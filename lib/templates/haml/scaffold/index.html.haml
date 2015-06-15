@@ -1,0 +1,26 @@
+.page-header
+  = link_to new_<%= singular_table_name %>_path, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    Uusi <%= human_name %>
+  %h1 <%= plural_table_name %>
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+<% for attribute in attributes -%>
+        %th <%= attribute.human_name %>
+<% end -%>
+        %th
+        %th
+        %th
+
+    %tbody
+      - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+        %tr
+<% for attribute in attributes -%>
+          %td= <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+          %td= link_to 'Näytä', <%= singular_table_name %>
+          %td= link_to 'Muokkaa', edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
+          %td= link_to 'Poista', <%= singular_table_name %>, data: {confirm: 'Oletko varma?'}, method: :delete

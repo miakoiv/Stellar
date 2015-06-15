@@ -1,0 +1,14 @@
+.page-header
+  = link_to <%= index_helper %>_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Takaisin
+  = link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-primary' do
+    = icon('pencil-square')
+    Muokkaa
+  %h1 @<%= singular_table_name %>.to_s
+
+%dl.dl-horizontal
+  <%- for attribute in attributes -%>
+  %dt <%= attribute.human_name %>:
+  %dd= @<%= singular_table_name %>.<%= attribute.name %>
+  <%- end -%>

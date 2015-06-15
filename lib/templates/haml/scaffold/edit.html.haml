@@ -1,0 +1,10 @@
+.page-header
+  = link_to <%= index_helper %>_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Takaisin
+  = link_to @<%= singular_table_name %>, class: 'btn btn-primary' do
+    = icon('info-circle')
+    Näytä
+  %h1 @<%= singular_table_name %>.to_s>
+
+= render 'form'
