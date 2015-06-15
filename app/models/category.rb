@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
   has_many :sub_categories, class_name: 'Category', foreign_key: :parent_category_id
   has_many :products
 
+  validates :name, presence: true
+
 
   def self.options
     all.map { |c| [c.name, c.id] }
@@ -13,6 +15,6 @@ class Category < ActiveRecord::Base
 
 
   def to_s
-    name
+    new_record? ? 'New category' : name
   end
 end
