@@ -1,5 +1,10 @@
 %ul.nav.navbar-nav
-  = active_link_to 'Brands', admin_brands_path, wrap_tag: :li
-  = active_link_to 'Categories', admin_categories_path, wrap_tag: :li
-  = active_link_to 'Products', admin_products_path, wrap_tag: :li
-  = active_link_to 'Orders', admin_orders_path, wrap_tag: :li
+  %li.dropdown
+    %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
+      Admin
+      %span.caret
+    %ul.dropdown-menu{role: 'menu'}
+      = active_link_to 'Brands', admin_brands_path, wrap_tag: :li
+      = active_link_to 'Categories', admin_categories_path, wrap_tag: :li
+      = active_link_to 'Products', admin_products_path, wrap_tag: :li
+      = active_link_to 'Orders', admin_orders_path, wrap_tag: :li
