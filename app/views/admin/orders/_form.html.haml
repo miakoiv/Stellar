@@ -13,7 +13,7 @@
   .form-group
     = f.label :user_id, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :user_id, class: 'form-control'
+      = f.select :user_id, User.options, {}, {class: 'select2 form-control'}
   .form-group
     = f.label :order_type_id, class: 'col-sm-2 control-label'
     .col-sm-10

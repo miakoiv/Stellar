@@ -6,4 +6,14 @@ class User < ActiveRecord::Base
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
+
+
+  def self.options
+    all.map { |u| [u.email, u.id] }
+  end
+
+
+  def to_s
+    new_record? ? 'New user' : email
+  end
 end
