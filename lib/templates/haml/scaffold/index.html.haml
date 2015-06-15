@@ -1,7 +1,7 @@
 .page-header
   = link_to new_<%= singular_table_name %>_path, class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
-    Uusi <%= human_name %>
+    New <%= human_name %>
   %h1 <%= plural_table_name %>
 
 .table-responsive
@@ -21,6 +21,6 @@
 <% for attribute in attributes -%>
           %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-          %td= link_to 'Näytä', <%= singular_table_name %>
-          %td= link_to 'Muokkaa', edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
-          %td= link_to 'Poista', <%= singular_table_name %>, data: {confirm: 'Oletko varma?'}, method: :delete
+          %td= link_to 'Show', <%= singular_table_name %>
+          %td= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
+          %td= link_to 'Delete', <%= singular_table_name %>, data: {confirm: 'Are you sure?'}, method: :delete

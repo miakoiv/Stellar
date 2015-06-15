@@ -1,10 +1,11 @@
-= form_for @<%= singular_table_name %>, html: {class: "form-horizontal", role: 'form'} do |f|
+= form_for @<%= singular_table_name %>, html: {class: 'form-horizontal', role: 'form'} do |f|
   -if @<%= singular_table_name %>.errors.any?
     .alert.alert-danger.alert-dismissable{role: 'alert'}
       %button.close{type: 'button', data: {dismiss: 'alert'}}
-        %span{aria: {hidden: 'true'} } &times;
-        %span.sr-only Sulje
-      %h4= 'Ole hyvä ja korjaa nämä virheet:'
+        %span{aria: {hidden: 'true'}}
+          = icon('times')
+        %span.sr-only Close
+      %h4= 'Please correct these errors before resubmitting the form:'
       %ul
         - @<%= singular_table_name %>.errors.full_messages.each do |msg|
           %li= msg
