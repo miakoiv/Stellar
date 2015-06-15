@@ -26,9 +26,8 @@
             %span.icon-bar
           = link_to 'Spry', root_path, class: "navbar-brand"
         #navbar.collapse.navbar-collapse
-          %ul.nav.navbar-nav
-            %li.active
-              %a{href: brands_path} Brands
+          = render partial: 'shared/main_nav'
+
     .container
       - flash.each do |name, msg|
         = content_tag :div, class: "alert alert-#{name == :error ? 'danger' : 'success'} alert-dismissable", role: 'alert' do
