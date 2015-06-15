@@ -9,13 +9,13 @@
       %tr
         %th Parent category
         %th Name
-        %th.col-sm-1
-        %th.col-sm-1
+        %th.col-md-1.col.xs-2
+        %th.col-md-1.col.xs-2
 
     %tbody
       - @categories.each do |category|
         %tr
           %td= category.parent_category
           %td= category.name
-          %td= link_to icon('info', 'Show'), admin_category_path(category)
-          %td= link_to icon('edit', 'Edit'), edit_admin_category_path(category)
+          %td.text-right= link_to icon('info', 'Show'), admin_category_path(category)
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_category_path(category)

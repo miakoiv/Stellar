@@ -8,12 +8,12 @@
     %thead
       %tr
         %th Name
-        %th.col-sm-1
-        %th.col-sm-1
+        %th.col-md-1.col.xs-2
+        %th.col-md-1.col.xs-2
 
     %tbody
       - @brands.each do |brand|
         %tr
           %td= brand.name
-          %td= link_to icon('info', 'Show'), admin_brand_path(brand)
-          %td= link_to icon('edit', 'Edit'), edit_admin_brand_path(brand)
+          %td.text-right= link_to icon('info', 'Show'), admin_brand_path(brand)
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_brand_path(brand)

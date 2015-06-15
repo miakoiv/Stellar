@@ -9,13 +9,13 @@
       %tr
         %th User
         %th Order type
-        %th.col-sm-1
-        %th.col-sm-1
+        %th.col-md-1.col.xs-2
+        %th.col-md-1.col-xs-2
 
     %tbody
       - @orders.each do |order|
         %tr
           %td= order.user_id
           %td= order.order_type_id
-          %td= link_to icon('info', 'Show'), admin_order_path(order)
-          %td= link_to icon('edit', 'Edit'), edit_admin_order_path(order)
+          %td.text-right= link_to icon('info', 'Show'), admin_order_path(order)
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_order_path(order)

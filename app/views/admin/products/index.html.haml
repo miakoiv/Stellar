@@ -10,8 +10,8 @@
         %th Brand
         %th Category
         %th Name
-        %th.col-sm-1
-        %th.col-sm-1
+        %th.col-md-1.col.xs-2
+        %th.col-md-1.col.xs-2
 
     %tbody
       - @products.each do |product|
@@ -19,5 +19,5 @@
           %td= product.brand
           %td= product.category
           %td= product.name
-          %td= link_to icon('info', 'Show'), admin_product_path(product)
-          %td= link_to icon('edit', 'Edit'), edit_admin_product_path(product)
+          %td.text-right= link_to icon('info', 'Show'), admin_product_path(product)
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_product_path(product)
