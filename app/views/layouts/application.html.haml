@@ -25,6 +25,7 @@
           = link_to 'Spry', root_path, class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           = render partial: 'shared/main_nav'
+          = render partial: 'shared/user_menu'
 
     .container
       - flash.each do |name, msg|
