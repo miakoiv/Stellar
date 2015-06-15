@@ -1,0 +1,12 @@
+.page-header
+  = link_to brands_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Back
+  = link_to edit_brand_path(@brand), class: 'btn btn-primary' do
+    = icon('pencil-square')
+    Edit
+  %h1= @brand.to_s
+
+%dl.dl-horizontal
+  %dt Name:
+  %dd= @brand.name
