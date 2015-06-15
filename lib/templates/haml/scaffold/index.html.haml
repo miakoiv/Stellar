@@ -5,13 +5,12 @@
   %h1 <%= plural_table_name %>
 
 .table-responsive
-  %table.table.table-striped.table-bordered.table-hover
+  %table.table.table-striped.table-hover
     %thead
       %tr
 <% for attribute in attributes -%>
         %th <%= attribute.human_name %>
 <% end -%>
-        %th
         %th
         %th
 
@@ -21,6 +20,5 @@
 <% for attribute in attributes -%>
           %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-          %td= link_to 'Show', <%= singular_table_name %>
-          %td= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
-          %td= link_to 'Delete', <%= singular_table_name %>, data: {confirm: 'Are you sure?'}, method: :delete
+          %td= link_to icon('info', 'Show'), <%= singular_table_name %>
+          %td= link_to icon('edit', 'Edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>)

@@ -1,22 +1,19 @@
 .page-header
   = link_to new_brand_path, class: 'btn btn-primary' do
-    = icon(:plus)
-    New Brand
-  %h1 brands
+    = icon(:plus, 'New Brand')
+  %h1 Brands
 
 .table-responsive
-  %table.table.table-striped.table-bordered.table-hover
+  %table.table.table-striped.table-hover
     %thead
       %tr
         %th Name
-        %th
-        %th
-        %th
+        %th.col-sm-1
+        %th.col-sm-1
 
     %tbody
       - @brands.each do |brand|
         %tr
           %td= brand.name
-          %td= link_to 'Show', brand
-          %td= link_to 'Edit', edit_brand_path(brand)
-          %td= link_to 'Delete', brand, data: {confirm: 'Are you sure?'}, method: :delete
+          %td= link_to icon('info', 'Show'), brand
+          %td= link_to icon('edit', 'Edit'), edit_brand_path(brand)

@@ -1,24 +1,21 @@
 .page-header
   = link_to new_order_path, class: 'btn btn-primary' do
-    = icon(:plus)
-    New Order
-  %h1 orders
+    = icon(:plus, 'New Order')
+  %h1 Orders
 
 .table-responsive
-  %table.table.table-striped.table-bordered.table-hover
+  %table.table.table-striped.table-hover
     %thead
       %tr
         %th User
         %th Order type
-        %th
-        %th
-        %th
+        %th.col-sm-1
+        %th.col-sm-1
 
     %tbody
       - @orders.each do |order|
         %tr
           %td= order.user
           %td= order.order_type
-          %td= link_to 'Show', order
-          %td= link_to 'Edit', edit_order_path(order)
-          %td= link_to 'Delete', order, data: {confirm: 'Are you sure?'}, method: :delete
+          %td= link_to icon('info', 'Show'), order
+          %td= link_to icon('edit', 'Edit'), edit_order_path(order)
