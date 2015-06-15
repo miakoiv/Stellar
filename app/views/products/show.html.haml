@@ -1,0 +1,16 @@
+.page-header
+  = link_to products_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Back
+  = link_to edit_product_path(@product), class: 'btn btn-primary' do
+    = icon('pencil-square')
+    Edit
+  %h1= @product.to_s
+
+%dl.dl-horizontal
+  %dt Brand:
+  %dd= @product.brand_id
+  %dt Category:
+  %dd= @product.category_id
+  %dt Name:
+  %dd= @product.name
