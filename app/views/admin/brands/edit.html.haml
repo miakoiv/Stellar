@@ -1,0 +1,10 @@
+.page-header
+  = link_to admin_brands_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Back
+  = link_to admin_brand_path(@brand), class: 'btn btn-primary' do
+    = icon('info-circle')
+    Show
+  %h1= @brand.to_s
+
+= render 'form'

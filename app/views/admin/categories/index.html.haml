@@ -1,0 +1,21 @@
+.page-header
+  = link_to new_admin_category_path, class: 'btn btn-primary' do
+    = icon(:plus, 'New Category')
+  %h1 Categories
+
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th Parent category
+        %th Name
+        %th.col-sm-1
+        %th.col-sm-1
+
+    %tbody
+      - @categories.each do |category|
+        %tr
+          %td= category.parent_category
+          %td= category.name
+          %td= link_to icon('info', 'Show'), admin_category_path(category)
+          %td= link_to icon('edit', 'Edit'), edit_admin_category_path(category)

@@ -1,0 +1,7 @@
+.page-header
+  = link_to admin_categories_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left')
+    Back
+  %h1= @category.to_s
+
+= render 'form'

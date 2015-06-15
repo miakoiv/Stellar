@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :orders
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'brands#index'
+  root 'admin/brands#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -34,7 +33,9 @@ Rails.application.routes.draw do
   #     resource :seller
   #   end
 
-  resources :brands, :categories, :products
+  namespace :admin do
+    resources :brands, :categories, :products, :orders
+  end
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

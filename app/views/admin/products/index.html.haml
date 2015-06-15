@@ -1,0 +1,23 @@
+.page-header
+  = link_to new_admin_product_path, class: 'btn btn-primary' do
+    = icon(:plus, 'New Product')
+  %h1 Products
+
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th Brand
+        %th Category
+        %th Name
+        %th.col-sm-1
+        %th.col-sm-1
+
+    %tbody
+      - @products.each do |product|
+        %tr
+          %td= product.brand
+          %td= product.category
+          %td= product.name
+          %td= link_to icon('info', 'Show'), admin_product_path(product)
+          %td= link_to icon('edit', 'Edit'), edit_admin_product_path(product)
