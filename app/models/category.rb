@@ -6,4 +6,7 @@ class Category < ActiveRecord::Base
   has_many :sub_categories, class_name: 'Category', foreign_key: :parent_category_id
   has_many :products
 
+  def to_s
+    name
+  end
 end
