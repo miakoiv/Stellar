@@ -30,6 +30,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Navigation link helper
 gem 'active_link_to'
 
+# Select2
+gem 'select2-rails', '~> 3.5.9'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

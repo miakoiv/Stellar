@@ -6,6 +6,12 @@ class Category < ActiveRecord::Base
   has_many :sub_categories, class_name: 'Category', foreign_key: :parent_category_id
   has_many :products
 
+
+  def self.options
+    all.map { |c| [c.name, c.id] }
+  end
+
+
   def to_s
     name
   end
