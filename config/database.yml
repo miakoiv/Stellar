@@ -13,13 +13,13 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password:
+  username: ruby
+  password: rails
   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
-  database: spry_development
+  database: spry_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: spry_production
-  username: spry
-  password: <%= ENV['SPRY_DATABASE_PASSWORD'] %>
+  database: spry
+  username: ruby
+  password: rails
