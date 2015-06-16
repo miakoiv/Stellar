@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   # :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
+  # Users are restricted to interacting with only one brand.
+  belongs_to :brand
+
 
   def self.options
     all.map { |u| [u.email, u.id] }
