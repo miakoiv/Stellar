@@ -7,10 +7,16 @@
     Edit
   %h1= @product.to_s
 
-%dl.dl-horizontal
-  %dt Brand:
-  %dd= @product.brand
-  %dt Category:
-  %dd= @product.category
-  %dt Name:
-  %dd= @product.name
+.row
+  .col-sm-6
+    %dl.dl-horizontal
+      %dt Brand:
+      %dd= @product.brand
+      %dt Category:
+      %dd= @product.category
+      %dt Name:
+      %dd= @product.name
+
+  .col-sm-6
+    .list-group.gallery
+      = render @product.product_images

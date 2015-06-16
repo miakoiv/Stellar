@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615132455) do
+ActiveRecord::Schema.define(version: 20150616105746) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(version: 20150615132455) do
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
+
+  create_table "product_images", force: :cascade do |t|
+    t.integer  "product_id",         limit: 4,   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+  end
+
+  add_index "product_images", ["product_id"], name: "index_product_images_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id",    limit: 4,   null: false

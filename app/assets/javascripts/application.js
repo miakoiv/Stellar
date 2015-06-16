@@ -22,5 +22,6 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/dropdown
+//= require magnific-popup
 //= require select2
 //= require_tree .

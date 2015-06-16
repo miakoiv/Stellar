@@ -16,6 +16,13 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc', '~> 0.4.0', group: :doc
+
 # Authentication and authorization
 gem 'devise'
 gem 'devise-bootstrap-views'
@@ -24,12 +31,9 @@ gem 'devise-bootstrap-views'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass', '~> 4.3.0'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+# Image attachments and popups
+gem 'paperclip', '~> 4.2'
+gem 'magnific-popup-rails'
 
 # Navigation link helper
 gem 'active_link_to'

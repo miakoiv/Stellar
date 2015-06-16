@@ -7,4 +7,10 @@
     Show
   %h1= @product.to_s
 
-= render 'form'
+.row
+  .col-sm-6
+    = render 'form'
+
+  .col-sm-6
+    .list-group.gallery
+      = render @product.product_images
