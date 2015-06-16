@@ -68,6 +68,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-bootstrap-views (0.0.4)
+    dropzonejs-rails (0.7.1)
+      rails (> 3.1)
     erubis (2.7.0)
     execjs (2.5.2)
     font-awesome-sass (4.3.2.1)
@@ -198,6 +200,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-bootstrap-views
+  dropzonejs-rails
   font-awesome-sass (~> 4.3.0)
   haml-rails
   jbuilder (~> 2.0)

@@ -33,6 +33,7 @@ gem 'font-awesome-sass', '~> 4.3.0'
 
 # Image attachments and popups
 gem 'paperclip', '~> 4.2'
+gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
 # Navigation link helper
