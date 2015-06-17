@@ -16,6 +16,6 @@
       - @orders.each do |order|
         %tr
           %td= order.user
-          %td= order.order_type_id
+          %td= order.order_type
           %td.text-right= link_to icon('info', 'Show'), admin_order_path(order)
           %td.text-right= link_to icon('edit', 'Edit'), edit_admin_order_path(order)
