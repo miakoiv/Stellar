@@ -1,6 +1,6 @@
-class CreateItems < ActiveRecord::Migration
+class CreateInventoryItems < ActiveRecord::Migration
   def change
-    create_table :items do |t|
+    create_table :inventory_items do |t|
       t.belongs_to :inventory, null: false, index: true
       t.belongs_to :product,   null: false, index: true
       t.integer :amount

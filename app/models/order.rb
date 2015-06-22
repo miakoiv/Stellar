@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :order_type
+  has_many :order_items
 
 
   def to_s
