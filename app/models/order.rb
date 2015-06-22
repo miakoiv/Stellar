@@ -7,6 +7,6 @@ class Order < ActiveRecord::Base
 
 
   def to_s
-    "[#{created_at.to_s(:long)}] #{user}"
+    new_record? ? 'New order' : "[#{created_at.to_s(:long)}] #{user}"
   end
 end
