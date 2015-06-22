@@ -5,6 +5,10 @@
   = link_to admin_brand_path(@brand), class: 'btn btn-primary' do
     = icon('info-circle')
     Show
-  %h1= @brand.to_s
+  %h1
+    Brand
+    %span.small= @brand.to_s
 
-= render 'form'
+.row
+  .col-sm-6
+    = render 'form'

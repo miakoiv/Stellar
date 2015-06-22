@@ -5,6 +5,10 @@
   = link_to admin_order_path(@order), class: 'btn btn-primary' do
     = icon('info-circle')
     Show
-  %h1= @order.to_s
+  %h1
+    Order
+    %span.small= @order.to_s
 
-= render 'form'
+.row
+  .col-sm-6
+    = render 'form'

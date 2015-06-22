@@ -5,17 +5,26 @@
   = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
     = icon('pencil-square')
     Edit
-  %h1= @product.to_s
+  %h1
+    Product
+    %span.small= @product.to_s
 
 .row
   .col-sm-6
-    %dl.dl-horizontal
-      %dt Brand:
-      %dd= @product.brand
-      %dt Category:
-      %dd= @product.category
-      %dt Name:
-      %dd= @product.name
+    .panel.panel-default
+      .panel-body.form-horizontal
+        .form-group
+          %label.col-sm-4.control-label Brand
+          .col-sm-8
+            %p.form-control-static= @product.brand
+        .form-group
+          %label.col-sm-4.control-label Category
+          .col-sm-8
+            %p.form-control-static= @product.category
+        .form-group
+          %label.col-sm-4.control-label Name
+          .col-sm-8
+            %p.form-control-static= @product.name
 
   .col-sm-6
     .list-group.gallery
