@@ -70,6 +70,8 @@ GEM
     devise-bootstrap-views (0.0.4)
     dropzonejs-rails (0.7.1)
       rails (> 3.1)
+    erb2haml (0.1.5)
+      html2haml
     erubis (2.7.0)
     execjs (2.5.2)
     font-awesome-sass (4.3.2.1)
@@ -201,6 +203,7 @@ DEPENDENCIES
   devise
   devise-bootstrap-views
   dropzonejs-rails
+  erb2haml
   font-awesome-sass (~> 4.3.0)
   haml-rails
   jbuilder (~> 2.0)
