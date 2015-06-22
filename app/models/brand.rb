@@ -3,6 +3,9 @@
 class Brand < ActiveRecord::Base
 
   has_many :products
+  has_many :users
+  has_many :inventories
+  has_many :order_types, through: :inventories
 
   validates :name, presence: true
 

@@ -8,6 +8,18 @@
 
 User.create(email: 'rosenblad@gmail.com', password: 'rush2112')
 
-Brand.create(name: 'Alko Oyj')
-Brand.create(name: 'Ruokakesko Oy')
 Brand.create(name: 'Tikkurila Oyj')
+
+Inventory.create(brand_id: 1, name: 'Manufacturing')
+Inventory.create(brand_id: 1, name: 'Shipping')
+
+OrderType.create(
+  inventory_id: 1,
+  adjustment_multiplier: 1,
+  name: 'Manufacturing'
+)
+OrderType.create(
+  inventory_id: 2,
+  adjustment_multiplier: -1,
+  name: 'Shipping'
+)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616134130) do
+ActiveRecord::Schema.define(version: 20150622094705) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -28,10 +28,32 @@ ActiveRecord::Schema.define(version: 20150616134130) do
 
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
 
-  create_table "order_types", force: :cascade do |t|
+  create_table "inventories", force: :cascade do |t|
+    t.integer  "brand_id",   limit: 4,   null: false
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  add_index "inventories", ["brand_id"], name: "index_inventories_on_brand_id", using: :btree
+
+  create_table "items", force: :cascade do |t|
+    t.integer  "inventory_id", limit: 4, null: false
+    t.integer  "product_id",   limit: 4, null: false
+    t.integer  "amount",       limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "items", ["inventory_id"], name: "index_items_on_inventory_id", using: :btree
+  add_index "items", ["product_id"], name: "index_items_on_product_id", using: :btree
+
+  create_table "order_types", force: :cascade do |t|
+    t.integer  "inventory_id",          limit: 4,                null: false
+    t.integer  "adjustment_multiplier", limit: 4,   default: -1, null: false
+    t.string   "name",                  limit: 255
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "orders", force: :cascade do |t|
