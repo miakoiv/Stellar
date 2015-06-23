@@ -21,6 +21,28 @@ class Admin::ImagesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /admin/images/1
+  def update
+    @image = Image.find(params[:id])
+
+    respond_to do |format|
+      if @image.update(image_params)
+        format.js { render :update }
+      end
+    end
+  end
+
+  # DELETE /admin/images/1
+  def destroy
+    @image = Image.find(params[:id])
+
+    respond_to do |format|
+      if @image.destroy
+        format.js { render :destroy }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

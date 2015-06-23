@@ -8,4 +8,9 @@ class ImageType < ActiveRecord::Base
   def self.options
     all.map { |i| [i.name, i.id] }
   end
+
+
+  def to_s
+    name
+  end
 end
