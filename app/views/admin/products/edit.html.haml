@@ -22,7 +22,10 @@
         = f.submit class: 'btn btn-primary'
       :javascript
         Dropzone.options.newImage = {
-          paramName: 'image[attachment]'
+          paramName: 'image[attachment]',
+          success: function(file, image) {
+            $.get("/admin/images/" + image['id']);
+          }
         }
-    .list-group.gallery
+    #product-images.list-group.gallery
       = render partial: 'admin/images/edit_image', collection: @product.images, as: :image

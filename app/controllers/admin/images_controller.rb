@@ -1,7 +1,18 @@
 #encoding: utf-8
 
 class Admin::ImagesController < ApplicationController
+
   before_action :set_product, only: [:new, :create]
+
+  # GET /admin/images/1
+  # This is only called by Dropzone as callback for success.
+  def show
+    @image = Image.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # GET /admin/products/1/images/new
   def new
@@ -27,7 +38,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.update(image_params)
-        format.js { render :update }
+        format.js
       end
     end
   end
@@ -38,7 +49,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.destroy
-        format.js { render :destroy }
+        format.js
       end
     end
   end
