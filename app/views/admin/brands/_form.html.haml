@@ -4,6 +4,10 @@
       = render 'shared/errors', object: @brand
 
       .form-group
+        = f.label :matfox_customer, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_field :matfox_customer, class: 'form-control'
+      .form-group
         = f.label :name, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.text_field :name, class: 'form-control'
