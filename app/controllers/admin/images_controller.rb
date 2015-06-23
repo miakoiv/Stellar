@@ -18,7 +18,7 @@ class Admin::ImagesController < ApplicationController
     @image = @imageable.images.build
   end
 
-  # POST /admin/products/1/images
+  # POST /admin/imageable/1/images
   def create
     @imageable = find_imageable
     @image = @imageable.images.build(image_params)
