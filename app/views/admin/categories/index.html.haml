@@ -8,9 +8,9 @@
     %thead
       %tr
         %th.col-xs-1
-        %th Brand
-        %th Parent category
         %th Name
+        %th Parent category
+        %th.col-xs-2 Brand
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
 
@@ -18,8 +18,10 @@
       - @categories.each do |category|
         %tr
           %td= image_tag(category.images.first.attachment.url(:icon)) unless category.images.empty?
-          %td= category.brand
-          %td= category.parent_category
           %td= category.name
-          %td.text-right= link_to icon('info', 'Show'), admin_category_path(category)
-          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_category_path(category)
+          %td= category.parent_category
+          %td= category.brand
+          %td.text-right= link_to icon('info', 'Show'), admin_category_path(category),
+            class: 'btn btn-default btn-sm'
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_category_path(category),
+            class: 'btn btn-default btn-sm'

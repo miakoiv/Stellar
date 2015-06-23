@@ -7,17 +7,19 @@
   %table.table.table-striped.table-hover
     %thead
       %tr
-        %th.col-xs-2 Brand
-        %th.col-xs-2 Category
         %th Name
+        %th.col-xs-2 Category
+        %th.col-xs-2 Brand
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
 
     %tbody
       - @products.each do |product|
         %tr
-          %td= product.brand
-          %td= product.category
           %td= product.name
-          %td.text-right= link_to icon('info', 'Show'), admin_product_path(product)
-          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_product_path(product)
+          %td= product.category
+          %td= product.brand
+          %td.text-right= link_to icon('info', 'Show'), admin_product_path(product),
+            class: 'btn btn-default btn-sm'
+          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+            class: 'btn btn-default btn-sm'
