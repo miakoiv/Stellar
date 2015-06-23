@@ -25,7 +25,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.json { render json: {message: 'success'}, status: 200 }
+        format.json { render json: @image, status: 200 }
       else
         format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
       end
