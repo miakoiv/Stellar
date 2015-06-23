@@ -15,13 +15,14 @@
 
   .col-sm-6
     .list-group.gallery
-      = render @product.product_images
-      = form_for [:admin, @product, ProductImage.new],
+      = render @product.images
+      = form_for [:admin, @product, @product.images.build],
           html: {multipart: true, class: 'dropzone'} do |f|
         .fallback
-          = f.file_field :image
+          = f.hidden_field :image_type_id
+          = f.file_field :attachment
           = f.submit class: 'btn btn-primary'
         :javascript
-          Dropzone.options.newProductImage = {
-            paramName: 'product_image[image]'
+          Dropzone.options.newImage = {
+            paramName: 'image[attachment]'
           }

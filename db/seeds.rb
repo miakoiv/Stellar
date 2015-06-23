@@ -12,7 +12,17 @@ User.create(
   password: 'rush2112'
 )
 
-Brand.create(name: 'Tikkurila Oyj')
+ImageType.create(name: 'Presentational')
+ImageType.create(name: 'Technical')
+
+Brand.create(matfox_customer: 1545, name: 'Tikkurila Oyj')
+
+Category.create(brand_id: 1, name: 'Color Display')
+Category.create(brand_id: 1, name: 'Product Placement')
+Category.create(brand_id: 1, name: 'Shop Event Material')
+Category.create(brand_id: 1, name: 'Visio')
+Category.create(brand_id: 1, name: 'Duett')
+Category.create(brand_id: 1, name: 'Tinting Area')
 
 Inventory.create(brand_id: 1, name: 'Manufacturing')
 Inventory.create(brand_id: 1, name: 'Shipping')

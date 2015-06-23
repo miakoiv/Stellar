@@ -1,22 +1,22 @@
 #encoding: utf-8
 
-class Admin::ProductImagesController < ApplicationController
+class Admin::ImagesController < ApplicationController
   before_action :set_product, only: [:new, :create]
 
-  # GET /admin/products/1/product_images/new
+  # GET /admin/products/1/images/new
   def new
-    @product_image = @product.product_images.build
+    @image = @product.images.build
   end
 
-  # POST /admin/products/1/product_images
+  # POST /admin/products/1/images
   def create
-    @product_image = @product.product_images.build(product_image_params)
+    @image = @product.images.build(image_params)
 
     respond_to do |format|
-      if @product_image.save
+      if @image.save
         format.json { render json: {message: 'success'}, status: 200 }
       else
-        format.json { render json: {error: @product_image.errors.full_messages.join(', ')}, status: 400 }
+        format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
       end
     end
   end
@@ -28,9 +28,9 @@ class Admin::ProductImagesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def product_image_params
-      params.require(:product_image).permit(
-        :image
+    def image_params
+      params.require(:image).permit(
+        :image_type_id, :attachment
       )
     end
 end

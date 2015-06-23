@@ -11,22 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622101529) do
+ActiveRecord::Schema.define(version: 20150623063746) do
 
   create_table "brands", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "matfox_customer", limit: 4,   null: false
+    t.string   "name",            limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "categories", force: :cascade do |t|
+    t.integer  "brand_id",           limit: 4,   null: false
     t.integer  "parent_category_id", limit: 4
     t.string   "name",               limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "categories", ["brand_id"], name: "index_categories_on_brand_id", using: :btree
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
+
+  create_table "image_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "imageable_id",            limit: 4
+    t.string   "imageable_type",          limit: 255
+    t.integer  "image_type_id",           limit: 4
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 4
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "images", ["image_type_id"], name: "index_images_on_image_type_id", using: :btree
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
     t.integer  "brand_id",   limit: 4,   null: false
@@ -76,18 +100,6 @@ ActiveRecord::Schema.define(version: 20150622101529) do
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
-
-  create_table "product_images", force: :cascade do |t|
-    t.integer  "product_id",         limit: 4,   null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
-    t.datetime "image_updated_at"
-  end
-
-  add_index "product_images", ["product_id"], name: "index_product_images_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id",    limit: 4,   null: false

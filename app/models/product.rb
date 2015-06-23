@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :brand
   belongs_to :category
-  has_many :product_images
+  has_many :images, as: :imageable
 
   validates :brand_id, presence: true
   validates :category_id, presence: true
