@@ -28,4 +28,4 @@
 
   .col-sm-6
     .list-group.gallery
-      = render @product.images
+      = render partial: 'admin/images/image', collection: @product.images

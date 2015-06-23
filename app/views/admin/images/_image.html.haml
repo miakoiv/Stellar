@@ -3,9 +3,16 @@
     .media-left
       %a.image-link{href: image.attachment.url(:large)}
         = image_tag image.attachment.url(:thumb), class: 'media-object'
-    .media-body
-      %dl.dl-horizontal
-        %dt File name:
-        %dd= image.attachment_file_name
-        %dt File size:
-        %dd= number_to_human_size(image.attachment_file_size)
+    .media-body.form-horizontal
+      .form-group
+        %label.col-sm-4.control-label Image type
+        .col-sm-8
+          %p.form-control-static= image.image_type
+      .form-group
+        %label.col-sm-4.control-label File name
+        .col-sm-8
+          %p.form-control-static= image.attachment_file_name
+      .form-group
+        %label.col-sm-4.control-label File size
+        .col-sm-8
+          %p.form-control-static= number_to_human_size(image.attachment_file_size)

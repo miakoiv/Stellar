@@ -1,0 +1,24 @@
+.list-group-item
+  .media
+    .media-left
+      %a.image-link{href: image.attachment.url(:large)}
+        = image_tag image.attachment.url(:thumb), class: 'media-object'
+    .media-body
+      = form_for [:admin, image], html: {class: 'form-horizontal'} do |f|
+        .form-group
+          = f.label :image_type_id, class: 'col-lg-4 control-label'
+          .col-lg-8
+            = f.select :image_type_id, ImageType.options,
+                {include_blank: blank_option}, {class: 'select2 form-control'}
+        .form-group
+          = f.label :file_name, class: 'col-lg-4 control-label'
+          .col-lg-8
+            %p.form-control-static= image.attachment_file_name
+        .form-group
+          = f.label :file_size, class: 'col-lg-4 control-label'
+          .col-lg-8
+            %p.form-control-static= number_to_human_size(image.attachment_file_size)
+        .form-group
+          .col-lg-offset-4.col-lg-8
+            = f.submit class: 'btn btn-sm btn-primary'
+            = link_to 'Delete Image', '#', class: 'btn btn-sm btn-danger'

@@ -15,7 +15,7 @@
 
   .col-sm-6
     .list-group.gallery
-      = render @product.images
+      = render partial: 'admin/images/edit_image', collection: @product.images, as: :image
       = form_for [:admin, @product, @product.images.build],
           html: {multipart: true, class: 'dropzone'} do |f|
         .fallback
