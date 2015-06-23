@@ -7,6 +7,7 @@
   %table.table.table-striped.table-hover
     %thead
       %tr
+        %th.col-xs-1
         %th Brand
         %th Parent category
         %th Name
@@ -16,6 +17,7 @@
     %tbody
       - @categories.each do |category|
         %tr
+          %td= image_tag(category.images.first.attachment.url(:icon)) unless category.images.empty?
           %td= category.brand
           %td= category.parent_category
           %td= category.name
