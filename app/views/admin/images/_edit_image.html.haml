@@ -1,8 +1,9 @@
 = div_for image, class: 'list-group-item' do
   .media
     .media-left
-      %a.image-link{href: image.attachment.url(:large)}
-        = image_tag image.attachment.url(:thumb), class: 'media-object'
+      .thumbnail
+        %a.image-link{href: image.attachment.url(:lightbox)}
+          = image_tag image.attachment.url(:thumbnail), class: 'media-object'
     .media-body
       = form_for [:admin, image], remote: true, html: {class: 'form-horizontal'} do |f|
         .form-group

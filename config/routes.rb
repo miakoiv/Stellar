@@ -35,10 +35,16 @@ Rails.application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :brands, :categories, :orders
+    resources :brands do
+      resources :images, shallow: true
+    end
+    resources :categories do
+      resources :images, shallow: true
+    end
     resources :products do
       resources :images, shallow: true
     end
+    resources :orders
   end
 
   # Example resource route with more complex sub-resources:

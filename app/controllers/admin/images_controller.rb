@@ -2,8 +2,6 @@
 
 class Admin::ImagesController < ApplicationController
 
-  before_action :set_product, only: [:new, :create]
-
   # GET /admin/images/1
   # This is only called by Dropzone as callback for success.
   def show
@@ -14,14 +12,16 @@ class Admin::ImagesController < ApplicationController
     end
   end
 
-  # GET /admin/products/1/images/new
+  # GET /admin/imageable/1/images/new
   def new
-    @image = @product.images.build
+    @imageable = find_imageable
+    @image = @imageable.images.build
   end
 
   # POST /admin/products/1/images
   def create
-    @image = @product.images.build(image_params)
+    @imageable = find_imageable
+    @image = @imageable.images.build(image_params)
 
     respond_to do |format|
       if @image.save
@@ -55,9 +55,14 @@ class Admin::ImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:product_id])
+    # Finds the associated imageable by looking through params.
+    def find_imageable
+      params.each do |name, value|
+        if name =~ /(.+)_id$/
+          return $1.classify.constantize.find(value)
+        end
+      end
+      nil
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

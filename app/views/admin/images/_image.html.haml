@@ -1,8 +1,9 @@
 .list-group-item
   .media
     .media-left
-      %a.image-link{href: image.attachment.url(:large)}
-        = image_tag image.attachment.url(:thumb), class: 'media-object'
+      .thumbnail
+        %a.image-link{href: image.attachment.url(:lightbox)}
+          = image_tag image.attachment.url(:thumbnail), class: 'media-object'
     .media-body.form-horizontal
       .form-group
         %label.col-sm-4.control-label Image type

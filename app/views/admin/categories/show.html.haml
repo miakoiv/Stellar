@@ -25,3 +25,7 @@
           %label.col-sm-4.control-label Name
           .col-sm-8
             %p.form-control-static= @category.name
+
+  .col-sm-6
+    .list-group.gallery
+      = render partial: 'admin/images/image', collection: @category.images
