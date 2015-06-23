@@ -2,6 +2,7 @@
 
 class Brand < ActiveRecord::Base
 
+  has_many :categories
   has_many :products
   has_many :users
   has_many :inventories

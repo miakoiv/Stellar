@@ -7,6 +7,7 @@
   %table.table.table-striped.table-hover
     %thead
       %tr
+        %th Brand
         %th Parent category
         %th Name
         %th.col-md-1.col.xs-2
@@ -15,6 +16,7 @@
     %tbody
       - @categories.each do |category|
         %tr
+          %td= category.brand
           %td= category.parent_category
           %td= category.name
           %td.text-right= link_to icon('info', 'Show'), admin_category_path(category)
