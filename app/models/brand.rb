@@ -7,6 +7,7 @@ class Brand < ActiveRecord::Base
   has_many :users
   has_many :inventories
   has_many :order_types, through: :inventories
+  has_many :images, as: :imageable
 
   validates :name, presence: true
 

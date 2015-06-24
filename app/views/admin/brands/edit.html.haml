@@ -12,3 +12,9 @@
 .row
   .col-sm-6
     = render 'form'
+
+  .col-sm-6
+    = render partial: 'admin/images/dropzone', object: @brand, as: :imageable
+
+    #images.list-group.gallery
+      = render partial: 'admin/images/edit_image', collection: @brand.images, as: :image

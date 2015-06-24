@@ -7,6 +7,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-xs-1
         %th Name
         %th Matfox customer
         %th.col-md-1.col.xs-2
@@ -15,6 +16,7 @@
     %tbody
       - @brands.each do |brand|
         %tr
+          %td= icon_image(brand)
           %td= brand.name
           %td= brand.matfox_customer
           %td.text-right= link_to icon('info', 'Show'), admin_brand_path(brand),
