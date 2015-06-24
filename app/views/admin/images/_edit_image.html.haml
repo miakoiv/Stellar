@@ -1,9 +1,8 @@
 = div_for image, class: 'list-group-item' do
   .media
     .media-left
-      .thumbnail
-        %a.image-link{href: image.attachment.url(:lightbox)}
-          = image_tag image.attachment.url(:thumbnail), class: 'media-object'
+      %a.image-link{href: image.attachment.url(:lightbox)}
+        = image_tag image.attachment.url(:thumbnail), class: 'media-object'
     .media-body
       = form_for [:admin, image], remote: true, html: {class: 'form-horizontal'} do |f|
         .form-group
@@ -21,6 +20,6 @@
             %p.form-control-static= number_to_human_size(image.attachment_file_size)
         .form-group
           .col-lg-offset-4.col-lg-8
-            = f.submit class: 'btn btn-sm btn-primary'
-            = link_to 'Delete Image', admin_image_path(image),
+            = f.button icon('check', 'Save'), class: 'btn btn-sm btn-primary'
+            = link_to icon('remove', 'Delete'), admin_image_path(image),
                 remote: true, method: :delete, class: 'btn btn-sm btn-danger'

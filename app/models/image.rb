@@ -6,9 +6,9 @@ class Image < ActiveRecord::Base
   belongs_to :image_type
   has_attached_file :attachment,
     styles: {
-      lightbox: '1024x1024>',
-      thumbnail: '128x128>',
-      icon: '32x32>',
+      lightbox: '1000x1000>',
+      thumbnail: '200x200>',
+      icon: '25x25>',
     }
 
   scope :by_type, -> (type) { joins(:image_type).where(image_types: {name: type}) }
