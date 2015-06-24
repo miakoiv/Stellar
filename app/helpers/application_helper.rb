@@ -4,7 +4,7 @@ module ApplicationHelper
 
   # Display an icon for object.
   def icon_image(object)
-    icons = object.images.by_type('Icon')
+    icons = object.images.by_type(:icon)
     return nil if icons.empty?
     image_tag(icons.first.attachment.url(:icon))
   end
