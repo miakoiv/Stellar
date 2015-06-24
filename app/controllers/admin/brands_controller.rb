@@ -1,6 +1,7 @@
 #encoding: utf-8
 
 class Admin::BrandsController < ApplicationController
+
   before_action :set_brand, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/brands
@@ -62,7 +63,7 @@ class Admin::BrandsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brand_params
       params.require(:brand).permit(
-        :name
+        :name, :matfox_customer
       )
     end
 end
