@@ -1,9 +1,8 @@
 .list-group-item
   .row
     .col-lg-5
-      %a.image-link{href: image.attachment.url(:lightbox)}
-        .thumbnail
-          = image_tag image.attachment.url(:thumbnail)
+      %a.thumbnail.image-link{href: image.attachment.url(:lightbox)}
+        = image_tag image.attachment.url(:thumbnail)
     .col-lg-7.form-horizontal
       .form-group
         %label.col-sm-4.control-label Image type
