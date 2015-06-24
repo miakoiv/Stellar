@@ -2,6 +2,8 @@
 
 class Brand < ActiveRecord::Base
 
+  before_create :assign_slug
+
   has_many :categories
   has_many :products
   has_many :users
@@ -21,4 +23,10 @@ class Brand < ActiveRecord::Base
   def to_s
     new_record? ? 'New brand' : name
   end
+
+  private
+    def assign_slug
+      self.slug = name.parameterize
+    end
+
 end
