@@ -15,6 +15,10 @@
  *= require magnific-popup
  *= require select2
  *= require select2-bootstrap
- *= require_tree .
- *= require_self
  */
+
+@import "bootstrap-generators.scss";
+@import "bootstrap-font-awesome.scss";
+@import "bootstrap-tweaks.scss";
+@import "fonts.scss";
+@import "brands.scss";

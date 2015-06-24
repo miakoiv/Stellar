@@ -1,0 +1,18 @@
+/*
+ * Brand specific styles targeting the element .brand
+ * and its descendants.
+ */
+
+.tikkurila {
+
+  .categories {
+    @extend .row;
+
+    .category {
+      @extend .col-sm-2;
+
+      .thumbnail {
+      }
+    }
+  }
+}
