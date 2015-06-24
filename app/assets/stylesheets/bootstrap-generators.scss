@@ -37,3 +37,8 @@ h2 {
 .select2-choice, .select2-drop, .select2-search, .select2-input {
   font-family: inherit !important;
 }
+
+.table.table-loose > tbody > tr > th,
+.table.table-loose > tbody > tr > td {
+  line-height: 2;
+}
