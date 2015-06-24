@@ -17,7 +17,7 @@
     %tbody
       - @categories.each do |category|
         %tr
-          %td= image_tag(category.images.first.attachment.url(:icon)) unless category.images.empty?
+          %td= icon_image(category)
           %td= category.name
           %td= category.parent_category
           %td= category.brand

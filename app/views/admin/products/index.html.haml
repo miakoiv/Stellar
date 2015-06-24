@@ -7,6 +7,7 @@
   %table.table.table-striped.table-hover
     %thead
       %tr
+        %th.col-xs-1
         %th Name
         %th.col-xs-2 Category
         %th.col-xs-2 Brand
@@ -16,6 +17,7 @@
     %tbody
       - @products.each do |product|
         %tr
+          %td= icon_image(product)
           %td= product.name
           %td= product.category
           %td= product.brand
