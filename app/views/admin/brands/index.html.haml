@@ -12,6 +12,7 @@
         %th Matfox customer
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
+        %th.col-md-1.col.xs-2
 
     %tbody
       - @brands.each do |brand|
@@ -19,6 +20,9 @@
           %td= icon_image(brand)
           %td= brand.name
           %td= brand.matfox_customer
+          %td.text-right= link_to icon('shopping-cart', 'View storefront'),
+            root_path(brand_id: brand),
+            class: 'btn btn-default btn-sm'
           %td.text-right= link_to icon('info', 'Show'), admin_brand_path(brand),
             class: 'btn btn-default btn-sm'
           %td.text-right= link_to icon('edit', 'Edit'), edit_admin_brand_path(brand),
