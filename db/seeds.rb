@@ -8,6 +8,7 @@
 
 ImageType.create(name: 'Presentational')
 ImageType.create(name: 'Technical')
+ImageType.create(name: 'Icon')
 
 Brand.create(
   erp_number: 1545,

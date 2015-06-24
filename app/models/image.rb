@@ -11,6 +11,8 @@ class Image < ActiveRecord::Base
       icon: '32x32>',
     }
 
+  scope :icons, -> { joins(:image_type).where(image_types: {name: 'Icon'}) }
+
 
   validates_attachment_content_type :attachment, content_type: /\Aimage\/.*\Z/
 
