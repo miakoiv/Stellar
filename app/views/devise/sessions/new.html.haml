@@ -1,27 +1,28 @@
-.panel.panel-default
-  .panel-heading
-    %h4= t('.sign_in', default: "Sign in")
-  .panel-body
-    = form_for(resource, as: resource_name, url: session_path(resource_name),
-        html: {class: 'form-horizontal', role: "form"}) do |f|
-      .form-group
-        = f.label :email, class: 'col-sm-2 control-label'
-        .col-sm-10
-          = f.email_field :email, autofocus: true, class: "form-control"
-      .form-group
-        = f.label :password, class: 'col-sm-2 control-label'
-        .col-sm-10
-          = f.password_field :password, autocomplete: "off", class: "form-control"
-      - if devise_mapping.rememberable?
+.col-sm-offset-3.col-sm-6
+  .panel.panel-default
+    .panel-heading
+      %h4= t('.sign_in', default: "Sign in")
+    .panel-body
+      = form_for(resource, as: resource_name, url: session_path(resource_name),
+          html: {class: 'form-horizontal', role: "form"}) do |f|
         .form-group
-          .col-sm-offset-2.col-sm-10
-            .checkbox
-              %label
-                = f.check_box :remember_me
-                = t('.remember_me', default: 'Remember me')
+          = f.label :email, class: 'col-sm-4 control-label'
+          .col-sm-8
+            = f.email_field :email, autofocus: true, class: "form-control"
+        .form-group
+          = f.label :password, class: 'col-sm-4 control-label'
+          .col-sm-8
+            = f.password_field :password, autocomplete: "off", class: "form-control"
+        - if devise_mapping.rememberable?
+          .form-group
+            .col-sm-offset-4.col-sm-8
+              .checkbox
+                %label
+                  = f.check_box :remember_me
+                  = t('.remember_me', default: 'Remember me')
 
-      .form-group
-        .col-sm-offset-2.col-sm-10
-          = f.submit  t('.sign_in', default: "Sign in"), class: "btn btn-primary"
+        .form-group
+          .col-sm-offset-4.col-sm-8
+            = f.submit  t('.sign_in', default: "Sign in"), class: "btn btn-primary"
 
-= render "devise/shared/links"
+  = render "devise/shared/links"
