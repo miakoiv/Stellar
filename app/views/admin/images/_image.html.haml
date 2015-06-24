@@ -1,10 +1,10 @@
 .list-group-item
-  .media
-    .media-left
-      .thumbnail
-        %a.image-link{href: image.attachment.url(:lightbox)}
+  .row
+    .col-lg-5
+      %a.image-link{href: image.attachment.url(:lightbox)}
+        .thumbnail
           = image_tag image.attachment.url(:thumbnail), class: 'media-object'
-    .media-body.form-horizontal
+    .col-lg-7.form-horizontal
       .form-group
         %label.col-sm-4.control-label Image type
         .col-sm-8
