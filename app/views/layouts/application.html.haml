@@ -3,7 +3,7 @@
   %head
     = render partial: 'shared/metadata'
     %title= current_brand
-  %body
+  %body{class: current_brand.slug}
     %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
         .navbar-header
