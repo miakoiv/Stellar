@@ -4,16 +4,42 @@
  */
 
 .tikkurila {
+  padding-top: $navbar-height;
+
+  .navbar {
+    @include box-shadow(0 0 12px 0 rgba(0,0,0,0.333));
+
+    .navbar-brand img {
+      margin-top: -2px;
+    }
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+  }
 
   .categories {
-    @extend .row;
+    @extend .clearfix;
+    margin: 0 -15px 15px;
+    padding: 15px 0 0;
+    background: $gray;
 
     .category {
       @extend .col-xs-4;
       @extend .col-sm-2;
 
       .thumbnail {
+        max-width: 200px;
       }
+    }
+  }
+
+  .products {
+    .product {
+      @extend .col-xs-4;
+      @extend .col-sm-2;
     }
   }
 }

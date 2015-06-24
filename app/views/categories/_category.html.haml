@@ -1,3 +1,5 @@
 .category
-  .thumbnail
-    = image_tag(category.images.first.attachment.url(:thumbnail))
+  %a{href: '#'}
+    .thumbnail
+      = image_tag(category.images.first.attachment.url(:thumbnail))
+      .caption= category.name
