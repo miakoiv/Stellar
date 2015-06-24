@@ -14,18 +14,7 @@
     = render 'form'
 
   .col-sm-6
-    = form_for [:admin, @product, Image.new],
-        html: {multipart: true, class: 'dropzone well'} do |f|
-      .fallback
-        = f.hidden_field :image_type_id
-        = f.file_field :attachment
-        = f.submit class: 'btn btn-primary'
-      :javascript
-        Dropzone.options.newImage = {
-          paramName: 'image[attachment]',
-          success: function(file, image) {
-            $.get("/admin/images/" + image['id']);
-          }
-        }
+    = render partial: 'admin/images/dropzone', object: @product, as: :imageable
+
     #images.list-group.gallery
       = render partial: 'admin/images/edit_image', collection: @product.images, as: :image
