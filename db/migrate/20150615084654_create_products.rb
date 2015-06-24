@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
       t.belongs_to :category, null: false, index: true
       t.string :code
       t.string :name
+      t.text :memo
 
       t.timestamps null: false
     end

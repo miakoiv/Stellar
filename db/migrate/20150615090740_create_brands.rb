@@ -1,8 +1,9 @@
 class CreateBrands < ActiveRecord::Migration
   def change
     create_table :brands do |t|
-      t.integer :matfox_customer, null: false
+      t.integer :erp_number, null: false
       t.string :name
+      t.string :slug
 
       t.timestamps null: false
     end

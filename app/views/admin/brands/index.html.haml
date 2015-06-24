@@ -9,7 +9,7 @@
       %tr
         %th.col-xs-1
         %th Name
-        %th Matfox customer
+        %th ERP number
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
@@ -19,7 +19,7 @@
         %tr
           %td= icon_image(brand)
           %td= brand.name
-          %td= brand.matfox_customer
+          %td= brand.erp_number
           %td.text-right= link_to icon('shopping-cart', 'View storefront'),
             root_path(brand_id: brand),
             class: 'btn btn-default btn-sm'

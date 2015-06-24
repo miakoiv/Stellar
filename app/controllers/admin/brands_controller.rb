@@ -65,7 +65,7 @@ class Admin::BrandsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def brand_params
       params.require(:brand).permit(
-        :name, :matfox_customer
+        :erp_number, :name
       )
     end
 end

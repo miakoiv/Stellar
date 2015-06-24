@@ -10,7 +10,7 @@ class Brand < ActiveRecord::Base
   has_many :images, as: :imageable
 
   validates :name, presence: true
-  validates :matfox_customer, numericality: true
+  validates :erp_number, numericality: true
 
 
   def self.options

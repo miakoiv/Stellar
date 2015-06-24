@@ -6,16 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+ImageType.create(name: 'Presentational')
+ImageType.create(name: 'Technical')
+
+Brand.create(
+  erp_number: 1545,
+  name: 'Tikkurila',
+  slug: 'tikkurila'
+)
+
 User.create(
   brand_id: 1,
   email: 'rosenblad@gmail.com',
   password: 'rush2112'
 )
-
-ImageType.create(name: 'Presentational')
-ImageType.create(name: 'Technical')
-
-Brand.create(matfox_customer: 1545, name: 'Tikkurila Oyj')
 
 Category.create(brand_id: 1, name: 'Color Display')
 Category.create(brand_id: 1, name: 'Product Placement')
