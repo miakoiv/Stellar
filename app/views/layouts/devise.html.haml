@@ -2,7 +2,7 @@
 %html
   %head
     = render partial: 'shared/metadata'
-    %title= current_brand
+    %title Spry
   %body
     %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
@@ -10,10 +10,7 @@
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             %span.sr-only Toggle navigation
             = icon('bars')
-          = link_to current_brand, root_path, class: "navbar-brand"
-        #navbar.collapse.navbar-collapse
-          = render partial: 'shared/storefront_nav'
-          = render partial: 'shared/user_menu'
+          = link_to 'Spry', root_path, class: "navbar-brand"
 
     .container
       = render partial: 'shared/flash'

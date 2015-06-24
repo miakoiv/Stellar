@@ -1,2 +1,3 @@
 %ul.nav.navbar-nav
   = active_link_to 'Store', root_path, wrap_tag: :li, active: ['store']
+  %li= link_to icon('cog', 'Administration'), admin_brands_path
