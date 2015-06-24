@@ -9,6 +9,7 @@
     @extend .row;
 
     .category {
+      @extend .col-xs-4;
       @extend .col-sm-2;
 
       .thumbnail {
