@@ -5,9 +5,7 @@
   = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
     = icon('pencil-square')
     Edit
-  %h1
-    Product
-    %span.small= @product.to_s
+  %h1= icon('cube', @product)
 
 .row
   .col-sm-6
