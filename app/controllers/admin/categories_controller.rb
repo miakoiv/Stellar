@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class Admin::CategoriesController < ApplicationController
+
+  layout 'admin'
+
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/categories

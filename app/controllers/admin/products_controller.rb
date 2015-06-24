@@ -1,6 +1,9 @@
 #encoding: utf-8
 
 class Admin::ProductsController < ApplicationController
+
+  layout 'admin'
+
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/products

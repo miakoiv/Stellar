@@ -2,6 +2,8 @@
 
 class Admin::ImagesController < ApplicationController
 
+  # No layout, this controller never renders HTML.
+
   # GET /admin/images/1
   # This is only called by Dropzone as callback for success.
   def show
