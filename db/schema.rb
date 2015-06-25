@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150623063746) do
     t.integer  "brand_id",           limit: 4,   null: false
     t.integer  "parent_category_id", limit: 4
     t.string   "name",               limit: 255
+    t.integer  "priority",           limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20150623063746) do
     t.integer  "imageable_id",            limit: 4
     t.string   "imageable_type",          limit: 255
     t.integer  "image_type_id",           limit: 4
+    t.integer  "priority",                limit: 4
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "attachment_file_name",    limit: 255
@@ -107,7 +109,9 @@ ActiveRecord::Schema.define(version: 20150623063746) do
     t.integer  "category_id", limit: 4,     null: false
     t.string   "code",        limit: 255
     t.string   "name",        limit: 255
+    t.string   "description", limit: 255
     t.text     "memo",        limit: 65535
+    t.integer  "priority",    limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end

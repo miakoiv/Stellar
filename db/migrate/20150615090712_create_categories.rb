@@ -5,6 +5,7 @@ class CreateCategories < ActiveRecord::Migration
       t.belongs_to :parent_category, index: true
       t.string :name
 
+      t.integer :priority
       t.timestamps null: false
     end
   end
