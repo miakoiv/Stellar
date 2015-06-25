@@ -21,6 +21,11 @@ User.create(
   email: 'rosenblad@gmail.com',
   password: 'rush2112'
 )
+User.create(
+  brand_id: 1,
+  email: 'mikko.kaukojarvi@tjt-kaluste.fi',
+  password: 'powerrangers'
+)
 
 Category.create(brand_id: 1, name: 'Color Display')
 Category.create(brand_id: 1, name: 'Product Placement')
