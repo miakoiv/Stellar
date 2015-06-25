@@ -1,5 +1,5 @@
 = div_for category, class: category == @category ? 'active' : nil do
-  = link_to show_category_path(category) do
+  = link_to show_category_path(category), remote: true do
     .thumbnail
       - if category.cover_image.present?
         = image_tag(category.cover_image.attachment.url(:thumbnail))

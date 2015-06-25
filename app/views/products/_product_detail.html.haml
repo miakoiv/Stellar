@@ -1,0 +1,17 @@
+%h1.product-title
+  = product.name
+  = link_to icon(:times), show_category_path(product.category), remote: true,
+      class: 'close'
+
+.product-description
+  = product.description
+
+.images.technical
+  = render partial: 'images/technical',
+      collection: product.images.by_type(:technical),
+      as: :image
+
+.images.presentational
+  = render partial: 'images/presentational',
+      collection: product.images.by_type(:presentational),
+      as: :image

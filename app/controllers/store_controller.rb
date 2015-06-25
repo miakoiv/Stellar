@@ -18,6 +18,11 @@ class StoreController < ApplicationController
     @products = @category.products
   end
 
+  # GET /product/1
+  def show_product
+    @product = Product.find(params[:product_id])
+  end
+
   private
     def set_categories
       @categories = current_brand.categories

@@ -53,6 +53,7 @@
   }
 
   .products {
+    position: relative;
     @extend .col-md-10;
     @extend .col-md-offset-1;
 
@@ -62,6 +63,38 @@
 
       img {
         @extend .img-thumbnail;
+      }
+    }
+  }
+
+  .product-detail {
+    position: absolute;
+    left: 30px;
+    right: 30px;
+    background: $body-bg;
+
+    .product-title {
+      @extend .page-header;
+    }
+
+    .product-description {
+      @extend .col-md-2;
+    }
+
+    .images.technical {
+      @extend .col-md-offset-1;
+      @extend .col-md-2;
+
+      img {
+        @extend .img-responsive;
+      }
+    }
+    .images.presentational {
+      @extend .col-md-offset-1;
+      @extend .col-md-6;
+
+      img {
+        @extend .img-responsive;
       }
     }
   }
