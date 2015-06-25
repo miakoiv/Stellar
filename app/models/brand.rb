@@ -2,6 +2,8 @@
 
 class Brand < ActiveRecord::Base
 
+  include Imageable
+
   before_create :assign_slug
 
   has_many :categories
@@ -9,7 +11,6 @@ class Brand < ActiveRecord::Base
   has_many :users
   has_many :inventories
   has_many :order_types, through: :inventories
-  has_many :images, as: :imageable
 
   validates :name, presence: true
   validates :erp_number, numericality: true

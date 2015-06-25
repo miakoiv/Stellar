@@ -2,9 +2,10 @@
 
 class Product < ActiveRecord::Base
 
+  include Imageable
+
   belongs_to :brand
   belongs_to :category
-  has_many :images, as: :imageable
 
   validates :brand_id, presence: true
   validates :category_id, presence: true
