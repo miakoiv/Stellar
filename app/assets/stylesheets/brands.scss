@@ -7,7 +7,7 @@
   padding-top: $navbar-height;
 
   .navbar {
-    @include box-shadow(0 0 12px 0 rgba(0,0,0,0.333));
+    @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
     padding-left: 20px;
     padding-right: 20px;
 
@@ -24,8 +24,8 @@
 
   .categories {
     @extend .clearfix;
-    margin: 0 -15px 15px;
-    padding: 15px 15px 0;
+    margin: 0 -15px 20px;
+    padding: 20px 15px 0;
     background: $gray;
 
     .category {
@@ -33,13 +33,22 @@
       @extend .col-sm-3;
       @extend .col-lg-2;
 
+      a {
+        outline: 0;
+        text-decoration: none;
+      }
       .thumbnail {
         max-width: 180px;
+        transition: margin-top 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 
         .caption {
           font-size: $font-size-small;
         }
       }
+    }
+    .category.active .thumbnail {
+      margin-top: -5px;
+      @include box-shadow(0 3px 8px 0 rgba(0,0,0,0.8));
     }
   }
 
@@ -50,6 +59,10 @@
     .product {
       @extend .col-sm-6;
       @extend .col-lg-3;
+
+      img {
+        @extend .img-thumbnail;
+      }
     }
   }
 }
