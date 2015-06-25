@@ -20,9 +20,17 @@
           .col-sm-8
             %p.form-control-static= @product.category
         .form-group
+          %label.col-sm-4.control-label Product code
+          .col-sm-8
+            %p.form-control-static= @product.code
+        .form-group
           %label.col-sm-4.control-label Name
           .col-sm-8
             %p.form-control-static= @product.name
+        .form-group
+          %label.col-sm-4.control-label Description
+          .col-sm-8
+            %p.form-control-static= @product.description
 
   .col-sm-6
     .list-group.gallery

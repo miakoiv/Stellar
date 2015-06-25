@@ -12,9 +12,17 @@
         .col-sm-8
           = f.select :category_id, Category.options, {}, {class: 'select2 form-control'}
       .form-group
+        %label.col-sm-4.control-label Product code
+        .col-sm-8
+          %p.form-control-static= @product.code
+      .form-group
         = f.label :name, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :description, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :description, class: 'form-control'
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'

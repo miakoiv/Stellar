@@ -8,19 +8,19 @@
     %thead
       %tr
         %th.col-xs-1
+        %th.col-xs-2 Product code
         %th Name
         %th.col-xs-2 Category
-        %th.col-xs-2 Brand
         %th.col-md-1.col.xs-2
         %th.col-md-1.col.xs-2
 
     %tbody
       - @products.each do |product|
         %tr
-          %td= icon_image_tag(product)
+          %td= icon_image_tag(product.brand)
+          %td= product.code
           %td= product.name
           %td= product.category
-          %td= product.brand
           %td.text-right= link_to icon('info', 'Show'), admin_product_path(product),
             class: 'btn btn-default btn-sm'
           %td.text-right= link_to icon('edit', 'Edit'), edit_admin_product_path(product),

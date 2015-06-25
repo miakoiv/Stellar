@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20150623063746) do
     t.integer  "category_id", limit: 4,     null: false
     t.string   "code",        limit: 255
     t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.text     "description", limit: 65535
     t.text     "memo",        limit: 65535
     t.integer  "priority",    limit: 4
     t.datetime "created_at",                null: false
