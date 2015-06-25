@@ -17,7 +17,7 @@
     %tbody
       - @categories.each do |category|
         %tr
-          %td= icon_image(category)
+          %td= icon_image_tag(category)
           %td= category.name
           %td= category.parent_category
           %td= category.brand

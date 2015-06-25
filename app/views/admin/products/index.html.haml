@@ -17,7 +17,7 @@
     %tbody
       - @products.each do |product|
         %tr
-          %td= icon_image(product)
+          %td= icon_image_tag(product)
           %td= product.name
           %td= product.category
           %td= product.brand

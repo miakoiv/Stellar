@@ -1,5 +1,6 @@
 .category
   %a{href: '#'}
     .thumbnail
-      = image_tag(category.images.first.attachment.url(:thumbnail))
+      - if category.cover_image.present?
+        = image_tag(category.cover_image.attachment.url(:thumbnail))
       .caption= category.name

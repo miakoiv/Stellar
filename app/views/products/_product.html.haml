@@ -1,4 +1,5 @@
 .product
-  = image_tag product.images.by_type(:presentational).first.attachment.url(:thumbnail),
-      class: 'img-responsive'
+  - if product.cover_image.present?
+    = image_tag product.cover_image.attachment.url(:thumbnail),
+        class: 'img-responsive'
   %h4= product.name

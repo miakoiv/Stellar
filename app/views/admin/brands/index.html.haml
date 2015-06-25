@@ -17,7 +17,7 @@
     %tbody
       - @brands.each do |brand|
         %tr
-          %td= icon_image(brand)
+          %td= icon_image_tag(brand)
           %td= brand.name
           %td= brand.erp_number
           %td.text-right= link_to icon('shopping-cart', 'View storefront'),
