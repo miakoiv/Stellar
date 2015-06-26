@@ -11,7 +11,8 @@ class Image < ActiveRecord::Base
       lightbox: '1000x1000>',
       presentational: '1000x1000>',
       technical: '400x400>',
-      thumbnail: '200x200>',
+      matchbox: '200x200>',
+      thumbnail: '75x75>',
       icon: '25x25>',
     }
 

@@ -12,15 +12,5 @@
     = render 'form'
 
   .col-sm-6
+    = render partial: 'admin/images/edit_table', object: @product, as: :imageable
     = render partial: 'admin/images/dropzone', object: @product, as: :imageable
-
-    #images.list-group.gallery
-      = render partial: 'admin/images/edit_image', collection: @product.images, as: :image
-
-:coffee
-  $('#images').sortable(
-    items: '.list-group-item'
-    placeholder: '#{list_group_placeholder}'
-  ).bind 'sortupdate', (e, ui) ->
-    $.post '#{admin_reorder_images_path}',
-      {reorder: $('.list-group-item', this).map(-> this.id).get()}

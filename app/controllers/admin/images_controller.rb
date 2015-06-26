@@ -16,16 +16,11 @@ class Admin::ImagesController < ApplicationController
     end
   end
 
-  # GET /admin/imageable/1/images/new
-  def new
-    @imageable = find_imageable
-    @image = @imageable.images.build
-  end
-
   # POST /admin/imageable/1/images
   def create
     @imageable = find_imageable
     @image = @imageable.images.build(image_params)
+    @image.image_type ||= ImageType.first
 
     respond_to do |format|
       if @image.save

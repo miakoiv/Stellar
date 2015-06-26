@@ -2,5 +2,5 @@
   = link_to show_category_path(category), remote: true do
     .thumbnail
       - if category.cover_image.present?
-        = image_tag(category.cover_image.attachment.url(:thumbnail))
+        = image_tag(category.cover_image.attachment.url(:matchbox))
       .caption= category.name

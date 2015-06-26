@@ -1,6 +1,6 @@
 = div_for product do
   = link_to show_product_path(product), remote: true do
     - if product.cover_image.present?
-      = image_tag product.cover_image.attachment.url(:thumbnail),
+      = image_tag product.cover_image.attachment.url(:matchbox),
           class: 'img-responsive'
     %h4= product.name

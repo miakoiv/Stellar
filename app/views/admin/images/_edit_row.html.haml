@@ -1,0 +1,15 @@
+= content_tag_for :tr, image do
+  %td
+    = image_tag(image.attachment.url(:thumbnail), class: 'img-rounded',
+        data: {toggle: 'popover', placement: 'left',
+          content: "#{image_tag(image.attachment.url(:matchbox))}"})
+  %td
+    = form_for [:admin, image], remote: true, html: {class: 'immediate form-horizontal'} do |f|
+      .btn-group{'data-toggle' => 'buttons'}
+        - ImageType.all.each do |imagetype|
+          %label.btn.btn-sm.btn-default{class: image.image_type == imagetype ? 'active' : nil}
+            = f.radio_button :image_type_id, imagetype.id
+            = imagetype
+  %td.text-right
+    = link_to icon('remove', 'Delete'), admin_image_path(image),
+        remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -1,3 +1,5 @@
-$("#{j render partial: 'admin/images/edit_image', object: @image, as: :image}").appendTo('#images');
+$("#{j render partial: 'admin/images/edit_row', object: @image, as: :image}").appendTo('#images');
 $("##{dom_id(@image)}").initialize();
 $("##{dom_id(@image)}").effect('highlight');
+
+$('.sortable').sortable();

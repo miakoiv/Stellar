@@ -33,5 +33,4 @@
             %p.form-control-static= @product.description
 
   .col-sm-6
-    .list-group.gallery
-      = render partial: 'admin/images/image', collection: @product.images
+    = render partial: 'admin/images/table', object: @product, as: :imageable

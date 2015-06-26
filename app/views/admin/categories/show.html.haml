@@ -27,5 +27,4 @@
             %p.form-control-static= @category.name
 
   .col-sm-6
-    .list-group.gallery
-      = render partial: 'admin/images/image', collection: @category.images
+    = render partial: 'admin/images/table', object: @category, as: :imageable
