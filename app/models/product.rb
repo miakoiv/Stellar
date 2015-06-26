@@ -3,6 +3,7 @@
 class Product < ActiveRecord::Base
 
   include Imageable
+  include Reorderable
 
   belongs_to :brand
   belongs_to :category

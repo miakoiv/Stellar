@@ -2,6 +2,8 @@
 
 class Admin::CategoriesController < ApplicationController
 
+  include Reorderer
+
   layout 'admin'
 
   before_action :set_category, only: [:show, :edit, :update, :destroy]

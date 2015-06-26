@@ -30,6 +30,14 @@ h2 {
   line-height: 2;
 }
 
+.table > tbody.sortable > tr:hover {
+  cursor: grab;
+}
+.sortable-placeholder {
+    outline: $brand-primary solid 1px;
+}
+
+
 #flash {
   position: absolute;
   bottom: 15px;

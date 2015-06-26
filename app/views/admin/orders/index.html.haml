@@ -9,15 +9,15 @@
       %tr
         %th User
         %th Order type
-        %th.col-md-1.col.xs-2
-        %th.col-md-1.col-xs-2
+        %th
 
     %tbody
       - @orders.each do |order|
         %tr
           %td= order.user
           %td= order.order_type
-          %td.text-right= link_to icon('info', 'Show'), admin_order_path(order),
-            class: 'btn btn-default btn-sm'
-          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_order_path(order),
-            class: 'btn btn-default btn-sm'
+          %td.text-right
+            = link_to icon('info', 'Show'), admin_order_path(order),
+                class: 'btn btn-default btn-sm'
+            = link_to icon('edit', 'Edit'), edit_admin_order_path(order),
+                class: 'btn btn-default btn-sm'

@@ -12,4 +12,11 @@ module ApplicationHelper
     "\u274c" # U+274C CROSS MARK
   end
 
+  def tr_placeholder(colspan)
+    content_tag(:tr, content_tag(:td, icon('hand-o-right'), colspan: colspan))
+  end
+
+  def list_group_placeholder
+    content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
+  end
 end

@@ -16,3 +16,11 @@
 
     #images.list-group.gallery
       = render partial: 'admin/images/edit_image', collection: @product.images, as: :image
+
+:coffee
+  $('#images').sortable(
+    items: '.list-group-item'
+    placeholder: '#{list_group_placeholder}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_images_path}',
+      {reorder: $('.list-group-item', this).map(-> this.id).get()}

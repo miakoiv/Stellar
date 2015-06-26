@@ -2,6 +2,8 @@
 
 class Admin::ProductsController < ApplicationController
 
+  include Reorderer
+
   layout 'admin'
 
   before_action :set_product, only: [:show, :edit, :update, :destroy]

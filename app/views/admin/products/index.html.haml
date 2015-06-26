@@ -11,17 +11,24 @@
         %th.col-xs-2 Product code
         %th Name
         %th.col-xs-2 Category
-        %th.col-md-1.col.xs-2
-        %th.col-md-1.col.xs-2
+        %th
 
-    %tbody
-      - @products.each do |product|
-        %tr
-          %td= icon_image_tag(product.brand)
-          %td= product.code
-          %td= product.name
-          %td= product.category
-          %td.text-right= link_to icon('info', 'Show'), admin_product_path(product),
-            class: 'btn btn-default btn-sm'
-          %td.text-right= link_to icon('edit', 'Edit'), edit_admin_product_path(product),
-            class: 'btn btn-default btn-sm'
+    %tbody.sortable
+      = content_tag_for :tr, @products do |product|
+        %td= icon_image_tag(product.brand)
+        %td= product.code
+        %td= product.name
+        %td= product.category
+        %td.text-right
+          = link_to icon('info', 'Show'), admin_product_path(product),
+              class: 'btn btn-default btn-sm'
+          = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+              class: 'btn btn-default btn-sm'
+
+:coffee
+  $('tbody.sortable').sortable(
+    items: 'tr'
+    placeholder: '#{tr_placeholder(5)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_products_path}',
+      {reorder: $('tr', this).map(-> this.id).get()}

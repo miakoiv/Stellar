@@ -3,6 +3,7 @@
 class Category < ActiveRecord::Base
 
   include Imageable
+  include Reorderable
 
   belongs_to :brand
   belongs_to :parent_category, class_name: 'Category'

@@ -43,12 +43,17 @@ Rails.application.routes.draw do
     end
     resources :categories do
       resources :images, shallow: true
+      post :reorder, on: :collection
     end
     resources :products do
       resources :images, shallow: true
+      post :reorder, on: :collection
     end
     resources :orders
+
+    post '/images/reorder' => 'images#reorder', as: :reorder_images
   end
+
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

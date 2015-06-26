@@ -2,6 +2,8 @@
 
 class Admin::ImagesController < ApplicationController
 
+  include Reorderer
+
   # No layout, this controller never renders HTML.
 
   # GET /admin/images/1
