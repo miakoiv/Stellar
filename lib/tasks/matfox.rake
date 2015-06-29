@@ -56,11 +56,6 @@ namespace :matfox do
         product.update_columns(
           name: data[:product][:name],
           description: data[:product][:description],
-          memo: [
-            data[:product][:memo_1],
-            data[:product][:memo_2],
-            data[:product][:memo_3]
-          ].join("\n"),
         )
       end
     end
