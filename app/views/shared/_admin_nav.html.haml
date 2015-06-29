@@ -3,3 +3,6 @@
   = active_link_to icon('sitemap', 'Categories'), admin_categories_path, wrap_tag: :li
   = active_link_to icon('cube', 'Products'), admin_products_path, wrap_tag: :li
   = active_link_to icon('truck', 'Orders'), admin_orders_path, wrap_tag: :li
+%ul.nav.navbar-nav.navbar-right
+  %li= link_to "#{icon_image_tag(current_brand, 20)} #{current_brand.name} storefront".html_safe,
+    root_path(brand_id: current_brand.id)

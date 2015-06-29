@@ -3,9 +3,9 @@
 module ApplicationHelper
 
   # Display an icon for object.
-  def icon_image_tag(object)
+  def icon_image_tag(object, size = 25)
     icon = object.icon_image
-    image_tag(icon.attachment.url(:icon)) if icon.present?
+    image_tag(icon.attachment.url(:icon), width: size, height: size) if icon.present?
   end
 
   def blank_option
