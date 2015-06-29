@@ -31,6 +31,10 @@
           %label.col-sm-4.control-label Description
           .col-sm-8
             %p.form-control-static= @product.description
+        .form-group
+          %label.col-sm-4.control-label Memo
+          .col-sm-8
+            %p.form-control-static= @product.memo
 
   .col-sm-6
     = render partial: 'admin/images/table', object: @product, as: :imageable

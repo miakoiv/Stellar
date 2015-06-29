@@ -10,7 +10,8 @@
       .form-group
         = f.label :category_id, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :category_id, Category.options, {}, {class: 'select2 form-control'}
+          = f.select :category_id, Category.options,
+              {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
         %label.col-sm-4.control-label Product code
         .col-sm-8
@@ -22,7 +23,11 @@
       .form-group
         = f.label :description, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.text_area :description, class: 'form-control'
+          = f.text_area :description, rows: 2, class: 'form-control'
+      .form-group
+        = f.label :memo, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :memo, rows: 6, class: 'form-control'
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'
