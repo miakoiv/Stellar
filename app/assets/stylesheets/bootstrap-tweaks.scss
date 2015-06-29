@@ -42,3 +42,22 @@ h2 {
   position: absolute;
   bottom: 15px;
 }
+
+#footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  background: darken($brand-primary, 6%);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
+  color: #fff;
+  font-size: $font-size-small;
+
+  p {
+    margin: 0;
+  }
+  p.lead {
+    font-size: $font-size-base;
+  }
+}

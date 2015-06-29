@@ -1,0 +1,77 @@
+/*
+ * Brand specific styles targeting the element .brand
+ * and its descendants.
+ */
+
+.intersport-finland {
+
+  .categories {
+    margin-bottom: 20px;
+
+    .category {
+      display: inline-block;
+      width: 16.67%;
+
+      a {
+        outline: 0;
+        text-decoration: none;
+      }
+      .thumbnail {
+        margin-bottom: 5px;
+        transition: all 0.2s ease-in-out 0s;
+
+        .caption {
+          font-size: $font-size-small;
+        }
+      }
+    }
+    .category.active .thumbnail {
+      @include box-shadow(0 0 3px 0 $brand-primary);
+    }
+  }
+
+  .products {
+
+    .product {
+      @extend .col-sm-6;
+      @extend .col-lg-3;
+
+      a {
+        padding: 5px;
+      }
+      img {
+        @extend .img-thumbnail;
+      }
+    }
+  }
+
+  .product-detail {
+    @extend .row;
+
+    .product-title {
+      @extend .col-xs-12;
+      @extend .page-header;
+    }
+
+    .product-description {
+      @extend .col-md-2;
+    }
+
+    .images.technical {
+      @extend .col-md-offset-1;
+      @extend .col-md-2;
+
+      img {
+        @extend .img-responsive;
+      }
+    }
+    .images.presentational {
+      @extend .col-md-offset-1;
+      @extend .col-md-6;
+
+      img {
+        @extend .img-responsive;
+      }
+    }
+  }
+}
