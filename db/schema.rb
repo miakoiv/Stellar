@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150623063746) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "brand_id",    limit: 4,     null: false
-    t.integer  "category_id", limit: 4,     null: false
+    t.integer  "category_id", limit: 4
     t.string   "code",        limit: 255
     t.string   "name",        limit: 255
     t.text     "description", limit: 65535
