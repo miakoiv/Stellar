@@ -16,9 +16,9 @@
           = render partial: 'shared/user_menu'
           = render partial: 'shared/storefront_nav'
 
-    .container
+    #main.container
       = render partial: 'shared/flash'
       = yield
 
-    #footer
+    #footer.container
       = render partial: 'shared/footer'
