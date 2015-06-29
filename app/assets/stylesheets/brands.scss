@@ -5,11 +5,10 @@
 
 .tikkurila {
   padding-top: $navbar-height;
+  padding-bottom: 200px;
 
   .navbar {
     @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-    padding-left: 20px;
-    padding-right: 20px;
 
     .navbar-brand img {
       margin-top: -2px;
@@ -19,14 +18,17 @@
   .container {
     margin-left: 0;
     margin-right: 0;
+    padding-left: 30px;
+    padding-right: 30px;
     width: auto;
   }
 
   .categories {
     @extend .clearfix;
-    margin: 0 -15px 20px;
+    margin: 0 -30px 20px;
     padding: 20px 15px 0;
     background: $gray;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 
     .category {
       display: inline-block;
@@ -55,7 +57,6 @@
   }
 
   .products {
-    position: relative;
     @extend .col-md-10;
     @extend .col-md-offset-1;
 
@@ -75,12 +76,10 @@
   }
 
   .product-detail {
-    position: absolute;
-    left: 30px;
-    right: 30px;
-    background: $body-bg;
+    @extend .row;
 
     .product-title {
+      @extend .col-xs-12;
       @extend .page-header;
     }
 
@@ -103,6 +102,24 @@
       img {
         @extend .img-responsive;
       }
+    }
+  }
+
+  #footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 15px;
+    background: darken($brand-primary, 6%);
+    color: #fff;
+    font-size: $font-size-small;
+
+    p {
+      margin: 0;
+    }
+    p.lead {
+      font-size: $font-size-base;
     }
   }
 }
