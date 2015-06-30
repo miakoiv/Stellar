@@ -5,14 +5,10 @@
 
 .tikkurila {
   padding-top: $navbar-height;
-  padding-bottom: 200px;
+  padding-bottom: 120px;
 
   .navbar {
     @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-
-    .navbar-brand img {
-      margin-top: -2px;
-    }
   }
 
   .container {
@@ -77,10 +73,16 @@
 
   .product-detail {
     @extend .row;
+    position: relative;
+    z-index: $zindex-navbar;
+    margin: 0 -30px;
+    padding: 0 30px 30px;
+    background: #fff;
 
     .product-title {
       @extend .col-xs-12;
       @extend .page-header;
+      margin-top: 0;
     }
 
     .product-description {
