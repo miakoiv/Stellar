@@ -2,6 +2,8 @@
   = product.name
   = link_to icon(:times, 'Close'), show_category_path(product.category), remote: true,
       class: 'btn btn-primary'
+  = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+      class: 'btn btn-default'
 
 .product-description
   = product.description

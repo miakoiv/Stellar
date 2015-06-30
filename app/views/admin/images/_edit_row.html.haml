@@ -1,8 +1,8 @@
 = content_tag_for :tr, image do
   %td
-    = image_tag(image.attachment.url(:thumbnail), class: 'img-rounded',
+    = image_variant_tag(image, :thumbnail, class: 'img-rounded',
         data: {toggle: 'popover', placement: 'left',
-          content: "#{image_tag(image.attachment.url(:matchbox))}"})
+          content: "#{image_variant_tag(image, :matchbox)}"})
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate form-horizontal'} do |f|
       .btn-group{'data-toggle' => 'buttons'}

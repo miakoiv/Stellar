@@ -19,7 +19,7 @@
         %td= product.name
         %td
           - product.images.each do |image|
-            = image_tag(image.attachment.url(:icon))
+            = image_variant_tag(image, :icon)
         %td= product.category
         %td.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),

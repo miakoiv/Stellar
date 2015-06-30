@@ -15,7 +15,7 @@
     %tbody
       - @brands.each do |brand|
         %tr
-          %td= icon_image_tag(brand)
+          %td= image_variant_tag(brand.cover_image)
           %td= brand.name
           %td= brand.erp_number
           %td.text-right

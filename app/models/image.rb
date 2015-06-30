@@ -18,6 +18,8 @@ class Image < ActiveRecord::Base
 
   scope :by_type, -> (type) { joins(:image_type).where(image_types: {name: type}) }
 
+  delegate :url, to: :attachment
+
   validates_attachment_content_type :attachment, content_type: /\Aimage\/.*\Z/
 
 end

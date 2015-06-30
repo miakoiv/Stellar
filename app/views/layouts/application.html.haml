@@ -11,7 +11,7 @@
             %span.sr-only Toggle navigation
             = icon('bars')
           = link_to root_path, class: "navbar-brand" do
-            = icon_image_tag(current_brand)
+            = image_variant_tag(current_brand.cover_image)
         #navbar.collapse.navbar-collapse
           = render partial: 'shared/user_menu'
           = render partial: 'shared/storefront_nav'

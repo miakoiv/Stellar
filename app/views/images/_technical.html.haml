@@ -1,2 +1,2 @@
-%a.image-link{href: image.attachment.url(:lightbox)}
-  = image_tag image.attachment.url(:technical)
+%a.image-link{href: image.url(:lightbox)}
+  = image_variant_tag(image, :technical)

@@ -14,7 +14,7 @@
 
     %tbody.sortable
       = content_tag_for :tr, @categories do |category|
-        %td= icon_image_tag(category)
+        %td= image_variant_tag(category.cover_image)
         %td= category.name
         %td= category.parent_category
         %td.text-right
