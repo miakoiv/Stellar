@@ -14,6 +14,10 @@ h2 {
   font-weight: 400;
 }
 
+a, a:focus {
+  outline: 0;
+}
+
 .navbar img {
   margin: -2px 5px -3px 0;
 }

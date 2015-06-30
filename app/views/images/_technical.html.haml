@@ -1,2 +1,4 @@
-= link_to image.url(:lightbox), class: 'image-link' do
-  = image_variant_tag(image, :technical)
+= div_for(image, role: 'tabpanel',
+    class: image_counter == 0 ? 'tab-pane fade in active' : 'tab-pane fade') do
+  = link_to image.url(:lightbox), class: 'image-link' do
+    = image_variant_tag(image, :technical)

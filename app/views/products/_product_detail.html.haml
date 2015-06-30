@@ -4,22 +4,28 @@
   = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
       class: 'btn btn-default'
   = product.name
-  - if product.customer_code.present?
-    %span.small= product.customer_code
-  %span.small
-    [TJT
-    = product.code
-    ]
+  %span.product-code
+    - if product.customer_code.present?
+      %span.label.label-info= product.customer_code
+    %span.label.label-default
+      TJT
+      = product.code
 
 .product-description
   = product.description
 
-.images.technical.gallery
-  = render partial: 'images/technical',
-      collection: product.images.by_type(:technical),
-      as: :image
+.images.technical
+  %ul.nav.nav-pills{role: 'tablist'}
+    = render partial: 'images/pill',
+        collection: product.images.by_type(:technical), as: :image
+  .tab-content.gallery
+    = render partial: 'images/technical',
+        collection: product.images.by_type(:technical), as: :image
 
-.images.presentational.gallery
-  = render partial: 'images/presentational',
-      collection: product.images.by_type(:presentational),
-      as: :image
+.images.presentational
+  %ul.nav.nav-pills{role: 'tablist'}
+    = render partial: 'images/pill',
+        collection: product.images.by_type(:presentational), as: :image
+  .tab-content.gallery
+    = render partial: 'images/presentational',
+        collection: product.images.by_type(:presentational), as: :image
