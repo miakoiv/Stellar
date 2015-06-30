@@ -1,7 +1,7 @@
 %h1.product-title
   = product.name
-  = link_to icon(:times), show_category_path(product.category), remote: true,
-      class: 'close'
+  = link_to icon(:times, 'Close'), show_category_path(product.category), remote: true,
+      class: 'btn btn-primary'
 
 .product-description
   = product.description
