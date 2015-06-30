@@ -105,15 +105,16 @@ ActiveRecord::Schema.define(version: 20150623063746) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "brand_id",    limit: 4,     null: false
-    t.integer  "category_id", limit: 4
-    t.string   "code",        limit: 255
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
-    t.text     "memo",        limit: 65535
-    t.integer  "priority",    limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "brand_id",      limit: 4,     null: false
+    t.integer  "category_id",   limit: 4
+    t.string   "code",          limit: 255
+    t.string   "customer_code", limit: 255
+    t.string   "name",          limit: 255
+    t.text     "description",   limit: 65535
+    t.text     "memo",          limit: 65535
+    t.integer  "priority",      limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree

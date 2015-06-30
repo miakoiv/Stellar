@@ -22,7 +22,7 @@ IMPORT_FILES = {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
     headers: [
-      :code, :erp_number, :brand_name, :foreign_code, :sales_price
+      :code, :erp_number, :brand_name, :customer_code, :sales_price
     ],
   },
   # PAANUMERO,ALINUMERO,PAATMP,ALITMP,LKM,TARVE1,TARVE2,BTARVE1,BTARVE2,SELITE
@@ -42,7 +42,6 @@ namespace :matfox do
   desc "Import data from Matfox"
   task :import => :environment do |task, args|
 
-    #pp import_data
     import_data.each do |code, data|
       next if data[:product].nil? or data[:brands].nil?
 
@@ -56,6 +55,7 @@ namespace :matfox do
         product.update_columns(
           name: data[:product][:name],
           description: data[:product][:description],
+          customer_code: row[:customer_code],
         )
       end
     end
