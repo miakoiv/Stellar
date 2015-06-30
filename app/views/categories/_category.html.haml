@@ -1,5 +1,4 @@
 = div_for category, class: category == @category ? 'active' : nil do
   = link_to show_category_path(category), remote: true do
-    .thumbnail
-      = image_variant_tag(category.cover_image, :matchbox)
-      .caption= category.name
+    = image_variant_tag(category.cover_image, :matchbox)
+    %p= category.name
