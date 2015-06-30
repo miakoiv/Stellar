@@ -72,6 +72,7 @@
   }
 
   .product-detail {
+    @extend .clearfix;
     position: relative;
     z-index: $zindex-navbar;
     margin: 0 -30px;
