@@ -14,12 +14,12 @@
 .product-description
   = product.description
 
-.images.technical
+.images.technical.gallery
   = render partial: 'images/technical',
       collection: product.images.by_type(:technical),
       as: :image
 
-.images.presentational
+.images.presentational.gallery
   = render partial: 'images/presentational',
       collection: product.images.by_type(:presentational),
       as: :image

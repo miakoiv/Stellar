@@ -1,6 +1,13 @@
 $.fn.extend
   initialize: ->
 
+    $('.gallery').each ->
+      $(this).magnificPopup
+        delegate: '.image-link'
+        type: 'image'
+        gallery:
+          enabled: true
+
     $('[data-toggle="popover"]').popover
       html: true
       trigger: 'hover'
@@ -9,15 +16,9 @@ $.fn.extend
       width: 'resolve'
       dropdownAutoWidth: true
 
-    $(document).on 'change', 'form.immediate', (e) ->
-      $(e.currentTarget).trigger('submit.rails')
-
 jQuery ->
 
   $(document).initialize()
 
-  $('.gallery').magnificPopup
-    delegate: '.image-link'
-    type: 'image'
-    gallery:
-      enabled: true
+  $(document).on 'change', 'form.immediate', (e) ->
+    $(e.currentTarget).trigger('submit.rails')
