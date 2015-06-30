@@ -16,10 +16,9 @@ class Brand < ActiveRecord::Base
   validates :erp_number, numericality: true
 
 
-  def self.options
-    all.map { |b| [b.name, b.id] }
+  def category_options
+    categories.map { |c| [c.name, c.id] }
   end
-
 
   def to_s
     new_record? ? 'New brand' : name

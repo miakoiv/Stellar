@@ -11,7 +11,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = Category.all
+    @categories = current_brand.categories
   end
 
   # GET /admin/categories/1
@@ -21,7 +21,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /admin/categories/new
   def new
-    @category = Category.new
+    @category = current_brand.categories.build
   end
 
   # GET /admin/categories/1/edit
@@ -31,7 +31,7 @@ class Admin::CategoriesController < ApplicationController
   # POST /admin/categories
   # POST /admin/categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_brand.categories.build(category_params)
 
     respond_to do |format|
       if @category.save
@@ -67,7 +67,7 @@ class Admin::CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(
-        :brand_id, :parent_category_id, :name
+        :parent_category_id, :name
       )
     end
 end

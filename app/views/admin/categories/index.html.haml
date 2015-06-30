@@ -10,7 +10,6 @@
         %th.col-xs-1
         %th Name
         %th Parent category
-        %th.col-xs-2 Brand
         %th
 
     %tbody.sortable
@@ -18,7 +17,6 @@
         %td= icon_image_tag(category)
         %td= category.name
         %td= category.parent_category
-        %td= category.brand
         %td.text-right
           = link_to icon('info', 'Show'), admin_category_path(category),
               class: 'btn btn-default btn-sm'

@@ -19,6 +19,10 @@
           %td= brand.name
           %td= brand.erp_number
           %td.text-right
+            - if current_brand != brand
+              = link_to icon('star', 'Select'),
+                  admin_brands_path(brand_id: brand),
+                  class: 'btn btn-default btn-sm'
             = link_to icon('shopping-cart', 'View storefront'),
                 root_path(brand_id: brand), class: 'btn btn-default btn-sm'
             = link_to icon('info', 'Show'), admin_brand_path(brand),

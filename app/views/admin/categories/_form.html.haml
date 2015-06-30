@@ -4,14 +4,10 @@
       = render 'shared/errors', object: @category
 
       .form-group
-        = f.label :brand_id, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.select :brand_id, Brand.options, {}, {class: 'select2 form-control'}
-      .form-group
         = f.label :parent_category_id, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :parent_category_id, Category.options, {include_blank: blank_option},
-              {class: 'select2 form-control'}
+          = f.select :parent_category_id, current_brand.category_options,
+              {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
         = f.label :name, class: 'col-sm-4 control-label'
         .col-sm-8

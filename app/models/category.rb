@@ -13,11 +13,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
 
 
-  def self.options
-    all.map { |c| [c.name, c.id] }
-  end
-
-
   def to_s
     new_record? ? 'New category' : name
   end
