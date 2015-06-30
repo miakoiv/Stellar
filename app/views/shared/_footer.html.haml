@@ -1,10 +1,13 @@
 .row
-  .col-xs-1.col-xs-offset-9
+  .col-xs-1.col-xs-offset-8
     = image_tag('spry-logo.svg', class: 'img-responsive')
-  .col-xs-2
+  .col-xs-3
     %p.lead Spry Storefront
     %p
       Provided to
       = current_brand.name
       by Leasit Oy
-    %p Copyright © 2015
+    %p
+      Copyright
+      = icon('copyright')
+      2015
