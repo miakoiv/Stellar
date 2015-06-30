@@ -16,16 +16,14 @@
 
 .images.technical
   %ul.nav.nav-pills{role: 'tablist'}
-    = render partial: 'images/pill',
-        collection: product.images.by_type(:technical), as: :image
+    - if @technical_images.count > 1
+      = render partial: 'images/pill', collection: @technical_images, as: :image
   .tab-content.gallery
-    = render partial: 'images/technical',
-        collection: product.images.by_type(:technical), as: :image
+    = render partial: 'images/technical', collection: @technical_images, as: :image
 
 .images.presentational
   %ul.nav.nav-pills{role: 'tablist'}
-    = render partial: 'images/pill',
-        collection: product.images.by_type(:presentational), as: :image
+    - if @presentational_images.count > 1
+      = render partial: 'images/pill', collection: @presentational_images, as: :image
   .tab-content.gallery
-    = render partial: 'images/presentational',
-        collection: product.images.by_type(:presentational), as: :image
+    = render partial: 'images/presentational', collection: @presentational_images, as: :image
