@@ -13,7 +13,8 @@ IMPORT_FILES = {
     multiple: false,
     headers: [
       nil, :item_type_no, :code, nil, nil, nil,
-      :name, :description, nil, nil, nil, nil,
+      :name, :description, nil,
+      :quantity_on_hand, :quantity_reserved, :quantity_pending,
       :memo_1, :memo_2, :memo_3
     ],
   },
@@ -30,16 +31,6 @@ IMPORT_FILES = {
     file: 'www-nimike_rakenne-utf8.csv',
     multiple: true,
     headers: [:code, :part_code, nil, nil, :amount]
-  },
-  # NRO,HYLLY,VARASTOLKM,VARATTULKM,TULOSSA,TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
-  inventory: {
-  #  file: 'www-nimike_varasto-utf8.csv',
-    file: 'www-nimike-utf8.csv',
-    # FIXME: fix these headers to match nimike_varasto later
-    headers: [
-      nil, nil, :code, nil, nil, nil, nil, nil, nil,
-      :quantity_on_hand, :quantity_reserved, :quantity_pending
-    ]
   },
 }
 
@@ -62,16 +53,16 @@ namespace :matfox do
           description: data[:product][:description],
           customer_code: row[:customer_code],
         )
-
-        # Update inventory items to match quantities.
-        pending_item = brand.inventories.which(:manufacturing)
-          .inventory_items.find_or_create_by(product: product)
-        pending_item.update(amount: data[:inventory][:quantity_pending])
-
-        on_hand_item = brand.inventories.which(:shipping)
-          .inventory_items.find_or_create_by(product: product)
-        on_hand_item.update(amount: data[:inventory][:quantity_on_hand])
       end
+
+      # Update inventory items to match quantities.
+      pending_item = Inventory.which(:manufacturing)
+        .inventory_items.find_or_create_by(code: code)
+      pending_item.update(amount: data[:product][:quantity_pending])
+
+      on_hand_item = Inventory.which(:shipping)
+        .inventory_items.find_or_create_by(code: code)
+      on_hand_item.update(amount: data[:product][:quantity_on_hand])
     end
   end
 

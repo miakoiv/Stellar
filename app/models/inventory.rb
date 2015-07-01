@@ -2,7 +2,6 @@
 
 class Inventory < ActiveRecord::Base
 
-  belongs_to :brand
   has_many :inventory_items
 
   # An inventory can have any number of order types that
