@@ -11,4 +11,9 @@ class Inventory < ActiveRecord::Base
   # Finds the first inventory by name, either Manufacturing or Shipping.
   scope :which, -> (name) { where(name: name).first }
 
+  # Looks up the inventory item by product code and inventory name.
+  def self.lookup(code, inventory)
+    which(inventory).inventory_items.where(code: code).first
+  end
+
 end

@@ -9,8 +9,9 @@
       %tr
         %th.col-xs-2 Product code
         %th Name
-        %th Images
+        %th.col-xs-2 Images
         %th.col-xs-2 Category
+        %th Stock
         %th
 
     %tbody.sortable
@@ -21,6 +22,10 @@
           - product.images.each do |image|
             = image_variant_tag(image, :icon)
         %td= product.category
+        %td
+          = Inventory.lookup(product.code, :shipping).amount || 0
+          ⁄
+          = Inventory.lookup(product.code, :manufacturing).amount || 0
         %td.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
               class: 'btn btn-default btn-sm'
