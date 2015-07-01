@@ -32,10 +32,15 @@ IMPORT_FILES = {
     headers: [:code, :part_code, nil, nil, :amount]
   },
   # NRO,HYLLY,VARASTOLKM,VARATTULKM,TULOSSA,TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
-  #inventory: {
+  inventory: {
   #  file: 'www-nimike_varasto-utf8.csv',
-  #  headers: []
-  #},
+    file: 'www-nimike-utf8.csv',
+    # FIXME: fix these headers to match nimike_varasto later
+    headers: [
+      nil, nil, :code, nil, nil, nil, nil, nil, nil,
+      :quantity_on_hand, :quantity_reserved, :quantity_pending
+    ]
+  },
 }
 
 namespace :matfox do
@@ -57,6 +62,15 @@ namespace :matfox do
           description: data[:product][:description],
           customer_code: row[:customer_code],
         )
+
+        # Update inventory items to match quantities.
+        pending_item = brand.inventories.which(:manufacturing)
+          .inventory_items.find_or_create_by(product: product)
+        pending_item.update(amount: data[:inventory][:quantity_pending])
+
+        on_hand_item = brand.inventories.which(:shipping)
+          .inventory_items.find_or_create_by(product: product)
+        on_hand_item.update(amount: data[:inventory][:quantity_on_hand])
       end
     end
   end
