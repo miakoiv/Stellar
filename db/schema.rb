@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623063746) do
+ActiveRecord::Schema.define(version: 20150622101529) do
 
   create_table "brands", force: :cascade do |t|
     t.integer  "erp_number", limit: 4,   null: false
@@ -57,24 +57,21 @@ ActiveRecord::Schema.define(version: 20150623063746) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
-    t.integer  "brand_id",   limit: 4,   null: false
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  add_index "inventories", ["brand_id"], name: "index_inventories_on_brand_id", using: :btree
-
   create_table "inventory_items", force: :cascade do |t|
-    t.integer  "inventory_id", limit: 4, null: false
-    t.integer  "product_id",   limit: 4, null: false
+    t.integer  "inventory_id", limit: 4,   null: false
+    t.string   "code",         limit: 255, null: false
     t.integer  "amount",       limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
+  add_index "inventory_items", ["code"], name: "index_inventory_items_on_code", using: :btree
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
-  add_index "inventory_items", ["product_id"], name: "index_inventory_items_on_product_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "order_id",   limit: 4, null: false
