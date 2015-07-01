@@ -8,6 +8,7 @@
 
 ImageType.create(name: 'Presentational')
 ImageType.create(name: 'Technical')
+ImageType.create(name: 'Document', bitmap: false)
 
 Brand.create(
   erp_number: 1545,

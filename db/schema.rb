@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(version: 20150623063746) do
 
   create_table "image_types", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "bitmap",     limit: 1,   default: true, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "images", force: :cascade do |t|
