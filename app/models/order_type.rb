@@ -8,6 +8,11 @@ class OrderType < ActiveRecord::Base
   has_many :orders
 
 
+  def self.options
+    all.map { |i| [i.name, i.id] }
+  end
+
+
   def to_s
     name
   end

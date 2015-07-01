@@ -10,7 +10,7 @@
       .form-group
         = f.label :order_type_id, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :order_type_id, current_user.order_type_options,
+          = f.select :order_type_id, OrderType.options,
               {}, {class: 'select2 form-control'}
       .form-group
         .col-sm-offset-4.col-sm-8

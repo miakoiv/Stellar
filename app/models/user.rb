@@ -16,11 +16,6 @@ class User < ActiveRecord::Base
   end
 
 
-  # Available order types for the user.
-  def order_type_options
-    brand.order_types.map { |o| [o.to_s, o.id] }
-  end
-
   def to_s
     new_record? ? 'New user' : email
   end
