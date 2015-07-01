@@ -8,7 +8,6 @@
 
 ImageType.create(name: 'Presentational')
 ImageType.create(name: 'Technical')
-ImageType.create(name: 'PDF')
 
 Brand.create(
   erp_number: 1545,

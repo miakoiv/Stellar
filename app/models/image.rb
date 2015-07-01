@@ -13,7 +13,15 @@ class Image < ActiveRecord::Base
       technical: '400x400>',
       matchbox: '200x200>',
       thumbnail: '75x75>',
-      icon: '25x25>',
+      icon: '25x25#',
+    },
+    convert_options: {
+      lightbox: '-strip',
+      presentational: '-strip',
+      technical: '-strip',
+      matchbox: '-strip -quality 75',
+      thumbnail: '-strip -quality 70',
+      icon: '-strip -quality 70',
     }
 
   scope :by_type, -> (type) { joins(:image_type).where(image_types: {name: type}) }
