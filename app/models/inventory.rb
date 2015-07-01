@@ -9,4 +9,7 @@ class Inventory < ActiveRecord::Base
   # reference the stock in this inventory.
   has_many :order_types
 
+  # Finds the first inventory by name, either Manufacturing or Shipping.
+  scope :which, -> (name) { where(name: name).first }
+
 end
