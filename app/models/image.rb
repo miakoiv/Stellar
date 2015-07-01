@@ -35,7 +35,7 @@ class Image < ActiveRecord::Base
       content_type: [
         %r{\Aimage/(bmp|jpeg|jpg|png|x-png)},
         %r{\Aapplication/(pdf|msword)},
-        %r{\aapplication/vnd.openxmlformats},
+        %r{\Aapplication/vnd.openxmlformats},
       ]
     }
 
@@ -51,6 +51,17 @@ class Image < ActiveRecord::Base
 
   def is_bitmap?
     !!(attachment_content_type =~ /\Aimage/)
+  end
+
+  def document_icon
+    case attachment_content_type
+    when %r{\Aapplication/pdf}
+      'file-pdf-o'
+    when %r{\Aapplication/(msword|vnd.openxmlformats)}
+      'file-word-o'
+    else
+      'file-o'
+    end
   end
 
   private
