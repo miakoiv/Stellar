@@ -8,6 +8,7 @@ $.fn.extend
         gallery:
           enabled: true
 
+    $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover
       html: true
       trigger: 'hover'
