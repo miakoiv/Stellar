@@ -20,7 +20,6 @@ class Admin::ImagesController < ApplicationController
   def create
     @imageable = find_imageable
     @image = @imageable.images.build(image_params)
-    @image.image_type ||= ImageType.first
 
     respond_to do |format|
       if @image.save
@@ -67,7 +66,7 @@ class Admin::ImagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.require(:image).permit(
-        :image_type_id, :attachment
+        :attachment
       )
     end
 end
