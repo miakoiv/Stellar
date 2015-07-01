@@ -6,10 +6,33 @@ module ApplicationHelper
     "\u274c" # U+274C CROSS MARK
   end
 
-  # image_tag with size variant support.
+  # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
     return '' if image.nil?
-    image_tag(image.url(size), options)
+    if image.is_bitmap?
+      image_tag(image.url(size), options)
+    else
+      document_icon_tag(image, size)
+    end
+  end
+
+  # Different sized icons for documents.
+  # Comes with a tooltip of the file name.
+  def document_icon_tag(image, size = :icon)
+    case size
+    when :icon
+      icon(image.document_icon, class: 'fa-lg icon',
+        title: image.attachment_file_name,
+        data: {toggle: 'tooltip'})
+    when :thumbnail
+      icon(image.document_icon,
+        image.attachment_file_name.truncate(20, omission: '…'),
+        class: 'fa-2x')
+    else
+      icon(image.document_icon,
+        image.attachment_file_name.truncate(20, omission: '…'),
+        class: 'fa-3x')
+    end
   end
 
   # Display icon with name, using cover image as the icon.
