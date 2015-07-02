@@ -1,0 +1,20 @@
+.page-header
+  %h1= icon('truck', 'Orders')
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th Date
+        %th Order type
+        %th
+
+    %tbody
+      = content_tag_for(:tr, @orders) do |order|
+        %td= order.created_at.to_s(:short)
+        %td= order.order_type
+        %td.text-right
+          = link_to icon('info', 'Show'), order_path(order),
+              class: 'btn btn-default btn-sm'
+          = link_to icon('edit', 'Edit'), edit_order_path(order),
+              class: 'btn btn-default btn-sm'

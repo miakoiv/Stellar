@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
   get '/category/:category_id' => 'store#show_category', as: :show_category
   get '/product/:product_id' => 'store#show_product', as: :show_product
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
+
+  resources :orders do
+    resources :order_items, shallow: true
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

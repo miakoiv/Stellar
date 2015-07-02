@@ -1,4 +1,5 @@
 %ul.nav.navbar-nav
-  = active_link_to 'Store', root_path, wrap_tag: :li, active: ['store']
+  = active_link_to icon('cubes', 'Store'), root_path, wrap_tag: :li, active: ['store']
+  = active_link_to icon('truck', 'Orders'), orders_path, wrap_tag: :li
 %ul.nav.navbar-nav.navbar-right
   %li= link_to icon('cog', 'Administration'), admin_brands_path
