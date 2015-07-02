@@ -6,8 +6,8 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   has_many :order_items
 
-  scope :pending, -> { where(ordered_at: nil) }
-
+  default_scope { where.not(ordered_at: nil) }
+  scope :pending, -> { unscoped.where(ordered_at: nil) }
 
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
