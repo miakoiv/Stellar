@@ -14,15 +14,16 @@
 
 %h1.product-title
   = product.name
-  %span.product-code
+
+.product-description
+  .product-code
     - if product.customer_code.present?
       %span.label.label-info= product.customer_code
     %span.label.label-default
       TJT
       = product.code
 
-.product-description
-  = product.description
+  %p= product.description
 
 .images.technical
   %ul.nav.nav-pills{role: 'tablist'}
