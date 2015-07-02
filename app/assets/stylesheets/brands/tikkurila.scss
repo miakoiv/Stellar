@@ -15,15 +15,15 @@
   .container {
     margin-left: 0;
     margin-right: 0;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: $grid-gutter-width;
+    padding-right: $grid-gutter-width;
     width: auto;
   }
 
   .categories {
     @extend .clearfix;
-    margin: 0 -30px 20px;
-    padding: 20px 15px 0;
+    margin: 0 -1*$grid-gutter-width 20px;
+    padding: 20px $grid-gutter-width/2 0;
     background: $gray;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 
@@ -75,8 +75,8 @@
     @extend .clearfix;
     position: relative;
     z-index: $zindex-navbar;
-    margin: 0 -30px;
-    padding: 0 15px 30px;
+    margin: 0 -1*$grid-gutter-width;
+    padding: 0 $grid-gutter-width/2 30px;
     background: $body-bg;
 
     .product-actions {
@@ -94,8 +94,8 @@
     .product-title {
       @extend .page-header;
       margin-top: 0;
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: $grid-gutter-width/2;
+      padding-right: $grid-gutter-width/2;
 
       .product-code {
         font-size: $font-size-large;

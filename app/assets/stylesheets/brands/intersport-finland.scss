@@ -63,10 +63,23 @@
   .product-detail {
     @extend .row;
 
+    .product-actions {
+      @extend .pull-right;
+
+      .form-inline {
+        display: inline-block;
+
+        input#amount {
+          width: 70px;
+        }
+      }
+    }
+
     .product-title {
-      @extend .col-xs-12;
       @extend .page-header;
       margin-top: 0;
+      padding-left: $grid-gutter-width/2;
+      padding-right: $grid-gutter-width/2;
 
       .product-code {
         font-size: $font-size-large;
