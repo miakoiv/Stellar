@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration
     create_table :orders do |t|
       t.belongs_to :user, null: false, index: true
       t.belongs_to :order_type, null: false, index: true
-
+      t.datetime :ordered_at
       t.timestamps null: false
     end
   end
