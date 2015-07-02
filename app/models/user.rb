@@ -10,11 +10,18 @@ class User < ActiveRecord::Base
   # Users are restricted to interacting with only one brand.
   belongs_to :brand
 
+  has_many :orders
 
   def self.options
     all.map { |u| [u.email, u.id] }
   end
 
+
+  # A user's shopping cart is technically an order singleton,
+  # the one and only order that's not been ordered yet.
+  def shopping_cart
+    orders.pending.first || orders.create
+  end
 
   def to_s
     new_record? ? 'New user' : email

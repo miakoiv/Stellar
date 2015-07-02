@@ -25,6 +25,15 @@ class StoreController < ApplicationController
     @technical_images = @product.images.by_purpose(:technical)
   end
 
+  # POST /product/1/order
+  def order_product
+    @product = Product.find(params[:product_id])
+    amount = params[:amount].to_i
+    current_user.shopping_cart.insert!(@product, amount)
+
+    flash.now[:notice] = "#{amount} of #{@product} added to cart"
+  end
+
   private
     def set_categories
       @categories = current_brand.categories

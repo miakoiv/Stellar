@@ -1,8 +1,18 @@
-%h1.product-title
-  = link_to icon('times', 'Close'), show_category_path(product.category), remote: true,
-      class: 'btn btn-primary'
+.product-actions
+  = form_tag order_product_path(product), method: :post, remote: true,
+      class: 'form-inline' do
+    .form-group
+      %label{for: :amount} Amount to order
+      = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
+    %button.btn.btn-default{type: 'submit'}
+      = icon('shopping-cart', 'Add to cart')
+
   = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
       class: 'btn btn-default'
+  = link_to icon('times', 'Close'), show_category_path(product.category), remote: true,
+      class: 'btn btn-primary'
+
+%h1.product-title
   = product.name
   %span.product-code
     - if product.customer_code.present?

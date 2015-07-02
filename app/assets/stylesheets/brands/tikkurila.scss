@@ -79,10 +79,23 @@
     padding: 0 15px 30px;
     background: $body-bg;
 
+    .product-actions {
+      @extend .pull-right;
+
+      .form-inline {
+        display: inline-block;
+
+        input[type=number] {
+          width: 70px;
+        }
+      }
+    }
+
     .product-title {
-      @extend .col-xs-12;
       @extend .page-header;
       margin-top: 0;
+      padding-left: 15px;
+      padding-right: 15px;
 
       .product-code {
         font-size: $font-size-large;
