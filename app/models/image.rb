@@ -26,7 +26,9 @@ class Image < ActiveRecord::Base
   before_post_process :resize_bitmaps
   before_create :assign_image_type
 
-  scope :by_type, -> (type) { joins(:image_type).where(image_types: {name: type}) }
+  scope :by_purpose, -> (purpose) do
+    joins(:image_type).where(image_types: {purpose: ImageType.purposes[purpose]})
+  end
 
   delegate :url, to: :attachment
 

@@ -7,6 +7,6 @@ module Imageable
 
   # Use the first presentational image as cover image.
   def cover_image
-    images.by_type(:presentational).first
+    images.by_purpose(:presentational).first
   end
 end

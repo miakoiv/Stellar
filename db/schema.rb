@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150622101529) do
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id"
 
   create_table "image_types", force: :cascade do |t|
+    t.integer  "purpose",    default: 0,    null: false
     t.string   "name"
     t.boolean  "bitmap",     default: true, null: false
     t.datetime "created_at",                null: false

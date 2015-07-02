@@ -21,8 +21,8 @@ class StoreController < ApplicationController
   # GET /product/1
   def show_product
     @product = Product.find(params[:product_id])
-    @presentational_images = @product.images.by_type(:presentational)
-    @technical_images = @product.images.by_type(:technical)
+    @presentational_images = @product.images.by_purpose(:presentational)
+    @technical_images = @product.images.by_purpose(:technical)
   end
 
   private
