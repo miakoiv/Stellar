@@ -8,12 +8,14 @@ class Inventory < ActiveRecord::Base
   # reference the stock in this inventory.
   has_many :order_types
 
-  # Finds the first inventory by name, either Manufacturing or Shipping.
-  scope :which, -> (name) { where(name: name).first }
+  # Inventories are for two purposes, manufacturing (products in the pipeline),
+  # or shipping (products on hand).
+  enum purpose: {manufacturing: 0, shipping: 1}
 
-  # Looks up the inventory item by product code and inventory name.
-  def self.lookup(code, inventory)
-    which(inventory).inventory_items.where(code: code).first
+  default_scope { order(:purpose) }
+
+  # Finds the first inventory by purpose.
+  def self.for(purpose)
+    where(purpose: purposes[purpose]).first
   end
-
 end

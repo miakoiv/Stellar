@@ -34,8 +34,8 @@ Category.create(brand_id: 1, name: 'Visio')
 Category.create(brand_id: 1, name: 'Duett')
 Category.create(brand_id: 1, name: 'Tinting Area')
 
-Inventory.create(name: 'Manufacturing')
-Inventory.create(name: 'Shipping')
+Inventory.create(purpose: 'manufacturing', name: 'Manufacturing')
+Inventory.create(purpose: 'shipping', name: 'Shipping')
 
 OrderType.create(
   inventory_id: 1,

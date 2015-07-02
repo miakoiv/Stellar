@@ -56,11 +56,11 @@ namespace :matfox do
       end
 
       # Update inventory items to match quantities.
-      pending_item = Inventory.which(:manufacturing)
+      pending_item = Inventory.for(:manufacturing)
         .inventory_items.find_or_create_by(code: code)
       pending_item.update(amount: data[:product][:quantity_pending])
 
-      on_hand_item = Inventory.which(:shipping)
+      on_hand_item = Inventory.for(:shipping)
         .inventory_items.find_or_create_by(code: code)
       on_hand_item.update(amount: data[:product][:quantity_on_hand])
     end
