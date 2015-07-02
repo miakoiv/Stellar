@@ -18,8 +18,10 @@ default: &default
   socket: /var/run/mysqld/mysqld.sock
 
 development:
-  <<: *default
-  database: spry_dev
+  adapter: sqlite3
+  database: db/spry_dev.sqlite3
+  pool: 5
+  timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
