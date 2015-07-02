@@ -1,0 +1,23 @@
+.page-header
+  %h1= icon('shopping-cart', 'Shopping cart')
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th Product code
+        %th Product name
+        %th.col-xs-1.text-right Amount
+        %th
+
+    %tbody
+      = content_tag_for(:tr, @order.order_items) do |order_item|
+        %td= order_item.product.code
+        %td= order_item.product.name
+        %td
+          = form_for order_item, remote: true,
+              html: {class: 'immediate form-horizontal'} do |f|
+            = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
+        %td.text-right
+          = link_to icon('remove', 'Delete'), order_item_path(order_item),
+              method: :delete, class: 'btn btn-danger btn-sm'

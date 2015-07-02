@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
-  get '/category/:category_id' => 'store#show_category', as: :show_category
-  get '/product/:product_id' => 'store#show_product', as: :show_product
+  get '/category/:category_id'      => 'store#show_category', as: :show_category
+  get '/product/:product_id'        => 'store#show_product', as: :show_product
+  get '/cart'                       => 'store#show_cart', as: :show_cart
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
 
   resources :orders do

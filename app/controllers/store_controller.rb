@@ -25,6 +25,11 @@ class StoreController < ApplicationController
     @technical_images = @product.images.by_purpose(:technical)
   end
 
+  # GET /cart
+  def show_cart
+    @order = current_user.shopping_cart
+  end
+
   # POST /product/1/order
   def order_product
     @product = Product.find(params[:product_id])
