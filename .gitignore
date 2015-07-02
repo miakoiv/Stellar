@@ -12,6 +12,10 @@
 !/log/.keep
 /tmp
 
+# Ignore any SQLite databases.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
 # Ignore uploaded files
 /public/system
 
