@@ -4,7 +4,7 @@
     .form-group
       %label{for: :amount} Amount to order
       = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
-    %button.btn.btn-default{type: 'submit'}
+    %button.btn.btn-default.stateful{type: 'submit'}
       = icon('shopping-cart', 'Add to cart')
 
   = link_to icon('edit', 'Edit'), edit_admin_product_path(product),

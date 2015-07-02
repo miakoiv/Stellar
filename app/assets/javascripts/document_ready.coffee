@@ -23,3 +23,6 @@ jQuery ->
 
   $(document).on 'change', 'form.immediate', (e) ->
     $(e.currentTarget).trigger('submit.rails')
+
+  $(document).on 'click', 'button.stateful', (e) ->
+    $(e.currentTarget).prop('disabled', true)
