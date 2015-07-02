@@ -13,5 +13,6 @@
           = link_to 'Spry', root_path, class: "navbar-brand"
 
     .container
-      = render partial: 'shared/flash'
       = yield
+
+    .unobtrusive-flash-container

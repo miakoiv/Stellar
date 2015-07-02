@@ -17,5 +17,6 @@
           = render partial: 'shared/admin_nav'
 
     .container
-      = render partial: 'shared/flash'
       = yield
+
+    .unobtrusive-flash-container

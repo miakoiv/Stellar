@@ -17,8 +17,9 @@
           = render partial: 'shared/storefront_nav'
 
     #main.container
-      = render partial: 'shared/flash'
       = yield
 
     #footer
       = render partial: 'shared/footer'
+
+    .unobtrusive-flash-container

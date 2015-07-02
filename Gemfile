@@ -51,6 +51,9 @@ gem 'active_link_to'
 # Select2
 gem 'select2-rails', '~> 3.5.9'
 
+# Unobtrusive flash
+gem 'unobtrusive_flash', '>= 3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

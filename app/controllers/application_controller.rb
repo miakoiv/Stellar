@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   # Authenticate every action.
   before_action :authenticate_user!
 
+  after_filter :prepare_unobtrusive_flash
+
   # Find the current brand for the storefront section
   # that is restricted to a single brand.
   def current_brand

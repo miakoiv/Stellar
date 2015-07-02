@@ -26,4 +26,6 @@
 //= require dropzone
 //= require magnific-popup
 //= require select2
+//= require unobtrusive_flash
+//= require unobtrusive_flash_bootstrap
 //= require_tree .
