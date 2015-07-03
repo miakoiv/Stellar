@@ -49,11 +49,10 @@ namespace :matfox do
         product = Product.find_or_initialize_by(code: code, brand: brand)
         product.save(validate: false)
         product.update_columns(
-          title: data[:product][:title],
-          subtitle: data[:product][:subtitle],
+          title: data[:product][:title].try(:mb_chars).try(:titleize),
+          subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
           memo: data[:product][:memo],
           customer_code: row[:customer_code],
-
         )
       end
 
