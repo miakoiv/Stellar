@@ -5,7 +5,9 @@
   = link_to admin_product_path(@product), class: 'btn btn-primary' do
     = icon('info-circle')
     Show
-  %h1= icon('cube', @product)
+  %h1
+    = icon('cube', @product.title)
+    %span.small= @product.subtitle
 
 .row
   .col-sm-6
