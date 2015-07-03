@@ -5,7 +5,8 @@ class CreateProducts < ActiveRecord::Migration
       t.belongs_to :category, index: true
       t.string :code
       t.string :customer_code
-      t.string :name
+      t.string :title
+      t.string :subtitle
       t.text :description
       t.text :memo
 

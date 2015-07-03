@@ -9,21 +9,30 @@
           = f.select :category_id, current_brand.category_options,
               {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
-        %label.col-sm-4.control-label Product code
+        = f.label :code, 'Product code', class: 'col-sm-4 control-label import'
         .col-sm-8
-          %p.form-control-static= @product.code
+          = f.text_field :code, class: 'form-control'
       .form-group
-        = f.label :name, class: 'col-sm-4 control-label'
+        = f.label :title, class: 'col-sm-4 control-label import'
         .col-sm-8
-          = f.text_field :name, class: 'form-control'
+          = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :subtitle, class: 'col-sm-4 control-label import'
+        .col-sm-8
+          = f.text_field :subtitle, class: 'form-control'
       .form-group
         = f.label :description, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.text_area :description, rows: 2, class: 'form-control'
+          = f.text_area :description, rows: 4, class: 'form-control'
       .form-group
-        = f.label :memo, class: 'col-sm-4 control-label'
+        = f.label :memo, class: 'col-sm-4 control-label import'
         .col-sm-8
-          = f.text_area :memo, rows: 6, class: 'form-control'
+          = f.text_area :memo, rows: 4, class: 'form-control'
+          %p.help-block
+            Fields marked with
+            %span.text-info ❖
+            are imported and should not be edited locally.
+            Your changes may be overwritten.
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'

@@ -10,10 +10,11 @@ class Product < ActiveRecord::Base
   has_many :inventory_items
 
   validates :brand_id, presence: true
-  validates :name, presence: true
+  validates :code, presence: true
+  validates :title, presence: true
 
 
   def to_s
-    new_record? ? 'New product' : name
+    new_record? ? 'New product' : title
   end
 end

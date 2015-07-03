@@ -13,9 +13,9 @@ IMPORT_FILES = {
     multiple: false,
     headers: [
       nil, :item_type_no, :code, nil, nil, nil,
-      :name, :description, nil,
+      :title, :subtitle, nil,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
-      :memo_1, :memo_2, :memo_3
+      nil, nil, :memo
     ],
   },
   # NRO,ASIAKNRO,ASIAKNIMI,ASIAKTNRO,MYYNTHINTA,VALUUTTA,MYYNTIERA,PAIVPVM
@@ -49,9 +49,11 @@ namespace :matfox do
         product = Product.find_or_initialize_by(code: code, brand: brand)
         product.save(validate: false)
         product.update_columns(
-          name: data[:product][:name],
-          description: data[:product][:description],
+          title: data[:product][:title],
+          subtitle: data[:product][:subtitle],
+          memo: data[:product][:memo],
           customer_code: row[:customer_code],
+
         )
       end
 
