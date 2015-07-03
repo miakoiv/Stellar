@@ -19,6 +19,8 @@ $.fn.extend
 
 jQuery ->
 
+  window.wiselinks = new Wiselinks()
+
   $(document).initialize()
 
   $(document).on 'change', 'form.immediate', (e) ->
