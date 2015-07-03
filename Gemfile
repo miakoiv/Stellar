@@ -7,6 +7,8 @@ gem 'rails', '4.2.1'
 gem 'mysql2', group: :production
 # Use sqlite3 for development only
 gem 'sqlite3', group: :development
+# ...and yaml_db to migrate between the two
+gem 'yaml_db'
 # Use Haml for markup
 gem 'haml-rails'
 gem 'erb2haml', group: :development

@@ -202,6 +202,9 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     wiselinks (1.2.1)
+    yaml_db (0.3.0)
+      rails (>= 3.0, < 4.3)
+      rake (>= 0.8.7)
 
 PLATFORMS
   ruby
@@ -236,6 +239,7 @@ DEPENDENCIES
   unobtrusive_flash (>= 3)
   web-console (~> 2.0)
   wiselinks
+  yaml_db
 
 BUNDLED WITH
    1.10.3
