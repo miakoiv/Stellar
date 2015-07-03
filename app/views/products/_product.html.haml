@@ -1,5 +1,5 @@
 = div_for product do
-  = link_to show_product_path(product), remote: true do
+  = link_to show_product_path(product), data: {push: 'partial', target: '.product-detail'} do
     = image_variant_tag(product.cover_image, :matchbox,
         class: 'img-responsive')
     %h4= product.title

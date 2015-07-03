@@ -1,0 +1,8 @@
+.categories
+  = render @categories
+
+.products{style: 'display: none'}
+  = render @products
+
+.product-detail
+  = render partial: 'products/product_detail', object: @product, as: :product

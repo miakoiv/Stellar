@@ -1,0 +1,7 @@
+= render partial: 'products/product_detail', object: @product, as: :product
+
+:javascript
+  $('.products').hide('blind', 150);
+  $('.product-detail').show('fade', 300, function() { $(this).initialize() });
+  $('.categories .category').removeClass('active');
+  $('.categories ##{dom_id(@category)}').addClass('active');

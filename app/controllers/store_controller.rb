@@ -2,14 +2,16 @@
 
 class StoreController < ApplicationController
 
+  def wiselinks_layout
+    'application'
+  end
+
   before_action :set_categories
 
   # GET /
   def index
     @category = current_brand.categories.first
     @products = @category.products
-
-    render :show_category
   end
 
   # GET /category/1
@@ -21,6 +23,8 @@ class StoreController < ApplicationController
   # GET /product/1
   def show_product
     @product = Product.find(params[:product_id])
+    @category = @product.category
+    @products = @category.products
     @presentational_images = @product.images.by_purpose(:presentational)
     @technical_images = @product.images.by_purpose(:technical)
   end

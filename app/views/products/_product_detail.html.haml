@@ -9,7 +9,8 @@
 
   = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
       class: 'btn btn-default'
-  = link_to icon('times', 'Close'), show_category_path(product.category), remote: true,
+  = link_to icon('times', 'Close'), show_category_path(product.category),
+      data: {push: 'partial', target: '.products'},
       class: 'btn btn-primary'
 
 %h1.product-title
