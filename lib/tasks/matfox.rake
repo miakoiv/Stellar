@@ -2,7 +2,7 @@
 
 require 'csv'
 
-IMPORT_PATH = Pathname.new '/home/blade/Dropbox/extranet'
+IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'
 
 IMPORT_FILES = {
 
