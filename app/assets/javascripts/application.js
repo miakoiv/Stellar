@@ -23,6 +23,7 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/dropdown
+//= require bootstrap-wysihtml5
 //= require dropzone
 //= require magnific-popup
 //= require select2
