@@ -16,3 +16,4 @@
   .col-sm-5
     = render partial: 'admin/images/edit_table', object: @product, as: :imageable
     = render partial: 'admin/images/dropzone', object: @product, as: :imageable
+    = render partial: 'admin/relationships/table', object: @product, as: :product

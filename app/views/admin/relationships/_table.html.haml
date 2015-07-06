@@ -1,0 +1,9 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-4 Component code
+        %th.col-xs-8 Title
+
+    %tbody
+      = render partial: 'admin/relationships/row', collection: product.relationships, as: :relationship

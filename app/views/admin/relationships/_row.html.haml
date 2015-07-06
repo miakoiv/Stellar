@@ -1,0 +1,5 @@
+= content_tag_for :tr, relationship do
+  %td= relationship.product.code
+  %td
+    %strong= relationship.product.title
+    = relationship.product.subtitle
