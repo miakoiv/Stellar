@@ -36,34 +36,36 @@ IMPORT_FILES = {
 
 namespace :matfox do
   desc "Import data from Matfox"
-  task :import => :environment do |task, args|
+  task import: :environment do |task, args|
 
-    import_data.each do |code, data|
-      next if data[:product].nil? or data[:brands].nil?
+    Product.transaction do
+      import_data.each do |code, data|
+        next if data[:product].nil? or data[:brands].nil?
 
-      # Find of create the product by product code separately in each brand.
-      data[:brands].each do |row|
-        brand = Brand.where(erp_number: row[:erp_number]).first
-        next if brand.nil?
+        # Find of create the product by product code separately in each brand.
+        data[:brands].each do |row|
+          brand = Brand.where(erp_number: row[:erp_number]).first
+          next if brand.nil?
 
-        product = Product.find_or_initialize_by(code: code, brand: brand)
-        product.save(validate: false)
-        product.update_columns(
-          title: data[:product][:title].try(:mb_chars).try(:titleize),
-          subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
-          memo: data[:product][:memo],
-          customer_code: row[:customer_code],
-        )
+          product = Product.find_or_initialize_by(code: code, brand: brand)
+          product.save(validate: false)
+          product.update_columns(
+            title: data[:product][:title].try(:mb_chars).try(:titleize),
+            subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
+            memo: data[:product][:memo],
+            customer_code: row[:customer_code],
+          )
+        end
+
+        # Update inventory items to match quantities.
+        pending_item = Inventory.for(:manufacturing)
+          .inventory_items.find_or_create_by(code: code)
+        pending_item.update(amount: data[:product][:quantity_pending])
+
+        on_hand_item = Inventory.for(:shipping)
+          .inventory_items.find_or_create_by(code: code)
+        on_hand_item.update(amount: data[:product][:quantity_on_hand])
       end
-
-      # Update inventory items to match quantities.
-      pending_item = Inventory.for(:manufacturing)
-        .inventory_items.find_or_create_by(code: code)
-      pending_item.update(amount: data[:product][:quantity_pending])
-
-      on_hand_item = Inventory.for(:shipping)
-        .inventory_items.find_or_create_by(code: code)
-      on_hand_item.update(amount: data[:product][:quantity_on_hand])
     end
   end
 
