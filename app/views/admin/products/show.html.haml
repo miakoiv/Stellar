@@ -10,7 +10,7 @@
     %span.small= @product.subtitle
 
 .row
-  .col-sm-6
+  .col-sm-7
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
@@ -31,12 +31,12 @@
             %p.form-control-static= @product.subtitle
         .form-group
           %label.col-sm-4.control-label Description
-          .col-sm-8
-            %p.form-control-static= @product.description
+          .col-sm-8.form-control-static
+            = @product.description.html_safe
         .form-group
           %label.col-sm-4.control-label Memo
           .col-sm-8
             %p.form-control-static.pre><= @product.memo
 
-  .col-sm-6
+  .col-sm-5
     = render partial: 'admin/images/table', object: @product, as: :imageable

@@ -10,9 +10,9 @@
     %span.small= @product.subtitle
 
 .row
-  .col-sm-6
+  .col-sm-7
     = render 'form'
 
-  .col-sm-6
+  .col-sm-5
     = render partial: 'admin/images/edit_table', object: @product, as: :imageable
     = render partial: 'admin/images/dropzone', object: @product, as: :imageable
