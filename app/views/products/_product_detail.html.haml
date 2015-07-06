@@ -25,7 +25,7 @@
       TJT
       = product.code
 
-  = product.description.html_safe
+  = product.description.html_safe if product.description.present?
 
   .documents.list-group
     - @documents.each do |document|
