@@ -8,6 +8,8 @@ class Product < ActiveRecord::Base
   belongs_to :brand
   belongs_to :category
   has_many :inventory_items
+  has_many :relationships, foreign_key: :parent_id
+  has_many :components, through: :relationships, source: :product
 
   validates :brand_id, presence: true
   validates :code, presence: true

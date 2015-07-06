@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622101529) do
+ActiveRecord::Schema.define(version: 20150706112758) do
 
   create_table "brands", force: :cascade do |t|
     t.integer  "erp_number", null: false
@@ -121,6 +121,17 @@ ActiveRecord::Schema.define(version: 20150622101529) do
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id"
   add_index "products", ["category_id"], name: "index_products_on_category_id"
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "parent_id",  null: false
+    t.integer  "product_id", null: false
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id"
+  add_index "relationships", ["product_id"], name: "index_relationships_on_product_id"
 
   create_table "users", force: :cascade do |t|
     t.integer  "brand_id",                         null: false
