@@ -1,10 +1,8 @@
 .page-header
   = link_to admin_categories_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left')
-    Back
+    = icon('chevron-circle-left', 'Back')
   = link_to admin_category_path(@category), class: 'btn btn-primary' do
-    = icon('info-circle')
-    Show
+    = icon('info-circle', 'Show')
   %h1
     = image_variant_tag(@category.cover_image)
     = @category

@@ -1,10 +1,10 @@
 .page-header
   = link_to admin_products_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left')
-    Back
+    = icon('chevron-circle-left', 'Back')
   = link_to admin_product_path(@product), class: 'btn btn-primary' do
-    = icon('info-circle')
-    Show
+    = icon('info-circle', 'Show')
+  = link_to show_product_path(@product), class: 'btn btn-default' do
+    = icon('cubes', 'Show in store')
   %h1
     = icon('cube', @product.title)
     %span.small= @product.subtitle

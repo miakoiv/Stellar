@@ -1,10 +1,8 @@
 .page-header
   = link_to admin_orders_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left')
-    Back
+    = icon('chevron-circle-left', 'Back')
   = link_to admin_order_path(@order), class: 'btn btn-primary' do
-    = icon('info-circle')
-    Show
+    = icon('info-circle', 'Show')
   %h1
     Order
     %span.small= @order.to_s
