@@ -30,7 +30,7 @@ IMPORT_FILES = {
   structure: {
     file: 'www-nimike_rakenne-utf8.csv',
     multiple: true,
-    headers: [:code, :part_code, nil, nil, :amount]
+    headers: [:code, :component_code, nil, nil, :quantity]
   },
 }
 
@@ -42,7 +42,7 @@ namespace :matfox do
       import_data.each do |code, data|
         next if data[:product].nil? or data[:brands].nil?
 
-        # Find of create the product by product code separately in each brand.
+        # Find or create the product by product code separately in each brand.
         data[:brands].each do |row|
           brand = Brand.where(erp_number: row[:erp_number]).first
           next if brand.nil?
@@ -55,6 +55,16 @@ namespace :matfox do
             memo: data[:product][:memo],
             customer_code: row[:customer_code],
           )
+          next if data[:structure].nil?
+
+          # Assign relationships between code and part_code.
+          data[:structure].each do |row|
+            component = Product.find_by(code: row[:component_code])
+            next if component.nil?
+            relationship = product.relationships
+              .find_or_create_by(product: component)
+            relationship.update_columns(quantity: row[:quantity].to_i)
+          end
         end
 
         # Update inventory items to match quantities.
