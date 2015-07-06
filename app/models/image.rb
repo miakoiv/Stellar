@@ -9,7 +9,7 @@ class Image < ActiveRecord::Base
   has_attached_file :attachment,
     styles: {
       lightbox: '1000x1000>',
-      presentational: '1000x1000>',
+      presentational: '600x600>',
       technical: '400x400>',
       matchbox: '200x200>',
       thumbnail: '75x75>',

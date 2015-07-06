@@ -105,7 +105,7 @@
     }
 
     .product-description {
-      @extend .col-sm-2;
+      @extend .col-sm-4;
 
       .product-code {
         margin-bottom: 10px;
@@ -113,9 +113,13 @@
     }
 
     .images {
+      position: relative;
+      padding-bottom: 60px;
+
       .nav {
-        @extend .col-sm-1;
-        @extend .nav-stacked;
+        position: absolute;
+        left: $grid-gutter-width/2;
+        bottom: 0;
       }
 
       img {
@@ -124,13 +128,16 @@
     }
 
     .images.technical {
+      @extend .col-sm-2;
+      @extend .col-sm-offset-1;
+
       .tab-content {
-        @extend .col-sm-2;
       }
     }
     .images.presentational {
+      @extend .col-sm-5;
+
       .tab-content {
-        @extend .col-sm-6;
       }
     }
   }
