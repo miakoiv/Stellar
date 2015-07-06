@@ -27,6 +27,11 @@
 
   %p= product.description
 
+  .documents.list-group
+    - @documents.each do |document|
+      = link_to(icon('paperclip', document.attachment_file_name),
+          document.url(:original), class: 'list-group-item')
+
 .images.technical
   %ul.nav.nav-pills{role: 'tablist'}
     - if @technical_images.count > 1

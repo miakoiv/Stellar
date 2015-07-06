@@ -27,6 +27,7 @@ class StoreController < ApplicationController
     @products = @category.products
     @presentational_images = @product.images.by_purpose(:presentational)
     @technical_images = @product.images.by_purpose(:technical)
+    @documents = @product.images.by_purpose(:document)
   end
 
   # GET /cart
