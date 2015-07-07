@@ -10,29 +10,45 @@ ImageType.create(purpose: 'presentational', name: 'Presentational')
 ImageType.create(purpose: 'technical', name: 'Technical')
 ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 
-Brand.create(
+Store.create(
   erp_number: 1545,
   name: 'Tikkurila',
   slug: 'tikkurila'
 )
+Category.create(store_id: 1, name: 'Color Display')
+Category.create(store_id: 1, name: 'Product Placement')
+Category.create(store_id: 1, name: 'Shop Event Material')
+Category.create(store_id: 1, name: 'Visio')
+Category.create(store_id: 1, name: 'Duett')
+Category.create(store_id: 1, name: 'Tinting Area')
 
 User.create(
-  brand_id: 1,
+  store_id: 1,
   email: 'rosenblad@gmail.com',
   password: 'rush2112'
 )
 User.create(
-  brand_id: 1,
+  store_id: 1,
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
   password: 'powerrangers'
 )
 
-Category.create(brand_id: 1, name: 'Color Display')
-Category.create(brand_id: 1, name: 'Product Placement')
-Category.create(brand_id: 1, name: 'Shop Event Material')
-Category.create(brand_id: 1, name: 'Visio')
-Category.create(brand_id: 1, name: 'Duett')
-Category.create(brand_id: 1, name: 'Tinting Area')
+Store.create(
+  erp_number: 110007,
+  name: 'Intersport',
+  slug: 'intersport'
+)
+
+Category.create(store_id: 2, name: 'Sokkelit')
+Category.create(store_id: 2, name: 'Korit')
+Category.create(store_id: 2, name: 'Modifiointiosat')
+Category.create(store_id: 2, name: 'Keskilattiakalusteet')
+Category.create(store_id: 2, name: 'Palvelupisteet')
+Category.create(store_id: 2, name: 'Jalkine')
+Category.create(store_id: 2, name: 'Sovituskopit')
+Category.create(store_id: 2, name: 'Kassat')
+Category.create(store_id: 2, name: 'Paneeliseinä')
+Category.create(store_id: 2, name: 'Muut kalusteet')
 
 Inventory.create(purpose: 'manufacturing', name: 'Manufacturing')
 Inventory.create(purpose: 'shipping', name: 'Shipping')

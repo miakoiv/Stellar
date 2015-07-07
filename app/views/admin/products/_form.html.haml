@@ -6,7 +6,7 @@
       .form-group
         = f.label :category_id, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :category_id, current_brand.category_options,
+          = f.select :category_id, current_store.category_options,
               {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
         = f.label :code, 'Product code', class: 'col-sm-4 control-label import'

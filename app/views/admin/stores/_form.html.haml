@@ -1,7 +1,7 @@
-= form_for [:admin, @brand], html: {class: 'form-horizontal', role: 'form'} do |f|
+= form_for [:admin, @store], html: {class: 'form-horizontal', role: 'form'} do |f|
   .panel.panel-default
     .panel-body
-      = render 'shared/errors', object: @brand
+      = render 'shared/errors', object: @store
 
       .form-group
         = f.label :ERP_number, class: 'col-sm-4 control-label'

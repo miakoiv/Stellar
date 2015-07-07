@@ -1,0 +1,31 @@
+.page-header
+  = link_to new_admin_store_path, class: 'btn btn-primary' do
+    = icon('plus', 'New Store')
+  %h1= icon('cubes', 'Stores')
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-1
+        %th Name
+        %th ERP number
+        %th
+
+    %tbody
+      - @stores.each do |store|
+        %tr
+          %td= image_variant_tag(store.cover_image)
+          %td= store.name
+          %td= store.erp_number
+          %td.text-right
+            - if current_store != store
+              = link_to icon('star', 'Select'),
+                  admin_stores_path(store_id: store),
+                  class: 'btn btn-default btn-sm'
+            = link_to icon('shopping-cart', 'View storefront'),
+                root_path(store_id: store), class: 'btn btn-default btn-sm'
+            = link_to icon('info', 'Show'), admin_store_path(store),
+                class: 'btn btn-default btn-sm'
+            = link_to icon('edit', 'Edit'), edit_admin_store_path(store),
+                class: 'btn btn-default btn-sm'

@@ -11,7 +11,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products = current_brand.products
+    @products = current_store.products
   end
 
   # GET /admin/products/1
@@ -21,7 +21,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/new
   def new
-    @product = current_brand.products.build
+    @product = current_store.products.build
   end
 
   # GET /admin/products/1/edit
@@ -31,7 +31,7 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products
   # POST /admin/products.json
   def create
-    @product = current_brand.products.build(product_params)
+    @product = current_store.products.build(product_params)
 
     respond_to do |format|
       if @product.save

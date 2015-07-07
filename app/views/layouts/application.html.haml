@@ -2,8 +2,8 @@
 %html
   %head
     = render partial: 'shared/metadata'
-    %title= current_brand
-  %body{class: current_brand.slug}
+    %title= current_store
+  %body{class: current_store.slug}
     %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
         .navbar-header
@@ -11,7 +11,7 @@
             %span.sr-only Toggle navigation
             = icon('bars')
           = link_to root_path, class: "navbar-brand" do
-            = image_variant_tag(current_brand.cover_image)
+            = image_variant_tag(current_store.cover_image)
         #navbar.collapse.navbar-collapse
           = render partial: 'shared/user_menu'
           = render partial: 'shared/storefront_nav'

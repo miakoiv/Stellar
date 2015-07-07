@@ -5,13 +5,13 @@ class Product < ActiveRecord::Base
   include Imageable
   include Reorderable
 
-  belongs_to :brand
+  belongs_to :store
   belongs_to :category
   has_many :inventory_items
   has_many :relationships, foreign_key: :parent_id
   has_many :components, through: :relationships, source: :product
 
-  validates :brand_id, presence: true
+  validates :store_id, presence: true
   validates :code, presence: true
   validates :title, presence: true
 

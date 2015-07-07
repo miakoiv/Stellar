@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Brand < ActiveRecord::Base
+class Store < ActiveRecord::Base
 
   include Imageable
 
@@ -19,7 +19,7 @@ class Brand < ActiveRecord::Base
   end
 
   def to_s
-    new_record? ? 'New brand' : name
+    new_record? ? 'New store' : name
   end
 
   private

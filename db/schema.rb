@@ -13,16 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20150706112758) do
 
-  create_table "brands", force: :cascade do |t|
-    t.integer  "erp_number", null: false
-    t.string   "name"
-    t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "categories", force: :cascade do |t|
-    t.integer  "brand_id",           null: false
+    t.integer  "store_id",           null: false
     t.integer  "parent_category_id"
     t.string   "name"
     t.integer  "priority"
@@ -30,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "categories", ["brand_id"], name: "index_categories_on_brand_id"
+  add_index "categories", ["store_id"], name: "index_categories_on_store_id"
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id"
 
   create_table "image_types", force: :cascade do |t|
@@ -106,7 +98,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "products", force: :cascade do |t|
-    t.integer  "brand_id",      null: false
+    t.integer  "store_id",      null: false
     t.integer  "category_id"
     t.string   "code"
     t.string   "customer_code"
@@ -119,7 +111,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "products", ["brand_id"], name: "index_products_on_brand_id"
+  add_index "products", ["store_id"], name: "index_products_on_store_id"
   add_index "products", ["category_id"], name: "index_products_on_category_id"
 
   create_table "relationships", force: :cascade do |t|
@@ -133,8 +125,16 @@ ActiveRecord::Schema.define(version: 20150706112758) do
   add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id"
   add_index "relationships", ["product_id"], name: "index_relationships_on_product_id"
 
+  create_table "stores", force: :cascade do |t|
+    t.integer  "erp_number", null: false
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
-    t.integer  "brand_id",                         null: false
+    t.integer  "store_id",                         null: false
     t.string   "email",               default: "", null: false
     t.string   "encrypted_password",  default: "", null: false
     t.datetime "remember_created_at"
@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.datetime "updated_at",                       null: false
   end
 
-  add_index "users", ["brand_id"], name: "index_users_on_brand_id"
+  add_index "users", ["store_id"], name: "index_users_on_store_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

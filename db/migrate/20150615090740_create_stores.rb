@@ -1,6 +1,6 @@
-class CreateBrands < ActiveRecord::Migration
+class CreateStores < ActiveRecord::Migration
   def change
-    create_table :brands do |t|
+    create_table :stores do |t|
       t.integer :erp_number, null: false
       t.string :name
       t.string :slug

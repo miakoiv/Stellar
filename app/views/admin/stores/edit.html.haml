@@ -1,0 +1,16 @@
+.page-header
+  = link_to admin_stores_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', 'Back')
+  = link_to admin_store_path(@store), class: 'btn btn-primary' do
+    = icon('info-circle', 'Show')
+  %h1
+    = image_variant_tag(@store.cover_image)
+    = @store
+
+.row
+  .col-sm-6
+    = render 'form'
+
+  .col-sm-6
+    = render partial: 'admin/images/edit_table', object: @store, as: :imageable
+    = render partial: 'admin/images/dropzone', object: @store, as: :imageable

@@ -11,17 +11,17 @@ class ApplicationController < ActionController::Base
 
   after_filter :prepare_unobtrusive_flash
 
-  # Find the current brand for the storefront section
-  # that is restricted to a single brand.
-  def current_brand
-    if params[:brand_id].present? # and admin?
-      session[:brand_id] = params[:brand_id]
+  # Find the current store for the storefront section
+  # that is restricted to a single store.
+  def current_store
+    if params[:store_id].present? # and admin?
+      session[:store_id] = params[:store_id]
     end
-    if session[:brand_id].present?
-      Brand.find(session[:brand_id])
+    if session[:store_id].present?
+      Store.find(session[:store_id])
     else
-      current_user.brand
+      current_user.store
     end
   end
-  helper_method :current_brand
+  helper_method :current_store
 end

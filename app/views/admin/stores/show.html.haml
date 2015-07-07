@@ -1,0 +1,24 @@
+.page-header
+  = link_to admin_stores_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', 'Back')
+  = link_to edit_admin_store_path(@store), class: 'btn btn-primary' do
+    = icon('pencil-square', 'Edit')
+  %h1
+    = image_variant_tag(@store.cover_image)
+    = @store
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-body.form-horizontal
+        .form-group
+          %label.col-sm-4.control-label ERP number
+          .col-sm-8
+            %p.form-control-static= @store.erp_number
+        .form-group
+          %label.col-sm-4.control-label Name
+          .col-sm-8
+            %p.form-control-static= @store.name
+
+  .col-sm-6
+    = render partial: 'admin/images/table', object: @store, as: :imageable

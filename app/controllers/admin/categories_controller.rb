@@ -11,7 +11,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = current_brand.categories
+    @categories = current_store.categories
   end
 
   # GET /admin/categories/1
@@ -21,7 +21,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /admin/categories/new
   def new
-    @category = current_brand.categories.build
+    @category = current_store.categories.build
   end
 
   # GET /admin/categories/1/edit
@@ -31,7 +31,7 @@ class Admin::CategoriesController < ApplicationController
   # POST /admin/categories
   # POST /admin/categories.json
   def create
-    @category = current_brand.categories.build(category_params)
+    @category = current_store.categories.build(category_params)
 
     respond_to do |format|
       if @category.save

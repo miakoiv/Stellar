@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   #   end
 
   namespace :admin do
-    resources :brands do
+    resources :stores do
       resources :images, shallow: true
     end
     resources :categories do

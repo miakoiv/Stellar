@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   # :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
-  # Users are restricted to interacting with only one brand.
-  belongs_to :brand
+  # Users are restricted to interacting with only one store.
+  belongs_to :store
 
   has_many :orders
 

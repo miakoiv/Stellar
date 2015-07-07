@@ -10,7 +10,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_brand.categories.first
+    @category = current_store.categories.first
     @products = @category.products
   end
 
@@ -46,6 +46,6 @@ class StoreController < ApplicationController
 
   private
     def set_categories
-      @categories = current_brand.categories
+      @categories = current_store.categories
     end
 end

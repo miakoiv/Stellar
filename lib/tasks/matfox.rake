@@ -13,17 +13,17 @@ IMPORT_FILES = {
     multiple: false,
     headers: [
       nil, :item_type_no, :code, nil, nil, nil,
-      :title, :subtitle, nil,
+      :title, :subtitle, :default_price,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
       nil, nil, :memo
     ],
   },
   # NRO,ASIAKNRO,ASIAKNIMI,ASIAKTNRO,MYYNTHINTA,VALUUTTA,MYYNTIERA,PAIVPVM
-  brands: {
+  stores: {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
     headers: [
-      :code, :erp_number, :brand_name, :customer_code, :sales_price
+      :code, :erp_number, :store_name, :customer_code, :sales_price
     ],
   },
   # PAANUMERO,ALINUMERO,PAATMP,ALITMP,LKM,TARVE1,TARVE2,BTARVE1,BTARVE2,SELITE
@@ -40,14 +40,14 @@ namespace :matfox do
 
     Product.transaction do
       import_data.each do |code, data|
-        next if data[:product].nil? or data[:brands].nil?
+        next if data[:product].nil? or data[:stores].nil?
 
-        # Find or create the product by product code separately in each brand.
-        data[:brands].each do |row|
-          brand = Brand.where(erp_number: row[:erp_number]).first
-          next if brand.nil?
+        # Find or create the product by product code separately in each store.
+        data[:stores].each do |row|
+          store = Store.where(erp_number: row[:erp_number]).first
+          next if store.nil?
 
-          product = Product.find_or_initialize_by(code: code, brand: brand)
+          product = Product.find_or_initialize_by(code: code, store: store)
           product.save(validate: false)
           product.update_columns(
             title: data[:product][:title].try(:mb_chars).try(:titleize),
