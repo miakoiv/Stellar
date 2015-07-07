@@ -46,8 +46,7 @@ namespace :matfox do
 
         # Each product may exist in one or several stores separately.
         # If the product has customers assigned, the corresponding store
-        # is found by ERP number. Additional stores may be specified
-        # directly in the `stores` field as a list of slugs.
+        # is found by the customer's ERP number.
         if data[:customers].present?
           data[:customers].each do |row|
             store = Store.find_by(erp_number: row[:erp_number])
@@ -57,6 +56,18 @@ namespace :matfox do
               sales_price:   row[:sales_price] || data[:default_price],
             )
           end
+        end
+
+        # Additional stores may be specified by listing store slugs
+        # in the `stores` field. As future expansion, product variants
+        # will identify their parent product by `#code`.
+        slugs, variant_of = data[:product][:stores].split '#'
+        slugs.mb_chars.scan(/[[:word:]]+/).map(&:downcase).each do |slug|
+          store = Store.find_by(slug: slug)
+          next if store.nil?
+          find_or_create_product(store, code, data).update_columns(
+            sales_price: data[:default_price],
+          )
         end
 
         # Update inventory items to match quantities.
