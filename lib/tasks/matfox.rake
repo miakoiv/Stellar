@@ -6,24 +6,24 @@ IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'
 
 IMPORT_FILES = {
 
-  # ASIAKAS,MIKA,NRO,OMALUOKIT,LUOKITUS2,TOIMLUOKIT,NIMI,NIMI2,MYYNTHINTA,
+  # PIIRNRO,ASIAKAS,MIKA,NRO,OMALUOKIT,LUOKITUS2,TOIMLUOKIT,NIMI,NIMI2,MYYNTHINTA,
   # VARASTOLKM,VARATTULKM,TULOSSA,MUISTIO,MUISTIO2,MUISTIO4
   product: {
     file: 'www-nimike-utf8.csv',
     multiple: false,
     headers: [
-      nil, :item_type_no, :code, nil, nil, nil,
+      :stores, nil, :item_type_no, :code, nil, nil, nil,
       :title, :subtitle, :default_price,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
       nil, nil, :memo
     ],
   },
   # NRO,ASIAKNRO,ASIAKNIMI,ASIAKTNRO,MYYNTHINTA,VALUUTTA,MYYNTIERA,PAIVPVM
-  stores: {
+  customers: {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
     headers: [
-      :code, :erp_number, :store_name, :customer_code, :sales_price
+      :code, :erp_number, nil, :customer_code, :sales_price
     ],
   },
   # PAANUMERO,ALINUMERO,PAATMP,ALITMP,LKM,TARVE1,TARVE2,BTARVE1,BTARVE2,SELITE
@@ -37,33 +37,25 @@ IMPORT_FILES = {
 namespace :matfox do
   desc "Import data from Matfox"
   task import: :environment do |task, args|
+    @data_by_product_code = import_data
 
     Product.transaction do
-      import_data.each do |code, data|
-        next if data[:product].nil? or data[:stores].nil?
 
-        # Find or create the product by product code separately in each store.
-        data[:stores].each do |row|
-          store = Store.where(erp_number: row[:erp_number]).first
-          next if store.nil?
+      @data_by_product_code.each do |code, data|
+        next if data[:product].nil?
 
-          product = Product.find_or_initialize_by(code: code, store: store)
-          product.save(validate: false)
-          product.update_columns(
-            title: data[:product][:title].try(:mb_chars).try(:titleize),
-            subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
-            memo: data[:product][:memo],
-            customer_code: row[:customer_code],
-          )
-          next if data[:structure].nil?
-
-          # Assign relationships between code and part_code.
-          data[:structure].each do |row|
-            component = Product.find_by(code: row[:component_code])
-            next if component.nil?
-            relationship = product.relationships
-              .find_or_create_by(product: component)
-            relationship.update_columns(quantity: row[:quantity].to_i)
+        # Each product may exist in one or several stores separately.
+        # If the product has customers assigned, the corresponding store
+        # is found by ERP number. Additional stores may be specified
+        # directly in the `stores` field as a list of slugs.
+        if data[:customers].present?
+          data[:customers].each do |row|
+            store = Store.find_by(erp_number: row[:erp_number])
+            next if store.nil?
+            find_or_create_product(store, code, data).update_columns(
+              customer_code: row[:customer_code],
+              sales_price:   row[:sales_price] || data[:default_price],
+            )
           end
         end
 
@@ -75,6 +67,16 @@ namespace :matfox do
         on_hand_item = Inventory.for(:shipping)
           .inventory_items.find_or_create_by(code: code)
         on_hand_item.update(amount: data[:product][:quantity_on_hand])
+
+        # Assign product relationships.
+        next if data[:structure].nil?
+        data[:structure].each do |row|
+          Relationship.find_or_create_by(
+            parent_code: code, product_code: row[:component_code]
+          ).update_columns(
+            quantity: row[:quantity].to_i
+          )
+        end
       end
     end
   end
@@ -97,5 +99,18 @@ namespace :matfox do
       end
     end
     data
+  end
+
+  # Finds or creates a product by `code` in the scope of `store`,
+  # specified in the hash `data`.
+  def find_or_create_product(store, code, data)
+    product = Product.find_or_initialize_by(store: store, code: code)
+    product.save(validate: false)
+    product.update_columns(
+      title:    data[:product][:title]   .try(:mb_chars).try(:titleize),
+      subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
+      memo:     data[:product][:memo],
+    )
+    product
   end
 end
