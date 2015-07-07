@@ -6,13 +6,13 @@ IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'
 
 IMPORT_FILES = {
 
-  # PIIRNRO,ASIAKAS,MIKA,NRO,OMALUOKIT,LUOKITUS2,TOIMLUOKIT,NIMI,NIMI2,MYYNTHINTA,
+  # PIIRNRO,ASIAKAS,MIKA,MYYTAVA,NRO,NIMI,NIMI2,MYYNTHINTA,
   # VARASTOLKM,VARATTULKM,TULOSSA,MUISTIO,MUISTIO2,MUISTIO4
   product: {
     file: 'www-nimike-utf8.csv',
     multiple: false,
     headers: [
-      :stores, nil, :item_type_no, :code, nil, nil, nil,
+      :stores, nil, nil, nil, :code,
       :title, :subtitle, :default_price,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
       nil, nil, :memo
