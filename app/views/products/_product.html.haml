@@ -2,5 +2,5 @@
   = link_to show_product_path(product), data: {push: 'partial', target: '.product-detail'} do
     = image_variant_tag(product.cover_image, :matchbox,
         class: 'img-responsive')
-    %h4= product.title
-    %h3= product.subtitle
+    %h3= product.title
+    %h4= product.subtitle
