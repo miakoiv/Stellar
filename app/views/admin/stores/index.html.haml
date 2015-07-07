@@ -10,6 +10,7 @@
         %th.col-xs-1
         %th Name
         %th ERP number
+        %th Semantic name
         %th
 
     %tbody
@@ -18,6 +19,7 @@
           %td= image_variant_tag(store.cover_image)
           %td= store.name
           %td= store.erp_number
+          %td= store.slug
           %td.text-right
             - if current_store != store
               = link_to icon('star', 'Select'),
