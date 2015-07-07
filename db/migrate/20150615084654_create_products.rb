@@ -9,6 +9,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string :subtitle
       t.text :description
       t.text :memo
+      t.decimal :sales_price, precision: 8, scale: 2
 
       t.integer :priority
       t.timestamps null: false

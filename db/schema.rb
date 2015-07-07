@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "categories", ["store_id"], name: "index_categories_on_store_id"
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id"
+  add_index "categories", ["store_id"], name: "index_categories_on_store_id"
 
   create_table "image_types", force: :cascade do |t|
     t.integer  "purpose",    default: 0,    null: false
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "products", force: :cascade do |t|
-    t.integer  "store_id",      null: false
+    t.integer  "store_id",                              null: false
     t.integer  "category_id"
     t.string   "code"
     t.string   "customer_code"
@@ -106,27 +106,28 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.string   "subtitle"
     t.text     "description"
     t.text     "memo"
+    t.decimal  "sales_price",   precision: 8, scale: 2
     t.integer  "priority"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
-  add_index "products", ["store_id"], name: "index_products_on_store_id"
   add_index "products", ["category_id"], name: "index_products_on_category_id"
+  add_index "products", ["store_id"], name: "index_products_on_store_id"
 
   create_table "relationships", force: :cascade do |t|
-    t.integer  "parent_id",  null: false
-    t.integer  "product_id", null: false
+    t.string   "parent_code",  null: false
+    t.string   "product_code", null: false
     t.integer  "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
-  add_index "relationships", ["parent_id"], name: "index_relationships_on_parent_id"
-  add_index "relationships", ["product_id"], name: "index_relationships_on_product_id"
+  add_index "relationships", ["parent_code"], name: "index_relationships_on_parent_code"
+  add_index "relationships", ["product_code"], name: "index_relationships_on_product_code"
 
   create_table "stores", force: :cascade do |t|
-    t.integer  "erp_number", null: false
+    t.integer  "erp_number"
     t.string   "name"
     t.string   "slug"
     t.datetime "created_at", null: false
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(version: 20150706112758) do
     t.datetime "updated_at",                       null: false
   end
 
-  add_index "users", ["store_id"], name: "index_users_on_store_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["store_id"], name: "index_users_on_store_id"
 
 end

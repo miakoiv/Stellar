@@ -12,8 +12,7 @@ ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 
 Store.create(
   erp_number: 1545,
-  name: 'Tikkurila',
-  slug: 'tikkurila'
+  name: 'Tikkurila'
 )
 Category.create(store_id: 1, name: 'Color Display')
 Category.create(store_id: 1, name: 'Product Placement')
@@ -35,8 +34,7 @@ User.create(
 
 Store.create(
   erp_number: 110007,
-  name: 'Intersport',
-  slug: 'intersport'
+  name: 'Intersport Finland'
 )
 
 Category.create(store_id: 2, name: 'Sokkelit')

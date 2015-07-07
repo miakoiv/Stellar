@@ -11,7 +11,7 @@ class Store < ActiveRecord::Base
   has_many :users
 
   validates :name, presence: true
-  validates :erp_number, numericality: true
+  validates :erp_number, numericality: true, allow_blank: true
 
 
   def category_options
@@ -26,5 +26,4 @@ class Store < ActiveRecord::Base
     def assign_slug
       self.slug = name.parameterize
     end
-
 end

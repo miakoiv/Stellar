@@ -8,8 +8,9 @@ class Product < ActiveRecord::Base
   belongs_to :store
   belongs_to :category
   has_many :inventory_items
-  has_many :relationships, foreign_key: :parent_id
-  has_many :components, through: :relationships, source: :product
+  has_many :relationships, -> (product) {
+    joins(:product).where(products: {store_id: product.store_id})
+  }, foreign_key: :parent_code, primary_key: :code
 
   validates :store_id, presence: true
   validates :code, presence: true
