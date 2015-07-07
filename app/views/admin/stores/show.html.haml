@@ -19,6 +19,10 @@
           %label.col-sm-4.control-label Name
           .col-sm-8
             %p.form-control-static= @store.name
+        .form-group
+          %label.col-sm-4.control-label Semantic name
+          .col-sm-8
+            %p.form-control-static= @store.slug
 
   .col-sm-6
     = render partial: 'admin/images/table', object: @store, as: :imageable
