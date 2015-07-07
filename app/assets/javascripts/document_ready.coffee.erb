@@ -1,15 +1,15 @@
 $.fn.extend
   initialize: ->
 
-    $('.gallery').each ->
+    $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'
         type: 'image'
         gallery:
           enabled: true
 
-    $('[data-toggle="tooltip"]').tooltip()
-    $('[data-toggle="popover"]').popover
+    $('[data-toggle="tooltip"]', this).tooltip()
+    $('[data-toggle="popover"]', this).popover
       html: true
       trigger: 'hover'
 
@@ -17,7 +17,7 @@ $.fn.extend
       width: 'resolve'
       dropdownAutoWidth: true
 
-    $('.wysihtml5').each ->
+    $('.wysihtml5', this).each ->
       $(this).wysihtml5
         locale: 'en-terse'
         stylesheets: ["<%= asset_path('fonts.css') %>"]
