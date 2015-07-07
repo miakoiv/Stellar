@@ -4,11 +4,13 @@ class Store < ActiveRecord::Base
 
   include Imageable
 
-  before_create :assign_slug
+  after_create :assign_slug
 
   has_many :categories
   has_many :products
   has_many :users
+
+  scope :all_except, -> (this) { where.not(id: this) }
 
   validates :name, presence: true
   validates :erp_number, numericality: true, allow_blank: true
@@ -24,6 +26,13 @@ class Store < ActiveRecord::Base
 
   private
     def assign_slug
-      self.slug = name.parameterize
+      taken_slugs = Store.all_except(self).map(&:slug)
+      len = 3
+      unique_slug = "#{name}#{id}#{Time.now.to_i}"
+        .parameterize.underscore.mb_chars.downcase
+      begin
+        slug = unique_slug[0, len += 1]
+      end while taken_slugs.include?(slug)
+      update_attributes(slug: slug)
     end
 end
