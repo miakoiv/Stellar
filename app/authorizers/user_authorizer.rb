@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class OrderAuthorizer < ApplicationAuthorizer
+class UserAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user)
     user.is_site_manager?  ||
