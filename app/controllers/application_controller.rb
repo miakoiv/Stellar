@@ -21,14 +21,15 @@ class ApplicationController < ActionController::Base
   # Find the current store for the storefront section
   # that is restricted to a single store.
   def current_store
-    if params[:store_id].present? # and admin?
-      session[:store_id] = params[:store_id]
+    if current_user.is_site_manager? || current_user.is_site_monitor?
+      if params[:store_id].present?
+        session[:store_id] = params[:store_id]
+      end
+      if session[:store_id].present?
+        return Store.find(session[:store_id])
+      end
     end
-    if session[:store_id].present?
-      Store.find(session[:store_id])
-    else
-      current_user.store
-    end
+    current_user.store
   end
   helper_method :current_store
 end
