@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Role.create(name: 'site_manager')
+Role.create(name: 'site_monitor')
+Role.create(name: 'store_manager')
+Role.create(name: 'sales_rep')
+Role.create(name: 'customer')
+
 ImageType.create(purpose: 'presentational', name: 'Presentational')
 ImageType.create(purpose: 'technical', name: 'Technical')
 ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
@@ -24,12 +30,14 @@ Category.create(store_id: 1, name: 'Tinting Area')
 User.create(
   store_id: 1,
   email: 'rosenblad@gmail.com',
-  password: 'rush2112'
+  password: 'rush2112',
+  roles: [Role.first],
 )
 User.create(
   store_id: 1,
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
-  password: 'powerrangers'
+  password: 'powerrangers',
+  roles: [Role.first],
 )
 
 Store.create(
