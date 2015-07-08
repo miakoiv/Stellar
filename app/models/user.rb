@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   # Adds `creatable_by?(user)`, etc.
   include Authority::UserAbilities
+  resourcify
   rolify
 
   # Include default devise modules. Others available are:
