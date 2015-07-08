@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # A user's shopping cart is technically an order singleton,
   # the one and only order that's not been ordered yet.
   def shopping_cart
-    orders.pending.first || orders.create
+    orders.pending.first || orders.create(store: store)
   end
 
   def to_s
