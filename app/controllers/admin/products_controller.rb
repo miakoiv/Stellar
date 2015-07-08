@@ -6,6 +6,7 @@ class Admin::ProductsController < ApplicationController
 
   layout 'admin'
 
+  authorize_actions_for Product
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/products

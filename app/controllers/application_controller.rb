@@ -9,6 +9,13 @@ class ApplicationController < ActionController::Base
   # Authenticate every action.
   before_action :authenticate_user!
 
+  # Send the user back where she came from if not authorized.
+  def authority_forbidden(error)
+    Rails.logger.warn(error.message)
+    redirect_to request.referrer.presence || root_path,
+      alert: 'You are not authorized to complete that action.'
+  end
+
   after_filter :prepare_unobtrusive_flash
 
   # Find the current store for the storefront section

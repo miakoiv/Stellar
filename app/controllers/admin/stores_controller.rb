@@ -4,6 +4,7 @@ class Admin::StoresController < ApplicationController
 
   layout 'admin'
 
+  authorize_actions_for Store
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/stores

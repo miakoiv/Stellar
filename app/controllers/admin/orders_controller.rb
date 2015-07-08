@@ -4,6 +4,7 @@ class Admin::OrdersController < ApplicationController
 
   layout 'admin'
 
+  authorize_actions_for Order
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/orders

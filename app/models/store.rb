@@ -2,6 +2,8 @@
 
 class Store < ActiveRecord::Base
 
+  resourcify
+  include Authority::Abilities
   include Imageable
 
   after_create :assign_slug

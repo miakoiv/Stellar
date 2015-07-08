@@ -2,6 +2,8 @@
 
 class Category < ActiveRecord::Base
 
+  resourcify
+  include Authority::Abilities
   include Imageable
   include Reorderable
 

@@ -6,6 +6,7 @@ class Admin::CategoriesController < ApplicationController
 
   layout 'admin'
 
+  authorize_actions_for Category
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/categories

@@ -2,6 +2,8 @@
 
 class Product < ActiveRecord::Base
 
+  resourcify
+  include Authority::Abilities
   include Imageable
   include Reorderable
 
