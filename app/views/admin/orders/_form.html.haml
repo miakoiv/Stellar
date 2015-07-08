@@ -6,12 +6,17 @@
       .form-group
         = f.label :user_id, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :user_id, User.options, {}, {class: 'select2 form-control'}
+          = f.select :user_id, current_store.user_options,
+              {}, {class: 'select2 form-control'}
       .form-group
         = f.label :order_type_id, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.select :order_type_id, OrderType.options,
               {}, {class: 'select2 form-control'}
+      .form-group
+        = f.label :ordered_at, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.datetime_local_field :ordered_at, class: 'form-control'
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'

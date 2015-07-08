@@ -10,7 +10,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = Order.all
+    @orders = current_store.orders
   end
 
   # GET /admin/orders/1
@@ -20,7 +20,7 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/new
   def new
-    @order = Order.new
+    @order = current_store.orders.build(ordered_at: Time.current)
   end
 
   # GET /admin/orders/1/edit
@@ -30,7 +30,7 @@ class Admin::OrdersController < ApplicationController
   # POST /admin/orders
   # POST /admin/orders.json
   def create
-    @order = Order.new(order_params)
+    @order = current_store.orders.build(order_params)
 
     respond_to do |format|
       if @order.save
@@ -66,7 +66,7 @@ class Admin::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :user_id, :order_type_id
+        :user_id, :order_type_id, :ordered_at
       )
     end
 end
