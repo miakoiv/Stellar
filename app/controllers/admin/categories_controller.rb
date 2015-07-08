@@ -3,6 +3,7 @@
 class Admin::CategoriesController < ApplicationController
 
   include Reorderer
+  authority_actions reorder: 'update'
 
   layout 'admin'
 
