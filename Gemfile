@@ -40,6 +40,8 @@ gem 'wiselinks'
 # Authentication and authorization
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'authority'
+gem 'rolify'
 
 # Twitter Bootstrap scaffolds
 gem 'bootstrap-generators', '~> 3.3.4'
