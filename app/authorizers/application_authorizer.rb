@@ -15,4 +15,14 @@ class ApplicationAuthorizer < Authority::Authorizer
     # considered forbidden.
     false
   end
+
+  # General authorization to perform any shopping related action.
+  def self.authorizes_to_shop?(user, options = {})
+    user.is_site_manager?  ||
+    user.is_site_monitor?  ||
+    user.is_store_manager? ||
+    user.is_sales_rep?     ||
+    user.is_customer?      ||
+    false
+  end
 end
