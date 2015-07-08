@@ -4,4 +4,5 @@
   = active_link_to icon('shopping-cart', 'Cart'), show_cart_path, wrap_tag: :li, active: :exact
   = active_link_to icon('truck', 'Orders'), orders_path, wrap_tag: :li
 %ul.nav.navbar-nav.navbar-right
-  %li= link_to icon('cog', 'Administration'), admin_orders_path
+  - if current_user.can_read?(Order)
+    %li= link_to icon('cog', 'Administration'), admin_orders_path
