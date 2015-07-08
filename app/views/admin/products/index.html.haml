@@ -1,6 +1,7 @@
 .page-header
-  = link_to new_admin_product_path, class: 'btn btn-primary' do
-    = icon('plus', 'New Product')
+  - if current_user.can_create?(Product)
+    = link_to new_admin_product_path, class: 'btn btn-primary' do
+      = icon('plus', 'New Product')
   %h1= icon('cube', 'Products')
 
 .table-responsive
@@ -14,7 +15,7 @@
         %th Stock
         %th
 
-    %tbody.sortable
+    %tbody{class: current_user.can_update?(Product) ? 'sortable' : nil}
       = content_tag_for :tr, @products do |product|
         %td= product.code
         %td
@@ -29,8 +30,9 @@
         %td.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
               class: 'btn btn-default btn-sm'
-          = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
-              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(Product)
+            = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+                class: 'btn btn-default btn-sm'
 
 :coffee
   $('.sortable').sortable(
