@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
+  belongs_to :store
   belongs_to :user
   belongs_to :order_type
   has_many :order_items

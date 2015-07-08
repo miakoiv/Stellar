@@ -10,6 +10,7 @@ class Store < ActiveRecord::Base
 
   has_many :categories
   has_many :products
+  has_many :orders
   has_many :users
 
   scope :all_except, -> (this) { where.not(id: this) }
@@ -20,6 +21,10 @@ class Store < ActiveRecord::Base
 
   def category_options
     categories.map { |c| [c.name, c.id] }
+  end
+
+  def user_options
+    users.map { |u| [u.to_s, u.id] }
   end
 
   def to_s
