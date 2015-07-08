@@ -45,8 +45,29 @@ class StoreController < ApplicationController
     flash.now[:notice] = "#{amount} of #{@product} added to cart"
   end
 
+  # POST /checkout
+  def checkout
+    @order = current_user.shopping_cart
+    @order.ordered_at = Time.current
+
+    respond_to do |format|
+      if @order.update(order_params)
+        format.html { redirect_to orders_path, notice: 'Order was successfully placed.' }
+      else
+        format.html { render :show_cart }
+      end
+    end
+  end
+
   private
     def set_categories
       @categories = current_store.categories
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def order_params
+      params.require(:order).permit(
+        :order_type_id
+      )
     end
 end

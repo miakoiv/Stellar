@@ -25,3 +25,13 @@
               class: 'btn btn-default btn-sm'
           = link_to icon('remove', 'Delete'), order_item_path(order_item),
               remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+
+- if @order.order_items.present?
+  = form_for @order, url: checkout_path, method: :post,
+      html: {class: 'form-inline row', role: 'form'} do |f|
+    .form-group.col-xs-2.col-xs-offset-9
+      = f.label :order_type_id, class: 'sr-only'
+      = f.select :order_type_id, OrderType.options,
+          {}, {class: 'select2 form-control', style: 'width: 100%'}
+    .form-group.col-xs-1
+      = f.submit 'Place Order', class: 'btn btn-primary pull-right'

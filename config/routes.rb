@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/product/:product_id'        => 'store#show_product', as: :show_product
   get '/cart'                       => 'store#show_cart', as: :show_cart
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
+  post '/checkout'                  => 'store#checkout', as: :checkout
 
   resources :orders do
     resources :order_items, shallow: true
