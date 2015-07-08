@@ -11,7 +11,7 @@ class StoreController < ApplicationController
   # GET /
   def index
     @category = current_store.categories.first
-    @products = @category.products
+    @products = @category.try(:products) || []
   end
 
   # GET /category/1
