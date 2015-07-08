@@ -11,6 +11,7 @@ Role.create(name: 'site_monitor')
 Role.create(name: 'store_manager')
 Role.create(name: 'sales_rep')
 Role.create(name: 'customer')
+Role.create(name: 'guest')
 
 ImageType.create(purpose: 'presentational', name: 'Presentational')
 ImageType.create(purpose: 'technical', name: 'Technical')
