@@ -22,12 +22,17 @@
 .product-description
   .product-code
     - if product.customer_code.present?
-      %span.label.label-info= product.customer_code
-    %span.label.label-default
-      TJT
-      = product.code
+      = icon('barcode', product.customer_code, class: 'fa-lg')
+    = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
   = product.description.html_safe if product.description.present?
+
+  - if current_user.can?(:shop)
+    %p.product-pricing
+      = icon('tag', number_to_currency(product.sales_price, unit: '€'))
+    %p.product-stock
+      - @stock.each do |inventory, amount|
+        = icon('cubes', "#{inventory}: #{amount}")
 
   .documents.list-group
     - @documents.each do |document|

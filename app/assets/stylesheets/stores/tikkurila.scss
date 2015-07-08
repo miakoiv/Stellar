@@ -111,6 +111,20 @@
       .product-code {
         margin-bottom: 10px;
       }
+
+      .product-pricing {
+        @extend .col-sm-4;
+        @extend .lead;
+        @extend .text-primary;
+        line-height: 40px;
+      }
+
+      .product-stock {
+        @extend .col-sm-8;
+        @extend .text-muted;
+        @extend .text-right;
+        line-height: 40px;
+      }
     }
 
     .images {
