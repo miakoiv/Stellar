@@ -2,7 +2,7 @@ body {
   padding-bottom: 100px;
 }
 
-h1, h2, h3, h4, h5, h6, th, dt, label, strong {
+h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
   font-weight: 500;
 }
 h1 {
@@ -46,7 +46,7 @@ label.import:before {
   color: $state-info-text;
 }
 
-.select2-choice, .select2-drop, .select2-search, .select2-input {
+.select2-choices, .select2-choice, .select2-drop, .select2-search, .select2-input {
   font-family: inherit !important;
 }
 
