@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150708064056) do
     t.integer  "user_id",       null: false
     t.integer  "order_type_id"
     t.datetime "ordered_at"
+    t.datetime "approved_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
