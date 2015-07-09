@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.unapproved
   end
 
 end
