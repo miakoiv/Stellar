@@ -10,14 +10,11 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   has_many :order_items, dependent: :destroy
 
-  # Completed orders
-  default_scope { where.not(ordered_at: nil) }
+  # Default scope includes completed, not yet approved orders.
+  default_scope { where.not(ordered_at: nil).where(approved_at: nil) }
 
-  # Not ordered yet – shopping carts
+  # Unordered orders is the scope for shopping carts.
   scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
-
-  # Not approved yet – items in these orders contribute to inventory adjustments
-  scope :unapproved, -> { where(approved_at: nil) }
 
 
   def insert!(product, amount)
