@@ -38,7 +38,8 @@ class Store < ActiveRecord::Base
       unique_slug = "#{name}#{id}#{Time.now.to_i}"
         .parameterize.underscore.mb_chars.downcase
       begin
-        slug = unique_slug[0, len += 1]
+        slug = unique_slug[0, len]
+        len += 1
       end while taken_slugs.include?(slug)
       update_attributes(slug: slug)
     end
