@@ -10,7 +10,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = current_store.orders
+    @orders = current_store.orders.everything
   end
 
   # GET /admin/orders/1
@@ -60,13 +60,13 @@ class Admin::OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
+      @order = Order.everything.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :user_id, :order_type_id, :ordered_at
+        :user_id, :order_type_id, :ordered_at, :approval
       )
     end
 end

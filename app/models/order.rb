@@ -16,6 +16,17 @@ class Order < ActiveRecord::Base
   # Unordered orders is the scope for shopping carts.
   scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
 
+  # Everything lists completed orders, approved or not.
+  scope :everything, -> { unscope(where: :approved_at) }
+
+
+  def approval
+    !!approved_at.present?
+  end
+
+  def approval=(status)
+    update(approved_at: status == '1' ? Time.current : nil)
+  end
 
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
