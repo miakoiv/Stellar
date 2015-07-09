@@ -16,7 +16,7 @@
         %td= order.order_type
         %td= order.order_items.count
         %td.text-right
-          = link_to icon('info', 'Show'), order_path(order),
-              class: 'btn btn-default btn-sm'
           = link_to icon('edit', 'Edit'), edit_order_path(order),
               class: 'btn btn-default btn-sm'
+          = link_to icon('remove', 'Delete'), order_path(order),
+              method: :delete, class: 'btn btn-sm btn-danger'
