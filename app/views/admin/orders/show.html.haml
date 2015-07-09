@@ -24,3 +24,19 @@
           %label.col-sm-4.control-label Ordered at
           .col-sm-8
             %p.form-control-static= @order.ordered_at
+        .form-group
+          %label.col-sm-4.control-label Approved at
+          .col-sm-8
+            %p.form-control-static= @order.approved_at
+
+  .col-sm-6
+    .table-responsive
+      %table.table.table-striped.table-hover.table-loose
+        %thead
+          %tr
+            %th.col-xs-3 Product code
+            %th Product title
+            %th.col-xs-2.text-right Amount
+
+        %tbody
+          = render partial: 'admin/order_items/order_item', collection: @order.order_items

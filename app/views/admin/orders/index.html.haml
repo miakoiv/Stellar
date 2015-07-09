@@ -12,6 +12,7 @@
         %th.col-xs-2 Order type
         %th User
         %th.col-xs-1 Items
+        %th.col-xs-1 Status
         %th.col-xs-2
 
     %tbody
@@ -20,6 +21,7 @@
         %td= order.order_type
         %td= order.user
         %td= order.order_items.count
+        %td= order.approval ? icon('check') : ''
         %td.text-right
           = link_to icon('info', 'Show'), admin_order_path(order),
               class: 'btn btn-default btn-sm'
