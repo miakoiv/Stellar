@@ -11,20 +11,7 @@
         %th.col-xs-2
 
     %tbody
-      = content_tag_for(:tr, @order.order_items) do |order_item|
-        %td= order_item.product.code
-        %td
-          %strong= order_item.product.title
-          = order_item.product.subtitle
-        %td
-          = form_for order_item, remote: true,
-              html: {class: 'immediate form-horizontal'} do |f|
-            = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
-        %td.text-right
-          = link_to icon('info', 'Product info'), show_product_path(order_item.product),
-              class: 'btn btn-default btn-sm'
-          = link_to icon('remove', 'Delete'), order_item_path(order_item),
-              remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+      = render partial: 'order_items/order_item', collection: @order.order_items
 
 - if @order.order_items.present?
   = form_for @order, url: checkout_path, method: :post,
