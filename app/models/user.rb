@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   # Adds `creatable_by?(user)`, etc.
   include Authority::UserAbilities
+  include Authority::Abilities
   resourcify
   rolify
 
@@ -26,6 +27,14 @@ class User < ActiveRecord::Base
   # the one and only order that's not been ordered yet.
   def shopping_cart
     orders.unordered.first || orders.create(store: store)
+  end
+
+  def grantable_role_options
+    roles.first.grantable_roles.map { |r| [r.to_s, r.id] }
+  end
+
+  def role_names
+    roles.map { |r| r.to_s }
   end
 
   def to_s

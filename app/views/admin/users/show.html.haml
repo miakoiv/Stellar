@@ -1,0 +1,22 @@
+.page-header
+  = link_to admin_users_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', 'Back')
+  - if current_user.can_update?(User)
+    = link_to edit_admin_user_path(@user), class: 'btn btn-primary' do
+      = icon('edit', 'Edit')
+  %h1= icon('user', @user)
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-body.form-horizontal
+        .form-group
+          %label.col-sm-4.control-label E-mail
+          .col-sm-8
+            %p.form-control-static= @user.email
+        .form-group
+          %label.col-sm-4.control-label Roles
+          .col-sm-8
+            %p.form-control-static
+              - @user.role_names.each do |role_name|
+                %span.label.label-default= role_name

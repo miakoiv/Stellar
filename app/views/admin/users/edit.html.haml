@@ -1,0 +1,10 @@
+.page-header
+  = link_to admin_users_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', 'Back')
+  = link_to admin_user_path(@user), class: 'btn btn-primary' do
+    = icon('info-circle', 'Show')
+  %h1= icon('user', @user)
+
+.row
+  .col-sm-6
+    = render 'form'

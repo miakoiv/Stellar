@@ -1,0 +1,27 @@
+= form_for [:admin, @user], html: {class: 'form-horizontal', role: 'form'} do |f|
+  .panel.panel-default
+    .panel-body
+      = render 'shared/errors', object: @user
+
+      .form-group
+        = f.label :email, 'E-mail', class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_field :email, class: 'form-control'
+      - if @user.new_record?
+        .form-group
+          = f.label :password, class: 'col-sm-4 control-label'
+          .col-sm-8
+            = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation, class: 'col-sm-4 control-label'
+          .col-sm-8
+            = f.password_field :password_confirmation, class: 'form-control'
+        .form-group
+          = f.label :roles, class: 'col-sm-4 control-label'
+          .col-sm-8
+            = f.select :role_ids,
+              current_user.grantable_role_options,
+              {}, {multiple: true, class: 'select2 form-control'}
+      .form-group
+        .col-sm-offset-4.col-sm-8
+          = f.submit class: 'btn btn-primary'

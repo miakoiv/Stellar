@@ -58,6 +58,7 @@ Rails.application.routes.draw do
       post :reorder, on: :collection
     end
     resources :orders
+    resources :users
 
     post '/images/reorder' => 'images#reorder', as: :reorder_images
   end
