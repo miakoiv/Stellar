@@ -4,8 +4,9 @@
   - if current_user.can_update?(Product)
     = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
       = icon('pencil-square', 'Edit')
-  = link_to show_product_path(@product), class: 'btn btn-default' do
-    = icon('cubes', 'Show in store')
+  - if @product.category.present?
+    = link_to show_product_path(@product), class: 'btn btn-default' do
+      = icon('cubes', 'Show in store')
   %h1
     = icon('cube', @product.title)
     %span.small= @product.subtitle
