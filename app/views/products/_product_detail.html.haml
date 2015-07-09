@@ -36,8 +36,7 @@
     %p.product-pricing
       = icon('tag', number_to_currency(product.sales_price, unit: '€'))
     %p.product-stock
-      - @stock.each do |inventory, amount|
-        = icon('cubes', "#{inventory}: #{amount}")
+      = product_stock_string(product.stock_lookup)
 
 .images.technical
   %ul.nav.nav-pills{role: 'tablist'}

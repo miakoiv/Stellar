@@ -28,7 +28,6 @@ class StoreController < ApplicationController
     @presentational_images = @product.images.by_purpose(:presentational)
     @technical_images = @product.images.by_purpose(:technical)
     @documents = @product.images.by_purpose(:document)
-    @stock = InventoryItem.lookup(@product.code)
   end
 
   # GET /cart

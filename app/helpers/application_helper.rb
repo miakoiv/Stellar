@@ -47,4 +47,14 @@ module ApplicationHelper
   def list_group_placeholder
     content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
   end
+
+  # Pretty-prints a stock lookup hash.
+  def product_stock_string(stock)
+    stock.map do |i, s|
+      content_tag(:span, class: i, title: i, data: {toggle: 'tooltip'}) do
+        content_tag(:span, s[:adjustment] == 0 ? s[:current] :
+          sprintf("%i(%+i)", s[:current], s[:adjustment]))
+      end
+    end.join.html_safe
+  end
 end

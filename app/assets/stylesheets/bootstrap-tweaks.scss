@@ -66,6 +66,23 @@ label.import:before {
   white-space: pre-line;
 }
 
+span.manufacturing, span.shipping {
+  display: inline-block;
+  margin-right: 5px;
+}
+span.manufacturing::before, span.shipping::before {
+  display: inline-block;
+  margin-right: 2px;
+  font-family: FontAwesome;
+  color: $text-muted;
+}
+span.manufacturing:before {
+  content: ""; // cogs
+}
+span.shipping:before {
+  content: ""; // truck
+}
+
 #flash {
   position: absolute;
   bottom: 15px;
