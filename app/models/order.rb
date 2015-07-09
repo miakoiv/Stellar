@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   default_scope { where.not(ordered_at: nil) }
-  scope :pending, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
+  scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
 
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
