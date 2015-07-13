@@ -46,6 +46,10 @@ label.import:before {
   color: $state-info-text;
 }
 
+input[type="number"] {
+  width: 70px !important;
+}
+
 .select2-choices, .select2-choice, .select2-drop, .select2-search, .select2-input {
   font-family: inherit !important;
 }
