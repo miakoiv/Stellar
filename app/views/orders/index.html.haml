@@ -8,6 +8,7 @@
         %th.col-xs-1 Date
         %th Order type
         %th.col-xs-1 Items
+        %th.col-xs-1 Shipping at
         %th.col-xs-2
 
     %tbody
@@ -15,6 +16,7 @@
         %td= order.ordered_at.to_date
         %td= order.order_type
         %td= order.order_items.count
+        %td= order.shipping_at
         %td.text-right
           = link_to icon('edit', 'Edit'), edit_order_path(order),
               class: 'btn btn-default btn-sm'

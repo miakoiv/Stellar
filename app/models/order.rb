@@ -17,8 +17,8 @@ class Order < ActiveRecord::Base
   # Unordered orders is the scope for shopping carts.
   scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
 
-  # Everything lists completed orders, approved or not.
-  scope :everything, -> { unscope(where: :approved_at) }
+  # Archived orders have been approved.
+  scope :archived, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
 
 
   def approval

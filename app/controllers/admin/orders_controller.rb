@@ -10,7 +10,8 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = current_store.orders.everything
+    @orders = current_store.orders
+    @archive = current_store.orders.archived
   end
 
   # GET /admin/orders/1
@@ -48,8 +49,8 @@ class Admin::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: admin_order_path(@order) }
+        format.html { redirect_to admin_orders_path, notice: 'Order was successfully updated.' }
+        format.json { render :index, status: :ok, location: admin_orders_path }
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -60,13 +61,13 @@ class Admin::OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.everything.find(params[:id])
+      @order = Order.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :user_id, :order_type_id, :ordered_at, :approval,
+        :user_id, :order_type_id, :ordered_at, :shipping_at, :approval,
         :company_name, :contact_person, :billing_address, :shipping_address,
         :notes
       )

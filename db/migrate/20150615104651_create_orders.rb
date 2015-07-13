@@ -5,6 +5,7 @@ class CreateOrders < ActiveRecord::Migration
       t.belongs_to :user,  null: false, index: true
       t.belongs_to :order_type, index: true
       t.datetime :ordered_at
+      t.date :shipping_at
       t.datetime :approved_at
       t.string :company_name
       t.string :contact_person

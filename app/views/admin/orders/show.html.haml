@@ -33,6 +33,10 @@
           .col-sm-8
             %p.form-control-static= @order.contact_person
         .form-group
+          %label.col-sm-4.control-label Shipping at
+          .col-sm-8
+            %p.form-control-static= @order.shipping_at
+        .form-group
           %label.col-sm-4.control-label Billing address
           .col-sm-8
             %p.form-control-static.pre><= @order.billing_address

@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150708064056) do
     t.integer  "user_id",          null: false
     t.integer  "order_type_id"
     t.datetime "ordered_at"
+    t.date     "shipping_at"
     t.datetime "approved_at"
     t.string   "company_name"
     t.string   "contact_person"

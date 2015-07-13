@@ -12,6 +12,10 @@
   .col-sm-8
     = f.text_field :contact_person, class: 'form-control'
 .form-group
+  = f.label :shipping_at, class: 'col-sm-4 control-label'
+  .col-sm-8
+    = f.date_field :shipping_at, class: 'form-control'
+.form-group
   = f.label :billing_address, class: 'col-sm-4 control-label'
   .col-sm-8
     = f.text_area :billing_address, rows: 4, class: 'form-control'
