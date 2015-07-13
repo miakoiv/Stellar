@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150708064056) do
     t.text     "notes"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.text     "archived_copy"
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id"

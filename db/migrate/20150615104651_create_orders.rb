@@ -12,6 +12,7 @@ class CreateOrders < ActiveRecord::Migration
       t.text :shipping_address
       t.text :notes
       t.timestamps null: false
+      t.text :archived_copy
     end
   end
 end

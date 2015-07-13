@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include ActiveModel::Serialization
 
   belongs_to :store
   belongs_to :user
@@ -24,8 +25,19 @@ class Order < ActiveRecord::Base
     !!approved_at.present?
   end
 
+  # Setting approval status also updates
+  # the archived copy in JSON format.
   def approval=(status)
-    update(approved_at: status == '1' ? Time.current : nil)
+    case status
+    when '1'
+      archive!
+      update(approved_at: Time.current)
+    when '0'
+      unarchive!
+      update(approved_at: nil)
+    else
+      raise "Unknown approval status #{status}"
+    end
   end
 
   def insert!(product, amount)
@@ -35,6 +47,46 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    new_record? ? 'New order' : "[#{created_at.to_s(:long)}] #{user}"
+    new_record? ? 'New order' : ("%08d" % id)
   end
+
+  def as_json(options = {})
+    super(
+      only: [
+        :ordered_at, :approved_at, :company_name, :contact_person,
+        :billing_address, :shipping_address, :notes
+      ],
+      include: {
+        store: {
+          only: :name,
+          include: {
+            contact_person: {
+              only: [:name, :email]
+            }
+          }
+        },
+        user: {
+          only: [:name, :email]
+        },
+        order_items: {
+          only: :amount,
+          include: {
+            product: {
+              only: [:code, :customer_code, :title, :subtitle, :sales_price]
+            }
+          }
+        }
+      }
+    )
+  end
+
+  private
+    def archive!
+      update(archived_copy: to_json)
+    end
+
+    def unarchive!
+      update(archived_copy: nil)
+    end
+
 end
