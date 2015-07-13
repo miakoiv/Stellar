@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
     orders.unordered.first || orders.create(store: store)
   end
 
+  # Superiority over another user is decided on the pecking order
+  # of their highest ranked roles.
+  def superior_to?(user)
+    roles.first.id < user.roles.first.id
+  end
+
   def grantable_role_options
     roles.first.grantable_roles.map { |r| [r.to_s, r.id] }
   end
