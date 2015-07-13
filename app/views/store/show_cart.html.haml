@@ -1,24 +1,27 @@
 .page-header
   %h1= icon('shopping-cart', 'Shopping cart')
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-2 Product code
-        %th Product title
-        %th.col-xs-1.text-right Amount
-        %th.col-xs-2
+.row
+  .col-sm-5
+    - if @order.order_items.present?
+      = form_for @order, url: checkout_path, method: :post,
+          html: {class: 'form-horizontal', role: 'form'} do |f|
+        .panel.panel-default
+          .panel-body
+            = render partial: 'orders/form_fields', locals: {f: f}
+            .form-group
+              .col-sm-offset-4.col-sm-8
+                = f.submit 'Place Order', class: 'btn btn-primary'
 
-    %tbody
-      = render partial: 'order_items/order_item', collection: @order.order_items
+  .col-sm-7
+    .table-responsive
+      %table.table.table-striped.table-hover.table-loose
+        %thead
+          %tr
+            %th.col-xs-2 Product code
+            %th Product title
+            %th.col-xs-2.text-right Amount
+            %th
 
-- if @order.order_items.present?
-  = form_for @order, url: checkout_path, method: :post,
-      html: {class: 'form-inline row', role: 'form'} do |f|
-    .form-group.col-xs-2.col-xs-offset-9
-      = f.label :order_type_id, class: 'sr-only'
-      = f.select :order_type_id, OrderType.options,
-          {}, {class: 'select2 form-control', style: 'width: 100%'}
-    .form-group.col-xs-1
-      = f.submit 'Place Order', class: 'btn btn-primary pull-right'
+        %tbody
+          = render partial: 'order_items/order_item', collection: @order.order_items

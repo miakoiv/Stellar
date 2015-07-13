@@ -9,7 +9,7 @@
     %span.small= @order.to_s
 
 .row
-  .col-sm-6
+  .col-sm-5
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
@@ -25,11 +25,31 @@
           .col-sm-8
             %p.form-control-static= @order.ordered_at
         .form-group
+          %label.col-sm-4.control-label Company name
+          .col-sm-8
+            %p.form-control-static= @order.company_name
+        .form-group
+          %label.col-sm-4.control-label Contact person
+          .col-sm-8
+            %p.form-control-static= @order.contact_person
+        .form-group
+          %label.col-sm-4.control-label Billing address
+          .col-sm-8
+            %p.form-control-static.pre><= @order.billing_address
+        .form-group
+          %label.col-sm-4.control-label Shipping address
+          .col-sm-8
+            %p.form-control-static.pre><= @order.shipping_address
+        .form-group
+          %label.col-sm-4.control-label Notes
+          .col-sm-8
+            %p.form-control-static.pre><= @order.notes
+        .form-group
           %label.col-sm-4.control-label Approved at
           .col-sm-8
             %p.form-control-static= @order.approved_at
 
-  .col-sm-6
+  .col-sm-7
     .table-responsive
       %table.table.table-striped.table-hover.table-loose
         %thead

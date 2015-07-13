@@ -4,19 +4,37 @@
       = render 'shared/errors', object: @order
 
       .form-group
-        = f.label :user_id, class: 'col-sm-4 control-label'
+        %label.col-sm-4.control-label User
         .col-sm-8
-          = f.select :user_id, current_store.user_options,
-              {}, {class: 'select2 form-control'}
+          %p.form-control-static= @order.user
       .form-group
-        = f.label :order_type_id, class: 'col-sm-4 control-label'
+        %label.col-sm-4.control-label Order type
         .col-sm-8
-          = f.select :order_type_id, OrderType.options,
-              {}, {class: 'select2 form-control'}
+          %p.form-control-static= @order.order_type
       .form-group
-        = f.label :ordered_at, class: 'col-sm-4 control-label'
+        %label.col-sm-4.control-label Ordered at
         .col-sm-8
-          = f.datetime_local_field :ordered_at, class: 'form-control'
+          %p.form-control-static= @order.ordered_at
+      .form-group
+        = f.label :company_name, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_field :company_name, class: 'form-control'
+      .form-group
+        = f.label :contact_person, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_field :contact_person, class: 'form-control'
+      .form-group
+        = f.label :billing_address, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :billing_address, rows: 4, class: 'form-control'
+      .form-group
+        = f.label :shipping_address, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :shipping_address, rows: 4, class: 'form-control'
+      .form-group
+        = f.label :notes, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :notes, rows: 4, class: 'form-control'
       .form-group
         .col-sm-offset-4.col-sm-8
           .checkbox

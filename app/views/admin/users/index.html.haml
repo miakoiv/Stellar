@@ -9,6 +9,7 @@
     %thead
       %tr
         %th.col-xs-1
+        %th Name
         %th E-mail
         %th.col-xs-2 Roles
         %th.col-xs-3
@@ -17,6 +18,7 @@
       - @users.each do |user|
         %tr
           %td= image_variant_tag(user.store.cover_image)
+          %td= user.name
           %td= user.email
           %td
             - user.role_names.each do |role_name|

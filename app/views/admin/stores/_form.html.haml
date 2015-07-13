@@ -4,6 +4,11 @@
       = render 'shared/errors', object: @store
 
       .form-group
+        = f.label :contact_person, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.select :contact_person_id, User.all.map { |u| [u.name, u.id] },
+              {}, {class: 'select2 form-control'}
+      .form-group
         = f.label :erp_number, 'ERP number', class: 'col-sm-4 control-label'
         .col-sm-8
           = f.text_field :erp_number, class: 'form-control'

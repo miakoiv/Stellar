@@ -11,6 +11,10 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
+          %label.col-sm-4.control-label Name
+          .col-sm-8
+            %p.form-control-static= @user.name
+        .form-group
           %label.col-sm-4.control-label E-mail
           .col-sm-8
             %p.form-control-static= @user.email

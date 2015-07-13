@@ -87,13 +87,18 @@ ActiveRecord::Schema.define(version: 20150708064056) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",      null: false
-    t.integer  "user_id",       null: false
+    t.integer  "store_id",         null: false
+    t.integer  "user_id",          null: false
     t.integer  "order_type_id"
     t.datetime "ordered_at"
     t.datetime "approved_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "company_name"
+    t.string   "contact_person"
+    t.text     "billing_address"
+    t.text     "shipping_address"
+    t.text     "notes"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id"
@@ -141,15 +146,17 @@ ActiveRecord::Schema.define(version: 20150708064056) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "stores", force: :cascade do |t|
+    t.integer  "contact_person_id", null: false
     t.integer  "erp_number"
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",                         null: false
+    t.string   "name",                             null: false
     t.string   "email",               default: "", null: false
     t.string   "encrypted_password",  default: "", null: false
     t.datetime "remember_created_at"

@@ -8,6 +8,7 @@ class Store < ActiveRecord::Base
 
   after_create :assign_slug
 
+  belongs_to :contact_person, class_name: 'User'
   has_many :categories
   has_many :products
   has_many :orders

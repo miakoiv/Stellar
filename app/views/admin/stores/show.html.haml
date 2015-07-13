@@ -13,6 +13,10 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
+          %label.col-sm-4.control-label Contact person
+          .col-sm-8
+            %p.form-control-static= @store.contact_person.name
+        .form-group
           %label.col-sm-4.control-label ERP number
           .col-sm-8
             %p.form-control-static= @store.erp_number

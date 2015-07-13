@@ -6,26 +6,24 @@
     %span.small= @order.to_s
 
 .row
-  .col-sm-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label Order type
-          .col-sm-8
-            %p.form-control-static= @order.order_type
-        .form-group
-          %label.col-sm-4.control-label Ordered at
-          .col-sm-8
-            %p.form-control-static= @order.ordered_at
+  .col-sm-5
+    = form_for @order, html: {class: 'form-horizontal', role: 'form'} do |f|
+      .panel.panel-default
+        .panel-body
+          = render partial: 'orders/form_fields', locals: {f: f}
+          .form-group
+            .col-sm-offset-4.col-sm-8
+              = f.submit class: 'btn btn-primary'
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-2 Product code
-        %th Product title
-        %th.col-xs-1.text-right Amount
-        %th.col-xs-2
+  .col-sm-7
+    .table-responsive
+      %table.table.table-striped.table-hover.table-loose
+        %thead
+          %tr
+            %th.col-xs-2 Product code
+            %th Product title
+            %th.col-xs-2.text-right Amount
+            %th
 
-    %tbody
-      = render partial: 'order_items/order_item', collection: @order.order_items
+        %tbody
+          = render partial: 'order_items/order_item', collection: @order.order_items

@@ -18,6 +18,7 @@ ImageType.create(purpose: 'technical', name: 'Technical')
 ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 
 Store.create(
+  contact_person_id: 2,
   erp_number: 1545,
   name: 'Tikkurila'
 )
@@ -30,18 +31,21 @@ Category.create(store_id: 1, name: 'Tinting Area')
 
 User.create(
   store_id: 1,
+  name: 'Sami Rosenblad',
   email: 'rosenblad@gmail.com',
   password: 'rush2112',
   roles: [Role.first],
 )
 User.create(
   store_id: 1,
+  name: 'Mikko Kaukojärvi',
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
   password: 'powerrangers',
   roles: [Role.first],
 )
 
 Store.create(
+  contact_person_id: 2,
   erp_number: 110007,
   name: 'Intersport Finland'
 )

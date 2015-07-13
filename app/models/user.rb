@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
+
+  validates :name, presence: true
+
+
   def self.options
     all.map { |u| [u.email, u.id] }
   end
