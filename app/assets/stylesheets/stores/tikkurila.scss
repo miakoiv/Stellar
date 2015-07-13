@@ -108,21 +108,27 @@
     .product-description {
       @extend .col-sm-4;
 
-      .product-code {
-        margin-bottom: 10px;
+      .product-stock {
+        @extend .lead;
+        line-height: 1;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .body-text {
+        margin-top: 10px;
       }
 
       .product-pricing {
-        @extend .col-sm-4;
+        @extend .col-sm-6;
         @extend .lead;
         @extend .text-primary;
-        line-height: 40px;
       }
 
-      .product-stock {
-        @extend .col-sm-8;
+      .product-code {
+        @extend .col-sm-6;
         @extend .text-right;
-        line-height: 40px;
+        margin-bottom: 0;
       }
     }
 
