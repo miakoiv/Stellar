@@ -1,9 +1,4 @@
 .form-group
-  = f.label :order_type_id, class: 'col-sm-4 control-label'
-  .col-sm-8
-    = f.select :order_type_id, OrderType.options,
-        {}, {class: 'select2 form-control', style: 'width: 100%'}
-.form-group
   = f.label :company_name, class: 'col-sm-4 control-label'
   .col-sm-8
     = f.text_field :company_name, class: 'form-control'
@@ -12,18 +7,31 @@
   .col-sm-8
     = f.text_field :contact_person, class: 'form-control'
 .form-group
-  = f.label :shipping_at, class: 'col-sm-4 control-label'
+  = f.label :order_type_id, class: 'col-sm-4 control-label'
   .col-sm-8
-    = f.date_field :shipping_at, class: 'form-control'
-.form-group
-  = f.label :billing_address, class: 'col-sm-4 control-label'
-  .col-sm-8
-    = f.text_area :billing_address, rows: 4, class: 'form-control'
-.form-group
-  = f.label :shipping_address, class: 'col-sm-4 control-label'
-  .col-sm-8
-    = f.text_area :shipping_address, rows: 4, class: 'form-control'
+    = f.select :order_type_id, OrderType.options,
+        {}, {class: 'select2 form-control', style: 'width: 100%'}
+%fieldset#shipping-info.collapse{class: @order.order_type.id == 2 ? 'in' : ''}
+  .form-group
+    = f.label :shipping_at, class: 'col-sm-4 control-label'
+    .col-sm-8
+      = f.date_field :shipping_at, class: 'form-control'
+  .form-group
+    = f.label :billing_address, class: 'col-sm-4 control-label'
+    .col-sm-8
+      = f.text_area :billing_address, rows: 4, class: 'form-control'
+  .form-group
+    = f.label :shipping_address, class: 'col-sm-4 control-label'
+    .col-sm-8
+      = f.text_area :shipping_address, rows: 4, class: 'form-control'
 .form-group
   = f.label :notes, class: 'col-sm-4 control-label'
   .col-sm-8
     = f.text_area :notes, rows: 4, class: 'form-control'
+
+:coffee
+  $('#order_order_type_id').on 'change', (e) ->
+    if e.val == '2'
+      $('#shipping-info').addClass 'in'
+    else
+      $('#shipping-info').removeClass 'in'

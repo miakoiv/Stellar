@@ -34,18 +34,19 @@
           %label.col-sm-4.control-label Contact person
           .col-sm-8
             %p.form-control-static= @order.contact_person
-        .form-group
-          %label.col-sm-4.control-label Shipping at
-          .col-sm-8
-            %p.form-control-static= @order.shipping_at
-        .form-group
-          %label.col-sm-4.control-label Billing address
-          .col-sm-8
-            %p.form-control-static.pre><= @order.billing_address
-        .form-group
-          %label.col-sm-4.control-label Shipping address
-          .col-sm-8
-            %p.form-control-static.pre><= @order.shipping_address
+        #shipping-info.collapse{class: @order.order_type.id == 2 ? 'in' : ''}
+          .form-group
+            %label.col-sm-4.control-label Shipping at
+            .col-sm-8
+              %p.form-control-static= @order.shipping_at
+          .form-group
+            %label.col-sm-4.control-label Billing address
+            .col-sm-8
+              %p.form-control-static.pre><= @order.billing_address
+          .form-group
+            %label.col-sm-4.control-label Shipping address
+            .col-sm-8
+              %p.form-control-static.pre><= @order.shipping_address
         .form-group
           %label.col-sm-4.control-label Notes
           .col-sm-8
