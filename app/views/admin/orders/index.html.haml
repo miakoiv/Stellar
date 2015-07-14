@@ -4,29 +4,15 @@
       = icon('plus', 'New Order')
   %h1= icon('truck', 'Orders')
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-1 Date
-        %th.col-xs-2 Order type
-        %th User
-        %th.col-xs-1 Items
-        %th.col-xs-1 Shipping at
-        %th.col-xs-1 Approved
-        %th.col-xs-2
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li.active{role: 'presentation'}
+    %a{href: '#orders', role: 'tab', data: {toggle: 'tab'}} Current orders
+  %li{role: 'presentation'}
+    %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}} Approved orders
 
-    %tbody
-      = content_tag_for :tr, @orders do |order|
-        %td= order.ordered_at.to_date
-        %td= order.order_type
-        %td= order.user
-        %td= order.order_items.count
-        %td= order.shipping_at
-        %td= order.approval ? icon('check') : ''
-        %td.text-right
-          = link_to icon('info', 'Show'), admin_order_path(order),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Order)
-            = link_to icon('edit', 'Edit'), edit_admin_order_path(order),
-                class: 'btn btn-default btn-sm'
+.tab-content
+  #orders.tab-pane.active
+    = render partial: 'admin/orders/table', object: @orders, as: :orders
+
+  #approved.tab-pane
+    = render partial: 'admin/orders/table', object: @approved, as: :orders

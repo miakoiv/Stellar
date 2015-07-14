@@ -87,8 +87,8 @@ ActiveRecord::Schema.define(version: 20150708064056) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",         null: false
-    t.integer  "user_id",          null: false
+    t.integer  "store_id",                   null: false
+    t.integer  "user_id",                    null: false
     t.integer  "order_type_id"
     t.datetime "ordered_at"
     t.date     "shipping_at"
@@ -98,9 +98,14 @@ ActiveRecord::Schema.define(version: 20150708064056) do
     t.text     "billing_address"
     t.text     "shipping_address"
     t.text     "notes"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.text     "archived_copy"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "store_name"
+    t.string   "store_contact_person_name"
+    t.string   "store_contact_person_email"
+    t.string   "user_name"
+    t.string   "user_email"
+    t.string   "order_type_name"
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id"

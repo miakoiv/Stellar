@@ -17,23 +17,21 @@ class Order < ActiveRecord::Base
   # Unordered orders is the scope for shopping carts.
   scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
 
-  # Archived orders have been approved.
-  scope :archived, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
+  # Approved orders.
+  scope :approved, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
 
 
   def approval
     !!approved_at.present?
   end
 
-  # Setting approval status also updates
-  # the archived copy in JSON format.
+  # Setting approval status also archives the order and its order items.
   def approval=(status)
     case status
     when '1'
       archive!
       update(approved_at: Time.current)
     when '0'
-      unarchive!
       update(approved_at: nil)
     else
       raise "Unknown approval status #{status}"
@@ -50,43 +48,15 @@ class Order < ActiveRecord::Base
     new_record? ? 'New order' : ("%08d" % id)
   end
 
-  def as_json(options = {})
-    super(
-      only: [
-        :ordered_at, :approved_at, :company_name, :contact_person,
-        :billing_address, :shipping_address, :notes
-      ],
-      include: {
-        store: {
-          only: :name,
-          include: {
-            contact_person: {
-              only: [:name, :email]
-            }
-          }
-        },
-        user: {
-          only: [:name, :email]
-        },
-        order_items: {
-          only: :amount,
-          include: {
-            product: {
-              only: [:code, :customer_code, :title, :subtitle, :sales_price]
-            }
-          }
-        }
-      }
-    )
-  end
-
   private
     def archive!
-      update(archived_copy: to_json)
+      update(
+        store_name: store.name,
+        store_contact_person_name: store.contact_person.name,
+        store_contact_person_email: store.contact_person.email,
+        user_name: user.name,
+        user_email: user.email,
+        order_type_name: order_type.name
+      )
     end
-
-    def unarchive!
-      update(archived_copy: nil)
-    end
-
 end

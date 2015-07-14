@@ -41,6 +41,10 @@ i.icon {
   }
 }
 
+.nav-tabs {
+  margin-bottom: 15px;
+}
+
 label.import:before {
   content: "❖ ";
   color: $state-info-text;

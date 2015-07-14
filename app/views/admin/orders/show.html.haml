@@ -15,11 +15,13 @@
         .form-group
           %label.col-sm-4.control-label User
           .col-sm-8
-            %p.form-control-static= @order.user
+            %p.form-control-static
+              = @order.approval ? "#{@order.user_name} <#{@order.user_email}>" : @order.user
         .form-group
           %label.col-sm-4.control-label Order type
           .col-sm-8
-            %p.form-control-static= @order.order_type
+            %p.form-control-static
+              = @order.approval ? @order.order_type_name : @order.order_type
         .form-group
           %label.col-sm-4.control-label Ordered at
           .col-sm-8

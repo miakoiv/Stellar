@@ -13,7 +13,15 @@ class CreateOrders < ActiveRecord::Migration
       t.text :shipping_address
       t.text :notes
       t.timestamps null: false
-      t.text :archived_copy
+
+      # The rest of the fields are permanent copies of
+      # store, user, and order type attributes.
+      t.string :store_name
+      t.string :store_contact_person_name
+      t.string :store_contact_person_email
+      t.string :user_name
+      t.string :user_email
+      t.string :order_type_name
     end
   end
 end

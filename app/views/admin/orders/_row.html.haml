@@ -1,0 +1,12 @@
+= content_tag_for :tr, order do
+  %td= order.ordered_at.to_date
+  %td= order.order_type
+  %td= order.user
+  %td= order.order_items.count
+  %td= order.shipping_at
+  %td.text-right
+    = link_to icon('info', 'Show'), admin_order_path(order),
+        class: 'btn btn-default btn-sm'
+    - if current_user.can_update?(Order)
+      = link_to icon('edit', 'Edit'), edit_admin_order_path(order),
+          class: 'btn btn-default btn-sm'
