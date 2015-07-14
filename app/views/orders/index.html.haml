@@ -12,7 +12,7 @@
         %th.col-xs-2
 
     %tbody
-      = content_tag_for(:tr, @orders) do |order|
+      = content_tag_for :tr, @orders do |order|
         %td= order.ordered_at.to_date
         %td= order.order_type
         %td= order.order_items.count
