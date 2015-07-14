@@ -28,6 +28,10 @@
           %label.col-sm-4.control-label Semantic name
           .col-sm-8
             %p.form-control-static= @store.slug
+        .form-group
+          %label.col-sm-4.control-label Theme
+          .col-sm-8
+            %p.form-control-static= @store.theme
 
   .col-sm-6
     = render partial: 'admin/images/table', object: @store, as: :imageable
