@@ -5,6 +5,7 @@ class CreateStores < ActiveRecord::Migration
       t.integer :erp_number
       t.string :name
       t.string :slug
+      t.string :theme
 
       t.timestamps null: false
     end

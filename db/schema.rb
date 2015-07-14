@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20150708064056) do
     t.integer  "erp_number"
     t.string   "name"
     t.string   "slug"
+    t.string   "theme"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
