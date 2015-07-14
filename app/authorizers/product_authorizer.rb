@@ -3,6 +3,8 @@
 class ProductAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user)
+    user.is_site_manager?  ||
+    user.is_store_manager? ||
     false
   end
 
