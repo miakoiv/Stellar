@@ -15,4 +15,14 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+
+  def archive!
+    update(
+      product_code: product.code,
+      product_customer_code: product.customer_code,
+      product_title: product.title,
+      product_subtitle: product.subtitle,
+      product_sales_price: product.sales_price
+    )
+  end
 end

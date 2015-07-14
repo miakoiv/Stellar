@@ -68,11 +68,16 @@ ActiveRecord::Schema.define(version: 20150708064056) do
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id"
 
   create_table "order_items", force: :cascade do |t|
-    t.integer  "order_id",   null: false
-    t.integer  "product_id", null: false
+    t.integer  "order_id",                                      null: false
+    t.integer  "product_id",                                    null: false
     t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "product_code"
+    t.string   "product_customer_code"
+    t.string   "product_title"
+    t.string   "product_subtitle"
+    t.decimal  "product_sales_price",   precision: 8, scale: 2
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"

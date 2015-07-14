@@ -50,13 +50,18 @@ class Order < ActiveRecord::Base
 
   private
     def archive!
-      update(
-        store_name: store.name,
-        store_contact_person_name: store.contact_person.name,
-        store_contact_person_email: store.contact_person.email,
-        user_name: user.name,
-        user_email: user.email,
-        order_type_name: order_type.name
-      )
+      transaction do
+        update(
+          store_name: store.name,
+          store_contact_person_name: store.contact_person.name,
+          store_contact_person_email: store.contact_person.email,
+          user_name: user.name,
+          user_email: user.email,
+          order_type_name: order_type.name
+        )
+        order_items.each do |item|
+          item.archive!
+        end
+      end
     end
 end
