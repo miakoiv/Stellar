@@ -57,6 +57,8 @@
     .product {
       @extend .col-sm-4;
       @extend .col-lg-2;
+      float: none;
+      display: inline-block;
 
       a {
         display: block;
