@@ -1,0 +1,8 @@
+%ul#sub-page-nav.nav.nav-stacked.nav-pills
+  - sub_pages = if page.sub_pages.any?
+    - page.sub_pages
+  - else
+    - page.parent_page.present? ? page.parent_page.sub_pages : []
+
+  - sub_pages.each do |page|
+    = active_link_to page, show_page_path(page), wrap_tag: :li

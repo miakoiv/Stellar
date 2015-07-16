@@ -1,0 +1,3 @@
+%ul#page-nav.nav.nav-tabs{role: 'navigation'}
+  - @pages.each do |page|
+    = active_link_to page, show_page_path(page), wrap_tag: :li

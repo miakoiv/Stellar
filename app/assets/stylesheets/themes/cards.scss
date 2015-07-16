@@ -8,7 +8,7 @@
   padding-bottom: 120px;
   overflow-y: scroll;
 
-  .navbar {
+  #main-nav {
     @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
   }
 
@@ -20,8 +20,18 @@
     width: auto;
   }
 
-  .page-content {
+  #page-nav {
     margin-top: 20px;
+  }
+  #sub-page-nav {
+    @extend .col-sm-2;
+  }
+  .page-content {
+    @extend .col-sm-8;
+
+    img {
+      @extend .img-responsive;
+    }
   }
 
   .categories {
