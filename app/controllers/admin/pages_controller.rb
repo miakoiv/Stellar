@@ -37,8 +37,8 @@ class Admin::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to admin_page_path(@page), notice: 'Page was successfully created.' }
-        format.json { render :show, status: :created, location: admin_page_path(@page) }
+        format.html { redirect_to edit_admin_page_path(@page), notice: 'Page was successfully created.' }
+        format.json { render :edit, status: :created, location: admin_page_path(@page) }
       else
         format.html { render :new }
         format.json { render json: @page.errors, status: :unprocessable_entity }

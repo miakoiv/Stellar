@@ -6,7 +6,11 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    redirect_to show_page_path(@pages.first)
+    if @pages.any?
+      redirect_to show_page_path(@pages.first)
+    else
+      redirect_to store_path
+    end
   end
 
   # GET /pages/1

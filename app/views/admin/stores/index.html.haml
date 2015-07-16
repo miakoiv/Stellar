@@ -27,7 +27,7 @@
                   admin_stores_path(store_id: store),
                   class: 'btn btn-default btn-sm'
             = link_to icon('cubes', 'View'),
-                root_path(store_id: store), class: 'btn btn-default btn-sm'
+                store_path(store_id: store), class: 'btn btn-default btn-sm'
             = link_to icon('info', 'Show'), admin_store_path(store),
                 class: 'btn btn-default btn-sm'
             - if current_user.can_update?(Store)
