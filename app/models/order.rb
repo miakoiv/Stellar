@@ -4,7 +4,6 @@ class Order < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
-  include ActiveModel::Serialization
 
   belongs_to :store
   belongs_to :user
