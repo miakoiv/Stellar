@@ -1,0 +1,32 @@
+.page-header
+  - if current_user.can_create?(Page)
+    = link_to new_admin_page_path, class: 'btn btn-primary' do
+      = icon('plus', 'New page')
+  %h1= icon('files-o', 'Pages')
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th Title
+        %th.col-xs-4 Parent page
+        %th.col-xs-2
+
+    %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
+      = content_tag_for :tr, @pages do |page|
+        %td= page.title
+        %td= page.parent_page
+        %td.text-right
+          = link_to icon('info', 'Show'), admin_page_path(page),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(Page)
+            = link_to icon('edit', 'Edit'), edit_admin_page_path(page),
+                class: 'btn btn-default btn-sm'
+
+:coffee
+  $('.sortable').sortable(
+    items: 'tr'
+    placeholder: '#{tr_placeholder(3)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_pages_path}',
+      {reorder: $('tr', this).map(-> this.id).get()}

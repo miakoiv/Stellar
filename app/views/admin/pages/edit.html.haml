@@ -1,0 +1,14 @@
+.page-header
+  = link_to admin_pages_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', 'Back')
+  = link_to admin_page_path(@page), class: 'btn btn-primary' do
+    = icon('info-circle', 'Show')
+  %h1= icon('file-text-o', @page)
+
+.row
+  .col-sm-7
+    = render 'form'
+
+  .col-sm-5
+    = render partial: 'admin/images/edit_table', object: @page, as: :imageable
+    = render partial: 'admin/images/dropzone', object: @page, as: :imageable

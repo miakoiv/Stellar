@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708064056) do
+ActiveRecord::Schema.define(version: 20150716065216) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           null: false
@@ -116,6 +116,19 @@ ActiveRecord::Schema.define(version: 20150708064056) do
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id"
   add_index "orders", ["store_id"], name: "index_orders_on_store_id"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "store_id",       null: false
+    t.integer  "parent_page_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "priority"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "pages", ["parent_page_id"], name: "index_pages_on_parent_page_id"
+  add_index "pages", ["store_id"], name: "index_pages_on_store_id"
 
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                              null: false

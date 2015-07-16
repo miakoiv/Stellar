@@ -1,0 +1,21 @@
+= form_for [:admin, @page], html: {class: 'form-horizontal', role: 'form'} do |f|
+  .panel.panel-default
+    .panel-body
+      = render 'shared/errors', object: @page
+
+      .form-group
+        = f.label :parent_page, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.select :parent_page_id, current_store.page_options,
+              {include_blank: blank_option}, {class: 'select2 form-control'}
+      .form-group
+        = f.label :title, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_field :title, class: 'form-control'
+      .form-group
+        = f.label :content, class: 'col-sm-4 control-label'
+        .col-sm-8
+          = f.text_area :content, rows: 20, class: 'form-control wysihtml5'
+      .form-group
+        .col-sm-offset-4.col-sm-8
+          = f.submit class: 'btn btn-primary'

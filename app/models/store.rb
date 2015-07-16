@@ -13,6 +13,7 @@ class Store < ActiveRecord::Base
   has_many :products
   has_many :orders
   has_many :users
+  has_many :pages
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -26,6 +27,10 @@ class Store < ActiveRecord::Base
 
   def user_options
     users.map { |u| [u.to_s, u.id] }
+  end
+
+  def page_options
+    pages.map { |p| [p.to_s, p.id] }
   end
 
   def to_s

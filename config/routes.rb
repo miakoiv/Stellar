@@ -57,6 +57,10 @@ Rails.application.routes.draw do
       resources :images, shallow: true
       post :reorder, on: :collection
     end
+    resources :pages do
+      resources :images, shallow: true
+      post :reorder, on: :collection
+    end
     resources :orders
     resources :users
 
