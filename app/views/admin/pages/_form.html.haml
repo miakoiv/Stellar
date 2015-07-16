@@ -4,18 +4,32 @@
       = render 'shared/errors', object: @page
 
       .form-group
-        = f.label :parent_page, class: 'col-sm-4 control-label'
-        .col-sm-8
+        = f.label :parent_page, class: 'col-sm-2 control-label'
+        .col-sm-10
           = f.select :parent_page_id, current_store.page_options,
               {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
-        = f.label :title, class: 'col-sm-4 control-label'
-        .col-sm-8
+        = f.label :title, class: 'col-sm-2 control-label'
+        .col-sm-10
           = f.text_field :title, class: 'form-control'
       .form-group
-        = f.label :content, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_area :content, rows: 20, class: 'form-control wysihtml5'
+        = f.label :content, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_area :content, class: 'form-control'
       .form-group
-        .col-sm-offset-4.col-sm-8
+        .col-sm-offset-2.col-sm-10
           = f.submit class: 'btn btn-primary'
+
+:coffee
+  $('#page_content').editable
+    inlineMode: false
+    imageUploadURL: '#{admin_page_images_path(@page)}'
+    imageUploadParam: 'image[attachment]'
+    imageUploadParams:
+      authenticity_token: '#{form_authenticity_token}'
+    imageDeleteURL: '#{admin_delete_image_path}'
+  .on 'editable.afterRemoveImage', (e, editor, img) ->
+    editor.options.imageDeleteParams =
+      url: img.attr 'src'
+      authenticity_token: '#{form_authenticity_token}'
+    editor.deleteImage img

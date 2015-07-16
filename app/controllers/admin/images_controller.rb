@@ -23,8 +23,10 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.json { render json: @image, status: 200 }
+        format.html { render json: {link: @image.url(:lightbox, false)} } # for Froala
+        format.json { render json: @image, status: 200 } # for dropzone
       else
+        format.html { render json: {error: 'Image upload failed.'} }
         format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
       end
     end
@@ -48,6 +50,19 @@ class Admin::ImagesController < ApplicationController
     respond_to do |format|
       if @image.destroy
         format.js
+      end
+    end
+  end
+
+  # POST /admin/images/delete
+  # This method is for Froala, which wants to delete images using POST
+  # requests, and supplies the image url as param.
+  def delete
+    @image = Image.at_url(params[:url], :lightbox)
+
+    respond_to do |format|
+      if @image.destroy
+        format.html { render nothing: true, status: 200 }
       end
     end
   end

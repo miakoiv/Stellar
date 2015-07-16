@@ -6,22 +6,17 @@
       = icon('pencil-square', 'Edit')
   %h1= icon('file-text-o', @page)
 
-.row
-  .col-sm-7
-    .panel.panel-default
-      .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label Parent page
-          .col-sm-8
-            %p.form-control-static= @page.parent_page
-        .form-group
-          %label.col-sm-4.control-label Title
-          .col-sm-8
-            %p.form-control-static= @page.title
-        .form-group
-          %label.col-sm-4.control-label Content
-          .col-sm-8.form-control-static
-            = @page.content.html_safe if @page.content.present?
-
-  .col-sm-5
-    = render partial: 'admin/images/table', object: @page, as: :imageable
+.panel.panel-default
+  .panel-body.form-horizontal
+    .form-group
+      %label.col-sm-2.control-label Parent page
+      .col-sm-10
+        %p.form-control-static= @page.parent_page
+    .form-group
+      %label.col-sm-2.control-label Title
+      .col-sm-10
+        %p.form-control-static= @page.title
+    .form-group
+      %label.col-sm-2.control-label Content
+      .col-sm-10.form-control-static
+        = @page.content.html_safe if @page.content.present?

@@ -61,8 +61,8 @@ gem 'select2-rails', '~> 3.5.9'
 # Unobtrusive flash
 gem 'unobtrusive_flash', '>= 3'
 
-# Bootstrappy wysihtml5
-gem 'bootstrap-wysihtml5-rails'
+# Froala for wysiwyg editing
+gem 'wysiwyg-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

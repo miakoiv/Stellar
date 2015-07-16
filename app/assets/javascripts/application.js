@@ -23,7 +23,9 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/dropdown
-//= require bootstrap-wysihtml5
+//= require froala_editor.min.js
+//= require plugins/file_upload.min.js
+//= require plugins/lists.min.js
 //= require dropzone
 //= require magnific-popup
 //= require select2

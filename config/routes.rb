@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     resources :users
 
     post '/images/reorder' => 'images#reorder', as: :reorder_images
+    post '/images/delete'  => 'images#delete', as: :delete_image
   end
 
 

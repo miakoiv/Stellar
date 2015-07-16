@@ -17,11 +17,6 @@ $.fn.extend
       width: 'resolve'
       dropdownAutoWidth: true
 
-    $('.wysihtml5', this).each ->
-      $(this).wysihtml5
-        locale: 'en-terse'
-        stylesheets: ["<%= asset_path('fonts.css') %>"]
-
 jQuery ->
 
   window.wiselinks = new Wiselinks()

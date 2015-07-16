@@ -5,10 +5,4 @@
     = icon('info-circle', 'Show')
   %h1= icon('file-text-o', @page)
 
-.row
-  .col-sm-7
-    = render 'form'
-
-  .col-sm-5
-    = render partial: 'admin/images/edit_table', object: @page, as: :imageable
-    = render partial: 'admin/images/dropzone', object: @page, as: :imageable
+= render 'form'
