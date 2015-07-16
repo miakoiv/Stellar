@@ -36,3 +36,12 @@
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'
+
+:coffee
+  $('#product_description').editable
+    inlineMode: false
+    buttons: [
+      'bold', 'italic', 'underline', 'formatBlock', 'align',
+      'insertOrderedList', 'insertUnorderedList',
+      'undo', 'redo'
+    ]

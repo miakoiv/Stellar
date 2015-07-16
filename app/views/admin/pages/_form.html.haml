@@ -23,6 +23,11 @@
 :coffee
   $('#page_content').editable
     inlineMode: false
+    buttons: [
+      'bold', 'italic', 'underline', 'formatBlock', 'align',
+      'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',
+      'undo', 'redo'
+    ]
     imageUploadURL: '#{admin_page_images_path(@page)}'
     imageUploadParam: 'image[attachment]'
     imageUploadParams:

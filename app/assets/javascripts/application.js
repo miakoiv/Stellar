@@ -24,8 +24,8 @@
 //= require bootstrap/popover
 //= require bootstrap/dropdown
 //= require froala_editor.min.js
-//= require plugins/file_upload.min.js
 //= require plugins/lists.min.js
+//= require plugins/tables.min.js
 //= require dropzone
 //= require magnific-popup
 //= require select2
