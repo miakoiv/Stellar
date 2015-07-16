@@ -1,0 +1,6 @@
+/*!
+ * froala_editor v1.2.8 (https://www.froala.com/wysiwyg-editor)
+ * License https://www.froala.com/wysiwyg-editor/terms
+ * Copyright 2014-2015 Froala Labs
+ */
+Array.prototype.indexOf||(Array.prototype.indexOf=function(t){if(void 0===this||null===this)throw TypeError();var e=Object(this),i=e.length>>>0;if(0===i)return-1;var s=0;if(arguments.length>0&&(s=Number(arguments[1]),isNaN(s)?s=0:0!==s&&s!==1/0&&s!==-(1/0)&&(s=(s>0||-1)*Math.floor(Math.abs(s)))),s>=i)return-1;for(var n=s>=0?s:Math.max(i-Math.abs(s),0);i>n;n++)if(n in e&&e[n]===t)return n;return-1}),String.prototype.trim||(String.prototype.trim=function(){return String(this).replace(/^\s+/,"").replace(/\s+$/,"")}),Object.keys||(Object.keys=function(t){var e=[];for(var i in t)t.hasOwnProperty(i)&&e.push(i);return e});var Node=Node||{ELEMENT_NODE:1,ATTRIBUTE_NODE:2,TEXT_NODE:3};$.Editable.prototype.saveSelection=function(){var t=window.document.selection;this.savedSelection="None"!=t.type?t.createRange():null},$.Editable.prototype.restoreSelection=function(){this.selectionDisabled||this.savedSelection&&this.savedSelection.select()},$.Editable.prototype.getSelectionTextInfo=function(){return!1},$.Editable.DEFAULTS.blockTags={n:"Normal",h1:"Heading 1",h2:"Heading 2",h3:"Heading 3",h4:"Heading 4",h5:"Heading 5",h6:"Heading 6"};
