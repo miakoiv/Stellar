@@ -1,5 +1,5 @@
 %ul.nav.navbar-nav
-  = active_link_to icon('cubes', 'Store'), root_path, wrap_tag: :li,
+  = active_link_to icon('cubes', 'Store'), store_path, wrap_tag: :li,
       active: [['store'], ['index', 'show_category', 'show_product']]
   - if current_user.can?(:shop)
     = active_link_to icon('shopping-cart', 'Cart'), show_cart_path, wrap_tag: :li, active: :exact

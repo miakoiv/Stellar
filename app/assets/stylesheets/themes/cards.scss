@@ -20,6 +20,10 @@
     width: auto;
   }
 
+  .page-content {
+    margin-top: 20px;
+  }
+
   .categories {
     @extend .clearfix;
     margin: 0 -1*$grid-gutter-width 20px;
