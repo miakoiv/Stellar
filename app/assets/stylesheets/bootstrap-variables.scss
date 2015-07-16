@@ -109,7 +109,7 @@ $line-height-small:         1.5 !default;
 
 $border-radius-base:        7px !default;
 $border-radius-large:       9px !default;
-$border-radius-small:       3px !default;
+$border-radius-small:       5px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -117,9 +117,9 @@ $component-active-color:    #fff !default;
 $component-active-bg:       $brand-primary !default;
 
 //** Width of the `border` for generating carets that indicator dropdowns.
-$caret-width-base:          6px !default;
+$caret-width-base:          5px !default;
 //** Carets increase slightly in size for larger components.
-$caret-width-large:         8px !default;
+$caret-width-large:         7px !default;
 
 
 //== Tables

@@ -26,7 +26,7 @@ module ApplicationHelper
         data: {toggle: 'tooltip'})
     when :thumbnail
       icon(image.document_icon,
-        image.attachment_file_name.truncate(20, omission: '…'),
+        image.attachment_file_name.truncate(10, omission: '…'),
         class: 'fa-2x')
     else
       icon(image.document_icon,

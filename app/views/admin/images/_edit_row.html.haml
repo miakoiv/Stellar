@@ -1,6 +1,6 @@
 = content_tag_for :tr, image do
   %td
-    = image_variant_tag(image, :thumbnail, class: 'img-rounded',
+    = image_variant_tag(image, :thumbnail,
         data: {toggle: 'popover', placement: 'left',
           content: "#{image_variant_tag(image, :matchbox)}"})
   %td
