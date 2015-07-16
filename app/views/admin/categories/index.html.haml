@@ -28,7 +28,7 @@
 :coffee
   $('.sortable').sortable(
     items: 'tr'
-    placeholder: '#{tr_placeholder(5)}'
+    placeholder: '#{tr_placeholder(4)}'
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{reorder_admin_categories_path}',
       {reorder: $('tr', this).map(-> this.id).get()}
