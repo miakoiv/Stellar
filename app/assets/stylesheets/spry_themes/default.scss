@@ -1,82 +1,51 @@
-@import "bootstrap-variables.scss";
-@import "bootstrap-sprockets.scss";
-@import "bootstrap.scss";
-
 /*
- * Theme specific styles targeting the element .cards
+ * Theme specific styles targeting the element .default
  * and its descendants.
  */
 
-.cards {
-  padding-top: $navbar-height;
-  padding-bottom: 120px;
+.default {
   overflow-y: scroll;
 
-  #main-nav {
-    @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-  }
-
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: $grid-gutter-width;
-    padding-right: $grid-gutter-width;
-    width: auto;
-  }
-
-  #page-nav {
-    margin-top: 20px;
-  }
-  #sub-page-nav {
-    @extend .col-sm-2;
-  }
-  .page-content {
-    @extend .col-sm-8;
-
-    img {
-      @extend .img-responsive;
-    }
-  }
-
   .categories {
-    @extend .clearfix;
-    margin: 0 -1*$grid-gutter-width 20px;
-    padding: 20px $grid-gutter-width/2 0;
-    background: $gray;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
+    margin-bottom: 20px;
 
     .category {
       display: inline-block;
-      width: 12.5%;
-      min-width: 100px;
-      max-width: 180px;
-      height: 10%;
-      padding: 0 10px;
+      width: 16.67%;
+      min-width: 150px;
+      margin-right: 10px;
+      margin-bottom: 10px;
 
       a {
         @extend .thumbnail;
+        display: block;
+        margin: 0;
+        padding: 5px 10px;
+        outline: 0;
         text-decoration: none;
         transition: all 0.2s ease-in-out 0s;
-      }
-      p {
-        margin: 0.5em 0.25em 0;
-        font-size: $font-size-small;
+
+        img {
+          display: none;
+        }
+
+        p {
+          margin: 0;
+        }
       }
     }
     .category.active a {
-      transform: translate(0, -8px) rotateZ(-2.5deg);
-      @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.8));
+      @include box-shadow(0 0 3px 0 $brand-primary);
     }
   }
 
   .products {
-    @extend .row;
 
     .product {
-      @extend .col-sm-4;
-      @extend .col-lg-2;
-      float: none;
       display: inline-block;
+      width: 16.67%;
+      margin-right: 10px;
+      margin-bottom: 10px;
 
       a {
         display: block;
@@ -98,12 +67,7 @@
   }
 
   .product-detail {
-    @extend .clearfix;
-    position: relative;
-    z-index: $zindex-navbar;
-    margin: 0 -1*$grid-gutter-width;
-    padding: 0 $grid-gutter-width/2 30px;
-    background: $body-bg;
+    @extend .row;
 
     .product-actions {
       @extend .pull-right;
