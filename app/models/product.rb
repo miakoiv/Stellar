@@ -14,10 +14,14 @@ class Product < ActiveRecord::Base
     joins(:product).where(products: {store_id: product.store_id})
   }, foreign_key: :parent_code, primary_key: :code
 
+
+  scope :categorized, -> { where.not(category_id: nil) }
+  scope :uncategorized, -> { where(category_id: nil) }
+
+
   validates :store_id, presence: true
   validates :code, presence: true
   validates :title, presence: true
-
 
   # Performs a stock lookup on a product. Returns a hash like
   # {
