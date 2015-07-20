@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
 
   get 'page/:id'                    => 'pages#show', as: :show_page
+
   get '/store'                      => 'store#index', as: :store
   get '/category/:category_id'      => 'store#show_category', as: :show_category
   get '/product/:product_id'        => 'store#show_product', as: :show_product
@@ -48,6 +49,8 @@ Rails.application.routes.draw do
   #   end
 
   namespace :admin do
+    get '/dashboard' => 'dashboard#index', as: :dashboard
+
     resources :stores do
       resources :images, shallow: true
     end

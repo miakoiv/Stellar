@@ -1,12 +1,14 @@
 %ul.nav.navbar-nav
-  - if current_user.can_read?(Order)
-    = active_link_to icon('truck', 'Orders'), admin_orders_path, wrap_tag: :li
-  - if current_user.can_read?(Product)
-    = active_link_to icon('cube', 'Products'), admin_products_path, wrap_tag: :li
-  - if current_user.can_read?(Category)
-    = active_link_to icon('sitemap', 'Categories'), admin_categories_path, wrap_tag: :li
+  - if current_user.can?(:has_dashboard)
+    = active_link_to icon('tachometer', 'Dashboard'), admin_dashboard_path, wrap_tag: :li
   - if current_user.can_read?(Store)
     = active_link_to icon('cubes', 'Stores'), admin_stores_path, wrap_tag: :li
+  - if current_user.can_read?(Category)
+    = active_link_to icon('sitemap', 'Categories'), admin_categories_path, wrap_tag: :li
+  - if current_user.can_read?(Product)
+    = active_link_to icon('cube', 'Products'), admin_products_path, wrap_tag: :li
+  - if current_user.can_read?(Order)
+    = active_link_to icon('truck', 'Orders'), admin_orders_path, wrap_tag: :li
   - if current_user.can_read?(Page)
     = active_link_to icon('files-o', 'Pages'), admin_pages_path, wrap_tag: :li
   - if current_user.can_read?(User)

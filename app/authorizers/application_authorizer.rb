@@ -25,4 +25,12 @@ class ApplicationAuthorizer < Authority::Authorizer
     user.is_customer?      ||
     false
   end
+
+  # General authorization to access the admin dashboard.
+  def self.authorizes_to_has_dashboard?(user, options = {})
+    user.is_site_manager?  ||
+    user.is_site_monitor?  ||
+    user.is_store_manager? ||
+    false
+  end
 end
