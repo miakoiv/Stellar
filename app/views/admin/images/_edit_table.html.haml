@@ -7,7 +7,7 @@
         %th
 
     %tbody#images.sortable
-      = render partial: 'admin/images/edit_row', collection: imageable.images, as: :image
+      = render partial: 'admin/images/edit_row', collection: imageable.images.ordered, as: :image
 
 :coffee
   $('.sortable').sortable(

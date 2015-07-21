@@ -2,6 +2,6 @@ module Reorderable
   extend ActiveSupport::Concern
 
   included do
-    default_scope { order(:priority) }
+    scope :ordered, -> { order(:priority) }
   end
 end

@@ -16,7 +16,7 @@
             = product.title
           = (product.subtitle || '').truncate(30, omission: '…')
         %td
-          - product.images.each do |image|
+          - product.images.ordered.each do |image|
             = image_variant_tag(image, :icon)
         %td= product.category
         %td.text-right

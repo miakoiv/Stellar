@@ -13,7 +13,7 @@ class Admin::PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   def index
-    @pages = current_store.pages.all
+    @pages = current_store.pages.ordered
   end
 
   # GET /pages/1
