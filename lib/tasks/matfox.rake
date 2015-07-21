@@ -22,8 +22,16 @@ IMPORT_FILES = {
   customers: {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
+    headers: [:code, :erp_number, nil, :customer_code, :sales_price],
+  },
+  # VARASTO,NRO,HYLLY,VARASTOLKM,VARATTULKM,TULOSSA,TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
+  inventory: {
+    file: 'www-nimike_varasto-utf8.csv',
+    multiple: true,
     headers: [
-      :code, :erp_number, nil, :customer_code, :sales_price
+      :inventory_code, :code, :shelf,
+      :quantity_on_hand, :quantity_reserved, :quantity_pending,
+      nil, nil, nil, :value
     ],
   },
   # PAANUMERO,ALINUMERO,PAATMP,ALITMP,LKM,TARVE1,TARVE2,BTARVE1,BTARVE2,SELITE
@@ -70,14 +78,29 @@ namespace :matfox do
           )
         end
 
-        # Update inventory items to match quantities.
-        pending_item = Inventory.for(:manufacturing)
-          .inventory_items.find_or_create_by(code: code)
-        pending_item.update(amount: data[:product][:quantity_pending])
+        # Update inventory items in global inventory.
+        update_inventory(
+          Inventory.global.by_purpose(:manufacturing),
+          code, data[:product][:quantity_pending]
+        )
+        update_inventory(
+          Inventory.global.by_purpose(:shipping),
+          code, data[:product][:quantity_on_hand]
+        )
 
-        on_hand_item = Inventory.for(:shipping)
-          .inventory_items.find_or_create_by(code: code)
-        on_hand_item.update(amount: data[:product][:quantity_on_hand])
+        # Update inventory items in local inventories.
+        next if data[:inventory].nil?
+        data[:inventory].each do |row|
+          store = Store.find_by(inventory_code: row[:inventory_code])
+          update_inventory(
+            store.inventory_for(:manufacturing),
+            code, row[:quantity_pending]
+          )
+          update_inventory(
+            store.inventory_for(:shipping),
+            code, row[:quantity_on_hand]
+          )
+        end
 
         # Assign product relationships.
         next if data[:structure].nil?
@@ -123,5 +146,14 @@ namespace :matfox do
       memo:     data[:product][:memo],
     )
     product
+  end
+
+  # Updates an inventory item by product code in specified inventory,
+  # which may not exist.
+  def update_inventory(inventory, code, quantity)
+    return nil if inventory.nil?
+    inventory.inventory_items.find_or_create_by(code: code).update_columns(
+      amount: quantity
+    )
   end
 end

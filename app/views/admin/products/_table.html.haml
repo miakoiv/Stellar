@@ -20,7 +20,7 @@
           - product.images.each do |image|
             = image_variant_tag(image, :icon)
         %td= product.category
-        %td= product_stock_string(product.stock_lookup)
+        %td= product_stock_string(current_store.stock_lookup(product.code))
         %td.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
               class: 'btn btn-default btn-sm'

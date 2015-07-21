@@ -10,17 +10,16 @@ class InventoryItem < ActiveRecord::Base
 
   default_scope { order(:inventory_id) }
 
-
-  # Returns a hash of stock numbers for a product code,
-  # see Product#stock_lookup for the format.
-  def self.stock(code)
-    stock = {}.tap do |stock|
-      where(code: code).each do |item|
-        stock[item.inventory.purpose] = {
-          current: item.amount || 0,
-          adjustment: 0
-        }
-      end
-    end
+  # Adjustment attribute is calculated on the fly from
+  # orders affecting the stock. OrderItem#adjust! calls
+  # InventoryItem#adjust! via Store#stock_lookup.
+  attr_accessor :adjustment
+  def adjust!(amount)
+    self.adjustment ||= 0
+    self.adjustment += amount
   end
+
+  # Inventory item HTML representation methods.
+  def title; inventory.name; end
+  def klass; inventory.purpose; end
 end

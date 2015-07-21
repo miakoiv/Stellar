@@ -48,12 +48,12 @@ module ApplicationHelper
     content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
   end
 
-  # Pretty-prints a stock lookup hash.
-  def product_stock_string(stock)
-    stock.map do |i, s|
-      content_tag(:span, class: i, title: i, data: {toggle: 'tooltip'}) do
-        content_tag(:span, s[:adjustment] == 0 ? s[:current] :
-          sprintf("%i(%+i)", s[:current], s[:adjustment]))
+  # Pretty-prints an inventory item array from a stock lookup.
+  def product_stock_string(items)
+    items.map do |i|
+      content_tag(:span, class: i.klass, title: i.title, data: {toggle: 'tooltip'}) do
+        content_tag(:span, i.adjustment.nil? ? i.amount || 0 :
+          sprintf("%i(%+i)", i.amount || 0, i.adjustment))
       end
     end.join.html_safe
   end

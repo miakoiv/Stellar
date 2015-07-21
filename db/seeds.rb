@@ -17,12 +17,61 @@ ImageType.create(purpose: 'presentational', name: 'Presentational')
 ImageType.create(purpose: 'technical', name: 'Technical')
 ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 
+#-----------------------------------------------------------------------------
+# General inventory with fuzzy availability, and order type for delivery only.
+
+Inventory.create(id: 1, purpose: 'shipping', fuzzy: true, name: 'Availability')
+
+OrderType.create(
+  id: 1,
+  inventory_id: 1,
+  adjustment_multiplier: -1,
+  name: 'Delivery'
+)
+
+#-----------------------------------------------------------------------------
+# Tikkurila
+#
+# An example using local, store specific inventories
+# without fuzziness in stock availability.
+#
 Store.create(
+  id: 1,
   contact_person_id: 2,
   erp_number: 1545,
+  local_inventory: true,
+  inventory_code: 'VART',
   name: 'Tikkurila',
   theme: 'cards'
 )
+Inventory.create(
+  id: 2,
+  store_id: 1,
+  purpose: 'manufacturing',
+  fuzzy: false,
+  name: 'In manufacturing queue'
+)
+Inventory.create(
+  id: 3,
+  store_id: 1,
+  purpose: 'shipping',
+  fuzzy: false,
+  name: 'Available for shipping'
+)
+
+OrderType.create(
+  id: 2,
+  inventory_id: 2,
+  adjustment_multiplier: 1,
+  name: 'Manufacture products'
+)
+OrderType.create(
+  id: 3,
+  inventory_id: 3,
+  adjustment_multiplier: -1,
+  name: 'Ship products'
+)
+
 Category.create(store_id: 1, name: 'Color Display')
 Category.create(store_id: 1, name: 'Product Placement')
 Category.create(store_id: 1, name: 'Shop Event Material')
@@ -45,7 +94,13 @@ User.create(
   roles: [Role.first],
 )
 
+#-----------------------------------------------------------------------------
+# Intersport Finland
+#
+# An example using global inventories
+#
 Store.create(
+  id: 2,
   contact_person_id: 2,
   erp_number: 110007,
   name: 'Intersport Finland',
@@ -62,17 +117,3 @@ Category.create(store_id: 2, name: 'Sovituskopit')
 Category.create(store_id: 2, name: 'Kassat')
 Category.create(store_id: 2, name: 'Paneeliseinä')
 Category.create(store_id: 2, name: 'Muut kalusteet')
-
-Inventory.create(purpose: 'manufacturing', name: 'Manufacturing')
-Inventory.create(purpose: 'shipping', name: 'Shipping')
-
-OrderType.create(
-  inventory_id: 1,
-  adjustment_multiplier: 1,
-  name: 'Manufacturing'
-)
-OrderType.create(
-  inventory_id: 2,
-  adjustment_multiplier: -1,
-  name: 'Shipping'
-)

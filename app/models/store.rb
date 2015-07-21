@@ -14,6 +14,10 @@ class Store < ActiveRecord::Base
   has_many :orders
   has_many :users
   has_many :pages
+  has_many :inventories
+  def inventories
+    local_inventory? ? super : Inventory.global
+  end
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -21,8 +25,35 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
 
+  # Performs a stock lookup on a product. Returns an array
+  # of inventory items per inventory, adjusted by orders.
+  def stock_lookup(code)
+    stock = [].tap do |stock|
+      inventories.each do |inventory|
+        if (item = inventory.lookup(code))
+          stock << OrderItem.adjust!(item)
+        end
+      end
+    end
+  end
+
+  # Finds the first inventory by purpose.
+  def inventory_for(purpose)
+    inventories.by_purpose(purpose)
+  end
+
   def category_options
     categories.map { |c| [c.name, c.id] }
+  end
+
+  def order_type_options
+    options = [].tap do |options|
+      inventories.each do |i|
+        i.order_types.each do |o|
+          options << [o.name, o.id, {class: i.purpose}]
+        end
+      end
+    end
   end
 
   def user_options

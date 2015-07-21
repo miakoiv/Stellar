@@ -9,9 +9,9 @@
 .form-group
   = f.label :order_type_id, class: 'col-sm-4 control-label'
   .col-sm-8
-    = f.select :order_type_id, OrderType.options,
+    = f.select :order_type_id, current_store.order_type_options,
         {}, {class: 'select2 form-control', style: 'width: 100%'}
-%fieldset#shipping-info.collapse{class: @order.order_type.try(:id) == 2 ? 'in' : ''}
+%fieldset#shipping-info.collapse{class: @order.needs_shipping_info? ? 'in' : ''}
   .form-group
     = f.label :shipping_at, class: 'col-sm-4 control-label'
     .col-sm-8
@@ -31,7 +31,8 @@
 
 :coffee
   $('#order_order_type_id').on 'change', (e) ->
-    if e.val == '2'
+    console.log e
+    if e.added.css == 'shipping'
       $('#shipping-info').addClass 'in'
     else
       $('#shipping-info').removeClass 'in'

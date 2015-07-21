@@ -5,14 +5,18 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
-
-  def self.adjust_stock!(stock, code)
-    joins(:product, order: :order_type)
-        .where(products: {code: code}).each do |item|
+  # Takes an inventory item from Store#stock_lookup and adjusts
+  # its adjustment attribute according to amount of product
+  # in orders concerning the specified inventory.
+  def self.adjust!(inventory_item)
+    joins(:product, order: {order_type: :inventory})
+        .where(products: {code: inventory_item.code})
+        .where(inventories: {id: inventory_item.inventory}).each do |item|
       order_type = item.order.order_type
       multiplier = order_type.adjustment_multiplier
-      stock[order_type.inventory.purpose][:adjustment] += multiplier * item.amount
+      inventory_item.adjust!(multiplier * item.amount)
     end
+    inventory_item
   end
 
 

@@ -43,6 +43,10 @@ class Order < ActiveRecord::Base
     order_item.save
   end
 
+  def needs_shipping_info?
+    order_type.present? && order_type.inventory.purpose == 'shipping'
+  end
+
   def to_s
     new_record? ? 'New order' : ("%08d" % id)
   end

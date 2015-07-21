@@ -50,18 +50,21 @@ ActiveRecord::Schema.define(version: 20150716065216) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
 
   create_table "inventories", force: :cascade do |t|
-    t.integer  "purpose",    default: 0, null: false
+    t.integer  "store_id"
+    t.integer  "purpose",    default: 0,     null: false
+    t.boolean  "fuzzy",      default: false, null: false
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "inventory_items", force: :cascade do |t|
-    t.integer  "inventory_id", null: false
-    t.string   "code",         null: false
+    t.integer  "inventory_id",                         null: false
+    t.string   "code",                                 null: false
     t.integer  "amount"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.decimal  "value",        precision: 8, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "inventory_items", ["code"], name: "index_inventory_items_on_code"
@@ -171,13 +174,15 @@ ActiveRecord::Schema.define(version: 20150716065216) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "stores", force: :cascade do |t|
-    t.integer  "contact_person_id", null: false
+    t.integer  "contact_person_id",                 null: false
     t.integer  "erp_number"
+    t.boolean  "local_inventory",   default: false, null: false
+    t.string   "inventory_code"
     t.string   "name"
     t.string   "slug"
     t.string   "theme"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "users", force: :cascade do |t|

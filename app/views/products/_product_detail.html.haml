@@ -22,7 +22,7 @@
 .product-description
   - if current_user.can?(:shop)
     %p.product-stock
-      = product_stock_string(product.stock_lookup)
+      = product_stock_string(current_store.stock_lookup(product.code))
 
   .body-text><= product.description.html_safe if product.description.present?
   .documents.list-group
