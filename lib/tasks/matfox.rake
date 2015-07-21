@@ -94,11 +94,11 @@ namespace :matfox do
           store = Store.find_by(inventory_code: row[:inventory_code])
           update_inventory(
             store.inventory_for(:manufacturing),
-            code, row[:quantity_pending]
+            code, row[:quantity_pending], row[:shelf], row[:value]
           )
           update_inventory(
             store.inventory_for(:shipping),
-            code, row[:quantity_on_hand]
+            code, row[:quantity_on_hand], row[:shelf], row[:value]
           )
         end
 
@@ -150,10 +150,12 @@ namespace :matfox do
 
   # Updates an inventory item by product code in specified inventory,
   # which may not exist.
-  def update_inventory(inventory, code, quantity)
+  def update_inventory(inventory, code, quantity, shelf = nil, value = nil)
     return nil if inventory.nil?
     inventory.inventory_items.find_or_create_by(code: code).update_columns(
-      amount: quantity
+      amount: quantity,
+      shelf: shelf,
+      value: value
     )
   end
 end

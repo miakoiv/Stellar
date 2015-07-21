@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150716065216) do
   create_table "inventory_items", force: :cascade do |t|
     t.integer  "inventory_id",                         null: false
     t.string   "code",                                 null: false
+    t.string   "shelf"
     t.integer  "amount"
     t.decimal  "value",        precision: 8, scale: 2
     t.datetime "created_at",                           null: false
