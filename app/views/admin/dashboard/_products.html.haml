@@ -1,10 +1,10 @@
 .table-scroller
-  %table.table.table-striped.table-hover
+  %table#inventory.table.table-striped.table-hover
     %thead
       %tr
         %th.col-xs-1 Code
         %th Title
-        %th.col-xs-2 Stock
+        %th.col-xs-1.text-right Stock
         %th.col-xs-1.text-right à
         %th.col-xs-1.text-right Value
 
@@ -21,9 +21,17 @@
           %strong
             = product.title
           = (product.subtitle || '').truncate(30, omission: '…')
-        %td= product_stock_string(stock)
+        %td.text-right= shippable.try(:amount)
         %td.text-right= number_to_currency(shippable.try(:value), unit: '€')
         %td.text-right= number_to_currency(shippable.try(:total_value), unit: '€')
     %tbody
       %tr.info
         %th.text-right{colspan: 5}= number_to_currency(grand_total, unit: '€')
+
+:coffee
+  $('#inventory').tablesorter
+    theme: 'bootstrap'
+    widgets: ['uitheme', 'saveSort']
+    headerTemplate: '{content} {icon}'
+    cancelSelection: true
+    sortList: [[0,0]]
