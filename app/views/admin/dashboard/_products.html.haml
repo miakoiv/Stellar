@@ -14,7 +14,7 @@
 
         - stock = current_store.stock_lookup(product.code)
         - shippable = stock.find(&:shippable?)
-        - grand_total += (shippable.total_value || 0)
+        - grand_total += (shippable.try(:total_value) || 0)
 
         %td= link_to product.code, admin_product_path(product)
         %td
@@ -22,8 +22,8 @@
             = product.title
           = (product.subtitle || '').truncate(30, omission: '…')
         %td= product_stock_string(stock)
-        %td.text-right= number_to_currency(shippable.value, unit: '€')
-        %td.text-right= number_to_currency(shippable.total_value, unit: '€')
+        %td.text-right= number_to_currency(shippable.try(:value), unit: '€')
+        %td.text-right= number_to_currency(shippable.try(:total_value), unit: '€')
     %tbody
       %tr.info
         %th.text-right{colspan: 5}= number_to_currency(grand_total, unit: '€')
