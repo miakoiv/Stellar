@@ -6,6 +6,7 @@ class Admin::DashboardController < ApplicationController
 
   # GET /dashboard
   def index
+    @products = current_store.products
   end
 
 end

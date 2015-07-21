@@ -6,7 +6,6 @@
         %th Title
         %th.col-xs-2 Images
         %th.col-xs-2 Category
-        %th Stock
         %th
 
     %tbody{class: current_user.can_update?(Product) ? 'sortable' : nil}
@@ -20,7 +19,6 @@
           - product.images.each do |image|
             = image_variant_tag(image, :icon)
         %td= product.category
-        %td= product_stock_string(current_store.stock_lookup(product.code))
         %td.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
               class: 'btn btn-default btn-sm'

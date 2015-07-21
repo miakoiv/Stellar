@@ -19,6 +19,15 @@ class InventoryItem < ActiveRecord::Base
     self.adjustment += amount
   end
 
+  def total_value
+    return nil if amount.nil? || value.nil?
+    amount * value
+  end
+
+  def shippable?
+    inventory.purpose == 'shipping'
+  end
+
   # Inventory item HTML representation methods.
   def title; inventory.name; end
   def klass; inventory.purpose; end
