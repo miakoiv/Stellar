@@ -3,11 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-# Use mysql as the database for Active Record in production
-gem 'mysql2', group: :production
-# Use sqlite3 for development only
-gem 'sqlite3', group: :development
-# ...and yaml_db to migrate between the two
+# Use mysql as the database for Active Record
+gem 'mysql2'
 gem 'yaml_db'
 # Use Haml for markup
 gem 'haml-rails'
