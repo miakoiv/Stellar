@@ -43,6 +43,19 @@ class Order < ActiveRecord::Base
     order_item.save
   end
 
+  # Collects aggregated component quantities of all products in the order.
+  # Returns a hash of quantities keyed by product object.
+  def aggregated_components
+    components = {}.tap do |components|
+      order_items.each do |item|
+        item.product.relationships.each do |relationship|
+          components[relationship.product] ||= 0
+          components[relationship.product] += item.amount * relationship.quantity
+        end
+      end
+    end
+  end
+
   def needs_shipping_info?
     order_type.present? && order_type.inventory.purpose == 'shipping'
   end

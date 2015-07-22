@@ -1,0 +1,27 @@
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li.active{role: 'presentation'}
+    %a{href: '#order_items', role: 'tab', data: {toggle: 'tab'}} Order items
+  %li{role: 'presentation'}
+    %a{href: '#components', role: 'tab', data: {toggle: 'tab'}} Aggregated components
+
+.tab-content
+  #order_items.tab-pane.fade.in.active
+    = render partial: 'admin/order_items/table', object: order, as: :order
+
+  #components.tab-pane.fade
+    .table-responsive
+      %table.table.table-striped.table-hover.table-condensed
+        %thead
+          %tr
+            %th.col-xs-2 Product code
+            %th Product title
+            %th.col-xs-2.text-right #
+
+        %tbody
+          - order.aggregated_components.each do |product, quantity|
+            %tr
+              %td= link_to product.code, admin_product_path(product)
+              %td
+                %strong= product.title
+                = product.subtitle
+              %td.text-right= quantity
