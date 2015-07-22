@@ -1,4 +1,7 @@
 @media print {
+  @page {
+    margin: 1cm 1cm 1cm 2cm;
+  }
 
   body {
     font-size: 9pt;

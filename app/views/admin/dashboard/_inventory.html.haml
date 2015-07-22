@@ -15,7 +15,7 @@
           %td
             %strong
               = product.title
-            = (product.subtitle || '').truncate(30, omission: '…')
+            = product.subtitle
           %td.text-right= values[:amount]
           %td.text-right= number_to_currency(values[:unit_value], unit: '€')
           %td.text-right= number_to_currency(values[:total_value], unit: '€')
