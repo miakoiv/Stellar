@@ -12,18 +12,17 @@
     %tbody
       = content_tag_for :tr, @products do |product|
 
-        - stock = current_store.stock_lookup(product.code)
-        - shippable = stock.find(&:shippable?)
-        - grand_total += (shippable.try(:total_value) || 0)
+        - stock = current_store.stock_lookup(product.code).find(&:shippable?)
+        - grand_total += (stock.try(:total_value) || 0)
 
         %td= link_to product.code, admin_product_path(product)
         %td
           %strong
             = product.title
           = (product.subtitle || '').truncate(30, omission: '…')
-        %td.text-right= shippable.try(:amount)
-        %td.text-right= number_to_currency(shippable.try(:value), unit: '€')
-        %td.text-right= number_to_currency(shippable.try(:total_value), unit: '€')
+        %td.text-right= stock.try(:amount)
+        %td.text-right= number_to_currency(stock.try(:value), unit: '€')
+        %td.text-right= number_to_currency(stock.try(:total_value), unit: '€')
     %tbody
       %tr.info
         %th.text-right{colspan: 5}= number_to_currency(grand_total, unit: '€')
