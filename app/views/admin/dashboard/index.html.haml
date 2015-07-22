@@ -9,8 +9,15 @@
 .tab-content
   #inventory.tab-pane.fade.in.active
     %h2.visible-print-block Inventory valuation
-    %p.lead
-      Total value
-      %span.label.label-primary= number_to_currency(@grand_total, unit: '€')
+    .panel.panel-default
+      .panel-body.form-horizontal
+        .form-group
+          %label.col-sm-4.control-label Total value
+          .col-sm-8
+            %p.form-control-static= number_to_currency(@grand_total, unit: '€')
+        .form-group
+          %label.col-sm-4.control-label Inventory items
+          .col-sm-8
+            %p.form-control-static= @inventory.size
 
     = render partial: 'inventory'
