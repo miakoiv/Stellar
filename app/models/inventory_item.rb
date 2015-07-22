@@ -24,10 +24,6 @@ class InventoryItem < ActiveRecord::Base
     amount * value
   end
 
-  def shippable?
-    inventory.purpose == 'shipping'
-  end
-
   # Inventory item HTML representation methods.
   def title; inventory.name; end
   def klass; inventory.purpose; end
