@@ -16,7 +16,13 @@
   .page-header {
     margin: 0;
     border: 0;
+    background: image-url('spry-logo.svg') 100% 0% no-repeat;
+    background-size: 3in;
 
+
+    h1 {
+      font-size: 18pt;
+    }
     .btn {
       display: none;
     }

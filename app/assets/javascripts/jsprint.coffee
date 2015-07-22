@@ -15,5 +15,7 @@ $.print = () ->
   p.setOption('footerStrLeft', '')
   p.setOption('footerStrCenter', '')
   p.setOption('footerStrRight', '')
+  p.setOption('printBGColors', 1)
+  p.setOption('printBGImages', 1)
   #p.setOption('printSilent', 1)
   p.print()
