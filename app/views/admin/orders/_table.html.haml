@@ -6,8 +6,8 @@
         %th.col-xs-2 Order type
         %th User
         %th.col-xs-1 Items
-        %th.col-xs-1 Shipping at
-        %th.col-xs-2
+        %th.col-xs-2 Shipping at
+        %th.col-xs-2.hidden-print
 
     %tbody
       = render partial: 'admin/orders/row', collection: orders, as: :order

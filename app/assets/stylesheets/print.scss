@@ -1,0 +1,41 @@
+@media print {
+
+  body {
+    font-size: 9pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container, .container > .row > * {
+    width: 100%;
+  }
+
+  .page-header {
+    margin: 0;
+    border: 0;
+
+    .btn {
+      display: none;
+    }
+  }
+
+  .nav.nav-tabs {
+    display: none;
+  }
+
+  .tab-content > .tab-pane {
+    display: block;
+  }
+
+  .fade {
+    opacity: 1;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  a[href]:after {
+    content: "";
+  }
+}

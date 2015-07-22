@@ -11,14 +11,14 @@
         %th.col-xs-1
         %th Name
         %th Parent category
-        %th
+        %th.hidden-print
 
     %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
       = content_tag_for :tr, @categories do |category|
         %td= image_variant_tag(category.cover_image)
         %td= category.name
         %td= category.parent_category
-        %td.text-right
+        %td.hidden-print.text-right
           = link_to icon('info', 'Show'), admin_category_path(category),
               class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Category)

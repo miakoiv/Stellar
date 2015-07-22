@@ -12,7 +12,7 @@
         %th Name
         %th ERP number
         %th Semantic name
-        %th
+        %th.hidden-print
 
     %tbody
       - @stores.each do |store|
@@ -21,7 +21,7 @@
           %td= store.name
           %td= store.erp_number
           %td= store.slug
-          %td.text-right
+          %td.hidden-print.text-right
             - if current_store != store
               = link_to icon('bookmark', 'Select'),
                   admin_stores_path(store_id: store),

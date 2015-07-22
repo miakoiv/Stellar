@@ -4,7 +4,7 @@
   %td= order.user
   %td= order.order_items.count
   %td= order.shipping_at
-  %td.text-right
+  %td.hidden-print.text-right
     = link_to icon('info', 'Show'), admin_order_path(order),
         class: 'btn btn-default btn-sm'
     - if current_user.can_update?(Order)

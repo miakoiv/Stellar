@@ -12,7 +12,9 @@
 
 .tab-content
   #orders.tab-pane.fade.in.active
+    %h2.visible-print-block Current orders
     = render partial: 'admin/orders/table', object: @orders, as: :orders
 
   #approved.tab-pane.fade
+    %h2.visible-print-block Approved orders
     = render partial: 'admin/orders/table', object: @approved, as: :orders

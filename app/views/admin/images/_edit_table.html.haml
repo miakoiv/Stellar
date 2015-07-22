@@ -4,7 +4,7 @@
       %tr
         %th.col-xs-4 Image
         %th.col-xs-6 Image type
-        %th
+        %th.hidden-print
 
     %tbody#images.sortable
       = render partial: 'admin/images/edit_row', collection: imageable.images.ordered, as: :image

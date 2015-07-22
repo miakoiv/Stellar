@@ -12,7 +12,7 @@
         %th Name
         %th E-mail
         %th.col-xs-2 Roles
-        %th.col-xs-3
+        %th.col-xs-3.hidden-print
 
     %tbody
       - @users.each do |user|
@@ -23,7 +23,7 @@
           %td
             - user.role_names.each do |role_name|
               %span.label.label-default= role_name
-          %td.text-right
+          %td.hidden-print.text-right
             = link_to icon('info', 'Show'), admin_user_path(user),
                 class: 'btn btn-default btn-sm'
             - if current_user.can_update?(user)

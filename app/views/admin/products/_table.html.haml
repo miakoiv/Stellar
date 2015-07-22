@@ -6,7 +6,7 @@
         %th Title
         %th.col-xs-2 Images
         %th.col-xs-2 Category
-        %th
+        %th.hidden-print
 
     %tbody{class: current_user.can_update?(Product) ? 'sortable' : nil}
       = content_tag_for :tr, products do |product|
@@ -19,7 +19,7 @@
           - product.images.ordered.each do |image|
             = image_variant_tag(image, :icon)
         %td= product.category
-        %td.text-right
+        %td.hidden-print.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
               class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Product)

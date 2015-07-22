@@ -6,9 +6,11 @@
 
 .tab-content
   #order_items.tab-pane.fade.in.active
+    %h2.visible-print-block Order items
     = render partial: 'admin/order_items/table', object: order, as: :order
 
   #components.tab-pane.fade
+    %h2.visible-print-block Aggregated components
     .table-responsive
       %table.table.table-striped.table-hover.table-condensed
         %thead

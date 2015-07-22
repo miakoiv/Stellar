@@ -12,7 +12,9 @@
 
 .tab-content
   #products.tab-pane.fade.in.active
+    %h2.visible-print-block Products
     = render partial: 'admin/products/table', object: @categorized, as: :products
 
   #uncategorized.tab-pane.fade
+    %h2.visible-print-block Uncategorized products
     = render partial: 'admin/products/table', object: @uncategorized, as: :products
