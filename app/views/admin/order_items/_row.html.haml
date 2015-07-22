@@ -1,23 +1,27 @@
-= content_tag_for :tr, order_item do
-  %td
-    - if order_item.product.relationships.any?
-      %span.caret
-  - if order_item.order.approval
-    %td= link_to order_item.product_code, admin_product_path(order_item.product)
-    %td
-      %strong= order_item.product_title
-      = order_item.product_subtitle
-  - else
-    %td= link_to order_item.product.code, admin_product_path(order_item.product)
-    %td
-      %strong= order_item.product.title
-      = order_item.product.subtitle
-  %td.text-right= order_item.amount
+= content_tag_for :tbody, order_item do
+  %tr
+    - if order_item.order.approval
+      %td{colspan: 2}
+        = link_to order_item.product_code, admin_product_path(order_item.product)
+        - if order_item.product.relationships.any?
+          %span.caret
+      %td
+        %strong= order_item.product_title
+        = order_item.product_subtitle
+    - else
+      %td{colspan: 2}
+        = link_to order_item.product.code, admin_product_path(order_item.product)
+        - if order_item.product.relationships.any?
+          %span.caret
+      %td
+        %strong= order_item.product.title
+        = order_item.product.subtitle
+    %td.text-right= order_item.amount
 
-= content_tag_for :tr, order_item.product.relationships do |relationship|
-  %td
-  %td= link_to relationship.product.code, admin_product_path(relationship.product)
-  %td.text-muted
-    %strong= relationship.product.title
-    = relationship.product.subtitle
-  %td.text-right.text-muted= relationship.quantity * order_item.amount
+  = content_tag_for :tr, order_item.product.relationships do |relationship|
+    %td.col-xs-1
+    %td= link_to relationship.product.code, admin_product_path(relationship.product)
+    %td.text-muted
+      %strong= relationship.product.title
+      = relationship.product.subtitle
+    %td.text-right.text-muted= relationship.quantity * order_item.amount
