@@ -2,8 +2,9 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-4 Component code
-        %th.col-xs-8 Title
+        %th.col-xs-2 Code
+        %th Title
+        %th.col-xs-1.text-right Amount
 
     %tbody
       = render partial: 'admin/relationships/row', collection: product.relationships, as: :relationship
