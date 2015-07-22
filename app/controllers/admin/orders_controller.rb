@@ -49,8 +49,8 @@ class Admin::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to admin_orders_path, notice: 'Order was successfully updated.' }
-        format.json { render :index, status: :ok, location: admin_orders_path }
+        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
+        format.json { render :show, status: :ok, location: admin_order_path(@order) }
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
