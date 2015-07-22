@@ -16,8 +16,8 @@
   .page-header {
     margin: 0;
     border: 0;
-    background: image-url('spry-logo.svg') 100% 0% no-repeat;
-    background-size: 3in;
+    background: image-url('spry-logo.svg') 100% 0% no-repeat !important;
+    background-size: 15% !important;
 
 
     h1 {
@@ -43,6 +43,8 @@
   .form-group {
     margin-bottom: 0;
   }
+
+  .table .
 
   a[href]:after {
     content: "";
