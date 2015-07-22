@@ -11,8 +11,8 @@
     %a{href: '#uncategorized', role: 'tab', data: {toggle: 'tab'}} Uncategorized products
 
 .tab-content
-  #products.tab-pane.active
+  #products.tab-pane.fade.in.active
     = render partial: 'admin/products/table', object: @categorized, as: :products
 
-  #uncategorized.tab-pane
+  #uncategorized.tab-pane.fade
     = render partial: 'admin/products/table', object: @uncategorized, as: :products

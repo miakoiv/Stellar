@@ -11,8 +11,8 @@
     %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}} Approved orders
 
 .tab-content
-  #orders.tab-pane.active
+  #orders.tab-pane.fade.in.active
     = render partial: 'admin/orders/table', object: @orders, as: :orders
 
-  #approved.tab-pane
+  #approved.tab-pane.fade
     = render partial: 'admin/orders/table', object: @approved, as: :orders

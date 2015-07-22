@@ -1,5 +1,5 @@
 .page-header
-  = link_to admin_orders_path, class: 'btn btn-default' do
+  = link_to admin_orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
     = icon('chevron-circle-left', 'Back')
   - if current_user.can_update?(Order)
     = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
