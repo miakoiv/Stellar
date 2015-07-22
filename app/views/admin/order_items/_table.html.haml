@@ -1,0 +1,10 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2 Product code
+        %th Product title
+        %th.col-xs-2.text-right Amount
+
+    %tbody
+      = render partial: 'admin/order_items/row', collection: order.order_items, as: :order_item
