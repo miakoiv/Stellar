@@ -6,7 +6,7 @@ class Admin::DashboardController < ApplicationController
 
   # GET /dashboard
   def index
-    @products = current_store.products
+    @inventory, @grand_total = current_store.inventory_valuation
   end
 
 end

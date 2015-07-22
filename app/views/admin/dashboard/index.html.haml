@@ -1,7 +1,15 @@
 .page-header
   %h1= icon('tachometer', 'Dashboard')
 
-.panel.panel-default
-  .panel-heading
-    .panel-title Inventory
-  = render partial: 'products'
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li.active{role: 'presentation'}
+    %a{href: '#inventory', role: 'tab', data: {toggle: 'tab'}} Inventory valuation
+
+.tab-content
+  #inventory.tab-pane.fade.in.active
+    %h2.visible-print-block Inventory valuation
+    %p.lead
+      Total value
+      %span.label.label-primary= number_to_currency(@grand_total, unit: '€')
+
+    = render partial: 'inventory'
