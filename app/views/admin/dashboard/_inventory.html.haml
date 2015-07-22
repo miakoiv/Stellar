@@ -23,7 +23,9 @@
 :coffee
   $('#inventory-table').tablesorter
     theme: 'bootstrap'
-    widgets: ['uitheme', 'saveSort']
+    widgets: ['uitheme', 'saveSort', 'stickyHeaders']
+    widgetOptions:
+      stickyHeaders_offset: 50
     headerTemplate: '{content} {icon}'
     cancelSelection: true
     sortList: [[0,0]]

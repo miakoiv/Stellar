@@ -58,14 +58,17 @@ input[type="number"] {
   font-family: inherit !important;
 }
 
-.table-scroller {
-  max-height: 296px;
-  overflow-y: scroll;
-}
-
 .table.table-loose > tbody > tr > th,
 .table.table-loose > tbody > tr > td {
   line-height: 2;
+}
+
+.tablesorter-bootstrap thead th,
+.tablesorter-bootstrap thead td,
+.tablesorter-bootstrap tfoot th,
+.tablesorter-bootstrap tfoot td {
+  font-family: inherit;
+  font-weight: 500;
 }
 
 .table > tbody.sortable > tr:hover {
