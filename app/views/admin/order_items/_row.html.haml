@@ -1,4 +1,5 @@
-= content_tag_for :tr, order_item do
+= content_tag_for :tr, order_item, class: 'info' do
+  %td= icon('cube')
   - if order_item.order.approval
     %td= order_item.product_code
     %td
@@ -10,3 +11,11 @@
       %strong= order_item.product.title
       = order_item.product.subtitle
   %td.text-right= order_item.amount
+
+= content_tag_for :tr, order_item.product.relationships do |relationship|
+  %td.text-muted= icon('puzzle-piece')
+  %td.text-muted= relationship.parent_code
+  %td.text-muted
+    %strong= relationship.product.title
+    = relationship.product.subtitle
+  %td.text-right.text-muted= relationship.quantity * order_item.amount
