@@ -25,6 +25,11 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
 
+  # Make shipping the default order type.
+  def default_order_type
+    inventories.by_purpose(:shipping).order_types.first
+  end
+
   # Performs a stock lookup on a product. Returns a hash
   # of inventory items keyed by inventory purpose, adjusted by orders.
   def stock_lookup(code)
