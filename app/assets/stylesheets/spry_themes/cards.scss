@@ -132,15 +132,18 @@
       }
 
       .product-pricing {
-        @extend .col-sm-6;
+        @extend .col-sm-5;
         @extend .lead;
         @extend .text-primary;
+        line-height: 30px;
       }
 
       .product-code {
-        @extend .col-sm-6;
+        @extend .col-sm-7;
         @extend .text-right;
         margin-bottom: 0;
+        font-size: 90%;
+        line-height: 30px;
       }
     }
 
