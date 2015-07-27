@@ -24,11 +24,12 @@
           = f.label :contact_person, class: 'col-sm-4 control-label'
           .col-sm-8
             = f.text_field :contact_person, class: 'form-control'
-        #shipping-info.collapse{class: @order.order_type.id == 2 ? 'in' : ''}
+        #shipping-info.collapse{class: @order.needs_shipping_info? ? 'in' : ''}
           .form-group
             = f.label :shipping_at, class: 'col-sm-4 control-label'
             .col-sm-8
-              = f.date_field :shipping_at, class: 'form-control'
+              = f.date_field :shipping_at, class: 'form-control',
+                  data: {provide: 'datepicker'}
           .form-group
             = f.label :billing_address, class: 'col-sm-4 control-label'
             .col-sm-8
