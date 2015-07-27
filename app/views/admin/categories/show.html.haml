@@ -9,7 +9,7 @@
     = @category
 
 .row
-  .col-sm-6
+  .col-md-6
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
@@ -21,5 +21,5 @@
           .col-sm-8
             %p.form-control-static= @category.name
 
-  .col-sm-6
+  .col-md-6
     = render partial: 'admin/images/table', object: @category, as: :imageable

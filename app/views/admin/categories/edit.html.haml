@@ -8,9 +8,9 @@
     = @category
 
 .row
-  .col-sm-6
+  .col-md-6
     = render 'form'
 
-  .col-sm-6
+  .col-md-6
     = render partial: 'admin/images/edit_table', object: @category, as: :imageable
     = render partial: 'admin/images/dropzone', object: @category, as: :imageable
