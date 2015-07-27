@@ -1,4 +1,9 @@
 .form-group
+  = f.label :order_type_id, class: 'col-sm-4 control-label'
+  .col-sm-8
+    = f.select :order_type_id, current_store.order_type_options,
+        {}, {class: 'select2 form-control', style: 'width: 100%'}
+.form-group
   = f.label :company_name, class: 'col-sm-4 control-label'
   .col-sm-8
     = f.text_field :company_name, class: 'form-control'
@@ -6,11 +11,6 @@
   = f.label :contact_person, class: 'col-sm-4 control-label'
   .col-sm-8
     = f.text_field :contact_person, class: 'form-control'
-.form-group
-  = f.label :order_type_id, class: 'col-sm-4 control-label'
-  .col-sm-8
-    = f.select :order_type_id, current_store.order_type_options,
-        {}, {class: 'select2 form-control', style: 'width: 100%'}
 %fieldset#shipping-info.collapse{class: @order.needs_shipping_info? ? 'in' : ''}
   .form-group
     = f.label :shipping_at, class: 'col-sm-4 control-label'
@@ -32,7 +32,6 @@
 
 :coffee
   $('#order_order_type_id').on 'change', (e) ->
-    console.log e
     if e.added.css == 'shipping'
       $('#shipping-info').addClass 'in'
     else

@@ -1,16 +1,12 @@
 .page-header
-  = link_to admin_orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
+  = link_to orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
     = icon('chevron-circle-left', 'Back')
-  - if current_user.can_update?(Order)
-    = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
-      = icon('pencil-square', 'Edit')
-  = link_to icon('print', 'Print'), '#print', class: 'btn btn-default'
   %h1
     Order
     %span.small= @order.to_s
 
 .row
-  .col-lg-5
+  .col-sm-5
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
@@ -18,15 +14,6 @@
           .col-sm-8
             %p.form-control-static
               = @order.approval ? @order.order_type_name : @order.order_type
-        .form-group
-          %label.col-sm-4.control-label Customer
-          .col-sm-8
-            %p.form-control-static
-              = @order.approval ? "#{@order.user_name} <#{@order.user_email}>" : @order.user
-        .form-group
-          %label.col-sm-4.control-label Ordered at
-          .col-sm-8
-            %p.form-control-static= @order.ordered_at
         .form-group
           %label.col-sm-4.control-label Company name
           .col-sm-8
@@ -52,10 +39,16 @@
           %label.col-sm-4.control-label Notes
           .col-sm-8
             %p.form-control-static.pre><= @order.notes
-        .form-group
-          %label.col-sm-4.control-label Approved at
-          .col-sm-8
-            %p.form-control-static= @order.approved_at
 
-  .col-lg-7
-    = render partial: 'admin/orders/components', object: @order, as: :order
+  .col-sm-7
+    .table-responsive
+      %table.table.table-striped.table-hover.table-loose
+        %thead
+          %tr
+            %th.col-xs-2 Product code
+            %th Product title
+            %th.text-right #
+            %th
+
+        %tbody
+          = render partial: 'order_items/row', collection: @order.order_items, as: :order_item

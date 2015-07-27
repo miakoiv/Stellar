@@ -2,11 +2,19 @@
 
 class OrdersController < ApplicationController
 
-  before_action :set_order, only: [:edit, :update, :destroy]
+  # FIXME: should authorize actions here
+
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   def index
     @orders = current_user.orders
+    @approved = current_user.orders.approved
+  end
+
+  # GET /orders/1
+  # GET /orders/1.json
+  def show
   end
 
   # GET /orders/edit/1
@@ -38,7 +46,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params[:id])
+      @order = current_user.orders.completed.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

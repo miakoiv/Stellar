@@ -4,13 +4,13 @@
       = render 'shared/errors', object: @order
 
       .form-group
-        %label.col-sm-4.control-label User
-        .col-sm-8
-          %p.form-control-static= @order.user
-      .form-group
         %label.col-sm-4.control-label Order type
         .col-sm-8
           %p.form-control-static= @order.order_type
+      .form-group
+        %label.col-sm-4.control-label Customer
+        .col-sm-8
+          %p.form-control-static= @order.user
       .form-group
         %label.col-sm-4.control-label Ordered at
         .col-sm-8

@@ -13,6 +13,9 @@ class Order < ActiveRecord::Base
   # Default scope includes completed, not yet approved orders.
   default_scope { where.not(ordered_at: nil).where(approved_at: nil) }
 
+  # Completed orders, approved or not.
+  scope :completed, -> { unscope(where: :approved_at) }
+
   # Unordered orders is the scope for shopping carts.
   scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
 

@@ -1,0 +1,9 @@
+= content_tag_for(:tr, order_item) do
+  %td= order_item.product.code
+  %td
+    %strong= order_item.product.title
+    = order_item.product.subtitle
+  %td.text-right= order_item.amount
+  %td.text-right
+    = link_to icon('info', 'Product info'), show_product_path(order_item.product),
+        class: 'btn btn-default btn-sm'

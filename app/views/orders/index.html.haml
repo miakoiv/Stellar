@@ -1,24 +1,17 @@
 .page-header
   %h1= icon('truck', 'Orders')
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-1 Date
-        %th Order type
-        %th.col-xs-1 Items
-        %th.col-xs-1 Shipping at
-        %th.col-xs-2
+%ul.nav.nav-tabs{role: 'tablist'}
+  %li.active{role: 'presentation'}
+    %a{href: '#orders', role: 'tab', data: {toggle: 'tab'}} Current orders
+  %li{role: 'presentation'}
+    %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}} Approved orders
 
-    %tbody
-      = content_tag_for :tr, @orders do |order|
-        %td= order.ordered_at.to_date
-        %td= order.order_type
-        %td= order.order_items.count
-        %td= order.shipping_at
-        %td.text-right
-          = link_to icon('edit', 'Edit'), edit_order_path(order),
-              class: 'btn btn-default btn-sm'
-          = link_to icon('remove', 'Delete'), order_path(order),
-              method: :delete, class: 'btn btn-sm btn-danger'
+.tab-content
+  #orders.tab-pane.fade.in.active
+    %h2.visible-print-block Current orders
+    = render partial: 'orders/table', object: @orders, as: :orders
+
+  #approved.tab-pane.fade
+    %h2.visible-print-block Approved orders
+    = render partial: 'orders/table', object: @approved, as: :orders
