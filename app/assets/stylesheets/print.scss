@@ -23,9 +23,6 @@
     h1 {
       font-size: 18pt;
     }
-    .btn {
-      display: none;
-    }
   }
 
   .nav.nav-tabs {
@@ -44,7 +41,19 @@
     margin-bottom: 0;
   }
 
+  .page-break {
+    page-break-before: always;
+  }
+
+  .btn {
+    display: none;
+  }
+
   a[href]:after {
     content: "";
+  }
+
+  #footer {
+    display: none;
   }
 }

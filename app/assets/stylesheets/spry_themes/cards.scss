@@ -118,7 +118,8 @@
     }
 
     .product-description {
-      @extend .col-sm-4;
+      @extend .col-md-4;
+      @extend .col-xs-12;
 
       .product-stock {
         @extend .lead;
@@ -163,14 +164,16 @@
     }
 
     .images.technical {
-      @extend .col-sm-2;
-      @extend .col-sm-offset-1;
+      @extend .col-md-2;
+      @extend .col-md-offset-1;
+      @extend .col-xs-5;
 
       .tab-content {
       }
     }
     .images.presentational {
-      @extend .col-sm-5;
+      @extend .col-md-5;
+      @extend .col-xs-7;
 
       .tab-content {
       }
