@@ -58,6 +58,9 @@ gem 'select2-rails', '~> 3.5.9'
 # Unobtrusive flash
 gem 'unobtrusive_flash', '>= 3'
 
+# Eternicode's excellent Datepicker
+gem 'bootstrap-datepicker-rails'
+
 # Tablesorter
 gem 'jquery-tablesorter'
 

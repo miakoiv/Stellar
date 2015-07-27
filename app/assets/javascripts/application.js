@@ -29,6 +29,7 @@
 //= require dropzone
 //= require magnific-popup
 //= require select2
+//= require bootstrap-datepicker
 //= require jquery-tablesorter
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap

@@ -15,7 +15,8 @@
   .form-group
     = f.label :shipping_at, class: 'col-sm-4 control-label'
     .col-sm-8
-      = f.date_field :shipping_at, class: 'form-control'
+      = f.date_field :shipping_at, class: 'form-control',
+          data: {provide: 'datepicker'}
   .form-group
     = f.label :billing_address, class: 'col-sm-4 control-label'
     .col-sm-8
