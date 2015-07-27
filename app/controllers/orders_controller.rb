@@ -2,8 +2,6 @@
 
 class OrdersController < ApplicationController
 
-  # FIXME: should authorize actions here
-
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -15,15 +13,19 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    authorize_action_for @order
   end
 
   # GET /orders/edit/1
   def edit
+    authorize_action_for @order
   end
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    authorize_action_for @order
+
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to edit_order_path(@order), notice: 'Order was successfully updated.' }
@@ -37,6 +39,8 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1
   def destroy
+    authorize_action_for @order
+
     @order.destroy
     respond_to do |format|
       format.html { redirect_to orders_path, notice: 'Order deleted.'}

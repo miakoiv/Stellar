@@ -28,4 +28,15 @@ class OrderAuthorizer < ApplicationAuthorizer
     false
   end
 
+  def readable_by?(user)
+    user == resource.user
+  end
+
+  def updatable_by?(user)
+    user == resource.user && !resource.approval
+  end
+
+  def deletable_by?(user)
+    user == resource.user
+  end
 end
