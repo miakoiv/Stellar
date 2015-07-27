@@ -8,8 +8,8 @@
     %span.small= @order.to_s
 
 .row
-  .col-sm-5
+  .col-lg-5
     = render 'form'
 
-  .col-sm-7
+  .col-lg-7
     = render partial: 'admin/orders/components', object: @order, as: :order

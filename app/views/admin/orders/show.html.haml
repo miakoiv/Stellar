@@ -10,7 +10,7 @@
     %span.small= @order.to_s
 
 .row
-  .col-sm-5
+  .col-lg-5
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
@@ -57,5 +57,5 @@
           .col-sm-8
             %p.form-control-static= @order.approved_at
 
-  .col-sm-7
+  .col-lg-7
     = render partial: 'admin/orders/components', object: @order, as: :order
