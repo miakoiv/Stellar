@@ -1,7 +1,10 @@
 module Reorderable
   extend ActiveSupport::Concern
+  include OrderQuery
 
   included do
-    scope :ordered, -> { order(:priority) }
+    order_query :ordered,
+      [:priority, :asc],
+      [:id, :asc]
   end
 end

@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
+# Keyset pagination to get previous/next record
+gem 'order_query', '~> 0.3.2'
+
 # Shhhh
 gem 'quiet_assets'
 
