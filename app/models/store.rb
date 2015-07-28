@@ -42,22 +42,16 @@ class Store < ActiveRecord::Base
     end
   end
 
-  # Performs an inventory valuation on all products.
-  # Returns a tuple where the first value is a hash keyed by product,
-  # containing a hash keyed by unit_value, amount, and total_value;
-  # the second value is the grand total.
+  # Performs an inventory valuation on categorized products.
+  # Returns a tuple where the first value is a hash of inventory items
+  # keyed by product, the second value is the grand total.
   def inventory_valuation
     grand_total = 0
     inventory = {}.tap do |inventory|
-      products.each do |product|
-        stock = stock_lookup(product.code)[:shipping]
-        unit_value, amount, total_value = stock.value, stock.amount, stock.total_value
-        inventory[product] = {
-          unit_value: unit_value,
-          amount: amount,
-          total_value: total_value
-        }
-        grand_total += total_value if total_value.present?
+      products.categorized.each do |product|
+        stock = stock_lookup(product.code)
+        inventory[product] = stock
+        grand_total += stock[:shipping].total_value || 0
       end
     end
     [inventory, grand_total]

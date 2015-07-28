@@ -4,21 +4,20 @@
       %tr
         %th.col-xs-1 Code
         %th Title
-        %th.col-xs-1.text-right Stock
+        %th.col-xs-2 Stock
         %th.col-xs-1.text-right à
         %th.col-xs-1.text-right Value
 
     %tbody
-      - @inventory.each do |product, values|
+      - @inventory.each do |product, stock|
         %tr
           %td= link_to product.code, admin_product_path(product)
           %td
-            %strong
-              = product.title
+            %strong= product.title
             = product.subtitle
-          %td.text-right= values[:amount]
-          %td.text-right= number_to_currency(values[:unit_value], unit: '€')
-          %td.text-right= number_to_currency(values[:total_value], unit: '€')
+          %td= product_stock_string(stock)
+          %td.text-right= number_to_currency(stock[:shipping].value, unit: '€')
+          %td.text-right= number_to_currency(stock[:shipping].total_value, unit: '€')
 
 :coffee
   $('#inventory-table').tablesorter
