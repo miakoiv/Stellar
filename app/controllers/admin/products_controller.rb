@@ -8,7 +8,8 @@ class Admin::ProductsController < ApplicationController
   layout 'admin'
 
   authorize_actions_for Product
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product,  only: [:show, :edit, :update, :destroy]
+  before_action :set_point,    only: [:show, :edit]
 
   # GET /admin/products
   # GET /admin/products.json
@@ -64,7 +65,16 @@ class Admin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = current_store.products.ordered.find(params[:id])
+    end
+
+    def set_point
+      @point = if @product.category.present?
+        current_store.products.categorized.ordered_at(@product)
+      else
+        current_store.products.uncategorized.ordered_at(@product)
+      end
+      logger.info "Point set at: #{@point.inspect}"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
