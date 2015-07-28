@@ -6,16 +6,18 @@ IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'
 
 IMPORT_FILES = {
 
-  # PIIRNRO,ASIAKAS,MIKA,MYYTAVA,NRO,NIMI,NIMI2,MYYNTHINTA,
-  # VARASTOLKM,VARATTULKM,TULOSSA,MUISTIO,MUISTIO2,MUISTIO4
+  # PIIRNRO,NRO,NIMI,NIMI2,
+  # MYYNTHINTA,STDHINTA,PVMMYYN,PVMSTD,
+  # VARASTOLKM,VARATTULKM,TULOSSA,
+  # TARVE_ETU,MUISTIO4
   product: {
     file: 'www-nimike-utf8.csv',
     multiple: false,
     headers: [
-      :stores, nil, nil, nil, :code,
-      :title, :subtitle, :default_price,
+      :stores, :code, :title, :subtitle,
+      :sales_price, :cost, :sales_price_modified_at, :cost_modified_at,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
-      nil, nil, :memo
+      :additional_stores, :memo
     ],
   },
   # NRO,ASIAKNRO,ASIAKNIMI,ASIAKTNRO,MYYNTHINTA,VALUUTTA,MYYNTIERA,PAIVPVM
@@ -61,21 +63,25 @@ namespace :matfox do
             next if store.nil?
             find_or_create_product(store, code, data).update_columns(
               customer_code: row[:customer_code],
-              sales_price:   row[:sales_price] || data[:default_price],
+              sales_price: row[:sales_price] || data[:sales_price],
+              sales_price_modified_at: data[:sales_price_modified_at]
             )
           end
         end
 
         # Additional stores may be specified by listing store slugs
-        # in the `stores` field. As future expansion, product variants
-        # will identify their parent product by `#code`.
-        slugs, variant_of = data[:product][:stores].split '#'
-        slugs.mb_chars.scan(/[[:word:]]+/).map(&:downcase).each do |slug|
-          store = Store.find_by(slug: slug)
-          next if store.nil?
-          find_or_create_product(store, code, data).update_columns(
-            sales_price: data[:default_price],
-          )
+        # in the `additional_stores` field. As future expansion,
+        # product variants will identify their parent product by `#code`.
+        if data[:product][:additional_stores].present?
+          slugs, variant_of = data[:product][:additional_stores].split '#'
+          slugs.mb_chars.scan(/[[:word:]]+/).map(&:downcase).each do |slug|
+            store = Store.find_by(slug: slug)
+            next if store.nil?
+            find_or_create_product(store, code, data).update_columns(
+              sales_price: data[:sales_price],
+              sales_price_modified_at: data[:sales_price_modified_at]
+            )
+          end
         end
 
         # Update inventory items in global inventory.
@@ -141,9 +147,11 @@ namespace :matfox do
     product = Product.find_or_initialize_by(store: store, code: code)
     product.save(validate: false)
     product.update_columns(
-      title:    data[:product][:title]   .try(:mb_chars).try(:titleize),
-      subtitle: data[:product][:subtitle].try(:mb_chars).try(:titleize),
-      memo:     data[:product][:memo],
+      title:            data[:product][:title]   .try(:mb_chars).try(:titleize),
+      subtitle:         data[:product][:subtitle].try(:mb_chars).try(:titleize),
+      memo:             data[:product][:memo],
+      cost:             data[:cost],
+      cost_modified_at: data[:cost_modified_at]
     )
     product
   end
