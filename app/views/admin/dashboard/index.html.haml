@@ -14,10 +14,10 @@
         .form-group
           %label.col-sm-4.control-label Total value
           .col-sm-8
-            %p.form-control-static= number_to_currency(@grand_total, unit: '€')
+            %p.form-control-static= number_to_currency(@inventory[1], unit: '€')
         .form-group
           %label.col-sm-4.control-label Inventory items
           .col-sm-8
-            %p.form-control-static= @inventory.size
+            %p.form-control-static= @inventory[0].size
 
     = render partial: 'inventory'
