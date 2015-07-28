@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716065216) do
+ActiveRecord::Schema.define(version: 20150728104719) do
 
   create_table "categories", force: :cascade do |t|
-    t.integer  "store_id",           limit: 4,   null: false
+    t.integer  "store_id",           limit: 4,               null: false
     t.integer  "parent_category_id", limit: 4
     t.string   "name",               limit: 255
-    t.integer  "priority",           limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "priority",           limit: 4,   default: 0, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20150716065216) do
     t.integer  "imageable_id",            limit: 4
     t.string   "imageable_type",          limit: 255
     t.integer  "image_type_id",           limit: 4
-    t.integer  "priority",                limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "priority",                limit: 4,   default: 0, null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "attachment_file_name",    limit: 255
     t.string   "attachment_content_type", limit: 255
     t.integer  "attachment_file_size",    limit: 4
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20150716065216) do
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "store_id",      limit: 4,                             null: false
+    t.integer  "store_id",      limit: 4,                                         null: false
     t.integer  "category_id",   limit: 4
     t.string   "code",          limit: 255
     t.string   "customer_code", limit: 255
@@ -144,9 +144,9 @@ ActiveRecord::Schema.define(version: 20150716065216) do
     t.text     "description",   limit: 65535
     t.text     "memo",          limit: 65535
     t.decimal  "sales_price",                 precision: 8, scale: 2
-    t.integer  "priority",      limit: 4
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.integer  "priority",      limit: 4,                             default: 0, null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
