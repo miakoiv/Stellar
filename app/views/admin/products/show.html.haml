@@ -1,8 +1,10 @@
 .page-header
   = link_to admin_products_path(anchor: products_tab(@product)), class: 'btn btn-default' do
     = icon('chevron-circle-left', 'Back')
-  = link_to icon('arrow-down'), admin_product_path(@point.next), class: 'btn btn-default'
-  = link_to icon('arrow-up'), admin_product_path(@point.previous), class: 'btn btn-default'
+  - if @point.next.present?
+    = link_to icon('arrow-down'), admin_product_path(@point.next), class: 'btn btn-default'
+  - if @point.previous.present?
+    = link_to icon('arrow-up'), admin_product_path(@point.previous), class: 'btn btn-default'
   - if current_user.can_update?(Product)
     = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
       = icon('pencil-square', 'Edit')
