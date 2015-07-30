@@ -3,6 +3,7 @@
 class Admin::ImagesController < ApplicationController
 
   include Reorderer
+  before_action :authenticate_user!
 
   # No layout, this controller never renders HTML.
 

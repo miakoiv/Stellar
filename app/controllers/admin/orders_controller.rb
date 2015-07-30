@@ -3,6 +3,7 @@
 class Admin::OrdersController < ApplicationController
 
   layout 'admin'
+  before_action :authenticate_user!
 
   authorize_actions_for Order
   before_action :set_order, only: [:show, :edit, :update, :destroy]

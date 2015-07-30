@@ -3,6 +3,7 @@
 class Admin::PagesController < ApplicationController
 
   include Reorderer
+  before_action :authenticate_user!
   authority_actions reorder: 'update'
 
   layout 'admin'

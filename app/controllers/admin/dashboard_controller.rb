@@ -3,6 +3,7 @@
 class Admin::DashboardController < ApplicationController
 
   layout 'admin'
+  before_action :authenticate_user!
 
   # GET /dashboard
   def index

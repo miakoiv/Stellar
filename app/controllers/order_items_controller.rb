@@ -2,6 +2,8 @@
 
 class OrderItemsController < ApplicationController
 
+  before_action :authenticate_user!
+
   # PATCH/PUT /order_items/1
   def update
     @order_item = OrderItem.find(params[:id])

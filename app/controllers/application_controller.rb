@@ -6,9 +6,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  # Authenticate every action.
-  before_action :authenticate_user!
-
   # Send the user back where she came from if not authorized.
   def authority_forbidden(error)
     Rails.logger.warn(error.message)
@@ -18,18 +15,23 @@ class ApplicationController < ActionController::Base
 
   after_filter :prepare_unobtrusive_flash
 
-  # Find the current store for the storefront section
-  # that is restricted to a single store.
+  # Find the current store for the storefront section.
   def current_store
-    if current_user.is_site_manager? || current_user.is_site_monitor?
-      if params[:store_id].present?
-        session[:store_id] = params[:store_id]
+    if current_user
+      # Site staff may use the `store_id` param to switch between stores.
+      if current_user.is_site_manager? || current_user.is_site_monitor?
+        if params[:store_id].present?
+          session[:store_id] = params[:store_id]
+        end
+        if session[:store_id].present?
+          return Store.find(session[:store_id])
+        end
       end
-      if session[:store_id].present?
-        return Store.find(session[:store_id])
-      end
+      # Everyone else is shackled to their designated store.
+      current_user.store
+    else
+      Store.find_by(host: request.host)
     end
-    current_user.store
   end
   helper_method :current_store
 end

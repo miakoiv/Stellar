@@ -5,7 +5,7 @@ class StoreController < ApplicationController
   def wiselinks_layout
     'application'
   end
-
+  before_action :authenticate_user!
   before_action :set_categories
 
   # GET /

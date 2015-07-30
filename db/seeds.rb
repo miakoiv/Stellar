@@ -38,6 +38,7 @@ OrderType.create(
 Store.create(
   id: 1,
   contact_person_id: 2,
+  host: 'extranet.tjt-kaluste.fi',
   erp_number: 1545,
   local_inventory: true,
   inventory_code: 'VART',

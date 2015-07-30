@@ -3,6 +3,7 @@
 class Admin::UsersController < ApplicationController
 
   layout 'admin'
+  before_action :authenticate_user!
 
   authorize_actions_for User, except: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
