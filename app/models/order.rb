@@ -59,8 +59,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def needs_shipping_info?
-    order_type.present? && order_type.inventory.purpose == 'shipping'
+  def has_shipping?
+    order_type.present? && order_type.has_shipping?
   end
 
   def padded_id

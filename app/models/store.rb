@@ -25,9 +25,10 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
 
-  # Make shipping the default order type.
+  # Make shipping the default order type. We can't have order_types through
+  # inventories because some stores use global inventories.
   def default_order_type
-    inventories.by_purpose(:shipping).order_types.first
+    inventories.map(&:order_types).flatten.find { |o| o.has_shipping? }
   end
 
   # Performs a stock lookup on a product. Returns a hash
@@ -73,7 +74,9 @@ class Store < ActiveRecord::Base
     options = [].tap do |options|
       inventories.each do |i|
         i.order_types.each do |o|
-          options << [o.name, o.id, {class: i.purpose}]
+          options << [o.name, o.id, {
+            class: [o.has_shipping? ? :shipping : nil, o.has_payment? ? :payment : nil]
+          }]
         end
       end
     end

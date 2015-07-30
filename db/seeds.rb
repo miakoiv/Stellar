@@ -18,22 +18,34 @@ ImageType.create(purpose: 'technical', name: 'Technical')
 ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 
 #-----------------------------------------------------------------------------
-# General inventory with fuzzy availability, and order type for delivery only.
-
+# General inventory with fuzzy availability, and order types for delivery
+# with or without online payment.
+#
 Inventory.create(id: 1, purpose: 'shipping', fuzzy: true, name: 'Availability')
 
 OrderType.create(
   id: 1,
   inventory_id: 1,
   adjustment_multiplier: -1,
-  name: 'Delivery'
+  name: 'Bill me and deliver',
+  has_shipping: true,
+  has_payment: false
+)
+OrderType.create(
+  id: 2,
+  inventory_id: 1,
+  adjustment_multiplier: -1,
+  name: 'Payment and delivery',
+  has_shipping: true,
+  has_payment: true
 )
 
 #-----------------------------------------------------------------------------
 # Tikkurila
 #
-# An example using local, store specific inventories
-# without fuzziness in stock availability.
+# An example using local, store specific inventories without fuzziness
+# in stock availability. Order types include manufacturing and shipping
+# without online payment.
 #
 Store.create(
   id: 1,
@@ -61,16 +73,20 @@ Inventory.create(
 )
 
 OrderType.create(
-  id: 2,
+  id: 3,
   inventory_id: 2,
   adjustment_multiplier: 1,
-  name: 'Manufacture products'
+  name: 'Manufacture products',
+  has_shipping: false,
+  has_payment: false
 )
 OrderType.create(
-  id: 3,
+  id: 4,
   inventory_id: 3,
   adjustment_multiplier: -1,
-  name: 'Ship products'
+  name: 'Ship products',
+  has_shipping: true,
+  has_payment: false
 )
 
 Category.create(store_id: 1, name: 'Color Display')

@@ -22,7 +22,7 @@
           %label.col-sm-4.control-label Contact person
           .col-sm-8
             %p.form-control-static= @order.contact_person
-        #shipping-info.collapse{class: @order.needs_shipping_info? ? 'in' : ''}
+        #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           .form-group
             %label.col-sm-4.control-label Shipping at
             .col-sm-8

@@ -24,7 +24,7 @@
           = f.label :contact_person, class: 'col-sm-4 control-label'
           .col-sm-8
             = f.text_field :contact_person, class: 'form-control'
-        #shipping-info.collapse{class: @order.needs_shipping_info? ? 'in' : ''}
+        #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           .form-group
             = f.label :shipping_at, class: 'col-sm-4 control-label'
             .col-sm-8
