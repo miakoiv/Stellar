@@ -57,7 +57,8 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
         :user_id, :order_type_id, :ordered_at, :shipping_at, :approval,
-        :company_name, :contact_person, :billing_address, :shipping_address,
+        :company_name, :contact_person, :billing_address, :billing_postalcode,
+        :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,
         :notes
       )
     end

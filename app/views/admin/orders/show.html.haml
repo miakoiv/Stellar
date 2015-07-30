@@ -43,11 +43,21 @@
           .form-group
             %label.col-sm-4.control-label Billing address
             .col-sm-8
-              %p.form-control-static.pre><= @order.billing_address
+              %p.form-control-static= @order.billing_address
+          .form-group
+            .col-sm-3.col-sm-offset-4
+              %p.form-control-static= @order.billing_postalcode
+            .col-sm-5
+              %p.form-control-static= @order.billing_city
           .form-group
             %label.col-sm-4.control-label Shipping address
             .col-sm-8
-              %p.form-control-static.pre><= @order.shipping_address
+              %p.form-control-static= @order.shipping_address
+          .form-group
+            .col-sm-3.col-sm-offset-4
+              %p.form-control-static= @order.shipping_postalcode
+            .col-sm-5
+              %p.form-control-static= @order.shipping_city
         .form-group
           %label.col-sm-4.control-label Notes
           .col-sm-8
