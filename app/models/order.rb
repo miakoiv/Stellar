@@ -63,8 +63,12 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.inventory.purpose == 'shipping'
   end
 
+  def padded_id
+    '%08d' % id
+  end
+
   def to_s
-    new_record? ? 'New order' : ("%08d" % id)
+    new_record? ? '[new]' : padded_id
   end
 
   private
