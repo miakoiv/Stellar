@@ -11,7 +11,7 @@ class StoreController < ApplicationController
   # GET /
   def index
     @category = current_store.categories.first
-    @products = @category.try(:products).ordered || []
+    @products = @category.present? ? @category.products.ordered : []
   end
 
   # GET /category/1
