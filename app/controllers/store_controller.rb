@@ -11,20 +11,20 @@ class StoreController < ApplicationController
   # GET /
   def index
     @category = current_store.categories.first
-    @products = @category.try(:products) || []
+    @products = @category.try(:products).ordered || []
   end
 
   # GET /category/1
   def show_category
     @category = Category.find(params[:category_id])
-    @products = @category.products
+    @products = @category.products.ordered
   end
 
   # GET /product/1
   def show_product
     @product = Product.find(params[:product_id])
     @category = @product.category
-    @products = @category.products
+    @products = @category.products.ordered
     @presentational_images = @product.images.by_purpose(:presentational)
     @technical_images = @product.images.by_purpose(:technical)
     @documents = @product.images.by_purpose(:document)
