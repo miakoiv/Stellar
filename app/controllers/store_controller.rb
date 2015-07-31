@@ -47,11 +47,19 @@ class StoreController < ApplicationController
   # POST /checkout
   def checkout
     @order = current_user.shopping_cart
-    @order.ordered_at = Time.current
 
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to orders_path, notice: 'Order was successfully placed.' }
+        if @order.has_payment?
+          @payment = Payment.new @order,
+            ok_url: orders_url(anchor: 'ok'),
+            error_url: show_cart_url(anchor: 'error'),
+            cancel_url: show_cart_url(anchor: 'cancel')
+          format.html { render :confirm }
+        else
+          @order.update ordered_at: Time.current
+          format.html { redirect_to orders_path, notice: 'Order was successfully placed.' }
+        end
       else
         format.html { render :show_cart }
       end
@@ -66,8 +74,10 @@ class StoreController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :order_type_id, :shipping_at, :company_name, :contact_person,
-        :billing_address, :shipping_address, :notes
+        :order_type_id, :shipping_at,
+        :company_name, :contact_person, :billing_address, :billing_postalcode,
+        :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,
+        :notes
       )
     end
 end

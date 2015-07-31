@@ -23,6 +23,11 @@ class Order < ActiveRecord::Base
   scope :approved, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
 
 
+  validates :company_name, :contact_person, :shipping_at,
+    :billing_address, :billing_postalcode, :billing_city,
+    :shipping_address, :shipping_postalcode, :shipping_city,
+      presence: true, on: :update, if: :has_shipping?
+
   def approval
     !!approved_at.present?
   end
@@ -63,8 +68,12 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_shipping?
   end
 
+  def has_payment?
+    order_type.present? && order_type.has_payment?
+  end
+
   def padded_id
-    '%08d' % id
+    '1%07d' % id
   end
 
   def to_s

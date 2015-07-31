@@ -7,13 +7,9 @@
 
 .row
   .col-sm-5
-    = form_for @order, html: {class: 'form-horizontal', role: 'form'} do |f|
-      .panel.panel-default
-        .panel-body
-          = render partial: 'orders/form_fields', locals: {f: f}
-          .form-group
-            .col-sm-offset-4.col-sm-8
-              = f.submit class: 'btn btn-primary'
+    .panel.panel-default
+      .panel-body
+        = render partial: 'form'
 
   .col-sm-7
     .table-responsive
@@ -26,4 +22,4 @@
             %th
 
         %tbody
-          = render partial: 'order_items/edit_row', collection: @order.order_items, as: :order_item
+          = render partial: 'order_items/row', collection: @order.order_items, as: :order_item

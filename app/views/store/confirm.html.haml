@@ -1,0 +1,28 @@
+.page-header
+  %h1= icon('shopping-cart', 'Order confirmation')
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2 Product code
+        %th Product title
+        %th.text-right #
+        %th
+
+    %tbody
+      = render partial: 'order_items/edit_row', collection: @order.order_items, as: :order_item
+
+  .row
+    .col-lg-7
+      .panel.panel-default
+        .panel-body
+          = form_tag 'http://test1.maksuturva.fi/NewPaymentExtended.pmt',
+              method: :post, authenticity_token: false, enforce_utf8: false do
+            - @payment.params.each do |key, value|
+              = hidden_field_tag key, value
+            %p.help-block
+              Tilauksesi on valmis maksettavaksi. Klikkaa
+              %strong Maksa nyt
+              jatkaaksesi Maksuturvan sivulle.
+            = submit_tag 'Maksa nyt', class: 'btn btn-lg btn-primary'
