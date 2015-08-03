@@ -32,21 +32,21 @@ class StoreController < ApplicationController
 
   # GET /cart
   def show_cart
-    @order = current_user.shopping_cart
+    @order = current_user.shopping_cart(current_store)
   end
 
   # POST /product/1/order
   def order_product
     @product = Product.find(params[:product_id])
     amount = params[:amount].to_i
-    current_user.shopping_cart.insert!(@product, amount)
+    current_user.shopping_cart(current_store).insert!(@product, amount)
 
     flash.now[:notice] = "#{amount} of #{@product} added to cart"
   end
 
   # POST /checkout
   def checkout
-    @order = current_user.shopping_cart
+    @order = current_user.shopping_cart(current_store)
 
     respond_to do |format|
       if @order.update(order_params)

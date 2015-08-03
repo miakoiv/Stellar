@@ -22,6 +22,9 @@ class Order < ActiveRecord::Base
   # Approved orders.
   scope :approved, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
 
+  # Orders of specified store.
+  scope :by_store, -> (store) { where(store: store) }
+
 
   validates :company_name, :contact_person, :shipping_at,
     :billing_address, :billing_postalcode, :billing_city,
