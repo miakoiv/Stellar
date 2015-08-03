@@ -7,6 +7,7 @@ class OrderItemsController < ApplicationController
   # PATCH/PUT /order_items/1
   def update
     @order_item = OrderItem.find(params[:id])
+    @order = current_user.shopping_cart(current_store)
 
     respond_to do |format|
       if @order_item.update(order_item_params)
@@ -23,6 +24,7 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1
   def destroy
     @order_item = OrderItem.find(params[:id])
+    @order = current_user.shopping_cart(current_store)
 
     respond_to do |format|
       if @order_item.destroy

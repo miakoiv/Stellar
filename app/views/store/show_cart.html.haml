@@ -12,7 +12,8 @@
           %th.col-xs-1.text-right à
           %th.col-xs-1.text-right Subtotal
           %th
-
+      %tfoot
+        = render partial: 'orders/grand_total_row', object: @order, as: :order
       %tbody
         = render partial: 'order_items/edit_row', collection: @order.order_items, as: :order_item
 

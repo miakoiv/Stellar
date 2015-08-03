@@ -75,6 +75,10 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
+  def grand_total
+    order_items.map { |item| item.amount * (item.product.sales_price || 0) }.sum
+  end
+
   def padded_id
     '1%07d' % id
   end
