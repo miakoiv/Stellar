@@ -1,1 +1,2 @@
+$("##{dom_id(@order_item)}").replaceWith("#{j render partial: 'order_items/edit_row', object: @order_item, as: :order_item}");
 $("##{dom_id(@order_item)}").effect('highlight');
