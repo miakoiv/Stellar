@@ -26,11 +26,3 @@
           - if current_user.can_update?(Product)
             = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
                 class: 'btn btn-default btn-sm'
-
-:coffee
-  $('.sortable').sortable(
-    items: 'tr'
-    placeholder: '#{tr_placeholder(6)}'
-  ).bind 'sortupdate', (e, ui) ->
-    $.post '#{reorder_admin_products_path}',
-      {reorder: $('tr', this).map(-> this.id).get()}

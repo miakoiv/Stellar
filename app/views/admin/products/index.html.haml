@@ -5,16 +5,28 @@
   %h1= icon('cube', 'Products')
 
 %ul.nav.nav-tabs{role: 'tablist'}
-  %li.active{role: 'presentation'}
-    %a{href: '#products', role: 'tab', data: {toggle: 'tab'}} Products
+  - @categories.each_with_index do |category, index|
+    - next if category.products.empty?
+    %li{role: 'presentation', class: index == 0 ? 'active' : nil}
+      %a{href: "##{dom_id(category)}", role: 'tab', data: {toggle: 'tab'}}
+        = category.name.truncate(15, omission: '…')
   %li{role: 'presentation'}
-    %a{href: '#uncategorized', role: 'tab', data: {toggle: 'tab'}} Uncategorized products
+    %a{href: '#uncategorized', role: 'tab', data: {toggle: 'tab'}} Uncategorized
 
 .tab-content
-  #products.tab-pane.fade.in.active
-    %h2.visible-print-block Products
-    = render partial: 'admin/products/table', object: @categorized, as: :products
+  - @categorized.group_by(&:category).each do |category, products|
+    .tab-pane.fade.in{id: dom_id(category), class: category == @categories.first ? 'active' : nil}
+      %h2.visible-print-block= category.name
+      = render partial: 'admin/products/table', object: products, as: :products
 
   #uncategorized.tab-pane.fade
-    %h2.visible-print-block Uncategorized products
+    %h2.visible-print-block Uncategorized
     = render partial: 'admin/products/table', object: @uncategorized, as: :products
+
+:coffee
+  $('.sortable').sortable(
+    items: 'tr'
+    placeholder: '#{tr_placeholder(6)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_products_path}',
+      {reorder: $('tr', this).map(-> this.id).get()}
