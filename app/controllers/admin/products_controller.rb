@@ -75,7 +75,6 @@ class Admin::ProductsController < ApplicationController
       else
         current_store.products.uncategorized.ordered_at(@product)
       end
-      logger.info "Point set at: #{@point.inspect}"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
