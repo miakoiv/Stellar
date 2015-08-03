@@ -44,6 +44,10 @@
           .col-sm-8.form-control-static
             = @product.description.html_safe if @product.description.present?
         .form-group
+          %label.col-sm-4.control-label Sales price
+          .col-sm-8
+            %p.form-control-static= @product.sales_price
+        .form-group
           %label.col-sm-4.control-label Memo
           .col-sm-8
             %p.form-control-static.pre><= @product.memo
