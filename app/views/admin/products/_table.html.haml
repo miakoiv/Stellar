@@ -13,10 +13,12 @@
         %td= product.code
         %td
           %strong= product.title
-          = (product.subtitle || '').truncate(30, omission: '…')
+          = product.subtitle
         %td
           - product.images.ordered.each do |image|
-            = image_variant_tag(image, :icon)
+            = image_variant_tag(image, :icon,
+                data: {toggle: 'popover', placement: 'left', container: 'body',
+                  content: "#{image_variant_tag(image, :matchbox)}"})
         %td= product.category
         %td.hidden-print.text-right
           = link_to icon('info', 'Show'), admin_product_path(product),
