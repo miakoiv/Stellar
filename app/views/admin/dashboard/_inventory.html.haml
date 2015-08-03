@@ -19,11 +19,11 @@
           %td
             %strong= product.title
             = product.subtitle
-          %td= stock[:shipping].amount
-          %td.text-right= number_to_currency(stock[:shipping].value, unit: '€')
+          %td= stock[:shipping].try(:amount)
+          %td.text-right= number_to_currency(stock[:shipping].try(:value), unit: '€')
           %td.text-right{title: number_to_currency(component_inventory[1], unit: '𝚺 €'),
               data: {toggle: 'tooltip'}}
-            = number_to_currency(stock[:shipping].total_value, unit: '€')
+            = number_to_currency(stock[:shipping].try(:total_value), unit: '€')
 
         - component_inventory[0].each do |component, inventory|
           - stock = inventory[0]

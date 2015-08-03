@@ -54,7 +54,7 @@ class Store < ActiveRecord::Base
     inventory = {}.tap do |inventory|
       products.each do |product|
         stock = stock_lookup(product.code)
-        grand_total += stock[:shipping].total_value || 0
+        grand_total += stock[:shipping].try(:total_value) || 0
         inventory[product] = [stock, inventory_valuation(product.components)]
       end
     end
