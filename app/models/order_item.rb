@@ -20,6 +20,10 @@ class OrderItem < ActiveRecord::Base
   end
 
 
+  def subtotal
+    amount * (product.sales_price || 0)
+  end
+
   def archive!
     update(
       product_code: product.code,
