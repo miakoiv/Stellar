@@ -1,0 +1,13 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2 Product code
+        %th Product title
+        %th.text-right #
+        %th.col-xs-1.text-right à
+        %th.col-xs-1.text-right Subtotal
+    %tfoot
+      = render partial: 'orders/grand_total_row', object: order, as: :order
+    %tbody
+      = render partial: 'order_items/row', collection: order.order_items, as: :order_item

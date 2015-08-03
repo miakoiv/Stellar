@@ -12,14 +12,4 @@
         = render partial: 'form'
 
   .col-sm-7
-    .table-responsive
-      %table.table.table-striped.table-hover.table-loose
-        %thead
-          %tr
-            %th.col-xs-2 Product code
-            %th Product title
-            %th.text-right #
-            %th
-
-        %tbody
-          = render partial: 'order_items/row', collection: @order.order_items, as: :order_item
+    = render partial: 'order_items/table', object: @order, as: :order

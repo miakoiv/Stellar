@@ -1,5 +1,5 @@
-= content_tag_for(:tr, order_item) do
-  %td= order_item.product.code
+= content_tag_for :tr, order_item do
+  %td= link_to icon('cube', order_item.product.code), show_product_path(order_item.product)
   %td
     %strong= order_item.product.title
     = order_item.product.subtitle
@@ -7,10 +7,8 @@
     = form_for order_item, remote: true,
         html: {class: 'pull-right immediate form-horizontal'} do |f|
       = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
-  %td.text-right= order_item.product.sales_price
-  %td.text-right= order_item.amount * (order_item.product.sales_price || 0)
+  %td.text-right= number_to_currency(order_item.product.sales_price, unit: '€')
+  %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
   %td.text-right
-    = link_to icon('info', 'Product info'), show_product_path(order_item.product),
-        class: 'btn btn-default btn-sm'
     = link_to icon('remove', 'Delete'), order_item_path(order_item),
         remote: true, method: :delete, class: 'btn btn-danger btn-sm'
