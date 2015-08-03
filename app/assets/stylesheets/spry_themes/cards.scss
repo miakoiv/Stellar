@@ -153,9 +153,16 @@
       padding-bottom: 60px;
 
       .nav {
+        @extend .hidden-print;
         position: absolute;
         left: $grid-gutter-width/2;
         bottom: 0;
+      }
+
+      .tab-content {
+        .image:not(:first-child) {
+          @extend .hidden-print;
+        }
       }
 
       img {
@@ -167,16 +174,10 @@
       @extend .col-md-2;
       @extend .col-md-offset-1;
       @extend .col-xs-5;
-
-      .tab-content {
-      }
     }
     .images.presentational {
       @extend .col-md-5;
       @extend .col-xs-7;
-
-      .tab-content {
-      }
     }
   }
 }
