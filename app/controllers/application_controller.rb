@@ -30,7 +30,8 @@ class ApplicationController < ActionController::Base
       # Everyone else is shackled to their designated store.
       current_user.store
     else
-      Store.find_by(host: request.host)
+      # If not logged in, select the store by hostname if possible.
+      Store.find_by(host: request.host) || Store.first
     end
   end
   helper_method :current_store
