@@ -13,3 +13,5 @@
     = active_link_to icon('users', 'Users'), admin_users_path, wrap_tag: :li
   - if current_user.can_read?(Store)
     = active_link_to icon('cubes', 'Stores'), admin_stores_path, wrap_tag: :li
+  %p.navbar-text
+    %span.label.label-warning= Rails.env if Rails.env == 'development'
