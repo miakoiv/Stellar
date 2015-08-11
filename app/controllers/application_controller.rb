@@ -40,4 +40,22 @@ class ApplicationController < ActionController::Base
     Store.find_by(host: request.host) || Store.first
   end
 
+  # Find the guest user stored in session, or create it.
+  def guest_user
+    @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
+  end
+
+  private
+    def create_guest_user
+      guest = User.create(
+        store: default_store,
+        name: "Guest at #{default_store.name}",
+        email: "guest_#{Time.now.to_i}#{rand(100)}@leasit.info",
+        roles: [Role.guest]
+      )
+      guest.save!(validate: false)
+      session[:guest_user_id] = guest.id
+      guest
+    end
+
 end

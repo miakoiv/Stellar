@@ -5,7 +5,17 @@ class StoreController < ApplicationController
   def wiselinks_layout
     'application'
   end
-  before_action :authenticate_user!
+
+  def current_user
+    super || guest_user
+  end
+
+  # A store may admit session-dependent guest users, skipping authentication.
+  before_action do |controller|
+    unless controller.current_store.admit_guests?
+      controller.authenticate_user!
+    end
+  end
   before_action :set_categories
 
   # GET /

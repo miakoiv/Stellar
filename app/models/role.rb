@@ -13,6 +13,11 @@ class Role < ActiveRecord::Base
 
   scopify
 
+  def self.guest
+    find_by(name: 'guest')
+  end
+
+
   # Users permitted to create new users may grant them
   # roles that come later in the pecking order.
   def grantable_roles

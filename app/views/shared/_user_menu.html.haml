@@ -1,5 +1,5 @@
 %ul.nav.navbar-nav.navbar-right
-  - if user_signed_in?
+  - if user_signed_in? && !current_user.is_guest?
     %li.dropdown
       %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
         = current_user.name

@@ -23,7 +23,7 @@ class ApplicationAuthorizer < Authority::Authorizer
     user.is_store_manager? ||
     user.is_sales_rep?     ||
     user.is_customer?      ||
-    false
+    user.is_guest? && user.store.admit_guests?
   end
 
   # General authorization to access the admin dashboard.
