@@ -18,13 +18,9 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
+  scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
 
   validates :name, presence: true
-
-
-  def self.options
-    all.map { |u| [u.email, u.id] }
-  end
 
 
   # A user's shopping cart is technically an order singleton in the scope of
