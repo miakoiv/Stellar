@@ -24,3 +24,20 @@
             %p.form-control-static
               - @user.role_names.each do |role_name|
                 %span.label.label-default= role_name
+
+  - unless @user.is_guest?
+    .col-sm-6
+      .panel.panel-default
+        .panel-body.form-horizontal
+          .form-group
+            %label.col-sm-4.control-label Signed in at
+            .col-sm-8
+              %p.form-control-static= @user.last_sign_in_at.to_s
+          .form-group
+            %label.col-sm-4.control-label IP address
+            .col-sm-8
+              %p.form-control-static= @user.last_sign_in_ip
+          .form-group
+            %label.col-sm-4.control-label Sign in count
+            .col-sm-8
+              %p.form-control-static= @user.sign_in_count
