@@ -35,9 +35,9 @@ class StoreController < ApplicationController
     @product = Product.find(params[:product_id])
     @category = @product.category
     @products = @category.products.ordered
-    @presentational_images = @product.images.by_purpose(:presentational)
-    @technical_images = @product.images.by_purpose(:technical)
-    @documents = @product.images.by_purpose(:document)
+    @presentational_images = @product.images.by_purpose(:presentational).ordered
+    @technical_images = @product.images.by_purpose(:technical).ordered
+    @documents = @product.images.by_purpose(:document).ordered
   end
 
   # GET /cart
@@ -78,7 +78,7 @@ class StoreController < ApplicationController
 
   private
     def set_categories
-      @categories = current_store.categories
+      @categories = current_store.categories.ordered
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
