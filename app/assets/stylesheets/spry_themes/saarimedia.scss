@@ -19,6 +19,21 @@
     padding-right: $grid-gutter-width;
     width: auto;
   }
+
+  #page-nav {
+    margin-top: 20px;
+  }
+  #sub-page-nav {
+    @extend .col-sm-2;
+  }
+  .page-content {
+    @extend .col-sm-8;
+
+    img {
+      @extend .img-responsive;
+    }
+  }
+
   .categories {
     margin: 0 -1*$grid-gutter-width 20px;
     padding: 20px $grid-gutter-width/2 10px;
