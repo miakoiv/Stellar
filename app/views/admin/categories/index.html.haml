@@ -26,7 +26,8 @@
                 class: 'btn btn-default btn-sm'
           - if current_user.can_delete?(Category)
             = link_to icon('remove', 'Delete'), admin_category_path(category),
-                method: :delete, class: 'btn btn-sm btn-danger'
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: "Delete category #{category.name}?"}
 
 :coffee
   $('.sortable').sortable(
