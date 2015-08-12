@@ -135,38 +135,38 @@
     .product-title {
       @extend .page-header;
       margin-top: 0;
+      margin-bottom: 10px;
       padding-left: $grid-gutter-width/2;
       padding-right: $grid-gutter-width/2;
     }
 
     .product-description {
+      position: relative;
       @extend .col-md-4;
       @extend .col-xs-12;
 
       .product-stock {
-        @extend .lead;
-        line-height: 1;
-        margin-top: 0;
-        margin-bottom: 0;
+        display: none;
       }
 
       .body-text {
-        margin-top: 10px;
+        margin-top: 50px;
       }
 
       .product-pricing {
-        @extend .col-sm-5;
+        position: absolute;
+        top: 0;
+        left: $grid-gutter-width/2;
         @extend .lead;
         @extend .text-primary;
-        line-height: 30px;
       }
 
       .product-code {
-        @extend .col-sm-7;
+        position: absolute;
+        top: 0;
+        right: $grid-gutter-width/2;
         @extend .text-right;
-        margin-bottom: 0;
         font-size: 90%;
-        line-height: 30px;
       }
     }
 
