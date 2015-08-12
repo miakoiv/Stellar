@@ -7,7 +7,7 @@
         = f.label :contact_person, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.select :contact_person_id,
-              @store.users.by_role(:store_manager).map { |u| [u.name, u.id] },
+              User.by_role(:store_manager).map { |u| [u.name, u.id] },
               {}, {class: 'select2 form-control'}
           %p.help-block
             A person who is a
