@@ -11,28 +11,28 @@ class Admin::PagesController < ApplicationController
   authorize_actions_for Page
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
-  # GET /pages
-  # GET /pages.json
+  # GET /admin/pages
+  # GET /admin/pages.json
   def index
     @pages = current_store.pages.ordered
   end
 
-  # GET /pages/1
-  # GET /pages/1.json
+  # GET /admin/pages/1
+  # GET /admin/pages/1.json
   def show
   end
 
-  # GET /pages/new
+  # GET /admin/pages/new
   def new
     @page = current_store.pages.build
   end
 
-  # GET /pages/1/edit
+  # GET /admin/pages/1/edit
   def edit
   end
 
-  # POST /pages
-  # POST /pages.json
+  # POST /admin/pages
+  # POST /admin/pages.json
   def create
     @page = current_store.pages.build(page_params)
 
@@ -47,8 +47,8 @@ class Admin::PagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /pages/1
-  # PATCH/PUT /pages/1.json
+  # PATCH/PUT /admin/pages/1
+  # PATCH/PUT /admin/pages/1.json
   def update
     respond_to do |format|
       if @page.update(page_params)
@@ -61,8 +61,8 @@ class Admin::PagesController < ApplicationController
     end
   end
 
-  # DELETE /pages/1
-  # DELETE /pages/1.json
+  # DELETE /admin/pages/1
+  # DELETE /admin/pages/1.json
   def destroy
     @page.destroy
     respond_to do |format|
