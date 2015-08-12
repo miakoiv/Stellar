@@ -12,31 +12,34 @@
         = f.label :title, class: 'col-sm-2 control-label'
         .col-sm-10
           = f.text_field :title, class: 'form-control'
-      - unless @page.new_record?
-        .form-group
-          = f.label :content, class: 'col-sm-2 control-label'
-          .col-sm-10
-            = f.text_area :content, class: 'form-control'
       .form-group
         .col-sm-offset-2.col-sm-10
           = f.submit class: 'btn btn-primary'
 
-- unless @page.new_record?
-  :coffee
-    $('#page_content').editable
-      inlineMode: false
-      buttons: [
-        'bold', 'italic', 'underline', 'formatBlock', 'align',
-        'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',
-        'undo', 'redo'
-      ]
-      imageUploadURL: '#{admin_page_images_path(@page)}'
-      imageUploadParam: 'image[attachment]'
-      imageUploadParams:
-        authenticity_token: '#{form_authenticity_token}'
-      imageDeleteURL: '#{admin_delete_image_path}'
-    .on 'editable.afterRemoveImage', (e, editor, img) ->
-      editor.options.imageDeleteParams =
-        url: img.attr 'src'
-        authenticity_token: '#{form_authenticity_token}'
-      editor.deleteImage img
+  - unless @page.new_record?
+    #page_content><= @page.content.try(:html_safe)
+
+    :coffee
+      $('#page_content').editable
+        inlineMode: false
+        toolbarFixed: false
+        buttons: [
+          'bold', 'italic', 'underline', 'formatBlock', 'align',
+          'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',
+          'undo', 'redo', 'html', 'save'
+        ]
+        saveURL: '#{admin_page_path(@page)}'
+        saveRequestType: 'PATCH'
+        saveParam: 'page[content]'
+        saveParams:
+          authenticity_token: '#{form_authenticity_token}'
+        imageUploadURL: '#{admin_page_images_path(@page)}'
+        imageUploadParam: 'image[attachment]'
+        imageUploadParams:
+          authenticity_token: '#{form_authenticity_token}'
+        imageDeleteURL: '#{admin_delete_image_path}'
+      .on 'editable.afterRemoveImage', (e, editor, img) ->
+        editor.options.imageDeleteParams =
+          url: img.attr 'src'
+          authenticity_token: '#{form_authenticity_token}'
+        editor.deleteImage img

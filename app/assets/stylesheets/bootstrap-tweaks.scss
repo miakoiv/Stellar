@@ -125,6 +125,10 @@ span.shipping:before {
   }
 }
 
+.froala-view[contenteditable] div {
+  outline: 2px solid rgba(0,0,255,0.2);
+}
+
 .unobtrusive-flash-container {
   z-index: $zindex-modal + 10;
   position: fixed;

@@ -52,9 +52,11 @@ class Admin::PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(page_params)
+        format.js
         format.html { redirect_to admin_page_path(@page), notice: 'Page was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_page_path(@page) }
       else
+        format.js { head :no_content }
         format.html { render :edit }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end

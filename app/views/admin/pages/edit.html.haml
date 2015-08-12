@@ -1,8 +1,8 @@
 .page-header
   = link_to admin_pages_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', 'Back')
-  = link_to admin_page_path(@page), class: 'btn btn-primary' do
-    = icon('info-circle', 'Show')
+  = link_to show_page_path(@page), class: 'btn btn-default' do
+    = icon('eye', 'View')
   %h1= icon('file-text-o', @page)
 
 = render 'form'
