@@ -20,7 +20,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_store.categories.first
+    @category = current_store.categories.ordered.first
     @products = @category.present? ? @category.products.ordered : []
   end
 
