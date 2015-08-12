@@ -1,0 +1,190 @@
+/*
+ * Theme specific styles targeting the element .saarimedia
+ * and its descendants.
+ */
+
+.saarimedia {
+  padding-top: $navbar-height;
+  padding-bottom: 120px;
+  overflow-y: scroll;
+
+  #main-nav {
+    @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: $grid-gutter-width;
+    padding-right: $grid-gutter-width;
+    width: auto;
+  }
+  .categories {
+    margin: 0 -1*$grid-gutter-width 20px;
+    padding: 20px $grid-gutter-width/2 10px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAiCAAAAADD1SApAAAA5UlEQVR4AYXUMW6EQBAF0TpSS4T//vda2dO0GgiKwDuItwRl7ef6v5L+qNSc+5EL+jZpkTZJm3LBkBxRx2TI5YLzriQ5j//O9+0hLmgz4hoz71BB56kRc552KtjFpvqjnQtWsdHJbueCVWx9Z7dzwSpWQ2q3c8GudMN6tHPBo1hV/9ntXLCK7SsZ44Jd7CXqGBdMsQ+ZdipYldYvf7dzwfwHWqRNDXXBa2Eq9dkgFfgGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gF/gGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gFz+Bp+mo8f2VxAAAAABJRU5ErkJggg==);
+
+    .category {
+      display: inline-block;
+      margin-right: -10px;
+      margin-bottom: 10px;
+      background: #ccc;
+      @include box-shadow(0 0 6px 0 rgba(0,0,0,0.5));
+      transition: all 0.2s ease-in-out 0s;
+
+      a {
+        display: block;
+        position: relative;
+        width: 90px;
+        height: 112px;
+        padding: 1px;
+        outline: 0;
+        overflow: hidden;
+        text-decoration: none;
+
+        img {
+          display: block;
+          width: 88px;
+          height: auto;
+        }
+
+        p {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 30px;
+          margin: 0;
+          padding: 5px;
+          color: #fff;
+          background: rgba(0,0,0,0.5);
+          font-weight: 500;
+        }
+      }
+    }
+    .category:hover {
+      transform: scale(1.05);
+    }
+    .category.active {
+      z-index: 2;
+    }
+    .category.active a:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      @include gradient-directional(rgba(255,255,255,0.1), rgba(255,255,255,0.9), 120deg);
+    }
+  }
+
+  .products {
+
+    .product {
+      display: inline-block;
+      width: 16.67%;
+      margin-right: 10px;
+      margin-bottom: 10px;
+
+      a {
+        display: block;
+
+        img {
+          @extend .img-thumbnail;
+        }
+        h3 {
+          font-size: $font-size-base;
+          margin-top: 0.5em;
+          margin-bottom: 0.25em;
+        }
+        h4 {
+          margin-top: 0;
+          font-size: $font-size-small;
+        }
+      }
+    }
+  }
+
+  .product-detail {
+    @extend .row;
+
+    .product-actions {
+      @extend .pull-right;
+      margin-top: 6px;
+
+      .form-inline {
+        display: inline-block;
+      }
+    }
+
+    .product-title {
+      @extend .page-header;
+      margin-top: 0;
+      padding-left: $grid-gutter-width/2;
+      padding-right: $grid-gutter-width/2;
+    }
+
+    .product-description {
+      @extend .col-md-4;
+      @extend .col-xs-12;
+
+      .product-stock {
+        @extend .lead;
+        line-height: 1;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .body-text {
+        margin-top: 10px;
+      }
+
+      .product-pricing {
+        @extend .col-sm-5;
+        @extend .lead;
+        @extend .text-primary;
+        line-height: 30px;
+      }
+
+      .product-code {
+        @extend .col-sm-7;
+        @extend .text-right;
+        margin-bottom: 0;
+        font-size: 90%;
+        line-height: 30px;
+      }
+    }
+
+    .images {
+      position: relative;
+      padding-bottom: 60px;
+
+      .nav {
+        @extend .hidden-print;
+        position: absolute;
+        left: $grid-gutter-width/2;
+        bottom: 0;
+      }
+
+      .tab-content {
+        .image:not(:first-child) {
+          @extend .hidden-print;
+        }
+      }
+
+      img {
+        @extend .img-responsive;
+      }
+    }
+
+    .images.technical {
+      @extend .col-md-2;
+      @extend .col-md-offset-1;
+      @extend .col-xs-5;
+    }
+    .images.presentational {
+      @extend .col-md-5;
+      @extend .col-xs-7;
+    }
+  }
+}
