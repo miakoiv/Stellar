@@ -6,8 +6,12 @@
       .form-group
         = f.label :contact_person, class: 'col-sm-4 control-label'
         .col-sm-8
-          = f.select :contact_person_id, User.all.map { |u| [u.name, u.id] },
+          = f.select :contact_person_id,
+              @store.users.by_role(:store_manager).map { |u| [u.name, u.id] },
               {}, {class: 'select2 form-control'}
+          %p.help-block
+            A person who is a
+            %span.label.label-default store manager
       .form-group
         = f.label :erp_number, 'ERP number', class: 'col-sm-4 control-label'
         .col-sm-8
