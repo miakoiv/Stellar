@@ -24,6 +24,9 @@
           - if current_user.can_update?(Category)
             = link_to icon('edit', 'Edit'), edit_admin_category_path(category),
                 class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(Category)
+            = link_to icon('remove', 'Delete'), admin_category_path(category),
+                method: :delete, class: 'btn btn-sm btn-danger'
 
 :coffee
   $('.sortable').sortable(

@@ -61,6 +61,16 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
+  # DELETE /admin/categories/1
+  # DELETE /admin/categories/1.json
+  def destroy
+    @category.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_categories_path, notice: 'Category was successfully deleted.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
