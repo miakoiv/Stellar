@@ -91,14 +91,20 @@
   }
 
   .product-detail {
-
-    .product-actions {
-      @extend .pull-right;
-      margin-top: 6px;
-
-      .form-inline {
-        display: inline-block;
+    @media (min-width: $screen-md-min) {
+      .product-actions {
+        float: right;
+        margin-top: 6px;
       }
+    }
+    @media (max-width: $screen-md-min) {
+      .product-actions {
+        margin-bottom: 20px;
+      }
+    }
+
+    .product-actions .form-inline {
+      display: inline-block;
     }
 
     .product-title {
