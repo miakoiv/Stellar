@@ -1,5 +1,34 @@
-body {
-  padding-bottom: 100px;
+#main {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 60px;
+  margin-bottom: 90px;
+  background: $body-bg;
+}
+
+#flash {
+  position: absolute;
+  bottom: 15px;
+}
+
+#footer {
+  position: fixed;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background-color: $body-bg;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
+  @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
+  font-size: $font-size-small;
+
+  p {
+    margin: 0;
+  }
+  p.lead {
+    font-size: $font-size-base;
+  }
 }
 
 h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
@@ -98,31 +127,6 @@ span.manufacturing:before {
 }
 span.shipping:before {
   content: ""; // truck
-}
-
-#flash {
-  position: absolute;
-  bottom: 15px;
-}
-
-#footer {
-  position: fixed;
-  z-index: 5;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 20px;
-  background-color: $body-bg;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
-  @include box-shadow(inset 0 6px 12px 0 rgba(0,0,0,0.333));
-  font-size: $font-size-small;
-
-  p {
-    margin: 0;
-  }
-  p.lead {
-    font-size: $font-size-base;
-  }
 }
 
 .froala-view[contenteditable] div {

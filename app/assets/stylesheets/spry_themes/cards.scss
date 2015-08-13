@@ -5,7 +5,6 @@
 
 .cards {
   padding-top: $navbar-height;
-  padding-bottom: 120px;
   overflow-y: scroll;
 
   #main-nav {
@@ -27,7 +26,6 @@
     @extend .col-sm-2;
   }
   .page-content {
-    @extend .col-sm-8;
 
     img {
       @extend .img-responsive;
@@ -35,7 +33,6 @@
   }
 
   .categories {
-    @extend .clearfix;
     margin: 0 -1*$grid-gutter-width 20px;
     padding: 20px $grid-gutter-width/2 0;
     background: $gray;
@@ -94,12 +91,6 @@
   }
 
   .product-detail {
-    @extend .clearfix;
-    position: relative;
-    z-index: $zindex-navbar;
-    margin: 0 -1*$grid-gutter-width;
-    padding: 0 $grid-gutter-width/2 30px;
-    background: $body-bg;
 
     .product-actions {
       @extend .pull-right;
