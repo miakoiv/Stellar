@@ -6,3 +6,7 @@
 
 .product-detail
   = render partial: 'products/product_detail', object: @product, as: :product
+
+:coffee
+  jQuery ->
+    $(window).scrollTo $('.product-detail'), 300, offset: -70

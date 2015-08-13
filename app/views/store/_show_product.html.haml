@@ -1,7 +1,9 @@
 = render partial: 'products/product_detail', object: @product, as: :product
 
-:javascript
-  $('.products').hide('blind', 150);
-  $('.product-detail').show('fade', 300, function() { $(this).initialize() });
-  $('.categories .category').removeClass('active');
-  $('.categories ##{dom_id(@category)}').addClass('active');
+:coffee
+  $('.products').hide 'blind', 150
+  $('.categories .category').removeClass 'active'
+  $('.categories ##{dom_id(@category)}').addClass 'active'
+  $('.product-detail').show 'fade', 300, ->
+    $(this).initialize()
+    $(window).scrollTo $(this), 300, offset: -70

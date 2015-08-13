@@ -5,3 +5,7 @@
   = render @products
 
 .product-detail{style: 'display: none'}
+
+:coffee
+  jQuery ->
+    $(window).scrollTo $('.products'), 300, offset: -70

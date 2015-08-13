@@ -1,7 +1,8 @@
 = render @products
 
-:javascript
-  $('.categories .category').removeClass('active');
-  $('.categories ##{dom_id(@category)}').addClass('active');
-  $('.product-detail').hide();
-  $('.products').show();
+:coffee
+  $('.categories .category').removeClass 'active'
+  $('.categories ##{dom_id(@category)}').addClass 'active'
+  $('.product-detail').hide()
+  $('.products').show()
+  $(window).scrollTo $('.products'), 300, offset: -70

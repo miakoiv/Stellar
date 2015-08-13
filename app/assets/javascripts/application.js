@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/effect.all
+//= require jquery.scrollTo
 //= require bootstrap/collapse
 //= require bootstrap/modal
 //= require bootstrap/button
