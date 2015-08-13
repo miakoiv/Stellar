@@ -23,7 +23,7 @@
     margin-top: 20px;
   }
   #sub-page-nav {
-    @extend .col-sm-2;
+    display: none;
   }
   .page-content {
 
