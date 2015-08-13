@@ -31,6 +31,19 @@
   }
 }
 
+.navbar {
+  img {
+    margin: -2px 5px -3px 0;
+  }
+  .navbar-brand {
+    letter-spacing: -0.02em;
+
+    img {
+      display: inline-block;
+    }
+  }
+}
+
 h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
   font-weight: 500;
 }
@@ -52,13 +65,6 @@ i.icon {
   display: inline-block;
   vertical-align: middle;
   padding: 5px 5px 6px 4px;
-}
-
-.navbar img {
-  margin: -2px 5px -3px 0;
-}
-.navbar .navbar-brand img {
-  display: inline-block;
 }
 
 .page-header {
