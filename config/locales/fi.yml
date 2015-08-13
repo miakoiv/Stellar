@@ -19,9 +19,9 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+fi:
   store:
     show_cart:
-      shopping_cart: 'Shopping cart'
-      empty: 'Your shopping cart is empty.'
-      go_shopping: 'Go shopping.'
+      shopping_cart: 'Ostoskori'
+      empty: 'Ostoskorisi on tyhjä.'
+      go_shopping: 'Ostoksille!'

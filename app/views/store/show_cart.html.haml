@@ -1,5 +1,5 @@
 .page-header
-  %h1= icon('shopping-cart', 'Shopping cart')
+  %h1= icon('shopping-cart', t('.shopping_cart'))
 
 - if @order.order_items.present?
   = render partial: 'order_items/edit_table', object: @order, as: :order
@@ -17,5 +17,5 @@
 
 - else
   %p
-    Your shopping cart is empty.
-    = link_to 'Go shopping.', store_path
+    = t('.empty')
+    = link_to t('.go_shopping'), store_path

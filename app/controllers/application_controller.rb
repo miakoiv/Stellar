@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
       alert: 'You are not authorized to complete that action.'
   end
 
+  before_action :set_locale
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
   after_filter :prepare_unobtrusive_flash
 
   # Find the current store for the storefront section.
