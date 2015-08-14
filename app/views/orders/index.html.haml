@@ -1,17 +1,19 @@
 .page-header
-  %h1= icon('truck', 'Orders')
+  %h1= icon('truck', title(Order, count: 2))
 
 %ul.nav.nav-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
-    %a{href: '#orders', role: 'tab', data: {toggle: 'tab'}} Current orders
+    %a{href: '#orders', role: 'tab', data: {toggle: 'tab'}}
+      = t('.current')
   %li{role: 'presentation'}
-    %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}} Approved orders
+    %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}}
+      = t('.approved')
 
 .tab-content
   #orders.tab-pane.fade.in.active
-    %h2.visible-print-block Current orders
+    %h2.visible-print-block= t('.current')
     = render partial: 'orders/table', object: @orders, as: :orders
 
   #approved.tab-pane.fade
-    %h2.visible-print-block Approved orders
+    %h2.visible-print-block= t('.approved')
     = render partial: 'orders/table', object: @approved, as: :orders

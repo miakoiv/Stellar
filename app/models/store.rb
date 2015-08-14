@@ -91,7 +91,7 @@ class Store < ActiveRecord::Base
   end
 
   def to_s
-    new_record? ? 'New store' : name
+    name
   end
 
   private

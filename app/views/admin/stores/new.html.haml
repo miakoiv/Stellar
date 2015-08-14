@@ -1,10 +1,8 @@
 .page-header
   = link_to admin_stores_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left')
-    Back
+    = icon('chevron-circle-left', t('actions.back'))
   %h1
-    Store
-    %span.small= @store.to_s
+    = t('.new_store')
 
 .row
   .col-sm-6

@@ -2,11 +2,11 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-2 Product code
-        %th Product title
-        %th.text-right #
+        %th.col-xs-2= col(OrderItem, :product_code)
+        %th= col(OrderItem, :product_title)
+        %th.text-right= col(OrderItem, :amount)
         %th.col-xs-1.text-right à
-        %th.col-xs-1.text-right Subtotal
+        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
         %th.col-xs-2
     %tfoot
       = render partial: 'orders/grand_total_row', object: order, as: :order

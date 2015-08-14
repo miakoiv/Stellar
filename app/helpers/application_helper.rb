@@ -2,6 +2,14 @@
 
 module ApplicationHelper
 
+  def title(klass, options = {})
+    klass.model_name.human(options).capitalize
+  end
+
+  def col(klass, attribute_name)
+    klass.human_attribute_name(attribute_name)
+  end
+
   def blank_option
     "\u274c" # U+274C CROSS MARK
   end

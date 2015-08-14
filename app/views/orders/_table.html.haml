@@ -2,24 +2,24 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1 Date
-        %th Order type
-        %th.col-xs-1 Items
-        %th.col-xs-1 Shipping at
+        %th.col-xs-1= col(Order, :ordered_at)
+        %th= col(Order, :order_type_id)
+        %th.col-xs-1= col(Order, :items)
+        %th.col-xs-1= col(Order, :shipping_at)
         %th.col-xs-2
 
     %tbody
       = content_tag_for :tr, orders do |order|
-        %td= order.ordered_at.to_date
+        %td= l(order.ordered_at.to_date)
         %td= order.order_type
         %td= order.order_items.count
-        %td= order.shipping_at
+        %td= l(order.shipping_at)
         %td.text-right
           - if order.approval
-            = link_to icon('info', 'Show'), order_path(order),
+            = link_to icon('info', t('actions.show')), order_path(order),
                 class: 'btn btn-default btn-sm'
           - else
-            = link_to icon('edit', 'Edit'), edit_order_path(order),
+            = link_to icon('edit', t('actions.edit')), edit_order_path(order),
                 class: 'btn btn-default btn-sm'
-            = link_to icon('remove', 'Delete'), order_path(order),
+            = link_to icon('remove', t('actions.delete')), order_path(order),
                 method: :delete, class: 'btn btn-sm btn-danger'

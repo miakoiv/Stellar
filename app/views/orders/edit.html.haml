@@ -1,6 +1,6 @@
 .page-header
   = link_to orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   %h1
     Order
     %span.small= @order.to_s

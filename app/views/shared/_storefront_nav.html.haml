@@ -1,9 +1,9 @@
 %ul.nav.navbar-nav
-  = active_link_to icon('cubes', 'Store'), store_path, wrap_tag: :li,
+  = active_link_to icon('cubes', title(Store)), store_path, wrap_tag: :li,
       active: [['store'], ['index', 'show_category', 'show_product']]
   - if current_user && current_user.can?(:shop)
-    = active_link_to icon('shopping-cart', 'Cart'), show_cart_path, wrap_tag: :li, active: :exact
-    = active_link_to icon('truck', 'Orders'), orders_path, wrap_tag: :li
+    = active_link_to icon('shopping-cart', t('store.show_cart.shopping_cart')), show_cart_path, wrap_tag: :li, active: :exact
+    = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
 %ul.nav.navbar-nav.navbar-right
   - if current_user && current_user.can_read?(Order)
-    %li= link_to icon('cog', 'Administration'), admin_orders_path
+    %li= link_to icon('cog', t('admin.manage')), admin_orders_path

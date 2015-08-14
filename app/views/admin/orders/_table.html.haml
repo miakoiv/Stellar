@@ -2,11 +2,11 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1 Date
-        %th.col-xs-2 Order type
-        %th User
-        %th.col-xs-1 Items
-        %th.col-xs-2 Shipping at
+        %th.col-xs-1= col(Order, :ordered_at)
+        %th.col-xs-2= col(Order, :order_type_id)
+        %th= col(Order, :user_id)
+        %th.col-xs-1= col(Order, :items)
+        %th.col-xs-2= col(Order, :shipping_at)
         %th.col-xs-2.hidden-print
 
     %tbody

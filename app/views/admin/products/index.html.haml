@@ -1,8 +1,8 @@
 .page-header
   - if current_user.can_create?(Product)
     = link_to new_admin_product_path, class: 'btn btn-primary' do
-      = icon('plus', 'New Product')
-  %h1= icon('cube', 'Products')
+      = icon('plus', t('.new_product'))
+  %h1= icon('cube', title(Product, count: 2))
 
 %ul.nav.nav-tabs{role: 'tablist'}
   - @categories.each_with_index do |category, index|

@@ -10,5 +10,5 @@
   %td.text-right= number_to_currency(order_item.product.sales_price, unit: '€')
   %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
   %td.text-right
-    = link_to icon('remove', 'Delete'), order_item_path(order_item),
+    = link_to icon('remove', t('actions.delete')), order_item_path(order_item),
         remote: true, method: :delete, class: 'btn btn-danger btn-sm'

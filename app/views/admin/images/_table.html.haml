@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-8 Image
-        %th.col-xs-4 Image type
+        %th.col-xs-8= title(Image)
+        %th.col-xs-4= col(Image, :image_type_id)
 
     %tbody
       = render partial: 'admin/images/row', collection: imageable.images.ordered, as: :image

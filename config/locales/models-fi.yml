@@ -1,0 +1,128 @@
+fi:
+  activerecord:
+    models:
+      category:
+        one: tuoteryhmä
+        other: tuoteryhmät
+      image:
+        one: kuva
+        other: kuvat
+      image_type:
+        one: kuvatyyppi
+        other: kuvatyypit
+      inventory:
+        one: varasto
+        other: varastot
+      inventory_item:
+        one: varastorivi
+        other: varastorivit
+      order:
+        one: tilaus
+        other: tilaukset
+      order_item:
+        one: tilausrivi
+        other: tilausrivit
+      order_type:
+        one: tilaustyyppi
+        other: tilaustyypit
+      page:
+        one: sivu
+        other: sivut
+      product:
+        one: tuote
+        other: tuotteet
+      role:
+        one: rooli
+        other: roolit
+      store:
+        one: kauppa
+        other: kaupat
+      user:
+        one: käyttäjä
+        other: käyttäjät
+    attributes:
+      category:
+        parent_category_id: Pääryhmä
+        name: Nimi
+      image:
+        image_type_id: Kuvatyyppi
+        attachment_file_name: Tiedostonimi
+        attachment_content_type: Tyyppi
+        attachment_file_size: Koko
+      inventory:
+        name: Nimi
+      inventory_item:
+        inventory_id: Varasto
+        code: Tuotekoodi
+        shelf: Hylly
+        amount: Määrä
+        value: Arvo
+      order:
+        user_id: Tilaaja
+        order_type_id: Tilaustyyppi
+        ordered_at: Tilauspvm
+        shipping_at: Toimituspvm
+        approved: Hyväksytty
+        approved_at: Käsitelty
+        items: Rivejä
+        company_name: Yritys
+        contact_person: Yhteyshenkilö
+        billing_address: Laskutusosoite
+        billing_postalcode: Postinro
+        billing_city: Toimipaikka
+        billing_country: Maa
+        shipping_address: Toimitusosoite
+        shipping_postalcode: Postinro
+        shipping_city: Toimipaikka
+        shipping_country: Maa
+        notes: Lisätietoja
+        store_name: Kauppa
+        store_contact_person_name: Yhteyshenkilö
+        store_contact_person_email: Sähköpostiosoite
+        user_name: Tilaaja
+        user_email: Sähköpostiosoite
+        order_type_name: Tilaustyyppi
+        grand_total: Yhteensä
+      order_item:
+        order_id: Tilaus
+        product_id: Tuote
+        amount: Määrä
+        product_code: Tuotekoodi
+        product_customer_code: Asiakkaan koodi
+        product_title: Tuotenimike
+        product_sales_price: Hinta
+        subtotal: Yhteensä
+      page:
+        parent_page_id: Ylempi sivu
+        title: Otsake
+        content: Sisältö
+      product:
+        category_id: Tuoteryhmä
+        code: Tuotekoodi
+        customer_code: Asiakkaan koodi
+        title: Nimike
+        subtitle: Alanimi
+        description: Kuvaus
+        memo: Muistio
+        images: Kuvat
+        cost: Ostohinta
+        sales_price: Myyntihinta
+        stock: Saldo
+        value: Arvo
+      role:
+        name: Nimi
+      store:
+        contact_person_id: Yhteyshenkilö
+        host: Palvelimen osoite
+        erp_number: ERP-numero
+        name: Nimi
+        slug: Tunniste
+        theme: Ulkoasun teema
+      user:
+        name: Nimi
+        role_ids: Roolit
+        sign_in_count: Kirjautumiskertoja
+        current_sign_in_at: Viimeisin kirjautuminen
+        last_sign_in_at: Edellinen kirjautuminen
+        current_sign_in_ip: IP-osoite
+        last_sign_in_ip: IP-osoite

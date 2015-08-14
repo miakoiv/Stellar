@@ -2,11 +2,11 @@
   %table#inventory-table.table.table-condensed.table-hover
     %thead
       %tr
-        %th.col-xs-2{colspan: 2} Product code
-        %th Product title
-        %th.col-xs-1 Stock
+        %th.col-xs-2{colspan: 2}= col(Product, :code)
+        %th= col(Product, :title)
+        %th.col-xs-1= col(Product, :stock)
         %th.col-xs-1.text-right à
-        %th.col-xs-1.text-right Value
+        %th.col-xs-1.text-right= col(Product, :value)
 
     - @inventory[0].each do |product, inventory|
       - stock, component_inventory = inventory

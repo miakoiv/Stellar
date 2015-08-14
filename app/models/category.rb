@@ -16,6 +16,6 @@ class Category < ActiveRecord::Base
 
 
   def to_s
-    new_record? ? 'New category' : name
+    name
   end
 end

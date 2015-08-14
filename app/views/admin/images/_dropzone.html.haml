@@ -6,6 +6,7 @@
 
 :coffee
   Dropzone.options.newImage =
+    dictDefaultMessage: "#{I18n.t('dropzone.default_message')}"
     paramName: 'image[attachment]'
     success: (file, image) ->
       $.get('/admin/images/' + image['id']);

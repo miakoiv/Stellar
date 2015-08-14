@@ -1,9 +1,9 @@
 .page-header
   = link_to admin_users_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(@user)
     = link_to edit_admin_user_path(@user), class: 'btn btn-primary' do
-      = icon('edit', 'Edit')
+      = icon('edit', t('actions.edit'))
   %h1= icon('user', @user)
 
 .row
@@ -11,15 +11,18 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
-          %label.col-sm-4.control-label Name
+          %label.col-sm-4.control-label
+            = col(User, :name)
           .col-sm-8
             %p.form-control-static= @user.name
         .form-group
-          %label.col-sm-4.control-label E-mail
+          %label.col-sm-4.control-label
+            = col(User, :email)
           .col-sm-8
             %p.form-control-static= @user.email
         .form-group
-          %label.col-sm-4.control-label Roles
+          %label.col-sm-4.control-label
+            = col(User, :role_ids)
           .col-sm-8
             %p.form-control-static
               - @user.role_names.each do |role_name|
@@ -30,14 +33,18 @@
       .panel.panel-default
         .panel-body.form-horizontal
           .form-group
-            %label.col-sm-4.control-label Signed in at
+            %label.col-sm-4.control-label
+              = col(User, :last_sign_in_at)
             .col-sm-8
-              %p.form-control-static= @user.last_sign_in_at.to_s
+              %p.form-control-static
+                = l(@user.last_sign_in_at, format: :long)
           .form-group
-            %label.col-sm-4.control-label IP address
+            %label.col-sm-4.control-label
+              = col(User, :last_sign_in_ip)
             .col-sm-8
               %p.form-control-static= @user.last_sign_in_ip
           .form-group
-            %label.col-sm-4.control-label Sign in count
+            %label.col-sm-4.control-label
+              = col(User, :sign_in_count)
             .col-sm-8
               %p.form-control-static= @user.sign_in_count

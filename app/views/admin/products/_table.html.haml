@@ -2,10 +2,10 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1 Code
-        %th Title
-        %th.col-xs-2 Images
-        %th.col-xs-2 Category
+        %th.col-xs-1= col(Product, :code)
+        %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :images)
+        %th.col-xs-2= col(Product, :category_id)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Product) ? 'sortable' : nil}
@@ -21,8 +21,8 @@
                   content: "#{image_variant_tag(image, :matchbox)}"})
         %td= product.category
         %td.hidden-print.text-right
-          = link_to icon('info', 'Show'), admin_product_path(product),
+          = link_to icon('info', t('actions.show')), admin_product_path(product),
               class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Product)
-            = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+            = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
                 class: 'btn btn-default btn-sm'

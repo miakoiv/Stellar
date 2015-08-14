@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-4 Image
-        %th.col-xs-6 Image type
+        %th.col-xs-4= title(Image)
+        %th.col-xs-6= col(Image, :image_type_id)
         %th.hidden-print
 
     %tbody#images.sortable

@@ -15,6 +15,6 @@ class Page < ActiveRecord::Base
 
 
   def to_s
-    new_record? ? 'New page' : title
+    title
   end
 end

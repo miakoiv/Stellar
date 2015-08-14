@@ -20,5 +20,5 @@
 <% for attribute in attributes -%>
           %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-          %td= link_to icon('info', 'Show'), <%= singular_table_name %>
-          %td= link_to icon('edit', 'Edit'), edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
+          %td= link_to icon('info', t('actions.show')), <%= singular_table_name %>
+          %td= link_to icon('edit', t('actions.edit')), edit_<%= singular_table_name %>_path(<%= singular_table_name %>)

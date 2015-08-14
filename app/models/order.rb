@@ -84,7 +84,7 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    new_record? ? '[new]' : padded_id
+    new_record? ? '' : padded_id
   end
 
   private

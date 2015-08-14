@@ -1,17 +1,17 @@
 .page-header
   - if current_user.can_create?(Store)
     = link_to new_admin_store_path, class: 'btn btn-primary' do
-      = icon('plus', 'New Store')
-  %h1= icon('cubes', 'Stores')
+      = icon('plus', t('.new_store'))
+  %h1= icon('cubes', title(Store, count: 2))
 
 .table-responsive
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
         %th.col-xs-1
-        %th Name
-        %th ERP number
-        %th Semantic name
+        %th= col(Store, :name)
+        %th= col(Store, :erp_number)
+        %th= col(Store, :slug)
         %th.hidden-print
 
     %tbody
@@ -23,13 +23,13 @@
           %td= store.slug
           %td.hidden-print.text-right
             - if current_store != store
-              = link_to icon('bookmark', 'Select'),
+              = link_to icon('bookmark', t('actions.select')),
                   admin_stores_path(store_id: store),
                   class: 'btn btn-default btn-sm'
-            = link_to icon('cubes', 'View'),
+            = link_to icon('cubes', t('actions.view')),
                 store_path(store_id: store), class: 'btn btn-default btn-sm'
-            = link_to icon('info', 'Show'), admin_store_path(store),
+            = link_to icon('info', t('actions.show')), admin_store_path(store),
                 class: 'btn btn-default btn-sm'
             - if current_user.can_update?(Store)
-              = link_to icon('edit', 'Edit'), edit_admin_store_path(store),
+              = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store),
                   class: 'btn btn-default btn-sm'

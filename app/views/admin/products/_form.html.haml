@@ -9,11 +9,11 @@
           = f.select :category_id, current_store.category_options,
               {include_blank: blank_option}, {class: 'select2 form-control'}
       .form-group
-        = f.label :code, 'Product code', class: 'col-sm-4 control-label import'
+        = f.label :code, class: 'col-sm-4 control-label import'
         .col-sm-8
           = f.text_field :code, class: 'form-control'
       .form-group
-        = f.label :customer_code, 'Customer product code', class: 'col-sm-4 control-label import'
+        = f.label :customer_code, class: 'col-sm-4 control-label import'
         .col-sm-8
           = f.text_field :customer_code, class: 'form-control'
       .form-group
@@ -38,11 +38,7 @@
         = f.label :memo, class: 'col-sm-4 control-label import'
         .col-sm-8
           = f.text_area :memo, rows: 4, class: 'form-control'
-          %p.help-block
-            Fields marked with
-            %span.text-info ❖
-            are imported and should not be edited locally.
-            Your changes may be overwritten.
+          %p.help-block= t('.memo_help_html')
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'

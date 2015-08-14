@@ -1,15 +1,15 @@
 .page-header
   = link_to admin_products_path(anchor: products_tab(@product)), class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   - if @point.next.present?
     = link_to icon('arrow-down'), edit_admin_product_path(@point.next), class: 'btn btn-default'
   - if @point.previous.present?
     = link_to icon('arrow-up'), edit_admin_product_path(@point.previous), class: 'btn btn-default'
   = link_to admin_product_path(@product), class: 'btn btn-primary' do
-    = icon('info-circle', 'Show')
+    = icon('info-circle', t('actions.show'))
   - if @product.category.present?
     = link_to show_product_path(@product), class: 'btn btn-default' do
-      = icon('cubes', 'Show in store')
+      = icon('eye', t('actions.view'))
   %h1
     = icon('cube', @product.title)
     %span.small= @product.subtitle

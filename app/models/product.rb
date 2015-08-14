@@ -27,6 +27,6 @@ class Product < ActiveRecord::Base
 
 
   def to_s
-    new_record? ? 'New product' : title
+    title
   end
 end

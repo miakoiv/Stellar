@@ -45,6 +45,6 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    new_record? ? 'New user' : "#{name} <#{email}>"
+    "#{name} <#{email}>"
   end
 end

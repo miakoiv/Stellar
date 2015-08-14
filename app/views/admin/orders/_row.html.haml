@@ -5,8 +5,8 @@
   %td= order.order_items.count
   %td= order.shipping_at
   %td.hidden-print.text-right
-    = link_to icon('info', 'Show'), admin_order_path(order),
+    = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'
     - if current_user.can_update?(Order)
-      = link_to icon('edit', 'Edit'), edit_admin_order_path(order),
+      = link_to icon('edit', t('actions.edit')), edit_admin_order_path(order),
           class: 'btn btn-default btn-sm'

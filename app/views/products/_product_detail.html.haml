@@ -3,15 +3,15 @@
     = form_tag order_product_path(product), method: :post, remote: true,
         class: 'form-inline hidden-print' do
       .form-group
-        %label{for: :amount} Amount to order
+        %label{for: :amount}= t('.amount')
         = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
       %button.btn.btn-success{type: 'submit'}
-        = icon('cart-plus', 'Add to cart')
+        = icon('cart-plus', t('.add'))
 
   - if current_user.can_update?(Product)
-    = link_to icon('edit', 'Edit'), edit_admin_product_path(product),
+    = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
         class: 'btn btn-default'
-  = link_to icon('times', 'Close'), show_category_path(product.category),
+  = link_to icon('times'), show_category_path(product.category),
       data: {push: 'partial', target: '.products'},
       class: 'btn btn-primary'
 

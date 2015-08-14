@@ -1,8 +1,7 @@
 .page-header
   = link_to admin_users_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left')
-    Back
-  %h1= icon('user', @user)
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1= icon('user', t('.new_user'))
 
 .row
   .col-sm-6

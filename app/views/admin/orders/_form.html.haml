@@ -4,17 +4,20 @@
       = render 'shared/errors', object: @order
 
       .form-group
-        %label.col-sm-4.control-label Order type
+        %label.col-sm-4.control-label
+          = col(Order, :order_type_id)
         .col-sm-8
           %p.form-control-static= @order.order_type
       .form-group
-        %label.col-sm-4.control-label Customer
+        %label.col-sm-4.control-label
+          = col(Order, :user_id)
         .col-sm-8
           %p.form-control-static= @order.user
       .form-group
-        %label.col-sm-4.control-label Ordered at
+        %label.col-sm-4.control-label
+          = col(Order, :ordered_at)
         .col-sm-8
-          %p.form-control-static= @order.ordered_at
+          %p.form-control-static= l(@order.ordered_at, format: :long)
       %fieldset{disabled: @order.approval}
         .form-group
           = f.label :company_name, class: 'col-sm-4 control-label'
@@ -59,7 +62,7 @@
           .checkbox
             %label
               = f.check_box :approval
-              Approved
+              = col(Order, :approved)
       .form-group
         .col-sm-offset-4.col-sm-8
           = f.submit class: 'btn btn-primary'

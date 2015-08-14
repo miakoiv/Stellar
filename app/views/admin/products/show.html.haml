@@ -1,16 +1,16 @@
 .page-header
   = link_to admin_products_path(anchor: products_tab(@product)), class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   - if @point.next.present?
     = link_to icon('arrow-down'), admin_product_path(@point.next), class: 'btn btn-default'
   - if @point.previous.present?
     = link_to icon('arrow-up'), admin_product_path(@point.previous), class: 'btn btn-default'
   - if current_user.can_update?(Product)
     = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
-      = icon('pencil-square', 'Edit')
+      = icon('pencil-square', t('actions.edit'))
   - if @product.category.present?
     = link_to show_product_path(@product), class: 'btn btn-default' do
-      = icon('cubes', 'Show in store')
+      = icon('eye', t('actions.view'))
   %h1
     = icon('cube', @product.title)
     %span.small= @product.subtitle
@@ -20,35 +20,43 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
-          %label.col-sm-4.control-label Category
+          %label.col-sm-4.control-label
+            = col(Product, :category_id)
           .col-sm-8
             %p.form-control-static= @product.category
         .form-group
-          %label.col-sm-4.control-label Product code
+          %label.col-sm-4.control-label
+            = col(Product, :code)
           .col-sm-8
             %p.form-control-static= @product.code
         .form-group
-          %label.col-sm-4.control-label Customer product code
+          %label.col-sm-4.control-label
+            = col(Product, :customer_code)
           .col-sm-8
             %p.form-control-static= @product.customer_code
         .form-group
-          %label.col-sm-4.control-label Title
+          %label.col-sm-4.control-label
+            = col(Product, :title)
           .col-sm-8
             %p.form-control-static= @product.title
         .form-group
-          %label.col-sm-4.control-label Subtitle
+          %label.col-sm-4.control-label
+            = col(Product, :subtitle)
           .col-sm-8
             %p.form-control-static= @product.subtitle
         .form-group
-          %label.col-sm-4.control-label Description
+          %label.col-sm-4.control-label
+            = col(Product, :description)
           .col-sm-8.form-control-static
             = @product.description.html_safe if @product.description.present?
         .form-group
-          %label.col-sm-4.control-label Sales price
+          %label.col-sm-4.control-label
+            = col(Product, :sales_price)
           .col-sm-8
             %p.form-control-static= @product.sales_price
         .form-group
-          %label.col-sm-4.control-label Memo
+          %label.col-sm-4.control-label
+            = col(Product, :memo)
           .col-sm-8
             %p.form-control-static.pre><= @product.memo
 

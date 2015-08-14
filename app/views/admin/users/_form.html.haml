@@ -8,7 +8,7 @@
         .col-sm-8
           = f.text_field :name, class: 'form-control'
       .form-group
-        = f.label :email, 'E-mail', class: 'col-sm-4 control-label'
+        = f.label :email, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.text_field :email, class: 'form-control'
       - if @user.new_record?
@@ -21,7 +21,7 @@
           .col-sm-8
             = f.password_field :password_confirmation, class: 'form-control'
       .form-group
-        = f.label :roles, class: 'col-sm-4 control-label'
+        = f.label :role_ids, class: 'col-sm-4 control-label'
         .col-sm-8
           = f.select :role_ids,
             current_user.grantable_role_options,

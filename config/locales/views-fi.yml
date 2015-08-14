@@ -1,0 +1,92 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+fi:
+  admin:
+    dashboard:
+      title: Konsoli
+      valuation: Varaston arvo
+      total_value: Arvo yhteensä
+      items: Nimikkeitä
+
+    manage: Hallinta
+    categories:
+      index:
+        new_category: Uusi tuoteryhmä
+      new:
+        new_category: Uusi tuoteryhmä
+    orders:
+      index:
+        current: Avoimet
+        approved: Hyväksytyt
+      components:
+        aggregated: Keräilylista
+    products:
+      index:
+        new_product: Uusi tuote
+      new:
+        new_product: Uusi tuote
+      form:
+        memo_help_html: |
+          Merkityt <span class="text-info">❖</span> kentät
+          tuodaan ulkopuolisesta tietokannasta. Tekemäsi
+          muutokset eivät ehkä säily.
+    stores:
+      index:
+        new_store: Uusi kauppa
+      new:
+        new_store: Uusi kauppa
+      form:
+        contact_person_help_html: |
+          A person who is a <span class="label label-default">
+          Store manager</span>
+        slug_help_html: Tunniste luodaan automaattisesti.
+    users:
+      index:
+        new_user: Uusi käyttäjä
+      new:
+        new_user: Uusi käyttäjä
+
+  orders:
+    index:
+      current: Avoimet
+      approved: Hyväksytyt
+  products:
+    product_detail:
+      amount: Määrä
+      add: Lisää koriin
+  store:
+    show_cart:
+      shopping_cart: Ostoskori
+      empty: Ostoskorisi on tyhjä.
+      go_shopping: Ostoksille!
+
+  actions:
+    back: Palaa
+    show: Näytä
+    edit: Muokkaa
+    delete: Poista
+    select: Valitse
+    view: Katso
+    print: Tulosta
+    confirm: "Poistetaanko varmasti %{klass} %{name}?"
+  dropzone:
+    default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.

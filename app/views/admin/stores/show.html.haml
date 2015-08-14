@@ -1,9 +1,9 @@
 .page-header
   = link_to admin_stores_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(Store)
     = link_to edit_admin_store_path(@store), class: 'btn btn-primary' do
-      = icon('pencil-square', 'Edit')
+      = icon('pencil-square', t('actions.edit'))
   %h1
     = image_variant_tag(@store.cover_image)
     = @store
@@ -13,27 +13,33 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
-          %label.col-sm-4.control-label Contact person
+          %label.col-sm-4.control-label
+            = col(Store, :contact_person_id)
           .col-sm-8
             %p.form-control-static= @store.contact_person.name
         .form-group
-          %label.col-sm-4.control-label ERP number
+          %label.col-sm-4.control-label
+            = col(Store, :erp_number)
           .col-sm-8
             %p.form-control-static= @store.erp_number
         .form-group
-          %label.col-sm-4.control-label Name
+          %label.col-sm-4.control-label
+            = col(Store, :name)
           .col-sm-8
             %p.form-control-static= @store.name
         .form-group
-          %label.col-sm-4.control-label Semantic name
+          %label.col-sm-4.control-label
+            = col(Store, :slug)
           .col-sm-8
             %p.form-control-static= @store.slug
         .form-group
-          %label.col-sm-4.control-label Host
+          %label.col-sm-4.control-label
+            = col(Store, :host)
           .col-sm-8
             %p.form-control-static= "http://#{@store.host}"
         .form-group
-          %label.col-sm-4.control-label Theme
+          %label.col-sm-4.control-label
+            = col(Store, :theme)
           .col-sm-8
             %p.form-control-static= @store.theme
 

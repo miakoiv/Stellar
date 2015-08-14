@@ -1,6 +1,6 @@
 .page-header
   = link_to admin_pages_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', 'Back')
+    = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('file-text-o', @page)
 
 = render 'form'

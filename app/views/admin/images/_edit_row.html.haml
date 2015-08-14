@@ -11,5 +11,5 @@
             = f.radio_button :image_type_id, imagetype.id
             = imagetype
   %td.hidden-print.text-right
-    = link_to icon('remove', 'Delete'), admin_image_path(image),
+    = link_to icon('remove', t('actions.delete')), admin_image_path(image),
         remote: true, method: :delete, class: 'btn btn-sm btn-danger'
