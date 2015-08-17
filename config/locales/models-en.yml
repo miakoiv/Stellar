@@ -118,6 +118,7 @@ en:
         name: Name
         slug: Slug
         theme: Display theme
+        locale: Language
       user:
         name: Name
         role_ids: Roles

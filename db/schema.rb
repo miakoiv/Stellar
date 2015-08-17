@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811125029) do
+ActiveRecord::Schema.define(version: 20150817100007) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 20150811125029) do
     t.string   "name",              limit: 255
     t.string   "slug",              limit: 255
     t.string   "theme",             limit: 255
+    t.string   "locale",            limit: 255, default: "fi",  null: false
     t.boolean  "admit_guests",      limit: 1,   default: false, null: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false

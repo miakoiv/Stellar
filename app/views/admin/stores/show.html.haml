@@ -42,6 +42,12 @@
             = col(Store, :theme)
           .col-sm-8
             %p.form-control-static= @store.theme
+        .form-group
+          %label.col-sm-4.control-label
+            = col(Store, :locale)
+          .col-sm-8
+            %p.form-control-static
+              = {'en' => 'English', 'fi' => 'suomi'}[@store.locale]
 
   .col-md-6
     = render partial: 'admin/images/table', object: @store, as: :imageable

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = params[:locale] || current_store.locale || I18n.default_locale
   end
 
   after_filter :prepare_unobtrusive_flash

@@ -118,6 +118,7 @@ fi:
         name: Nimi
         slug: Tunniste
         theme: Ulkoasun teema
+        locale: Kieli
       user:
         name: Nimi
         role_ids: Roolit
