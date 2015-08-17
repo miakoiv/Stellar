@@ -28,7 +28,10 @@
             = link_to icon('remove', t('actions.delete')), admin_category_path(category),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',
-                  klass: Category.model_name.human, name: category.name)}
+                  klass: Category.model_name.human, name: category.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(
