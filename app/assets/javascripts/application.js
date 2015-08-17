@@ -31,7 +31,8 @@
 //= require dropzone
 //= require magnific-popup
 //= require select2
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require jquery-tablesorter
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap

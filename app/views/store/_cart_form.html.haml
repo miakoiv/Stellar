@@ -20,7 +20,8 @@
       = f.label :shipping_at, class: 'col-sm-4 control-label'
       .col-sm-8
         = f.date_field :shipping_at, class: 'form-control',
-            data: {provide: 'datepicker'}
+            data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
+              'date-language' => I18n.locale}
     .form-group
       = f.label :billing_address, class: 'col-sm-4 control-label'
       .col-sm-8
