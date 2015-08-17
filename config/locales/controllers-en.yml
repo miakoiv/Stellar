@@ -1,0 +1,49 @@
+fi:
+  admin:
+    categories:
+      create:
+        notice: "Category %{category} created."
+      update:
+        notice: "Category %{category} updated."
+      destroy:
+        notice: "Category %{category} deleted."
+    images:
+      create:
+        error: "Image upload failed."
+    orders:
+      create:
+        notice: "Order %{order} created."
+      update:
+        notice: "Order %{order} updated."
+    pages:
+      create:
+        notice: "Page %{page} created."
+      update:
+        notice: "Page %{page} updated."
+      destroy:
+        notice: "Page %{page} deleted."
+    products:
+      create:
+        notice: "Product %{product} created."
+      update:
+        notice: "Product %{product} updated."
+    stores:
+      create:
+        notice: "Store %{store} created."
+      update:
+        notice: "Store %{store} updated."
+    users:
+      create:
+        notice: "User %{user} created."
+      update:
+        notice: "User %{user} updated."
+  orders:
+    update:
+      notice: "Order %{order} updated."
+    destroy:
+      notice: "Order %{order} deleted."
+  store:
+    order_product:
+      notice: "%{amount} of ”%{product}” added to cart."
+    checkout:
+      notice: "Order received."

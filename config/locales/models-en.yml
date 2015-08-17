@@ -1,0 +1,128 @@
+en:
+  activerecord:
+    models:
+      category:
+        one: category
+        other: categories
+      image:
+        one: image
+        other: images
+      image_type:
+        one: image type
+        other: image types
+      inventory:
+        one: inventory
+        other: inventories
+      inventory_item:
+        one: inventory item
+        other: inventory items
+      order:
+        one: order
+        other: orders
+      order_item:
+        one: order item
+        other: order items
+      order_type:
+        one: order type
+        other: order types
+      page:
+        one: page
+        other: pages
+      product:
+        one: product
+        other: products
+      role:
+        one: role
+        other: roles
+      store:
+        one: store
+        other: stores
+      user:
+        one: user
+        other: users
+    attributes:
+      category:
+        parent_category_id: Parent category
+        name: Name
+      image:
+        image_type_id: Image type
+        attachment_file_name: File name
+        attachment_content_type: File type
+        attachment_file_size: File size
+      inventory:
+        name: Name
+      inventory_item:
+        inventory_id: Inventory
+        code: Product code
+        shelf: Shelf
+        amount: Amount
+        value: Value
+      order:
+        user_id: Customer
+        order_type_id: Order type
+        ordered_at: Date of order
+        shipping_at: Date of shipment
+        approved: Approved
+        approved_at: Processed
+        items: Rows
+        company_name: Company
+        contact_person: Contact person
+        billing_address: Billing address
+        billing_postalcode: Postal code
+        billing_city: City
+        billing_country: County
+        shipping_address: Shipping address
+        shipping_postalcode: Postal code
+        shipping_city: City
+        shipping_country: Country
+        notes: Notes
+        store_name: Store
+        store_contact_person_name: Contact person
+        store_contact_person_email: E-mail
+        user_name: Customer
+        user_email: E-mail
+        order_type_name: Order type
+        grand_total: Grand total
+      order_item:
+        order_id: Order
+        product_id: Product
+        amount: Amount
+        product_code: Product code
+        product_customer_code: Customer code
+        product_title: Product title
+        product_sales_price: Sales price
+        subtotal: Subtotal
+      page:
+        parent_page_id: Parent page
+        title: Title
+        content: Content
+      product:
+        category_id: Category
+        code: Product code
+        customer_code: Customer code
+        title: Title
+        subtitle: Subtitle
+        description: Description
+        memo: Memo
+        images: Images
+        cost: Purchase price
+        sales_price: Sales price
+        stock: Stock
+        value: Value
+      role:
+        name: Name
+      store:
+        contact_person_id: Contact person
+        host: Server address
+        erp_number: ERP number
+        name: Name
+        slug: Slug
+        theme: Display theme
+      user:
+        name: Name
+        role_ids: Roles
+        sign_in_count: Sign in count
+        current_sign_in_at: Current sign in
+        last_sign_in_at: Last sign in
+        current_sign_in_ip: IP address
+        last_sign_in_ip: IP address
