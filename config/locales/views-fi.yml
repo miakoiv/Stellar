@@ -27,7 +27,6 @@ fi:
         title: Varaston arvo
         total_value: Arvo yhteensä
         items: Nimikkeitä
-
     manage: Hallinta
     categories:
       index:
@@ -70,7 +69,6 @@ fi:
         new_user: Uusi käyttäjä
       new:
         new_user: Uusi käyttäjä
-
   orders:
     index:
       current: Avoimet
@@ -86,7 +84,6 @@ fi:
       go_shopping: Ostoksille!
     cart_form:
       place_order: Tilaa
-
   actions:
     back: Palaa
     show: Näytä
@@ -103,5 +100,5 @@ fi:
   dropzone:
     default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
   footer:
-    heading: 😃 Spry-verkkokauppa
+    heading: Spry 😃 -verkkokauppa
     body_html: Tuottanut Leasit Oy <i class="fa fa-copyright"></i> 2015
