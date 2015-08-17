@@ -74,7 +74,7 @@ class Admin::ProductsController < ApplicationController
 
     def set_point
       @point = if @product.category.present?
-        current_store.products.categorized.ordered_at(@product)
+        @product.category.products.ordered_at(@product)
       else
         current_store.products.uncategorized.ordered_at(@product)
       end
