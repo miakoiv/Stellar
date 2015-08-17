@@ -27,7 +27,7 @@ class Admin::ImagesController < ApplicationController
         format.html { render json: {link: @image.url(:lightbox, false)} } # for Froala
         format.json { render json: @image, status: 200 } # for dropzone
       else
-        format.html { render json: {error: 'Image upload failed.'} }
+        format.html { render json: {error: t('.error')} }
         format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
       end
     end

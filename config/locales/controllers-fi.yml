@@ -1,0 +1,49 @@
+fi:
+  admin:
+    categories:
+      create:
+        notice: "Tuoteryhmä %{category} luotu."
+      update:
+        notice: "Tuoteryhmä %{category} päivitetty."
+      destroy:
+        notice: "Tuoteryhmä %{category} poistettu."
+    images:
+      create:
+        error: "Kuvan lisääminen epäonnistui."
+    orders:
+      create:
+        notice: "Tilaus %{order} luotu."
+      update:
+        notice: "Tilaus %{order} päivitetty."
+    pages:
+      create:
+        notice: "Sivu %{page} luotu."
+      update:
+        notice: "Sivu %{page} päivitetty."
+      destroy:
+        notice: "Sivu %{page} poistettu."
+    products:
+      create:
+        notice: "Tuote %{product} luotu."
+      update:
+        notice: "Tuote %{product} päivitetty."
+    stores:
+      create:
+        notice: "Kauppa %{store} luotu."
+      update:
+        notice: "Kauppa %{store} päivitetty."
+    users:
+      create:
+        notice: "Käyttäjä %{user} luotu."
+      update:
+        notice: "Käyttäjä %{user} päivitetty."
+  orders:
+    update:
+      notice: "Tilaus %{order} päivitetty."
+    destroy:
+      notice: "Tilaus %{order} poistettu."
+  store:
+    order_product:
+      notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
+    checkout:
+      notice: "Tilaus vastaanotettu."

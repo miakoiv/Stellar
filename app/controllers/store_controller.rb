@@ -51,7 +51,7 @@ class StoreController < ApplicationController
     amount = params[:amount].to_i
     current_user.shopping_cart(current_store).insert!(@product, amount)
 
-    flash.now[:notice] = "#{amount} of #{@product} added to cart"
+    flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
   # POST /checkout
@@ -68,7 +68,8 @@ class StoreController < ApplicationController
           format.html { render :confirm }
         else
           @order.update ordered_at: Time.current
-          format.html { redirect_to orders_path, notice: 'Order was successfully placed.' }
+          format.html { redirect_to orders_path,
+            notice: t('.notice') }
         end
       else
         format.html { render :show_cart }

@@ -36,7 +36,8 @@ class Admin::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully created.' }
+        format.html { redirect_to admin_order_path(@order),
+          notice: t('.notice', order: @order) }
         format.json { render :show, status: :created, location: admin_order_path(@order) }
       else
         format.html { render :new }
@@ -50,7 +51,8 @@ class Admin::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to admin_order_path(@order), notice: 'Order was successfully updated.' }
+        format.html { redirect_to admin_order_path(@order),
+          notice: t('.notice', order: @order) }
         format.json { render :show, status: :ok, location: admin_order_path(@order) }
       else
         format.html { render :edit }

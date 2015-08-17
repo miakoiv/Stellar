@@ -33,7 +33,8 @@ class Admin::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to edit_admin_page_path(@page), notice: 'Page was successfully created.' }
+        format.html { redirect_to edit_admin_page_path(@page),
+          notice: t('.notice', page: @page) }
         format.json { render :edit, status: :created, location: admin_page_path(@page) }
       else
         format.html { render :new }
@@ -48,7 +49,8 @@ class Admin::PagesController < ApplicationController
     respond_to do |format|
       if @page.update(page_params)
         format.js
-        format.html { redirect_to admin_page_path(@page), notice: 'Page was successfully updated.' }
+        format.html { redirect_to admin_page_path(@page),
+          notice: t('.notice', page: @page) }
         format.json { render :show, status: :ok, location: admin_page_path(@page) }
       else
         format.js { head :no_content }
@@ -63,7 +65,8 @@ class Admin::PagesController < ApplicationController
   def destroy
     @page.destroy
     respond_to do |format|
-      format.html { redirect_to admin_pages_path, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to admin_pages_path,
+        notice: t('.notice', page: @page) }
       format.json { head :no_content }
     end
   end

@@ -38,7 +38,8 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to edit_order_path(@order), notice: 'Order was successfully updated.' }
+        format.html { redirect_to edit_order_path(@order),
+          notice: t('.notice', order: @order) }
         format.json { render :edit, status: :ok, location: edit_order_path(@order) }
       else
         format.html { render :edit }
@@ -53,7 +54,8 @@ class OrdersController < ApplicationController
 
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_path, notice: 'Order deleted.'}
+      format.html { redirect_to orders_path,
+        notice: t('.notice', order: @order) }
     end
   end
 

@@ -36,7 +36,8 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
+        format.html { redirect_to admin_user_path(@user),
+          notice: t('.notice', user: @user) }
         format.json { render :show, status: :created, location: admin_user_path(@user) }
       else
         format.html { render :new }
@@ -52,7 +53,8 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to admin_user_path(@user),
+          notice: t('.notice', user: @user) }
         format.json { render :show, status: :ok, location: admin_user_path(@user) }
       else
         format.html { render :edit }
@@ -65,7 +67,8 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_users_path, notice: 'User was successfully deleted.' }
+      format.html { redirect_to admin_users_path,
+        notice: t('.notice', user: @user) }
     end
   end
 

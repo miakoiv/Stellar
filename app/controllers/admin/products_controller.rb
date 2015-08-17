@@ -41,7 +41,8 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully created.' }
+        format.html { redirect_to admin_product_path(@product),
+          notice: t('.notice', product: @product) }
         format.json { render :show, status: :created, location: admin_product_path(@product) }
       else
         format.html { render :new }
@@ -55,7 +56,8 @@ class Admin::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully updated.' }
+        format.html { redirect_to admin_product_path(@product),
+          notice: t('.notice', product: @product) }
         format.json { render :show, status: :ok, location: admin_product_path(@product) }
       else
         format.html { render :edit }
