@@ -27,7 +27,7 @@
           - if current_user.can_delete?(Category)
             = link_to icon('remove', t('actions.delete')), admin_category_path(category),
                 method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm',
+                data: {confirm: t('actions.confirm.body',
                   klass: Category.model_name.human, name: category.name)}
 
 :coffee

@@ -95,7 +95,11 @@ fi:
     select: Valitse
     view: Katso
     print: Tulosta
-    confirm: "Poistetaanko varmasti %{klass} %{name}?"
+    confirm:
+      title: 'Oletko varma?'
+      body: "Poistetaanko varmasti %{klass} ”%{name}”?"
+      proceed: 'Poista'
+      cancel: 'Kumoa'
   dropzone:
     default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
   footer:
