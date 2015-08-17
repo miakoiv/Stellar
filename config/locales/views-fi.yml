@@ -23,9 +23,10 @@ fi:
   admin:
     dashboard:
       title: Konsoli
-      valuation: Varaston arvo
-      total_value: Arvo yhteensä
-      items: Nimikkeitä
+      inventory:
+        title: Varaston arvo
+        total_value: Arvo yhteensä
+        items: Nimikkeitä
 
     manage: Hallinta
     categories:
@@ -39,9 +40,15 @@ fi:
         approved: Hyväksytyt
       components:
         aggregated: Keräilylista
+    pages:
+      index:
+        new_page: Uusi sivu
+      new:
+        new_page: Uusi sivu
     products:
       index:
         new_product: Uusi tuote
+        uncategorized: Ei tuoteryhmää
       new:
         new_product: Uusi tuote
       form:
@@ -56,8 +63,7 @@ fi:
         new_store: Uusi kauppa
       form:
         contact_person_help_html: |
-          A person who is a <span class="label label-default">
-          Store manager</span>
+          Käyttäjä joka on <span class="label label-default">Store manager</span>
         slug_help_html: Tunniste luodaan automaattisesti.
     users:
       index:
@@ -78,6 +84,8 @@ fi:
       shopping_cart: Ostoskori
       empty: Ostoskorisi on tyhjä.
       go_shopping: Ostoksille!
+    cart_form:
+      place_order: Tilaa
 
   actions:
     back: Palaa
@@ -90,3 +98,6 @@ fi:
     confirm: "Poistetaanko varmasti %{klass} %{name}?"
   dropzone:
     default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
+  footer:
+    heading: 😃 Spry-verkkokauppa
+    body_html: Tuottanut Leasit Oy <i class="fa fa-copyright"></i> 2015

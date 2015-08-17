@@ -25,29 +25,33 @@
       = f.label :billing_address, class: 'col-sm-4 control-label'
       .col-sm-8
         = f.text_field :billing_address, class: 'form-control',
-            placeholder: 'Street address or PO box'
+            placeholder: col(Order, :billing_address)
     .form-group
       .col-sm-3.col-sm-offset-4
-        = f.text_field :billing_postalcode, class: 'form-control', placeholder: 'Postcode'
+        = f.text_field :billing_postalcode, class: 'form-control',
+            placeholder: col(Order, :billing_postalcode)
       .col-sm-5
-        = f.text_field :billing_city, class: 'form-control', placeholder: 'Postal area'
+        = f.text_field :billing_city, class: 'form-control',
+            placeholder: col(Order, :billing_city)
     .form-group
       = f.label :shipping_address, class: 'col-sm-4 control-label'
       .col-sm-8
         = f.text_field :shipping_address, class: 'form-control',
-            placeholder: 'Street address or PO box'
+            placeholder: col(Order, :shipping_address)
     .form-group
       .col-sm-3.col-sm-offset-4
-        = f.text_field :shipping_postalcode, class: 'form-control', placeholder: 'Postcode'
+        = f.text_field :shipping_postalcode, class: 'form-control',
+            placeholder: col(Order, :shipping_postalcode)
       .col-sm-5
-        = f.text_field :shipping_city, class: 'form-control', placeholder: 'Postal area'
+        = f.text_field :shipping_city, class: 'form-control',
+            placeholder: col(Order, :shipping_city)
   .form-group
     = f.label :notes, class: 'col-sm-4 control-label'
     .col-sm-8
       = f.text_area :notes, rows: 4, class: 'form-control'
   .form-group
     .col-sm-offset-4.col-sm-8
-      = f.submit 'Place Order', class: 'btn btn-primary'
+      = f.submit t('.place_order'), class: 'btn btn-primary'
 
 :coffee
   $('#order_order_type_id').on 'change', (e) ->

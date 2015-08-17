@@ -11,7 +11,8 @@
       %a{href: "##{dom_id(category)}", role: 'tab', data: {toggle: 'tab'}}
         = category.name.truncate(15, omission: '…')
   %li{role: 'presentation'}
-    %a{href: '#uncategorized', role: 'tab', data: {toggle: 'tab'}} Uncategorized
+    %a{href: '#uncategorized', role: 'tab', data: {toggle: 'tab'}}
+      = t('.uncategorized')
 
 .tab-content
   - @categorized.group_by(&:category).each do |category, products|
@@ -20,7 +21,7 @@
       = render partial: 'admin/products/table', object: products, as: :products
 
   #uncategorized.tab-pane.fade
-    %h2.visible-print-block Uncategorized
+    %h2.visible-print-block= t('.uncategorized')
     = render partial: 'admin/products/table', object: @uncategorized, as: :products
 
 :coffee

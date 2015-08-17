@@ -1,15 +1,15 @@
 .page-header
   - if current_user.can_create?(Page)
     = link_to new_admin_page_path, class: 'btn btn-primary' do
-      = icon('plus', 'New page')
-  %h1= icon('files-o', 'Pages')
+      = icon('plus', t('.new_page'))
+  %h1= icon('files-o', title(Page, count: 2))
 
 .table-responsive
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-4 Title
-        %th.col-xs-4 Parent page
+        %th.col-xs-4= col(Page, :title)
+        %th.col-xs-4= col(Page, :parent_page_id)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
@@ -25,7 +25,8 @@
           - if current_user.can_delete?(Page)
             = link_to icon('remove', t('actions.delete')), admin_page_path(page),
                 method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: "Delete page #{page.title}?"}
+                data: {confirm: t('actions.confirm',
+                  klass: Page.model_name.human, name: page.title)}
 
 :coffee
   $('.sortable').sortable(

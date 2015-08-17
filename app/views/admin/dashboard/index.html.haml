@@ -5,19 +5,19 @@
 %ul.nav.nav-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
     %a{href: '#inventory', role: 'tab', data: {toggle: 'tab'}}
-      = t('admin.dashboard.valuation')
+      = t('admin.dashboard.inventory.title')
 
 .tab-content
   #inventory.tab-pane.fade.in.active
-    %h2.visible-print-block= t('admin.dashboard.valuation')
+    %h2.visible-print-block= t('admin.dashboard.inventory.title')
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
-          %label.col-sm-4.control-label= t('admin.dashboard.total_value')
+          %label.col-sm-4.control-label= t('admin.dashboard.inventory.total_value')
           .col-sm-8
             %p.form-control-static= number_to_currency(@inventory[1], unit: '€')
         .form-group
-          %label.col-sm-4.control-label= t('admin.dashboard.items')
+          %label.col-sm-4.control-label= t('admin.dashboard.inventory.items')
           .col-sm-8
             %p.form-control-static= @inventory[0].size
 

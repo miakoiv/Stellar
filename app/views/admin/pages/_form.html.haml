@@ -4,7 +4,7 @@
       = render 'shared/errors', object: @page
 
       .form-group
-        = f.label :parent_page, class: 'col-sm-2 control-label'
+        = f.label :parent_page_id, class: 'col-sm-2 control-label'
         .col-sm-10
           = f.select :parent_page_id, current_store.page_options,
               {include_blank: blank_option}, {class: 'select2 form-control'}
