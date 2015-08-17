@@ -8,11 +8,11 @@
 
 .tab-content
   #order_items.tab-pane.fade.in.active
-    %h2.visible-print-block Order items
+    %h2.visible-print-block= title(OrderItem, count: 2)
     = render partial: 'admin/order_items/table', object: order, as: :order
 
   #components.tab-pane.fade.page-break
-    %h2.visible-print-block Aggregated components
+    %h2.visible-print-block= t('.aggregated')
     .table-responsive
       %table.table.table-hover.table-condensed
         %thead

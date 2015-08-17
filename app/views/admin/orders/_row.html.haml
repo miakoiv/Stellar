@@ -1,9 +1,9 @@
 = content_tag_for :tr, order do
-  %td= order.ordered_at.to_date
+  %td= l(order.ordered_at.to_date)
   %td= order.order_type
   %td= order.user
   %td= order.order_items.count
-  %td= order.shipping_at
+  %td= l(order.shipping_at)
   %td.hidden-print.text-right
     = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'

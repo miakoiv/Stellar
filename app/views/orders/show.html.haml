@@ -2,7 +2,7 @@
   = link_to orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   %h1
-    Order
+    = title(Order)
     %span.small= @order.to_s
 
 .row
@@ -10,25 +10,30 @@
     .panel.panel-default
       .panel-body.form-horizontal
         .form-group
-          %label.col-sm-4.control-label Order type
+          %label.col-sm-4.control-label
+            = col(Order, :order_type_id)
           .col-sm-8
             %p.form-control-static
               = @order.approval ? @order.order_type_name : @order.order_type
         .form-group
-          %label.col-sm-4.control-label Company name
+          %label.col-sm-4.control-label
+            = col(Order, :company_name)
           .col-sm-8
             %p.form-control-static= @order.company_name
         .form-group
-          %label.col-sm-4.control-label Contact person
+          %label.col-sm-4.control-label
+            = col(Order, :contact_person)
           .col-sm-8
             %p.form-control-static= @order.contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           .form-group
-            %label.col-sm-4.control-label Shipping at
+            %label.col-sm-4.control-label
+              = col(Order, :shipping_at)
             .col-sm-8
               %p.form-control-static= @order.shipping_at
           .form-group
-            %label.col-sm-4.control-label Billing address
+            %label.col-sm-4.control-label
+              = col(Order, :billing_address)
             .col-sm-8
               %p.form-control-static= @order.billing_address
           .form-group
@@ -37,7 +42,8 @@
             .col-sm-5
               %p.form-control-static= @order.billing_city
           .form-group
-            %label.col-sm-4.control-label Shipping address
+            %label.col-sm-4.control-label
+              = col(Order, :shipping_address)
             .col-sm-8
               %p.form-control-static= @order.shipping_address
           .form-group
@@ -46,7 +52,8 @@
             .col-sm-5
               %p.form-control-static= @order.shipping_city
         .form-group
-          %label.col-sm-4.control-label Notes
+          %label.col-sm-4.control-label
+            = col(Order, :notes)
           .col-sm-8
             %p.form-control-static.pre><= @order.notes
 
