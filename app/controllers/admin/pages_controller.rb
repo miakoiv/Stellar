@@ -17,11 +17,6 @@ class Admin::PagesController < ApplicationController
     @pages = current_store.pages.ordered
   end
 
-  # GET /admin/pages/1
-  # GET /admin/pages/1.json
-  def show
-  end
-
   # GET /admin/pages/new
   def new
     @page = current_store.pages.build
