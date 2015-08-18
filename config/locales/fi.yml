@@ -100,18 +100,18 @@ fi:
     format: "%{attribute} %{message}"
     messages:
       accepted: täytyy olla hyväksytty
-      blank: ei voi olla sisällötön
+      blank: ei voi olla tyhjä
       confirmation: ei vastaa varmennusta
       empty: ei voi olla tyhjä
       equal_to: täytyy olla yhtä suuri kuin %{count}
       even: täytyy olla parillinen
       exclusion: on varattu
       greater_than: täytyy olla suurempi kuin %{count}
-      greater_than_or_equal_to: täytyy olla suurempi tai yhtä suuri kuin %{count}
+      greater_than_or_equal_to: täytyy olla vähintään %{count}
       inclusion: ei löydy listasta
       invalid: on kelvoton
       less_than: täytyy olla pienempi kuin %{count}
-      less_than_or_equal_to: täytyy olla pienempi tai yhtä suuri kuin %{count}
+      less_than_or_equal_to: täytyy olla enintään %{count}
       not_a_number: ei ole luku
       not_an_integer: ei ole kokonaisluku
       odd: täytyy olla pariton
@@ -135,7 +135,7 @@ fi:
   number:
     currency:
       format:
-        delimiter: "."
+        delimiter: " "
         format: "%n %u"
         precision: 2
         separator: ","
@@ -143,7 +143,7 @@ fi:
         strip_insignificant_zeros: false
         unit: "€"
     format:
-      delimiter: "."
+      delimiter: " "
       precision: 3
       separator: ","
       significant: false
