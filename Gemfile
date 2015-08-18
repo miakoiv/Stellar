@@ -62,6 +62,9 @@ gem 'select2-rails', '~> 3.5.9'
 # Unobtrusive flash
 gem 'unobtrusive_flash', '>= 3'
 
+# Bootstrappy forms
+gem 'bootstrap_form'
+
 # Eternicode's excellent Datepicker
 gem 'bootstrap-datepicker-rails'
 
