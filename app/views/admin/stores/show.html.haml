@@ -12,42 +12,20 @@
   .col-md-6
     .panel.panel-default
       .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :contact_person_id)
-          .col-sm-8
-            %p.form-control-static= @store.contact_person.name
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :erp_number)
-          .col-sm-8
-            %p.form-control-static= @store.erp_number
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :name)
-          .col-sm-8
-            %p.form-control-static= @store.name
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :slug)
-          .col-sm-8
-            %p.form-control-static= @store.slug
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :host)
-          .col-sm-8
-            %p.form-control-static= "http://#{@store.host}"
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :theme)
-          .col-sm-8
-            %p.form-control-static= @store.theme
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Store, :locale)
-          .col-sm-8
-            %p.form-control-static
-              = {'en' => 'English', 'fi' => 'suomi'}[@store.locale]
+        = static_control col(Store, :contact_person_id),
+            @store.contact_person
+        = static_control col(Store, :erp_number),
+            @store.erp_number
+        = static_control col(Store, :name),
+            @store.name
+        = static_control col(Store, :slug),
+            @store.slug
+        = static_control col(Store, :host),
+            "http://#{@store.host}"
+        = static_control col(Store, :theme),
+            @store.theme
+        = static_control col(Store, :locale),
+            {'en' => 'English', 'fi' => 'suomi'}[@store.locale]
 
   .col-md-6
     = render partial: 'admin/images/table', object: @store, as: :imageable

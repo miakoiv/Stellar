@@ -19,46 +19,22 @@
   .col-lg-7
     .panel.panel-default
       .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :category_id)
-          .col-sm-8
-            %p.form-control-static= @product.category
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :code)
-          .col-sm-8
-            %p.form-control-static= @product.code
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :customer_code)
-          .col-sm-8
-            %p.form-control-static= @product.customer_code
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :title)
-          .col-sm-8
-            %p.form-control-static= @product.title
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :subtitle)
-          .col-sm-8
-            %p.form-control-static= @product.subtitle
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :description)
-          .col-sm-8.form-control-static
-            = @product.description.html_safe if @product.description.present?
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :sales_price)
-          .col-sm-8
-            %p.form-control-static= @product.sales_price
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Product, :memo)
-          .col-sm-8
-            %p.form-control-static.pre><= @product.memo
+        = static_control col(Product, :category_id),
+            @product.category
+        = static_control col(Product, :code),
+            @product.code
+        = static_control col(Product, :customer_code),
+            @product.customer_code
+        = static_control col(Product, :title),
+            @product.title
+        = static_control col(Product, :subtitle),
+            @product.subtitle
+        = static_control col(Product, :description) do
+          = @product.description.html_safe if @product.description.present?
+        = static_control col(Product, :sales_price),
+            number_to_currency(@product.sales_price, unit: '€')
+        = static_control col(Product, :memo) do
+          = simple_format(@product.memo)
 
   .col-lg-5
     = render partial: 'admin/images/table', object: @product, as: :imageable

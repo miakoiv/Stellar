@@ -1,69 +1,26 @@
-= form_for [:admin, @order], html: {class: 'form-horizontal', role: 'form'} do |f|
+= bootstrap_form_for [:admin, @order], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      = render 'shared/errors', object: @order
-
-      .form-group
-        %label.col-sm-4.control-label
-          = col(Order, :order_type_id)
-        .col-sm-8
-          %p.form-control-static= @order.order_type
-      .form-group
-        %label.col-sm-4.control-label
-          = col(Order, :user_id)
-        .col-sm-8
-          %p.form-control-static= @order.user
-      .form-group
-        %label.col-sm-4.control-label
-          = col(Order, :ordered_at)
-        .col-sm-8
-          %p.form-control-static= l(@order.ordered_at, format: :long)
+      = f.static_control :order_type, label: col(Order, :order_type_id)
+      = f.static_control :user, label: col(Order, :user_id)
+      = f.static_control label: col(Order, :ordered_at) do
+        = l(@order.ordered_at, format: :long)
       %fieldset{disabled: @order.approval}
-        .form-group
-          = f.label :company_name, class: 'col-sm-4 control-label'
-          .col-sm-8
-            = f.text_field :company_name, class: 'form-control'
-        .form-group
-          = f.label :contact_person, class: 'col-sm-4 control-label'
-          .col-sm-8
-            = f.text_field :contact_person, class: 'form-control'
+        = f.text_field :company_name
+        = f.text_field :contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
-          .form-group
-            = f.label :shipping_at, class: 'col-sm-4 control-label'
-            .col-sm-8
-              = f.date_field :shipping_at, class: 'form-control',
-                  data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
-                    'date-language' => I18n.locale}
-          .form-group
-            = f.label :billing_address, class: 'col-sm-4 control-label'
-            .col-sm-8
-              = f.text_field :billing_address, class: 'form-control',
-                  placeholder: 'Street address or PO box'
-          .form-group
-            .col-sm-3.col-sm-offset-4
-              = f.text_field :billing_postalcode, class: 'form-control', placeholder: 'Postcode'
-            .col-sm-5
-              = f.text_field :billing_city, class: 'form-control', placeholder: 'Postal area'
-          .form-group
-            = f.label :shipping_address, class: 'col-sm-4 control-label'
-            .col-sm-8
-              = f.text_field :shipping_address, class: 'form-control',
-                  placeholder: 'Street address or PO box'
-          .form-group
-            .col-sm-3.col-sm-offset-4
-              = f.text_field :shipping_postalcode, class: 'form-control', placeholder: 'Postcode'
-            .col-sm-5
-              = f.text_field :shipping_city, class: 'form-control', placeholder: 'Postal area'
-        .form-group
-          = f.label :notes, class: 'col-sm-4 control-label'
-          .col-sm-8
-            = f.text_area :notes, rows: 4, class: 'form-control'
-      .form-group
-        .col-sm-offset-4.col-sm-8
-          .checkbox
-            %label
-              = f.check_box :approval
-              = col(Order, :approved)
-      .form-group
-        .col-sm-offset-4.col-sm-8
-          = f.submit class: 'btn btn-primary'
+          = f.date_field :shipping_at,
+              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
+                'date-language' => I18n.locale}
+          = f.text_field :billing_address
+          = f.text_field :billing_postalcode, skip_label: true
+          = f.text_field :billing_city, skip_label: true
+          = f.text_field :shipping_address
+          = f.text_field :shipping_postalcode, skip_label: true
+          = f.text_field :shipping_city, skip_label: true
+        = f.text_area :notes, rows: 4
+      = f.form_group :approval do
+        = f.check_box :approval, label: col(Order, :approved)
+      = f.form_group do
+        = f.primary

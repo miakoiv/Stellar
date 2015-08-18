@@ -14,6 +14,22 @@ module ApplicationHelper
     "\u274c" # U+274C CROSS MARK
   end
 
+  # Outputs a bootstrappy form group with a label and a static control
+  # for value. A block may be given to supply an html-escaped, more
+  # complex element for value.
+  def static_control(label, value = nil, &block)
+    content_tag(:div, class: 'form-group') do
+      content_tag(:label, label, class: 'col-sm-4 control-label') +
+      if block_given?
+        content_tag(:div, capture(&block), class: 'col-sm-8 form-control-static')
+      else
+        content_tag(:div, class: 'col-sm-8') do
+          content_tag(:p, value, class: 'form-control-static')
+        end
+      end
+    end
+  end
+
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
     return '' if image.nil?

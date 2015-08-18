@@ -1,17 +1,9 @@
-= form_for [:admin, @category], html: {class: 'form-horizontal', role: 'form'} do |f|
+= bootstrap_form_for [:admin, @category], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      = render 'shared/errors', object: @category
-
-      .form-group
-        = f.label :parent_category_id, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.select :parent_category_id, current_store.category_options,
-              {include_blank: blank_option}, {class: 'select2 form-control'}
-      .form-group
-        = f.label :name, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_field :name, class: 'form-control'
-      .form-group
-        .col-sm-offset-4.col-sm-8
-          = f.submit class: 'btn btn-primary'
+      = f.select :parent_category_id, current_store.category_options,
+          {include_blank: blank_option}, {class: 'select2'}
+      = f.text_field :name
+      = f.form_group do
+        = f.primary

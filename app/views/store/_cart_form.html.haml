@@ -1,58 +1,30 @@
-= form_for @order, url: checkout_path, method: :post,
-    html: {class: 'form-horizontal', role: 'form'} do |f|
-  = render 'shared/errors', object: @order
+= bootstrap_form_for @order, url: checkout_path, method: :post,
+    layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
 
-  .form-group
-    = f.label :order_type_id, class: 'col-sm-4 control-label'
-    .col-sm-8
-      = f.select :order_type_id, current_store.order_type_options,
-          {}, {class: 'select2 form-control', style: 'width: 100%'}
-  .form-group
-    = f.label :company_name, class: 'col-sm-4 control-label'
-    .col-sm-8
-      = f.text_field :company_name, class: 'form-control'
-  .form-group
-    = f.label :contact_person, class: 'col-sm-4 control-label'
-    .col-sm-8
-      = f.text_field :contact_person, class: 'form-control'
+  = f.select :order_type_id, current_store.order_type_options,
+      {}, {class: 'select2', style: 'width: 100%'}
+  = f.text_field :company_name
+  = f.text_field :contact_person
   %fieldset.shipping.collapse{class: @order.has_shipping? ? 'in' : ''}
-    .form-group
-      = f.label :shipping_at, class: 'col-sm-4 control-label'
-      .col-sm-8
-        = f.date_field :shipping_at, class: 'form-control',
-            data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
-              'date-language' => I18n.locale}
-    .form-group
-      = f.label :billing_address, class: 'col-sm-4 control-label'
-      .col-sm-8
-        = f.text_field :billing_address, class: 'form-control',
-            placeholder: col(Order, :billing_address)
-    .form-group
-      .col-sm-3.col-sm-offset-4
-        = f.text_field :billing_postalcode, class: 'form-control',
-            placeholder: col(Order, :billing_postalcode)
-      .col-sm-5
-        = f.text_field :billing_city, class: 'form-control',
-            placeholder: col(Order, :billing_city)
-    .form-group
-      = f.label :shipping_address, class: 'col-sm-4 control-label'
-      .col-sm-8
-        = f.text_field :shipping_address, class: 'form-control',
-            placeholder: col(Order, :shipping_address)
-    .form-group
-      .col-sm-3.col-sm-offset-4
-        = f.text_field :shipping_postalcode, class: 'form-control',
-            placeholder: col(Order, :shipping_postalcode)
-      .col-sm-5
-        = f.text_field :shipping_city, class: 'form-control',
-            placeholder: col(Order, :shipping_city)
-  .form-group
-    = f.label :notes, class: 'col-sm-4 control-label'
-    .col-sm-8
-      = f.text_area :notes, rows: 4, class: 'form-control'
+    = f.date_field :shipping_at,
+        data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
+          'date-language' => I18n.locale}
+    = f.text_field :billing_address,
+        placeholder: col(Order, :billing_address)
+    = f.text_field :billing_postalcode, hide_label: true,
+        placeholder: col(Order, :billing_postalcode)
+    = f.text_field :billing_city, hide_label: true,
+        placeholder: col(Order, :billing_city)
+    = f.text_field :shipping_address,
+        placeholder: col(Order, :shipping_address)
+    = f.text_field :shipping_postalcode, hide_label: true,
+        placeholder: col(Order, :shipping_postalcode)
+    = f.text_field :shipping_city, hide_label: true,
+        placeholder: col(Order, :shipping_city)
+  = f.text_area :notes, rows: 4
   .form-group
     .col-sm-offset-4.col-sm-8
-      = f.submit t('.place_order'), class: 'btn btn-primary'
+      = f.primary t('.place_order')
 
 :coffee
   $('#order_order_type_id').on 'change', (e) ->

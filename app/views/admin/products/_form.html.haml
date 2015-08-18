@@ -1,51 +1,24 @@
-= form_for [:admin, @product], html: {class: 'form-horizontal', role: 'form'} do |f|
+= bootstrap_form_for [:admin, @product], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      = render 'shared/errors', object: @product
-
-      .form-group
-        = f.label :category_id, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.select :category_id, current_store.category_options,
-              {include_blank: blank_option}, {class: 'select2 form-control'}
-      .form-group
-        = f.label :code, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          = f.text_field :code, class: 'form-control'
-      .form-group
-        = f.label :customer_code, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          = f.text_field :customer_code, class: 'form-control'
-      .form-group
-        = f.label :title, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          = f.text_field :title, class: 'form-control'
-      .form-group
-        = f.label :subtitle, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          = f.text_field :subtitle, class: 'form-control'
-      .form-group
-        = f.label :description, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_area :description, class: 'form-control wysiwyg'
-      .form-group
-        = f.label :sales_price, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          .input-group
-            = f.text_field :sales_price, class: 'form-control'
-            .input-group-addon €
-      .form-group
-        = f.label :memo, class: 'col-sm-4 control-label import'
-        .col-sm-8
-          = f.text_area :memo, rows: 4, class: 'form-control'
-          %p.help-block= t('.memo_help_html')
-      .form-group
-        .col-sm-offset-4.col-sm-8
-          = f.submit class: 'btn btn-primary'
+      = f.select :category_id, current_store.category_options,
+          {include_blank: blank_option}, {class: 'select2'}
+      = f.text_field :code, label_class: 'import'
+      = f.text_field :customer_code, label_class: 'import'
+      = f.text_field :title, label_class: 'import'
+      = f.text_field :subtitle, label_class: 'import'
+      = f.text_area :description, class: 'wysiwyg'
+      = f.text_field :sales_price, label_class: 'import', append: '€'
+      = f.text_area :memo, rows: 4, label_class: 'import',
+          help: t('.memo_help_html')
+      = f.form_group do
+        = f.primary
 
 :coffee
   $('#product_description').editable
     inlineMode: false
+    maxHeight: 400
     buttons: [
       'bold', 'italic', 'underline', 'formatBlock', 'align',
       'insertOrderedList', 'insertUnorderedList',

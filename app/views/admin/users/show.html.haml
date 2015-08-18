@@ -10,41 +10,21 @@
   .col-sm-6
     .panel.panel-default
       .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label
-            = col(User, :name)
-          .col-sm-8
-            %p.form-control-static= @user.name
-        .form-group
-          %label.col-sm-4.control-label
-            = col(User, :email)
-          .col-sm-8
-            %p.form-control-static= @user.email
-        .form-group
-          %label.col-sm-4.control-label
-            = col(User, :role_ids)
-          .col-sm-8
-            %p.form-control-static
-              - @user.role_names.each do |role_name|
-                %span.label.label-default= role_name
+        = static_control col(User, :name),
+            @user.name
+        = static_control col(User, :email),
+            @user.email
+        = static_control col(User, :role_ids) do
+          - @user.role_names.each do |role_name|
+            %span.label.label-default= role_name
 
   - unless @user.is_guest?
     .col-sm-6
       .panel.panel-default
         .panel-body.form-horizontal
-          .form-group
-            %label.col-sm-4.control-label
-              = col(User, :last_sign_in_at)
-            .col-sm-8
-              %p.form-control-static
-                = l(@user.last_sign_in_at, format: :long)
-          .form-group
-            %label.col-sm-4.control-label
-              = col(User, :last_sign_in_ip)
-            .col-sm-8
-              %p.form-control-static= @user.last_sign_in_ip
-          .form-group
-            %label.col-sm-4.control-label
-              = col(User, :sign_in_count)
-            .col-sm-8
-              %p.form-control-static= @user.sign_in_count
+          = static_control col(User, :last_sign_in_at),
+              l(@user.last_sign_in_at, format: :long)
+          = static_control col(User, :last_sign_in_ip),
+              @user.last_sign_in_ip
+          = static_control col(User, :sign_in_count),
+              @user.sign_in_count

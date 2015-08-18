@@ -12,16 +12,10 @@
   .col-md-6
     .panel.panel-default
       .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Category, :parent_category_id)
-          .col-sm-8
-            %p.form-control-static= @category.parent_category
-        .form-group
-          %label.col-sm-4.control-label
-            = col(Category, :name)
-          .col-sm-8
-            %p.form-control-static= @category.name
+        = static_control col(Category, :parent_category_id),
+            @category.parent_category
+        = static_control col(Category, :name),
+            @category.name
 
   .col-md-6
     = render partial: 'admin/images/table', object: @category, as: :imageable

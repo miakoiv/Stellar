@@ -1,43 +1,16 @@
-= form_for [:admin, @store], html: {class: 'form-horizontal', role: 'form'} do |f|
+= bootstrap_form_for [:admin, @store], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      = render 'shared/errors', object: @store
-
-      .form-group
-        = f.label :contact_person_id, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.select :contact_person_id,
-              User.by_role(:store_manager).map { |u| [u.name, u.id] },
-              {}, {class: 'select2 form-control'}
-          %p.help-block= t('.contact_person_help_html')
-      .form-group
-        = f.label :erp_number, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_field :erp_number, class: 'form-control'
-      .form-group
-        = f.label :name, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_field :name, class: 'form-control'
-      .form-group
-        = f.label :slug, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_field :slug, class: 'form-control', readonly: true
-          %p.help-block= t('.slug_help_html')
-      .form-group
-        = f.label :host, class: 'col-sm-4 control-label'
-        .col-sm-8
-          .input-group
-            .input-group-addon http://
-            = f.text_field :host, class: 'form-control'
-      .form-group
-        = f.label :theme, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.text_field :theme, class: 'form-control'
-      .form-group
-        = f.label :locale, class: 'col-sm-4 control-label'
-        .col-sm-8
-          = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
-              {}, {class: 'select2 form-control'}
-      .form-group
-        .col-sm-offset-4.col-sm-8
-          = f.submit class: 'btn btn-primary'
+      = f.select :contact_person_id,
+          User.by_role(:store_manager).map { |u| [u.name, u.id] },
+          {help: t('.contact_person_help_html')}, {class: 'select2'}
+      = f.text_field :erp_number
+      = f.text_field :name
+      = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+      = f.text_field :host, prepend: 'http://'
+      = f.text_field :theme
+      = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
+          {}, {class: 'select2'}
+      = f.form_group do
+        = f.primary
