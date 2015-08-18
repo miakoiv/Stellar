@@ -16,6 +16,9 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+# Ignore database YAML dump
+/db/data.yml
+
 # Ignore uploaded files
 /public/system
 
