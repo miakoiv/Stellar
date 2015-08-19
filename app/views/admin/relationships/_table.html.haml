@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-2 Code
-        %th Title
+        %th.col-xs-2= col(Product, :code)
+        %th= col(Product, :title)
         %th.col-xs-1.text-right #
 
     %tbody
