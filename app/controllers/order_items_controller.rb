@@ -2,7 +2,13 @@
 
 class OrderItemsController < ApplicationController
 
-  before_action :authenticate_user!
+  # This controller is aware of unauthenticated guests.
+  def current_user
+    super || guest_user
+  end
+
+  # Guest users may edit their shopping cart contents.
+  before_action :authenticate_user_or_skip!
 
   # PATCH/PUT /order_items/1
   def update

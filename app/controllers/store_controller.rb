@@ -6,16 +6,14 @@ class StoreController < ApplicationController
     'application'
   end
 
+  # This controller is aware of unauthenticated guests.
   def current_user
     super || guest_user
   end
 
-  # A store may admit session-dependent guest users, skipping authentication.
-  before_action do |controller|
-    unless controller.current_store.admit_guests?
-      controller.authenticate_user!
-    end
-  end
+  # Unauthenticated guests may visit the store.
+  before_action :authenticate_user_or_skip!
+
   before_action :set_categories
 
   # GET /

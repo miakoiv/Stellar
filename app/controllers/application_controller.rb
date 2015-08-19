@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # Authenticate user, but skip authentication
+  # if the current store admits guests.
+  def authenticate_user_or_skip!
+    return true if current_store.admit_guests?
+    authenticate_user!
+  end
+
   # Send the user back where she came from if not authorized.
   def authority_forbidden(error)
     Rails.logger.warn(error.message)

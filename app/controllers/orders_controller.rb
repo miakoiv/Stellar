@@ -2,16 +2,14 @@
 
 class OrdersController < ApplicationController
 
+  # This controller is aware of unauthenticated guests.
   def current_user
     super || guest_user
   end
 
   # Unauthenticated guests may browse their orders.
-  before_action do |controller|
-    unless controller.current_store.admit_guests?
-      controller.authenticate_user!
-    end
-  end
+  before_action :authenticate_user_or_skip!
+
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
