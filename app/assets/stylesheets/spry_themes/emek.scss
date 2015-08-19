@@ -85,17 +85,17 @@
       }
     }
     .category:hover {
-      transform: rotate(360deg);
+      @include gradient-striped(rgba(255,255,16,1), 45deg);
+
       a {
         img {
         }
         p {
-          color: #fff;
-          text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
         }
       }
     }
     .category.active {
+      transform: rotate(360deg);
       @include gradient-striped(rgba(255,255,16,1), 45deg);
     }
   }
