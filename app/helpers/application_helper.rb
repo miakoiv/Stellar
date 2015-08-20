@@ -10,6 +10,12 @@ module ApplicationHelper
     klass.human_attribute_name(attribute_name)
   end
 
+  def drag_handle
+    content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
+      icon('ellipsis-v', class: 'fa-lg fa-fw')
+    end
+  end
+
   def blank_option
     "\u274c" # U+274C CROSS MARK
   end
