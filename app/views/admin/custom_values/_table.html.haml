@@ -1,0 +1,12 @@
+.table-responsive
+  %table.table.table-striped.table-hover
+    %caption
+      %span= col(CustomAttribute, :custom_values)
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-8= col(CustomValue, :value)
+        %th.hidden-print
+
+    %tbody
+      = render partial: 'admin/custom_values/row', collection: custom_attribute.custom_values.ordered, as: :custom_value

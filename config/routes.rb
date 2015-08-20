@@ -58,6 +58,9 @@ Rails.application.routes.draw do
       resources :images, shallow: true
       post :reorder, on: :collection
     end
+    resources :custom_attributes do
+      resources :custom_values, shallow: true
+    end
     resources :products do
       resources :images, shallow: true
       post :reorder, on: :collection
@@ -69,6 +72,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :users
 
+    post '/custom_values/reorder' => 'custom_values#reorder', as: :reorder_custom_values
     post '/images/reorder' => 'images#reorder', as: :reorder_images
     post '/images/delete'  => 'images#delete', as: :delete_image
   end

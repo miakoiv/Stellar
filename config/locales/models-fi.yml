@@ -4,6 +4,15 @@ fi:
       category:
         one: tuoteryhmä
         other: tuoteryhmät
+      customization:
+        one: vaihtoehto
+        other: vaihtoehdot
+      custom_attribute:
+        one: ominaisuus
+        other: ominaisuudet
+      custom_value:
+        one: vaihtoehto
+        other: vaihtoehdot
       image:
         one: kuva
         other: kuvat
@@ -44,6 +53,14 @@ fi:
       category:
         parent_category_id: Pääryhmä
         name: Nimi
+      customization:
+        custom_attribute_id: Ominaisuus
+        custom_values: Vaihtoehdot
+      custom_attribute:
+        name: Nimi
+        custom_values: Vaihtoehdot
+      custom_value:
+        value: Arvo
       image:
         image_type_id: Kuvatyyppi
         attachment_file_name: Tiedostonimi

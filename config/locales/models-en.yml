@@ -4,6 +4,15 @@ en:
       category:
         one: category
         other: categories
+      customization:
+        one: option
+        other: options
+      custom_attribute:
+        one: attribute
+        other: attributes
+      custom_value:
+        one: option
+        other: options
       image:
         one: image
         other: images
@@ -44,6 +53,14 @@ en:
       category:
         parent_category_id: Parent category
         name: Name
+      customization:
+        custom_attribute_id: Property
+        custom_values: Options
+      custom_attribute:
+        name: Name
+        custom_values: Options
+      custom_value:
+        value: Value
       image:
         image_type_id: Image type
         attachment_file_name: File name

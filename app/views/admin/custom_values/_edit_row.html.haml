@@ -1,0 +1,8 @@
+= content_tag_for :tr, custom_value do
+  %td= drag_handle
+  %td
+    = form_for [:admin, custom_value], remote: true, html: {class: 'form-horizontal'} do |f|
+      = f.text_field :value, class: 'form-control'
+  %td.hidden-print.text-right
+    = link_to icon('remove', t('actions.delete')), admin_custom_value_path(custom_value),
+        remote: true, method: :delete, class: 'btn btn-sm btn-danger'

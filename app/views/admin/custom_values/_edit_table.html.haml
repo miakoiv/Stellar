@@ -1,0 +1,30 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %caption
+      %span= col(CustomAttribute, :custom_values)
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-8= col(CustomValue, :value)
+        %th.hidden-print
+
+    %tbody#custom_values.sortable
+      = render partial: 'admin/custom_values/edit_row', collection: custom_attribute.custom_values.ordered, as: :custom_value
+    %tbody
+      %tr
+        %td
+        %td
+          = form_for [:admin, custom_attribute, custom_attribute.custom_values.build],
+              remote: true, html: {class: 'form-horizontal'} do |f|
+            = f.text_field :value, class: 'form-control',
+                placeholder: t('.new_custom_value')
+        %td
+
+:coffee
+  $('.sortable').sortable(
+    items: 'tr'
+    handle: '.handle'
+    placeholder: '#{tr_placeholder(2)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_custom_values_path}',
+      {reorder: $('tr', this).map(-> this.id).get()}

@@ -11,6 +11,7 @@ class Store < ActiveRecord::Base
   belongs_to :contact_person, class_name: 'User'
   has_many :categories
   has_many :products
+  has_many :custom_attributes
   has_many :orders
   has_many :users
   has_many :pages

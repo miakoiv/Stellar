@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817100007) do
+ActiveRecord::Schema.define(version: 20150820065902) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -24,6 +24,38 @@ ActiveRecord::Schema.define(version: 20150817100007) do
 
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
+
+  create_table "custom_attributes", force: :cascade do |t|
+    t.integer  "store_id",   limit: 4,   null: false
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "custom_attributes", ["store_id"], name: "index_custom_attributes_on_store_id", using: :btree
+
+  create_table "custom_values", force: :cascade do |t|
+    t.integer  "custom_attribute_id", limit: 4,   null: false
+    t.string   "value",               limit: 255
+    t.integer  "priority",            limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "custom_values", ["custom_attribute_id"], name: "index_custom_values_on_custom_attribute_id", using: :btree
+
+  create_table "customizations", force: :cascade do |t|
+    t.integer  "customizable_id",     limit: 4
+    t.string   "customizable_type",   limit: 255
+    t.integer  "custom_attribute_id", limit: 4
+    t.integer  "custom_value_id",     limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "customizations", ["custom_attribute_id"], name: "index_customizations_on_custom_attribute_id", using: :btree
+  add_index "customizations", ["custom_value_id"], name: "index_customizations_on_custom_value_id", using: :btree
+  add_index "customizations", ["customizable_type", "customizable_id"], name: "index_customizations_on_customizable_type_and_customizable_id", using: :btree
 
   create_table "image_types", force: :cascade do |t|
     t.integer  "purpose",    limit: 4,   default: 0,    null: false

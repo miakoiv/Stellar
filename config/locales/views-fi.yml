@@ -33,6 +33,14 @@ fi:
         new_category: Uusi tuoteryhmä
       new:
         new_category: Uusi tuoteryhmä
+    custom_attributes:
+      index:
+        new_custom_attribute: Uusi ominaisuus
+      new:
+        new_custom_attribute: Uusi ominaisuus
+    custom_values:
+      edit_table:
+        new_custom_value: Uusi vaihtoehto
     orders:
       index:
         current: Avoimet

@@ -1,0 +1,32 @@
+.page-header
+  - if current_user.can_create?(CustomAttribute)
+    = link_to new_admin_custom_attribute_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_custom_attribute'))
+  %h1= icon('sliders', title(CustomAttribute, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-3= col(CustomAttribute, :name)
+        %th= col(CustomAttribute, :custom_values)
+        %th.hidden-print
+
+    %tbody
+      = content_tag_for :tr, @custom_attributes do |custom_attribute|
+        %td= custom_attribute.name
+        %td= custom_attribute.custom_values.to_sentence
+        %td.hidden-print.text-right
+          = link_to icon('info', t('actions.show')), admin_custom_attribute_path(custom_attribute),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(CustomAttribute)
+            = link_to icon('edit', t('actions.edit')), edit_admin_custom_attribute_path(custom_attribute),
+                class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(CustomAttribute)
+            = link_to icon('remove', t('actions.delete')), admin_custom_attribute_path(custom_attribute),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: CustomAttribute.model_name.human, name: custom_attribute.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
