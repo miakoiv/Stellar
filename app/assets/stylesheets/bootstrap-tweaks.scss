@@ -44,6 +44,10 @@
   }
 }
 
+.col-min {
+  width: 1px;
+}
+
 h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
   font-weight: 500;
 }
@@ -94,6 +98,10 @@ input[type="number"] {
   font-family: inherit !important;
 }
 
+.table-responsive {
+  min-height: 120px;
+}
+
 .table {
 
   caption {
@@ -131,7 +139,7 @@ input[type="number"] {
   font-weight: 500;
 }
 
-.table > tbody.sortable > tr:hover {
+.table > tbody.sortable .handle {
   cursor: grab;
 }
 .sortable-placeholder {
