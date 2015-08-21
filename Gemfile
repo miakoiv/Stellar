@@ -56,8 +56,8 @@ gem 'magnific-popup-rails'
 # Navigation link helper
 gem 'active_link_to'
 
-# Select2
-gem 'select2-rails', '~> 3.5.9'
+# selectize
+gem 'selectize-rails'
 
 # Unobtrusive flash
 gem 'unobtrusive_flash', '>= 3'

@@ -30,7 +30,7 @@
 //= require plugins/tables.min.js
 //= require dropzone
 //= require magnific-popup
-//= require select2
+//= require selectize
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require jquery-tablesorter

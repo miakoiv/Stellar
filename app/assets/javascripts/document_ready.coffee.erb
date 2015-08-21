@@ -13,9 +13,8 @@ $.fn.extend
       html: true
       trigger: 'hover'
 
-    $('.select2', this).select2
-      width: 'resolve'
-      dropdownAutoWidth: true
+    $('.selectize', this).selectize
+      dropdownParent: 'body'
 
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
