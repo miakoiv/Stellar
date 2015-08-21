@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       = f.select :category_id, current_store.category_options,
-          {include_blank: blank_option}, {class: 'select2'}
+          {include_blank: blank_option}, {class: 'selectize'}
       = f.text_field :code, label_class: 'import'
       = f.text_field :customer_code, label_class: 'import'
       = f.text_field :title, label_class: 'import'

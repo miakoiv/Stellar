@@ -71,16 +71,12 @@ class Store < ActiveRecord::Base
     categories.map { |c| [c.name, c.id] }
   end
 
+  def order_types
+    inventories.map(&:order_types).flatten
+  end
+
   def order_type_options
-    options = [].tap do |options|
-      inventories.each do |i|
-        i.order_types.each do |o|
-          options << [o.name, o.id, {
-            class: [o.has_shipping? ? :shipping : nil, o.has_payment? ? :payment : nil]
-          }]
-        end
-      end
-    end
+    order_types.map { |o| [o.to_s, o.id] }
   end
 
   def user_options

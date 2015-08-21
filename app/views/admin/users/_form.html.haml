@@ -9,6 +9,6 @@
         = f.password_field :password_confirmation
       = f.select :role_ids,
         current_user.grantable_role_options,
-        {}, {multiple: true, class: 'select2'}
+        {}, {multiple: true, class: 'selectize'}
       = f.form_group do
         = f.primary

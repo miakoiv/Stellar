@@ -2,7 +2,7 @@
     layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
 
   = f.select :order_type_id, current_store.order_type_options,
-      {}, {class: 'select2', style: 'width: 100%'}
+      {}, {class: 'selectize', style: 'width: 100%'}
   = f.text_field :company_name
   = f.text_field :contact_person
   %fieldset.shipping.collapse{class: @order.has_shipping? ? 'in' : ''}
@@ -27,12 +27,14 @@
       = f.primary t('.place_order')
 
 :coffee
+  options = #{current_store.order_types.map { |o| [o.id, o] }.to_h.to_json}
   $('#order_order_type_id').on 'change', (e) ->
-    if /shipping/.test e.added.css
+    index = $(e.target).val()
+    if options[index]['has_shipping']
       $('.shipping').addClass 'in'
     else
       $('.shipping').removeClass 'in'
-    if /payment/.test e.added.css
+    if options[index]['has_payment']
       $('.payment').addClass 'in'
     else
       $('.payment').removeClass 'in'

@@ -4,13 +4,13 @@
     .panel-body
       = f.select :contact_person_id,
           User.by_role(:store_manager).map { |u| [u.name, u.id] },
-          {help: t('.contact_person_help_html')}, {class: 'select2'}
+          {help: t('.contact_person_help_html')}, {class: 'selectize'}
       = f.text_field :erp_number
       = f.text_field :name
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')
       = f.text_field :host, prepend: 'http://'
       = f.text_field :theme
       = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
-          {}, {class: 'select2'}
+          {}, {class: 'selectize'}
       = f.form_group do
         = f.primary
