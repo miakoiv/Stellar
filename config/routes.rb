@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     end
     resources :products do
       resources :images, shallow: true
+      resources :customizations, shallow: true
       post :reorder, on: :collection
     end
     resources :pages do

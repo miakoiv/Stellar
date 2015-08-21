@@ -81,6 +81,25 @@ i.icon {
   }
 }
 
+.label-with-delete {
+  display: inline-block;
+
+  a {
+    visibility: hidden;
+    display: inline-block;
+    padding: 3px;
+    color: #fff;
+  }
+
+}
+.label-with-delete:hover {
+  background-color: $label-danger-bg;
+
+  a {
+    visibility: visible;
+  }
+}
+
 .nav-tabs {
   margin-bottom: 15px;
 }

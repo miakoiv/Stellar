@@ -1,0 +1,14 @@
+.table-responsive
+  %table.table.table-striped.table-hover
+    %caption
+      %span= title(Customization, count: 2)
+    %thead
+      %tr
+        %th.col-xs-3= col(Customization, :custom_attribute_id)
+        %th= col(Customization, :custom_values)
+
+    - customizable.customizations.group_by(&:custom_attribute).each do |custom_attribute, customizations|
+      %tbody
+        %tr
+          %td= custom_attribute
+          %td= customizations.map(&:custom_value).to_sentence

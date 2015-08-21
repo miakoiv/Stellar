@@ -55,6 +55,7 @@ fi:
         name: Nimi
       customization:
         custom_attribute_id: Ominaisuus
+        custom_value_id: Vaihtoehto
         custom_values: Vaihtoehdot
       custom_attribute:
         name: Nimi

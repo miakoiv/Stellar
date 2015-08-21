@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
+  include Customizable
   include Reorderable
 
   belongs_to :store

@@ -55,6 +55,7 @@ en:
         name: Name
       customization:
         custom_attribute_id: Property
+        custom_value_id: Option
         custom_values: Options
       custom_attribute:
         name: Name

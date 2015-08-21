@@ -1,0 +1,40 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %caption
+      %span= title(Customization, count: 2)
+    %thead
+      %tr
+        %th.col-xs-4= col(Customization, :custom_attribute_id)
+        %th= col(Customization, :custom_values)
+        %th.col-xs-1.hidden-print
+
+      %tbody#customizations
+        = render partial: 'admin/customizations/edit_tbody', object: customizable, as: :customizable
+
+      = form_for [:admin, customizable, customizable.customizations.new], remote: true do |f|
+        %tbody
+          %tr
+            %td
+              = f.select :custom_attribute_id, current_store.custom_attributes.map { |a| [a.to_s, a.id] }, {include_blank: true}, {placeholder: col(Customization, :custom_attribute_id), class: 'form-control'}
+            %td
+              = f.select :custom_value_ids, [], {include_blank: true}, {multiple: true, placeholder: col(Customization, :custom_value_id), class: 'form-control'}
+            %td.text-right
+              = f.submit class: 'btn btn-sm btn-default'
+
+:coffee
+  options = #{current_store.grouped_custom_values.to_h.to_json}
+  jQuery ->
+    $attribute_select = $('#customization_custom_attribute_id').selectize
+      dropdownParent: 'body'
+      onChange: (index) ->
+        value_select.disable()
+        value_select.clearOptions()
+        value_select.addOption options[index]
+        value_select.enable()
+    $value_select = $('#customization_custom_value_ids').selectize
+      dropdownParent: 'body'
+      valueField: 'id'
+      labelField: 'value'
+
+    attribute_select = $attribute_select[0].selectize
+    value_select = $value_select[0].selectize

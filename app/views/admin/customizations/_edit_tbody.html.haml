@@ -1,0 +1,8 @@
+- customizable.customizations.group_by(&:custom_attribute).each do |custom_attribute, customizations|
+  %tr
+    %td= custom_attribute
+    %td{colspan: 2}
+      - customizations.each do |customization|
+        .label.label-default.label-with-delete{id: dom_id(customization)}
+          = link_to icon('remove'), admin_customization_path(customization), remote: true, method: :delete
+          = customization.custom_value
