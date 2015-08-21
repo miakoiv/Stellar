@@ -8,12 +8,14 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-min
         %th.col-xs-4= col(Page, :title)
         %th.col-xs-4= col(Page, :parent_page_id)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
       = content_tag_for :tr, @pages do |page|
+        %td= drag_handle
         %td= page.title
         %td= page.parent_page
         %td.hidden-print.text-right
@@ -34,7 +36,8 @@
 :coffee
   $('.sortable').sortable(
     items: 'tr'
-    placeholder: '#{tr_placeholder(3)}'
+    handle: '.handle'
+    placeholder: '#{tr_placeholder(4)}'
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{reorder_admin_pages_path}',
       {reorder: $('tr', this).map(-> this.id).get()}

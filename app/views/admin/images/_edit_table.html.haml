@@ -4,6 +4,7 @@
       %span= col(Product, :images)
     %thead
       %tr
+        %th.col-min
         %th.col-xs-4= title(Image)
         %th.col-xs-6= col(Image, :image_type_id)
         %th.hidden-print
@@ -14,7 +15,8 @@
 :coffee
   $('.sortable').sortable(
     items: 'tr'
-    placeholder: '#{tr_placeholder(3)}'
+    handle: '.handle'
+    placeholder: '#{tr_placeholder(4)}'
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{admin_reorder_images_path}',
       {reorder: $('tr', this).map(-> this.id).get()}
