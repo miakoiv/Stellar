@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post '/checkout'                  => 'store#checkout', as: :checkout
 
   resources :orders do
+    get 'confirm', on: :member
     resources :order_items, shallow: true
   end
 

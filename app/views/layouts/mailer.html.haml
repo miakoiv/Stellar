@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    :css
+      #outlook a { padding: 0; }
+      body { width: 100% !important; margin: 30px; padding: 0; }
+      img { border: 0; height: auto; line-height: 100%; outline: none, text-decoration: none; }
+      h1 { font-size: 24px; font-weight: bold; line-height: 100%; margin: 0 0 20px; text-align: left; }
+      dl { width: 100%; }
+      dt { float: left; width: 30%; text-align: right; font-weight: bold; }
+      dd { margin-left: 40%; }
+      hr { clear: both; margin: 20px 0; }
+      th { text-align: left; }
+      .text-right { text-align: right; }
+
+  %body
+    = yield

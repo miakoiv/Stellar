@@ -60,13 +60,13 @@ class StoreController < ApplicationController
       if @order.update(order_params)
         if @order.has_payment?
           @payment = Payment.new @order,
-            ok_url: orders_url(anchor: 'ok'),
-            error_url: show_cart_url(anchor: 'error'),
-            cancel_url: show_cart_url(anchor: 'cancel')
+            ok_url: confirm_order_url(@order),
+            error_url: show_cart_url,
+            cancel_url: show_cart_url
           format.html { render :confirm }
         else
           @order.update ordered_at: Time.current
-          format.html { redirect_to orders_path,
+          format.html { redirect_to confirm_order_path(@order),
             notice: t('.notice') }
         end
       else

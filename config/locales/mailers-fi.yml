@@ -1,0 +1,4 @@
+fi:
+  order_mailer:
+    order_confirmation:
+      subject: "%{store} – Tilausvahvistus"

@@ -9,8 +9,9 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
+  authority_actions confirm: 'read'
 
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :confirm]
 
   # GET /orders
   def index
@@ -55,6 +56,14 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_path,
         notice: t('.notice', order: @order) }
     end
+  end
+
+  # GET /orders/confirm/1
+  def confirm
+    authorize_action_for @order
+
+    OrderMailer.order_confirmation(@order).deliver_later
+    render :show
   end
 
   private
