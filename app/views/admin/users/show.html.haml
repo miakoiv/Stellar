@@ -23,7 +23,7 @@
       .panel.panel-default
         .panel-body.form-horizontal
           = static_control col(User, :last_sign_in_at),
-              l(@user.last_sign_in_at, format: :long)
+              @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :long) : ''
           = static_control col(User, :last_sign_in_ip),
               @user.last_sign_in_ip
           = static_control col(User, :sign_in_count),
