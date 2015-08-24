@@ -11,7 +11,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.json
   def index
-    @users = current_store.users
+    @users = current_store.users.non_guests
   end
 
   # GET /admin/users/1
