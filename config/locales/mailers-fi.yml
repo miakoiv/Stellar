@@ -2,3 +2,4 @@ fi:
   order_mailer:
     order_confirmation:
       subject: "%{store} – Tilausvahvistus"
+    thank_you: "%{store} kiittää tilauksestanne"

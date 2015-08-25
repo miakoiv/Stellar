@@ -1,87 +1,83 @@
-%table.row
+%table.main{width: '100%', cellpadding: 0, cellspacing: 0}
   %tr
-    %td.wrapper
-      %table.nine.columns
+    %td.content-wrap.aligncenter
+      %table{width: '100%', cellpadding: 0, cellspacing: 0}
         %tr
-          %td
+          %td.content-block
             %h1
               = Order.model_name.human.capitalize
               %span.small= @order.to_s
-          %td.expander
-    %td.wrapper.last
-      %table.three.columns
         %tr
-          %td.left-text-pad
-            = image_tag(image_url('spry-logo.svg'))
-            %p.tiny= t('footer.body_html')
+          %td.content-block
+            %h2= t('order_mailer.thank_you', store: @store)
+        %tr
+          %td.content-block
+            %table.invoice
+              %tr
+                %td
+                  %table{width: '100%', cellpadding: 0, cellspacing: 5}
+                    %tr
+                      %td= Order.human_attribute_name(:company_name)
+                      %td
+                        %b= @order.company_name
+                      %td= Order.human_attribute_name(:contact_person)
+                      %td
+                        %b= @order.contact_person
+                    - if @order.has_shipping?
+                      %tr
+                        %td
+                          = Order.human_attribute_name(:shipping_at)
+                        %td
+                          %b= l(@order.shipping_at)
+                      %tr
+                        %td
+                          = Order.human_attribute_name(:billing_address)
+                        %td
+                          %b= @order.billing_address
+                          %br
+                          %b= @order.billing_postalcode
+                          %b= @order.billing_city
+                        %td
+                          = Order.human_attribute_name(:shipping_address)
+                        %td
+                          %b= @order.shipping_address
+                          %br
+                          %b= @order.shipping_postalcode
+                          %b= @order.shipping_city
+                      %tr
+                        %td
+                          = Order.human_attribute_name(:notes)
+                        %td{colspan: 3}
+                          = @order.notes
+              %tr
+                %td
+                  %table.invoice-items{cellpadding: 0, cellspacing: 0}
+                    %tr
+                      %td= OrderItem.human_attribute_name(:product_code)
+                      %td= OrderItem.human_attribute_name(:product_title)
+                      %td.alignright= OrderItem.human_attribute_name(:amount)
+                      %td.alignright à
+                      %td.alignright= OrderItem.human_attribute_name(:subtotal)
+                    - @order.order_items.each do |order_item|
+                      = content_tag_for :tr, order_item do
+                        %td= order_item.product.code
+                        %td
+                          %b= order_item.product.title
+                          = order_item.product.subtitle
+                        %td.alignright= order_item.amount
+                        %td.alignright= number_to_currency(order_item.product.sales_price, unit: '€')
+                        %td.alignright= number_to_currency(order_item.subtotal, unit: '€')
+                    %tr.total
+                      %td{colspan: 3}
+                      %td.alignright= Order.human_attribute_name(:grand_total)
+                      %td.alignright= number_to_currency(@order.grand_total, unit: '€')
 
-%hr
-%table.row
-  %tr
-    %td.wrapper.last
-      %table.twelve.columns
-        %tr
-          %td.panel
-            %table
-              %col{width: '200px'}
-              %tr
-                %th= Order.human_attribute_name(:company_name)
-                %td= @order.company_name
-              %tr
-                %th= Order.human_attribute_name(:contact_person)
-                %td= @order.contact_person
-              - if @order.has_shipping?
-                %tr
-                  %th= Order.human_attribute_name(:shipping_at)
-                  %td= l(@order.shipping_at)
-                %tr
-                  %th= Order.human_attribute_name(:billing_address)
-                  %td= @order.billing_address
-                %tr
-                  %th
-                  %td
-                    = @order.billing_postalcode
-                    = @order.billing_city
-                %tr
-                  %th= Order.human_attribute_name(:shipping_address)
-                  %td= @order.shipping_address
-                %tr
-                  %th
-                  %td
-                    = @order.shipping_postalcode
-                    = @order.shipping_city
-              %tr
-                %th= Order.human_attribute_name(:notes)
-                %td= simple_format(@order.notes)
-          %td.expander
 
-%table.row
-  %tr
-    %td.wrapper.last
-      %table.twelve.columns
-        %tr
-          %td
-            %table.stylish
-              %col{width: '30%'}
-              %thead
-                %tr
-                  %th= OrderItem.human_attribute_name(:product_code)
-                  %th= OrderItem.human_attribute_name(:product_title)
-                  %th.text-right= OrderItem.human_attribute_name(:amount)
-                  %th.text-right à
-                  %th.text-right= OrderItem.human_attribute_name(:subtotal)
-              %tfoot
-                %tr
-                  %th{colspan: 3}
-                  %th.text-right= Order.human_attribute_name(:grand_total)
-                  %th.text-right= number_to_currency(@order.grand_total, unit: '€')
-              %tbody
-                - @order.order_items.each do |order_item|
-                  = content_tag_for :tr, order_item do
-                    %td= order_item.product.code
-                    %td
-                      %strong= order_item.product.title
-                      = order_item.product.subtitle
-                    %td.text-right= order_item.amount
-                    %td.text-right= number_to_currency(order_item.product.sales_price, unit: '€')
-                    %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
+.footer
+  %table{width: '100%'}
+    %tr
+      %td.content-block
+        = image_tag(image_url('spry-logo.svg'))
+      %td.content-block
+        %p= t('footer.heading')
+        %p= t('footer.body_html')
