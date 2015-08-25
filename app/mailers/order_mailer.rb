@@ -1,13 +1,14 @@
 #encoding: utf-8
 
 class OrderMailer < ApplicationMailer
+  include Roadie::Rails::Mailer
 
   def order_confirmation(order)
     @order = order
     @store = order.store
     @user = order.user
 
-    mail(
+    roadie_mail(
       from: @store.contact_person.to_s,
       to: @user.to_s,
       #cc: @store.contact_person.to_s,
