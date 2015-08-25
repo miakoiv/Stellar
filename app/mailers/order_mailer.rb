@@ -16,4 +16,8 @@ class OrderMailer < ApplicationMailer
     )
   end
 
+  protected
+    def roadie_options
+      super.merge(url_options: {host: @store.host, scheme: 'http'})
+    end
 end
