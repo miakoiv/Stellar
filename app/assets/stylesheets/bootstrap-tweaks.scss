@@ -44,6 +44,26 @@
   }
 }
 
+.categories {
+  position: relative;
+
+  .corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 40px solid $brand-primary;
+    border-left: 40px solid transparent;
+  }
+  .corner-link {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #fff;
+  }
+}
+
 .col-min {
   width: 1px;
 }

@@ -38,6 +38,11 @@ class StoreController < ApplicationController
     @documents = @product.images.by_purpose(:document).ordered
   end
 
+  # GET /products/all
+  def show_all_products
+    @products = current_store.products.categorized.ordered
+  end
+
   # GET /cart
   def show_cart
     @order = current_user.shopping_cart(current_store)

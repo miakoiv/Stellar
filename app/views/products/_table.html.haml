@@ -1,0 +1,28 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-1= col(Product, :code)
+        %th= col(Product, :title)
+        %th.col-xs-1= col(Product, :sales_price)
+        %th.col-xs-2.hidden-print
+    %tbody
+      = content_tag_for :tr, products do |product|
+        %td
+          = image_variant_tag(product.cover_image, :icon,
+              data: {toggle: 'popover', placement: 'right', container: 'body',
+                content: "#{image_variant_tag(product.cover_image, :matchbox)}"})
+        %td= product.code
+        %td
+          %strong= product.title
+          = product.subtitle
+        %td= number_to_currency(product.sales_price, unit: '€')
+        %td.hidden-print.text-right
+          - if current_user.can?(:shop)
+            = form_tag order_product_path(product), method: :post, remote: true,
+                class: 'form-inline' do
+              .form-group
+                = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
+              %button.btn.btn-success{type: 'submit'}
+                = icon('cart-plus')

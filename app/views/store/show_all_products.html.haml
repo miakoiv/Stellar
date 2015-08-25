@@ -1,0 +1,13 @@
+#page-nav
+  %ul.nav.nav-tabs{role: 'tablist'}
+    - @categories.each_with_index do |category, index|
+      - next if category.products.empty?
+      %li{role: 'presentation', class: index == 0 ? 'active' : nil}
+        %a{href: "##{dom_id(category)}", role: 'tab', data: {toggle: 'tab'}}
+          = category.name.truncate(15, omission: '…')
+
+.tab-content
+  - @products.group_by(&:category).each do |category, products|
+    .tab-pane.fade.in{id: dom_id(category), class: category == @categories.first ? 'active' : nil}
+      %h2.visible-print-block= category.name
+      = render partial: 'products/table', object: products, as: :products

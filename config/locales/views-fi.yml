@@ -81,11 +81,9 @@ fi:
     index:
       current: Avoimet
       approved: Hyväksytyt
-  products:
-    product_detail:
-      amount: Määrä
-      add: Lisää koriin
   store:
+    amount: Määrä
+    add_to_cart: Lisää koriin
     show_cart:
       shopping_cart: Ostoskori
       empty: Ostoskorisi on tyhjä.
