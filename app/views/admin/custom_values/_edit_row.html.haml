@@ -1,5 +1,5 @@
 = content_tag_for :tr, custom_value do
-  %td= drag_handle
+  %td.hidden-print= drag_handle
   %td
     = form_for [:admin, custom_value], remote: true, html: {class: 'form-horizontal'} do |f|
       = f.text_field :value, class: 'form-control'

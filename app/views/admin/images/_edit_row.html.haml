@@ -1,5 +1,5 @@
 = content_tag_for :tr, image do
-  %td= drag_handle
+  %td.hidden-print= drag_handle
   %td
     = image_variant_tag(image, :thumbnail,
         data: {toggle: 'popover', placement: 'left',

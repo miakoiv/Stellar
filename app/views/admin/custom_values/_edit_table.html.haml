@@ -4,14 +4,14 @@
       %span= col(CustomAttribute, :custom_values)
     %thead
       %tr
-        %th.col-min
+        %th.col-min.hidden-print
         %th.col-xs-8= col(CustomValue, :value)
         %th.hidden-print
 
     %tbody#custom_values.sortable
       = render partial: 'admin/custom_values/edit_row', collection: custom_attribute.custom_values.ordered, as: :custom_value
     %tbody
-      %tr
+      %tr.hidden-print
         %td
         %td
           = form_for [:admin, custom_attribute, custom_attribute.custom_values.build],

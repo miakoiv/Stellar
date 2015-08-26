@@ -8,7 +8,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-min
+        %th.col-min.hidden-print
         %th.col-xs-1
         %th= col(Category, :name)
         %th= col(Category, :parent_category_id)
@@ -16,7 +16,7 @@
 
     %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
       = content_tag_for :tr, @categories do |category|
-        %td= drag_handle
+        %td.hidden-print= drag_handle
         %td= image_variant_tag(category.cover_image)
         %td= category.name
         %td= category.parent_category

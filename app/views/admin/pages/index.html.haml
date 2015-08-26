@@ -8,14 +8,14 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-min
+        %th.col-min.hidden-print
         %th.col-xs-4= col(Page, :title)
         %th.col-xs-4= col(Page, :parent_page_id)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
       = content_tag_for :tr, @pages do |page|
-        %td= drag_handle
+        %td.hidden-print= drag_handle
         %td= page.title
         %td= page.parent_page
         %td.hidden-print.text-right
