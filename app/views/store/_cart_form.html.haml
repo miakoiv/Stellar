@@ -9,18 +9,18 @@
     = f.date_field :shipping_at,
         data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
           'date-language' => I18n.locale}
-    = f.text_field :billing_address,
-        placeholder: col(Order, :billing_address)
-    = f.text_field :billing_postalcode, hide_label: true,
-        placeholder: col(Order, :billing_postalcode)
-    = f.text_field :billing_city, hide_label: true,
-        placeholder: col(Order, :billing_city)
     = f.text_field :shipping_address,
         placeholder: col(Order, :shipping_address)
-    = f.text_field :shipping_postalcode, hide_label: true,
+    = f.text_field :shipping_postalcode, skip_label: true,
         placeholder: col(Order, :shipping_postalcode)
-    = f.text_field :shipping_city, hide_label: true,
+    = f.text_field :shipping_city, skip_label: true,
         placeholder: col(Order, :shipping_city)
+    = f.text_field :billing_address,
+        placeholder: col(Order, :billing_address)
+    = f.text_field :billing_postalcode, skip_label: true,
+        placeholder: col(Order, :billing_postalcode)
+    = f.text_field :billing_city, skip_label: true,
+        placeholder: col(Order, :billing_city)
   = f.text_area :notes, rows: 4
   .form-group
     .col-sm-offset-4.col-sm-8

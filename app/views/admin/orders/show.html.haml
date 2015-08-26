@@ -26,18 +26,18 @@
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           = static_control col(Order, :shipping_at),
               l(@order.shipping_at)
-          = static_control col(Order, :billing_address),
-              @order.billing_address
-          = static_control nil,
-              @order.billing_postalcode
-          = static_control nil,
-              @order.billing_city
           = static_control col(Order, :shipping_address),
               @order.shipping_address
           = static_control nil,
               @order.shipping_postalcode
           = static_control nil,
               @order.shipping_city
+          = static_control col(Order, :billing_address),
+              @order.billing_address
+          = static_control nil,
+              @order.billing_postalcode
+          = static_control nil,
+              @order.billing_city
         = static_control col(Order, :notes) do
           = simple_format(@order.notes)
         = static_control col(Order, :approved_at),
