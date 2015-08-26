@@ -42,8 +42,8 @@ class ApplicationController < ActionController::Base
   private
     def create_guest_user
       guest = User.create(
-        store: default_store,
-        name: "Guest at #{default_store.name}",
+        store: current_store,
+        name: 'Guest',
         email: "guest_#{Time.now.to_i}#{rand(100)}@leasit.info",
         roles: [Role.guest]
       )
