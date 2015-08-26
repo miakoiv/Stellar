@@ -1,3 +1,13 @@
+html {
+  position: relative;
+  min-height: 100%;
+
+  body {
+    margin-bottom: 60px;
+  }
+}
+
+
 #main {
   position: relative;
   z-index: 1;
@@ -11,13 +21,12 @@
   bottom: 15px;
 }
 
-#footer {
-  position: fixed;
-  z-index: 0;
-  left: 0;
-  right: 0;
+.footer {
+  position: absolute;
   bottom: 0;
-  padding: 20px;
+  width: 100%;
+  height: 60px;
+  padding-top: 15px;
   background-color: $body-bg;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
   @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
