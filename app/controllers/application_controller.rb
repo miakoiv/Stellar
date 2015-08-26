@@ -27,30 +27,12 @@ class ApplicationController < ActionController::Base
 
   after_filter :prepare_unobtrusive_flash
 
-  # Find the current store for the storefront section.
+  # Select current store by requested hostname, but default to
+  # current user's designated store if there is no match.
   def current_store
-    if current_user
-      # Site staff may use the `store_id` param to switch between stores.
-      if current_user.is_site_manager? || current_user.is_site_monitor?
-        if params[:store_id].present?
-          session[:store_id] = params[:store_id]
-        end
-        if session[:store_id].present?
-          return Store.find(session[:store_id])
-        end
-      end
-      # Everyone else is shackled to their designated store.
-      current_user.store
-    else
-      default_store
-    end
+    Store.find_by(host: request.host) || current_user.store
   end
   helper_method :current_store
-
-  # Default to finding the store by hostname if possible.
-  def default_store
-    Store.find_by(host: request.host) || Store.first
-  end
 
   # Find the guest user stored in session, or create it.
   def guest_user
