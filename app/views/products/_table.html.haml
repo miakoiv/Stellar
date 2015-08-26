@@ -20,9 +20,8 @@
         %td= number_to_currency(product.sales_price, unit: '€')
         %td.hidden-print.text-right
           - if current_user.can?(:shop)
-            = form_tag order_product_path(product), method: :post, remote: true,
-                class: 'form-inline' do
-              .form-group
+            = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
+              .input-group
                 = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
-              %button.btn.btn-success{type: 'submit'}
-                = icon('cart-plus')
+                %span.input-group-btn
+                  %button.btn.btn-success{type: 'submit'}= icon('cart-plus')

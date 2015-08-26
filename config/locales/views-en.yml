@@ -107,6 +107,8 @@ en:
       amount: Amount
       add: Add to cart
   store:
+    all_products: All products
+    add_to_cart: Add to cart
     show_cart:
       shopping_cart: Shopping cart
       empty: Your shopping cart is empty.

@@ -1,13 +1,13 @@
-.product-actions
-  - if current_user.can?(:shop)
-    = form_tag order_product_path(product), method: :post, remote: true,
-        class: 'form-inline hidden-print' do
-      .form-group
-        %label{for: :amount}= t('store.amount')
+- if current_user.can?(:shop)
+  = form_tag order_product_path(product), method: :post, remote: true,
+      class: 'form-inline' do
+    .form-group
+      .input-group
         = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
-      %button.btn.btn-success{type: 'submit'}
-        = icon('cart-plus', t('store.add_to_cart'))
+        %span.input-group-btn
+          %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))
 
+.product-actions
   - if current_user.can_update?(Product)
     = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
         class: 'btn btn-default'

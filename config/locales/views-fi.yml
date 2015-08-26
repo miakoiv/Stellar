@@ -82,7 +82,7 @@ fi:
       current: Avoimet
       approved: Hyväksytyt
   store:
-    amount: Määrä
+    all_products: Kaikki tuotteet
     add_to_cart: Lisää koriin
     show_cart:
       shopping_cart: Ostoskori

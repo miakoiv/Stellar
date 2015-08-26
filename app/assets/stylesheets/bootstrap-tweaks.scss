@@ -7,10 +7,10 @@ html {
   }
 }
 
-
 #main {
   position: relative;
   background: $body-bg;
+  padding-bottom: 40px;
 }
 
 #flash {
@@ -50,24 +50,8 @@ html {
   }
 }
 
-.categories {
-  position: relative;
-
-  .corner {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-bottom: 40px solid $brand-primary;
-    border-left: 40px solid transparent;
-  }
-  .corner-link {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    color: #fff;
-  }
+.all-products {
+  margin-top: 20px;
 }
 
 .col-min {
@@ -126,6 +110,10 @@ i.icon {
   }
 }
 
+input[type=number] {
+  min-width: 60px;
+}
+
 .nav-tabs {
   margin-bottom: 15px;
 }
@@ -133,10 +121,6 @@ i.icon {
 label.import:before {
   content: "❖ ";
   color: $state-info-text;
-}
-
-input[type="number"] {
-  width: 70px !important;
 }
 
 .table-responsive {
