@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820065902) do
+ActiveRecord::Schema.define(version: 20150826102655) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -130,14 +130,15 @@ ActiveRecord::Schema.define(version: 20150820065902) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",                   limit: 4,                    null: false
-    t.integer  "user_id",                    limit: 4,                    null: false
+    t.integer  "store_id",                   limit: 4,                     null: false
+    t.integer  "user_id",                    limit: 4,                     null: false
     t.integer  "order_type_id",              limit: 4
     t.datetime "ordered_at"
     t.date     "shipping_at"
     t.datetime "approved_at"
     t.string   "company_name",               limit: 255
     t.string   "contact_person",             limit: 255
+    t.boolean  "has_billing_address",        limit: 1,     default: false, null: false
     t.string   "billing_address",            limit: 255
     t.string   "billing_postalcode",         limit: 255
     t.string   "billing_city",               limit: 255
@@ -147,8 +148,8 @@ ActiveRecord::Schema.define(version: 20150820065902) do
     t.string   "shipping_city",              limit: 255
     t.string   "shipping_country",           limit: 255,   default: "FI"
     t.text     "notes",                      limit: 65535
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "store_name",                 limit: 255
     t.string   "store_contact_person_name",  limit: 255
     t.string   "store_contact_person_email", limit: 255

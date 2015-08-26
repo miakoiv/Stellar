@@ -27,9 +27,14 @@ class Order < ActiveRecord::Base
 
 
   validates :company_name, :contact_person, :shipping_at,
-    :billing_address, :billing_postalcode, :billing_city,
     :shipping_address, :shipping_postalcode, :shipping_city,
       presence: true, on: :update, if: :has_shipping?
+
+  validates :billing_address, :billing_postalcode, :billing_city,
+    presence: true, on: :update, if: :has_shipping?,
+    if: :has_billing_address?
+
+  before_save :copy_billing_address, unless: :has_billing_address?
 
   def approval
     !!approved_at.present?
@@ -88,6 +93,12 @@ class Order < ActiveRecord::Base
   end
 
   private
+    def copy_billing_address
+      self.billing_address = shipping_address
+      self.billing_postalcode = shipping_postalcode
+      self.billing_city = shipping_city
+    end
+
     def archive!
       transaction do
         update(

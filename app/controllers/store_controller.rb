@@ -89,8 +89,9 @@ class StoreController < ApplicationController
     def order_params
       params.require(:order).permit(
         :order_type_id, :shipping_at,
-        :company_name, :contact_person, :billing_address, :billing_postalcode,
-        :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,
+        :company_name, :contact_person, :has_billing_address,
+        :billing_address, :billing_postalcode, :billing_city,
+        :shipping_address, :shipping_postalcode, :shipping_city,
         :notes
       )
     end

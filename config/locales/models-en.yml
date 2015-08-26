@@ -90,6 +90,7 @@ en:
         billing_postalcode: Postal code
         billing_city: City
         billing_country: County
+        has_billing_address: Billing to a different address from shipping
         shipping_address: Shipping address
         shipping_postalcode: Postal code
         shipping_city: City

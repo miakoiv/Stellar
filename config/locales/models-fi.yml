@@ -90,6 +90,7 @@ fi:
         billing_postalcode: Postinro
         billing_city: Toimipaikka
         billing_country: Maa
+        has_billing_address: Laskutus eri osoitteeseen kuin toimitus
         shipping_address: Toimitusosoite
         shipping_postalcode: Postinro
         shipping_city: Toimipaikka
