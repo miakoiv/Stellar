@@ -118,6 +118,11 @@ input[type=number] {
   margin-bottom: 15px;
 }
 
+label.required:before {
+  content: "❗ ";
+  color: $state-danger-text;
+}
+
 label.import:before {
   content: "❖ ";
   color: $state-info-text;
