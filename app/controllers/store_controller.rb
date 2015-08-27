@@ -14,6 +14,7 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!
 
+  before_action :set_order
   before_action :set_categories
 
   # GET /
@@ -45,22 +46,19 @@ class StoreController < ApplicationController
 
   # GET /cart
   def show_cart
-    @order = current_user.shopping_cart(current_store)
   end
 
   # POST /product/1/order
   def order_product
     @product = Product.find(params[:product_id])
     amount = params[:amount].to_i
-    current_user.shopping_cart(current_store).insert!(@product, amount)
+    @order.insert!(@product, amount)
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
   # POST /checkout
   def checkout
-    @order = current_user.shopping_cart(current_store)
-
     respond_to do |format|
       if @order.update(order_params)
         if @order.has_payment?
@@ -81,6 +79,11 @@ class StoreController < ApplicationController
   end
 
   private
+    # Finds current user's shopping cart, which is technically an order.
+    def set_order
+      @order = current_user.shopping_cart(current_store)
+    end
+
     def set_categories
       @categories = current_store.categories.ordered
     end
