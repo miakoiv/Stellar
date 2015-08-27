@@ -34,6 +34,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_store
 
+  # Convenience method to access the current user's shopping cart.
+  def shopping_cart
+    current_user.shopping_cart(current_store)
+  end
+  helper_method :shopping_cart
+
   # Find the guest user stored in session, or create it.
   def guest_user
     @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
