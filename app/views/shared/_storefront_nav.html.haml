@@ -4,9 +4,7 @@
   - if current_user && current_user.can?(:shop)
     = active_link_to show_cart_path, wrap_tag: :li, active: :exact do
       = icon('shopping-cart', t('store.show_cart.shopping_cart'))
-      - if @order.order_items.present?
-        %span.badge
-          = @order.order_items.count
+      = render partial: 'store/cart_badge'
     = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
 %ul.nav.navbar-nav.navbar-right
   - if current_user && current_user.can_read?(Order)
