@@ -34,3 +34,6 @@ jQuery ->
   $(document).on 'click', 'a[href="#print"]', (e) ->
     e.preventDefault()
     $.print()
+
+  $(document).on 'show.bs.modal', '.modal', (e) ->
+    $('.modal-body', this).css 'height', $(window).height() - 120

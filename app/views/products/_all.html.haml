@@ -1,0 +1,15 @@
+.row
+  .col-sm-2
+    %ul.nav.nav-pills.nav-stacked{role: 'tablist'}
+      - @categories.each_with_index do |category, index|
+        - next if category.products.empty?
+        %li{role: 'presentation', class: index == 0 ? 'active' : nil}
+          %a{href: "##{dom_id(category, :tab)}", role: 'tab', data: {toggle: 'tab'}}
+            = category.name.truncate(15, omission: '…')
+
+  .col-sm-10
+    .tab-content
+      - @products.group_by(&:category).each do |category, products|
+        .tab-pane.fade.in{id: dom_id(category, :tab), class: category == @categories.first ? 'active' : nil}
+          %h2.visible-print-block= category.name
+          = render partial: 'products/modal_table', object: products, as: :products

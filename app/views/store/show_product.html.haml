@@ -8,6 +8,9 @@
 .product-detail
   = render partial: 'products/product_detail', object: @product, as: :product
 
+.all-products
+  = render partial: 'products_modal'
+
 :coffee
   jQuery ->
     $(window).scrollTo $('.product-detail'), 300, offset: -70
