@@ -5,4 +5,5 @@
   $('.categories ##{dom_id(@category)}').addClass 'active'
   $('.product-detail').hide()
   $('.products').show()
-  $(window).scrollTo $('.products'), 300, offset: -70
+  if $(window).isSmall()
+    $(window).scrollTo $('.products'), 300, offset: -70
