@@ -123,6 +123,8 @@ fi:
         title: Nimike
         subtitle: Alanimi
         description: Kuvaus
+        available_at: Saatavana alkaen
+        deleted_at: Poistettu
         memo: Muistio
         images: Kuvat
         components: Komponentit

@@ -123,6 +123,8 @@ en:
         title: Title
         subtitle: Subtitle
         description: Description
+        available_at: Available since
+        deleted_at: Removed at
         memo: Memo
         images: Images
         components: Components

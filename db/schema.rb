@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901103438) do
+ActiveRecord::Schema.define(version: 20150901121958) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -195,6 +195,8 @@ ActiveRecord::Schema.define(version: 20150901103438) do
     t.decimal  "sales_price",                           precision: 8, scale: 2
     t.date     "sales_price_modified_at"
     t.integer  "priority",                limit: 4,                             default: 0, null: false
+    t.date     "available_at"
+    t.date     "deleted_at"
     t.datetime "created_at",                                                                null: false
     t.datetime "updated_at",                                                                null: false
   end

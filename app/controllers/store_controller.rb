@@ -19,20 +19,20 @@ class StoreController < ApplicationController
   # GET /
   def index
     @category = current_store.categories.ordered.first
-    @products = @category.present? ? @category.products.ordered : []
+    @products = @category.present? ? @category.products.available.ordered : []
   end
 
   # GET /category/1
   def show_category
     @category = Category.find(params[:category_id])
-    @products = @category.products.ordered
+    @products = @category.products.available.ordered
   end
 
   # GET /product/1
   def show_product
-    @product = Product.find(params[:product_id])
+    @product = Product.available.find(params[:product_id])
     @category = @product.category
-    @products = @category.products.ordered
+    @products = @category.products.available.ordered
     @presentational_images = @product.images.by_purpose(:presentational).ordered
     @technical_images = @product.images.by_purpose(:technical).ordered
     @documents = @product.images.by_purpose(:document).ordered
@@ -40,7 +40,7 @@ class StoreController < ApplicationController
 
   # GET /products/all
   def show_all_products
-    @products = current_store.products.categorized.ordered
+    @products = current_store.products.available.categorized.ordered
   end
 
   # GET /cart
@@ -51,7 +51,7 @@ class StoreController < ApplicationController
   # POST /product/1/order
   def order_product
     @order = shopping_cart
-    @product = Product.find(params[:product_id])
+    @product = Product.available.find(params[:product_id])
     amount = params[:amount].to_i
     @order.insert!(@product, amount)
 
