@@ -17,10 +17,8 @@ class Store < ActiveRecord::Base
   has_many :orders
   has_many :users
   has_many :pages
-  has_many :inventories
-  def inventories
-    local_inventory? ? super : Inventory.global
-  end
+  has_and_belongs_to_many :inventories
+  has_many :order_types, through: :inventories
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -29,10 +27,9 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
-  # Make shipping the default order type. We can't have order_types through
-  # inventories because some stores use global inventories.
+  # Make shipping the default order type.
   def default_order_type
-    inventories.map(&:order_types).flatten.find { |o| o.has_shipping? }
+    order_types.find_by(has_shipping: true)
   end
 
   # Performs a stock lookup on a product. Returns a hash
@@ -72,10 +69,6 @@ class Store < ActiveRecord::Base
 
   def category_options
     categories.map { |c| [c.name, c.id] }
-  end
-
-  def order_types
-    inventories.map(&:order_types).flatten
   end
 
   def order_type_options

@@ -26,7 +26,9 @@ IMPORT_FILES = {
     multiple: true,
     headers: [:code, :erp_number, nil, :customer_code, :sales_price],
   },
-  # VARASTO,NRO,HYLLY,VARASTOLKM,VARATTULKM,TULOSSA,TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
+  # VARASTO,NRO,HYLLY,
+  # VARASTOLKM,VARATTULKM,TULOSSA,
+  # TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
   inventory: {
     file: 'www-nimike_varasto-utf8.csv',
     multiple: true,
@@ -84,13 +86,9 @@ namespace :matfox do
           end
         end
 
-        # Update inventory items in global inventory.
+        # Update the primary (first) inventory from product data.
         update_inventory(
-          Inventory.global.by_purpose(:manufacturing),
-          code, data[:product][:quantity_pending]
-        )
-        update_inventory(
-          Inventory.global.by_purpose(:shipping),
+          Inventory.first,
           code, data[:product][:quantity_on_hand]
         )
 

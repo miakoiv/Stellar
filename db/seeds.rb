@@ -21,13 +21,13 @@ ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
 # General inventory with fuzzy availability, and order types for delivery
 # with or without online payment.
 #
-Inventory.create(id: 1, purpose: 'shipping', fuzzy: true, name: 'Availability')
+Inventory.create(id: 1, purpose: 'shipping', fuzzy: true, name: 'Saatavuus')
 
 OrderType.create(
   id: 1,
   inventory_id: 1,
   adjustment_multiplier: -1,
-  name: 'Bill me and deliver',
+  name: 'Maksu laskulla',
   has_shipping: true,
   has_payment: false
 )
@@ -35,38 +35,23 @@ OrderType.create(
   id: 2,
   inventory_id: 1,
   adjustment_multiplier: -1,
-  name: 'Payment and delivery',
+  name: 'Maksu verkkomaksuna',
   has_shipping: true,
   has_payment: true
 )
 
 #-----------------------------------------------------------------------------
-# Tikkurila
+# Inventories without fuzziness in stock availability.
+# Order types include manufacturing and shipping without online payment.
 #
-# An example using local, store specific inventories without fuzziness
-# in stock availability. Order types include manufacturing and shipping
-# without online payment.
-#
-Store.create(
-  id: 1,
-  contact_person_id: 2,
-  host: 'extranet.tjt-kaluste.fi',
-  erp_number: 1545,
-  local_inventory: true,
-  inventory_code: 'VART',
-  name: 'Tikkurila',
-  theme: 'cards'
-)
 Inventory.create(
   id: 2,
-  store_id: 1,
   purpose: 'manufacturing',
   fuzzy: false,
   name: 'In manufacturing queue'
 )
 Inventory.create(
   id: 3,
-  store_id: 1,
   purpose: 'shipping',
   fuzzy: false,
   name: 'Available for shipping'
@@ -89,6 +74,20 @@ OrderType.create(
   has_payment: false
 )
 
+#-----------------------------------------------------------------------------
+# Tikkurila
+#
+Store.create(
+  id: 1,
+  contact_person_id: 2,
+  host: 'tjt-extranet.leasit.info',
+  erp_number: 1545,
+  inventory_code: 'VART',
+  name: 'Tikkurila',
+  theme: 'cards',
+  inventory_ids: [2,3]
+)
+
 Category.create(store_id: 1, name: 'Color Display')
 Category.create(store_id: 1, name: 'Product Placement')
 Category.create(store_id: 1, name: 'Shop Event Material')
@@ -101,27 +100,26 @@ User.create(
   name: 'Sami Rosenblad',
   email: 'rosenblad@gmail.com',
   password: 'rush2112',
-  roles: [Role.first],
+  role_ids: [1],
 )
 User.create(
   store_id: 1,
   name: 'Mikko Kaukojärvi',
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
   password: 'powerrangers',
-  roles: [Role.first],
+  role_ids: [3],
 )
 
 #-----------------------------------------------------------------------------
 # Intersport Finland
-#
-# An example using global inventories
 #
 Store.create(
   id: 2,
   contact_person_id: 2,
   erp_number: 110007,
   name: 'Intersport Finland',
-  theme: 'default'
+  theme: 'default',
+  inventory_ids: [1]
 )
 
 Category.create(store_id: 2, name: 'Sokkelit')

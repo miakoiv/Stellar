@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826102655) do
+ActiveRecord::Schema.define(version: 20150901103438) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -82,13 +82,19 @@ ActiveRecord::Schema.define(version: 20150826102655) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
-    t.integer  "store_id",   limit: 4
     t.integer  "purpose",    limit: 4,   default: 0,     null: false
     t.boolean  "fuzzy",      limit: 1,   default: false, null: false
     t.string   "name",       limit: 255
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
+
+  create_table "inventories_stores", id: false, force: :cascade do |t|
+    t.integer "store_id",     limit: 4, null: false
+    t.integer "inventory_id", limit: 4, null: false
+  end
+
+  add_index "inventories_stores", ["inventory_id", "store_id"], name: "index_inventories_stores_on_inventory_id_and_store_id", unique: true, using: :btree
 
   create_table "inventory_items", force: :cascade do |t|
     t.integer  "inventory_id", limit: 4,                           null: false
@@ -222,7 +228,6 @@ ActiveRecord::Schema.define(version: 20150826102655) do
     t.integer  "contact_person_id", limit: 4,                   null: false
     t.string   "host",              limit: 255
     t.integer  "erp_number",        limit: 4
-    t.boolean  "local_inventory",   limit: 1,   default: false, null: false
     t.string   "inventory_code",    limit: 255
     t.string   "name",              limit: 255
     t.string   "slug",              limit: 255
