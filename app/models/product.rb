@@ -19,7 +19,7 @@ class Product < ActiveRecord::Base
 
   has_many :components, through: :relationships, class_name: 'Product', source: :product
 
-  scope :available, -> { where(deleted_at: nil).where('available_at <= ?', Date.current) }
+  scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
   scope :categorized, -> { where.not(category_id: nil) }
   scope :uncategorized, -> { where(category_id: nil) }
 
@@ -30,7 +30,8 @@ class Product < ActiveRecord::Base
 
   #---
   def available?
-    deleted_at.nil? && !(available_at.nil? || available_at.future?)
+    (deleted_at.nil? || deleted_at.future?) &&
+    !(available_at.nil? || available_at.future?)
   end
 
   def to_s

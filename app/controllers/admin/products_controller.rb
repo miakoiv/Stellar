@@ -27,7 +27,7 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/new
   def new
-    @product = current_store.products.build
+    @product = current_store.products.build(available_at: Date.current)
   end
 
   # GET /admin/products/1/edit
