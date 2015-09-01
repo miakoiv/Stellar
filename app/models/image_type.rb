@@ -2,9 +2,10 @@
 
 class ImageType < ActiveRecord::Base
 
-  has_many :images
-
   enum purpose: {presentational: 0, technical: 1, document: 2}
+
+  #---
+  has_many :images
 
   #---
   def self.options
