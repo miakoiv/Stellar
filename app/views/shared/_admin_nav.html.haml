@@ -7,9 +7,12 @@
   - if current_user.can_read?(Order)
     = active_link_to icon('truck', title(Order, count: 2)),
         admin_orders_path, wrap_tag: :li
+  %p.navbar-text
+    %span.label.label-warning= Rails.env if Rails.env == 'development'
+%ul.nav.navbar-nav.navbar-right
   %li.dropdown
     %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
-      = t('admin.manage')
+      = icon('cog', t('admin.manage'))
       %span.caret
     %ul.dropdown-menu{role: 'menu'}
       - if current_user.can_read?(Product)
@@ -30,5 +33,3 @@
       - if current_user.can_read?(Store)
         = active_link_to icon('cubes', title(Store, count: 2), class: 'fa-fw'),
             admin_stores_path, wrap_tag: :li
-  %p.navbar-text
-    %span.label.label-warning= Rails.env if Rails.env == 'development'
