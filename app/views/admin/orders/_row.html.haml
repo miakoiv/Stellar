@@ -3,7 +3,7 @@
   %td= order.order_type
   %td= order.user
   %td= order.order_items.count
-  %td= l(order.shipping_at)
+  %td= order.shipping_at.present? ? l(order.shipping_at) : ''
   %td.hidden-print.text-right
     = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'
