@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
   include Customizable
   include Reorderable
 
+  #---
   belongs_to :store
   belongs_to :category
   has_many :inventory_items
@@ -21,12 +22,12 @@ class Product < ActiveRecord::Base
   scope :categorized, -> { where.not(category_id: nil) }
   scope :uncategorized, -> { where(category_id: nil) }
 
-
+  #---
   validates :store_id, presence: true
   validates :code, presence: true
   validates :title, presence: true
 
-
+  #---
   def to_s
     title
   end

@@ -9,6 +9,7 @@ class Payment
 
   attr_accessor :params
 
+  #---
   # Payment is initialized with an order and options hash
   # containing the urls for redirecting back from the broker site.
   def initialize(order, options = {})

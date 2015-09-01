@@ -4,6 +4,7 @@ class Image < ActiveRecord::Base
 
   include Reorderable
 
+  #---
   belongs_to :imageable, polymorphic: true
   belongs_to :image_type
   has_attached_file :attachment,
@@ -32,6 +33,7 @@ class Image < ActiveRecord::Base
 
   delegate :url, to: :attachment
 
+  #---
   validates_attachment :attachment,
     content_type: {
       content_type: [
@@ -41,12 +43,13 @@ class Image < ActiveRecord::Base
       ]
     }
 
+  #---
   # Finds an image by its url, because Froala doesn't know about ids.
   def self.at_url(url, size = :original)
     all.find { |i| i.url(size, false) == url }
   end
 
-
+  #---
   # Applicable image types due to attachment bitmappiness.
   def applicable_image_types
     ImageType.where(bitmap: is_bitmap?)

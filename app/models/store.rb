@@ -6,8 +6,10 @@ class Store < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
 
+  #---
   after_create :assign_slug
 
+  #---
   belongs_to :contact_person, class_name: 'User'
   has_many :categories
   has_many :products
@@ -22,10 +24,11 @@ class Store < ActiveRecord::Base
 
   scope :all_except, -> (this) { where.not(id: this) }
 
+  #---
   validates :name, presence: true
   validates :erp_number, numericality: true, allow_blank: true
 
-
+  #---
   # Make shipping the default order type. We can't have order_types through
   # inventories because some stores use global inventories.
   def default_order_type

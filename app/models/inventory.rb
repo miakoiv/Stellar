@@ -22,13 +22,13 @@ class Inventory < ActiveRecord::Base
   # Global scope for inventories that are not store specific.
   scope :global, -> { where(store_id: nil) }
 
-
+  #---
   # Returns the first inventory fulfilling given purpose.
   def self.by_purpose(purpose)
     find_by(purpose: purposes[purpose])
   end
 
-
+  #---
   # Inventory lookup by product code.
   def lookup(code)
     inventory_items.find_by(code: code)

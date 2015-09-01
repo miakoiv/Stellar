@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
+  #---
   belongs_to :store
   belongs_to :user
   belongs_to :order_type
@@ -25,7 +26,7 @@ class Order < ActiveRecord::Base
   # Orders of specified store.
   scope :by_store, -> (store) { where(store: store) }
 
-
+  #---
   validates :company_name, :contact_person, :shipping_at,
     :shipping_address, :shipping_postalcode, :shipping_city,
       presence: true, on: :update, if: :has_shipping?
@@ -34,8 +35,10 @@ class Order < ActiveRecord::Base
     presence: true, on: :update, if: :has_shipping?,
     if: :has_billing_address?
 
+  #---
   before_save :copy_billing_address, unless: :has_billing_address?
 
+  #---
   def approval
     !!approved_at.present?
   end

@@ -5,6 +5,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
+  #---
   # Takes an inventory item from Store#stock_lookup and adjusts
   # its adjustment attribute according to amount of product
   # in orders concerning the specified inventory.
@@ -19,7 +20,7 @@ class OrderItem < ActiveRecord::Base
     inventory_item
   end
 
-
+  #---
   def subtotal
     amount * (product.sales_price || 0)
   end

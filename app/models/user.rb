@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   # :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :validatable
 
+  #---
   # Users are restricted to interacting with only one store.
   belongs_to :store
 
@@ -21,9 +22,10 @@ class User < ActiveRecord::Base
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
   scope :non_guests, -> { joins(:roles).where.not(roles: {name: 'guest'}) }
 
+  #---
   validates :name, presence: true
 
-
+  #---
   # A user's shopping cart is technically an order singleton in the scope of
   # current store, the one and only order that's not been ordered yet.
   def shopping_cart(store)
