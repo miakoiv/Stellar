@@ -33,6 +33,6 @@
             %td.text-muted
               %strong= component.title
               = component.subtitle
-            %td.text-muted= stock[:shipping].amount
-            %td.text-right.text-muted= number_to_currency(stock[:shipping].value, unit: '€')
-            %td.text-right.text-muted= number_to_currency(stock[:shipping].total_value, unit: '€')
+            %td.text-muted= stock[:shipping].try(:amount)
+            %td.text-right.text-muted= number_to_currency(stock[:shipping].try(:value), unit: '€')
+            %td.text-right.text-muted= number_to_currency(stock[:shipping].try(:total_value), unit: '€')
