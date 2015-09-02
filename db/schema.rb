@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901121958) do
+ActiveRecord::Schema.define(version: 20150902112738) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -202,18 +202,18 @@ ActiveRecord::Schema.define(version: 20150901121958) do
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+  add_index "products", ["code"], name: "index_products_on_code", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
-    t.string   "parent_code",  limit: 255, null: false
-    t.string   "product_code", limit: 255, null: false
+    t.integer  "product_id",   limit: 4, null: false
+    t.integer  "component_id", limit: 4, null: false
     t.integer  "quantity",     limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "relationships", ["parent_code"], name: "index_relationships_on_parent_code", using: :btree
-  add_index "relationships", ["product_code"], name: "index_relationships_on_product_code", using: :btree
+  add_index "relationships", ["product_id"], name: "index_relationships_on_product_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

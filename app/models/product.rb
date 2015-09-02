@@ -12,12 +12,8 @@ class Product < ActiveRecord::Base
   belongs_to :store
   belongs_to :category
   has_many :inventory_items
-
-  has_many :relationships, -> (product) {
-    joins(:product).where(products: {store_id: product.store_id})
-  }, foreign_key: :parent_code, primary_key: :code
-
-  has_many :components, through: :relationships, class_name: 'Product', source: :product
+  has_many :relationships, dependent: :destroy
+  has_many :components, through: :relationships
 
   scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
   scope :categorized, -> { where.not(category_id: nil) }

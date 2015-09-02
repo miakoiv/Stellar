@@ -22,10 +22,10 @@
             %th.col-xs-2.text-right #
 
         %tbody
-          - order.aggregated_components.each do |product, quantity|
+          - order.aggregated_components.each do |component, quantity|
             %tr
-              %td= link_to product.code, admin_product_path(product)
+              %td= link_to component.code, admin_product_path(component)
               %td
-                %strong= product.title
-                = product.subtitle
+                %strong= component.title
+                = component.subtitle
               %td.text-right= quantity

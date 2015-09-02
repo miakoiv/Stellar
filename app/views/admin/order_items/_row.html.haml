@@ -20,8 +20,8 @@
 
   = content_tag_for :tr, order_item.product.relationships do |relationship|
     %td.col-xs-1
-    %td= link_to relationship.product.code, admin_product_path(relationship.product)
+    %td= link_to relationship.component.code, admin_product_path(relationship.component)
     %td.text-muted
-      %strong= relationship.product.title
-      = relationship.product.subtitle
+      %strong= relationship.component.title
+      = relationship.component.subtitle
     %td.text-right.text-muted= relationship.quantity * order_item.amount

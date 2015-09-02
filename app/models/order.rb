@@ -65,11 +65,11 @@ class Order < ActiveRecord::Base
   # Collects aggregated component quantities of all products in the order.
   # Returns a hash of quantities keyed by product object.
   def aggregated_components
-    components = {}.tap do |components|
+    aggregated = {}.tap do |aggregated|
       order_items.each do |item|
         item.product.relationships.each do |relationship|
-          components[relationship.product] ||= 0
-          components[relationship.product] += item.amount * relationship.quantity
+          aggregated[relationship.component] ||= 0
+          aggregated[relationship.component] += item.amount * relationship.quantity
         end
       end
     end

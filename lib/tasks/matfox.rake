@@ -63,11 +63,13 @@ namespace :matfox do
           data[:customers].each do |row|
             store = Store.find_by(erp_number: row[:erp_number])
             next if store.nil?
-            find_or_create_product(store, code, data).update_columns(
+            product = find_or_create_product(store, code, data)
+            product.update_columns(
               customer_code: row[:customer_code],
               sales_price: row[:sales_price] || data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )
+            update_structure(store, product, data[:structure])
           end
         end
 
@@ -79,10 +81,12 @@ namespace :matfox do
           slugs.mb_chars.scan(/[[:word:]]+/).map(&:downcase).each do |slug|
             store = Store.find_by(slug: slug)
             next if store.nil?
-            find_or_create_product(store, code, data).update_columns(
+            product = find_or_create_product(store, code, data)
+            product.update_columns(
               sales_price: data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )
+            update_structure(store, product, data[:structure])
           end
         end
 
@@ -103,16 +107,6 @@ namespace :matfox do
           update_inventory(
             store.inventory_for(:shipping),
             code, row[:quantity_on_hand], row[:shelf], row[:value]
-          )
-        end
-
-        # Assign product relationships.
-        next if data[:structure].nil?
-        data[:structure].each do |row|
-          Relationship.find_or_create_by(
-            parent_code: code, product_code: row[:component_code]
-          ).update_columns(
-            quantity: row[:quantity].to_i
           )
         end
       end
@@ -151,7 +145,35 @@ namespace :matfox do
       cost:             data[:cost],
       cost_modified_at: data[:cost_modified_at]
     )
+    puts "#{code} ➞ #{store}"
     product
+  end
+
+  # Updates the relationships of `product` according to entries
+  # in `structure`, in the scope of `store`.
+  def update_structure(store, product, structure)
+    if structure.nil?
+      product.relationships.clear
+    else
+      relationships = structure.map { |row|
+        [
+          store.products.find_by(code: row[:component_code]),
+          row[:quantity].to_i
+        ]
+      }.reject { |row| row[0].nil? }
+
+      # First mass assign the components to delete unwanted relationships.
+      product.components = relationships.map { |r| r[0] }
+
+      # Now update quantities on the relationships.
+      relationships.each do |relationship|
+        product.relationships.find_by(
+          component: relationship[0]
+        ).update_attributes(
+          quantity: relationship[1]
+        )
+      end
+    end
   end
 
   # Updates an inventory item by product code in specified inventory,
