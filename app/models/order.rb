@@ -27,13 +27,9 @@ class Order < ActiveRecord::Base
   scope :by_store, -> (store) { where(store: store) }
 
   #---
-  validates :company_name, :contact_person, :shipping_at,
-    :shipping_address, :shipping_postalcode, :shipping_city,
-      presence: true, on: :update, if: :has_shipping?
+  validates :shipping_address, :shipping_postalcode, :shipping_city, presence: true, on: :update, if: :has_shipping?
 
-  validates :billing_address, :billing_postalcode, :billing_city,
-    presence: true, on: :update, if: :has_shipping?,
-    if: :has_billing_address?
+  validates :billing_address, :billing_postalcode, :billing_city, presence: true, on: :update, if: :has_shipping?, if: :has_billing_address?
 
   #---
   before_save :copy_billing_address, unless: :has_billing_address?

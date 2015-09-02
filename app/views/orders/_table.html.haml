@@ -13,7 +13,7 @@
         %td= l(order.ordered_at.to_date)
         %td= order.order_type
         %td= order.order_items.count
-        %td= l(order.shipping_at)
+        %td= order.shipping_at.present? ? l(order.shipping_at) : ''
         %td.text-right
           - if order.approval
             = link_to icon('info', t('actions.show')), order_path(order),

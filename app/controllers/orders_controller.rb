@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order
 
     OrderMailer.order_confirmation(@order).deliver_later
-    render :show
+    redirect_to orders_path
   end
 
   private

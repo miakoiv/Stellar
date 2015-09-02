@@ -25,7 +25,7 @@
             @order.contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           = static_control col(Order, :shipping_at),
-              l(@order.shipping_at)
+              @order.shipping_at.present? ? l(@order.shipping_at) : ''
           = static_control col(Order, :shipping_address),
               @order.shipping_address
           = static_control nil,
