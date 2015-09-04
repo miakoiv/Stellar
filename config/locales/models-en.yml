@@ -127,6 +127,7 @@ en:
         deleted_at: Removed at
         memo: Memo
         images: Images
+        customizations: Properties
         components: Components
         cost: Purchase price
         sales_price: Sales price

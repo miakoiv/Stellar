@@ -127,6 +127,7 @@ fi:
         deleted_at: Poistettu
         memo: Muistio
         images: Kuvat
+        customizations: Ominaisuudet
         components: Komponentit
         cost: Ostohinta
         sales_price: Myyntihinta
