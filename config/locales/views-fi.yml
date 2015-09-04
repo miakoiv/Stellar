@@ -40,7 +40,7 @@ fi:
         new_custom_attribute: Uusi ominaisuus
     custom_values:
       edit_table:
-        new_custom_value: Uusi vaihtoehto
+        new_custom_value: Uusi arvo
     orders:
       index:
         current: Avoimet

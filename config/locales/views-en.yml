@@ -60,7 +60,7 @@ en:
         new_custom_attribute: New attribute
     custom_values:
       edit_table:
-        new_custom_value: New option
+        new_custom_value: New value
     orders:
       index:
         current: Current

@@ -3,10 +3,9 @@
     %thead
       %tr
         %th.col-xs-3= col(Customization, :custom_attribute_id)
-        %th= col(Customization, :custom_values)
+        %th= col(Customization, :custom_value_id)
 
-    - customizable.customizations.group_by(&:custom_attribute).each do |custom_attribute, customizations|
-      %tbody
-        %tr
-          %td= custom_attribute
-          %td= customizations.map(&:custom_value).to_sentence
+    %tbody
+      = content_tag_for :tr, customizable.customizations do |customization|
+        %td= customization.custom_attribute
+        %td= customization.custom_value

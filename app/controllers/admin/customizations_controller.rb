@@ -9,15 +9,10 @@ class Admin::CustomizationsController < ApplicationController
   # POST /admin/customizable/1/customizations
   def create
     @customizable = find_customizable
-    custom_value_ids = params[:customization][:custom_value_ids]
-      .map(&:to_i)
-      .reject { |id| id < 1 }
-    custom_value_ids.each do |id|
-      @customizable.customizations.find_or_create_by(
-        custom_attribute_id: params[:customization][:custom_attribute_id],
-        custom_value_id: id
-      )
-    end
+    @customizable.customizations.find_or_create_by(
+      custom_attribute_id: params[:customization][:custom_attribute_id],
+      custom_value_id: params[:customization][:custom_value_id]
+    )
     respond_to do |format|
       format.js
     end
@@ -48,7 +43,7 @@ class Admin::CustomizationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def customization_params
       params.require(:customization).permit(
-        :custom_attribute_id, :custom_value_ids
+        :custom_attribute_id, :custom_value_id
       )
     end
 end

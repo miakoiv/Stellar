@@ -59,7 +59,7 @@ en:
         custom_values: Values
       custom_attribute:
         name: Attribute
-        custom_values: Value
+        custom_values: Values
       custom_value:
         value: Value
       image:
