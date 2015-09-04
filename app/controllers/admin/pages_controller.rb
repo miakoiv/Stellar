@@ -35,7 +35,7 @@ class Admin::PagesController < ApplicationController
       if @page.save
         format.html { redirect_to edit_admin_page_path(@page),
           notice: t('.notice', page: @page) }
-        format.json { render :edit, status: :created, location: admin_page_path(@page) }
+        format.json { render :edit, status: :created, location: edit_admin_page_path(@page) }
       else
         format.html { render :new }
         format.json { render json: @page.errors, status: :unprocessable_entity }
@@ -49,9 +49,9 @@ class Admin::PagesController < ApplicationController
     respond_to do |format|
       if @page.update(page_params)
         format.js
-        format.html { redirect_to admin_page_path(@page),
+        format.html { redirect_to edit_admin_page_path(@page),
           notice: t('.notice', page: @page) }
-        format.json { render :show, status: :ok, location: admin_page_path(@page) }
+        format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }
       else
         format.js { head :no_content }
         format.html { render :edit }
