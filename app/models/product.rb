@@ -11,7 +11,10 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
   belongs_to :category
-  has_many :inventory_items
+  has_many :inventory_items, -> (product) {
+    joins(:product).where('products.store_id = inventory_items.store_id')
+  }
+  has_many :order_items
   has_many :relationships, dependent: :destroy
   has_many :components, through: :relationships
 
@@ -28,6 +31,13 @@ class Product < ActiveRecord::Base
   def available?
     (deleted_at.nil? || deleted_at.future?) &&
     !(available_at.nil? || available_at.future?)
+  end
+
+  # Gathers product stock to a hash keyed by inventory.
+  # Values are inventory items.
+  def stock
+    inventory_items.group_by(&:inventory)
+      .map { |inventory, items| [inventory, items.first] }.to_h
   end
 
   def to_s

@@ -31,7 +31,7 @@ IMPORT_FILES = {
   # TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
   inventory: {
     file: 'www-nimike_varasto-utf8.csv',
-    multiple: true,
+    multiple: false,
     headers: [
       :inventory_code, :code, :shelf,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
@@ -69,6 +69,7 @@ namespace :matfox do
               sales_price: row[:sales_price] || data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )
+            update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
           end
         end
@@ -86,30 +87,44 @@ namespace :matfox do
               sales_price: data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )
+            update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
           end
         end
-
-        # Update the primary (first) inventory from product data.
-        update_inventory(
-          Inventory.first,
-          code, data[:product][:quantity_on_hand]
-        )
-
-        # Update inventory items in local inventories.
-        next if data[:inventory].nil?
-        data[:inventory].each do |row|
-          store = Store.find_by(inventory_code: row[:inventory_code])
-          update_inventory(
-            store.inventory_for(:manufacturing),
-            code, row[:quantity_pending], row[:shelf], row[:value]
-          )
-          update_inventory(
-            store.inventory_for(:shipping),
-            code, row[:quantity_on_hand], row[:shelf], row[:value]
-          )
-        end
       end
+    end
+  end
+
+  # Updates the inventory item entry for `product` at `store`.
+  def update_inventory(store, product, product_data, inventory_data)
+
+    # Create stubs to ensure each product at least exists in each inventory.
+    store.inventories.each do |inventory|
+      find_or_create_inventory_item(store, inventory, product)
+    end
+
+    # If the inventory code in `inventory_data` matches the store,
+    # it is preferred over `product_data`.
+    if inventory_data.present? &&
+        inventory_data[:inventory_code] == store.inventory_code
+
+      update_inventory_item(
+        store, store.inventory_for(:manufacturing), product,
+        inventory_data[:quantity_pending],
+        inventory_data[:shelf],
+        inventory_data[:value]
+      )
+      update_inventory_item(
+        store, store.inventory_for(:shipping), product,
+        inventory_data[:quantity_on_hand],
+        inventory_data[:shelf],
+        inventory_data[:value]
+      )
+    else
+      update_inventory_item(
+        store, store.inventory_for(:shipping), product,
+        product[:quantity_on_hand], nil, nil
+      )
     end
   end
 
@@ -149,6 +164,21 @@ namespace :matfox do
     product
   end
 
+  # Finds or creates inventory item for `product` in `inventory` at `store`.
+  def find_or_create_inventory_item(store, inventory, product)
+    inventory.inventory_items.find_or_create_by(store: store, product: product)
+  end
+
+  def update_inventory_item(store, inventory, product, amount, shelf, value)
+    find_or_create_inventory_item(
+      store, inventory, product
+    ).update_attributes(
+      amount: amount || 0,
+      shelf: shelf,
+      value: value || 0
+    )
+  end
+
   # Updates the relationships of `product` according to entries
   # in `structure`, in the scope of `store`.
   def update_structure(store, product, structure)
@@ -174,16 +204,5 @@ namespace :matfox do
         )
       end
     end
-  end
-
-  # Updates an inventory item by product code in specified inventory,
-  # which may not exist.
-  def update_inventory(inventory, code, quantity, shelf = nil, value = nil)
-    return nil if inventory.nil?
-    inventory.inventory_items.find_or_create_by(code: code).update_columns(
-      amount: quantity,
-      shelf: shelf,
-      value: value
-    )
   end
 end

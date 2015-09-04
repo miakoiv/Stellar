@@ -27,39 +27,16 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
+  # Performs an inventory valuation of items in the shipping inventory.
+  def inventory_valuation
+    items = inventory_for(:shipping).inventory_items
+              .for_products(products.categorized)
+    [items, items.map { |item| item.total_value }.sum]
+  end
+
   # Make shipping the default order type.
   def default_order_type
     order_types.find_by(has_shipping: true)
-  end
-
-  # Performs a stock lookup on a product. Returns a hash
-  # of inventory items keyed by inventory purpose, adjusted by orders.
-  def stock_lookup(code)
-    stock = ActiveSupport::HashWithIndifferentAccess.new.tap do |stock|
-      inventories.each do |inventory|
-        if (item = inventory.lookup(code))
-          stock[inventory.purpose] = OrderItem.adjust!(item)
-        end
-      end
-    end
-  end
-
-  # Performs an inventory valuation on given products recursively.
-  # Returns a [inventory, grand_total] tuple, where inventory is a hash
-  # keyed by product, containing [stock, inventory_valuation] tuples.
-  # stock is an inventory item from stock_lookup, inventory_valuation
-  # is another inventory valuation tuple performed on the components
-  # of the product.
-  def inventory_valuation(products)
-    grand_total = 0
-    inventory = {}.tap do |inventory|
-      products.each do |product|
-        stock = stock_lookup(product.code)
-        grand_total += stock[:shipping].try(:total_value) || 0
-        inventory[product] = [stock, inventory_valuation(product.components)]
-      end
-    end
-    [inventory, grand_total]
   end
 
   # Finds the first inventory by purpose.

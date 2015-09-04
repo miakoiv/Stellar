@@ -21,8 +21,8 @@ class Inventory < ActiveRecord::Base
   end
 
   #---
-  # Inventory lookup by product code.
-  def lookup(code)
-    inventory_items.find_by(code: code)
+  def stock
+    items = inventory_items
+    [items, items.map { |item| item.value || 0}.sum]
   end
 end

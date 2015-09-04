@@ -98,7 +98,8 @@ ActiveRecord::Schema.define(version: 20150902112738) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.integer  "inventory_id", limit: 4,                           null: false
-    t.string   "code",         limit: 255,                         null: false
+    t.integer  "store_id",     limit: 4,                           null: false
+    t.integer  "product_id",   limit: 4,                           null: false
     t.string   "shelf",        limit: 255
     t.integer  "amount",       limit: 4
     t.decimal  "value",                    precision: 8, scale: 2
@@ -106,8 +107,9 @@ ActiveRecord::Schema.define(version: 20150902112738) do
     t.datetime "updated_at",                                       null: false
   end
 
-  add_index "inventory_items", ["code"], name: "index_inventory_items_on_code", using: :btree
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
+  add_index "inventory_items", ["product_id"], name: "index_inventory_items_on_product_id", using: :btree
+  add_index "inventory_items", ["store_id"], name: "index_inventory_items_on_store_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "order_id",              limit: 4,                           null: false

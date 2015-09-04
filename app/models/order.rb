@@ -42,6 +42,7 @@ class Order < ActiveRecord::Base
   def approval
     !!approved_at.present?
   end
+  alias approved? approval
 
   # Setting approval status also archives the order and its order items.
   def approval=(status)

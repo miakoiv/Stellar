@@ -3,20 +3,24 @@
 class InventoryItem < ActiveRecord::Base
 
   belongs_to :inventory
-
-  # Inventory items don't reference a product directly,
-  # instead there is a `code` attribute that may refer to
-  # multiple products under different stores simultaneously.
+  belongs_to :store
+  belongs_to :product
 
   default_scope { order(:inventory_id) }
+  scope :for_products, -> (products) {
+    joins(:product).where('products.id IN (?)', products.pluck(:id))
+  }
 
-  # Adjustment attribute is calculated on the fly from
-  # orders affecting the stock. OrderItem#adjust! calls
-  # InventoryItem#adjust! via Store#stock_lookup.
-  attr_accessor :adjustment
-  def adjust!(amount)
-    self.adjustment ||= 0
-    self.adjustment += amount
+  # The adjustment of an inventory item is the sum of products
+  # ordered in current orders that target the inventory this item
+  # resides in. An inner join with orders applies the default scope
+  # of orders that is current orders only.
+  def adjustment
+    product.order_items.joins(order: :order_type)
+      .where(order_types: {inventory_id: inventory})
+      .map { |item|
+        item.order.order_type.adjustment_multiplier * item.amount
+      }.sum
   end
 
   def total_value
