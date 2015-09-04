@@ -5,14 +5,14 @@ en:
         one: category
         other: categories
       customization:
-        one: option
-        other: options
+        one: attribute
+        other: attributes
       custom_attribute:
         one: attribute
         other: attributes
       custom_value:
-        one: option
-        other: options
+        one: value
+        other: values
       image:
         one: image
         other: images
@@ -54,12 +54,12 @@ en:
         parent_category_id: Parent category
         name: Name
       customization:
-        custom_attribute_id: Property
-        custom_value_id: Option
-        custom_values: Options
+        custom_attribute_id: Attribute
+        custom_value_id: Value
+        custom_values: Values
       custom_attribute:
-        name: Name
-        custom_values: Options
+        name: Attribute
+        custom_values: Value
       custom_value:
         value: Value
       image:
@@ -127,7 +127,7 @@ en:
         deleted_at: Removed at
         memo: Memo
         images: Images
-        customizations: Properties
+        customizations: Attributes
         components: Components
         cost: Purchase price
         sales_price: Sales price
