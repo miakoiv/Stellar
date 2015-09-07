@@ -116,6 +116,7 @@ fi:
         parent_page_id: Pääsivu
         title: Otsake
         content: Sisältö
+        wysiwyg: Käytä Froala-editoria
       product:
         category_id: Tuoteryhmä
         code: Tuotekoodi

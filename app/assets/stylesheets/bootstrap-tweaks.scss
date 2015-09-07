@@ -81,32 +81,18 @@ i.icon {
   padding: 5px 5px 6px 4px;
 }
 
+.monospace {
+  font-family: "Fira Mono", monospace;
+}
+
 .page-header {
+
   a.btn {
     float: right;
   }
 
   a.btn + a.btn {
     margin-right: 8px;
-  }
-}
-
-.label-with-delete {
-  display: inline-block;
-
-  a {
-    visibility: hidden;
-    display: inline-block;
-    padding: 3px;
-    color: #fff;
-  }
-
-}
-.label-with-delete:hover {
-  background-color: $label-danger-bg;
-
-  a {
-    visibility: visible;
   }
 }
 
@@ -119,7 +105,7 @@ input[type=number] {
 }
 
 label.required:before {
-  content: "❗ ";
+  content: "❋ ";
   color: $state-danger-text;
 }
 

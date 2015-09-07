@@ -6,15 +6,20 @@
           {include_blank: blank_option}, {class: 'selectize'}
       = f.text_field :title
       = f.form_group do
+        = f.check_box :wysiwyg
+      - if !@page.wysiwyg?
+        = f.text_area :content, rows: 20, class: 'monospace input-sm'
+      = f.form_group do
         = f.primary
 
-  - unless @page.new_record?
+  - if !@page.new_record? && @page.wysiwyg?
     #page_content><= @page.content.try(:html_safe)
 
     :coffee
       $('#page_content').editable
         inlineMode: false
         toolbarFixed: false
+        minHeight: 400
         buttons: [
           'bold', 'italic', 'underline', 'formatBlock', 'align',
           'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',

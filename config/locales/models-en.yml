@@ -116,6 +116,7 @@ en:
         parent_page_id: Parent page
         title: Title
         content: Content
+        wysiwyg: Use Froala Editor
       product:
         category_id: Category
         code: Product code
