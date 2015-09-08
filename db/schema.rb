@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20150908085859) do
     t.integer  "product_id",            limit: 4,                           null: false
     t.integer  "amount",                limit: 4
     t.decimal  "price",                             precision: 8, scale: 2
+    t.integer  "priority",              limit: 4
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
     t.string   "product_code",          limit: 255

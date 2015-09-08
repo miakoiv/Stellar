@@ -114,7 +114,11 @@ class Order < ActiveRecord::Base
 
     def apply_shipping_cost
       return if store.shipping_cost_product.nil?
-      order_items.create_with(amount: 1).find_or_create_by(product: store.shipping_cost_product).update(price: calculated_shipping_cost)
+      order_items.create_with(
+        amount: 1, priority: 1e9
+      ).find_or_create_by(
+        product: store.shipping_cost_product
+      ).update(price: calculated_shipping_cost)
     end
 
     def calculated_shipping_cost

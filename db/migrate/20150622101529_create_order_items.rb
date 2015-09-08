@@ -5,6 +5,8 @@ class CreateOrderItems < ActiveRecord::Migration
       t.belongs_to :product, null: false, index: true
       t.integer :amount
       t.decimal :price, precision: 8, scale: 2
+
+      t.integer :priority
       t.timestamps null: false
 
       # The rest of the fields are permanent copies of
