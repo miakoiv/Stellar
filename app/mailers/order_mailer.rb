@@ -1,8 +1,10 @@
 #encoding: utf-8
 
 class OrderMailer < ApplicationMailer
+
   include Roadie::Rails::Mailer
 
+  #---
   def order_confirmation(order)
     @order = order
     @store = order.store
