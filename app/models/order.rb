@@ -61,6 +61,7 @@ class Order < ActiveRecord::Base
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
     order_item.amount += amount
+    order_item.price = product.sales_price
     order_item.save
   end
 
@@ -86,7 +87,14 @@ class Order < ActiveRecord::Base
   end
 
   def grand_total
-    order_items.map { |item| item.amount * (item.product.sales_price || 0) }.sum
+    order_items.map { |item| item.amount * (item.price || 0) }.sum
+  end
+
+  def grand_total_without_shipping
+    order_items
+      .reject { |item| item.is_shipping_cost? }
+      .map { |item| item.amount * (item.price || 0) }
+      .sum
   end
 
   def padded_id
@@ -105,7 +113,14 @@ class Order < ActiveRecord::Base
     end
 
     def apply_shipping_cost
-      puts "*** Applying shipping cost ***"
+      return if store.shipping_cost_product.nil?
+      order_items.create_with(amount: 1).find_or_create_by(product: store.shipping_cost_product).update(price: calculated_shipping_cost)
+    end
+
+    def calculated_shipping_cost
+      default_price = store.shipping_cost_product.sales_price
+      return default_price if store.free_shipping_at.nil? || grand_total_without_shipping < store.free_shipping_at
+      return 0.00
     end
 
     def archive!

@@ -1,14 +1,22 @@
 = content_tag_for :tr, order_item do
-  %td= link_to icon('cube', order_item.product.code), show_product_path(order_item.product)
-  %td
-    %strong= order_item.product.title
-    = order_item.product.subtitle
-  %td
-    = form_for order_item, remote: true,
-        html: {class: 'pull-right immediate form-horizontal'} do |f|
-      = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
-  %td.text-right= number_to_currency(order_item.product.sales_price, unit: '€')
-  %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
-  %td.text-right
-    = link_to icon('remove', t('actions.delete')), order_item_path(order_item),
-        remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+  - if order_item.is_shipping_cost?
+    %td
+    %td= order_item.product.title
+    %td
+    %td
+    %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
+    %td
+  - else
+    %td= link_to icon('cube', order_item.product.code), show_product_path(order_item.product)
+    %td
+      %strong= order_item.product.title
+      = order_item.product.subtitle
+    %td
+      = form_for order_item, remote: true,
+          html: {class: 'pull-right immediate form-horizontal'} do |f|
+        = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
+    %td.text-right= number_to_currency(order_item.price, unit: '€')
+    %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
+    %td.text-right
+      = link_to icon('remove', t('actions.delete')), order_item_path(order_item),
+          remote: true, method: :delete, class: 'btn btn-danger btn-sm'

@@ -14,11 +14,10 @@
           {}, {class: 'selectize'}
       = f.form_group do
         = f.check_box :admit_guests
-      = f.text_field :shipping_cost
-      = f.text_field :free_shipping_at
       = f.select :shipping_cost_product_id,
           @store.products.uncategorized.map { |p| [p.to_s, p.id] },
           {}, {class: 'selectize'}
+      = f.text_field :free_shipping_at
 
       = f.form_group do
         = f.primary

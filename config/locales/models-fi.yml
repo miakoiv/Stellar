@@ -145,7 +145,6 @@ fi:
         theme: Ulkoasun teema
         locale: Kieli
         admit_guests: Pääsy vieraskäyttäjille
-        shipping_cost: Toimituskulut
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
       user:

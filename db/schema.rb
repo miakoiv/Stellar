@@ -115,13 +115,13 @@ ActiveRecord::Schema.define(version: 20150908085859) do
     t.integer  "order_id",              limit: 4,                           null: false
     t.integer  "product_id",            limit: 4,                           null: false
     t.integer  "amount",                limit: 4
+    t.decimal  "price",                             precision: 8, scale: 2
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
     t.string   "product_code",          limit: 255
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
     t.string   "product_subtitle",      limit: 255
-    t.decimal  "product_sales_price",               precision: 8, scale: 2
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
@@ -239,9 +239,8 @@ ActiveRecord::Schema.define(version: 20150908085859) do
     t.string   "theme",                    limit: 255
     t.string   "locale",                   limit: 255,                         default: "fi",  null: false
     t.boolean  "admit_guests",             limit: 1,                           default: false, null: false
-    t.decimal  "shipping_cost",                        precision: 8, scale: 2
-    t.decimal  "free_shipping_at",                     precision: 8, scale: 2
     t.integer  "shipping_cost_product_id", limit: 4
+    t.decimal  "free_shipping_at",                     precision: 8, scale: 2
     t.datetime "created_at",                                                                   null: false
     t.datetime "updated_at",                                                                   null: false
   end

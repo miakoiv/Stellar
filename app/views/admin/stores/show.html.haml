@@ -28,12 +28,10 @@
             {'en' => 'English', 'fi' => 'suomi'}[@store.locale]
         = static_control col(Store, :admit_guests),
             @store.admit_guests? ? icon('check-square-o') : icon('square-o')
-        = static_control col(Store, :shipping_cost),
-            @store.shipping_cost.present? ? number_to_currency(@store.shipping_cost, unit: '€') : ''
-        = static_control col(Store, :free_shipping_at),
-            @store.free_shipping_at.present? ? number_to_currency(@store.free_shipping_at, unit: '€') : ''
         = static_control col(Store, :shipping_cost_product_id),
             @store.shipping_cost_product
+        = static_control col(Store, :free_shipping_at),
+            @store.free_shipping_at.present? ? number_to_currency(@store.free_shipping_at, unit: '€') : ''
 
   .col-md-6
     = render partial: 'admin/images/table', object: @store, as: :imageable

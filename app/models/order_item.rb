@@ -7,7 +7,11 @@ class OrderItem < ActiveRecord::Base
 
   #---
   def subtotal
-    amount * (product.sales_price || 0)
+    amount * (price || 0)
+  end
+
+  def is_shipping_cost?
+    product == order.store.shipping_cost_product
   end
 
   def archive!
@@ -15,8 +19,7 @@ class OrderItem < ActiveRecord::Base
       product_code: product.code,
       product_customer_code: product.customer_code,
       product_title: product.title,
-      product_subtitle: product.subtitle,
-      product_sales_price: product.sales_price
+      product_subtitle: product.subtitle
     )
   end
 end
