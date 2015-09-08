@@ -11,7 +11,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = current_store.orders
+    @orders = current_store.orders.current
     @approved = current_store.orders.approved
   end
 
@@ -64,7 +64,7 @@ class Admin::OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.unscoped.find(params[:id])
+      @order = Order.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

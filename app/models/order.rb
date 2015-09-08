@@ -11,17 +11,17 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   has_many :order_items, dependent: :destroy
 
-  # Default scope includes completed, not yet approved orders.
-  default_scope { where.not(ordered_at: nil).where(approved_at: nil) }
+  # Current orders are completed, not yet approved orders.
+  scope :current, -> { where.not(ordered_at: nil).where(approved_at: nil) }
 
   # Completed orders, approved or not.
-  scope :completed, -> { unscope(where: :approved_at) }
+  scope :completed, -> { where.not(ordered_at: nil) }
 
   # Unordered orders is the scope for shopping carts.
-  scope :unordered, -> { unscope(where: :ordered_at).where(ordered_at: nil) }
+  scope :unordered, -> { where(ordered_at: nil) }
 
   # Approved orders.
-  scope :approved, -> { unscope(where: :approved_at).where.not(approved_at: nil) }
+  scope :approved, -> { where.not(approved_at: nil) }
 
   # Orders of specified store.
   scope :by_store, -> (store) { where(store: store) }
@@ -37,6 +37,7 @@ class Order < ActiveRecord::Base
 
   #---
   before_save :copy_billing_address, unless: :has_billing_address?
+  after_touch :apply_shipping_cost
 
   #---
   def approval
@@ -101,6 +102,10 @@ class Order < ActiveRecord::Base
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
+    end
+
+    def apply_shipping_cost
+      puts "*** Applying shipping cost ***"
     end
 
     def archive!

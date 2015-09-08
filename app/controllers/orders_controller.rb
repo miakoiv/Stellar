@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = current_user.orders.by_store(current_store)
+    @orders = current_user.orders.by_store(current_store).current
     @approved = current_user.orders.by_store(current_store).approved
   end
 

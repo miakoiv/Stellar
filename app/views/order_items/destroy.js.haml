@@ -1,3 +1,2 @@
-$('#grand_total').replaceWith("#{j render partial: 'orders/grand_total_row', object: @order, as: :order}");
-$('##{dom_id(@order_item)}').fadeOut(200, function() { this.remove(); });
+$('#order-items-table').replaceWith("#{j render partial: 'order_items/edit_table', object: @order, as: :order}");
 $('#cart-badge').replaceWith("#{j render partial: 'store/cart_badge'}");

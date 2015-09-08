@@ -13,10 +13,11 @@ class InventoryItem < ActiveRecord::Base
 
   # The adjustment of an inventory item is the sum of products
   # ordered in current orders that target the inventory this item
-  # resides in. An inner join with orders applies the default scope
-  # of orders that is current orders only.
+  # resides in.
   def adjustment
     product.order_items.joins(order: :order_type)
+      .where.not(orders: {ordered_at: nil})
+      .where(orders: {approved_at: nil})
       .where(order_types: {inventory_id: inventory})
       .map { |item|
         item.order.order_type.adjustment_multiplier * item.amount
