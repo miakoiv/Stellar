@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
   post '/checkout'                  => 'store#checkout', as: :checkout
 
+  post '/correspondence/mail_form'  => 'correspondence#mail_form', as: :mail_form
+
   resources :orders do
     get 'confirm', on: :member
     resources :order_items, shallow: true

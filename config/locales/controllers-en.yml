@@ -44,6 +44,9 @@ en:
         notice: "User %{user} created."
       update:
         notice: "User %{user} updated."
+  correspondence:
+    mail_form:
+      thank_you: Thank you for contacting us!
   orders:
     update:
       notice: "Order %{order} updated."

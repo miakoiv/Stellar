@@ -44,6 +44,9 @@ fi:
         notice: "Käyttäjä %{user} luotu."
       update:
         notice: "Käyttäjä %{user} päivitetty."
+  correspondence:
+    mail_form:
+      thank_you: Kiitos yhteydenotostanne!
   orders:
     update:
       notice: "Tilaus %{order} päivitetty."
