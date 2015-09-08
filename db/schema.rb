@@ -230,19 +230,20 @@ ActiveRecord::Schema.define(version: 20150908085859) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.integer  "contact_person_id", limit: 4,                                           null: false
-    t.string   "host",              limit: 255
-    t.integer  "erp_number",        limit: 4
-    t.string   "inventory_code",    limit: 255
-    t.string   "name",              limit: 255
-    t.string   "slug",              limit: 255
-    t.string   "theme",             limit: 255
-    t.string   "locale",            limit: 255,                         default: "fi",  null: false
-    t.boolean  "admit_guests",      limit: 1,                           default: false, null: false
-    t.decimal  "shipping_cost",                 precision: 8, scale: 2
-    t.decimal  "free_shipping_at",              precision: 8, scale: 2
-    t.datetime "created_at",                                                            null: false
-    t.datetime "updated_at",                                                            null: false
+    t.integer  "contact_person_id",        limit: 4,                                           null: false
+    t.string   "host",                     limit: 255
+    t.integer  "erp_number",               limit: 4
+    t.string   "inventory_code",           limit: 255
+    t.string   "name",                     limit: 255
+    t.string   "slug",                     limit: 255
+    t.string   "theme",                    limit: 255
+    t.string   "locale",                   limit: 255,                         default: "fi",  null: false
+    t.boolean  "admit_guests",             limit: 1,                           default: false, null: false
+    t.decimal  "shipping_cost",                        precision: 8, scale: 2
+    t.decimal  "free_shipping_at",                     precision: 8, scale: 2
+    t.integer  "shipping_cost_product_id", limit: 4
+    t.datetime "created_at",                                                                   null: false
+    t.datetime "updated_at",                                                                   null: false
   end
 
   create_table "users", force: :cascade do |t|

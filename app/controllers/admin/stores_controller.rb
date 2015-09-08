@@ -69,7 +69,9 @@ class Admin::StoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(
-        :contact_person_id, :erp_number, :name, :host, :theme, :locale
+        :contact_person_id, :erp_number, :name, :host, :theme, :locale,
+        :admit_guests, :shipping_cost, :free_shipping_at,
+        :shipping_cost_product_id
       )
     end
 end
