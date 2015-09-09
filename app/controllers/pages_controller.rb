@@ -15,7 +15,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1
   def show
-    @page = current_store.pages.find(params[:id])
+    @page = current_store.pages.friendly.find(params[:id])
   end
 
   private

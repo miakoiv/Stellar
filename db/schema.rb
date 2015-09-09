@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908085859) do
+ActiveRecord::Schema.define(version: 20150909063856) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(version: 20150908085859) do
   add_index "customizations", ["custom_attribute_id"], name: "index_customizations_on_custom_attribute_id", using: :btree
   add_index "customizations", ["custom_value_id"], name: "index_customizations_on_custom_value_id", using: :btree
   add_index "customizations", ["customizable_type", "customizable_id"], name: "index_customizations_on_customizable_type_and_customizable_id", using: :btree
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",           limit: 255, null: false
+    t.integer  "sluggable_id",   limit: 4,   null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope",          limit: 255
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "image_types", force: :cascade do |t|
     t.integer  "purpose",    limit: 4,   default: 0,    null: false
@@ -175,6 +188,7 @@ ActiveRecord::Schema.define(version: 20150908085859) do
     t.integer  "store_id",       limit: 4,                    null: false
     t.integer  "parent_page_id", limit: 4
     t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255,                  null: false
     t.text     "content",        limit: 65535
     t.boolean  "wysiwyg",        limit: 1,     default: true
     t.integer  "priority",       limit: 4

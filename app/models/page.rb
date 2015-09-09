@@ -6,6 +6,8 @@ class Page < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
   include Reorderable
+  include FriendlyId
+  friendly_id :title, use: [:slugged]
 
   #---
   belongs_to :store
