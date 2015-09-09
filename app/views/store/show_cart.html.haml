@@ -1,9 +1,4 @@
 .page-header
   %h1= icon('shopping-cart', t('.shopping_cart'))
 
-- if @order.empty?
-  %p
-    = t('.empty')
-    = link_to t('.go_shopping'), store_path
-- else
-  = render partial: 'order_items/edit_table', object: @order, as: :order
+= render partial: 'order_items/edit_table', object: @order, as: :order

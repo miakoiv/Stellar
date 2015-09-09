@@ -1,19 +1,26 @@
 #order-items-table.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-2= col(OrderItem, :product_code)
-        %th= col(OrderItem, :product_title)
-        %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.text-right à
-        %th.text-right= col(OrderItem, :subtotal)
-        %th.col-xs-1
-    %tfoot
-      %tr
-        %th.text-right{colspan: 4}= col(Order, :grand_total)
-        %th.text-right= number_to_currency(@order.grand_total, unit: '€')
-        %th
-    %tbody
-      = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
-  .pull-right
-    = link_to t('store.go_checkout'), checkout_path, class: 'btn btn-primary'
+  - if @order.empty?
+    .panel.panel-default
+      .panel-heading
+        %h4= t('store.empty_cart')
+      .panel-body
+        %p= link_to t('store.go_shopping'), store_path
+  - else
+    %table.table.table-striped.table-hover.table-loose
+      %thead
+        %tr
+          %th.col-xs-2= col(OrderItem, :product_code)
+          %th= col(OrderItem, :product_title)
+          %th.col-xs-1.text-right= col(OrderItem, :amount)
+          %th.col-xs-2.text-right à
+          %th.col-xs-2.text-right= col(OrderItem, :subtotal)
+          %th.col-xs-1
+      %tfoot
+        %tr
+          %th.text-right{colspan: 4}= col(Order, :grand_total)
+          %th.text-right= number_to_currency(@order.grand_total, unit: '€')
+          %th
+      %tbody
+        = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
+    .pull-right
+      = link_to t('store.go_checkout'), checkout_path, class: 'btn btn-primary'
