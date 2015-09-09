@@ -61,6 +61,9 @@ class StoreController < ApplicationController
   # GET /checkout
   def checkout
     @order = shopping_cart
+    if @order.empty?
+      return redirect_to show_cart_path
+    end
   end
 
   # POST /confirm
