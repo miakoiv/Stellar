@@ -15,6 +15,7 @@ class OrderItemsController < ApplicationController
   # PATCH/PUT /order_items/1
   def update
     if @order_item.update(order_item_params)
+      @order_item.destroy if @order_item.amount < 1
       @order.apply_shipping_cost!
     end
   end
