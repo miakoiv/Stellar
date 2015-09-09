@@ -3,9 +3,10 @@
   .panel.panel-default
     .panel-body
       = f.static_control :order_type, label: col(Order, :order_type_id)
-      = f.static_control :user, label: col(Order, :user_id)
       = f.static_control label: col(Order, :ordered_at) do
         = l(@order.ordered_at, format: :long)
+      = f.text_field :customer_name
+      = f.text_field :customer_email
       %fieldset{disabled: @order.approval}
         = f.text_field :company_name
         = f.text_field :contact_person

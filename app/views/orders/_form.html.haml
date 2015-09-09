@@ -1,6 +1,8 @@
 = bootstrap_form_for @order, layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   = f.static_control :order_type, label: col(Order, :order_type_id)
+  = f.text_field :customer_name
+  = f.text_field :customer_email
   = f.text_field :company_name
   = f.text_field :contact_person
   %fieldset#shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}

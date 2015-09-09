@@ -84,6 +84,8 @@ en:
         approved_at: Processed
         items: Rows
         products: Products
+        customer_name: Customer name
+        customer_email: E-mail
         company_name: Company
         contact_person: Contact person
         billing_address: Billing address

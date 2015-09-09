@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909074142) do
+ActiveRecord::Schema.define(version: 20150909132239) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -158,6 +158,8 @@ ActiveRecord::Schema.define(version: 20150909074142) do
     t.datetime "ordered_at"
     t.date     "shipping_at"
     t.datetime "approved_at"
+    t.string   "customer_name",              limit: 255
+    t.string   "customer_email",             limit: 255
     t.string   "company_name",               limit: 255
     t.string   "contact_person",             limit: 255
     t.boolean  "has_billing_address",        limit: 1,     default: false, null: false

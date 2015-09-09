@@ -11,6 +11,10 @@
       .panel-body.form-horizontal
         = static_control col(Order, :order_type_id),
             @order.approval ? @order.order_type_name : @order.order_type
+        = static_control col(Order, :customer_name),
+            @order.customer_name
+        = static_control col(Order, :customer_email),
+            @order.customer_email
         = static_control col(Order, :company_name),
             @order.company_name
         = static_control col(Order, :contact_person),

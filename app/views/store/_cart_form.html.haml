@@ -3,6 +3,8 @@
 
   = f.select :order_type_id, current_store.order_type_options,
       {}, {class: 'selectize', style: 'width: 100%'}
+  = f.text_field :customer_name
+  = f.text_field :customer_email
   = f.text_field :company_name
   = f.text_field :contact_person
   %fieldset.shipping.collapse{class: @order.has_shipping? ? 'in' : ''}

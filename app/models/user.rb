@@ -30,7 +30,12 @@ class User < ActiveRecord::Base
   # current store, the one and only order that's not been ordered yet.
   def shopping_cart(store)
     orders.by_store(store).unordered.first ||
-      orders.create(store: store, order_type: store.default_order_type)
+      orders.create(
+        store: store,
+        order_type: store.default_order_type,
+        customer_name: is_guest? ? nil : name,
+        customer_email: is_guest? ? nil : email
+      )
   end
 
   # Superiority over another user is decided on the pecking order
