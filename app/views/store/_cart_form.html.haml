@@ -5,12 +5,14 @@
       {}, {class: 'selectize', style: 'width: 100%'}
   = f.text_field :customer_name
   = f.text_field :customer_email
-  = f.text_field :company_name
-  = f.text_field :contact_person
+  - if current_store.b2b_sales?
+    = f.text_field :company_name
+    = f.text_field :contact_person
   %fieldset.shipping.collapse{class: @order.has_shipping? ? 'in' : ''}
-    = f.date_field :shipping_at,
-        data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
-          'date-language' => I18n.locale}
+    - if current_store.b2b_sales?
+      = f.date_field :shipping_at,
+          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
+            'date-language' => I18n.locale}
     = f.text_field :shipping_address,
         placeholder: col(Order, :shipping_address)
     = f.text_field :shipping_postalcode, skip_label: true,

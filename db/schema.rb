@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909132239) do
+ActiveRecord::Schema.define(version: 20150909140234) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 20150909132239) do
     t.string   "slug",                     limit: 255
     t.string   "theme",                    limit: 255
     t.string   "locale",                   limit: 255,                         default: "fi",  null: false
+    t.boolean  "b2b_sales",                limit: 1,                           default: false, null: false
     t.boolean  "admit_guests",             limit: 1,                           default: false, null: false
     t.integer  "shipping_cost_product_id", limit: 4
     t.decimal  "free_shipping_at",                     precision: 8, scale: 2
