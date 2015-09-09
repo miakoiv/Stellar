@@ -20,6 +20,6 @@ class PagesController < ApplicationController
 
   private
     def set_pages
-      @pages = current_store.pages.top_level
+      @pages = current_store.pages.top_level.ordered
     end
 end
