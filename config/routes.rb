@@ -17,9 +17,11 @@ Rails.application.routes.draw do
   get '/category/:category_id'      => 'store#show_category', as: :show_category
   get '/product/:product_id'        => 'store#show_product', as: :show_product
   get '/products/all'               => 'store#show_all_products', as: :show_all_products
-  get '/cart'                       => 'store#show_cart', as: :show_cart
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
-  post '/checkout'                  => 'store#checkout', as: :checkout
+
+  get '/cart'                       => 'store#show_cart', as: :show_cart
+  get '/checkout'                   => 'store#checkout', as: :checkout
+  post '/confirm'                   => 'store#confirm', as: :confirm
 
   post '/correspondence/mail_form'  => 'correspondence#mail_form', as: :mail_form
 

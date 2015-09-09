@@ -84,12 +84,15 @@ fi:
   store:
     all_products: Kaikki tuotteet
     add_to_cart: Lisää koriin
+    go_checkout: Jatka kassalle
     show_cart:
       shopping_cart: Ostoskori
       empty: Ostoskorisi on tyhjä.
       go_shopping: Ostoksille!
     cart_form:
       place_order: Tilaa
+    checkout:
+      checkout: Kassa
   actions:
     back: Palaa
     show: Näytä

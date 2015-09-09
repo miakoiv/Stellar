@@ -5,10 +5,11 @@
         %th.col-xs-2= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
         %th.text-right= col(OrderItem, :amount)
-        %th.col-xs-1.text-right à
-        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
-        %th
+        %th.text-right à
+        %th.text-right= col(OrderItem, :subtotal)
     %tfoot
-      = render partial: 'orders/grand_total_row', object: order, as: :order
+      %tr
+        %th.text-right{colspan: 4}= col(Order, :grand_total)
+        %th.text-right= number_to_currency(@order.grand_total, unit: '€')
     %tbody
       = render partial: 'order_items/row', collection: order.order_items, as: :order_item

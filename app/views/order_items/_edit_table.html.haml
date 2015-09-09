@@ -5,10 +5,15 @@
         %th.col-xs-2= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.col-xs-1.text-right à
-        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
-        %th.col-xs-2
+        %th.text-right à
+        %th.text-right= col(OrderItem, :subtotal)
+        %th.col-xs-1
     %tfoot
-      = render partial: 'orders/grand_total_row', object: order, as: :order
+      %tr
+        %th.text-right{colspan: 4}= col(Order, :grand_total)
+        %th.text-right= number_to_currency(@order.grand_total, unit: '€')
+        %th
     %tbody
       = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
+  .pull-right
+    = link_to t('store.go_checkout'), checkout_path, class: 'btn btn-primary'

@@ -43,11 +43,6 @@ class StoreController < ApplicationController
     @products = current_store.products.available.categorized.ordered
   end
 
-  # GET /cart
-  def show_cart
-    @order = shopping_cart
-  end
-
   # POST /product/1/order
   def order_product
     @order = shopping_cart
@@ -58,8 +53,18 @@ class StoreController < ApplicationController
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
-  # POST /checkout
+  # GET /cart
+  def show_cart
+    @order = shopping_cart
+  end
+
+  # GET /checkout
   def checkout
+    @order = shopping_cart
+  end
+
+  # POST /confirm
+  def confirm
     @order = shopping_cart
 
     respond_to do |format|
@@ -76,7 +81,7 @@ class StoreController < ApplicationController
             notice: t('.notice') }
         end
       else
-        format.html { render :show_cart }
+        format.html { render :checkout }
       end
     end
   end

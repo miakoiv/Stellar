@@ -109,12 +109,15 @@ en:
   store:
     all_products: All products
     add_to_cart: Add to cart
+    go_checkout: Proceed to checkout
     show_cart:
       shopping_cart: Shopping cart
       empty: Your shopping cart is empty.
       go_shopping: Go shopping.
     cart_form:
       place_order: Place order
+    checkout:
+      checkout: Checkout
   actions:
     back: Back
     show: Show

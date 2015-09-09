@@ -1,4 +1,4 @@
-= bootstrap_form_for @order, url: checkout_path, method: :post,
+= bootstrap_form_for @order, url: confirm_path, method: :post,
     layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
 
   = f.select :order_type_id, current_store.order_type_options,
