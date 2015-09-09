@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   belongs_to :store
   belongs_to :user
   belongs_to :order_type
-  has_many :order_items, dependent: :destroy
+  has_many :order_items, dependent: :destroy, inverse_of: :order
 
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(ordered_at: nil).where(approved_at: nil) }
@@ -37,7 +37,6 @@ class Order < ActiveRecord::Base
 
   #---
   before_save :copy_billing_address, unless: :has_billing_address?
-  after_touch :apply_shipping_cost
 
   #---
   def approval
@@ -62,7 +61,24 @@ class Order < ActiveRecord::Base
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
     order_item.amount += amount
     order_item.price = product.sales_price
-    order_item.save
+    order_item.save!
+    apply_shipping_cost!
+  end
+
+  # Applies a shipping cost for the current contents of the order.
+  # The shipping cost is an order item referencing a virtual product
+  # defined by the store.
+  def apply_shipping_cost!
+    return if store.shipping_cost_product.nil?
+    item = order_items.create_with(
+      amount: 1, priority: 1e9
+    ).find_or_create_by(
+      product: store.shipping_cost_product
+    )
+    item.update(price: calculated_shipping_cost)
+
+    # Reloading order items that may have gone out of sync.
+    order_items(reload)
   end
 
   # Collects aggregated component quantities of all products in the order.
@@ -86,15 +102,17 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
-  def grand_total
-    order_items.map { |item| item.amount * (item.price || 0) }.sum
-  end
-
-  def grand_total_without_shipping
+  # Total sum without virtual items (like shipping and handling).
+  def total
     order_items
-      .reject { |item| item.is_shipping_cost? }
+      .reject { |item| item.virtual? }
       .map { |item| item.amount * (item.price || 0) }
       .sum
+  end
+
+  # Grand total, including virtual items.
+  def grand_total
+    order_items.map { |item| item.amount * (item.price || 0) }.sum
   end
 
   def padded_id
@@ -112,18 +130,10 @@ class Order < ActiveRecord::Base
       self.billing_city = shipping_city
     end
 
-    def apply_shipping_cost
-      return if store.shipping_cost_product.nil?
-      order_items.create_with(
-        amount: 1, priority: 1e9
-      ).find_or_create_by(
-        product: store.shipping_cost_product
-      ).update(price: calculated_shipping_cost)
-    end
-
     def calculated_shipping_cost
+      logger.info "*** total #{total}"
       default_price = store.shipping_cost_product.sales_price
-      return default_price if store.free_shipping_at.nil? || grand_total_without_shipping < store.free_shipping_at
+      return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at
       return 0.00
     end
 

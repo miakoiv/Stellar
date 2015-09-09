@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909063856) do
+ActiveRecord::Schema.define(version: 20150909074142) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -200,8 +200,9 @@ ActiveRecord::Schema.define(version: 20150909063856) do
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "store_id",                limit: 4,                                         null: false
+    t.integer  "store_id",                limit: 4,                                             null: false
     t.integer  "category_id",             limit: 4
+    t.boolean  "virtual",                 limit: 1,                             default: false, null: false
     t.string   "code",                    limit: 255
     t.string   "customer_code",           limit: 255
     t.string   "title",                   limit: 255
@@ -212,11 +213,11 @@ ActiveRecord::Schema.define(version: 20150909063856) do
     t.date     "cost_modified_at"
     t.decimal  "sales_price",                           precision: 8, scale: 2
     t.date     "sales_price_modified_at"
-    t.integer  "priority",                limit: 4,                             default: 0, null: false
+    t.integer  "priority",                limit: 4,                             default: 0,     null: false
     t.date     "available_at"
     t.date     "deleted_at"
-    t.datetime "created_at",                                                                null: false
-    t.datetime "updated_at",                                                                null: false
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

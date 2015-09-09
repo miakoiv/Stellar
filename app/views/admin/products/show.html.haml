@@ -21,6 +21,8 @@
       .panel-body.form-horizontal
         = static_control col(Product, :category_id),
             @product.category
+        = static_control col(Product, :virtual),
+            @product.virtual? ? icon('check-square-o') : icon('square-o')
         = static_control col(Product, :code),
             @product.code
         = static_control col(Product, :customer_code),

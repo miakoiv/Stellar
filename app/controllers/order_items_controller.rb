@@ -10,36 +10,28 @@ class OrderItemsController < ApplicationController
   # Guest users may edit their shopping cart contents.
   before_action :authenticate_user_or_skip!
 
+  before_action :set_order_and_item
+
   # PATCH/PUT /order_items/1
   def update
-    @order_item = OrderItem.find(params[:id])
-    @order = current_user.shopping_cart(current_store)
-
-    respond_to do |format|
-      if @order_item.update(order_item_params)
-        if @order_item.amount < 1
-          @order_item.destroy
-          format.js { render :destroy }
-        else
-          format.js
-        end
-      end
+    if @order_item.update(order_item_params)
+      @order.apply_shipping_cost!
     end
   end
 
   # DELETE /order_items/1
   def destroy
-    @order_item = OrderItem.find(params[:id])
-    @order = current_user.shopping_cart(current_store)
-
-    respond_to do |format|
-      if @order_item.destroy
-        format.js
-      end
+    if @order_item.destroy
+      @order.apply_shipping_cost!
     end
   end
 
   private
+    def set_order_and_item
+      @order = current_user.shopping_cart(current_store)
+      @order_item = @order.order_items.find(params[:id])
+    end
+
     def order_item_params
       params.require(:order_item).permit(
         :amount

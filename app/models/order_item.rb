@@ -2,18 +2,17 @@
 
 class OrderItem < ActiveRecord::Base
 
-  belongs_to :order, touch: true
+  belongs_to :order, inverse_of: :order_items
   belongs_to :product
 
   default_scope { order(:priority) }
 
   #---
+  delegate :virtual?, to: :product
+
+  #---
   def subtotal
     amount * (price || 0)
-  end
-
-  def is_shipping_cost?
-    product == order.store.shipping_cost_product
   end
 
   def archive!

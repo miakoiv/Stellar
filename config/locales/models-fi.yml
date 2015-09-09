@@ -119,6 +119,7 @@ fi:
         wysiwyg: Käytä Froala-editoria
       product:
         category_id: Tuoteryhmä
+        virtual: Näennäinen tuote
         code: Tuotekoodi
         customer_code: Asiakkaan koodi
         title: Nimike

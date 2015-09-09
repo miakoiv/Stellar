@@ -119,6 +119,7 @@ en:
         wysiwyg: Use Froala Editor
       product:
         category_id: Category
+        virtual: Virtual product
         code: Product code
         customer_code: Customer code
         title: Title
