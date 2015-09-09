@@ -1,3 +1,3 @@
 %span#cart-badge.badge<
-  - if shopping_cart.order_items.present?
-    = shopping_cart.order_items.count
+  - unless shopping_cart.empty?
+    = shopping_cart.order_items.real.count

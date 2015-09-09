@@ -6,6 +6,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
 
   default_scope { order(:priority) }
+  scope :real, -> { joins(:product).where(products: {virtual: false}) }
 
   #---
   delegate :virtual?, to: :product

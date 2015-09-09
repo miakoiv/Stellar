@@ -94,6 +94,11 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # An order is empty when it's empty of non-virtual items.
+  def empty?
+    order_items.real.empty?
+  end
+
   def has_shipping?
     order_type.present? && order_type.has_shipping?
   end
@@ -104,10 +109,7 @@ class Order < ActiveRecord::Base
 
   # Total sum without virtual items (like shipping and handling).
   def total
-    order_items
-      .reject { |item| item.virtual? }
-      .map { |item| item.amount * (item.price || 0) }
-      .sum
+    order_items.real.map { |item| item.amount * (item.price || 0) }.sum
   end
 
   # Grand total, including virtual items.
