@@ -107,6 +107,11 @@ en:
       amount: Amount
       add: Add to cart
   store:
+    titles:
+      shop: Shop
+      store: Store
+      catalog: Product catalog
+      back_issues: Back issues
     all_products: All products
     add_to_cart: Add to cart
     empty_cart: Your shopping cart is empty.

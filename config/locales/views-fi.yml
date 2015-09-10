@@ -82,6 +82,11 @@ fi:
       current: Avoimet
       approved: Hyväksytyt
   store:
+    titles:
+      shop: Kauppa
+      store: Kauppa
+      catalog: Tuoteluettelo
+      back_issues: Vanhat lehdet
     all_products: Kaikki tuotteet
     add_to_cart: Lisää koriin
     empty_cart: Ostoskorisi on tyhjä.
