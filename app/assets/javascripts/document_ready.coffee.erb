@@ -37,3 +37,6 @@ jQuery ->
 
   $(document).on 'show.bs.modal', '.modal', (e) ->
     $('.modal-body', this).css 'height', $(window).height() - 120
+
+  $(document).on 'page:done', (event, $target, status, url, data) ->
+    ga('set', 'page', url)

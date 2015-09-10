@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909140234) do
+ActiveRecord::Schema.define(version: 20150910080109) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(version: 20150909140234) do
     t.boolean  "admit_guests",             limit: 1,                           default: false, null: false
     t.integer  "shipping_cost_product_id", limit: 4
     t.decimal  "free_shipping_at",                     precision: 8, scale: 2
+    t.string   "tracking_code",            limit: 255
     t.datetime "created_at",                                                                   null: false
     t.datetime "updated_at",                                                                   null: false
   end
