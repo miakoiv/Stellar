@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910101051) do
+ActiveRecord::Schema.define(version: 20150910102131) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
     t.integer  "parent_category_id", limit: 4
     t.string   "name",               limit: 255
+    t.string   "slug",               limit: 255,             null: false
     t.integer  "priority",           limit: 4,   default: 0, null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
 
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
+  add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
 
   create_table "custom_attributes", force: :cascade do |t|
@@ -199,6 +201,7 @@ ActiveRecord::Schema.define(version: 20150910101051) do
   end
 
   add_index "pages", ["parent_page_id"], name: "index_pages_on_parent_page_id", using: :btree
+  add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -208,6 +211,7 @@ ActiveRecord::Schema.define(version: 20150910101051) do
     t.string   "code",                    limit: 255
     t.string   "customer_code",           limit: 255
     t.string   "title",                   limit: 255
+    t.string   "slug",                    limit: 255,                                           null: false
     t.string   "subtitle",                limit: 255
     t.text     "description",             limit: 65535
     t.text     "memo",                    limit: 65535
@@ -224,6 +228,7 @@ ActiveRecord::Schema.define(version: 20150910101051) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
+  add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
