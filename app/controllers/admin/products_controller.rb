@@ -69,7 +69,7 @@ class Admin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = current_store.products.ordered.find(params[:id])
+      @product = current_store.products.ordered.friendly.find(params[:id])
     end
 
     def set_point

@@ -7,6 +7,8 @@ class Product < ActiveRecord::Base
   include Imageable
   include Customizable
   include Reorderable
+  include FriendlyId
+  friendly_id :slugger, use: [:slugged]
 
   #---
   belongs_to :store
@@ -38,6 +40,13 @@ class Product < ActiveRecord::Base
   def stock
     inventory_items.group_by(&:inventory)
       .map { |inventory, items| [inventory, items.first] }.to_h
+  end
+
+  def slugger
+    [
+      [:title, :code],
+      [:title, :code, -> { store.name }]
+    ]
   end
 
   def to_s

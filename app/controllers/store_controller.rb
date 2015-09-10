@@ -18,19 +18,19 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_store.categories.ordered.first
+    @category = current_store.categories.ordered.friendly.first
     @products = @category.present? ? @category.products.available.ordered : []
   end
 
   # GET /category/1
   def show_category
-    @category = Category.find(params[:category_id])
+    @category = Category.friendly.find(params[:category_id])
     @products = @category.products.available.ordered
   end
 
   # GET /product/1
   def show_product
-    @product = Product.available.find(params[:product_id])
+    @product = Product.available.friendly.find(params[:product_id])
     @category = @product.category
     @products = @category.products.available.ordered
     @presentational_images = @product.images.by_purpose(:presentational).ordered
@@ -46,7 +46,7 @@ class StoreController < ApplicationController
   # POST /product/1/order
   def order_product
     @order = shopping_cart
-    @product = Product.available.find(params[:product_id])
+    @product = Product.available.friendly.find(params[:product_id])
     amount = params[:amount].to_i
     @order.insert!(@product, amount)
 

@@ -6,6 +6,8 @@ class Category < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
   include Reorderable
+  include FriendlyId
+  friendly_id :slugger, use: [:slugged]
 
   #---
   belongs_to :store
@@ -17,6 +19,13 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
 
   #---
+  def slugger
+    [
+      :name,
+      [:name, -> { store.name }]
+    ]
+  end
+
   def to_s
     name
   end
