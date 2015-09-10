@@ -27,8 +27,8 @@ class Order < ActiveRecord::Base
   scope :by_store, -> (store) { where(store: store) }
 
   #---
-  validates :customer_name, presence: true
-  validates :customer_email, presence: true
+  validates :customer_name, presence: true, on: :update
+  validates :customer_email, presence: true, on: :update
   validates :shipping_address, :shipping_postalcode, :shipping_city,
     presence: true, on: :update,
     if: :has_shipping?
