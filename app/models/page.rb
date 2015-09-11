@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   include Imageable
   include Reorderable
   include FriendlyId
-  friendly_id :title, use: [:slugged]
+  friendly_id :title, use: [:slugged, :history]
 
   #---
   belongs_to :store
@@ -17,6 +17,10 @@ class Page < ActiveRecord::Base
   scope :top_level, -> { where(parent_page_id: nil) }
 
   #---
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
+
   def to_s
     title
   end

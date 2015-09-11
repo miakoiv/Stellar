@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
   include Imageable
   include Reorderable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged]
+  friendly_id :slugger, use: [:slugged, :history]
 
   #---
   belongs_to :store
@@ -20,10 +20,11 @@ class Category < ActiveRecord::Base
 
   #---
   def slugger
-    [
-      :name,
-      [:name, -> { store.name }]
-    ]
+    [:name, [:name, -> { store.name }]]
+  end
+
+  def should_generate_new_friendly_id?
+    name_changed? || super
   end
 
   def to_s

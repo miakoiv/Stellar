@@ -15,6 +15,8 @@ class StoreController < ApplicationController
   before_action :authenticate_user_or_skip!
 
   before_action :set_categories
+  before_action :find_category, only: [:show_category]
+  before_action :find_product, only: [:show_product]
 
   # GET /
   def index
@@ -24,13 +26,11 @@ class StoreController < ApplicationController
 
   # GET /category/1
   def show_category
-    @category = Category.friendly.find(params[:category_id])
     @products = @category.products.available.ordered
   end
 
   # GET /product/1
   def show_product
-    @product = Product.available.friendly.find(params[:product_id])
     @category = @product.category
     @products = @category.products.available.ordered
     @presentational_images = @product.images.by_purpose(:presentational).ordered
@@ -92,6 +92,22 @@ class StoreController < ApplicationController
   private
     def set_categories
       @categories = current_store.categories.ordered
+    end
+
+    # Find category by friendly id in `category_id`, including history.
+    def find_category
+      @category = Category.friendly.find(params[:category_id])
+      if request.path != show_category_path(@category)
+        return redirect_to show_category_path(@category), status: :moved_permanently
+      end
+    end
+
+    # Find product by friendly id in `product_id`, including history.
+    def find_product
+      @product = Product.available.friendly.find(params[:product_id])
+      if request.path != show_product_path(@product)
+        return redirect_to show_product_path(@product), status: :moved_permanently
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   include Customizable
   include Reorderable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged]
+  friendly_id :slugger, use: [:slugged, :history]
 
   #---
   belongs_to :store
@@ -43,10 +43,11 @@ class Product < ActiveRecord::Base
   end
 
   def slugger
-    [
-      [:title, :code],
-      [:title, :code, -> { store.name }]
-    ]
+    [[:title, :subtitle, :code], [:title, :subtitle, :code, -> { store.name }]]
+  end
+
+  def should_generate_new_friendly_id?
+    (title_changed? || subtitle_changed? || code_changed?) || super
   end
 
   def to_s
