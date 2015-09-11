@@ -48,7 +48,6 @@ class Admin::PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.js
         format.html { redirect_to edit_admin_page_path(@page),
           notice: t('.notice', page: @page) }
         format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }

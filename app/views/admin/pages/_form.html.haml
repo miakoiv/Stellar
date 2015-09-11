@@ -7,14 +7,14 @@
       = f.text_field :title
       = f.form_group do
         = f.check_box :wysiwyg
-      - if !@page.wysiwyg?
-        = f.text_area :content, rows: 20, class: 'monospace input-sm'
+      - unless @page.new_record?
+        .form-group
+          .col-xs-12
+            = f.text_area_without_bootstrap :content, rows: 20, class: 'form-control monospace input-sm'
       = f.form_group do
         = f.primary
 
   - if !@page.new_record? && @page.wysiwyg?
-    #page_content><= @page.content.try(:html_safe)
-
     :coffee
       $('#page_content').editable
         inlineMode: false
@@ -23,14 +23,9 @@
         buttons: [
           'bold', 'italic', 'underline', 'formatBlock', 'align',
           'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',
-          'undo', 'redo', 'html', 'save'
+          'undo', 'redo', 'html'
         ]
-        saveURL: '#{admin_page_path(@page)}'
-        saveRequestType: 'PATCH'
-        saveParam: 'page[content]'
-        saveParams:
-          authenticity_token: '#{form_authenticity_token}'
-        imageUploadURL: '#{admin_page_images_path(@page)}'
+        imageUploadURL: '#{admin_page_images_path(@page.id)}'
         imageUploadParam: 'image[attachment]'
         imageUploadParams:
           authenticity_token: '#{form_authenticity_token}'
