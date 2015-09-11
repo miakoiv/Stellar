@@ -52,7 +52,6 @@ class Admin::PagesController < ApplicationController
           notice: t('.notice', page: @page) }
         format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }
       else
-        format.js { head :no_content }
         format.html { render :edit }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
