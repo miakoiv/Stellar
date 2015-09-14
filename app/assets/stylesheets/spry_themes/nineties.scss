@@ -82,54 +82,66 @@
 
     li.product {
       position: relative;
-      max-height: 150px;
+      max-height: 120px;
       overflow: hidden;
       border-bottom: 1px solid #ccc;
       transition: all 0.5s ease-in-out 0.2s;
 
       a {
         display: block;
+        position: relative;
         padding: 10px;
+        text-decoration: none;
         @extend .clearfix;
 
-        img {
-          @extend .img-thumbnail;
-          max-width: 150px;
+        .product-image {
           float: left;
-          margin-right: $grid-gutter-width/2;
-        }
-        h3 {
-          margin-top: 0;
-          padding-left: $grid-gutter-width/2 + 150;
-          font-size: $font-size-large;
+          width: 100px;
+          overflow: hidden;
 
-          .small {
-            font-size: $font-size-base;
+          img {
+            @extend .img-responsive;
           }
         }
-        .description {
-          padding-left: $grid-gutter-width/2 + 150;
-          font-size: $font-size-small;
+        .product-text {
+          padding-left: $grid-gutter-width/2 + 100;
+
+          h3 {
+            margin-top: 0;
+            font-size: $font-size-large;
+
+            .small {
+              font-size: $font-size-base;
+            }
+          }
+          .description {
+            font-size: $font-size-small;
+          }
         }
       }
       .buy-now {
-        position: absolute;
-        top: 7px;
-        right: 10px;
-        padding-left: 5px;
-        background: #fff;
+        display: none;
+      }
+      @media (min-width: $screen-xs) {
+        .buy-now {
+          display: block;
+          position: absolute;
+          top: 7px;
+          right: 10px;
+          padding-left: 5px;
+          background: #fff;
 
-        p, form {
-          display: inline-block;
+          p, form {
+            display: inline-block;
+          }
         }
       }
     }
-    li:hover {
-      @include box-shadow(0 0 8px $input-border-focus);
-      max-height: 1000px;
 
-      a {
-        text-decoration: none;
+    @media (min-width: $screen-sm) {
+      li:hover {
+        @include box-shadow(0 0 8px $input-border-focus);
+        max-height: 1000px;
       }
     }
   }

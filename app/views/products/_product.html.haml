@@ -1,11 +1,12 @@
 = content_tag_for :li, product do
   = link_to show_product_path(product), data: {push: 'partial', target: '.product-detail'} do
-    = image_variant_tag(product.cover_image, :matchbox,
+    .product-image= image_variant_tag(product.cover_image, :matchbox,
         class: 'img-responsive')
-    %h3
-      = product.title
-      %span.small= product.subtitle
-    .description= product.description.html_safe
+    .product-text
+      %h3
+        = product.title
+        %span.small= product.subtitle
+      .description= product.description.html_safe
   .buy-now
     %p= number_to_currency(product.sales_price, unit: '€')
     - if current_user.can?(:shop)
