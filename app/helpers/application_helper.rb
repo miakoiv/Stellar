@@ -16,10 +16,6 @@ module ApplicationHelper
     end
   end
 
-  def blank_option
-    "\u274c" # U+274C CROSS MARK
-  end
-
   # Outputs a bootstrappy form group with a label and a static control
   # for value. A block may be given to supply an html-escaped, more
   # complex element for value.

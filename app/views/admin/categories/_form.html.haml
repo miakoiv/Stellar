@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       = f.select :parent_category_id, current_store.category_options,
-          {include_blank: blank_option}, {class: 'selectize'}
+          {include_blank: true}, {class: 'selectize'}
       = f.text_field :name
       = f.form_group do
         = f.primary
