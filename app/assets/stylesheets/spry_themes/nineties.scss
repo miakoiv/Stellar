@@ -19,14 +19,15 @@
     }
   }
 
-  .categories {
+  ul.categories {
     @extend .col-sm-3;
     @extend .col-md-2;
+    list-style: none;
     border-top-right-radius: 10px;
     background: #f0f0f0;
     @include box-shadow(inset 3px 0 6px 0 rgba(0,0,0,0.333));
 
-    .category {
+    li.category {
       margin: 0 $grid-gutter-width/-2;
       border-top: 1px solid #ccc;
 
@@ -43,17 +44,27 @@
           margin: 0;
         }
       }
+      ul {
+        list-style: none;
+        padding-left: 0;
+        font-size: $font-size-small;
+
+        li {
+          margin: 0;
+          text-indent: $grid-gutter-width/2;
+        }
+      }
     }
-    .category:hover a {
+    a:hover {
       background: #fff;
     }
-    .category.active a {
+    li.category.active > a {
       background: $brand-primary;
       color: #fff;
     }
 
   }
-  .categories:before {
+  ul.categories:before {
     content: 'Tuoteryhmät';
     display: block;
     margin: 0 $grid-gutter-width/-2;
@@ -64,37 +75,69 @@
     font-weight: 500;
   }
 
-  .products {
+  ul.products {
     @extend .col-sm-9;
     @extend .col-md-10;
+    list-style: none;
 
-    .product {
-      @extend .clearfix;
-      padding-bottom: 10px;
+    li.product {
+      position: relative;
+      max-height: 150px;
+      overflow: hidden;
       border-bottom: 1px solid #ccc;
-      margin-bottom: 10px;
+      transition: all 0.5s ease-in-out 0.2s;
 
       a {
         display: block;
+        padding: 10px;
+        @extend .clearfix;
 
         img {
           @extend .img-thumbnail;
           max-width: 150px;
           float: left;
-          margin-right: $grid-gutter-width;
+          margin-right: $grid-gutter-width/2;
         }
         h3 {
           margin-top: 0;
-          font-size: $font-size-base;
+          padding-left: $grid-gutter-width/2 + 150;
+          font-size: $font-size-large;
+
+          .small {
+            font-size: $font-size-base;
+          }
         }
-        h4 {
-          font-size: $font-size-small
+        .description {
+          padding-left: $grid-gutter-width/2 + 150;
+          font-size: $font-size-small;
         }
+      }
+      .buy-now {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        padding-left: 5px;
+        background: #fff;
+
+        p, form {
+          display: inline-block;
+        }
+      }
+    }
+    li:hover {
+      @include box-shadow(0 0 8px $input-border-focus);
+      max-height: 1000px;
+
+      a {
+        text-decoration: none;
       }
     }
   }
 
   .product-detail {
+    @extend .col-sm-9;
+    @extend .col-md-10;
+    @extend .clearfix;
 
     .form-inline {
       @extend .col-xs-7;
@@ -121,33 +164,32 @@
     }
 
     .product-description {
+      position: relative;
       @extend .col-md-4;
       @extend .col-xs-12;
 
       .product-stock {
-        @extend .lead;
-        line-height: 1;
-        margin-top: 0;
-        margin-bottom: 0;
+        display: none;
       }
 
       .body-text {
-        margin-top: 10px;
+        margin-top: 50px;
       }
 
       .product-pricing {
-        @extend .col-sm-5;
+        position: absolute;
+        top: 0;
+        left: $grid-gutter-width/2;
         @extend .lead;
         @extend .text-primary;
-        line-height: 30px;
       }
 
       .product-code {
-        @extend .col-sm-7;
+        position: absolute;
+        top: 0;
+        right: $grid-gutter-width/2;
         @extend .text-right;
-        margin-bottom: 0;
         font-size: 90%;
-        line-height: 30px;
       }
     }
 

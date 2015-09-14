@@ -1,4 +1,9 @@
-= div_for category, class: category == @category ? 'active' : nil do
-  = link_to show_category_path(category), data: {push: 'partial', target: '.products'} do
+= content_tag_for :li, category,
+    class: category == @category ? 'active' : nil do
+  = link_to show_category_path(category),
+      data: {push: 'partial', target: '.products'} do
     = image_variant_tag(category.cover_image, :matchbox)
     %p= category.name
+  - if category.sub_categories.any?
+    %ul
+      = render category.sub_categories
