@@ -73,7 +73,7 @@ class Admin::ImagesController < ApplicationController
     def find_imageable
       params.each do |name, value|
         if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
+          return $1.classify.constantize.friendly.find(value)
         end
       end
       nil
