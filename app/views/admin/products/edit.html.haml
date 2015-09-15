@@ -21,20 +21,20 @@
   .col-lg-5
     %ul.nav.nav-tabs{role: 'tablist'}
       %li.active{role: 'presentation'}
-        %a{href: '#images', role: 'tab', data: {toggle: 'tab'}}
+        %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :images)
       %li{role: 'presentation'}
-        %a{href: '#customizations', role: 'tab', data: {toggle: 'tab'}}
+        %a{href: '#tab-customizations', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :customizations)
       %li{role: 'presentation'}
-        %a{href: '#components', role: 'tab', data: {toggle: 'tab'}}
+        %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :components)
 
     .tab-content
-      #images.tab-pane.fade.in.active
+      #tab-images.tab-pane.fade.in.active
         = render partial: 'admin/images/edit_table', object: @product, as: :imageable
         = render partial: 'admin/images/dropzone', object: @product, as: :imageable
-      #customizations.tab-pane.fade
+      #tab-customizations.tab-pane.fade
         = render partial: 'admin/customizations/edit_table', object: @product, as: :customizable
-      #components.tab-pane.fade
+      #tab-components.tab-pane.fade
         = render partial: 'admin/relationships/table', object: @product, as: :product
