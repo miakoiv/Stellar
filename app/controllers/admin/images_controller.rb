@@ -70,10 +70,16 @@ class Admin::ImagesController < ApplicationController
 
   private
     # Finds the associated imageable by looking through params.
+    # Invokes a friendly_id find if the class implements it.
     def find_imageable
       params.each do |name, value|
         if name =~ /(.+)_id$/
-          return $1.classify.constantize.friendly.find(value)
+          klass = $1.classify.constantize
+          if klass.respond_to?(:friendly)
+            return klass.friendly.find(value)
+          else
+            return klass.find(value)
+          end
         end
       end
       nil
