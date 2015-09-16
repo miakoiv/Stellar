@@ -2,6 +2,12 @@
  * Theme specific styles
  */
 
+$brand-primary: #444;
+$navbar-default-color: #222;
+$navbar-default-bg: #ffcc19;
+$navbar-default-link-color: #000;
+$navbar-default-link-hover-color: #fff;
+
 @import "bootstrap-generators.scss";
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-tweaks.scss";
@@ -10,17 +16,6 @@
 
 .lepola {
   overflow-y: scroll;
-
-  #main-nav {
-    background: #ffcc19;
-
-    .navbar-brand, li a {
-      color: #000;
-      &:hover {
-        color: $brand-primary;
-      }
-    }
-  }
 
   .container {
     margin-left: 0;
@@ -32,6 +27,7 @@
 
   ul.categories {
     @extend .nav, .nav-pills;
+    z-index: $zindex-navbar;
     position: fixed;
     left: 0;
     right: 0;
@@ -41,21 +37,35 @@
     background: #fff;
     border-bottom: 1px solid #ffcc19;
 
-    li {
+    li.category {
       a {
         border-radius: 18px;
 
-        img {
-          display: none;
-        }
-        p {
-          margin: 0;
-        }
+        img { display: none; }
+        p { margin: 0; }
       }
     }
   }
 
   ul.products {
     padding-top: 48px;
+    list-style: none;
+
+    li.product {
+      max-width: 180px;
+      background: $body-bg;
+
+      h3 {
+        margin: 0.5em 0 0;
+        font-size: $font-size-base;
+      }
+      .description, .buy-now {
+        display: none;
+      }
+      &:hover {
+        @include box-shadow(0 0 8px $input-border-focus);
+        a { text-decoration: none; }
+      }
+    }
   }
 }

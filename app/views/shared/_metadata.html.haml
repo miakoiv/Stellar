@@ -6,6 +6,8 @@
 = stylesheet_link_tag 'application', media: 'all'
 = stylesheet_link_tag "spry_themes/#{current_store.theme}", media: 'all'
 = javascript_include_tag 'application'
+= javascript_include_tag "spry_themes/#{current_store.theme}"
+
 = csrf_meta_tags
 
 - if current_store.tracking_code.present?
