@@ -10,4 +10,12 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += %w( email/mailgun.css )
+Rails.application.config.assets.precompile += %w(
+  spry_themes/cards.css
+  spry_themes/default.css
+  spry_themes/emek.css
+  spry_themes/lepola.css
+  spry_themes/nineties.css
+  spry_themes/saarimedia.css
+  email/mailgun.css
+)

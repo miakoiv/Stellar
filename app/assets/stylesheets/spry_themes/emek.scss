@@ -1,7 +1,12 @@
 /*
- * Theme specific styles targeting the element .emek
- * and its descendants.
+ * Theme specific styles
  */
+
+@import "bootstrap-generators.scss";
+@import "bootstrap-font-awesome.scss";
+@import "bootstrap-tweaks.scss";
+@import "fonts.scss";
+@import "print.scss";
 
 .emek {
   padding-top: $navbar-height;

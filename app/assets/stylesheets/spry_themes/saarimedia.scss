@@ -1,7 +1,12 @@
 /*
- * Theme specific styles targeting the element .saarimedia
- * and its descendants.
+ * Theme specific styles
  */
+
+@import "bootstrap-generators.scss";
+@import "bootstrap-font-awesome.scss";
+@import "bootstrap-tweaks.scss";
+@import "fonts.scss";
+@import "print.scss";
 
 .saarimedia {
   padding-top: $navbar-height;

@@ -3,7 +3,8 @@
 %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
 %meta{content: '', name: 'description'}
 %meta{content: 'Leasit Oy', name: 'author'}
-= stylesheet_link_tag    'application', media: 'all'
+= stylesheet_link_tag 'application', media: 'all'
+= stylesheet_link_tag "spry_themes/#{current_store.theme}", media: 'all'
 = javascript_include_tag 'application'
 = csrf_meta_tags
 
