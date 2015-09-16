@@ -1,14 +1,24 @@
 = bootstrap_form_for [:admin, @store], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  .panel.panel-default
-    .panel-body
+  %ul.nav.nav-tabs{role: 'tablist'}
+    %li.active{role: 'presentation'}
+      %a{href: '#tab-store', role: 'tab', data: {toggle: 'tab'}}
+        = title(Store)
+    %li{role: 'presentation'}
+      %a{href: '#tab-settings', role: 'tab', data: {toggle: 'tab'}}
+        = col(Store, :settings)
+
+  .tab-content
+    #tab-store.tab-pane.active{role: 'tabpanel'}
+      = f.text_field :name
       = f.select :contact_person_id,
           User.by_role(:store_manager).map { |u| [u.name, u.id] },
           {help: t('.contact_person_help_html')}, {class: 'selectize'}
-      = f.text_field :erp_number
-      = f.text_field :name
-      = f.text_field :slug, readonly: true, help: t('.slug_help_html')
       = f.text_field :host, prepend: 'http://'
+      = f.text_field :erp_number
+      = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+
+    #tab-settings.tab-pane{role: 'tabpanel'}
       = f.text_field :theme
       = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
           {}, {class: 'selectize'}
@@ -19,5 +29,5 @@
           {include_blank: true}, {class: 'selectize'}
       = f.text_field :free_shipping_at
 
-      = f.form_group do
-        = f.primary
+  = f.form_group do
+    = f.primary

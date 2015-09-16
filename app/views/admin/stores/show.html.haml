@@ -10,18 +10,28 @@
 
 .row
   .col-md-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(Store, :contact_person_id),
-            @store.contact_person
-        = static_control col(Store, :erp_number),
-            @store.erp_number
+    %ul.nav.nav-tabs{role: 'tablist'}
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-store', role: 'tab', data: {toggle: 'tab'}}
+          = title(Store)
+      %li{role: 'presentation'}
+        %a{href: '#tab-settings', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :settings)
+
+    .tab-content.form-horizontal
+      #tab-store.tab-pane.active{role: 'tabpanel'}
         = static_control col(Store, :name),
             @store.name
-        = static_control col(Store, :slug),
-            @store.slug
+        = static_control col(Store, :contact_person_id),
+            @store.contact_person
         = static_control col(Store, :host),
             "http://#{@store.host}"
+        = static_control col(Store, :erp_number),
+            @store.erp_number
+        = static_control col(Store, :slug),
+            @store.slug
+
+      #tab-settings.tab-pane{role: 'tabpanel'}
         = static_control col(Store, :theme),
             @store.theme
         = static_control col(Store, :locale),
