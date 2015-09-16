@@ -145,6 +145,7 @@ fi:
         erp_number: ERP-numero
         name: Nimi
         slug: Tunniste
+        settings: Asetukset
         theme: Ulkoasun teema
         locale: Kieli
         admit_guests: Pääsy vieraskäyttäjille

@@ -145,6 +145,7 @@ en:
         erp_number: ERP number
         name: Name
         slug: Slug
+        settings: Settings
         theme: Display theme
         locale: Language
         admit_guests: Guest users may shop
