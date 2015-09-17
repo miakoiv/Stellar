@@ -94,7 +94,7 @@ class Store < ActiveRecord::Base
   # How to title the store in navigation menus.
   # The given string undergoes I18n before output.
   def menu_title
-    self[:menu_title] || 'store'
+    super || 'store'
   end
 
   def to_s
