@@ -53,10 +53,12 @@ $navbar-default-link-hover-color: #fff;
 
     li.product {
       float: left;
-      width: 16.67%
-      min-width: 160px;
-      max-width: 220px;
+      width: 180px;
+      padding: 10px;
+      margin-bottom: 10px;
       background: #f0f0f0;
+      border-radius: $border-radius-base;
+      transition: all 0.5s ease-in-out 0s;
 
       h3 {
         margin: 0.5em 0 0;

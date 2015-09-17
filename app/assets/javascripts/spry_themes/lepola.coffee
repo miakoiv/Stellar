@@ -1,12 +1,12 @@
+$.fn.extend
+  position_below_categories: ->
+    this.css('padding-top', $('ul.categories').height() + 10)
+  build_masonry: ->
+    this.imagesLoaded ->
+      this.masonry
+        itemSelector: '.product'
+        columnWidth: 190
+        isAnimated: true
+
 jQuery ->
-
-  $('ul.products').css(
-    'padding-top', $('ul.categories').height()
-  )
-
-  $products = $('ul.products').masonry
-    itemSelector: 'li.product'
-    columnWidth: 200
-
-  $products.imagesLoaded().progress ->
-    $products.masonry('layout')
+  $('ul.products').position_below_categories().build_masonry()
