@@ -1,0 +1,12 @@
+- if current_user.can?(:shop)
+  = form_tag order_product_path(product), method: :post, remote: true,
+      class: 'form-inline' do
+    .form-group
+      = hidden_field_tag :amount, 1
+      %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))
+- if current_user.can_update?(Product)
+  = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
+      class: 'btn btn-default'
+= link_to icon('times'), show_category_path(product.category),
+    data: {push: 'partial', target: '.products'},
+    class: 'btn btn-primary'
