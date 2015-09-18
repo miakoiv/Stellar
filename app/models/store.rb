@@ -111,6 +111,6 @@ class Store < ActiveRecord::Base
         slug = unique_slug[0, len]
         len += 1
       end while taken_slugs.include?(slug)
-      update_attributes(slug: slug)
+      update(slug: slug)
     end
 end
