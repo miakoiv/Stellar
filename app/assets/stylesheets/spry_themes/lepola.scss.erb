@@ -2,11 +2,10 @@
  * Theme specific styles
  */
 
-$brand-primary: #444;
-$navbar-default-color: #222;
-$navbar-default-bg: #ffcc19;
-$navbar-default-link-color: #000;
-$navbar-default-link-hover-color: #fff;
+$brand-primary: lighten(#1a3476, 8%);
+$navbar-inverse-bg: #1a3476;
+$navbar-inverse-color: lighten(#1a3476, 40%);
+$navbar-inverse-link-color: lighten(#1a3476, 45%);
 
 @import "bootstrap-generators.scss";
 @import "bootstrap-font-awesome.scss";
@@ -16,6 +15,17 @@ $navbar-default-link-hover-color: #fff;
 
 .lepola {
   overflow-y: scroll;
+  background-image: url(<%= asset_path('lepola-bg.svg') %>);
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-size: 1000px 1000px;
+
+  #main {
+    background: transparent;
+  }
+  #main-nav {
+    @extend .navbar-inverse;
+  }
 
   .container {
     margin-left: 0;
@@ -35,7 +45,7 @@ $navbar-default-link-hover-color: #fff;
     padding: 5px $grid-gutter-width/2;
     font-size: $font-size-small;
     background: #fff;
-    border-bottom: 1px solid #ffcc19;
+    border-bottom: 1px solid #1a3476;
 
     li.category {
       a {
@@ -56,7 +66,7 @@ $navbar-default-link-hover-color: #fff;
       width: 180px;
       padding: 10px;
       margin: 0 10px 10px 0;
-      background: #f0f0f0;
+      background: #fff;
       border-radius: $border-radius-base;
 
       h3 {
@@ -72,4 +82,9 @@ $navbar-default-link-hover-color: #fff;
       }
     }
   }
+}
+
+.footer {
+  background: #1a3476;
+  color: lighten(#1a3476, 40%);
 }
