@@ -26,7 +26,6 @@ class Product < ActiveRecord::Base
   scope :virtual, -> { where(virtual: true) }
 
   #---
-  validates :store_id, presence: true
   validates :code, presence: true
   validates :title, presence: true
 
