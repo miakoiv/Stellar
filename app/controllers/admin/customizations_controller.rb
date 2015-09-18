@@ -34,7 +34,12 @@ class Admin::CustomizationsController < ApplicationController
     def find_customizable
       params.each do |name, value|
         if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
+          klass = $1.classify.constantize
+          if klass.respond_to?(:friendly)
+            return klass.friendly.find(value)
+          else
+            return klass.find(value)
+          end
         end
       end
       nil
