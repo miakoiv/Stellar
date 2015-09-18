@@ -152,14 +152,12 @@ namespace :matfox do
   # specified in the hash `data`.
   def find_or_create_product(store, code, data)
     product = Product.find_or_initialize_by(store: store, code: code)
-    product.save(validate: false)
-    product.update_columns(
-      title:            data[:product][:title]   .try(:mb_chars).try(:titleize),
-      subtitle:         data[:product][:subtitle].try(:mb_chars).try(:titleize),
-      memo:             data[:product][:memo],
-      cost:             data[:cost],
-      cost_modified_at: data[:cost_modified_at]
-    )
+    product.title = data[:product][:title].try(:mb_chars).try(:titleize)
+    product.subtitle = data[:product][:subtitle].try(:mb_chars).try(:titleize)
+    product.memo = data[:product][:memo]
+    product.cost = data[:cost]
+    product.cost_modified_at = data[:cost_modified_at]
+    product.save!
     puts "#{code} ➞ #{store}"
     product
   end
@@ -172,7 +170,7 @@ namespace :matfox do
   def update_inventory_item(store, inventory, product, amount, shelf, value)
     find_or_create_inventory_item(
       store, inventory, product
-    ).update_attributes(
+    ).update(
       amount: amount || 0,
       shelf: shelf,
       value: value || 0
@@ -199,7 +197,7 @@ namespace :matfox do
       relationships.each do |relationship|
         product.relationships.find_by(
           component: relationship[0]
-        ).update_attributes(
+        ).update(
           quantity: relationship[1]
         )
       end
