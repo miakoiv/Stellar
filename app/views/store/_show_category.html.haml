@@ -5,5 +5,10 @@
   $('.categories ##{dom_id(@category)}').addClass 'active'
   $('.product-detail').hide()
   $('.products').show()
+
+  # if theme-specific scripts have added masonry, trigger reload on it
+  if $('.products').hasClass 'masonry'
+    $('.products').imagesLoaded -> this.masonry 'reload'
+
   if $(window).isSmall()
     $(window).scrollTo $('.products'), 300, offset: -70
