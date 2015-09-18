@@ -10,7 +10,7 @@ class Admin::ProductsController < ApplicationController
 
   authorize_actions_for Product
   before_action :set_product,  only: [:show, :edit, :update, :destroy]
-  before_action :set_point,    only: [:show, :edit]
+  before_action :set_point,    only: [:show, :edit, :update]
 
   # GET /admin/products
   # GET /admin/products.json
