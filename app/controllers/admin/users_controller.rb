@@ -36,7 +36,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_user_path(@user),
+        format.html { redirect_to edit_admin_user_path(@user),
           notice: t('.notice', user: @user) }
         format.json { render :show, status: :created, location: admin_user_path(@user) }
       else

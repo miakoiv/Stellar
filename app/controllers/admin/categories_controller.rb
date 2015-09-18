@@ -38,7 +38,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to admin_category_path(@category),
+        format.html { redirect_to edit_admin_category_path(@category),
           notice: t('.notice', category: @category) }
         format.json { render :show, status: :created, location: admin_category_path(@category) }
       else

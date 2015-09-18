@@ -41,7 +41,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to admin_product_path(@product),
+        format.html { redirect_to edit_admin_product_path(@product),
           notice: t('.notice', product: @product) }
         format.json { render :show, status: :created, location: admin_product_path(@product) }
       else

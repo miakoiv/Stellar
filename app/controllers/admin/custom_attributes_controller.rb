@@ -36,7 +36,7 @@ class Admin::CustomAttributesController < ApplicationController
 
     respond_to do |format|
       if @custom_attribute.save
-        format.html { redirect_to admin_custom_attribute_path(@custom_attribute),
+        format.html { redirect_to edit_admin_custom_attribute_path(@custom_attribute),
           notice: t('.notice', custom_attribute: @custom_attribute) }
         format.json { render :show, status: :created, location: admin_custom_attribute_path(@custom_attribute) }
       else
