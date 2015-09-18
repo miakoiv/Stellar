@@ -58,11 +58,6 @@ fi:
         uncategorized: Ei tuoteryhmää
       new:
         new_product: Uusi tuote
-      form:
-        memo_help_html: |
-          Merkityt <span class="text-info">❖</span> kentät
-          tuodaan ulkopuolisesta tietokannasta. Tekemäsi
-          muutokset eivät ehkä säily.
     stores:
       index:
         new_store: Uusi kauppa

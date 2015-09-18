@@ -78,11 +78,6 @@ en:
         uncategorized: Uncategorized
       new:
         new_product: New product
-      form:
-        memo_help_html: |
-          Fields marked with <span class="text-info">❖</span>
-          are imported and should not be edited locally.
-          Your changes may be overwritten.
     stores:
       index:
         new_store: New store

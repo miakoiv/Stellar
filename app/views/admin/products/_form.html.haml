@@ -6,18 +6,17 @@
           {include_blank: true}, {class: 'selectize'}
       = f.form_group do
         = f.check_box :virtual
-      = f.text_field :code, label_class: 'import'
-      = f.text_field :customer_code, label_class: 'import'
-      = f.text_field :title, label_class: 'import'
-      = f.text_field :subtitle, label_class: 'import'
+      = f.text_field :code
+      = f.text_field :customer_code
+      = f.text_field :title
+      = f.text_field :subtitle
       = f.text_area :description, class: 'wysiwyg'
-      = f.text_field :sales_price, label_class: 'import', append: '€'
+      = f.text_field :sales_price, append: '€'
       = f.date_field :available_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.date_field :deleted_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-      = f.text_area :memo, rows: 4, label_class: 'import',
-          help: t('.memo_help_html')
+      = f.text_area :memo, rows: 4
       = f.form_group do
         = f.primary
 
