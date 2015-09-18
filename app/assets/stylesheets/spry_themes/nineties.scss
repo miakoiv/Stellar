@@ -156,28 +156,24 @@
     @extend .col-md-10;
     @extend .clearfix;
 
-    .form-inline {
-      @extend .col-xs-7;
-      @extend .col-sm-3;
-      @extend .col-sm-push-6;
-      @extend .text-right;
-    }
-
     .product-actions {
-      @extend .col-xs-5;
-      @extend .col-sm-3;
-      @extend .col-sm-push-6;
+      @extend .col-xs-12;
+      @extend .col-md-5, .col-md-push-7;
       @extend .text-right;
+      margin-bottom: 20px;
+
+      .form-inline {
+        float: left;
+        max-width: 150px;
+      }
+      a { display: inline-block; }
     }
 
     .product-title {
       @extend .col-xs-12;
-      @extend .col-sm-6;
-      @extend .col-sm-pull-6;
+      @extend .col-md-7, .col-md-pull-5;
       margin-top: 0;
       margin-bottom: 20px;
-      padding-left: $grid-gutter-width/2;
-      padding-right: $grid-gutter-width/2;
     }
 
     .product-description {

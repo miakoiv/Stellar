@@ -15,6 +15,7 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
 
 .lepola {
   overflow-y: scroll;
+  background-color: lighten(#fab20b, 46%);
   background-image: url(<%= asset_path('lepola-bg.svg') %>);
   background-position: bottom left;
   background-repeat: no-repeat;
@@ -28,8 +29,6 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
   }
 
   .container {
-    margin-left: 0;
-    margin-right: 0;
     padding-left: $grid-gutter-width;
     padding-right: $grid-gutter-width;
     width: auto;
@@ -60,8 +59,10 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
   ul.products {
     list-style: none;
     position: relative;
+    padding: 0;
 
     li.product {
+      @extend .img-thumbnail;
       position: absolute;
       width: 180px;
       padding: 10px;
@@ -80,6 +81,58 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
         @include box-shadow(0 0 8px $input-border-focus);
         a { text-decoration: none; }
       }
+    }
+  }
+
+  .product-detail {
+    @extend .row;
+
+    .product-actions {
+      @extend .col-xs-12;
+      @extend .col-sm-6, .col-sm-push-6;
+      @extend .col-md-5, .col-md-push-7;
+      @extend .col-lg-4, .col-lg-push-8;
+      @extend .text-right;
+
+      .form-inline {
+        float: left;
+        max-width: 200px;
+      }
+      a { display: inline-block; }
+    }
+
+    .product-title {
+      @extend .col-xs-12;
+      @extend .col-sm-6, .col-sm-pull-6;
+      @extend .col-md-7, .col-md-pull-5;
+      @extend .col-lg-8, .col-lg-pull-4;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .product-description { display: none; }
+
+    .images {
+      .nav { display: none; }
+
+      .tab-content {
+        .image:not(:first-child) {
+          @extend .hidden-print;
+        }
+      }
+
+      img {
+          @extend .img-responsive, .img-thumbnail;
+      }
+    }
+
+    .images.technical {
+      @extend .col-sm-4;
+      @extend .col-sm-push-8;
+    }
+    .images.presentational {
+      @extend .col-sm-8;
+      @extend .col-sm-pull-4;
     }
   }
 }

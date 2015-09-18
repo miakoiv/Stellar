@@ -1,0 +1,1 @@
+(function(){jQuery(function(){var t;return t=$(".categories").height()+10,$(".products").css("padding-top",t).imagesLoaded(function(){return this.masonry({itemSelector:".product",columnWidth:190})}),$(".product-detail").css("padding-top",t)})}).call(this);
