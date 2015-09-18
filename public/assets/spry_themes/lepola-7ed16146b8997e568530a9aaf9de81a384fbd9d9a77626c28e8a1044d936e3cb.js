@@ -1,0 +1,1 @@
+(function(){jQuery(function(){return $(".products").css("padding-top",$(".categories").height()+10).imagesLoaded(function(){return this.masonry({itemSelector:".product",columnWidth:190})})})}).call(this);
