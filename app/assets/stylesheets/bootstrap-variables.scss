@@ -15,7 +15,7 @@ $gray:                   lighten($gray-base, 33.5%) !default; // #555
 $gray-light:             lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
-$brand-primary:         #46466d !default;
+$brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
 $brand-success:         #5cb85c !default;
 $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
@@ -621,7 +621,7 @@ $modal-sm:                    300px !default;
 
 $alert-padding:               15px !default;
 $alert-border-radius:         $border-radius-base !default;
-$alert-link-font-weight:      bold !default;
+$alert-link-font-weight:      500 !default;
 
 $alert-success-bg:            $state-success-bg !default;
 $alert-success-text:          $state-success-text !default;
@@ -777,7 +777,7 @@ $badge-active-color:          $link-color !default;
 //** Badge background color in active nav link
 $badge-active-bg:             #fff !default;
 
-$badge-font-weight:           bold !default;
+$badge-font-weight:           500 !default;
 $badge-line-height:           1 !default;
 $badge-border-radius:         10px !default;
 
@@ -819,7 +819,7 @@ $carousel-caption-color:                      #fff !default;
 //
 //##
 
-$close-font-weight:           bold !default;
+$close-font-weight:           500 !default;
 $close-color:                 #000 !default;
 $close-text-shadow:           0 1px 0 #fff !default;
 
