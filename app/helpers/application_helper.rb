@@ -61,9 +61,9 @@ module ApplicationHelper
     end
   end
 
-  # Display icon with name, using cover image as the icon.
-  def name_with_icon(object)
-    image_variant_tag(object.cover_image) + " #{object.name}"
+  def branding(store)
+    image_variant_tag(store.cover_image, :thumbnail) +
+      content_tag(:span, store.to_s)
   end
 
   def tr_placeholder(colspan)

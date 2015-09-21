@@ -46,7 +46,9 @@ html {
 
     img {
       display: inline-block;
+      max-height: 25px;
     }
+    span { display: none; }
   }
 }
 

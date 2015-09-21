@@ -10,7 +10,7 @@
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             %span.sr-only Toggle navigation
             = icon('bars')
-          = link_to name_with_icon(current_store), root_path, class: 'navbar-brand'
+          = link_to branding(current_store), root_path, class: 'navbar-brand'
         #navbar.collapse.navbar-collapse
           = render partial: 'shared/user_menu'
           = render partial: 'shared/admin_nav'
