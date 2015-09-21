@@ -19,11 +19,6 @@
 
   #main-nav {
     @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-
-    .nav > li.active > a {
-      background-color: $brand-danger;
-      color: #fff;
-    }
   }
 
   .container {
@@ -51,7 +46,7 @@
     @extend .clearfix;
     list-style: none;
     margin: 0 -1*$grid-gutter-width 20px;
-    padding: 20px $grid-gutter-width/2 10px;
+    padding: 20px $grid-gutter-width 10px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAMAAADto6y6AAAAD1BMVEUgICAAAQAoKCg1NTU/Pz+suxeKAAAAOklEQVR42u2QwQkAMAgDo3b/mftSlKO4QO+VINGgZPJkarMyXb8TcaJM1/IJBtiYFh3WBDpsx8l/CbgSVgPZd9YSYQAAAABJRU5ErkJggg==);
 
     li.category {
@@ -64,6 +59,13 @@
       @include gradient-striped(rgba(255,255,16,0.25), 45deg);
       transition: all 0.33s ease-in-out 0s;
 
+      &:hover {
+        @include gradient-striped(rgba(255,255,16,1), 45deg);
+      }
+      &.active {
+        transform: rotate(360deg);
+        @include gradient-striped(rgba(255,255,16,1), 45deg);
+      }
       a {
         display: block;
         position: relative;
@@ -78,7 +80,6 @@
           @extend .img-responsive;
           @include border-bottom-radius(15px);
         }
-
         p {
           position: absolute;
           top: 0;
@@ -93,17 +94,11 @@
         display: none;
       }
     }
-    li.category:hover {
-      @include gradient-striped(rgba(255,255,16,1), 45deg);
-    }
-    li.category.active {
-      transform: rotate(360deg);
-      @include gradient-striped(rgba(255,255,16,1), 45deg);
-    }
   }
 
   ul.products {
     list-style: none;
+    padding: 0;
 
     li.product {
       display: inline-block;
@@ -111,6 +106,9 @@
       margin-right: 10px;
       margin-bottom: 10px;
 
+      &:hover a img {
+        @include box-shadow(0 0 8px $brand-primary);
+      }
       a {
         display: block;
         text-decoration: none;
@@ -125,6 +123,7 @@
 
           .small {
             display: block;
+            font-size: $font-size-small;
           }
         }
         .description {
@@ -135,37 +134,30 @@
         display: none;
       }
     }
-    li:hover a img {
-      @include box-shadow(0 0 8px $input-border-focus);
-    }
   }
 
   .product-detail {
-
-    .form-inline {
-      @extend .col-xs-7;
-      @extend .col-sm-3;
-      @extend .col-sm-push-6;
-      @extend .text-right;
-    }
+    @extend .row;
 
     .product-actions {
-      @extend .col-xs-5;
-      @extend .col-sm-3;
-      @extend .col-sm-push-6;
+      @extend .col-xs-12;
+      @extend .col-sm-6, .col-sm-push-6;
+      @extend .col-md-5, .col-md-push-7;
+      @extend .col-lg-4, .col-lg-push-8;
       @extend .text-right;
-    }
 
+      .form-inline {
+        display: inline-block
+      }
+    }
     .product-title {
       @extend .col-xs-12;
-      @extend .col-sm-6;
-      @extend .col-sm-pull-6;
+      @extend .col-sm-6, .col-sm-pull-6;
+      @extend .col-md-7, .col-md-pull-5;
+      @extend .col-lg-8, .col-lg-pull-4;
       margin-top: 0;
       margin-bottom: 20px;
-      padding-left: $grid-gutter-width/2;
-      padding-right: $grid-gutter-width/2;
     }
-
     .product-description {
       position: relative;
       @extend .col-md-4;
@@ -174,11 +166,12 @@
       .product-stock {
         display: none;
       }
-
       .body-text {
         margin-top: 50px;
       }
-
+      .list-group {
+        margin: 10px 0;
+      }
       .product-pricing {
         position: absolute;
         top: 0;
@@ -186,7 +179,6 @@
         @extend .lead;
         @extend .text-primary;
       }
-
       .product-code {
         position: absolute;
         top: 0;
@@ -195,37 +187,33 @@
         font-size: 90%;
       }
     }
-
     .images {
       position: relative;
       padding-bottom: 60px;
 
+      &.technical {
+        @extend .col-md-2;
+        @extend .col-md-offset-1;
+        @extend .col-xs-5;
+      }
+      &.presentational {
+        @extend .col-md-5;
+        @extend .col-xs-7;
+      }
       .nav {
         @extend .hidden-print;
         position: absolute;
         left: $grid-gutter-width/2;
         bottom: 0;
       }
-
       .tab-content {
         .image:not(:first-child) {
           @extend .hidden-print;
         }
       }
-
       img {
         @extend .img-responsive;
       }
-    }
-
-    .images.technical {
-      @extend .col-md-2;
-      @extend .col-md-offset-1;
-      @extend .col-xs-5;
-    }
-    .images.presentational {
-      @extend .col-md-5;
-      @extend .col-xs-7;
     }
   }
 }

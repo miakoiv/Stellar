@@ -2,10 +2,10 @@
  * Theme specific styles
  */
 
-$brand-primary: lighten(#1a3476, 8%);
-$navbar-inverse-bg: #1a3476;
-$navbar-inverse-color: lighten(#1a3476, 40%);
-$navbar-inverse-link-color: lighten(#1a3476, 45%);
+$brand-primary: lighten(#1a3476, 24%);
+$navbar-inverse-bg: lighten(#1a3476, 8%);
+$navbar-inverse-color: lighten(#1a3476, 45%);
+$navbar-inverse-link-color: lighten(#1a3476, 55%);
 
 @import "bootstrap-generators.scss";
 @import "bootstrap-font-awesome.scss";
@@ -44,7 +44,7 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
     padding: 5px $grid-gutter-width/2;
     font-size: $font-size-small;
     background: #fff;
-    border-bottom: 1px solid #1a3476;
+    border-bottom: 1px solid $brand-primary;
 
     li.category {
       a {
@@ -70,16 +70,21 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
       background: #fff;
       border-radius: $border-radius-base;
 
+      &:hover {
+        @include box-shadow(0 0 8px $brand-primary);
+        a { text-decoration: none; }
+      }
       h3 {
         margin: 0.5em 0 0;
         font-size: $font-size-base;
+
+        .small {
+          display: block;
+          font-size: $font-size-small;
+        }
       }
       .description, .buy-now {
         display: none;
-      }
-      &:hover {
-        @include box-shadow(0 0 8px $input-border-focus);
-        a { text-decoration: none; }
       }
     }
   }
@@ -95,12 +100,9 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
       @extend .text-right;
 
       .form-inline {
-        float: left;
-        max-width: 200px;
+        display: inline-block;
       }
-      a { display: inline-block; }
     }
-
     .product-title {
       @extend .col-xs-12;
       @extend .col-sm-6, .col-sm-pull-6;
@@ -109,35 +111,30 @@ $navbar-inverse-link-color: lighten(#1a3476, 45%);
       margin-top: 0;
       margin-bottom: 20px;
     }
-
     .product-description { display: none; }
-
     .images {
+      &.technical {
+        @extend .col-sm-4;
+        @extend .col-sm-push-8;
+      }
+      &.presentational {
+        @extend .col-sm-8;
+        @extend .col-sm-pull-4;
+      }
       .nav { display: none; }
-
       .tab-content {
         .image:not(:first-child) {
           @extend .hidden-print;
         }
       }
-
       img {
-          @extend .img-responsive, .img-thumbnail;
+        @extend .img-responsive, .img-thumbnail;
       }
-    }
-
-    .images.technical {
-      @extend .col-sm-4;
-      @extend .col-sm-push-8;
-    }
-    .images.presentational {
-      @extend .col-sm-8;
-      @extend .col-sm-pull-4;
     }
   }
 }
 
 .footer {
-  background: #1a3476;
-  color: lighten(#1a3476, 40%);
+  background: $navbar-inverse-bg;
+  color: $navbar-inverse-color;
 }
