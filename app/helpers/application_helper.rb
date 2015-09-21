@@ -34,7 +34,7 @@ module ApplicationHelper
 
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
-    return '' if image.nil?
+    return ''.html_safe if image.nil?
     if image.is_bitmap?
       image_tag(image.url(size), options)
     else
