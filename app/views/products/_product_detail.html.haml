@@ -12,16 +12,16 @@
 
   .body-text><= product.description.html_safe if product.description.present?
 
+  .documents.list-group
+    - @documents.each do |document|
+      = link_to(icon('paperclip', document.attachment_file_name),
+          document.url(:original), class: 'list-group-item')
+
   %ul.customizations.list-group
     - product.customizations.each do |customization|
       %li.list-group-item
         %span.badge= customization.custom_value
         = customization.custom_attribute
-
-  .documents.list-group
-    - @documents.each do |document|
-      = link_to(icon('paperclip', document.attachment_file_name),
-          document.url(:original), class: 'list-group-item')
 
   - if current_user.can?(:shop)
     %p.product-pricing
