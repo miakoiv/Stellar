@@ -5,4 +5,4 @@ jQuery ->
   $('.products').imagesLoaded ->
     this.masonry
       itemSelector: '.product'
-      columnWidth: 215
+      gutterWidth: 15
