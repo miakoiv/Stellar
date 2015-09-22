@@ -19,12 +19,13 @@ $brand-primary: #e6172b;
   background-size: cover;
 
   #main-nav {
-    @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
+    @include box-shadow(0 6px 24px 0 rgba(0,0,0,0.333));
     background: rgba(255,255,255,0.88);
     border-top: 4px solid #000;
   }
   #main {
-    background-color: rgba(255,255,255,0.5);
+    background: transparent;
+    @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0));
   }
 
   .container {
@@ -43,7 +44,7 @@ $brand-primary: #e6172b;
 
     li.category {
       @extend .col-xs-2;
-      min-width: 225px;
+      min-width: 240px;
       margin-bottom: 15px;
 
       &.active a {
@@ -148,84 +149,84 @@ $brand-primary: #e6172b;
 
   .product-detail {
     @extend .row;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background: #fff;
 
-    .product-actions {
+    .product-header {
       @extend .col-xs-12;
-      @extend .col-sm-5, .col-sm-push-7;
-      @extend .col-md-4, .col-md-push-8;
-      @extend .text-right;
+      @extend .col-sm-10, .col-sm-offset-1;
+      @extend .col-lg-8, .col-lg-offset-2;
 
-      .form-inline {
-        display: inline-block;
-      }
-    }
-    .product-title {
-      @extend .col-xs-12;
-      @extend .col-sm-7, .col-sm-pull-5;
-      @extend .col-md-8, .col-md-pull-4;
-      margin-top: 0;
-      margin-bottom: 20px;
-    }
-    .product-description {
-      @extend .col-md-4;
-      @extend .col-xs-12;
+      .product-actions {
+        @extend .col-xs-12, .text-right;
 
-      .product-stock {
-        @extend .lead;
-        line-height: 1;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-      .body-text {
-        margin-top: 10px;
-      }
-      .product-pricing {
-        @extend .col-sm-5;
-        @extend .lead;
-        @extend .text-primary;
-        line-height: 30px;
-      }
-      .product-code {
-        @extend .col-sm-7;
-        @extend .text-right;
-        margin-bottom: 0;
-        font-size: 90%;
-        line-height: 30px;
-      }
-    }
-
-    .images {
-      position: relative;
-      padding-bottom: 60px;
-
-      &.technical {
-        @extend .col-md-2;
-        @extend .col-md-offset-1;
-        @extend .col-xs-5;
-      }
-      &.presentational {
-        @extend .col-md-5;
-        @extend .col-xs-7;
-      }
-      .nav {
-        @extend .hidden-print;
-        position: absolute;
-        left: $grid-gutter-width/2;
-        bottom: 0;
-      }
-      .tab-content {
-        .image:not(:first-child) {
-          @extend .hidden-print;
+        .form-inline {
+          display: inline-block;
         }
       }
-      img {
-        @extend .img-responsive;
+      .product-title {
+        @extend .col-xs-12;
+        margin: 10px 0;
+      }
+    }
+    .product-body {
+      @extend .col-xs-12;
+      @extend .col-sm-10, .col-sm-offset-1;
+      @extend .col-lg-8, .col-lg-offset-2;
+      border-top: 3px solid #000;
+      background: #fff;
+      padding-top: 15px;
+      padding-bottom: 15px;
+
+      .product-description {
+        @extend .col-sm-6, .col-sm-push-6;
+        @extend .col-xs-12;
+
+        .product-stock { display: none; }
+        .body-text {
+          margin-top: 50px;
+        }
+        .product-pricing {
+          position: absolute;
+          top: 0;
+          left: $grid-gutter-width/2;
+          @extend .lead;
+          @extend .text-primary;
+        }
+        .product-code {
+          @extend .text-right;
+          font-size: 90%;
+        }
+      }
+      .images {
+        position: relative;
+        padding-bottom: 60px;
+
+        &.technical { display: none; }
+        &.presentational {
+          @extend .col-sm-6, .col-sm-pull-6;
+          @extend .col-xs-12;
+        }
+        .nav {
+          @extend .hidden-print;
+          position: absolute;
+          left: $grid-gutter-width/2;
+          bottom: 0;
+        }
+        .tab-content {
+          .image:not(:first-child) {
+            @extend .hidden-print;
+          }
+        }
+        img {
+          @extend .img-responsive, .img-thumbnail;
+        }
       }
     }
   }
+}
+
+.table-responsive {
+  padding: 15px;
+  background: #fff;
 }
 
 .footer {
