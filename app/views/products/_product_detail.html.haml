@@ -1,46 +1,49 @@
-.product-actions
-  = render partial: 'products/actions', object: product, as: :product
+.product-header
 
-%h1.product-title
-  = product.title
-  %span.small= product.subtitle
+  .product-actions
+    = render partial: 'products/actions', object: product, as: :product
+  %h1.product-title
+    = product.title
+    %span.small= product.subtitle
 
-.product-description
-  - if current_user.can?(:shop)
-    %p.product-stock
-      = product_stock_string(product.stock)
+.product-body
 
-  .body-text><= product.description.html_safe if product.description.present?
+  .product-description
+    - if current_user.can?(:shop)
+      %p.product-stock
+        = product_stock_string(product.stock)
 
-  .documents.list-group
-    - @documents.each do |document|
-      = link_to(icon('paperclip', document.attachment_file_name),
-          document.url(:original), class: 'list-group-item')
+    .body-text><= product.description.html_safe if product.description.present?
 
-  %ul.customizations.list-group
-    - product.customizations.each do |customization|
-      %li.list-group-item
-        %span.badge= customization.custom_value
-        = customization.custom_attribute
+    .documents.list-group
+      - @documents.each do |document|
+        = link_to(icon('paperclip', document.attachment_file_name),
+            document.url(:original), class: 'list-group-item')
 
-  - if current_user.can?(:shop)
-    %p.product-pricing
-      = icon('tag', number_to_currency(product.sales_price, unit: '€'))
-  %p.product-code
-    - if product.customer_code.present?
-      = icon('barcode', product.customer_code, class: 'fa-lg')
-    = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
+    %ul.customizations.list-group
+      - product.customizations.each do |customization|
+        %li.list-group-item
+          %span.badge= customization.custom_value
+          = customization.custom_attribute
 
-.images.technical
-  %ul.nav.nav-pills{role: 'tablist'}
-    - if @technical_images.count > 1
-      = render partial: 'images/pill', collection: @technical_images, as: :image
-  .tab-content.gallery
-    = render partial: 'images/technical', collection: @technical_images, as: :image
+    - if current_user.can?(:shop)
+      %p.product-pricing
+        = icon('tag', number_to_currency(product.sales_price, unit: '€'))
+    %p.product-code
+      - if product.customer_code.present?
+        = icon('barcode', product.customer_code, class: 'fa-lg')
+      = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
-.images.presentational
-  %ul.nav.nav-pills{role: 'tablist'}
-    - if @presentational_images.count > 1
-      = render partial: 'images/pill', collection: @presentational_images, as: :image
-  .tab-content.gallery
-    = render partial: 'images/presentational', collection: @presentational_images, as: :image
+  .images.technical
+    %ul.nav.nav-pills{role: 'tablist'}
+      - if @technical_images.count > 1
+        = render partial: 'images/pill', collection: @technical_images, as: :image
+    .tab-content.gallery
+      = render partial: 'images/technical', collection: @technical_images, as: :image
+
+  .images.presentational
+    %ul.nav.nav-pills{role: 'tablist'}
+      - if @presentational_images.count > 1
+        = render partial: 'images/pill', collection: @presentational_images, as: :image
+    .tab-content.gallery
+      = render partial: 'images/presentational', collection: @presentational_images, as: :image
