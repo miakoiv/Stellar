@@ -1,10 +1,9 @@
 = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
-  $('.products').hide 'blind', 150
+  $('.products').hide()
   $('.categories .category').removeClass 'active'
   $('.categories ##{dom_id(@category)}').addClass 'active'
-  $('.product-detail').show 'fade', 300, ->
-    $(this).initialize()
-    if $(window).isSmall()
-      $(window).scrollTo $(this), 300, offset: -70
+  $('.product-detail').show().initialize()
+  if $(window).isSmall()
+    $(window).scrollTo $('.product-detail'), 300, offset: -70
