@@ -16,6 +16,8 @@
             @category.parent_category
         = static_control col(Category, :name),
             @category.name
+        = static_control col(Category, :description) do
+          = @category.description.html_safe if @category.description.present?
 
   .col-md-6
     = render partial: 'admin/images/table', object: @category, as: :imageable

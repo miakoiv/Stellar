@@ -53,6 +53,7 @@ fi:
       category:
         parent_category_id: Pääryhmä
         name: Nimi
+        description: Kuvaus
       customization:
         custom_attribute_id: Ominaisuus
         custom_value_id: Arvo

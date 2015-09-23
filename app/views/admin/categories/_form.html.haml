@@ -5,5 +5,15 @@
       = f.select :parent_category_id, current_store.category_options,
           {include_blank: true}, {class: 'selectize'}
       = f.text_field :name
+      = f.text_area :description, class: 'wysiwyg'
       = f.form_group do
         = f.primary
+
+:coffee
+  $('#category_description').editable
+    inlineMode: false
+    maxHeight: 400
+    buttons: [
+      'bold', 'italic', 'underline', 'formatBlock', 'align',
+      'undo', 'redo'
+    ]

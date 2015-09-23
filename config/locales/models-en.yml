@@ -53,6 +53,7 @@ en:
       category:
         parent_category_id: Parent category
         name: Name
+        description: Description
       customization:
         custom_attribute_id: Attribute
         custom_value_id: Value
