@@ -1,0 +1,23 @@
+.page-header
+  = link_to admin_promotions_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(Promotion)
+    = link_to edit_admin_promotion_path(@promotion), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1
+    = icon('tag', @promotion)
+
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-body.form-horizontal
+        = static_control col(Promotion, :name),
+            @promotion.name
+        = static_control col(Promotion, :promotion_class),
+            @promotion.promotion_class
+        = static_control col(Promotion, :first_date),
+            @promotion.first_date.present? ? l(@promotion.first_date) : ''
+        = static_control col(Promotion, :last_date),
+            @promotion.last_date.present? ? l(@promotion.last_date) : ''
+
+  .col-md-6

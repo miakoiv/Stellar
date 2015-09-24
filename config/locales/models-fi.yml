@@ -40,6 +40,12 @@ fi:
       product:
         one: tuote
         other: tuotteet
+      promoted_item:
+        one: kampanjatuote
+        other: kampanjatuotteet
+      promotion:
+        one: kampanja
+        other: kampanjat
       role:
         one: rooli
         other: roolit
@@ -138,6 +144,18 @@ fi:
         sales_price: Myyntihinta
         stock: Saldo
         value: Arvo
+      promoted_item:
+        product_id: Tuote
+        price: Hinta
+        amount_available: Saatavuus
+        amount_sold: Myyty
+      promotion:
+        promotion_class: Menetelmä
+        name: Nimi
+        first_date: Alkamispäivä
+        last_date: Päättymispäivä
+        product_ids: Tuotteet
+        category_ids: Tuoteryhmät
       role:
         name: Nimi
       store:

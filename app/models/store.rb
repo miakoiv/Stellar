@@ -26,6 +26,7 @@ class Store < ActiveRecord::Base
   has_many :pages
   has_and_belongs_to_many :inventories
   has_many :order_types, through: :inventories
+  has_many :promotions
 
   scope :all_except, -> (this) { where.not(id: this) }
 

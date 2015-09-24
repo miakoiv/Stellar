@@ -1,0 +1,10 @@
+#promoted-items-table.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(PromotedItem, :product_id)
+        %th.text-right.col-xs-2= col(PromotedItem, :amount_available)
+        %th.text-right.col-xs-2= col(PromotedItem, :price)
+        %th.col-min.hidden-print
+    %tbody
+      = render partial: 'admin/promoted_items/edit_row', collection: promotion.promoted_items, as: :promoted_item

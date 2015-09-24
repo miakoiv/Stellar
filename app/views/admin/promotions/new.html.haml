@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_promotions_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('sliders', t('.new_promotion'))
+
+.row
+  .col-md-6
+    = render 'form'

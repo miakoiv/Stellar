@@ -40,6 +40,12 @@ en:
       product:
         one: product
         other: products
+      promoted_item:
+        one: promoted product
+        other: promoted products
+      promotion:
+        one: promotion
+        other: promotions
       role:
         one: role
         other: roles
@@ -138,6 +144,18 @@ en:
         sales_price: Sales price
         stock: Stock
         value: Value
+      promoted_item:
+        product_id: Product
+        price: Price
+        amount_available: Availability
+        amount_sold: Sold
+      promotion:
+        promotion_class: Method
+        name: Name
+        first_date: Starts at
+        last_date: Expires at
+        product_ids: Products
+        category_ids: Categories
       role:
         name: Name
       store:

@@ -78,6 +78,18 @@ en:
         uncategorized: Uncategorized
       new:
         new_product: New product
+    promotions:
+      index:
+        new_promotion: New promotion
+      new:
+        new_promotion: New promotion
+      edit:
+        add_products: Add products
+        add_categories: Add categories
+      add_products:
+        submit: Add products
+      add_categories:
+        submit: Add categories
     stores:
       index:
         new_store: New store

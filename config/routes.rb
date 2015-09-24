@@ -76,6 +76,11 @@ Rails.application.routes.draw do
       resources :images, shallow: true
       post :reorder, on: :collection
     end
+    resources :promotions do
+      resources :promoted_items, shallow: true
+      post :add_products, on: :member
+      post :add_categories, on: :member
+    end
     resources :orders
     resources :users
 

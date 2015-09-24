@@ -34,6 +34,11 @@ fi:
         notice: "Tuote %{product} luotu."
       update:
         notice: "Tuote %{product} päivitetty."
+    promotions:
+      create:
+        notice: "Kampanja %{promotion} luotu."
+      update:
+        notice: "Kampanja %{promotion} päivitetty."
     stores:
       create:
         notice: "Kauppa %{store} luotu."

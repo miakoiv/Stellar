@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922111726) do
+ActiveRecord::Schema.define(version: 20150923065748) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
@@ -231,6 +231,31 @@ ActiveRecord::Schema.define(version: 20150922111726) do
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
+
+  create_table "promoted_items", force: :cascade do |t|
+    t.integer  "promotion_id",     limit: 4,                                     null: false
+    t.integer  "product_id",       limit: 4,                                     null: false
+    t.decimal  "price",                      precision: 8, scale: 2
+    t.integer  "amount_available", limit: 4
+    t.integer  "amount_sold",      limit: 4,                         default: 0, null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+  end
+
+  add_index "promoted_items", ["product_id"], name: "index_promoted_items_on_product_id", using: :btree
+  add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
+
+  create_table "promotions", force: :cascade do |t|
+    t.integer  "store_id",        limit: 4,   null: false
+    t.string   "promotion_class", limit: 255, null: false
+    t.string   "name",            limit: 255
+    t.date     "first_date"
+    t.date     "last_date"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "promotions", ["store_id"], name: "index_promotions_on_store_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "product_id",   limit: 4, null: false

@@ -58,6 +58,18 @@ fi:
         uncategorized: Ei tuoteryhmää
       new:
         new_product: Uusi tuote
+    promotions:
+      index:
+        new_promotion: Uusi kampanja
+      new:
+        new_promotion: Uusi kampanja
+      edit:
+        add_products: Lisää tuotteita
+        add_categories: Lisää tuoteryhmiä
+      add_products:
+        submit: Lisää tuotteet
+      add_categories:
+        submit: Lisää tuoteryhmät
     stores:
       index:
         new_store: Uusi kauppa

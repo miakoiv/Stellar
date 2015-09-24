@@ -1,0 +1,31 @@
+.page-header
+  = link_to admin_promotions_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_promotion_path(@promotion), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('tag', @promotion)
+
+.row
+  .col-md-5
+    = render 'form'
+
+  .col-md-7
+    %ul.nav.nav-tabs{role: 'tablist'}
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-promoted', role: 'tab', data: {toggle: 'tab'}}
+          = title(PromotedItem, count: 2)
+      %li{role: 'presentation'}
+        %a{href: '#tab-products', role: 'tab', data: {toggle: 'tab'}}
+          = t('.add_products')
+      %li{role: 'presentation'}
+        %a{href: '#tab-categories', role: 'tab', data: {toggle: 'tab'}}
+          = t('.add_categories')
+
+    .tab-content
+      #tab-promoted.tab-pane.fade.in.active
+        %h2.visible-print-block= title(PromotedItem, count: 2)
+        = render partial: 'admin/promoted_items/edit_table', object: @promotion, as: :promotion
+      #tab-products.tab-pane.fade
+        = render partial: 'admin/promotions/add_products', object: @promotion, as: :promotion
+      #tab-categories.tab-pane.fade
