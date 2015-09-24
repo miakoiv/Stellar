@@ -13,7 +13,7 @@
         %td
         %td
           = form_for [:admin, custom_attribute, custom_attribute.custom_values.build],
-              remote: true, html: {class: 'form-horizontal'} do |f|
+              remote: true do |f|
             = f.text_field :value, class: 'form-control',
                 placeholder: t('.new_custom_value')
         %td

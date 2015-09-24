@@ -5,7 +5,7 @@
         data: {toggle: 'popover', placement: 'left',
           content: "#{image_variant_tag(image, :matchbox)}"})
   %td
-    = form_for [:admin, image], remote: true, html: {class: 'immediate form-horizontal'} do |f|
+    = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
       .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
         - image.applicable_image_types.each do |imagetype|
           %label.btn.btn-default{class: image.image_type == imagetype ? 'active' : nil}
