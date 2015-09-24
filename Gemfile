@@ -19,6 +19,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
+# Extend I18n to attribute values too
+gem 'human_attribute_values'
+
 # Friendly ids
 gem 'friendly_id'
 

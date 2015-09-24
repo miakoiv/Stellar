@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    values:
+      image_type:
+        purpose:
+          presentational: Presentational
+          technical: Technical
+          document: Document

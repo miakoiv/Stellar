@@ -1,0 +1,8 @@
+fi:
+  activerecord:
+    values:
+      image_type:
+        purpose:
+          presentational: Esittävä
+          technical: Tekninen
+          document: Dokumentti

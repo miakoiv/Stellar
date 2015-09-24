@@ -6,7 +6,7 @@
           content: "#{image_variant_tag(image, :matchbox)}"})
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate form-horizontal'} do |f|
-      .btn-group.btn-group-sm{'data-toggle' => 'buttons'}
+      .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
         - image.applicable_image_types.each do |imagetype|
           %label.btn.btn-default{class: image.image_type == imagetype ? 'active' : nil}
             = f.radio_button :image_type_id, imagetype.id
