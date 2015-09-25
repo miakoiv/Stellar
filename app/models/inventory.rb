@@ -25,4 +25,8 @@ class Inventory < ActiveRecord::Base
     items = inventory_items
     [items, items.map { |item| item.value || 0}.sum]
   end
+
+  def to_s
+    name
+  end
 end

@@ -19,7 +19,9 @@
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')
 
     #tab-settings.tab-pane{role: 'tabpanel'}
-      = f.text_field :theme
+      = f.select :theme,
+          %w{cards default emek hiustalo lepola nineties saarimedia},
+          {}, {class: 'selectize'}
       = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
           {}, {class: 'selectize'}
       = f.form_group do
@@ -30,6 +32,9 @@
           @store.products.virtual.map { |p| [p.to_s, p.id] },
           {include_blank: true}, {class: 'selectize'}
       = f.text_field :free_shipping_at
+      = f.select :inventory_ids,
+          Inventory.all.map { |i| [i.to_s, i.id] },
+          {include_blank: true}, {multiple: true, class: 'selectize'}
 
   = f.form_group do
     = f.primary

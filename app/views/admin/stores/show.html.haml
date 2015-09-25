@@ -44,6 +44,8 @@
             @store.shipping_cost_product
         = static_control col(Store, :free_shipping_at),
             @store.free_shipping_at.present? ? number_to_currency(@store.free_shipping_at, unit: '€') : ''
+        = static_control col(Store, :inventory_ids),
+            @store.inventories.to_sentence
 
   .col-md-6
     = render partial: 'admin/images/table', object: @store, as: :imageable

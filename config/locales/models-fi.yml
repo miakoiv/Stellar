@@ -171,6 +171,7 @@ fi:
         admit_guests: Salli pääsy kauppaan vieraana
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
+        inventory_ids: Varastot
       user:
         name: Nimi
         role_ids: Roolit
