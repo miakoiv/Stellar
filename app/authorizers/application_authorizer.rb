@@ -17,14 +17,16 @@ class ApplicationAuthorizer < Authority::Authorizer
   end
 
   # General authorization to perform any shopping related action.
+  # The current store is provided as an option.
   def self.authorizes_to_shop?(user, options = {})
-    user.store.allow_shopping? && (
+    current_store = options[:store]
+    current_store.allow_shopping? && (
       user.is_site_manager?  ||
       user.is_site_monitor?  ||
       user.is_store_manager? ||
       user.is_sales_rep?     ||
       user.is_customer?      ||
-      user.is_guest? && user.store.admit_guests?
+      user.is_guest? && current_store.admit_guests?
     )
   end
 

@@ -9,7 +9,7 @@
 .product-body
 
   .product-description
-    - if current_user.can?(:shop)
+    - if can_shop?
       %p.product-stock
         = product_stock_string(product.stock)
 
@@ -26,7 +26,7 @@
           %span.badge= customization.custom_value
           = customization.custom_attribute
 
-    - if current_user.can?(:shop)
+    - if can_shop?
       %p.product-pricing
         = icon('tag', number_to_currency(product.sales_price, unit: '€'))
     %p.product-code

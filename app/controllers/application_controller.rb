@@ -40,6 +40,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :shopping_cart
 
+  # Convenience method to determine if the current user may shop
+  # in the current store.
+  def can_shop?
+    current_user.can?(:shop, store: current_store)
+  end
+  helper_method :can_shop?
+
   # Find the guest user stored in session, or create it.
   def guest_user
     @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)

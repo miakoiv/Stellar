@@ -2,7 +2,7 @@
   = active_link_to icon('cubes', t("store.titles.#{current_store.menu_title}")),
       store_path, wrap_tag: :li,
       active: [['store'], ['index', 'show_category', 'show_product']]
-  - if current_user && current_user.can?(:shop)
+  - if current_user && can_shop?
     = active_link_to show_cart_path, wrap_tag: :li, active: :exact do
       = icon('shopping-cart', t('store.show_cart.shopping_cart'))
       = render partial: 'store/cart_badge'

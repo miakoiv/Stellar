@@ -9,7 +9,7 @@
       .description= product.description.html_safe
   .buy-now
     %p= number_to_currency(product.sales_price, unit: '€')
-    - if current_user.can?(:shop)
+    - if can_shop?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
         = hidden_field_tag :amount, 1
         %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

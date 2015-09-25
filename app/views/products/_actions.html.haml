@@ -1,4 +1,4 @@
-- if current_user.can?(:shop)
+- if can_shop?
   = form_tag order_product_path(product), method: :post, remote: true,
       class: 'form-inline' do
     .form-group
