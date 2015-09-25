@@ -154,8 +154,8 @@ fi:
         name: Nimi
         first_date: Alkamispäivä
         last_date: Päättymispäivä
-        product_ids: Tuotteet
-        category_ids: Tuoteryhmät
+        product_ids_string: Lisättävät tuotteet
+        category_ids_string: Lisättävät tuoteryhmät
       role:
         name: Nimi
       store:

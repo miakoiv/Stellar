@@ -2,12 +2,15 @@
   = bootstrap_form_for promotion,
       url: add_products_admin_promotion_path(promotion),
       remote: true, method: :post do |f|
-    = f.text_field :product_ids, class: 'form-control'
+    = f.text_field :product_ids_string
     = f.primary t('.submit')
 
     :coffee
-      options = #{promotion.available_products.map { |p| {id: p.id, title: p.title, subtitle: p.subtitle} }.to_json}
-      $('#promotion_product_ids').selectize
+      options = #{promotion.available_products.map { |p|
+        {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle}
+      }.to_json}
+
+      $('#promotion_product_ids_string').selectize
         options: options
         maxItems: null
         valueField: 'id'
@@ -21,7 +24,7 @@
             (if item.subtitle then escape(item.subtitle) else '') +
             '</div>'
           option: (item, escape) ->
-            '<div>' +
-            '<strong>' + escape(item.title) + '</strong> ' +
+            '<div>' + escape(item.code) +
+            ' <strong>' + escape(item.title) + '</strong> ' +
             (if item.subtitle then escape(item.subtitle) else '') +
             '</div>'

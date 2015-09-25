@@ -77,9 +77,13 @@ class Admin::PromotionsController < ApplicationController
 
   # POST /admin/promotions/1/add_products
   def add_products
-    product_ids = params[:promotion][:product_ids].split(',').map(&:to_i)
+    product_ids = params[:promotion][:product_ids_string]
+      .split(',').map(&:to_i)
+
     product_ids.each do |product_id|
-      @promotion.promoted_items.create(product: Product.find(product_id))
+      @promotion.promoted_items.find_or_create_by(
+        product: Product.find(product_id)
+      )
     end
 
     respond_to do |format|
@@ -89,6 +93,18 @@ class Admin::PromotionsController < ApplicationController
 
   # POST /admin/promotions/1/add_categories
   def add_categories
+    category_ids = params[:promotion][:category_ids_string]
+      .split(',').map(&:to_i)
+
+    category_ids.each do |category_id|
+      category = Category.find(category_id)
+      category.products.available.each do |product|
+        @promotion.promoted_items.find_or_create_by(
+          product: product
+        )
+      end
+    end
+
     respond_to do |format|
       format.js
     end

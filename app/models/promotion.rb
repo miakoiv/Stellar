@@ -21,6 +21,11 @@ class Promotion < ActiveRecord::Base
   validates :name, presence: true
 
   #---
+  # These attributes allow adding products and categories en masse
+  # through a string of comma-separated ids.
+  attr :product_ids_string, :category_ids_string
+
+  #---
   def available_products
     store.products.categorized.available - products
   end

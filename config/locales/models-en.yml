@@ -154,8 +154,8 @@ en:
         name: Name
         first_date: Starts at
         last_date: Expires at
-        product_ids: Products
-        category_ids: Categories
+        product_ids_string: Products to add
+        category_ids_string: Categories to add
       role:
         name: Name
       store:
