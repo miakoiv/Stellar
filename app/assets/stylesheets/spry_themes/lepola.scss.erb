@@ -71,7 +71,7 @@ $navbar-inverse-link-color: lighten(#1a3476, 55%);
       border-radius: $border-radius-base;
 
       &:hover {
-        @include box-shadow(0 0 8px $brand-primary);
+        @include box-shadow(0 0 8px $link-color);
         a { text-decoration: none; }
       }
       h3 {
@@ -123,12 +123,22 @@ $navbar-inverse-link-color: lighten(#1a3476, 55%);
       }
       .nav { display: none; }
       .tab-content {
-        .image:not(:first-child) {
-          @extend .hidden-print;
+        .image {
+          a {
+            display: block;
+
+            img {
+              @extend .img-responsive;
+
+              &:hover {
+                @include box-shadow(0 0 8px $link-color);
+              }
+            }
+          }
+          &:not(:first-child) {
+            @extend .hidden-print;
+          }
         }
-      }
-      img {
-        @extend .img-responsive, .img-thumbnail;
       }
     }
   }

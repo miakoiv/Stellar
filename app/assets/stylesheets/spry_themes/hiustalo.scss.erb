@@ -217,12 +217,22 @@ $brand-primary: #e6172b;
           bottom: 0;
         }
         .tab-content {
-          .image:not(:first-child) {
-            @extend .hidden-print;
+          .image {
+            a {
+              display: block;
+
+              img {
+                @extend .img-responsive;
+
+                &:hover {
+                  @include box-shadow(0 0 8px $link-color);
+                }
+              }
+            }
+            &:not(:first-child) {
+              @extend .hidden-print;
+            }
           }
-        }
-        img {
-          @extend .img-responsive, .img-thumbnail;
         }
       }
     }

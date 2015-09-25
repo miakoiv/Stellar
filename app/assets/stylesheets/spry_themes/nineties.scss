@@ -145,7 +145,7 @@
     }
     @media (min-width: $screen-sm) {
       li:hover {
-        @include box-shadow(0 0 8px $input-border-focus);
+        @include box-shadow(0 0 8px $link-color);
         max-height: 1000px;
       }
     }
@@ -222,12 +222,22 @@
         bottom: 0;
       }
       .tab-content {
-        .image:not(:first-child) {
-          @extend .hidden-print;
+        .image {
+          a {
+            display: block;
+
+            img {
+              @extend .img-responsive;
+
+              &:hover {
+                @include box-shadow(0 0 8px $link-color);
+              }
+            }
+          }
+          &:not(:first-child) {
+            @extend .hidden-print;
+          }
         }
-      }
-      img {
-        @extend .img-responsive;
       }
     }
   }
