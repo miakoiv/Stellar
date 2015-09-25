@@ -110,6 +110,10 @@ input[type=number] {
   margin-bottom: 15px;
 }
 
+.checkbox label {
+  padding-left: 0;
+}
+
 label.required:before {
   content: "❋ ";
   color: $state-danger-text;

@@ -24,6 +24,7 @@
 //= require bootstrap/tooltip
 //= require bootstrap/popover
 //= require bootstrap/dropdown
+//= require bootstrap-switch
 //= require twitter/bootstrap/rails/confirm
 //= require froala_editor.min.js
 //= require plugins/lists.min.js

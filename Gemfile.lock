@@ -53,6 +53,7 @@ GEM
       railties (>= 3.0)
     bootstrap-generators (3.3.4)
       railties (>= 3.1.0)
+    bootstrap-switch-rails (3.3.3)
     bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (5.0.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-datepicker-rails
   bootstrap-generators (~> 3.3.4)
+  bootstrap-switch-rails
   bootstrap_form
   byebug
   coffee-rails (~> 4.1.0)
