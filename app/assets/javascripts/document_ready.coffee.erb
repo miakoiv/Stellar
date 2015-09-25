@@ -21,6 +21,8 @@ $.fn.extend
       size: 'mini'
       onText: '<i class="fa fa-check"></i>'
       offText: '<i class="fa fa-remove"></i>'
+    .on 'switchChange.bootstrapSwitch', (e, state) ->
+      $(e.target).trigger 'change'
 
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
