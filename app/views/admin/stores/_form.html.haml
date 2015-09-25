@@ -23,6 +23,8 @@
       = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
           {}, {class: 'selectize'}
       = f.form_group do
+        = f.check_box :allow_shopping
+      = f.form_group do
         = f.check_box :admit_guests
       = f.select :shipping_cost_product_id,
           @store.products.virtual.map { |p| [p.to_s, p.id] },

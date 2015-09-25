@@ -18,12 +18,14 @@ class ApplicationAuthorizer < Authority::Authorizer
 
   # General authorization to perform any shopping related action.
   def self.authorizes_to_shop?(user, options = {})
-    user.is_site_manager?  ||
-    user.is_site_monitor?  ||
-    user.is_store_manager? ||
-    user.is_sales_rep?     ||
-    user.is_customer?      ||
-    user.is_guest? && user.store.admit_guests?
+    user.store.allow_shopping? && (
+      user.is_site_manager?  ||
+      user.is_site_monitor?  ||
+      user.is_store_manager? ||
+      user.is_sales_rep?     ||
+      user.is_customer?      ||
+      user.is_guest? && user.store.admit_guests?
+    )
   end
 
   # General authorization to access the admin dashboard.

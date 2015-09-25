@@ -70,7 +70,8 @@ class Admin::StoresController < ApplicationController
     def store_params
       params.require(:store).permit(
         :contact_person_id, :erp_number, :name, :host, :theme, :locale,
-        :admit_guests, :shipping_cost_product_id, :free_shipping_at
+        :allow_shopping, :admit_guests,
+        :shipping_cost_product_id, :free_shipping_at
       )
     end
 end

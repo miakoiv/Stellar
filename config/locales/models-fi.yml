@@ -167,7 +167,8 @@ fi:
         settings: Asetukset
         theme: Ulkoasun teema
         locale: Kieli
-        admit_guests: Pääsy vieraskäyttäjille
+        allow_shopping: Ostaminen sallittu
+        admit_guests: Ostaminen vieraskäyttäjänä
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
       user:

@@ -36,6 +36,8 @@
             @store.theme
         = static_control col(Store, :locale),
             {'en' => 'English', 'fi' => 'suomi'}[@store.locale]
+        = static_control col(Store, :allow_shopping),
+            @store.allow_shopping? ? icon('check-square-o') : icon('square-o')
         = static_control col(Store, :admit_guests),
             @store.admit_guests? ? icon('check-square-o') : icon('square-o')
         = static_control col(Store, :shipping_cost_product_id),

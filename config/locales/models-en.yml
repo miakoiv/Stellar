@@ -167,6 +167,7 @@ en:
         settings: Settings
         theme: Display theme
         locale: Language
+        allow_shopping: Shopping enabled
         admit_guests: Guest users may shop
         free_shipping_at: Free S&H beyond
         shipping_cost_product_id: S&H product entry
