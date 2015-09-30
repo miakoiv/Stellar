@@ -58,6 +58,10 @@ module ApplicationHelper
     content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
   end
 
+  def unit_price_string(price, unit)
+    "#{number_to_currency(price, unit: '€')} / #{unit}"
+  end
+
   # Pretty-prints a hash from Product#stock.
   def product_stock_string(hash)
     hash.values.map do |i|

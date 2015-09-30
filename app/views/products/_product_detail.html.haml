@@ -23,12 +23,18 @@
     %ul.customizations.list-group
       - product.customizations.each do |customization|
         %li.list-group-item
-          %span.badge= customization.custom_value
+          %span.badge
+            = customization.custom_value
+            = customization.custom_attribute.measurement_unit
           = customization.custom_attribute
 
     - if can_shop?
-      %p.product-pricing
-        = icon('tag', number_to_currency(product.sales_price, unit: '€'))
+      .product-pricing
+        %p= icon('tag', number_to_currency(product.sales_price, unit: '€'))
+        - unless product.unit_price.nil?
+          .unit-price
+            = unit_price_string(product.unit_price, product.base_unit)
+
     %p.product-code
       - if product.customer_code.present?
         = icon('barcode', product.customer_code, class: 'fa-lg')
