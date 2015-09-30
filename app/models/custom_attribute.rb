@@ -7,6 +7,7 @@ class CustomAttribute < ActiveRecord::Base
 
   #---
   belongs_to :store
+  belongs_to :measurement_unit
   has_many :custom_values, dependent: :destroy
 
   #---

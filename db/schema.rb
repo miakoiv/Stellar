@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923065748) do
+ActiveRecord::Schema.define(version: 20150930081930) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 20150923065748) do
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
 
   create_table "custom_attributes", force: :cascade do |t|
-    t.integer  "store_id",   limit: 4,   null: false
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "store_id",            limit: 4,                   null: false
+    t.integer  "measurement_unit_id", limit: 4
+    t.boolean  "unit_pricing",        limit: 1,   default: false, null: false
+    t.string   "name",                limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "custom_attributes", ["store_id"], name: "index_custom_attributes_on_store_id", using: :btree
@@ -126,6 +128,16 @@ ActiveRecord::Schema.define(version: 20150923065748) do
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
   add_index "inventory_items", ["product_id"], name: "index_inventory_items_on_product_id", using: :btree
   add_index "inventory_items", ["store_id"], name: "index_inventory_items_on_store_id", using: :btree
+
+  create_table "measurement_units", force: :cascade do |t|
+    t.integer  "base_unit_id", limit: 4
+    t.integer  "exponent",     limit: 4
+    t.string   "name",         limit: 255, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "measurement_units", ["base_unit_id"], name: "index_measurement_units_on_base_unit_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "order_id",              limit: 4,                           null: false

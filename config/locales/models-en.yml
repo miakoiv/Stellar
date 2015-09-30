@@ -65,6 +65,8 @@ en:
         custom_value_id: Value
         custom_values: Values
       custom_attribute:
+        measurement_unit_id: Measurement unit
+        unit_pricing: Use unit pricing
         name: Attribute
         custom_values: Values
       custom_value:

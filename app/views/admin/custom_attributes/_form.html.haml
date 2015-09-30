@@ -3,6 +3,23 @@
   .panel.panel-default
     %fieldset.panel-body{disabled: locked}
       = f.text_field :name
+      = f.select :measurement_unit_id,
+          MeasurementUnit.all.map { |u| [u.to_s, u.id] },
+          {include_blank: true}, {class: 'selectize'}
+      %fielset.unit_pricing.collapse{class: @custom_attribute.measurement_unit.present? ? 'in' : ''}
+        = f.form_group do
+          = f.check_box :unit_pricing,
+              disabled: @custom_attribute.measurement_unit.nil?
       - unless locked
         = f.form_group do
           = f.primary
+
+:coffee
+  $('#custom_attribute_measurement_unit_id').on 'change', (e) ->
+    if $(e.target).val()
+      $('.unit_pricing').collapse 'show'
+      $('#custom_attribute_unit_pricing').bootstrapSwitch 'disabled', false
+    else
+      $('.unit_pricing').collapse 'hide'
+      $('#custom_attribute_unit_pricing').bootstrapSwitch 'state', false
+      $('#custom_attribute_unit_pricing').bootstrapSwitch 'disabled', true

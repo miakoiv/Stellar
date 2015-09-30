@@ -65,6 +65,8 @@ fi:
         custom_value_id: Arvo
         custom_values: Arvot
       custom_attribute:
+        measurement_unit_id: Mittayksikkö
+        unit_pricing: Käytä yksikköhintaa
         name: Ominaisuus
         custom_values: Arvot
       custom_value:

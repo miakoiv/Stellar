@@ -9,12 +9,14 @@
     %thead
       %tr
         %th.col-xs-3= col(CustomAttribute, :name)
+        %th= col(CustomAttribute, :measurement_unit_id)
         %th= col(CustomAttribute, :custom_values)
         %th.hidden-print
 
     %tbody
       = content_tag_for :tr, @custom_attributes do |custom_attribute|
         %td= custom_attribute.name
+        %td= custom_attribute.measurement_unit
         %td= custom_attribute.custom_values.to_sentence
         %td.hidden-print.text-right
           = link_to icon('info', t('actions.show')), admin_custom_attribute_path(custom_attribute),

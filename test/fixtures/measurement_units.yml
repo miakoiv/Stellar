@@ -1,0 +1,18 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+kg:
+  id: 1
+  name: kg
+g:
+  id: 2
+  base_unit_id: 1
+  exponent: -3
+  name: g
+l:
+  id: 3
+  name: l
+ml:
+  id: 4
+  base_unit_id: 3
+  exponent: -3
+  name: ml

@@ -37,6 +37,21 @@ class Product < ActiveRecord::Base
     !(available_at.nil? || available_at.future?)
   end
 
+  # Checks assigned customizations for an attribute that declares unit pricing,
+  # returns calculated price per base unit.
+  def unit_price
+    customization = unit_pricing_customization
+    return nil if sales_price.nil? || customization.nil?
+    sales_price / (customization.custom_value.to_i * customization.custom_attribute.measurement_unit.factor)
+  end
+
+  # Returns the unit (if any) that unit pricing is based on.
+  def base_unit
+    customization = unit_pricing_customization
+    return nil if customization.nil?
+    customization.custom_attribute.measurement_unit.base_unit
+  end
+
   # Gathers product stock to a hash keyed by inventory.
   # Values are inventory items.
   def stock

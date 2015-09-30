@@ -11,4 +11,8 @@ class CustomValue < ActiveRecord::Base
   def to_s
     value
   end
+
+  def to_i
+    value.to_i
+  end
 end
