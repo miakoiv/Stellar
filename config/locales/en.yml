@@ -10,7 +10,7 @@ en:
     - Fri
     - Sat
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mar
@@ -35,8 +35,9 @@ en:
       default: "%Y-%m-%d"
       long: "%B %d, %Y"
       short: "%b %d"
+      iso: "%Y-%m-%d"
     month_names:
-    - 
+    -
     - January
     - February
     - March
@@ -202,4 +203,5 @@ en:
       default: "%a, %d %b %Y %H:%M:%S %z"
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
+      iso: "%Y-%m-%d %H:%M"
     pm: pm
