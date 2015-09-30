@@ -3,4 +3,4 @@
     = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('file-text-o', t('.new_page'))
 
-= render 'form'
+= render partial: 'form', locals: {locked: false}

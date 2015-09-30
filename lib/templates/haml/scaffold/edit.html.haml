@@ -7,4 +7,4 @@
     Show
   %h1= @<%= singular_table_name %>.to_s
 
-= render 'form'
+= render partial: 'form', locals: {locked: false}

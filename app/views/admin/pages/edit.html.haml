@@ -5,4 +5,4 @@
     = icon('eye', t('actions.view'))
   %h1= icon('file-text-o', @page)
 
-= render 'form'
+= render partial: 'form', locals: {locked: false}
