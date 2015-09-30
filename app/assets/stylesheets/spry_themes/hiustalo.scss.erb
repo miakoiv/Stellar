@@ -156,8 +156,8 @@ $brand-primary: #e6172b;
       .product-actions {
         @extend .text-right;
         position: absolute;
-        right: 15px;
-        top: 78px;
+        right: 30px;
+        top: 93px;
         z-index: 3;
 
         .form-inline {
@@ -178,8 +178,8 @@ $brand-primary: #e6172b;
       @include box-shadow(0 0 3px 0 rgba(0,0,0,0.666));
       border-top: 3px solid #000;
       background: #fff;
-      padding-top: 15px;
-      padding-bottom: 15px;
+      padding-top: 30px;
+      padding-bottom: 30px;
 
       .product-description {
         @extend .col-sm-6, .col-sm-push-6;
@@ -187,14 +187,21 @@ $brand-primary: #e6172b;
 
         .product-stock { display: none; }
         .body-text {
-          margin-top: 50px;
+          margin-top: 80px;
         }
         .product-pricing {
           position: absolute;
           top: 0;
           left: $grid-gutter-width/2;
-          @extend .lead;
-          @extend .text-primary;
+
+          p {
+            @extend .lead;
+            @extend .text-primary;
+            margin: 0;
+          }
+          .unit-price {
+            @extend .small, .text-right;
+          }
         }
         .product-code {
           @extend .text-right;
