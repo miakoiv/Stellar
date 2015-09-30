@@ -6,12 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Role.create(name: 'site_manager')
-Role.create(name: 'site_monitor')
-Role.create(name: 'store_manager')
-Role.create(name: 'sales_rep')
-Role.create(name: 'customer')
-Role.create(name: 'guest')
+Role.create(id: 1, name: 'site_manager')
+Role.create(id: 2, name: 'site_monitor')
+Role.create(id: 3, name: 'store_manager')
+Role.create(id: 4, name: 'sales_rep')
+Role.create(id: 5, name: 'customer')
+Role.create(id: 6, name: 'guest')
 
 ImageType.create(purpose: 'presentational', name: 'Presentational')
 ImageType.create(purpose: 'technical', name: 'Technical')
