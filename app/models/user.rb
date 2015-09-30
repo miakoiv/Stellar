@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def grantable_role_options
-    roles.first.grantable_roles.map { |r| [r.to_s, r.id] }
+    Role.all.map { |r| [r.to_s, r.id] }
   end
 
   def role_names
