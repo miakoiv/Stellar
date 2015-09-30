@@ -8,8 +8,8 @@
     %span.small= @order.to_s
 
 .row
-  .col-lg-5
-    = render 'form'
+  .col-lg-6
+    = render partial: 'form', locals: {locked: false}
 
-  .col-lg-7
+  .col-lg-6
     = render partial: 'admin/orders/components', object: @order, as: :order

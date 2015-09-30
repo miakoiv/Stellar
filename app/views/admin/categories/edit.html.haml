@@ -9,7 +9,7 @@
 
 .row
   .col-md-6
-    = render 'form'
+    = render partial: 'form', locals: {locked: false}
 
   .col-md-6
     = render partial: 'admin/images/edit_table', object: @category, as: :imageable

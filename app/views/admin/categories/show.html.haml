@@ -10,14 +10,7 @@
 
 .row
   .col-md-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(Category, :parent_category_id),
-            @category.parent_category
-        = static_control col(Category, :name),
-            @category.name
-        = static_control col(Category, :description) do
-          = @category.description.html_safe if @category.description.present?
+    = render partial: 'form', locals: {locked: true}
 
   .col-md-6
     = render partial: 'admin/images/table', object: @category, as: :imageable

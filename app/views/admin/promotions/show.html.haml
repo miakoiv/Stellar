@@ -8,16 +8,7 @@
     = icon('tag', @promotion)
 
 .row
-  .col-md-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(Promotion, :name),
-            @promotion.name
-        = static_control col(Promotion, :promotion_class),
-            @promotion.promotion_class
-        = static_control col(Promotion, :first_date),
-            @promotion.first_date.present? ? l(@promotion.first_date) : ''
-        = static_control col(Promotion, :last_date),
-            @promotion.last_date.present? ? l(@promotion.last_date) : ''
+  .col-md-5
+    = render partial: 'form', locals: {locked: true}
 
-  .col-md-6
+  .col-md-7

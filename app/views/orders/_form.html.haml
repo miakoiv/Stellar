@@ -1,20 +1,24 @@
 = bootstrap_form_for @order, layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  = f.static_control :order_type, label: col(Order, :order_type_id)
-  = f.text_field :customer_name
-  = f.text_field :customer_email
-  = f.text_field :company_name
-  = f.text_field :contact_person
-  %fieldset#shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
-    = f.date_field :shipping_at,
-        data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
-          'date-language' => I18n.locale}
-    = f.text_field :shipping_address
-    = f.text_field :shipping_postalcode, skip_label: true
-    = f.text_field :shipping_city, skip_label: true
-    = f.text_field :billing_address
-    = f.text_field :billing_postalcode, skip_label: true
-    = f.text_field :billing_city, skip_label: true
-  = f.text_area :notes, rows: 4
-  = f.form_group do
-    = f.primary
+  .panel.panel-default
+    %fieldset.panel-body{disabled: locked}
+      = f.select :order_type_id, current_store.order_type_options,
+          {}, {disabled: true, class: 'selectize'}
+      = f.text_field :customer_name
+      = f.text_field :customer_email
+      = f.text_field :company_name
+      = f.text_field :contact_person
+      %fieldset#shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
+        = f.date_field :shipping_at,
+            data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
+              'date-language' => I18n.locale}
+        = f.text_field :shipping_address
+        = f.text_field :shipping_postalcode, skip_label: true
+        = f.text_field :shipping_city, skip_label: true
+        = f.text_field :billing_address
+        = f.text_field :billing_postalcode, skip_label: true
+        = f.text_field :billing_city, skip_label: true
+      = f.text_area :notes, rows: 4
+      - unless locked
+        = f.form_group do
+          = f.primary

@@ -8,7 +8,7 @@
 
 .row
   .col-md-5
-    = render 'form'
+    = render partial: 'form', locals: {locked: false}
 
   .col-md-7
     %ul.nav.nav-tabs{role: 'tablist'}

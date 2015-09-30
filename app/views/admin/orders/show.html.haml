@@ -10,40 +10,8 @@
     %span.small= @order.to_s
 
 .row
-  .col-lg-5
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(Order, :order_type_id),
-            @order.approval ? @order.order_type_name : @order.order_type
-        = static_control col(Order, :ordered_at),
-            l(@order.ordered_at, format: :long)
-        = static_control col(Order, :customer_name),
-            @order.customer_name
-        = static_control col(Order, :customer_email),
-            @order.customer_email
-        = static_control col(Order, :company_name),
-            @order.company_name
-        = static_control col(Order, :contact_person),
-            @order.contact_person
-        #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
-          = static_control col(Order, :shipping_at),
-              @order.shipping_at.present? ? l(@order.shipping_at) : ''
-          = static_control col(Order, :shipping_address),
-              @order.shipping_address
-          = static_control nil,
-              @order.shipping_postalcode
-          = static_control nil,
-              @order.shipping_city
-          = static_control col(Order, :billing_address),
-              @order.billing_address
-          = static_control nil,
-              @order.billing_postalcode
-          = static_control nil,
-              @order.billing_city
-        = static_control col(Order, :notes) do
-          = simple_format(@order.notes)
-        = static_control col(Order, :approved_at),
-            @order.approval ? l(@order.approved_at, format: :long) : ''
+  .col-lg-6
+    = render partial: 'form', locals: {locked: true}
 
-  .col-lg-7
+  .col-lg-6
     = render partial: 'admin/orders/components', object: @order, as: :order

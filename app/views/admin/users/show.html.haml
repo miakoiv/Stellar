@@ -8,23 +8,14 @@
 
 .row
   .col-sm-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(User, :name),
-            @user.name
-        = static_control col(User, :email),
-            @user.email
-        = static_control col(User, :role_ids) do
-          - @user.role_names.each do |role_name|
-            %span.label.label-default= role_name
+    = render partial: 'form', locals: {locked: true}
 
   - unless @user.is_guest?
     .col-sm-6
-      .panel.panel-default
-        .panel-body.form-horizontal
-          = static_control col(User, :last_sign_in_at),
-              @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :long) : ''
-          = static_control col(User, :last_sign_in_ip),
-              @user.last_sign_in_ip
-          = static_control col(User, :sign_in_count),
-              @user.sign_in_count
+      = bootstrap_form_for [:admin, @user], layout: :horizontal,
+          label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+        .panel.panel-default
+          %fieldset.panel-body{disabled: true}
+            = f.text_field :last_sign_in_at, value: @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :iso) : ''
+            = f.text_field :last_sign_in_ip
+            = f.text_field :sign_in_count

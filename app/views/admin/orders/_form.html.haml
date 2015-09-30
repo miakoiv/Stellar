@@ -1,13 +1,13 @@
 = bootstrap_form_for [:admin, @order], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    .panel-body
-      = f.static_control :order_type, label: col(Order, :order_type_id)
-      = f.static_control label: col(Order, :ordered_at) do
-        = l(@order.ordered_at, format: :long)
-      = f.text_field :customer_name
-      = f.text_field :customer_email
+    %fieldset.panel-body{disabled: locked}
+      = f.select :order_type_id, current_store.order_type_options,
+          {}, {disabled: true, class: 'selectize'}
+      = f.text_field :ordered_at, value: l(@order.ordered_at.to_date, format: :iso), disabled: true
       %fieldset{disabled: @order.approval}
+        = f.text_field :customer_name
+        = f.text_field :customer_email
         = f.text_field :company_name
         = f.text_field :contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
@@ -23,5 +23,6 @@
         = f.text_area :notes, rows: 4
       = f.form_group :approval do
         = f.check_box :approval, label: col(Order, :approved)
-      = f.form_group do
-        = f.primary
+      - unless locked
+        = f.form_group do
+          = f.primary

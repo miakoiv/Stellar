@@ -7,9 +7,7 @@
 
 .row
   .col-sm-5
-    .panel.panel-default
-      .panel-body
-        = render partial: 'form'
+    = render partial: 'form', locals: {locked: false}
 
   .col-sm-7
     = render partial: 'order_items/table', object: @order, as: :order

@@ -1,7 +1,7 @@
 = bootstrap_form_for [:admin, @product], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    .panel-body
+    %fieldset.panel-body{disabled: locked}
       = f.select :category_id, current_store.category_options,
           {include_blank: true}, {class: 'selectize'}
       = f.form_group do
@@ -17,12 +17,14 @@
       = f.date_field :deleted_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.text_area :memo, rows: 4
-      = f.form_group do
-        = f.primary
+      - unless locked
+        = f.form_group do
+          = f.primary
 
 :coffee
   $('#product_description').editable
     inlineMode: false
+    minHeight: 200
     maxHeight: 400
     buttons: [
       'bold', 'italic', 'underline', 'formatBlock', 'align',

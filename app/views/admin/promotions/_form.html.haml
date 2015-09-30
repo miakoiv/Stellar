@@ -1,12 +1,13 @@
 = bootstrap_form_for [:admin, @promotion], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    .panel-body
+    %fieldset.panel-body{disabled: locked}
       = f.text_field :name
       = f.text_field :promotion_class
       = f.date_field :first_date,
         data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.date_field :last_date,
         data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-      = f.form_group do
-        = f.primary
+      - unless locked
+        = f.form_group do
+          = f.primary

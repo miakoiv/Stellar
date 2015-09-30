@@ -9,10 +9,7 @@
 
 .row
   .col-md-6
-    .panel.panel-default
-      .panel-body.form-horizontal
-        = static_control col(CustomAttribute, :name),
-            @custom_attribute.name
+    = render partial: 'form', locals: {locked: true}
 
   .col-md-6
     = render partial: 'admin/custom_values/table', object: @custom_attribute, as: :custom_attribute

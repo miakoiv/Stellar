@@ -102,16 +102,34 @@ i.icon {
   }
 }
 
-input[type=number] {
-  min-width: 60px;
-}
-
 .nav-tabs {
   margin-bottom: 15px;
 }
 
 .checkbox label {
   padding-left: 0;
+}
+
+input[type=number] {
+  min-width: 60px;
+}
+
+.form-control[disabled],
+fieldset[disabled] .form-control,
+fieldset[disabled] .input-group .input-group-addon,
+.selectize-control .selectize-input.disabled,
+.selectize-control .selectize-input.disabled > div {
+  color: $input-color !important;
+  background: #fff;
+  opacity: 1;
+  border-color: transparent;
+  box-shadow: none;
+}
+fieldset[disabled] .help-block {
+  display: none;
+}
+.selectize-control.single .selectize-input.disabled::after {
+  display: none;
 }
 
 label.required:before {
