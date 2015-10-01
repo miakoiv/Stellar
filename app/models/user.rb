@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable,
+    request_keys: [:host]
 
   #---
   # Users are restricted to interacting with only one store.
@@ -24,6 +25,15 @@ class User < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true, if: :password_required?
+  validates :password, confirmation: true
+
+  #---
+  # Override Devise hook to find users in the scope of a store.
+  def self.find_for_authentication(warden_conditions)
+    joins(:store).where(email: warden_conditions[:email], stores: {host: warden_conditions[:host]}).first
+  end
 
   #---
   # A user's shopping cart is technically an order singleton in the scope of
@@ -55,4 +65,9 @@ class User < ActiveRecord::Base
   def to_s
     "#{name} <#{email}>"
   end
+
+  protected
+    def password_required?
+      !persisted? || !password.nil? || !password_confirmation.nil?
+    end
 end
