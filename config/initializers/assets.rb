@@ -11,14 +11,12 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
-  spry_themes/cards.css
-  spry_themes/default.css
-  spry_themes/emek.css
-  spry_themes/hiustalo.css
-  spry_themes/hiustalo.js
-  spry_themes/lepola.css
-  spry_themes/lepola.js
-  spry_themes/nineties.css
-  spry_themes/saarimedia.css
+  spry_themes/cards.css spry_themes/cards.js
+  spry_themes/default.css spry_themes/default.js
+  spry_themes/emek.css spry_themes/emek.js
+  spry_themes/hiustalo.css spry_themes/hiustalo.js
+  spry_themes/lepola.css spry_themes/lepola.js
+  spry_themes/nineties.css spry_themes/nineties.js
+  spry_themes/saarimedia.css spry_themes/saarimedia.js
   email/mailgun.css
 )
