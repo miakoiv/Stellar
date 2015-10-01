@@ -8,16 +8,14 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1
-        %th= col(User, :name)
-        %th= col(User, :email)
-        %th.col-xs-2= col(User, :role_ids)
-        %th.col-xs-3.hidden-print
+        %th.col-xs-2= col(User, :name)
+        %th.col-xs-3= col(User, :email)
+        %th= col(User, :role_ids)
+        %th.col-xs-2.hidden-print
 
     %tbody
       - @users.each do |user|
         %tr
-          %td= image_variant_tag(user.store.cover_image)
           %td= user.name
           %td= user.email
           %td

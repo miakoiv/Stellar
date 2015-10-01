@@ -48,14 +48,12 @@ class User < ActiveRecord::Base
       )
   end
 
-  # Superiority over another user is decided on the pecking order
-  # of their highest ranked roles.
-  def superior_to?(user)
-    roles.first.id < user.roles.first.id
-  end
-
+  # Roles that a user manager may grant to other users. The superuser
+  # may promote others to user managers and superusers.
   def grantable_role_options
-    Role.all.map { |r| [r.to_s, r.id] }
+    roles = [:customer, :manager, :contact_person, :dashboard_access, :attribute_editor, :category_editor, :order_editor, :product_editor, :promotion_editor]
+    roles += [:user_manager, :superuser] if is_superuser?
+    Role.where(name: roles).map { |r| [r.to_s, r.id] }
   end
 
   def role_names

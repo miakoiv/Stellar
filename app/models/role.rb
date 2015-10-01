@@ -21,12 +21,6 @@ class Role < ActiveRecord::Base
   end
 
   #---
-  # Users permitted to create new users may grant them
-  # roles that come later in the pecking order.
-  def grantable_roles
-    Role.where('id > ?', id)
-  end
-
   def to_s
     name.humanize
   end

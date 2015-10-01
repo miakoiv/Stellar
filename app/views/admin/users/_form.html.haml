@@ -7,9 +7,9 @@
       - if @user.new_record?
         = f.password_field :password
         = f.password_field :password_confirmation
-      = f.select :role_ids,
-          current_user.grantable_role_options,
-          {}, {multiple: true, class: 'selectize'}
+      %fieldset{disabled: !current_user.is_user_manager?}
+        = f.select :role_ids, current_user.grantable_role_options,
+            {}, {multiple: true, class: 'selectize'}
       - unless locked
         = f.form_group do
           = f.primary
