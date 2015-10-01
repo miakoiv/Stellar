@@ -76,8 +76,6 @@ fi:
       new:
         new_store: Uusi kauppa
       form:
-        contact_person_help_html: |
-          Käyttäjä joka on <span class="label label-default">Store manager</span>
         slug_help_html: Tunniste luodaan automaattisesti.
     users:
       index:

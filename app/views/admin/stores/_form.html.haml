@@ -12,8 +12,8 @@
     #tab-store.tab-pane.active{role: 'tabpanel'}
       = f.text_field :name
       = f.select :contact_person_id,
-          User.by_role(:store_manager).map { |u| [u.name, u.id] },
-          {help: t('.contact_person_help_html')}, {class: 'selectize'}
+          User.by_role(:contact_person).map { |u| [u.name, u.id] },
+          {}, {class: 'selectize'}
       = f.text_field :host, prepend: 'http://'
       = f.text_field :erp_number
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')
