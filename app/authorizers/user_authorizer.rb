@@ -15,6 +15,6 @@ class UserAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    user.is_user_manager? || user == current_user
+    user.is_user_manager? || user == resource
   end
 end
