@@ -47,11 +47,23 @@ class ApplicationController < ActionController::Base
   helper_method :shopping_cart
 
   # Convenience method to determine if the current user may shop
-  # in the current store.
+  # at the current store.
   def can_shop?
     current_user.can?(:shop, store: current_store)
   end
   helper_method :can_shop?
+
+  # Convenience method to determine if the current user is a manager
+  def can_manage?
+    current_user.has_role?(:manager)
+  end
+  helper_method :can_manage?
+
+  # Convenience method to determine if the current user has dashboard access
+  def can_access_dashboard?
+    current_user.has_role?(:dashboard_access)
+  end
+  helper_method :can_access_dashboard?
 
   # Find the guest user stored in session, or create it.
   def guest_user

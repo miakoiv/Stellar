@@ -7,25 +7,15 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def self.readable_by?(user)
-    user.is_site_manager?  ||
-    user.is_site_monitor?  ||
-    user.is_store_manager? ||
-    user.is_sales_rep?     ||
-    false
+    user.is_order_editor?
   end
 
   def self.updatable_by?(user)
-    user.is_site_manager?  ||
-    user.is_store_manager? ||
-    user.is_sales_rep?     ||
-    false
+    user.is_order_editor?
   end
 
   def self.deletable_by?(user)
-    user.is_site_manager?  ||
-    user.is_store_manager? ||
-    user.is_sales_rep?     ||
-    false
+    user.is_order_editor?
   end
 
   def readable_by?(user)

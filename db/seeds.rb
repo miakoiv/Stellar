@@ -6,17 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Role.create(id: 1, name: 'site_manager')
-Role.create(id: 2, name: 'site_monitor')
-Role.create(id: 3, name: 'store_manager')
-Role.create(id: 4, name: 'sales_rep')
-Role.create(id: 5, name: 'customer')
-Role.create(id: 6, name: 'guest')
-
-ImageType.create(purpose: 'presentational', name: 'Presentational')
-ImageType.create(purpose: 'technical', name: 'Technical')
-ImageType.create(purpose: 'document', name: 'Document', bitmap: false)
-
 #-----------------------------------------------------------------------------
 # General inventory with fuzzy availability, and order types for delivery
 # with or without online payment.
@@ -99,36 +88,13 @@ User.create(
   store_id: 1,
   name: 'Sami Rosenblad',
   email: 'rosenblad@gmail.com',
-  password: 'rush2112',
-  role_ids: [1],
+  password: 'interior thin pale character',
+  role_ids: [10,30,40,50,60,70,80,90,100,110],
 )
 User.create(
   store_id: 1,
   name: 'Mikko Kaukojärvi',
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
   password: 'powerrangers',
-  role_ids: [3],
+  role_ids: [10,30,35,50,60,70,80,90,100,110],
 )
-
-#-----------------------------------------------------------------------------
-# Intersport Finland
-#
-Store.create(
-  id: 2,
-  contact_person_id: 2,
-  erp_number: 110007,
-  name: 'Intersport Finland',
-  theme: 'default',
-  inventory_ids: [1]
-)
-
-Category.create(store_id: 2, name: 'Sokkelit')
-Category.create(store_id: 2, name: 'Korit')
-Category.create(store_id: 2, name: 'Modifiointiosat')
-Category.create(store_id: 2, name: 'Keskilattiakalusteet')
-Category.create(store_id: 2, name: 'Palvelupisteet')
-Category.create(store_id: 2, name: 'Jalkine')
-Category.create(store_id: 2, name: 'Sovituskopit')
-Category.create(store_id: 2, name: 'Kassat')
-Category.create(store_id: 2, name: 'Paneeliseinä')
-Category.create(store_id: 2, name: 'Muut kalusteet')

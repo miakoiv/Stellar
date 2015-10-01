@@ -1,7 +1,7 @@
 %ul.nav.navbar-nav
   = active_link_to icon('cubes', title(Store)),
       store_path, wrap_tag: :li
-  - if current_user.can?(:has_dashboard)
+  - if can_access_dashboard?
     = active_link_to icon('tachometer', t('admin.dashboard.title')),
         admin_dashboard_path, wrap_tag: :li
   - if current_user.can_read?(Order)

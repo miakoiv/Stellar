@@ -16,25 +16,11 @@ class ApplicationAuthorizer < Authority::Authorizer
     false
   end
 
-  # General authorization to perform any shopping related action.
-  # The current store is provided as an option.
+  # General authorization to perform any shopping related action
+  # at the specified store, given in options.
   def self.authorizes_to_shop?(user, options = {})
     current_store = options[:store]
-    current_store.allow_shopping? && (
-      user.is_site_manager?  ||
-      user.is_site_monitor?  ||
-      user.is_store_manager? ||
-      user.is_sales_rep?     ||
-      user.is_customer?      ||
-      user.is_guest? && current_store.admit_guests?
-    )
-  end
-
-  # General authorization to access the admin dashboard.
-  def self.authorizes_to_has_dashboard?(user, options = {})
-    user.is_site_manager?  ||
-    user.is_site_monitor?  ||
-    user.is_store_manager? ||
-    false
+    return false unless current_store.allow_shopping?
+    user.is_customer? || (user.is_guest? && current_store.admit_guests?)
   end
 end

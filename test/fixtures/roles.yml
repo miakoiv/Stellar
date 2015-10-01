@@ -1,0 +1,38 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+customer:
+  id: 10
+  name: customer
+guest:
+  id: 20
+  name: guest
+manager:
+  id: 30
+  name: manager
+contact_person:
+  id: 35
+  name: contact_person
+superuser:
+  id: 40
+  name: superuser
+dashboard_access:
+  id: 50
+  name: dashboard_access
+attribute_editor:
+  id: 60
+  name: attribute_editor
+category_editor:
+  id: 70
+  name: category_editor
+order_editor:
+  id: 80
+  name: order_editor
+product_editor:
+  id: 90
+  name: product_editor
+promotion_editor:
+  id: 100
+  name: promotion_editor
+user_manager:
+  id: 110
+  name: user_manager

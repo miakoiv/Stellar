@@ -9,5 +9,5 @@
       = render partial: 'store/cart_badge'
     = active_link_to title(Order, count: 2), orders_path, wrap_tag: :li
 %ul.nav.navbar-nav.navbar-right
-  - if current_user && current_user.can_read?(Order)
+  - if current_user && can_manage?
     %li= link_to icon('cog', t('admin.manage')), admin_orders_path
