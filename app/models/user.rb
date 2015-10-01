@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :orders
 
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
-  scope :non_guests, -> { joins(:roles).where.not(roles: {name: 'guest'}) }
+  scope :non_guests, -> { includes(:roles).where.not(roles: {name: 'guest'}) }
 
   #---
   validates :name, presence: true
