@@ -27,6 +27,9 @@ category_editor:
 order_editor:
   id: 80
   name: order_editor
+page_editor:
+  id: 85
+  name: page_editor
 product_editor:
   id: 90
   name: product_editor
