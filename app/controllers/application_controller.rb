@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  # Pages must be available to main navigation at all times.
+  before_action :load_pages
+  def load_pages
+    @pages = current_store.pages.top_level.ordered
+  end
+
   # Authenticate user, but skip authentication
   # if the current store admits guests.
   def authenticate_user_or_skip!

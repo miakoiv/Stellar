@@ -1,3 +1,7 @@
-%ul#page-nav.nav.nav-tabs{role: 'navigation'}
-  - @pages.each do |page|
-    = active_link_to page, show_page_path(page), wrap_tag: :li
+- @pages.each do |page|
+  %li{class: active_link_to_class(show_page_path(page))}
+    = active_link_to page, show_page_path(page)
+    - if page.sub_pages.any?
+      %ul.nav.subnav
+        - page.sub_pages.each do |sub_page|
+          = active_link_to sub_page, show_page_path(sub_page), wrap_tag: :li

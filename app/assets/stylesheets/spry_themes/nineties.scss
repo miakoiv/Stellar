@@ -11,13 +11,8 @@
 .nineties {
   overflow-y: scroll;
 
-  #page-nav {
-    margin-top: 20px;
-  }
-  #sub-page-nav {
-    display: none;
-  }
   .page-content {
+    padding-top: 30px;
 
     img {
       @extend .img-responsive;

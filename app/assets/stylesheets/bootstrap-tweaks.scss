@@ -52,6 +52,27 @@ html {
   }
 }
 
+// subnavs that open on hover but look identical to real dropdowns
+.subnav {
+  @extend .dropdown-menu;
+  margin: 0;
+}
+.navbar-nav > li:hover > ul.subnav {
+  display: block;
+}
+
+@media (max-width: $screen-xs) {
+  .subnav {
+    position: static;
+    left: auto;
+    display: block;
+    float: none;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
 .modal-body {
   overflow-y: scroll;
 }
