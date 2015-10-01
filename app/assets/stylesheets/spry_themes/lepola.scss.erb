@@ -34,6 +34,14 @@ $navbar-inverse-link-color: lighten(#1a3476, 55%);
     width: auto;
   }
 
+  .page-content {
+    padding-top: 30px;
+
+    img {
+      @extend .img-responsive;
+    }
+  }
+
   ul.categories {
     @extend .nav, .nav-pills;
     z-index: $zindex-navbar;

@@ -11,6 +11,14 @@
 .default {
   overflow-y: scroll;
 
+  .page-content {
+    padding-top: 30px;
+
+    img {
+      @extend .img-responsive;
+    }
+  }
+
   ul.categories {
     list-style: none;
     margin-bottom: 20px;
