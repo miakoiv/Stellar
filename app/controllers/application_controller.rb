@@ -46,20 +46,31 @@ class ApplicationController < ActionController::Base
   end
   helper_method :shopping_cart
 
-  # Convenience method to determine if the current user may shop
-  # at the current store.
+  # Can the current user perform shopping at current store?
   def can_shop?
     current_user.can?(:shop, store: current_store)
   end
   helper_method :can_shop?
 
-  # Convenience method to determine if the current user is a manager
+  # Can the current user see pricing?
+  def can_see_pricing?
+    current_user.has_role?(:see_pricing)
+  end
+  helper_method :can_see_pricing?
+
+  # Can the current user see stock numbers?
+  def can_see_stock?
+    current_user.has_role?(:see_stock)
+  end
+  helper_method :can_see_stock?
+
+  # Can the current user manage her store?
   def can_manage?
     current_user.has_role?(:manager)
   end
   helper_method :can_manage?
 
-  # Convenience method to determine if the current user has dashboard access
+  # Can the current user access the dashboard at her store?
   def can_access_dashboard?
     current_user.has_role?(:dashboard_access)
   end
@@ -76,7 +87,7 @@ class ApplicationController < ActionController::Base
         store: current_store,
         name: 'Guest',
         email: "guest_#{Time.now.to_i}#{rand(100)}@leasit.info",
-        roles: [Role.guest]
+        roles: Role.guest_roles
       )
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id

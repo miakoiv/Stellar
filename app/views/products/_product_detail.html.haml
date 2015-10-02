@@ -9,7 +9,7 @@
 .product-body
 
   .product-description
-    - if can_shop?
+    - if can_see_stock?
       %p.product-stock
         = product_stock_string(product.stock)
 
@@ -28,7 +28,7 @@
             = customization.custom_attribute.measurement_unit
           = customization.custom_attribute
 
-    - if can_shop?
+    - if can_see_pricing?
       .product-pricing
         %p= icon('tag', humanized_money_with_symbol(product.sales_price))
         - unless product.unit_price.nil?

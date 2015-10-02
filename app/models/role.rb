@@ -16,8 +16,8 @@ class Role < ActiveRecord::Base
     allow_nil: true
 
   #---
-  def self.guest
-    find_by(name: 'guest')
+  def self.guest_roles
+    where(name: [:guest, :see_pricing])
   end
 
   #---

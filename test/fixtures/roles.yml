@@ -1,11 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-customer:
-  id: 10
-  name: customer
 guest:
-  id: 20
+  id: 10
   name: guest
+customer:
+  id: 20
+  name: customer
+see_pricing:
+  id: 21
+  name: see_pricing
+see_stock:
+  id: 22
+  name: see_stock
 manager:
   id: 30
   name: manager
