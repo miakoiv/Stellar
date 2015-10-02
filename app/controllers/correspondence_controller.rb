@@ -13,6 +13,6 @@ class CorrespondenceController < ApplicationController
     end
     CorrespondenceMailer.correspondence(@store, @fields).deliver_later
 
-    redirect_to store_path, notice: t('.thank_you')
+    redirect_to root_path, notice: t('.thank_you')
   end
 end
