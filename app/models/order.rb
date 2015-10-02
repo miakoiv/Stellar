@@ -135,7 +135,6 @@ class Order < ActiveRecord::Base
     end
 
     def calculated_shipping_cost
-      logger.info "*** total #{total}"
       default_price = store.shipping_cost_product.sales_price
       return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at
       return 0.00
