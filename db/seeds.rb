@@ -89,12 +89,12 @@ User.create(
   name: 'Sami Rosenblad',
   email: 'rosenblad@gmail.com',
   password: 'interior thin pale character',
-  role_ids: [10,30,40,50,60,70,80,90,100,110],
+  role_ids: [1,2,3,10,12,13,14,15,16,17,18,19,99],
 )
 User.create(
   store_id: 1,
   name: 'Mikko Kaukojärvi',
   email: 'mikko.kaukojarvi@tjt-kaluste.fi',
   password: 'powerrangers',
-  role_ids: [10,30,35,50,60,70,80,90,100,110],
+  role_ids: [1,2,3,10,11,12,13,14,15,16,17,18,19],
 )
