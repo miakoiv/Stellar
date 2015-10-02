@@ -149,6 +149,7 @@ fieldset[disabled] .input-group .input-group-addon,
 fieldset[disabled] .help-block {
   display: none;
 }
+.selectize-control.plugin-remove_button .selectize-input.disabled .remove,
 .selectize-control.single .selectize-input.disabled::after {
   display: none;
 }
