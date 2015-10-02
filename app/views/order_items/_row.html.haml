@@ -8,5 +8,6 @@
       = order_item.amount
   %td.text-right
     - unless order_item.virtual?
-      = number_to_currency(order_item.price, unit: '€')
-  %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
+      = humanized_money_with_symbol order_item.price
+  %td.text-right
+    = humanized_money_with_symbol order_item.subtotal

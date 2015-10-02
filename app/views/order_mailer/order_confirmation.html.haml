@@ -65,13 +65,15 @@
                           %b= order_item.product.title
                           = order_item.product.subtitle
                         %td.alignright= order_item.amount
-                        %td.alignright= number_to_currency(order_item.product.sales_price, unit: '€')
-                        %td.alignright= number_to_currency(order_item.subtotal, unit: '€')
+                        %td.alignright
+                          = humanized_money_with_symbol order_item.product.sales_price
+                        %td.alignright
+                          = humanized_money_with_symbol order_item.subtotal
                     %tr.total
                       %td{colspan: 3}
                       %td.alignright= Order.human_attribute_name(:grand_total)
-                      %td.alignright= number_to_currency(@order.grand_total, unit: '€')
-
+                      %td.alignright
+                        = humanized_money_with_symbol @order.grand_total
 
 .footer
   %table{width: '100%'}

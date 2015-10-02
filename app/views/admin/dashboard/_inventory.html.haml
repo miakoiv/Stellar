@@ -17,5 +17,5 @@
           %strong= item.product.title
           = item.product.subtitle
         %td= item.amount
-        %td.text-right= number_to_currency(item.value, unit: '€')
-        %td.text-right= number_to_currency(item.total_value, unit: '€')
+        %td.text-right= humanized_money_with_symbol item.value
+        %td.text-right= humanized_money_with_symbol item.total_value

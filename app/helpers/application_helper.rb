@@ -59,7 +59,7 @@ module ApplicationHelper
   end
 
   def unit_price_string(price, unit)
-    "#{number_to_currency(price, unit: '€')} / #{unit}"
+    "#{humanized_money_with_symbol price} / #{unit}"
   end
 
   # Pretty-prints a hash from Product#stock.

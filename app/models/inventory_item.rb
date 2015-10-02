@@ -2,6 +2,9 @@
 
 class InventoryItem < ActiveRecord::Base
 
+  monetize :value_cents, allow_nil: true
+
+  #---
   belongs_to :inventory
   belongs_to :store
   belongs_to :product
@@ -11,6 +14,7 @@ class InventoryItem < ActiveRecord::Base
     joins(:product).where('products.id IN (?)', products.pluck(:id))
   }
 
+  #---
   # The adjustment of an inventory item is the sum of products
   # ordered in current orders that target the inventory this item
   # resides in.

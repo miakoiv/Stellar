@@ -15,7 +15,7 @@
         .form-group
           %label.col-sm-4.control-label= t('admin.dashboard.inventory.total_value')
           .col-sm-8
-            %p.form-control-static= number_to_currency(@inventory[1], unit: '€')
+            %p.form-control-static= humanized_money_with_symbol @inventory[1]
         .form-group
           %label.col-sm-4.control-label= t('admin.dashboard.inventory.items')
           .col-sm-8

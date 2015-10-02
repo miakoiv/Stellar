@@ -10,6 +10,7 @@
     %tfoot
       %tr
         %th.text-right{colspan: 4}= col(Order, :grand_total)
-        %th.text-right= number_to_currency(@order.grand_total, unit: '€')
+        %th.text-right
+          = humanized_money_with_symbol @order.grand_total
     %tbody
       = render partial: 'order_items/row', collection: order.order_items, as: :order_item

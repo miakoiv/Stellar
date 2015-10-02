@@ -64,7 +64,7 @@ namespace :matfox do
             store = Store.find_by(erp_number: row[:erp_number])
             next if store.nil?
             product = find_or_create_product(store, code, data)
-            product.update_columns(
+            product.update(
               customer_code: row[:customer_code],
               sales_price: row[:sales_price] || data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
@@ -83,7 +83,7 @@ namespace :matfox do
             store = Store.find_by(slug: slug)
             next if store.nil?
             product = find_or_create_product(store, code, data)
-            product.update_columns(
+            product.update(
               sales_price: data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )

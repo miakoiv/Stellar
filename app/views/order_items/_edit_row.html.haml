@@ -10,8 +10,9 @@
         = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
   %td.text-right
     - unless order_item.virtual?
-      = number_to_currency(order_item.price, unit: '€')
-  %td.text-right= number_to_currency(order_item.subtotal, unit: '€')
+      = humanized_money_with_symbol order_item.price
+  %td.text-right
+    = humanized_money_with_symbol order_item.subtotal
   %td.text-right
     - unless order_item.virtual?
       = link_to icon('remove', t('actions.delete')), order_item_path(order_item),

@@ -30,7 +30,7 @@
 
     - if can_shop?
       .product-pricing
-        %p= icon('tag', number_to_currency(product.sales_price, unit: '€'))
+        %p= icon('tag', humanized_money_with_symbol(product.sales_price))
         - unless product.unit_price.nil?
           .unit-price
             = unit_price_string(product.unit_price, product.base_unit)

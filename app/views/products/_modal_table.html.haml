@@ -16,7 +16,8 @@
         %td
           %strong= product.title
           = product.subtitle
-        %td= number_to_currency(product.sales_price, unit: '€')
+        %td
+          = humanized_money_with_symbol product.sales_price
         %td.hidden-print.text-right
           - if can_shop?
             = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do

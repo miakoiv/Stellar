@@ -25,6 +25,9 @@ gem 'human_attribute_values'
 # Friendly ids
 gem 'friendly_id'
 
+# Moneh!
+gem 'money-rails'
+
 # Keyset pagination to get previous/next record
 gem 'order_query', '~> 0.3.2'
 

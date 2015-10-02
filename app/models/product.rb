@@ -9,6 +9,8 @@ class Product < ActiveRecord::Base
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
+  monetize :cost_cents, allow_nil: true
+  monetize :sales_price_cents, allow_nil: true
 
   #---
   belongs_to :store

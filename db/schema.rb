@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001102652) do
+ActiveRecord::Schema.define(version: 20151001133016) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
@@ -115,14 +115,14 @@ ActiveRecord::Schema.define(version: 20151001102652) do
   add_index "inventories_stores", ["inventory_id", "store_id"], name: "index_inventories_stores_on_inventory_id_and_store_id", unique: true, using: :btree
 
   create_table "inventory_items", force: :cascade do |t|
-    t.integer  "inventory_id", limit: 4,                           null: false
-    t.integer  "store_id",     limit: 4,                           null: false
-    t.integer  "product_id",   limit: 4,                           null: false
+    t.integer  "inventory_id", limit: 4,   null: false
+    t.integer  "store_id",     limit: 4,   null: false
+    t.integer  "product_id",   limit: 4,   null: false
     t.string   "shelf",        limit: 255
     t.integer  "amount",       limit: 4
-    t.decimal  "value",                    precision: 8, scale: 2
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "value_cents",  limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
@@ -140,13 +140,13 @@ ActiveRecord::Schema.define(version: 20151001102652) do
   add_index "measurement_units", ["base_unit_id"], name: "index_measurement_units_on_base_unit_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
-    t.integer  "order_id",              limit: 4,                           null: false
-    t.integer  "product_id",            limit: 4,                           null: false
+    t.integer  "order_id",              limit: 4,   null: false
+    t.integer  "product_id",            limit: 4,   null: false
     t.integer  "amount",                limit: 4
-    t.decimal  "price",                             precision: 8, scale: 2
+    t.integer  "price_cents",           limit: 4
     t.integer  "priority",              limit: 4
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "product_code",          limit: 255
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
@@ -218,25 +218,25 @@ ActiveRecord::Schema.define(version: 20151001102652) do
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer  "store_id",                limit: 4,                                             null: false
+    t.integer  "store_id",                limit: 4,                     null: false
     t.integer  "category_id",             limit: 4
-    t.boolean  "virtual",                 limit: 1,                             default: false, null: false
+    t.boolean  "virtual",                 limit: 1,     default: false, null: false
     t.string   "code",                    limit: 255
     t.string   "customer_code",           limit: 255
     t.string   "title",                   limit: 255
-    t.string   "slug",                    limit: 255,                                           null: false
+    t.string   "slug",                    limit: 255,                   null: false
     t.string   "subtitle",                limit: 255
     t.text     "description",             limit: 65535
     t.text     "memo",                    limit: 65535
-    t.decimal  "cost",                                  precision: 8, scale: 2
+    t.integer  "cost_cents",              limit: 4
     t.date     "cost_modified_at"
-    t.decimal  "sales_price",                           precision: 8, scale: 2
+    t.integer  "sales_price_cents",       limit: 4
     t.date     "sales_price_modified_at"
-    t.integer  "priority",                limit: 4,                             default: 0,     null: false
+    t.integer  "priority",                limit: 4,     default: 0,     null: false
     t.date     "available_at"
     t.date     "deleted_at"
-    t.datetime "created_at",                                                                    null: false
-    t.datetime "updated_at",                                                                    null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -245,13 +245,13 @@ ActiveRecord::Schema.define(version: 20151001102652) do
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
 
   create_table "promoted_items", force: :cascade do |t|
-    t.integer  "promotion_id",     limit: 4,                                     null: false
-    t.integer  "product_id",       limit: 4,                                     null: false
-    t.decimal  "price",                      precision: 8, scale: 2
+    t.integer  "promotion_id",     limit: 4,             null: false
+    t.integer  "product_id",       limit: 4,             null: false
+    t.integer  "price_cents",      limit: 4
     t.integer  "amount_available", limit: 4
-    t.integer  "amount_sold",      limit: 4,                         default: 0, null: false
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
+    t.integer  "amount_sold",      limit: 4, default: 0, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "promoted_items", ["product_id"], name: "index_promoted_items_on_product_id", using: :btree

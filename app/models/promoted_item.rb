@@ -5,6 +5,9 @@
 #
 class PromotedItem < ActiveRecord::Base
 
+  monetize :price_cents, allow_nil: true
+  #---
+
   belongs_to :promotion
   belongs_to :product
 
