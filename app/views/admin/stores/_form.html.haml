@@ -12,7 +12,7 @@
     #tab-store.tab-pane.active{role: 'tabpanel'}
       = f.text_field :name
       = f.select :contact_person_id,
-          User.by_role(:contact_person).map { |u| [u.name, u.id] },
+          User.by_role(:contact_person).map { |u| [u.to_s, u.id] },
           {}, {class: 'selectize'}
       = f.text_field :host, prepend: 'http://'
       = f.text_field :erp_number
