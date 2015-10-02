@@ -1,5 +1,5 @@
 fi:
   order_mailer:
     order_confirmation:
-      subject: "%{store} – Tilausvahvistus"
+      subject: "%{store} – Kuitti"
     thank_you: "%{store} kiittää tilauksestanne"

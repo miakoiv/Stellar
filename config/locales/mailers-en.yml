@@ -1,5 +1,5 @@
 en:
   order_mailer:
     order_confirmation:
-      subject: "%{store} – Order Confirmation"
+      subject: "Receipt from %{store}"
     thank_you: "Thank you for shopping at %{store}"
