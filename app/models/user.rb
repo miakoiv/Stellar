@@ -43,8 +43,8 @@ class User < ActiveRecord::Base
       orders.create(
         store: store,
         order_type: store.default_order_type,
-        customer_name: is_guest? ? nil : name,
-        customer_email: is_guest? ? nil : email
+        customer_name: guest? ? nil : name,
+        customer_email: guest? ? nil : email
       )
   end
 
