@@ -17,7 +17,7 @@ class Role < ActiveRecord::Base
 
   #---
   def self.guest_roles
-    where(name: [:guest, :see_pricing])
+    where(name: [:see_pricing])
   end
 
   #---

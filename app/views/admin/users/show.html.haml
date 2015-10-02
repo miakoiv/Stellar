@@ -10,7 +10,7 @@
   .col-sm-6
     = render partial: 'form', locals: {locked: true}
 
-  - unless @user.is_guest?
+  - unless @user.guest?
     .col-sm-6
       = bootstrap_form_for [:admin, @user], layout: :horizontal,
           label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|

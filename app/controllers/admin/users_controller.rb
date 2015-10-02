@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
 
   # GET /admin/users/new
   def new
-    @user = current_store.users.build(roles: [Role.find_by(name: 'guest')])
+    @user = current_store.users.build
   end
 
   # GET /admin/users/1/edit
