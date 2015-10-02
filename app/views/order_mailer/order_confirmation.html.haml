@@ -5,8 +5,10 @@
         %tr
           %td.content-block
             %h1
-              = Order.model_name.human.capitalize
-              %span.small= @order.to_s
+              = @order.order_type
+              %span.small
+                \#
+                = @order.to_s
         %tr
           %td.content-block
             %h2= t('order_mailer.thank_you', store: @store)
@@ -66,12 +68,12 @@
                           = order_item.product.subtitle
                         %td.alignright= order_item.amount
                         %td.alignright
-                          = humanized_money_with_symbol order_item.product.sales_price
+                          = humanized_money_with_symbol order_item.price
                         %td.alignright
                           = humanized_money_with_symbol order_item.subtotal
                     %tr.total
-                      %td{colspan: 3}
-                      %td.alignright= Order.human_attribute_name(:grand_total)
+                      %td.alignright{colspan: 4}
+                        = Order.human_attribute_name(:grand_total)
                       %td.alignright
                         = humanized_money_with_symbol @order.grand_total
 
