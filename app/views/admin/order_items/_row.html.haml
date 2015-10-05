@@ -1,9 +1,13 @@
 = content_tag_for :tbody, order_item do
   %tr
+    %td
+      - images = order_item.product.images.by_purpose(:technical)
+      - if images.any?
+        = image_variant_tag(images.ordered.first, :matchbox, style: 'max-width: 50px')
     - if order_item.order.approval
       %td{colspan: 2}
         = link_to order_item.product_code, admin_product_path(order_item.product)
-        - if order_item.product.relationships.any?
+        - if !order_item.order.is_quote? && order_item.product.relationships.any?
           %span.caret
       %td
         %strong= order_item.product_title
@@ -11,17 +15,21 @@
     - else
       %td{colspan: 2}
         = link_to order_item.product.code, admin_product_path(order_item.product)
-        - if order_item.product.relationships.any?
+        - if !order_item.order.is_quote? && order_item.product.relationships.any?
           %span.caret
       %td
         %strong= order_item.product.title
         = order_item.product.subtitle
     %td.text-right= order_item.amount
+    - if order_item.order.is_quote?
+      %td.text-right= order_item.price
 
-  = content_tag_for :tr, order_item.product.relationships do |relationship|
-    %td.col-xs-1
-    %td= link_to relationship.component.code, admin_product_path(relationship.component)
-    %td.text-muted
-      %strong= relationship.component.title
-      = relationship.component.subtitle
-    %td.text-right.text-muted= relationship.quantity * order_item.amount
+  - if !order_item.order.is_quote?
+    = content_tag_for :tr, order_item.product.relationships do |relationship|
+      %td
+      %td.col-xs-1
+      %td= link_to relationship.component.code, admin_product_path(relationship.component)
+      %td.text-muted
+        %strong= relationship.component.title
+        = relationship.component.subtitle
+      %td.text-right.text-muted= relationship.quantity * order_item.amount

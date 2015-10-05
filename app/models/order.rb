@@ -110,6 +110,10 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
+  def is_quote?
+    order_type.is_quote?
+  end
+
   # Total sum without virtual items (like shipping and handling).
   def total
     order_items.real.map { |item| item.amount * (item.price || 0) }.sum

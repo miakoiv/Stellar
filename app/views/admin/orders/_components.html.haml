@@ -2,30 +2,32 @@
   %li.active{role: 'presentation'}
     %a{href: '#order_items', role: 'tab', data: {toggle: 'tab'}}
       = title(OrderItem, count: 2)
-  %li{role: 'presentation'}
-    %a{href: '#components', role: 'tab', data: {toggle: 'tab'}}
-      = t('.aggregated')
+  - unless order.is_quote?
+    %li{role: 'presentation'}
+      %a{href: '#components', role: 'tab', data: {toggle: 'tab'}}
+        = t('.aggregated')
 
 .tab-content
   #order_items.tab-pane.fade.in.active.page-break
     %h2.visible-print-block= title(OrderItem, count: 2)
     = render partial: 'admin/order_items/table', object: order, as: :order
 
-  #components.tab-pane.fade.page-break
-    %h2.visible-print-block= t('.aggregated')
-    .table-responsive
-      %table.table.table-hover.table-condensed
-        %thead
-          %tr
-            %th.col-xs-2= col(OrderItem, :product_code)
-            %th= col(OrderItem, :product_title)
-            %th.col-xs-2.text-right #
-
-        %tbody
-          - order.aggregated_components.each do |component, quantity|
+  - unless order.is_quote?
+    #components.tab-pane.fade.page-break
+      %h2.visible-print-block= t('.aggregated')
+      .table-responsive
+        %table.table.table-hover.table-condensed
+          %thead
             %tr
-              %td= link_to component.code, admin_product_path(component)
-              %td
-                %strong= component.title
-                = component.subtitle
-              %td.text-right= quantity
+              %th.col-xs-2= col(OrderItem, :product_code)
+              %th= col(OrderItem, :product_title)
+              %th.col-xs-2.text-right #
+
+          %tbody
+            - order.aggregated_components.each do |component, quantity|
+              %tr
+                %td= link_to component.code, admin_product_path(component)
+                %td
+                  %strong= component.title
+                  = component.subtitle
+                %td.text-right= quantity
