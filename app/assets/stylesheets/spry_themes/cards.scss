@@ -161,12 +161,12 @@
     }
     .images {
       position: relative;
-      padding-bottom: 60px;
 
       &.technical {
         @extend .col-md-2;
         @extend .col-md-offset-1;
         @extend .col-xs-5;
+        min-height: 440px;
       }
       &.presentational {
         @extend .col-md-5;
@@ -177,6 +177,10 @@
         position: absolute;
         left: $grid-gutter-width/2;
         bottom: 0;
+
+        > li > a {
+          padding: 5px;
+        }
       }
       .tab-content {
         .image {
