@@ -7,7 +7,7 @@
       = t('.aggregated')
 
 .tab-content
-  #order_items.tab-pane.fade.in.active
+  #order_items.tab-pane.fade.in.active.page-break
     %h2.visible-print-block= title(OrderItem, count: 2)
     = render partial: 'admin/order_items/table', object: order, as: :order
 

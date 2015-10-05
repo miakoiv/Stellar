@@ -12,4 +12,6 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-lg-6
+    = render partial: 'admin/images/edit_table', object: @order, as: :imageable
+    = render partial: 'admin/images/dropzone', object: @order, as: :imageable
     = render partial: 'admin/orders/components', object: @order, as: :order

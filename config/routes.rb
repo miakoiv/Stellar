@@ -81,7 +81,9 @@ Rails.application.routes.draw do
       post :add_products, on: :member
       post :add_categories, on: :member
     end
-    resources :orders
+    resources :orders do
+      resources :images, shallow: true
+    end
     resources :users
 
     post '/custom_values/reorder' => 'custom_values#reorder', as: :reorder_custom_values

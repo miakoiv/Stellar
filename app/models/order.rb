@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Imageable
 
   #---
   belongs_to :store
