@@ -32,6 +32,7 @@
 //= require dropzone
 //= require magnific-popup
 //= require masonry/jquery.masonry
+//= require masonry/jquery.imagesloaded.min
 //= require selectize
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
