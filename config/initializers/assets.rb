@@ -12,6 +12,7 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w(
   spry_themes/cards.css spry_themes/cards.js
+  spry_themes/compass.css spry_themes/compass.js
   spry_themes/default.css spry_themes/default.js
   spry_themes/emek.css spry_themes/emek.js
   spry_themes/hiustalo.css spry_themes/hiustalo.js
