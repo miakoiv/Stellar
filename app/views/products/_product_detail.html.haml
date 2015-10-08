@@ -39,6 +39,10 @@
             = customization.custom_attribute.measurement_unit
           = customization.custom_attribute
 
+  - if product.iframes.any?
+    .iframes
+      = render product.iframes
+
   .images.technical
     %ul.nav.nav-pills{role: 'tablist'}
       - if @technical_images.count > 1

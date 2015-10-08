@@ -13,6 +13,9 @@ fi:
       custom_value:
         one: arvo
         other: arvot
+      iframe:
+        one: upotus
+        other: upotukset
       image:
         one: kuva
         other: kuvat
@@ -71,6 +74,8 @@ fi:
         custom_values: Arvot
       custom_value:
         value: Arvo
+      iframe:
+        html: HTML-koodi
       image:
         image_type_id: Kuvatyyppi
         attachment_file_name: Tiedostonimi
@@ -139,6 +144,7 @@ fi:
         available_at: Saatavana alkaen
         deleted_at: Poistettu
         memo: Muistio
+        iframes: Upotukset
         images: Kuvat
         customizations: Ominaisuudet
         components: Komponentit

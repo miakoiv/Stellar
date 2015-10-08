@@ -28,6 +28,9 @@
         %a{href: '#tab-customizations', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :customizations)
       %li{role: 'presentation'}
+        %a{href: '#tab-iframes', role: 'tab', data: {toggle: 'tab'}}
+          = col(Product, :iframes)
+      %li{role: 'presentation'}
         %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :components)
 
@@ -36,5 +39,7 @@
         = render partial: 'admin/images/table', object: @product, as: :imageable
       #tab-customizations.tab-pane.fade
         = render partial: 'admin/customizations/table', object: @product, as: :customizable
+      #tab-iframes.tab-pane.fade
+        = render partial: 'admin/iframes/table', object: @product, as: :product
       #tab-components.tab-pane.fade
         = render partial: 'admin/relationships/table', object: @product, as: :product

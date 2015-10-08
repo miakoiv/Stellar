@@ -70,6 +70,7 @@ Rails.application.routes.draw do
     resources :products do
       resources :images, shallow: true
       resources :customizations, shallow: true
+      resources :iframes, shallow: true
       post :reorder, on: :collection
     end
     resources :pages do
@@ -89,6 +90,7 @@ Rails.application.routes.draw do
     post '/custom_values/reorder' => 'custom_values#reorder', as: :reorder_custom_values
     post '/images/reorder' => 'images#reorder', as: :reorder_images
     post '/images/delete'  => 'images#delete', as: :delete_image
+    post '/iframes/reorder' => 'iframes#reorder', as: :reorder_iframes
   end
 
 

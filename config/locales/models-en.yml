@@ -13,6 +13,9 @@ en:
       custom_value:
         one: value
         other: values
+      iframe:
+        one: embed
+        other: embeds
       image:
         one: image
         other: images
@@ -71,6 +74,8 @@ en:
         custom_values: Values
       custom_value:
         value: Value
+      iframe:
+        html: HTML code
       image:
         image_type_id: Image type
         attachment_file_name: File name
@@ -139,6 +144,7 @@ en:
         available_at: Available since
         deleted_at: Removed at
         memo: Memo
+        iframes: Embeds
         images: Images
         customizations: Attributes
         components: Components

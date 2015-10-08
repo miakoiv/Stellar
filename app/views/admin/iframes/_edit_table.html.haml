@@ -1,0 +1,24 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min.hidden-print
+        %th= col(Iframe, :html)
+        %th.hidden-print
+
+    %tbody#iframes-tbody.sortable
+      = render partial: 'admin/iframes/edit_row', collection: product.iframes.ordered, as: :iframe
+
+= bootstrap_form_for [:admin, product, product.iframes.new], layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-9', remote: true do |f|
+  = f.text_area :html, rows: 4, class: 'input-sm'
+  = f.form_group do
+    = f.primary
+
+:coffee
+  $('.sortable').sortable(
+    items: 'tr'
+    handle: '.handle'
+    placeholder: '#{tr_placeholder(3)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_iframes_path}',
+      {reorder: $('tr', this).map(-> this.id).get()}

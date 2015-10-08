@@ -1,0 +1,8 @@
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= col(Iframe, :html)
+
+    %tbody
+      = render partial: 'admin/iframes/row', collection: product.iframes.ordered, as: :iframe

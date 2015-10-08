@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005133708) do
+ActiveRecord::Schema.define(version: 20151008110340) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 20151005133708) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "iframes", force: :cascade do |t|
+    t.integer  "product_id", limit: 4
+    t.text     "html",       limit: 65535
+    t.integer  "priority",   limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "iframes", ["product_id"], name: "index_iframes_on_product_id", using: :btree
 
   create_table "image_types", force: :cascade do |t|
     t.integer  "purpose",    limit: 4,   default: 0,    null: false
