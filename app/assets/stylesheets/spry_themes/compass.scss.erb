@@ -242,7 +242,7 @@ body {
       @extend .row;
 
       .product-description {
-        @extend .col-xs-12, .col-sm-5;
+        @extend .col-xs-12, .col-md-4;
 
         .product-code { font-size: $font-size-small; }
         .product-stock { display: none; }
@@ -256,6 +256,14 @@ body {
 
             &:hover { color: #fff; }
           }
+        }
+      }
+      .iframes {
+        @extend .col-xs-5, .col-md-4;
+
+        iframe {
+          width: 100%;
+          height: 640px;
         }
       }
       .images {
@@ -279,7 +287,7 @@ body {
           }
         }
         &.presentational {
-          @extend .col-xs-12, .col-sm-7;
+          @extend .col-xs-7, .col-md-4;
 
           .image {
             a {
