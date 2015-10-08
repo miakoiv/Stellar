@@ -1,14 +1,25 @@
 .product-header
 
-  .product-actions
-    = render partial: 'products/actions', object: product, as: :product
   %h1.product-title
     = product.title
     %span.small= product.subtitle
 
+  .product-meta
+    .product-actions
+      = render partial: 'products/actions', object: product, as: :product
+    - if can_see_pricing?
+      .product-pricing
+        = render partial: 'products/pricing', object: product, as: :product
+
 .product-body
 
   .product-description
+
+    %p.product-code
+      - if product.customer_code.present?
+        = icon('barcode', product.customer_code, class: 'fa-lg')
+      = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
+
     - if can_see_stock?
       %p.product-stock
         = product_stock_string(product.stock)
@@ -27,18 +38,6 @@
             = customization.custom_value
             = customization.custom_attribute.measurement_unit
           = customization.custom_attribute
-
-    - if can_see_pricing?
-      .product-pricing
-        %p= icon('tag', humanized_money_with_symbol(product.sales_price))
-        - unless product.unit_price.nil?
-          .unit-price
-            = unit_price_string(product.unit_price, product.base_unit)
-
-    %p.product-code
-      - if product.customer_code.present?
-        = icon('barcode', product.customer_code, class: 'fa-lg')
-      = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
   .images.technical
     %ul.nav.nav-pills{role: 'tablist'}

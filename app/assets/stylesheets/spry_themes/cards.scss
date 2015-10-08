@@ -27,9 +27,7 @@
   .page-content {
     padding-top: 30px;
 
-    img {
-      @extend .img-responsive;
-    }
+    img { @extend .img-responsive; }
   }
 
   ul.categories {
@@ -60,9 +58,7 @@
         margin: 0.5em 0.25em 0;
         font-size: $font-size-small;
       }
-      ul {
-        display: none;
-      }
+      ul { display: none; }
     }
   }
 
@@ -84,9 +80,7 @@
         display: block;
         text-decoration: none;
 
-        img {
-          @extend .img-thumbnail;
-        }
+        img { @extend .img-thumbnail; }
         h3 {
           font-size: $font-size-base;
           margin-top: 0.5em;
@@ -97,106 +91,101 @@
             font-size: $font-size-small;
           }
         }
-        .description {
-          display: none;
-        }
+        .description { display: none; }
       }
-      .buy-now {
-        display: none;
-      }
+      .buy-now { display: none; }
     }
   }
 
   .product-detail {
-    @extend .row;
 
-    .product-actions {
-      @extend .col-xs-12;
-      @extend .col-sm-6, .col-sm-push-6;
-      @extend .col-md-5, .col-md-push-7;
-      @extend .col-lg-4, .col-lg-push-8;
-      @extend .text-right;
-
-      .form-inline {
-        display: inline-block
-      }
-    }
-    .product-title {
-      @extend .col-xs-12;
-      @extend .col-sm-6, .col-sm-pull-6;
-      @extend .col-md-7, .col-md-pull-5;
-      @extend .col-lg-8, .col-lg-pull-4;
-      margin-top: 0;
+    .product-header {
+      @extend .row;
       margin-bottom: 20px;
-    }
-    .product-description {
-      @extend .col-md-4;
-      @extend .col-xs-12;
 
-      .product-stock {
-        @extend .lead;
-        line-height: 1;
-        margin-top: 0;
-        margin-bottom: 0;
+      .product-title {
+        @extend .col-xs-12;
+        @extend .col-md-7;
+        margin: 0;
       }
-      .body-text {
-        margin-top: 10px;
-      }
-      .list-group {
-        margin: 10px 0;
-      }
-      .product-pricing {
-        @extend .col-sm-5;
-        @extend .lead;
-        @extend .text-primary;
-        line-height: 30px;
-      }
-      .product-code {
-        @extend .col-sm-7;
-        @extend .text-right;
-        margin-bottom: 0;
-        font-size: 90%;
-        line-height: 30px;
-      }
-    }
-    .images {
-      position: relative;
-
-      &.technical {
-        @extend .col-md-2;
-        @extend .col-md-offset-1;
-        @extend .col-xs-5;
-        min-height: 440px;
-      }
-      &.presentational {
+      .product-meta {
+        @extend .col-xs-12;
         @extend .col-md-5;
-        @extend .col-xs-7;
-      }
-      .nav {
-        @extend .hidden-print;
-        position: absolute;
-        left: $grid-gutter-width/2;
-        bottom: 0;
+        margin-top: 8px;
 
-        > li > a {
-          padding: 5px;
+        .product-actions {
+          float: right;
+
+          .form-inline, .btn { display: inline-block; }
+        }
+        .product-pricing {
+          @extend .text-primary;
+          float: right;
+          margin-right: $grid-gutter-width/2;
+          font-size: $font-size-large;
+          line-height: 34px;
         }
       }
-      .tab-content {
-        .image {
-          a {
-            display: block;
+    }
+    .product-body {
+      @extend .row;
 
-            img {
-              @extend .img-responsive;
+      .product-description {
+        @extend .col-md-4;
+        @extend .col-xs-12;
 
-              &:hover {
-                @include box-shadow(0 0 8px $link-color);
+        .product-code {
+          float: left;
+          font-size: $font-size-small;
+          line-height: 30px;
+        }
+        .product-stock {
+          float: right;
+          font-size: $font-size-large;
+          line-height: 30px;
+        }
+        .body-text { padding-top: 40px; }
+        .list-group { margin: 10px 0; }
+      }
+      .images {
+        position: relative;
+
+        &.technical {
+          @extend .col-md-2;
+          @extend .col-md-offset-1;
+          @extend .col-xs-5;
+          min-height: 440px;
+        }
+        &.presentational {
+          @extend .col-md-5;
+          @extend .col-xs-7;
+        }
+        .nav {
+          @extend .hidden-print;
+          position: absolute;
+          left: $grid-gutter-width/2;
+          bottom: 0;
+
+          > li > a {
+            padding: 5px;
+          }
+        }
+        .tab-content {
+          .image {
+            a {
+              display: block;
+
+              img {
+                @extend .img-responsive;
+
+                &:hover {
+                  @include box-shadow(0 0 8px $link-color);
+                }
               }
             }
-          }
-          &:not(:first-child) {
-            @extend .hidden-print;
+            &:not(:first-child) {
+              @extend .hidden-print;
+            }
           }
         }
       }

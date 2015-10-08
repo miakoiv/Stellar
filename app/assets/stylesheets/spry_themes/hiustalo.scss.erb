@@ -161,22 +161,39 @@ $brand-primary: #e6172b;
       @extend .col-sm-10, .col-sm-offset-1;
       @extend .col-lg-8, .col-lg-offset-2;
 
-      .product-actions {
-        @extend .text-right;
-        position: absolute;
-        right: 30px;
-        top: 93px;
-        z-index: 3;
-
-        .form-inline {
-          display: inline-block;
-        }
-      }
       .product-title {
         @extend .col-xs-12;
         margin: 10px 0;
         height: 40px;
         overflow: hidden;
+      }
+      .product-meta {
+        @extend .col-xs-12;
+        @extend .col-sm-6, .col-sm-offset-6;
+        position: absolute;
+        top: 93px;
+        right: 15px;
+        z-index: 3;
+
+        .product-actions {
+          float: right;
+
+          .form-inline { display: inline-block; }
+        }
+        .product-pricing {
+          float: right;
+          margin-right: $grid-gutter-width/2;
+
+          p {
+            @extend .lead;
+            @extend .text-primary;
+            margin: 0;
+            line-height: 34px;
+          }
+          .unit-price {
+            @extend .small, .text-right;
+          }
+        }
       }
     }
     .product-body {
@@ -192,29 +209,15 @@ $brand-primary: #e6172b;
       .product-description {
         @extend .col-sm-6, .col-sm-push-6;
         @extend .col-xs-12;
+        margin-top: 80px;
 
-        .product-stock { display: none; }
-        .body-text {
-          margin-top: 80px;
-        }
-        .product-pricing {
-          position: absolute;
-          top: 0;
-          left: $grid-gutter-width/2;
-
-          p {
-            @extend .lead;
-            @extend .text-primary;
-            margin: 0;
-          }
-          .unit-price {
-            @extend .small, .text-right;
-          }
-        }
         .product-code {
           @extend .text-right;
           font-size: 90%;
         }
+        .product-stock { display: none; }
+        .body-text { text-align: justify; }
+        .list-group { margin: 10px 0; }
       }
       .images {
         position: relative;
