@@ -68,29 +68,34 @@ body {
   }
 
   ul.categories {
-    display: none;
     @extend .row;
     margin-left: -1*$grid-gutter-width;
+    margin-right: -1*$grid-gutter-width;
     list-style: none;
     padding-left: 0;
+    background-color: #ccc;
 
     li.category {
       float: left;
       position: relative;
       width: 12.5vw;
-      height: 12.5vw;
       min-width: 90px;
-      min-height: 90px;
       overflow: hidden;
-      background-color: #ccc;
 
       a {
-        img { width: 100%; }
+        display: block;
+        text-decoration: none;
+        color: #1c1c1c;
+        transition: all 0.2s ease-in-out 0s;
+
+        &:hover {
+          background-color: #fff;
+        }
+
+        img { display: none; }
         p {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          margin: 10px;
+          margin: 0;
+          padding: 10px 30px;
         }
       }
     }
