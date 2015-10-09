@@ -85,9 +85,7 @@ body {
       background-color: #ccc;
 
       a {
-        img {
-          width: 100%;
-        }
+        img { width: 100%; }
         p {
           position: absolute;
           left: 0;
@@ -242,7 +240,7 @@ body {
       @extend .row;
 
       .product-description {
-        @extend .col-xs-12, .col-md-4;
+        @extend .col-xs-12, .col-md-3;
 
         .product-code { font-size: $font-size-small; }
         .product-stock { display: none; }
@@ -259,7 +257,7 @@ body {
         }
       }
       .iframes {
-        @extend .col-xs-5, .col-md-4;
+        @extend .col-xs-12, .col-md-4;
 
         iframe {
           width: 100%;
@@ -283,17 +281,12 @@ body {
 
             img {
               @extend .img-responsive;
+              margin: 0 auto;
             }
           }
         }
         &.presentational {
-          @extend .col-xs-7, .col-md-4;
-
-          .image {
-            a {
-              img { @extend .pull-right; }
-            }
-          }
+          @extend .col-xs-12, .col-md-5;
         }
         &.technical {
           position: absolute;
@@ -301,6 +294,8 @@ body {
           bottom: 0;
           height: 200px;
           width: 100%;
+          overflow-x: scroll;
+          overflow-y: hidden;
           padding: 0 $grid-gutter-width/2;
           background: #e0e0e0;
           @include box-shadow(inset 0 15px 10px -10px rgba(0,0,0,0.333));
@@ -314,9 +309,6 @@ body {
             &.fade { opacity: 1; }
           }
         }
-      }
-      @media (min-width: $screen-lg) {
-        .images.presentational { margin-top: -88px; }
       }
     }
   }
