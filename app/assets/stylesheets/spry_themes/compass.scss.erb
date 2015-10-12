@@ -17,7 +17,6 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
 
 body {
   padding-top: 70px;
-  background-color: #e0e0e0;
 
   > nav.navbar {
     @extend .navbar-inverse;
@@ -50,6 +49,7 @@ body {
 
 .compass {
   overflow-y: scroll;
+  background-color: #e0e0e0;
 
   .container {
     margin-left: 0;
@@ -62,9 +62,7 @@ body {
   .page-content {
     padding-top: 30px;
 
-    img {
-      @extend .img-responsive;
-    }
+    img { @extend .img-responsive; }
   }
 
   ul.categories {
@@ -73,19 +71,19 @@ body {
     margin-right: -1*$grid-gutter-width;
     list-style: none;
     margin-bottom: 0;
-    padding-left: 0;
-    background-color: #ccc;
+    padding-left: $grid-gutter-width;
+    background-color: #d0d0d0;
 
     li.category {
       float: left;
       position: relative;
       width: 12.5vw;
-      min-width: 90px;
-      overflow: hidden;
+      min-width: 120px;
 
       a {
         display: block;
         text-decoration: none;
+        background-color: #c4c4c4;
         color: #1c1c1c;
         transition: all 0.2s ease-in-out 0s;
 
@@ -96,7 +94,8 @@ body {
         img { display: none; }
         p {
           margin: 0;
-          padding: 10px 30px;
+          padding: 10px 15px;
+          white-space: nowrap;
         }
       }
     }
@@ -199,13 +198,13 @@ body {
         @extend .col-xs-12;
         margin-top: 0;
         margin-bottom: 30px;
-        padding-top: 40px;
+        padding-top: 60px;
         font-weight: 500;
         text-transform: uppercase;
 
         .small {
           position: absolute;
-          top: 20px;
+          top: 40px;
           left: $grid-gutter-width/2;
           font-size: $font-size-small;
         }
@@ -213,12 +212,14 @@ body {
       .product-meta {
         position: absolute;
         top: 30px;
+        left: 30px;
         right: 30px;
 
         .product-actions {
           float: right;
 
           .form-inline, .btn { display: inline-block; }
+          .form-inline .form-group { margin: 0; }
           .btn {
             @extend .btn-default;
             color: #ddd;
@@ -234,7 +235,7 @@ body {
         }
         .product-pricing {
           float: right;
-          margin-right: $grid-gutter-width/2;
+          margin: 0 15px;
           color: #fff;
           font-weight: 500;
           font-size: $font-size-large;
@@ -250,7 +251,7 @@ body {
 
         .product-code { font-size: $font-size-small; }
         .product-stock { display: none; }
-        .body-text { text-align: justify; }
+        .body-text { }
         .list-group {
           margin-top: 20px;
 
@@ -300,19 +301,22 @@ body {
           bottom: 0;
           height: 200px;
           width: 100%;
-          overflow-x: scroll;
           overflow-y: hidden;
+          overflow-x: auto;
           padding: 0 $grid-gutter-width/2;
           background: #e0e0e0;
           @include box-shadow(inset 0 15px 10px -10px rgba(0,0,0,0.333));
 
           .nav { display: none; }
-          .image {
-            display: block !important;
-            float: left;
-            padding: 15px;
-            img { max-height: 170px; }
-            &.fade { opacity: 1; }
+          .gallery {
+            display: table;
+
+            .image {
+              display: table-cell;
+              padding: 15px;
+              img { max-height: 170px; }
+              &.fade { opacity: 1; }
+            }
           }
         }
       }
