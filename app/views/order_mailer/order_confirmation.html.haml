@@ -33,12 +33,13 @@
                         %td= Order.human_attribute_name(:contact_person)
                         %td
                           %b= @order.contact_person
-                    - if @order.has_shipping?
+                    - if @store.b2b_sales? && @order.has_shipping?
                       %tr
                         %td
                           = Order.human_attribute_name(:shipping_at)
                         %td
                           %b= @order.shipping_at.present? ? l(@order.shipping_at) : ''
+                    - if @order.has_shipping?
                       %tr
                         %td
                           = Order.human_attribute_name(:billing_address)
