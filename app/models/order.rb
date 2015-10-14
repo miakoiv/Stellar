@@ -151,8 +151,8 @@ class Order < ActiveRecord::Base
           store_name: store.name,
           store_contact_person_name: store.contact_person.name,
           store_contact_person_email: store.contact_person.email,
-          user_name: user.name,
-          user_email: user.email,
+          user_name: user.try(:name),
+          user_email: user.try(:email),
           order_type_name: order_type.name
         )
         order_items.each do |item|
