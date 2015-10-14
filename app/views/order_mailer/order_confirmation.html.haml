@@ -5,7 +5,7 @@
         %tr
           %td.content-block
             %h1
-              = @order.order_type
+              = t('.title')
               %span.small
                 \#
                 = @order.to_s
@@ -54,11 +54,16 @@
                           %br
                           %b= @order.shipping_postalcode
                           %b= @order.shipping_city
-                      %tr
-                        %td
-                          = Order.human_attribute_name(:notes)
-                        %td{colspan: 3}
-                          = @order.notes
+                    %tr
+                      %td
+                        = Order.human_attribute_name(:order_type_id)
+                      %td{colspan: 3}
+                        %b= @order.order_type
+                    %tr
+                      %td
+                        = Order.human_attribute_name(:notes)
+                      %td{colspan: 3}
+                        = @order.notes
               %tr
                 %td
                   %table.invoice-items{cellpadding: 0, cellspacing: 0}
