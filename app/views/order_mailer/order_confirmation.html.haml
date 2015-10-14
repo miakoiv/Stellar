@@ -19,12 +19,20 @@
                 %td
                   %table{width: '100%', cellpadding: 0, cellspacing: 5}
                     %tr
-                      %td= Order.human_attribute_name(:company_name)
+                      %td= Order.human_attribute_name(:customer_name)
                       %td
-                        %b= @order.company_name
-                      %td= Order.human_attribute_name(:contact_person)
+                        %b= @order.customer_name
+                      %td= Order.human_attribute_name(:customer_email)
                       %td
-                        %b= @order.contact_person
+                        %b= @order.customer_email
+                    - if @store.b2b_sales?
+                      %tr
+                        %td= Order.human_attribute_name(:company_name)
+                        %td
+                          %b= @order.company_name
+                        %td= Order.human_attribute_name(:contact_person)
+                        %td
+                          %b= @order.contact_person
                     - if @order.has_shipping?
                       %tr
                         %td
