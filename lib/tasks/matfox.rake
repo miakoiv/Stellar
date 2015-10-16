@@ -66,7 +66,7 @@ namespace :matfox do
             product = find_or_create_product(store, code, data)
             product.update(
               customer_code: row[:customer_code],
-              sales_price: row[:sales_price] || data[:sales_price],
+              sales_price: row[:sales_price].present? ? row[:sales_price] : data[:sales_price],
               sales_price_modified_at: data[:sales_price_modified_at]
             )
             update_inventory(store, product, data[:product], data[:inventory])
