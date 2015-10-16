@@ -66,8 +66,8 @@ namespace :matfox do
             product = find_or_create_product(store, code, data)
             product.update(
               customer_code: row[:customer_code],
-              sales_price: row[:sales_price].present? ? row[:sales_price] : data[:sales_price],
-              sales_price_modified_at: data[:sales_price_modified_at]
+              sales_price: row[:sales_price].present? ? row[:sales_price] : data[:product][:sales_price],
+              sales_price_modified_at: data[:product][:sales_price_modified_at]
             )
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
@@ -84,8 +84,8 @@ namespace :matfox do
             next if store.nil?
             product = find_or_create_product(store, code, data)
             product.update(
-              sales_price: data[:sales_price],
-              sales_price_modified_at: data[:sales_price_modified_at]
+              sales_price: data[:product][:sales_price],
+              sales_price_modified_at: data[:product][:sales_price_modified_at]
             )
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
@@ -155,8 +155,8 @@ namespace :matfox do
     product.title = data[:product][:title].try(:mb_chars).try(:titleize)
     product.subtitle = data[:product][:subtitle].try(:mb_chars).try(:titleize)
     product.memo = data[:product][:memo]
-    product.cost = data[:cost]
-    product.cost_modified_at = data[:cost_modified_at]
+    product.cost = data[:product][:cost]
+    product.cost_modified_at = data[:product][:cost_modified_at]
     product.save!
     puts "#{code} ➞ #{store}"
     product
