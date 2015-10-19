@@ -7,7 +7,7 @@ class Payment
 
   PMT_KEY = '11223344556677889900'
 
-  attr :params
+  attr_accessor :params
 
   #---
   # Payment is initialized with an order and options hash
