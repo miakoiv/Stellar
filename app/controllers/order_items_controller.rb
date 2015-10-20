@@ -17,6 +17,7 @@ class OrderItemsController < ApplicationController
     if @order_item.update(order_item_params)
       @order_item.destroy if @order_item.amount < 1
       @order.apply_shipping_cost!
+      @order.apply_promotions!
     end
   end
 
@@ -24,6 +25,7 @@ class OrderItemsController < ApplicationController
   def destroy
     if @order_item.destroy
       @order.apply_shipping_cost!
+      @order.apply_promotions!
     end
   end
 

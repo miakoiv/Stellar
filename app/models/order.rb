@@ -66,6 +66,7 @@ class Order < ActiveRecord::Base
     order_item.price = product.sales_price
     order_item.save!
     apply_shipping_cost!
+    apply_promotions!
   end
 
   # Applies a shipping cost for the current contents of the order.
@@ -82,6 +83,11 @@ class Order < ActiveRecord::Base
 
     # Reloading order items that may have gone out of sync.
     order_items(reload)
+  end
+
+  # Applies active promotions on the order.
+  def apply_promotions!
+    logger.info "*** Applying promotions on #{self}"
   end
 
   # Collects aggregated component quantities of all products in the order.

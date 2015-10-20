@@ -26,9 +26,9 @@ class Promotion < ActiveRecord::Base
   attr :product_ids_string, :category_ids_string
 
   #---
+  # Takes an order object and returns order items that match this promotion.
   def matching_items(order)
-    # This method takes an order object and should return the order items
-    # that match the products this promotion is promoting.
+    order.order_items.where(product_id: promoted_items.pluck(:product_id))
   end
 
   def available_products
