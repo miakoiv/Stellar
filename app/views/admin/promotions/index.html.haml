@@ -10,6 +10,7 @@
       %tr
         %th.col-min
         %th.col-xs-3= col(Promotion, :name)
+        %th.col-xs-3= col(Promotion, :promotion_handler_id)
         %th= col(Promotion, :first_date)
         %th= col(Promotion, :last_date)
         %th.hidden-print
@@ -18,6 +19,7 @@
       = content_tag_for :tr, @promotions do |promotion|
         %td= promotion.active? ? icon('check-square-o') : icon('square-o')
         %td= promotion.name
+        %td= promotion.promotion_handler
         %td= promotion.first_date.present? ? l(promotion.first_date) : ''
         %td= promotion.last_date.present? ? l(promotion.last_date) : ''
         %td.hidden-print.text-right

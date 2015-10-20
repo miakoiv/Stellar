@@ -158,7 +158,7 @@ en:
         amount_available: Availability
         amount_sold: Sold
       promotion:
-        promotion_class: Method
+        promotion_handler_id: Method
         name: Name
         first_date: Starts at
         last_date: Expires at

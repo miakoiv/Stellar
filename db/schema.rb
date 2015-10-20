@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008110340) do
+ActiveRecord::Schema.define(version: 20151020095637) do
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
   create_table "custom_attributes", force: :cascade do |t|
     t.integer  "store_id",            limit: 4,                   null: false
     t.integer  "measurement_unit_id", limit: 4
-    t.boolean  "unit_pricing",        limit: 1,   default: false, null: false
+    t.boolean  "unit_pricing",                    default: false, null: false
     t.string   "name",                limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
   create_table "image_types", force: :cascade do |t|
     t.integer  "purpose",    limit: 4,   default: 0,    null: false
     t.string   "name",       limit: 255
-    t.boolean  "bitmap",     limit: 1,   default: true, null: false
+    t.boolean  "bitmap",                 default: true, null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer  "purpose",    limit: 4,   default: 0,     null: false
-    t.boolean  "fuzzy",      limit: 1,   default: false, null: false
+    t.boolean  "fuzzy",                  default: false, null: false
     t.string   "name",       limit: 255
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
@@ -170,9 +170,9 @@ ActiveRecord::Schema.define(version: 20151008110340) do
     t.integer  "inventory_id",          limit: 4,                   null: false
     t.integer  "adjustment_multiplier", limit: 4,   default: -1,    null: false
     t.string   "name",                  limit: 255
-    t.boolean  "has_shipping",          limit: 1,   default: false, null: false
-    t.boolean  "has_payment",           limit: 1,   default: false, null: false
-    t.boolean  "is_quote",              limit: 1,   default: false, null: false
+    t.boolean  "has_shipping",                      default: false, null: false
+    t.boolean  "has_payment",                       default: false, null: false
+    t.boolean  "is_quote",                          default: false, null: false
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
   end
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
     t.string   "customer_email",             limit: 255
     t.string   "company_name",               limit: 255
     t.string   "contact_person",             limit: 255
-    t.boolean  "has_billing_address",        limit: 1,     default: false, null: false
+    t.boolean  "has_billing_address",                      default: false, null: false
     t.string   "billing_address",            limit: 255
     t.string   "billing_postalcode",         limit: 255
     t.string   "billing_city",               limit: 255
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
     t.string   "title",          limit: 255
     t.string   "slug",           limit: 255,                  null: false
     t.text     "content",        limit: 65535
-    t.boolean  "wysiwyg",        limit: 1,     default: true
+    t.boolean  "wysiwyg",                      default: true
     t.integer  "priority",       limit: 4
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
@@ -231,7 +231,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                limit: 4,                     null: false
     t.integer  "category_id",             limit: 4
-    t.boolean  "virtual",                 limit: 1,     default: false, null: false
+    t.boolean  "virtual",                               default: false, null: false
     t.string   "code",                    limit: 255
     t.string   "customer_code",           limit: 255
     t.string   "title",                   limit: 255
@@ -268,14 +268,25 @@ ActiveRecord::Schema.define(version: 20151008110340) do
   add_index "promoted_items", ["product_id"], name: "index_promoted_items_on_product_id", using: :btree
   add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
 
+  create_table "promotion_handlers", force: :cascade do |t|
+    t.string   "type",              limit: 255,   null: false
+    t.string   "name",              limit: 255
+    t.text     "description",       limit: 65535
+    t.integer  "order_total_cents", limit: 4
+    t.integer  "required_items",    limit: 4
+    t.integer  "discount_percent",  limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
   create_table "promotions", force: :cascade do |t|
-    t.integer  "store_id",        limit: 4,   null: false
-    t.string   "promotion_class", limit: 255, null: false
-    t.string   "name",            limit: 255
+    t.integer  "store_id",             limit: 4,   null: false
+    t.integer  "promotion_handler_id", limit: 4,   null: false
+    t.string   "name",                 limit: 255
     t.date     "first_date"
     t.date     "last_date"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   add_index "promotions", ["store_id"], name: "index_promotions_on_store_id", using: :btree
@@ -315,7 +326,7 @@ ActiveRecord::Schema.define(version: 20151008110340) do
 
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",            limit: 4,                   null: false
-    t.boolean  "guest",               limit: 1,   default: false, null: false
+    t.boolean  "guest",                           default: false, null: false
     t.string   "name",                limit: 255,                 null: false
     t.string   "email",               limit: 255, default: "",    null: false
     t.string   "encrypted_password",  limit: 255, default: "",    null: false

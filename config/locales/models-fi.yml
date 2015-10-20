@@ -158,7 +158,7 @@ fi:
         amount_available: Saatavuus
         amount_sold: Myyty
       promotion:
-        promotion_class: Menetelmä
+        promotion_handler_id: Menetelmä
         name: Nimi
         first_date: Alkamispäivä
         last_date: Päättymispäivä
