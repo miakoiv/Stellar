@@ -2,6 +2,7 @@
 
 class OrderItem < ActiveRecord::Base
 
+  include Adjustable
   monetize :price_cents, allow_nil: true
 
   #---

@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Adjustable
 
   #---
   belongs_to :store

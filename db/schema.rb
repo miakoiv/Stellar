@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020095637) do
+ActiveRecord::Schema.define(version: 20151020125329) do
+
+  create_table "adjustments", force: :cascade do |t|
+    t.integer  "adjustable_id",   limit: 4
+    t.string   "adjustable_type", limit: 255
+    t.integer  "source_id",       limit: 4
+    t.string   "source_type",     limit: 255
+    t.string   "label",           limit: 255
+    t.integer  "amount_cents",    limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "adjustments", ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id", using: :btree
+  add_index "adjustments", ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
