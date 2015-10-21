@@ -14,6 +14,4 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-lg-6
-    .hidden-print
-      = render partial: 'admin/images/table', object: @order, as: :imageable
     = render partial: 'admin/orders/components', object: @order, as: :order
