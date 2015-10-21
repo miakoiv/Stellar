@@ -120,14 +120,18 @@ class Order < ActiveRecord::Base
     order_type.is_quote?
   end
 
+  def adjustment_total
+    adjustments.map(&:amount).sum
+  end
+
   # Total sum without virtual items (like shipping and handling).
   def total
-    order_items.real.map { |item| item.amount * (item.price || 0) }.sum
+    order_items.real.map { |item| item.subtotal + item.adjustment_total }.sum + adjustment_total
   end
 
   # Grand total, including virtual items.
   def grand_total
-    order_items.map { |item| item.amount * (item.price || 0) }.sum
+    order_items.map { |item| item.subtotal + item.adjustment_total }.sum + adjustment_total
   end
 
   def padded_id

@@ -20,6 +20,10 @@ class OrderItem < ActiveRecord::Base
     amount * (price || 0)
   end
 
+  def adjustment_total
+    adjustments.map(&:amount).sum
+  end
+
   def archive!
     update(
       product_code: product.code,
