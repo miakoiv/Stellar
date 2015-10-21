@@ -7,8 +7,22 @@
 # `adjustment_label` that defines the contents of the label.
 #
 class Adjustment < ActiveRecord::Base
+
+  monetize :amount_cents
+
+  #---
   belongs_to :adjustable, polymorphic: true
   belongs_to :source, polymorphic: true
 
-  monetize :amount_cents
+  scope :credit, -> { where('amount_cents < ?', 0) }
+  scope :charge, -> { where('amount_cents > ?', 0) }
+
+  #---
+  def credit?
+    amount < 0
+  end
+
+  def charge?
+    amount > 0
+  end
 end
