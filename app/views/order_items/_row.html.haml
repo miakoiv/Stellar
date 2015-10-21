@@ -6,8 +6,12 @@
   %td.text-right
     - unless order_item.virtual?
       = order_item.amount
-  %td.text-right
+  %td.text-right.currency
     - unless order_item.virtual?
       = humanized_money_with_symbol order_item.price
-  %td.text-right
+  %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal
+  %td
+
+- if order_item.adjustments.any?
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment

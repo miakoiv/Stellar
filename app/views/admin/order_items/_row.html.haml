@@ -22,7 +22,8 @@
         = order_item.product.subtitle
     %td.text-right= order_item.amount
     - if order_item.order.is_quote?
-      %td.text-right= order_item.price
+      %td.text-right.currency
+        = humanized_money_with_symbol order_item.price
 
   - if !order_item.order.is_quote?
     = content_tag_for :tr, order_item.product.relationships do |relationship|

@@ -1,0 +1,7 @@
+%tr.subrow{class: adjustment.credit? ? 'success' : 'warning'}
+  %td
+  %th= adjustment.label
+  %td
+  %td
+  %td.text-right.currency= humanized_money_with_symbol adjustment.amount
+  %td

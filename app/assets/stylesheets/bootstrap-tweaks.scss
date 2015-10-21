@@ -77,10 +77,6 @@ html {
   overflow-y: scroll;
 }
 
-.col-min {
-  width: 1px;
-}
-
 h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
   font-weight: 500;
 }
@@ -110,6 +106,11 @@ i.icon {
 
 .monospace {
   font-family: "Fira Mono", monospace;
+}
+
+.currency {
+  word-spacing: -0.1em;
+  white-space: nowrap;
 }
 
 .page-header {
@@ -165,6 +166,16 @@ label.import:before {
 }
 
 .table {
+
+  .subrow {
+    th, td {
+      border-top: 1px dotted #ddd;
+      padding: 4px 8px;
+    }
+  }
+  .col-min {
+    width: 1px;
+  }
 
   caption {
     position: absolute;

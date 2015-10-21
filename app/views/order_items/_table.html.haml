@@ -7,10 +7,14 @@
         %th.text-right= col(OrderItem, :amount)
         %th.text-right à
         %th.text-right= col(OrderItem, :subtotal)
+        %th.col-min
     %tfoot
       %tr
         %th.text-right{colspan: 4}= col(Order, :grand_total)
-        %th.text-right
+        %th.text-right.currency
           = humanized_money_with_symbol @order.grand_total
+        %th
     %tbody
       = render partial: 'order_items/row', collection: order.order_items, as: :order_item
+      - if order.adjustments.any?
+        = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
