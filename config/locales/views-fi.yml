@@ -58,6 +58,9 @@ fi:
         uncategorized: Ei tuoteryhmää
       new:
         new_product: Uusi tuote
+    promotion_handlers:
+      promotion_get_one_free:
+        discount_percent_help: Alentaa halvimman tuotteen hintaa annetulla prosentilla, kun kampanjatuotteita ostetaan ym. määrä.
     promotions:
       index:
         new_promotion: Uusi kampanja

@@ -166,6 +166,11 @@ en:
         last_date: Expires at
         product_ids_string: Products to add
         category_ids_string: Categories to add
+      promotion_handler:
+        description: Description
+      promotion_get_one_free:
+        required_items: Number of items
+        discount_percent: Apply discount
       role:
         name: Name
       store:
