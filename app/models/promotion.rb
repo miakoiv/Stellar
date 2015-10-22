@@ -13,7 +13,7 @@ class Promotion < ActiveRecord::Base
   belongs_to :store
   has_many :promoted_items, dependent: :destroy
   has_many :products, through: :promoted_items
-  has_one :promotion_handler
+  has_one :promotion_handler, dependent: :destroy
   accepts_nested_attributes_for :promotion_handler
 
   scope :active, -> { where '(first_date IS NULL OR first_date <= :today) AND (last_date IS NULL OR last_date >= :today)', today: Date.current }
