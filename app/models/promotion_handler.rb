@@ -9,6 +9,16 @@
 #
 class PromotionHandler < ActiveRecord::Base
 
+  belongs_to :promotion
+
+  #---
+  validates :description, presence: true, on: :update
+
+  #---
+  def to_partial_path
+    "promotion_handlers/#{model_name.singular}"
+  end
+
   def to_s
     name
   end

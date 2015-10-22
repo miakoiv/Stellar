@@ -3,13 +3,16 @@
   .panel.panel-default
     %fieldset.panel-body{disabled: locked}
       = f.text_field :name
-      = f.select :promotion_handler_id,
-          PromotionHandler.all.map { |h| [h.to_s, h.id] },
+      = f.select :promotion_handler_type,
+          Promotion.handler_types.map { |h| [h.constantize.model_name.human, h] },
           {}, {class: 'selectize', disabled: !@promotion.new_record?}
       = f.date_field :first_date,
-        data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.date_field :last_date,
-        data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+      - unless @promotion.new_record?
+        = f.fields_for :promotion_handler do |ff|
+          = render partial: @promotion.promotion_handler, locals: {f: ff}
       - unless locked
         = f.form_group do
           = f.primary

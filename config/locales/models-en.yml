@@ -49,6 +49,8 @@ en:
       promotion:
         one: promotion
         other: promotions
+      promotion_vanilla: manual pricing
+      promotion_get_one_free: get one free
       role:
         one: role
         other: roles
@@ -158,7 +160,7 @@ en:
         amount_available: Availability
         amount_sold: Sold
       promotion:
-        promotion_handler_id: Method
+        promotion_handler_type: Method
         name: Name
         first_date: Starts at
         last_date: Expires at

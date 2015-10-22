@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(version: 20151020125329) do
   add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
 
   create_table "promotion_handlers", force: :cascade do |t|
+    t.integer  "promotion_id",      limit: 4,     null: false
     t.string   "type",              limit: 255,   null: false
     t.string   "name",              limit: 255
     t.text     "description",       limit: 65535
@@ -293,14 +294,16 @@ ActiveRecord::Schema.define(version: 20151020125329) do
     t.datetime "updated_at",                      null: false
   end
 
+  add_index "promotion_handlers", ["promotion_id"], name: "index_promotion_handlers_on_promotion_id", using: :btree
+
   create_table "promotions", force: :cascade do |t|
-    t.integer  "store_id",             limit: 4,   null: false
-    t.integer  "promotion_handler_id", limit: 4,   null: false
-    t.string   "name",                 limit: 255
+    t.integer  "store_id",               limit: 4,   null: false
+    t.string   "promotion_handler_type", limit: 255, null: false
+    t.string   "name",                   limit: 255
     t.date     "first_date"
     t.date     "last_date"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "promotions", ["store_id"], name: "index_promotions_on_store_id", using: :btree

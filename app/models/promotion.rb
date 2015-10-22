@@ -2,7 +2,7 @@
 #
 # Promotions of one or more promoted items that run from first_date
 # to last_date. The business logic of the promotion is defined by its
-# promotion handler it belongs to.
+# promotion handler that is created on the creation of the promotion.
 #
 class Promotion < ActiveRecord::Base
 
@@ -11,9 +11,10 @@ class Promotion < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :promotion_handler
   has_many :promoted_items, dependent: :destroy
   has_many :products, through: :promoted_items
+  has_one :promotion_handler
+  accepts_nested_attributes_for :promotion_handler
 
   scope :active, -> { where '(first_date IS NULL OR first_date <= :today) AND (last_date IS NULL OR last_date >= :today)', today: Date.current }
 
@@ -23,7 +24,12 @@ class Promotion < ActiveRecord::Base
   #---
   # These attributes allow adding products and categories en masse
   # through a string of comma-separated ids.
-  attr :product_ids_string, :category_ids_string
+  attr_accessor :product_ids_string, :category_ids_string
+
+  #---
+  def self.handler_types
+    ['PromotionVanilla', 'PromotionGetOneFree']
+  end
 
   #---
   # Takes an order object and returns order items that match this promotion.

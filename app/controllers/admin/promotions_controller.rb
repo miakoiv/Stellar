@@ -36,6 +36,7 @@ class Admin::PromotionsController < ApplicationController
   # POST /admin/promotions.json
   def create
     @promotion = current_store.promotions.build(promotion_params)
+    @promotion_handler = @promotion.build_promotion_handler(type: @promotion.promotion_handler_type)
 
     respond_to do |format|
       if @promotion.save
@@ -119,7 +120,8 @@ class Admin::PromotionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def promotion_params
       params.require(:promotion).permit(
-        :name, :promotion_handler_id, :first_date, :last_date
+        :name, :promotion_handler_type, :first_date, :last_date,
+        promotion_handler_attributes: []
       )
     end
 end
