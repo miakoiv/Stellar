@@ -1,1 +1,2 @@
-= f.text_field :discount_percent
+= f.text_field :required_items
+= f.text_field :discount_percent, prepend: '–', append: '%', help: t('.discount_percent_help')
