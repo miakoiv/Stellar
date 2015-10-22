@@ -15,6 +15,8 @@ class PromotionHandler < ActiveRecord::Base
   validates :description, presence: true, on: :update
 
   #---
+  # Consolidates different promotion handler subclasses into a single
+  # folder of view partials.
   def to_partial_path
     "promotion_handlers/#{model_name.singular}"
   end
