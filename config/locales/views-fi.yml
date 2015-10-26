@@ -96,7 +96,9 @@ fi:
       catalog: Tuoteluettelo
       back_issues: Vanhat lehdet
     all_products: Kaikki tuotteet
+    linked_products: Tämä tuote tarvitsee näitä oheistuotteita
     add_to_cart: Lisää koriin
+    select_for_cart: Valitse tuotteet
     empty_cart: Ostoskorisi on tyhjä.
     go_shopping: Ostoksille!
     go_checkout: Jatka kassalle

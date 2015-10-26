@@ -3,7 +3,10 @@
       class: 'form-inline' do
     .form-group
       = hidden_field_tag :amount, 1
-      %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))
+      - if product.linked_products.any?
+        %button.btn.btn-success{type: 'button', data: {toggle: 'modal', target: '#select-for-cart-modal'}}= icon('shopping-cart', t('store.select_for_cart'))
+      - else
+        %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))
 - if current_user.can_update?(Product)
   = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
       class: 'btn btn-default'

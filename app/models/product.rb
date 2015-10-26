@@ -73,6 +73,10 @@ class Product < ActiveRecord::Base
     (title_changed? || subtitle_changed? || code_changed?) || super
   end
 
+  def with_linked_products
+    [self] + linked_products
+  end
+
   def linked_product_options
     (store.products.categorized - [self]).map { |p| [p.to_s, p.id] }
   end

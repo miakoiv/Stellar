@@ -1,0 +1,8 @@
+#select-for-cart-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('store.select_for_cart')
+      .modal-body
+        = render partial: 'products/modal_table', object: product.with_linked_products, as: :products

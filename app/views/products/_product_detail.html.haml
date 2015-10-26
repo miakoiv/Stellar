@@ -56,3 +56,14 @@
         = render partial: 'images/pill', collection: @presentational_images, as: :image
     .tab-content.gallery
       = render partial: 'images/presentational', collection: @presentational_images, as: :image
+
+.product-footer
+
+  - if @product.linked_products.any?
+    .col-xs-12
+      %h2= t('store.linked_products')
+    %ul.linked-products
+      = render partial: 'products/linked_product', collection: @product.linked_products, as: :product
+
+- if @product.linked_products.any?
+  = render partial: 'store/select_for_cart_modal', object: product, as: :product
