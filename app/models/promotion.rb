@@ -28,13 +28,18 @@ class Promotion < ActiveRecord::Base
 
   #---
   def self.handler_types
-    ['PromotionVanilla', 'PromotionGetOneFree']
+    ['PromotionVanilla', 'PromotionFreebieBundle']
   end
 
   #---
   # Takes an order object and returns order items that match this promotion.
   def matching_items(order)
     order.order_items.where(product_id: promoted_items.pluck(:product_id))
+  end
+
+  # Applies this promotion to the given order.
+  def apply!(order)
+    promotion_handler.apply!(order)
   end
 
   def available_products
