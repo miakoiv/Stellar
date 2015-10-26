@@ -85,9 +85,15 @@ class Order < ActiveRecord::Base
     order_items(reload)
   end
 
-  # Applies active promotions on the order.
+  # Applies active promotions on the order, first removing all existing
+  # adjustments from the order and its items.
   def apply_promotions!
-    logger.info "*** Applying promotions on #{self}"
+    adjustments.destroy_all
+    order_items.each { |order_item| order_item.adjustments.destroy_all }
+
+    store.promotions.active.each do |promotion|
+      promotion.apply!(self)
+    end
   end
 
   # Collects aggregated component quantities of all products in the order.
