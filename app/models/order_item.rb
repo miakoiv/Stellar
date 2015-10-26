@@ -32,4 +32,8 @@ class OrderItem < ActiveRecord::Base
       product_subtitle: product.subtitle
     )
   end
+
+  def to_s
+    product.title
+  end
 end
