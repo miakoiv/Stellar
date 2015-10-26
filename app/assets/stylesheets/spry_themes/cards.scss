@@ -190,5 +190,40 @@
         }
       }
     }
+    .product-footer {
+      @extend .row;
+
+      ul.linked-products {
+        list-style: none;
+        padding: 0;
+
+        li.product {
+          @extend .col-sm-2;
+          @extend .col-lg-1;
+          float: none;
+          display: inline-block;
+
+          &:hover a img {
+            @include box-shadow(0 0 8px $link-color);
+          }
+          a {
+            display: block;
+            text-decoration: none;
+
+            img { @extend .img-thumbnail; }
+            h3 {
+              font-size: $font-size-base;
+              margin-top: 0.25em;
+              margin-bottom: 0.5em;
+
+              .small {
+                display: block;
+                font-size: $font-size-small;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
