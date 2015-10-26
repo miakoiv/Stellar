@@ -21,8 +21,8 @@ class Product < ActiveRecord::Base
   has_many :order_items
   has_many :relationships, dependent: :destroy
   has_many :components, through: :relationships
-  has_many :promoted_item
-  has_many :promotions, through: :promoted_item
+  has_many :promoted_items
+  has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy
 
   scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
