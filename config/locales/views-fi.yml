@@ -59,7 +59,7 @@ fi:
       new:
         new_product: Uusi tuote
     promotion_handlers:
-      promotion_get_one_free:
+      promotion_freebie_bundle:
         discount_percent_help: Alentaa halvimman tuotteen hintaa annetulla prosentilla, kun kampanjatuotteita ostetaan ym. määrä.
     promotions:
       index:

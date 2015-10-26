@@ -79,7 +79,7 @@ en:
       new:
         new_product: New product
     promotion_handlers:
-      promotion_get_one_free:
+      promotion_freebie_bundle:
         discount_percent_help: The cheapest item is discounted by this percentage when the number of items purchased matches.
     promotions:
       index:

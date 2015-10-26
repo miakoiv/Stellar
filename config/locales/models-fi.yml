@@ -50,7 +50,7 @@ fi:
         one: kampanja
         other: kampanjat
       promotion_vanilla: manuaalinen hinnoittelu
-      promotion_get_one_free: tarjoamme halvimman
+      promotion_freebie_bundle: alennettu tuote paketissa
       role:
         one: rooli
         other: roolit
@@ -168,7 +168,7 @@ fi:
         category_ids_string: Lisättävät tuoteryhmät
       promotion_handler:
         description: Selite
-      promotion_get_one_free:
+      promotion_freebie_bundle:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa
       role:
