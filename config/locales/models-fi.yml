@@ -150,6 +150,7 @@ fi:
         images: Kuvat
         customizations: Ominaisuudet
         components: Komponentit
+        linked_product_ids: Liitännäistuotteet
         cost: Ostohinta
         sales_price: Myyntihinta
         stock: Saldo

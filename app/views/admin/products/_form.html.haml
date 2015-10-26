@@ -16,6 +16,8 @@
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.date_field :deleted_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+      = f.select :linked_product_ids, @product.linked_product_options,
+          {}, {multiple: true, class: 'selectize'}
       = f.text_area :memo, rows: 4
       - unless locked
         = f.form_group do

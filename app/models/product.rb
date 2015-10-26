@@ -25,6 +25,9 @@ class Product < ActiveRecord::Base
   has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy
 
+  # Self-referential HABTM to link products together.
+  has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
+
   scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
   scope :categorized, -> { where.not(category_id: nil) }
   scope :uncategorized, -> { where(category_id: nil) }
@@ -70,7 +73,11 @@ class Product < ActiveRecord::Base
     (title_changed? || subtitle_changed? || code_changed?) || super
   end
 
+  def linked_product_options
+    (store.products.categorized - [self]).map { |p| [p.to_s, p.id] }
+  end
+
   def to_s
-    title
+    "#{title} #{subtitle}"
   end
 end

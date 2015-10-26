@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020125329) do
+ActiveRecord::Schema.define(version: 20151026093108) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(version: 20151020125329) do
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
   add_index "inventory_items", ["product_id"], name: "index_inventory_items_on_product_id", using: :btree
   add_index "inventory_items", ["store_id"], name: "index_inventory_items_on_store_id", using: :btree
+
+  create_table "linked_products_products", id: false, force: :cascade do |t|
+    t.integer "product_id",        limit: 4, null: false
+    t.integer "linked_product_id", limit: 4, null: false
+  end
+
+  add_index "linked_products_products", ["product_id", "linked_product_id"], name: "linked_products_by_product", unique: true, using: :btree
 
   create_table "measurement_units", force: :cascade do |t|
     t.integer  "base_unit_id", limit: 4

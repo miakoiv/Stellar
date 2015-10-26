@@ -150,6 +150,7 @@ en:
         images: Images
         customizations: Attributes
         components: Components
+        linked_product_ids: Associated products
         cost: Purchase price
         sales_price: Sales price
         stock: Stock
