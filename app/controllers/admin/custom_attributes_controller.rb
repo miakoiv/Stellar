@@ -81,7 +81,7 @@ class Admin::CustomAttributesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def custom_attribute_params
       params.require(:custom_attribute).permit(
-        :measurement_unit_id, :unit_pricing, :name
+        :attribute_type, :measurement_unit_id, :unit_pricing, :name
       )
     end
 end

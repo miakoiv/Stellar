@@ -10,5 +10,6 @@
   .col-md-6
     = render partial: 'form', locals: {locked: false}
 
-  .col-md-6
-    = render partial: 'admin/custom_values/edit_table', object: @custom_attribute, as: :custom_attribute
+  - if @custom_attribute.set?
+    .col-md-6
+      = render partial: 'admin/custom_values/edit_table', object: @custom_attribute, as: :custom_attribute

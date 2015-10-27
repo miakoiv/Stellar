@@ -1,8 +1,13 @@
 fi:
   activerecord:
     values:
+      custom_attribute:
+        attribute_type:
+          set: arvojoukko
+          numeric: numeerinen
+          alpha: teksti
       image_type:
         purpose:
-          presentational: Esittävä
-          technical: Tekninen
-          document: Dokumentti
+          presentational: esittävä
+          technical: tekninen
+          document: dokumentti

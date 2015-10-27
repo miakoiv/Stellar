@@ -9,15 +9,20 @@
       %tbody#customizations-tbody
         = render partial: 'admin/customizations/edit_tbody', object: customizable, as: :customizable
 
-      = form_for [:admin, customizable, customizable.customizations.new], remote: true do |f|
-        %tbody
-          %tr
-            %td
-              = f.select :custom_attribute_id, current_store.custom_attributes.map { |a| [a.to_s, a.id] }, {include_blank: true}, {placeholder: col(Customization, :custom_attribute_id), class: 'form-control'}
-            %td
+.table-responsive
+  = form_for [:admin, customizable, customizable.customizations.new], remote: true do |f|
+    %table.table.table-loose
+      %tbody
+        %tr
+          %td.col-xs-4
+            = f.select :custom_attribute_id, current_store.custom_attributes.map { |a| [a.name_with_units, a.id] }, {include_blank: true}, {placeholder: col(Customization, :custom_attribute_id), class: 'form-control'}
+          %td
+            .custom-value-select.collapse
               = f.select :custom_value_id, [], {include_blank: true}, {placeholder: col(Customization, :custom_value_id), class: 'form-control'}
-            %td.text-right
-              = f.submit class: 'btn btn-sm btn-default'
+            .value-input.collapse
+              = f.text_field :value, class: 'form-control'
+          %td.col-xs-1.text-right
+            = f.submit class: 'btn btn-sm btn-default'
 
 :coffee
   options = #{current_store.grouped_custom_values.to_h.to_json}
@@ -27,8 +32,15 @@
       onChange: (index) ->
         value_select.disable()
         value_select.clearOptions()
-        value_select.addOption options[index]
-        value_select.enable()
+        if options[index]
+          value_select.addOption options[index]
+          value_select.enable()
+          $('.value-input').collapse 'hide'
+          $('.custom-value-select').collapse 'show'
+        else
+          $('.custom-value-select').collapse 'hide'
+          $('.value-input').collapse 'show'
+
     $value_select = $('#customization_custom_value_id').selectize
       dropdownParent: 'body'
       valueField: 'id'

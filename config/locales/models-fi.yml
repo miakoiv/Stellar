@@ -68,8 +68,10 @@ fi:
       customization:
         custom_attribute_id: Ominaisuus
         custom_value_id: Arvo
-        custom_values: Arvot
+        custom_values: Arvojoukko
+        value: Arvo
       custom_attribute:
+        attribute_type: Tyyppi
         measurement_unit_id: Mittayksikkö
         unit_pricing: Käytä yksikköhintaa
         name: Ominaisuus

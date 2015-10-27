@@ -17,7 +17,11 @@
       = content_tag_for :tr, @custom_attributes do |custom_attribute|
         %td= custom_attribute.name
         %td= custom_attribute.measurement_unit
-        %td= custom_attribute.custom_values.to_sentence
+        %td
+          - if custom_attribute.set?
+            = custom_attribute.custom_values.to_sentence
+          - else
+            %em= custom_attribute.type_name
         %td.hidden-print.text-right
           = link_to icon('info', t('actions.show')), admin_custom_attribute_path(custom_attribute),
               class: 'btn btn-default btn-sm'

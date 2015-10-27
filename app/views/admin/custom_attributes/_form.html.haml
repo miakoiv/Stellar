@@ -3,10 +3,14 @@
   .panel.panel-default
     %fieldset.panel-body{disabled: locked}
       = f.text_field :name
-      = f.select :measurement_unit_id,
-          MeasurementUnit.all.map { |u| [u.to_s, u.id] },
-          {include_blank: true}, {class: 'selectize'}
-      %fielset.unit_pricing.collapse{class: @custom_attribute.measurement_unit.present? ? 'in' : ''}
+      = f.select :attribute_type,
+          CustomAttribute.attribute_types.keys.map { |t| [CustomAttribute.human_attribute_value(:attribute_type, t), t] },
+          {}, {class: 'selectize', disabled: !@custom_attribute.new_record?}
+      %fieldset.measurement_unit.collapse{class: @custom_attribute.numeric? ? 'in' : ''}
+        = f.select :measurement_unit_id,
+            MeasurementUnit.all.map { |u| [u.to_s, u.id] },
+            {include_blank: true}, {class: 'selectize'}
+      %fieldset.unit_pricing.collapse{class: @custom_attribute.measurement_unit.present? ? 'in' : ''}
         = f.form_group do
           = f.check_box :unit_pricing,
               disabled: @custom_attribute.measurement_unit.nil?
@@ -15,6 +19,13 @@
           = f.primary
 
 :coffee
+  $('#custom_attribute_attribute_type').on 'change', (e) ->
+    if $(e.target).val() == 'numeric'
+      $('.measurement_unit').collapse 'show'
+    else
+      $('.measurement_unit').collapse 'hide'
+      $('#custom_attribute_measurement_unit_id')[0].selectize.setValue ''
+
   $('#custom_attribute_measurement_unit_id').on 'change', (e) ->
     if $(e.target).val()
       $('.unit_pricing').collapse 'show'

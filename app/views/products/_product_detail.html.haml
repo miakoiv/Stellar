@@ -35,8 +35,7 @@
       - product.customizations.each do |customization|
         %li.list-group-item
           %span.badge
-            = customization.custom_value
-            = customization.custom_attribute.measurement_unit
+            = customization.value_with_units
           = customization.custom_attribute
 
   - if product.iframes.any?

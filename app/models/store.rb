@@ -70,7 +70,7 @@ class Store < ActiveRecord::Base
 
   # All custom values available to the store, grouped by custom attribute id.
   def grouped_custom_values
-    custom_attributes.map do |a|
+    custom_attributes.set.map do |a|
       [a.id, a.custom_values.map { |v| {id: v.id, value: v.to_s} }]
     end
   end
