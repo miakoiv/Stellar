@@ -47,8 +47,9 @@ class Product < ActiveRecord::Base
   # returns calculated price per base unit.
   def unit_price
     customization = unit_pricing_customization
-    return nil if sales_price.nil? || customization.nil?
-    sales_price / (customization.custom_value.to_i * customization.custom_attribute.measurement_unit.factor)
+    measure = customization.try(:value).to_i
+    return nil if sales_price.nil? || customization.nil? || measure == 0
+    sales_price / (measure * customization.custom_attribute.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.
