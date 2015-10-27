@@ -4,5 +4,4 @@
       .modal-header
         %button.close{data: {dismiss: 'modal'}}= icon('close')
         %h4.modal-title= t('store.select_for_cart')
-      .modal-body
-        = render partial: 'products/modal_table', object: product.with_linked_products, as: :products
+      = render partial: 'products/modal_table', object: product.with_linked_products, as: :products
