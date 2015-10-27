@@ -9,4 +9,8 @@ module Imageable
   def cover_image
     images.by_purpose(:presentational).ordered.first
   end
+
+  def technical_cover_image
+    images.by_purpose(:technical).ordered.first
+  end
 end
