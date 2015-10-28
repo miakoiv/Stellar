@@ -6,17 +6,17 @@
 
 %ul.nav.nav-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
-    %a{href: '#orders', role: 'tab', data: {toggle: 'tab'}}
+    %a{href: '#tab-orders', role: 'tab', data: {toggle: 'tab'}}
       = t('.current')
   %li{role: 'presentation'}
-    %a{href: '#approved', role: 'tab', data: {toggle: 'tab'}}
+    %a{href: '#tab-approved', role: 'tab', data: {toggle: 'tab'}}
       = t('.approved')
 
 .tab-content
-  #orders.tab-pane.fade.in.active
+  #tab-orders.tab-pane.fade.in.active
     %h2.visible-print-block= t('.current')
     = render partial: 'admin/orders/table', object: @orders, as: :orders
 
-  #approved.tab-pane.fade
+  #tab-approved.tab-pane.fade
     %h2.visible-print-block= t('.approved')
     = render partial: 'admin/orders/table', object: @approved, as: :orders

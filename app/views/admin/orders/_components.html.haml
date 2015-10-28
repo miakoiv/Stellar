@@ -1,19 +1,19 @@
 %ul.nav.nav-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
-    %a{href: '#order_items', role: 'tab', data: {toggle: 'tab'}}
+    %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
       = title(OrderItem, count: 2)
   - unless order.is_quote?
     %li{role: 'presentation'}
-      %a{href: '#components', role: 'tab', data: {toggle: 'tab'}}
+      %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
         = t('.aggregated')
 
 .tab-content
-  #order_items.tab-pane.fade.in.active.page-break
+  #tab-order-items.tab-pane.fade.in.active.page-break
     %h2.visible-print-block= title(OrderItem, count: 2)
     = render partial: 'admin/order_items/table', object: order, as: :order
 
   - unless order.is_quote?
-    #components.tab-pane.fade.page-break
+    #tab-components.tab-pane.fade.page-break
       %h2.visible-print-block= t('.aggregated')
       .table-responsive
         %table.table.table-hover.table-condensed

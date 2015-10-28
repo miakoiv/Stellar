@@ -4,11 +4,11 @@
 
 %ul.nav.nav-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
-    %a{href: '#inventory', role: 'tab', data: {toggle: 'tab'}}
+    %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
       = t('admin.dashboard.inventory.title')
 
 .tab-content
-  #inventory.tab-pane.fade.in.active
+  #tab-inventory.tab-pane.fade.in.active
     %h2.visible-print-block= t('admin.dashboard.inventory.title')
     .panel.panel-default
       .panel-body.form-horizontal
