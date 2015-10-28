@@ -15,6 +15,7 @@ class Admin::CustomValuesController < ApplicationController
 
     respond_to do |format|
       if @custom_value.save
+        format.json { render json: @custom_value, status: 200 } # for selectize.js
         format.js
       end
     end

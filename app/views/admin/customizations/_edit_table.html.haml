@@ -24,17 +24,24 @@
           %td.col-xs-1.text-right
             = f.submit class: 'btn btn-sm btn-default'
 
+- attribute_set_ids = current_store.custom_attributes.set.pluck(:id)
+
 :coffee
-  options = #{current_store.grouped_custom_values.to_h.to_json}
+  show_paths = #{attribute_set_ids.map { |id| [id, admin_custom_attribute_path(id)] }.to_h.to_json}
+  create_paths = #{attribute_set_ids.map { |id| [id, admin_custom_attribute_custom_values_path(id)] }.to_h.to_json}
   jQuery ->
     $attribute_select = $('#customization_custom_attribute_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->
         value_select.disable()
         value_select.clearOptions()
-        if options[index]
-          value_select.addOption options[index]
-          value_select.enable()
+        if show_paths[index]
+          value_select.load (callback) ->
+            $.ajax
+              url: show_paths[index]
+              success: (response) ->
+                callback(response)
+                value_select.enable()
           $('.value-input').collapse 'hide'
           $('.custom-value-select').collapse 'show'
         else
@@ -45,6 +52,16 @@
       dropdownParent: 'body'
       valueField: 'id'
       labelField: 'value'
+      create: (input, callback) ->
+        $.ajax
+          url: create_paths[attribute_select.getValue()]
+          type: 'POST'
+          async: false
+          data: {custom_value: {value: input}}
+          success: (response) ->
+            callback
+              id: response.id
+              value: response.value
 
     attribute_select = $attribute_select[0].selectize
     value_select = $value_select[0].selectize

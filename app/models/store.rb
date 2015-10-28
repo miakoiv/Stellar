@@ -68,13 +68,6 @@ class Store < ActiveRecord::Base
     pages.map { |p| [p.to_s, p.id] }
   end
 
-  # All custom values available to the store, grouped by custom attribute id.
-  def grouped_custom_values
-    custom_attributes.set.map do |a|
-      [a.id, a.custom_values.map { |v| {id: v.id, value: v.to_s} }]
-    end
-  end
-
   # Finds the shipping cost product manually due to having
   # shipping_cost_product_id a setting instead of a real relation.
   def shipping_cost_product

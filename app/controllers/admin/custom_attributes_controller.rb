@@ -18,6 +18,10 @@ class Admin::CustomAttributesController < ApplicationController
   # GET /admin/custom_attributes/1
   # GET /admin/custom_attributes/1.json
   def show
+    respond_to do |format|
+      format.json { render json: @custom_attribute.custom_values.to_json, status: 200 }
+      format.html
+    end
   end
 
   # GET /admin/custom_attributes/new
