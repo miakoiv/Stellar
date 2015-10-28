@@ -3,12 +3,13 @@
     = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('shopping-cart', t('.checkout'))
 
-.col-lg-7
-  .panel.panel-default
-    .panel-body
-      = render partial: 'cart_form'
+.row
+  .col-lg-7
+    .panel.panel-default
+      .panel-body
+        = render partial: 'cart_form'
 
-.col-lg-5
-  .help-block.payment.collapse{class: @order.has_payment? ? 'in' : ''}
-    %a(href="https://www.maksuturva.fi/Certificate.pmt?seller_id=testikauppias&request_locale=en" target="_blank" title="Maksuturva web payment")
-      %img(src="https://www.maksuturva.fi/Banner.pmt?sellerid=testikauppias&bannertype=payment_methods_horizontal&request_locale=en&rowscolumns=6" Alt="Maksuturva web payment")
+  .col-lg-5
+    .help-block.payment.collapse{class: @order.has_payment? ? 'in' : ''}
+      %a(href="https://www.maksuturva.fi/Certificate.pmt?seller_id=testikauppias&request_locale=en" target="_blank" title="Maksuturva web payment")
+        %img(src="https://www.maksuturva.fi/Banner.pmt?sellerid=testikauppias&bannertype=payment_methods_horizontal&request_locale=en&rowscolumns=6" Alt="Maksuturva web payment")
