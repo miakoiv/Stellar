@@ -6,8 +6,8 @@
         %th= col(Customization, :custom_value_id)
         %th.col-xs-1.hidden-print
 
-      %tbody#customizations-tbody
-        = render partial: 'admin/customizations/edit_tbody', object: customizable, as: :customizable
+    %tbody#customizations-tbody
+      = render partial: 'admin/customizations/edit_tbody', object: customizable, as: :customizable
 
 .table-responsive
   = form_for [:admin, customizable, customizable.customizations.new], remote: true do |f|
