@@ -249,9 +249,14 @@ body {
       .product-description {
         @extend .col-xs-12, .col-md-3;
 
-        .product-code { font-size: $font-size-small; }
-        .product-stock { display: none; }
-        .body-text { }
+        .product-code {
+          @extend .pull-left;
+          font-size: $font-size-small;
+        }
+        .product-stock {
+          @extend .pull-right, .clearfix;
+        }
+        .body-text { clear: both; }
         .list-group {
           margin-top: 20px;
 
