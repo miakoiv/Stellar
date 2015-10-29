@@ -16,8 +16,12 @@ class Admin::OrdersController < ApplicationController
   end
 
   # GET /admin/orders/1
-  # GET /admin/orders/1.json
+  # GET /admin/orders/1.xml
   def show
+    respond_to do |format|
+      format.html
+      format.xml
+    end
   end
 
   # GET /admin/orders/new
