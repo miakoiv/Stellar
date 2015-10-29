@@ -1,11 +1,12 @@
 = bootstrap_form_for [:admin, @category], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    %fieldset.panel-body{disabled: locked}
-      = f.select :parent_category_id, current_store.category_options,
-          {include_blank: true}, {class: 'selectize'}
-      = f.text_field :name
-      = f.text_area :description, class: 'wysiwyg'
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.select :parent_category_id, current_store.category_options,
+            {include_blank: true}, {class: 'selectize'}
+        = f.text_field :name
+        = f.text_area :description, class: 'wysiwyg'
       - unless locked
         = f.form_group do
           = f.primary

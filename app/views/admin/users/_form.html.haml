@@ -1,13 +1,14 @@
 = bootstrap_form_for [:admin, @user], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    %fieldset.panel-body{disabled: locked}
-      = f.text_field :name
-      = f.text_field :email
-      - if @user.new_record?
-        = f.password_field :password
-        = f.password_field :password_confirmation
-      %fieldset{disabled: !current_user.is_user_manager?}
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :name
+        = f.text_field :email
+        - if @user.new_record?
+          = f.password_field :password
+          = f.password_field :password_confirmation
+      %fieldset{disabled: locked || !current_user.is_user_manager?}
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}
       - unless locked

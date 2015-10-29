@@ -1,25 +1,26 @@
 = bootstrap_form_for [:admin, @product], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    %fieldset.panel-body{disabled: locked}
-      = f.select :category_id, current_store.category_options,
-          {include_blank: true}, {class: 'selectize'}
-      = f.form_group do
-        = f.check_box :virtual
-      = f.text_field :code
-      = f.text_field :customer_code
-      = f.text_field :title
-      = f.text_field :subtitle
-      = f.text_area :description, class: 'wysiwyg'
-      = f.text_field :cost, append: '€'
-      = f.text_field :sales_price, append: '€'
-      = f.date_field :available_at,
-          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-      = f.date_field :deleted_at,
-          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-      = f.select :linked_product_ids, @product.linked_product_options,
-          {}, {multiple: true, class: 'selectize'}
-      = f.text_area :memo, rows: 4
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.select :category_id, current_store.category_options,
+            {include_blank: true}, {class: 'selectize'}
+        = f.form_group do
+          = f.check_box :virtual
+        = f.text_field :code
+        = f.text_field :customer_code
+        = f.text_field :title
+        = f.text_field :subtitle
+        = f.text_area :description, class: 'wysiwyg'
+        = f.text_field :cost, append: '€'
+        = f.text_field :sales_price, append: '€'
+        = f.date_field :available_at,
+            data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+        = f.date_field :deleted_at,
+            data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+        = f.select :linked_product_ids, @product.linked_product_options,
+            {}, {multiple: true, class: 'selectize'}
+        = f.text_area :memo, rows: 4
       - unless locked
         = f.form_group do
           = f.primary

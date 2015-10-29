@@ -1,19 +1,19 @@
 = bootstrap_form_for [:admin, @order], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    %fieldset.panel-body{disabled: locked}
-      = f.select :order_type_id, current_store.order_type_options,
-          {}, {disabled: true, class: 'selectize'}
-      = f.text_field :ordered_at, value: l(@order.ordered_at.to_date, format: :iso), disabled: true
-      %fieldset{disabled: @order.approval}
+    .panel-body
+      %fieldset{disabled: true}
+        = f.select :order_type_id, current_store.order_type_options,
+            {}, {class: 'selectize'}
+        = f.text_field :ordered_at, value: l(@order.ordered_at.to_date, format: :iso)
+      %fieldset{disabled: locked || @order.approval}
         = f.text_field :customer_name
         = f.text_field :customer_email
         = f.text_field :company_name
         = f.text_field :contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           = f.date_field :shipping_at,
-              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd',
-                'date-language' => I18n.locale}
+              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           = f.text_field :shipping_address
           = f.text_field :shipping_postalcode, skip_label: true
           = f.text_field :shipping_city, skip_label: true
@@ -21,8 +21,9 @@
           = f.text_field :billing_postalcode, skip_label: true
           = f.text_field :billing_city, skip_label: true
         = f.text_area :notes, rows: 4
-      = f.form_group :approval do
-        = f.check_box :approval, label: col(Order, :approved)
+      %fieldset
+        = f.form_group :approval do
+          = f.check_box :approval, label: col(Order, :approved)
       - unless locked
         = f.form_group do
           = f.primary

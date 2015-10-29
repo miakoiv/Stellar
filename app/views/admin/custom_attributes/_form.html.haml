@@ -1,16 +1,17 @@
 = bootstrap_form_for [:admin, @custom_attribute], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
-    %fieldset.panel-body{disabled: locked}
-      = f.text_field :name
-      = f.select :attribute_type,
-          CustomAttribute.attribute_types.keys.map { |t| [CustomAttribute.human_attribute_value(:attribute_type, t), t] },
-          {}, {class: 'selectize', disabled: !@custom_attribute.new_record?}
-      %fieldset.measurement_unit.collapse{class: @custom_attribute.numeric? ? 'in' : ''}
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :name
+        = f.select :attribute_type,
+            CustomAttribute.attribute_types.keys.map { |t| [CustomAttribute.human_attribute_value(:attribute_type, t), t] },
+            {}, {class: 'selectize', disabled: !@custom_attribute.new_record?}
+      %fieldset.measurement_unit.collapse{disabled: locked, class: @custom_attribute.numeric? ? 'in' : ''}
         = f.select :measurement_unit_id,
             MeasurementUnit.all.map { |u| [u.to_s, u.id] },
             {include_blank: true}, {class: 'selectize'}
-      %fieldset.unit_pricing.collapse{class: @custom_attribute.measurement_unit.present? ? 'in' : ''}
+      %fieldset.unit_pricing.collapse{disabled: locked, class: @custom_attribute.measurement_unit.present? ? 'in' : ''}
         = f.form_group do
           = f.check_box :unit_pricing,
               disabled: @custom_attribute.measurement_unit.nil?
