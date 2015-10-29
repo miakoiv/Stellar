@@ -94,6 +94,7 @@ en:
         amount: Amount
         value: Value
       order:
+        number: order №
         user_id: Customer
         order_type_id: Order type
         ordered_at: Date of order

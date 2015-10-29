@@ -3,8 +3,6 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: true}
-        = f.select :order_type_id, current_store.order_type_options,
-            {}, {class: 'selectize'}
         = f.text_field :ordered_at, value: l(@order.ordered_at.to_date, format: :iso)
       %fieldset{disabled: locked || @order.approval}
         = f.text_field :customer_name

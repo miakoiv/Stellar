@@ -2,8 +2,10 @@
   = link_to orders_path(anchor: orders_tab(@order)), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   %h1
-    = title(Order)
-    %span.small= @order.to_s
+    = @order.order_type
+    %span.small
+      = col(Order, :number)
+      = @order.to_s
 
 .row
   .col-sm-5

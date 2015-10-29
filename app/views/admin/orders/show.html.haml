@@ -6,8 +6,10 @@
       = icon('pencil-square', t('actions.edit'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1
-    = title(Order)
-    %span.small= @order.to_s
+    = @order.order_type
+    %span.small
+      = col(Order, :number)
+      = @order.to_s
 
 .row
   .col-lg-6

@@ -4,8 +4,10 @@
   = link_to admin_order_path(@order), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1
-    = title(Order)
-    %span.small= @order.to_s
+    = @order.order_type
+    %span.small
+      = col(Order, :number)
+      = @order.to_s
 
 .row
   .col-lg-6
