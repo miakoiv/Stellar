@@ -18,11 +18,9 @@
         %td
           - product.images.ordered.each do |image|
             = image_variant_tag(image, :icon,
-                data: {toggle: 'popover', placement: 'left', container: 'body',
-                  content: "#{image_variant_tag(image, :matchbox)}"})
+                data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
         %td.hidden-print.text-right
           = link_to icon('info', t('actions.show')), admin_product_path(product),
               class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Product)
-            = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product),
-                class: 'btn btn-default btn-sm'
+            = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
