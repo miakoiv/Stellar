@@ -16,6 +16,14 @@ class OrderItem < ActiveRecord::Base
   delegate :virtual?, to: :product
 
   #---
+  # Reveal price and components when the order allows it.
+  def reveal_price?
+    order.reveal_prices?
+  end
+  def reveal_components?
+    order.reveal_components? && product.relationships.any?
+  end
+
   def subtotal
     amount * (price || 0)
   end

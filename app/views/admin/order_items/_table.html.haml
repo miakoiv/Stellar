@@ -6,7 +6,7 @@
         %th.col-xs-3{colspan: 2}= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
         %th.col-xs-2.text-right #
-        - if order.is_quote?
+        - if order.reveal_prices?
           %th.col-xs-1.text-right à
 
     = render partial: 'admin/order_items/row', collection: order.order_items, as: :order_item

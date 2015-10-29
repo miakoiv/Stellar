@@ -2,7 +2,7 @@
   %li.active{role: 'presentation'}
     %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
       = title(OrderItem, count: 2)
-  - unless order.is_quote?
+  - if order.reveal_components?
     %li{role: 'presentation'}
       %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
         = t('.aggregated')
@@ -12,7 +12,7 @@
     %h2.visible-print-block= title(OrderItem, count: 2)
     = render partial: 'admin/order_items/table', object: order, as: :order
 
-  - unless order.is_quote?
+  - if order.reveal_components?
     #tab-components.tab-pane.fade.page-break
       %h2.visible-print-block= t('.aggregated')
       .table-responsive

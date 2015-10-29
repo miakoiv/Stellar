@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
   belongs_to :store
   belongs_to :user
   belongs_to :order_type
+  delegate :is_rfq?, :is_quote?, to: :order_type
+
   has_many :order_items, dependent: :destroy, inverse_of: :order
 
   # Current orders are completed, not yet approved orders.
@@ -42,6 +44,16 @@ class Order < ActiveRecord::Base
   before_save :copy_billing_address, unless: :has_billing_address?
 
   #---
+  # Only show prices for RFQs.
+  def reveal_prices?
+    is_rfq?
+  end
+
+  # Only show product components for non-RFQs.
+  def reveal_components?
+    !is_rfq?
+  end
+
   def approval
     !!approved_at.present?
   end
@@ -120,10 +132,6 @@ class Order < ActiveRecord::Base
 
   def has_payment?
     order_type.present? && order_type.has_payment?
-  end
-
-  def is_quote?
-    order_type.is_quote?
   end
 
   def adjustment_total
