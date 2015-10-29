@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Pages must be available to main navigation at all times.
   before_action :load_pages
   def load_pages
-    @pages = current_store.pages.top_level.ordered
+    @pages ||= current_store.pages.top_level.ordered
   end
 
   # Authenticate user, but skip authentication
@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   # Convenience method to access the current user's shopping cart.
   def shopping_cart
-    current_user.shopping_cart(current_store)
+    @shopping_cart ||= current_user.shopping_cart(current_store)
   end
   helper_method :shopping_cart
 
