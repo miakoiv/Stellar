@@ -76,10 +76,10 @@
                       %td.alignright= OrderItem.human_attribute_name(:subtotal)
                     - @order.order_items.each do |order_item|
                       = content_tag_for :tr, order_item do
-                        %td= order_item.product.code
+                        %td= order_item.product_code
                         %td
-                          %b= order_item.product.title
-                          = order_item.product.subtitle
+                          %b= order_item.product_title
+                          = order_item.product_subtitle
                         %td.alignright= order_item.amount
                         %td.alignright
                           = humanized_money_with_symbol order_item.price
