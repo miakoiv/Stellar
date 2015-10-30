@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     end
     resources :orders do
       resources :images, shallow: true
+      resources :order_items, shallow: true
     end
     resources :users
 
