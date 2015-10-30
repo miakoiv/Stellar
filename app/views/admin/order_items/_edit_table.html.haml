@@ -9,4 +9,4 @@
         - if order.reveal_prices?
           %th.col-xs-2.text-right à
 
-    = render partial: 'admin/order_items/row', collection: order.order_items, as: :order_item
+    = render partial: 'admin/order_items/edit_row', collection: order.order_items, as: :order_item
