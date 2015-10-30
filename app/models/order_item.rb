@@ -2,8 +2,13 @@
 
 class OrderItem < ActiveRecord::Base
 
+  resourcify
+  include Authority::Abilities
   include Adjustable
-  monetize :price_cents, allow_nil: true
+  monetize :price_cents, allow_nil: true,
+    numericality: {
+      greater_than_or_equal_to: 0
+    }
 
   #---
   belongs_to :order, inverse_of: :order_items
