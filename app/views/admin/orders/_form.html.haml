@@ -4,7 +4,7 @@
     .panel-body
       %fieldset{disabled: true}
         = f.text_field :ordered_at, value: l(@order.ordered_at.to_date, format: :iso)
-      %fieldset{disabled: locked || @order.approval}
+      %fieldset{disabled: locked || @order.approved?}
         = f.text_field :customer_name
         = f.text_field :customer_email
         = f.text_field :company_name

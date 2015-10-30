@@ -14,6 +14,7 @@ class OrderItem < ActiveRecord::Base
 
   #---
   delegate :virtual?, to: :product
+  delegate :approved?, to: :order
 
   #---
   # Reveal price and components when the order allows it.

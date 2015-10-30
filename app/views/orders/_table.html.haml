@@ -15,7 +15,7 @@
         %td= order.order_items.count
         %td= order.shipping_at.present? ? l(order.shipping_at) : ''
         %td.text-right
-          - if order.approval
+          - if order.approved?
             = link_to icon('info', t('actions.show')), order_path(order),
                 class: 'btn btn-default btn-sm'
           - else

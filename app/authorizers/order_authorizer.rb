@@ -23,7 +23,7 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    user == resource.user && !resource.approval
+    user == resource.user && !resource.approved?
   end
 
   def deletable_by?(user)
