@@ -93,6 +93,9 @@ class Store < ActiveRecord::Base
     super || 'store'
   end
 
+  def contact_person_name; contact_person.try(:name); end
+  def contact_person_email; contact_person.try(:email); end
+
   def to_s
     name
   end
