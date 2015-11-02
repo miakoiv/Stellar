@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   # Set current store to the current user's store. As a fallback for guests,
   # look it up using the requested hostname.
   def current_store
-    @current_store ||= user_signed_in? && current_user.store || Store.find_by(host: request.host)
+    Store.find_by(host: request.host)
   end
   helper_method :current_store
 
