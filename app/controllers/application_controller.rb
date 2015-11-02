@@ -33,10 +33,10 @@ class ApplicationController < ActionController::Base
 
   after_filter :prepare_unobtrusive_flash
 
-  # Set current store to the current user's store. As a fallback for guests,
-  # look it up using the requested hostname.
+  # Set current store to the current user's store. For unauthenticated guests,
+  # use the store matching requested hostname.
   def current_store
-    Store.find_by(host: request.host)
+    @current_store ||= user_signed_in? && current_user.store || current_store_by_request
   end
   helper_method :current_store
 
@@ -82,9 +82,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def current_store_by_request
+      Store.find_by(host: request.host)
+    end
+
     def create_guest_user
-      guest = User.create(
-        store: current_store,
+      guest = User.new(
+        store: current_store_by_request,
         guest: true,
         name: 'Guest',
         email: "guest_#{Time.now.to_i}#{rand(100)}@leasit.info",
@@ -94,5 +98,4 @@ class ApplicationController < ActionController::Base
       session[:guest_user_id] = guest.id
       guest
     end
-
 end
