@@ -79,7 +79,7 @@ class StoreController < ApplicationController
             cancel_url: show_cart_url
           format.html { render :confirm }
         else
-          @order.update ordered_at: Time.current
+          @order.update completed_at: Time.current
           format.html { redirect_to confirm_order_path(@order),
             notice: t('.notice') }
         end

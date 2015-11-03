@@ -20,7 +20,7 @@ class InventoryItem < ActiveRecord::Base
   # resides in.
   def adjustment
     product.order_items.joins(order: :order_type)
-      .where.not(orders: {ordered_at: nil})
+      .where.not(orders: {completed_at: nil})
       .where(orders: {approved_at: nil})
       .where(order_types: {inventory_id: inventory})
       .map { |item|

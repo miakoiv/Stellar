@@ -2,7 +2,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1= col(Order, :ordered_at)
+        %th.col-xs-1= col(Order, :completed_at)
         %th= col(Order, :order_type_id)
         %th.col-xs-1= col(Order, :items)
         %th.col-xs-1= col(Order, :shipping_at)
@@ -10,7 +10,7 @@
 
     %tbody
       = content_tag_for :tr, orders do |order|
-        %td= l(order.ordered_at.to_date)
+        %td= l(order.completed_at.to_date)
         %td= order.order_type
         %td= order.order_items.count
         %td= order.shipping_at.present? ? l(order.shipping_at) : ''

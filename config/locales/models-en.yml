@@ -97,7 +97,7 @@ en:
         number: order №
         user_id: Customer
         order_type_id: Order type
-        ordered_at: Date of order
+        completed_at: Date of order
         shipping_at: Date of shipment
         approved: Approved
         approved_at: Processed

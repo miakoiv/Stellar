@@ -97,7 +97,7 @@ fi:
         number: tilaus nro
         user_id: Tilaaja
         order_type_id: Tilaustyyppi
-        ordered_at: Tilauspvm
+        completed_at: Tilauspvm
         shipping_at: Toimituspvm
         approved: Hyväksytty
         approved_at: Käsitelty

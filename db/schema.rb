@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029124745) do
+ActiveRecord::Schema.define(version: 20151103133435) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -202,10 +202,12 @@ ActiveRecord::Schema.define(version: 20151029124745) do
   end
 
   create_table "orders", force: :cascade do |t|
+    t.string   "checkout_state",             limit: 255
+    t.string   "state",                      limit: 255
     t.integer  "store_id",                   limit: 4,                     null: false
     t.integer  "user_id",                    limit: 4,                     null: false
     t.integer  "order_type_id",              limit: 4
-    t.datetime "ordered_at"
+    t.datetime "completed_at"
     t.date     "shipping_at"
     t.datetime "approved_at"
     t.string   "customer_name",              limit: 255

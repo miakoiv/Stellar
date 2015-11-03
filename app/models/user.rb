@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   # A user's shopping cart is technically an order singleton in the scope of
   # current store, the one and only order that's not been ordered yet.
   def shopping_cart(store)
-    orders.by_store(store).unordered.first ||
+    orders.by_store(store).incomplete.first ||
       orders.create(
         store: store,
         order_type: store.default_order_type,

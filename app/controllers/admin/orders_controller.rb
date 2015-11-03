@@ -26,7 +26,7 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/new
   def new
-    @order = current_store.orders.build(ordered_at: Time.current)
+    @order = current_store.orders.build(completed_at: Time.current)
   end
 
   # GET /admin/orders/1/edit
@@ -74,7 +74,7 @@ class Admin::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :order_type_id, :ordered_at, :shipping_at, :approval,
+        :order_type_id, :completed_at, :shipping_at, :approval,
         :customer_name, :customer_email,
         :company_name, :contact_person, :billing_address, :billing_postalcode,
         :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,

@@ -15,13 +15,13 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy, inverse_of: :order
 
   # Current orders are completed, not yet approved orders.
-  scope :current, -> { where.not(ordered_at: nil).where(approved_at: nil) }
+  scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
 
-  # Completed orders, approved or not.
-  scope :completed, -> { where.not(ordered_at: nil) }
+  # Complete orders, approved or not.
+  scope :complete, -> { where.not(completed_at: nil) }
 
-  # Unordered orders is the scope for shopping carts.
-  scope :unordered, -> { where(ordered_at: nil) }
+  # Incomplete orders is the scope for shopping carts.
+  scope :incomplete, -> { where(completed_at: nil) }
 
   # Approved orders.
   scope :approved, -> { where.not(approved_at: nil) }

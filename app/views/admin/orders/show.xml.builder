@@ -1,6 +1,6 @@
 xml.order do
   xml.order_type @order.order_type
-  xml.order_date @order.ordered_at.to_date
+  xml.order_date @order.completed_at.to_date
   xml.store_name @order.store_name
   xml.shipping_date @order.shipping_at
 
