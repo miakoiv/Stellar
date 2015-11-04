@@ -8,6 +8,10 @@ class OrderType < ActiveRecord::Base
   has_many :orders
 
   #---
+  def tab_name
+    name
+  end
+
   def to_s
     name
   end

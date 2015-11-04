@@ -15,8 +15,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = current_user.orders.current
-    @approved = current_user.orders.approved
+    @orders_by_type = current_user.orders.complete.by_order_type
   end
 
   # GET /orders/1

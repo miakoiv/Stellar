@@ -15,9 +15,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @categories = current_store.categories.ordered
-    @categorized = current_store.products.categorized.ordered
-    @uncategorized = current_store.products.uncategorized.ordered
+    @products_by_category = current_store.products.ordered.by_category
   end
 
   # GET /admin/products/1

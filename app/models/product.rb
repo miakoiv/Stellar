@@ -31,6 +31,7 @@ class Product < ActiveRecord::Base
   scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
   scope :categorized, -> { where.not(category_id: nil) }
   scope :uncategorized, -> { where(category_id: nil) }
+  scope :by_category, -> { order(:category_id).group_by(&:category) }
   scope :virtual, -> { where(virtual: true) }
 
   #---
@@ -80,6 +81,10 @@ class Product < ActiveRecord::Base
 
   def linked_product_options
     (store.products.categorized - [self]).map { |p| [p.to_s, p.id] }
+  end
+
+  def tab_name
+    category.present? ? category.name : 'uncategorized'
   end
 
   def to_s

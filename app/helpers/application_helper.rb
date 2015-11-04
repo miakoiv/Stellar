@@ -16,6 +16,12 @@ module ApplicationHelper
     end
   end
 
+  # Records displayed in tabs must respond to #tab_name,
+  # used to construct the tab name the record resides in.
+  def tab_name(object, fallback = nil)
+    "tab-#{object.respond_to?(:tab_name) ? object.tab_name.parameterize : fallback}"
+  end
+
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
     return ''.html_safe if image.nil?

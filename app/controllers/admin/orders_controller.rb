@@ -11,8 +11,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders = current_store.orders.current
-    @approved = current_store.orders.approved
+    @orders_by_type = current_store.orders.complete.by_order_type
   end
 
   # GET /admin/orders/1

@@ -1,19 +1,16 @@
 .page-header
   %h1= icon('truck', title(Order, count: 2))
 
+- first = @orders_by_type.keys.first
+
 %ul.nav.nav-tabs{role: 'tablist'}
-  %li.active{role: 'presentation'}
-    %a{href: '#tab-orders', role: 'tab', data: {toggle: 'tab'}}
-      = t('.current')
-  %li{role: 'presentation'}
-    %a{href: '#tab-approved', role: 'tab', data: {toggle: 'tab'}}
-      = t('.approved')
+  - @orders_by_type.each_key do |order_type|
+    %li{role: 'presentation', class: order_type == first ? 'active' : nil}
+      %a{href: "##{tab_name(order_type)}", role: 'tab', data: {toggle: 'tab'}}
+        = order_type
 
 .tab-content
-  #tab-orders.tab-pane.fade.in.active
-    %h2.visible-print-block= t('.current')
-    = render partial: 'orders/table', object: @orders, as: :orders
-
-  #tab-approved.tab-pane.fade
-    %h2.visible-print-block= t('.approved')
-    = render partial: 'orders/table', object: @approved, as: :orders
+  - @orders_by_type.each do |order_type, orders|
+    .tab-pane.fade{id: tab_name(order_type), class: order_type == first ? 'in active' : nil}
+      %h2.visible-print-block= order_type
+      = render partial: 'orders/table', object: orders, as: :orders

@@ -4,25 +4,19 @@
       = icon('plus', t('.new_product'))
   %h1= icon('cube', title(Product, count: 2))
 
+- first = @products_by_category.keys.first
+
 %ul.nav.nav-tabs{role: 'tablist'}
-  - @categories.each_with_index do |category, index|
-    - next if category.products.empty?
-    %li{role: 'presentation', class: index == 0 ? 'active' : nil}
-      %a{href: "#tab-#{dom_id(category)}", role: 'tab', data: {toggle: 'tab'}}
-        = category.name.truncate(15, omission: '…')
-  %li{role: 'presentation'}
-    %a{href: '#tab-uncategorized', role: 'tab', data: {toggle: 'tab'}}
-      = t('.uncategorized')
+  - @products_by_category.each_key do |category|
+    %li{role: 'presentation', class: category == first ? 'active' : nil}
+      %a{href: "##{tab_name(category, 'uncategorized')}", role: 'tab', data: {toggle: 'tab'}}
+        = category.present? ? category.name.truncate(15, omission: '…') : t('.uncategorized')
 
 .tab-content
-  - @categorized.group_by(&:category).each do |category, products|
-    .tab-pane.fade{id: "tab-#{dom_id(category)}", class: category == @categories.first ? 'in active' : nil}
-      %h2.visible-print-block= category.name
+  - @products_by_category.each do |category, products|
+    .tab-pane.fade{id: tab_name(category, 'uncategorized'), class: category == first ? 'in active' : nil}
+      %h2.visible-print-block= category.try(:name) || t('.uncategorized')
       = render partial: 'admin/products/table', object: products, as: :products
-
-  #tab-uncategorized.tab-pane.fade
-    %h2.visible-print-block= t('.uncategorized')
-    = render partial: 'admin/products/table', object: @uncategorized, as: :products
 
 :coffee
   $('.sortable').sortable(

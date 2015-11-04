@@ -1,6 +1,5 @@
 = content_tag_for :tr, order do
   %td= order.completed_at.present? ? l(order.completed_at.to_date) : ''
-  %td= order.order_type
   %td= order.customer_name
   %td= order.order_items.count
   %td= order.shipping_at.present? ? l(order.shipping_at) : ''

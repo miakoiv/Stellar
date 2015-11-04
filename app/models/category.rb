@@ -29,6 +29,10 @@ class Category < ActiveRecord::Base
     name_changed? || super
   end
 
+  def tab_name
+    name
+  end
+
   def to_s
     name
   end

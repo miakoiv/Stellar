@@ -26,6 +26,8 @@ class Order < ActiveRecord::Base
   # Approved orders.
   scope :approved, -> { where.not(approved_at: nil) }
 
+  scope :by_order_type, -> { order(:order_type_id).group_by(&:order_type) }
+
   #---
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
@@ -159,6 +161,10 @@ class Order < ActiveRecord::Base
 
   def padded_id
     '1%07d' % id
+  end
+
+  def tab_name
+    order_type.name
   end
 
   def to_s
