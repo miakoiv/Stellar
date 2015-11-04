@@ -24,3 +24,24 @@ mm:
   base_unit_id: 5
   exponent: -3
   name: mm
+V:
+  id: 7
+  name: V
+mV:
+  id: 8
+  base_unit_id: 7
+  exponent: -3
+  name: mV
+W:
+  id: 9
+  name: W
+mW:
+  id: 10
+  base_unit_id: 9
+  exponent: -3
+  name: mW
+kW:
+  id: 11
+  base_unit_id: 9
+  exponent: 3
+  name: kW
