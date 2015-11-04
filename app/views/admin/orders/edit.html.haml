@@ -26,7 +26,10 @@
     .tab-content
       #tab-order-items.tab-pane.fade.in.active.page-break
         %h2.visible-print-block= title(OrderItem, count: 2)
-        = render partial: 'admin/order_items/edit_table', object: @order, as: :order
+        - if @order.approved?
+          = render partial: 'admin/order_items/table', object: @order, as: :order
+        - else
+          = render partial: 'admin/order_items/edit_table', object: @order, as: :order
 
       - if @order.reveal_components?
         #tab-components.tab-pane.fade.page-break
