@@ -26,9 +26,6 @@ class Order < ActiveRecord::Base
   # Approved orders.
   scope :approved, -> { where.not(approved_at: nil) }
 
-  # Orders of specified store.
-  scope :by_store, -> (store) { where(store: store) }
-
   #---
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update

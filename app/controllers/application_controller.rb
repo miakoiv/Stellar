@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def shopping_cart
-    @shopping_cart ||= current_user.shopping_cart(current_store)
+    @shopping_cart ||= current_user.shopping_cart
   end
 
   def can_shop?

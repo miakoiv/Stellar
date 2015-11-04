@@ -15,8 +15,8 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders = current_user.orders.by_store(current_store).current
-    @approved = current_user.orders.by_store(current_store).approved
+    @orders = current_user.orders.current
+    @approved = current_user.orders.approved
   end
 
   # GET /orders/1
@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = current_user.orders.by_store(current_store).complete.find(params[:id])
+      @order = current_user.orders.complete.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
