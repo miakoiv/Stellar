@@ -21,7 +21,7 @@ $.fn.extend
     $('input[type=checkbox]').bootstrapSwitch
       size: 'mini'
       onText: '<i class="fa fa-check"></i>'
-      offText: '<i class="fa fa-remove"></i>'
+      offText: ' '
     .on 'switchChange.bootstrapSwitch', (e, state) ->
       $(e.target).trigger 'change'
 
