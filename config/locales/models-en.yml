@@ -101,7 +101,8 @@ en:
         shipping_at: Date of shipment
         approved: Approved
         approved_at: Processed
-        items: Rows
+        not_approved: Not processed yet
+        items: Items
         products: Products
         customer_name: Customer name
         customer_email: E-mail
@@ -147,6 +148,7 @@ en:
         subtitle: Subtitle
         description: Description
         available_at: Available since
+        not_available: Not available
         deleted_at: Removed at
         memo: Memo
         iframes: Embeds

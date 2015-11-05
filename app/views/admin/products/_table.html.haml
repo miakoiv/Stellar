@@ -3,24 +3,26 @@
     %thead
       %tr
         %th.col-min.hidden-print
-        %th.col-xs-1= col(Product, :code)
+        %th.col-xs-2= col(Product, :code)
         %th= col(Product, :title)
         %th.col-xs-2= col(Product, :images)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Product) ? 'sortable' : nil}
-      = content_tag_for :tr, products do |product|
-        %td.hidden-print= drag_handle
-        %td{class: product.available? ? '' : 'text-muted'}= product.code
-        %td
-          %strong= product.title
-          = product.subtitle
-        %td
-          - product.images.ordered.each do |image|
-            = image_variant_tag(image, :icon,
-                data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
-        %td.hidden-print.text-right
-          = link_to icon('info', t('actions.show')), admin_product_path(product),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Product)
-            = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
+      - products.each do |product|
+        = content_tag_for :tr, product, class: product.available? ? '' : 'warning text-warning' do
+          %td.hidden-print= drag_handle
+          %td
+            = product.available? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_available))
+          %td
+            %strong= product.title
+            = product.subtitle
+          %td
+            - product.images.ordered.each do |image|
+              = image_variant_tag(image, :icon,
+                  data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
+          %td.hidden-print.text-right
+            = link_to icon('info', t('actions.show')), admin_product_path(product),
+                class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(Product)
+              = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'

@@ -2,17 +2,21 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-1= col(Order, :completed_at)
+        %th.col-xs-2= col(Order, :completed_at)
+        %th.col-xs-2= col(Order, :shipping_at)
+        %th.col-xs-2= col(Order, :approved_at)
         %th.col-xs-1= col(Order, :items)
-        %th.col-xs-1= col(Order, :shipping_at)
-        %th.col-xs-2
+        %th.col-xs-2.text-right= col(Order, :grand_total)
+        %th.col-xs-2.hidden-print
 
     %tbody
       = content_tag_for :tr, orders do |order|
         %td= l(order.completed_at.to_date)
-        %td= order.order_items.count
         %td= order.shipping_at.present? ? l(order.shipping_at) : ''
-        %td.text-right
+        %td= order.approved? ? l(order.approved_at.to_date) : col(Order, :not_approved)
+        %td= order.order_items.count
+        %td.text-right.currency= humanized_money_with_symbol order.grand_total
+        %td.hidden-print.text-right
           - if order.approved?
             = link_to icon('info', t('actions.show')), order_path(order),
                 class: 'btn btn-default btn-sm'
