@@ -2,7 +2,7 @@
 
 retail_customer:
   id: 1
-  name: retail customer
+  name: retail_customer
   appearance: info
 see_pricing:
   id: 2
