@@ -19,8 +19,8 @@
           %td= user.name
           %td= user.email
           %td
-            - user.role_names.each do |role_name|
-              %span.label.label-default= role_name
+            - user.roles.each do |role|
+              %span.label{class: "label-#{role.appearance}"}= role
           %td.hidden-print.text-right
             = link_to icon('info', t('actions.show')), admin_user_path(user),
                 class: 'btn btn-default btn-sm'
