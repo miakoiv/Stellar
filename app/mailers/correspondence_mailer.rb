@@ -11,7 +11,7 @@ class CorrespondenceMailer < ApplicationMailer
 
     roadie_mail(
       from: "#{@fields[:name]} <#{@fields[:email]}>",
-      to: @store.contact_person.to_s,
+      to: @store.correspondents.map(&:to_s),
       subject: @fields[:subject]
     )
   end

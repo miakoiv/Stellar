@@ -11,9 +11,9 @@ class OrderMailer < ApplicationMailer
     @user = order.user
 
     roadie_mail(
-      from: @store.contact_person.to_s,
+      from: "noreply@#{@store.host}",
       to: "#{@order.customer_name} <#{@order.customer_email}>",
-      cc: @store.contact_person.to_s,
+      cc: @order.available_handlers.map(&:to_s),
       subject: default_i18n_subject(store: @store)
     )
   end

@@ -65,6 +65,12 @@ class Order < ActiveRecord::Base
     !is_rfq?
   end
 
+  # FIXME: make this use the order type's designated handler role,
+  # once it's implemented
+  def available_handlers
+    store.users.with_role(:order_editor)
+  end
+
   def approval
     !!approved_at.present?
   end

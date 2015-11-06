@@ -86,6 +86,10 @@ class Store < ActiveRecord::Base
   def admit_guests=(value); super(value == '1'); end
   def b2b_sales=(value); super(value == '1'); end
 
+  def correspondents
+    users.with_role(:correspondence)
+  end
+
   # How to title the store in navigation menus.
   # The given string undergoes I18n before output.
   def menu_title
