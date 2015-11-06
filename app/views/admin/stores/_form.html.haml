@@ -11,9 +11,6 @@
   %fieldset.tab-content{disabled: locked}
     #tab-store.tab-pane.active{role: 'tabpanel'}
       = f.text_field :name
-      = f.select :contact_person_id,
-          User.by_role(:contact_person).map { |u| [u.to_s, u.id] },
-          {}, {class: 'selectize'}
       = f.text_field :host, prepend: 'http://'
       = f.text_field :erp_number
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')

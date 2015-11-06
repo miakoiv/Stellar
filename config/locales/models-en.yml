@@ -119,8 +119,6 @@ en:
         shipping_country: Country
         notes: Notes
         store_name: Store
-        store_contact_person_name: Contact person
-        store_contact_person_email: E-mail
         user_name: Customer
         user_email: E-mail
         order_type_name: Order type
@@ -180,7 +178,6 @@ en:
       role:
         name: Name
       store:
-        contact_person_id: Contact person
         host: Server address
         erp_number: ERP number
         name: Name

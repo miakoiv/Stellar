@@ -17,7 +17,6 @@ class Store < ActiveRecord::Base
   after_create :assign_slug
 
   #---
-  belongs_to :contact_person, class_name: 'User'
   has_many :categories
   has_many :products
   has_many :custom_attributes
@@ -92,9 +91,6 @@ class Store < ActiveRecord::Base
   def menu_title
     super || 'store'
   end
-
-  def contact_person_name; contact_person.try(:name); end
-  def contact_person_email; contact_person.try(:email); end
 
   def to_s
     name

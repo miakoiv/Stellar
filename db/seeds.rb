@@ -68,7 +68,6 @@ OrderType.create(
 #
 Store.create(
   id: 1,
-  contact_person_id: 2,
   host: 'tjt-extranet.leasit.info',
   erp_number: 1545,
   inventory_code: 'VART',

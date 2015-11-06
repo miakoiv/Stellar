@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106122839) do
+ActiveRecord::Schema.define(version: 20151106133422) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -202,34 +202,32 @@ ActiveRecord::Schema.define(version: 20151106122839) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",                   limit: 4,                     null: false
-    t.integer  "user_id",                    limit: 4,                     null: false
-    t.integer  "order_type_id",              limit: 4
+    t.integer  "store_id",            limit: 4,                     null: false
+    t.integer  "user_id",             limit: 4,                     null: false
+    t.integer  "order_type_id",       limit: 4
     t.datetime "completed_at"
     t.date     "shipping_at"
     t.datetime "approved_at"
-    t.string   "customer_name",              limit: 255
-    t.string   "customer_email",             limit: 255
-    t.string   "company_name",               limit: 255
-    t.string   "contact_person",             limit: 255
-    t.boolean  "has_billing_address",                      default: false, null: false
-    t.string   "billing_address",            limit: 255
-    t.string   "billing_postalcode",         limit: 255
-    t.string   "billing_city",               limit: 255
-    t.string   "billing_country",            limit: 255,   default: "FI"
-    t.string   "shipping_address",           limit: 255
-    t.string   "shipping_postalcode",        limit: 255
-    t.string   "shipping_city",              limit: 255
-    t.string   "shipping_country",           limit: 255,   default: "FI"
-    t.text     "notes",                      limit: 65535
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
-    t.string   "store_name",                 limit: 255
-    t.string   "store_contact_person_name",  limit: 255
-    t.string   "store_contact_person_email", limit: 255
-    t.string   "user_name",                  limit: 255
-    t.string   "user_email",                 limit: 255
-    t.string   "order_type_name",            limit: 255
+    t.string   "customer_name",       limit: 255
+    t.string   "customer_email",      limit: 255
+    t.string   "company_name",        limit: 255
+    t.string   "contact_person",      limit: 255
+    t.boolean  "has_billing_address",               default: false, null: false
+    t.string   "billing_address",     limit: 255
+    t.string   "billing_postalcode",  limit: 255
+    t.string   "billing_city",        limit: 255
+    t.string   "billing_country",     limit: 255,   default: "FI"
+    t.string   "shipping_address",    limit: 255
+    t.string   "shipping_postalcode", limit: 255
+    t.string   "shipping_city",       limit: 255
+    t.string   "shipping_country",    limit: 255,   default: "FI"
+    t.text     "notes",               limit: 65535
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "store_name",          limit: 255
+    t.string   "user_name",           limit: 255
+    t.string   "user_email",          limit: 255
+    t.string   "order_type_name",     limit: 255
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
@@ -341,15 +339,14 @@ ActiveRecord::Schema.define(version: 20151106122839) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.integer  "contact_person_id", limit: 4,     null: false
-    t.string   "host",              limit: 255
-    t.integer  "erp_number",        limit: 4
-    t.string   "inventory_code",    limit: 255
-    t.string   "name",              limit: 255
-    t.string   "slug",              limit: 255
-    t.text     "settings",          limit: 65535
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "host",           limit: 255
+    t.integer  "erp_number",     limit: 4
+    t.string   "inventory_code", limit: 255
+    t.string   "name",           limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "settings",       limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "users", force: :cascade do |t|

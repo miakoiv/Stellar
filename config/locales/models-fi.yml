@@ -119,8 +119,6 @@ fi:
         shipping_country: Maa
         notes: Lisätietoja
         store_name: Kauppa
-        store_contact_person_name: Yhteyshenkilö
-        store_contact_person_email: Sähköpostiosoite
         user_name: Tilaaja
         user_email: Sähköpostiosoite
         order_type_name: Tilaustyyppi
@@ -180,7 +178,6 @@ fi:
       role:
         name: Nimi
       store:
-        contact_person_id: Yhteyshenkilö
         host: Palvelimen osoite
         erp_number: ERP-numero
         name: Nimi
