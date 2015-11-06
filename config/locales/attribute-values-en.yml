@@ -3,7 +3,7 @@ en:
     values:
       custom_attribute:
         attribute_type:
-          set: Value set
+          set: Choices
           numeric: Numeric
           alpha: Text
       image_type:

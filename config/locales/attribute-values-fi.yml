@@ -3,7 +3,7 @@ fi:
     values:
       custom_attribute:
         attribute_type:
-          set: arvojoukko
+          set: monivalinta
           numeric: numeerinen
           alpha: teksti
       image_type:
