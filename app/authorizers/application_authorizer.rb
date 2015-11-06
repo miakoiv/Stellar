@@ -21,6 +21,8 @@ class ApplicationAuthorizer < Authority::Authorizer
   def self.authorizes_to_shop?(user, options = {})
     current_store = options[:store]
     return false unless current_store.allow_shopping?
-    user.is_customer? || (user.guest? && current_store.admit_guests?)
+    user.is_retail_customer? ||
+    user.is_reseller? ||
+    (user.guest? && current_store.admit_guests?)
   end
 end

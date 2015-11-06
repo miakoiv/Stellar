@@ -51,13 +51,12 @@ class User < ActiveRecord::Base
   # Roles that a user manager may grant to other users. The superuser
   # may promote others to user managers and superusers.
   def grantable_role_options
-    roles = [:customer, :see_pricing, :see_stock, :manager, :contact_person, :dashboard_access, :attribute_editor, :category_editor, :order_editor, :page_editor, :product_editor, :promotion_editor]
-    roles += [:user_manager, :superuser] if is_superuser?
-    Role.where(name: roles).map { |r| [r.to_s, r.id] }
-  end
-
-  def role_names
-    roles.map { |r| r.to_s }
+    roles = if is_superuser?
+      Role.all
+    else
+      Role.where.not(name: [:user_manager, :superuser])
+    end
+    roles.map { |r| [r.to_s, r.id] }
   end
 
   def to_s

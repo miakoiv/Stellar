@@ -1,44 +1,66 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-customer:
+retail_customer:
   id: 1
-  name: customer
+  name: retail customer
+  appearance: info
 see_pricing:
   id: 2
   name: see_pricing
+  appearance: success
 see_stock:
   id: 3
   name: see_stock
+  appearance: success
+reseller:
+  id: 5
+  name: reseller
+  appearance: info
+manufacturer:
+  id: 6
+  name: manufacturer
+  appearance: info
 manager:
   id: 10
   name: manager
-contact_person:
+  appearance: warning
+correspondence:
   id: 11
-  name: contact_person
+  name: correspondence
+  appearance: default
 dashboard_access:
   id: 12
   name: dashboard_access
+  appearance: warning
 attribute_editor:
   id: 13
   name: attribute_editor
+  appearance: warning
 category_editor:
   id: 14
   name: category_editor
+  appearance: warning
 order_editor:
   id: 15
   name: order_editor
+  appearance: warning
 page_editor:
   id: 16
   name: page_editor
+  appearance: warning
 product_editor:
   id: 17
   name: product_editor
+  appearance: warning
 promotion_editor:
   id: 18
   name: promotion_editor
+  appearance: warning
 user_manager:
   id: 19
   name: user_manager
+  appearance: warning
 superuser:
   id: 99
   name: superuser
+  appearance: danger
