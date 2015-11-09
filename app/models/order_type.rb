@@ -9,8 +9,8 @@ class OrderType < ActiveRecord::Base
 
   # Source and destination roles define who can initiate an order of this type
   # and who will process (approve) it as an administrator.
-  belongs_to :source_role, class_name: 'Role', inverse_of: :source_order_types
-  belongs_to :destination_role, class_name: 'Role', inverse_of: :destination_order_types
+  belongs_to :source_role, class_name: 'Role', inverse_of: :available_order_types
+  belongs_to :destination_role, class_name: 'Role', inverse_of: :managed_order_types
 
   #---
   def tab_name
