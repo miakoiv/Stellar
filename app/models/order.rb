@@ -14,6 +14,8 @@ class Order < ActiveRecord::Base
 
   has_many :order_items, dependent: :destroy, inverse_of: :order
 
+  default_scope { order(created_at: :desc) }
+
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
 
