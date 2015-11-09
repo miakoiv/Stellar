@@ -41,11 +41,6 @@ class Store < ActiveRecord::Base
     [items, items.map { |item| item.total_value }.sum]
   end
 
-  # Make shipping the default order type.
-  def default_order_type
-    order_types.find_by(has_shipping: true)
-  end
-
   # Finds the first inventory by purpose.
   def inventory_for(purpose)
     inventories.by_purpose(purpose)
@@ -53,10 +48,6 @@ class Store < ActiveRecord::Base
 
   def category_options
     categories.map { |c| [c.name, c.id] }
-  end
-
-  def order_type_options
-    order_types.map { |o| [o.to_s, o.id] }
   end
 
   def user_options
