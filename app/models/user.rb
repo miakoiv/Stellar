@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     orders.incomplete.first ||
       orders.create(
         store: store,
-        order_type: store.default_order_type,
+        order_type: available_order_types.find_by(has_shipping: true),
         customer_name: guest? ? nil : name,
         customer_email: guest? ? nil : email
       )

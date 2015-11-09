@@ -1,7 +1,7 @@
 = bootstrap_form_for @order, url: confirm_path, method: :post,
     layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %fieldset
-    = f.select :order_type_id, current_store.order_type_options,
+    = f.select :order_type_id, current_user.available_order_types.map { |o| [o.to_s, o.id] },
         {}, {class: 'selectize', style: 'width: 100%'}
     = f.text_field :customer_name
     = f.text_field :customer_email
