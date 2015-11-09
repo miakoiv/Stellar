@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
   # Approved orders.
   scope :approved, -> { where.not(approved_at: nil) }
 
-  scope :by_order_type, -> { order(:order_type_id).group_by(&:order_type) }
+  scope :managed_by, -> (user) { joins(:order_type).where(order_types: {id: user.managed_order_types}) }
 
   #---
   validates :customer_name, presence: true, on: :update

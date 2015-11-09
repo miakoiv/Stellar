@@ -2,10 +2,15 @@
 
 class OrderType < ActiveRecord::Base
 
+  has_many :orders
+
   # Orders of this type refer to stock in this particular inventory.
   belongs_to :inventory
 
-  has_many :orders
+  # Source and destination roles define who can initiate an order of this type
+  # and who will process (approve) it as an administrator.
+  belongs_to :source_role, class_name: 'Role', inverse_of: :source_order_types
+  belongs_to :destination_role, class_name: 'Role', inverse_of: :destination_order_types
 
   #---
   def tab_name
