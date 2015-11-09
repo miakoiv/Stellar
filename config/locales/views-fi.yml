@@ -42,10 +42,9 @@ fi:
       edit_table:
         new_custom_value: Uusi arvo
     orders:
-      index:
-        current: Avoimet
-        approved: Hyväksytyt
-      components:
+      show:
+        aggregated: Keräilylista
+      edit:
         aggregated: Keräilylista
     pages:
       index:
