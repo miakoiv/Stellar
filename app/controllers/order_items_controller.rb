@@ -31,7 +31,7 @@ class OrderItemsController < ApplicationController
 
   private
     def set_order_and_item
-      @order = current_user.shopping_cart(current_store)
+      @order = shopping_cart
       @order_item = @order.order_items.find(params[:id])
     end
 
