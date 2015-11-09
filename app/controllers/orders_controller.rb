@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders_by_type = current_user.orders.complete.by_order_type
+    @orders_by_type = current_user.orders.complete.group_by(&:order_type)
   end
 
   # GET /orders/1
