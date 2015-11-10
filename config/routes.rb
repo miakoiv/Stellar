@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get '/store'                      => 'store#index', as: :store
   get '/category/:category_id'      => 'store#show_category', as: :show_category
   get '/product/:product_id'        => 'store#show_product', as: :show_product
-  get '/products/all'               => 'store#show_all_products', as: :show_all_products
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
 
   get '/cart'                       => 'store#show_cart', as: :show_cart

@@ -1,11 +1,9 @@
 %ul.categories.hidden-print
   = render @categories
-  = render 'categories/all'
 
 %ul.products
   = render @products
 
 .product-detail{style: 'display: none'}
 
-.all-products
-  = render partial: 'products_modal'
+= render partial: 'products_modal'

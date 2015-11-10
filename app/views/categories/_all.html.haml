@@ -1,4 +1,2 @@
-%li.category
-  = link_to show_all_products_path, data: {push: 'partial', target: '.all-products'} do
-    = image_variant_tag(current_store.cover_image, :matchbox)
-    %p= t('store.all_products')
+%li
+  %button.btn.btn-primary.navbar-btn{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star', t('store.all_products'))

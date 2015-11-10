@@ -1,6 +1,5 @@
 %ul.categories.hidden-print
   = render @categories
-  = render 'categories/all'
 
 %ul.products{style: 'display: none'}
   = render @products
@@ -8,8 +7,7 @@
 .product-detail
   = render partial: 'products/product_detail', object: @product, as: :product
 
-.all-products
-  = render partial: 'products_modal'
+= render partial: 'products_modal'
 
 :coffee
   jQuery ->

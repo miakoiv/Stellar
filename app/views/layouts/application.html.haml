@@ -13,7 +13,7 @@
           = link_to branding(current_store), root_path, class: 'navbar-brand'
         #navbar.collapse.navbar-collapse
           .visible-xs
-            = render partial: 'shared/search_bar'
+            = render partial: 'shared/filter_bar'
           %ul.nav.navbar-nav
             = render partial: 'shared/page_nav'
             = render partial: 'shared/storefront_nav'
@@ -22,11 +22,10 @@
               %li= link_to icon('cog', t('admin.manage')), admin_orders_path
             = render partial: 'shared/user_menu'
             %li.hidden-xs
-              %a.navbar-link{href: '#search-bar', role: 'button', data: {toggle: 'collapse'}}
+              %a.navbar-link{href: '#filter-bar', role: 'button', data: {toggle: 'collapse'}}
                 = icon('search')
-      #search-bar.collapse
-        .container
-          = render partial: 'shared/search_bar'
+      #filter-bar.container.collapse
+        = render partial: 'shared/filter_bar'
 
     #main.container
       = yield
