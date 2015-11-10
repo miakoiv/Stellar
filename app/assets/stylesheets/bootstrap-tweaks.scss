@@ -61,15 +61,27 @@ html {
   display: block;
 }
 
-@media (max-width: $screen-xs) {
+@media (max-width: $screen-xs-max) {
   .subnav {
     position: static;
     left: auto;
     display: block;
     float: none;
+    margin: 0 30px;
     border: 0;
-    background: transparent;
     box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+.navbar-default {
+  #search-bar {
+    border-top: 1px solid $navbar-default-border;
+  }
+}
+.navbar-inverse {
+  #search-bar {
+    border-top: 1px solid $navbar-inverse-border;
   }
 }
 
