@@ -3,10 +3,10 @@
  */
 
 $navbar-inverse-bg: #373737;
-$navbar-inverse-color: #cdcdcd;
-$navbar-inverse-link-color: #cdcdcd;
-$navbar-inverse-toggle-hover-bg: #29abe2;
-$navbar-inverse-toggle-border-color: #cdcdcd;
+$navbar-inverse-color: #888;
+$navbar-inverse-link-color: #aaa;
+$navbar-inverse-toggle-hover-bg: #fff;
+$navbar-inverse-toggle-border-color: #888;
 
 @import "bootstrap-generators.scss";
 @import "bootstrap-font-awesome.scss";
@@ -19,7 +19,11 @@ body {
 
   > nav.navbar {
     @extend .navbar-inverse;
-    @include box-shadow(0 1px 10px 0 rgba(0,0,0,.333));
+    @include box-shadow(0 1px 10px 0 rgba(0,0,0,.666));
+
+    .navbar-toggle {
+      color: $navbar-inverse-link-color;
+    }
   }
 }
 
@@ -30,7 +34,10 @@ body {
 
 .penumbra {
   overflow-y: scroll;
-  background-color: #494949;
+  background-image: url(<%= asset_path('bokeh-3.jpg') %>);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .container {
     margin-left: 0;
@@ -48,31 +55,38 @@ body {
 
   ul.categories {
     @extend .row;
+    @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0.7));
     margin-left: -1*$grid-gutter-width;
     margin-right: -1*$grid-gutter-width;
     list-style: none;
     margin-bottom: 0;
-    padding-left: $grid-gutter-width;
-    background-color: #fff;
+    padding: 0 $grid-gutter-width;
 
     li.category {
       float: left;
       position: relative;
-      width: 10vw;
+      z-index: 890;
+      width: 12vw;
       min-width: 150px;
+      max-width: 200px;
 
-      &.active a {
-        @include box-shadow(0 0 8px 0 rgba(0,0,0,0.5));
+      &.active {
+        z-index: 900;
+
+        a {
+          @include box-shadow(0 0 8px 0 rgba(0,0,0,0.5));
+        }
       }
       a {
         display: block;
         padding: 10px;
         text-decoration: none;
         color: #1c1c1c;
+        background-color: #fff;
         transition: all 0.2s ease-in-out 0s;
 
         &:hover {
-          background-color: $brand-primary;
+          background: transparent;
         }
 
         img { @extend .img-responsive; }
@@ -157,15 +171,9 @@ body {
         }
         form {
           button {
+            @extend .btn-primary;
             width: 50%;
-            background-color: #343434;
-            border-color: #000;
             transition: all 0.2s ease-in-out 0s;
-
-            &:hover {
-              background-color: $brand-primary;
-              border-color: $link-color;
-            }
           }
         }
       }
@@ -175,28 +183,18 @@ body {
   .product-detail {
     position: relative;
     margin: 0 -1*$grid-gutter-width;
-    padding: 0 $grid-gutter-width 220px;
-    background: #1c1c1c;
-    color: #b8b8b8;
+    padding: 30px $grid-gutter-width;
+    background-color: rgba(255,255,255,0.75);
 
     .product-header {
       @extend .row;
-      color: #ddd;
 
       .product-title {
         @extend .col-xs-12;
-        margin-top: 0;
-        margin-bottom: 30px;
-        padding-top: 60px;
+        margin-top: 40px;
+        margin-bottom: 20px;
         font-weight: 500;
         text-transform: uppercase;
-
-        .small {
-          position: absolute;
-          top: 40px;
-          left: $grid-gutter-width/2;
-          font-size: $font-size-small;
-        }
       }
       .product-meta {
         position: absolute;
@@ -207,25 +205,14 @@ body {
         .product-actions {
           float: right;
 
-          .form-inline, .btn { display: inline-block; }
-          .form-inline .form-group { margin: 0; }
-          .btn {
-            @extend .btn-default;
-            color: #ddd;
-            background: transparent;
+          .form-inline, .btn {
+            display: inline-block;
             transition: all 0.2s ease-in-out 0s;
-
-            &:hover {
-              background-color: $brand-primary;
-              border-color: $link-color;
-              color: #fff;
-            }
           }
         }
         .product-pricing {
           float: right;
           margin: 0 15px;
-          color: #fff;
           font-weight: 500;
           font-size: $font-size-large;
           line-height: 34px;
@@ -236,7 +223,7 @@ body {
       @extend .row;
 
       .product-description {
-        @extend .col-xs-12, .col-md-3;
+        @extend .col-xs-12, .col-md-4;
 
         .product-code {
           @extend .pull-left;
@@ -246,33 +233,16 @@ body {
           @extend .pull-right, .clearfix;
         }
         .body-text { clear: both; }
-        .list-group {
-          margin-top: 20px;
-
-          .list-group-item {
-            background: transparent;
-            color: inherit;
-
-            &:hover { color: #fff; }
-          }
-        }
-      }
-      .iframes {
-        @extend .col-xs-12, .col-md-4;
-
-        iframe {
-          width: 100%;
-          height: 640px;
-        }
+        .list-group { margin-top: 20px; }
       }
       .images {
-        padding-bottom: 50px;
+        padding-bottom: 70px;
 
         .nav {
           @extend .hidden-print;
           position: absolute;
           left: $grid-gutter-width/2;
-          bottom: 0;
+          bottom: 20px;
 
           > li > a { padding: 5px; }
         }
@@ -286,32 +256,11 @@ body {
             }
           }
         }
-        &.presentational {
-          @extend .col-xs-12, .col-md-5;
-        }
         &.technical {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          height: 200px;
-          width: 100%;
-          overflow-y: hidden;
-          overflow-x: auto;
-          padding: 0 $grid-gutter-width/2;
-          background: #e0e0e0;
-          @include box-shadow(inset 0 15px 10px -10px rgba(0,0,0,0.333));
-
-          .nav { display: none; }
-          .gallery {
-            display: table;
-
-            .image {
-              display: table-cell;
-              padding: 15px;
-              img { max-height: 170px; }
-              &.fade { opacity: 1; }
-            }
-          }
+          @extend .col-xs-12, .col-sm-4, .col-md-3;
+        }
+        &.presentational {
+          @extend .col-xs-12, .col-sm-8, .col-md-5;
         }
       }
     }
