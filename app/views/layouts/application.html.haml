@@ -22,8 +22,9 @@
               %li= link_to icon('cog', t('admin.manage')), admin_orders_path
             = render partial: 'shared/user_menu'
             %li.hidden-xs
-              %a.navbar-link{href: '#filter-bar', role: 'button', data: {toggle: 'collapse'}}
-                = icon('search')
+              - if filters_available?
+                %a.navbar-link{href: '#filter-bar', role: 'button', data: {toggle: 'collapse'}}= icon('search')
+
       #filter-bar.container.collapse
         = render partial: 'shared/filter_bar'
 

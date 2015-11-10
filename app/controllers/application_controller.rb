@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
   after_filter :prepare_unobtrusive_flash
 
   #---
+  # Product filtering is available when a category is loaded.
+  def filters_available?
+    @category.present?
+  end
+  helper_method :filters_available?
+
   # Authenticate user, but skip authentication
   # if the current store admits guests.
   def authenticate_user_or_skip!

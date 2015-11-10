@@ -1,8 +1,9 @@
 .filter-bar
-  = form_tag show_category_path(@category), {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-right'} do
-    .form-group.has-feedback
-      = search_field_tag 'keyword', params[:keyword], class: 'form-control', placeholder: t('search_bar.keyword')
-      %span.fa.fa-search.form-control-feedback
+  - if filters_available?
+    = form_tag show_category_path(@category), {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-right'} do
+      .form-group.has-feedback
+        = search_field_tag 'keyword', params[:keyword], class: 'form-control', placeholder: t('search_bar.keyword')
+        %span.fa.fa-search.form-control-feedback
 
-  %ul.nav.navbar-nav.navbar-right
-    = render 'categories/all'
+    %ul.nav.navbar-nav.navbar-right
+      = render 'categories/all'
