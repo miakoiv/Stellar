@@ -5,6 +5,7 @@
   $('.categories ##{dom_id(@category)}').addClass 'active'
   $('.product-detail').hide()
   $('.products').show()
+  $('.filter-bar').replaceWith("#{j render partial: 'shared/filter_bar'}");
 
   # if theme-specific scripts have added masonry, trigger reload on it
   if $('.products').hasClass 'masonry'

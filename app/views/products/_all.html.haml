@@ -9,7 +9,7 @@
 
   .col-sm-10
     .tab-content
-      - @products.group_by(&:category).each do |category, products|
+      - @all_products.group_by(&:category).each do |category, products|
         .tab-pane.fade{id: tab_name(category), class: category == @categories.first ? 'in active' : nil}
           %h2.visible-print-block= category.name
           = render partial: 'products/modal_table', object: products, as: :products

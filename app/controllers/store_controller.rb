@@ -14,7 +14,8 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!
 
-  before_action :set_categories
+  before_action :set_categories, only: [:index, :show_category, :show_product]
+  before_action :set_all_products, only: [:index, :show_category, :show_product]
   before_action :find_category, only: [:show_category]
   before_action :find_product, only: [:show_product]
 
@@ -36,11 +37,6 @@ class StoreController < ApplicationController
     @presentational_images = @product.images.by_purpose(:presentational).ordered
     @technical_images = @product.images.by_purpose(:technical).ordered
     @documents = @product.images.by_purpose(:document).ordered
-  end
-
-  # GET /products/all
-  def show_all_products
-    @products = current_store.products.available.categorized.ordered
   end
 
   # POST /product/1/order
@@ -92,6 +88,10 @@ class StoreController < ApplicationController
   private
     def set_categories
       @categories = current_store.categories.top_level.ordered
+    end
+
+    def set_all_products
+      @all_products = current_store.products.available.categorized.ordered
     end
 
     # Find category by friendly id in `category_id`, including history.
