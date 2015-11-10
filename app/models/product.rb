@@ -33,6 +33,9 @@ class Product < ActiveRecord::Base
   scope :uncategorized, -> { where(category_id: nil) }
   scope :by_category, -> { order(:category_id).group_by(&:category) }
   scope :virtual, -> { where(virtual: true) }
+  scope :by_keyword, -> (keyword) {
+    where "code LIKE :match OR title LIKE :match OR subtitle LIKE :match", match: "%#{keyword}%"
+  }
 
   #---
   validates :code, presence: true

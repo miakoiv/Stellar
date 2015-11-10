@@ -25,9 +25,13 @@ class StoreController < ApplicationController
     @products = @category.present? ? @category.products.available.ordered : []
   end
 
-  # GET /category/1
+  # GET /category/1?keyword=hola
   def show_category
-    @products = @category.products.available.ordered
+    @products = if params[:keyword].present?
+      @category.products.available.ordered.by_keyword(params[:keyword])
+    else
+      @category.products.available.ordered
+    end
   end
 
   # GET /product/1
