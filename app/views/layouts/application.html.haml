@@ -12,8 +12,21 @@
             = icon('bars')
           = link_to branding(current_store), root_path, class: 'navbar-brand'
         #navbar.collapse.navbar-collapse
-          = render partial: 'shared/user_menu'
-          = render partial: 'shared/storefront_nav'
+          .visible-xs
+            = render partial: 'shared/search_bar'
+          %ul.nav.navbar-nav
+            = render partial: 'shared/page_nav'
+            = render partial: 'shared/storefront_nav'
+          %ul.nav.navbar-nav.navbar-right
+            - if current_user && can_manage?
+              %li= link_to icon('cog', t('admin.manage')), admin_orders_path
+            = render partial: 'shared/user_menu'
+            %li.hidden-xs
+              %a.navbar-link{href: '#search-bar', role: 'button', data: {toggle: 'collapse'}}
+                = icon('search')
+      #search-bar.collapse
+        .container
+          = render partial: 'shared/search_bar'
 
     #main.container
       = yield

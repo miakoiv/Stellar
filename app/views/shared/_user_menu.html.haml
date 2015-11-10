@@ -1,11 +1,10 @@
-%ul.nav.navbar-nav.navbar-right
-  - if user_signed_in? && !current_user.guest?
-    %li.dropdown
-      %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
-        = icon(:user)
-        %span.caret
-      %ul.dropdown-menu{role: 'menu'}
-        %li.dropdown-header= current_user.name
-        %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
-  - else
-    %li= link_to icon('sign-in'), new_user_session_path
+- if user_signed_in? && !current_user.guest?
+  %li.dropdown
+    %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
+      = icon(:user)
+      %span.caret
+    %ul.dropdown-menu{role: 'menu'}
+      %li.dropdown-header= current_user.name
+      %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
+- else
+  %li= link_to icon('sign-in'), new_user_session_path
