@@ -74,11 +74,11 @@ body {
         z-index: 900;
 
         a {
-          @include box-shadow(0 0 8px 0 rgba(0,0,0,0.5));
+          @include box-shadow(0 0 5px 0 rgba(0,0,0,0.9));
         }
       }
       &:hover a {
-        @include box-shadow(0 0 4px 0 rgba(0,0,0,0.333));
+        @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
       }
       a {
         display: block;
@@ -180,10 +180,10 @@ body {
   }
 
   .product-detail {
+    @include gradient-horizontal(rgba(255,255,255,1), rgba(255,255,255,0));
     position: relative;
     margin: 0 -1*$grid-gutter-width;
     padding: 30px $grid-gutter-width;
-    background-color: rgba(255,255,255,0.75);
 
     .product-header {
       @extend .row;
@@ -204,9 +204,14 @@ body {
         .product-actions {
           float: right;
 
-          .form-inline, .btn {
+          .form-inline { display: inline-block; }
+          .btn {
             display: inline-block;
             transition: all 0.2s ease-in-out 0s;
+
+            &:hover {
+              @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
+            }
           }
         }
         .product-pricing {
