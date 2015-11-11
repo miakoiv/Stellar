@@ -28,7 +28,7 @@
 
     .documents.list-group
       - @documents.each do |document|
-        = link_to(icon('paperclip', document.attachment_file_name),
+        = link_to(icon('paperclip', document.to_s),
             document.url(:original), class: 'list-group-item')
 
     %ul.customizations.list-group

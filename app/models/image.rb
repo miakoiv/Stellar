@@ -75,6 +75,10 @@ class Image < ActiveRecord::Base
     end
   end
 
+  def to_s
+    attachment_file_name.humanize
+  end
+
   private
     def resize_bitmaps
       return false unless is_bitmap?
