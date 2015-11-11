@@ -15,8 +15,6 @@ $navbar-inverse-toggle-border-color: #888;
 @import "print.scss";
 
 body {
-  padding-top: 50px;
-
   > nav.navbar {
     @extend .navbar-inverse;
     @include box-shadow(0 1px 10px 0 rgba(0,0,0,.666));
@@ -34,6 +32,7 @@ body {
 
 .penumbra {
   overflow-y: scroll;
+  padding-top: 50px;
   background-image: url(<%= asset_path('bokeh-3.jpg') %>);
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -55,20 +54,21 @@ body {
 
   ul.categories {
     @extend .row;
-    @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0.7));
     margin-left: -1*$grid-gutter-width;
     margin-right: -1*$grid-gutter-width;
     list-style: none;
     margin-bottom: 0;
-    padding: 0 $grid-gutter-width;
+    padding: 20px $grid-gutter-width;
 
     li.category {
       float: left;
       position: relative;
       z-index: 890;
-      width: 12vw;
-      min-width: 150px;
-      max-width: 200px;
+      width: 10%;
+      min-width: 75px;
+      max-width: 125px;
+      margin-right: 5px;
+      margin-bottom: 5px;
 
       &.active {
         z-index: 900;
@@ -77,23 +77,31 @@ body {
           @include box-shadow(0 0 8px 0 rgba(0,0,0,0.5));
         }
       }
+      &:hover a {
+        @include box-shadow(0 0 4px 0 rgba(0,0,0,0.333));
+      }
       a {
         display: block;
-        padding: 10px;
+        padding: 5px 5px 20px;
         text-decoration: none;
         color: #1c1c1c;
         background-color: #fff;
         transition: all 0.2s ease-in-out 0s;
 
-        &:hover {
-          background: transparent;
-        }
-
         img { @extend .img-responsive; }
         p {
-          margin: 0.5em 0 0;
+          position: absolute;
+          bottom: 5px;
+          left: 0;
+          right: 0;
+          margin: 0;
+          padding-top: 2px;
+          text-align: center;
+          background: #fff;
           font-size: $font-size-small;
-          white-space: nowrap;
+          font-weight: 500;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
         }
       }
     }
@@ -106,7 +114,7 @@ body {
     align-content: flex-start;
     position: relative;
     list-style: none;
-    padding: 30px 0;
+    padding: 0;
 
     li.product {
       position: relative;
@@ -123,7 +131,7 @@ body {
       }
       a {
         display: block;
-        padding-bottom: 95px;
+        padding-bottom: 80px;
 
         &:hover { text-decoration: none; }
         .product-image {
@@ -144,22 +152,7 @@ body {
             font-size: $font-size-large;
             text-transform: uppercase;
           }
-          .description {
-            position: relative;
-            max-height: 80px;
-            overflow: hidden;
-            font-size: $font-size-small;
-
-            &:after {
-              @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
-              content: "";
-              position: absolute;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              height: 30px;
-            }
-          }
+          .description { display: none; }
         }
       }
       .buy-now {
@@ -171,6 +164,7 @@ body {
 
         p {
           @extend .lead;
+          margin-bottom: 10px;
           color: #5f5f5f;
         }
         form {
