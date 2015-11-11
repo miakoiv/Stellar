@@ -260,8 +260,12 @@ span.shipping:before {
   outline: 2px solid rgba(0,0,255,0.2);
 }
 
+.mfp-bg {
+  opacity: 0.9;
+}
 .mfp-figure:after {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wsLDR8KqjrGmQAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAArSURBVCjPY7xz5w4DNqCsrIxVnImBRDCqgRjA+P//f6wSd+/eHQ0l+mkAAIvVCLBPFDu7AAAAAElFTkSuQmCC);
+  background: transparent;
+  box-shadow: none;
 }
 
 .unobtrusive-flash-container {
