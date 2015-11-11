@@ -11,7 +11,7 @@
         %th.col-xs-3= col(CustomAttribute, :name)
         %th= col(CustomAttribute, :measurement_unit_id)
         %th= col(CustomAttribute, :custom_values)
-        %th.hidden-print
+        %th.col-xs-3.hidden-print
 
     %tbody
       = content_tag_for :tr, @custom_attributes do |custom_attribute|
