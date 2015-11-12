@@ -15,7 +15,10 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products_by_category = current_store.products.ordered.by_category
+    @products_by_category = current_store.categories.map do |category|
+      [category, category.products.ordered]
+    end.to_h
+    @products_by_category[nil] = current_store.products.uncategorized.ordered
   end
 
   # GET /admin/products/1
@@ -81,9 +84,9 @@ class Admin::ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(
-        :category_id, :virtual, :code, :customer_code, :title, :subtitle,
+        :virtual, :code, :customer_code, :title, :subtitle,
         :description, :memo, :cost, :sales_price, :available_at, :deleted_at,
-        linked_product_ids: []
+        category_ids: [], linked_product_ids: []
       )
     end
 end

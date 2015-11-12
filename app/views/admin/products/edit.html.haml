@@ -8,7 +8,7 @@
   = link_to admin_product_path(@product), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   - if @product.category.present? && @product.available?
-    = link_to show_product_path(@product), class: 'btn btn-default' do
+    = link_to show_product_path(@product.category, @product), class: 'btn btn-default' do
       = icon('eye', t('actions.view'))
   %h1
     = icon('cube', @product.title)

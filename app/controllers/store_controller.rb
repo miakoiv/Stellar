@@ -16,7 +16,7 @@ class StoreController < ApplicationController
 
   before_action :set_categories, only: [:index, :show_category, :show_product]
   before_action :set_all_products, only: [:index, :show_category, :show_product]
-  before_action :find_category, only: [:show_category]
+  before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
 
   # GET /
@@ -36,7 +36,6 @@ class StoreController < ApplicationController
 
   # GET /product/1
   def show_product
-    @category = @product.category
     @products = @category.products.available.ordered
     @presentational_images = @product.images.by_purpose(:presentational).ordered
     @technical_images = @product.images.by_purpose(:technical).ordered
@@ -101,7 +100,7 @@ class StoreController < ApplicationController
     # Find category by friendly id in `category_id`, including history.
     def find_category
       @category = Category.friendly.find(params[:category_id])
-      if request.path != show_category_path(@category)
+      if params[:product_id].nil? && request.path != show_category_path(@category)
         return redirect_to show_category_path(@category), status: :moved_permanently
       end
     end
@@ -109,8 +108,8 @@ class StoreController < ApplicationController
     # Find product by friendly id in `product_id`, including history.
     def find_product
       @product = Product.available.friendly.find(params[:product_id])
-      if request.path != show_product_path(@product)
-        return redirect_to show_product_path(@product), status: :moved_permanently
+      if request.path != show_product_path(@category, @product)
+        return redirect_to show_product_path(@category, @product), status: :moved_permanently
       end
     end
 

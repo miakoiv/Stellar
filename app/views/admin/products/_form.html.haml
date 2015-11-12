@@ -3,8 +3,8 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :category_id, current_store.category_options,
-            {include_blank: true}, {class: 'selectize'}
+        = f.select :category_ids, current_store.category_options,
+            {include_blank: true}, {multiple: true, class: 'selectize'}
         = f.form_group do
           = f.check_box :virtual
         = f.text_field :code

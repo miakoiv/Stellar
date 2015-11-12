@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109075556) do
+ActiveRecord::Schema.define(version: 20151111135614) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20151109075556) do
   add_index "adjustments", ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id", using: :btree
   add_index "adjustments", ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id", using: :btree
 
+  create_table "brands", force: :cascade do |t|
+    t.integer  "erp_number", limit: 4,   null: false
+    t.string   "name",       limit: 255
+    t.string   "slug",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
     t.integer  "parent_category_id", limit: 4
@@ -41,6 +49,13 @@ ActiveRecord::Schema.define(version: 20151109075556) do
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
+
+  create_table "categories_products", id: false, force: :cascade do |t|
+    t.integer "category_id", limit: 4, null: false
+    t.integer "product_id",  limit: 4, null: false
+  end
+
+  add_index "categories_products", ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true, using: :btree
 
   create_table "custom_attributes", force: :cascade do |t|
     t.integer  "store_id",            limit: 4,                   null: false
@@ -257,7 +272,6 @@ ActiveRecord::Schema.define(version: 20151109075556) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                limit: 4,                     null: false
-    t.integer  "category_id",             limit: 4
     t.boolean  "virtual",                               default: false, null: false
     t.string   "code",                    limit: 255
     t.string   "customer_code",           limit: 255
@@ -277,7 +291,6 @@ ActiveRecord::Schema.define(version: 20151109075556) do
     t.datetime "updated_at",                                            null: false
   end
 
-  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
@@ -298,7 +311,6 @@ ActiveRecord::Schema.define(version: 20151109075556) do
   create_table "promotion_handlers", force: :cascade do |t|
     t.integer  "promotion_id",      limit: 4,     null: false
     t.string   "type",              limit: 255,   null: false
-    t.string   "name",              limit: 255
     t.text     "description",       limit: 65535
     t.integer  "order_total_cents", limit: 4
     t.integer  "required_items",    limit: 4

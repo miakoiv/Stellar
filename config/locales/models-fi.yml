@@ -138,7 +138,7 @@ fi:
         content: Sisältö
         wysiwyg: Käytä Froala-editoria
       product:
-        category_id: Tuoteryhmä
+        category_ids: Tuoteryhmät
         virtual: Näennäinen tuote
         code: Tuotekoodi
         customer_code: Asiakkaan koodi

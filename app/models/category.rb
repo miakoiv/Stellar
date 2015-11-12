@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
   belongs_to :store
   belongs_to :parent_category, class_name: 'Category'
   has_many :sub_categories, class_name: 'Category', foreign_key: :parent_category_id
-  has_many :products
+  has_and_belongs_to_many :products
 
   scope :top_level, -> { where(parent_category_id: nil) }
 

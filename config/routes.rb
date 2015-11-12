@@ -11,18 +11,18 @@ Rails.application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
-  get 'page/:id'                    => 'pages#show', as: :show_page
+  get 'page/:id' => 'pages#show', as: :show_page
 
-  get '/store'                      => 'store#index', as: :store
-  get '/category/:category_id'      => 'store#show_category', as: :show_category
-  get '/product/:product_id'        => 'store#show_product', as: :show_product
+  get '/store' => 'store#index', as: :store
+  get '/category/:category_id' => 'store#show_category', as: :show_category
+  get '/category/:category_id/product/:product_id' => 'store#show_product', as: :show_product
   post '/product/:product_id/order' => 'store#order_product', as: :order_product
 
-  get '/cart'                       => 'store#show_cart', as: :show_cart
-  get '/checkout'                   => 'store#checkout', as: :checkout
-  post '/confirm'                   => 'store#confirm', as: :confirm
+  get '/cart' => 'store#show_cart', as: :show_cart
+  get '/checkout' => 'store#checkout', as: :checkout
+  post '/confirm' => 'store#confirm', as: :confirm
 
-  post '/correspondence/mail_form'  => 'correspondence#mail_form', as: :mail_form
+  post '/correspondence/mail_form' => 'correspondence#mail_form', as: :mail_form
 
   resources :orders do
     get 'confirm', on: :member
@@ -66,14 +66,14 @@ Rails.application.routes.draw do
     resources :custom_attributes do
       resources :custom_values, shallow: true
     end
+    resources :pages do
+      resources :images, shallow: true
+      post :reorder, on: :collection
+    end
     resources :products do
       resources :images, shallow: true
       resources :customizations, shallow: true
       resources :iframes, shallow: true
-      post :reorder, on: :collection
-    end
-    resources :pages do
-      resources :images, shallow: true
       post :reorder, on: :collection
     end
     resources :promotions do
@@ -89,7 +89,7 @@ Rails.application.routes.draw do
 
     post '/custom_values/reorder' => 'custom_values#reorder', as: :reorder_custom_values
     post '/images/reorder' => 'images#reorder', as: :reorder_images
-    post '/images/delete'  => 'images#delete', as: :delete_image
+    post '/images/delete' => 'images#delete', as: :delete_image
     post '/iframes/reorder' => 'iframes#reorder', as: :reorder_iframes
   end
 
