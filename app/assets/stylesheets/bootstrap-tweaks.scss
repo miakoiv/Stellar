@@ -50,6 +50,24 @@ html {
     }
     span { display: none; }
   }
+
+  .navbar-charms {
+    float: right;
+    margin-right: -15px;
+    margin-left: 15px;
+
+    .nav.navbar-nav {
+      float: left;
+
+      > li {
+        float: left;
+      }
+    }
+    .navbar-toggle {
+      margin-left: 30px;
+    }
+  }
+
 }
 
 // subnavs that open on hover but look identical to real dropdowns
