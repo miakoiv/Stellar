@@ -2,6 +2,11 @@
 
 class PagesController < ApplicationController
 
+  # This controller is aware of unauthenticated guests.
+  def current_user
+    super || guest_user
+  end
+
   before_action :find_page, only: [:show]
 
   # GET /pages
