@@ -15,7 +15,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products_by_category = current_store.categories.map do |category|
+    @products_by_category = current_store.categories.ordered.map do |category|
       [category, category.products.ordered]
     end.to_h
     @products_by_category[nil] = current_store.products.uncategorized.ordered
