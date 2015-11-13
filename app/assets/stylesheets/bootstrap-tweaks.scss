@@ -138,6 +138,10 @@ i.icon {
   font-family: "Fira Mono", monospace;
 }
 
+// no-wrap, and currency with tighter spacing
+.no-wrap {
+  white-space: nowrap;
+}
 .currency {
   word-spacing: -0.1em;
   white-space: nowrap;

@@ -1,5 +1,7 @@
 = content_tag_for :tr, order_item do
-  %td= link_to_unless order_item.virtual?, icon('cube', order_item.product_code), show_product_path(order_item.product.category, order_item.product)
+  %td.no-wrap
+    - unless order_item.virtual? || order_item.product.category.nil?
+      = link_to order_item.product_code, show_product_path(order_item.product.category, order_item.product)
   %td
     %strong= order_item.product_title
     = order_item.product_subtitle

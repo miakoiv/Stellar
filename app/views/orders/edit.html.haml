@@ -8,8 +8,9 @@
       = @order.to_s
 
 .row
-  .col-sm-5
+  .col-lg-5
     = render partial: 'form', locals: {locked: false}
 
-  .col-sm-7
-    = render partial: 'order_items/table', object: @order, as: :order
+  .col-lg-7
+    .panel.panel-default
+      = render partial: 'order_items/table', object: @order, as: :order

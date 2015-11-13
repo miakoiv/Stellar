@@ -2,7 +2,7 @@
   %tr
     %td
       = image_variant_tag(order_item.product.technical_cover_image, :matchbox, style: 'max-width: 50px')
-    %td{colspan: 2}
+    %td.no-wrap{colspan: 2}
       = link_to order_item.product_code, admin_product_path(order_item.product)
       - if order_item.reveal_components?
         %span.caret
@@ -19,7 +19,7 @@
     = content_tag_for :tr, order_item.product.relationships do |relationship|
       %td
       %td.col-xs-1
-      %td= link_to relationship.component.code, admin_product_path(relationship.component)
+      %td.no-wrap= link_to relationship.component.code, admin_product_path(relationship.component)
       %td.text-muted
         %strong= relationship.component.title
         = relationship.component.subtitle
