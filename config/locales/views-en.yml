@@ -124,6 +124,7 @@ en:
     select_for_cart: Select products
     empty_cart: Your shopping cart is empty.
     go_shopping: Go shopping.
+    no_orders: Your order history is empty.
     go_checkout: Proceed to checkout
     show_cart:
       shopping_cart: Shopping cart

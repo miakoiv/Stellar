@@ -100,6 +100,7 @@ fi:
     select_for_cart: Valitse tuotteet
     empty_cart: Ostoskorisi on tyhjä.
     go_shopping: Ostoksille!
+    no_orders: Tilaushistoriasi on tyhjä.
     go_checkout: Jatka kassalle
     show_cart:
       shopping_cart: Ostoskori

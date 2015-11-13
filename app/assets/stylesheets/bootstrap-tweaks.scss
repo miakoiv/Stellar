@@ -144,6 +144,7 @@ i.icon {
 }
 
 .page-header {
+  border-bottom: 0;
 
   a.btn {
     float: right;
@@ -154,8 +155,17 @@ i.icon {
   }
 }
 
+// beautified nav tabs, with a special case for tabbed panels
 .nav-tabs {
   margin-bottom: 15px;
+}
+.nav-tabs.panel-tabs {
+  margin-bottom: -1px;
+  border-bottom-color: transparent;
+}
+.panel.tabbed-panel {
+  border-top-left-radius: 0;
+  padding-top: 5px;
 }
 
 .checkbox label {

@@ -1,16 +1,22 @@
 .page-header
   %h1= icon('truck', title(Order, count: 2))
 
-- first = @orders_by_type.keys.first
+- if @orders_by_type.empty?
+  .panel.panel-default
+    .panel-body
+      %p.lead= t('store.no_orders')
+      %p= link_to t('store.go_shopping'), store_path
+- else
+  - first = @orders_by_type.keys.first
 
-%ul.nav.nav-tabs{role: 'tablist'}
-  - @orders_by_type.each_key do |order_type|
-    %li{role: 'presentation', class: order_type == first ? 'active' : nil}
-      %a{href: "##{tab_name(order_type)}", role: 'tab', data: {toggle: 'tab'}}
-        = order_type
+  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
+    - @orders_by_type.each_key do |order_type|
+      %li{role: 'presentation', class: order_type == first ? 'active' : nil}
+        %a{href: "##{tab_name(order_type)}", role: 'tab', data: {toggle: 'tab'}}
+          = order_type
 
-.tab-content
-  - @orders_by_type.each do |order_type, orders|
-    .tab-pane.fade{id: tab_name(order_type), class: order_type == first ? 'in active' : nil}
-      %h2.visible-print-block= order_type
-      = render partial: 'orders/table', object: orders, as: :orders
+  .tab-content.panel.panel-default.tabbed-panel
+    - @orders_by_type.each do |order_type, orders|
+      .tab-pane.fade{id: tab_name(order_type), class: order_type == first ? 'in active' : nil}
+        %h2.visible-print-block= order_type
+        = render partial: 'orders/table', object: orders, as: :orders
