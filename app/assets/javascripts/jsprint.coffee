@@ -1,7 +1,6 @@
-$.print = () ->
-  p = jsPrintSetup
-
-  if p
+$.print = ->
+  if jsPrintSetup?
+    p = jsPrintSetup
     p.setPaperSizeData(9) # A4
     p.setOption('orientation', p.kPortraitOrientation)
     p.setOption('scaling', 100)
