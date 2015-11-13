@@ -1,4 +1,6 @@
 .page-header
-  %h1= icon('shopping-cart', t('.shopping_cart'))
+  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+  %h1.hidden-print= icon('shopping-cart', t('.shopping_cart'))
+  %h1.visible-print-block= current_store
 
 = render partial: 'order_items/edit_table', object: @order, as: :order
