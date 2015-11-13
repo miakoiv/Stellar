@@ -19,7 +19,7 @@ class Role < ActiveRecord::Base
 
   #---
   def self.guest_roles
-    where(name: [:see_pricing])
+    where(name: [:retail_customer, :see_pricing])
   end
 
   #---

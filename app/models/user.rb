@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
   has_many :orders
 
   # Order types the user has available when going through checkout.
-  has_many :available_order_types, through: :roles
+  has_many :available_order_types, -> (user) { joins(inventory: :stores).where('stores.id = ?', user.store) }, through: :roles
 
   # Order types the user may browse and process as an administrator.
-  has_many :managed_order_types, through: :roles
+  has_many :managed_order_types, -> (user) { joins(inventory: :stores).where('stores.id = ?', user.store) }, through: :roles
 
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
   scope :non_guests, -> { where(guest: false) }
