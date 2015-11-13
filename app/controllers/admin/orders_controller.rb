@@ -74,7 +74,7 @@ class Admin::OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
         :order_type_id, :completed_at, :shipping_at, :approval,
-        :customer_name, :customer_email,
+        :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :billing_address, :billing_postalcode,
         :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,
         :notes

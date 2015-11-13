@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111135614) do
+ActiveRecord::Schema.define(version: 20151113085633) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -230,6 +230,7 @@ ActiveRecord::Schema.define(version: 20151111135614) do
     t.datetime "approved_at"
     t.string   "customer_name",       limit: 255
     t.string   "customer_email",      limit: 255
+    t.string   "customer_phone",      limit: 255
     t.string   "company_name",        limit: 255
     t.string   "contact_person",      limit: 255
     t.boolean  "has_billing_address",               default: false, null: false

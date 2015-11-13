@@ -106,6 +106,7 @@ fi:
         products: Tuotteet
         customer_name: Tilaajan nimi
         customer_email: Sähköpostiosoite
+        customer_phone: Puhelinnumero
         company_name: Yritys
         contact_person: Yhteyshenkilö
         billing_address: Laskutusosoite

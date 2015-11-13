@@ -106,6 +106,7 @@ en:
         products: Products
         customer_name: Customer name
         customer_email: E-mail
+        customer_phone: Phone number
         company_name: Company
         contact_person: Contact person
         billing_address: Billing address

@@ -33,6 +33,8 @@ class Order < ActiveRecord::Base
   #---
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
+  validates :customer_phone, presence: true, on: :update
+
   validates :shipping_address, :shipping_postalcode, :shipping_city,
     presence: true, on: :update,
     if: :has_shipping?

@@ -5,6 +5,7 @@
         {}, {class: 'selectize', style: 'width: 100%'}
     = f.text_field :customer_name
     = f.text_field :customer_email
+    = f.text_field :customer_phone
     - if current_store.b2b_sales?
       = f.text_field :company_name
       = f.text_field :contact_person
