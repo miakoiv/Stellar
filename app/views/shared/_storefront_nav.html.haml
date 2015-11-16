@@ -2,5 +2,5 @@
     store_path, wrap_tag: :li,
     active: [['store'], ['index', 'show_category', 'show_product']]
 
-- if current_user && can_shop?
+- if user_signed_in? && can_shop?
   = active_link_to title(Order, count: 2), orders_path, wrap_tag: :li

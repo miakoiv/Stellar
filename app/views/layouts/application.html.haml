@@ -7,16 +7,16 @@
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
         .navbar-charms
-          - if current_user && can_shop?
-            %ul.nav.navbar-nav
-              - if current_user && can_manage?
-                %li= link_to icon('wrench', class: 'fa-lg'), admin_orders_path
+          %ul.nav.navbar-nav
+            - if user_signed_in? && can_manage?
+              %li= link_to icon('wrench', class: 'fa-lg'), admin_orders_path
+            - if user_signed_in? && can_shop?
               = active_link_to show_cart_path, wrap_tag: :li, active: :exact do
                 = icon('shopping-cart', class: 'fa-lg')
                 = render partial: 'store/cart_badge'
-              - if filters_available?
-                %li
-                  %a{href: '#filter-bar', role: 'button', data: {toggle: 'collapse'}}= icon('search', class: 'fa-lg')
+            - if filters_available?
+              %li
+                %a{href: '#filter-bar', role: 'button', data: {toggle: 'collapse'}}= icon('search', class: 'fa-lg')
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             %span.sr-only Toggle navigation
             = icon('bars', class: 'fa-lg')
