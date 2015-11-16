@@ -20,6 +20,9 @@ class CustomAttribute < ActiveRecord::Base
   # Sets may have any number of custom values.
   has_many :custom_values, dependent: :destroy
 
+  # Searchable attributes are included in product searching and filtering.
+  scope :searchable, -> { where(searchable: true) }
+
   #---
   validates :name, presence: true
 

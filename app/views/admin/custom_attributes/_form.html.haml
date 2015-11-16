@@ -4,6 +4,8 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name
+        = f.form_group do
+          = f.check_box :searchable
         = f.select :attribute_type,
             CustomAttribute.attribute_types.keys.map { |t| [CustomAttribute.human_attribute_value(:attribute_type, t), t] },
             {}, {class: 'selectize', disabled: !@custom_attribute.new_record?}
