@@ -1,5 +1,5 @@
-.filter-bar
-  - if filters_available?
+.search-bar
+  - if search_available?
     = form_tag show_category_path(@category), {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-right'} do
       .form-group.has-feedback
         = search_field_tag 'keyword', params[:keyword], class: 'form-control', placeholder: t('search_bar.keyword')
