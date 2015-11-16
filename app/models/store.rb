@@ -20,12 +20,19 @@ class Store < ActiveRecord::Base
   has_many :categories
   has_many :products
   has_many :custom_attributes
+  has_many :custom_values, through: :custom_attributes
   has_many :orders
   has_many :users
   has_many :pages
   has_and_belongs_to_many :inventories
   has_many :order_types, through: :inventories
   has_many :promotions
+
+  # Collects distinct customizations in tuples of custom_attribute_id,
+  # custom_value_id, value from customizations assigned to products.
+  has_many :distinct_customizations, -> {
+    joins(:custom_attribute).where(custom_attributes: {searchable: true}).select(:custom_attribute_id, :custom_value_id, :value).distinct
+  }, through: :products, class_name: 'Customization', source: :customizations
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -34,6 +41,18 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
+  # Collects available search terms to a hash indexed by custom attribute.
+  # The values are arrays of custom values (for attributes of type set),
+  # or strings (for numeric and alpha attributes).
+  def search_terms
+    keys = custom_attributes.searchable.index_by(&:id)
+    values = custom_values.index_by(&:id)
+    distinct_customizations.inject({}) do |terms, c|
+      (terms[keys[c.custom_attribute_id]] ||= []) << (values[c.custom_value_id] || c.value)
+      terms
+    end
+  end
+
   # Performs an inventory valuation of items in the shipping inventory.
   def inventory_valuation
     items = inventory_for(:shipping).inventory_items
