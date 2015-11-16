@@ -72,7 +72,7 @@ class Admin::StoresController < ApplicationController
         :host, :erp_number, :name,
         :theme, :locale, :allow_shopping, :admit_guests,
         :shipping_cost_product_id, :free_shipping_at,
-        inventory_ids: []
+        :tracking_code, inventory_ids: []
       )
     end
 end

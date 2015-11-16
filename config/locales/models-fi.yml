@@ -190,6 +190,7 @@ fi:
         admit_guests: Salli pääsy kauppaan vieraana
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
+        tracking_code: GA-seurantakoodi
         inventory_ids: Varastot
       user:
         name: Nimi

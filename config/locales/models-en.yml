@@ -190,6 +190,7 @@ en:
         admit_guests: Admit guests to the store
         free_shipping_at: Free S&H beyond
         shipping_cost_product_id: S&H product entry
+        tracking_code: GA tracking code
         inventory_ids: Inventories
       user:
         name: Name

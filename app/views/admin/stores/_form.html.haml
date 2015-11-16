@@ -29,6 +29,7 @@
           @store.products.virtual.map { |p| [p.to_s, p.id] },
           {include_blank: true}, {class: 'selectize'}
       = f.text_field :free_shipping_at
+      = f.text_field :tracking_code
       = f.select :inventory_ids,
           Inventory.all.map { |i| [i.to_s, i.id] },
           {include_blank: true}, {multiple: true, class: 'selectize'}
