@@ -147,7 +147,10 @@ body {
             font-size: 17px;
             letter-spacing: -0.01em;
 
-            .small { font-size: 14px; }
+            .small {
+              display: block;
+              font-size: 14px;
+            }
           }
           .description { display: none; }
         }
@@ -185,20 +188,18 @@ body {
       @extend .row;
 
       .product-title {
-        @extend .col-xs-12;
-        margin-top: 40px;
+        @extend .col-xs-12, .col-md-7;
+        margin-top: 0;
         margin-bottom: 20px;
         font-weight: 500;
-        text-transform: uppercase;
       }
       .product-meta {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        right: 30px;
+        @extend .col-xs-12, .col-md-5;
+        margin-top: 8px;
 
         .product-actions {
           float: right;
+          margin-left: 15px;
 
           .form-inline { display: inline-block; }
           .btn {
@@ -212,7 +213,6 @@ body {
         }
         .product-pricing {
           float: right;
-          margin: 0 15px;
           font-weight: 500;
           font-size: $font-size-large;
           line-height: 34px;
