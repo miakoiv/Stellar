@@ -151,4 +151,5 @@ en:
     heading: Spry 😃 Storefront
     body_html: Provided by Leasit Oy <i class="fa fa-copyright"></i> 2015
   search_bar:
+    search: Search products
     keyword: Product name or code

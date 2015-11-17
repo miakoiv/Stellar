@@ -14,8 +14,8 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!
 
-  before_action :set_categories, only: [:index, :show_category, :show_product]
-  before_action :set_all_products, only: [:index, :show_category, :show_product]
+  before_action :set_categories, only: [:index, :search, :show_category, :show_product]
+  before_action :set_all_products, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
 
@@ -25,13 +25,15 @@ class StoreController < ApplicationController
     @products = @category.present? ? @category.products.available.ordered : []
   end
 
-  # GET /category/1?keyword=hola
+  # GET /search
+  def search
+    @products = current_store.products.categorized.available
+      .filter(filter_params).ordered
+  end
+
+  # GET /category/1
   def show_category
-    @products = if params[:keyword].present?
-      @category.products.available.ordered.by_keyword(params[:keyword])
-    else
-      @category.products.available.ordered
-    end
+    @products = @category.products.available.ordered
   end
 
   # GET /product/1
@@ -114,6 +116,10 @@ class StoreController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    def filter_params
+      params.slice(*:keyword, current_store.search_params)
+    end
+
     def order_params
       params.require(:order).permit(
         :order_type_id, :shipping_at,

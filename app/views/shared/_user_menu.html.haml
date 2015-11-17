@@ -1,7 +1,7 @@
 - if user_signed_in? && !current_user.guest?
   %li.dropdown
     %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
-      = icon('user')
+      = icon('user', class: 'fa-lg')
       %span.caret
     %ul.dropdown-menu{role: 'menu'}
       %li.dropdown-header= current_user.name

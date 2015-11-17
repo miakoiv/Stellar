@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   after_filter :prepare_unobtrusive_flash
 
   #---
-  # Product search is available when a category is loaded.
+  # Product search is available if a category is loaded.
   def search_available?
     @category.present?
   end

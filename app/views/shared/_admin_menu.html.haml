@@ -1,6 +1,6 @@
 %li.dropdown
   %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
-    = icon('wrench', t('admin.manage'))
+    = icon('wrench', t('admin.manage'), class: 'fa-lg')
     %span.caret
   %ul.dropdown-menu{role: 'menu'}
     - if current_user.can_read?(Product)

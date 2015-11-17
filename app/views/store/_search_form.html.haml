@@ -1,0 +1,10 @@
+.search-form
+  = form_tag search_path, {method: :get, data: {push: 'partial', target: '.products'}, role: 'search'} do
+    .form-group
+      = search_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: t('search_bar.keyword')
+    - current_store.search_terms.each do |param, terms|
+      .form-group
+        = select_tag param.name, options_for_select(terms), include_blank: true, class: 'selectize form-control', placeholder: param.name.humanize
+    .form-group
+      %button.btn.btn-primary{type: 'submit'}= t('search_bar.search')
+      %button.btn.btn-default.pull-right{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star', t('store.all_products'))

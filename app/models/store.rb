@@ -28,11 +28,9 @@ class Store < ActiveRecord::Base
   has_many :order_types, through: :inventories
   has_many :promotions
 
-  # Collects distinct customizations in tuples of custom_attribute_id,
-  # custom_value_id, value from customizations assigned to products.
-  has_many :distinct_customizations, -> {
-    joins(:custom_attribute).where(custom_attributes: {searchable: true}).select(:custom_attribute_id, :custom_value_id, :value).distinct
-  }, through: :products, class_name: 'Customization', source: :customizations
+  # Searchables is the set of product customizations referring to
+  # a custom attribute that's searchable. See #search_terms below.
+  has_many :searchables, -> { includes(:custom_attribute, :custom_value).joins(:custom_attribute).where(custom_attributes: {searchable: true}) }, through: :products, class_name: 'Customization', source: :customizations
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -41,16 +39,14 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
+  def search_params
+    custom_attributes.searchable.pluck(:name)
+  end
+
   # Collects available search terms to a hash indexed by custom attribute.
-  # The values are arrays of custom values (for attributes of type set),
-  # or strings (for numeric and alpha attributes).
+  # The values are arrays of strings derived from the customization's value.
   def search_terms
-    keys = custom_attributes.searchable.index_by(&:id)
-    values = custom_values.index_by(&:id)
-    distinct_customizations.inject({}) do |terms, c|
-      (terms[keys[c.custom_attribute_id]] ||= []) << (values[c.custom_value_id] || c.value)
-      terms
-    end
+    searchables.map { |c| [c.custom_attribute, c.value] }.uniq.group_by(&:shift).transform_values(&:flatten)
   end
 
   # Performs an inventory valuation of items in the shipping inventory.

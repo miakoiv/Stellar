@@ -1,5 +1,5 @@
 = content_tag_for :li, product do
-  = link_to show_product_path(@category, product), data: {push: 'partial', target: '.product-detail'} do
+  = link_to show_product_path((@category || product.category), product), data: {push: 'partial', target: '.product-detail'} do
     .product-image= image_variant_tag(product.cover_image, :matchbox,
         class: 'img-responsive')
     .product-text

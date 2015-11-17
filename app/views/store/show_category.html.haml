@@ -1,6 +1,9 @@
 %ul.categories.hidden-print
   = render @categories
 
+.search-panel{style: 'display: none'}
+  = render partial: 'search_form'
+
 %ul.products
   = render @products
 

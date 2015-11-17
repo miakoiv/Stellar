@@ -32,13 +32,22 @@ class Product < ActiveRecord::Base
   scope :categorized, -> { includes(:categories).where.not(categories: {id: nil}) }
   scope :uncategorized, -> { includes(:categories).where(categories: {id: nil}) }
   scope :virtual, -> { where(virtual: true) }
-  scope :by_keyword, -> (keyword) {
+  scope :keyword, -> (keyword) {
     where "code LIKE :match OR title LIKE :match OR subtitle LIKE :match", match: "%#{keyword}%"
   }
 
   #---
   validates :code, presence: true
   validates :title, presence: true
+
+  #---
+  def self.filter(params)
+    results = all
+    params.each do |key, value|
+      results = results.public_send(key, value) if value.present?
+    end
+    results
+  end
 
   #---
   # If a single category is requested, give the first one.

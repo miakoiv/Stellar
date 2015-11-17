@@ -1,0 +1,16 @@
+= render @products
+
+:coffee
+  $('.categories .category').removeClass 'active'
+  $('.categories').hide()
+  $('.navbar-form').hide()
+  $('.search-form').replaceWith("#{j render partial: 'store/search_form'}")
+  $('.search-form').initialize()
+
+  $('.search-panel').show()
+  $('.product-detail').hide()
+  $('.products').show()
+
+  # if theme-specific scripts have added masonry, trigger reload on it
+  if $('.products').hasClass 'masonry'
+    $('.products').imagesLoaded -> this.masonry 'reload'
