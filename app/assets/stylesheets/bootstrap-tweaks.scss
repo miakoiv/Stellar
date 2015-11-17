@@ -93,13 +93,13 @@ html {
 }
 
 .navbar-default {
-  #filter-bar {
-    border-top: 1px solid $navbar-default-border;
+  #search-bar {
+    @extend .navbar-inverse;
   }
 }
 .navbar-inverse {
-  #filter-bar {
-    border-top: 1px solid $navbar-inverse-border;
+  #search-bar {
+    @extend .navbar-default;
   }
 }
 
