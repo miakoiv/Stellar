@@ -3,9 +3,11 @@
 :coffee
   $('.categories .category').removeClass 'active'
   $('.categories ##{dom_id(@category)}').addClass 'active'
+  $('.categories').show()
+  $('.navbar-form').show()
+  $('.search-panel').hide()
   $('.product-detail').hide()
   $('.products').show()
-  $('.search-bar').replaceWith("#{j render partial: 'shared/search_bar'}");
 
   # if theme-specific scripts have added masonry, trigger reload on it
   if $('.products').hasClass 'masonry'
