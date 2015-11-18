@@ -93,13 +93,11 @@ html {
 }
 
 .search-panel {
-  margin-left: -1*$grid-gutter-width;
-  margin-right: -1*$grid-gutter-width;
-  margin-bottom: 10px;
-  padding: 20px $grid-gutter-width/2 10px;
+  @extend .row;
+  padding-top: 20px;
+  padding-bottom: 10px;
   max-height: 320px;
   overflow-y: auto;
-  background-color: darken($brand-primary, 25%);
 
   .search-form {
     @extend .col-xs-10, .col-sm-8;
