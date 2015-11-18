@@ -1,13 +1,12 @@
 %ul.categories.hidden-print{style: 'display: none'}
-  = render @categories
 
 .search-panel
-  = render partial: 'search_form'
-  = link_to icon('times', class: 'fa-2x'), store_path, class: 'col-xs-1'
+  = render partial: 'search_panel'
 
-%ul.products
+%ul.products{class: current_store.masonry? ? 'brickwork' : ''}
   = render @products
 
 .product-detail{style: 'display: none'}
 
-= render partial: 'products_modal'
+.all-products
+  = render partial: 'products_modal'

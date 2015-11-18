@@ -2,12 +2,10 @@
   = render @categories
 
 .search-panel{style: 'display: none'}
-  = render partial: 'search_form'
-  = link_to icon('times', class: 'fa-2x'), store_path, class: 'col-xs-1'
 
-%ul.products
+%ul.products{class: current_store.masonry? ? 'brickwork' : ''}
   = render @products
 
 .product-detail{style: 'display: none'}
 
-= render partial: 'products_modal'
+.all-products

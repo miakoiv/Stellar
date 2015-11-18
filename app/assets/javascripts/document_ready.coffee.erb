@@ -28,11 +28,20 @@ $.fn.extend
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
 
+  rebuild_masonry: ->
+    $brickwork = $('.brickwork')
+    $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')
+    $brickwork.imagesLoaded ->
+      this.masonry
+        itemSelector: '.product'
+        gutterWidth: 15
+
 jQuery ->
 
   window.wiselinks = new Wiselinks()
 
   $(document).initialize()
+  $(document).rebuild_masonry()
 
   $(document).on 'change', 'form.immediate', (e) ->
     $(e.currentTarget).trigger('submit.rails')
@@ -49,4 +58,5 @@ jQuery ->
     $('.modal-body', this).css 'height', $(window).height() - 120
 
   $(document).on 'page:done', (event, $target, status, url, data) ->
+    $(document).rebuild_masonry()
     if ga? then ga('send', 'pageview', window.location.pathname)

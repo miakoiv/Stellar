@@ -2,16 +2,13 @@
   = render @categories
 
 .search-panel{style: 'display: none'}
-  = render partial: 'search_form'
-  = link_to icon('times', class: 'fa-2x'), store_path, class: 'col-xs-1'
 
 %ul.products{style: 'display: none'}
-  = render @products
 
 .product-detail
   = render partial: 'products/product_detail', object: @product, as: :product
 
-= render partial: 'products_modal'
+.all-products
 
 :coffee
   jQuery ->
