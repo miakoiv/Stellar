@@ -10,7 +10,7 @@
         .col-sm-8
           = select_tag attribute.param_name, options_for_select(terms, params[attribute.attribute_type].try(:[], attribute.name)), include_blank: true, class: 'selectize form-control'
     .form-group
-      .col-xs-5
-        %button.btn.btn-default{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star', t('store.all_products'))
-      .col-xs-7
+      .col-sm-4
+        %button.btn.btn-default{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star')
+      .col-sm-8
         %button.btn.btn-primary{type: 'submit'}= t('search_bar.search')
