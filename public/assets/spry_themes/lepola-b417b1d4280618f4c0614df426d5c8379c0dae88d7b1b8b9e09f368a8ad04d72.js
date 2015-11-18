@@ -1,1 +1,0 @@
-(function(){jQuery(function(){return console.log($("ul.categories").first)})}).call(this);
