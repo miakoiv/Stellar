@@ -27,6 +27,7 @@ class StoreController < ApplicationController
 
   # GET /search
   def search
+    @search_terms = current_store.search_terms
     @products = current_store.products.categorized.available
       .filter(filter_params).ordered
   end
