@@ -7,12 +7,12 @@ class Customization < ActiveRecord::Base
   belongs_to :custom_value
 
   #---
-  def value
-    custom_value.present? ? custom_value.value : self[:value]
+  def display_value
+    custom_value.present? ? custom_value.value : value
   end
 
-  def value_with_units
-    "#{value} #{custom_attribute.measurement_unit}"
+  def display_value_with_units
+    "#{display_value} #{custom_attribute.measurement_unit}"
   end
 
 end
