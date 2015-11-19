@@ -35,8 +35,7 @@ class CustomAttribute < ActiveRecord::Base
     measurement_unit.present? ? "#{name} (#{measurement_unit})" : name
   end
 
-  # Search parameter name.
-  def param_name
+  def search_param_name
     "#{attribute_type}[#{name}]"
   end
 

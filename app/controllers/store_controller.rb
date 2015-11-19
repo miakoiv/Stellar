@@ -18,6 +18,7 @@ class StoreController < ApplicationController
   before_action :set_all_products, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
+  before_action :set_search_params, only: [:search]
 
   # GET /
   def index
@@ -27,9 +28,9 @@ class StoreController < ApplicationController
 
   # GET /search
   def search
-    @search_terms = current_store.search_terms
+    @searchables_by_attribute = current_store.searchables_by_attribute
     @products = current_store.products.categorized.available
-      .filter(filter_params).ordered
+      .by_keyword(params[:keyword]).search(@search_params).order(:title)
   end
 
   # GET /category/1
@@ -116,11 +117,13 @@ class StoreController < ApplicationController
       end
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def filter_params
-      params.slice(*:keyword, current_store.search_params)
+    # Search by custom attribute types.
+    def set_search_params
+      keys = CustomAttribute.attribute_types.keys
+      @search_params = keys.map { |k| [k, {}] }.to_h.merge(params.slice(*keys))
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
         :order_type_id, :shipping_at,

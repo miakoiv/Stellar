@@ -39,14 +39,10 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
-  def search_params
-    custom_attributes.searchable.pluck(:name)
-  end
-
-  # Collects available search terms to a hash indexed by custom attribute.
-  # The values are arrays of strings derived from the customization's value.
-  def search_terms
-    searchables.map { |c| [c.custom_attribute, c.value] }.uniq.group_by(&:shift).transform_values(&:flatten)
+  # Collects available "searchables" to a hash indexed by custom attribute.
+  # The values are arrays of either custom value objects or value strings.
+  def searchables_by_attribute
+    searchables.map { |c| [c.custom_attribute, c.custom_value || c.value] }.uniq.group_by(&:shift).transform_values(&:flatten)
   end
 
   # Performs an inventory valuation of items in the shipping inventory.

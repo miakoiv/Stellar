@@ -4,11 +4,11 @@
       %label.control-label.col-sm-4= t('search_panel.keyword')
       .col-sm-8
         = search_field_tag :keyword, params[:keyword], class: 'form-control'
-    - @search_terms.each do |attribute, terms|
+    - @searchables_by_attribute.each do |attribute, searchables|
       .form-group
         %label.control-label.col-sm-4= attribute.name.humanize
         .col-sm-8
-          = select_tag attribute.param_name, options_for_select(terms, params[attribute.attribute_type].try(:[], attribute.name)), include_blank: true, class: 'selectize form-control'
+          = render partial: 'custom_attributes/search_field', object: attribute, as: :custom_attribute, locals: {searchables: searchables, current_value: @search_params[attribute.attribute_type][attribute.name]}
     .form-group
       .col-sm-4
         %button.btn.btn-default{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star')

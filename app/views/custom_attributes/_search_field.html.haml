@@ -1,0 +1,7 @@
+- case custom_attribute.attribute_type
+- when 'set'
+  = select_tag custom_attribute.search_param_name, options_from_collection_for_select(searchables, :value, :value, current_value.try(:split, ',')), include_blank: true, multiple: true, class: 'selectize form-control'
+- when 'numeric'
+  = text_field_tag custom_attribute.search_param_name, current_value, class: 'form-control'
+- when 'alpha'
+  = text_field_tag custom_attribute.search_param_name, current_value, class: 'form-control'
