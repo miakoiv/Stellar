@@ -126,6 +126,6 @@ fi:
   footer:
     heading: Spry 😃 -verkkokauppa
     body_html: Tuottanut Leasit Oy <i class="fa fa-copyright"></i> 2015
-  search_bar:
+  search_panel:
     search: Etsi tuotteista
-    keyword: Nimike tai tuotenumero
+    keyword: Hakusana
