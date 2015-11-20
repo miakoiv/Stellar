@@ -8,7 +8,7 @@
       .form-group
         %label.control-label.col-sm-4= attribute.name.humanize
         .col-sm-8
-          = render partial: 'custom_attributes/search_field', object: attribute, as: :custom_attribute, locals: {searchables: searchables, current_value: @search_params[attribute.attribute_type][attribute.name]}
+          = render partial: 'custom_attributes/search_field', object: attribute, as: :custom_attribute, locals: {searchables: searchables, current_value: @search_params[attribute.attribute_type][attribute.id.to_s]}
     .form-group
       .col-sm-8.col-sm-offset-4
         %button.btn.btn-primary{type: 'submit'}= t('search_panel.search')

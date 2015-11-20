@@ -36,11 +36,11 @@ class CustomAttribute < ActiveRecord::Base
   end
 
   def search_field_name
-    "#{attribute_type}[#{name}]"
+    "#{attribute_type}[#{id}]"
   end
 
   def search_field_id
-    "#{attribute_type}_#{name}"
+    "#{attribute_type}_#{id}"
   end
 
   def to_s
