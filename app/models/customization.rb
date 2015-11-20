@@ -7,9 +7,9 @@ class Customization < ActiveRecord::Base
   belongs_to :custom_value
 
   # Customizations matching given attribute, value combination where
-  # attribute is of type set, and value is a comma separated list of values.
+  # attribute is of type set, and value is a comma separated list of ids.
   scope :by_set, -> (attribute, value) {
-    joins([:custom_attribute, :custom_value]).where(custom_attributes: {name: attribute}).where(custom_values: {value: value.split(',')}).select(:id).pluck(:id)
+    joins(:custom_attribute).where(custom_attributes: {name: attribute}).where(custom_value_id: value.split(',')).select(:id).pluck(:id)
   }
 
   #---

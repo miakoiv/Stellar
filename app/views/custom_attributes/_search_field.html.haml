@@ -1,7 +1,13 @@
 - case custom_attribute.attribute_type
 - when 'set'
-  = select_tag custom_attribute.search_param_name, options_from_collection_for_select(searchables, :value, :value, current_value.try(:split, ',')), include_blank: true, multiple: true, class: 'selectize form-control'
+  = select_tag custom_attribute.search_field_name, options_from_collection_for_select(searchables, :id, :value, current_value.try(:split, ',')), include_blank: true, multiple: true, class: 'form-control'
+  :coffee
+    $('##{custom_attribute.search_field_id}').selectize
+      plugins: ['remove_button']
+      dropdownParent: 'body'
+      allowEmptyOption: true
+
 - when 'numeric'
-  = text_field_tag custom_attribute.search_param_name, current_value, class: 'form-control'
+  = text_field_tag custom_attribute.search_field_name, current_value, class: 'form-control'
 - when 'alpha'
-  = text_field_tag custom_attribute.search_param_name, current_value, class: 'form-control'
+  = text_field_tag custom_attribute.search_field_name, current_value, class: 'form-control'
