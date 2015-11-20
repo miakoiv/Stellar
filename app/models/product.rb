@@ -35,25 +35,19 @@ class Product < ActiveRecord::Base
   scope :by_keyword, -> (keyword) {
     keyword.present? ? where('code LIKE :match OR title LIKE :match OR subtitle LIKE :match', match: "%#{keyword}%") : all
   }
-  scope :by_set, -> (attribute, value) {
-    joins(customizations: [:custom_attribute, :custom_value]).where(custom_attributes: {name: attribute}).where(custom_values: {value: value.split(',')})
-  }
 
   #---
   validates :code, presence: true
   validates :title, presence: true
 
   #---
-  # Search by a hash keyed by custom attribute type (set, numeric, alpha),
-  # containing hashes of values keyed by custom attribute name. Searches
-  # of each attribute type are carried out by calling the respective scope
-  # with attributes and values.
   def self.search(search_params)
     results = all
     search_params.each do |type, terms|
       next unless terms.present?
       terms.each do |attribute, value|
-        results = results.public_send("by_#{type}", attribute, value)
+        matches = Customization.public_send("by_#{type}", attribute, value)
+        results &= includes(:customizations).where(customizations: {id: matches}).order(:title)
       end
     end
     results

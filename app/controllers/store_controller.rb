@@ -30,7 +30,7 @@ class StoreController < ApplicationController
   def search
     @searchables_by_attribute = current_store.searchables_by_attribute
     @products = current_store.products.categorized.available
-      .by_keyword(params[:keyword]).search(@search_params).order(:title)
+      .by_keyword(params[:keyword]).search(@search_params)
   end
 
   # GET /category/1
