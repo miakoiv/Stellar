@@ -33,8 +33,7 @@ $.fn.extend
     $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')
     $brickwork.imagesLoaded ->
       this.masonry
-        itemSelector: '.product'
-        gutterWidth: 15
+        itemSelector: 'li.product'
 
 jQuery ->
 

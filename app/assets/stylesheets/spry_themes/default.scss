@@ -17,61 +17,67 @@
     img { @extend .img-responsive; }
   }
 
-  ul.categories {
-    list-style: none;
+  .categories {
     margin-bottom: 20px;
-    padding: 0;
 
-    li.category {
-      display: inline-block;
-      width: 16.67%;
-      min-width: 150px;
-      margin-right: 10px;
-      margin-bottom: 10px;
+    ul {
+      list-style: none;
+      padding: 0;
 
-      &.active a { @include box-shadow(0 0 3px 0 $link-color); }
-      a {
-        @extend .thumbnail;
-        display: block;
-        margin: 0;
-        padding: 5px 10px;
-        outline: 0;
-        text-decoration: none;
-        transition: all 0.2s ease-in-out 0s;
+      li.category {
+        display: inline-block;
+        width: 16.67%;
+        min-width: 150px;
+        margin-right: 10px;
+        margin-bottom: 10px;
 
-        img { display: none; }
-        p { margin: 0; }
+        &.active a { @include box-shadow(0 0 3px 0 $link-color); }
+        a {
+          @extend .thumbnail;
+          display: block;
+          margin: 0;
+          padding: 5px 10px;
+          outline: 0;
+          text-decoration: none;
+          transition: all 0.2s ease-in-out 0s;
+
+          img { display: none; }
+          p { margin: 0; }
+        }
       }
     }
   }
 
-  ul.products {
-    list-style: none;
-    padding: 0;
+  .products {
 
-    li.product {
-      display: inline-block;
-      width: 16.67%;
-      margin-right: 10px;
-      margin-bottom: 10px;
+    ul {
+      list-style: none;
+      padding: 0;
 
-      a {
-        display: block;
+      li.product {
+        display: inline-block;
+        width: 16.67%;
+        margin-right: 10px;
+        margin-bottom: 10px;
 
-        img { @extend .img-thumbnail; }
-        h3 {
-          font-size: $font-size-base;
-          margin-top: 0.5em;
-          margin-bottom: 0.25em;
+        a {
+          display: block;
 
-          small {
-            display: block;
-            font-size: $font-size-small;
+          img { @extend .img-thumbnail; }
+          h3 {
+            font-size: $font-size-base;
+            margin-top: 0.5em;
+            margin-bottom: 0.25em;
+
+            small {
+              display: block;
+              font-size: $font-size-small;
+            }
           }
+          .description { display: none; }
         }
-        .description { display: none; }
+        .buy-now { display: none; }
       }
-      .buy-now { display: none; }
     }
   }
 

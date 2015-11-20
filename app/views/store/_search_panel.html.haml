@@ -10,7 +10,5 @@
         .col-sm-8
           = render partial: 'custom_attributes/search_field', object: attribute, as: :custom_attribute, locals: {searchables: searchables, current_value: @search_params[attribute.attribute_type][attribute.name]}
     .form-group
-      .col-sm-4
-        %button.btn.btn-default{type: 'button', data: {toggle: 'modal', target: '#products-modal'}}= icon('star')
-      .col-sm-8
+      .col-sm-8.col-sm-offset-4
         %button.btn.btn-primary{type: 'submit'}= t('search_panel.search')

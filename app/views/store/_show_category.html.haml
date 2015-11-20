@@ -1,4 +1,8 @@
-= render @products
+.canvas
+  %ul= render @products
+.list{style: 'display: none'}
+  .panel.panel-default
+    = render partial: 'products/table', object: @products, as: :products
 
 :coffee
   $('.categories .category').removeClass 'active'

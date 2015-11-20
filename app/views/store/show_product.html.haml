@@ -1,14 +1,12 @@
-%ul.categories.hidden-print
-  = render @categories
+.categories.hidden-print
+  %ul= render @categories
 
 .search-panel{style: 'display: none'}
 
-%ul.products{style: 'display: none'}
+.products{style: 'display: none'}
 
 .product-detail
   = render partial: 'products/product_detail', object: @product, as: :product
-
-.all-products
 
 :coffee
   jQuery ->

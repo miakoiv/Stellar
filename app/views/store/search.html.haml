@@ -1,12 +1,10 @@
-%ul.categories.hidden-print{style: 'display: none'}
+.categories.hidden-print{style: 'display: none'}
 
 .search-panel
   = render partial: 'search_panel'
 
-%ul.products{class: current_store.masonry? ? 'brickwork' : ''}
-  = render @products
+.products{class: current_store.masonry? ? 'brickwork' : ''}
+  .canvas
+    %ul= render @products
 
 .product-detail{style: 'display: none'}
-
-.all-products
-  = render partial: 'products_modal'

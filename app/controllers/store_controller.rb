@@ -15,7 +15,6 @@ class StoreController < ApplicationController
   before_action :authenticate_user_or_skip!
 
   before_action :set_categories, only: [:index, :search, :show_category, :show_product]
-  before_action :set_all_products, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
   before_action :set_search_params, only: [:search]
@@ -95,10 +94,6 @@ class StoreController < ApplicationController
   private
     def set_categories
       @categories = current_store.categories.top_level.ordered
-    end
-
-    def set_all_products
-      @all_products = current_store.products.available.categorized.ordered
     end
 
     # Find category by friendly id in `category_id`, including history.

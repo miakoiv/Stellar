@@ -1,4 +1,4 @@
-= render @products
+%ul.canvas= render @products
 
 :coffee
   $('.categories').hide()
@@ -8,4 +8,3 @@
   $('.search-panel').show()
   $('.products').show()
   $('.product-detail').hide()
-  $('.all-products').html("#{j render partial: 'store/products_modal'}")

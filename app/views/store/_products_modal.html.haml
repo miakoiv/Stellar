@@ -1,8 +1,0 @@
-#products-modal.modal{data: {backdrop: 'static'}}
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        %button.close{data: {dismiss: 'modal'}}= icon('close')
-        %h4.modal-title= t('store.all_products')
-      .modal-body
-        = render partial: 'products/all'

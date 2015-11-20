@@ -44,109 +44,119 @@ $brand-primary: #e6172b;
     }
   }
 
-  ul.categories {
+  .categories {
     @extend .row;
-    list-style: none;
     margin-bottom: 20px;
     padding: 20px 0 0;
 
-    li.category {
-      @extend .col-xs-2;
-      min-width: 240px;
-      margin-bottom: 15px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-      &.active a {
-        @extend .btn-primary;
-      }
-      a {
-        @extend .btn, .btn-default;
-        width: 100%;
-        outline: 0 !important;
-        transition: all 0.2s ease-in-out 0s;
+      li.category {
+        @extend .col-xs-2;
+        min-width: 240px;
+        margin-bottom: 15px;
 
-        img { display: none; }
-        p { margin: 0; }
+        &.active a {
+          @extend .btn-primary;
+        }
+        a {
+          @extend .btn, .btn-default;
+          width: 100%;
+          outline: 0 !important;
+          transition: all 0.2s ease-in-out 0s;
+
+          img { display: none; }
+          p { margin: 0; }
+        }
       }
     }
   }
 
-  ul.products {
-    list-style: none;
-    padding: 0;
+  .products {
 
-    li.product {
-      @include box-shadow(0 0 3px 0 rgba(0,0,0,0.666));
-      position: absolute;
-      background: #fff;
-      width: 200px;
-      padding: $grid-gutter-width/2;
-      padding-bottom: 0;
-      margin-bottom: $grid-gutter-width/2;
-      transition: all 0.2s ease-in-out 0s;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-      &:hover {
-        @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));
-        transform: scale(1.02);
+      li.product {
+        @include box-shadow(0 0 3px 0 rgba(0,0,0,0.666));
+        position: absolute;
+        background: #fff;
+        width: 200px;
+        padding: $grid-gutter-width/2;
+        padding-bottom: 0;
+        margin-right: $grid-gutter-width/2;
+        margin-bottom: $grid-gutter-width/2;
+        transition: all 0.2s ease-in-out 0s;
 
+        &:hover {
+          @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));
+          transform: scale(1.02);
+
+          a {
+            text-decoration: none;
+          }
+        }
         a {
-          text-decoration: none;
-        }
-      }
-      a {
-        display: block;
-
-        img {
           display: block;
-          margin: 0 auto;
-        }
-        h3 {
-          font-size: $font-size-base;
-          margin-top: 0.5em;
-          margin-bottom: 0.5em;
 
-          .small {
+          img {
             display: block;
-            font-size: $font-size-small;
+            margin: 0 auto;
+          }
+          h3 {
+            font-size: $font-size-base;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+
+            .small {
+              display: block;
+              font-size: $font-size-small;
+            }
+          }
+          .description {
+            position: relative;
+            font-size: $font-size-small - 2;
+            color: $text-color;
+            max-height: 50px;
+            overflow: hidden;
+
+            &:after {
+              @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
+              content: "";
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              height: 30px;
+            }
           }
         }
-        .description {
+        .buy-now {
+          @extend .row;
           position: relative;
-          font-size: $font-size-small - 2;
-          color: $text-color;
-          max-height: 50px;
-          overflow: hidden;
+          height: 40px;
+          padding: 10px;
+          background: $gray-dark;
 
-          &:after {
-            @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 30px;
+          p {
+            margin: 0 0 0 $grid-gutter-width;
+            color: #fff;
+            font-weight: 500;
           }
-        }
-      }
-      .buy-now {
-        @extend .row;
-        position: relative;
-        height: 40px;
-        padding: 10px;
-        background: $gray-dark;
+          .form-inline {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            padding: 0;
 
-        p {
-          margin: 0 0 0 $grid-gutter-width;
-          color: #fff;
-          font-weight: 500;
-        }
-        .form-inline {
-          position: absolute;
-          left: 10px;
-          top: 10px;
-          padding: 0;
-
-          button {
-            @extend .btn-xs, .btn-default;
+            button {
+              @extend .btn-xs, .btn-default;
+            }
           }
         }
       }

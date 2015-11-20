@@ -72,121 +72,135 @@ body {
     margin-bottom: 30px;
   }
 
-  ul.categories {
+  .categories {
     @extend .row;
     margin-left: -1*$grid-gutter-width;
     margin-right: -1*$grid-gutter-width;
-    list-style: none;
-    margin-bottom: 0;
-    padding-left: $grid-gutter-width;
     background-color: #d0d0d0;
 
-    li.category {
-      float: left;
-      position: relative;
-      width: 12.5vw;
-      min-width: 120px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 $grid-gutter-width;
 
-      a {
-        display: block;
-        text-decoration: none;
-        background-color: #c4c4c4;
-        color: #1c1c1c;
-        transition: all 0.2s ease-in-out 0s;
+      li.category {
+        float: left;
+        position: relative;
+        width: 12.5vw;
+        min-width: 120px;
 
-        &:hover {
-          background-color: #fff;
-        }
+        a {
+          display: block;
+          text-decoration: none;
+          background-color: #c4c4c4;
+          color: #1c1c1c;
+          transition: all 0.2s ease-in-out 0s;
 
-        img { display: none; }
-        p {
-          margin: 0;
-          padding: 10px 15px;
-          white-space: nowrap;
+          &:hover {
+            background-color: #fff;
+          }
+
+          img { display: none; }
+          p {
+            margin: 0;
+            padding: 10px 15px;
+            white-space: nowrap;
+          }
         }
       }
     }
   }
 
-  ul.products {
+  .products {
+    @extend .row;
     position: relative;
-    list-style: none;
-    padding: 30px 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
 
-    li.product {
-      float: left;
-      width: 220px;
-      padding: 15px;
-      margin-bottom: 15px;
-      background-color: #fff;
-      transition: all 0.2s ease-in-out 0s;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-      &:hover {
-        @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
-        @include gradient-directional(rgba(250,250,250,1), rgba(255,255,255,0), 135deg);
-      }
-      a {
-        display: block;
+      li.product {
+        float: left;
+        width: 220px;
+        padding: 15px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        transition: all 0.2s ease-in-out 0s;
 
-        &:hover { text-decoration: none; }
-        .product-image {
-          position: relative;
-
-          img {
-            display: block;
-            margin: 0 auto;
-          }
+        &:hover {
+          @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
+          @include gradient-directional(rgba(250,250,250,1), rgba(255,255,255,0), 135deg);
         }
-        .product-text {
-          text-align: center;
-          color: #5f5f5f;
+        a {
+          display: block;
 
-          h3 {
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: $font-size-large;
-            text-transform: uppercase;
-          }
-          .description {
+          &:hover { text-decoration: none; }
+          .product-image {
             position: relative;
-            max-height: 80px;
-            overflow: hidden;
-            font-size: $font-size-small;
 
-            &:after {
-              @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
-              content: "";
-              position: absolute;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              height: 30px;
+            img {
+              display: block;
+              margin: 0 auto;
+            }
+          }
+          .product-text {
+            text-align: center;
+            color: #5f5f5f;
+
+            h3 {
+              margin-top: 15px;
+              margin-bottom: 5px;
+              font-size: $font-size-large;
+              text-transform: uppercase;
+            }
+            .description {
+              position: relative;
+              max-height: 80px;
+              overflow: hidden;
+              font-size: $font-size-small;
+
+              &:after {
+                @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 30px;
+              }
+            }
+          }
+        }
+        .buy-now {
+          margin-top: 15px;
+          text-align: center;
+
+          p {
+            @extend .lead;
+            color: #5f5f5f;
+          }
+          form {
+            button {
+              width: 50%;
+              background-color: #343434;
+              border-color: #000;
+              transition: all 0.2s ease-in-out 0s;
+
+              &:hover {
+                background-color: $brand-primary;
+                border-color: $link-color;
+              }
             }
           }
         }
       }
-      .buy-now {
-        margin-top: 15px;
-        text-align: center;
-
-        p {
-          @extend .lead;
-          color: #5f5f5f;
-        }
-        form {
-          button {
-            width: 50%;
-            background-color: #343434;
-            border-color: #000;
-            transition: all 0.2s ease-in-out 0s;
-
-            &:hover {
-              background-color: $brand-primary;
-              border-color: $link-color;
-            }
-          }
-        }
-      }
+    }
+    .list {
+      @extend .col-xs-12;
     }
   }
 

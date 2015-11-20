@@ -30,98 +30,105 @@
     img { @extend .img-responsive; }
   }
 
-  ul.categories {
-    list-style: none;
+  .categories {
     margin: 0 -1*$grid-gutter-width 20px;
-    padding: 20px $grid-gutter-width/2 10px;
+    padding: 20px $grid-gutter-width 10px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAiCAAAAADD1SApAAAA5UlEQVR4AYXUMW6EQBAF0TpSS4T//vda2dO0GgiKwDuItwRl7ef6v5L+qNSc+5EL+jZpkTZJm3LBkBxRx2TI5YLzriQ5j//O9+0hLmgz4hoz71BB56kRc552KtjFpvqjnQtWsdHJbueCVWx9Z7dzwSpWQ2q3c8GudMN6tHPBo1hV/9ntXLCK7SsZ44Jd7CXqGBdMsQ+ZdipYldYvf7dzwfwHWqRNDXXBa2Eq9dkgFfgGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gF/gGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gFz+Bp+mo8f2VxAAAAABJRU5ErkJggg==);
 
-    li.category {
-      display: inline-block;
-      z-index: 1;
-      margin-right: -10px;
-      margin-bottom: 10px;
-      background: #ccc;
-      @include box-shadow(0 0 6px 0 rgba(0,0,0,0.5));
-      transition: all 0.2s ease-in-out 0s;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-      &:hover { transform: scale(1.05); }
-      &.active {
-        z-index: 2;
-
-        a:before {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          @include gradient-directional(rgba(255,255,255,0.1), rgba(255,255,255,0.9), 120deg);
-        }
-      }
-      a {
-        display: block;
+      li.category {
+        display: inline-block;
         position: relative;
-        width: 90px;
-        height: 112px;
-        padding: 1px;
-        outline: 0;
-        overflow: hidden;
-        text-decoration: none;
+        margin-right: -10px;
+        margin-bottom: 10px;
+        background: #ccc;
+        @include box-shadow(0 0 6px 0 rgba(0,0,0,0.5));
+        transition: all 0.2s ease-in-out 0s;
 
-        img {
+        &:hover { transform: scale(1.05); }
+        &.active {
+          a:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            @include gradient-directional(rgba(255,255,255,0.1), rgba(255,255,255,0.9), 120deg);
+          }
+        }
+        a {
           display: block;
-          width: 88px;
-          height: auto;
-        }
+          position: relative;
+          width: 90px;
+          height: 112px;
+          padding: 1px;
+          outline: 0;
+          overflow: hidden;
+          text-decoration: none;
 
-        p {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          height: 30px;
-          margin: 0;
-          padding: 5px;
-          color: #fff;
-          background: rgba(0,0,0,0.5);
-          font-weight: 500;
+          img {
+            display: block;
+            width: 88px;
+            height: auto;
+          }
+
+          p {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 30px;
+            margin: 0;
+            padding: 5px;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            font-weight: 500;
+          }
         }
+        ul { display: none; }
       }
-      ul { display: none; }
     }
   }
 
-  ul.products {
-    padding: 0;
+  .products {
 
-    li.product {
-      display: inline-block;
-      width: 16.67%;
-      margin-right: 10px;
-      margin-bottom: 10px;
+    ul {
+      margin: 0;
+      padding: 0;
 
-      &:hover a img { @include box-shadow(0 0 8px $link-color); }
+      li.product {
+        display: inline-block;
+        width: 16.67%;
+        margin-right: 10px;
+        margin-bottom: 10px;
 
-      a {
-        display: block;
-        text-decoration: none;
+        &:hover a img { @include box-shadow(0 0 8px $link-color); }
 
-        img {
-          @extend .img-thumbnail;
-        }
-        h3 {
-          font-size: $font-size-base;
-          margin-top: 0.5em;
-          margin-bottom: 1em;
+        a {
+          display: block;
+          text-decoration: none;
 
-          .small {
-            display: block;
-            font-size: $font-size-small;
+          img {
+            @extend .img-thumbnail;
           }
+          h3 {
+            font-size: $font-size-base;
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+
+            .small {
+              display: block;
+              font-size: $font-size-small;
+            }
+          }
+          .description { display: none; }
         }
-        .description { display: none; }
+        .buy-now { display: none; }
       }
-      .buy-now { display: none; }
     }
   }
 

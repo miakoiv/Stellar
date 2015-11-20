@@ -1,14 +1,16 @@
-%ul.categories.hidden-print
-  = render @categories
+.categories.hidden-print
+  %ul= render @categories
 
 .search-panel{style: 'display: none'}
 
-%ul.products{class: current_store.masonry? ? 'brickwork' : ''}
-  = render @products
+.products{class: current_store.masonry? ? 'brickwork' : ''}
+  .canvas
+    %ul= render @products
+  .list{style: 'display: none'}
+    .panel.panel-default
+      = render partial: 'products/table', object: @products, as: :products
 
 .product-detail{style: 'display: none'}
-
-.all-products
 
 :coffee
   jQuery ->
