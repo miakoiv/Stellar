@@ -7,11 +7,11 @@
 :coffee
   $('.categories .category').removeClass 'active'
   $('.categories ##{dom_id(@category)}').addClass 'active'
-  $('.categories').show()
-  $('.navbar-form').show()
   $('.search-panel').hide()
   $('.product-detail').hide()
+  $('.categories').show()
   $('.products').show()
+  $('.navbar-form').show()
 
   if $(window).isSmall()
     $(window).scrollTo $('.products'), 300, offset: -70

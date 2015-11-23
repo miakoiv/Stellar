@@ -104,6 +104,16 @@ html {
   }
 }
 
+.visible-from-search {
+  display: none;
+}
+.from-search .visible-from-search {
+  display: inline-block;
+}
+.from-search .hidden-from-search {
+  display: none;
+}
+
 .modal-body {
   overflow-y: scroll;
 }

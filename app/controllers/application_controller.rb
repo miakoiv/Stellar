@@ -12,12 +12,6 @@ class ApplicationController < ActionController::Base
   after_filter :prepare_unobtrusive_flash
 
   #---
-  # Product search is available if a category is loaded.
-  def search_available?
-    @category.present?
-  end
-  helper_method :search_available?
-
   # Authenticate user, but skip authentication
   # if the current store admits guests.
   def authenticate_user_or_skip!

@@ -1,10 +1,11 @@
-%ul.canvas= render @products
+.canvas
+  %ul= render @products
 
 :coffee
   $('.categories').hide()
+  $('.product-detail').hide().addClass 'from-search'
   $('.navbar-form').hide()
   $('.search-panel').html("#{j render partial: 'store/search_panel'}")
   $('.search-panel').initialize()
   $('.search-panel').show()
-  $('.products').show()
-  $('.product-detail').hide()
+  $('.products').show().addClass 'from-search'

@@ -1,4 +1,4 @@
-- if search_available?
+- if @navbar_search
   = form_tag search_path, {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-left', role: 'search'} do
     .form-group.has-feedback
       = search_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: t('search_panel.keyword')

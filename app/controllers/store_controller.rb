@@ -14,6 +14,7 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!
 
+  before_action :enable_navbar_search, only: [:index, :show_category, :show_product]
   before_action :set_categories, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
@@ -110,6 +111,11 @@ class StoreController < ApplicationController
       if request.path != show_product_path(@category, @product)
         return redirect_to show_product_path(@category, @product), status: :moved_permanently
       end
+    end
+
+    # Enable navbar search widget when applicable.
+    def enable_navbar_search
+      @navbar_search = true
     end
 
     # Search by custom attribute types.

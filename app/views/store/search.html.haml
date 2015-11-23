@@ -3,8 +3,8 @@
 .search-panel
   = render partial: 'search_panel'
 
-.products{class: current_store.masonry? ? 'brickwork' : ''}
+.products.from-search{class: current_store.masonry? ? 'brickwork' : ''}
   .canvas
     %ul= render @products
 
-.product-detail{style: 'display: none'}
+.product-detail.from-search{style: 'display: none'}
