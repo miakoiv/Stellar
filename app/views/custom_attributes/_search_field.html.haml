@@ -9,5 +9,10 @@
 
 - when 'numeric'
   = text_field_tag custom_attribute.search_field_name, current_value, class: 'form-control'
+  :coffee
+    $('##{custom_attribute.search_field_id}').slider
+      min: 0
+      max: 2000
+      value: [0, 2000]
 - when 'alpha'
   = text_field_tag custom_attribute.search_field_name, current_value, class: 'form-control'
