@@ -8,8 +8,12 @@ class Customization < ActiveRecord::Base
 
   # Customizations matching given attribute, value combination where
   # attribute is of type set, and value is a comma separated list of ids.
-  scope :by_set, -> (attribute, value) {
-    where(custom_attribute_id: attribute).where(custom_value_id: value.split(',')).select(:id).pluck(:id)
+  scope :by_set, -> (attribute, values) {
+    where(custom_attribute_id: attribute).where(custom_value_id: values.split(','))
+  }
+
+  scope :by_numeric, -> (attribute, values) {
+    where(custom_attribute_id: attribute).where(value: values.split(','))
   }
 
   #---

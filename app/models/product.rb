@@ -45,14 +45,12 @@ class Product < ActiveRecord::Base
   # intersecting the current result set with the matches of each search term.
   # Search params are keyed by attribute type (set, numeric, alpha), for example
   # {set: {color: 'white', origin: 'Finland'}, numeric: {width: '100:200'}}
-  # FIXME: find a more optimized solution using Arel.
   def self.search(search_params)
     results = all
     search_params.each do |type, terms|
-      #next unless terms.present?
-      terms.each do |attribute, value|
-        matches = Customization.public_send("by_#{type}", attribute, value)
-        results &= includes(:customizations).where(customizations: {id: matches}).order(:title)
+      terms.each do |attribute, values|
+        matches = Customization.public_send("by_#{type}", attribute, values)
+        results &= includes(:customizations).where(customizations: {id: matches})
       end
     end
     results
