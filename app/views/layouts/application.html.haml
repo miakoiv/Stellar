@@ -16,7 +16,6 @@
                   = icon('shopping-cart', class: 'fa-lg')
                   = render partial: 'store/cart_badge'
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
-            %span.sr-only Toggle navigation
             = icon('bars', class: 'fa-lg')
         .navbar-header
           = link_to branding(current_store), root_path, class: 'navbar-brand'
