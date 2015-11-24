@@ -241,6 +241,9 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     wiselinks (1.2.1)
+    with_advisory_lock (3.0.0)
+      activerecord (>= 3.2)
+      thread_safe
     wysiwyg-rails (1.2.8)
       font-awesome-rails (>= 4.3.0.0)
       railties (>= 3.2, < 5.0)
@@ -296,6 +299,7 @@ DEPENDENCIES
   unobtrusive_flash (>= 3)
   web-console (~> 2.0)
   wiselinks
+  with_advisory_lock
   wysiwyg-rails
   yaml_db
 

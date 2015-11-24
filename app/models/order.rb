@@ -129,6 +129,15 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Completing an order sets the completion timestamp and
+  # assigns a number from the sequence in the store.
+  def complete!
+    Order.with_advisory_lock('order_numbering') do
+      current_max = store.orders.complete.maximum(:number) || store.order_sequence
+      update(number: current_max.succ, completed_at: Time.current)
+    end
+  end
+
   # Collects aggregated component quantities of all products in the order.
   # Returns a hash of quantities keyed by product object.
   def aggregated_components
@@ -169,16 +178,12 @@ class Order < ActiveRecord::Base
     order_items.map { |item| item.subtotal + item.adjustment_total }.sum + adjustment_total
   end
 
-  def padded_id
-    '1%07d' % id
-  end
-
   def tab_name
     order_type.name
   end
 
   def to_s
-    new_record? ? '' : padded_id
+    number
   end
 
   private
