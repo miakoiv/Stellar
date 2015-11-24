@@ -11,6 +11,9 @@
               %li= link_to icon('wrench', class: 'fa-lg'), admin_orders_path
             - if user_signed_in? && can_shop?
               %li
+                %button.btn.btn-link.navbar-btn{data: {toggle: 'collapse', target: '.products > div'}}
+                  = icon('table', class: 'fa-lg')
+              %li
                 = link_to show_cart_path do
                   = icon('shopping-cart', class: 'fa-lg')
                   = render partial: 'store/cart_badge'
