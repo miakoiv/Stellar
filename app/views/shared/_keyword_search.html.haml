@@ -1,5 +1,9 @@
 - if @navbar_search
-  = form_tag search_path, {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-left', role: 'search'} do
+  = form_tag search_path, {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-right', role: 'search'} do
     .form-group.has-feedback
-      = search_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: t('search_panel.keyword')
-      %span.form-control-feedback= icon('search')
+      .input-group
+        %span.input-group-btn
+          %button.btn.btn-default{type: 'button', data: {toggle: 'collapse', target: '.products > div'}}
+            = icon('list')
+        = search_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: t('search_panel.keyword')
+        %span.form-control-feedback= icon('search')

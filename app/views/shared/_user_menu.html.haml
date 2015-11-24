@@ -7,4 +7,4 @@
       %li.dropdown-header= current_user.name
       %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
 - else
-  %li= link_to icon('sign-in'), new_user_session_path
+  %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
