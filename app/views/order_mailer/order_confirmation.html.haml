@@ -22,9 +22,9 @@
                       %td= Order.human_attribute_name(:customer_name)
                       %td
                         %b= @order.customer_name
-                      %td= Order.human_attribute_name(:customer_email)
+                      %td= Order.human_attribute_name(:customer_phone)
                       %td
-                        %b= @order.customer_email
+                        %b= @order.customer_phone
                     - if @store.b2b_sales?
                       %tr
                         %td= Order.human_attribute_name(:company_name)

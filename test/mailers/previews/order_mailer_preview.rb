@@ -5,7 +5,7 @@
 class OrderMailerPreview < ActionMailer::Preview
 
   def order_confirmation
-    OrderMailer.order_confirmation(Order.first)
+    OrderMailer.order_confirmation(Order.complete.first)
   end
 
 end
