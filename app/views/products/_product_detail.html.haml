@@ -26,10 +26,11 @@
 
     .body-text><= product.description.html_safe if product.description.present?
 
-    .documents.list-group
-      - @documents.each do |document|
-        = link_to(icon('paperclip', document.to_s),
-            document.url(:original), class: 'list-group-item')
+    - if @images['document']
+      .documents.list-group
+        - @images['document'].each do |document|
+          = link_to(icon('paperclip', document.to_s),
+              document.url(:original), class: 'list-group-item')
 
     %ul.customizations.list-group
       - product.customizations.each do |customization|
@@ -44,17 +45,17 @@
 
   .images.technical
     %ul.nav.nav-pills{role: 'tablist'}
-      - if @technical_images.count > 1
-        = render partial: 'images/pill', collection: @technical_images, as: :image
+      - if @images['technical'] && @images['technical'].count > 1
+        = render partial: 'images/pill', collection: @images['technical'], as: :image
     .tab-content.gallery
-      = render partial: 'images/technical', collection: @technical_images, as: :image
+      = render partial: 'images/technical', collection: @images['technical'], as: :image
 
   .images.presentational
     %ul.nav.nav-pills{role: 'tablist'}
-      - if @presentational_images.count > 1
-        = render partial: 'images/pill', collection: @presentational_images, as: :image
+      - if @images['presentational'] && @images['presentational'].count > 1
+        = render partial: 'images/pill', collection: @images['presentational'], as: :image
     .tab-content.gallery
-      = render partial: 'images/presentational', collection: @presentational_images, as: :image
+      = render partial: 'images/presentational', collection: @images['presentational'], as: :image
 
 .product-footer
 

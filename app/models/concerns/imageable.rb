@@ -5,12 +5,17 @@ module Imageable
     has_many :images, as: :imageable, dependent: :destroy
   end
 
+  # Collected images by purpose, useful for preloading.
+  def collected_images
+    @collection ||= images.includes(:image_type).ordered.group_by { |i| i.image_type.purpose }
+  end
+
   # Use the first presentational image as cover image.
   def cover_image
-    images.by_purpose(:presentational).ordered.first
+    images.presentational.ordered.first
   end
 
   def technical_cover_image
-    images.by_purpose(:technical).ordered.first
+    images.technical.ordered.first
   end
 end

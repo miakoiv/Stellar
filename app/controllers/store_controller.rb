@@ -40,10 +40,7 @@ class StoreController < ApplicationController
 
   # GET /product/1
   def show_product
-    @products = @category.products.available.ordered
-    @presentational_images = @product.images.by_purpose(:presentational).ordered
-    @technical_images = @product.images.by_purpose(:technical).ordered
-    @documents = @product.images.by_purpose(:document).ordered
+    @images = @product.collected_images
   end
 
   # POST /product/1/order
