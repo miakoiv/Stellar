@@ -1,7 +1,7 @@
 - set_meta_tags(og: {title: @product.to_s, url: request.original_url, image: image_url(@product.cover_image.url(:presentational)), description: strip_tags(@product.description)})
 
 .categories.hidden-print
-  %ul= render @categories
+  = render partial: 'categories'
 
 .search-panel{style: 'display: none'}
 

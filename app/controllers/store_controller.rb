@@ -22,7 +22,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_store.categories.ordered.friendly.first
+    @category = current_store.categories.ordered.friendly.first.having_products
     @products = @category.present? ? @category.products.available.ordered : []
   end
 
@@ -96,9 +96,13 @@ class StoreController < ApplicationController
 
     # Find category by friendly id in `category_id`, including history.
     def find_category
-      @category = Category.friendly.find(params[:category_id])
-      if params[:product_id].nil? && request.path != show_category_path(@category)
-        return redirect_to show_category_path(@category), status: :moved_permanently
+      selected = Category.friendly.find(params[:category_id])
+      if params[:product_id].nil? && request.path != show_category_path(selected)
+        return redirect_to show_category_path(selected), status: :moved_permanently
+      end
+      @category = selected.having_products
+      if @category != selected
+        return redirect_to show_category_path(@category)
       end
     end
 

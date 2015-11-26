@@ -21,6 +21,15 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
 
   #---
+  def top_level
+    parent_category.nil? ? self : parent_category.top_level
+  end
+
+  def having_products
+    return self if sub_categories.empty? || products.any?
+    sub_categories.first.products.empty? ? self : sub_categories.first
+  end
+
   def slugger
     [:name, [:name, -> { store.name }]]
   end
