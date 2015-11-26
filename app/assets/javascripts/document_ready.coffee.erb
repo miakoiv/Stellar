@@ -28,6 +28,13 @@ $.fn.extend
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
 
+  deactivate: ->
+    $(this).removeClass 'active'
+  activate: ->
+    $(this).addClass 'active'
+    if parent = $(this).data 'parent'
+      $(parent).activate()
+
   rebuild_masonry: ->
     $brickwork = $('.brickwork')
     $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')

@@ -1,5 +1,6 @@
 .categories.hidden-print
-  = render partial: 'categories'
+  %ul= render @categories
+  = render partial: 'subcategories'
 
 .search-panel{style: 'display: none'}
 

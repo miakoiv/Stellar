@@ -1,0 +1,3 @@
+.subcategories
+  - if @category.top_level.sub_categories.any?
+    %ul= render partial: 'categories/subcategory', collection: @category.top_level.sub_categories
