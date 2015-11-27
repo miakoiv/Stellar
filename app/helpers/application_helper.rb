@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def meta_tags_for(object)
-    set_meta_tags(og: {title: object.to_s, url: request.original_url, image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational)) : nil, description: strip_tags(object.description)})
+    set_meta_tags(og: {title: object.to_s, url: request.original_url, image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational)) : nil, description: Nokogiri::HTML(object.description).css('body').children.map(&:text).join("\n")})
   end
 
   def drag_handle
