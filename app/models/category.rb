@@ -12,7 +12,7 @@ class Category < ActiveRecord::Base
   #---
   belongs_to :store
   belongs_to :parent_category, class_name: 'Category'
-  has_many :sub_categories, class_name: 'Category', foreign_key: :parent_category_id
+  has_many :subcategories, class_name: 'Category', foreign_key: :parent_category_id
   has_and_belongs_to_many :products
 
   scope :top_level, -> { where(parent_category_id: nil) }
@@ -35,8 +35,9 @@ class Category < ActiveRecord::Base
   # Defaults to self if there are no subcategories, or the first
   # subcategory has no products either.
   def having_products
-    return self if sub_categories.empty? || products.any?
-    sub_categories.first.products.empty? ? self : sub_categories.first
+    return self if subcategories.empty? || products.any?
+    first_subcategory = subcategories.ordered.first
+    first_subcategory.products.empty? ? self : first_subcategory
   end
 
   def slugger
