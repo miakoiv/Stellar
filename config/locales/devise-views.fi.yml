@@ -1,12 +1,4 @@
 fi:
-  activerecord:
-    attributes:
-      user:
-        current_password: Nykyinen salasana
-        email: Sähköpostiosoite
-        password: Salasana
-        password_confirmation: Salasanan vahvistus
-        remember_me: Muista minut
   devise:
     confirmations:
       new:

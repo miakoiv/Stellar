@@ -196,6 +196,11 @@ en:
       user:
         name: Name
         role_ids: Roles
+        current_password: Current password
+        email: E-mail address
+        password: Password
+        password_confirmation: Confirm password
+        remember_me: Remember me
         sign_in_count: Sign in count
         current_sign_in_at: Current sign in
         last_sign_in_at: Last sign in

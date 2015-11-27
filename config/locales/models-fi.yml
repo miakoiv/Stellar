@@ -196,6 +196,11 @@ fi:
       user:
         name: Nimi
         role_ids: Roolit
+        current_password: Nykyinen salasana
+        email: Sähköpostiosoite
+        password: Salasana
+        password_confirmation: Salasanan vahvistus
+        remember_me: Muista minut
         sign_in_count: Kirjautumiskertoja
         current_sign_in_at: Viimeisin kirjautuminen
         last_sign_in_at: Edellinen kirjautuminen
