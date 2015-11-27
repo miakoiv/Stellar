@@ -57,8 +57,8 @@ class Store < ActiveRecord::Base
     inventories.by_purpose(purpose)
   end
 
-  def category_options
-    categories.map { |c| [c.name, c.id] }
+  def category_options(exclude = nil)
+    (categories.top_level.ordered - [exclude]).map { |c| [c.name, c.id] }
   end
 
   def user_options
