@@ -10,6 +10,10 @@ module ApplicationHelper
     klass.human_attribute_name(attribute_name)
   end
 
+  def meta_tags_for(object)
+    set_meta_tags(og: {title: object.to_s, url: request.original_url, image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational)) : nil, description: strip_tags(object.description)})
+  end
+
   def drag_handle
     content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
       icon('ellipsis-v', class: 'fa-lg fa-fw')

@@ -1,4 +1,4 @@
-- set_meta_tags(og: {title: @product.to_s, url: request.original_url, image: @product.cover_image.present? ? image_url(@product.cover_image.url(:presentational)) : nil, description: strip_tags(@product.description)})
+- meta_tags_for(@product)
 
 .categories.hidden-print
   %ul= render @categories
