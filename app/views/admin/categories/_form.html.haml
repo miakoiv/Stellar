@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :parent_category_id, current_store.category_options(@category), {include_blank: true}, {class: 'selectize'}
+        = f.select :parent_category_id, current_store.top_level_category_options(@category), {include_blank: true}, {class: 'selectize'}
         = f.text_field :name
         = f.text_area :description, class: 'wysiwyg'
       - unless locked
