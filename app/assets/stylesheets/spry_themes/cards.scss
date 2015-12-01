@@ -74,6 +74,18 @@
         ul { display: none; }
       }
     }
+    .subcategories {
+      clear: left;
+      margin: 0 -1*$grid-gutter-width;
+      padding: 0 $grid-gutter-width;
+      background: #f0f0f0;
+
+      ul {
+        @extend .clearfix;
+
+        li a { display: block; }
+      }
+    }
   }
 
   .products {
@@ -167,7 +179,7 @@
           line-height: 30px;
         }
         .body-text { padding-top: 40px; }
-        .list-group { margin: 10px 0; }
+        .list-group, .table { margin-top: 20px; }
       }
       .images {
         position: relative;

@@ -26,16 +26,16 @@
 
     .body-text><= product.description.html_safe if product.description.present?
 
+    %table.table.table-condensed.properties
+      = content_tag_for :tr, product.product_properties do |product_property|
+        %th= product_property.property
+        %td= product_property.value_with_units
+
     - if @images['document']
       .documents.list-group
         - @images['document'].each do |document|
           = link_to(icon('paperclip', document.to_s),
               document.url(:original), class: 'list-group-item')
-
-    %table.table.table-condensed.properties
-      = content_tag_for :tr, product.product_properties do |product_property|
-        %th= product_property.property
-        %td= product_property.value_with_units
 
   - if product.iframes.any?
     .iframes

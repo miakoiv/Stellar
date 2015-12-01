@@ -127,12 +127,8 @@
           font-size: $font-size-large;
           line-height: 30px;
         }
-        .body-text {
-          padding-top: 30px;
-        }
-        .list-group {
-          margin: 10px 0;
-        }
+        .body-text { padding-top: 30px; }
+        .list-group, .table { margin-top: 20px; }
       }
 
       .images {
