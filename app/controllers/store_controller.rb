@@ -18,7 +18,6 @@ class StoreController < ApplicationController
   before_action :set_categories, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
-  before_action :set_search_params, only: [:search]
 
   # GET /
   def index
@@ -28,9 +27,8 @@ class StoreController < ApplicationController
 
   # GET /search
   def search
-    @searchables_by_attribute = current_store.searchables_by_attribute
-    @products = current_store.products.categorized.available.order(:title)
-      .by_keyword(params[:keyword]).search(@search_params)
+    @q = current_store.products.categorized.available.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
 
   # GET /category/1
@@ -117,12 +115,6 @@ class StoreController < ApplicationController
     # Enable navbar search widget when applicable.
     def enable_navbar_search
       @navbar_search = true
-    end
-
-    # Search by custom attribute types.
-    def set_search_params
-      keys = CustomAttribute.attribute_types.keys
-      @search_params = keys.map { |k| [k, {}] }.to_h.merge(params.slice(*keys))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

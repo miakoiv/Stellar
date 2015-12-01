@@ -1,5 +1,5 @@
 - if @navbar_search
-  = form_tag search_path, {method: :get, data: {push: 'partial', target: '.products'}, class: 'navbar-form navbar-right', role: 'search'} do
+  = form_tag search_path, method: :get, class: 'navbar-form navbar-right', data: {push: 'partial', target: '.products'}, role: 'search' do
     .form-group.has-feedback
-      = search_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: t('search_panel.keyword')
+      = search_field_tag 'q[title_or_subtitle_cont]', nil, class: 'form-control', placeholder: t('search_panel.keyword')
       %span.form-control-feedback= icon('search')

@@ -3,11 +3,9 @@
 .search-panel
   = render partial: 'search_panel'
 
-.products.from-search{class: current_store.masonry? ? 'brickwork' : ''}
-  .product-grid.collapse.in
-    %ul= render @products
-  .product-list.collapse
+.products.from-search
+  .product-list
     .panel.panel-default
-      = render partial: 'products/table', object: @products, as: :products
+      = render partial: 'products/search_results', object: @products, as: :products
 
 .product-detail.from-search{style: 'display: none'}

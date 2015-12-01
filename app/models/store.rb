@@ -29,10 +29,6 @@ class Store < ActiveRecord::Base
   has_many :order_types, through: :inventories
   has_many :promotions
 
-  # Searchables is the set of product customizations referring to
-  # a custom attribute that's searchable. See #search_terms below.
-  has_many :searchables, -> { includes(:custom_attribute, :custom_value).joins(:custom_attribute).where(custom_attributes: {searchable: true}) }, through: :products, class_name: 'Customization', source: :customizations
-
   scope :all_except, -> (this) { where.not(id: this) }
 
   #---
@@ -40,12 +36,6 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
-  # Collects available "searchables" to a hash indexed by custom attribute.
-  # The values are arrays of either custom value objects or value strings.
-  def searchables_by_attribute
-    searchables.map { |c| [c.custom_attribute, c.custom_value || c.value] }.uniq.group_by(&:shift).transform_values(&:flatten)
-  end
-
   # Performs an inventory valuation of items in the shipping inventory.
   def inventory_valuation
     items = inventory_for(:shipping).inventory_items

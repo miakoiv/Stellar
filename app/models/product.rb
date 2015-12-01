@@ -34,9 +34,10 @@ class Product < ActiveRecord::Base
   scope :categorized, -> { includes(:categories).where.not(categories: {id: nil}) }
   scope :uncategorized, -> { includes(:categories).where(categories: {id: nil}) }
   scope :virtual, -> { where(virtual: true) }
-  scope :by_keyword, -> (keyword) {
-    keyword.present? ? where('code LIKE :match OR title LIKE :match OR subtitle LIKE :match', match: "%#{keyword}%") : all
-  }
+
+  ransacker :sales_price, formatter: -> (v) { Monetize.parse(v).cents } do |parent|
+    parent.table[:sales_price_cents]
+  end
 
   #---
   validates :code, presence: true
