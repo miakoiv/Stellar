@@ -20,6 +20,9 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
+# Awesome search
+gem 'ransack'
+
 # Meta tag generator
 gem 'meta-tags'
 
@@ -61,7 +64,6 @@ gem 'rolify'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass', '~> 4.3.0'
 gem 'bootstrap-switch-rails'
-gem 'bootstrap-slider-rails'
 
 # Image attachments and popups
 gem 'paperclip', '~> 4.2'
@@ -85,9 +87,6 @@ gem 'bootstrap_form'
 
 # Eternicode's excellent Datepicker
 gem 'bootstrap-datepicker-rails'
-
-# Tablesorter
-gem 'jquery-tablesorter'
 
 # Bootstrappy confirmation dialogs
 gem 'twitter-bootstrap-rails-confirm'

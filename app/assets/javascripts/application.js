@@ -25,7 +25,6 @@
 //= require bootstrap/popover
 //= require bootstrap/dropdown
 //= require bootstrap-switch
-//= require bootstrap-slider
 //= require twitter/bootstrap/rails/confirm
 //= require froala_editor.min.js
 //= require plugins/lists.min.js
@@ -37,7 +36,6 @@
 //= require selectize
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
-//= require jquery-tablesorter
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //= require wiselinks
