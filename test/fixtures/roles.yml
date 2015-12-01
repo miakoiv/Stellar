@@ -32,9 +32,9 @@ dashboard_access:
   id: 12
   name: dashboard_access
   appearance: warning
-attribute_editor:
+property_editor:
   id: 13
-  name: attribute_editor
+  name: property_editor
   appearance: warning
 category_editor:
   id: 14

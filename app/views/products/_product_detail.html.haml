@@ -32,12 +32,10 @@
           = link_to(icon('paperclip', document.to_s),
               document.url(:original), class: 'list-group-item')
 
-    %ul.customizations.list-group
-      - product.customizations.each do |customization|
-        %li.list-group-item
-          %span.badge
-            = customization.display_value_with_units
-          = customization.custom_attribute
+    %table.table.table-condensed.properties
+      = content_tag_for :tr, product.product_properties do |product_property|
+        %th= product_property.property
+        %td= product_property.value_with_units
 
   - if product.iframes.any?
     .iframes

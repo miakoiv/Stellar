@@ -43,6 +43,9 @@ fi:
       product:
         one: tuote
         other: tuotteet
+      product_property:
+        one: ominaisuus
+        other: ominaisuudet
       promoted_item:
         one: kampanjatuote
         other: kampanjatuotteet
@@ -51,6 +54,9 @@ fi:
         other: kampanjat
       promotion_vanilla: manuaalinen hinnoittelu
       promotion_freebie_bundle: alennettu tuote paketissa
+      property:
+        one: ominaisuus
+        other: ominaisuudet
       role:
         one: rooli
         other: roolit
@@ -154,6 +160,7 @@ fi:
         iframes: Upotukset
         images: Kuvat
         customizations: Ominaisuudet
+        product_properties: Ominaisuudet
         components: Komponentit
         linked_product_ids: Liitännäistuotteet
         cost: Ostohinta
@@ -177,6 +184,12 @@ fi:
       promotion_freebie_bundle:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa
+      property:
+        value_type: Tyyppi
+        measurement_unit_id: Mittayksikkö
+        unit_pricing: Käytä yksikköhintaa
+        searchable: Lisää tuotehakuun
+        name: Nimi
       role:
         name: Nimi
       store:

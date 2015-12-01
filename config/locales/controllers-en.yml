@@ -39,6 +39,13 @@ en:
         notice: "Promotion %{promotion} created."
       update:
         notice: "Promotion %{promotion} updated."
+    properties:
+      create:
+        notice: "Property %{property} created."
+      update:
+        notice: "Property %{property} updated."
+      destroy:
+        notice: "Property %{property} deleted."
     stores:
       create:
         notice: "Store %{store} created."

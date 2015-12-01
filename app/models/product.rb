@@ -21,6 +21,8 @@ class Product < ActiveRecord::Base
   has_many :order_items
   has_many :relationships, dependent: :destroy
   has_many :components, through: :relationships
+  has_many :product_properties, dependent: :destroy
+  has_many :properties, through: :product_properties
   has_many :promoted_items
   has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy

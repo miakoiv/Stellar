@@ -43,6 +43,9 @@ en:
       product:
         one: product
         other: products
+      product_property:
+        one: property
+        other: properties
       promoted_item:
         one: promoted product
         other: promoted products
@@ -51,6 +54,9 @@ en:
         other: promotions
       promotion_vanilla: manual pricing
       promotion_freebie_bundle: freebie with bundle
+      property:
+        one: property
+        other: properties
       role:
         one: role
         other: roles
@@ -154,6 +160,7 @@ en:
         iframes: Embeds
         images: Images
         customizations: Attributes
+        product_properties: Properties
         components: Components
         linked_product_ids: Associated products
         cost: Purchase price
@@ -177,6 +184,12 @@ en:
       promotion_freebie_bundle:
         required_items: Number of items
         discount_percent: Apply discount
+      property:
+        value_type: Type
+        measurement_unit_id: Measurement unit
+        unit_pricing: Use unit pricing
+        searchable: Include in product search
+        name: Name
       role:
         name: Name
       store:

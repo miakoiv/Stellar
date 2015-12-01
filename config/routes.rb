@@ -74,6 +74,7 @@ Rails.application.routes.draw do
     resources :products do
       resources :images, shallow: true
       resources :customizations, shallow: true
+      resources :product_properties, shallow: true
       resources :iframes, shallow: true
       post :reorder, on: :collection
     end
@@ -85,6 +86,9 @@ Rails.application.routes.draw do
     resources :orders do
       resources :images, shallow: true
       resources :order_items, shallow: true
+    end
+    resources :properties do
+      post :reorder, on: :collection
     end
     resources :users
 

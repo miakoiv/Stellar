@@ -1,0 +1,12 @@
+.page-header
+  = link_to admin_properties_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(Property)
+    = link_to edit_admin_property_path(@property), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1
+    = icon('eyedropper', @property)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: true}

@@ -11,3 +11,7 @@ en:
           presentational: Presentational
           technical: Technical
           document: Document
+      property:
+        value_type:
+          string: String
+          numeric: Numeric

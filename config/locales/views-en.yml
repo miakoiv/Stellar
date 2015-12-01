@@ -92,6 +92,11 @@ en:
         submit: Add products
       add_categories:
         submit: Add categories
+    properties:
+      index:
+        new_property: New property
+      new:
+        new_property: New property
     stores:
       index:
         new_store: New store

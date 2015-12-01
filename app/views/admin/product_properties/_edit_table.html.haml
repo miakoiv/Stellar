@@ -1,0 +1,53 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-4= col(ProductProperty, :property_id)
+        %th= col(ProductProperty, :value)
+        %th.col-xs-1.hidden-print
+
+    %tbody#properties-tbody
+      = render partial: 'admin/product_properties/edit_tbody', object: product, as: :product
+
+.table-responsive
+  = form_for [:admin, product, product.product_properties.new], remote: true do |f|
+    %table.table.table-loose
+      %tbody
+        %tr
+          %td.col-xs-4
+            = f.select :property_id, current_store.properties.map { |p| [p.name_with_units, p.id] }, {include_blank: true}, {placeholder: col(ProductProperty, :property_id), class: 'form-control'}
+          %td= f.text_field :value, placeholder: col(ProductProperty, :value), class: 'form-control'
+          %td.col-xs-1.text-right
+            = f.submit class: 'btn btn-sm btn-default'
+
+- string_property_ids = current_store.properties.string.pluck(:id)
+
+:coffee
+  show_paths = #{string_property_ids.map { |id| [id, admin_property_path(id)] }.to_h.to_json}
+  jQuery ->
+    $property_select = $('#product_property_property_id').selectize
+      dropdownParent: 'body'
+      onChange: (index) ->
+        value_select.disable()
+        value_select.clearOptions()
+        if show_paths[index]
+          value_select.load (callback) ->
+            $.ajax
+              url: show_paths[index]
+              success: (response) ->
+                console.log(response)
+                callback(response)
+        value_select.enable()
+
+    $value_select = $('#product_property_value').selectize
+      dropdownParent: 'body'
+      valueField: 'value'
+      labelField: 'value'
+      maxItems: 1
+      create: (input) ->
+        {
+          value: input
+          text: input
+        }
+    property_select = $property_select[0].selectize
+    value_select = $value_select[0].selectize

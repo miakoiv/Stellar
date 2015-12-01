@@ -1,0 +1,39 @@
+= bootstrap_form_for [:admin, @property], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :name
+        = f.form_group do
+          = f.check_box :searchable
+        = f.select :value_type,
+            Property.value_types.keys.map { |t| [Property.human_attribute_value(:value_type, t), t] },
+            {}, {class: 'selectize', disabled: !@property.new_record?}
+      %fieldset.measurement_unit.collapse{disabled: locked, class: @property.numeric? ? 'in' : ''}
+        = f.select :measurement_unit_id,
+            MeasurementUnit.all.map { |u| [u.to_s, u.id] },
+            {include_blank: true}, {class: 'selectize'}
+      %fieldset.unit_pricing.collapse{disabled: locked, class: @property.measurement_unit.present? ? 'in' : ''}
+        = f.form_group do
+          = f.check_box :unit_pricing,
+              disabled: @property.measurement_unit.nil?
+      - unless locked
+        = f.form_group do
+          = f.primary
+
+:coffee
+  $('#property_value_type').on 'change', (e) ->
+    if $(e.target).val() == 'numeric'
+      $('.measurement_unit').collapse 'show'
+    else
+      $('.measurement_unit').collapse 'hide'
+      $('#property_measurement_unit_id')[0].selectize.setValue ''
+
+  $('#property_measurement_unit_id').on 'change', (e) ->
+    if $(e.target).val()
+      $('.unit_pricing').collapse 'show'
+      $('#property_unit_pricing').bootstrapSwitch 'disabled', false
+    else
+      $('.unit_pricing').collapse 'hide'
+      $('#property_unit_pricing').bootstrapSwitch 'state', false
+      $('#property_unit_pricing').bootstrapSwitch 'disabled', true

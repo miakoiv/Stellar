@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124080323) do
+ActiveRecord::Schema.define(version: 20151130122517) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -273,6 +273,17 @@ ActiveRecord::Schema.define(version: 20151124080323) do
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
+  create_table "product_properties", force: :cascade do |t|
+    t.integer  "product_id",  limit: 4,   null: false
+    t.integer  "property_id", limit: 4,   null: false
+    t.string   "value",       limit: 255, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "product_properties", ["product_id"], name: "index_product_properties_on_product_id", using: :btree
+  add_index "product_properties", ["property_id"], name: "index_product_properties_on_property_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                limit: 4,                     null: false
     t.boolean  "virtual",                               default: false, null: false
@@ -335,6 +346,21 @@ ActiveRecord::Schema.define(version: 20151124080323) do
   end
 
   add_index "promotions", ["store_id"], name: "index_promotions_on_store_id", using: :btree
+
+  create_table "properties", force: :cascade do |t|
+    t.integer  "store_id",            limit: 4,                   null: false
+    t.integer  "value_type",          limit: 4,                   null: false
+    t.integer  "measurement_unit_id", limit: 4
+    t.boolean  "unit_pricing",                    default: false, null: false
+    t.boolean  "searchable",                      default: false, null: false
+    t.string   "name",                limit: 255
+    t.integer  "priority",            limit: 4
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "properties", ["measurement_unit_id"], name: "index_properties_on_measurement_unit_id", using: :btree
+  add_index "properties", ["store_id"], name: "index_properties_on_store_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "product_id",   limit: 4, null: false

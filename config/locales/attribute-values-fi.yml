@@ -11,3 +11,7 @@ fi:
           presentational: esittävä
           technical: tekninen
           document: dokumentti
+      property:
+        value_type:
+          string: sanallinen
+          numeric: numeerinen

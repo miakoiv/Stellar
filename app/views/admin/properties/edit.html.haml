@@ -1,0 +1,11 @@
+.page-header
+  = link_to admin_properties_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_property_path(@property), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('eyedropper', @property)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: false}

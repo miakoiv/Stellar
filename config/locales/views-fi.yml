@@ -72,6 +72,11 @@ fi:
         submit: Lisää tuotteet
       add_categories:
         submit: Lisää tuoteryhmät
+    properties:
+      index:
+        new_property: Uusi ominaisuus
+      new:
+        new_property: Uusi ominaisuus
     stores:
       index:
         new_store: Uusi kauppa

@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_properties_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('eyedropper', t('.new_property'))
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: false}
