@@ -2,7 +2,7 @@
   = search_form_for @q, url: search_path, data: {push: 'partial', target: '.products', 'optimize-url-params' => false}, class: 'form-vertical' do |f|
     .col-xs-12.col-sm-3.col-lg-2
       .form-group
-        = f.search_field :title_or_subtitle_cont, placeholder: t('search_panel.keyword'), class: 'form-control'
+        = f.search_field :title_or_subtitle_cont, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
     .col-xs-12.col-sm-3.col-lg-2
       .form-group
         .input-group
