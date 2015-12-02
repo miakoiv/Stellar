@@ -20,7 +20,6 @@ class Property < ActiveRecord::Base
   has_many :product_properties, dependent: :destroy
   has_many :products, through: :product_properties
 
-  # Searchable properties are included in product searching and filtering.
   scope :searchable, -> { where(searchable: true) }
 
   #---

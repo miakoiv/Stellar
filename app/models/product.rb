@@ -44,22 +44,6 @@ class Product < ActiveRecord::Base
   validates :title, presence: true
 
   #---
-  # Find products matching all of the given search params by iteratively
-  # intersecting the current result set with the matches of each search term.
-  # Search params are keyed by attribute type (set, numeric, alpha), for example
-  # {set: {color: 'white', origin: 'Finland'}, numeric: {width: '100:200'}}
-  def self.search(search_params)
-    results = all
-    search_params.each do |type, terms|
-      terms.each do |attribute, values|
-        matches = Customization.public_send("by_#{type}", attribute, values)
-        results &= includes(:customizations).where(customizations: {id: matches})
-      end
-    end
-    results
-  end
-
-  #---
   # If a single category is requested, give the first one.
   def category
     categories.first
