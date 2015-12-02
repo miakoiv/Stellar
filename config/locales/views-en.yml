@@ -158,3 +158,5 @@ en:
   search_panel:
     search: Search products
     keyword: Keyword
+    budget: Maximum price
+    all_categories: All categories
