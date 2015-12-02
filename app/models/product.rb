@@ -44,6 +44,10 @@ class Product < ActiveRecord::Base
   validates :title, presence: true
 
   #---
+  def property_value(property_id)
+    product_properties.where(property_id: property_id).first.try(:value_with_units)
+  end
+
   # If a single category is requested, give the first one.
   def category
     categories.first

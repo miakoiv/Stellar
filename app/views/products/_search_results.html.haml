@@ -4,6 +4,9 @@
       %tr
         %th.col-xs-2.no-wrap= col(Product, :code)
         %th= col(Product, :title)
+        - @properties.each do |property|
+          %th{class: property.numeric? ? 'text-right' : ''}
+            = property.name.capitalize
         - if can_see_pricing?
           %th.no-wrap.text-right= col(Product, :sales_price)
     %tbody
@@ -13,5 +16,8 @@
           = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
             %strong= product.title
             = product.subtitle
+        - @properties.each do |property|
+          %td.no-wrap{class: property.numeric? ? 'text-right' : ''}
+            = product.property_value(property.id)
         - if can_see_pricing?
           %td.currency.text-right= humanized_money_with_symbol product.sales_price
