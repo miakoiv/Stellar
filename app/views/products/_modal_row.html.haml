@@ -1,0 +1,15 @@
+= content_tag_for :tr, product do
+  %td= image_variant_tag(product.technical_cover_image, :thumbnail)
+  %td= product.code
+  %td
+    %strong= product.title
+    = product.subtitle
+  - if can_see_pricing?
+    %td.currency= humanized_money_with_symbol product.sales_price
+  %td.hidden-print.text-right
+    - if can_shop?
+      = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
+        .input-group
+          = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
+          %span.input-group-btn
+            %button.btn.btn-success{type: 'submit'}= icon('cart-plus')

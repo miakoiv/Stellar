@@ -4,4 +4,28 @@
       .modal-header
         %button.close{data: {dismiss: 'modal'}}= icon('close')
         %h4.modal-title= t('store.select_for_cart')
-      = render partial: 'products/modal_table', object: product.with_linked_products, as: :products
+      .well
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th.col-min
+                %th.col-xs-2.no-wrap= col(Product, :code)
+                %th= col(Product, :title)
+                - if can_see_pricing?
+                  %th.col-xs-2.no-wrap= col(Product, :sales_price)
+                %th.col-xs-2.no-wrap.hidden-print
+            %tbody
+            = render partial: 'products/modal_row', collection: [product], as: :product
+      .table-responsive
+        %table.table.table-hover
+          %thead
+            %tr
+              %th.col-min
+              %th.col-xs-2.no-wrap= col(Product, :code)
+              %th= col(Product, :title)
+              - if can_see_pricing?
+                %th.col-xs-2.no-wrap= col(Product, :sales_price)
+              %th.col-xs-2.no-wrap.hidden-print
+          %tbody
+          = render partial: 'products/modal_row', collection: product.linked_products, as: :product
