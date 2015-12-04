@@ -34,6 +34,7 @@
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require selectize
+//= require jquery-tablesorter
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require unobtrusive_flash

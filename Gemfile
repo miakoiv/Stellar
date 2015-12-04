@@ -91,6 +91,9 @@ gem 'bootstrap-datepicker-rails'
 # Bootstrappy confirmation dialogs
 gem 'twitter-bootstrap-rails-confirm'
 
+# Sortable tables
+gem 'jquery-tablesorter'
+
 # Froala for wysiwyg editing
 gem 'wysiwyg-rails'
 

@@ -26,6 +26,10 @@ class Property < ActiveRecord::Base
   validates :name, presence: true
 
   #---
+  def values
+    product_properties.pluck(:value).uniq
+  end
+
   def value_type_name
     human_attribute_value(:value_type)
   end

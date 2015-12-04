@@ -1,12 +1,11 @@
 .table-responsive
-  %table.table.table-striped.table-hover.table-loose
+  %table#search-results.table.table-hover
     %thead
       %tr
         %th.col-xs-2.no-wrap= col(Product, :code)
         %th= col(Product, :title)
         - @properties.each do |property|
-          %th{class: property.numeric? ? 'text-right' : ''}
-            = property.name.capitalize
+          %th= property.name.capitalize
         - if can_see_pricing?
           %th.no-wrap.text-right= col(Product, :sales_price)
     %tbody
@@ -17,7 +16,16 @@
             %strong= product.title
             = product.subtitle
         - @properties.each do |property|
-          %td.no-wrap{class: property.numeric? ? 'text-right' : ''}
+          %td.no-wrap.small{class: property.numeric? ? 'text-right' : ''}
             = product.property_value(property.id)
         - if can_see_pricing?
-          %td.currency.text-right= humanized_money_with_symbol product.sales_price
+          %td.currency.text-right
+            = humanized_money_with_symbol product.sales_price
+
+:coffee
+  $('#search-results').tablesorter
+    theme: 'bootstrap'
+    widthFixed: true
+    widgets: ['uiTheme', 'saveSort']
+    headerTemplate: '{content} {icon}'
+    sortList: [[1,0]]
