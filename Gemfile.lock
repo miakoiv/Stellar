@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/leonardoeloy/arel-fulltext.git
+  revision: 5131335263f6915c87ad4ec73c4387d2f505a0db
+  specs:
+    arel-fulltext (1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -262,6 +268,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
+  arel-fulltext!
   authority
   autoprefixer-rails
   bootstrap-datepicker-rails

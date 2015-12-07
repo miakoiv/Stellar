@@ -6,7 +6,8 @@ class ProductProperty < ActiveRecord::Base
   belongs_to :property
 
   #---
-  def value_with_units
-    "#{value} #{property.measurement_unit}"
+  def value_with_units(spacing = true)
+    return value if property.measurement_unit.nil?
+    (spacing ? "%s %s" : "%s%s") % [value, property.measurement_unit]
   end
 end

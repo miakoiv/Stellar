@@ -307,8 +307,11 @@ ActiveRecord::Schema.define(version: 20151207071721) do
   end
 
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
+  add_index "products", ["search_tags"], name: "index_products_on_search_tags", type: :fulltext
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
+  add_index "products", ["subtitle"], name: "index_products_on_subtitle", using: :btree
+  add_index "products", ["title"], name: "index_products_on_title", using: :btree
 
   create_table "promoted_items", force: :cascade do |t|
     t.integer  "promotion_id",     limit: 4,             null: false

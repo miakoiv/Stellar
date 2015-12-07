@@ -22,6 +22,7 @@ gem 'execjs'
 
 # Awesome search
 gem 'ransack'
+gem 'arel-fulltext', github: 'leonardoeloy/arel-fulltext'
 
 # Meta tag generator
 gem 'meta-tags'

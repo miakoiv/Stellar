@@ -13,7 +13,7 @@
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
     .col-xs-12.col-sm-3.col-lg-3
       .form-group
-        = f.search_field :search_tags_cont, autocomplete: 'off', placeholder: t('search_panel.search_tags'), class: 'form-control'
+        = f.search_field :search_tags_match, autocomplete: 'off', placeholder: t('search_panel.search_tags'), class: 'form-control'
     .col-xs-12.col-lg-1
       .form-group.pull-right
         = f.submit t('search_panel.search'), class: 'btn btn-default'

@@ -24,9 +24,11 @@ class Product < ActiveRecord::Base
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
   after_touch do |product|
-    strings = product.product_properties
-        .joins(:property).merge(Property.searchable).pluck(:value)
-    product.update search_tags: strings.sort.join(';')
+    tags = product.product_properties
+        .joins(:property).merge(Property.searchable).map { |s|
+          s.value_with_units(false)
+        }
+    product.update search_tags: tags.join(' ')
   end
 
   has_many :promoted_items
@@ -43,10 +45,6 @@ class Product < ActiveRecord::Base
 
   ransacker :sales_price, formatter: -> (v) { Monetize.parse(v).cents } do |parent|
     parent.table[:sales_price_cents]
-  end
-
-  ransacker :search_tags, formatter: -> (v) { v.split.sort.join(';') } do |parent|
-    parent.table[:search_tags]
   end
 
   #---
