@@ -12,6 +12,7 @@ class Admin::ProductPropertiesController < ApplicationController
     @product.product_properties.find_or_initialize_by(
       property_id: params[:product_property][:property_id]
     ).update(product_property_params)
+    @product.touch
 
     respond_to do |format|
       format.js
@@ -24,6 +25,7 @@ class Admin::ProductPropertiesController < ApplicationController
 
     respond_to do |format|
       if @product_property.destroy
+        @product.touch
         format.js
       end
     end
