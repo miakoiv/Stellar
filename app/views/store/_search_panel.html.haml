@@ -2,7 +2,7 @@
   = search_form_for @q, url: search_path, data: {push: 'partial', target: '.products', 'optimize-url-params' => false}, class: 'form-vertical' do |f|
     .col-xs-12.col-sm-3.col-lg-3
       .form-group
-        = f.search_field :title_or_subtitle_cont, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
+        = f.search_field :keyword_cont, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
     .col-xs-12.col-sm-3.col-lg-2
       .form-group
         .input-group
@@ -13,7 +13,7 @@
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
     .col-xs-12.col-sm-3.col-lg-3
       .form-group
-        = f.search_field :search_tags_match, autocomplete: 'off', placeholder: t('search_panel.search_tags'), class: 'form-control'
+        = f.search_field :search_tags_match, autocomplete: 'off', placeholder: current_store.properties.searchable.pluck(:name).join('/'), class: 'form-control'
     .col-xs-12.col-lg-1
       .form-group.pull-right
         = f.submit t('search_panel.search'), class: 'btn btn-default'

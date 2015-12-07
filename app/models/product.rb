@@ -43,6 +43,10 @@ class Product < ActiveRecord::Base
   scope :uncategorized, -> { includes(:categories).where(categories: {id: nil}) }
   scope :virtual, -> { where(virtual: true) }
 
+  ransacker :keyword do |parent|
+    Arel::Nodes::NamedFunction.new('CONCAT_WS', [Arel::Nodes.build_quoted(' '), parent.table[:title], parent.table[:subtitle]])
+  end
+
   ransacker :sales_price, formatter: -> (v) { Monetize.parse(v).cents } do |parent|
     parent.table[:sales_price_cents]
   end
