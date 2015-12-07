@@ -54,6 +54,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Wiselinks to handle Ajaxy navigation
 gem 'wiselinks'
+gem 'nprogress-rails'
 
 # Authentication and authorization
 gem 'devise'
