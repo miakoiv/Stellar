@@ -15,6 +15,7 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
   has_and_belongs_to_many :categories
+  after_save { categories.each(&:touch) }
   has_many :inventory_items, -> (product) {
     joins(:product).where('products.store_id = inventory_items.store_id')
   }
