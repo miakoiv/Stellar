@@ -39,7 +39,6 @@ class StoreController < ApplicationController
 
   # GET /product/1
   def show_product
-    @images = @product.collected_images
   end
 
   # POST /product/1/order

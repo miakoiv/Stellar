@@ -31,9 +31,9 @@
         %th= product_property.property
         %td= product_property.value_with_units
 
-    - if @images['document']
+    - if product.images.document.any?
       .documents.list-group
-        - @images['document'].each do |document|
+        - product.images.document.each do |document|
           = link_to(icon('paperclip', document.to_s),
               document.url(:original), class: 'list-group-item')
 
@@ -42,18 +42,19 @@
       = render product.iframes
 
   .images.technical
+    - technicals = product.images.technical
     %ul.nav.nav-pills{role: 'tablist'}
-      - if @images['technical'] && @images['technical'].count > 1
-        = render partial: 'images/pill', collection: @images['technical'], as: :image
+      - if technicals.count > 1
+        = render partial: 'images/pill', collection: technicals, as: :image
     .tab-content.gallery
-      = render partial: 'images/technical', collection: @images['technical'], as: :image
-
+      = render partial: 'images/technical', collection: technicals, as: :image
   .images.presentational
+    - presentationals = product.images.presentational
     %ul.nav.nav-pills{role: 'tablist'}
-      - if @images['presentational'] && @images['presentational'].count > 1
-        = render partial: 'images/pill', collection: @images['presentational'], as: :image
+      - if presentationals.count > 1
+        = render partial: 'images/pill', collection: presentationals, as: :image
     .tab-content.gallery
-      = render partial: 'images/presentational', collection: @images['presentational'], as: :image
+      = render partial: 'images/presentational', collection: presentationals, as: :image
 
 .product-footer
 
