@@ -1,4 +1,5 @@
-= render partial: 'products/product_detail', object: @product, as: :product
+- cache(@product) do
+  = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
   $('.products').hide()

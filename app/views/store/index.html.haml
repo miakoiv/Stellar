@@ -1,14 +1,16 @@
 .categories.hidden-print
-  %ul= render @categories
-  = render partial: 'subcategories'
+  - cache(@categories) do
+    %ul= render @categories
+    = render partial: 'subcategories'
 
 .search-panel{style: 'display: none'}
 
 .products{class: current_store.masonry? ? 'brickwork' : ''}
-  .product-grid.collapse.in
-    %ul= render @products
-  .product-list.collapse
-    .panel.panel-default
-      = render partial: 'products/table', object: @products, as: :products
+  - cache(@category) do
+    .product-grid.collapse.in
+      %ul= render @products
+    .product-list.collapse
+      .panel.panel-default
+        = render partial: 'products/table', object: @products, as: :products
 
 .product-detail{style: 'display: none'}
