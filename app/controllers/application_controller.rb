@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #---
+  before_action :load_roles
   before_action :load_pages
   before_action :set_locale
   after_filter :prepare_unobtrusive_flash
@@ -49,26 +50,31 @@ class ApplicationController < ActionController::Base
   end
 
   def can_see_pricing?
-    @can_see_pricing = current_user.has_role?(:see_pricing) if @can_see_pricing.nil?
+    @can_see_pricing = current_user.has_cached_role?(:see_pricing) if @can_see_pricing.nil?
     @can_see_pricing
   end
 
   def can_see_stock?
-    @can_see_stock = current_user.has_role?(:see_stock) if @can_see_stock.nil?
+    @can_see_stock = current_user.has_cached_role?(:see_stock) if @can_see_stock.nil?
     @can_see_stock
   end
 
   def can_manage?
-    @can_manage = current_user.has_role?(:manager) if @can_manage.nil?
+    @can_manage = current_user.has_cached_role?(:manager) if @can_manage.nil?
     @can_manage
   end
 
   def can_access_dashboard?
-    @can_access_dashboard = current_user.has_role?(:dashboard_access) if @can_access_dashboard.nil?
+    @can_access_dashboard = current_user.has_cached_role?(:dashboard_access) if @can_access_dashboard.nil?
     @can_access_dashboard
   end
 
   private
+    # Preload users with their roles to enable Rolify's caching of roles.
+    def load_roles
+      current_store.users.preload(:roles)
+    end
+
     # Pages are loaded by a before_filter, since their links are
     # rendered in the main navigation bar.
     def load_pages

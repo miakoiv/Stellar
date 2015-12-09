@@ -8,7 +8,7 @@
         - if @user.new_record?
           = f.password_field :password
           = f.password_field :password_confirmation
-      %fieldset{disabled: locked || !current_user.is_user_manager?}
+      %fieldset{disabled: locked || !current_user.has_cached_role?(:user_manager)}
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}
       - unless locked

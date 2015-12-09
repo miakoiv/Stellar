@@ -3,24 +3,24 @@
     = icon('wrench', t('admin.manage'), class: 'fa-lg')
     %span.caret
   %ul.dropdown-menu{role: 'menu'}
-    - if current_user.can_read?(Product)
+    - if current_user.has_cached_role?(:product_editor)
       = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'),
           admin_products_path, wrap_tag: :li
-    - if current_user.can_read?(Category)
+    - if current_user.has_cached_role?(:category_editor)
       = active_link_to icon('sitemap', title(Category, count: 2), class: 'fa-fw'),
           admin_categories_path, wrap_tag: :li
-    - if current_user.can_read?(Promotion)
+    - if current_user.has_cached_role?(:promotion_editor)
       = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'),
           admin_promotions_path, wrap_tag: :li
-    - if current_user.can_read?(Property)
+    - if current_user.has_cached_role?(:property_editor)
       = active_link_to icon('eyedropper', title(Property, count: 2), class: 'fa-fw'),
           admin_properties_path, wrap_tag: :li
-    - if current_user.can_read?(Page)
+    - if current_user.has_cached_role?(:page_editor)
       = active_link_to icon('files-o', title(Page, count: 2), class: 'fa-fw'),
           admin_pages_path, wrap_tag: :li
-    - if current_user.can_read?(User)
+    - if current_user.has_cached_role?(:user_editor)
       = active_link_to icon('users', title(User, count: 2), class: 'fa-fw'),
           admin_users_path, wrap_tag: :li
-    - if current_user.can_read?(Store)
+    - if current_user.has_cached_role?(:superuser)
       = active_link_to icon('cubes', title(Store, count: 2), class: 'fa-fw'),
           admin_stores_path, wrap_tag: :li

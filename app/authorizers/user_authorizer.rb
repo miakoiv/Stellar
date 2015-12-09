@@ -3,11 +3,11 @@
 class UserAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user)
-    user.is_user_manager?
+    user.has_cached_role?(:user_manager)
   end
 
   def self.readable_by?(user)
-    user.is_user_manager?
+    user.has_cached_role?(:user_manager)
   end
 
   def self.deletable_by?(user)
@@ -15,6 +15,6 @@ class UserAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    user.is_user_manager? || user == resource
+    user.has_cached_role?(:user_manager) || user == resource
   end
 end

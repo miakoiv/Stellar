@@ -7,15 +7,15 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def self.readable_by?(user)
-    user.is_order_editor?
+    user.has_cached_role?(:order_editor)
   end
 
   def self.updatable_by?(user)
-    user.is_order_editor?
+    user.has_cached_role?(:order_editor)
   end
 
   def self.deletable_by?(user)
-    user.is_order_editor?
+    user.has_cached_role?(:order_editor)
   end
 
   def readable_by?(user)
