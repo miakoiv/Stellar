@@ -7,11 +7,11 @@
         %th.col-xs-6= col(Image, :image_type_id)
         %th.hidden-print
 
-    %tbody#images.sortable
+    %tbody#images-tbody.sortable
       = render partial: 'admin/images/edit_row', collection: imageable.images.ordered, as: :image
 
 :coffee
-  $('.sortable').sortable(
+  $('#images-tbody').sortable(
     items: 'tr'
     handle: '.handle'
     placeholder: '#{tr_placeholder(4)}'
