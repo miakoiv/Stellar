@@ -18,7 +18,7 @@
     - if current_user.has_cached_role?(:page_editor)
       = active_link_to icon('files-o', title(Page, count: 2), class: 'fa-fw'),
           admin_pages_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:user_editor)
+    - if current_user.has_cached_role?(:user_manager)
       = active_link_to icon('users', title(User, count: 2), class: 'fa-fw'),
           admin_users_path, wrap_tag: :li
     - if current_user.has_cached_role?(:superuser)

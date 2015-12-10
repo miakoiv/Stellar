@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   # Roles that a user manager may grant to other users. The superuser
   # may promote others to user managers and superusers.
   def grantable_role_options
-    roles = if is_superuser?
+    roles = if has_cached_role?(:superuser)
       Role.all
     else
       Role.where.not(name: [:user_manager, :superuser])
