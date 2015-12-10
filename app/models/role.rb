@@ -10,7 +10,7 @@ class Role < ActiveRecord::Base
   has_many :available_order_types, class_name: 'OrderType', foreign_key: :source_role_id, inverse_of: :source_role
   has_many :managed_order_types, class_name: 'OrderType', foreign_key: :destination_role_id, inverse_of: :destination_role
 
-  default_scope { order(:id) }
+  default_scope { order(:appearance, :name) }
 
   #---
   validates :resource_type,
