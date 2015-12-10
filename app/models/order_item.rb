@@ -11,7 +11,7 @@ class OrderItem < ActiveRecord::Base
     }
 
   #---
-  belongs_to :order, inverse_of: :order_items
+  belongs_to :order, inverse_of: :order_items, touch: true
   belongs_to :product
 
   default_scope { order(:priority) }

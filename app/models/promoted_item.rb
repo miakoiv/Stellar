@@ -8,7 +8,7 @@ class PromotedItem < ActiveRecord::Base
   monetize :price_cents, allow_nil: true
   #---
 
-  belongs_to :promotion
+  belongs_to :promotion, touch: true
   belongs_to :product
 
 end
