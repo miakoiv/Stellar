@@ -16,22 +16,26 @@
 
   - if !@page.new_record? && @page.wysiwyg?
     :coffee
-      $('#page_content').editable
-        inlineMode: false
-        toolbarFixed: false
-        minHeight: 400
-        buttons: [
-          'bold', 'italic', 'underline', 'formatBlock', 'align',
-          'insertOrderedList', 'insertUnorderedList', 'table', 'insertImage',
+      $('#page_content').froalaEditor
+        language: '#{current_store.locale}'
+        heightMin: 400
+        toolbarButtons: [
+          'bold', 'italic', 'underline', '|', 'paragraphFormat', 'align',
+          'formatOL', 'formatUL', '|', 'insertTable', 'insertImage', '|',
           'undo', 'redo', 'html'
         ]
+        toolbarSticky: true
+        toolbarStickyOffset: $('#navbar').css('height')
+        paragraphFormatSelection: true
+        tabSpaces: 2
+        imageDefaultAlign: 'left'
+        imageDefaultWidth: '100%'
         imageUploadURL: '#{admin_page_images_path(@page.id)}'
         imageUploadParam: 'image[attachment]'
         imageUploadParams:
           authenticity_token: '#{form_authenticity_token}'
-        imageDeleteURL: '#{admin_delete_image_path}'
-      .on 'editable.afterRemoveImage', (e, editor, img) ->
-        editor.options.imageDeleteParams =
-          url: img.attr 'src'
+      .on 'froalaEditor.image.removed', (e, editor, $img) ->
+        $.post '#{admin_delete_image_path}', {
+          url: $img.attr('src')
           authenticity_token: '#{form_authenticity_token}'
-        editor.deleteImage img
+        }

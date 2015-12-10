@@ -91,7 +91,7 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.6.0)
-    font-awesome-rails (4.4.0.0)
+    font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     font-awesome-sass (4.3.2.1)
       sass (~> 3.2)
@@ -257,8 +257,8 @@ GEM
     with_advisory_lock (3.0.0)
       activerecord (>= 3.2)
       thread_safe
-    wysiwyg-rails (1.2.8)
-      font-awesome-rails (>= 4.3.0.0)
+    wysiwyg-rails (2.0.3)
+      font-awesome-rails (~> 4.4, >= 4.4.0.0)
       railties (>= 3.2, < 5.0)
     yaml_db (0.3.0)
       rails (>= 3.0, < 4.3)

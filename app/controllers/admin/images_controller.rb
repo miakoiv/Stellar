@@ -56,8 +56,7 @@ class Admin::ImagesController < ApplicationController
   end
 
   # POST /admin/images/delete
-  # This method is for Froala, which wants to delete images using POST
-  # requests, and supplies the image url as param.
+  # This method is for Froala that deletes images by URL.
   def delete
     @image = Image.at_url(params[:url], :lightbox)
 
