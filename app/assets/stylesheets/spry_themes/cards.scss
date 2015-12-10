@@ -28,6 +28,30 @@
     padding-top: 30px;
   }
 
+  .albums {
+    margin: 20px -1*$grid-gutter-width;
+    padding: 20px $grid-gutter-width;
+    background: $brand-primary;
+
+    .album {
+      @extend .clearfix;
+      background-color: rgba(255,255,255,0.8);
+
+      .gallery {
+        padding-top: 5px;
+
+        a {
+          float: left;
+          margin-right: 5px;
+
+          img {
+            @extend .img-thumbnail;
+          }
+        }
+      }
+    }
+  }
+
   .search-panel {
     background-color: lighten($brand-primary, 25%);
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);

@@ -1,0 +1,6 @@
+%li.album.list-group-item
+  %h4.list-group-item-heading= album.title
+  %p.list-group-item-text= album.description
+  .gallery
+    - album.images.each do |image|
+      = link_to image_variant_tag(image, :thumbnail), image.url(:lightbox), class: 'image-link'
