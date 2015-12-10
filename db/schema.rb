@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(version: 20151207071721) do
   add_index "adjustments", ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id", using: :btree
   add_index "adjustments", ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id", using: :btree
 
-  create_table "brands", force: :cascade do |t|
-    t.integer  "erp_number", limit: 4,   null: false
-    t.string   "name",       limit: 255
-    t.string   "slug",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false
     t.integer  "parent_category_id", limit: 4
