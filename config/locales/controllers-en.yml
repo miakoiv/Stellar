@@ -1,5 +1,12 @@
 en:
   admin:
+    albums:
+      create:
+        notice: "Photo album %{album} created."
+      update:
+        notice: "Photo album %{album} updated."
+      destroy:
+        notice: "Photo album %{album} deleted."
     categories:
       create:
         notice: "Category %{category} created."

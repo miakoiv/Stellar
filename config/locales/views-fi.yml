@@ -28,6 +28,11 @@ fi:
         total_value: Arvo yhteensä
         items: Nimikkeitä
     manage: Hallinta
+    albums:
+      index:
+        new_album: Uusi kuva-albumi
+      new:
+        new_album: Uusi kuva-albumi
     categories:
       index:
         new_category: Uusi tuoteryhmä

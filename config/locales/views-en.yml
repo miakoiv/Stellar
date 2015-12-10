@@ -48,6 +48,11 @@ en:
         total_value: Total value
         items: Items
     manage: Manage
+    albums:
+      index:
+        new_album: New photo album
+      new:
+        new_album: New photo album
     categories:
       index:
         new_category: New category

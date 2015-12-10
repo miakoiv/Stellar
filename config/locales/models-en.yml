@@ -1,6 +1,9 @@
 en:
   activerecord:
     models:
+      album:
+        one: photo album
+        other: photo albums
       category:
         one: category
         other: categories
@@ -67,6 +70,12 @@ en:
         one: user
         other: users
     attributes:
+      album:
+        title: Title
+        created_at: Date
+        description: Description
+        images: Photos
+        page_ids: Shown on pages
       category:
         parent_category_id: Parent category
         name: Name
@@ -145,6 +154,7 @@ en:
         title: Title
         content: Content
         wysiwyg: Use Froala Editor
+        album_ids: Photo albums
       product:
         category_ids: Categories
         virtual: Virtual product

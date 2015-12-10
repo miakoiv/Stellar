@@ -9,15 +9,17 @@
     %thead
       %tr
         %th.col-min.hidden-print
+        %th.col-xs-2= col(Page, :parent_page_id)
         %th.col-xs-4= col(Page, :title)
-        %th.col-xs-4= col(Page, :parent_page_id)
+        %th= col(Page, :album_ids)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
       = content_tag_for :tr, @pages do |page|
         %td.hidden-print= drag_handle
-        %td= page.title
         %td= page.parent_page
+        %td= page.title
+        %td= page.albums.to_sentence
         %td.hidden-print.text-right
           = link_to icon('eye', t('actions.view')), show_page_path(page),
               class: 'btn btn-default btn-sm'

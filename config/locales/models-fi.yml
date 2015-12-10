@@ -1,6 +1,9 @@
 fi:
   activerecord:
     models:
+      album:
+        one: kuva-albumi
+        other: kuva-albumit
       category:
         one: tuoteryhmä
         other: tuoteryhmät
@@ -67,6 +70,12 @@ fi:
         one: käyttäjä
         other: käyttäjät
     attributes:
+      album:
+        title: Otsikko
+        created_at: Päiväys
+        description: Kuvaus
+        images: Kuvat
+        page_ids: Näytetään sivuilla
       category:
         parent_category_id: Pääryhmä
         name: Nimi
@@ -145,6 +154,7 @@ fi:
         title: Otsake
         content: Sisältö
         wysiwyg: Käytä Froala-editoria
+        album_ids: Kuva-albumit
       product:
         category_ids: Tuoteryhmät
         virtual: Näennäinen tuote

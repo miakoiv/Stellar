@@ -1,0 +1,10 @@
+= bootstrap_form_for [:admin, @album], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :title
+        = f.select :page_ids, current_store.page_options, {include_blank: true}, {multiple: true, class: 'selectize'}
+      - unless locked
+        = f.form_group do
+          = f.primary

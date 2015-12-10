@@ -25,6 +25,7 @@ class Store < ActiveRecord::Base
   has_many :orders
   has_many :users
   has_many :pages
+  has_many :albums
   has_and_belongs_to_many :inventories
   has_many :order_types, through: :inventories
   has_many :promotions
@@ -63,6 +64,10 @@ class Store < ActiveRecord::Base
 
   def page_options
     pages.map { |p| [p.to_s, p.id] }
+  end
+
+  def album_options
+    albums.map { |a| [a.to_s, a.id] }
   end
 
   # Finds the shipping cost product manually due to having

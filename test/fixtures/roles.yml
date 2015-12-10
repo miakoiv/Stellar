@@ -60,6 +60,10 @@ user_manager:
   id: 19
   name: user_manager
   appearance: warning
+album_editor:
+  id: 20
+  name: album_editor
+  appearance: warning
 superuser:
   id: 99
   name: superuser

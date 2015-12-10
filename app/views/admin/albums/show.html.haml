@@ -1,0 +1,16 @@
+.page-header
+  = link_to admin_albums_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(Album)
+    = link_to edit_admin_album_path(@album), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1
+    = image_variant_tag(@album.cover_image)
+    = @album
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: true}
+
+  .col-md-6
+    = render partial: 'admin/images/table', object: @album, as: :imageable

@@ -5,6 +5,7 @@
       = f.select :parent_page_id, current_store.page_options,
           {include_blank: true}, {class: 'selectize'}
       = f.text_field :title
+      = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
       = f.form_group do
         = f.check_box :wysiwyg
       - unless @page.new_record?

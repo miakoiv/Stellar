@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207071721) do
+ActiveRecord::Schema.define(version: 20151210132630) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -26,6 +26,23 @@ ActiveRecord::Schema.define(version: 20151207071721) do
 
   add_index "adjustments", ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id", using: :btree
   add_index "adjustments", ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id", using: :btree
+
+  create_table "albums", force: :cascade do |t|
+    t.integer  "store_id",    limit: 4,     null: false
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "albums", ["store_id"], name: "index_albums_on_store_id", using: :btree
+
+  create_table "albums_pages", id: false, force: :cascade do |t|
+    t.integer "album_id", limit: 4, null: false
+    t.integer "page_id",  limit: 4, null: false
+  end
+
+  add_index "albums_pages", ["page_id", "album_id"], name: "index_albums_pages_on_page_id_and_album_id", unique: true, using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,                 null: false

@@ -1,0 +1,37 @@
+.page-header
+  - if current_user.can_create?(Album)
+    = link_to new_admin_album_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_album'))
+  %h1= icon('camera-retro', title(Album, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-1= col(Album, :created_at)
+        %th.col-xs-2= col(Album, :title)
+        %th= col(Album, :images)
+        %th.hidden-print
+
+    %tbody
+      = content_tag_for :tr, @albums do |album|
+        %td= l(album.created_at.to_date)
+        %td= album.title
+        %td
+          - album.images.ordered.each do |image|
+            = image_variant_tag(image, :icon,
+                data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
+        %td.hidden-print.text-right
+          = link_to icon('info', t('actions.show')), admin_album_path(album),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(Album)
+            = link_to icon('edit', t('actions.edit')), edit_admin_album_path(album),
+                class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(Album)
+            = link_to icon('remove', t('actions.delete')), admin_album_path(album),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: album.model_name.human, name: album.title),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
