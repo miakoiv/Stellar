@@ -4,6 +4,7 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :title
+        = f.text_area :description
         = f.select :page_ids, current_store.page_options, {include_blank: true}, {multiple: true, class: 'selectize'}
       - unless locked
         = f.form_group do
