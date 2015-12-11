@@ -92,6 +92,34 @@ html {
   }
 }
 
+.sidebar {
+  position: fixed;
+  z-index: $zindex-navbar;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  overflow-y: auto;
+  transition: all 0.5s ease 0s;
+
+  .container {
+    margin: 0;
+    padding-top: $navbar-height;
+  }
+}
+
+.sidebar-right {
+  &.active {
+    right: 0%;
+  }
+  right: -50%;
+
+  .sidebar-toggle {
+    position: absolute;
+    top: 50px;
+    left: -30px;
+  }
+}
+
 .search-panel {
   @extend .row;
   padding-top: 20px;

@@ -98,6 +98,9 @@ fi:
     index:
       current: Avoimet
       approved: Hyväksytyt
+  pages:
+    show:
+      included_albums: Näytä kuva-albumit
   store:
     titles:
       shop: Kauppa

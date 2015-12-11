@@ -24,32 +24,35 @@
     width: auto;
   }
 
-  .page-content {
-    padding-top: 30px;
-  }
+  .sidebar {
+    background-color: lighten($brand-primary, 25%);
 
-  .albums {
-    margin: 20px -1*$grid-gutter-width;
-    padding: 20px $grid-gutter-width;
-    background: $brand-primary;
+    &.active { @include box-shadow(-6px 0 12px 0 rgba(0,0,0,0.25)); }
+    .container { padding-top: 70px; }
 
-    .album {
-      @extend .clearfix;
-      background-color: rgba(255,255,255,0.8);
+    .albums {
+      .album {
+        @extend .clearfix;
+        background-color: rgba(255,255,255,0.8);
 
-      .gallery {
-        padding-top: 5px;
+        .gallery {
+          padding-top: 5px;
 
-        a {
-          float: left;
-          margin-right: 5px;
+          a {
+            float: left;
+            margin-right: 5px;
+            margin-bottom: 5px;
 
-          img {
-            @extend .img-thumbnail;
+            &:hover { @include box-shadow(0 0 4px $link-color); }
+            img { @extend .img-thumbnail; }
           }
         }
       }
     }
+  }
+
+  .page-content {
+    padding-top: 30px;
   }
 
   .search-panel {

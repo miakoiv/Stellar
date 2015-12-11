@@ -28,24 +28,27 @@
     padding-top: 30px;
   }
 
-  .albums {
-    margin: 20px -1*$grid-gutter-width;
-    padding: 20px $grid-gutter-width;
-    background: $brand-primary;
+  .sidebar {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAiCAAAAADD1SApAAAA5UlEQVR4AYXUMW6EQBAF0TpSS4T//vda2dO0GgiKwDuItwRl7ef6v5L+qNSc+5EL+jZpkTZJm3LBkBxRx2TI5YLzriQ5j//O9+0hLmgz4hoz71BB56kRc552KtjFpvqjnQtWsdHJbueCVWx9Z7dzwSpWQ2q3c8GudMN6tHPBo1hV/9ntXLCK7SsZ44Jd7CXqGBdMsQ+ZdipYldYvf7dzwfwHWqRNDXXBa2Eq9dkgFfgGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gF/gGucA3yAW+QS7wDXKBb5ALfINc4BvkAt8gFz+Bp+mo8f2VxAAAAABJRU5ErkJggg==);
 
-    .album {
-      @extend .clearfix;
-      background-color: rgba(255,255,255,0.8);
+    &.active { @include box-shadow(-6px 0 12px 0 rgba(0,0,0,0.25)); }
+    .container { padding-top: 70px; }
 
-      .gallery {
-        padding-top: 5px;
+    .albums {
+      .album {
+        @extend .clearfix;
+        background-color: rgba(255,255,255,0.8);
 
-        a {
-          float: left;
-          margin-right: 5px;
+        .gallery {
+          padding-top: 5px;
 
-          img {
-            @extend .img-thumbnail;
+          a {
+            float: left;
+            margin-right: 5px;
+            margin-bottom: 5px;
+
+            &:hover { @include box-shadow(0 0 4px $link-color); }
+            img { @extend .img-thumbnail; }
           }
         }
       }

@@ -118,6 +118,9 @@ en:
     index:
       current: Current
       approved: Approved
+  pages:
+    show:
+      included_albums: Show photo albums
   products:
     product_detail:
       amount: Amount

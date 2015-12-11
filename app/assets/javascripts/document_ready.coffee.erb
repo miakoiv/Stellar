@@ -52,6 +52,9 @@ jQuery ->
   $(document).on 'change', 'form.immediate', (e) ->
     $(e.currentTarget).trigger('submit.rails')
 
+  $(document).on 'click', '[data-toggle=sidebar]', (e) ->
+    $('.sidebar').toggleClass 'active'
+
   $(document).on 'click', 'a[href="#back"]', (e) ->
     e.preventDefault()
     history.back()
