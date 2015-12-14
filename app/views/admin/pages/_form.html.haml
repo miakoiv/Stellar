@@ -10,19 +10,20 @@
         = f.check_box :wysiwyg
 
       - unless @page.new_record?
-        - if @page.wysiwyg?
-          #wysiwyg-content><
-            = @page.content.html_safe if @page.content.present?
-          .form-group
+        .form-group
+          - if @page.wysiwyg?
             = f.hidden_field :content
-        - else
-          .form-group
+          - else
             = f.text_area_without_bootstrap :content, rows: 20, class: 'form-control monospace input-sm'
 
       = f.form_group do
         = f.primary
 
   - if !@page.new_record? && @page.wysiwyg?
+
+    #wysiwyg-content><
+      = @page.content.html_safe if @page.content.present?
+
     :coffee
       $blocks = $('#wysiwyg-content .editable')
 
