@@ -27,12 +27,13 @@
 
 :coffee
   $('#product_description').froalaEditor
+    key: '#{current_store.froala_key}'
     language: '#{current_store.locale}'
     heightMin: 200
     heightMax: 400
     toolbarButtons: [
-      'bold', 'italic', 'underline', '|',
-      'paragraphFormat', 'align', 'formatOL', 'formatUL', '|',
+      'paragraphFormat', 'bold', 'italic', 'underline', '-',
+      'align', 'formatOL', 'formatUL', '-',
       'undo', 'redo'
     ]
     toolbarInline: true
