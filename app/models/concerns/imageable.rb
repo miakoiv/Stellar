@@ -5,12 +5,7 @@ module Imageable
     has_many :images, as: :imageable, dependent: :destroy
   end
 
-  # Use the first presentational image as cover image.
-  def cover_image
-    images.presentational.ordered.first
-  end
-
-  def technical_cover_image
-    images.technical.ordered.first
+  def cover_image(purpose = :presentational)
+    images.send(purpose).ordered.first
   end
 end
