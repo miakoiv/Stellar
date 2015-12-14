@@ -8,26 +8,37 @@
       = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
       = f.form_group do
         = f.check_box :wysiwyg
+
       - unless @page.new_record?
-        .form-group
-          .col-xs-12
+        - if @page.wysiwyg?
+          #wysiwyg-content><
+            = @page.content.html_safe if @page.content.present?
+          .form-group
+            = f.hidden_field :content
+        - else
+          .form-group
             = f.text_area_without_bootstrap :content, rows: 20, class: 'form-control monospace input-sm'
+
       = f.form_group do
         = f.primary
 
   - if !@page.new_record? && @page.wysiwyg?
     :coffee
-      $('#page_content').froalaEditor
+      $blocks = $('#wysiwyg-content .editable')
+
+      $('form').on 'submit', (e) ->
+        $blocks.froalaEditor 'destroy'
+        $('#page_content').val $('#wysiwyg-content').html()
+
+      $blocks.froalaEditor
+        key: '#{current_store.froala_key}'
         language: '#{current_store.locale}'
-        heightMin: 400
         toolbarButtons: [
-          'bold', 'italic', 'underline', '|',
-          'paragraphFormat', 'align', 'formatOL', 'formatUL', '|',
-          'insertTable', 'insertImage', '|',
+          'paragraphFormat', 'bold', 'italic', 'underline', '-',
+          'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', '-',
           'undo', 'redo', 'html'
         ]
-        toolbarSticky: true
-        toolbarStickyOffset: $('#navbar').css('height')
+        toolbarInline: true
         paragraphFormatSelection: true
         tabSpaces: 2
         imageDefaultAlign: 'left'

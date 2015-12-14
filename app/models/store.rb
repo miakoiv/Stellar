@@ -6,7 +6,7 @@ class Store < ActiveRecord::Base
     :locale, :theme, :masonry, :menu_title,
     :allow_shopping, :b2b_sales, :admit_guests,
     :shipping_cost_product_id, :free_shipping_at,
-    :tracking_code, :order_sequence
+    :tracking_code, :froala_key, :order_sequence
   ], coder: JSON
 
   resourcify
