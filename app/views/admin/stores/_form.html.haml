@@ -16,11 +16,8 @@
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')
 
     #tab-settings.tab-pane{role: 'tabpanel'}
-      = f.select :theme,
-          %w{cards compass default emek hiustalo lepola nineties penumbra saarimedia},
-          {}, {class: 'selectize'}
-      = f.select :locale, [['English', 'en'], ['suomi', 'fi']],
-          {}, {class: 'selectize'}
+      = f.select :theme, %w{cards compass default emek hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
+      = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
       = f.form_group do
         = f.check_box :allow_shopping
       = f.form_group do

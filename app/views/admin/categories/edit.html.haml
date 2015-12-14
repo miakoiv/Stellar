@@ -4,7 +4,7 @@
   = link_to admin_category_path(@category), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1
-    = image_variant_tag(@category.cover_image)
+    = image_variant_tag @category.cover_image
     = @category
 
 .row

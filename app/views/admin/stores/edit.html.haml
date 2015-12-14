@@ -4,7 +4,7 @@
   = link_to admin_store_path(@store), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1
-    = image_variant_tag(@store.cover_image)
+    = image_variant_tag @store.cover_image
     = @store
 
 .row
