@@ -332,8 +332,8 @@ span.shipping:before {
   content: ""; // truck
 }
 
-.fr-view[contenteditable] div {
-  outline: 2px solid rgba(0,0,255,0.2);
+#wysiwyg-content .editable {
+  outline: 2px dotted rgba(0,0,255,0.333);
 }
 
 .mfp-bg {
