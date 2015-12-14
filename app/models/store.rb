@@ -3,10 +3,20 @@
 class Store < ActiveRecord::Base
 
   store :settings, accessors: [
-    :locale, :theme, :masonry, :menu_title,
-    :allow_shopping, :b2b_sales, :admit_guests,
-    :shipping_cost_product_id, :free_shipping_at,
-    :tracking_code, :froala_key, :order_sequence
+    :locale,  # see #locale_options for supported locales
+    :theme,   # see app/stylesheets/spry_themes
+    :masonry, # boolean, use masonry in storefront products view
+    :menu_title,  # one of the l10n keys under *.store.titles
+    :card_image_type, # image type to use for cover images on cards etc.
+    :list_image_type, # image type in list views
+    :allow_shopping,  # boolean, master switch to allow/disallow shopping
+    :b2b_sales,       # boolean, does the shop do business to business sales
+    :admit_guests,    # boolean, are guests allowed inside the store
+    :shipping_cost_product_id,  # product reference for shipping cost
+    :free_shipping_at,  # order total beyond which shipping cost won't apply
+    :tracking_code,   # Google Analytics code
+    :froala_key,    # Froala license key
+    :order_sequence # base value for order numbers if no numbering exists
   ], coder: JSON
 
   resourcify
@@ -35,6 +45,11 @@ class Store < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :erp_number, numericality: true, allow_blank: true
+
+  #---
+  def self.locale_options
+    [['English', 'en'], ['suomi', 'fi']]
+  end
 
   #---
   # Performs an inventory valuation of items in the shipping inventory.
