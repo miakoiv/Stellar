@@ -28,7 +28,11 @@ class StoreController < ApplicationController
   # GET /search
   def search
     @q = current_store.products.categorized.available.ransack(params[:q])
-    @products = @q.result(distinct: true).includes(:product_properties)
+    @products = if params[:q][:keyword_cont].present?
+      @q.result(distinct: true).includes(:product_properties)
+    else
+      Product.none
+    end
     @properties = current_store.properties.searchable
   end
 
