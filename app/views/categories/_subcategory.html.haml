@@ -1,4 +1,4 @@
-- cache [:category_item, subcategory] do
+- cache_if current_user.guest?, [:category_item, subcategory] do
   = content_tag_for :li, subcategory, class: @category.inside?(subcategory) ? 'active' : nil, data: {parent: "##{dom_id(subcategory.parent_category)}"} do
     = link_to show_category_path(subcategory), data: {push: 'partial', target: '.products'} do
       %p= subcategory.name
