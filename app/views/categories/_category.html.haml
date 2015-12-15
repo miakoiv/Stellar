@@ -1,5 +1,4 @@
-- cache_if current_user.guest?, [:category_card, category] do
-  = content_tag_for :li, category, class: @category.inside?(category) ? 'active' : nil do
-    = link_to show_category_path(category), data: {push: 'partial', target: '.products'} do
-      = image_variant_tag category.cover_image, :matchbox
-      %p= category.name
+= content_tag_for :li, category, class: @category.inside?(category) ? 'active' : nil do
+  = link_to show_category_path(category), data: {push: 'partial', target: '.products'} do
+    = image_variant_tag category.cover_image, :matchbox
+    %p= category.name
