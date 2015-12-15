@@ -1,8 +1,9 @@
 - meta_tags_for(@product)
 
 .categories.hidden-print
-  %ul= render @categories
-  = render partial: 'subcategories'
+  - cache(@categories) do
+    %ul= render @categories
+    = render partial: 'subcategories'
 
 .search-panel{style: 'display: none'}
 
