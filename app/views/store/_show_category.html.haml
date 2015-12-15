@@ -1,9 +1,8 @@
-- cache(@category) do
-  .product-grid.collapse.in
-    %ul= render @products
-  .product-list.collapse
-    .panel.panel-default
-      = render partial: 'products/table', object: @products, as: :products
+.product-grid.collapse.in
+  %ul= render @products
+.product-list.collapse
+  .panel.panel-default
+    = render partial: 'products/table', object: @products, as: :products
 
 :coffee
   $('.subcategories').replaceWith("#{j render partial: 'subcategories'}")

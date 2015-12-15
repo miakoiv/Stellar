@@ -1,8 +1,7 @@
 - meta_tags_for(@product)
 
 .categories.hidden-print
-  - cache(@categories) do
-    %ul= render @categories
+  %ul= render @categories
   = render partial: 'subcategories'
 
 .search-panel{style: 'display: none'}
@@ -10,8 +9,7 @@
 .products{style: 'display: none'}
 
 .product-detail
-  - cache(@product) do
-    = render partial: 'products/product_detail', object: @product, as: :product
+  = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
   jQuery ->
