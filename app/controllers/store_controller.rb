@@ -29,7 +29,9 @@ class StoreController < ApplicationController
   def search
     @q = current_store.products.categorized.available.ransack(params[:q])
     @products = if params[:q][:keyword_cont].present?
-      @q.result(distinct: true).includes(:product_properties)
+      @q.result(distinct: true)
+        .limit(Product::SEARCH_RESULTS_MAX)
+        .includes(:product_properties)
     else
       Product.none
     end
