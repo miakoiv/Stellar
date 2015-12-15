@@ -140,6 +140,7 @@ fi:
         user_email: Sähköpostiosoite
         order_type_name: Tilaustyyppi
         grand_total: Yhteensä
+        summary: Yhteenveto
       order_item:
         order_id: Tilaus
         product_id: Tuote

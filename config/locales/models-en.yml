@@ -140,6 +140,7 @@ en:
         user_email: E-mail
         order_type_name: Order type
         grand_total: Grand total
+        summary: Summary
       order_item:
         order_id: Order
         product_id: Product

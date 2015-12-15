@@ -182,6 +182,10 @@ class Order < ActiveRecord::Base
     order_type.name
   end
 
+  def summary
+    [company_name, contact_person, shipping_city].reject(&:empty?).join('/')
+  end
+
   def to_s
     number
   end
