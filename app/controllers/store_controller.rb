@@ -21,7 +21,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_store.categories.ordered.friendly.first.having_products
+    @category = current_store.categories.ordered.first.try(:having_products)
     @products = @category.present? ? @category.products.available.ordered : []
   end
 
