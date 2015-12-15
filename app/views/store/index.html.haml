@@ -1,7 +1,7 @@
 .categories.hidden-print
   - cache(@categories) do
     %ul= render @categories
-    = render partial: 'subcategories'
+  = render partial: 'subcategories'
 
 .search-panel{style: 'display: none'}
 
