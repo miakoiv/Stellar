@@ -1,5 +1,6 @@
 .subcategories
   %ul
-    = render partial: 'categories/subcategory', collection: @category.top_level.subcategories.ordered
+    - if @category.present?
+      = render partial: 'categories/subcategory', collection: @category.top_level.subcategories.ordered
     %li.pull-right
       %button.btn.btn-sm.btn-link{type: 'button', data: {toggle: 'collapse', target: '.products > div'}}= icon('list')
