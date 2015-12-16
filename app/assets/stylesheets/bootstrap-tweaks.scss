@@ -49,6 +49,12 @@ html {
 
   .media {
     margin: 0;
+
+    .media-left {
+      .box-thumbnail {
+        img { margin-top: 0; }
+      }
+    }
     a { padding: 10px 20px; }
   }
 }
@@ -153,6 +159,33 @@ i.icon {
 
   a.btn { float: right; }
   a.btn + a.btn { margin-right: 8px; }
+}
+
+//
+// image boxes for various sizes, with image centered inside
+//
+.box-matchbox {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.box-thumbnail {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+.box-icon {
+  position: relative;
+  width: 25px;
+  width: 25px;
+}
+.box-matchbox img, .box-thumbnail img, .box-icon img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 //
