@@ -2,6 +2,7 @@
   %table#search-results.table.table-hover
     %thead
       %tr
+        %th.col-min{data: {sorter: 'false'}}
         %th.col-xs-2.no-wrap= col(Product, :code)
         %th= col(Product, :title)
         - @properties.each do |property|
@@ -12,6 +13,9 @@
       - products.each do |product|
         - cache_if current_user.guest?, [:search_result_row, product] do
           = content_tag_for :tr, product do
+            %td
+              .box-thumbnail
+                = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
             %td= product.code
             %td
               = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
@@ -30,4 +34,4 @@
     widthFixed: true
     widgets: ['uiTheme', 'saveSort']
     headerTemplate: '{content} {icon}'
-    sortList: [[1,0]]
+    sortList: [[2,0]]
