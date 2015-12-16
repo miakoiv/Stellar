@@ -4,7 +4,7 @@
     .form-group.has-feedback
       = search_field_tag 'q[keyword_cont]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword'), required: true
       %span.form-control-feedback= icon('search')
-      %ul.dropdown-menu.media-list.search-results
+      %ul#search-results.dropdown-menu.media-list
 
   :coffee
     $('#q_keyword_cont').on 'keyup', (e) ->

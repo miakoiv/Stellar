@@ -1,5 +1,5 @@
 - if @products.any?
-  $('#navbar-search .search-results').html("#{j render partial: 'products/search_dropdown', object: @products, as: :products}");
-  $('#navbar-search .search-results').show()
+  $('#search-results').html("#{j render partial: 'products/search_dropdown', object: @products, as: :products}");
+  $('#search-results').show()
 - else
-  $('#navbar-search .search-results').hide()
+  $('#search-results').hide()
