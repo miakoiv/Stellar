@@ -152,13 +152,13 @@ namespace :matfox do
   # specified in the hash `data`.
   def find_or_create_product(store, code, data)
     product = Product.find_or_initialize_by(store: store, code: code)
-    product.title = data[:product][:title].try(:mb_chars).try(:titleize)
-    product.subtitle = data[:product][:subtitle].try(:mb_chars).try(:titleize)
+    product.title ||= data[:product][:title].try(:mb_chars).try(:titleize)
+    product.subtitle ||= data[:product][:subtitle].try(:mb_chars).try(:titleize)
     product.memo = data[:product][:memo]
     product.cost = data[:product][:cost]
     product.cost_modified_at = data[:product][:cost_modified_at]
     product.save!
-    puts "#{code} ➞ #{store}"
+    puts "#{code} | #{product.title} #{product.subtitle}"
     product
   end
 
