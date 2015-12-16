@@ -7,5 +7,5 @@
       %ul#search-results.dropdown-menu.media-list
 
   :coffee
-    $('#q_keyword_cont').on 'keyup', (e) ->
+    $('#q_keyword_cont').smartkeyup ->
       $.get '#{search_path}?i=1&q[keyword_cont]=' + encodeURIComponent($(this).val())
