@@ -13,34 +13,11 @@ html {
   padding-bottom: 40px;
 }
 
-#flash {
-  position: absolute;
-  bottom: 15px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  padding-top: 15px;
-  background-color: $body-bg;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
-  @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
-  font-size: $font-size-small;
-
-  p {
-    margin: 0;
-  }
-  p.lead {
-    font-size: $font-size-base;
-  }
-}
-
+//
+// navbar with charms and a search results dropdown
+//
 .navbar {
-  img {
-    margin: -2px 5px -3px 0;
-  }
+  img { margin: -2px 5px -3px 0; }
   .navbar-brand {
     letter-spacing: -0.02em;
 
@@ -59,25 +36,31 @@ html {
     .nav.navbar-nav {
       float: left;
 
-      > li {
-        float: left;
-      }
+      > li { float: left; }
     }
-    .navbar-toggle {
-      margin-left: 30px;
-    }
+    .navbar-toggle { margin-left: 30px; }
   }
-
 }
 
+#search-results {
+  min-width: 320px;
+  max-height: 600px;
+  overflow-y: scroll;
+
+  .media {
+    margin: 0;
+    a { padding: 10px 20px; }
+  }
+}
+
+//
 // subnavs that open on hover but look identical to real dropdowns
+//
 .subnav {
   @extend .dropdown-menu;
   margin: 0;
 }
-.navbar-nav > li:hover > ul.subnav {
-  display: block;
-}
+.navbar-nav > li:hover > ul.subnav { display: block; }
 
 @media (max-width: $screen-xs-max) {
   .subnav {
@@ -92,6 +75,9 @@ html {
   }
 }
 
+//
+// sidebar on the right
+//
 .sidebar {
   position: fixed;
   z-index: $zindex-navbar;
@@ -108,9 +94,7 @@ html {
 }
 
 .sidebar-right {
-  &.active {
-    right: 0%;
-  }
+  &.active { right: 0%; }
   right: -50%;
 
   .sidebar-toggle {
@@ -128,40 +112,26 @@ html {
   overflow-y: auto;
 }
 
-.visible-from-search {
-  display: none;
-}
-.from-search .visible-from-search {
-  display: inline-block;
-}
-.from-search .hidden-from-search {
-  display: none;
-}
+.visible-from-search { display: none; }
+.from-search .visible-from-search { display: inline-block; }
+.from-search .hidden-from-search { display: none; }
 
-.modal-body {
-  overflow-y: scroll;
-}
+.modal-body { overflow-y: scroll; }
 
-h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label {
-  font-weight: 500;
-}
+h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label { font-weight: 500; }
 h1 {
   font-size: 2.5em;
   font-weight: 400;
   letter-spacing: -0.05em;
 
-  .small {
-    letter-spacing: 0;
-  }
+  .small { letter-spacing: 0; }
 }
 h2 {
   font-size: 1.6em;
   font-weight: 400;
 }
 
-a, a:focus {
-  outline: 0;
-}
+a, a:focus { outline: 0 !important; }
 
 i.icon {
   display: inline-block;
@@ -169,14 +139,10 @@ i.icon {
   padding: 5px 5px 6px 4px;
 }
 
-.monospace {
-  font-family: "Fira Mono", monospace;
-}
+.monospace { font-family: "Fira Mono", monospace; }
 
 // no-wrap, and currency with tighter spacing
-.no-wrap {
-  white-space: nowrap;
-}
+.no-wrap { white-space: nowrap; }
 .currency {
   word-spacing: -0.1em;
   white-space: nowrap;
@@ -185,19 +151,14 @@ i.icon {
 .page-header {
   border-bottom: 0;
 
-  a.btn {
-    float: right;
-  }
-
-  a.btn + a.btn {
-    margin-right: 8px;
-  }
+  a.btn { float: right; }
+  a.btn + a.btn { margin-right: 8px; }
 }
 
+//
 // beautified nav tabs, with a special case for tabbed panels
-.nav-tabs {
-  margin-bottom: 15px;
-}
+//
+.nav-tabs { margin-bottom: 15px; }
 .nav-tabs.panel-tabs {
   margin-bottom: -1px;
   border-bottom-color: transparent;
@@ -207,17 +168,11 @@ i.icon {
   padding-top: 5px;
 }
 
-.checkbox label {
-  padding-left: 0;
-}
+.checkbox label { padding-left: 0; }
 
-.selectize-input {
-  vertical-align: top;
-}
+.selectize-input { vertical-align: top; }
 
-input[type=number] {
-  min-width: 60px;
-}
+input[type=number] { min-width: 60px; }
 
 .form-control[disabled],
 fieldset[disabled] .form-control,
@@ -230,27 +185,16 @@ fieldset[disabled] .input-group .input-group-addon,
   border-color: transparent;
   box-shadow: none;
 }
-fieldset[disabled] .help-block {
-  display: none;
-}
+fieldset[disabled] .help-block { display: none; }
 .selectize-control.plugin-remove_button .selectize-input.disabled .remove,
-.selectize-control.single .selectize-input.disabled::after {
-  display: none;
-}
+.selectize-control.single .selectize-input.disabled::after { display: none; }
 
 // fixes z-index for dropdowns on search-bar
-.selectize-dropdown.form-control {
-  z-index: 1035;
-}
+.selectize-dropdown.form-control { z-index: 1035; }
 
 label.required:before {
   content: "❋ ";
   color: $state-danger-text;
-}
-
-label.import:before {
-  content: "❖ ";
-  color: $state-info-text;
 }
 
 .table {
@@ -261,36 +205,11 @@ label.import:before {
       padding: 4px 8px;
     }
   }
-  .col-min {
-    width: 1px;
-  }
-
-  caption {
-    position: absolute;
-    width: 100%;
-    left: -100%;
-    height: $grid-gutter-width/2;
-    padding: 0;
-    transform-origin: top right;
-    transform: rotate(-90deg) translateY(-5px);
-
-    span {
-      float: right;
-      padding: 1px 5px;
-      @include border-top-radius(4px);
-      font-size: $font-size-small;
-      font-weight: 500;
-      background: lighten($brand-primary, 40%);
-      color: #fff;
-      text-transform: uppercase;
-    }
-  }
+  .col-min { width: 1px; }
 }
 
 .table.table-loose > tbody > tr > th,
-.table.table-loose > tbody > tr > td {
-  line-height: 2;
-}
+.table.table-loose > tbody > tr > td { line-height: 2; }
 
 .tablesorter-bootstrap thead th,
 .tablesorter-bootstrap thead td,
@@ -300,21 +219,15 @@ label.import:before {
   font-weight: 500;
 }
 
-.table > tbody.sortable .handle {
-  cursor: grab;
-}
-.sortable-placeholder {
-    outline: $brand-primary solid 1px;
-}
+.table > tbody.sortable .handle { cursor: grab; }
+.sortable-placeholder { outline: $brand-primary solid 1px; }
 
-.pre {
-  white-space: pre-line;
-}
+.pre { white-space: pre-line; }
+.box { background: transparent; }
 
-.box {
-  background: transparent;
-}
-
+//
+// inventory readouts
+//
 span.manufacturing, span.shipping {
   display: inline-block;
   margin-right: 5px;
@@ -325,23 +238,28 @@ span.manufacturing::before, span.shipping::before {
   font-family: FontAwesome;
   color: $text-muted;
 }
-span.manufacturing:before {
-  content: ""; // cogs
-}
-span.shipping:before {
-  content: ""; // truck
-}
+// cogs
+span.manufacturing:before { content: ""; }
+// truck
+span.shipping:before { content: ""; }
 
-#wysiwyg-content .editable {
-  outline: 2px dotted rgba(0,0,255,0.333);
-}
+//
+// make editable boxes stand out in Froala instances
+//
+#wysiwyg-content .editable { outline: 2px dotted rgba(0,0,255,0.333); }
 
-.mfp-bg {
-  opacity: 0.9;
-}
+//
+// magnific popup tweaks
+//
+.mfp-bg { opacity: 0.9; }
 .mfp-figure:after {
   background: transparent;
   box-shadow: none;
+}
+
+#flash {
+  position: absolute;
+  bottom: 15px;
 }
 
 .unobtrusive-flash-container {
@@ -350,4 +268,19 @@ span.shipping:before {
   bottom: 15px;
   left: 30px;
   right: 30px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  padding-top: 15px;
+  background-color: $body-bg;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
+  @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
+  font-size: $font-size-small;
+
+  p { margin: 0; }
+  p.lead { font-size: $font-size-base; }
 }
