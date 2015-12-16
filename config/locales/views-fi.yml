@@ -129,6 +129,8 @@ fi:
     select: Valitse
     view: Katso
     print: Tulosta
+    search: Etsi
+    advanced_search: Tarkennettu haku sanalla ”%{keyword}”…
     confirm:
       title: 'Oletko varma?'
       body: "Poistetaanko varmasti %{klass} ”%{name}”?"

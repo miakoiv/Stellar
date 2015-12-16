@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
   monetize :cost_cents, allow_nil: true
   monetize :sales_price_cents, allow_nil: true
 
-  SEARCH_RESULTS_MAX = 50
+  INLINE_SEARCH_RESULTS = 20
 
   #---
   belongs_to :store

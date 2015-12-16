@@ -153,6 +153,8 @@ en:
     select: Select
     view: View
     print: Print
+    search: Search
+    advanced_search: Advanced search with ”%{keyword}”…
     confirm:
       title: 'Are you sure?'
       body: "Are you sure you want to delete %{klass} ”%{name}”?"

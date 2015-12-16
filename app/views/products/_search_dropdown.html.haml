@@ -1,0 +1,13 @@
+%li= link_to t('actions.advanced_search', keyword: params[:q][:keyword_cont]), search_path(q: params[:q]), class: 'text-right'
+%li.divider
+= content_tag_for :li, @products, class: 'media' do |product|
+  = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
+    .media-left
+      = image_variant_tag(product.cover_image, :thumbnail, class: 'img-thumbnail')
+    .media-body
+      %h4.media-heading
+        = product.title
+        .small= product.subtitle
+      - if can_see_pricing?
+        %p.currency.text-right
+          = humanized_money_with_symbol product.sales_price

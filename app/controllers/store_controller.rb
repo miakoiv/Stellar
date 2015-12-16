@@ -27,15 +27,20 @@ class StoreController < ApplicationController
 
   # GET /search
   def search
-    @q = current_store.products.categorized.available.ransack(params[:q])
-    @products = if params[:q][:keyword_cont].present?
-      @q.result(distinct: true)
-        .limit(Product::SEARCH_RESULTS_MAX)
-        .includes(:product_properties)
+    q = params.fetch(:q, {})    # Ransack query
+    i = params.fetch(:i, false) # inline mode
+    valid_search = q.present? && q[:keyword_cont].present? && q[:keyword_cont].length > 2
+    @q = current_store.products.categorized.available.ransack(q)
+    @properties = current_store.properties.searchable
+
+    @products = if valid_search
+      i ? @q.result(distinct: true).limit(Product::INLINE_SEARCH_RESULTS)
+        : @q.result(distinct: true).includes(:product_properties)
     else
       Product.none
     end
-    @properties = current_store.properties.searchable
+
+    respond_to :js, :html
   end
 
   # GET /category/1
