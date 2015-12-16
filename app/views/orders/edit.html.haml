@@ -1,6 +1,8 @@
 .page-header
   = link_to orders_path(anchor: tab_name(@order)), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
+  = link_to duplicate_order_path(@order), class: 'btn btn-info' do
+    = icon('copy', t('.duplicate'))
   %h1
     = @order.order_type
     %span.small

@@ -9,9 +9,9 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions confirm: 'read'
+  authority_actions confirm: 'read', duplicate: 'read'
 
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :confirm]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :confirm, :duplicate]
 
   # GET /orders
   def index
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order
   end
 
-  # GET /orders/edit/1
+  # GET /orders/1/edit
   def edit
     authorize_action_for @order
   end
@@ -57,12 +57,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/confirm/1
+  # GET /orders/1/confirm
   def confirm
     authorize_action_for @order
 
     OrderMailer.order_confirmation(@order).deliver_later
     redirect_to orders_path
+  end
+
+  # GET /orders/1/duplicate
+  def duplicate
+    authorize_action_for @order
+
+    order = shopping_cart
+    @order.order_items.each do |order_item|
+      order.insert!(order_item.product, order_item.amount)
+    end
+
+    redirect_to show_cart_path
   end
 
   private

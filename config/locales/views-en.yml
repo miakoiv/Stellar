@@ -115,9 +115,10 @@ en:
       new:
         new_user: New user
   orders:
-    index:
-      current: Current
-      approved: Approved
+    show:
+      duplicate: Duplicate to cart
+    edit:
+      duplicate: Duplicate to cart
   pages:
     show:
       included_albums: Show photo albums

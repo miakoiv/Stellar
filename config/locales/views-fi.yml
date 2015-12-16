@@ -95,9 +95,10 @@ fi:
       new:
         new_user: Uusi käyttäjä
   orders:
-    index:
-      current: Avoimet
-      approved: Hyväksytyt
+    show:
+      duplicate: Kopioi ostoskoriin
+    edit:
+      duplicate: Kopioi ostoskoriin
   pages:
     show:
       included_albums: Näytä kuva-albumit

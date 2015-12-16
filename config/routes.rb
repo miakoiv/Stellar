@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     get 'confirm', on: :member
+    get 'duplicate', on: :member
     resources :order_items, shallow: true
   end
 
