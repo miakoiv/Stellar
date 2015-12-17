@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     resources :categories do
       resources :images, shallow: true
       post :reorder, on: :collection
+      get :reorder_products, on: :member
     end
     resources :custom_attributes do
       resources :custom_values, shallow: true

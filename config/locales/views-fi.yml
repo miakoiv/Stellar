@@ -130,6 +130,7 @@ fi:
     select: Valitse
     view: Katso
     print: Tulosta
+    reorder: Järjestele
     search: Etsi
     advanced_search: Tarkennettu haku sanalla ”%{keyword}”…
     confirm:

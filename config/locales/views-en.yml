@@ -154,6 +154,7 @@ en:
     select: Select
     view: View
     print: Print
+    reorder: Reorder
     search: Search
     advanced_search: Advanced search with ”%{keyword}”…
     confirm:
