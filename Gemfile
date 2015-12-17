@@ -36,9 +36,6 @@ gem 'friendly_id'
 # Moneh!
 gem 'money-rails'
 
-# Keyset pagination to get previous/next record
-gem 'order_query', '~> 0.3.2'
-
 # Shhhh
 gem 'quiet_assets'
 

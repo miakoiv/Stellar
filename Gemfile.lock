@@ -156,9 +156,6 @@ GEM
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
     nprogress-rails (0.1.6.7)
-    order_query (0.3.2)
-      activerecord (~> 4.0)
-      activesupport (~> 4.0)
     orm_adapter (0.5.0)
     paperclip (4.3.1)
       activemodel (>= 3.2.0)
@@ -298,7 +295,6 @@ DEPENDENCIES
   money-rails
   mysql2 (= 0.3.18)
   nprogress-rails
-  order_query (~> 0.3.2)
   paperclip (~> 4.2)
   quiet_assets
   rails (= 4.2.4)

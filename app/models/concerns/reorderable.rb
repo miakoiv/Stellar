@@ -1,6 +1,5 @@
 module Reorderable
   extend ActiveSupport::Concern
-  include OrderQuery
 
   included do
 
