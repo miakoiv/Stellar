@@ -7,7 +7,7 @@
         %th.hidden-print
 
     %tbody#iframes-tbody.sortable
-      = render partial: 'admin/iframes/edit_row', collection: product.iframes.ordered, as: :iframe
+      = render partial: 'admin/iframes/edit_row', collection: product.iframes.sorted, as: :iframe
 
 = bootstrap_form_for [:admin, product, product.iframes.new], layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-9', remote: true do |f|
   = f.text_area :html, rows: 4, class: 'input-sm'

@@ -10,15 +10,14 @@ class Admin::ProductsController < ApplicationController
 
   authorize_actions_for Product
   before_action :set_product,  only: [:show, :edit, :update, :destroy]
-  before_action :set_point,    only: [:show, :edit, :update]
 
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products_by_category = current_store.categories.ordered.map do |category|
-      [category, category.products.ordered]
+    @products_by_category = current_store.categories.sorted.map do |category|
+      [category, category.products.sorted(category.product_scope)]
     end.to_h
-    @products_by_category[nil] = current_store.products.uncategorized.ordered
+    @products_by_category[nil] = current_store.products.uncategorized.sorted
   end
 
   # GET /admin/products/1
@@ -70,15 +69,7 @@ class Admin::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = current_store.products.ordered.friendly.find(params[:id])
-    end
-
-    def set_point
-      @point = if @product.category.present?
-        @product.category.products.ordered_at(@product)
-      else
-        current_store.products.uncategorized.ordered_at(@product)
-      end
+      @product = current_store.products.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -15,3 +15,9 @@ en:
         value_type:
           string: String
           numeric: Numeric
+      product:
+        sorting:
+          manual: manually
+          alphabetical: alphabetical
+          sales_price_asc: least expensive first
+          sales_price_desc: most expensive first

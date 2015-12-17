@@ -80,6 +80,7 @@ en:
         parent_category_id: Parent category
         name: Name
         description: Description
+        product_scope: Product sorting
       customization:
         custom_attribute_id: Attribute
         custom_value_id: Value

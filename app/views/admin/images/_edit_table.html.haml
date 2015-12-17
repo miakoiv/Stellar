@@ -8,7 +8,7 @@
         %th.hidden-print
 
     %tbody#images-tbody.sortable
-      = render partial: 'admin/images/edit_row', collection: imageable.images.ordered, as: :image
+      = render partial: 'admin/images/edit_row', collection: imageable.images.sorted, as: :image
 
 :coffee
   $('#images-tbody').sortable(

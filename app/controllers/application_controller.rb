@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     # Pages are loaded by a before_filter, since their links are
     # rendered in the main navigation bar.
     def load_pages
-      @pages ||= current_store.pages.top_level.ordered
+      @pages ||= current_store.pages.top_level.sorted
     end
 
     # Locale is set by a before_filter. Using params is a manual override

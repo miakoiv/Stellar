@@ -14,6 +14,17 @@ class Product < ActiveRecord::Base
 
   INLINE_SEARCH_RESULTS = 20
 
+  # Additional sorting scopes through Reorderable.
+  define_scope :alphabetical do
+    order(:title, :subtitle)
+  end
+  define_scope :sales_price_asc do
+    order(sales_price_cents: :asc)
+  end
+  define_scope :sales_price_desc do
+    order(sales_price_cents: :desc)
+  end
+
   #---
   belongs_to :store
   has_and_belongs_to_many :categories

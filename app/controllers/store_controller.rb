@@ -21,8 +21,8 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    @category = current_store.categories.ordered.first.try(:having_products)
-    @products = @category.present? ? @category.products.available.ordered : []
+    @category = current_store.categories.sorted.first.try(:having_products)
+    @products = @category.present? ? @category.products.available.sorted(@category.product_scope) : []
   end
 
   # GET /search
@@ -45,7 +45,7 @@ class StoreController < ApplicationController
 
   # GET /category/1
   def show_category
-    @products = @category.products.available.ordered
+    @products = @category.products.available.sorted(@category.product_scope)
   end
 
   # GET /product/1
@@ -100,7 +100,7 @@ class StoreController < ApplicationController
 
   private
     def set_categories
-      @categories = current_store.categories.top_level.ordered
+      @categories = current_store.categories.top_level.sorted
     end
 
     # Find category by friendly id in `category_id`, including history.

@@ -14,7 +14,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = current_store.categories.ordered
+    @categories = current_store.categories.sorted
   end
 
   # GET /admin/categories/1
@@ -83,7 +83,7 @@ class Admin::CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(
-        :parent_category_id, :name, :description
+        :parent_category_id, :name, :description, :product_scope
       )
     end
 end

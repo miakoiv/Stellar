@@ -80,6 +80,7 @@ fi:
         parent_category_id: Pääryhmä
         name: Nimi
         description: Kuvaus
+        product_scope: Tuotteiden järjestys
       customization:
         custom_attribute_id: Ominaisuus
         custom_value_id: Arvo

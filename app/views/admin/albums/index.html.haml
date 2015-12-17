@@ -18,7 +18,7 @@
         %td= l(album.created_at.to_date)
         %td= album.title
         %td
-          - album.images.ordered.each do |image|
+          - album.images.sorted.each do |image|
             = image_variant_tag(image, :icon,
                 data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
         %td.hidden-print.text-right

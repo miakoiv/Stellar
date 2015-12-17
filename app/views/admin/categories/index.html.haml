@@ -12,6 +12,7 @@
         %th.col-xs-1
         %th= col(Category, :name)
         %th= col(Category, :parent_category_id)
+        %th= col(Category, :product_scope)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
@@ -20,6 +21,7 @@
         %td= image_variant_tag category.cover_image
         %td= category.name
         %td= category.parent_category
+        %td= Product.human_attribute_value(:sorting, category.product_scope)
         %td.hidden-print.text-right
           = link_to icon('info', t('actions.show')), admin_category_path(category),
               class: 'btn btn-default btn-sm'

@@ -14,7 +14,7 @@ class Admin::PagesController < ApplicationController
   # GET /admin/pages
   # GET /admin/pages.json
   def index
-    @pages = current_store.pages.ordered
+    @pages = current_store.pages.sorted
   end
 
   # GET /admin/pages/new

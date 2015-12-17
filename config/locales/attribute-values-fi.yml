@@ -15,3 +15,9 @@ fi:
         value_type:
           string: sanallinen
           numeric: numeerinen
+      product:
+        sorting:
+          manual: käsin
+          alphabetical: aakkosjärjestys
+          sales_price_asc: halvin ensin
+          sales_price_desc: kallein ensin

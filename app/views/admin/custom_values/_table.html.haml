@@ -7,4 +7,4 @@
         %th.hidden-print
 
     %tbody
-      = render partial: 'admin/custom_values/row', collection: custom_attribute.custom_values.ordered, as: :custom_value
+      = render partial: 'admin/custom_values/row', collection: custom_attribute.custom_values.sort, as: :custom_value
