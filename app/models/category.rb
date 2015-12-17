@@ -19,6 +19,7 @@ class Category < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates :product_scope, presence: true
 
   #---
   # Category is inside another category if it's the category itself,
