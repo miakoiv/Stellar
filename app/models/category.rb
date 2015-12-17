@@ -27,6 +27,10 @@ class Category < ActiveRecord::Base
     category == self || parent_category.present? && parent_category.inside?(category)
   end
 
+  def level
+    parent_category.nil? ? 0 : 1 + parent_category.level
+  end
+
   def top_level
     parent_category.nil? ? self : parent_category.top_level
   end
@@ -50,6 +54,10 @@ class Category < ActiveRecord::Base
 
   def tab_name
     name
+  end
+
+  def indented_name
+    "#{'    ' * level}#{name}"
   end
 
   def to_s

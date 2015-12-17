@@ -70,7 +70,7 @@ class Store < ActiveRecord::Base
   end
 
   def category_options
-    categories.ordered.map { |c| [c.name, c.id] }
+    categories.ordered.map { |c| [c.indented_name, c.id] }
   end
 
   def user_options
