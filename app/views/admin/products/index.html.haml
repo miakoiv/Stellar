@@ -17,12 +17,3 @@
     .tab-pane.fade{id: tab_name(category, 'uncategorized'), class: category == first ? 'in active' : nil}
       %h2.visible-print-block= category.try(:name) || t('.uncategorized')
       = render partial: 'admin/products/table', object: products, as: :products
-
-:coffee
-  $('.sortable').sortable(
-    items: 'tr'
-    handle: '.handle'
-    placeholder: '#{tr_placeholder(5)}'
-  ).bind 'sortupdate', (e, ui) ->
-    $.post '#{reorder_admin_products_path}',
-      {reorder: $('tr', this).map(-> this.id).get()}
