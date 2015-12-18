@@ -165,9 +165,9 @@ en:
         title: Title
         subtitle: Subtitle
         description: Description
-        available_at: Available since
-        not_available: Not available
-        deleted_at: Removed at
+        available_at: Availability starts
+        deleted_at: Availability ends
+        not_live: Not available
         memo: Memo
         iframes: Embeds
         images: Images

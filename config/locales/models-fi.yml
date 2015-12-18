@@ -165,9 +165,9 @@ fi:
         title: Nimike
         subtitle: Alanimi
         description: Kuvaus
-        available_at: Saatavana alkaen
-        not_available: Ei saatavana
-        deleted_at: Poistettu
+        available_at: Myynnin alkamispvm
+        deleted_at: Myynnin päättymispvm
+        not_live: Ei myynnissä
         memo: Muistio
         iframes: Upotukset
         images: Kuvat

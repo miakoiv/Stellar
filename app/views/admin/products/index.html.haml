@@ -15,8 +15,10 @@
       .col-xs-4
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
       .col-xs-2
-        = f.check_box :live_false, class: 'form-control'
-        %label= col(Product, :not_available)
+        .checkbox
+          %label
+            = f.check_box :live_false
+            = col(Product, :not_live)
       .col-xs-1.pull-right
         = f.submit t('actions.search'), class: 'btn btn-primary'
 
