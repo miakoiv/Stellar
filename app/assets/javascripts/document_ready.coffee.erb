@@ -18,13 +18,6 @@ $.fn.extend
       dropdownParent: 'body'
       allowEmptyOption: true
 
-    $('input[type=checkbox]').bootstrapSwitch
-      size: 'mini'
-      onText: '<i class="fa fa-check"></i>'
-      offText: ' '
-    .on 'switchChange.bootstrapSwitch', (e, state) ->
-      $(e.target).trigger 'change'
-
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
 

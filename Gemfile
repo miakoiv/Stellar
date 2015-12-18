@@ -62,7 +62,6 @@ gem 'rolify'
 # Twitter Bootstrap scaffolds
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass', '~> 4.3.0'
-gem 'bootstrap-switch-rails'
 
 # Image attachments and popups
 gem 'paperclip', '~> 4.2'
