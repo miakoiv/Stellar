@@ -14,10 +14,9 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    @products_by_category = current_store.categories.sorted.map do |category|
-      [category, category.products.sorted(category.product_scope)]
-    end.to_h
-    @products_by_category[nil] = current_store.products.uncategorized.sorted
+    set_ransack_query('products')
+    @q = current_store.products.ransack(@query)
+    @products = @q.result(distinct: true)
   end
 
   # GET /admin/products/1

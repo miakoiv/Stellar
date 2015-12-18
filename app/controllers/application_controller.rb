@@ -32,6 +32,12 @@ class ApplicationController < ActionController::Base
     @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
   end
 
+  # Preserves ransack query param in a cookie.
+  def set_ransack_query(key)
+    cookies[key] = params[:q].to_json if params[:q]
+    @query = params[:q].presence || JSON.load(cookies[key])
+  end
+
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
   helper_method :current_store, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :can_access_dashboard?

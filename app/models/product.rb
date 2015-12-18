@@ -65,6 +65,10 @@ class Product < ActiveRecord::Base
     parent.table[:sales_price_cents]
   end
 
+  ransacker :available do |parent|
+    Arel.sql('((deleted_at IS NULL OR deleted_at > CURRENT_DATE()) AND NOT (available_at IS NULL OR available_at > CURRENT_DATE()))')
+  end
+
   #---
   validates :code, presence: true
   validates :title, presence: true

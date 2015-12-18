@@ -1,5 +1,5 @@
 .page-header
-  = link_to admin_products_path(anchor: tab_name(@product)), class: 'btn btn-default' do
+  = link_to admin_products_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   = link_to admin_product_path(@product), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
