@@ -1,5 +1,5 @@
 .table-responsive
-  %table#products-table.table.table-striped.table-hover.table-loose
+  %table#products-table.table.table-hover.table-loose
     %thead
       %tr
         %th.col-min{data: {sorter: 'false'}}
@@ -10,18 +10,19 @@
 
     %tbody
       - products.each do |product|
-        = content_tag_for :tr, product, class: product.live? ? '' : 'warning text-warning' do
-          %td= image_variant_tag product.cover_image, :icon
-          %td
-            = product.live? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
-          %td
-            %strong= product.title
-            = product.subtitle
-          %td= product.categories.to_sentence
-          %td.hidden-print.text-right
-            = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(Product)
-              = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
+        - cache [:admin_product_row, product] do
+          = content_tag_for :tr, product, class: product.live? ? '' : 'warning text-warning' do
+            %td= image_variant_tag product.cover_image, :icon
+            %td
+              = product.live? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
+            %td
+              %strong= product.title
+              = product.subtitle
+            %td= product.categories.to_sentence
+            %td.hidden-print.text-right
+              = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
+              - if current_user.can_update?(Product)
+                = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
 
 :coffee
   $('#products-table').tablesorter
