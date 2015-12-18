@@ -7,6 +7,7 @@
 .panel.panel-info
   .panel-heading
     .panel-title
+      .pull-right= product_count(@products.count, current_store.products.live.count)
       %h4= t('actions.search')
   .panel-body
     = search_form_for [:admin, @q] do |f|
