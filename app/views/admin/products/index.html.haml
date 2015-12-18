@@ -4,7 +4,7 @@
       = icon('plus', t('.new_product'))
   %h1= icon('cube', title(Product, count: 2))
 
-.panel.panel-primary
+.panel.panel-info
   .panel-heading
     .panel-title
       %h4= t('actions.search')
@@ -15,7 +15,7 @@
       .col-xs-4
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
       .col-xs-2
-        = f.check_box :available_false, class: 'form-control'
+        = f.check_box :live_false, class: 'form-control'
         %label= col(Product, :not_available)
       .col-xs-1.pull-right
         = f.submit t('actions.search'), class: 'btn btn-primary'

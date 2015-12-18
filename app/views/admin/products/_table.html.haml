@@ -10,10 +10,10 @@
 
     %tbody
       - products.each do |product|
-        = content_tag_for :tr, product, class: product.available? ? '' : 'warning text-warning' do
+        = content_tag_for :tr, product, class: product.live? ? '' : 'warning text-warning' do
           %td= image_variant_tag product.cover_image, :icon
           %td
-            = product.available? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_available))
+            = product.live? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_available))
           %td
             %strong= product.title
             = product.subtitle

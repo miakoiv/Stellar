@@ -22,7 +22,7 @@ class StoreController < ApplicationController
   # GET /
   def index
     @category = current_store.categories.sorted.first.try(:having_products)
-    @products = @category.present? ? @category.products.available.sorted(@category.product_scope) : []
+    @products = @category.present? ? @category.products.live.sorted(@category.product_scope) : []
   end
 
   # GET /search
@@ -30,7 +30,7 @@ class StoreController < ApplicationController
     q = params.fetch(:q, {})    # Ransack query
     i = params.fetch(:i, false) # inline mode
     valid_search = q.present? && q[:keyword_cont].present? && q[:keyword_cont].length > 2
-    @q = current_store.products.categorized.available.ransack(q)
+    @q = current_store.products.live.ransack(q)
     @properties = current_store.properties.searchable
 
     @products = if valid_search
@@ -45,7 +45,7 @@ class StoreController < ApplicationController
 
   # GET /category/1
   def show_category
-    @products = @category.products.available.sorted(@category.product_scope)
+    @products = @category.products.live.sorted(@category.product_scope)
   end
 
   # GET /product/1
@@ -55,7 +55,7 @@ class StoreController < ApplicationController
   # POST /product/1/order
   def order_product
     @order = shopping_cart
-    @product = Product.available.friendly.find(params[:product_id])
+    @product = Product.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
     @order.insert!(@product, amount)
 
@@ -117,7 +117,7 @@ class StoreController < ApplicationController
 
     # Find product by friendly id in `product_id`, including history.
     def find_product
-      @product = Product.available.friendly.find(params[:product_id])
+      @product = Product.live.friendly.find(params[:product_id])
       if request.path != show_product_path(@category, @product)
         return redirect_to show_product_path(@category, @product), status: :moved_permanently
       end

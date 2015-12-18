@@ -76,7 +76,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /admin/categories/1/reorder_products
   def reorder_products
-    @products = @category.products.available.sorted(@category.product_scope)
+    @products = @category.products.live.sorted(@category.product_scope)
   end
 
   private

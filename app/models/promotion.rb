@@ -43,7 +43,7 @@ class Promotion < ActiveRecord::Base
   end
 
   def available_products
-    store.products.categorized.available - products
+    store.products.live - products
   end
 
   def available_categories

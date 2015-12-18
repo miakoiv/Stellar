@@ -99,7 +99,7 @@ class Admin::PromotionsController < ApplicationController
 
     category_ids.each do |category_id|
       category = Category.find(category_id)
-      category.products.available.each do |product|
+      category.products.live.each do |product|
         @promotion.promoted_items.find_or_create_by(
           product: product
         )

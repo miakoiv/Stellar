@@ -52,9 +52,7 @@ class Product < ActiveRecord::Base
   # Self-referential HABTM to link products together.
   has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
 
-  scope :available, -> { where '(deleted_at IS NULL OR deleted_at > :today) AND NOT (available_at IS NULL OR available_at > :today)', today: Date.current }
-  scope :categorized, -> { includes(:categories).where.not(categories: {id: nil}) }
-  scope :uncategorized, -> { includes(:categories).where(categories: {id: nil}) }
+  scope :live, -> { where(live: true) }
   scope :virtual, -> { where(virtual: true) }
 
   ransacker :keyword do |parent|
@@ -65,13 +63,11 @@ class Product < ActiveRecord::Base
     parent.table[:sales_price_cents]
   end
 
-  ransacker :available do |parent|
-    Arel.sql('((deleted_at IS NULL OR deleted_at > CURRENT_DATE()) AND NOT (available_at IS NULL OR available_at > CURRENT_DATE()))')
-  end
-
   #---
   validates :code, presence: true
   validates :title, presence: true
+
+  before_save :reset_live
 
   #---
   def property_value(property_id)
@@ -81,11 +77,6 @@ class Product < ActiveRecord::Base
   # If a single category is requested, give the first one.
   def category
     categories.first
-  end
-
-  def available?
-    (deleted_at.nil? || deleted_at.future?) &&
-    !(available_at.nil? || available_at.future?)
   end
 
   # Checks assigned customizations for an attribute that declares unit pricing,
@@ -124,7 +115,7 @@ class Product < ActiveRecord::Base
   end
 
   def linked_product_options
-    (store.products.categorized - [self]).map { |p| [p.to_s, p.id] }
+    (store.products.live - [self]).map { |p| [p.to_s, p.id] }
   end
 
   def tab_name
@@ -134,4 +125,15 @@ class Product < ActiveRecord::Base
   def to_s
     "#{title} #{subtitle}"
   end
+
+  private
+    # Resets the live status of the product, according to these criteria:
+    # - must have at least one category
+    # - set to be available at a certain date which is not in the future
+    # - if set to be deleted at a certain date which is in the future
+    def reset_live
+      self[:live] = categories.any? &&
+        (available_at.present? && !available_at.future?) &&
+        (deleted_at.nil? || deleted_at.future?)
+    end
 end

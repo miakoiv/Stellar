@@ -55,7 +55,7 @@ class Store < ActiveRecord::Base
   # Performs an inventory valuation of items in the shipping inventory.
   def inventory_valuation
     items = inventory_for(:shipping).inventory_items
-              .for_products(products.categorized)
+              .for_products(products.live)
     [items, items.map { |item| item.total_value }.sum]
   end
 
