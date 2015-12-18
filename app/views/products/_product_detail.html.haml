@@ -43,14 +43,14 @@
         = render product.iframes
 
     .images.technical
-      - technicals = product.images.technical
+      - technicals = product.images.technical.sorted
       %ul.nav.nav-pills{role: 'tablist'}
         - if technicals.count > 1
           = render partial: 'images/pill', collection: technicals, as: :image
       .tab-content.gallery
         = render partial: 'images/technical', collection: technicals, as: :image
     .images.presentational
-      - presentationals = product.images.presentational
+      - presentationals = product.images.presentational.sorted
       %ul.nav.nav-pills{role: 'tablist'}
         - if presentationals.count > 1
           = render partial: 'images/pill', collection: presentationals, as: :image
