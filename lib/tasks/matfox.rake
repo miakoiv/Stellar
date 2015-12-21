@@ -157,8 +157,8 @@ namespace :matfox do
     product.memo = data[:product][:memo]
     product.cost = data[:product][:cost]
     product.cost_modified_at = data[:product][:cost_modified_at]
+    puts product.to_json
     product.save!
-    puts "#{code} | #{product.title} #{product.subtitle}"
     product
   end
 
