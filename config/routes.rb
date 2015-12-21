@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  # Error conditions
+  match '(errors)/:status', to: 'errors#show',
+    constraints: {status: /\d{3}/},
+    defaults: {status: '500'},
+    via: :all
+
   devise_for :users
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -102,7 +108,6 @@ Rails.application.routes.draw do
     post '/images/delete' => 'images#delete', as: :delete_image
     post '/iframes/reorder' => 'iframes#reorder', as: :reorder_iframes
   end
-
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

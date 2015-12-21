@@ -164,6 +164,9 @@ en:
       cancel: 'Cancel'
   dropzone:
     default_message: Click to add images, or drop image files here.
+  errors:
+    header: Oops!
+    blurb: "We couldn't process your request for the following technical reason:"
   footer:
     heading: Spry 😃 Storefront
     body_html: Provided by Leasit Oy <i class="fa fa-copyright"></i> 2015

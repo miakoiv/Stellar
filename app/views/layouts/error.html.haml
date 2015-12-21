@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    = render partial: 'shared/metadata'
+  %body{class: current_store.theme}
+    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .container
+        .navbar-header
+          = link_to branding(current_store), root_path, class: 'navbar-brand'
+
+    #main.container
+      = yield
+
+    %footer.footer
+      = render partial: 'shared/footer'
+
+    .unobtrusive-flash-container

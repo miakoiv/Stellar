@@ -140,6 +140,9 @@ fi:
       cancel: 'Kumoa'
   dropzone:
     default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
+  errors:
+    header: Hopsis!
+    blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"
   footer:
     heading: Spry 😃 -verkkokauppa
     body_html: Tuottanut Leasit Oy <i class="fa fa-copyright"></i> 2015

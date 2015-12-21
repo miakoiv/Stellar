@@ -1,0 +1,7 @@
+.page-content
+  .jumbotron
+    %h1= t('errors.header')
+    %p
+      = t('errors.blurb')
+      %code= "#{@status_code} #{Rack::Utils::HTTP_STATUS_CODES[@status_code] || 'Internal Server Error'}"
+    %p= link_to t('store.go_shopping'), store_path, class: 'btn btn-primary btn-lg'
