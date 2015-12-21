@@ -28,7 +28,6 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
   has_and_belongs_to_many :categories
-  after_save { categories.each(&:touch) }
   has_many :inventory_items, -> (product) {
     joins(:product).where('products.store_id = inventory_items.store_id')
   }
@@ -37,14 +36,6 @@ class Product < ActiveRecord::Base
   has_many :components, through: :relationships
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-  after_touch do |product|
-    tags = product.product_properties
-        .joins(:property).merge(Property.searchable).map { |s|
-          s.value_with_units(false)
-        }
-    product.update search_tags: tags.join(' ')
-  end
-
   has_many :promoted_items
   has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy
@@ -68,6 +59,8 @@ class Product < ActiveRecord::Base
   validates :title, presence: true
 
   before_save :reset_live
+  before_save :reset_search_tags
+  after_save :touch_categories
 
   #---
   def property_value(property_id)
@@ -126,7 +119,19 @@ class Product < ActiveRecord::Base
     "#{title} #{subtitle}"
   end
 
-  private
+  protected
+    def reset_search_tags
+      tags = product_properties
+          .joins(:property).merge(Property.searchable)
+          .map { |s| s.value_with_units(false) }
+      self.search_tags = tags.join(' ')
+      true
+    end
+
+    def touch_categories
+      categories.each(&:touch)
+    end
+
     # Resets the live status of the product, according to these criteria:
     # - must have at least one category
     # - set to be available at a certain date which is not in the future
@@ -135,5 +140,6 @@ class Product < ActiveRecord::Base
       self[:live] = categories.any? &&
         (available_at.present? && !available_at.future?) &&
         (deleted_at.nil? || deleted_at.future?)
+      true
     end
 end
