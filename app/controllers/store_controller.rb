@@ -82,7 +82,8 @@ class StoreController < ApplicationController
     respond_to do |format|
       if @order.update(order_params)
         if @order.has_payment?
-          @payment = Payment.new @order,
+          gateway_class = "Payment::#{@order.payment_gateway}".constantize
+          @payment = gateway_class.send :new, @order,
             ok_url: confirm_order_url(@order),
             error_url: show_cart_url,
             cancel_url: show_cart_url

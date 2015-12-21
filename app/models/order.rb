@@ -164,6 +164,10 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
+  def payment_gateway
+    order_type.present? && order_type.payment_gateway
+  end
+
   def adjustment_total
     adjustments.map(&:amount).sum
   end
