@@ -23,10 +23,10 @@
         %td.hidden-print.text-right
           = link_to icon('eye', t('actions.view')), show_page_path(page),
               class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Page)
+          - if current_user.can_update?(page)
             = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Page)
+          - if current_user.can_delete?(page)
             = link_to icon('remove', t('actions.delete')), admin_page_path(page),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',
