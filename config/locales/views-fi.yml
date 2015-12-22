@@ -103,11 +103,6 @@ fi:
     show:
       included_albums: Näytä kuva-albumit
   store:
-    titles:
-      shop: Kauppa
-      store: Kauppa
-      catalog: Tuoteluettelo
-      back_issues: Vanhat lehdet
     all_products: Kaikki tuotteet
     linked_products: Tämä tuote tarvitsee näitä oheistuotteita
     add_to_cart: Lisää koriin
@@ -116,7 +111,7 @@ fi:
     go_shopping: Ostoksille!
     no_orders: Tilaushistoriasi on tyhjä.
     go_checkout: Jatka kassalle
-    show_cart:
+    cart:
       shopping_cart: Ostoskori
     cart_form:
       place_order: Tilaa

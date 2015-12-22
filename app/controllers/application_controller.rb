@@ -75,6 +75,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+    def set_pages
+      @pages = current_store.pages.top_level.sorted
+    end
+
     # Preload users with their roles to enable Rolify's caching of roles.
     def load_roles
       current_store.users.preload(:roles)

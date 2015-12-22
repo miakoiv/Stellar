@@ -127,11 +127,6 @@ en:
       amount: Amount
       add: Add to cart
   store:
-    titles:
-      shop: Shop
-      store: Store
-      catalog: Product catalog
-      back_issues: Back issues
     all_products: All products
     linked_products: This product requires these additional products
     add_to_cart: Add to cart
@@ -140,7 +135,7 @@ en:
     go_shopping: Go shopping.
     no_orders: Your order history is empty.
     go_checkout: Proceed to checkout
-    show_cart:
+    cart:
       shopping_cart: Shopping cart
     cart_form:
       place_order: Place order

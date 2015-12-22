@@ -5,6 +5,7 @@
       %span.caret
     %ul.dropdown-menu{role: 'menu'}
       %li.dropdown-header= current_user.name
+      = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
       %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
 - else
   %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path

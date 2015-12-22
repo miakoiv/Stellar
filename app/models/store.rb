@@ -6,7 +6,6 @@ class Store < ActiveRecord::Base
     :locale,  # see #locale_options for supported locales
     :theme,   # see app/stylesheets/spry_themes
     :masonry, # boolean, use masonry in storefront products view
-    :menu_title,  # one of the l10n keys under *.store.titles
     :card_image_type, # image type to use for cover images on cards etc.
     :list_image_type, # image type in list views
     :allow_shopping,  # boolean, master switch to allow/disallow shopping
@@ -105,12 +104,6 @@ class Store < ActiveRecord::Base
 
   def correspondents
     users.with_role(:correspondence)
-  end
-
-  # How to title the store in navigation menus.
-  # The given string undergoes I18n before output.
-  def menu_title
-    super || 'store'
   end
 
   def to_s

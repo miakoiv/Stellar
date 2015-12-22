@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user_or_skip!
   authority_actions confirm: 'read', duplicate: 'read'
 
+  before_action :set_pages
   before_action :set_order, only: [:show, :edit, :update, :destroy, :confirm, :duplicate]
 
   # GET /orders
@@ -74,7 +75,7 @@ class OrdersController < ApplicationController
       order.insert!(order_item.product, order_item.amount)
     end
 
-    redirect_to show_cart_path
+    redirect_to cart_path
   end
 
   private

@@ -1,29 +1,41 @@
 Rails.application.routes.draw do
 
-  root 'store#first_page'
+  root 'store#index'
 
-  devise_for :users
-
-  get '/store', to: 'store#index', as: :store
-  get '/search', to: 'store#search', as: :search
-
-  get '/category/:category_id', to: 'store#show_category', as: :show_category
-  get '/category/:category_id/product/:product_id', to: 'store#show_product', as: :show_product
-  post '/product/:product_id/order', to: 'store#order_product', as: :order_product
-  get '/page/index', to: 'store#first_page', as: :first_page
-  get '/page/:page_id', to: 'store#show_page', as: :show_page
-
-  get '/cart', to: 'store#show_cart', as: :show_cart
-  get '/checkout', to: 'store#checkout', as: :checkout
-  post '/confirm', to: 'store#confirm', as: :confirm
-
-  post '/correspondence/mail_form', to: 'correspondence#mail_form', as: :mail_form
+  # Redirect old product urls still found in the wild.
+  get '/category/:category_id/product/:product_id',
+    to: redirect('/product/:category_id/:product_id')
 
   resources :orders do
     get 'confirm', on: :member
     get 'duplicate', on: :member
     resources :order_items, shallow: true
   end
+
+  devise_for :users
+
+  # Catch bona fide storefront urls that are not accessible via slugs.
+  get '/store/search',   to: 'store#search',    as: :search
+  get '/store/checkout', to: 'store#checkout',  as: :checkout
+  post '/order/confirm', to: 'store#confirm',   as: :confirm
+  post '/correspondence/mail_form', to: 'correspondence#mail_form',
+    as: :mail_form
+
+  # Category and product views.
+  get '/category/:category_id', to: 'store#show_category',
+    as: :show_category
+  get '/product/:category_id/:product_id', to: 'store#show_product',
+    as: :show_product
+  post '/product/:product_id/order', to: 'store#order_product',
+    as: :order_product
+
+  # These routes can be reached via /:slug
+  get '/front', to: 'store#front', as: :front
+  get '/cart',  to: 'store#cart',  as: :cart
+
+  # If we get here, the url is seen as a slug of a page. If the page
+  # is internal, its slug will match one of the above routes.
+  get '/:slug', to: 'store#show_page', as: :show_page, slug: /[a-z0-9_-]+/
 
   namespace :admin do
     get '/dashboard', to: 'dashboard#index', as: :dashboard

@@ -2,7 +2,7 @@
   - if @order.empty?
     .panel-body
       %p.lead= t('store.empty_cart')
-      %p= link_to t('store.go_shopping'), store_path
+      %p= link_to t('store.go_shopping'), front_path
   - else
     .table-responsive
       %table.table.table-striped.table-hover.table-loose

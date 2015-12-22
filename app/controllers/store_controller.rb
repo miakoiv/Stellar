@@ -14,20 +14,35 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!
 
-  before_action :enable_navbar_search, only: [:index, :show_category, :show_product]
   before_action :set_pages
-  before_action :set_categories, only: [:index, :search, :show_category, :show_product]
+  before_action :set_categories, only: [:front, :search, :show_category, :show_product]
+  before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
-  before_action :find_page, only: [:show_page]
+  before_action :enable_navbar_search, only: [:front, :show_category, :show_product]
 
+  #
   # GET /
   def index
+    redirect_to show_page_path(@pages.top_level.sorted.first)
+  end
+
+  # GET /front
+  def front
     @category = current_store.categories.sorted.first.try(:having_products)
     @products = @category.present? ? @category.products.live.sorted(@category.product_scope) : []
   end
 
-  # GET /search
+  # GET /:slug
+  def show_page
+  end
+
+  # GET /cart
+  def cart
+    @order = shopping_cart
+  end
+
+  # GET /store/search
   def search
     q = params.fetch(:q, {})    # Ransack query
     i = params.fetch(:i, false) # inline mode
@@ -45,12 +60,12 @@ class StoreController < ApplicationController
     respond_to :js, :html
   end
 
-  # GET /category/1
+  # GET /category/:category_id
   def show_category
     @products = @category.products.live.sorted(@category.product_scope)
   end
 
-  # GET /product/1
+  # GET /product/:category_id/:product_id
   def show_product
   end
 
@@ -64,33 +79,15 @@ class StoreController < ApplicationController
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
-  # GET /first_page
-  def first_page
-    if @pages.any?
-      redirect_to show_page_path(@pages.top_level.sorted.first)
-    else
-      redirect_to store_path
-    end
-  end
-
-  # GET /pages/1
-  def show_page
-  end
-
-  # GET /cart
-  def show_cart
-    @order = shopping_cart
-  end
-
-  # GET /checkout
+  # GET /store/checkout
   def checkout
     @order = shopping_cart
     if @order.empty?
-      return redirect_to show_cart_path
+      return redirect_to cart_path
     end
   end
 
-  # POST /confirm
+  # POST /order/confirm
   def confirm
     @order = shopping_cart
 
@@ -100,8 +97,8 @@ class StoreController < ApplicationController
           gateway_class = "Payment::#{@order.payment_gateway}".constantize
           @payment = gateway_class.send :new, @order,
             ok_url: confirm_order_url(@order),
-            error_url: show_cart_url,
-            cancel_url: show_cart_url
+            error_url: cart_url,
+            cancel_url: cart_url
           format.html { render :confirm }
         else
           @order.complete!
@@ -115,10 +112,6 @@ class StoreController < ApplicationController
   end
 
   private
-    def set_pages
-      @pages = current_store.pages.top_level.sorted
-    end
-
     def set_categories
       @categories = current_store.categories.top_level.sorted
     end
@@ -143,9 +136,9 @@ class StoreController < ApplicationController
       end
     end
 
-    # Find page by friendly id in `page_id`, including history.
+    # Find page by friendly id in `slug`, including history.
     def find_page
-      @page = current_store.pages.friendly.find(params[:page_id])
+      @page = current_store.pages.friendly.find(params[:slug])
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
