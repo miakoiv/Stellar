@@ -9,31 +9,35 @@
     %thead
       %tr
         %th.col-min.hidden-print
-        %th.col-xs-2= col(Page, :parent_page_id)
-        %th.col-xs-4= col(Page, :title)
+        %th= col(Page, :slug)
+        %th= col(Page, :parent_page_id)
+        %th= col(Page, :title)
         %th= col(Page, :album_ids)
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
-      = content_tag_for :tr, @pages do |page|
-        %td.hidden-print= drag_handle
-        %td= page.parent_page
-        %td= page.title
-        %td= page.albums.to_sentence
-        %td.hidden-print.text-right
-          = link_to icon('eye', t('actions.view')), show_page_path(page),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(page)
-            = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
+      - @pages.each do |page|
+        = content_tag_for :tr, page, class: page.internal? ? 'active' : '' do
+          %td.hidden-print= drag_handle
+          %td
+            %code= "/#{page.slug}"
+          %td= page.parent_page
+          %td= page.internal? ? icon('warning', page.title, data: {toggle: 'tooltip'}, title: col(Page, :internal)) : page.title
+          %td= page.albums.to_sentence
+          %td.hidden-print.text-right
+            = link_to icon('eye', t('actions.view')), show_page_path(page),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(page)
-            = link_to icon('remove', t('actions.delete')), admin_page_path(page),
-                method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Page.model_name.human, name: page.title),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+            - if current_user.can_update?(page)
+              = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(page)
+              = link_to icon('remove', t('actions.delete')), admin_page_path(page),
+                  method: :delete, class: 'btn btn-sm btn-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: Page.model_name.human, name: page.title),
+                    'confirm-title' => t('actions.confirm.title'),
+                    'confirm-proceed' => t('actions.confirm.proceed'),
+                    'confirm-cancel' => t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

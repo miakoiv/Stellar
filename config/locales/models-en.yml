@@ -154,6 +154,7 @@ en:
       page:
         parent_page_id: Parent page
         title: Title
+        slug: Address
         content: Content
         internal: Page is for internal use
         wysiwyg: Use Froala Editor

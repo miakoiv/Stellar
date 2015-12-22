@@ -154,6 +154,7 @@ fi:
       page:
         parent_page_id: Pääsivu
         title: Otsake
+        slug: Osoite
         content: Sisältö
         internal: Sivu on sisäiseen käyttöön
         wysiwyg: Käytä Froala-editoria
