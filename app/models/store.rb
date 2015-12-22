@@ -14,6 +14,7 @@ class Store < ActiveRecord::Base
     :shipping_cost_product_id,  # product reference for shipping cost
     :free_shipping_at,  # order total beyond which shipping cost won't apply
     :tracking_code,   # Google Analytics code
+    :tawkto_site_id, # tawk.to site id for chat widget
     :froala_key,    # Froala license key
     :order_sequence # base value for order numbers if no numbering exists
   ], coder: JSON
