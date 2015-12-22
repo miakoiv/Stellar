@@ -1,35 +1,23 @@
 Rails.application.routes.draw do
 
-  # Error conditions
-  match '(errors)/:status', to: 'errors#show',
-    constraints: {status: /\d{3}/},
-    defaults: {status: '500'},
-    via: :all
+  root 'store#first_page'
 
   devise_for :users
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  get '/store', to: 'store#index', as: :store
+  get '/search', to: 'store#search', as: :search
 
-  # You can have the root of your site routed with "root"
-  root 'pages#index'
+  get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/category/:category_id/product/:product_id', to: 'store#show_product', as: :show_product
+  post '/product/:product_id/order', to: 'store#order_product', as: :order_product
+  get '/page/index', to: 'store#first_page', as: :first_page
+  get '/page/:page_id', to: 'store#show_page', as: :show_page
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get '/cart', to: 'store#show_cart', as: :show_cart
+  get '/checkout', to: 'store#checkout', as: :checkout
+  post '/confirm', to: 'store#confirm', as: :confirm
 
-  get 'page/:id' => 'pages#show', as: :show_page
-
-  get '/store' => 'store#index', as: :store
-  get '/search' => 'store#search', as: :search
-  get '/category/:category_id' => 'store#show_category', as: :show_category
-  get '/category/:category_id/product/:product_id' => 'store#show_product', as: :show_product
-  post '/product/:product_id/order' => 'store#order_product', as: :order_product
-
-  get '/cart' => 'store#show_cart', as: :show_cart
-  get '/checkout' => 'store#checkout', as: :checkout
-  post '/confirm' => 'store#confirm', as: :confirm
-
-  post '/correspondence/mail_form' => 'correspondence#mail_form', as: :mail_form
+  post '/correspondence/mail_form', to: 'correspondence#mail_form', as: :mail_form
 
   resources :orders do
     get 'confirm', on: :member
@@ -37,32 +25,8 @@ Rails.application.routes.draw do
     resources :order_items, shallow: true
   end
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
   namespace :admin do
-    get '/dashboard' => 'dashboard#index', as: :dashboard
+    get '/dashboard', to: 'dashboard#index', as: :dashboard
 
     resources :stores do
       resources :images, shallow: true
@@ -103,31 +67,15 @@ Rails.application.routes.draw do
     end
     resources :users
 
-    post '/custom_values/reorder' => 'custom_values#reorder', as: :reorder_custom_values
-    post '/images/reorder' => 'images#reorder', as: :reorder_images
-    post '/images/delete' => 'images#delete', as: :delete_image
-    post '/iframes/reorder' => 'iframes#reorder', as: :reorder_iframes
+    post '/custom_values/reorder', to: 'custom_values#reorder', as: :reorder_custom_values
+    post '/images/reorder', to: 'images#reorder', as: :reorder_images
+    post '/images/delete', to: 'images#delete', as: :delete_image
+    post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  # Error conditions
+  match '(errors)/:status', to: 'errors#show',
+    constraints: {status: /\d{3}/},
+    defaults: {status: '500'},
+    via: :all
 end

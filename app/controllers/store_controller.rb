@@ -15,9 +15,11 @@ class StoreController < ApplicationController
   before_action :authenticate_user_or_skip!
 
   before_action :enable_navbar_search, only: [:index, :show_category, :show_product]
+  before_action :set_pages
   before_action :set_categories, only: [:index, :search, :show_category, :show_product]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
+  before_action :find_page, only: [:show_page]
 
   # GET /
   def index
@@ -62,6 +64,19 @@ class StoreController < ApplicationController
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
+  # GET /first_page
+  def first_page
+    if @pages.any?
+      redirect_to show_page_path(@pages.top_level.sorted.first)
+    else
+      redirect_to store_path
+    end
+  end
+
+  # GET /pages/1
+  def show_page
+  end
+
   # GET /cart
   def show_cart
     @order = shopping_cart
@@ -100,6 +115,10 @@ class StoreController < ApplicationController
   end
 
   private
+    def set_pages
+      @pages = current_store.pages.top_level.sorted
+    end
+
     def set_categories
       @categories = current_store.categories.top_level.sorted
     end
@@ -121,6 +140,14 @@ class StoreController < ApplicationController
       @product = Product.live.friendly.find(params[:product_id])
       if request.path != show_product_path(@category, @product)
         return redirect_to show_product_path(@category, @product), status: :moved_permanently
+      end
+    end
+
+    # Find page by friendly id in `page_id`, including history.
+    def find_page
+      @page = current_store.pages.friendly.find(params[:page_id])
+      if request.path != show_page_path(@page)
+        return redirect_to show_page_path(@page), status: :moved_permanently
       end
     end
 
