@@ -12,7 +12,7 @@ class StoreController < ApplicationController
   end
 
   # Unauthenticated guests may visit the store.
-  before_action :authenticate_user_or_skip!
+  before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
   before_action :set_pages
   before_action :set_categories, only: [:front, :search, :show_category, :show_product]
