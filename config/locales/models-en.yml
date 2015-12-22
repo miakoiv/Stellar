@@ -155,6 +155,7 @@ en:
         parent_page_id: Parent page
         title: Title
         content: Content
+        internal: Page is for internal use
         wysiwyg: Use Froala Editor
         album_ids: Photo albums
       product:

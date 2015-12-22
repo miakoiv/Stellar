@@ -155,6 +155,7 @@ fi:
         parent_page_id: Pääsivu
         title: Otsake
         content: Sisältö
+        internal: Sivu on sisäiseen käyttöön
         wysiwyg: Käytä Froala-editoria
         album_ids: Kuva-albumit
       product:

@@ -2,20 +2,15 @@
 
 class PageAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
+  def self.default(able, user)
     user.has_cached_role?(:page_editor)
   end
 
-  def self.readable_by?(user)
-    user.has_cached_role?(:page_editor)
+  def updatable_by?(user)
+    user.has_cached_role?(resource.internal? ? :superuser : :page_editor)
   end
 
-  def self.updatable_by?(user)
-    user.has_cached_role?(:page_editor)
+  def deletable_by?(user)
+    user.has_cached_role?(resource.internal? ? :superuser : :page_editor)
   end
-
-  def self.deletable_by?(user)
-    user.has_cached_role?(:page_editor)
-  end
-
 end

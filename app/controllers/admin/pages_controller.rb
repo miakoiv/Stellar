@@ -8,7 +8,7 @@ class Admin::PagesController < ApplicationController
 
   layout 'admin'
 
-  authorize_actions_for Page
+  authorize_actions_for Page, except: [:edit, :update, :destroy]
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/pages
@@ -24,6 +24,7 @@ class Admin::PagesController < ApplicationController
 
   # GET /admin/pages/1/edit
   def edit
+    authorize_action_for @page
   end
 
   # POST /admin/pages
@@ -46,6 +47,8 @@ class Admin::PagesController < ApplicationController
   # PATCH/PUT /admin/pages/1
   # PATCH/PUT /admin/pages/1.json
   def update
+    authorize_action_for @page
+
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to edit_admin_page_path(@page),
@@ -61,7 +64,9 @@ class Admin::PagesController < ApplicationController
   # DELETE /admin/pages/1
   # DELETE /admin/pages/1.json
   def destroy
+    authorize_action_for @page
     @page.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_pages_path,
         notice: t('.notice', page: @page) }

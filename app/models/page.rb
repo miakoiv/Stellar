@@ -18,8 +18,9 @@ class Page < ActiveRecord::Base
   scope :top_level, -> { where(parent_page_id: nil) }
 
   #---
+  # Prevent FriendlyId from changing slugs on internal pages.
   def should_generate_new_friendly_id?
-    title_changed? || super
+    !internal? && title_changed? || super
   end
 
   def to_s
