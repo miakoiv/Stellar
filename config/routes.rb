@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root 'store#index'
 
+  # Redirect old /store route.
+  get '/store', to: redirect('/front')
+
   # Redirect old product urls still found in the wild.
   get '/category/:category_id/product/:product_id',
     to: redirect('/product/:category_id/:product_id')
