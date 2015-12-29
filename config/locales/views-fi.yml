@@ -113,8 +113,8 @@ fi:
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
-    cart_form:
-      place_order: Tilaa
+    checkout_form:
+      confirm: Vahvista tilaus
     checkout:
       checkout: Kassa
   actions:

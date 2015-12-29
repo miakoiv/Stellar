@@ -1,29 +1,31 @@
-#order-items-table.panel.panel-default
-  - if @order.empty?
-    .panel-body
-      %p.lead= t('store.empty_cart')
-      %p= link_to t('store.go_shopping'), front_path
-  - else
-    .table-responsive
-      %table.table.table-striped.table-hover.table-loose
-        %thead
-          %tr
-            %th.col-xs-2= col(OrderItem, :product_code)
-            %th= col(OrderItem, :product_title)
-            %th.col-xs-1.text-right= col(OrderItem, :amount)
-            %th.col-xs-1.text-right à
-            %th.col-xs-1.text-right= col(OrderItem, :subtotal)
-            %th.col-xs-1
-        %tfoot
-          %tr.info
-            %th.text-right{colspan: 4}= col(Order, :grand_total)
-            %th.text-right.currency
-              = humanized_money_with_symbol @order.grand_total
-            %th
-        %tbody
-          = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
-          - if order.adjustments.any?
-            = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
-    .panel-body
-      .pull-right
-        = link_to t('store.go_checkout'), checkout_path, class: 'btn btn-primary'
+#order-items-table
+  .panel.panel-default
+    - if @order.empty?
+      .panel-body
+        %p.lead= t('store.empty_cart')
+        %p= link_to t('store.go_shopping'), front_path
+    - else
+      .table-responsive
+        %table.table.table-striped.table-hover.table-loose
+          %thead
+            %tr
+              %th.col-xs-2= col(OrderItem, :product_code)
+              %th= col(OrderItem, :product_title)
+              %th.col-xs-1.text-right= col(OrderItem, :amount)
+              %th.col-xs-1.text-right à
+              %th.col-xs-1.text-right= col(OrderItem, :subtotal)
+              %th.col-xs-1
+          %tfoot
+            %tr.info
+              %th.text-right{colspan: 4}= col(Order, :grand_total)
+              %th.text-right.currency
+                = humanized_money_with_symbol @order.grand_total
+              %th
+          %tbody
+            = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
+            - if order.adjustments.any?
+              = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
+      .panel-body
+        .pull-right
+          - current_store.order_types.each do |order_type|
+            = link_to order_type.name, checkout_path(order_type_id: order_type), class: 'btn btn-primary'

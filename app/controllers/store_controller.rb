@@ -21,7 +21,6 @@ class StoreController < ApplicationController
   before_action :find_product, only: [:show_product]
   before_action :enable_navbar_search, only: [:front, :show_category, :show_product]
 
-  #
   # GET /
   def index
     redirect_to show_page_path(@pages.top_level.sorted.first)
@@ -79,11 +78,18 @@ class StoreController < ApplicationController
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
-  # GET /store/checkout
+  # GET /store/checkout/:order_type_id
   def checkout
     @order = shopping_cart
+    @order.order_type = current_store.order_types.find(params[:order_type_id])
+
     if @order.empty?
       return redirect_to cart_path
+    end
+
+    if @order.has_payment?
+      gateway_class = "Payment::#{@order.payment_gateway}".constantize
+      @payment_gateway = gateway_class.send :new, @order
     end
   end
 
@@ -93,18 +99,9 @@ class StoreController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
-        if @order.has_payment?
-          gateway_class = "Payment::#{@order.payment_gateway}".constantize
-          @payment = gateway_class.send :new, @order,
-            ok_url: confirm_order_url(@order),
-            error_url: cart_url,
-            cancel_url: cart_url
-          format.html { render :confirm }
-        else
-          @order.complete!
-          format.html { redirect_to confirm_order_path(@order),
-            notice: t('.notice') }
-        end
+        @order.complete!
+        format.html { redirect_to confirm_order_path(@order),
+          notice: t('.notice') }
       else
         format.html { render :checkout }
       end
