@@ -23,7 +23,5 @@
             = link_to icon('info', t('actions.show')), order_path(order),
                 class: 'btn btn-default btn-sm'
           - else
-            = link_to icon('edit', t('actions.edit')), edit_order_path(order),
-                class: 'btn btn-default btn-sm'
             = link_to icon('remove', t('actions.delete')), order_path(order),
                 method: :delete, class: 'btn btn-sm btn-danger'
