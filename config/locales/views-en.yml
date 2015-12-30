@@ -141,6 +141,8 @@ en:
       confirm: Confirm order
     checkout:
       checkout: Checkout
+      success_html: <h4>Order completed. Thank you for shopping with us!</h4><p>Please make sure to print a receipt for your purchase.</p>
+      receipt: Print a receipt
   actions:
     back: Back
     show: Show

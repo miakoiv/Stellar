@@ -74,5 +74,3 @@ fi:
   store:
     order_product:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
-    confirm:
-      notice: "Tilaus vastaanotettu. Kiitos käynnistä!"

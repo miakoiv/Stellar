@@ -74,5 +74,3 @@ en:
   store:
     order_product:
       notice: "%{amount} of ”%{product}” added to cart."
-    confirm:
-      notice: "Order completed. Thank you for shopping with us!"

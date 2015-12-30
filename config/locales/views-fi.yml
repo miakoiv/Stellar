@@ -117,6 +117,8 @@ fi:
       confirm: Vahvista tilaus
     checkout:
       checkout: Kassa
+      success_html: <h4>Tilaus vastaanotettu, kiitos käynnistä!</h4><p>Muistathan tulostaa kuitin ostoksestasi.</p>
+      receipt: Tulosta kuitti
   actions:
     back: Palaa
     show: Näytä
