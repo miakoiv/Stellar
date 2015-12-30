@@ -11,7 +11,7 @@
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.telephone_field :contact_phone
-        #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
+        - if @order.has_shipping?
           = f.date_field :shipping_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           = f.text_field :shipping_address, required: true
