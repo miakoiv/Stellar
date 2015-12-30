@@ -93,21 +93,6 @@ class StoreController < ApplicationController
     end
   end
 
-  # POST /order/confirm
-  def confirm
-    @order = shopping_cart
-
-    respond_to do |format|
-      if @order.update(order_params)
-        @order.complete!
-        format.html { redirect_to confirm_order_path(@order),
-          notice: t('.notice') }
-      else
-        format.html { render :checkout }
-      end
-    end
-  end
-
   private
     def set_categories
       @categories = current_store.categories.top_level.sorted
@@ -144,17 +129,5 @@ class StoreController < ApplicationController
     # Enable navbar search widget when applicable.
     def enable_navbar_search
       @navbar_search = true
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(
-        :order_type_id, :shipping_at,
-        :customer_name, :customer_email, :customer_phone,
-        :company_name, :contact_person, :has_billing_address,
-        :billing_address, :billing_postalcode, :billing_city,
-        :shipping_address, :shipping_postalcode, :shipping_city,
-        :notes
-      )
     end
 end

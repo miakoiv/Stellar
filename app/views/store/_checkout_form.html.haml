@@ -1,4 +1,4 @@
-= bootstrap_form_for @order, url: confirm_path, method: :post, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for @order, remote: true, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8', data: {type: 'json'}, html: {id: 'checkout-form'} do |f|
   = f.text_field :customer_name
   = f.text_field :customer_email
   = f.text_field :customer_phone
@@ -30,7 +30,8 @@
     = render @payment_gateway
 
   = f.form_group do
-    = f.primary t('.confirm')
+    = f.hidden_field :order_type_id
+    = f.primary t('.confirm'), id: 'confirm-button'
 
 :coffee
   $('#order_has_billing_address').on 'change', (e) ->

@@ -30,16 +30,18 @@ class OrdersController < ApplicationController
     authorize_action_for @order
   end
 
-  # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
+  # Updating orders only happens during the checkout process via Ajax,
+  # and responses are sent in JSON. A successful update denotes the order
+  # is complete and can be confirmed.
   def update
     authorize_action_for @order
 
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to edit_order_path(@order),
-          notice: t('.notice', order: @order) }
-        format.json { render :edit, status: :ok, location: edit_order_path(@order) }
+        @order.complete!
+        OrderMailer.order_confirmation(@order).deliver_later
+        format.json { render json: @order }
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -58,14 +60,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/1/confirm
-  def confirm
-    authorize_action_for @order
-
-    OrderMailer.order_confirmation(@order).deliver_later
-    redirect_to orders_path
-  end
-
   # GET /orders/1/duplicate
   def duplicate
     authorize_action_for @order
@@ -81,7 +75,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = current_user.orders.complete.find(params[:id])
+      @order = current_user.orders.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -89,8 +83,9 @@ class OrdersController < ApplicationController
       params.require(:order).permit(
         :order_type_id, :completed_at, :shipping_at,
         :customer_name, :customer_email, :customer_phone,
-        :company_name, :contact_person, :billing_address, :billing_postalcode,
-        :billing_city, :shipping_address, :shipping_postalcode, :shipping_city,
+        :company_name, :contact_person, :has_billing_address,
+        :billing_address, :billing_postalcode, :billing_city,
+        :shipping_address, :shipping_postalcode, :shipping_city,
         :notes
       )
     end

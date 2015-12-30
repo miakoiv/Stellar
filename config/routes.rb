@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     to: redirect('/product/:category_id/:product_id')
 
   resources :orders do
-    get 'confirm', on: :member
     get 'duplicate', on: :member
     resources :order_items, shallow: true
   end
