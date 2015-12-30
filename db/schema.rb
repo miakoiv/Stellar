@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222085056) do
+ActiveRecord::Schema.define(version: 20151230140455) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -417,6 +417,7 @@ ActiveRecord::Schema.define(version: 20151222085056) do
     t.boolean  "guest",                           default: false, null: false
     t.string   "name",                limit: 255,                 null: false
     t.string   "email",               limit: 255, default: "",    null: false
+    t.string   "phone",               limit: 255
     t.string   "encrypted_password",  limit: 255, default: "",    null: false
     t.datetime "remember_created_at"
     t.integer  "sign_in_count",       limit: 4,   default: 0,     null: false

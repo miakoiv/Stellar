@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :email, presence: true
+  validates :phone, presence: true
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
 
@@ -50,7 +51,8 @@ class User < ActiveRecord::Base
         store: store,
         order_type: available_order_types.find_by(has_shipping: true),
         customer_name: guest? ? nil : name,
-        customer_email: guest? ? nil : email
+        customer_email: guest? ? nil : email,
+        customer_phone: guest? ? nil : phone
       )
   end
 

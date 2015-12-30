@@ -225,6 +225,7 @@ en:
         role_ids: Roles
         current_password: Current password
         email: E-mail address
+        phone: Phone number
         password: Password
         password_confirmation: Confirm password
         remember_me: Remember me
