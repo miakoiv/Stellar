@@ -126,6 +126,7 @@ en:
         customer_phone: Phone number
         company_name: Company
         contact_person: Contact person
+        contact_phone: Phone number
         billing_address: Billing address
         billing_postalcode: Postal code
         billing_city: City

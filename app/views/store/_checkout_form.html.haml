@@ -5,6 +5,7 @@
   - if current_store.b2b_sales?
     = f.text_field :company_name
     = f.text_field :contact_person
+    = f.telephone_field :contact_phone
   - if @order.has_shipping?
     - if current_store.b2b_sales?
       = f.date_field :shipping_at,

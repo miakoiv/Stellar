@@ -30,9 +30,13 @@
                         %td= Order.human_attribute_name(:company_name)
                         %td
                           %b= @order.company_name
+                      %tr
                         %td= Order.human_attribute_name(:contact_person)
                         %td
                           %b= @order.contact_person
+                        %td= Order.human_attribute_name(:contact_phone)
+                        %td
+                          %b= @order.contact_phone
                     - if @store.b2b_sales? && @order.has_shipping?
                       %tr
                         %td
