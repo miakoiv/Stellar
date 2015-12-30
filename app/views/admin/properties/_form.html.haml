@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :name
+        = f.text_field :name, required: true
         = f.form_group do
           = f.check_box :searchable
         = f.select :value_type,

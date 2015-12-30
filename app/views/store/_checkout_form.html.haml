@@ -1,7 +1,7 @@
 = bootstrap_form_for @order, remote: true, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8', data: {type: 'json'}, html: {id: 'checkout-form'} do |f|
-  = f.text_field :customer_name
-  = f.text_field :customer_email
-  = f.text_field :customer_phone
+  = f.text_field :customer_name, required: true
+  = f.text_field :customer_email, required: true
+  = f.telephone_field :customer_phone, required: true
   - if current_store.b2b_sales?
     = f.text_field :company_name
     = f.text_field :contact_person
@@ -9,11 +9,11 @@
     - if current_store.b2b_sales?
       = f.date_field :shipping_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-    = f.text_field :shipping_address,
+    = f.text_field :shipping_address, required: true,
         placeholder: col(Order, :shipping_address)
-    = f.text_field :shipping_postalcode, skip_label: true,
+    = f.text_field :shipping_postalcode, required: true, skip_label: true,
         placeholder: col(Order, :shipping_postalcode)
-    = f.text_field :shipping_city, skip_label: true,
+    = f.text_field :shipping_city, required: true, skip_label: true,
         placeholder: col(Order, :shipping_city)
     = f.form_group do
       = f.check_box :has_billing_address
@@ -36,6 +36,8 @@
 :coffee
   $('#order_has_billing_address').on 'change', (e) ->
     if $(e.target).is ':checked'
+      $('.form-control', '.billing_address').attr 'required', true
       $('.billing_address').collapse 'show'
     else
+      $('.form-control', '.billing_address').attr 'required', false
       $('.billing_address').collapse 'hide'

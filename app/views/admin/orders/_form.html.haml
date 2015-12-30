@@ -5,20 +5,20 @@
       %fieldset{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset{disabled: locked || @order.approved?}
-        = f.text_field :customer_name
-        = f.text_field :customer_email
-        = f.text_field :customer_phone
+        = f.text_field :customer_name, required: true
+        = f.text_field :customer_email, required: true
+        = f.telephone_field :customer_phone, required: true
         = f.text_field :company_name
         = f.text_field :contact_person
         #shipping-info.collapse{class: @order.has_shipping? ? 'in' : ''}
           = f.date_field :shipping_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          = f.text_field :shipping_address
-          = f.text_field :shipping_postalcode, skip_label: true
-          = f.text_field :shipping_city, skip_label: true
-          = f.text_field :billing_address
-          = f.text_field :billing_postalcode, skip_label: true
-          = f.text_field :billing_city, skip_label: true
+          = f.text_field :shipping_address, required: true
+          = f.text_field :shipping_postalcode, required: true, skip_label: true
+          = f.text_field :shipping_city, required: true, skip_label: true
+          = f.text_field :billing_address, required: true
+          = f.text_field :billing_postalcode, required: true, skip_label: true
+          = f.text_field :billing_city, required: true, skip_label: true
         = f.text_area :notes, rows: 4
       %fieldset{disabled: locked}
         = f.form_group :approval do

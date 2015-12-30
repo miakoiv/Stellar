@@ -7,9 +7,9 @@
             {include_blank: true}, {multiple: true, class: 'selectize'}
         = f.form_group do
           = f.check_box :virtual
-        = f.text_field :code
+        = f.text_field :code, required: true
         = f.text_field :customer_code
-        = f.text_field :title
+        = f.text_field :title, required: true
         = f.text_field :subtitle
         = f.text_area :description, class: 'wysiwyg'
         = f.text_field :cost, append: '€'

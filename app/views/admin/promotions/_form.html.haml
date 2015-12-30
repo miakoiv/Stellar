@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :name
+        = f.text_field :name, required: true
         = f.select :promotion_handler_type,
             Promotion.handler_types.map { |h| [h.constantize.model_name.human, h] },
             {}, {class: 'selectize', disabled: !@promotion.new_record?}

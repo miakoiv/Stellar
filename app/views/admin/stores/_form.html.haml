@@ -10,9 +10,9 @@
 
   %fieldset.tab-content{disabled: locked}
     #tab-store.tab-pane.active{role: 'tabpanel'}
-      = f.text_field :name
-      = f.text_field :host, prepend: 'http://'
-      = f.text_field :erp_number
+      = f.text_field :name, required: true
+      = f.text_field :host, required: true, prepend: 'http://'
+      = f.number_field :erp_number
       = f.text_field :slug, readonly: true, help: t('.slug_help_html')
 
     #tab-settings.tab-pane{role: 'tabpanel'}

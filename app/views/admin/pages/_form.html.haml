@@ -4,14 +4,14 @@
     .panel-body
       = f.select :parent_page_id, current_store.page_options,
           {include_blank: true}, {class: 'selectize'}
-      = f.text_field :title
+      = f.text_field :title, required: true
 
       - if @page.new_record? && current_user.has_cached_role?(:superuser)
         = f.form_group do
           = f.check_box :internal
 
       - if @page.internal?
-        = f.text_field :slug
+        = f.text_field :slug, required: true
       - else
         = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
         = f.form_group do

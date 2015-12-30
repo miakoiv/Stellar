@@ -2,7 +2,7 @@
 
   = form_tag search_path, method: :get, id: 'navbar-search', class: 'navbar-form navbar-right', data: {push: 'partial', target: '.products'}, role: 'search' do
     .form-group.has-feedback
-      = search_field_tag 'q[keyword_cont]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword'), required: true
+      = search_field_tag 'q[keyword_cont]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
       %span.form-control-feedback= icon('search')
       %ul#search-dropdown.dropdown-menu.media-list
 

@@ -3,11 +3,11 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :name
-        = f.text_field :email
+        = f.text_field :name, required: true
+        = f.text_field :email, required: true
         - if @user.new_record?
-          = f.password_field :password
-          = f.password_field :password_confirmation
+          = f.password_field :password, required: true
+          = f.password_field :password_confirmation, required: true
       %fieldset{disabled: locked || !current_user.has_cached_role?(:user_manager)}
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}

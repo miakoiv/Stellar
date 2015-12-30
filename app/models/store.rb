@@ -44,6 +44,7 @@ class Store < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates :host, presence: true
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
