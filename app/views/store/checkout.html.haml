@@ -1,10 +1,17 @@
 .page-header
   = link_to cart_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  %h1
+  %h1.hidden-print
     = icon('shopping-cart', t('.checkout'))
-    %span.small
-      = @order.order_type
+    %span.small= @order.order_type
+  %h1.visible-print
+    = current_store
+    %span.small= @order.order_type
+
+#message-success.collapse.hidden-print
+  .alert.alert-success
+    %p.pull-right= link_to icon('print', t('.receipt')), '#print', class: 'btn btn-default'
+    = t('.success_html')
 
 .row
   .col-lg-6

@@ -5,7 +5,7 @@
   - if current_store.b2b_sales?
     = f.text_field :company_name
     = f.text_field :contact_person
-  .shipping.collapse{class: @order.has_shipping? ? 'in' : ''}
+  - if @order.has_shipping?
     - if current_store.b2b_sales?
       = f.date_field :shipping_at,
           data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
@@ -41,3 +41,7 @@
     else
       $('.form-control', '.billing_address').attr 'required', false
       $('.billing_address').collapse 'hide'
+
+  $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
+    $('#confirm-button').hide()
+    $('#message-success').collapse 'show'
