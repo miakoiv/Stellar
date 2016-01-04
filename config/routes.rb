@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   root 'store#index'
 
+  # Catch error conditions early.
+  match '(errors)/:status', to: 'errors#show',
+    constraints: {status: /\d{3}/},
+    defaults: {status: '500'},
+    via: :all
+
   # Redirect old /store route.
   get '/store', to: redirect('/front')
 
@@ -86,10 +92,4 @@ Rails.application.routes.draw do
     post '/images/delete', to: 'images#delete', as: :delete_image
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
-
-  # Error conditions
-  match '(errors)/:status', to: 'errors#show',
-    constraints: {status: /\d{3}/},
-    defaults: {status: '500'},
-    via: :all
 end
