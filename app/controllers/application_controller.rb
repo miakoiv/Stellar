@@ -12,8 +12,10 @@ class ApplicationController < ActionController::Base
   after_filter :prepare_unobtrusive_flash
 
   #---
-  # Authenticate user, but skip authentication
-  # if the current store admits guests.
+  # Authenticate user, but skip authentication if guests are admitted.
+  # This method is the first before_action callback in controllers that
+  # optionally serve guests, and will fail early if the current store
+  # can't be found.
   def authenticate_user_or_skip!
     return true if current_store.admit_guests?
     authenticate_user!
@@ -75,13 +77,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    def set_pages
-      @pages = current_store.pages.top_level.sorted
-    end
-
     # Preload users with their roles to enable Rolify's caching of roles.
     def load_roles
       current_store.users.preload(:roles)
+    end
+
+    def set_pages
+      @pages = current_store.pages.top_level.sorted
     end
 
     # Locale is set by a before_filter. Using params is a manual override
@@ -91,9 +93,9 @@ class ApplicationController < ActionController::Base
     end
 
     # When no user is signed in, or a guest user is created, the current store
-    # is looked up by the requested hostname.
+    # is looked up by the requested hostname, and must exist.
     def current_store_by_request
-      Store.find_by(host: request.host)
+      Store.find_by!(host: request.host)
     end
 
     def create_guest_user
