@@ -19,9 +19,6 @@
         %td= order.approved? ? l(order.approved_at.to_date) : col(Order, :not_approved)
         %td.text-right.currency= humanized_money_with_symbol order.grand_total
         %td.hidden-print.text-right
-          - if order.approved?
-            = link_to icon('info', t('actions.show')), order_path(order),
-                class: 'btn btn-default btn-sm'
-          - else
-            = link_to icon('remove', t('actions.delete')), order_path(order),
-                method: :delete, class: 'btn btn-sm btn-danger'
+          = link_to icon('info', t('actions.show')), order_path(order), class: 'btn btn-default btn-sm'
+          - unless order.approved?
+            = link_to icon('remove', t('actions.delete')), order_path(order), method: :delete, class: 'btn btn-sm btn-danger'
