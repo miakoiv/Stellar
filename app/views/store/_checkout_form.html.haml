@@ -1,48 +1,55 @@
-= bootstrap_form_for @order, remote: true, layout: :horizontal, label_col: 'col-sm-4', control_col: 'col-sm-8', data: {type: 'json'}, html: {id: 'checkout-form'} do |f|
-  = f.text_field :customer_name, required: true
-  = f.text_field :customer_email, required: true
-  = f.telephone_field :customer_phone, required: true
+= bootstrap_form_for @order, remote: true, layout: :vertical, data: {type: 'json'}, html: {id: 'checkout-form'} do |f|
+  = f.hidden_field :order_type_id
+  .row
+    .col-sm-4
+      = f.text_field :customer_name, required: true
+    .col-sm-4
+      = f.text_field :customer_email, required: true
+    .col-sm-4
+      = f.telephone_field :customer_phone, required: true
   - if current_store.b2b_sales?
-    = f.text_field :company_name
-    = f.text_field :contact_person
-    = f.telephone_field :contact_phone
+    .row
+      .col-sm-4
+        = f.text_field :company_name
+      .col-sm-4
+        = f.text_field :contact_person
+      .col-sm-4
+        = f.telephone_field :contact_phone
   - if @order.has_shipping?
-    - if current_store.b2b_sales?
-      = f.date_field :shipping_at,
-          data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-    = f.text_field :shipping_address, required: true,
-        placeholder: col(Order, :shipping_address)
-    = f.text_field :shipping_postalcode, required: true, skip_label: true,
-        placeholder: col(Order, :shipping_postalcode)
-    = f.text_field :shipping_city, required: true, skip_label: true,
-        placeholder: col(Order, :shipping_city)
+    .row
+      .col-sm-12
+        = f.text_field :shipping_address, required: true
+      .col-sm-4
+        = f.text_field :shipping_postalcode, required: true
+      .col-sm-4
+        = f.text_field :shipping_city, required: true
+      - if current_store.b2b_sales?
+        .col-sm-4
+          = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
     = f.form_group do
       = f.check_box :has_billing_address
-    .billing_address.collapse{class: @order.has_billing_address? ? 'in' : ''}
-      = f.text_field :billing_address,
-          placeholder: col(Order, :billing_address)
-      = f.text_field :billing_postalcode, skip_label: true,
-          placeholder: col(Order, :billing_postalcode)
-      = f.text_field :billing_city, skip_label: true,
-          placeholder: col(Order, :billing_city)
+    #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}
+      .row
+        .col-sm-12
+          = f.text_field :billing_address
+        .col-sm-4
+          = f.text_field :billing_postalcode
+        .col-sm-4
+          = f.text_field :billing_city
   = f.text_area :notes, rows: 4
 
-  - if @payment_gateway.present?
-    = render @payment_gateway
-
-  = f.form_group do
-    = f.hidden_field :order_type_id
-    = f.primary t('.confirm'), id: 'confirm-button'
+  #continue-button.collapse{class: @order.paid? ? '' : 'in'}
+    = f.form_group do
+      = f.submit t('.continue'), class: 'btn btn-lg btn-block btn-primary'
+  #confirm-button.collapse{class: @order.paid? ? 'in' : ''}
+    = f.form_group do
+      = f.submit t('.confirm'), class: 'btn btn-lg btn-block btn-success'
 
 :coffee
   $('#order_has_billing_address').on 'change', (e) ->
     if $(e.target).is ':checked'
-      $('.form-control', '.billing_address').attr 'required', true
-      $('.billing_address').collapse 'show'
+      $('.form-control', '#billing-address').attr 'required', true
+      $('#billing-address').collapse 'show'
     else
-      $('.form-control', '.billing_address').attr 'required', false
-      $('.billing_address').collapse 'hide'
-
-  $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
-    $('#confirm-button').hide()
-    $('#message-success').collapse 'show'
+      $('.form-control', '#billing-address').attr 'required', false
+      $('#billing-address').collapse 'hide'

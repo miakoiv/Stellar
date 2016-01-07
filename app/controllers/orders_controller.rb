@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions confirm: 'read', duplicate: 'read'
+  authority_actions duplicate: 'read'
 
   before_action :set_pages
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :confirm, :duplicate]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
 
   # GET /orders
   def index
@@ -30,20 +30,18 @@ class OrdersController < ApplicationController
     authorize_action_for @order
   end
 
-  # PATCH/PUT /orders/1.json
-  # Updating orders only happens during the checkout process via Ajax,
-  # and responses are sent in JSON. A successful update denotes the order
-  # is complete and can be confirmed.
+  # PATCH/PUT /orders/1
   def update
     authorize_action_for @order
 
     respond_to do |format|
       if @order.update(order_params)
-        @order.complete!
-        OrderMailer.order_confirmation(@order).deliver_later
+        if @order.paid?
+          @order.complete!
+          OrderMailer.order_confirmation(@order).deliver_later
+        end
         format.json { render json: @order }
       else
-        format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

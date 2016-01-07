@@ -14,11 +14,24 @@
     = t('.success_html')
 
 .row
-  .col-lg-6
-    .panel.panel-default
-      = render partial: 'order_items/table', object: @order, as: :order
-
-  .col-lg-6
+  .col-lg-7
     .panel.panel-default
       .panel-body
         = render partial: 'checkout_form'
+        #payment-widget.collapse
+          - if @payment_gateway.present?
+            = render @payment_gateway
+
+  .col-lg-5
+    .panel.panel-default
+      = render partial: 'order_items/table', object: @order, as: :order
+
+:coffee
+  $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
+    if data.paid
+      $('#payment-widget').collapse 'hide'
+      $('#confirm-button').collapse 'hide'
+      $('#message-success').collapse 'show'
+    else
+      $('#continue-button').collapse 'hide'
+      $('#payment-widget').collapse 'show'

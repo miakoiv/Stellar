@@ -4,19 +4,22 @@
 # communicate with maksuturva.fi brokering service.
 #
 module PaymentGateway
+
   class Maksuturva
     include ActiveModel::Model
 
     PMT_KEY = '11223344556677889900'
 
-    attr_accessor :params
+    attr_accessor :order
 
-    def initialize(order, options = {})
-      options.merge!({
+    def initialize(attributes = {})
+      super
+      raise ArgumentError if order.nil?
+      @options = {
         ok_url: "/orders/#{order.id}/ok",
         error_url: "/cart",
         cancel_url: "/cart"
-      })
+      }
       @params = [
         [:pmt_action, 'NEW_PAYMENT_EXTENDED'],
         [:pmt_version, '0004'],
@@ -26,10 +29,10 @@ module PaymentGateway
         [:pmt_duedate, (Date.current + 2.weeks).to_s(:fi)],
         [:pmt_amount, ('%.2f' % order.grand_total).tr('.', ',')],
         [:pmt_currency, 'EUR'],
-        [:pmt_okreturn, options[:ok_url]],
-        [:pmt_errorreturn, options[:error_url]],
-        [:pmt_cancelreturn, options[:cancel_url]],
-        [:pmt_delayedpayreturn, options[:cancel_url]],
+        [:pmt_okreturn, @options[:ok_url]],
+        [:pmt_errorreturn, @options[:error_url]],
+        [:pmt_cancelreturn, @options[:cancel_url]],
+        [:pmt_delayedpayreturn, @options[:cancel_url]],
         [:pmt_escrow, 'N'],
         [:pmt_escrowchangeallowed, 'N'],
         [:pmt_buyername, order.user_name],

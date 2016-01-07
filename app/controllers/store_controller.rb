@@ -88,8 +88,7 @@ class StoreController < ApplicationController
     end
 
     if @order.has_payment?
-      gateway_class = "PaymentGateway::#{@order.payment_gateway}".constantize
-      @payment_gateway = gateway_class.send :new, @order
+      @payment_gateway = @order.payment_gateway.new(order: @order)
     end
   end
 

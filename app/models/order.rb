@@ -156,6 +156,18 @@ class Order < ActiveRecord::Base
     order_items.real.empty?
   end
 
+  # An order is considered paid if its order type requires no payment,
+  # or its balance is brought to zero.
+  def paid?
+    !has_payment? || balance == 0
+  end
+  alias_method :paid, :paid?
+
+  def complete?
+    completed_at.present?
+  end
+  alias_method :complete, :complete?
+
   def has_shipping?
     order_type.present? && order_type.has_shipping?
   end
@@ -165,11 +177,16 @@ class Order < ActiveRecord::Base
   end
 
   def payment_gateway
-    order_type.present? && order_type.payment_gateway
+    "PaymentGateway::#{order_type.payment_gateway}".constantize
   end
 
   def adjustment_total
     adjustments.map(&:amount).sum
+  end
+
+  # FIXME: implement payments to calculate order balance.
+  def balance
+    Money.new(-100)
   end
 
   # Total sum without virtual items (like shipping and handling).
@@ -192,6 +209,10 @@ class Order < ActiveRecord::Base
 
   def to_s
     number
+  end
+
+  def as_json(options = {})
+    super(methods: [:paid, :complete])
   end
 
   private

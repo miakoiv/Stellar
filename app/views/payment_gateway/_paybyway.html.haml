@@ -1,4 +1,18 @@
-%h4
-  Paybyway
-  = icon('cc-visa', class: 'fa-lg')
-  = icon('cc-mastercard', class: 'fa-lg')
+.panel.panel-primary
+  .panel-heading
+    %h4.panel-title
+      = @payment_gateway.order.order_type
+      .pull-right
+        = icon('cc-visa', class: 'fa-lg')
+        = icon('cc-mastercard', class: 'fa-lg')
+  .panel-body
+    = bootstrap_form_tag remote: true do |f|
+      .row
+        .col-sm-6
+          = f.text_field :number, value: '4012888888881881', label: t('store.checkout.card_number')
+        .col-sm-3
+          = f.text_field :expiry, value: '12/17', label: t('store.checkout.card_expiry')
+        .col-sm-3
+          = f.text_field :cvc, value: '777', label: t('store.checkout.card_cvc')
+      = f.button t('store.checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
+      %p.help-block.collapse= t('store.checkout.charging')
