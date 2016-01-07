@@ -114,11 +114,17 @@ fi:
     cart:
       shopping_cart: Ostoskori
     checkout_form:
+      continue: Siirry maksamaan
       confirm: Vahvista tilaus
     checkout:
       checkout: Kassa
       success_html: <h4>Tilaus vastaanotettu, kiitos käynnistä!</h4><p>Muistathan tulostaa kuitin ostoksestasi.</p>
       receipt: Tulosta kuitti
+      card_number: Kortin numero
+      card_expiry: Voimassa (kk/vv)
+      card_cvc: Kortin tarkiste (CVC)
+      charge: Maksa nyt
+      charging: Odotetaan maksutapahtuman valmistumista…
   actions:
     back: Palaa
     show: Näytä

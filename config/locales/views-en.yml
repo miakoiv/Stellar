@@ -138,11 +138,17 @@ en:
     cart:
       shopping_cart: Shopping cart
     checkout_form:
+      continue: Proceed to payment
       confirm: Confirm order
     checkout:
       checkout: Checkout
       success_html: <h4>Order completed. Thank you for shopping with us!</h4><p>Please make sure to print a receipt for your purchase.</p>
       receipt: Print a receipt
+      card_number: Card number
+      card_expiry: Expiry (mm/yy)
+      card_cvc: Security code (CVC)
+      charge: Pay now
+      charging: Processing payment…
   actions:
     back: Back
     show: Show
