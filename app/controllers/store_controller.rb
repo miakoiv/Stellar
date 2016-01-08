@@ -92,6 +92,20 @@ class StoreController < ApplicationController
     end
   end
 
+  # POST /store/pay/:method.json
+  def pay
+    method = params[:method]
+    @order = shopping_cart
+
+    unless @order.has_payment? && method.present?
+      return redirect_to cart_path
+    end
+
+    @payment_gateway = @order.payment_gateway.new(order: @order)
+    result = @payment_gateway.send("charge_#{method}")
+    render json: result
+  end
+
   private
     def set_categories
       @categories = current_store.categories.top_level.sorted
