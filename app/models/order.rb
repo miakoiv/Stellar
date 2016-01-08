@@ -168,6 +168,12 @@ class Order < ActiveRecord::Base
   end
   alias_method :complete, :complete?
 
+  def billing_address_components
+    has_billing_address? ?
+      [billing_address, billing_postalcode, billing_city] :
+      [shipping_address, shipping_postalcode, shipping_city]
+  end
+
   def has_shipping?
     order_type.present? && order_type.has_shipping?
   end
