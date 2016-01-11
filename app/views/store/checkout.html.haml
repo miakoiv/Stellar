@@ -8,6 +8,8 @@
     = current_store
     %span.small= @order.order_type
 
+#message-failure.collapse.hidden-print
+  .alert.alert-danger
 #message-success.collapse.hidden-print
   .alert.alert-success
     %p.pull-right= link_to icon('print', t('.receipt')), '#print', class: 'btn btn-default'
@@ -27,6 +29,9 @@
       = render partial: 'order_items/table', object: @order, as: :order
 
 :coffee
+  # When the checkout form is submitted, collapse and reveal relevant
+  # elements. Note that a payment widget may call this after verifying
+  # a payment.
   $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
     if data.paid
       $('#payment-widget').collapse 'hide'

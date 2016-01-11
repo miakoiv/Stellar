@@ -11,25 +11,53 @@
         .col-sm-6
           = f.text_field :number, value: '4012888888881881', label: t('store.checkout.card_number')
         .col-sm-3
-          = f.text_field :expiry, value: '12/17', label: t('store.checkout.card_expiry')
+          = f.text_field :expiry, value: '12/2017', label: t('store.checkout.card_expiry')
         .col-sm-3
           = f.text_field :cvc, value: '777', label: t('store.checkout.card_cvc')
-        .col-xs-12
+        .col-xs-12.pay-now-button.collapse.in
           = f.button t('store.checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
       .row
         .col-xs-12.working.collapse
-          %p
-            .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
-            = t('store.checkout.charging')
+          .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
+          %p= t('store.checkout.charging')
 
 :coffee
+  $charge_url = '#{@payment_gateway.charge_url}'
+  $verify_path = '#{verify_path}'
+  $failure = (message) ->
+    $('.working').collapse 'hide'
+    $('#message-failure').find('.alert').text(message)
+    $('#message-failure').collapse 'show'
+
   $('#paybyway-creditcard-form').on 'submit', (e) ->
     e.preventDefault()
     $(this).find('button').attr 'disabled', true
+    $('.pay-now-button').collapse 'hide'
     $('.working').collapse 'show'
-    $.get($(this).attr 'action').done (data) ->
-      token = data.token
-      amount = data.amount
-      number = $('#number').val()
-      [exp_month, exp_year] = $('#expiry').val().split '/'
-      cvc = $('#cvc').val()
+    request = $.get $(this).attr 'action'
+    request.done (data) ->
+      try
+        token = data.token
+        throw 'token request failure' unless token?
+        amount = $('#grand-total').data('amount')
+        number = $('#number').val()
+        [exp_month, exp_year] = $('#expiry').val().split '/'
+        cvc = $('#cvc').val()
+        request = $.post $charge_url,
+          token: token
+          card: number
+          amount: amount
+          currency: 'EUR'
+          exp_month: exp_month
+          exp_year: exp_year
+          security_code: cvc
+        request.done (data) ->
+          verification = $.post $verify_path, token: token
+          verification.done ->
+            $('#checkout-form').trigger 'submit.rails'
+          verification.fail ->
+            $failure "#{t('store.checkout.errors.charge')}"
+        request.error (data) ->
+          $failure "#{t('store.checkout.errors.charge')}"
+      catch error
+        $failure "#{t('store.checkout.errors.token_request')}"

@@ -149,6 +149,9 @@ en:
       card_cvc: Security code (CVC)
       charge: Pay now
       charging: Processing payment…
+      errors:
+        token_request: There was a problem communicating with the payment provider. Try again later.
+        charge: There was a problem processing your payment, check your card details.
   actions:
     back: Back
     show: Show

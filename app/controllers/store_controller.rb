@@ -102,8 +102,22 @@ class StoreController < ApplicationController
     end
 
     @payment_gateway = @order.payment_gateway.new(order: @order)
-    result = @payment_gateway.send("charge_#{method}")
-    render json: result
+    response = @payment_gateway.send("charge_#{method}")
+    render json: response
+  end
+
+  # POST /store/verify.json
+  def verify
+    token = params[:token]
+    @order = shopping_cart
+
+    @payment_gateway = @order.payment_gateway.new(order: @order)
+    status = @payment_gateway.verify(token)
+
+    if status
+      # ... add payment here
+    end
+    head status ? :ok : :bad_request
   end
 
   private

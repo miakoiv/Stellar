@@ -1,4 +1,9 @@
 #encoding: utf-8
+#
+# Implementation of the Paybyway API, including payment token requests,
+# credit card charge requests, and verification.
+# For API docs, see
+# <https://www.paybyway.com/docs/web_payments/?page=full-api-reference>
 
 module PaymentGateway
 
@@ -7,7 +12,6 @@ module PaymentGateway
     base_uri 'https://www.paybyway.com/pbwapi'
     headers 'Content-Type' => 'application/json'
     format :json
-    debug_output Rails.logger
   end
 
   class Paybyway
@@ -28,18 +32,20 @@ module PaymentGateway
     # The methods below create charge requests and return JSON responses.
     #
     def charge_credit_card
-      @token_request ||= token_request
+      @token_request = token_request
       @token_request[:payment_method] = {type: 'card', register_card_token: 0}
-      result = PaybywayConnector.post('/auth_payment', body: @token_request.to_json)
-      Rails.logger.info result
-      result
+      response = PaybywayConnector.post('/auth_payment', body: @token_request.to_json)
     end
 
-    # Call PaymentGateway::Paybyway::validate(token: 'token_string')
-    # to check the status of a payment by its token. Returns a hash:
-    # {success: boolean, message: string}
-    def self.validate(params = {})
+    # Sends a payment status request.
+    def verify(token)
+      @verify_request = verify_request(token)
+      response = PaybywayConnector.post('/check_payment_status', body: @verify_request.to_json)
+      response.parsed_response['result'] == 0
+    end
 
+    def charge_url
+      "#{PaybywayConnector.base_uri}/charge"
     end
 
     def to_partial_path
@@ -68,6 +74,15 @@ module PaymentGateway
             address_zip: zip,
             address_city: city
           }
+        }
+      end
+
+      def verify_request(token)
+        {
+          version: @version,
+          api_key: @api_key,
+          token: token,
+          authcode: sha256(@private_key, "#{@api_key}|#{token}")
         }
       end
 

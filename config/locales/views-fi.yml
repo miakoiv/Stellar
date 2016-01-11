@@ -125,6 +125,9 @@ fi:
       card_cvc: Kortin tarkiste (CVC)
       charge: Maksa nyt
       charging: Odotetaan maksutapahtuman valmistumista…
+      errors:
+        token_request: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
+        charge: Virhe maksutapahtumassa. Tarkista kortin tiedot.
   actions:
     back: Palaa
     show: Näytä
