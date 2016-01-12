@@ -9,11 +9,11 @@
     = bootstrap_form_tag url: pay_path(method: :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
       .row
         .col-sm-6
-          = f.text_field :number, value: '4012888888881881', label: t('store.checkout.card_number')
+          = f.telephone_field :number, label: t('store.checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
         .col-sm-3
-          = f.text_field :expiry, value: '12/2017', label: t('store.checkout.card_expiry')
+          = f.text_field :expiry, label: t('store.checkout.card_expiry'), class: 'credit-card-expiry'
         .col-sm-3
-          = f.text_field :cvc, value: '777', label: t('store.checkout.card_cvc')
+          = f.text_field :cvc, label: t('store.checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
         .col-xs-12.pay-now-button.collapse.in
           = f.button t('store.checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
       .row
@@ -36,22 +36,23 @@
     $('button', '.pay-now-button').attr 'disabled', true
     $('.pay-now-button').collapse 'hide'
     $('.working').collapse 'show'
+    $('#message-failure').collapse 'hide'
     request = $.get $(this).attr 'action'
     request.done (data) ->
       try
         token = data.token
         throw 'token request failure' unless token?
         amount = $('#grand-total').data 'amount'
-        number = $('#number').val()
-        [exp_month, exp_year] = $('#expiry').val().split '/'
+        number = $('#number').val().replace(/ /g, '')
+        expiry = $('#expiry').payment 'cardExpiryVal'
         cvc = $('#cvc').val()
         request = $.post $charge_url,
           token: token
           card: number
           amount: amount
           currency: 'EUR'
-          exp_month: exp_month
-          exp_year: exp_year
+          exp_month: if expiry.month < 10 then '0' + expiry.month else expiry.month
+          exp_year: expiry.year
           security_code: cvc
         request.done (data) ->
           verification = $.post $verify_path, token: token
