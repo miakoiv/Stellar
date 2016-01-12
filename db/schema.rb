@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151230141435) do
+ActiveRecord::Schema.define(version: 20160111142613) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -285,6 +285,15 @@ ActiveRecord::Schema.define(version: 20151230141435) do
   add_index "pages", ["parent_page_id"], name: "index_pages_on_parent_page_id", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id",   limit: 4, null: false
+    t.integer  "amount",     limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "product_properties", force: :cascade do |t|
     t.integer  "product_id",  limit: 4,   null: false

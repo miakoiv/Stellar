@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
   delegate :is_rfq?, :is_quote?, to: :order_type
 
   has_many :order_items, dependent: :destroy, inverse_of: :order
+  has_many :payments, dependent: :destroy, inverse_of: :order
 
   default_scope { order(created_at: :desc) }
 
@@ -157,9 +158,9 @@ class Order < ActiveRecord::Base
   end
 
   # An order is considered paid if its order type requires no payment,
-  # or its balance is brought to zero.
+  # or its balance reaches zero.
   def paid?
-    !has_payment? || balance == 0
+    !has_payment? || balance <= 0
   end
   alias_method :paid, :paid?
 
@@ -190,9 +191,8 @@ class Order < ActiveRecord::Base
     adjustments.map(&:amount).sum
   end
 
-  # FIXME: implement payments to calculate order balance.
   def balance
-    Money.new(-100)
+    grand_total - Money.new(payments.sum(:amount))
   end
 
   # Total sum without virtual items (like shipping and handling).

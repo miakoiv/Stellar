@@ -115,9 +115,11 @@ class StoreController < ApplicationController
     status = @payment_gateway.verify(token)
 
     if status
-      # ... add payment here
+      @order.payments.create(amount: @order.grand_total.cents)
+      head :ok
+    else
+      head :bad_request
     end
-    head status ? :ok : :bad_request
   end
 
   private
