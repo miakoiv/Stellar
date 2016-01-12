@@ -151,7 +151,7 @@ fi:
     blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"
   footer:
     heading: Spry 😃 -verkkokauppa
-    body_html: Tuottanut Leasit Oy <i class="fa fa-copyright"></i> 2015
+    body_html: <p>Tuottanut Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2016</p>
   search_panel:
     search: Etsi
     keyword: Hakusana

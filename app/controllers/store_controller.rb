@@ -23,7 +23,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    redirect_to show_page_path(@pages.top_level.sorted.first)
+    redirect_to show_page_path(@pages.top_level.navbar.sorted.first)
   end
 
   # GET /front

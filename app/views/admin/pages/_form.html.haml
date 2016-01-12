@@ -4,6 +4,8 @@
     .panel-body
       = f.select :parent_page_id, current_store.page_options,
           {include_blank: true}, {class: 'selectize'}
+      = f.form_group do
+        = f.check_box :navbar
       = f.text_field :title, required: true
 
       - if @page.new_record? && current_user.has_cached_role?(:superuser)

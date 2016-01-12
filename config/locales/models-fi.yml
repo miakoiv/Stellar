@@ -156,6 +156,7 @@ fi:
         subtotal: Yhteensä
       page:
         parent_page_id: Pääsivu
+        navbar: Näytetään päävalikossa
         title: Otsake
         slug: Osoite
         content: Sisältö
