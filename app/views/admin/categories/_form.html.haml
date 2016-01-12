@@ -7,6 +7,8 @@
         = f.text_field :name, required: true
         = f.text_area :description, class: 'wysiwyg'
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
+        = f.form_group do
+          = f.check_box :live
       - unless locked
         = f.form_group do
           = f.primary

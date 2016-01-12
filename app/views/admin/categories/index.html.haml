@@ -16,28 +16,30 @@
         %th.hidden-print
 
     %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
-      = content_tag_for :tr, @categories do |category|
-        %td.hidden-print= drag_handle
-        %td= image_variant_tag category.cover_image
-        %td= category.name
-        %td= category.parent_category
-        %td= Product.human_attribute_value(:sorting, category.product_scope)
-        %td.hidden-print.text-right
-          - if category.product_scope == 'manual'
-            = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-sm'
-          = link_to icon('info', t('actions.show')), admin_category_path(category),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Category)
-            = link_to icon('edit', t('actions.edit')), edit_admin_category_path(category),
+      - @categories.each do |category|
+        = content_tag_for :tr, category, class: category.live? ? '' : 'warning text-warning' do
+          %td.hidden-print= drag_handle
+          %td= image_variant_tag category.cover_image
+          %td
+            = category.live? ? category.name : icon('warning', category.name, data: {toggle: 'tooltip'}, title: col(Category, :not_live))
+          %td= category.parent_category
+          %td= Product.human_attribute_value(:sorting, category.product_scope)
+          %td.hidden-print.text-right
+            - if category.product_scope == 'manual'
+              = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-sm'
+            = link_to icon('info', t('actions.show')), admin_category_path(category),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Category)
-            = link_to icon('remove', t('actions.delete')), admin_category_path(category),
-                method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Category.model_name.human, name: category.name),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+            - if current_user.can_update?(Category)
+              = link_to icon('edit', t('actions.edit')), edit_admin_category_path(category),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(Category)
+              = link_to icon('remove', t('actions.delete')), admin_category_path(category),
+                  method: :delete, class: 'btn btn-sm btn-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: Category.model_name.human, name: category.name),
+                    'confirm-title' => t('actions.confirm.title'),
+                    'confirm-proceed' => t('actions.confirm.proceed'),
+                    'confirm-cancel' => t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

@@ -15,6 +15,7 @@ class Category < ActiveRecord::Base
   has_many :subcategories, class_name: 'Category', foreign_key: :parent_category_id
   has_and_belongs_to_many :products
 
+  scope :live, -> { where(live: true) }
   scope :top_level, -> { where(parent_category_id: nil) }
 
   #---
