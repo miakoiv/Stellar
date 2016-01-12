@@ -16,6 +16,7 @@ class Page < ActiveRecord::Base
   has_and_belongs_to_many :albums
 
   scope :top_level, -> { where(parent_page_id: nil) }
+  scope :navbar, -> { where(navbar: true) }
 
   #---
   validates :title, presence: true

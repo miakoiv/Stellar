@@ -156,6 +156,7 @@ en:
         subtotal: Subtotal
       page:
         parent_page_id: Parent page
+        navbar: Show in main navigation
         title: Title
         slug: Address
         content: Content
