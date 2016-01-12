@@ -270,7 +270,7 @@ span.manufacturing, span.shipping {
   display: inline-block;
   margin-right: 5px;
 }
-span.manufacturing::before, span.shipping::before {
+span.manufacturing:before, span.shipping:before {
   display: inline-block;
   margin-right: 2px;
   font-family: FontAwesome;
