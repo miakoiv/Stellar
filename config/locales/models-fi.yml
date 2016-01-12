@@ -78,6 +78,8 @@ fi:
         page_ids: Näytetään sivuilla
       category:
         parent_category_id: Pääryhmä
+        live: Aktiivinen
+        not_live: Tuoteryhmä ei aktiivinen
         name: Nimi
         description: Kuvaus
         product_scope: Tuotteiden järjestys

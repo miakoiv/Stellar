@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111142613) do
+ActiveRecord::Schema.define(version: 20160112124541) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -45,15 +45,16 @@ ActiveRecord::Schema.define(version: 20160111142613) do
   add_index "albums_pages", ["page_id", "album_id"], name: "index_albums_pages_on_page_id_and_album_id", unique: true, using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.integer  "store_id",           limit: 4,                 null: false
+    t.integer  "store_id",           limit: 4,                     null: false
     t.integer  "parent_category_id", limit: 4
+    t.boolean  "live",                             default: false, null: false
     t.string   "name",               limit: 255
     t.text     "description",        limit: 65535
-    t.string   "slug",               limit: 255,               null: false
+    t.string   "slug",               limit: 255,                   null: false
     t.string   "product_scope",      limit: 255
-    t.integer  "priority",           limit: 4,     default: 0, null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.integer  "priority",           limit: 4,     default: 0,     null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
