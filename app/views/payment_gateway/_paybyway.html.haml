@@ -26,12 +26,14 @@
   $verify_path = '#{verify_path}'
   $failure = (message) ->
     $('.working').collapse 'hide'
-    $('#message-failure').find('.alert').text(message)
+    $('#message-failure').find('.alert').text message
     $('#message-failure').collapse 'show'
+    $('button', '.pay-now-button').attr 'disabled', false
+    $('.pay-now-button').collapse 'show'
 
   $('#paybyway-creditcard-form').on 'submit', (e) ->
     e.preventDefault()
-    $(this).find('button').attr 'disabled', true
+    $('button', '.pay-now-button').attr 'disabled', true
     $('.pay-now-button').collapse 'hide'
     $('.working').collapse 'show'
     request = $.get $(this).attr 'action'
@@ -39,7 +41,7 @@
       try
         token = data.token
         throw 'token request failure' unless token?
-        amount = $('#grand-total').data('amount')
+        amount = $('#grand-total').data 'amount'
         number = $('#number').val()
         [exp_month, exp_year] = $('#expiry').val().split '/'
         cvc = $('#cvc').val()
