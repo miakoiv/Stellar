@@ -25,7 +25,10 @@
             = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
             - if order.adjustments.any?
               = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
-      .panel-body
-        .pull-right
-          - current_store.order_types.each do |order_type|
-            = link_to order_type.name, checkout_path(order_type_id: order_type), class: 'btn btn-primary'
+      .panel-footer
+        .text-right
+          - if @order.checkoutable?
+            - current_store.order_types.each do |order_type|
+              = link_to order_type.name, checkout_path(order_type_id: order_type), class: 'btn btn-lg btn-primary'
+          - else
+            = t('store.checkout.cannot_checkout_html')

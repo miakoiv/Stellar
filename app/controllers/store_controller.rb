@@ -83,7 +83,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @order.order_type = current_store.order_types.find(params[:order_type_id])
 
-    if @order.empty?
+    if @order.empty? || !@order.checkoutable?
       return redirect_to cart_path
     end
 

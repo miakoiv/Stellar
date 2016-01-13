@@ -142,6 +142,7 @@ en:
       confirm: Confirm order
     checkout:
       checkout: Checkout
+      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Your shopping cart contains items that are no longer available.</strong></p><p>Please delete the marked entries.</p>
       success_html: <h4>Order completed. Thank you for shopping with us!</h4><p>Please make sure to print a receipt for your purchase.</p>
       receipt: Print a receipt
       card_number: Card number
