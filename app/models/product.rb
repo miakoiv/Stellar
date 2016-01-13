@@ -65,6 +65,9 @@ class Product < ActiveRecord::Base
   after_save :touch_categories
 
   #---
+  def real?; !virtual end
+  def undead?; !live end
+
   def property_value(property_id)
     product_properties.where(property_id: property_id).first.try(:value_with_units)
   end
