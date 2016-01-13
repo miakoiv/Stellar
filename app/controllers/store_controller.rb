@@ -92,18 +92,18 @@ class StoreController < ApplicationController
     end
   end
 
-  # POST /store/pay/:method.json
+  # GET /store/pay/:method.json
   def pay
     method = params[:method]
     @order = shopping_cart
 
-    unless @order.has_payment? && method.present?
-      return redirect_to cart_path
+    if method.present? && @order.has_payment?
+      @payment_gateway = @order.payment_gateway.new(order: @order)
+      response = @payment_gateway.send("charge_#{method}")
+      render json: response
+    else
+      head :bad_request
     end
-
-    @payment_gateway = @order.payment_gateway.new(order: @order)
-    response = @payment_gateway.send("charge_#{method}")
-    render json: response
   end
 
   # POST /store/verify.json
