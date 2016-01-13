@@ -100,6 +100,13 @@ class Product < ActiveRecord::Base
       .map { |inventory, items| [inventory, items.first] }.to_h
   end
 
+  # Product is considered available when it's live. In reality,
+  # stock should be consulted here, but we don't exactly know
+  # which inventory would apply.
+  def available?
+    live?
+  end
+
   def slugger
     [[:title, :subtitle, :code], [:title, :subtitle, :code, -> { store.name }]]
   end

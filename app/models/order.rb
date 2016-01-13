@@ -158,9 +158,11 @@ class Order < ActiveRecord::Base
   end
 
   # An order is checkoutable when all its real items are available.
-  # FIXME: inventory should be checked here too
   def checkoutable?
-    order_items.undead.empty?
+    order_items.joins(:product).real.each do |order_item|
+      return false unless order_item.product.available?
+    end
+    return true
   end
 
   # An order is considered paid if its order type requires no payment,
