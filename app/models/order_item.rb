@@ -9,6 +9,8 @@ class OrderItem < ActiveRecord::Base
     numericality: {
       greater_than_or_equal_to: 0
     }
+  monetize :subtotal_cents
+  monetize :adjustment_total_cents
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true
@@ -42,12 +44,12 @@ class OrderItem < ActiveRecord::Base
     order.reveal_components? && product.relationships.any?
   end
 
-  def subtotal
-    amount * (price || 0)
+  def subtotal_cents
+    amount * (price_cents || 0)
   end
 
-  def adjustment_total
-    adjustments.map(&:amount).sum
+  def adjustment_total_cents
+    adjustments.sum(:amount_cents)
   end
 
   def archive!

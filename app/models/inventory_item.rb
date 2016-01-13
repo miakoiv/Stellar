@@ -3,6 +3,7 @@
 class InventoryItem < ActiveRecord::Base
 
   monetize :value_cents, allow_nil: true
+  monetize :total_value_cents
 
   #---
   belongs_to :inventory
@@ -28,9 +29,9 @@ class InventoryItem < ActiveRecord::Base
       }.sum
   end
 
-  def total_value
-    return nil if amount.nil? || value.nil?
-    amount * value
+  def total_value_cents
+    return 0 if amount.nil? || value_cents.nil?
+    amount * value_cents
   end
 
   # Inventory item HTML representation methods.

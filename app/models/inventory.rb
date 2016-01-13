@@ -23,7 +23,7 @@ class Inventory < ActiveRecord::Base
   #---
   def stock
     items = inventory_items
-    [items, items.map { |item| item.value || 0}.sum]
+    [items, items.map(&:value).sum]
   end
 
   def to_s

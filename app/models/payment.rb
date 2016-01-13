@@ -2,7 +2,7 @@
 
 class Payment < ActiveRecord::Base
 
-  monetize :amount
+  monetize :amount_cents
 
   #---
   belongs_to :order

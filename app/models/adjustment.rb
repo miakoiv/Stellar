@@ -19,10 +19,10 @@ class Adjustment < ActiveRecord::Base
 
   #---
   def credit?
-    amount < 0
+    amount_cents < 0
   end
 
   def charge?
-    amount > 0
+    amount_cents > 0
   end
 end

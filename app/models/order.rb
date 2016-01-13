@@ -5,6 +5,10 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Adjustable
+  monetize :adjustment_total_cents
+  monetize :balance_cents
+  monetize :total_cents
+  monetize :grand_total_cents
 
   #---
   belongs_to :store
@@ -195,22 +199,22 @@ class Order < ActiveRecord::Base
     "PaymentGateway::#{order_type.payment_gateway}".constantize
   end
 
-  def adjustment_total
-    adjustments.map(&:amount).sum
+  def adjustment_total_cents
+    adjustments.sum(:amount_cents)
   end
 
-  def balance
-    grand_total - Money.new(payments.sum(:amount))
+  def balance_cents
+    grand_total_cents - payments.sum(:amount_cents)
   end
 
   # Total sum without virtual items (like shipping and handling).
-  def total
-    order_items.real.map { |item| item.subtotal + item.adjustment_total }.sum + adjustment_total
+  def total_cents
+    order_items.real.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end
 
   # Grand total, including virtual items.
-  def grand_total
-    order_items.map { |item| item.subtotal + item.adjustment_total }.sum + adjustment_total
+  def grand_total_cents
+    order_items.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end
 
   def tab_name
