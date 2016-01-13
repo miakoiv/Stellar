@@ -71,6 +71,9 @@ fi:
       notice: "Tilaus %{order} päivitetty."
     destroy:
       notice: "Tilaus %{order} poistettu."
+    duplicate:
+      notice: "Tilaus %{order} kopioitu ostoskoriin."
+      failed: "Tilaus %{order} kopioitu ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"
   store:
     order_product:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."

@@ -71,6 +71,9 @@ en:
       notice: "Order %{order} updated."
     destroy:
       notice: "Order %{order} deleted."
+    duplicate:
+      notice: "Order %{order} copied to shopping cart."
+      failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"
   store:
     order_product:
       notice: "%{amount} of ”%{product}” added to cart."

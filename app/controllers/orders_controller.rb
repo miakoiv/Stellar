@@ -63,11 +63,21 @@ class OrdersController < ApplicationController
     authorize_action_for @order
 
     order = shopping_cart
-    @order.order_items.each do |order_item|
-      order.insert!(order_item.product, order_item.amount)
+    failed = []
+    @order.order_items.includes(:product).each do |order_item|
+      product = order_item.product
+      next if product.virtual?
+      if product.live?
+        order.insert!(product, order_item.amount)
+      else
+        failed << product
+      end
     end
-
-    redirect_to cart_path
+    if failed.any?
+      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed.to_sentence)
+    else
+      redirect_to cart_path, notice: t('.notice', order: @order)
+    end
   end
 
   private
