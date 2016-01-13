@@ -44,6 +44,7 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
 
   scope :live, -> { where(live: true) }
+  scope :real, -> { where(virtual: false) }
   scope :virtual, -> { where(virtual: true) }
 
   ransacker :keyword do |parent|
