@@ -15,10 +15,13 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
 
   default_scope { order(:priority) }
+  scope :live, -> { joins(:product).merge(Product.live) }
+  scope :undead, -> { joins(:product).merge(Product.undead) }
   scope :real, -> { joins(:product).merge(Product.real) }
+  scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
-  delegate :virtual?, to: :product
+  delegate :live?, :undead?, :real?, :virtual?, to: :product
   delegate :approved?, to: :order
 
   #---
