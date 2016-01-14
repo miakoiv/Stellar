@@ -15,8 +15,8 @@
 
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            = render partial: 'shared/page_link', collection: @pages.navbar, as: :page
-          %ul.nav.navbar-nav.navbar-right
+            = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
+          %ul.nav.navbar-nav.navbar-right{data: {'sm-skip' => true}}
             = render partial: 'shared/user_menu'
           = render partial: 'shared/keyword_search'
 

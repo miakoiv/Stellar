@@ -46,4 +46,6 @@
 //= require unobtrusive_flash_bootstrap
 //= require wiselinks
 //= require nprogress
+//= require ./jquery.smartmenus.js
+//= require ./jquery.smartmenus.bootstrap.js
 //= require_directory .

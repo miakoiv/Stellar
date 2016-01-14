@@ -55,29 +55,21 @@ html {
         img { margin-top: 0; }
       }
     }
-    a { padding: 10px 20px; }
+    a {
+      padding: 10px 20px;
+      border-bottom: 1px solid $dropdown-divider-bg;
+    }
   }
 }
 
-//
-// subnavs that open on hover but look identical to real dropdowns
-//
-.subnav {
-  @extend .dropdown-menu;
-  margin: 0;
-}
-.navbar-nav > li:hover > ul.subnav { display: block; }
-
 @media (max-width: $screen-xs-max) {
-  .subnav {
-    position: static;
-    left: auto;
-    display: block;
-    float: none;
-    margin: 0 30px;
-    border: 0;
-    box-shadow: none;
-    border-radius: 0;
+  .navbar-collapse {
+    max-height: 100% !important;
+
+    #search-dropdown {
+      position: static;
+      min-width: 0;
+    }
   }
 }
 
@@ -315,11 +307,35 @@ span.shipping:before { content: ""; }
   min-height: 120px;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: $gray-lighter;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
-  @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
   font-size: $font-size-small;
+  @include box-shadow(inset 0 3px 6px 0 rgba(0,0,0,0.15));
 
   p { margin: 0; }
   p.lead { font-size: $font-size-base; }
+  .logo img { width: 80px; }
+  .nav {
+    li {
+      float: left;
+      padding: 0 15px;
+      border-left: 1px solid $gray-light;
+      font-weight: 500;
+
+      ul {
+        li {
+          float: none;
+          border: 0;
+          font-weight: 400;
+        }
+      }
+      a {
+        padding: 0;
+        color: inherit;
+
+        &:hover {
+          background: transparent;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

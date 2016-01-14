@@ -1,6 +1,12 @@
+- has_dropdown = page.sub_pages.any?
+
 %li{class: active_link_to_class(show_page_path(page))}
-  = active_link_to page, show_page_path(page)
-  - if page.sub_pages.any?
-    %ul.nav.subnav
+  - if has_dropdown
+    = active_link_to show_page_path(page) do
+      = page
+      %span.caret
+    %ul{class: subnav}
       - page.sub_pages.each do |sub_page|
         = active_link_to sub_page, show_page_path(sub_page), wrap_tag: :li
+  - else
+    = active_link_to page, show_page_path(page)

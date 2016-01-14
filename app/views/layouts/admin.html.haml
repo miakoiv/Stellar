@@ -14,7 +14,7 @@
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             = render partial: 'shared/admin_nav'
-          %ul.nav.navbar-nav.navbar-right
+          %ul.nav.navbar-nav.navbar-right{data: {'sm-skip' => true}}
             = render partial: 'shared/admin_menu'
             = render partial: 'shared/user_menu'
 

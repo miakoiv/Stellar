@@ -1,10 +1,10 @@
 .container
   .row
     .media.col-xs-6.col-sm-3
-      .media-left= image_tag('spry-logo.svg', style: 'width: 80px')
+      .media-left.logo= image_tag('spry-logo.svg')
       .media-body
         %p.lead= t('footer.heading')
         = t('footer.body_html')
     .col-xs-6.col-sm-3
-      %ul.nav.nav-pills
-        = render partial: 'shared/page_link', collection: @pages, as: :page
+      %ul.nav
+        = render partial: 'shared/page_link', collection: @pages, as: :page, locals: {subnav: 'nav'}
