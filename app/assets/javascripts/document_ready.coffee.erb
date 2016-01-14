@@ -43,6 +43,8 @@ jQuery ->
 
   window.wiselinks = new Wiselinks()
 
+  $('body').css('margin-bottom', $('.footer').height())
+
   $(document).initialize()
   $(document).rebuild_masonry()
 
