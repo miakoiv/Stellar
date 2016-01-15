@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get  '/store/checkout/:order_type_id', to: 'store#checkout',  as: :checkout
   get  '/store/pay/:method', to: 'store#pay', as: :pay
   post '/store/verify', to: 'store#verify', as: :verify
+  get  '/store/return/:order_id', to: 'store#return', as: :return
   post '/correspondence/mail_form', to: 'correspondence#mail_form',
     as: :mail_form
 

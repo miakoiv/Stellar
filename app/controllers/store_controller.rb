@@ -98,8 +98,8 @@ class StoreController < ApplicationController
     @order = shopping_cart
 
     if method.present? && @order.has_payment?
-      @payment_gateway = @order.payment_gateway.new(order: @order)
-      response = @payment_gateway.send("charge_#{method}")
+      @payment_gateway = @order.payment_gateway.new(order: @order, return_url: return_url(@order))
+      response = @payment_gateway.send("charge_#{method}", params)
       render json: response
     else
       head :bad_request
@@ -115,10 +115,24 @@ class StoreController < ApplicationController
     status = @payment_gateway.verify(token)
 
     if status
-      @order.payments.create(amount: @order.grand_total.cents)
+      @order.payments.create(amount: @order.grand_total)
       head :ok
     else
       head :bad_request
+    end
+  end
+
+  # GET /store/return/1
+  def return
+    @order = current_user.orders.find(params[:order_id])
+
+    @payment_gateway = @order.payment_gateway.new(order: @order)
+    status = @payment_gateway.return(params)
+    if status && !@order.paid?
+      @order.payments.create(amount: @order.grand_total)
+      render :success
+    else
+      render :checkout
     end
   end
 

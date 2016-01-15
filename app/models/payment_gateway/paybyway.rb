@@ -9,16 +9,33 @@ module PaymentGateway
 
   class PaybywayConnector
     include HTTParty
-    base_uri 'https://www.paybyway.com/pbwapi'
+    base_uri 'https://www.paybyway.com/pbwapi/'
     headers 'Content-Type' => 'application/json'
     format :json
+    logger Rails.logger
+
+    def auth_payment(token_request)
+      self.class.post('/auth_payment', body: token_request.to_json)
+    end
+
+    def check_payment_status(verify_request)
+      self.class.post('/check_payment_status', body: verify_request.to_json)
+    end
+
+    def charge_url
+      "#{self.class.base_uri}/charge"
+    end
+
+    def token_url(token)
+      "#{self.class.base_uri}/token/#{token}"
+    end
   end
 
   class Paybyway
 
     include ActiveModel::Model
 
-    attr_accessor :order
+    attr_accessor :order, :return_url
 
     def initialize(attributes = {})
       super
@@ -26,26 +43,51 @@ module PaymentGateway
       @api_key = order.store.pbw_api_key
       @private_key = order.store.pbw_private_key
       @version = 'w3'
+      @connector = PaybywayConnector.new
     end
 
     #
     # The methods below create charge requests and return JSON responses.
     #
-    def charge_credit_card
-      @token_request = token_request
-      @token_request[:payment_method] = {type: 'card', register_card_token: 0}
-      response = PaybywayConnector.post('/auth_payment', body: @token_request.to_json)
+    def charge_credit_card(params = {})
+      request = token_request(payment_method: {
+        type: 'card', register_card_token: 0
+      })
+      response = @connector.auth_payment(request).parsed_response
+      {
+        result: response['result'],
+        token: response['token'],
+        amount: request[:amount],
+        currency: request[:currency],
+        payment_url: @connector.charge_url
+      }
+    end
+
+    def charge_e_payment(params = {})
+      request = token_request(payment_method: {
+        type: 'e-payment',
+        return_url: return_url,
+        notify_url: return_url,
+        lang: 'fi',
+        token_valid_until: (Time.current + 6.hours).to_i,
+        selected: [params[:selected]]
+      })
+      response = @connector.auth_payment(request).parsed_response
+      {
+        payment_url: @connector.token_url(response['token'])
+      }
     end
 
     # Sends a payment status request.
     def verify(token)
-      @verify_request = verify_request(token)
-      response = PaybywayConnector.post('/check_payment_status', body: @verify_request.to_json)
-      response.parsed_response['result'] == 0
+      request = verify_request(token)
+      response = @connector.check_payment_status(request).parsed_response
+      response['result'] == 0
     end
 
-    def charge_url
-      "#{PaybywayConnector.base_uri}/charge"
+    # Checks the return params from a bank payment.
+    def return(params)
+      params['RETURN_CODE'] == '0'
     end
 
     def to_partial_path
@@ -54,7 +96,7 @@ module PaymentGateway
 
     private
 
-      def token_request
+      def token_request(options = {})
         number = SecureRandom.hex(12)
         first, last = order.customer_name.split(/\s+/, 2)
         street, zip, city = order.billing_address_components
@@ -74,7 +116,7 @@ module PaymentGateway
             address_zip: zip,
             address_city: city
           }
-        }
+        }.merge(options)
       end
 
       def verify_request(token)

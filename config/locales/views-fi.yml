@@ -118,9 +118,11 @@ fi:
       confirm: Vahvista tilaus
     checkout:
       checkout: Kassa
-      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Ostoskorisi sisältää tuotteita, joita ei ole enää saatavana.</strong></p><p>Ole hyvä ja poista merkityt tuotteet.</p> 
+      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Ostoskorisi sisältää tuotteita, joita ei ole enää saatavana.</strong></p><p>Ole hyvä ja poista merkityt tuotteet.</p>
       success_html: <h4>Tilaus vastaanotettu, kiitos käynnistä!</h4><p>Muistathan tulostaa kuitin ostoksestasi.</p>
       receipt: Tulosta kuitti
+      creditcard_payment: Maksa luottokortilla
+      bank_payment: Maksa nettipankissa
       card_number: Kortin numero
       card_expiry: Voimassa (kk/vv)
       card_cvc: Kortin tarkiste (CVC)

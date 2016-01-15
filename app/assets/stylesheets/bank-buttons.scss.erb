@@ -1,0 +1,26 @@
+.bank-buttons {
+
+  .bank-button {
+    width: 140px;
+    height: 80px;
+    float: left;
+    transform: scale(0.88);
+    opacity: 0.667;
+    transition: all 0.6s ease-in-out 0s;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    &.nordea { background-image: url(<%= asset_url('banks/nordea.png') %>); }
+    &.op { background-image: url(<%= asset_url('banks/op.png') %>); }
+    &.danske { background-image: url(<%= asset_url('banks/danskebank.png') %>); }
+    &.saastopankki { background-image: url(<%= asset_url('banks/saastopankki.png') %>); }
+    &.poppankki { background-image: url(<%= asset_url('banks/poppankki.png') %>); }
+    &.aktia { background-image: url(<%= asset_url('banks/aktia.png') %>); }
+    &.handelsbanken { background-image: url(<%= asset_url('banks/handelsbanken.png') %>); }
+    &.spankki { background-image: url(<%= asset_url('banks/spankki.png') %>); }
+  }
+}
