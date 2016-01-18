@@ -24,6 +24,9 @@ gem 'execjs'
 gem 'ransack'
 gem 'arel-fulltext', github: 'leonardoeloy/arel-fulltext'
 
+# Pagination
+gem 'kaminari'
+
 # Meta tag generator
 gem 'meta-tags'
 

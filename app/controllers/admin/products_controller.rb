@@ -16,7 +16,8 @@ class Admin::ProductsController < ApplicationController
   def index
     set_ransack_query('products')
     @q = current_store.products.ransack(@query)
-    @products = @q.result(distinct: true)
+    @q.sorts = 'title asc' if @q.sorts.empty?
+    @products = @q.result(distinct: true).page(params[:page])
   end
 
   # GET /admin/products/1

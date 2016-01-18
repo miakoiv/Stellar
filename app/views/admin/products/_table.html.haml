@@ -2,11 +2,11 @@
   %table#products-table.table.table-hover.table-loose
     %thead
       %tr
-        %th.col-min{data: {sorter: 'false'}}
-        %th.col-xs-2= col(Product, :code)
-        %th= col(Product, :title)
+        %th.col-min
+        %th.col-xs-2= sort_link(@q, :code, col(Product, :code))
+        %th= sort_link(@q, :title, col(Product, :title))
         %th= col(Product, :category_ids)
-        %th.col-xs-2.hidden-print{data: {sorter: 'false'}}
+        %th.col-xs-2.hidden-print
 
     %tbody
       - products.each do |product|
@@ -23,11 +23,3 @@
               = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
               - if current_user.can_update?(Product)
                 = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
-
-:coffee
-  $('#products-table').tablesorter
-    theme: 'bootstrap'
-    widthFixed: true
-    widgets: ['uiTheme', 'saveSort']
-    headerTemplate: '{content} {icon}'
-    sortList: [[2,0]]
