@@ -1,9 +1,9 @@
 = content_tag_for :tr, product do
   %td= image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-  %td= product.code
   %td
     %strong= product.title
     = product.subtitle
+  %td= product.code
   - if can_see_pricing?
     %td.currency= humanized_money_with_symbol product.sales_price
   %td.hidden-print.text-right

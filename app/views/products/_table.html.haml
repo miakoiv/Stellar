@@ -4,8 +4,8 @@
       %thead
         %tr
           %th.col-min{data: {sorter: 'false'}}
-          %th.col-xs-2.no-wrap= col(Product, :code)
           %th= col(Product, :title)
+          %th.col-xs-2.no-wrap= col(Product, :code)
           - if can_see_pricing?
             %th.no-wrap.text-right= col(Product, :sales_price)
           %th.col-xs-1.no-wrap.hidden-print{data: {sorter: 'false'}}
@@ -14,10 +14,10 @@
           %td
             .box-thumbnail
               = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-          %td= product.code
           %td
             %strong= product.title
             = product.subtitle
+          %td= product.code
           - if can_see_pricing?
             %td.currency.text-right= humanized_money_with_symbol product.sales_price
           %td.hidden-print.text-right

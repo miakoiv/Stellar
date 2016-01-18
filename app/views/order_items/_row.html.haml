@@ -1,10 +1,10 @@
 = content_tag_for :tr, order_item do
-  %td.no-wrap
-    - unless order_item.virtual? || order_item.product.category.nil?
-      = link_to order_item.product_code, show_product_path(order_item.product.category, order_item.product)
   %td
-    %strong= order_item.product_title
+    %strong= link_to_if order_item.live?, order_item.product_title, show_product_path(order_item.product.category, order_item.product)
     = order_item.product_subtitle
+  %td.no-wrap
+    - if order_item.real?
+      = order_item.product_code
   %td.text-right
     - unless order_item.virtual?
       = order_item.amount

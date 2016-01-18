@@ -1,13 +1,13 @@
 = content_tag_for :tr, order_item, class: order_item.live? ? '' : 'warning text-warning' do
+  %td
+    %strong= link_to_if order_item.live?, order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+    = order_item.product_subtitle
   %td.no-wrap
     - if order_item.real?
       - if order_item.live?
-        = link_to order_item.product_code, show_product_path(order_item.product.category, order_item.product)
+        = order_item.product_code
       - else
         = icon('warning', order_item.product_code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
-  %td
-    %strong= order_item.product_title
-    = order_item.product_subtitle
   %td
     - unless order_item.virtual?
       = form_for order_item, remote: true,

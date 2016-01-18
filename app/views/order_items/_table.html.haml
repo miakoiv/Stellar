@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-2= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
+        %th.col-xs-2= col(OrderItem, :product_code)
         %th.text-right= col(OrderItem, :amount)
         %th.text-right à
         %th.text-right= col(OrderItem, :subtotal)
