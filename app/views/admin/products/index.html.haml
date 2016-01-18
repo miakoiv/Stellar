@@ -7,7 +7,7 @@
 .panel.panel-info
   .panel-heading
     .panel-title
-      .pull-right= product_count(@products.count, current_store.products.live.count)
+      .pull-right= product_count(@products.count, current_store.products.count)
       %h4= t('actions.search')
   .panel-body
     = search_form_for [:admin, @q] do |f|
@@ -16,10 +16,7 @@
       .col-xs-4
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
       .col-xs-2
-        .checkbox
-          %label
-            = f.check_box :live_false
-            = col(Product, :not_live)
+        = f.select :live_eq, Product.availability_options, {include_blank: true}, {placeholder: col(Product, :live), class: 'form-control selectize'}
       .col-xs-1.pull-right
         = f.submit t('actions.search'), class: 'btn btn-primary'
 

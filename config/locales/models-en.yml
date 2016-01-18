@@ -173,6 +173,7 @@ en:
         description: Description
         available_at: Availability starts
         deleted_at: Availability ends
+        live: Available
         not_live: Not available
         memo: Memo
         iframes: Embeds

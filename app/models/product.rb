@@ -107,6 +107,14 @@ class Product < ActiveRecord::Base
     live?
   end
 
+  # Options for a search form.
+  def self.availability_options
+    [
+      [human_attribute_name(:live), true],
+      [human_attribute_name(:not_live), false]
+    ]
+  end
+
   def slugger
     [[:title, :subtitle, :code], [:title, :subtitle, :code, -> { store.name }]]
   end

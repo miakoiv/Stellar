@@ -173,6 +173,7 @@ fi:
         description: Kuvaus
         available_at: Myynnin alkamispvm
         deleted_at: Myynnin päättymispvm
+        live: Myynnissä
         not_live: Ei myynnissä
         memo: Muistio
         iframes: Upotukset
