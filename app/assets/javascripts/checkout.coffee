@@ -4,7 +4,6 @@ jQuery ->
   # elements. Note that a payment widget will call this after verifying
   # a payment, by triggering submit on #checkout-form.
   $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
-    console.log data
     if data.paid
       $('#payment-widget').collapse 'hide'
       $('#confirm-button').collapse 'hide'
