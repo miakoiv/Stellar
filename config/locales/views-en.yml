@@ -137,24 +137,24 @@ en:
     go_checkout: Proceed to checkout
     cart:
       shopping_cart: Shopping cart
+  checkout:
+    title: Checkout
+    receipt: Print a receipt
+    creditcard_payment: Credit card payment
+    bank_payment: Bank payment
+    card_number: Card number
+    card_expiry: Expiry (mm/yy)
+    card_cvc: Security code (CVC)
+    charge: Pay now
+    messages:
+      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Your shopping cart contains items that are no longer available.</strong></p><p>Please delete the marked entries.</p>
+      success_html: <h4>Order completed. Thank you for shopping with us!</h4><p>Please make sure to print a receipt for your purchase.</p>
+      charging: Processing payment…
+      token_request_error: There was a problem communicating with the payment provider. Try again later.
+      charge_error: There was a problem processing your payment, check your card details.
     checkout_form:
       continue: Proceed to payment
       confirm: Confirm order
-    checkout:
-      checkout: Checkout
-      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Your shopping cart contains items that are no longer available.</strong></p><p>Please delete the marked entries.</p>
-      success_html: <h4>Order completed. Thank you for shopping with us!</h4><p>Please make sure to print a receipt for your purchase.</p>
-      receipt: Print a receipt
-      creditcard_payment: Credit card payment
-      bank_payment: Bank payment
-      card_number: Card number
-      card_expiry: Expiry (mm/yy)
-      card_cvc: Security code (CVC)
-      charge: Pay now
-      charging: Processing payment…
-      errors:
-        token_request: There was a problem communicating with the payment provider. Try again later.
-        charge: There was a problem processing your payment, check your card details.
   actions:
     back: Back
     show: Show

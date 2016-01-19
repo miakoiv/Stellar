@@ -24,12 +24,14 @@ Rails.application.routes.draw do
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store/search', to: 'store#search', as: :search
-  get  '/store/checkout/:order_type_id', to: 'store#checkout',  as: :checkout
-  get  '/store/pay/:method', to: 'store#pay', as: :pay
-  post '/store/verify', to: 'store#verify', as: :verify
-  get  '/store/return/:order_id', to: 'store#return', as: :return
   post '/correspondence/mail_form', to: 'correspondence#mail_form',
     as: :mail_form
+
+  # Checkout related routes.
+  get  '/checkout/:order_id/via/:order_type_id', to: 'checkout#checkout',  as: :checkout
+  get  '/checkout/:order_id/pay/:method', to: 'checkout#pay', as: :pay
+  post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
+  get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
 
   # Category and product views.
   get '/category/:category_id', to: 'store#show_category',

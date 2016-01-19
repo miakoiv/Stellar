@@ -78,64 +78,6 @@ class StoreController < ApplicationController
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
   end
 
-  # GET /store/checkout/:order_type_id
-  def checkout
-    @order = shopping_cart
-    @order.order_type = current_store.order_types.find(params[:order_type_id])
-
-    if @order.empty? || !@order.checkoutable?
-      return redirect_to cart_path
-    end
-
-    if @order.has_payment?
-      @payment_gateway = @order.payment_gateway.new(order: @order)
-    end
-  end
-
-  # GET /store/pay/:method.json
-  def pay
-    method = params[:method]
-    @order = shopping_cart
-
-    if method.present? && @order.has_payment?
-      @payment_gateway = @order.payment_gateway.new(order: @order, return_url: return_url(@order))
-      response = @payment_gateway.send("charge_#{method}", params)
-      render json: response
-    else
-      head :bad_request
-    end
-  end
-
-  # POST /store/verify.json
-  def verify
-    token = params[:token]
-    @order = shopping_cart
-
-    @payment_gateway = @order.payment_gateway.new(order: @order)
-    status = @payment_gateway.verify(token)
-
-    if status
-      @order.payments.create(amount: @order.grand_total)
-      head :ok
-    else
-      head :bad_request
-    end
-  end
-
-  # GET /store/return/1
-  def return
-    @order = current_user.orders.find(params[:order_id])
-
-    @payment_gateway = @order.payment_gateway.new(order: @order)
-    status = @payment_gateway.return(params)
-    if status && !@order.paid?
-      @order.payments.create(amount: @order.grand_total)
-      render :success
-    else
-      render :checkout
-    end
-  end
-
   private
     def set_categories
       @categories = current_store.categories.live.top_level.sorted

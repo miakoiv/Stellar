@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
+  payment_gateway/paybyway.js
   spry_themes/cards.css spry_themes/cards.js
   spry_themes/compass.css spry_themes/compass.js
   spry_themes/default.css spry_themes/default.js

@@ -1,7 +1,7 @@
 #encoding: utf-8
 #
 # Implementation of the Paybyway API, including payment token requests,
-# credit card charge requests, and verification.
+# credit card charge requests & verifications, and bank e-payments.
 # For API docs, see
 # <https://www.paybyway.com/docs/web_payments/?page=full-api-reference>
 
@@ -85,7 +85,7 @@ module PaymentGateway
       response['result'] == 0
     end
 
-    # Checks the return params from a bank payment.
+    # Checks the return params from a bank e-payment.
     def return(params)
       params['RETURN_CODE'] == '0'
     end

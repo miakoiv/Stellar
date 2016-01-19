@@ -2,7 +2,7 @@
   = link_to cart_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   %h1.hidden-print
-    = icon('shopping-cart', t('.checkout'))
+    = icon('shopping-cart', t('checkout.title'))
     %span.small= @order.order_type
   %h1.visible-print
     = current_store
@@ -12,8 +12,8 @@
   .alert.alert-danger
 #message-success.collapse.hidden-print
   .alert.alert-success
-    %p.pull-right= link_to icon('print', t('.receipt')), '#print', class: 'btn btn-default'
-    = t('.success_html')
+    %p.pull-right= link_to icon('print', t('checkout.receipt')), '#print', class: 'btn btn-default'
+    = t('checkout.messages.success_html')
 
 .row
   .col-lg-6
@@ -27,16 +27,3 @@
   .col-lg-6
     .panel.panel-default
       = render partial: 'order_items/table', object: @order, as: :order
-
-:coffee
-  # When the checkout form is submitted, collapse and reveal relevant
-  # elements. Note that a payment widget will call this after verifying
-  # a payment, by triggering submit on #checkout-form.
-  $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
-    if data.paid
-      $('#payment-widget').collapse 'hide'
-      $('#confirm-button').collapse 'hide'
-      $('#message-success').collapse 'show'
-    else
-      $('#continue-button').collapse 'hide'
-      $('#payment-widget').collapse 'show'

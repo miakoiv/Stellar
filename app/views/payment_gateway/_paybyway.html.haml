@@ -1,3 +1,6 @@
+#paybyway-data{data: {pay_url: pay_path(@order, :e_payment), verify_url: verify_path(@order)}}
+#messages{data: {token_request_error: t('checkout.messages.token_request_error'), charge_error: t('checkout.messages.charge_error')}}
+
 .panel.panel-default
   .panel-heading
     %h4.panel-title
@@ -5,26 +8,26 @@
         = icon('cc-visa', class: 'fa-lg')
         = icon('cc-mastercard', class: 'fa-lg')
         = icon('cc-diners-club', class: 'fa-lg')
-      = t('store.checkout.creditcard_payment')
+      = t('checkout.creditcard_payment')
   .panel-body
-    = bootstrap_form_tag url: pay_path(method: :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
+    = bootstrap_form_tag url: pay_path(@order, :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
       .row
         .col-sm-6
-          = f.telephone_field :number, label: t('store.checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
+          = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
         .col-sm-3
-          = f.text_field :expiry, label: t('store.checkout.card_expiry'), class: 'credit-card-expiry'
+          = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
         .col-sm-3
-          = f.text_field :cvc, label: t('store.checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
+          = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
         .col-xs-12.pay-now-button.collapse.in
-          = f.button t('store.checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
+          = f.button t('checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
       .row
         .col-xs-12.working.collapse
           .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
-          %p= t('store.checkout.charging')
+          %p= t('checkout.messages.charging')
 
 .panel.panel-default
   .panel-heading
-    %h4.panel-title= t('store.checkout.bank_payment')
+    %h4.panel-title= t('checkout.bank_payment')
   .panel-body.bank-buttons
     .bank-button.nordea{data: {selected: 'nordea'}}
     .bank-button.op{data: {selected: 'osuuspankki'}}
@@ -35,57 +38,4 @@
     .bank-button.handelsbanken{data: {selected: 'handelsbanken'}}
     .bank-button.spankki{data: {selected: 'spankki'}}
 
-:coffee
-  $e_payment_path = "#{pay_path(method: 'e_payment')}"
-  $verify_path = '#{verify_path}'
-  $failure = (message) ->
-    $('.working').collapse 'hide'
-    $('#message-failure').find('.alert').text message
-    $('#message-failure').collapse 'show'
-    $('button', '.pay-now-button').attr 'disabled', false
-    $('.pay-now-button').collapse 'show'
-
-  $('#paybyway-creditcard-form').on 'submit', (e) ->
-    e.preventDefault()
-    $('button', '.pay-now-button').attr 'disabled', true
-    $('.pay-now-button').collapse 'hide'
-    $('.working').collapse 'show'
-    $('#message-failure').collapse 'hide'
-    request = $.get $(this).attr 'action'
-    request.done (data) ->
-      try
-        token = data.token
-        amount = data.amount
-        throw 'token request failure' unless token?
-        number = $('#number').val().replace(/ /g, '')
-        expiry = $('#expiry').payment 'cardExpiryVal'
-        cvc = $('#cvc').val()
-        request = $.post data.payment_url,
-          token: token
-          amount: amount
-          currency: data.currency
-          card: number
-          exp_month: if expiry.month < 10 then '0' + expiry.month else expiry.month
-          exp_year: expiry.year
-          security_code: cvc
-        request.done (data) ->
-          verification = $.post $verify_path, token: token
-          verification.done ->
-            $('#checkout-form').trigger 'submit.rails'
-          verification.fail ->
-            $failure "#{t('store.checkout.errors.charge')}"
-        request.error (data) ->
-          $failure "#{t('store.checkout.errors.charge')}"
-      catch error
-        $failure "#{t('store.checkout.errors.token_request')}"
-
-  $('.bank-button').on 'click', (e) ->
-    request = $.get $e_payment_path,
-      selected: $(this).data 'selected'
-    request.done (data) ->
-      try
-        form = $('<form></form>').attr('action', data.payment_url).attr('method', 'GET')
-        $('body').append form
-        form.submit()
-      catch error
-        $failure "#{t('store.checkout.errors.token_request')}"
+= javascript_include_tag 'payment_gateway/paybyway'

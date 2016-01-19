@@ -113,24 +113,24 @@ fi:
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
-    checkout_form:
-      continue: Siirry maksamaan
-      confirm: Vahvista tilaus
-    checkout:
-      checkout: Kassa
+  checkout:
+    title: Kassa
+    receipt: Tulosta kuitti
+    creditcard_payment: Maksa luottokortilla
+    bank_payment: Maksa nettipankissa
+    card_number: Kortin numero
+    card_expiry: Voimassa (kk/vv)
+    card_cvc: Kortin tarkiste (CVC)
+    charge: Maksa nyt
+    messages:
       cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Ostoskorisi sisältää tuotteita, joita ei ole enää saatavana.</strong></p><p>Ole hyvä ja poista merkityt tuotteet.</p>
       success_html: <h4>Tilaus vastaanotettu, kiitos käynnistä!</h4><p>Muistathan tulostaa kuitin ostoksestasi.</p>
-      receipt: Tulosta kuitti
-      creditcard_payment: Maksa luottokortilla
-      bank_payment: Maksa nettipankissa
-      card_number: Kortin numero
-      card_expiry: Voimassa (kk/vv)
-      card_cvc: Kortin tarkiste (CVC)
-      charge: Maksa nyt
       charging: Odotetaan maksutapahtuman valmistumista…
-      errors:
-        token_request: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
-        charge: Virhe maksutapahtumassa. Tarkista kortin tiedot.
+      token_request_error: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
+      charge_error: Virhe maksutapahtumassa. Tarkista kortin tiedot.
+    actions:
+      continue: Siirry maksamaan
+      confirm: Vahvista tilaus
   actions:
     back: Palaa
     show: Näytä
