@@ -99,9 +99,6 @@ fi:
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
-  pages:
-    show:
-      included_albums: Näytä kuva-albumit
   store:
     all_products: Kaikki tuotteet
     linked_products: Tämä tuote tarvitsee näitä oheistuotteita
@@ -113,6 +110,8 @@ fi:
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
+    show_page:
+      included_albums: Näytä kuva-albumit
   checkout:
     title: Kassa
     receipt: Tulosta kuitti
