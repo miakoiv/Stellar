@@ -87,7 +87,19 @@ module PaymentGateway
 
     # Checks the return params from a bank e-payment.
     def return(params)
-      params['RETURN_CODE'] == '0'
+      return_code  = params['RETURN_CODE']
+      order_number = params['ORDER_NUMBER']
+      settled      = params['SETTLED']
+      contact_id   = params['CONTACT_ID']
+      incident_id  = params['INCIDENT_ID']
+      authcode     = params['AUTHCODE']
+      if return_code.present? && order_number.present? && authcode.present?
+        cleartext = [return_code, order_number, settled, contact_id, incident_id].compact.join('|')
+        if authcode == sha256(@private_key, cleartext)
+          return true
+        end
+      end
+      false
     end
 
     def to_partial_path

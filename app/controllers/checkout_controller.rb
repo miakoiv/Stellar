@@ -45,7 +45,9 @@ class CheckoutController < ApplicationController
     status = @payment_gateway.verify(token)
 
     if status
-      @order.payments.create(amount: @order.grand_total)
+      unless @order.paid?
+        @order.payments.create(amount: @order.grand_total)
+      end
       head :ok
     else
       head :bad_request
