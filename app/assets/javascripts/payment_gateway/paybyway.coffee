@@ -1,9 +1,9 @@
-$e_payment_path = $('#paybyway-data').data 'pay-url'
-$verify_path = $('#paybyway-data').data 'verify-url'
+$e_payment_path = $('#paybyway-data').data 'payUrl'
+$verify_path = $('#paybyway-data').data 'verifyUrl'
 
 $failure = (error_type) ->
   $('.working').collapse 'hide'
-  $('#message-failure').find('.alert').text $('messages').data(error_type)
+  $('#message-failure').find('.alert').text $('#messages').data(error_type)
   $('#message-failure').collapse 'show'
   $('button', '.pay-now-button').attr 'disabled', false
   $('.pay-now-button').collapse 'show'
@@ -36,11 +36,11 @@ $('#paybyway-creditcard-form').on 'submit', (e) ->
         verification.done ->
           $('#checkout-form').trigger 'submit.rails'
         verification.fail ->
-          $failure 'charge_error'
+          $failure 'chargeError'
       request.error (data) ->
-        $failure 'charge_error'
+        $failure 'chargeError'
     catch error
-      $failure 'token_request_error'
+      $failure 'tokenRequestError'
 
 $('.bank-button').on 'click', (e) ->
   request = $.get $e_payment_path,
@@ -51,4 +51,4 @@ $('.bank-button').on 'click', (e) ->
       $('body').append form
       form.submit()
     catch error
-      $failure 'token_request_error'
+      $failure 'tokenRequestError'
