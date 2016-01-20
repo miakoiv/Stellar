@@ -86,10 +86,11 @@ class ApplicationController < ActionController::Base
       @pages = current_store.pages.top_level.sorted
     end
 
-    # Locale is set by a before_filter. Using params is a manual override
-    # not available in the user interface.
+    # Locale is set by a before_filter. User locale takes precedence over
+    # store locale. Using params is a manual override not available
+    # in the user interface.
     def set_locale
-      I18n.locale = params[:locale] || current_store.locale || I18n.default_locale
+      I18n.locale = params[:locale] || current_user.locale || current_store.locale || I18n.default_locale
     end
 
     # When no user is signed in, or a guest user is created, the current store
