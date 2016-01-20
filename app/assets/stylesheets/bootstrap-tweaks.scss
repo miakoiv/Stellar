@@ -80,11 +80,24 @@ html {
   float: right;
   position: fixed;
   z-index: $zindex-navbar;
+  overflow-x: visible;
   top: 50%;
   height: 70vh;
   transform: translateY(-50%);
   border-radius: $border-radius-large;
   transition: all 0.5s ease 0s;
+
+  .albums.container {
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 0;
+
+    .list-group {
+      margin: 0;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
 }
 
 .sidebar-right {
