@@ -228,6 +228,7 @@ en:
       user:
         name: Name
         role_ids: Roles
+        locale: Language
         current_password: Current password
         email: E-mail address
         phone: Phone number

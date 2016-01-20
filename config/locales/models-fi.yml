@@ -228,6 +228,7 @@ fi:
       user:
         name: Nimi
         role_ids: Roolit
+        locale: Kieli
         current_password: Nykyinen salasana
         email: Sähköpostiosoite
         phone: Puhelinnumero
