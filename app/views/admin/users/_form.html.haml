@@ -6,7 +6,7 @@
         = f.text_field :name, required: true
         = f.text_field :email, required: true
         = f.telephone_field :phone, required: true
-        = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
+        = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
         - if @user.new_record?
           = f.password_field :password, required: true
           = f.password_field :password_confirmation, required: true

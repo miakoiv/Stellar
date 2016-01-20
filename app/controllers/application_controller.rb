@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
     # store locale. Using params is a manual override not available
     # in the user interface.
     def set_locale
-      I18n.locale = params[:locale] || current_user.locale || current_store.locale || I18n.default_locale
+      I18n.locale = params[:locale] || current_user.locale.presence || current_store.locale || I18n.default_locale
     end
 
     # When no user is signed in, or a guest user is created, the current store
