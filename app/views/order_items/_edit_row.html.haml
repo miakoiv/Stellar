@@ -1,6 +1,10 @@
 = content_tag_for :tr, order_item, class: order_item.live? ? '' : 'warning text-warning' do
   %td
-    %strong= link_to_if order_item.live? && order_item.real?, order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+    %strong
+      - if order_item.real? && order_item.live?
+        = link_to order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+      - else
+        = order_item.product_title
     = order_item.product_subtitle
   %td.no-wrap
     - if order_item.real?
