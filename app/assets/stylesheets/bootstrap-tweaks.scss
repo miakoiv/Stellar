@@ -111,6 +111,7 @@ html {
     left: -20px;
     top: 50%;
     transform: translateY(-50%);
+    animation-delay: 3s;
 
     .btn {
       @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));

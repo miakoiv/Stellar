@@ -3,7 +3,7 @@
 
 - if @page.albums.any?
   #sidebar.sidebar.sidebar-right
-    .sidebar-toggle
+    .sidebar-toggle.animated.pulse.infinite
       %button.btn.btn-lg.btn-primary{data: {toggle: 'sidebar'}}
         = icon('chevron-left')
     .container.albums
