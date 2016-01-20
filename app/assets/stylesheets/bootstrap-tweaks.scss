@@ -77,29 +77,43 @@ html {
 // sidebar on the right
 //
 .sidebar {
+  float: right;
   position: fixed;
   z-index: $zindex-navbar;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  overflow-y: auto;
+  top: 50%;
+  height: 70vh;
+  transform: translateY(-50%);
+  border-radius: $border-radius-large;
   transition: all 0.5s ease 0s;
-
-  .container {
-    margin: 0;
-    padding-top: $navbar-height;
-  }
 }
 
 .sidebar-right {
-  &.active { right: 0%; }
-  right: -50%;
+  width: 320px;
+  right: -290px;
+
+  &.active { right: -15px; }
 
   .sidebar-toggle {
     position: absolute;
-    top: 50px;
-    left: -30px;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    .btn {
+      @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));
+      border-radius: 50%;
+    }
   }
+}
+@media (min-width: $screen-sm-min) {
+  .sidebar-right {
+    width: 640px;
+    right: -610px;
+  }
+}
+
+.page-content.has-sidebar {
+  padding-right: 30px;
 }
 
 .search-panel {
