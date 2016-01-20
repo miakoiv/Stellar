@@ -127,7 +127,7 @@ fi:
       charging: Odotetaan maksutapahtuman valmistumista…
       token_request_error: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
       charge_error: Virhe maksutapahtumassa. Tarkista kortin tiedot.
-    actions:
+    checkout_form:
       continue: Siirry maksamaan
       confirm: Vahvista tilaus
   actions:
