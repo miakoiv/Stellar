@@ -51,7 +51,7 @@ class Store < ActiveRecord::Base
 
   #---
   def self.locale_options
-    [['English', 'en'], ['suomi', 'fi']]
+    [['English', 'en'], ['Deutsch', 'de'], ['suomi', 'fi']]
   end
 
   #---

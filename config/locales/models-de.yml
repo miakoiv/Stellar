@@ -1,0 +1,235 @@
+de:
+  activerecord:
+    models:
+      album:
+        one: Fotoalbum
+        other: Fotoalben
+      category:
+        one: Kategorie
+        other: Kategorien
+      customization:
+        one: Attribut
+        other: Attribute
+      custom_attribute:
+        one: Attribut
+        other: Attribute
+      custom_value:
+        one: Wert
+        other: Werte
+      iframe:
+        one: Eingebunder iFrame
+        other: Eingebundene iFrames
+      image:
+        one: Bild
+        other: Bilder
+      image_type:
+        one: Bilder-Art
+        other: Bilder-Arten
+      inventory:
+        one: Bestand
+        other: Bestände
+      inventory_item:
+        one: Inventarstück
+        other: Inventarstücke
+      order:
+        one: Bestellung
+        other: Bestellungen
+      order_item:
+        one: Bestellposition
+        other: Bestellpositionen
+      order_type:
+        one: Bestell-Art
+        other: Bestell-Arten
+      page:
+        one: Seite
+        other: Seiten
+      product:
+        one: Produkt
+        other: Produkte
+      product_property:
+        one: Eigenschaft
+        other: Eigenschaften
+      promoted_item:
+        one: Beworbenes Produkt
+        other: Beworbene Produkte
+      promotion:
+        one: Werbeaktion
+        other: Werbeaktionen
+      promotion_vanilla: Manuelle Preisgestaltung
+      promotion_freebie_bundle: Gratis-Beigabe im Paket
+      property:
+        one: Eigenschaft
+        other: Eigenschaften
+      role:
+        one: Rolle
+        other: Rollen
+      store:
+        one: Filiale
+        other: Filialen
+      user:
+        one: Nutzer
+        other: Nutzer
+    attributes:
+      album:
+        title: Titel
+        created_at: Datum
+        description: Beschreibung
+        images: Fotos
+        page_ids: Angezeigt auf Seiten
+      category:
+        parent_category_id: Übergeordnete Kategorie
+        name: Name
+        description: Beschreibung
+        product_scope: Produktsortierung
+      customization:
+        custom_attribute_id: Attribut
+        custom_value_id: Wert
+        custom_values: Menge von Werten
+        value: Wert
+      custom_attribute:
+        attribute_type: Typ
+        measurement_unit_id: Messgröße
+        unit_pricing: Nutze Preis der Verpackungseinheit
+        searchable: In Produktsuche einbinden
+        name: Attribut
+        custom_values: Werte
+      custom_value:
+        value: Wert
+      iframe:
+        html: HTML-Code
+      image:
+        image_type_id: Bild-Typ
+        attachment_file_name: Dateiname
+        attachment_content_type: Dateityp
+        attachment_file_size: Dateigröße
+      inventory:
+        name: Name
+      inventory_item:
+        inventory_id: Bestand
+        code: Produktcode
+        shelf: Regal
+        amount: Menge
+        value: Wert
+      order:
+        number: Bestellung â„–
+        user_id: Kunde
+        order_type_id: Bestell-Art
+        completed_at: Bestelldatum
+        shipping_at: Versanddatum
+        approved: Genehmigt
+        approved_at: Bearbeitet
+        not_approved: Noch nicht bearbeitet
+        items: Posten
+        products: Produkte
+        customer_name: Kunde
+        customer_email: E-Mail
+        customer_phone: Telefonnummer
+        company_name: Firma
+        contact_person: Kontaktperson
+        billing_address: Rechnungsadresse
+        billing_postalcode: Postleitzahl
+        billing_city: Stadt
+        billing_country: Land
+        has_billing_address: Abweichende Lieferadresse
+        shipping_address: Lieferadresse
+        shipping_postalcode: Postleitzahl
+        shipping_city: Stadt
+        shipping_country: Land
+        notes: Anmerkungen
+        store_name: Filiale
+        user_name: Kunde
+        user_email: E-Mail
+        order_type_name: Bestell-Art
+        grand_total: Gesamtbetrag
+        summary: Zusammenfassung
+      order_item:
+        order_id: Bestellung
+        product_id: Produkt
+        amount: Anzahl
+        product_code: Produktcode
+        product_customer_code: Kunden-Code
+        product_title: Produkt-Titel
+        product_sales_price: Verkaufspreis
+        subtotal: Zwischensumme
+      page:
+        parent_page_id: Übergeordnete Seite
+        title: Titel
+        slug: Adresse
+        content: Inhalt
+        internal: Seite ist für den internen Gebrauch
+        wysiwyg: Froala-Editor nutzen
+        album_ids: Fotoalben
+      product:
+        category_ids: Kategorien
+        virtual: Virtuelles Produkt
+        code: Produktcode
+        customer_code: Kunden-Code
+        title: Titel
+        subtitle: Untertitel
+        description: Beschreibung
+        available_at: Verfügbar ab
+        deleted_at: Verfügbar bis
+        not_live: Nicht verfügbar
+        memo: Notiz
+        iframes: Einbindung
+        images: Bilder
+        customizations: Attribute
+        product_properties: Eigenschaften
+        components: Komponenten
+        linked_product_ids: Verknüpfte Produkte
+        cost: Einkaufspreis
+        sales_price: Verkaufspreis
+        stock: Bestand
+        value: Wert
+      promoted_item:
+        product_id: Produkt
+        price: Preis
+        amount_available: Verfügbarkeit
+        amount_sold: Ausverkauft
+      promotion:
+        promotion_handler_type: Methode
+        name: Name
+        first_date: Beginnt am
+        last_date: Endet am
+        product_ids_string: Hinzuzufügende Produkte
+        category_ids_string: Hinzuzufügende Kategorien
+      promotion_handler:
+        description: Beschreibung
+      promotion_freebie_bundle:
+        required_items: Anzahl der Stücke
+        discount_percent: Ermäßigung anwenden
+      property:
+        value_type: Typ
+        measurement_unit_id: Maßeinheit
+        unit_pricing: Nutze Preis der Verpackungseinheit
+        searchable: In Produktsuche einbinden
+        name: Name
+      role:
+        name: Name
+      store:
+        host: Server Adresse
+        erp_number: ERP-Nummer
+        name: Name
+        slug: Slug
+        settings: Einstellungen
+        theme: Ausstellungs-Thema
+        locale: Sprache
+        allow_shopping: Einkaufen erlauben
+        admit_guests: Gäste erlauben
+        free_shipping_at: Versandkostenfrei ab
+        shipping_cost_product_id: Versandkosten
+        tracking_code: GA Verfolgungs-Code
+        inventory_ids: Lager
+      user:
+        name: Name
+        role_ids: Rollen
+        current_password: Aktuelles Passwort
+        email: E-Mail-Adresse
+        password: Passwort
+        password_confirmation: Passwort bestätigen
+        remember_me: Remember me
+        sign_in_count: Anzahl Anmeldungen
+        current_sign_in_at: Aktuelle Anmeldung
+        last_sign_in_at: Letzte Anmeldung
+        current_sign_in_ip: IP-Adresse
+        last_sign_in_ip: IP-Adresse

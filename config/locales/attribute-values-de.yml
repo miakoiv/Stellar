@@ -1,0 +1,23 @@
+de:
+  activerecord:
+    values:
+      custom_attribute:
+        attribute_type:
+          set: Auswahlen
+          numeric: Numerisch
+          alpha: Text
+      image_type:
+        purpose:
+          presentational: Präsentation
+          technical: Technisch
+          document: Dokument
+      property:
+        value_type:
+          string: Text
+          numeric: Numerisch
+      product:
+        sorting:
+          manual: manuell
+          alphabetical: alphabetisch
+          sales_price_asc: günstigstes zuerst
+          sales_price_desc: teuerstes zuerst

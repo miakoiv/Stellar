@@ -1,0 +1,6 @@
+de:
+  order_mailer:
+    order_confirmation:
+      subject: "Bestellbestätigung von %{store}"
+      title: Bestellbestätigung
+    thank_you: "Vielen Dank, dass Sie bei %{store} eingekauft haben!"

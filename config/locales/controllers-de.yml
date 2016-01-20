@@ -1,0 +1,78 @@
+de:
+  admin:
+    albums:
+      create:
+        notice: "Fotoalbum %{album} erstellt."
+      update:
+        notice: "Fotoalbum %{album} aktualisiert."
+      destroy:
+        notice: "Fotoalbum %{album} gelöscht."
+    categories:
+      create:
+        notice: "Kategorie %{category} erstellt."
+      update:
+        notice: "Kategorie %{category} aktualisiert."
+      destroy:
+        notice: "Kategorie %{category} gelöscht."
+    custom_attributes:
+      create:
+        notice: "Attribut %{custom_attribute} erstellt."
+      update:
+        notice: "Attribut %{custom_attribute} aktualisiert."
+      destroy:
+        notice: "Attribut %{custom_attribute} gelöscht."
+    images:
+      create:
+        error: "Hochladen des Bildes fehlgeschlagen."
+    orders:
+      create:
+        notice: "Bestellung %{order} erstellt."
+      update:
+        notice: "Bestellung %{order} aktualisiert."
+    pages:
+      create:
+        notice: "Seite %{page} erstellt."
+      update:
+        notice: "Seite %{page} aktualisiert."
+      destroy:
+        notice: "Seite %{page} gelöscht."
+    products:
+      create:
+        notice: "Produkt %{product} erstellt."
+      update:
+        notice: "Produkt %{product} aktualisiert"
+    promotions:
+      create:
+        notice: "Werbeaktion %{promotion} erstellt."
+      update:
+        notice: "Werbeaktion %{promotion} aktualisiert"
+    properties:
+      create:
+        notice: "Eigenschaft %{property} erstellt."
+      update:
+        notice: "Eigenschaft %{property} aktualisiert"
+      destroy:
+        notice: "Eigenschaft %{property} gelöscht."
+    stores:
+      create:
+        notice: "Filiale %{store} erstellt."
+      update:
+        notice: "Filiale %{store} aktualisiert"
+    users:
+      create:
+        notice: "Nutzer %{user} erstellt."
+      update:
+        notice: "Nutzer %{user} aktualisiert"
+  correspondence:
+    mail_form:
+      thank_you: Vielen Dank für Ihre Nachricht!
+  orders:
+    update:
+      notice: "Bestellung %{order} aktualisiert"
+    destroy:
+      notice: "Bestellung %{order} gelöscht."
+  store:
+    order_product:
+      notice: "”%{product}” wurde %{amount} mal dem Warenkorb hinzugefügt."
+    confirm:
+      notice: "Bestellung abgeschlossen. Wir danken Ihnen für Ihr Vertrauen!"

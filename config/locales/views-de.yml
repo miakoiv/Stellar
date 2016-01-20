@@ -1,0 +1,173 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+de:
+  admin:
+    dashboard:
+      title: Dashboard
+      inventory:
+        title: Lagerwert
+        total_value: Gesamtwert
+        items: Stücke
+    manage: Verwalten
+    albums:
+      index:
+        new_album: Neues Fotoalbum
+      new:
+        new_album: Neues Fotoalbum
+    categories:
+      index:
+        new_category: Neue Kategorie
+      new:
+        new_category: Neue Kategorie
+    custom_attributes:
+      index:
+        new_custom_attribute: Neues Attribut
+      new:
+        new_custom_attribute: Neues Attribut
+    custom_values:
+      edit_table:
+        new_custom_value: Neuer Wert
+    orders:
+      show:
+        aggregated: Aggregated components
+      edit:
+        aggregated: Aggregated components
+    pages:
+      index:
+        new_page: Neue Seite
+      new:
+        new_page: Neue Seite
+    products:
+      index:
+        new_product: Neues Produkt
+        uncategorized: keine Kategorie
+      new:
+        new_product: Neues Produkt
+    promotion_handlers:
+      promotion_freebie_bundle:
+        discount_percent_help: Der günstigste Artikel wird um diesen Prozentsatz reduziert, wenn die Anzahl der gekauften Artikel übereinstimmt.
+    promotions:
+      index:
+        new_promotion: Neue Werbeaktion
+      new:
+        new_promotion: Neue Werbeaktion
+      edit:
+        add_products: Produkte hinzufügen
+        add_categories: Kategorien hinzufügen
+      add_products:
+        submit: Produkte hinzufügen
+      add_categories:
+        submit: Kategorien hinzufügen
+    properties:
+      index:
+        new_property: Neue Eigenschaft
+      new:
+        new_property: Neue Eigenschaft
+    stores:
+      index:
+        new_store: Neue Filiale
+      new:
+        new_store: Neue Filiale
+      form:
+        slug_help_html: Dies ist ein automatisch erzeugtes Feld
+    users:
+      index:
+        new_user: Neuer Nutzer
+      new:
+        new_user: Neuer Nutzer
+  orders:
+    show:
+      duplicate: In Warenkorb duplizieren
+    edit:
+      duplicate: In Warenkorb duplizieren
+  pages:
+    show:
+      included_albums: Fotoalben anzeigen
+  products:
+    product_detail:
+      amount: Anzahl
+      add: Zum Warenkorb hinzufügen
+  store:
+    all_products: Alle Produkte
+    linked_products: Dieses Produkt benötigt diese zusätzlichen Produkte
+    add_to_cart: Zum Warenkorb hinzufügen
+    select_for_cart: Produkte auswählen
+    empty_cart: Ihr Warenkorb ist leer.
+    go_shopping: Einkaufen gehen.
+    no_orders: Sie haben noch keine Bestellungen.
+    go_checkout: Zur Kasse gehen
+    cart:
+      shopping_cart: Warenkorb
+    cart_form:
+      place_order: Bestellung durchführen
+    checkout:
+      checkout: Kasse
+  actions:
+    back: Zurück
+    show: Anzeigen
+    edit: Bearbeiten
+    delete: Löschen
+    select: Auswählen
+    view: Betrachten
+    print: Drucken
+    reorder: Sortieren
+    search: Suchen
+    advanced_search: Erweiterte Suche mit ”%{keyword}”
+    confirm:
+      title: 'Sind Sie sicher?'
+      body: "Sind Sie sich sicher, dass Sie %{klass} ”%{name}” löschen möchten?"
+      proceed: 'Löschen'
+      cancel: 'Abbrechen'
+  dropzone:
+    default_message: Klicken, um Bild hinzuzufügen oder Bildd hierhin ziehen.
+  errors:
+    header: Ups!
+    blurb: "Wir konnten Ihre Anfrage wegen des folgenden technischen Fehlers nicht verarbeiten:"
+  footer:
+    heading: Spry 😃 Storefront
+    body_html: Provided by Leasit Oy <i class="fa fa-copyright"></i> 2015
+  search_panel:
+    search: Suche
+    keyword: Stichwort
+    budget: Höchstpreis
+    all_categories: Alle Kategorien
+    search_tags: Produkteigenschaften
