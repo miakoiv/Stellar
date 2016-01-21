@@ -5,7 +5,7 @@
         %th.col-min.hidden-print
         %th.col-xs-4= title(Image)
         %th.col-xs-6= col(Image, :image_type_id)
-        %th.hidden-print
+        %th.actions
 
     %tbody#images-tbody.sortable
       = render partial: 'admin/images/edit_row', collection: imageable.images.sorted, as: :image
