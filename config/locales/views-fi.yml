@@ -110,7 +110,8 @@ fi:
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
-    show_page:
+  albums:
+    sidebar:
       included_albums: Näytä kuva-albumit
   checkout:
     title: Kassa

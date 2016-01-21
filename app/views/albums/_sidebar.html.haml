@@ -1,0 +1,10 @@
+#sidebar.sidebar.sidebar-right
+  .sidebar-toggle.animated.pulse.infinite{title: t('.included_albums'), data: {toggle: 'tooltip', placement: 'left'}}
+    %button.btn.btn-lg.btn-primary{data: {toggle: 'sidebar'}}
+      = icon('image')
+  .container.albums
+    %ul.list-group
+      = render partial: 'albums/gallery_item', collection: albums, as: :album
+
+:coffee
+  $('.sidebar-toggle').tooltip 'show'
