@@ -264,6 +264,10 @@ fieldset[disabled] .help-block { display: none; }
     }
   }
   .col-min { width: 1px; }
+
+  .actions {
+    @extend .text-right, .no-wrap, .hidden-print;
+  }
 }
 
 .table.table-loose > tbody > tr > th,

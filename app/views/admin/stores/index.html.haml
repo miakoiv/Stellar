@@ -12,7 +12,7 @@
         %th= col(Store, :name)
         %th= col(Store, :erp_number)
         %th= col(Store, :slug)
-        %th.hidden-print
+        %th.actions
 
     %tbody
       - @stores.each do |store|
@@ -21,7 +21,7 @@
           %td= store.name
           %td= store.erp_number
           %td= store.slug
-          %td.hidden-print.text-right
+          %td.actions
             - if current_store != store
               = link_to icon('bookmark', t('actions.select')),
                   {host: store.host},

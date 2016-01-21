@@ -4,7 +4,7 @@
       %tr
         %th.col-xs-4= col(Customization, :custom_attribute_id)
         %th= col(Customization, :custom_value_id)
-        %th.col-xs-1.hidden-print
+        %th.actions
 
     %tbody#customizations-tbody
       = render partial: 'admin/customizations/edit_tbody', object: customizable, as: :customizable
@@ -21,7 +21,7 @@
               = f.select :custom_value_id, [], {include_blank: true}, {placeholder: col(Customization, :custom_value_id), class: 'form-control'}
             .value-input.collapse
               = f.text_field :value, class: 'form-control'
-          %td.col-xs-1.text-right
+          %td.actions
             = f.submit class: 'btn btn-sm btn-default'
 
 - attribute_set_ids = current_store.custom_attributes.set.pluck(:id)

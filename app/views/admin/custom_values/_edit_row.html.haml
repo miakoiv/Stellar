@@ -3,6 +3,6 @@
   %td
     = form_for [:admin, custom_value], remote: true do |f|
       = f.text_field :value, class: 'form-control'
-  %td.hidden-print.text-right
+  %td.actions
     = link_to icon('remove', t('actions.delete')), admin_custom_value_path(custom_value),
         remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -4,7 +4,7 @@
       %tr
         %th.col-xs-4= col(ProductProperty, :property_id)
         %th= col(ProductProperty, :value)
-        %th.col-xs-1.hidden-print
+        %th.actions
 
     %tbody#properties-tbody
       = render partial: 'admin/product_properties/edit_tbody', object: product, as: :product
@@ -17,7 +17,7 @@
           %td.col-xs-4
             = f.select :property_id, current_store.properties.map { |p| [p.name_with_units, p.id] }, {include_blank: true}, {placeholder: col(ProductProperty, :property_id), class: 'form-control'}
           %td= f.text_field :value, placeholder: col(ProductProperty, :value), class: 'form-control'
-          %td.col-xs-1.text-right
+          %td.actions
             = f.submit class: 'btn btn-sm btn-default'
 
 - string_property_ids = current_store.properties.string.pluck(:id)

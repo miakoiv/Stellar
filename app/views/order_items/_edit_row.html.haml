@@ -22,7 +22,7 @@
       = humanized_money_with_symbol order_item.price
   %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal
-  %td.text-right
+  %td.actions
     - unless order_item.virtual?
       = link_to icon('remove', t('actions.delete')), order_item_path(order_item),
           remote: true, method: :delete, class: 'btn btn-danger btn-sm'

@@ -12,7 +12,7 @@
         %th.col-xs-3= col(Property, :name)
         %th= col(Property, :measurement_unit_id)
         %th= col(Property, :value_type)
-        %th.col-xs-3.hidden-print
+        %th.actions
 
     %tbody.sortable
       - @properties.each do |property|
@@ -22,7 +22,7 @@
             = property.searchable? ? icon('search-plus', property.name, data: {toggle: 'tooltip'}, title: col(Property, :searchable)) : property.name
           %td= property.measurement_unit
           %td= property.value_type_name
-          %td.hidden-print.text-right
+          %td.actions
             = link_to icon('info', t('actions.show')), admin_property_path(property), class: 'btn btn-default btn-sm'
             - if current_user.can_update?(Property)
               = link_to icon('edit', t('actions.edit')), edit_admin_property_path(property), class: 'btn btn-default btn-sm'

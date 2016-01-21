@@ -11,7 +11,7 @@
         %th.col-xs-1= col(Album, :created_at)
         %th.col-xs-2= col(Album, :title)
         %th= col(Album, :images)
-        %th.hidden-print
+        %th.actions
 
     %tbody
       = content_tag_for :tr, @albums do |album|
@@ -21,7 +21,7 @@
           - album.images.sorted.each do |image|
             = image_variant_tag(image, :icon,
                 data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
-        %td.hidden-print.text-right
+        %td.actions
           = link_to icon('info', t('actions.show')), admin_album_path(album),
               class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Album)

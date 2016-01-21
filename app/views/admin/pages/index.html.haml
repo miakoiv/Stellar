@@ -13,7 +13,7 @@
         %th= col(Page, :parent_page_id)
         %th= col(Page, :title)
         %th= col(Page, :album_ids)
-        %th.hidden-print
+        %th.actions
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
       - @pages.each do |page|
@@ -24,7 +24,7 @@
           %td= page.parent_page
           %td= page.internal? ? icon('warning', page.title, data: {toggle: 'tooltip'}, title: col(Page, :internal)) : page.title
           %td= page.albums.to_sentence
-          %td.hidden-print.text-right
+          %td.actions
             = link_to icon('eye', t('actions.view')), show_page_path(page),
                 class: 'btn btn-default btn-sm'
             - if current_user.can_update?(page)

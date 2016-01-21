@@ -11,7 +11,7 @@
         %th.col-xs-3= col(CustomAttribute, :name)
         %th= col(CustomAttribute, :measurement_unit_id)
         %th= col(CustomAttribute, :custom_values)
-        %th.col-xs-3.hidden-print
+        %th.actions
 
     %tbody
       - @custom_attributes.each do |custom_attribute|
@@ -24,7 +24,7 @@
               = custom_attribute.custom_values.to_sentence
             - else
               %em= custom_attribute.type_name
-          %td.hidden-print.text-right
+          %td.actions
             = link_to icon('info', t('actions.show')), admin_custom_attribute_path(custom_attribute), class: 'btn btn-default btn-sm'
             - if current_user.can_update?(CustomAttribute)
               = link_to icon('edit', t('actions.edit')), edit_admin_custom_attribute_path(custom_attribute), class: 'btn btn-default btn-sm'
