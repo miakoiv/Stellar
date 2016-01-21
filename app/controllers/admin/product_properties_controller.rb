@@ -22,6 +22,7 @@ class Admin::ProductPropertiesController < ApplicationController
   # DELETE /admin/product_properties/1
   def destroy
     @product_property = ProductProperty.find(params[:id])
+    @product = @product_property.product
 
     respond_to do |format|
       if @product_property.destroy

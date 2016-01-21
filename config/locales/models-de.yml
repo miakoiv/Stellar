@@ -7,15 +7,6 @@ de:
       category:
         one: Kategorie
         other: Kategorien
-      customization:
-        one: Attribut
-        other: Attribute
-      custom_attribute:
-        one: Attribut
-        other: Attribute
-      custom_value:
-        one: Wert
-        other: Werte
       iframe:
         one: Eingebunder iFrame
         other: Eingebundene iFrames
@@ -81,20 +72,6 @@ de:
         name: Name
         description: Beschreibung
         product_scope: Produktsortierung
-      customization:
-        custom_attribute_id: Attribut
-        custom_value_id: Wert
-        custom_values: Menge von Werten
-        value: Wert
-      custom_attribute:
-        attribute_type: Typ
-        measurement_unit_id: Messgröße
-        unit_pricing: Nutze Preis der Verpackungseinheit
-        searchable: In Produktsuche einbinden
-        name: Attribut
-        custom_values: Werte
-      custom_value:
-        value: Wert
       iframe:
         html: HTML-Code
       image:
@@ -173,7 +150,6 @@ de:
         memo: Notiz
         iframes: Einbindung
         images: Bilder
-        customizations: Attribute
         product_properties: Eigenschaften
         components: Komponenten
         linked_product_ids: Verknüpfte Produkte

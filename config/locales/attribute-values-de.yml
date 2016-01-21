@@ -1,11 +1,6 @@
 de:
   activerecord:
     values:
-      custom_attribute:
-        attribute_type:
-          set: Auswahlen
-          numeric: Numerisch
-          alpha: Text
       image_type:
         purpose:
           presentational: Präsentation

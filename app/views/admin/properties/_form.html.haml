@@ -32,8 +32,8 @@
   $('#property_measurement_unit_id').on 'change', (e) ->
     if $(e.target).val()
       $('.unit_pricing').collapse 'show'
-      $('#property_unit_pricing').bootstrapSwitch 'disabled', false
+      $('#property_unit_pricing').attr 'disabled', false
     else
       $('.unit_pricing').collapse 'hide'
-      $('#property_unit_pricing').bootstrapSwitch 'state', false
-      $('#property_unit_pricing').bootstrapSwitch 'disabled', true
+      $('#property_unit_pricing').attr 'checked', false
+      $('#property_unit_pricing').attr 'disabled', true

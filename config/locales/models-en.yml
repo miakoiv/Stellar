@@ -7,15 +7,6 @@ en:
       category:
         one: category
         other: categories
-      customization:
-        one: attribute
-        other: attributes
-      custom_attribute:
-        one: attribute
-        other: attributes
-      custom_value:
-        one: value
-        other: values
       iframe:
         one: embed
         other: embeds
@@ -83,20 +74,6 @@ en:
         name: Name
         description: Description
         product_scope: Product sorting
-      customization:
-        custom_attribute_id: Attribute
-        custom_value_id: Value
-        custom_values: Set of values
-        value: Value
-      custom_attribute:
-        attribute_type: Type
-        measurement_unit_id: Measurement unit
-        unit_pricing: Use unit pricing
-        searchable: Include in product search
-        name: Attribute
-        custom_values: Values
-      custom_value:
-        value: Value
       iframe:
         html: HTML code
       image:
@@ -178,7 +155,6 @@ en:
         memo: Memo
         iframes: Embeds
         images: Images
-        customizations: Attributes
         product_properties: Properties
         components: Components
         linked_product_ids: Associated products

@@ -14,13 +14,6 @@ fi:
         notice: "Tuoteryhmä %{category} päivitetty."
       destroy:
         notice: "Tuoteryhmä %{category} poistettu."
-    custom_attributes:
-      create:
-        notice: "Ominaisuus %{custom_attribute} luotu."
-      update:
-        notice: "Ominaisuus %{custom_attribute} päivitetty."
-      destroy:
-        notice: "Ominaisuus %{custom_attribute} poistettu."
     images:
       create:
         error: "Kuvan lisääminen epäonnistui."

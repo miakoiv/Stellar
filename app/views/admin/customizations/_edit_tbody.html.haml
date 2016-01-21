@@ -1,6 +1,0 @@
-= content_tag_for :tr, customizable.customizations do |customization|
-  %td= customization.custom_attribute
-  %td= customization.display_value_with_units
-  %td.actions
-    = link_to icon('remove', t('actions.delete')), admin_customization_path(customization),
-        remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -58,14 +58,6 @@ de:
         new_category: Neue Kategorie
       new:
         new_category: Neue Kategorie
-    custom_attributes:
-      index:
-        new_custom_attribute: Neues Attribut
-      new:
-        new_custom_attribute: Neues Attribut
-    custom_values:
-      edit_table:
-        new_custom_value: Neuer Wert
     orders:
       show:
         aggregated: Aggregated components

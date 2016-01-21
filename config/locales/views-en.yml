@@ -58,14 +58,6 @@ en:
         new_category: New category
       new:
         new_category: New category
-    custom_attributes:
-      index:
-        new_custom_attribute: New attribute
-      new:
-        new_custom_attribute: New attribute
-    custom_values:
-      edit_table:
-        new_custom_value: New value
     orders:
       show:
         aggregated: Aggregated components

@@ -32,8 +32,6 @@ class Store < ActiveRecord::Base
   has_many :categories
   has_many :products
   has_many :properties
-  has_many :custom_attributes
-  has_many :custom_values, through: :custom_attributes
   has_many :orders
   has_many :users
   has_many :pages

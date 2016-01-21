@@ -5,7 +5,6 @@ class Product < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
-  include Customizable
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
@@ -77,20 +76,20 @@ class Product < ActiveRecord::Base
     categories.first
   end
 
-  # Checks assigned customizations for an attribute that declares unit pricing,
+  # Checks product properties for a property that declares unit pricing,
   # returns calculated price per base unit.
   def unit_price
-    customization = unit_pricing_customization
-    measure = customization.try(:value).to_i
-    return nil if sales_price.nil? || customization.nil? || measure == 0
-    sales_price / (measure * customization.custom_attribute.measurement_unit.factor)
+    product_property = unit_pricing_property
+    measure = product_property.try(:value).to_i
+    return nil if sales_price.nil? || product_property.nil? || measure == 0
+    sales_price / (measure * product_property.property.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.
   def base_unit
-    customization = unit_pricing_customization
-    return nil if customization.nil?
-    customization.custom_attribute.measurement_unit.base_unit
+    product_property = unit_pricing_property
+    return nil if product_property.nil?
+    product_property.property.measurement_unit.pricing_base
   end
 
   # Gathers product stock to a hash keyed by inventory.
@@ -162,4 +161,9 @@ class Product < ActiveRecord::Base
         (deleted_at.nil? || deleted_at.future?)
       true
     end
+
+    private
+      def unit_pricing_property
+        product_properties.joins(:property).merge(Property.unit_pricing).first
+      end
 end

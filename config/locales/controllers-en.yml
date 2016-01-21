@@ -14,13 +14,6 @@ en:
         notice: "Category %{category} updated."
       destroy:
         notice: "Category %{category} deleted."
-    custom_attributes:
-      create:
-        notice: "Attribute %{custom_attribute} created."
-      update:
-        notice: "Attribute %{custom_attribute} updated."
-      destroy:
-        notice: "Attribute %{custom_attribute} deleted."
     images:
       create:
         error: "Image upload failed."

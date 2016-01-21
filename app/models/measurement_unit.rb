@@ -9,6 +9,10 @@ class MeasurementUnit < ActiveRecord::Base
     base_unit.nil? ? 1 : 10 ** exponent
   end
 
+  def pricing_base
+    base_unit || self
+  end
+
   def to_s
     name
   end

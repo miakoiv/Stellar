@@ -14,13 +14,6 @@ de:
         notice: "Kategorie %{category} aktualisiert."
       destroy:
         notice: "Kategorie %{category} gelöscht."
-    custom_attributes:
-      create:
-        notice: "Attribut %{custom_attribute} erstellt."
-      update:
-        notice: "Attribut %{custom_attribute} aktualisiert."
-      destroy:
-        notice: "Attribut %{custom_attribute} gelöscht."
     images:
       create:
         error: "Hochladen des Bildes fehlgeschlagen."

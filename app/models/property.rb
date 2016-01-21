@@ -21,6 +21,7 @@ class Property < ActiveRecord::Base
   has_many :products, through: :product_properties
 
   scope :searchable, -> { where(searchable: true) }
+  scope :unit_pricing, -> { where(unit_pricing: true) }
 
   #---
   validates :name, presence: true
