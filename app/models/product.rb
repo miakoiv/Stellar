@@ -80,6 +80,7 @@ class Product < ActiveRecord::Base
 
   # Sales price adjusted for given user.
   def sales_price_for_cents(user)
+    return nil if sales_price_cents.nil?
     sales_price_cents * user.pricing_factor
   end
 
