@@ -204,6 +204,7 @@ en:
       user:
         name: Name
         role_ids: Roles
+        pricing_factor: Pricing factor
         locale: Language
         current_password: Current password
         email: E-mail address

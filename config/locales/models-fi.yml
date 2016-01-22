@@ -204,6 +204,7 @@ fi:
       user:
         name: Nimi
         role_ids: Roolit
+        pricing_factor: Hintakerroin
         locale: Kieli
         current_password: Nykyinen salasana
         email: Sähköpostiosoite

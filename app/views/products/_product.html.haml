@@ -9,7 +9,7 @@
           %span.small= product.subtitle
         .description= product.description.html_safe
     .buy-now
-      %p= humanized_money_with_symbol product.sales_price
+      %p= humanized_money_with_symbol product.sales_price_for(current_user)
       - if can_shop?
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
           = hidden_field_tag :amount, 1

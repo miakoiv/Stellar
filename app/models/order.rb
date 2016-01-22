@@ -98,10 +98,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Inserts amount of product to this order, with pricing adjusted
+  # for the owner of this order.
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
     order_item.amount += amount
-    order_item.price = product.sales_price
+    order_item.price = product.sales_price_for(user)
     order_item.save!
     apply_shipping_cost!
     apply_promotions!

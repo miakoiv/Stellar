@@ -5,7 +5,8 @@
     = product.subtitle
   %td= product.code
   - if can_see_pricing?
-    %td.currency= humanized_money_with_symbol product.sales_price
+    %td.currency
+      = humanized_money_with_symbol product.sales_price_for(current_user)
   %td.actions
     - if can_shop?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do

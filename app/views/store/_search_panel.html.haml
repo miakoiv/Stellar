@@ -3,11 +3,6 @@
     .col-xs-12.col-sm-3.col-lg-3
       .form-group
         = f.search_field :keyword_cont, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
-    .col-xs-12.col-sm-3.col-lg-2
-      .form-group
-        .input-group
-          = f.text_field :sales_price_lteq, autocomplete: 'off', placeholder: t('search_panel.budget'), class: 'form-control text-right'
-          %span.input-group-addon €
     .col-xs-12.col-sm-3.col-lg-3
       .form-group
         = f.select :categories_id_in, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
