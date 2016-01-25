@@ -20,9 +20,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
-# Awesome search
-gem 'ransack'
-gem 'arel-fulltext', github: 'leonardoeloy/arel-fulltext'
+# Low-magic searches
+gem 'searchlight'
 
 # Pagination
 gem 'kaminari'

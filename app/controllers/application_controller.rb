@@ -33,10 +33,11 @@ class ApplicationController < ActionController::Base
     @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
   end
 
-  # Preserves ransack query param in a cookie.
-  def set_ransack_query(key)
-    cookies[key] = params[:q].to_json if params[:q]
-    @query = params[:q].presence || JSON.load(cookies[key])
+  # Preserves search query param in a cookie.
+  def set_search_query(search_model)
+    key = "#{search_model}_search"
+    cookies[key] = params[key].to_json if params[key]
+    @query = params[key].presence || JSON.load(cookies[key]) || {}
   end
 
   # The methods below are for convenience and to cache often repeated

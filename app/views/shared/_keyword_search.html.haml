@@ -2,10 +2,10 @@
 
   = form_tag search_path, method: :get, id: 'navbar-search', class: 'navbar-form navbar-right', data: {push: 'partial', target: '.products'}, role: 'search' do
     .form-group.has-feedback
-      = search_field_tag 'q[keyword_cont]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
+      = search_field_tag 'product_search[keyword]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
       %span.form-control-feedback= icon('search')
       %ul#search-dropdown.dropdown-menu.media-list
 
   :coffee
-    $('#q_keyword_cont').smartkeyup ->
-      $.get '#{search_path}?i=1&q[keyword_cont]=' + encodeURIComponent($(this).val())
+    $('#product_search_keyword').smartkeyup ->
+      $.get '#{search_path}?i=1&product_search[keyword]=' + encodeURIComponent($(this).val())

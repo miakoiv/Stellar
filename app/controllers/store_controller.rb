@@ -43,18 +43,14 @@ class StoreController < ApplicationController
 
   # GET /store/search
   def search
-    q = params.fetch(:q, {})    # Ransack query
-    i = params.fetch(:i, false) # inline mode
-    valid_search = q.present? && q[:keyword_cont].present? && q[:keyword_cont].length > 2
-    @q = current_store.products.live.ransack(q)
-    @properties = current_store.properties.searchable
-
-    @products = if valid_search
-      i ? @q.result(distinct: true).limit(Product::INLINE_SEARCH_RESULTS)
-        : @q.result(distinct: true).includes(:product_properties)
+    inline_mode = params.fetch(:i, false)
+    @search = ProductSearch.new(search_params)
+    @products = if inline_mode
+      @search.results.limit(Product::INLINE_SEARCH_RESULTS)
     else
-      Product.none
+      @search.results.page(params[:page])
     end
+    @properties = current_store.properties.searchable
 
     respond_to :js, :html
   end
@@ -114,5 +110,10 @@ class StoreController < ApplicationController
     # Enable navbar search widget when applicable.
     def enable_navbar_search
       @navbar_search = true
+    end
+
+    # Restrict searching to live products in current store.
+    def search_params
+      (params[:product_search] || {}).merge(store_id: current_store.id, live: true)
     end
 end

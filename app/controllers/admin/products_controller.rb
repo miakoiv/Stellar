@@ -14,10 +14,9 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    set_ransack_query('products')
-    @q = current_store.products.ransack(@query)
-    @q.sorts = 'title asc' if @q.sorts.empty?
-    @products = @q.result(distinct: true).page(params[:page])
+    set_search_query('product')
+    @search = ProductSearch.new(search_params)
+    @products = @search.results.page(params[:page])
   end
 
   # GET /admin/products/1
@@ -79,5 +78,10 @@ class Admin::ProductsController < ApplicationController
         :description, :memo, :cost, :sales_price, :available_at, :deleted_at,
         category_ids: [], linked_product_ids: []
       )
+    end
+
+    # Restrict searching to the current store.
+    def search_params
+      @query.merge(store_id: current_store.id)
     end
 end
