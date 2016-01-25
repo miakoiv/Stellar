@@ -10,8 +10,8 @@ class Product < ActiveRecord::Base
   friendly_id :slugger, use: [:slugged, :history]
   monetize :cost_cents, allow_nil: true
   monetize :sales_price_cents, allow_nil: true
-  monetize :sales_price_for_cents
-  monetize :unit_price_for_cents
+  monetize :user_price_cents, disable_validation: true
+  monetize :user_unit_price_cents, disable_validation: true
 
   INLINE_SEARCH_RESULTS = 20
 
@@ -70,19 +70,20 @@ class Product < ActiveRecord::Base
     categories.first
   end
 
-  # Sales price adjusted for given user.
-  def sales_price_for_cents(user)
+  # Price adjusted for given user.
+  def user_price_cents(user)
     return nil if sales_price_cents.nil?
     sales_price_cents * user.pricing_factor
   end
 
   # Checks product properties for a property that declares unit pricing,
   # returns calculated price per base unit, adjusted for given user.
-  def unit_price_for_cents(user)
+  def user_unit_price_cents(user)
+    price = user_price_cents(user)
     product_property = unit_pricing_property
     measure = product_property.try(:value).to_i
-    return nil if sales_price_cents.nil? || product_property.nil? || measure == 0
-    sales_price_for_cents(user) / (measure * product_property.property.measurement_unit.factor)
+    return nil if price.nil? || product_property.nil? || measure == 0
+    price / (measure * product_property.property.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.

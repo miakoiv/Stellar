@@ -26,7 +26,7 @@
                 = product.property_value(property.id)
             - if can_see_pricing?
               %td.currency.text-right
-                = humanized_money_with_symbol product.sales_price_for(current_user)
+                = humanized_money_with_symbol product.user_price(current_user)
 
 :coffee
   $('#search-results').tablesorter
