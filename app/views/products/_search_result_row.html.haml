@@ -5,7 +5,7 @@
         = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
     %td= product.code
     %td
-      = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
+      = link_to show_product_path(product.category, product) do
         %strong= product.title
         = product.subtitle
     - @properties.each do |property|
