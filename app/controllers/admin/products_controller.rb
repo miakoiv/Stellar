@@ -14,8 +14,8 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products
   # GET /admin/products.json
   def index
-    set_search_query('product')
-    @search = ProductSearch.new(search_params)
+    @query = saved_search_query('product', 'admin_product_search')
+    @search = ProductSearch.new(@query.merge(store_id: current_store))
     @products = @search.results.page(params[:page])
   end
 
@@ -78,10 +78,5 @@ class Admin::ProductsController < ApplicationController
         :description, :memo, :cost, :sales_price, :available_at, :deleted_at,
         category_ids: [], linked_product_ids: []
       )
-    end
-
-    # Restrict searching to the current store.
-    def search_params
-      @query.merge(store_id: current_store.id)
     end
 end
