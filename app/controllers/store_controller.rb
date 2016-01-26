@@ -43,16 +43,21 @@ class StoreController < ApplicationController
 
   # GET /store/search
   def search
-    inline_mode = params.fetch(:i, false)
+    @query = saved_search_query('product', 'product_search')
     @search = ProductSearch.new(search_params)
-    @products = if inline_mode
-      @search.results.limit(Product::INLINE_SEARCH_RESULTS)
-    else
-      @search.results.page(params[:page])
-    end
+    @products = @search.results.page(params[:page])
     @properties = current_store.properties.searchable
 
     respond_to :js, :html
+  end
+
+  # GET /store/lookup
+  def lookup
+    @query = params[:product_search]
+    @search = ProductSearch.new(search_params)
+    @products = @search.results.limit(Product::INLINE_SEARCH_RESULTS)
+
+    respond_to :js
   end
 
   # GET /category/:category_id
@@ -114,6 +119,6 @@ class StoreController < ApplicationController
 
     # Restrict searching to live products in current store.
     def search_params
-      (params[:product_search] || {}).merge(store_id: current_store.id, live: true)
+      @query.merge(store_id: current_store.id, live: true, categorized: true)
     end
 end

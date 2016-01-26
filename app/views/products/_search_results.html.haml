@@ -1,13 +1,16 @@
-.table-responsive
-  %table.table.table-striped.table-hover
-    %thead
-      %tr
-        %th.col-min
-        %th.col-xs-2.no-wrap= col(Product, :code)
-        %th= col(Product, :title)
-        - @properties.each do |property|
-          %th= property.name.capitalize
-        - if can_see_pricing?
-          %th.no-wrap.text-right= col(Product, :sales_price)
-    %tbody#search-results
-      = render partial: 'products/search_result_row', collection: products, as: :product
+#search-results
+  .table-responsive.infinite-table
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th.col-min
+          %th.col-xs-2.no-wrap= col(Product, :code)
+          %th= col(Product, :title)
+          - @properties.each do |property|
+            %th= property.name.capitalize
+          - if can_see_pricing?
+            %th.no-wrap.text-right= col(Product, :sales_price)
+      %tbody
+        = render partial: 'products/search_result_row', collection: products, as: :product
+    .pagination
+      = link_to_next_page(products, '', remote: true)

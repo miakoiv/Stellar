@@ -1,9 +1,6 @@
-- if @products.any?
-  $('#search-dropdown').html("#{j render partial: 'products/search_dropdown', object: @products, as: :products}");
-  $('#search-dropdown').show('fade', 150);
-  $('#main').on('click', function() { $('#search-dropdown').hide('fade') });
-  $('#navbar-search input').on('focus', function() { $('#search-dropdown').show('fade') });
+$("#{j render partial: 'products/search_result_row', collection: @products, as: :product}").appendTo($('.infinite-table > table > tbody'));
+
+- if @products.last_page?
+  $('.pagination').html('');
 - else
-  $('#main').off('click');
-  $('#navbar-search input').off('focus');
-  $('#search-dropdown').hide('fade');
+  $('.pagination').html("#{j link_to_next_page(@products, '', remote: true)}")

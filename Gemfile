@@ -23,8 +23,9 @@ gem 'execjs'
 # Low-magic searches
 gem 'searchlight'
 
-# Pagination
+# Pagination and infinite pages
 gem 'kaminari'
+gem 'jquery-infinite-pages'
 
 # Meta tag generator
 gem 'meta-tags'

@@ -3,9 +3,7 @@
     = render partial: 'products/search_results', object: @products, as: :products
 
 :coffee
-  $('.categories').hide()
   $('.product-detail').hide().addClass 'from-search'
-  $('.navbar-form').hide()
   $('.search-panel').html("#{j render partial: 'store/search_panel'}")
-  $('.search-panel').show()
   $('.products').show().addClass 'from-search'
+  $('#search-results').initialize()

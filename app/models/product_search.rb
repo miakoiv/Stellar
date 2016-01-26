@@ -31,6 +31,10 @@ class ProductSearch < Searchlight::Search
     query.where(live: checked?(options['live']))
   end
 
+  def search_categorized
+    query.where.not(categories: {id: nil})
+  end
+
   # Define search methods for all searchable properties, avoiding name clashes
   # by including the property id. Finding matching products is done with
   # subselects to be able to combine multiple property searches.

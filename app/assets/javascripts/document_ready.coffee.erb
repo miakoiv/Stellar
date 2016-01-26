@@ -18,6 +18,10 @@ $.fn.extend
       dropdownParent: 'body'
       allowEmptyOption: true
 
+    $('.infinite-table', this).infinitePages
+      loading: ->
+        $(this).html('<i class="fa fa-spin fa-circle-o-notch"></i>')
+
     $('.nav-tabs[role="tablist"]').stickyTabs
       backToTop: true
 

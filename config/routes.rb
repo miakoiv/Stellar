@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store/search', to: 'store#search', as: :search
+  get  '/store/lookup', to: 'store#lookup', as: :lookup
   post '/correspondence/mail_form', to: 'correspondence#mail_form',
     as: :mail_form
 

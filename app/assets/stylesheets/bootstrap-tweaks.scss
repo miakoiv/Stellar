@@ -133,12 +133,24 @@ html {
   padding-right: 30px;
 }
 
+//
+// search panel and infinite table of search results
+//
 .search-panel {
   @extend .row;
   padding-top: 20px;
   padding-bottom: 10px;
   max-height: 320px;
   overflow-y: auto;
+}
+
+.infinite-table .pagination {
+  @extend .col-xs-12;
+
+  a {
+    @extend .btn, .btn-lg, .btn-block, .btn-primary;
+    height: 50px;
+  }
 }
 
 .visible-from-search { display: none; }
