@@ -8,4 +8,4 @@
         %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))
 - if current_user.can_update?(Product)
   = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default'
-  = link_to icon('times'), '#back', class: 'btn btn-primary'
+= link_to icon('times'), '#back', class: 'btn btn-primary'
