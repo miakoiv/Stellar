@@ -1,37 +1,13 @@
 .table-responsive
-  %table#search-results.table.table-hover
+  %table.table.table-striped.table-hover
     %thead
       %tr
-        %th.col-min{data: {sorter: 'false'}}
+        %th.col-min
         %th.col-xs-2.no-wrap= col(Product, :code)
         %th= col(Product, :title)
         - @properties.each do |property|
           %th= property.name.capitalize
         - if can_see_pricing?
           %th.no-wrap.text-right= col(Product, :sales_price)
-    %tbody
-      - products.each do |product|
-        - cache_if current_user.guest?, [:search_result_row, product] do
-          = content_tag_for :tr, product do
-            %td
-              .box-thumbnail
-                = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-            %td= product.code
-            %td
-              = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
-                %strong= product.title
-                = product.subtitle
-            - @properties.each do |property|
-              %td.no-wrap.small{class: property.numeric? ? 'text-right' : ''}
-                = product.property_value(property.id)
-            - if can_see_pricing?
-              %td.currency.text-right
-                = humanized_money_with_symbol product.user_price(current_user)
-
-:coffee
-  $('#search-results').tablesorter
-    theme: 'bootstrap'
-    widthFixed: true
-    widgets: ['uiTheme', 'saveSort']
-    headerTemplate: '{content} {icon}'
-    sortList: [[2,0]]
+    %tbody#search-results
+      = render partial: 'products/search_result_row', collection: products, as: :product
