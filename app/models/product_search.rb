@@ -27,8 +27,8 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_live
-    return query if empty?(options[:live])
-    query.where(live: checked?(options[:live]))
+    return query if empty?(options['live'])
+    query.where(live: checked?(options['live']))
   end
 
   # Define search methods for all searchable properties, avoiding name clashes
