@@ -65,6 +65,11 @@ class Store < ActiveRecord::Base
     inventories.by_purpose(purpose)
   end
 
+  # Properties flagged searchable.
+  def searchable_properties
+    properties.merge(Property.searchable)
+  end
+
   # Available categories at top level.
   def top_level_category_options(exclude = nil)
     (categories.top_level.sorted - [exclude]).map { |c| [c.name, c.id] }

@@ -1,17 +1,20 @@
 .search-form
   = form_for @search, url: search_path, data: {push: 'partial', target: '.products', 'optimize-url-params' => false}, class: 'form-vertical' do |f|
-    .col-xs-12.col-sm-3.col-lg-3
-      .form-group
-        = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
-    .col-xs-12.col-sm-3.col-lg-3
-      .form-group
-        = f.select :categories, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
-    .col-xs-12.col-sm-3.col-lg-3
-      .form-group
-        = f.search_field :search_tags, autocomplete: 'off', placeholder: current_store.properties.searchable.pluck(:name).join('/'), class: 'form-control'
-    .col-xs-12.col-lg-1
-      .form-group.pull-right
-        = f.submit t('search_panel.search'), class: 'btn btn-default'
+    .row
+      .col-xs-12.col-sm-4
+        .form-group
+          = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
+      .col-xs-12.col-sm-4
+        .form-group
+          = f.select :categories, current_store.category_options, {include_blank: true}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
+      .col-xs-12.col-sm-4
+        .form-group.pull-right
+          = f.submit t('search_panel.search'), class: 'btn btn-default'
+    .row
+      - current_store.searchable_properties.each do |property|
+        .col-xs-6.col-sm-3
+          .form-group
+            = f.select "#{property.name}_#{property.id}", property.values.sort, {include_blank: true}, {multiple: true, placeholder: property.name, class: 'form-control'}
 
 :coffee
   $('select', '.search-form').selectize
