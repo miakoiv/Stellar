@@ -27,8 +27,8 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_live
-    return query if empty?(options['live'])
-    query.where(live: checked?(options['live']))
+    return query if empty?(live)
+    query.where(live: checked?(live))
   end
 
   def search_categorized
