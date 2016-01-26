@@ -3,9 +3,9 @@
 .search-panel
   = render partial: 'search_panel'
 
-.products.from-search
+.products
   .product-list
     .panel.panel-default
       = render partial: 'products/search_results', object: @products, as: :products
 
-.product-detail.from-search{style: 'display: none'}
+.product-detail{style: 'display: none'}

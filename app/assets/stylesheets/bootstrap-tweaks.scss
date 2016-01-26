@@ -153,10 +153,6 @@ html {
   }
 }
 
-.visible-from-search { display: none; }
-.from-search .visible-from-search { display: inline-block; }
-.from-search .hidden-from-search { display: none; }
-
 .modal-body { overflow-y: scroll; }
 
 h1, h2, h3, h4, h5, h6, th, dt, label, strong, .label { font-weight: 500; }
