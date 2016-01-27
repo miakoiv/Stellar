@@ -1,5 +1,5 @@
 .search-form
-  = form_for @search, url: search_path, data: {push: 'partial', target: '.products', 'optimize-url-params' => false}, class: 'form-vertical' do |f|
+  = form_for @search, url: search_path, method: :get, enforce_utf8: false, data: {push: 'partial', target: '.products', 'optimize-url-params' => false}, class: 'form-vertical' do |f|
     .row
       .col-xs-12.col-sm-6
         .form-group
