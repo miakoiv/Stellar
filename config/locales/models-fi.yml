@@ -203,6 +203,7 @@ fi:
         inventory_ids: Varastot
       user:
         name: Nimi
+        group: Ryhmä
         role_ids: Roolit
         pricing_factor: Hintakerroin
         locale: Kieli

@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable,
     request_keys: [:host]
 
+  enum group: {customer: 0, reseller: 1, manufacturer: 2}
+
+  GROUP_LABELS = {
+    'customer' => 'success',
+    'reseller' => 'info',
+    'manufacturer' => 'warning'
+  }.freeze
+
   #---
   # Users are restricted to interacting with only one store.
   belongs_to :store
@@ -25,6 +33,8 @@ class User < ActiveRecord::Base
 
   # Order types the user may browse and process as an administrator.
   has_many :managed_order_types, -> (user) { joins(inventory: :stores).where('stores.id = ?', user.store) }, through: :roles
+
+  default_scope { order(group: :desc, name: :asc) }
 
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
   scope :non_guests, -> { where(guest: false) }
@@ -40,6 +50,10 @@ class User < ActiveRecord::Base
   # Override Devise hook to find users in the scope of a store.
   def self.find_for_authentication(warden_conditions)
     joins(:store).where(email: warden_conditions[:email], stores: {host: warden_conditions[:host]}).first
+  end
+
+  def self.group_options
+    groups.keys.map { |group| [human_attribute_value(:group, group), group] }
   end
 
   #---
@@ -65,6 +79,10 @@ class User < ActiveRecord::Base
       Role.where.not(name: [:user_manager, :superuser])
     end
     roles.map { |r| [r.to_s, r.id] }
+  end
+
+  def appearance
+    GROUP_LABELS[group]
   end
 
   def to_s

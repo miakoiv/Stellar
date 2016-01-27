@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127082339) do
+ActiveRecord::Schema.define(version: 20160127120613) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -387,6 +387,7 @@ ActiveRecord::Schema.define(version: 20160127082339) do
 
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",            limit: 4,                                           null: false
+    t.integer  "group",               limit: 4,                           default: 0,     null: false
     t.boolean  "guest",                                                   default: false, null: false
     t.decimal  "pricing_factor",                  precision: 6, scale: 2, default: 1.0,   null: false
     t.string   "name",                limit: 255,                                         null: false

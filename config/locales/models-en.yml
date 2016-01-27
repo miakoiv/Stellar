@@ -203,6 +203,7 @@ en:
         inventory_ids: Inventories
       user:
         name: Name
+        group: Group
         role_ids: Roles
         pricing_factor: Pricing factor
         locale: Language

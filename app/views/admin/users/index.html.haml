@@ -8,6 +8,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-xs-1= col(User, :group)
         %th.col-xs-2= col(User, :name)
         %th.col-xs-3= col(User, :email)
         %th= col(User, :role_ids)
@@ -16,6 +17,9 @@
     %tbody
       - @users.each do |user|
         %tr
+          %td
+            %span.label{class: "label-#{user.appearance}"}
+              = user.human_attribute_value(:group)
           %td= user.name
           %td= user.email
           %td
