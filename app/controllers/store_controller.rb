@@ -119,6 +119,6 @@ class StoreController < ApplicationController
 
     # Restrict searching to live products in current store.
     def search_params
-      @query.merge(store_id: current_store.id, live: true, categorized: true)
+      @query.merge(store_id: current_store.id, live: true)
     end
 end
