@@ -60,13 +60,13 @@ class Product < ActiveRecord::Base
   def real?; !virtual end
   def undead?; !live end
 
-  def property_value(property_id)
-    product_properties.where(property_id: property_id).first.try(:value_with_units)
-  end
-
   # If a single category is requested, give the first one.
   def category
     categories.first
+  end
+
+  def searchable_product_properties
+    product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
   end
 
   # Price adjusted for given user.

@@ -1,13 +1,11 @@
 #search-results
   .table-responsive.infinite-table
-    %table.table.table-striped.table-hover
+    %table.table.table-hover
       %thead
         %tr
           %th.col-min
-          %th.col-xs-2.no-wrap= col(Product, :code)
           %th= col(Product, :title)
-          - @properties.each do |property|
-            %th= property.name.capitalize
+          %th
           - if can_see_pricing?
             %th.no-wrap.text-right= col(Product, :sales_price)
       %tbody

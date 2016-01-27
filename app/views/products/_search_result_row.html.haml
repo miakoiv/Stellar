@@ -3,14 +3,14 @@
     %td
       .box-thumbnail
         = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-    %td= product.code
     %td
-      = link_to show_product_path(product.category, product) do
-        %strong= product.title
-        = product.subtitle
-    - @properties.each do |property|
-      %td.no-wrap.small{class: property.numeric? ? 'text-right' : ''}
-        = product.property_value(property.id)
+      %p
+        = link_to show_product_path(product.category, product) do
+          %strong= product.title
+          = product.subtitle
+      %p
+        %span.small= product.code
+    %td= property_string(product.searchable_product_properties)
     - if can_see_pricing?
       %td.currency.text-right
         = humanized_money_with_symbol product.user_price(current_user)
