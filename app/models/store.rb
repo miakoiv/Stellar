@@ -67,7 +67,7 @@ class Store < ActiveRecord::Base
 
   # Properties flagged searchable.
   def searchable_properties
-    properties.merge(Property.searchable)
+    properties.merge(Property.searchable).merge(Property.sorted)
   end
 
   # Available categories at top level.
