@@ -22,13 +22,13 @@ class ProductSearch < Searchlight::Search
     query.where("CONCAT_WS(' ', products.title, products.subtitle) LIKE ?", "%#{keyword}%")
   end
 
+  def search_categories
+    query.where(categories: {id: categories})
+  end
+
   def search_live
     return query if empty?(live)
     query.where(live: checked?(live))
-  end
-
-  def search_categorized
-    query.where.not(categories: {id: nil})
   end
 
   # Define search methods for all searchable properties, avoiding name clashes
