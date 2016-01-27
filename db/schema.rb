@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122082804) do
+ActiveRecord::Schema.define(version: 20160127082339) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -282,7 +282,6 @@ ActiveRecord::Schema.define(version: 20160122082804) do
     t.string   "subtitle",                limit: 255
     t.text     "description",             limit: 65535
     t.text     "memo",                    limit: 65535
-    t.text     "search_tags",             limit: 65535
     t.integer  "cost_cents",              limit: 4
     t.date     "cost_modified_at"
     t.integer  "sales_price_cents",       limit: 4
@@ -295,7 +294,6 @@ ActiveRecord::Schema.define(version: 20160122082804) do
   end
 
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
-  add_index "products", ["search_tags"], name: "index_products_on_search_tags", type: :fulltext
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
   add_index "products", ["subtitle"], name: "index_products_on_subtitle", using: :btree

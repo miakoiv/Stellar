@@ -54,7 +54,6 @@ class Product < ActiveRecord::Base
   validates :title, presence: true
 
   before_save :reset_live
-  before_save :reset_search_tags
   after_save :touch_categories
 
   #---
@@ -140,14 +139,6 @@ class Product < ActiveRecord::Base
   end
 
   protected
-    def reset_search_tags
-      tags = product_properties
-          .joins(:property).merge(Property.searchable)
-          .map { |s| s.value_with_units(false) }
-      self.search_tags = tags.join(' ')
-      true
-    end
-
     def touch_categories
       categories.each(&:touch)
     end
