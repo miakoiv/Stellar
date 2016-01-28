@@ -107,6 +107,7 @@ fi:
       included_albums: Näytä kuva-albumit
   checkout:
     title: Kassa
+    continue_shopping: Jatka ostoksia
     receipt: Tulosta kuitti
     creditcard_payment: Maksa luottokortilla
     bank_payment: Maksa nettipankissa

@@ -26,6 +26,8 @@
             - if order.adjustments.any?
               = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
       .panel-footer
+        .pull-left
+          = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
         .text-right
           - if @order.checkoutable?
             - current_user.available_order_types.each do |order_type|

@@ -131,6 +131,7 @@ en:
       included_albums: Show photo albums
   checkout:
     title: Checkout
+    continue_shopping: Continue shopping
     receipt: Print a receipt
     creditcard_payment: Credit card payment
     bank_payment: Bank payment
