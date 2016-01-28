@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   default_scope { order(group: :desc, name: :asc) }
 
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
-  scope :non_guest, -> { where.not(group: -1) }
+  scope :non_guest, -> { where.not(group: groups[:guest]) }
 
   #---
   validates :name, presence: true
@@ -56,9 +56,7 @@ class User < ActiveRecord::Base
   # the one and only incomplete order.
   def shopping_cart
     orders.incomplete.first ||
-      orders.create(
-        store: store,
-        order_type: available_order_types.find_by(has_shipping: true),
+      store.orders.create(
         customer_name: guest? ? nil : name,
         customer_email: guest? ? nil : email,
         customer_phone: guest? ? nil : phone

@@ -60,7 +60,7 @@ class Store < ActiveRecord::Base
     {
       name: name,
       email: "#{name}@#{host}",
-      group: 'guest',
+      group: User.groups[:guest],
       roles: Role.where(name: 'see_pricing')
     }
   end
