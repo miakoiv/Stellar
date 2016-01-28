@@ -3,7 +3,7 @@
     %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
       = icon('user', class: 'fa-lg')
       %span.caret
-    %ul.dropdown-menu{role: 'menu'}
+    %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
       %li.dropdown-header= current_user.name
       = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
       %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete

@@ -2,7 +2,7 @@
   %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
     = icon('wrench', t('admin.manage'), class: 'fa-lg')
     %span.caret
-  %ul.dropdown-menu{role: 'menu'}
+  %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
     - if current_user.has_cached_role?(:product_editor)
       = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'),
           admin_products_path, wrap_tag: :li
