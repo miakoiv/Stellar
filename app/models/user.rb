@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
   # the one and only incomplete order.
   def shopping_cart
     orders.incomplete.first ||
-      store.orders.create(
+      orders.create(
+        store: store,
         customer_name: guest? ? nil : name,
         customer_email: guest? ? nil : email,
         customer_phone: guest? ? nil : phone
