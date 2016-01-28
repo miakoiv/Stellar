@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def self.group_options
-    groups.keys.map { |group| [human_attribute_value(:group, group), group] }
+    [:customer, :reseller, :manufacturer].map { |group| [human_attribute_value(:group, group), group] }
   end
 
   #---
