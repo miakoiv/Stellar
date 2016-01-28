@@ -65,12 +65,12 @@ class User < ActiveRecord::Base
 
   # Order types the user has available when going through checkout.
   def available_order_types
-    store.order_types.where(source_group: group)
+    store.order_types.where(source_group: User.groups[group])
   end
 
   # Order types the user may browse and process as an administrator.
   def managed_order_types
-    store.order_types.where(destination_group: group)
+    store.order_types.where(destination_group: User.groups[group])
   end
 
   # Roles that a user manager may grant to other users. The superuser
