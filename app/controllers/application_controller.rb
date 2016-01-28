@@ -101,13 +101,8 @@ class ApplicationController < ActionController::Base
     end
 
     def create_guest_user
-      guest = User.new(
-        store: current_store_by_request,
-        guest: true,
-        name: 'Guest',
-        email: "guest_#{Time.now.to_i}#{rand(100)}@leasit.info",
-        roles: Role.guest_roles
-      )
+      store = current_store_by_request
+      guest = store.users.new(store.guest_user_defaults)
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
       guest

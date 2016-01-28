@@ -14,9 +14,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable,
     request_keys: [:host]
 
-  enum group: {customer: 0, reseller: 1, manufacturer: 2}
+  enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2}
 
   GROUP_LABELS = {
+    'guest' => 'default',
     'customer' => 'success',
     'reseller' => 'info',
     'manufacturer' => 'warning'
@@ -28,16 +29,10 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
-  # Order types the user has available when going through checkout.
-  has_many :available_order_types, -> (user) { joins(inventory: :stores).where('stores.id = ?', user.store) }, through: :roles
-
-  # Order types the user may browse and process as an administrator.
-  has_many :managed_order_types, -> (user) { joins(inventory: :stores).where('stores.id = ?', user.store) }, through: :roles
-
   default_scope { order(group: :desc, name: :asc) }
 
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
-  scope :non_guests, -> { where(guest: false) }
+  scope :non_guest, -> { where.not(group: -1) }
 
   #---
   validates :name, presence: true
@@ -68,6 +63,16 @@ class User < ActiveRecord::Base
         customer_email: guest? ? nil : email,
         customer_phone: guest? ? nil : phone
       )
+  end
+
+  # Order types the user has available when going through checkout.
+  def available_order_types
+    store.order_types.where(source_group: group)
+  end
+
+  # Order types the user may browse and process as an administrator.
+  def managed_order_types
+    store.order_types.where(destination_group: group)
   end
 
   # Roles that a user manager may grant to other users. The superuser

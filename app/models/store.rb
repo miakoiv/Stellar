@@ -10,7 +10,7 @@ class Store < ActiveRecord::Base
     :list_image_type, # image type in list views
     :allow_shopping,  # boolean, master switch to allow/disallow shopping
     :b2b_sales,       # boolean, does the shop do business to business sales
-    :admit_guests,    # boolean, are guests allowed inside the store
+    :admit_guests,    # boolean, are guests allowed to shop at the store
     :shipping_cost_product_id,  # product reference for shipping cost
     :free_shipping_at,  # order total beyond which shipping cost won't apply
     :tracking_code,   # Google Analytics code
@@ -53,6 +53,18 @@ class Store < ActiveRecord::Base
   end
 
   #---
+  # Defaults for guest users reveal pricing and will allow shopping
+  # if admit_guests is also enabled, to get in without authentication.
+  def guest_user_defaults
+    name = "#{Time.now.to_i}#{rand(100)}"
+    {
+      name: name,
+      email: "#{name}@#{host}",
+      group: 'guest',
+      roles: Role.where(name: 'see_pricing')
+    }
+  end
+
   # Performs an inventory valuation of items in the shipping inventory.
   def inventory_valuation
     items = inventory_for(:shipping).inventory_items

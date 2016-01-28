@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-retail_customer:
-  id: 1
-  name: retail_customer
-  appearance: info
 see_pricing:
   id: 2
   name: see_pricing
@@ -12,14 +8,6 @@ see_stock:
   id: 3
   name: see_stock
   appearance: success
-reseller:
-  id: 5
-  name: reseller
-  appearance: info
-manufacturer:
-  id: 6
-  name: manufacturer
-  appearance: info
 manager:
   id: 10
   name: manager
