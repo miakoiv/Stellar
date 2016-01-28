@@ -1,6 +1,6 @@
 - if @navbar_search
 
-  = form_tag lookup_path, method: :get, id: 'navbar-search', class: 'navbar-form navbar-right', role: 'search' do
+  = form_tag lookup_path, method: :get, id: 'navbar-search', class: 'navbar-form navbar-right hidden-xs', role: 'search' do
     .form-group.has-feedback
       = search_field_tag 'product_search[keyword]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
       %span.form-control-feedback= icon('search')

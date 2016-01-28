@@ -39,6 +39,7 @@ class StoreController < ApplicationController
   # GET /cart
   def cart
     @order = shopping_cart
+    return redirect_to store_path if @order.empty?
   end
 
   # GET /store/search

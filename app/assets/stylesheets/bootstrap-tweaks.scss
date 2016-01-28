@@ -43,6 +43,8 @@ html {
 }
 
 #search-dropdown {
+  right: 0;
+  left: auto;
   min-width: 320px;
   max-height: 600px;
   overflow-y: scroll;
@@ -58,17 +60,6 @@ html {
     a {
       padding: 10px 20px;
       border-bottom: 1px solid $dropdown-divider-bg;
-    }
-  }
-}
-
-@media (max-width: $screen-xs-max) {
-  .navbar-collapse {
-    max-height: 100% !important;
-
-    #search-dropdown {
-      position: static;
-      min-width: 0;
     }
   }
 }
@@ -137,11 +128,8 @@ html {
 // search panel and infinite table of search results
 //
 .search-panel {
-  @extend .row;
   padding-top: 20px;
   padding-bottom: 10px;
-  max-height: 320px;
-  overflow-y: auto;
 }
 
 .infinite-table .pagination {

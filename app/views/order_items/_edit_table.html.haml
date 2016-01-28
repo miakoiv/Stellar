@@ -31,4 +31,4 @@
             - current_user.available_order_types.each do |order_type|
               = link_to order_type.name, checkout_path(@order, order_type), class: 'btn btn-primary'
           - else
-            = t('store.checkout.cannot_checkout_html')
+            = t('checkout.messages.cannot_checkout_html')

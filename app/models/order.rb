@@ -163,8 +163,10 @@ class Order < ActiveRecord::Base
     order_items.real.empty?
   end
 
-  # An order is checkoutable when all its real items are available.
+  # An order is checkoutable when it's not empty, and
+  # all its real items are available.
   def checkoutable?
+    return false if empty?
     order_items.joins(:product).real.each do |order_item|
       return false unless order_item.product.available?
     end
