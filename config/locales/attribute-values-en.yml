@@ -18,6 +18,7 @@ en:
           sales_price_desc: most expensive first
       user:
         group:
+          guest: Guest
           customer: Customer
           reseller: Reseller
           manufacturer: Manufacturer

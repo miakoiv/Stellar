@@ -18,6 +18,7 @@ fi:
           sales_price_desc: kallein ensin
       user:
         group:
+          guest: Vieras
           customer: Asiakas
           reseller: Jälleenmyyjä
           manufacturer: Valmistaja
