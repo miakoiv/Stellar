@@ -74,10 +74,10 @@ class Order < ActiveRecord::Base
     !is_rfq?
   end
 
-  # Users who may manage this order are order editors with the role defined
-  # as the destination in the order type.
+  # Users who may manage this order are order editors in the group defined
+  # as the destination group for this order type.
   def managing_users
-    store.users.with_all_roles(:order_editor, order_type.destination_role.name)
+    store.users.where(group: order_type.destination_group).with_role(:order_editor)
   end
 
   def approval
