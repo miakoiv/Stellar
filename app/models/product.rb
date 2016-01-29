@@ -77,7 +77,8 @@ class Product < ActiveRecord::Base
   # returns calculated price per base unit.
   def unit_price_cents
     product_property = unit_pricing_property
-    measure = product_property.try(:value).tr(',', '.').to_f
+    return nil if product_property.value.nil?
+    measure = product_property.value.tr(',', '.').to_f
     return nil if retail_price.nil? || product_property.nil? || measure == 0
     retail_price / (measure * product_property.property.measurement_unit.factor)
   end
