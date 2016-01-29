@@ -15,11 +15,11 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_code
-    query.where('products.code LIKE ?', "#{code}%")
+    query.where('code LIKE ?', "#{code}%")
   end
 
   def search_keyword
-    query.where("CONCAT_WS(' ', products.title, products.subtitle) LIKE ?", "%#{keyword}%")
+    query.where("CONCAT_WS(' ', code, title, subtitle) LIKE ?", "%#{keyword}%")
   end
 
   def search_categories
