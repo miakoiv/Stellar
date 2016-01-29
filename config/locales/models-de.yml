@@ -126,7 +126,7 @@ de:
         product_code: Produktcode
         product_customer_code: Kunden-Code
         product_title: Produkt-Titel
-        product_sales_price: Verkaufspreis
+        product_retail_price: Verkaufspreis
         subtotal: Zwischensumme
       page:
         parent_page_id: Übergeordnete Seite
@@ -153,8 +153,10 @@ de:
         product_properties: Eigenschaften
         components: Komponenten
         linked_product_ids: Verknüpfte Produkte
-        cost: Einkaufspreis
-        sales_price: Verkaufspreis
+        cost_price: Selbstkostenpreis
+        trade_price: Handelspreis
+        retail_price: Verkaufspreis
+        price: Preis
         stock: Bestand
         value: Wert
       promoted_item:

@@ -129,7 +129,7 @@ en:
         product_code: Product code
         product_customer_code: Customer code
         product_title: Product title
-        product_sales_price: Sales price
+        product_retail_price: Retail price
         subtotal: Subtotal
       page:
         parent_page_id: Parent page
@@ -158,8 +158,10 @@ en:
         product_properties: Properties
         components: Components
         linked_product_ids: Associated products
-        cost: Purchase price
-        sales_price: Sales price
+        cost_price: Cost Price
+        trade_price: Trade price
+        retail_price: Retail price
+        price: Price
         stock: Stock
         value: Value
       promoted_item:

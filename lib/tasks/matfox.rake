@@ -15,7 +15,8 @@ IMPORT_FILES = {
     multiple: false,
     headers: [
       :stores, :code, :title, :subtitle,
-      :sales_price, :cost, :sales_price_modified_at, :cost_modified_at,
+      :trade_price, :cost_price,
+      :trade_price_modified_at, :cost_price_modified_at,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
       :additional_stores, :memo
     ],
@@ -24,7 +25,7 @@ IMPORT_FILES = {
   customers: {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
-    headers: [:code, :erp_number, nil, :customer_code, :sales_price],
+    headers: [:code, :erp_number, nil, :customer_code, :trade_price],
   },
   # VARASTO,NRO,HYLLY,
   # VARASTOLKM,VARATTULKM,TULOSSA,
@@ -66,8 +67,8 @@ namespace :matfox do
             product = find_or_create_product(store, code, data)
             product.update(
               customer_code: row[:customer_code],
-              sales_price: row[:sales_price].present? ? row[:sales_price] : data[:product][:sales_price],
-              sales_price_modified_at: data[:product][:sales_price_modified_at]
+              trade_price: row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price],
+              trade_price_modified_at: data[:product][:trade_price_modified_at]
             )
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
@@ -84,8 +85,8 @@ namespace :matfox do
             next if store.nil?
             product = find_or_create_product(store, code, data)
             product.update(
-              sales_price: data[:product][:sales_price],
-              sales_price_modified_at: data[:product][:sales_price_modified_at]
+              trade_price: data[:product][:trade_price],
+              trade_price_modified_at: data[:product][:trade_price_modified_at]
             )
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
@@ -155,8 +156,8 @@ namespace :matfox do
     product.title ||= data[:product][:title].try(:mb_chars).try(:titleize)
     product.subtitle ||= data[:product][:subtitle].try(:mb_chars).try(:titleize)
     product.memo = data[:product][:memo]
-    product.cost = data[:product][:cost]
-    product.cost_modified_at = data[:product][:cost_modified_at]
+    product.cost_price = data[:product][:cost_price]
+    product.cost_price_modified_at = data[:product][:cost_price_modified_at]
     puts product.to_json
     product.save!
     product

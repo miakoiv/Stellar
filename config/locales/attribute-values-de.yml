@@ -14,5 +14,5 @@ de:
         sorting:
           manual: manuell
           alphabetical: alphabetisch
-          sales_price_asc: günstigstes zuerst
-          sales_price_desc: teuerstes zuerst
+          retail_price_asc: günstigstes zuerst
+          retail_price_desc: teuerstes zuerst

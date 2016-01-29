@@ -1,5 +1,5 @@
-- unless product.sales_price.nil?
-  %p.currency= icon('tag', humanized_money_with_symbol(product.user_price(current_user)))
-  - unless product.user_unit_price(current_user).nil?
+- unless product.retail_price.nil?
+  %p.currency= icon('tag', humanized_money_with_symbol(product.retail_price))
+  - unless product.unit_price.nil?
     .unit-price.currency
-      = unit_price_string(product.user_unit_price(current_user), product.base_unit)
+      = unit_price_string(product.unit_price, product.base_unit)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128100117) do
+ActiveRecord::Schema.define(version: 20160129075223) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -279,10 +279,11 @@ ActiveRecord::Schema.define(version: 20160128100117) do
     t.string   "subtitle",                limit: 255
     t.text     "description",             limit: 65535
     t.text     "memo",                    limit: 65535
-    t.integer  "cost_cents",              limit: 4
-    t.date     "cost_modified_at"
-    t.integer  "sales_price_cents",       limit: 4
-    t.date     "sales_price_modified_at"
+    t.integer  "cost_price_cents",        limit: 4
+    t.date     "cost_price_modified_at"
+    t.integer  "trade_price_cents",       limit: 4
+    t.date     "trade_price_modified_at"
+    t.integer  "retail_price_cents",      limit: 4
     t.integer  "priority",                limit: 4,     default: 0,     null: false
     t.date     "available_at"
     t.date     "deleted_at"

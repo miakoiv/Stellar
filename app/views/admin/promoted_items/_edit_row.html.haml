@@ -8,7 +8,7 @@
       = f.text_field :amount_available, class: 'form-control input-sm text-right', tabindex: 1
   %td
     = form_for [:admin, promoted_item], remote: true, html: {class: 'immediate'} do |f|
-      = f.text_field :price, placeholder: promoted_item.product.sales_price.to_s, tabindex: 2, class: 'form-control input-sm text-right'
+      = f.text_field :price, placeholder: promoted_item.product.retail_price.to_s, tabindex: 2, class: 'form-control input-sm text-right'
   %td.actions
     = link_to icon('remove'), admin_promoted_item_path(promoted_item),
         remote: true, method: :delete, class: 'btn btn-sm btn-danger'

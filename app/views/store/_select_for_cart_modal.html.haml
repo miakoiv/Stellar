@@ -12,7 +12,7 @@
               %th= col(Product, :title)
               %th.col-xs-2.no-wrap= col(Product, :code)
               - if can_see_pricing?
-                %th.col-xs-2.no-wrap= col(Product, :sales_price)
+                %th.col-xs-2.no-wrap= col(Product, :price)
               %th.actions
           %tbody
           = render partial: 'products/modal_row', collection: [product], as: :product
@@ -27,7 +27,7 @@
               %th= col(Product, :title)
               %th.col-xs-2.no-wrap= col(Product, :code)
               - if can_see_pricing?
-                %th.col-xs-2.no-wrap= col(Product, :sales_price)
+                %th.col-xs-2.no-wrap= col(Product, :price)
               %th.actions
           %tbody
           = render partial: 'products/modal_row', collection: product.linked_products, as: :product

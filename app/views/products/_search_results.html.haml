@@ -7,7 +7,7 @@
           %th= col(Product, :title)
           %th
           - if can_see_pricing?
-            %th.no-wrap.text-right= col(Product, :sales_price)
+            %th.no-wrap.text-right= col(Product, :price)
       %tbody
         = render partial: 'products/search_result_row', collection: products, as: :product
     .pagination

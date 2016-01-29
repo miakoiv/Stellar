@@ -129,7 +129,7 @@ fi:
         product_code: Tuotekoodi
         product_customer_code: Asiakkaan koodi
         product_title: Tuotenimike
-        product_sales_price: Myyntihinta
+        product_retail_price: Myyntihinta
         subtotal: Yhteensä
       page:
         parent_page_id: Pääsivu
@@ -158,8 +158,10 @@ fi:
         product_properties: Ominaisuudet
         components: Komponentit
         linked_product_ids: Liitännäistuotteet
-        cost: Ostohinta
-        sales_price: Myyntihinta
+        cost_price: Omakustannushinta
+        trade_price: Valmistajan hinta
+        retail_price: Myyntihinta
+        price: Hinta
         stock: Saldo
         value: Arvo
       promoted_item:

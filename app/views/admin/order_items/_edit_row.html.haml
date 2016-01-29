@@ -13,7 +13,7 @@
     - if order_item.reveal_price?
       %td.text-right.currency
         = form_for [:admin, order_item], remote: true, html: {class: 'immediate'} do |f|
-          = f.text_field :price, class: 'form-control input-sm text-right', placeholder: humanized_money(order_item.product.sales_price), tabindex: 1
+          = f.text_field :price, class: 'form-control input-sm text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 1
 
   - if order_item.reveal_components?
     = content_tag_for :tr, order_item.product.relationships do |relationship|

@@ -103,7 +103,7 @@ class Order < ActiveRecord::Base
   def insert!(product, amount)
     order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
     order_item.amount += amount
-    order_item.price = product.user_price(user)
+    order_item.price = product.retail_price
     order_item.save!
     apply_shipping_cost!
     apply_promotions!
@@ -245,7 +245,7 @@ class Order < ActiveRecord::Base
     end
 
     def calculated_shipping_cost
-      default_price = store.shipping_cost_product.sales_price
+      default_price = store.shipping_cost_product.retail_price
       return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at.to_money
       return 0.to_money
     end

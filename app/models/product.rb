@@ -8,10 +8,14 @@ class Product < ActiveRecord::Base
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
-  monetize :cost_cents, allow_nil: true
-  monetize :sales_price_cents, allow_nil: true
-  monetize :user_price_cents, disable_validation: true
-  monetize :user_unit_price_cents, disable_validation: true
+
+  # Monetize product attributes.
+  monetize :cost_price_cents, allow_nil: true
+  monetize :trade_price_cents, allow_nil: true
+  monetize :retail_price_cents, allow_nil: true
+
+  # Monetize aggregate methods.
+  monetize :unit_price_cents, disable_validation: true
 
   INLINE_SEARCH_RESULTS = 20
 
@@ -19,11 +23,11 @@ class Product < ActiveRecord::Base
   define_scope :alphabetical do
     order(:title, :subtitle)
   end
-  define_scope :sales_price_asc do
-    order(sales_price_cents: :asc)
+  define_scope :retail_price_asc do
+    order(retail_price_cents: :asc)
   end
-  define_scope :sales_price_desc do
-    order(sales_price_cents: :desc)
+  define_scope :retail_price_desc do
+    order(retail_price_cents: :desc)
   end
 
   #---
@@ -69,20 +73,13 @@ class Product < ActiveRecord::Base
     product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
   end
 
-  # Price adjusted for given user.
-  def user_price_cents(user)
-    return nil if sales_price_cents.nil?
-    sales_price_cents * user.pricing_factor
-  end
-
   # Checks product properties for a property that declares unit pricing,
-  # returns calculated price per base unit, adjusted for given user.
-  def user_unit_price_cents(user)
-    price = user_price_cents(user)
+  # returns calculated price per base unit.
+  def unit_price_cents
     product_property = unit_pricing_property
-    measure = product_property.try(:value).to_i
-    return nil if price.nil? || product_property.nil? || measure == 0
-    price / (measure * product_property.property.measurement_unit.factor)
+    measure = product_property.try(:value).tr(',', '.').to_f
+    return nil if retail_price.nil? || product_property.nil? || measure == 0
+    retail_price / (measure * product_property.property.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.

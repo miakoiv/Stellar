@@ -14,8 +14,8 @@ fi:
         sorting:
           manual: käsin
           alphabetical: aakkosjärjestys
-          sales_price_asc: halvin ensin
-          sales_price_desc: kallein ensin
+          retail_price_asc: halvin ensin
+          retail_price_desc: kallein ensin
       user:
         group:
           guest: Vieras

@@ -33,7 +33,7 @@ xml.order do
         xml.title item.product_title
         xml.subtitle item.product_subtitle
         xml.amount item.amount
-        xml.sales_price item.price
+        xml.price item.price
       end
     end
   end

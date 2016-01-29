@@ -12,8 +12,10 @@
         = f.text_field :title, required: true
         = f.text_field :subtitle
         = f.text_area :description, class: 'wysiwyg'
-        = f.text_field :cost, append: '€'
-        = f.text_field :sales_price, append: '€'
+        - if current_user.manufacturer?
+          = f.text_field :cost_price, append: '€'
+        = f.text_field :trade_price, append: '€'
+        = f.text_field :retail_price, append: '€'
         = f.date_field :available_at,
             data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.date_field :deleted_at,
