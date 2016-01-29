@@ -92,11 +92,13 @@ class Product < ActiveRecord::Base
 
   # Markup percentage from trade price to retail price.
   def markup_percent
+    return nil if trade_price.nil? || retail_price.nil? || trade_price == 0
     100 * (retail_price - trade_price) / trade_price
   end
 
   # Margin percentage from trade price to retail price.
   def margin_percent
+    return nil if trade_price.nil? || retail_price.nil? || retail_price == 0
     100 * (retail_price - trade_price) / retail_price
   end
 
