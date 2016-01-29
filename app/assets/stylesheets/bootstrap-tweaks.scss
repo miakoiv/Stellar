@@ -180,6 +180,13 @@ i.icon {
   a.btn + a.btn { margin-right: 8px; }
 }
 
+.panel-footer {
+  @extend .clearfix;
+
+  a.btn { margin-bottom: 5px; }
+  a.btn + a.btn { margin-right: 8px; }
+}
+
 //
 // image boxes for various sizes, with image centered inside
 //

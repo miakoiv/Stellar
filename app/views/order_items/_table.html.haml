@@ -10,7 +10,10 @@
         %th.actions
     %tfoot
       %tr
-        %th.text-right{colspan: 4}= col(Order, :grand_total)
+        %th
+        %th
+        %th
+        %th.text-right= col(Order, :grand_total)
         %th#grand-total.text-right.currency{data: {amount: @order.grand_total.cents}}
           = humanized_money_with_symbol @order.grand_total
         %th

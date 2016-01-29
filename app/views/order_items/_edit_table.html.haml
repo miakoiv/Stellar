@@ -17,7 +17,10 @@
               %th.actions
           %tfoot
             %tr.info
-              %th.text-right{colspan: 4}= col(Order, :grand_total)
+              %th
+              %th
+              %th
+              %th.text-right= col(Order, :grand_total)
               %th#grand-total.text-right.currency{data: {amount: @order.grand_total.cents}}
                 = humanized_money_with_symbol @order.grand_total
               %th
@@ -25,12 +28,10 @@
             = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
             - if order.adjustments.any?
               = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
-      .panel-footer
-        .pull-left
-          = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
-        .text-right
-          - if @order.checkoutable?
-            - current_user.available_order_types.each do |order_type|
-              = link_to order_type.name, checkout_path(@order, order_type), class: 'btn btn-primary'
-          - else
-            = t('checkout.messages.cannot_checkout_html')
+    .panel-footer
+      = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
+      - if @order.checkoutable?
+        - current_user.available_order_types.each do |order_type|
+          = link_to order_type.name, checkout_path(@order, order_type), class: 'btn btn-primary pull-right'
+      - else
+        = t('checkout.messages.cannot_checkout_html')
