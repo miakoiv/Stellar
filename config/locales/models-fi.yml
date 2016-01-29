@@ -162,6 +162,8 @@ fi:
         trade_price: Valmistajan hinta
         retail_price: Myyntihinta
         price: Hinta
+        markup_percent: Lisä-%
+        margin_percent: Kate-%
         stock: Saldo
         value: Arvo
       promoted_item:

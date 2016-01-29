@@ -14,8 +14,26 @@
         = f.text_area :description, class: 'wysiwyg'
         - if current_user.manufacturer?
           = f.text_field :cost_price, append: '€'
-        = f.text_field :trade_price, append: '€'
-        = f.text_field :retail_price, append: '€'
+        .form-group
+          %label.control-label.col-sm-4= col(Product, :trade_price)
+          .col-sm-4
+            .input-group
+              = f.text_field_without_bootstrap :trade_price, class: 'form-control text-right'
+              %span.input-group-addon €
+          .col-sm-4
+            .input-group
+              %span.input-group-addon= col(Product, :markup_percent)
+              = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), disabled: true, class: 'form-control text-right'
+        .form-group
+          %label.control-label.col-sm-4= col(Product, :retail_price)
+          .col-sm-4
+            .input-group
+              = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
+              %span.input-group-addon €
+          .col-sm-4
+            .input-group
+              %span.input-group-addon= col(Product, :margin_percent)
+              = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), disabled: true, class: 'form-control text-right'
         = f.date_field :available_at,
             data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.date_field :deleted_at,

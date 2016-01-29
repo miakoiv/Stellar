@@ -162,6 +162,8 @@ en:
         trade_price: Trade price
         retail_price: Retail price
         price: Price
+        markup_percent: Markup %
+        margin_percent: Margin %
         stock: Stock
         value: Value
       promoted_item:

@@ -90,6 +90,16 @@ class Product < ActiveRecord::Base
     product_property.property.measurement_unit.pricing_base
   end
 
+  # Markup percentage from trade price to retail price.
+  def markup_percent
+    100 * (retail_price - trade_price) / trade_price
+  end
+
+  # Margin percentage from trade price to retail price.
+  def margin_percent
+    100 * (retail_price - trade_price) / retail_price
+  end
+
   # Gathers product stock to a hash keyed by inventory.
   # Values are inventory items.
   def stock
