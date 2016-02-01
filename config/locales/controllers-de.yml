@@ -56,6 +56,8 @@ de:
         notice: "Nutzer %{user} erstellt."
       update:
         notice: "Nutzer %{user} aktualisiert"
+      destroy:
+        notice: "Nutzer %{user} gelöscht."
   correspondence:
     mail_form:
       thank_you: Vielen Dank für Ihre Nachricht!

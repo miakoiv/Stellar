@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   # Users are restricted to interacting with only one store.
   belongs_to :store
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   default_scope { order(group: :desc, name: :asc) }
 
