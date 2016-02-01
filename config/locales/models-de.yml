@@ -138,6 +138,7 @@ de:
         album_ids: Fotoalben
       product:
         category_ids: Kategorien
+        compound: Verbindung Produkt
         virtual: Virtuelles Produkt
         code: Produktcode
         customer_code: Kunden-Code

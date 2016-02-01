@@ -142,6 +142,7 @@ fi:
         album_ids: Kuva-albumit
       product:
         category_ids: Tuoteryhmät
+        compound: Yhdistelmätuote
         virtual: Näennäinen tuote
         code: Tuotekoodi
         customer_code: Asiakkaan koodi

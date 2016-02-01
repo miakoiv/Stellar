@@ -142,6 +142,7 @@ en:
         album_ids: Photo albums
       product:
         category_ids: Categories
+        compound: Compound product
         virtual: Virtual product
         code: Product code
         customer_code: Customer code
