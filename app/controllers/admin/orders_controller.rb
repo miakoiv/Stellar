@@ -11,7 +11,9 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders
   # GET /admin/orders.json
   def index
-    @orders_by_type = current_store.orders.complete.managed_by(current_user).group_by(&:order_type)
+    @query = saved_search_query('order', 'admin_order_search')
+    @search = OrderSearch.new(search_params)
+    @orders = @search.results.page(params[:page])
   end
 
   # GET /admin/orders/1
@@ -79,6 +81,14 @@ class Admin::OrdersController < ApplicationController
         :billing_address, :billing_postalcode, :billing_city,
         :shipping_address, :shipping_postalcode, :shipping_city,
         :notes
+      )
+    end
+
+    # Restrict searching to orders in current store for current user.
+    def search_params
+      @query.merge(
+        store_id: current_store.id,
+        user_id: current_user.id
       )
     end
 end
