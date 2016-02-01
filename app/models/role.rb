@@ -17,7 +17,7 @@ class Role < ActiveRecord::Base
 
   #---
   def to_s
-    name.humanize
+    human_attribute_value(:name)
   end
 
 end

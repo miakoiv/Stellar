@@ -16,6 +16,22 @@ fi:
           alphabetical: aakkosjärjestys
           retail_price_asc: halvin ensin
           retail_price_desc: kallein ensin
+      role:
+        name:
+          see_pricing: näkee hinnat
+          see_stock: näkee varastosaldon
+          manager: ylläpitäjä
+          correspondence: yhteydenotot
+          dashboard_access: pääsy konsoliin
+          property_editor: ominaisuuksien muokkaus
+          category_editor: tuoteryhmien muokkaus
+          order_editor: tilauksien käsittely
+          page_editor: sivujen muokkaus
+          product_editor: tuotteiden muokkaus
+          promotion_editor: kampanjoiden muokkaus
+          user_manager: käyttäjien hallinta
+          album_editor: kuva-albumien muokkaus
+          superuser: pääkäyttäjä
       user:
         group:
           guest: Vieras

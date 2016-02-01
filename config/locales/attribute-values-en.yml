@@ -16,6 +16,22 @@ en:
           alphabetical: alphabetical
           retail_price_asc: least expensive first
           retail_price_desc: most expensive first
+      role:
+        name:
+          see_pricing: see pricing
+          see_stock: see stock
+          manager: manager
+          correspondence: correspondence
+          dashboard_access: dashboard access
+          property_editor: property editor
+          category_editor: category editor
+          order_editor: order editor
+          page_editor: page editor
+          product_editor: product editor
+          promotion_editor: promotion editor
+          user_manager: user manager
+          album_editor: album editor
+          superuser: superuser
       user:
         group:
           guest: Guest
