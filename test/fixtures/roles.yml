@@ -3,15 +3,15 @@
 see_pricing:
   id: 2
   name: see_pricing
-  appearance: success
+  appearance: warning
 see_stock:
   id: 3
   name: see_stock
-  appearance: success
+  appearance: warning
 manager:
   id: 10
   name: manager
-  appearance: warning
+  appearance: success
 correspondence:
   id: 11
   name: correspondence
@@ -19,39 +19,39 @@ correspondence:
 dashboard_access:
   id: 12
   name: dashboard_access
-  appearance: warning
+  appearance: success
 property_editor:
   id: 13
   name: property_editor
-  appearance: warning
+  appearance: success
 category_editor:
   id: 14
   name: category_editor
-  appearance: warning
+  appearance: info
 order_editor:
   id: 15
   name: order_editor
-  appearance: warning
+  appearance: info
 page_editor:
   id: 16
   name: page_editor
-  appearance: warning
+  appearance: success
 product_editor:
   id: 17
   name: product_editor
-  appearance: warning
+  appearance: info
 promotion_editor:
   id: 18
   name: promotion_editor
-  appearance: warning
+  appearance: info
 user_manager:
   id: 19
   name: user_manager
-  appearance: warning
+  appearance: success
 album_editor:
   id: 20
   name: album_editor
-  appearance: warning
+  appearance: success
 superuser:
   id: 99
   name: superuser
