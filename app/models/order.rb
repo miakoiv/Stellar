@@ -98,13 +98,24 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Inserts amount of product to this order, with pricing adjusted
-  # for the owner of this order.
-  def insert!(product, amount)
-    order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
-    order_item.amount += amount
-    order_item.price = product.retail_price
-    order_item.save!
+  # Inserts amount of product to this order. If the product is a compound,
+  # its immediate components are inserted instead.
+  def insert(product, amount)
+    if product.compound?
+      product.relationships.each do |relationship|
+        insert(relationship.component, relationship.quantity)
+      end
+    else
+      order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
+      order_item.amount += amount
+      order_item.price = product.retail_price
+      order_item.save!
+    end
+  end
+
+  # Recalculate things that may take some heavy lifting. This should be called
+  # when the contents of the order have changed.
+  def recalculate!
     apply_shipping_cost!
     apply_promotions!
   end
@@ -163,10 +174,8 @@ class Order < ActiveRecord::Base
     order_items.real.empty?
   end
 
-  # An order is checkoutable when it's not empty, and
-  # all its real items are available.
+  # An order is checkoutable when all its real items are available.
   def checkoutable?
-    return false if empty?
     order_items.joins(:product).real.each do |order_item|
       return false unless order_item.product.available?
     end
