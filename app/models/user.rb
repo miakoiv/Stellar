@@ -16,6 +16,13 @@ class User < ActiveRecord::Base
 
   enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2}
 
+  MANAGED_GROUPS = {
+    'guest' => [],
+    'customer' => ['customer'],
+    'reseller' => ['customer', 'reseller'],
+    'manufacturer' => ['customer', 'reseller', 'manufacturer']
+  }.freeze
+
   GROUP_LABELS = {
     'guest' => 'default',
     'customer' => 'success',
@@ -47,10 +54,6 @@ class User < ActiveRecord::Base
     joins(:store).where(email: warden_conditions[:email], stores: {host: warden_conditions[:host]}).first
   end
 
-  def self.group_options
-    [:customer, :reseller, :manufacturer].map { |group| [human_attribute_value(:group, group), group] }
-  end
-
   #---
   # A user's shopping cart is technically an order singleton,
   # the one and only incomplete order.
@@ -74,15 +77,28 @@ class User < ActiveRecord::Base
     store.order_types.where(destination_group: User.groups[group])
   end
 
+  def managed_groups
+    User::MANAGED_GROUPS[group]
+  end
+
+  def grantable_group_options
+    managed_groups.map { |group| [User.human_attribute_value(:group, group), group] }
+  end
+
   # Roles that a user manager may grant to other users. The superuser
-  # may promote others to user managers and superusers.
+  # may promote others to superusers.
   def grantable_role_options
     roles = if has_cached_role?(:superuser)
       Role.all
     else
-      Role.where.not(name: [:user_manager, :superuser])
+      Role.where.not(name: [:superuser])
     end
     roles.map { |r| [r.to_s, r.id] }
+  end
+
+  # Other users the user may manage.
+  def managed_users
+    store.users.where(group: managed_groups.map { |group| User.groups[group] })
   end
 
   def appearance
