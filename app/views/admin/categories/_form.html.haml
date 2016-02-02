@@ -5,7 +5,7 @@
       %fieldset{disabled: locked}
         = f.select :parent_category_id, current_store.top_level_category_options(@category), {include_blank: true}, {class: 'selectize'}
         = f.text_field :name, required: true
-        = f.text_area :description, class: 'wysiwyg'
+        = f.text_area :description
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :live
@@ -25,3 +25,5 @@
       'undo', 'redo'
     ]
     toolbarInline: true
+    editorClass: 'form-control-wysiwyg'
+    placeholderText: ''

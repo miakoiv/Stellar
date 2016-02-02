@@ -312,8 +312,12 @@ span.manufacturing:before { content: ""; }
 span.shipping:before { content: ""; }
 
 //
-// make editable boxes stand out in Froala instances
+// Froala tweaks
 //
+.form-control-wysiwyg {
+  @extend .form-control;
+  height: auto;
+}
 #wysiwyg-content .editable { outline: 2px dotted rgba(0,0,255,0.333); }
 
 //

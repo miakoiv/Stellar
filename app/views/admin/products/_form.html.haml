@@ -13,7 +13,7 @@
         = f.text_field :customer_code
         = f.text_field :title, required: true
         = f.text_field :subtitle
-        = f.text_area :description, class: 'wysiwyg'
+        = f.text_area :description
         - if current_user.manufacturer?
           = f.text_field :cost_price, append: '€'
         .form-group
@@ -59,3 +59,5 @@
       'undo', 'redo'
     ]
     toolbarInline: true
+    editorClass: 'form-control-wysiwyg'
+    placeholderText: ''
