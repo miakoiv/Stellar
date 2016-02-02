@@ -113,6 +113,22 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Copies order items on this order to another order. Any order items
+  # referring to a product that's not available are returned as failed items.
+  def copy_items_to(another_order)
+    failed_items = []
+    order_items.includes(:product).each do |order_item|
+      product = order_item.product
+      next if product.virtual?
+      if product.live?
+        another_order.insert(product, order_item.amount)
+      else
+        failed_items << product
+      end
+    end
+    failed_items
+  end
+
   # Recalculate things that may take some heavy lifting. This should be called
   # when the contents of the order have changed.
   def recalculate!

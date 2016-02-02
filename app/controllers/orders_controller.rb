@@ -62,19 +62,9 @@ class OrdersController < ApplicationController
   def duplicate
     authorize_action_for @order
 
-    order = shopping_cart
-    failed = []
-    @order.order_items.includes(:product).each do |order_item|
-      product = order_item.product
-      next if product.virtual?
-      if product.live?
-        order.insert!(product, order_item.amount)
-      else
-        failed << product
-      end
-    end
-    if failed.any?
-      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed.to_sentence)
+    failed_items = @order.copy_items_to(shopping_cart)
+    if failed_items.any?
+      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
     else
       redirect_to cart_path, notice: t('.notice', order: @order)
     end
