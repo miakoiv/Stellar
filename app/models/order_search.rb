@@ -14,9 +14,13 @@ class OrderSearch < Searchlight::Search
     query.where(store_id: store_id)
   end
 
-  # User id restricts the search on orders that may be managed by her.
   def search_user_id
-    order_types = User.find(user_id).managed_order_types
+    query.where(user_id: user_id)
+  end
+
+  # Manager id restricts the search on orders that may be managed by her.
+  def search_manager_id
+    order_types = User.find(manager_id).managed_order_types
     return Order.none if order_types.empty?
     query.where(order_type_id: order_types)
   end
@@ -31,5 +35,9 @@ class OrderSearch < Searchlight::Search
 
   def search_customer
     query.where('customer_name LIKE ?', "%#{customer}%")
+  end
+
+  def search_summary
+    query.where("CONCAT_WS(' ', company_name, contact_person, shipping_city) LIKE ?", "%#{summary}%")
   end
 end
