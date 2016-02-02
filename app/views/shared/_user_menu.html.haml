@@ -4,7 +4,9 @@
       = icon('user', class: 'fa-lg')
       %span.caret
     %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-      %li.dropdown-header= current_user.name
+      %li.dropdown-header
+        = current_user.name
+        %span.label{class: "label-#{current_user.appearance}"}= current_user.human_attribute_value(:group)
       = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
       %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
 - else
