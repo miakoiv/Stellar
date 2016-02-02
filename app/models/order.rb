@@ -113,9 +113,28 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Write relevant fields from this order to another order
-  # when forwarding an order.
+  # Copies order items on this order to another order. Any order items
+  # referring to a product that's not available are returned as failed items.
+  def copy_items_to(another_order)
+    failed_items = []
+    order_items.includes(:product).each do |order_item|
+      product = order_item.product
+      next if product.virtual?
+      if product.live?
+        another_order.insert(product, order_item.amount)
+      else
+        failed_items << product
+      end
+    end
+    failed_items
+  end
+
+  # Forwards this order as another order by replacing its items with
+  # items from this order, and copying some relevant info over.
+  # Returns items that failed just like #copy_items_to above.
   def forward_to(another_order)
+    another_order.order_items.destroy_all
+    failed_items = copy_items_to(another_order)
     another_order.update(
       contact_person: customer_name,
       contact_phone: customer_phone,
@@ -130,21 +149,6 @@ class Order < ActiveRecord::Base
       shipping_country: shipping_country,
       notes: notes
     )
-  end
-
-  # Copies order items on this order to another order. Any order items
-  # referring to a product that's not available are returned as failed items.
-  def copy_items_to(another_order)
-    failed_items = []
-    order_items.includes(:product).each do |order_item|
-      product = order_item.product
-      next if product.virtual?
-      if product.live?
-        another_order.insert(product, order_item.amount)
-      else
-        failed_items << product
-      end
-    end
     failed_items
   end
 

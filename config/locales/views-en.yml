@@ -60,7 +60,7 @@ en:
         new_category: New category
     orders:
       show:
-        duplicate: Duplicate to cart
+        forward: Forward to cart
         aggregated: Aggregated components
       edit:
         aggregated: Aggregated components

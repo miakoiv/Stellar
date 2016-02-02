@@ -6,8 +6,8 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
 
   authorize_actions_for Order
-  authority_actions duplicate: 'read'
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
+  authority_actions forward: 'read'
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :forward]
 
   # GET /admin/orders
   # GET /admin/orders.json
@@ -67,10 +67,11 @@ class Admin::OrdersController < ApplicationController
     end
   end
 
-  # GET /admin/orders/1/duplicate
-  def duplicate
-    @order.forward_to(shopping_cart)
-    failed_items = @order.copy_items_to(shopping_cart)
+  # GET /admin/orders/1/forward
+  def forward
+    failed_items = @order.forward_to(shopping_cart)
+    shopping_cart.recalculate!
+
     if failed_items.any?
       redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
     else
