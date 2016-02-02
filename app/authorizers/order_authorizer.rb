@@ -19,7 +19,7 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user)
-    user == resource.user
+    user.has_cached_role?(:order_editor) || user == resource.user
   end
 
   def updatable_by?(user)

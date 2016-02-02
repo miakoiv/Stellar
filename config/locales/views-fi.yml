@@ -40,6 +40,7 @@ fi:
         new_category: Uusi tuoteryhmä
     orders:
       show:
+        duplicate: Kopioi ostoskoriin
         aggregated: Keräilylista
       edit:
         aggregated: Keräilylista

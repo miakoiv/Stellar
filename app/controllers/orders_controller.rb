@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   authority_actions duplicate: 'read'
 
   before_action :set_pages
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
   def index
@@ -62,6 +62,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/duplicate
   def duplicate
+    @order = current_store.orders.find(params[:id])
     authorize_action_for @order
 
     failed_items = @order.copy_items_to(shopping_cart)
