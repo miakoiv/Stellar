@@ -5,7 +5,7 @@
     = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   - if @order.approved?
-    = link_to duplicate_order_path(@order), class: 'btn btn-info' do
+    = link_to duplicate_admin_order_path(@order), class: 'btn btn-info' do
       = icon('copy', t('.duplicate'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1

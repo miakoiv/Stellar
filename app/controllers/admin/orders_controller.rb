@@ -6,7 +6,8 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
 
   authorize_actions_for Order
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  authority_actions duplicate: 'read'
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
 
   # GET /admin/orders
   # GET /admin/orders.json
@@ -63,6 +64,17 @@ class Admin::OrdersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /admin/orders/1/duplicate
+  def duplicate
+    @order.forward_to(shopping_cart)
+    failed_items = @order.copy_items_to(shopping_cart)
+    if failed_items.any?
+      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
+    else
+      redirect_to cart_path, notice: t('.notice', order: @order)
     end
   end
 

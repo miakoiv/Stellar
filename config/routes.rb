@@ -82,6 +82,7 @@ Rails.application.routes.draw do
     resources :orders do
       resources :images, shallow: true
       resources :order_items, shallow: true
+      get 'duplicate', on: :member
     end
     resources :properties do
       post :reorder, on: :collection

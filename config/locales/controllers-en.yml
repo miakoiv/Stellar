@@ -22,6 +22,9 @@ en:
         notice: "Order %{order} created."
       update:
         notice: "Order %{order} updated."
+      duplicate:
+        notice: "Order %{order} copied to shopping cart."
+        failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"
     pages:
       create:
         notice: "Page %{page} created."

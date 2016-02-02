@@ -22,6 +22,9 @@ fi:
         notice: "Tilaus %{order} luotu."
       update:
         notice: "Tilaus %{order} päivitetty."
+      duplicate:
+        notice: "Tilaus %{order} kopioitu ostoskoriin."
+        failed: "Tilaus %{order} kopioitu ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"
     pages:
       create:
         notice: "Sivu %{page} luotu."

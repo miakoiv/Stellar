@@ -113,6 +113,25 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Write relevant fields from this order to another order
+  # when forwarding an order.
+  def forward_to(another_order)
+    another_order.update(
+      contact_person: customer_name,
+      contact_phone: customer_phone,
+      has_billing_address: has_billing_address,
+      billing_address: billing_address,
+      billing_postalcode: billing_postalcode,
+      billing_city: billing_city,
+      billing_country: billing_country,
+      shipping_address: shipping_address,
+      shipping_postalcode: shipping_postalcode,
+      shipping_city: shipping_city,
+      shipping_country: shipping_country,
+      notes: notes
+    )
+  end
+
   # Copies order items on this order to another order. Any order items
   # referring to a product that's not available are returned as failed items.
   def copy_items_to(another_order)
