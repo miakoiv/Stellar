@@ -15,7 +15,7 @@
         = f.text_field :subtitle
         = f.text_area :description
         - if current_user.manufacturer?
-          = f.text_field :cost_price, append: '€'
+          = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
         .form-group
           %label.control-label.col-sm-4= col(Product, :trade_price)
           .col-sm-4
