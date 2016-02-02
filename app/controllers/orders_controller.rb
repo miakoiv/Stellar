@@ -16,7 +16,9 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @orders_by_type = current_user.orders.complete.group_by(&:order_type)
+    @query = saved_search_query('order', 'order_search')
+    @search = OrderSearch.new(search_params)
+    @orders = @search.results.page(params[:page])
   end
 
   # GET /orders/1
@@ -85,6 +87,13 @@ class OrdersController < ApplicationController
         :billing_address, :billing_postalcode, :billing_city,
         :shipping_address, :shipping_postalcode, :shipping_city,
         :notes
+      )
+    end
+
+    # Restrict searching to orders of current user.
+    def search_params
+      @query.merge(
+        user_id: current_user.id
       )
     end
 end

@@ -1,22 +1,20 @@
 .page-header
   %h1= icon('truck', title(Order, count: 2))
 
-- if @orders_by_type.empty?
-  .panel.panel-default
-    .panel-body
-      %p.lead= t('store.no_orders')
-      %p= link_to t('store.go_shopping'), front_path
-- else
-  - first = @orders_by_type.keys.first
+.panel.panel-info
+  .panel-heading
+    .panel-title
+      %h4= t('actions.search')
+  .panel-body
+    = form_for @search, url: orders_path, method: :get do |f|
+      .col-xs-3
+        = f.select :order_type, current_user.available_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+      .col-xs-2
+        = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'top'}
+      .col-xs-4
+        = f.search_field :summary, autocomplete: 'off', placeholder: col(Order, :summary), class: 'form-control'
+      .col-xs-1.pull-right
+        = f.submit t('actions.search'), class: 'btn btn-primary'
 
-  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    - @orders_by_type.each_key do |order_type|
-      %li{role: 'presentation', class: order_type == first ? 'active' : nil}
-        %a{href: "##{tab_name(order_type)}", role: 'tab', data: {toggle: 'tab'}}
-          = order_type
-
-  .tab-content.panel.panel-default.tabbed-panel
-    - @orders_by_type.each do |order_type, orders|
-      .tab-pane.fade{id: tab_name(order_type), class: order_type == first ? 'in active' : nil}
-        %h2.visible-print-block= order_type
-        = render partial: 'orders/table', object: orders, as: :orders
+= render partial: 'orders/table', object: @orders, as: :orders
+= paginate @orders
