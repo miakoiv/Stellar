@@ -65,6 +65,7 @@ namespace :matfox do
             store = Store.find_by(erp_number: row[:erp_number])
             next if store.nil?
             product = find_or_create_product(store, code, data)
+            next if product.nil?
             product.update(
               customer_code: row[:customer_code],
               trade_price: row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price],
@@ -84,6 +85,7 @@ namespace :matfox do
             store = Store.find_by(slug: slug)
             next if store.nil?
             product = find_or_create_product(store, code, data)
+            next if product.nil?
             product.update(
               trade_price: data[:product][:trade_price],
               trade_price_modified_at: data[:product][:trade_price_modified_at]
@@ -158,9 +160,12 @@ namespace :matfox do
     product.memo = data[:product][:memo]
     product.cost_price = data[:product][:cost_price]
     product.cost_price_modified_at = data[:product][:cost_price_modified_at]
-    puts product.to_json
-    product.save!
-    product
+    if product.save
+      puts "#{store.name} #{product.code} #{product.title} #{product.subtitle}"
+      product
+    else
+      nil
+    end
   end
 
   # Finds or creates inventory item for `product` in `inventory` at `store`.
