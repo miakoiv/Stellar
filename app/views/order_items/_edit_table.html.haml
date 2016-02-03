@@ -1,44 +1,23 @@
-#order-items-table
-  .panel.panel-default
-    - if @order.empty?
-      .panel-body
-        %p.lead= t('store.empty_cart')
-        %p= link_to t('store.go_shopping'), front_path
-    - else
-      .table-responsive
-        %table.table.table-striped.table-hover.table-loose
-          %thead
-            %tr
-              %th= col(OrderItem, :product_title)
-              %th.col-xs-2= col(OrderItem, :product_code)
-              %th.col-xs-1.text-right= col(OrderItem, :amount)
-              %th.col-xs-1.text-right à
-              %th.col-xs-1.text-right= col(OrderItem, :subtotal)
-              %th.actions
-          %tfoot
-            %tr.info
-              %th
-              %th
-              %th
-              %th.text-right= col(Order, :grand_total)
-              %th#grand-total.text-right.currency{data: {amount: @order.grand_total.cents}}
-                = humanized_money_with_symbol @order.grand_total
-              %th
-          %tbody
-            = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
-            - if order.adjustments.any?
-              = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
-      .panel-footer
-        = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
-        = link_to icon('remove', t('store.cart.delete')), delete_cart_path,
-            class: 'btn btn-danger',
-            data: {confirm: t('store.cart.confirm_delete'),
-              'confirm-title' => t('actions.confirm.title'),
-              'confirm-proceed' => t('store.cart.delete'),
-              'confirm-cancel' => t('actions.confirm.cancel')}
-
-        - if @order.checkoutable?
-          - current_user.available_order_types.each do |order_type|
-            = link_to order_type.name, checkout_path(@order, order_type), class: 'btn btn-primary pull-right'
-        - else
-          .pull-right= t('checkout.messages.cannot_checkout_html')
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(OrderItem, :product_title)
+        %th.col-xs-2= col(OrderItem, :product_code)
+        %th.col-xs-1.text-right= col(OrderItem, :amount)
+        %th.col-xs-1.text-right à
+        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
+        %th.actions
+    %tfoot
+      %tr.info
+        %th
+        %th
+        %th
+        %th.text-right= col(Order, :grand_total)
+        %th#grand-total.text-right.currency{data: {amount: order.grand_total.cents}}
+          = humanized_money_with_symbol order.grand_total
+        %th
+    %tbody
+      = render partial: 'order_items/edit_row', collection: order.order_items, as: :order_item
+      - if order.adjustments.any?
+        = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment

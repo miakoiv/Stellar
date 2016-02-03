@@ -1,2 +1,2 @@
-$('#order-items-table').replaceWith("#{j render partial: 'order_items/edit_table', object: @order, as: :order}");
+$('#cart-contents').replaceWith("#{j render partial: 'store/cart_contents', object: @order, as: :order}");
 $('#cart-badge').replaceWith("#{j render partial: 'store/cart_badge'}");

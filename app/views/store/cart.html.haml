@@ -3,4 +3,4 @@
   %h1.hidden-print= icon('shopping-cart', t('.shopping_cart'))
   %h1.visible-print-block= current_store
 
-= render partial: 'order_items/edit_table', object: @order, as: :order
+= render partial: 'cart_contents', object: @order, as: :order
