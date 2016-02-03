@@ -75,3 +75,5 @@ en:
   store:
     order_product:
       notice: "%{amount} of ”%{product}” added to cart."
+    delete_cart:
+      notice: "Shopping cart emptied."

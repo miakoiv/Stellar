@@ -30,6 +30,13 @@
               = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment
       .panel-footer
         = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
+        = link_to icon('remove', t('store.cart.delete')), delete_cart_path,
+            class: 'btn btn-danger',
+            data: {confirm: t('store.cart.confirm_delete'),
+              'confirm-title' => t('actions.confirm.title'),
+              'confirm-proceed' => t('store.cart.delete'),
+              'confirm-cancel' => t('actions.confirm.cancel')}
+
         - if @order.checkoutable?
           - current_user.available_order_types.each do |order_type|
             = link_to order_type.name, checkout_path(@order, order_type), class: 'btn btn-primary pull-right'

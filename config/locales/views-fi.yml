@@ -103,6 +103,8 @@ fi:
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
+      delete: Tyhjennä kori
+      confirm_delete: Tyhjennetäänkö ostoskori?
   albums:
     sidebar:
       included_albums: Näytä kuva-albumit

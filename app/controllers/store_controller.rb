@@ -42,6 +42,14 @@ class StoreController < ApplicationController
     return redirect_to store_path if @order.empty?
   end
 
+  # GET /cart/delete
+  def delete_cart
+    @order = shopping_cart
+    @order.destroy
+
+    redirect_to store_path, notice: t('.notice')
+  end
+
   # GET /store/search
   def search
     @query = saved_search_query('product', 'product_search')

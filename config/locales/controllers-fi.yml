@@ -75,3 +75,5 @@ fi:
   store:
     order_product:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
+    delete_cart:
+      notice: "Ostoskori tyhjennetty."

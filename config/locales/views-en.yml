@@ -127,6 +127,8 @@ en:
     go_checkout: Proceed to checkout
     cart:
       shopping_cart: Shopping cart
+      delete: Empty cart
+      confirm_delete: Really empty your shopping cart?
   albums:
     sidebar:
       included_albums: Show photo albums
