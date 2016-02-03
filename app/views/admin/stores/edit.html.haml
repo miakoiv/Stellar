@@ -1,6 +1,7 @@
 .page-header
-  = link_to admin_stores_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_read?(Store)
+    = link_to admin_stores_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
   = link_to admin_store_path(@store), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1

@@ -5,7 +5,7 @@ class Admin::StoresController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
 
-  authorize_actions_for Store
+  authorize_actions_for Store, except: [:show, :edit, :update]
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/stores
@@ -17,6 +17,7 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores/1
   # GET /admin/stores/1.json
   def show
+    authorize_action_for @store
   end
 
   # GET /admin/stores/new
@@ -26,6 +27,7 @@ class Admin::StoresController < ApplicationController
 
   # GET /admin/stores/1/edit
   def edit
+    authorize_action_for @store
   end
 
   # POST /admin/stores
@@ -48,6 +50,8 @@ class Admin::StoresController < ApplicationController
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json
   def update
+    authorize_action_for @store
+
     respond_to do |format|
       if @store.update(store_params)
         format.html { redirect_to admin_store_path(@store),

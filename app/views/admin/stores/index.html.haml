@@ -28,6 +28,6 @@
                   class: 'btn btn-default btn-sm'
             = link_to icon('info', t('actions.show')), admin_store_path(store),
                 class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(Store)
+            - if current_user.can_update?(store)
               = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store),
                   class: 'btn btn-default btn-sm'

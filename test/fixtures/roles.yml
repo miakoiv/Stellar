@@ -52,6 +52,10 @@ album_editor:
   id: 20
   name: album_editor
   appearance: success
+store_admin:
+  id: 95
+  name: store_admin
+  appearance: danger
 superuser:
   id: 99
   name: superuser

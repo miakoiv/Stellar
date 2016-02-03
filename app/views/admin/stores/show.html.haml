@@ -1,7 +1,8 @@
 .page-header
-  = link_to admin_stores_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(Store)
+  - if current_user.can_read?(Store)
+    = link_to admin_stores_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(@store)
     = link_to edit_admin_store_path(@store), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1

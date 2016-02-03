@@ -31,6 +31,7 @@ fi:
           promotion_editor: kampanjoiden muokkaus
           user_manager: käyttäjien hallinta
           album_editor: kuva-albumien muokkaus
+          store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
       user:
         group:
