@@ -55,7 +55,7 @@ class Product < ActiveRecord::Base
   scope :virtual, -> { where(virtual: true) }
 
   #---
-  validates :code, presence: true
+  validates :code, presence: true, uniqueness: {scope: :store}
   validates :title, presence: true
 
   before_save :reset_live
