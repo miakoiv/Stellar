@@ -1,0 +1,46 @@
+%h1
+  = t('.title')
+  %span.small
+    = col(Order, :number)
+    = @order.to_s
+
+.row
+  .col-xs-4
+    %dl
+      %dt= col(Order, :completed_at)
+      %dd= l(@order.completed_at.to_date, format: :iso)
+      %dt= col(Order, :customer_name)
+      %dd= @order.customer_name
+      %dt= col(Order, :customer_email)
+      %dd= @order.customer_email
+      %dt= col(Order, :customer_phone)
+      %dd= @order.customer_phone
+  .col-xs-4
+    %dl
+      %dt= col(Order, :company_name)
+      %dd= @order.company_name
+      %dt= col(Order, :contact_person)
+      %dd= @order.contact_person
+      %dt= col(Order, :contact_phone)
+      %dd= @order.contact_phone
+  .col-xs-4
+    %dl
+      - if @order.has_shipping?
+        %dt= col(Order, :shipping_at)
+        %dd= @order.shipping_at.present? ? l(@order.shipping_at) : '–'
+        %dt= col(Order, :shipping_address)
+        %dd= @order.shipping_address
+        %dt= col(Order, :billing_address)
+        %dd
+          = @order.shipping_postalcode
+          = @order.shipping_city
+        %dd= @order.billing_address
+        %dd
+          = @order.billing_postalcode
+          = @order.billing_city
+.row
+  .col-xs-6
+    %dl
+      %dt= col(Order, :notes)
+      %dd
+        %p= @order.notes

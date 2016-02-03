@@ -42,6 +42,8 @@ fi:
       show:
         forward: Välitä ostoskoriin
         aggregated: Keräilylista
+      delivery_note:
+        title: Lähete
       edit:
         aggregated: Keräilylista
     pages:

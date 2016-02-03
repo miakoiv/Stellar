@@ -13,11 +13,17 @@
           = f.date_field :shipping_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           = f.text_field :shipping_address
-          = f.text_field :shipping_postalcode, skip_label: true
-          = f.text_field :shipping_city, skip_label: true
+          .form-group
+            .col-sm-offset-4.col-sm-3
+              = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
+            .col-sm-5
+              = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
           = f.text_field :billing_address
-          = f.text_field :billing_postalcode, skip_label: true
-          = f.text_field :billing_city, skip_label: true
+          .form-group
+            .col-sm-offset-4.col-sm-3
+              = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
+            .col-sm-5
+              = f.text_field_without_bootstrap :billing_city, class: 'form-control'
       %fieldset{disabled: locked}
         = f.text_area :notes, rows: 4
       - unless locked

@@ -62,6 +62,8 @@ en:
       show:
         forward: Forward to cart
         aggregated: Aggregated components
+      delivery_note:
+        title: Delivery note
       edit:
         aggregated: Aggregated components
     pages:

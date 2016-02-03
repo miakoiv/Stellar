@@ -8,14 +8,17 @@
     = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
       = icon('share', t('.forward'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
-  %h1
+  %h1.hidden-print
     = @order.order_type
     %span.small
       = col(Order, :number)
       = @order.to_s
 
+.visible-print
+  = render partial: 'delivery_note'
+
 .row
-  .col-lg-6
+  .col-lg-6.hidden-print
     = render partial: 'form', locals: {locked: true}
 
   .col-lg-6
