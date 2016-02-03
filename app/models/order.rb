@@ -108,7 +108,7 @@ class Order < ActiveRecord::Base
     else
       order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
       order_item.amount += amount
-      order_item.price = product.retail_price
+      order_item.price = product.price(user)
       order_item.save!
     end
   end

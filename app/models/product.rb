@@ -15,6 +15,7 @@ class Product < ActiveRecord::Base
   monetize :retail_price_cents, allow_nil: true
 
   # Monetize aggregate methods.
+  monetize :price_cents, disable_validation: true
   monetize :unit_price_cents, disable_validation: true
 
   INLINE_SEARCH_RESULTS = 20
@@ -73,14 +74,31 @@ class Product < ActiveRecord::Base
     product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
   end
 
+  # Price adjusted for given user. Pricing depends on user's group and
+  # personal pricing factor. Prices returned by this method must be used
+  # for presentation only, to avoid applying the factor multiple times.
+  def price_cents(user = nil)
+    return retail_price_cents if user.nil?
+    case user.group
+    when 'manufacturer'
+      cost_price_cents
+    when 'reseller'
+      trade_price_cents.nil? ? nil : trade_price_cents * user.pricing_factor
+    when 'customer'
+      retail_price_cents.nil? ? nil : retail_price_cents * user.pricing_factor
+    else
+      retail_price_cents
+    end
+  end
+
   # Checks product properties for a property that declares unit pricing,
-  # returns calculated price per base unit.
-  def unit_price_cents
+  # returns calculated price per base unit, for given user.
+  def unit_price_cents(user = nil)
     product_property = unit_pricing_property
-    return nil if product_property.nil? or product_property.value.nil?
+    return nil if user.nil? || product_property.nil? || product_property.value.nil?
     measure = product_property.value.tr(',', '.').to_f
     return nil if retail_price.nil? || product_property.nil? || measure == 0
-    retail_price / (measure * product_property.property.measurement_unit.factor)
+    price(user) / (measure * product_property.property.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.
