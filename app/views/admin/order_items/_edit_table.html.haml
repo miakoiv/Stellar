@@ -2,7 +2,7 @@
   %table.table.table-hover{class: order.reveal_prices? ? 'table-loose' : 'table-condensed'}
     %thead
       %tr
-        %th
+        %th.col-min
         %th.col-xs-3{colspan: 2}= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
         %th.col-xs-2.text-right #
