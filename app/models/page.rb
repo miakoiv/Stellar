@@ -30,4 +30,8 @@ class Page < ActiveRecord::Base
   def to_s
     title
   end
+
+  def description
+    content
+  end
 end
