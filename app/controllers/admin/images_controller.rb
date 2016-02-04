@@ -20,7 +20,7 @@ class Admin::ImagesController < ApplicationController
   # POST /admin/imageable/1/images
   def create
     @imageable = find_imageable
-    @image = @imageable.images.build(image_params)
+    @image = @imageable.images.build(image_params.merge(priority: @imageable.images.count))
 
     respond_to do |format|
       if @image.save
