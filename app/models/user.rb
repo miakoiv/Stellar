@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
   #---
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: {scope: :store}
   validates :phone, presence: true
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
