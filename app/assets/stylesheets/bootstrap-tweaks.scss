@@ -194,16 +194,31 @@ i.icon {
   position: relative;
   width: 200px;
   height: 200px;
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+  }
 }
 .box-thumbnail {
   position: relative;
   width: 75px;
   height: 75px;
+
+  img {
+    max-width: 75px;
+    max-height: 75px;
+  }
 }
 .box-icon {
   position: relative;
   width: 25px;
-  width: 25px;
+  height: 25px;
+
+  img {
+    max-width: 25px;
+    max-height: 25px;
+  }
 }
 .box-matchbox img, .box-thumbnail img, .box-icon img {
   position: absolute;
@@ -319,7 +334,11 @@ span.shipping:before { content: ""; }
   @extend .form-control;
   height: auto;
 }
-#wysiwyg-content .editable { outline: 2px dotted rgba(0,0,255,0.333); }
+.wysiwyg {
+  margin-bottom: 20px;
+
+  .editable { outline: 2px dotted rgba(0,0,255,0.333); }
+}
 
 //
 // magnific popup tweaks

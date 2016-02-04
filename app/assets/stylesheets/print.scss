@@ -13,10 +13,13 @@
     font-size: inherit;
   }
 
-  h1 {
+  .container {
     width: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
+  }
+
+  .page-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
   }
 
   .nav.nav-tabs {
@@ -34,7 +37,7 @@
   .form-group {
     margin-bottom: 0;
 
-    .form-control {
+    .form-control, .input-group-addon {
       font-size: inherit;
       border: 0;
       background: transparent;

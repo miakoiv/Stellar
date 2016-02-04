@@ -5,4 +5,9 @@
     = icon('eye', t('actions.view'))
   %h1= icon('file-text-o', @page)
 
-= render partial: 'form', locals: {locked: false}
+.row
+  .col-md-8
+    = render partial: 'form', locals: {locked: false}
+
+.fr-view
+  = render partial: 'wysiwyg_content'
