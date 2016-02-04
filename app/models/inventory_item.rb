@@ -30,7 +30,7 @@ class InventoryItem < ActiveRecord::Base
   end
 
   def total_value_cents
-    return 0 if amount.nil? || value_cents.nil?
+    return 0 if amount.nil? || value_cents.nil? || amount < 0
     amount * value_cents
   end
 
