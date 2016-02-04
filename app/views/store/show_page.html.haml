@@ -1,3 +1,5 @@
+- meta_tags_for(@page)
+
 .page-content{class: @page.albums.any? ? 'has-sidebar' : ''}
   .fr-view
     = @page.content.html_safe if @page.content.present?
