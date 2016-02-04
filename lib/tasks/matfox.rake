@@ -66,11 +66,14 @@ namespace :matfox do
             next if store.nil?
             product = find_or_create_product(store, code, data)
             next if product.nil?
-            product.update(
-              customer_code: row[:customer_code],
-              trade_price: row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price],
-              trade_price_modified_at: data[:product][:trade_price_modified_at]
-            )
+            product.update(customer_code: row[:customer_code])
+            trade_price = row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price]
+            if trade_price.present? && trade_price.to_f > 0
+              product.update(
+                trade_price: trade_price,
+                trade_price_modified_at: data[:product][:trade_price_modified_at]
+              )
+            end
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
           end
@@ -86,10 +89,13 @@ namespace :matfox do
             next if store.nil?
             product = find_or_create_product(store, code, data)
             next if product.nil?
-            product.update(
-              trade_price: data[:product][:trade_price],
-              trade_price_modified_at: data[:product][:trade_price_modified_at]
-            )
+            trade_price = data[:product][:trade_price]
+            if trade_price.present? && trade_price.to_f > 0
+              product.update(
+                trade_price: data[:product][:trade_price],
+                trade_price_modified_at: data[:product][:trade_price_modified_at]
+              )
+            end
             update_inventory(store, product, data[:product], data[:inventory])
             update_structure(store, product, data[:structure])
           end
