@@ -198,6 +198,7 @@ fi:
         name: Nimi
         slug: Tunniste
         settings: Asetukset
+        letterhead: Kirjelomake
         theme: Ulkoasun teema
         locale: Kieli
         allow_shopping: Salli ostokset

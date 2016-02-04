@@ -1,4 +1,4 @@
-.page-header
+.page-header.hidden-print
   = link_to admin_orders_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(Order)
@@ -8,13 +8,15 @@
     = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
       = icon('share', t('.forward'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
-  %h1.hidden-print
+  %h1
     = @order.order_type
     %span.small
       = col(Order, :number)
       = @order.to_s
 
 .visible-print
+  .page-header.fr-view
+    = @order.store.letterhead.html_safe if @order.store.letterhead.present?
   = render partial: 'delivery_note'
 
 .row

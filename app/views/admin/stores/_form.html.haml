@@ -22,6 +22,7 @@
         = f.text_field :tracking_code
         - if current_user.has_cached_role?(:superuser)
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
+        = f.hidden_field :letterhead
       - unless locked
         = f.form_group do
           = f.primary
