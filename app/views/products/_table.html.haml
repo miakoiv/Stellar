@@ -1,32 +1,33 @@
-- cache_if current_user.guest?, [:products_table, products] do
-  .table-responsive
-    %table#products-table.table.table-striped.table-hover.table-loose
-      %thead
-        %tr
-          %th.col-min{data: {sorter: 'false'}}
-          %th= col(Product, :title)
-          %th.col-xs-2.no-wrap= col(Product, :code)
-          - if can_see_pricing?
-            %th.no-wrap.text-right= col(Product, :price)
-          %th.col-xs-1.actions{data: {sorter: 'false'}}
-      %tbody
-        = content_tag_for :tr, products do |product|
-          %td
-            .box-thumbnail
-              = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-          %td
-            %strong= product.title
-            = product.subtitle
-          %td= product.code
-          - if can_see_pricing?
-            %td.currency.text-right= humanized_money_with_symbol product.price(current_user)
-          %td.actions
-            - if can_shop?
-              = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
-                .input-group
-                  = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
-                  %span.input-group-btn
-                    %button.btn.btn-success{type: 'submit'}= icon('cart-plus')
+.table-responsive
+  %table#products-table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min{data: {sorter: 'false'}}
+        %th= col(Product, :title)
+        %th.col-xs-2.no-wrap= col(Product, :code)
+        - if can_see_pricing?
+          %th.no-wrap.text-right= col(Product, :price)
+        %th.col-xs-1.actions{data: {sorter: 'false'}}
+    %tbody
+      - products.each do |product|
+        - cache_if current_user.guest?, [I18n.locale, :product_row, product] do
+          = content_tag_for :tr, product do
+            %td
+              .box-thumbnail
+                = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
+            %td
+              %strong= product.title
+              = product.subtitle
+            %td= product.code
+            - if can_see_pricing?
+              %td.currency.text-right= humanized_money_with_symbol product.price(current_user)
+            %td.actions
+              - if can_shop?
+                = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
+                  .input-group
+                    = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
+                    %span.input-group-btn
+                      %button.btn.btn-success{type: 'submit'}= icon('cart-plus')
 
 :coffee
   $('#products-table').tablesorter
