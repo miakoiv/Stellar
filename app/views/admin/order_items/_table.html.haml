@@ -8,5 +8,15 @@
         %th.col-xs-2.text-right #
         - if order.reveal_prices?
           %th.col-xs-2.text-right à
+    - if order.reveal_prices?
+      %tfoot
+        %tr
+          %th
+          %th
+          %th
+          %th
+          %th.text-right= col(Order, :grand_total)
+          %th.text-right.currency
+            = render partial: 'admin/orders/grand_total', object: order, as: :order
 
     = render partial: 'admin/order_items/row', collection: order.order_items, as: :order_item

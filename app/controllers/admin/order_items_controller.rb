@@ -17,6 +17,7 @@ class Admin::OrderItemsController < ApplicationController
       if @order_item.update(order_item_params)
         format.js
       else
+        format.js
         format.json { render json: @order_item.errors, status: :unprocessable_entity }
       end
     end
