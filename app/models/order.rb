@@ -269,10 +269,6 @@ class Order < ActiveRecord::Base
     order_items.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end
 
-  def tab_name
-    order_type.name
-  end
-
   def summary
     [company_name, contact_person, shipping_city].compact.reject(&:empty?).join('/')
   end

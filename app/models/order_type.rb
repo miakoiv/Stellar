@@ -8,10 +8,6 @@ class OrderType < ActiveRecord::Base
   belongs_to :inventory
 
   #---
-  def tab_name
-    name
-  end
-
   def to_s
     name
   end

@@ -54,10 +54,6 @@ class Category < ActiveRecord::Base
     name_changed? || super
   end
 
-  def tab_name
-    name
-  end
-
   def indented_name
     "#{'    ' * level}#{name}"
   end

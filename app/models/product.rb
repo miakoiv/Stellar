@@ -158,10 +158,6 @@ class Product < ActiveRecord::Base
     (store.products.live - [self]).map { |p| [p.to_s, p.id] }
   end
 
-  def tab_name
-    category.present? ? category.name : 'uncategorized'
-  end
-
   def to_s
     "#{title} #{subtitle}"
   end
