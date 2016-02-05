@@ -199,7 +199,6 @@ en:
         name: Name
         slug: Slug
         settings: Settings
-        letterhead: Letterhead
         theme: Display theme
         locale: Language
         allow_shopping: Enable shopping
