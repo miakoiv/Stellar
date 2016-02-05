@@ -1,0 +1,1 @@
+(function(){jQuery(function(){var n;return n=$("#main-nav").height(),$(".heat").css("padding-top",n)})}).call(this);
