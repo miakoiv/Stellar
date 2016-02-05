@@ -22,9 +22,6 @@ $.fn.extend
       loading: ->
         $(this).html('<i class="fa fa-spin fa-circle-o-notch"></i>')
 
-    $('.nav-tabs[role="tablist"]').stickyTabs
-      backToTop: true
-
     $('.credit-card-number').payment 'formatCardNumber'
     $('.credit-card-expiry').payment 'formatCardExpiry'
     $('.credit-card-cvc').payment 'formatCardCVC'
