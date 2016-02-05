@@ -1,0 +1,246 @@
+/*
+ * Theme specific styles
+ */
+
+$navbar-inverse-bg: #434343;
+$navbar-inverse-color: #c4c4c4;
+$navbar-inverse-link-color: #eaeaea;
+$navbar-inverse-toggle-hover-bg: #fff;
+$navbar-inverse-toggle-border-color: #c4c4c4;
+
+$brand-primary: #ec1b25;
+
+@import "bootstrap-font-awesome.scss";
+@import "bootstrap-generators.scss";
+@import "bootstrap-tweaks.scss";
+@import "fonts.scss";
+@import "print.scss";
+
+html {
+  background: rgba(255,184,0,1);
+  background: -moz-linear-gradient(-45deg, rgba(255,184,0,1) 0%, rgba(255,184,0,1) 10%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 85%, rgba(236,27,37,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,184,0,1)), color-stop(10%, rgba(255,184,0,1)), color-stop(25%, rgba(255,255,255,1)), color-stop(85%, rgba(255,255,255,1)), color-stop(100%, rgba(236,27,37,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(255,184,0,1) 0%, rgba(255,184,0,1) 10%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 85%, rgba(236,27,37,1) 100%);
+  background: -o-linear-gradient(-45deg, rgba(255,184,0,1) 0%, rgba(255,184,0,1) 10%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 85%, rgba(236,27,37,1) 100%);
+  background: -ms-linear-gradient(-45deg, rgba(255,184,0,1) 0%, rgba(255,184,0,1) 10%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 85%, rgba(236,27,37,1) 100%);
+  background: linear-gradient(135deg, rgba(255,184,0,1) 0%, rgba(255,184,0,1) 10%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 85%, rgba(236,27,37,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb800', endColorstr='#ec1b25', GradientType=1 );
+  background-attachment: fixed;
+}
+
+body {
+  > nav.navbar {
+    @extend .navbar-inverse;
+    @include box-shadow(0 1px 10px 0 rgba(0,0,0,.666));
+
+    .navbar-toggle {
+      color: $navbar-inverse-link-color;
+    }
+  }
+}
+
+#main {
+  padding-bottom: 100px;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.heat {
+  overflow-y: scroll;
+  padding-top: 50px;
+  background-color: transparent;
+
+  .page-content {
+    padding-top: 30px;
+  }
+
+  .search-panel {
+  }
+
+  .categories {
+    margin-top: 10px;
+
+    > ul {
+      @extend .nav, .nav-pills, .nav-justified;
+
+      li.category {
+
+        a {
+          display: block;
+
+          img {
+            display: none;
+          }
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+    .subcategories {
+      margin-top: 5px;
+      font-size: $font-size-small;
+
+      > ul {
+        @extend .nav, .nav-pills;
+
+        li.category {
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .products {
+    position: relative;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li.product {
+        @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+        max-width: 230px;
+        position: relative;
+        padding: 5px;
+        transition: all 0.2s ease-in-out 0s;
+
+        a {
+          display: block;
+          padding: 10px;
+          background-color: #fff;
+          border-radius: $border-radius-base;
+
+          &:hover {
+            @include box-shadow(0 0 8px 0 $brand-primary);
+            text-decoration: none;
+          }
+          .product-image {
+            position: relative;
+            height: 200px;
+
+            img {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              margin: auto;
+            }
+          }
+          .product-text {
+            text-align: center;
+
+            h3 {
+              margin-top: 5px;
+              margin-bottom: 5px;
+              font-size: 17px;
+              letter-spacing: -0.01em;
+
+              .small {
+                display: block;
+                font-size: 14px;
+              }
+            }
+            .description { display: none; }
+          }
+        }
+        .buy-now { display: none; }
+      }
+    }
+    .product-list {
+      @extend .col-xs-12;
+    }
+  }
+
+  .product-detail {
+    position: relative;
+    padding: 30px 0;
+
+    .product-header {
+      @extend .row;
+
+      .product-title {
+        @extend .col-xs-12, .col-md-7;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+      .product-meta {
+        @extend .col-xs-12, .col-md-5;
+        margin-top: 8px;
+
+        .product-actions {
+          float: right;
+          margin-left: 15px;
+
+          .form-inline { display: inline-block; }
+          .btn {
+            display: inline-block;
+            transition: all 0.2s ease-in-out 0s;
+
+            &:hover {
+              @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
+            }
+          }
+        }
+        .product-pricing {
+          float: right;
+          font-weight: 500;
+          font-size: $font-size-large;
+          line-height: 34px;
+        }
+      }
+    }
+    .product-body {
+      @extend .row;
+
+      .product-description {
+        @extend .col-xs-12, .col-md-4;
+
+        .product-code {
+          @extend .pull-left;
+          font-size: $font-size-small;
+        }
+        .product-stock {
+          @extend .pull-right, .clearfix;
+        }
+        .body-text { clear: both; }
+        .list-group, .table { margin-top: 20px; }
+      }
+      .images {
+        padding-bottom: 70px;
+
+        .nav {
+          @extend .hidden-print;
+          position: absolute;
+          left: $grid-gutter-width/2;
+          bottom: 20px;
+
+          > li > a { padding: 5px; }
+        }
+        .image {
+          a {
+            display: block;
+
+            img {
+              @extend .img-responsive;
+              margin: 0 auto;
+            }
+          }
+        }
+        &.technical {
+          @extend .col-xs-12, .col-sm-4, .col-md-3;
+        }
+        &.presentational {
+          @extend .col-xs-12, .col-sm-8, .col-md-5;
+        }
+      }
+    }
+  }
+}
