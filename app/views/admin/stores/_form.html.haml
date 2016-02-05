@@ -20,9 +20,10 @@
             {include_blank: true}, {class: 'selectize'}
         = f.text_field :free_shipping_at
         = f.text_field :tracking_code
+        = f.select :manufacturer_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
+        = f.select :reseller_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
         - if current_user.has_cached_role?(:superuser)
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
-        = f.hidden_field :letterhead
       - unless locked
         = f.form_group do
           = f.primary

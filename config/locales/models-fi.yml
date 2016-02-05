@@ -137,6 +137,7 @@ fi:
         title: Otsake
         slug: Osoite
         content: Sisältö
+        letterhead: Sivu on kirjepohja
         internal: Sivu on sisäiseen käyttöön
         wysiwyg: Käytä Froala-editoria
         album_ids: Kuva-albumit
@@ -207,6 +208,8 @@ fi:
         shipping_cost_product_id: Toimituskulujen tuote
         tracking_code: GA-seurantakoodi
         inventory_ids: Varastot
+        manufacturer_letterhead_id: Valmistajan kirjepohja
+        reseller_letterhead_id: Jälleenmyyjän kirjepohja
       user:
         name: Nimi
         group: Ryhmä

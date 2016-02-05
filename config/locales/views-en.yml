@@ -64,6 +64,8 @@ en:
         aggregated: Aggregated components
       delivery_note:
         title: Delivery note
+      quote:
+        title: Quote
       edit:
         aggregated: Aggregated components
     pages:

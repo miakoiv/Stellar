@@ -11,6 +11,9 @@
       - if @page.new_record? && current_user.has_cached_role?(:superuser)
         = f.form_group do
           = f.check_box :internal
+      - if current_user.has_cached_role?(:store_admin) || current_user.has_cached_role?(:superuser)
+        = f.form_group do
+          = f.check_box :letterhead
 
       - if @page.internal?
         = f.text_field :slug, required: true

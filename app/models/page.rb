@@ -15,8 +15,9 @@ class Page < ActiveRecord::Base
   has_many :sub_pages, class_name: 'Page', foreign_key: :parent_page_id
   has_and_belongs_to_many :albums
 
-  scope :top_level, -> { where(parent_page_id: nil) }
-  scope :navbar, -> { where(navbar: true) }
+  scope :top_level, -> { where(parent_page_id: nil, letterhead: false) }
+  scope :navbar, -> { where(navbar: true, letterhead: false) }
+  scope :letterhead, -> { where(letterhead: true) }
 
   #---
   validates :title, presence: true

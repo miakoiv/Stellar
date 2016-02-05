@@ -137,6 +137,7 @@ en:
         title: Title
         slug: Address
         content: Content
+        letterhead: Page is a letterhead
         internal: Page is for internal use
         wysiwyg: Use Froala Editor
         album_ids: Photo albums
@@ -207,6 +208,8 @@ en:
         shipping_cost_product_id: S&H product entry
         tracking_code: GA tracking code
         inventory_ids: Inventories
+        manufacturer_letterhead_id: Manufacturer letterhead
+        reseller_letterhead_id: Reseller letterhead
       user:
         name: Name
         group: Group

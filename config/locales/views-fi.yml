@@ -44,6 +44,8 @@ fi:
         aggregated: Keräilylista
       delivery_note:
         title: Lähete
+      quote:
+        title: Tarjous
       edit:
         aggregated: Keräilylista
     pages:
