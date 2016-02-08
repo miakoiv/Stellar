@@ -1,6 +1,4 @@
 %ul.nav.navbar-nav
-  - if user_signed_in? && can_manage?
-    %li= link_to icon('wrench', class: 'fa-lg'), admin_orders_path
   %li= link_to icon('search-plus', class: 'fa-lg'), search_path
   - if user_signed_in? && can_shop?
     %li

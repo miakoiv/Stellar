@@ -18,6 +18,8 @@
             = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
           %ul.nav.navbar-nav.navbar-right
             = render partial: 'shared/user_menu'
+            - if user_signed_in? && can_manage?
+              = render partial: 'shared/admin_menu'
           = render partial: 'shared/keyword_search'
 
     #main.container
