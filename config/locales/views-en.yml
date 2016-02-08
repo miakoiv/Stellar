@@ -43,6 +43,8 @@ en:
   admin:
     dashboard:
       title: Dashboard
+    reports:
+      title: Reports
       inventory:
         title: Inventory value
         total_value: Total value

@@ -5,9 +5,8 @@ class Admin::DashboardController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
 
-  # GET /dashboard
+  # GET /admin/dashboard
   def index
-    @inventory = current_store.inventory_valuation
   end
 
 end

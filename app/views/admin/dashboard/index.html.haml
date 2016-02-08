@@ -1,24 +1,2 @@
 .page-header
-  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1= icon('tachometer', t('admin.dashboard.title'))
-
-%ul.nav.nav-tabs{role: 'tablist'}
-  %li.active{role: 'presentation'}
-    %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
-      = t('admin.dashboard.inventory.title')
-
-.tab-content
-  #tab-inventory.tab-pane.fade.in.active
-    %h2.visible-print-block= t('admin.dashboard.inventory.title')
-    .panel.panel-default
-      .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label= t('admin.dashboard.inventory.total_value')
-          .col-sm-8
-            %p.form-control-static= humanized_money_with_symbol @inventory[1]
-        .form-group
-          %label.col-sm-4.control-label= t('admin.dashboard.inventory.items')
-          .col-sm-8
-            %p.form-control-static= @inventory[0].size
-
-    = render partial: 'inventory'

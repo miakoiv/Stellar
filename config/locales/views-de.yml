@@ -42,7 +42,9 @@
 de:
   admin:
     dashboard:
-      title: Dashboard
+      title: Konsole
+    reports:
+      title: Berichte
       inventory:
         title: Lagerwert
         total_value: Gesamtwert

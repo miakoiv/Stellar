@@ -54,6 +54,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/dashboard', to: 'dashboard#index', as: :dashboard
 
+    get '/reports', to: 'reports#index', as: :reports
+
     resources :stores do
       resources :images, shallow: true
     end

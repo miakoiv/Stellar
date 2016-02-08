@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_store, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :can_access_dashboard?
+  helper_method :current_store, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?
 
   def current_store
     @current_store ||= user_signed_in? && current_user.store || current_store_by_request
@@ -70,11 +70,6 @@ class ApplicationController < ActionController::Base
   def can_manage?
     @can_manage = current_user.has_cached_role?(:manager) if @can_manage.nil?
     @can_manage
-  end
-
-  def can_access_dashboard?
-    @can_access_dashboard = current_user.has_cached_role?(:dashboard_access) if @can_access_dashboard.nil?
-    @can_access_dashboard
   end
 
   private

@@ -16,9 +16,9 @@ correspondence:
   id: 11
   name: correspondence
   appearance: default
-dashboard_access:
+reports:
   id: 12
-  name: dashboard_access
+  name: reports
   appearance: success
 property_editor:
   id: 13

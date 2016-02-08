@@ -22,7 +22,7 @@ fi:
           see_stock: näkee varastosaldon
           manager: ylläpitäjä
           correspondence: yhteydenotot
-          dashboard_access: pääsy konsoliin
+          reports: raportit
           property_editor: ominaisuuksien muokkaus
           category_editor: tuoteryhmien muokkaus
           order_editor: tilauksien käsittely

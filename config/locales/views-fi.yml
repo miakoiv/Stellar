@@ -23,6 +23,8 @@ fi:
   admin:
     dashboard:
       title: Konsoli
+    reports:
+      title: Raportit
       inventory:
         title: Varaston arvo
         total_value: Arvo yhteensä
