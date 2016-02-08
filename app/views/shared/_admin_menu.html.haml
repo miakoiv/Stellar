@@ -4,25 +4,4 @@
     %span.caret
   %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
     = active_link_to icon('tachometer', t('admin.dashboard.title')), admin_dashboard_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:reports)
-      = active_link_to icon('line-chart', t('admin.reports.title'), class: 'fa-fw'), admin_reports_path, wrap_tag: :li
-    - if current_user.can_read?(Order)
-      = active_link_to icon('truck', title(Order, count: 2)), admin_orders_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:product_editor)
-      = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'), admin_products_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:category_editor)
-      = active_link_to icon('sitemap', title(Category, count: 2), class: 'fa-fw'), admin_categories_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:promotion_editor)
-      = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'), admin_promotions_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:property_editor)
-      = active_link_to icon('eyedropper', title(Property, count: 2), class: 'fa-fw'), admin_properties_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:page_editor)
-      = active_link_to icon('files-o', title(Page, count: 2), class: 'fa-fw'), admin_pages_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:album_editor)
-      = active_link_to icon('camera-retro', title(Album, count: 2), class: 'fa-fw'), admin_albums_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:user_manager)
-      = active_link_to icon('users', title(User, count: 2), class: 'fa-fw'), admin_users_path, wrap_tag: :li
-    - if current_user.has_cached_role?(:store_admin)
-      = active_link_to icon('cube', title(Store), class: 'fa-fw'), edit_admin_store_path(current_store), wrap_tag: :li
-    - if current_user.has_cached_role?(:superuser)
-      = active_link_to icon('cubes', title(Store, count: 2), class: 'fa-fw'), admin_stores_path, wrap_tag: :li
+    = render partial: 'admin/dashboard/admin_links'
