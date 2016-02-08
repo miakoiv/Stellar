@@ -1,8 +1,2 @@
 = active_link_to icon('cubes', title(Store)),
     front_path, wrap_tag: :li
-- if can_access_dashboard?
-  = active_link_to icon('tachometer', t('admin.dashboard.title')),
-      admin_dashboard_path, wrap_tag: :li
-- if current_user.can_read?(Order)
-  = active_link_to icon('truck', title(Order, count: 2)),
-      admin_orders_path, wrap_tag: :li

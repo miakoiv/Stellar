@@ -3,6 +3,12 @@
     = icon('wrench', class: 'fa-lg')
     %span.caret
   %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+    - if can_access_dashboard?
+      = active_link_to icon('tachometer', t('admin.dashboard.title')),
+          admin_dashboard_path, wrap_tag: :li
+    - if current_user.can_read?(Order)
+      = active_link_to icon('truck', title(Order, count: 2)),
+          admin_orders_path, wrap_tag: :li
     - if current_user.has_cached_role?(:product_editor)
       = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'),
           admin_products_path, wrap_tag: :li
