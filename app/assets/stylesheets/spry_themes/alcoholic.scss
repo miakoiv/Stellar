@@ -106,6 +106,7 @@ body {
   }
 
   .products {
+    @extend .row;
     position: relative;
     margin-top: 20px;
 
@@ -121,17 +122,17 @@ body {
         @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
         max-width: 230px;
         position: relative;
-        padding: 5px;
         transition: all 0.2s ease-in-out 0s;
 
         a {
+          @extend .thumbnail;
           display: block;
           padding: 10px;
           background-color: #fff;
           border-radius: $border-radius-base;
 
           &:hover {
-            @include box-shadow(0 0 8px 0 $brand-primary);
+            @include box-shadow(0 0 1px 2px $brand-primary);
             text-decoration: none;
           }
           .product-image {
@@ -197,10 +198,6 @@ body {
           .btn {
             display: inline-block;
             transition: all 0.2s ease-in-out 0s;
-
-            &:hover {
-              @include box-shadow(0 0 5px 0 rgba(0,0,0,0.333));
-            }
           }
         }
         .product-pricing {
@@ -256,5 +253,39 @@ body {
         }
       }
     }
+    .product-footer {
+
+      .linked-products {
+        @extend .row;
+
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li.product {
+            @extend .col-sm-2, .col-lg-1;
+
+            a {
+              display: block;
+              text-decoration: none;
+
+              .product-image { @extend .box-thumbnail; }
+
+              h3 {
+                font-size: $font-size-base;
+                margin-top: 0.25em;
+                margin-bottom: 0.5em;
+
+                .small {
+                  display: block;
+                  font-size: $font-size-small;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
+  .footer { background-color: #e3dfd7; }
 }
