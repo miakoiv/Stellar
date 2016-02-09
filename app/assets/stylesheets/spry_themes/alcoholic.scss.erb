@@ -287,5 +287,11 @@ body {
       }
     }
   }
-  .footer { background-color: #e3dfd7; }
+  .footer {
+    background-color: #e3dfd7;
+    background-image: url(<%= asset_path('tjt-logo.svg'));
+    background-repeat: no-repeat;
+    background-position: right $grid-gutter-width top 15px;
+    background-size: 75px;
+  }
 }
