@@ -3,5 +3,5 @@
     = icon('wrench', class: 'fa-lg')
     %span.caret
   %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-    = active_link_to icon('tachometer', t('admin.dashboard.title')), admin_dashboard_path, wrap_tag: :li
+    = active_link_to icon('tachometer', t('admin.dashboard.title'), class: 'fa-fw'), admin_dashboard_path, wrap_tag: :li
     = render partial: 'admin/dashboard/admin_links'
