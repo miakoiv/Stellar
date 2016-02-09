@@ -276,6 +276,27 @@ fieldset[disabled] .help-block { display: none; }
   }
 }
 
+//
+// vertical fieldset legend
+//
+.panel-body {
+  fieldset {
+    position: relative;
+
+    legend.vertical {
+      position: absolute;
+      right: 100%;
+      margin-right: 42px;
+      transform-origin: top right;
+      transform: rotate(-90deg);
+      text-align: right;
+      font-size: $font-size-large;
+      font-weight: 500;
+      border: 0;
+    }
+  }
+}
+
 .table {
 
   .subrow {

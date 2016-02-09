@@ -4,12 +4,6 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        - if current_user.has_cached_role?(:superuser)
-          = f.text_field :host, required: true, prepend: 'http://'
-          = f.number_field :erp_number
-          = f.text_field :slug, readonly: true, help: t('.slug_help_html')
-        - if current_user.has_cached_role?(:superuser)
-          = f.select :theme, %w{alcoholic cards compass default emek heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
         = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :allow_shopping
@@ -22,8 +16,15 @@
         = f.text_field :tracking_code
         = f.select :manufacturer_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
         = f.select :reseller_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
-        - if current_user.has_cached_role?(:superuser)
+      - if current_user.has_cached_role?(:superuser)
+        %fieldset{disabled: locked}
+          %legend.text-danger.vertical= Role.human_attribute_value(:name, :superuser)
+          = f.text_field :host, required: true, prepend: 'http://'
+          = f.number_field :erp_number
+          = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+          = f.select :theme, %w{alcoholic cards compass default emek heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
+
       - unless locked
         = f.form_group do
           = f.primary
