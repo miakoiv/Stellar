@@ -4,9 +4,6 @@
 # with varying business logic for how to apply the promotion on a given
 # order.
 #
-# Promotion handlers are predefined and loaded from fixtures. Therefore
-# there are no associated controllers or views.
-#
 class PromotionHandler < ActiveRecord::Base
 
   belongs_to :promotion
@@ -14,14 +11,4 @@ class PromotionHandler < ActiveRecord::Base
   #---
   validates :description, presence: true, on: :update
 
-  #---
-  # Consolidates different promotion handler subclasses into a single
-  # folder of view partials.
-  def to_partial_path
-    "promotion_handlers/#{model_name.singular}"
-  end
-
-  def to_s
-    name
-  end
 end

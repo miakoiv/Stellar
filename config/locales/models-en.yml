@@ -46,8 +46,8 @@ en:
       promotion:
         one: promotion
         other: promotions
-      promotion_vanilla: manual pricing
-      promotion_freebie_bundle: freebie with bundle
+      promotion_handler/vanilla: manual pricing
+      promotion_handler/freebie_bundle: freebie with bundle
       property:
         one: property
         other: properties
@@ -182,7 +182,7 @@ en:
         category_ids_string: Categories to add
       promotion_handler:
         description: Description
-      promotion_freebie_bundle:
+      promotion_handler/freebie_bundle:
         required_items: Number of items
         discount_percent: Apply discount
       property:

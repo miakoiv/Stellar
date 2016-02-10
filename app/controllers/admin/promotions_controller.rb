@@ -36,7 +36,7 @@ class Admin::PromotionsController < ApplicationController
   # POST /admin/promotions.json
   def create
     @promotion = current_store.promotions.build(promotion_params)
-    @promotion_handler = @promotion.build_promotion_handler(type: @promotion.promotion_handler_type)
+    @promotion.build_promotion_handler(type: @promotion.promotion_handler_type)
 
     respond_to do |format|
       if @promotion.save

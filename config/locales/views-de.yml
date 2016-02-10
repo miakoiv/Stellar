@@ -76,8 +76,8 @@ de:
         uncategorized: keine Kategorie
       new:
         new_product: Neues Produkt
-    promotion_handlers:
-      promotion_freebie_bundle:
+    promotion_handler:
+      freebie_bundle:
         discount_percent_help: Der günstigste Artikel wird um diesen Prozentsatz reduziert, wenn die Anzahl der gekauften Artikel übereinstimmt.
     promotions:
       index:

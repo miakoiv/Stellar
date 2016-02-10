@@ -3,8 +3,9 @@
     %thead
       %tr
         %th= col(PromotedItem, :product_id)
-        %th.text-right.col-xs-2= col(PromotedItem, :amount_available)
-        %th.text-right.col-xs-2= col(PromotedItem, :price)
+        %th.hidden.text-right.col-xs-2= col(PromotedItem, :amount_available)
+        - if promotion.editable_prices?
+          %th.text-right.col-xs-2= col(PromotedItem, :price)
         %th.actions
     %tbody
       = render partial: 'admin/promoted_items/edit_row', collection: promotion.promoted_items, as: :promoted_item

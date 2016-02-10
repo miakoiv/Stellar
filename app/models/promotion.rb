@@ -27,11 +27,20 @@ class Promotion < ActiveRecord::Base
   attr_accessor :product_ids_string, :category_ids_string
 
   #---
+  # When a promotion is created, its promotion handler type is set to one
+  # of the PromotionHandler subclasses below. An object of this type is
+  # created an associated with the promotion.
   def self.handler_types
-    ['PromotionVanilla', 'PromotionFreebieBundle']
+    [
+      'PromotionHandler::Vanilla',
+      'PromotionHandler::FreebieBundle'
+    ]
   end
 
   #---
+  # Whether prices can be set on promoted items depends on the handler.
+  delegate :editable_prices?, to: :promotion_handler
+
   # Takes an order object and returns order items that match this promotion.
   def matching_items(order)
     order.order_items.where(product_id: promoted_items.pluck(:product_id))

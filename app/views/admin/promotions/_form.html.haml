@@ -13,7 +13,7 @@
             data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         - unless @promotion.new_record?
           = f.fields_for :promotion_handler do |ff|
-            = ff.text_area :description, rows: 3
+            = ff.text_area :description, rows: 3, required: true
             = render partial: @promotion.promotion_handler, locals: {f: ff}
       - unless locked
         = f.form_group do

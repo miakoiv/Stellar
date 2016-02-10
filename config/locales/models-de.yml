@@ -46,8 +46,8 @@ de:
       promotion:
         one: Werbeaktion
         other: Werbeaktionen
-      promotion_vanilla: Manuelle Preisgestaltung
-      promotion_freebie_bundle: Gratis-Beigabe im Paket
+      promotion_handler/vanilla: Manuelle Preisgestaltung
+      promotion_handler/freebie_bundle: Gratis-Beigabe im Paket
       property:
         one: Eigenschaft
         other: Eigenschaften
@@ -174,7 +174,7 @@ de:
         category_ids_string: Hinzuzufügende Kategorien
       promotion_handler:
         description: Beschreibung
-      promotion_freebie_bundle:
+      promotion_handler/freebie_bundle:
         required_items: Anzahl der Stücke
         discount_percent: Ermäßigung anwenden
       property:

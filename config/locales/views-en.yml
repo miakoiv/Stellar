@@ -81,8 +81,8 @@ en:
         uncategorized: Uncategorized
       new:
         new_product: New product
-    promotion_handlers:
-      promotion_freebie_bundle:
+    promotion_handler:
+      freebie_bundle:
         discount_percent_help: The cheapest item is discounted by this percentage when the number of items purchased matches.
     promotions:
       index:
