@@ -5,6 +5,7 @@
         %th= col(PromotedItem, :product_id)
         %th.hidden.text-right.col-xs-2= col(PromotedItem, :amount_available)
         - if promotion.editable_prices?
+          %th.text-right.col-xs-2= col(PromotedItem, :discount_percent)
           %th.text-right.col-xs-2= col(PromotedItem, :price)
         %th.actions
     %tbody

@@ -21,10 +21,15 @@ class Admin::PromotedItemsController < ApplicationController
   # PATCH/PUT /admin/promoted_items/1
   def update
     @promoted_item = PromotedItem.find(params[:id])
+    @promoted_item.assign_attributes(promoted_item_params)
 
     respond_to do |format|
-      if @promoted_item.update(promoted_item_params)
-        format.js
+      if @promoted_item.valid?
+        @promoted_item.save
+        @promoted_item.reload
+        format.js { render 'update' }
+      else
+        format.js { render 'rollback' }
       end
     end
   end
@@ -49,7 +54,7 @@ class Admin::PromotedItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def promoted_item_params
       params.require(:promoted_item).permit(
-        :price, :amount_available
+        :price, :discount_percent, :amount_available
       )
     end
 end

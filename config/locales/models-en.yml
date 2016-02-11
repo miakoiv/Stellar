@@ -171,6 +171,7 @@ en:
       promoted_item:
         product_id: Product
         price: Price
+        discount_percent: Discount
         amount_available: Availability
         amount_sold: Sold
       promotion:

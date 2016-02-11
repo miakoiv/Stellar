@@ -20,6 +20,7 @@ class Promotion < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates_associated :promoted_items, on: :update
 
   #---
   # These attributes allow adding products and categories en masse
@@ -27,9 +28,9 @@ class Promotion < ActiveRecord::Base
   attr_accessor :product_ids_string, :category_ids_string
 
   #---
-  # When a promotion is created, its promotion handler type is set to one
-  # of the PromotionHandler subclasses below. An object of this type is
-  # created an associated with the promotion.
+  # When a promotion is created, its promotion handler type specifies one
+  # of the PromotionHandler subclasses as string. An object of this type is
+  # created and associated with the promotion.
   def self.handler_types
     [
       'PromotionHandler::Vanilla',
