@@ -72,37 +72,47 @@ $brand-primary: #e6172b;
   }
 
   .products {
+    @extend .row;
+    position: relative;
+    margin-top: 20px;
 
     ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
       list-style: none;
       margin: 0;
       padding: 0;
 
       li.product {
-        @include box-shadow(0 0 3px 0 rgba(0,0,0,0.666));
-        position: absolute;
-        background: #fff;
-        width: 200px;
-        padding: $grid-gutter-width/2;
-        padding-bottom: 0;
-        margin-right: $grid-gutter-width/2;
-        margin-bottom: $grid-gutter-width/2;
-        transition: all 0.2s ease-in-out 0s;
+        @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+        max-width: 230px;
+        position: relative;
+        margin-bottom: 20px;
 
-        &:hover {
-          @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));
-          transform: scale(1.02);
+        a {
+          @include box-shadow(0 0 3px 0 rgba(0,0,0,0.333));
+          display: block;
+          padding: 10px 10px 50px;
+          background: #fff;
+          transition: all 0.2s ease-in-out 0s;
 
-          a {
+          &:hover {
+            @include box-shadow(0 0 6px 0 rgba(0,0,0,0.666));
             text-decoration: none;
           }
-        }
-        a {
-          display: block;
+          .product-image {
+            position: relative;
+            height: 200px;
 
-          img {
-            display: block;
-            margin: 0 auto;
+            img {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              margin: auto;
+            }
           }
           h3 {
             font-size: $font-size-base;
@@ -114,28 +124,14 @@ $brand-primary: #e6172b;
               font-size: $font-size-small;
             }
           }
-          .description {
-            position: relative;
-            font-size: $font-size-small - 2;
-            color: $text-color;
-            max-height: 50px;
-            overflow: hidden;
-
-            &:after {
-              @include gradient-vertical(rgba(255,255,255,0), rgba(255,255,255,1));
-              content: "";
-              position: absolute;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              height: 30px;
-            }
-          }
+          .description { display: none; }
         }
         .buy-now {
-          @extend .row;
-          position: relative;
+          position: absolute;
           height: 40px;
+          left: 15px;
+          right: 15px;
+          bottom: 0;
           padding: 10px;
           background: $gray-dark;
 
