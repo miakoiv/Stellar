@@ -160,6 +160,9 @@ de:
         price: Preis
         stock: Bestand
         value: Wert
+      product_property:
+        property_id: Eigenschaft
+        value: Wert
       promoted_item:
         product_id: Produkt
         price: Preis

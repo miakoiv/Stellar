@@ -168,6 +168,9 @@ fi:
         margin_percent: Kate-%
         stock: Saldo
         value: Arvo
+      product_property:
+        property_id: Ominaisuus
+        value: Arvo
       promoted_item:
         product_id: Tuote
         price: Hinta

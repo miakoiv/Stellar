@@ -168,6 +168,9 @@ en:
         margin_percent: Margin %
         stock: Stock
         value: Value
+      product_property:
+        property_id: Property
+        value: Value
       promoted_item:
         product_id: Product
         price: Price
