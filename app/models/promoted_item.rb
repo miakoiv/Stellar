@@ -7,11 +7,14 @@
 class PromotedItem < ActiveRecord::Base
 
   monetize :price_cents, allow_nil: true
-  #---
 
+  attr_accessor :calculated
+
+  #---
   belongs_to :promotion, touch: true
   belongs_to :product
 
+  #---
   validates :discount_percent,
     numericality: {
       allow_nil: true,
@@ -20,14 +23,28 @@ class PromotedItem < ActiveRecord::Base
       less_than_or_equal_to: 100
     }, on: :update
 
+  before_validation :calculate_price, if: :should_calculate_price
+  before_validation :calculate_discount, if: :should_calculate_discount
+
   #---
-  # Recalculations to keep discount percent and price synchronized.
-  def recalculate
-    if changes[:discount_percent].present?
-      self.price = product.retail_price * (1 - discount_percent/100)
-    elsif changes[:price_cents].present?
-      self.discount_percent = 100 * (product.retail_price_cents - price_cents).to_f / product.retail_price_cents
-    end
+  # Calculations should happen when the linked attribute changes but only once.
+  def should_calculate_price
+    discount_percent_changed? && !calculated
   end
-  before_validation :recalculate
+
+  def should_calculate_discount
+    price_cents_changed? && !calculated
+  end
+
+  # The calculations set a flag to prevent before_validation hooks from
+  # firing again as the linked attribute changes.
+  def calculate_price
+    self.price_cents = product.retail_price_cents * (1 - discount_percent/100)
+    self.calculated = true
+  end
+
+  def calculate_discount
+    self.discount_percent = 100 * (product.retail_price_cents - price_cents).to_f / product.retail_price_cents
+    self.calculated = true
+  end
 end
