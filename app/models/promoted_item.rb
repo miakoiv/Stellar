@@ -25,6 +25,7 @@ class PromotedItem < ActiveRecord::Base
 
   before_validation :calculate_price, if: :should_calculate_price
   before_validation :calculate_discount, if: :should_calculate_discount
+  after_save :touch_product
 
   #---
   def description
@@ -53,4 +54,9 @@ class PromotedItem < ActiveRecord::Base
     self.discount_percent = 100 * (product.retail_price_cents - price_cents).to_f / product.retail_price_cents
     self.calculated = true
   end
+
+  protected
+    def touch_product
+      product.touch
+    end
 end
