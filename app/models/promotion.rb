@@ -39,7 +39,7 @@ class Promotion < ActiveRecord::Base
   end
 
   #---
-  # Whether prices can be set on promoted items depends on the handler.
+  delegate :description, to: :promotion_handler
   delegate :editable_prices?, to: :promotion_handler
 
   # Takes an order object and returns order items that match this promotion.
