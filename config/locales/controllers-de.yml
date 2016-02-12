@@ -39,6 +39,8 @@ de:
         notice: "Werbeaktion %{promotion} erstellt."
       update:
         notice: "Werbeaktion %{promotion} aktualisiert"
+      destroy:
+        notice: "Werbeaktion %{promotion} gelöscht."
     properties:
       create:
         notice: "Eigenschaft %{property} erstellt."

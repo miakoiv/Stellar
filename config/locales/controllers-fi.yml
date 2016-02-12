@@ -42,6 +42,8 @@ fi:
         notice: "Kampanja %{promotion} luotu."
       update:
         notice: "Kampanja %{promotion} päivitetty."
+      destroy:
+        notice: "Kampanja %{promotion} poistettu."
     properties:
       create:
         notice: "Ominaisuus %{property} luotu."

@@ -42,6 +42,8 @@ en:
         notice: "Promotion %{promotion} created."
       update:
         notice: "Promotion %{promotion} updated."
+      destroy:
+        notice: "Promotion %{promotion} deleted."
     properties:
       create:
         notice: "Property %{property} created."
