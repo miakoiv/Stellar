@@ -126,6 +126,24 @@ $brand-primary: #e6172b;
           }
           .description { display: none; }
         }
+        .promotion {
+          position: absolute;
+          top: 0;
+          left: 30px;
+          right: 30px;
+          height: 200px;
+          background-image: url(<%= asset_path('triangle.png') %>);
+          background-repeat: no-repeat;
+          background-size: 100%;
+
+          p {
+            margin: 5px 40px 0;
+            text-align: center;
+            font-size: $font-size-large;
+            font-weight: 500;
+            color: #fff;
+          }
+        }
         .buy-now {
           position: absolute;
           height: 40px;
@@ -133,7 +151,7 @@ $brand-primary: #e6172b;
           right: 15px;
           bottom: 0;
           padding: 10px;
-          background: $gray-dark;
+          background-color: $gray-dark;
 
           p {
             margin: 0 0 0 $grid-gutter-width;
