@@ -8,7 +8,6 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-min
         %th.col-xs-3= col(Promotion, :name)
         %th.col-xs-3= col(Promotion, :promotion_handler_type)
         %th= col(Promotion, :first_date)
@@ -16,23 +15,27 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, @promotions do |promotion|
-        %td= promotion.active? ? icon('check-square-o') : icon('square-o')
-        %td= promotion.name
-        %td= title(promotion.promotion_handler)
-        %td= promotion.first_date.present? ? l(promotion.first_date) : ''
-        %td= promotion.last_date.present? ? l(promotion.last_date) : ''
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_promotion_path(promotion),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Promotion)
-            = link_to icon('edit', t('actions.edit')), edit_admin_promotion_path(promotion),
+      - @promotions.each do |promotion|
+        = content_tag_for :tr, promotion, class: promotion.active? ? '' : 'warning text-warning' do
+          %td= promotion.name
+          %td= title(promotion.promotion_handler)
+          %td
+            - if promotion.active?
+              = promotion.first_date.present? ? l(promotion.first_date) : ''
+            - else
+              = icon('warning', promotion.first_date.present? ? l(promotion.first_date) : '', data: {toggle: 'tooltip'}, title: col(Promotion, :not_active))
+          %td= promotion.last_date.present? ? l(promotion.last_date) : ''
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_promotion_path(promotion),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Promotion)
-            = link_to icon('remove', t('actions.delete')), admin_promotion_path(promotion),
-                method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Promotion.model_name.human, name: promotion.name),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+            - if current_user.can_update?(Promotion)
+              = link_to icon('edit', t('actions.edit')), edit_admin_promotion_path(promotion),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(Promotion)
+              = link_to icon('remove', t('actions.delete')), admin_promotion_path(promotion),
+                  method: :delete, class: 'btn btn-sm btn-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: Promotion.model_name.human, name: promotion.name),
+                    'confirm-title' => t('actions.confirm.title'),
+                    'confirm-proceed' => t('actions.confirm.proceed'),
+                    'confirm-cancel' => t('actions.confirm.cancel')}

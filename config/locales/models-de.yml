@@ -173,6 +173,7 @@ de:
         name: Name
         first_date: Beginnt am
         last_date: Endet am
+        not_active: Ungültig
         product_ids_string: Hinzuzufügende Produkte
         category_ids_string: Hinzuzufügende Kategorien
       promotion_handler:
