@@ -1,7 +1,6 @@
 = content_tag_for :li, product do
   = link_to show_product_path(product.category, product), data: {push: 'partial', target: '.product-detail'} do
-    .product-image= image_variant_tag product.cover_image(current_store.list_image_type), :matchbox,
-        class: 'img-responsive'
+    .product-image= image_variant_tag product.cover_image(current_store.list_image_type), :matchbox
     .product-text
       %h3
         = product.title
