@@ -26,6 +26,7 @@ class PromotedItem < ActiveRecord::Base
   before_validation :calculate_price, if: :should_calculate_price
   before_validation :calculate_discount, if: :should_calculate_discount
   after_save :touch_product
+  before_destroy :touch_product
 
   #---
   def description
