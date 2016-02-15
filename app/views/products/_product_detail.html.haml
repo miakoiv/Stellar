@@ -1,4 +1,4 @@
-- cache_if current_user.guest?, [I18n.locale, :product_detail, product] do
+- cache_if current_user.guest?, [I18n.locale, :product_detail, product, Date.current.to_s] do
   .product-header
 
     %h1.product-title
