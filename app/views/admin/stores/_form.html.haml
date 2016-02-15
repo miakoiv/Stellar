@@ -22,7 +22,7 @@
           = f.text_field :host, required: true, prepend: 'http://'
           = f.number_field :erp_number
           = f.text_field :slug, readonly: true, help: t('.slug_help_html')
-          = f.select :theme, %w{alcoholic cards compass default emek heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
+          = f.select :theme, %w{alcoholic birch cards compass default emek heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
 
       - unless locked
