@@ -40,7 +40,7 @@
 
     - if product.iframes.any?
       .iframes
-        = render product.iframes
+        = render partial: 'iframes/gallery', object: product, as: :product, locals: {inline: current_store.inline_iframes}
 
     .images.technical
       - technicals = product.images.technical.sorted
