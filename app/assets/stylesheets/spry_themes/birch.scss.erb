@@ -43,6 +43,7 @@ $brand-primary: #013183;
     margin: 0 -1*$grid-gutter-width;
     padding: 20px $grid-gutter-width/2 0;
     background-image: url(<%= asset_path('birch.jpg') %>);
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -323,11 +324,17 @@ $brand-primary: #013183;
     }
   }
   .footer {
-    background-color: lighten($brand-primary, 10%);
-    background-image: url(<%= asset_path('tjt-logo.svg'));
+    background-image: url(<%= asset_path('birch.jpg') %>);
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    background-position: right $grid-gutter-width top 15px;
-    background-size: 75px;
-    color: #fff;
+    background-size: cover;
+
+    .container {
+      background-image: url(<%= asset_path('tjt-logo.svg'));
+      background-repeat: no-repeat;
+      background-position: right $grid-gutter-width top 0;
+      background-size: 75px;
+      color: #fff;
+    }
   }
 }
