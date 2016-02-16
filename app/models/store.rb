@@ -3,8 +3,9 @@
 class Store < ActiveRecord::Base
 
   store :settings, accessors: [
-    :locale,  # see #locale_options for supported locales
-    :theme,   # see app/stylesheets/spry_themes
+    :locale,   # see #locale_options for supported locales
+    :theme,    # see app/stylesheets/spry_themes
+    :brand_image, # additional branding image displayed in the footer
     :masonry, # boolean, use masonry in storefront products view
     :inline_iframes,  # boolean, render iframes inline (instead of popups)
     :card_image_type, # image type to use for cover images on cards etc.
