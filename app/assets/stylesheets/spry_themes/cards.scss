@@ -180,6 +180,7 @@
             }
           }
           .description { display: none; }
+          .promotion { display: none; }
         }
         .buy-now { display: none; }
       }
@@ -211,12 +212,29 @@
 
           .form-inline, .btn { display: inline-block; }
         }
+
         .product-pricing {
-          @extend .text-primary;
-          float: right;
-          margin-right: $grid-gutter-width/2;
-          font-size: $font-size-large;
-          line-height: 34px;
+
+          .price, .retail-price {
+            float: right;
+            margin-right: $grid-gutter-width/2;
+            font-size: $font-size-large;
+            line-height: 34px;
+
+            .unit-price {
+              display: block;
+              margin-top: -10px;
+              font-size: $font-size-small;
+            }
+          }
+          .price {
+            @extend .text-primary;
+            font-weight: 500;
+          }
+          .retail-price {
+            opacity: 0.5;
+            text-decoration: line-through;
+          }
         }
       }
     }

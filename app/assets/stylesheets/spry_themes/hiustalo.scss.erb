@@ -201,17 +201,26 @@ $brand-primary: #e6172b;
           .form-inline { display: inline-block; }
         }
         .product-pricing {
-          float: right;
-          margin-right: $grid-gutter-width/2;
 
-          p {
-            @extend .lead;
-            @extend .text-primary;
-            margin: 0;
+          .price, .retail-price {
+            float: right;
+            margin-right: $grid-gutter-width/2;
+            font-size: $font-size-large;
             line-height: 34px;
+
+            .unit-price {
+              display: block;
+              margin-top: -10px;
+              font-size: $font-size-small;
+            }
           }
-          .unit-price {
-            @extend .small, .text-right;
+          .price {
+            @extend .text-primary;
+            font-weight: 500;
+          }
+          .retail-price {
+            opacity: 0.5;
+            text-decoration: line-through;
           }
         }
       }
