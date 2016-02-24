@@ -43,7 +43,7 @@ class Product < ActiveRecord::Base
   has_many :components, through: :relationships
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-  has_many :promoted_items, -> { joins(:promotion).merge(Promotion.active) }
+  has_many :promoted_items
   has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy
 
@@ -75,12 +75,16 @@ class Product < ActiveRecord::Base
     product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
   end
 
+  def active_promoted_items
+    promoted_items.joins(:promotion).merge(Promotion.active)
+  end
+
   # Retail price with any active promotions, lowest applicable.
   # This price is for display purposes only, the promotion effect
   # will create an adjustment for the order item.
   def price_cents
-    if promoted_items.any?
-      lowest = promoted_items.pluck(:price_cents).compact.min
+    if active_promoted_items.any?
+      lowest = active_promoted_items.pluck(:price_cents).compact.min
       lowest || retail_price_cents
     else
       retail_price_cents

@@ -7,7 +7,7 @@
           = product.title
           %span.small= product.subtitle
         .description= product.description.html_safe
-      - product.promoted_items.each do |item|
+      - product.active_promoted_items.each do |item|
         .promotion
           %p= item.description
     .buy-now
