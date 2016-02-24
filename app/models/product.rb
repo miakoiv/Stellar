@@ -13,11 +13,11 @@ class Product < ActiveRecord::Base
   monetize :cost_price_cents, allow_nil: true
   monetize :trade_price_cents, allow_nil: true
   monetize :retail_price_cents, allow_nil: true
-  monetize :promoted_retail_price_cents, allow_nil: true
 
   # Monetize aggregate methods.
   monetize :price_cents, disable_validation: true
   monetize :unit_price_cents, disable_validation: true
+  monetize :price_for_group_cents, disabled_validation: true
 
   INLINE_SEARCH_RESULTS = 20
 
@@ -75,39 +75,27 @@ class Product < ActiveRecord::Base
     product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
   end
 
-  # Price adjusted for given user. Pricing depends on user's group and
-  # personal pricing factor. Prices returned by this method must be used
-  # for presentation only, to avoid applying the factor multiple times.
-  # Any promotion affecting the product and specifying a different price
-  # will take precedence over retail price.
-  def price_cents(user = nil)
-    return promoted_retail_price_cents if user.nil?
-    case user.group
-    when 'manufacturer'
-      cost_price_cents
-    when 'reseller'
-      trade_price_cents.nil? ? nil : trade_price_cents * user.pricing_factor
+  # Retail price with any active promotions, lowest applicable.
+  # This price is for display purposes only, the promotion effect
+  # will create an adjustment for the order item.
+  def price_cents
+    if promoted_items.any?
+      lowest = promoted_items.pluck(:price_cents).compact.min
+      lowest || retail_price_cents
     else
-      promoted_retail_price_cents
+      retail_price_cents
     end
   end
 
-  # Retail price with possible promotions applied, where the promotion
-  # specifies a different price, and the promotion is currently active.
-  def promoted_retail_price_cents
-    return retail_price_cents if promoted_items.empty?
-    lowest = promoted_items.pluck(:price_cents).compact.min
-    lowest || retail_price_cents
-  end
-
-  # Checks product properties for a property that declares unit pricing,
-  # returns calculated price per base unit, for given user.
-  def unit_price_cents(user = nil)
+  # Calculates unit price from given total cents by finding a product
+  # property that declares unit pricing.
+  def unit_price_cents(total_cents)
+    return nil if total_cents.nil?
     product_property = unit_pricing_property
-    return nil if user.nil? || product_property.nil? || product_property.value.nil?
+    return nil if product_property.nil? || product_property.value.nil?
     measure = product_property.value.tr(',', '.').to_f
-    return nil if retail_price.nil? || product_property.nil? || measure == 0
-    price(user) / (measure * product_property.property.measurement_unit.factor)
+    return nil if measure == 0
+    total_cents / (measure * product_property.property.measurement_unit.factor)
   end
 
   # Returns the unit (if any) that unit pricing is based on.
@@ -115,6 +103,19 @@ class Product < ActiveRecord::Base
     product_property = unit_pricing_property
     return nil if product_property.nil?
     product_property.property.measurement_unit.pricing_base
+  end
+
+  # Price by user depending on their group.
+  def price_for_group_cents(user)
+    return retail_price_cents if user.nil?
+    case user.group
+    when 'manufacturer'
+      cost_price_cents
+    when 'reseller'
+      trade_price_cents
+    else
+      retail_price_cents
+    end
   end
 
   # Markup percentage from trade price to retail price.

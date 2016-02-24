@@ -98,7 +98,8 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Inserts amount of product to this order. If the product is a compound,
+  # Inserts amount of product to this order. Pricing is according to the
+  # group the order owner belongs to. If the product is a compound,
   # its immediate components are inserted instead.
   def insert(product, amount)
     if product.compound?
@@ -108,7 +109,7 @@ class Order < ActiveRecord::Base
     else
       order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
       order_item.amount += amount
-      order_item.price = product.price(user)
+      order_item.price = product.price_for_group(user)
       order_item.save!
     end
   end

@@ -1,6 +1,12 @@
-- price, unit_price = product.price(current_user), product.unit_price(current_user)
-- unless price.nil?
-  %p.currency= icon('tag', humanized_money_with_symbol(price))
-  - unless unit_price.nil?
-    .unit-price.currency
-      = unit_price_string(unit_price, product.base_unit)
+- price = product.price
+- unit_price = product.unit_price(product.price_cents)
+
+- if price.present?
+  %p.price.currency
+    = icon('tag', humanized_money_with_symbol(price))
+    - unless unit_price.nil?
+      %span.unit-price.currency
+        = unit_price_string(unit_price, product.base_unit)
+  - if price != product.retail_price
+    %p.retail-price.currency
+      = icon('tag', humanized_money_with_symbol(product.retail_price))
