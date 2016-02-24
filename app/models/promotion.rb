@@ -16,7 +16,7 @@ class Promotion < ActiveRecord::Base
   has_one :promotion_handler, dependent: :destroy
   accepts_nested_attributes_for :promotion_handler
 
-  scope :active, -> { where '(first_date IS NULL OR first_date <= :today) AND (last_date IS NULL OR last_date >= :today)', today: Date.current }
+  scope :active, -> { where '(promotions.first_date IS NULL OR promotions.first_date <= :today) AND (promotions.last_date IS NULL OR promotions.last_date >= :today)', today: Date.current }
 
   #---
   validates :name, presence: true
@@ -42,14 +42,10 @@ class Promotion < ActiveRecord::Base
   delegate :description, to: :promotion_handler
   delegate :editable_prices?, to: :promotion_handler
 
-  # Takes an order object and returns order items that match this promotion.
-  def matching_items(order)
-    order.order_items.where(product_id: promoted_items.pluck(:product_id))
-  end
-
-  # Applies this promotion to the given order.
+  # Applies this promotion to the given order by calling the promotion
+  # handler with the matching items.
   def apply!(order)
-    promotion_handler.apply!(order)
+    promotion_handler.apply!(matching_items(order))
   end
 
   def available_products
@@ -68,4 +64,11 @@ class Promotion < ActiveRecord::Base
   def to_s
     name
   end
+
+  #private
+
+    # Takes an order object and returns order items that match this promotion.
+    def matching_items(order)
+      order.order_items.includes(:product).where(product_id: promoted_items.pluck(:product_id))
+    end
 end

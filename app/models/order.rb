@@ -158,6 +158,7 @@ class Order < ActiveRecord::Base
   def recalculate!
     apply_shipping_cost!
     apply_promotions!
+    reload
   end
 
   # Applies a shipping cost for the current contents of the order.

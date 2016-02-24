@@ -14,8 +14,8 @@ class PromotionHandler
       }, on: :update
 
     #---
-    def apply!(order)
-      logger.info "Applying #{promotion} to order #{order}"
+    def apply!(items)
+
     end
 
     def editable_prices?
