@@ -61,18 +61,4 @@ module ApplicationHelper
   def list_group_placeholder
     content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
   end
-
-  def unit_price_string(price, unit)
-    "#{humanized_money_with_symbol price} / #{unit}"
-  end
-
-  # Pretty-prints a hash from Product#stock.
-  def product_stock_string(hash)
-    hash.values.map do |i|
-      content_tag(:span, class: i.klass, title: i.title, data: {toggle: 'tooltip'}) do
-        content_tag(:span, i.adjustment == 0 ? i.amount || 0 :
-          sprintf("%i(%+i)", i.amount || 0, i.adjustment))
-      end
-    end.join.html_safe
-  end
 end
