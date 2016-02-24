@@ -39,6 +39,10 @@ class Property < ActiveRecord::Base
     measurement_unit.present? ? "#{name} (#{measurement_unit})" : name
   end
 
+  def sluggify
+    "#{name.parameterize.underscore}_#{id}"
+  end
+
   def to_s
     name
   end

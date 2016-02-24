@@ -35,7 +35,7 @@ class ProductSearch < Searchlight::Search
   # by including the property id. Finding matching products is done with
   # subselects to be able to combine multiple property searches.
   Property.searchable.each do |property|
-    key = "#{property.name}_#{property.id}"
+    key = property.sluggify
     define_method("search_#{key}") do
       query.where("EXISTS (SELECT 1 FROM product_properties WHERE product_id = products.id AND property_id = #{property.id} AND value IN (?))", send(key))
     end
