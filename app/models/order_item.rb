@@ -5,6 +5,7 @@ class OrderItem < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Adjustable
+  include Reorderable
   monetize :price_cents, allow_nil: true,
     numericality: {
       greater_than_or_equal_to: 0
