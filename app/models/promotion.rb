@@ -48,6 +48,11 @@ class Promotion < ActiveRecord::Base
     promotion_handler.apply!(matching_items(order))
   end
 
+  # Finds the promoted item matching given order item.
+  def item_from_order_item(order_item)
+    promoted_items.includes(:product).find_by(product_id: order_item.product_id)
+  end
+
   def available_products
     store.products.live - products
   end
