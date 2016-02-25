@@ -151,6 +151,7 @@ body {
       display: flex;
       flex-wrap: wrap;
       align-content: flex-start;
+      align-items: flex-end;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -174,20 +175,21 @@ body {
           }
           .product-image {
             position: relative;
-            height: 200px;
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
 
             img {
               position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              margin: auto;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%,-50%);
             }
           }
           .product-text {
-            height: 80px;
             text-align: center;
+            overflow: hidden;
 
             h3 {
               margin-top: 5px;
@@ -201,6 +203,14 @@ body {
               }
             }
             .description { display: none; }
+          }
+          .promotion {
+            @extend .bg-success, .text-success;
+            margin: 0 -10px;
+            padding: 10px;
+            text-align: center;
+
+            p { margin-bottom: 0; }
           }
         }
         .buy-now {
