@@ -3,10 +3,9 @@
 class PromotionHandler
   class Vanilla < PromotionHandler
 
-    #---
     def apply!(order_items)
       order_items.each do |order_item|
-        promoted_item = promotion.promoted_items.includes(:product).find_by(product_id: order_item.product_id)
+        promoted_item = promotion.item_from_order_item(order_item)
         order_item.adjustments.create(
           source: promoted_item,
           label: promoted_item.description,
