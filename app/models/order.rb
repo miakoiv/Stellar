@@ -107,7 +107,10 @@ class Order < ActiveRecord::Base
         insert(relationship.component, relationship.quantity)
       end
     else
-      order_item = order_items.create_with(amount: 0).find_or_create_by(product: product)
+      order_item = order_items.create_with(
+        amount: 0,
+        priority: order_items.count
+      ).find_or_create_by(product: product)
       order_item.amount += amount
       order_item.price = product.price_for_group(user)
       order_item.save!
