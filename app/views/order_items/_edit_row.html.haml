@@ -24,7 +24,7 @@
     = humanized_money_with_symbol order_item.subtotal
   %td.actions
     - unless order_item.virtual?
-      = link_to icon('remove', t('actions.delete')), order_item_path(order_item),
+      = link_to icon('remove'), order_item_path(order_item),
           remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
