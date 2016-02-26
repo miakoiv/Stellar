@@ -6,6 +6,7 @@
       - else
         = order_item.product_title
     = order_item.product_subtitle
+    %span.label.label-primary= order_item.label
   %td.no-wrap
     - if order_item.real?
       - if order_item.live?

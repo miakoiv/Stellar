@@ -1,4 +1,4 @@
 %tr.subrow{class: adjustment.credit? ? 'success text-success' : 'warning text-warning'}
-  %th.text-right{colspan: 4}= adjustment.label
+  %th{colspan: 4}= adjustment.label
   %td.text-right.currency= humanized_money_with_symbol adjustment.amount
   %td
