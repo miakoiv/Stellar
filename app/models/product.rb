@@ -80,8 +80,9 @@ class Product < ActiveRecord::Base
   end
 
   # Retail price with any active promotions, lowest applicable.
-  # This price is for display purposes only, the promotion effect
-  # will create an adjustment for the order item.
+  # This price is valid for guests and customer level users. Resellers
+  # and manufacturers get their prices when an order item is created
+  # by calling #price_for_group.
   def price_cents
     if active_promoted_items.any?
       lowest = active_promoted_items.pluck(:price_cents).compact.min
@@ -111,15 +112,10 @@ class Product < ActiveRecord::Base
 
   # Price by user depending on their group.
   def price_for_group_cents(user)
-    return retail_price_cents if user.nil?
-    case user.group
-    when 'manufacturer'
-      cost_price_cents
-    when 'reseller'
-      trade_price_cents
-    else
-      retail_price_cents
-    end
+    return price_cents if user.nil?
+    return cost_price_cents if user.manufacturer?
+    return trade_price_cents if user.reseller?
+    price_cents
   end
 
   # Markup percentage from trade price to retail price.
