@@ -78,17 +78,16 @@ class Product < ActiveRecord::Base
     promoted_items.joins(:promotion).merge(Promotion.active)
   end
 
-  # Retail price with any active promotions, lowest applicable.
-  # This price is valid for guests and customer level users. Resellers
-  # and manufacturers get their prices when an order item is created
-  # by calling #price_for_group.
+  # Finds the promoted item with the lowest quoted price.
+  def best_promoted_item
+    active_promoted_items.find_by(price_cents: active_promoted_items.minimum(:price_cents))
+  end
+
+  # Retail price through best promotion.
   def price_cents
-    if active_promoted_items.any?
-      lowest = active_promoted_items.pluck(:price_cents).compact.min
-      lowest || retail_price_cents
-    else
-      retail_price_cents
-    end
+    lowest = best_promoted_item
+    return lowest.price_cents if lowest.present?
+    retail_price_cents
   end
 
   # Calculates unit price from given total cents by finding a product
