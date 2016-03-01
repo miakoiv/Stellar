@@ -113,6 +113,7 @@ class Order < ActiveRecord::Base
       ).find_or_create_by(product: product)
       order_item.amount += amount
       order_item.price = user.price_for(product)
+      order_item.label = user.label_for(product)
       order_item.save!
     end
   end

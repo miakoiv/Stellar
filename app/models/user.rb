@@ -76,6 +76,16 @@ class User < ActiveRecord::Base
     product.price
   end
 
+  # Constructs a label for given product, depending on its active promotions.
+  def label_for(product)
+    return human_attribute_value(:group) if manufacturer? || reseller?
+    promoted_item = product.best_promoted_item
+    if promoted_item.present?
+      return promoted_item.description
+    end
+    nil
+  end
+
   # Order types the user has available when going through checkout.
   def available_order_types
     store.order_types.where(source_group: User.groups[group])
