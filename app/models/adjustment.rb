@@ -8,21 +8,21 @@
 #
 class Adjustment < ActiveRecord::Base
 
-  monetize :amount_cents
+  monetize :amount_cents, allow_nil: true
 
   #---
   belongs_to :adjustable, polymorphic: true
   belongs_to :source, polymorphic: true
 
-  scope :credit, -> { where('amount_cents < ?', 0) }
+  scope :credit, -> { where('amount_cents <= ?', 0) }
   scope :charge, -> { where('amount_cents > ?', 0) }
 
   #---
   def credit?
-    amount_cents < 0
+    amount_cents.nil? || amount_cents < 0
   end
 
   def charge?
-    amount_cents > 0
+    amount_cents.present? && amount_cents > 0
   end
 end
