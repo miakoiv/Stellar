@@ -17,7 +17,6 @@ class Product < ActiveRecord::Base
   # Monetize aggregate methods.
   monetize :price_cents, disable_validation: true
   monetize :unit_price_cents, disable_validation: true
-  monetize :price_for_group_cents, disabled_validation: true
 
   INLINE_SEARCH_RESULTS = 20
 
@@ -108,14 +107,6 @@ class Product < ActiveRecord::Base
     product_property = unit_pricing_property
     return nil if product_property.nil?
     product_property.property.measurement_unit.pricing_base
-  end
-
-  # Price by user depending on their group.
-  def price_for_group_cents(user)
-    return price_cents if user.nil?
-    return cost_price_cents if user.manufacturer?
-    return trade_price_cents if user.reseller?
-    price_cents
   end
 
   # Markup percentage from trade price to retail price.

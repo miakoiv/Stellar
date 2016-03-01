@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   resourcify
   rolify
 
+  monetize :price_for_cents, disable_validation: true
+
   # Include default devise modules. Others available are:
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
@@ -65,6 +67,13 @@ class User < ActiveRecord::Base
         customer_email: guest? ? nil : email,
         customer_phone: guest? ? nil : phone
       )
+  end
+
+  # Looks up the relevant price for given product depending on user group.
+  def price_for_cents(product)
+    return product.cost_price if manufacturer?
+    return product.trade_price if reseller?
+    product.price
   end
 
   # Order types the user has available when going through checkout.
