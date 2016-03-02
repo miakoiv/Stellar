@@ -1,0 +1,21 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(PromotedItem, :product_id)
+        %th.hidden.text-right.col-xs-2= col(PromotedItem, :amount_available)
+        - if promotion.editable_prices?
+          %th.text-right.col-xs-2= col(PromotedItem, :discount_percent)
+          %th.text-right.col-xs-2= col(PromotedItem, :price)
+    %tbody
+      = content_tag_for :tr, promotion.promoted_items do |promoted_item|
+        %td
+          %strong= promoted_item.product.title
+          = promoted_item.product.subtitle
+        %td.hidden= promoted_item.amount_available
+        - if promoted_item.promotion.editable_prices?
+          %td.text-right
+            = number_with_precision(promoted_item.discount_percent, precision: 2)
+            \%
+          %td.text-right.currency
+            = humanized_money_with_symbol promoted_item.price
