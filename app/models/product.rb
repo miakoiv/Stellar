@@ -80,7 +80,9 @@ class Product < ActiveRecord::Base
 
   # Finds the promoted item with the lowest quoted price.
   def best_promoted_item
-    active_promoted_items.find_by(price_cents: active_promoted_items.minimum(:price_cents))
+    lowest = active_promoted_items.pluck(:price_cents).compact.min
+    return nil if lowest.nil?
+    active_promoted_items.find_by(price_cents: lowest)
   end
 
   # Retail price through best promotion.
