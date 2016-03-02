@@ -70,7 +70,7 @@ class Promotion < ActiveRecord::Base
     name
   end
 
-  #private
+  private
 
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
