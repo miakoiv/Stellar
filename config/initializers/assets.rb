@@ -18,6 +18,7 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/compass.css spry_themes/compass.js
   spry_themes/default.css spry_themes/default.js
   spry_themes/emek.css spry_themes/emek.js
+  spry_themes/gto.css spry_themes/gto.js
   spry_themes/heat.css spry_themes/heat.js
   spry_themes/hiustalo.css spry_themes/hiustalo.js
   spry_themes/lepola.css spry_themes/lepola.js

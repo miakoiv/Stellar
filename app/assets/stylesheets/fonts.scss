@@ -41,3 +41,13 @@
   font-weight: 500;
   font-style: italic;
 }
+
+@font-face {
+  font-family: 'Pacifico';
+  src: font-url('pacifico-webfont.eot');
+  src: font-url('pacifico-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('pacifico-webfont.woff') format('woff'),
+  font-url('pacifico-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
