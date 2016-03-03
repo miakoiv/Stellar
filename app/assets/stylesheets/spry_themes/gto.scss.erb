@@ -1,16 +1,4 @@
-$gray-base:     #fff;
-$gray-darker:   darken($gray-base, 13.5%);
-$gray-dark:     darken($gray-base, 20%);
-$gray:          darken($gray-base, 33.5%);
-$gray-light:    darken($gray-base, 46.7%);
-$gray-lighter:  darken($gray-base, 93.5%);
-
 $brand-primary: #93ca33;
-
-$body-bg:       #000;
-$text-color:    $gray-dark;
-
-$table-border-color: #333;
 
 $navbar-height: 60px;
 $navbar-inverse-bg: #000;
@@ -32,7 +20,7 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
 }
 
 .gto {
-  @include gradient-vertical-three-colors(#000, $brand-primary, 33%, #000);
+  background-image: linear-gradient(#000, $brand-primary 400px, lighten($brand-primary, 20%) 401px, $brand-primary 402px, #000);
   background-attachment: fixed;
   background-color: #000;
   overflow-y: scroll;
@@ -49,7 +37,10 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
     }
   }
 
-  .container {
+  #main {
+    @include box-shadow(0 0 96px 12px #000);
+    background-color: #000;
+    color: #ddd;
   }
 
   .page-content {
@@ -75,10 +66,15 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
         position: relative;
         transition: all 0.2s ease-in-out 0s;
 
-        &.active {
-        }
-
-        &:hover, &.active {
+        &.active a:after {
+          @include gradient-directional(rgba(255,255,255,0.25), rgba(255,255,255,0.85), 135deg);
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
         }
 
         a {
@@ -87,9 +83,11 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
           background: #000;
 
           img {
+            display: block;
             @extend .img-responsive;
           }
           p {
+            z-index: 1;
             @include pacifico();
             position: absolute;
             left: 0;
@@ -126,8 +124,7 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
       padding: 0;
 
       li.product {
-        @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
-        max-width: 230px;
+        @extend .col-xs-6, .col-sm-4, .col-md-3;
         position: relative;
         transition: all 0.2s ease-in-out 0s;
 
@@ -139,6 +136,8 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
           border: 0;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
+          background-color: #000;
+          color: #ddd;
 
           &:hover {
             @include box-shadow(0 0 1px 1px $brand-primary);
@@ -165,24 +164,22 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
               bottom: 0;
               left: -6px;
               right: -6px;
-              @include box-shadow(0 0 12px rgba(0,0,0,0.15) inset);
+              @include box-shadow(0 0 18px rgba(255,255,255,0.65) inset);
             }
           }
           .product-text {
             padding: 10px 15px;
 
             h3 {
+              @include pacifico();
               margin-top: 5px;
               margin-bottom: 5px;
-              font-size: 18px;
-              font-weight: 400;
-              letter-spacing: -0.01em;
+              font-size: 22px;
+              font-weight: normal;
 
               .small {
                 display: block;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 0.02em;
+                font-family: 'Fira Sans';
               }
             }
             .description { display: none; }
@@ -208,9 +205,10 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
         @extend .col-xs-12, .col-md-7;
         @include pacifico();
         margin-top: 0;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         .small {
+          display: block;
           font-family: 'Fira Sans';
         }
       }
@@ -228,46 +226,18 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
             transition: all 0.2s ease-in-out 0s;
           }
         }
-        .product-pricing {
-
-          .price, .retail-price {
-            float: right;
-            margin-right: $grid-gutter-width/2;
-            font-size: $font-size-large;
-            line-height: 34px;
-
-            .unit-price {
-              display: block;
-              margin-top: -10px;
-              font-size: $font-size-small;
-              text-align: right;
-            }
-          }
-          .price {
-            @extend .text-primary;
-            font-weight: 500;
-          }
-          .retail-price {
-            opacity: 0.5;
-            text-decoration: line-through;
-          }
-        }
+        .product-pricing { display: none; }
       }
     }
     .product-body {
       @extend .row;
 
       .product-description {
-        @extend .col-xs-12, .col-md-4;
+        @extend .col-xs-12, .col-md-3, .col-md-push-6;
         margin-top: 50px;
 
-        .product-code {
-          @extend .pull-left;
-          font-size: $font-size-small;
-        }
-        .product-stock {
-          @extend .pull-right, .clearfix;
-        }
+        .product-code { display: none; }
+        .product-stock { display: none; }
         .body-text { clear: both; }
         .list-group, .table { margin-top: 20px; }
       }
@@ -306,48 +276,17 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
           }
         }
         &.technical {
-          @extend .col-xs-12, .col-sm-4, .col-md-3;
+          @extend .col-xs-12, .col-sm-4, .col-md-3, .col-md-push-6;
         }
         &.presentational {
-          @extend .col-xs-12, .col-sm-8, .col-md-5;
+          @extend .col-xs-12, .col-sm-8, .col-md-6, .col-md-pull-6;
         }
       }
     }
-    .product-footer {
-
-      .linked-products {
-        @extend .row;
-
-        ul {
-          list-style: none;
-          padding: 0;
-
-          li.product {
-            @extend .col-sm-2, .col-lg-1;
-
-            a {
-              display: block;
-              text-decoration: none;
-
-              .product-image { @extend .box-thumbnail; }
-
-              h3 {
-                font-size: $font-size-base;
-                margin-top: 0.25em;
-                margin-bottom: 0.5em;
-
-                .small {
-                  display: block;
-                  font-size: $font-size-small;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+    .product-footer { display: none; }
   }
   .footer {
+    @include box-shadow(0 0 18px rgba(0,0,0,0.333) inset);
     background: darken($brand-primary, 15%);
     color: #fff;
   }
