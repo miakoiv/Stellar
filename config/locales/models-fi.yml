@@ -132,6 +132,7 @@ fi:
         product_retail_price: Myyntihinta
         subtotal: Yhteensä
       page:
+        purpose: Sivun tyyppi
         parent_page_id: Pääsivu
         navbar: Näytetään päävalikossa
         title: Otsake

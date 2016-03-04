@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_pages
-      @pages = current_store.pages.top_level.sorted
+      @pages = current_store.pages.navbar.sorted
     end
 
     # Locale is set by a before_filter. User locale takes precedence over

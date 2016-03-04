@@ -9,7 +9,7 @@
     %thead
       %tr
         %th.col-min.hidden-print
-        %th= col(Page, :slug)
+        %th= col(Page, :purpose)
         %th= col(Page, :parent_page_id)
         %th= col(Page, :title)
         %th= col(Page, :album_ids)
@@ -20,9 +20,11 @@
         = content_tag_for :tr, page, class: page.internal? ? 'active' : '' do
           %td.hidden-print= drag_handle
           %td
-            %code= "/#{page.slug}"
+            = page.human_attribute_value(:purpose)
+            - if page.route?
+              %code= "/#{page.slug}"
           %td= page.parent_page
-          %td= page.internal? ? icon('warning', page.title, data: {toggle: 'tooltip'}, title: col(Page, :internal)) : page.title
+          %td= page.title
           %td= page.albums.to_sentence
           %td.actions
             = link_to icon('eye', t('actions.view')), show_page_path(page),

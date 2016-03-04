@@ -6,6 +6,13 @@ en:
           presentational: Presentational
           technical: Technical
           document: Document
+      page:
+        purpose:
+          route: Routing entry
+          primary: Primary content
+          secondary: Secondary content
+          banner: Banner
+          letterhead: Letterhead
       property:
         value_type:
           string: String

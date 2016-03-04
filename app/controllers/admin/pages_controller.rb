@@ -30,7 +30,7 @@ class Admin::PagesController < ApplicationController
   # POST /admin/pages
   # POST /admin/pages.json
   def create
-    @page = current_store.pages.build(page_params)
+    @page = current_store.pages.build(page_params.merge(priority: current_store.pages.count))
 
     respond_to do |format|
       if @page.save
@@ -83,8 +83,8 @@ class Admin::PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(
-        :store_id, :parent_page_id, :navbar, :title, :slug, :content,
-        :letterhead, :internal, :wysiwyg, album_ids: []
+        :store_id, :purpose, :parent_page_id, :title, :slug, :content,
+        :wysiwyg, album_ids: []
       )
     end
 end

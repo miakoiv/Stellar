@@ -6,6 +6,13 @@ fi:
           presentational: esittävä
           technical: tekninen
           document: dokumentti
+      page:
+        purpose:
+          route: Reitityspiste
+          primary: Ensisijainen sisältö
+          secondary: Toissijainen sisältö
+          banner: Juliste
+          letterhead: Kirjepohja
       property:
         value_type:
           string: sanallinen

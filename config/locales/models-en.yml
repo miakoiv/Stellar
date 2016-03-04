@@ -132,6 +132,7 @@ en:
         product_retail_price: Retail price
         subtotal: Subtotal
       page:
+        purpose: Page type
         parent_page_id: Parent page
         navbar: Show in main navigation
         title: Title
