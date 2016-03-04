@@ -10,14 +10,18 @@
       %h4= t('actions.search')
   .panel-body
     = form_for @search, url: admin_orders_path, method: :get do |f|
-      .col-xs-3
-        = f.select :order_type, current_user.managed_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
-      .col-xs-2
-        = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'top'}
-      .col-xs-3
-        = f.search_field :customer, autocomplete: 'off', placeholder: col(Order, :customer_name), class: 'form-control'
-      .col-xs-1.pull-right
-        = f.submit t('actions.search'), class: 'btn btn-primary'
+      .col-sm-6.col-md-4
+        .form-group
+          = f.select :order_type, current_user.managed_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+      .col-sm-6.col-md-3
+        .form-group
+          = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'top'}
+      .col-sm-6.col-md-4
+        .form-group
+          = f.search_field :customer, autocomplete: 'off', placeholder: col(Order, :customer_name), class: 'form-control'
+      .col-sm-6.col-md-1
+        .form-group
+          = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
 = render partial: 'admin/orders/table', object: @orders, as: :orders
 = paginate @orders
