@@ -134,12 +134,9 @@ fi:
       page:
         purpose: Sivun tyyppi
         parent_page_id: Pääsivu
-        navbar: Näytetään päävalikossa
         title: Otsake
         slug: Osoite
         content: Sisältö
-        letterhead: Sivu on kirjepohja
-        internal: Sivu on sisäiseen käyttöön
         wysiwyg: Käytä Froala-editoria
         album_ids: Kuva-albumit
       product:

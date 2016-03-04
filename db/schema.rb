@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304115836) do
+ActiveRecord::Schema.define(version: 20160304140943) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -232,19 +232,16 @@ ActiveRecord::Schema.define(version: 20160304115836) do
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
-    t.integer  "store_id",       limit: 4,                     null: false
-    t.integer  "purpose",        limit: 4,     default: 1,     null: false
+    t.integer  "store_id",       limit: 4,                    null: false
+    t.integer  "purpose",        limit: 4,     default: 1,    null: false
     t.integer  "parent_page_id", limit: 4
-    t.boolean  "navbar",                       default: false, null: false
     t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255,                   null: false
+    t.string   "slug",           limit: 255,                  null: false
     t.text     "content",        limit: 65535
-    t.boolean  "letterhead",                   default: false, null: false
-    t.boolean  "internal",                     default: false, null: false
     t.boolean  "wysiwyg",                      default: true
     t.integer  "priority",       limit: 4
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "pages", ["parent_page_id"], name: "index_pages_on_parent_page_id", using: :btree

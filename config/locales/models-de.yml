@@ -133,7 +133,6 @@ de:
         title: Titel
         slug: Adresse
         content: Inhalt
-        internal: Seite ist für den internen Gebrauch
         wysiwyg: Froala-Editor nutzen
         album_ids: Fotoalben
       product:

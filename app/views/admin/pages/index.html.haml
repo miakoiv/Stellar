@@ -16,36 +16,35 @@
         %th.actions
 
     %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
-      - @pages.each do |page|
-        = content_tag_for :tr, page, class: page.internal? ? 'active' : '' do
-          %td.hidden-print= drag_handle
-          %td
-            = page.human_attribute_value(:purpose)
-            - if page.route?
-              %code= "/#{page.slug}"
-          %td= page.parent_page
-          %td= page.title
-          %td= page.albums.to_sentence
-          %td.actions
-            = link_to icon('eye', t('actions.view')), show_page_path(page),
+      = content_tag_for :tr, @pages do |page|
+        %td.hidden-print= drag_handle
+        %td
+          = page.human_attribute_value(:purpose)
+          - if page.route?
+            %code= "/#{page.slug}"
+        %td= page.parent_page
+        %td= page.title
+        %td= page.albums.to_sentence
+        %td.actions
+          = link_to icon('eye', t('actions.view')), show_page_path(page),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(page)
+            = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
                 class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(page)
-              = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
-                  class: 'btn btn-default btn-sm'
-            - if current_user.can_delete?(page)
-              = link_to icon('remove', t('actions.delete')), admin_page_path(page),
-                  method: :delete, class: 'btn btn-sm btn-danger',
-                  data: {confirm: t('actions.confirm.body',
-                    klass: Page.model_name.human, name: page.title),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+          - if current_user.can_delete?(page)
+            = link_to icon('remove', t('actions.delete')), admin_page_path(page),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: Page.model_name.human, name: page.title),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(
     items: 'tr'
     handle: '.handle'
-    placeholder: '#{tr_placeholder(4)}'
+    placeholder: '#{tr_placeholder(6)}'
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{reorder_admin_pages_path}',
       {reorder: $('tr', this).map(-> this.id).get()}
