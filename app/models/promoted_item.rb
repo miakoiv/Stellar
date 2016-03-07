@@ -56,7 +56,7 @@ class PromotedItem < ActiveRecord::Base
     self.calculated = true
   end
 
-  protected
+  private
     def touch_product
       product.touch
     end

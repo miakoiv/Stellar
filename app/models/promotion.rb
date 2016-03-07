@@ -21,6 +21,8 @@ class Promotion < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
+  before_save :touch_products
+  before_destroy :touch_products
 
   #---
   # These attributes allow adding products and categories en masse
@@ -71,9 +73,15 @@ class Promotion < ActiveRecord::Base
   end
 
   private
-
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
       order.order_items.includes(:product).where(product_id: promoted_items.pluck(:product_id))
+    end
+
+    # Touch all affected products to invalidate their cached views.
+    def touch_products
+      products.each do |product|
+        product.touch
+      end
     end
 end
