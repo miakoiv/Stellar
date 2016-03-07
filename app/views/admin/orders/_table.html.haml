@@ -3,8 +3,9 @@
     %thead
       %tr
         %th.col-xs-2= col(Order, :completed_at)
-        %th.col-xs-2= col(Order, :shipping_at)
-        %th.col-xs-2= col(Order, :approved_at)
+        - if current_store.b2b_sales?
+          %th= col(Order, :summary)
+        %th= col(Order, :shipping_at)
         %th= col(Order, :user_id)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.col-xs-1.text-right= col(Order, :grand_total)
