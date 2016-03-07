@@ -25,6 +25,7 @@ class Property < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  after_save :define_search_method
 
   #---
   def values
@@ -46,4 +47,9 @@ class Property < ActiveRecord::Base
   def to_s
     name
   end
+
+  private
+    def define_search_method
+      ProductSearch.define_search_method(self)
+    end
 end

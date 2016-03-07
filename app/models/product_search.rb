@@ -6,6 +6,22 @@ class ProductSearch < Searchlight::Search
 
   include Searchlight::Adapters::ActionView
 
+  # Defines a search method for a property. Using subselects
+  # makes it possible to match multiple properties at the same time.
+  def self.define_search_method(property)
+    key = property.sluggify
+    define_method("search_#{key}") do
+      query.where("EXISTS (SELECT 1 FROM product_properties WHERE product_id = products.id AND property_id = #{property.id} AND value IN (?))", send(key))
+    end
+  end
+
+  # Defines search methods for all existing properties. When a property
+  # is created or modified, call #define_search_method on it.
+  Property.searchable.each do |property|
+    define_search_method(property)
+  end
+
+  #---
   def base_query
     Product.includes(:categories).order(:title, :subtitle)
   end
@@ -29,15 +45,5 @@ class ProductSearch < Searchlight::Search
   def search_live
     return query if empty?(live)
     query.where(live: checked?(live))
-  end
-
-  # Define search methods for all searchable properties, avoiding name clashes
-  # by including the property id. Finding matching products is done with
-  # subselects to be able to combine multiple property searches.
-  Property.searchable.each do |property|
-    key = property.sluggify
-    define_method("search_#{key}") do
-      query.where("EXISTS (SELECT 1 FROM product_properties WHERE product_id = products.id AND property_id = #{property.id} AND value IN (?))", send(key))
-    end
   end
 end
