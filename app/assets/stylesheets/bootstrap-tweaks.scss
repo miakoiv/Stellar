@@ -277,11 +277,17 @@ fieldset[disabled] .help-block { display: none; }
 }
 
 //
-// vertical fieldset legend
+// prettier fieldsets inside panels, vertical fieldset legend
 //
 .panel-body {
   fieldset {
     position: relative;
+    margin: 0 $grid-gutter-width/-2;
+    padding: 0 $grid-gutter-width/2;
+
+    &:not(:first-child) {
+      padding-top: 15px;
+    }
 
     legend.vertical {
       position: absolute;
@@ -290,6 +296,7 @@ fieldset[disabled] .help-block { display: none; }
       transform-origin: top right;
       transform: rotate(-90deg);
       text-align: right;
+      text-transform: lowercase;
       font-size: $font-size-large;
       font-weight: 500;
       border: 0;
