@@ -33,16 +33,22 @@ class Store < ActiveRecord::Base
   after_create :assign_slug
 
   #---
-  has_many :categories
-  has_many :products
-  has_many :properties
-  has_many :orders
-  has_many :users
-  has_many :pages
-  has_many :albums
+  # All these associations are dependent of the store.
+  with_options dependent: :destroy do |store|
+    store.has_many :categories
+    store.has_many :products
+    store.has_many :properties
+    store.has_many :orders
+    store.has_many :pages
+    store.has_many :albums
+    store.has_many :promotions
+    store.has_many :users
+  end
+  accepts_nested_attributes_for :users, limit: 1
+
+  # Inventories may be shared between stores.
   has_and_belongs_to_many :inventories
   has_many :order_types, through: :inventories
-  has_many :promotions
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -52,6 +58,15 @@ class Store < ActiveRecord::Base
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
+  # The minimal set of default settings for a newly created store.
+  def self.default_settings
+    {
+      brand_image: 'leasit.svg',
+      card_image_type: :presentational,
+      list_image_type: :presentational
+    }
+  end
+
   def self.locale_options
     [['English', 'en'], ['Deutsch', 'de'], ['suomi', 'fi']]
   end

@@ -17,14 +17,28 @@
         = f.select :manufacturer_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
         = f.select :reseller_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
       - if current_user.has_cached_role?(:superuser)
-        %fieldset{disabled: locked}
-          %legend.text-danger.vertical= Role.human_attribute_value(:name, :superuser)
+        %fieldset.bg-warning{disabled: locked}
+          %legend.text-warning.vertical= Role.human_attribute_value(:name, :superuser)
           = f.text_field :host, required: true, prepend: 'http://'
           = f.number_field :erp_number
-          = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+          - unless @store.new_record?
+            = f.text_field :slug, readonly: true, help: t('.slug_help_html')
           = f.select :theme, %w{alcoholic birch cards compass default emek gto heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
 
+      - if @store.new_record?
+        = f.fields_for :users do |ff|
+          %fieldset.bg-info{disabled: locked}
+            %legend.text-info.vertical= t('users.new.new_user')
+            = ff.select :group, User.group_options, {}, {class: 'selectize'}
+            = ff.text_field :name, required: true
+            = ff.text_field :email, required: true
+            = ff.telephone_field :phone, required: true
+            = ff.password_field :password, required: true
+            = ff.password_field :password_confirmation, required: true
+            = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
+
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset
+          = f.form_group do
+            = f.primary

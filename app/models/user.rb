@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
     joins(:store).where(email: warden_conditions[:email], stores: {host: warden_conditions[:host]}).first
   end
 
+  def self.group_options
+    %w{reseller manufacturer}.map { |group| [User.human_attribute_value(:group, group), group] }
+  end
+
   #---
   # A user's shopping cart is technically an order singleton,
   # the one and only incomplete order.

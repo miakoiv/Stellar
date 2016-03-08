@@ -23,6 +23,7 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores/new
   def new
     @store = Store.new
+    @store.users.build(roles: Role.where(name: 'superuser'))
   end
 
   # GET /admin/stores/1/edit
@@ -33,7 +34,7 @@ class Admin::StoresController < ApplicationController
   # POST /admin/stores
   # POST /admin/stores.json
   def create
-    @store = Store.new(store_params)
+    @store = Store.new(store_params.merge(Store.default_settings))
 
     respond_to do |format|
       if @store.save
@@ -73,11 +74,16 @@ class Admin::StoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(
-        :host, :erp_number, :name,
-        :theme, :locale, :allow_shopping, :admit_guests,
+        :host, :erp_number, :name, :theme, :locale, :brand_image,
+        :card_image_type, :list_image_type,
+        :allow_shopping, :admit_guests,
         :shipping_cost_product_id, :free_shipping_at,
         :manufacturer_letterhead_id, :reseller_letterhead_id,
-        :tracking_code, inventory_ids: []
+        :tracking_code, inventory_ids: [],
+        users_attributes: [
+          :name, :email, :phone, :locale, :pricing_factor,
+          :password, :password_confirmation, :group, role_ids: []
+        ]
       )
     end
 end
