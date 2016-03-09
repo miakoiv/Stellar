@@ -36,7 +36,12 @@ class ApplicationController < ActionController::Base
   # Preserves search query param in a cookie.
   def saved_search_query(search_model, cookie_key)
     param = "#{search_model}_search"
-    cookies[cookie_key] = params[param].to_json if params[param]
+    if params[param]
+      cookies[cookie_key] = {
+        value: params[param].to_json,
+        expires: 2.weeks.from_now
+      }
+    end
     params[param].presence || JSON.load(cookies[cookie_key]) || {}
   end
 
