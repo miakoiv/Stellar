@@ -20,6 +20,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
+# ActiveJob backend and its runner daemon
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 # Low-magic searches
 gem 'searchlight'
 

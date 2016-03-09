@@ -25,5 +25,8 @@ module Spry
 
     # Let Rails routing handle error conditions
     config.exceptions_app = self.routes
+
+    # Let DelayedJob do the heavy lifting for ActiveJob.
+    config.active_job.queue_adapter = :delayed_job
   end
 end
