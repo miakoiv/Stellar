@@ -63,18 +63,15 @@ class ApplicationController < ActionController::Base
   end
 
   def can_see_pricing?
-    @can_see_pricing = current_user.has_cached_role?(:see_pricing) if @can_see_pricing.nil?
-    @can_see_pricing
+    current_user.has_cached_role?(:see_pricing)
   end
 
   def can_see_stock?
-    @can_see_stock = current_user.has_cached_role?(:see_stock) if @can_see_stock.nil?
-    @can_see_stock
+    current_user.has_cached_role?(:see_stock)
   end
 
   def can_manage?
-    @can_manage = current_user.has_cached_role?(:manager) if @can_manage.nil?
-    @can_manage
+    current_user.has_cached_role?(:manager)
   end
 
   private
