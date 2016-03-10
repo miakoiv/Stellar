@@ -10,7 +10,7 @@
         %th.col-xs-1.actions{data: {sorter: 'false'}}
     %tbody
       - products.each do |product|
-        - cache_if current_user.guest?, [I18n.locale, :product_row, product, Date.current.to_s] do
+        - cache_if current_user.guest?, [I18n.locale, :product_row, product] do
           = content_tag_for :tr, product do
             %td
               .box-thumbnail
