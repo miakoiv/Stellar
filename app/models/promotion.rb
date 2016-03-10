@@ -68,6 +68,16 @@ class Promotion < ActiveRecord::Base
     (last_date.nil? || !last_date.past?)
   end
 
+  # Exact time the promotion is activated.
+  def activate_at
+    first_date.present? && first_date.midnight
+  end
+
+  # Exact time the promotion is deactivated.
+  def deactivate_at
+    last_date.present? && last_date.tomorrow.midnight
+  end
+
   def to_s
     name
   end
@@ -78,10 +88,18 @@ class Promotion < ActiveRecord::Base
       order.order_items.includes(:product).where(product_id: promoted_items.pluck(:product_id))
     end
 
-    # Touch all affected products to invalidate their cached views.
+    # Called before save, all affected products are touched to flush caches.
+    # If the promotion becomes active/inactive in the future, an activation
+    # job is queued to handle it at the set date.
     def touch_products
       products.each do |product|
         product.touch
+      end
+      if activate_at && activate_at.future?
+        PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
+      end
+      if deactivate_at && deactivate_at.future?
+        PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
       end
     end
 end
