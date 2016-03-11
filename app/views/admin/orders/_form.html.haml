@@ -2,6 +2,12 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
+      %fieldset.bg-warning{disabled: locked}
+        = f.form_group :approval do
+          = f.check_box :approval, label: col(Order, :approved)
+        .conclusion.collapse{class: @order.approved? ? 'in' : ''}
+          = f.form_group :conclusion do
+            = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
       %fieldset{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset{disabled: locked || @order.approved?}
@@ -26,13 +32,7 @@
               = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control', required: true
             .col-sm-5
               = f.text_field_without_bootstrap :billing_city, class: 'form-control', required: true
-        = f.text_area :notes, rows: 4
-      %fieldset.bg-success{disabled: locked}
-        = f.form_group :approval do
-          = f.check_box :approval, label: col(Order, :approved)
-        .conclusion.collapse{class: @order.approved? ? 'in' : ''}
-          = f.form_group :conclusion do
-            = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
+        = f.text_area :notes, rows: 7
       - unless locked
         %fieldset.actions
           = f.form_group do
