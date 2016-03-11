@@ -91,12 +91,14 @@ en:
         value: Value
       order:
         number: order №
-        user_id: Customer
+        user_id: From
         order_type_id: Order type
-        completed_at: Date of order
-        shipping_at: Date of shipment
+        completed_at: Ordered
+        shipping_at: Shipment
         approved: Approved
         approved_at: Processed
+        concluded_at: Concluded
+        status: Status
         not_approved: Not processed yet
         items: Items
         products: Products

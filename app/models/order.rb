@@ -33,6 +33,9 @@ class Order < ActiveRecord::Base
   # Approved orders.
   scope :approved, -> { where.not(approved_at: nil) }
 
+  # Concluded orders.
+  scope :concluded, -> { where.not(concluded_at: nil) }
+
   scope :managed_by, -> (user) { joins(:order_type).where(order_types: {id: user.managed_order_types}) }
 
   #---
@@ -85,16 +88,26 @@ class Order < ActiveRecord::Base
   end
   alias approved? approval
 
-  # Setting approval status also archives the order and its order items.
   def approval=(status)
-    case status
-    when '1'
-      archive!
+    if ['1', 1, true].include?(status)
       update(approved_at: Time.current)
-    when '0'
-      update(approved_at: nil)
     else
-      raise "Unknown approval status #{status}"
+      update(approved_at: nil)
+    end
+  end
+
+  def conclusion
+    !!concluded_at.present?
+  end
+  alias concluded? conclusion
+
+  # Concluding an order archives the order and its order items.
+  def conclusion=(status)
+    if ['1', 1, true].include?(status)
+      archive!
+      update(concluded_at: Time.current)
+    else
+      update(concluded_at: nil)
     end
   end
 
@@ -276,11 +289,23 @@ class Order < ActiveRecord::Base
   end
 
   def summary
-    [company_name, contact_person, shipping_city].compact.reject(&:empty?).join('/')
+    [company_name, contact_person, shipping_city].compact.reject(&:empty?).join(', ')
   end
 
   def to_s
     number
+  end
+
+  # CSS class based on order status.
+  def appearance
+    return nil if concluded?
+    approved? && 'warning text-warning' || 'danger text-danger'
+  end
+
+  # Icon name based on order status.
+  def icon
+    return nil if concluded?
+    approved? && 'cog' || 'warning'
   end
 
   def as_json(options = {})

@@ -25,15 +25,15 @@ class OrderItem < ActiveRecord::Base
 
   #---
   delegate :live?, :undead?, :real?, :virtual?, to: :product
-  delegate :approved?, to: :order
+  delegate :approved?, :concluded?, to: :order
 
   #---
   # Define methods to use archived copies of order items if the associated
-  # order is approved, otherwise go through the associations.
+  # order is concluded, otherwise go through the associations.
   %w[product_code product_customer_code product_title product_subtitle].each do |method|
     association, association_method = method.split('_', 2)
     define_method(method.to_sym) do
-      approved? ? self[method] : send(association).send(association_method)
+      concluded? ? self[method] : send(association).send(association_method)
     end
   end
 

@@ -22,7 +22,7 @@ class InventoryItem < ActiveRecord::Base
   def adjustment
     product.order_items.joins(order: :order_type)
       .where.not(orders: {completed_at: nil})
-      .where(orders: {approved_at: nil})
+      .where(orders: {concluded_at: nil})
       .where(order_types: {inventory_id: inventory})
       .map { |item|
         item.order.order_type.adjustment_multiplier * item.amount

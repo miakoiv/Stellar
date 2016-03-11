@@ -1,6 +1,6 @@
-= content_tag_for :tr, order, class: order.approved? ? '' : 'danger text-danger' do
-  %td
-    = order.approved? ? l(order.completed_at.to_date) : icon('warning', l(order.completed_at.to_date), data: {toggle: 'tooltip'}, title: col(Order, :not_approved))
+= content_tag_for :tr, order, class: order.appearance do
+  %td= icon(order.icon)
+  %td= l(order.completed_at.to_date)
   - if current_store.b2b_sales?
     %td= order.summary
   %td= order.shipping_at.present? ? l(order.shipping_at) : ''

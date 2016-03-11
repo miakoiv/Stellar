@@ -95,6 +95,7 @@ de:
         shipping_at: Versanddatum
         approved: Genehmigt
         approved_at: Bearbeitet
+        status: Stand
         not_approved: Noch nicht bearbeitet
         items: Posten
         products: Produkte
