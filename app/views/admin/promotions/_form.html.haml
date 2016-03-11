@@ -16,5 +16,6 @@
             = ff.text_area :description, rows: 3, required: true
             = render partial: @promotion.promotion_handler, locals: {f: ff}
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary

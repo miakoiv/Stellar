@@ -15,11 +15,11 @@
       .unit_pricing.collapse{class: @property.measurement_unit.present? ? 'in' : ''}
         %fieldset{disabled: locked}
         = f.form_group do
-          = f.check_box :unit_pricing,
-              disabled: @property.measurement_unit.nil?
+          = f.check_box :unit_pricing, disabled: @property.measurement_unit.nil?
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
 
 :coffee
   $('#property_value_type').on 'change', (e) ->

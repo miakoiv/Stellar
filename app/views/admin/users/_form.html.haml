@@ -16,5 +16,6 @@
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary

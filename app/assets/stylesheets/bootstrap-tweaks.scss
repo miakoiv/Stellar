@@ -285,7 +285,10 @@ fieldset[disabled] .help-block { display: none; }
     margin: 0 $grid-gutter-width/-2;
     padding: 0 $grid-gutter-width/2;
 
-    &:not(:first-child) {
+    &.actions {
+      padding-top: 15px;
+    }
+    &.bg-primary, &.bg-success, &.bg-info, &.bg-warning, &.bg-danger {
       padding-top: 15px;
     }
 

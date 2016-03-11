@@ -10,8 +10,9 @@
         = f.form_group do
           = f.check_box :live
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
 
 :coffee
   $('#category_description').froalaEditor

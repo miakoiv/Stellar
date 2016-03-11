@@ -39,6 +39,6 @@
             = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
 
       - unless locked
-        %fieldset
+        %fieldset.actions
           = f.form_group do
             = f.primary

@@ -6,5 +6,6 @@
         = f.text_field :title, required: true
         = f.text_area :description
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary

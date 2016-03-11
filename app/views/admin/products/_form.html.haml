@@ -44,8 +44,9 @@
             {}, {multiple: true, class: 'selectize'}
         = f.text_area :memo, rows: 4
       - unless locked
-        = f.form_group do
-          = f.primary
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
 
 :coffee
   $('#product_description').froalaEditor
