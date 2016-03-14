@@ -6,10 +6,12 @@
   %td
     = form_for order_item, remote: true,
         html: {class: 'pull-right immediate'} do |f|
-      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1
   %td.text-right.currency
     = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
-      = f.text_field :price, class: 'form-control input-sm text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 1
+      .input-group.input-group-sm
+        = f.text_field :price, class: 'form-control text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 2
+        %span.input-group-addon €
   %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal
   %td.actions
