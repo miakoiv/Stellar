@@ -1,32 +1,16 @@
-= content_tag_for :tr, order_item, class: order_item.live? ? '' : 'warning text-warning' do
+= content_tag_for :tr, order_item do
   %td
-    %strong
-      - if order_item.real? && order_item.live?
-        = link_to order_item.product_title, show_product_path(order_item.product.category, order_item.product)
-      - else
-        = order_item.product_title
+    %strong= order_item.product_title
     = order_item.product_subtitle
-    %span.label.label-primary= order_item.label
-  %td.no-wrap
-    - if order_item.real?
-      - if order_item.live?
-        = order_item.product_code
-      - else
-        = icon('warning', order_item.product_code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
+  %td.no-wrap= order_item.product_code
   %td
-    - unless order_item.virtual?
-      = form_for order_item, remote: true,
-          html: {class: 'pull-right immediate'} do |f|
-        = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
+    = form_for order_item, remote: true,
+        html: {class: 'pull-right immediate'} do |f|
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
   %td.text-right.currency
-    - unless order_item.virtual?
-      = humanized_money_with_symbol order_item.price
+    = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
+      = f.text_field :price, class: 'form-control input-sm text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 1
   %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal
   %td.actions
-    - unless order_item.virtual?
-      = link_to icon('remove'), order_item_path(order_item),
-          remote: true, method: :delete, class: 'btn btn-danger btn-sm'
-
-- if order_item.adjustments.any?
-  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment
+    = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

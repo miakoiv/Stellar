@@ -5,7 +5,7 @@
         %p.lead= t('store.empty_cart')
         %p= link_to t('store.go_shopping'), front_path
     - else
-      = render partial: 'order_items/edit_table', object: order, as: :order
+      = render partial: 'order_items/cart_table', object: order, as: :order
       .panel-footer
         = link_to t('checkout.continue_shopping'), store_path, class: 'btn btn-default'
         = link_to icon('remove', t('store.cart.delete')), delete_cart_path,

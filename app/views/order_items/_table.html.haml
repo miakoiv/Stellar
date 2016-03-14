@@ -3,19 +3,17 @@
     %thead
       %tr
         %th= col(OrderItem, :product_title)
-        %th.col-xs-2= col(OrderItem, :product_code)
-        %th.text-right= col(OrderItem, :amount)
-        %th.text-right à
+        %th= col(OrderItem, :product_code)
+        %th.col-xs-1.text-right= col(OrderItem, :amount)
+        %th.col-xs-2.text-right à
         %th.text-right= col(OrderItem, :subtotal)
-        %th.col-xs-1.actions
     %tfoot
       %tr
         %th
         %th
-        %th
-        %th.text-right= col(Order, :grand_total)
-        %th#grand-total.text-right.currency{data: {amount: @order.grand_total.cents}}
-          = humanized_money_with_symbol @order.grand_total
+        %th.text-right{colspan: 2}= col(Order, :grand_total)
+        %th.text-right.currency
+          = render partial: 'orders/grand_total', object: order, as: :order
         %th
     %tbody
       = render partial: 'order_items/row', collection: order.order_items.sorted, as: :order_item
