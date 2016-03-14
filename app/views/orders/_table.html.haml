@@ -20,5 +20,8 @@
         %td.text-right.currency= humanized_money_with_symbol order.grand_total
         %td.actions
           = link_to icon('info', t('actions.show')), order_path(order), class: 'btn btn-default btn-sm'
-          - unless order.approved?
+          - if current_user.can_update?(order)
+            = link_to icon('edit', t('actions.edit')), edit_order_path(order),
+                class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(order)
             = link_to icon('remove', t('actions.delete')), order_path(order), method: :delete, class: 'btn btn-sm btn-danger'
