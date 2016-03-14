@@ -33,18 +33,23 @@ class OrdersController < ApplicationController
   end
 
   # PATCH/PUT /orders/1
+  # The checkout process calls this via AJAX and a successful update completes
+  # the order and sends confirmation e-mail. Responses are in JSON.
+  # HTML responses are sent when the user edits her own completed orders.
   def update
     authorize_action_for @order
 
     respond_to do |format|
       if @order.update(order_params)
-        if @order.paid?
+        if !@order.complete? && @order.paid?
           @order.complete!
           OrderMailer.order_confirmation(@order).deliver_later
         end
         format.json { render json: @order }
+        format.html { redirect_to order_path(@order), notice: t('.notice', order: @order) }
       else
         format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.html { render :edit }
       end
     end
   end
