@@ -1,0 +1,17 @@
+.page-header
+  = link_to orders_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to order_path(@order), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = @order.order_type
+    %span.small
+      = col(Order, :number)
+      = @order.to_s
+
+.row
+  .col-lg-5
+    = render partial: 'form', locals: {locked: false}
+
+  .col-lg-7
+    = render partial: 'order_items/edit_table', object: @order, as: :order
