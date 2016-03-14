@@ -25,5 +25,4 @@
             = render @payment_gateway
 
   .col-lg-6
-    .panel.panel-default
-      = render partial: 'order_items/table', object: @order, as: :order
+    = render partial: 'order_items/table', object: @order, as: :order
