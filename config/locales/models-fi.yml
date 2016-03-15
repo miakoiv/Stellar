@@ -97,6 +97,7 @@ fi:
         shipping_at: Toimituspvm
         approved: Hyväksytty
         approved_at: Käsitelty
+        concluded: Päätetty
         concluded_at: Päätetty
         status: Tila
         not_approved: Ei vielä käsitelty

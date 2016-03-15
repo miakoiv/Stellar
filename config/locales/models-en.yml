@@ -97,6 +97,7 @@ en:
         shipping_at: Shipment
         approved: Approved
         approved_at: Processed
+        concluded: Concluded
         concluded_at: Concluded
         status: Status
         not_approved: Not processed yet
