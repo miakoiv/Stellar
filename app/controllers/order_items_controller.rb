@@ -21,9 +21,19 @@ class OrderItemsController < ApplicationController
 
   # PATCH/PUT /order_items/1
   def update
-    if @order_item.update(order_item_params)
-      @order_item.destroy if @order_item.amount < 1
-      @order.recalculate!
+    respond_to do |format|
+      if @order_item.update(order_item_params)
+        if @order_item.amount < 1
+          @order_item.destroy
+          format.js { render :destroy }
+        else
+          @order_item.reload
+          @order.recalculate!
+          format.js { render :update }
+        end
+      else
+        format.js { render :rollback }
+      end
     end
   end
 

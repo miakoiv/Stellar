@@ -39,6 +39,7 @@ class Order < ActiveRecord::Base
   scope :managed_by, -> (user) { joins(:order_type).where(order_types: {id: user.managed_order_types}) }
 
   #---
+  validates_associated :order_items, on: :update
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update
