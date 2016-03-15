@@ -25,5 +25,5 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/nineties.css spry_themes/nineties.js
   spry_themes/penumbra.css spry_themes/penumbra.js
   spry_themes/saarimedia.css spry_themes/saarimedia.js
-  email/mailgun.css
+  email/mailgun.css email/grid.css
 )
