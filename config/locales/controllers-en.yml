@@ -71,6 +71,8 @@ en:
       notice: "Order %{order} updated."
     destroy:
       notice: "Order %{order} deleted."
+    quote:
+      notice: "Quotation %{order} sent."
     duplicate:
       notice: "Order %{order} copied to shopping cart."
       failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"

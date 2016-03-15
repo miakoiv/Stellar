@@ -3,4 +3,8 @@ fi:
     order_confirmation:
       subject: "%{store} – Tilausvahvistus"
       title: Tilausvahvistus
-    thank_you: "%{store} kiittää tilauksestanne!"
+      thank_you: "%{store} kiittää tilauksestanne!"
+    quotation:
+      subject: "%{store} – Uusi tarjous"
+      title: Tarjous
+      intro: "Tähän tulee tarjouksen esipuhe."

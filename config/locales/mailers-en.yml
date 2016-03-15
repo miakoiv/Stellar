@@ -3,4 +3,8 @@ en:
     order_confirmation:
       subject: "Order confirmation from %{store}"
       title: Order confirmation
-    thank_you: "Thank you for shopping at %{store}!"
+      thank_you: "Thank you for shopping at %{store}!"
+    quotation:
+      subject: "New quotation from %{store}"
+      title: Quotation
+      intro: "Quotation intro section goes here."

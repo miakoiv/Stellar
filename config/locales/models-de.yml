@@ -104,6 +104,8 @@ de:
         customer_phone: Telefonnummer
         company_name: Firma
         contact_person: Kontaktperson
+        contact_email: E-Mail
+        contact_phone: Telefonnummer
         billing_address: Rechnungsadresse
         billing_postalcode: Postleitzahl
         billing_city: Stadt

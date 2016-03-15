@@ -16,6 +16,7 @@
         = f.telephone_field :customer_phone, required: true
         = f.text_field :company_name
         = f.text_field :contact_person
+        = f.text_field :contact_email
         = f.telephone_field :contact_phone
         - if @order.has_shipping?
           = f.date_field :shipping_at,

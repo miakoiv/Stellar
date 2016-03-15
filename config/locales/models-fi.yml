@@ -107,6 +107,7 @@ fi:
         customer_phone: Puhelinnumero
         company_name: Yritys
         contact_person: Yhteyshenkilö
+        contact_email: Sähköpostiosoite
         contact_phone: Puhelinnumero
         billing_address: Laskutusosoite
         billing_postalcode: Postinro

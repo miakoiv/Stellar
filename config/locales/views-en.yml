@@ -115,6 +115,7 @@ en:
         new_user: New user
   orders:
     show:
+      quote: Send quotation
       duplicate: Duplicate to cart
     edit:
       duplicate: Duplicate to cart

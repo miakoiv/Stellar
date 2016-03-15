@@ -95,6 +95,7 @@ fi:
         new_user: Uusi käyttäjä
   orders:
     show:
+      quote: Lähetä tarjous
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin

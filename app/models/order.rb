@@ -233,6 +233,11 @@ class Order < ActiveRecord::Base
     order_items.real.empty?
   end
 
+  # An order is quotable if it's a quote and there's a contact address.
+  def quotable?
+    is_quote? && contact_email.present?
+  end
+
   # An order is checkoutable when all its real items are available.
   def checkoutable?
     order_items.joins(:product).real.each do |order_item|

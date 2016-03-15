@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions duplicate: 'read'
+  authority_actions quote: 'read', duplicate: 'read'
 
   before_action :set_pages
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :duplicate]
 
   # GET /orders
   def index
@@ -65,6 +65,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  # GET /orders/1/quote
+  def quote
+    authorize_action_for @order
+
+    OrderMailer.quotation(@order).deliver_later
+    redirect_to order_path(@order), notice: t('.notice', order: @order)
+  end
+
   # GET /orders/1/duplicate
   def duplicate
     authorize_action_for @order
@@ -90,7 +98,8 @@ class OrdersController < ApplicationController
       params.require(:order).permit(
         :order_type_id, :completed_at, :shipping_at,
         :customer_name, :customer_email, :customer_phone,
-        :company_name, :contact_person, :contact_phone, :has_billing_address,
+        :company_name, :contact_person, :contact_email, :contact_phone,
+        :has_billing_address,
         :billing_address, :billing_postalcode, :billing_city,
         :shipping_address, :shipping_postalcode, :shipping_city,
         :notes

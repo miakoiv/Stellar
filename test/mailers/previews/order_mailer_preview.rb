@@ -8,4 +8,7 @@ class OrderMailerPreview < ActionMailer::Preview
     OrderMailer.order_confirmation(Order.complete.first)
   end
 
+  def quotation
+    OrderMailer.quotation(Order.includes(:order_type).where(order_types: {is_quote: true}).first)
+  end
 end

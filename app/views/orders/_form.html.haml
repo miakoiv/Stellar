@@ -6,8 +6,10 @@
         = f.text_field :customer_name
         = f.text_field :customer_email
         = f.telephone_field :customer_phone
+      %fieldset.bg-info{disabled: locked}
         = f.text_field :company_name
         = f.text_field :contact_person
+        = f.text_field :contact_email
         = f.telephone_field :contact_phone
         - if @order.has_shipping?
           = f.date_field :shipping_at,
@@ -24,7 +26,7 @@
               = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
             .col-sm-5
               = f.text_field_without_bootstrap :billing_city, class: 'form-control'
-      %fieldset{disabled: locked}
+      %fieldset.gap{disabled: locked}
         = f.text_area :notes, rows: 7
       - unless locked
         = f.form_group do

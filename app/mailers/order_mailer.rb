@@ -18,6 +18,20 @@ class OrderMailer < ApplicationMailer
     )
   end
 
+  def quotation(order)
+    Rails.logger.info "#{order.inspect}"
+    @order = order
+    @store = order.store
+    @user = order.user
+
+    roadie_mail(
+      from: @order.user.to_s,
+      to: "#{@order.contact_person} <#{@order.contact_email}>",
+      bcc: @order.user.to_s,
+      subject: default_i18n_subject(store: @store)
+    )
+  end
+
   protected
     def roadie_options
       super.merge(url_options: {host: @store.host, scheme: 'http'})

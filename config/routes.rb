@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     get 'duplicate', on: :member
+    get 'quote', on: :member
     resources :order_items, shallow: true
   end
 

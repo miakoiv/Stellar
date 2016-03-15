@@ -4,8 +4,11 @@
   - if current_user.can_update?(@order)
     = link_to edit_order_path(@order), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
-  = link_to duplicate_order_path(@order), class: 'btn btn-info' do
+  = link_to duplicate_order_path(@order), class: 'btn btn-warning' do
     = icon('copy', t('.duplicate'))
+  - if @order.quotable?
+    = link_to quote_order_path(@order), class: 'btn btn-info' do
+      = icon('envelope', t('.quote'))
   %h1
     = @order.order_type
     %span.small
