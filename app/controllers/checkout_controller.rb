@@ -12,8 +12,12 @@ class CheckoutController < ApplicationController
   before_action :find_order
 
   # GET /checkout/1/via/2
+  # Entering checkout sets the order type, which tells us how to reappraise
+  # the order items (trade price for resellers ordering from manufacturers),
+  # and whether a payment is required.
   def checkout
     @order.order_type = current_store.order_types.find(params[:order_type_id])
+    @order.reappraise!
 
     if @order.empty? || !@order.checkoutable?
       return redirect_to cart_path

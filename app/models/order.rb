@@ -113,8 +113,9 @@ class Order < ActiveRecord::Base
   end
 
   # Inserts amount of product to this order. If the product is a compound,
-  # its immediate components are inserted instead. Pricing is according to
-  # the user who owns this order.
+  # its immediate components are inserted instead. Pricing is initially
+  # for retail. Depending on the user's group, different pricing may be
+  # applied at checkout by Order#reappraise!
   def insert(product, amount)
     if product.compound?
       product.relationships.each do |relationship|
@@ -126,8 +127,7 @@ class Order < ActiveRecord::Base
         priority: order_items.count
       ).find_or_create_by(product: product)
       order_item.amount += amount
-      order_item.price = user.price_for(product)
-      order_item.label = user.label_for(product)
+      order_item.price = product.price
       order_item.save!
     end
   end
@@ -169,6 +169,19 @@ class Order < ActiveRecord::Base
       notes: notes
     )
     failed_items
+  end
+
+  # Reappraising the order modifies the order item prices to reflect
+  # the user's group and order type. Quotes always have retail pricing,
+  # but resellers get trade prices when ordering (from the manufacturer).
+  def reappraise!
+    order_items.each do |order_item|
+      product = order_item.product
+      order_item.update(
+        price: is_quote? ? product.price : user.price_for(product),
+        label: is_quote? ? nil : user.label_for(product)
+      )
+    end
   end
 
   # Recalculate things that may take some heavy lifting. This should be called
