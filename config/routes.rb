@@ -16,9 +16,10 @@ Rails.application.routes.draw do
     to: redirect('/product/:category_id/:product_id')
 
   resources :orders do
-    get 'duplicate', on: :member
-    get 'quote', on: :member
     resources :order_items, shallow: true
+    get :duplicate, on: :member
+    get :quote, on: :member
+    post :add_products, on: :member
   end
 
   devise_for :users
@@ -86,7 +87,7 @@ Rails.application.routes.draw do
     resources :orders do
       resources :images, shallow: true
       resources :order_items, shallow: true
-      get 'forward', on: :member
+      get :forward, on: :member
     end
     resources :properties do
       post :reorder, on: :collection
