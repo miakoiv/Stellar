@@ -9,12 +9,14 @@
   - if promoted_item.promotion.editable_prices?
     %td
       = form_for [:admin, promoted_item], remote: true, html: {class: 'immediate'} do |f|
-        .input-group
-          = f.text_field :discount_percent, value: number_with_precision(promoted_item.discount_percent, precision: 2), tabindex: 2, class: 'form-control input-sm text-right'
+        .input-group.input-group-sm
+          = f.text_field :discount_percent, value: number_with_precision(promoted_item.discount_percent, precision: 2), tabindex: 2, class: 'form-control text-right'
           %span.input-group-addon %
     %td
       = form_for [:admin, promoted_item], remote: true, html: {class: 'immediate'} do |f|
-        = f.text_field :price, placeholder: promoted_item.product.retail_price.to_s, tabindex: 3, class: 'form-control input-sm text-right'
+        .input-group.input-group-sm
+          = f.text_field :price, placeholder: promoted_item.product.retail_price.to_s, tabindex: 3, class: 'form-control text-right'
+          %span.input-group-addon €
   %td.actions
     = link_to icon('remove'), admin_promoted_item_path(promoted_item),
         remote: true, method: :delete, class: 'btn btn-sm btn-danger'
