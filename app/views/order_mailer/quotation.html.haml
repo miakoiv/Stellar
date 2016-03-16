@@ -1,14 +1,10 @@
-.header
-  %table{width: '100%'}
-    %tr
-      %td.content-block
-        = @order.store.letterhead(@user).html_safe
 %table.main{width: '100%', cellpadding: 0, cellspacing: 0}
   %tr
     %td.content-wrap.aligncenter
       %table{width: '100%', cellpadding: 0, cellspacing: 0}
         %tr
           %td.content-block
+            %div= image_tag @store.cover_image.url(:thumbnail), width: 75, height: 75
             %h1
               = t('.title')
               %span.small
@@ -104,6 +100,7 @@
   %table{width: '100%'}
     %tr
       %td.content-block
-        %p= t('footer.heading')
+        %p= image_tag 'spry-logo.svg', width: 75
       %td.content-block
+        %p= t('footer.heading')
         = t('footer.body_html')
