@@ -1,0 +1,23 @@
+#add-products
+  = bootstrap_form_for order, url: add_products_order_path(order), remote: true, method: :post do |f|
+    = f.text_field :product_ids_string
+    = f.primary t('.submit')
+
+    :coffee
+      options = #{current_store.products.live.map { |p|
+        {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
+      }.to_json}
+
+      $('#order_product_ids_string').selectize
+        plugins: ['remove_button']
+        options: options
+        maxItems: null
+        valueField: 'id'
+        sortField: [{field: 'title'}, {field: 'subtitle'}]
+        searchField: ['code', 'title', 'subtitle']
+        diacritics: false
+        render:
+          item: (item, escape) ->
+            '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
+          option: (item, escape) ->
+            '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><h4>' + escape(item.title) + ' <small>' + (if item.subtitle then escape(item.subtitle) else '') + '</small></h4><p>' + escape(item.code) + '</p></div></div>'

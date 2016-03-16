@@ -99,6 +99,8 @@ fi:
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
+    add_products:
+      submit: Lisää tuotteet
     quotation:
       title: Tarjous
   store:

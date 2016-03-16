@@ -126,6 +126,7 @@ en:
         order_type_name: Order type
         grand_total: Grand total
         summary: Summary
+        product_ids_string: Products to add
       order_item:
         order_id: Order
         product_id: Product

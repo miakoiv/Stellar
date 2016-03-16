@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions quote: 'read', duplicate: 'read'
+  authority_actions quote: 'read', duplicate: 'read', add_products: 'update'
 
   before_action :set_pages
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :duplicate]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :duplicate, :add_products]
 
   # GET /orders
   def index
@@ -84,6 +84,22 @@ class OrdersController < ApplicationController
       redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
     else
       redirect_to cart_path, notice: t('.notice', order: @order)
+    end
+  end
+
+  # POST /orders/1/add_products
+  def add_products
+    authorize_action_for @order
+
+    product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
+
+    product_ids.each do |product_id|
+      @order.insert(@current_store.products.live.find(product_id), 1)
+    end
+    @order.recalculate!
+
+    respond_to do |format|
+      format.js
     end
   end
 

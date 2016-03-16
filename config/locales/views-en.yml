@@ -119,6 +119,8 @@ en:
       duplicate: Duplicate to cart
     edit:
       duplicate: Duplicate to cart
+    add_products:
+      submit: Add products
     quotation:
       title: Quotation
   products:

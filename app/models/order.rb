@@ -53,6 +53,11 @@ class Order < ActiveRecord::Base
     if: -> (order) { order.has_shipping? && order.has_billing_address? }
 
   #---
+  # This attribute allows adding products en masse
+  # through a string of comma-separated ids.
+  attr_accessor :product_ids_string
+
+  #---
   before_save :copy_billing_address, unless: :has_billing_address?
 
   #---
@@ -127,7 +132,7 @@ class Order < ActiveRecord::Base
         priority: order_items.count
       ).find_or_create_by(product: product)
       order_item.amount += amount
-      order_item.price = product.price
+      order_item.price ||= product.price
       order_item.save!
     end
   end
