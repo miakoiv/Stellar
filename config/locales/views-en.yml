@@ -66,8 +66,8 @@ en:
         aggregated: Aggregated components
       delivery_note:
         title: Delivery note
-      quote:
-        title: Quote
+      quotation:
+        title: Quotation
       edit:
         aggregated: Aggregated components
     pages:
@@ -119,6 +119,8 @@ en:
       duplicate: Duplicate to cart
     edit:
       duplicate: Duplicate to cart
+    quotation:
+      title: Quotation
   products:
     product_detail:
       amount: Amount

@@ -1,4 +1,6 @@
-.page-header
+- print_title = t('orders.quotation.title')
+
+.page-header.hidden-print
   = link_to orders_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(@order)
@@ -9,14 +11,21 @@
   - if @order.quotable?
     = link_to quote_order_path(@order), class: 'btn btn-info' do
       = icon('envelope', t('.quote'))
+      = link_to icon('print', "#{t('actions.print')} #{print_title.downcase}"), '#print', class: 'btn btn-default'
   %h1
     = @order.order_type
     %span.small
       = col(Order, :number)
       = @order.to_s
 
+- if @order.is_quote?
+  .visible-print
+    .page-header.fr-view
+      = @order.store.letterhead(current_user).html_safe
+    = render partial: 'summary', locals: {title: print_title}
+
 .row
-  .col-lg-5
+  .col-lg-5.hidden-print
     = render partial: 'form', locals: {locked: true}
 
   .col-lg-7

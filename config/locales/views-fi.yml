@@ -46,7 +46,7 @@ fi:
         aggregated: Keräilylista
       delivery_note:
         title: Lähete
-      quote:
+      quotation:
         title: Tarjous
       edit:
         aggregated: Keräilylista
@@ -99,6 +99,8 @@ fi:
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
+    quotation:
+      title: Tarjous
   store:
     all_products: Kaikki tuotteet
     linked_products: Tämä tuote tarvitsee näitä oheistuotteita
