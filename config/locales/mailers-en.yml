@@ -7,4 +7,3 @@ en:
     quotation:
       subject: "New quotation from %{store}"
       title: Quotation
-      intro: "Quotation intro section goes here."

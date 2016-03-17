@@ -7,4 +7,3 @@ fi:
     quotation:
       subject: "%{store} – Uusi tarjous"
       title: Tarjous
-      intro: "Tähän tulee tarjouksen esipuhe."

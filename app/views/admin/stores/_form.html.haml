@@ -16,6 +16,7 @@
         = f.text_field :tracking_code
         = f.select :manufacturer_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
         = f.select :reseller_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
+        = f.select :quotation_letterhead_id, @store.letterhead_options, {include_blank: true}, {class: 'selectize'}
       - if current_user.has_cached_role?(:superuser)
         %fieldset.bg-warning{disabled: locked}
           %legend.text-warning.vertical= Role.human_attribute_value(:name, :superuser)

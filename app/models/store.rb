@@ -22,7 +22,8 @@ class Store < ActiveRecord::Base
     :pbw_private_key, # Paybyway private key
     :order_sequence, # base value for order numbers if no numbering exists
     :manufacturer_letterhead_id, # page references to letterheads
-    :reseller_letterhead_id
+    :reseller_letterhead_id,
+    :quotation_letterhead_id
   ], coder: JSON
 
   resourcify
@@ -149,6 +150,12 @@ class Store < ActiveRecord::Base
     page_id = send("#{user.group}_letterhead_id")
     return '' unless page_id.present?
     pages.find(page_id).content
+  end
+
+  # Quotation boilerplate is the letterhead page contents.
+  def quotation_boilerplate
+    return '' unless quotation_letterhead_id.present?
+    pages.find(quotation_letterhead_id).content
   end
 
   def to_s

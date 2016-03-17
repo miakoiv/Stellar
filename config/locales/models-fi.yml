@@ -217,6 +217,7 @@ fi:
         inventory_ids: Varastot
         manufacturer_letterhead_id: Valmistajan kirjepohja
         reseller_letterhead_id: Jälleenmyyjän kirjepohja
+        quotation_letterhead_id: Tarjouksen tekstisisältö
       user:
         name: Nimi
         group: Ryhmä
