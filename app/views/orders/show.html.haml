@@ -30,3 +30,7 @@
 
   .col-lg-7
     = render partial: 'order_items/table', object: @order, as: :order
+
+- if @order.is_quote?
+  .visible-print.small.fr-view
+    = @order.store.quotation_boilerplate.html_safe
