@@ -215,9 +215,9 @@ fi:
         shipping_cost_product_id: Toimituskulujen tuote
         tracking_code: GA-seurantakoodi
         inventory_ids: Varastot
-        manufacturer_letterhead_id: Valmistajan kirjepohja
-        reseller_letterhead_id: Jälleenmyyjän kirjepohja
-        quotation_letterhead_id: Tarjouksen tekstisisältö
+        manufacturer_template_id: Valmistajan kirjepohja
+        reseller_template_id: Jälleenmyyjän kirjepohja
+        quotation_template_id: Tarjouksen tekstisisältö
       user:
         name: Nimi
         group: Ryhmä

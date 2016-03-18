@@ -12,7 +12,7 @@ fi:
           primary: Ensisijainen sisältö
           secondary: Toissijainen sisältö
           banner: Juliste
-          letterhead: Kirjepohja
+          template: Sivupohja
       property:
         value_type:
           string: sanallinen

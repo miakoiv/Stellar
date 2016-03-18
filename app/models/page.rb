@@ -13,9 +13,9 @@ class Page < ActiveRecord::Base
   # Pages serve different purposes while they are essentially comprised of
   # the same attributes. Route pages use their slug for routing to /front
   # or /cart. Primary and secondary pages are regular user edited content,
-  # while secondaries don't get a navbar item. Banners and letterheads are
-  # templates for content generation.
-  enum purpose: {route: 0, primary: 1, secondary: 2, banner: 3, letterhead: 4}
+  # while secondaries don't get a navbar item. Banners and templates are
+  # used for content generation.
+  enum purpose: {route: 0, primary: 1, secondary: 2, banner: 3, template: 4}
 
   #---
   belongs_to :store

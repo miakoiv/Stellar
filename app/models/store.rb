@@ -21,9 +21,9 @@ class Store < ActiveRecord::Base
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
     :order_sequence, # base value for order numbers if no numbering exists
-    :manufacturer_letterhead_id, # page references to letterheads
-    :reseller_letterhead_id,
-    :quotation_letterhead_id
+    :manufacturer_template_id, # page references to templates
+    :reseller_template_id,
+    :quotation_template_id
   ], coder: JSON
 
   resourcify
@@ -119,8 +119,8 @@ class Store < ActiveRecord::Base
     albums.map { |a| [a.to_s, a.id] }
   end
 
-  def letterhead_options
-    pages.letterhead.map { |p| [p.to_s, p.id] }
+  def template_options
+    pages.template.map { |p| [p.to_s, p.id] }
   end
 
   # Finds the shipping cost product manually due to having
@@ -145,17 +145,17 @@ class Store < ActiveRecord::Base
     users.with_role(:correspondence)
   end
 
-  # Serves the contents of the letterhead page for given user.
+  # Serves the contents of the letterhead template for given user.
   def letterhead(user)
-    page_id = send("#{user.group}_letterhead_id")
+    page_id = send("#{user.group}_template_id")
     return '' unless page_id.present?
     pages.find(page_id).content
   end
 
-  # Quotation boilerplate is the letterhead page contents.
+  # Quotation boilerplate is the template page contents.
   def quotation_boilerplate
-    return '' unless quotation_letterhead_id.present?
-    pages.find(quotation_letterhead_id).content
+    return '' unless quotation_template_id.present?
+    pages.find(quotation_template_id).content
   end
 
   def to_s

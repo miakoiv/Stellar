@@ -215,9 +215,9 @@ en:
         shipping_cost_product_id: S&H product entry
         tracking_code: GA tracking code
         inventory_ids: Inventories
-        manufacturer_letterhead_id: Manufacturer letterhead
-        reseller_letterhead_id: Reseller letterhead
-        quotation_letterhead_id: Quotation boilerplate
+        manufacturer_template_id: Manufacturer letterhead
+        reseller_template_id: Reseller letterhead
+        quotation_template_id: Quotation boilerplate
       user:
         name: Name
         group: Group

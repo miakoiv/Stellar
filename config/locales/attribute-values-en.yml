@@ -12,7 +12,7 @@ en:
           primary: Primary content
           secondary: Secondary content
           banner: Banner
-          letterhead: Letterhead
+          template: Template
       property:
         value_type:
           string: String

@@ -78,8 +78,8 @@ class Admin::StoresController < ApplicationController
         :card_image_type, :list_image_type,
         :allow_shopping, :admit_guests,
         :shipping_cost_product_id, :free_shipping_at,
-        :manufacturer_letterhead_id, :reseller_letterhead_id,
-        :quotation_letterhead_id,
+        :manufacturer_template_id, :reseller_template_id,
+        :quotation_template_id,
         :tracking_code, inventory_ids: [],
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
