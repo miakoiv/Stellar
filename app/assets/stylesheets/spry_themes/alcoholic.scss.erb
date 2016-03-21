@@ -167,6 +167,7 @@ body {
             }
             .description { display: none; }
           }
+          .promotion { text-align: center; }
         }
         .buy-now { display: none; }
       }
@@ -310,5 +311,53 @@ body {
   }
   .footer {
     background-color: #e3dfd7;
+  }
+}
+
+@media print {
+  .alcoholic {
+    .products {
+      ul {
+        display: block;
+
+        li.product {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          page-break-inside: avoid;
+          break-inside: avoid;
+
+          a {
+            display: block;
+
+            &:after {
+              content: '';
+              display: table;
+              clear: both;
+            }
+
+            .product-image {
+              position: static;
+              float: left;
+              width: auto;
+              height: auto;
+              padding: 0;
+              margin-right: $grid-gutter-width/2;
+
+              img {
+                position: static;
+                transform: none;
+              }
+            }
+            .product-text {
+              text-align: left;
+
+              .description { display: block; }
+            }
+            .promotion { display: none; }
+          }
+        }
+      }
+    }
   }
 }
