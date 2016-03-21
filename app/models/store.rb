@@ -162,6 +162,10 @@ class Store < ActiveRecord::Base
     name
   end
 
+  def description
+    nil
+  end
+
   private
     def assign_slug
       taken_slugs = Store.all_except(self).map(&:slug)
