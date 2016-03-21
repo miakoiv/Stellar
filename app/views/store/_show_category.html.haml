@@ -1,3 +1,7 @@
+.page-header.visible-print
+  %h1
+    = current_store.to_s
+    %small= @category.to_s
 .product-grid.collapse.in
   %ul= render @products
 .product-list.collapse
