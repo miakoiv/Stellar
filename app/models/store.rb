@@ -72,6 +72,13 @@ class Store < ActiveRecord::Base
     [['English', 'en'], ['Deutsch', 'de'], ['suomi', 'fi']]
   end
 
+  # Looks up the names of precompiled stylesheets for themes.
+  def self.theme_options
+    @themes ||= Rails.application.config.assets.precompile.select { |a|
+      a.is_a?(String) && a.sub!(/spry_themes\/([^.]+)\.css/, "\\1")
+    }
+  end
+
   #---
   # Defaults for guest users reveal pricing and will allow shopping
   # if admit_guests is also enabled, to get in without authentication.

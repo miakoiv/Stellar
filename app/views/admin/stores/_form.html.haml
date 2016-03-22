@@ -24,7 +24,7 @@
           = f.number_field :erp_number
           - unless @store.new_record?
             = f.text_field :slug, readonly: true, help: t('.slug_help_html')
-          = f.select :theme, %w{alcoholic birch cards compass default emek gto heat hiustalo lepola nineties penumbra saarimedia}, {}, {class: 'selectize'}
+          = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
           = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
 
       - if @store.new_record?
