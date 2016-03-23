@@ -370,6 +370,7 @@ body {
           a {
             display: block;
             padding: 0;
+            border: 0;
 
             &:after {
               content: '';
@@ -378,19 +379,20 @@ body {
             }
 
             .product-image {
-              position: static;
               float: left;
-              width: auto;
-              height: auto;
+              width: 200px;
+              height: 200px;
               padding: 0;
-              margin-right: $grid-gutter-width/2;
 
               img {
                 position: static;
+                display: block;
                 transform: none;
+                margin: 0 auto;
               }
             }
             .product-text {
+              margin-left: 220px;
               text-align: left;
 
               .description { display: block; }
