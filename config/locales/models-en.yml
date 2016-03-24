@@ -95,6 +95,7 @@ en:
         order_type_id: Order type
         completed_at: Ordered
         shipping_at: Shipment
+        installation_at: Installation
         approved: Approved
         approved_at: Processed
         concluded: Concluded

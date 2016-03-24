@@ -23,9 +23,12 @@
         = f.text_field :shipping_postalcode, required: true
       .col-sm-4
         = f.text_field :shipping_city, required: true
-      - if current_store.b2b_sales?
+    - if current_store.b2b_sales?
+      .row
         .col-sm-4
           = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+        .col-sm-4
+          = f.date_field :installation_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
     = f.form_group do
       = f.check_box :has_billing_address
     #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}

@@ -95,6 +95,7 @@ fi:
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm
         shipping_at: Toimituspvm
+        installation_at: Asennuspvm
         approved: Hyväksytty
         approved_at: Käsitelty
         concluded: Päätetty
