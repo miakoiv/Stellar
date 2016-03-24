@@ -124,6 +124,12 @@ class User < ActiveRecord::Base
     store.users.where(group: managed_groups.map { |group| User.groups[group] })
   end
 
+  # This could be a separate role but for now, resellers and manufacturer
+  # users have permission to browse orders sent from their own group.
+  def can_see_group_orders?
+    reseller? || manufacturer?
+  end
+
   def appearance
     GROUP_LABELS[group]
   end

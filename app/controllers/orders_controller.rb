@@ -122,10 +122,10 @@ class OrdersController < ApplicationController
       )
     end
 
-    # Orders are searched group-wide in current store if user is reseller
-    # or manufacturer. Everyone else gets their own orders.
+    # Orders are searched by store and group if the user is permitted to do so,
+    # otherwise only user's own orders are considered.
     def search_params
-      if current_user.reseller? || current_user.manufacturer?
+      if current_user.can_see_group_orders?
         @query.merge(
           store_id: current_store.id,
           group: User.groups[current_user.group]
