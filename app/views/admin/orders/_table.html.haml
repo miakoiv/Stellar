@@ -7,6 +7,8 @@
         - if current_store.b2b_sales?
           %th= col(Order, :summary)
         %th.col-xs-1= col(Order, :shipping_at)
+        - if current_store.b2b_sales?
+          %th.col-xs-1= col(Order, :installation_at)
         %th.col-xs-2= col(Order, :user_id)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.col-xs-1.text-right= col(Order, :grand_total)

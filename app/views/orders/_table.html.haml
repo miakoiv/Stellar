@@ -9,6 +9,8 @@
         - if current_store.b2b_sales?
           %th= col(Order, :summary)
         %th= col(Order, :shipping_at)
+        - if current_store.b2b_sales?
+          %th= col(Order, :installation_at)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.text-right= col(Order, :grand_total)
         %th.actions
@@ -23,6 +25,8 @@
           - if current_store.b2b_sales?
             %td= order.summary
           %td= order.shipping_at.present? ? l(order.shipping_at) : ''
+          - if current_store.b2b_sales?
+            %td= order.installation_at.present? ? l(order.installation_at) : ''
           %td.text-right= order.order_items.count
           %td.text-right.currency= humanized_money_with_symbol order.grand_total
           %td.actions
