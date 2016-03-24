@@ -7,7 +7,7 @@ class OrderSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    Order.includes(:order_type).complete.order(completed_at: :desc)
+    Order.includes(:order_type, :user).complete.order(completed_at: :desc)
   end
 
   def search_store_id
@@ -16,6 +16,10 @@ class OrderSearch < Searchlight::Search
 
   def search_user_id
     query.where(user_id: user_id)
+  end
+
+  def search_group
+    query.where(users: {group: group})
   end
 
   # Manager id restricts the search on orders that may be managed by her.
