@@ -94,7 +94,7 @@ class Order < ActiveRecord::Base
 
   def approval=(status)
     if ['1', 1, true].include?(status)
-      update(approved_at: Time.current)
+      update(approved_at: Time.current) unless approved?
     else
       update(approved_at: nil)
     end
@@ -108,8 +108,10 @@ class Order < ActiveRecord::Base
   # Concluding an order archives the order and its order items.
   def conclusion=(status)
     if ['1', 1, true].include?(status)
-      archive!
-      update(concluded_at: Time.current)
+      if !concluded?
+        archive!
+        update(concluded_at: Time.current)
+      end
     else
       update(concluded_at: nil)
     end
