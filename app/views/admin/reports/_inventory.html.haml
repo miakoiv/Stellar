@@ -2,20 +2,30 @@
   %table#inventory-table.table.table-condensed.table-hover
     %thead
       %tr
-        %th.col-xs-2{colspan: 2}= col(Product, :code)
         %th= col(Product, :title)
-        %th.col-xs-1= col(Product, :stock)
+        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-2= col(Product, :category_ids)
+        %th.col-xs-1.text-right= col(Product, :stock)
         %th.col-xs-1.text-right à
         %th.col-xs-1.text-right= col(Product, :value)
 
     %tbody
     - @inventory[0].each do |item|
       %tr
-        %td{colspan: 2}
-          = link_to item.product.code, admin_product_path(item.product)
         %td
-          %strong= item.product.title
-          = item.product.subtitle
-        %td= item.amount
-        %td.text-right= humanized_money_with_symbol item.value
-        %td.text-right= humanized_money_with_symbol item.total_value
+          = link_to admin_product_path(item.product) do
+            %strong= item.product.title
+            = item.product.subtitle
+        %td= item.product.code
+        %td= item.product.categories.to_sentence
+        %td.text-right= item.amount
+        %td.text-right.currency= humanized_money_with_symbol item.value
+        %td.text-right.currency= humanized_money_with_symbol item.total_value
+
+:coffee
+  $('#inventory-table').tablesorter
+    theme: 'bootstrap'
+    widthFixed: true
+    widgets: ['uiTheme', 'saveSort']
+    headerTemplate: '{content} {icon}'
+    sortList: [[0,0]]
