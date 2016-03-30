@@ -23,7 +23,10 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores/new
   def new
     @store = Store.new
-    @store.users.build(roles: Role.where(name: 'superuser'))
+    @store.users.build(
+      group: User.groups[:manufacturer],
+      roles: Role.where(name: 'superuser')
+    )
   end
 
   # GET /admin/stores/1/edit
