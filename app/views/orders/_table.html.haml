@@ -27,7 +27,7 @@
           %td= order.shipping_at.present? ? l(order.shipping_at) : ''
           - if current_store.b2b_sales?
             %td= order.installation_at.present? ? l(order.installation_at) : ''
-          %td.text-right= order.order_items.count
+          %td.text-right= order.order_items_count
           %td.text-right.currency= humanized_money_with_symbol order.grand_total
           %td.actions
             = link_to icon('info', t('actions.show')), order_path(order), class: 'btn btn-default btn-sm'

@@ -69,7 +69,7 @@ module PaymentGateway
       @params += [
         [:pmt_sellerid, 'testikauppias'],
         [:pmt_keygeneration, '001'],
-        [:pmt_rows, order.order_items.count],
+        [:pmt_rows, order.order_items_count],
         [:pmt_buyeremail, order.user_email],
         [:pmt_charset, 'UTF-8'],
         [:pmt_charsethttp, 'UTF-8'],

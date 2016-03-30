@@ -14,7 +14,7 @@ class OrderItem < ActiveRecord::Base
   monetize :adjustment_total_cents
 
   #---
-  belongs_to :order, inverse_of: :order_items, touch: true
+  belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   belongs_to :product
 
   default_scope { order(:priority) }
