@@ -31,6 +31,10 @@ gem 'searchlight'
 gem 'kaminari'
 gem 'jquery-infinite-pages'
 
+# Data visualization
+gem 'momentjs-rails'
+gem 'visjs-rails'
+
 # Meta tag generator
 gem 'meta-tags'
 

@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require moment
+//= require moment/fi
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/effect.all
@@ -49,4 +51,5 @@
 //= require nprogress
 //= require ./jquery.smartmenus.js
 //= require ./jquery.smartmenus.bootstrap.js
+//= require vis
 //= require_directory .
