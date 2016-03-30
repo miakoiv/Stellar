@@ -1,12 +1,5 @@
 .page-header
   %h1= icon('tachometer', t('admin.dashboard.title'))
 
-%ul.nav.nav-tabs{role: 'tablist'}
-  %li.active{role: 'presentation'}
-    %a{href: '#tab-orders', role: 'tab', data: {toggle: 'tab'}}
-      = title(Order, count: 2)
-
-.tab-content
-  #tab-orders.tab-pane.fade.in.active
-    %h2.visible-print-block= title(Order, count: 2)
-    = render partial: 'orders'
+%ul.nav.nav-pills
+  = render partial: 'shared/admin_links'
