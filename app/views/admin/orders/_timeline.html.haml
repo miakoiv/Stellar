@@ -1,0 +1,26 @@
+#timeline
+  - @timeline_orders.each do |order|
+    = content_tag_for :span, order, data: {id: order.id, url: admin_order_path(order), summary: order.summary}
+
+:coffee
+  container = $('#timeline')[0]
+  groups = (
+    {
+      id: $(item).data('id')
+      content: '<a href="' + $(item).data('url') + '">' + $(item).data('summary') + '</a>'
+    } for item in $('#timeline > span')
+  )
+  items = new vis.DataSet(
+    #{@timeline_orders.map(&:timeline_events).flatten.to_json}
+  )
+  options =
+    locale: '#{I18n.locale}'
+    stack: false
+    clickToUse: true
+    selectable: false
+    start: "#{Date.current - 1.day}"
+    end: "#{Date.current + 2.weeks}"
+    zoomMin: 1000 * 60 * 60 * 24 * 7
+    zoomMax: 1000 * 60 * 60 * 24 * 365
+
+  timeline = new vis.Timeline container, items, groups, options

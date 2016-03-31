@@ -4,6 +4,10 @@
       = icon('plus', t('.new_order'))
   %h1= icon('truck', title(Order, count: 2))
 
+- if @timeline_orders.any?
+  .panel.panel-default
+    = render partial: 'timeline'
+
 .panel.panel-info
   .panel-heading
     .panel-title

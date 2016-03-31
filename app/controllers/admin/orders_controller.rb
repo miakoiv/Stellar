@@ -14,7 +14,9 @@ class Admin::OrdersController < ApplicationController
   def index
     @query = saved_search_query('order', 'admin_order_search')
     @search = OrderSearch.new(search_params)
-    @orders = @search.results.page(params[:page])
+    results = @search.results
+    @orders = results.page(params[:page])
+    @timeline_orders = results.has_shipping.topical
   end
 
   # GET /admin/orders/1
