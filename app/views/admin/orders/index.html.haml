@@ -4,10 +4,6 @@
       = icon('plus', t('.new_order'))
   %h1= icon('truck', title(Order, count: 2))
 
-- if @timeline_orders.any?
-  .panel.panel-default
-    = render partial: 'timeline'
-
 .panel.panel-info
   .panel-heading
     .panel-title
@@ -26,6 +22,13 @@
       .col-sm-6.col-md-2
         .form-group
           = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+- if @timeline_orders.any?
+  .panel.panel-default
+    .panel-heading
+      %span.pull-right= icon('question-circle', class: 'fa-lg', title: t('orders.index.timeline_help_html'), data: {toggle: 'tooltip'})
+      %h4.panel-title= t('orders.index.timeline_header')
+    = render partial: 'timeline'
 
 = render partial: 'admin/orders/table', object: @orders, as: :orders
 = paginate @orders

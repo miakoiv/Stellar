@@ -94,6 +94,9 @@ fi:
       new:
         new_user: Uusi käyttäjä
   orders:
+    index:
+      timeline_header: Toimitettavat tilaukset
+      timeline_help_html: Aktivoi aikajana klikkaamalla
     show:
       quote: Lähetä tarjous
       duplicate: Kopioi ostoskoriin

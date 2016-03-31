@@ -114,6 +114,9 @@ en:
       new:
         new_user: New user
   orders:
+    index:
+      timeline_header: Orders that require shipping
+      timeline_help_html: Click on the timeline to activate scrolling and zooming
     show:
       quote: Send quotation
       duplicate: Duplicate to cart
