@@ -38,6 +38,8 @@ class Order < ActiveRecord::Base
   # one week ago are topical. This is used for timeline data.
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
+  scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
+
   scope :managed_by, -> (user) { joins(:order_type).where(order_types: {id: user.managed_order_types}) }
 
   #---
