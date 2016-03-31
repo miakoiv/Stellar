@@ -1,8 +1,9 @@
 .page-header
   %h1= icon('truck', title(Order, count: 2))
 
-.panel.panel-default
-  = render partial: 'timeline'
+- if @timeline_orders.any?
+  .panel.panel-default
+    = render partial: 'timeline'
 
 .panel.panel-info
   .panel-heading
