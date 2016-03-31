@@ -2,7 +2,7 @@
 
 .panel.panel-default
   .panel-heading
-    %h4= t('.title', resource: resource_class.model_name.human,
+    %h4.panel-title= t('.title', resource: resource_class.model_name.human,
       default: 'Edit #{resource_name.to_s.humanize}')
   .panel-body
     = form_for(resource, as: resource_name, url: registration_path(resource_name),

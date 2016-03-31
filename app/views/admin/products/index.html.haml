@@ -6,8 +6,7 @@
 
 .panel.panel-info
   .panel-heading
-    .panel-title
-      %h4= t('actions.search')
+    %h4.panel-title= t('actions.search')
   .panel-body
     = form_for @search, url: admin_products_path, method: :get do |f|
       .row
