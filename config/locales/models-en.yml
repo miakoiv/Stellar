@@ -34,6 +34,9 @@ en:
       page:
         one: page
         other: pages
+      pricing_group:
+        one: pricing group
+        other: pricing groups
       product:
         one: product
         other: products
@@ -145,6 +148,8 @@ en:
         content: Content
         wysiwyg: Use Froala Editor
         album_ids: Photo albums
+      pricing_group:
+        name: Name
       product:
         category_ids: Categories
         compound: Compound product

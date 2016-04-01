@@ -55,6 +55,11 @@ fi:
         new_page: Uusi sivu
       new:
         new_page: Uusi sivu
+    pricing_groups:
+      index:
+        new_pricing_group: Uusi hintaryhmä
+      new:
+        new_pricing_group: Uusi hintaryhmä
     products:
       index:
         new_product: Uusi tuote

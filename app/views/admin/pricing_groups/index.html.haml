@@ -1,0 +1,28 @@
+.page-header
+  - if current_user.can_create?(PricingGroup)
+    = link_to new_admin_pricing_group_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_pricing_group'))
+  %h1= icon('shopping-basket', title(PricingGroup, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(PricingGroup, :name)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @pricing_groups do |pricing_group|
+        %td= pricing_group.name
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_pricing_group_path(pricing_group), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(PricingGroup)
+            = link_to icon('edit', t('actions.edit')), edit_admin_pricing_group_path(pricing_group), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(PricingGroup)
+            = link_to icon('remove', t('actions.delete')), admin_pricing_group_path(pricing_group),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: PricingGroup.model_name.human, name: pricing_group.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}

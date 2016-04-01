@@ -34,6 +34,9 @@ fi:
       page:
         one: sivu
         other: sivut
+      pricing_group:
+        one: hintaryhmä
+        other: hintaryhmät
       product:
         one: tuote
         other: tuotteet
@@ -145,6 +148,8 @@ fi:
         content: Sisältö
         wysiwyg: Käytä Froala-editoria
         album_ids: Kuva-albumit
+      pricing_group:
+        name: Nimi
       product:
         category_ids: Tuoteryhmät
         compound: Yhdistelmätuote

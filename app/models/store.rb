@@ -44,6 +44,7 @@ class Store < ActiveRecord::Base
     store.has_many :albums
     store.has_many :promotions
     store.has_many :users
+    store.has_many :pricing_groups
   end
   accepts_nested_attributes_for :users, limit: 1
 

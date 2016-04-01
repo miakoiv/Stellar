@@ -32,6 +32,13 @@ en:
         notice: "Page %{page} updated."
       destroy:
         notice: "Page %{page} deleted."
+    pricing_groups:
+      create:
+        notice: "Pricing group %{pricing_group} created."
+      update:
+        notice: "Pricing group %{pricing_group} updated."
+      destroy:
+        notice: "Pricing group %{pricing_group} deleted."
     products:
       create:
         notice: "Product %{product} created."

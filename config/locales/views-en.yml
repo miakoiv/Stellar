@@ -75,6 +75,11 @@ en:
         new_page: New page
       new:
         new_page: New page
+    pricing_groups:
+      index:
+        new_pricing_group: New pricing group
+      new:
+        new_pricing_group: New pricing group
     products:
       index:
         new_product: New product
