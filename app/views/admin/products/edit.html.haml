@@ -11,10 +11,10 @@
     %span.small= @product.subtitle
 
 .row
-  .col-lg-7
+  .col-lg-6
     = render partial: 'form', locals: {locked: false}
 
-  .col-lg-5
+  .col-lg-6
     %ul.nav.nav-tabs{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}

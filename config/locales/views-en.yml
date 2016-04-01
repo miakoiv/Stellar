@@ -86,6 +86,8 @@ en:
         uncategorized: Uncategorized
       new:
         new_product: New product
+      form:
+        default_pricing: Default pricing
     promotion_handler:
       freebie_bundle:
         discount_percent_help: The cheapest item is discounted by this percentage when the number of items purchased matches.
