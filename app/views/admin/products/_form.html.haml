@@ -9,11 +9,13 @@
           = f.check_box :compound
         = f.form_group do
           = f.check_box :virtual
-        = f.text_field :code, required: true
-        = f.text_field :customer_code
-        = f.text_field :title, required: true
-        = f.text_field :subtitle
-        = f.text_area :description
+        %fieldset.bg-warning
+          = f.text_field :code, required: true
+          = f.text_field :customer_code
+        %fieldset.gap
+          = f.text_field :title, required: true
+          = f.text_field :subtitle
+          = f.text_area :description
         %fieldset.bg-info
           %legend.text-info.vertical= t('.default_pricing')
           - if current_user.manufacturer?
