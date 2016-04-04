@@ -9,13 +9,16 @@ class Admin::ProductPropertiesController < ApplicationController
 
   # POST /admin/products/1/product_properties
   def create
-    @product.product_properties.find_or_initialize_by(
+    @product_property = @product.product_properties.find_or_initialize_by(
       property_id: params[:product_property][:property_id]
-    ).update(product_property_params)
-    @product.touch
-
+    )
     respond_to do |format|
-      format.js
+      if @product_property.update(product_property_params)
+        @product.touch
+        format.js { render :create }
+      else
+        format.json { render json: @product_property.errors, status: :unprocessable_entity }
+      end
     end
   end
 
