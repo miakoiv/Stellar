@@ -4,6 +4,9 @@ en:
       album:
         one: photo album
         other: photo albums
+      alternate_price:
+        one: price
+        other: prices
       category:
         one: category
         other: categories
@@ -70,6 +73,12 @@ en:
         description: Description
         images: Photos
         page_ids: Shown on pages
+      alternate_price:
+        pricing_group_id: Pricing group
+        product_id: Product
+        retail_price: Retail price
+        markup_percent: Markup %
+        margin_percent: Margin %
       category:
         parent_category_id: Parent category
         live: Enabled
@@ -172,6 +181,7 @@ en:
         cost_price: Cost Price
         trade_price: Trade price
         retail_price: Retail price
+        alternate_prices: Pricing
         price: Price
         markup_percent: Markup %
         margin_percent: Margin %

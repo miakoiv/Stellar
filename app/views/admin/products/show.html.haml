@@ -18,6 +18,9 @@
   .col-lg-6
     %ul.nav.nav-tabs{role: 'tablist'}
       %li.active{role: 'presentation'}
+        %a{href: '#tab-alternate-prices', role: 'tab', data: {toggle: 'tab'}}
+          = col(Product, :alternate_prices)
+      %li{role: 'presentation'}
         %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :images)
       %li{role: 'presentation'}
@@ -31,7 +34,9 @@
           = col(Product, :components)
 
     .tab-content
-      #tab-images.tab-pane.fade.in.active
+      #tab-alternate-prices.tab-pane.fade.in.active
+        = render partial: 'admin/alternate_prices/table', object: @product, as: :product
+      #tab-images.tab-pane.fade
         = render partial: 'admin/images/table', object: @product, as: :imageable
       #tab-properties.tab-pane.fade
         = render partial: 'admin/product_properties/table', object: @product, as: :product

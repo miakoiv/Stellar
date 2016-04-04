@@ -49,6 +49,9 @@ class Product < ActiveRecord::Base
   # Self-referential HABTM to link products together.
   has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
 
+  # Alternate retail prices in pricing groups.
+  has_many :alternate_prices, dependent: :destroy
+
   scope :live, -> { where(live: true) }
   scope :undead, -> { where(live: false) }
   scope :real, -> { where(virtual: false) }

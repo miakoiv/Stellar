@@ -1,0 +1,15 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(AlternatePrice, :pricing_group_id)
+        %th.col-xs-2.text-right= col(AlternatePrice, :retail_price)
+        %th.col-xs-2.text-right= col(AlternatePrice, :markup_percent)
+        %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
+
+    %tbody
+      = content_tag_for :tr, product.alternate_prices do |alternate_price|
+        %td= alternate_price.pricing_group
+        %td.text-right.currency= humanized_money_with_symbol alternate_price.retail_price
+        %td.text-right= number_with_precision(alternate_price.markup_percent, precision: 2)
+        %td.text-right= number_with_precision(alternate_price.margin_percent, precision: 2)

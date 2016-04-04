@@ -4,6 +4,9 @@ fi:
       album:
         one: kuva-albumi
         other: kuva-albumit
+      alternate_price:
+        one: hinta
+        other: hinnat
       category:
         one: tuoteryhmä
         other: tuoteryhmät
@@ -70,6 +73,12 @@ fi:
         description: Kuvaus
         images: Kuvat
         page_ids: Näytetään sivuilla
+      alternate_price:
+        pricing_group_id: Hintaryhmä
+        product_id: Tuote
+        retail_price: Myyntihinta
+        markup_percent: Lisä-%
+        margin_percent: Kate-%
       category:
         parent_category_id: Pääryhmä
         live: Aktiivinen
@@ -172,6 +181,7 @@ fi:
         cost_price: Omakustannushinta
         trade_price: Valmistajan hinta
         retail_price: Myyntihinta
+        alternate_prices: Hinnoittelu
         price: Hinta
         markup_percent: Lisä-%
         margin_percent: Kate-%

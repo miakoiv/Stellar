@@ -1,0 +1,2 @@
+module Admin::AlternatePricesHelper
+end
