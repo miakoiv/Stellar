@@ -4,4 +4,4 @@
   %td.text-right= number_with_precision(alternate_price.markup_percent, precision: 2)
   %td.text-right= number_with_precision(alternate_price.margin_percent, precision: 2)
   %td.actions
-    = link_to icon('remove', t('actions.delete')), admin_alternate_price_path(alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    = link_to icon('remove'), admin_alternate_price_path(alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -1,8 +1,7 @@
 = content_tag_for :tr, image do
   %td.hidden-print= drag_handle
   %td
-    = image_variant_tag(image, :thumbnail,
-        data: {toggle: 'popover', placement: 'left', content: "#{image_variant_tag(image, :matchbox)}"})
+    = image_variant_tag(image, :thumbnail, data: {toggle: 'popover', placement: 'left', content: "#{image_variant_tag(image, :matchbox)}"})
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
       .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
@@ -11,5 +10,4 @@
             = f.radio_button :image_type_id, imagetype.id
             = imagetype
   %td.actions
-    = link_to icon('remove', t('actions.delete')), admin_image_path(image),
-        remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

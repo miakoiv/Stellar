@@ -3,9 +3,9 @@
     %thead
       %tr
         %th.col-xs-3= col(AlternatePrice, :pricing_group_id)
-        %th.col-xs-2.text-right= col(AlternatePrice, :retail_price)
-        %th.col-xs-2.text-right= col(AlternatePrice, :markup_percent)
-        %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
+        %th.col-xs-3.text-right= col(AlternatePrice, :retail_price)
+        %th.col-xs-3.text-right= col(AlternatePrice, :markup_percent)
+        %th.col-xs-3.text-right= col(AlternatePrice, :margin_percent)
         %th.actions
 
     %tbody#alternate-prices-tbody
@@ -18,8 +18,9 @@
         %tr
           %td.col-xs-3
             = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {}, {class: 'form-control selectize'}
-          %td.col-xs-2= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
-          %td.col-xs-2= f.text_field :markup_percent, placeholder: col(AlternatePrice, :markup_percent), disabled: true, class: 'form-control text-right'
-          %td.col-xs-2= f.text_field :margin_percent, placeholder: col(AlternatePrice, :margin_percent), disabled: true, class: 'form-control text-right'
+          %td.col-xs-3= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
+          %td.col-xs-3= f.text_field :markup_percent, placeholder: col(AlternatePrice, :markup_percent), disabled: true, class: 'form-control text-right'
+          %td.col-xs-3= f.text_field :margin_percent, placeholder: col(AlternatePrice, :margin_percent), disabled: true, class: 'form-control text-right'
           %td.actions
-            = f.submit class: 'btn btn-default'
+            = f.button class: 'btn btn-default' do
+              = icon('check')

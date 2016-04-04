@@ -12,7 +12,7 @@
 = bootstrap_form_for [:admin, product, product.iframes.new], layout: :horizontal, label_col: 'col-sm-3', control_col: 'col-sm-9', remote: true do |f|
   = f.text_area :html, rows: 4, class: 'input-sm'
   = f.form_group do
-    = f.primary
+    = f.submit
 
 :coffee
   $('#iframes-tbody').sortable(

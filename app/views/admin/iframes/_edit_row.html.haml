@@ -4,5 +4,4 @@
     = form_for [:admin, iframe], remote: true, html: {class: 'immediate'} do |f|
       = f.text_area :html, rows: 4, class: 'form-control input-sm'
   %td.actions
-    = link_to icon('remove', t('actions.delete')), admin_iframe_path(iframe),
-        remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    = link_to icon('remove'), admin_iframe_path(iframe), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

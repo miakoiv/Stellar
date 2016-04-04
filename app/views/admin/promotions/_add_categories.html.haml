@@ -3,7 +3,7 @@
       url: add_categories_admin_promotion_path(promotion),
       remote: true, method: :post do |f|
     = f.text_field :category_ids_string
-    = f.primary t('.submit')
+    = f.submit t('.submit')
 
     :coffee
       options = #{promotion.available_categories.map { |c|

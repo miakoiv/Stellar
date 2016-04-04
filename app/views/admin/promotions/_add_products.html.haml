@@ -1,7 +1,7 @@
 #add-products
   = bootstrap_form_for promotion, url: add_products_admin_promotion_path(promotion), remote: true, method: :post do |f|
     = f.text_field :product_ids_string
-    = f.primary t('.submit')
+    = f.submit t('.submit')
 
     :coffee
       options = #{promotion.available_products.map { |p|

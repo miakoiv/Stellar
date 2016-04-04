@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-4= col(ProductProperty, :property_id)
-        %th= col(ProductProperty, :value)
+        %th.col-xs-6= col(ProductProperty, :property_id)
+        %th.col-xs-5= col(ProductProperty, :value)
         %th.actions
 
     %tbody#properties-tbody
@@ -14,11 +14,12 @@
     %table.table.table-loose
       %tbody
         %tr
-          %td.col-xs-4
+          %td.col-xs-6
             = f.select :property_id, current_store.properties.map { |p| [p.name_with_units, p.id] }, {include_blank: true}, {placeholder: col(ProductProperty, :property_id), class: 'form-control'}
-          %td= f.text_field :value, placeholder: col(ProductProperty, :value), class: 'form-control'
+          %td.col-xs-5= f.text_field :value, placeholder: col(ProductProperty, :value), class: 'form-control'
           %td.actions
-            = f.submit class: 'btn btn-sm btn-default'
+            = f.button class: 'btn btn-default' do
+              = icon('check')
 
 - string_property_ids = current_store.properties.string.pluck(:id)
 
