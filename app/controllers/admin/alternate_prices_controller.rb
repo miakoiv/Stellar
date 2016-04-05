@@ -24,7 +24,6 @@ class Admin::AlternatePricesController < ApplicationController
   # DELETE /admin/alternate_prices/1
   def destroy
     @alternate_price = AlternatePrice.find(params[:id])
-    @product = @alternate_price.product
 
     respond_to do |format|
       if @alternate_price.destroy
