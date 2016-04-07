@@ -48,10 +48,14 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_store, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?
+  helper_method :current_store, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?
 
   def current_store
     @current_store ||= user_signed_in? && current_user.store || current_store_by_request
+  end
+
+  def current_pricing
+    @pricing_group
   end
 
   def shopping_cart
