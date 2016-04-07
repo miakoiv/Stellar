@@ -69,6 +69,15 @@ class StoreController < ApplicationController
     respond_to :js
   end
 
+  # GET /store/pricing/(:pricing_group_id)
+  def pricing
+    pricing_group_id = params[:pricing_group_id]
+    @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
+
+    cookies[:pricing_group_id] = pricing_group_id
+    redirect_to store_path, alert: t('.alert', pricing: @pricing_group.try(:name) || t('store.pricing_groups.default'))
+  end
+
   # GET /category/:category_id
   def show_category
     @products = @category.products.live.sorted(@category.product_scope)

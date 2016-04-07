@@ -150,6 +150,8 @@ en:
       shopping_cart: Shopping cart
       delete: Empty cart
       confirm_delete: Really empty your shopping cart?
+    pricing_groups:
+      default: <default>
   albums:
     sidebar:
       included_albums: Show photo albums

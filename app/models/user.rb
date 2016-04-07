@@ -130,6 +130,11 @@ class User < ActiveRecord::Base
     reseller? || manufacturer?
   end
 
+  # Reseller users are able to select a pricing group to use for retail.
+  def can_select_pricing_group?
+    reseller?
+  end
+
   def appearance
     GROUP_LABELS[group]
   end

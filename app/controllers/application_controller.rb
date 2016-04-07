@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   #---
   before_action :load_roles
   before_action :set_locale
+  before_action :set_pricing_group
   after_filter :prepare_unobtrusive_flash
 
   #---
@@ -89,6 +90,13 @@ class ApplicationController < ActionController::Base
     # in the user interface.
     def set_locale
       I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
+    end
+
+    # Pricing group is set by a before_filter. Changing the pricing group
+    # is done by StoreController#pricing and its id is retained in a cookie.
+    def set_pricing_group
+      pricing_group_id = cookies[:pricing_group_id]
+      @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
     end
 
     # When no user is signed in, or a guest user is created, the current store
