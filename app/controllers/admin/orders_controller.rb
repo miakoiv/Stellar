@@ -72,6 +72,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/1/forward
   def forward
     failed_items = @order.forward_to(shopping_cart)
+    shopping_cart.reappraise!(current_pricing)
     shopping_cart.recalculate!
 
     if failed_items.any?

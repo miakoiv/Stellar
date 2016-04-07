@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
   # and whether a payment is required.
   def checkout
     @order.order_type = current_store.order_types.find(params[:order_type_id])
-    @order.reappraise!
+    @order.reappraise!(current_pricing)
 
     if @order.empty? || !@order.checkoutable?
       return redirect_to cart_path

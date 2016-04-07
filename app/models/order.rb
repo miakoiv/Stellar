@@ -123,11 +123,11 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Inserts amount of product to this order. If the product is a compound,
-  # its immediate components are inserted instead. Pricing is initially
-  # for retail. Depending on the user's group, different pricing may be
-  # applied at checkout by Order#reappraise!
-  def insert(product, amount)
+  # Inserts amount of product to this order in the context of given pricing
+  # group. If the product is a compound, its immediate components are inserted
+  # instead. Pricing is initially for retail. Depending on the user's group,
+  # different pricing may be applied at checkout by Order#reappraise!
+  def insert(product, amount, pricing_group = nil)
     if product.compound?
       product.relationships.each do |relationship|
         insert(relationship.component, relationship.quantity)
@@ -138,9 +138,21 @@ class Order < ActiveRecord::Base
         priority: order_items_count
       ).find_or_create_by(product: product)
       order_item.amount += amount
-      order_item.price ||= product.price
+      order_item.price = product.price(pricing_group)
       order_item.save!
     end
+  end
+
+  # Inserts the contents of given order item to this order.
+  # This is useful for copying order items from another order.
+  def insert_order_item(item)
+    order_item = order_items.create_with(
+      amount: 0,
+      priority: order_items_count
+    ).find_or_create_by(product: item.product)
+    order_item.amount += item.amount
+    order_item.price = item.price
+    order_item.save!
   end
 
   # Copies order items on this order to another order. Any order items
@@ -151,7 +163,7 @@ class Order < ActiveRecord::Base
       product = order_item.product
       next if product.virtual?
       if product.live?
-        another_order.insert(product, order_item.amount)
+        another_order.insert_order_item(order_item)
       else
         failed_items << product
       end
@@ -182,16 +194,23 @@ class Order < ActiveRecord::Base
     failed_items
   end
 
-  # Reappraising the order modifies the order item prices to reflect
-  # the user's group and order type. Quotes always have retail pricing,
-  # but resellers get trade prices when ordering (from the manufacturer).
-  def reappraise!
-    order_items.each do |order_item|
-      product = order_item.product
-      order_item.update(
-        price: is_quote? ? product.price : user.price_for(product),
-        label: is_quote? ? nil : user.label_for(product)
-      )
+  # Reappraising the order modifies the order item prices according to
+  # given pricing group. When called at checkout, the order type is known
+  # and may specify user specific pricing to be applied.
+  def reappraise!(pricing_group)
+    trade_prices = order_type.present? && !is_quote?
+    order_items(includes: :product).each do |order_item|
+      if trade_prices
+        order_item.update(
+          price: user.price_for(order_item.product, pricing_group),
+          label: user.label_for(order_item.product)
+        )
+      else
+        order_item.update(
+          price: order_item.product.price(pricing_group),
+          label: nil
+        )
+      end
     end
   end
 

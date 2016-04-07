@@ -72,9 +72,11 @@ class StoreController < ApplicationController
   # GET /store/pricing/(:pricing_group_id)
   def pricing
     pricing_group_id = params[:pricing_group_id]
-    @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
-
     cookies[:pricing_group_id] = pricing_group_id
+
+    @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
+    shopping_cart.reappraise!(@pricing_group)
+
     redirect_to store_path, alert: t('.alert', pricing: @pricing_group.try(:name) || t('store.pricing_groups.default'))
   end
 
@@ -92,7 +94,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @product = Product.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
-    @order.insert(@product, amount)
+    @order.insert(@product, amount, current_pricing)
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)

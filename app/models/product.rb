@@ -88,8 +88,12 @@ class Product < ActiveRecord::Base
     active_promoted_items.find_by(price_cents: lowest)
   end
 
-  # Retail price through best promotion.
-  def price_cents
+  # Returns the retail price in given pricing group. If no group is specified,
+  # finds the lowest retail price through promotions.
+  def price_cents(pricing_group)
+    if pricing_group.present?
+      return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
+    end
     lowest = best_promoted_item
     return lowest.price_cents if lowest.present?
     retail_price_cents

@@ -80,6 +80,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order
 
     failed_items = @order.copy_items_to(shopping_cart)
+    shopping_cart.reappraise!(current_pricing)
     shopping_cart.recalculate!
 
     if failed_items.any?
@@ -96,7 +97,7 @@ class OrdersController < ApplicationController
     product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
 
     product_ids.each do |product_id|
-      @order.insert(@current_store.products.live.find(product_id), 1)
+      @order.insert(@current_store.products.live.find(product_id), 1, current_pricing)
     end
     @order.recalculate!
 

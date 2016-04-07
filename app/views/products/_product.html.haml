@@ -11,7 +11,7 @@
         .promotion
           %p= item.description
     .buy-now
-      %p= humanized_money_with_symbol product.price
+      %p= humanized_money_with_symbol product.price(current_pricing)
       - if can_shop?
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
           = hidden_field_tag :amount, 1
