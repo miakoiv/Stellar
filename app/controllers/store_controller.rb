@@ -23,7 +23,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    redirect_to @pages.any? ? show_page_path(@pages.first) : {action: 'front'}
+    redirect_to @pages.any? ? show_page_path(@pages.first) : front_path
   end
 
   # GET /front
