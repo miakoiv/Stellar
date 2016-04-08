@@ -7,13 +7,7 @@
     %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
       = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
       - if current_user.can_select_pricing_group?
-        %li.divider
-        %li.dropdown-header= title(PricingGroup, count: 2)
-        %li{class: current_pricing.nil? ? 'active' : nil}
-          = link_to t('store.pricing_groups.default'), pricing_path
-        - current_store.pricing_groups.each do |pricing_group|
-          %li{class: current_pricing == pricing_group ? 'active' : nil}
-            = link_to pricing_group, pricing_path(pricing_group)
+        = render partial: 'shared/pricing_options'
       %li.divider
       %li= link_to icon('sign-out', t('devise.sessions.delete.sign_out'), class: 'fa-fw'), destroy_user_session_path, method: :delete
 - else
