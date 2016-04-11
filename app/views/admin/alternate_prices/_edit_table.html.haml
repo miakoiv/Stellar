@@ -5,7 +5,7 @@
         %th.col-xs-4= col(AlternatePrice, :pricing_group_id)
         %th.col-xs-2.text-right= col(AlternatePrice, :price_factor)
         %th.col-xs-3.text-right= col(AlternatePrice, :retail_price)
-        %th.col-xs-3.text-right= col(AlternatePrice, :margin_percent)
+        %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
         %th.actions
 
     %tbody#alternate-prices-tbody
@@ -20,22 +20,25 @@
             = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'form-control'}
           %td.col-xs-2= f.text_field :price_factor, class: 'form-control text-right', disabled: true
           %td.col-xs-3= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
-          %td.col-xs-3
+          %td.col-xs-2
           %td.actions
             = f.button id: 'create_alternate_price', class: 'btn btn-default', disabled: true do
               = icon('check')
 
 :coffee
   jQuery ->
+    culture_options = #{Store.culture_options.to_json}
     price_factors = #{current_store.pricing_groups.map { |p| [p.id, p.price_factor.to_f] }.to_h.to_json}
+
+    numbro.culture culture_options['#{I18n.locale}']
     $pricing_group_select = $('#alternate_price_pricing_group_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->
         factor = price_factors[index]
-        retail_price = $('#product_retail_price').val()
+        retail_price = numbro().unformat $('#product_retail_price').val()
         if factor
-          $('#alternate_price_price_factor').val factor
-          $('#alternate_price_retail_price').val factor * retail_price
+          $('#alternate_price_price_factor').val numbro(factor).format('0.00')
+          $('#alternate_price_retail_price').val numbro(factor * retail_price).format('0.00')
           $('#create_alternate_price').attr disabled: false
         else
           $('#alternate_price_price_factor').val ''
