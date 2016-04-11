@@ -49,6 +49,8 @@
 //= require unobtrusive_flash_bootstrap
 //= require wiselinks
 //= require nprogress
+//= require ./numbro.min.js
+//= require ./languages.min.js
 //= require ./jquery.smartmenus.js
 //= require ./jquery.smartmenus.bootstrap.js
 //= require vis
