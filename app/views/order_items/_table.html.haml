@@ -15,6 +15,6 @@
         %th.text-right.currency
           = render partial: 'orders/grand_total', object: order, as: :order
     %tbody
-      = render partial: 'order_items/row', collection: order.order_items.sorted, as: :order_item
+      = render partial: 'order_items/row', collection: order.order_items.includes(:product, :adjustments).sorted, as: :order_item
       - if order.adjustments.any?
         = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment

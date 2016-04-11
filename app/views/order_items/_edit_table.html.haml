@@ -18,4 +18,4 @@
             = render partial: 'orders/grand_total', object: order, as: :order
           %th
       %tbody
-        = render partial: 'order_items/edit_row', collection: order.order_items.sorted, as: :order_item
+        = render partial: 'order_items/edit_row', collection: order.order_items.includes(:product).sorted, as: :order_item
