@@ -9,13 +9,13 @@
     %thead
       %tr
         %th.col-xs-7= col(PricingGroup, :name)
-        %th.col-xs-2= col(PricingGroup, :price_factor)
+        %th.col-xs-2= col(PricingGroup, :markup_percent)
         %th.actions
 
     %tbody
       = content_tag_for :tr, @pricing_groups do |pricing_group|
         %td= pricing_group.name
-        %td= number_with_precision(pricing_group.price_factor, precision: 2)
+        %td= number_with_precision(pricing_group.markup_percent, precision: 2)
         %td.actions
           = link_to icon('info', t('actions.show')), admin_pricing_group_path(pricing_group), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(PricingGroup)

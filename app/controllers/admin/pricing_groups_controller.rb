@@ -81,7 +81,7 @@ class Admin::PricingGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pricing_group_params
       params.require(:pricing_group).permit(
-        :name, :price_factor
+        :name, :markup_percent
       )
     end
 end

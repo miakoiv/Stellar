@@ -160,7 +160,7 @@ en:
         album_ids: Photo albums
       pricing_group:
         name: Name
-        price_factor: Price factor
+        markup_percent: Markup %
       product:
         category_ids: Categories
         compound: Compound product

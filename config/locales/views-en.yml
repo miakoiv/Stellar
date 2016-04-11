@@ -81,7 +81,7 @@ en:
       new:
         new_pricing_group: New pricing group
       form:
-        price_factor_help: Retail prices are multiplied by this price factor by default in this pricing group.
+        markup_percent_help: The default markup applied to alternate prices.
     products:
       index:
         new_product: New product

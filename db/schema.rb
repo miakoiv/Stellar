@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411093637) do
+ActiveRecord::Schema.define(version: 20160411124457) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -290,11 +290,11 @@ ActiveRecord::Schema.define(version: 20160411093637) do
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "pricing_groups", force: :cascade do |t|
-    t.integer  "store_id",     limit: 4
-    t.string   "name",         limit: 255,                                       null: false
-    t.decimal  "price_factor",             precision: 4, scale: 3, default: 1.0, null: false
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
+    t.integer  "store_id",       limit: 4
+    t.string   "name",           limit: 255,                                       null: false
+    t.decimal  "markup_percent",             precision: 5, scale: 2, default: 0.0, null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
   end
 
   add_index "pricing_groups", ["store_id"], name: "index_pricing_groups_on_store_id", using: :btree

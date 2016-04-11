@@ -61,7 +61,7 @@ fi:
       new:
         new_pricing_group: Uusi hintaryhmä
       form:
-        price_factor_help: Myyntihinta kerrotaan oletuksena tällä kertoimella asetettaessa hintaa tähän hintaryhmään.
+        markup_percent_help: Oletuslisäprosentti hintaryhmän hinnoille.
     products:
       index:
         new_product: Uusi tuote

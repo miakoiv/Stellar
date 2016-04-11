@@ -4,7 +4,7 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        = f.number_field :price_factor, step: 0.01, required: true, help: t('.price_factor_help')
+        = f.number_field :markup_percent, step: 0.01, required: true, help: t('.markup_percent_help')
       - unless locked
         %fieldset.actions
           = f.form_group do

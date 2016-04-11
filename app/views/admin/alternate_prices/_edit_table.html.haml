@@ -3,8 +3,8 @@
     %thead
       %tr
         %th.col-xs-4= col(AlternatePrice, :pricing_group_id)
-        %th.col-xs-2.text-right= col(AlternatePrice, :price_factor)
         %th.col-xs-3.text-right= col(AlternatePrice, :retail_price)
+        %th.col-xs-2.text-right= col(AlternatePrice, :markup_percent)
         %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
         %th.actions
 
@@ -18,8 +18,8 @@
         %tr
           %td.col-xs-4
             = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'form-control'}
-          %td.col-xs-2= f.text_field :price_factor, class: 'form-control text-right', disabled: true
           %td.col-xs-3= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
+          %td.col-xs-2= f.text_field :markup_percent, class: 'form-control text-right', disabled: true
           %td.col-xs-2
           %td.actions
             = f.button id: 'create_alternate_price', class: 'btn btn-default', disabled: true do
@@ -28,19 +28,19 @@
 :coffee
   jQuery ->
     culture_options = #{Store.culture_options.to_json}
-    price_factors = #{current_store.pricing_groups.map { |p| [p.id, p.price_factor.to_f] }.to_h.to_json}
+    markup_percents = #{current_store.pricing_groups.map { |p| [p.id, p.markup_percent.to_f] }.to_h.to_json}
 
     numbro.culture culture_options['#{I18n.locale}']
     $pricing_group_select = $('#alternate_price_pricing_group_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->
-        factor = price_factors[index]
-        retail_price = numbro().unformat $('#product_retail_price').val()
-        if factor
-          $('#alternate_price_price_factor').val numbro(factor).format('0.00')
-          $('#alternate_price_retail_price').val numbro(factor * retail_price).format('0.00')
+        markup_percent = markup_percents[index]
+        trade_price = numbro().unformat $('#product_trade_price').val()
+        if markup_percent
+          $('#alternate_price_markup_percent').val numbro(markup_percent).format('0.00')
+          $('#alternate_price_retail_price').val numbro((1 + markup_percent/100) * trade_price).format('0.00')
           $('#create_alternate_price').attr disabled: false
         else
-          $('#alternate_price_price_factor').val ''
+          $('#alternate_price_markup_percent').val ''
           $('#alternate_price_retail_price').val ''
           $('#create_alternate_price').attr disabled: true

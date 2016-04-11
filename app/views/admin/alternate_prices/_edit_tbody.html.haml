@@ -1,7 +1,7 @@
 = content_tag_for :tr, product.alternate_prices do |alternate_price|
   %td= alternate_price.pricing_group
-  %td.text-right= number_with_precision(alternate_price.price_factor, precision: 2)
   %td.text-right.currency= humanized_money_with_symbol alternate_price.retail_price
+  %td.text-right= number_with_precision(alternate_price.markup_percent, precision: 2)
   %td.text-right= number_with_precision(alternate_price.margin_percent, precision: 2)
   %td.actions
     = link_to icon('remove'), admin_alternate_price_path(alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
