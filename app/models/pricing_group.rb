@@ -7,7 +7,7 @@ class PricingGroup < ActiveRecord::Base
 
   #---
   belongs_to :store
-  has_many :retail_prices
+  has_many :alternate_prices, dependent: :destroy
 
   default_scope -> { order(:name) }
 
