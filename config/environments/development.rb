@@ -49,7 +49,7 @@ Rails.application.configure do
     Bullet.alert = false
     Bullet.bullet_logger = false
     Bullet.rails_logger = true
-    Bullet.console = true
-    Bullet.add_footer = true
+    Bullet.console = false
+    Bullet.add_footer = false
   end
 end
