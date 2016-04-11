@@ -42,4 +42,14 @@ Rails.application.configure do
 
   # Whitelist our virtual IP address block to the web console.
   config.web_console.whitelisted_ips = '10.2.0.0/16'
+
+  # Bullet configuration.
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = false
+    Bullet.bullet_logger = false
+    Bullet.rails_logger = true
+    Bullet.console = true
+    Bullet.add_footer = true
+  end
 end

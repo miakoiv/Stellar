@@ -54,6 +54,9 @@ GEM
       railties (>= 3.1.0)
     bootstrap_form (2.3.0)
     builder (3.2.2)
+    bullet (5.0.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.9.0)
     byebug (8.2.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -268,6 +271,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    uniform_notifier (1.9.0)
     unobtrusive_flash (3.2.0)
       railties
     visjs-rails (4.2.0.4)
@@ -299,6 +303,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-generators (~> 3.3.4)
   bootstrap_form
+  bullet
   byebug
   coffee-rails (~> 4.1.0)
   daemons

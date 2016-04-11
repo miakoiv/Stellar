@@ -131,6 +131,9 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # Bullet finds n+1 queries and unused eager loading.
+  gem 'bullet'
+
   # Favicon generation.
   gem 'rails_real_favicon'
 end
