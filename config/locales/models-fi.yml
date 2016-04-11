@@ -79,6 +79,7 @@ fi:
         retail_price: Myyntihinta
         markup_percent: Lisä-%
         margin_percent: Kate-%
+        price_factor: Kerroin
       category:
         parent_category_id: Pääryhmä
         live: Aktiivinen
@@ -159,6 +160,7 @@ fi:
         album_ids: Kuva-albumit
       pricing_group:
         name: Nimi
+        price_factor: Hintakerroin
       product:
         category_ids: Tuoteryhmät
         compound: Yhdistelmätuote

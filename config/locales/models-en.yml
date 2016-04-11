@@ -79,6 +79,7 @@ en:
         retail_price: Retail price
         markup_percent: Markup %
         margin_percent: Margin %
+        price_factor: Factor
       category:
         parent_category_id: Parent category
         live: Enabled
@@ -159,6 +160,7 @@ en:
         album_ids: Photo albums
       pricing_group:
         name: Name
+        price_factor: Price factor
       product:
         category_ids: Categories
         compound: Compound product

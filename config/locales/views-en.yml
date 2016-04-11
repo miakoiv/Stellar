@@ -80,6 +80,8 @@ en:
         new_pricing_group: New pricing group
       new:
         new_pricing_group: New pricing group
+      form:
+        price_factor_help: Retail prices are multiplied by this price factor by default in this pricing group.
     products:
       index:
         new_product: New product

@@ -60,6 +60,8 @@ fi:
         new_pricing_group: Uusi hintaryhmä
       new:
         new_pricing_group: Uusi hintaryhmä
+      form:
+        price_factor_help: Myyntihinta kerrotaan oletuksena tällä kertoimella asetettaessa hintaa tähän hintaryhmään.
     products:
       index:
         new_product: Uusi tuote
