@@ -179,6 +179,7 @@ class Order < ActiveRecord::Base
     failed_items = copy_items_to(another_order)
     another_order.update(
       contact_person: customer_name,
+      contact_email: customer_email,
       contact_phone: customer_phone,
       has_billing_address: has_billing_address,
       billing_address: billing_address,
