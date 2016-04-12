@@ -95,6 +95,7 @@ Rails.application.routes.draw do
       post :reorder, on: :collection
     end
     resources :users
+    resources :customer_assets
     resources :pricing_groups
 
     post '/images/reorder', to: 'images#reorder', as: :reorder_images

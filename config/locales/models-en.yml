@@ -10,6 +10,9 @@ en:
       category:
         one: category
         other: categories
+      customer_asset:
+        one: customer asset
+        other: customer assets
       iframe:
         one: embed
         other: embeds
@@ -87,6 +90,11 @@ en:
         name: Name
         description: Description
         product_scope: Product sorting
+      customer_asset:
+        user_id: Customer
+        product_id: Product
+        amount: Amount
+        value: Value
       iframe:
         html: HTML code
       image:

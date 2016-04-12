@@ -60,6 +60,11 @@ en:
         new_category: New category
       new:
         new_category: New category
+    customer_assets:
+      index:
+        new_customer_asset: New asset
+      new:
+        new_customer_asset: New asset
     orders:
       show:
         forward: Forward to cart

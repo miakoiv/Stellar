@@ -1,0 +1,30 @@
+= bootstrap_form_for [:admin, @customer_asset], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.select :product_id, current_store.products.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize-tall'}
+        = f.select :user_id, current_store.users.customer.map { |u| [u.to_s, u.id] }, {include_blank: true}, {class: 'selectize'}
+      - unless locked
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
+
+:coffee
+  options = #{current_store.products.map { |p|
+    {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
+  }.to_json}
+
+  $('#customer_asset_product_id').selectize
+    dropdownParent: 'body'
+    options: options
+    maxItems: 1
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'title', 'subtitle']
+    diacritics: false
+    render:
+      item: (item, escape) ->
+        '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
+      option: (item, escape) ->
+        '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><div><strong>' + escape(item.title) + ' </strong>' + (if item.subtitle then escape(item.subtitle) else '') + '</div><div class="small text-right">' + escape(item.code) + '</div></div></div>'

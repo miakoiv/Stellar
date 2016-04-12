@@ -38,6 +38,7 @@ en:
           promotion_editor: promotion editor
           user_manager: user manager
           album_editor: album editor
+          asset_editor: asset editor
           store_admin: store administrator
           superuser: superuser
       user:

@@ -1,0 +1,26 @@
+.page-header
+  - if current_user.can_create?(CustomerAsset)
+    = link_to new_admin_customer_asset_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_customer_asset'))
+  %h1= icon('archive', title(CustomerAsset, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(CustomerAsset, :product_id)
+        %th= col(CustomerAsset, :user_id)
+        %th.col-xs-1.text-right= col(CustomerAsset, :amount)
+        %th.col-xs-2.text-right= col(CustomerAsset, :value)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @customer_assets do |customer_asset|
+        %td= customer_asset.product
+        %td= customer_asset.user
+        %td.text-right= customer_asset.amount
+        %td.text-right.currency= humanized_money_with_symbol customer_asset.value
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_customer_asset_path(customer_asset), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(CustomerAsset)
+            = link_to icon('edit', t('actions.edit')), edit_admin_customer_asset_path(customer_asset), class: 'btn btn-default btn-sm'

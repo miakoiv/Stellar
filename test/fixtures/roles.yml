@@ -52,6 +52,10 @@ album_editor:
   id: 20
   name: album_editor
   appearance: success
+asset_editor:
+  id: 21
+  name: asset_editor
+  appearance: info
 store_admin:
   id: 95
   name: store_admin

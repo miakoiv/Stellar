@@ -40,6 +40,11 @@ fi:
         new_category: Uusi tuoteryhmä
       new:
         new_category: Uusi tuoteryhmä
+    customer_assets:
+      index:
+        new_customer_asset: Uusi omistus
+      new:
+        new_customer_asset: Uusi omistus
     orders:
       show:
         forward: Välitä ostoskoriin

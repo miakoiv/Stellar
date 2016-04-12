@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_customer_assets_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('archive', t('.new_customer_asset'))
+
+.row
+  .col-sm-6
+    = render partial: 'form', locals: {locked: false}

@@ -14,6 +14,9 @@ en:
         notice: "Category %{category} updated."
       destroy:
         notice: "Category %{category} deleted."
+    customer_assets:
+      create:
+        notice: "Customer asset %{customer_asset} created."
     images:
       create:
         error: "Image upload failed."

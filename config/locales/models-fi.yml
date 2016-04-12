@@ -10,6 +10,9 @@ fi:
       category:
         one: tuoteryhmä
         other: tuoteryhmät
+      customer_asset:
+        one: asiakkaan omistus
+        other: asiakkaan omistukset
       iframe:
         one: upotus
         other: upotukset
@@ -87,6 +90,11 @@ fi:
         name: Nimi
         description: Kuvaus
         product_scope: Tuotteiden järjestys
+      customer_asset:
+        user_id: Asiakas
+        product_id: Tuote
+        amount: Määrä
+        value: Arvo
       iframe:
         html: HTML-koodi
       image:

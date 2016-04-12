@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
   # Users are restricted to interacting with only one store.
   belongs_to :store
 
+  # Users (customers) collect assets by ordering products.
+  has_many :customer_assets, dependent: :destroy
+
   has_many :orders, dependent: :destroy
 
   default_scope { order(group: :desc, name: :asc) }
