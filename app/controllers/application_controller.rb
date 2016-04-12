@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
     # is done by StoreController#pricing and its id is retained in a cookie.
     # If current user has her own pricing group set, it will take precedence.
     def set_pricing_group
-      if current_user.pricing_group.present?
+      if user_signed_in? && current_user.pricing_group.present?
         @pricing_group = current_user.pricing_group
       else
         pricing_group_id = cookies[:pricing_group_id]
