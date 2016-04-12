@@ -66,11 +66,11 @@ class Order < ActiveRecord::Base
 
   #---
   # Define methods to use archived copies of order attributes if the order
-  # is approved, otherwise go through the associations. See #archive! below.
+  # is concluded, otherwise go through the associations. See #archive! below.
   %w[store_name user_name user_email user_phone].each do |method|
     association, association_method = method.split('_', 2)
     define_method(method.to_sym) do
-      approved? ? self[method] : send(association).send(association_method)
+      concluded? ? self[method] : send(association).send(association_method)
     end
   end
   def order_type_name
