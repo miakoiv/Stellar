@@ -36,6 +36,9 @@ class User < ActiveRecord::Base
   # Users are restricted to interacting with only one store.
   belongs_to :store
 
+  # User may optionally have a fixed pricing group set.
+  belongs_to :pricing_group
+
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 
