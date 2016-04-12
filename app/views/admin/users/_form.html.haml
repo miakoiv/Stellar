@@ -3,16 +3,16 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
         = f.text_field :name, required: true
         = f.text_field :email, required: true
         = f.telephone_field :phone, required: true
-        = f.text_field :pricing_factor, required: true
         = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
         - if @user.new_record?
           = f.password_field :password, required: true
           = f.password_field :password_confirmation, required: true
-      %fieldset{disabled: locked}
+      %fieldset.bg-warning{disabled: locked}
+        = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
+        = f.select :pricing_group_id, current_store.pricing_groups.map { |g| [g.to_s, g.id] }, {include_blank: true}, {class: 'selectize'}
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}
       - unless locked

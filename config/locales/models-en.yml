@@ -248,7 +248,7 @@ en:
         name: Name
         group: Group
         role_ids: Roles
-        pricing_factor: Pricing factor
+        pricing_group_id: Pricing group
         locale: Language
         current_password: Current password
         email: E-mail address

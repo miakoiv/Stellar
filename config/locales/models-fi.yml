@@ -248,7 +248,7 @@ fi:
         name: Nimi
         group: Ryhmä
         role_ids: Roolit
-        pricing_factor: Hintakerroin
+        pricing_group_id: Hintaryhmä
         locale: Kieli
         current_password: Nykyinen salasana
         email: Sähköpostiosoite
