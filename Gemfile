@@ -134,6 +134,9 @@ group :development, :test do
   # Bullet finds n+1 queries and unused eager loading.
   gem 'bullet'
 
+  # Entity-Relationship Diagrams.
+  gem 'rails-erd'
+
   # Favicon generation.
   gem 'rails_real_favicon'
 end

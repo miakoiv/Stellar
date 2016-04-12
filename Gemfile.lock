@@ -58,6 +58,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     byebug (8.2.2)
+    choice (0.2.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -206,6 +207,11 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-erd (1.4.6)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     rails_real_favicon (0.0.3)
@@ -234,6 +240,7 @@ GEM
       railties (>= 3.0, < 4.3)
       roadie (~> 3.1)
     rolify (5.0.0)
+    ruby-graphviz (1.2.2)
     ruby_parser (3.8.1)
       sexp_processor (~> 4.1)
     rubyzip (1.2.0)
@@ -335,6 +342,7 @@ DEPENDENCIES
   paperclip (~> 4.2)
   quiet_assets
   rails (= 4.2.5.2)
+  rails-erd
   rails_real_favicon
   roadie-rails
   rolify
