@@ -242,9 +242,10 @@ i.icon {
   padding-top: 5px;
 }
 
-.selectize-input { vertical-align: top; }
-
 input[type=number] { min-width: 60px; }
+
+.selectize-input { vertical-align: top; }
+.selectize-tall .selectize-dropdown-content { min-height: 600px; }
 
 .form-control[disabled],
 fieldset[disabled] .form-control,
