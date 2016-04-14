@@ -63,6 +63,7 @@ en:
     customer_assets:
       index:
         new_customer_asset: New asset
+        grand_total: Total
       new:
         new_customer_asset: New asset
     orders:

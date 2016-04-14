@@ -1,0 +1,7 @@
+= content_tag_for :tr, customer_asset.asset_entries.includes(:source) do |asset_entry|
+  %td= l(asset_entry.recorded_at)
+  %td= asset_entry.source
+  %td.text-right= asset_entry.amount
+  %td.text-right.currency= humanized_money_with_symbol asset_entry.value
+  %td= asset_entry.note
+  %td

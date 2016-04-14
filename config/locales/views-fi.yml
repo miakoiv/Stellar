@@ -43,6 +43,7 @@ fi:
     customer_assets:
       index:
         new_customer_asset: Uusi omistus
+        grand_total: Yhteensä
       new:
         new_customer_asset: Uusi omistus
     orders:

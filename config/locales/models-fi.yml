@@ -7,6 +7,9 @@ fi:
       alternate_price:
         one: hinta
         other: hinnat
+      asset_entry:
+        one: kirjaus
+        other: kirjaukset
       category:
         one: tuoteryhmä
         other: tuoteryhmät
@@ -83,6 +86,13 @@ fi:
         markup_percent: Lisä-%
         margin_percent: Kate-%
         price_factor: Kerroin
+      asset_entry:
+        customer_asset_id: Asiakkaan omistus
+        recorded_at: Pvm
+        source_id: Viite
+        amount: Määrä
+        value: Arvo
+        note: Selite
       category:
         parent_category_id: Pääryhmä
         live: Aktiivinen

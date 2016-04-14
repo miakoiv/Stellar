@@ -8,7 +8,8 @@
     %span.small= @customer_asset.user
 
 .row
-  .col-md-7
+  .col-md-5
     = render partial: 'form', locals: {locked: true}
 
-  .col-md-5
+  .col-md-7
+    = render partial: 'admin/asset_entries/edit_table', object: @customer_asset, as: :customer_asset

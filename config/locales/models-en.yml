@@ -7,6 +7,9 @@ en:
       alternate_price:
         one: price
         other: prices
+      asset_entry:
+        one: entry
+        other: entries
       category:
         one: category
         other: categories
@@ -83,6 +86,13 @@ en:
         markup_percent: Markup %
         margin_percent: Margin %
         price_factor: Factor
+      asset_entry:
+        customer_asset_id: Customer asset
+        recorded_at: Date
+        source_id: Reference
+        amount: Amount
+        value: Value
+        note: Note
       category:
         parent_category_id: Parent category
         live: Enabled

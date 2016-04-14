@@ -112,9 +112,11 @@ class Order < ActiveRecord::Base
   alias concluded? conclusion
 
   # Concluding an order archives the order and its order items.
+  # For each order item, an asset entry is created.
   def conclusion=(status)
     if ['1', 1, true].include?(status)
       if !concluded?
+        create_asset_entries!
         archive!
         update(concluded_at: Time.current)
       end
@@ -413,6 +415,10 @@ class Order < ActiveRecord::Base
       default_price = store.shipping_cost_product.retail_price
       return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at.to_money
       return 0.to_money
+    end
+
+    def create_asset_entries!
+      CustomerAsset.create_from(self)
     end
 
     def archive!
