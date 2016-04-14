@@ -64,6 +64,12 @@ class Image < ActiveRecord::Base
     !!(attachment_content_type =~ /\Aimage/)
   end
 
+  # The style given to Froala is lightbox sized for bitmaps,
+  # original for documents and other non-bitmaps.
+  def froala_style
+    is_bitmap? ? :lightbox : :original
+  end
+
   def document_icon
     case attachment_content_type
     when %r{\Aapplication/pdf}

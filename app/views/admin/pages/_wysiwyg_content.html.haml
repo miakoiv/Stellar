@@ -14,9 +14,7 @@
       key: '#{current_store.froala_key}'
       language: '#{current_store.locale}'
       toolbarButtons: [
-        'paragraphFormat', 'bold', 'italic', 'underline', '-',
-        'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', '-',
-        'undo', 'redo', 'html'
+        'paragraphFormat', 'bold', 'italic', 'underline', '-', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertFile', '-', 'undo', 'redo', 'html'
       ]
       toolbarInline: true
       placeholderText: ''
@@ -33,8 +31,18 @@
       imageUploadParam: 'image[attachment]'
       imageUploadParams:
         authenticity_token: '#{form_authenticity_token}'
+      fileMaxSize: 32 * 1024 * 1024
+      fileUploadParam: 'image[attachment]'
+      fileUploadParams:
+        authenticity_token: '#{form_authenticity_token}'
+      fileUploadURL: '#{admin_page_images_path(@page.id)}'
     .on 'froalaEditor.image.removed', (e, editor, $img) ->
       $.post '#{admin_delete_image_path}', {
         url: $img.attr('src')
+        authenticity_token: '#{form_authenticity_token}'
+      }
+    .on 'froalaEditor.file.unlink', (e, editor, $link) ->
+      $.post '#{admin_delete_image_path}', {
+        url: $link.attr('href')
         authenticity_token: '#{form_authenticity_token}'
       }

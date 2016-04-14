@@ -31,6 +31,7 @@
 //= require plugins/paragraph_format.min.js
 //= require plugins/align.min.js
 //= require plugins/image.min.js
+//= require plugins/file.min.js
 //= require plugins/lists.min.js
 //= require plugins/table.min.js
 //= require plugins/code_beautifier.min.js

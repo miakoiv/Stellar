@@ -24,7 +24,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { render json: {link: @image.url(:lightbox, false)} } # for Froala
+        format.html { render json: {link: @image.url(@image.froala_style, false)} } # for Froala
         format.json { render json: @image, status: 200 } # for dropzone
       else
         format.html { render json: {error: t('.error')} }
