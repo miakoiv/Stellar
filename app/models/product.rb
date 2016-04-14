@@ -34,9 +34,11 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
   has_and_belongs_to_many :categories
+
   has_many :inventory_items, -> (product) {
     joins(:product).where('products.store_id = inventory_items.store_id')
   }
+
   has_many :order_items
   has_many :relationships, dependent: :destroy
   has_many :components, through: :relationships
@@ -52,10 +54,15 @@ class Product < ActiveRecord::Base
   # Alternate retail prices in pricing groups.
   has_many :alternate_prices, dependent: :destroy
 
+  # Customer assets referring to this product.
+  has_many :customer_assets
+
   scope :live, -> { where(live: true) }
   scope :undead, -> { where(live: false) }
   scope :real, -> { where(virtual: false) }
   scope :virtual, -> { where(virtual: true) }
+
+  scope :with_assets, -> { joins(:customer_assets).distinct }
 
   #---
   validates :code, presence: true, uniqueness: {scope: :store}

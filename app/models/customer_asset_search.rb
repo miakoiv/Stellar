@@ -14,4 +14,12 @@ class CustomerAssetSearch < Searchlight::Search
   def search_store_id
     query.where(store_id: store_id)
   end
+
+  def search_user_id
+    query.where(user_id: user_id)
+  end
+
+  def search_product_id
+    query.where(product_id: product_id)
+  end
 end

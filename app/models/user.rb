@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
   scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
   scope :non_guest, -> { where.not(group: groups[:guest]) }
 
+  scope :with_assets, -> { joins(:customer_assets).distinct }
+
   #---
   validates :name, presence: true
   validates :email, presence: true, uniqueness: {scope: :store}

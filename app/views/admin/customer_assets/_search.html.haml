@@ -1,0 +1,35 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_customer_assets_path, method: :get do |f|
+      .row
+        .col-sm-6
+          .form-group
+            = f.select :product_id, current_store.products.with_assets.map { |p| [p.to_s, p.id] }, {include_blank: true}, {multiple: true, placeholder: col(CustomerAsset, :product_id), class: 'selectize-tall'}
+        .col-sm-4
+          .form-group
+            = f.select :user_id, current_store.users.with_assets.map { |u| [u.to_s, u.id] }, {include_blank: true}, {multiple: true, placeholder: col(CustomerAsset, :user_id), class: 'selectize'}
+        .col-sm-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+:coffee
+  options = #{current_store.products.with_assets.map { |p|
+    {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
+  }.to_json}
+
+  $('#customer_asset_search_product_id').selectize
+    plugins: ['remove_button']
+    dropdownParent: 'body'
+    options: options
+    maxItems: null
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'title', 'subtitle']
+    diacritics: false
+    render:
+      item: (item, escape) ->
+        '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
+      option: (item, escape) ->
+        '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><div><strong>' + escape(item.title) + ' </strong>' + (if item.subtitle then escape(item.subtitle) else '') + '</div><div class="small text-right">' + escape(item.code) + '</div></div></div>'
