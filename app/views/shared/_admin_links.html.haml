@@ -12,6 +12,8 @@
   = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'), admin_promotions_path, wrap_tag: :li
 - if current_user.has_cached_role?(:property_editor)
   = active_link_to icon('eyedropper', title(Property, count: 2), class: 'fa-fw'), admin_properties_path, wrap_tag: :li
+- if current_user.has_cached_role?(:asset_editor)
+  = active_link_to icon('archive', title(CustomerAsset, count: 2), class: 'fa-fw'), admin_customer_assets_path, wrap_tag: :li
 - if current_user.has_cached_role?(:page_editor)
   = active_link_to icon('files-o', title(Page, count: 2), class: 'fa-fw'), admin_pages_path, wrap_tag: :li
 - if current_user.has_cached_role?(:album_editor)
