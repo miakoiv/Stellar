@@ -23,6 +23,8 @@ class CheckoutController < ApplicationController
       return redirect_to cart_path
     end
 
+    @order.address_to(current_user)
+
     if @order.has_payment?
       @payment_gateway = @order.payment_gateway.new(order: @order)
     end
