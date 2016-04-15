@@ -16,29 +16,38 @@
       .col-sm-4
         = f.telephone_field :contact_phone
   - if @order.has_shipping?
-    .row
-      .col-sm-12
-        = f.text_field :shipping_address, required: true
-      .col-sm-4
-        = f.text_field :shipping_postalcode, required: true
-      .col-sm-4
-        = f.text_field :shipping_city, required: true
-    - if current_store.b2b_sales?
-      .row
-        .col-sm-4
-          = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        .col-sm-4
-          = f.date_field :installation_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-    = f.form_group do
-      = f.check_box :has_billing_address
-    #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}
+    %fieldset.bg-info
       .row
         .col-sm-12
-          = f.text_field :billing_address
+          = f.text_field :shipping_address, required: true
         .col-sm-4
-          = f.text_field :billing_postalcode
+          = f.text_field :shipping_postalcode, required: true
         .col-sm-4
-          = f.text_field :billing_city
+          = f.text_field :shipping_city, required: true
+      - if current_store.b2b_sales?
+        .row
+          .col-sm-4
+            = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          .col-sm-4
+            = f.date_field :installation_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+      = f.form_group do
+        = f.check_box :has_billing_address
+      #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}
+        .row
+          .col-sm-12
+            = f.text_field :billing_address
+          .col-sm-4
+            = f.text_field :billing_postalcode
+          .col-sm-4
+            = f.text_field :billing_city
+  %fieldset.gap
+    .row
+      .col-sm-4
+        = f.text_field :your_reference
+      .col-sm-4
+        = f.text_field :our_reference
+      .col-sm-4
+        = f.text_field :message
   = f.text_area :notes, rows: 4
 
   #continue-button.collapse{class: @order.paid? ? '' : 'in'}

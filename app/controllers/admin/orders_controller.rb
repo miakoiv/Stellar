@@ -93,6 +93,7 @@ class Admin::OrdersController < ApplicationController
       params.require(:order).permit(
         :order_type_id, :completed_at, :shipping_at, :installation_at,
         :approval, :conclusion,
+        :external_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :contact_email, :contact_phone,
         :billing_address, :billing_postalcode, :billing_city,

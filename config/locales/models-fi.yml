@@ -122,6 +122,10 @@ fi:
         value: Arvo
       order:
         number: tilaus nro
+        external_number: Ulkoinen nro
+        your_reference: Viitteenne
+        our_reference: Viitteemme
+        message: Merkki
         user_id: Tilaaja
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm

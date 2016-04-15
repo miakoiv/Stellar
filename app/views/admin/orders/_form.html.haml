@@ -8,9 +8,14 @@
         .conclusion.collapse{class: @order.approved? ? 'in' : ''}
           = f.form_group :conclusion do
             = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
-      %fieldset{disabled: true}
+      %fieldset.gap{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
-      %fieldset{disabled: locked || @order.approved?}
+      %fieldset.bg-info{disabled: locked}
+        = f.text_field :external_number
+        = f.text_field :your_reference
+        = f.text_field :our_reference
+        = f.text_field :message
+      %fieldset.gap{disabled: locked || @order.approved?}
         = f.text_field :customer_name, required: true
         = f.text_field :customer_email, required: true
         = f.telephone_field :customer_phone, required: true

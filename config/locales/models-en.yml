@@ -122,6 +122,10 @@ en:
         value: Value
       order:
         number: order №
+        external_number: External №
+        your_reference: Your reference
+        our_reference: Our reference
+        message: Message
         user_id: From
         order_type_id: Order type
         completed_at: Ordered

@@ -6,13 +6,17 @@
         = f.text_field :customer_name
         = f.text_field :customer_email
         = f.telephone_field :customer_phone
-      %fieldset.bg-warning{disabled: locked}
-        - if @order.has_shipping?
+      - if @order.has_shipping?
+        %fieldset.bg-warning{disabled: locked}
           = f.date_field :shipping_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           = f.date_field :installation_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       %fieldset.bg-info{disabled: locked}
+        = f.text_field :your_reference
+        = f.text_field :our_reference
+        = f.text_field :message
+      %fieldset.gap{disabled: locked}
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.text_field :contact_email
