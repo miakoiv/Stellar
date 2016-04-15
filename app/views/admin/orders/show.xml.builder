@@ -1,7 +1,5 @@
 xml.order do
-  xml.order_type @order.order_type
   xml.order_date @order.completed_at.to_date
-  xml.store_name @order.store_name
   xml.shipping_date @order.shipping_at
 
   xml.customer do
@@ -34,6 +32,7 @@ xml.order do
         xml.subtitle item.product_subtitle
         xml.amount item.amount
         xml.price item.price
+        xml.shipping_date @order.shipping_at
       end
     end
   end
