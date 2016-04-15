@@ -263,6 +263,14 @@ en:
         current_password: Current password
         email: E-mail address
         phone: Phone number
+        billing_address: Billing address
+        billing_postalcode: Postal code
+        billing_city: City
+        billing_country: County
+        shipping_address: Shipping address
+        shipping_postalcode: Postal code
+        shipping_city: City
+        shipping_country: Country
         password: Password
         password_confirmation: Confirm password
         remember_me: Remember me

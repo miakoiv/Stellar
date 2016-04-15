@@ -263,6 +263,14 @@ fi:
         current_password: Nykyinen salasana
         email: Sähköpostiosoite
         phone: Puhelinnumero
+        billing_address: Laskutusosoite
+        billing_postalcode: Postinro
+        billing_city: Toimipaikka
+        billing_country: Maa
+        shipping_address: Toimitusosoite
+        shipping_postalcode: Postinro
+        shipping_city: Toimipaikka
+        shipping_country: Maa
         password: Salasana
         password_confirmation: Salasanan vahvistus
         remember_me: Muista minut
