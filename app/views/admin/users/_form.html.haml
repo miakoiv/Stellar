@@ -6,6 +6,20 @@
         = f.text_field :name, required: true
         = f.text_field :email, required: true
         = f.telephone_field :phone, required: true
+      %fieldset.bg-info{disabled: locked}
+        = f.text_field :shipping_address
+        .form-group
+          .col-sm-offset-4.col-sm-3
+            = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
+          .col-sm-5
+            = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
+        = f.text_field :billing_address
+        .form-group
+          .col-sm-offset-4.col-sm-3
+            = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
+          .col-sm-5
+            = f.text_field_without_bootstrap :billing_city, class: 'form-control'
+      %fieldset.gap{disabled: locked}
         = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
         - if @user.new_record?
           = f.password_field :password, required: true
