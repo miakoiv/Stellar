@@ -14,5 +14,8 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-lg-7
-    = render partial: 'order_items/edit_table', object: @order, as: :order
-    = render partial: 'orders/add_products', object: @order, as: :order
+    - if @order.is_quote?
+      = render partial: 'order_items/edit_table', object: @order, as: :order
+      = render partial: 'orders/add_products', object: @order, as: :order
+    - else
+      = render partial: 'order_items/table', object: @order, as: :order
