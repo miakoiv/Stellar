@@ -35,8 +35,9 @@ class Promotion < ActiveRecord::Base
   # created and associated with the promotion.
   def self.handler_types
     [
+      'PromotionHandler::BulkDiscount',
+      'PromotionHandler::FreebieBundle',
       'PromotionHandler::Vanilla',
-      'PromotionHandler::FreebieBundle'
     ]
   end
 

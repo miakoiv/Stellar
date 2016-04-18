@@ -77,6 +77,8 @@ fi:
       form:
         default_pricing: Perushinnat
     promotion_handler:
+      bulk_discount:
+        discount_percent_help: Jokainen ym. erä tuotteita alentaa tuotteiden hintaa kumulatiivisesti annetulla prosentilla.
       freebie_bundle:
         discount_percent_help: Alentaa halvimman tuotteen hintaa annetulla prosentilla, kun kampanjatuotteita ostetaan ym. määrä.
     promotions:

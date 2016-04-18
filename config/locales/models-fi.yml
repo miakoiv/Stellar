@@ -58,8 +58,9 @@ fi:
       promotion:
         one: kampanja
         other: kampanjat
-      promotion_handler/vanilla: manuaalinen hinnoittelu
+      promotion_handler/bulk_discount: määräalennus
       promotion_handler/freebie_bundle: alennettu tuote paketissa
+      promotion_handler/vanilla: manuaalinen hinnoittelu
       property:
         one: ominaisuus
         other: ominaisuudet
@@ -230,6 +231,9 @@ fi:
         category_ids_string: Lisättävät tuoteryhmät
       promotion_handler:
         description: Selite
+      promotion_handler/bulk_discount:
+        required_items: Erän koko
+        discount_percent: Alenna hintaa
       promotion_handler/freebie_bundle:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa

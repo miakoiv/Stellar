@@ -97,6 +97,8 @@ en:
       form:
         default_pricing: Default pricing
     promotion_handler:
+      bulk_discount:
+        discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.
       freebie_bundle:
         discount_percent_help: The cheapest item is discounted by this percentage when the number of items purchased matches.
     promotions:
