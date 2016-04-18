@@ -1,15 +1,19 @@
 - meta_tags_for(@product)
 
-.categories.hidden-print
-  %ul= render @categories
+#categories-wrap
+  .categories.hidden-print
+    %ul= render @categories
   = render partial: 'subcategories'
 
-.search-panel{style: 'display: none'}
+#search-panel-wrap
+  .search-panel{style: 'display: none'}
 
-.products{style: 'display: none'}
+#products-wrap
+  .products{style: 'display: none'}
 
-.product-detail
-  = render partial: 'products/product_detail', object: @product, as: :product
+#product-detail-wrap
+  .product-detail
+    = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
   jQuery ->

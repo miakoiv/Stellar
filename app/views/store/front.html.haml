@@ -1,20 +1,24 @@
 - meta_tags_for(current_store)
 
-.categories.hidden-print
-  %ul= render @categories
+#categories-wrap
+  .categories.hidden-print
+    %ul= render @categories
   = render partial: 'subcategories'
 
-.search-panel{style: 'display: none'}
+#search-panel-wrap
+  .search-panel{style: 'display: none'}
 
-.products{class: current_store.masonry? ? 'brickwork' : ''}
-  .page-header.visible-print
-    %h1
-      = current_store.to_s
-      %small= @category.to_s
-  .product-grid.collapse.in
-    %ul= render @products
-  .product-list.collapse
-    .panel.panel-default
-      = render partial: 'products/table', object: @products, as: :products
+#products-wrap
+  .products{class: current_store.masonry? ? 'brickwork' : ''}
+    .page-header.visible-print
+      %h1
+        = current_store.to_s
+        %small= @category.to_s
+    .product-grid.collapse.in
+      %ul= render @products
+    .product-list.collapse
+      .panel.panel-default
+        = render partial: 'products/table', object: @products, as: :products
 
-.product-detail{style: 'display: none'}
+#product-detail-wrap
+  .product-detail{style: 'display: none'}

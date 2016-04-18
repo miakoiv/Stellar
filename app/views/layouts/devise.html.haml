@@ -2,17 +2,20 @@
 %html
   %head
     = render partial: 'shared/metadata'
-    %title Spry
-  %body
-    %nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
-      .container
+    = render partial: 'favicon'
+  %body{class: current_store.theme}
+    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .content
         .navbar-header
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             %span.sr-only Toggle navigation
             = icon('bars')
           = link_to branding(current_store), root_path, class: 'navbar-brand'
 
-    .container
+    #main-wrap
       = yield
+
+    %footer.footer
+      = render partial: 'shared/footer'
 
     .unobtrusive-flash-container

@@ -1,28 +1,29 @@
-.page-header
-  = link_to cart_path, class: 'btn btn-default' do
-    = icon('chevron-circle-left', t('actions.back'))
-  %h1.hidden-print
-    = icon('shopping-cart', t('checkout.title'))
-    %span.small= @order.order_type
-  %h1.visible-print
-    = current_store
-    %span.small= @order.order_type
+.content
+  .page-header
+    = link_to cart_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+    %h1.hidden-print
+      = icon('shopping-cart', t('checkout.title'))
+      %span.small= @order.order_type
+    %h1.visible-print
+      = current_store
+      %span.small= @order.order_type
 
-#message-failure.collapse.hidden-print
-  .alert.alert-danger
-#message-success.collapse.hidden-print
-  .alert.alert-success
-    %p.pull-right= link_to icon('print', t('checkout.receipt')), '#print', class: 'btn btn-default'
-    = t('checkout.messages.success_html')
+  #message-failure.collapse.hidden-print
+    .alert.alert-danger
+  #message-success.collapse.hidden-print
+    .alert.alert-success
+      %p.pull-right= link_to icon('print', t('checkout.receipt')), '#print', class: 'btn btn-default'
+      = t('checkout.messages.success_html')
 
-.row
-  .col-lg-6
-    .panel.panel-default
-      .panel-body
-        = render partial: 'checkout_form'
-        #payment-widget.collapse
-          - if @payment_gateway.present?
-            = render @payment_gateway
+  .row
+    .col-lg-6
+      .panel.panel-default
+        .panel-body
+          = render partial: 'checkout_form'
+          #payment-widget.collapse
+            - if @payment_gateway.present?
+              = render @payment_gateway
 
-  .col-lg-6
-    = render partial: 'order_items/table', object: @order, as: :order
+    .col-lg-6
+      = render partial: 'order_items/table', object: @order, as: :order
