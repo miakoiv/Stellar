@@ -13,8 +13,10 @@
     font-size: inherit;
   }
 
-  .container {
-    width: 100% !important;
+  #main-wrap {
+    & > div, & > div > div {
+      width: 640px !important;
+    }
   }
 
   .page-header {
