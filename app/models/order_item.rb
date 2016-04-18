@@ -24,6 +24,9 @@ class OrderItem < ActiveRecord::Base
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
+  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
+
+  #---
   delegate :live?, :undead?, :real?, :virtual?, to: :product
   delegate :approved?, :concluded?, to: :order
 
