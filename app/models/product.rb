@@ -33,7 +33,10 @@ class Product < ActiveRecord::Base
 
   #---
   belongs_to :store
-  has_and_belongs_to_many :categories
+
+  # A product may belong to multiple categories, and must update its own
+  # timestamp when the relationships change.
+  has_and_belongs_to_many :categories, after_add: :touch_self, after_remove: :touch_self
 
   has_many :inventory_items, -> (product) {
     joins(:product).where('products.store_id = inventory_items.store_id')
@@ -179,6 +182,10 @@ class Product < ActiveRecord::Base
   end
 
   protected
+    def touch_self
+      self.touch if persisted?
+    end
+
     def touch_categories
       categories.each(&:touch)
     end
