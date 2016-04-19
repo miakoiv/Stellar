@@ -475,20 +475,23 @@ span.shipping:before { content: ""; }
   .logo img { width: 80px; }
   .nav {
     > li {
+      float: left;
+      width: 50%;
       padding: 0;
-      border-top: 1px solid rgba(255,255,255,0.5);
       font-weight: 500;
 
       > ul {
-        margin-left: 40px;
+        padding-left: 40px;
 
         > li {
+          float: none;
+          width: auto;
           border: 0;
           font-weight: 400;
         }
       }
       a {
-        padding: 5px 0;
+        padding: 3px 0;
         color: inherit;
 
         &:hover {
