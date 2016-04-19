@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class ProductSearch - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Searchlight::Search
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Searchlight::Adapters::ActionView</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-define_search_method">::define_search_method</a>
+    
+    <li ><a href="#method-i-base_query">#base_query</a>
+    
+    <li ><a href="#method-i-search_categories">#search_categories</a>
+    
+    <li ><a href="#method-i-search_code">#search_code</a>
+    
+    <li ><a href="#method-i-search_keyword">#search_keyword</a>
+    
+    <li ><a href="#method-i-search_live">#search_live</a>
+    
+    <li ><a href="#method-i-search_store_id">#search_store_id</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-ProductSearch">
+  <h1 id="class-ProductSearch" class="class">
+    class ProductSearch
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-define_search_method" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">define_search_method</span><span
+            class="method-args">(property)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Defines a search method for a property. Using subselects makes it possible
+to match multiple properties at the same time.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="define_search_method-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">define_search_method</span>(<span class="ruby-identifier">property</span>)
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">property</span>.<span class="ruby-identifier">sluggify</span>
+  <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;search_#{key}&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;EXISTS (SELECT 1 FROM product_properties WHERE product_id = products.id AND property_id = #{property.id} AND value IN (?))&quot;</span>, <span class="ruby-identifier">send</span>(<span class="ruby-identifier">key</span>))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-base_query" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">base_query</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="base_query-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
+  <span class="ruby-constant">Product</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:categories</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:subtitle</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_categories" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_categories</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_categories-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_categories</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">categories</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">categories</span>})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_code" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_code</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_code-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_code</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;code LIKE ?&#39;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_keyword" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_keyword</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_keyword-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, code, title, subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_live" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_live</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_live-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_live</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty?</span>(<span class="ruby-identifier">live</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">live</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_store_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_store_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_store_id-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store_id</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

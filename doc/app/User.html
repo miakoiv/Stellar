@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class User - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Authority::UserAbilities</span>
+  
+  
+  
+    <li><span class="include">Authority::Abilities</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-find_for_authentication">::find_for_authentication</a>
+    
+    <li ><a href="#method-c-group_options">::group_options</a>
+    
+    <li ><a href="#method-i-appearance">#appearance</a>
+    
+    <li ><a href="#method-i-available_order_types">#available_order_types</a>
+    
+    <li ><a href="#method-i-can_see_group_orders-3F">#can_see_group_orders?</a>
+    
+    <li ><a href="#method-i-can_select_pricing_group-3F">#can_select_pricing_group?</a>
+    
+    <li ><a href="#method-i-grantable_group_options">#grantable_group_options</a>
+    
+    <li ><a href="#method-i-grantable_role_options">#grantable_role_options</a>
+    
+    <li ><a href="#method-i-label_for">#label_for</a>
+    
+    <li ><a href="#method-i-managed_groups">#managed_groups</a>
+    
+    <li ><a href="#method-i-managed_order_types">#managed_order_types</a>
+    
+    <li ><a href="#method-i-managed_users">#managed_users</a>
+    
+    <li ><a href="#method-i-password_required-3F">#password_required?</a>
+    
+    <li ><a href="#method-i-price_for_cents">#price_for_cents</a>
+    
+    <li ><a href="#method-i-shopping_cart">#shopping_cart</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-User">
+  <h1 id="class-User" class="class">
+    class User
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="GROUP_LABELS">GROUP_LABELS
+        
+        <dd>
+        
+      
+        <dt id="MANAGED_GROUPS">MANAGED_GROUPS
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-find_for_authentication" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_for_authentication</span><span
+            class="method-args">(warden_conditions)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_for_authentication-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_authentication</span>(<span class="ruby-identifier">warden_conditions</span>)
+  <span class="ruby-identifier">joins</span>(<span class="ruby-value">:store</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:email</span>], <span class="ruby-identifier">stores</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:host</span>]}).<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-group_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">group_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="group_options-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">group_options</span>
+  <span class="ruby-node">%w{reseller manufacturer}</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-constant">User</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>, <span class="ruby-identifier">group</span>), <span class="ruby-identifier">group</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-appearance" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appearance</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="appearance-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
+  <span class="ruby-constant">GROUP_LABELS</span>[<span class="ruby-identifier">group</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-available_order_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_order_types</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Order.html">Order</a> types the user has available when going
+through checkout.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="available_order_types-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_order_types</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">source_group</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-can_see_group_orders-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_see_group_orders?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This could be a separate role but for now, resellers and manufacturer users
+have permission to browse orders sent from their own group.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="can_see_group_orders-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_see_group_orders?</span>
+  <span class="ruby-identifier">reseller?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">manufacturer?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-can_select_pricing_group-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_select_pricing_group?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Reseller users are able to select a pricing group to use for retail.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="can_select_pricing_group-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_select_pricing_group?</span>
+  <span class="ruby-identifier">reseller?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-grantable_group_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">grantable_group_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="grantable_group_options-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_group_options</span>
+  <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-constant">User</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>, <span class="ruby-identifier">group</span>), <span class="ruby-identifier">group</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-grantable_role_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">grantable_role_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Roles that a user manager may grant to other users. The superuser may
+promote others to superusers.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="grantable_role_options-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_role_options</span>
+  <span class="ruby-identifier">roles</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>)
+    <span class="ruby-constant">Role</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Role</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> [<span class="ruby-value">:superuser</span>])
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">roles</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">id</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-label_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">label_for</span><span
+            class="method-args">(product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Constructs a label for given product, depending on its active promotions.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="label_for-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">label_for</span>(<span class="ruby-identifier">product</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">reseller?</span>
+  <span class="ruby-identifier">promoted_item</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">best_promoted_item</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">promoted_item</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">promoted_item</span>.<span class="ruby-identifier">description</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-managed_groups" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">managed_groups</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="managed_groups-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_groups</span>
+  <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">MANAGED_GROUPS</span>[<span class="ruby-identifier">group</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-managed_order_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">managed_order_types</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Order.html">Order</a> types the user may browse and process as an
+administrator.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="managed_order_types-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_order_types</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">destination_group</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-managed_users" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">managed_users</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Other users the user may manage.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="managed_users-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_users</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>] })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-price_for_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">price_for_cents</span><span
+            class="method-args">(product, pricing_group)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Looks up the relevant price for given product depending on user group.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="price_for_cents-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">price_for_cents</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">pricing_group</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">cost_price</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">reseller?</span>
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price</span>(<span class="ruby-identifier">pricing_group</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-shopping_cart" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">shopping_cart</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="shopping_cart-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shopping_cart</span>
+  <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">incomplete</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span>
+    <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">create</span>(
+      <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>,
+      <span class="ruby-identifier">customer_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">guest?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">name</span>,
+      <span class="ruby-identifier">customer_email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">guest?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">email</span>,
+      <span class="ruby-identifier">customer_phone</span><span class="ruby-operator">:</span> <span class="ruby-identifier">guest?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">phone</span>
+    )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-node">&quot;#{name} &lt;#{email}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-password_required-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password_required?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="password_required-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password_required?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">persisted?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password_confirmation</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
