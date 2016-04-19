@@ -13,4 +13,4 @@
           .media-right.logo= image_tag(current_store.brand_image)
     .col-xs-12.col-sm-6.col-sm-pull-2
       %ul.nav
-        = render partial: 'shared/page_link', collection: @pages, as: :page, locals: {subnav: 'nav'}
+        = render partial: 'shared/page_link', collection: @pages.footer, as: :page, locals: {subnav: 'nav'}

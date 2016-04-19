@@ -29,6 +29,9 @@ class Page < ActiveRecord::Base
   # Navbar items are created from route and primary pages.
   scope :navbar, -> { where(parent_page_id: nil).where(purpose: [0, 1]) }
 
+  # Footer gets the secondary pages.
+  scope :footer, -> { where(purpose: 2) }
+
   #---
   validates :title, presence: true
 
