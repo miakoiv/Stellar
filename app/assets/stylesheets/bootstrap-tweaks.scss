@@ -474,21 +474,21 @@ span.shipping:before { content: ""; }
   }
   .logo img { width: 80px; }
   .nav {
-    li {
-      float: left;
-      padding: 0 15px;
-      border-left: 1px solid $gray-light;
+    > li {
+      padding: 0;
+      border-top: 1px solid rgba(255,255,255,0.5);
       font-weight: 500;
 
-      ul {
-        li {
-          float: none;
+      > ul {
+        margin-left: 40px;
+
+        > li {
           border: 0;
           font-weight: 400;
         }
       }
       a {
-        padding: 0;
+        padding: 5px 0;
         color: inherit;
 
         &:hover {
