@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
   scope :navbar, -> { where(parent_page_id: nil).where(purpose: [0, 1]) }
 
   # Footer gets the secondary pages.
-  scope :footer, -> { where(purpose: 2) }
+  scope :footer, -> { where(parent_page_id: nil).secondary }
 
   #---
   validates :title, presence: true
