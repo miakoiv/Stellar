@@ -182,7 +182,7 @@ class Product < ActiveRecord::Base
   end
 
   protected
-    def touch_self
+    def touch_self(category)
       self.touch if persisted?
     end
 
