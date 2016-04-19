@@ -8,8 +8,8 @@
       .box-thumbnail
         = image_variant_tag product.cover_image, :thumbnail
     .media-body
-      %h4.media-heading
-        = product.title
+      .media-heading
+        %strong= product.title
         .small= product.subtitle
       - if can_see_pricing?
         %p.currency.text-right
