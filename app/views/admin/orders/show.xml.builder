@@ -28,6 +28,7 @@ xml.order do
     @order.order_items.each do |item|
       xml.item do
         xml.product_code item.product_code
+        xml.inventory @order.store.inventory_code
         xml.title item.product_title
         xml.subtitle item.product_subtitle
         xml.amount item.amount
