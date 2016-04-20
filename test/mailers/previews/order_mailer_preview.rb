@@ -4,11 +4,17 @@
 
 class OrderMailerPreview < ActionMailer::Preview
 
-  def order_confirmation
-    OrderMailer.order_confirmation(Order.complete.first)
-  end
+  Store.all.each do |store|
+    store.orders.complete.each do |order|
+      define_method "order_confirmation (#{store} #{order})" do
+        OrderMailer.order_confirmation(order)
+      end
+    end
 
-  def quotation
-    OrderMailer.quotation(Order.includes(:order_type).where(order_types: {is_quote: true}).first)
+    store.orders.includes(:order_type).where(order_types: {is_quote: true}).each do |quotation|
+      define_method "quotation (#{store} #{quotation})" do
+        OrderMailer.quotation(quotation)
+      end
+    end
   end
 end
