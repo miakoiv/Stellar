@@ -16,16 +16,7 @@
 //= require jquery_ujs
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
-//= require bootstrap/collapse
-//= require bootstrap/modal
-//= require bootstrap/button
-//= require bootstrap/affix
-//= require bootstrap/tab
-//= require bootstrap/alert
-//= require bootstrap/transition
-//= require bootstrap/tooltip
-//= require bootstrap/popover
-//= require bootstrap/dropdown
+//= require bootstrap
 //= require twitter/bootstrap/rails/confirm
 //= require froala_editor.min.js
 //= require plugins/paragraph_format.min.js
