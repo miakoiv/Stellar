@@ -28,6 +28,37 @@ body.carbon {
   padding-top: 110px;
 }
 
+.drop-cap {
+  float: left;
+  margin-right: 15px;
+  margin-bottom: -5px;
+  font-size: 3em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.2em;
+}
+
+.carousel {
+  margin-bottom: 40px;
+
+  .carousel-inner {
+    .item {
+      min-height: 250px;
+      max-height: 400px;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+      .carousel-caption {
+        padding: 10px 10px 40px;
+        border-radius: 10px;
+        background-color: rgba(0,0,0,0.5);
+      }
+    }
+  }
+}
+
 #main-nav {
   @extend .navbar-inverse;
   @include box-shadow(0 0 6px 0 rgba(0,0,0,0.8));
@@ -108,37 +139,6 @@ body.carbon {
 
   #static-wrap {
     > .content {} // static content will include its own containers
-
-    .drop-cap {
-      float: left;
-      margin-right: 15px;
-      margin-bottom: -5px;
-      font-size: 3em;
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.2em;
-    }
-
-    .carousel {
-      margin-bottom: 40px;
-
-      .carousel-inner {
-        .item {
-          min-height: 250px;
-          max-height: 400px;
-
-          img {
-            display: block;
-            width: 100%;
-          }
-          .carousel-caption {
-            padding: 10px 10px 40px;
-            border-radius: 10px;
-            background-color: rgba(0,0,0,0.5);
-          }
-        }
-      }
-    }
   }
 
   #search-panel-wrap {
@@ -158,9 +158,24 @@ body.carbon {
         flex-flow: row wrap;
 
         li.category {
-          @extend .col-xs-4, .col-sm-3;
+          @extend .col-xs-6, .col-sm-3;
           flex: 0 1 auto;
           padding: 0;
+
+          &.active a::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            @include gradient-vertical(rgba(255,255,255,0.75), rgba(255,255,255,0), 0%, 50%);
+          }
+
+          a:hover img {
+            transform: translate(-50%, -50%) scale(1.2);
+          }
 
           a {
             position: relative;
@@ -176,6 +191,7 @@ body.carbon {
               left: 50%;
               top: 50%;
               transform: translate(-50%, -50%);
+              transition: all 0.8s ease-in-out 0s;
             }
             p {
               position: absolute;
@@ -199,6 +215,22 @@ body.carbon {
   }
 
   #products-wrap {
+    .products {
+      @extend .container;
+
+      .product-grid {
+        @extend .row;
+
+        ul {
+          list-style: none;
+          padding-left: 0;
+
+          li.product {
+            @extend .col-xs-4, .col-sm-3, .col-md-2;
+          }
+        }
+      }
+    }
   }
 
   #product-detail-wrap {
