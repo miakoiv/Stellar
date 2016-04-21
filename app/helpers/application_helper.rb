@@ -56,7 +56,7 @@ module ApplicationHelper
   end
 
   def branding(store)
-    image_variant_tag(store.cover_image, :matchbox) +
+    image_variant_tag(store.cover_image, :technical) +
       content_tag(:span, store.to_s)
   end
 
