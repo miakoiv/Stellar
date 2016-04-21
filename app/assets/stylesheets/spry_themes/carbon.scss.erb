@@ -23,7 +23,7 @@ $body-bg: #fbfbfb;
 @import "fonts.scss";
 @import "print.scss";
 
-body {
+body.carbon {
   overflow-y: scroll;
   padding-top: 110px;
 }
@@ -32,7 +32,7 @@ body {
   @extend .navbar-inverse;
   @include box-shadow(0 0 6px 0 rgba(0,0,0,0.8));
   background-image: url(asset_path('carbon.png'));
-  font-size: 0.8em;
+  font-size: $font-size-small;
   font-weight: 500;
 
   > .content {
@@ -44,7 +44,10 @@ body {
       padding-top: 0;
       padding-bottom: 0;
 
-      img { max-height: none; }
+      img {
+        max-height: 50px;
+        margin: -3px 0 0 0;
+      }
     }
 
     .navbar-nav {
@@ -59,6 +62,7 @@ body {
     }
     #navbar-search .form-control {
       @extend .input-sm;
+      max-width: 120px;
     }
   }
 
@@ -72,7 +76,7 @@ body {
   logo shrunk, and the navbar items revert to default styles
 */
 @media (max-width: $screen-sm-min) {
-  body { padding-top: 75px; }
+  body.carbon { padding-top: 75px; }
 
   #main-nav {
     > .content {
@@ -98,8 +102,12 @@ body {
 
 #main-wrap {
 
+  > .content {
+    @extend .container;
+  }
+
   #static-wrap {
-    > .content {}
+    > .content {} // static content will include its own containers
 
     .drop-cap {
       float: left;
@@ -140,18 +148,60 @@ body {
   }
 
   #categories-wrap {
-    display: none;
+    background-color: #ccc;
+
+    .categories {
+      > ul {
+        list-style: none;
+        padding-left: 0;
+        display: flex;
+        flex-flow: row wrap;
+
+        li.category {
+          @extend .col-xs-4, .col-sm-3;
+          flex: 0 1 auto;
+          padding: 0;
+
+          a {
+            position: relative;
+            display: block;
+            height: 0;
+            padding-bottom: 50%;
+            overflow: hidden;
+
+            img {
+              position: absolute;
+              display: block;
+              height: 100%;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+            p {
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: 100%;
+              margin: 0;
+              padding: 5px;
+              font-size: $font-size-small;
+              font-weight: 500;
+              background-color: rgba(0,0,0,0.666);
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
   }
   #subcategories-wrap {
     display: none;
   }
 
   #products-wrap {
-    display: none;
   }
 
   #product-detail-wrap {
-    display: none;
   }
 }
 .footer {
