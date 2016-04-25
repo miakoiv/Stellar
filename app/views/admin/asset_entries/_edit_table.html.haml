@@ -4,8 +4,8 @@
       %tr
         %th.col-xs-2= col(AssetEntry, :recorded_at)
         %th.col-xs-2= col(AssetEntry, :source_id)
-        %th.col-xs-1.text-right= col(AssetEntry, :amount)
-        %th.col-xs-3.text-right= col(AssetEntry, :value)
+        %th.col-xs-2.text-right= col(AssetEntry, :amount)
+        %th.hidden.text-right= col(AssetEntry, :value)
         %th= col(AssetEntry, :note)
         %th.actions
 
@@ -19,8 +19,8 @@
         %tr
           %td.col-xs-2= f.date_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           %td.col-xs-2
-          %td.col-xs-1= f.number_field :amount, class: 'form-control text-right'
-          %td.col-xs-3
+          %td.col-xs-2= f.number_field :amount, class: 'form-control text-right'
+          %td.hidden
             .input-group
               = f.text_field :value, class: 'form-control text-right'
               .input-group-addon €

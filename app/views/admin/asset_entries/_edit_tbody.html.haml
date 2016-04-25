@@ -2,6 +2,6 @@
   %td= l(asset_entry.recorded_at)
   %td= asset_entry.source
   %td.text-right= asset_entry.amount
-  %td.text-right.currency= humanized_money_with_symbol asset_entry.value
+  %td.hidden.text-right.currency= humanized_money_with_symbol asset_entry.value
   %td= asset_entry.note
   %td

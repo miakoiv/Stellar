@@ -4,25 +4,16 @@
       %tr
         %th.col-xs-2= col(AssetEntry, :recorded_at)
         %th.col-xs-2= col(AssetEntry, :source_id)
-        %th.col-xs-1.text-right= col(AssetEntry, :amount)
-        %th.col-xs-3.text-right= col(AssetEntry, :value)
+        %th.col-xs-2.text-right= col(AssetEntry, :amount)
+        %th.hidden.text-right= col(AssetEntry, :value)
         %th= col(AssetEntry, :note)
         %th.actions
-
-    %tfoot
-      %tr
-        %th
-        %th
-        %th.text-right= @customer_asset.amount
-        %th.text-right.currency= humanized_money_with_symbol @customer_asset.value
-        %th
-        %th
 
     %tbody
       = content_tag_for :tr, customer_asset.asset_entries.includes(:source) do |asset_entry|
         %td= l(asset_entry.recorded_at)
         %td= asset_entry.source
         %td.text-right= asset_entry.amount
-        %td.text-right.currency= humanized_money_with_symbol asset_entry.value
+        %td.hidden.text-right.currency= humanized_money_with_symbol asset_entry.value
         %td= asset_entry.note
         %td
