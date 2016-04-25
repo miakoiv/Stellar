@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #---
-  before_action :load_roles
   before_action :set_locale
   before_action :set_pricing_group
   after_filter :prepare_unobtrusive_flash
@@ -80,11 +79,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    # Preload users with their roles to enable Rolify's caching of roles.
-    def load_roles
-      current_store.users.preload(:roles)
-    end
-
     def set_pages
       @pages = current_store.pages.includes(:sub_pages).sorted
     end
