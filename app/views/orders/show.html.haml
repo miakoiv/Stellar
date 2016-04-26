@@ -12,7 +12,7 @@
     - if @order.quotable?
       = link_to quote_order_path(@order), class: 'btn btn-info' do
         = icon('envelope', t('.quote'))
-        = link_to icon('print', "#{t('actions.print')} #{print_title.downcase}"), '#print', class: 'btn btn-default'
+      = link_to icon('print', "#{t('actions.print')} #{print_title.downcase}"), '#print', class: 'btn btn-default'
     %h1
       = @order.order_type
       %span.small
