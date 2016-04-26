@@ -32,7 +32,10 @@ fi:
           reports: raportit
           property_editor: ominaisuuksien muokkaus
           category_editor: tuoteryhmien muokkaus
-          order_editor: tilauksien käsittely
+          order_editor: tilauksien käsittely (poistettu)
+          order_review: tilauksien katselu
+          order_manage: tilauksien hallinta
+          order_notify: tilausvahvistukset
           page_editor: sivujen muokkaus
           product_editor: tuotteiden muokkaus
           promotion_editor: kampanjoiden muokkaus

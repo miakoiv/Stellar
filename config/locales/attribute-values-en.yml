@@ -32,7 +32,10 @@ en:
           reports: reporting
           property_editor: property editor
           category_editor: category editor
-          order_editor: order editor
+          order_editor: order editor (deprecated)
+          order_review: review orders
+          order_manage: manage orders
+          order_notify: order notifications
           page_editor: page editor
           product_editor: product editor
           promotion_editor: promotion editor
