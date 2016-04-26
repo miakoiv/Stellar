@@ -56,6 +56,18 @@ asset_editor:
   id: 21
   name: asset_editor
   appearance: info
+order_review:
+  id: 50
+  name: order_review
+  appearance: info
+order_manage:
+  id: 51
+  name: order_manage
+  appearance: info
+order_notify:
+  id: 52
+  name: order_notify
+  appearance: info
 store_admin:
   id: 95
   name: store_admin
