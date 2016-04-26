@@ -74,7 +74,7 @@ class Order < ActiveRecord::Base
     end
   end
   def order_type_name
-    approved? ? self[:order_type_name] : order_type.name
+    concluded? ? self[:order_type_name] : order_type.name
   end
 
   # Only show prices for RFQs.
