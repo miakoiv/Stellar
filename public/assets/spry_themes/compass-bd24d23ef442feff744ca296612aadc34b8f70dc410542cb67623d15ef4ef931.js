@@ -1,1 +1,0 @@
-(function(){jQuery(function(){return $(".products").imagesLoaded(function(){return this.masonry({itemSelector:".product",gutterWidth:15})})})}).call(this);
