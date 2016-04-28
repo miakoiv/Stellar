@@ -10,38 +10,45 @@ $brand-primary: #e6172b;
 @import "fonts.scss";
 @import "print.scss";
 
-.hiustalo {
+body {
   padding-top: $navbar-height + 4;
   overflow-y: scroll;
+}
+.hiustalo {
   background-image: url(<%= asset_path('hiustalo-bg.jpg') %>);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+}
 
-  #main-nav {
-    @include box-shadow(0 6px 24px 0 rgba(0,0,0,0.333));
-    background: rgba(255,255,255,0.88);
-    border-top: 4px solid #000;
-  }
-  #main {
-    background: transparent;
-    @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0));
-  }
+#main-nav {
+  @include box-shadow(0 6px 24px 0 rgba(0,0,0,0.333));
+  background: rgba(255,255,255,0.88);
+  border-top: 4px solid #000;
 
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: $grid-gutter-width;
-    padding-right: $grid-gutter-width;
-    width: auto;
+  > .content {
+    @extend .container;
   }
+}
 
-  .page-content {
-    padding-top: 30px;
+#main-wrap {
+  background: transparent;
+  @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0));
+
+  > .content {
+    @extend .container;
   }
 
+  #static-wrap {
+    > .content {
+      @extend .container;
+    }
+  }
+}
+
+#categories-wrap {
   .categories {
-    @extend .row;
+    @extend .container;
     margin-bottom: 20px;
     padding: 20px 0 0;
 
@@ -70,9 +77,11 @@ $brand-primary: #e6172b;
       }
     }
   }
+}
 
+#products-wrap {
   .products {
-    @extend .row;
+    @extend .container;
     position: relative;
     margin-top: 20px;
 
@@ -174,9 +183,12 @@ $brand-primary: #e6172b;
       }
     }
   }
+}
+
+#product-detail-wrap {
+  @extend .container;
 
   .product-detail {
-    @extend .row;
 
     .product-header {
       @extend .col-xs-12;
@@ -294,6 +306,10 @@ $brand-primary: #e6172b;
 }
 
 .footer {
+  .content {
+    @extend .container;
+  }
+
   background: $brand-primary;
   color: lighten($brand-primary, 40%);
 }
