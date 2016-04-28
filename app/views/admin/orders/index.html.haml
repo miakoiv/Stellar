@@ -12,7 +12,7 @@
       .row
         .col-sm-6.col-md-3
           .form-group
-            = f.select :order_type, current_store.order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            = f.select :order_type, current_user.available_order_types.map { |o| [order_type_label(o, current_user), o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-3
           .form-group
             = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'bottom'}

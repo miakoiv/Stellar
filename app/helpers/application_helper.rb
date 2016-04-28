@@ -67,4 +67,8 @@ module ApplicationHelper
   def list_group_placeholder
     content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
   end
+
+  def order_type_label(order_type, user)
+    "#{order_type.incoming_for?(user) ? '↘' : '↖'} #{order_type.to_s}"
+  end
 end
