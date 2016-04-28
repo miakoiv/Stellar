@@ -15,35 +15,72 @@ $navbar-inverse-toggle-border-color: #cdcdcd;
 @import "fonts.scss";
 @import "print.scss";
 
-body {
+body.compass {
   overflow-y: scroll;
   padding-top: 70px;
   background-color: #e0e0e0;
+}
 
-  > nav.navbar {
-    @extend .navbar-inverse;
-    @include box-shadow(0 1px 10px 0 rgba(0,0,0,.333));
+#main-nav {
+  @extend .navbar-inverse;
+  @include box-shadow(0 1px 10px 0 rgba(0,0,0,.333));
 
-    & > .content {
-      @extend .container;
-    }
+  > .content {
+    @extend .container;
+    padding-top: 15px;    // padding the container only,
+    padding-bottom: 5px;  // not the contained elements
 
     .navbar-brand {
-      height: 70px;
-      padding-top: 25px;
-      padding-bottom: 25px;
+      margin-top: -9px;
     }
-    .navbar-nav > li > a {
-      padding-top: 34px;
-      padding-bottom: 16px;
-      text-transform: uppercase;
-      font-size: $font-size-small;
+  }
+  .navbar-nav {
+    > li {
+      > a {
+        margin-top: -15px;    // matches the container padding
+        margin-bottom: -5px;
+        padding-top: 30px;    // container padding + native 15px padding
+        padding-bottom: 20px;
+        text-transform: uppercase;
+        font-size: $font-size-small;
+      }
+
+      &.active {
+        background-color: $navbar-inverse-link-active-bg;
+      }
     }
-    .navbar-form {
-      margin-top: 28px;
+  }
+  .navbar-form {
+    .form-control {
+      @extend .input-sm;
+      max-width: 120px;
     }
-    .navbar-toggle {
-      color: #cdcdcd;
+  }
+  .navbar-toggle {
+    color: #cdcdcd;
+  }
+}
+
+@media (max-width: $screen-sm-min) {
+  body.compass { padding-top: 75px; }
+
+  #main-nav {
+    > .content {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .navbar-brand {
+        margin-top: -4px;
+      }
+
+      .navbar-nav {
+        > li > a {
+          margin-top: 0;
+          margin-bottom: 0;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+      }
     }
   }
 }
@@ -51,14 +88,14 @@ body {
 #main-wrap {
   background-color: transparent;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
     margin-top: 40px;
 
-    & > .content {
+    > .content {
       @extend .container;
     }
   }
@@ -130,11 +167,8 @@ body {
     .products {
       @extend .container;
       position: relative;
-      margin-top: 10px;
 
       .product-grid {
-        @extend .row;
-
         ul {
           list-style: none;
           margin: 0;
@@ -144,8 +178,8 @@ body {
             float: left;
             width: 220px;
             padding: 10px;
-            margin-right: 7px;
-            margin-bottom: 7px;
+            margin-right: 5px;
+            margin-bottom: 5px;
             background-color: #fff;
             transition: all 0.2s ease-in-out 0s;
 
@@ -228,7 +262,7 @@ body {
     .product-detail {
       @extend .container;
       position: relative;
-      padding-bottom: 220px;
+      padding-bottom: 240px;
 
       .product-header {
         @extend .row;
@@ -358,16 +392,17 @@ body {
             @extend .col-xs-12, .col-md-5;
           }
           &.technical {
+            @extend .well;
             position: absolute;
             left: 0;
-            bottom: 0;
+            bottom: 20px;
             height: 200px;
             width: 100%;
             overflow-y: hidden;
             overflow-x: auto;
             padding: 0 $grid-gutter-width/2;
             background: #e0e0e0;
-            @include box-shadow(inset 0 15px 10px -10px rgba(0,0,0,0.333));
+            @include box-shadow(inset 0 0 10px rgba(0,0,0,0.333));
 
             .nav { display: none; }
             .gallery {
