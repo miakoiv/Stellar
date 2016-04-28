@@ -87,10 +87,11 @@ class Order < ActiveRecord::Base
     !is_rfq?
   end
 
-  # Users who may manage this order are order editors in the group defined
-  # as the destination group for this order type.
-  def managing_users
-    store.users.where(group: order_type.destination_group).with_role(:order_editor)
+  # Notify users with order_notify role in the group where this order
+  # is destined to. No notifications are sent of quotes.
+  def notified_users
+    return User.none if is_quote?
+    store.users.where(group: order_type.destination_group).with_role(:order_notify)
   end
 
   def approval

@@ -5,8 +5,8 @@ class OrderMailer < ApplicationMailer
   include Roadie::Rails::Mailer
 
   #---
-  # Order confirmation for the customer. Carbon copies are sent to the users
-  # responsible for managing this order, unless it's a quotation.
+  # Order confirmation for the customer. Carbon copies are sent to users
+  # who need to be notified of this order.
   def order_confirmation(order)
     @order = order
     @store = order.store
@@ -15,11 +15,9 @@ class OrderMailer < ApplicationMailer
     headers = {
       from: "noreply@#{@store.host}",
       to: "#{@order.customer_name} <#{@order.customer_email}>",
-      subject: default_i18n_subject(store: @store)
+      subject: default_i18n_subject(store: @store),
+      cc: @order.notified_users.map(&:to_s)
     }
-    unless @order.is_quote?
-      headers.merge!(cc: @order.managing_users.map(&:to_s))
-    end
     roadie_mail(headers)
   end
 
