@@ -5,7 +5,7 @@
       %span.label{class: "label-#{current_user.appearance}"}= current_user.human_attribute_value(:group).first
       %span.caret
     %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-      = active_link_to icon('truck', title(Order, count: 2)), orders_path, wrap_tag: :li
+      = active_link_to icon('calendar', t('store.order_history')), orders_path, wrap_tag: :li
       - if current_user.can_select_pricing_group?
         = render partial: 'shared/pricing_options'
       %li.divider

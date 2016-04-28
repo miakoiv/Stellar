@@ -1,6 +1,6 @@
 .content
   .page-header
-    %h1= icon('truck', title(Order, count: 2))
+    %h1= icon('calendar', t('store.order_history'))
 
   .panel.panel-info
     .panel-heading
@@ -10,7 +10,7 @@
         .row
           .col-sm-6.col-md-4
             .form-group
-              = f.select :order_type, current_user.available_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+              = f.select :order_type, current_user.existing_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
           .col-sm-6.col-md-3
             .form-group
               = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'bottom'}

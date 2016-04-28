@@ -22,13 +22,6 @@ class OrderSearch < Searchlight::Search
     query.where(users: {group: group})
   end
 
-  # Manager id restricts the search on orders that may be managed by her.
-  def search_manager_id
-    order_types = User.find(manager_id).managed_order_types
-    return Order.none if order_types.empty?
-    query.where(order_type_id: order_types)
-  end
-
   def search_order_type
     query.where(order_type_id: order_type)
   end

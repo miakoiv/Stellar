@@ -98,13 +98,20 @@ class User < ActiveRecord::Base
     nil
   end
 
-  # Order types the user has available when going through checkout.
-  def available_order_types
+  # Order types seen in the user's set of completed orders.
+  def existing_order_types
+    orders.includes(:order_type).complete.map(&:order_type).uniq
+  end
+
+  # Order types where the user is in the source group. These are what she
+  # has available when going through checkout.
+  def outgoing_order_types
     store.order_types.where(source_group: User.groups[group])
   end
 
-  # Order types the user may browse and process as an administrator.
-  def managed_order_types
+  # Order types where the user is in the destination group. Affects what
+  # she can do with the order.
+  def incoming_order_types
     store.order_types.where(destination_group: User.groups[group])
   end
 
@@ -130,12 +137,6 @@ class User < ActiveRecord::Base
   # Other users the user may manage.
   def managed_users
     store.users.where(group: managed_groups.map { |group| User.groups[group] })
-  end
-
-  # This could be a separate role but for now, resellers and manufacturer
-  # users have permission to browse orders sent from their own group.
-  def can_see_group_orders?
-    reseller? || manufacturer?
   end
 
   # Reseller users are able to select a pricing group to use for retail.

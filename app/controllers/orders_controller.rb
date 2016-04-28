@@ -67,6 +67,7 @@ class OrdersController < ApplicationController
     end
   end
 
+  # FIXME: this probably doesn't belong here, but at admin/orders
   # GET /orders/1/quote
   def quote
     authorize_action_for @order
@@ -90,6 +91,7 @@ class OrdersController < ApplicationController
     end
   end
 
+  # FIXME: move this to admin/orders
   # POST /orders/1/add_products
   def add_products
     authorize_action_for @order
@@ -109,7 +111,7 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = current_store.orders.find(params[:id])
+      @order = current_user.orders.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -126,18 +128,8 @@ class OrdersController < ApplicationController
       )
     end
 
-    # Orders are searched by store and group if the user is permitted to do so,
-    # otherwise only user's own orders are considered.
+    # The search is limited to the current user's personal history.
     def search_params
-      if current_user.can_see_group_orders?
-        @query.merge(
-          store_id: current_store.id,
-          group: User.groups[current_user.group]
-        )
-      else
-        @query.merge(
-          user_id: current_user.id
-        )
-      end
+      @query.merge(user_id: current_user.id)
     end
 end

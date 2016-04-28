@@ -1,6 +1,6 @@
 - if current_user.has_cached_role?(:reports)
   = active_link_to icon('line-chart', t('admin.reports.title'), class: 'fa-fw'), admin_reports_path, wrap_tag: :li
-- if current_user.has_cached_role?(:order_editor)
+- if current_user.has_cached_role?(:order_review) || current_user.has_cached_role?(:order_manage)
   = active_link_to icon('truck', title(Order, count: 2), class: 'fa-fw'), admin_orders_path, wrap_tag: :li
 - if current_user.has_cached_role?(:product_editor)
   = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'), admin_products_path, wrap_tag: :li

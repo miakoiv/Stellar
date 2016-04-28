@@ -16,7 +16,7 @@
               'confirm-cancel' => t('actions.confirm.cancel')}
 
         - if order.checkoutable?
-          - current_user.available_order_types.each do |order_type|
+          - current_user.outgoing_order_types.each do |order_type|
             = link_to order_type.name, checkout_path(order, order_type), class: 'btn btn-primary pull-right'
         - else
           .pull-right= t('checkout.messages.cannot_checkout_html')

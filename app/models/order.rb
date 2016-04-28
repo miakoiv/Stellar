@@ -40,7 +40,7 @@ class Order < ActiveRecord::Base
 
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
-  scope :managed_by, -> (user) { joins(:order_type).where(order_types: {id: user.managed_order_types}) }
+  scope :incoming_to, -> (user) { joins(:order_type).where(order) }
 
   #---
   validates_associated :order_items, on: :update

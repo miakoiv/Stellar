@@ -102,11 +102,8 @@ class Admin::OrdersController < ApplicationController
       )
     end
 
-    # Restrict searching to orders in current store managed by current user.
+    # Include all orders in the current store.
     def search_params
-      @query.merge(
-        store_id: current_store.id,
-        manager_id: current_user.id
-      )
+      @query.merge(store_id: current_store.id)
     end
 end
