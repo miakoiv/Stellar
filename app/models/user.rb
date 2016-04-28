@@ -103,16 +103,20 @@ class User < ActiveRecord::Base
     orders.includes(:order_type).complete.map(&:order_type).uniq
   end
 
-  # Order types where the user is in the source group. These are what she
-  # has available when going through checkout.
+  # Available outgoing order types. These are what the user has available
+  # when going through checkout.
   def outgoing_order_types
-    store.order_types.where(source_group: User.groups[group])
+    store.order_types.outgoing_for(self)
   end
 
-  # Order types where the user is in the destination group. Affects what
-  # she can do with the order.
+  # Available incoming order types.
   def incoming_order_types
-    store.order_types.where(destination_group: User.groups[group])
+    store.order_types.incoming_for(self)
+  end
+
+  # Both of the above
+  def available_order_types
+    incoming_order_types + outgoing_order_types
   end
 
   def managed_groups

@@ -40,7 +40,13 @@ class Order < ActiveRecord::Base
 
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
-  scope :incoming_to, -> (user) { joins(:order_type).where(order) }
+  # Incoming and outgoing orders for given user, based on order type.
+  scope :incoming_for, -> (user) { joins(:order_type).merge(OrderType.incoming_for(user)) }
+  scope :outgoing_for, -> (user) { joins(:order_type).merge(OrderType.outgoing_for(user)) }
+
+  # The corresponding methods for above scopes are found in OrderType.
+  delegate :incoming_for?, to: :order_type
+  delegate :outgoing_for?, to: :order_type
 
   #---
   validates_associated :order_items, on: :update
