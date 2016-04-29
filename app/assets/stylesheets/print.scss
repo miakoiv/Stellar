@@ -13,9 +13,11 @@
     font-size: inherit;
   }
 
-  #main-wrap {
-    & > div, & > div > div {
-      width: 640px !important;
+  #main-wrap, .container {
+    width: 100% !important;
+
+    > div > div {
+      width: 100% !important;
     }
   }
 

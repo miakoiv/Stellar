@@ -288,8 +288,11 @@ fieldset[disabled] .help-block { display: none; }
     &.bg-primary, &.bg-success, &.bg-info, &.bg-warning, &.bg-danger,
     &.actions, &.gap {
       padding-top: 15px;
-    }
 
+      &:first-child {
+        margin-top: -15px;
+      }
+    }
     legend.vertical {
       position: absolute;
       right: 100%;
