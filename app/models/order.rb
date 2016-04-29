@@ -93,10 +93,13 @@ class Order < ActiveRecord::Base
     !is_rfq?
   end
 
-  # Notify users with order_notify role in the group where this order
-  # is destined to. No notifications are sent of quotes.
+  # Confirmation mail is not sent for quotations.
+  def send_confirmation?
+    !is_quote?
+  end
+
+  # Notify users with order_notify role in the destination group.
   def notified_users
-    return User.none if is_quote?
     store.users.where(group: order_type.destination_group).with_role(:order_notify)
   end
 

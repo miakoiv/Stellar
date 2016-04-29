@@ -45,7 +45,9 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
         if !@order.complete? && @order.paid?
           @order.complete!
-          OrderMailer.order_confirmation(@order).deliver_later
+          if @order.send_confirmation?
+            OrderMailer.order_confirmation(@order).deliver_later
+          end
         end
         format.json { render json: @order }
         format.html { redirect_to order_path(@order), notice: t('.notice', order: @order) }
