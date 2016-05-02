@@ -354,16 +354,12 @@ class Order < ActiveRecord::Base
 
   # Total sum without virtual items (like shipping and handling).
   def total_cents
-    Rails.cache.fetch("#{cache_key}/total_cents") do
-      order_items.real.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
-    end
+    order_items.real.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end
 
   # Grand total, including virtual items.
   def grand_total_cents
-    Rails.cache.fetch("#{cache_key}/grand_total_cents") do
-      order_items.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
-    end
+    order_items.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end
 
   def summary
