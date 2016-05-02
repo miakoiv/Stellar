@@ -1,15 +1,19 @@
-- print_title = @order.is_rfq? ? t('admin.orders.quotation.title') : t('admin.orders.delivery_note.title')
-
 .page-header.hidden-print
   = link_to admin_orders_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(Order)
     = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
-  - if @order.approved?
-    = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
-      = icon('share', t('.forward'))
-  = link_to icon('print', "#{t('actions.print')} #{print_title.downcase}"), '#print', class: 'btn btn-default'
+  - if @order.incoming_for?(current_user)
+    - if @order.approved?
+      = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
+        = icon('share', t('.forward'))
+    = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
+  - if @order.quotable?
+    = link_to quote_admin_order_path(@order), class: 'btn btn-info' do
+      = icon('envelope', t('.quote'))
+    = link_to icon('print', t('.print_quotation')), '#print', class: 'btn btn-default'
+
   %h1
     = @order.order_type
     %span.small
@@ -19,28 +23,32 @@
 .visible-print
   .page-header.fr-view
     = @order.store.letterhead(current_user).html_safe
-  = render partial: 'summary', locals: {title: print_title}
+    %h1
+      - if @order.incoming_for?(current_user)
+        = t('.delivery_note')
+      - if @order.quotable?
+        = t('.quotation')
+      %span.small= @order.to_s
+  = render partial: 'summary'
 
 .row
-  .col-lg-6.hidden-print
+  .col-lg-5.hidden-print
     = render partial: 'form', locals: {locked: true}
 
-  .col-lg-6
+  .col-lg-7
     %ul.nav.nav-tabs{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
           = title(OrderItem, count: 2)
-      - if @order.reveal_components?
-        %li{role: 'presentation'}
-          %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
-            = t('.aggregated')
+      %li{role: 'presentation'}
+        %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
+          = t('.aggregated')
 
     .tab-content
       #tab-order-items.tab-pane.fade.in.active
         %h2.visible-print-block= title(OrderItem, count: 2)
         = render partial: 'admin/order_items/table', object: @order, as: :order
 
-      - if @order.reveal_components?
-        #tab-components.tab-pane.fade.page-break
-          %h2.visible-print-block= t('.aggregated')
-          = render partial: 'admin/orders/components', object: @order, as: :order
+      #tab-components.tab-pane.fade.page-break
+        %h2.visible-print-block= t('.aggregated')
+        = render partial: 'admin/orders/components', object: @order, as: :order

@@ -49,13 +49,16 @@ fi:
     orders:
       show:
         forward: Välitä ostoskoriin
+        quote: Lähetä tarjous
         aggregated: Keräilylista
-      delivery_note:
-        title: Lähete
-      quotation:
-        title: Tarjous
+        delivery_note: Lähete
+        quotation: Tarjous
+        print_delivery_note: Tulosta lähete
+        print_quotation: Tulosta tarjous
       edit:
         aggregated: Keräilylista
+      add_products:
+        submit: Lisää tuotteet
     pages:
       index:
         new_page: Uusi sivu
@@ -115,14 +118,9 @@ fi:
       timeline_header: Toimitettavat tilaukset
       timeline_help_html: Aktivoi aikajana klikkaamalla
     show:
-      quote: Lähetä tarjous
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
-    add_products:
-      submit: Lisää tuotteet
-    quotation:
-      title: Tarjous
   store:
     all_products: Kaikki tuotteet
     linked_products: Tämä tuote tarvitsee näitä oheistuotteita

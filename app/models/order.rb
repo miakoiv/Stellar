@@ -83,14 +83,9 @@ class Order < ActiveRecord::Base
     concluded? ? self[:order_type_name] : order_type.name
   end
 
-  # Only show prices for RFQs.
-  def reveal_prices?
-    is_rfq?
-  end
-
-  # Only show product components for non-RFQs.
-  def reveal_components?
-    !is_rfq?
+  # Allow adding and editing order items on quotations only.
+  def editable_items?
+    is_quote?
   end
 
   # Confirmation mail is not sent for quotations.

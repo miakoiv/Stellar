@@ -3,7 +3,7 @@
 class Admin::OrderItemsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_order_item
+  before_action :set_order_and_item
 
   # No layout, this controller never renders HTML.
 
@@ -11,26 +11,26 @@ class Admin::OrderItemsController < ApplicationController
 
   # PATCH/PUT /admin/order_items/1
   def update
-    @order_item = OrderItem.find(params[:id])
-
     respond_to do |format|
       if @order_item.update(order_item_params)
-        format.js
+        @order_item.reload
+        @order.recalculate!
+        format.js { render :update }
       else
-        format.js
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
+        format.js { render :rollback }
       end
     end
   end
 
   private
-    def set_order_item
+    def set_order_and_item
       @order_item = OrderItem.find(params[:id])
+      @order = @order_item.order
     end
 
     def order_item_params
       params.require(:order_item).permit(
-        :price
+        :amount, :price
       )
     end
 end

@@ -2,15 +2,16 @@
   %table.table.table-hover.table-condensed
     %thead
       %tr
-        %th.no-wrap= col(OrderItem, :product_code)
         %th= col(OrderItem, :product_title)
-        %th.col-xs-2.text-right #
+        %th.no-wrap= col(OrderItem, :product_code)
+        %th.col-xs-2.text-right= col(OrderItem, :amount)
 
     %tbody
       - order.aggregated_components.each do |component, quantity|
         %tr
-          %td.no-wrap= link_to component.code, admin_product_path(component)
           %td
-            %strong= component.title
+            %strong
+              = link_to component.title, admin_product_path(component)
             = component.subtitle
+          %td.no-wrap= component.code
           %td.text-right= quantity

@@ -25,6 +25,8 @@ fi:
         notice: "Tilaus %{order} luotu."
       update:
         notice: "Tilaus %{order} päivitetty."
+      quote:
+        notice: "Tarjous %{order} lähetetty."
       forward:
         notice: "Tilaus %{order} välitetty edelleen ostoskoriin."
         failed: "Tilaus %{order} välitetty edelleen ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"
@@ -81,8 +83,6 @@ fi:
       notice: "Tilaus %{order} päivitetty."
     destroy:
       notice: "Tilaus %{order} poistettu."
-    quote:
-      notice: "Tarjous %{order} lähetetty."
     duplicate:
       notice: "Tilaus %{order} kopioitu ostoskoriin."
       failed: "Tilaus %{order} kopioitu ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"

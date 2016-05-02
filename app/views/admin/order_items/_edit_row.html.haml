@@ -1,26 +1,18 @@
-= content_tag_for :tbody, order_item do
-  %tr
-    %td
-      .box-thumbnail= image_variant_tag order_item.product.cover_image(current_store.list_image_type), :matchbox
-    %td.no-wrap{colspan: 2}
-      = link_to order_item.product_code, admin_product_path(order_item.product)
-      - if order_item.reveal_components?
-        %span.caret
-    %td
-      %strong= order_item.product_title
-      = order_item.product_subtitle
-    %td.text-right= order_item.amount
-    - if order_item.reveal_price?
-      %td.text-right.currency
-        = form_for [:admin, order_item], remote: true, html: {class: 'immediate'} do |f|
-          = f.text_field :price, class: 'form-control input-sm text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 1
-
-  - if order_item.reveal_components?
-    = content_tag_for :tr, order_item.product.relationships do |relationship|
-      %td
-      %td.col-xs-1
-      %td.no-wrap= link_to relationship.component.code, admin_product_path(relationship.component)
-      %td.text-muted
-        %strong= relationship.component.title
-        = relationship.component.subtitle
-      %td.text-right.text-muted= relationship.quantity * order_item.amount
+= content_tag_for :tr, order_item do
+  %td
+    %strong= order_item.product_title
+    = order_item.product_subtitle
+  %td.no-wrap= order_item.product_code
+  %td
+    = form_for [:admin, order_item], remote: true,
+        html: {class: 'pull-right immediate'} do |f|
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1
+  %td.text-right.currency
+    = form_for [:admin, order_item], remote: true, html: {class: 'immediate'} do |f|
+      .input-group.input-group-sm
+        = f.text_field :price, class: 'form-control text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 2
+        %span.input-group-addon €
+  %td.text-right.currency
+    = humanized_money_with_symbol order_item.subtotal
+  %td.actions
+    = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

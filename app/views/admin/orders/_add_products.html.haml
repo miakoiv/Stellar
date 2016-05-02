@@ -1,7 +1,7 @@
 #add-products
-  = bootstrap_form_for order, url: add_products_order_path(order), remote: true, method: :post do |f|
+  = bootstrap_form_for order, url: add_products_admin_order_path(order), remote: true, method: :post do |f|
     = f.text_field :product_ids_string, class: 'selectize-tall'
-    = f.primary t('.submit')
+    = f.submit t('.submit')
 
   :coffee
     options = #{current_store.products.live.map { |p|

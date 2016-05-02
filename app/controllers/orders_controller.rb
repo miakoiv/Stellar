@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions quote: 'read', duplicate: 'read', add_products: 'update'
+  authority_actions duplicate: 'read'
 
   before_action :set_pages
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :duplicate, :add_products]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
 
   # GET /orders
   def index
@@ -69,15 +69,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # FIXME: this probably doesn't belong here, but at admin/orders
-  # GET /orders/1/quote
-  def quote
-    authorize_action_for @order
-
-    OrderMailer.quotation(@order).deliver_later
-    redirect_to order_path(@order), notice: t('.notice', order: @order)
-  end
-
   # GET /orders/1/duplicate
   def duplicate
     authorize_action_for @order
@@ -90,23 +81,6 @@ class OrdersController < ApplicationController
       redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
     else
       redirect_to cart_path, notice: t('.notice', order: @order)
-    end
-  end
-
-  # FIXME: move this to admin/orders
-  # POST /orders/1/add_products
-  def add_products
-    authorize_action_for @order
-
-    product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
-
-    product_ids.each do |product_id|
-      @order.insert(@current_store.products.live.find(product_id), 1, current_pricing)
-    end
-    @order.recalculate!
-
-    respond_to do |format|
-      format.js
     end
   end
 

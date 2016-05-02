@@ -1,11 +1,6 @@
 #encoding: utf-8
 #
-# Order items have a dualist nature as shopping cart items before they
-# are part of a completed order. If the item being updated is part of
-# an incomplete order, @is_cart will be set, and permitted parameters
-# restricted to amounts only.
-# Rendering responses to AJAX requests looks at this variable to render
-# appropriate updates to the DOM.
+# This controller deals with editing and deleting items in the shopping cart.
 #
 class OrderItemsController < ApplicationController
 
@@ -46,13 +41,13 @@ class OrderItemsController < ApplicationController
 
   private
     def set_order_and_item
-      @order_item = OrderItem.find(params[:id])
-      @order = @order_item.order
-      @is_cart = !@order.complete?
+      @order = shopping_cart
+      @order_item = @order.order_items.find(params[:id])
     end
 
     def order_item_params
-      permitted = @is_cart ? [:amount] : [:amount, :price]
-      params.require(:order_item).permit(*permitted)
+      params.require(:order_item).permit(
+        :amount
+      )
     end
 end

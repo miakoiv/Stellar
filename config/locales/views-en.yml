@@ -69,13 +69,16 @@ en:
     orders:
       show:
         forward: Forward to cart
+        quote: Send quotation
         aggregated: Aggregated components
-      delivery_note:
-        title: Delivery note
-      quotation:
-        title: Quotation
+        delivery_note: Delivery note
+        quotation: Quotation
+        print_delivery_note: Print delivery note
+        print_quotation: Print quotation
       edit:
         aggregated: Aggregated components
+      add_products:
+        submit: Add products
     pages:
       index:
         new_page: New page
@@ -135,14 +138,9 @@ en:
       timeline_header: Orders that require shipping
       timeline_help_html: Click on the timeline to activate scrolling and zooming
     show:
-      quote: Send quotation
       duplicate: Duplicate to cart
     edit:
       duplicate: Duplicate to cart
-    add_products:
-      submit: Add products
-    quotation:
-      title: Quotation
   products:
     product_detail:
       amount: Amount

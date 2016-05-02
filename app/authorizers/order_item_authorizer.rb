@@ -3,6 +3,6 @@
 class OrderItemAuthorizer < ApplicationAuthorizer
 
   def self.updatable_by?(user)
-    user.has_cached_role?(:order_editor)
+    user.has_cached_role?(:order_manage)
   end
 end

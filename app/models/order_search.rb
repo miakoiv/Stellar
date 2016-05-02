@@ -22,8 +22,8 @@ class OrderSearch < Searchlight::Search
     query.where(users: {group: group})
   end
 
-  def search_order_type
-    query.where(order_type_id: order_type)
+  def search_order_type_id
+    query.where(order_type_id: order_type_id)
   end
 
   def search_date

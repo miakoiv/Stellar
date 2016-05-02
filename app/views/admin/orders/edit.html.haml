@@ -10,28 +10,27 @@
       = @order.to_s
 
 .row
-  .col-lg-6
+  .col-lg-5
     = render partial: 'form', locals: {locked: false}
 
-  .col-lg-6
+  .col-lg-7
     %ul.nav.nav-tabs{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
           = title(OrderItem, count: 2)
-      - if @order.reveal_components?
-        %li{role: 'presentation'}
-          %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
-            = t('.aggregated')
+      %li{role: 'presentation'}
+        %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
+          = t('.aggregated')
 
     .tab-content
       #tab-order-items.tab-pane.fade.in.active.page-break
         %h2.visible-print-block= title(OrderItem, count: 2)
-        - if @order.approved?
-          = render partial: 'admin/order_items/table', object: @order, as: :order
-        - else
+        - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
+          = render partial: 'admin/orders/add_products', object: @order, as: :order
+        - else
+          = render partial: 'admin/order_items/table', object: @order, as: :order
 
-      - if @order.reveal_components?
-        #tab-components.tab-pane.fade.page-break
-          %h2.visible-print-block= t('.aggregated')
-          = render partial: 'admin/orders/components', object: @order, as: :order
+      #tab-components.tab-pane.fade.page-break
+        %h2.visible-print-block= t('.aggregated')
+        = render partial: 'admin/orders/components', object: @order, as: :order

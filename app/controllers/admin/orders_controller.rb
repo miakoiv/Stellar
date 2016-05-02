@@ -6,8 +6,8 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
 
   authorize_actions_for Order
-  authority_actions forward: 'read'
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :forward]
+  authority_actions quote: 'read', forward: 'read', add_products: 'update'
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :add_products]
 
   # GET /admin/orders
   # GET /admin/orders.json
@@ -69,6 +69,12 @@ class Admin::OrdersController < ApplicationController
     end
   end
 
+  # GET /admin/orders/1/quote
+  def quote
+    OrderMailer.quotation(@order).deliver_later
+    redirect_to admin_order_path(@order), notice: t('.notice', order: @order)
+  end
+
   # GET /admin/orders/1/forward
   def forward
     failed_items = @order.forward_to(shopping_cart)
@@ -79,6 +85,20 @@ class Admin::OrdersController < ApplicationController
       redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
     else
       redirect_to cart_path, notice: t('.notice', order: @order)
+    end
+  end
+
+  # POST /admin/orders/1/add_products
+  def add_products
+    product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
+
+    product_ids.each do |product_id|
+      @order.insert(@current_store.products.live.find(product_id), 1, current_pricing)
+    end
+    @order.recalculate!
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -102,8 +122,10 @@ class Admin::OrdersController < ApplicationController
       )
     end
 
-    # Include all orders in the current store.
+    # Limit the search to available order types and default to the first one.
     def search_params
-      @query.merge(store_id: current_store.id)
+      @query.merge(store_id: current_store.id).reverse_merge({
+        'order_type_id' => current_user.available_order_types.first.id
+      })
     end
 end

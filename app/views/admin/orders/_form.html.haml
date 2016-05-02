@@ -2,12 +2,13 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      %fieldset.bg-warning{disabled: locked}
-        = f.form_group :approval do
-          = f.check_box :approval, label: col(Order, :approved)
-        .conclusion.collapse{class: @order.approved? ? 'in' : ''}
-          = f.form_group :conclusion do
-            = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
+      - if @order.incoming_for?(current_user)
+        %fieldset.bg-warning{disabled: locked}
+          = f.form_group :approval do
+            = f.check_box :approval, label: col(Order, :approved)
+          .conclusion.collapse{class: @order.approved? ? 'in' : ''}
+            = f.form_group :conclusion do
+              = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
       %fieldset.gap{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.bg-info{disabled: locked}
@@ -20,10 +21,8 @@
         = f.text_field :customer_email, required: true
         = f.telephone_field :customer_phone, required: true
         - if @order.has_shipping?
-          = f.date_field :shipping_at,
-              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          = f.date_field :installation_at,
-              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          = f.date_field :installation_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.text_field :contact_email
