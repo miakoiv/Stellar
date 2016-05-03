@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_store, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?
+  helper_method :current_store, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
 
   def current_store
     @current_store ||= user_signed_in? && current_user.store || current_store_by_request
@@ -76,6 +76,13 @@ class ApplicationController < ActionController::Base
 
   def can_manage?
     current_user.has_cached_role?(:manager)
+  end
+
+  # The ability of shop at any given category depends on possible restricted
+  # categories given to the current user. If any category assignments
+  # exist, shopping is only allowed in the assigned categories.
+  def may_shop_at?(category)
+    current_user.categories.empty? || current_user.categories.include?(category)
   end
 
   private

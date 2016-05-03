@@ -85,7 +85,7 @@ class Admin::UsersController < ApplicationController
         :billing_address, :billing_postalcode, :billing_city,
         :shipping_address, :shipping_postalcode, :shipping_city,
         :locale, :password, :password_confirmation,
-        :group, :pricing_group_id, role_ids: []
+        :group, :pricing_group_id, role_ids: [], category_ids: []
       )
     end
 end

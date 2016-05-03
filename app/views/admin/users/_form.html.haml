@@ -10,6 +10,7 @@
       %fieldset.bg-warning{disabled: locked}
         = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
         = f.select :pricing_group_id, current_store.pricing_groups.map { |g| [g.to_s, g.id] }, {include_blank: true}, {class: 'selectize'}
+        = f.select :category_ids, current_store.categories.map { |c| [c.to_s, c.id] }, {include_blank: true}, {multiple: true, class: 'selectize', placeholder: t('.no_categories')}
         = f.select :role_ids, current_user.grantable_role_options,
             {}, {multiple: true, class: 'selectize'}
       %fieldset.bg-info{disabled: locked}

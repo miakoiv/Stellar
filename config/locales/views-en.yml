@@ -133,6 +133,8 @@ en:
         new_user: New user
       new:
         new_user: New user
+      form:
+        no_categories: all
   orders:
     index:
       timeline_header: Orders that require shipping

@@ -39,6 +39,9 @@ class User < ActiveRecord::Base
   # User may optionally have a fixed pricing group set.
   belongs_to :pricing_group
 
+  # User may have a set of categories she's restricted to for shopping.
+  has_and_belongs_to_many :categories
+
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 

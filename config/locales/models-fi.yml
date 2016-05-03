@@ -266,6 +266,7 @@ fi:
         name: Nimi
         group: Ryhmä
         role_ids: Roolit
+        category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä
         locale: Kieli
         current_password: Nykyinen salasana

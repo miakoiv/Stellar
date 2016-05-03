@@ -12,7 +12,7 @@
           %p= item.description
     .buy-now
       %p= humanized_money_with_symbol product.price(current_pricing)
-      - if can_shop?
+      - if can_shop? && may_shop_at?(@category)
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
           = hidden_field_tag :amount, 1
           %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

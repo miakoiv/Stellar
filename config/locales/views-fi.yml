@@ -113,6 +113,8 @@ fi:
         new_user: Uusi käyttäjä
       new:
         new_user: Uusi käyttäjä
+      form:
+        no_categories: kaikki
   orders:
     index:
       timeline_header: Toimitettavat tilaukset

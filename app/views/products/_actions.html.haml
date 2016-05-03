@@ -1,4 +1,4 @@
-- if can_shop?
+- if can_shop? && may_shop_at?(@category)
   = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
     .form-group
       = hidden_field_tag :amount, 1
