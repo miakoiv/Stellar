@@ -5,7 +5,7 @@
         %th.col-min{data: {sorter: 'false'}}
         %th= col(Product, :title)
         %th.col-xs-2.no-wrap= col(Product, :code)
-        - if can_see_pricing?
+        - if can_see_pricing? && can_shop? && may_shop_at?(@category)
           %th.no-wrap.text-right= col(Product, :price)
         %th.col-xs-1.actions{data: {sorter: 'false'}}
     %tbody
@@ -19,7 +19,7 @@
               %strong= product.title
               = product.subtitle
             %td= product.code
-            - if can_see_pricing?
+            - if can_see_pricing? && can_shop? && may_shop_at?(@category)
               %td.currency.text-right
                 = humanized_money_with_symbol product.price(current_pricing)
             %td.actions

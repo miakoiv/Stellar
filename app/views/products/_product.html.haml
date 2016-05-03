@@ -10,9 +10,9 @@
       - product.active_promoted_items.each do |item|
         .promotion
           %p= item.description
-    .buy-now
-      %p= humanized_money_with_symbol product.price(current_pricing)
-      - if can_shop? && may_shop_at?(@category)
+    - if can_see_pricing? && can_shop? && may_shop_at?(@category)
+      .buy-now
+        %p= humanized_money_with_symbol product.price(current_pricing)
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
           = hidden_field_tag :amount, 1
           %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

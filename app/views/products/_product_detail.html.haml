@@ -8,7 +8,7 @@
     .product-meta
       .product-actions
         = render partial: 'products/actions', object: product, as: :product
-      - if can_see_pricing?
+      - if can_see_pricing? && can_shop? && may_shop_at?(@category)
         .product-pricing
           = render partial: 'products/pricing', object: product, as: :product
 
