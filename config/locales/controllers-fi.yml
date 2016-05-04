@@ -82,7 +82,7 @@ fi:
     update:
       notice: "Tilaus %{order} päivitetty."
     destroy:
-      notice: "Tilaus %{order} poistettu."
+      notice: "Tilaus %{order} peruttu."
     duplicate:
       notice: "Tilaus %{order} kopioitu ostoskoriin."
       failed: "Tilaus %{order} kopioitu ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"

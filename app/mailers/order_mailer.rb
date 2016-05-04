@@ -10,7 +10,20 @@ class OrderMailer < ApplicationMailer
   def order_confirmation(order)
     @order = order
     @store = order.store
-    @user = order.user
+
+    headers = {
+      from: "noreply@#{@store.host}",
+      to: "#{@order.customer_name} <#{@order.customer_email}>",
+      subject: default_i18n_subject(store: @store),
+      cc: @order.notified_users.map(&:to_s)
+    }
+    roadie_mail(headers)
+  end
+
+  # Order cancellation to the customer. Carbon copies as per confirmations.
+  def order_cancellation(order)
+    @order = order
+    @store = order.store
 
     headers = {
       from: "noreply@#{@store.host}",
@@ -29,9 +42,9 @@ class OrderMailer < ApplicationMailer
     @user = order.user
 
     headers = {
-      from: @order.user.to_s,
+      from: @user.to_s,
       to: "#{@order.contact_person} <#{@order.contact_email}>",
-      bcc: @order.user.to_s,
+      bcc: @user.to_s,
       subject: default_i18n_subject(store: @store)
     }
     roadie_mail(headers)

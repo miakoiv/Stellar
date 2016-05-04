@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503062537) do
+ActiveRecord::Schema.define(version: 20160504110842) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20160503062537) do
     t.text     "notes",               limit: 65535
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
+    t.datetime "cancelled_at"
     t.string   "store_name",          limit: 255
     t.string   "user_name",           limit: 255
     t.string   "user_email",          limit: 255

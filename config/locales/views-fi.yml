@@ -119,6 +119,12 @@ fi:
     index:
       timeline_header: Toimitettavat tilaukset
       timeline_help_html: Aktivoi aikajana klikkaamalla
+    table:
+      cancel:
+        button: Peru
+        confirm: "Perutaanko varmasti %{klass} %{name}?"
+        proceed: Peru tilaus
+        cancel: Takaisin
     show:
       duplicate: Kopioi ostoskoriin
     edit:

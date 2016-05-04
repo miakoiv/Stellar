@@ -4,6 +4,10 @@ fi:
       subject: "%{store} – Tilausvahvistus"
       title: Tilausvahvistus
       thank_you: "%{store} kiittää tilauksestanne!"
+    order_cancellation:
+      subject: "%{store} – Tilauksen peruutus"
+      title: Tilauksen peruutus
+      body_html: <p>Tilauksenne on peruttu.</p>
     quotation:
       subject: "%{store} – Uusi tarjous"
       title: Tarjous

@@ -62,7 +62,9 @@ class OrdersController < ApplicationController
   def destroy
     authorize_action_for @order
 
-    @order.destroy
+    @order.update(cancelled_at: Time.current)
+    OrderMailer.order_cancellation(@order).deliver_later
+
     respond_to do |format|
       format.html { redirect_to orders_path,
         notice: t('.notice', order: @order) }

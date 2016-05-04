@@ -19,6 +19,8 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy, inverse_of: :order
   has_many :payments, dependent: :destroy, inverse_of: :order
 
+  default_scope { where(cancelled_at: nil) }
+
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
 
@@ -33,6 +35,9 @@ class Order < ActiveRecord::Base
 
   # Concluded orders.
   scope :concluded, -> { where.not(concluded_at: nil) }
+
+  # Cancelled orders.
+  scope :cancelled, -> { unscope(where: :cancelled_at).where.not(cancelled_at: nil) }
 
   # Orders that are not concluded or have been concluded not longer than
   # one week ago are topical. This is used for timeline data.
@@ -308,6 +313,10 @@ class Order < ActiveRecord::Base
     completed_at.present?
   end
   alias_method :complete, :complete?
+
+  def cancelled?
+    cancelled_at.present?
+  end
 
   # Addresses this order to the given user if she has any addresses defined.
   def address_to(user)

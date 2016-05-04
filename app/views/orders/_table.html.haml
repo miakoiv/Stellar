@@ -31,9 +31,9 @@
               = link_to icon('edit', t('actions.edit')), edit_order_path(order),
                   class: 'btn btn-default btn-sm'
             - if current_user.can_delete?(order)
-              = link_to icon('remove', t('actions.delete')), order_path(order), method: :delete, class: 'btn btn-sm btn-danger',
-                  data: {confirm: t('actions.confirm.body',
+              = link_to icon('remove', t('.cancel.button')), order_path(order), method: :delete, class: 'btn btn-sm btn-warning',
+                  data: {confirm: t('.cancel.confirm',
                     klass: Order.model_name.human, name: order.to_s),
                     'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+                    'confirm-proceed' => t('.cancel.proceed'),
+                    'confirm-cancel' => t('.cancel.cancel')}

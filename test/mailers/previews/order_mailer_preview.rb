@@ -11,6 +11,12 @@ class OrderMailerPreview < ActionMailer::Preview
       end
     end
 
+    store.orders.cancelled.each do |order|
+      define_method "order_cancellation (#{store} #{order})" do
+        OrderMailer.order_cancellation(order)
+      end
+    end
+
     store.orders.includes(:order_type).where(order_types: {is_quote: true}).each do |quotation|
       define_method "quotation (#{store} #{quotation})" do
         OrderMailer.quotation(quotation)

@@ -82,7 +82,7 @@ en:
     update:
       notice: "Order %{order} updated."
     destroy:
-      notice: "Order %{order} deleted."
+      notice: "Order %{order} cancelled."
     duplicate:
       notice: "Order %{order} copied to shopping cart."
       failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"

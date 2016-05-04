@@ -139,6 +139,12 @@ en:
     index:
       timeline_header: Orders that require shipping
       timeline_help_html: Click on the timeline to activate scrolling and zooming
+    table:
+      cancel:
+        button: Cancel
+        confirm: "Are you sure you want to cancel %{klass} %{name}?"
+        proceed: Cancel order
+        cancel: Go back
     show:
       duplicate: Duplicate to cart
     edit:
