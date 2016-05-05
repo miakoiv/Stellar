@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   include Imageable
   include Reorderable
   include FriendlyId
-  friendly_id :title, use: [:slugged, :history]
+  friendly_id :slugger, use: [:slugged, :history]
 
   #---
   # Pages serve different purposes while they are essentially comprised of
@@ -51,6 +51,10 @@ class Page < ActiveRecord::Base
 
   def needs_content?
     !route?
+  end
+
+  def slugger
+    [:title, [:title, -> { store.name }]]
   end
 
   # Prevent FriendlyId from changing slugs on route pages.
