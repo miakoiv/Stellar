@@ -198,6 +198,8 @@ en:
         live: Available
         not_live: Not available
         memo: Memo
+        mass: Weight
+        dimensions: Dimensions
         iframes: Embeds
         images: Images
         product_properties: Properties

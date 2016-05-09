@@ -47,7 +47,20 @@
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.select :linked_product_ids, @product.linked_product_options,
             {}, {multiple: true, class: 'selectize'}
-        = f.text_area :memo, rows: 4
+        %fieldset.bg-warning
+          = f.text_field :mass, append: 'g', class: 'text-right'
+          .form-group
+            %label.control-label.col-sm-4= col(Product, :dimensions)
+            .col-sm-8
+              .input-group
+                = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
+                %span.input-group-addon ⨯
+                = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
+                %span.input-group-addon ⨯
+                = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
+                %span.input-group-addon mm
+        %fieldset.gap
+          = f.text_area :memo, rows: 4
       - unless locked
         %fieldset.actions
           = f.form_group do

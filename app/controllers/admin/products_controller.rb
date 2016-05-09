@@ -75,7 +75,8 @@ class Admin::ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(
         :compound, :virtual, :code, :customer_code, :title, :subtitle,
-        :description, :memo, :cost_price, :trade_price, :retail_price,
+        :description, :memo, :mass, :dimension_u, :dimension_v, :dimension_w,
+        :cost_price, :trade_price, :retail_price,
         :available_at, :deleted_at, category_ids: [], linked_product_ids: []
       )
     end
