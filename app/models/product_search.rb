@@ -23,7 +23,7 @@ class ProductSearch < Searchlight::Search
 
   #---
   def base_query
-    Product.includes(:categories).order(:title, :subtitle)
+    Product.order(:title, :subtitle)
   end
 
   def search_store_id
