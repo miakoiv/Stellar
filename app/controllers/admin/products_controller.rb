@@ -4,7 +4,7 @@ class Admin::ProductsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  authority_actions reorder: 'update'
+  authority_actions query: 'read', reorder: 'update'
 
   layout 'admin'
 
@@ -17,6 +17,14 @@ class Admin::ProductsController < ApplicationController
     @query = saved_search_query('product', 'admin_product_search')
     @search = ProductSearch.new(search_params)
     @products = @search.results.page(params[:page])
+  end
+
+  # GET /admin/products/query.json?q=keyword
+  # This method serves selectize widgets populated via Ajax.
+  def query
+    @query = {keyword: params[:q]}
+    @search = ProductSearch.new(search_params)
+    @products = @search.results
   end
 
   # GET /admin/products/1

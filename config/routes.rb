@@ -79,6 +79,7 @@ Rails.application.routes.draw do
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
       resources :relationships, shallow: true
+      get :query, on: :collection
       post :reorder, on: :collection
     end
     resources :promotions do
