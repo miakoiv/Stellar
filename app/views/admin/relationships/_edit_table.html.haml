@@ -1,0 +1,42 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-1.text-right= col(Relationship, :quantity)
+        %th.actions
+
+    %tbody#relationships-tbody
+      = render partial: 'admin/relationships/edit_tbody', object: product, as: :product
+
+.table-responsive
+  = form_for [:admin, product, product.relationships.build(quantity: 1)], remote: true do |f|
+    %table.table.table-loose
+      %tbody
+        %tr
+          %td.col-xs-10
+            = f.select :component_id, current_store.products.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize-tall'}
+          %td.col-xs-1= f.number_field :quantity, min: 1, class: 'form-control text-right'
+          %td.actions
+            = f.button id: 'create_relationship', class: 'btn btn-default' do
+              = icon('check')
+
+:coffee
+  options = #{current_store.products.map { |p|
+    {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
+  }.to_json}
+
+  $('#relationship_component_id').selectize
+    dropdownParent: 'body'
+    options: options
+    maxItems: 1
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'title', 'subtitle']
+    diacritics: false
+    render:
+      item: (item, escape) ->
+        '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
+      option: (item, escape) ->
+        '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><div><strong>' + escape(item.title) + ' </strong>' + (if item.subtitle then escape(item.subtitle) else '') + '</div><div class="small text-right">' + escape(item.code) + '</div></div></div>'

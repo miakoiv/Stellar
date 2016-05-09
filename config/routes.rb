@@ -78,6 +78,7 @@ Rails.application.routes.draw do
       resources :product_properties, shallow: true
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
+      resources :relationships, shallow: true
       post :reorder, on: :collection
     end
     resources :promotions do

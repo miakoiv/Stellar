@@ -245,6 +245,10 @@ fi:
         unit_pricing: Käytä yksikköhintaa
         searchable: Lisää tuotehakuun
         name: Nimi
+      relationship:
+        product_id: Tuote
+        component_id: Komponentti
+        quantity: Määrä
       role:
         name: Nimi
       store:

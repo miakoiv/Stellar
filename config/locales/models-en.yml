@@ -245,6 +245,10 @@ en:
         unit_pricing: Use unit pricing
         searchable: Include in product search
         name: Name
+      relationship:
+        product_id: Product
+        component_id: Component
+        quantity: Quantity
       role:
         name: Name
       store:
