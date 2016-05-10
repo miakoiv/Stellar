@@ -142,7 +142,7 @@ class Order < ActiveRecord::Base
   def insert(product, amount, pricing_group = nil)
     if product.compound?
       product.relationships.each do |relationship|
-        insert(relationship.component, relationship.quantity)
+        insert(relationship.component, relationship.quantity, pricing_group)
       end
     else
       order_item = order_items.create_with(
