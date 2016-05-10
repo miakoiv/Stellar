@@ -3,7 +3,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :product_id, current_store.products.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize-tall'}
+        = f.select :product_id, [], {include_blank: true}, {placeholder: t('actions.query'), class: 'selectize-tall'}
         = f.select :user_id, current_store.users.non_guest.map { |u| [u.to_s, u.id] }, {include_blank: true}, {class: 'selectize'}
       - unless locked
         %fieldset.actions
@@ -11,20 +11,22 @@
             = f.primary
 
 :coffee
-  options = #{current_store.products.map { |p|
-    {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
-  }.to_json}
-
   $('#customer_asset_product_id').selectize
     dropdownParent: 'body'
-    options: options
-    maxItems: 1
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
-    searchField: ['code', 'title', 'subtitle']
+    searchField: ['title', 'subtitle']
     diacritics: false
-    render:
-      item: (item, escape) ->
-        '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
-      option: (item, escape) ->
-        '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><div><strong>' + escape(item.title) + ' </strong>' + (if item.subtitle then escape(item.subtitle) else '') + '</div><div class="small text-right">' + escape(item.code) + '</div></div></div>'
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      return callback() unless query
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        data:
+          q: query
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)

@@ -202,6 +202,7 @@ en:
     reorder: Reorder
     search: Search
     advanced_search: Advanced search with ”%{keyword}”…
+    query: Type to search…
     confirm:
       title: 'Are you sure?'
       body: "Are you sure you want to delete %{klass} ”%{name}”?"

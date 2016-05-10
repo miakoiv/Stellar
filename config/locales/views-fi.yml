@@ -178,6 +178,7 @@ fi:
     reorder: Järjestele
     search: Etsi
     advanced_search: Tarkennettu haku sanalla ”%{keyword}”…
+    query: Kirjoita hakeaksesi…
     confirm:
       title: 'Oletko varma?'
       body: "Poistetaanko varmasti %{klass} ”%{name}”?"

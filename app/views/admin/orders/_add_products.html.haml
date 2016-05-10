@@ -1,23 +1,26 @@
 #add-products
   = bootstrap_form_for order, url: add_products_admin_order_path(order), remote: true, method: :post do |f|
-    = f.text_field :product_ids_string, class: 'selectize-tall'
+    = f.text_field :product_ids_string, placeholder: t('actions.query'), class: 'selectize-tall'
     = f.submit t('.submit')
 
   :coffee
-    options = #{current_store.products.live.map { |p|
-      {id: p.id, code: p.code, title: p.title, subtitle: p.subtitle, image: image_variant_tag(p.cover_image, :thumbnail)}
-    }.to_json}
-
     $('#order_product_ids_string').selectize
       plugins: ['remove_button']
-      options: options
-      maxItems: null
+      dropdownParent: 'body'
       valueField: 'id'
       sortField: [{field: 'title'}, {field: 'subtitle'}]
-      searchField: ['code', 'title', 'subtitle']
+      searchField: ['title', 'subtitle']
       diacritics: false
-      render:
-        item: (item, escape) ->
-          '<div><strong>' + escape(item.title) + '</strong> ' + (if item.subtitle then escape(item.subtitle) else '') + '</div>'
-        option: (item, escape) ->
-          '<div class="list-group-item"><div class="media-left">' + item.image + '</div><div class="media-body"><div><strong>' + escape(item.title) + ' </strong>' + (if item.subtitle then escape(item.subtitle) else '') + '</div><div class="small text-right">' + escape(item.code) + '</div></div></div>'
+      render: $.fn.selectize.renderers
+      load: (query, callback) ->
+        return callback() unless query
+        $.ajax
+          url: '#{query_admin_products_path}'
+          type: 'GET'
+          dataType: 'json'
+          data:
+            q: query
+          error: ->
+            callback()
+          success: (response) ->
+            callback(response)
