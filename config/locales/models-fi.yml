@@ -198,8 +198,8 @@ fi:
         live: Myynnissä
         not_live: Ei myynnissä
         memo: Muistio
-        mass: Paino
-        dimensions: Mitat
+        mass: Pakkauksen paino
+        dimensions: Pakkauksen mitat
         iframes: Upotukset
         images: Kuvat
         product_properties: Ominaisuudet
