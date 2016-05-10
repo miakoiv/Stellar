@@ -40,14 +40,6 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  # Reveal price and components when the order allows it.
-  def reveal_price?
-    order.reveal_prices?
-  end
-  def reveal_components?
-    order.reveal_components? && product.relationships.any?
-  end
-
   def subtotal_cents
     amount * (price_cents || 0)
   end
