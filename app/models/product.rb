@@ -53,11 +53,6 @@ class Product < ActiveRecord::Base
   has_many :promotions, through: :promoted_items
   has_many :iframes, dependent: :destroy
 
-  # Self-referential HABTM to link products together.
-  # FIXME: remove this once existing linked products have been converted
-  # to requisite entries
-  has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
-
   # Alternate retail prices in pricing groups.
   has_many :alternate_prices, dependent: :destroy
 
@@ -179,12 +174,8 @@ class Product < ActiveRecord::Base
     (title_changed? || subtitle_changed? || code_changed?) || super
   end
 
-  def with_linked_products
-    [self] + linked_products
-  end
-
-  def linked_product_options
-    (store.products.live - [self]).map { |p| [p.to_s, p.id] }
+  def with_requisite_products
+    [self] + requisite_products
   end
 
   def to_s

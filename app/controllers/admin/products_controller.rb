@@ -101,7 +101,7 @@ class Admin::ProductsController < ApplicationController
         :compound, :virtual, :code, :customer_code, :title, :subtitle,
         :description, :memo, :mass, :dimension_u, :dimension_v, :dimension_w,
         :cost_price, :trade_price, :retail_price,
-        :available_at, :deleted_at, category_ids: [], linked_product_ids: []
+        :available_at, :deleted_at, category_ids: []
       )
     end
 

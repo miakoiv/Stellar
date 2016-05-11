@@ -131,7 +131,7 @@ fi:
       duplicate: Kopioi ostoskoriin
   store:
     all_products: Kaikki tuotteet
-    linked_products: Tämä tuote tarvitsee näitä oheistuotteita
+    requisite_products: Tämä tuote tarvitsee näitä oheistuotteita
     add_to_cart: Lisää koriin
     select_for_cart: Valitse tuotteet
     empty_cart: Ostoskorisi on tyhjä.

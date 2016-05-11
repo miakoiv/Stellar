@@ -155,7 +155,7 @@ en:
       add: Add to cart
   store:
     all_products: All products
-    linked_products: This product requires these additional products
+    requisite_products: This product requires these additional products
     add_to_cart: Add to cart
     select_for_cart: Select products
     empty_cart: Your shopping cart is empty.

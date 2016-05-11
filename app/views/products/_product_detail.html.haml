@@ -59,10 +59,10 @@
 
   .product-footer
 
-    - if @product.linked_products.any?
-      %h2= t('store.linked_products')
-      .linked-products
-        %ul= render partial: 'products/linked_product', collection: @product.linked_products, as: :product
+    - if @product.requisite_products.any?
+      %h2= t('store.requisite_products')
+      .requisite-products
+        %ul= render partial: 'products/requisite_product', collection: @product.requisite_products, as: :product
 
-  - if @product.linked_products.any?
+  - if @product.requisite_products.any?
     = render partial: 'store/select_for_cart_modal', object: product, as: :product

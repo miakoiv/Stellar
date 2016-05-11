@@ -2,7 +2,7 @@
   = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
     .form-group
       = hidden_field_tag :amount, 1
-      - if product.linked_products.any?
+      - if product.requisite_products.any?
         %button.btn.btn-success{type: 'button', data: {toggle: 'modal', target: '#select-for-cart-modal'}}= icon('shopping-cart', t('store.select_for_cart'))
       - else
         %button.btn.btn-success{type: 'submit'}= icon('cart-plus', t('store.add_to_cart'))

@@ -122,7 +122,7 @@ de:
       add: Zum Warenkorb hinzufügen
   store:
     all_products: Alle Produkte
-    linked_products: Dieses Produkt benötigt diese zusätzlichen Produkte
+    requisite_products: Dieses Produkt benötigt diese zusätzlichen Produkte
     add_to_cart: Zum Warenkorb hinzufügen
     select_for_cart: Produkte auswählen
     empty_cart: Ihr Warenkorb ist leer.

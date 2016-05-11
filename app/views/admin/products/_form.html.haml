@@ -45,8 +45,6 @@
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           = f.date_field :deleted_at,
               data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        = f.select :linked_product_ids, @product.linked_product_options,
-            {}, {multiple: true, class: 'selectize'}
         %fieldset.bg-warning
           = f.text_field :mass, append: 'g', class: 'text-right'
           .form-group
