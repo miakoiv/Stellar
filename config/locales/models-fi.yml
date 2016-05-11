@@ -101,6 +101,10 @@ fi:
         name: Nimi
         description: Kuvaus
         product_scope: Tuotteiden järjestys
+      component_entry:
+        product_id: Tuote
+        component_id: Komponentti
+        quantity: Määrä
       customer_asset:
         user_id: Asiakas
         product_id: Tuote
@@ -203,8 +207,7 @@ fi:
         iframes: Upotukset
         images: Kuvat
         product_properties: Ominaisuudet
-        components: Komponentit
-        linked_product_ids: Liitännäistuotteet
+        component_entries: Rakenne
         cost_price: Omakustannushinta
         trade_price: Valmistajan hinta
         retail_price: Myyntihinta
@@ -245,10 +248,6 @@ fi:
         unit_pricing: Käytä yksikköhintaa
         searchable: Lisää tuotehakuun
         name: Nimi
-      relationship:
-        product_id: Tuote
-        component_id: Komponentti
-        quantity: Määrä
       role:
         name: Nimi
       store:

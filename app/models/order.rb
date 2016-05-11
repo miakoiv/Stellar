@@ -141,8 +141,8 @@ class Order < ActiveRecord::Base
   # different pricing may be applied at checkout by Order#reappraise!
   def insert(product, amount, pricing_group = nil)
     if product.compound?
-      product.relationships.each do |relationship|
-        insert(relationship.component, relationship.quantity, pricing_group)
+      product.component_entries.each do |entry|
+        insert(entry.component, entry.quantity, pricing_group)
       end
     else
       order_item = order_items.create_with(
@@ -276,9 +276,9 @@ class Order < ActiveRecord::Base
   def aggregated_components
     aggregated = {}.tap do |aggregated|
       order_items.each do |item|
-        item.product.relationships.each do |relationship|
-          aggregated[relationship.component] ||= 0
-          aggregated[relationship.component] += item.amount * relationship.quantity
+        item.product.component_entries.each do |entry|
+          aggregated[entry.component] ||= 0
+          aggregated[entry.component] += item.amount * entry.quantity
         end
       end
     end

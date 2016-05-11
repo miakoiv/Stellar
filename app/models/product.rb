@@ -43,8 +43,8 @@ class Product < ActiveRecord::Base
   }
 
   has_many :order_items
-  has_many :relationships, dependent: :destroy
-  has_many :components, through: :relationships
+  has_many :component_entries, dependent: :destroy
+  has_many :component_products, through: :component_entries, source: :component
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
   has_many :promoted_items
@@ -52,6 +52,7 @@ class Product < ActiveRecord::Base
   has_many :iframes, dependent: :destroy
 
   # Self-referential HABTM to link products together.
+  # FIXME: replace this with a has_many through association
   has_and_belongs_to_many :linked_products, class_name: 'Product', join_table: :linked_products_products, foreign_key: :product_id, association_foreign_key: :linked_product_id
 
   # Alternate retail prices in pricing groups.

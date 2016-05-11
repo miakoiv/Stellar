@@ -1,0 +1,2 @@
+module Admin::ComponentEntriesHelper
+end

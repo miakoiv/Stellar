@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RelationshipTest < ActiveSupport::TestCase
+class ComponentEntryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

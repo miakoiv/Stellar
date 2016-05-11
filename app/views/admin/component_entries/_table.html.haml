@@ -1,0 +1,15 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-1.text-right= col(ComponentEntry, :quantity)
+
+    %tbody
+      = content_tag_for :tr, product.component_entries do |entry|
+        %td
+          %strong= entry.component.title
+          = entry.component.subtitle
+        %td= entry.component.code
+        %td.text-right= entry.quantity

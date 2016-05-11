@@ -4,7 +4,7 @@
       %strong
         = link_to_if order_item.real? && order_item.live?, order_item.product_title, admin_product_path(order_item.product)
       = order_item.product_subtitle
-      - if order_item.product.relationships.any?
+      - if order_item.product.component_entries.any?
         %span.caret
     %td.no-wrap
       - if order_item.real?
@@ -18,13 +18,13 @@
     %td.text-right.currency
       = humanized_money_with_symbol order_item.subtotal
 
-  = content_tag_for :tr, order_item.product.relationships do |relationship|
+  = content_tag_for :tr, order_item.product.component_entries do |entry|
     %td.col-xs-1
     %td.text-muted
       %strong
-        = link_to relationship.component.title, admin_product_path(relationship.component)
-      = relationship.component.subtitle
-    %td.no-wrap= relationship.component.code
-    %td.text-right.text-muted= relationship.quantity * order_item.amount
+        = link_to entry.component.title, admin_product_path(entry.component)
+      = entry.component.subtitle
+    %td.no-wrap= entry.component.code
+    %td.text-right.text-muted= entry.quantity * order_item.amount
     %td
     %td

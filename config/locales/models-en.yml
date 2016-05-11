@@ -101,6 +101,10 @@ en:
         name: Name
         description: Description
         product_scope: Product sorting
+      component_entry:
+        product_id: Product
+        component_id: Component
+        quantity: Quantity
       customer_asset:
         user_id: Customer
         product_id: Product
@@ -203,8 +207,7 @@ en:
         iframes: Embeds
         images: Images
         product_properties: Properties
-        components: Components
-        linked_product_ids: Associated products
+        component_entries: Structure
         cost_price: Cost Price
         trade_price: Trade price
         retail_price: Retail price
@@ -245,10 +248,6 @@ en:
         unit_pricing: Use unit pricing
         searchable: Include in product search
         name: Name
-      relationship:
-        product_id: Product
-        component_id: Component
-        quantity: Quantity
       role:
         name: Name
       store:

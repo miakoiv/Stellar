@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505134634) do
+ActiveRecord::Schema.define(version: 20160511080813) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -100,6 +100,16 @@ ActiveRecord::Schema.define(version: 20160505134634) do
   end
 
   add_index "categories_users", ["category_id", "user_id"], name: "index_categories_users_on_category_id_and_user_id", unique: true, using: :btree
+
+  create_table "component_entries", force: :cascade do |t|
+    t.integer  "product_id",   limit: 4, null: false
+    t.integer  "component_id", limit: 4, null: false
+    t.integer  "quantity",     limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "component_entries", ["product_id"], name: "index_component_entries_on_product_id", using: :btree
 
   create_table "customer_assets", force: :cascade do |t|
     t.integer  "store_id",    limit: 4,             null: false
@@ -438,16 +448,6 @@ ActiveRecord::Schema.define(version: 20160505134634) do
 
   add_index "properties", ["measurement_unit_id"], name: "index_properties_on_measurement_unit_id", using: :btree
   add_index "properties", ["store_id"], name: "index_properties_on_store_id", using: :btree
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer  "product_id",   limit: 4, null: false
-    t.integer  "component_id", limit: 4, null: false
-    t.integer  "quantity",     limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "relationships", ["product_id"], name: "index_relationships_on_product_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

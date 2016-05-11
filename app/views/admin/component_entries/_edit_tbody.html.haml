@@ -1,0 +1,8 @@
+= content_tag_for :tr, product.component_entries do |entry|
+  %td
+    %strong= entry.component.title
+    = entry.component.subtitle
+  %td= entry.component.code
+  %td.text-right= entry.quantity
+  %td.actions
+    = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -189,28 +189,28 @@ namespace :matfox do
     )
   end
 
-  # Updates the relationships of `product` according to entries
+  # Updates the component entries of `product` according to entries
   # in `structure`, in the scope of `store`.
   def update_structure(store, product, structure)
     if structure.nil?
-      product.relationships.clear
+      product.component_entries.clear
     else
-      relationships = structure.map { |row|
+      component_entries = structure.map { |row|
         [
           store.products.find_by(code: row[:component_code]),
           row[:quantity].to_i
         ]
       }.reject { |row| row[0].nil? }
 
-      # First mass assign the components to delete unwanted relationships.
-      product.components = relationships.map { |r| r[0] }
+      # First mass assign the components to delete unwanted entries.
+      product.component_products = component_entries.map { |r| r[0] }
 
-      # Now update quantities on the relationships.
-      relationships.each do |relationship|
-        product.relationships.find_by(
-          component: relationship[0]
+      # Now update quantities on the component entries.
+      component_entries.each do |entry|
+        product.component_entries.find_by(
+          component: entry[0]
         ).update(
-          quantity: relationship[1]
+          quantity: entry[1]
         )
       end
     end

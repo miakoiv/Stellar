@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Admin::RelationshipsControllerTest < ActionController::TestCase
+class Admin::ComponentEntriesControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

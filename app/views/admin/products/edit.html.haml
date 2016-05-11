@@ -29,8 +29,8 @@
         %a{href: '#tab-iframes', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :iframes)
       %li{role: 'presentation'}
-        %a{href: '#tab-components', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :components)
+        %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
+          = col(Product, :component_entries)
 
     .tab-content
       #tab-alternate-prices.tab-pane.fade.in.active
@@ -42,5 +42,5 @@
         = render partial: 'admin/product_properties/edit_table', object: @product, as: :product
       #tab-iframes.tab-pane.fade
         = render partial: 'admin/iframes/edit_table', object: @product, as: :product
-      #tab-components.tab-pane.fade
-        = render partial: 'admin/relationships/edit_table', object: @product, as: :product
+      #tab-component-entries.tab-pane.fade
+        = render partial: 'admin/component_entries/edit_table', object: @product, as: :product
