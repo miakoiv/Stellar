@@ -79,6 +79,10 @@ Rails.application.routes.draw do
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
       resources :component_entries, shallow: true
+      resources :requisite_entries, shallow: true do
+        post :reorder, on: :collection
+      end
+      post :add_requisite_entries, on: :member
       get :query, on: :collection
       post :reorder, on: :collection
     end

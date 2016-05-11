@@ -4,12 +4,12 @@ class Admin::ProductsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  authority_actions query: 'read', reorder: 'update'
+  authority_actions query: 'read', reorder: 'update', add_requisite_entries: 'update'
 
   layout 'admin'
 
   authorize_actions_for Product
-  before_action :set_product,  only: [:show, :edit, :update, :destroy]
+  before_action :set_product,  only: [:show, :edit, :update, :destroy, :add_requisite_entries]
 
   # GET /admin/products
   # GET /admin/products.json
@@ -70,6 +70,22 @@ class Admin::ProductsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /admin/products/1/add_requisite_entries
+  def add_requisite_entries
+    requisite_ids = params[:product][:requisite_ids_string]
+      .split(',').map(&:to_i)
+
+    requisite_ids.each do |requisite_id|
+      @product.requisite_entries.find_or_create_by(
+        requisite: Product.find(requisite_id)
+      ).update(priority: @product.requisite_entries.count)
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 

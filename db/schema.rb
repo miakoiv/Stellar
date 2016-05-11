@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511080813) do
+ActiveRecord::Schema.define(version: 20160511110542) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -448,6 +448,15 @@ ActiveRecord::Schema.define(version: 20160511080813) do
 
   add_index "properties", ["measurement_unit_id"], name: "index_properties_on_measurement_unit_id", using: :btree
   add_index "properties", ["store_id"], name: "index_properties_on_store_id", using: :btree
+
+  create_table "requisite_entries", force: :cascade do |t|
+    t.integer "product_id",   limit: 4,             null: false
+    t.integer "requisite_id", limit: 4,             null: false
+    t.integer "priority",     limit: 4, default: 0, null: false
+  end
+
+  add_index "requisite_entries", ["product_id"], name: "index_requisite_entries_on_product_id", using: :btree
+  add_index "requisite_entries", ["requisite_id"], name: "index_requisite_entries_on_requisite_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

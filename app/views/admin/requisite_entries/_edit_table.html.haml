@@ -1,0 +1,20 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min.hidden-print
+        %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :code)
+        %th.actions
+
+    %tbody#requisite-entries-tbody.sortable
+      = render partial: 'admin/requisite_entries/edit_tbody', object: product, as: :product
+
+:coffee
+  $('#requisite-entries-tbody').sortable(
+    items: 'tr'
+    handle: '.handle'
+    placeholder: '#{tr_placeholder(4)}'
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_product_requisite_entries_path(@product)}',
+      {reorder: $('tr', this).map(-> this.id).get()}

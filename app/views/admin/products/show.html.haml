@@ -30,6 +30,9 @@
         %a{href: '#tab-iframes', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :iframes)
       %li{role: 'presentation'}
+        %a{href: '#tab-requisite-entries', role: 'tab', data: {toggle: 'tab'}}
+          = col(Product, :requisite_entries)
+      %li{role: 'presentation'}
         %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :component_entries)
 
@@ -42,5 +45,7 @@
         = render partial: 'admin/product_properties/table', object: @product, as: :product
       #tab-iframes.tab-pane.fade
         = render partial: 'admin/iframes/table', object: @product, as: :product
+      #tab-requisite-entries.tab-pane.fade
+        = render partial: 'admin/requisite_entries/table', object: @product, as: :product
       #tab-component-entries.tab-pane.fade
         = render partial: 'admin/component_entries/table', object: @product, as: :product

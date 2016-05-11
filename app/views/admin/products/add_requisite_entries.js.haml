@@ -1,0 +1,4 @@
+$('#requisite-entries-tbody').html("#{j render partial: 'admin/requisite_entries/edit_tbody', object: @product, as: :product}");
+$('#add-requisite-entries').replaceWith("#{j render partial: 'admin/products/add_requisite_entries', object: @product, as: :product}");
+
+$('#requisite-entries-tbody').sortable();
