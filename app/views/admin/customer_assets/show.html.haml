@@ -8,9 +8,4 @@
     = icon('archive', @customer_asset.product.title)
     %span.small= @customer_asset.user
 
-.row
-  .col-md-5
-    = render partial: 'form', locals: {locked: true}
-
-  .col-md-7
-    = render partial: 'admin/asset_entries/table', object: @customer_asset, as: :customer_asset
+= render partial: 'admin/asset_entries/table', object: @customer_asset, as: :customer_asset
