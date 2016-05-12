@@ -1,6 +1,7 @@
 = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
+  $('.category-banner').hide()
   $('.products').hide()
   $('.product-detail').show().initialize()
   if $(window).isSmall()

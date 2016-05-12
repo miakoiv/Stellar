@@ -14,6 +14,7 @@ class Category < ActiveRecord::Base
   belongs_to :parent_category, class_name: 'Category'
   has_many :subcategories, class_name: 'Category', foreign_key: :parent_category_id
   has_and_belongs_to_many :products
+  belongs_to :banner, class_name: 'Page'
 
   scope :live, -> { where(live: true) }
   scope :top_level, -> { where(parent_category_id: nil) }
@@ -56,6 +57,10 @@ class Category < ActiveRecord::Base
 
   def indented_name
     "#{'    ' * level}#{name}"
+  end
+
+  def description
+    name
   end
 
   def to_s

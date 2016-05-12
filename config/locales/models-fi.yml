@@ -99,7 +99,7 @@ fi:
         live: Aktiivinen
         not_live: Tuoteryhmä ei aktiivinen
         name: Nimi
-        description: Kuvaus
+        banner_id: Julistesivu
         product_scope: Tuotteiden järjestys
       component_entry:
         product_id: Tuote

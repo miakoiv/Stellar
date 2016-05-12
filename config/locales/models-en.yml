@@ -99,7 +99,7 @@ en:
         live: Enabled
         not_live: Category is disabled
         name: Name
-        description: Description
+        banner_id: Banner page
         product_scope: Product sorting
       component_entry:
         product_id: Product
