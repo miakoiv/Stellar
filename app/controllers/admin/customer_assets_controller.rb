@@ -13,7 +13,7 @@ class Admin::CustomerAssetsController < ApplicationController
   def index
     @query = saved_search_query('customer_asset', 'admin_customer_asset_search')
     @search = CustomerAssetSearch.new(search_params)
-    @customer_assets = @search.results
+    @customer_assets = @search.results.page(params[:page])
   end
 
   # GET /admin/customer_assets/1
