@@ -1,0 +1,89 @@
+/*
+ * Theme specific styles
+ */
+
+$brand-primary: #99000f;
+$navbar-default-link-active-bg: transparent;
+
+@import "bootstrap-font-awesome.scss";
+@import "bootstrap-generators.scss";
+@import "bootstrap-tweaks.scss";
+@import "fonts.scss";
+@import "print.scss";
+
+body.stellar {
+  overflow-y: scroll;
+  padding-top: 80px;
+}
+
+#main-nav {
+  @include box-shadow(0 0 6px 0 rgba(0,0,0,0.8));
+  font-size: $font-size-small;
+  font-weight: 500;
+
+  > .content {
+    @extend .container;
+    padding-top: 15px;    // padding the container only,
+    padding-bottom: 15px; // not the contained elements
+
+    .navbar-brand {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      img {
+        max-height: 50px;
+        margin: 0;
+      }
+    }
+
+    .navbar-nav {
+      > li {
+
+        &.active:before {
+          content: '';
+          position: absolute;
+          left: 15px;
+          right: 15px;
+          bottom: 10px;
+          border-bottom: 3px solid $brand-primary;
+        }
+      }
+    }
+    #navbar-search .form-control {
+      @extend .input-sm;
+      max-width: 120px;
+    }
+  }
+}
+
+/*
+  on extra small screens the navbar will collapse, and we shrink the logo,
+  and revert navbar links to original styles
+*/
+@media (max-width: $screen-sm-min) {
+  body.stellar { padding-top: 75px; }
+
+  #main-nav {
+    > .content {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .navbar-brand img {
+        max-height: 30px;
+        margin-top: 12px;
+      }
+
+      .navbar-nav {
+        > li {
+          margin-top: 0;
+          padding-top: 0;
+
+          &.active {
+            background-color: darken($navbar-default-bg, 6.5%);
+            &:before { display: none; }
+          }
+        }
+      }
+    }
+  }
+}
