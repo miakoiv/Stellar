@@ -68,6 +68,7 @@ body {
   }
 
   #categories-wrap {
+    position: relative;
     background-color: #333;
     border-top: 1px solid #676767;
     border-bottom: 1px solid #676767;
@@ -81,11 +82,14 @@ body {
         color: #fff;
         font-size: $font-size-small;
 
-        li.category {
-          position: relative;
+        > li.category {
+          position: static; // override relative position set by .nav
 
+          &.active {
+            > .subcategories-wrap { display: block; }
+          }
           &:not(.active):hover a { background-color: #000; }
-          a {
+          > a {
             color: inherit;
             border-radius: 0;
             white-space: nowrap;
@@ -93,37 +97,50 @@ body {
             img { display: none; }
             p { margin: 0; }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    .subcategories {
-      @extend .container;
 
-      > ul {
-        @extend .nav, .nav-pills;
-        font-size: $font-size-small;
+          .subcategories-wrap {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
 
-        li.category {
-          a {
-            border-radius: 0;
+            > .subcategories {
+              @extend .container;
+              padding-top: 1px;
+              padding-bottom: 1px;
 
-            img { display: none; }
-            p { margin: 0; }
+              > ul {
+                @extend .nav, .nav-pills;
+
+                > li {
+                  img { display: none; }
+                  p { margin: 0; }
+                }
+              }
+            }
           }
-        }
-        li {
-          button { @extend .btn-link; }
         }
       }
     }
   }
 
   #products-wrap {
+    position: relative;
+
+    #products-view-toggle {
+      position: absolute;
+      right: $grid-gutter-width/2;
+      top: -30px;
+
+      button {
+        @extend .btn, .btn-default, .btn-xs;
+      }
+    }
     .products {
       @extend .container;
-      margin-top: 20px;
+      margin-top: 40px;
 
       .product-grid {
         @extend .row;

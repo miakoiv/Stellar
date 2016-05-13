@@ -63,31 +63,36 @@ body {
   }
 
   #categories-wrap {
+    position: relative;
     background-color: rgba(255,255,255, 0.667);
 
     .categories {
       @extend .container-fluid;
       padding-top: 10px;
 
-      ul {
+      > ul {
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
         list-style: none;
         padding-left: 0;
 
-        li.category {
+        > li.category {
           @extend .col-xs-4, .col-sm-3, .col-md-2, .col-lg-1;
+          position: static; // override relation position set above
           float: left;
-          position: relative;
           max-width: 200px;
           padding-left: 5px;
           padding-right: 5px;
 
-          &.active a p { @extend .btn-primary; }
+          &.active {
+            > a p { @extend .btn-primary; }
+            > .subcategories-wrap { display: block; }
+          }
           &:hover a img { transform: scale(1.10); }
-          a {
+          > a {
             display: block;
+            position: relative;
             padding: 0 0 20px;
             text-decoration: none;
             color: inherit;
@@ -109,42 +114,41 @@ body {
               transition: all 0.2s ease-in-out 0s;
             }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    background-color: rgba(0,0,0, 0.4);
+          .subcategories-wrap {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0, 0.4);
 
-    .subcategories {
-      @extend .container;
+            .subcategories {
+              @extend .container;
+              padding-top: 5px;
+              padding-bottom: 5px;
 
-      ul {
-        @extend .row;
-        list-style: none;
-        margin: 0;
-        padding: 5px 0;
+              > ul {
+                list-style: none;
+                padding-left: 0;
 
-        li.category {
-          float: left;
+                > li.category {
+                  float: left;
 
-          &.active a p { @extend .btn-default; }
-          a {
-            display: block;
-            padding: 0;
-            text-decoration: none;
+                  &.active a p { @extend .btn-default; }
+                  a {
+                    display: block;
+                    padding: 0;
+                    text-decoration: none;
 
-            p {
-              @extend .btn-sm;
-              margin-bottom: 0;
-              color: #fff;
+                    p {
+                      @extend .btn-sm;
+                      margin-bottom: 0;
+                      color: #fff;
+                    }
+                  }
+                }
+              }
             }
-          }
-        }
-        li {
-          button {
-            @extend .btn-link;
-            color: #fff;
           }
         }
       }
@@ -152,10 +156,21 @@ body {
   }
 
   #products-wrap {
+    position: relative;
+
+    #products-view-toggle {
+      position: absolute;
+      right: $grid-gutter-width/2;
+      top: -30px;
+
+      button {
+        @extend .btn, .btn-link, .btn-xs;
+      }
+    }
     .products {
       @extend .container;
       position: relative;
-      padding-top: 20px;
+      margin-top: 40px;
       padding-bottom: 20px;
 
       .product-grid {

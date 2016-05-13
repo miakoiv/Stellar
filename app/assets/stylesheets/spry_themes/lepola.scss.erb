@@ -62,39 +62,37 @@ body {
         @extend .nav, .nav-pills;
 
         li.category {
+          &.active {
+            .subcategories-wrap { display: block; }
+          }
           a {
             border-radius: 18px;
 
             img { display: none; }
             p { margin: 0; }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    .subcategories {
-      @extend .container;
-      padding: 5px 0;
-      font-size: $font-size-small;
-
-      ul {
-        @extend .nav, .nav-pills;
-
-        li {
-          a {
-            img { display: none; }
-            p { margin: 0; }
-          }
+          .subcategories-wrap { display: none; }
         }
       }
     }
   }
 
   #products-wrap {
+    position: relative;
+
+    #products-view-toggle {
+      position: absolute;
+      right: $grid-gutter-width/2;
+      top: -30px;
+
+      button {
+        @extend .btn, .btn-default, .btn-xs;
+      }
+    }
     .products {
       @extend .container;
       position: relative;
+      margin-top: 40px;
 
       ul {
         list-style: none;

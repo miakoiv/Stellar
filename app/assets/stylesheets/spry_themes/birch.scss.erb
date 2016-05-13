@@ -46,6 +46,8 @@ body {
   }
 
   #categories-wrap {
+    position: relative;
+    padding-bottom: 50px;
     background-image: url(<%= asset_path('birch.jpg') %>);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -63,29 +65,32 @@ body {
         list-style: none;
         padding-left: 0;
 
-        li.category {
+        > li.category {
           @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+          position: static; // override position: relative set by .col-*
           max-width: 230px;
           margin-bottom: 15px;
           transition: all 0.2s ease-in-out 0s;
 
           &.active {
-            a {
+            > a {
               @include box-shadow(0 0 4px 2px rgba(0,0,0,0.8));
             }
+            > .subcategories-wrap { display: block; }
           }
 
           &:hover, &.active {
-            a {
+            > a {
               p {
                 background-color: rgba(80,59,34,0.95);
               }
             }
           }
 
-          a {
+          > a {
             @include box-shadow(0 0 1px 1px rgba(0,0,0,0.333));
             display: block;
+            position: relative;
             text-decoration: none;
 
             img {
@@ -93,8 +98,8 @@ body {
             }
             p {
               position: absolute;
-              left: 15px;
-              right: 15px;
+              left: 0;
+              right: 0;
               bottom: 0;
               margin: 0;
               padding: 15px;
@@ -102,24 +107,28 @@ body {
               color: #fff;
             }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    .subcategories {
-      @extend .container;
-      padding-top: 5px;
+          .subcategories-wrap {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.7);
 
-      > ul {
-        @extend .nav, .nav-pills;
-        min-height: 40px;
-        font-size: $font-size-small;
+            > .subcategories {
+              @extend .container;
+              padding-top: 5px;
+              padding-bottom: 5px;
 
-        li.category {
-          a {
-            img { display: none; }
-            p { margin: 0; }
+              > ul {
+                @extend .nav, .nav-pills;
+
+                > li {
+                  img { display: none; }
+                  p { margin: 0; }
+                }
+              }
+            }
           }
         }
       }
@@ -127,10 +136,21 @@ body {
   }
 
   #products-wrap {
+    position: relative;
+
+    #products-view-toggle {
+      position: absolute;
+      right: $grid-gutter-width/2;
+      top: -30px;
+
+      button {
+        @extend .btn, .btn-default, .btn-xs;
+      }
+    }
     .products {
       @extend .container;
       position: relative;
-      margin-top: 10px;
+      margin-top: 40px;
 
       .product-grid {
         @extend .row;

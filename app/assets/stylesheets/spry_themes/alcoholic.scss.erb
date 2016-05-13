@@ -46,6 +46,7 @@ body {
   }
 
   #categories-wrap {
+    position: relative;
     background-color: #343434;
 
     .categories {
@@ -57,27 +58,28 @@ body {
         padding: 15px 0;
         margin: 0;
         font-size: $font-size-small;
-        font-weight: 500;
-        text-transform: uppercase;
 
-        li.category {
+        > li.category {
           float: left;
           padding: 5px 0;
           margin-right: $grid-gutter-width;
 
           &.active {
-            a {
+            > a {
               color: #fff;
               border-bottom-color: $brand-primary;
             }
+            > .subcategories-wrap { display: block; }
           }
 
-          a {
+          > a {
             display: block;
             padding: 0;
+            text-align: left;
             text-decoration: none;
             color: #b6b6b6;
-            text-align: left;
+            font-weight: 500;
+            text-transform: uppercase;
             border-bottom: 2px solid transparent;
 
             &:hover { color: #eee; }
@@ -85,23 +87,29 @@ body {
             img { display: none; }
             p { margin: 0; }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    .subcategories {
-      @extend .container;
-      padding-top: 5px;
 
-      > ul {
-        @extend .nav, .nav-pills;
-        font-size: $font-size-small;
+          .subcategories-wrap {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fff;
 
-        li.category {
-          a {
-            img { display: none; }
-            p { margin: 0; }
+            > .subcategories {
+              @extend .container;
+              padding-top: 5px;
+              padding-bottom: 5px;
+
+              > ul {
+                @extend .nav, .nav-pills;
+
+                > li {
+                  img { display: none; }
+                  p { margin: 0; }
+                }
+              }
+            }
           }
         }
       }
@@ -109,10 +117,21 @@ body {
   }
 
   #products-wrap {
+    position: relative;
+
+    #products-view-toggle {
+      position: absolute;
+      right: $grid-gutter-width/2;
+      top: -30px;
+
+      button {
+        @extend .btn, .btn-default, .btn-xs;
+      }
+    }
     .products {
       @extend .container;
       position: relative;
-      margin-top: 20px;
+      margin-top: 40px;
 
       .product-grid {
         @extend .row;

@@ -111,18 +111,18 @@ body.compass {
     .categories {
       @extend .container;
 
-      ul {
+      > ul {
         @extend .clearfix;
         list-style: none;
         margin: 0;
         padding-left: 0;
 
-        li.category {
+        > li.category {
           float: left;
           position: relative;
           width: 20%;
 
-          a {
+          > a {
             display: block;
             text-decoration: none;
             background-color: #c4c4c4;
@@ -140,24 +140,7 @@ body.compass {
               white-space: nowrap;
             }
           }
-        }
-      }
-    }
-  }
-  #subcategories-wrap {
-    .subcategories {
-      @extend .container;
-
-      ul {
-        @extend .clearfix;
-        list-style: none;
-        margin: 0;
-        padding-left: 0;
-
-        li {
-          float: left;
-
-          a, button { @extend .btn, .btn-link; }
+        > .subcategories-wrap { display: none; }
         }
       }
     }

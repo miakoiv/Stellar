@@ -63,12 +63,12 @@ body {
       @extend .container;
       padding-top: 20px;
 
-      ul {
+      > ul {
         list-style: none;
         margin: 0;
         padding: 0;
 
-        li.category {
+        > li.category {
           display: inline-block;
           position: relative;
           margin-right: -10px;
@@ -89,7 +89,7 @@ body {
               @include gradient-directional(rgba(255,255,255,0.1), rgba(255,255,255,0.9), 120deg);
             }
           }
-          a {
+          > a {
             display: block;
             position: relative;
             width: 90px;
@@ -122,7 +122,6 @@ body {
       }
     }
   }
-  #subcategories-wrap { display: none; }
 
   #products-wrap {
     .products {
