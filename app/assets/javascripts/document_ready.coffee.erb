@@ -32,6 +32,9 @@ $.fn.extend
     $(this).addClass 'active'
     $(this).parents('li').addClass 'active'
 
+  make_room: (element) ->
+    $(this).css 'padding-bottom', element.height()
+
   rebuild_masonry: ->
     $brickwork = $('.brickwork')
     $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')
