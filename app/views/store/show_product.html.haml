@@ -3,8 +3,6 @@
 #categories-wrap
   .categories.hidden-print
     %ul= render @categories
-#subcategories-wrap
-  = render partial: 'subcategories'
 #category-banner-wrap{style: 'display: none'}
 
 #search-panel-wrap
@@ -12,6 +10,7 @@
 
 #products-wrap
   .products{style: 'display: none'}
+  = render partial: 'products_view_toggle'
 
 #product-detail-wrap
   .product-detail

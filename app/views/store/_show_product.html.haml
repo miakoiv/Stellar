@@ -3,6 +3,7 @@
 :coffee
   $('.category-banner').hide()
   $('.products').hide()
+  $('#products-view-toggle').hide()
   $('.product-detail').show().initialize()
   if $(window).isSmall()
     $(window).scrollTo $('.product-detail'), 300, offset: -70

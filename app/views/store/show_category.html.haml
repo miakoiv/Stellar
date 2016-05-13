@@ -3,8 +3,6 @@
 #categories-wrap
   .categories.hidden-print
     %ul= render @categories
-#subcategories-wrap
-  = render partial: 'subcategories'
 #category-banner-wrap
   = render partial: 'category_banner'
 
@@ -22,6 +20,7 @@
     .product-list.collapse
       .panel.panel-default
         = render partial: 'products/table', object: @products, as: :products
+  = render partial: 'products_view_toggle'
 
 #product-detail-wrap
   .product-detail{style: 'display: none'}

@@ -30,8 +30,7 @@ $.fn.extend
     $(this).removeClass 'active'
   activate: ->
     $(this).addClass 'active'
-    if parent = $(this).data 'parent'
-      $(parent).activate()
+    $(this).parents('li').addClass 'active'
 
   rebuild_masonry: ->
     $brickwork = $('.brickwork')

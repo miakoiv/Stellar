@@ -9,15 +9,15 @@
     = render partial: 'products/table', object: @products, as: :products
 
 :coffee
-  $('.category-banner').replaceWith("#{j render partial: 'category_banner'}")
-  $('.subcategories').replaceWith("#{j render partial: 'subcategories'}")
-  $('.categories > ul > .category').deactivate()
-  $("##{dom_id(@category)}").activate()
   $('.search-panel').hide()
   $('.product-detail').hide()
+  $('.category').deactivate()
+  $("##{dom_id(@category)}").activate()
+  $('.category-banner').replaceWith("#{j render partial: 'category_banner'}")
   $('.category-banner').show()
   $('.categories').show()
   $('.products').show()
+  $('#products-view-toggle').show()
   $('.navbar-form').show()
 
   if $(window).isSmall()

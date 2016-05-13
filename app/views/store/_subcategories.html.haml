@@ -1,6 +1,0 @@
-.subcategories.hidden-print
-  %ul
-    - if @category.present?
-      = render partial: 'categories/subcategory', collection: @category.top_level.subcategories.sorted
-    %li.pull-right
-      %button.btn.btn-sm{type: 'button', data: {toggle: 'collapse', target: '.products > div'}}= icon('list')

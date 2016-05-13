@@ -2,3 +2,7 @@
   = link_to show_category_path(category), data: {push: 'partial', target: '.products'} do
     = image_variant_tag category.cover_image, :presentational
     %p= category.name
+  .subcategories-wrap
+    - if category.subcategories.any?
+      .subcategories
+        %ul= render category.subcategories
