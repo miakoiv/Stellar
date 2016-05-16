@@ -82,9 +82,6 @@ gem 'paperclip', '~> 4.2'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
-# Cascading grid layout library
-gem 'masonry-rails'
-
 # Navigation link helper
 gem 'active_link_to'
 

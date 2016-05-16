@@ -151,8 +151,6 @@ GEM
     magnific-popup-rails (1.0.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    masonry-rails (0.2.4)
-      railties
     meta-tags (2.1.0)
       actionpack (>= 3.0.0)
     mime-types (2.99.1)
@@ -333,7 +331,6 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   magnific-popup-rails
-  masonry-rails
   meta-tags
   momentjs-rails
   money-rails

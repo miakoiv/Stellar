@@ -30,8 +30,6 @@
 //= require languages/fi.js
 //= require dropzone
 //= require magnific-popup
-//= require masonry/jquery.masonry
-//= require masonry/jquery.imagesloaded.min
 //= require selectize
 //= require jquery-tablesorter
 //= require jquery.infinite-pages

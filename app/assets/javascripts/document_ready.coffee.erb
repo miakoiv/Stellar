@@ -39,8 +39,10 @@ $.fn.extend
     $brickwork = $('.brickwork')
     $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')
     $brickwork.imagesLoaded ->
-      this.masonry
+      console.log this
+      $brickwork.masonry
         itemSelector: 'li.product'
+        percentPosition: true
 
 jQuery ->
 
