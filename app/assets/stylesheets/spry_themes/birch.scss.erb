@@ -14,27 +14,42 @@ $brand-primary: #013183;
 
 body {
   overflow-y: scroll;
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 #main-nav {
   @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.333));
 
-  & > .content {
+  > .content {
     @extend .container;
+    padding-top: 5px;    // padding the container only,
+    padding-bottom: 5px; // not the contained elements
+
+    .navbar-brand {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      img {
+        max-height: 35px;
+        margin: 0;
+      }
+    }
+    #navbar-search .form-control {
+      max-width: 120px;
+    }
   }
 }
 
 #main-wrap {
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
     margin-top: 40px;
 
-    & > .content {
+    > .content {
       @extend .container;
     }
   }
@@ -47,7 +62,6 @@ body {
 
   #categories-wrap {
     position: relative;
-    padding-bottom: 50px;
     background-image: url(<%= asset_path('birch.jpg') %>);
     background-attachment: fixed;
     background-repeat: no-repeat;
