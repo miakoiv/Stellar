@@ -190,9 +190,12 @@ class Order < ActiveRecord::Base
     another_order.order_items.destroy_all
     failed_items = copy_items_to(another_order)
     another_order.update(
-      contact_person: customer_name,
-      contact_email: customer_email,
-      contact_phone: customer_phone,
+      shipping_at: shipping_at,
+      installation_at: installation_at,
+      company_name: company_name,
+      contact_person: contact_person,
+      contact_email: contact_email,
+      contact_phone: contact_phone,
       has_billing_address: has_billing_address,
       billing_address: billing_address,
       billing_postalcode: billing_postalcode,
