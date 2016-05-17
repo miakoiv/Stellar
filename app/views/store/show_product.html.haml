@@ -3,7 +3,8 @@
 #categories-wrap
   .categories.hidden-print
     %ul= render @categories
-#category-banner-wrap{style: 'display: none'}
+#category-banner-wrap
+  = render partial: 'category_banner'
 
 #search-panel-wrap
   .search-panel{style: 'display: none'}
