@@ -46,7 +46,7 @@ class Page < ActiveRecord::Base
   end
 
   def can_have_albums?
-    primary? || secondary?
+    primary? || secondary? || banner?
   end
 
   def needs_content?

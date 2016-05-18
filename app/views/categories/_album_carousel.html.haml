@@ -1,0 +1,7 @@
+- id = dom_id(album, 'carousel')
+
+.carousel.slide{id: id, data: {ride: 'carousel'}}
+  .carousel-inner{role: 'listbox'}
+    - album.images.each_with_index do |image, i|
+      .item{class: i == 0 ? 'active' : ''}
+        = image_variant_tag(image, :original)
