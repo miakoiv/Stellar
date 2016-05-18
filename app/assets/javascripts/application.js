@@ -25,6 +25,7 @@
 //= require plugins/file.min.js
 //= require plugins/lists.min.js
 //= require plugins/table.min.js
+//= require plugins/draggable.min.js
 //= require plugins/code_beautifier.min.js
 //= require plugins/code_view.min.js
 //= require languages/fi.js
