@@ -370,6 +370,16 @@ span.shipping:before { content: ""; }
   margin-bottom: 20px;
 
   .editable { outline: 2px dotted rgba(0,0,255,0.333); }
+  .snip {
+    @extend .panel, .panel-default;
+    min-height: 3em;
+    padding: 10px 15px;
+
+    &:before {
+      content: attr(data-src);
+      display: block;
+    }
+  }
 }
 
 //

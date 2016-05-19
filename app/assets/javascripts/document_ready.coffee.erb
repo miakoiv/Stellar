@@ -1,6 +1,12 @@
 $.fn.extend
   initialize: ->
 
+    $('#static-wrap .snip').each ->
+      $.ajax
+        url: $(this).data('src')
+        success: (data, status, xhr) =>
+          $(this).html data
+
     $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'

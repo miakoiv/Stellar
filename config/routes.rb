@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
 
+  # Snippets
+  get '/snippets/:type/:id', to: 'snippets#show', as: :show_snippet
+
   # Category and product views.
   get '/category/:category_id', to: 'store#show_category',
     as: :show_category
