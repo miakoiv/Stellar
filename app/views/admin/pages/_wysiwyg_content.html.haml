@@ -14,12 +14,16 @@
       key: '#{current_store.froala_key}'
       language: '#{current_store.locale}'
       toolbarButtons: [
-        'paragraphFormat', 'bold', 'italic', 'underline', '-', 'align', 'formatOL', 'formatUL', 'insertTable', 'insertImage', 'insertFile', '-', 'undo', 'redo', 'html'
+        'paragraphFormat', 'bold', 'italic', 'underline', '-', 'align', 'formatOL', 'formatUL', 'insertLink', 'insertTable', 'insertImage', 'insertFile', '-', 'undo', 'redo', 'html'
       ]
       toolbarInline: true
       placeholderText: ''
       paragraphFormatSelection: true
       tabSpaces: 2
+      linkAutoPrefix: ''
+      linkInsertButtons: ['linkBack']
+      linkStyles:
+        'snip': '<i class="fa fa-scissors"></i>'
       imageDefaultAlign: 'left'
       imageDefaultWidth: '100%'
       imageStyles:

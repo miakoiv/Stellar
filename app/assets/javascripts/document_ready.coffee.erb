@@ -1,11 +1,11 @@
 $.fn.extend
   initialize: ->
 
-    $('#static-wrap .snip').each ->
+    $('#static-wrap a.snip').each ->
       $.ajax
-        url: $(this).data('src')
+        url: $(this).attr 'href'
         success: (data, status, xhr) =>
-          $(this).html data
+          $(this).replaceWith data
 
     $('.gallery', this).each ->
       $(this).magnificPopup
