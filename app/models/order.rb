@@ -308,7 +308,7 @@ class Order < ActiveRecord::Base
   # An order is considered paid if its order type requires no payment,
   # or its balance reaches zero.
   def paid?
-    !has_payment? || balance <= 0
+    !has_payment? || balance_cents <= 0
   end
   alias_method :paid, :paid?
 
