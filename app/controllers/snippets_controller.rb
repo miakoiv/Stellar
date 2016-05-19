@@ -2,6 +2,11 @@
 
 class SnippetsController < ApplicationController
 
+  # This controller is aware of unauthenticated guests.
+  def current_user
+    super || guest_user
+  end
+
   # No layout, this controller never renders full pages.
 
   # GET /snippet/:type/:id
