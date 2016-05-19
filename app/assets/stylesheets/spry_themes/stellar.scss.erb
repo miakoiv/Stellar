@@ -437,22 +437,29 @@ body.stellar {
           margin-top: 40px;
         }
       }
-      .images.technical {
-        @extend .hidden-xs, .hidden-sm;
-        @extend .col-md-2, .col-md-push-6;
-        border-left: 1px solid #ddd;
-      }
-      .images.presentational {
-        @extend .col-xs-12;
-        @extend .col-sm-7;
-        @extend .col-md-6, .col-md-pull-6;
-      }
       .images {
-        padding-bottom: 40px;
+        &.presentational {
+          @extend .col-xs-12;
+          @extend .col-sm-7;
+          @extend .col-md-6, .col-md-pull-6;
 
+          .nav {
+            left: -1*$grid-gutter-width;
+          }
+        }
+        &.technical {
+          @extend .hidden-xs, .hidden-sm;
+          @extend .col-md-2, .col-md-push-6;
+          border-left: 1px solid #ddd;
+
+          .nav {
+            right: -1*$grid-gutter-width;
+          }
+        }
         .nav {
+          @extend .nav-stacked;
           position: absolute;
-          bottom: 0;
+          top: 0;
 
           > li > a { padding: 5px; }
         }
