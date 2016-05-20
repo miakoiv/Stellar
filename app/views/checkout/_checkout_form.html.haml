@@ -1,20 +1,21 @@
-= bootstrap_form_for @order, remote: true, layout: :vertical, data: {type: 'json'}, html: {id: 'checkout-form'} do |f|
+= bootstrap_form_for @order, remote: true, layout: :vertical, data: {type: 'json'}, html: {id: 'checkout-form', class: 'collapse in'} do |f|
   = f.hidden_field :order_type_id
-  .row
-    .col-sm-4
-      = f.text_field :customer_name, required: true
-    .col-sm-4
-      = f.text_field :customer_email, required: true
-    .col-sm-4
-      = f.telephone_field :customer_phone, required: true
-  - if current_store.b2b_sales?
+  %fieldset
     .row
       .col-sm-4
-        = f.text_field :company_name
+        = f.text_field :customer_name, required: true
       .col-sm-4
-        = f.text_field :contact_person
+        = f.text_field :customer_email, required: true
       .col-sm-4
-        = f.telephone_field :contact_phone
+        = f.telephone_field :customer_phone, required: true
+    - if current_store.b2b_sales?
+      .row
+        .col-sm-4
+          = f.text_field :company_name
+        .col-sm-4
+          = f.text_field :contact_person
+        .col-sm-4
+          = f.telephone_field :contact_phone
   - if @order.has_shipping?
     %fieldset.bg-info
       .row
@@ -48,7 +49,7 @@
         = f.text_field :our_reference
       .col-sm-4
         = f.text_field :message
-  = f.text_area :notes, rows: 4
+    = f.text_area :notes, rows: 4
 
   #continue-button.collapse{class: @order.paid? ? '' : 'in'}
     = f.form_group do

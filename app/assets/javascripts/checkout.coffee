@@ -8,6 +8,9 @@ jQuery ->
       $('#payment-widget').collapse 'hide'
       $('#confirm-button').collapse 'hide'
       $('#message-success').collapse 'show'
+      $('#checkout-form').collapse 'show'
     else
+      $('#checkout-form').find('fieldset').attr 'disabled', true
       $('#continue-button').collapse 'hide'
+      $('#checkout-form').collapse 'hide'
       $('#payment-widget').collapse 'show'
