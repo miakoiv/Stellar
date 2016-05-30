@@ -11,7 +11,7 @@ class UserAuthorizer < ApplicationAuthorizer
   end
 
   def self.deletable_by?(user)
-    user.has_cached_role?(:user_manager)
+    user.has_cached_role?(:superuser)
   end
 
   def updatable_by?(user)
