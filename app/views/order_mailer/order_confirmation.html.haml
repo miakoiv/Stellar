@@ -74,7 +74,7 @@
                         = @order.notes
               %tr
                 %td
-                  %table.invoice-items{cellpadding: 0, cellspacing: 0}
+                  %table.invoice-items{cellpadding: 5, cellspacing: 0}
                     %tr
                       %td= OrderItem.human_attribute_name(:product_code)
                       %td= OrderItem.human_attribute_name(:product_title)
@@ -87,15 +87,15 @@
                         %td
                           %b= order_item.product_title
                           = order_item.product_subtitle
-                        %td.alignright= order_item.amount
-                        %td.alignright
+                        %td.alignright.nowrap= order_item.amount
+                        %td.alignright.nowrap
                           = humanized_money_with_symbol order_item.price
-                        %td.alignright
+                        %td.alignright.nowrap
                           = humanized_money_with_symbol order_item.subtotal
                     %tr.total
                       %td.alignright{colspan: 4}
                         = Order.human_attribute_name(:grand_total)
-                      %td.alignright
+                      %td.alignright.nowrap
                         = humanized_money_with_symbol @order.grand_total
 
 .footer

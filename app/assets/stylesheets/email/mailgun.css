@@ -220,7 +220,7 @@ a {
 .invoice {
   margin: 40px auto;
   text-align: left;
-  width: 80%;
+  width: 100%;
 }
 .invoice td {
   padding: 5px 0;
@@ -229,7 +229,12 @@ a {
   width: 100%;
 }
 .invoice .invoice-items td {
-  border-top: #eee 1px solid;
+  padding: 5px;
+  border-top: 1px solid #eee;
+  border-left: 1px solid #eee;
+}
+.invoice .invoice-items td.nowrap {
+  white-space: nowrap;
 }
 .invoice .invoice-items .total td {
   border-top: 2px solid #333;
