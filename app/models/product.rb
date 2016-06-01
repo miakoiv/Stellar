@@ -9,6 +9,8 @@ class Product < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
+  #enum purpose: {vanilla: 0, master: 1, compound: 2, virtual: 3}
+
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
   monetize :trade_price_cents, allow_nil: true

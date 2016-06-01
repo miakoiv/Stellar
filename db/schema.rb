@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601061753) do
+ActiveRecord::Schema.define(version: 20160601114506) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -363,6 +363,8 @@ ActiveRecord::Schema.define(version: 20160601061753) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                limit: 4,                     null: false
+    t.integer  "purpose",                 limit: 4,     default: 0,     null: false
+    t.integer  "master_product_id",       limit: 4
     t.boolean  "live",                                  default: false, null: false
     t.boolean  "compound",                              default: false, null: false
     t.boolean  "virtual",                               default: false, null: false
@@ -390,6 +392,8 @@ ActiveRecord::Schema.define(version: 20160601061753) do
   end
 
   add_index "products", ["code"], name: "index_products_on_code", using: :btree
+  add_index "products", ["master_product_id"], name: "index_products_on_master_product_id", using: :btree
+  add_index "products", ["purpose"], name: "index_products_on_purpose", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
   add_index "products", ["subtitle"], name: "index_products_on_subtitle", using: :btree
