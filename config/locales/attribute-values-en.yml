@@ -18,6 +18,12 @@ en:
           string: String
           numeric: Numeric
       product:
+        purpose:
+          vanilla: product
+          master: master product
+          variant: product variant
+          compound: compound product
+          virtual: virtual product
         sorting:
           manual: manually
           alphabetical: alphabetical

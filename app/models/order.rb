@@ -287,7 +287,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # An order is empty when it's empty of non-virtual items.
+  # An order is empty when it's empty of real items.
   def empty?
     order_items.real.empty?
   end
@@ -364,7 +364,7 @@ class Order < ActiveRecord::Base
     grand_total_cents - payments.sum(:amount_cents)
   end
 
-  # Total sum without virtual items (like shipping and handling).
+  # Total sum counting only real items (excluding shipping and handling).
   def total_cents
     order_items.real.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
   end

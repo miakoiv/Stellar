@@ -18,6 +18,12 @@ fi:
           string: sanallinen
           numeric: numeerinen
       product:
+        purpose:
+          vanilla: tuote
+          master: päätuote
+          variant: tuotevariantti
+          compound: yhdistelmätuote
+          virtual: näennäinen tuote
         sorting:
           manual: käsin
           alphabetical: aakkosjärjestys

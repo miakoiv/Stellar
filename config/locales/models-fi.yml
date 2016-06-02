@@ -189,9 +189,8 @@ fi:
         name: Nimi
         markup_percent: Lisä-%
       product:
+        purpose: Tyyppi
         category_ids: Tuoteryhmät
-        compound: Yhdistelmätuote
-        virtual: Näennäinen tuote
         code: Tuotekoodi
         customer_code: Asiakkaan koodi
         title: Nimike

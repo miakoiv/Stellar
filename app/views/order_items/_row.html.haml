@@ -1,16 +1,19 @@
 = content_tag_for :tr, order_item do
   %td
     %strong
-      = link_to_if order_item.real? && order_item.live?, order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+      - if order_item.real? && order_item.live?
+        = link_to order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+      - else
+        = order_item.product_title
     = order_item.product_subtitle
   %td.no-wrap
     - if order_item.real?
       = order_item.product_code
   %td.text-right
-    - unless order_item.virtual?
+    - if order_item.real?
       = order_item.amount
   %td.text-right.currency
-    - unless order_item.virtual?
+    - if order_item.real?
       = humanized_money_with_symbol order_item.price
   %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal

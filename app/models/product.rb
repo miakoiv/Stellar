@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
-  #enum purpose: {vanilla: 0, master: 1, compound: 2, virtual: 3}
+  enum purpose: {vanilla: 0, master: 1, variant: 2, compound: 3, virtual: 4}
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
@@ -61,10 +61,16 @@ class Product < ActiveRecord::Base
   # Customer assets referring to this product.
   has_many :customer_assets
 
+  scope :real, -> { where.not(purpose: purposes[:virtual]) }
   scope :live, -> { where(live: true) }
   scope :undead, -> { where(live: false) }
-  scope :real, -> { where(virtual: false) }
-  scope :virtual, -> { where(virtual: true) }
+
+  # Products on display are shown in storefront views. Vanilla products are
+  # directly purchasable, master products link to their first variant, and
+  # compound products will split into their components when purchased.
+  scope :on_display, -> {
+    where(purpose: [:vanilla, :master, :compound].map { |p| purposes[p] })
+  }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
@@ -82,8 +88,13 @@ class Product < ActiveRecord::Base
   after_save :touch_categories
 
   #---
-  def real?; !virtual end
-  def undead?; !live end
+  def self.purpose_options
+    purposes.keys.map { |p| [Product.human_attribute_value(:purpose, p), p] }
+  end
+
+  #---
+  def real?; !virtual? end
+  def undead?; !live? end
 
   # If a single category is requested, give the first one.
   def category

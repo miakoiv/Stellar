@@ -10,10 +10,10 @@
       - if order_item.real?
         = order_item.product_code
     %td.text-right
-      - unless order_item.virtual?
+      - if order_item.real?
         = order_item.amount
     %td.text-right.currency
-      - unless order_item.virtual?
+      - if order_item.real?
         = humanized_money_with_symbol order_item.price
     %td.text-right.currency
       = humanized_money_with_symbol order_item.subtotal

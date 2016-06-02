@@ -5,10 +5,7 @@
       %fieldset{disabled: locked}
         = f.select :category_ids, current_store.category_options,
             {include_blank: true}, {multiple: true, class: 'selectize'}
-        = f.form_group do
-          = f.check_box :compound
-        = f.form_group do
-          = f.check_box :virtual
+        = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
         %fieldset.bg-warning
           = f.text_field :code, required: true
           = f.text_field :customer_code

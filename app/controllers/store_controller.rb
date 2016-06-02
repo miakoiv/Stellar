@@ -29,7 +29,7 @@ class StoreController < ApplicationController
   # GET /front
   def front
     @category = current_store.categories.sorted.first.try(:having_products)
-    @products = @category.present? ? @category.products.live.sorted(@category.product_scope) : []
+    @products = @category.present? ? @category.products.live.on_display.sorted(@category.product_scope) : []
   end
 
   # GET /:slug
@@ -82,7 +82,7 @@ class StoreController < ApplicationController
 
   # GET /category/:category_id
   def show_category
-    @products = @category.products.live.sorted(@category.product_scope)
+    @products = @category.products.live.on_display.sorted(@category.product_scope)
   end
 
   # GET /product/:category_id/:product_id
