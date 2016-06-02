@@ -42,8 +42,8 @@ class Category < ActiveRecord::Base
   # Defaults to self if there are no subcategories, or the first
   # subcategory has no products either.
   def having_products
-    return self if subcategories.empty? || products.any?
-    first_subcategory = subcategories.sorted.first
+    return self if subcategories.live.empty? || products.any?
+    first_subcategory = subcategories.live.sorted.first
     first_subcategory.products.empty? ? self : first_subcategory
   end
 

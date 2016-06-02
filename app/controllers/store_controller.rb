@@ -28,7 +28,7 @@ class StoreController < ApplicationController
 
   # GET /front
   def front
-    @category = current_store.categories.sorted.first.try(:having_products)
+    @category = @categories.first.try(:having_products)
     @products = @category.present? ? @category.products.live.on_display.sorted(@category.product_scope) : []
   end
 
@@ -82,7 +82,8 @@ class StoreController < ApplicationController
 
   # GET /category/:category_id
   def show_category
-    @products = @category.products.live.on_display.sorted(@category.product_scope)
+    display_products = @category.products.live.on_display
+    @products = display_products.sorted(@category.product_scope)
   end
 
   # GET /product/:category_id/:product_id
@@ -92,7 +93,7 @@ class StoreController < ApplicationController
   # POST /product/1/order
   def order_product
     @order = shopping_cart
-    @product = Product.live.friendly.find(params[:product_id])
+    @product = current_store.products.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
     @order.insert(@product, amount, current_pricing)
     @order.recalculate!
@@ -102,12 +103,13 @@ class StoreController < ApplicationController
 
   private
     def set_categories
-      @categories = current_store.categories.live.top_level.sorted
+      @live_categories = current_store.categories.live
+      @categories = @live_categories.top_level.sorted
     end
 
-    # Find category by friendly id in `category_id`, including history.
+    # Find category from live categories by friendly id, including history.
     def find_category
-      selected = Category.friendly.find(params[:category_id])
+      selected = @live_categories.friendly.find(params[:category_id])
       if params[:product_id].nil? && request.path != show_category_path(selected)
         return redirect_to show_category_path(selected), status: :moved_permanently
       end
@@ -119,7 +121,7 @@ class StoreController < ApplicationController
 
     # Find product by friendly id in `product_id`, including history.
     def find_product
-      @product = Product.live.friendly.find(params[:product_id])
+      @product = current_store.products.live.friendly.find(params[:product_id])
       if request.path != show_product_path(@category, @product)
         return redirect_to show_product_path(@category, @product), status: :moved_permanently
       end
