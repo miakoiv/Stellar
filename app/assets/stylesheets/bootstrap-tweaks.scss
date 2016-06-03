@@ -229,9 +229,8 @@ i.icon {
 }
 
 //
-// beautified nav tabs, with a special case for tabbed panels
+// tabbed panels and smaller navs
 //
-.nav-tabs { margin-bottom: 15px; }
 .nav-tabs.panel-tabs {
   margin-bottom: -1px;
   border-bottom-color: transparent;
@@ -240,6 +239,16 @@ i.icon {
   border-top-left-radius: 0;
   padding-top: 5px;
 }
+.nav-sm {
+  margin-bottom: 10px;
+  font-size: $font-size-small;
+
+  > li > a {
+    padding: 5px 10px;
+  }
+}
+
+a.disabled, .disabled > a { pointer-events: none; }
 
 input[type=number] { min-width: 60px; }
 
@@ -280,13 +289,15 @@ fieldset[disabled] .help-block { display: none; }
 // prettier fieldsets inside panels, vertical fieldset legend
 //
 .panel-body {
+  .gap { padding-top: 15px; }
+
   fieldset {
     position: relative;
     margin: 0 $grid-gutter-width/-2;
     padding: 0 $grid-gutter-width/2;
 
-    &.bg-primary, &.bg-success, &.bg-info, &.bg-warning, &.bg-danger,
-    &.actions, &.gap {
+    &.bg-primary, &.bg-success, &.bg-info,
+    &.bg-warning, &.bg-danger, &.actions {
       padding-top: 15px;
 
       &:first-child {
