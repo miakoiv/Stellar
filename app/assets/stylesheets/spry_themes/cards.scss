@@ -339,7 +339,7 @@ body {
       }
       .product-footer {
 
-        .requisite-products {
+        .requisite-products, .variant-products {
 
           ul {
             @extend .row;
@@ -347,13 +347,10 @@ body {
             padding: 0;
 
             li.product {
-              @extend .col-sm-2, .col-lg-1;
 
               a {
                 display: block;
                 text-decoration: none;
-
-                .product-image { @extend .box-thumbnail; }
 
                 h3 {
                   font-size: $font-size-base;
@@ -367,6 +364,19 @@ body {
                 }
               }
             }
+          }
+        }
+        .requisite-products ul li.product {
+          @extend .col-sm-2, .col-lg-1;
+
+          .product-image { @extend .box-thumbnail; }
+        }
+        .variant-products ul li.product {
+          @extend .col-lg-2;
+
+          .product-image { @extend .box-matchbox; }
+          .properties {
+            font-size: $font-size-small;
           }
         }
       }

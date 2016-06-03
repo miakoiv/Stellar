@@ -436,6 +436,11 @@ body.stellar {
         .body-text {
           margin-top: 40px;
         }
+        .properties {
+          margin-left: $grid-gutter-width/-2;
+
+          > tbody > tr > th { padding-left: $grid-gutter-width/2; }
+        }
       }
       .images {
         &.presentational {
@@ -481,7 +486,8 @@ body.stellar {
     }
     .product-footer {
       h2 { font-size: $font-size-large; }
-      .requisite-products {
+
+      .requisite-products, .variant-products {
         > ul {
           list-style: none;
           padding-left: 0;
@@ -525,6 +531,12 @@ body.stellar {
                     text-transform: uppercase;
                   }
                 }
+              }
+              .properties {
+                margin-left: $grid-gutter-width/-2;
+                font-size: $font-size-small;
+
+                > tbody > tr > th { padding-left: $grid-gutter-width/2; }
               }
             }
           }
