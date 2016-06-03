@@ -2,7 +2,7 @@
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1= icon('line-chart', t('admin.reports.title'))
 
-%ul.nav.nav-tabs{role: 'tablist'}
+%ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
   %li.active{role: 'presentation'}
     %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
       = t('admin.reports.inventory.title')
@@ -10,7 +10,7 @@
 .tab-content
   #tab-inventory.tab-pane.fade.in.active
     %h2.visible-print-block= t('admin.reports.inventory.title')
-    .panel.panel-default
+    .panel.panel-default.tabbed-panel
       .panel-body.form-horizontal
         .form-group
           %label.col-sm-4.control-label= t('admin.reports.inventory.total_value')

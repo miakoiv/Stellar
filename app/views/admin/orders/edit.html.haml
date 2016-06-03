@@ -14,7 +14,7 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-lg-7
-    %ul.nav.nav-tabs{role: 'tablist'}
+    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
           = title(OrderItem, count: 2)

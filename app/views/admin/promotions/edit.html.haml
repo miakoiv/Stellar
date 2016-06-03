@@ -11,7 +11,7 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-md-7
-    %ul.nav.nav-tabs{role: 'tablist'}
+    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-promoted', role: 'tab', data: {toggle: 'tab'}}
           = title(PromotedItem, count: 2)
