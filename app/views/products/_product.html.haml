@@ -10,7 +10,7 @@
       - product.active_promoted_items.each do |item|
         .promotion
           %p= item.description
-    - if can_see_pricing? && can_shop? && may_shop_at?(@category)
+    - if can_see_pricing? && can_shop? && may_shop_at?(@category) && !product.master?
       .buy-now
         %p= humanized_money_with_symbol product.price(current_pricing)
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do

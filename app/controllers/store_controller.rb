@@ -121,9 +121,13 @@ class StoreController < ApplicationController
 
     # Find product by friendly id in `product_id`, including history.
     def find_product
-      @product = current_store.products.live.friendly.find(params[:product_id])
-      if request.path != show_product_path(@category, @product)
-        return redirect_to show_product_path(@category, @product), status: :moved_permanently
+      selected = current_store.products.live.friendly.find(params[:product_id])
+      if request.path != show_product_path(@category, selected)
+        return redirect_to show_product_path(@category, selected), status: :moved_permanently
+      end
+      @product = selected.first_variant(@category)
+      if @product != selected
+        return redirect_to show_product_path(@category, @product)
       end
     end
 

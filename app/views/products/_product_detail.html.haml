@@ -59,10 +59,14 @@
 
   .product-footer
 
-    - if @product.requisite_products.any?
+    - if product.variant?
+      .variant-products
+        %ul= render partial: 'products/variant_product', collection: product.sibling_variants, as: :product, locals: {context: product}
+
+    - if product.requisite_products.any?
       %h2= t('store.requisite_products')
       .requisite-products
-        %ul= render partial: 'products/requisite_product', collection: @product.requisite_products, as: :product
+        %ul= render partial: 'products/requisite_product', collection: product.requisite_products, as: :product
 
-  - if @product.requisite_products.any?
+  - if product.requisite_products.any?
     = render partial: 'store/select_for_cart_modal', object: product, as: :product

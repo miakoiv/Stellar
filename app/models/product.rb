@@ -40,6 +40,11 @@ class Product < ActiveRecord::Base
   # timestamp when the relationships change.
   has_and_belongs_to_many :categories, after_add: :touch_self, after_remove: :touch_self
 
+  # Product may form master-variant relationships, and any change will
+  # trigger a timestamp update.
+  belongs_to :master_product, class_name: 'Product', inverse_of: :variants
+  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :touch_self, after_remove: :touch_self
+
   has_many :inventory_items, -> (product) {
     joins(:product).where('products.store_id = inventory_items.store_id')
   }
@@ -96,6 +101,25 @@ class Product < ActiveRecord::Base
   def real?; !virtual? end
   def undead?; !live? end
 
+  # Finds the first variant for this product in the scope of given category.
+  # Returns self if not a master product or there are no variants.
+  def first_variant(category)
+    master? && variants.sorted(category.product_scope).first || self
+  end
+
+  def sibling_variants
+    master_product.variants - [self]
+  end
+
+  # Finds product properties that differ from the baseline established
+  # by given product. Properties unique to this product are retained.
+  def distinct_properties(product)
+    baseline = product.product_properties_hash
+    product_properties.select { |product_property|
+      baseline[product_property.property_id] != product_property.value
+    }
+  end
+
   # If a single category is requested, give the first one.
   def category
     categories.first
@@ -103,6 +127,12 @@ class Product < ActiveRecord::Base
 
   def searchable_product_properties
     product_properties.joins(:property).merge(Property.searchable).merge(Property.sorted)
+  end
+
+  # Assigned product properties as a hash keyed by property id.
+  # Useful for comparison, see #distinct_properties.
+  def product_properties_hash
+    product_properties.pluck(:property_id, :value).to_h
   end
 
   def active_promoted_items

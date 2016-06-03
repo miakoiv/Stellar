@@ -10,7 +10,7 @@
     %td.currency
       = humanized_money_with_symbol product.price(current_pricing)
   %td.actions
-    - if can_shop?
+    - if can_shop? && !product.master?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
         .input-group
           = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
