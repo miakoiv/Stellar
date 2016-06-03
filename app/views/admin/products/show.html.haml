@@ -16,7 +16,7 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-lg-6
-    %ul.nav.nav-tabs{role: 'tablist'}
+    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
       %li.active{role: 'presentation'}
         %a{href: '#tab-alternate-prices', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :alternate_prices)

@@ -1,67 +1,107 @@
 = bootstrap_form_for [:admin, @product], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  .panel.panel-default
+  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
+    %li.active{role: 'presentation'}
+      %a{href: '#tab-product-meta', role: 'tab', data: {toggle: 'tab'}}
+        = col(Product, :metadata)
+    %li{role: 'presentation'}
+      %a{href: '#tab-product-text', role: 'tab', data: {toggle: 'tab'}}
+        = col(Product, :text)
+    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
+      %a{href: '#tab-product-measurements', role: 'tab', data: {toggle: 'tab'}}
+        = col(Product, :measurements)
+    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
+      %a{href: '#tab-product-pricing', role: 'tab', data: {toggle: 'tab'}}
+        = col(Product, :pricing)
+
+  .panel.panel-default.tabbed-panel
     .panel-body
-      %fieldset{disabled: locked}
-        = f.select :category_ids, current_store.category_options,
-            {include_blank: true}, {multiple: true, class: 'selectize'}
-        = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
-        %fieldset.bg-warning
-          = f.text_field :code, required: true
-          = f.text_field :customer_code
-        %fieldset.gap
-          = f.text_field :title, required: true
-          = f.text_field :subtitle
-          = f.text_area :description
-        %fieldset.bg-info
-          %legend.text-info.vertical= t('.default_pricing')
-          - if current_user.manufacturer?
-            = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
-          .form-group
-            %label.control-label.col-sm-4= col(Product, :trade_price)
-            .col-sm-4
-              .input-group
-                = f.text_field_without_bootstrap :trade_price, class: 'form-control text-right'
-                %span.input-group-addon €
-            .col-sm-4
-              .input-group
-                %span.input-group-addon= col(Product, :markup_percent)
-                = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), disabled: true, class: 'form-control text-right'
-          .form-group
-            %label.control-label.col-sm-4= col(Product, :retail_price)
-            .col-sm-4
-              .input-group
-                = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
-                %span.input-group-addon €
-            .col-sm-4
-              .input-group
-                %span.input-group-addon= col(Product, :margin_percent)
-                = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), disabled: true, class: 'form-control text-right'
-        %fieldset.gap
-          = f.date_field :available_at,
-              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          = f.date_field :deleted_at,
-              data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        %fieldset.bg-warning
-          = f.text_field :mass, append: 'g', class: 'text-right'
-          .form-group
-            %label.control-label.col-sm-4= col(Product, :dimensions)
-            .col-sm-8
-              .input-group
-                = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
-                %span.input-group-addon ⨯
-                = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
-                %span.input-group-addon ⨯
-                = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
-                %span.input-group-addon mm
-        %fieldset.gap
-          = f.text_area :memo, rows: 4
+      .tab-content
+        #tab-product-meta.tab-pane.fade.in.active
+          %fieldset{disabled: locked}
+            = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
+            .variant-only.collapse{class: @product.variant? ? 'in' : ''}
+              = f.select :master_product_id, @product.master_product_options, {}, {class: 'selectize'}
+            .master-only.collapse{class: @product.master? ? 'in' : ''}
+              = f.select :variant_ids, @product.available_variant_options, {}, {multiple: true, class: 'selectize'}
+            = f.select :category_ids, current_store.category_options, {include_blank: true}, {multiple: true, class: 'selectize'}
+            = f.text_field :code, required: true
+            = f.text_field :customer_code
+            = f.date_field :available_at,
+                data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+            = f.date_field :deleted_at,
+                data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+            = f.text_area :memo, rows: 4
+
+        #tab-product-text.tab-pane.fade
+          %fieldset{disabled: locked}
+            = f.text_field :title, required: true
+            = f.text_field :subtitle
+            = f.text_area :description
+
+        #tab-product-measurements.tab-pane.fade
+          %fieldset{disabled: locked}
+            = f.text_field :mass, append: 'g', class: 'text-right'
+            .form-group
+              %label.control-label.col-sm-4= col(Product, :dimensions)
+              .col-sm-8
+                .input-group
+                  = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
+                  %span.input-group-addon ⨯
+                  = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
+                  %span.input-group-addon ⨯
+                  = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
+                  %span.input-group-addon mm
+
+        #tab-product-pricing.tab-pane.fade
+          %fieldset{disabled: locked}
+            - if current_user.manufacturer?
+              = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
+            .form-group
+              %label.control-label.col-sm-4= col(Product, :trade_price)
+              .col-sm-4
+                .input-group
+                  = f.text_field_without_bootstrap :trade_price, class: 'form-control text-right'
+                  %span.input-group-addon €
+              .col-sm-4
+                .input-group
+                  %span.input-group-addon= col(Product, :markup_percent)
+                  = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), disabled: true, class: 'form-control text-right'
+            .form-group
+              %label.control-label.col-sm-4= col(Product, :retail_price)
+              .col-sm-4
+                .input-group
+                  = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
+                  %span.input-group-addon €
+              .col-sm-4
+                .input-group
+                  %span.input-group-addon= col(Product, :margin_percent)
+                  = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), disabled: true, class: 'form-control text-right'
       - unless locked
         %fieldset.actions
           = f.form_group do
             = f.primary
 
 :coffee
+  $('#product_purpose').on 'change', (e) ->
+    switch $(e.target).val()
+      when 'master'
+        $('.variant-only').collapse 'hide'
+        $('.master-only').collapse 'show'
+        $('.master-disable').addClass 'disabled'
+        $('#product_master_product_id')[0].selectize.setValue ''
+      when 'variant'
+        $('.master-only').collapse 'hide'
+        $('.variant-only').collapse 'show'
+        $('.master-disable').removeClass 'disabled'
+        $('#product_variant_ids')[0].selectize.setValue ''
+      else
+        $('.master-only').collapse 'hide'
+        $('.variant-only').collapse 'hide'
+        $('.master-disable').removeClass 'disabled'
+        $('#product_variant_ids')[0].selectize.setValue ''
+        $('#product_master_product_id')[0].selectize.setValue ''
+
   $('#product_description').froalaEditor
     key: '#{current_store.froala_key}'
     language: '#{current_store.locale}'

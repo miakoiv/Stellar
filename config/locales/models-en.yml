@@ -189,7 +189,13 @@ en:
         name: Name
         markup_percent: Markup %
       product:
+        metadata: General
+        text: Text
+        measurements: Measurements
+        pricing: Pricing
         purpose: Type
+        master_product_id: Master product
+        variant_ids: Variants
         category_ids: Categories
         code: Product code
         customer_code: Customer code

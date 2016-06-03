@@ -189,7 +189,13 @@ fi:
         name: Nimi
         markup_percent: Lisä-%
       product:
+        metadata: Yleistä
+        text: Teksti
+        measurements: Mitat
+        pricing: Hinnat
         purpose: Tyyppi
+        master_product_id: Päätuote
+        variant_ids: Variantit
         category_ids: Tuoteryhmät
         code: Tuotekoodi
         customer_code: Asiakkaan koodi

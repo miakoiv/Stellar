@@ -201,6 +201,14 @@ class Product < ActiveRecord::Base
     live?
   end
 
+  def master_product_options
+    store.products.master.map { |p| [p.to_s, p.id] }
+  end
+
+  def available_variant_options
+    store.products.variant.map { |p| [p.to_s, p.id] }
+  end
+
   # Options for a search form.
   def self.availability_options
     [
