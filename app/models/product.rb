@@ -229,6 +229,11 @@ class Product < ActiveRecord::Base
     [self] + requisite_products
   end
 
+  # Icon name based on purpose.
+  def icon
+    [nil, 'square', 'sitemap', 'archive', 'magic'][Product.purposes[purpose]]
+  end
+
   def to_s
     "#{title} #{subtitle}"
   end

@@ -5,6 +5,7 @@
         %th.col-min
         %th.col-xs-2= col(Product, :code)
         %th= col(Product, :title)
+        %th.col-min
         %th= col(Product, :category_ids)
         %th.actions
 
@@ -18,6 +19,7 @@
             %td
               %strong= product.title
               = product.subtitle
+            %td= icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
             %td= product.categories.to_sentence
             %td.actions
               = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
