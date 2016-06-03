@@ -21,7 +21,7 @@
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             .variant-only.collapse{class: @product.variant? ? 'in' : ''}
-              = f.select :master_product_id, @product.master_product_options, {}, {class: 'selectize'}
+              = f.select :master_product_id, @product.master_product_options, {include_blank: true}, {class: 'selectize'}
             .master-only.collapse{class: @product.master? ? 'in' : ''}
               = f.select :variant_ids, @product.available_variant_options, {}, {multiple: true, class: 'selectize'}
             = f.select :category_ids, current_store.category_options, {include_blank: true}, {multiple: true, class: 'selectize'}
