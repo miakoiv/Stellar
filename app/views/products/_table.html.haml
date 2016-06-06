@@ -9,27 +9,7 @@
           %th.no-wrap.text-right= col(Product, :price)
         %th.col-xs-1.actions{data: {sorter: 'false'}}
     %tbody
-      - products.each do |product|
-        - cache_if current_user.guest?, [I18n.locale, :product_row, product] do
-          = content_tag_for :tr, product do
-            %td
-              .box-thumbnail
-                = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-            %td
-              %strong= product.title
-              = product.subtitle
-            %td= product.code
-            - if can_see_pricing? && can_shop? && may_shop_at?(@category)
-              %td.currency.text-right
-                - unless product.master?
-                  = humanized_money_with_symbol product.price(current_pricing)
-            %td.actions
-              - if can_shop? && may_shop_at?(@category) && !product.master?
-                = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do
-                  .input-group
-                    = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
-                    %span.input-group-btn
-                      %button.btn.btn-success{type: 'submit'}= icon('cart-plus')
+      = render partial: 'products/table_row', collection: products, as: :product
 
 :coffee
   $('#products-table').tablesorter
