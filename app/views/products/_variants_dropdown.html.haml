@@ -1,16 +1,16 @@
 .dropdown
   %button.btn.btn-default.dropdown-toggle{type: 'button', data: {toggle: 'dropdown'}}
-    = col(Product, :variant_ids)
+    = t('products.product_detail.variants')
     %span.caret
   %ul.dropdown-menu
     = content_tag_for :li, product.sibling_variants do |variant|
       = link_to show_product_path(variant.category, variant), data: {push: 'partial', target: '.product-detail'} do
-        .product-image= image_variant_tag product.cover_image, :matchbox
-        .product-text
-          %h3
-            = product.title
-            %span.small= product.subtitle
-        %table.table.table-condensed.properties
-          = content_tag_for :tr, product.distinct_properties(context) do |product_property|
-            %th= product_property.property
-            %td= product_property.value_with_units
+        .media
+          .media-left= image_variant_tag variant.cover_image, :thumbnail, class: 'media-object'
+          .media-body
+            %h4.media-heading
+              = variant.title
+              %span.small= variant.subtitle
+            %p
+              - variant.distinct_properties(product).each do |product_property|
+                %span.label.label-default= product_property

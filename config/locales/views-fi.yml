@@ -129,6 +129,9 @@ fi:
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
+  products:
+    product_detail:
+      variants: Vaihtoehtoisia tuotteita…
   store:
     all_products: Kaikki tuotteet
     requisite_products: Tämä tuote tarvitsee näitä oheistuotteita

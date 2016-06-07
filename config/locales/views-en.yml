@@ -151,8 +151,7 @@ en:
       duplicate: Duplicate to cart
   products:
     product_detail:
-      amount: Amount
-      add: Add to cart
+      variants: Alternatives for this product…
   store:
     all_products: All products
     requisite_products: This product requires these additional products
