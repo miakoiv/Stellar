@@ -90,7 +90,7 @@ class StoreController < ApplicationController
   def show_product
   end
 
-  # POST /product/1/order
+  # POST /product/:product_id/order
   def order_product
     @order = shopping_cart
     @product = current_store.products.live.friendly.find(params[:product_id])
