@@ -40,13 +40,12 @@ Rails.application.routes.draw do
   # Snippets
   get '/snippets/:type/:id', to: 'snippets#show', as: :show_snippet
 
+  # Product specific routes.
+  post '/product/:product_id/order', to: 'store#order_product', as: :order_product
+
   # Category and product views.
-  get '/category/:category_id', to: 'store#show_category',
-    as: :show_category
-  get '/product/:category_id/:product_id', to: 'store#show_product',
-    as: :show_product
-  post '/product/:product_id/order', to: 'store#order_product',
-    as: :order_product
+  get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/product/:category_id/:product_id', to: 'store#show_product', as: :show_product
 
   # These routes can be reached via /:slug
   get '/front', to: 'store#front', as: :front
