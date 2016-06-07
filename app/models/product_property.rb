@@ -10,4 +10,8 @@ class ProductProperty < ActiveRecord::Base
     return value if property.measurement_unit.nil?
     (spacing ? "%s %s" : "%s%s") % [value, property.measurement_unit]
   end
+
+  def to_s
+    "#{property} #{value_with_units}"
+  end
 end
