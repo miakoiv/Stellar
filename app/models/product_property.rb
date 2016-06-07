@@ -5,6 +5,8 @@ class ProductProperty < ActiveRecord::Base
   belongs_to :product, touch: true
   belongs_to :property
 
+  default_scope { joins(:property).merge(Property.sorted) }
+
   #---
   def value_with_units(spacing = true)
     return value if property.measurement_unit.nil?
