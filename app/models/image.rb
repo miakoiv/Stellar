@@ -57,7 +57,7 @@ class Image < ActiveRecord::Base
 
   # Assign first applicable image type.
   def assign_image_type
-    self.image_type = applicable_image_types.first
+    self.image_type ||= applicable_image_types.first
   end
 
   def is_bitmap?
