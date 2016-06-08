@@ -20,6 +20,7 @@ class Property < ActiveRecord::Base
   has_many :product_properties, dependent: :destroy
   has_many :products, through: :product_properties
 
+  default_scope { sorted }
   scope :searchable, -> { where(searchable: true) }
   scope :unit_pricing, -> { where(unit_pricing: true) }
 
