@@ -49,6 +49,8 @@ fi:
         notice: "Tuote %{product} luotu."
       update:
         notice: "Tuote %{product} päivitetty."
+      duplicate:
+        notice: "Tuote %{product} kopioitu."
     promotions:
       create:
         notice: "Kampanja %{promotion} luotu."

@@ -75,6 +75,12 @@ fi:
       index:
         new_product: Uusi tuote
         uncategorized: Ei tuoteryhmää
+      table:
+        duplicate:
+          button: Kopioi
+          confirm: "Kopioidaanko varmasti %{klass} %{name}?"
+          proceed: Kopioi
+          cancel: Kumoa
       new:
         new_product: Uusi tuote
       form:

@@ -22,6 +22,13 @@
             %td= icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
             %td= product.categories.to_sentence
             %td.actions
+              - if current_user.can_create?(Product)
+                = link_to icon('copy', t('.duplicate.button')), duplicate_admin_product_path(product), method: :post, class: 'btn btn-warning btn-sm',
+                    data: {confirm: t('.duplicate.confirm',
+                      klass: Product.model_name.human, name: product.to_s),
+                      'confirm-title' => t('actions.confirm.title'),
+                      'confirm-proceed' => t('.duplicate.proceed'),
+                      'confirm-cancel' => t('.duplicate.cancel')}
               = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
               - if current_user.can_update?(Product)
                 = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'

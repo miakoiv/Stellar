@@ -49,6 +49,8 @@ en:
         notice: "Product %{product} created."
       update:
         notice: "Product %{product} updated."
+      duplicate:
+        notice: "Product %{product} duplicated."
     promotions:
       create:
         notice: "Promotion %{promotion} created."

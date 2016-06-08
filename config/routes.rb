@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       resources :requisite_entries, shallow: true do
         post :reorder, on: :collection
       end
+      post :duplicate, on: :member
       post :add_requisite_entries, on: :member
       get :query, on: :collection
       post :reorder, on: :collection

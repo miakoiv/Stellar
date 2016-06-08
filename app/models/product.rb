@@ -97,6 +97,14 @@ class Product < ActiveRecord::Base
     purposes.keys.map { |p| [Product.human_attribute_value(:purpose, p), p] }
   end
 
+  # Options for a search form.
+  def self.availability_options
+    [
+      [human_attribute_name(:live), true],
+      [human_attribute_name(:not_live), false]
+    ]
+  end
+
   #---
   def real?; !virtual? end
   def undead?; !live? end
@@ -217,12 +225,28 @@ class Product < ActiveRecord::Base
     store.products.variant.map { |p| [p.to_s, p.id] }
   end
 
-  # Options for a search form.
-  def self.availability_options
-    [
-      [human_attribute_name(:live), true],
-      [human_attribute_name(:not_live), false]
-    ]
+  # Creates a duplicate of this product, including associations.
+  def duplicate!
+    clone = dup.tap do |c|
+      c.reset_code
+      c.save
+      c.update(
+        categories: categories,
+        variants: variants,
+        component_products: component_products,
+        requisite_products: requisite_products,
+        iframes: iframes.map(&:dup),
+        alternate_prices: alternate_prices.map(&:dup),
+        product_properties: product_properties.map(&:dup)
+      )
+      images.each do |image|
+        c.images.create(
+          priority: image.priority,
+          image_type: image.image_type,
+          attachment: image.attachment
+        )
+      end
+    end
   end
 
   def slugger
@@ -253,6 +277,15 @@ class Product < ActiveRecord::Base
 
     def touch_categories
       categories.each(&:touch)
+    end
+
+    # Adds an incrementing branch number to the product code.
+    def reset_code
+      while !valid?
+        trunk, branch = code.partition(/ \(\d+\)/)
+        branch = ' (0)' if branch.empty?
+        self[:code] = "#{trunk}#{branch.succ}"
+      end
     end
 
     # Resets the live status of the product, according to these criteria:

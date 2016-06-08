@@ -95,6 +95,12 @@ en:
       index:
         new_product: New product
         uncategorized: Uncategorized
+      table:
+        duplicate:
+          button: Duplicate
+          confirm: "Are you sure you want to duplicate %{klass} %{name}?"
+          proceed: Duplicate
+          cancel: Cancel
       new:
         new_product: New product
       form:
