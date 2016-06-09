@@ -2,7 +2,7 @@
 
 #static-wrap
   .content{class: @page.albums.any? ? 'has-sidebar' : ''}
-    .fr-view
+    %div{class: @page.wysiwyg? ? 'fr-view' : ''}
       = @page.content.html_safe if @page.content.present?
 
 - if @page.albums.any?
