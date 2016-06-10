@@ -25,7 +25,7 @@ body.fanletti {
   font-weight: 500;
 
   > .content {
-    @extend .container;
+    @extend .container-fluid;
     padding-top: 15px;    // padding the container only,
     padding-bottom: 15px; // not the contained elements
 
@@ -44,7 +44,14 @@ body.fanletti {
         margin-top: -15px;  // matches container padding
         padding-top: 15px;
 
-        &.active { background-color: $brand-primary; }
+        &.active:before {
+          content: '';
+          position: absolute;
+          left: 15px;
+          right: 15px;
+          bottom: 10px;
+          border-bottom: 3px solid $brand-primary;
+        }
       }
     }
     #navbar-search .form-control {
