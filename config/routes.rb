@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     defaults: {status: '500'},
     via: :all
 
+  # Mount the cookie alert engine.
+  mount CookieAlert::Engine => '/cookie-alert'
+
   # Redirect old /store route.
   get '/store', to: redirect('/front')
 

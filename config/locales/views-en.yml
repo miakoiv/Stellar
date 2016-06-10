@@ -141,6 +141,9 @@ en:
         new_user: New user
       form:
         no_categories: all
+  cookie_alert:
+    title_html: <i class="fa fa-exclamation-circle"></i>
+    text_html: We use cookies to help personalise and improve your web experience. By using our website you consent to our use of cookies, some of which may have already been set on your device.
   orders:
     index:
       timeline_header: Orders that require shipping

@@ -121,6 +121,9 @@ fi:
         new_user: Uusi käyttäjä
       form:
         no_categories: kaikki
+  cookie_alert:
+    title_html: <i class="fa fa-exclamation-circle"></i>
+    text_html: Tämä sivusto vaatii toimiakseen keksejä, joita selaimesi vastaanottaa automaattisesti. Keksit sisältävät vain tätä sivustoa koskevia tietoja. Vierailemalla sivustolla hyväksyt keksien käytön tähän tarkoitukseen.
   orders:
     index:
       timeline_header: Toimitettavat tilaukset

@@ -2,6 +2,8 @@
 
 module ApplicationHelper
 
+  include CookieAlert
+
   def title(klass, options = {})
     klass.model_name.human(options).capitalize
   end

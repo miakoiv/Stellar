@@ -50,6 +50,9 @@ gem 'money-rails'
 # Shhhh
 gem 'quiet_assets'
 
+# EU Cookie Law requires this, unfortunately
+gem 'cookie_alert'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

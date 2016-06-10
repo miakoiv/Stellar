@@ -1,0 +1,31 @@
+#cookie_alert {
+  @extend .alert, .alert-info;
+  position: fixed;
+  min-width: 50px;
+  min-height: 52px;
+  margin: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+#cookie_alert_message {
+}
+
+#cookie_alert_title {
+  position: absolute;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+#cookie_alert_text {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#cookie_alert_close {
+  @extend .btn, .btn-xs, .btn-danger;
+  position: absolute;
+  right: 15px;
+}
