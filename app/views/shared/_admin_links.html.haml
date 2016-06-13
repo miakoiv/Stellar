@@ -1,23 +1,26 @@
-- if current_user.has_cached_role?(:reports)
-  = active_link_to icon('line-chart', t('admin.reports.title'), class: 'fa-fw'), admin_reports_path, wrap_tag: :li
 - if current_user.has_cached_role?(:order_review) || current_user.has_cached_role?(:order_manage)
   = active_link_to icon('truck', title(Order, count: 2), class: 'fa-fw'), admin_orders_path, wrap_tag: :li
+- if current_user.has_cached_role?(:reports)
+  = active_link_to icon('line-chart', t('admin.reports.title'), class: 'fa-fw'), admin_reports_path, wrap_tag: :li
+%li.divider
 - if current_user.has_cached_role?(:product_editor)
   = active_link_to icon('cube', title(Product, count: 2), class: 'fa-fw'), admin_products_path, wrap_tag: :li
 - if current_user.has_cached_role?(:category_editor)
   = active_link_to icon('sitemap', title(Category, count: 2), class: 'fa-fw'), admin_categories_path, wrap_tag: :li
-- if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
-  = active_link_to icon('shopping-basket', title(PricingGroup, count: 2), class: 'fa-fw'), admin_pricing_groups_path, wrap_tag: :li
-- if current_user.has_cached_role?(:promotion_editor)
-  = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'), admin_promotions_path, wrap_tag: :li
 - if current_user.has_cached_role?(:property_editor)
   = active_link_to icon('eyedropper', title(Property, count: 2), class: 'fa-fw'), admin_properties_path, wrap_tag: :li
-- if current_user.has_cached_role?(:asset_editor)
-  = active_link_to icon('archive', title(CustomerAsset, count: 2), class: 'fa-fw'), admin_customer_assets_path, wrap_tag: :li
 - if current_user.has_cached_role?(:page_editor)
   = active_link_to icon('files-o', title(Page, count: 2), class: 'fa-fw'), admin_pages_path, wrap_tag: :li
 - if current_user.has_cached_role?(:album_editor)
   = active_link_to icon('camera-retro', title(Album, count: 2), class: 'fa-fw'), admin_albums_path, wrap_tag: :li
+%li.divider
+- if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
+  = active_link_to icon('shopping-basket', title(PricingGroup, count: 2), class: 'fa-fw'), admin_pricing_groups_path, wrap_tag: :li
+- if current_user.has_cached_role?(:promotion_editor)
+  = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'), admin_promotions_path, wrap_tag: :li
+- if current_user.has_cached_role?(:asset_editor)
+  = active_link_to icon('archive', title(CustomerAsset, count: 2), class: 'fa-fw'), admin_customer_assets_path, wrap_tag: :li
+%li.divider
 - if current_user.has_cached_role?(:user_manager)
   = active_link_to icon('users', title(User, count: 2), class: 'fa-fw'), admin_users_path, wrap_tag: :li
 - if current_user.has_cached_role?(:store_admin)
