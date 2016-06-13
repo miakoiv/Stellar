@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602075227) do
+ActiveRecord::Schema.define(version: 20160613110906) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 20160602075227) do
     t.integer  "imageable_id",            limit: 4
     t.string   "imageable_type",          limit: 255
     t.integer  "image_type_id",           limit: 4
+    t.integer  "purpose",                 limit: 4,   default: 0, null: false
     t.integer  "priority",                limit: 4,   default: 0, null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false

@@ -4,6 +4,8 @@ class Image < ActiveRecord::Base
 
   include Reorderable
 
+  enum purpose: {presentational: 0, technical: 1, document: 2}
+
   #---
   belongs_to :imageable, polymorphic: true, touch: true
   belongs_to :image_type
