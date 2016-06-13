@@ -1,7 +1,7 @@
 fi:
   activerecord:
     values:
-      image_type:
+      image:
         purpose:
           presentational: esittävä
           technical: tekninen

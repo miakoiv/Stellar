@@ -87,7 +87,7 @@ class Admin::ImagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.require(:image).permit(
-        :image_type_id, :attachment
+        :purpose, :attachment
       )
     end
 end

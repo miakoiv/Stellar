@@ -5,9 +5,9 @@
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
       .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
-        - image.applicable_image_types.each do |imagetype|
-          %label.btn.btn-default{class: image.image_type == imagetype ? 'active' : nil}
-            = f.radio_button :image_type_id, imagetype.id
-            = imagetype
+        - image.applicable_purposes.each do |purpose|
+          %label.btn.btn-default{class: image.purpose == purpose ? 'active' : nil}
+            = f.radio_button :purpose, purpose
+            = Image.human_attribute_value(:purpose, purpose)
   %td.actions
     = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

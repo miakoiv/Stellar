@@ -3,7 +3,7 @@
     %thead
       %tr
         %th.col-xs-8= title(Image)
-        %th.col-xs-4= col(Image, :image_type_id)
+        %th.col-xs-4= col(Image, :purpose)
 
     %tbody
       = render partial: 'admin/images/row', collection: imageable.images.sorted, as: :image

@@ -22,9 +22,6 @@ en:
       image:
         one: image
         other: images
-      image_type:
-        one: image type
-        other: image types
       inventory:
         one: inventory
         other: inventories
@@ -113,7 +110,7 @@ en:
       iframe:
         html: HTML code
       image:
-        image_type_id: Image type
+        purpose: Image type
         attachment_file_name: File name
         attachment_content_type: File type
         attachment_file_size: File size

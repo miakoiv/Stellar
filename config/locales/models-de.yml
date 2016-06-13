@@ -13,9 +13,6 @@ de:
       image:
         one: Bild
         other: Bilder
-      image_type:
-        one: Bilder-Art
-        other: Bilder-Arten
       inventory:
         one: Bestand
         other: Bestände
@@ -75,7 +72,7 @@ de:
       iframe:
         html: HTML-Code
       image:
-        image_type_id: Bild-Typ
+        purpose: Bild-Typ
         attachment_file_name: Dateiname
         attachment_content_type: Dateityp
         attachment_file_size: Dateigröße

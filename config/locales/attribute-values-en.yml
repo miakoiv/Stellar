@@ -1,7 +1,7 @@
 en:
   activerecord:
     values:
-      image_type:
+      image:
         purpose:
           presentational: Presentational
           technical: Technical

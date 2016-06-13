@@ -242,7 +242,7 @@ class Product < ActiveRecord::Base
       images.each do |image|
         c.images.create(
           priority: image.priority,
-          image_type: image.image_type,
+          purpose: image.purpose,
           attachment: image.attachment
         )
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613110906) do
+ActiveRecord::Schema.define(version: 20160613121827) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -164,19 +164,10 @@ ActiveRecord::Schema.define(version: 20160613110906) do
 
   add_index "iframes", ["product_id"], name: "index_iframes_on_product_id", using: :btree
 
-  create_table "image_types", force: :cascade do |t|
-    t.integer  "purpose",    limit: 4,   default: 0,    null: false
-    t.string   "name",       limit: 255
-    t.boolean  "bitmap",                 default: true, null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-  end
-
   create_table "images", force: :cascade do |t|
     t.integer  "imageable_id",            limit: 4
     t.string   "imageable_type",          limit: 255
-    t.integer  "image_type_id",           limit: 4
-    t.integer  "purpose",                 limit: 4,   default: 0, null: false
+    t.integer  "purpose",                 limit: 4,               null: false
     t.integer  "priority",                limit: 4,   default: 0, null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
@@ -186,7 +177,6 @@ ActiveRecord::Schema.define(version: 20160613110906) do
     t.datetime "attachment_updated_at"
   end
 
-  add_index "images", ["image_type_id"], name: "index_images_on_image_type_id", using: :btree
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|

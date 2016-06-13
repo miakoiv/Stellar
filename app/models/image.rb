@@ -8,7 +8,7 @@ class Image < ActiveRecord::Base
 
   #---
   belongs_to :imageable, polymorphic: true, touch: true
-  belongs_to :image_type
+
   has_attached_file :attachment,
     styles: {
       lightbox: '1000x1000>',
@@ -27,11 +27,7 @@ class Image < ActiveRecord::Base
       icon: '-strip -quality 70',
     }
   before_post_process :resize_bitmaps
-  before_create :assign_image_type
-
-  ImageType.purposes.keys.each do |purpose|
-    scope purpose, -> { joins(:image_type).merge(ImageType.send(purpose)) }
-  end
+  before_create :assign_purpose
 
   delegate :url, to: :attachment
 
@@ -52,14 +48,14 @@ class Image < ActiveRecord::Base
   end
 
   #---
-  # Applicable image types due to attachment bitmappiness.
-  def applicable_image_types
-    ImageType.where(bitmap: is_bitmap?)
+  # Applicable purposes based on attachment bitmappiness.
+  def applicable_purposes
+    is_bitmap? ? ['presentational', 'technical'] : ['document']
   end
 
-  # Assign first applicable image type.
-  def assign_image_type
-    self.image_type ||= applicable_image_types.first
+  # Assign first applicable purpose.
+  def assign_purpose
+    self.purpose ||= applicable_purposes.first
   end
 
   def is_bitmap?

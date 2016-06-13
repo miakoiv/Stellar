@@ -8,8 +8,8 @@ class Store < ActiveRecord::Base
     :brand_image, # additional branding image displayed in the footer
     :masonry, # boolean, use masonry in storefront products view
     :inline_iframes,  # boolean, render iframes inline (instead of popups)
-    :card_image_type, # image type to use for cover images on cards etc.
-    :list_image_type, # image type in list views
+    :card_image_type, # image purpose to use for cover images on cards etc.
+    :list_image_type, # image purpose in list views
     :allow_shopping,  # boolean, master switch to allow/disallow shopping
     :b2b_sales,       # boolean, does the shop do business to business sales
     :admit_guests,    # boolean, are guests allowed to shop at the store
@@ -65,8 +65,8 @@ class Store < ActiveRecord::Base
   def self.default_settings
     {
       brand_image: 'leasit.svg',
-      card_image_type: :presentational,
-      list_image_type: :presentational
+      card_image_type: 'presentational',
+      list_image_type: 'presentational'
     }
   end
 

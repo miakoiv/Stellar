@@ -22,9 +22,6 @@ fi:
       image:
         one: kuva
         other: kuvat
-      image_type:
-        one: kuvatyyppi
-        other: kuvatyypit
       inventory:
         one: varasto
         other: varastot
@@ -113,7 +110,7 @@ fi:
       iframe:
         html: HTML-koodi
       image:
-        image_type_id: Kuvatyyppi
+        purpose: Kuvatyyppi
         attachment_file_name: Tiedostonimi
         attachment_content_type: Tyyppi
         attachment_file_size: Koko
