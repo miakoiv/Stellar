@@ -72,9 +72,6 @@ jQuery ->
     e.preventDefault()
     $.print()
 
-  $(document).on 'show.bs.modal', '.modal', (e) ->
-    $('.modal-body', this).css 'height', $(window).height() - 120
-
   $(document).on 'page:loading', -> NProgress.start()
   $(document).on 'page:always', -> NProgress.done()
 
