@@ -180,7 +180,7 @@ en:
         title: Title
         slug: Address
         content: Content
-        wysiwyg: Use Froala Editor
+        wysiwyg: Show layout
         album_ids: Photo albums
       pricing_group:
         name: Name

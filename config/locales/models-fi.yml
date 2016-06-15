@@ -180,7 +180,7 @@ fi:
         title: Otsake
         slug: Osoite
         content: Sisältö
-        wysiwyg: Käytä Froala-editoria
+        wysiwyg: Näytä ulkoasu
         album_ids: Kuva-albumit
       pricing_group:
         name: Nimi
