@@ -16,21 +16,20 @@ body {
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }
 
 #main-wrap {
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    & > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
 
     .sidebar {

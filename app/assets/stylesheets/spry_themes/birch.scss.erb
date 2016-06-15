@@ -41,16 +41,14 @@ body {
 }
 
 #main-wrap {
-
   > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
   }
 
@@ -410,7 +408,7 @@ body {
   background-size: cover;
   color: #fff;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }

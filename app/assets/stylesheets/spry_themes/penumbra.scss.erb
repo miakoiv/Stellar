@@ -30,7 +30,7 @@ body {
   @extend .navbar-inverse;
   @include box-shadow(0 1px 10px 0 rgba(0,0,0,.666));
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 
@@ -42,15 +42,14 @@ body {
 #main-wrap {
   background: transparent;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    & > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
   }
 
@@ -382,7 +381,7 @@ body {
 }
 
 .footer {
-  & > .content {
+  > .content {
     @extend .container;
   }
 }

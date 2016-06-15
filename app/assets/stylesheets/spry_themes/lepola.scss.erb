@@ -34,15 +34,14 @@ body {
 #main-wrap {
   background: transparent;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    & > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
   }
 
@@ -219,7 +218,7 @@ body {
   background: $navbar-inverse-bg;
   color: $navbar-inverse-color;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }

@@ -18,22 +18,20 @@ body {
 }
 
 #main-nav {
-  & > .content {
+  > .content {
     @extend .container;
   }
 }
 
 #main-wrap {
-
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    & > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
   }
 
@@ -342,7 +340,7 @@ body {
 .footer {
   background-color: #e3dfd7;
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }

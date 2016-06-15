@@ -95,13 +95,15 @@ body.fanletti {
 }
 
 #main-wrap {
-
   > .content {
     @extend .container;
   }
 
   #static-wrap {
-    > .content {} // static content will include its own containers
+    > .wysiwyg-content {
+      @extend .container;
+      margin-top: 40px;
+    }
 
     .list-group-item .price {
       float: right;

@@ -16,21 +16,20 @@ body {
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }
 
 #main-wrap {
-  & > .content {
+  > .content {
     @extend .container;
   }
 
   #static-wrap {
-    margin-top: 40px;
-
-    & > .content {
+    > .wysiwyg-content {
       @extend .container;
+      margin-top: 40px;
     }
 
     .sidebar {
@@ -387,7 +386,7 @@ body {
 .footer {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 
-  & > .content {
+  > .content {
     @extend .container;
   }
 }
