@@ -22,16 +22,6 @@
                         {
                             tabsize: 2,
                             airMode: true,
-                            // Focus editor on creation
-                            callbacks: {
-                                onInit: function() {
-                                    contentArea.summernote('focus');
-
-                                    if (settings.summernote.config.onInit && typeof settings.summernote.config.onInit == 'function') {
-                                      settings.summernote.config.onInit();
-                                    }
-                                }
-                            }
                         }
                     );
                     contentArea.summernote(configuration);

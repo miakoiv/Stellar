@@ -31,4 +31,6 @@
           dialogsFade: true
           callbacks:
             onInit: ->
-              console.log('Summernote fired up!')
+              $(this).summernote 'focus'
+            onImageUpload: (files) ->
+              console.log 'incoming image'
