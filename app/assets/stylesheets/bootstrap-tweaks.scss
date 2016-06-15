@@ -119,8 +119,9 @@ html {
   }
 }
 
-.page-content.has-sidebar {
-  padding-right: 30px;
+.has-sidebar {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 //
@@ -373,14 +374,15 @@ span.shipping:before { content: ""; }
 //
 // Froala tweaks
 //
-.form-control-wysiwyg {
+.form-control-froala {
   @extend .form-control;
   height: auto;
 }
-.wysiwyg {
-  margin-bottom: 20px;
 
-  .editable { outline: 2px dotted rgba(0,0,255,0.333); }
+//
+// wysiwyg content
+//
+.wysiwyg-content {
   a.snip {
     @extend .panel, .panel-default;
     display: block;

@@ -106,8 +106,8 @@ gem 'twitter-bootstrap-rails-confirm'
 # Sortable tables
 gem 'jquery-tablesorter'
 
-# Froala for wysiwyg editing
-gem 'wysiwyg-rails'
+# Summernote for wysiwyg editing
+gem 'summernote-rails'
 
 #  Making HTML emails comfortable for the Rails rockstars
 gem 'roadie-rails'
