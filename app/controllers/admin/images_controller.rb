@@ -24,8 +24,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
-        format.html { render json: {link: @image.url(@image.froala_style, false)} } # for Froala
-        format.json { render json: @image, status: 200 } # for dropzone
+        format.json { render json: @image, status: 200 } # for dropzone and summernote
       else
         format.html { render json: {error: t('.error')} }
         format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
@@ -51,18 +50,6 @@ class Admin::ImagesController < ApplicationController
     respond_to do |format|
       if @image.destroy
         format.js
-      end
-    end
-  end
-
-  # POST /admin/images/delete
-  # This method is for Froala that deletes images by URL.
-  def delete
-    @image = Image.at_url(params[:url], :lightbox)
-
-    respond_to do |format|
-      if @image.destroy
-        format.html { render nothing: true, status: 200 }
       end
     end
   end
