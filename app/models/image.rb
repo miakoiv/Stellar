@@ -42,12 +42,6 @@ class Image < ActiveRecord::Base
     }
 
   #---
-  # Finds an image by its url, because Froala doesn't know about ids.
-  def self.at_url(url, size = :original)
-    all.find { |i| i.url(size, false) == url }
-  end
-
-  #---
   # Applicable purposes based on attachment bitmappiness.
   def applicable_purposes
     is_bitmap? ? ['presentational', 'technical'] : ['document']
