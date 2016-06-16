@@ -33,6 +33,8 @@ module ApplicationHelper
     return ''.html_safe if image.nil?
     if image.is_bitmap?
       image_tag(image.url(size), options)
+    elsif image.is_vector?
+      image_tag(image.url(:original), options.merge(class: 'img-responsive'))
     else
       document_icon_tag(image, size)
     end

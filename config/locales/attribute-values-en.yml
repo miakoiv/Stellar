@@ -6,6 +6,7 @@ en:
           presentational: Presentational
           technical: Technical
           document: Document
+          vector: Vector image
       page:
         purpose:
           route: Routing entry

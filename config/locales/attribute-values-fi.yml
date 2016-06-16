@@ -6,6 +6,7 @@ fi:
           presentational: esittävä
           technical: tekninen
           document: dokumentti
+          vector: vektorikuva
       page:
         purpose:
           route: Reitityspiste

@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
 
   include Reorderable
 
-  enum purpose: {presentational: 0, technical: 1, document: 2}
+  enum purpose: {presentational: 0, technical: 1, document: 2, vector: 3}
 
   #---
   belongs_to :imageable, polymorphic: true, touch: true
@@ -35,7 +35,7 @@ class Image < ActiveRecord::Base
   validates_attachment :attachment,
     content_type: {
       content_type: [
-        %r{\Aimage/(bmp|jpeg|jpg|png|x-png)},
+        %r{\Aimage/(bmp|jpeg|jpg|png|x-png|svg)},
         %r{\Aapplication/(pdf|msword)},
         %r{\Aapplication/vnd.openxmlformats},
       ]
@@ -44,7 +44,9 @@ class Image < ActiveRecord::Base
   #---
   # Applicable purposes based on attachment bitmappiness.
   def applicable_purposes
-    is_bitmap? ? ['presentational', 'technical'] : ['document']
+    return ['presentational', 'technical'] if is_bitmap?
+    return ['vector'] if is_vector?
+    ['document']
   end
 
   # Assign first applicable purpose.
@@ -53,7 +55,11 @@ class Image < ActiveRecord::Base
   end
 
   def is_bitmap?
-    !!(attachment_content_type =~ /\Aimage/)
+    !!(attachment_content_type =~ /\/(bmp|jpeg|jpg|png|x-png)/)
+  end
+
+  def is_vector?
+    !!(attachment_content_type =~ /\/svg/)
   end
 
   # The style given to Summernote is lightbox sized for bitmaps,
