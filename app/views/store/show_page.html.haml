@@ -2,6 +2,8 @@
 
 #static-wrap{class: @page.albums.any? ? 'has-sidebar' : ''}
   %div{class: @page.wysiwyg? ? 'wysiwyg-content' : 'content'}
+    - if current_user.can_update?(Page)
+      = link_to icon('edit'), edit_admin_page_path(@page), class: 'btn btn-sm btn-default', style: 'position: absolute; right: 15px;'
     = @page.content.html_safe if @page.content.present?
 
 - if @page.albums.any?
