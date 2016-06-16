@@ -102,16 +102,10 @@
         $('#product_variant_ids')[0].selectize.setValue ''
         $('#product_master_product_id')[0].selectize.setValue ''
 
-  $('#product_description').froalaEditor
-    key: '#{current_store.froala_key}'
-    language: '#{current_store.locale}'
-    heightMin: 50
-    heightMax: 200
-    toolbarButtons: [
-      'paragraphFormat', 'bold', 'italic', 'underline', '-',
-      'align', 'formatOL', 'formatUL', '-',
-      'undo', 'redo'
+  $('#product_description').summernote
+    lang: '#{Store.culture_options[I18n.locale]}'
+    toolbar: [
+      ['para', ['style', 'ul', 'ol', 'paragraph']]
+      ['font', ['bold', 'italic', 'clear']]
     ]
-    toolbarInline: true
-    editorClass: 'form-control-froala'
-    placeholderText: ''
+    dialogsFade: true

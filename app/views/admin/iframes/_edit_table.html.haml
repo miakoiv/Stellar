@@ -16,9 +16,11 @@
 
 :coffee
   $('#iframes-tbody').sortable(
-    items: 'tr'
+    items: '> tr'
     handle: '.handle'
-    placeholder: '#{tr_placeholder(3)}'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{admin_reorder_iframes_path}',
-      {reorder: $('tr', this).map(-> this.id).get()}
+      {reorder: $(this).sortable('toArray')}

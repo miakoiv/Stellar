@@ -2,4 +2,4 @@ $("#{j render partial: 'admin/images/edit_row', object: @image, as: :image}").ap
 $("##{dom_id(@image)}").initialize();
 $("##{dom_id(@image)}").effect('highlight');
 
-$('#images-tbody').sortable();
+$('#images-tbody').sortable('refresh');

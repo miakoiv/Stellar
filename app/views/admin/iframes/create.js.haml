@@ -2,6 +2,6 @@ $("#{j render partial: 'admin/iframes/edit_row', object: @iframe, as: :iframe}")
 $("##{dom_id(@iframe)}").initialize();
 $("##{dom_id(@iframe)}").effect('highlight');
 
-$('#iframes-tbody').sortable();
+$('#iframes-tbody').sortable('refresh');
 
 $('#new_iframe #iframe_html').val('');

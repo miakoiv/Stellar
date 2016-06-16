@@ -62,14 +62,6 @@ module ApplicationHelper
       content_tag(:span, store.to_s)
   end
 
-  def tr_placeholder(colspan)
-    content_tag(:tr, content_tag(:td, icon('hand-o-right'), colspan: colspan))
-  end
-
-  def list_group_placeholder
-    content_tag(:div, content_tag(:p, icon('hand-o-right')), class: 'list-group-item')
-  end
-
   def order_type_label(order_type, user)
     "#{order_type.incoming_for?(user) ? '↘' : '↖'} #{order_type.to_s}"
   end

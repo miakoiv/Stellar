@@ -12,9 +12,11 @@
 
 :coffee
   $('#requisite-entries-tbody').sortable(
-    items: 'tr'
+    items: '> tr'
     handle: '.handle'
-    placeholder: '#{tr_placeholder(4)}'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{reorder_admin_product_requisite_entries_path(@product)}',
-      {reorder: $('tr', this).map(-> this.id).get()}
+      {reorder: $(this).sortable('toArray')}

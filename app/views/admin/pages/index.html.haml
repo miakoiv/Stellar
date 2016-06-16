@@ -42,9 +42,11 @@
 
 :coffee
   $('.sortable').sortable(
-    items: 'tr'
+    items: '> tr'
     handle: '.handle'
-    placeholder: '#{tr_placeholder(6)}'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{reorder_admin_pages_path}',
-      {reorder: $('tr', this).map(-> this.id).get()}
+      {reorder: $(this).sortable('toArray')}
