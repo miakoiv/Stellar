@@ -4,8 +4,17 @@
     = @page.content.html_safe if @page.content.present?
 
   :coffee
-    $(document).on 'submit', 'form', (e) ->
-      $('#page_content').val $('#wysiwyg-content').gridEditor('getHtml')
+    sendAttachment = (file, callback) ->
+      data = new FormData()
+      data.append 'image[attachment]', file
+      $.ajax
+        url: '#{admin_page_images_path(@page.id)}'
+        data: data
+        processData: false
+        contentType: false
+        type: 'POST'
+        success: (data) ->
+          callback data
 
     $('#wysiwyg-content').gridEditor
       row_classes: []
@@ -33,4 +42,13 @@
             onInit: ->
               $(this).summernote 'focus'
             onImageUpload: (files) ->
-              console.log 'incoming image'
+              sendAttachment files[0], (data) =>
+                p = $('<p>').append $('<img>', {
+                  id: 'image_' + data.id
+                  src: data.wysiwyg_url
+                  'data-id': data.id
+                })
+                $(this).summernote 'insertNode', p[0]
+
+    $(document).on 'submit', 'form', (e) ->
+      $('#page_content').val $('#wysiwyg-content').gridEditor('getHtml')
