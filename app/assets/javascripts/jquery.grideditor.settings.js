@@ -1,1 +1,1 @@
-$.fn.gridEditor.RTEs.summernote.initialContent = '<p><br></p>';
+$.fn.gridEditor.RTEs.summernote.initialContent = '<p>. . . </p>'
