@@ -348,7 +348,10 @@ fieldset[disabled] .help-block { display: none; }
 }
 
 .table > tbody.sortable .handle { cursor: grab; }
-.sortable-placeholder { outline: $brand-primary solid 1px; }
+.sortable-placeholder {
+  background-color: rgba($brand-primary, 0.333);
+  outline: $brand-primary solid 1px;
+}
 
 .pre { white-space: pre-line; }
 .box { background: transparent; }
@@ -370,14 +373,6 @@ span.manufacturing:before, span.shipping:before {
 span.manufacturing:before { content: ""; }
 // truck
 span.shipping:before { content: ""; }
-
-//
-// Froala tweaks
-//
-.form-control-froala {
-  @extend .form-control;
-  height: auto;
-}
 
 //
 // wysiwyg content
