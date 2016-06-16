@@ -62,10 +62,14 @@ class Image < ActiveRecord::Base
     !!(attachment_content_type =~ /\Aimage/)
   end
 
-  # The style given to Froala is lightbox sized for bitmaps,
+  # The style given to Summernote is lightbox sized for bitmaps,
   # original for documents and other non-bitmaps.
-  def froala_style
+  def wysiwyg_style
     is_bitmap? ? :lightbox : :original
+  end
+
+  def wysiwyg_url
+    url(wysiwyg_style, false)
   end
 
   def document_icon
@@ -81,6 +85,10 @@ class Image < ActiveRecord::Base
 
   def to_s
     attachment_file_name.humanize
+  end
+
+  def as_json(options = {})
+    super(methods: [:wysiwyg_url])
   end
 
   private
