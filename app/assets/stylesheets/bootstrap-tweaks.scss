@@ -387,6 +387,18 @@ span.shipping:before { content: ""; }
 }
 
 //
+// this dirty hack seems to get rid of the rogue table resizing
+// widgets in summernote that are erroneously positioned
+//
+.note-editable {
+  .table {
+    th, td {
+      position: relative;
+    }
+  }
+}
+
+//
 // magnific popup tweaks
 //
 .mfp-bg { opacity: 0.9; }
