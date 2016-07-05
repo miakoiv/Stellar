@@ -21,8 +21,8 @@
       = @order.to_s
 
 .visible-print
-  .page-header.fr-view
-    = @order.store.letterhead(current_user).html_safe
+  = @order.store.letterhead(current_user).html_safe
+  .page-header
     %h1
       - if @order.incoming_for?(current_user)
         = t('.delivery_note')
