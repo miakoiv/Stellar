@@ -107,6 +107,8 @@ namespace :matfox do
   # Updates the inventory item entry for `product` at `store`.
   def update_inventory(store, product, product_data, inventory_data)
 
+    return false unless store.inventories.any?
+
     # Create stubs to ensure each product at least exists in each inventory.
     store.inventories.each do |inventory|
       find_or_create_inventory_item(store, inventory, product)
