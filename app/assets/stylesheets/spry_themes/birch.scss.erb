@@ -366,15 +366,18 @@ body {
       }
       .product-footer {
 
-        .requisite-products {
+        .requisite-products, .variant-products {
           @extend .row;
 
           ul {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
             list-style: none;
             padding: 0;
 
             li.product {
-              @extend .col-sm-2, .col-lg-1;
+              @extend .col-sm-2;
 
               a {
                 display: block;
