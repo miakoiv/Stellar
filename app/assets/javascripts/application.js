@@ -15,7 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/sortable
-//= require jquery-ui/effect
+//= require jquery-ui/effect.all
 //= require jquery.scrollTo
 //= require bootstrap
 //= require twitter/bootstrap/rails/confirm
