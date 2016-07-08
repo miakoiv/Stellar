@@ -30,9 +30,9 @@ IMPORT_FILES = {
   # VARASTO,NRO,HYLLY,
   # VARASTOLKM,VARATTULKM,TULOSSA,
   # TILAUSPIST,INVENTLKM,INVENTPVM,VARHINTA
-  inventory: {
+  inventories: {
     file: 'www-nimike_varasto-utf8.csv',
-    multiple: false,
+    multiple: true,
     headers: [
       :inventory_code, :code, :shelf,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
@@ -74,7 +74,7 @@ namespace :matfox do
                 trade_price_modified_at: data[:product][:trade_price_modified_at]
               )
             end
-            update_inventory(store, product, data[:product], data[:inventory])
+            update_inventory(store, product, data[:product], data[:inventories])
             update_structure(store, product, data[:structure])
           end
         end
@@ -96,7 +96,7 @@ namespace :matfox do
                 trade_price_modified_at: data[:product][:trade_price_modified_at]
               )
             end
-            update_inventory(store, product, data[:product], data[:inventory])
+            update_inventory(store, product, data[:product], data[:inventories])
             update_structure(store, product, data[:structure])
           end
         end
@@ -114,22 +114,22 @@ namespace :matfox do
       find_or_create_inventory_item(store, inventory, product)
     end
 
-    # If the inventory code in `inventory_data` matches the store,
-    # it is preferred over `product_data`.
+    # If `inventory_data` contains a row with `inventory_code` matching
+    # that of the store, it takes precedence over `product_data`.
     if inventory_data.present? &&
-        inventory_data[:inventory_code] == store.inventory_code
+      (inventory_row = inventory_data.find { |row| row[:inventory_code] == store.inventory_code }).present?
 
       update_inventory_item(
         store, store.inventory_for(:manufacturing), product,
-        inventory_data[:quantity_pending],
-        inventory_data[:shelf],
-        inventory_data[:value]
+        inventory_row[:quantity_pending],
+        inventory_row[:shelf],
+        inventory_row[:value]
       )
       update_inventory_item(
         store, store.inventory_for(:shipping), product,
-        inventory_data[:quantity_on_hand],
-        inventory_data[:shelf],
-        inventory_data[:value]
+        inventory_row[:quantity_on_hand],
+        inventory_row[:shelf],
+        inventory_row[:value]
       )
     else
       update_inventory_item(
@@ -182,6 +182,8 @@ namespace :matfox do
   end
 
   def update_inventory_item(store, inventory, product, amount, shelf, value)
+    puts "→ #{inventory.name} #{amount}"
+
     find_or_create_inventory_item(
       store, inventory, product
     ).update(
