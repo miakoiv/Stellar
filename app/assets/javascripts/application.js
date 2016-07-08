@@ -32,6 +32,7 @@
 //= require unobtrusive_flash_bootstrap
 //= require wiselinks
 //= require nprogress
+//= require ./parallax.min.js
 //= require ./numbro.min.js
 //= require ./languages.min.js
 //= require ./jquery.smartmenus.js
