@@ -120,11 +120,11 @@ class Store < ActiveRecord::Base
 
   # Available categories at top level.
   def top_level_category_options(exclude = nil)
-    (categories.top_level.sorted - [exclude]).map { |c| [c.name, c.id] }
+    (categories.top_level - [exclude]).map { |c| [c.name, c.id] }
   end
 
   def category_options
-    categories.sorted.map { |c| [c.indented_name, c.id] }
+    categories.map { |c| [c.indented_name, c.id] }
   end
 
   def user_options

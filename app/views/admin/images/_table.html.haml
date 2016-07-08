@@ -6,4 +6,4 @@
         %th.col-xs-4= col(Image, :purpose)
 
     %tbody
-      = render partial: 'admin/images/row', collection: imageable.images.sorted, as: :image
+      = render partial: 'admin/images/row', collection: imageable.images, as: :image

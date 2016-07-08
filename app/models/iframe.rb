@@ -9,6 +9,8 @@ class Iframe < ActiveRecord::Base
   #---
   belongs_to :product
 
+  default_scope { sorted }
+
   #---
   validates :html, presence: true
 

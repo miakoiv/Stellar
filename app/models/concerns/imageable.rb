@@ -6,6 +6,6 @@ module Imageable
   end
 
   def cover_image(purpose = :presentational)
-    images.send(purpose).sorted.first
+    images.send(purpose).first
   end
 end

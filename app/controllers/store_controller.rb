@@ -104,7 +104,7 @@ class StoreController < ApplicationController
   private
     def set_categories
       @live_categories = current_store.categories.live
-      @categories = @live_categories.top_level.sorted
+      @categories = @live_categories.top_level
     end
 
     # Find category from live categories by friendly id, including history.

@@ -3,7 +3,7 @@
     = t('products.product_detail.variants')
     %span.caret
   %ul.dropdown-menu
-    = content_tag_for :li, product.sibling_variants do |variant|
+    = content_tag_for :li, product.sibling_variants.sorted do |variant|
       = link_to show_product_path(variant.category, variant), data: {push: 'partial', target: '.product-detail'} do
         .media
           .media-left= image_variant_tag variant.cover_image, :thumbnail, class: 'media-object'

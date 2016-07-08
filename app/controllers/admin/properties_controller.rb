@@ -14,7 +14,7 @@ class Admin::PropertiesController < ApplicationController
   # GET /admin/properties
   # GET /admin/properties.json
   def index
-    @properties = current_store.properties.sorted
+    @properties = current_store.properties
   end
 
   # GET /admin/properties/1

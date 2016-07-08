@@ -16,6 +16,7 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products
   belongs_to :banner, class_name: 'Page'
 
+  default_scope { sorted }
   scope :live, -> { where(live: true) }
   scope :top_level, -> { where(parent_category_id: nil) }
 
@@ -43,7 +44,7 @@ class Category < ActiveRecord::Base
   # subcategory has no products either.
   def having_products
     return self if subcategories.live.empty? || products.any?
-    first_subcategory = subcategories.live.sorted.first
+    first_subcategory = subcategories.live.first
     first_subcategory.products.empty? ? self : first_subcategory
   end
 

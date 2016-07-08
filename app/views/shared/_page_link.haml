@@ -6,7 +6,7 @@
       = page
       %span.caret
     %ul{class: subnav}
-      - page.sub_pages.sorted.each do |sub_page|
+      - page.sub_pages.each do |sub_page|
         = active_link_to sub_page, show_page_path(sub_page), wrap_tag: :li
   - else
     = active_link_to page, show_page_path(page)

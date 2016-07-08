@@ -23,6 +23,8 @@ class Page < ActiveRecord::Base
   has_many :sub_pages, class_name: 'Page', foreign_key: :parent_page_id
   has_and_belongs_to_many :albums
 
+  default_scope { sorted }
+
   # Acceptable parent pages are regular top level pages.
   scope :acceptable_parent, -> { where(parent_page_id: nil).where(purpose: [1, 2]) }
 
