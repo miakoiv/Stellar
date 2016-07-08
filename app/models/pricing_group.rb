@@ -9,7 +9,7 @@ class PricingGroup < ActiveRecord::Base
   belongs_to :store
   has_many :alternate_prices, dependent: :destroy
 
-  default_scope -> { order(:name) }
+  default_scope { order(:name) }
 
   #---
   validates :name, presence: true, uniqueness: {scope: :store}

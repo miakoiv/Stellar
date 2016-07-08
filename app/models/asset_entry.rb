@@ -21,7 +21,7 @@ class AssetEntry < ActiveRecord::Base
   # of this particular entry.
   belongs_to :source, polymorphic: true
 
-  default_scope -> { order(recorded_at: :desc, created_at: :desc) }
+  default_scope { order(recorded_at: :desc, created_at: :desc) }
 
   #---
   validates :recorded_at, presence: true
