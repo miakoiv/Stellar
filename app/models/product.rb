@@ -206,7 +206,7 @@ class Product < ActiveRecord::Base
   # Gathers product stock to a hash keyed by inventory.
   # Values are inventory items.
   def stock
-    inventory_items.group_by(&:inventory)
+    inventory_items.includes(:inventory).group_by(&:inventory)
       .map { |inventory, items| [inventory, items.first] }.to_h
   end
 
