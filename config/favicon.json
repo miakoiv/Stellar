@@ -1,34 +1,56 @@
 {
-    "master_picture": "app/assets/images/icon.png",
+    "master_picture": "app/assets/images/stellar-icon.svg.png",
     "favicon_design": {
         "ios": {
-            "picture_aspect": "no_change"
+            "picture_aspect": "background_and_margin",
+            "background_color": "#ffffff",
+            "margin": "0%",
+            "assets": {
+                "ios6_and_prior_icons": false,
+                "ios7_and_later_icons": false,
+                "precomposed_icons": false,
+                "declare_only_default_icon": true
+            },
+            "app_name": "Stellar"
         },
         "desktop_browser": [
 
         ],
         "windows": {
-            "picture_aspect": "no_change",
-            "background_color": "#da532c",
-            "on_conflict": "override"
+            "picture_aspect": "white_silhouette",
+            "background_color": "#b91d47",
+            "on_conflict": "override",
+            "assets": {
+                "windows_80_ie_10_tile": false,
+                "windows_10_ie_11_edge_tiles": {
+                    "small": false,
+                    "medium": true,
+                    "big": false,
+                    "rectangle": false
+                }
+            },
+            "app_name": "Stellar"
         },
         "android_chrome": {
-            "picture_aspect": "no_change",
+            "picture_aspect": "background_and_margin",
+            "margin": "0%",
+            "background_color": "#ffffff",
             "theme_color": "#ffffff",
             "manifest": {
-                "name": "Spry",
-                "display": "browser",
+                "name": "Stellar",
+                "display": "standalone",
                 "orientation": "not_set",
-                "on_conflict": "override"
+                "on_conflict": "override",
+                "declared": true
+            },
+            "assets": {
+                "legacy_icon": false,
+                "low_resolution_icons": false
             }
         },
         "safari_pinned_tab": {
-            "master_picture": {
-                "type": "inline",
-                "content": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiCiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiCiAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIgogICB3aWR0aD0iMzIwIgogICBoZWlnaHQ9IjMyMCIKICAgdmlld0JveD0iMCAwIDMyMCAzMTkuOTk5OTkiCiAgIGlkPSJzdmc0MjExIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlua3NjYXBlOnZlcnNpb249IjAuOTEgciIKICAgc29kaXBvZGk6ZG9jbmFtZT0iUzIuc3ZnIgogICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9Ii9ob21lL2JsYWRlL0Ryb3Bib3gvWWxsw6RwaXRvL1NwcnkvUy5wbmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5MCIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9IjkwIj4KICA8ZGVmcwogICAgIGlkPSJkZWZzNDIxMyIgLz4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9ImJhc2UiCiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIgogICAgIGJvcmRlcmNvbG9yPSIjNjY2NjY2IgogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6em9vbT0iMS42MjU1MTciCiAgICAgaW5rc2NhcGU6Y3g9IjE1NS4xNTgyNiIKICAgICBpbmtzY2FwZTpjeT0iMTQ5Ljg5ODY5IgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJweCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJsYXllcjEiCiAgICAgc2hvd2dyaWQ9ImZhbHNlIgogICAgIGZpdC1tYXJnaW4tdG9wPSIwIgogICAgIGZpdC1tYXJnaW4tbGVmdD0iMCIKICAgICBmaXQtbWFyZ2luLXJpZ2h0PSIwIgogICAgIGZpdC1tYXJnaW4tYm90dG9tPSIwIgogICAgIHNob3dib3JkZXI9InRydWUiCiAgICAgdW5pdHM9InB4IgogICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMjU2MCIKICAgICBpbmtzY2FwZTp3aW5kb3ctaGVpZ2h0PSIxMzY4IgogICAgIGlua3NjYXBlOndpbmRvdy14PSIwIgogICAgIGlua3NjYXBlOndpbmRvdy15PSIwIgogICAgIGlua3NjYXBlOndpbmRvdy1tYXhpbWl6ZWQ9IjEiIC8+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhNDIxNiI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgICA8ZGM6dGl0bGU+PC9kYzp0aXRsZT4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGcKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjIiCiAgICAgaW5rc2NhcGU6bGFiZWw9IkJhY2tncm91bmQiCiAgICAgc3R5bGU9ImRpc3BsYXk6aW5saW5lIgogICAgIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDAuODQxNzQsLTg1Ljg5ODY3MykiIC8+CiAgPGcKICAgICBpbmtzY2FwZTpsYWJlbD0iTGF5ZXIgMSIKICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIgogICAgIGlkPSJsYXllcjEiCiAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQxOC44MTEyNiw5LjM0Mjc4NjcpIj4KICAgIDxwYXRoCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgaWQ9InBhdGg0MTkxIgogICAgICAgc3R5bGU9ImZvbnQtc3R5bGU6bm9ybWFsO2ZvbnQtdmFyaWFudDpub3JtYWw7Zm9udC13ZWlnaHQ6NTAwO2ZvbnQtc3RyZXRjaDpleHBhbmRlZDtmb250LXNpemU6NTMuNzI2MzcxNzdweDtsaW5lLWhlaWdodDoxMjUlO2ZvbnQtZmFtaWx5OidIZWx2ZXRpY2EgTmV1ZSBMVCBTdGQnOy1pbmtzY2FwZS1mb250LXNwZWNpZmljYXRpb246J0hlbHZldGljYSBOZXVlIExUIFN0ZCwgTWVkaXVtIEV4cGFuZGVkJzt0ZXh0LWFsaWduOnN0YXJ0O2xldHRlci1zcGFjaW5nOi0zLjI4MzI3ODQ3cHg7d29yZC1zcGFjaW5nOjBweDt3cml0aW5nLW1vZGU6bHItdGI7dGV4dC1hbmNob3I6c3RhcnQ7b3BhY2l0eToxO2ZpbGw6IzAwMDAwMDtmaWxsLW9wYWNpdHk6MTtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MXB4O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBkPSJtIDQyMy42NTMwMSwyMDEuNDc3MjYgYyAyLjYyOTc4LDg1LjIwNTUzIDk2Ljc3NjY1LDk3LjgyODY0IDE1Ni4yMTAxNSw5Ny44Mjg2NCA4Ni4yNTc1MiwwIDE1NC4xMDYzNiwtMjQuMTk0MjQgMTU0LjEwNjM2LC05NS4xOTg4NiAwLC02NC42OTMwNiAtNTkuOTU5NTEsLTczLjYzNDQgLTE1MS40NzY0OSwtODYuNzgzNDEgLTY5Ljk1MjcyLC05Ljk5MzI0IC03Ni43OTAxOCwtMTMuNjc0OTEgLTc2Ljc5MDE4LC0zNi4yOTEyNTcgMCwtMTQuNzI2OSAyMi4wOTAyNSwtMzIuMDgzNTggNjMuMTE1MTcsLTMyLjA4MzU4IDI0LjcyMDE0LDAgNzMuMTA4NTEsNC43MzM2NyA3OC44OTQwNyw0Ni4yODQ0ODggbCA3NS43MzgxOSwwIEMgNzE5LjI0MjYxLDUuODIwMDg1OCA2MTUuNjI4NTEsLTAuNDkxNDc0MiA1NzIuNDk5NywtMC40OTE0NzQyIGMgLTQ2LjgxMDM5LDAgLTEzOS4zNzkzNiwxMC41MTkyMzAyIC0xMzkuMzc5MzYsODkuOTM5MTk1MiAwLDYzLjY0MTI1OSA0NS4yMzI0OSw3My42MzQ0OTkgMTMxLjQ5MDAxLDg1LjIwNTYxOSA3OC4zNjgwNywxMC41MTkxMyA5MC40NjUxOSwxNy44ODI1OCA5MC40NjUxOSwzOS40NDY5NCAwLDI2LjI5ODAyIC0zOS40NDcwMywzNS43NjUzNSAtNzUuNzM4MjksMzUuNzY1MzUgLTI2LjI5ODAyLDAgLTc0LjY4NjQsLTYuMzExNTUgLTc2Ljc5MDE4LC00OC4zODgzNyBsIC03OC44OTQwNywwIHoiIC8+CiAgPC9nPgo8L3N2Zz4K"
-            },
             "picture_aspect": "silhouette",
-            "theme_color": "#0074ba"
+            "theme_color": "#5bbad5"
         }
     },
     "settings": {

@@ -20,8 +20,8 @@
 .footer
   %table{width: '100%'}
     %tr
-      %td.content-block
-        = image_tag('spry-logo.svg')
+      %td.content-block{width: 70}
+        %p= image_tag 'stellar-vertical.svg', width: 50
       %td.content-block
         %p= t('footer.heading')
-        %p= t('footer.body_html')
+        = t('footer.body_html')

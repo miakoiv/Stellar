@@ -4,7 +4,7 @@
       %table{width: '100%', cellpadding: 0, cellspacing: 0}
         %tr
           %td.content-block
-            %div= image_tag @store.cover_image.url(:thumbnail), width: 75, height: 75
+            %div= image_tag @store.cover_image.url(:thumbnail), height: 75
             %h1
               = t('.title')
               %span.small
@@ -99,8 +99,8 @@
 .footer
   %table{width: '100%'}
     %tr
-      %td.content-block
-        %p= image_tag 'spry-logo.svg', width: 75
+      %td.content-block{width: 70}
+        %p= image_tag 'stellar-vertical.svg', width: 50
       %td.content-block
         %p= t('footer.heading')
         = t('footer.body_html')

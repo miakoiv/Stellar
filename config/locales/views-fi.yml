@@ -204,7 +204,7 @@ fi:
     header: Hopsis!
     blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"
   footer:
-    heading: Spry-verkkokauppa
+    heading: Stellar Storefront
     body_html: <p>Tuottanut Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2016</p>
   search_panel:
     search: Etsi
