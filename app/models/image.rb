@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
 
   include Reorderable
 
-  enum purpose: {presentational: 0, technical: 1, document: 2, vector: 3}
+  enum purpose: {presentational: 0, technical: 1, document: 2, vector: 3, video: 4}
 
   #---
   belongs_to :imageable, polymorphic: true, touch: true
@@ -38,6 +38,7 @@ class Image < ActiveRecord::Base
     content_type: {
       content_type: [
         %r{\Aimage/(bmp|jpeg|jpg|png|x-png|svg)},
+        %r{\Avideo/(mp4|webm)},
         %r{\Aapplication/(pdf|msword)},
         %r{\Aapplication/vnd.openxmlformats},
       ]
@@ -48,6 +49,7 @@ class Image < ActiveRecord::Base
   def applicable_purposes
     return ['presentational', 'technical'] if is_bitmap?
     return ['vector'] if is_vector?
+    return ['video'] if is_video?
     ['document']
   end
 
@@ -64,6 +66,10 @@ class Image < ActiveRecord::Base
     !!(attachment_content_type =~ /\/svg/)
   end
 
+  def is_video?
+    !!(attachment_content_type =~ /video\//)
+  end
+
   # The style given to Summernote is lightbox sized for bitmaps,
   # original for documents and other non-bitmaps.
   def wysiwyg_style
@@ -76,6 +82,8 @@ class Image < ActiveRecord::Base
 
   def document_icon
     case attachment_content_type
+    when %r{\Avideo/}
+      'file-video-o'
     when %r{\Aapplication/pdf}
       'file-pdf-o'
     when %r{\Aapplication/(msword|vnd.openxmlformats)}
