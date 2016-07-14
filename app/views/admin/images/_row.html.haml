@@ -2,4 +2,4 @@
   %td= image_variant_tag image, :matchbox
   %td= image.human_attribute_value(:purpose)
   %td
-    %button.btn.btn-default.btn-sm.clipboard{data: {'clipboard-text' => image.attachment.url(:original, timestamp: false)}}= icon('scissors')
+    %button.btn.btn-default.btn-sm.clipboard{data: {'clipboard-text' => image.attachment.url(:original, timestamp: false)}}= icon('link')
