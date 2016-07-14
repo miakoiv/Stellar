@@ -61,6 +61,7 @@ GEM
     choice (0.2.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    clipboard-rails (1.5.10)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   bootstrap_form
   bullet
   byebug
+  clipboard-rails
   coffee-rails (~> 4.1.0)
   cookie_alert
   daemons
@@ -360,4 +362,4 @@ DEPENDENCIES
   yaml_db
 
 BUNDLED WITH
-   1.10.3
+   1.11.2

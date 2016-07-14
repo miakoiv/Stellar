@@ -58,6 +58,8 @@ jQuery ->
   $(document).initialize()
   $(document).rebuild_masonry()
 
+  new Clipboard('.clipboard')
+
   $(document).on 'change', 'form.immediate', (e) ->
     $(e.currentTarget).trigger('submit.rails')
 
