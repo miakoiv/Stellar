@@ -114,6 +114,7 @@ fi:
         attachment_file_name: Tiedostonimi
         attachment_content_type: Tyyppi
         attachment_file_size: Koko
+        url: Osoite
       inventory:
         name: Nimi
       inventory_item:
