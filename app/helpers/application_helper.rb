@@ -40,22 +40,16 @@ module ApplicationHelper
     end
   end
 
-  # Different sized icons for documents.
+  # Different sized icons for documents and video files.
   # Comes with a tooltip of the file name.
   def document_icon_tag(image, size = :icon)
     case size
     when :icon
-      icon(image.document_icon, class: 'fa-lg icon',
-        title: image.attachment_file_name,
-        data: {toggle: 'tooltip'})
+      icon(image.document_icon, class: 'fa-lg icon', title: image.attachment_file_name, data: {toggle: 'tooltip'})
     when :thumbnail
-      icon(image.document_icon,
-        image.attachment_file_name.truncate(10, omission: '…'),
-        class: 'fa-2x')
+      icon(image.document_icon, image.attachment_file_name.truncate(10, omission: '…'), class: 'fa-2x', title: image.attachment_file_name, data: {toggle: 'tooltip'})
     else
-      icon(image.document_icon,
-        image.attachment_file_name.truncate(20, omission: '…'),
-        class: 'fa-3x')
+      icon(image.document_icon, image.attachment_file_name.truncate(20, omission: '…'), class: 'fa-3x', title: image.attachment_file_name, data: {toggle: 'tooltip'})
     end
   end
 

@@ -19,8 +19,7 @@
         %td= album.title
         %td
           - album.images.each do |image|
-            = image_variant_tag(image, :icon,
-                data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
+            = image_variant_tag(image, :icon, data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{image_variant_tag(image, :matchbox)}"})
         %td.actions
           = link_to icon('info', t('actions.show')), admin_album_path(album),
               class: 'btn btn-default btn-sm'
