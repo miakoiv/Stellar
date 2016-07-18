@@ -32,9 +32,9 @@ fi:
     manage: Hallinta
     albums:
       index:
-        new_album: Uusi kuva-albumi
+        new_album: Uusi albumi
       new:
-        new_album: Uusi kuva-albumi
+        new_album: Uusi albumi
     categories:
       index:
         new_category: Uusi tuoteryhmä
@@ -161,7 +161,7 @@ fi:
       default: <oletus>
   albums:
     sidebar:
-      included_albums: Näytä kuva-albumit
+      included_albums: Näytä albumit
   checkout:
     title: Kassa
     continue_shopping: Jatka ostoksia

@@ -2,8 +2,8 @@ fi:
   activerecord:
     models:
       album:
-        one: kuva-albumi
-        other: kuva-albumit
+        one: albumi
+        other: albumit
       alternate_price:
         one: hinta
         other: hinnat
@@ -182,7 +182,7 @@ fi:
         slug: Osoite
         content: Sisältö
         wysiwyg: Näytä ulkoasu
-        album_ids: Kuva-albumit
+        album_ids: Albumit
       pricing_group:
         name: Nimi
         markup_percent: Lisä-%

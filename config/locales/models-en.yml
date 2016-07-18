@@ -2,8 +2,8 @@ en:
   activerecord:
     models:
       album:
-        one: photo album
-        other: photo albums
+        one: album
+        other: albums
       alternate_price:
         one: price
         other: prices
@@ -182,7 +182,7 @@ en:
         slug: Address
         content: Content
         wysiwyg: Show layout
-        album_ids: Photo albums
+        album_ids: Albums
       pricing_group:
         name: Name
         markup_percent: Markup %

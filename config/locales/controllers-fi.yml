@@ -2,11 +2,11 @@ fi:
   admin:
     albums:
       create:
-        notice: "Kuva-albumi %{album} luotu."
+        notice: "Albumi %{album} luotu."
       update:
-        notice: "Kuva-albumi %{album} päivitetty."
+        notice: "Albumi %{album} päivitetty."
       destroy:
-        notice: "Kuva-albumi %{album} poistettu."
+        notice: "Albumi %{album} poistettu."
     categories:
       create:
         notice: "Tuoteryhmä %{category} luotu."

@@ -2,8 +2,8 @@ de:
   activerecord:
     models:
       album:
-        one: Fotoalbum
-        other: Fotoalben
+        one: Album
+        other: Alben
       category:
         one: Kategorie
         other: Kategorien

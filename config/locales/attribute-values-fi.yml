@@ -47,7 +47,7 @@ fi:
           product_editor: tuotteiden muokkaus
           promotion_editor: kampanjoiden muokkaus
           user_manager: käyttäjien hallinta
-          album_editor: kuva-albumien muokkaus
+          album_editor: albumien muokkaus
           asset_editor: omistuksien muokkaus
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä

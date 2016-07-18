@@ -52,9 +52,9 @@ en:
     manage: Manage
     albums:
       index:
-        new_album: New photo album
+        new_album: New album
       new:
-        new_album: New photo album
+        new_album: New album
     categories:
       index:
         new_category: New category
@@ -181,7 +181,7 @@ en:
       default: <default>
   albums:
     sidebar:
-      included_albums: Show photo albums
+      included_albums: Show albums
   checkout:
     title: Checkout
     continue_shopping: Continue shopping
