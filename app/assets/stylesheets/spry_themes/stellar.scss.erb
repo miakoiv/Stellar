@@ -58,7 +58,7 @@ body.stellar {
 
 /*
   on extra small screens the navbar will collapse, and we shrink the logo,
-  and revert navbar links to original styles
+  revert navbar links to original styles, and always show subcategories
 */
 @media (max-width: $screen-sm-min) {
   body.stellar { padding-top: 75px; }
@@ -84,6 +84,13 @@ body.stellar {
           }
         }
       }
+    }
+  }
+
+  #main-wrap {
+    #categories-wrap .categories > ul > li.category > .subcategories-wrap {
+      max-height: 1000px !important;
+      opacity: 1 !important;
     }
   }
 }
@@ -181,7 +188,10 @@ body.stellar {
           }
           &:hover {
             > a { background-color: transparent; }
-            .subcategories-wrap { display: block; }
+            .subcategories-wrap {
+              max-height: 1000px; // transition needs a value
+              opacity: 1;
+            }
           }
           > a {
             border-radius: 0;
@@ -203,7 +213,10 @@ body.stellar {
             }
           }
           > .subcategories-wrap {
-            display: none;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.8s ease-in-out 0s;
 
             > .subcategories {
               > ul {
