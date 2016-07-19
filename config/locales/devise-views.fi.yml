@@ -21,10 +21,10 @@ fi:
         message: Tilisi on lukittu johtuen liian useasta epäonnistuneesta kirjautumisyrityksestä.
     passwords:
       edit:
-        change_my_password:
-        change_your_password:
-        confirm_new_password:
-        new_password:
+        change_my_password: Vaihda salasanani
+        change_your_password: Vaihda salasanasi
+        confirm_new_password: Salasanan vahvistus
+        new_password: Uusi salasana
       new:
         forgot_your_password: Unohditko salasanasi?
         send_me_reset_password_instructions: Lähetä minulle salasanan vaihto-ohjeet

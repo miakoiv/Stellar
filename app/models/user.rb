@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable,
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     request_keys: [:host]
 
   enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2}
