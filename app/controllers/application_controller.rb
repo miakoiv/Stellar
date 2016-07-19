@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   #---
   before_action :set_locale
+  before_action :set_mail_host
   before_action :set_pricing_group
   after_filter :prepare_unobtrusive_flash
 
@@ -95,6 +96,10 @@ class ApplicationController < ActionController::Base
     # in the user interface.
     def set_locale
       I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
+    end
+
+    def set_mail_host
+      ActionMailer::Base.default_url_options = {host: current_store.host}
     end
 
     # Pricing group is set by a before_filter. Changing the pricing group
