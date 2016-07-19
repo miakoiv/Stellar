@@ -1,17 +1,17 @@
-#static-wrap
-  .content
-    = bootstrap_devise_error_messages!
-    .row
-      .col-sm-offset-3.col-sm-6
-        .panel.panel-default
-          .panel-heading
-            %h4.panel-title= t('.resend_unlock_instructions', default: "Resend unlock instructions")
-          .panel-body
-            = form_for(resource, as: resource_name, url: unlock_path(resource_name),
-                html: {method: :post, html: {role: "form"}}) do |f|
-              .form-group
-                = f.label :email
-                = f.email_field :email, autofocus: true, class: "form-control"
-              = f.submit t('.resend_unlock_instructions', default: "Resend unlock instructions"), class: "btn btn-primary"
+.content
+  .page-header
+  = bootstrap_devise_error_messages!
+  .row
+    .col-sm-offset-3.col-sm-6
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= t('.resend_unlock_instructions', default: "Resend unlock instructions")
+        .panel-body
+          = form_for(resource, as: resource_name, url: unlock_path(resource_name),
+              html: {method: :post, html: {role: "form"}}) do |f|
+            .form-group
+              = f.label :email
+              = f.email_field :email, autofocus: true, class: "form-control"
+            = f.submit t('.resend_unlock_instructions', default: "Resend unlock instructions"), class: "btn btn-primary"
 
-        = render "devise/shared/links"
+      = render "devise/shared/links"
