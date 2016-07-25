@@ -66,7 +66,7 @@
               .col-sm-4
                 .input-group
                   %span.input-group-addon= col(Product, :markup_percent)
-                  = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), disabled: true, class: 'form-control text-right'
+                  = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), class: 'form-control text-right'
             .form-group
               %label.control-label.col-sm-4= col(Product, :retail_price)
               .col-sm-4
@@ -76,13 +76,37 @@
               .col-sm-4
                 .input-group
                   %span.input-group-addon= col(Product, :margin_percent)
-                  = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), disabled: true, class: 'form-control text-right'
+                  = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), class: 'form-control text-right'
       - unless locked
         %fieldset.actions
           = f.form_group do
             = f.primary
 
 :coffee
+  numbro.culture "#{t('culture')}"
+  $('#product_trade_price').on 'change', (e) ->
+    update_markup_margin()
+    $('#markup_percent, #margin_percent').effect 'highlight'
+  $('#product_retail_price').on 'change', (e) ->
+    update_markup_margin()
+    $('#markup_percent, #margin_percent').effect 'highlight'
+
+  $('#markup_percent').on 'change', (e) ->
+    markup_percent = numbro().unformat $('#markup_percent').val()
+    trade_price = numbro().unformat $('#product_trade_price').val()
+    retail_price = trade_price * (1 + markup_percent/100.0)
+    $('#product_retail_price').val numbro(retail_price).format('0.00')
+    update_markup_margin()
+    $('#product_retail_price, #margin_percent').effect 'highlight'
+
+  $('#margin_percent').on 'change', (e) ->
+    margin_percent = numbro().unformat $('#margin_percent').val()
+    trade_price = numbro().unformat $('#product_trade_price').val()
+    retail_price = - trade_price / (margin_percent/100.0 - 1)
+    $('#product_retail_price').val numbro(retail_price).format('0.00')
+    update_markup_margin()
+    $('#product_retail_price, #markup_percent').effect 'highlight'
+
   $('#product_purpose').on 'change', (e) ->
     switch $(e.target).val()
       when 'master'
