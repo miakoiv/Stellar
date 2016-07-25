@@ -42,4 +42,5 @@
 //= require ./jquery.grideditor.summernote.js
 //= require ./jquery.grideditor.settings.js
 //= require vis
+//= require_directory ./admin
 //= require_directory .
