@@ -27,10 +27,9 @@
 
 :coffee
   jQuery ->
-    culture_options = #{Store.culture_options.to_json}
     markup_percents = #{current_store.pricing_groups.map { |p| [p.id, p.markup_percent.to_f] }.to_h.to_json}
 
-    numbro.culture culture_options['#{I18n.locale}']
+    numbro.culture "#{t('culture')}"
     $pricing_group_select = $('#alternate_price_pricing_group_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->

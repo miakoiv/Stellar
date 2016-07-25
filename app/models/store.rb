@@ -73,14 +73,6 @@ class Store < ActiveRecord::Base
     @@locale_options ||= [['English', 'en'], ['Deutsch', 'de'], ['suomi', 'fi']]
   end
 
-  def self.culture_options
-    @@culture_options ||= ActiveSupport::HashWithIndifferentAccess.new(
-      en: 'en-US',
-      de: 'de-DE',
-      fi: 'fi-FI'
-    )
-  end
-
   # Looks up the names of precompiled stylesheets for themes.
   def self.theme_options
     @@themes ||= Rails.application.config.assets.precompile.select { |a|
