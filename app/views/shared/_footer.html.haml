@@ -7,10 +7,10 @@
           %p.lead= t('footer.heading')
           = t('footer.body_html')
     .col-xs-4.col-sm-2.col-sm-push-6
-      - if current_store.brand_image.present?
+      - if current_store.try(:brand_image).present?
         .media
           .media-body
-          .media-right.logo= image_tag(current_store.brand_image)
+          .media-right.logo= image_tag(current_store.brand_image, style: 'width: 90px')
     .col-xs-12.col-sm-6.col-sm-pull-2
       - if @pages.present?
         %ul.nav
