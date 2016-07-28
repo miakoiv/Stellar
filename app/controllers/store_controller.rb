@@ -11,7 +11,6 @@ class StoreController < ApplicationController
     super || guest_user
   end
 
-  before_action :set_locale
   before_action :set_mail_host
   before_action :set_pricing_group
 
@@ -106,11 +105,6 @@ class StoreController < ApplicationController
   end
 
   private
-
-    # Store locale may be overridden by user setting.
-    def set_locale
-      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
-    end
 
     def set_mail_host
       ActionMailer::Base.default_url_options = {host: current_store.host}
