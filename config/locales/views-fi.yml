@@ -113,6 +113,7 @@ fi:
       new:
         new_store: Uusi kauppa
       form:
+        subdomain_help_html: Tämä aladomain muodostaa kaupan osoitteen portaalin sisällä.
         slug_help_html: Tunniste luodaan automaattisesti.
     users:
       index:

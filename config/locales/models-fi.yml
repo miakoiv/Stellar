@@ -258,7 +258,11 @@ fi:
       role:
         name: Nimi
       store:
+        admin: Asetukset
+        new_user: Luo ylläpitäjä
+        superuser: Vain pääkäyttäjälle
         host: Palvelimen osoite
+        subdomain: Portaalin aladomain
         erp_number: ERP-numero
         name: Nimi
         slug: Tunniste

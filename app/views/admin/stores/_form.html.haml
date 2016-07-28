@@ -1,43 +1,58 @@
 = bootstrap_form_for [:admin, @store], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  .panel.panel-default
-    .panel-body
-      %fieldset{disabled: locked}
-        = f.text_field :name, required: true
-        = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
-        = f.form_group do
-          = f.check_box :allow_shopping
-        = f.form_group do
-          = f.check_box :admit_guests
-        = f.select :shipping_cost_product_id,
-            @store.products.virtual.map { |p| [p.to_s, p.id] },
-            {include_blank: true}, {class: 'selectize'}
-        = f.text_field :free_shipping_at
-        = f.text_field :tracking_code
-        = f.select :manufacturer_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
-        = f.select :reseller_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
-        = f.select :quotation_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
-      - if current_user.has_cached_role?(:superuser)
-        %fieldset.bg-warning{disabled: locked}
-          %legend.text-warning.vertical= Role.human_attribute_value(:name, :superuser)
-          = f.text_field :host, required: true, prepend: 'http://'
-          = f.number_field :erp_number
-          - unless @store.new_record?
-            = f.text_field :slug, readonly: true, help: t('.slug_help_html')
-          = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
-          = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
+  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
+    %li.active{role: 'presentation'}
+      %a{href: '#tab-store-admin', role: 'tab', data: {toggle: 'tab'}}
+        = col(Store, :admin)
+    - if current_user.has_cached_role?(:superuser)
+      %li{role: 'presentation'}
+        %a{href: '#tab-store-superuser', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :superuser)
+    - if @store.new_record?
+      %li{role: 'presentation'}
+        %a{href: '#tab-store-new-user', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :new_user)
 
-      - if @store.new_record?
-        = f.fields_for :users do |ff|
-          %fieldset.bg-info{disabled: locked}
-            %legend.text-info.vertical= t('users.new.new_user')
-            = ff.hidden_field :group
-            = ff.text_field :name, required: true
-            = ff.text_field :email, required: true
-            = ff.telephone_field :phone, required: true
-            = ff.password_field :password, required: true
-            = ff.password_field :password_confirmation, required: true
-            = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
+  .panel.panel-default.tabbed-panel
+    .panel-body
+      .tab-content
+        #tab-store-admin.tab-pane.fade.in.active
+          %fieldset{disabled: locked}
+            = f.text_field :name, required: true
+            = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
+            = f.form_group do
+              = f.check_box :allow_shopping
+            = f.form_group do
+              = f.check_box :admit_guests
+            = f.select :shipping_cost_product_id,
+                @store.products.virtual.map { |p| [p.to_s, p.id] },
+                {include_blank: true}, {class: 'selectize'}
+            = f.text_field :free_shipping_at
+            = f.text_field :tracking_code
+            = f.select :manufacturer_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
+            = f.select :reseller_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
+            = f.select :quotation_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
+        - if current_user.has_cached_role?(:superuser)
+          #tab-store-superuser.tab-pane.fade
+            %fieldset{disabled: locked}
+              = f.text_field :host, required: true, prepend: 'https://'
+              = f.text_field :subdomain, prepend: 'https://', append: '.portal.com', help: t('.subdomain_help_html')
+              = f.number_field :erp_number
+              - unless @store.new_record?
+                = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+              = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
+              = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
+        - if @store.new_record?
+          #tab-store-new-user.tab-pane.fade
+            = f.fields_for :users do |ff|
+              %fieldset{disabled: locked}
+                = ff.hidden_field :group
+                = ff.text_field :name, required: true
+                = ff.text_field :email, required: true
+                = ff.telephone_field :phone, required: true
+                = ff.password_field :password, required: true
+                = ff.password_field :password_confirmation, required: true
+                = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
 
       - unless locked
         %fieldset.actions
