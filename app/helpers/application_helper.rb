@@ -53,9 +53,9 @@ module ApplicationHelper
     end
   end
 
-  def branding(store)
-    image_variant_tag(store.cover_image, :technical) +
-      content_tag(:span, store.to_s)
+  def branding(object)
+    image_variant_tag(object.cover_image, :technical) +
+      content_tag(:span, object.to_s)
   end
 
   def order_type_label(order_type, user)

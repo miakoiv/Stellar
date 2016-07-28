@@ -33,6 +33,9 @@ class Store < ActiveRecord::Base
   after_create :assign_slug
 
   #---
+  # A store may appear at multiple portals.
+  has_and_belongs_to_many :portals
+
   # All these associations are dependent of the store.
   with_options dependent: :destroy do |store|
     store.has_many :categories

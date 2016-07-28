@@ -2,25 +2,19 @@
 %html
   %head
     = render partial: 'shared/metadata'
-    = render partial: 'shared/external_scripts'
     = render partial: 'favicon'
   %body{class: current_theme}
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .content
         .navbar-charms
-          = render partial: 'shared/navbar_charms'
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             = icon('bars', class: 'fa-lg')
         .navbar-header
-          = link_to branding(current_store), standalone_store? ? root_path : current_portal.url, class: 'navbar-brand'
+          = link_to branding(current_portal), root_path, class: 'navbar-brand'
 
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
           %ul.nav.navbar-nav.navbar-right
-            = render partial: 'shared/user_menu'
-            - if user_signed_in? && can_manage?
-              = render partial: 'shared/admin_menu'
           = render partial: 'shared/keyword_search'
 
     #main-wrap

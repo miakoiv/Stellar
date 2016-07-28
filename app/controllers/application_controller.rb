@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #---
-  before_action :set_locale
-  before_action :set_mail_host
-  before_action :set_pricing_group
   after_filter :prepare_unobtrusive_flash
 
   #---
@@ -48,10 +45,26 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_store, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
+  helper_method :current_portal, :current_store, :current_site_name, :current_theme, :standalone_store?, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
+
+  def current_portal
+    @current_portal ||= current_portal_by_request
+  end
 
   def current_store
     @current_store ||= user_signed_in? && current_user.store || current_store_by_request
+  end
+
+  def current_site_name
+    current_store.present? ? current_store.name : current_portal.name
+  end
+
+  def current_theme
+    current_store.present? ? current_store.theme : current_portal.theme
+  end
+
+  def standalone_store?
+    current_portal.nil?
   end
 
   def current_pricing
@@ -79,7 +92,7 @@ class ApplicationController < ActionController::Base
     current_user.has_cached_role?(:manager)
   end
 
-  # The ability of shop at any given category depends on possible restricted
+  # The ability to shop at any given category depends on possible restricted
   # categories given to the current user. If any category assignments
   # exist, shopping is only allowed in the assigned categories.
   def may_shop_at?(category)
@@ -91,33 +104,20 @@ class ApplicationController < ActionController::Base
       @pages = current_store.pages.includes(:sub_pages)
     end
 
-    # Locale is set by a before_filter. User locale takes precedence over
-    # store locale. Using params is a manual override not available
-    # in the user interface.
-    def set_locale
-      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
+    # Finds the current portal by requested domain, if any.
+    def current_portal_by_request
+      Portal.find_by(domain: request.domain)
     end
 
-    def set_mail_host
-      ActionMailer::Base.default_url_options = {host: current_store.host}
-    end
-
-    # Pricing group is set by a before_filter. Changing the pricing group
-    # is done by StoreController#pricing and its id is retained in a cookie.
-    # If current user has her own pricing group set, it will take precedence.
-    def set_pricing_group
-      if user_signed_in? && current_user.pricing_group.present?
-        @pricing_group = current_user.pricing_group
-      else
-        pricing_group_id = cookies[:pricing_group_id]
-        @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
-      end
-    end
-
-    # When no user is signed in, or a guest user is created, the current store
-    # is looked up by the requested hostname, and must exist.
+    # Finds the current store by requested host. If inside a portal,
+    # the requested subdomain is matched instead, yielding nil if the address
+    # contains no subdomain part.
     def current_store_by_request
-      Store.find_by!(host: request.host)
+      if current_portal.present?
+        current_portal.stores.find_by(subdomain: request.subdomain)
+      else
+        Store.find_by!(host: request.host)
+      end
     end
 
     # Create a record for a guest user and schedule its cleanup

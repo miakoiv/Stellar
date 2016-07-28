@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'store#index'
+  # Portal landing page.
+  root 'portal#index'
 
   # Catch error conditions early.
   match '(errors)/:status', to: 'errors#show',
