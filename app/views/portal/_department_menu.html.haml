@@ -1,0 +1,7 @@
+%li.dropdown
+  %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
+    = icon('umbrella', title(Department, count: 2), class: 'fa-lg')
+    %span.caret
+  %ul.dropdown-menu{role: 'menu'}
+    = content_tag_for :li, @departments do |department|
+      = active_link_to department, show_department_path(department)

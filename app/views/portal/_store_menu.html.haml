@@ -1,0 +1,7 @@
+%li.dropdown
+  %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
+    = icon('shopping-bag', title(Store, count: 2), class: 'fa-lg')
+    %span.caret
+  %ul.dropdown-menu{role: 'menu'}
+    = content_tag_for :li, @stores do |store|
+      = link_to store, front_url(subdomain: store.subdomain)

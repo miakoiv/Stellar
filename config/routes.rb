@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  # Portal routes.
+  get '/department/:department_id', to: 'portal#show_department', as: :show_department
+
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store/search', to: 'store#search', as: :search
   get  '/store/lookup', to: 'store#lookup', as: :lookup

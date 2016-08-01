@@ -1,0 +1,11 @@
+#products-wrap
+  .products
+    .page-header.visible-print
+      %h1
+        = current_portal.to_s
+        %small= @department.to_s
+    .product-grid.infinite-table
+      %ul.brickwork
+        = render partial: 'product', collection: @products
+      .pagination
+        = link_to '', show_department_path(@department), remote: true, rel: 'next'

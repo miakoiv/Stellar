@@ -1,0 +1,15 @@
+- cache [I18n.locale, :portal_product_card, product] do
+  = content_tag_for :li, product do
+    = link_to show_product_url(product.category, product, subdomain: product.store.subdomain) do
+      .product-image= image_variant_tag product.cover_image, :matchbox
+      .product-text
+        %h3
+          = product.title
+          %span.small= product.subtitle
+        .description= product.description.html_safe
+      - product.active_promoted_items.each do |item|
+        .promotion
+          %p= item.description
+    - if !product.master?
+      .buy-now
+        %p= humanized_money_with_symbol product.price(nil)
