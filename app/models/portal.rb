@@ -26,6 +26,10 @@ class Portal < ActiveRecord::Base
   validates :domain, presence: true, uniqueness: true
 
   #---
+  def description
+    name
+  end
+
   def to_s
     name
   end
