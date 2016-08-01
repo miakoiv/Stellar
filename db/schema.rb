@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160727101736) do
+ActiveRecord::Schema.define(version: 20160728095805) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -87,6 +87,13 @@ ActiveRecord::Schema.define(version: 20160727101736) do
   add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
 
+  create_table "categories_departments", id: false, force: :cascade do |t|
+    t.integer "category_id",   limit: 4, null: false
+    t.integer "department_id", limit: 4, null: false
+  end
+
+  add_index "categories_departments", ["category_id", "department_id"], name: "index_categories_departments_on_category_id_and_department_id", unique: true, using: :btree
+
   create_table "categories_products", id: false, force: :cascade do |t|
     t.integer "category_id", limit: 4, null: false
     t.integer "product_id",  limit: 4, null: false
@@ -140,6 +147,17 @@ ActiveRecord::Schema.define(version: 20160727101736) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "departments", force: :cascade do |t|
+    t.integer  "portal_id",  limit: 4
+    t.string   "name",       limit: 255
+    t.string   "slug",       limit: 255
+    t.integer  "priority",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "departments", ["portal_id"], name: "index_departments_on_portal_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false

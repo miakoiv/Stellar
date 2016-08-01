@@ -16,6 +16,9 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products
   belongs_to :banner, class_name: 'Page'
 
+  # Categories may appear at any number of portal departments.
+  has_and_belongs_to_many :departments
+
   default_scope { sorted }
   scope :live, -> { where(live: true) }
   scope :top_level, -> { where(parent_category_id: nil) }

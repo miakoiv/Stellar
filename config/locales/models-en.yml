@@ -16,6 +16,9 @@ en:
       customer_asset:
         one: customer asset
         other: customer assets
+      department:
+        one: department
+        other: departments
       iframe:
         one: embed
         other: embeds

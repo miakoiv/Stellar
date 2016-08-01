@@ -16,6 +16,9 @@ fi:
       customer_asset:
         one: asiakkaan omistus
         other: asiakkaan omistukset
+      department:
+        one: osasto
+        other: osastot
       iframe:
         one: upotus
         other: upotukset
