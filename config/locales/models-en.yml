@@ -282,6 +282,9 @@ en:
         reseller_template_id: Reseller letterhead
         quotation_template_id: Quotation boilerplate
       user:
+        personal: Personal information
+        privileges: Privileges
+        addresses: Addresses
         name: Name
         group: Group
         role_ids: Roles

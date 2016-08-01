@@ -282,6 +282,9 @@ fi:
         reseller_template_id: Jälleenmyyjän kirjepohja
         quotation_template_id: Tarjouksen tekstisisältö
       user:
+        personal: Omat tiedot
+        privileges: Käyttöoikeudet
+        addresses: Osoitteet
         name: Nimi
         group: Ryhmä
         role_ids: Roolit
