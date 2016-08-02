@@ -43,7 +43,7 @@ GEM
     authority (3.1.0)
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
-    autoprefixer-rails (6.3.3.1)
+    autoprefixer-rails (6.3.7)
       execjs
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -97,7 +97,7 @@ GEM
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
-    execjs (2.6.0)
+    execjs (2.7.0)
     font-awesome-sass (4.6.2)
       sass (>= 3.2)
     friendly_id (5.1.0)
