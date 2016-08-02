@@ -67,6 +67,9 @@ Rails.application.routes.draw do
 
     get '/reports', to: 'reports#index', as: :reports
 
+    resources :portals do
+      resources :images, shallow: true
+    end
     resources :stores do
       resources :images, shallow: true
     end

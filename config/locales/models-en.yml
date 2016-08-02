@@ -43,6 +43,9 @@ en:
       page:
         one: page
         other: pages
+      portal:
+        one: portal
+        other: portals
       pricing_group:
         one: pricing group
         other: pricing groups
@@ -186,6 +189,12 @@ en:
         content: Content
         wysiwyg: Show layout
         album_ids: Albums
+      portal:
+        name: Name
+        domain: Domain
+        departments: Departments
+        theme: Display theme
+        locale: Language
       pricing_group:
         name: Name
         markup_percent: Markup %

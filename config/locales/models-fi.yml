@@ -43,6 +43,9 @@ fi:
       page:
         one: sivu
         other: sivut
+      portal:
+        one: portaali
+        other: portaalit
       pricing_group:
         one: hintaryhmä
         other: hintaryhmät
@@ -186,6 +189,12 @@ fi:
         content: Sisältö
         wysiwyg: Näytä ulkoasu
         album_ids: Albumit
+      portal:
+        name: Nimi
+        domain: Verkkotunnus
+        departments: Osastot
+        theme: Ulkoasun teema
+        locale: Kieli
       pricing_group:
         name: Nimi
         markup_percent: Lisä-%

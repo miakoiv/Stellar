@@ -1,0 +1,17 @@
+.page-header
+  - if current_user.can_read?(Portal)
+    = link_to admin_portals_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_portal_path(@portal), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = image_variant_tag @portal.cover_image
+    = @portal
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: false}
+
+  .col-md-6
+    = render partial: 'admin/images/edit_table', object: @portal, as: :imageable
+    = render partial: 'admin/images/dropzone', object: @portal, as: :imageable

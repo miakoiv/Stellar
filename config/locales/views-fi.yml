@@ -64,6 +64,11 @@ fi:
         new_page: Uusi sivu
       new:
         new_page: Uusi sivu
+    portals:
+      index:
+        new_portal: Uusi portaali
+      new:
+        new_portal: Uusi portaali
     pricing_groups:
       index:
         new_pricing_group: Uusi hintaryhmä

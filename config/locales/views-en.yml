@@ -84,6 +84,11 @@ en:
         new_page: New page
       new:
         new_page: New page
+    portals:
+      index:
+        new_portal: New portal
+      new:
+        new_portal: New portal
     pricing_groups:
       index:
         new_pricing_group: New pricing group
