@@ -1,8 +1,8 @@
 - if user_signed_in? && !current_user.guest?
   %li.dropdown
     %a.dropdown-toggle{href: '#', role: 'button', 'aria-expanded' => 'false', data: {toggle: 'dropdown'}}
-      = icon('user', current_user.name)
-      %span.label{class: "label-#{current_user.appearance}"}= current_user.human_attribute_value(:group).first
+      %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+      = current_user.name.split.first
       %span.caret
     %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
       = active_link_to icon('calendar', t('store.order_history')), orders_path, wrap_tag: :li
