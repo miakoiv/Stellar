@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
-    request_keys: [:host]
+    request_keys: [:host, :subdomain]
 
   enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2}
 
@@ -62,9 +62,10 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
 
   #---
-  # Override Devise hook to find users in the scope of a store.
+  # Override Devise hook to find users in the scope of a store, by matching
+  # against their host or subdomain attributes.
   def self.find_for_authentication(warden_conditions)
-    joins(:store).where(email: warden_conditions[:email], stores: {host: warden_conditions[:host]}).first
+    joins(:store).where('users.email = ? AND (stores.host = ? OR stores.subdomain = ?)', warden_conditions[:email], warden_conditions[:host], warden_conditions[:subdomain]).first
   end
 
   def self.group_options
