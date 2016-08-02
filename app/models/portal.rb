@@ -19,7 +19,7 @@ class Portal < ActiveRecord::Base
   # Departments act like virtual categories for portals, coalescing
   # products from multiple categories across different stores
   # into a single view.
-  has_many :departments
+  has_many :departments, dependent: :destroy
 
   #---
   validates :name, presence: true
