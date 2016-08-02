@@ -192,7 +192,8 @@ en:
       portal:
         name: Name
         domain: Domain
-        departments: Departments
+        store_ids: Stores
+        department_ids: Departments
         theme: Display theme
         locale: Language
       pricing_group:

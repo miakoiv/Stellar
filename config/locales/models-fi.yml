@@ -192,7 +192,8 @@ fi:
       portal:
         name: Nimi
         domain: Verkkotunnus
-        departments: Osastot
+        store_ids: Kaupat
+        department_ids: Osastot
         theme: Ulkoasun teema
         locale: Kieli
       pricing_group:

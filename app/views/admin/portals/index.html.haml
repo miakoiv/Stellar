@@ -10,16 +10,22 @@
       %tr
         %th.col-xs-1
         %th= col(Portal, :name)
-        %th= col(Portal, :departments)
+        %th= col(Portal, :store_ids)
+        %th= col(Portal, :department_ids)
         %th.actions
     %tbody
       = content_tag_for :tr, @portals do |portal|
         %td= image_variant_tag portal.cover_image
         %td= portal.name
         %td
+          - portal.stores.each do |store|
+            = image_variant_tag(store.cover_image, :icon, title: store, data: {toggle: 'tooltip'})
+        %td
           - portal.departments.each do |department|
             %span.label.label-default= department
         %td.actions
+          - if current_portal != portal
+            = link_to icon('bookmark', t('actions.select')), root_url(host: portal.domain), class: 'btn btn-default btn-sm'
           = link_to icon('info', t('actions.show')), admin_portal_path(portal), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Portal)
             = link_to icon('edit', t('actions.edit')), edit_admin_portal_path(portal), class: 'btn btn-default btn-sm'
