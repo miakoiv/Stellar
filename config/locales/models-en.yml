@@ -275,6 +275,7 @@ en:
         superuser: Superuser only
         host: Server address
         subdomain: Portal subdomain
+        portal_ids: Portals
         erp_number: ERP number
         name: Name
         slug: Slug

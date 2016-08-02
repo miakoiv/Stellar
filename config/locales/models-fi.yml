@@ -275,6 +275,7 @@ fi:
         superuser: Vain pääkäyttäjälle
         host: Palvelimen osoite
         subdomain: Portaalin aladomain
+        portal_ids: Portaalit
         erp_number: ERP-numero
         name: Nimi
         slug: Tunniste

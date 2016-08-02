@@ -10,24 +10,19 @@
       %tr
         %th.col-xs-1
         %th= col(Store, :name)
-        %th= col(Store, :erp_number)
-        %th= col(Store, :slug)
+        %th= col(Store, :portal_ids)
         %th.actions
 
     %tbody
-      - @stores.each do |store|
-        %tr
-          %td= image_variant_tag store.cover_image
-          %td= store.name
-          %td= store.erp_number
-          %td= store.slug
-          %td.actions
-            - if current_store != store
-              = link_to icon('bookmark', t('actions.select')),
-                  {host: store.host},
-                  class: 'btn btn-default btn-sm'
-            = link_to icon('info', t('actions.show')), admin_store_path(store),
-                class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(store)
-              = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store),
-                  class: 'btn btn-default btn-sm'
+      = content_tag_for :tr, @stores do |store|
+        %td= image_variant_tag store.cover_image
+        %td= store.name
+        %td
+          - store.portals.each do |portal|
+            = image_variant_tag(portal.cover_image, :icon, title: portal, data: {toggle: 'tooltip'})
+        %td.actions
+          - if current_store != store
+            = link_to icon('bookmark', t('actions.select')), {host: store.host}, class: 'btn btn-default btn-sm'
+          = link_to icon('info', t('actions.show')), admin_store_path(store), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(store)
+            = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store), class: 'btn btn-default btn-sm'
