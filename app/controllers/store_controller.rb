@@ -110,7 +110,7 @@ class StoreController < ApplicationController
       ActionMailer::Base.default_url_options = {host: current_store.host}
     end
 
-    # Pricing group is set by a before_filter. Changing the pricing group
+    # Pricing group is set by a before_action. Changing the pricing group
     # is done by StoreController#pricing and its id is retained in a cookie.
     # If current user has her own pricing group set, it will take precedence.
     def set_pricing_group
