@@ -26,6 +26,11 @@ class Portal < ActiveRecord::Base
   validates :domain, presence: true, uniqueness: true
 
   #---
+  def self.store_options
+    Store.all.map { |s| [s.name, s.id] }
+  end
+
+  #---
   def description
     name
   end
