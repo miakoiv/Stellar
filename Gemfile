@@ -47,9 +47,6 @@ gem 'friendly_id'
 # Moneh!
 gem 'money-rails'
 
-# Shhhh
-gem 'quiet_assets'
-
 # EU Cookie Law requires this, unfortunately
 gem 'cookie_alert'
 

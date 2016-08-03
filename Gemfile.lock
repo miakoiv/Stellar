@@ -184,8 +184,6 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pkg-config (1.1.7)
-    quiet_assets (1.1.0)
-      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -339,7 +337,6 @@ DEPENDENCIES
   mysql2
   nprogress-rails
   paperclip (~> 5.0)
-  quiet_assets
   rails (= 4.2.7)
   rails-erd
   rails_real_favicon
