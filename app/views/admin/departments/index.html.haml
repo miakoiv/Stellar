@@ -19,7 +19,7 @@
         %td= department.name
         %td
           - department.categories.each do |category|
-            = image_variant_tag category.cover_image, :icon, title: category, data: {toggle: 'tooltip'}
+            = image_variant_tag category.cover_image || category.store.cover_image, :icon, title: category, data: {toggle: 'tooltip'}
         %td.actions
           = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Department)
