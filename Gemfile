@@ -81,7 +81,7 @@ gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass'
 
 # Image attachments and popups
-gem 'paperclip', '~> 4.2'
+gem 'paperclip', '~> 5.0'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
