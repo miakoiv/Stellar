@@ -66,6 +66,11 @@ en:
         grand_total: Total
       new:
         new_customer_asset: New asset
+    departments:
+      index:
+        new_department: New department
+      new:
+        new_department: New department
     orders:
       show:
         forward: Forward to cart

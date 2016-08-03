@@ -70,6 +70,9 @@ Rails.application.routes.draw do
     resources :portals do
       resources :images, shallow: true
     end
+    resources :departments do
+      post :reorder, on: :collection
+    end
     resources :stores do
       resources :images, shallow: true
     end

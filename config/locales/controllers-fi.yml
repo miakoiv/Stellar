@@ -17,6 +17,13 @@ fi:
     customer_assets:
       create:
         notice: "Asiakkaan omistus %{customer_asset} luotu."
+    departments:
+      create:
+        notice: "Osasto %{department} luotu."
+      update:
+        notice: "Osasto %{department} päivitetty."
+      destroy:
+        notice: "Osasto %{department} poistettu."
     images:
       create:
         error: "Kuvan lisääminen epäonnistui."

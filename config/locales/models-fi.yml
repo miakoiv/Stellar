@@ -113,6 +113,9 @@ fi:
         product_id: Tuote
         amount: Määrä
         value: Arvo
+      department:
+        name: Nimi
+        category_ids: Tuoteryhmät
       iframe:
         html: HTML-koodi
       image:

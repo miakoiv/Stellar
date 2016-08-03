@@ -46,6 +46,11 @@ fi:
         grand_total: Yhteensä
       new:
         new_customer_asset: Uusi omistus
+    departments:
+      index:
+        new_department: Uusi osasto
+      new:
+        new_department: Uusi osasto
     orders:
       show:
         forward: Välitä ostoskoriin

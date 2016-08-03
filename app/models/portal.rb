@@ -16,6 +16,10 @@ class Portal < ActiveRecord::Base
   # stores may belong to multiple portals.
   has_and_belongs_to_many :stores
 
+  # Categories that are available through stores, to associate
+  # with departments under this portal.
+  has_many :available_categories, through: :stores, source: :categories
+
   # Departments act like virtual categories for portals, coalescing
   # products from multiple categories across different stores
   # into a single view.
@@ -31,6 +35,10 @@ class Portal < ActiveRecord::Base
   end
 
   #---
+  def category_options
+    available_categories.includes(:store).live.map { |c| ["#{c.store} ⯈ #{c}", c.id] }.sort
+  end
+
   def description
     name
   end

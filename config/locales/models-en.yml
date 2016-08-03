@@ -113,6 +113,9 @@ en:
         product_id: Product
         amount: Amount
         value: Value
+      department:
+        name: Name
+        category_ids: Categories
       iframe:
         html: HTML code
       image:

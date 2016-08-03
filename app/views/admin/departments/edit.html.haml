@@ -1,0 +1,12 @@
+.page-header
+  - if current_user.can_read?(Department)
+    = link_to admin_departments_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_department_path(@department), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('umbrella', @department.name)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: false}

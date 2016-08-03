@@ -1,0 +1,45 @@
+.page-header
+  - if current_user.can_create?(Department)
+    = link_to new_admin_department_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_department'))
+  %h1= icon('umbrella', title(Department, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min.hidden-print
+        %th.col-xs-3= col(Department, :name)
+        %th= col(Department, :category_ids)
+        %th.actions
+
+    %tbody{class: current_user.can_update?(Department) ? 'sortable' : nil}
+      = content_tag_for :tr, @departments do |department|
+        %td.hidden-print= drag_handle
+        %td= department.name
+        %td
+          - department.categories.each do |category|
+            = image_variant_tag category.cover_image, :icon, title: category, data: {toggle: 'tooltip'}
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(Department)
+            = link_to icon('edit', t('actions.edit')), edit_admin_department_path(department), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(Department)
+            = link_to icon('remove', t('actions.delete')), admin_department_path(department),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: Department.model_name.human, name: department.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_departments_path}',
+      {reorder: $(this).sortable('toArray')}

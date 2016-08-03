@@ -17,6 +17,13 @@ en:
     customer_assets:
       create:
         notice: "Customer asset %{customer_asset} created."
+    departments:
+      create:
+        notice: "Department %{department} created."
+      update:
+        notice: "Department %{department} updated."
+      destroy:
+        notice: "Department %{department} deleted."
     images:
       create:
         error: "Image upload failed."
