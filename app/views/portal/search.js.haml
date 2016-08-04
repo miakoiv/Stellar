@@ -1,5 +1,8 @@
+$brickwork = $('.brickwork');
 $items = $("#{j render partial: 'product', collection: @products}");
-$('.brickwork').append($items).masonry('appended', $items);
+
+$brickwork.imagesLoaded(function() { $brickwork.append($items).masonry('appended', $items);
+});
 
 - if @products.last_page?
   $('.pagination').html('');
