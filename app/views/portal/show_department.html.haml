@@ -2,8 +2,8 @@
   .products
     .page-header.visible-print
       %h1
-        = current_portal.to_s
-        %small= @department.to_s
+        = current_portal
+        %small= @department
     .product-grid.infinite-table
       %ul.brickwork
         = render partial: 'product', collection: @products
