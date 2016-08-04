@@ -1,0 +1,7 @@
+$items = $("#{j render partial: 'product', collection: @products}");
+$('.brickwork').append($items).masonry('appended', $items);
+
+- if @products.last_page?
+  $('.pagination').html('');
+- else
+  $('.pagination').html("#{j link_to_next_page(@products, '', params: params, remote: true)}")

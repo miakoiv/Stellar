@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   # Portal routes.
   get '/department/:department_id', to: 'portal#show_department', as: :show_department
+  get '/portal/search', to: 'portal#search', as: :portal_search
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store/search', to: 'store#search', as: :search

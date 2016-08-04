@@ -1,0 +1,10 @@
+#products-wrap
+  .products
+    .page-header.visible-print
+      %h1
+        = current_portal
+    .product-grid.infinite-table
+      %ul.brickwork
+        = render partial: 'product', collection: @products
+      .pagination
+        = link_to_next_page(@products, '', params: params, remote: true)

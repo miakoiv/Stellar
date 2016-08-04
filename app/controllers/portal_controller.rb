@@ -13,14 +13,22 @@ class PortalController < ApplicationController
   before_action :set_stores
   before_action :set_departments
   before_action :find_department, only: [:show_department]
+  before_action :prepare_search
 
   # GET /
   def index
   end
 
+  # GET /portal/search
+  def search
+    @products = @search.results.page(params[:page]).per(30)
+
+    respond_to :js, :html
+  end
+
   # GET /department/:department_id
   def show_department
-    @products = @department.all_products.page(params[:page]).per(30)
+    @products = @department.all_products.includes(:store).page(params[:page]).per(30)
 
     respond_to :js, :html
   end
@@ -51,5 +59,15 @@ class PortalController < ApplicationController
       if request.path != show_department_path(@department)
         return redirect_to show_department_path(@department), status: :moved_permanently
       end
+    end
+
+    def prepare_search
+      @search = ProductSearch.new(search_params)
+    end
+
+    # Restrict searching to live products under current portal.
+    def search_params
+      @query = params[:search] || {}
+      @query.merge(store_id: current_portal.stores, live: true)
     end
 end
