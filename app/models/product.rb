@@ -136,9 +136,9 @@ class Product < ActiveRecord::Base
       .flatten.group_by(&:property).select { |p, v| v.uniq(&:value).count > 1 }
   end
 
-  # If a single category is requested, give the first one.
+  # If a single category is requested, give the first live one.
   def category
-    categories.first
+    categories.live.first
   end
 
   def searchable_product_properties
@@ -289,11 +289,11 @@ class Product < ActiveRecord::Base
     end
 
     # Resets the live status of the product, according to these criteria:
-    # - must have at least one category
+    # - must have at least one live category
     # - set to be available at a certain date which is not in the future
     # - if set to be deleted at a certain date which is in the future
     def reset_live
-      self[:live] = categories.any? &&
+      self[:live] = categories.live.any? &&
         (available_at.present? && !available_at.future?) &&
         (deleted_at.nil? || deleted_at.future?)
       true
