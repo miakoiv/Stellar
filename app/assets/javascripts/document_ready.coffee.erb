@@ -1,7 +1,7 @@
 $.fn.extend
   initialize: ->
 
-    $('#static-wrap a.snip').each ->
+    $('#static-wrap a[href^="/snippets/"]').each ->
       $.ajax
         url: $(this).attr 'href'
         success: (data, status, xhr) =>
