@@ -60,7 +60,7 @@ class Store < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :host, presence: true, uniqueness: true
-  validates :subdomain, uniqueness: true
+  validates :subdomain, uniqueness: true, allow_blank: true
   validates :erp_number, numericality: true, allow_blank: true
 
   #---
