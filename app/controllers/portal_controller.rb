@@ -38,7 +38,7 @@ class PortalController < ApplicationController
     # Redirect to the storefront if there is no portal here, or a subdomain
     # inside a portal is specified.
     def conditional_redirect_to_storefront
-      redirect_to front_path if current_portal.nil? || current_portal.present? && request.subdomain.present?
+      redirect_to store_path if current_portal.nil? || current_portal.present? && request.subdomain.present?
     end
 
     def set_locale

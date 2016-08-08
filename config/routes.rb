@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   # Mount the cookie alert engine.
   mount CookieAlert::Engine => '/cookie-alert'
 
-  # Redirect old /store route.
-  get '/store', to: redirect('/front')
-
   # Redirect old product urls still found in the wild.
   get '/category/:category_id/product/:product_id',
     to: redirect('/product/:category_id/:product_id')
@@ -32,6 +29,7 @@ Rails.application.routes.draw do
   get '/portal/search', to: 'portal#search', as: :portal_search
 
   # Catch bona fide storefront urls that are not accessible via slugs.
+  get  '/store', to: 'store#index', as: :store
   get  '/store/search', to: 'store#search', as: :search
   get  '/store/lookup', to: 'store#lookup', as: :lookup
   get  '/store/pricing/(:pricing_group_id)', to: 'store#pricing', as: :pricing
