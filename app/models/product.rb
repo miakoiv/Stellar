@@ -116,7 +116,7 @@ class Product < ActiveRecord::Base
   end
 
   def sibling_variants
-    master_product.variants - [self]
+    master_product.variants.where.not(id: self)
   end
 
   # Finds product properties that differ from the baseline established
