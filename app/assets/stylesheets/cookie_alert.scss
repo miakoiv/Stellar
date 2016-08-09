@@ -6,8 +6,11 @@
   margin: 0;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 2000000001;
   overflow: hidden;
+  background-color: $body-bg;
+  color: $text-color;
+  border-color: $table-border-color;
 }
 
 #cookie_alert_message {
