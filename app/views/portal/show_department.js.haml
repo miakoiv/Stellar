@@ -1,7 +1,4 @@
 $masonry = $('.masonry-grid');
 $items = $("#{j render partial: 'product', collection: @products}");
 
-$items.hide();
-$masonry.append($items);
-$masonry.imagesLoaded(function() { $items.show(); $masonry.masonry('appended', $items);
-});
+$masonry.masonryReveal($items);
