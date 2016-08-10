@@ -1,0 +1,26 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2= col(User, :name)
+        %th.col-xs-3= col(User, :email)
+        %th= col(User, :role_ids)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, users do |user|
+        %td= user.name
+        %td= user.email
+        %td
+          - user.roles.each do |role|
+            %span.label{class: "label-#{role.appearance}"}= role
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(user)
+            = link_to icon('edit', t('actions.edit')), edit_admin_user_path(user), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(User)
+            = link_to icon('remove', t('actions.delete')), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
+                  klass: User.model_name.human, name: user.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}
