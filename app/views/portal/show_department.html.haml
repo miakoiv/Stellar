@@ -5,7 +5,7 @@
         = current_portal
         %small= @department
     .product-grid.infinite-table
-      %ul.brickwork
+      %ul.masonry-grid
         = render partial: 'product', collection: @products
       .pagination
         = link_to '', show_department_path(@department), remote: true, rel: 'next'

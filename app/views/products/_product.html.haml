@@ -1,5 +1,5 @@
 - cache_if current_user.guest?, [I18n.locale, :product_card, product] do
-  = content_tag_for :li, product do
+  = content_tag_for :li, product, class: 'masonry-item single' do
     = link_to show_product_path((@category || product.category), product), data: {push: 'partial', target: '.product-detail'} do
       .product-image= image_variant_tag product.cover_image(current_store.card_image_type), :postcard
       .product-text

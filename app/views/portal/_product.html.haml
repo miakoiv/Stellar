@@ -1,4 +1,4 @@
-= content_tag_for :li, product, class: product.cover_image.present? && product.description.present? && rand < 0.333 ? 'wide' : '' do
+= content_tag_for :li, product, class: product.cover_image.present? && product.description.present? && rand < 0.333 ? 'masonry-item double' : 'masonry-item single' do
   = link_to show_product_url(product.category, product, subdomain: product.store.subdomain) do
     .product-image= image_variant_tag product.cover_image, :postcard
     .product-text

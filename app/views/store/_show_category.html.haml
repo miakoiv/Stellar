@@ -3,7 +3,7 @@
     = current_store.to_s
     %small= @category.to_s
 .product-grid.collapse.in
-  %ul{class: current_store.masonry? ? 'brickwork' : ''}= render @products
+  %ul{class: current_store.masonry? ? 'masonry-grid' : ''}= render @products
 .product-list.collapse
   .panel.panel-default
     = render partial: 'products/table', object: @products, as: :products

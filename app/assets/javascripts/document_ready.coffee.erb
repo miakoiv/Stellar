@@ -42,12 +42,12 @@ $.fn.extend
     $(this).css 'padding-bottom', element.height()
 
   rebuild_masonry: ->
-    $brickwork = $('.brickwork')
-    $brickwork.masonry('destroy') if $brickwork.hasClass('masonry')
-    $brickwork.imagesLoaded ->
-      $brickwork.masonry
-        itemSelector: '.product'
-        percentPosition: false
+    $masonry = $('.masonry-grid')
+    $masonry.imagesLoaded ->
+      $masonry.masonry
+        itemSelector: '.masonry-item'
+        columnWidth: '.single'
+        percentPosition: true
 
 jQuery ->
 
