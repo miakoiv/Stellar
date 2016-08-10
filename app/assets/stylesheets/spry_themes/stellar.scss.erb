@@ -286,19 +286,17 @@ body.stellar {
           padding-left: 0;
           margin-bottom: 0;
           border-right: 1px solid #ddd;
-          background-color: #f0f0f0;
 
           li.product {
             @extend .col-xs-6, .col-sm-4, .col-md-3;
             padding-bottom: 20px;
             border-left: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
-            background-color: #fff;
 
-            &.wide {
+            &.double {
               @extend .col-xs-12, .col-sm-8, .col-md-6;
               padding-top: 10px;
-              border-top: 3px solid $brand-primary;
+              border-top: 2px solid $text-color;
 
               .product-image {
                 @extend .col-xs-6;
@@ -312,6 +310,7 @@ body.stellar {
                 .description:after { display: none; }
               }
               .buy-now {
+                @extend .col-xs-6;
                 position: absolute;
                 right: $grid-gutter-width/2;
                 bottom: 20px;
@@ -374,8 +373,21 @@ body.stellar {
               }
             }
             .buy-now {
-              p {
+              .store {
+                @extend .pull-left;
+                margin-bottom: 0;
+                font-size: $font-size-small;
+                font-weight: 500;
+
+                img {
+                  display: inline-block;
+                  margin-right: 5px;
+                }
+              }
+              .price {
                 @extend .pull-right, .label, .label-default;
+                border-radius: 0;
+                line-height: 20px;
                 margin-bottom: 0;
               }
               form {
