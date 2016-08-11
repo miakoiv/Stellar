@@ -306,13 +306,11 @@ body.stellar {
               .product-text {
                 @extend .col-xs-6;
                 padding-right: 0;
-
-                .description:after { display: none; }
               }
               .buy-now {
                 @extend .col-xs-6;
                 position: absolute;
-                right: $grid-gutter-width/2;
+                right: 0;
                 bottom: 20px;
               }
             }
@@ -366,13 +364,15 @@ body.stellar {
                     position: absolute;
                     left: 0;
                     right: 0;
-                    bottom: 0;    // obscures the bottom 20px portion
+                    top: 100px;   // obscures the bottom 20px portion
                     height: 20px; // but clipped by bounding box
                   }
                 }
               }
             }
             .buy-now {
+              @extend .clearfix;
+
               .store {
                 @extend .pull-left;
                 margin-bottom: 0;
