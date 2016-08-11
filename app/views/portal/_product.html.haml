@@ -1,17 +1,19 @@
-= content_tag_for :li, product, class: product.cover_image.present? && product.description.present? && rand < 0.333 ? 'masonry-item double' : 'masonry-item single' do
-  = link_to show_product_url(product.category, product, subdomain: product.store.subdomain) do
-    .product-image= image_variant_tag product.cover_image, :postcard
-    .product-text
-      %h3
-        = product.title
-        %span.small= product.subtitle
-      .description= product.description.html_safe
-    - product.active_promoted_items.each do |item|
-      .promotion
-        %p= item.description
-  - if !product.master?
-    .buy-now
-      %p.store
-        = image_variant_tag product.store.cover_image, :icon
-        = product.store
-      %p.price= humanized_money_with_symbol product.price(nil)
+- size = product.limelightable? && rand < 0.333 ? 'double' : 'single'
+- cache [I18n.locale, size, :portal_product_card, product] do
+  = content_tag_for :li, product, class: "masonry-item #{size}" do
+    = link_to show_product_url(product.category, product, subdomain: product.store.subdomain) do
+      .product-image= image_variant_tag product.cover_image, :postcard
+      .product-text
+        %h3
+          = product.title
+          %span.small= product.subtitle
+        .description= product.description.html_safe
+      - product.active_promoted_items.each do |item|
+        .promotion
+          %p= item.description
+    - if !product.master?
+      .buy-now
+        %p.store
+          = image_variant_tag product.store.cover_image, :icon
+          = product.store
+        %p.price= humanized_money_with_symbol product.price(nil)

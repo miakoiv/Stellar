@@ -261,6 +261,11 @@ class Product < ActiveRecord::Base
     [self] + requisite_products
   end
 
+  # Limelighting a product in portal views needs both images and text.
+  def limelightable?
+    cover_image.present? && description.present?
+  end
+
   # Icon name based on purpose.
   def icon
     [nil, 'square', 'sitemap', 'archive', 'magic'][Product.purposes[purpose]]
