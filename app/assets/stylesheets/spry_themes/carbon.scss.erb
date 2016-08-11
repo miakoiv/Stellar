@@ -67,7 +67,10 @@ ul { list-style-type: square; }
 
       img {
         display: block;
-        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
       }
       .carousel-caption {
         padding: 10px 10px 40px;
@@ -95,7 +98,10 @@ ul { list-style-type: square; }
       padding-bottom: 0;
 
       img {
+        max-width: none;
         max-height: 50px;
+        width: auto;
+        height: auto;
         margin: -3px 0 0 0;
       }
     }
@@ -209,6 +215,7 @@ ul { list-style-type: square; }
             img {
               position: absolute;
               display: block;
+              width: auto;
               height: 100%;
               left: 50%;
               top: 50%;

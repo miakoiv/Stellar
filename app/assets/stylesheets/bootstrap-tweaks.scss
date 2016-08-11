@@ -23,6 +23,8 @@ html {
     img {
       display: inline-block;
       max-height: 25px;
+      width: auto;
+      height: auto;
     }
     span { display: none; }
   }
@@ -227,6 +229,8 @@ i.icon {
 }
 .box-matchbox img, .box-thumbnail img, .box-icon img {
   position: absolute;
+  width: auto;
+  height: auto;
   top: 0;
   bottom: 0;
   left: 0;
