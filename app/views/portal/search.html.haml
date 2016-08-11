@@ -7,4 +7,4 @@
       %ul.masonry-grid
         = render partial: 'product', collection: @products
       .pagination
-        = link_to_next_page(@products, '', params: params, remote: true)
+        = link_to_next_page(@products, loading_spinner, params: params, remote: true)

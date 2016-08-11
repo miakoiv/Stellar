@@ -133,11 +133,16 @@ html {
 }
 
 .infinite-table .pagination {
-  @extend .col-xs-12;
+  display: block;
 
   a {
-    @extend .btn, .btn-lg, .btn-block, .btn-primary;
-    height: 50px;
+    @extend .btn, .btn-lg, .btn-block, .btn-default;
+    background-color: transparent;
+    border-color: transparent;
+
+    i {
+      @extend .fa-2x;
+    }
   }
 }
 

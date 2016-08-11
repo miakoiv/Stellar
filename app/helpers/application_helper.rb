@@ -28,6 +28,10 @@ module ApplicationHelper
     end
   end
 
+  def loading_spinner
+    icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
+  end
+
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
     return ''.html_safe if image.nil?

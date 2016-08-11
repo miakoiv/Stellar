@@ -11,4 +11,4 @@
       %tbody
         = render partial: 'products/search_result_row', collection: products, as: :product
     .pagination
-      = link_to_next_page(products, '', remote: true)
+      = link_to_next_page(products, loading_spinner, remote: true)
