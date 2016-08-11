@@ -97,6 +97,8 @@ GEM
       html2haml
     erubis (2.7.0)
     execjs (2.7.0)
+    fastimage (2.0.0)
+      addressable (~> 2)
     font-awesome-sass (4.6.2)
       sass (>= 3.2)
     friendly_id (5.1.0)
@@ -317,6 +319,7 @@ DEPENDENCIES
   dropzonejs-rails
   erb2haml
   execjs
+  fastimage
   font-awesome-sass
   friendly_id
   haml-rails

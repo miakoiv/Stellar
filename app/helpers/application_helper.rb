@@ -36,7 +36,7 @@ module ApplicationHelper
   def image_variant_tag(image, size = :icon, options = {})
     return ''.html_safe if image.nil?
     if image.is_bitmap?
-      image_tag(image.url(size), options)
+      image_tag(image.url(size), options.merge(image.dimensions(size)))
     elsif image.is_vector?
       image_tag(image.url(:original), options.merge(class: 'img-responsive'))
     else

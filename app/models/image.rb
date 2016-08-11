@@ -95,6 +95,13 @@ class Image < ActiveRecord::Base
     end
   end
 
+  # Image dimensions courtesy of FastImage, cached.
+  def dimensions(style = :original)
+    @dimensions ||= {}
+    return nil unless is_bitmap?
+    @dimensions[style] ||= [:width, :height].zip(FastImage.size(attachment.path(style))).to_h
+  end
+
   def to_s
     attachment_file_name.humanize
   end

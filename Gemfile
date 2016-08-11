@@ -79,6 +79,7 @@ gem 'font-awesome-sass'
 
 # Image attachments and popups
 gem 'paperclip', '~> 5.0'
+gem 'fastimage'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
