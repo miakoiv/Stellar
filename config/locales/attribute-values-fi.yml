@@ -30,6 +30,7 @@ fi:
           alphabetical: aakkosjärjestys
           retail_price_asc: halvin ensin
           retail_price_desc: kallein ensin
+          random: satunnainen
       role:
         name:
           see_pricing: näkee hinnat

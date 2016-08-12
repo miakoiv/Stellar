@@ -21,10 +21,6 @@ class Department < ActiveRecord::Base
   validates :name, presence: true
 
   #---
-  def all_products
-    products.reorder('RAND()')
-  end
-
   def slugger
     [:name, [:name, -> { portal.name }]]
   end

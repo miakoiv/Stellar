@@ -32,6 +32,9 @@ class Product < ActiveRecord::Base
   define_scope :retail_price_desc do
     order(retail_price_cents: :desc)
   end
+  define_scope :random do
+    reorder('RAND()')
+  end
 
   #---
   belongs_to :store
