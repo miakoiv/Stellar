@@ -119,10 +119,6 @@ class Store < ActiveRecord::Base
     (categories.top_level - [exclude]).map { |c| [c.name, c.id] }
   end
 
-  def category_options
-    categories.map { |c| [c.indented_name, c.id] }
-  end
-
   def user_options
     users.map { |u| [u.to_s, u.id] }
   end
