@@ -30,6 +30,10 @@ class ProductSearch < Searchlight::Search
     query.where(store_id: store_id)
   end
 
+  def search_vendor_id
+    query.where(vendor_id: vendor_id)
+  end
+
   def search_code
     query.where('code LIKE ? OR customer_code LIKE ?', "#{code}%", "#{code}%")
   end
