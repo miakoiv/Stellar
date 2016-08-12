@@ -6,7 +6,8 @@ class OrderMailer < ApplicationMailer
 
   #---
   # Order confirmation for the customer. Carbon copies are sent to users
-  # who need to be notified of this order.
+  # who need to be notified of this order. Another copy is sent to contact
+  # email, if present.
   def order_confirmation(order)
     @order = order
     @store = order.store
@@ -15,7 +16,7 @@ class OrderMailer < ApplicationMailer
       from: "noreply@#{@store.host}",
       to: "#{@order.customer_name} <#{@order.customer_email}>",
       subject: default_i18n_subject(store: @store),
-      cc: @order.notified_users.map(&:to_s)
+      cc: @order.notified_users.map(&:to_s) << @order.contact_string
     }
     roadie_mail(headers)
   end

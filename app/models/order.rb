@@ -103,6 +103,10 @@ class Order < ActiveRecord::Base
     store.users.where(group: order_type.destination_group).with_role(:order_notify)
   end
 
+  def contact_string
+    contact_person.present? && contact_email.present? ? "#{contact_person} <#{contact_email}>" : nil
+  end
+
   def approval
     !!approved_at.present?
   end
