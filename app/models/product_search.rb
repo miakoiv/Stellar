@@ -31,7 +31,7 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_code
-    query.where('code LIKE ?', "#{code}%")
+    query.where('code LIKE ? OR customer_code LIKE ?', "#{code}%", "#{code}%")
   end
 
   def search_keyword
