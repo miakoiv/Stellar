@@ -36,6 +36,9 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
 
+  # A product may belong to a specific vendor user who's responsible for it.
+  belongs_to :vendor, class_name: 'User'
+
   # A product may belong to multiple categories, and must update its own
   # timestamp when the relationships change.
   has_and_belongs_to_many :categories, after_add: :touch_self, after_remove: :touch_self

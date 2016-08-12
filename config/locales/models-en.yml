@@ -207,6 +207,7 @@ en:
         text: Text
         measurements: Measurements
         pricing: Pricing
+        vendor_id: Vendor
         purpose: Type
         master_product_id: Master product
         variant_ids: Variants

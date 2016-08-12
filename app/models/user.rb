@@ -16,20 +16,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     request_keys: [:host, :subdomain]
 
-  enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2}
+  enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2, vendor: 3}
 
   MANAGED_GROUPS = {
     'guest' => [],
     'customer' => ['customer'],
     'reseller' => ['customer', 'reseller'],
-    'manufacturer' => ['customer', 'reseller', 'manufacturer']
+    'manufacturer' => ['customer', 'reseller', 'manufacturer', 'vendor'],
+    'vendor' => []
   }.freeze
 
   GROUP_LABELS = {
     'guest' => 'default',
     'customer' => 'success',
     'reseller' => 'info',
-    'manufacturer' => 'warning'
+    'manufacturer' => 'warning',
+    'vendor' => 'danger'
   }.freeze
 
   #---
@@ -66,10 +68,6 @@ class User < ActiveRecord::Base
   # against their host or subdomain attributes.
   def self.find_for_authentication(warden_conditions)
     joins(:store).where('users.email = ? AND (stores.host = ? OR stores.subdomain = ?)', warden_conditions[:email], warden_conditions[:host], warden_conditions[:subdomain]).first
-  end
-
-  def self.group_options
-    %w{reseller manufacturer}.map { |group| [User.human_attribute_value(:group, group), group] }
   end
 
   #---
@@ -146,6 +144,13 @@ class User < ActiveRecord::Base
   def managed_users
     store.users.where(group: managed_groups.map { |group| User.groups[group] })
   end
+
+  # Categories available to this user when creating and editing products.
+  def category_options
+    available_categories = vendor? ? categories : store.categories
+    available_categories.map { |c| [c.indented_name, c.id] }
+  end
+
 
   # Reseller users are able to select a pricing group to use for retail.
   def can_select_pricing_group?

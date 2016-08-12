@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728095805) do
+ActiveRecord::Schema.define(version: 20160812081457) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -389,6 +389,7 @@ ActiveRecord::Schema.define(version: 20160728095805) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "store_id",                limit: 4,                     null: false
+    t.integer  "vendor_id",               limit: 4
     t.integer  "purpose",                 limit: 4,     default: 0,     null: false
     t.integer  "master_product_id",       limit: 4
     t.boolean  "live",                                  default: false, null: false
@@ -422,6 +423,7 @@ ActiveRecord::Schema.define(version: 20160728095805) do
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
   add_index "products", ["subtitle"], name: "index_products_on_subtitle", using: :btree
   add_index "products", ["title"], name: "index_products_on_title", using: :btree
+  add_index "products", ["vendor_id"], name: "index_products_on_vendor_id", using: :btree
 
   create_table "promoted_items", force: :cascade do |t|
     t.integer  "promotion_id",     limit: 4,                                     null: false
