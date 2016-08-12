@@ -5,9 +5,9 @@ class Admin::OrderItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order_and_item
 
-  # No layout, this controller never renders HTML.
-
   authorize_actions_for OrderItem
+
+  # No layout, this controller never renders HTML.
 
   # PATCH/PUT /admin/order_items/1
   def update

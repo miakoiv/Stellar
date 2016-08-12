@@ -3,11 +3,11 @@
 class Admin::AlbumsController < ApplicationController
 
   before_action :authenticate_user!
-
-  layout 'admin'
+  before_action :set_album, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for Album
-  before_action :set_album, only: [:show, :edit, :update, :destroy]
+
+  layout 'admin'
 
   # GET /admin/albums
   # GET /admin/albums.json

@@ -3,14 +3,14 @@
 class Admin::PromotionsController < ApplicationController
 
   before_action :authenticate_user!
-  authority_actions add_products: 'update'
-  authority_actions add_categories: 'update'
-
-  layout 'admin'
-
-  authorize_actions_for Promotion
   before_action :set_promotion,
     only: [:show, :edit, :update, :destroy, :add_products, :add_categories]
+
+  authority_actions add_products: 'update'
+  authority_actions add_categories: 'update'
+  authorize_actions_for Promotion
+
+  layout 'admin'
 
   # GET /admin/promotions
   # GET /admin/promotions.json

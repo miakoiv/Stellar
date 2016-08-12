@@ -4,12 +4,12 @@ class Admin::DepartmentsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_department, only: [:show, :edit, :update, :destroy, :reorder_products]
+
   authority_actions reorder: 'update'
+  authorize_actions_for Department
 
   layout 'admin'
-
-  authorize_actions_for Department
-  before_action :set_department, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   # GET /admin/departments
   # GET /admin/departments.json

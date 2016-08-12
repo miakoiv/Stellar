@@ -2,11 +2,12 @@
 
 class Admin::UsersController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for User, except: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  layout 'admin'
 
   # GET /admin/users
   # GET /admin/users.json
@@ -26,7 +27,7 @@ class Admin::UsersController < ApplicationController
 
   # GET /admin/users/1/edit
   def edit
-    authorize_action_for(@user)
+    authorize_action_for @user
   end
 
   # POST /admin/users
@@ -49,7 +50,7 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /admin/users/1
   # PATCH/PUT /admin/users/1.json
   def update
-    authorize_action_for(@user)
+    authorize_action_for @user
 
     respond_to do |format|
       if @user.update(user_params)

@@ -4,10 +4,10 @@ class Admin::IframesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  authority_actions reorder: 'update'
-
-  authorize_actions_for Iframe
   before_action :set_iframe, only: [:update, :destroy]
+
+  authority_actions reorder: 'update'
+  authorize_actions_for Iframe
 
   # No layout, this controller never renders HTML.
 

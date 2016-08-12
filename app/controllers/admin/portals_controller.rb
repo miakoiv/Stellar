@@ -2,11 +2,12 @@
 
 class Admin::PortalsController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
+  before_action :set_portal, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for Portal
-  before_action :set_portal, only: [:show, :edit, :update, :destroy]
+
+  layout 'admin'
 
   # GET /admin/portals
   def index

@@ -4,12 +4,12 @@ class Admin::CategoriesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
+
   authority_actions reorder: 'update', reorder_products: 'update'
+  authorize_actions_for Category
 
   layout 'admin'
-
-  authorize_actions_for Category
-  before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   # GET /admin/categories
   # GET /admin/categories.json

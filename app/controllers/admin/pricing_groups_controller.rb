@@ -3,11 +3,11 @@
 class Admin::PricingGroupsController < ApplicationController
 
   before_action :authenticate_user!
-
-  layout 'admin'
+  before_action :set_pricing_group, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for PricingGroup
-  before_action :set_pricing_group, only: [:show, :edit, :update, :destroy]
+
+  layout 'admin'
 
   # GET /admin/pricing_groups
   # GET /admin/pricing_groups.json

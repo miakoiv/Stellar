@@ -2,8 +2,9 @@
 
 class Admin::ReportsController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
+
+  layout 'admin'
 
   # GET /admin/reports
   def index

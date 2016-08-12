@@ -4,12 +4,12 @@ class Admin::PagesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_page, only: [:show, :edit, :update, :destroy]
+
   authority_actions reorder: 'update'
+  authorize_actions_for Page, except: [:edit, :update, :destroy]
 
   layout 'admin'
-
-  authorize_actions_for Page, except: [:edit, :update, :destroy]
-  before_action :set_page, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/pages
   # GET /admin/pages.json

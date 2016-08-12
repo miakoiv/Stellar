@@ -4,12 +4,12 @@ class Admin::PropertiesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_property, only: [:show, :edit, :update, :destroy]
+
   authority_actions reorder: 'update'
+  authorize_actions_for Property
 
   layout 'admin'
-
-  authorize_actions_for Property
-  before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/properties
   # GET /admin/properties.json

@@ -2,11 +2,12 @@
 
 class Admin::CustomerAssetsController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
+  before_action :set_customer_asset, only: [:show, :edit]
 
   authorize_actions_for CustomerAsset
-  before_action :set_customer_asset, only: [:show, :edit]
+
+  layout 'admin'
 
   # GET /admin/customer_assets
   # GET /admin/customer_assets.json

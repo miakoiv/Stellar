@@ -2,12 +2,13 @@
 
 class Admin::OrdersController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
-
-  authorize_actions_for Order
-  authority_actions quote: 'read', forward: 'read', add_products: 'update'
   before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :add_products]
+
+  authority_actions quote: 'read', forward: 'read', add_products: 'update'
+  authorize_actions_for Order
+
+  layout 'admin'
 
   # GET /admin/orders
   # GET /admin/orders.json

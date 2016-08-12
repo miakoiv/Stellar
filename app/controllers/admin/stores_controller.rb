@@ -2,11 +2,12 @@
 
 class Admin::StoresController < ApplicationController
 
-  layout 'admin'
   before_action :authenticate_user!
+  before_action :set_store, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for Store, except: [:show, :edit, :update]
-  before_action :set_store, only: [:show, :edit, :update, :destroy]
+
+  layout 'admin'
 
   # GET /admin/stores
   # GET /admin/stores.json

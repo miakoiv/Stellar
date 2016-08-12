@@ -3,9 +3,9 @@
 class Admin::AssetEntriesController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_customer_asset, only: [:create]
 
   authorize_actions_for AssetEntry
-  before_action :set_customer_asset, only: [:create]
 
   # No layout, this controller never renders HTML.
 
