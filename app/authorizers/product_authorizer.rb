@@ -18,4 +18,12 @@ class ProductAuthorizer < ApplicationAuthorizer
     user.has_cached_role?(:product_editor)
   end
 
+  # Vendors may only interact with their own products.
+  def readable_by?(user)
+    user.has_cached_role?(:product_editor) && (!user.vendor? || user.vendor? && resource.vendor == user)
+  end
+
+  def updatable_by?(user)
+    user.has_cached_role?(:product_editor) && (!user.vendor? || user.vendor? && resource.vendor == user)
+  end
 end

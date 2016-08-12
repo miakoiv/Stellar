@@ -4,12 +4,12 @@ class Admin::ProductsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries]
+
   authority_actions query: 'read', reorder: 'update', duplicate: 'create', add_requisite_entries: 'update'
+  authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries]
 
   layout 'admin'
-
-  authorize_actions_for Product
-  before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries]
 
   # GET /admin/products
   # GET /admin/products.json
@@ -30,21 +30,27 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/1
   # GET /admin/products/1.json
   def show
+    authorize_action_for @product
   end
 
   # GET /admin/products/new
   def new
-    @product = current_store.products.build(available_at: Date.current)
+    @product = current_store.products.build(
+      vendor: current_user.vendor? ? current_user : nil,
+      available_at: Date.current
+    )
   end
 
   # GET /admin/products/1/edit
   def edit
+    authorize_action_for @product
   end
 
   # POST /admin/products
   # POST /admin/products.json
   def create
     @product = current_store.products.build(product_params)
+    @product.vendor = current_user if current_user.vendor?
 
     respond_to do |format|
       if @product.save
@@ -61,6 +67,8 @@ class Admin::ProductsController < ApplicationController
   # PATCH/PUT /admin/products/1
   # PATCH/PUT /admin/products/1.json
   def update
+    authorize_action_for @product
+
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_product_path(@product),
@@ -75,7 +83,8 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products/1/duplicate
   def duplicate
-    original = current_store.products.friendly.find(params[:id])
+    authorize_action_for @product
+    original = @product
     @product = original.duplicate!
 
     redirect_to edit_admin_product_path(@product),
@@ -84,6 +93,8 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products/1/add_requisite_entries
   def add_requisite_entries
+    authorize_action_for @product
+
     requisite_ids = params[:product][:requisite_ids_string]
       .split(',').map(&:to_i)
 
@@ -108,7 +119,7 @@ class Admin::ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(
         :purpose, :master_product_id, {variant_ids: []},
-        :code, :customer_code, :title, :subtitle,
+        :vendor_id, :code, :customer_code, :title, :subtitle,
         :description, :memo, :mass, :dimension_u, :dimension_v, :dimension_w,
         :cost_price, :trade_price, :retail_price,
         :available_at, :deleted_at, category_ids: []
@@ -117,6 +128,8 @@ class Admin::ProductsController < ApplicationController
 
     # Restrict searching to products in current store.
     def search_params
-      @query.merge(store_id: current_store.id)
+      params = {store_id: current_store.id}
+      params.merge!(vendor_id: current_user.id) if current_user.vendor?
+      @query.merge(params)
     end
 end
