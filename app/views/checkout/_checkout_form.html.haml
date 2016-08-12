@@ -5,16 +5,19 @@
       .col-sm-4
         = f.text_field :customer_name, required: true
       .col-sm-4
-        = f.text_field :customer_email, required: true
+        = f.email_field :customer_email, required: true
       .col-sm-4
         = f.telephone_field :customer_phone, required: true
-    - if current_store.b2b_sales?
+  - if current_store.b2b_sales?
+    %fieldset.bg-info
       .row
-        .col-sm-4
+        .col-sm-6
           = f.text_field :company_name
-        .col-sm-4
+        .col-sm-6
           = f.text_field :contact_person
-        .col-sm-4
+        .col-sm-6
+          = f.email_field :contact_email
+        .col-sm-6
           = f.telephone_field :contact_phone
   - if @order.has_shipping?
     %fieldset.bg-info
