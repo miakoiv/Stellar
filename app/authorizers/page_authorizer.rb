@@ -7,10 +7,18 @@ class PageAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    user.has_cached_role?(resource.route? ? :superuser : :page_editor)
+    if resource_route?
+      user.has_cached_role?(:superuser) || user.has_cached_role?(:store_admin)
+    else
+      user.has_cached_role?(:page_editor)
+    end
   end
 
   def deletable_by?(user)
-    user.has_cached_role?(resource.route? ? :superuser : :page_editor)
+    if resource_route?
+      user.has_cached_role?(:superuser) || user.has_cached_role?(:store_admin)
+    else
+      user.has_cached_role?(:page_editor)
+    end
   end
 end
