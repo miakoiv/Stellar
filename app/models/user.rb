@@ -87,9 +87,9 @@ class User < ActiveRecord::Base
 
   # Looks up the relevant price for given product depending on user group.
   def price_for_cents(product, pricing_group)
-    return product.cost_price if manufacturer?
-    return product.trade_price if reseller?
-    product.price(pricing_group)
+    return product.cost_price_cents if manufacturer?
+    return product.trade_price_cents if reseller?
+    product.price_cents(pricing_group)
   end
 
   # Constructs a label for given product, depending on its active promotions.
