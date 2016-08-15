@@ -6,6 +6,7 @@
         %th.col-xs-2= col(Product, :code)
         %th= col(Product, :title)
         %th.col-min
+        %th.col-min
         %th= col(Product, :category_ids)
         %th.actions
 
@@ -19,7 +20,12 @@
             %td
               %strong= product.title
               = product.subtitle
-            %td= icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
+            %td
+              - if product.icon.present?
+                = icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
+            %td
+              - if product.vendor.present?
+                = icon('truck', title: "#{col(Product, :vendor_id)}: #{product.vendor}", data: {toggle: 'tooltip'})
             %td= product.categories.to_sentence
             %td.actions
               - if current_user.can_update?(product)
