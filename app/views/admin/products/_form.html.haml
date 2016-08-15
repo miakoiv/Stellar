@@ -32,7 +32,7 @@
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
             = f.date_field :deleted_at,
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-            = f.text_area :memo, rows: 4
+            = f.text_area :memo, rows: 2, help: t('.memo_help')
 
         #tab-product-text.tab-pane.fade
           %fieldset{disabled: locked}

@@ -73,7 +73,6 @@ de:
     products:
       index:
         new_product: Neues Produkt
-        uncategorized: keine Kategorie
       new:
         new_product: Neues Produkt
     promotion_handler:

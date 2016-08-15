@@ -104,7 +104,6 @@ en:
     products:
       index:
         new_product: New product
-        uncategorized: Uncategorized
       table:
         duplicate:
           button: Duplicate
@@ -114,7 +113,7 @@ en:
       new:
         new_product: New product
       form:
-        default_pricing: Default pricing
+        memo_help: Extra information for shopping cart and order rows.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.

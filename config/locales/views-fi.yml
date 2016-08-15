@@ -84,7 +84,6 @@ fi:
     products:
       index:
         new_product: Uusi tuote
-        uncategorized: Ei tuoteryhmää
       table:
         duplicate:
           button: Kopioi
@@ -94,7 +93,7 @@ fi:
       new:
         new_product: Uusi tuote
       form:
-        default_pricing: Perushinnat
+        memo_help: Lisätietoja tilausriville ostoskoriin ja tilauksiin.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Jokainen ym. erä tuotteita alentaa tuotteiden hintaa kumulatiivisesti annetulla prosentilla.
