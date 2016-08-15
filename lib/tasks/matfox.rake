@@ -165,7 +165,6 @@ namespace :matfox do
     product = Product.find_or_initialize_by(store: store, code: code)
     product.title ||= data[:product][:title].try(:mb_chars).try(:titleize)
     product.subtitle ||= data[:product][:subtitle].try(:mb_chars).try(:titleize)
-    product.memo ||= data[:product][:memo]
     product.cost_price = data[:product][:cost_price]
     product.cost_price_modified_at = data[:product][:cost_price_modified_at]
     if product.save
