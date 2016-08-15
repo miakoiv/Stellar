@@ -2,6 +2,10 @@
   %td
     %strong= order_item.product_title
     = order_item.product_subtitle
+    - if order_item.product.memo.present?
+      .small
+        = icon('info-circle')
+        = order_item.product.memo
   %td.no-wrap= order_item.product_code
   %td
     = form_for order_item, remote: true,

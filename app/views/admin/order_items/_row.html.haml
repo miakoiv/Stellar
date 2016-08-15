@@ -6,6 +6,10 @@
       = order_item.product_subtitle
       - if order_item.product.component_entries.any?
         %span.caret
+      - if order_item.product.memo.present?
+        .small
+          = icon('info-circle')
+          = order_item.product.memo
     %td.no-wrap
       - if order_item.real?
         = order_item.product_code
