@@ -207,7 +207,7 @@ fi:
         text: Teksti
         measurements: Mitat
         pricing: Hinnat
-        vendor_id: Myyjä
+        vendor_id: Tavarantoimittaja
         purpose: Tyyppi
         master_product_id: Päätuote
         variant_ids: Variantit
