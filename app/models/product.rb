@@ -95,8 +95,8 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
-  before_save :reset_live
   after_save :touch_categories
+  after_save :reset_live!
 
   #---
   def self.purpose_options
@@ -303,10 +303,10 @@ class Product < ActiveRecord::Base
     # - must have at least one live category
     # - set to be available at a certain date which is not in the future
     # - if set to be deleted at a certain date which is in the future
-    def reset_live
-      self[:live] = categories.live.any? &&
+    def reset_live!
+      update_columns(live: categories.live.any? &&
         (available_at.present? && !available_at.future?) &&
-        (deleted_at.nil? || deleted_at.future?)
+        (deleted_at.nil? || deleted_at.future?))
       true
     end
 
