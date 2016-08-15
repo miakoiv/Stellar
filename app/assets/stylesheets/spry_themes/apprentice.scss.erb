@@ -18,6 +18,8 @@ body {
 }
 
 #main-nav {
+  @include box-shadow(0 0 27px 0 #343434);
+
   > .content {
     @extend .container;
   }
@@ -183,8 +185,7 @@ body {
           padding-left: 0;
 
           li.product {
-            @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
-            max-width: 230px;
+            @extend .col-xs-6, .col-sm-4, .col-md-3;
             position: relative;
             transition: all 0.2s ease-in-out 0s;
 
