@@ -17,6 +17,7 @@ class Order < ActiveRecord::Base
   delegate :is_rfq?, :is_quote?, to: :order_type
 
   has_many :order_items, dependent: :destroy, inverse_of: :order
+  has_many :products, through: :order_items
   has_many :payments, dependent: :destroy, inverse_of: :order
 
   default_scope { where(cancelled_at: nil) }
@@ -291,9 +292,14 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # An order is empty when it's empty of real items.
+  # Returns the lead time for this order based on the contained products.
+  def lead_time
+    products.maximum(:lead_time)
+  end
+
+  # An order is empty when it's empty of real products.
   def empty?
-    order_items.real.empty?
+    products.real.empty?
   end
 
   # An order is quotable if it's a quote and there's a contact address.
@@ -303,8 +309,8 @@ class Order < ActiveRecord::Base
 
   # An order is checkoutable when all its real items are available.
   def checkoutable?
-    order_items.joins(:product).real.each do |order_item|
-      return false unless order_item.product.available?
+    products.real.each do |product|
+      return false unless product.available?
     end
     return true
   end

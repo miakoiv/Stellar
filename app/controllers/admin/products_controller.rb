@@ -119,8 +119,9 @@ class Admin::ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(
         :purpose, :master_product_id, {variant_ids: []},
-        :vendor_id, :code, :customer_code, :title, :subtitle,
-        :description, :memo, :mass, :dimension_u, :dimension_v, :dimension_w,
+        :vendor_id, :code, :customer_code,
+        :title, :subtitle, :description, :memo,
+        :mass, :dimension_u, :dimension_v, :dimension_w, :lead_time,
         :cost_price, :trade_price, :retail_price,
         :available_at, :deleted_at, category_ids: []
       )

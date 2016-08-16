@@ -8,11 +8,11 @@
       %a{href: '#tab-product-text', role: 'tab', data: {toggle: 'tab'}}
         = col(Product, :text)
     %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
-      %a{href: '#tab-product-measurements', role: 'tab', data: {toggle: 'tab'}}
-        = col(Product, :measurements)
-    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
       %a{href: '#tab-product-pricing', role: 'tab', data: {toggle: 'tab'}}
         = col(Product, :pricing)
+    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
+      %a{href: '#tab-product-shipping', role: 'tab', data: {toggle: 'tab'}}
+        = col(Product, :shipping)
 
   .panel.panel-default.tabbed-panel
     .panel-body
@@ -40,20 +40,6 @@
             = f.text_field :subtitle
             = f.text_area :description
 
-        #tab-product-measurements.tab-pane.fade
-          %fieldset{disabled: locked}
-            = f.text_field :mass, append: 'g', class: 'text-right'
-            .form-group
-              %label.control-label.col-sm-4= col(Product, :dimensions)
-              .col-sm-8
-                .input-group
-                  = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
-                  %span.input-group-addon ⨯
-                  = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
-                  %span.input-group-addon ⨯
-                  = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
-                  %span.input-group-addon mm
-
         #tab-product-pricing.tab-pane.fade
           %fieldset{disabled: locked}
             - if current_user.manufacturer?
@@ -78,6 +64,22 @@
                 .input-group
                   %span.input-group-addon= col(Product, :margin_percent)
                   = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), class: 'form-control text-right'
+
+        #tab-product-shipping.tab-pane.fade
+          %fieldset{disabled: locked}
+            = f.text_field :mass, append: 'g', class: 'text-right'
+            .form-group
+              %label.control-label.col-sm-4= col(Product, :dimensions)
+              .col-sm-8
+                .input-group
+                  = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
+                  %span.input-group-addon ⨯
+                  = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
+                  %span.input-group-addon ⨯
+                  = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
+                  %span.input-group-addon mm
+            = f.text_field :lead_time, append: col(Product, :lead_time_unit), class: 'text-right'
+
       - unless locked
         %fieldset.actions
           = f.form_group do

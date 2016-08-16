@@ -205,8 +205,8 @@ en:
       product:
         metadata: General
         text: Text
-        measurements: Measurements
         pricing: Pricing
+        shipping: Shipping
         vendor_id: Supplier
         purpose: Type
         master_product_id: Master product
@@ -224,6 +224,8 @@ en:
         memo: Memo
         mass: Shipping weight
         dimensions: Shipping dimensions
+        lead_time: Lead time
+        lead_time_unit: days
         iframes: Embeds
         images: Images
         product_properties: Properties

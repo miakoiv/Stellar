@@ -205,8 +205,8 @@ fi:
       product:
         metadata: Yleistä
         text: Teksti
-        measurements: Mitat
         pricing: Hinnat
+        shipping: Toimitus
         vendor_id: Tavarantoimittaja
         purpose: Tyyppi
         master_product_id: Päätuote
@@ -224,6 +224,8 @@ fi:
         memo: Muistio
         mass: Pakkauksen paino
         dimensions: Pakkauksen mitat
+        lead_time: Toimitusaika
+        lead_time_unit: päivää
         iframes: Upotukset
         images: Kuvat
         product_properties: Ominaisuudet
