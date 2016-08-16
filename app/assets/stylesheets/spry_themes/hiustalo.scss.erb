@@ -10,11 +10,9 @@ $brand-primary: #e6172b;
 @import "fonts.scss";
 @import "print.scss";
 
-body {
+body.hiustalo {
   padding-top: $navbar-height + 4;
   overflow-y: scroll;
-}
-.hiustalo {
   background-image: url(<%= asset_path('hiustalo-bg.jpg') %>);
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -31,20 +29,16 @@ body {
   }
 }
 
-#main-wrap {
-  background: transparent;
+#static-wrap {
+  .container {
+    margin-top: 20px;
+
+    > .page-header { margin-top: 0; }
+  }
+}
+
+#store-wrap {
   @include gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0));
-
-  > .content {
-    @extend .container;
-  }
-
-  #static-wrap {
-    .wysiwyg-content {
-      @extend .container;
-      margin-top: 40px;
-    }
-  }
 }
 
 #categories-wrap {

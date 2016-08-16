@@ -13,24 +13,8 @@
   overflow-y: scroll;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAFVBMVEXv7u/f3d/n5uff3N/w7/Dv7e/w7vA7L+vAAAAAK0lEQVR42k3KsQ0AIAwDwXeA7D8yBoSS4grLD0gPEdfQRPY3rN6knd+ymg0KYwBQlnIIcgAAAABJRU5ErkJggg==);
 
-  #main {
-    background: transparent;
-  }
-
   #main-nav {
     @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-  }
-
-  .container {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: $grid-gutter-width;
-    padding-right: $grid-gutter-width;
-    width: auto;
-  }
-
-  .page-content {
-    padding-top: 30px;
   }
 
   .categories {

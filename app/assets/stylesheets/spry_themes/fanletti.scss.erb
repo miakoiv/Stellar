@@ -94,61 +94,56 @@ body.fanletti {
   }
 }
 
-#main-wrap {
-  > .content {
-    @extend .container;
+#static-wrap {
+  .container {
+    margin-top: 20px;
+
+    > .page-header { margin-top: 0; }
   }
 
-  #static-wrap {
-    .wysiwyg-content {
-      @extend .container;
-      margin-top: 40px;
-    }
+  .list-group-item .price {
+    float: right;
+    font-weight: 500;
+  }
+  .table .price {
+    font-weight: 500;
+  }
 
-    .list-group-item .price {
-      float: right;
-      font-weight: 500;
-    }
-    .table .price {
-      font-weight: 500;
-    }
+  .drop-cap {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: -5px;
+    font-size: 3em;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.2em;
+  }
 
-    .drop-cap {
-      float: left;
-      margin-right: 15px;
-      margin-bottom: -5px;
-      font-size: 3em;
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.2em;
-    }
+  .carousel {
+    margin-bottom: 40px;
 
-    .carousel {
-      margin-bottom: 40px;
+    .carousel-inner {
+      .item {
+        min-height: 250px;
+        max-height: 400px;
 
-      .carousel-inner {
-        .item {
-          min-height: 250px;
-          max-height: 400px;
-
-          img {
-            display: block;
-            width: 100%;
-          }
-          .carousel-caption {
-            padding: 10px 10px 40px;
-            border-radius: 10px;
-            background-color: rgba(0,0,0,0.5);
-          }
+        img {
+          display: block;
+          width: 100%;
+        }
+        .carousel-caption {
+          padding: 10px 10px 40px;
+          border-radius: 10px;
+          background-color: rgba(0,0,0,0.5);
         }
       }
     }
   }
+}
 
-  #search-panel-wrap {
-    > .content {
-      @extend .container;
-    }
+#search-panel-wrap {
+  > .content {
+    @extend .container;
   }
 }
 
