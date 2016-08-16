@@ -1,32 +1,33 @@
-.content
-  .page-header
-    %h1= icon('calendar', t('store.order_history'))
+#static-wrap
+  .container
+    .page-header
+      %h1= icon('calendar', t('store.order_history'))
 
-  .panel.panel-info
-    .panel-heading
-      %h4.panel-title= t('actions.search')
-    .panel-body
-      = form_for @search, url: orders_path, method: :get do |f|
-        .row
-          .col-sm-6.col-md-4
-            .form-group
-              = f.select :order_type_id, current_user.existing_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
-          .col-sm-6.col-md-3
-            .form-group
-              = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'bottom'}
-          .col-sm-6.col-md-4
-            .form-group
-              = f.search_field :summary, autocomplete: 'off', placeholder: col(Order, :summary), class: 'form-control'
-          .col-sm-6.col-md-1
-            .form-group
-              = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
-
-  - if @timeline_orders.any?
-    .panel.panel-default
+    .panel.panel-info
       .panel-heading
-        %span.pull-right= icon('question-circle', class: 'fa-lg', title: t('.timeline_help_html'), data: {toggle: 'tooltip'})
-        %h4.panel-title= t('.timeline_header')
-      = render partial: 'timeline'
+        %h4.panel-title= t('actions.search')
+      .panel-body
+        = form_for @search, url: orders_path, method: :get do |f|
+          .row
+            .col-sm-6.col-md-4
+              .form-group
+                = f.select :order_type_id, current_user.existing_order_types.map { |o| [o.name, o.id] }, {include_blank: true}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            .col-sm-6.col-md-3
+              .form-group
+                = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale, 'date-orientation' => 'bottom'}
+            .col-sm-6.col-md-4
+              .form-group
+                = f.search_field :summary, autocomplete: 'off', placeholder: col(Order, :summary), class: 'form-control'
+            .col-sm-6.col-md-1
+              .form-group
+                = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
-  = render partial: 'orders/table', object: @orders, as: :orders
-  = paginate @orders
+    - if @timeline_orders.any?
+      .panel.panel-default
+        .panel-heading
+          %span.pull-right= icon('question-circle', class: 'fa-lg', title: t('.timeline_help_html'), data: {toggle: 'tooltip'})
+          %h4.panel-title= t('.timeline_header')
+        = render partial: 'timeline'
+
+    = render partial: 'orders/table', object: @orders, as: :orders
+    = paginate @orders

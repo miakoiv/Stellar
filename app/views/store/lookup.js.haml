@@ -1,9 +1,9 @@
 - if @products.any?
   $('#search-dropdown').html("#{j render partial: 'products/search_dropdown', object: @products, as: :products}");
   $('#search-dropdown').show('fade', 150);
-  $('#main-wrap').on('click', function() { $('#search-dropdown').hide('fade') });
+  $('#store-wrap').on('click', function() { $('#search-dropdown').hide('fade') });
   $('#navbar-search input').on('focus', function() { $('#search-dropdown').show('fade', 150) });
 - else
-  $('#main-wrap').off('click');
+  $('#store-wrap').off('click');
   $('#navbar-search input').off('focus');
   $('#search-dropdown').hide('fade');

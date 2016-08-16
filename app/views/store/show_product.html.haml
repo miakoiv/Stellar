@@ -1,22 +1,23 @@
 - meta_tags_for(@product)
 
-#categories-wrap
-  .categories.hidden-print
-    %ul= render @categories
-#category-banner-wrap
-  = render partial: 'category_banner'
+#store-wrap
+  #categories-wrap
+    .categories.hidden-print
+      %ul= render @categories
+  #category-banner-wrap
+    = render partial: 'category_banner'
 
-#search-panel-wrap
-  .search-panel{style: 'display: none'}
+  #search-panel-wrap
+    .search-panel{style: 'display: none'}
 
-#products-wrap
-  .products{style: 'display: none'}
-  #products-view-toggle{style: 'display: none'}
-    = render partial: 'products_view_toggle'
+  #products-wrap
+    .products{style: 'display: none'}
+    #products-view-toggle{style: 'display: none'}
+      = render partial: 'products_view_toggle'
 
-#product-detail-wrap
-  .product-detail
-    = render partial: 'products/product_detail', object: @product, as: :product
+  #product-detail-wrap
+    .product-detail
+      = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
   jQuery ->

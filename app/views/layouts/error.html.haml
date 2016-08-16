@@ -9,7 +9,7 @@
         .navbar-header
           = link_to branding(current_store.presence || current_portal.presence), root_path, class: 'navbar-brand'
 
-    #main-wrap
+    #static-wrap
       = yield
 
     %footer.footer

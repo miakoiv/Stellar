@@ -1,25 +1,26 @@
-.content
-  .page-header.hidden-print
-    = link_to orders_path, class: 'btn btn-default' do
-      = icon('chevron-circle-left', t('actions.back'))
-    - if current_user.can_update?(@order)
-      = link_to edit_order_path(@order), class: 'btn btn-primary' do
-        = icon('pencil-square', t('actions.edit'))
-    = link_to duplicate_order_path(@order), class: 'btn btn-warning' do
-      = icon('copy', t('.duplicate'))
-    %h1
-      = @order.order_type
-      %span.small
-        = col(Order, :number)
-        = @order.to_s
+#static-wrap
+  .container
+    .page-header.hidden-print
+      = link_to orders_path, class: 'btn btn-default' do
+        = icon('chevron-circle-left', t('actions.back'))
+      - if current_user.can_update?(@order)
+        = link_to edit_order_path(@order), class: 'btn btn-primary' do
+          = icon('pencil-square', t('actions.edit'))
+      = link_to duplicate_order_path(@order), class: 'btn btn-warning' do
+        = icon('copy', t('.duplicate'))
+      %h1
+        = @order.order_type
+        %span.small
+          = col(Order, :number)
+          = @order.to_s
 
-  .row
-    .col-lg-5.hidden-print
-      = render partial: 'form', locals: {locked: true}
+    .row
+      .col-lg-5.hidden-print
+        = render partial: 'form', locals: {locked: true}
 
-    .col-lg-7
-      = render partial: 'order_items/table', object: @order, as: :order
+      .col-lg-7
+        = render partial: 'order_items/table', object: @order, as: :order
 
-  - if @order.is_quote?
-    .visible-print.small
-      = @order.store.quotation_boilerplate.html_safe
+    - if @order.is_quote?
+      .visible-print.small
+        = @order.store.quotation_boilerplate.html_safe

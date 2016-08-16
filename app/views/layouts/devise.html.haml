@@ -12,8 +12,9 @@
             = icon('bars')
           = link_to branding(current_store), root_path, class: 'navbar-brand'
 
-    #main-wrap
-      = yield
+    #static-wrap
+      .container
+        = yield
 
     %footer.footer
       = render partial: 'shared/footer'

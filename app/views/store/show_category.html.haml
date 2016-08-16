@@ -1,30 +1,31 @@
 - meta_tags_for(@category)
 
-#categories-wrap
-  .categories.hidden-print
-    %ul= render @categories
-#category-banner-wrap
-  = render partial: 'category_banner'
+#store-wrap
+  #categories-wrap
+    .categories.hidden-print
+      %ul= render @categories
+  #category-banner-wrap
+    = render partial: 'category_banner'
 
-#search-panel-wrap
-  .search-panel{style: 'display: none'}
+  #search-panel-wrap
+    .search-panel{style: 'display: none'}
 
-#products-wrap
-  .products
-    .page-header.visible-print
-      %h1
-        = current_store.to_s
-        %small= @category.to_s
-    .product-grid.collapse.in
-      %ul{class: current_store.masonry? ? 'masonry-grid' : ''}= render @products
-    .product-list.collapse
-      .panel.panel-default
-        = render partial: 'products/table', object: @products, as: :products
-  #products-view-toggle
-    = render partial: 'products_view_toggle'
+  #products-wrap
+    .products
+      .page-header.visible-print
+        %h1
+          = current_store.to_s
+          %small= @category.to_s
+      .product-grid.collapse.in
+        %ul{class: current_store.masonry? ? 'masonry-grid' : ''}= render @products
+      .product-list.collapse
+        .panel.panel-default
+          = render partial: 'products/table', object: @products, as: :products
+    #products-view-toggle
+      = render partial: 'products_view_toggle'
 
-#product-detail-wrap
-  .product-detail{style: 'display: none'}
+  #product-detail-wrap
+    .product-detail{style: 'display: none'}
 
 :coffee
   jQuery ->
