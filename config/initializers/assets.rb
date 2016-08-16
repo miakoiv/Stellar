@@ -19,14 +19,9 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/carbon.css      spry_themes/carbon.js
   spry_themes/cards.css       spry_themes/cards.js
   spry_themes/compass.css     spry_themes/compass.js
-  spry_themes/default.css     spry_themes/default.js
-  spry_themes/emek.css        spry_themes/emek.js
   spry_themes/fanletti.css    spry_themes/fanletti.js
-  spry_themes/gto.css         spry_themes/gto.js
-  spry_themes/heat.css        spry_themes/heat.js
   spry_themes/hiustalo.css    spry_themes/hiustalo.js
   spry_themes/lepola.css      spry_themes/lepola.js
-  spry_themes/nineties.css    spry_themes/nineties.js
   spry_themes/penumbra.css    spry_themes/penumbra.js
   spry_themes/saarimedia.css  spry_themes/saarimedia.js
   spry_themes/stellar.css     spry_themes/stellar.js
