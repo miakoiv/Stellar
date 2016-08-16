@@ -297,6 +297,10 @@ class Order < ActiveRecord::Base
     products.maximum(:lead_time)
   end
 
+  def earliest_shipping_at
+     (completed_at || Date.current).to_date + lead_time.days
+  end
+
   # An order is empty when it's empty of real products.
   def empty?
     products.real.empty?

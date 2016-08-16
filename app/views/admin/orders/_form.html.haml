@@ -21,8 +21,8 @@
         = f.text_field :customer_email, required: true
         = f.telephone_field :customer_phone, required: true
         - if @order.has_shipping?
-          = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          = f.date_field :installation_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          = f.date_field :shipping_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          = f.date_field :installation_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.text_field :contact_email
