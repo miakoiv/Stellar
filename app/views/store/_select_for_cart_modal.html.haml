@@ -15,7 +15,7 @@
                 %th.col-xs-2.no-wrap= col(Product, :price)
               %th.actions
           %tbody
-          = render partial: 'products/modal_row', collection: [product], as: :product
+            = render partial: 'products/modal_row', collection: [product], as: :product
       .table-responsive
         %table.table.table-hover
           %thead
@@ -30,4 +30,4 @@
                 %th.col-xs-2.no-wrap= col(Product, :price)
               %th.actions
           %tbody
-          = render partial: 'products/modal_row', collection: product.requisite_products.sorted, as: :product
+            = render partial: 'products/modal_row', collection: product.requisite_products, as: :product

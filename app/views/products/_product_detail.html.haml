@@ -69,7 +69,5 @@
     - if product.requisite_products.any?
       %h2= t('store.requisite_products')
       .requisite-products
-        %ul= render partial: 'products/requisite_product', collection: product.requisite_products.sorted, as: :product
-
-  - if product.requisite_products.any?
-    = render partial: 'store/select_for_cart_modal', object: product, as: :product
+        %ul= render partial: 'products/requisite_product', collection: product.requisite_products, as: :product
+      = render partial: 'store/select_for_cart_modal', object: product, as: :product
