@@ -83,9 +83,10 @@ class Admin::StoresController < ApplicationController
         :card_image_type, :list_image_type,
         :allow_shopping, :admit_guests,
         :shipping_cost_product_id, :free_shipping_at,
+        :tracking_code, :tawkto_site_id, :order_sequence,
         :manufacturer_template_id, :reseller_template_id,
         :quotation_template_id,
-        :tracking_code, inventory_ids: [],
+        inventory_ids: [],
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
           :password, :password_confirmation, :group, role_ids: []

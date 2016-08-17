@@ -29,6 +29,7 @@
                 {include_blank: true}, {class: 'selectize'}
             = f.text_field :free_shipping_at
             = f.text_field :tracking_code
+            = f.text_field :tawkto_site_id
             = f.select :manufacturer_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
             = f.select :reseller_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
             = f.select :quotation_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
@@ -40,6 +41,7 @@
               = f.number_field :erp_number
               - unless @store.new_record?
                 = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+              = f.text_field :order_sequence, help: t('.order_sequence_help_html')
               = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
               = f.select :inventory_ids, Inventory.all.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, class: 'selectize'}
         - if @store.new_record?

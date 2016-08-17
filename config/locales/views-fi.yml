@@ -124,6 +124,7 @@ fi:
       form:
         subdomain_help_html: Tämä aladomain muodostaa kaupan osoitteen portaalin sisällä.
         slug_help_html: Tunniste luodaan automaattisesti.
+        order_sequence_help_html: "Ensimmäinen tilaus saa tämän arvon plus yksi: <strong>0000</strong> antaa <strong>0001</strong>, <strong>AAA</strong> antaa <strong>AAB</strong>"
     users:
       index:
         new_user: Uusi käyttäjä

@@ -287,14 +287,15 @@ fi:
         erp_number: ERP-numero
         name: Nimi
         slug: Tunniste
-        settings: Asetukset
         theme: Ulkoasun teema
         locale: Kieli
         allow_shopping: Salli ostokset
         admit_guests: Salli pääsy kauppaan vieraana
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
-        tracking_code: GA-seurantakoodi
+        tracking_code: Google Analytics -koodi
+        tawkto_site_id: tawk.to -tunnus
+        order_sequence: Tilausnumerointi
         inventory_ids: Varastot
         manufacturer_template_id: Valmistajan kirjepohja
         reseller_template_id: Jälleenmyyjän kirjepohja

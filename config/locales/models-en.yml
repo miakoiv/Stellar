@@ -287,14 +287,15 @@ en:
         erp_number: ERP number
         name: Name
         slug: Slug
-        settings: Settings
         theme: Display theme
         locale: Language
         allow_shopping: Enable shopping
         admit_guests: Admit guests to the store
         free_shipping_at: Free S&H beyond
         shipping_cost_product_id: S&H product entry
-        tracking_code: GA tracking code
+        tracking_code: Google Analytics key
+        tawkto_site_id: tawk.to site
+        order_sequence: Order numbering
         inventory_ids: Inventories
         manufacturer_template_id: Manufacturer letterhead
         reseller_template_id: Reseller letterhead
