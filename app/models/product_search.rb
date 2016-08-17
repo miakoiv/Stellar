@@ -39,7 +39,7 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_keyword
-    query.where("CONCAT_WS(' ', code, title, subtitle) LIKE ?", "%#{keyword}%")
+    query.where("CONCAT_WS(' ', code, customer_code, title, subtitle) LIKE ?", "%#{keyword}%")
   end
 
   def search_purposes
