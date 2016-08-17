@@ -42,6 +42,10 @@ class ProductSearch < Searchlight::Search
     query.where("CONCAT_WS(' ', code, title, subtitle) LIKE ?", "%#{keyword}%")
   end
 
+  def search_purposes
+    query.where(purpose: Product.purposes.slice(*purposes).values)
+  end
+
   def search_categories
     query.where(categories: {id: categories})
   end
@@ -49,5 +53,9 @@ class ProductSearch < Searchlight::Search
   def search_live
     return query if empty?(live)
     query.where(live: checked?(live))
+  end
+
+  def search_exclusions
+    query.where.not(id: exclusions)
   end
 end

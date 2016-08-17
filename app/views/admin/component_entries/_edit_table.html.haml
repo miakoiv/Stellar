@@ -38,6 +38,8 @@
         dataType: 'json'
         data:
           q: query
+          purposes: ['vanilla', 'variant']
+          exclusions: #{product.id}
         error: ->
           callback()
         success: (response) ->
