@@ -63,10 +63,19 @@
                           %b= @order.shipping_postalcode
                           %b= @order.shipping_city
                     %tr
+                      %td= Order.human_attribute_name(:order_type_id)
                       %td
-                        = Order.human_attribute_name(:order_type_id)
-                      %td{colspan: 3}
                         %b= @order.order_type
+                      %td= Order.human_attribute_name(:message)
+                      %td
+                        %b= @order.message
+                    %tr
+                      %td= Order.human_attribute_name(:your_reference)
+                      %td
+                        %b= @order.your_reference
+                      %td= Order.human_attribute_name(:our_reference)
+                      %td
+                        %b= @order.our_reference
                     %tr
                       %td
                         = Order.human_attribute_name(:notes)
