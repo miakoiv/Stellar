@@ -87,9 +87,9 @@
                         %td
                           %b= order_item.product_title
                           = order_item.product_subtitle
-                          - if order_item.product.memo.present?
+                          - if order_item.product.shipping_notes.present?
                             .small
-                              %em= order_item.product.memo
+                              %em= order_item.product.shipping_notes
                         %td.alignright.nowrap= order_item.amount
                         %td.alignright.nowrap
                           = humanized_money_with_symbol order_item.price

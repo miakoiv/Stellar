@@ -226,6 +226,7 @@ fi:
         dimensions: Pakkauksen mitat
         lead_time: Toimitusaika
         lead_time_unit: päivää
+        shipping_notes: Lisätietoja
         iframes: Upotukset
         images: Kuvat
         product_properties: Ominaisuudet

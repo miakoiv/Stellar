@@ -32,7 +32,7 @@
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
             = f.date_field :deleted_at,
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-            = f.text_area :memo, rows: 2, help: t('.memo_help')
+            = f.text_area :memo, rows: 2
 
         #tab-product-text.tab-pane.fade
           %fieldset{disabled: locked}
@@ -79,6 +79,7 @@
                   = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
                   %span.input-group-addon mm
             = f.text_field :lead_time, append: col(Product, :lead_time_unit), class: 'text-right'
+            = f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 
       - unless locked
         %fieldset.actions

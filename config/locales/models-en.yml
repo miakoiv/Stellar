@@ -226,6 +226,7 @@ en:
         dimensions: Shipping dimensions
         lead_time: Lead time
         lead_time_unit: days
+        shipping_notes: Notes
         iframes: Embeds
         images: Images
         product_properties: Properties
