@@ -22,7 +22,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/query.json?q=keyword
   # This method serves selectize widgets populated via Ajax.
   def query
-    @query = {keyword: params[:q], live: true}
+    @query = {'keyword' => params[:q], live: true}.merge(params)
     @search = ProductSearch.new(search_params)
     @products = @search.results
   end
