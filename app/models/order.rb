@@ -294,7 +294,7 @@ class Order < ActiveRecord::Base
 
   # Returns the lead time for this order based on the contained products.
   def lead_time
-    products.maximum(:lead_time)
+    products.maximum(:lead_time) || 0
   end
 
   def earliest_shipping_at
