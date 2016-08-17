@@ -30,10 +30,7 @@
       - if product.variant?
         = render partial: 'products/variants_dropdown', object: product, as: :product
 
-      %table.table.table-condensed.properties
-        = content_tag_for :tr, product.product_properties do |product_property|
-          %th= product_property.property
-          %td= product_property.value_with_units
+      = render partial: 'products/properties_components_table', object: product, as: :product
 
       - if product.images.document.any?
         .documents.list-group

@@ -157,6 +157,8 @@ fi:
   store:
     all_products: Kaikki tuotteet
     requisite_products: Tämä tuote tarvitsee näitä oheistuotteita
+    product_properties: Tuotetiedot
+    component_entries: Tuotteen sisältämät osat
     add_to_cart: Lisää koriin
     select_for_cart: Valitse tuotteet
     empty_cart: Ostoskorisi on tyhjä.
