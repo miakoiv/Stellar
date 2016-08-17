@@ -279,6 +279,22 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Sends an order confirmation to the customer, possible contact person,
+  # and additional notifications to vendors if the order contains any of
+  # their products.
+  def send_confirmations
+    return unless send_confirmation?
+    OrderMailer.order_confirmation(self).deliver_later
+    items_by_vendor.each do |vendor, items|
+      OrderMailer.vendor_notification(self, vendor, items).deliver_later
+    end
+  end
+
+  # Coalesces items in this order into a hash by product vendor.
+  def items_by_vendor
+    order_items.includes(product: :vendor).where.not(products: {vendor_id: nil}).group_by { |item| item.product.vendor }
+  end
+
   # Collects aggregated component quantities of all products in the order.
   # Returns a hash of quantities keyed by product object.
   def aggregated_components

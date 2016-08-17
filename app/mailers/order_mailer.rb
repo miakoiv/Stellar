@@ -21,6 +21,20 @@ class OrderMailer < ApplicationMailer
     roadie_mail(headers)
   end
 
+  # Order notification for a vendor. Only includes the supplied items.
+  def vendor_notification(order, vendor, items)
+    @order = order
+    @store = order.store
+    @order_items = items
+
+    headers = {
+      from: "noreply@#{@store.host}",
+      to: vendor.to_s,
+      subject: default_i18n_subject(store: @store)
+    }
+    roadie_mail(headers)
+  end
+
   # Order cancellation to the customer. Carbon copies as per confirmations.
   def order_cancellation(order)
     @order = order

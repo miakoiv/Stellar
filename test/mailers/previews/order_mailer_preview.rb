@@ -9,6 +9,11 @@ class OrderMailerPreview < ActionMailer::Preview
       define_method "order_confirmation (#{store} #{order})" do
         OrderMailer.order_confirmation(order)
       end
+      order.items_by_vendor.each do |vendor, items|
+        define_method "vendor_notification (#{store} #{order} #{vendor.name})" do
+          OrderMailer.vendor_notification(order, vendor, items)
+        end
+      end
     end
 
     store.orders.cancelled.each do |order|

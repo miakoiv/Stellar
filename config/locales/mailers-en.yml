@@ -8,6 +8,9 @@ en:
       subject: "Order cancelled"
       title: Order cancellation
       body_html: <p>Your order from %{store} has been cancelled.</p>
+    vendor_notification:
+      subject: "Order notification from %{store}"
+      title: "Order notification"
     quotation:
       subject: "New quotation from %{store}"
       title: Quotation

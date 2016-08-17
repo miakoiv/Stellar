@@ -8,6 +8,9 @@ fi:
       subject: "%{store} – Tilauksen peruutus"
       title: Tilauksen peruutus
       body_html: <p>Tilauksenne on peruttu.</p>
+    vendor_notification:
+      subject: "%{store} – Ilmoitus tilauksesta"
+      title: "Ilmoitus tilauksesta"
     quotation:
       subject: "%{store} – Uusi tarjous"
       title: Tarjous
