@@ -230,7 +230,7 @@ body {
         .product-code { font-size: $font-size-small; }
         .product-stock { display: none; }
         .body-text { }
-        .list-group { margin: 10px 0; }
+        > .dropdown, .list-group, .nav { margin-top: 20px; }
       }
       .images {
         position: relative;

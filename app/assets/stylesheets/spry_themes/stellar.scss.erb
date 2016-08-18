@@ -454,10 +454,10 @@ body.stellar {
         .body-text {
           margin-top: 40px;
         }
-        .properties {
-          margin-left: $grid-gutter-width/-2;
-
-          > tbody > tr > th { padding-left: $grid-gutter-width/2; }
+        > .dropdown, .list-group, .nav { margin-top: 20px; }
+        .properties, .components {
+          tr > :first-child { padding-left: 0; }
+          tr > :last-child { padding-right: 10px; }
         }
       }
       .images {
@@ -553,10 +553,9 @@ body.stellar {
                 }
               }
               .properties {
-                margin-left: $grid-gutter-width/-2;
                 font-size: $font-size-small;
-
-                > tbody > tr > th { padding-left: $grid-gutter-width/2; }
+                tr > :first-child { padding-left: 0; }
+                tr > :last-child { padding-right: 0; }
               }
             }
           }
