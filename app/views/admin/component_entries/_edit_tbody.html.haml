@@ -1,4 +1,5 @@
 = content_tag_for :tr, product.component_entries do |entry|
+  %td.hidden-print= drag_handle
   %td
     %strong= entry.component.title
     = entry.component.subtitle

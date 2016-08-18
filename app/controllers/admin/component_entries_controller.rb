@@ -2,6 +2,7 @@
 
 class Admin::ComponentEntriesController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
   before_action :set_product, only: [:create]
 
@@ -12,6 +13,8 @@ class Admin::ComponentEntriesController < ApplicationController
     @component_entry = @product.component_entries.find_or_initialize_by(
       component_id: params[:component_entry][:component_id]
     )
+    @component_entry.priority = @product.component_entries.count if @component_entry.new_record?
+
     respond_to do |format|
       if @component_entry.update(component_entry_params)
         format.js { render 'create' }

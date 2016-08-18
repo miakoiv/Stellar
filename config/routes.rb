@@ -92,7 +92,9 @@ Rails.application.routes.draw do
       resources :product_properties, shallow: true
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
-      resources :component_entries, shallow: true
+      resources :component_entries, shallow: true do
+        post :reorder, on: :collection
+      end
       resources :requisite_entries, shallow: true do
         post :reorder, on: :collection
       end

@@ -1,2 +1,3 @@
 $('#component-entries-tbody').html("#{j render partial: 'admin/component_entries/edit_tbody', object: @product, as: :product}");
 $("##{dom_id(@component_entry)}").effect('highlight');
+$('#component-entries-tbody').sortable('refresh');

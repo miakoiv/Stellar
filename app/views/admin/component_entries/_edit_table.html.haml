@@ -2,12 +2,13 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-min.hidden-print
         %th= col(Product, :title)
         %th.col-xs-2= col(Product, :code)
         %th.col-xs-1.text-right= col(ComponentEntry, :quantity)
         %th.actions
 
-    %tbody#component-entries-tbody
+    %tbody#component-entries-tbody.sortable
       = render partial: 'admin/component_entries/edit_tbody', object: product, as: :product
 
 .table-responsive
@@ -23,6 +24,16 @@
               = icon('check')
 
 :coffee
+  $('#component-entries-tbody').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_product_component_entries_path(@product)}',
+      {reorder: $(this).sortable('toArray')}
+
   $('#component_entry_component_id').selectize
     dropdownParent: 'body'
     valueField: 'id'
