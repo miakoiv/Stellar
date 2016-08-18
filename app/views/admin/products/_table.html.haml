@@ -3,8 +3,9 @@
     %thead
       %tr
         %th.col-min
-        %th.col-xs-2= col(Product, :code)
         %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :code)
+        %th.col-min
         %th.col-min
         %th.col-min
         %th= col(Product, :category_ids)
@@ -16,10 +17,12 @@
           = content_tag_for :tr, product, class: product.live? ? '' : 'warning text-warning' do
             %td= image_variant_tag product.cover_image, :icon
             %td
-              = product.live? ? product.code : icon('warning', product.code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
-            %td
               %strong= product.title
               = product.subtitle
+            %td= product.code
+            %td
+              - unless product.live?
+                = icon('warning', title: col(Product, :not_live), data: {toggle: 'tooltip'})
             %td
               - if product.icon.present?
                 = icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
