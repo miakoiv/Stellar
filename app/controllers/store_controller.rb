@@ -162,9 +162,9 @@ class StoreController < ApplicationController
       end
     end
 
-    # Find the products on display in the currently set category.
+    # Find the products visible in the currently set category.
     def display_products
-      @category.products.on_display
+      @category.products.visible
     end
 
     # Enable navbar search widget when applicable.

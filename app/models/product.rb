@@ -76,10 +76,10 @@ class Product < ActiveRecord::Base
   scope :live, -> { where(live: true) }
   scope :undead, -> { where(live: false) }
 
-  # Products on display are shown in storefront views. Vanilla products are
+  # Products that are shown in storefront views. Vanilla products are
   # directly purchasable, master products link to their first variant, and
   # compound products will split into their components when purchased.
-  scope :on_display, -> {
+  scope :visible, -> {
     live.where(purpose: purposes.slice(:vanilla, :master, :compound).values)
   }
 

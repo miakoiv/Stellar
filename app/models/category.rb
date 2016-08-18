@@ -46,9 +46,9 @@ class Category < ActiveRecord::Base
   # Defaults to self if there are no subcategories, or the first
   # subcategory has no products either.
   def having_products
-    return self if subcategories.live.empty? || products.on_display.any?
+    return self if subcategories.live.empty? || products.visible.any?
     first_subcategory = subcategories.live.first
-    first_subcategory.products.on_display.empty? ? self : first_subcategory
+    first_subcategory.products.visible.empty? ? self : first_subcategory
   end
 
   def slugger
