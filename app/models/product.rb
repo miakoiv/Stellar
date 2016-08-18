@@ -171,6 +171,9 @@ class Product < ActiveRecord::Base
   # Returns the retail price in given pricing group. If no group is specified,
   # finds the lowest retail price through promotions.
   def price_cents(pricing_group)
+    if compound? && retail_price_cents.nil?
+      return component_entries.map { |entry| entry.quantity * (entry.component.price_cents(pricing_group) || 0) }.sum
+    end
     if pricing_group.present?
       return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
     end
