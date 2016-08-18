@@ -23,7 +23,9 @@
           %td
             = category.live? ? category.name : icon('warning', category.name, data: {toggle: 'tooltip'}, title: col(Category, :not_live))
           %td= category.parent_category
-          %td= Product.human_attribute_value(:sorting, category.product_scope)
+          %td
+            .label.label-default
+              = Product.human_attribute_value(:sorting, category.product_scope)
           %td.actions
             - if category.product_scope == 'manual'
               = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-sm'
