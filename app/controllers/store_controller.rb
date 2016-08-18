@@ -32,7 +32,11 @@ class StoreController < ApplicationController
   # GET /front
   def front
     @category = @categories.first.try(:having_products)
-    @products = @category.present? ? @category.products.live.on_display.sorted(@category.product_scope) : []
+    if @category.present?
+      @products = display_products.sorted(@category.product_scope)
+    else
+      Product.none
+    end
   end
 
   # GET /:slug
@@ -85,7 +89,6 @@ class StoreController < ApplicationController
 
   # GET /category/:category_id
   def show_category
-    display_products = @category.products.live.on_display
     @products = display_products.sorted(@category.product_scope)
   end
 
@@ -157,6 +160,11 @@ class StoreController < ApplicationController
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
+    end
+
+    # Find the products on display in the currently set category.
+    def display_products
+      @category.products.on_display
     end
 
     # Enable navbar search widget when applicable.

@@ -80,7 +80,7 @@ class Product < ActiveRecord::Base
   # directly purchasable, master products link to their first variant, and
   # compound products will split into their components when purchased.
   scope :on_display, -> {
-    where(purpose: [:vanilla, :master, :compound].map { |p| purposes[p] })
+    live.where(purpose: purposes.slice(:vanilla, :master, :compound).values)
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
