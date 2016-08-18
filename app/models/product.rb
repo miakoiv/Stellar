@@ -96,7 +96,7 @@ class Product < ActiveRecord::Base
 
   #---
   after_save :touch_categories
-  after_save :reset_live!
+  after_save :reset_live_status
 
   #---
   def self.purpose_options
@@ -312,15 +312,15 @@ class Product < ActiveRecord::Base
     # - must have at least one live category
     # - set to be available at a certain date which is not in the future
     # - if set to be deleted at a certain date which is in the future
-    def reset_live!
+    def reset_live_status
       update_columns(live: categories.live.any? &&
         (available_at.present? && !available_at.future?) &&
         (deleted_at.nil? || deleted_at.future?))
       true
     end
 
-    private
-      def unit_pricing_property
-        product_properties.joins(:property).merge(Property.unit_pricing).first
-      end
+  private
+    def unit_pricing_property
+      product_properties.joins(:property).merge(Property.unit_pricing).first
+    end
 end
