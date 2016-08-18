@@ -200,6 +200,12 @@ class Product < ActiveRecord::Base
     product_property.property.measurement_unit.pricing_base
   end
 
+  # Returns the range of retail prices across variants of a master product.
+  def price_range(pricing_group)
+    return nil unless master?
+    variants.map { |variant| variant.price(pricing_group) }.minmax
+  end
+
   # Markup percentage from trade price to retail price.
   def markup_percent
     return nil if trade_price.nil? || retail_price.nil? || trade_price == 0
