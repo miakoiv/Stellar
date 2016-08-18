@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818090457) do
+ActiveRecord::Schema.define(version: 20160818130252) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160818090457) do
     t.integer  "parent_category_id", limit: 4
     t.integer  "banner_id",          limit: 4
     t.boolean  "live",                           default: false, null: false
+    t.boolean  "hidden",                         default: false, null: false
     t.string   "name",               limit: 255
     t.string   "slug",               limit: 255,                 null: false
     t.string   "product_scope",      limit: 255

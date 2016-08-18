@@ -43,8 +43,8 @@ class Product < ActiveRecord::Base
   belongs_to :vendor, class_name: 'User'
 
   # A product may belong to multiple categories, and must update its own
-  # timestamp when the relationships change.
-  has_and_belongs_to_many :categories, after_add: :touch_self, after_remove: :touch_self
+  # live status when the relationships change.
+  has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
 
   # Product may form master-variant relationships, and any change will
   # trigger a timestamp update.
@@ -96,7 +96,7 @@ class Product < ActiveRecord::Base
 
   #---
   after_save :touch_categories
-  after_save :reset_live_status
+  after_save :reset_live_status!
 
   #---
   def self.purpose_options
@@ -290,9 +290,20 @@ class Product < ActiveRecord::Base
     "#{title} #{subtitle}"
   end
 
+  # Resets the live status of the product, according to these criteria:
+  # - must have at least one live category
+  # - set to be available at a certain date which is not in the future
+  # - if set to be deleted at a certain date which is in the future
+  def reset_live_status!
+    update_columns(live: categories.live.any? &&
+      (available_at.present? && !available_at.future?) &&
+      (deleted_at.nil? || deleted_at.future?))
+    true
+  end
+
   protected
-    def touch_self(category)
-      self.touch if persisted?
+    def reset_itself!(category)
+      reset_live_status! if persisted?
     end
 
     def touch_categories
@@ -306,17 +317,6 @@ class Product < ActiveRecord::Base
         branch = ' (0)' if branch.empty?
         self[:code] = "#{trunk}#{branch.succ}"
       end
-    end
-
-    # Resets the live status of the product, according to these criteria:
-    # - must have at least one live category
-    # - set to be available at a certain date which is not in the future
-    # - if set to be deleted at a certain date which is in the future
-    def reset_live_status
-      update_columns(live: categories.live.any? &&
-        (available_at.present? && !available_at.future?) &&
-        (deleted_at.nil? || deleted_at.future?))
-      true
     end
 
   private

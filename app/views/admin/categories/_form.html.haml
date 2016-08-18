@@ -9,6 +9,8 @@
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :live
+        = f.form_group do
+          = f.check_box :hidden
       - unless locked
         %fieldset.actions
           = f.form_group do

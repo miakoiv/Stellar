@@ -101,6 +101,7 @@ en:
         parent_category_id: Parent category
         live: Enabled
         not_live: Category is disabled
+        hidden: Hidden from view
         name: Name
         banner_id: Banner page
         product_scope: Product sorting

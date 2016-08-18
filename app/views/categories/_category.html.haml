@@ -3,6 +3,6 @@
     = image_variant_tag category.cover_image, :presentational
     %p= category.name
   .subcategories-wrap
-    - if category.subcategories.live.any?
+    - if category.subcategories.visible.any?
       .subcategories
-        %ul= render category.subcategories.live
+        %ul= render category.subcategories.visible

@@ -101,6 +101,7 @@ fi:
         parent_category_id: Pääryhmä
         live: Aktiivinen
         not_live: Tuoteryhmä ei aktiivinen
+        hidden: Piilotettu
         name: Nimi
         banner_id: Julistesivu
         product_scope: Tuotteiden järjestys

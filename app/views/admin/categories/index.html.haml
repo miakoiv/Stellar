@@ -10,19 +10,26 @@
       %tr
         %th.col-min.hidden-print
         %th.col-min
-        %th= col(Category, :name)
+        %th.col-xs-4= col(Category, :name)
         %th= col(Category, :parent_category_id)
+        %th.col-min
+        %th.col-min
         %th= col(Category, :product_scope)
         %th.actions
 
     %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
       - @categories.each do |category|
-        = content_tag_for :tr, category, class: category.live? ? '' : 'warning text-warning' do
+        = content_tag_for :tr, category, class: category.live? ? (category.visible? ? '' : 'text-muted') : 'warning text-warning' do
           %td.hidden-print= drag_handle
           %td= image_variant_tag category.cover_image
-          %td
-            = category.live? ? category.name : icon('warning', category.name, data: {toggle: 'tooltip'}, title: col(Category, :not_live))
+          %td= category.name
           %td= category.parent_category
+          %td
+            - if category.hidden?
+              = icon('eye-slash', title: col(Category, :hidden), data: {toggle: 'tooltip'})
+          %td
+            - unless category.live?
+              = icon('warning', title: col(Category, :not_live), data: {toggle: 'tooltip'})
           %td
             .label.label-default
               = Product.human_attribute_value(:sorting, category.product_scope)

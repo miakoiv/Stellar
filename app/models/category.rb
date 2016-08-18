@@ -22,10 +22,14 @@ class Category < ActiveRecord::Base
   default_scope { sorted }
   scope :live, -> { where(live: true) }
   scope :top_level, -> { where(parent_category_id: nil) }
+  scope :visible, -> { where(live: true, hidden: false) }
 
   #---
   validates :name, presence: true
   validates :product_scope, presence: true
+
+  #---
+  after_save :reset_live_status_of_products!
 
   #---
   # Category is inside another category if it's the category itself,
@@ -42,12 +46,16 @@ class Category < ActiveRecord::Base
     parent_category.nil? ? self : parent_category.top_level
   end
 
+  def visible?
+    live? && !hidden?
+  end
+
   # If this category has no products, tries the first subcategory.
   # Defaults to self if there are no subcategories, or the first
   # subcategory has no products either.
   def having_products
-    return self if subcategories.live.empty? || products.visible.any?
-    first_subcategory = subcategories.live.first
+    return self if subcategories.visible.empty? || products.visible.any?
+    first_subcategory = subcategories.visible.first
     first_subcategory.products.visible.empty? ? self : first_subcategory
   end
 
@@ -70,4 +78,11 @@ class Category < ActiveRecord::Base
   def to_s
     name
   end
+
+  private
+    def reset_live_status_of_products!
+      products.each do |product|
+        product.reset_live_status!
+      end
+    end
 end
