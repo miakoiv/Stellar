@@ -149,7 +149,7 @@ body {
           a {
             @extend .thumbnail;
             display: block;
-            padding: 10px;
+            padding: 10px 10px 40px;
             background-color: #fff;
             border-radius: $border-radius-base;
 
@@ -190,7 +190,34 @@ body {
             }
             .promotion { text-align: center; }
           }
-          .buy-now { display: none; }
+          .buy-now {
+            position: absolute;
+            bottom: 30px;
+            left: 25px;
+            right: 25px;
+            display: flex;
+            justify-content: center;
+
+            form {
+              flex: 0 0 auto;
+
+              button {
+                @extend .btn-default;
+                @include border-left-radius(0);
+                height: 30px;
+                margin-left: -2px;
+                border-left-width: 0;
+                border-color: $brand-primary;
+              }
+            }
+            p {
+              @extend .label, .label-primary;
+              flex: 0 0 auto;
+              font-size: 1em;
+              line-height: 23px;
+              margin-bottom: 0;
+            }
+          }
         }
       }
     }
