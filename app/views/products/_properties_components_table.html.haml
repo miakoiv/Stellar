@@ -3,7 +3,7 @@
     %li.active{role: 'presentation'}
       %a{href: '#tab-properties', role: 'tab', data: {toggle: 'tab'}}
         = t('store.product_properties')
-  - if product.component_entries.any?
+  - if product.component_entries.live.any?
     %li{role: 'presentation', class: product.product_properties.any? ? '' : 'active'}
       %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
         = t('store.component_entries')
@@ -18,11 +18,11 @@
             %th= product_property.property
             %td= product_property.value_with_units
 
-  - if product.component_entries.any?
+  - if product.component_entries.live.any?
     #tab-component-entries.tab-pane.fade{class: product.product_properties.any? ? '' : 'in active'}
       .table-scroller.table-responsive
         %table.table.table-condensed.components
-          = content_tag_for :tr, product.component_entries.includes(:product) do |entry|
+          = content_tag_for :tr, product.component_entries.live do |entry|
             %td
               .box-icon= image_variant_tag entry.component.cover_image, :icon
             %th
