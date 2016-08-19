@@ -10,7 +10,8 @@
     %tbody
       = content_tag_for :tr, promotion.promoted_items do |promoted_item|
         %td
-          %strong= promoted_item.product.title
+          %strong
+            = link_to promoted_item.product.title, admin_product_path(promoted_item.product)
           = promoted_item.product.subtitle
         %td.hidden= promoted_item.amount_available
         - if promoted_item.promotion.editable_prices?

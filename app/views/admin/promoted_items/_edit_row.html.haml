@@ -1,7 +1,7 @@
 = content_tag_for :tr, promoted_item do
   %td
     %strong
-      = promoted_item.product.title
+      = link_to promoted_item.product.title, admin_product_path(promoted_item.product)
     = promoted_item.product.subtitle
   %td.hidden
     = form_for [:admin, promoted_item], remote: true, html: {class: 'immediate'} do |f|
