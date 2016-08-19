@@ -8,7 +8,7 @@ class CustomerAssetSearch < Searchlight::Search
 
   #---
   def base_query
-    CustomerAsset.order('products.title', 'products.subtitle')
+    CustomerAsset.includes(:product).order('products.title', 'products.subtitle')
   end
 
   def search_store_id
