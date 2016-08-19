@@ -22,7 +22,7 @@ class OrderMailerPreview < ActionMailer::Preview
       end
     end
 
-    store.orders.includes(:order_type).where(order_types: {is_quote: true}).each do |quotation|
+    store.orders.joins(:order_type).where(order_types: {is_quote: true}).each do |quotation|
       define_method "quotation (#{store} #{quotation})" do
         OrderMailer.quotation(quotation)
       end
