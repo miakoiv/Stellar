@@ -21,8 +21,7 @@ class InventoryItem < ActiveRecord::Base
   # resides in.
   def adjustment
     product.order_items.joins(order: :order_type)
-      .where.not(orders: {completed_at: nil})
-      .where(orders: {approved_at: nil})
+      .merge(Order.current)
       .where(order_types: {inventory_id: inventory})
       .map { |item|
         item.order.order_type.adjustment_multiplier * item.amount
