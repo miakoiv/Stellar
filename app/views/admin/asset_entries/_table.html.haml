@@ -10,7 +10,7 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, customer_asset.asset_entries.includes(:source) do |asset_entry|
+      = content_tag_for :tr, customer_asset.asset_entries do |asset_entry|
         %td= l(asset_entry.recorded_at)
         %td= asset_entry.source
         %td.text-right= asset_entry.amount
