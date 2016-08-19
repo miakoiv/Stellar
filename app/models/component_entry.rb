@@ -8,6 +8,7 @@ class ComponentEntry < ActiveRecord::Base
   belongs_to :component, class_name: 'Product'
 
   default_scope { sorted }
+  scope :live, -> { joins(:component).merge(Product.live) }
 
   #---
   validates :quantity, numericality: {only_integer: true, greater_than: 0}

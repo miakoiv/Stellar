@@ -8,6 +8,7 @@ class RequisiteEntry < ActiveRecord::Base
   belongs_to :requisite, class_name: 'Product'
 
   default_scope { sorted }
+  scope :live, -> { joins(:requisite).merge(Product.live) }
 
   #---
   validates :requisite_id, presence: true
