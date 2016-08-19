@@ -53,7 +53,7 @@ class Promotion < ActiveRecord::Base
 
   # Finds the promoted item matching given order item.
   def item_from_order_item(order_item)
-    promoted_items.includes(:product).find_by(product_id: order_item.product_id)
+    promoted_items.find_by(product_id: order_item.product_id)
   end
 
   def available_products
@@ -86,7 +86,7 @@ class Promotion < ActiveRecord::Base
   private
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
-      order.order_items.includes(:product).where(product_id: promoted_items.pluck(:product_id))
+      order.order_items.where(product_id: promoted_items.pluck(:product_id))
     end
 
     # Called before save, all affected products are touched to flush caches.

@@ -138,8 +138,7 @@ class Product < ActiveRecord::Base
   # Returns a hash keyed by property, or an empty set if not a master product.
   def unique_properties
     return [] unless master?
-    variants.includes(product_properties: :property).map(&:product_properties)
-      .flatten.group_by(&:property).select { |p, v| v.uniq(&:value).count > 1 }
+    variants.map(&:product_properties).flatten.group_by(&:property).select { |p, v| v.uniq(&:value).count > 1 }
   end
 
   # If a single category is requested, give the first live one.
@@ -221,7 +220,7 @@ class Product < ActiveRecord::Base
   # Gathers product stock to a hash keyed by inventory.
   # Values are inventory items.
   def stock
-    inventory_items.includes(:inventory).group_by(&:inventory)
+    inventory_items.group_by(&:inventory)
       .map { |inventory, items| [inventory, items.first] }.to_h
   end
 

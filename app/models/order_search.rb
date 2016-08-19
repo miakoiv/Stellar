@@ -7,7 +7,7 @@ class OrderSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    Order.includes(:order_type, :user).complete.order(completed_at: :desc)
+    Order.complete.order(completed_at: :desc)
   end
 
   def search_store_id

@@ -176,7 +176,7 @@ class Order < ActiveRecord::Base
   # referring to a product that's not available are returned as failed items.
   def copy_items_to(another_order)
     failed_items = []
-    order_items.includes(:product).each do |order_item|
+    order_items.each do |order_item|
       product = order_item.product
       next if product.virtual?
       if product.live?
@@ -220,7 +220,7 @@ class Order < ActiveRecord::Base
   # and may specify user specific pricing to be applied.
   def reappraise!(pricing_group)
     trade_prices = order_type.present? && !is_quote?
-    order_items(includes: :product).each do |order_item|
+    order_items.each do |order_item|
       if trade_prices
         order_item.update(
           price: user.price_for(order_item.product, pricing_group),
@@ -292,7 +292,7 @@ class Order < ActiveRecord::Base
 
   # Coalesces items in this order into a hash by product vendor.
   def items_by_vendor
-    order_items.includes(product: :vendor).where.not(products: {vendor_id: nil}).group_by { |item| item.product.vendor }
+    order_items.joins(product: :vendor).group_by { |item| item.product.vendor }
   end
 
   # Collects aggregated component quantities of all products in the order.

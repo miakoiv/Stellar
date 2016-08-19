@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
 
   # Order types seen in the user's set of completed orders.
   def existing_order_types
-    orders.includes(:order_type).complete.map(&:order_type).uniq
+    orders.complete.map(&:order_type).uniq
   end
 
   # Available outgoing order types. These are what the user has available

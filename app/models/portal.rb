@@ -36,7 +36,7 @@ class Portal < ActiveRecord::Base
 
   #---
   def category_options
-    available_categories.includes(:store).live.map { |c| ["#{c.store} ⯈ #{c}", c.id] }.sort
+    available_categories.live.map { |c| ["#{c.store} ⯈ #{c}", c.id] }.sort
   end
 
   def description
