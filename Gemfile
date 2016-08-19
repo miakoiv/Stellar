@@ -24,6 +24,9 @@ gem 'execjs'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+# Automatic eager loading
+gem 'goldiloader'
+
 # Low-magic searches
 gem 'searchlight'
 
