@@ -12,7 +12,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.json
   def index
-    @users = current_user.managed_users.includes(:roles)
+    @users = current_user.managed_users
   end
 
   # GET /admin/users/1

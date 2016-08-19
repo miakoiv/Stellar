@@ -28,7 +28,7 @@ class PortalController < ApplicationController
 
   # GET /department/:department_id
   def show_department
-    @products = @department.products.includes(:store).live.random.page(params[:page]).per(30)
+    @products = @department.products.live.random.page(params[:page]).per(30)
 
     respond_to :js, :html
   end

@@ -14,7 +14,7 @@ class Admin::DepartmentsController < ApplicationController
   # GET /admin/departments
   # GET /admin/departments.json
   def index
-    @departments = current_portal.departments.includes(:categories)
+    @departments = current_portal.departments
   end
 
   # GET /admin/departments/1

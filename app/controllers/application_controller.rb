@@ -109,7 +109,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_pages
-      @pages = current_store.pages.includes(:sub_pages)
+      @pages = current_store.pages
     end
 
     # Finds the current portal by requested domain, if any.
