@@ -1,7 +1,7 @@
 = content_tag_for :tr, image do
   %td.hidden-print= drag_handle
   %td
-    = image_variant_tag(image, :thumbnail)
+    = image_variant_tag image, :thumbnail, title: image.attachment_file_name, data: {toggle: 'tooltip'}
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
       .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
