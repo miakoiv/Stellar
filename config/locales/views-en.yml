@@ -176,7 +176,8 @@ en:
       variants: Alternatives for this product…
   store:
     all_products: All products
-    requisite_products: This product requires these additional products
+    product_variants: Alternatives for this product
+    requisite_products: Recommended products
     product_properties: Product information
     component_entries: Included components
     add_to_cart: Add to cart

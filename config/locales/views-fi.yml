@@ -156,7 +156,8 @@ fi:
       variants: Vaihtoehtoisia tuotteita…
   store:
     all_products: Kaikki tuotteet
-    requisite_products: Tämä tuote tarvitsee näitä oheistuotteita
+    product_variants: Vaihtoehtoisia tuotteita
+    requisite_products: Katso myös nämä
     product_properties: Tuotetiedot
     component_entries: Tuotteen sisältämät osat
     add_to_cart: Lisää koriin
