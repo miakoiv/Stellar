@@ -13,8 +13,8 @@ class Image < ActiveRecord::Base
 
   has_attached_file :attachment,
     styles: {
-      lightbox: '1000x1000>',
-      presentational: '600x600>',
+      lightbox: '1200x1200>',
+      presentational: '800x800>',
       technical: '400x400>',
       postcard: '300x300>',
       matchbox: '200x200>',
@@ -100,6 +100,15 @@ class Image < ActiveRecord::Base
     @dimensions ||= {}
     return nil unless is_bitmap?
     @dimensions[style] ||= [:width, :height].zip(FastImage.size(attachment.path(style))).to_h
+  end
+
+  def portrait?
+    return nil unless is_bitmap?
+    dimensions[:height] > dimensions[:width]
+  end
+
+  def landscape?
+    !portrait?
   end
 
   def to_s
