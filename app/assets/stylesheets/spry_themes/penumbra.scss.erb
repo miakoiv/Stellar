@@ -183,12 +183,7 @@ body {
               height: 0;
               padding-bottom: 100%;
 
-              img {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%,-50%);
-              }
+              img { @extend .img-contain, .img-center; }
             }
             .product-text {
               overflow: hidden;
