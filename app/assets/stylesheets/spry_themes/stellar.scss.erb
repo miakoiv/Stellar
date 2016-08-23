@@ -459,12 +459,15 @@ body {
           form {
             .form-group {
               margin-top: 20px;
-              margin-bottom: 0;
 
               button {
                 @extend .btn-block, .btn-lg, .btn-success;
               }
             }
+          }
+          .go-checkout .btn {
+            @extend .btn-block, .btn-lg;
+            transition: all 0.2s ease-in-out 0s;
           }
         }
         .variant-products {

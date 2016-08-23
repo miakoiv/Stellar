@@ -23,6 +23,7 @@
           .product-pricing
             = render partial: 'products/pricing', object: product, as: :product
           = render partial: 'products/buy_now', object: product, as: :product
+          = render partial: 'store/go_checkout'
 
       - if product.variant?
         .variant-products

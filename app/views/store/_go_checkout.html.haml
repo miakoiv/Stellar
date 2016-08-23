@@ -1,0 +1,3 @@
+.go-checkout
+  - if can_shop? && !shopping_cart.empty?
+    = link_to icon('check-circle', t('store.go_checkout')), cart_path, class: 'btn btn-default'
