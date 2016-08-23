@@ -87,6 +87,12 @@ body {
     }
   }
   #category-banner-wrap { display: none; }
+  #categories-wrap > .categories > ul > li.category {
+    &.active {
+      > .subcategories-wrap { display: block; }
+    }
+    > .subcategories-wrap { display: none; }
+  }
   .products, .product-detail { padding-top: 30px; }
 }
 
