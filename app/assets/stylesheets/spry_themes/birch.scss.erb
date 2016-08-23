@@ -41,6 +41,11 @@ body {
   }
 }
 
+@media (max-width: $screen-sm-min) {
+  #category-banner-wrap { display: none; }
+  .products, .product-detail { padding-top: 30px; }
+}
+
 #static-wrap {
   .container {
     margin-top: 20px;
@@ -49,10 +54,14 @@ body {
   }
 }
 
-#search-panel-wrap {
-  .search-panel {
-    @extend .container;
+#category-banner-wrap {
+  > .category-banner {
+    .jumbotron { margin-bottom: 0; }
   }
+}
+
+#store-wrap {
+  padding-bottom: 30px;
 }
 
 #categories-wrap {
@@ -144,18 +153,14 @@ body {
   }
 }
 
+#search-panel-wrap {
+  .search-panel {
+  }
+}
+
 #products-wrap {
   position: relative;
 
-  #products-view-toggle {
-    position: absolute;
-    right: $grid-gutter-width/2;
-    top: -30px;
-
-    button {
-      @extend .btn, .btn-default, .btn-xs;
-    }
-  }
   .products {
     @extend .container;
     position: relative;
@@ -254,80 +259,113 @@ body {
     position: relative;
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: rgba(255,255,255,0.9);
 
     .product-header {
-      @extend .row;
+      .actions {
+        @extend .pull-right;
 
-      .product-title {
-        @extend .col-xs-12, .col-md-7;
-        margin-top: 0;
-        margin-bottom: 10px;
-        font-weight: 500;
+        .btn { display: inline-block; }
       }
-      .product-meta {
-        @extend .col-xs-12, .col-md-5;
-        margin-top: 8px;
-
-        .product-actions {
-          float: right;
-          margin-left: 15px;
-
-          .form-inline { display: inline-block; }
-          .btn {
-            display: inline-block;
-            transition: all 0.2s ease-in-out 0s;
-          }
-        }
-        .product-pricing {
-
-          .price, .retail-price {
-            float: right;
-            margin-right: $grid-gutter-width/2;
-            font-size: $font-size-large;
-            line-height: 34px;
-
-            .tax-rate {
-              margin-left: 5px;
-              color: $text-color;
-              font-size: $font-size-small;
-              letter-spacing: 0.05em;
-              word-spacing: 0;
-            }
-            .unit-price {
-              display: block;
-              margin-top: -10px;
-              font-size: $font-size-small;
-              text-align: right;
-            }
-          }
-          .price {
-            @extend .text-primary;
-            font-weight: 500;
-          }
-          .retail-price {
-            opacity: 0.5;
-            text-decoration: line-through;
-          }
-        }
+      .product-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-weight: 500;
       }
     }
     .product-body {
       @extend .row;
 
-      .product-description {
-        @extend .col-xs-12, .col-md-4;
-        margin-top: 50px;
+      .images.presentational {
+        @extend .col-xs-12, .col-sm-7, .col-md-8, .col-lg-9;
+        margin-bottom: 30px;
+      }
+      .product-meta {
+        @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
 
         .product-code {
-          @extend .pull-left;
           font-size: $font-size-small;
         }
-        .product-stock {
-          @extend .pull-right, .clearfix;
+        .buy-now {
+          @extend .well;
+
+          .product-pricing {
+            .price {
+              @extend .lead, .text-primary;
+              margin-right: 0.5em;
+              margin-bottom: 0;
+              font-weight: 500;
+
+              .tax-rate, .unit-price {
+                @extend .text-muted;
+                display: inline-block;
+                font-size: $font-size-base;
+                font-weight: 400;
+              }
+              .unit-price { display: block; }
+            }
+            .retail-price {
+              text-decoration: line-through;
+            }
+          }
+          form {
+            .form-group {
+              margin-top: 20px;
+              margin-bottom: 0;
+
+              button {
+                @extend .btn-block, .btn-lg, .btn-success;
+                transition: all 0.2s ease-in-out 0s;
+              }
+            }
+          }
         }
-        .body-text { clear: both; }
-        > .dropdown, .list-group, .nav { margin-top: 20px; }
+        .variant-products {
+          margin-bottom: 20px;
+
+          button { @extend .btn-block; }
+          .dropdown-menu {
+            @extend .dropdown-menu-right;
+          }
+        }
+        .product-stock {
+          ul {
+            @extend .list-group;
+            font-size: $font-size-small;
+
+            > li {
+              @extend .list-group-item;
+              > span {
+                @extend .pull-right, .label;
+                font-size: inherit;
+              }
+
+              &.manufacturing {
+                @extend .list-group-item-warning;
+                > span { @extend .label-warning; }
+              }
+              &.shipping {
+                @extend .list-group-item-success;
+                > span { @extend .label-success; }
+              }
+            }
+          }
+        }
+      }
+      .product-description {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-5;
+
+        .body-text { margin-bottom: 20px; }
+      }
+      .product-properties {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-4;
+
+        .properties, .components {
+          tr > :first-child { padding-left: 0; }
+          tr > :last-child { padding-right: 10px; }
+        }
+      }
+      .images.technical {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-3;
       }
       .iframes {
         @extend .hidden-print;
@@ -337,37 +375,34 @@ body {
         .iframe-toggle {
           @extend .btn-sm, .btn-primary;
           display: block;
-          width: 3*$grid-gutter-width;
+          width: 2*$grid-gutter-width;
           font-weight: 500;
           text-align: right;
         }
       }
       .images {
-        padding-bottom: 70px;
-
-        .nav {
-          @extend .hidden-print;
-          position: absolute;
-          left: $grid-gutter-width/2;
-          bottom: 20px;
-
-          > li > a { padding: 5px; }
-        }
+        .nav { @extend .nav-tabs, .nav-sm; }
         .image {
-          a {
-            display: block;
+          position: relative;
+          height: 0;
+          padding-bottom: 61.8%; // golden ratio
+
+          > a.image-link {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
 
             img {
-              @extend .img-responsive;
+              display: block;
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
               margin: 0 auto;
             }
           }
-        }
-        &.technical {
-          @extend .col-xs-12, .col-sm-4, .col-md-3;
-        }
-        &.presentational {
-          @extend .col-xs-12, .col-sm-8, .col-md-5;
         }
       }
     }

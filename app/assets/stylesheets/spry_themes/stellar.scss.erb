@@ -11,7 +11,7 @@ $navbar-default-link-active-bg: transparent;
 @import "fonts.scss";
 @import "print.scss";
 
-body.stellar {
+body {
   overflow-y: scroll;
   padding-top: 80px;
 }
@@ -61,7 +61,7 @@ body.stellar {
   and revert navbar links to original styles
 */
 @media (max-width: $screen-sm-min) {
-  body.stellar { padding-top: 75px; }
+  body { padding-top: 75px; }
 
   #main-nav {
     > .content {
@@ -86,6 +86,8 @@ body.stellar {
       }
     }
   }
+  #category-banner-wrap { display: none; }
+  .products, .product-detail { padding-top: 30px; }
 }
 
 #static-wrap {
@@ -144,32 +146,67 @@ body.stellar {
   }
 }
 
-#store-wrap {
-  @extend .container;
+#category-banner-wrap {
+  > .category-banner {
+    > .carousel {
+      .item {
+        img {
+          width: 100%;
+          min-height: 400px;
+        }
+      }
+    }
+  }
 }
 
-#search-panel-wrap {
+/*
+  storefront structure elements in source order
+*/
+#store-wrap {
+  @extend .container;
+  margin-top: 30px;
+  padding-bottom: 30px;
 
-  .search-panel {
+  .store-sections {
+    @extend .row;
+
+    #categories-wrap {
+      @extend .col-sm-3, .col-lg-2;
+      padding-right: 0;
+    }
+    #products-wrap {
+      @extend .col-sm-9, .col-lg-10;
+    }
+    #product-detail-wrap {
+      @extend .col-sm-9, .col-lg-10;
+
+      .images.presentational {
+        @extend .col-xs-12, .col-sm-7, .col-md-8, .col-lg-9;
+      }
+      .product-meta {
+        @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+      }
+      .product-description {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-5;
+      }
+      .product-properties {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-4;
+      }
+      .images.technical {
+        @extend .col-xs-12, .col-sm-6, .col-md-6, .col-lg-3;
+      }
+    }
   }
 }
 
 #categories-wrap {
-
-  .categories {
-    @extend .container-fluid;
-
+  > .categories {
     > ul {
-      @extend .nav, .nav-pills;
-      display: flex;
-      flex-flow: row wrap;
+      @extend .nav, .nav-pills, .nav-stacked;
       font-size: $font-size-small;
 
       > li.category {
-        @extend .col-xs-6, .col-sm-4, .col-md-3;
-        flex: 0 1 auto;
-        padding: 0;
-        margin-right: -10px;
+        margin-left: -15px;
 
         &.active {
           > a {
@@ -179,10 +216,6 @@ body.stellar {
         }
         &:hover {
           > a { background-color: transparent; }
-          .subcategories-wrap {
-            max-height: 1000px; // transition needs a value
-            opacity: 1;
-          }
         }
         > a {
           border-radius: 0;
@@ -204,14 +237,11 @@ body.stellar {
           }
         }
         > .subcategories-wrap {
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          transition: all 0.8s ease-in-out 0s;
-
           > .subcategories {
             > ul {
-              @extend .nav, .nav-pills;
+              @extend .nav, .nav-pills, .nav-stacked;
+              margin-top: 2px;
+              margin-left: 35px;
 
               > li.category {
                 &.active > a {
@@ -235,57 +265,32 @@ body.stellar {
   }
 }
 
-#category-banner-wrap {
-  > .category-banner {
-    > .carousel {
-      .item {
-        img {
-          width: 100%;
-          min-height: 400px;
-        }
-      }
-    }
-    > .content {
-      @extend .container;
-      position: relative;
-    }
+#search-panel-wrap {
+  .search-panel {
   }
 }
 
 #products-wrap {
-  position: relative;
 
-  #products-view-toggle {
-    position: absolute;
-    right: $grid-gutter-width/2;
-    top: -30px;
-
-    button {
-      @extend .btn, .btn-link, .btn-xs;
-    }
-  }
   .products {
-    @extend .container;
-    margin-top: 40px;
-    padding-bottom: 20px;
+    @extend .row;
 
     .product-grid {
 
       > ul {
-        @extend .row;
         list-style: none;
         padding-left: 0;
         margin-bottom: 0;
-        border-right: 1px solid #ddd;
+        border-right: 1px solid $table-border-color;
 
         li.product {
-          @extend .col-xs-6, .col-sm-4, .col-md-3;
+          @extend .col-xs-6, .col-sm-4, .col-md-4, .col-lg-3;
           padding-bottom: 20px;
-          border-left: 1px solid #ddd;
-          border-bottom: 1px solid #ddd;
+          border-left: 1px solid $table-border-color;
+          border-bottom: 1px solid $table-border-color;
 
           &.double {
-            @extend .col-xs-12, .col-sm-8, .col-md-6;
+            @extend .col-xs-12, .col-sm-8, .col-md-8, .col-lg-6;
             padding-top: 10px;
             border-top: 2px solid $text-color;
 
@@ -392,19 +397,22 @@ body.stellar {
 }
 
 #product-detail-wrap {
-  position: relative;
-  padding-bottom: 40px;
+  border-left: 1px solid $table-border-color;
 
   .product-detail {
-    @extend .container;
 
     .product-header {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+
+      .actions {
+        @extend .pull-right;
+
+        .btn { display: inline-block; }
+      }
 
       .product-title {
+        margin: 0;
         font-size: 3em;
-        margin-top: 40px;
-        margin-bottom: 20px;
 
         .small {
           display: block;
@@ -413,89 +421,121 @@ body.stellar {
           letter-spacing: 0.05em;
         }
       }
-      .product-meta {
-        @extend .clearfix;
-
-        .product-actions {
-          @extend .pull-right;
-
-          .form-inline, .btn { display: inline-block; }
-        }
-        .product-pricing {
-          @extend .pull-left;
-
-          .price {
-            margin-left: -15px;
-            padding: 4px 15px;
-            background-image: url(<%= asset_path('leasit-bar.svg') %>);
-            background-position: top left;
-            background-size: cover;
-            color: #fff;
-            font-size: $font-size-large;
-            font-weight: 500;
-          }
-        }
-      }
     }
     .product-body {
       @extend .row;
 
-      .product-description {
-        @extend .col-xs-12;
-        @extend .col-sm-5;
-        @extend .col-md-4, .col-md-push-6;
-        border-left: 1px solid #ddd;
-
+      .images.presentational {
+        margin-bottom: 30px;
+      }
+      .product-meta {
         .product-code {
-          @extend .pull-right, .label, .label-default;
-          padding: 5px 10px;
+          padding-top: 10px;
+          margin-bottom: 20px;
+          border-top: 1px solid $table-border-color;
         }
-        .product-stock {}
-        .body-text {
-          margin-top: 40px;
+        .buy-now {
+          @extend .well;
+
+          .product-pricing {
+            .price {
+              @extend .lead, .text-primary;
+              margin-right: 0.5em;
+              margin-bottom: 0;
+              font-weight: 500;
+
+              .tax-rate, .unit-price {
+                @extend .text-muted;
+                display: inline-block;
+                font-size: $font-size-base;
+                font-weight: 400;
+              }
+              .unit-price { display: block; }
+            }
+            .retail-price {
+              text-decoration: line-through;
+            }
+          }
+          form {
+            .form-group {
+              margin-top: 20px;
+              margin-bottom: 0;
+
+              button {
+                @extend .btn-block, .btn-lg, .btn-success;
+              }
+            }
+          }
         }
-        > .dropdown, .list-group, .nav { margin-top: 20px; }
+        .variant-products {
+          margin-bottom: 20px;
+
+          button { @extend .btn-block; }
+          .dropdown-menu {
+            @extend .dropdown-menu-right;
+          }
+        }
+        .product-stock {
+          ul {
+            @extend .list-group;
+            font-size: $font-size-small;
+
+            > li {
+              @extend .list-group-item;
+              > span {
+                @extend .pull-right, .label;
+                font-size: inherit;
+              }
+
+              &.manufacturing {
+                @extend .list-group-item-warning;
+                > span { @extend .label-warning; }
+              }
+              &.shipping {
+                @extend .list-group-item-success;
+                > span { @extend .label-success; }
+              }
+            }
+          }
+        }
+      }
+
+      .product-description {
+        .body-text { margin-bottom: 20px; }
+      }
+      .images.technical {}
+      .iframes {}
+      .product-properties {
         .properties, .components {
           tr > :first-child { padding-left: 0; }
           tr > :last-child { padding-right: 10px; }
         }
       }
       .images {
-        &.presentational {
-          @extend .col-xs-12;
-          @extend .col-sm-7;
-          @extend .col-md-6, .col-md-pull-6;
-
-          .nav {
-            left: -1*$grid-gutter-width;
-          }
-        }
-        &.technical {
-          @extend .hidden-xs, .hidden-sm;
-          @extend .col-md-2, .col-md-push-6;
-          border-left: 1px solid #ddd;
-
-          .nav {
-            right: -1*$grid-gutter-width;
-          }
-        }
-        .nav {
-          @extend .nav-stacked;
-          position: absolute;
-          top: 0;
-
-          > li > a { padding: 5px; }
-        }
+        .nav { @extend .nav-tabs, .nav-sm; }
         .image {
-          a.image-link {
-            display: block;
-            position: relative;
+          position: relative;
+          height: 0;
+          padding-bottom: 61.8%; // golden ratio
+
+          > a.image-link {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
 
             img {
-              @extend .img-responsive;
+              display: block;
+              max-width: 100%;
+              max-height: 100%;
+              width: auto;
+              height: auto;
+              margin: 0 auto;
+              transition: all 0.4s ease-in-out 0s;
 
               &:hover {
-                @include box-shadow(0 0 15px 0 rgba(0,0,0,0.1));
+                @include box-shadow(0 0 15px 0 rgba(0,0,0,0.15));
               }
             }
           }
@@ -503,6 +543,8 @@ body.stellar {
       }
     }
     .product-footer {
+      border-top: 1px solid $table-border-color;
+
       h2 { font-size: $font-size-large; }
 
       .requisite-products, .variant-products {
@@ -512,7 +554,7 @@ body.stellar {
 
           li.product {
             @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
-            border-left: 1px solid #ddd;
+            border-right: 1px solid $table-border-color;
 
             &:hover {
               a {
