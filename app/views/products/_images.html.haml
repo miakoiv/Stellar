@@ -1,0 +1,14 @@
+- images = product.images.send(purpose)
+
+- if images.count > 1
+  %ul.nav{role: 'tablist'}
+    - images.each_with_index do |image, index|
+      %li{role: 'presentation', class: index == 0 ? 'active' : nil}
+        = link_to "##{dom_id(image)}", role: 'pill', data: {toggle: 'pill'} do
+          = image_variant_tag image, :icon
+
+.tab-content.gallery
+  - images.each_with_index do |image, index|
+    = div_for(image, role: 'tabpanel', class: index == 0 ? 'tab-pane fade in active' : 'tab-pane fade') do
+      = link_to image.url(:lightbox), class: 'image-link' do
+        = image_variant_tag image, purpose

@@ -7,11 +7,6 @@ html {
   }
 }
 
-#main-wrap {
-  position: relative;
-  background: $body-bg;
-}
-
 //
 // navbar with charms and a search results dropdown
 //
@@ -64,6 +59,11 @@ html {
     }
   }
 }
+
+//
+// parallax window that's also a jumbotron
+//
+.jumbotron.parallax-window { background-color: transparent; }
 
 //
 // sidebar on the right

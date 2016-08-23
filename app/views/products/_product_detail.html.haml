@@ -1,36 +1,39 @@
 - cache_if current_user.guest?, [I18n.locale, :product_detail, product] do
   .product-header
-
+    .actions
+      - if current_user.can_update?(product)
+        = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default'
+      = link_to icon('times'), '#back', class: 'btn btn-default'
     %h1.product-title
       = product.title
       %span.small= product.subtitle
 
-    .product-meta
-      .product-actions
-        = render partial: 'products/actions', object: product, as: :product
-      - if can_see_pricing? && can_shop? && may_shop_at?(@category)
-        .product-pricing
-          = render partial: 'products/pricing', object: product, as: :product
-
   .product-body
+    .images.presentational
+      = render partial: 'products/images', locals: {product: product, purpose: :presentational}
 
-    .product-description
-
+    .product-meta
       %p.product-code
         - if product.customer_code.present?
           = icon('barcode', product.customer_code, class: 'fa-lg')
         = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
-      - if can_see_stock?
-        %p.product-stock
-          = product_stock_string(product.stock)
-
-      .body-text><= product.description.html_safe if product.description.present?
+      - if can_see_pricing? && can_shop? && may_shop_at?(@category)
+        .buy-now
+          .product-pricing
+            = render partial: 'products/pricing', object: product, as: :product
+          = render partial: 'products/buy_now', object: product, as: :product
 
       - if product.variant?
-        = render partial: 'products/variants_dropdown', object: product, as: :product
+        .variant-products
+          = render partial: 'products/variants_dropdown', object: product, as: :product
 
-      = render partial: 'products/properties_components_table', object: product, as: :product
+      - if can_see_stock?
+        .product-stock
+          = product_stock_string(product.stock)
+
+    .product-description
+      .body-text><= product.description.html_safe if product.description.present?
 
       - if product.images.document.any?
         .documents.list-group
@@ -38,28 +41,20 @@
             = link_to(icon('paperclip', document.to_s),
                 document.url(:original), class: 'list-group-item')
 
+    .product-properties
+      = render partial: 'products/properties_components_table', object: product, as: :product
+
+    .images.technical
+      = render partial: 'products/images', locals: {product: product, purpose: :technical}
+
     - if product.iframes.any?
       .iframes
         = render partial: 'iframes/gallery', object: product, as: :product, locals: {inline: current_store.inline_iframes}
 
-    .images.technical
-      - technicals = product.images.technical
-      %ul.nav.nav-pills{role: 'tablist'}
-        - if technicals.count > 1
-          = render partial: 'images/pill', collection: technicals, as: :image
-      .tab-content.gallery
-        = render partial: 'images/technical', collection: technicals, as: :image
-    .images.presentational
-      - presentationals = product.images.presentational
-      %ul.nav.nav-pills{role: 'tablist'}
-        - if presentationals.count > 1
-          = render partial: 'images/pill', collection: presentationals, as: :image
-      .tab-content.gallery
-        = render partial: 'images/presentational', collection: presentationals, as: :image
-
   .product-footer
 
     - if product.variant?
+      %h2= t('store.product_variants')
       .variant-products
         %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
 

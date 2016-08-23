@@ -16,8 +16,7 @@
   $('.category-banner').replaceWith("#{j render partial: 'category_banner'}")
   $('.categories').show()
   $('.products').show()
-  $('#products-view-toggle').show()
   $('.navbar-form').show()
 
   if $(window).isSmall()
-    $(window).scrollTo $('.products'), 300, offset: -70
+    $(window).scrollTo $('#products-wrap'), 300, offset: -$('#main-nav').height()

@@ -41,6 +41,12 @@ $.fn.extend
   make_room: (element) ->
     $(this).css 'padding-bottom', element.height()
 
+  rebuild_parallax: ->
+    $('.parallax-mirror').remove()
+    $parallax = $('.parallax-window')
+    $parallax.imagesLoaded ->
+      $parallax.parallax($parallax.data())
+
   rebuild_masonry: ->
     $masonry = $('.masonry-grid')
     $masonry.imagesLoaded ->
@@ -79,5 +85,6 @@ jQuery ->
 
   $(document).on 'page:done', (event, $target, status, url, data) ->
     $.SmartMenus.Bootstrap.init()
+    $(document).rebuild_parallax()
     $(document).rebuild_masonry()
     if ga? then ga('send', 'pageview', window.location.pathname)

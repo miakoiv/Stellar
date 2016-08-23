@@ -1,8 +1,10 @@
 = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
+  $('.category').deactivate()
+  $("##{dom_id(@category)}").activate()
+  $('.category-banner').replaceWith("#{j render partial: 'category_banner'}")
   $('.products').hide()
-  $('#products-view-toggle').hide()
   $('.product-detail').show().initialize()
   if $(window).isSmall()
-    $(window).scrollTo $('.product-detail'), 300, offset: -70
+    $(window).scrollTo $('#product-detail-wrap'), 300, offset: -$('#main-nav').height()

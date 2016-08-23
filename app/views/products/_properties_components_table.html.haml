@@ -1,12 +1,13 @@
-%ul.nav.nav-tabs.nav-sm{role: 'tablist'}
-  - if product.product_properties.any?
-    %li.active{role: 'presentation'}
-      %a{href: '#tab-properties', role: 'tab', data: {toggle: 'tab'}}
-        = t('store.product_properties')
-  - if product.component_entries.live.any?
-    %li{role: 'presentation', class: product.product_properties.any? ? '' : 'active'}
-      %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
-        = t('store.component_entries')
+- if product.product_properties.any? || product.component_entries.live.any?
+  %ul.nav.nav-tabs.nav-sm{role: 'tablist'}
+    - if product.product_properties.any?
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-properties', role: 'tab', data: {toggle: 'tab'}}
+          = t('store.product_properties')
+    - if product.component_entries.live.any?
+      %li{role: 'presentation', class: product.product_properties.any? ? '' : 'active'}
+        %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
+          = t('store.component_entries')
 
 .tab-content
 
