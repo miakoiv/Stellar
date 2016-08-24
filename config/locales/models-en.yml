@@ -109,6 +109,7 @@ en:
         product_id: Product
         component_id: Component
         quantity: Quantity
+        subtotal: Subtotal
       customer_asset:
         user_id: Customer
         product_id: Product

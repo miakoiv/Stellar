@@ -4,8 +4,9 @@
       %tr
         %th.col-min.hidden-print
         %th= col(Product, :title)
-        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-1= col(Product, :price)
         %th.col-xs-1.text-right= col(ComponentEntry, :quantity)
+        %th.col-xs-1= col(ComponentEntry, :subtotal)
         %th.actions
 
     %tbody#component-entries-tbody.sortable

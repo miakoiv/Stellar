@@ -109,6 +109,7 @@ fi:
         product_id: Tuote
         component_id: Komponentti
         quantity: Määrä
+        subtotal: Yhteensä
       customer_asset:
         user_id: Asiakas
         product_id: Tuote

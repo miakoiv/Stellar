@@ -2,9 +2,12 @@
   %td.hidden-print= drag_handle
   %td
     %strong
-      = link_to entry.component.title, admin_product_path(entry.component)
+      = link_to entry.component.title, admin_product_path(entry.component), title: entry.component.code, data: {toggle: 'tooltip'}
     = entry.component.subtitle
-  %td= entry.component.code
+  %td.text-right.currency
+    = humanized_money_with_symbol entry.component.retail_price
   %td.text-right= entry.quantity
+  %td.text-right.currency
+    = humanized_money_with_symbol entry.quantity * entry.component.retail_price
   %td.actions
     = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

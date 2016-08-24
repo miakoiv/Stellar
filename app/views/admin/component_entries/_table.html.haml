@@ -3,14 +3,18 @@
     %thead
       %tr
         %th= col(Product, :title)
-        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-1= col(Product, :price)
         %th.col-xs-1.text-right= col(ComponentEntry, :quantity)
+        %th.col-xs-1= col(ComponentEntry, :subtotal)
 
     %tbody
       = content_tag_for :tr, product.component_entries do |entry|
         %td
           %strong
-            = link_to entry.component.title, admin_product_path(entry.component)
+            = link_to entry.component.title, admin_product_path(entry.component), title: entry.component.code, data: {toggle: 'tooltip'}
           = entry.component.subtitle
-        %td= entry.component.code
+        %td.text-right.currency
+          = humanized_money_with_symbol entry.component.retail_price
         %td.text-right= entry.quantity
+        %td.text-right.currency
+          = humanized_money_with_symbol entry.quantity * entry.component.retail_price
