@@ -1,10 +1,11 @@
-#products-wrap
-  .products
-    .page-header.visible-print
-      %h1
-        = current_portal
-    .product-grid.infinite-table
-      %ul.masonry-grid
-        = render partial: 'product', collection: @products
-      .pagination
-        = link_to_next_page(@products, loading_spinner, params: params, remote: true)
+#portal-wrap
+  #products-wrap
+    .products
+      .page-header.visible-print
+        %h1
+          = current_portal
+      .product-grid.infinite-table
+        %ul.masonry-grid
+          = render partial: 'product', collection: @products
+        .pagination
+          = link_to_next_page(@products, loading_spinner, params: params, remote: true)

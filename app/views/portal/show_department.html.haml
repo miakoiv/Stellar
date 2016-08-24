@@ -1,11 +1,12 @@
-#products-wrap
-  .products
-    .page-header.visible-print
-      %h1
-        = current_portal
-        %small= @department
-    .product-grid.infinite-table
-      %ul.masonry-grid
-        = render partial: 'product', collection: @products
-      .pagination
-        = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'
+#portal-wrap
+  #products-wrap
+    .products
+      .page-header.visible-print
+        %h1
+          = current_portal
+          %small= @department
+      .product-grid.infinite-table
+        %ul.masonry-grid
+          = render partial: 'product', collection: @products
+        .pagination
+          = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'
