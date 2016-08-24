@@ -141,28 +141,40 @@ class Order < ActiveRecord::Base
   end
 
   # Inserts amount of product to this order in the context of given pricing
-  # group. Bundles/composites insert their components instead/additionally.
+  # group. Bundles are inserted as components right away.
   # Pricing is initially for retail. Depending on the user's group,
   # different pricing may be applied at checkout by Order#reappraise!
-  def insert(product, amount, pricing_group = nil)
+  def insert(product, amount, pricing = nil)
     if product.bundle?
-      insert_components(product, amount, pricing_group)
+      insert_components(product, amount, pricing)
     else
-      order_item = order_items.create_with(
-        amount: 0,
-        priority: order_items_count
-      ).find_or_create_by(product: product)
-      order_item.amount += amount
-      order_item.price = product.price(pricing_group)
-      order_item.save!
-      insert_components(product, amount, pricing_group) if product.composite?
+      insert_single(product, amount, pricing, product.composite?)
+    end
+  end
+
+  # Inserts a single product to this order, optionally with separate components
+  # that are deducted from the price of this product.
+  def insert_single(product, amount, pricing, separate_components)
+    price_cents = product.price_cents(pricing)
+    if separate_components
+      price_cents -= product.component_total_price_cents(pricing)
+    end
+    order_item = order_items.create_with(
+      amount: 0,
+      priority: order_items_count
+    ).find_or_create_by(product: product)
+    order_item.amount += amount
+    order_item.price_cents = price_cents
+    order_item.save!
+    if separate_components
+      insert_components(product, amount, pricing)
     end
   end
 
   # Inserts the component products of given product to this order.
-  def insert_components(product, amount, pricing_group)
+  def insert_components(product, amount, pricing)
     product.component_entries.each do |entry|
-      insert(entry.component, amount * entry.quantity, pricing_group)
+      insert(entry.component, amount * entry.quantity, pricing)
     end
   end
 

@@ -171,7 +171,7 @@ class Product < ActiveRecord::Base
 
   # Returns the retail price in given pricing group. If no group is specified,
   # finds the lowest retail price through promotions. Bundles sum their
-  # components if no price is specified.
+  # components if no price is specified. Composites add their components.
   def price_cents(pricing_group)
     if bundle? && retail_price_cents.nil?
       return component_total_price_cents(pricing_group)
@@ -179,9 +179,11 @@ class Product < ActiveRecord::Base
     if pricing_group.present?
       return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
     end
+    price_cents = retail_price_cents
     lowest = best_promoted_item
-    return lowest.price_cents if lowest.present?
-    retail_price_cents
+    price_cents = lowest.price_cents if lowest.present?
+    price_cents += component_total_price_cents(pricing_group) if composite?
+    price_cents
   end
 
   # Total price of components.
