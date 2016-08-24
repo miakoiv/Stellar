@@ -141,14 +141,12 @@ class Order < ActiveRecord::Base
   end
 
   # Inserts amount of product to this order in the context of given pricing
-  # group. If the product is a bundle, its immediate components are inserted
-  # instead. Pricing is initially for retail. Depending on the user's group,
+  # group. Bundles/composites insert their components instead/additionally.
+  # Pricing is initially for retail. Depending on the user's group,
   # different pricing may be applied at checkout by Order#reappraise!
   def insert(product, amount, pricing_group = nil)
     if product.bundle?
-      product.component_entries.each do |entry|
-        insert(entry.component, entry.quantity, pricing_group)
-      end
+      insert_components(product, amount, pricing_group)
     else
       order_item = order_items.create_with(
         amount: 0,
@@ -157,6 +155,14 @@ class Order < ActiveRecord::Base
       order_item.amount += amount
       order_item.price = product.price(pricing_group)
       order_item.save!
+      insert_components(product, amount, pricing_group) if product.composite?
+    end
+  end
+
+  # Inserts the component products of given product to this order.
+  def insert_components(product, amount, pricing_group)
+    product.component_entries.each do |entry|
+      insert(entry.component, amount * entry.quantity, pricing_group)
     end
   end
 

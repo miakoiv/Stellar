@@ -24,6 +24,7 @@ fi:
           master: päätuote
           variant: tuotevariantti
           bundle: tuotekokonaisuus
+          composite: yhdistelmätuote
           virtual: näennäinen tuote
         sorting:
           manual: käsin

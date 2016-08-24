@@ -18,6 +18,7 @@ class Product < ActiveRecord::Base
 
   # Monetize aggregate methods.
   monetize :price_cents, disable_validation: true
+  monetize :component_total_price_cents, disable_validation: true
   monetize :unit_price_cents, disable_validation: true
 
   INLINE_SEARCH_RESULTS = 20
@@ -77,10 +78,11 @@ class Product < ActiveRecord::Base
   scope :undead, -> { where(live: false) }
 
   # Products that are shown in storefront views. Vanilla products are
-  # directly purchasable, master products link to their first variant, and
-  # bundle products will split into their components when purchased.
+  # directly purchasable, master products link to their first variant,
+  # while composite and bundle products will split into their components
+  # when purchased.
   scope :visible, -> {
-    live.where(purpose: purposes.slice(:vanilla, :master, :bundle).values)
+    live.where(purpose: purposes.slice(:vanilla, :master, :bundle, :composite).values)
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -168,10 +170,11 @@ class Product < ActiveRecord::Base
   end
 
   # Returns the retail price in given pricing group. If no group is specified,
-  # finds the lowest retail price through promotions.
+  # finds the lowest retail price through promotions. Bundles sum their
+  # components if no price is specified.
   def price_cents(pricing_group)
     if bundle? && retail_price_cents.nil?
-      return component_entries.map { |entry| entry.quantity * (entry.component.price_cents(pricing_group) || 0) }.sum
+      return component_total_price_cents(pricing_group)
     end
     if pricing_group.present?
       return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
@@ -179,6 +182,11 @@ class Product < ActiveRecord::Base
     lowest = best_promoted_item
     return lowest.price_cents if lowest.present?
     retail_price_cents
+  end
+
+  # Total price of components.
+  def component_total_price_cents(pricing_group)
+    component_entries.map { |entry| entry.quantity * (entry.component.price_cents(pricing_group) || 0) }.sum
   end
 
   # Calculates unit price from given total cents by finding a product

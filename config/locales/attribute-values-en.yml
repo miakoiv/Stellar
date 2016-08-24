@@ -24,6 +24,7 @@ en:
           master: master product
           variant: product variant
           bundle: product collection
+          composite: composite product
           virtual: virtual product
         sorting:
           manual: manually
