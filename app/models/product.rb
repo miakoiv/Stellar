@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
-  enum purpose: {vanilla: 0, master: 1, variant: 2, bundle: 3, virtual: 4}
+  enum purpose: {vanilla: 0, master: 1, variant: 2, bundle: 3, composite: 4, virtual: 5}
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
