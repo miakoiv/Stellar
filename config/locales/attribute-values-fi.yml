@@ -23,7 +23,7 @@ fi:
           vanilla: tuote
           master: päätuote
           variant: tuotevariantti
-          compound: yhdistelmätuote
+          bundle: tuotekokonaisuus
           virtual: näennäinen tuote
         sorting:
           manual: käsin

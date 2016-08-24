@@ -23,7 +23,7 @@ en:
           vanilla: product
           master: master product
           variant: product variant
-          compound: compound product
+          bundle: product collection
           virtual: virtual product
         sorting:
           manual: manually

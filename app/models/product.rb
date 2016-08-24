@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
-  enum purpose: {vanilla: 0, master: 1, variant: 2, compound: 3, virtual: 4}
+  enum purpose: {vanilla: 0, master: 1, variant: 2, bundle: 3, virtual: 4}
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
@@ -78,9 +78,9 @@ class Product < ActiveRecord::Base
 
   # Products that are shown in storefront views. Vanilla products are
   # directly purchasable, master products link to their first variant, and
-  # compound products will split into their components when purchased.
+  # bundle products will split into their components when purchased.
   scope :visible, -> {
-    live.where(purpose: purposes.slice(:vanilla, :master, :compound).values)
+    live.where(purpose: purposes.slice(:vanilla, :master, :bundle).values)
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -170,7 +170,7 @@ class Product < ActiveRecord::Base
   # Returns the retail price in given pricing group. If no group is specified,
   # finds the lowest retail price through promotions.
   def price_cents(pricing_group)
-    if compound? && retail_price_cents.nil?
+    if bundle? && retail_price_cents.nil?
       return component_entries.map { |entry| entry.quantity * (entry.component.price_cents(pricing_group) || 0) }.sum
     end
     if pricing_group.present?

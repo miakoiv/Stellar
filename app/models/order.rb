@@ -141,11 +141,11 @@ class Order < ActiveRecord::Base
   end
 
   # Inserts amount of product to this order in the context of given pricing
-  # group. If the product is a compound, its immediate components are inserted
+  # group. If the product is a bundle, its immediate components are inserted
   # instead. Pricing is initially for retail. Depending on the user's group,
   # different pricing may be applied at checkout by Order#reappraise!
   def insert(product, amount, pricing_group = nil)
-    if product.compound?
+    if product.bundle?
       product.component_entries.each do |entry|
         insert(entry.component, entry.quantity, pricing_group)
       end
