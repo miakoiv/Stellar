@@ -11,6 +11,8 @@ class Product < ActiveRecord::Base
 
   enum purpose: {vanilla: 0, master: 1, variant: 2, bundle: 3, composite: 4, virtual: 5}
 
+  PURPOSE_ICONS = [nil, 'square', 'sitemap', 'archive', 'object-group', 'magic'].freeze
+
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
   monetize :trade_price_cents, allow_nil: true
@@ -292,7 +294,7 @@ class Product < ActiveRecord::Base
 
   # Icon name based on purpose.
   def icon
-    [nil, 'square', 'sitemap', 'archive', 'magic'][Product.purposes[purpose]]
+    PURPOSE_ICONS[Product.purposes[purpose]]
   end
 
   def to_s
