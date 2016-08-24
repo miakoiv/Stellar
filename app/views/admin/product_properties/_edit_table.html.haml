@@ -16,40 +16,43 @@
         %tr
           %td.col-xs-6
             = f.select :property_id, current_store.properties.map { |p| [p.name_with_units, p.id] }, {include_blank: true}, {placeholder: col(ProductProperty, :property_id), class: 'form-control'}
-          %td.col-xs-5= f.text_field :value, placeholder: col(ProductProperty, :value), class: 'form-control'
+          %td.col-xs-5
+            = f.text_field :value, placeholder: col(ProductProperty, :value), disabled: true, class: 'form-control'
           %td.actions
             = f.button class: 'btn btn-default' do
               = icon('check')
 
-- string_property_ids = current_store.properties.string.pluck(:id)
-
 :coffee
-  show_paths = #{string_property_ids.map { |id| [id, admin_property_path(id)] }.to_h.to_json}
+  show_paths = #{current_store.properties.string.map { |p| [p.id, admin_property_path(p)] }.to_h.to_json}
   jQuery ->
+    $value_select = $('#product_property_value')
     $property_select = $('#product_property_property_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->
-        value_select.disable()
-        value_select.clearOptions()
+        $value_select.attr 'disabled', true
+        if $value_select[0].selectize
+          $value_select[0].selectize.destroy()
+        $value_select.attr 'disabled', false
         if show_paths[index]
-          value_select.load (callback) ->
-            $.ajax
-              url: show_paths[index]
-              success: (response) ->
-                callback(response)
-        value_select.enable()
-
-    $value_select = $('#product_property_value').selectize
-      dropdownParent: 'body'
-      valueField: 'value'
-      labelField: 'value'
-      searchField: 'value'
-      maxItems: 1
-      persist: false
-      create: (input) ->
-        {
-          value: input
-          text: input
-        }
-    property_select = $property_select[0].selectize
-    value_select = $value_select[0].selectize
+          $value_select.val(null)
+          $value_select.selectize
+            dropdownParent: 'body'
+            valueField: 'value'
+            labelField: 'value'
+            searchField: 'value'
+            maxItems: 1
+            delimiter: null
+            create: true
+            persist: false
+            preload: true
+            load: (query, callback) ->
+              callback() if !query
+              $.ajax
+                url: show_paths[index]
+                success: (response) ->
+                  callback(response)
+            create: (input) ->
+              {value: input, text: input}
+            render:
+              option_create: (data, escape) ->
+                '<div class="create"><i class="fa fa-fw fa-plus-circle"></i> ' + escape(data.input) + '</div>'
