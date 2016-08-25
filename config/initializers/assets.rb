@@ -24,6 +24,7 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/lepola.css      spry_themes/lepola.js
   spry_themes/penumbra.css    spry_themes/penumbra.js
   spry_themes/saarimedia.css  spry_themes/saarimedia.js
+  spry_themes/solar.css       spry_themes/solar.js
   spry_themes/stellar.css     spry_themes/stellar.js
   email/mailgun.css
 )
