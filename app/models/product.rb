@@ -214,7 +214,7 @@ class Product < ActiveRecord::Base
   # Returns the range of retail prices across variants of a master product.
   def price_range(pricing_group)
     return nil unless master?
-    variants.map { |variant| variant.price(pricing_group) }.minmax
+    variants.map { |variant| variant.price(pricing_group) }.compact.minmax
   end
 
   # Markup percentage from trade price to retail price.

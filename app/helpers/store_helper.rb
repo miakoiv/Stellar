@@ -8,7 +8,11 @@ module StoreHelper
 
   def humanized_money_range(range)
     min, max = range
-    "#{humanized_money_with_symbol min} – #{humanized_money_with_symbol max}"
+    if min == max
+      humanized_money_with_symbol min
+    else
+      "#{humanized_money_with_symbol min} – #{humanized_money_with_symbol max}"
+    end
   end
 
   # Pretty-prints a hash from Product#stock.
