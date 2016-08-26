@@ -152,9 +152,10 @@ en:
         new_user: New user
       form:
         no_categories: all
-  cookie_alert:
-    title_html: <i class="fa fa-lg fa-coffee"></i>
-    text_html: This website uses cookies to ensure you get the best experience on our website.
+  cookieconsent:
+    message: This website uses cookies to ensure you get the best experience on our website.
+    dismiss: Got it!
+    more_info: More info
   orders:
     index:
       timeline_header: Orders that require shipping

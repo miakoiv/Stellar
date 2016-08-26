@@ -50,9 +50,6 @@ gem 'friendly_id'
 # Moneh!
 gem 'money-rails'
 
-# EU Cookie Law requires this, unfortunately
-gem 'cookie_alert'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

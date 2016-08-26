@@ -2,9 +2,9 @@
 %html
   %head
     = render partial: 'shared/metadata'
+    = render partial: 'shared/cookieconsent'
     = render partial: 'favicon'
   %body{class: current_theme}
-    = display_cookie_alert
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .content
         .navbar-charms

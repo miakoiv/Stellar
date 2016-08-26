@@ -9,9 +9,6 @@ Rails.application.routes.draw do
     defaults: {status: '500'},
     via: :all
 
-  # Mount the cookie alert engine.
-  mount CookieAlert::Engine => '/cookie-alert'
-
   # Redirect old product urls still found in the wild.
   get '/category/:category_id/product/:product_id',
     to: redirect('/product/:category_id/:product_id')

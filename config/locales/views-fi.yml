@@ -132,9 +132,10 @@ fi:
         new_user: Uusi käyttäjä
       form:
         no_categories: kaikki
-  cookie_alert:
-    title_html: <i class="fa fa-lg fa-coffee"></i>
-    text_html: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.
+  cookieconsent:
+    message: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.
+    dismiss: Selvä!
+    more_info: Kerro lisää
   orders:
     index:
       timeline_header: Toimitettavat tilaukset
