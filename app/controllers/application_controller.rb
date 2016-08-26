@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   # Find the guest user stored in session, or create it.
   def guest_user
-    @cached_guest ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
+    @cached_guest ||= User.find(session[:guest_user_id]) rescue User.find(session[:guest_user_id] = create_guest_user.id)
   end
 
   # Preserves search query param in a cookie.
