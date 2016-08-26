@@ -32,8 +32,8 @@ class StoreController < ApplicationController
   # GET /front
   def front
     @category = @categories.first.try(:having_products)
-    if @category.present?
-      @products = display_products.sorted(@category.product_scope)
+    @products = if @category.present?
+      display_products.sorted(@category.product_scope)
     else
       Product.none
     end
