@@ -592,9 +592,13 @@ body {
         > ul {
           list-style: none;
           padding-left: 0;
+          display: flex;
+          flex-flow: row wrap;
 
           li.product {
-            @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+            @extend .col-xs-6, .col-sm-4, .col-md-3;
+            flex: 0 1 auto;
+            padding-bottom: 40px;
             border-right: 1px solid $table-border-color;
 
             &:hover {
@@ -639,6 +643,31 @@ body {
                 font-size: $font-size-small;
                 tr > :first-child { padding-left: 0; }
                 tr > :last-child { padding-right: 0; }
+              }
+            }
+            .buy-now {
+              position: absolute;
+              bottom: 10px;
+              left: $grid-gutter-width/2;
+              right: $grid-gutter-width/2;
+              display: flex;
+
+              .price {
+                @extend .label, .label-primary;
+                flex: 0 1 auto;
+                background-color: transparent;
+                background-image: url(<%= asset_path('leasit-bar.svg') %>);
+                background-position: top left;
+                background-size: cover;
+                font-size: 12px;
+                line-height: 2;
+                margin-bottom: 0;
+                border-radius: 0;
+              }
+              form {
+                flex: 0 1 auto;
+                @extend .form-inline;
+                button { @extend .btn-default; }
               }
             }
           }
