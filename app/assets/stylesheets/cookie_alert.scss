@@ -1,34 +1,31 @@
 #cookie_alert {
-  @extend .alert, .alert-info;
-  position: fixed;
-  min-width: 50px;
-  min-height: 52px;
-  margin: 0;
-  bottom: 0;
-  left: 0;
+  @extend .alert, .alert-danger;
   z-index: 2000000001;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 0;
   overflow: hidden;
-  background-color: $body-bg;
-  color: $text-color;
-  border-color: $table-border-color;
+  background-color: rgba(0,0,0,0.667);
+  color: #fff;
+  border-radius: 0;
 }
 
 #cookie_alert_message {
 }
 
 #cookie_alert_title {
-  position: absolute;
-  font-size: 18px;
-  line-height: 21px;
+  float: left;
 }
 
 #cookie_alert_text {
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 70px;
 }
 
 #cookie_alert_close {
-  @extend .btn, .btn-xs, .btn-danger;
+  @extend .btn, .btn-danger;
   position: absolute;
   right: 15px;
 }

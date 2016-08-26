@@ -133,8 +133,8 @@ fi:
       form:
         no_categories: kaikki
   cookie_alert:
-    title_html: <i class="fa fa-exclamation-circle"></i>
-    text_html: Tämä sivusto vaatii toimiakseen keksejä, joita selaimesi vastaanottaa automaattisesti. Keksit sisältävät vain tätä sivustoa koskevia tietoja. Vierailemalla sivustolla hyväksyt keksien käytön tähän tarkoitukseen.
+    title_html: <i class="fa fa-lg fa-coffee"></i>
+    text_html: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.
   orders:
     index:
       timeline_header: Toimitettavat tilaukset
