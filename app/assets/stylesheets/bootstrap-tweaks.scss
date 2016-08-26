@@ -456,6 +456,17 @@ span.shipping:before { content: ""; }
 }
 
 //
+// cookieconsent overrides
+//
+.cc_banner-wrapper {
+  z-index: 2000000001 !important;
+
+  .cc_container {
+    font-family: inherit !important;
+  }
+}
+
+//
 // vis.js styling
 //
 .vis-timeline {
