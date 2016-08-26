@@ -1,0 +1,15 @@
+= content_tag_for :li, @product.requisite_products.visible do |product|
+  %a{href: '#'}
+    .product-image= image_variant_tag product.cover_image(current_store.list_image_type), :matchbox
+    .product-text
+      %h3
+        = product.title
+        %span.small= product.subtitle
+    .buy-now
+      - if can_see_pricing? && can_shop?
+        %p.price= humanized_money_with_symbol product.price(current_pricing)
+        = form_tag order_product_path(product), method: :post, remote: true do
+          .input-group.input-group-sm
+            = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'
+            %span.input-group-btn
+              %button.btn.btn-success{type: 'submit'}= icon('cart-plus')

@@ -2,9 +2,5 @@
   = form_tag order_product_path(product), method: :post, remote: true do
     .form-group
       = hidden_field_tag :amount, 1
-      - if product.requisite_products.any?
-        %button.btn.btn-default{type: 'button', data: {toggle: 'modal', target: '#select-for-cart-modal'}}
-          = icon('shopping-cart', t('store.select_for_cart'))
-      - else
-        %button.btn.btn-default{type: 'submit'}
-          = icon('cart-plus', t('store.add_to_cart'))
+      %button.btn.btn-default{type: 'submit'}
+        = icon('cart-plus', t('store.add_to_cart'))
