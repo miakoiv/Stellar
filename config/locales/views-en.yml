@@ -50,6 +50,7 @@ en:
         total_value: Total value
         items: Items
     manage: Manage
+    return_to_storefront: Return to storefront
     albums:
       index:
         new_album: New album

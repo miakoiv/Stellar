@@ -28,7 +28,7 @@
 - if current_user.has_cached_role?(:store_admin)
   = active_link_to icon('cube', title(Store), class: 'fa-fw'), edit_admin_store_path(current_store), wrap_tag: :li
 - if current_user.has_cached_role?(:superuser)
-  = active_link_to icon('cubes', title(Store, count: 2), class: 'fa-fw'), admin_stores_path, wrap_tag: :li
+  = active_link_to icon('paw', title(Store, count: 2), class: 'fa-fw'), admin_stores_path, wrap_tag: :li
   %li.divider
   = active_link_to icon('globe', title(Portal, count: 2), class: 'fa-fw'), admin_portals_path, wrap_tag: :li
   = active_link_to icon('umbrella', title(Department, count: 2), class: 'fa-fw'), admin_departments_path, wrap_tag: :li

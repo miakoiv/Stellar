@@ -30,6 +30,7 @@ fi:
         total_value: Arvo yhteensä
         items: Nimikkeitä
     manage: Hallinta
+    return_to_storefront: Takaisin kauppaan
     albums:
       index:
         new_album: Uusi albumi
