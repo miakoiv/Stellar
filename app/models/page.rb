@@ -38,11 +38,16 @@ class Page < ActiveRecord::Base
   validates :title, presence: true
 
   #---
-  def self.purpose_options
-    purposes.keys.map { |p| [Page.human_attribute_value(:purpose, p), p] }
+  def available_purposes
+    return Page.purposes if new_record?
+    return Page.purposes.slice('route') if route?
+    Page.purposes.slice('primary', 'secondary', 'banner', 'template')
   end
 
-  #---
+  def purpose_options
+    available_purposes.keys.map { |p| [Page.human_attribute_value(:purpose, p), p] }
+  end
+
   def can_be_nested?
     primary? || secondary?
   end

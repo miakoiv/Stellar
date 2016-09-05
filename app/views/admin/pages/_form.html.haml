@@ -2,23 +2,24 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      = f.select :purpose, Page.purpose_options, {}, {class: 'selectize', disabled: !@page.new_record?}
-      = f.text_field :title, required: true
-      - unless @page.new_record?
-        - if @page.route?
-          = f.text_field :slug
-        - if @page.can_be_nested?
-          = f.select :parent_page_id, current_store.pages.where.not(id: @page).acceptable_parent.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize'}
-        - if @page.can_have_albums?
-          = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
-        - if @page.needs_content?
-          = f.form_group do
-            = f.check_box :wysiwyg
-          - unless @page.new_record?
-            - if @page.wysiwyg?
-              = f.hidden_field :content
-            - else
-              = f.text_area :content, rows: 20, class: 'monospace input-sm'
+      %fieldset{disabled: locked}
+        = f.select :purpose, @page.purpose_options, {}, {class: 'selectize'}
+        = f.text_field :title, required: true
+        - unless @page.new_record?
+          - if @page.route?
+            = f.text_field :slug
+          - if @page.can_be_nested?
+            = f.select :parent_page_id, current_store.pages.where.not(id: @page).acceptable_parent.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize'}
+          - if @page.can_have_albums?
+            = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
+          - if @page.needs_content?
+            = f.form_group do
+              = f.check_box :wysiwyg
+            - unless @page.new_record?
+              - if @page.wysiwyg?
+                = f.hidden_field :content
+              - else
+                = f.text_area :content, rows: 20, class: 'monospace input-sm'
 
       %fieldset.actions
         = f.form_group do
