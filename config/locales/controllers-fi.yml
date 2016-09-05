@@ -27,6 +27,13 @@ fi:
     images:
       create:
         error: "Kuvan lisääminen epäonnistui."
+    inventories:
+      create:
+        notice: "Varasto %{inventory} luotu."
+      update:
+        notice: "Varasto %{inventory} päivitetty."
+      destroy:
+        notice: "Varasto %{inventory} poistettu."
     orders:
       create:
         notice: "Tilaus %{order} luotu."

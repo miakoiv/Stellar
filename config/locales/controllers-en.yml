@@ -27,6 +27,13 @@ en:
     images:
       create:
         error: "Image upload failed."
+    inventories:
+      create:
+        notice: "Inventory %{inventory} created."
+      update:
+        notice: "Inventory %{inventory} updated."
+      destroy:
+        notice: "Inventory %{inventory} deleted."
     orders:
       create:
         notice: "Order %{order} created."

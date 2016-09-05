@@ -1,0 +1,13 @@
+= bootstrap_form_for [:admin, @inventory], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :name, required: true
+        = f.select :purpose, Inventory.purpose_options, {}, {class: 'selectize'}
+        = f.form_group do
+          = f.check_box :fuzzy
+      - unless locked
+        %fieldset.actions
+          = f.form_group do
+            = f.primary

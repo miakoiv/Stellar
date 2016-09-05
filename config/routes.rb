@@ -120,6 +120,7 @@ Rails.application.routes.draw do
       resources :asset_entries, shallow: true
     end
     resources :pricing_groups
+    resources :inventories
 
     post '/images/reorder', to: 'images#reorder', as: :reorder_images
     post '/images/delete', to: 'images#delete', as: :delete_image

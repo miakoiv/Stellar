@@ -128,6 +128,8 @@ fi:
         link: Linkki
       inventory:
         name: Nimi
+        purpose: Tarkoitus
+        fuzzy: Epätarkat saldot
       inventory_item:
         inventory_id: Varasto
         code: Tuotekoodi

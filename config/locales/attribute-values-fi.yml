@@ -7,6 +7,10 @@ fi:
           technical: tekninen
           document: dokumentti
           vector: vektorikuva
+      inventory:
+        purpose:
+          manufacturing: valmistus
+          shipping: toimitus
       page:
         purpose:
           route: Reitityspiste

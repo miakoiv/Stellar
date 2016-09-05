@@ -128,6 +128,8 @@ en:
         link: Link
       inventory:
         name: Name
+        purpose: Purpose
+        fuzzy: Approximate quantities
       inventory_item:
         inventory_id: Inventory
         code: Product code

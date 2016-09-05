@@ -1,0 +1,34 @@
+.page-header
+  - if current_user.can_create?(Inventory)
+    = link_to new_admin_inventory_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_inventory'))
+  %h1= icon('cubes', title(Inventory, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-6= col(Inventory, :name)
+        %th.col-xs-2= col(Inventory, :purpose)
+        %th.col-min
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @inventories do |inventory|
+        %td= inventory.name
+        %td= inventory.human_attribute_value(:purpose)
+        %td
+          - if inventory.fuzzy?
+            = icon('low-vision', title: col(Inventory, :fuzzy), data: {toggle: 'tooltip'})
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(Inventory)
+            = link_to icon('edit', t('actions.edit')), edit_admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(Inventory)
+            = link_to icon('remove', t('actions.delete')), admin_inventory_path(inventory),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: Inventory.model_name.human, name: inventory.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}

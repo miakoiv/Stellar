@@ -1,0 +1,11 @@
+.page-header
+  = link_to admin_inventories_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(PricingGroup)
+    = link_to edit_admin_inventory_path(@inventory), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1= icon('cubes', @inventory)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: true}

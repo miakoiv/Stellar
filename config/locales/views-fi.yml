@@ -51,6 +51,11 @@ fi:
         new_department: Uusi osasto
       new:
         new_department: Uusi osasto
+    inventories:
+      index:
+        new_inventory: Uusi varasto
+      new:
+        new_inventory: Uusi varasto
     orders:
       show:
         forward: Välitä ostoskoriin

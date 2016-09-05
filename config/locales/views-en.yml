@@ -71,6 +71,11 @@ en:
         new_department: New department
       new:
         new_department: New department
+    inventories:
+      index:
+        new_inventory: New inventory
+      new:
+        new_inventory: New inventory
     orders:
       show:
         forward: Forward to cart
