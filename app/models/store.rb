@@ -51,8 +51,7 @@ class Store < ActiveRecord::Base
   end
   accepts_nested_attributes_for :users, limit: 1
 
-  # Inventories may be shared between stores.
-  has_and_belongs_to_many :inventories
+  has_many :inventories, dependent: :destroy
   has_many :order_types, through: :inventories
 
   scope :all_except, -> (this) { where.not(id: this) }
