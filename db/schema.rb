@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818130252) do
+ActiveRecord::Schema.define(version: 20160905121712) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -200,12 +200,15 @@ ActiveRecord::Schema.define(version: 20160818130252) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
+    t.integer  "store_id",   limit: 4
     t.integer  "purpose",    limit: 4,   default: 0,     null: false
     t.boolean  "fuzzy",                  default: false, null: false
     t.string   "name",       limit: 255
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end
+
+  add_index "inventories", ["store_id"], name: "index_inventories_on_store_id", using: :btree
 
   create_table "inventories_stores", id: false, force: :cascade do |t|
     t.integer "store_id",     limit: 4, null: false
