@@ -1,7 +1,7 @@
 - price = product.price(current_pricing)
 - unit_price = product.unit_price(product.price_cents(current_pricing))
 
-- if price.present?
+- if can_see_pricing? && price.present?
   %p.price.currency
     = icon('tag', humanized_money_with_symbol(price))
     - if current_store.b2b_sales?
@@ -11,4 +11,4 @@
         = unit_price_string(unit_price, product.base_unit)
   - if product.best_promoted_item.present?
     %p.retail-price.currency
-      = icon('tag', humanized_money_with_symbol(product.retail_price))
+      = humanized_money_with_symbol(product.retail_price)

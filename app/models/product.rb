@@ -229,18 +229,15 @@ class Product < ActiveRecord::Base
     100 * (retail_price - trade_price) / retail_price
   end
 
-  # Gathers product stock to a hash keyed by inventory.
-  # Values are inventory items.
-  def stock
-    inventory_items.group_by(&:inventory)
-      .map { |inventory, items| [inventory, items.first] }.to_h
+  # Sum of stock in shipping inventories.
+  def shipping_stock
+    inventory_items.shipping.pluck(:amount).compact.sum
   end
 
-  # Product is considered available when it's live. In reality,
-  # stock should be consulted here, but we don't exactly know
-  # which inventory would apply.
+  # Product is considered available when it's live and has shipping inventory,
+  # or in case of no inventory, has a defined lead time.
   def available?
-    live?
+    live? && (lead_time.present? || shipping_stock > 0)
   end
 
   def master_product_options

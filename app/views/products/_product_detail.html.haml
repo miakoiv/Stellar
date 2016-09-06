@@ -18,20 +18,18 @@
           = icon('barcode', product.customer_code, class: 'fa-lg')
         = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
-      - if can_see_pricing? && can_shop? && may_shop_at?(@category)
-        .buy-now
-          .product-pricing
-            = render partial: 'products/pricing', object: product, as: :product
-          = render partial: 'products/buy_now', object: product, as: :product
-          = render partial: 'store/go_checkout'
+      .buy-now
+        .product-pricing
+          = render partial: 'products/pricing', object: product, as: :product
+        = render partial: 'products/buy_now', object: product, as: :product
+        = render partial: 'store/go_checkout'
 
       - if product.variant?
         .variant-products
           = render partial: 'products/variants_dropdown', object: product, as: :product
 
-      - if can_see_stock?
-        .product-stock
-          = product_stock_string(product.stock)
+      .product-stock
+        = render partial: 'products/stock', object: product, as: :product
 
     .product-description
       .body-text><= product.description.html_safe if product.description.present?

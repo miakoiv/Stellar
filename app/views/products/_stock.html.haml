@@ -1,0 +1,9 @@
+- if can_see_stock?
+  %ul
+    - product.inventory_items.each do |item|
+      %li{class: item.appearance}
+        %span
+          = item.amount || 0
+          - if item.adjustment != 0
+            = sprintf "(%+i)", item.adjustment
+        = item.title

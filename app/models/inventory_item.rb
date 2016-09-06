@@ -11,6 +11,10 @@ class InventoryItem < ActiveRecord::Base
   belongs_to :product
 
   default_scope { order(:inventory_id) }
+
+  scope :manufacturing, -> { joins(:inventory).merge(Inventory.manufacturing) }
+  scope :shipping, -> { joins(:inventory).merge(Inventory.shipping) }
+
   scope :for_products, -> (products) {
     joins(:product).where('products.id IN (?)', products.pluck(:id))
   }
@@ -33,7 +37,11 @@ class InventoryItem < ActiveRecord::Base
     amount * value_cents
   end
 
-  # Inventory item HTML representation methods.
-  def title; inventory.name; end
-  def klass; inventory.purpose; end
+  def title
+    inventory.name
+  end
+
+  def appearance
+    inventory.purpose
+  end
 end
