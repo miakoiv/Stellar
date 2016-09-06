@@ -1,5 +1,7 @@
 = content_tag_for :tr, order_item, class: order_item.live? ? '' : 'warning text-warning' do
   %td
+    - if !order_item.product.available?
+      = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
     %strong
       - if order_item.real? && order_item.live?
         = link_to order_item.product_title, show_product_path(order_item.product.category, order_item.product)
@@ -13,14 +15,10 @@
         = order_item.product.shipping_notes
   %td.no-wrap
     - if order_item.real?
-      - if order_item.live?
-        = order_item.product_code
-      - else
-        = icon('warning', order_item.product_code, data: {toggle: 'tooltip'}, title: col(Product, :not_live))
+      = order_item.product_code
   %td
     - if order_item.real?
-      = form_for order_item, remote: true,
-          html: {class: 'pull-right immediate'} do |f|
+      = form_for order_item, remote: true, html: {class: 'pull-right immediate'} do |f|
         = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
   %td.text-right.currency
     - if order_item.real?
@@ -29,8 +27,7 @@
     = humanized_money_with_symbol order_item.subtotal
   %td.actions
     - if order_item.real?
-      = link_to icon('remove'), order_item_path(order_item),
-          remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+      = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
   = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment
