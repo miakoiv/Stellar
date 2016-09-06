@@ -62,7 +62,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Authority::Abilities</span>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -71,6 +82,8 @@
   <ul class="link-list" role="directory">
     
     <li ><a href="#method-c-by_purpose">::by_purpose</a>
+    
+    <li ><a href="#method-c-purpose_options">::purpose_options</a>
     
     <li ><a href="#method-i-stock">#stock</a>
     
@@ -129,9 +142,42 @@
 
           
           <div class="method-source-code" id="by_purpose-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">by_purpose</span>(<span class="ruby-identifier">purpose</span>)
   <span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-identifier">purposes</span>[<span class="ruby-identifier">purpose</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-purpose_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">purpose_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="purpose_options-source">
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
+  <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -170,7 +216,7 @@
 
           
           <div class="method-source-code" id="stock-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stock</span>
   <span class="ruby-identifier">items</span> = <span class="ruby-identifier">inventory_items</span>
   [<span class="ruby-identifier">items</span>, <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>).<span class="ruby-identifier">sum</span>]
@@ -204,7 +250,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>

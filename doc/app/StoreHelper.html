@@ -63,7 +63,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-product_stock_string">#product_stock_string</a>
+    <li ><a href="#method-i-humanized_money_range">#humanized_money_range</a>
     
     <li ><a href="#method-i-property_string">#property_string</a>
     
@@ -103,11 +103,11 @@
        </header>
 
     
-      <div id="method-i-product_stock_string" class="method-detail ">
+      <div id="method-i-humanized_money_range" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">product_stock_string</span><span
-            class="method-args">(hash)</span>
+          <span class="method-name">humanized_money_range</span><span
+            class="method-args">(range)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -116,21 +116,20 @@
 
         <div class="method-description">
           
-          <p>Pretty-prints a hash from <a
-href="Product.html#method-i-stock">Product#stock</a>.</p>
+          
           
           
 
           
-          <div class="method-source-code" id="product_stock_string-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 9</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">product_stock_string</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">title</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tooltip&#39;</span>}) <span class="ruby-keyword">do</span>
-      <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">adjustment</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span>
-        <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%i(%+i)&quot;</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">adjustment</span>))
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">html_safe</span>
+          <div class="method-source-code" id="humanized_money_range-source">
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">humanized_money_range</span>(<span class="ruby-identifier">range</span>)
+  <span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span> = <span class="ruby-identifier">range</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">min</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">max</span>
+    <span class="ruby-identifier">humanized_money_with_symbol</span> <span class="ruby-identifier">min</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-node">&quot;#{humanized_money_with_symbol min} – #{humanized_money_with_symbol max}&quot;</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -161,7 +160,7 @@ href="Product.html#method-i-stock">Product#stock</a>.</p>
 
           
           <div class="method-source-code" id="property_string-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">property_string</span>(<span class="ruby-identifier">product_properties</span>)
   <span class="ruby-identifier">product_properties</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pp</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">pp</span>.<span class="ruby-identifier">value</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;label label-default&#39;</span>)

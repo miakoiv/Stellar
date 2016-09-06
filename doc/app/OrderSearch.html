@@ -89,9 +89,7 @@
     
     <li ><a href="#method-i-search_group">#search_group</a>
     
-    <li ><a href="#method-i-search_manager_id">#search_manager_id</a>
-    
-    <li ><a href="#method-i-search_order_type">#search_order_type</a>
+    <li ><a href="#method-i-search_order_type_id">#search_order_type_id</a>
     
     <li ><a href="#method-i-search_store_id">#search_store_id</a>
     
@@ -154,7 +152,7 @@
           <div class="method-source-code" id="base_query-source">
             <pre><span class="ruby-comment"># File app/models/order_search.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
-  <span class="ruby-constant">Order</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:order_type</span>, <span class="ruby-value">:user</span>).<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>)
+  <span class="ruby-constant">Order</span>.<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -185,7 +183,7 @@
 
           
           <div class="method-source-code" id="search_customer-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_customer</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;customer_name LIKE ?&#39;</span>, <span class="ruby-node">&quot;%#{customer}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -218,7 +216,7 @@
 
           
           <div class="method-source-code" id="search_date-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_date</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;DATE(completed_at) = ?&#39;</span>, <span class="ruby-identifier">date</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -265,45 +263,10 @@
       </div>
 
     
-      <div id="method-i-search_manager_id" class="method-detail ">
+      <div id="method-i-search_order_type_id" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">search_manager_id</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Manager id restricts the search on orders that may be managed by her.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="search_manager_id-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_manager_id</span>
-  <span class="ruby-identifier">order_types</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">manager_id</span>).<span class="ruby-identifier">managed_order_types</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Order</span>.<span class="ruby-identifier">none</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_type_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_types</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-search_order_type" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">search_order_type</span><span
+          <span class="method-name">search_order_type_id</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -318,10 +281,10 @@
           
 
           
-          <div class="method-source-code" id="search_order_type-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_order_type</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_type_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>)
+          <div class="method-source-code" id="search_order_type_id-source">
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_order_type_id</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_type_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_type_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -385,7 +348,7 @@
 
           
           <div class="method-source-code" id="search_summary-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_summary</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, company_name, contact_person, shipping_city) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{summary}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>

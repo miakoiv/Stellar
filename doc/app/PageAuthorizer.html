@@ -170,9 +170,13 @@
 
           
           <div class="method-source-code" id="deletable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/page_authorizer.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/authorizers/page_authorizer.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">route?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:superuser</span> <span class="ruby-operator">:</span> <span class="ruby-value">:page_editor</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">route?</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:page_editor</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -205,7 +209,11 @@
           <div class="method-source-code" id="updatable_by-3F-source">
             <pre><span class="ruby-comment"># File app/authorizers/page_authorizer.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-identifier">resource</span>.<span class="ruby-identifier">route?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:superuser</span> <span class="ruby-operator">:</span> <span class="ruby-value">:page_editor</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">route?</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:page_editor</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

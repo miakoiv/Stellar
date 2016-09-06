@@ -170,9 +170,9 @@
 
           
           <div class="method-source-code" id="deletable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_editor</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -205,7 +205,8 @@
           <div class="method-source-code" id="readable_by-3F-source">
             <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">readable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_editor</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_review</span>) <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -236,9 +237,9 @@
 
           
           <div class="method-source-code" id="updatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_editor</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -277,7 +278,7 @@
 
           
           <div class="method-source-code" id="deletable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">approved?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -310,9 +311,9 @@
 
           
           <div class="method-source-code" id="readable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">readable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_editor</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">user</span>
+  <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">user</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -343,7 +344,7 @@
 
           
           <div class="method-source-code" id="updatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/authorizers/order_authorizer.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">approved?</span>
 <span class="ruby-keyword">end</span></pre>

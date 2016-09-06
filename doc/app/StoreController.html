@@ -149,7 +149,7 @@
 
           
           <div class="method-source-code" id="cart-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cart</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">shopping_cart</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">store_path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">empty?</span>
@@ -221,7 +221,7 @@
 
           
           <div class="method-source-code" id="delete_cart-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_cart</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">shopping_cart</span>
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">destroy</span>
@@ -257,10 +257,14 @@
 
           
           <div class="method-source-code" id="front-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">front</span>
-  <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">sorted</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:having_products</span>)
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>) <span class="ruby-operator">:</span> []
+  <span class="ruby-ivar">@category</span> = <span class="ruby-ivar">@categories</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:having_products</span>)
+  <span class="ruby-ivar">@products</span> = <span class="ruby-keyword">if</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">display_products</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Product</span>.<span class="ruby-identifier">none</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -291,7 +295,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">show_page_path</span>(<span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">front_path</span>
 <span class="ruby-keyword">end</span></pre>
@@ -324,7 +328,7 @@
 
           
           <div class="method-source-code" id="lookup-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lookup</span>
   <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:product_search</span>]
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ProductSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
@@ -355,16 +359,16 @@
 
         <div class="method-description">
           
-          <p>POST /product/1/order</p>
+          <p>POST /product/:product_id/order</p>
           
           
 
           
           <div class="method-source-code" id="order_product-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 92</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_product</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">shopping_cart</span>
-  <span class="ruby-ivar">@product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">friendly</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
+  <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">friendly</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
   <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:amount</span>].<span class="ruby-identifier">to_i</span>
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-ivar">@product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">current_pricing</span>)
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
@@ -400,7 +404,7 @@
 
           
           <div class="method-source-code" id="pricing-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pricing</span>
   <span class="ruby-identifier">pricing_group_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:pricing_group_id</span>]
   <span class="ruby-identifier">cookies</span>[<span class="ruby-value">:pricing_group_id</span>] = <span class="ruby-identifier">pricing_group_id</span>
@@ -439,7 +443,7 @@
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
   <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;product&#39;</span>, <span class="ruby-string">&#39;product_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ProductSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
@@ -477,9 +481,9 @@
 
           
           <div class="method-source-code" id="show_category-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 83</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_category</span>
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
+  <span class="ruby-ivar">@products</span> = <span class="ruby-identifier">display_products</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -510,7 +514,7 @@
 
           
           <div class="method-source-code" id="show_page-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_page</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -542,7 +546,7 @@
 
           
           <div class="method-source-code" id="show_product-source">
-            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 88</span>
+            <pre><span class="ruby-comment"># File app/controllers/store_controller.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show_product</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

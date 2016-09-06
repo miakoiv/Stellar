@@ -109,6 +109,8 @@
     
     <li ><a href="#method-i-billing_address_components">#billing_address_components</a>
     
+    <li ><a href="#method-i-cancelled-3F">#cancelled?</a>
+    
     <li ><a href="#method-i-checkoutable-3F">#checkoutable?</a>
     
     <li ><a href="#method-i-complete">#complete</a>
@@ -123,7 +125,13 @@
     
     <li ><a href="#method-i-conclusion-3D">#conclusion=</a>
     
+    <li ><a href="#method-i-contact_string">#contact_string</a>
+    
     <li ><a href="#method-i-copy_items_to">#copy_items_to</a>
+    
+    <li ><a href="#method-i-earliest_shipping_at">#earliest_shipping_at</a>
+    
+    <li ><a href="#method-i-editable_items-3F">#editable_items?</a>
     
     <li ><a href="#method-i-empty-3F">#empty?</a>
     
@@ -139,9 +147,17 @@
     
     <li ><a href="#method-i-insert">#insert</a>
     
+    <li ><a href="#method-i-insert_components">#insert_components</a>
+    
     <li ><a href="#method-i-insert_order_item">#insert_order_item</a>
     
-    <li ><a href="#method-i-managing_users">#managing_users</a>
+    <li ><a href="#method-i-insert_single">#insert_single</a>
+    
+    <li ><a href="#method-i-items_by_vendor">#items_by_vendor</a>
+    
+    <li ><a href="#method-i-lead_time">#lead_time</a>
+    
+    <li ><a href="#method-i-notified_users">#notified_users</a>
     
     <li ><a href="#method-i-order_type_name">#order_type_name</a>
     
@@ -157,9 +173,9 @@
     
     <li ><a href="#method-i-recalculate-21">#recalculate!</a>
     
-    <li ><a href="#method-i-reveal_components-3F">#reveal_components?</a>
+    <li ><a href="#method-i-send_confirmation-3F">#send_confirmation?</a>
     
-    <li ><a href="#method-i-reveal_prices-3F">#reveal_prices?</a>
+    <li ><a href="#method-i-send_confirmations">#send_confirmations</a>
     
     <li ><a href="#method-i-summary">#summary</a>
     
@@ -243,7 +259,7 @@
 
           
           <div class="method-source-code" id="address_to-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 307</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 372</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">address_to</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">shipping_address</span>.<span class="ruby-identifier">present?</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shipping_address</span> = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">shipping_address</span>
@@ -288,7 +304,7 @@
 
           
           <div class="method-source-code" id="adjustment_total_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 341</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 406</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustment_total_cents</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount_cents</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -322,13 +338,13 @@ Returns a hash of quantities keyed by product object.</p>
 
           
           <div class="method-source-code" id="aggregated_components-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 265</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 317</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">aggregated_components</span>
   <span class="ruby-identifier">aggregated</span> = {}.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aggregated</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">relationship</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">aggregated</span>[<span class="ruby-identifier">relationship</span>.<span class="ruby-identifier">component</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
-        <span class="ruby-identifier">aggregated</span>[<span class="ruby-identifier">relationship</span>.<span class="ruby-identifier">component</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">relationship</span>.<span class="ruby-identifier">quantity</span>
+      <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">component_entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">aggregated</span>[<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">component</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">aggregated</span>[<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">component</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">quantity</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -362,7 +378,7 @@ Returns a hash of quantities keyed by product object.</p>
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 372</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 433</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">concluded?</span>
   <span class="ruby-identifier">approved?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;warning text-warning&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;danger text-danger&#39;</span>
@@ -397,7 +413,7 @@ adjustments from the order and its items.</p>
 
           
           <div class="method-source-code" id="apply_promotions-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 245</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 281</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apply_promotions!</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">destroy_all</span>
   <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">destroy_all</span> }
@@ -436,7 +452,7 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="apply_shipping_cost-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 230</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apply_shipping_cost!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">shipping_cost_product</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">item</span> = <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">create_with</span>(
@@ -478,7 +494,7 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="approval-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">approval</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">approved_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -515,7 +531,7 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="approval-3D-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">approval=</span>(<span class="ruby-identifier">status</span>)
   <span class="ruby-keyword">if</span> [<span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-value">1</span>, <span class="ruby-keyword">true</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">status</span>)
     <span class="ruby-identifier">update</span>(<span class="ruby-identifier">approved_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">approved?</span>
@@ -585,7 +601,7 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="as_json-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 383</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 444</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:paid</span>, <span class="ruby-value">:complete</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -618,7 +634,7 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="balance_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 345</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 410</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">balance_cents</span>
   <span class="ruby-identifier">grand_total_cents</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">payments</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount_cents</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -651,11 +667,44 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="billing_address_components-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 323</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 388</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">billing_address_components</span>
   <span class="ruby-identifier">has_billing_address?</span> <span class="ruby-operator">?</span>
     [<span class="ruby-identifier">billing_address</span>, <span class="ruby-identifier">billing_postalcode</span>, <span class="ruby-identifier">billing_city</span>] <span class="ruby-operator">:</span>
     [<span class="ruby-identifier">shipping_address</span>, <span class="ruby-identifier">shipping_postalcode</span>, <span class="ruby-identifier">shipping_city</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-cancelled-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cancelled?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cancelled-3F-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 367</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancelled?</span>
+  <span class="ruby-identifier">cancelled_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -686,10 +735,10 @@ cost is an order item referencing a virtual product defined by the store.</p>
 
           
           <div class="method-source-code" id="checkoutable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 287</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkoutable?</span>
-  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:product</span>).<span class="ruby-identifier">real</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">available?</span>
+  <span class="ruby-identifier">products</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">available?</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
@@ -751,7 +800,7 @@ the sequence in the store.</p>
 
           
           <div class="method-source-code" id="complete-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 256</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 292</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete!</span>
   <span class="ruby-constant">Order</span>.<span class="ruby-identifier">with_advisory_lock</span>(<span class="ruby-string">&#39;order_numbering&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">current_max</span> = <span class="ruby-identifier">store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">maximum</span>(<span class="ruby-value">:number</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_sequence</span>
@@ -787,7 +836,7 @@ the sequence in the store.</p>
 
           
           <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 301</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 362</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
   <span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -852,7 +901,7 @@ the sequence in the store.</p>
 
           
           <div class="method-source-code" id="conclusion-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 108</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conclusion</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">concluded_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -890,7 +939,7 @@ item, an asset entry is created.</p>
 
           
           <div class="method-source-code" id="conclusion-3D-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 115</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conclusion=</span>(<span class="ruby-identifier">status</span>)
   <span class="ruby-keyword">if</span> [<span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-value">1</span>, <span class="ruby-keyword">true</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">status</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">concluded?</span>
@@ -901,6 +950,39 @@ item, an asset entry is created.</p>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">update</span>(<span class="ruby-identifier">concluded_at</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-contact_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">contact_string</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="contact_string-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">contact_string</span>
+  <span class="ruby-identifier">contact_person</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">contact_email</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{contact_person} &lt;#{contact_email}&gt;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -933,10 +1015,10 @@ items.</p>
 
           
           <div class="method-source-code" id="copy_items_to-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 161</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">copy_items_to</span>(<span class="ruby-identifier">another_order</span>)
   <span class="ruby-identifier">failed_items</span> = []
-  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:product</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">product</span> = <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product</span>
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">virtual?</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">live?</span>
@@ -946,6 +1028,72 @@ items.</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">failed_items</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-earliest_shipping_at" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">earliest_shipping_at</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="earliest_shipping_at-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 333</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">earliest_shipping_at</span>
+   (<span class="ruby-identifier">completed_at</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>).<span class="ruby-identifier">to_date</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">lead_time</span>.<span class="ruby-identifier">days</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-editable_items-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">editable_items?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Allow adding and editing order items on quotations only.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="editable_items-3F-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">editable_items?</span>
+  <span class="ruby-identifier">is_quote?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -970,15 +1118,15 @@ items.</p>
 
         <div class="method-description">
           
-          <p>An order is empty when it&#39;s empty of non-virtual items.</p>
+          <p>An order is empty when it&#39;s empty of real products.</p>
           
           
 
           
           <div class="method-source-code" id="empty-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 277</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 338</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">products</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1012,14 +1160,17 @@ above.</p>
 
           
           <div class="method-source-code" id="forward_to-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward_to</span>(<span class="ruby-identifier">another_order</span>)
   <span class="ruby-identifier">another_order</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">destroy_all</span>
   <span class="ruby-identifier">failed_items</span> = <span class="ruby-identifier">copy_items_to</span>(<span class="ruby-identifier">another_order</span>)
   <span class="ruby-identifier">another_order</span>.<span class="ruby-identifier">update</span>(
-    <span class="ruby-identifier">contact_person</span><span class="ruby-operator">:</span> <span class="ruby-identifier">customer_name</span>,
-    <span class="ruby-identifier">contact_email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">customer_email</span>,
-    <span class="ruby-identifier">contact_phone</span><span class="ruby-operator">:</span> <span class="ruby-identifier">customer_phone</span>,
+    <span class="ruby-identifier">shipping_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">shipping_at</span>,
+    <span class="ruby-identifier">installation_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">installation_at</span>,
+    <span class="ruby-identifier">company_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">company_name</span>,
+    <span class="ruby-identifier">contact_person</span><span class="ruby-operator">:</span> <span class="ruby-identifier">contact_person</span>,
+    <span class="ruby-identifier">contact_email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">contact_email</span>,
+    <span class="ruby-identifier">contact_phone</span><span class="ruby-operator">:</span> <span class="ruby-identifier">contact_phone</span>,
     <span class="ruby-identifier">has_billing_address</span><span class="ruby-operator">:</span> <span class="ruby-identifier">has_billing_address</span>,
     <span class="ruby-identifier">billing_address</span><span class="ruby-operator">:</span> <span class="ruby-identifier">billing_address</span>,
     <span class="ruby-identifier">billing_postalcode</span><span class="ruby-operator">:</span> <span class="ruby-identifier">billing_postalcode</span>,
@@ -1062,11 +1213,9 @@ above.</p>
 
           
           <div class="method-source-code" id="grand_total_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 357</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 420</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_cents</span>
-  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{cache_key}/grand_total_cents&quot;</span>) <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">subtotal_cents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">adjustment_total_cents</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustment_total_cents</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">subtotal_cents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">adjustment_total_cents</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustment_total_cents</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1097,7 +1246,7 @@ above.</p>
 
           
           <div class="method-source-code" id="has_payment-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 333</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 398</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_payment?</span>
   <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">has_payment?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1130,7 +1279,7 @@ above.</p>
 
           
           <div class="method-source-code" id="has_shipping-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 329</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 394</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_shipping?</span>
   <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">has_shipping?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1163,7 +1312,7 @@ above.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 378</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 439</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">concluded?</span>
   <span class="ruby-identifier">approved?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;cog&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;warning&#39;</span>
@@ -1182,7 +1331,7 @@ above.</p>
         
         <div class="method-heading">
           <span class="method-name">insert</span><span
-            class="method-args">(product, amount, pricing_group = nil)</span>
+            class="method-args">(product, amount, pricing = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -1192,29 +1341,56 @@ above.</p>
         <div class="method-description">
           
           <p>Inserts amount of product to this order in the context of given pricing
-group. If the product is a compound, its immediate components are inserted
-instead. Pricing is initially for retail. Depending on the user&#39;s
-group, different pricing may be applied at checkout by <a
+group. Bundles are inserted as components right away. Pricing is initially
+for retail. Depending on the user&#39;s group, different pricing may be
+applied at checkout by <a
 href="Order.html#method-i-reappraise-21">#reappraise!</a></p>
           
           
 
           
           <div class="method-source-code" id="insert-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing_group</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">compound?</span>
-    <span class="ruby-identifier">product</span>.<span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">relationship</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">relationship</span>.<span class="ruby-identifier">component</span>, <span class="ruby-identifier">relationship</span>.<span class="ruby-identifier">quantity</span>)
-    <span class="ruby-keyword">end</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">bundle?</span>
+    <span class="ruby-identifier">insert_components</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span>)
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">order_item</span> = <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">create_with</span>(
-      <span class="ruby-identifier">amount</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
-      <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_items_count</span>
-    ).<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>)
-    <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">amount</span>
-    <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">price</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price</span>(<span class="ruby-identifier">pricing_group</span>)
-    <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">save!</span>
+    <span class="ruby-identifier">insert_single</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span>, <span class="ruby-identifier">product</span>.<span class="ruby-identifier">composite?</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-insert_components" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">insert_components</span><span
+            class="method-args">(product, amount, pricing)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Inserts the component products of given product to this order.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="insert_components-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_components</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span>)
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">component_entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">insert</span>(<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">component</span>, <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">quantity</span>, <span class="ruby-identifier">pricing</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1247,7 +1423,7 @@ copying order items from another order.</p>
 
           
           <div class="method-source-code" id="insert_order_item-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 149</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_order_item</span>(<span class="ruby-identifier">item</span>)
   <span class="ruby-identifier">order_item</span> = <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">create_with</span>(
     <span class="ruby-identifier">amount</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
@@ -1267,10 +1443,57 @@ copying order items from another order.</p>
       </div>
 
     
-      <div id="method-i-managing_users" class="method-detail ">
+      <div id="method-i-insert_single" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">managing_users</span><span
+          <span class="method-name">insert_single</span><span
+            class="method-args">(product, amount, pricing, separate_components)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Inserts a single product to this order, optionally with separate components
+that are deducted from the price of this product.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="insert_single-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_single</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span>, <span class="ruby-identifier">separate_components</span>)
+  <span class="ruby-identifier">price_cents</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price_cents</span>(<span class="ruby-identifier">pricing</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">separate_components</span>
+    <span class="ruby-identifier">price_cents</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">component_total_price_cents</span>(<span class="ruby-identifier">pricing</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">order_item</span> = <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">create_with</span>(
+    <span class="ruby-identifier">amount</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
+    <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_items_count</span>
+  ).<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>)
+  <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">price_cents</span> = <span class="ruby-identifier">price_cents</span>
+  <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">separate_components</span>
+    <span class="ruby-identifier">insert_components</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-identifier">pricing</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-items_by_vendor" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">items_by_vendor</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -1280,16 +1503,81 @@ copying order items from another order.</p>
 
         <div class="method-description">
           
-          <p>Users who may manage this order are order editors in the group defined as
-the destination group for this order type.</p>
+          <p>Coalesces items in this order into a hash by product vendor.</p>
           
           
 
           
-          <div class="method-source-code" id="managing_users-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">managing_users</span>
-  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">destination_group</span>).<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_editor</span>)
+          <div class="method-source-code" id="items_by_vendor-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">items_by_vendor</span>
+  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-value">:vendor</span>).<span class="ruby-identifier">group_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">vendor</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lead_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lead_time</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the lead time for this order based on the contained products.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="lead_time-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lead_time</span>
+  <span class="ruby-identifier">products</span>.<span class="ruby-identifier">maximum</span>(<span class="ruby-value">:lead_time</span>) <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-notified_users" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">notified_users</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Notify users with order_notify role in the destination group.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="notified_users-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">notified_users</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">destination_group</span>).<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_notify</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1320,9 +1608,9 @@ the destination group for this order type.</p>
 
           
           <div class="method-source-code" id="order_type_name-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_type_name</span>
-  <span class="ruby-identifier">approved?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>[<span class="ruby-value">:order_type_name</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">concluded?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>[<span class="ruby-value">:order_type_name</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1382,9 +1670,9 @@ balance reaches zero.</p>
 
           
           <div class="method-source-code" id="paid-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 296</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 357</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">paid?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">has_payment?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">balance</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">has_payment?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">balance_cents</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1419,7 +1707,7 @@ balance reaches zero.</p>
 
           
           <div class="method-source-code" id="payment_gateway-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 337</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 402</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">payment_gateway</span>
   <span class="ruby-node">&quot;PaymentGateway::#{order_type.payment_gateway}&quot;</span>.<span class="ruby-identifier">constantize</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1452,7 +1740,7 @@ balance reaches zero.</p>
 
           
           <div class="method-source-code" id="quotable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 282</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 343</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">quotable?</span>
   <span class="ruby-identifier">is_quote?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">contact_email</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1487,10 +1775,10 @@ specify user specific pricing to be applied.</p>
 
           
           <div class="method-source-code" id="reappraise-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 202</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 238</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reappraise!</span>(<span class="ruby-identifier">pricing_group</span>)
   <span class="ruby-identifier">trade_prices</span> = <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">is_quote?</span>
-  <span class="ruby-identifier">order_items</span>(<span class="ruby-identifier">includes</span><span class="ruby-operator">:</span> <span class="ruby-value">:product</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">order_item</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">trade_prices</span>
       <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">update</span>(
         <span class="ruby-identifier">price</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">price_for</span>(<span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product</span>, <span class="ruby-identifier">pricing_group</span>),
@@ -1534,7 +1822,7 @@ when the contents of the order have changed.</p>
 
           
           <div class="method-source-code" id="recalculate-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 221</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">recalculate!</span>
   <span class="ruby-identifier">apply_shipping_cost!</span>
   <span class="ruby-identifier">apply_promotions!</span>
@@ -1550,10 +1838,10 @@ when the contents of the order have changed.</p>
       </div>
 
     
-      <div id="method-i-reveal_components-3F" class="method-detail ">
+      <div id="method-i-send_confirmation-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">reveal_components?</span><span
+          <span class="method-name">send_confirmation?</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -1563,15 +1851,15 @@ when the contents of the order have changed.</p>
 
         <div class="method-description">
           
-          <p>Only show product components for non-RFQs.</p>
+          <p>Confirmation mail is not sent for quotations.</p>
           
           
 
           
-          <div class="method-source-code" id="reveal_components-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 85</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">reveal_components?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">is_rfq?</span>
+          <div class="method-source-code" id="send_confirmation-3F-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_confirmation?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">is_quote?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1583,10 +1871,10 @@ when the contents of the order have changed.</p>
       </div>
 
     
-      <div id="method-i-reveal_prices-3F" class="method-detail ">
+      <div id="method-i-send_confirmations" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">reveal_prices?</span><span
+          <span class="method-name">send_confirmations</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -1596,15 +1884,21 @@ when the contents of the order have changed.</p>
 
         <div class="method-description">
           
-          <p>Only show prices for RFQs.</p>
+          <p>Sends an order confirmation to the customer, possible contact person, and
+additional notifications to vendors if the order contains any of their
+products.</p>
           
           
 
           
-          <div class="method-source-code" id="reveal_prices-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">reveal_prices?</span>
-  <span class="ruby-identifier">is_rfq?</span>
+          <div class="method-source-code" id="send_confirmations-source">
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_confirmations</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">send_confirmation?</span>
+  <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">order_confirmation</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">deliver_later</span>
+  <span class="ruby-identifier">items_by_vendor</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">vendor</span>, <span class="ruby-identifier">items</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">vendor_notification</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">vendor</span>, <span class="ruby-identifier">items</span>).<span class="ruby-identifier">deliver_later</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1635,7 +1929,7 @@ when the contents of the order have changed.</p>
 
           
           <div class="method-source-code" id="summary-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 363</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 424</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">summary</span>
   [<span class="ruby-identifier">company_name</span>, <span class="ruby-identifier">contact_person</span>, <span class="ruby-identifier">shipping_city</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:empty?</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1668,7 +1962,7 @@ when the contents of the order have changed.</p>
 
           
           <div class="method-source-code" id="timeline_events-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 388</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 449</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">timeline_events</span>
   <span class="ruby-identifier">events</span> = []
 
@@ -1707,7 +2001,7 @@ when the contents of the order have changed.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 367</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 428</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">number</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1734,17 +2028,15 @@ when the contents of the order have changed.</p>
 
         <div class="method-description">
           
-          <p>Total sum without virtual items (like shipping and handling).</p>
+          <p>Total sum counting only real items (excluding shipping and handling).</p>
           
           
 
           
           <div class="method-source-code" id="total_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 350</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 415</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_cents</span>
-  <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-node">&quot;#{cache_key}/total_cents&quot;</span>) <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">subtotal_cents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">adjustment_total_cents</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustment_total_cents</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">subtotal_cents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">adjustment_total_cents</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustment_total_cents</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

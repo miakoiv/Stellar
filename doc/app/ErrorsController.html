@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActionController::Base
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
   
 </div>
 
@@ -69,8 +69,6 @@
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
-    <li ><a href="#method-i-current_store">#current_store</a>
     
     <li ><a href="#method-i-show">#show</a>
     
@@ -108,39 +106,6 @@
        </header>
 
     
-      <div id="method-i-current_store" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">current_store</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The application layout needs this.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="current_store-source">
-            <pre><span class="ruby-comment"># File app/controllers/errors_controller.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@current_store</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Store</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-show" class="method-detail ">
         
         <div class="method-heading">
@@ -160,7 +125,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/errors_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/errors_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@status_code</span> = (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/\d{3}/</span>) <span class="ruby-operator">||</span> [<span class="ruby-string">&#39;500&#39;</span>])[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>

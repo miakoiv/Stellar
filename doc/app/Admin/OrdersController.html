@@ -70,6 +70,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-add_products">#add_products</a>
+    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-edit">#edit</a>
@@ -79,6 +81,8 @@
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-quote">#quote</a>
     
     <li ><a href="#method-i-show">#show</a>
     
@@ -118,6 +122,48 @@
        </header>
 
     
+      <div id="method-i-add_products" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_products</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /admin/orders/1/add_products</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_products-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_products</span>
+  <span class="ruby-identifier">product_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>][<span class="ruby-value">:product_ids_string</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
+
+  <span class="ruby-identifier">product_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product_id</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">product_id</span>), <span class="ruby-value">1</span>, <span class="ruby-identifier">current_pricing</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-create" class="method-detail ">
         
         <div class="method-heading">
@@ -137,7 +183,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">order_params</span>)
 
@@ -181,7 +227,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -213,7 +259,7 @@
 
           
           <div class="method-source-code" id="forward-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>
   <span class="ruby-identifier">failed_items</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">forward_to</span>(<span class="ruby-identifier">shopping_cart</span>)
   <span class="ruby-identifier">shopping_cart</span>.<span class="ruby-identifier">reappraise!</span>(<span class="ruby-identifier">current_pricing</span>)
@@ -254,7 +300,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;admin_order_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
@@ -291,9 +337,43 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-quote" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">quote</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1/quote</p>
+          
+          
+
+          
+          <div class="method-source-code" id="quote-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">quote</span>
+  <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">quotation</span>(<span class="ruby-ivar">@order</span>).<span class="ruby-identifier">deliver_later</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_order_path</span>(<span class="ruby-ivar">@order</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -324,7 +404,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
@@ -360,7 +440,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_params</span>)

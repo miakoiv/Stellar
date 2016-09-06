@@ -70,8 +70,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-add_products">#add_products</a>
-    
     <li class="calls-super" ><a href="#method-i-current_user">#current_user</a>
     
     <li ><a href="#method-i-destroy">#destroy</a>
@@ -81,8 +79,6 @@
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
-    
-    <li ><a href="#method-i-quote">#quote</a>
     
     <li ><a href="#method-i-show">#show</a>
     
@@ -120,50 +116,6 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-add_products" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">add_products</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>POST /orders/1/add_products</p>
-          
-          
-
-          
-          <div class="method-source-code" id="add_products-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 93</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_products</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>
-
-  <span class="ruby-identifier">product_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>][<span class="ruby-value">:product_ids_string</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_i</span>)
-
-  <span class="ruby-identifier">product_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product_id</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">product_id</span>), <span class="ruby-value">1</span>, <span class="ruby-identifier">current_pricing</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-current_user" class="method-detail ">
@@ -227,7 +179,9 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>
 
-  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">cancelled_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>)
+  <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">order_cancellation</span>(<span class="ruby-ivar">@order</span>).<span class="ruby-identifier">deliver_later</span>
+
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">orders_path</span>,
       <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>) }
@@ -262,7 +216,7 @@
 
           
           <div class="method-source-code" id="duplicate-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>
 
@@ -356,42 +310,6 @@
       </div>
 
     
-      <div id="method-i-quote" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">quote</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /orders/1/quote</p>
-          
-          
-
-          
-          <div class="method-source-code" id="quote-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">quote</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>
-
-  <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">quotation</span>(<span class="ruby-ivar">@order</span>).<span class="ruby-identifier">deliver_later</span>
-  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">order_path</span>(<span class="ruby-ivar">@order</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-show" class="method-detail ">
         
         <div class="method-heading">
@@ -455,7 +373,7 @@ completed orders.</p>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_params</span>)
       <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@order</span>.<span class="ruby-identifier">complete?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">paid?</span>
         <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">complete!</span>
-        <span class="ruby-constant">OrderMailer</span>.<span class="ruby-identifier">order_confirmation</span>(<span class="ruby-ivar">@order</span>).<span class="ruby-identifier">deliver_later</span>
+        <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">send_confirmations</span>
       <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">order_path</span>(<span class="ruby-ivar">@order</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>) }

@@ -437,7 +437,7 @@ with the matching items.</p>
           <div class="method-source-code" id="item_from_order_item-source">
             <pre><span class="ruby-comment"># File app/models/promotion.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">item_from_order_item</span>(<span class="ruby-identifier">order_item</span>)
-  <span class="ruby-identifier">promoted_items</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:product</span>).<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product_id</span>)
+  <span class="ruby-identifier">promoted_items</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

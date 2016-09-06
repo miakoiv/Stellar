@@ -72,7 +72,7 @@
     
     <li ><a href="#method-i-adjustment">#adjustment</a>
     
-    <li ><a href="#method-i-klass">#klass</a>
+    <li ><a href="#method-i-appearance">#appearance</a>
     
     <li ><a href="#method-i-title">#title</a>
     
@@ -131,11 +131,10 @@
 
           
           <div class="method-source-code" id="adjustment-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustment</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-value">:order_type</span>)
-    .<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">orders</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>})
-    .<span class="ruby-identifier">where</span>(<span class="ruby-identifier">orders</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">approved_at</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>})
+    .<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Order</span>.<span class="ruby-identifier">current</span>)
     .<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_types</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">inventory_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory</span>})
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">item</span>.<span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">adjustment_multiplier</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span>
@@ -151,10 +150,10 @@
       </div>
 
     
-      <div id="method-i-klass" class="method-detail ">
+      <div id="method-i-appearance" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">klass</span><span
+          <span class="method-name">appearance</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -169,9 +168,11 @@
           
 
           
-          <div class="method-source-code" id="klass-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">klass</span>; <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">purpose</span>; <span class="ruby-keyword">end</span></pre>
+          <div class="method-source-code" id="appearance-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
+  <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">purpose</span>
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -195,14 +196,16 @@
 
         <div class="method-description">
           
-          <p><a href="Inventory.html">Inventory</a> item HTML representation methods.</p>
+          
           
           
 
           
           <div class="method-source-code" id="title-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>; <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">name</span>; <span class="ruby-keyword">end</span></pre>
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
+  <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -232,7 +235,7 @@
 
           
           <div class="method-source-code" id="total_value_cents-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_value_cents</span>
   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value_cents</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
   <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">value_cents</span>

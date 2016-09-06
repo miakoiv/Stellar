@@ -81,19 +81,31 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-at_url">::at_url</a>
+    <li ><a href="#method-i-applicable_purposes">#applicable_purposes</a>
     
-    <li ><a href="#method-i-applicable_image_types">#applicable_image_types</a>
+    <li class="calls-super" ><a href="#method-i-as_json">#as_json</a>
     
-    <li ><a href="#method-i-assign_image_type">#assign_image_type</a>
+    <li ><a href="#method-i-assign_purpose">#assign_purpose</a>
+    
+    <li ><a href="#method-i-dimensions">#dimensions</a>
     
     <li ><a href="#method-i-document_icon">#document_icon</a>
     
-    <li ><a href="#method-i-froala_style">#froala_style</a>
-    
     <li ><a href="#method-i-is_bitmap-3F">#is_bitmap?</a>
     
+    <li ><a href="#method-i-is_vector-3F">#is_vector?</a>
+    
+    <li ><a href="#method-i-is_video-3F">#is_video?</a>
+    
+    <li ><a href="#method-i-landscape-3F">#landscape?</a>
+    
+    <li ><a href="#method-i-portrait-3F">#portrait?</a>
+    
     <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-wysiwyg_style">#wysiwyg_style</a>
+    
+    <li ><a href="#method-i-wysiwyg_url">#wysiwyg_url</a>
     
   </ul>
 </div>
@@ -123,57 +135,16 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-at_url" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">at_url</span><span
-            class="method-args">(url, size = :original)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="at_url-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">at_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:original</span>)
-  <span class="ruby-identifier">all</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">size</span>, <span class="ruby-keyword">false</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">url</span> }
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-i-applicable_image_types" class="method-detail ">
+      <div id="method-i-applicable_purposes" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">applicable_image_types</span><span
+          <span class="method-name">applicable_purposes</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -188,10 +159,13 @@
           
 
           
-          <div class="method-source-code" id="applicable_image_types-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">applicable_image_types</span>
-  <span class="ruby-constant">ImageType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">bitmap</span><span class="ruby-operator">:</span> <span class="ruby-identifier">is_bitmap?</span>)
+          <div class="method-source-code" id="applicable_purposes-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">applicable_purposes</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;presentational&#39;</span>, <span class="ruby-string">&#39;technical&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_bitmap?</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;vector&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_vector?</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;video&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_video?</span>
+  [<span class="ruby-string">&#39;document&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -203,10 +177,48 @@
       </div>
 
     
-      <div id="method-i-assign_image_type" class="method-detail ">
+      <div id="method-i-as_json" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">assign_image_type</span><span
+          <span class="method-name">as_json</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="as_json-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:wysiwyg_url</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-assign_purpose" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">assign_purpose</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -216,15 +228,50 @@
 
         <div class="method-description">
           
-          <p>Assign first applicable image type.</p>
+          <p>Assign first applicable purpose.</p>
           
           
 
           
-          <div class="method-source-code" id="assign_image_type-source">
+          <div class="method-source-code" id="assign_purpose-source">
             <pre><span class="ruby-comment"># File app/models/image.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_image_type</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">image_type</span> = <span class="ruby-identifier">applicable_image_types</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_purpose</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">applicable_purposes</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dimensions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dimensions</span><span
+            class="method-args">(style = :original)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Image.html">Image</a> dimensions courtesy of FastImage, cached.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="dimensions-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">style</span> = <span class="ruby-value">:original</span>)
+  <span class="ruby-ivar">@dimensions</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span>
+  <span class="ruby-ivar">@dimensions</span>[<span class="ruby-identifier">style</span>] <span class="ruby-operator">||=</span> [<span class="ruby-value">:width</span>, <span class="ruby-value">:height</span>].<span class="ruby-identifier">zip</span>(<span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>))).<span class="ruby-identifier">to_h</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -255,9 +302,11 @@
 
           
           <div class="method-source-code" id="document_icon-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">attachment_content_type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r{\Avideo/}</span>
+    <span class="ruby-string">&#39;file-video-o&#39;</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r{\Aapplication/pdf}</span>
     <span class="ruby-string">&#39;file-pdf-o&#39;</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r{\Aapplication/(msword|vnd.openxmlformats)}</span>
@@ -265,40 +314,6 @@
   <span class="ruby-keyword">else</span>
     <span class="ruby-string">&#39;file-o&#39;</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-froala_style" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">froala_style</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>The style given to Froala is lightbox sized for bitmaps, original for
-documents and other non-bitmaps.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="froala_style-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">froala_style</span>
-  <span class="ruby-identifier">is_bitmap?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:lightbox</span> <span class="ruby-operator">:</span> <span class="ruby-value">:original</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -331,7 +346,140 @@ documents and other non-bitmaps.</p>
           <div class="method-source-code" id="is_bitmap-3F-source">
             <pre><span class="ruby-comment"># File app/models/image.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_bitmap?</span>
-  <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\Aimage/</span>)
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/(bmp|jpeg|jpg|png|x-png)/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-is_vector-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_vector?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_vector-3F-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_vector?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/svg/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-is_video-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_video?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_video-3F-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_video?</span>
+  <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/video\//</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-landscape-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">landscape?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="landscape-3F-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">landscape?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">portrait?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-portrait-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">portrait?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="portrait-3F-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">portrait?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span>
+  <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:height</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:width</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -362,9 +510,76 @@ documents and other non-bitmaps.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 83</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">attachment_file_name</span>.<span class="ruby-identifier">humanize</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wysiwyg_style" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wysiwyg_style</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The style given to Summernote is lightbox sized for bitmaps, original for
+documents and other non-bitmaps.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="wysiwyg_style-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">wysiwyg_style</span>
+  <span class="ruby-identifier">is_bitmap?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:lightbox</span> <span class="ruby-operator">:</span> <span class="ruby-value">:original</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-wysiwyg_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">wysiwyg_url</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="wysiwyg_url-source">
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">wysiwyg_url</span>
+  <span class="ruby-identifier">url</span>(<span class="ruby-identifier">wysiwyg_style</span>, <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

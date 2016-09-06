@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class UserAuthorizer - Rails Application Documentation</title>
+<title>class InventoryAuthorizer - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -76,7 +76,7 @@
     
     <li ><a href="#method-c-readable_by-3F">::readable_by?</a>
     
-    <li ><a href="#method-i-updatable_by-3F">#updatable_by?</a>
+    <li ><a href="#method-c-updatable_by-3F">::updatable_by?</a>
     
   </ul>
 </div>
@@ -84,9 +84,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-UserAuthorizer">
-  <h1 id="class-UserAuthorizer" class="class">
-    class UserAuthorizer
+<main role="main" aria-labelledby="class-InventoryAuthorizer">
+  <h1 id="class-InventoryAuthorizer" class="class">
+    class InventoryAuthorizer
   </h1>
 
   <section class="description">
@@ -131,9 +131,10 @@
 
           
           <div class="method-source-code" id="creatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/user_authorizer.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_authorizer.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">creatable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:user_manager</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -164,9 +165,10 @@
 
           
           <div class="method-source-code" id="deletable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/user_authorizer.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_authorizer.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -197,9 +199,10 @@
 
           
           <div class="method-source-code" id="readable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/user_authorizer.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_authorizer.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">readable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:user_manager</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -211,15 +214,7 @@
       </div>
 
     
-    </section>
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-updatable_by-3F" class="method-detail ">
+      <div id="method-c-updatable_by-3F" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">updatable_by?</span><span
@@ -238,9 +233,10 @@
 
           
           <div class="method-source-code" id="updatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/user_authorizer.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:user_manager</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">resource</span>
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_authorizer.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:store_admin</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

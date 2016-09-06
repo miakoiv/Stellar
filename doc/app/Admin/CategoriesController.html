@@ -266,7 +266,7 @@
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">sorted</span>
+  <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -332,7 +332,7 @@
           <div class="method-source-code" id="reorder_products-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reorder_products</span>
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
+  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

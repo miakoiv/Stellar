@@ -93,7 +93,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-purpose_options">::purpose_options</a>
+    <li ><a href="#method-i-available_purposes">#available_purposes</a>
     
     <li ><a href="#method-i-can_be_nested-3F">#can_be_nested?</a>
     
@@ -103,7 +103,11 @@
     
     <li ><a href="#method-i-needs_content-3F">#needs_content?</a>
     
+    <li ><a href="#method-i-purpose_options">#purpose_options</a>
+    
     <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    
+    <li ><a href="#method-i-slugger">#slugger</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -135,16 +139,16 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-purpose_options" class="method-detail ">
+      <div id="method-i-available_purposes" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">purpose_options</span><span
+          <span class="method-name">available_purposes</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -159,10 +163,12 @@
           
 
           
-          <div class="method-source-code" id="purpose_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
-  <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
+          <div class="method-source-code" id="available_purposes-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_purposes</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_record?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-string">&#39;route&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">route?</span>
+  <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-string">&#39;primary&#39;</span>, <span class="ruby-string">&#39;secondary&#39;</span>, <span class="ruby-string">&#39;banner&#39;</span>, <span class="ruby-string">&#39;template&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -172,14 +178,6 @@
 
         
       </div>
-
-    
-    </section>
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
 
     
       <div id="method-i-can_be_nested-3F" class="method-detail ">
@@ -201,7 +199,7 @@
 
           
           <div class="method-source-code" id="can_be_nested-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_nested?</span>
   <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secondary?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -234,9 +232,9 @@
 
           
           <div class="method-source-code" id="can_have_albums-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_albums?</span>
-  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secondary?</span>
+  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secondary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">banner?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -267,7 +265,7 @@
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
@@ -300,9 +298,42 @@
 
           
           <div class="method-source-code" id="needs_content-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_content?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">route?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-purpose_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">purpose_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="purpose_options-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">purpose_options</span>
+  <span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -338,9 +369,42 @@
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 56</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">route?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-slugger" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">slugger</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="slugger-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
+  [<span class="ruby-value">:title</span>, [<span class="ruby-value">:title</span>, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">store</span>.<span class="ruby-identifier">name</span> }]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -371,7 +435,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>

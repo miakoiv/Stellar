@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class OrderType - Rails Application Documentation</title>
+<title>class PortalController - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActiveRecord::Base
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
   
 </div>
 
@@ -70,11 +70,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-incoming_for-3F">#incoming_for?</a>
+    <li ><a href="#method-i-index">#index</a>
     
-    <li ><a href="#method-i-outgoing_for-3F">#outgoing_for?</a>
+    <li ><a href="#method-i-search">#search</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-show_department">#show_department</a>
     
   </ul>
 </div>
@@ -82,13 +82,18 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-OrderType">
-  <h1 id="class-OrderType" class="class">
-    class OrderType
+<main role="main" aria-labelledby="class-PortalController">
+  <h1 id="class-PortalController" class="class">
+    class PortalController
   </h1>
 
   <section class="description">
     
+<p><a href="PortalController.html">PortalController</a> is the entry point to
+the app. The current portal is selected by matching request.host to a
+portal domain name. Stores participating in the portal live under
+subdomains of that domain.</p>
+
   </section>
 
   
@@ -110,76 +115,10 @@
        </header>
 
     
-      <div id="method-i-incoming_for-3F" class="method-detail ">
+      <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">incoming_for?</span><span
-            class="method-args">(user)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="incoming_for-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_type.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">incoming_for?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">destination_group</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">user</span>.<span class="ruby-identifier">group</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-outgoing_for-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">outgoing_for?</span><span
-            class="method-args">(user)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="outgoing_for-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_type.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">outgoing_for?</span>(<span class="ruby-identifier">user</span>)
-  <span class="ruby-identifier">source_group</span> <span class="ruby-operator">==</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">user</span>.<span class="ruby-identifier">group</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
+          <span class="method-name">index</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -189,15 +128,84 @@
 
         <div class="method-description">
           
-          
+          <p>GET /</p>
           
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/order_type.rb, line 24</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /portal/search</p>
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
+  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]).<span class="ruby-identifier">per</span>(<span class="ruby-value">30</span>)
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>, <span class="ruby-value">:html</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show_department" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show_department</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /department/:department_id</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show_department-source">
+            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_department</span>
+  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@department</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">random</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]).<span class="ruby-identifier">per</span>(<span class="ruby-value">30</span>)
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>, <span class="ruby-value">:html</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

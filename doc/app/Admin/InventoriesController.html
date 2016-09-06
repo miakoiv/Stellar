@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Admin::UsersController - Rails Application Documentation</title>
+<title>class Admin::InventoriesController - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -90,9 +90,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Admin::UsersController">
-  <h1 id="class-Admin::UsersController" class="class">
-    class Admin::UsersController
+<main role="main" aria-labelledby="class-Admin::InventoriesController">
+  <h1 id="class-Admin::InventoriesController" class="class">
+    class Admin::InventoriesController
   </h1>
 
   <section class="description">
@@ -131,24 +131,24 @@
 
         <div class="method-description">
           
-          <p>POST /admin/users POST /admin/users.json</p>
+          <p>POST /admin/inventories POST /admin/inventories.json</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">user_params</span>)
+  <span class="ruby-ivar">@inventory</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">inventory_params</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_user_path</span>(<span class="ruby-ivar">@user</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_inventory_path</span>(<span class="ruby-ivar">@inventory</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_inventory_path</span>(<span class="ruby-ivar">@inventory</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -175,18 +175,19 @@
 
         <div class="method-description">
           
-          <p>DELETE /admin/users/1</p>
+          <p>DELETE /admin/inventories/1 DELETE /admin/inventories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_users_path</span>,
-      <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>) }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_inventories_path</span>,
+      <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory</span>) }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -212,15 +213,14 @@
 
         <div class="method-description">
           
-          <p>GET /admin/users/1/edit</p>
+          <p>GET /admin/inventories/1/edit</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@user</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -245,15 +245,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/users GET /admin/users.json</p>
+          <p>GET /admin/inventories GET /admin/inventories.json</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@users</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">managed_users</span>
+  <span class="ruby-ivar">@inventories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventories</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -278,15 +278,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/users/new</p>
+          <p>GET /admin/inventories/new</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">build</span>
+  <span class="ruby-ivar">@inventory</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">build</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -311,13 +311,13 @@
 
         <div class="method-description">
           
-          <p>GET /admin/users/1 GET /admin/users/1.json</p>
+          <p>GET /admin/inventories/1 GET /admin/inventories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -343,24 +343,22 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/users/1 PATCH/PUT /admin/users/1.json</p>
+          <p>PATCH/PUT /admin/inventories/1 PATCH/PUT /admin/inventories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/users_controller.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventories_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@user</span>
-
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">user_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_user_path</span>(<span class="ruby-ivar">@user</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">inventory_params</span>)
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_inventory_path</span>(<span class="ruby-ivar">@inventory</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_inventory_path</span>(<span class="ruby-ivar">@inventory</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

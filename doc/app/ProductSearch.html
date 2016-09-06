@@ -89,11 +89,17 @@
     
     <li ><a href="#method-i-search_code">#search_code</a>
     
+    <li ><a href="#method-i-search_exclusions">#search_exclusions</a>
+    
     <li ><a href="#method-i-search_keyword">#search_keyword</a>
     
     <li ><a href="#method-i-search_live">#search_live</a>
     
+    <li ><a href="#method-i-search_purposes">#search_purposes</a>
+    
     <li ><a href="#method-i-search_store_id">#search_store_id</a>
+    
+    <li ><a href="#method-i-search_vendor_id">#search_vendor_id</a>
     
   </ul>
 </div>
@@ -226,7 +232,7 @@ to match multiple properties at the same time.</p>
 
           
           <div class="method-source-code" id="search_categories-source">
-            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_categories</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">categories</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">categories</span>})
 <span class="ruby-keyword">end</span></pre>
@@ -259,9 +265,42 @@ to match multiple properties at the same time.</p>
 
           
           <div class="method-source-code" id="search_code-source">
-            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_code</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;code LIKE ?&#39;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;code LIKE ? OR customer_code LIKE ?&#39;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_exclusions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_exclusions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_exclusions-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_exclusions</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">exclusions</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -292,9 +331,9 @@ to match multiple properties at the same time.</p>
 
           
           <div class="method-source-code" id="search_keyword-source">
-            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, code, title, subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, code, customer_code, title, subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -325,10 +364,43 @@ to match multiple properties at the same time.</p>
 
           
           <div class="method-source-code" id="search_live-source">
-            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_live</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty?</span>(<span class="ruby-identifier">live</span>)
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">live</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_purposes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_purposes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_purposes-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_purposes</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">purposes</span>).<span class="ruby-identifier">values</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -362,6 +434,39 @@ to match multiple properties at the same time.</p>
             <pre><span class="ruby-comment"># File app/models/product_search.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store_id</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_vendor_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_vendor_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_vendor_id-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_vendor_id</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">vendor_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">vendor_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

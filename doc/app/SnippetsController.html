@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class OrderItemsController - Rails Application Documentation</title>
+<title>class SnippetsController - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -72,9 +72,7 @@
     
     <li class="calls-super" ><a href="#method-i-current_user">#current_user</a>
     
-    <li ><a href="#method-i-destroy">#destroy</a>
-    
-    <li ><a href="#method-i-update">#update</a>
+    <li ><a href="#method-i-show">#show</a>
     
   </ul>
 </div>
@@ -82,15 +80,13 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-OrderItemsController">
-  <h1 id="class-OrderItemsController" class="class">
-    class OrderItemsController
+<main role="main" aria-labelledby="class-SnippetsController">
+  <h1 id="class-SnippetsController" class="class">
+    class SnippetsController
   </h1>
 
   <section class="description">
     
-<p>This controller deals with editing and deleting items in the shopping cart.</p>
-
   </section>
 
   
@@ -136,7 +132,7 @@
 
           
           <div class="method-source-code" id="current_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/order_items_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/snippets_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_user</span>
   <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">guest_user</span>
 <span class="ruby-keyword">end</span></pre>
@@ -150,10 +146,10 @@
       </div>
 
     
-      <div id="method-i-destroy" class="method-detail ">
+      <div id="method-i-show" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">destroy</span><span
+          <span class="method-name">show</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -163,63 +159,18 @@
 
         <div class="method-description">
           
-          <p>DELETE /order_items/1</p>
+          <p>GET /snippet/:type/:id</p>
           
           
 
           
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/order_items_controller.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">destroy</span>
-    <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/snippets_controller.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-identifier">type</span>, <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
+  <span class="ruby-ivar">@snippable</span> = <span class="ruby-identifier">find_snippable</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">id</span>)
 
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-update" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">update</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>PATCH/PUT /order_items/1</p>
-          
-          
-
-          
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/order_items_controller.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_item_params</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
-        <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">destroy</span>
-        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:destroy</span> }
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">reload</span>
-        <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
-        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:update</span> }
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:rollback</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">partial</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{type}&quot;</span>, <span class="ruby-identifier">object</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@snippable</span>, <span class="ruby-identifier">as</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

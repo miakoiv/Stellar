@@ -87,27 +87,29 @@
     
     <li ><a href="#method-c-find_for_authentication">::find_for_authentication</a>
     
-    <li ><a href="#method-c-group_options">::group_options</a>
-    
     <li ><a href="#method-i-appearance">#appearance</a>
     
     <li ><a href="#method-i-available_order_types">#available_order_types</a>
     
-    <li ><a href="#method-i-can_see_group_orders-3F">#can_see_group_orders?</a>
-    
     <li ><a href="#method-i-can_select_pricing_group-3F">#can_select_pricing_group?</a>
+    
+    <li ><a href="#method-i-category_options">#category_options</a>
+    
+    <li ><a href="#method-i-existing_order_types">#existing_order_types</a>
     
     <li ><a href="#method-i-grantable_group_options">#grantable_group_options</a>
     
     <li ><a href="#method-i-grantable_role_options">#grantable_role_options</a>
     
+    <li ><a href="#method-i-incoming_order_types">#incoming_order_types</a>
+    
     <li ><a href="#method-i-label_for">#label_for</a>
     
     <li ><a href="#method-i-managed_groups">#managed_groups</a>
     
-    <li ><a href="#method-i-managed_order_types">#managed_order_types</a>
-    
     <li ><a href="#method-i-managed_users">#managed_users</a>
+    
+    <li ><a href="#method-i-outgoing_order_types">#outgoing_order_types</a>
     
     <li ><a href="#method-i-password_required-3F">#password_required?</a>
     
@@ -189,42 +191,9 @@
 
           
           <div class="method-source-code" id="find_for_authentication-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_authentication</span>(<span class="ruby-identifier">warden_conditions</span>)
-  <span class="ruby-identifier">joins</span>(<span class="ruby-value">:store</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:email</span>], <span class="ruby-identifier">stores</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:host</span>]}).<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-group_options" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">group_options</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="group_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">group_options</span>
-  <span class="ruby-node">%w{reseller manufacturer}</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-constant">User</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>, <span class="ruby-identifier">group</span>), <span class="ruby-identifier">group</span>] }
+  <span class="ruby-identifier">joins</span>(<span class="ruby-value">:store</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;users.email = ? AND (stores.host = ? OR stores.subdomain = ?)&#39;</span>, <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:email</span>], <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:host</span>], <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:subdomain</span>]).<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -263,7 +232,7 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 145</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">GROUP_LABELS</span>[<span class="ruby-identifier">group</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -290,50 +259,15 @@
 
         <div class="method-description">
           
-          <p><a href="Order.html">Order</a> types the user has available when going
-through checkout.</p>
+          <p>Both of the above</p>
           
           
 
           
           <div class="method-source-code" id="available_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 101</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_order_types</span>
-  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">source_group</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>])
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-can_see_group_orders-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">can_see_group_orders?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>This could be a separate role but for now, resellers and manufacturer users
-have permission to browse orders sent from their own group.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="can_see_group_orders-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_see_group_orders?</span>
-  <span class="ruby-identifier">reseller?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">manufacturer?</span>
+  <span class="ruby-identifier">incoming_order_types</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">outgoing_order_types</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -364,9 +298,77 @@ have permission to browse orders sent from their own group.</p>
 
           
           <div class="method-source-code" id="can_select_pricing_group-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 141</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_select_pricing_group?</span>
   <span class="ruby-identifier">reseller?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-category_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">category_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Categories available to this user when creating and editing products.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="category_options-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">category_options</span>
+  <span class="ruby-identifier">available_categories</span> = <span class="ruby-identifier">vendor?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">categories</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>
+  <span class="ruby-identifier">available_categories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">indented_name</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-existing_order_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">existing_order_types</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Order.html">Order</a> types seen in the user&#39;s set of
+completed orders.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="existing_order_types-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">existing_order_types</span>
+  <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:order_type</span>).<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -397,7 +399,7 @@ have permission to browse orders sent from their own group.</p>
 
           
           <div class="method-source-code" id="grantable_group_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_group_options</span>
   <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-constant">User</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>, <span class="ruby-identifier">group</span>), <span class="ruby-identifier">group</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -431,7 +433,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="grantable_role_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 120</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_role_options</span>
   <span class="ruby-identifier">roles</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>)
     <span class="ruby-constant">Role</span>.<span class="ruby-identifier">all</span>
@@ -439,6 +441,39 @@ promote others to superusers.</p>
     <span class="ruby-constant">Role</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> [<span class="ruby-value">:superuser</span>])
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">roles</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">r</span>.<span class="ruby-identifier">id</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-incoming_order_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incoming_order_types</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Available incoming order types.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="incoming_order_types-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">incoming_order_types</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">incoming_for</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -469,7 +504,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="label_for-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label_for</span>(<span class="ruby-identifier">product</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">reseller?</span>
   <span class="ruby-identifier">promoted_item</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">best_promoted_item</span>
@@ -507,43 +542,9 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="managed_groups-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 110</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_groups</span>
   <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">MANAGED_GROUPS</span>[<span class="ruby-identifier">group</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-managed_order_types" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">managed_order_types</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p><a href="Order.html">Order</a> types the user may browse and process as an
-administrator.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="managed_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 106</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_order_types</span>
-  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">destination_group</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -574,9 +575,43 @@ administrator.</p>
 
           
           <div class="method-source-code" id="managed_users-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 130</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_users</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>] })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-outgoing_order_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">outgoing_order_types</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Available outgoing order types. These are what the user has available when
+going through checkout.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="outgoing_order_types-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">outgoing_order_types</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">outgoing_for</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -607,11 +642,11 @@ administrator.</p>
 
           
           <div class="method-source-code" id="price_for_cents-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 84</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_for_cents</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">pricing_group</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">cost_price</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">reseller?</span>
-  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price</span>(<span class="ruby-identifier">pricing_group</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">cost_price_cents</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price_cents</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">reseller?</span>
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price_cents</span>(<span class="ruby-identifier">pricing_group</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -642,7 +677,7 @@ administrator.</p>
 
           
           <div class="method-source-code" id="shopping_cart-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shopping_cart</span>
   <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">incomplete</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span>
     <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">create</span>(
@@ -681,7 +716,7 @@ administrator.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 149</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{name} &lt;#{email}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -722,7 +757,7 @@ administrator.</p>
 
           
           <div class="method-source-code" id="password_required-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 154</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password_required?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">persisted?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password_confirmation</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>

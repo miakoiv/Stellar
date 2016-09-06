@@ -83,8 +83,6 @@
     
     <li ><a href="#method-i-create">#create</a>
     
-    <li ><a href="#method-i-delete">#delete</a>
-    
     <li ><a href="#method-i-destroy">#destroy</a>
     
     <li ><a href="#method-i-show">#show</a>
@@ -151,51 +149,10 @@
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">link</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-ivar">@image</span>.<span class="ruby-identifier">froala_style</span>, <span class="ruby-keyword">false</span>)} } <span class="ruby-comment"># for Froala</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@image</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span> } <span class="ruby-comment"># for dropzone</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@image</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span> } <span class="ruby-comment"># for dropzone and summernote</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">error</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.error&#39;</span>)} }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">error</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)}, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">400</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-delete" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">delete</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>POST /admin/images/delete This method is for Froala that deletes images by
-URL.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>
-  <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">at_url</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:url</span>], <span class="ruby-value">:lightbox</span>)
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">destroy</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -228,7 +185,7 @@ URL.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 
@@ -305,7 +262,7 @@ success.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 

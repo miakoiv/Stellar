@@ -133,7 +133,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@customer_asset</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">customer_assets</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">customer_asset_params</span>)
 
@@ -177,7 +177,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -209,11 +209,11 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;customer_asset&#39;</span>, <span class="ruby-string">&#39;admin_customer_asset_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">CustomerAssetSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
-  <span class="ruby-ivar">@customer_assets</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+  <span class="ruby-ivar">@customer_assets</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -244,7 +244,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@customer_asset</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">customer_assets</span>.<span class="ruby-identifier">build</span>
 <span class="ruby-keyword">end</span></pre>
@@ -277,7 +277,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

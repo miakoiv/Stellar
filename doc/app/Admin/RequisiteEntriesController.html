@@ -4,32 +4,32 @@
 <head>
 <meta charset="utf-8">
 
-<title>module Imageable - Rails Application Documentation</title>
+<title>class Admin::RequisiteEntriesController - Rails Application Documentation</title>
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "./";
+  var rdoc_rel_prefix = "../";
 </script>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/darkfish.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
 
-<link href="./css/fonts.css" rel="stylesheet">
-<link href="./css/rdoc.css" rel="stylesheet">
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
 
 
 
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="./index.html" rel="home">Home</a>
+    <a href="../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="./table_of_contents.html#pages">Pages</a>
-    <a href="./table_of_contents.html#classes">Classes</a>
-    <a href="./table_of_contents.html#methods">Methods</a>
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -54,27 +54,34 @@
 
   <div id="class-metadata">
     
-    
-    
-    <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
 
   <ul class="link-list">
-    
   
-    <li><span class="extend">ActiveSupport::Concern</span>
+  
+    <li><a class="include" href="../Reorderer.html">Reorderer</a>
   
   
   </ul>
 </div>
 
+    
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-cover_image">#cover_image</a>
+    <li ><a href="#method-i-destroy">#destroy</a>
     
   </ul>
 </div>
@@ -82,9 +89,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-Imageable">
-  <h1 id="module-Imageable" class="module">
-    module Imageable
+<main role="main" aria-labelledby="class-Admin::RequisiteEntriesController">
+  <h1 id="class-Admin::RequisiteEntriesController" class="class">
+    class Admin::RequisiteEntriesController
   </h1>
 
   <section class="description">
@@ -110,11 +117,11 @@
        </header>
 
     
-      <div id="method-i-cover_image" class="method-detail ">
+      <div id="method-i-destroy" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">cover_image</span><span
-            class="method-args">(purpose = :presentational)</span>
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -123,15 +130,21 @@
 
         <div class="method-description">
           
-          
+          <p>DELETE /admin/requisite_entries/1</p>
           
           
 
           
-          <div class="method-source-code" id="cover_image-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/imageable.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cover_image</span>(<span class="ruby-identifier">purpose</span> = <span class="ruby-value">:presentational</span>)
-  <span class="ruby-identifier">images</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">purpose</span>).<span class="ruby-identifier">first</span>
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/requisite_entries_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@requisite_entry</span> = <span class="ruby-constant">RequisiteEntry</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@requisite_entry</span>.<span class="ruby-identifier">destroy</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
