@@ -5,15 +5,19 @@
         %button.close{data: {dismiss: 'modal'}}= icon('close')
         %h4.modal-title= t('.title')
       .modal-body
-        = form_tag upload_admin_products_path, multipart: true, id: 'products-upload', class: 'dropzone well' do |f|
+        = form_tag upload_file_admin_products_path, multipart: true, id: 'products-upload', class: 'dropzone well' do |f|
           .fallback
             .form-group
               = file_field_tag :file
             .form-group
               %button.btn.btn-primary{type: 'submit'}= t('actions.upload')
-
+        #upload-complete.collapse.fade
+          = t('.upload_complete')
 :coffee
   Dropzone.options.productsUpload =
     dictDefaultMessage: "#{I18n.t('admin.products.upload_modal.dropzone_message')}"
     paramName: 'file'
     acceptedFiles: '.xls,.xlsx'
+    init: ->
+      @on 'success', (file, response) ->
+        $('#upload-complete').collapse 'show'

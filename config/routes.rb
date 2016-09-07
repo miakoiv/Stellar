@@ -99,7 +99,7 @@ Rails.application.routes.draw do
       post :add_requisite_entries, on: :member
       get :query, on: :collection
       post :reorder, on: :collection
-      post :upload, on: :collection
+      post :upload_file, on: :collection
     end
     resources :promotions do
       resources :promoted_items, shallow: true

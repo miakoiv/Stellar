@@ -6,7 +6,7 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries]
 
-  authority_actions query: 'read', reorder: 'update', upload: 'update'
+  authority_actions query: 'read', reorder: 'update', upload_file: 'update'
   authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries]
 
   layout 'admin'
@@ -109,17 +109,12 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  # POST /admin/products/upload
-  def upload
+  # POST /admin/products/upload_file
+  def upload_file
     @file = params[:file]
 
     respond_to do |format|
-      if true
-        format.json { render json: @file.original_filename, status: 200 } # for dropzone
-      else
-        format.html { render json: {error: t('.error')} }
-        format.json { render json: {error: t('.error')}, status: 400 }
-      end
+      format.json { render json: {filename: @file.original_filename}, status: 200 }
     end
   end
 
