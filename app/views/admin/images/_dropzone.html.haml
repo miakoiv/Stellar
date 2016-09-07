@@ -8,7 +8,8 @@
   Dropzone.options.newImage =
     dictDefaultMessage: "#{I18n.t('dropzone.default_message')}"
     paramName: 'image[attachment]'
-    success: (file, image) ->
-      $.get('/admin/images/' + image['id']);
-    complete: (file) ->
-      this.removeFile(file);
+    init: ->
+      @on 'success', (file, image) ->
+        $.get('/admin/images/' + image['id']);
+      @on 'complete', (file) ->
+        this.removeFile(file);
