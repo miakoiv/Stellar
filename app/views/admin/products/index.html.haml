@@ -2,6 +2,8 @@
   - if current_user.can_create?(Product)
     = link_to new_admin_product_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_product'))
+    %button.btn.btn-default{data: {toggle: 'modal', target: '#products-upload-modal'}}
+      = icon('cloud-upload', t('actions.upload'))
   %h1= icon('cube', title(Product, count: 2))
 
 .panel.panel-info
@@ -26,5 +28,6 @@
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
+= render partial: 'admin/products/upload_modal'
 = render partial: 'admin/products/table', object: @products, as: :products
 = paginate @products
