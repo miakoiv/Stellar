@@ -22,7 +22,11 @@ class Store < ActiveRecord::Base
     :order_sequence, # base value for order numbers if no numbering exists
     :manufacturer_template_id, # page references to templates
     :reseller_template_id,
-    :quotation_template_id
+    :quotation_template_id,
+    :csv_encoding,        # CSV encoding of uploaded files
+    :csv_product_code,    # CSV field headers for product code,
+    :csv_retail_price,    # retail price, and inventory amount
+    :csv_inventory_amount # in uploaded files
   ], coder: JSON
 
   resourcify
@@ -163,6 +167,23 @@ class Store < ActiveRecord::Base
   def quotation_boilerplate
     return '' unless quotation_template_id.present?
     pages.find(quotation_template_id).content
+  end
+
+  # CSV header conversion table for uploaded products.
+  def csv_headers
+    {
+      csv_product_code => :product_code,
+      csv_retail_price => :retail_price,
+      csv_inventory_amount => :inventory_amount
+    }
+  end
+
+  def csv_options
+    {
+      col_sep: ';',
+      encoding: csv_encoding || 'utf-8',
+      headers: true
+    }
   end
 
   def to_s

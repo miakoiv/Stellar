@@ -121,8 +121,8 @@ en:
       form:
         shipping_notes_help: Extra information for shopping cart and order rows.
       upload_modal:
-        title: Upload Excel® file
-        dropzone_message: Drop an Excel® file here to update pricing and shipping information on multiple products at once.
+        title: Upload CSV file
+        dropzone_message: Drop a CSV file here to update pricing and shipping information on multiple products at once.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.

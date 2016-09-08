@@ -115,6 +115,30 @@ class Product < ActiveRecord::Base
     ]
   end
 
+  # Takes a CSV::Row and updates a product from its data in the given store.
+  # Returns the updated product, or nil if it fails. Supported fields:
+  # product_code     : required
+  # retail_price     : anything supported by Monetize.parse
+  # inventory_amount : targets the first shipping inventory
+  def self.update_from_csv_row(store, row)
+    inventory = store.inventories.shipping.first
+    product = store.products.where(code: row[:product_code]).first
+    return nil if product.nil?
+    begin
+      if row[:retail_price].present?
+        product.update!(retail_price: row[:retail_price].to_money)
+      end
+      if row[:inventory_amount].present?
+        amount = row[:inventory_amount].to_i
+        amount = 0 if amount < 0
+        inventory.inventory_items.where(product: product).find_or_create_by!(store: store).update!(amount: amount)
+      end
+      product
+    rescue
+      nil
+    end
+  end
+
   #---
   def real?; !virtual? end
   def undead?; !live? end
@@ -296,6 +320,11 @@ class Product < ActiveRecord::Base
 
   def to_s
     "#{title} #{subtitle}"
+  end
+
+  # Retail price string representation for JSON.
+  def formatted_price_string
+    retail_price.present? ? retail_price.format : ''
   end
 
   # Resets the live status of the product, according to these criteria:

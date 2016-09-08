@@ -1,5 +1,5 @@
 #products-upload-modal.modal{data: {backdrop: 'static'}}
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button.close{data: {dismiss: 'modal'}}= icon('close')
@@ -12,12 +12,16 @@
             .form-group
               %button.btn.btn-primary{type: 'submit'}= t('actions.upload')
         #upload-complete.collapse.fade
-          = t('.upload_complete')
+          %ul.list-group
+
 :coffee
   Dropzone.options.productsUpload =
     dictDefaultMessage: "#{I18n.t('admin.products.upload_modal.dropzone_message')}"
     paramName: 'file'
-    acceptedFiles: '.xls,.xlsx'
+    acceptedFiles: '.csv'
     init: ->
       @on 'success', (file, response) ->
+        $ul = $('#upload-complete > ul')
+        for product in response
+          $ul.append $('<li class="list-group-item"><strong>' + product.title + '</strong> ' + product.subtitle + ' <span class="label label-default">' + product.code + '</span> <span class="currency pull-right">' + product.formatted_price_string + '</span></li>')
         $('#upload-complete').collapse 'show'
