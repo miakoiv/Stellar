@@ -285,6 +285,7 @@ fi:
       store:
         admin: Asetukset
         new_user: Luo ylläpitäjä
+        upload: Tiedostojen tuonti
         superuser: Vain pääkäyttäjälle
         host: Palvelimen osoite
         subdomain: Portaalin aladomain
@@ -305,6 +306,10 @@ fi:
         manufacturer_template_id: Valmistajan kirjepohja
         reseller_template_id: Jälleenmyyjän kirjepohja
         quotation_template_id: Tarjouksen tekstisisältö
+        csv_encoding: Tiedoston merkistö
+        csv_product_code: Tuotekoodisarake
+        csv_retail_price: Myyntihintasarake
+        csv_inventory_amount: Varastosaldosarake
       user:
         personal: Omat tiedot
         privileges: Käyttöoikeudet

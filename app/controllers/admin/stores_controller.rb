@@ -85,7 +85,8 @@ class Admin::StoresController < ApplicationController
         :shipping_cost_product_id, :free_shipping_at,
         :tracking_code, :tawkto_site_id, :order_sequence,
         :manufacturer_template_id, :reseller_template_id,
-        :quotation_template_id,
+        :quotation_template_id, :csv_encoding,
+        :csv_product_code, :csv_retail_price, :csv_inventory_amount,
         inventory_ids: [],
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,

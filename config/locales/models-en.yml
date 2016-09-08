@@ -285,6 +285,7 @@ en:
       store:
         admin: Settings
         new_user: Create admin user
+        upload: File import
         superuser: Superuser only
         host: Server address
         subdomain: Portal subdomain
@@ -305,6 +306,10 @@ en:
         manufacturer_template_id: Manufacturer letterhead
         reseller_template_id: Reseller letterhead
         quotation_template_id: Quotation boilerplate
+        csv_encoding: Character set
+        csv_product_code: Product code field
+        csv_retail_price: Retail price field
+        csv_inventory_amount: Inventory field
       user:
         personal: Personal information
         privileges: Privileges
