@@ -6,7 +6,7 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries]
 
-  authority_actions query: 'read', reorder: 'update', upload_file: 'update'
+  authority_actions query: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', duplicate: 'create'
   authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries]
 
   layout 'admin'
