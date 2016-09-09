@@ -1,3 +1,5 @@
-%span#cart-badge.badge<
-  - unless shopping_cart.empty?
+- if shopping_cart.empty?
+  %span#cart-badge.badge
+- else
+  %span#cart-badge.badge.animated.infinite.tada<
     = shopping_cart.order_items.real.count
