@@ -1,7 +1,6 @@
-%ul.nav.navbar-nav
-  %li= link_to icon('search-plus', class: 'fa-lg'), search_path
-  - if user_signed_in? && can_shop?
-    %li
-      = link_to cart_path do
-        = icon('shopping-cart', class: 'fa-lg')
-        = render partial: 'store/cart_badge'
+%li= link_to icon('search-plus', class: 'fa-lg'), search_path
+- if user_signed_in? && can_shop?
+  %li
+    = link_to cart_path do
+      = icon('shopping-cart', class: 'fa-lg')
+      = render partial: 'store/cart_badge'

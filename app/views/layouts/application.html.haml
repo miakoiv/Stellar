@@ -10,7 +10,8 @@
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .content
         .navbar-charms
-          = render partial: 'shared/navbar_charms'
+          %ul.nav.navbar-nav.navbar-right
+            = render partial: 'shared/navbar_charms'
           %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
             = icon('bars', class: 'fa-lg')
         .navbar-header
