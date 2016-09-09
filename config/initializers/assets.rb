@@ -15,6 +15,7 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/alcoholic.css   spry_themes/alcoholic.js
   spry_themes/apprentice.css  spry_themes/apprentice.js
   spry_themes/birch.css       spry_themes/birch.js
+  spry_themes/boutique.css    spry_themes/boutique.js
   spry_themes/budget.css      spry_themes/budget.js
   spry_themes/carbon.css      spry_themes/carbon.js
   spry_themes/cards.css       spry_themes/cards.js
