@@ -128,13 +128,15 @@ en:
         link: Link
       inventory:
         name: Name
-        purpose: Purpose
         fuzzy: Approximate quantities
+        inventory_code: Inventory code
       inventory_item:
         inventory_id: Inventory
         code: Product code
         shelf: Shelf
-        amount: Amount
+        on_hand: On hand
+        reserved: Reserved
+        pending: Pending
         value: Value
       order:
         number: order №

@@ -18,7 +18,7 @@
             = item.product.subtitle
         %td= item.product.code
         %td= item.product.categories.to_sentence
-        %td.text-right= item.amount
+        %td.text-right= item.on_hand
         %td.text-right.currency= humanized_money_with_symbol item.value
         %td.text-right.currency= humanized_money_with_symbol item.total_value
 

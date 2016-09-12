@@ -42,10 +42,12 @@ class Store < ActiveRecord::Base
 
   # All these associations are dependent of the store.
   with_options dependent: :destroy do |store|
+    store.has_many :inventories
     store.has_many :categories
     store.has_many :products
     store.has_many :properties
     store.has_many :orders
+    store.has_many :order_types
     store.has_many :pages
     store.has_many :albums
     store.has_many :promotions
@@ -53,10 +55,10 @@ class Store < ActiveRecord::Base
     store.has_many :customer_assets
     store.has_many :pricing_groups
   end
-  accepts_nested_attributes_for :users, limit: 1
 
-  has_many :inventories, dependent: :destroy
-  has_many :order_types, through: :inventories
+  has_many :inventory_items, through: :inventories
+
+  accepts_nested_attributes_for :users, limit: 1
 
   scope :all_except, -> (this) { where.not(id: this) }
 
@@ -100,16 +102,10 @@ class Store < ActiveRecord::Base
     }
   end
 
-  # Performs an inventory valuation of items in the shipping inventory.
+  # Performs an inventory valuation of live products on hand.
   def inventory_valuation
-    items = inventory_for(:shipping).inventory_items
-              .for_products(products.live)
+    items = inventory_items.joins(:product).merge(Product.live)
     [items, items.map { |item| item.total_value }.sum]
-  end
-
-  # Finds the first inventory by purpose.
-  def inventory_for(purpose)
-    inventories.by_purpose(purpose)
   end
 
   # Properties flagged searchable.

@@ -2,10 +2,8 @@
 
 class OrderType < ActiveRecord::Base
 
+  belongs_to :store
   has_many :orders
-
-  # Orders of this type refer to stock in this particular inventory.
-  belongs_to :inventory
 
   scope :has_shipping, -> { where(has_shipping: true) }
 

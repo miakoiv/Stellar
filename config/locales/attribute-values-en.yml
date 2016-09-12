@@ -7,10 +7,6 @@ en:
           technical: Technical
           document: Document
           vector: Vector image
-      inventory:
-        purpose:
-          manufacturing: manufacturing
-          shipping: shipping
       page:
         purpose:
           route: Routing entry

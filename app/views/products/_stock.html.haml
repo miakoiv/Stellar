@@ -1,9 +1,9 @@
 - if can_see_stock?
-  %ul
+  %ul.list-group
     - product.inventory_items.each do |item|
-      %li{class: item.appearance}
+      %li.list-group-item{class: "list-group-item-#{item.appearance}"}
         %span
-          = item.amount || 0
-          - if item.adjustment != 0
-            = sprintf "(%+i)", item.adjustment
+          = item.on_hand || 0
+          - if item.pending.present? && item.pending != 0
+            = sprintf "(%+i)", item.pending
         = item.title

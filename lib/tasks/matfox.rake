@@ -109,32 +109,28 @@ namespace :matfox do
 
     return false unless store.inventories.any?
 
-    # Create stubs to ensure each product at least exists in each inventory.
-    store.inventories.each do |inventory|
-      find_or_create_inventory_item(store, inventory, product)
-    end
-
-    # If `inventory_data` contains a row with `inventory_code` matching
-    # that of the store, it takes precedence over `product_data`.
-    if inventory_data.present? &&
-      (inventory_row = inventory_data.find { |row| row[:inventory_code] == store.inventory_code }).present?
-
-      update_inventory_item(
-        store, store.inventory_for(:manufacturing), product,
-        inventory_row[:quantity_pending],
-        inventory_row[:shelf],
-        inventory_row[:value]
-      )
-      update_inventory_item(
-        store, store.inventory_for(:shipping), product,
-        inventory_row[:quantity_on_hand],
-        inventory_row[:shelf],
-        inventory_row[:value]
-      )
+    # Entries in `inventory_data` are placed into inventories with matching
+    # `inventory_code` fields. If no `inventory_data` exists, quantities in
+    # `product_data` are placed into the first inventory.
+    if inventory_data.present?
+      inventory_data.each do |row|
+        inventory = store.inventories.find_by(inventory_code: row[:inventory_code])
+        next if inventory.nil?
+        update_inventory_item(
+          inventory, product,
+          row[:quantity_on_hand],
+          row[:quantity_reserved],
+          row[:quantity_pending],
+          row[:shelf], row[:value]
+        )
+      end
     else
       update_inventory_item(
-        store, store.inventory_for(:shipping), product,
-        product[:quantity_on_hand], nil, nil
+        store.inventories.first, product,
+        product[:quantity_on_hand],
+        product[:quantity_reserved],
+        product[:quantity_pending],
+        nil, nil
       )
     end
   end
@@ -175,18 +171,20 @@ namespace :matfox do
     end
   end
 
-  # Finds or creates inventory item for `product` in `inventory` at `store`.
-  def find_or_create_inventory_item(store, inventory, product)
-    inventory.inventory_items.find_or_create_by(store: store, product: product)
+  # Finds or creates inventory item for `product` in `inventory`.
+  def find_or_create_inventory_item(inventory, product)
+    inventory.inventory_items.find_or_create_by(product: product)
   end
 
-  def update_inventory_item(store, inventory, product, amount, shelf, value)
-    puts "→ #{inventory.name} #{amount}"
+  def update_inventory_item(inventory, product, on_hand, reserved, pending, shelf, value)
+    puts "→ #{inventory.name} #{on_hand} / #{reserved} / #{pending}"
 
     find_or_create_inventory_item(
-      store, inventory, product
+      inventory, product
     ).update(
-      amount: amount || 0,
+      on_hand: on_hand || 0,
+      reserved: reserved || 0,
+      pending: pending || 0,
       shelf: shelf,
       value: value || 0
     )

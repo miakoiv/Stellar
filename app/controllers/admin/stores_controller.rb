@@ -87,7 +87,6 @@ class Admin::StoresController < ApplicationController
         :manufacturer_template_id, :reseller_template_id,
         :quotation_template_id, :csv_encoding,
         :csv_product_code, :csv_retail_price, :csv_inventory_amount,
-        inventory_ids: [],
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
           :password, :password_confirmation, :group, role_ids: []

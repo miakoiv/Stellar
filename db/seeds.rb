@@ -10,57 +10,21 @@
 # General inventory with fuzzy availability, and order types for delivery
 # with or without online payment.
 #
-Inventory.create(id: 1, purpose: 'shipping', fuzzy: true, name: 'Saatavuus')
+Inventory.create(id: 1, fuzzy: true, name: 'Saatavuus', inventory_code: 'VART')
 
 OrderType.create(
   id: 1,
-  inventory_id: 1,
-  adjustment_multiplier: -1,
+  store_id: 1,
   name: 'Maksu laskulla',
   has_shipping: true,
   has_payment: false
 )
 OrderType.create(
   id: 2,
-  inventory_id: 1,
-  adjustment_multiplier: -1,
+  store_id: 1,
   name: 'Maksu verkkomaksuna',
   has_shipping: true,
   has_payment: true
-)
-
-#-----------------------------------------------------------------------------
-# Inventories without fuzziness in stock availability.
-# Order types include manufacturing and shipping without online payment.
-#
-Inventory.create(
-  id: 2,
-  purpose: 'manufacturing',
-  fuzzy: false,
-  name: 'In manufacturing queue'
-)
-Inventory.create(
-  id: 3,
-  purpose: 'shipping',
-  fuzzy: false,
-  name: 'Available for shipping'
-)
-
-OrderType.create(
-  id: 3,
-  inventory_id: 2,
-  adjustment_multiplier: 1,
-  name: 'Manufacture products',
-  has_shipping: false,
-  has_payment: false
-)
-OrderType.create(
-  id: 4,
-  inventory_id: 3,
-  adjustment_multiplier: -1,
-  name: 'Ship products',
-  has_shipping: true,
-  has_payment: false
 )
 
 #-----------------------------------------------------------------------------
@@ -70,10 +34,8 @@ Store.create(
   id: 1,
   host: 'tjt-extranet.leasit.info',
   erp_number: 1545,
-  inventory_code: 'VART',
   name: 'Tikkurila',
-  theme: 'cards',
-  inventory_ids: [2,3]
+  theme: 'cards'
 )
 
 Category.create(store_id: 1, name: 'Color Display')

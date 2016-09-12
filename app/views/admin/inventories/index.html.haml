@@ -9,14 +9,14 @@
     %thead
       %tr
         %th.col-xs-6= col(Inventory, :name)
-        %th.col-xs-2= col(Inventory, :purpose)
+        %th.col-xs-2= col(Inventory, :inventory_code)
         %th.col-min
         %th.actions
 
     %tbody
       = content_tag_for :tr, @inventories do |inventory|
         %td= inventory.name
-        %td= inventory.human_attribute_value(:purpose)
+        %td= inventory.inventory_code
         %td
           - if inventory.fuzzy?
             = icon('low-vision', title: col(Inventory, :fuzzy), data: {toggle: 'tooltip'})

@@ -54,10 +54,7 @@ class Product < ActiveRecord::Base
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :touch_self, after_remove: :touch_self
 
-  has_many :inventory_items, -> (product) {
-    joins(:product).where('products.store_id = inventory_items.store_id')
-  }
-
+  has_many :inventory_items, dependent: :destroy
   has_many :order_items
   has_many :component_entries, dependent: :destroy
   has_many :component_products, through: :component_entries, source: :component
@@ -119,9 +116,8 @@ class Product < ActiveRecord::Base
   # Returns the updated product, or nil if it fails. Supported fields:
   # product_code     : required
   # retail_price     : anything supported by Monetize.parse
-  # inventory_amount : targets the first shipping inventory
+  # inventory_amount : targets the first inventory
   def self.update_from_csv_row(store, row)
-    inventory = store.inventories.shipping.first
     product = store.products.where(code: row[:product_code]).first
     return nil if product.nil?
     begin
@@ -131,7 +127,8 @@ class Product < ActiveRecord::Base
       if row[:inventory_amount].present?
         amount = row[:inventory_amount].to_i
         amount = 0 if amount < 0
-        inventory.inventory_items.where(product: product).find_or_create_by!(store: store).update!(amount: amount)
+        inventory_item = product.inventory_items.first || product.inventory_items.create(inventory: store.inventories.first)
+        inventory_item.update!(on_hand: amount)
       end
       product
     rescue
@@ -253,15 +250,15 @@ class Product < ActiveRecord::Base
     100 * (retail_price - trade_price) / retail_price
   end
 
-  # Sum of stock in shipping inventories.
-  def shipping_stock
-    inventory_items.shipping.pluck(:amount).compact.sum
+  # Amount on hand in all inventories.
+  def on_hand
+    inventory_items.pluck(:on_hand).compact.sum
   end
 
-  # Product is considered available when it's live and has shipping inventory,
+  # Product is considered available when it's live and has inventory on hand,
   # or in case of no inventory, has a defined lead time.
   def available?
-    live? && (lead_time.present? || shipping_stock > 0)
+    live? && (lead_time.present? || on_hand > 0)
   end
 
   def master_product_options

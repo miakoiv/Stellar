@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905123240) do
+ActiveRecord::Schema.define(version: 20160912085156) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -200,22 +200,23 @@ ActiveRecord::Schema.define(version: 20160905123240) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
-    t.integer  "store_id",   limit: 4
-    t.integer  "purpose",    limit: 4,   default: 0,     null: false
-    t.boolean  "fuzzy",                  default: false, null: false
-    t.string   "name",       limit: 255
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.integer  "store_id",       limit: 4
+    t.boolean  "fuzzy",                      default: false, null: false
+    t.string   "name",           limit: 255
+    t.string   "inventory_code", limit: 255
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "inventories", ["store_id"], name: "index_inventories_on_store_id", using: :btree
 
   create_table "inventory_items", force: :cascade do |t|
     t.integer  "inventory_id", limit: 4,   null: false
-    t.integer  "store_id",     limit: 4,   null: false
     t.integer  "product_id",   limit: 4,   null: false
     t.string   "shelf",        limit: 255
-    t.integer  "amount",       limit: 4
+    t.integer  "on_hand",      limit: 4
+    t.integer  "reserved",     limit: 4
+    t.integer  "pending",      limit: 4
     t.integer  "value_cents",  limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -223,7 +224,6 @@ ActiveRecord::Schema.define(version: 20160905123240) do
 
   add_index "inventory_items", ["inventory_id"], name: "index_inventory_items_on_inventory_id", using: :btree
   add_index "inventory_items", ["product_id"], name: "index_inventory_items_on_product_id", using: :btree
-  add_index "inventory_items", ["store_id"], name: "index_inventory_items_on_store_id", using: :btree
 
   create_table "linked_products_products", id: false, force: :cascade do |t|
     t.integer "product_id",        limit: 4, null: false
@@ -261,19 +261,20 @@ ActiveRecord::Schema.define(version: 20160905123240) do
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
 
   create_table "order_types", force: :cascade do |t|
-    t.integer  "inventory_id",          limit: 4,                   null: false
-    t.integer  "adjustment_multiplier", limit: 4,   default: -1,    null: false
-    t.string   "name",                  limit: 255
-    t.integer  "source_group",          limit: 4
-    t.integer  "destination_group",     limit: 4
-    t.boolean  "has_shipping",                      default: false, null: false
-    t.boolean  "has_payment",                       default: false, null: false
-    t.string   "payment_gateway",       limit: 255
-    t.boolean  "is_rfq",                            default: false, null: false
-    t.boolean  "is_quote",                          default: false, null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.integer  "store_id",          limit: 4
+    t.string   "name",              limit: 255
+    t.integer  "source_group",      limit: 4
+    t.integer  "destination_group", limit: 4
+    t.boolean  "has_shipping",                  default: false, null: false
+    t.boolean  "has_payment",                   default: false, null: false
+    t.string   "payment_gateway",   limit: 255
+    t.boolean  "is_rfq",                        default: false, null: false
+    t.boolean  "is_quote",                      default: false, null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
+
+  add_index "order_types", ["store_id"], name: "index_order_types_on_store_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "store_id",            limit: 4,                     null: false
@@ -501,15 +502,14 @@ ActiveRecord::Schema.define(version: 20160905123240) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.string   "host",           limit: 255
-    t.string   "subdomain",      limit: 255
-    t.integer  "erp_number",     limit: 4
-    t.string   "inventory_code", limit: 255
-    t.string   "name",           limit: 255
-    t.string   "slug",           limit: 255
-    t.text     "settings",       limit: 65535
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "host",       limit: 255
+    t.string   "subdomain",  limit: 255
+    t.integer  "erp_number", limit: 4
+    t.string   "name",       limit: 255
+    t.string   "slug",       limit: 255
+    t.text     "settings",   limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "stores", ["host"], name: "index_stores_on_host", unique: true, using: :btree

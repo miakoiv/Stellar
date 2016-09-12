@@ -4,7 +4,7 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        = f.select :purpose, Inventory.purpose_options, {}, {class: 'selectize'}
+        = f.text_field :inventory_code
         = f.form_group do
           = f.check_box :fuzzy
       - unless locked

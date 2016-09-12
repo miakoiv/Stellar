@@ -128,13 +128,15 @@ fi:
         link: Linkki
       inventory:
         name: Nimi
-        purpose: Tarkoitus
         fuzzy: Epätarkat saldot
+        inventory_code: Inventaariokoodi
       inventory_item:
         inventory_id: Varasto
         code: Tuotekoodi
         shelf: Hylly
-        amount: Määrä
+        on_hand: Varastossa
+        reserved: Varattu
+        pending: Tulossa
         value: Arvo
       order:
         number: tilaus nro
