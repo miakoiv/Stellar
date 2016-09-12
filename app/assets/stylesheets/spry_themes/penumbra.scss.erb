@@ -319,25 +319,9 @@ body {
         }
         .product-stock {
           ul {
-            @extend .list-group;
             font-size: $font-size-small;
 
-            > li {
-              @extend .list-group-item;
-              > span {
-                @extend .pull-right, .label;
-                font-size: inherit;
-              }
-
-              &.manufacturing {
-                @extend .list-group-item-warning;
-                > span { @extend .label-warning; }
-              }
-              &.shipping {
-                @extend .list-group-item-success;
-                > span { @extend .label-success; }
-              }
-            }
+            > li > span { @extend .badge; }
           }
         }
       }

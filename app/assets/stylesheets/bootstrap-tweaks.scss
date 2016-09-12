@@ -389,24 +389,6 @@ fieldset[disabled] .help-block { display: none; }
 .box { background: transparent; }
 
 //
-// inventory readouts
-//
-span.manufacturing, span.shipping {
-  display: inline-block;
-  margin-right: 5px;
-}
-span.manufacturing:before, span.shipping:before {
-  display: inline-block;
-  margin-right: 2px;
-  font-family: FontAwesome;
-  color: $text-muted;
-}
-// cogs
-span.manufacturing:before { content: ""; }
-// truck
-span.shipping:before { content: ""; }
-
-//
 // wysiwyg content
 //
 .wysiwyg-content {
