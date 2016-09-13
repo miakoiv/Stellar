@@ -246,6 +246,7 @@ en:
         price: Price
         markup_percent: Markup %
         margin_percent: Margin %
+        inventory: Inventory
         stock: Stock
         value: Value
       product_property:

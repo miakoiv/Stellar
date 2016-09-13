@@ -1,0 +1,17 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(InventoryItem, :inventory_id)
+        %th.col-xs-2.text-right= col(InventoryItem, :on_hand)
+        %th.col-xs-2.text-right= col(InventoryItem, :reserved)
+        %th.col-xs-2.text-right= col(InventoryItem, :pending)
+        %th.col-xs-2.text-right= col(InventoryItem, :value)
+
+    %tbody
+      = content_tag_for :tr, product.inventory_items do |inventory_item|
+        %td= inventory_item.inventory.name
+        %td.text-right= inventory_item.on_hand
+        %td.text-right= inventory_item.reserved
+        %td.text-right= inventory_item.pending
+        %td.text-right.currency= humanized_money_with_symbol inventory_item.total_value

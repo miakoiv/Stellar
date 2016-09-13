@@ -21,6 +21,9 @@
         %a{href: '#tab-alternate-prices', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :alternate_prices)
       %li{role: 'presentation'}
+        %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
+          = col(Product, :inventory)
+      %li{role: 'presentation'}
         %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
           = col(Product, :images)
       %li{role: 'presentation'}
@@ -39,6 +42,8 @@
     .tab-content
       #tab-alternate-prices.tab-pane.fade.in.active
         = render partial: 'admin/alternate_prices/table', object: @product, as: :product
+      #tab-inventory.tab-pane.fade
+        = render partial: 'admin/inventory_items/table', object: @product, as: :product
       #tab-images.tab-pane.fade
         = render partial: 'admin/images/table', object: @product, as: :imageable
       #tab-properties.tab-pane.fade

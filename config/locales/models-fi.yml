@@ -246,6 +246,7 @@ fi:
         price: Hinta
         markup_percent: Lisä-%
         margin_percent: Kate-%
+        inventory: Varasto
         stock: Saldo
         value: Arvo
       product_property:
