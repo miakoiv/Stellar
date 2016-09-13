@@ -51,6 +51,7 @@ en:
           user_manager: user manager
           album_editor: album editor
           asset_editor: asset editor
+          inventory_manage: manage inventory
           store_admin: store administrator
           superuser: superuser
       user:

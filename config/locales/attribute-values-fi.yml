@@ -51,6 +51,7 @@ fi:
           user_manager: käyttäjien hallinta
           album_editor: albumien muokkaus
           asset_editor: omistuksien muokkaus
+          inventory_manage: varastojen hallinta
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
       user:

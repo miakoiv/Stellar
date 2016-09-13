@@ -56,6 +56,10 @@ asset_editor:
   id: 21
   name: asset_editor
   appearance: info
+inventory_manager:
+  id: 22
+  name: inventory_manage
+  appearance: info
 order_review:
   id: 50
   name: order_review
