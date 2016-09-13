@@ -118,7 +118,7 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :customer_assets do
-      resources :asset_entries, shallow: true
+      resources :asset_entries, shallow: true, only: :create
     end
     resources :pricing_groups
     resources :inventories
