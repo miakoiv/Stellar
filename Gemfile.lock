@@ -253,7 +253,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     searchlight (4.1.0)
-    selectize-rails (0.12.1)
+    selectize-rails (0.12.3)
     sexp_processor (4.7.0)
     sixarm_ruby_unaccent (1.1.1)
     spring (1.6.4)
