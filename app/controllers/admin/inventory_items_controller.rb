@@ -1,0 +1,77 @@
+#encoding: utf-8
+
+class Admin::InventoryItemsController < ApplicationController
+
+  before_action :authenticate_user!
+  before_action :set_inventory_item, only: [:show, :edit]
+
+  authorize_actions_for InventoryItem
+
+  layout 'admin'
+
+  # GET /admin/inventory_items
+  # GET /admin/inventory_items.json
+  def index
+    @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
+    @search = InventoryItemSearch.new(search_params)
+    @inventory_items = @search.results.page(params[:page])
+  end
+
+  # GET /admin/inventory_items/1
+  def show
+  end
+
+  # GET /admin/inventory_items/new
+  def new
+    @inventory_item = current_store.inventory_items.build
+  end
+
+  # GET /admin/inventory_items/1/edit
+  def edit
+  end
+
+  # POST /admin/inventory_items
+  # POST /admin/inventory_items.json
+  def create
+    @product = current_store.products.find(params[:inventory_item][:product_id])
+
+    # Creating an inventory item updates an existing item with a matching code.
+    @inventory_item = InventoryItem.find_or_initialize_by(
+      inventory_item_params.slice(:inventory_id, :product_id, :code)
+    )
+
+    respond_to do |format|
+      if @inventory_item.update(inventory_item_params)
+        format.js
+        format.html { redirect_to edit_admin_inventory_item_path(@inventory_item),
+          notice: t('.notice', inventory_item: @inventory_item) }
+        format.json { render :show, status: :created, location: admin_inventory_item_path(@inventory_item) }
+      else
+        format.js
+        format.html { render :new }
+        format.json { render json: @inventory_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_inventory_item
+      @inventory_item = current_store.inventory_items.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def inventory_item_params
+      params.require(:inventory_item).permit(
+        :inventory_id, :product_id, :code,
+        inventory_entries_attributes: [:recorded_at, :amount, :value, :note]
+      )
+    end
+
+    # Restrict searching to inventories in current store.
+    def search_params
+      @query.merge(
+        store_id: current_store.id
+      )
+    end
+end

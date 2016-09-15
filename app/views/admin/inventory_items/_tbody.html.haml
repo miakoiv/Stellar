@@ -1,0 +1,7 @@
+= content_tag_for :tr, product.inventory_items.active do |inventory_item|
+  %td= inventory_item.title
+  %td= inventory_item.code
+  %td.text-right= inventory_item.on_hand
+  %td.text-right= inventory_item.reserved
+  %td.text-right= inventory_item.pending
+  %td.text-right.currency= humanized_money_with_symbol inventory_item.value

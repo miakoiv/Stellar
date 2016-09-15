@@ -28,9 +28,12 @@ en:
       inventory:
         one: inventory
         other: inventories
+      inventory_entry:
+        one: entry
+        other: entries
       inventory_item:
-        one: inventory item
-        other: inventory items
+        one: inventory level
+        other: inventory levels
       order:
         one: order
         other: orders
@@ -130,9 +133,17 @@ en:
         name: Name
         fuzzy: Approximate quantities
         inventory_code: Inventory code
+      inventory_entry:
+        recorded_at: Date
+        source_id: Reference
+        amount: Amount
+        value: Value
+        note: Note
+        barcode: Barcode
       inventory_item:
         inventory_id: Inventory
-        code: Product code
+        product_id: Product
+        code: Lot code
         shelf: Shelf
         on_hand: On hand
         reserved: Reserved

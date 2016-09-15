@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912085156) do
+ActiveRecord::Schema.define(version: 20160914110953) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -210,10 +210,26 @@ ActiveRecord::Schema.define(version: 20160912085156) do
 
   add_index "inventories", ["store_id"], name: "index_inventories_on_store_id", using: :btree
 
+  create_table "inventory_entries", force: :cascade do |t|
+    t.integer  "inventory_item_id", limit: 4,   null: false
+    t.date     "recorded_at"
+    t.integer  "source_id",         limit: 4
+    t.string   "source_type",       limit: 255
+    t.integer  "amount",            limit: 4,   null: false
+    t.integer  "value_cents",       limit: 4,   null: false
+    t.string   "note",              limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "inventory_entries", ["inventory_item_id"], name: "index_inventory_entries_on_inventory_item_id", using: :btree
+  add_index "inventory_entries", ["recorded_at"], name: "index_inventory_entries_on_recorded_at", using: :btree
+  add_index "inventory_entries", ["source_type", "source_id"], name: "index_inventory_entries_on_source_type_and_source_id", using: :btree
+
   create_table "inventory_items", force: :cascade do |t|
     t.integer  "inventory_id", limit: 4,   null: false
     t.integer  "product_id",   limit: 4,   null: false
-    t.string   "shelf",        limit: 255
+    t.string   "code",         limit: 255, null: false
     t.integer  "on_hand",      limit: 4
     t.integer  "reserved",     limit: 4
     t.integer  "pending",      limit: 4

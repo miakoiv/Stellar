@@ -1,0 +1,42 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_inventory_items_path, method: :get do |f|
+      .row
+        .col-sm-2
+          .form-group
+            = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
+        .col-sm-2
+          .form-group
+            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
+        .col-sm-6
+          .form-group
+            = f.select :product_id, [], {include_blank: true}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall'}
+        .col-sm-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+:coffee
+  items = #{@search.raw_options['product_id'].to_json}
+
+  $('#inventory_item_search_product_id').selectize
+    plugins: ['remove_button']
+    dropdownParent: 'body'
+    preload: true
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)
+    onLoad: ->
+      this.setValue(items)

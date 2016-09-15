@@ -122,6 +122,9 @@ Rails.application.routes.draw do
     end
     resources :pricing_groups
     resources :inventories
+    resources :inventory_items do
+      resources :inventory_entries, shallow: true, only: :create
+    end
 
     post '/images/reorder', to: 'images#reorder', as: :reorder_images
     post '/images/delete', to: 'images#delete', as: :delete_image

@@ -28,9 +28,12 @@ fi:
       inventory:
         one: varasto
         other: varastot
+      inventory_entry:
+        one: kirjaus
+        other: kirjaukset
       inventory_item:
-        one: varastorivi
-        other: varastorivit
+        one: varastosaldo
+        other: varastosaldot
       order:
         one: tilaus
         other: tilaukset
@@ -130,9 +133,17 @@ fi:
         name: Nimi
         fuzzy: Epätarkat saldot
         inventory_code: Inventaariokoodi
+      inventory_entry:
+        recorded_at: Pvm
+        source_id: Viite
+        amount: Määrä
+        value: Arvo
+        note: Selite
+        barcode: Viivakoodi
       inventory_item:
         inventory_id: Varasto
-        code: Tuotekoodi
+        product_id: Tuote
+        code: Eräkoodi
         shelf: Hylly
         on_hand: Varastossa
         reserved: Varattu

@@ -1,0 +1,17 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2= col(InventoryEntry, :recorded_at)
+        %th.col-xs-3= col(InventoryEntry, :source_id)
+        %th.col-xs-2= col(InventoryEntry, :amount)
+        %th.col-xs-2= col(InventoryEntry, :value)
+        %th= col(InventoryEntry, :note)
+
+    %tbody
+      = content_tag_for :tr, @inventory_item.inventory_entries do |inventory_entry|
+        %td= l(inventory_entry.recorded_at)
+        %td= inventory_entry.source
+        %td= inventory_entry.amount
+        %td= inventory_entry.value
+        %td= inventory_entry.note

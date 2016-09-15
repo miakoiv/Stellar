@@ -1,0 +1,14 @@
+.page-header
+  = link_to admin_inventory_items_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('bar-chart', @inventory_item.code)
+    %span.small
+      %strong= @inventory_item.product.title
+      = @inventory_item.product.subtitle
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: true}
+  .col-md-7
+    = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item

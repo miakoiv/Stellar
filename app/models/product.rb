@@ -252,7 +252,7 @@ class Product < ActiveRecord::Base
 
   # Amount on hand in all inventories.
   def on_hand
-    inventory_items.pluck(:on_hand).compact.sum
+    inventory_items.active.pluck(:on_hand).compact.sum
   end
 
   # Product is considered available when it's live and has inventory on hand,

@@ -1,6 +1,6 @@
 - if can_see_stock?
   %ul.list-group
-    - product.inventory_items.each do |item|
+    - product.inventory_items.active.each do |item|
       %li.list-group-item{class: "list-group-item-#{item.appearance}"}
         %span
           = item.on_hand || 0

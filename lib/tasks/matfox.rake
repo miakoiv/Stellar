@@ -34,7 +34,7 @@ IMPORT_FILES = {
     file: 'www-nimike_varasto-utf8.csv',
     multiple: true,
     headers: [
-      :inventory_code, :code, :shelf,
+      :inventory_code, :code, nil,
       :quantity_on_hand, :quantity_reserved, :quantity_pending,
       nil, nil, nil, :value
     ],
@@ -116,21 +116,21 @@ namespace :matfox do
       inventory_data.each do |row|
         inventory = store.inventories.find_by(inventory_code: row[:inventory_code])
         next if inventory.nil?
-        update_inventory_item(
+        create_inventory_item(
           inventory, product,
           row[:quantity_on_hand],
           row[:quantity_reserved],
           row[:quantity_pending],
-          row[:shelf], row[:value]
+          row[:value]
         )
       end
     else
-      update_inventory_item(
+      create_inventory_item(
         store.inventories.first, product,
         product[:quantity_on_hand],
         product[:quantity_reserved],
         product[:quantity_pending],
-        nil, nil
+        product[:cost_price]
       )
     end
   end
@@ -171,23 +171,23 @@ namespace :matfox do
     end
   end
 
-  # Finds or creates inventory item for `product` in `inventory`.
-  def find_or_create_inventory_item(inventory, product)
-    inventory.inventory_items.find_or_create_by(product: product)
-  end
-
-  def update_inventory_item(inventory, product, on_hand, reserved, pending, shelf, value)
+  # Creates an inventory item for `product` in `inventory`.
+  def create_inventory_item(inventory, product, on_hand, reserved, pending, value)
     puts "→ #{inventory.name} #{on_hand} / #{reserved} / #{pending}"
 
-    find_or_create_inventory_item(
-      inventory, product
-    ).update(
-      on_hand: on_hand || 0,
-      reserved: reserved || 0,
-      pending: pending || 0,
-      shelf: shelf,
+    # Purges any existing inventory items for this product.
+    inventory.inventory_items.where(product: product).destroy_all
+
+    item = inventory.inventory_items.build(
+      product: product,
+      code: Time.current.to_i
+    )
+    item.inventory_entries.build(
+      recorded_at: Date.today,
+      amount: on_hand.to_i || 0,
       value: value || 0
     )
+    item.save!
   end
 
   # Updates the component entries of `product` according to entries

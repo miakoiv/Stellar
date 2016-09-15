@@ -1,0 +1,6 @@
+.page-header
+  %h1= icon('bar-chart', title(InventoryItem, count: 2))
+
+= render partial: 'search'
+= render partial: 'table'
+= paginate @inventory_items
