@@ -112,13 +112,14 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products/upload_file
   def upload_file
     @file = params[:file]
+    code = @file.original_filename
     headers = current_store.csv_headers
     updated = []
 
     CSV.foreach @file.path, current_store.csv_options.merge(
       header_converters: lambda { |x| headers[x] || x }
     ) do |row|
-      if product = Product.update_from_csv_row(current_store, row)
+      if product = Product.update_from_csv_row(current_store, row, code)
         updated << product.as_json(
           only: [:code, :title, :subtitle], methods: [:formatted_price_string]
         )

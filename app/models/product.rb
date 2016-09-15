@@ -117,18 +117,29 @@ class Product < ActiveRecord::Base
   # product_code     : required
   # retail_price     : anything supported by Monetize.parse
   # inventory_amount : targets the first inventory
-  def self.update_from_csv_row(store, row)
+  def self.update_from_csv_row(store, row, code = nil)
     product = store.products.where(code: row[:product_code]).first
-    return nil if product.nil?
+    inventory = store.inventories.first
+    return nil if product.nil? || inventory.nil?
+
     begin
       if row[:retail_price].present?
         product.update!(retail_price: row[:retail_price].to_money)
       end
       if row[:inventory_amount].present?
+        inventory.inventory_items.where(product: product).destroy_all
         amount = row[:inventory_amount].to_i
         amount = 0 if amount < 0
-        inventory_item = product.inventory_items.first || product.inventory_items.create(inventory: store.inventories.first)
-        inventory_item.update!(on_hand: amount)
+        item = inventory.inventory_items.build(
+          product: product,
+          code: code
+        )
+        item.inventory_entries.build(
+          recorded_at: Date.today,
+          amount: amount,
+          value: product.cost_price || 0
+        )
+        item.save!
       end
       product
     rescue
