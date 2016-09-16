@@ -117,7 +117,7 @@ class Product < ActiveRecord::Base
   # product_code     : required
   # retail_price     : anything supported by Monetize.parse
   # inventory_amount : targets the first inventory
-  def self.update_from_csv_row(store, row, code = nil)
+  def self.update_from_csv_row(store, row, code)
     product = store.products.where(code: row[:product_code]).first
     inventory = store.inventories.first
     return nil if product.nil? || inventory.nil?
@@ -127,19 +127,10 @@ class Product < ActiveRecord::Base
         product.update!(retail_price: row[:retail_price].to_money)
       end
       if row[:inventory_amount].present?
-        inventory.inventory_items.where(product: product).destroy_all
+        product.inventory_items.destroy_all
         amount = row[:inventory_amount].to_i
         amount = 0 if amount < 0
-        item = inventory.inventory_items.build(
-          product: product,
-          code: code
-        )
-        item.inventory_entries.build(
-          recorded_at: Date.today,
-          amount: amount,
-          value: product.cost_price || 0
-        )
-        item.save!
+        product.restock(inventory, code, amount)
       end
       product
     rescue
@@ -270,6 +261,23 @@ class Product < ActiveRecord::Base
   # or in case of no inventory, has a defined lead time.
   def available?
     live? && (lead_time.present? || on_hand > 0)
+  end
+
+  # Restocks given inventory with amount of this product with given lot code,
+  # at given value.
+  def restock(inventory, code, amount, value = nil, recorded_at = nil)
+    recorded_at ||= Date.today
+    value ||= cost_price || 0
+    item = inventory_items.find_or_initialize_by(
+      inventory: inventory,
+      code: code
+    )
+    item.inventory_entries.build(
+      recorded_at: recorded_at,
+      amount: amount,
+      value: value
+    )
+    item.save!
   end
 
   def master_product_options
