@@ -15,7 +15,7 @@ class InventoryItem < ActiveRecord::Base
   has_many :inventory_entries, dependent: :destroy
   accepts_nested_attributes_for :inventory_entries, limit: 1
 
-  default_scope { order(:inventory_id) }
+  default_scope { order(:created_at) }
   scope :active, -> { where('on_hand > 0') }
 
   #---
