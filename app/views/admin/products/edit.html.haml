@@ -43,7 +43,8 @@
         = render partial: 'admin/alternate_prices/edit_table', object: @product, as: :product
       #tab-inventory.tab-pane.fade
         = render partial: 'admin/inventory_items/table_for_product', object: @product, as: :product
-        = render partial: 'admin/inventory_items/form_for_product', object: @product, as: :product
+        - if current_user.can_create?(InventoryItem)
+          = render partial: 'admin/inventory_items/form_for_product', object: @product, as: :product
       #tab-images.tab-pane.fade
         = render partial: 'admin/images/edit_table', object: @product, as: :imageable
         = render partial: 'admin/images/dropzone', object: @product, as: :imageable
