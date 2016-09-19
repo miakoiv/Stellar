@@ -297,6 +297,15 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Consumes stock for the contents of this order.
+  def consume_stock!
+    transaction do
+      order_items.each do |item|
+        item.product.consume!(item.amount, self)
+      end
+    end
+  end
+
   # Sends an order confirmation to the customer, possible contact person,
   # and additional notifications to vendors if the order contains any of
   # their products.

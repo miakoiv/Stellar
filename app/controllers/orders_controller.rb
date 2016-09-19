@@ -45,6 +45,7 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
         if !@order.complete? && @order.paid?
           @order.complete!
+          @order.consume_stock!
           @order.send_confirmations
         end
         format.json { render json: @order }
