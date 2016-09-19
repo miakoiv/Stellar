@@ -130,7 +130,7 @@ class Product < ActiveRecord::Base
         product.inventory_items.destroy_all
         amount = row[:inventory_amount].to_i
         amount = 0 if amount < 0
-        product.restock(inventory, code, amount)
+        product.restock!(inventory, code, amount)
       end
       product
     rescue
@@ -264,10 +264,10 @@ class Product < ActiveRecord::Base
   end
 
   # Restocks given inventory with amount of this product with given lot code,
-  # at given value.
-  def restock(inventory, code, amount, value = nil, recorded_at = nil)
+  # at given value. If value is not specified, uses the current value of the
+  # targeted inventory item, defaulting to product cost price.
+  def restock!(inventory, code, amount, value = nil, recorded_at = nil)
     recorded_at ||= Date.today
-    value ||= cost_price || 0
     item = inventory_items.find_or_initialize_by(
       inventory: inventory,
       code: code
@@ -275,9 +275,28 @@ class Product < ActiveRecord::Base
     item.inventory_entries.build(
       recorded_at: recorded_at,
       amount: amount,
-      value: value
+      value: value || item.value || cost_price || 0
     )
     item.save!
+  end
+
+  # Consumes given amount of this product from inventory, starting from
+  # the oldest stock. Multiple inventory items may be affected to satisfy
+  # the consumed amount. Returns false if we have insufficient stock on hand.
+  def consume!(amount, source = nil)
+    return false if amount > on_hand
+    inventory_items.active.each do |item|
+      if item.on_hand >= amount
+        # This inventory item satisfies the amount, destock and finish.
+        item.destock!(amount, source)
+        break
+      else
+        # Continue with remaining amount after destocking all of this item.
+        amount -= item.on_hand
+        item.destock!(item.on_hand, source)
+      end
+    end
+    true
   end
 
   def master_product_options

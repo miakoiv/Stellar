@@ -33,7 +33,7 @@ class InventoryItem < ActiveRecord::Base
   end
 
   # Reduces stock from this inventory item.
-  def destock!(amount, value, source = nil, recorded_at = nil)
+  def destock!(amount, source = nil, recorded_at = nil)
     recorded_at ||= Date.today
     inventory_entries.create(
       recorded_at: recorded_at,
