@@ -11,7 +11,9 @@
     %tbody
       = content_tag_for :tr, @inventory_item.inventory_entries do |inventory_entry|
         %td= l(inventory_entry.recorded_at)
-        %td= inventory_entry.source
+        %td
+          - if inventory_entry.source.present?
+            = link_to_if current_user.can_read?(inventory_entry.source.class), "#{title(inventory_entry.source.class)} #{inventory_entry.source}", [:admin, inventory_entry.source]
         %td= inventory_entry.amount
         %td= inventory_entry.value
         %td= inventory_entry.note

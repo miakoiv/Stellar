@@ -17,8 +17,9 @@
         %td= inventory_item.code
         %td= inventory_item.inventory.name
         %td
-          %strong= inventory_item.product.title
-          = inventory_item.product.subtitle
+          = link_to admin_product_path(inventory_item.product) do
+            %strong= inventory_item.product.title
+            = inventory_item.product.subtitle
         %td.text-right= inventory_item.on_hand
         %td.text-right= inventory_item.reserved
         %td.text-right= inventory_item.pending
