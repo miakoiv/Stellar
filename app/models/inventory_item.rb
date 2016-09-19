@@ -32,6 +32,18 @@ class InventoryItem < ActiveRecord::Base
     on_hand * value_cents
   end
 
+  # Reduces stock from this inventory item.
+  def destock!(amount, value, source = nil, recorded_at = nil)
+    recorded_at ||= Date.today
+    inventory_entries.create(
+      recorded_at: recorded_at,
+      source: source,
+      amount: -amount,
+      value: value
+    )
+    update_amount_and_value!
+  end
+
   def title
     inventory.name
   end
