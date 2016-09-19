@@ -252,9 +252,19 @@ class Product < ActiveRecord::Base
     100 * (retail_price - trade_price) / retail_price
   end
 
+  # Stock is not tracked for master products, bundles or composites, or
+  # virtual products.
+  def tracked_stock?
+    vanilla? || variant?
+  end
+
   # Amount on hand in all inventories.
   def on_hand
-    inventory_items.active.pluck(:on_hand).compact.sum
+    if tracked_stock?
+      inventory_items.active.pluck(:on_hand).compact.sum
+    else
+      Float::INFINITY
+    end
   end
 
   # Product is considered available when it's live and has inventory on hand,
@@ -284,6 +294,7 @@ class Product < ActiveRecord::Base
   # the oldest stock. Multiple inventory items may be affected to satisfy
   # the consumed amount. Returns false if we have insufficient stock on hand.
   def consume!(amount, source = nil)
+    return true if !tracked_stock?
     return false if amount > on_hand
     inventory_items.active.each do |item|
       if item.on_hand >= amount
