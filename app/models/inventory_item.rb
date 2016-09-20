@@ -22,6 +22,7 @@ class InventoryItem < ActiveRecord::Base
   validates :inventory_id, presence: true
   validates :product_id, presence: true
   validates :code, presence: true
+  validates_associated :inventory_entries
 
   #---
   after_save :update_amount_and_value!

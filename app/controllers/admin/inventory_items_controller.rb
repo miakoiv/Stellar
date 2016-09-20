@@ -33,15 +33,15 @@ class Admin::InventoryItemsController < ApplicationController
   # POST /admin/inventory_items
   # POST /admin/inventory_items.json
   def create
-    @product = current_store.products.find(params[:inventory_item][:product_id])
-
     # Creating an inventory item updates an existing item with a matching code.
     @inventory_item = InventoryItem.find_or_initialize_by(
       inventory_item_params.slice(:inventory_id, :product_id, :code)
     )
+    @inventory_item.assign_attributes(inventory_item_params)
 
     respond_to do |format|
-      if @inventory_item.update(inventory_item_params)
+      if @inventory_item.save
+        @product = @inventory_item.product
         format.js
         format.html { redirect_to edit_admin_inventory_item_path(@inventory_item),
           notice: t('.notice', inventory_item: @inventory_item) }

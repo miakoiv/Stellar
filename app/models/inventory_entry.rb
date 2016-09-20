@@ -7,7 +7,7 @@ class InventoryEntry < ActiveRecord::Base
 
   # Values are for each, total value is added to inventory item value.
   monetize :value_cents
-  monetize :total_value_cents
+  monetize :total_value_cents, disable_validation: true
 
   belongs_to :inventory_item
 
@@ -18,8 +18,8 @@ class InventoryEntry < ActiveRecord::Base
   default_scope { order(recorded_at: :desc, created_at: :desc) }
 
   #---
-  validates :recorded_at, presence: true
-  validates :amount, numericality: {only_integer: true}
+  validates :recorded_at, presence: true, on: :create
+  validates :amount, numericality: {only_integer: true}, on: :create
 
   #---
   def total_value_cents

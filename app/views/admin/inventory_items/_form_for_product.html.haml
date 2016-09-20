@@ -1,17 +1,14 @@
 #add-inventory-item.table-responsive
-  - inventory_item = InventoryItem.new(product: product)
-  - inventory_item.inventory_entries.build(recorded_at: Date.today)
-
-  = form_for [:admin, inventory_item], remote: true, method: :post do |f|
+  = form_for [:admin, product, product.inventory_items.build.tap { |item| item.inventory_entries.build(recorded_at: Date.today) }], remote: true, method: :post do |f|
+    = f.hidden_field :product_id
     = f.fields_for :inventory_entries do |ff|
-      = f.hidden_field :product_id
       %table.table.table-loose
         %tbody
           %tr
             %td.col-xs-3
-              = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {placeholder: col(InventoryItem, :inventory_id)}
-            %td.col-xs-3
               = f.text_field :code, class: 'form-control'
+            %td.col-xs-3
+              = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {placeholder: col(InventoryItem, :inventory_id)}
             %td.col-xs-2= ff.number_field :amount, value: 0, class: 'form-control text-right'
             %td.col-xs-2
             %td.col-xs-2= ff.text_field :value, value: product.cost_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'

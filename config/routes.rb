@@ -89,15 +89,16 @@ Rails.application.routes.draw do
       resources :product_properties, shallow: true
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
+      resources :inventory_items, shallow: true
       resources :component_entries, shallow: true do
         post :reorder, on: :collection
       end
       resources :requisite_entries, shallow: true do
         post :reorder, on: :collection
       end
-      post :duplicate, on: :member
-      post :add_requisite_entries, on: :member
       get :query, on: :collection
+      post :add_requisite_entries, on: :member
+      post :duplicate, on: :member
       post :reorder, on: :collection
       post :upload_file, on: :collection
     end
