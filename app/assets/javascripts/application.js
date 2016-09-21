@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require moment
-//= require moment/fi
-//= require jquery
+//= require moment/fi.js
+//= require jquery2
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require jquery-ui/effect.all
