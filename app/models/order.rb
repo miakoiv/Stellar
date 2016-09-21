@@ -15,6 +15,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :order_type
   delegate :is_rfq?, :is_quote?, to: :order_type
+  delegate :payment_gateway_class, to: :order_type
 
   has_many :order_items, dependent: :destroy, inverse_of: :order
   has_many :products, through: :order_items
@@ -407,10 +408,6 @@ class Order < ActiveRecord::Base
 
   def has_payment?
     order_type.present? && order_type.has_payment?
-  end
-
-  def payment_gateway
-    "PaymentGateway::#{order_type.payment_gateway}".constantize
   end
 
   def adjustment_total_cents

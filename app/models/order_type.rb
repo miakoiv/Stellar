@@ -20,6 +20,10 @@ class OrderType < ActiveRecord::Base
     destination_group == User.groups[user.group]
   end
 
+  def payment_gateway_class
+    "PaymentGateway::#{payment_gateway}".constantize
+  end
+
   def to_s
     name
   end

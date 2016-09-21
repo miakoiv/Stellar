@@ -26,7 +26,7 @@ class CheckoutController < ApplicationController
     @order.address_to(current_user)
 
     if @order.has_payment?
-      @payment_gateway = @order.payment_gateway.new(order: @order)
+      @payment_gateway = @order.payment_gateway_class.new(order: @order)
     end
   end
 
@@ -35,7 +35,7 @@ class CheckoutController < ApplicationController
     method = params[:method]
 
     if method.present? && @order.has_payment?
-      @payment_gateway = @order.payment_gateway.new(order: @order, return_url: return_url(@order))
+      @payment_gateway = @order.payment_gateway_class.new(order: @order, return_url: return_url(@order))
       response = @payment_gateway.send("charge_#{method}", params)
       render json: response
     else
@@ -47,7 +47,7 @@ class CheckoutController < ApplicationController
   def verify
     token = params[:token]
 
-    @payment_gateway = @order.payment_gateway.new(order: @order)
+    @payment_gateway = @order.payment_gateway_class.new(order: @order)
     status = @payment_gateway.verify(token)
 
     if status
@@ -62,7 +62,7 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/return
   def return
-    @payment_gateway = @order.payment_gateway.new(order: @order)
+    @payment_gateway = @order.payment_gateway_class.new(order: @order)
     status = @payment_gateway.return(params)
     if status
       @order.payments.create(amount: @order.grand_total)
