@@ -48,6 +48,7 @@ class Store < ActiveRecord::Base
     store.has_many :properties
     store.has_many :orders
     store.has_many :order_types
+    store.has_many :shipping_methods
     store.has_many :pages
     store.has_many :albums
     store.has_many :promotions

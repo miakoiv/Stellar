@@ -207,8 +207,15 @@ en:
     sidebar:
       included_albums: Show albums
   checkout:
+    checkout:
+      address_panel: Contact information
+      shipping_panel: Shipping
+      payment_panel: Payment
+      confirm_panel: Confirmation
     title: Checkout
     continue_shopping: Continue shopping
+    select_shipping_method: Select shipping method
+    ship: Continue with order
     receipt: Print a receipt
     creditcard_payment: Credit card payment
     bank_payment: Bank payment
@@ -223,8 +230,9 @@ en:
       token_request_error: There was a problem communicating with the payment provider. Try again later.
       charge_error: There was a problem processing your payment, check your card details.
     checkout_form:
-      continue: Proceed to payment
-      confirm: Confirm
+      continue_order: Continue with order
+    confirm:
+      confirm_order: Confirm order
   actions:
     back: Back
     show: Show

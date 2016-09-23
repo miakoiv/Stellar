@@ -54,12 +54,9 @@
         = f.text_field :message
     = f.text_area :notes, rows: 4
 
-  #continue-button.collapse{class: @order.paid? ? '' : 'in'}
+  #continue-order
     = f.form_group do
-      = f.submit t('.continue'), class: 'btn btn-lg btn-block btn-primary'
-  #confirm-button.collapse{class: @order.paid? ? 'in' : ''}
-    = f.form_group do
-      = f.submit t('.confirm'), class: 'btn btn-lg btn-block btn-success'
+      = f.submit t('.continue_order'), class: 'btn btn-lg btn-block btn-primary'
 
 :coffee
   $('#order_has_billing_address').on 'change', (e) ->

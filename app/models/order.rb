@@ -20,6 +20,7 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy, inverse_of: :order
   has_many :products, through: :order_items
   has_many :payments, dependent: :destroy, inverse_of: :order
+  has_many :shipments, dependent: :destroy, inverse_of: :order
 
   default_scope { where(cancelled_at: nil) }
 
@@ -432,6 +433,17 @@ class Order < ActiveRecord::Base
     [company_name, contact_person, shipping_city].compact.reject(&:empty?).join(', ')
   end
 
+  # Order status in the checkout process. This is included in the JSON
+  # representation for checkout.coffee to reveal the corresponding form
+  # elements.
+  def status
+    return :address  if !valid?
+    return :shipping if has_shipping? && shipments.empty?
+    return :payment  if !paid?
+    return :confirm  if !complete?
+    return :complete
+  end
+
   def to_s
     number
   end
@@ -449,7 +461,7 @@ class Order < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(methods: [:paid, :complete])
+    super(methods: :status)
   end
 
   # Vis.js timeline representation of order events.

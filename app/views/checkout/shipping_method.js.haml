@@ -1,0 +1,7 @@
+$('#shipping-panel .list-group a').removeClass('active');
+$('#shipping-panel .content').html('');
+
+$('##{dom_id(@shipping_method)}').addClass('active');
+
+- if @shipping_gateway.present?
+  $('#shipping-panel .content').html("#{j render @shipping_gateway}");

@@ -1,0 +1,8 @@
+%h4= t('checkout.select_shipping_method')
+.list-group
+  - current_store.shipping_methods.each do |method|
+    = link_to method.name, shipping_method_path(@order, method), remote: true, id: dom_id(method), class: 'list-group-item'
+
+.content
+
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDLj2FT4dBaUWWKXUIji0YR8AXL1xQg_mc"

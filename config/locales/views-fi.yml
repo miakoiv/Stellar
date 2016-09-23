@@ -187,8 +187,15 @@ fi:
     sidebar:
       included_albums: Näytä albumit
   checkout:
+    checkout:
+      address_panel: Yhteystiedot
+      shipping_panel: Toimitus
+      payment_panel: Maksu
+      confirm_panel: Vahvistus
     title: Kassa
     continue_shopping: Jatka ostoksia
+    select_shipping_method: Valitse toimitustapa
+    ship: Jatka tilaamista
     receipt: Tulosta kuitti
     creditcard_payment: Maksa luottokortilla
     bank_payment: Maksa nettipankissa
@@ -203,8 +210,9 @@ fi:
       token_request_error: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
       charge_error: Virhe maksutapahtumassa. Tarkista kortin tiedot.
     checkout_form:
-      continue: Siirry maksamaan
-      confirm: Vahvista
+      continue_order: Jatka tilaamista
+    confirm:
+      confirm_order: Vahvista tilaus
   actions:
     back: Palaa
     show: Näytä

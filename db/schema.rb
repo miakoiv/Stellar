@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914110953) do
+ActiveRecord::Schema.define(version: 20160921115110) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -516,6 +516,30 @@ ActiveRecord::Schema.define(version: 20160914110953) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "shipments", force: :cascade do |t|
+    t.integer  "order_id",           limit: 4,     null: false
+    t.integer  "shipping_method_id", limit: 4
+    t.string   "number",             limit: 255
+    t.datetime "shipped_at"
+    t.datetime "cancelled_at"
+    t.text     "metadata",           limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "shipments", ["order_id"], name: "index_shipments_on_order_id", using: :btree
+
+  create_table "shipping_methods", force: :cascade do |t|
+    t.integer  "store_id",         limit: 4,     null: false
+    t.string   "name",             limit: 255,   null: false
+    t.string   "shipping_gateway", limit: 255
+    t.text     "description",      limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
     t.string   "host",       limit: 255

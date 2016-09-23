@@ -19,12 +19,32 @@
 
     .row
       .col-lg-6
-        .panel.panel-default
-          .panel-body
-            = render partial: 'checkout_form'
-            #payment-widget.collapse
-              - if @payment_gateway.present?
-                = render @payment_gateway
+        #checkout-panels.panel-group{role: 'tablist'}
+          .panel.panel-default
+            .panel-heading{role: 'tab'}
+              %h4.panel-title= t('.address_panel')
+            #address-panel.panel-collapse.collapse.in{role: 'tabpanel'}
+              .panel-body
+                = render partial: 'checkout_form'
+          .panel.panel-default
+            .panel-heading{role: 'tab'}
+              %h4.panel-title= t('.shipping_panel')
+            #shipping-panel.panel-collapse.collapse{role: 'tabpanel'}
+              .panel-body
+                = render partial: 'select_shipping_method'
+          - if @payment_gateway.present?
+            .panel.panel-default
+              .panel-heading{role: 'tab'}
+                %h4.panel-title= t('.payment_panel')
+              #payment-panel.panel-collapse.collapse{role: 'tabpanel'}
+                .panel-body
+                  = render @payment_gateway
+          .panel.panel-default
+            .panel-heading{role: 'tab'}
+              %h4.panel-title= t('.confirm_panel')
+            #confirm-panel.panel-collapse.collapse{role: 'tabpanel'}
+              .panel-body
+                = render partial: 'confirm'
 
       .col-lg-6
         = render partial: 'order_items/table', object: @order, as: :order

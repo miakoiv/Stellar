@@ -34,11 +34,21 @@ Rails.application.routes.draw do
   post '/correspondence/mail_form', to: 'correspondence#mail_form',
     as: :mail_form
 
-  # Checkout related routes.
-  get  '/checkout/:order_id/via/:order_type_id', to: 'checkout#checkout',  as: :checkout
+  # Routes for the checkout process:
+  #
+  # 1) select a shipping method
+  get  '/checkout/:order_id/shipping_method/:method_id', to: 'checkout#shipping_method', as: :shipping_method
+  # 2) create a shipment
+  post '/checkout/:order_id/ship/:method_id', to: 'checkout#ship', as: :ship
+  # 3) enter payment information
   get  '/checkout/:order_id/pay/:method', to: 'checkout#pay', as: :pay
+  # 4) verify credit card payment or return from online payment
   post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
+  # 5) confirm order
+  post '/checkout/:order_id/confirm', to: 'checkout#confirm', as: :confirm
+
+  get  '/checkout/:order_id/:order_type_id', to: 'checkout#checkout',  as: :checkout
 
   # Snippets
   get '/snippets/:type/:id', to: 'snippets#show', as: :show_snippet
