@@ -1,4 +1,8 @@
 fi:
+  activemodel:
+    models:
+      shipping_gateway/customer_pickup: asiakas noutaa
+      shipping_gateway/smart_post: Posti SmartPOST
   activerecord:
     models:
       album:

@@ -15,7 +15,7 @@
     %tbody
       = content_tag_for :tr, @shipping_methods do |shipping_method|
         %td= shipping_method.name
-        %td= shipping_method.shipping_gateway
+        %td= "ShippingGateway::#{shipping_method.shipping_gateway}".constantize.model_name.human
         %td.actions
           = link_to icon('info', t('actions.show')), admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(ShippingMethod)

@@ -90,9 +90,11 @@ class Store < ActiveRecord::Base
     }
   end
 
-  # Shipping gateways defined in the ShippingGateway module.
-  def self.available_shipping_gateways
-    ['SmartPost']
+  # Options for shipping gateways defined in the ShippingGateway module.
+  def self.shipping_gateway_options
+    %w{CustomerPickup SmartPost}.map do |gateway|
+      ["ShippingGateway::#{gateway}".constantize.model_name.human, gateway]
+    end
   end
 
   #---
