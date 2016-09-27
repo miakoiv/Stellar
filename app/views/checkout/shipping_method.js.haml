@@ -1,7 +1,9 @@
 $('#shipping-panel .list-group a').removeClass('active');
-$('#shipping-panel .content').html('');
+$('#shipping-panel .description').html('');
+$('#shipping-panel .gateway-content').html('');
 
 $('##{dom_id(@shipping_method)}').addClass('active');
 
+$('#shipping-panel .description').html("#{@shipping_method.description.html_safe}");
 - if @shipping_gateway.present?
-  $('#shipping-panel .content').html("#{j render @shipping_gateway}");
+  $('#shipping-panel .gateway-content').html("#{j render @shipping_gateway}");
