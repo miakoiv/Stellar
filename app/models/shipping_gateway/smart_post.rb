@@ -7,8 +7,6 @@ module ShippingGateway
     base_uri 'https://ohjelmat.posti.fi/pup/v1/'
     logger Rails.logger
 
-    # Queries pickup locations by zip code, returns post code information.
-    # We are interested in the longitude and latitude.
     def lookup(query)
       self.class.get '/pickuppoints', query: query
     end
