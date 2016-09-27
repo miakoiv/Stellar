@@ -73,6 +73,9 @@ en:
       role:
         one: role
         other: roles
+      shipping_method:
+        one: shipping method
+        other: shipping methods
       store:
         one: store
         other: stores
@@ -296,6 +299,12 @@ en:
         requisite_id: Requisite product
       role:
         name: Name
+      shipping_method:
+        name: Name
+        shipping_gateway: Shipping mode
+        enabled_at: Active since
+        disabled_at: Active until
+        description: Description
       store:
         admin: Settings
         new_user: Create admin user

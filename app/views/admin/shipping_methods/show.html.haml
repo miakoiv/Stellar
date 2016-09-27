@@ -1,0 +1,11 @@
+.page-header
+  = link_to admin_shipping_methods_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(PricingGroup)
+    = link_to edit_admin_shipping_method_path(@shipping_method), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1= icon('ship', @shipping_method)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: true}

@@ -136,6 +136,7 @@ Rails.application.routes.draw do
     resources :inventory_items do
       resources :inventory_entries, shallow: true, only: :create
     end
+    resources :shipping_methods
 
     post '/images/reorder', to: 'images#reorder', as: :reorder_images
     post '/images/delete', to: 'images#delete', as: :delete_image

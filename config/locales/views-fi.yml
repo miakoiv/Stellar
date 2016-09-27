@@ -125,6 +125,11 @@ fi:
         new_property: Uusi ominaisuus
       new:
         new_property: Uusi ominaisuus
+    shipping_methods:
+      index:
+        new_shipping_method: Uusi toimitustapa
+      new:
+        new_shipping_method: Uusi toimitustapa
     stores:
       index:
         new_store: Uusi kauppa

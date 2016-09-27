@@ -90,6 +90,11 @@ class Store < ActiveRecord::Base
     }
   end
 
+  # Shipping gateways defined in the ShippingGateway module.
+  def self.available_shipping_gateways
+    ['SmartPost']
+  end
+
   #---
   # Defaults for guest users reveal pricing and will allow shopping
   # if admit_guests is also enabled, to get in without authentication.

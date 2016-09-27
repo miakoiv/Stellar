@@ -73,6 +73,9 @@ fi:
       role:
         one: rooli
         other: roolit
+      shipping_method:
+        one: toimitustapa
+        other: toimitustavat
       store:
         one: kauppa
         other: kaupat
@@ -296,6 +299,12 @@ fi:
         requisite_id: Tarvittava tuote
       role:
         name: Nimi
+      shipping_method:
+        name: Nimi
+        shipping_gateway: Toimintamalli
+        enabled_at: Käytössä alkaen
+        disabled_at: Käytössä kunnes
+        description: Kuvaus
       store:
         admin: Asetukset
         new_user: Luo ylläpitäjä

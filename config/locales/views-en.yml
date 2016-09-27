@@ -145,6 +145,11 @@ en:
         new_property: New property
       new:
         new_property: New property
+    shipping_methods:
+      index:
+        new_shipping_method: New shipping method
+      new:
+        new_shipping_method: New shipping method
     stores:
       index:
         new_store: New store

@@ -1,0 +1,30 @@
+.page-header
+  - if current_user.can_create?(ShippingMethod)
+    = link_to new_admin_shipping_method_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_shipping_method'))
+  %h1= icon('ship', title(ShippingMethod, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-7= col(ShippingMethod, :name)
+        %th.col-xs-2= col(ShippingMethod, :shipping_gateway)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @shipping_methods do |shipping_method|
+        %td= shipping_method.name
+        %td= shipping_method.shipping_gateway
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(ShippingMethod)
+            = link_to icon('edit', t('actions.edit')), edit_admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(ShippingMethod)
+            = link_to icon('remove', t('actions.delete')), admin_shipping_method_path(shipping_method),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: ShippingMethod.model_name.human, name: shipping_method.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}

@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_shipping_methods_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('ship', t('.new_shipping_method'))
+
+.row
+  .col-sm-6
+    = render partial: 'form', locals: {locked: false}

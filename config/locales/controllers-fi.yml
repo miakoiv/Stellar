@@ -86,6 +86,13 @@ fi:
         notice: "Ominaisuus %{property} päivitetty."
       destroy:
         notice: "Ominaisuus %{property} poistettu."
+    shipping_methods:
+      create:
+        notice: "Toimitustapa %{shipping_method} luotu."
+      update:
+        notice: "Toimitustapa %{shipping_method} päivitetty."
+      destroy:
+        notice: "Toimitustapa %{shipping_method} poistettu."
     stores:
       create:
         notice: "Kauppa %{store} luotu."
