@@ -433,14 +433,13 @@ class Order < ActiveRecord::Base
     [company_name, contact_person, shipping_city].compact.reject(&:empty?).join(', ')
   end
 
-  # Order status in the checkout process. This is included in the JSON
+  # Order phase in the checkout process. This is included in the JSON
   # representation for checkout.coffee to reveal the corresponding form
   # elements.
-  def status
+  def checkout_phase
     return :address  if !valid?
     return :shipping if has_shipping? && shipments.empty?
     return :payment  if !paid?
-    return :confirm  if !complete?
     return :complete
   end
 
@@ -461,7 +460,7 @@ class Order < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(methods: :status)
+    super(methods: :checkout_phase)
   end
 
   # Vis.js timeline representation of order events.

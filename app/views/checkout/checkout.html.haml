@@ -4,47 +4,47 @@
       = link_to cart_path, class: 'btn btn-default' do
         = icon('chevron-circle-left', t('actions.back'))
       %h1.hidden-print
-        = icon('shopping-cart', t('checkout.title'))
-        %span.small= @order.order_type
+        = icon('shopping-cart')
+        = @order.order_type
       %h1.visible-print
         = current_store
         %span.small= @order.order_type
 
     #message-failure.collapse.hidden-print
       .alert.alert-danger
-    #message-success.collapse.hidden-print
-      .alert.alert-success
-        %p.pull-right= link_to icon('print', t('checkout.receipt')), '#print', class: 'btn btn-default'
-        = t('checkout.messages.success_html')
 
     .row
       .col-lg-6
         #checkout-panels.panel-group{role: 'tablist'}
-          .panel.panel-default
+          .panel.panel-info
             .panel-heading{role: 'tab'}
-              %h4.panel-title= t('.address_panel')
-            #address-panel.panel-collapse.collapse.in{role: 'tabpanel'}
+              %h4.panel-title= t('checkout.panels.address_panel')
+            #address-panel.panel-collapse.collapse{role: 'tabpanel'}
               .panel-body
                 = render partial: 'checkout_form'
-          .panel.panel-default
+          .panel.panel-danger
             .panel-heading{role: 'tab'}
-              %h4.panel-title= t('.shipping_panel')
+              %h4.panel-title= t('checkout.panels.shipping_panel')
             #shipping-panel.panel-collapse.collapse{role: 'tabpanel'}
               .panel-body
                 = render partial: 'select_shipping_method'
           - if @payment_gateway.present?
-            .panel.panel-default
+            .panel.panel-warning
               .panel-heading{role: 'tab'}
-                %h4.panel-title= t('.payment_panel')
+                %h4.panel-title= t('checkout.panels.payment_panel')
               #payment-panel.panel-collapse.collapse{role: 'tabpanel'}
                 .panel-body
                   = render @payment_gateway
-          .panel.panel-default
+          .panel.panel-success.hidden-print
             .panel-heading{role: 'tab'}
-              %h4.panel-title= t('.confirm_panel')
-            #confirm-panel.panel-collapse.collapse{role: 'tabpanel'}
+              %h4.panel-title= t('checkout.panels.complete_panel')
+            #complete-panel.panel-collapse.collapse{role: 'tabpanel'}
               .panel-body
-                = render partial: 'confirm'
+                = render partial: 'complete'
 
       .col-lg-6
         = render partial: 'order_items/table', object: @order, as: :order
+
+:coffee
+  jQuery ->
+    $.do_checkout_phase "#{@order.checkout_phase}"

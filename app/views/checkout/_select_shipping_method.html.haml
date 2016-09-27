@@ -1,6 +1,6 @@
 %p= t('checkout.select_shipping_method')
 .list-group
-  - current_store.shipping_methods.active.each do |method|
+  - @shipping_methods.each do |method|
     = link_to method.name, shipping_method_path(@order, method), remote: true, id: dom_id(method), class: 'list-group-item'
 
 .description

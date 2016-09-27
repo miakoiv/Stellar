@@ -212,12 +212,11 @@ en:
     sidebar:
       included_albums: Show albums
   checkout:
-    checkout:
+    panels:
       address_panel: Contact information
-      shipping_panel: Shipping
+      shipping_panel: Shipping options
       payment_panel: Payment
-      confirm_panel: Confirmation
-    title: Checkout
+      complete_panel: Order complete
     continue_shopping: Continue shopping
     select_shipping_method: Select shipping method
     ship: Continue with order
@@ -236,8 +235,6 @@ en:
       charge_error: There was a problem processing your payment, check your card details.
     checkout_form:
       continue_order: Continue with order
-    confirm:
-      confirm_order: Confirm order
   actions:
     back: Back
     show: Show

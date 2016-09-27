@@ -33,6 +33,10 @@
   .tab-content > .tab-pane {
     display: block;
   }
+  .panel-group .panel-collapse {
+    display: block !important;
+    height: auto !important;
+  }
 
   .fade {
     opacity: 1;
