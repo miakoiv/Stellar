@@ -26,7 +26,7 @@ class CheckoutController < ApplicationController
     @order.address_to(current_user)
 
     @shipping_methods = if @order.has_shipping?
-      current_store.shipping_methods
+      current_store.shipping_methods.active
     else
       ShippingMethod.none
     end
@@ -100,15 +100,6 @@ class CheckoutController < ApplicationController
       render :success
     else
       render :checkout
-    end
-  end
-
-  # POST /checkout/1/confirm.js
-  def confirm
-    if @order.status != :complete
-      @order.complete!
-      @order.consume_stock!
-      @order.send_confirmations
     end
   end
 

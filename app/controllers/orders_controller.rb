@@ -43,6 +43,13 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
+
+        if !@order.complete? && @order.checkout_phase == :complete
+          @order.complete!
+          @order.consume_stock!
+          @order.send_confirmations
+        end
+
         format.json { render json: @order }
         format.html { redirect_to order_path(@order), notice: t('.notice', order: @order) }
       else
