@@ -383,17 +383,17 @@ class Order < ActiveRecord::Base
   # Addresses this order to the given user if she has any addresses defined.
   def address_to(user)
     if user.shipping_address.present?
-      self.shipping_address = user.shipping_address
-      self.shipping_postalcode = user.shipping_postalcode
-      self.shipping_city = user.shipping_city
-      self.shipping_country = user.shipping_country
+      self.shipping_address ||= user.shipping_address
+      self.shipping_postalcode ||= user.shipping_postalcode
+      self.shipping_city ||= user.shipping_city
+      self.shipping_country ||= user.shipping_country
     end
     if user.billing_address.present?
       self.has_billing_address = true
-      self.billing_address = user.billing_address
-      self.billing_postalcode = user.billing_postalcode
-      self.billing_city = user.billing_city
-      self.billing_country = user.billing_country
+      self.billing_address ||= user.billing_address
+      self.billing_postalcode ||= user.billing_postalcode
+      self.billing_city ||= user.billing_city
+      self.billing_country ||= user.billing_country
     end
   end
 
