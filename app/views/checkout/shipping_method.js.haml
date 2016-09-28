@@ -4,6 +4,6 @@ $('#shipping-panel .gateway-content').html('');
 
 $('##{dom_id(@shipping_method)}').addClass('active');
 
-$('#shipping-panel .description').html("#{@shipping_method.description.html_safe}");
+$('#shipping-panel .description').html("#{j @shipping_method.description.html_safe}");
 - if @shipping_gateway.present?
   $('#shipping-panel .gateway-content').html("#{j render @shipping_gateway}");
