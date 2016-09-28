@@ -1,7 +1,16 @@
-- postcode, locations = @shipping_gateway.smartpost_lookup(@order.shipping_postalcode)
+- zipcode = params[:zipcode] || @order.shipping_postalcode
+- postcode, locations = @shipping_gateway.smartpost_lookup(zipcode)
 
 .thumbnail{style: 'position: relative; height: 0; padding-bottom: 61.8%; background-color: #eee;'}
   #map{style: 'position: absolute; left: 0; right: 0; top: 0; bottom: 0;'}
+
+= form_tag shipping_method_path(@order, @shipping_method), method: :get, remote: true do
+  .form-group
+    .input-group
+      = text_field_tag :zipcode, zipcode, class: 'form-control text-right'
+      .input-group-btn
+        = button_tag class: 'btn btn-default' do
+          = icon('search', t('.zipcode'))
 
 = form_tag ship_path(@order, @shipping_method), remote: true, id: 'smartpost-form' do
   .form-group
@@ -11,6 +20,7 @@
           = radio_button_tag 'metadata[pup_code]', loc['PupCode']
           %strong= loc['PublicName']
           = loc['Address']
+          = loc['Municipality']
           .small= loc['AdditionalInfo']
   .ship-button.collapse.hidden-print
     = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'

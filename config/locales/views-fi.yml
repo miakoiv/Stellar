@@ -235,6 +235,9 @@ fi:
       cancel: 'Kumoa'
   dropzone:
     default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
+  shipping_gateway:
+    smart_post:
+      zipcode: Hae postinumerolla
   errors:
     header: Hopsis!
     blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"
