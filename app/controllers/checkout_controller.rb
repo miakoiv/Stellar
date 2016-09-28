@@ -9,27 +9,25 @@ class CheckoutController < ApplicationController
 
   before_action :authenticate_user_or_skip!
   before_action :set_pages
-  before_action :find_order
+  before_action :set_order
 
   # GET /checkout/1/via/2
   # Entering checkout sets the order type, which tells us how to reappraise
   # the order items (trade price for resellers ordering from manufacturers),
-  # and whether shipping and/or payment is required.
+  # and whether shipping and/or payment is required. Any existing shipments
+  # are destroyed to allow re-entry to the checkout process.
   def checkout
     @order.order_type = current_store.order_types.find(params[:order_type_id])
     @order.reappraise!(current_pricing)
 
-    if @order.empty? || !@order.checkoutable?
+    if @order.complete? || @order.empty? || !@order.checkoutable?
       return redirect_to cart_path
     end
 
+    @shipping_methods = active_shipping_methods
+    @order.shipments.destroy_all
     @order.address_to(current_user)
 
-    @shipping_methods = if @order.has_shipping?
-      current_store.shipping_methods.active
-    else
-      ShippingMethod.none
-    end
     if @order.has_payment?
       @payment_gateway = @order.payment_gateway_class.new(order: @order)
     end
@@ -37,7 +35,8 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/shipping_method/2.js
   def shipping_method
-    @shipping_method = current_store.shipping_methods.find(params[:method_id])
+    @shipping_methods = active_shipping_methods
+    @shipping_method = @shipping_methods.find(params[:method_id])
     @shipping_gateway = if @shipping_method.shipping_gateway.present?
       @shipping_method.shipping_gateway_class.new(order: @order)
     else
@@ -47,7 +46,8 @@ class CheckoutController < ApplicationController
 
   # POST /checkout/1/ship/2.js
   def ship
-    @shipping_method = current_store.shipping_methods.find(params[:method_id])
+    @shipping_methods = active_shipping_methods
+    @shipping_method = @shipping_methods.find(params[:method_id])
     @shipment = @order.shipments.build(
       shipping_method: @shipping_method,
       metadata: params[:metadata]
@@ -93,18 +93,30 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/return
   def return
+    @shipping_methods = active_shipping_methods
     @payment_gateway = @order.payment_gateway_class.new(order: @order)
     status = @payment_gateway.return(params)
+
     if status
-      @order.payments.create(amount: @order.grand_total)
+      unless @order.paid?
+        @order.payments.create(amount: @order.grand_total)
+      end
       render :success
     else
-      render :checkout
+      redirect_to checkout_path(@order, @order.order_type)
     end
   end
 
   private
-    def find_order
+    def set_order
       @order = current_user.orders.find(params[:order_id])
+    end
+
+    def active_shipping_methods
+      if @order.has_shipping?
+        current_store.shipping_methods.active
+      else
+        ShippingMethod.none
+      end
     end
 end
