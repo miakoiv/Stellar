@@ -3,7 +3,7 @@
 
 .panel.panel-default
   .panel-heading
-    %h4.panel-title
+    %h5.panel-title
       .pull-right
         = icon('cc-visa', class: 'fa-lg')
         = icon('cc-mastercard', class: 'fa-lg')
@@ -12,11 +12,11 @@
   .panel-body
     = bootstrap_form_tag url: pay_path(@order, :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
       .row
-        .col-sm-6
+        .col-sm-12
           = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
-        .col-sm-3
+        .col-sm-6
           = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
-        .col-sm-3
+        .col-sm-6
           = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
         .col-xs-12.pay-now-button.collapse.in
           = f.button t('checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
@@ -27,7 +27,7 @@
 
 .panel.panel-default
   .panel-heading
-    %h4.panel-title= t('checkout.bank_payment')
+    %h5.panel-title= t('checkout.bank_payment')
   .panel-body.bank-buttons
     .bank-button.nordea{data: {selected: 'nordea'}}
     .bank-button.op{data: {selected: 'osuuspankki'}}

@@ -14,16 +14,19 @@
       .alert.alert-danger
 
     .row
-      .col-lg-6
+      .col-md-6.col-md-push-6
+        = render partial: 'order_items/table', object: @order, as: :order
+
+      .col-md-6.col-md-pull-6
         #checkout-panels.panel-group{role: 'tablist'}
-          .panel.panel-info
+          .panel.panel-default
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.address_panel')
             #address-panel.panel-collapse.collapse.in{role: 'tabpanel'}
               .panel-body
                 = render partial: 'checkout_form'
           - if @order.has_shipping?
-            .panel.panel-danger
+            .panel.panel-default
               .panel-heading{role: 'tab'}
                 %h4.panel-title= t('checkout.panels.shipping_panel')
               #shipping-panel.panel-collapse.collapse{role: 'tabpanel'}
@@ -32,7 +35,7 @@
                 .panel-footer
                   = render partial: 'cancel'
           - if @payment_gateway.present?
-            .panel.panel-warning
+            .panel.panel-default
               .panel-heading{role: 'tab'}
                 %h4.panel-title= t('checkout.panels.payment_panel')
               #payment-panel.panel-collapse.collapse{role: 'tabpanel'}
@@ -40,12 +43,9 @@
                   = render @payment_gateway
                 .panel-footer
                   = render partial: 'cancel'
-          .panel.panel-success.hidden-print
+          .panel.panel-default.hidden-print
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.complete_panel')
             #complete-panel.panel-collapse.collapse{role: 'tabpanel'}
               .panel-body
                 = render partial: 'complete'
-
-      .col-lg-6
-        = render partial: 'order_items/table', object: @order, as: :order
