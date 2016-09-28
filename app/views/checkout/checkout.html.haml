@@ -2,7 +2,7 @@
   .container
     .page-header
       = link_to cart_path, class: 'btn btn-default' do
-        = icon('chevron-circle-left', t('actions.back'))
+        = icon('shopping-cart', t('checkout.back_to_cart'))
       %h1.hidden-print
         = icon('shopping-cart')
         = @order.order_type
@@ -19,15 +19,18 @@
           .panel.panel-info
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.address_panel')
-            #address-panel.panel-collapse.collapse{role: 'tabpanel'}
+            #address-panel.panel-collapse.collapse.in{role: 'tabpanel'}
               .panel-body
                 = render partial: 'checkout_form'
-          .panel.panel-danger
-            .panel-heading{role: 'tab'}
-              %h4.panel-title= t('checkout.panels.shipping_panel')
-            #shipping-panel.panel-collapse.collapse{role: 'tabpanel'}
-              .panel-body
-                = render partial: 'select_shipping_method'
+          - if @order.has_shipping?
+            .panel.panel-danger
+              .panel-heading{role: 'tab'}
+                %h4.panel-title= t('checkout.panels.shipping_panel')
+              #shipping-panel.panel-collapse.collapse{role: 'tabpanel'}
+                .panel-body
+                  = render partial: 'select_shipping_method'
+                .panel-footer
+                  = render partial: 'cancel'
           - if @payment_gateway.present?
             .panel.panel-warning
               .panel-heading{role: 'tab'}
@@ -35,6 +38,8 @@
               #payment-panel.panel-collapse.collapse{role: 'tabpanel'}
                 .panel-body
                   = render @payment_gateway
+                .panel-footer
+                  = render partial: 'cancel'
           .panel.panel-success.hidden-print
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.complete_panel')
@@ -44,7 +49,3 @@
 
       .col-lg-6
         = render partial: 'order_items/table', object: @order, as: :order
-
-:coffee
-  jQuery ->
-    $.do_checkout_phase "#{@order.checkout_phase}"

@@ -218,8 +218,11 @@ en:
       payment_panel: Payment
       complete_panel: Order complete
     continue_shopping: Continue shopping
+    back_to_cart: Return to shopping cart
+    cancel_checkout: Cancel and return to contact information
+    address: Submit contact information
     select_shipping_method: Select shipping method
-    ship: Continue with order
+    ship: Select this shipping method
     receipt: Print a receipt
     creditcard_payment: Credit card payment
     bank_payment: Bank payment
@@ -233,8 +236,6 @@ en:
       charging: Processing payment…
       token_request_error: There was a problem communicating with the payment provider. Try again later.
       charge_error: There was a problem processing your payment, check your card details.
-    checkout_form:
-      continue_order: Continue with order
   actions:
     back: Back
     show: Show

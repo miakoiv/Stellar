@@ -1,4 +1,5 @@
 = render template: 'checkout/checkout'
 
 :coffee
-  $('#checkout-form').trigger 'submit.rails'
+  jQuery ->
+    $.do_checkout_phase 'complete'

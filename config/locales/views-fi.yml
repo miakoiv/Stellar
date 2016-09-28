@@ -198,8 +198,11 @@ fi:
       payment_panel: Maksaminen
       complete_panel: Tilaus valmis
     continue_shopping: Jatka ostoksia
+    back_to_cart: Takaisin ostoskoriin
+    cancel_checkout: Keskeytä ja palaa takaisin yhteystietoihin
+    address: Vahvista yhteystiedot
     select_shipping_method: Valitse toimitustapa
-    ship: Jatka tilaamista
+    ship: Valitse tämä toimitustapa
     receipt: Tulosta kuitti
     creditcard_payment: Maksa luottokortilla
     bank_payment: Maksa nettipankissa
@@ -213,8 +216,6 @@ fi:
       charging: Odotetaan maksutapahtuman valmistumista…
       token_request_error: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
       charge_error: Virhe maksutapahtumassa. Tarkista kortin tiedot.
-    checkout_form:
-      continue_order: Jatka tilaamista
   actions:
     back: Palaa
     show: Näytä
