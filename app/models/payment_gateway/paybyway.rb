@@ -93,6 +93,7 @@ module PaymentGateway
       contact_id   = params['CONTACT_ID']
       incident_id  = params['INCIDENT_ID']
       authcode     = params['AUTHCODE']
+      return false unless return_code == '0'
       if return_code.present? && order_number.present? && authcode.present?
         cleartext = [return_code, order_number, settled, contact_id, incident_id].compact.join('|')
         if authcode == sha256(@private_key, cleartext)
