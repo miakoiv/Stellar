@@ -308,6 +308,7 @@ fi:
         shipping_gateway: Toimintamalli
         enabled_at: Käytössä alkaen
         disabled_at: Käytössä kunnes
+        not_active: Ei voimassa
         description: Kuvaus
       store:
         admin: Asetukset

@@ -308,6 +308,7 @@ en:
         shipping_gateway: Shipping mode
         enabled_at: Active since
         disabled_at: Active until
+        not_active: Not in effect
         description: Description
       store:
         admin: Settings
