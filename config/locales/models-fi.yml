@@ -303,6 +303,11 @@ fi:
         requisite_id: Tarvittava tuote
       role:
         name: Nimi
+      shipment:
+        shipping_method_id: Toimitustapa
+        number: Numero
+        shipped_at: Toimituspvm
+        cancelled_at: Peruutuspvm
       shipping_method:
         name: Nimi
         shipping_gateway: Toimintamalli

@@ -303,6 +303,11 @@ en:
         requisite_id: Requisite product
       role:
         name: Name
+      shipment:
+        shipping_method_id: Shipping method
+        number: Number
+        shipped_at: Shipping date
+        cancelled_at: Cancellation date
       shipping_method:
         name: Name
         shipping_gateway: Shipping mode
