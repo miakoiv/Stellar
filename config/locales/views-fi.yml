@@ -203,7 +203,7 @@ fi:
     address: Vahvista yhteystiedot
     select_shipping_method: Valitse toimitustapa
     ship: Valitse tämä toimitustapa
-    receipt: Tulosta kuitti
+    receipt: Kuitti
     creditcard_payment: Maksa luottokortilla
     bank_payment: Maksa nettipankissa
     card_number: Kortin numero

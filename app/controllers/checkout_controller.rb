@@ -112,6 +112,10 @@ class CheckoutController < ApplicationController
     end
   end
 
+  # GET /checkout/1/receipt.js
+  def receipt
+  end
+
   private
     def set_order
       @order = current_user.orders.find(params[:order_id])

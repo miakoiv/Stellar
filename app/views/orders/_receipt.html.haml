@@ -1,0 +1,70 @@
+= order.letterhead.html_safe
+
+.page-header
+  %h1= t('checkout.receipt')
+
+.row
+  .col-xs-5
+    %dl.dl-horizontal
+      %dt= col(Order, :customer_name)
+      %dd= order.customer_name
+      %dt= col(Order, :customer_email)
+      %dd= order.customer_email
+      %dt= col(Order, :customer_phone)
+      %dd= order.customer_phone
+      - if order.store.b2b_sales?
+        %dt= col(Order, :company_name)
+        %dd= order.company_name
+        %dt= col(Order, :contact_person)
+        %dd= order.contact_person
+        %dt= col(Order, :contact_email)
+        %dd= order.contact_email
+        %dt= col(Order, :contact_phone)
+        %dd= order.contact_phone
+  .col-xs-7
+    %dl.dl-horizontal
+      %dt= col(Order, :completed_at)
+      %dd= l(order.completed_at.to_date)
+      - if order.store.b2b_sales?
+        %dt= col(Order, :shipping_at)
+        %dd= order.shipping_at.present? ? l(order.shipping_at) : ''
+        %dt= col(Order, :installation_at)
+        %dd= order.installation_at.present? ? l(order.installation_at) : ''
+%hr
+.row
+  .col-xs-5
+    %dl.dl-horizontal
+      %dt= col(Order, :billing_address)
+      %dd= order.billing_address
+      %dd
+        = order.billing_postalcode
+        = order.billing_city
+  .col-xs-7
+    - if order.has_shipping?
+      %dl.dl-horizontal
+        %dt= col(Order, :shipping_address)
+        %dd= order.shipping_address
+        %dd
+          = order.shipping_postalcode
+          = order.shipping_city
+        - order.shipments.each do |shipment|
+          %dt= col(Shipment, :shipping_method_id)
+          %dd= shipment.shipping_method
+
+%hr
+.row
+  .col-xs-5
+    %dl.dl-horizontal
+      %dt= col(Order, :your_reference)
+      %dd= order.your_reference
+      %dt= col(Order, :our_reference)
+      %dd= order.our_reference
+      %dt= col(Order, :message)
+      %dd= order.message
+  .col-xs-7
+    %dl.dl-horizontal
+      %dt= col(Order, :notes)
+      %dd= order.notes
+
+%hr
+= render partial: 'order_items/table', object: order, as: :order

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
   # 5) confirm order
   post '/checkout/:order_id/confirm', to: 'checkout#confirm', as: :confirm
+  # 6) show a receipt
+  get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 
   get  '/checkout/:order_id/:order_type_id', to: 'checkout#checkout',  as: :checkout
 

@@ -21,6 +21,21 @@
     }
   }
 
+  .modal {
+    position: static;
+    padding: 0 !important;
+
+    .modal-dialog {
+      width: 100% !important;
+      margin: 0;
+
+      .modal-content {
+        border: 0 !important;
+        box-shadow: none;
+      }
+    }
+  }
+
   .page-header {
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;

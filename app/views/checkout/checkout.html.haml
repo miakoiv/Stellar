@@ -1,4 +1,4 @@
-#static-wrap
+#static-wrap.hidden-print
   .container
     .page-header
       = link_to cart_path, class: 'btn btn-default' do
@@ -6,11 +6,8 @@
       %h1.hidden-print
         = icon('shopping-cart')
         = @order.order_type
-      %h1.visible-print
-        = current_store
-        %span.small= @order.order_type
 
-    #message-failure.collapse.hidden-print
+    #message-failure.collapse
       .alert.alert-danger
 
     .row
@@ -43,9 +40,19 @@
                   = render @payment_gateway
                 .panel-footer
                   = render partial: 'cancel'
-          .panel.panel-default.hidden-print
+          .panel.panel-default
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.complete_panel')
             #complete-panel.panel-collapse.collapse{role: 'tabpanel'}
               .panel-body
                 = render partial: 'complete'
+
+#order-receipt-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header.hidden-print
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('checkout.receipt')
+      .modal-body
+      .modal-footer.hidden-print
+        = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'

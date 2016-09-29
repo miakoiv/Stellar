@@ -1,2 +1,5 @@
-%p.pull-right= link_to icon('print', t('checkout.receipt')), '#print', class: 'btn btn-default'
+%p.pull-right
+  = link_to receipt_path(@order), remote: true, class: 'btn btn-primary' do
+    = icon('file-text-o', t('checkout.receipt'))
+
 = t('checkout.messages.success_html')

@@ -223,7 +223,7 @@ en:
     address: Submit contact information
     select_shipping_method: Select shipping method
     ship: Select this shipping method
-    receipt: Print a receipt
+    receipt: Receipt
     creditcard_payment: Credit card payment
     bank_payment: Bank payment
     card_number: Card number

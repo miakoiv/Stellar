@@ -463,6 +463,14 @@ class Order < ActiveRecord::Base
     super(methods: :checkout_phase)
   end
 
+  # Letterhead for this order based on its destination.
+  def letterhead
+    group = User.groups.key(order_type.destination_group)
+    page_id = store.send("#{group}_template_id")
+    return '' unless page_id.present?
+    store.pages.find(page_id).content
+  end
+
   # Vis.js timeline representation of order events.
   def timeline_events
     events = []
