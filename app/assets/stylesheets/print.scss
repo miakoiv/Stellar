@@ -1,6 +1,6 @@
 @media print {
   @page {
-    margin: 1cm 1cm 1cm 2cm;
+    margin: 1.4cm 1.4cm 2.1cm 2.1cm;
   }
 
   html {
@@ -15,6 +15,7 @@
 
   .content, .container {
     width: 100% !important;
+    padding: 0 !important;
 
     > div > div {
       width: 100% !important;
@@ -32,6 +33,10 @@
       .modal-content {
         border: 0 !important;
         box-shadow: none;
+
+        .modal-body {
+          padding: 0;
+        }
       }
     }
   }
