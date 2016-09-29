@@ -35,8 +35,8 @@ class OrdersController < ApplicationController
   end
 
   # PATCH/PUT /orders/1
-  # The checkout process calls this via AJAX and a successful update completes
-  # the order and sends confirmation e-mail. Responses are in JSON.
+  # The checkout process calls this via AJAX any time the order status changes.
+  # Once in complete state, the order is finalized. Responses are in JSON.
   # HTML responses are sent when the user edits her own completed orders.
   def update
     authorize_action_for @order

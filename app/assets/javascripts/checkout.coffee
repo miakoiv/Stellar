@@ -1,3 +1,5 @@
+# Collapse and reveal checkout panels according to checkout phase.
+
 $.do_checkout_phase = (phase) ->
   switch phase
     when 'address'
@@ -15,8 +17,7 @@ $.do_checkout_phase = (phase) ->
 
 jQuery ->
 
-  # When the checkout form is submitted, collapse and reveal relevant
-  # elements. Note that shipping and payment gateways may call this by
-  # triggering submit on #checkout-form.
+  # This callback is triggered by user submission of #checkout-form, and
+  # externally by actions that create shipments or payments.
   $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
     $.do_checkout_phase data.checkout_phase

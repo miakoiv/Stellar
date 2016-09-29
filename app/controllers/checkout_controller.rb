@@ -34,6 +34,8 @@ class CheckoutController < ApplicationController
   end
 
   # GET /checkout/1/shipping_method/2.js
+  # Selecting a shipping method sets up a shipping gateway object that will
+  # render its own interface within the view. Called via Ajax.
   def shipping_method
     @shipping_methods = active_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
@@ -45,6 +47,9 @@ class CheckoutController < ApplicationController
   end
 
   # POST /checkout/1/ship/2.js
+  # Shipping gateway views submit their form to this action via Ajax.
+  # A shipment record is created, and the JS response will trigger an
+  # order update.
   def ship
     @shipping_methods = active_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
