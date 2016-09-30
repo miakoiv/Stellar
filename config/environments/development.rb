@@ -23,6 +23,11 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  # Prefix development assets path to ignore locally compiled assets
+  # in development, and serving them via Sprockets.
+  # http://guides.rubyonrails.org/asset_pipeline.html#local-precompilation
+  config.assets.prefix = '/dev-assets'
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
