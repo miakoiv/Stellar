@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927072824) do
+ActiveRecord::Schema.define(version: 20161003101644) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -271,9 +271,11 @@ ActiveRecord::Schema.define(version: 20160927072824) do
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
     t.string   "product_subtitle",      limit: 255
+    t.integer  "parent_item_id",        limit: 4
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["parent_item_id"], name: "index_order_items_on_parent_item_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
 
   create_table "order_types", force: :cascade do |t|
