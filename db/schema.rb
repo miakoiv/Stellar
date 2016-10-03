@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 20161003101644) do
   add_index "measurement_units", ["base_unit_id"], name: "index_measurement_units_on_base_unit_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
+    t.integer  "parent_item_id",        limit: 4
     t.integer  "order_id",              limit: 4,   null: false
     t.integer  "product_id",            limit: 4,   null: false
     t.string   "label",                 limit: 255
@@ -271,7 +272,6 @@ ActiveRecord::Schema.define(version: 20161003101644) do
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
     t.string   "product_subtitle",      limit: 255
-    t.integer  "parent_item_id",        limit: 4
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
