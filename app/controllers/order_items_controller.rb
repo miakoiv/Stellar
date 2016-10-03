@@ -22,7 +22,7 @@ class OrderItemsController < ApplicationController
           @order_item.destroy
           format.js { render :destroy }
         else
-          @order_item.reload
+          @order_item.reset_subitems!
           @order.recalculate!
           format.js { render :update }
         end

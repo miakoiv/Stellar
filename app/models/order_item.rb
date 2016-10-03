@@ -17,6 +17,12 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   belongs_to :product
 
+  # Order items may have subitems that update with their parent, and are not
+  # directly updatable or removable.
+  belongs_to :parent_item, class_name: 'OrderItem'
+  has_many :subitems, class_name: 'OrderItem', foreign_key: :parent_item_id,
+    dependent: :destroy
+
   default_scope { order(:priority) }
   scope :live, -> { joins(:product).merge(Product.live) }
   scope :undead, -> { joins(:product).merge(Product.undead) }
@@ -31,6 +37,22 @@ class OrderItem < ActiveRecord::Base
   delegate :approved?, :concluded?, to: :order
 
   #---
+  def is_subitem?
+    parent_item.present?
+  end
+
+  # When an order item is updated, its subitems must be updated to reflect
+  # the new amount according to the component entries of the product on
+  # this order item.
+  def reset_subitems!
+    entries = product.component_entries
+    subitems.each do |subitem|
+      component = entries.find_by(component: subitem.product)
+      subitem.update! amount: amount * component.quantity
+    end
+    reload
+  end
+
   # Define methods to use archived copies of order items if the associated
   # order is concluded, otherwise go through the associations.
   %w[product_code product_customer_code product_title product_subtitle].each do |method|

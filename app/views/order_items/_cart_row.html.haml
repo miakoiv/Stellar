@@ -1,4 +1,10 @@
-= content_tag_for :tr, order_item, class: order_item.live? ? '' : 'warning text-warning' do
+:ruby
+  classes = [].tap do |c|
+    c << 'warning text-warning' unless order_item.live?
+    c << 'subrow' if order_item.is_subitem?
+  end
+
+= content_tag_for :tr, order_item, class: classes.join(' ') do
   %td
     - if !order_item.product.available?
       = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
@@ -16,17 +22,17 @@
   %td.no-wrap
     - if order_item.real?
       = order_item.product_code
-  %td
-    - if order_item.real?
-      = form_for order_item, remote: true, html: {class: 'pull-right immediate'} do |f|
-        = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
+  %td.text-right
+    = form_for order_item, remote: true, html: {class: 'pull-right immediate'} do |f|
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right',
+          disabled: order_item.is_subitem? || order_item.virtual?
   %td.text-right.currency
     - if order_item.real?
       = humanized_money_with_symbol order_item.price
   %td.text-right.currency
     = humanized_money_with_symbol order_item.subtotal
   %td.actions
-    - if order_item.real?
+    - unless order_item.is_subitem? || order_item.virtual?
       = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
