@@ -78,15 +78,11 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/1/forward
   def forward
-    failed_items = @order.forward_to(shopping_cart)
+    @order.forward_to(shopping_cart)
     shopping_cart.reappraise!(current_pricing)
     shopping_cart.recalculate!
 
-    if failed_items.any?
-      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
-    else
-      redirect_to cart_path, notice: t('.notice', order: @order)
-    end
+    redirect_to cart_path, notice: t('.notice', order: @order)
   end
 
   # POST /admin/orders/1/add_products

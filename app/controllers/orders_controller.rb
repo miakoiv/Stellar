@@ -76,15 +76,11 @@ class OrdersController < ApplicationController
   def duplicate
     authorize_action_for @order
 
-    failed_items = @order.copy_items_to(shopping_cart)
+    @order.copy_items_to(shopping_cart)
     shopping_cart.reappraise!(current_pricing)
     shopping_cart.recalculate!
 
-    if failed_items.any?
-      redirect_to cart_path, alert: t('.failed', order: @order, failed: failed_items.to_sentence)
-    else
-      redirect_to cart_path, notice: t('.notice', order: @order)
-    end
+    redirect_to cart_path, notice: t('.notice', order: @order)
   end
 
   private

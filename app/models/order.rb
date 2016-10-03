@@ -183,38 +183,32 @@ class Order < ActiveRecord::Base
 
   # Inserts the contents of given order item to this order.
   # This is useful for copying order items from another order.
-  def insert_order_item(item)
+  def insert_order_item(item, parent_item = nil)
     order_item = order_items.create_with(
       amount: 0,
       priority: order_items_count
-    ).find_or_create_by(product: item.product)
+    ).find_or_create_by(product: item.product, parent_item: parent_item)
     order_item.amount += item.amount
-    order_item.price = item.price
+    order_item.price_cents = item.price_cents
     order_item.save!
+    item.subitems.each do |subitem|
+      insert_order_item(subitem, order_item)
+    end
   end
 
-  # Copies order items on this order to another order. Any order items
-  # referring to a product that's not available are returned as failed items.
+  # Copies the top level order items on this order to another order.
+  # Any subitems are recursively copied by #insert_order_item.
   def copy_items_to(another_order)
-    failed_items = []
-    order_items.each do |order_item|
-      product = order_item.product
-      next if product.virtual?
-      if product.live?
-        another_order.insert_order_item(order_item)
-      else
-        failed_items << product
-      end
+    order_items.top_level.real.each do |order_item|
+      another_order.insert_order_item(order_item)
     end
-    failed_items
   end
 
   # Forwards this order as another order by replacing its items with
   # items from this order, and copying some relevant info over.
-  # Returns items that failed just like #copy_items_to above.
   def forward_to(another_order)
     another_order.order_items.destroy_all
-    failed_items = copy_items_to(another_order)
+    copy_items_to(another_order)
     another_order.update(
       shipping_at: shipping_at,
       installation_at: installation_at,
@@ -233,7 +227,6 @@ class Order < ActiveRecord::Base
       shipping_country: shipping_country,
       notes: notes
     )
-    failed_items
   end
 
   # Reappraising the order modifies the order item prices according to
