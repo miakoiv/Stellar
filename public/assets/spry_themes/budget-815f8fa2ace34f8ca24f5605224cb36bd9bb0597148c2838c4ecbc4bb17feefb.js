@@ -1,0 +1,1 @@
+(function(){jQuery(function(){return(this.setup=function(){return $("#categories-wrap").make_room($("#categories-wrap li.category.active > .subcategories-wrap"))})(),$(document).on("page:done",function(){return this.setup()})})}).call(this);
