@@ -414,6 +414,8 @@ body {
       }
       .images.technical {
         @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+
+        .image { padding-bottom: 100%; }
       }
       .iframes {}
       .images {
@@ -458,7 +460,15 @@ body {
               display: block;
               text-decoration: none;
 
-              .product-image img { @extend .img-responsive; }
+              .product-image {
+                position: relative;
+                height: 0;
+                padding-bottom: 100%;
+
+                img {
+                  @extend .img-contain, .img-center;
+                }
+              }
 
               .product-text {
                 h3 {

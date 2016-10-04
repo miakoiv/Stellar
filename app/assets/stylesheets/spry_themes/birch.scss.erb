@@ -351,6 +351,8 @@ body {
       }
       .images.technical {
         @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+
+        .image { padding-bottom: 100%; }
       }
       .iframes {
         @extend .hidden-print;
@@ -410,7 +412,15 @@ body {
               display: block;
               text-decoration: none;
 
-              .product-image { @extend .box-thumbnail; }
+              .product-image {
+                position: relative;
+                height: 0;
+                padding-bottom: 100%;
+
+                img {
+                  @extend .img-contain, .img-center;
+                }
+              }
 
               h3 {
                 font-size: $font-size-base;
