@@ -56,6 +56,8 @@ body {
   }
 }
 
+#category-banner-wrap { display: none; }
+
 #search-panel-wrap {
   background-color: lighten($brand-primary, 25%);
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
