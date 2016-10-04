@@ -193,15 +193,17 @@ en:
     all_products: All products
     product_variants: Alternatives for this product
     requisite_products: Recommended products
-    product_properties: Product information
-    component_entries: Included components
+    product_description: Description
+    product_documentation: Documentation
+    product_properties: Properties
+    component_entries: Incl. components
     add_to_cart: Add to cart
     offer_requisites: Recommended purchases
     empty_cart: Your shopping cart is empty.
     go_shopping: Go shopping.
     order_history: Order history
     no_orders: Your order history is empty.
-    go_checkout: Proceed to checkout
+    go_checkout: Checkout
     cart:
       shopping_cart: Shopping cart
       delete: Empty cart

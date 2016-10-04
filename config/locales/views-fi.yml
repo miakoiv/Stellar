@@ -173,8 +173,10 @@ fi:
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
     requisite_products: Katso myös nämä
-    product_properties: Tuotetiedot
-    component_entries: Tuotteen sisältämät osat
+    product_description: Tuotekuvaus
+    product_documentation: Dokumentaatio
+    product_properties: Ominaisuudet
+    component_entries: Sisältyvät osat
     add_to_cart: Lisää koriin
     offer_requisites: Muista myös nämä
     empty_cart: Ostoskorisi on tyhjä.
