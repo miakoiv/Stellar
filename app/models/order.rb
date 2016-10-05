@@ -165,9 +165,12 @@ class Order < ActiveRecord::Base
       amount: 0,
       priority: order_items_count
     ).find_or_create_by(product: product, parent_item: parent_item)
-    order_item.amount += amount
-    order_item.price_cents = price_cents
-    order_item.save!
+    order_item.update!(
+      amount: order_item.amount + amount,
+      price_cents: price_cents,
+      tax_rate: product.tax_category.rate,
+      price_includes_tax: product.tax_category.included_in_retail
+    )
     if separate_components
       insert_components(product, amount, pricing, order_item)
     end
@@ -290,6 +293,23 @@ class Order < ActiveRecord::Base
     Order.with_advisory_lock('order_numbering') do
       current_max = store.orders.complete.maximum(:number) || store.order_sequence
       update(number: current_max.succ, completed_at: Time.current)
+    end
+  end
+
+  # Archives the order and its items to permanently record data
+  # that is subject to change.
+  def archive!
+    transaction do
+      update(
+        store_name: store.name,
+        user_name: user.try(:name),
+        user_email: user.try(:email),
+        user_phone: user.try(:phone),
+        order_type_name: order_type.name
+      )
+      order_items.each do |item|
+        item.archive!
+      end
     end
   end
 
@@ -516,20 +536,5 @@ class Order < ActiveRecord::Base
 
     def create_asset_entries!
       CustomerAsset.create_from(self)
-    end
-
-    def archive!
-      transaction do
-        update(
-          store_name: store.name,
-          user_name: user.try(:name),
-          user_email: user.try(:email),
-          user_phone: user.try(:phone),
-          order_type_name: order_type.name
-        )
-        order_items.each do |item|
-          item.archive!
-        end
-      end
     end
 end

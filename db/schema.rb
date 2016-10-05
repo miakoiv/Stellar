@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005090354) do
+ActiveRecord::Schema.define(version: 20161005110650) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -260,18 +260,20 @@ ActiveRecord::Schema.define(version: 20161005090354) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "parent_item_id",        limit: 4
-    t.integer  "order_id",              limit: 4,   null: false
-    t.integer  "product_id",            limit: 4,   null: false
+    t.integer  "order_id",              limit: 4,                                           null: false
+    t.integer  "product_id",            limit: 4,                                           null: false
     t.string   "label",                 limit: 255
     t.integer  "amount",                limit: 4
     t.integer  "price_cents",           limit: 4
     t.integer  "priority",              limit: 4
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                                                null: false
+    t.datetime "updated_at",                                                                null: false
     t.string   "product_code",          limit: 255
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
     t.string   "product_subtitle",      limit: 255
+    t.decimal  "tax_rate",                          precision: 5, scale: 2, default: 0.0,   null: false
+    t.boolean  "price_includes_tax",                                        default: false, null: false
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree

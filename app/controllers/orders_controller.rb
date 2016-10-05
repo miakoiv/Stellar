@@ -46,6 +46,7 @@ class OrdersController < ApplicationController
 
         if !@order.complete? && @order.checkout_phase == :complete
           @order.complete!
+          @order.archive!
           @order.consume_stock!
           @order.send_confirmations
         end
