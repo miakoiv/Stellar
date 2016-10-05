@@ -5,7 +5,7 @@
   %p.price.currency
     = icon('tag', humanized_money_with_symbol(price))
     - if current_store.b2b_sales?
-      %span.tax-rate= t('.zero_tax_rate')
+      %span.tax-rate= "(#{product.tax_category})"
     - unless unit_price.nil?
       %span.unit-price.currency
         = unit_price_string(unit_price, product.base_unit)

@@ -172,8 +172,6 @@ fi:
     edit:
       duplicate: Kopioi ostoskoriin
   products:
-    pricing:
-      zero_tax_rate: (ALV 0%)
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
   store:

@@ -192,8 +192,6 @@ en:
     edit:
       duplicate: Duplicate to cart
   products:
-    pricing:
-      zero_tax_rate: (0% VAT)
     product_detail:
       variants: Alternatives for this product…
   store:
