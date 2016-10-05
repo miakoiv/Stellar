@@ -134,6 +134,7 @@ Rails.application.routes.draw do
       resources :asset_entries, shallow: true, only: :create
     end
     resources :pricing_groups
+    resources :tax_categories
     resources :inventories
     resources :inventory_items do
       resources :inventory_entries, shallow: true, only: :create

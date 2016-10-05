@@ -15,6 +15,8 @@
   = active_link_to icon('camera-retro', title(Album, count: 2), class: 'fa-fw'), admin_albums_path, wrap_tag: :li
 %li.divider
 - if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
+  = active_link_to icon('percent', title(TaxCategory, count: 2), class: 'fa-fw'), admin_tax_categories_path, wrap_tag: :li
+- if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
   = active_link_to icon('shopping-basket', title(PricingGroup, count: 2), class: 'fa-fw'), admin_pricing_groups_path, wrap_tag: :li
 - if current_user.has_cached_role?(:promotion_editor)
   = active_link_to icon('tag', title(Promotion, count: 2), class: 'fa-fw'), admin_promotions_path, wrap_tag: :li

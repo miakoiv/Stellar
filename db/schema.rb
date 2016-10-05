@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003101644) do
+ActiveRecord::Schema.define(version: 20161005073122) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -557,6 +557,17 @@ ActiveRecord::Schema.define(version: 20161003101644) do
   end
 
   add_index "stores", ["host"], name: "index_stores_on_host", unique: true, using: :btree
+
+  create_table "tax_categories", force: :cascade do |t|
+    t.integer  "store_id",           limit: 4
+    t.string   "name",               limit: 255
+    t.decimal  "rate",                           precision: 5, scale: 2
+    t.boolean  "included_in_retail",                                     default: true, null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+  end
+
+  add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",               limit: 4,                  null: false

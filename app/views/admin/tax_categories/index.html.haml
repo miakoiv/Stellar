@@ -1,0 +1,38 @@
+.page-header
+  - if current_user.can_create?(TaxCategory)
+    = link_to new_admin_tax_category_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_tax_category'))
+  %h1= icon('percent', title(TaxCategory, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-6= col(TaxCategory, :name)
+        %th= col(TaxCategory, :rate)
+        %th.col-xs-3= col(TaxCategory, :included_in_retail)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @tax_categories do |tax_category|
+        %td= tax_category.name
+        %td
+          = tax_category.rate
+          \%
+        %td
+          - if tax_category.included_in_retail?
+            = icon('check-square-o')
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_tax_category_path(tax_category),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(TaxCategory)
+            = link_to icon('edit', t('actions.edit')), edit_admin_tax_category_path(tax_category),
+                class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(TaxCategory)
+            = link_to icon('remove', t('actions.delete')), admin_tax_category_path(tax_category),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: TaxCategory.model_name.human, name: tax_category.name),
+                  'confirm-title' => t('actions.confirm.title'),
+                  'confirm-proceed' => t('actions.confirm.proceed'),
+                  'confirm-cancel' => t('actions.confirm.cancel')}

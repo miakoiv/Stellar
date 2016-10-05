@@ -83,6 +83,9 @@ fi:
       store:
         one: kauppa
         other: kaupat
+      tax_category:
+        one: veroluokka
+        other: veroluokat
       user:
         one: käyttäjä
         other: käyttäjät
@@ -343,6 +346,10 @@ fi:
         csv_product_code: Tuotekoodisarake
         csv_retail_price: Myyntihintasarake
         csv_inventory_amount: Varastosaldosarake
+      tax_category:
+        name: Nimi
+        rate: Veroaste
+        included_in_retail: Myyntihinnat sisältävät veron
       user:
         personal: Omat tiedot
         privileges: Käyttöoikeudet

@@ -98,6 +98,13 @@ fi:
         notice: "Kauppa %{store} luotu."
       update:
         notice: "Kauppa %{store} päivitetty."
+    tax_categories:
+      create:
+        notice: "Veroluokka %{tax_category} luotu."
+      update:
+        notice: "Veroluokka %{tax_category} päivitetty."
+      destroy:
+        notice: "Veroluokka %{tax_category} poistettu."
     users:
       create:
         notice: "Käyttäjä %{user} luotu."

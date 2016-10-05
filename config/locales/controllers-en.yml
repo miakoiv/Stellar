@@ -98,6 +98,13 @@ en:
         notice: "Store %{store} created."
       update:
         notice: "Store %{store} updated."
+    tax_categories:
+      create:
+        notice: "Tax category %{tax_category} created."
+      update:
+        notice: "Tax category %{tax_category} updated."
+      destroy:
+        notice: "Tax category %{tax_category} deleted."
     users:
       create:
         notice: "User %{user} created."

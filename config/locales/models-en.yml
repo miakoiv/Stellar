@@ -83,6 +83,9 @@ en:
       store:
         one: store
         other: stores
+      tax_category:
+        one: tax category
+        other: tax categories
       user:
         one: user
         other: users
@@ -343,6 +346,10 @@ en:
         csv_product_code: Product code field
         csv_retail_price: Retail price field
         csv_inventory_amount: Inventory field
+      tax_category:
+        name: Name
+        rate: Tax rate
+        included_in_retail: Retail prices include tax
       user:
         personal: Personal information
         privileges: Privileges

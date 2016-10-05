@@ -55,6 +55,7 @@ class Store < ActiveRecord::Base
     store.has_many :users
     store.has_many :customer_assets
     store.has_many :pricing_groups
+    store.has_many :tax_categories
   end
 
   has_many :inventory_items, through: :inventories
