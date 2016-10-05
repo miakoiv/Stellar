@@ -2,9 +2,11 @@
 
 class Admin::TaxCategoriesController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
   before_action :set_tax_category, only: [:show, :edit, :update, :destroy]
 
+  authority_actions reorder: 'update'
   authorize_actions_for TaxCategory
 
   layout 'admin'

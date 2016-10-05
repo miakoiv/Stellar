@@ -263,6 +263,7 @@ fi:
         cost_price: Omakustannushinta
         trade_price: Valmistajan hinta
         retail_price: Myyntihinta
+        tax_category_id: Veroluokka
         alternate_prices: Hinnoittelu
         price: Hinta
         markup_percent: Lisä-%

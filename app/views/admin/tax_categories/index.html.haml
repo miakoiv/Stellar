@@ -8,20 +8,22 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-6= col(TaxCategory, :name)
+        %th.col-min.hidden-print
+        %th.col-xs-4= col(TaxCategory, :name)
         %th= col(TaxCategory, :rate)
-        %th.col-xs-3= col(TaxCategory, :included_in_retail)
+        %th
         %th.actions
 
-    %tbody
+    %tbody{class: current_user.can_update?(TaxCategory) ? 'sortable' : nil}
       = content_tag_for :tr, @tax_categories do |tax_category|
+        %td.hidden-print= drag_handle
         %td= tax_category.name
         %td
           = tax_category.rate
           \%
         %td
           - if tax_category.included_in_retail?
-            = icon('check-square-o')
+            .label.label-primary= col(TaxCategory, :included_in_retail)
         %td.actions
           = link_to icon('info', t('actions.show')), admin_tax_category_path(tax_category),
               class: 'btn btn-default btn-sm'
@@ -36,3 +38,14 @@
                   'confirm-title' => t('actions.confirm.title'),
                   'confirm-proceed' => t('actions.confirm.proceed'),
                   'confirm-cancel' => t('actions.confirm.cancel')}
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_tax_categories_path}',
+      {reorder: $(this).sortable('toArray')}

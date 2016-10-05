@@ -4,9 +4,12 @@ class TaxCategory < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Reorderable
 
   #---
   belongs_to :store
+
+  default_scope { sorted }
 
   #---
   validates :name, presence: true

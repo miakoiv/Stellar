@@ -119,6 +119,8 @@ en:
       new:
         new_product: New product
       form:
+        tax_included_in_retail_html: Price <strong>includes tax</strong>.
+        tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Price <strong>excludes tax</strong>.
         shipping_notes_help: Extra information for shopping cart and order rows.
       upload_modal:
         title: Upload CSV file

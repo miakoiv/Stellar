@@ -37,7 +37,8 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = current_store.products.build(
       vendor: current_user.vendor? ? current_user : nil,
-      available_at: Date.current
+      available_at: Date.current,
+      tax_category: current_store.tax_categories.first
     )
   end
 
@@ -145,7 +146,7 @@ class Admin::ProductsController < ApplicationController
         :title, :subtitle, :description, :memo,
         :mass, :dimension_u, :dimension_v, :dimension_w,
         :lead_time, :shipping_notes,
-        :cost_price, :trade_price, :retail_price,
+        :cost_price, :trade_price, :retail_price, :tax_category_id,
         :available_at, :deleted_at, category_ids: []
       )
     end

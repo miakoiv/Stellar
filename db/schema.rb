@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005073122) do
+ActiveRecord::Schema.define(version: 20161005090354) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -428,6 +428,7 @@ ActiveRecord::Schema.define(version: 20161005073122) do
     t.integer  "trade_price_cents",       limit: 4
     t.date     "trade_price_modified_at"
     t.integer  "retail_price_cents",      limit: 4
+    t.integer  "tax_category_id",         limit: 4,                     null: false
     t.integer  "priority",                limit: 4,     default: 0,     null: false
     t.date     "available_at"
     t.date     "deleted_at"
@@ -441,6 +442,7 @@ ActiveRecord::Schema.define(version: 20161005073122) do
   add_index "products", ["slug"], name: "index_products_on_slug", using: :btree
   add_index "products", ["store_id"], name: "index_products_on_store_id", using: :btree
   add_index "products", ["subtitle"], name: "index_products_on_subtitle", using: :btree
+  add_index "products", ["tax_category_id"], name: "index_products_on_tax_category_id", using: :btree
   add_index "products", ["title"], name: "index_products_on_title", using: :btree
   add_index "products", ["vendor_id"], name: "index_products_on_vendor_id", using: :btree
 
@@ -563,6 +565,7 @@ ActiveRecord::Schema.define(version: 20161005073122) do
     t.string   "name",               limit: 255
     t.decimal  "rate",                           precision: 5, scale: 2
     t.boolean  "included_in_retail",                                     default: true, null: false
+    t.integer  "priority",           limit: 4,                           default: 0,    null: false
     t.datetime "created_at",                                                            null: false
     t.datetime "updated_at",                                                            null: false
   end

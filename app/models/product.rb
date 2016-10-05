@@ -45,6 +45,9 @@ class Product < ActiveRecord::Base
   # A product may belong to a specific vendor user who's responsible for it.
   belongs_to :vendor, class_name: 'User'
 
+  # Products must have a tax category
+  belongs_to :tax_category, required: true
+
   # A product may belong to multiple categories, and must update its own
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!

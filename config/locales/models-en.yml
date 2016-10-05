@@ -263,6 +263,7 @@ en:
         cost_price: Cost Price
         trade_price: Trade price
         retail_price: Retail price
+        tax_category_id: Tax category
         alternate_prices: Pricing
         price: Price
         markup_percent: Markup %

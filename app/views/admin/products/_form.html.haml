@@ -42,6 +42,7 @@
 
         #tab-product-pricing.tab-pane.fade
           %fieldset{disabled: locked}
+            = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }
             - if current_user.manufacturer?
               = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
             .form-group
@@ -60,6 +61,11 @@
                 .input-group
                   = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
                   %span.input-group-addon €
+                .help-block
+                  #tax-included.collapse{class: @product.tax_category.included_in_retail? ? 'in' : ''}
+                    = t('.tax_included_in_retail_html')
+                  #tax-excluded.collapse{class: @product.tax_category.included_in_retail? ? '' : 'in'}
+                    = t('.tax_excluded_in_retail_html')
               .col-sm-4
                 .input-group
                   %span.input-group-addon= col(Product, :margin_percent)
@@ -110,6 +116,18 @@
     $('#product_retail_price').val numbro(retail_price).format('0.00')
     update_markup_margin()
     $('#product_retail_price, #markup_percent').effect 'highlight'
+
+  tax_categories = #{current_store.tax_categories.map { |t| [t.id, t.included_in_retail?] }.to_h.to_json}
+
+  $('#product_tax_category_id').selectize
+      dropdownParent: 'body'
+      onChange: (index) ->
+        if tax_categories[index]
+          $('#tax-included').collapse 'show'
+          $('#tax-excluded').collapse 'hide'
+        else
+          $('#tax-included').collapse 'hide'
+          $('#tax-excluded').collapse 'show'
 
   $('#product_purpose').on 'change', (e) ->
     switch $(e.target).val()
