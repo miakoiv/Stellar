@@ -167,6 +167,9 @@ fi:
         confirm: "Perutaanko varmasti %{klass} %{name}?"
         proceed: Peru tilaus
         cancel: Takaisin
+    receipt:
+      tax_included: Hinnat sisältävät arvonlisäveron.
+      tax_excluded: Hinnat ilman arvonlisäveroa.
     show:
       duplicate: Kopioi ostoskoriin
     edit:

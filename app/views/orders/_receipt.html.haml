@@ -67,6 +67,10 @@
       %dd= order.notes
 
 %hr
+%p.text-right
+  %em.small= order.includes_tax? ? t('.tax_included') : t('.tax_excluded')
+
 = render partial: 'order_items/table', object: order, as: :order
+
 %hr
 = render partial: 'orders/tax_summary', object: order, as: :order

@@ -187,6 +187,9 @@ en:
         confirm: "Are you sure you want to cancel %{klass} %{name}?"
         proceed: Cancel order
         cancel: Go back
+    receipt:
+      tax_included: Prices include Value Added Tax.
+      tax_excluded: Prices do not include taxes.
     show:
       duplicate: Duplicate to cart
     edit:
