@@ -265,6 +265,8 @@ ActiveRecord::Schema.define(version: 20161005110650) do
     t.string   "label",                 limit: 255
     t.integer  "amount",                limit: 4
     t.integer  "price_cents",           limit: 4
+    t.decimal  "tax_rate",                          precision: 5, scale: 2, default: 0.0,   null: false
+    t.boolean  "price_includes_tax",                                        default: false, null: false
     t.integer  "priority",              limit: 4
     t.datetime "created_at",                                                                null: false
     t.datetime "updated_at",                                                                null: false
@@ -272,8 +274,6 @@ ActiveRecord::Schema.define(version: 20161005110650) do
     t.string   "product_customer_code", limit: 255
     t.string   "product_title",         limit: 255
     t.string   "product_subtitle",      limit: 255
-    t.decimal  "tax_rate",                          precision: 5, scale: 2, default: 0.0,   null: false
-    t.boolean  "price_includes_tax",                                        default: false, null: false
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
