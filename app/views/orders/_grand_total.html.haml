@@ -1,1 +1,1 @@
-#grand-total= humanized_money_with_symbol order.grand_total
+#grand-total= humanized_money_with_symbol order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax

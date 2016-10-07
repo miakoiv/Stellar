@@ -117,8 +117,8 @@ module PaymentGateway
           version: @version,
           api_key: @api_key,
           order_number: number,
-          amount: order.grand_total.cents,
-          currency: order.grand_total.currency_as_string,
+          amount: order.grand_total_with_tax.cents,
+          currency: order.grand_total_with_tax.currency_as_string,
           email: "noreply@#{order.store.host}",
           authcode: sha256(@private_key, "#{@api_key}|#{number}"),
           customer: {

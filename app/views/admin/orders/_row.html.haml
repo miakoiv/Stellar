@@ -8,7 +8,8 @@
     %td= order.installation_at.present? ? l(order.installation_at) : ''
   %td= order.customer_name
   %td.text-right= order.order_items_count
-  %td.text-right.currency= humanized_money_with_symbol order.grand_total
+  %td.text-right.currency
+    = humanized_money_with_symbol order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
   %td.actions
     = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'

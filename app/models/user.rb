@@ -90,6 +90,12 @@ class User < ActiveRecord::Base
     product.price_cents(pricing_group)
   end
 
+  # Manufacturer and reseller users always deal with prices sans tax.
+  def price_includes_tax?(product)
+    return false if manufacturer? || reseller?
+    product.tax_category.included_in_retail?
+  end
+
   # Constructs a label for given product, depending on its active promotions.
   def label_for(product)
     return human_attribute_value(:group) if manufacturer? || reseller?

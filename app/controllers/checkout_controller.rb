@@ -88,7 +88,7 @@ class CheckoutController < ApplicationController
 
     if status
       unless @order.paid?
-        @order.payments.create(amount: @order.grand_total)
+        @order.payments.create(amount: @order.grand_total_with_tax)
       end
       head :ok
     else
@@ -104,7 +104,7 @@ class CheckoutController < ApplicationController
 
     if status
       unless @order.paid?
-        @order.payments.create(amount: @order.grand_total)
+        @order.payments.create(amount: @order.grand_total_with_tax)
       end
       render :success
     else

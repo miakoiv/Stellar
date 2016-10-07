@@ -200,17 +200,22 @@ en:
         user_email: E-mail
         order_type_name: Order type
         grand_total: Grand total
+        total_sans_tax: Not incl. tax
+        tax_total: Tax
+        total_with_tax: Incl. tax
         summary: Summary
         product_ids_string: Products to add
       order_item:
         order_id: Order
         product_id: Product
-        amount: Amount
+        amount: pc
+        price: à
+        subtotal: Subtotal
+        tax_rate: VAT
         product_code: Product code
         product_customer_code: Customer code
         product_title: Product title
         product_retail_price: Retail price
-        subtotal: Subtotal
       page:
         purpose: Page type
         parent_page_id: Parent page

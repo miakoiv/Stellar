@@ -7,8 +7,8 @@ class Order < ActiveRecord::Base
   include Adjustable
   monetize :adjustment_total_cents
   monetize :balance_cents
-  monetize :total_cents
-  monetize :grand_total_cents
+  monetize :total_sans_tax_cents, :total_with_tax_cents
+  monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents
 
   #---
   belongs_to :store
@@ -236,16 +236,18 @@ class Order < ActiveRecord::Base
   # given pricing group. When called at checkout, the order type is known
   # and may specify user specific pricing to be applied.
   def reappraise!(pricing_group)
-    trade_prices = order_type.present? && !is_quote?
+    user_specific = order_type.present? && !is_quote?
     order_items.each do |order_item|
-      if trade_prices
+      if user_specific
         order_item.update(
-          price: user.price_for(order_item.product, pricing_group),
+          price_cents: user.price_for_cents(order_item.product, pricing_group),
+          price_includes_tax: user.price_includes_tax?(order_item.product),
           label: user.label_for(order_item.product)
         )
       else
         order_item.update(
-          price: order_item.product.price(pricing_group),
+          price_cents: order_item.product.price_cents(pricing_group),
+          price_includes_tax: order_item.product.tax_category.included_in_retail?,
           label: nil
         )
       end
@@ -375,20 +377,16 @@ class Order < ActiveRecord::Base
     products.real.each do |product|
       return false unless product.available?
     end
-    return true
+    true
   end
 
-  # An order is considered paid if its order type requires no payment,
-  # or its balance reaches zero.
   def paid?
-    !has_payment? || balance_cents <= 0
+    balance_cents <= 0
   end
-  alias_method :paid, :paid?
 
   def complete?
     completed_at.present?
   end
-  alias_method :complete, :complete?
 
   def cancelled?
     cancelled_at.present?
@@ -417,6 +415,11 @@ class Order < ActiveRecord::Base
       [shipping_address, shipping_postalcode, shipping_city]
   end
 
+  # Do prices shown include tax?
+  def includes_tax?
+    !store.b2b_sales?
+  end
+
   def has_shipping?
     order_type.present? && order_type.has_shipping?
   end
@@ -430,17 +433,26 @@ class Order < ActiveRecord::Base
   end
 
   def balance_cents
-    grand_total_cents - payments.sum(:amount_cents)
+    grand_total_with_tax_cents - payments.sum(:amount_cents)
   end
 
-  # Total sum counting only real items (excluding shipping and handling).
-  def total_cents
-    order_items.real.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
+  # Grand total for the given items (or whole order), without tax.
+  def grand_total_sans_tax_cents(items = order_items)
+    items.map { |item|
+      (item.subtotal_sans_tax_cents || 0) + item.adjustment_total_cents
+    }.sum + adjustment_total_cents
   end
 
-  # Grand total, including virtual items.
-  def grand_total_cents
-    order_items.map { |item| item.subtotal_cents + item.adjustment_total_cents }.sum + adjustment_total_cents
+  # Same as above, with tax.
+  def grand_total_with_tax_cents(items = order_items)
+    items.map { |item|
+      (item.subtotal_with_tax_cents || 0) + item.adjustment_total_cents
+    }.sum + adjustment_total_cents
+  end
+
+  # Total tax for the given items.
+  def tax_total_cents(items = order_items)
+    items.map { |item| item.tax_subtotal_cents }.sum
   end
 
   def summary
@@ -453,7 +465,7 @@ class Order < ActiveRecord::Base
   def checkout_phase
     return :address  if !valid?
     return :shipping if has_shipping? && shipments.empty?
-    return :payment  if !paid?
+    return :payment  if has_payment? && !paid?
     return :complete
   end
 
@@ -528,9 +540,11 @@ class Order < ActiveRecord::Base
       self.billing_city = shipping_city
     end
 
+    # Shipping cost does not apply if there's a free shipping threshold
+    # met by the grand total of non-virtual items in the order.
     def calculated_shipping_cost
       default_price = store.shipping_cost_product.retail_price
-      return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at.to_money
+      return default_price if store.free_shipping_at.nil? || grand_total_with_tax(order_items.real) < store.free_shipping_at.to_money
       return 0.to_money
     end
 

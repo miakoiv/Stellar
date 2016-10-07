@@ -200,17 +200,22 @@ fi:
         user_email: Sähköpostiosoite
         order_type_name: Tilaustyyppi
         grand_total: Yhteensä
+        total_sans_tax: Veroton
+        tax_total: Vero
+        total_with_tax: Verollinen
         summary: Yhteenveto
         product_ids_string: Lisättävät tuotteet
       order_item:
         order_id: Tilaus
         product_id: Tuote
-        amount: Määrä
+        amount: kpl
+        price: à-hinta
+        subtotal: Yhteensä
+        tax_rate: ALV
         product_code: Tuotekoodi
         product_customer_code: Asiakkaan koodi
         product_title: Tuotenimike
         product_retail_price: Myyntihinta
-        subtotal: Yhteensä
       page:
         purpose: Sivun tyyppi
         parent_page_id: Pääsivu
@@ -349,7 +354,7 @@ fi:
         csv_inventory_amount: Varastosaldosarake
       tax_category:
         name: Nimi
-        rate: Veroaste
+        rate: Verokanta
         included_in_retail: Myyntihinnat sisältävät veron
       user:
         personal: Omat tiedot

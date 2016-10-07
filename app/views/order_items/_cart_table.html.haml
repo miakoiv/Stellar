@@ -5,17 +5,15 @@
         %th= col(OrderItem, :product_title)
         %th.col-xs-2= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.col-xs-1.text-right à
+        %th.col-xs-1.text-right= col(OrderItem, :price)
         %th.col-xs-1.text-right= col(OrderItem, :subtotal)
         %th.col-xs-1.actions
     %tfoot
       %tr.info
-        %th
-        %th
-        %th
+        %th{colspan: 3}
         %th.text-right= col(Order, :grand_total)
-        %th#grand-total.text-right.currency{data: {amount: order.grand_total.cents}}
-          = humanized_money_with_symbol order.grand_total
+        %th#grand-total.text-right.currency
+          = humanized_money_with_symbol order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
         %th
     %tbody
       = render partial: 'order_items/cart_row', collection: order.order_items, as: :order_item

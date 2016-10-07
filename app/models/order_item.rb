@@ -6,11 +6,9 @@ class OrderItem < ActiveRecord::Base
   include Authority::Abilities
   include Adjustable
   include Reorderable
-  monetize :price_cents, allow_nil: true,
-    numericality: {
-      greater_than_or_equal_to: 0
-    }
-  monetize :subtotal_cents
+  monetize :price_cents
+  monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents
+  monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents
   monetize :adjustment_total_cents
 
   #---
@@ -35,7 +33,7 @@ class OrderItem < ActiveRecord::Base
 
   #---
   delegate :live?, :undead?, :real?, :virtual?, to: :product
-  delegate :approved?, :concluded?, to: :order
+  delegate :includes_tax?, :approved?, :concluded?, to: :order
 
   #---
   def is_subitem?
@@ -63,8 +61,49 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  def subtotal_cents
-    amount * (price_cents || 0)
+  # Price without tax deducts the tax portion if it's included in the attribute.
+  def price_sans_tax_cents
+    return nil if price_cents.nil?
+    if price_includes_tax?
+      price_cents - tax_cents
+    else
+      price_cents
+    end
+  end
+
+  # Tax is calculated from the price attribute, which may include tax.
+  def tax_cents
+    return nil if price_cents.nil?
+    if price_includes_tax?
+      price_cents * tax_rate / (tax_rate + 100)
+    else
+      price_cents * tax_rate / 100
+    end
+  end
+
+  # Price with tax adds the tax portion if it wasn't included.
+  def price_with_tax_cents
+    return nil if price_cents.nil?
+    if price_includes_tax?
+      price_cents
+    else
+      price_sans_tax_cents + tax_cents
+    end
+  end
+
+  def subtotal_sans_tax_cents
+    return nil if price_cents.nil?
+    amount * price_sans_tax_cents
+  end
+
+  def tax_subtotal_cents
+    return nil if price_cents.nil?
+    amount * tax_cents
+  end
+
+  def subtotal_with_tax_cents
+    return nil if price_cents.nil?
+    amount * price_with_tax_cents
   end
 
   def adjustment_total_cents

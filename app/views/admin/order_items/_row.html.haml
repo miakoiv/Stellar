@@ -17,10 +17,9 @@
       - if order_item.real?
         = order_item.amount
     %td.text-right.currency
-      - if order_item.real?
-        = humanized_money_with_symbol order_item.price
+      = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
     %td.text-right.currency
-      = humanized_money_with_symbol order_item.subtotal
+      = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
 
   = content_tag_for :tr, order_item.product.component_entries do |entry|
     %td.col-xs-1

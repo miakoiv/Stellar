@@ -27,7 +27,7 @@ module PaymentGateway
         [:pmt_orderid, order.number],
         [:pmt_reference, reference(order.id.to_s)],
         [:pmt_duedate, (Date.current + 2.weeks).to_s(:fi)],
-        [:pmt_amount, ('%.2f' % order.grand_total).tr('.', ',')],
+        [:pmt_amount, ('%.2f' % order.grand_total_with_tax).tr('.', ',')],
         [:pmt_currency, 'EUR'],
         [:pmt_okreturn, @options[:ok_url]],
         [:pmt_errorreturn, @options[:error_url]],
