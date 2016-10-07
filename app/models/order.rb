@@ -7,7 +7,6 @@ class Order < ActiveRecord::Base
   include Adjustable
   monetize :adjustment_total_cents
   monetize :balance_cents
-  monetize :total_sans_tax_cents, :total_with_tax_cents
   monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents
 
   #---
