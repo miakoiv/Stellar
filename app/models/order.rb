@@ -232,11 +232,11 @@ class Order < ActiveRecord::Base
   end
 
   # Reappraising the order modifies the order item prices according to
-  # given pricing group. When called at checkout, the order type is known
-  # and may specify user specific pricing to be applied.
+  # given pricing group. This is called whenever the order type changes.
   def reappraise!(pricing_group)
     user_specific = order_type.present? && !is_quote?
     order_items.each do |order_item|
+      next if order_item.product == store.shipping_cost_product
       if user_specific
         order_item.update(
           price_cents: user.price_for_cents(order_item.product, pricing_group),
@@ -543,8 +543,9 @@ class Order < ActiveRecord::Base
     # met by the grand total of non-virtual items in the order.
     def calculated_shipping_cost
       default_price = store.shipping_cost_product.retail_price
-      return default_price if store.free_shipping_at.nil? || grand_total_with_tax(order_items.real) < store.free_shipping_at.to_money
-      return 0.to_money
+      total = includes_tax? ? grand_total_with_tax(order_items.real) : grand_total_sans_tax(order_items.real)
+      return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at.to_money
+      0.to_money
     end
 
     def create_asset_entries!
