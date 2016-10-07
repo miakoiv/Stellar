@@ -1,0 +1,14 @@
+.pull-right
+  = link_to t('store.go_checkout'), checkout_path(order), id: 'checkout-button', class: 'btn btn-primary', disabled: true
+.pull-right
+  = form_tag order_type_path(order), method: :post, remote: true, id: 'order-type-form', class: 'immediate' do
+    .btn-group{data: {toggle: 'buttons'}}
+      - current_user.outgoing_order_types.each do |order_type|
+        %label.btn.btn-default
+          = radio_button_tag :order_type_id, order_type.id
+          = order_type.name
+
+  :coffee
+    $('#order-type-form').on 'change', (e) ->
+      if $(e.target)
+        $('#checkout-button').attr 'disabled', false

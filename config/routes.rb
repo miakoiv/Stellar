@@ -36,21 +36,21 @@ Rails.application.routes.draw do
 
   # Routes for the checkout process:
   #
-  # 1) select a shipping method
+  # 1) set order type
+  post '/checkout/:order_id/order_type', to: 'checkout#order_type', as: :order_type
+  # 2) enter checkout process
+  get  '/checkout/:order_id', to: 'checkout#checkout',  as: :checkout
+  # 3) select a shipping method
   get  '/checkout/:order_id/shipping_method/:method_id', to: 'checkout#shipping_method', as: :shipping_method
-  # 2) create a shipment
+  # 4) create a shipment
   post '/checkout/:order_id/ship/:method_id', to: 'checkout#ship', as: :ship
-  # 3) enter payment information
+  # 5) enter payment information
   get  '/checkout/:order_id/pay/:method', to: 'checkout#pay', as: :pay
-  # 4) verify credit card payment or return from online payment
+  # 6) verify credit card payment or return from online payment
   post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
-  # 5) confirm order
-  post '/checkout/:order_id/confirm', to: 'checkout#confirm', as: :confirm
-  # 6) show a receipt
+  # 7) show a receipt
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
-
-  get  '/checkout/:order_id/:order_type_id', to: 'checkout#checkout',  as: :checkout
 
   # Snippets
   get '/snippets/:type/:id', to: 'snippets#show', as: :show_snippet

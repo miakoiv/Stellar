@@ -11,15 +11,20 @@ class CheckoutController < ApplicationController
   before_action :set_pages
   before_action :set_order
 
-  # GET /checkout/1/via/2
-  # Entering checkout sets the order type, which tells us how to reappraise
-  # the order items (trade price for resellers ordering from manufacturers),
-  # and whether shipping and/or payment is required. Any existing shipments
-  # are destroyed to allow re-entry to the checkout process.
-  def checkout
+  # POST /checkout/1/order_type/2.js
+  # Setting an order type allows the user to proceed to checkout.
+  # The order type tells us how to reappraise the order with user specific
+  # pricing.
+  def order_type
     @order.order_type = current_store.order_types.find(params[:order_type_id])
+    @order.save!(validate: false)
     @order.reappraise!(current_pricing)
+  end
 
+  # GET /checkout/1
+  # Entering checkout destroys any existing shipments to allow re-entry
+  # to the checkout process.
+  def checkout
     if @order.complete? || @order.empty? || !@order.checkoutable?
       return redirect_to cart_path
     end
@@ -108,7 +113,7 @@ class CheckoutController < ApplicationController
       end
       render :success
     else
-      redirect_to checkout_path(@order, @order.order_type)
+      redirect_to checkout_path(@order)
     end
   end
 
