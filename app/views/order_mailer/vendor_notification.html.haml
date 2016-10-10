@@ -81,11 +81,13 @@
               %tr
                 %td
                   %table.invoice-items{cellpadding: 5, cellspacing: 0}
+                    %caption.alignright
+                      %em= @order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')
                     %tr
                       %td= OrderItem.human_attribute_name(:product_code)
                       %td= OrderItem.human_attribute_name(:product_title)
                       %td.alignright= OrderItem.human_attribute_name(:amount)
-                      %td.alignright à
+                      %td.alignright= OrderItem.human_attribute_name(:price)
                       %td.alignright= OrderItem.human_attribute_name(:subtotal)
                     - @order_items.each do |order_item|
                       = content_tag_for :tr, order_item do
@@ -98,14 +100,14 @@
                               %em= order_item.product.shipping_notes
                         %td.alignright.nowrap= order_item.amount
                         %td.alignright.nowrap
-                          = humanized_money_with_symbol order_item.price
+                          = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
                         %td.alignright.nowrap
-                          = humanized_money_with_symbol order_item.subtotal
+                          = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
                     %tr.total
                       %td.alignright{colspan: 4}
                         = Order.human_attribute_name(:grand_total)
                       %td.alignright.nowrap
-                        = humanized_money_with_symbol @order_items.sum(&:subtotal)
+                        = humanized_money_with_symbol @order.includes_tax? ? @order.grand_total_with_tax(@order_items) : @order.grand_total_sans_tax(@order_items)
 
 .footer
   %table{width: '100%'}
