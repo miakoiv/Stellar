@@ -35,4 +35,4 @@
       = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
-  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

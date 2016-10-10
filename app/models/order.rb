@@ -5,9 +5,9 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Adjustable
-  monetize :adjustment_total_cents
   monetize :balance_cents
   monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents
+  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents
 
   #---
   belongs_to :store
@@ -427,10 +427,6 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
-  def adjustment_total_cents
-    adjustments.sum(:amount_cents)
-  end
-
   def balance_cents
     grand_total_with_tax_cents - payments.sum(:amount_cents)
   end
@@ -438,20 +434,28 @@ class Order < ActiveRecord::Base
   # Grand total for the given items (or whole order), without tax.
   def grand_total_sans_tax_cents(items = order_items)
     items.map { |item|
-      (item.subtotal_sans_tax_cents || 0) + item.adjustment_total_cents
-    }.sum + adjustment_total_cents
+      (item.subtotal_sans_tax_cents || 0) + item.adjustments_sans_tax_cents
+    }.sum + adjustments_sans_tax_cents
   end
 
   # Same as above, with tax.
   def grand_total_with_tax_cents(items = order_items)
     items.map { |item|
-      (item.subtotal_with_tax_cents || 0) + item.adjustment_total_cents
-    }.sum + adjustment_total_cents
+      (item.subtotal_with_tax_cents || 0) + item.adjustments_with_tax_cents
+    }.sum + adjustments_with_tax_cents
   end
 
   # Total tax for the given items.
   def tax_total_cents(items = order_items)
     items.map { |item| item.tax_subtotal_cents }.sum
+  end
+
+  def adjustments_sans_tax_cents
+    adjustments.map(&:amount_sans_tax_cents).sum
+  end
+
+  def adjustments_with_tax_cents
+    adjustments.map(&:amount_with_tax_cents).sum
   end
 
   def summary

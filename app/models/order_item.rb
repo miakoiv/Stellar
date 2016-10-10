@@ -9,7 +9,7 @@ class OrderItem < ActiveRecord::Base
   monetize :price_cents
   monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents
   monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents
-  monetize :adjustment_total_cents
+  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
@@ -106,8 +106,12 @@ class OrderItem < ActiveRecord::Base
     amount * price_with_tax_cents
   end
 
-  def adjustment_total_cents
-    adjustments.sum(:amount_cents)
+  def adjustments_sans_tax_cents
+    adjustments.map(&:amount_sans_tax_cents).sum
+  end
+
+  def adjustments_with_tax_cents
+    adjustments.map(&:amount_with_tax_cents).sum
   end
 
   def archive!

@@ -23,4 +23,4 @@
     = number_to_percentage order_item.tax_rate, precision: 0
 
 - if order_item.adjustments.any?
-  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}
