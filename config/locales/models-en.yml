@@ -282,6 +282,7 @@ en:
       promoted_item:
         product_id: Product
         price: Price
+        tax_category_id: Tax
         discount_percent: Discount
         amount_available: Availability
         amount_sold: Sold

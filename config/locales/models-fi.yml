@@ -282,6 +282,7 @@ fi:
       promoted_item:
         product_id: Tuote
         price: Hinta
+        tax_category_id: Vero
         discount_percent: Alennus
         amount_available: Saatavuus
         amount_sold: Myyty
