@@ -270,8 +270,8 @@ class Product < ActiveRecord::Base
     end
   end
 
-  # Product is considered available when it's live and has inventory on hand,
-  # or in case of no inventory, has a defined lead time.
+  # Product is considered available when it's live and has either inventory
+  # on hand, or a defined lead time.
   def available?
     live? && (lead_time.present? || on_hand > 0)
   end
@@ -377,11 +377,11 @@ class Product < ActiveRecord::Base
   end
 
   # Resets the live status of the product, according to these criteria:
-  # - must have at least one live category
+  # - must have at least one live category, unless it's a virtual product
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
-    update_columns(live: categories.live.any? &&
+    update_columns(live: (virtual? || categories.live.any?) &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
     true
