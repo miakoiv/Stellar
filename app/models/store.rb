@@ -91,9 +91,9 @@ class Store < ActiveRecord::Base
     }
   end
 
-  # Options for shipping gateways defined in the ShippingGateway module.
+  # Options for shipping gateways found in the ShippingGateway module.
   def self.shipping_gateway_options
-    %w{CustomerPickup SmartPost}.map do |gateway|
+    Shipment.available_gateways.map do |gateway|
       ["ShippingGateway::#{gateway}".constantize.model_name.human, gateway]
     end
   end

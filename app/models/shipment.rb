@@ -8,6 +8,12 @@ class Shipment < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
   scope :pending, -> { where(shipped_at: nil) }
 
+  #---
+  def self.available_gateways
+    %w{CustomerPickup Letter SmartPost}
+  end
+
+  #---
   def shipping_gateway
     "ShippingGateway::#{shipping_method.shipping_gateway}".constantize
   end
