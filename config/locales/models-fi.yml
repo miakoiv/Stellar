@@ -4,6 +4,7 @@ fi:
       shipping_gateway/customer_pickup: asiakas noutaa
       shipping_gateway/letter: postitus kirjeenä
       shipping_gateway/smart_post: Posti SmartPOST
+      shipping_gateway/vendor: tavarantoimittaja kuljettaa
   activerecord:
     models:
       album:

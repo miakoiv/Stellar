@@ -4,6 +4,7 @@ en:
       shipping_gateway/customer_pickup: customer pick-up
       shipping_gateway/letter: letter via mail
       shipping_gateway/smart_post: Posti SmartPOST
+      shipping_gateway/vendor: shipping by vendor
   activerecord:
     models:
       album:
