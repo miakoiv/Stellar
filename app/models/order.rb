@@ -105,8 +105,12 @@ class Order < ActiveRecord::Base
     store.users.where(group: order_type.destination_group).with_role(:order_notify)
   end
 
+  def has_contact_info?
+    contact_person.present? && contact_email.present?
+  end
+
   def contact_string
-    contact_person.present? && contact_email.present? ? "#{contact_person} <#{contact_email}>" : nil
+    has_contact_info? ? "#{contact_person} <#{contact_email}>" : nil
   end
 
   def approval
@@ -323,12 +327,13 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Sends an order confirmation to the customer, possible contact person,
-  # and additional notifications to vendors if the order contains any of
-  # their products.
+  # Sends an order confirmation to the customer, and additional notifications
+  # to vendors if the order contains any of their products. A separate order
+  # notification is sent to the contact person, if applicable.
   def send_confirmations
     return unless send_confirmation?
     OrderMailer.order_confirmation(self).deliver_later
+    OrderMailer.order_notification(self).deliver_later if has_contact_info?
     items_by_vendor.each do |vendor, items|
       OrderMailer.vendor_notification(self, vendor, items).deliver_later
     end
