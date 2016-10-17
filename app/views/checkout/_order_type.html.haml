@@ -16,7 +16,7 @@
       if $(e.target)
         $('#checkout-button').attr 'disabled', false
 
-- else
+- elsif order_types.count == 1
   :coffee
     jQuery ->
       request = $.post '#{order_type_path(order)}',
