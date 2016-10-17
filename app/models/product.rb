@@ -207,7 +207,7 @@ class Product < ActiveRecord::Base
     if pricing_group.present?
       return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
     end
-    price_cents = retail_price_cents
+    price_cents = retail_price_cents || 0
     lowest = best_promoted_item
     price_cents = lowest.price_cents if lowest.present?
     price_cents += component_total_price_cents(pricing_group) if composite?
