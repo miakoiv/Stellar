@@ -19,6 +19,11 @@ ml:
 m:
   id: 5
   name: m
+cm:
+  id: 12
+  base_unit_id: 5
+  exponent: -2
+  name: cm
 mm:
   id: 6
   base_unit_id: 5
