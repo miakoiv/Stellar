@@ -9,7 +9,7 @@
 class Adjustment < ActiveRecord::Base
 
   monetize :amount_cents, allow_nil: true
-  monetize :amount_sans_tax_cents, :tax_cents, :amount_with_tax_cents
+  monetize :amount_sans_tax_cents, :tax_cents, :amount_with_tax_cents, disable_validation: true
 
   #---
   belongs_to :adjustable, polymorphic: true

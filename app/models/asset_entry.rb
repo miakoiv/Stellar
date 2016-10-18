@@ -12,7 +12,7 @@ class AssetEntry < ActiveRecord::Base
 
   # Values are for each, total value is added to customer asset value.
   monetize :value_cents
-  monetize :total_value_cents
+  monetize :total_value_cents, disable_validation: true
 
   #---
   belongs_to :customer_asset, touch: true

@@ -6,7 +6,7 @@ class InventoryItem < ActiveRecord::Base
   include Authority::Abilities
 
   monetize :value_cents, allow_nil: true
-  monetize :total_value_cents
+  monetize :total_value_cents, disable_validation: true
 
   #---
   belongs_to :inventory
