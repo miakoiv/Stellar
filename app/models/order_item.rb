@@ -6,10 +6,10 @@ class OrderItem < ActiveRecord::Base
   include Authority::Abilities
   include Adjustable
   include Reorderable
-  monetize :price_cents
-  monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents
-  monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents
-  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents
+  monetize :price_cents, allow_nil: true
+  monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents, disable_validation: true
+  monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents, disable_validation: true
+  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true

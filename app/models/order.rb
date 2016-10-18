@@ -5,9 +5,9 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Adjustable
-  monetize :balance_cents
-  monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents
-  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents
+  monetize :balance_cents, disable_validation: true
+  monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents, disable_validation: true
+  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
 
   #---
   belongs_to :store
@@ -56,7 +56,6 @@ class Order < ActiveRecord::Base
   delegate :outgoing_for?, to: :order_type
 
   #---
-  validates_associated :order_items, on: :update
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update
