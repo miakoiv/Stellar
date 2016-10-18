@@ -61,6 +61,7 @@ class Store < ActiveRecord::Base
   has_many :inventory_items, through: :inventories
 
   accepts_nested_attributes_for :users, limit: 1
+  accepts_nested_attributes_for :tax_categories, limit: 1
 
   scope :all_except, -> (this) { where.not(id: this) }
 
