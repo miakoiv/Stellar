@@ -452,15 +452,15 @@ class Order < ActiveRecord::Base
 
   # Total tax for the given items.
   def tax_total_cents(items = order_items)
-    items.map { |item| item.tax_subtotal_cents }.sum
+    items.map { |item| item.tax_subtotal_cents || 0 }.sum
   end
 
   def adjustments_sans_tax_cents
-    adjustments.map(&:amount_sans_tax_cents).sum
+    adjustments.map { |a| a.amount_sans_tax_cents || 0 }.sum
   end
 
   def adjustments_with_tax_cents
-    adjustments.map(&:amount_with_tax_cents).sum
+    adjustments.map { |a| amount_with_tax_cents || 0 }.sum
   end
 
   def summary
