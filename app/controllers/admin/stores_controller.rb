@@ -28,6 +28,7 @@ class Admin::StoresController < ApplicationController
       group: User.groups[:manufacturer],
       roles: Role.where(name: 'superuser')
     )
+    @store.tax_categories.build
   end
 
   # GET /admin/stores/1/edit
@@ -90,6 +91,9 @@ class Admin::StoresController < ApplicationController
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
           :password, :password_confirmation, :group, role_ids: []
+        ],
+        tax_categories_attributes: [
+          :name, :rate, :included_in_retail
         ]
       )
     end

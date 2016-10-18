@@ -330,8 +330,9 @@ fi:
       store:
         admin: Asetukset
         new_user: Luo ylläpitäjä
-        upload: Tiedostojen tuonti
-        superuser: Vain pääkäyttäjälle
+        new_tax_category: Aseta verotus
+        upload: Tuontiasetukset
+        superuser: Lisäasetukset
         host: Palvelimen osoite
         subdomain: Portaalin aladomain
         portal_ids: Portaalit

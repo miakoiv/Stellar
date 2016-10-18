@@ -15,6 +15,9 @@
       %li{role: 'presentation'}
         %a{href: '#tab-store-new-user', role: 'tab', data: {toggle: 'tab'}}
           = col(Store, :new_user)
+      %li{role: 'presentation'}
+        %a{href: '#tab-store-new-tax-category', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :new_tax_category)
 
   .panel.panel-default.tabbed-panel
     .panel-body
@@ -63,6 +66,13 @@
                 = ff.password_field :password, required: true
                 = ff.password_field :password_confirmation, required: true
                 = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
+          #tab-store-new-tax-category.tab-pane.fade
+            = f.fields_for :tax_categories do |ff|
+              %fieldset{disabled: locked}
+                = ff.text_field :name, required: true
+                = ff.text_field :rate, append: '%', class: 'text-right', required: true
+                = ff.form_group do
+                  = ff.check_box :included_in_retail
 
       - unless locked
         %fieldset.actions

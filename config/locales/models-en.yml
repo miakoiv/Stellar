@@ -329,9 +329,10 @@ en:
         description: Description
       store:
         admin: Settings
-        new_user: Create admin user
+        new_user: Create admin
+        new_tax_category: Set taxation
         upload: File import
-        superuser: Superuser only
+        superuser: Advanced
         host: Server address
         subdomain: Portal subdomain
         portal_ids: Portals
