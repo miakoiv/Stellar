@@ -40,11 +40,11 @@ IMPORT_FILES = {
     ],
   },
   # PAANUMERO,ALINUMERO,PAATMP,ALITMP,LKM,TARVE1,TARVE2,BTARVE1,BTARVE2,SELITE
-  structure: {
-    file: 'www-nimike_rakenne-utf8.csv',
-    multiple: true,
-    headers: [:code, :component_code, nil, nil, :quantity]
-  },
+  #structure: {
+  #  file: 'www-nimike_rakenne-utf8.csv',
+  #  multiple: true,
+  #  headers: [:code, :component_code, nil, nil, :quantity]
+  #},
 }
 
 namespace :matfox do
@@ -75,7 +75,7 @@ namespace :matfox do
               )
             end
             update_inventory(store, product, data[:product], data[:inventories])
-            update_structure(store, product, data[:structure])
+            #update_structure(store, product, data[:structure])
           end
         end
 
@@ -97,7 +97,7 @@ namespace :matfox do
               )
             end
             update_inventory(store, product, data[:product], data[:inventories])
-            update_structure(store, product, data[:structure])
+            #update_structure(store, product, data[:structure])
           end
         end
       end
@@ -190,6 +190,7 @@ namespace :matfox do
     item.save!
   end
 
+=begin
   # Updates the component entries of `product` according to entries
   # in `structure`, in the scope of `store`.
   def update_structure(store, product, structure)
@@ -216,4 +217,5 @@ namespace :matfox do
       end
     end
   end
+=end
 end
