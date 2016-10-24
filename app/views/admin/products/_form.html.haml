@@ -28,9 +28,9 @@
             = f.select :vendor_id, current_store.users.vendor.map { |u| [u.name, u.id] }, {include_blank: true}, {class: 'selectize', disabled: current_user.vendor?}
             = f.text_field :code, required: true
             = f.text_field :customer_code
-            = f.date_field :available_at,
+            = f.text_field :available_at,
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-            = f.date_field :deleted_at,
+            = f.text_field :deleted_at,
                 data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
             = f.text_area :memo, rows: 2
 

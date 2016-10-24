@@ -5,8 +5,8 @@
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
         = f.select :shipping_gateway, Store.shipping_gateway_options, {}, {class: 'selectize'}
-        = f.date_field :enabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        = f.date_field :disabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+        = f.text_field :enabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+        = f.text_field :disabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.text_area :description
       - unless locked
         %fieldset.actions
