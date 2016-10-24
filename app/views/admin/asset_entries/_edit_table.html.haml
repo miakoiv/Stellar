@@ -17,7 +17,7 @@
     %table.table.table-loose
       %tbody
         %tr
-          %td.col-xs-2= f.date_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          %td.col-xs-2= f.text_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
           %td.col-xs-2
           %td.col-xs-2= f.number_field :amount, class: 'form-control text-right'
           %td.hidden
