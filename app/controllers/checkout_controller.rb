@@ -10,6 +10,7 @@ class CheckoutController < ApplicationController
   before_action :authenticate_user_or_skip!
   before_action :set_pages
   before_action :set_order
+  before_action :set_pricing_group
 
   # POST /checkout/1/order_type/2.js
   # Setting an order type allows the user to proceed to checkout.
@@ -18,6 +19,7 @@ class CheckoutController < ApplicationController
   def order_type
     @order.order_type = current_store.order_types.find(params[:order_type_id])
     @order.save!(validate: false)
+    logger.info "Reappraising with pricing: #{current_pricing}"
     @order.reappraise!(current_pricing)
   end
 
