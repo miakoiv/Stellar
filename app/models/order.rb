@@ -396,6 +396,7 @@ class Order < ActiveRecord::Base
   end
 
   # Addresses this order to the given user if she has any addresses defined.
+  # The country on both addresses is set to store default if none is set yet.
   def address_to(user)
     if user.shipping_address.present?
       self.shipping_address ||= user.shipping_address
@@ -410,6 +411,8 @@ class Order < ActiveRecord::Base
       self.billing_city ||= user.billing_city
       self.billing_country ||= user.billing_country
     end
+    self.shipping_country ||= store.country.code
+    self.billing_country ||= store.country.code
   end
 
   def billing_address_components
