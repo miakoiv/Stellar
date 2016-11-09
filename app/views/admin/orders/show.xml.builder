@@ -11,14 +11,14 @@ xml.order do
       xml.address @order.billing_address
       xml.postalcode @order.billing_postalcode
       xml.city @order.billing_city
-      xml.country @order.billing_country
+      xml.country @order.billing_country_code
     end
 
     xml.shipping do
       xml.address @order.shipping_address
       xml.postalcode @order.shipping_postalcode
       xml.city @order.shipping_city
-      xml.country @order.shipping_country
+      xml.country @order.shipping_country_code
     end
   end
 

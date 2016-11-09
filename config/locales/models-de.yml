@@ -106,12 +106,12 @@ de:
         billing_address: Rechnungsadresse
         billing_postalcode: Postleitzahl
         billing_city: Stadt
-        billing_country: Land
+        billing_country_code: Land
         has_billing_address: Abweichende Lieferadresse
         shipping_address: Lieferadresse
         shipping_postalcode: Postleitzahl
         shipping_city: Stadt
-        shipping_country: Land
+        shipping_country_code: Land
         notes: Anmerkungen
         store_name: Filiale
         user_name: Kunde

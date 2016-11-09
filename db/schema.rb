@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109135757) do
+ActiveRecord::Schema.define(version: 20161109142641) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -304,45 +304,45 @@ ActiveRecord::Schema.define(version: 20161109135757) do
   add_index "order_types", ["store_id"], name: "index_order_types_on_store_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",            limit: 4,                     null: false
-    t.integer  "order_items_count",   limit: 4
-    t.string   "number",              limit: 255
-    t.string   "external_number",     limit: 255
-    t.string   "your_reference",      limit: 255
-    t.string   "our_reference",       limit: 255
-    t.string   "message",             limit: 255
-    t.integer  "user_id",             limit: 4,                     null: false
-    t.integer  "order_type_id",       limit: 4
+    t.integer  "store_id",              limit: 4,                     null: false
+    t.integer  "order_items_count",     limit: 4
+    t.string   "number",                limit: 255
+    t.string   "external_number",       limit: 255
+    t.string   "your_reference",        limit: 255
+    t.string   "our_reference",         limit: 255
+    t.string   "message",               limit: 255
+    t.integer  "user_id",               limit: 4,                     null: false
+    t.integer  "order_type_id",         limit: 4
     t.datetime "completed_at"
     t.date     "shipping_at"
     t.date     "installation_at"
     t.datetime "approved_at"
     t.datetime "concluded_at"
-    t.string   "customer_name",       limit: 255
-    t.string   "customer_email",      limit: 255
-    t.string   "customer_phone",      limit: 255
-    t.string   "company_name",        limit: 255
-    t.string   "contact_person",      limit: 255
-    t.string   "contact_email",       limit: 255
-    t.string   "contact_phone",       limit: 255
-    t.boolean  "has_billing_address",               default: false, null: false
-    t.string   "billing_address",     limit: 255
-    t.string   "billing_postalcode",  limit: 255
-    t.string   "billing_city",        limit: 255
-    t.string   "billing_country",     limit: 255
-    t.string   "shipping_address",    limit: 255
-    t.string   "shipping_postalcode", limit: 255
-    t.string   "shipping_city",       limit: 255
-    t.string   "shipping_country",    limit: 255
-    t.text     "notes",               limit: 65535
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "customer_name",         limit: 255
+    t.string   "customer_email",        limit: 255
+    t.string   "customer_phone",        limit: 255
+    t.string   "company_name",          limit: 255
+    t.string   "contact_person",        limit: 255
+    t.string   "contact_email",         limit: 255
+    t.string   "contact_phone",         limit: 255
+    t.boolean  "has_billing_address",                 default: false, null: false
+    t.string   "billing_address",       limit: 255
+    t.string   "billing_postalcode",    limit: 255
+    t.string   "billing_city",          limit: 255
+    t.string   "billing_country_code",  limit: 2
+    t.string   "shipping_address",      limit: 255
+    t.string   "shipping_postalcode",   limit: 255
+    t.string   "shipping_city",         limit: 255
+    t.string   "shipping_country_code", limit: 2
+    t.text     "notes",                 limit: 65535
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.datetime "cancelled_at"
-    t.string   "store_name",          limit: 255
-    t.string   "user_name",           limit: 255
-    t.string   "user_email",          limit: 255
-    t.string   "user_phone",          limit: 255
-    t.string   "order_type_name",     limit: 255
+    t.string   "store_name",            limit: 255
+    t.string   "user_name",             limit: 255
+    t.string   "user_email",            limit: 255
+    t.string   "user_phone",            limit: 255
+    t.string   "order_type_name",       limit: 255
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
@@ -592,11 +592,11 @@ ActiveRecord::Schema.define(version: 20161109135757) do
     t.string   "billing_address",        limit: 255
     t.string   "billing_postalcode",     limit: 255
     t.string   "billing_city",           limit: 255
-    t.string   "billing_country",        limit: 255
+    t.string   "billing_country_code",   limit: 2
     t.string   "shipping_address",       limit: 255
     t.string   "shipping_postalcode",    limit: 255
     t.string   "shipping_city",          limit: 255
-    t.string   "shipping_country",       limit: 255
+    t.string   "shipping_country_code",  limit: 2
     t.string   "locale",                 limit: 255
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255

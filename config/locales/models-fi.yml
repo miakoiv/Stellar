@@ -190,12 +190,12 @@ fi:
         billing_address: Laskutusosoite
         billing_postalcode: Postinro
         billing_city: Toimipaikka
-        billing_country: Maa
+        billing_country_code: Maa
         has_billing_address: Laskutus eri osoitteeseen kuin toimitus
         shipping_address: Toimitusosoite
         shipping_postalcode: Postinro
         shipping_city: Toimipaikka
-        shipping_country: Maa
+        shipping_country_code: Maa
         notes: Lisätietoja
         store_name: Kauppa
         user_name: Tilaaja
@@ -377,11 +377,11 @@ fi:
         billing_address: Laskutusosoite
         billing_postalcode: Postinro
         billing_city: Toimipaikka
-        billing_country: Maa
+        billing_country_code: Maa
         shipping_address: Toimitusosoite
         shipping_postalcode: Postinro
         shipping_city: Toimipaikka
-        shipping_country: Maa
+        shipping_country_code: Maa
         password: Salasana
         password_confirmation: Salasanan vahvistus
         remember_me: Muista minut

@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
   # Users are restricted to interacting with only one store.
   belongs_to :store
 
+  # Preset shipping and billing addresses have country associations.
+  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
+  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
+
   # User may optionally have a fixed pricing group set.
   belongs_to :pricing_group
 
