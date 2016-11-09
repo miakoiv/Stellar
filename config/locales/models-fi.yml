@@ -341,6 +341,7 @@ fi:
         slug: Tunniste
         theme: Ulkoasun teema
         locale: Kieli
+        country_code: Kotimaa
         allow_shopping: Salli ostokset
         admit_guests: Salli pääsy kauppaan vieraana
         free_shipping_at: Ei toimituskuluja alkaen

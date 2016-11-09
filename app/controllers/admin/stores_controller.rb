@@ -80,7 +80,7 @@ class Admin::StoresController < ApplicationController
     def store_params
       params.require(:store).permit(
         :host, :subdomain, :erp_number, :name,
-        :theme, :locale, :brand_image,
+        :theme, :locale, :country_code, :brand_image,
         :card_image_type, :list_image_type,
         :allow_shopping, :admit_guests,
         :shipping_cost_product_id, :free_shipping_at,
