@@ -12,6 +12,11 @@ class Order < ActiveRecord::Base
   #---
   belongs_to :store
   belongs_to :user
+
+  # Shipping and billing addresses have country associations.
+  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
+  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
+
   belongs_to :order_type
   delegate :is_rfq?, :is_quote?, to: :order_type
   delegate :payment_gateway_class, to: :order_type
@@ -396,6 +401,7 @@ class Order < ActiveRecord::Base
   end
 
   # Addresses this order to the given user if she has any addresses defined.
+  # The country on both addresses is set to store default if none is set yet.
   def address_to(user)
     if user.shipping_address.present?
       self.shipping_address ||= user.shipping_address
@@ -410,6 +416,8 @@ class Order < ActiveRecord::Base
       self.billing_city ||= user.billing_city
       self.billing_country ||= user.billing_country
     end
+    self.shipping_country ||= store.country
+    self.billing_country ||= store.country
   end
 
   def billing_address_components

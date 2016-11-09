@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005110650) do
+ActiveRecord::Schema.define(version: 20161109142641) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -119,6 +119,13 @@ ActiveRecord::Schema.define(version: 20161005110650) do
   end
 
   add_index "component_entries", ["product_id"], name: "index_component_entries_on_product_id", using: :btree
+
+  create_table "countries", id: false, force: :cascade do |t|
+    t.string "code", limit: 2,   null: false
+    t.string "name", limit: 255
+  end
+
+  add_index "countries", ["code"], name: "index_countries_on_code", unique: true, using: :btree
 
   create_table "customer_assets", force: :cascade do |t|
     t.integer  "store_id",    limit: 4,             null: false
@@ -297,45 +304,45 @@ ActiveRecord::Schema.define(version: 20161005110650) do
   add_index "order_types", ["store_id"], name: "index_order_types_on_store_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "store_id",            limit: 4,                     null: false
-    t.integer  "order_items_count",   limit: 4
-    t.string   "number",              limit: 255
-    t.string   "external_number",     limit: 255
-    t.string   "your_reference",      limit: 255
-    t.string   "our_reference",       limit: 255
-    t.string   "message",             limit: 255
-    t.integer  "user_id",             limit: 4,                     null: false
-    t.integer  "order_type_id",       limit: 4
+    t.integer  "store_id",              limit: 4,                     null: false
+    t.integer  "order_items_count",     limit: 4
+    t.string   "number",                limit: 255
+    t.string   "external_number",       limit: 255
+    t.string   "your_reference",        limit: 255
+    t.string   "our_reference",         limit: 255
+    t.string   "message",               limit: 255
+    t.integer  "user_id",               limit: 4,                     null: false
+    t.integer  "order_type_id",         limit: 4
     t.datetime "completed_at"
     t.date     "shipping_at"
     t.date     "installation_at"
     t.datetime "approved_at"
     t.datetime "concluded_at"
-    t.string   "customer_name",       limit: 255
-    t.string   "customer_email",      limit: 255
-    t.string   "customer_phone",      limit: 255
-    t.string   "company_name",        limit: 255
-    t.string   "contact_person",      limit: 255
-    t.string   "contact_email",       limit: 255
-    t.string   "contact_phone",       limit: 255
-    t.boolean  "has_billing_address",               default: false, null: false
-    t.string   "billing_address",     limit: 255
-    t.string   "billing_postalcode",  limit: 255
-    t.string   "billing_city",        limit: 255
-    t.string   "billing_country",     limit: 255,   default: "FI"
-    t.string   "shipping_address",    limit: 255
-    t.string   "shipping_postalcode", limit: 255
-    t.string   "shipping_city",       limit: 255
-    t.string   "shipping_country",    limit: 255,   default: "FI"
-    t.text     "notes",               limit: 65535
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "customer_name",         limit: 255
+    t.string   "customer_email",        limit: 255
+    t.string   "customer_phone",        limit: 255
+    t.string   "company_name",          limit: 255
+    t.string   "contact_person",        limit: 255
+    t.string   "contact_email",         limit: 255
+    t.string   "contact_phone",         limit: 255
+    t.boolean  "has_billing_address",                 default: false, null: false
+    t.string   "billing_address",       limit: 255
+    t.string   "billing_postalcode",    limit: 255
+    t.string   "billing_city",          limit: 255
+    t.string   "billing_country_code",  limit: 2
+    t.string   "shipping_address",      limit: 255
+    t.string   "shipping_postalcode",   limit: 255
+    t.string   "shipping_city",         limit: 255
+    t.string   "shipping_country_code", limit: 2
+    t.text     "notes",                 limit: 65535
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.datetime "cancelled_at"
-    t.string   "store_name",          limit: 255
-    t.string   "user_name",           limit: 255
-    t.string   "user_email",          limit: 255
-    t.string   "user_phone",          limit: 255
-    t.string   "order_type_name",     limit: 255
+    t.string   "store_name",            limit: 255
+    t.string   "user_name",             limit: 255
+    t.string   "user_email",            limit: 255
+    t.string   "user_phone",            limit: 255
+    t.string   "order_type_name",       limit: 255
   end
 
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
@@ -550,14 +557,15 @@ ActiveRecord::Schema.define(version: 20161005110650) do
   add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.string   "host",       limit: 255
-    t.string   "subdomain",  limit: 255
-    t.integer  "erp_number", limit: 4
-    t.string   "name",       limit: 255
-    t.string   "slug",       limit: 255
-    t.text     "settings",   limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "host",         limit: 255
+    t.string   "subdomain",    limit: 255
+    t.integer  "erp_number",   limit: 4
+    t.string   "name",         limit: 255
+    t.string   "slug",         limit: 255
+    t.string   "country_code", limit: 2,     null: false
+    t.text     "settings",     limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "stores", ["host"], name: "index_stores_on_host", unique: true, using: :btree
@@ -575,32 +583,32 @@ ActiveRecord::Schema.define(version: 20161005110650) do
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "store_id",               limit: 4,                  null: false
-    t.integer  "group",                  limit: 4,   default: 0,    null: false
+    t.integer  "store_id",               limit: 4,                null: false
+    t.integer  "group",                  limit: 4,   default: 0,  null: false
     t.integer  "pricing_group_id",       limit: 4
-    t.string   "name",                   limit: 255,                null: false
-    t.string   "email",                  limit: 255, default: "",   null: false
+    t.string   "name",                   limit: 255,              null: false
+    t.string   "email",                  limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255
     t.string   "billing_address",        limit: 255
     t.string   "billing_postalcode",     limit: 255
     t.string   "billing_city",           limit: 255
-    t.string   "billing_country",        limit: 255, default: "FI"
+    t.string   "billing_country_code",   limit: 2
     t.string   "shipping_address",       limit: 255
     t.string   "shipping_postalcode",    limit: 255
     t.string   "shipping_city",          limit: 255
-    t.string   "shipping_country",       limit: 255, default: "FI"
+    t.string   "shipping_country_code",  limit: 2
     t.string   "locale",                 limit: 255
-    t.string   "encrypted_password",     limit: 255, default: "",   null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,    null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "users", ["pricing_group_id"], name: "index_users_on_pricing_group_id", using: :btree

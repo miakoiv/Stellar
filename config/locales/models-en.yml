@@ -190,12 +190,12 @@ en:
         billing_address: Billing address
         billing_postalcode: Postal code
         billing_city: City
-        billing_country: County
+        billing_country_code: County
         has_billing_address: Billing to a different address from shipping
         shipping_address: Shipping address
         shipping_postalcode: Postal code
         shipping_city: City
-        shipping_country: Country
+        shipping_country_code: Country
         notes: Notes
         store_name: Store
         user_name: Customer
@@ -341,6 +341,7 @@ en:
         slug: Slug
         theme: Display theme
         locale: Language
+        country_code: Country
         allow_shopping: Enable shopping
         admit_guests: Admit guests to the store
         free_shipping_at: Free S&H beyond
@@ -376,11 +377,11 @@ en:
         billing_address: Billing address
         billing_postalcode: Postal code
         billing_city: City
-        billing_country: County
+        billing_country_code: County
         shipping_address: Shipping address
         shipping_postalcode: Postal code
         shipping_city: City
-        shipping_country: Country
+        shipping_country_code: Country
         password: Password
         password_confirmation: Confirm password
         remember_me: Remember me

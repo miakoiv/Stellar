@@ -19,7 +19,6 @@ class CheckoutController < ApplicationController
   def order_type
     @order.order_type = current_store.order_types.find(params[:order_type_id])
     @order.save!(validate: false)
-    logger.info "Reappraising with pricing: #{current_pricing}"
     @order.reappraise!(current_pricing)
   end
 

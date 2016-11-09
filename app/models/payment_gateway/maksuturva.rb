@@ -39,12 +39,12 @@ module PaymentGateway
         [:pmt_buyeraddress, order.billing_address],
         [:pmt_buyerpostalcode, order.billing_postalcode],
         [:pmt_buyercity, order.billing_city],
-        [:pmt_buyercountry, order.billing_country],
+        [:pmt_buyercountry, order.billing_country_code],
         [:pmt_deliveryname, order.user_name],
         [:pmt_deliveryaddress, order.shipping_address],
         [:pmt_deliverypostalcode, order.shipping_postalcode],
         [:pmt_deliverycity, order.shipping_city],
-        [:pmt_deliverycountry, order.shipping_country],
+        [:pmt_deliverycountry, order.shipping_country_code],
         [:pmt_sellercosts, '0,00'],
       ]
       order.order_items.each_with_index do |item, n|

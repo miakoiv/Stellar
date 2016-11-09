@@ -113,8 +113,10 @@ class Admin::OrdersController < ApplicationController
         :external_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :contact_email, :contact_phone,
-        :billing_address, :billing_postalcode, :billing_city,
-        :shipping_address, :shipping_postalcode, :shipping_city,
+        :billing_address, :billing_postalcode,
+        :billing_city, :billing_country_code,
+        :shipping_address, :shipping_postalcode,
+        :shipping_city, :shipping_country_code,
         :notes
       )
     end
