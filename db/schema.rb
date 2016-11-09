@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005110650) do
+ActiveRecord::Schema.define(version: 20161109121825) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -119,6 +119,13 @@ ActiveRecord::Schema.define(version: 20161005110650) do
   end
 
   add_index "component_entries", ["product_id"], name: "index_component_entries_on_product_id", using: :btree
+
+  create_table "countries", id: false, force: :cascade do |t|
+    t.string "code", limit: 2,   null: false
+    t.string "name", limit: 255
+  end
+
+  add_index "countries", ["code"], name: "index_countries_on_code", unique: true, using: :btree
 
   create_table "customer_assets", force: :cascade do |t|
     t.integer  "store_id",    limit: 4,             null: false
@@ -322,11 +329,11 @@ ActiveRecord::Schema.define(version: 20161005110650) do
     t.string   "billing_address",     limit: 255
     t.string   "billing_postalcode",  limit: 255
     t.string   "billing_city",        limit: 255
-    t.string   "billing_country",     limit: 255,   default: "FI"
+    t.string   "billing_country",     limit: 255
     t.string   "shipping_address",    limit: 255
     t.string   "shipping_postalcode", limit: 255
     t.string   "shipping_city",       limit: 255
-    t.string   "shipping_country",    limit: 255,   default: "FI"
+    t.string   "shipping_country",    limit: 255
     t.text     "notes",               limit: 65535
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
