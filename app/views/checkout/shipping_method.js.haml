@@ -1,9 +1,12 @@
 $('#shipping-panel .list-group a').removeClass('active');
 $('#shipping-panel .description').html('');
+$('#shipping-panel .details').html('');
 $('#shipping-panel .gateway-content').html('');
 
 $('##{dom_id(@shipping_method)}').addClass('active');
 
 $('#shipping-panel .description').html("#{j @shipping_method.description.html_safe}");
+- if @shipping_method.detail_page.present?
+  $('#shipping-panel .details').html("#{j render partial: 'checkout/detail_page_modal', object: @shipping_method.detail_page, as: :detail_page}");
 - if @shipping_gateway.present?
   $('#shipping-panel .gateway-content').html("#{j render @shipping_gateway}");
