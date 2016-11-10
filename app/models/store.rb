@@ -106,7 +106,7 @@ class Store < ActiveRecord::Base
 
   # Options for shipping address countries.
   def self.country_options
-    Country.all.map { |c| [c.name, c.code] }
+    @@country_options ||= Country.all.map { |c| [c.name, c.code] }
   end
 
   #---
