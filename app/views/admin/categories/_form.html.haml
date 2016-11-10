@@ -3,9 +3,9 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :parent_category_id, current_store.top_level_category_options(@category), {include_blank: true}, {class: 'selectize'}
+        = f.select :parent_category_id, current_store.top_level_category_options(@category), {include_blank: blank}, {class: 'selectize'}
         = f.text_field :name, required: true
-        = f.select :banner_id, current_store.pages.banner.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize'}
+        = f.select :banner_id, current_store.pages.banner.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :live

@@ -110,6 +110,7 @@ en:
     products:
       index:
         new_product: New product
+        availability: "[Availability]"
       table:
         duplicate:
           button: Duplicate

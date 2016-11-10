@@ -9,9 +9,9 @@
           - if @page.route?
             = f.text_field :slug
           - if @page.can_be_nested?
-            = f.select :parent_page_id, current_store.pages.where.not(id: @page).acceptable_parent.map { |p| [p.to_s, p.id] }, {include_blank: true}, {class: 'selectize'}
+            = f.select :parent_page_id, current_store.pages.where.not(id: @page).acceptable_parent.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
           - if @page.can_have_albums?
-            = f.select :album_ids, current_store.album_options, {include_blank: true}, {multiple: true, class: 'selectize'}
+            = f.select :album_ids, current_store.album_options, {}, {multiple: true, class: 'selectize'}
           - if @page.needs_content?
             = f.form_group do
               = f.check_box :wysiwyg

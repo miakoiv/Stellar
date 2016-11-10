@@ -11,7 +11,7 @@
             {}, {class: 'selectize', disabled: !@property.new_record?}
       .measurement_unit.collapse{class: @property.numeric? ? 'in' : ''}
         %fieldset{disabled: locked}
-          = f.select :measurement_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: true}, {class: 'selectize'}
+          = f.select :measurement_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: blank}, {class: 'selectize'}
       .unit_pricing.collapse{class: @property.measurement_unit.present? ? 'in' : ''}
         %fieldset{disabled: locked}
         = f.form_group do

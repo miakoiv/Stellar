@@ -3,8 +3,8 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :product_id, [], {include_blank: true}, {placeholder: t('actions.query'), class: 'selectize-tall'}
-        = f.select :user_id, current_store.users.non_guest.map { |u| [u.to_s, u.id] }, {include_blank: true}, {class: 'selectize'}
+        = f.select :product_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall'}
+        = f.select :user_id, current_store.users.non_guest.map { |u| [u.to_s, u.id] }, {include_blank: blank}, {class: 'selectize'}
       - unless locked
         %fieldset.actions
           = f.form_group do
