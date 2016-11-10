@@ -163,6 +163,7 @@ namespace :matfox do
     product.subtitle ||= data[:product][:subtitle].try(:mb_chars).try(:titleize)
     product.cost_price = data[:product][:cost_price]
     product.cost_price_modified_at = data[:product][:cost_price_modified_at]
+    product.tax_category ||= store.tax_categories.first
     if product.save
       puts "#{store.name} #{product.code} #{product.title} #{product.subtitle}"
       product
