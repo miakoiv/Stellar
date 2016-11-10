@@ -133,6 +133,8 @@ fi:
         new_shipping_method: Uusi toimitustapa
       new:
         new_shipping_method: Uusi toimitustapa
+      form:
+        detail_page_help: Linkki tähän lisätietosivuun näytetään kun asiakas valitsee tämän toimitustavan.
     stores:
       index:
         new_store: Uusi kauppa

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109142641) do
+ActiveRecord::Schema.define(version: 20161110133205) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -550,6 +550,7 @@ ActiveRecord::Schema.define(version: 20161109142641) do
     t.date     "enabled_at"
     t.date     "disabled_at"
     t.text     "description",      limit: 65535
+    t.integer  "detail_page_id",   limit: 4
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end

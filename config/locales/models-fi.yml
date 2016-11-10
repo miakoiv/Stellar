@@ -327,6 +327,7 @@ fi:
         disabled_at: Käytössä kunnes
         not_active: Ei voimassa
         description: Kuvaus
+        detail_page_id: Lisätietosivu
       store:
         admin: Asetukset
         new_user: Luo ylläpitäjä

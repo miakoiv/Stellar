@@ -153,6 +153,8 @@ en:
         new_shipping_method: New shipping method
       new:
         new_shipping_method: New shipping method
+      form:
+        detail_page_help: A link to this page is shown during checkout to provide further details on this shipping method.
     stores:
       index:
         new_store: New store

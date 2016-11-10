@@ -327,6 +327,7 @@ en:
         disabled_at: Active until
         not_active: Not in effect
         description: Description
+        detail_page_id: Information page
       store:
         admin: Settings
         new_user: Create admin
