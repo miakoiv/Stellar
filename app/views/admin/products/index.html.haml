@@ -20,10 +20,10 @@
             = f.search_field :keyword, autocomplete: 'off', placeholder: col(Product, :title), class: 'form-control'
         .col-sm-6.col-md-3
           .form-group
-            = f.select :categories, current_user.category_options, {include_blank: true}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
+            = f.select :categories, current_user.category_options, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
         .col-sm-4.col-md-2
           .form-group
-            = f.select :live, Product.availability_options, {include_blank: true}, {placeholder: col(Product, :live), class: 'form-control selectize'}
+            = f.select :live, Product.availability_options, {include_blank: t('.availability')}, {placeholder: t('.availability'), class: 'form-control selectize'}
         .col-sm-2.col-md-1
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

@@ -90,6 +90,7 @@ fi:
     products:
       index:
         new_product: Uusi tuote
+        availability: "[Saatavuus]"
       table:
         duplicate:
           button: Kopioi

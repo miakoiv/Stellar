@@ -6,10 +6,10 @@
       .row
         .col-sm-6
           .form-group
-            = f.select :product_id, [], {include_blank: true}, {multiple: true, placeholder: col(CustomerAsset, :product_id), class: 'selectize-tall'}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: col(CustomerAsset, :product_id), class: 'selectize-tall'}
         .col-sm-4
           .form-group
-            = f.select :user_id, current_store.users.with_assets.map { |u| [u.to_s, u.id] }, {include_blank: true}, {multiple: true, placeholder: col(CustomerAsset, :user_id), class: 'selectize'}
+            = f.select :user_id, current_store.users.with_assets.map { |u| [u.to_s, u.id] }, {}, {multiple: true, placeholder: col(CustomerAsset, :user_id), class: 'selectize'}
         .col-sm-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

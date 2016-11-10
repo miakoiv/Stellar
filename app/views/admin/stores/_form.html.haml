@@ -31,15 +31,13 @@
               = f.check_box :allow_shopping
             = f.form_group do
               = f.check_box :admit_guests
-            = f.select :shipping_cost_product_id,
-                @store.products.virtual.map { |p| [p.to_s, p.id] },
-                {include_blank: true}, {class: 'selectize'}
+            = f.select :shipping_cost_product_id, @store.products.virtual.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
             = f.text_field :free_shipping_at
             = f.text_field :tracking_code
             = f.text_field :tawkto_site_id
-            = f.select :manufacturer_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
-            = f.select :reseller_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
-            = f.select :quotation_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
+            = f.select :manufacturer_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
+            = f.select :reseller_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
+            = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         #tab-store-upload.tab-pane.fade
           %fieldset{disabled: locked}
             = f.text_field :csv_encoding

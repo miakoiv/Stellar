@@ -9,10 +9,10 @@
             = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
         .col-sm-2
           .form-group
-            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: true}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
+            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
         .col-sm-6
           .form-group
-            = f.select :product_id, [], {include_blank: true}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall'}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall'}
         .col-sm-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
