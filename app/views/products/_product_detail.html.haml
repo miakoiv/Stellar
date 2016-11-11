@@ -42,10 +42,6 @@
           %li{role: 'presentation'}
             %a{href: '#tab-documents', role: 'tab', data: {toggle: 'tab'}}
               = t('store.product_documentation')
-        - if product.product_properties.any?
-          %li{role: 'presentation'}
-            %a{href: '#tab-properties', role: 'tab', data: {toggle: 'tab'}}
-              = t('store.product_properties')
       .tab-content
         #tab-description.tab-pane.fade.in.active
           .body-text><
@@ -56,8 +52,10 @@
               - product.images.document.each do |document|
                 = link_to(icon('paperclip', document.to_s),
                     document.url(:original), class: 'list-group-item')
-        - if product.product_properties.any?
-          = render partial: 'products/properties_panel', object: product, as: :product
+
+    - if product.product_properties.any?
+      .product-properties
+        = render partial: 'products/properties_panel', object: product, as: :product
 
     .images.technical
       = render partial: 'products/images', locals: {product: product, purpose: :technical}

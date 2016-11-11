@@ -1,6 +1,9 @@
-#tab-properties.tab-pane.fade
-  .table-scroller.table-responsive
-    %table.table.table-condensed.table-scroller.properties
+.table-scroller.table-responsive
+  %table.table.table-condensed.table-scroller.properties
+    %thead
+      %td{colspan: 2}
+        .small= t('store.product_properties')
+    %tbody
       = content_tag_for :tr, product.product_properties do |product_property|
         %th= product_property.property
         %td= product_property.value_with_units
