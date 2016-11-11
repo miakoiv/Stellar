@@ -362,10 +362,31 @@ fieldset[disabled] .help-block { display: none; }
   }
 }
 
-.table-scroller {
+//
+// height limited tables and list groups with scrolling content
+//
+.table-scroller, .list-group.list-scroller {
   max-height: 15em;
   overflow-y: auto;
 }
+
+.list-group.list-scroller {
+  border-top: 1px solid $list-group-border;
+  border-bottom: 1px solid $list-group-border;
+
+  .list-group-item:first-child { border-top: 0; }
+  .list-group-item:last-child { border-bottom: 0; }
+  .list-group-item:first-child,
+  .list-group-item:last-child {
+    border-radius: 0;
+  }
+}
+
+.well > .list-group {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
 
 .table.table-loose > tbody > tr > th,
 .table.table-loose > tbody > tr > td { line-height: 2; }
