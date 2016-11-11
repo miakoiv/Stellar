@@ -1,7 +1,10 @@
 - meta_tags_for(current_store)
 
-#category-banner-wrap
+- content_for :category_banner do
   = render partial: 'category_banner'
+
+#category-banner-wrap
+  = yield :category_banner
 
 #store-wrap
   .store-sections
@@ -13,7 +16,7 @@
       .search-panel{style: 'display: none'}
 
     #products-wrap
-      = render partial: 'category_banner'
+      = yield :category_banner
 
       .products
         .page-header.visible-print
