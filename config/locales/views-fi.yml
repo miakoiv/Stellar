@@ -224,6 +224,7 @@ fi:
     card_cvc: Kortin tarkiste (CVC)
     charge: Maksa nyt
     messages:
+      vat_number_reminder: Muista Y-tunnus ulkomaan tilauksissa!
       cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Ostoskorisi sisältää tuotteita, joita ei ole enää saatavana.</strong></p><p>Ole hyvä ja poista merkityt tuotteet.</p>
       success_html: <h4>Tilaus vastaanotettu, kiitos!</h4><p>Muistathan tulostaa kuitin kirjanpitoasi varten.</p>
       charging: Odotetaan maksutapahtuman valmistumista…

@@ -52,12 +52,19 @@
               = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
   %fieldset.gap
     .row
-      .col-sm-4
-        = f.text_field :your_reference
-      .col-sm-4
-        = f.text_field :our_reference
-      .col-sm-4
+      .col-sm-6
         = f.text_field :message
+      #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? ? 'in' : ''}
+        .form-group.has-feedback
+          = f.label :vat_number
+          = f.text_field_without_bootstrap :vat_number, class: 'form-control'
+          %span.form-control-feedback.fa.fa-warning.text-danger
+          %span.help-block= t('checkout.messages.vat_number_reminder')
+    .row
+      .col-sm-6
+        = f.text_field :your_reference
+      .col-sm-6
+        = f.text_field :our_reference
     = f.text_area :notes, rows: 4
 
   #continue-order.hidden-print
@@ -69,6 +76,19 @@
     if $(e.target).is ':checked'
       $('.form-control', '#billing-address').attr 'required', true
       $('#billing-address').collapse 'show'
+      $('#order_billing_country_code').trigger 'change'
     else
       $('.form-control', '#billing-address').attr 'required', false
       $('#billing-address').collapse 'hide'
+      $('#order_shipping_country_code').trigger 'change'
+
+  country_code = '#{current_store.country_code}'
+  $('#order_shipping_country_code, #order_billing_country_code').on 'change', (e) ->
+    destination = if $('#order_has_billing_address').is ':checked'
+      $('#order_billing_country_code').val()
+    else
+      $('#order_shipping_country_code').val()
+    if country_code is destination
+      $('#vat-number').collapse 'hide'
+    else
+      $('#vat-number').collapse 'show'

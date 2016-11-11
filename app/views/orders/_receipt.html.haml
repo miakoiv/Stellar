@@ -55,6 +55,9 @@
 .row
   .col-xs-5
     %dl.dl-horizontal
+      - if order.vat_number_expected?
+        %dt= col(Order, :vat_number)
+        %dd= order.vat_number
       %dt= col(Order, :your_reference)
       %dd= order.your_reference
       %dt= col(Order, :our_reference)
