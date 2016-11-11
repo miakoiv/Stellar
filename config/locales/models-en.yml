@@ -190,7 +190,7 @@ en:
         billing_address: Billing address
         billing_postalcode: Postal code
         billing_city: City
-        billing_country_code: County
+        billing_country_code: Country
         has_billing_address: Billing to a different address from shipping
         shipping_address: Shipping address
         shipping_postalcode: Postal code
@@ -378,7 +378,7 @@ en:
         billing_address: Billing address
         billing_postalcode: Postal code
         billing_city: City
-        billing_country_code: County
+        billing_country_code: Country
         shipping_address: Shipping address
         shipping_postalcode: Postal code
         shipping_city: City
