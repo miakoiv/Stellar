@@ -164,6 +164,7 @@ en:
       order:
         number: order №
         external_number: External №
+        vat_number: VAT number
         your_reference: Your reference
         our_reference: Our reference
         message: Message

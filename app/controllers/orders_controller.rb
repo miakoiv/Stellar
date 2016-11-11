@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(
         :order_type_id, :completed_at, :shipping_at, :installation_at,
-        :your_reference, :our_reference, :message,
+        :vat_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :contact_email, :contact_phone,
         :has_billing_address,

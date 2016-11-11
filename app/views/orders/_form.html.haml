@@ -13,6 +13,7 @@
           = f.text_field :installation_at,
               data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       %fieldset.bg-info{disabled: locked}
+        = f.text_field :vat_number
         = f.text_field :your_reference
         = f.text_field :our_reference
         = f.text_field :message

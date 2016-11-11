@@ -164,6 +164,7 @@ fi:
       order:
         number: tilaus nro
         external_number: Ulkoinen nro
+        vat_number: Y-tunnus
         your_reference: Viitteenne
         our_reference: Viitteemme
         message: Merkki

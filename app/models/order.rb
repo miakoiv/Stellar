@@ -361,6 +361,17 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # VAT numbers are not mandatory, but expected to be present in orders
+  # billed at a different country from the store home country.
+  def vat_number_expected?
+    return false unless has_shipping?
+    if has_billing_address?
+      billing_country != store.country
+    else
+      shipping_country != store.country
+    end
+  end
+
   # Returns the lead time for this order based on the contained products.
   def lead_time
     products.maximum(:lead_time) || 0

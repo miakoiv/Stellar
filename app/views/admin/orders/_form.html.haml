@@ -13,6 +13,7 @@
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.bg-info{disabled: locked}
         = f.text_field :external_number
+        = f.text_field :vat_number
         = f.text_field :your_reference
         = f.text_field :our_reference
         = f.text_field :message
