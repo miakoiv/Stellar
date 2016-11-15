@@ -233,6 +233,7 @@ en:
     continue_shopping: Continue shopping
     back_to_cart: Return to shopping cart
     cancel_checkout: Cancel and return to contact information
+    select_order_type: "Select to proceed:"
     address: Submit contact information
     select_shipping_method: Select shipping method
     ship: Select this shipping method

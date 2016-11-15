@@ -213,6 +213,7 @@ fi:
     continue_shopping: Jatka ostoksia
     back_to_cart: Takaisin ostoskoriin
     cancel_checkout: Keskeytä ja palaa takaisin yhteystietoihin
+    select_order_type: "Valitse ja jatka kassalle:"
     address: Vahvista yhteystiedot
     select_shipping_method: Valitse toimitustapa
     ship: Valitse tämä toimitustapa

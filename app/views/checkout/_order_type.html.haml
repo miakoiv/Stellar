@@ -1,20 +1,22 @@
 :ruby
   order_types = current_user.outgoing_order_types
 
-.pull-right
-  = link_to t('store.go_checkout'), checkout_path(order), id: 'checkout-button', class: 'btn btn-primary', disabled: order.order_type.nil?
 - if order_types.count > 1
-  .pull-right
-    = form_tag order_type_path(order), method: :post, remote: true, id: 'order-type-form', class: 'immediate' do
-      .btn-group{data: {toggle: 'buttons'}}
-        - order_types.each do |order_type|
-          %label.btn.btn-default{class: order_type == order.order_type ? 'active' : ''}
-            = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
-            = order_type.name
+  .row
+    .col-xs-12
+      .pull-right
+        = form_tag order_type_path(order), method: :post, remote: true, id: 'order-type-form' do
+          .form-group
+            %label= t('checkout.select_order_type')
+            .btn-group{data: {toggle: 'buttons'}}
+              - order_types.each do |order_type|
+                %label.btn.btn-default{class: order_type == order.order_type ? 'active' : ''}
+                  = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
+                  = order_type.name
   :coffee
-    $('#order-type-form').on 'change', (e) ->
-      if $(e.target)
-        $('#checkout-button').attr 'disabled', false
+    $('#order-type-form input').on 'change', (e) ->
+      $('#order-type-form').trigger 'submit.rails'
+      $('#checkout-button').collapse 'show'
 
 - elsif order_types.count == 1
   :coffee
@@ -22,4 +24,11 @@
       request = $.post '#{order_type_path(order)}',
         order_type_id: #{order_types.first.id}
       request.done (data) ->
-        $('#checkout-button').attr 'disabled', false
+        $('#checkout-button').collapse 'show'
+
+.row
+  .col-xs-12
+    .pull-right
+      #checkout-button.collapse{class: order.order_type.present? ? 'in' : ''}
+        = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
+          = icon('check-circle', t('store.go_checkout'))
