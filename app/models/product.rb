@@ -291,6 +291,7 @@ class Product < ActiveRecord::Base
       value: value || item.value || cost_price || 0
     )
     item.save!
+    touch # touch itself to invalidate cached partials
   end
 
   # Consumes given amount of this product from inventory, starting from
@@ -310,7 +311,7 @@ class Product < ActiveRecord::Base
         item.destock!(item.on_hand, source)
       end
     end
-    true
+    touch # touch itself to invalidate cached partials
   end
 
   def master_product_options
