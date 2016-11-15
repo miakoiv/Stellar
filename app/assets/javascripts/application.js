@@ -30,6 +30,7 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
+//= require outdatedbrowser/outdatedBrowser
 //= require wiselinks
 //= require nprogress
 //= require clipboard

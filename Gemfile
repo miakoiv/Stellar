@@ -104,6 +104,9 @@ gem 'bootstrap-datepicker-rails'
 # Bootstrappy confirmation dialogs
 gem 'twitter-bootstrap-rails-confirm'
 
+# Outdated browser warnings
+gem 'outdatedbrowser_rails'
+
 # Sortable tables
 gem 'jquery-tablesorter'
 
