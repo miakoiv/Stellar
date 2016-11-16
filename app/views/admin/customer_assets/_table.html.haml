@@ -9,7 +9,9 @@
 
     %tbody
       = content_tag_for :tr, @customer_assets do |customer_asset|
-        %td= customer_asset.product
+        %td
+          %strong= customer_asset.product.title
+          = customer_asset.product.subtitle
         %td= customer_asset.user
         %td.text-right= customer_asset.amount
         %td.actions

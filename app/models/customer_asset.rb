@@ -10,7 +10,7 @@ class CustomerAsset < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  monetize :value_cents
+  monetize :value_cents, disable_validation: true
 
   #---
   belongs_to :store
@@ -41,7 +41,7 @@ class CustomerAsset < ActiveRecord::Base
           recorded_at: order.concluded_at,
           source: order,
           amount: order_item.amount,
-          value: order_item.price
+          value_cents: order_item.price_cents || 0
         )
       end
     end
