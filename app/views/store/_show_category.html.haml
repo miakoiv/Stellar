@@ -6,7 +6,6 @@
   %ul{class: current_store.masonry? ? 'masonry-grid' : ''}= render @products
 
 :coffee
-  $('.search-panel').hide()
   $('.product-detail').hide()
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()

@@ -1,16 +1,9 @@
-#store-wrap
-  #categories-wrap
-    .categories.hidden-print{style: 'display: none'}
+#search-panel-wrap
+  .search-panel
+    = render partial: 'search_panel'
 
-  #search-panel-wrap
-    .search-panel
-      = render partial: 'search_panel'
-
-  #products-wrap
-    .products
-      .product-list
-        .panel.panel-default
-          = render partial: 'products/search_results', object: @products, as: :products
-
-  #product-detail-wrap
-    .product-detail{style: 'display: none'}
+#search-results-wrap
+  .products
+    .product-list
+      .panel.panel-default
+        = render partial: 'products/search_results', object: @products, as: :products
