@@ -378,11 +378,11 @@ class Product < ActiveRecord::Base
   end
 
   # Resets the live status of the product, according to these criteria:
-  # - must have at least one live category, unless it's a virtual product
+  # - must have at least one live category
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
-    update_columns(live: (virtual? || categories.live.any?) &&
+    update_columns(live: categories.live.any? &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
     true
