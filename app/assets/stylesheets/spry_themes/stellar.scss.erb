@@ -184,6 +184,29 @@ body {
 }
 
 /*
+  search panel and search results
+*/
+#search-panel-wrap {
+  padding-top: 10px;
+  background-color: #fff;
+  background-image: linear-gradient(90deg, #eee .1em, transparent .1em);
+  background-size: 0.333em 100%;
+  border-bottom: 1px solid $table-border-color;
+
+  .search-panel {
+    @extend .container;
+  }
+}
+
+#search-results-wrap {
+  margin-top: 20px;
+
+  .products {
+    @extend .container;
+  }
+}
+
+/*
   storefront wrapper with contained elements in source order
 */
 #store-wrap {
@@ -284,11 +307,6 @@ body {
         }
       }
     }
-  }
-}
-
-#search-panel-wrap {
-  .search-panel {
   }
 }
 

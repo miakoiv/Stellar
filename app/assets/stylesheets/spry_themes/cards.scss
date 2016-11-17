@@ -59,7 +59,8 @@ body {
 #category-banner-wrap { display: none; }
 
 #search-panel-wrap {
-  background-color: lighten($brand-primary, 25%);
+  padding-top: 10px;
+  background-color: $gray-light;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 
   .search-panel {
@@ -67,10 +68,18 @@ body {
   }
 }
 
+#search-results-wrap {
+  margin-top: 20px;
+
+  .products {
+    @extend .container;
+  }
+}
+
 #categories-wrap {
   position: relative;
   padding-bottom: 30px;
-  background: $gray-light;
+  background-color: $gray-light;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 
   .categories {
