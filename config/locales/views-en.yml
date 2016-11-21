@@ -219,6 +219,7 @@ en:
       shopping_cart: Shopping cart
       delete: Empty cart
       confirm_delete: Really empty your shopping cart?
+      lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{days} days.
     pricing_groups:
       default: <default>
   albums:

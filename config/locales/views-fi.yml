@@ -199,6 +199,7 @@ fi:
       shopping_cart: Ostoskori
       delete: Tyhjennä kori
       confirm_delete: Tyhjennetäänkö ostoskori?
+      lead_time_warning: Tilattua määrää ei varastossa. Toimitusaika %{days} päivää.
     pricing_groups:
       default: <oletus>
   albums:
