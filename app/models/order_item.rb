@@ -117,7 +117,11 @@ class OrderItem < ActiveRecord::Base
   # Lead time for an order item is zero if the amount is readily available,
   # product lead time otherwise.
   def lead_time
-    amount > product.available ? product.lead_time : 0
+    if amount > product.available
+      product.lead_time || 0
+    else
+      0
+    end
   end
 
   def archive!
