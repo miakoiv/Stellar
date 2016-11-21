@@ -148,7 +148,9 @@ fi:
       inventory_entry:
         recorded_at: Pvm
         source_id: Viite
-        amount: Määrä
+        on_hand: Varastossa
+        reserved: Varattu
+        pending: Tulossa
         value: Arvo
         note: Selite
         barcode: Viivakoodi

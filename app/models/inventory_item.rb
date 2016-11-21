@@ -16,7 +16,9 @@ class InventoryItem < ActiveRecord::Base
   accepts_nested_attributes_for :inventory_entries, limit: 1
 
   default_scope { order(:created_at) }
-  scope :active, -> { where('on_hand > 0') }
+
+  # Inventory items are considered online if they have stock available.
+  scope :online, -> { where('on_hand - reserved > 0') }
 
   #---
   validates :inventory_id, presence: true
@@ -25,24 +27,30 @@ class InventoryItem < ActiveRecord::Base
   validates_associated :inventory_entries
 
   #---
-  after_save :update_amount_and_value!
+  after_save :update_counts_and_value!
 
   #---
+  def available
+    on_hand - reserved
+  end
+
   def total_value_cents
     return 0 if on_hand.nil? || value_cents.nil? || on_hand < 0
     on_hand * value_cents
   end
 
-  # Reduces stock from this inventory item.
+  # Reduces on hand stock from this inventory item.
   def destock!(amount, source = nil, recorded_at = nil)
     recorded_at ||= Date.today
     inventory_entries.create(
       recorded_at: recorded_at,
       source: source,
-      amount: -amount,
+      on_hand: -amount,
+      reserved: 0,
+      pending: 0,
       value: value
     )
-    update_amount_and_value!
+    update_counts_and_value!
   end
 
   def title
@@ -54,15 +62,21 @@ class InventoryItem < ActiveRecord::Base
   end
 
   private
-    # After save, update the inventory count and value from the entries.
-    def update_amount_and_value!
+    # After save, update the inventory counts and value from the entries.
+    # Value is calculated from on hand inventory, using a weighted average
+    # of values given in the entries.
+    def update_counts_and_value!
       entries = inventory_entries(true)
-      total_amount = entries.sum(:amount)
-      weighted_total_cents = entries.map { |e| e.amount * e.value_cents }.sum
+      total_on_hand = entries.sum(:on_hand)
+      total_reserved = entries.sum(:reserved)
+      total_pending = entries.sum(:pending)
+      weighted_total_cents = entries.map { |e| e.on_hand * e.value_cents }.sum
 
       update_columns(
-        on_hand: total_amount,
-        value_cents: total_amount == 0 ? 0 : weighted_total_cents / total_amount
+        on_hand: total_on_hand,
+        reserved: total_reserved,
+        pending: total_pending,
+        value_cents: total_on_hand == 0 ? 0 : weighted_total_cents / total_on_hand
       )
     end
 end

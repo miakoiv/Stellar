@@ -261,19 +261,19 @@ class Product < ActiveRecord::Base
     vanilla? || variant?
   end
 
-  # Amount on hand in all inventories.
-  def on_hand
+  # Amount available in all inventories.
+  def available
     if tracked_stock?
-      inventory_items.active.pluck(:on_hand).compact.sum
+      inventory_items.online.map(&:available).sum
     else
       Float::INFINITY
     end
   end
 
   # Product is considered available when it's live and has either inventory
-  # on hand, or a defined lead time.
+  # available, or a defined lead time.
   def available?
-    live? && (lead_time.present? || on_hand > 0)
+    live? && (lead_time.present? || available > 0)
   end
 
   # Restocks given inventory with amount of this product with given lot code,
@@ -296,19 +296,19 @@ class Product < ActiveRecord::Base
 
   # Consumes given amount of this product from inventory, starting from
   # the oldest stock. Multiple inventory items may be affected to satisfy
-  # the consumed amount. Returns false if we have insufficient stock on hand.
+  # the consumed amount. Returns false if we have insufficient stock available.
   def consume!(amount, source = nil)
     return true if !tracked_stock?
-    return false if amount > on_hand
-    inventory_items.active.each do |item|
-      if item.on_hand >= amount
+    return false if amount > available
+    inventory_items.online.each do |item|
+      if item.available >= amount
         # This inventory item satisfies the amount, destock and finish.
         item.destock!(amount, source)
         break
       else
         # Continue with remaining amount after destocking all of this item.
-        amount -= item.on_hand
-        item.destock!(item.on_hand, source)
+        amount -= item.available
+        item.destock!(item.available, source)
       end
     end
     touch # touch itself to invalidate cached partials

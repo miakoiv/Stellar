@@ -1,9 +1,9 @@
 - if can_see_stock?
   %ul.list-group
-    - product.inventory_items.active.each do |item|
+    - product.inventory_items.online.each do |item|
       %li.list-group-item{class: "list-group-item-#{item.appearance}"}
         %span
-          = item.on_hand || 0
+          = item.available
           - if item.pending.present? && item.pending != 0
             = sprintf "(%+i)", item.pending
         = item.title

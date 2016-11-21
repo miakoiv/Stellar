@@ -322,8 +322,9 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Consumes stock for the contents of this order.
+  # Consumes stock for the order contents if it includes shipping.
   def consume_stock!
+    return true unless has_shipping?
     transaction do
       order_items.each do |item|
         item.product.consume!(item.amount, self)

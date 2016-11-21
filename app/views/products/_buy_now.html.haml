@@ -1,6 +1,6 @@
 - if can_shop? && may_shop_at?(@category) && !product.master?
 
-  - if product.on_hand == 0
+  - if product.available == 0
     - if product.available?
       %p.text-info
         = icon('exclamation-circle')

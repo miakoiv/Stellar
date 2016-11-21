@@ -164,17 +164,18 @@ namespace :matfox do
     product.cost_price = data[:product][:cost_price]
     product.cost_price_modified_at = data[:product][:cost_price_modified_at]
     product.tax_category ||= store.tax_categories.first
+    puts "#{store.name} #{product.code} #{product.title} #{product.subtitle}"
     if product.save
-      puts "#{store.name} #{product.code} #{product.title} #{product.subtitle}"
       product
     else
+      puts product.errors.full_messages.map { |m| "! #{m}"}
       nil
     end
   end
 
   # Creates an inventory item for `product` in `inventory`.
   def create_inventory_item(inventory, product, on_hand, reserved, pending, value)
-    puts "→ #{inventory.name} #{on_hand} / #{reserved} / #{pending}"
+    puts "→ #{inventory.name} #{on_hand} #{reserved} #{pending}"
 
     # Purges any existing inventory items for this product.
     inventory.inventory_items.where(product: product).destroy_all
@@ -185,7 +186,9 @@ namespace :matfox do
     )
     item.inventory_entries.build(
       recorded_at: Date.today,
-      amount: on_hand.to_i || 0,
+      on_hand: on_hand.to_i || 0,
+      reserved: reserved.to_i || 0,
+      pending: pending.to_i || 0,
       value: value || 0
     )
     item.save!

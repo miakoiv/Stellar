@@ -64,7 +64,9 @@ class Admin::InventoryItemsController < ApplicationController
     def inventory_item_params
       params.require(:inventory_item).permit(
         :inventory_id, :product_id, :code,
-        inventory_entries_attributes: [:recorded_at, :amount, :value, :note]
+        inventory_entries_attributes: [
+          :recorded_at, :on_hand, :reserved, :pending, :value, :note
+        ]
       )
     end
 

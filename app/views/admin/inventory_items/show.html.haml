@@ -8,7 +8,7 @@
       = @inventory_item.product.subtitle
 
 .row
-  .col-md-5
+  .col-md-4
     = render partial: 'form', locals: {locked: true}
-  .col-md-7
+  .col-md-8
     = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item

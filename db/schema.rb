@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111083028) do
+ActiveRecord::Schema.define(version: 20161118085804) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -222,7 +222,9 @@ ActiveRecord::Schema.define(version: 20161111083028) do
     t.date     "recorded_at"
     t.integer  "source_id",         limit: 4
     t.string   "source_type",       limit: 255
-    t.integer  "amount",            limit: 4,   null: false
+    t.integer  "on_hand",           limit: 4,   null: false
+    t.integer  "reserved",          limit: 4,   null: false
+    t.integer  "pending",           limit: 4,   null: false
     t.integer  "value_cents",       limit: 4,   null: false
     t.string   "note",              limit: 255
     t.datetime "created_at",                    null: false

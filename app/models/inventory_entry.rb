@@ -19,10 +19,18 @@ class InventoryEntry < ActiveRecord::Base
 
   #---
   validates :recorded_at, presence: true, on: :create
-  validates :amount, numericality: {only_integer: true}, on: :create
+  validates :on_hand, numericality: {only_integer: true}
+  validates :reserved, numericality: {only_integer: true}
+  validates :pending, numericality: {only_integer: true}
 
   #---
+  # Availability takes reserved amounts out.
+  def available
+    on_hand - reserved
+  end
+
+  # Total value is calculated from amount on hand.
   def total_value_cents
-    amount * value_cents
+    on_hand * value_cents
   end
 end

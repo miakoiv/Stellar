@@ -9,7 +9,10 @@
               = f.text_field :code, class: 'form-control'
             %td.col-xs-3
               = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {placeholder: col(InventoryItem, :inventory_id)}
-            %td.col-xs-2= ff.number_field :amount, value: 0, class: 'form-control text-right'
+            %td.col-xs-2
+              = ff.number_field :on_hand, value: 0, class: 'form-control text-right'
+              = ff.hidden_field :reserved, value: 0
+              = ff.hidden_field :pending, value: 0
             %td.col-xs-2
             %td.col-xs-2= ff.text_field :value, value: product.cost_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
           %tr.subrow

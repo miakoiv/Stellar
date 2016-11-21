@@ -148,7 +148,9 @@ en:
       inventory_entry:
         recorded_at: Date
         source_id: Reference
-        amount: Amount
+        on_hand: On hand
+        reserved: Reserved
+        pending: Pending
         value: Value
         note: Note
         barcode: Barcode
