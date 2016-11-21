@@ -114,6 +114,12 @@ class OrderItem < ActiveRecord::Base
     adjustments.map(&:amount_with_tax_cents).sum
   end
 
+  # Lead time for an order item is zero if the amount is readily available,
+  # product lead time otherwise.
+  def lead_time
+    amount > product.available ? product.lead_time : 0
+  end
+
   def archive!
     update(
       product_code: product.code,
