@@ -255,10 +255,9 @@ class Product < ActiveRecord::Base
     100 * (retail_price - trade_price) / retail_price
   end
 
-  # Stock is not tracked for master products, bundles or composites, or
-  # virtual products.
+  # Stock is not tracked for master products, bundles, or virtual products.
   def tracked_stock?
-    vanilla? || variant?
+    vanilla? || variant? || composite?
   end
 
   # Amount available in all inventories.
