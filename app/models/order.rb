@@ -135,14 +135,13 @@ class Order < ActiveRecord::Base
   end
   alias concluded? conclusion
 
-  # Concluding an order archives the order and its order items.
-  # For each order item, an asset entry is created.
+  # Concluding an order archives the order and creates asset entries for it.
   def conclusion=(status)
     if ['1', 1, true].include?(status)
       if !concluded?
+        update(concluded_at: Time.current)
         create_asset_entries!
         archive!
-        update(concluded_at: Time.current)
       end
     else
       update(concluded_at: nil)
