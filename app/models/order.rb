@@ -81,6 +81,9 @@ class Order < ActiveRecord::Base
   #---
   before_save :copy_billing_address, unless: :has_billing_address?
 
+  # Conclude the order when concluded_at first gets a value.
+  after_save :conclude!, if: -> (order) { order.concluded_at_changed?(from: nil) }
+
   #---
   # Define methods to use archived copies of order attributes if the order
   # is concluded, otherwise go through the associations. See #archive! below.
@@ -117,35 +120,12 @@ class Order < ActiveRecord::Base
     has_contact_info? ? "#{contact_person} <#{contact_email}>" : nil
   end
 
-  def approval
+  def approved?
     !!approved_at.present?
   end
-  alias approved? approval
 
-  def approval=(status)
-    if ['1', 1, true].include?(status)
-      update(approved_at: Time.current) unless approved?
-    else
-      update(approved_at: nil)
-    end
-  end
-
-  def conclusion
+  def concluded?
     !!concluded_at.present?
-  end
-  alias concluded? conclusion
-
-  # Concluding an order archives the order and creates asset entries for it.
-  def conclusion=(status)
-    if ['1', 1, true].include?(status)
-      if !concluded?
-        update(concluded_at: Time.current)
-        create_asset_entries!
-        archive!
-      end
-    else
-      update(concluded_at: nil)
-    end
   end
 
   # Inserts amount of product to this order in the context of given pricing
@@ -575,7 +555,11 @@ class Order < ActiveRecord::Base
       0.to_money
     end
 
-    def create_asset_entries!
+    # Concluding an order archives the order and creates asset entries for it.
+    def conclude!
+      reload # to clear changes and prevent a callback loop
       CustomerAsset.create_from(self)
+      archive!
+      true
     end
 end

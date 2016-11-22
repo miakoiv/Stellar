@@ -175,9 +175,7 @@ en:
         completed_at: Ordered
         shipping_at: Shipment
         installation_at: Installation
-        approved: Approved
-        approved_at: Processed
-        concluded: Concluded
+        approved_at: Approved
         concluded_at: Concluded
         status: Status
         not_approved: Not processed yet

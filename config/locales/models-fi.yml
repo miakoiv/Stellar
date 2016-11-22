@@ -175,9 +175,7 @@ fi:
         completed_at: Tilauspvm
         shipping_at: Toimituspvm
         installation_at: Asennuspvm
-        approved: Hyväksytty
-        approved_at: Käsitelty
-        concluded: Päätetty
+        approved_at: Hyväksytty
         concluded_at: Päätetty
         status: Tila
         not_approved: Ei vielä käsitelty

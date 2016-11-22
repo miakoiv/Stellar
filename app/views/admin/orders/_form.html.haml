@@ -4,11 +4,9 @@
     .panel-body
       - if @order.incoming_for?(current_user)
         %fieldset.bg-warning{disabled: locked}
-          = f.form_group :approval do
-            = f.check_box :approval, label: col(Order, :approved)
+          = f.text_field :approved_at, disabled: @order.concluded?, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}, help: t('.approved_at_help')
           .conclusion.collapse{class: @order.approved? ? 'in' : ''}
-            = f.form_group :conclusion do
-              = f.check_box :conclusion, label: col(Order, :concluded), disabled: !@order.approved?
+            = f.text_field :concluded_at, disabled: !@order.approved? || @order.concluded?, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}, help: t('.concluded_at_help')
       %fieldset.gap{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.bg-info{disabled: locked}
@@ -50,11 +48,10 @@
             = f.primary
 
 :coffee
-  $('#order_approval').on 'change', (e) ->
-    if $(e.target).is ':checked'
+  $('#order_approved_at').on 'change', (e) ->
+    if $(e.target).val()
       $('.conclusion').collapse 'show'
-      $('#order_conclusion').attr 'disabled', false
+      $('#order_concluded_at').attr 'disabled', false
     else
       $('.conclusion').collapse 'hide'
-      $('#order_conclusion').attr 'checked', false
-      $('#order_conclusion').attr 'disabled', true
+      $('#order_concluded_at').attr 'disabled', true
