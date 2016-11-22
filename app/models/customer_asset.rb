@@ -10,7 +10,7 @@ class CustomerAsset < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  monetize :value_cents, disable_validation: true
+  monetize :value_cents
 
   #---
   belongs_to :store
@@ -27,21 +27,20 @@ class CustomerAsset < ActiveRecord::Base
   after_touch :update_amount_and_value
 
   #---
-  # Creates a customer asset and its asset entries from the given order.
+  # Creates customer assets and their asset entries from the given order.
   def self.create_from(order)
     store, user = order.store, order.user
     transaction do
-      order.order_items.each do |order_item|
-        customer_asset = find_or_create_by(
-          store: order.store,
+      order.order_items.each do |item|
+        asset = store.customer_assets.find_or_create_by!(
           user: order.user,
-          product: order_item.product
+          product: item.product
         )
-        customer_asset.asset_entries.create(
+        asset.asset_entries.create!(
           recorded_at: order.concluded_at,
           source: order,
-          amount: order_item.amount,
-          value_cents: order_item.price_cents || 0
+          amount: item.amount,
+          value_cents: item.price_cents || 0
         )
       end
     end
