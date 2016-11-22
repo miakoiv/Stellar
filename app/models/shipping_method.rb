@@ -4,6 +4,7 @@ class ShippingMethod < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Imageable
 
   #---
   belongs_to :store

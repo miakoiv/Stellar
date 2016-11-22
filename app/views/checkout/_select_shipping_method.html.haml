@@ -1,7 +1,12 @@
 %p= t('checkout.select_shipping_method')
 .list-group
   - @shipping_methods.each do |method|
-    = link_to method.name, shipping_method_path(@order, method), remote: true, id: dom_id(method), class: 'list-group-item'
+    = link_to shipping_method_path(@order, method), remote: true, id: dom_id(method), class: 'list-group-item' do
+      .media
+        .media-left
+          = image_variant_tag method.cover_image, :thumbnail, class: 'media-object'
+        .media-body
+          %h4.media-heading= method.name
 
 .description
 .details
