@@ -49,6 +49,14 @@ en:
         title: Inventory value
         total_value: Total value
         items: Items
+      sales:
+        title: Sales
+        total_value: Total value before tax
+        total_items: Total items sold
+        products: Products
+        search:
+          since_date: Since date
+          until_date: Until date
     manage: Manage
     return_to_storefront: Return to storefront
     albums:

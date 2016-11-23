@@ -1,0 +1,19 @@
+= render partial: 'header'
+
+.reports
+  .report-panel
+    = link_to admin_reports_path do
+      = icon('shopping-cart')
+      = t('admin.reports.sales.title')
+
+  .report-body
+    %dl.dl-horizontal
+      %dt= t('admin.reports.sales.total_value')
+      %dd= humanized_money_with_symbol @sales.total_value
+      %dt= t('admin.reports.sales.total_items')
+      %dd= @sales.total_items
+      %dt= t('admin.reports.sales.products')
+      %dd= @sales.by_product.keys.size
+
+= render partial: 'sales_query'
+= render partial: 'sales_table'

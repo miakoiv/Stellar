@@ -1,0 +1,45 @@
+.table-responsive
+  %table#sales-table.table.table-hover
+    %thead
+      %tr
+        %th.col-min{data: {sorter: 'false'}}
+        %th= col(Product, :title)
+        %th.col-xs-2= col(Product, :code)
+        %th.col-xs-2= col(Product, :category_ids)
+        %th.col-xs-1.text-right= col(OrderItem, :amount)
+        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
+
+    %tbody
+      - @sales.by_product.each do |product, items|
+        %tr.expandable{data: {toggle: 'collapse', target: ".#{dom_id(product)}"}}
+          %td= icon('plus')
+          %td
+            = link_to admin_product_path(product) do
+              %strong= product.title
+              = product.subtitle
+          %td= product.code
+          %td= product.categories.to_sentence
+          %td.text-right= items.map(&:amount).sum
+          %td.text-right.currency
+            = humanized_money_with_symbol items.map(&:subtotal_sans_tax).compact.sum
+
+        - items.each do |item|
+          %tr.subrow.collapse{class: dom_id(product)}
+            %td
+            %td
+              = link_to admin_order_path(item.order) do
+                = l(item.order.completed_at.to_date, format: :iso)
+            %td
+            %td
+            %td.text-right= item.amount
+            %td.text-right.currency
+              = humanized_money_with_symbol item.subtotal_sans_tax
+
+:coffee
+  $('#sales-table').tablesorter
+    theme: 'bootstrap'
+    widthFixed: true
+    widgets: ['uiTheme', 'saveSort']
+    headerTemplate: '{content} {icon}'
+    cssChildRow: 'subrow'
+    sortList: [[1,0]]

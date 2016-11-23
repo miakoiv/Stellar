@@ -29,6 +29,14 @@ fi:
         title: Varaston arvo
         total_value: Arvo yhteensä
         items: Nimikkeitä
+      sales:
+        title: Myynnit
+        total_value: Arvo ennen veroja
+        total_items: Myytyjä kappaleita
+        products: Tuotteita
+        search:
+          since_date: Pvm alkaen
+          until_date: Pvm päättyen
     manage: Hallinta
     return_to_storefront: Takaisin kauppaan
     albums:

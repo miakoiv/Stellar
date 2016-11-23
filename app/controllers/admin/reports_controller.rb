@@ -14,4 +14,15 @@ class Admin::ReportsController < ApplicationController
   def inventory
     @inventory = Reports::Inventory.new(store_id: current_store.id)
   end
+
+  # GET /admin/reports/sales
+  def sales
+    @query = saved_search_query('order_item', 'admin_order_item_search')
+    @sales = Reports::Sales.new(sales_search_params)
+  end
+
+  private
+    def sales_search_params
+      @query.merge(store_id: current_store.id)
+    end
 end
