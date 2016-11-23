@@ -122,12 +122,6 @@ class Store < ActiveRecord::Base
     }
   end
 
-  # Performs an inventory valuation of live products on hand.
-  def inventory_valuation
-    items = inventory_items.joins(:product).merge(Product.live)
-    [items, items.map { |item| item.total_value }.sum]
-  end
-
   # Properties flagged searchable.
   def searchable_properties
     properties.merge(Property.searchable).merge(Property.sorted)

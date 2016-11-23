@@ -10,7 +10,7 @@
         %th.col-xs-1.text-right= col(Product, :value)
 
     %tbody
-    - @inventory[0].each do |item|
+    - @inventory.items.each do |item|
       %tr
         %td
           = link_to admin_product_path(item.product) do

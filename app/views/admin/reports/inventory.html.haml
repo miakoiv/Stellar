@@ -9,8 +9,8 @@
   .report-body
     %dl.dl-horizontal
       %dt= t('admin.reports.inventory.total_value')
-      %dd= humanized_money_with_symbol @inventory[1]
+      %dd= humanized_money_with_symbol @inventory.total_value
       %dt= t('admin.reports.inventory.items')
-      %dd= @inventory[0].size
+      %dd= @inventory.items.size
 
 = render partial: 'inventory'
