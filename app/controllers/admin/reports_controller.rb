@@ -12,6 +12,6 @@ class Admin::ReportsController < ApplicationController
 
   # GET /admin/reports/inventory
   def inventory
-    @inventory = Reports::Inventory.new(current_store)
+    @inventory = Reports::Inventory.new(store_id: current_store.id)
   end
 end
