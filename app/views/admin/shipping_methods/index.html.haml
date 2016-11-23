@@ -8,6 +8,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-min
         %th.col-xs-4= col(ShippingMethod, :name)
         %th.col-xs-2= col(ShippingMethod, :shipping_gateway)
         %th= col(ShippingMethod, :enabled_at)
@@ -17,6 +18,7 @@
     %tbody
       - @shipping_methods.each do |shipping_method|
         = content_tag_for :tr, shipping_method, class: shipping_method.active? ? '' : 'warning text-warning' do
+          %td= image_variant_tag shipping_method.cover_image
           %td= shipping_method.name
           %td= "ShippingGateway::#{shipping_method.shipping_gateway}".constantize.model_name.human
           %td
