@@ -1,24 +1,7 @@
-.page-header
-  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
-  %h1= icon('line-chart', t('admin.reports.title'))
+= render partial: 'header'
 
-%ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-  %li.active{role: 'presentation'}
-    %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
+.reports
+  .report-panel
+    = link_to admin_inventory_report_path do
+      = icon('eur')
       = t('admin.reports.inventory.title')
-
-.tab-content
-  #tab-inventory.tab-pane.fade.in.active
-    %h2.visible-print-block= t('admin.reports.inventory.title')
-    .panel.panel-default.tabbed-panel
-      .panel-body.form-horizontal
-        .form-group
-          %label.col-sm-4.control-label= t('admin.reports.inventory.total_value')
-          .col-sm-8
-            %p.form-control-static= humanized_money_with_symbol @inventory[1]
-        .form-group
-          %label.col-sm-4.control-label= t('admin.reports.inventory.items')
-          .col-sm-8
-            %p.form-control-static= @inventory[0].size
-
-    = render partial: 'inventory'

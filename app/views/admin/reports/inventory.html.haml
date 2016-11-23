@@ -1,0 +1,16 @@
+= render partial: 'header'
+
+.reports
+  .report-panel
+    = link_to admin_reports_path do
+      = icon('eur')
+      = t('admin.reports.inventory.title')
+
+  .report-body
+    %dl.dl-horizontal
+      %dt= t('admin.reports.inventory.total_value')
+      %dd= humanized_money_with_symbol @inventory[1]
+      %dt= t('admin.reports.inventory.items')
+      %dd= @inventory[0].size
+
+= render partial: 'inventory'

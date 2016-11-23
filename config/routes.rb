@@ -74,6 +74,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#index', as: :dashboard
 
     get '/reports', to: 'reports#index', as: :reports
+    get '/reports/inventory', to: 'reports#inventory', as: :inventory_report
 
     resources :portals do
       resources :images, shallow: true

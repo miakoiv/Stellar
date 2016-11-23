@@ -434,6 +434,32 @@ fieldset[disabled] .help-block { display: none; }
 }
 
 //
+// report panels
+//
+.reports {
+  @extend .row, .list-group;
+
+  .report-panel {
+    @extend .col-sm-4, .col-md-3, .col-lg-2;
+    margin-bottom: 20px;
+
+    > a {
+      @extend .list-group-item, .text-center;
+      padding: 40px 20px;
+
+      i.fa {
+        @extend .fa-3x;
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  .report-body {
+    @extend .col-sm-8, .col-md-9, .col-lg-10;
+  }
+}
+
+//
 // magnific popup tweaks
 //
 .mfp-bg { opacity: 0.9; }

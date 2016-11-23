@@ -8,7 +8,10 @@ class Admin::ReportsController < ApplicationController
 
   # GET /admin/reports
   def index
-    @inventory = current_store.inventory_valuation
   end
 
+  # GET /admin/reports/inventory
+  def inventory
+    @inventory = current_store.inventory_valuation
+  end
 end
