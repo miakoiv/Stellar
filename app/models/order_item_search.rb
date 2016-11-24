@@ -16,10 +16,10 @@ class OrderItemSearch < Searchlight::Search
   end
 
   def search_since_date
-    query.where(Order.arel_table[:completed_at].gteq(since_date))
+    query.where('DATE(orders.completed_at) >= ?', since_date)
   end
 
   def search_until_date
-    query.where(Order.arel_table[:completed_at].lteq(until_date))
+    query.where('DATE(orders.completed_at) <= ?', until_date)
   end
 end
