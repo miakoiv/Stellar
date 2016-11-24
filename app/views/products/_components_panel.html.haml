@@ -4,3 +4,7 @@
     %span.badge= entry.quantity
     %strong= entry.component.title
     = entry.component.subtitle
+    - if entry.component.vendor.present?
+      .small
+        = icon('truck')
+        %strong= entry.component.vendor.name

@@ -98,6 +98,10 @@
                         %td
                           %b= order_item.product_title
                           = order_item.product_subtitle
+                          - if order_item.product.vendor.present?
+                            .small
+                              = "#{Product.human_attribute_name(:vendor_id)}:"
+                              = order_item.product.vendor.name
                           - if order_item.product.shipping_notes.present?
                             .small
                               %em= order_item.product.shipping_notes
