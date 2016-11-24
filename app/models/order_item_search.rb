@@ -14,8 +14,8 @@ class OrderItemSearch < Searchlight::Search
   def options
     this_month = Date.current.all_month
     super.tap do |opts|
-      opts['since_date'] ||= this_month.first
-      opts['until_date'] ||= this_month.last
+      opts[:since_date] = raw_options[:since_date].present? ? Date.parse(raw_options[:since_date]) : this_month.first
+      opts[:until_date] = raw_options[:until_date].present? ? Date.parse(raw_options[:until_date]) : this_month.last
     end
   end
 
