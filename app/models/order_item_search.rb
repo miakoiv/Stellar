@@ -11,6 +11,14 @@ class OrderItemSearch < Searchlight::Search
       .reorder('orders.completed_at DESC')
   end
 
+  def options
+    this_month = Date.current.all_month
+    super.tap do |opts|
+      opts['since_date'] ||= this_month.first
+      opts['until_date'] ||= this_month.last
+    end
+  end
+
   def search_store_id
     query.where(orders: {store_id: store_id})
   end
