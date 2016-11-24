@@ -37,6 +37,9 @@ fi:
         search:
           since_date: Pvm alkaen
           until_date: Pvm päättyen
+        chart:
+          daily: Päiväkohtainen €
+          total: Yhteensä €
     manage: Hallinta
     return_to_storefront: Takaisin kauppaan
     albums:

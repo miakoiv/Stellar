@@ -42,6 +42,7 @@
 //= require jquery.grideditor.js
 //= require jquery.grideditor.summernote.js
 //= require jquery.grideditor.settings.js
+//= require chartist.min.js
 //= require vis
 //= require_directory ./admin
 //= require_directory .

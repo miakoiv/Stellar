@@ -57,6 +57,9 @@ en:
         search:
           since_date: Since date
           until_date: Until date
+        chart:
+          daily: Daily sales €
+          total: Total sales €
     manage: Manage
     return_to_storefront: Return to storefront
     albums:

@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-body
+    #sales-chart.ct-chart.ct-minor-seventh
+
+:coffee
+  data = #{@sales.chart_data.to_json}
+  new Chartist.Bar '#sales-chart', data
