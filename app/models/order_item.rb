@@ -124,6 +124,11 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+  # Date used in reports is the completion date of the order.
+  def report_date
+    order.completed_at.to_date
+  end
+
   def archive!
     update(
       product_code: product.code,
