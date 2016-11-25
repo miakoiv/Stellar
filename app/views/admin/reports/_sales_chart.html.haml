@@ -1,7 +1,23 @@
 .panel.panel-default
   .panel-body
-    #sales-chart.ct-chart.ct-minor-seventh
+    %canvas#sales-chart
 
 :coffee
   data = #{@sales.chart_data.to_json}
-  new Chartist.Bar '#sales-chart', data
+  ctx = $('#sales-chart')
+  chart = new Chart ctx,
+    type: 'line',
+    data: data,
+    options:
+      legend:
+        display: false
+      scales:
+        xAxes: [{type: 'time'}]
+      elements:
+        point:
+          radius: 4
+          hoverRadius: 6
+          borderColor: 'hsla(225,100%,30%,0.75)'
+          backgroundColor: 'hsla(225,100%,30%,0.25)'
+        line:
+          borderColor: 'hsla(225,50%,30%,0.25)'

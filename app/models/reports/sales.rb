@@ -15,27 +15,27 @@ module Reports
       @total_value = items.map(&:subtotal_sans_tax).compact.sum
     end
 
-    def days
-      @by_date.keys.reverse
-    end
-
-    def daily_sales
-      @by_date.map do |date, items|
-        items.map(&:subtotal_sans_tax).compact.sum.amount
-      end
-    end
-
     def chart_data
       data = daily_sales
       {
-        labels: days,
-        series: [
+        datasets: [
           {
-            name: I18n.t('admin.reports.sales.chart.daily'),
-            data: daily_sales
+            label: I18n.t('admin.reports.sales.chart.daily'),
+            data: daily_sales,
+            cubicInterpolationMode: 'monotone'
           }
         ]
       }
     end
+
+    private
+      def daily_sales
+        @by_date.map do |date, items|
+          {
+            x: date,
+            y: items.map(&:subtotal_sans_tax).compact.sum.amount
+          }
+        end
+      end
   end
 end
