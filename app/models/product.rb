@@ -55,7 +55,7 @@ class Product < ActiveRecord::Base
   # Product may form master-variant relationships, and any change will
   # trigger a timestamp update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
-  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :touch_self, after_remove: :touch_self
+  has_many :variants, -> { merge(variant) }, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :touch_self, after_remove: :touch_self
 
   has_many :inventory_items, dependent: :destroy
   has_many :order_items
