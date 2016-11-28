@@ -286,7 +286,9 @@ class Product < ActiveRecord::Base
     )
     item.inventory_entries.build(
       recorded_at: recorded_at,
-      amount: amount,
+      on_hand: amount,
+      reserved: 0,
+      pending: 0,
       value: value || item.value || cost_price || 0
     )
     item.save!
