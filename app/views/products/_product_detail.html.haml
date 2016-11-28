@@ -21,7 +21,7 @@
       .buy-now
         .product-pricing
           = render partial: 'products/pricing', object: product, as: :product
-        - if product.component_entries.live.any?
+        - if product.includes_components?
           = render partial: 'products/components_panel', object: product, as: :product
         = render partial: 'products/buy_now', object: product, as: :product
         = render partial: 'store/go_checkout'

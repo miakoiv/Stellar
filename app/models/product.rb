@@ -255,6 +255,11 @@ class Product < ActiveRecord::Base
     100 * (retail_price - trade_price) / retail_price
   end
 
+  # Bundles and composites include components when ordered, if any are live.
+  def includes_components?
+    (bundle? || composite?) && component_entries.live.any?
+  end
+
   # Stock is not tracked for master products, bundles, or virtual products.
   def tracked_stock?
     vanilla? || variant? || composite?
