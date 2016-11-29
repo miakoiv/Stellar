@@ -26,4 +26,9 @@ class InventoryItemSearch < Searchlight::Search
   def search_product_id
     query.where(product_id: product_id)
   end
+
+  def search_live
+    return query if empty?(live)
+    query.where(products: {live: checked?(live)})
+  end
 end
