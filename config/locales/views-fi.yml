@@ -73,13 +73,10 @@ fi:
       show:
         forward: Välitä ostoskoriin
         quote: Lähetä tarjous
-        aggregated: Keräilylista
         delivery_note: Lähete
         quotation: Tarjous
         print_delivery_note: Tulosta lähete
         print_quotation: Tulosta tarjous
-      edit:
-        aggregated: Keräilylista
       form:
         approved_at_help: Päivä, jona tilaus otettiin vastaan ja hyväksyttiin.
         concluded_at_help: Päivä, jona tilaus toimitettiin ja arkistoitiin.

@@ -93,13 +93,10 @@ en:
       show:
         forward: Forward to cart
         quote: Send quotation
-        aggregated: Aggregated components
         delivery_note: Delivery note
         quotation: Quotation
         print_delivery_note: Print delivery note
         print_quotation: Print quotation
-      edit:
-        aggregated: Aggregated components
       form:
         approved_at_help: Date when the order was received and approved.
         concluded_at_help: Date when the order was shipped and archived.

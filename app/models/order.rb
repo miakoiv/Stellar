@@ -328,19 +328,6 @@ class Order < ActiveRecord::Base
     order_items.joins(product: :vendor).group_by { |item| item.product.vendor }
   end
 
-  # Collects aggregated component quantities of all products in the order.
-  # Returns a hash of quantities keyed by product object.
-  def aggregated_components
-    aggregated = {}.tap do |aggregated|
-      order_items.each do |item|
-        item.product.component_entries.each do |entry|
-          aggregated[entry.component] ||= 0
-          aggregated[entry.component] += item.amount * entry.quantity
-        end
-      end
-    end
-  end
-
   # VAT numbers are not mandatory, but expected to be present in orders
   # billed at a different country from the store home country.
   def vat_number_expected?

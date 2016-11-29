@@ -60,11 +60,6 @@ de:
         new_category: Neue Kategorie
       new:
         new_category: Neue Kategorie
-    orders:
-      show:
-        aggregated: Aggregated components
-      edit:
-        aggregated: Aggregated components
     pages:
       index:
         new_page: Neue Seite
