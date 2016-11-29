@@ -1,8 +1,8 @@
 # Collapse and reveal checkout panels according to checkout phase.
 
 $.do_checkout_phase = (phase) ->
+  ga?('send', 'pageview', '/checkout' + phase)
   switch phase
-    ga?('send', 'pageview', '/checkout' + phase)
     when 'address'
       $('#shipping-panel, #payment-panel, #complete-panel').collapse 'hide'
       $('#address-panel').collapse 'show'
