@@ -2,6 +2,7 @@
 
 $.do_checkout_phase = (phase) ->
   switch phase
+    ga?('send', 'pageview', '/checkout' + phase)
     when 'address'
       $('#shipping-panel, #payment-panel, #complete-panel').collapse 'hide'
       $('#address-panel').collapse 'show'
