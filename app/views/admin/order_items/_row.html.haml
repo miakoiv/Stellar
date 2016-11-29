@@ -1,33 +1,21 @@
-= content_tag_for :tbody, order_item do
-  %tr
-    %td{colspan: 2}
-      %strong
-        = link_to order_item.product_title, admin_product_path(order_item.product)
-      = order_item.product_subtitle
-      - if order_item.product.component_entries.any?
-        %span.caret
-      - if order_item.product.shipping_notes.present?
-        .small
-          = icon('info-circle')
-          = order_item.product.shipping_notes
-    %td.no-wrap
-      - if order_item.real?
-        = order_item.product_code
-    %td.text-right
-      - if order_item.real?
-        = order_item.amount
-    %td.text-right.currency
-      = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
-    %td.text-right.currency
-      = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+= content_tag_for :tr, order_item, class: order_item.is_subitem? ? 'subrow' : '' do
+  %td
+    %strong
+      = link_to order_item.product_title, admin_product_path(order_item.product)
+    = order_item.product_subtitle
+    - if order_item.product.shipping_notes.present?
+      .small
+        = icon('info-circle')
+        = order_item.product.shipping_notes
+  %td.no-wrap
+    - if order_item.real?
+      = order_item.product_code
+  %td.text-right
+    = order_item.amount
+  %td.text-right.currency
+    = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+  %td.text-right.currency
+    = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
 
-  = content_tag_for :tr, order_item.product.component_entries do |entry|
-    %td.col-xs-1
-    %td.text-muted
-      %strong
-        = link_to entry.component.title, admin_product_path(entry.component)
-      = entry.component.subtitle
-    %td.no-wrap= entry.component.code
-    %td.text-right.text-muted= entry.quantity * order_item.amount
-    %td
-    %td
+- if order_item.adjustments.any?
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

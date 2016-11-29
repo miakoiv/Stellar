@@ -2,14 +2,13 @@
   %table.table.table-hover
     %thead
       %tr
-        %th{colspan: 2}= col(OrderItem, :product_title)
+        %th= col(OrderItem, :product_title)
         %th= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
         %th.col-xs-2.text-right= col(OrderItem, :price)
         %th.col-xs-2.text-right= col(OrderItem, :subtotal)
     %tfoot
       %tr
-        %th
         %th
         %th
         %th.text-right{colspan: 2}= col(Order, :grand_total)
