@@ -6,28 +6,7 @@
       = icon('cloud-upload', t('actions.upload'))
   %h1= icon('cube', title(Product, count: 2))
 
-.panel.panel-info
-  .panel-heading
-    %h4.panel-title= t('actions.search')
-  .panel-body
-    = form_for @search, url: admin_products_path, method: :get do |f|
-      .row
-        .col-sm-6.col-md-2
-          .form-group
-            = f.search_field :code, autocomplete: 'off', placeholder: col(Product, :code), class: 'form-control'
-        .col-sm-6.col-md-4
-          .form-group
-            = f.search_field :keyword, autocomplete: 'off', placeholder: col(Product, :title), class: 'form-control'
-        .col-sm-6.col-md-3
-          .form-group
-            = f.select :categories, current_user.category_options, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
-        .col-sm-4.col-md-2
-          .form-group
-            = f.select :live, Product.availability_options, {include_blank: t('.availability')}, {placeholder: t('.availability'), class: 'form-control selectize'}
-        .col-sm-2.col-md-1
-          .form-group
-            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
-
+= render partial: 'search'
 = render partial: 'admin/products/upload_modal'
 = render partial: 'admin/products/table', object: @products, as: :products
 = paginate @products

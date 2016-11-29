@@ -124,6 +124,7 @@ en:
     products:
       index:
         new_product: New product
+      search:
         availability: "[Availability]"
       table:
         duplicate:
