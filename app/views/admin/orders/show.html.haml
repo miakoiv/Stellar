@@ -40,8 +40,15 @@
       %li.active{role: 'presentation'}
         %a{href: '#tab-order-items', role: 'tab', data: {toggle: 'tab'}}
           = title(OrderItem, count: 2)
+      %li{role: 'presentation'}
+        %a{href: '#tab-payments', role: 'tab', data: {toggle: 'tab'}}
+          = title(Payment, count: 2)
 
     .tab-content
       #tab-order-items.tab-pane.fade.in.active
         %h2.visible-print-block= title(OrderItem, count: 2)
         = render partial: 'admin/order_items/table', object: @order, as: :order
+
+      #tab-payments.tab-pane.fade
+        %h2.visible-print-block= title(Payment, count: 2)
+        = render partial: 'admin/payments/table', object: @order, as: :order

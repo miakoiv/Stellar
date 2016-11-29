@@ -1,0 +1,11 @@
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Payment, :created_at)
+        %th.col-xs-2.text-right= col(Payment, :amount)
+
+    %tbody
+      = content_tag_for :tr, order.payments do |payment|
+        %td= l(payment.created_at, format: :iso)
+        %td.text-right.currency= humanized_money_with_symbol payment.amount

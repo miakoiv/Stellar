@@ -52,6 +52,9 @@ fi:
       page:
         one: sivu
         other: sivut
+      payment:
+        one: maksu
+        other: maksut
       portal:
         one: portaali
         other: portaalit
@@ -227,6 +230,10 @@ fi:
         content: Sisältö
         wysiwyg: Näytä ulkoasu
         album_ids: Albumit
+      payment:
+        order_id: Tilaus
+        amount: Maksettu
+        created_at: Päiväys
       portal:
         name: Nimi
         domain: Verkkotunnus

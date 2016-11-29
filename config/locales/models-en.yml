@@ -52,6 +52,9 @@ en:
       page:
         one: page
         other: pages
+      payment:
+        one: payment
+        other: payments
       portal:
         one: portal
         other: portals
@@ -227,6 +230,10 @@ en:
         content: Content
         wysiwyg: Show layout
         album_ids: Albums
+      payment:
+        order_id: Order
+        amount: Paid
+        created_at: Date
       portal:
         name: Name
         domain: Domain
