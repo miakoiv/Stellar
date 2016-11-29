@@ -37,6 +37,7 @@ fi:
         search:
           since_date: Pvm alkaen
           until_date: Pvm päättyen
+          countries: Kohdemaat
         chart:
           daily: Päiväkohtainen €
           total: Yhteensä €

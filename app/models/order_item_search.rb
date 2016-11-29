@@ -30,4 +30,8 @@ class OrderItemSearch < Searchlight::Search
   def search_until_date
     query.where('DATE(orders.completed_at) <= ?', until_date)
   end
+
+  def search_shipping_country_code
+    query.where(orders: {shipping_country_code: shipping_country_code})
+  end
 end

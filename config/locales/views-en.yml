@@ -57,6 +57,7 @@ en:
         search:
           since_date: Since date
           until_date: Until date
+          countries: Destination countries
         chart:
           daily: Daily sales €
           total: Total sales €

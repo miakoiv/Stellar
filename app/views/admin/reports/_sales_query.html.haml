@@ -4,12 +4,15 @@
   .panel-body
     = form_for @sales.search, url: admin_sales_report_path, method: :get do |f|
       .row
-        .col-sm-5.col-md-3
+        .col-sm-3.col-md-2
           .form-group
             = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        .col-sm-5.col-md-3
+        .col-sm-3.col-md-2
           .form-group
             = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-        .col-sm-2.col-md-2
+        .col-sm-4
+          .form-group
+            = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.sales.search.countries'), class: 'form-control selectize'}
+        .col-sm-2.col-md-2.col-md-push-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

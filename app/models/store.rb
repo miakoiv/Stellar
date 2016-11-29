@@ -132,6 +132,14 @@ class Store < ActiveRecord::Base
     (categories.top_level - [exclude]).map { |c| [c.name, c.id] }
   end
 
+  # Countries where concluded orders have been shipped to.
+  # Useful as sales report search option.
+  def countries_shipped_to
+    country_codes = orders.concluded.select(:shipping_country_code)
+      .distinct.pluck(:shipping_country_code)
+    Country.find(country_codes)
+  end
+
   def user_options
     users.map { |u| [u.to_s, u.id] }
   end
