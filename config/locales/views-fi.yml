@@ -117,8 +117,8 @@ fi:
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Hinta on <strong>veroton</strong>.
         shipping_notes_help: Lisätietoja tilausriville ostoskoriin ja tilauksiin.
       upload_modal:
-        title: Siirrä CSV-tiedosto
-        dropzone_message: Pudota CSV-tiedosto tähän päivittääksesi useiden tuotteiden hinta- ja toimitustiedot kerralla.
+        title: Siirrä CSV tai XLS -tiedosto
+        dropzone_message: Pudota tiedosto tähän päivittääksesi useiden tuotteiden hinta- ja toimitustiedot kerralla.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Jokainen ym. erä tuotteita alentaa tuotteiden hintaa kumulatiivisesti annetulla prosentilla.

@@ -137,8 +137,8 @@ en:
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Price <strong>excludes tax</strong>.
         shipping_notes_help: Extra information for shopping cart and order rows.
       upload_modal:
-        title: Upload CSV file
-        dropzone_message: Drop a CSV file here to update pricing and shipping information on multiple products at once.
+        title: Upload CSV or XLS file
+        dropzone_message: Drop a file here to update pricing and shipping information on multiple products at once.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.

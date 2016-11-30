@@ -18,7 +18,7 @@
   Dropzone.options.productsUpload =
     dictDefaultMessage: "#{I18n.t('admin.products.upload_modal.dropzone_message')}"
     paramName: 'file'
-    acceptedFiles: '.csv'
+    acceptedFiles: '.csv,.xls'
     init: ->
       @on 'success', (file, response) ->
         $ul = $('#upload-complete > ul')
