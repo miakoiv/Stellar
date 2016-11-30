@@ -83,6 +83,9 @@ gem 'fastimage'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
+# SpreadsheetML parser for uploaded files
+gem 'SpreadsheetML'
+
 # Clipboard handling
 gem 'clipboard-rails'
 
