@@ -124,9 +124,13 @@ Rails.application.routes.draw do
     resources :orders do
       resources :images, shallow: true
       resources :order_items, shallow: true
-      get :forward, on: :member
-      get :quote, on: :member
-      post :add_products, on: :member
+      member do
+        get :forward
+        get :quote
+        patch :approve
+        patch :conclude
+        post :add_products
+      end
     end
     resources :properties do
       post :reorder, on: :collection

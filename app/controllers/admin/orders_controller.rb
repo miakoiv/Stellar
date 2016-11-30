@@ -3,9 +3,9 @@
 class Admin::OrdersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :add_products]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :approve, :conclude, :add_products]
 
-  authority_actions quote: 'read', forward: 'read', add_products: 'update'
+  authority_actions quote: 'read', forward: 'read', approve: 'update', conclude: 'update', add_products: 'update'
   authorize_actions_for Order
 
   layout 'admin'
@@ -83,6 +83,24 @@ class Admin::OrdersController < ApplicationController
     shopping_cart.recalculate!
 
     redirect_to cart_path, notice: t('.notice', order: @order)
+  end
+
+  # PATCH/PUT /admin/orders/1/approve
+  def approve
+    @order.update(approved_at: Date.current)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # PATCH/PUT /admin/orders/1/conclude
+  def conclude
+    @order.update(concluded_at: Date.current)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /admin/orders/1/add_products

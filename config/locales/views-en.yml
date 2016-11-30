@@ -90,6 +90,14 @@ en:
       new:
         new_inventory: New inventory
     orders:
+      row:
+        approve:
+          button: Approve
+        conclude:
+          button: Conclude
+          confirm: "%{klass} %{name} will be concluded. Remember to print a delivery note!"
+          proceed: Conclude order
+          cancel: Cancel
       show:
         forward: Forward to cart
         quote: Send quotation

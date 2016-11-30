@@ -70,6 +70,14 @@ fi:
       new:
         new_inventory: Uusi varasto
     orders:
+      row:
+        approve:
+          button: Hyväksy
+        conclude:
+          button: Päätä
+          confirm: "%{klass} %{name} päätetään. Muista tulostaa lähete!"
+          proceed: Päätä tilaus
+          cancel: Takaisin
       show:
         forward: Välitä ostoskoriin
         quote: Lähetä tarjous
