@@ -1,6 +1,6 @@
 #timeline
   - @timeline_orders.each do |order|
-    = content_tag_for :span, order, data: {id: order.id, url: admin_order_path(order), summary: order.summary}
+    = content_tag_for :span, order, :vis, data: {id: order.id, url: admin_order_path(order), summary: order.summary}
 
 :coffee
   container = $('#timeline')[0]
