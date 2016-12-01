@@ -3,13 +3,11 @@
 
 .panel.panel-default
   .panel-heading
-    %h5.panel-title
-      .pull-right
-        = icon('cc-visa', class: 'fa-lg')
-        = icon('cc-mastercard', class: 'fa-lg')
-        = icon('cc-diners-club', class: 'fa-lg')
-      = t('checkout.creditcard_payment')
+    %h5.panel-title= t('checkout.creditcard_payment')
   .panel-body
+    .row
+      .col-sm-12
+        .pull-right= image_tag 'visa-mastercard.png'
     = bootstrap_form_tag url: pay_path(@order, :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
       .row
         .col-sm-12
