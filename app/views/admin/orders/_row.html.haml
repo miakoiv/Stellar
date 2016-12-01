@@ -12,16 +12,11 @@
     = humanized_money_with_symbol order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
   %td.actions
     - if current_user.can_update?(Order) && !order.approved? && order.incoming_for?(current_user)
-      = link_to icon('check', t('.approve.button')), approve_admin_order_path(order),
+      = link_to icon('check', t('.approve')), approve_admin_order_path(order),
           remote: true, method: :patch, class: 'btn btn-sm btn-success'
     - if current_user.can_update?(Order) && order.approved? && !order.concluded? && order.incoming_for?(current_user)
-      = link_to icon('gavel', t('.conclude.button')), conclude_admin_order_path(order),
-          remote: true, method: :patch, class: 'btn btn-sm btn-primary',
-          data: {confirm: t('.conclude.confirm',
-            klass: Order.model_name.human.capitalize, name: order.to_s),
-            'confirm-title' => t('actions.confirm.title'),
-            'confirm-proceed' => t('.conclude.proceed'),
-            'confirm-cancel' => t('.conclude.cancel')}
+      = link_to icon('search', t('.review')), review_admin_order_path(order),
+          remote: true, class: 'btn btn-sm btn-primary'
     = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'
     - if current_user.can_update?(Order)

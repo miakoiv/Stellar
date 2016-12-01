@@ -3,9 +3,9 @@
 class Admin::OrdersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :approve, :conclude, :add_products]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :approve, :review, :conclude, :add_products]
 
-  authority_actions quote: 'read', forward: 'read', approve: 'update', conclude: 'update', add_products: 'update'
+  authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update', add_products: 'update'
   authorize_actions_for Order
 
   layout 'admin'
@@ -92,6 +92,10 @@ class Admin::OrdersController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  # GET /admin/orders/1/review
+  def review
   end
 
   # PATCH/PUT /admin/orders/1/conclude

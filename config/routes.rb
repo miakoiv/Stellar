@@ -128,6 +128,7 @@ Rails.application.routes.draw do
         get :forward
         get :quote
         patch :approve
+        get :review
         patch :conclude
         post :add_products
       end

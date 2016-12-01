@@ -91,18 +91,11 @@ en:
         new_inventory: New inventory
     orders:
       row:
-        approve:
-          button: Approve
-        conclude:
-          button: Conclude
-          confirm: "%{klass} %{name} will be concluded. Remember to print a delivery note!"
-          proceed: Conclude order
-          cancel: Cancel
+        approve: Approve
+        review: Review
       show:
         forward: Forward to cart
         quote: Send quotation
-        delivery_note: Delivery note
-        quotation: Quotation
         print_delivery_note: Print delivery note
         print_quotation: Print quotation
       form:
@@ -110,6 +103,12 @@ en:
         concluded_at_help: Date when the order was shipped and archived.
       add_products:
         submit: Add products
+      headers:
+        delivery_note: Delivery note
+        quotation: Quotation
+      review_modal:
+        title: Order review
+        conclude: Conclude order and close
     pages:
       index:
         new_page: New page

@@ -1,0 +1,14 @@
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header.hidden-print
+      %button.close{data: {dismiss: 'modal'}}= icon('close')
+      %h4.modal-title= t('.title')
+    .modal-body
+      = render partial: 'headers'
+      = render partial: 'summary'
+      %h2= title(OrderItem, count: 2)
+      = render partial: 'admin/order_items/table', object: @order, as: :order
+    .modal-footer.hidden-print
+      = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+      = link_to icon('gavel', t('.conclude')), conclude_admin_order_path(@order),
+          remote: true, method: :patch, class: 'btn btn-primary'

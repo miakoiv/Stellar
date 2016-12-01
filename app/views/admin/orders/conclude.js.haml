@@ -1,1 +1,2 @@
+$('#orders-review-modal').modal('hide');
 $("##{dom_id(@order)}").replaceWith("#{j render partial: 'admin/orders/row', object: @order, as: :order}");
