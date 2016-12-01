@@ -550,14 +550,6 @@ fieldset[disabled] .help-block { display: none; }
   bottom: 15px;
 }
 
-.unobtrusive-flash-container {
-  z-index: $zindex-modal + 10;
-  position: fixed;
-  bottom: 15px;
-  left: 30px;
-  right: 30px;
-}
-
 .footer {
   position: absolute;
   bottom: 0;

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   #---
   before_action :set_locale
-  after_filter :prepare_unobtrusive_flash
+  after_action :prepare_unobtrusive_flash
 
   #---
   # Authenticate user, but skip authentication if guests are admitted.

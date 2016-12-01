@@ -29,7 +29,7 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require unobtrusive_flash
-//= require unobtrusive_flash_bootstrap
+//= require bootstrap-notify.min.js
 //= require outdatedbrowser/outdatedBrowser
 //= require wiselinks
 //= require nprogress
