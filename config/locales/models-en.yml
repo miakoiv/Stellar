@@ -353,6 +353,7 @@ en:
         country_code: Country
         allow_shopping: Enable shopping
         admit_guests: Admit guests to the store
+        accept_credit_cards: Accept credit card payments
         free_shipping_at: Free S&H beyond
         shipping_cost_product_id: S&H product entry
         tracking_code: Google Analytics key

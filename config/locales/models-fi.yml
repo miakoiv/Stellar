@@ -353,6 +353,7 @@ fi:
         country_code: Kotimaa
         allow_shopping: Salli ostokset
         admit_guests: Salli pääsy kauppaan vieraana
+        accept_credit_cards: Hyväksy luottokorttimaksut
         free_shipping_at: Ei toimituskuluja alkaen
         shipping_cost_product_id: Toimituskulujen tuote
         tracking_code: Google Analytics -koodi

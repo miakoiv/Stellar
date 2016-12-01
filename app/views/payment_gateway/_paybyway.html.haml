@@ -1,27 +1,28 @@
 #paybyway-data{data: {pay_url: pay_path(@order, :e_payment), verify_url: verify_path(@order)}}
 #messages{data: {token_request_error: t('checkout.messages.token_request_error'), charge_error: t('checkout.messages.charge_error')}}
 
-.panel.panel-default
-  .panel-heading
-    %h5.panel-title= t('checkout.creditcard_payment')
-  .panel-body
-    .row
-      .col-sm-12
-        .pull-right= image_tag 'visa-mastercard.png'
-    = bootstrap_form_tag url: pay_path(@order, :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
+- if current_store.accept_credit_cards?
+  .panel.panel-default
+    .panel-heading
+      %h5.panel-title= t('checkout.creditcard_payment')
+    .panel-body
       .row
         .col-sm-12
-          = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
-        .col-sm-6
-          = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
-        .col-sm-6
-          = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
-        .col-xs-12.pay-now-button.collapse.in
-          = f.button t('checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
-      .row
-        .col-xs-12.working.collapse
-          .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
-          %p= t('checkout.messages.charging')
+          .pull-right= image_tag 'visa-mastercard.png'
+      = bootstrap_form_tag url: pay_path(@order, :credit_card), html: {id: 'paybyway-creditcard-form'} do |f|
+        .row
+          .col-sm-12
+            = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
+          .col-sm-6
+            = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
+          .col-sm-6
+            = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
+          .col-xs-12.pay-now-button.collapse.in
+            = f.button t('checkout.charge'), class: 'btn btn-block btn-lg btn-primary'
+        .row
+          .col-xs-12.working.collapse
+            .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
+            %p= t('checkout.messages.charging')
 
 .panel.panel-default
   .panel-heading

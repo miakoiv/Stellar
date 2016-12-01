@@ -28,9 +28,11 @@
             = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
             = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
             = f.form_group do
+              = f.check_box :admit_guests
+            = f.form_group do
               = f.check_box :allow_shopping
             = f.form_group do
-              = f.check_box :admit_guests
+              = f.check_box :accept_credit_cards
             = f.select :shipping_cost_product_id, @store.products.virtual.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
             = f.text_field :free_shipping_at
             = f.text_field :tracking_code
