@@ -17,14 +17,14 @@ UnobtrusiveFlash.showFlashMessage = (message, type) ->
     },
     {
       type: UnobtrusiveFlash.mapping[type].class
-      newest_on_top: true
+      newest_on_top: false
       placement:
-        from: 'bottom'
-        align: 'right'
+        from: 'top'
+        align: 'center'
       z_index: 1051
       mouse_over: 'pause'
       animate:
-        enter: 'animated fadeInRight'
+        enter: 'animated fadeInDown'
         exit: 'animated flipOutX'
     }
   )
