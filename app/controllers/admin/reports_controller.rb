@@ -23,6 +23,8 @@ class Admin::ReportsController < ApplicationController
 
   private
     def sales_search_params
-      @query.merge(store_id: current_store.id)
+      @query.merge(store_id: current_store.id).reverse_merge({
+        'order_type_id' => current_user.incoming_order_types.first.id
+      })
     end
 end
