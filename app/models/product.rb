@@ -274,6 +274,11 @@ class Product < ActiveRecord::Base
     end
   end
 
+  # Amount pending in all inventories.
+  def pending
+    inventory_items.online.map(&:pending).sum
+  end
+
   # Product is considered available when it's live and has either inventory
   # available, or a defined lead time.
   def available?
