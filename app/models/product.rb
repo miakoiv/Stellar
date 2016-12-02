@@ -52,8 +52,8 @@ class Product < ActiveRecord::Base
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
 
-  # Product may form master-variant relationships, and any change will
-  # trigger a timestamp update.
+  # Products may form master-variant relationships, and any change will
+  # trigger a live status update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
   has_many :variants, -> { merge(variant) }, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
 
@@ -297,7 +297,6 @@ class Product < ActiveRecord::Base
       value: value || item.value || cost_price || 0
     )
     item.save!
-    touch # touch itself to invalidate cached partials
   end
 
   # Consumes given amount of this product from inventory, starting from
@@ -317,7 +316,6 @@ class Product < ActiveRecord::Base
         item.destock!(item.available, source)
       end
     end
-    touch # touch itself to invalidate cached partials
   end
 
   def master_product_options
@@ -391,11 +389,12 @@ class Product < ActiveRecord::Base
     update_columns(live: categories.live.any? &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
+    touch
     true
   end
 
   protected
-    def reset_itself!(category)
+    def reset_itself!(context)
       reset_live_status! if persisted?
     end
 
