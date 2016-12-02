@@ -1,9 +1,6 @@
 - if can_see_stock? && product.tracked_stock?
   %ul.list-group
-    %li.list-group-item
-      %span= product.available
-      = icon('cube', t('.available'))
-    - if product.pending > 0
+    - product.available_by_inventory.each do |inventory, available|
       %li.list-group-item
-        %span= product.pending
-        = icon('arrow-down', t('.pending'))
+        %span= inventory.fuzzy? ? fuzzy_amount(available) : available
+        = icon('cube', inventory)

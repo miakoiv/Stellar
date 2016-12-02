@@ -2,6 +2,10 @@
 
 module StoreHelper
 
+  def fuzzy_amount(amount)
+    amount > 25 ? t('number.more_than', number: 25) : amount
+  end
+
   def unit_price_string(price, unit)
     "#{humanized_money_with_symbol price} / #{unit}"
   end

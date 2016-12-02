@@ -175,6 +175,7 @@ fi:
           kb: kt
           mb: Mt
           tb: Tt
+    more_than: "yli %{number}"
     percentage:
       format:
         delimiter: ''

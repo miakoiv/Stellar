@@ -186,6 +186,7 @@ en:
           kb: KB
           mb: MB
           tb: TB
+    more_than: "%{number}+"
     percentage:
       format:
         delimiter: ''

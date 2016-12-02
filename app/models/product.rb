@@ -274,15 +274,16 @@ class Product < ActiveRecord::Base
     end
   end
 
-  # Amount pending in all inventories.
-  def pending
-    inventory_items.online.map(&:pending).sum
-  end
-
   # Product is considered available when it's live and has either inventory
   # available, or a defined lead time.
   def available?
     live? && (lead_time.present? || available > 0)
+  end
+
+  # Coalesced amount available by inventory.
+  def available_by_inventory
+    amounts = inventory_items.online.group(:inventory_id).sum('on_hand - reserved')
+    amounts.transform_keys { |id| Inventory.find(id) }
   end
 
   # Restocks given inventory with amount of this product with given lot code,
