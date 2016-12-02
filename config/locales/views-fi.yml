@@ -200,6 +200,9 @@ fi:
   products:
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
+    stock:
+      available: Varastossa
+      pending: Tulossa
   store:
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
