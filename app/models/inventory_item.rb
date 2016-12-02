@@ -10,7 +10,7 @@ class InventoryItem < ActiveRecord::Base
 
   #---
   belongs_to :inventory
-  belongs_to :product
+  belongs_to :product, touch: true
 
   has_many :inventory_entries, dependent: :destroy
   accepts_nested_attributes_for :inventory_entries, limit: 1
