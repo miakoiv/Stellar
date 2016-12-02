@@ -42,7 +42,7 @@ $('#paybyway-creditcard-form').on 'submit', (e) ->
     catch error
       $failure 'tokenRequestError'
 
-$('.bank-button').on 'click', (e) ->
+$('.payment-button').on 'click', (e) ->
   request = $.get $e_payment_path,
     selected: $(this).data 'selected'
   request.done (data) ->

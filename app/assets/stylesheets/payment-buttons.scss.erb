@@ -1,6 +1,6 @@
-.bank-buttons {
+.payment-buttons {
 
-  .bank-button {
+  .payment-button {
     width: 140px;
     height: 80px;
     float: left;
@@ -14,6 +14,8 @@
       opacity: 1;
     }
 
+    &.visa { background-image: url(<%= asset_url('cards/visa.png') %>); }
+    &.mastercard { background-image: url(<%= asset_url('cards/mastercard.png') %>); }
     &.nordea { background-image: url(<%= asset_url('banks/nordea.png') %>); }
     &.op { background-image: url(<%= asset_url('banks/op.png') %>); }
     &.danske { background-image: url(<%= asset_url('banks/danskebank.png') %>); }

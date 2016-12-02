@@ -24,17 +24,21 @@
             .pull-right= icon('circle-o-notch', class: 'fa-lg fa-spin')
             %p= t('checkout.messages.charging')
 
-.panel.panel-default
-  .panel-heading
-    %h5.panel-title= t('checkout.bank_payment')
-  .panel-body.bank-buttons
-    .bank-button.nordea{data: {selected: 'nordea'}}
-    .bank-button.op{data: {selected: 'osuuspankki'}}
-    .bank-button.danske{data: {selected: 'danskebank'}}
-    .bank-button.saastopankki{data: {selected: 'saastopankki'}}
-    .bank-button.poppankki{data: {selected: 'paikallisosuuspankki'}}
-    .bank-button.aktia{data: {selected: 'aktia'}}
-    .bank-button.handelsbanken{data: {selected: 'handelsbanken'}}
-    .bank-button.spankki{data: {selected: 'spankki'}}
+%h5= t('checkout.e_payment')
+.payment-buttons
+  .row
+    .col-xs-12
+      .payment-button.visa{data: {selected: 'creditcards'}}
+      .payment-button.mastercard{data: {selected: 'creditcards'}}
+  .row
+    .col-xs-12
+      .payment-button.nordea{data: {selected: 'nordea'}}
+      .payment-button.op{data: {selected: 'osuuspankki'}}
+      .payment-button.danske{data: {selected: 'danskebank'}}
+      .payment-button.saastopankki{data: {selected: 'saastopankki'}}
+      .payment-button.poppankki{data: {selected: 'paikallisosuuspankki'}}
+      .payment-button.aktia{data: {selected: 'aktia'}}
+      .payment-button.handelsbanken{data: {selected: 'handelsbanken'}}
+      .payment-button.spankki{data: {selected: 'spankki'}}
 
 = javascript_include_tag 'payment_gateway/paybyway'

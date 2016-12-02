@@ -240,7 +240,7 @@ fi:
     ship: Valitse tämä toimitustapa
     receipt: Kuitti
     creditcard_payment: Maksa luottokortilla
-    bank_payment: Maksa nettipankissa
+    e_payment: Maksa luottokortilla tai nettipankissa
     card_number: Kortin numero
     card_expiry: Voimassa (kk/vv)
     card_cvc: Kortin tarkiste (CVC)

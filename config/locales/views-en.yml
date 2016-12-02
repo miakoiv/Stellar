@@ -260,7 +260,7 @@ en:
     ship: Select this shipping method
     receipt: Receipt
     creditcard_payment: Credit card payment
-    bank_payment: Bank payment
+    e_payment: Online payment
     card_number: Card number
     card_expiry: Expiry (mm/yy)
     card_cvc: Security code (CVC)
