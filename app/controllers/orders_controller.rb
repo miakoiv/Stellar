@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
 
   before_action :set_pages
   before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
+  before_action :set_pricing_group
 
   # GET /orders
   def index
