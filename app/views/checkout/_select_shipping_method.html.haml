@@ -8,8 +8,9 @@
         .media-body
           %h4.media-heading= method.name
           - if method.shipping_cost_product.present?
-            %p= "(+#{humanized_money_with_symbol method.shipping_cost_product.price(current_pricing)})"
-
+            .pull-right.label.label-primary= "+#{humanized_money_with_symbol method.shipping_cost_product.price(current_pricing)}"
+          - if method.delivery_time.present?
+            = t('checkout.delivery_time', days: method.delivery_time)
 .description
 .details
 .gateway-content

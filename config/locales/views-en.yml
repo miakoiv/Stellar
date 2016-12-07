@@ -257,6 +257,7 @@ en:
     select_order_type: "Select to proceed:"
     address: Submit contact information
     select_shipping_method: Select shipping method
+    delivery_time: Please allow %{days} business days for delivery.
     ship: Select this shipping method
     receipt: Receipt
     creditcard_payment: Credit card payment

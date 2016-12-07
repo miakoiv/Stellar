@@ -237,6 +237,7 @@ fi:
     select_order_type: "Valitse ja jatka kassalle:"
     address: Vahvista yhteystiedot
     select_shipping_method: Valitse toimitustapa
+    delivery_time: Toimitusaika-arvio %{days} arkipäivää.
     ship: Valitse tämä toimitustapa
     receipt: Kuitti
     creditcard_payment: Maksa luottokortilla
