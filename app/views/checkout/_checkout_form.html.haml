@@ -34,8 +34,9 @@
         .row
           .col-sm-4
             = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          .col-sm-4
-            = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          - if @order.has_installation?
+            .col-sm-4
+              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
       = f.form_group do
         = f.check_box :has_billing_address
       #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}

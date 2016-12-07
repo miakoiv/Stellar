@@ -411,6 +411,10 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_shipping?
   end
 
+  def has_installation?
+    order_type.present? && order_type.has_installation?
+  end
+
   def has_payment?
     order_type.present? && order_type.has_payment?
   end

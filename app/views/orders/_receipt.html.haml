@@ -28,8 +28,9 @@
       - if order.store.b2b_sales?
         %dt= col(Order, :shipping_at)
         %dd= order.shipping_at.present? ? l(order.shipping_at) : ''
-        %dt= col(Order, :installation_at)
-        %dd= order.installation_at.present? ? l(order.installation_at) : ''
+        - if order.has_installation?
+          %dt= col(Order, :installation_at)
+          %dd= order.installation_at.present? ? l(order.installation_at) : ''
 %hr
 .row
   .col-xs-5

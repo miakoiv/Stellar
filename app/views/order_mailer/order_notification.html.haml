@@ -40,9 +40,10 @@
                         %td= Order.human_attribute_name(:shipping_at)
                         %td
                           %b= @order.shipping_at.present? ? l(@order.shipping_at) : ''
-                        %td= Order.human_attribute_name(:installation_at)
-                        %td
-                          %b= @order.installation_at.present? ? l(@order.installation_at) : ''
+                        - if @order.has_installation?
+                          %td= Order.human_attribute_name(:installation_at)
+                          %td
+                            %b= @order.installation_at.present? ? l(@order.installation_at) : ''
                     - if @order.has_shipping?
                       %tr
                         %td
