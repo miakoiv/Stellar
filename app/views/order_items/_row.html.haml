@@ -19,6 +19,7 @@
     = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+  %td
 
 - if order_item.adjustments.any?
   = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}
