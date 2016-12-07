@@ -64,6 +64,7 @@ class Store < ActiveRecord::Base
   end
 
   has_many :inventory_items, through: :inventories
+  has_many :shipping_cost_products, through: :shipping_methods
 
   accepts_nested_attributes_for :users, limit: 1
   accepts_nested_attributes_for :tax_categories, limit: 1

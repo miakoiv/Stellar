@@ -23,8 +23,8 @@ class CheckoutController < ApplicationController
   end
 
   # GET /checkout/1
-  # Entering checkout destroys any existing shipments to allow re-entry
-  # to the checkout process.
+  # Entering checkout destroys any existing shipments and shipping costs
+  # to allow re-entry to the checkout process.
   def checkout
     if @order.complete? || @order.empty? || !@order.checkoutable?
       return redirect_to cart_path
@@ -32,6 +32,7 @@ class CheckoutController < ApplicationController
 
     @shipping_methods = active_shipping_methods
     @order.shipments.destroy_all
+    @order.clear_shipping_costs!
     @order.address_to(current_user)
 
     if @order.has_payment?
@@ -41,10 +42,13 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/shipping_method/2.js
   # Selecting a shipping method sets up a shipping gateway object that will
-  # render its own interface within the view. Called via Ajax.
+  # render its own interface within the view. Adds associated shipping cost
+  # product price to the order, replacing existing shipping costs.
+  # Called via Ajax.
   def shipping_method
     @shipping_methods = active_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
+    @order.apply_shipping_cost!(@shipping_method, current_pricing)
     @shipping_gateway = if @shipping_method.shipping_gateway.present?
       @shipping_method.shipping_gateway_class.new(order: @order)
     else

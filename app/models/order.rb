@@ -160,6 +160,7 @@ class Order < ActiveRecord::Base
     if separate_components
       insert_components(product, amount, pricing, order_item)
     end
+    order_item
   end
 
   # Inserts the component products of given product to this order as
@@ -243,25 +244,22 @@ class Order < ActiveRecord::Base
   # Recalculate things that may take some heavy lifting. This should be called
   # when the contents of the order have changed.
   def recalculate!
-    apply_shipping_cost!
     apply_promotions!
     reload
   end
 
-  # Applies a shipping cost for the current contents of the order.
-  # The shipping cost is an order item referencing an internal product
-  # defined by the store.
-  def apply_shipping_cost!
-    return if store.shipping_cost_product.nil?
-    item = order_items.create_with(
-      amount: 1, priority: 1e9
-    ).find_or_create_by(
-      product: store.shipping_cost_product
-    )
-    item.update(price: calculated_shipping_cost)
+  # Applies the shipping cost incurred by given shipping method, if any.
+  # Existing shipping costs are removed first.
+  def apply_shipping_cost!(shipping_method, pricing = nil)
+    clear_shipping_costs!
+    return if shipping_method.shipping_cost_product.nil?
+    item = insert(shipping_method.shipping_cost_product, 1, pricing)
+    item.update(priority: 1e9)
+    order_items.reload
+  end
 
-    # Reloading order items that may have gone out of sync.
-    order_items(reload)
+  def clear_shipping_costs!
+    order_items.where(product: store.shipping_cost_products).destroy_all
   end
 
   # Applies active promotions on the order, first removing all existing
@@ -531,15 +529,6 @@ class Order < ActiveRecord::Base
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
-    end
-
-    # Shipping cost does not apply if there's a free shipping threshold
-    # met by the grand total of non-internal items in the order.
-    def calculated_shipping_cost
-      default_price = store.shipping_cost_product.retail_price
-      total = includes_tax? ? grand_total_with_tax(order_items.real) : grand_total_sans_tax(order_items.real)
-      return default_price if store.free_shipping_at.nil? || total < store.free_shipping_at.to_money
-      0.to_money
     end
 
     # Concluding an order archives the order and creates asset entries for it.
