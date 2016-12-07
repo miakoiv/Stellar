@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122132118) do
+ActiveRecord::Schema.define(version: 20161207082920) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -547,15 +547,17 @@ ActiveRecord::Schema.define(version: 20161122132118) do
   add_index "shipments", ["order_id"], name: "index_shipments_on_order_id", using: :btree
 
   create_table "shipping_methods", force: :cascade do |t|
-    t.integer  "store_id",         limit: 4,     null: false
-    t.string   "name",             limit: 255,   null: false
-    t.string   "shipping_gateway", limit: 255
+    t.integer  "store_id",                 limit: 4,     null: false
+    t.string   "name",                     limit: 255,   null: false
+    t.string   "shipping_gateway",         limit: 255
+    t.integer  "delivery_time",            limit: 4
     t.date     "enabled_at"
     t.date     "disabled_at"
-    t.text     "description",      limit: 65535
-    t.integer  "detail_page_id",   limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.text     "description",              limit: 65535
+    t.integer  "shipping_cost_product_id", limit: 4
+    t.integer  "detail_page_id",           limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree

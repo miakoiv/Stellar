@@ -331,10 +331,13 @@ en:
       shipping_method:
         name: Name
         shipping_gateway: Shipping mode
+        delivery_time: Minimum delivery time
+        delivery_time_unit: days
         enabled_at: Active since
         disabled_at: Active until
         not_active: Not in effect
         description: Description
+        shipping_cost_product_id: Shipping cost product
         detail_page_id: Information page
       store:
         admin: Settings

@@ -331,10 +331,13 @@ fi:
       shipping_method:
         name: Nimi
         shipping_gateway: Toimintamalli
+        delivery_time: Minimi toimitusaika
+        delivery_time_unit: päivää
         enabled_at: Käytössä alkaen
         disabled_at: Käytössä kunnes
         not_active: Ei voimassa
         description: Kuvaus
+        shipping_cost_product_id: Toimituskustannusten tuote
         detail_page_id: Lisätietosivu
       store:
         admin: Asetukset

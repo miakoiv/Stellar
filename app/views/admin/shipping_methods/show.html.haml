@@ -9,8 +9,8 @@
     = @shipping_method
 
 .row
-  .col-md-6
+  .col-md-7
     = render partial: 'form', locals: {locked: true}
 
-  .col-md-6
+  .col-md-5
     = render partial: 'admin/images/table', object: @shipping_method, as: :imageable

@@ -81,8 +81,8 @@ class Admin::ShippingMethodsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipping_method_params
       params.require(:shipping_method).permit(
-        :name, :shipping_gateway, :enabled_at, :disabled_at,
-        :description, :detail_page_id
+        :name, :shipping_gateway, :delivery_time, :enabled_at, :disabled_at,
+        :description, :shipping_cost_product_id, :detail_page_id
       )
     end
 end
