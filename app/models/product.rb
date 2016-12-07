@@ -9,9 +9,22 @@ class Product < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
-  enum purpose: {vanilla: 0, master: 1, variant: 2, bundle: 3, composite: 4, virtual: 5}
+  enum purpose: {
+    # Regular product
+    vanilla: 0,
+    # Master and its variants
+    master: 1, variant: 2,
+    # Bundles consist solely of their components
+    bundle: 3,
+    # Composites come with their components
+    composite: 4,
+    # Virtual products are intangible, such as services
+    virtual: 5,
+    # Internal products are implied costs and other surcharges
+    internal: 6
+  }
 
-  PURPOSE_ICONS = [nil, 'square', 'sitemap', 'archive', 'object-group', 'magic'].freeze
+  PURPOSE_ICONS = [nil, 'square', 'sitemap', 'archive', 'object-group', 'magic', 'link'].freeze
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
@@ -75,16 +88,18 @@ class Product < ActiveRecord::Base
   # Customer assets referring to this product.
   has_many :customer_assets
 
-  scope :real, -> { where.not(purpose: purposes[:virtual]) }
+  # Real products are everything but internal costs.
+  scope :real, -> { where.not(purpose: purposes[:internal]) }
+
   scope :live, -> { where(live: true) }
   scope :undead, -> { where(live: false) }
 
-  # Products that are shown in storefront views. Vanilla products are
-  # directly purchasable, master products link to their first variant,
+  # Products that are shown in storefront views. Vanilla and virtual products
+  # are directly purchasable, master products link to their first variant,
   # while composite and bundle products will split into their components
   # when purchased.
   scope :visible, -> {
-    live.where(purpose: purposes.slice(:vanilla, :master, :bundle, :composite).values)
+    live.where(purpose: purposes.slice(:vanilla, :master, :bundle, :composite, :virtual).values)
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -260,7 +275,8 @@ class Product < ActiveRecord::Base
     (bundle? || composite?) && component_entries.live.any?
   end
 
-  # Stock is not tracked for master products, bundles, or virtual products.
+  # Stock is not tracked for master products, bundles,
+  # virtual or internal products.
   def tracked_stock?
     vanilla? || variant? || composite?
   end

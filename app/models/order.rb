@@ -249,7 +249,7 @@ class Order < ActiveRecord::Base
   end
 
   # Applies a shipping cost for the current contents of the order.
-  # The shipping cost is an order item referencing a virtual product
+  # The shipping cost is an order item referencing an internal product
   # defined by the store.
   def apply_shipping_cost!
     return if store.shipping_cost_product.nil?
@@ -534,7 +534,7 @@ class Order < ActiveRecord::Base
     end
 
     # Shipping cost does not apply if there's a free shipping threshold
-    # met by the grand total of non-virtual items in the order.
+    # met by the grand total of non-internal items in the order.
     def calculated_shipping_cost
       default_price = store.shipping_cost_product.retail_price
       total = includes_tax? ? grand_total_with_tax(order_items.real) : grand_total_sans_tax(order_items.real)

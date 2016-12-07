@@ -26,6 +26,7 @@ en:
           bundle: product collection
           composite: composite product
           virtual: virtual product
+          internal: internal cost
         sorting:
           manual: manually
           alphabetical: alphabetical

@@ -26,6 +26,7 @@ fi:
           bundle: tuotekokonaisuus
           composite: yhdistelmätuote
           virtual: näennäinen tuote
+          internal: sisäinen kustannus
         sorting:
           manual: käsin
           alphabetical: aakkosjärjestys
