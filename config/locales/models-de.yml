@@ -197,8 +197,6 @@ de:
         locale: Sprache
         allow_shopping: Einkaufen erlauben
         admit_guests: Gäste erlauben
-        free_shipping_at: Versandkostenfrei ab
-        shipping_cost_product_id: Versandkosten
         tracking_code: GA Verfolgungs-Code
         inventory_ids: Lager
       user:

@@ -15,8 +15,6 @@ class Store < ActiveRecord::Base
     :global_sales,    # boolean, do shipping addresses include country selection
     :admit_guests,    # boolean, are guests allowed to shop at the store
     :accept_credit_cards,  # boolean, are credit cards accepted as payment method
-    :shipping_cost_product_id,  # product reference for shipping cost
-    :free_shipping_at,  # order total beyond which shipping cost won't apply
     :tracking_code,   # Google Analytics code
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key
