@@ -116,6 +116,7 @@ class CheckoutController < ApplicationController
       unless @order.paid?
         @order.payments.create(amount: @order.grand_total_with_tax)
       end
+      @order.complete! if @order.should_complete?
       render :success
     else
       redirect_to checkout_path(@order)

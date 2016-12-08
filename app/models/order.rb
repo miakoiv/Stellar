@@ -81,6 +81,9 @@ class Order < ActiveRecord::Base
   #---
   before_save :copy_billing_address, unless: :has_billing_address?
 
+  # Approve the order when approved_at first gets a value.
+  after_save :approve!, if: -> (order) { order.approved_at_changed?(from: nil) }
+
   # Conclude the order when concluded_at first gets a value.
   after_save :conclude!, if: -> (order) { order.concluded_at_changed?(from: nil) }
 
@@ -273,9 +276,21 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Completing an order sets the completion timestamp and
-  # assigns a number from the sequence in the store.
+  # Order should complete when it reaches complete phase at checkout
+  # but hasn't been completed yet.
+  def should_complete?
+    !complete? && checkout_phase == :complete
+  end
+
+  # Completing an order assigns it a number, archives it, and
+  # sends order confirmation(s).
   def complete!
+    assign_number!
+    archive!
+    send_confirmations
+  end
+
+  def assign_number!
     Order.with_advisory_lock('order_numbering') do
       current_max = store.orders.complete.maximum(:number) || store.order_sequence || 0
       update(number: current_max.succ, completed_at: Time.current)
@@ -535,11 +550,17 @@ class Order < ActiveRecord::Base
       self.billing_city = shipping_city
     end
 
-    # Concluding an order archives the order and creates asset entries for it.
+    # Approving an order consumes stock for the ordered items.
+    def approve!
+      reload # to clear changes and prevent a callback loop
+      consume_stock!
+      true
+    end
+
+    # Concluding an order creates asset entries for it.
     def conclude!
       reload # to clear changes and prevent a callback loop
       CustomerAsset.create_from(self)
-      archive!
       true
     end
 end
