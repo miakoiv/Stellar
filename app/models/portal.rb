@@ -12,6 +12,9 @@ class Portal < ActiveRecord::Base
   include Imageable
 
   #---
+  # A portal has one or more hostnames it can be found at.
+  has_many :hostnames, as: :resource, dependent: :destroy
+
   # Portals combine any number of stores together, while
   # stores may belong to multiple portals.
   has_and_belongs_to_many :stores

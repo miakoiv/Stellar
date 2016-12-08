@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207131606) do
+ActiveRecord::Schema.define(version: 20161208121544) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -180,6 +180,18 @@ ActiveRecord::Schema.define(version: 20161207131606) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "hostnames", force: :cascade do |t|
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
+    t.string   "fqdn",          limit: 255,                 null: false
+    t.boolean  "portal",                    default: false, null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "hostnames", ["fqdn"], name: "index_hostnames_on_fqdn", using: :btree
+  add_index "hostnames", ["resource_type", "resource_id"], name: "index_hostnames_on_resource_type_and_resource_id", using: :btree
 
   create_table "iframes", force: :cascade do |t|
     t.integer  "product_id", limit: 4

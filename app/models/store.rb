@@ -40,6 +40,9 @@ class Store < ActiveRecord::Base
   # Home country, used as default shipping and billing country.
   belongs_to :country, foreign_key: :country_code
 
+  # A store has one or more hostnames it can be found at.
+  has_many :hostnames, as: :resource, dependent: :destroy
+
   # A store may appear at multiple portals.
   has_and_belongs_to_many :portals
 
