@@ -380,7 +380,7 @@ class Order < ActiveRecord::Base
   end
 
   def paid?
-    balance_cents <= 0
+    balance <= 0.to_money
   end
 
   def complete?
