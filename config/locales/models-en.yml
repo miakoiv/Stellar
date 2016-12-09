@@ -25,6 +25,9 @@ en:
       department:
         one: department
         other: departments
+      hostname:
+        one: address
+        other: addresses
       iframe:
         one: embed
         other: embeds
@@ -136,6 +139,9 @@ en:
       department:
         name: Name
         category_ids: Categories
+      hostname:
+        fqdn: Hostname
+        is_subdomain: Subdomain
       iframe:
         html: HTML code
       image:
@@ -235,8 +241,9 @@ en:
         amount: Paid
         created_at: Date
       portal:
+        hostnames: Addresses
+        images: Images
         name: Name
-        domain: Domain
         store_ids: Stores
         department_ids: Departments
         theme: Display theme
@@ -345,8 +352,8 @@ en:
         new_tax_category: Set taxation
         upload: File import
         superuser: Advanced
-        host: Server address
-        subdomain: Portal subdomain
+        hostnames: Addresses
+        images: Images
         portal_ids: Portals
         erp_number: ERP number
         name: Name

@@ -79,7 +79,7 @@ class Admin::PortalsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def portal_params
       params.require(:portal).permit(
-        :domain, :name, :theme, :locale, store_ids: []
+        :name, :theme, :locale, store_ids: []
       )
     end
 end

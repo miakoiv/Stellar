@@ -79,14 +79,12 @@ class Admin::StoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(
-        :host, :subdomain, :erp_number, :name,
-        :theme, :locale, :country_code, :brand_image,
-        :card_image_type, :list_image_type,
-        :allow_shopping, :admit_guests,
-        :tracking_code, :tawkto_site_id, :order_sequence,
-        :manufacturer_template_id, :reseller_template_id,
-        :quotation_template_id, :csv_encoding,
-        :csv_product_code, :csv_retail_price, :csv_inventory_amount,
+        :name, :locale, :country_code,
+        :admit_guests, :allow_shopping, :accept_credit_cards,
+        :tracking_code, :tawkto_site_id,
+        :manufacturer_template_id, :reseller_template_id, :quotation_template_id,
+        :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
+        :erp_number, :order_sequence, :theme,
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
           :password, :password_confirmation, :group, role_ids: []

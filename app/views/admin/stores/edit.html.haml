@@ -13,5 +13,16 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-md-6
-    = render partial: 'admin/images/edit_table', object: @store, as: :imageable
-    = render partial: 'admin/images/dropzone', object: @store, as: :imageable
+    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-hostnames', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :hostnames)
+      %li{role: 'presentation'}
+        %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
+          = col(Store, :images)
+    .tab-content
+      #tab-hostnames.tab-pane.fade.in.active
+        = render partial: 'admin/hostnames/edit_table', object: @store, as: :resource
+      #tab-images.tab-pane.fade
+        = render partial: 'admin/images/edit_table', object: @store, as: :imageable
+        = render partial: 'admin/images/dropzone', object: @store, as: :imageable

@@ -25,6 +25,9 @@ fi:
       department:
         one: osasto
         other: osastot
+      hostname:
+        one: osoite
+        other: osoitteet
       iframe:
         one: upotus
         other: upotukset
@@ -136,6 +139,9 @@ fi:
       department:
         name: Nimi
         category_ids: Tuoteryhmät
+      hostname:
+        fqdn: Verkkotunnus
+        is_subdomain: Alitunnus
       iframe:
         html: HTML-koodi
       image:
@@ -235,8 +241,9 @@ fi:
         amount: Maksettu
         created_at: Päiväys
       portal:
+        hostnames: Osoitteet
+        images: Kuvat
         name: Nimi
-        domain: Verkkotunnus
         store_ids: Kaupat
         department_ids: Osastot
         theme: Ulkoasun teema
@@ -345,8 +352,8 @@ fi:
         new_tax_category: Aseta verotus
         upload: Tuontiasetukset
         superuser: Lisäasetukset
-        host: Palvelimen osoite
-        subdomain: Portaalin aladomain
+        hostnames: Osoitteet
+        images: Kuvat
         portal_ids: Portaalit
         erp_number: ERP-numero
         name: Nimi

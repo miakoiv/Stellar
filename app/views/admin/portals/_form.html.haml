@@ -4,7 +4,6 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        = f.text_field :domain, required: true, prepend: 'https://'
         = f.select :store_ids, Portal.store_options, {}, {multiple: true, class: 'selectize'}
         = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
         = f.select :theme, Store.theme_options, {}, {class: 'selectize'}

@@ -1,0 +1,24 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Hostname, :fqdn)
+        %th.col-xs-3= col(Hostname, :is_subdomain)
+        %th.col-xs-1.actions
+
+    %tbody#hostnames-tbody
+      = render partial: 'admin/hostnames/edit_tbody', object: resource, as: :resource
+
+  %table.table.table-loose
+    %tbody
+      = form_for [:admin, resource, resource.hostnames.new], remote: true do |f|
+        %tr
+          %td= f.text_field :fqdn, class: 'form-control'
+          %td.col-xs-3
+            .btn-group{data: {toggle: 'buttons'}}
+              %label.btn.btn-default
+                = f.check_box :is_subdomain
+                = icon('globe')
+          %td.col-xs-1.actions
+            = f.button class: 'btn btn-default' do
+              = icon('check')

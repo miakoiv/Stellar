@@ -47,8 +47,6 @@
         - if current_user.has_cached_role?(:superuser)
           #tab-store-superuser.tab-pane.fade
             %fieldset{disabled: locked}
-              = f.text_field :host, required: true, prepend: 'https://'
-              = f.text_field :subdomain, prepend: 'https://', append: '.portal.com', help: t('.subdomain_help_html')
               = f.number_field :erp_number
               - unless @store.new_record?
                 = f.text_field :slug, readonly: true, help: t('.slug_help_html')

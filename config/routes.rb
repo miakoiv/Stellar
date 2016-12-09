@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   # Portal landing page.
   root 'portal#index'
 
@@ -18,8 +20,6 @@ Rails.application.routes.draw do
     get :duplicate, on: :member
     get :quote, on: :member
   end
-
-  devise_for :users
 
   # Portal routes.
   get '/department/:department_id', to: 'portal#show_department', as: :show_department
@@ -78,12 +78,14 @@ Rails.application.routes.draw do
     get '/reports/sales', to: 'reports#sales', as: :sales_report
 
     resources :portals do
+      resources :hostnames, shallow: true
       resources :images, shallow: true
     end
     resources :departments do
       post :reorder, on: :collection
     end
     resources :stores do
+      resources :hostnames, shallow: true
       resources :images, shallow: true
     end
     resources :categories do

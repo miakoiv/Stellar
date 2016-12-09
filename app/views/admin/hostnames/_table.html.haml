@@ -1,0 +1,11 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Hostname, :fqdn)
+        %th.col-xs-3= col(Hostname, :is_subdomain)
+
+    %tbody#hostnames-tbody
+      = content_tag_for :tr, resource.hostnames do |hostname|
+        %td= hostname.fqdn
+        %td= hostname.is_subdomain? ? icon('globe') : ''

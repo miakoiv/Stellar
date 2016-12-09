@@ -13,4 +13,15 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-md-6
-    = render partial: 'admin/images/table', object: @portal, as: :imageable
+    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
+      %li.active{role: 'presentation'}
+        %a{href: '#tab-hostnames', role: 'tab', data: {toggle: 'tab'}}
+          = col(Portal, :hostnames)
+      %li{role: 'presentation'}
+        %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
+          = col(Portal, :images)
+    .tab-content
+      #tab-hostnames.tab-pane.fade.in.active
+        = render partial: 'admin/hostnames/table', object: @portal, as: :resource
+      #tab-images.tab-pane.fade
+        = render partial: 'admin/images/table', object: @portal, as: :imageable
