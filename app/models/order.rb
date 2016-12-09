@@ -227,7 +227,7 @@ class Order < ActiveRecord::Base
   def reappraise!(pricing_group)
     user_specific = order_type.present? && !is_quote?
     order_items.each do |order_item|
-      next if order_item.product == store.shipping_cost_product
+      next if order_item.product.internal?
       if user_specific
         order_item.update(
           price_cents: user.price_for_cents(order_item.product, pricing_group),
