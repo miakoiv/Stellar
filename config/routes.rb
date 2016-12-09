@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # Portal landing page.
-  root 'portal#index'
+  root 'store#index'
 
   # Catch error conditions early.
   match '(errors)/:status', to: 'errors#show',
@@ -22,8 +21,9 @@ Rails.application.routes.draw do
   end
 
   # Portal routes.
+  get '/browse', to: 'portal#index', as: :portal
+  get '/browse/search', to: 'portal#search', as: :portal_search
   get '/department/:department_id', to: 'portal#show_department', as: :show_department
-  get '/portal/search', to: 'portal#search', as: :portal_search
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store', to: 'store#index', as: :store
