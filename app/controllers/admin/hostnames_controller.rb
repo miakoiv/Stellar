@@ -4,6 +4,8 @@ class Admin::HostnamesController < ApplicationController
 
   before_action :authenticate_user!
 
+  authorize_actions_for Hostname
+
   # No layout, this controller never renders HTML.
 
   # POST /admin/resource/1/hostnames
