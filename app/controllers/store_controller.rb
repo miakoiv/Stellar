@@ -11,7 +11,6 @@ class StoreController < ApplicationController
     super || guest_user
   end
 
-  before_action :conditional_redirect_to_portal
   before_action :set_locale
   before_action :set_mail_host
   before_action :set_pricing_group
@@ -110,10 +109,6 @@ class StoreController < ApplicationController
   end
 
   private
-    def conditional_redirect_to_portal
-      redirect_to portal_path if current_store.nil?
-    end
-
     def set_mail_host
       ActionMailer::Base.default_url_options = {host: current_store.host}
     end

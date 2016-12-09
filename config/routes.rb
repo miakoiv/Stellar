@@ -1,6 +1,20 @@
+class PortalConstraint
+  def matches?(request)
+    hostname = Hostname.find_by(fqdn: request.host)
+    hostname.resource.is_a?(Portal)
+  end
+end
+
 Rails.application.routes.draw do
 
   devise_for :users
+
+  # Portal routes.
+  constraints(PortalConstraint.new) do
+    get '/', to: 'portal#index'
+    get '/search', to: 'portal#search', as: :portal_search
+    get '/department/:department_id', to: 'portal#show_department', as: :show_department
+  end
 
   root 'store#index'
 
@@ -19,11 +33,6 @@ Rails.application.routes.draw do
     get :duplicate, on: :member
     get :quote, on: :member
   end
-
-  # Portal routes.
-  get '/browse', to: 'portal#index', as: :portal
-  get '/browse/search', to: 'portal#search', as: :portal_search
-  get '/department/:department_id', to: 'portal#show_department', as: :show_department
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store', to: 'store#index', as: :store
