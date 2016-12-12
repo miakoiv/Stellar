@@ -2,11 +2,12 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-min.hidden-print
         %th= col(Hostname, :fqdn)
         %th.col-xs-3= col(Hostname, :is_subdomain)
         %th.col-xs-1.actions
 
-    %tbody#hostnames-tbody
+    %tbody#hostnames-tbody.sortable
       = render partial: 'admin/hostnames/edit_tbody', object: resource, as: :resource
 
   %table.table.table-loose
@@ -22,3 +23,14 @@
           %td.col-xs-1.actions
             = f.button class: 'btn btn-default' do
               = icon('check')
+
+:coffee
+  $('#hostnames-tbody').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_hostnames_path}',
+      {reorder: $(this).sortable('toArray')}

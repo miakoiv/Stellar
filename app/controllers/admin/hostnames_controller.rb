@@ -2,8 +2,10 @@
 
 class Admin::HostnamesController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
 
+  authority_actions reorder: 'update'
   authorize_actions_for Hostname
 
   # No layout, this controller never renders HTML.

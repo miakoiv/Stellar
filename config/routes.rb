@@ -163,6 +163,7 @@ Rails.application.routes.draw do
       resources :images, shallow: true
     end
 
+    post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/images/reorder', to: 'images#reorder', as: :reorder_images
     post '/images/delete', to: 'images#delete', as: :delete_image
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes

@@ -4,7 +4,9 @@ class Hostname < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Reorderable
 
+  default_scope { sorted }
   scope :subdomain, -> { where(is_subdomain: true) }
   scope :at, -> (domain) { where('fqdn LIKE ?', "%.#{domain}") }
 

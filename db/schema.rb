@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212084639) do
+ActiveRecord::Schema.define(version: 20161212135131) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 20161212084639) do
     t.string   "resource_type", limit: 255
     t.string   "fqdn",          limit: 255,                 null: false
     t.boolean  "is_subdomain",              default: false, null: false
+    t.integer  "priority",      limit: 4,   default: 0,     null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
   end
