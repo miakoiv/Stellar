@@ -11,7 +11,6 @@ class StoreController < ApplicationController
     super || guest_user
   end
 
-  before_action :set_locale
   before_action :set_mail_host
   before_action :set_pricing_group
 

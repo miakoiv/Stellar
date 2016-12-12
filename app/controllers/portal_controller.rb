@@ -7,7 +7,6 @@ class PortalController < ApplicationController
 
   layout 'portal'
 
-  before_action :set_locale
   before_action :set_stores
   before_action :set_departments
   before_action :find_department, only: [:show_department]
@@ -32,10 +31,6 @@ class PortalController < ApplicationController
   end
 
   private
-
-    def set_locale
-      I18n.locale = params[:locale] || current_portal.locale || I18n.default_locale
-    end
 
     def set_stores
       @stores = current_portal.stores

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   #---
   prepend_before_action :set_current_portal_and_store
+  before_action :set_locale
   after_action :prepare_unobtrusive_flash
 
   #---
