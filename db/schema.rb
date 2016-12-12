@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208121544) do
+ActiveRecord::Schema.define(version: 20161212084639) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -392,14 +392,11 @@ ActiveRecord::Schema.define(version: 20161208121544) do
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "portals", force: :cascade do |t|
-    t.string   "domain",     limit: 255
     t.string   "name",       limit: 255
     t.text     "settings",   limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
-
-  add_index "portals", ["domain"], name: "index_portals_on_domain", unique: true, using: :btree
 
   create_table "portals_stores", id: false, force: :cascade do |t|
     t.integer "portal_id", limit: 4, null: false
@@ -576,8 +573,6 @@ ActiveRecord::Schema.define(version: 20161208121544) do
   add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.string   "host",         limit: 255
-    t.string   "subdomain",    limit: 255
     t.integer  "erp_number",   limit: 4
     t.string   "name",         limit: 255
     t.string   "slug",         limit: 255
@@ -586,8 +581,6 @@ ActiveRecord::Schema.define(version: 20161208121544) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
-
-  add_index "stores", ["host"], name: "index_stores_on_host", unique: true, using: :btree
 
   create_table "tax_categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4
