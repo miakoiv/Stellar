@@ -12,7 +12,7 @@ class OrderMailer < ApplicationMailer
     @store = order.store
 
     headers = {
-      from: "noreply@#{@store.host}",
+      from: "noreply@#{@store.primary_host.fqdn}",
       to: "#{@order.customer_name} <#{@order.customer_email}>",
       subject: default_i18n_subject(store: @store),
       cc: @order.notified_users.map(&:to_s)
@@ -26,7 +26,7 @@ class OrderMailer < ApplicationMailer
     @store = order.store
 
     headers = {
-      from: "noreply@#{@store.host}",
+      from: "noreply@#{@store.primary_host.fqdn}",
       to: @order.contact_string,
       subject: default_i18n_subject(store: @store),
     }
@@ -40,7 +40,7 @@ class OrderMailer < ApplicationMailer
     @order_items = items
 
     headers = {
-      from: "noreply@#{@store.host}",
+      from: "noreply@#{@store.primary_host.fqdn}",
       to: vendor.to_s,
       subject: default_i18n_subject(store: @store)
     }
@@ -53,7 +53,7 @@ class OrderMailer < ApplicationMailer
     @store = order.store
 
     headers = {
-      from: "noreply@#{@store.host}",
+      from: "noreply@#{@store.primary_host.fqdn}",
       to: "#{@order.customer_name} <#{@order.customer_email}>",
       subject: default_i18n_subject(store: @store),
       cc: @order.notified_users.map(&:to_s)
@@ -79,6 +79,6 @@ class OrderMailer < ApplicationMailer
 
   protected
     def roadie_options
-      super.merge(url_options: {host: @store.host, scheme: 'http'})
+      super.merge(url_options: {host: @store.primary_host.fqdn})
     end
 end

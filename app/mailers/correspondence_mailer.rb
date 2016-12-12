@@ -18,6 +18,6 @@ class CorrespondenceMailer < ApplicationMailer
 
   protected
     def roadie_options
-      super.merge(url_options: {host: @store.host, scheme: 'http'})
+      super.merge(url_options: {host: @store.primary_host.fqdn})
     end
 end

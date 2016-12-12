@@ -129,6 +129,11 @@ class Store < ActiveRecord::Base
     hostnames.subdomain.at(domain).first || hostnames.first
   end
 
+  # Returns the first hostname for mailers and such with no request context.
+  def primary_host
+    hostnames.first
+  end
+
   # Properties flagged searchable.
   def searchable_properties
     properties.merge(Property.searchable).merge(Property.sorted)

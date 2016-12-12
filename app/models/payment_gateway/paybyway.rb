@@ -119,7 +119,7 @@ module PaymentGateway
           order_number: number,
           amount: order.grand_total_with_tax.cents,
           currency: order.grand_total_with_tax.currency_as_string,
-          email: "noreply@#{order.store.host}",
+          email: "noreply@#{order.store.primary_host.fqdn}",
           authcode: sha256(@private_key, "#{@api_key}|#{number}"),
           customer: {
             firstname: first,
