@@ -123,6 +123,12 @@ class Store < ActiveRecord::Base
     }
   end
 
+  # Tries to find a subdomain hostname for this store at given domain,
+  # defaulting to any hostname at all.
+  def hostname_at(domain)
+    hostnames.subdomain.at(domain).first || hostnames.first
+  end
+
   # Properties flagged searchable.
   def searchable_properties
     properties.merge(Property.searchable).merge(Property.sorted)
