@@ -110,7 +110,7 @@ class StoreController < ApplicationController
 
   private
     def set_mail_host
-      ActionMailer::Base.default_url_options = {host: current_store.host}
+      ActionMailer::Base.default_url_options = {host: request.host}
     end
 
     def set_categories
