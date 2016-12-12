@@ -30,7 +30,6 @@ class Portal < ActiveRecord::Base
 
   #---
   validates :name, presence: true
-  validates :domain, presence: true, uniqueness: true
 
   #---
   def self.store_options
