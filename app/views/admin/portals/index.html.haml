@@ -24,8 +24,8 @@
           - portal.departments.each do |department|
             %span.label.label-default= department
         %td.actions
-          - if current_portal != portal
-            = link_to icon('bookmark', t('actions.select')), root_url(host: portal.domain), class: 'btn btn-default btn-sm'
+          - if current_portal != portal && portal.hostnames.any?
+            = link_to icon('bookmark', t('actions.select')), root_url(host: portal.hostnames.first.fqdn), class: 'btn btn-default btn-sm'
           = link_to icon('info', t('actions.show')), admin_portal_path(portal), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(Portal)
             = link_to icon('edit', t('actions.edit')), edit_admin_portal_path(portal), class: 'btn btn-default btn-sm'

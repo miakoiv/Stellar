@@ -1,7 +1,7 @@
 - size = product.limelightable? && rand < 0.333 ? 'double' : 'single'
 - cache [I18n.locale, size, :portal_product_card, product] do
   = content_tag_for :li, product, class: "masonry-item #{size}" do
-    = link_to show_product_url(product.category, product, subdomain: product.store.subdomain) do
+    = link_to show_product_url(product.category, product, host: product.store.hostname_at(request.domain).fqdn) do
       .product-image= image_variant_tag product.cover_image, :postcard
       .product-text
         %h3
