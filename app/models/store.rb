@@ -113,7 +113,7 @@ class Store < ActiveRecord::Base
   #---
   # Defaults for guest users reveal pricing and stock, and will allow shopping
   # if admit_guests is also enabled, to get in without authentication.
-  def guest_user_defaults
+  def guest_user_defaults(host)
     name = "#{Time.now.to_i}#{rand(100)}"
     {
       name: name,

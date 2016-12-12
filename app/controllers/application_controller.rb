@@ -143,7 +143,7 @@ class ApplicationController < ActionController::Base
     # Create a record for a guest user and schedule its cleanup
     # to happen after two weeks.
     def create_guest_user
-      guest = @current_store.users.new(@current_store.guest_user_defaults)
+      guest = @current_store.users.new(@current_store.guest_user_defaults(request.host))
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
