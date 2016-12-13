@@ -345,6 +345,7 @@ fi:
         not_active: Ei voimassa
         description: Kuvaus
         shipping_cost_product_id: Toimituskustannusten tuote
+        free_shipping_from: Ilmainen toimitus alkaen
         detail_page_id: Lisätietosivu
       store:
         admin: Asetukset

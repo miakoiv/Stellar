@@ -82,7 +82,8 @@ class Admin::ShippingMethodsController < ApplicationController
     def shipping_method_params
       params.require(:shipping_method).permit(
         :name, :shipping_gateway, :delivery_time, :enabled_at, :disabled_at,
-        :description, :shipping_cost_product_id, :detail_page_id
+        :description, :shipping_cost_product_id, :free_shipping_from,
+        :detail_page_id
       )
     end
 end

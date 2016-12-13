@@ -345,6 +345,7 @@ en:
         not_active: Not in effect
         description: Description
         shipping_cost_product_id: Shipping cost product
+        free_shipping_from: Free shipping from
         detail_page_id: Information page
       store:
         admin: Settings

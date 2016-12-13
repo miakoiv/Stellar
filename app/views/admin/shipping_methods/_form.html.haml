@@ -9,6 +9,7 @@
         = f.text_field :enabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.text_field :disabled_at, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
         = f.select :shipping_cost_product_id, current_store.products.internal.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
+        = f.text_field :free_shipping_from, append: '€', class: 'text-right'
         = f.select :detail_page_id, current_store.pages.secondary.map { |p| [p.to_s, p.id] }, {include_blank: blank, help: t('.detail_page_help')}, {class: 'selectize'}
         = f.text_area :description
       - unless locked

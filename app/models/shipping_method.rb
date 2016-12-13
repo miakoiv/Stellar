@@ -6,6 +6,8 @@ class ShippingMethod < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
 
+  monetize :free_shipping_from_cents, allow_nil: true
+
   #---
   belongs_to :store
   has_many :shipments
