@@ -58,6 +58,8 @@ Rails.application.routes.draw do
   # 6) verify credit card payment or return from online payment
   post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
+  # 6b) handle online payment notify if the user failed to return herself
+  get  '/checkout/:order_id/notify', to: 'checkout#notify', as: :notify
   # 7) show a receipt
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 

@@ -35,7 +35,7 @@ module PaymentGateway
 
     include ActiveModel::Model
 
-    attr_accessor :order, :return_url
+    attr_accessor :order, :return_url, :notify_url
 
     def initialize(attributes = {})
       super
@@ -67,7 +67,7 @@ module PaymentGateway
       request = token_request(payment_method: {
         type: 'e-payment',
         return_url: return_url,
-        notify_url: return_url,
+        notify_url: notify_url,
         lang: 'fi',
         token_valid_until: (Time.current + 6.hours).to_i,
         selected: [params[:selected]]

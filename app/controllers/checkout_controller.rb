@@ -9,7 +9,7 @@ class CheckoutController < ApplicationController
 
   before_action :authenticate_user_or_skip!
   before_action :set_pages
-  before_action :set_order
+  before_action :set_order, except: [:notify]
   before_action :set_pricing_group
 
   # POST /checkout/1/order_type/2.js
@@ -81,7 +81,7 @@ class CheckoutController < ApplicationController
     method = params[:method]
 
     if method.present? && @order.has_payment?
-      @payment_gateway = @order.payment_gateway_class.new(order: @order, return_url: return_url(@order))
+      @payment_gateway = @order.payment_gateway_class.new(order: @order, return_url: return_url(@order), notify_url: notify_url(@order))
       response = @payment_gateway.send("charge_#{method}", params)
       render json: response
     else
@@ -120,6 +120,27 @@ class CheckoutController < ApplicationController
       render :success
     else
       redirect_to checkout_path(@order)
+    end
+  end
+
+  # GET /checkout/1/notify
+  # This action is reached without an active session when the payment
+  # gateway performs a notify call after the user has failed to return
+  # from the payment gateway. Therefore there is no current user and
+  # no client to render any views to.
+  def notify
+    @order = Order.find(params[:order_id])
+    @payment_gateway = @order.payment_gateway_class.new(order: @order)
+    status = @payment_gateway.return(params)
+
+    if status
+      unless @order.paid?
+        @order.payments.create(amount: @order.grand_total_with_tax)
+      end
+      @order.complete! if @order.should_complete?
+      render nothing: true, status: :ok
+    else
+      render nothing: true, status: :unprocessable_entity
     end
   end
 
