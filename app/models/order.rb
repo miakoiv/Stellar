@@ -297,7 +297,7 @@ class Order < ActiveRecord::Base
 
   def assign_number!
     Order.with_advisory_lock('order_numbering') do
-      current_max = store.orders.complete.maximum(:number) || store.order_sequence.presence || 0
+      current_max = store.orders.complete.maximum(:number).presence || store.order_sequence.presence || 0
       update(number: current_max.succ, completed_at: Time.current)
     end
   end
