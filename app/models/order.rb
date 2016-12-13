@@ -255,9 +255,14 @@ class Order < ActiveRecord::Base
   # Existing shipping costs are removed first.
   def apply_shipping_cost!(shipping_method, pricing = nil)
     clear_shipping_costs!
-    return if shipping_method.shipping_cost_product.nil?
-    item = insert(shipping_method.shipping_cost_product, 1, pricing)
-    item.update(priority: 1e9)
+    product = shipping_method.shipping_cost_product
+    return if product.nil?
+    threshold = shipping_method.free_shipping_from
+    total = includes_tax? ? grand_total_with_tax : grand_total_sans_tax
+    if threshold.nil? || total < threshold
+      item = insert(product, 1, pricing)
+      item.update(priority: 1e9)
+    end
     order_items.reload
   end
 
