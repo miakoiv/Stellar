@@ -7,7 +7,7 @@ en:
     order_cancellation:
       subject: "Order cancelled"
       title: Order cancellation
-      body_html: <p>Your order from %{store} has been cancelled.</p>
+      body_html: <p>Your order № %{order} from %{store} has been cancelled.</p>
     order_notification:
       subject: "Delivery note from %{store}"
       title: Delivery note

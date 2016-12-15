@@ -7,7 +7,7 @@ fi:
     order_cancellation:
       subject: "%{store} – Tilauksen peruutus"
       title: Tilauksen peruutus
-      body_html: <p>Tilauksenne on peruttu.</p>
+      body_html: <p>Tilauksenne nro %{order} on peruttu.</p>
     order_notification:
       subject: "%{store} – Lähete"
       title: Lähete

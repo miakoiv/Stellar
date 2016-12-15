@@ -206,6 +206,7 @@ en:
         shipping_postalcode: Postal code
         shipping_city: City
         shipping_country_code: Country
+        shipping_method: Shipping
         notes: Notes
         store_name: Store
         user_name: Customer

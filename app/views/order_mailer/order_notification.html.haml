@@ -60,6 +60,12 @@
                           %br
                           %b= @order.shipping_postalcode
                           %b= @order.shipping_city
+                    - @order.shipments.each do |shipment|
+                      %tr
+                        %td
+                          = Order.human_attribute_name(:shipping_method)
+                        %td
+                          %b= shipment.shipping_method.name
                     %tr
                       %td= Order.human_attribute_name(:order_type_id)
                       %td

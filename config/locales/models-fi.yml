@@ -206,6 +206,7 @@ fi:
         shipping_postalcode: Postinro
         shipping_city: Toimipaikka
         shipping_country_code: Maa
+        shipping_method: Toimitus
         notes: Lisätietoja
         store_name: Kauppa
         user_name: Tilaaja
