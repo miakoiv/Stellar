@@ -185,7 +185,7 @@ fi:
         user_id: Tilaaja
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm
-        shipping_at: Toimituspvm
+        shipping_at: Haluttu toimituspvm
         installation_at: Asennuspvm
         approved_at: Hyväksytty
         concluded_at: Päätetty
@@ -201,12 +201,12 @@ fi:
         contact_email: Sähköpostiosoite
         contact_phone: Puhelinnumero
         billing_address: Laskutusosoite
-        billing_postalcode: Postinro
+        billing_postalcode: Postinumero
         billing_city: Toimipaikka
         billing_country_code: Maa
         has_billing_address: Laskutus eri osoitteeseen kuin toimitus
         shipping_address: Toimitusosoite
-        shipping_postalcode: Postinro
+        shipping_postalcode: Postinumero
         shipping_city: Toimipaikka
         shipping_country_code: Maa
         shipping_method: Toimitus
@@ -399,11 +399,11 @@ fi:
         email: Sähköpostiosoite
         phone: Puhelinnumero
         billing_address: Laskutusosoite
-        billing_postalcode: Postinro
+        billing_postalcode: Postinumero
         billing_city: Toimipaikka
         billing_country_code: Maa
         shipping_address: Toimitusosoite
-        shipping_postalcode: Postinro
+        shipping_postalcode: Postinumero
         shipping_city: Toimipaikka
         shipping_country_code: Maa
         password: Salasana

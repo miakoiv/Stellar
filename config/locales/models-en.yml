@@ -185,8 +185,8 @@ en:
         user_id: From
         order_type_id: Order type
         completed_at: Ordered
-        shipping_at: Shipment
-        installation_at: Installation
+        shipping_at: Requested shipping at
+        installation_at: Installation at
         approved_at: Approved
         concluded_at: Concluded
         status: Status
