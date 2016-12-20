@@ -46,7 +46,7 @@ class StoreController < ApplicationController
   # GET /cart
   def cart
     @order = shopping_cart
-    return redirect_to store_path if @order.empty?
+    return redirect_to front_path if @order.empty?
   end
 
   # GET /cart/delete
@@ -54,7 +54,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @order.destroy
 
-    redirect_to store_path, notice: t('.notice')
+    redirect_to front_path, notice: t('.notice')
   end
 
   # GET /store/search
