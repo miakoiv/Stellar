@@ -2,4 +2,4 @@
   %span#cart-badge.badge
 - else
   %span#cart-badge.badge.animated.infinite.tada<
-    = shopping_cart.order_items.real.count
+    = shopping_cart.order_items.real.sum(:amount)
