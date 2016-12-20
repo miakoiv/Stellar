@@ -21,7 +21,8 @@
       .product-detail
         = render partial: 'products/product_detail', object: @product, as: :product
 
-:coffee
-  jQuery ->
-    if $(window).isSmall()
-      $(window).scrollTo $('#product-detail-wrap'), 300, offset: -$('#main-nav').height()
+- if current_store.wiselinks?
+  :coffee
+    jQuery ->
+      if $(window).isSmall()
+        $(window).scrollTo $('#product-detail-wrap'), 300, offset: -$('#main-nav').height()

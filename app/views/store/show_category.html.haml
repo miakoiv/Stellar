@@ -27,7 +27,8 @@
     #product-detail-wrap
       .product-detail{style: 'display: none'}
 
-:coffee
-  jQuery ->
-    if $(window).isSmall()
-      $(window).scrollTo $('#products-wrap'), 300, offset: -$('#main-nav').height()
+- if current_store.wiselinks?
+  :coffee
+    jQuery ->
+      if $(window).isSmall()
+        $(window).scrollTo $('#products-wrap'), 300, offset: -$('#main-nav').height()
