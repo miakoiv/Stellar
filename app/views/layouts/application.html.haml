@@ -6,7 +6,7 @@
     = render partial: 'shared/external_scripts'
     = render partial: 'favicon'
 
-  %body{class: current_theme}
+  %body{class: current_store.wiselinks? ? "wiselinks #{current_theme}" : current_theme}
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .content
         .navbar-charms

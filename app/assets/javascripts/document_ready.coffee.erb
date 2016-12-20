@@ -57,8 +57,6 @@ $.fn.extend
 
 jQuery ->
 
-  window.wiselinks = new Wiselinks()
-
   $('body').css('margin-bottom', 30 + $('.footer').height())
 
   $(document).initialize()
@@ -79,12 +77,3 @@ jQuery ->
   $(document).on 'click', 'a[href="#print"]', (e) ->
     e.preventDefault()
     $.print()
-
-  $(document).on 'page:loading', -> NProgress.start()
-  $(document).on 'page:always', -> NProgress.done()
-
-  $(document).on 'page:done', (event, $target, status, url, data) ->
-    $.SmartMenus.Bootstrap.init()
-    $(document).rebuild_parallax()
-    $(document).rebuild_masonry()
-    ga?('send', 'pageview', window.location.pathname)
