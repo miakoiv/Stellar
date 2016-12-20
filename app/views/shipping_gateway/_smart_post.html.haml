@@ -13,11 +13,12 @@
           = icon('search', t('.zipcode'))
 
 = form_tag ship_path(@order, @shipping_method), remote: true, id: 'smartpost-form' do
+  = hidden_field_tag 'metadata'
   .form-group
     .btn-group-vertical.center-block{data: {toggle: 'buttons'}}
       - locations.each do |loc|
         %label.btn.btn-default{style: 'text-align: left;'}
-          = radio_button_tag 'metadata[pup_code]', loc['PupCode']
+          = radio_button_tag 'pup_code', loc['PupCode']
           %strong= loc['PublicName']
           = loc['Address']
           = loc['Municipality']
@@ -28,6 +29,7 @@
 :coffee
   postcode = #{postcode.to_json}
   locations = #{locations.to_json}
+  metadata = {}
 
   $map = $('#map')[0]
   markers = {}
@@ -37,11 +39,12 @@
     mapTypeControl: false
     streetViewControl: false
   for loc in locations
+    metadata[loc.PupCode] = loc
     marker = new google.maps.Marker
       map: map
       position: {lat: loc.MapLatitude, lng: loc.MapLongitude}
       title: loc.PublicName + "\n" + loc.Address
-      target: '#metadata_pup_code_' + loc.PupCode
+      target: '#pup_code_' + loc.PupCode
     marker.activate = ->
       v.setAnimation null for k, v of markers
       map.panTo this.getPosition()
@@ -49,8 +52,10 @@
     marker.addListener 'click', ->
       this.activate()
       $(this.target).trigger 'click'
-    markers['metadata_pup_code_' + loc.PupCode] = marker
+    markers['pup_code_' + loc.PupCode] = marker
 
   $('#smartpost-form').on 'change', (e) ->
+    meta = metadata[$(e.target).val()]
+    $('#metadata').val JSON.stringify(meta)
     markers[e.target.id].activate()
     $('.ship-button').collapse 'show'
