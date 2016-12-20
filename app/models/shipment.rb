@@ -14,6 +14,11 @@ class Shipment < ActiveRecord::Base
   end
 
   #---
+  def parsed_metadata
+    return {} if metadata.blank?
+    JSON.parse(metadata) rescue eval(metadata)
+  end
+
   def shipping_gateway
     "ShippingGateway::#{shipping_method.shipping_gateway}".constantize
   end

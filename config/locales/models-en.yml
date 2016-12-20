@@ -85,6 +85,9 @@ en:
       role:
         one: role
         other: roles
+      shipment:
+        one: shipment
+        other: shipments
       shipping_method:
         one: shipping method
         other: shipping methods
@@ -336,6 +339,7 @@ en:
         number: Number
         shipped_at: Shipping date
         cancelled_at: Cancellation date
+        metadata: Details
       shipping_method:
         name: Name
         shipping_gateway: Shipping mode

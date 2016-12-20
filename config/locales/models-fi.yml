@@ -85,6 +85,9 @@ fi:
       role:
         one: rooli
         other: roolit
+      shipment:
+        one: toimitus
+        other: toimitukset
       shipping_method:
         one: toimitustapa
         other: toimitustavat
@@ -336,6 +339,7 @@ fi:
         number: Numero
         shipped_at: Toimituspvm
         cancelled_at: Peruutuspvm
+        metadata: Yksityiskohdat
       shipping_method:
         name: Nimi
         shipping_gateway: Toimintamalli
