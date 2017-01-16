@@ -10,3 +10,4 @@ jQuery ->
       $(document).rebuild_parallax()
       $(document).rebuild_masonry()
       ga?('send', 'pageview', window.location.pathname)
+      fbq?('track', 'PageView')

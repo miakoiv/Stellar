@@ -371,6 +371,7 @@ fi:
         admit_guests: Salli pääsy kauppaan vieraana
         accept_credit_cards: Hyväksy luottokorttimaksut
         tracking_code: Google Analytics -koodi
+        facebook_pixel_id: Facebook-pikselitunnus
         tawkto_site_id: tawk.to -tunnus
         order_sequence: Tilausnumerointi
         inventory_ids: Varastot

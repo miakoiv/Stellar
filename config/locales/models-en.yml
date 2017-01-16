@@ -371,6 +371,7 @@ en:
         admit_guests: Admit guests to the store
         accept_credit_cards: Accept credit card payments
         tracking_code: Google Analytics key
+        facebook_pixel_id: Facebook Pixel ID
         tawkto_site_id: tawk.to site
         order_sequence: Order numbering
         inventory_ids: Inventories

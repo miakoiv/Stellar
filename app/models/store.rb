@@ -17,6 +17,7 @@ class Store < ActiveRecord::Base
     :admit_guests,    # boolean, are guests allowed to shop at the store
     :accept_credit_cards,  # boolean, are credit cards accepted as payment method
     :tracking_code,   # Google Analytics code
+    :facebook_pixel_id, # Facebook Pixel id
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
