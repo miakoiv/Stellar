@@ -1,4 +1,5 @@
 xml.order do
+  xml.storeNumber @order.store.erp_number
   xml.customerReference @order.our_reference
   xml.ourReference @order.your_reference
   xml.message @order.message
