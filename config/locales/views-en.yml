@@ -259,6 +259,7 @@ en:
     select_shipping_method: Select shipping method
     delivery_time: Please allow %{days} business days for delivery.
     ship: Select this shipping method
+    business_orders_only: These fields for business orders only
     receipt: Receipt
     creditcard_payment: Credit card payment
     e_payment: Online payment

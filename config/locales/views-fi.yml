@@ -239,6 +239,7 @@ fi:
     select_shipping_method: Valitse toimitustapa
     delivery_time: Toimitusaika-arvio %{days} arkipäivää.
     ship: Valitse tämä toimitustapa
+    business_orders_only: Nämä tiedot vain yritystilauksille
     receipt: Kuitti
     creditcard_payment: Maksa luottokortilla
     e_payment: Maksa luottokortilla tai nettipankissa

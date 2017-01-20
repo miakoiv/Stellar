@@ -49,7 +49,8 @@
             = f.text_field :billing_city
           .col-sm-4.collapse{class: current_store.global_sales? ? 'in' : ''}
             = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
-  %fieldset.gap
+  %fieldset.bg-warning
+    %p.text-warning= icon('exclamation-circle', t('checkout.business_orders_only'))
     .row
       .col-sm-6
         = f.text_field :message
@@ -64,6 +65,7 @@
         = f.text_field :your_reference
       .col-sm-6
         = f.text_field :our_reference
+  %fieldset.gap
     = f.text_area :notes, rows: 4
 
   #continue-order.hidden-print
