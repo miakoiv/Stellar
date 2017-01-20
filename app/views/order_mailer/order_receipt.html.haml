@@ -26,26 +26,11 @@
                       %td= Order.human_attribute_name(:customer_phone)
                       %td
                         %b= @order.customer_phone
-                    %tr
-                      %td= Order.human_attribute_name(:company_name)
-                      %td
-                        %b= @order.company_name
-                    %tr
-                      %td= Order.human_attribute_name(:contact_person)
-                      %td
-                        %b= @order.contact_person
-                      %td= Order.human_attribute_name(:contact_phone)
-                      %td
-                        %b= @order.contact_phone
                     - if @order.has_shipping?
                       %tr
                         %td= Order.human_attribute_name(:shipping_at)
                         %td
                           %b= @order.shipping_at.present? ? l(@order.shipping_at) : ''
-                        - if @order.has_installation?
-                          %td= Order.human_attribute_name(:installation_at)
-                          %td
-                            %b= @order.installation_at.present? ? l(@order.installation_at) : ''
                       %tr
                         %td
                           = Order.human_attribute_name(:billing_address)
@@ -120,6 +105,31 @@
                         = Order.human_attribute_name(:grand_total)
                       %td.alignright.nowrap
                         = humanized_money_with_symbol @order.includes_tax? ? @order.grand_total_with_tax : @order.grand_total_sans_tax
+              %tr
+                %td
+                  %table.invoice-items{cellpadding: 5, cellspacing: 0}
+                    %tr
+                      %td= TaxCategory.human_attribute_name(:rate)
+                      %td.alignright= Order.human_attribute_name(:total_sans_tax)
+                      %td.alignright= Order.human_attribute_name(:tax_total)
+                      %td.alignright= Order.human_attribute_name(:total_with_tax)
+                    - @order.order_items.group_by(&:tax_rate).each do |tax_rate, items|
+                      %tr
+                        %td= number_to_percentage tax_rate, precision: 0
+                        %td.alignright.nowrap
+                          = humanized_money_with_symbol @order.grand_total_sans_tax(items)
+                        %td.alignright.nowrap
+                          = humanized_money_with_symbol @order.tax_total(items)
+                        %td.alignright.nowrap
+                          = humanized_money_with_symbol @order.grand_total_with_tax(items)
+                    %tr
+                      %th.alignright.nowrap= Order.human_attribute_name(:grand_total)
+                      %th.alignright.nowrap
+                        = humanized_money_with_symbol @order.grand_total_sans_tax
+                      %th.alignright.nowrap
+                        = humanized_money_with_symbol @order.tax_total
+                      %th.alignright.nowrap
+                        = humanized_money_with_symbol @order.grand_total_with_tax
 
 .footer
   %table{width: '100%'}

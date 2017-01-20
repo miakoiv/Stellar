@@ -20,6 +20,21 @@ class OrderMailer < ApplicationMailer
     roadie_mail(headers)
   end
 
+  # Order receipt sent instead of confirmation in non-b2b stores.
+  # Carbon copies as per confirmation, but blind.
+  def order_receipt(order)
+    @order = order
+    @store = order.store
+
+    headers = {
+      from: "noreply@#{@store.primary_host.fqdn}",
+      to: "#{@order.customer_name} <#{@order.customer_email}>",
+      subject: default_i18n_subject(store: @store),
+      bcc: @order.notified_users.map(&:to_s)
+    }
+    roadie_mail(headers)
+  end
+
   # Order notification for the contact person.
   def order_notification(order)
     @order = order

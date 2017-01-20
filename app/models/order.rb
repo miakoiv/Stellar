@@ -329,12 +329,13 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Sends an order confirmation to the customer, and additional notifications
-  # to vendors if the order contains any of their products. A separate order
-  # notification is sent to the contact person, if applicable.
+  # Sends an order confirmation/receipt to the customer, and additional
+  # notifications to vendors if the order contains any of their products.
+  # A separate order notification is sent to the contact person, if applicable.
   def send_confirmations
     return unless send_confirmation?
-    OrderMailer.order_confirmation(self).deliver_later
+    method = store.b2b_sales? ? :order_confirmation : :order_receipt
+    OrderMailer.send(method, self).deliver_later
     OrderMailer.order_notification(self).deliver_later if has_contact_info?
     items_by_vendor.each do |vendor, items|
       OrderMailer.vendor_notification(self, vendor, items).deliver_later

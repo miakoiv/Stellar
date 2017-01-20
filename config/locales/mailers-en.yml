@@ -4,6 +4,10 @@ en:
       subject: "Order confirmation from %{store}"
       title: Order confirmation
       thank_you: "Thank you for shopping at %{store}!"
+    order_receipt:
+      subject: "Receipt for your order from %{store}"
+      title: Receipt
+      thank_you: "Thank you for shopping at %{store}!"
     order_cancellation:
       subject: "Order cancelled"
       title: Order cancellation

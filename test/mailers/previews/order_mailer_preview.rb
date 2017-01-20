@@ -9,6 +9,9 @@ class OrderMailerPreview < ActionMailer::Preview
       define_method "order_confirmation (#{store} #{order})" do
         OrderMailer.order_confirmation(order)
       end
+      define_method "order_receipt (#{store} #{order})" do
+        OrderMailer.order_receipt(order)
+      end
       define_method "order_notification (#{store} #{order})" do
         OrderMailer.order_notification(order)
       end
