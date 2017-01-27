@@ -7,10 +7,10 @@
     %li{role: 'presentation'}
       %a{href: '#tab-product-text', role: 'tab', data: {toggle: 'tab'}}
         = col(Product, :text)
-    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
+    %li.master-disable{role: 'presentation', class: @product.master? && 'disabled'}
       %a{href: '#tab-product-pricing', role: 'tab', data: {toggle: 'tab'}}
         = col(Product, :pricing)
-    %li.master-disable{role: 'presentation', class: @product.master? ? 'disabled' : ''}
+    %li.master-disable{role: 'presentation', class: @product.master? && 'disabled'}
       %a{href: '#tab-product-shipping', role: 'tab', data: {toggle: 'tab'}}
         = col(Product, :shipping)
 
@@ -20,18 +20,18 @@
         #tab-product-meta.tab-pane.fade.in.active
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
-            .variant-only.collapse{class: @product.variant? ? 'in' : ''}
+            .variant-only.collapse{class: @product.variant? && 'in'}
               = f.select :master_product_id, @product.master_product_options, {include_blank: blank}, {class: 'selectize'}
-            .master-only.collapse{class: @product.master? ? 'in' : ''}
+            .master-only.collapse{class: @product.master? && 'in'}
               = f.select :variant_ids, @product.available_variant_options, {}, {multiple: true, class: 'selectize'}
             = f.select :category_ids, current_user.category_options, {}, {multiple: true, class: 'selectize'}
             = f.select :vendor_id, current_store.users.vendor.map { |u| [u.name, u.id] }, {include_blank: blank}, {class: 'selectize', disabled: current_user.vendor?}
             = f.text_field :code, required: true
             = f.text_field :customer_code
             = f.text_field :available_at,
-                data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             = f.text_field :deleted_at,
-                data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             = f.text_area :memo, rows: 2
 
         #tab-product-text.tab-pane.fade
@@ -62,9 +62,9 @@
                   = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
                   %span.input-group-addon €
                 .help-block
-                  #tax-included.collapse{class: @product.tax_category.included_in_retail? ? 'in' : ''}
+                  #tax-included.collapse{class: @product.tax_category.included_in_retail? && 'in'}
                     = t('.tax_included_in_retail_html')
-                  #tax-excluded.collapse{class: @product.tax_category.included_in_retail? ? '' : 'in'}
+                  #tax-excluded.collapse{class: @product.tax_category.included_in_retail? || 'in'}
                     = t('.tax_excluded_in_retail_html')
               .col-sm-4
                 .input-group

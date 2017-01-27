@@ -13,9 +13,9 @@
         .col-sm-8.col-md-4
           .form-group
             .input-group
-              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
               %span.input-group-addon= icon('ellipsis-h')
-              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         .col-sm-4.col-md-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

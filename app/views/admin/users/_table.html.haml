@@ -21,6 +21,6 @@
           - if current_user.can_delete?(User)
             = link_to icon('remove', t('actions.delete')), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
                   klass: User.model_name.human, name: user.name),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+                  'confirm-title': t('actions.confirm.title'),
+                  'confirm-proceed': t('actions.confirm.proceed'),
+                  'confirm-cancel': t('actions.confirm.cancel')}

@@ -40,7 +40,7 @@
                         %td
                           = Order.human_attribute_name(:shipping_at)
                         %td
-                          %b= @order.shipping_at.present? ? l(@order.shipping_at) : ''
+                          %b= @order.shipping_at.present? ? l(@order.shipping_at) : nil
                     - if @order.has_shipping?
                       %tr
                         %td

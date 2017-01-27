@@ -3,9 +3,9 @@
   %td= l(order.completed_at.to_date)
   - if current_store.b2b_sales?
     %td= order.summary
-  %td= order.shipping_at.present? ? l(order.shipping_at) : ''
+  %td= order.shipping_at.present? ? l(order.shipping_at) : nil
   - if current_store.b2b_sales?
-    %td= order.installation_at.present? ? l(order.installation_at) : ''
+    %td= order.installation_at.present? ? l(order.installation_at) : nil
   %td= order.customer_name
   %td.text-right= order.order_items_count
   %td.text-right.currency

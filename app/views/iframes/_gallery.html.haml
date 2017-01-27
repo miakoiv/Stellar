@@ -1,5 +1,5 @@
 - product.iframes.each do |iframe|
-  .iframe{id: dom_id(iframe), class: inline ? '' : 'iframe-popup mfp-hide'}
+  .iframe[iframe]{class: inline || 'iframe-popup mfp-hide'}
     = iframe
 
 - unless inline

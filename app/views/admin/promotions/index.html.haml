@@ -16,15 +16,15 @@
 
     %tbody
       - @promotions.each do |promotion|
-        = content_tag_for :tr, promotion, class: promotion.active? ? '' : 'warning text-warning' do
+        = content_tag_for :tr, promotion, class: promotion.active? ? nil : 'warning text-warning' do
           %td= promotion.name
           %td= title(promotion.promotion_handler)
           %td
             - if promotion.active?
-              = promotion.first_date.present? ? l(promotion.first_date) : ''
+              = promotion.first_date.present? ? l(promotion.first_date) : nil
             - else
-              = icon('warning', promotion.first_date.present? ? l(promotion.first_date) : '', data: {toggle: 'tooltip'}, title: col(Promotion, :not_active))
-          %td= promotion.last_date.present? ? l(promotion.last_date) : ''
+              = icon('warning', promotion.first_date.present? ? l(promotion.first_date) : nil, data: {toggle: 'tooltip'}, title: col(Promotion, :not_active))
+          %td= promotion.last_date.present? ? l(promotion.last_date) : nil
           %td.actions
             = link_to icon('info', t('actions.show')), admin_promotion_path(promotion),
                 class: 'btn btn-default btn-sm'
@@ -36,6 +36,6 @@
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: Promotion.model_name.human, name: promotion.name),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}

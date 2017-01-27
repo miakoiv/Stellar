@@ -39,11 +39,11 @@
                       %tr
                         %td= Order.human_attribute_name(:shipping_at)
                         %td
-                          %b= @order.shipping_at.present? ? l(@order.shipping_at) : ''
+                          %b= @order.shipping_at.present? ? l(@order.shipping_at) : nil
                         - if @order.has_installation?
                           %td= Order.human_attribute_name(:installation_at)
                           %td
-                            %b= @order.installation_at.present? ? l(@order.installation_at) : ''
+                            %b= @order.installation_at.present? ? l(@order.installation_at) : nil
                     - if @order.has_shipping?
                       %tr
                         %td

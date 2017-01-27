@@ -4,9 +4,9 @@
     .panel-body
       - if @order.incoming_for?(current_user)
         %fieldset.bg-warning{disabled: locked}
-          = f.text_field :approved_at, disabled: @order.concluded?, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}, help: t('.approved_at_help')
-          .conclusion.collapse{class: @order.approved? ? 'in' : ''}
-            = f.text_field :concluded_at, disabled: !@order.approved? || @order.concluded?, data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}, help: t('.concluded_at_help')
+          = f.text_field :approved_at, disabled: @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.approved_at_help')
+          .conclusion.collapse{class: @order.approved? && 'in'}
+            = f.text_field :concluded_at, disabled: !@order.approved? || @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.concluded_at_help')
       %fieldset.gap{disabled: true}
         = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.bg-info{disabled: locked}
@@ -20,8 +20,8 @@
         = f.text_field :customer_email, required: true
         = f.telephone_field :customer_phone, required: true
         - if @order.has_shipping?
-          = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
-          = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+          = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+          = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.text_field :contact_email

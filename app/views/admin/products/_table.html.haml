@@ -14,7 +14,7 @@
     %tbody
       - products.each do |product|
         - cache [I18n.locale, :admin_product_row, product] do
-          = content_tag_for :tr, product, class: product.live? ? '' : 'warning text-warning' do
+          = content_tag_for :tr, product, class: product.live? ? nil : 'warning text-warning' do
             %td= image_variant_tag product.cover_image, :icon
             %td
               %strong= product.title
@@ -35,9 +35,9 @@
                 = link_to icon('copy', t('.duplicate.button')), duplicate_admin_product_path(product), method: :post, class: 'btn btn-warning btn-sm',
                     data: {confirm: t('.duplicate.confirm',
                       klass: Product.model_name.human, name: product.to_s),
-                      'confirm-title' => t('actions.confirm.title'),
-                      'confirm-proceed' => t('.duplicate.proceed'),
-                      'confirm-cancel' => t('.duplicate.cancel')}
+                      'confirm-title': t('actions.confirm.title'),
+                      'confirm-proceed': t('.duplicate.proceed'),
+                      'confirm-cancel': t('.duplicate.cancel')}
               - if current_user.can_read?(product)
                 = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
               - if current_user.can_update?(product)

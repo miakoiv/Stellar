@@ -17,16 +17,16 @@
 
     %tbody
       - @shipping_methods.each do |shipping_method|
-        = content_tag_for :tr, shipping_method, class: shipping_method.active? ? '' : 'warning text-warning' do
+        = content_tag_for :tr, shipping_method, class: shipping_method.active? ? nil : 'warning text-warning' do
           %td= image_variant_tag shipping_method.cover_image
           %td= shipping_method.name
           %td= "ShippingGateway::#{shipping_method.shipping_gateway}".constantize.model_name.human
           %td
             - if shipping_method.active?
-              = shipping_method.enabled_at.present? ? l(shipping_method.enabled_at) : ''
+              = shipping_method.enabled_at.present? ? l(shipping_method.enabled_at) : nil
             - else
-              = icon('warning', shipping_method.enabled_at.present? ? l(shipping_method.enabled_at) : '', data: {toggle: 'tooltip'}, title: col(ShippingMethod, :not_active))
-          %td= shipping_method.disabled_at.present? ? l(shipping_method.disabled_at) : ''
+              = icon('warning', shipping_method.enabled_at.present? ? l(shipping_method.enabled_at) : nil, data: {toggle: 'tooltip'}, title: col(ShippingMethod, :not_active))
+          %td= shipping_method.disabled_at.present? ? l(shipping_method.disabled_at) : nil
           %td.actions
             = link_to icon('info', t('actions.show')), admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
             - if current_user.can_update?(ShippingMethod)
@@ -36,6 +36,6 @@
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: ShippingMethod.model_name.human, name: shipping_method.name),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}

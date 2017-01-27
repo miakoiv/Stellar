@@ -10,7 +10,7 @@
             %label= t('checkout.select_order_type')
             .btn-group{data: {toggle: 'buttons'}}
               - order_types.each do |order_type|
-                %label.btn.btn-default{class: order_type == order.order_type ? 'active' : ''}
+                %label.btn.btn-default{class: order_type == order.order_type && 'active'}
                   = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
                   = order_type.name
   :coffee
@@ -29,6 +29,6 @@
 .row
   .col-xs-12
     .pull-right
-      #checkout-button.collapse{class: order.order_type.present? ? 'in' : ''}
+      #checkout-button.collapse{class: order.order_type.present? && 'in'}
         = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
           = icon('check-circle', t('store.go_checkout'))

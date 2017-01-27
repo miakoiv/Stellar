@@ -5,12 +5,12 @@
   %h1= icon('users', title(User, count: 2))
 %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
   - current_user.managed_groups.reverse.each_with_index do |group, index|
-    %li{role: 'presentation', class: index == 0 ? 'active' : nil}
+    %li{role: 'presentation', class: index == 0 && 'active'}
       %a{href: "#tab-#{group}", role: 'tab', data: {toggle: 'tab'}}
         = User.human_attribute_value(:group, group)
 
 .panel.panel-default.tabbed-panel
   .tab-content
     - current_user.managed_groups.reverse.each_with_index do |group, index|
-      .tab-pane.fade{id: "tab-#{group}", class: index == 0 ? 'in active' : nil}
+      .tab-pane.fade{id: "tab-#{group}", class: index == 0 && 'in active'}
         = render partial: 'table', object: @users.send(group), as: :users

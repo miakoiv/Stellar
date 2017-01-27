@@ -3,7 +3,8 @@
     = current_store.to_s
     %small= @category.to_s
 .product-grid
-  %ul{class: current_store.masonry? ? 'masonry-grid' : ''}= render @products
+  %ul{class: current_store.masonry? && 'masonry-grid'}
+    = render @products
 
 :coffee
   $('.product-detail').hide()

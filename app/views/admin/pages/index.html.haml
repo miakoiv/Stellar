@@ -15,7 +15,7 @@
         %th= col(Page, :album_ids)
         %th.actions
 
-    %tbody{class: current_user.can_update?(Page) ? 'sortable' : nil}
+    %tbody{class: current_user.can_update?(Page) && 'sortable'}
       = content_tag_for :tr, @pages do |page|
         %td.hidden-print= drag_handle
         %td
@@ -36,9 +36,9 @@
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',
                   klass: Page.model_name.human, name: page.title),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+                  'confirm-title': t('actions.confirm.title'),
+                  'confirm-proceed': t('actions.confirm.proceed'),
+                  'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

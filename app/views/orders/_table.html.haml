@@ -20,9 +20,9 @@
           %td= l(order.completed_at.to_date)
           - if current_store.b2b_sales?
             %td= order.summary
-          %td= order.shipping_at.present? ? l(order.shipping_at) : ''
+          %td= order.shipping_at.present? ? l(order.shipping_at) : nil
           - if current_store.b2b_sales?
-            %td= order.installation_at.present? ? l(order.installation_at) : ''
+            %td= order.installation_at.present? ? l(order.installation_at) : nil
           %td.text-right= order.order_items_count
           %td.text-right.currency
             = humanized_money_with_symbol order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
@@ -35,6 +35,6 @@
               = link_to icon('remove', t('.cancel.button')), order_path(order), method: :delete, class: 'btn btn-sm btn-warning',
                   data: {confirm: t('.cancel.confirm',
                     klass: Order.model_name.human, name: order.to_s),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('.cancel.proceed'),
-                    'confirm-cancel' => t('.cancel.cancel')}
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('.cancel.proceed'),
+                    'confirm-cancel': t('.cancel.cancel')}

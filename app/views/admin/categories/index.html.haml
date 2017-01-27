@@ -17,9 +17,9 @@
         %th= col(Category, :product_scope)
         %th.actions
 
-    %tbody{class: current_user.can_update?(Category) ? 'sortable' : nil}
+    %tbody{class: current_user.can_update?(Category) && 'sortable'}
       - @categories.each do |category|
-        = content_tag_for :tr, category, class: category.live? ? (category.visible? ? '' : 'text-muted') : 'warning text-warning' do
+        = content_tag_for :tr, category, class: !category.live? && 'warning text-warning' || category.hidden? && 'text-muted' do
           %td.hidden-print= drag_handle
           %td= image_variant_tag category.cover_image
           %td= category.name
@@ -46,9 +46,9 @@
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: Category.model_name.human, name: category.name),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

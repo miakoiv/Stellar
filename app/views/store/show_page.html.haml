@@ -1,6 +1,6 @@
 - meta_tags_for(@page)
 
-#static-wrap{class: @page.albums.any? ? 'has-sidebar' : ''}
+#static-wrap{class: @page.albums.any? && 'has-sidebar'}
   %div{class: @page.wysiwyg? ? 'container' : 'freeform'}
     - if current_user.can_update?(Page)
       = link_to icon('edit'), edit_admin_page_path(@page), class: 'btn btn-sm btn-default', style: 'position: absolute; right: 15px;'

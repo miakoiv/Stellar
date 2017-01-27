@@ -4,9 +4,9 @@
     = image_variant_tag image, :thumbnail, title: image.attachment_file_name, data: {toggle: 'tooltip'}
   %td
     = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
-      .btn-group.btn-group-xs{'data-toggle' => 'buttons'}
+      .btn-group.btn-group-xs{data: {toggle: 'buttons'}}
         - image.applicable_purposes.each do |purpose|
-          %label.btn.btn-default{class: image.purpose == purpose ? 'active' : nil}
+          %label.btn.btn-default{class: image.purpose == purpose && 'active'}
             = f.radio_button :purpose, purpose
             = Image.human_attribute_value(:purpose, purpose)
   %td.actions

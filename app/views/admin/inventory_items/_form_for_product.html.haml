@@ -17,7 +17,7 @@
             %td.col-xs-2= ff.text_field :value, value: product.cost_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
           %tr.subrow
             %td
-              = ff.text_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+              = ff.text_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             %td{colspan: 3}= ff.text_field :note, placeholder: col(InventoryEntry, :note), class: 'form-control'
             %td.actions
               = f.button t('.submit'), class: 'btn btn-default' do

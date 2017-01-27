@@ -16,7 +16,7 @@
 
     %tbody.sortable
       - @properties.each do |property|
-        = content_tag_for :tr, property, class: property.searchable? ? 'info text-info' : '' do
+        = content_tag_for :tr, property, class: property.searchable? ? 'info text-info' : nil do
           %td.hidden-print= drag_handle
           %td
             = property.searchable? ? icon('search-plus', property.name, data: {toggle: 'tooltip'}, title: col(Property, :searchable)) : property.name
@@ -31,9 +31,9 @@
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: Property.model_name.human, name: property.name),
-                    'confirm-title' => t('actions.confirm.title'),
-                    'confirm-proceed' => t('actions.confirm.proceed'),
-                    'confirm-cancel' => t('actions.confirm.cancel')}
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

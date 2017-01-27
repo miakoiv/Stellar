@@ -28,18 +28,18 @@
           = f.text_field :shipping_postalcode, required: true
         .col-sm-4
           = f.text_field :shipping_city, required: true
-        .col-sm-4.collapse{class: current_store.global_sales? ? 'in' : ''}
+        .col-sm-4.collapse{class: current_store.global_sales? && 'in'}
           = f.select :shipping_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
       - if current_store.b2b_sales?
         .row
           .col-sm-4
-            = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+            = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           - if @order.has_installation?
             .col-sm-4
-              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date' => @order.earliest_shipping_at, 'date-format' => 'yyyy-mm-dd', 'date-language' => I18n.locale}
+              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
       = f.form_group do
         = f.check_box :has_billing_address
-      #billing-address.collapse{class: @order.has_billing_address? ? 'in' : ''}
+      #billing-address.collapse{class: @order.has_billing_address? && 'in'}
         .row
           .col-sm-12
             = f.text_field :billing_address
@@ -47,14 +47,14 @@
             = f.text_field :billing_postalcode
           .col-sm-4
             = f.text_field :billing_city
-          .col-sm-4.collapse{class: current_store.global_sales? ? 'in' : ''}
+          .col-sm-4.collapse{class: current_store.global_sales? && 'in'}
             = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
   %fieldset.bg-warning
     %p.text-warning= icon('exclamation-circle', t('checkout.business_orders_only'))
     .row
       .col-sm-6
         = f.text_field :message
-      #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? ? 'in' : ''}
+      #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? && 'in'}
         .form-group.has-feedback
           = f.label :vat_number
           = f.text_field_without_bootstrap :vat_number, class: 'form-control'

@@ -1,4 +1,4 @@
-= content_tag_for :tr, order_item, class: order_item.is_subitem? ? 'subrow' : '' do
+= content_tag_for :tr, order_item, class: order_item.is_subitem? ? 'subrow' : nil do
   %td
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)

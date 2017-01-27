@@ -1,7 +1,7 @@
 = content_tag_for :tr, resource.hostnames do |hostname|
   %td.hidden-print= drag_handle
   %td= hostname.fqdn
-  %td= hostname.is_subdomain? ? icon('globe') : ''
+  %td= hostname.is_subdomain? ? icon('globe') : nil
   %td.actions
     = link_to icon('remove'), admin_hostname_path(hostname),
         remote: true, method: :delete, class: 'btn btn-sm btn-danger'

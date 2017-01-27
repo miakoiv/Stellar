@@ -14,7 +14,7 @@
         %th
         %th.actions
 
-    %tbody{class: current_user.can_update?(TaxCategory) ? 'sortable' : nil}
+    %tbody{class: current_user.can_update?(TaxCategory) && 'sortable'}
       = content_tag_for :tr, @tax_categories do |tax_category|
         %td.hidden-print= drag_handle
         %td= tax_category.name
@@ -35,9 +35,9 @@
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',
                   klass: TaxCategory.model_name.human, name: tax_category.name),
-                  'confirm-title' => t('actions.confirm.title'),
-                  'confirm-proceed' => t('actions.confirm.proceed'),
-                  'confirm-cancel' => t('actions.confirm.cancel')}
+                  'confirm-title': t('actions.confirm.title'),
+                  'confirm-proceed': t('actions.confirm.proceed'),
+                  'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(
