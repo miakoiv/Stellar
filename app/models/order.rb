@@ -506,6 +506,10 @@ class Order < ActiveRecord::Base
     super(methods: :checkout_phase)
   end
 
+  def external_identifier
+    [store.erp_number, number].join '/'
+  end
+
   # Letterhead for this order based on its destination.
   def letterhead
     group = User.groups.key(order_type.destination_group)

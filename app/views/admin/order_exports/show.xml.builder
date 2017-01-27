@@ -2,7 +2,7 @@ xml.instruct!
 xml.order do
   xml.storeNumber @order.store.erp_number
   xml.customerReference @order.our_reference
-  xml.ourReference @order.number
+  xml.ourReference @order.external_identifier
   xml.message @order.message
 
   xml.orderDate @order.completed_at.to_date
