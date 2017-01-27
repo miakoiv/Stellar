@@ -287,12 +287,13 @@ class Order < ActiveRecord::Base
     !complete? && checkout_phase == :complete
   end
 
-  # Completing an order assigns it a number, archives it, and
-  # sends order confirmation(s).
+  # Completing an order assigns it a number, archives it, sends
+  # order confirmation(s), and triggers an XML export job.
   def complete!
     assign_number!
     archive!
     send_confirmations
+    export_xml
   end
 
   def assign_number!
@@ -554,6 +555,14 @@ class Order < ActiveRecord::Base
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
+    end
+
+    # Perform XML export if specified by order type, and
+    # store settings have a path defined.
+    def export_xml
+      if order_type.is_exported? && store.order_xml_path.present?
+        OrderExportJob.perform_later(self, store.order_xml_path)
+      end
     end
 
     # Approving an order consumes stock for the ordered items.
