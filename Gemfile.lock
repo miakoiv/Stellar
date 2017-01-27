@@ -46,6 +46,8 @@ GEM
       activesupport (>= 3.0.0)
     autoprefixer-rails (6.5.3)
       execjs
+    backport_new_renderer (1.0.0)
+      rails
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -306,6 +308,7 @@ DEPENDENCIES
   active_link_to
   authority
   autoprefixer-rails
+  backport_new_renderer
   bootstrap-datepicker-rails
   bootstrap-generators (~> 3.3.4)
   bootstrap_form

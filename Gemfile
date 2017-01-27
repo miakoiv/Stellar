@@ -55,6 +55,8 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-scrollto-rails'
 
+# Backport of ApplicationController.renderer from Rails 5
+gem 'backport_new_renderer'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
