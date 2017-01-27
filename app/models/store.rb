@@ -25,10 +25,11 @@ class Store < ActiveRecord::Base
     :manufacturer_template_id, # page references to templates
     :reseller_template_id,
     :quotation_template_id,
-    :csv_encoding,        # CSV encoding of uploaded files
-    :csv_product_code,    # CSV field headers for product code,
-    :csv_retail_price,    # retail price, and inventory amount
-    :csv_inventory_amount # in uploaded files
+    :csv_encoding,         # CSV encoding of uploaded files
+    :csv_product_code,     # CSV field headers for product code,
+    :csv_retail_price,     # retail price, and inventory amount
+    :csv_inventory_amount, # in uploaded files
+    :order_xml_path   # where to upload XML files of completed orders
   ], coder: JSON
 
   resourcify

@@ -5,8 +5,8 @@
       %a{href: '#tab-store-admin', role: 'tab', data: {toggle: 'tab'}}
         = col(Store, :admin)
     %li{role: 'presentation'}
-      %a{href: '#tab-store-upload', role: 'tab', data: {toggle: 'tab'}}
-        = col(Store, :upload)
+      %a{href: '#tab-store-files', role: 'tab', data: {toggle: 'tab'}}
+        = col(Store, :files)
     - if current_user.has_cached_role?(:superuser)
       %li{role: 'presentation'}
         %a{href: '#tab-store-superuser', role: 'tab', data: {toggle: 'tab'}}
@@ -39,12 +39,16 @@
             = f.select :manufacturer_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
             = f.select :reseller_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
             = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
-        #tab-store-upload.tab-pane.fade
+        #tab-store-files.tab-pane.fade
           %fieldset{disabled: locked}
+            %legend= col(Store, :product_csv)
             = f.text_field :csv_encoding
             = f.text_field :csv_product_code
             = f.text_field :csv_retail_price
             = f.text_field :csv_inventory_amount
+          %fieldset{disabled: locked}
+            %legend= col(Store, :order_xml)
+            = f.text_field :order_xml_path
         - if current_user.has_cached_role?(:superuser)
           #tab-store-superuser.tab-pane.fade
             %fieldset{disabled: locked}

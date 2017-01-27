@@ -84,7 +84,7 @@ class Admin::StoresController < ApplicationController
         :tracking_code, :facebook_pixel_id, :tawkto_site_id,
         :manufacturer_template_id, :reseller_template_id, :quotation_template_id,
         :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
-        :erp_number, :order_sequence, :theme,
+        :order_xml_path, :erp_number, :order_sequence, :theme,
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
           :password, :password_confirmation, :group, role_ids: []

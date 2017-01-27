@@ -356,7 +356,9 @@ fi:
         admin: Asetukset
         new_user: Luo ylläpitäjä
         new_tax_category: Aseta verotus
-        upload: Tuontiasetukset
+        files: Tiedostot
+        product_csv: Tuotteiden CSV-tuonti
+        order_xml: Tilauksien XML-vienti
         superuser: Lisäasetukset
         hostnames: Osoitteet
         images: Kuvat
@@ -382,6 +384,7 @@ fi:
         csv_product_code: Tuotekoodisarake
         csv_retail_price: Myyntihintasarake
         csv_inventory_amount: Varastosaldosarake
+        order_xml_path: Kansion sijainti
       tax_category:
         name: Nimi
         rate: Verokanta

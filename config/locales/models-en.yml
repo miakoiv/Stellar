@@ -356,7 +356,9 @@ en:
         admin: Settings
         new_user: Create admin
         new_tax_category: Set taxation
-        upload: File import
+        files: Files
+        product_csv: Product CSV import
+        order_xml: Order XML export
         superuser: Advanced
         hostnames: Addresses
         images: Images
@@ -382,6 +384,7 @@ en:
         csv_product_code: Product code field
         csv_retail_price: Retail price field
         csv_inventory_amount: Inventory field
+        order_xml_path: Folder path
       tax_category:
         name: Name
         rate: Tax rate
