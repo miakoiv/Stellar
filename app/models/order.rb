@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
   monetize :balance_cents, disable_validation: true
   monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents, disable_validation: true
   monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
+  monetize :grand_total_for_export_cents, disable_validation: true
 
   #---
   belongs_to :store
@@ -470,6 +471,13 @@ class Order < ActiveRecord::Base
 
   def adjustments_with_tax_cents
     adjustments.map { |a| amount_with_tax_cents || 0 }.sum
+  end
+
+  # Grand total for exported orders.
+  def grand_total_for_export_cents(items = order_items)
+    items.map { |item|
+      (item.subtotal_for_export_cents || 0) + item.adjustments_sans_tax_cents
+    }.sum + adjustments_sans_tax_cents
   end
 
   def summary

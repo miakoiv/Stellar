@@ -38,12 +38,12 @@ xml.order do
         xml.title item.product_title
         xml.subtitle item.product_subtitle
         xml.amount item.amount
-        xml.unitPrice item.includes_tax? ? item.price_with_tax : item.price_sans_tax
-        xml.subTotal item.includes_tax? ? item.subtotal_with_tax : item.subtotal_sans_tax
+        xml.unitPrice item.price_for_export
+        xml.subTotal item.subtotal_for_export
         xml.shippingDate @order.shipping_at
       end
     end
   end
 
-  xml.grandTotal @order.includes_tax? ? @order.grand_total_with_tax : @order.grand_total_sans_tax
+  xml.grandTotal @order.grand_total_for_export
 end

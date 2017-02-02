@@ -10,6 +10,7 @@ class OrderItem < ActiveRecord::Base
   monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents, disable_validation: true
   monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents, disable_validation: true
   monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
+  monetize :price_for_export_cents, :subtotal_for_export_cents, disable_validation: true
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
@@ -112,6 +113,18 @@ class OrderItem < ActiveRecord::Base
 
   def adjustments_with_tax_cents
     adjustments.map(&:amount_with_tax_cents).sum
+  end
+
+  # Price for exported orders, always without tax,
+  # vendor products are listed without prices.
+  def price_for_export_cents
+    return nil if product.vendor.present?
+    price_sans_tax_cents
+  end
+
+  def subtotal_for_export_cents
+    return nil if product.vendor.present?
+    subtotal_sans_tax_cents
   end
 
   # Lead time for an order item is zero if the amount is readily available,
