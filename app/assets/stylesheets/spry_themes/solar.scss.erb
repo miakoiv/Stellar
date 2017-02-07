@@ -99,12 +99,6 @@ body {
     }
   }
   #category-banner-wrap { display: none; }
-  #categories-wrap > .categories > ul > li.category {
-    &.active {
-      > .subcategories-wrap { display: block; }
-    }
-    > .subcategories-wrap { display: none; }
-  }
   .products, .product-detail { padding-top: 30px; }
 }
 
@@ -260,7 +254,8 @@ body {
       > li.category {
         margin-left: -15px;
 
-        &.active > a {
+        &.active {
+          > .subcategories-wrap { display: block; }
         }
         > a {
           font-weight: 500;
@@ -277,6 +272,8 @@ body {
           }
         }
         > .subcategories-wrap {
+          display: none;
+
           > .subcategories {
             > ul {
               @extend .nav, .nav-pills, .nav-stacked;

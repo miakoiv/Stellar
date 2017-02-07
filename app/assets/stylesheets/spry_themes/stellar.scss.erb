@@ -92,12 +92,6 @@ body {
     }
   }
   #category-banner-wrap { display: none; }
-  #categories-wrap > .categories > ul > li.category {
-    &.active {
-      > .subcategories-wrap { display: block; }
-    }
-    > .subcategories-wrap { display: none; }
-  }
   .products, .product-detail { padding-top: 30px; }
 }
 
@@ -257,9 +251,13 @@ body {
       > li.category {
         margin-left: -15px;
 
-        &.active > a {
-          background-color: transparent;
-          background-image: url(<%= asset_path('leasit-bar.svg') %>);
+        &.active {
+          > .subcategories-wrap { display: block; }
+
+          > a {
+            background-color: transparent;
+            background-image: url(<%= asset_path('leasit-bar.svg') %>);
+          }
         }
         &:hover > a { background-color: transparent; }
         > a {
@@ -281,6 +279,8 @@ body {
           }
         }
         > .subcategories-wrap {
+          display: none;
+
           > .subcategories {
             > ul {
               @extend .nav, .nav-pills, .nav-stacked;
