@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127114127) do
+ActiveRecord::Schema.define(version: 20170208094911) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -544,6 +544,18 @@ ActiveRecord::Schema.define(version: 20170127114127) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "purpose",    limit: 4,     default: 1, null: false
+    t.integer  "page_id",    limit: 4,                 null: false
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "priority",   limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "shipments", force: :cascade do |t|
     t.integer  "order_id",           limit: 4,     null: false
