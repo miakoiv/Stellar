@@ -4,7 +4,7 @@ require 'csv'
 
 IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'
 
-IMPORT_FILES = {
+PRODUCT_FILES = {
 
   # PIIRNRO,NRO,NIMI,NIMI2,
   # MYYNTHINTA,STDHINTA,PVMMYYN,PVMSTD,
@@ -47,10 +47,21 @@ IMPORT_FILES = {
   #},
 }
 
+ORDER_FILES = {
+
+  # TILNRO,VAIHE1,OMAVIITE
+  order: {
+    file: 'www-tilaus-utf8.csv',
+    multiple: false,
+    headers: [:code, :status, :number],
+  },
+}
+
 namespace :matfox do
   desc "Import data from Matfox"
   task import: :environment do |task, args|
-    @data_by_product_code = import_data
+    @data_by_product_code = import_data(PRODUCT_FILES)
+    @data_by_order_code = import_data(ORDER_FILES)
 
     Product.transaction do
 
@@ -102,6 +113,24 @@ namespace :matfox do
         end
       end
     end
+
+    Order.transaction do
+
+      @data_by_order_code.each do |code, data|
+        next if data[:order].nil?
+
+        # Orders are found by the number field, which might not match
+        # any known order, or may refer to an already concluded one.
+        next unless data[:number] =~ /\A\d+\Z/
+        order = Order.find_by(number: data[:number])
+        next if order.nil? || order.concluded?
+
+        # Each order has a status of 2..4, where status 2 triggers
+        # approval, and 4 triggers conclusion.
+        approve_order(order)  if data[:order][:status] == '2'
+        conclude_order(order) if data[:order][:status] == '4'
+      end
+    end
   end
 
   # Updates the inventory item entry for `product` at `store`.
@@ -135,12 +164,12 @@ namespace :matfox do
     end
   end
 
-  # Import all import files into a hash of hashes, where the top level key 'i'
-  # is the field 'code', the second level key 'j' is the IMPORT_FILES key.
+  # Import specified files into a hash of hashes, where the top level key 'i'
+  # is the field 'code', the second level key 'j' is the files hash key.
   # Import file options may specify either single or multiple record mode.
-  def import_data
+  def import_data(files)
     data = {}
-    IMPORT_FILES.each do |j, options|
+    files.each do |j, options|
       CSV.foreach(IMPORT_PATH.join(options[:file]), headers: options[:headers]) do |row|
         i = row[:code]
         data[i] ||= {}
@@ -192,6 +221,22 @@ namespace :matfox do
       value: value || 0
     )
     item.save!
+  end
+
+  # Sets the approval timestamp of given order, if currently unset.
+  def approve_order(order)
+    return false if order.approved?
+    order.update(approved_at: Time.current)
+    puts "#{order.number} approved"
+  end
+
+  # Sets the conclusion timestamp of given order, if currently unset.
+  # Ensures the order is approved first.
+  def conclude_order(order)
+    approve_order(order)
+    return false if order.concluded?
+    order.update(concluded_at: Time.current)
+    puts "#{order.number} concluded"
   end
 
 =begin
