@@ -14,11 +14,12 @@ class PromotionHandler
 
     #---
     def apply!(order, items)
+      price_method = order.includes_tax? ? :price_with_tax : :price_sans_tax
       items_by_price = flatten(items.unscope(:order).order(price_cents: :desc))
       items_by_price.each_slice(required_items) do |bundle|
         break if bundle.size < required_items
+        bundle_total = bundle.map { |item| item.send(price_method) || 0 }.sum
         product_titles = bundle.map(&:product).to_sentence
-        bundle_total = bundle.map { |item| item.price || 0 }.sum
         order.adjustments.create(
           source: promotion,
           label: "#{promotion.description} (#{product_titles})",
