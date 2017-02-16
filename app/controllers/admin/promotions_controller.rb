@@ -123,7 +123,7 @@ class Admin::PromotionsController < ApplicationController
         :name, :promotion_handler_type, :first_date, :last_date,
         promotion_handler_attributes: [
           :id, :description,
-          :order_total_cents, :required_items, :discount_percent
+          :order_total, :required_items, :items_total, :discount_percent
         ]
       )
     end

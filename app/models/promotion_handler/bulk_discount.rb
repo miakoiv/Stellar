@@ -14,7 +14,7 @@ class PromotionHandler
       }, on: :update
 
     #---
-    def apply!(items)
+    def apply!(order, items)
       p = 1 - discount_percent / 100.0
       b = required_items
       items.each do |item|

@@ -11,4 +11,13 @@ class PromotionHandler < ActiveRecord::Base
   #---
   validates :description, presence: true, on: :update
 
+  #---
+  # Flattens the given items into an array so that all amounts equal one.
+  def flatten(items)
+    items.to_a.map { |item|
+      n = item.amount
+      item.amount = 1
+      [item] * n
+    }.flatten
+  end
 end

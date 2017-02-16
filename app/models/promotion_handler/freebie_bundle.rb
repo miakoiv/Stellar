@@ -14,7 +14,7 @@ class PromotionHandler
       }, on: :update
 
     #---
-    def apply!(items)
+    def apply!(order, items)
       items_by_price = flatten(items.unscope(:order).order(price_cents: :desc))
       items_by_price.each_slice(required_items) do |bundle|
         break if bundle.size < required_items
@@ -27,15 +27,6 @@ class PromotionHandler
           amount: (last_item.price || 0) * discount_percent/-100
         )
       end
-    end
-
-    # Flattens the given items into an array so that all amounts equal one.
-    def flatten(items)
-      items.to_a.map { |item|
-        n = item.amount
-        item.amount = 1
-        [item] * n
-      }.flatten
     end
 
     def editable_prices?

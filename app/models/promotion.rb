@@ -36,6 +36,7 @@ class Promotion < ActiveRecord::Base
   def self.handler_types
     [
       'PromotionHandler::BulkDiscount',
+      'PromotionHandler::BundlePricing',
       'PromotionHandler::FreebieBundle',
       'PromotionHandler::Vanilla',
     ]
@@ -48,7 +49,7 @@ class Promotion < ActiveRecord::Base
   # Applies this promotion to the given order by calling the promotion
   # handler with the matching items.
   def apply!(order)
-    promotion_handler.apply!(matching_items(order))
+    promotion_handler.apply!(order, matching_items(order))
   end
 
   # Finds the promoted item matching given order item.

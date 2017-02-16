@@ -5,7 +5,7 @@ class PromotionHandler
 
     # Vanilla promotions do not apply adjustments since order items
     # are created with the promoted price.
-    def apply!(items)
+    def apply!(order, items)
     end
 
     def editable_prices?
