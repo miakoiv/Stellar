@@ -470,7 +470,7 @@ class Order < ActiveRecord::Base
   end
 
   def adjustments_with_tax_cents
-    adjustments.map { |a| amount_with_tax_cents || 0 }.sum
+    adjustments.map { |a| a.amount_with_tax_cents || 0 }.sum
   end
 
   # Grand total for exported orders.
