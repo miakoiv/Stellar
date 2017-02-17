@@ -327,9 +327,9 @@ $grid-columns:              12 !default;
 $grid-gutter-width:         30px !default;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
-$grid-float-breakpoint:     $screen-sm-min !default;
+$grid-float-breakpoint:     0 !default;
 //** Point at which the navbar begins collapsing.
-$grid-float-breakpoint-max: ($grid-float-breakpoint - 1) !default;
+$grid-float-breakpoint-max: 0 !default;
 
 
 //== Container sizes
@@ -391,7 +391,7 @@ $navbar-default-toggle-border-color:       #ddd !default;
 // Inverted navbar
 // Reset inverted navbar basics
 $navbar-inverse-color:                      lighten($gray-light, 40%) !default;
-$navbar-inverse-bg:                         #666 !default;
+$navbar-inverse-bg:                         $gray-darker !default;
 $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !default;
 
 // Inverted navbar links

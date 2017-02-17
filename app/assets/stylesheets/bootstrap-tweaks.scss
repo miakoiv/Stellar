@@ -8,7 +8,8 @@ html {
 }
 
 //
-// navbar with charms and a search results dropdown
+// navbar that hides its nav elements on smaller devices and exposes
+// a hamburger menu to toggle an off canvas sidebar housing the mobile menu
 //
 .navbar {
   img { margin: -2px 5px -3px 0; }
@@ -24,17 +25,36 @@ html {
     span { display: none; }
   }
 
-  .navbar-charms {
+  .navbar-nav.responsive {
+    @extend .hidden-xs;
+  }
+
+  .sidebar-toggle {
+    @extend .btn, .btn-default, .navbar-btn;
+    @extend .visible-xs;
     float: right;
-    margin-left: 15px;
+    margin-left: $grid-gutter-width;
+    color: $navbar-default-link-color;
+    background-color: transparent;
+    border-color: transparent;
 
-    .nav.navbar-nav {
-      float: left;
-
-      > li { float: left; }
+    &:hover, &:focus {
+      color: $navbar-default-link-hover-color;
+      background-color: transparent;
+      border-color: transparent;
     }
-    #cart-badge { background-color: $brand-primary; }
-    .navbar-toggle { margin-left: 30px; }
+  }
+
+  #cart-badge { background-color: $brand-primary; }
+}
+
+.navbar-inverse {
+  .sidebar-toggle {
+    color: $navbar-inverse-link-color;
+
+    &:hover {
+      color: $navbar-inverse-link-hover-color;
+    }
   }
 }
 

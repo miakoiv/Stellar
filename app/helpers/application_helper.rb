@@ -20,6 +20,14 @@ module ApplicationHelper
     set_meta_tags(og: tags)
   end
 
+  def menu_title(icon, text)
+    icon(icon, text, class: 'fa-fw')
+  end
+
+  def menu_item(icon, text, path, options = {})
+    active_link_to menu_title(icon, text), path, options.merge(wrap_tag: :li)
+  end
+
   def drag_handle
     content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
       icon('ellipsis-v', class: 'fa-lg fa-fw')

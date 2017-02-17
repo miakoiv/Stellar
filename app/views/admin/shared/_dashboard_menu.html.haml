@@ -1,0 +1,11 @@
+%ul{class: menu}
+  - if current_user.has_cached_role?(:order_review) || current_user.has_cached_role?(:order_manage)
+    = menu_item 'truck', title(Order, count: 2), admin_orders_path
+  - if current_user.has_cached_role?(:reports)
+    = menu_item 'line-chart', t('admin.reports.title'), admin_reports_path
+  - if current_user.has_cached_role?(:inventory_manage)
+    = menu_item 'bar-chart', title(InventoryItem, count: 2), admin_inventory_items_path
+  - if current_user.has_cached_role?(:promotion_editor)
+    = menu_item 'tag', title(Promotion, count: 2), admin_promotions_path
+  - if current_user.has_cached_role?(:asset_editor)
+    = menu_item 'archive', title(CustomerAsset, count: 2), admin_customer_assets_path

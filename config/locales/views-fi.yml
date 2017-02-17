@@ -23,6 +23,12 @@ fi:
   admin:
     dashboard:
       title: Konsoli
+    content:
+      title: Sisältö
+    configuration:
+      title: Asetukset
+    global:
+      title: Ympäristö
     reports:
       title: Raportit
       inventory:
@@ -42,7 +48,7 @@ fi:
           daily: Päiväkohtainen €
           total: Yhteensä €
     manage: Hallinta
-    return_to_storefront: Takaisin kauppaan
+    return_to_storefront: Etusivu
     albums:
       index:
         new_album: Uusi albumi

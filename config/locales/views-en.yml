@@ -43,6 +43,12 @@ en:
   admin:
     dashboard:
       title: Dashboard
+    content:
+      title: Content
+    configuration:
+      title: Configuration
+    global:
+      title: Global
     reports:
       title: Reports
       inventory:
@@ -62,7 +68,7 @@ en:
           daily: Daily sales €
           total: Total sales €
     manage: Manage
-    return_to_storefront: Return to storefront
+    return_to_storefront: Storefront
     albums:
       index:
         new_album: New album
