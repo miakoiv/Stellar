@@ -18,6 +18,7 @@
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
 //= require bootstrap
+//= require jasny-bootstrap.min
 //= require twitter/bootstrap/rails/confirm
 //= require summernote
 //= require summernote/locales

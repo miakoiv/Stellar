@@ -52,9 +52,25 @@ html {
   .sidebar-toggle {
     color: $navbar-inverse-link-color;
 
-    &:hover {
+    &:hover, &:focus {
       color: $navbar-inverse-link-hover-color;
     }
+  }
+}
+
+.navmenu {
+  .navmenu-title {
+    margin-top: 20px;
+    padding: 10px 15px;
+    color: $navbar-default-color;
+    border-top: 1px solid $navbar-default-border;
+    text-transform: uppercase;
+  }
+}
+.navmenu.navmenu-inverse {
+  .navmenu-title {
+    color: $navbar-inverse-color;
+    border-top: 1px solid $navbar-inverse-border;
   }
 }
 
