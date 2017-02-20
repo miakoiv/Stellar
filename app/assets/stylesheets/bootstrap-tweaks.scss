@@ -9,7 +9,7 @@ html {
 
 //
 // navbar that hides its nav elements on smaller devices and exposes
-// a hamburger menu to toggle an off canvas sidebar housing the mobile menu
+// a hamburger button to toggle an off canvas navmenu
 //
 .navbar {
   img { margin: -2px 5px -3px 0; }
@@ -32,7 +32,7 @@ html {
   #cart-badge { background-color: $brand-primary; }
 }
 
-.sidebar-toggle {
+.offcanvas-toggle {
   @extend .btn, .btn-default, .navbar-btn;
   @extend .visible-xs;
   float: right;
@@ -49,7 +49,7 @@ html {
 }
 
 .navbar-inverse, .navmenu-inverse {
-  .sidebar-toggle {
+  .offcanvas-toggle {
     color: $navbar-inverse-link-color;
 
     &:hover, &:focus {
