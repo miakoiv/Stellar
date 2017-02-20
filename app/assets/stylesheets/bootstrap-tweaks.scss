@@ -29,26 +29,26 @@ html {
     @extend .hidden-xs;
   }
 
-  .sidebar-toggle {
-    @extend .btn, .btn-default, .navbar-btn;
-    @extend .visible-xs;
-    float: right;
-    margin-left: $grid-gutter-width;
-    color: $navbar-default-link-color;
-    background-color: transparent;
-    border-color: transparent;
-
-    &:hover, &:focus {
-      color: $navbar-default-link-hover-color;
-      background-color: transparent;
-      border-color: transparent;
-    }
-  }
-
   #cart-badge { background-color: $brand-primary; }
 }
 
-.navbar-inverse {
+.sidebar-toggle {
+  @extend .btn, .btn-default, .navbar-btn;
+  @extend .visible-xs;
+  float: right;
+  margin-left: $grid-gutter-width;
+  color: $navbar-default-link-color;
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover, &:focus {
+    color: $navbar-default-link-hover-color;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+.navbar-inverse, .navmenu-inverse {
   .sidebar-toggle {
     color: $navbar-inverse-link-color;
 
