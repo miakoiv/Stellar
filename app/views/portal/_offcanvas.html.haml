@@ -1,0 +1,11 @@
+.clearfix
+  %button.sidebar-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
+    = icon('close', class: 'fa-lg')
+
+.navmenu-title= title(Department, count: 2)
+%ul.nav.navmenu-nav
+  = render partial: 'department_menu'
+
+.navmenu-title= title(Store, count: 2)
+%ul.nav.navmenu-nav
+  = render partial: 'store_menu'

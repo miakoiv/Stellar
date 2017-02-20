@@ -5,21 +5,33 @@
     = render partial: 'shared/cookieconsent'
     = render partial: 'favicon'
   %body{class: current_theme}
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
-      .content
-        .navbar-charms
-          %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#navbar'}, aria: {expanded: 'false', controls: 'navbar'}}
+    #offcanvas-wrap
+      %nav#offcanvas.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
+        = render partial: 'portal/offcanvas'
+      %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+        .content
+          %button.sidebar-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
             = icon('bars', class: 'fa-lg')
-        .navbar-header
-          = link_to branding(current_portal), root_path, class: 'navbar-brand'
+          .navbar-header
+            = link_to branding(current_portal), root_path, class: 'navbar-brand'
+          %ul.nav.navbar-nav.responsive
+            %li.dropdown
+              %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+                = icon('umbrella', title(Department, count: 2), class: 'fa-lg')
+                %span.caret
+              %ul.dropdown-menu{role: 'menu'}
+                = render partial: 'department_menu'
+            %li.dropdown
+              %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+                = icon('shopping-bag', title(Store, count: 2), class: 'fa-lg')
+                %span.caret
+              %ul.dropdown-menu{role: 'menu'}
+                = render partial: 'store_menu'
+            = render partial: 'keyword_search'
 
-        #navbar.collapse.navbar-collapse
-          %ul.nav.navbar-nav
-            = render partial: 'department_menu'
-            = render partial: 'store_menu'
-          = render partial: 'keyword_search'
-
-    = yield
+      = yield
 
     %footer.footer
       = render partial: 'shared/footer'
+
+    = render partial: 'shared/outdated_browser'
