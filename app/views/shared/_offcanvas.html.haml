@@ -5,9 +5,10 @@
 %ul.nav.navmenu-nav
   = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
 
-.navmenu-title= title(Category, count: 2)
-%ul.nav.navmenu-nav
-  = render partial: 'categories/nav_item', collection: @categories, as: :category
+- if @categories.present?
+  .navmenu-title= title(Category, count: 2)
+  %ul.nav.navmenu-nav
+    = render partial: 'categories/nav_item', collection: @categories, as: :category
 
 - if user_signed_in? && !current_user.guest?
   .navmenu-title
