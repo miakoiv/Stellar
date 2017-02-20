@@ -67,11 +67,17 @@ html {
     text-transform: uppercase;
   }
 
-  .navmenu-nav > li > .navmenu-nav {
-    padding-left: 30px;
+  .navmenu-nav > li {
+    > a img {
+      @extend .box-icon, .pull-left;
+      margin-right: 10px;
+    }
+    > .navmenu-nav {
+      padding-left: 35px;
 
-    > li > a {
-      font-size: $font-size-small;
+      > li > a {
+        font-size: $font-size-small;
+      }
     }
   }
 }
