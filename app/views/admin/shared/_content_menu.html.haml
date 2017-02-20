@@ -1,11 +1,10 @@
-%ul{class: menu}
-  - if current_user.has_cached_role?(:product_editor)
-    = menu_item 'cube', title(Product, count: 2), admin_products_path
-  - if current_user.has_cached_role?(:category_editor)
-    = menu_item 'sitemap', title(Category, count: 2), admin_categories_path
-  - if current_user.has_cached_role?(:property_editor)
-    = menu_item 'eyedropper', title(Property, count: 2), admin_properties_path
-  - if current_user.has_cached_role?(:page_editor)
-    = menu_item 'files-o', title(Page, count: 2), admin_pages_path
-  - if current_user.has_cached_role?(:album_editor)
-    = menu_item 'camera-retro', title(Album, count: 2), admin_albums_path
+- if current_user.has_cached_role?(:product_editor)
+  = menu_item 'cube', title(Product, count: 2), admin_products_path
+- if current_user.has_cached_role?(:category_editor)
+  = menu_item 'sitemap', title(Category, count: 2), admin_categories_path
+- if current_user.has_cached_role?(:property_editor)
+  = menu_item 'eyedropper', title(Property, count: 2), admin_properties_path
+- if current_user.has_cached_role?(:page_editor)
+  = menu_item 'files-o', title(Page, count: 2), admin_pages_path
+- if current_user.has_cached_role?(:album_editor)
+  = menu_item 'camera-retro', title(Album, count: 2), admin_albums_path

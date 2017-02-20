@@ -2,13 +2,17 @@
   = menu_item 'shopping-cart', t('admin.return_to_storefront'), front_path
 
 .navmenu-title= menu_title 'tachometer', t('admin.dashboard.title')
-= render partial: 'admin/shared/dashboard_menu', locals: {menu: 'nav navmenu-nav'}
+%ul.nav.navmenu-nav
+  = render partial: 'admin/shared/dashboard_menu'
 
 .navmenu-title= menu_title 'cube', t('admin.content.title')
-= render partial: 'admin/shared/content_menu', locals: {menu: 'nav navmenu-nav'}
+%ul.nav.navmenu-nav
+  = render partial: 'admin/shared/content_menu'
 
 .navmenu-title= menu_title 'cog', t('admin.configuration.title')
-= render partial: 'admin/shared/configuration_menu', locals: {menu: 'nav navmenu-nav'}
+%ul.nav.navmenu-nav
+  = render partial: 'admin/shared/configuration_menu'
 
 .navmenu-title= menu_title 'globe', t('admin.global.title')
-= render partial: 'admin/shared/global_menu', locals: {menu: 'nav navmenu-nav'}
+%ul.nav.navmenu-nav
+  = render partial: 'admin/shared/global_menu'

@@ -1,11 +1,10 @@
-%ul{class: menu}
-  - if current_user.has_cached_role?(:store_admin)
-    = menu_item 'cube', title(Store), edit_admin_store_path(current_store)
-  - if current_user.has_cached_role?(:user_manager)
-    = menu_item 'users', title(User, count: 2), admin_users_path
-  - if current_user.has_cached_role?(:inventory_manage)
-    = menu_item 'cubes', title(Inventory, count: 2), admin_inventories_path
-  - if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
-    = menu_item 'percent', title(TaxCategory, count: 2), admin_tax_categories_path
-    = menu_item 'ship', title(ShippingMethod, count: 2), admin_shipping_methods_path
-    = menu_item 'shopping-basket', title(PricingGroup, count: 2), admin_pricing_groups_path
+- if current_user.has_cached_role?(:store_admin)
+  = menu_item 'cube', title(Store), edit_admin_store_path(current_store)
+- if current_user.has_cached_role?(:user_manager)
+  = menu_item 'users', title(User, count: 2), admin_users_path
+- if current_user.has_cached_role?(:inventory_manage)
+  = menu_item 'cubes', title(Inventory, count: 2), admin_inventories_path
+- if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
+  = menu_item 'percent', title(TaxCategory, count: 2), admin_tax_categories_path
+  = menu_item 'ship', title(ShippingMethod, count: 2), admin_shipping_methods_path
+  = menu_item 'shopping-basket', title(PricingGroup, count: 2), admin_pricing_groups_path

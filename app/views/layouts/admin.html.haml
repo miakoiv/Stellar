@@ -17,22 +17,26 @@
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = menu_title 'tachometer', t('admin.dashboard.title')
               %span.caret
-            = render partial: 'admin/shared/dashboard_menu', locals: {menu: 'dropdown-menu'}
+            %ul.dropdown-menu
+              = render partial: 'admin/shared/dashboard_menu'
           %li.dropdown
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = menu_title 'cube', t('admin.content.title')
               %span.caret
-            = render partial: 'admin/shared/content_menu', locals: {menu: 'dropdown-menu'}
+            %ul.dropdown-menu
+              = render partial: 'admin/shared/content_menu'
           %li.dropdown
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = menu_title 'cog', t('admin.configuration.title')
               %span.caret
-            = render partial: 'admin/shared/configuration_menu', locals: {menu: 'dropdown-menu'}
+            %ul.dropdown-menu
+              = render partial: 'admin/shared/configuration_menu'
           %li.dropdown
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = menu_title 'globe', t('admin.global.title')
               %span.caret
-            = render partial: 'admin/shared/global_menu', locals: {menu: 'dropdown-menu'}
+            %ul.dropdown-menu
+              = render partial: 'admin/shared/global_menu'
         %ul.nav.navbar-nav.navbar-right.responsive
           = menu_item 'shopping-cart', t('admin.return_to_storefront'), front_path
           = render partial: 'admin/shared/user_menu'
