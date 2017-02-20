@@ -48,7 +48,7 @@ fi:
           daily: Päiväkohtainen €
           total: Yhteensä €
     manage: Hallinta
-    return_to_storefront: Etusivu
+    return_to_storefront: Palaa etusivulle
     albums:
       index:
         new_album: Uusi albumi

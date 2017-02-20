@@ -1,0 +1,4 @@
+%li{class: @category.inside?(category) && 'active'}
+  = link_to category.name, show_category_path(category)
+  - if category.subcategories.visible.any?
+    %ul.nav.navmenu-nav= render partial: 'categories/nav_item', collection: category.subcategories.visible, as: :category

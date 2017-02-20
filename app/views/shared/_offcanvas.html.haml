@@ -1,0 +1,22 @@
+.clearfix
+  %button.sidebar-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
+    = icon('close', class: 'fa-lg')
+
+%ul.nav.navmenu-nav
+  = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
+
+.navmenu-title= title(Category, count: 2)
+%ul.nav.navmenu-nav
+  = render partial: 'categories/nav_item', collection: @categories, as: :category
+
+- if user_signed_in? && !current_user.guest?
+  .navmenu-title
+    %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+    = current_user.name
+  %ul.nav.navmenu-nav
+    = render partial: 'shared/user_menu'
+    - if can_manage?
+      = menu_item 'wrench', t('admin.manage'), admin_dashboard_path
+- else
+  %ul.nav.navmenu-nav
+    = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path

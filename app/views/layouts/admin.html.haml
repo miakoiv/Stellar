@@ -38,8 +38,17 @@
             %ul.dropdown-menu
               = render partial: 'admin/shared/global_menu'
         %ul.nav.navbar-nav.navbar-right.responsive
-          = menu_item 'shopping-cart', t('admin.return_to_storefront'), front_path
-          = render partial: 'admin/shared/user_menu'
+          - if user_signed_in? && !current_user.guest?
+            %li.dropdown
+              %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+                %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+                = current_user.name.split.first
+                %span.caret
+              %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+                = render partial: 'admin/shared/user_menu'
+          - else
+            %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
+          %li= link_to icon('home', class: 'fa-lg'), front_path, title: t('admin.return_to_storefront'), data: {toggle: 'tooltip', placement: 'bottom'}
 
     .container
       = yield

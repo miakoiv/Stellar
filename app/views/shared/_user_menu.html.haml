@@ -1,14 +1,5 @@
-- if user_signed_in? && !current_user.guest?
-  %li.dropdown
-    %a.dropdown-toggle{href: '#', role: 'button', data: {toggle: 'dropdown'}}
-      %span.label{class: "label-#{current_user.appearance}"}= icon('user')
-      = current_user.name.split.first
-      %span.caret
-    %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-      = menu_item 'calendar', t('store.order_history'), orders_path
-      - if current_user.can_select_pricing_group?
-        = render partial: 'shared/pricing_options'
-      %li.divider
-      %li= link_to menu_title('sign-out', t('devise.sessions.delete.sign_out')), destroy_user_session_path, method: :delete
-- else
-  %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
+= menu_item 'calendar', t('store.order_history'), orders_path
+- if current_user.can_select_pricing_group?
+  = render partial: 'shared/pricing_options'
+%li.divider
+%li= link_to menu_title('sign-out', t('devise.sessions.delete.sign_out')), destroy_user_session_path, method: :delete

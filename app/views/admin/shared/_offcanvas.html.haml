@@ -1,5 +1,6 @@
-%ul.nav.navmenu-nav
-  = menu_item 'shopping-cart', t('admin.return_to_storefront'), front_path
+.clearfix
+  %button.sidebar-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
+    = icon('close', class: 'fa-lg')
 
 .navmenu-title= menu_title 'tachometer', t('admin.dashboard.title')
 %ul.nav.navmenu-nav
@@ -16,3 +17,14 @@
 .navmenu-title= menu_title 'globe', t('admin.global.title')
 %ul.nav.navmenu-nav
   = render partial: 'admin/shared/global_menu'
+
+- if user_signed_in? && !current_user.guest?
+  .navmenu-title
+    %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+    = current_user.name
+  %ul.nav.navmenu-nav
+    = render partial: 'shared/user_menu'
+    = menu_item 'home', t('admin.return_to_storefront'), front_path
+- else
+  %ul.nav.navmenu-nav
+    = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path

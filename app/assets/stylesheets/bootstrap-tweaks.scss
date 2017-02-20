@@ -62,14 +62,22 @@ html {
   .navmenu-title {
     margin-top: 20px;
     padding: 10px 15px;
-    color: $navbar-default-color;
+    color: $navbar-default-link-active-color;
     border-top: 1px solid $navbar-default-border;
     text-transform: uppercase;
+  }
+
+  .navmenu-nav > li > .navmenu-nav {
+    padding-left: 30px;
+
+    > li > a {
+      font-size: $font-size-small;
+    }
   }
 }
 .navmenu.navmenu-inverse {
   .navmenu-title {
-    color: $navbar-inverse-color;
+    color: $navbar-inverse-link-active-color;
     border-top: 1px solid $navbar-inverse-border;
   }
 }

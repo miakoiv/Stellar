@@ -68,7 +68,7 @@ en:
           daily: Daily sales €
           total: Total sales €
     manage: Manage
-    return_to_storefront: Storefront
+    return_to_storefront: Return to storefront
     albums:
       index:
         new_album: New album
