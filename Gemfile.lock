@@ -46,6 +46,8 @@ GEM
       activesupport (>= 3.0.0)
     autoprefixer-rails (6.7.3)
       execjs
+    awesome_nested_set (3.1.1)
+      activerecord (>= 4.0.0, < 5.1)
     backport_new_renderer (1.0.0)
       rails
     bcrypt (3.1.11)
@@ -316,6 +318,7 @@ DEPENDENCIES
   active_link_to
   authority
   autoprefixer-rails
+  awesome_nested_set
   backport_new_renderer
   bootstrap-datepicker-rails
   bootstrap-generators (~> 3.3.4)

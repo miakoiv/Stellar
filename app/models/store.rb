@@ -144,7 +144,7 @@ class Store < ActiveRecord::Base
 
   # Available categories at top level.
   def top_level_category_options(exclude = nil)
-    (categories.top_level - [exclude]).map { |c| [c.name, c.id] }
+    (categories.roots - [exclude]).map { |c| [c.name, c.id] }
   end
 
   # Countries where concluded orders have been shipped to.

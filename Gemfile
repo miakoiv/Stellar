@@ -47,6 +47,9 @@ gem 'human_attribute_values'
 # Friendly ids
 gem 'friendly_id'
 
+# Awesome nested sets
+gem 'awesome_nested_set'
+
 # Moneh!
 gem 'money-rails'
 
