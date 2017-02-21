@@ -8,11 +8,6 @@
 @import "fonts.scss";
 @import "print.scss";
 
-body {
-  padding-top: $navbar-height;
-  overflow-y: scroll;
-}
-
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
 

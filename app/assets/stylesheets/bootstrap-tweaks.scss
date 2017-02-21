@@ -3,7 +3,27 @@ html {
   min-height: 100%;
 
   body {
-    margin-bottom: 120px;
+    min-height: 100%;
+    padding-top: 0;
+  }
+}
+
+#offcanvas-wrap {
+  overflow-y: scroll;
+
+  > #canvas-wrap {
+    padding-top: $navbar-height;
+    padding-bottom: 200px;
+  }
+
+  &.canvas-slid {
+    // offcanvas is 300px wide, fix #canvas-wrap in position
+    > #canvas-wrap {
+      position: fixed;
+      overflow: hidden;
+      left: 300px;
+      right: -300px;
+    }
   }
 }
 
