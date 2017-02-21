@@ -65,7 +65,7 @@ de:
         images: Fotos
         page_ids: Angezeigt auf Seiten
       category:
-        parent_category_id: Übergeordnete Kategorie
+        parent_id: Übergeordnete Kategorie
         name: Name
         description: Beschreibung
         product_scope: Produktsortierung

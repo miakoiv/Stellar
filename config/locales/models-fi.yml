@@ -123,7 +123,7 @@ fi:
         value: Arvo
         note: Selite
       category:
-        parent_category_id: Pääryhmä
+        parent_id: Pääryhmä
         live: Aktiivinen
         not_live: Tuoteryhmä ei aktiivinen
         hidden: Piilotettu

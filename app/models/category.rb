@@ -11,8 +11,8 @@ class Category < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :parent_category, class_name: 'Category'
-  has_many :subcategories, class_name: 'Category', foreign_key: :parent_category_id
+  belongs_to :parent, class_name: 'Category'
+  has_many :children, class_name: 'Category', foreign_key: :parent_id
   has_and_belongs_to_many :products
   belongs_to :banner, class_name: 'Page'
 
@@ -21,7 +21,7 @@ class Category < ActiveRecord::Base
 
   default_scope { sorted }
   scope :live, -> { where(live: true) }
-  scope :top_level, -> { where(parent_category_id: nil) }
+  scope :top_level, -> { where(parent_id: nil) }
   scope :visible, -> { where(live: true, hidden: false) }
 
   #---
@@ -35,28 +35,28 @@ class Category < ActiveRecord::Base
   # Category is inside another category if it's the category itself,
   # or inside one of its parent categories.
   def inside?(category)
-    category == self || parent_category.present? && parent_category.inside?(category)
+    category == self || parent.present? && parent.inside?(category)
   end
 
   def level
-    parent_category.nil? ? 0 : 1 + parent_category.level
+    parent.nil? ? 0 : 1 + parent.level
   end
 
   def top_level
-    parent_category.nil? ? self : parent_category.top_level
+    parent.nil? ? self : parent.top_level
   end
 
   def visible?
     live? && !hidden?
   end
 
-  # If this category has no products, tries the first subcategory.
-  # Defaults to self if there are no subcategories, or the first
-  # subcategory has no products either.
+  # If this category has no products, tries the first child category.
+  # Defaults to self if there are no child categories, or the first
+  # child category has no products either.
   def having_products
-    return self if subcategories.visible.empty? || products.visible.any?
-    first_subcategory = subcategories.visible.first
-    first_subcategory.products.visible.empty? ? self : first_subcategory
+    return self if children.visible.empty? || products.visible.any?
+    first_child = children.visible.first
+    first_child.products.visible.empty? ? self : first_child
   end
 
   def slugger

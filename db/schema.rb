@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216095027) do
+ActiveRecord::Schema.define(version: 20170221115049) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -71,20 +71,20 @@ ActiveRecord::Schema.define(version: 20170216095027) do
   add_index "asset_entries", ["source_type", "source_id"], name: "index_asset_entries_on_source_type_and_source_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.integer  "store_id",           limit: 4,                   null: false
-    t.integer  "parent_category_id", limit: 4
-    t.integer  "banner_id",          limit: 4
-    t.boolean  "live",                           default: false, null: false
-    t.boolean  "hidden",                         default: false, null: false
-    t.string   "name",               limit: 255
-    t.string   "slug",               limit: 255,                 null: false
-    t.string   "product_scope",      limit: 255
-    t.integer  "priority",           limit: 4,   default: 0,     null: false
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.integer  "store_id",      limit: 4,                   null: false
+    t.integer  "parent_id",     limit: 4
+    t.integer  "banner_id",     limit: 4
+    t.boolean  "live",                      default: false, null: false
+    t.boolean  "hidden",                    default: false, null: false
+    t.string   "name",          limit: 255
+    t.string   "slug",          limit: 255,                 null: false
+    t.string   "product_scope", limit: 255
+    t.integer  "priority",      limit: 4,   default: 0,     null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
-  add_index "categories", ["parent_category_id"], name: "index_categories_on_parent_category_id", using: :btree
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
 

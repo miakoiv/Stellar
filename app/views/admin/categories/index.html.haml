@@ -11,7 +11,7 @@
         %th.col-min.hidden-print
         %th.col-min
         %th.col-xs-4= col(Category, :name)
-        %th= col(Category, :parent_category_id)
+        %th= col(Category, :parent_id)
         %th.col-min
         %th.col-min
         %th= col(Category, :product_scope)
@@ -23,7 +23,7 @@
           %td.hidden-print= drag_handle
           %td= image_variant_tag category.cover_image
           %td= category.name
-          %td= category.parent_category
+          %td= category.parent
           %td
             - if category.hidden?
               = icon('eye-slash', title: col(Category, :hidden), data: {toggle: 'tooltip'})
