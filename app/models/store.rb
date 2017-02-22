@@ -142,11 +142,6 @@ class Store < ActiveRecord::Base
     properties.merge(Property.searchable).merge(Property.sorted)
   end
 
-  # Available categories at top level.
-  def top_level_category_options(exclude = nil)
-    (categories.roots - [exclude]).map { |c| [c.name, c.id] }
-  end
-
   # Countries where concluded orders have been shipped to.
   # Useful as sales report search option.
   def countries_shipped_to
