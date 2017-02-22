@@ -9,6 +9,9 @@
     = render partial: 'nested_list_item', collection: @categories.roots, as: :category
 
 :coffee
-  $('.dd').nestable
-    callback: (l, e) ->
-      console.log l, e
+  $('.dd').nestable().bind 'change', ->
+    $.ajax
+      type: 'POST'
+      url: '#{rearrange_admin_categories_path}'
+      data: JSON.stringify {categories: $(this).nestable('serialize')}
+      contentType: 'application/json; charset=utf-8'
