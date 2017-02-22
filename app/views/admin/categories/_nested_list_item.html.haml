@@ -1,0 +1,5 @@
+%li.dd-item{data: {id: category.id}}
+  = render partial: 'category', object: category, as: :category
+  - if category.children_count > 0
+    %ol.dd-list
+      = render partial: 'nested_list_item', collection: category.children, as: :category

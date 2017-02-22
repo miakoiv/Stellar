@@ -1,0 +1,84 @@
+.dd-list {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 30px;
+
+  .dd-list { padding-left: 30px; }
+}
+
+.dd-item {
+  margin: 10px 0;
+  padding: 8px;
+  background-color: $list-group-bg;
+  border: 1px solid $list-group-border;
+  border-radius: $list-group-border-radius;
+
+  &:hover { background-color: $list-group-hover-bg; }
+
+  .dd-widget, .dd-handle {
+    @extend .pull-left;
+    margin-right: 15px;
+  }
+  .dd-handle { cursor: grab; }
+  .label { margin-left: 15px; }
+  .dd-actions {
+    @extend .pull-right, .text-right, .no-wrap, .hidden-print;
+  }
+
+  > button {
+    @extend .pull-left;
+    position: relative;
+    width: 24px;
+    margin-right: 15px;
+    padding: 0;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 0;
+    background-color: transparent;
+
+    &:before {
+      @extend .fa;
+      display: block;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      text-indent: 0;
+      line-height: inherit;
+    }
+
+    &.dd-expand:before { content: "\f0da"; }
+    &.dd-collapse:before { content: "\f0d7"; }
+  }
+}
+
+.dd-empty, .dd-placeholder {
+  box-sizing: content-box;
+  min-height: 30px;
+  margin: 10px 0;
+  padding: 8px;
+  background-color: $list-group-active-bg;
+  border: 1px solid $list-group-active-border;
+  border-radius: $list-group-border-radius;
+  opacity: 0.333;
+}
+
+.dd-expand { display: none; }
+.dd-collapsed {
+  .dd-list, .dd-collapse { display: none; }
+  .dd-expand { display: block; }
+}
+
+.dd-dragel {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+
+  > .dd-item {
+    @include box-shadow(0 0 6px 0 rgba(0,0,0,0.25));
+    margin-top: 0;
+  }
+}
