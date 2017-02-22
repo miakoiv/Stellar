@@ -2,11 +2,10 @@
 
 class Admin::CategoriesController < ApplicationController
 
-  include Reorderer
   before_action :authenticate_user!
   before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
-  authority_actions reorder: 'update', reorder_products: 'update'
+  authority_actions rearrange: 'update', reorder_products: 'update'
   authorize_actions_for Category
 
   layout 'admin'
@@ -14,7 +13,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = current_store.categories
+    @categories = current_store.categories.order(:lft)
   end
 
   # GET /admin/categories/1
@@ -72,6 +71,10 @@ class Admin::CategoriesController < ApplicationController
         notice: t('.notice', category: @category) }
       format.json { head :no_content }
     end
+  end
+
+  # POST /admin/categories/rearrange
+  def rearrange
   end
 
   # GET /admin/categories/1/reorder_products

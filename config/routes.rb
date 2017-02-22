@@ -101,7 +101,7 @@ Rails.application.routes.draw do
     end
     resources :categories do
       resources :images, shallow: true
-      post :reorder, on: :collection
+      post :rearrange, on: :collection
       get :reorder_products, on: :member
     end
     resources :pages do
