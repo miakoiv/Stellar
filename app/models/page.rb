@@ -10,12 +10,15 @@ class Page < ActiveRecord::Base
   friendly_id :slugger, use: [:slugged, :history]
 
   #---
-  # Pages serve different purposes while they are essentially comprised of
-  # the same attributes. Route pages use their slug for routing to /front
-  # or /cart. Primary and secondary pages are regular user edited content,
-  # while secondaries don't get a navbar item. Banners and templates are
-  # used for content generation.
-  enum purpose: {route: 0, primary: 1, secondary: 2, banner: 3, template: 4}
+  enum purpose: {
+    route: 0,     # navigation node routed to #slug
+    primary: 1,   # primary content in main nav
+    secondary: 2, # secondary content in footer
+    banner: 3,    # banner container (deprecated)
+    template: 4,  # printed page template
+    category: 5,  # navigation node to linked category (or categories root)
+    empty: 6,     # empty page providing a navigation node
+  }
 
   #---
   belongs_to :store
