@@ -16,44 +16,30 @@
 
   .col-lg-6
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      %li.active{role: 'presentation'}
-        %a{href: '#tab-alternate-prices', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :alternate_prices)
-      %li{role: 'presentation'}
-        %a{href: '#tab-inventory', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :inventory)
-      %li{role: 'presentation'}
-        %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :images)
-      %li{role: 'presentation'}
-        %a{href: '#tab-properties', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :product_properties)
-      %li{role: 'presentation'}
-        %a{href: '#tab-iframes', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :iframes)
-      %li{role: 'presentation'}
-        %a{href: '#tab-requisite-entries', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :requisite_entries)
-      %li{role: 'presentation'}
-        %a{href: '#tab-component-entries', role: 'tab', data: {toggle: 'tab'}}
-          = col(Product, :component_entries)
+      = nav_tab 'images', col(Product, :images), class: 'active'
+      = nav_tab 'inventory', col(Product, :inventory)
+      = nav_tab 'alternate-prices', col(Product, :alternate_prices)
+      = nav_tab 'properties', col(Product, :product_properties)
+      = nav_tab 'iframes', col(Product, :iframes)
+      = nav_tab 'requisite-entries', col(Product, :requisite_entries)
+      = nav_tab 'component-entries', col(Product, :component_entries)
 
     .tab-content
-      #tab-alternate-prices.tab-pane.fade.in.active
-        = render partial: 'admin/alternate_prices/edit_table', object: @product, as: :product
-      #tab-inventory.tab-pane.fade
+      = tab_pane 'images', class: 'in active' do
+        = render partial: 'admin/images/edit_table', object: @product, as: :imageable
+        = render partial: 'admin/images/dropzone', object: @product, as: :imageable
+      = tab_pane 'inventory' do
         = render partial: 'admin/inventory_items/table_for_product', object: @product, as: :product
         - if current_user.can_create?(InventoryItem)
           = render partial: 'admin/inventory_items/form_for_product', object: @product, as: :product
-      #tab-images.tab-pane.fade
-        = render partial: 'admin/images/edit_table', object: @product, as: :imageable
-        = render partial: 'admin/images/dropzone', object: @product, as: :imageable
-      #tab-properties.tab-pane.fade
+      = tab_pane 'alternate-prices' do
+        = render partial: 'admin/alternate_prices/edit_table', object: @product, as: :product
+      = tab_pane 'properties' do
         = render partial: 'admin/product_properties/edit_table', object: @product, as: :product
-      #tab-iframes.tab-pane.fade
+      = tab_pane 'iframes' do
         = render partial: 'admin/iframes/edit_table', object: @product, as: :product
-      #tab-requisite-entries.tab-pane.fade
+      = tab_pane 'requisite-entries' do
         = render partial: 'admin/requisite_entries/edit_table', object: @product, as: :product
         = render partial: 'add_requisite_entries', object: @product, as: :product
-      #tab-component-entries.tab-pane.fade
+      = tab_pane 'component-entries' do
         = render partial: 'admin/component_entries/edit_table', object: @product, as: :product

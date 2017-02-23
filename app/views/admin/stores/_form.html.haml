@@ -1,28 +1,18 @@
 = bootstrap_form_for [:admin, @store], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    %li.active{role: 'presentation'}
-      %a{href: '#tab-store-admin', role: 'tab', data: {toggle: 'tab'}}
-        = col(Store, :admin)
-    %li{role: 'presentation'}
-      %a{href: '#tab-store-files', role: 'tab', data: {toggle: 'tab'}}
-        = col(Store, :files)
+    = nav_tab 'store-admin', col(Store, :admin), class: 'active'
+    = nav_tab 'store-files', col(Store, :files)
     - if current_user.has_cached_role?(:superuser)
-      %li{role: 'presentation'}
-        %a{href: '#tab-store-superuser', role: 'tab', data: {toggle: 'tab'}}
-          = col(Store, :superuser)
+      = nav_tab 'store-superuser', col(Store, :superuser)
     - if @store.new_record?
-      %li{role: 'presentation'}
-        %a{href: '#tab-store-new-user', role: 'tab', data: {toggle: 'tab'}}
-          = col(Store, :new_user)
-      %li{role: 'presentation'}
-        %a{href: '#tab-store-new-tax-category', role: 'tab', data: {toggle: 'tab'}}
-          = col(Store, :new_tax_category)
+      = nav_tab 'store-new-user', col(Store, :new_user)
+      = nav_tab 'store-new-tax-category', col(Store, :new_tax_category)
 
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        #tab-store-admin.tab-pane.fade.in.active
+        = tab_pane 'store-admin', class: 'in active' do
           %fieldset{disabled: locked}
             = f.text_field :name, required: true
             = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
@@ -39,7 +29,7 @@
             = f.select :manufacturer_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
             = f.select :reseller_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
             = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
-        #tab-store-files.tab-pane.fade
+        = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)
             = f.text_field :csv_encoding
@@ -50,7 +40,7 @@
             %legend= col(Store, :order_xml)
             = f.text_field :order_xml_path
         - if current_user.has_cached_role?(:superuser)
-          #tab-store-superuser.tab-pane.fade
+          = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
               = f.number_field :erp_number
               - unless @store.new_record?
@@ -58,7 +48,7 @@
               = f.text_field :order_sequence, help: t('.order_sequence_help_html')
               = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
         - if @store.new_record?
-          #tab-store-new-user.tab-pane.fade
+          = tab_pane 'store-new-user' do
             = f.fields_for :users do |ff|
               %fieldset{disabled: locked}
                 = ff.hidden_field :group
@@ -68,7 +58,7 @@
                 = ff.password_field :password, required: true
                 = ff.password_field :password_confirmation, required: true
                 = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
-          #tab-store-new-tax-category.tab-pane.fade
+          = tab_pane 'store-new-tax-category' do
             = f.fields_for :tax_categories do |ff|
               %fieldset{disabled: locked}
                 = ff.text_field :name, required: true

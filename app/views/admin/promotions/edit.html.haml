@@ -12,21 +12,15 @@
 
   .col-md-7
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      %li.active{role: 'presentation'}
-        %a{href: '#tab-promoted', role: 'tab', data: {toggle: 'tab'}}
-          = title(PromotedItem, count: 2)
-      %li{role: 'presentation'}
-        %a{href: '#tab-products', role: 'tab', data: {toggle: 'tab'}}
-          = t('.add_products')
-      %li{role: 'presentation'}
-        %a{href: '#tab-categories', role: 'tab', data: {toggle: 'tab'}}
-          = t('.add_categories')
+      = nav_tab 'promoted', title(PromotedItem, count: 2), class: 'active'
+      = nav_tab 'products', t('.add_products')
+      = nav_tab 'categories', t('.add_categories')
 
     .tab-content
-      #tab-promoted.tab-pane.fade.in.active
+      = tab_pane 'promoted', class: 'in active' do
         %h2.visible-print-block= title(PromotedItem, count: 2)
         = render partial: 'admin/promoted_items/edit_table', object: @promotion, as: :promotion
-      #tab-products.tab-pane.fade
+      = tab_pane 'products' do
         = render partial: 'admin/promotions/add_products', object: @promotion, as: :promotion
-      #tab-categories.tab-pane.fade
+      = tab_pane 'categories' do
         = render partial: 'admin/promotions/add_categories', object: @promotion, as: :promotion

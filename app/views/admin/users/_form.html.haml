@@ -1,20 +1,14 @@
 = bootstrap_form_for [:admin, @user], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    %li.active{role: 'presentation'}
-      %a{href: '#tab-user-personal', role: 'tab', data: {toggle: 'tab'}}
-        = col(User, :personal)
-    %li{role: 'presentation'}
-      %a{href: '#tab-user-privileges', role: 'tab', data: {toggle: 'tab'}}
-        = col(User, :privileges)
-    %li{role: 'presentation'}
-      %a{href: '#tab-user-addresses', role: 'tab', data: {toggle: 'tab'}}
-        = col(User, :addresses)
+    = nav_tab 'user-personal', col(User, :personal), class: 'active'
+    = nav_tab 'user-privileges', col(User, :privileges)
+    = nav_tab 'user-addresses', col(User, :addresses)
 
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        #tab-user-personal.tab-pane.fade.in.active
+        = tab_pane 'user-personal', class: 'in active' do
           %fieldset{disabled: locked}
             = f.text_field :name, required: true
             = f.text_field :email, required: true
@@ -26,13 +20,13 @@
                 .col-sm-8.col-sm-offset-4
                   = render partial: 'shared/password_strength'
               = f.password_field :password_confirmation, required: true
-        #tab-user-privileges.tab-pane.fade
+        = tab_pane 'user-privileges' do
           %fieldset{disabled: locked}
             = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
             = f.select :pricing_group_id, current_store.pricing_groups.map { |g| [g.to_s, g.id] }, {include_blank: blank}, {class: 'selectize'}
             = f.select :category_ids, current_store.categories.map { |c| [c.to_s, c.id] }, {}, {multiple: true, class: 'selectize', placeholder: t('.no_categories')}
             = f.select :role_ids, current_user.grantable_role_options, {}, {multiple: true, class: 'selectize'}
-        #tab-user-addresses.tab-pane.fade
+        = tab_pane 'user-addresses' do
           %fieldset{disabled: locked}
             = f.text_field :shipping_address
             .form-group

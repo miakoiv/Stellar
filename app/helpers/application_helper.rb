@@ -28,6 +28,21 @@ module ApplicationHelper
     active_link_to menu_title(icon, text), path, options.merge(wrap_tag: :li)
   end
 
+  def nav_tab(id, text, options = {})
+    content_tag :li, options.merge(role: 'presentation') do
+      link_to text, "#tab-#{id}", role: 'tab', data: {toggle: 'tab'}
+    end
+  end
+
+  def tab_pane(id, options = {})
+    classes = (options[:class] || '').split
+    classes << 'tab-pane fade'
+    options[:class] = classes.join(' ')
+    content_tag :div, options.merge(id: "tab-#{id}") do
+      yield
+    end
+  end
+
   def drag_handle
     content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
       icon('ellipsis-v', class: 'fa-lg fa-fw')

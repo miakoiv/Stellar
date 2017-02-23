@@ -35,19 +35,16 @@
 
     .product-description
       %ul.nav.nav-tabs.nav-sm{role: 'tablist'}
-        %li.active{role: 'presentation'}
-          %a{href: '#tab-description', role: 'tab', data: {toggle: 'tab'}}
-            = t('store.product_description')
+        = nav_tab 'description', t('store.product_description'), class: 'active'
         - if product.images.document.any?
-          %li{role: 'presentation'}
-            %a{href: '#tab-documents', role: 'tab', data: {toggle: 'tab'}}
-              = t('store.product_documentation')
+          = nav_tab 'documents', t('store.product_documentation')
+
       .tab-content
-        #tab-description.tab-pane.fade.in.active
+        = tab_pane 'description', class: 'in active' do
           .body-text><
             = product.description.html_safe if product.description.present?
         - if product.images.document.any?
-          #tab-documents.tab-pane.fade
+          = tab_pane 'documents' do
             .documents.list-group
               - product.images.document.each do |document|
                 = link_to(icon('paperclip', document.to_s),

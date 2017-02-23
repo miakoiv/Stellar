@@ -14,14 +14,11 @@
 
   .col-md-6
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      %li.active{role: 'presentation'}
-        %a{href: '#tab-hostnames', role: 'tab', data: {toggle: 'tab'}}
-          = col(Portal, :hostnames)
-      %li{role: 'presentation'}
-        %a{href: '#tab-images', role: 'tab', data: {toggle: 'tab'}}
-          = col(Portal, :images)
+      = nav_tab 'hostnames', col(Portal, :hostnames), class: 'active'
+      = nav_tab 'images', col(Portal, :images)
+
     .tab-content
-      #tab-hostnames.tab-pane.fade.in.active
+      = tab_pane 'hostnames', class: 'in active' do
         = render partial: 'admin/hostnames/table', object: @portal, as: :resource
-      #tab-images.tab-pane.fade
+      = tab_pane 'images' do
         = render partial: 'admin/images/table', object: @portal, as: :imageable

@@ -1,23 +1,15 @@
 = bootstrap_form_for [:admin, @product], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    %li.active{role: 'presentation'}
-      %a{href: '#tab-product-meta', role: 'tab', data: {toggle: 'tab'}}
-        = col(Product, :metadata)
-    %li{role: 'presentation'}
-      %a{href: '#tab-product-text', role: 'tab', data: {toggle: 'tab'}}
-        = col(Product, :text)
-    %li.master-disable{role: 'presentation', class: @product.master? && 'disabled'}
-      %a{href: '#tab-product-pricing', role: 'tab', data: {toggle: 'tab'}}
-        = col(Product, :pricing)
-    %li.master-disable{role: 'presentation', class: @product.master? && 'disabled'}
-      %a{href: '#tab-product-shipping', role: 'tab', data: {toggle: 'tab'}}
-        = col(Product, :shipping)
+    = nav_tab 'product-meta', col(Product, :metadata), class: 'active'
+    = nav_tab 'product-text', col(Product, :text)
+    = nav_tab 'product-pricing', col(Product, :pricing), class: @product.master? ? 'master-disable disabled' : 'master-disable'
+    = nav_tab 'product-shipping', col(Product, :shipping), class: @product.master? ? 'master-disable disabled' : 'master-disable'
 
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        #tab-product-meta.tab-pane.fade.in.active
+        = tab_pane 'product-meta', class: 'in active' do
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             .variant-only.collapse{class: @product.variant? && 'in'}
@@ -34,13 +26,13 @@
                 data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             = f.text_area :memo, rows: 2
 
-        #tab-product-text.tab-pane.fade
+        = tab_pane 'product-text' do
           %fieldset{disabled: locked}
             = f.text_field :title, required: true
             = f.text_field :subtitle
             = f.text_area :description
 
-        #tab-product-pricing.tab-pane.fade
+        = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
             = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }
             - if current_user.manufacturer?
@@ -71,7 +63,7 @@
                   %span.input-group-addon= col(Product, :margin_percent)
                   = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), class: 'form-control text-right'
 
-        #tab-product-shipping.tab-pane.fade
+        = tab_pane 'product-shipping' do
           %fieldset{disabled: locked}
             = f.text_field :mass, append: 'g', class: 'text-right'
             .form-group
