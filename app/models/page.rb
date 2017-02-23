@@ -12,12 +12,14 @@ class Page < ActiveRecord::Base
   #---
   enum purpose: {
     route: 0,     # navigation node routed to #slug
-    primary: 1,   # primary content in main nav
-    secondary: 2, # secondary content in footer
+    primary: 1,   # page with content sections
+    secondary: 2, # secondary content (deprecated)
     banner: 3,    # banner container (deprecated)
-    template: 4,  # printed page template
-    category: 5,  # navigation node to linked category (or categories root)
-    empty: 6,     # empty page providing a navigation node
+    template: 4,  # printed page template (deprecated)
+    menu: 5,      # navigation menu containing other pages
+    category: 6,  # navigation node to linked category (or categories root)
+    header: 10,   # virtual page containing main navigation
+    footer: 11,   # virtual page containing footer links
   }
 
   #---
