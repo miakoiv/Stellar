@@ -1,4 +1,4 @@
-%li{class: @category.inside?(category) && 'active'}
+%li{class: @category == category && 'active'}
   = link_to show_category_path(category) do
     = image_variant_tag category.cover_image(:technical), :thumbnail
     = category.name
