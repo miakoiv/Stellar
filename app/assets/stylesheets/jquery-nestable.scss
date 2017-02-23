@@ -13,6 +13,7 @@
   margin: 10px 0;
   padding: 8px;
   background-color: $list-group-bg;
+  color: $text-color;
   border: 1px solid $list-group-border;
   border-radius: $list-group-border-radius;
 
@@ -81,4 +82,25 @@
     @include box-shadow(0 0 6px 0 rgba(0,0,0,0.25));
     margin-top: 0;
   }
+}
+
+.dd-item-success {
+  background-color: $state-success-bg;
+  color: $state-success-text;
+  &:hover, &:focus { background-color: darken($state-success-bg, 5%); }
+}
+.dd-item-info {
+  background-color: $state-info-bg;
+  color: $state-info-text;
+  &:hover, &:focus { background-color: darken($state-info-bg, 5%); }
+}
+.dd-item-warning {
+  background-color: $state-warning-bg;
+  color: $state-warning-text;
+  &:hover, &:focus { background-color: darken($state-warning-bg, 5%); }
+}
+.dd-item-danger {
+  background-color: $state-danger-bg;
+  color: $state-danger-text;
+  &:hover, &:focus { background-color: darken($state-danger-bg, 5%); }
 }

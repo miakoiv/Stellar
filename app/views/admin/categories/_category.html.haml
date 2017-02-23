@@ -1,5 +1,9 @@
 .dd-handle= drag_handle
 .dd-widget.box-icon= image_variant_tag category.cover_image
+- unless category.live?
+  .dd-widget= icon('warning', title: col(Category, :not_live), data: {toggle: 'tooltip'})
+- if category.hidden?
+  .dd-widget= icon('eye-slash', title: col(Category, :hidden), data: {toggle: 'tooltip'})
 = category
 .dd-actions
   - if category.product_scope == 'manual'
