@@ -126,7 +126,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_pages
-      @pages = @current_store.pages
+      @pages = @current_store.pages.order(:lft)
     end
 
     # Pricing group is set by a before_action. Changing the pricing group
