@@ -1,4 +1,4 @@
-- if !@page.new_record? && @page.wysiwyg?
+- if !@page.new_record? && @page.can_have_content? && @page.wysiwyg?
 
   #wysiwyg-content.wysiwyg-content><
     = @page.content.html_safe if @page.content.present?

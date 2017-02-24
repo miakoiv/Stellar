@@ -1,0 +1,22 @@
+- if page.movable?
+  .dd-handle= drag_handle
+- if page.route?
+  .dd-widget
+    %code= "/#{page.slug}"
+%span.dd-icon= icon(page.icon)
+= page.title
+.dd-actions
+  - if page.can_have_content?
+    = link_to icon('eye', t('actions.view')), show_page_path(page),
+        class: 'btn btn-default btn-sm'
+  - if current_user.can_update?(page)
+    = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
+        class: 'btn btn-default btn-sm'
+  - if current_user.can_delete?(page)
+    = link_to icon('remove', t('actions.delete')), admin_page_path(page),
+        method: :delete, class: 'btn btn-sm btn-danger',
+        data: {confirm: t('actions.confirm.body',
+          klass: Page.model_name.human, name: page.title),
+          'confirm-title': t('actions.confirm.title'),
+          'confirm-proceed': t('actions.confirm.proceed'),
+          'confirm-cancel': t('actions.confirm.cancel')}

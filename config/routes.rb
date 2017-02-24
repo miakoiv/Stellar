@@ -106,7 +106,7 @@ Rails.application.routes.draw do
     end
     resources :pages do
       resources :images, shallow: true
-      post :reorder, on: :collection
+      post :rearrange, on: :collection
     end
     resources :albums do
       resources :images, shallow: true

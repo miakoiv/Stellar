@@ -129,7 +129,7 @@ de:
         product_retail_price: Verkaufspreis
         subtotal: Zwischensumme
       page:
-        parent_page_id: Übergeordnete Seite
+        parent_id: Übergeordnete Seite
         title: Titel
         slug: Adresse
         content: Inhalt

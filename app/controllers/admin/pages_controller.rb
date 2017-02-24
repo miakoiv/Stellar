@@ -2,11 +2,11 @@
 
 class Admin::PagesController < ApplicationController
 
-  include Reorderer
+  include AwesomeNester
   before_action :authenticate_user!
   before_action :set_page, only: [:show, :edit, :update, :destroy]
 
-  authority_actions reorder: 'update'
+  authority_actions rearrange: 'update'
   authorize_actions_for Page, except: [:edit, :update, :destroy]
 
   layout 'admin'
@@ -30,7 +30,7 @@ class Admin::PagesController < ApplicationController
   # POST /admin/pages
   # POST /admin/pages.json
   def create
-    @page = current_store.pages.build(page_params.merge(priority: current_store.pages.count))
+    @page = current_store.pages.build(page_params)
 
     respond_to do |format|
       if @page.save
@@ -83,7 +83,7 @@ class Admin::PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(
-        :store_id, :purpose, :parent_page_id, :title, :slug, :content,
+        :store_id, :purpose, :title, :slug, :content,
         :wysiwyg, album_ids: []
       )
     end

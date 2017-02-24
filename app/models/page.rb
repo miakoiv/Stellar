@@ -5,64 +5,69 @@ class Page < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
-  include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
+  acts_as_nested_set scope: :store,
+                     dependent: :nullify,
+                     counter_cache: :children_count
 
   #---
   enum purpose: {
-    route: 0,     # navigation node routed to #slug
-    primary: 1,   # page with content sections
-    secondary: 2, # secondary content (deprecated)
-    banner: 3,    # banner container (deprecated)
-    template: 4,  # printed page template (deprecated)
-    menu: 5,      # navigation menu containing other pages
-    category: 6,  # navigation node to linked category (or categories root)
-    header: 10,   # virtual page containing main navigation
-    footer: 11,   # virtual page containing footer links
+    route: 0,       # navigation node routed to #slug
+    primary: 1,     # page with content sections
+    secondary: 2,   # secondary content (deprecated)
+    banner: 3,      # banner container (deprecated)
+    template: 4,    # printed page template
+    navigation: 5,  # navigation menu containing other pages
+    category: 6,    # navigation node to linked category (or categories root)
+    header: 7,      # virtual page containing main navigation
+    footer: 8,      # virtual page containing footer links
   }
+
+  PRESENTATION = {
+    'route' => {icon: '', appearance: 'danger'},
+    'primary' => {icon: 'file-text-o', appearance: 'success'},
+    'secondary' => {icon: 'file-text-o', appearance: 'success'},
+    'banner' => {icon: ''},
+    'template' => {icon: 'file-o', appearance: 'warning'},
+    'navigation' => {icon: 'share-alt'},
+    'category' => {icon: 'sitemap', appearance: 'info'},
+    'header' => {icon: 'navicon'},
+    'footer' => {icon: 'paragraph'}
+  }.freeze
 
   #---
   belongs_to :store
-  belongs_to :parent_page, class_name: 'Page'
-  has_many :sub_pages, class_name: 'Page', foreign_key: :parent_page_id
   has_and_belongs_to_many :albums
 
-  default_scope { sorted }
-
-  # Acceptable parent pages are regular top level pages.
-  scope :acceptable_parent, -> { where(parent_page_id: nil).where(purpose: [1, 2]) }
-
-  # Navbar items are created from route and primary pages.
-  scope :navbar, -> { where(parent_page_id: nil).where(purpose: [0, 1]) }
-
-  # Footer gets the secondary pages.
-  scope :footer, -> { where(parent_page_id: nil).secondary }
+  #---
+  validates :title, presence: true,
+    unless: -> (page) { page.header? || page.footer? }
 
   #---
-  validates :title, presence: true
-
-  #---
-  def available_purposes
-    return Page.purposes if new_record?
-    return Page.purposes.slice('route') if route?
-    Page.purposes.slice('primary', 'secondary', 'banner', 'template')
+  def self.available_purposes
+    purposes.slice(:route, :primary, :template, :navigation, :category)
   end
 
-  def purpose_options
+  def self.purpose_options
     available_purposes.keys.map { |p| [Page.human_attribute_value(:purpose, p), p] }
   end
 
-  def can_be_nested?
-    primary? || secondary?
+  #---
+  def can_have_children?
+    navigation? || header? || footer?
+  end
+
+  def can_have_content?
+    primary? || template?
+  end
+
+  def movable?
+    route? || primary? || navigation? || category?
   end
 
   def can_have_albums?
-    primary? || secondary? || banner?
-  end
-
-  def needs_content?
-    !route?
+    primary?
   end
 
   def slugger
@@ -78,7 +83,19 @@ class Page < ActiveRecord::Base
     title
   end
 
+  def icon
+    Page::PRESENTATION[purpose][:icon]
+  end
+
+  def appearance
+    Page::PRESENTATION[purpose][:appearance]
+  end
+
   def description
     content
+  end
+
+  def to_partial_path
+    "pages/#{purpose}"
   end
 end

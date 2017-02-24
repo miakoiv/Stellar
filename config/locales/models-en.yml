@@ -235,7 +235,7 @@ en:
         product_retail_price: Retail price
       page:
         purpose: Page type
-        parent_page_id: Parent page
+        parent_id: Parent page
         title: Title
         slug: Address
         content: Content

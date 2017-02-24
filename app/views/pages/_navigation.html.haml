@@ -1,0 +1,12 @@
+- if navigation.children_count > 0
+  - if dropdown
+    %li.dropdown
+      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = navigation
+        %span.caret
+      %ul.dropdown-menu{role: 'menu'}
+        = render partial: navigation.children, locals: {dropdown: true}
+  - else
+    .navmenu-title= navigation
+    %ul.nav.navmenu-nav
+      = render partial: navigation.children, locals: {dropdown: false}

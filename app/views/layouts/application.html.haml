@@ -17,7 +17,7 @@
             .navbar-header
               = link_to branding(current_store), standalone_store? ? root_path : root_url(host: request.domain), class: 'navbar-brand'
             %ul.nav.navbar-nav.responsive
-              = render partial: 'shared/page_link', collection: @pages.navbar, as: :page, locals: {subnav: 'dropdown-menu'}
+              = render partial: @pages.header.first.children, locals: {dropdown: true}
             %ul.nav.navbar-nav.navbar-right
               = render partial: 'shared/navbar_charms'
             %ul.nav.navbar-nav.navbar-right.responsive

@@ -235,7 +235,7 @@ fi:
         product_retail_price: Myyntihinta
       page:
         purpose: Sivun tyyppi
-        parent_page_id: Pääsivu
+        parent_id: Pääsivu
         title: Otsake
         slug: Osoite
         content: Sisältö

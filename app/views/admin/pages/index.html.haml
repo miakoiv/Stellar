@@ -4,49 +4,14 @@
       = icon('plus', t('.new_page'))
   %h1= icon('files-o', title(Page, count: 2))
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-min.hidden-print
-        %th.col-xs-2= col(Page, :purpose)
-        %th.col-xs-2= col(Page, :parent_page_id)
-        %th.col-xs-2= col(Page, :title)
-        %th= col(Page, :album_ids)
-        %th.actions
-
-    %tbody{class: current_user.can_update?(Page) && 'sortable'}
-      = content_tag_for :tr, @pages do |page|
-        %td.hidden-print= drag_handle
-        %td
-          = page.human_attribute_value(:purpose)
-          - if page.route?
-            %code= "/#{page.slug}"
-        %td= page.parent_page
-        %td= page.title
-        %td= page.albums.to_sentence
-        %td.actions
-          = link_to icon('eye', t('actions.view')), show_page_path(page),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(page)
-            = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
-                class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(page)
-            = link_to icon('remove', t('actions.delete')), admin_page_path(page),
-                method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Page.model_name.human, name: page.title),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+.dd
+  %ol.dd-list
+    = render partial: 'nested_list_item', collection: @pages.roots, as: :page
 
 :coffee
-  $('.sortable').sortable(
-    items: '> tr'
-    handle: '.handle'
-    placeholder: 'sortable-placeholder'
-    opacity: 0.5
-    revert: 200
-  ).bind 'sortupdate', (e, ui) ->
-    $.post '#{reorder_admin_pages_path}',
-      {reorder: $(this).sortable('toArray')}
+  $('.dd').nestable().bind 'change', ->
+    $.ajax
+      type: 'POST'
+      url: '#{rearrange_admin_pages_path}'
+      data: JSON.stringify {rearrange: {pages: $(this).nestable('serialize')}}
+      contentType: 'application/json; charset=utf-8'
