@@ -26,7 +26,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    redirect_to @pages.any? ? show_page_path(@pages.first) : front_path
+    redirect_to @pages.any? && @pages.header.first.children_count > 0 ? show_page_path(@pages.header.first.children.first) : front_path
   end
 
   # GET /front
@@ -146,6 +146,12 @@ class StoreController < ApplicationController
       @page = current_store.pages.friendly.find(params[:slug])
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
+      end
+      if @page.navigation? && @page.children_count > 0
+        return redirect_to show_page_path(@page.children.first)
+      end
+      if @page.category?
+        return redirect_to show_category_path(@page)
       end
     end
 
