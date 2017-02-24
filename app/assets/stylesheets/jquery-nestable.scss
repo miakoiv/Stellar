@@ -10,6 +10,7 @@
 }
 
 .dd-item {
+  @extend .clearfix;
   margin: 10px 0;
   padding: 8px;
   background-color: $list-group-bg;
@@ -23,6 +24,7 @@
     @extend .pull-left;
     margin-right: 15px;
   }
+  .dd-icon { margin-right: 15px; }
   .dd-handle { cursor: grab; }
   .label { margin-left: 15px; }
   .dd-actions {
