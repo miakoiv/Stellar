@@ -13,5 +13,5 @@
     $.ajax
       type: 'POST'
       url: '#{rearrange_admin_categories_path}'
-      data: JSON.stringify {categories: $(this).nestable('serialize')}
+      data: JSON.stringify {rearrange: {categories: $(this).nestable('serialize')}}
       contentType: 'application/json; charset=utf-8'

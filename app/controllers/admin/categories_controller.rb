@@ -2,6 +2,7 @@
 
 class Admin::CategoriesController < ApplicationController
 
+  include AwesomeNester
   before_action :authenticate_user!
   before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
@@ -73,14 +74,6 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  # POST /admin/categories/rearrange
-  def rearrange
-    Category.transaction do
-      rearrange_recursively params[:categories]
-    end
-    render nothing: true
-  end
-
   # GET /admin/categories/1/reorder_products
   def reorder_products
     @products = @category.products.visible.live.sorted(@category.product_scope)
@@ -97,21 +90,5 @@ class Admin::CategoriesController < ApplicationController
       params.require(:category).permit(
         :banner_id, :live, :hidden, :name, :product_scope
       )
-    end
-
-    def rearrange_recursively(items, parent = nil)
-      last = nil
-      items.each do |item|
-        category = Category.find(item['id'])
-        if last
-          category.move_to_right_of(last)
-        else
-          parent ? category.move_to_child_of(parent) : category.move_to_root
-        end
-        last = category
-        if item['children']
-          rearrange_recursively item['children'], category
-        end
-      end
     end
 end
