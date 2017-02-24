@@ -7,6 +7,7 @@ class PageAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
+    return false if resource.header? || resource.footer?
     if resource.route?
       user.has_cached_role?(:superuser) || user.has_cached_role?(:store_admin)
     else
@@ -15,6 +16,7 @@ class PageAuthorizer < ApplicationAuthorizer
   end
 
   def deletable_by?(user)
+    return false if resource.header? || resource.footer?
     if resource.route?
       user.has_cached_role?(:superuser) || user.has_cached_role?(:store_admin)
     else
