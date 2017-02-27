@@ -80,6 +80,7 @@ class Page < ActiveRecord::Base
   end
 
   def to_s
+    return nil if header? || footer?
     title
   end
 

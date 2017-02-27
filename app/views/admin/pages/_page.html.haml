@@ -4,7 +4,7 @@
   .dd-widget
     %code= "/#{page.slug}"
 %span.dd-icon= icon(page.icon)
-= page.title
+= page
 .dd-actions
   - if page.can_have_content?
     = link_to icon('eye', t('actions.view')), show_page_path(page),

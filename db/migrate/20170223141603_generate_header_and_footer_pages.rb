@@ -6,8 +6,8 @@ class GenerateHeaderAndFooterPages < ActiveRecord::Migration
   # secondary pages as primary.
   def up
     Store.all.each do |store|
-      header = store.pages.header.first_or_create
-      footer = store.pages.footer.first_or_create
+      header = store.pages.header.first_or_create title: "#{store} header"
+      footer = store.pages.footer.first_or_create title: "#{store} footer"
 
       store.pages.route.update_all parent_id: header.id
       store.pages.primary.update_all parent_id: header.id
