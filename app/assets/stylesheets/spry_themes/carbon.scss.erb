@@ -88,8 +88,7 @@ ul { list-style-type: square; }
   font-size: $font-size-small;
   font-weight: 500;
 
-  > .content {
-    @extend .container;
+  > .container {
     padding-top: 30px;    // padding the container only,
     padding-bottom: 30px; // not the contained elements
 
@@ -135,7 +134,7 @@ ul { list-style-type: square; }
   body.carbon { padding-top: 75px; }
 
   #main-nav {
-    > .content {
+    > .container {
       padding-top: 10px;
       padding-bottom: 10px;
 
@@ -164,11 +163,7 @@ ul { list-style-type: square; }
   }
 }
 
-#search-panel-wrap {
-  > .content {
-    @extend .container;
-  }
-}
+#search-panel-wrap {}
 
 #categories-wrap {
   background-color: #ccc;
@@ -277,8 +272,7 @@ ul { list-style-type: square; }
   font-size: 0.8em;
   font-weight: 500;
 
-  > .content {
-    @extend .container;
+  > .container {
     color: #fff;
   }
 }

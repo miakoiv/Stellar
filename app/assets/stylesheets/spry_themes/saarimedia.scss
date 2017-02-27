@@ -10,10 +10,6 @@
 
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-
-  > .content {
-    @extend .container;
-  }
 }
 
 #static-wrap {
@@ -308,8 +304,4 @@
   }
 }
 
-.footer {
-  > .content {
-    @extend .container;
-  }
-}
+.footer {}

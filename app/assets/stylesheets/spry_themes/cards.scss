@@ -10,10 +10,6 @@
 
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));
-
-  > .content {
-    @extend .container;
-  }
 }
 
 #static-wrap {
@@ -414,10 +410,6 @@
 
 .footer {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
-
-  > .content {
-    @extend .container;
-  }
 }
 
 @media print {

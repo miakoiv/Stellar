@@ -23,8 +23,7 @@ $body-bg: #fdfdfd;
   font-size: $font-size-small;
   font-weight: 500;
 
-  > .content {
-    @extend .container;
+  > .container {
     padding-top: 15px;    // padding the container only,
     padding-bottom: 15px; // not the contained elements
 
@@ -74,7 +73,7 @@ $body-bg: #fdfdfd;
   }
 
   #main-nav {
-    > .content {
+    > .container {
       padding-top: 10px;
       padding-bottom: 10px;
 
@@ -139,11 +138,7 @@ $body-bg: #fdfdfd;
   }
 }
 
-#search-panel-wrap {
-  > .content {
-    @extend .container;
-  }
-}
+#search-panel-wrap {}
 
 .footer {
   background-color: #000;
@@ -151,9 +146,7 @@ $body-bg: #fdfdfd;
   font-size: 0.8em;
   font-weight: 500;
 
-  > .content {
-    @extend .container;
-
+  > .container {
     a { color: #fff; }
   }
 }

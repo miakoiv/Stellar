@@ -23,10 +23,6 @@ body.hiustalo {
   @include box-shadow(0 6px 24px 0 rgba(0,0,0,0.333));
   background: rgba(255,255,255,0.88);
   border-top: 4px solid #000;
-
-  > .content {
-    @extend .container;
-  }
 }
 
 #static-wrap {
@@ -308,10 +304,6 @@ body.hiustalo {
 }
 
 .footer {
-  .content {
-    @extend .container;
-  }
-
   background: $brand-primary;
   color: lighten($brand-primary, 40%);
 }

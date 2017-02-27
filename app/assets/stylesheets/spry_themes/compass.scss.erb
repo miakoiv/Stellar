@@ -25,8 +25,7 @@ body.compass {
   @extend .navbar-inverse;
   @include box-shadow(0 1px 10px 0 rgba(0,0,0,.333));
 
-  > .content {
-    @extend .container;
+  > .container {
     padding-top: 15px;    // padding the container only,
     padding-bottom: 5px;  // not the contained elements
 
@@ -65,7 +64,7 @@ body.compass {
   body.compass { padding-top: 75px; }
 
   #main-nav {
-    > .content {
+    > .container {
       padding-top: 10px;
       padding-bottom: 10px;
 
@@ -407,8 +406,4 @@ body.compass {
 .footer {
   background: darken($brand-primary, 35%);
   color: $brand-primary;
-
-  & > .content {
-    @extend .container;
-  }
 }

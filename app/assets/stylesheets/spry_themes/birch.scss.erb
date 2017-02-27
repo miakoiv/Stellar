@@ -16,9 +16,7 @@ $brand-primary: #013183;
 #main-nav {
   @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.333));
 
-  > .content {
-    @extend .container;
-
+  > .container {
     .navbar-brand {
       padding-top: 13px;
       padding-bottom: 12px;
@@ -453,10 +451,6 @@ $brand-primary: #013183;
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
-
-  > .content {
-    @extend .container;
-  }
 }
 
 @media print {

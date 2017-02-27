@@ -17,8 +17,7 @@ $navbar-default-link-active-bg: transparent;
 #main-nav {
   @include box-shadow(0 0 10px 0 #343434);
 
-  > .content {
-    @extend .container;
+  > .container {
     padding-top: 15px;    // padding the container only,
     padding-bottom: 15px; // not the contained elements
 
@@ -59,7 +58,7 @@ $navbar-default-link-active-bg: transparent;
   }
 
   #main-nav {
-    > .content {
+    > .container {
       padding-top: 10px;
       padding-bottom: 10px;
 
@@ -507,11 +506,7 @@ $navbar-default-link-active-bg: transparent;
   }
 }
 
-.footer {
-  > .content {
-    @extend .container;
-  }
-}
+.footer {}
 
 @media print {
   #products-wrap {
