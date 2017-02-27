@@ -38,6 +38,7 @@ class Store < ActiveRecord::Base
 
   #---
   after_create :assign_slug
+  after_create :create_header_and_footer
 
   #---
   # Home country, used as default shipping and billing country.
@@ -224,5 +225,10 @@ class Store < ActiveRecord::Base
         len += 1
       end while taken_slugs.include?(slug)
       update(slug: slug)
+    end
+
+    def create_header_and_footer
+      pages.header.first_or_create title: "#{name} header"
+      pages.footer.first_or_create title: "#{name} footer"
     end
 end
