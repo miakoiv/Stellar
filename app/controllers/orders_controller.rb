@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user_or_skip!
   authority_actions duplicate: 'read'
 
-  before_action :set_pages
+  before_action :set_header_and_footer
   before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
   before_action :set_pricing_group
 

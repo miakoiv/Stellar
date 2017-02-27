@@ -17,7 +17,7 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
-  before_action :set_pages
+  before_action :set_header_and_footer
   before_action :set_categories, only: [:front, :search, :show_category, :show_product]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category, :show_product]
@@ -26,7 +26,8 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    redirect_to @pages.any? && @pages.header.first.children_count > 0 ? show_page_path(@pages.header.first.children.first) : front_path
+    navigable = @header.descendants.navigable
+    redirect_to navigable.any? ? show_page_path(navigable.first) : front_path
   end
 
   # GET /front
@@ -147,9 +148,8 @@ class StoreController < ApplicationController
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
-      if @page.navigation? && @page.children_count > 0
-        return redirect_to show_page_path(@page.children.first)
-      end
+      # FIXME: this kludge uses the page slug as a category slug,
+      #        which works for very limited cases
       if @page.category?
         return redirect_to show_category_path(@page)
       end

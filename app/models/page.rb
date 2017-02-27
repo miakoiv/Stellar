@@ -44,6 +44,10 @@ class Page < ActiveRecord::Base
   validates :title, presence: true
 
   #---
+  def self.navigable
+    select { |page| page.is_navigable? }
+  end
+
   def self.available_purposes
     purposes.slice(:route, :primary, :template, :navigation, :category)
   end
@@ -53,6 +57,14 @@ class Page < ActiveRecord::Base
   end
 
   #---
+  # Page can be navigated to if it has content to present.
+  # FIXME: once category pages are implemented, allow navigation to
+  #        pages with target category assigned
+  def is_navigable?
+    return true if route? || primary? || category?
+    false
+  end
+
   def can_have_children?
     navigation? || header? || footer?
   end

@@ -125,8 +125,9 @@ class ApplicationController < ActionController::Base
       I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || @current_portal.present? && @current_portal.locale || @current_store.locale || I18n.default_locale
     end
 
-    def set_pages
-      @pages = @current_store.pages.order(:lft)
+    def set_header_and_footer
+      @header = @current_store.header
+      @footer = @current_store.footer
     end
 
     # Pricing group is set by a before_action. Changing the pricing group

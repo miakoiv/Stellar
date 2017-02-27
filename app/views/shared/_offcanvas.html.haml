@@ -3,7 +3,7 @@
     = icon('close', class: 'fa-lg')
 
 %ul.nav.navmenu-nav
-  = render partial: @pages.header.first.children, locals: {dropdown: false}
+  = render partial: @header.children, locals: {dropdown: false}
 
 - if @categories.present?
   .navmenu-title= title(Category, count: 2)

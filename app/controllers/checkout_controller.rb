@@ -8,7 +8,7 @@ class CheckoutController < ApplicationController
   end
 
   before_action :authenticate_user_or_skip!
-  before_action :set_pages
+  before_action :set_header_and_footer
   before_action :set_order, except: [:notify]
   before_action :set_pricing_group
 

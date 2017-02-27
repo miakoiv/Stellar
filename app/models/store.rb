@@ -68,6 +68,10 @@ class Store < ActiveRecord::Base
     store.has_many :tax_categories
   end
 
+  # The header and footer pages for presentation.
+  has_one :header, -> { merge(Page.header) }, class_name: 'Page'
+  has_one :footer, -> { merge(Page.footer) }, class_name: 'Page'
+
   has_many :inventory_items, through: :inventories
   has_many :shipping_cost_products, through: :shipping_methods
 

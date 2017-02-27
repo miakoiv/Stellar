@@ -12,6 +12,6 @@
           .media-body
           .media-right.logo= image_tag(current_store.brand_image, style: 'width: 90px')
     .col-xs-12.col-sm-6.col-sm-pull-2
-      - if @pages.present?
+      - if @footer.children.any?
         %ul.nav
-          = render partial: @pages.footer.first.children, locals: {dropdown: false}
+          = render partial: @footer.children, locals: {dropdown: false}
