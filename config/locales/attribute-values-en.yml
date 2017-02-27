@@ -14,10 +14,11 @@ en:
           secondary: Secondary content
           banner: Banner
           template: Template
-          navigation: Navigation menu
-          category: Category link
-          header: Site header
-          footer: Site footer
+          category_menu: Category menu
+          product_link: Product link
+          header: Header navigation
+          footer: Footer navigation
+          navigation: Page menu
       property:
         value_type:
           string: String

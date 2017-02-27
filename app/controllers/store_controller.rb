@@ -150,7 +150,7 @@ class StoreController < ApplicationController
       end
       # FIXME: this kludge uses the page slug as a category slug,
       #        which works for very limited cases
-      if @page.category?
+      if @page.category_menu?
         return redirect_to show_category_path(@page)
       end
     end

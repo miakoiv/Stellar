@@ -13,15 +13,16 @@ class Page < ActiveRecord::Base
 
   #---
   enum purpose: {
-    route: 0,       # navigation node routed to #slug
-    primary: 1,     # page with content sections
-    secondary: 2,   # secondary content (deprecated)
-    banner: 3,      # banner container (deprecated)
-    template: 4,    # printed page template
-    navigation: 5,  # navigation menu containing other pages
-    category: 6,    # navigation node to linked category (or categories root)
-    header: 7,      # virtual page containing main navigation
-    footer: 8,      # virtual page containing footer links
+    route: 0,         # navigation node routed to #slug
+    primary: 1,       # page with content sections
+    secondary: 2,     # secondary content (deprecated)
+    banner: 3,        # banner container (deprecated)
+    template: 4,      # printed page template
+    category_menu: 6, # menu from linked category (or root if nil)
+    product_link: 7,  # link to product
+    header: 10,       # virtual page containing main navigation
+    footer: 11,       # virtual page containing footer links
+    navigation: 12,   # secondary navigation
   }
 
   PRESENTATION = {
@@ -30,10 +31,11 @@ class Page < ActiveRecord::Base
     'secondary' => {icon: 'file-text-o', appearance: 'success'},
     'banner' => {icon: ''},
     'template' => {icon: 'file-o', appearance: 'warning'},
-    'navigation' => {icon: 'share-alt'},
-    'category' => {icon: 'sitemap', appearance: 'info'},
+    'category_menu' => {icon: 'sitemap', appearance: 'info'},
+    'product_link' => {icon: 'cube', appearance: 'info'},
     'header' => {icon: 'navicon'},
-    'footer' => {icon: 'paragraph'}
+    'footer' => {icon: 'paragraph'},
+    'navigation' => {icon: 'share-alt'}
   }.freeze
 
   #---
@@ -49,7 +51,10 @@ class Page < ActiveRecord::Base
   end
 
   def self.available_purposes
-    purposes.slice(:route, :primary, :template, :navigation, :category)
+    purposes.slice(
+      :route, :primary, :template,
+      :category_menu, :navigation
+    )
   end
 
   def self.purpose_options
@@ -61,12 +66,12 @@ class Page < ActiveRecord::Base
   # FIXME: once category pages are implemented, allow navigation to
   #        pages with target category assigned
   def is_navigable?
-    return true if route? || primary? || category?
+    return true if route? || primary? || category_menu? || product_link?
     false
   end
 
   def can_have_children?
-    navigation? || header? || footer?
+    header? || footer? || navigation?
   end
 
   def can_have_content?
@@ -74,7 +79,7 @@ class Page < ActiveRecord::Base
   end
 
   def movable?
-    route? || primary? || navigation? || category?
+    route? || primary? || navigation? || category_menu? || product_link?
   end
 
   def can_have_albums?

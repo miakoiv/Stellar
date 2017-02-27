@@ -14,10 +14,11 @@ fi:
           secondary: Toissijainen sisältö
           banner: Juliste
           template: Sivupohja
-          navigation: Navigaatiomenu
-          category: Tuoteryhmälinkki
+          category_menu: Tuoteryhmävalikko
+          product_link: Tuotelinkki
           header: Päävalikko
           footer: Alavalikko
+          navigation: Sivuvalikko
       property:
         value_type:
           string: sanallinen
