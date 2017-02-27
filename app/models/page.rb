@@ -41,8 +41,7 @@ class Page < ActiveRecord::Base
   has_and_belongs_to_many :albums
 
   #---
-  validates :title, presence: true,
-    unless: -> (page) { page.header? || page.footer? }
+  validates :title, presence: true
 
   #---
   def self.available_purposes
