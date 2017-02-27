@@ -80,7 +80,7 @@ class Page < ActiveRecord::Base
   end
 
   def to_s
-    return nil if header? || footer?
+    return human_attribute_value(:purpose) if header? || footer?
     title
   end
 
