@@ -9,8 +9,6 @@ html {
 }
 
 #offcanvas-wrap {
-  overflow-y: scroll;
-
   > #canvas-wrap {
     padding-top: $navbar-height;
     padding-bottom: 200px;
