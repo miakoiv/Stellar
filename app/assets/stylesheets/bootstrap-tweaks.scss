@@ -81,7 +81,7 @@ html {
 .navmenu {
   .navmenu-title {
     margin-top: 20px;
-    padding: 10px 15px;
+    padding: $nav-link-padding;
     color: $navbar-default-link-active-color;
     border-top: 1px solid $navbar-default-border;
     text-transform: uppercase;
@@ -92,6 +92,7 @@ html {
       @extend .box-icon, .pull-left;
       margin-right: 10px;
     }
+    > .navmenu-header { padding: $nav-link-padding; }
     > .navmenu-nav {
       padding-left: 35px;
 

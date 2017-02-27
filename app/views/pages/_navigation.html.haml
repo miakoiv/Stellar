@@ -7,6 +7,7 @@
       %ul.dropdown-menu{role: 'menu'}
         = render partial: navigation.children, locals: {dropdown: true}
   - else
-    .navmenu-title= navigation
-    %ul.nav.navmenu-nav
-      = render partial: navigation.children, locals: {dropdown: false}
+    %li
+      .navmenu-header= navigation
+      %ul.nav.navmenu-nav
+        = render partial: navigation.children, locals: {dropdown: false}
