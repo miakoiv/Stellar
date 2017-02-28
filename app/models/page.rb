@@ -57,7 +57,7 @@ class Page < ActiveRecord::Base
   def self.available_purposes
     purposes.slice(
       :route, :primary, :template,
-      :category_menu, :navigation
+      :category_menu, :product_link, :navigation
     )
   end
 
