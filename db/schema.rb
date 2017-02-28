@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228122411) do
+ActiveRecord::Schema.define(version: 20170228124957) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -87,7 +87,10 @@ ActiveRecord::Schema.define(version: 20170228122411) do
     t.datetime "updated_at",                                 null: false
   end
 
+  add_index "categories", ["depth"], name: "index_categories_on_depth", using: :btree
+  add_index "categories", ["lft"], name: "index_categories_on_lft", using: :btree
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+  add_index "categories", ["rgt"], name: "index_categories_on_rgt", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
   add_index "categories", ["store_id"], name: "index_categories_on_store_id", using: :btree
 
@@ -388,7 +391,10 @@ ActiveRecord::Schema.define(version: 20170228122411) do
     t.datetime "updated_at",                                  null: false
   end
 
+  add_index "pages", ["depth"], name: "index_pages_on_depth", using: :btree
+  add_index "pages", ["lft"], name: "index_pages_on_lft", using: :btree
   add_index "pages", ["parent_id"], name: "index_pages_on_parent_id", using: :btree
+  add_index "pages", ["rgt"], name: "index_pages_on_rgt", using: :btree
   add_index "pages", ["slug"], name: "index_pages_on_slug", using: :btree
   add_index "pages", ["store_id"], name: "index_pages_on_store_id", using: :btree
 
