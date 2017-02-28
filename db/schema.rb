@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227142154) do
+ActiveRecord::Schema.define(version: 20170228122411) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -373,6 +373,8 @@ ActiveRecord::Schema.define(version: 20170227142154) do
   create_table "pages", force: :cascade do |t|
     t.integer  "store_id",       limit: 4,                    null: false
     t.integer  "purpose",        limit: 4,     default: 1,    null: false
+    t.string   "resource_type",  limit: 255
+    t.integer  "resource_id",    limit: 4
     t.integer  "parent_id",      limit: 4
     t.integer  "lft",            limit: 4
     t.integer  "rgt",            limit: 4

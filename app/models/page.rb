@@ -40,6 +40,10 @@ class Page < ActiveRecord::Base
 
   #---
   belongs_to :store
+
+  # Resource is anything the page may refer to, depending on its purpose.
+  belongs_to :resource, polymorphic: true
+
   has_and_belongs_to_many :albums
 
   #---
