@@ -1,0 +1,26 @@
+= f.hidden_field :resource_type, value: 'Product'
+= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall'}
+
+:coffee
+  $('#page_resource_id').selectize
+    dropdownParent: 'body'
+    preload: true
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        data:
+          q: query
+          purposes: ['vanilla', 'variant']
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)
+    onLoad: ->
+      this.setValue(['#{@page.resource_id}'])

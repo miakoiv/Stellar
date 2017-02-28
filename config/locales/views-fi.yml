@@ -207,6 +207,7 @@ fi:
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
   store:
+    front: Etusivu
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
     requisite_products: Katso myös nämä

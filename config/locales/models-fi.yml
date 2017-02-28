@@ -236,8 +236,9 @@ fi:
       page:
         purpose: Sivun tyyppi
         parent_id: Pääsivu
+        resource_id: Kohde
         title: Otsake
-        slug: Osoite
+        slug: Kohde
         content: Sisältö
         wysiwyg: Näytä ulkoasu
         album_ids: Albumit

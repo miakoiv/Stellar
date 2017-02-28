@@ -3,6 +3,4 @@
     = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('file-text-o', t('.new_page'))
 
-.row
-  .col-md-8
-    = render partial: 'form', locals: {locked: false}
+= render partial: 'form', locals: {locked: false}

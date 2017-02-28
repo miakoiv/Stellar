@@ -1,23 +1,14 @@
 = bootstrap_form_for [:admin, @page], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+    label_col: 'col-sm-2', control_col: 'col-sm-4' do |f|
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
         = f.select :purpose, Page.purpose_options, {}, {disabled: locked || !@page.new_record?, class: 'selectize'}
         = f.text_field :title, required: true
         - unless @page.new_record?
-          - if @page.route?
-            = f.text_field :slug
+          = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
           - if @page.can_have_albums?
             = f.select :album_ids, current_store.album_options, {}, {multiple: true, class: 'selectize'}
-          - if @page.can_have_content?
-            = f.form_group do
-              = f.check_box :wysiwyg
-            - unless @page.new_record?
-              - if @page.wysiwyg?
-                = f.hidden_field :content
-              - else
-                = f.text_area :content, rows: 20, class: 'monospace input-sm'
 
       %fieldset.actions
         = f.form_group do

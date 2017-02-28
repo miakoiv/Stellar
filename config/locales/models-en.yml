@@ -236,8 +236,9 @@ en:
       page:
         purpose: Page type
         parent_id: Parent page
+        resource_id: Target
         title: Title
-        slug: Address
+        slug: Target
         content: Content
         wysiwyg: Show layout
         album_ids: Albums

@@ -227,6 +227,7 @@ en:
     product_detail:
       variants: Alternatives for this product…
   store:
+    front: Front page
     all_products: All products
     product_variants: Alternatives for this product
     requisite_products: Recommended products
