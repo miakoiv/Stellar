@@ -48,6 +48,8 @@ class Page < ActiveRecord::Base
 
   #---
   validates :title, presence: true
+  validates :resource, presence: true,
+    if: -> (page) { page.product_link? }
 
   #---
   def self.navigable
