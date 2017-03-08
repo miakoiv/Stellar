@@ -1,0 +1,4 @@
+%li
+  = link_to child, show_category_path(child)
+  %ul
+    = render partial: 'categories/mega_menu_child', collection: child.children, as: :child

@@ -30,7 +30,6 @@ html {
 // a hamburger button to toggle an off canvas navmenu
 //
 .navbar {
-  img { margin: -2px 5px -3px 0; }
   .navbar-brand {
     letter-spacing: -0.02em;
 
@@ -39,6 +38,7 @@ html {
       max-height: 25px;
       width: auto;
       height: auto;
+      margin: -2px 5px -3px 0;
     }
     span { display: none; }
   }
@@ -98,12 +98,30 @@ html {
         font-size: $font-size-small;
       }
     }
+    &.mega-dropdown { display: none; }
   }
 }
 .navmenu.navmenu-inverse {
   .navmenu-title {
     color: $navbar-inverse-link-active-color;
     border-top: 1px solid $navbar-inverse-border;
+  }
+}
+
+//
+// mega dropdowns
+//
+.navbar-nav > li {
+  &.mega-dropdown {
+    position: static !important;
+  }
+
+  > .mega-dropdown-menu {
+    right: 0;
+    padding: 20px 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
   }
 }
 
