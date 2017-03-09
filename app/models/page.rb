@@ -123,10 +123,16 @@ class Page < ActiveRecord::Base
   # Navigation pages point to their first child, category menu pages point
   # to their target, or first child if target is nil.
   def path
-    return show_page_path(self) if route? || primary?
-    return children.first.path if navigation?
-    return show_product_path(resource.category, resource) if product_link?
-    return show_category_path(resource || store.first_category) if category_menu?
-    nil
+    case
+    when route? || primary?
+      show_page_path(self)
+    when product_link?
+      show_product_path(resource.category, resource)
+    when navigation?
+      children.first.path
+    when category_menu?
+      show_category_path(resource || store.first_category)
+    else nil
+    end
   end
 end
