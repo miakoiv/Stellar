@@ -1,6 +1,6 @@
 - if category_menu.resource.nil?
-  = render partial: 'categories/mega_menu', object: category_menu, as: :root, locals: {categories: @current_store.categories.roots}
+  = render partial: 'categories/mega_menu', object: category_menu, as: :root, locals: {categories: @categories}
 - elsif !category_menu.resource.leaf?
-  = render partial: 'categories/mega_menu', object: category_menu, as: :root, locals: {categories: category_menu.resource.children}
+  = render partial: 'categories/mega_menu', object: category_menu, as: :root, locals: {categories: category_menu.resource.children.visible}
 - else
   = active_link_to category_menu, show_category_path(category_menu.resource), wrap_tag: :li

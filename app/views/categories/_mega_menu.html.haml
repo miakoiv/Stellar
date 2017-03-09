@@ -14,4 +14,4 @@
               .mega-dropdown-text
                 %h3= category.name
             %ul
-              = render partial: 'categories/mega_menu_child', collection: category.children, as: :child
+              = render partial: 'categories/mega_menu_child', collection: category.children.visible, as: :child
