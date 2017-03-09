@@ -372,6 +372,7 @@ fi:
         name: Nimi
         slug: Tunniste
         theme: Ulkoasun teema
+        detach_menu: Irroita päävalikko
         locale: Kieli
         country_code: Kotimaa
         allow_shopping: Salli ostokset

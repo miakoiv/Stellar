@@ -372,6 +372,7 @@ en:
         name: Name
         slug: Slug
         theme: Display theme
+        detach_menu: Detach main navigation
         locale: Language
         country_code: Country
         allow_shopping: Enable shopping

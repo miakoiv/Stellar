@@ -47,6 +47,8 @@
                 = f.text_field :slug, readonly: true, help: t('.slug_help_html')
               = f.text_field :order_sequence, help: t('.order_sequence_help_html')
               = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
+              = f.form_group do
+                = f.check_box :detach_menu
         - if @store.new_record?
           = tab_pane 'store-new-user' do
             = f.fields_for :users do |ff|
