@@ -26,8 +26,8 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    navigable = @header.descendants.navigable
-    redirect_to navigable.any? ? show_page_path(navigable.first) : front_path
+    entry_point = @header.descendants.entry_point
+    redirect_to entry_point.present? ? entry_point.path : front_path
   end
 
   # GET /front

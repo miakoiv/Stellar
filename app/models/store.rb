@@ -142,6 +142,11 @@ class Store < ActiveRecord::Base
     hostnames.first
   end
 
+  # Returns the first category. See Page#path.
+  def first_category
+    categories.order(:lft).first
+  end
+
   # Properties flagged searchable.
   def searchable_properties
     properties.merge(Property.searchable).merge(Property.sorted)

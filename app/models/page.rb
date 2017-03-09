@@ -2,6 +2,9 @@
 
 class Page < ActiveRecord::Base
 
+  # Pages must be aware of their routes since they may link to anything.
+  include Rails.application.routes.url_helpers
+
   resourcify
   include Authority::Abilities
   include Imageable
@@ -52,8 +55,9 @@ class Page < ActiveRecord::Base
     if: -> (page) { page.product_link? }
 
   #---
-  def self.navigable
-    select { |page| page.is_navigable? }
+  # Finds the first page that returns a non-nil path.
+  def self.entry_point
+    find { |page| page.path }
   end
 
   def self.available_purposes
@@ -68,14 +72,6 @@ class Page < ActiveRecord::Base
   end
 
   #---
-  # Page can be navigated to if it has content to present.
-  # FIXME: once category pages are implemented, allow navigation to
-  #        pages with target category assigned
-  def is_navigable?
-    return true if route? || primary? || category_menu? || product_link?
-    false
-  end
-
   def can_have_children?
     header? || footer? || navigation?
   end
@@ -120,5 +116,17 @@ class Page < ActiveRecord::Base
 
   def to_partial_path
     "pages/#{purpose}"
+  end
+
+  # Path to a page object depends on its purpose. Route and primary pages
+  # use plain page routes, product link pages point to the target product.
+  # Navigation pages point to their first child, category menu pages point
+  # to their target, or first child if target is nil.
+  def path
+    return show_page_path(self) if route? || primary?
+    return children.first.path if navigation?
+    return show_product_path(resource.category, resource) if product_link?
+    return show_category_path(resource || store.first_category) if category_menu?
+    nil
   end
 end
