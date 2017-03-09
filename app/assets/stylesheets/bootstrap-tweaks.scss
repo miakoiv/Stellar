@@ -31,16 +31,23 @@ html {
 //
 .navbar {
   .navbar-brand {
-    letter-spacing: -0.02em;
+    padding: 10px 15px;
 
     img {
       display: inline-block;
-      max-height: 25px;
+      max-height: 30px;
       width: auto;
       height: auto;
-      margin: -2px 5px -3px 0;
+      margin: 0 10px 0 0;
     }
-    span { display: none; }
+    span { font-size: 16px; }
+  }
+
+  .navbar-nav > li.lg > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 40px;
+    font-size: 20px;
   }
 
   .navbar-nav.responsive {
@@ -54,7 +61,13 @@ html {
   @extend .btn, .btn-default, .navbar-btn;
   @extend .visible-xs;
   float: right;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: $grid-gutter-width;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  line-height: 40px;
+  font-size: 24px;
   color: $navbar-default-link-color;
   background-color: transparent;
   border-color: transparent;
