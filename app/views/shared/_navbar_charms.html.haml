@@ -1,5 +1,5 @@
 - if user_signed_in? && can_shop?
-  %li
+  %li.lg
     = link_to cart_path do
-      = icon('shopping-cart', class: 'fa-lg')
+      = icon('shopping-cart')
       = render partial: 'store/cart_badge'
