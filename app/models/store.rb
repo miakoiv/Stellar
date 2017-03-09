@@ -145,7 +145,7 @@ class Store < ActiveRecord::Base
 
   # Returns the first category. See Page#path.
   def first_category
-    categories.order(:lft).first
+    categories.visible.root
   end
 
   # Properties flagged searchable.

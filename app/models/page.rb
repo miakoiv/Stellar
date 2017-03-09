@@ -131,7 +131,8 @@ class Page < ActiveRecord::Base
     when navigation?
       children.first.path
     when category_menu?
-      show_category_path(resource || store.first_category)
+      category = resource || store.first_category
+      category.present? ? show_category_path(category) : nil
     else nil
     end
   end
