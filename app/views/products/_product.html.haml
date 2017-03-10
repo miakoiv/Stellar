@@ -7,9 +7,9 @@
           = product.title
           %span.small= product.subtitle
         .description= product.description.html_safe
-      - product.active_promoted_items.each do |item|
-        .promotion
-          %p= item.description
+      .promotions
+        - product.active_promoted_items.each do |item|
+          .promotion= item.description
     .buy-now
       - if can_see_pricing?
         - if product.master?
