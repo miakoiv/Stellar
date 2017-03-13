@@ -1,6 +1,7 @@
-- if category_menu.resource.nil?
+- resource = category_menu.resource
+- if resource.nil?
   = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: @categories, partial: 'categories/megamenu_item'}
-- elsif !category_menu.resource.leaf?
-  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: category_menu.resource.children.visible, partial: 'categories/megamenu_item'}
+- elsif !resource.leaf?
+  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: resource.children.visible, partial: 'categories/megamenu_item'}
 - else
-  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: category_menu.resource.products.visible, partial: 'products/megamenu_item'}
+  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: resource.products.visible.sorted(resource.product_scope), partial: 'products/megamenu_item'}
