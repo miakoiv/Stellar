@@ -404,12 +404,12 @@ class Product < ActiveRecord::Base
   end
 
   # Resets the live status of the product, according to these criteria:
-  # - retail price is not nil
+  # - retail price is not nil (or it's a master product)
   # - must have at least one live category
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
-    update_columns(live: retail_price_cents.present? &&
+    update_columns(live: (master? || retail_price_cents.present?) &&
       categories.live.any? &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
