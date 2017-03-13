@@ -1,0 +1,11 @@
+%li
+  = link_to show_category_path(item) do
+    - if item.cover_image.present?
+      .mega-dropdown-image
+        = image_variant_tag item.cover_image, :postcard
+    .mega-dropdown-text
+      %h3= item
+  %ul
+    - item.children.visible.each do |child|
+      %li
+        = link_to child, show_category_path(child)

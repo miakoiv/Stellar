@@ -1,0 +1,7 @@
+%li
+  = link_to show_product_path(root, item) do
+    - if item.cover_image.present?
+      .mega-dropdown-image
+        = image_variant_tag item.cover_image, :postcard
+    .mega-dropdown-text
+      %h3= item
