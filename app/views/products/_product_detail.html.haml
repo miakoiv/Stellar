@@ -50,8 +50,8 @@
                 = link_to(icon('paperclip', document.to_s),
                     document.url(:original), class: 'list-group-item')
 
-    - if product.product_properties.any?
-      .product-properties
+    .product-properties
+      - if product.product_properties.any?
         = render partial: 'products/properties_panel', object: product, as: :product
 
     .images.technical
