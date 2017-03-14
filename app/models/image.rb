@@ -13,8 +13,8 @@ class Image < ActiveRecord::Base
 
   has_attached_file :attachment,
     styles: {
-      lightbox: '1200x1200>',
-      presentational: '800x800>',
+      lightbox: '1920x1200>',
+      presentational: '1000x600>',
       technical: '400x400>',
       postcard: '300x300>',
       matchbox: '200x200>',
