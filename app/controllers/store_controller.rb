@@ -18,7 +18,7 @@ class StoreController < ApplicationController
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
   before_action :set_header_and_footer
-  before_action :set_categories, only: [:front, :search, :show_page, :show_category, :show_product]
+  before_action :set_categories, only: [:front, :search, :show_page, :cart, :show_category, :show_product]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category, :show_product]
   before_action :find_product, only: [:show_product]
