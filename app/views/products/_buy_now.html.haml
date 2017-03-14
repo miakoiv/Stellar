@@ -13,7 +13,7 @@
         = col(Product, :out_of_stock)
 
   - if product.available?
-    = form_tag order_product_path(product), method: :post, remote: true do
+    = form_tag order_product_path(product), class: 'order-form', method: :post, remote: true do
       .form-group
         = hidden_field_tag :amount, 1
         %button.btn.btn-default{type: 'submit'}
