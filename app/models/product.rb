@@ -160,10 +160,10 @@ class Product < ActiveRecord::Base
   def real?; !virtual? end
   def undead?; !live? end
 
-  # Finds the first variant for this product in the scope of given category.
+  # Finds the first live variant for this product in the scope of given category.
   # Returns self if not a master product or there are no variants.
   def first_variant(category)
-    master? && variants.sorted(category.product_scope).first || self
+    master? && variants.live.sorted(category.product_scope).first || self
   end
 
   def sibling_variants
