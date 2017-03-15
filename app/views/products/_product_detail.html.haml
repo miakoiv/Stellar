@@ -64,14 +64,16 @@
   .product-footer
 
     - if product.variant?
-      %h2= t('store.product_variants')
+      %h2.footer-header= t('store.product_variants')
       .variant-products
-        %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
+        .product-grid
+          %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
 
     - if product.requisite_products.live.any?
-      %h2= t('store.requisite_products')
+      %h2.footer-header= t('store.requisite_products')
       .requisite-products
-        %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
+        .product-grid
+          %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
 
     #offer-requisites-modal.modal{data: {backdrop: 'static'}}
       .modal-dialog.modal-lg
