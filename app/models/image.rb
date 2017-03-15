@@ -13,22 +13,23 @@ class Image < ActiveRecord::Base
 
   has_attached_file :attachment,
     styles: {
-      lightbox: '1920x1200>',
+      lightbox:       '1920x1200>',
       presentational: '1000x600>',
-      technical: '400x400>',
-      postcard: '300x300>',
-      matchbox: '200x200>',
-      thumbnail: '75x75>',
-      icon: '25x25#',
+      technical:      '400x400>',
+      postcard:       '300x300>',
+      matchbox:       '200x200>',
+      thumbnail:      '75x75>',
+      icon:           '25x25#',
     },
     convert_options: {
-      lightbox: '-strip -quality 90',
-      presentational: '-strip -quality 90',
-      technical: '-strip -quality 90',
-      postcard: '-strip -quality 80',
-      matchbox: '-strip -quality 75',
-      thumbnail: '-strip -quality 70',
-      icon: '-strip -quality 70',
+      all:            '-set colorspace sRGB -strip -unsharp 0.25x0.08+8.3+0.045',
+      lightbox:       '-quality 80',
+      presentational: '-quality 80',
+      technical:      '-quality 80',
+      postcard:       '-quality 80',
+      matchbox:       '-quality 70',
+      thumbnail:      '-quality 70',
+      icon:           '-quality 70',
     }
   before_post_process :resize_bitmaps
   before_create :assign_purpose
