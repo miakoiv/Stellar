@@ -1,14 +1,14 @@
 - cache_if current_user.guest?, [I18n.locale, :product_row, product] do
   = content_tag_for :tr, product do
-    %td
+    %td.product-image
       .box-thumbnail
         = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
-    %td
+    %td.product-title
       %strong= product.title
       = product.subtitle
-    %td= product.code
+    %td.product-code= product.code
     - if can_see_pricing? && can_shop? && may_shop_at?(@category)
-      %td.currency.text-right
+      %td.price.currency.text-right
         - unless product.master?
           = humanized_money_with_symbol product.price(current_pricing)
     %td.actions
