@@ -17,9 +17,8 @@
 
       .products
         .page-header.visible-print
-          %h1
-            = current_store.to_s
-            %small= @category.to_s
+          %h1= @category.to_s
+          %p.lead= @category.subtitle
         .product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products
