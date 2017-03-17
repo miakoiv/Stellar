@@ -190,7 +190,7 @@ $bg-tone:           #f6f6f6;
 
 
 /*
- * Containers for product list and product grid
+ * Containers for product grid and product table
  */
 .products {
   @extend .container;
@@ -202,7 +202,7 @@ $bg-tone:           #f6f6f6;
   @extend .small;
   background-color: transparent;
 }
-.product-list { }
+.product-table { }
 .product-grid { @extend .row; }
 .product-grid > ul {
   list-style: none;
@@ -327,11 +327,11 @@ $bg-tone:           #f6f6f6;
 
 
 /*
- * Products in product list
+ * Products in product table
  */
-.product-list .product-title { margin-bottom: 5px; }
-.product-list .product-title a { color: inherit; }
-.product-list .price {
+.product-table .product-title { margin-bottom: 5px; }
+.product-table .product-title a { color: inherit; }
+.product-table .price {
   font-size: 16px;
   color: $gray-base;
 }
