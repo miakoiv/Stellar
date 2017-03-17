@@ -62,7 +62,7 @@ class Promotion < ActiveRecord::Base
   end
 
   def available_categories
-    store.categories
+    store.categories.order(:lft)
   end
 
   def active?
