@@ -287,6 +287,20 @@ i.icon {
 .panel-footer a.btn { margin-bottom: 5px; }
 .panel-footer a.btn + a.btn { margin-right: 8px; }
 
+
+/*
+ * Rounded buttons
+ */
+.btn-round { border-radius: 17px; }
+.btn-lg.btn-round { border-radius: 22.5px; }
+.btn-sm.btn-round { border-radius: 15px; }
+.btn-xs.btn-round {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 11px;
+}
+
+
 /*
  * Image boxes of various sizes, with image centered inside
  */
