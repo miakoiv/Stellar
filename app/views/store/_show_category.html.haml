@@ -1,3 +1,5 @@
+.breadcrumbs.visible-print
+  = render partial: 'categories/breadcrumbs', object: @category, as: :category
 .page-header.visible-print
   %h1= @category.to_s
   %p.lead= @category.subtitle
