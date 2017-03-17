@@ -1,2 +1,2 @@
 = f.hidden_field :resource_type, value: 'Category'
-= f.select :resource_id, current_store.categories.map { |c| [c.to_s, c.id] }, {include_blank: blank}, {class: 'selectize'}
+= f.select :resource_id, current_store.categories.live.order(:lft).map { |c| [c.to_option, c.id] }, {include_blank: blank}, {class: 'selectize'}

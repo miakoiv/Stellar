@@ -57,12 +57,12 @@ class Category < ActiveRecord::Base
     name_changed? || super
   end
 
-  def indented_name
-    "#{'    ' * level}#{name}"
-  end
-
   def description
     name
+  end
+
+  def to_option
+    self_and_ancestors.join " \u23f5 "
   end
 
   def to_s
