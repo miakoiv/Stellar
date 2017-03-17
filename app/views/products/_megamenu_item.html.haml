@@ -1,5 +1,5 @@
 %li.product-item
-  = link_to show_product_path(root, item) do
+  = link_to show_product_path(root.resource, item) do
     - if item.cover_image.present?
       .mega-dropdown-image
         = image_variant_tag item.cover_image, :postcard
