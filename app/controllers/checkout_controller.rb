@@ -9,6 +9,7 @@ class CheckoutController < ApplicationController
 
   before_action :authenticate_user_or_skip!
   before_action :set_header_and_footer
+  before_action :set_categories, only: [:checkout]
   before_action :set_order, except: [:notify]
   before_action :set_pricing_group
 

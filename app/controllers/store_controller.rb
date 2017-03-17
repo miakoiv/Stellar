@@ -113,11 +113,6 @@ class StoreController < ApplicationController
       ActionMailer::Base.default_url_options = {host: request.host}
     end
 
-    def set_categories
-      @live_categories = current_store.categories.live
-      @categories = @live_categories.visible.roots
-    end
-
     # Find category from live categories by friendly id, including history.
     def find_category
       selected = @live_categories.friendly.find(params[:category_id])

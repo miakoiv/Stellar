@@ -130,6 +130,11 @@ class ApplicationController < ActionController::Base
       @footer = @current_store.footer
     end
 
+    def set_categories
+      @live_categories = current_store.categories.live
+      @categories = @live_categories.visible.roots
+    end
+
     # Pricing group is set by a before_action. Changing the pricing group
     # is done by StoreController#pricing and its id is retained in a cookie.
     # If current user has her own pricing group set, it will take precedence.
