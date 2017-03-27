@@ -1,0 +1,23 @@
+es:
+  order_mailer:
+    order_confirmation:
+      subject: "Confirmación del pedido de %{store}"
+      title: Confirmación del pedido
+      thank_you: "Gracias por comprar en %{store}!"
+    order_receipt:
+      subject: "Recibo de tu pedido de %{store}"
+      title: Recibo
+      thank_you: "Gracias por comprar en %{store}!"
+    order_cancellation:
+      subject: "Pedido cancelado"
+      title: Cancelación del Pedido
+      body_html: <p>Tu pedido № %{order} de %{store} ha sido cancelado.</p>
+    order_notification:
+      subject: "Nota de envío de %{store}"
+      title: Nota de envío
+    vendor_notification:
+      subject: "Notificación del pedido de %{store}"
+      title: "Notificación del pedido"
+    quotation:
+      subject: "Nueva cita de %{store}"
+      title: Cita

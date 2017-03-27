@@ -1,0 +1,132 @@
+es:
+  admin:
+    albums:
+      create:
+        notice: "Album %{album} creado."
+      update:
+        notice: "Album %{album} subido."
+      destroy:
+        notice: "Album %{album} eliminado."
+    categories:
+      create:
+        notice: "Categoria %{category} creado."
+      update:
+        notice: "Categoria %{category} subido."
+      destroy:
+        notice: "Categoria %{category} eliminado."
+    customer_assets:
+      create:
+        notice: "Bienes del cliente %{customer_asset} creados."
+    departments:
+      create:
+        notice: "Departamento %{department} creado."
+      update:
+        notice: "Departamento %{department} subido."
+      destroy:
+        notice: "Departamento %{department} eliminado."
+    images:
+      create:
+        error: "Error al subir la imagen."
+    inventories:
+      create:
+        notice: "Inventario %{inventory} creado."
+      update:
+        notice: "Inventario %{inventory} subido."
+      destroy:
+        notice: "Inventario %{inventory} eliminado."
+    orders:
+      create:
+        notice: "Pedido %{order} creado."
+      update:
+        notice: "Pedido %{order} subido."
+      quote:
+        notice: "Cita %{order} enviada."
+      forward:
+        notice: "Pedido %{order} enviado al carro."
+        failed: "Pedido %{order} enviado al carro, excepto los sigueinte productos no disponibles: %{failed}"
+    pages:
+      create:
+        notice: "Página %{page} creado."
+      update:
+        notice: "Página %{page} subido."
+      destroy:
+        notice: "Página %{page} eliminado."
+    portals:
+      create:
+        notice: "Portal %{portal} creado."
+      update:
+        notice: "Portal %{portal} subido."
+      destroy:
+        notice: "Portal %{portal} eliminado."
+    pricing_groups:
+      create:
+        notice: "Grupo de precios %{pricing_group} creado."
+      update:
+        notice: "Grupo de precios %{pricing_group} subido."
+      destroy:
+        notice: "Grupo de precios %{pricing_group} eliminado."
+    products:
+      create:
+        notice: "Producto %{product} creado."
+      update:
+        notice: "Producto %{product} subido."
+      duplicate:
+        notice: "Producto %{product} eliminado."
+    promotions:
+      create:
+        notice: "Promoción %{promotion} creado."
+      update:
+        notice: "Promoción %{promotion} subido."
+      destroy:
+        notice: "Promoción %{promotion} eliminado."
+    properties:
+      create:
+        notice: "Propiedad %{property} creado."
+      update:
+        notice: "Propiedad %{property} subido."
+      destroy:
+        notice: "Propiedad %{property} eliminado."
+    shipping_methods:
+      create:
+        notice: "Metodo de envío %{shipping_method} creado."
+      update:
+        notice: "Metodo de envío %{shipping_method} subido."
+      destroy:
+        notice: "Metodo de envío %{shipping_method} eliminado."
+    stores:
+      create:
+        notice: "Tienda %{store} creada."
+      update:
+        notice: "Tienda %{store} subida."
+    tax_categories:
+      create:
+        notice: "Categoria de impuestos %{tax_category} creada."
+      update:
+        notice: "Categoria de impuestos %{tax_category} subida."
+      destroy:
+        notice: "Categoria de impuestos %{tax_category} eliminada."
+    users:
+      create:
+        notice: "Usuario %{user} creado."
+      update:
+        notice: "Usuario %{user} subido."
+      destroy:
+        notice: "Usuario %{user} eliminado."
+  correspondence:
+    mail_form:
+      thank_you: ¡Gracias por contactar con nosotros!
+  orders:
+    update:
+      notice: "Pedido %{order} subido."
+    destroy:
+      notice: "Pedido %{order} cancelado."
+    duplicate:
+      notice: "Pedido %{order} enviado al carro."
+      failed: "Pedido %{order} enviado al carro, excepto los siguientes productos no disponibles: %{failed}"
+  store:
+    order_product:
+      notice: "%{amount} ”%{product}” añadidos al carro."
+    delete_cart:
+      notice: "Carro de compra vacio."
+    pricing:
+      alert: "Precio establecido a %{pricing}."

@@ -406,8 +406,6 @@ fi:
         category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä
         locale: Kieli
-        current_password: Nykyinen salasana
-        email: Sähköpostiosoite
         phone: Puhelinnumero
         billing_address: Laskutusosoite
         billing_postalcode: Postinumero
@@ -417,9 +415,6 @@ fi:
         shipping_postalcode: Postinumero
         shipping_city: Toimipaikka
         shipping_country_code: Maa
-        password: Salasana
-        password_confirmation: Salasanan vahvistus
-        remember_me: Muista minut
         sign_in_count: Kirjautumiskertoja
         current_sign_in_at: Viimeisin kirjautuminen
         last_sign_in_at: Edellinen kirjautuminen

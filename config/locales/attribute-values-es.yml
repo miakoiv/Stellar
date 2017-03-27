@@ -1,0 +1,69 @@
+es:
+  activerecord:
+    values:
+      image:
+        purpose:
+          presentational: Presentación
+          technical: Técnico
+          document: Documento
+          vector: Imagen del Vector
+      page:
+        purpose:
+          route: Ruta de entrada
+          primary: Contenido Principal
+          secondary: Contenido Secundario
+          banner: Logotipo
+          template: Modelo
+          category_menu: Categorias
+          product_link: Enlace del producto
+          header: Encabezado
+          footer: Pie de página
+          navigation: Menu de navegación
+      property:
+        value_type:
+          string: Secuencia
+          numeric: Numérico
+      product:
+        purpose:
+          vanilla: Producto
+          master: Producto maestro
+          variant: Variedad de producto
+          bundle: Colección de productos
+          composite: Producto compuesto
+          virtual: Producto virtual
+          internal: Costes Internos
+        sorting:
+          manual: Manual
+          alphabetical: Alfabético
+          retail_price_asc: Del mas barato al mas caro
+          retail_price_desc: Del mas caro al mas barato
+          random: Aleatorio
+      role:
+        name:
+          see_pricing: Ver precios
+          see_stock: Ver stock
+          manager: Administrador
+          correspondence: Correspondencia
+          reports: Informes
+          property_editor: Editor de propiedades
+          category_editor: Editor de categorias
+          order_editor: Editor de pedido (obsoleto)
+          order_review: Ver pedido
+          order_manage: Administrar pedido
+          order_notify: Notificaciones del pedido
+          page_editor: Editor de página
+          product_editor: Editor de productos
+          promotion_editor: Editor de promoción
+          user_manager: 'Administrador de usuarios'
+          album_editor: Editor del album
+          asset_editor: Editor de bienes
+          inventory_manage: Inventario
+          store_admin: Administrador de tienda
+          superuser: Super Usuario
+      user:
+        group:
+          guest: Invitado
+          customer: Cliente
+          reseller: Distribuidor
+          manufacturer: Fabricante
+          vendor: Suministrador

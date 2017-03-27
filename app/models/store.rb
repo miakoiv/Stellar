@@ -97,7 +97,12 @@ class Store < ActiveRecord::Base
   end
 
   def self.locale_options
-    @@locale_options ||= [['English', 'en'], ['Deutsch', 'de'], ['suomi', 'fi']]
+    @@locale_options ||= [
+      ['English', 'en'],
+      ['español', 'es'],
+      ['Deutsch', 'de'],
+      ['suomi', 'fi']
+    ]
   end
 
   # Looks up the names of precompiled stylesheets for themes.

@@ -1,0 +1,314 @@
+# Los documentos en Config/locales son usados para internacionazar
+# Y son cargados automaticamente por Rails. Si quieres usar otro locale aparte
+# del Español, añade los archivos necesarios en este directorio.
+# Para usar los locales, usa `I18n.t`:
+#
+#     I18n.t 'hola'
+#
+# Esto  también es conocido como `t`:
+#
+#     <%= t('hola') %>
+#
+# Para usar un diferente locale, ponlo con `I18n.locale`:
+#
+#     I18n.locale = :en
+#
+# Esto usará la información en config/locales/en.yml.
+#
+# Para aprender más, por favor lee la guía Internacional de Rails
+# Disponible en  http://guides.rubyonrails.org/i18n.html.
+# Los documentos en Config/locales son usados para internacionazar
+# Y son cargados automaticamente por Rails. Si quieres usar otro locale aparte
+# del Español, añade los archivos necesarios en este directorio.
+# Para usar los locales, usa `I18n.t`:
+#
+#     I18n.t 'hola'
+#
+# In views, esto es conocido como `t`:
+#
+#     <%= t('hola') %>
+#
+# Para usar un diferente locale (idioma), ponlo con `I18n.locale`:
+#
+#     I18n.locale = :en
+#
+# Esto usará la información en config/locales/en.yml.
+#
+# Para aprender más, por favor lee la guía Internacional de Rails
+# Disponible en  http://guides.rubyonrails.org/i18n.html.
+es:
+  admin:
+    dashboard:
+      title: Tabla de mandos
+    content:
+      title: Contenido
+    configuration:
+      title: Configuración
+    global:
+      title: Global
+    reports:
+      title: Informes
+      inventory:
+        title: Valor del inventario
+        total_value: Valor total
+        items: Artículos
+      sales:
+        title: Ventas
+        total_value: Total del valor antes de aplicar tasas
+        total_items: Total de artículos vendidos
+        products: Productos
+        search:
+          since_date: Desde
+          until_date: Hasta
+          countries: Paises de destino
+        chart:
+          daily: Ventas diarias €
+          total: Ventas totales €
+    manage: Administrar
+    return_to_storefront: Regresar al inicio
+    albums:
+      index:
+        new_album: Nuevo album
+      new:
+        new_album: Nuevo album
+    categories:
+      index:
+        new_category: Nueva categoria
+      new:
+        new_category: Nueva categoria
+    customer_assets:
+      index:
+        new_customer_asset: Nuevo bien
+        grand_total: Total
+      new:
+        new_customer_asset: Nuevo bien
+    departments:
+      index:
+        new_department: Nuevo departamento
+      new:
+        new_department: Nuevo departamento
+    inventories:
+      index:
+        new_inventory: Nuevo inventario
+      new:
+        new_inventory: Nuevo inventario
+    orders:
+      row:
+        approve: Aprobar
+        review: Revisión
+      show:
+        forward: Ir a la caja
+        quote: Enviar ctización
+        print_delivery_note: Imprimir la nota de envió
+        print_quotation: Imprimir cotización
+      form:
+        approved_at_help: Fecha en la que se recibe y acepta el pedido
+        concluded_at_help: Fecha en la que el pedido es enviado y archivado
+      add_products:
+        submit: Añadir producto
+      headers:
+        delivery_note: Nota de envío
+        quotation: Cotización
+      review_modal:
+        title: Resumen del pedido
+        conclude: Concluir pedido y cerrar
+    pages:
+      index:
+        new_page: Nueva página
+      new:
+        new_page: Nueva página
+    portals:
+      index:
+        new_portal: Nuevo portal
+      new:
+        new_portal: Nuevo portal
+    pricing_groups:
+      index:
+        new_pricing_group: Nuevo grupo de precios
+      new:
+        new_pricing_group: Nuevo grupo de precios
+      form:
+        markup_percent_help: The default markup applied to alternate prices.
+    products:
+      index:
+        new_product: Nuevo producto
+      search:
+        availability: "[Disponibilidad]"
+      table:
+        duplicate:
+          button: Duplicado
+          confirm: "¿Estas seguro que quieres duplicar %{klass} %{name}?"
+          proceed: Duplicar
+          cancel: Cancelar
+      new:
+        new_product: Nuevo producto
+      form:
+        tax_included_in_retail_html: Precio <strong>incluye la tasa</strong>.
+        tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Precio <strong>excluye la tasa</strong>.
+        shipping_notes_help: Información extra para el carro de compra y otras filas
+      upload_modal:
+        title: Subir archivo CSV o XLS
+        dropzone_message: Mete un archivo aquí para subir la información de precio y envió de multiples productos a la vez
+    promotion_handler:
+      bulk_discount:
+        discount_percent_help: Cada lote de artículos requeridos produce un descuento acumulativo en todos los artículos.
+      freebie_bundle:
+        discount_percent_help: El artículo más barato es descontado en este porcentaje cuando el número de los artículos coincide.
+    promotions:
+      index:
+        new_promotion: Nueva promoción
+      new:
+        new_promotion: Nueva promoción
+      edit:
+        add_products: Añadir producto
+        add_categories: Añadir categorias
+      add_products:
+        submit: Añadir producto
+      add_categories:
+        submit: Añadir categorias
+    properties:
+      index:
+        new_property: Nueva propiedad
+      new:
+        new_property: Nueva propiedad
+    shipping_methods:
+      index:
+        new_shipping_method: Nuevo metodo de envío
+      new:
+        new_shipping_method: Nuevo metodo de envío
+      form:
+        detail_page_help: Un link a esta página es mostrado durante la compra para proveer detalles en este metodo de envío
+    stores:
+      index:
+        new_store: Nueva tienda
+      new:
+        new_store: Nueva tienda
+      form:
+        subdomain_help_html: Esto es el subdominio para esta tienda dentro del portal de los dominios
+        slug_help_html: Esto es un campo generado automaticamente
+        order_sequence_help_html: "El numero de predido inicial sera este más uno: <strong>0000</strong> se convierte en <strong>0001</strong>, <strong>AAA</strong> se convierte en <strong>AAB</strong>"
+    tax_categories:
+      index:
+        new_tax_category: Nueva categoria de tasa
+      new:
+        new_tax_category: Nueva categoria de tasa
+    users:
+      index:
+        new_user: Nuevo usuario
+      new:
+        new_user: Nuevo usuario
+      form:
+        no_categories: Todas
+  cookieconsent:
+    message: Está página web usa cookies para asegurar que tengas la mejor experiencia mientras navegas.
+    dismiss: ¡Entendido!
+    more_info: Más info
+  orders:
+    index:
+      timeline_header: Pedidos que requieran envío
+      timeline_help_html: Click on the timeline to activate scrolling and zooming haz click en el para activar el la rueda y el zomm.
+    table:
+      cancel:
+        button: Cancelar
+        confirm: "Estas seguro de que quieres cancelar %{klass} %{name}?"
+        proceed: Cancelar pedido
+        cancel: Volver
+    receipt:
+      tax_included: El precio incluye impuestos
+      tax_excluded: El precio no incluye impuestos
+    show:
+      duplicate: Duplicarlo en el carro
+    edit:
+      duplicate: Duplicarlo en el carro
+  products:
+    product_detail:
+      variants: Alternativas para este proyecto…
+  store:
+    front: Página principal
+    all_products: Todos los productos
+    product_variants: Alternativas para este producto
+    requisite_products: Productos Recomendados
+    product_description: Descripción
+    product_documentation: Documentación
+    product_properties: Propiedades
+    component_entries: Componentes Incl.
+    add_to_cart: Añadir al carro
+    offer_requisites: Compras recomendadas
+    empty_cart: Tu carro está vacio
+    go_shopping: Seguir comprando
+    order_history: Historial de pedido
+    no_orders: Tu historial de pedido está vacio
+    go_checkout: Comprobar
+    cart:
+      shopping_cart: Carro de compra
+      delete: Carro vacio
+      confirm_delete: ¿Quieres vaciar tu carro?
+      lead_time_warning: La cantidad pedida excede el inventario, se espera un retraso de %{days} días.
+    pricing_groups:
+      default: <Estandar>
+  albums:
+    sidebar:
+      included_albums: Mostrar albumes
+  checkout:
+    panels:
+      address_panel: Información de contacto
+      shipping_panel: Opciones de envío
+      payment_panel: Metodo de pago
+      complete_panel: Pedido completado
+    continue_shopping: Continuar comprando
+    back_to_cart: Regresar al carro
+    cancel_checkout: Cancelar y devolver al contacto
+    select_order_type: "Elige para proceder:"
+    address: Enviar información del contacto
+    select_shipping_method: Elegir metodo de envío
+    delivery_time: El envío tardará %{days} días laborables.
+    ship: Elegir este metodo de envío
+    business_orders_only: Estos campos son solo para pedidos laborales
+    receipt: Recibo
+    creditcard_payment: Pago con tarjeta
+    e_payment: Pago online
+    card_number: Numero de tarjeta
+    card_expiry: Expira el (mm/aa)
+    card_cvc: Codigo de seguridad (CVC)
+    charge: Pagar ahora
+    messages:
+      vat_number_reminder: ¡Recuerda incluir un numero de impuesto!
+      cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Tu carro contiene productos que ya no estan disponibles.</strong></p><p>Por favor, elimine las entradas marcadas.</p>
+      success_html: <h4>Revisión completada, ¡gracias!</h4><p>Por favor, asegurese de imprimir el recibo para tu registro.</p>
+      charging: Procesando el pago…
+      token_request_error: Hubo un problema con el proveedor del pago. Intentalo de nuevo mas tarde
+      charge_error: Hubo un problema al procesar tu pago, comprueba los datos de la tarjeta.
+  actions:
+    back: Volver
+    show: Mostrar
+    edit: Editar
+    delete: Eliminar
+    select: Seleccionar
+    view: Ver
+    print: Imprimir
+    upload: Subir archivo
+    reorder: Reordenar
+    search: Busqueda
+    advanced_search: Busqueda avanzada con ”%{keyword}”…
+    query: Escribe para buscar…
+    confirm:
+      title: 'Estas seguro?'
+      body: "Estas seguro de que quieres eliminar %{klass} ”%{name}”?"
+      proceed: 'Eliminar'
+      cancel: 'Cancelar'
+  dropzone:
+    default_message: Click para añadir imagenes, o arrastra la imagen aquí.
+  shipping_gateway:
+    smart_post:
+      zipcode: Buscar por Código zip
+  errors:
+    header: ¡Oops!
+    blurb: "No hemos podido proceder por las siguiente razones técnicas:"
+  footer:
+    heading: Stellar Storefront
+    body_html: <p>Proporcionado por Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2017</p>
+  search_panel:
+    search: Busqueda
+    keyword: Palabra clave
+    budget: Precio Máximo
+    all_categories: Todas las categorias

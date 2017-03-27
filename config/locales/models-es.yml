@@ -1,0 +1,420 @@
+es:
+  activemodel:
+    models:
+      shipping_gateway/customer_pickup: Recogida del cliente
+      shipping_gateway/letter: Carta vía mail
+      shipping_gateway/smart_post: Posti SmartPOST
+      shipping_gateway/vendor: Envío a cargo del vendedor
+  activerecord:
+    models:
+      album:
+        one: Album
+        other: Albumes
+      alternate_price:
+        one: Precio
+        other: Precios
+      asset_entry:
+        one: Entrada
+        other: Entradas
+      category:
+        one: Categoria
+        other: Categorias
+      customer_asset:
+        one: Bien del cliente
+        other: Bienes del cliente
+      department:
+        one: Departamento
+        other: Departamentos
+      hostname:
+        one: Dirección
+        other: Direcciones
+      iframe:
+        one: encastro
+        other: encastros
+      image:
+        one: Imagen
+        other: Imagenes
+      inventory:
+        one: Inventario
+        other: Inventarios
+      inventory_entry:
+        one: Entrada
+        other: Entradas
+      inventory_item:
+        one: Nivel de inventario
+        other: Niveles de inventario
+      order:
+        one: Pedido
+        other: Pedidos
+      order_item:
+        one: Artículo del pedido
+        other: Artículos del pedido
+      order_type:
+        one: Tipo de pedido
+        other: Tipos de pedido
+      page:
+        one: Página
+        other: Páginas
+      payment:
+        one: Metodo de pago
+        other: Metodos de pago
+      portal:
+        one: Portal
+        other: Portales
+      pricing_group:
+        one: Grupo de precios
+        other: Grupos de precios
+      product:
+        one: Producto
+        other: Productos
+      product_property:
+        one: Propiedad
+        other: Propiedades
+      promoted_item:
+        one: Producto promocionado
+        other: Productos promocionados
+      promotion:
+        one: Promoción
+        other: Promociones
+      promotion_handler/bulk_discount: Descuento por volumen
+      promotion_handler/bundle_pricing: bundle pricing
+      promotion_handler/freebie_bundle: Regalo de promoción por volumen
+      promotion_handler/vanilla: Fijador de precios
+      property:
+        one: Propiedad
+        other: Propiedades
+      role:
+        one: Rol
+        other: Roles
+      shipment:
+        one: Envío
+        other: Envios
+      shipping_method:
+        one: Metodo de envío
+        other: Metodos de envío
+      store:
+        one: Tienda
+        other: Tiendas
+      tax_category:
+        one: Categoria de tasa
+        other: Categoria de tasas
+      user:
+        one: Usuario
+        other: Usuarios
+    attributes:
+      album:
+        title: Título
+        created_at: Fecha
+        description: Descripción
+        images: Fotos
+        page_ids: Mostrar en páginas
+      alternate_price:
+        pricing_group_id: Grupo de precios
+        product_id: Producto
+        retail_price: Precio de venta
+        markup_percent: Incremento del precio %
+        margin_percent: Ganancia %
+        price_factor: Factor de precios
+      asset_entry:
+        customer_asset_id: Bien del cliente
+        recorded_at: Fecha
+        source_id: Referencia
+        amount: Cantidad
+        value: Valor
+        note: Notas
+      category:
+        parent_id: Categoria parental
+        live: Habilitar
+        not_live: La categoria está inhabilitada
+        hidden: Esconderlo
+        name: Nombre
+        banner_id: Página del Banner
+        product_scope: Variedad de productos
+      component_entry:
+        product_id: Producto
+        component_id: Componentes
+        quantity: Cantidad
+        subtotal: Subtotal
+      customer_asset:
+        user_id: Cliente
+        product_id: Producto
+        amount: Cantidad
+        value: Valor
+      department:
+        name: Nombre
+        category_ids: Categorias
+      hostname:
+        fqdn: Nombre del host
+        is_subdomain: Subdominio
+      iframe:
+        html: Código HTML
+      image:
+        purpose: Tipo de imagen
+        attachment_file_name: Nombre de archivo
+        attachment_content_type: Tipo de archivo
+        attachment_file_size: Tamaño del archivo
+        link: Link
+      inventory:
+        name: Nombre
+        fuzzy: Cantidades aproximadas
+        inventory_code: Código de inventario
+      inventory_entry:
+        recorded_at: Fecha
+        source_id: Referencia
+        on_hand: Disponible
+        reserved: Reservado
+        pending: Pendiente
+        value: Valor
+        note: Notas
+        barcode: Código de barras
+      inventory_item:
+        inventory_id: Inventorio
+        product_id: Producto
+        code: Código del lote
+        shelf: Estante
+        on_hand: Disponible
+        reserved: Reservado
+        pending: Pendiente
+        value: Valor
+      order:
+        number: Pedido №
+        external_number: № externo
+        vat_number: Numero VAT
+        your_reference: Tus referencias
+        our_reference: Nuestras referencias
+        message: Mensaje
+        user_id: De
+        order_type_id: Tipo de pedido
+        completed_at: Pedido
+        shipping_at: Envió requerido a
+        installation_at: Instalación en
+        approved_at: Aprobado
+        concluded_at: Concluido
+        status: Estado
+        not_approved: No procesado
+        items: Artículos
+        products: Productos
+        customer_name: Nombre del cliente
+        customer_email: E-mail
+        customer_phone: Numero de teléfono
+        company_name: Compañia
+        contact_person: Persona de contacto
+        contact_email: E-mail
+        contact_phone: Numero de teléfono
+        billing_address: Dirección de facturacuön
+        billing_postalcode: Código Postal
+        billing_city: Ciudad
+        billing_country_code: País
+        has_billing_address: Envío a diferente dirección
+        shipping_address: Dirección de envío
+        shipping_postalcode: Código postal
+        shipping_city: Ciudad
+        shipping_country_code: País
+        shipping_method: Envío
+        notes: Notas
+        store_name: Tienda
+        user_name: Cliente
+        user_email: E-mail
+        order_type_name: Tipo de pedido
+        grand_total: Totalidad
+        total_sans_tax: Impuesto no incl.
+        tax_total: Total de Impuesto
+        total_with_tax: Impuesto incl.
+        summary: Resumen
+        product_ids_string: Productos para añadir
+      order_item:
+        order_id: Pedido
+        product_id: Producto
+        amount: pc
+        price: à
+        subtotal: Subtotal
+        tax_rate: Impuesto
+        product_code: Código de producto
+        product_customer_code: Codigo de cliente
+        product_title: Nombre de producto
+        product_retail_price: Precio de venta
+      page:
+        purpose: Tipo de página
+        parent_id: Página Parental
+        resource_id: Objetivo
+        title: Título
+        slug: Objetivo
+        content: Contenido
+        wysiwyg: Mostrar plano
+        album_ids: Álbumes
+      payment:
+        order_id: Pedido
+        amount: Pagado
+        created_at: Fecha
+      portal:
+        hostnames: Direcciones
+        images: Imagenes
+        name: Nombre
+        store_ids: Tiendas
+        department_ids: Departamentos
+        theme: Tema de exhibición
+        locale: Idioma
+      pricing_group:
+        name: Nombre
+        markup_percent: Incremento del precio %
+      product:
+        metadata: General
+        text: Texto
+        pricing: Precio
+        shipping: Envío
+        vendor_id: Suministrador
+        purpose: Tipo
+        master_product_id: Producto Mastro
+        variant_ids: Variantes
+        category_ids: Categorias
+        code: Código producto
+        customer_code: Código cliente
+        title: Título
+        subtitle: Subtitulo
+        description: Descripción
+        available_at: Disponible a partir de
+        deleted_at: Disponible hasta
+        live: Disponible
+        not_live: No disponible
+        memo: Notas
+        mass: Peso
+        dimensions: Dimensiones
+        lead_time: Tiempo de entrega
+        lead_time_unit: Días
+        out_of_stock: Vendido
+        shipping_notes: Notas
+        iframes: Encastrar
+        images: Imagenes
+        product_properties: Propiedades
+        component_entries: Estructuras
+        requisite_entries: Requisitos
+        cost_price: Precio de coste
+        trade_price: Precio de compra
+        retail_price: Precio de venta
+        tax_category_id: Categoria de tasa
+        alternate_prices: Precio alternativo
+        price: Precio
+        markup_percent: Incremento de precio %
+        margin_percent: Beneficio %
+        inventory: Inventario
+        stock: Stock
+        value: Valor
+      product_property:
+        property_id: Propiedad
+        value: Valor
+      promoted_item:
+        product_id: Producto
+        price: Precio
+        tax_category_id: Impuesto
+        discount_percent: Descuento
+        amount_available: Disponibilidad
+        amount_sold: Vendido
+      promotion:
+        promotion_handler_type: Metodo
+        name: Nombre
+        first_date: Empieza en
+        last_date: Acaba en
+        not_active: No aplicado
+        product_ids_string: Productos a los que añadir
+        category_ids_string: Categorias a las que añadir
+      promotion_handler:
+        description: Descripción
+      promotion_handler/bulk_discount:
+        required_items: Tamaño del lote
+        discount_percent: Aplicar descuento
+      promotion_handler/bundle_pricing:
+        required_items: Numero de artículos
+        items_total: Precio total
+      promotion_handler/freebie_bundle:
+        required_items: Numero de artículos
+        discount_percent: Porcentaje del descuento
+      property:
+        value_type: Tipo
+        measurement_unit_id: Unidad de medidas
+        unit_pricing: Usar unidad de precios
+        searchable: Incluirlo en la busqueda del producto
+        name: Nombre
+      requisite_entry:
+        product_id: Producto
+        requisite_id: Requisito del producto
+      role:
+        name: Nombre
+      shipment:
+        shipping_method_id: Metodo de envío
+        number: Número
+        shipped_at: Fecha de envío
+        cancelled_at: Fecha de cancelación
+        metadata: Detalles
+      shipping_method:
+        name: Nombre
+        shipping_gateway: Modo de envío
+        delivery_time: Tiempo mínimo de envío
+        delivery_time_unit: días
+        enabled_at: Activo desde
+        disabled_at: Activo hasta
+        not_active: No aplicado
+        description: Descripción
+        shipping_cost_product_id: Coste de envío del producto
+        free_shipping_from: Envío gratis desde
+        detail_page_id: Información
+      store:
+        admin: Ajustes
+        new_user: Crear administrador
+        new_tax_category: Establecer impuestos
+        files: Archivos
+        product_csv: Importar producto CSV
+        order_xml: Exportar pedido XML
+        superuser: Avanzado
+        hostnames: Direcciones
+        images: Imagenes
+        portal_ids: Portales
+        erp_number: Número ERP
+        name: Nombre
+        slug: Abreviatura
+        theme: Tema de exhibición
+        locale: Idioma
+        country_code: País
+        allow_shopping: Compra disponible
+        admit_guests: Invitado admitido de la tienda
+        accept_credit_cards: Aceptar pagos con tarjeta
+        tracking_code: Clave Google Analytics
+        facebook_pixel_id: Facebook Pixel ID
+        tawkto_site_id: página de tawk.to
+        order_sequence: Numeración de pedido
+        inventory_ids: Inventarios
+        manufacturer_template_id: Membrete del fabricante
+        reseller_template_id: Membrete del vendedor
+        quotation_template_id: Calificación de la cotización
+        csv_encoding: Conjunto de caracteres
+        csv_product_code: Codigos de producto
+        csv_retail_price: Precio de venta
+        csv_inventory_amount: Campo de inventario
+        order_xml_path: Ruta de carpeta
+      tax_category:
+        name: Nombre
+        rate: Tarifa de tasa
+        included_in_retail: Precio de venta incluyendo tasas
+      user:
+        personal: Información personal
+        privileges: Privilegios
+        addresses: Direcciones
+        name: Nombres
+        group: Grupos
+        role_ids: Roles
+        category_ids: Categorias permitidas
+        pricing_group_id: Grupo de precios
+        locale: Idioma
+        phone: Número de teléfono
+        billing_address: Dirección de facturación
+        billing_postalcode: Codigo Psotal
+        billing_city: Ciudad
+        billing_country_code: País
+        shipping_address: Dirección de envío
+        shipping_postalcode: Postal code
+        shipping_city: Ciudad
+        shipping_country_code: País
+        sign_in_count: Cuenta
+        current_sign_in_at: Conectado
+        last_sign_in_at: Ultima vez conectado
+        current_sign_in_ip: Dirección IP
+        last_sign_in_ip: Dirección IP
