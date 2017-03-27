@@ -1,5 +1,6 @@
-%ol.breadcrumb
-  = content_tag_for :li, @category.ancestors do |ancestor|
-    = link_to ancestor, show_category_path(ancestor)
-  = content_tag_for :li, @category, class: 'active' do |category|
-    = category
+- if @category.present?
+  %ol.breadcrumb
+    = content_tag_for :li, @category.ancestors do |ancestor|
+      = link_to ancestor, show_category_path(ancestor)
+    = content_tag_for :li, @category, class: 'active' do |category|
+      = category
