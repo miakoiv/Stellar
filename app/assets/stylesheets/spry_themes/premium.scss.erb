@@ -649,12 +649,20 @@ $bg-tone:           #f6f6f6;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.product-footer .requisite-products,
-.product-footer .variant-products {
+.product-footer > .requisite-products,
+.product-footer > .variant-products {
   @extend .col-xs-12, .col-sm-8, .col-sm-offset-2;
   @extend .col-md-8, .col-md-offset-0;
+
+  .product a { padding-bottom: 10px; }
+  .product .product-text {
+    height: auto;
+    margin-bottom: 10px;
+  }
 }
-.product-footer .variant-products .product a { padding-bottom: 10px; }
+
+/* Product offerings in modal */
+#offer-requisites-modal .requisite-products { @extend .product-grid; }
 
 
 /*
