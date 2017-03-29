@@ -349,13 +349,13 @@ class Product < ActiveRecord::Base
   end
 
   # Creates a duplicate of this product, including associations.
+  # Any variants the product may have are not duplicated.
   def duplicate!
     clone = dup.tap do |c|
       c.reset_code
       c.save
       c.update(
         categories: categories,
-        variants: variants,
         component_products: component_products,
         requisite_products: requisite_products,
         iframes: iframes.map(&:dup),
