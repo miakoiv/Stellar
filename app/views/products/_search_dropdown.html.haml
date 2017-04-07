@@ -13,4 +13,4 @@
         .small= product.subtitle
       - if can_see_pricing?
         %p.currency.text-right
-          = humanized_money_with_symbol product.price(current_pricing)
+          = humanized_money_with_symbol product.price_tag(current_pricing)

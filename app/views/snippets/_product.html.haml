@@ -12,4 +12,4 @@
           %p= item.description
     - if can_see_pricing? && can_shop? && may_shop_at?(product.category)
       .product-price
-        %p= humanized_money_with_symbol product.price(current_pricing)
+        %p= humanized_money_with_symbol product.price_tag(current_pricing)

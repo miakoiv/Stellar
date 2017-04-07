@@ -16,4 +16,4 @@
         %p.store
           = image_variant_tag product.store.cover_image, :icon
           = product.store
-        %p.price= humanized_money_with_symbol product.price(nil)
+        %p.price= humanized_money_with_symbol product.price_tag(nil)

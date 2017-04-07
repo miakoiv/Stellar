@@ -33,6 +33,7 @@ class Product < ActiveRecord::Base
 
   # Monetize aggregate methods.
   monetize :price_cents, disable_validation: true
+  monetize :price_tag_cents, disable_validation: true
   monetize :component_total_price_cents, disable_validation: true
   monetize :unit_price_cents, disable_validation: true
 
@@ -214,7 +215,7 @@ class Product < ActiveRecord::Base
 
   # Returns the retail price in given pricing group. If no group is specified,
   # finds the lowest retail price through promotions. Bundles sum their
-  # components if no price is specified. Composites add their components.
+  # components if no price is specified.
   def price_cents(pricing_group)
     if bundle? && retail_price_cents.nil?
       return component_total_price_cents(pricing_group)
@@ -225,8 +226,14 @@ class Product < ActiveRecord::Base
     price_cents = retail_price_cents || 0
     lowest = best_promoted_item
     price_cents = lowest.price_cents if lowest.present?
-    price_cents += component_total_price_cents(pricing_group) if composite?
     price_cents
+  end
+
+  # Returns the display price in given pricing group. The price tag displays
+  # retail price, with components added on for composite products.
+  def price_tag_cents(pricing_group)
+    return price_cents(pricing_group) unless composite?
+    price_cents(pricing_group) + component_total_price_cents(pricing_group)
   end
 
   # Total price of components.
@@ -252,10 +259,10 @@ class Product < ActiveRecord::Base
     product_property.property.measurement_unit.pricing_base
   end
 
-  # Returns the range of retail prices across variants of a master product.
+  # Returns the range of price tags across variants of a master product.
   def price_range(pricing_group)
     return nil unless master?
-    variants.map { |variant| variant.price(pricing_group) }.compact.minmax
+    variants.map { |variant| variant.price_tag(pricing_group) }.compact.minmax
   end
 
   # Markup percentage from trade price to retail price.

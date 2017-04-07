@@ -144,13 +144,9 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Inserts a single product to this order, optionally with separate components
-  # that are deducted from the price of this product.
+  # Inserts a single product to this order, optionally with separate components.
   def insert_single(product, amount, pricing, parent_item, separate_components)
     price_cents = product.price_cents(pricing)
-    if separate_components
-      price_cents -= product.component_total_price_cents(pricing)
-    end
     order_item = order_items.create_with(
       amount: 0,
       priority: order_items_count

@@ -15,7 +15,7 @@
         - if product.master?
           %p.price= humanized_money_range product.price_range(current_pricing)
         - else
-          %p.price= humanized_money_with_symbol product.price(current_pricing)
+          %p.price= humanized_money_with_symbol product.price_tag(current_pricing)
       - if can_shop? && may_shop_at?(@category) && !product.master? && product.available?
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
           = hidden_field_tag :amount, 1
