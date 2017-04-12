@@ -5,6 +5,7 @@
 :coffee
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
+  $('.mega-dropdown').removeClass 'open'
   $('.product-detail').initialize()
 
   if $(window).isSmall()

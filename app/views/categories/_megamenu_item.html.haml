@@ -1,5 +1,5 @@
 %li.category-item
-  = link_to show_category_path(item) do
+  = link_to show_category_path(item), data: {push: 'partial', target: '#store-body'} do
     - if item.cover_image.present?
       .mega-dropdown-image
         = image_variant_tag item.cover_image, :postcard

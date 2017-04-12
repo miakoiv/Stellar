@@ -1,3 +1,3 @@
 %ol.breadcrumb
   = content_tag_for :li, @category.self_and_ancestors do |ancestor|
-    = link_to ancestor, show_category_path(ancestor)
+    = link_to ancestor, show_category_path(ancestor), data: {push: 'partial', target: '#store-body'}
