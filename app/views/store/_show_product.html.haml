@@ -3,7 +3,6 @@
 :coffee
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
-  $('.category-banner').collapse 'hide'
   $('.products').hide()
   $('.product-detail').show().initialize()
   if $(window).isSmall()

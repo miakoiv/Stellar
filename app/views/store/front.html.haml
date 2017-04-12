@@ -1,11 +1,5 @@
 - meta_tags_for(current_store)
 
-- content_for :category_banner do
-  = render partial: 'category_banner'
-
-#category-banner-wrap
-  = yield :category_banner
-
 #store-wrap
   .store-sections
     #categories-wrap
@@ -13,8 +7,6 @@
         %ul= render @categories
 
     #products-wrap
-      = yield :category_banner
-
       .products
         - if @category.present?
           .breadcrumbs.visible-print

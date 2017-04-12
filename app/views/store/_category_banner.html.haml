@@ -1,4 +1,0 @@
-.category-banner.collapse.in
-  - if @category.try(:banner).present?
-    = render partial: 'categories/album_carousel', collection: @category.banner.albums, as: :album
-    .container= @category.banner.content.html_safe

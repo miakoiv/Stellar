@@ -1,11 +1,5 @@
 - meta_tags_for(@product)
 
-- content_for :category_banner do
-  .category-banner
-
-#category-banner-wrap
-  = yield :category_banner
-
 #store-wrap
   .store-sections
     #categories-wrap
@@ -13,8 +7,6 @@
         %ul= render @categories
 
     #products-wrap
-      = yield :category_banner
-
       .products{style: 'display: none'}
 
     #product-detail-wrap

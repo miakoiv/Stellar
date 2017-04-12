@@ -11,8 +11,6 @@
   $('.product-detail').hide()
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
-  $('.category-banner').replaceWith("#{j render partial: 'category_banner'}")
-  $('.category-banner').collapse 'show'
   $('.categories').show()
   $('.products').show()
   $('.navbar-form').show()
