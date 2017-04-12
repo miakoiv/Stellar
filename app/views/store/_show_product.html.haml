@@ -1,10 +1,12 @@
-= render partial: 'products/product_detail', object: @product, as: :product
+#product-detail-wrap
+  .product-detail
+    = render partial: 'products/product_detail', object: @product, as: :product
 
 :coffee
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
-  $('.products').hide()
-  $('.product-detail').show().initialize()
+  $('.product-detail').initialize()
+
   if $(window).isSmall()
     $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)
   else

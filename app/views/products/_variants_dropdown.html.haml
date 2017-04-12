@@ -4,7 +4,7 @@
     %span.caret
   %ul.dropdown-menu
     = content_tag_for :li, product.sibling_variants.live.sorted do |variant|
-      = link_to show_product_path(variant.category, variant), data: {push: 'partial', target: '.product-detail'} do
+      = link_to show_product_path(variant.category, variant), data: {push: 'partial', target: '#store-body'} do
         .media
           .media-left= image_variant_tag variant.cover_image, :thumbnail, class: 'media-object'
           .media-body

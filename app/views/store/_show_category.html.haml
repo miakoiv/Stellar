@@ -1,18 +1,17 @@
-.breadcrumbs.visible-print
-  = render partial: 'categories/breadcrumbs', object: @category, as: :category
-.page-header.visible-print
-  %h1= @category.to_s
-  %p.lead= @category.subtitle
-.product-grid
-  %ul{class: current_store.masonry? && 'masonry-grid'}
-    = render @products
+#products-wrap
+  .products
+    .breadcrumbs.visible-print
+      = render partial: 'categories/breadcrumbs', object: @category, as: :category
+    .page-header.visible-print
+      %h1= @category.to_s
+      %p.lead= @category.subtitle
+    .product-grid
+      %ul{class: current_store.masonry? && 'masonry-grid'}
+        = render @products
 
 :coffee
-  $('.product-detail').hide()
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
-  $('.categories').show()
-  $('.products').show()
   $('.navbar-form').show()
 
   if $(window).isSmall()

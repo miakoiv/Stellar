@@ -1,7 +1,7 @@
-.product-table
-  .panel.panel-default
-    = render partial: 'products/search_results', object: @products, as: :products
+.products
+  .product-table
+    .panel.panel-default
+      = render partial: 'products/search_results', object: @products, as: :products
 
 :coffee
   $('.search-panel').html("#{j render partial: 'store/search_panel'}")
-  $('#search-results').initialize()
