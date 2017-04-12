@@ -1,14 +1,12 @@
 - meta_tags_for(@product)
 
 #store-wrap
-  .store-sections
+  #store-header
     #categories-wrap
       .categories.hidden-print
         %ul= render @categories
 
-    #products-wrap
-      .products{style: 'display: none'}
-
+  #store-body
     #product-detail-wrap
       .product-detail
         = render partial: 'products/product_detail', object: @product, as: :product

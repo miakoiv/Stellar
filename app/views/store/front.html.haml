@@ -1,11 +1,12 @@
 - meta_tags_for(current_store)
 
 #store-wrap
-  .store-sections
+  #store-header
     #categories-wrap
       .categories.hidden-print
         %ul= render @categories
 
+  #store-body
     #products-wrap
       .products
         - if @category.present?
@@ -17,6 +18,3 @@
         .product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products
-
-    #product-detail-wrap
-      .product-detail{style: 'display: none'}
