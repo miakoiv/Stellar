@@ -9,7 +9,8 @@ class Category < ActiveRecord::Base
   friendly_id :slugger, use: [:slugged, :history]
   acts_as_nested_set scope: :store,
                      dependent: :nullify,
-                     counter_cache: :children_count
+                     counter_cache: :children_count,
+                     touch: true
 
   #---
   belongs_to :store
