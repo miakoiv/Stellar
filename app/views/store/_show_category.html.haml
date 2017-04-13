@@ -13,7 +13,6 @@
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
   $('.navbar-form').show()
-  $('.mega-dropdown').removeClass 'open'
 
   if $(window).isSmall()
     $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)
