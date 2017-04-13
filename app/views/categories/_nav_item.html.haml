@@ -1,6 +1,7 @@
 %li{class: @category == category && 'active'}
-  = link_to show_category_path(category) do
-    = image_variant_tag category.cover_image(:technical), :thumbnail
-    = category.name
+  - cache_if current_user.guest?, [I18n.locale, :category_nav_link, category] do
+    = link_to show_category_path(category) do
+      = image_variant_tag category.cover_image(:technical), :thumbnail
+      = category.name
   - if category.children.visible.any?
     %ul.nav.navmenu-nav= render partial: 'categories/nav_item', collection: category.children.visible, as: :category
