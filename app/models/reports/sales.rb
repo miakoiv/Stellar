@@ -8,7 +8,7 @@ module Reports
     # which can be accessed through the search attribute.
     def initialize(params)
       @search = OrderItemSearch.new(params)
-      items = @search.results
+      items = @search.results.reorder('orders.completed_at')
       @by_product = items.group_by(&:product)
       @by_date = items.group_by(&:report_date)
       @total_items = items.pluck(:amount).sum
@@ -16,13 +16,13 @@ module Reports
     end
 
     def chart_data
-      data = daily_sales
+      dates, sales = daily_sales
       {
+        labels: dates,
         datasets: [
           {
             label: I18n.t('admin.reports.sales.chart.daily'),
-            data: daily_sales,
-            cubicInterpolationMode: 'monotone'
+            data: sales
           }
         ]
       }
@@ -30,12 +30,13 @@ module Reports
 
     private
       def daily_sales
-        @by_date.map do |date, items|
-          {
-            x: date,
-            y: items.map(&:subtotal_sans_tax).compact.sum.amount
-          }
+        return [[], []] unless @by_date.any?
+        dates = Range.new(*@by_date.keys.minmax).to_a
+        sales = dates.map do |date|
+          items = @by_date[date]
+          items ? items.map(&:subtotal_sans_tax).compact.sum.amount : nil
         end
+        [dates, sales]
       end
   end
 end
