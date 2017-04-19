@@ -52,7 +52,8 @@ class Page < ActiveRecord::Base
   #---
   validates :title, presence: true
   validates :resource, presence: true,
-    if: -> (page) { page.product_link? }
+    if: -> (page) { page.product_link? },
+    on: :update
 
   #---
   # Finds the first page that returns a non-nil path.
