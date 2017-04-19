@@ -1,1 +1,4 @@
-= active_link_to route, show_page_path(route), wrap_tag: :li
+- path = show_page_path(route)
+
+%li{class: !offcanvas && active_link_to_class(path)}
+  = link_to route, path

@@ -1,1 +1,4 @@
-= active_link_to primary, show_page_path(primary), wrap_tag: :li
+- path = show_page_path(primary)
+
+%li{class: !offcanvas && active_link_to_class(path)}
+  = link_to primary, path

@@ -18,7 +18,7 @@
               = link_to branding(current_store), standalone_store? ? root_path : root_url(host: request.domain), class: 'navbar-brand'
             - unless current_store.detach_menu?
               %ul.nav.navbar-nav.responsive
-                = render partial: @header.children, locals: {dropdown: true}
+                = render partial: @header.children, locals: {offcanvas: false}
             %ul.nav.navbar-nav.navbar-right
               = render partial: 'shared/navbar_charms'
             %ul.nav.navbar-nav.navbar-right.responsive
@@ -39,7 +39,7 @@
           %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
             .container
               %ul.nav.navbar-nav.responsive
-                = render partial: @header.children, locals: {dropdown: true}
+                = render partial: @header.children, locals: {offcanvas: false}
 
 
         = yield

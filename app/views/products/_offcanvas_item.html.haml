@@ -1,0 +1,5 @@
+- cache_if current_user.guest?, [I18n.locale, :offcanvas_item, item] do
+  %li
+    = link_to show_product_path(root.resource, item) do
+      = image_variant_tag item.cover_image(:technical), :icon
+      = item

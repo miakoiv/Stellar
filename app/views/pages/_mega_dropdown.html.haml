@@ -2,7 +2,7 @@
   %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
     = root
     %span.caret
-  %ul.dropdown-menu.mega-dropdown-menu
+  %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
     .container
       .row
         = render partial: partial, collection: items, as: :item, locals: {root: root}

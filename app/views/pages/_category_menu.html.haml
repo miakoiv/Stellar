@@ -1,7 +1,14 @@
-- resource = category_menu.resource
-- if resource.nil?
-  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: @categories, partial: 'categories/megamenu_item'}
-- elsif !resource.leaf?
-  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: resource.children.visible, partial: 'categories/megamenu_item'}
+:ruby
+  resource = category_menu.resource
+  if resource && resource.leaf?
+    items = resource.products.visible.sorted(resource.product_scope)
+    type = 'products'
+  else
+    items = resource.nil? ? @categories : resource.children.visible
+    type = 'categories'
+  end
+
+- if offcanvas
+  = render partial: 'pages/offcanvas_menu', object: category_menu, as: :root, locals: {items: items, partial: "#{type}/offcanvas_item"}
 - else
-  = render partial: 'shared/mega_dropdown', object: category_menu, as: :root, locals: {items: resource.products.visible.sorted(resource.product_scope), partial: 'products/megamenu_item'}
+  = render partial: 'pages/mega_dropdown', object: category_menu, as: :root, locals: {items: items, partial: "#{type}/megamenu_item"}

@@ -1,13 +1,15 @@
 - if navigation.children_count > 0
-  - if dropdown
+  - if offcanvas
+    %li
+      .navmenu-header
+        = navigation
+        %span.caret
+      %ul.nav.navmenu-nav
+        = render partial: navigation.children, locals: {offcanvas: true}
+  - else
     %li.dropdown
       %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
         = navigation
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
-        = render partial: navigation.children, locals: {dropdown: true}
-  - else
-    %li
-      .navmenu-header= navigation
-      %ul.nav.navmenu-nav
-        = render partial: navigation.children, locals: {dropdown: false}
+        = render partial: navigation.children, locals: {offcanvas: false}
