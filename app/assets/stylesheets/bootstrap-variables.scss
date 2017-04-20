@@ -38,6 +38,9 @@ $link-hover-color:      darken($link-color, 15%) !default;
 //** Link hover decoration.
 $link-hover-decoration: underline !default;
 
+//** Footer background to use on the mobile viewport to have a statically positioned footer seemingly extend to full height.
+$footer-bg:              #f5f5f5 !default;
+
 
 //== Typography
 //

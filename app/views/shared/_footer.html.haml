@@ -1,17 +1,20 @@
 .container
   .row
-    .col-xs-8.col-sm-4
+    .col-xs-12.col-sm-5.col-sm-push-4.bordered
+      - if @footer.present? && @footer.children.any?
+        %nav.navmenu
+          %ul.nav.navmenu-nav
+            = render partial: @footer.children, locals: {offcanvas: true}
+    .col-xs-8.col-sm-4.col-sm-pull-5
       .media
-        .media-left.logo= image_tag('stellar-vertical.svg', style: 'height: 90px')
+        .media-left
+          .media-object.tall= image_tag('stellar-vertical.svg')
         .media-body
           %p.lead= t('footer.heading')
           = t('footer.body_html')
-    .col-xs-4.col-sm-2.col-sm-push-6
+    .col-xs-4.col-sm-3
       - if current_store.try(:brand_image).present?
         .media
           .media-body
-          .media-right.logo= image_tag(current_store.brand_image, style: 'width: 90px')
-    .col-xs-12.col-sm-6.col-sm-pull-2
-      - if @footer.present? && @footer.children.any?
-        %ul.nav.navmenu-nav
-          = render partial: @footer.children, locals: {offcanvas: true}
+          .media-right
+            .media-object= image_tag(current_store.brand_image)
