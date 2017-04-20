@@ -15,7 +15,7 @@ $navbar-inverse-link-disabled-color: #444;
 $navbar-inverse-link-disabled-bg: transparent;
 $navbar-inverse-toggle-hover-bg: #fff;
 $navbar-inverse-toggle-border-color: #aaa;
-$body-bg: #fbfbfb;
+$body-bg: #fff;
 
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-generators.scss";
@@ -23,10 +23,56 @@ $body-bg: #fbfbfb;
 @import "fonts.scss";
 @import "print.scss";
 
-body.carbon {
-  overflow-y: scroll;
-  padding-top: 110px;
+
+/*
+ * Extra tall navbar
+ */
+#main-nav {
+  @extend .navbar-inverse;
+  background-image: url(asset_path('carbon.png'));
 }
+#main-nav .container {
+  padding-top: 30px;    // padding the container only,
+  padding-bottom: 30px; // not the contained elements
+}
+#main-nav .navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  img { max-height: 50px; }
+}
+
+/* Push content below the navbar and make room for the footer */
+#offcanvas-wrap > #canvas-wrap {
+  padding-top: 110px;
+  padding-bottom: 140px;
+}
+
+/* Keep the hamburger on desktop */
+.offcanvas-toggle {
+  @extend .btn-lg;
+  display: block !important;
+}
+
+
+/*
+ * Less prominent mobile navbar
+ */
+@media (max-width: $screen-xs-max) {
+  #offcanvas-wrap > #canvas-wrap { padding-top: 70px; }
+
+  #main-nav .container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  #main-nav .navbar-brand {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    img { max-height: 30px; }
+  }
+}
+
 
 h1, h2 {
   font-family: 'Playfair Display';
@@ -76,80 +122,6 @@ ul { list-style-type: square; }
         padding: 10px 10px 40px;
         border-radius: 10px;
         background-color: rgba(0,0,0,0.5);
-      }
-    }
-  }
-}
-
-#main-nav {
-  @extend .navbar-inverse;
-  @include box-shadow(0 0 6px 0 rgba(0,0,0,0.8));
-  background-image: url(asset_path('carbon.png'));
-  font-size: $font-size-small;
-  font-weight: 500;
-
-  > .container {
-    padding-top: 30px;    // padding the container only,
-    padding-bottom: 30px; // not the contained elements
-
-    .navbar-brand {
-      padding-top: 0;
-      padding-bottom: 0;
-
-      img {
-        max-width: none;
-        max-height: 50px;
-        width: auto;
-        height: auto;
-        margin: -3px 0 0 0;
-      }
-    }
-
-    .navbar-nav {
-      > li {
-        margin-top: -30px;  // matches container padding
-        padding-top: 30px;
-
-        &.active {
-          @include gradient-vertical(rgba(255,255,255,0.333), rgba(255,255,255,0));
-        }
-      }
-    }
-    #navbar-search .form-control {
-      @extend .input-sm;
-      max-width: 120px;
-    }
-  }
-
-  .navbar-toggle {
-    color: $navbar-inverse-link-color;
-  }
-}
-
-/*
-  as the navbar collapses on extra small screens, the navbar is thinned,
-  logo shrunk, and the navbar items revert to default styles
-*/
-@media (max-width: $screen-sm-min) {
-  body.carbon { padding-top: 75px; }
-
-  #main-nav {
-    > .container {
-      padding-top: 10px;
-      padding-bottom: 10px;
-
-      .navbar-brand img {
-        max-height: 30px;
-        margin-top: 10px;
-      }
-
-      .navbar-nav {
-        > li {
-          margin-top: 0;
-          padding-top: 0;
-
-          &.active { background: $brand-primary; }
-        }
       }
     }
   }
