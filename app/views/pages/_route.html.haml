@@ -1,4 +1,2 @@
-- path = show_page_path(route)
-
-%li{class: !offcanvas && active_link_to_class(path)}
-  = link_to route, path
+%li{class: !offcanvas && active_link_to_class(route.path)}
+  = link_to route, route.path

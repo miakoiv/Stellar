@@ -1,7 +1,5 @@
-- path = show_product_path(product_link.resource.category, product_link.resource)
-
-%li{class: !offcanvas && active_link_to_class(path)}
-  = link_to path do
+%li{class: !offcanvas && active_link_to_class(product_link.path)}
+  = link_to product_link.path do
     - if offcanvas
       = image_variant_tag product_link.resource.cover_image(:technical), :icon
     = product_link

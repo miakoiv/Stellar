@@ -1,4 +1,2 @@
-- path = show_page_path(primary)
-
-%li{class: !offcanvas && active_link_to_class(path)}
-  = link_to primary, path
+%li{class: !offcanvas && active_link_to_class(primary.path)}
+  = link_to primary, primary.path
