@@ -115,8 +115,32 @@ class Page < ActiveRecord::Base
     content
   end
 
+  # Navigation pages and category menu pages contain items.
+  def contained_items
+    case
+    when navigation?
+      children
+    when category_menu? && resource.present?
+      if resource.leaf?
+        resource.products.visible.sorted(resource.product_scope)
+      else
+        resource.children.visible
+      end
+    else nil
+    end
+  end
+
+  # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
     "pages/#{purpose}"
+  end
+
+  # Path to partials to render the contained items of a category menu.
+  # In most cases the items are categories, but for leaf categories,
+  # products are rendered.
+  def contained_item_partial_path
+    return 'products' if resource.present? && resource.leaf?
+    'categories'
   end
 
   # Path to a page object depends on its purpose. Route and primary pages

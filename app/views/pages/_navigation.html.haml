@@ -5,11 +5,11 @@
         = navigation
         %span.caret
       %ul.nav.navmenu-nav
-        = render partial: navigation.children, locals: {offcanvas: true}
+        = render partial: navigation.contained_items, locals: {offcanvas: true}
   - else
     %li.dropdown
       %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
         = navigation
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
-        = render partial: navigation.children, locals: {offcanvas: false}
+        = render partial: navigation.contained_items, locals: {offcanvas: false}

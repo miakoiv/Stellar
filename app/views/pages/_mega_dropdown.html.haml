@@ -5,4 +5,4 @@
   %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
     .container
       .row
-        = render partial: partial, collection: items, as: :item, locals: {root: root}
+        = render partial: "#{partial_path}/megamenu_item", collection: items, as: :item, locals: {root: root}

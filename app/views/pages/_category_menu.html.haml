@@ -1,14 +1,7 @@
-:ruby
-  resource = category_menu.resource
-  if resource && resource.leaf?
-    items = resource.products.visible.sorted(resource.product_scope)
-    type = 'products'
-  else
-    items = resource.nil? ? @categories : resource.children.visible
-    type = 'categories'
-  end
+- items = category_menu.contained_items || @categories
+- partial_path = category_menu.contained_item_partial_path
 
 - if offcanvas
-  = render partial: 'pages/offcanvas_menu', object: category_menu, as: :root, locals: {items: items, partial: "#{type}/offcanvas_item"}
+  = render partial: 'pages/offcanvas_menu', object: category_menu, as: :root, locals: {items: items, partial_path: partial_path}
 - else
-  = render partial: 'pages/mega_dropdown', object: category_menu, as: :root, locals: {items: items, partial: "#{type}/megamenu_item"}
+  = render partial: 'pages/mega_dropdown', object: category_menu, as: :root, locals: {items: items, partial_path: partial_path}

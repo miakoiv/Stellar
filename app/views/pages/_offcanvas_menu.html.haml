@@ -3,4 +3,4 @@
     = root
     %span.caret
   %ul.nav.navmenu-nav
-    = render partial: partial, collection: items, as: :item, locals: {root: root}
+    = render partial: "#{partial_path}/offcanvas_item", collection: items, as: :item, locals: {root: root}
