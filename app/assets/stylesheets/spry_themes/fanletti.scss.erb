@@ -7,6 +7,7 @@ $navbar-default-link-hover-bg: transparent;
 $navbar-default-link-active-bg: transparent;
 $navbar-default-link-active-color: #000;
 $body-bg: #fdfdfd;
+$footer-bg: #000;
 
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-generators.scss";
@@ -14,9 +15,7 @@ $body-bg: #fdfdfd;
 @import "fonts.scss";
 @import "print.scss";
 
-#offcanvas-wrap > #canvas-wrap {
-  padding-top: 80px;
-}
+#canvas-wrap { padding-top: 80px; }
 
 #main-nav {
   @include box-shadow(0 0 24px 0 rgba(0,0,0,0.333));
@@ -68,9 +67,7 @@ $body-bg: #fdfdfd;
   logo shrunk, and the navbar items revert to default styles
 */
 @media (max-width: $screen-sm-min) {
-  #offcanvas-wrap > #canvas-wrap {
-    padding-top: 70px;
-  }
+  #canvas-wrap { padding-top: 70px; }
 
   #main-nav {
     > .container {
@@ -97,6 +94,7 @@ $body-bg: #fdfdfd;
 #static-wrap {
   .container {
     margin-top: 20px;
+    margin-bottom: 40px;
 
     > .page-header { margin-top: 0; }
   }
@@ -141,12 +139,7 @@ $body-bg: #fdfdfd;
 #search-panel-wrap {}
 
 .footer {
-  background-color: #000;
   color: #fff;
   font-size: 0.8em;
   font-weight: 500;
-
-  > .container {
-    a { color: #fff; }
-  }
 }

@@ -2,6 +2,8 @@
  * Theme specific styles
  */
 
+$footer-bg: #d4d4d4;
+
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-generators.scss";
 @import "bootstrap-tweaks.scss";
@@ -75,6 +77,7 @@
 #static-wrap {
   .container {
     margin-top: 20px;
+    margin-bottom: 40px;
 
     > .page-header { margin-top: 0; }
   }
@@ -466,10 +469,6 @@
       }
     }
   }
-}
-
-.footer {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
 }
 
 @media print {

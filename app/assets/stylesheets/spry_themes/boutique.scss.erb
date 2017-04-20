@@ -10,9 +10,7 @@ $navbar-default-link-active-bg: transparent;
 @import "fonts.scss";
 @import "print.scss";
 
-#offcanvas-wrap > #canvas-wrap {
-  padding-top: 80px;
-}
+#canvas-wrap { padding-top: 80px; }
 
 #main-nav {
   @include box-shadow(0 0 10px 0 #343434);
@@ -53,9 +51,7 @@ $navbar-default-link-active-bg: transparent;
   and revert navbar links to original styles
 */
 @media (max-width: $screen-sm-min) {
-  #offcanvas-wrap > #canvas-wrap {
-    padding-top: 70px;
-  }
+  #canvas-wrap { padding-top: 70px; }
 
   #main-nav {
     > .container {
@@ -86,6 +82,7 @@ $navbar-default-link-active-bg: transparent;
 #static-wrap {
   .container {
     margin-top: 20px;
+    margin-bottom: 40px;
 
     > .page-header { margin-top: 0; }
   }
@@ -503,8 +500,6 @@ $navbar-default-link-active-bg: transparent;
     }
   }
 }
-
-.footer {}
 
 @media print {
   #products-wrap {

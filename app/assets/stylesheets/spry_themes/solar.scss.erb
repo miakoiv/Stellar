@@ -16,9 +16,7 @@ $border-radius-small: 0;
 @import "fonts.scss";
 @import "print.scss";
 
-#offcanvas-wrap > #canvas-wrap {
-  padding-top: 80px;
-}
+#canvas-wrap { padding-top: 80px; }
 
 #main-nav {
   @include box-shadow(0 0 18px 0 rgba(0,0,0,0.333));
@@ -148,9 +146,7 @@ $border-radius-small: 0;
   and we hide the main categories section
 */
 @media (max-width: $screen-sm-min) {
-  #offcanvas-wrap > #canvas-wrap {
-    padding-top: 60px;
-  }
+  #canvas-wrap { padding-top: 60px; }
 
   #main-nav {
     > .container {
@@ -173,6 +169,7 @@ $border-radius-small: 0;
 #static-wrap {
   .container {
     margin-top: 30px;
+    margin-bottom: 40px;
 
     > .page-header { margin-top: 0; }
   }

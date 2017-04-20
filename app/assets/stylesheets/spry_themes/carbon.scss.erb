@@ -2,6 +2,8 @@
  * Theme specific styles
  */
 
+$body-bg: #fff;
+$footer-bg: transparent;
 $brand-primary: #00427a;
 
 $navbar-inverse-bg: #333;
@@ -15,7 +17,6 @@ $navbar-inverse-link-disabled-color: #444;
 $navbar-inverse-link-disabled-bg: transparent;
 $navbar-inverse-toggle-hover-bg: #fff;
 $navbar-inverse-toggle-border-color: #aaa;
-$body-bg: #fff;
 
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-generators.scss";
@@ -23,6 +24,11 @@ $body-bg: #fff;
 @import "fonts.scss";
 @import "print.scss";
 
+
+body {
+  background-image: url(asset_path('carbon.png'));
+  background-attachment: fixed;
+}
 
 /*
  * Extra tall navbar
@@ -42,11 +48,8 @@ $body-bg: #fff;
   img { max-height: 50px; }
 }
 
-/* Push content below the navbar and make room for the footer */
-#offcanvas-wrap > #canvas-wrap {
-  padding-top: 110px;
-  padding-bottom: 140px;
-}
+/* Push content below the navbar */
+#canvas-wrap { padding-top: 110px; }
 
 /* Keep the hamburger on desktop */
 .offcanvas-toggle {
@@ -59,7 +62,7 @@ $body-bg: #fff;
  * Less prominent mobile navbar
  */
 @media (max-width: $screen-xs-max) {
-  #offcanvas-wrap > #canvas-wrap { padding-top: 70px; }
+  #canvas-wrap { padding-top: 70px; }
 
   #main-nav .container {
     padding-top: 10px;
@@ -130,6 +133,7 @@ ul { list-style-type: square; }
 #static-wrap {
   .container {
     margin-top: 20px;
+    margin-bottom: 40px;
 
     > .page-header { margin-top: 0; }
   }
@@ -241,10 +245,13 @@ ul { list-style-type: square; }
 
 .footer {
   background-image: url(asset_path('carbon.png'));
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: #fff;
   font-size: 0.8em;
   font-weight: 500;
-
-  > .container {
-    color: #fff;
-  }
+}
+.footer .navmenu {
+  @extend .navmenu-inverse;
+  background: transparent;
 }
