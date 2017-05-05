@@ -7,7 +7,7 @@
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  %td.no-wrap= order_item.product_code
+  %td= order_item.product_codes
   %td
     = form_for [:admin, order_item], remote: true,
         html: {class: 'pull-right immediate'} do |f|

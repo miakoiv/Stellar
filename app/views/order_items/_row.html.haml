@@ -10,9 +10,9 @@
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  %td.no-wrap
+  %td
     - if order_item.real?
-      = order_item.product_code
+      = order_item.product_codes
   %td.text-right
     = order_item.amount
   %td.text-right.currency

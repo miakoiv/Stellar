@@ -16,7 +16,7 @@
           = link_to admin_product_path(item.product) do
             %strong= item.product.title
             = item.product.subtitle
-        %td= item.product.code
+        %td= item.product.codes
         %td= item.product.categories.to_sentence
         %td.text-right= item.on_hand
         %td.text-right.currency= humanized_money_with_symbol item.value

@@ -7,7 +7,7 @@
       = link_to show_product_path(product.category, product) do
         %strong= product.title
         = product.subtitle
-      .small= product.code
+      .small= product.codes
     %td= property_string(product.searchable_product_properties)
     - if can_see_pricing?
       %td.price.currency.text-right

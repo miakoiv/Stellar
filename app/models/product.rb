@@ -401,6 +401,10 @@ class Product < ActiveRecord::Base
     PURPOSE_ICONS[Product.purposes[purpose]]
   end
 
+  def codes
+    customer_code.present? ? "#{customer_code} ⧸ #{code}" : code
+  end
+
   def to_s
     "#{title} #{subtitle}"
   end

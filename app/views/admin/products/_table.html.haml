@@ -19,7 +19,7 @@
             %td
               %strong= product.title
               = product.subtitle
-            %td= product.code
+            %td= product.codes
             %td
               - unless product.live?
                 = icon('warning', title: col(Product, :not_live), data: {toggle: 'tooltip'})

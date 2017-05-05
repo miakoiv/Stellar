@@ -84,7 +84,7 @@
                       %td.alignright= OrderItem.human_attribute_name(:subtotal)
                     - @order.order_items.each do |order_item|
                       = content_tag_for :tr, order_item do
-                        %td= order_item.product_code
+                        %td= order_item.product_codes
                         %td
                           %b= order_item.product_title
                           = order_item.product_subtitle

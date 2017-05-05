@@ -11,7 +11,7 @@
       = content_tag_for :tr, product.component_entries do |entry|
         %td
           %strong
-            = link_to entry.component.title, admin_product_path(entry.component), title: entry.component.code, data: {toggle: 'tooltip'}
+            = link_to entry.component.title, admin_product_path(entry.component), title: entry.component.codes, data: {toggle: 'tooltip'}
           = entry.component.subtitle
         %td.text-right.currency
           - if entry.component.retail_price.present?

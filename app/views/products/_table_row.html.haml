@@ -6,7 +6,7 @@
     %td.product-title
       %strong= product.title
       = product.subtitle
-    %td.product-code= product.code
+    %td.product-code= product.codes
     - if can_see_pricing? && can_shop? && may_shop_at?(@category)
       %td.price.currency.text-right
         - unless product.master?

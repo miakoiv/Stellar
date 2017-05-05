@@ -17,7 +17,7 @@
             = link_to admin_product_path(product) do
               %strong= product.title
               = product.subtitle
-          %td= product.code
+          %td= product.codes
           %td= product.categories.to_sentence
           %td.text-right= items.map(&:amount).sum
           %td.text-right.currency

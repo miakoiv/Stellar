@@ -4,6 +4,6 @@
     %strong
       = link_to entry.requisite.title, admin_product_path(entry.requisite)
     = entry.requisite.subtitle
-  %td= entry.requisite.code
+  %td= entry.requisite.codes
   %td.actions
     = link_to icon('remove'), admin_requisite_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
