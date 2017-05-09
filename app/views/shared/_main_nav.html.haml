@@ -1,0 +1,24 @@
+.container
+  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
+    = icon('bars')
+  .navbar-header
+    = link_to branding(current_store), standalone_store? ? root_path : root_url(host: request.domain), class: 'navbar-brand'
+  - unless current_store.detach_menu?
+    %ul.nav.navbar-nav.responsive
+      = render partial: @header.children, locals: {offcanvas: false}
+  %ul.nav.navbar-nav.navbar-right
+    = render partial: 'shared/navbar_charms'
+  %ul.nav.navbar-nav.navbar-right.responsive
+    - if user_signed_in? && !current_user.guest?
+      %li.dropdown
+        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+          %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+          = current_user.name.split.first
+          %span.caret
+        %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+          = render partial: 'shared/user_menu'
+    - else
+      %li.lg= link_to icon('sign-in'), new_user_session_path
+    - if user_signed_in? && can_manage?
+      %li.lg= link_to icon('wrench'), admin_dashboard_path, title: t('admin.manage'), data: {toggle: 'tooltip', placement: 'bottom'}
+  = render partial: 'shared/keyword_search'

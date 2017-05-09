@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 /*
  * Body element has footer background color to extend
  * the footer vertically to full height
@@ -9,26 +11,50 @@ body {
 
 
 /*
- * Offcanvas wrapper that slides aside as the offcanvas is shown
+ * Offcanvas wrapper
  */
-#offcanvas-wrap { }
-
+#offcanvas-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
 
 /*
- * Wrapper for the actual content, fixed in place when offcanvas is open,
- * provides body background color
+ * Wrapper for the actual content, provides body background color
  */
 #canvas-wrap {
+  position: relative;
+  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
+  transition: 0.4s ease all;
   padding-top: $navbar-height;
   background-color: $body-bg;
 }
-.canvas-slid #canvas-wrap {
-  position: fixed;
-  overflow: hidden;
-  left: 300px;
-  right: -300px;
+#offcanvas-wrap.canvas-slid #canvas-wrap {
+  transform: translateX($navmenu-width);
+  transform: translateX($navmenu-width) translateZ(0);
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
 }
 
+#offcanvas.offcanvas {
+  display: block;
+  width: $navmenu-width;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1*$navmenu-width;
+}
+#offcanvas .inner-wrap { padding-top: $navbar-height; }
 
 /*
  * Main navigation
@@ -124,6 +150,7 @@ body {
   margin-top: -2px;
   margin-right: 10px;
 }
+.navmenu-nav { margin-bottom: 0; }
 .navmenu-nav .navmenu-nav { padding-left: 20px; }
 
 

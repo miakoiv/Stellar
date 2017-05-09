@@ -38,7 +38,7 @@ $bg-tone:           #f6f6f6;
 }
 
 /* Push content below the navbar */
-#canvas-wrap { padding-top: 80px; }
+#canvas-wrap, #offcanvas .inner-wrap { padding-top: 80px; }
 
 /* Rounded navbar search */
 #navbar-search input { border-radius: $input-height-base/2; }
@@ -48,7 +48,7 @@ $bg-tone:           #f6f6f6;
  * Less prominent mobile navbar
  */
 @media (max-width: $screen-xs-max) {
-  #canvas-wrap { padding-top: 60px; }
+  #canvas-wrap, #offcanvas .inner-wrap { padding-top: 60px; }
 
   #main-nav {
     @include box-shadow(0 0 4px 0 rgba(0,0,0,0.75));
