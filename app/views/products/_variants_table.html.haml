@@ -1,0 +1,18 @@
+.table-scroller.table-responsive
+  %table.table.variants
+    %thead
+      %tr
+        %th.col-min
+        - product.master_product.properties.each do |property|
+          %th.small= property
+    %tbody
+      - product.master_product.variants_with_master_properties.each do |variant, product_properties|
+        %tr[variant]
+          %td.col-min
+            - if product == variant
+              = icon('dot-circle-o', class: 'fa-lg')
+            - else
+              = link_to show_product_path(variant.category, variant), data: {push: 'partial', target: '#store-body'} do
+                = icon('circle-o', class: 'fa-lg')
+          - product_properties.each do |product_property|
+            %td= product_property.value_with_units

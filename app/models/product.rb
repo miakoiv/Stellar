@@ -171,6 +171,18 @@ class Product < ActiveRecord::Base
     master_product.variants.where.not(id: self)
   end
 
+  def has_master_properties?
+    variant? && master_product.properties.any?
+  end
+
+  def variants_with_master_properties
+    return {} unless master?
+    variants.live.includes(product_properties: :property)
+      .map { |v|
+        [v, v.product_properties.where(properties: {id: properties})]
+      }
+  end
+
   # Finds product properties that differ from the baseline established
   # by given product. Properties unique to this product are retained.
   def distinct_properties(product)

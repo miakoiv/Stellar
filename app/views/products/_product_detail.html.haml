@@ -30,7 +30,10 @@
 
       - if product.variant?
         .variant-products
-          = render partial: 'products/variants_dropdown', object: product, as: :product
+          - if product.has_master_properties?
+            = render partial: 'products/variants_table', object: product, as: :product
+          - else
+            = render partial: 'products/variants_dropdown', object: product, as: :product
 
       .product-stock
         = render partial: 'products/stock', object: product, as: :product
@@ -65,7 +68,7 @@
 
   .product-footer
 
-    - if product.variant?
+    - if product.variant? && !product.has_master_properties?
       %h2.footer-header= t('store.product_variants')
       .variant-products
         .product-grid
