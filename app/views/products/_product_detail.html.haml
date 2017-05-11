@@ -80,11 +80,11 @@
         .product-grid
           %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
 
-#offer-requisites-modal.modal{data: {backdrop: 'static'}}
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        %button.close{data: {dismiss: 'modal'}}= icon('close')
-        %h4.modal-title= t('store.offer_requisites')
-      .modal-body.requisite-products
-        %ul
+    #offer-requisites-modal.modal{data: {backdrop: 'static'}}
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            %button.close{data: {dismiss: 'modal'}}= icon('close')
+            %h4.modal-title= t('store.offer_requisites')
+          .modal-body.requisite-products
+            %ul
