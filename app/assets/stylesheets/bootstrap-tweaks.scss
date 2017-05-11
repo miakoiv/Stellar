@@ -17,7 +17,7 @@ body {
   position: relative;
   width: 100%;
   overflow: hidden;
-  backface-visibility: hidden;
+  //backface-visibility: hidden;
 }
 
 /*
@@ -25,15 +25,17 @@ body {
  */
 #canvas-wrap {
   position: relative;
-  transform: translateX(0);
-  transform: translateX(0) translateZ(0);
+  //transform: translateX(0);
+  //transform: translateX(0) translateZ(0);
+  left: 0;
   transition: 0.4s ease all;
   padding-top: $navbar-height;
   background-color: $body-bg;
 }
 #offcanvas-wrap.canvas-slid #canvas-wrap {
-  transform: translateX($navmenu-width);
-  transform: translateX($navmenu-width) translateZ(0);
+  //transform: translateX($navmenu-width);
+  //transform: translateX($navmenu-width) translateZ(0);
+  left: $navmenu-width;
 
   &:after {
     content: '';
@@ -53,6 +55,7 @@ body {
   top: 0;
   bottom: 0;
   left: -1*$navmenu-width;
+  z-index: $zindex-navbar;
 }
 #offcanvas .inner-wrap { padding-top: $navbar-height; }
 
