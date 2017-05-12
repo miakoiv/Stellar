@@ -1,0 +1,21 @@
+#store-wrap
+  #store-header
+    #categories-wrap
+      .categories.hidden-print
+        %ul= render @categories
+
+  #store-body
+    #products-wrap
+      .products
+        - if @category.present?
+          .breadcrumbs.visible-print
+            = render partial: 'categories/breadcrumbs', object: @category, as: :category
+          .page-header.visible-print
+            %h1= @promotion.to_s
+        .product-grid
+          %ul{class: current_store.masonry? && 'masonry-grid'}
+            = render @products
+
+:coffee
+  if $(window).isSmall()
+    $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)

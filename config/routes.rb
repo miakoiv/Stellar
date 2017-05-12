@@ -69,8 +69,9 @@ Rails.application.routes.draw do
   # Product specific routes.
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
 
-  # Category and product views.
+  # Category, promotion and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
   get '/product/:category_id/:product_id', to: 'store#show_product', as: :show_product
 
   # These routes can be reached via /:slug

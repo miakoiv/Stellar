@@ -18,11 +18,14 @@ class StoreController < ApplicationController
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
   before_action :set_header_and_footer
-  before_action :set_categories, only: [:front, :search, :show_page, :cart, :show_category, :show_product]
+  before_action :set_categories,
+    only: [:front, :search, :show_page, :cart, :show_category, :show_promotion, :show_product]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category, :show_product]
+  before_action :find_promotion, only: [:show_promotion]
   before_action :find_product, only: [:show_product]
-  before_action :enable_navbar_search, only: [:front, :show_category, :show_product]
+  before_action :enable_navbar_search,
+    only: [:front, :show_category, :show_promotion, :show_product]
 
   # GET /
   def index
@@ -93,6 +96,11 @@ class StoreController < ApplicationController
     @products = display_products.sorted(@category.product_scope)
   end
 
+  # GET /promotion/:promotion_id
+  def show_promotion
+    @products = @promotion.products.visible
+  end
+
   # GET /product/:category_id/:product_id
   def show_product
   end
@@ -123,6 +131,11 @@ class StoreController < ApplicationController
       if @category != selected
         return redirect_to show_category_path(@category)
       end
+    end
+
+    # Find promotion from active promotions by friendly id.
+    def find_promotion
+      @promotion = current_store.promotions.active.friendly.find(params[:promotion_id])
     end
 
     # Find product by friendly id in `product_id`, including history.
