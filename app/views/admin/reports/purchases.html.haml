@@ -1,0 +1,20 @@
+= render partial: 'header'
+
+.reports
+  .report-panel
+    = link_to admin_reports_path do
+      = icon('money')
+      = t('admin.reports.purchases.title')
+
+  .report-body
+    %dl.dl-horizontal
+      %dt= t('admin.reports.purchases.total_value')
+      %dd= humanized_money_with_symbol @purchases.total_value
+      %dt= t('admin.reports.purchases.total_items')
+      %dd= @purchases.total_items
+      %dt= t('admin.reports.purchases.products')
+      %dd= @purchases.by_product.keys.size
+
+= render partial: 'purchases_query'
+= render partial: 'purchases_chart'
+= render partial: 'purchases_table'

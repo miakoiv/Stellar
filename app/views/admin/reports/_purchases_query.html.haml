@@ -1,0 +1,21 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @purchases.search, url: admin_purchases_report_path, method: :get do |f|
+      .row
+        .col-sm-6.col-md-3
+          .form-group
+            = f.select :order_type_id, current_user.outgoing_order_types.map { |o| [order_type_label(o, current_user), o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+        .col-sm-6.col-md-3
+          .form-group
+            = f.select :user_id, current_user.self_and_peers.map { |u| [u.to_s, u.id] }, {}, {multiple: true, placeholder: t('admin.reports.purchases.search.users'), class: 'form-control selectize'}
+        .col-sm-8.col-md-4
+          .form-group
+            .input-group
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              %span.input-group-addon= icon('ellipsis-h')
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+        .col-sm-4.col-md-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

@@ -17,14 +17,24 @@ class Admin::ReportsController < ApplicationController
 
   # GET /admin/reports/sales
   def sales
+    @order_types = current_user.incoming_order_types
+    return redirect_to admin_reports_path if @order_types.empty?
     @query = saved_search_query('order_item', 'admin_order_item_search')
-    @sales = Reports::Sales.new(sales_search_params)
+    @sales = Reports::Sales.new(search_params)
+  end
+
+  # GET /admin/reports/purchases
+  def purchases
+    @order_types = current_user.outgoing_order_types
+    return redirect_to admin_reports_path if @order_types.empty?
+    @query = saved_search_query('order_item', 'admin_order_item_search')
+    @purchases = Reports::Purchases.new(search_params)
   end
 
   private
-    def sales_search_params
+    def search_params
       @query.merge(store_id: current_store.id).reverse_merge({
-        'order_type_id' => current_user.incoming_order_types.first.id
+        'order_type_id' => @order_types.first.id
       })
     end
 end

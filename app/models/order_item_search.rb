@@ -27,6 +27,10 @@ class OrderItemSearch < Searchlight::Search
     query.where(orders: {order_type_id: order_type_id})
   end
 
+  def search_user_id
+    query.where(orders: {user_id: user_id})
+  end
+
   def search_since_date
     query.where('DATE(orders.completed_at) >= ?', since_date)
   end

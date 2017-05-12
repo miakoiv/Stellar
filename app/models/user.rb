@@ -134,6 +134,10 @@ class User < ActiveRecord::Base
     incoming_order_types + outgoing_order_types
   end
 
+  def self_and_peers
+    store.users.where(group: User.groups[group])
+  end
+
   def managed_groups
     User::MANAGED_GROUPS[group]
   end

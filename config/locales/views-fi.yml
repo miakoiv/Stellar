@@ -47,6 +47,19 @@ fi:
         chart:
           daily: Päiväkohtainen €
           total: Yhteensä €
+      purchases:
+        title: Ostot
+        total_value: Arvo ennen veroja
+        total_items: Ostettuja kappaleita
+        products: Tuotteita
+        search:
+          since_date: Pvm alkaen
+          until_date: Pvm päättyen
+          users: Käyttäjät
+          countries: Kohdemaat
+        chart:
+          daily: Päiväkohtainen €
+          total: Yhteensä €
     manage: Hallinta
     return_to_storefront: Palaa etusivulle
     albums:

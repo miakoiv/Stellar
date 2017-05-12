@@ -67,6 +67,19 @@ en:
         chart:
           daily: Daily sales €
           total: Total sales €
+      purchases:
+        title: Purchases
+        total_value: Total value before tax
+        total_items: Total items purchased
+        products: Products
+        search:
+          since_date: Since date
+          until_date: Until date
+          users: Users
+          countries: Destination countries
+        chart:
+          daily: Daily purchases €
+          total: Total purchases €
     manage: Manage
     return_to_storefront: Return to storefront
     albums:

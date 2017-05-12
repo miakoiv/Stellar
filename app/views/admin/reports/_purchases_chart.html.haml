@@ -1,0 +1,25 @@
+.panel.panel-default
+  .panel-body
+    %canvas#purchases-chart
+
+:coffee
+  moment.locale '#{I18n.locale}'
+  data = #{@purchases.chart_data.to_json}
+  ctx = $('#purchases-chart')
+  chart = new Chart ctx,
+    type: 'bar',
+    data: data,
+    options:
+      legend:
+        display: false
+      scales:
+        xAxes: [{
+          type: 'category'
+          categoryPercentage: 0.95
+          barPercentage: 1.0
+        }]
+      elements:
+        rectangle:
+          borderWidth: 1
+          borderColor: 'rgba(255,255,255,0.25)'
+          backgroundColor: 'rgba(20,48,72,0.5)'
