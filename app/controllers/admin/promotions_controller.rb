@@ -114,7 +114,7 @@ class Admin::PromotionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_promotion
-      @promotion = current_store.promotions.find(params[:id])
+      @promotion = current_store.promotions.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

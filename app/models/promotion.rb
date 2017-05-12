@@ -8,6 +8,8 @@ class Promotion < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include FriendlyId
+  friendly_id :slugger, use: [:slugged, :history]
 
   #---
   belongs_to :store
@@ -78,6 +80,14 @@ class Promotion < ActiveRecord::Base
   # Exact time the promotion is deactivated.
   def deactivate_at
     last_date.present? && last_date.tomorrow.midnight
+  end
+
+  def slugger
+    [:name, [:name, -> { store.name }]]
+  end
+
+  def should_generate_new_friendly_id?
+    name_changed? || super
   end
 
   def to_s
