@@ -5,4 +5,10 @@
   %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
     .container
       .row
-        = render partial: "#{partial_path}/megamenu_item", collection: items, as: :item, locals: {root: root}
+        = render partial: "#{partial_path}/megamenu_item", collection: items.first(12), as: :item, locals: {root: root}
+      - if parent_path.present? && items.count > 12
+        .row
+          .col-md-4
+            = link_to parent_path do
+              = root.resource
+              = icon('chevron-right')
