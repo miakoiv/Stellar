@@ -13,3 +13,10 @@
   .navmenu-title
   %ul.nav.navmenu-nav
     = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
+
+- if @footer.present? && @footer.children.any?
+  .navmenu-title
+  %ul.nav.navmenu-nav
+    = render partial: @footer.children, locals: {offcanvas: true}
+
+= render partial: 'shared/branding'

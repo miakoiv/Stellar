@@ -150,7 +150,7 @@ de:
   errors:
     header: Ups!
     blurb: "Wir konnten Ihre Anfrage wegen des folgenden technischen Fehlers nicht verarbeiten:"
-  footer:
+  branding:
     heading: Stellar Storefront
     body_html: Provided by Leasit Oy <i class="fa fa-copyright"></i> 2015
   search_panel:

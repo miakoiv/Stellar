@@ -300,7 +300,7 @@ fi:
   errors:
     header: Hopsis!
     blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"
-  footer:
+  branding:
     heading: Stellar Storefront
     body_html: <p>Tuottanut Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2017</p>
   search_panel:
