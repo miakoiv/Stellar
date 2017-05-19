@@ -16,6 +16,7 @@ fi:
           template: Sivupohja
           category_menu: Tuoteryhmävalikko
           product_link: Tuotelinkki
+          promotion_link: Kampanjalinkki
           header: Päävalikko
           footer: Alavalikko
           navigation: Sivuvalikko

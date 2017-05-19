@@ -16,16 +16,17 @@ class Page < ActiveRecord::Base
 
   #---
   enum purpose: {
-    route: 0,         # navigation node routed to #slug
-    primary: 1,       # page with content sections
-    secondary: 2,     # secondary content (deprecated)
-    banner: 3,        # banner container (deprecated)
-    template: 4,      # printed page template
-    category_menu: 6, # menu from linked category (or root if nil)
-    product_link: 7,  # link to product
-    header: 10,       # virtual page containing main navigation
-    footer: 11,       # virtual page containing footer links
-    navigation: 12,   # secondary navigation
+    route: 0,           # navigation node routed to #slug
+    primary: 1,         # page with content sections
+    secondary: 2,       # secondary content (deprecated)
+    banner: 3,          # banner container (deprecated)
+    template: 4,        # printed page template
+    category_menu: 6,   # menu from linked category (or root if nil)
+    product_link: 7,    # link to product
+    promotion_link: 8,  # link to promotion
+    header: 10,         # virtual page containing main navigation
+    footer: 11,         # virtual page containing footer links
+    navigation: 12,     # secondary navigation
   }
 
   PRESENTATION = {
@@ -36,6 +37,7 @@ class Page < ActiveRecord::Base
     'template' => {icon: 'file-o', appearance: 'warning'},
     'category_menu' => {icon: 'sitemap', appearance: 'info'},
     'product_link' => {icon: 'cube', appearance: 'info'},
+    'promotion_link' => {icon: 'tag', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
     'navigation' => {icon: 'share-alt'}
@@ -64,7 +66,8 @@ class Page < ActiveRecord::Base
   def self.available_purposes
     purposes.slice(
       :route, :primary, :template,
-      :category_menu, :product_link, :navigation
+      :category_menu, :product_link, :promotion_link,
+      :navigation
     )
   end
 
@@ -82,7 +85,7 @@ class Page < ActiveRecord::Base
   end
 
   def movable?
-    route? || primary? || navigation? || category_menu? || product_link?
+    route? || primary? || navigation? || category_menu? || product_link? || promotion_link?
   end
 
   def can_have_albums?
@@ -153,6 +156,8 @@ class Page < ActiveRecord::Base
       show_page_path(self)
     when product_link?
       show_product_path(resource.category, resource)
+    when promotion_link?
+      show_promotion_path(resource)
     when navigation?
       children.first.path
     when category_menu?

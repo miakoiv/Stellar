@@ -16,6 +16,7 @@ es:
           template: Modelo
           category_menu: Categorias
           product_link: Enlace del producto
+          promotion_link: Enlace de promoción
           header: Encabezado
           footer: Pie de página
           navigation: Menu de navegación

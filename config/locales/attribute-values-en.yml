@@ -16,6 +16,7 @@ en:
           template: Template
           category_menu: Category menu
           product_link: Product link
+          promotion_link: Promotion link
           header: Header navigation
           footer: Footer navigation
           navigation: Page menu
