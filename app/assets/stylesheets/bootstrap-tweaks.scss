@@ -108,8 +108,7 @@ body {
     border-color: transparent;
   }
 }
-.navbar-inverse .offcanvas-toggle,
-.navmenu-inverse .offcanvas-toggle {
+.navbar-inverse .offcanvas-toggle {
   color: $navbar-inverse-link-color;
 
   &:hover, &:focus {
@@ -143,16 +142,17 @@ body {
 .navmenu-title {
   margin-top: 20px;
   padding: $nav-link-padding;
-  color: $navbar-default-link-active-color;
-  border-top: 1px solid $navbar-default-border;
+  color: $navmenu-default-brand-color;
+  border-top: 1px solid $navmenu-default-border;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 .navmenu.navmenu-inverse .navmenu-title {
-  color: $navbar-inverse-link-active-color;
-  border-top: 1px solid $navbar-inverse-border;
+  color: $navmenu-inverse-brand-color;
+  border-top: 1px solid $navmenu-inverse-border;
 }
 .navmenu-header { padding: $nav-link-padding; }
+.navmenu.navmenu-inverse .navmenu-header { color: $navmenu-inverse-brand-color; }
 
 .navmenu-nav a img {
   @extend .box-icon, .pull-left;
