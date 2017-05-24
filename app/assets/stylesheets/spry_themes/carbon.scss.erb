@@ -2,21 +2,21 @@
  * Theme specific styles
  */
 
+$brand-primary: #3fb8b8;
 $body-bg: #fff;
-$footer-bg: transparent;
-$brand-primary: #00427a;
+$footer-bg: $brand-primary;
 
-$navbar-inverse-bg: #333;
-$navbar-inverse-color: #aaa;
-$navbar-inverse-link-color: #f0f0f0;
-$navbar-inverse-link-hover-color: #ccc;
-$navbar-inverse-link-hover-bg: transparent;
-$navbar-inverse-link-active-color: navbar-inverse-link-hover-color;
-$navbar-inverse-link-active-bg: transparent;
-$navbar-inverse-link-disabled-color: #444;
-$navbar-inverse-link-disabled-bg: transparent;
-$navbar-inverse-toggle-hover-bg: #fff;
-$navbar-inverse-toggle-border-color: #aaa;
+$font-size-base: 16px;
+$font-family-serif: 'Droid Serif', serif;
+
+$navbar-inverse-color: #bbb;
+$navbar-inverse-border: transparent;
+$navbar-inverse-link-color: #eee;
+$navbar-inverse-link-hover-color: #fff;
+$navbar-inverse-link-active-color: #fff;
+$navmenu-inverse-color: #bbb;
+$navmenu-inverse-link-color: #eee;
+$navmenu-inverse-link-active-color: #fff;
 
 @import "bootstrap-font-awesome.scss";
 @import "bootstrap-generators.scss";
@@ -24,11 +24,58 @@ $navbar-inverse-toggle-border-color: #aaa;
 @import "fonts.scss";
 @import "print.scss";
 
+@include bg-variant('.bg-primary', $brand-primary);
 
-body {
-  background-image: url(asset_path('carbon.png'));
-  background-attachment: fixed;
+@font-face {
+  font-family: 'Droid Serif';
+  src: font-url('droidserif-webfont.eot');
+  src: font-url('droidserif-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('droidserif-webfont.woff') format('woff'),
+  font-url('droidserif-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: font-url('droidserif-italic-webfont.eot');
+  src: font-url('droidserif-italic-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('droidserif-italic-webfont.woff') format('woff'),
+  font-url('droidserif-italic-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: font-url('droidserif-bold-webfont.eot');
+  src: font-url('droidserif-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('droidserif-bold-webfont.woff') format('woff'),
+  font-url('droidserif-bold-webfont.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Droid Serif';
+  src: font-url('droidserif-bolditalic-webfont.eot');
+  src: font-url('droidserif-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('droidserif-bolditalic-webfont.woff') format('woff'),
+  font-url('droidserif-bolditalic-webfont.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: font-url('montserrat-bold-webfont.eot');
+  src: font-url('montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  font-url('montserrat-bold-webfont.woff') format('woff'),
+  font-url('montserrat-bold-webfont.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
 
 /*
  * Extra tall navbar
@@ -36,6 +83,7 @@ body {
 #main-nav {
   @extend .navbar-inverse;
   background-image: url(asset_path('carbon.png'));
+  background-attachment: fixed;
 }
 #main-nav .container {
   padding-top: 30px;    // padding the container only,
@@ -49,10 +97,7 @@ body {
 }
 
 /* No main nav in this theme */
-#main-nav .navbar-nav {
-  display: none;
-}
-
+#main-nav .navbar-nav { display: none; }
 
 /* Push content below the navbar */
 #canvas-wrap, #offcanvas .inner-wrap { padding-top: 110px; }
@@ -61,6 +106,13 @@ body {
 .offcanvas-toggle {
   @extend .btn-lg;
   display: block !important;
+}
+
+/* Inverse offcanvas, hide offcanvas branding on desktop */
+#offcanvas { @extend .navmenu-inverse; }
+
+@media (min-width: $screen-sm-min) {
+  #offcanvas .branding { display: none; }
 }
 
 
@@ -83,24 +135,112 @@ body {
 }
 
 
-h1, h2 {
-  font-family: 'Playfair Display';
-  font-weight: 400;
-  letter-spacing: -0.025em;
+/*
+ * Rounded buttons all over
+ */
+#static-wrap .btn,
+#store-wrap .btn {
+  @extend .btn-round;
 }
+
+
+/*
+ * Static content wrapper
+ */
+#static-wrap > .container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Content sections */
+.section {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.section-primary {
+  background-color: $brand-primary;
+  color: #fff;
+}
+.section h2 { margin-bottom: 40px; }
+
+
+/*
+ * Content elements
+ */
+
+/* Thumbnails with various aspect ratios */
+.thumbnail {
+  position: relative;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+.thumbnail.three-by-two {
+  height: 0;
+  padding-bottom: 66.7%;
+}
+.thumbnail.square {
+  height: 0;
+  padding-bottom: 100%;
+}
+/* Thumbnail content takes up all available space */
+.thumbnail .thumbnail-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 5%;
+}
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background image */
+.bg-image {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.bg-image .text-shadow { text-shadow: 0 0 6px rgba(0,0,0,0.8); }
+
+.gradient-overlay:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  @include gradient-vertical(rgba(0,0,0,0.8), rgba(0,0,0,0), 0%, 50%);
+}
+/* Translucent container */
+.bg-translucent {
+  padding: 20px 40px 40px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+
+/*
+ * Typography
+ */
+p, address {
+  font-family: $font-family-serif;
+}
+.larger { font-size: 1.1em; }
+.extra-bold {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.text-white { color: #fff; }
+.text-shadow { text-shadow: 0 0 6px rgba(0,0,0,0.2); }
+.box-shadow { box-shadow: 0 0 6px rgba(0,0,0,0.2); }
 
 ul, ol { padding-left: 1em; }
 ul { list-style-type: square; }
-
-.jumbotron.parallax-window {
-  min-height: 800px;
-  background-color: transparent;
-
-  > .container {
-    position: relative;
-    z-index: 2;
-  }
-}
 
 .drop-cap {
   float: left;
@@ -112,37 +252,9 @@ ul { list-style-type: square; }
   letter-spacing: -0.2em;
 }
 
-.carousel {
-  margin-bottom: 40px;
-
-  .carousel-inner {
-    .item {
-      min-height: 250px;
-      max-height: 400px;
-
-      img {
-        display: block;
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-      }
-      .carousel-caption {
-        padding: 10px 10px 40px;
-        border-radius: 10px;
-        background-color: rgba(0,0,0,0.5);
-      }
-    }
-  }
-}
-
-#static-wrap {
-  .container {
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    > .page-header { margin-top: 0; }
-  }
+.correspondence-form .form-control {
+  border-color: transparent !important;
+  border-radius: 0;
 }
 
 #search-panel-wrap {}
@@ -214,45 +326,11 @@ ul { list-style-type: square; }
   }
 }
 
-#products-wrap {
-  position: relative;
+#products-wrap {}
 
-  #products-view-toggle {
-    position: absolute;
-    right: $grid-gutter-width/2;
-    top: -30px;
-
-    button {
-      @extend .btn, .btn-default, .btn-xs;
-    }
-  }
-  .products {
-    @extend .container;
-    position: relative;
-    margin-top: 40px;
-
-    .product-grid {
-      @extend .row;
-
-      ul {
-        list-style: none;
-        padding-left: 0;
-
-        li.product {
-          @extend .col-xs-4, .col-sm-3, .col-md-2;
-        }
-      }
-    }
-  }
-}
-
-#product-detail-wrap {
-}
+#product-detail-wrap {}
 
 .footer {
-  background-image: url(asset_path('carbon.png'));
-  background-repeat: repeat;
-  background-attachment: fixed;
   color: #fff;
   font-size: 0.8em;
   font-weight: 500;
