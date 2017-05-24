@@ -86,6 +86,17 @@ body {
 /* Adding .responsive hides a nav on mobile */
 .navbar-nav.responsive { @extend .hidden-xs; }
 
+/* Centered navbar-nav */
+.navbar-nav.nav-center {
+  @extend .text-center;
+  width: 100%;
+
+  > li {
+    float: none;
+    display: inline-block;
+  }
+}
+
 /* Hamburger for toggling the navmenu on mobile */
 .offcanvas-toggle {
   @extend .btn, .btn-default, .navbar-btn;
@@ -322,13 +333,25 @@ i.icon {
 /*
  * Rounded buttons
  */
-.btn-round { border-radius: 17px; }
-.btn-lg.btn-round { border-radius: 22.5px; }
-.btn-sm.btn-round { border-radius: 15px; }
+.btn-round {
+  padding-left: $padding-base-horizontal - 1px;
+  padding-right: $padding-base-horizontal - 1px;
+  border-radius: (0.5 * $font-size-base * $line-height-base) + $padding-base-vertical;
+}
+.btn-lg.btn-round {
+  padding-left: $padding-large-horizontal - 1px;
+  padding-right: $padding-large-horizontal - 1px;
+  border-radius: (0.5 * $font-size-large * $line-height-large) + $padding-large-vertical;
+}
+.btn-sm.btn-round {
+  padding-left: $padding-small-horizontal - 1px;
+  padding-right: $padding-small-horizontal - 1px;
+  border-radius: (0.5 * $font-size-small * $line-height-small) + $padding-small-vertical;
+}
 .btn-xs.btn-round {
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 11px;
+  padding-left: $padding-xs-horizontal - 1px;
+  padding-right: $padding-xs-horizontal - 1px;
+  border-radius: (0.5 * $font-size-small * $line-height-small) + $padding-xs-vertical;
 }
 
 
