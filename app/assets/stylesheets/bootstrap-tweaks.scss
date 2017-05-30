@@ -13,7 +13,7 @@ body {
  * Offcanvas wrapper
  */
 #offcanvas-wrap {
-  flex: 1;
+  flex: 1 0 auto;
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -21,7 +21,7 @@ body {
 }
 
 /*
- * Wrapper for the actual content, provides body background color
+ * Wrapper for the actual content
  */
 #canvas-wrap {
   position: relative;
