@@ -15,22 +15,24 @@ $brand-primary: #013183;
 
 #main-nav {
   @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.333));
+}
 
-  > .container {
-    .navbar-brand {
-      padding-top: 13px;
-      padding-bottom: 12px;
+.navbar .navbar-brand img {
+  max-height: 40px;
+  margin: 0;
+}
+#navbar-search .form-control {
+  max-width: 120px;
+}
 
-      img {
-        max-width: none;
-        max-height: 35px;
-        margin: 0;
-      }
-    }
-    #navbar-search .form-control {
-      max-width: 120px;
-    }
-  }
+.navbar-nav > li.lg > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.offcanvas-toggle {
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 @media (max-width: $screen-sm-min) {
@@ -59,16 +61,15 @@ $brand-primary: #013183;
 }
 
 #search-results-wrap {
-  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   .products {
     @extend .container;
   }
 }
 
-#store-wrap {
-  padding-bottom: 30px;
-}
+#store-wrap {}
 
 #categories-wrap {
   position: relative;
@@ -165,7 +166,8 @@ $brand-primary: #013183;
   .products {
     @extend .container;
     position: relative;
-    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 
     .product-grid {
       @extend .row;
@@ -258,8 +260,8 @@ $brand-primary: #013183;
   .product-detail {
     @extend .container;
     position: relative;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 
     .product-header {
       .actions {
