@@ -10,7 +10,7 @@ $navbar-default-link-active-bg: transparent;
 @import "fonts.scss";
 @import "print.scss";
 
-#content-wrap, #offcanvas .inner-wrap { padding-top: 80px; }
+#content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
 
 #main-nav {
   @include box-shadow(0 0 10px 0 #343434);
@@ -51,7 +51,7 @@ $navbar-default-link-active-bg: transparent;
   and revert navbar links to original styles
 */
 @media (max-width: $screen-sm-min) {
-  #content-wrap, #offcanvas .inner-wrap { padding-top: 70px; }
+  #content-wrap, .offcanvas .inner-wrap { padding-top: 70px; }
 
   #main-nav {
     > .container {

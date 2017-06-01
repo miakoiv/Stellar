@@ -6,8 +6,8 @@
     = render partial: 'shared/external_scripts'
     = render partial: 'favicon'
   %body{class: [current_theme, current_store.wiselinks? && 'wiselinks']}
-    %nav#offcanvas.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
-      .inner-wrap= render partial: 'shared/offcanvas'
+    %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
+      .inner-wrap= render partial: 'shared/side_nav'
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       = render partial: 'shared/main_nav'
     #content-wrap
@@ -15,7 +15,7 @@
         %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
           .container
             %ul.nav.navbar-nav.responsive
-              = render partial: @header.children, locals: {offcanvas: false}
+              = render partial: @header.children, locals: {navmenu: false}
 
       = yield
 

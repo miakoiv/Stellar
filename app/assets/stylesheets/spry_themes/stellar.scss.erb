@@ -20,7 +20,7 @@ $border-radius-small: 0;
 @import "fonts.scss";
 @import "print.scss";
 
-#content-wrap, #offcanvas .inner-wrap { padding-top: 80px; }
+#content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
 
 #main-nav {
   @include box-shadow(0 0 18px 0 rgba(0,0,0,0.5));
@@ -150,7 +150,7 @@ $border-radius-small: 0;
   and we hide the main categories section
 */
 @media (max-width: $screen-sm-min) {
-  #content-wrap, #offcanvas .inner-wrap { padding-top: 60px; }
+  #content-wrap, .offcanvas .inner-wrap { padding-top: 60px; }
 
   #main-nav {
     > .container {

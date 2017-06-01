@@ -1,0 +1,6 @@
+%li
+  .navmenu-header
+    = root
+    %span.caret
+  %ul.nav.navmenu-nav
+    = render partial: "#{partial_path}/navmenu_item", collection: items, as: :item, locals: {root: root}

@@ -1,11 +1,11 @@
 .container
-  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas'}}
+  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#side-nav'}}
     = icon('bars')
   .navbar-header
     = link_to branding(current_store), standalone_store? ? root_path : root_url(host: request.domain), class: 'navbar-brand'
   - unless current_store.detach_menu?
     %ul.nav.navbar-nav.responsive
-      = render partial: @header.children, locals: {offcanvas: false}
+      = render partial: @header.children, locals: {navmenu: false}
   %ul.nav.navbar-nav.navbar-right
     = render partial: 'shared/navbar_charms'
   %ul.nav.navbar-nav.navbar-right.responsive

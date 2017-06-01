@@ -305,6 +305,7 @@ en:
     upload: Upload file
     reorder: Reorder
     search: Search
+    filter: Filter
     advanced_search: Advanced search with ”%{keyword}”…
     query: Type to search…
     confirm:

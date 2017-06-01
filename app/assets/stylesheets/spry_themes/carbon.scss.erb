@@ -100,7 +100,7 @@ $navmenu-inverse-link-active-color: #fff;
 #main-nav .navbar-nav { display: none; }
 
 /* Push content below the navbar */
-#content-wrap, #offcanvas .inner-wrap { padding-top: 110px; }
+#content-wrap, .offcanvas .inner-wrap { padding-top: 110px; }
 
 /* Keep the hamburger on desktop */
 .offcanvas-toggle {
@@ -108,15 +108,15 @@ $navmenu-inverse-link-active-color: #fff;
   display: block !important;
 }
 
-/* Inverse offcanvas */
-#offcanvas { @extend .navmenu-inverse; }
+/* Inverse side nav */
+#side-nav { @extend .navmenu-inverse; }
 
 
 /*
  * Less prominent mobile navbar
  */
 @media (max-width: $screen-xs-max) {
-  #content-wrap, #offcanvas .inner-wrap { padding-top: 70px; }
+  #content-wrap, .offcanvas .inner-wrap { padding-top: 70px; }
 
   #main-nav .container {
     padding-top: 10px;

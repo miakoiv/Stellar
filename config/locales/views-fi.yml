@@ -285,6 +285,7 @@ fi:
     upload: Siirrä tiedosto
     reorder: Järjestele
     search: Etsi
+    filter: Suodata
     advanced_search: Tarkennettu haku sanalla ”%{keyword}”…
     query: Kirjoita hakeaksesi…
     confirm:

@@ -93,7 +93,9 @@ class StoreController < ApplicationController
 
   # GET /category/:category_id
   def show_category
-    @products = display_products.sorted(@category.product_scope)
+    @query = params[:product_search] || {}
+    @search = ProductSearch.new(filter_params)
+    @products = @search.results.sorted(@category.product_scope)
   end
 
   # GET /promotion/:promotion_id
@@ -176,5 +178,10 @@ class StoreController < ApplicationController
     # Restrict searching to live products in current store.
     def search_params
       @query.merge(store_id: current_store.id, live: true)
+    end
+
+    # Product filtering in the current category.
+    def filter_params
+      @query.merge(store_id: current_store.id, live: true, categories: [@category])
     end
 end

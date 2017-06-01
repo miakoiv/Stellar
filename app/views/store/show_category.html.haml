@@ -10,7 +10,9 @@
     #products-wrap
       .products
         - if @category.present?
-          .breadcrumbs.visible-print
+          .product-filter
+            = render partial: 'products/filtering'
+          .breadcrumbs
             = render partial: 'categories/breadcrumbs', object: @category, as: :category
           .page-header.visible-print
             %h1= @category.to_s

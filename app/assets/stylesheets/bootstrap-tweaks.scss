@@ -8,28 +8,28 @@ body {
   background-color: $body-bg;
 }
 
+.offcanvas { z-index: $zindex-navbar; }
+.offcanvas.open { display: block; }
+.offcanvas .inner-wrap {
+  padding-top: $navbar-height;
+  padding-bottom: 40px;
+}
 
 /*
- * Offcanvas menu that slides open
+ * Side nav slides open from the left
  */
-#offcanvas.offcanvas {
+#side-nav {
   display: block;
-  width: $navmenu-width;
   left: -1*$navmenu-width;
-  overflow-y: scroll;
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
   transition: 0.4s ease all;
   backface-visibility: hidden;
 }
-#offcanvas.canvas-open {
+#side-nav.open {
   transform: translateX($navmenu-width);
   transform: translateX($navmenu-width) translateZ(0);
   @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
-}
-#offcanvas .inner-wrap {
-  padding-top: $navbar-height;
-  padding-bottom: 40px;
 }
 
 
@@ -61,26 +61,10 @@ body {
   /* Hide brand name by default */
   span { display: none; }
 }
-#cart-badge { background-color: $brand-primary; }
 
-/* Adding .responsive hides a nav on mobile */
-.navbar-nav.responsive { @extend .hidden-xs; }
-
-/* Centered navbar-nav */
-.navbar-nav.nav-center {
-  @extend .text-center;
-  width: 100%;
-
-  > li {
-    float: none;
-    display: inline-block;
-  }
-}
-
-/* Hamburger for toggling the navmenu on mobile */
-.offcanvas-toggle {
-  @extend .btn, .btn-default, .navbar-btn;
-  @extend .visible-xs;
+/* Hamburger for toggling the side nav on mobile */
+.navbar .offcanvas-toggle {
+  @extend .btn, .navbar-btn, .visible-xs;
   float: right;
   margin-top: 0;
   margin-bottom: 0;
@@ -117,6 +101,22 @@ body {
   span { font-size: 14px; }
 }
 
+#cart-badge { background-color: $brand-primary; }
+
+/* Adding .responsive hides a nav on mobile */
+.navbar-nav.responsive { @extend .hidden-xs; }
+
+/* Centered navbar-nav */
+.navbar-nav.nav-center {
+  @extend .text-center;
+  width: 100%;
+
+  > li {
+    float: none;
+    display: inline-block;
+  }
+}
+
 
 /*
  * Secondary navigation bar
@@ -126,6 +126,27 @@ body {
   border-radius: 0;
 }
 
+
+/*
+ * Product filtering
+ */
+.product-filter-toggle { @extend .pull-right; }
+.product-filter-toggle .offcanvas-toggle {
+  @extend .btn, .btn-default;
+  border: 0;
+  background: transparent;
+}
+#product-filter .offcanvas-toggle {
+  @extend .btn, .btn-default, .pull-right;
+  margin-right: 15px;
+  margin-top: 20px;
+  border: 0;
+  background: transparent;
+}
+#product-filter .filter-form {
+  margin-top: 80px;
+  padding: 20px;
+}
 
 /*
  * Navmenu titles, headers, and icons; nested navmenus

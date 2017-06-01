@@ -4,8 +4,8 @@
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
   %body
-    %nav#offcanvas.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left{role: 'navigation'}
-      .inner-wrap= render partial: 'admin/shared/offcanvas'
+    %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left{role: 'navigation'}
+      .inner-wrap= render partial: 'admin/shared/side_nav'
     %nav.navbar.navbar-inverse.navbar-fixed-top{role: 'navigation'}
       = render partial: 'admin/shared/main_nav'
     #content-wrap

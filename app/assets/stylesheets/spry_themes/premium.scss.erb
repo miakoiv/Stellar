@@ -37,15 +37,15 @@ $bg-tone:           #f6f6f6;
   img { max-height: 50px; }
 }
 
-#offcanvas.offcanvas {
+#side-nav {
   transform: translateX(0) translateZ(0) scale(0.95);
 }
-#offcanvas.canvas-open {
+#side-nav.open {
   transform: translateX($navmenu-width) translateZ(0) scale(1);
 }
 
 /* Push content below the navbar */
-#content-wrap, #offcanvas .inner-wrap { padding-top: 80px; }
+#content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
 
 /* Rounded navbar search */
 #navbar-search input { border-radius: $input-height-base/2; }
@@ -55,7 +55,7 @@ $bg-tone:           #f6f6f6;
  * Less prominent mobile navbar
  */
 @media (max-width: $screen-xs-max) {
-  #content-wrap, #offcanvas .inner-wrap { padding-top: 60px; }
+  #content-wrap, .offcanvas .inner-wrap { padding-top: 60px; }
 
   #main-nav {
     @include box-shadow(0 0 4px 0 rgba(0,0,0,0.75));
@@ -184,6 +184,11 @@ $bg-tone:           #f6f6f6;
     background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 1170px) / 2 + 780px), $bg-tone calc((100% - 1170px) / 2 + 780px), $bg-tone);
   }
 }
+
+
+/*
+ * Product filter
+ */
 
 
 /*

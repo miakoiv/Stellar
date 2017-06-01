@@ -23,7 +23,7 @@ class ProductSearch < Searchlight::Search
 
   #---
   def base_query
-    Product.includes(:categories).order(:title, :subtitle)
+    Product.includes(:categories)
   end
 
   def search_store_id
@@ -35,11 +35,11 @@ class ProductSearch < Searchlight::Search
   end
 
   def search_code
-    query.where('code LIKE ? OR customer_code LIKE ?', "#{code}%", "#{code}%")
+    query.where('products.code LIKE ? OR products.customer_code LIKE ?', "#{code}%", "#{code}%")
   end
 
   def search_keyword
-    query.where("CONCAT_WS(' ', code, customer_code, title, subtitle) LIKE ?", "%#{keyword}%")
+    query.where("CONCAT_WS(' ', products.code, products.customer_code, products.title, products.subtitle) LIKE ?", "%#{keyword}%")
   end
 
   def search_purposes

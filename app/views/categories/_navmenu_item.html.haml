@@ -1,0 +1,7 @@
+- cache_if current_user.guest?, [I18n.locale, :navmenu_item, item] do
+  %li
+    = link_to show_category_path(item) do
+      = image_variant_tag item.cover_image(:technical), :icon
+      = item
+    %ul.nav.navmenu-nav
+      = render partial: 'categories/navmenu_item', collection: item.children.visible, as: :item
