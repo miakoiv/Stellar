@@ -1,15 +1,16 @@
 #encoding: utf-8
 #
-# Implementation of the Paybyway API, including payment token requests,
-# credit card charge requests & verifications, and bank e-payments.
+# Implementation of the Bambora PayForm née Paybyway API, including
+# payment token requests, credit card charge requests & verifications,
+# and bank e-payments.
 # For API docs, see
-# <https://www.paybyway.com/docs/web_payments/?page=full-api-reference>
+# <https://payform.bambora.com/docs/web_payments/?page=full-api-reference>
 
 module PaymentGateway
 
   class PaybywayConnector
     include HTTParty
-    base_uri 'https://www.paybyway.com/pbwapi/'
+    base_uri 'https://payform.bambora.com/pbwapi/'
     headers 'Content-Type' => 'application/json'
     format :json
     logger Rails.logger
@@ -42,7 +43,7 @@ module PaymentGateway
       raise ArgumentError if order.nil?
       @api_key = order.store.pbw_api_key
       @private_key = order.store.pbw_private_key
-      @version = 'w3'
+      @version = 'w3.1'
       @connector = PaybywayConnector.new
     end
 
