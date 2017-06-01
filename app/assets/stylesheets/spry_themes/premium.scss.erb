@@ -37,6 +37,13 @@ $bg-tone:           #f6f6f6;
   img { max-height: 50px; }
 }
 
+#offcanvas.offcanvas {
+  transform: translateX(0) translateZ(0) scale(0.95);
+}
+#offcanvas.canvas-open {
+  transform: translateX($navmenu-width) translateZ(0) scale(1);
+}
+
 /* Push content below the navbar */
 #content-wrap, #offcanvas .inner-wrap { padding-top: 80px; }
 
