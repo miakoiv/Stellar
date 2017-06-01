@@ -10,60 +10,40 @@ body {
 
 
 /*
- * Offcanvas wrapper
+ * Offcanvas menu that slides open
  */
-#offcanvas-wrap {
-  flex: 1 0 auto;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  //backface-visibility: hidden;
-}
-
-/*
- * Wrapper for the actual content
- */
-#canvas-wrap {
-  position: relative;
-  min-height: 100%;
-  //transform: translateX(0);
-  //transform: translateX(0) translateZ(0);
-  left: 0;
-  transition: 0.4s ease all;
-  padding-top: $navbar-height;
-}
-#offcanvas-wrap.canvas-slid #canvas-wrap {
-  //transform: translateX($navmenu-width);
-  //transform: translateX($navmenu-width) translateZ(0);
-  left: $navmenu-width;
-
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: #000;
-    animation: dim 0.4s ease 0s both;
-  }
-}
-@keyframes dim {
-  0% { opacity: 0; }
-  100% { opacity: 0.5; }
-}
-
-
 #offcanvas.offcanvas {
   display: block;
   width: $navmenu-width;
-  position: absolute;
-  top: 0;
-  bottom: 0;
   left: -1*$navmenu-width;
-  z-index: $zindex-navbar;
+  overflow-y: scroll;
+  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
+  transition: 0.4s ease all;
+  backface-visibility: hidden;
 }
-#offcanvas .inner-wrap { padding-top: $navbar-height; }
+#offcanvas.canvas-open {
+  transform: translateX($navmenu-width);
+  transform: translateX($navmenu-width) translateZ(0);
+  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
+}
+#offcanvas .inner-wrap {
+  padding-top: $navbar-height;
+  padding-bottom: 40px;
+}
+
+
+/*
+ * Content wrapper
+ */
+#content-wrap {
+  flex: 1 0 auto;
+  position: relative;
+  width: 100%;
+  padding-top: $navbar-height;
+  overflow: hidden;
+}
+
 
 /*
  * Main navigation
@@ -693,7 +673,7 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
- * Site footer, hidden on mobile
+ * Site footer
  */
 .footer {
   padding-top: 20px;
@@ -710,9 +690,6 @@ fieldset[disabled] .help-block { display: none; }
 .footer .bordered {
   border-left: 1px solid darken($footer-bg, 10%);
   border-right: 1px solid darken($footer-bg, 10%);
-}
-@media (max-width: $screen-xs-max) {
-  .footer { display: none; }
 }
 
 
@@ -733,9 +710,3 @@ fieldset[disabled] .help-block { display: none; }
 }
 .branding .media p { margin: 0; }
 .branding .media p.lead { font-size: $font-size-base; }
-
-#offcanvas .branding {
-  margin-top: 20px;
-  padding: $nav-link-padding;
-  border-top: 1px solid $navbar-default-border;
-}

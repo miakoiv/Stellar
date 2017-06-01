@@ -6,20 +6,18 @@
     = render partial: 'shared/external_scripts'
     = render partial: 'favicon'
   %body{class: [current_theme, current_store.wiselinks? && 'wiselinks']}
+    %nav#offcanvas.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
+      .inner-wrap= render partial: 'shared/offcanvas'
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       = render partial: 'shared/main_nav'
-    #offcanvas-wrap
-      #canvas-wrap
-        %nav#offcanvas.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
-          .inner-wrap
-            = render partial: 'shared/offcanvas'
-        - if current_store.detach_menu? && @header.children.any?
-          %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
-            .container
-              %ul.nav.navbar-nav.responsive
-                = render partial: @header.children, locals: {offcanvas: false}
+    #content-wrap
+      - if current_store.detach_menu? && @header.children.any?
+        %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
+          .container
+            %ul.nav.navbar-nav.responsive
+              = render partial: @header.children, locals: {offcanvas: false}
 
-        = yield
+      = yield
 
     %footer.footer
       = render partial: 'shared/footer'

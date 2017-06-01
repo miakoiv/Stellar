@@ -1,5 +1,5 @@
 .container
-  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas', canvas: '#offcanvas-wrap'}}
+  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#offcanvas'}}
     = icon('bars')
   .navbar-header
     = link_to branding(current_store), standalone_store? ? root_path : root_url(host: request.domain), class: 'navbar-brand'
