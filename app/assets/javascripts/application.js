@@ -14,6 +14,7 @@
 //= require moment/fi.js
 //= require jquery
 //= require wiselinks
+//= require wiselinks_init
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
