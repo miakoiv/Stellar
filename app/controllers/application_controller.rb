@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   prepend_before_action :set_current_portal_and_store
   before_action :set_locale
   after_action :prepare_unobtrusive_flash
+  after_action :set_cache_control
 
   #---
   # Before doing anything else, set current_store, current_portal,
@@ -118,6 +119,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+    def set_cache_control
+      response.headers['Cache-Control'] = 'no-cache, no-store, private, max-age=0, must-revalidate' if request.wiselinks?
+    end
 
     # Unless given by param, locale is set from user preference first, then
     # from portal settings if any, and finally from store settings.
