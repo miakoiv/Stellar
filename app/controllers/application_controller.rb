@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   prepend_before_action :set_current_portal_and_store
   before_action :set_locale
   after_action :prepare_unobtrusive_flash
-  after_action :set_cache_control
+  after_action :set_vary_header
 
   #---
   # Before doing anything else, set current_store, current_portal,
@@ -120,8 +120,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def set_cache_control
-      response.headers['Cache-Control'] = 'no-cache, no-store, private, max-age=0, must-revalidate' if request.wiselinks?
+    def set_vary_header
+      response.headers['Vary'] = '*' if request.wiselinks?
     end
 
     # Unless given by param, locale is set from user preference first, then
