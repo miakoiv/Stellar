@@ -7,7 +7,7 @@
     %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
       = icon('close')
     .filter-form
-      = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {replace: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
+      = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: true, target: '#store-body', 'include-blank-url-params': true, 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
         .form-group
           = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
         - current_store.searchable_properties.each do |property|
