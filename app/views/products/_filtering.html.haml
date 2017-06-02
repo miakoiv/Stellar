@@ -2,20 +2,17 @@
   %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
     = icon('filter', t('actions.filter'))
 
-#filter-panel.offcanvas.navmenu.navmenu-default.navmenu-fixed-right
+#filter-panel.offcanvas.navmenu.navmenu-default.navmenu-fixed-right{class: @filter_enabled && 'open'}
   .inner-wrap
     %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
       = icon('close')
     .filter-form
-      = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, class: 'form-vertical' do |f|
+      = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {replace: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {class: 'immediate'} do |f|
         .form-group
           = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
         - current_store.searchable_properties.each do |property|
           .form-group
             = f.select property.sluggify, property.values.sort, {}, {multiple: true, placeholder: property.name.titleize, class: 'form-control'}
-        .form-group
-          = f.button class: 'btn btn-block btn-primary' do
-            = icon('filter', t('actions.filter'))
 
 :coffee
   $('select', '#filter-panel').selectize

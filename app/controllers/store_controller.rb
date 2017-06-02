@@ -94,6 +94,7 @@ class StoreController < ApplicationController
   # GET /category/:category_id
   def show_category
     @query = params[:product_search] || {}
+    @filter_enabled = @query.present?
     @search = ProductSearch.new(filter_params)
     @products = @search.results.sorted(@category.product_scope)
   end
