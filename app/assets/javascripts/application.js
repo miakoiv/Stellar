@@ -13,6 +13,7 @@
 //= require moment
 //= require moment/fi.js
 //= require jquery
+//= require wiselinks
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
@@ -31,7 +32,6 @@
 //= require unobtrusive_flash
 //= require bootstrap-notify.min.js
 //= require outdatedbrowser/outdatedBrowser
-//= require wiselinks
 //= require nprogress
 //= require clipboard
 //= require parallax.min.js
