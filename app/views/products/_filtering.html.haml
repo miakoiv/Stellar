@@ -1,10 +1,10 @@
 .product-filter-toggle
-  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#product-filter'}}
+  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
     = icon('filter', t('actions.filter'))
 
-#product-filter.offcanvas.navmenu.navmenu-default.navmenu-fixed-right
+#filter-panel.offcanvas.navmenu.navmenu-default.navmenu-fixed-right
   .inner-wrap
-    %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#product-filter'}}
+    %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
       = icon('close')
     .filter-form
       = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, class: 'form-vertical' do |f|
@@ -18,7 +18,7 @@
             = icon('filter', t('actions.filter'))
 
 :coffee
-  $('select', '#product-filter').selectize
+  $('select', '#filter-panel').selectize
     plugins: ['remove_button']
     dropdownParent: 'body'
     allowEmptyOption: true

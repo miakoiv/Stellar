@@ -136,14 +136,14 @@ body {
   border: 0;
   background: transparent;
 }
-#product-filter .offcanvas-toggle {
+#filter-panel .offcanvas-toggle {
   @extend .btn, .btn-default, .pull-right;
   margin-right: 15px;
   margin-top: 20px;
   border: 0;
   background: transparent;
 }
-#product-filter .filter-form {
+#filter-panel .filter-form {
   margin-top: 80px;
   padding: 20px;
 }
@@ -267,6 +267,16 @@ body {
   margin-right: 30px;
 }
 
+
+/*
+ * Breadcrumbs
+ */
+.breadcrumbs .breadcrumb {
+  @extend .small;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: transparent;
+}
 
 /*
  * Search panel
