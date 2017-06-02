@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   prepend_before_action :set_current_portal_and_store
   before_action :set_locale
   after_action :prepare_unobtrusive_flash
-  after_action :set_vary_header
 
   #---
   # Before doing anything else, set current_store, current_portal,
@@ -119,10 +118,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-    def set_vary_header
-      response.headers['Vary'] = '*' if request.wiselinks?
-    end
 
     # Unless given by param, locale is set from user preference first, then
     # from portal settings if any, and finally from store settings.
