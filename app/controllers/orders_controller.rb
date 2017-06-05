@@ -7,13 +7,15 @@ class OrdersController < ApplicationController
     super || guest_user
   end
 
+  before_action :set_pricing_group
+
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
   authority_actions duplicate: 'read'
 
   before_action :set_header_and_footer
+  before_action :set_categories, only: [:index, :show, :edit]
   before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
-  before_action :set_pricing_group
 
   # GET /orders
   def index
