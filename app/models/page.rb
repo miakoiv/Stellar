@@ -168,4 +168,16 @@ class Page < ActiveRecord::Base
     else nil
     end
   end
+
+  # Route pages ask this method to render their links with
+  # active_link_to, since the page with a slug of 'front'
+  # should be active for all category and product pages.
+  def active_link_options
+    case slug
+    when 'front'
+      [['store'], ['show_category', 'show_promotion', 'show_product']]
+    when 'cart'
+      [['store'], ['cart']]
+    end
+  end
 end
