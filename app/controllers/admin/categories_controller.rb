@@ -14,7 +14,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories
   # GET /admin/categories.json
   def index
-    @categories = current_store.categories.order(:lft)
+    @categories = current_store.categories
   end
 
   # GET /admin/categories/1

@@ -201,7 +201,7 @@ class Product < ActiveRecord::Base
 
   # If a single category is requested, give the first live one.
   def category
-    categories.live.order(:lft).first
+    categories.live.first
   end
 
   def searchable_product_properties

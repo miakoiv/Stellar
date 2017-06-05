@@ -51,6 +51,8 @@ class Page < ActiveRecord::Base
 
   has_and_belongs_to_many :albums
 
+  default_scope { order(:lft) }
+
   #---
   validates :title, presence: true
   validates :resource, presence: true,

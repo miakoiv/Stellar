@@ -20,6 +20,7 @@ class Category < ActiveRecord::Base
   # Categories may appear at any number of portal departments.
   has_and_belongs_to_many :departments
 
+  default_scope { order(:lft) }
   scope :live, -> { where(live: true) }
   scope :visible, -> { where(live: true, hidden: false) }
 

@@ -17,7 +17,7 @@ namespace :products do
         csv << [
           product.code,
           product.to_s,
-          product.categories.order(:lft).map(&:to_s).join('|')
+          product.categories.map(&:to_s).join('|')
         ]
       end
     end
