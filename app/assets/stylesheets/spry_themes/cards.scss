@@ -218,7 +218,8 @@ $footer-bg: #d4d4d4;
 
   .products {
     @extend .container;
-    margin-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     ul {
       display: flex;
@@ -279,7 +280,8 @@ $footer-bg: #d4d4d4;
 #product-detail-wrap {
   .product-detail {
     @extend .container;
-    margin-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
 
     .product-header {
       .actions {
