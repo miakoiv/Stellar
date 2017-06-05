@@ -241,6 +241,7 @@ en:
       variants: Alternatives for this product…
   store:
     front: Front page
+    front_blurb: Store opening soon! Please check back later.
     all_products: All products
     product_variants: Alternatives for this product
     requisite_products: Recommended products

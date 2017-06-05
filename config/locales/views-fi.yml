@@ -221,6 +221,7 @@ fi:
       variants: Vaihtoehtoisia tuotteita…
   store:
     front: Etusivu
+    front_blurb: Kauppa avataan pian, tervetuloa lähipäivinä!
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
     requisite_products: Katso myös nämä

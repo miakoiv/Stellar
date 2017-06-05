@@ -225,6 +225,7 @@ es:
       variants: Alternativas para este proyecto…
   store:
     front: Página principal
+    front_blurb: Próxima apertura!
     all_products: Todos los productos
     product_variants: Alternativas para este producto
     requisite_products: Productos Recomendados

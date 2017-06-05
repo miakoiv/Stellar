@@ -35,11 +35,9 @@ class StoreController < ApplicationController
 
   # GET /front
   def front
-    @category = @categories.first.try(:having_products)
-    @products = if @category.present?
-      display_products.sorted(@category.product_scope)
-    else
-      Product.none
+    @category = @categories.first_with_products
+    if @category.present?
+      return redirect_to show_category_path(@category)
     end
   end
 
@@ -130,7 +128,7 @@ class StoreController < ApplicationController
       if params[:product_id].nil? && request.path != show_category_path(selected)
         return redirect_to show_category_path(selected), status: :moved_permanently
       end
-      @category = selected.having_products
+      @category = selected.first_with_products
       if @category != selected
         return redirect_to show_category_path(@category)
       end

@@ -32,6 +32,12 @@ class Category < ActiveRecord::Base
   after_save :reset_live_status_of_products!
 
   #---
+  # Finds the first category with visible products.
+  def self.first_with_products
+    find { |category| category.products.visible.any? }
+  end
+
+  #---
   # Category is inside another category if it's the category itself,
   # or one of its descendants.
   def inside?(category)
@@ -42,13 +48,12 @@ class Category < ActiveRecord::Base
     live? && !hidden?
   end
 
-  # If this category has no products, tries the first child category.
-  # Defaults to self if there are no child categories, or the first
-  # child category has no products either.
-  def having_products
-    return self if children.visible.empty? || products.visible.any?
-    first_child = children.visible.first
-    first_child.products.visible.empty? ? self : first_child
+  # Finds the first descendant category with visible products if this one
+  # has none. Defaults to self if descendants contain no visible products.
+  def first_with_products
+    return self if products.visible.any?
+    first = descendants.first_with_products
+    return first || self
   end
 
   def slugger
