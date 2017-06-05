@@ -1,7 +1,7 @@
 jQuery ->
 
   if $('body').hasClass 'wiselinks'
-    window.wiselinks = new Wiselinks()
+    window.wiselinks = new Wiselinks $('#content-wrap')
 
     $(document).off 'page:loading'
       .on 'page:loading', -> NProgress.start()
