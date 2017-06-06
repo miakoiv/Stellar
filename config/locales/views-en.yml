@@ -219,6 +219,8 @@ en:
     message: This website uses cookies to ensure you get the best experience on our website.
     dismiss: Got it!
     more_info: More info
+  live_chat:
+    title: Contact us
   orders:
     index:
       timeline_header: Orders that require shipping

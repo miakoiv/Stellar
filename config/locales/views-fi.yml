@@ -199,6 +199,8 @@ fi:
     message: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.
     dismiss: Selvä!
     more_info: Kerro lisää
+  live_chat:
+    title: Ota yhteyttä
   orders:
     index:
       timeline_header: Toimitettavat tilaukset
