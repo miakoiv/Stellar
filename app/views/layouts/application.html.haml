@@ -3,7 +3,6 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'shared/cookieconsent'
-    = render partial: 'shared/external_scripts'
     = render partial: 'favicon'
   %body{class: [current_theme, current_store.wiselinks? && 'wiselinks']}
     %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
@@ -23,3 +22,4 @@
       = render partial: 'shared/footer'
 
     = render partial: 'shared/outdated_browser'
+    = render partial: 'shared/external_scripts'
