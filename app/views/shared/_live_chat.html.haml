@@ -1,0 +1,11 @@
+- if current_store.tawkto_site_id.present?
+  .live-chat
+    .container
+      %button.btn.btn-success.btn-sm.btn-round{data: {toggle: 'modal', target: '#live-chat-modal'}}
+        = icon('comment', t('live_chat.title'))
+  #live-chat-modal.modal.fade{data: {backdrop: 'static'}}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %button.close{data: {dismiss: 'modal'}}= icon('close')
+          %iframe{src: "https://tawk.to/chat/#{current_store.tawkto_site_id}/default/?$_tawk_popout=true"}
