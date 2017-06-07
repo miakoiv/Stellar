@@ -647,6 +647,12 @@ fieldset[disabled] .help-block { display: none; }
   width: 100%;
   height: 100%;
 }
+@media (max-width: $screen-xs-max) {
+  .mfp-iframe-scaler {
+    height: 480px;
+    padding-bottom: 0;
+  }
+}
 
 
 /*
@@ -753,22 +759,3 @@ fieldset[disabled] .help-block { display: none; }
   bottom: 20px;
 }
 .live-chat .btn { float: right; }
-
-#live-chat-modal .modal-body {
-  position: relative;
-  height: 400px;
-  max-width: 100%;
-}
-#live-chat-modal .close {
-  position: relative;
-  z-index: $zindex-modal;
-}
-#live-chat-modal .modal-body iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: $border-radius-large;
-}
