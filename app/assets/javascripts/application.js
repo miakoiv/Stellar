@@ -19,6 +19,7 @@
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
+//= require jquery.sticky-kit
 //= require bootstrap
 //= require twitter/bootstrap/rails/confirm
 //= require summernote

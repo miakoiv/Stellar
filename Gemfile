@@ -121,6 +121,9 @@ gem 'jquery-tablesorter'
 # Summernote for wysiwyg editing
 gem 'summernote-rails'
 
+# Smart sticky elements
+gem 'stickykit-rails'
+
 #  Making HTML emails comfortable for the Rails rockstars
 gem 'roadie-rails'
 
