@@ -747,10 +747,13 @@ fieldset[disabled] .help-block { display: none; }
  * Live chat widget
  */
 .live-chat {
-  position: absolute;
-  right: $grid-gutter-width / 2 - 3px;
-  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 20px;
 }
+.live-chat .btn { float: right; }
+
 #live-chat-modal .modal-body {
   position: relative;
   height: 400px;
