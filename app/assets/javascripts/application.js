@@ -27,6 +27,8 @@
 //= require dropzone
 //= require magnific-popup
 //= require selectize
+//= require masonry.pkgd.min
+//= require imagesloaded.pkgd.min
 //= require jquery-tablesorter
 //= require jquery.infinite-pages
 //= require bootstrap-datepicker/core
@@ -39,8 +41,7 @@
 //= require parallax.min.js
 //= require numbro.min.js
 //= require languages.min.js
-//= require jquery.grideditor.js
-//= require jquery.grideditor.summernote.js
+//= require jquery.grideditor.min.js
 //= require jquery.grideditor.settings.js
 //= require Chart.min.js
 //= require vis

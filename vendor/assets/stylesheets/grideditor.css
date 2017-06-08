@@ -2,141 +2,133 @@
   position: relative;
   min-height: 22px;
   margin-bottom: 10px;
-
-  .ge-wrapper {
-    padding-top: 5px;
-
-    &.ge-top {
-      .container {
-        margin: 0;
-        padding: 0;
-        width: auto;
-      }
-    }
-
-    &.ge-fixed {
-      position: fixed;
-      z-index: 20;
-      top: 0;
-    }
-  }
-
-  .ge-addRowGroup {
-    .btn.btn-primary {
-      @extend .btn-default;
-    }
-    .ge-row-icon {
-      display: inline-block;
-      width: 48px;
-      margin: 0;
-
-      .column {
-        height: 10px;
-        padding: 0;
-        background-color: $brand-primary;
-        border-left: 2px solid #fff;
-      }
-    }
-  }
-
-  .ge-layout-mode {
-    margin-left: 5px;
-  }
 }
-
+.ge-mainControls .ge-wrapper {
+  padding-top: 5px;
+}
+.ge-mainControls .ge-wrapper.ge-top .container {
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+.ge-mainControls .ge-wrapper.ge-fixed {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+}
+.ge-mainControls .ge-addRowGroup .btn.btn-primary {
+  background: #f4f4f4;
+  color: #666;
+  border-color: #999;
+}
+.ge-mainControls .ge-addRowGroup .ge-row-icon {
+  display: inline-block;
+  width: 48px;
+  margin: 0;
+}
+.ge-mainControls .ge-addRowGroup .ge-row-icon .column {
+  height: 10px;
+  background: #666;
+  padding: 0;
+  border-left: 2px solid #f4f4f4;
+}
+.ge-mainControls .ge-layout-mode {
+  margin-left: 5px;
+}
+.ge-mainControls .btn:focus {
+  box-shadow: none;
+  outline: none;
+}
 .ge-html-output {
   width: 100%;
   display: none;
 }
-
-.ge-canvas {
-  .ge-tools-drawer {
-    display: none;
-  }
-
-  &.ge-editing {
-    .ge-tools-drawer {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      margin: 0 -5px 5px;
-      display: block;
-
-      > a {
-        display: inline-block;
-        padding: 5px;
-
-        &:hover {
-          background: rgba(255, 255, 255, 0.5);
-          cursor: pointer;
-        }
-      }
-      .ge-details {
-        padding: 5px;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        display: none;
-
-        .btn-group a {
-          @extend .btn, .btn-sm, .btn-default;
-        }
-        input.ge-id {
-          @extend .form-control, .input-sm;
-          display: inline-block;
-          padding: 2px 5px;
-          margin-right: 5px;
-          width: 80px;
-        }
-      }
-    }
-    .row {
-      @include box-shadow(0 0 2px 0 rgba(0,0,0,0.8));
-      background-color: #fff;
-      padding: 0 5px 5px;
-      margin-bottom: 0;
-      margin-left: 0;
-      margin-right: 0;
-
-      &:hover > .ge-tools-drawer > a { opacity: 1; }
-
-      > .ge-tools-drawer {
-        > a {
-          color: #333;
-          opacity: 0.1;
-          transition: all 0.2s ease-in-out 0s;
-
-          &.ge-add-column { color: $brand-primary; }
-        }
-      }
-    }
-    .column {
-      border: 1px solid #ddd;
-      background-color: #fff;
-      padding: 0 5px 5px;
-
-      &:hover > .ge-tools-drawer > a { opacity: 1; }
-
-      > .ge-tools-drawer {
-        > a {
-          color: $brand-primary;
-          opacity: 0.1;
-          transition: all 0.2s ease-in-out 0s;
-
-          &.ge-add-row { color: #333; }
-        }
-      }
-    }
-    .ge-content-type-tinymce.active { outline: 1px dotted #333; }
-
-    .ui-sortable-placeholder {
-      background: rgba($brand-primary, 0.2);
-      visibility: visible !important;
-      min-height: 50px;
-    }
-  }
+/* Not editing */
+.ge-canvas .ge-tools-drawer {
+  display: none;
 }
-
+/* While editing */
+.ge-canvas.ge-editing {
+  /* Content area */
+  /* Sorting */
+}
+.ge-canvas.ge-editing .ge-tools-drawer {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: blue;
+  margin: 0 -5px 5px;
+  display: block;
+}
+.ge-canvas.ge-editing .ge-tools-drawer > a {
+  display: inline-block;
+  padding: 5px;
+}
+.ge-canvas.ge-editing .ge-tools-drawer > a:hover {
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details {
+  padding: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: none;
+}
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details .btn-group a {
+  color: #333;
+}
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details .btn-group a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+.ge-canvas.ge-editing .ge-tools-drawer .ge-details input.ge-id {
+  border: 1px solid #7F7F7F;
+  border-radius: 4px;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 5px;
+  width: 80px;
+}
+.ge-canvas.ge-editing .row {
+  background-color: #efefef;
+  border: 1px solid #999999;
+  padding: 0 5px 5px;
+  margin-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
+}
+.ge-canvas.ge-editing .row > .ge-tools-drawer {
+  background: #e5e5e5;
+}
+.ge-canvas.ge-editing .row > .ge-tools-drawer > a {
+  color: #666;
+}
+.ge-canvas.ge-editing .row > .ge-tools-drawer > a.ge-add-column {
+  color: #178acc;
+}
+.ge-canvas.ge-editing .column {
+  background-color: rgba(47, 164, 231, 0.15);
+  border: 1px solid #2FA4E7;
+  padding: 0 5px 5px;
+}
+.ge-canvas.ge-editing .column > .ge-tools-drawer {
+  background: #afd5ea;
+}
+.ge-canvas.ge-editing .column > .ge-tools-drawer a {
+  color: #178acc;
+}
+.ge-canvas.ge-editing .column > .ge-tools-drawer > a.ge-add-row {
+  color: #666;
+}
+.ge-canvas.ge-editing .ge-content-type-tinymce.active {
+  outline: 1px dotted #333;
+}
+.ge-canvas.ge-editing .ui-sortable-placeholder {
+  background: rgba(255, 255, 0, 0.2);
+  visibility: visible !important;
+  min-height: 50px;
+}
 /* Layout modes */
 .ge-canvas.ge-layout-phone {
   max-width: 450px;
