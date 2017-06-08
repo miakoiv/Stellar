@@ -8,16 +8,17 @@
       = icon('close')
     .filter-form
       = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
-        .form-group
-          = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
         - current_store.searchable_properties.each do |property|
-          .form-group
-            = f.select property.sluggify, property.values.sort, {}, {multiple: true, placeholder: property.name.titleize, class: 'form-control'}
+          %fieldset.fieldset
+            %legend= property.name.titleize
+            - property.values_for(@category.products.visible).sort.each do |value|
+              - param = "product_search[#{property.sluggify}][]"
+              .form-group
+                .checkbox
+                  %label
+                    = check_box_tag param, value, @search.options[property.sluggify].present? && @search.options[property.sluggify].include?(value)
+                    = value
 
 :coffee
-  $('select', '#filter-form').selectize
-    plugins: ['remove_button']
-    dropdownParent: 'body'
-    allowEmptyOption: true
   $('#filter-form').on 'change', (e) ->
     $(this).submit()
