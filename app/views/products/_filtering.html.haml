@@ -14,7 +14,7 @@
           - if values.any?
             %fieldset
               %legend= property.name.titleize
-              - values.each do |value|
+              - values.sort.each do |value|
                 .form-group
                   .checkbox
                     %label
