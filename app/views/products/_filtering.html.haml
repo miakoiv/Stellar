@@ -9,15 +9,17 @@
     .filter-form
       = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
         - current_store.searchable_properties.each do |property|
-          %fieldset.fieldset
-            %legend= property.name.titleize
-            - property.values_for(@category.products.visible).sort.each do |value|
-              - param = "product_search[#{property.sluggify}][]"
-              .form-group
-                .checkbox
-                  %label
-                    = check_box_tag param, value, @search.options[property.sluggify].present? && @search.options[property.sluggify].include?(value)
-                    = value
+          - param = property.sluggify
+          - values = property.values_for(@category.products.visible)
+          - if values.any?
+            %fieldset
+              %legend= property.name.titleize
+              - values.each do |value|
+                .form-group
+                  .checkbox
+                    %label
+                      = check_box_tag "product_search[#{param}][]", value, @search.options[param].present? && @search.options[param].include?(value)
+                      = value
 
 :coffee
   $('#filter-form').on 'change', (e) ->

@@ -145,8 +145,29 @@ body {
 }
 #filter-panel .filter-form {
   margin-top: 80px;
-  padding: 20px;
 }
+.filter-form fieldset {
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+}
+.filter-form fieldset legend {
+  @extend .text-muted;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: $font-size-base;
+  font-weight: 400;
+}
+.filter-form .form-group {
+  margin-bottom: 0;
+  font-size: $font-size-small;
+}
+.filter-form .form-group .checkbox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  input[type="checkbox"] { margin-top: 2px; }
+}
+
 
 /*
  * Navmenu titles, headers, and icons; nested navmenus
