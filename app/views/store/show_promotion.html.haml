@@ -15,7 +15,3 @@
         .product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products
-
-:coffee
-  if $(window).isSmall()
-    $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)

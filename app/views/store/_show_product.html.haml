@@ -6,8 +6,3 @@
   $('.category').deactivate()
   $("##{dom_id(@category)}").activate()
   $('.product-detail').initialize()
-
-  if $(window).isSmall()
-    $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)
-  else
-    $(window).scrollTo 0, 300

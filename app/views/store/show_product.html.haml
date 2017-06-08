@@ -10,7 +10,3 @@
     #product-detail-wrap
       .product-detail
         = render partial: 'products/product_detail', object: @product, as: :product
-
-:coffee
-  if $(window).isSmall()
-    $(window).scrollTo $('#store-wrap'), 300, offset: -$('#main-nav').outerHeight(true)
