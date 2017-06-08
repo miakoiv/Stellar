@@ -33,6 +33,10 @@ class Property < ActiveRecord::Base
     product_properties.pluck(:value).uniq
   end
 
+  def values_for(scope)
+    product_properties.joins(:product).merge(scope).pluck(:value).uniq
+  end
+
   def value_type_name
     human_attribute_value(:value_type)
   end
