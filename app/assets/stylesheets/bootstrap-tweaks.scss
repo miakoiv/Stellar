@@ -132,7 +132,7 @@ body {
  */
 .product-filter-toggle { @extend .pull-right; }
 .product-filter-toggle .offcanvas-toggle {
-  @extend .btn, .btn-default;
+  @extend .btn, .btn-default, .btn-sm;
   border: 0;
   background: transparent;
 }
