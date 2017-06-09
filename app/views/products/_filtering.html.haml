@@ -13,8 +13,8 @@
           - values = property.values_for(@category.products.visible)
           - if values.any?
             %fieldset
-              %legend= property.name.titleize
-              - values.sort.each do |value|
+              %legend= property.name_with_units
+              - values.each do |value|
                 .form-group
                   .checkbox
                     %label
