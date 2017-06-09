@@ -9,7 +9,7 @@ class ProductProperty < ActiveRecord::Base
   default_scope { joins(:property).merge(Property.sorted) }
 
   #---
-  #
+  # Override value setter to convert numeric representations.
   def value=(string)
     self[:value] = string
     numeric = string.gsub(/[^\d,.-]/, '').sub(',', '.')
