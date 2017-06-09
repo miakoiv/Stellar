@@ -1,7 +1,7 @@
 class AddConvertedProductPropertyValues < ActiveRecord::Migration
   def up
     add_column :product_properties, :value_i, :integer, after: :value
-    add_column :product_properties, :value_f, :decimal, precision: 8, scale: 3, after: :value_i
+    add_column :product_properties, :value_f, :decimal, precision: 10, scale: 2, after: :value_i
 
     ProductProperty.find_each(batch_size: 100) do |product_property|
       next if product_property.string?
