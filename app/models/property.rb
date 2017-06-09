@@ -1,10 +1,5 @@
 #encoding: utf-8
 
-# NOTE: migration from CustomAttributes to Properties on production systems:
-# mapping = {'numeric' => 'numeric', 'set' => 'string', 'alpha' => 'string'}
-# CustomAttribute.all.each { |a| Property.create id: a.id, store_id: a.store_id, value_type: mapping[a.attribute_type], measurement_unit_id: a.measurement_unit_id, unit_pricing: a.unit_pricing, searchable: a.searchable, name: a.name }
-# Customization.all.each { |c| ProductProperty.create id: c.id, product_id: c.customizable_id, property_id: c.custom_attribute_id, value: c.display_value }
-
 class Property < ActiveRecord::Base
 
   resourcify
