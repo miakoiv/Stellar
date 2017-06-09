@@ -25,11 +25,14 @@ class Property < ActiveRecord::Base
 
   #---
   def values
-    product_properties.pluck(:value).uniq
+    sort_attribute = numeric? ? :value_f : :value
+    product_properties.order(sort_attribute).pluck(:value).uniq
   end
 
   def values_for(scope)
-    product_properties.joins(:product).merge(scope).pluck(:value).uniq
+    sort_attribute = numeric? ? :value_f : :value
+    product_properties.joins(:product).merge(scope).order(sort_attribute).
+      pluck(:value).uniq
   end
 
   def value_type_name
