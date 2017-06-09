@@ -9,7 +9,7 @@
     .filter-form
       = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
         - current_store.searchable_properties.each do |property|
-          = render partial: 'properties/filter_fieldset', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible)}
+          = render partial: 'properties/value_checkboxes', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible)}
 
 :coffee
   $('#filter-form').on 'change', (e) ->
