@@ -55,6 +55,14 @@ class ProductSearch < Searchlight::Search
     query.where(live: checked?(live))
   end
 
+  def search_price_min
+    query.where('retail_price_cents >= ?', price_min.to_money.cents)
+  end
+
+  def search_price_max
+    query.where('retail_price_cents <= ?', price_max.to_money.cents)
+  end
+
   def search_exclusions
     query.where.not(id: exclusions)
   end

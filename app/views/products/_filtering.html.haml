@@ -10,6 +10,14 @@
       = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
         - current_store.searchable_properties.each do |property|
           = render partial: 'properties/value_checkboxes', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible)}
+        %fieldset
+          %legend= col(Product, :price)
+          .form-group
+            .input-group.input-group-sm
+              = f.text_field :price_min, class: 'form-control'
+              %span.input-group-addon= icon('ellipsis-h')
+              = f.text_field :price_max, class: 'form-control'
+              %span.input-group-addon €
 
 :coffee
   $('#filter-form').on 'change', (e) ->
