@@ -2,20 +2,22 @@
  * Theme specific styles
  */
 
-$brand-primary: #3fb8b8;
+$brand-primary: #b0c7c6;
+$brand-secondary: #b9d6de;
+$off-white: #fbffff;
 $body-bg: #fff;
-$footer-bg: $brand-primary;
+$footer-bg: #fff;
 
 $font-size-base: 16px;
 $font-family-serif: 'Droid Serif', serif;
 
-$navbar-inverse-color: #bbb;
+$navbar-inverse-color: $off-white;
 $navbar-inverse-border: transparent;
-$navbar-inverse-link-color: #eee;
+$navbar-inverse-link-color: $off-white;
 $navbar-inverse-link-hover-color: #fff;
 $navbar-inverse-link-active-color: #fff;
-$navmenu-inverse-color: #bbb;
-$navmenu-inverse-link-color: #eee;
+$navmenu-inverse-color: $off-white;
+$navmenu-inverse-link-color: $off-white;
 $navmenu-inverse-link-active-color: #fff;
 
 @import "bootstrap-font-awesome.scss";
@@ -82,8 +84,9 @@ $navmenu-inverse-link-active-color: #fff;
  */
 #main-nav {
   @extend .navbar-inverse;
-  background-image: url(asset_path('carbon.png'));
-  background-attachment: fixed;
+  position: absolute;
+  width: 100% !important;
+  background-color: rgba(0,0,0,0);
 }
 #main-nav .container {
   padding-top: 30px;    // padding the container only,
@@ -96,14 +99,19 @@ $navmenu-inverse-link-active-color: #fff;
   img { max-height: 50px; }
 }
 
+/* Sticky kit sticks the navbar at -30px */
+#main-nav.is_stuck {
+  background-color: rgba(0,0,0,0.5);
+
+  .container { padding-bottom: 0; }
+}
+
+
 /* No main nav in this theme */
 #main-nav .navbar-nav { display: none; }
 
-/* Push content below the navbar */
-#content-wrap, .offcanvas .inner-wrap { padding-top: 110px; }
-
 /* Keep the hamburger on desktop */
-.offcanvas-toggle {
+#main-nav .offcanvas-toggle {
   @extend .btn-lg;
   display: block !important;
 }
@@ -111,24 +119,8 @@ $navmenu-inverse-link-active-color: #fff;
 /* Inverse side nav */
 #side-nav { @extend .navmenu-inverse; }
 
-
-/*
- * Less prominent mobile navbar
- */
-@media (max-width: $screen-xs-max) {
-  #content-wrap, .offcanvas .inner-wrap { padding-top: 70px; }
-
-  #main-nav .container {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  #main-nav .navbar-brand {
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    img { max-height: 30px; }
-  }
-}
+/* Push content below the navbar */
+#content-wrap, .offcanvas .inner-wrap { padding-top: 110px; }
 
 
 /*
@@ -148,6 +140,14 @@ $navmenu-inverse-link-active-color: #fff;
   padding-bottom: 20px;
 }
 
+/* Masthead extends underneath the navbar */
+#masthead {
+  display: flex;
+  flex-direction: column;
+  margin-top: -110px;
+  height: 1000px;
+}
+
 /* Content sections */
 .section {
   position: relative;
@@ -157,6 +157,9 @@ $navmenu-inverse-link-active-color: #fff;
 .section-primary {
   background-color: $brand-primary;
   color: #fff;
+}
+.section-secondary {
+  background-color: lighten($brand-primary, 17%);
 }
 .section h2 { margin-bottom: 40px; }
 
@@ -327,11 +330,8 @@ ul { list-style-type: square; }
 #product-detail-wrap {}
 
 .footer {
-  color: #fff;
   font-size: 0.8em;
   font-weight: 500;
 }
 .footer .navmenu {
-  @extend .navmenu-inverse;
-  background: transparent;
 }
