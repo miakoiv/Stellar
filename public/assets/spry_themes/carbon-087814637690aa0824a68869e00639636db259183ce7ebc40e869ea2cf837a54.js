@@ -1,0 +1,1 @@
+(function(){jQuery(function(){return this.stick_main_nav=function(){return $("#main-nav").stick_in_parent({offset_top:-30})},this.stick_main_nav(),$(document).on("page:done",this.stick_main_nav)})}).call(this);
