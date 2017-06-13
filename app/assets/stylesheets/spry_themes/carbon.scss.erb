@@ -117,10 +117,14 @@ $navmenu-inverse-link-active-color: #fff;
 }
 
 /* Inverse side nav */
-#side-nav { @extend .navmenu-inverse; }
+#side-nav {
+  @extend .navmenu-inverse;
+  z-index: 1040;
+  font-size: 13px;
+}
 
 /* Push content below the navbar */
-#content-wrap, .offcanvas .inner-wrap { padding-top: 110px; }
+#content-wrap { padding-top: 110px; }
 
 
 /*
