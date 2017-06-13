@@ -30,6 +30,7 @@ class Product < ActiveRecord::Base
   monetize :cost_price_cents, allow_nil: true
   monetize :trade_price_cents, allow_nil: true
   monetize :retail_price_cents, allow_nil: true
+  monetize :promoted_price_cents, allow_nil: true
 
   # Monetize aggregate methods.
   monetize :price_cents, disable_validation: true
@@ -79,8 +80,12 @@ class Product < ActiveRecord::Base
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-  has_many :promoted_items
+
+  # Products can be added to promotions, and any change will trigger
+  # recalculation of its promoted price.
+  has_many :promoted_items, after_add: :reset_itself!, after_remove: :reset_itself!
   has_many :promotions, through: :promoted_items
+
   has_many :iframes, dependent: :destroy
 
   # Alternate retail prices in pricing groups.
@@ -226,8 +231,8 @@ class Product < ActiveRecord::Base
   end
 
   # Returns the retail price in given pricing group. If no group is specified,
-  # finds the lowest retail price through promotions. Bundles sum their
-  # components if no price is specified.
+  # uses the promoted price, if any. Bundles sum their components if no price
+  # is specified.
   def price_cents(pricing_group)
     if bundle? && retail_price_cents.nil?
       return component_total_price_cents(pricing_group)
@@ -235,10 +240,7 @@ class Product < ActiveRecord::Base
     if pricing_group.present?
       return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
     end
-    price_cents = retail_price_cents || 0
-    lowest = best_promoted_item
-    price_cents = lowest.price_cents if lowest.present?
-    price_cents
+    promoted_price_cents || retail_price_cents
   end
 
   # Returns the display price in given pricing group. The price tag displays
@@ -440,9 +442,21 @@ class Product < ActiveRecord::Base
     true
   end
 
+  # Resets the promoted price of the product by looking for the lowest price
+  # from currently active promotions. Resets to nil if no promotions are found.
+  def reset_promoted_price!
+    lowest = best_promoted_item
+    update_columns(promoted_price_cents: lowest.present? ? lowest.price_cents : nil)
+    touch
+    true
+  end
+
   protected
     def reset_itself!(context)
-      reset_live_status! if persisted?
+      if persisted?
+        reset_live_status!
+        reset_promoted_price!
+      end
     end
 
     def touch_categories

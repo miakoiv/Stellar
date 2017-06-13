@@ -23,8 +23,8 @@ class Promotion < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
-  before_save :touch_products
-  before_destroy :touch_products
+  before_save :reset_products
+  before_destroy :reset_products
 
   #---
   # These attributes allow adding products and categories en masse
@@ -100,12 +100,12 @@ class Promotion < ActiveRecord::Base
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
     end
 
-    # Called before save, all affected products are touched to flush caches.
+    # Called before save, all affected products have their promoted price reset.
     # If the promotion becomes active/inactive in the future, an activation
     # job is queued to handle it at the set date.
-    def touch_products
+    def reset_products
       products.each do |product|
-        product.touch
+        product.reset_promoted_price!
       end
       if activate_at && activate_at.future?
         PromotionActivationJob.set(wait_until: activate_at).perform_later(self)

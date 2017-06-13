@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609064927) do
+ActiveRecord::Schema.define(version: 20170612111628) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -469,6 +469,7 @@ ActiveRecord::Schema.define(version: 20170609064927) do
     t.integer  "trade_price_cents",       limit: 4
     t.date     "trade_price_modified_at"
     t.integer  "retail_price_cents",      limit: 4
+    t.integer  "promoted_price_cents",    limit: 4
     t.integer  "tax_category_id",         limit: 4,                     null: false
     t.integer  "priority",                limit: 4,     default: 0,     null: false
     t.date     "available_at"

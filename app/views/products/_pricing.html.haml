@@ -9,6 +9,6 @@
     - unless unit_price.nil?
       %span.unit-price.currency
         = unit_price_string(unit_price, product.base_unit)
-  - if product.best_promoted_item.present?
+  - if product.promoted_price.present?
     %p.retail-price.currency
       = humanized_money_with_symbol(product.retail_price)
