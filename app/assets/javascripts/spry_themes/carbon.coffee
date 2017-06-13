@@ -1,6 +1,8 @@
+@carbon_init = ->
+  $('#masthead').css 'height', $(window).height()
+  $('#main-nav').stick_in_parent
+    offset_top: -30
+
 jQuery ->
-  @stick_main_nav = ->
-    $('#main-nav').stick_in_parent
-      offset_top: -30
-  @stick_main_nav()
-  $(document).on 'page:done', @stick_main_nav
+  carbon_init()
+  $(document).on 'page:done', carbon_init
