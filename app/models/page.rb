@@ -18,29 +18,27 @@ class Page < ActiveRecord::Base
   enum purpose: {
     route: 0,           # navigation node routed to #slug
     primary: 1,         # page with content sections
-    secondary: 2,       # secondary content (deprecated)
-    banner: 3,          # banner container (deprecated)
-    template: 4,        # printed page template
-    category_menu: 6,   # menu from linked category (or root if nil)
-    product_link: 7,    # link to product
-    promotion_link: 8,  # link to promotion
-    header: 10,         # virtual page containing main navigation
-    footer: 11,         # virtual page containing footer links
-    navigation: 12,     # secondary navigation
+    category: 2,        # link to category
+    product: 3,         # link to product
+    promotion: 4,       # link to promotion
+    header: 10,         # container for main navigation
+    footer: 11,         # container for footer links
+    dropdown: 20,       # dropdown container for other pages
+    megamenu: 21,       # megamenu container for other pages
+    template: 30,       # printed page template
   }
 
   PRESENTATION = {
     'route' => {icon: '', appearance: 'danger'},
     'primary' => {icon: 'file-text-o', appearance: 'success'},
-    'secondary' => {icon: 'file-text-o', appearance: 'success'},
-    'banner' => {icon: ''},
-    'template' => {icon: 'file-o', appearance: 'warning'},
-    'category_menu' => {icon: 'sitemap', appearance: 'info'},
-    'product_link' => {icon: 'cube', appearance: 'info'},
-    'promotion_link' => {icon: 'tag', appearance: 'info'},
+    'category' => {icon: 'sitemap', appearance: 'info'},
+    'product' => {icon: 'cube', appearance: 'info'},
+    'promotion' => {icon: 'tag', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
-    'navigation' => {icon: 'share-alt'}
+    'dropdown' => {icon: 'caret-down'},
+    'megamenu' => {icon: 'window-maximize'},
+    'template' => {icon: 'file-o', appearance: 'warning'},
   }.freeze
 
   #---
@@ -56,7 +54,7 @@ class Page < ActiveRecord::Base
   #---
   validates :title, presence: true
   validates :resource, presence: true,
-    if: -> (page) { page.product_link? },
+    if: -> (page) { page.needs_resource? },
     on: :update
 
   #---
@@ -67,9 +65,8 @@ class Page < ActiveRecord::Base
 
   def self.available_purposes
     purposes.slice(
-      :route, :primary, :template,
-      :category_menu, :product_link, :promotion_link,
-      :navigation
+      :route, :primary, :category, :product, :promotion,
+      :dropdown, :megamenu
     )
   end
 
@@ -79,15 +76,20 @@ class Page < ActiveRecord::Base
 
   #---
   def can_have_children?
-    header? || footer? || navigation?
+    header? || footer? || dropdown? || megamenu?
   end
 
   def can_have_content?
     primary? || template?
   end
 
+  def needs_resource?
+    category? || product? || promotion?
+  end
+
   def movable?
-    route? || primary? || navigation? || category_menu? || product_link? || promotion_link?
+    route? || primary? || category? || product? || promotion? ||
+    dropdown? || megamenu?
   end
 
   def can_have_albums?
@@ -123,9 +125,9 @@ class Page < ActiveRecord::Base
   # Navigation pages and category menu pages contain items.
   def contained_items
     case
-    when navigation?
+    when dropdown?
       children
-    when category_menu? && resource.present?
+    when category? && resource.present?
       if resource.leaf?
         resource.products.visible.sorted(resource.product_scope)
       else
@@ -156,13 +158,13 @@ class Page < ActiveRecord::Base
     case
     when route? || primary?
       show_page_path(self)
-    when product_link?
+    when product?
       show_product_path(resource.category, resource)
-    when promotion_link?
+    when promotion?
       show_promotion_path(resource)
-    when navigation?
+    when dropdown?
       children.first.path
-    when category_menu?
+    when category?
       category = resource || store.first_category
       category.present? ? show_category_path(category) : nil
     else nil
@@ -175,7 +177,7 @@ class Page < ActiveRecord::Base
   def active_link_options
     case slug
     when 'front'
-      [['store'], ['show_category', 'show_promotion', 'show_product']]
+      [['store'], ['show_category', 'show_product', 'show_promotion']]
     when 'cart'
       [['store'], ['cart']]
     end

@@ -11,15 +11,14 @@ fi:
         purpose:
           route: Reitityspiste
           primary: Ensisijainen sisältö
-          secondary: Toissijainen sisältö
-          banner: Juliste
-          template: Sivupohja
-          category_menu: Tuoteryhmävalikko
-          product_link: Tuotelinkki
-          promotion_link: Kampanjalinkki
+          category: Tuoteryhmä
+          product: Tuote
+          promotion: Kampanja
           header: Päävalikko
           footer: Alavalikko
-          navigation: Sivuvalikko
+          dropdown: Pudotusvalikko
+          megamenu: Megamenu
+          template: Sivupohja
       property:
         value_type:
           string: sanallinen

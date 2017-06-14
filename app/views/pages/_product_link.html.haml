@@ -1,5 +1,0 @@
-%li{class: !navmenu && active_link_to_class(product_link.path)}
-  = link_to product_link.path do
-    - if navmenu
-      = image_variant_tag product_link.resource.cover_image(:technical), :icon
-    = product_link

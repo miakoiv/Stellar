@@ -1,4 +1,4 @@
 %li
   = link_to item, show_category_path(item)
   %ul
-    = render partial: 'categories/megamenu_child_item', collection: item.children.visible, as: :item
+    = render partial: 'categories/megamenu_child_item', collection: item.children, as: :item

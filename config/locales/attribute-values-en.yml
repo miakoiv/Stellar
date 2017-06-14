@@ -11,15 +11,14 @@ en:
         purpose:
           route: Routing entry
           primary: Primary content
-          secondary: Secondary content
-          banner: Banner
-          template: Template
-          category_menu: Category menu
-          product_link: Product link
-          promotion_link: Promotion link
+          category: Category
+          product: Product
+          promotion: Promotion
           header: Header navigation
           footer: Footer navigation
-          navigation: Page menu
+          dropdown: Dropdown menu
+          megamenu: Mega menu
+          template: Template
       property:
         value_type:
           string: String

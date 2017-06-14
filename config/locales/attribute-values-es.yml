@@ -11,15 +11,14 @@ es:
         purpose:
           route: Ruta de entrada
           primary: Contenido Principal
-          secondary: Contenido Secundario
-          banner: Logotipo
-          template: Modelo
-          category_menu: Categorias
-          product_link: Enlace del producto
-          promotion_link: Enlace de promoción
+          category: Categorias
+          product: Enlace del producto
+          promotion: Enlace de promoción
           header: Encabezado
           footer: Pie de página
-          navigation: Menu de navegación
+          dropdown: Menu de navegación
+          megamenu: Mega menu
+          template: Modelo
       property:
         value_type:
           string: Secuencia

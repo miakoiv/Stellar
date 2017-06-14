@@ -1,8 +1,0 @@
-- items = category_menu.contained_items || @categories
-- partial_path = category_menu.contained_item_partial_path
-- parent_path = category_menu.resource.present? && show_category_path(category_menu.resource)
-
-- if navmenu
-  = render partial: 'pages/navmenu', object: category_menu, as: :root, locals: {items: items, partial_path: partial_path}
-- else
-  = render partial: 'pages/mega_dropdown', object: category_menu, as: :root, locals: {items: items, partial_path: partial_path, parent_path: parent_path}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612111628) do
+ActiveRecord::Schema.define(version: 20170614065711) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
