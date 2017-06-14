@@ -204,9 +204,9 @@ class Product < ActiveRecord::Base
     variants.map(&:product_properties).flatten.group_by(&:property).select { |p, v| v.uniq(&:value).count > 1 }
   end
 
-  # If a single category is requested, give the first live one.
+  # If a single category is requested, give the deepest live one.
   def category
-    categories.live.first
+    categories.live.order(depth: :desc, lft: :asc).first
   end
 
   def searchable_product_properties
