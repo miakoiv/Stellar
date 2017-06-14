@@ -7,15 +7,15 @@
 = category
 .dd-actions
   - if category.product_scope == 'manual'
-    = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-sm'
+    = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-xs'
   = link_to icon('info', t('actions.show')), admin_category_path(category),
-      class: 'btn btn-default btn-sm'
+      class: 'btn btn-default btn-xs'
   - if current_user.can_update?(Category)
     = link_to icon('edit', t('actions.edit')), edit_admin_category_path(category),
-        class: 'btn btn-default btn-sm'
+        class: 'btn btn-default btn-xs'
   - if current_user.can_delete?(Category)
     = link_to icon('remove', t('actions.delete')), admin_category_path(category),
-        method: :delete, class: 'btn btn-sm btn-danger',
+        method: :delete, class: 'btn btn-xs btn-danger',
         data: {confirm: t('actions.confirm.body',
           klass: Category.model_name.human, name: category.name),
           'confirm-title': t('actions.confirm.title'),

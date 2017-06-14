@@ -4,15 +4,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  line-height: 30px;
-
-  .dd-list { padding-left: 30px; }
+  line-height: 24px;
 }
 
 .dd-item {
   @extend .clearfix;
-  margin: 10px 0;
-  padding: 8px;
+  margin: 5px 0;
+  padding: $padding-small-vertical $padding-small-horizontal;
   background-color: $list-group-bg;
   color: $text-color;
   border: 1px solid $list-group-border;
@@ -58,11 +56,13 @@
   }
 }
 
+.dd-item .dd-list { padding-left: 28px; }
+
 .dd-empty, .dd-placeholder {
   box-sizing: content-box;
-  min-height: 30px;
-  margin: 10px 0;
-  padding: 8px;
+  min-height: 24px;
+  margin: 5px 0;
+  padding: $padding-small-vertical $padding-small-horizontal;
   background-color: $list-group-active-bg;
   border: 1px solid $list-group-active-border;
   border-radius: $list-group-border-radius;
