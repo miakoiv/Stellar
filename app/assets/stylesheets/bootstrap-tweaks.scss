@@ -8,7 +8,7 @@ body {
   background-color: $body-bg;
 }
 
-.offcanvas { z-index: 1030; }
+.offcanvas { z-index: $zindex-navbar; }
 .offcanvas.open { display: block; }
 .offcanvas .inner-wrap {
   padding-top: $navbar-height;
