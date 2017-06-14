@@ -6,7 +6,7 @@
 
 .dd
   %ol.dd-list
-    = render partial: 'nested_list_item', collection: @categories.roots, as: :category
+    = render partial: 'nested_list_item', collection: @categories, as: :category
 
 :coffee
   $('.dd').nestable().bind 'change', ->

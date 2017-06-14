@@ -6,7 +6,7 @@
 
 .dd
   %ol.dd-list
-    = render partial: 'nested_list_item', collection: @pages.roots, as: :page
+    = render partial: 'nested_list_item', collection: @pages, as: :page
 
 :coffee
   $('.dd').nestable().bind 'change', ->
