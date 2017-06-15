@@ -1,2 +1,4 @@
-%li{class: !navmenu && active_link_to_class(primary.path)}
-  = link_to primary, primary.path
+%li.primary{class: active_link_to_class(primary.path)}
+  = link_to primary.path do
+    .page-title
+      = primary

@@ -1,8 +1,6 @@
-- items = category.contained_items || @categories
-- partial_path = category.contained_item_partial_path
-- parent_path = category.resource.present? && show_category_path(category.resource)
-
-- if navmenu
-  = render partial: 'pages/navmenu', object: category, as: :root, locals: {items: items, partial_path: partial_path}
-- else
-  = render partial: 'pages/mega_dropdown', object: category, as: :root, locals: {items: items, partial_path: partial_path, parent_path: parent_path}
+%li.category{class: active_link_to_class(category.path)}
+  = link_to category.path do
+    .page-image
+      = image_variant_tag category.resource.cover_image, navmenu ? :icon : :matchbox
+    .page-title
+      = category

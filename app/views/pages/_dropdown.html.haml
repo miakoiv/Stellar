@@ -5,11 +5,11 @@
         = dropdown
         %span.caret
       %ul.nav.navmenu-nav
-        = render partial: dropdown.contained_items, locals: {navmenu: true}
+        = render partial: dropdown.children, locals: {navmenu: true}
   - else
     %li.dropdown
       %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
         = dropdown
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
-        = render partial: dropdown.contained_items, locals: {navmenu: false}
+        = render partial: dropdown.children, locals: {navmenu: false}

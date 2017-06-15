@@ -1,14 +1,17 @@
-%li.dropdown.mega-dropdown
-  %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-    = megamenu
-    %span.caret
-  %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
-    .container
-      .row
-        = render partial: "#{megamenu.contained_item_partial_path}/megamenu_item", collection: megamenu.children.first(12), as: :item, locals: {root: megamenu}
-      - if megamenu.children.count > 12
-        .row
-          .col-md-4
-            = link_to megamenu.resource.path do
-              = megamenu.resource
-              = icon('chevron-right')
+- if megamenu.children_count > 0
+  - if navmenu
+    %li
+      .navmenu-header
+        = megamenu
+        %span.caret
+      %ul.nav.navmenu-nav
+        = render partial: megamenu.children, locals: {navmenu: true}
+  - else
+    %li.dropdown.mega-dropdown
+      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = megamenu
+        %span.caret
+      %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
+        .container
+          .row
+            = render partial: megamenu.children, locals: {navmenu: false}

@@ -1,8 +1,0 @@
-- cache_if current_user.guest?, [I18n.locale, :megamenu_item, item] do
-  %li.product-item
-    = link_to show_product_path(root.resource, item) do
-      - if item.cover_image.present?
-        .mega-dropdown-image
-          = image_variant_tag item.cover_image, :postcard
-      .mega-dropdown-text
-        %h3= item

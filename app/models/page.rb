@@ -120,51 +120,26 @@ class Page < ActiveRecord::Base
     content
   end
 
-  # Navigation pages and category menu pages contain items.
-  def contained_items
-    case
-    when dropdown?
-      children
-    when category? && resource.present?
-      if resource.leaf?
-        resource.products.visible.sorted(resource.product_scope)
-      else
-        resource.children.visible
-      end
-    else nil
-    end
-  end
-
   # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
     "pages/#{purpose}"
   end
 
-  # Path to partials to render the contained items of a category menu.
-  # In most cases the items are categories, but for leaf categories,
-  # products are rendered.
-  def contained_item_partial_path
-    return 'products' if resource.present? && resource.leaf?
-    'categories'
-  end
-
   # Path to a page object depends on its purpose. Route and primary pages
-  # use plain page routes, product link pages point to the target product.
-  # Navigation pages point to their first child, category menu pages point
-  # to their target, or first child if target is nil.
+  # use plain page routes, product/category/promotion pages point to their
+  # resource. Dropdown and megamenu pages point to their first child.
   def path
     case
     when route? || primary?
       show_page_path(self)
+    when category?
+      show_category_path(resource)
     when product?
       show_product_path(resource.category, resource)
     when promotion?
       show_promotion_path(resource)
-    when dropdown?
+    when dropdown? || megamenu?
       children.first.path
-    when category?
-      category = resource || store.first_category
-      category.present? ? show_category_path(category) : nil
     else nil
     end
   end

@@ -1,2 +1,4 @@
-%li{class: !navmenu && active_link_to_class(route.path, active: route.active_link_options)}
-  = link_to route, route.path
+%li.route{class: active_link_to_class(route.path, active: route.active_link_options)}
+  = link_to route.path do
+    .page-title
+      = route
