@@ -131,7 +131,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_categories
-      @live_categories = current_store.categories.live
+      @live_categories = current_store.categories.live.order(:lft)
       @categories = @live_categories.visible.roots
     end
 
