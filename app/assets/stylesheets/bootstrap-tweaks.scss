@@ -101,6 +101,11 @@ body {
   span { font-size: 14px; }
 }
 
+/* Suppress page images on navigation bars */
+.navbar-nav > li > a > .page-image {
+  display: none;
+}
+
 #cart-badge { background-color: $brand-primary; }
 
 /* Adding .responsive hides a nav on mobile */
