@@ -157,11 +157,6 @@ class StoreController < ApplicationController
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
-      # FIXME: this kludge uses the page slug as a category slug,
-      #        which works for very limited cases
-      if @page.category?
-        return redirect_to show_category_path(@page)
-      end
     end
 
     # Find the products visible in the currently set category.
