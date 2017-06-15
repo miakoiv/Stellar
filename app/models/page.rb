@@ -36,7 +36,7 @@ class Page < ActiveRecord::Base
     'promotion' => {icon: 'tag', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
-    'dropdown' => {icon: 'caret-down'},
+    'dropdown' => {icon: 'files-o'},
     'megamenu' => {icon: 'window-maximize'},
     'template' => {icon: 'file-o', appearance: 'warning'},
   }.freeze
