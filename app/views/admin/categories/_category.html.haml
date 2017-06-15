@@ -13,9 +13,9 @@
   - if current_user.can_update?(Category)
     = link_to icon('edit', t('actions.edit')), edit_admin_category_path(category),
         class: 'btn btn-default btn-xs'
-  - if current_user.can_delete?(Category)
+  - if current_user.can_delete?(category)
     = link_to icon('remove', t('actions.delete')), admin_category_path(category),
-        method: :delete, class: 'btn btn-xs btn-danger',
+        method: :delete, class: 'btn btn-danger btn-xs',
         data: {confirm: t('actions.confirm.body',
           klass: Category.model_name.human, name: category.name),
           'confirm-title': t('actions.confirm.title'),

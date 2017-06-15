@@ -14,8 +14,8 @@ class CategoryAuthorizer < ApplicationAuthorizer
     user.has_cached_role?(:category_editor)
   end
 
-  def self.deletable_by?(user)
+  def deletable_by?(user)
+    return false if resource.children_count > 0
     user.has_cached_role?(:category_editor)
   end
-
 end
