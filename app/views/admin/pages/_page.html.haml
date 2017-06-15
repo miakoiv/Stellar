@@ -14,7 +14,7 @@
         class: 'btn btn-default btn-xs'
   - if current_user.can_delete?(page)
     = link_to icon('remove', t('actions.delete')), admin_page_path(page),
-        method: :delete, class: 'btn btn-xs btn-danger',
+        method: :delete, class: 'btn btn-danger btn-xs',
         data: {confirm: t('actions.confirm.body',
           klass: Page.model_name.human, name: page.title),
           'confirm-title': t('actions.confirm.title'),
