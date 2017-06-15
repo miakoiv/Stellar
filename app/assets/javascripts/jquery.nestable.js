@@ -214,7 +214,85 @@
             this.el.trigger('destroy-nestable');
         },
 
+        add: function (item)
+        {
+            var listClassSelector = '.' + this.options.listClass;
+            var tree = $(this.el).children(listClassSelector);
+
+            if (item.parent_id !== undefined) {
+                tree = tree.find('[data-id="' + item.parent_id + '"]');
+                delete item.parent_id;
+
+                if (tree.children(listClassSelector).length === 0) {
+                    tree = tree.append(this.options.listRenderer('', this.options))
+                }
+
+                tree = tree.find(listClassSelector);
+            }
+
+            tree.append(this._buildItem(item, this.options));
+        },
+
+        replace: function (item)
+        {
+            var html = this._buildItem(item, this.options);
+
+            this._getItemById(item.id)
+                .html(html);
+        },
+
+        remove: function (itemId)
+        {
+            var options = this.options;
+            var buttonsSelector = '[data-action="expand"], [data-action="collapse"]';
+
+            this._getItemById(itemId)
+                .remove();
+
+            // remove empty children lists
+            var emptyListsSelector = '.' + options.listClass + ':not(:has(*))';
+            $(this.el).find(emptyListsSelector).remove();
+
+            // remove buttons if parents do not have children
+            $(this.el).find(buttonsSelector).each(function() {
+                var siblings = $(this).siblings('.' + options.listClass);
+                if (siblings.length === 0) {
+                    $(this).remove();
+                }
+            });
+        },
+
+        _getItemById: function(itemId) {
+            return $(this.el).children('.' + this.options.listClass)
+                .find('[data-id="' + itemId + '"]');
+        },
+
         _build: function() {
+            var json = this.options.json;
+
+            if(typeof json === 'string') {
+                json = JSON.parse(json);
+            }
+
+            $(this.el).html(this._buildList(json, this.options));
+        },
+
+        _buildList: function(items, options) {
+            if(!items) {
+                return '';
+            }
+
+            var children = '';
+            var that = this;
+
+            $.each(items, function(index, sub) {
+                children += that._buildItem(sub, options);
+            });
+
+            return options.listRenderer(children, options);
+        },
+
+        _buildItem: function(item, options) {
             function escapeHtml(text) {
                 var map = {
                     '&': '&amp;',
@@ -274,37 +352,13 @@
                 return data_attrs;
             }
 
-            function buildList(items, options) {
-                if(!items) {
-                    return '';
-                }
+            var item_attrs = createDataAttrs(item);
+            item_attrs["class"] = createClassesString(item, options);
 
-                var children = '';
+            var content = options.contentCallback(item);
+            var children = this._buildList(item.children, options);
 
-                $.each(items, function(index, sub) {
-                    children += buildItem(sub, options);
-                });
-
-                return options.listRenderer(children, options);
-            }
-
-            function buildItem(item, options) {
-                var item_attrs = createDataAttrs(item);
-                item_attrs["class"] = createClassesString(item, options);
-
-                var content = options.contentCallback(item);
-                var children = buildList(item.children, options);
-
-                return options.itemRenderer(item_attrs, content, children, options, item);
-            }
-
-            var json = this.options.json;
-
-            if(typeof json == 'string') {
-                json = JSON.parse(json);
-            }
-
-            $(this.el).html(buildList(json, this.options));
+            return options.itemRenderer(item_attrs, content, children, options, item);
         },
 
         serialize: function() {
@@ -375,6 +429,102 @@
 
         serialise: function() {
             return this.serialize();
+        },
+        
+        toHierarchy: function(options) {
+
+            var o = $.extend({}, this.options, options),
+                sDepth = o.startDepthCount || 0,
+                ret = [];
+
+            $(this.element).children(o.items).each(function() {
+                var level = _recursiveItems(this);
+                ret.push(level);
+            });
+
+            return ret;
+
+            function _recursiveItems(item) {
+                var id = ($(item).attr(o.attribute || 'id') || '').match(o.expression || (/(.+)[-=_](.+)/));
+                if (id) {
+                    var currentItem = {
+                        "id": id[2]
+                    };
+                    if ($(item).children(o.listType).children(o.items).length > 0) {
+                        currentItem.children = [];
+                        $(item).children(o.listType).children(o.items).each(function() {
+                            var level = _recursiveItems(this);
+                            currentItem.children.push(level);
+                        });
+                    }
+                    return currentItem;
+                }
+            }
+        },
+
+        toArray: function() {
+
+            var o = $.extend({}, this.options, this),
+                sDepth = o.startDepthCount || 0,
+                ret = [],
+                left = 2,
+                list = this,
+                element = list.el.find(list.options.listNodeName).first();
+
+            var items = element.children(list.options.itemNodeName);
+            items.each(function() {
+                left = _recursiveArray($(this), sDepth + 1, left);
+            });
+
+            ret = ret.sort(function(a, b) {
+                return (a.left - b.left);
+            });
+
+            return ret;
+
+            function _recursiveArray(item, depth, left) {
+
+                var right = left + 1,
+                    id,
+                    pid;
+                var new_item = item.children(o.options.listNodeName).children(o.options.itemNodeName); /// .data()
+
+                if (item.children(o.options.listNodeName).children(o.options.itemNodeName).length > 0) {
+                    depth++;
+                    item.children(o.options.listNodeName).children(o.options.itemNodeName).each(function() {
+                        right = _recursiveArray($(this), depth, right);
+                    });
+                    depth--;
+                }
+
+                id = item.data().id;
+
+
+                if (depth === sDepth + 1) {
+                    pid = o.rootID;
+                } else {
+
+                    var parentItem = (item.parent(o.options.listNodeName)
+                        .parent(o.options.itemNodeName)
+                        .data());
+                    pid = parentItem.id;
+
+                }
+
+                if (id) {
+                    ret.push({
+                        "id": id,
+                        "parent_id": pid,
+                        "depth": depth,
+                        "left": left,
+                        "right": right
+                    });
+                }
+
+                left = right + 1;
+                return left;
+            }
+
         },
 
         reset: function() {
@@ -725,7 +875,7 @@
 
     };
 
-    $.fn.nestable = function(params) {
+    $.fn.nestable = function(params, val) {
         var lists = this,
             retval = this;
 
@@ -745,7 +895,11 @@
             }
             else {
                 if(typeof params === 'string' && typeof plugin[params] === 'function') {
-                    retval = plugin[params]();
+                    if (typeof val !== 'undefined') {
+                        retval = plugin[params](val);
+                    }else{
+                        retval = plugin[params]();
+                    }
                 }
             }
         });
