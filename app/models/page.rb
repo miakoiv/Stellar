@@ -74,7 +74,7 @@ class Page < ActiveRecord::Base
 
   #---
   def can_have_children?
-    header? || footer? || dropdown? || megamenu?
+    category? || header? || footer? || dropdown? || megamenu?
   end
 
   def can_have_content?
