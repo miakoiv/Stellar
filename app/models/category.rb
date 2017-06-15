@@ -8,7 +8,7 @@ class Category < ActiveRecord::Base
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
   acts_as_nested_set scope: :store,
-                     dependent: :nullify,
+                     dependent: :destroy,
                      counter_cache: :children_count,
                      touch: true
 
