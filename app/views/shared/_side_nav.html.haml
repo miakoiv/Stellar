@@ -14,7 +14,7 @@
   %ul.nav.navmenu-nav
     = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
 
-- if @footer.present? && @footer.children.any?
+- if @footer.present? && @footer.children_count > 0
   .navmenu-title
   %ul.nav.navmenu-nav
     = render partial: @footer.children, locals: {navmenu: true}

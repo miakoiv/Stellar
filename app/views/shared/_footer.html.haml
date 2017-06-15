@@ -1,7 +1,7 @@
 .container
   .row
     .col-xs-12.col-sm-5.col-sm-push-4.bordered
-      - if @footer.present? && @footer.children.any?
+      - if @footer.present? && @footer.children_count > 0
         %nav.navmenu
           %ul.nav.navmenu-nav
             = render partial: @footer.children, locals: {navmenu: true}

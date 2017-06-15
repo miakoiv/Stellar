@@ -10,7 +10,7 @@
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       = render partial: 'shared/main_nav'
     #content-wrap
-      - if current_store.detach_menu? && @header.children.any?
+      - if current_store.detach_menu? && @header.children_count > 0
         %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
           .container
             %ul.nav.navbar-nav.responsive
