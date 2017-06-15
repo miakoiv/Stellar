@@ -9,9 +9,10 @@
     = render partial: 'nested_list_item', collection: @pages, as: :page
 
 :coffee
-  $('.dd').nestable().bind 'change', ->
+  $('.dd').nestable().on 'change', ->
+    data = {rearrange: {pages: $(this).nestable('serialize')}}
     $.ajax
       type: 'POST'
       url: '#{rearrange_admin_pages_path}'
-      data: JSON.stringify {rearrange: {pages: $(this).nestable('serialize')}}
+      data: JSON.stringify data
       contentType: 'application/json; charset=utf-8'
