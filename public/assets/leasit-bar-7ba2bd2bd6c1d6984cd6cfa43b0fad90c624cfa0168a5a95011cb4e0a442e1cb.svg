@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 500 60.000002"
+   height="48pt"
+   width="400pt">
+  <defs
+     id="defs4">
+    <clipPath
+       id="clipPath4446"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         id="path4448"
+         d="m 255.28125,976.27623 c -1.35,0 -2.71797,0.11289 -4.10547,0.33789 l 0,40.44338 c 1.3875,0.225 2.77461,0.3379 4.16211,0.3379 1.3125,0 2.68242,-0.1129 4.10742,-0.3379 l 0,-40.44338 c -1.425,-0.225 -2.81406,-0.33789 -4.16406,-0.33789 z m 11.34961,0.33789 c -0.225,1.125 -0.33594,2.26719 -0.33594,3.42969 0,1.2375 0.11094,2.41992 0.33594,3.54492 l 10.07031,0 0,33.46877 c 0.75,0.1126 1.48086,0.1873 2.19336,0.2246 0.75,0.037 1.44258,0.057 2.08008,0.057 0.6375,0 1.29375,-0.038 1.96875,-0.1132 0.675,-0.038 1.35039,-0.093 2.02539,-0.168 l 0,-33.46877 10.06836,0 c 0.225,-1.125 0.33789,-2.30742 0.33789,-3.54492 0,-1.1625 -0.11289,-2.30469 -0.33789,-3.42969 l -28.40625,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:56.25px;line-height:100%;font-family:Aller;-inkscape-font-specification:'Aller Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.875;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </clipPath>
+  </defs>
+  <g
+     transform="translate(-82.500004,-39.999994)"
+     style="display:inline"
+     id="layer5">
+    <g
+       id="flowRoot4194"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#99000f;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="matrix(5.9210526,0,0,9.9337748,-213.10937,243.85306)">
+      <path
+         id="path4207"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Aller Display';-inkscape-font-specification:'Aller Display';fill:#99000f;fill-opacity:1"
+         d="m 49.925139,-17.481208 c 0,-0.906667 0.12,-1.92 0.36,-3.04 l 83.764451,0 c 0.13333,0.56 0.21333,1.093333 0.24,1.6 0.0533,0.48 0.08,0.946667 0.08,1.4 0,0.453333 -0.0267,0.933333 -0.08,1.44 -0.0267,0.506667 -0.10667,1.04 -0.24,1.6 l -83.764451,0 c -0.24,-1.12 -0.36,-2.12 -0.36,-3 z" />
+    </g>
+  </g>
+  <metadata
+     id="metadata4742">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
