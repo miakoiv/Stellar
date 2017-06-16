@@ -20,6 +20,9 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'execjs'
 
+# Asset precompilation in parallel
+gem 'turbo-sprockets-rails4'
+
 # ActiveJob backend and its runner daemon
 gem 'delayed_job_active_record'
 gem 'daemons'
