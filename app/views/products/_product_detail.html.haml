@@ -88,3 +88,6 @@
             %h4.modal-title= t('store.offer_requisites')
           .modal-body.requisite-products
             %ul
+          .modal-footer
+            = link_to cart_path, class: 'btn btn-primary' do
+              = icon('shopping-cart', t('store.continue_to_cart'))

@@ -233,6 +233,7 @@ fi:
     component_entries: Sisältyvät osat
     add_to_cart: Lisää koriin
     offer_requisites: Muista myös nämä
+    continue_to_cart: Jatka ostoskoriin
     empty_cart: Ostoskorisi on tyhjä.
     go_shopping: Ostoksille!
     order_history: Tilaushistoria
