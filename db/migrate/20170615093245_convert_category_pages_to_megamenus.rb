@@ -22,6 +22,16 @@ class ConvertCategoryPagesToMegamenus < ActiveRecord::Migration
               resource: item
             )
             item_page.move_to_child_of(page)
+            if item.is_a?(Category) && item.children_count > 0
+              item.children.visible.each do |child|
+                child_page = store.pages.create(
+                  purpose: 'category',
+                  title: child.to_s,
+                  resource: child
+                )
+                child_page.move_to_child_of(item_page)
+              end
+            end
           end
           page.update(purpose: 'megamenu', resource: nil)
         end
