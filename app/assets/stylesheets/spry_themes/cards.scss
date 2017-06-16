@@ -16,63 +16,54 @@ $footer-bg: #d4d4d4;
 
 .navbar-nav > li > .mega-dropdown-menu {
   background-color: $navbar-default-bg;
+}
+.mega-dropdown-menu .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.mega-dropdown-menu .row > li {
+  @extend .col-sm-3, .col-md-2;
+  margin-bottom: 20px;
+}
+.mega-dropdown-menu li a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out 0s;
+}
+.mega-dropdown-menu li a:hover {
+  .page-image { @include box-shadow(0 0 6px $link-color); }
+}
+.mega-dropdown-menu .page-image {
+  @extend .thumbnail;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  margin-bottom: 0;
 
-  .container {
-    .row {
-      display: flex;
-      flex-wrap: wrap;
+  img { @extend .img-contain, .img-center; }
+}
+.mega-dropdown-menu .page-title {
+  margin-top: 0.333em;
+  margin-bottom: 0.333em;
+}
+.mega-dropdown-menu li ul {
+  list-style: none;
+  padding-left: $grid-gutter-width/2;
+  font-size: $font-size-small;
+}
+.mega-dropdown-menu li ul li {
+  position: relative;
+  padding-left: 1em;
 
-      > li {
-        @extend .col-sm-3, .col-md-2;
-        margin-bottom: 20px;
-
-        > a {
-          text-decoration: none;
-
-          &:hover .mega-dropdown-image img {
-            @include box-shadow(0 0 6px $link-color);
-          }
-          .mega-dropdown-image {
-            position: relative;
-            height: 0;
-            padding-bottom: 100%;
-
-            img { @extend .img-thumbnail, .img-contain, .img-center; }
-          }
-          .mega-dropdown-text {
-            h3 {
-              font-size: $font-size-base;
-              margin-top: 0;
-              margin-bottom: 0.333em;
-              padding-top: 0.333em;
-            }
-          }
-        }
-        ul {
-          list-style: none;
-          padding-left: $grid-gutter-width/2;
-          font-size: $font-size-small;
-
-          > li {
-            position: relative;
-            padding-left: 1em;
-
-            &:before {
-              @extend .fa;
-              content: "\f0da";
-              display: block;
-              position: absolute;
-              left: 0;
-              font-size: $font-size-base;
-            }
-
-            > a { text-decoration: none; }
-          }
-        }
-      }
-    }
+  &:before {
+    @extend .fa;
+    content: "\f0da";
+    display: block;
+    position: absolute;
+    left: 0;
+    font-size: $font-size-base;
   }
 }
+.mega-dropdown-menu li ul li a { text-decoration: none; }
 
 #static-wrap {
   .container {
