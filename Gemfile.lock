@@ -199,7 +199,6 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-    parallel (1.11.2)
     public_suffix (2.0.5)
     rack (1.6.5)
     rack-test (0.6.3)
@@ -286,10 +285,6 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.6)
-    turbo-sprockets-rails4 (1.0.0)
-      parallel (~> 1.0)
-      railties (>= 4, < 5)
-      sprockets (~> 3.0)
     twitter-bootstrap-rails-confirm (1.0.6)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -373,7 +368,6 @@ DEPENDENCIES
   spring
   stickykit-rails
   summernote-rails
-  turbo-sprockets-rails4
   twitter-bootstrap-rails-confirm
   uglifier (>= 1.3.0)
   unobtrusive_flash (>= 3)
