@@ -94,18 +94,6 @@ $border-radius-small: 0;
 .mega-dropdown-menu li a:hover {
   .page-image { transform: scale(1.05); }
 }
-.mega-dropdown-menu .page-image {
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  transition: all 0.4s ease-in-out 0s;
-
-  img { @extend .img-contain, .img-center; }
-}
-.mega-dropdown-menu .page-title {
-  margin-top: 10px;
-  color: $brand-primary;
-}
 .mega-dropdown-menu li ul {
   list-style: none;
   padding-left: $grid-gutter-width/2;
@@ -130,6 +118,19 @@ $border-radius-small: 0;
 
   &:hover { color: $brand-primary; }
 }
+.mega-dropdown-menu .row > li > a > .page-image {
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  transition: all 0.4s ease-in-out 0s;
+
+  img { @extend .img-contain, .img-center; }
+}
+.mega-dropdown-menu .row > li > a > .page-title {
+  margin-top: 10px;
+  color: $brand-primary;
+}
+.mega-dropdown-menu li ul li a .page-image { display: none; }
 
 /*
   on extra small screens the navbar will collapse

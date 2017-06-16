@@ -32,19 +32,6 @@ $footer-bg: #d4d4d4;
 .mega-dropdown-menu li a:hover {
   .page-image { @include box-shadow(0 0 6px $link-color); }
 }
-.mega-dropdown-menu .page-image {
-  @extend .thumbnail;
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
-  margin-bottom: 0;
-
-  img { @extend .img-contain, .img-center; }
-}
-.mega-dropdown-menu .page-title {
-  margin-top: 0.333em;
-  margin-bottom: 0.333em;
-}
 .mega-dropdown-menu li ul {
   list-style: none;
   padding-left: $grid-gutter-width/2;
@@ -64,6 +51,21 @@ $footer-bg: #d4d4d4;
   }
 }
 .mega-dropdown-menu li ul li a { text-decoration: none; }
+
+.mega-dropdown-menu .row > li > a > .page-image {
+  @extend .thumbnail;
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  margin-bottom: 0;
+
+  img { @extend .img-contain, .img-center; }
+}
+.mega-dropdown-menu .row > li > a > .page-title {
+  margin-top: 0.333em;
+  margin-bottom: 0.333em;
+}
+.mega-dropdown-menu li ul li a .page-image { display: none; }
 
 #static-wrap {
   .container {
