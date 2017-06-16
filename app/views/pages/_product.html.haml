@@ -1,5 +1,6 @@
 %li{class: active_link_to_class(product.path)}
   = link_to product.path do
+    - if product.resource.cover_image.present?
     .page-image
       = image_variant_tag product.resource.cover_image, navmenu ? :icon : :matchbox
     .page-title
