@@ -40,8 +40,6 @@
           dialogsFade: true
           disableDragAndDrop: true
           callbacks:
-            onInit: ->
-              $(this).summernote 'focus'
             onImageUpload: (files) ->
               sendAttachment files[0], (data) =>
                 p = $('<p>').append $('<img>', {

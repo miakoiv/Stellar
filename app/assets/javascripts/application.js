@@ -41,7 +41,8 @@
 //= require parallax.min.js
 //= require numbro.min.js
 //= require languages.min.js
-//= require jquery.grideditor.min.js
+//= require jquery.grideditor.js
+//= require jquery.grideditor.summernote.js
 //= require jquery.grideditor.settings.js
 //= require Chart.min.js
 //= require vis
