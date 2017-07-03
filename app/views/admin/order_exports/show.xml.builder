@@ -1,5 +1,6 @@
 xml.instruct!
 xml.order do
+  xml.orderNumber @order.number
   xml.storeNumber @order.store.erp_number
   xml.customerReference @order.our_reference
   xml.ourReference @order.external_identifier
