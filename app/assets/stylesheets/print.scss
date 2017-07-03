@@ -17,7 +17,7 @@
   #content-wrap {
     flex: none;
     position: static;
-    padding: 0;
+    padding-top: 0 !important;
     overflow: auto;
   }
 
@@ -93,7 +93,7 @@
     content: "";
   }
 
-  .product-actions, .documents, .footer, #tawkchat-iframe-container {
+  .product-actions, .documents, .footer {
     display: none !important;
   }
 }
