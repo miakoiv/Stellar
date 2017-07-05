@@ -2,7 +2,10 @@
   .product-detail
     = render partial: 'products/product_detail', object: @product, as: :product
 
+- if @category.present?
+  :coffee
+    $('.category').deactivate()
+    $("##{dom_id(@category)}").activate()
+
 :coffee
-  $('.category').deactivate()
-  $("##{dom_id(@category)}").activate()
   $('.product-detail').initialize()
