@@ -21,7 +21,9 @@ class Product < ActiveRecord::Base
     # Virtual products are intangible, such as services
     virtual: 5,
     # Internal products are implied costs and other surcharges
-    internal: 6
+    internal: 6,
+    # Component products may not be purchased separately
+    component: 7
   }
 
   PURPOSE_ICONS = {
@@ -32,6 +34,7 @@ class Product < ActiveRecord::Base
     'composite' => 'object-group',
     'virtual' => 'magic',
     'internal' => 'link',
+    'component' => 'puzzle-piece'
   }.freeze
 
   # Monetize product attributes.

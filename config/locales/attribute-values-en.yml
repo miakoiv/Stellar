@@ -32,6 +32,7 @@ en:
           composite: composite product
           virtual: virtual product
           internal: internal cost
+          component: product component
         sorting:
           manual: manually
           alphabetical: alphabetical

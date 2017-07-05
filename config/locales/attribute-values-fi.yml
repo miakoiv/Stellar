@@ -32,6 +32,7 @@ fi:
           composite: yhdistelmätuote
           virtual: näennäinen tuote
           internal: sisäinen kustannus
+          component: tuotteen osa
         sorting:
           manual: käsin
           alphabetical: aakkosjärjestys
