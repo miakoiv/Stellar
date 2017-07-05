@@ -1,4 +1,4 @@
 %ol.breadcrumb
-  - @category.self_and_ancestors.each do |ancestor|
+  - @category.self_and_ancestors.live.each do |ancestor|
     %li[ancestor]<
       = link_to ancestor, show_category_path(ancestor), data: {push: 'partial', target: '#store-body'}
