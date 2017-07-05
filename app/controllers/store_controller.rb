@@ -63,7 +63,7 @@ class StoreController < ApplicationController
   def search
     @query = saved_search_query('product', 'product_search')
     @search = ProductSearch.new(search_params)
-    @products = @search.results.page(params[:page])
+    @products = @search.results.visible.page(params[:page])
     @properties = current_store.properties.searchable
 
     respond_to :js, :html
@@ -73,7 +73,7 @@ class StoreController < ApplicationController
   def lookup
     @query = params[:product_search]
     @search = ProductSearch.new(search_params)
-    @products = @search.results.limit(Product::INLINE_SEARCH_RESULTS)
+    @products = @search.results.visible.limit(Product::INLINE_SEARCH_RESULTS)
 
     respond_to :js
   end
@@ -94,7 +94,7 @@ class StoreController < ApplicationController
     @query = params[:product_search] || {}
     @filter_enabled = @query.present?
     @search = ProductSearch.new(filter_params)
-    @products = @search.results.sorted(@category.product_scope)
+    @products = @search.results.visible.sorted(@category.product_scope)
   end
 
   # GET /promotion/:promotion_id
