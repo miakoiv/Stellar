@@ -238,6 +238,8 @@ en:
         purpose: Page type
         parent_id: Parent page
         resource_id: Target
+        live: Enabled
+        not_live: Page is disabled
         title: Title
         slug: Target
         content: Content

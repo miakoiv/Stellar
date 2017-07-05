@@ -29,7 +29,7 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    entry_point = @header.descendants.entry_point
+    entry_point = @header.descendants.live.entry_point
     redirect_to entry_point.present? ? entry_point.path : front_path
   end
 

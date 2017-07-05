@@ -238,6 +238,8 @@ fi:
         purpose: Sivun tyyppi
         parent_id: Pääsivu
         resource_id: Kohde
+        live: Aktiivinen
+        not_live: Sivu ei aktiivinen
         title: Otsake
         slug: Kohde
         content: Sisältö

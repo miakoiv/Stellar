@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615093245) do
+ActiveRecord::Schema.define(version: 20170704123113) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(version: 20170615093245) do
     t.integer  "rgt",            limit: 4
     t.integer  "depth",          limit: 4,     default: 0,    null: false
     t.integer  "children_count", limit: 4,     default: 0,    null: false
+    t.boolean  "live",                         default: true, null: false
     t.string   "title",          limit: 255
     t.string   "slug",           limit: 255,                  null: false
     t.text     "content",        limit: 65535
