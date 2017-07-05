@@ -5,7 +5,7 @@
     = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   - if @product.live?
-    = link_to show_product_path(@product.category, @product), class: 'btn btn-default' do
+    = link_to show_product_path(@product), class: 'btn btn-default' do
       = icon('eye', t('actions.view'))
   %h1
     = icon('cube', @product.title)

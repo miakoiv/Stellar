@@ -189,10 +189,10 @@ class Product < ActiveRecord::Base
     live? && (vanilla? || variant? || bundle? || composite? || virtual?)
   end
 
-  # Finds the first live variant for this product in the scope of given category.
+  # Finds the first live variant for this product.
   # Returns self if not a master product or there are no variants.
-  def first_variant(category)
-    master? && variants.live.sorted(category.product_scope).first || self
+  def first_variant
+    master? && variants.live.sorted.first || self
   end
 
   def sibling_variants

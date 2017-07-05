@@ -10,7 +10,7 @@
       = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
     %strong
       - if order_item.real? && order_item.live?
-        = link_to order_item.product_title, show_product_path(order_item.product.category, order_item.product)
+        = link_to order_item.product_title, show_product_path(order_item.product)
       - else
         = order_item.product_title
     = order_item.product_subtitle

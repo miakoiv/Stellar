@@ -4,7 +4,7 @@
       .box-thumbnail
         = image_variant_tag product.cover_image(current_store.list_image_type), :thumbnail
     %td.product-title
-      = link_to show_product_path(product.category, product) do
+      = link_to show_product_path(product) do
         %strong= product.title
         = product.subtitle
       .small= product.codes

@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   # Category, promotion and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category
   get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
-  get '/product/:category_id/:product_id', to: 'store#show_product', as: :show_product
+  get '/product/:product_id(/:category_id)', to: 'store#show_product', as: :show_product
 
   # These routes can be reached via /:slug
   get '/front', to: 'store#front', as: :front

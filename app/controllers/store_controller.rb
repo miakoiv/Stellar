@@ -21,7 +21,7 @@ class StoreController < ApplicationController
   before_action :set_categories,
     only: [:front, :search, :show_page, :cart, :show_category, :show_promotion, :show_product]
   before_action :find_page, only: [:show_page]
-  before_action :find_category, only: [:show_category, :show_product]
+  before_action :find_category, only: [:show_category]
   before_action :find_promotion, only: [:show_promotion]
   before_action :find_product, only: [:show_product]
   before_action :enable_navbar_search,
@@ -102,8 +102,13 @@ class StoreController < ApplicationController
     @products = @promotion.products.visible
   end
 
-  # GET /product/:category_id/:product_id
+  # GET /product/:product_id(/:category_id)
   def show_product
+    @category = if params[:category_id].present?
+      @live_categories.friendly.find(params[:category_id])
+    else
+      @product.category
+    end
   end
 
   # POST /product/:product_id/order
@@ -139,15 +144,13 @@ class StoreController < ApplicationController
       @promotion = current_store.promotions.active.friendly.find(params[:promotion_id])
     end
 
-    # Find product by friendly id in `product_id`, including history.
+    # Find product by friendly id in `product_id`, redirecting to its
+    # first variant if applicable.
     def find_product
       selected = current_store.products.live.friendly.find(params[:product_id])
-      if request.path != show_product_path(@category, selected)
-        return redirect_to show_product_path(@category, selected), status: :moved_permanently
-      end
-      @product = selected.first_variant(@category)
+      @product = selected.first_variant
       if @product != selected
-        return redirect_to show_product_path(@category, @product)
+        return redirect_to show_product_path(@product, @category)
       end
     end
 

@@ -137,7 +137,7 @@ class Page < ActiveRecord::Base
     when category?
       show_category_path(resource)
     when product?
-      show_product_path(resource.category, resource)
+      show_product_path(resource)
     when promotion?
       show_promotion_path(resource)
     when dropdown? || megamenu?
