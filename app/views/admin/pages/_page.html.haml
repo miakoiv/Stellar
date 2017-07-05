@@ -1,10 +1,13 @@
 - if page.movable?
   .dd-handle= drag_handle
-- if page.route?
-  .dd-widget
-    %code= "/#{page.slug}"
-%span.dd-icon= icon(page.icon)
-= page
+.dd-title
+  - if page.route?
+    .dd-widget
+      %code= "/#{page.slug}"
+  .dd-icon= icon(page.icon)
+  = page
+  - unless page.live?
+    .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})
 .dd-actions
   - if page.can_have_content?
     = link_to icon('eye', t('actions.view')), show_page_path(page),
