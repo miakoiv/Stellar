@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
   def index
     @query = saved_search_query('product', 'admin_product_search')
     @search = ProductSearch.new(search_params)
-    @products = @search.results.page(params[:page])
+    @products = @search.results.alphabetical.page(params[:page])
   end
 
   # GET /admin/products/query.json?q=keyword
