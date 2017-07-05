@@ -24,7 +24,15 @@ class Product < ActiveRecord::Base
     internal: 6
   }
 
-  PURPOSE_ICONS = [nil, 'square', 'sitemap', 'archive', 'object-group', 'magic', 'link'].freeze
+  PURPOSE_ICONS = {
+    'vanilla' => nil,
+    'master' => 'square',
+    'variant' => 'square-o',
+    'bundle' => 'archive',
+    'composite' => 'object-group',
+    'virtual' => 'magic',
+    'internal' => 'link',
+  }.freeze
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true
@@ -412,7 +420,7 @@ class Product < ActiveRecord::Base
 
   # Icon name based on purpose.
   def icon
-    PURPOSE_ICONS[Product.purposes[purpose]]
+    PURPOSE_ICONS[purpose]
   end
 
   def codes
