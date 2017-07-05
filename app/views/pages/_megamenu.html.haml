@@ -5,7 +5,7 @@
         = megamenu
         %span.caret
       %ul.nav.navmenu-nav
-        = render partial: megamenu.children, locals: {navmenu: true}
+        = render partial: megamenu.children.live, locals: {navmenu: true}
   - else
     %li.dropdown.mega-dropdown
       %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
@@ -14,4 +14,4 @@
       %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
         .container
           .row
-            = render partial: megamenu.children, locals: {navmenu: false}
+            = render partial: megamenu.children.live, locals: {navmenu: false}

@@ -14,7 +14,7 @@
         %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
           .container
             %ul.nav.navbar-nav.responsive
-              = render partial: @header.children, locals: {navmenu: false}
+              = render partial: @header.children.live, locals: {navmenu: false}
 
       = yield
 

@@ -1,5 +1,5 @@
 %ul.nav.navmenu-nav
-  = render partial: @header.children, locals: {navmenu: true}
+  = render partial: @header.children.live, locals: {navmenu: true}
 
 - if user_signed_in? && !current_user.guest?
   .navmenu-title
@@ -17,4 +17,4 @@
 - if @footer.present? && @footer.children_count > 0
   .navmenu-title
   %ul.nav.navmenu-nav
-    = render partial: @footer.children, locals: {navmenu: true}
+    = render partial: @footer.children.live, locals: {navmenu: true}

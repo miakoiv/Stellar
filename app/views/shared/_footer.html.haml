@@ -4,7 +4,7 @@
       - if @footer.present? && @footer.children_count > 0
         %nav.navmenu
           %ul.nav.navmenu-nav
-            = render partial: @footer.children, locals: {navmenu: true}
+            = render partial: @footer.children.live, locals: {navmenu: true}
     .col-xs-8.col-sm-4.col-sm-pull-5
       = render partial: 'shared/branding'
     .col-xs-4.col-sm-3

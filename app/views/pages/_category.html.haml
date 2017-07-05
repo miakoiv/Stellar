@@ -7,4 +7,4 @@
       = category
   - if category.children_count > 0
     %ul{class: navmenu && 'nav navmenu-nav'}
-      = render partial: category.children, locals: {navmenu: navmenu}
+      = render partial: category.children.live, locals: {navmenu: navmenu}
