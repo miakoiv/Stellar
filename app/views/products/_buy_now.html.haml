@@ -1,4 +1,4 @@
-- if can_shop? && may_shop_at?(@category) && !product.master?
+- if can_shop? && may_shop_at?(@category) && product.purchasable?
 
   - if product.available == 0
     - if product.available?

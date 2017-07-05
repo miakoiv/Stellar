@@ -32,7 +32,7 @@ class OrderItem < ActiveRecord::Base
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
 
   #---
-  delegate :live?, :real?, :virtual?, :internal?, to: :product
+  delegate :live?, :visible?, :real?, :virtual?, :internal?, to: :product
   delegate :includes_tax?, :approved?, :concluded?, to: :order
 
   #---

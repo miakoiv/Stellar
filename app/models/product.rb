@@ -110,12 +110,16 @@ class Product < ActiveRecord::Base
 
   scope :live, -> { where(live: true) }
 
-  # Products that are shown in storefront views. Vanilla and virtual products
-  # are directly purchasable, master products link to their first variant,
-  # while composite and bundle products will split into their components
-  # when purchased.
+  # Visible products are shown in storefront views. They include live
+  # vanilla, master, bundle, composite, and virtual products.
   scope :visible, -> {
-    live.where(purpose: purposes.slice(:vanilla, :master, :bundle, :composite, :virtual).values)
+    live.where(purpose: [0, 1, 3, 4, 5])
+  }
+
+  # Purchasable products can be added to the cart by the customer.
+  # These are live vanilla, variant, bundle, composite, and virtual products.
+  scope :purchasable, -> {
+    live.where(purpose: [0, 2, 3, 4, 5])
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -175,6 +179,14 @@ class Product < ActiveRecord::Base
   #---
   def real?
     !internal?
+  end
+
+  def visible?
+    live? && (vanilla? || master? || bundle? || composite? || virtual?)
+  end
+
+  def purchasable?
+    live? && (vanilla? || variant? || bundle? || composite? || virtual?)
   end
 
   # Finds the first live variant for this product in the scope of given category.
@@ -441,12 +453,10 @@ class Product < ActiveRecord::Base
 
   # Resets the live status of the product, according to these criteria:
   # - retail price is not nil (or it's a master product)
-  # - must have at least one live category
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
     update_columns(live: (master? || retail_price_cents.present?) &&
-      categories.live.any? &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
     touch
