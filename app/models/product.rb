@@ -109,7 +109,6 @@ class Product < ActiveRecord::Base
   scope :real, -> { where.not(purpose: purposes[:internal]) }
 
   scope :live, -> { where(live: true) }
-  scope :undead, -> { where(live: false) }
 
   # Products that are shown in storefront views. Vanilla and virtual products
   # are directly purchasable, master products link to their first variant,
@@ -174,8 +173,9 @@ class Product < ActiveRecord::Base
   end
 
   #---
-  def real?; !virtual? end
-  def undead?; !live? end
+  def real?
+    !internal?
+  end
 
   # Finds the first live variant for this product in the scope of given category.
   # Returns self if not a master product or there are no variants.

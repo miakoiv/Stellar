@@ -25,7 +25,6 @@ class OrderItem < ActiveRecord::Base
   default_scope { order(:priority) }
   scope :top_level, -> { where(parent_item_id: nil) }
   scope :live, -> { joins(:product).merge(Product.live) }
-  scope :undead, -> { joins(:product).merge(Product.undead) }
   scope :real, -> { joins(:product).merge(Product.real) }
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
@@ -33,7 +32,7 @@ class OrderItem < ActiveRecord::Base
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
 
   #---
-  delegate :live?, :undead?, :real?, :virtual?, :internal?, to: :product
+  delegate :live?, :real?, :virtual?, :internal?, to: :product
   delegate :includes_tax?, :approved?, :concluded?, to: :order
 
   #---
