@@ -7,7 +7,7 @@ class Admin::CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions rearrange: 'update', reorder_products: 'update'
-  authorize_actions_for Category
+  authorize_actions_for Category, except: [:destroy]
 
   layout 'admin'
 
@@ -66,7 +66,9 @@ class Admin::CategoriesController < ApplicationController
   # DELETE /admin/categories/1
   # DELETE /admin/categories/1.json
   def destroy
+    authorize_action_for @category
     @category.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_categories_path,
         notice: t('.notice', category: @category) }
