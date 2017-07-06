@@ -5,7 +5,8 @@
     = f.submit class: 'btn btn-primary'
 
 :coffee
-  Dropzone.options.newImage =
+  Dropzone.autoDiscover = false
+  $('#new_image').dropzone
     dictDefaultMessage: "#{I18n.t('dropzone.default_message')}"
     paramName: 'image[attachment]'
     init: ->
