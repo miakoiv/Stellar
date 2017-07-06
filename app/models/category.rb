@@ -20,16 +20,15 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :departments
 
   scope :live, -> { where(live: true) }
-  scope :visible, -> { where(live: true, hidden: false) }
 
   #---
   validates :name, presence: true
   validates :product_scope, presence: true
 
   #---
-  # Finds the first category with visible products.
+  # Finds the first live category with visible products.
   def self.first_with_products
-    find { |category| category.products.visible.any? }
+    live.find { |category| category.products.visible.any? }
   end
 
   #---
@@ -39,15 +38,11 @@ class Category < ActiveRecord::Base
     category == self || is_descendant_of?(category)
   end
 
-  def visible?
-    live? && !hidden?
-  end
-
-  # Finds the first descendant category with visible products if this one
+  # Finds the first live descendant category with visible products if this one
   # has none. Defaults to self if descendants contain no visible products.
   def first_with_products
     return self if products.visible.any?
-    first = descendants.first_with_products
+    first = descendants.live.first_with_products
     return first || self
   end
 

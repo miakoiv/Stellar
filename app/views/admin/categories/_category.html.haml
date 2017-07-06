@@ -2,9 +2,7 @@
 .dd-title
   = category
   - unless category.live?
-    .dd-widget= icon('warning', title: col(Category, :not_live), data: {toggle: 'tooltip'})
-  - if category.hidden?
-    .dd-widget= icon('eye-slash', title: col(Category, :hidden), data: {toggle: 'tooltip'})
+    .dd-widget= icon('eye-slash', title: col(Category, :not_live), data: {toggle: 'tooltip'})
 .dd-actions
   - if category.product_scope == 'manual'
     = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-xs'

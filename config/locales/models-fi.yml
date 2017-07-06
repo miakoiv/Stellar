@@ -126,7 +126,6 @@ fi:
         parent_id: Pääryhmä
         live: Aktiivinen
         not_live: Tuoteryhmä ei aktiivinen
-        hidden: Piilotettu
         name: Nimi
         subtitle: Alaotsikko
         product_scope: Tuotteiden järjestys

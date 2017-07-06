@@ -1,4 +1,4 @@
-%li.dd-item{data: {id: category.id}, class: !category.live? && 'dd-item-warning' || category.hidden? && 'text-muted'}
+%li.dd-item{data: {id: category.id}, class: !category.live? && 'dd-item-warning'}
   = render category
   - if category.children_count > 0
     %ol.dd-list

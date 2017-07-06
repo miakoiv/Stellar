@@ -132,7 +132,7 @@ class ApplicationController < ActionController::Base
 
     def set_categories
       @live_categories = current_store.categories.live.order(:lft)
-      @categories = @live_categories.visible.roots
+      @categories = @live_categories.roots
     end
 
     # Pricing group is set by a before_action. Changing the pricing group

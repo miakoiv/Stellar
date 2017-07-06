@@ -35,7 +35,7 @@ class StoreController < ApplicationController
 
   # GET /front
   def front
-    @category = @live_categories.visible.first_with_products
+    @category = @live_categories.first_with_products
     if @category.present?
       return redirect_to show_category_path(@category)
     end

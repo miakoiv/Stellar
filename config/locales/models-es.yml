@@ -126,7 +126,6 @@ es:
         parent_id: Categoria parental
         live: Habilitar
         not_live: La categoria está inhabilitada
-        hidden: Esconderlo
         name: Nombre
         product_scope: Variedad de productos
       component_entry:
