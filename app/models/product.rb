@@ -105,6 +105,8 @@ class Product < ActiveRecord::Base
   # Customer assets referring to this product.
   has_many :customer_assets
 
+  has_one :page, as: :resource
+
   # Real products are everything but internal costs.
   scope :real, -> { where.not(purpose: purposes[:internal]) }
 

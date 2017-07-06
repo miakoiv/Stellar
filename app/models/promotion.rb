@@ -18,6 +18,8 @@ class Promotion < ActiveRecord::Base
   has_one :promotion_handler, dependent: :destroy
   accepts_nested_attributes_for :promotion_handler
 
+  has_one :page, as: :resource, dependent: :destroy
+
   scope :active, -> { where '(promotions.first_date IS NULL OR promotions.first_date <= :today) AND (promotions.last_date IS NULL OR promotions.last_date >= :today)', today: Date.current }
 
   #---
