@@ -15,7 +15,6 @@ class Category < ActiveRecord::Base
   #---
   belongs_to :store
   has_and_belongs_to_many :products
-  belongs_to :banner, class_name: 'Page'
 
   # Categories may appear at any number of portal departments.
   has_and_belongs_to_many :departments
@@ -26,9 +25,6 @@ class Category < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :product_scope, presence: true
-
-  #---
-  after_save :reset_live_status_of_products!
 
   #---
   # Finds the first category with visible products.
@@ -74,11 +70,4 @@ class Category < ActiveRecord::Base
   def to_s
     name
   end
-
-  private
-    def reset_live_status_of_products!
-      products.each do |product|
-        product.reset_live_status!
-      end
-    end
 end

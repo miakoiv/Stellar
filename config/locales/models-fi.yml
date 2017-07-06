@@ -129,7 +129,6 @@ fi:
         hidden: Piilotettu
         name: Nimi
         subtitle: Alaotsikko
-        banner_id: Julistesivu
         product_scope: Tuotteiden järjestys
       component_entry:
         product_id: Tuote

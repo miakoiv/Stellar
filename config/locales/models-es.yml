@@ -128,7 +128,6 @@ es:
         not_live: La categoria está inhabilitada
         hidden: Esconderlo
         name: Nombre
-        banner_id: Página del Banner
         product_scope: Variedad de productos
       component_entry:
         product_id: Producto
