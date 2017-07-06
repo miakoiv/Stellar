@@ -7,10 +7,10 @@
         .col-sm-6.col-md-2
           .form-group
             = f.search_field :code, autocomplete: 'off', placeholder: col(Product, :code), class: 'form-control'
-        .col-sm-6.col-md-4
+        .col-sm-6.col-md-3
           .form-group
             = f.search_field :keyword, autocomplete: 'off', placeholder: col(Product, :title), class: 'form-control'
-        .col-sm-6.col-md-3
+        .col-sm-6.col-md-4
           .form-group
             = f.select :categories, current_user.category_options, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
         .col-sm-3.col-md-2
