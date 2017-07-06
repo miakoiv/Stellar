@@ -1,4 +1,3 @@
-#
 # When a promotion becomes active (or inactive), this job resets
 # the promoted price of all affected products.
 #

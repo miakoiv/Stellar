@@ -25,8 +25,10 @@ class Promotion < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
-  before_save :reset_products
-  before_destroy :reset_products
+
+  after_save :schedule_product_reset
+  after_save :reset_products
+  around_destroy :clean_up
 
   #---
   # These attributes allow adding products and categories en masse
@@ -102,18 +104,31 @@ class Promotion < ActiveRecord::Base
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
     end
 
-    # Called before save, all affected products have their promoted price reset.
-    # If the promotion becomes active/inactive in the future, an activation
-    # job is queued to handle it at the set date.
-    def reset_products
-      products.each do |product|
-        product.reset_promoted_price!
-      end
+    # Schedules PromotionActivationJob to reset promoted prices
+    # when the promotion is set to activate or deactivate.
+    def schedule_product_reset
       if activate_at && activate_at.future?
         PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
       end
       if deactivate_at && deactivate_at.future?
         PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
+      end
+    end
+
+    # Called after save, all affected products have their promoted price reset.
+    def reset_products
+      products.each do |product|
+        product.reset_promoted_price!
+      end
+    end
+
+    # Called around destroy, grab the affected products and reset their
+    # promoted prices after the promotion is gone.
+    def clean_up
+      affected_products = products
+      yield
+      affected_products.each do |product|
+        product.reset_promoted_price!
       end
     end
 end
