@@ -3,6 +3,8 @@
   = category
   - unless category.live?
     .dd-widget= icon('eye-slash', title: col(Category, :not_live), data: {toggle: 'tooltip'})
+  - if category.page.present?
+    .dd-widget= icon('file-o', title: col(Category, :has_page), data: {toggle: 'tooltip'})
 .dd-actions
   - if category.product_scope == 'manual'
     = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-xs'

@@ -126,6 +126,7 @@ en:
         parent_id: Parent category
         live: Enabled
         not_live: Category is disabled
+        has_page: Category has a page
         name: Name
         subtitle: Subtitle
         product_scope: Product sorting
