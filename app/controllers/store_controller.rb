@@ -60,6 +60,7 @@ class StoreController < ApplicationController
   end
 
   # GET /store/search
+  # GET /store/search.js
   def search
     @query = saved_search_query('product', 'product_search')
     @search = ProductSearch.new(search_params)
@@ -69,7 +70,7 @@ class StoreController < ApplicationController
     respond_to :js, :html
   end
 
-  # GET /store/lookup
+  # GET /store/lookup.js
   def lookup
     @query = params[:product_search]
     @search = ProductSearch.new(search_params)
@@ -111,7 +112,7 @@ class StoreController < ApplicationController
     end
   end
 
-  # POST /product/:product_id/order
+  # POST /product/:product_id/order.js
   def order_product
     @order = shopping_cart
     @product = current_store.products.live.friendly.find(params[:product_id])
@@ -120,6 +121,7 @@ class StoreController < ApplicationController
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
+    respond_to :js
   end
 
   private
