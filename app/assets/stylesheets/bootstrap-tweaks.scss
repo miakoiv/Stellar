@@ -364,8 +364,8 @@ i.icon {
 .page-header .btn { float: right; }
 .page-header .btn + .btn { margin-right: 8px; }
 .panel-footer { @extend .clearfix; }
-.panel-footer a.btn { margin-bottom: 5px; }
-.panel-footer a.btn + a.btn { margin-right: 8px; }
+.panel-footer .btn { margin-bottom: 5px; }
+.panel-footer .btn + .btn { margin-right: 8px; }
 
 
 /*
@@ -456,6 +456,19 @@ img.img-center {
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+}
+
+
+/*
+ * Quick edit panel
+ */
+.quick-edit-panel { margin-top: 40px; }
+.quick-edit-panel .header {
+  @extend .clearfix;
+  margin-bottom: 44px;
+
+  .btn { float: right; }
+  .btn + .btn { margin-right: 8px; }
 }
 
 

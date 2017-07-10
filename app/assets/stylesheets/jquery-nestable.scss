@@ -24,7 +24,11 @@
     @extend .pull-left;
     margin-right: 15px;
   }
-  .dd-title { display: inline-block; }
+  .dd-content a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
   .dd-icon, .dd-widget { display: inline-block; }
   .dd-icon { margin-right: 5px; }
   .dd-widget { margin-left: 5px; }
