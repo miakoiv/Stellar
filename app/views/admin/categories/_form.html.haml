@@ -1,14 +1,16 @@
-= bootstrap_form_for [:admin, @category], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @category], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
   .panel.panel-default
     .panel-body
-      %fieldset{disabled: locked}
+      %fieldset
         = f.text_field :name, required: true
         = f.text_area :subtitle, rows: 3
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :live
-      - unless locked
-        %fieldset.actions
-          = f.form_group do
-            = f.primary
+    - unless @category.new_record?
+      .panel-footer
+        - if @category.product_scope == 'manual'
+          = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(@category), class: 'btn btn-default btn-sm'
+        - if current_user.can_delete?(@category)
+          .pull-right
+            = link_to icon('remove', t('actions.delete')), admin_category_path(@category), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Category.model_name.human, name: @category.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

@@ -1,5 +1,0 @@
-%li.dd-item{data: {id: page.id}, class: [page.can_have_children? || 'dd-nochildren', "dd-item-#{page.appearance}"]}
-  = render partial: 'admin/pages/page', object: page
-  - if page.children_count > 0
-    %ol.dd-list
-      = render partial: 'nested_list_item', collection: page.children, as: :page

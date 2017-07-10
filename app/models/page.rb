@@ -124,7 +124,7 @@ class Page < ActiveRecord::Base
 
   # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
-    "pages/#{purpose}"
+    "pages/purposes/#{purpose}"
   end
 
   # Path to a page object depends on its purpose. Route and primary pages

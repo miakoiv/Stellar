@@ -1,53 +1,51 @@
-- if !@page.new_record? && @page.can_have_content? && @page.wysiwyg?
+#wysiwyg-content.wysiwyg-content><
+  = @page.content.html_safe if @page.content.present?
 
-  #wysiwyg-content.wysiwyg-content><
-    = @page.content.html_safe if @page.content.present?
+:coffee
+  sendAttachment = (file, callback) ->
+    data = new FormData()
+    data.append 'image[attachment]', file
+    $.ajax
+      url: '#{admin_page_images_path(@page.id)}'
+      data: data
+      processData: false
+      contentType: false
+      type: 'POST'
+      success: (data) ->
+        callback data
 
-  :coffee
-    sendAttachment = (file, callback) ->
-      data = new FormData()
-      data.append 'image[attachment]', file
-      $.ajax
-        url: '#{admin_page_images_path(@page.id)}'
-        data: data
-        processData: false
-        contentType: false
-        type: 'POST'
-        success: (data) ->
-          callback data
+  $('#wysiwyg-content').gridEditor
+    row_classes: []
+    col_classes: []
+    content_types: ['summernote']
+    summernote:
+      config:
+        lang: "#{t('culture')}"
+        popover:
+          air: [
+            ['para', ['style', 'ul', 'ol', 'paragraph']]
+            ['font', ['bold', 'italic', 'clear']]
+            ['insert', ['table', 'hr', 'link', 'picture', 'video']]
+          ]
+          image: [
+            ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']]
+            ['float', ['floatLeft', 'floatRight', 'floatNone']]
+            ['remove', ['removeMedia']]
+          ]
+          link: [
+            ['link', ['linkDialogShow', 'unlink']]
+          ]
+        dialogsFade: true
+        disableDragAndDrop: true
+        callbacks:
+          onImageUpload: (files) ->
+            sendAttachment files[0], (data) =>
+              p = $('<p>').append $('<img>', {
+                id: 'image_' + data.id
+                src: data.wysiwyg_url
+                'data-id': data.id
+              })
+              $(this).summernote 'insertNode', p[0]
 
-    $('#wysiwyg-content').gridEditor
-      row_classes: []
-      col_classes: []
-      content_types: ['summernote']
-      summernote:
-        config:
-          lang: "#{t('culture')}"
-          popover:
-            air: [
-              ['para', ['style', 'ul', 'ol', 'paragraph']]
-              ['font', ['bold', 'italic', 'clear']]
-              ['insert', ['table', 'hr', 'link', 'picture', 'video']]
-            ]
-            image: [
-              ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']]
-              ['float', ['floatLeft', 'floatRight', 'floatNone']]
-              ['remove', ['removeMedia']]
-            ]
-            link: [
-              ['link', ['linkDialogShow', 'unlink']]
-            ]
-          dialogsFade: true
-          disableDragAndDrop: true
-          callbacks:
-            onImageUpload: (files) ->
-              sendAttachment files[0], (data) =>
-                p = $('<p>').append $('<img>', {
-                  id: 'image_' + data.id
-                  src: data.wysiwyg_url
-                  'data-id': data.id
-                })
-                $(this).summernote 'insertNode', p[0]
-
-    $(document).on 'submit', 'form', (e) ->
-      $('#page_content').val $('#wysiwyg-content').gridEditor('getHtml')
+  $(document).on 'submit', 'form', (e) ->
+    $('#page_content').val $('#wysiwyg-content').gridEditor('getHtml')

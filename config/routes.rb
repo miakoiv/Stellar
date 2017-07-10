@@ -109,6 +109,7 @@ Rails.application.routes.draw do
     resources :pages do
       resources :images, shallow: true
       post :rearrange, on: :collection
+      get :layout, on: :member
     end
     resources :albums do
       resources :images, shallow: true

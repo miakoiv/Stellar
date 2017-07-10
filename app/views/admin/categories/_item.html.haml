@@ -1,0 +1,6 @@
+= link_to edit_admin_category_path(category), remote: true do
+  = category
+  - unless category.live?
+    .dd-widget= icon('eye-slash', title: col(Category, :not_live), data: {toggle: 'tooltip'})
+  - if category.page.present?
+    .dd-widget= icon('file-o', title: col(Category, :has_page), data: {toggle: 'tooltip'})

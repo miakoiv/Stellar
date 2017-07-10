@@ -1,7 +1,0 @@
-= f.form_group do
-  = f.check_box :wysiwyg
-- unless @page.new_record?
-  - if @page.wysiwyg?
-    = f.hidden_field :content
-  - else
-    = f.text_area :content, rows: 20, class: 'monospace input-sm'

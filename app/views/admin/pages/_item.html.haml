@@ -1,0 +1,8 @@
+= link_to edit_admin_page_path(page), remote: true do
+  - if page.route?
+    .dd-widget
+      %code= "/#{page.slug}"
+  .dd-icon= icon(page.icon)
+  = page
+  - unless page.live?
+    .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})

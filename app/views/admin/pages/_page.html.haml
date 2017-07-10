@@ -1,25 +1,8 @@
-- if page.movable?
-  .dd-handle= drag_handle
-.dd-title
-  - if page.route?
-    .dd-widget
-      %code= "/#{page.slug}"
-  .dd-icon= icon(page.icon)
-  = page
-  - unless page.live?
-    .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})
-.dd-actions
-  - if page.can_have_content?
-    = link_to icon('eye', t('actions.view')), show_page_path(page),
-        class: 'btn btn-default btn-xs'
-  - if current_user.can_update?(page)
-    = link_to icon('edit', t('actions.edit')), edit_admin_page_path(page),
-        class: 'btn btn-default btn-xs'
-  - if current_user.can_delete?(page)
-    = link_to icon('remove', t('actions.delete')), admin_page_path(page),
-        method: :delete, class: 'btn btn-danger btn-xs',
-        data: {confirm: t('actions.confirm.body',
-          klass: Page.model_name.human, name: page.title),
-          'confirm-title': t('actions.confirm.title'),
-          'confirm-proceed': t('actions.confirm.proceed'),
-          'confirm-cancel': t('actions.confirm.cancel')}
+%li.dd-item{data: {id: page.id}, class: [page.can_have_children? || 'dd-nochildren', "dd-item-#{page.appearance}"]}
+  - if page.movable?
+    .dd-handle= drag_handle
+  .dd-content[page]
+    = render partial: 'item', object: page, as: :page
+  - if page.children_count > 0
+    %ol.dd-list
+      = render partial: 'page', collection: page.children

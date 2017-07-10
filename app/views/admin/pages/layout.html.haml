@@ -1,0 +1,19 @@
+.page-header
+  = link_to admin_pages_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if @page.can_have_content?
+    = link_to show_page_path(@page), class: 'btn btn-default' do
+      = icon('eye', t('actions.view'))
+  %h1= icon('file-text-o', @page)
+
+- if @page.wysiwyg?
+  = render partial: 'wysiwyg_content'
+
+= bootstrap_form_for [:admin, @page], layout: :vertical do |f|
+  - if @page.wysiwyg?
+    = f.hidden_field :content
+  - else
+    = f.text_area :content, rows: 40, class: 'monospace input-sm'
+  %fieldset.actions
+    = f.form_group do
+      = f.primary

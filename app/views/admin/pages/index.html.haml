@@ -1,15 +1,22 @@
-.page-header
-  - if current_user.can_create?(Page)
-    = link_to new_admin_page_path, class: 'btn btn-primary' do
-      = icon('plus', t('.new_page'))
-  %h1= icon('files-o', title(Page, count: 2))
+.row
+  .col-md-7
+    .page-header
+      %h1= icon('files-o', title(Page, count: 2))
+    #page-list.dd
+      %ol.dd-list
+        = render partial: 'page', collection: @pages
+  .col-md-5
+    .quick-edit-panel
+      .header
+        - if current_user.can_create?(Page)
+          = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do
+            = icon('plus', t('.new_page'))
+      #page-form
 
-.dd
-  %ol.dd-list
-    = render partial: 'nested_list_item', collection: @pages, as: :page
+
 
 :coffee
-  $('.dd').nestable().on 'change', ->
+  $('#page-list').nestable().on 'change', ->
     data = {rearrange: {pages: $(this).nestable('serialize')}}
     $.ajax
       type: 'POST'

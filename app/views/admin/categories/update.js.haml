@@ -1,0 +1,4 @@
+$("##{dom_id @category}").html("#{j render partial: 'item', object: @category, as: :category}");
+$("##{dom_id(@category)}").closest('.dd-item').effect('highlight');
+$('#category-form').html("#{j render partial: 'admin/categories/edit'}");
+$('#category-form').initialize();

@@ -1,23 +1,7 @@
-.dd-handle= drag_handle
-.dd-title
-  = category
-  - unless category.live?
-    .dd-widget= icon('eye-slash', title: col(Category, :not_live), data: {toggle: 'tooltip'})
-  - if category.page.present?
-    .dd-widget= icon('file-o', title: col(Category, :has_page), data: {toggle: 'tooltip'})
-.dd-actions
-  - if category.product_scope == 'manual'
-    = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(category), class: 'btn btn-default btn-xs'
-  = link_to icon('info', t('actions.show')), admin_category_path(category),
-      class: 'btn btn-default btn-xs'
-  - if current_user.can_update?(Category)
-    = link_to icon('edit', t('actions.edit')), edit_admin_category_path(category),
-        class: 'btn btn-default btn-xs'
-  - if current_user.can_delete?(category)
-    = link_to icon('remove', t('actions.delete')), admin_category_path(category),
-        method: :delete, class: 'btn btn-danger btn-xs',
-        data: {confirm: t('actions.confirm.body',
-          klass: Category.model_name.human, name: category.name),
-          'confirm-title': t('actions.confirm.title'),
-          'confirm-proceed': t('actions.confirm.proceed'),
-          'confirm-cancel': t('actions.confirm.cancel')}
+%li.dd-item{data: {id: category.id}}
+  .dd-handle= drag_handle
+  .dd-content[category]
+    = render partial: 'item', object: category, as: :category
+  - if category.children_count > 0
+    %ol.dd-list
+      = render category.children
