@@ -28,9 +28,6 @@ $.fn.extend
       loading: ->
         $('#spinner').show()
 
-    $('.sticky', this).each ->
-      $(this).stick_in_parent $(this).data
-
     $('.credit-card-number').payment 'formatCardNumber'
     $('.credit-card-expiry').payment 'formatCardExpiry'
     $('.credit-card-cvc').payment 'formatCardCVC'
