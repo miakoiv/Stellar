@@ -6,7 +6,7 @@
       %ol.dd-list
         = render partial: 'page', collection: @pages
   .col-md-5
-    .quick-edit-panel
+    .quick-edit-panel{data: {spy: 'affix'}}
       .header
         - if current_user.can_create?(Page)
           = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do

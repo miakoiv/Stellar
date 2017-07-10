@@ -6,7 +6,7 @@
       %ol.dd-list
         = render @categories
   .col-md-5
-    .quick-edit-panel
+    .quick-edit-panel{data: {spy: 'affix'}}
       .header
         - if current_user.can_create?(Category)
           = link_to new_admin_category_path, remote: true, class: 'btn btn-primary' do

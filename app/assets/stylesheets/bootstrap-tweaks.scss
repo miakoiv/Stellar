@@ -460,9 +460,9 @@ img.img-center {
 
 
 /*
- * Quick edit panel
+ * Quick edit panel, affixed inside .col-md-5
  */
-.quick-edit-panel { margin-top: 40px; }
+.quick-edit-panel { padding-top: 40px; }
 .quick-edit-panel .header {
   @extend .clearfix;
   margin-bottom: 44px;
@@ -471,6 +471,13 @@ img.img-center {
   .btn + .btn { margin-right: 8px; }
 }
 
+/* These widths match exactly with .col-md-5 */
+@media (min-width: $screen-md-min) {
+  .quick-edit-panel.affix { width: 374.1667px; }
+}
+@media (min-width: $screen-lg-min) {
+  .quick-edit-panel.affix { width: 457.5px; }
+}
 
 /*
  * Tabbed panels and smaller nav variant
