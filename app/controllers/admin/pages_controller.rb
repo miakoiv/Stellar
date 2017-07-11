@@ -32,6 +32,7 @@ class Admin::PagesController < ApplicationController
   # POST /admin/pages.json
   def create
     @page = current_store.pages.build(page_params)
+    @page.slug = 'front' if @page.route?
 
     respond_to do |format|
       if @page.save
