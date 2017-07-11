@@ -29,7 +29,7 @@ class Page < ActiveRecord::Base
   }
 
   PRESENTATION = {
-    'route' => {icon: '', appearance: 'danger'},
+    'route' => {icon: 'share-alt', appearance: 'danger'},
     'primary' => {icon: 'file-text-o', appearance: 'success'},
     'category' => {icon: 'sitemap', appearance: 'info'},
     'product' => {icon: 'cube', appearance: 'info'},
@@ -116,6 +116,11 @@ class Page < ActiveRecord::Base
 
   def appearance
     Page::PRESENTATION[purpose][:appearance]
+  end
+
+  def label
+    return slug if route?
+    resource || Page.human_attribute_value(:purpose, purpose)
   end
 
   def description

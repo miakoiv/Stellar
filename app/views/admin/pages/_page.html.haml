@@ -1,4 +1,4 @@
-%li.dd-item{data: {id: page.id}, class: [page.can_have_children? || 'dd-nochildren', "dd-item-#{page.appearance}"]}
+%li.dd-item{data: {id: page.id}, class: page.can_have_children? || 'dd-nochildren'}
   - if page.movable?
     .dd-handle= drag_handle
   .dd-content[page]
