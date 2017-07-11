@@ -1,3 +1,4 @@
 $("#{j render partial: 'page', object: @page}").appendTo('#page-list > .dd-list');
 $('#page-form').html("#{j render partial: 'admin/pages/edit'}");
 $('#page-form').initialize();
+$(window).scrollTo($('##{dom_id(@page)}'), 300, {offset: -$('.navbar').outerHeight(true)});

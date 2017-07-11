@@ -1,3 +1,4 @@
 $("#{j render @category}").appendTo('#category-list > .dd-list');
 $('#category-form').html("#{j render partial: 'admin/categories/edit'}");
 $('#category-form').initialize();
+$(window).scrollTo($('##{dom_id(@category)}'), 300, {offset: -$('.navbar').outerHeight(true)});
