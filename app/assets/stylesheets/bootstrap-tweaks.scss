@@ -501,7 +501,22 @@ img.img-center {
  * Selectize layout fixes, disabled form controls
  */
 .selectize-input { vertical-align: top; }
-.selectize-tall .selectize-dropdown-content { min-height: 600px; }
+.selectize-tall .selectize-dropdown-content { min-height: 400px; }
+.selectize-list-group {
+  .selectize-input img {
+    @extend .pull-left, .box-icon;
+    margin-right: 10px;
+  }
+  .selectize-dropdown-content {
+    padding: 0;
+
+    .list-group-item img {
+      @extend .pull-left, .box-icon;
+      margin-right: 10px;
+    }
+  }
+}
+
 .form-control[disabled],
 fieldset[disabled] .form-control,
 fieldset[disabled] .input-group .input-group-addon,
