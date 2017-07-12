@@ -448,6 +448,10 @@ class Product < ActiveRecord::Base
     "#{title} #{subtitle}"
   end
 
+  def as_json(options = {})
+    super(only: [:id, :code, :customer_code, :title, :subtitle])
+  end
+
   # Retail price string representation for JSON.
   def formatted_price_string
     retail_price.present? ? retail_price.format : ''

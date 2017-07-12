@@ -1,1 +1,3 @@
-json.extract! @product, :id, :store_id, :category_id, :title, :created_at, :updated_at
+json.extract! @product, :id, :code, :customer_code, :title, :subtitle
+json.url admin_product_url(@product, format: :json)
+json.image_html image_variant_tag(@product.cover_image, :icon)
