@@ -1,10 +1,12 @@
 = f.hidden_field :resource_type, value: 'Product'
-= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall'}
+= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group'}
 
 :coffee
   $('#page_resource_id').selectize
     dropdownParent: 'body'
     preload: true
+    options: [#{@page.resource.present? && @page.resource.to_json}]
+    items: [#{@page.resource_id}]
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']
@@ -17,10 +19,8 @@
         dataType: 'json'
         data:
           q: query
-          purposes: ['vanilla', 'variant']
+          purposes: ['vanilla', 'master', 'variant', 'bundle', 'composite', 'virtual']
         error: ->
           callback()
         success: (response) ->
           callback(response)
-    onLoad: ->
-      this.setValue(['#{@page.resource_id}'], true)

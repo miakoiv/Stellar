@@ -18,7 +18,7 @@
       %tbody
         %tr
           %td.col-xs-10
-            = f.select :component_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall'}
+            = f.select :component_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group'}
           %td.col-xs-1= f.number_field :quantity, min: 1, class: 'form-control text-right'
           %td.actions
             = f.button id: 'create_component_entry', class: 'btn btn-default' do

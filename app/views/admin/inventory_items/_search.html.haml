@@ -12,7 +12,7 @@
             = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
         .col-sm-6.col-md-4
           .form-group
-            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall'}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall selectize-list-group'}
         .col-sm-3.col-md-2
           .form-group
             = f.select :live, Product.availability_options, {include_blank: t('admin.products.search.availability')}, {placeholder: t('admin.products.search.availability'), class: 'form-control selectize'}
@@ -21,12 +21,12 @@
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
 :coffee
-  items = #{@search.raw_options['product_id'].to_json}
-
   $('#inventory_item_search_product_id').selectize
     plugins: ['remove_button']
     dropdownParent: 'body'
     preload: true
+    options: #{@inventory_items.map(&:product).to_json}
+    items: #{@search.raw_options['product_id'].to_json}
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']
@@ -41,5 +41,3 @@
           callback()
         success: (response) ->
           callback(response)
-    onLoad: ->
-      this.setValue(items)
