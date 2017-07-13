@@ -1,11 +1,13 @@
+@BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+
 $.fn.selectize.renderers =
   item: (item, escape) ->
     """
-      <div>
-        #{item.image_html}
-        <strong>#{escape(item.title)}</strong>
-        #{if item.subtitle then escape(item.subtitle) else ''}
-      </div>
+    <div>
+      <img src="#{item.icon_image || BLANK_IMAGE}" alt="">
+      <strong>#{escape(item.title)}</strong>
+      #{if item.subtitle then escape(item.subtitle) else ''}
+    </div>
     """
   option: (item, escape) ->
     """
@@ -18,7 +20,7 @@ $.fn.selectize.renderers =
           #{escape(item.code)}
         </span>
       </div>
-      #{item.image_html}
+      <img src="#{item.icon_image || BLANK_IMAGE}" alt="">
       <strong>#{escape(item.title)}</strong>
       #{if item.subtitle then escape(item.subtitle) else ''}
     </div>
