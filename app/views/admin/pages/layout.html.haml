@@ -1,5 +1,5 @@
 .page-header
-  = link_to admin_pages_path, class: 'btn btn-default' do
+  = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if @page.can_have_content?
     = link_to show_page_path(@page), class: 'btn btn-default' do

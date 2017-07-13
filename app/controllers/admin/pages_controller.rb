@@ -22,9 +22,13 @@ class Admin::PagesController < ApplicationController
     @page = current_store.pages.build
   end
 
+  # GET /admin/pages/1/edit
   # GET /admin/pages/1/edit.js
   def edit
     authorize_action_for @page
+    @pages = current_store.pages.roots
+
+    respond_to :html, :js
   end
 
   # POST /admin/pages

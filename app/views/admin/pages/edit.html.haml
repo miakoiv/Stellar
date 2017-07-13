@@ -1,0 +1,14 @@
+.row
+  .col-md-7
+    .page-header
+      %h1= icon('file-text-o', @page)
+    #page-list.dd
+      %ol.dd-list
+        = render partial: 'page', collection: @pages
+  .col-md-5
+    .quick-edit-panel{data: {spy: 'affix'}}
+      .header
+        = link_to admin_pages_path, class: 'btn btn-default' do
+          = icon('chevron-circle-left', t('actions.back'))
+      #page-form
+        = render partial: 'form', locals: {locked: false}
