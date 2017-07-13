@@ -1,14 +1,28 @@
 .row
   .col-md-7
     .page-header
-      %h1= icon('file-text-o', @page)
+      %h1= icon('files-o', title(Page, count: 2))
     #page-list.dd
       %ol.dd-list
         = render partial: 'page', collection: @pages
   .col-md-5
     .quick-edit-panel{data: {spy: 'affix'}}
       .header
-        = link_to admin_pages_path, class: 'btn btn-default' do
-          = icon('chevron-circle-left', t('actions.back'))
+        - if current_user.can_create?(Page)
+          = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do
+            = icon('plus', t('admin.pages.index.new_page'))
       #page-form
-        = render partial: 'form', locals: {locked: false}
+        = render partial: 'form'
+
+
+:coffee
+  $(window).scrollTo $('##{dom_id(@page)}'), 300,
+    offset: -$('.navbar').outerHeight true
+
+  $('#page-list').nestable().on 'change', ->
+    data = {rearrange: {pages: $(this).nestable('serialize')}}
+    $.ajax
+      type: 'POST'
+      url: '#{rearrange_admin_pages_path}'
+      data: JSON.stringify data
+      contentType: 'application/json; charset=utf-8'
