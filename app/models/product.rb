@@ -449,7 +449,9 @@ class Product < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(only: [:id, :code, :customer_code, :title, :subtitle])
+    super(only: [:id, :code, :customer_code, :title, :subtitle]).merge(
+      icon_image: cover_image(:presentational).url(:icon)
+    )
   end
 
   # Retail price string representation for JSON.
