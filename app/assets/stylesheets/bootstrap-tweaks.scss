@@ -725,6 +725,18 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
+ * CodeMirror styles
+ */
+.CodeMirror {
+  @extend .form-control, .input-sm;
+  height: 600px;
+}
+.CodeMirror-focused {
+  @extend .form-control:focus;
+}
+
+
+/*
  * Vis.js styles
  */
 .vis-timeline {
