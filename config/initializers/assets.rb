@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
+  jasny-bootstrap/rowlink.js
   payment_gateway/paybyway.js
   spry_themes/alcoholic.css   spry_themes/alcoholic.js
   spry_themes/apprentice.css  spry_themes/apprentice.js
