@@ -278,6 +278,7 @@ en:
         deleted_at: Availability ends
         live: Available
         not_live: Not available
+        has_page: Product has a page
         memo: Memo
         mass: Shipping weight
         dimensions: Shipping dimensions

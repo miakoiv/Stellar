@@ -17,7 +17,7 @@
           = link_to icon('eye', t('actions.view')), show_page_path(@page),
               class: 'btn btn-default btn-sm'
         - if @page.resource.present?
-          = link_to icon('edit', t('.edit_resource')), [:edit, :admin, @page.resource], class: 'btn btn-default btn-sm'
+          = link_to icon('external-link', t('.show_resource')), [:admin, @page.resource], class: 'btn btn-default btn-sm'
         - if current_user.can_delete?(@page)
           .pull-right
             = link_to icon('remove', t('actions.delete')), admin_page_path(@page), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Page.model_name.human, name: @page.title), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

@@ -4,7 +4,7 @@ class Admin::CategoriesController < ApplicationController
 
   include AwesomeNester
   before_action :authenticate_user!
-  before_action :set_category, only: [:edit, :update, :destroy, :reorder_products]
+  before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions rearrange: 'update', reorder_products: 'update'
   authorize_actions_for Category, except: [:destroy]
@@ -15,6 +15,11 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories.json
   def index
     @categories = current_store.categories.roots
+  end
+
+  # GET /admin/categories/1
+  def show
+    redirect_to edit_admin_category_path(@category)
   end
 
   # GET /admin/categories/new.js

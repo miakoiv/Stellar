@@ -8,6 +8,7 @@
         %th.col-min
         %th.col-min
         %th.col-min
+        %th.col-min
         %th= col(Product, :category_ids)
         %th.actions
 
@@ -20,6 +21,9 @@
               %strong= product.title
               = product.subtitle
             %td= product.codes
+            %td
+              - if product.page.present?
+                = icon('file-o', title: col(Product, :has_page), data: {toggle: 'tooltip'})
             %td
               - unless product.live?
                 = icon('warning', title: col(Product, :not_live), data: {toggle: 'tooltip'})

@@ -278,6 +278,7 @@ fi:
         deleted_at: Myynnin päättymispvm
         live: Myynnissä
         not_live: Ei myynnissä
+        has_page: Tuotteella on sivu
         memo: Muistio
         mass: Pakkauksen paino
         dimensions: Pakkauksen mitat

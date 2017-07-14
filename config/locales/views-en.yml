@@ -136,7 +136,7 @@ en:
       new:
         new_page: New page
       form:
-        edit_resource: Edit target
+        show_resource: Show target
     portals:
       index:
         new_portal: New portal
@@ -152,6 +152,8 @@ en:
     products:
       index:
         new_product: New product
+      show:
+        edit_page: Edit page
       search:
         availability: "[Availability]"
       table:

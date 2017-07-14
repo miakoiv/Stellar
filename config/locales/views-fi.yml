@@ -116,7 +116,7 @@ fi:
       new:
         new_page: Uusi sivu
       form:
-        edit_resource: Muokkaa kohdetta
+        show_resource: Näytä kohde
     portals:
       index:
         new_portal: Uusi portaali
@@ -132,6 +132,8 @@ fi:
     products:
       index:
         new_product: Uusi tuote
+      show:
+        edit_page: Muokkaa sivua
       search:
         availability: "[Saatavuus]"
       table:
