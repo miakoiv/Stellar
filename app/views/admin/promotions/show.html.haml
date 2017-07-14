@@ -4,6 +4,8 @@
   - if current_user.can_update?(Promotion)
     = link_to edit_admin_promotion_path(@promotion), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
+  - if @promotion.page.present?
+    = link_to icon('file-o', t('.edit_page')), edit_admin_page_path(@promotion.page), class: 'btn btn-default'
   %h1
     = icon('tag', @promotion)
 

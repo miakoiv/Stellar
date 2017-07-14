@@ -72,6 +72,8 @@ fi:
         new_category: Uusi tuoteryhmä
       new:
         new_category: Uusi tuoteryhmä
+      form:
+        edit_page: Muokkaa sivua
     customer_assets:
       index:
         new_customer_asset: Uusi omistus
@@ -113,6 +115,8 @@ fi:
         new_page: Uusi sivu
       new:
         new_page: Uusi sivu
+      form:
+        edit_resource: Muokkaa kohdetta
     portals:
       index:
         new_portal: Uusi portaali
@@ -155,6 +159,8 @@ fi:
         new_promotion: Uusi kampanja
       new:
         new_promotion: Uusi kampanja
+      show:
+        edit_page: Muokkaa sivua
       edit:
         add_products: Lisää tuotteita
         add_categories: Lisää tuoteryhmiä

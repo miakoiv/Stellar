@@ -10,6 +10,7 @@
       %tr
         %th.col-xs-3= col(Promotion, :name)
         %th.col-xs-3= col(Promotion, :promotion_handler_type)
+        %th.col-min
         %th= col(Promotion, :first_date)
         %th= col(Promotion, :last_date)
         %th.actions
@@ -19,6 +20,9 @@
         = content_tag_for :tr, promotion, class: promotion.active? ? nil : 'warning text-warning' do
           %td= promotion.name
           %td= title(promotion.promotion_handler)
+          %td
+            - if promotion.page.present?
+              = icon('file-o', title: col(Promotion, :has_page), data: {toggle: 'tooltip'})
           %td
             - if promotion.active?
               = promotion.first_date.present? ? l(promotion.first_date) : nil

@@ -92,6 +92,8 @@ en:
         new_category: New category
       new:
         new_category: New category
+      form:
+        edit_page: Edit page
     customer_assets:
       index:
         new_customer_asset: New asset
@@ -133,6 +135,8 @@ en:
         new_page: New page
       new:
         new_page: New page
+      form:
+        edit_resource: Edit target
     portals:
       index:
         new_portal: New portal
@@ -175,6 +179,8 @@ en:
         new_promotion: New promotion
       new:
         new_promotion: New promotion
+      show:
+        edit_page: Edit page
       edit:
         add_products: Add products
         add_categories: Add categories
