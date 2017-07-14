@@ -124,6 +124,9 @@ gem 'jquery-tablesorter'
 # Summernote for wysiwyg editing
 gem 'summernote-rails'
 
+# Codemirror for syntax highlighting
+gem 'codemirror-rails'
+
 # Smart sticky elements
 gem 'stickykit-rails'
 

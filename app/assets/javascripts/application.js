@@ -24,6 +24,8 @@
 //= require twitter/bootstrap/rails/confirm
 //= require summernote
 //= require summernote/locales
+//= require codemirror
+//= require codemirror/modes/xml
 //= require dropzone
 //= require magnific-popup
 //= require selectize

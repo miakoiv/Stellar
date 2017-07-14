@@ -65,6 +65,8 @@ GEM
     clipboard-rails (1.6.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
+    codemirror-rails (5.16.0)
+      railties (>= 3.0, < 6.0)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -331,6 +333,7 @@ DEPENDENCIES
   bootstrap_form
   byebug
   clipboard-rails
+  codemirror-rails
   coffee-rails (~> 4.2)
   daemons
   delayed_job_active_record

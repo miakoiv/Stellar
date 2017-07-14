@@ -11,6 +11,13 @@
     = f.hidden_field :content
   - else
     = f.text_area :content, rows: 40, class: 'monospace input-sm'
+
+    :coffee
+      $content = $('#page_content')[0]
+      cm = CodeMirror.fromTextArea $content,
+        mode: 'text/html'
+        lineWrapping: true
+
   %fieldset.actions
     = f.form_group do
       = f.primary
