@@ -25,7 +25,10 @@
 //= require summernote
 //= require summernote/locales
 //= require codemirror
+//= require codemirror/modes/javascript
+//= require codemirror/modes/css
 //= require codemirror/modes/xml
+//= require codemirror/modes/htmlmixed
 //= require dropzone
 //= require magnific-popup
 //= require selectize
