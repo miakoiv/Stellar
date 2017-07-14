@@ -462,9 +462,13 @@ img.img-center {
 /*
  * Quick edit panel, affixed inside .col-md-5
  */
-.quick-edit-panel { padding-top: 40px; }
+.quick-edit-panel { }
+.quick-edit-panel.affix {
+  top: $navbar-height + 20px;
+}
 .quick-edit-panel .header {
   @extend .clearfix;
+  margin-top: 40px;
   margin-bottom: 44px;
 
   .btn { float: right; }

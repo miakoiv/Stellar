@@ -16,3 +16,8 @@
   .col-md-5
     .quick-edit-panel
       #product-form
+
+:coffee
+  $('.quick-edit-panel').affix
+    offset:
+      top: $('.quick-edit-panel').offset().top - $('.navbar').outerHeight(true)
