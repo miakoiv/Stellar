@@ -22,8 +22,12 @@ class Admin::CategoriesController < ApplicationController
     @category = current_store.categories.build
   end
 
+  # GET /admin/categories/1/edit
   # GET /admin/categories/1/edit.js
   def edit
+    @categories = current_store.categories.roots
+
+    respond_to :html, :js
   end
 
   # POST /admin/categories
