@@ -1,4 +1,4 @@
-$("##{dom_id @page}").html("#{j render partial: 'item', object: @page, as: :page}");
+$("##{dom_id(@page)}").html("#{j render partial: 'item', object: @page, as: :page}");
 $("##{dom_id(@page)}").closest('.dd-item').effect('highlight');
 $('#page-form').html("#{j render partial: 'admin/pages/edit'}");
 $('#page-form').initialize();
