@@ -8,5 +8,11 @@
 
 = render partial: 'search'
 = render partial: 'admin/products/upload_modal'
-= render partial: 'admin/products/table', object: @products, as: :products
-= paginate @products
+
+.row
+  .col-md-7
+    = render partial: 'admin/products/table', object: @products, as: :products
+    = paginate @products
+  .col-md-5
+    .quick-edit-panel
+      #product-form

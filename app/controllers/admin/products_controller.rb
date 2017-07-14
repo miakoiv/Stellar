@@ -43,8 +43,11 @@ class Admin::ProductsController < ApplicationController
   end
 
   # GET /admin/products/1/edit
+  # GET /admin/products/1/edit.js
   def edit
     authorize_action_for @product
+
+    respond_to :html, :js
   end
 
   # POST /admin/products
@@ -66,6 +69,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   # PATCH/PUT /admin/products/1
+  # PATCH/PUT /admin/products/1.js
   # PATCH/PUT /admin/products/1.json
   def update
     authorize_action_for @product
@@ -74,6 +78,7 @@ class Admin::ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to admin_product_path(@product),
           notice: t('.notice', product: @product) }
+        format.js { flash.now[:notice] = t('.notice', product: @product) }
         format.json { render :show, status: :ok, location: admin_product_path(@product) }
       else
         format.html { render :edit }

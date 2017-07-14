@@ -136,12 +136,13 @@ fi:
         edit_page: Muokkaa sivua
       search:
         availability: "[Saatavuus]"
-      table:
+      edit:
         duplicate:
           button: Kopioi
           confirm: "Kopioidaanko varmasti %{klass} %{name}?"
           proceed: Kopioi
           cancel: Kumoa
+        edit_page: Muokkaa sivua
       new:
         new_product: Uusi tuote
       form:

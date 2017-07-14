@@ -9,40 +9,6 @@
         %th.col-min
         %th.col-min
         %th.col-min
-        %th= col(Product, :category_ids)
-        %th.actions
 
-    %tbody
-      - products.each do |product|
-        - cache [I18n.locale, :admin_product_row, product] do
-          = content_tag_for :tr, product, class: product.live? ? nil : 'warning text-warning' do
-            %td= image_variant_tag product.cover_image, :icon
-            %td
-              %strong= product.title
-              = product.subtitle
-            %td= product.codes
-            %td
-              - if product.page.present?
-                = icon('file-o', title: col(Product, :has_page), data: {toggle: 'tooltip'})
-            %td
-              - unless product.live?
-                = icon('warning', title: col(Product, :not_live), data: {toggle: 'tooltip'})
-            %td
-              - if product.icon.present?
-                = icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
-            %td
-              - if product.vendor.present?
-                = icon('truck', title: "#{col(Product, :vendor_id)}: #{product.vendor}", data: {toggle: 'tooltip'})
-            %td= product.categories.to_sentence
-            %td.actions
-              - if current_user.can_update?(product)
-                = link_to icon('copy', t('.duplicate.button')), duplicate_admin_product_path(product), method: :post, class: 'btn btn-warning btn-sm',
-                    data: {confirm: t('.duplicate.confirm',
-                      klass: Product.model_name.human, name: product.to_s),
-                      'confirm-title': t('actions.confirm.title'),
-                      'confirm-proceed': t('.duplicate.proceed'),
-                      'confirm-cancel': t('.duplicate.cancel')}
-              - if current_user.can_read?(product)
-                = link_to icon('info', t('actions.show')), admin_product_path(product), class: 'btn btn-default btn-sm'
-              - if current_user.can_update?(product)
-                = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default btn-sm'
+    %tbody.rowlink{data: {link: 'row'}}
+      = render partial: 'admin/products/row', collection: @products, as: :product

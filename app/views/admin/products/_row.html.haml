@@ -1,0 +1,20 @@
+- cache [I18n.locale, :admin_product_row, product] do
+  = content_tag_for :tr, product, class: product.live? ? nil : 'warning text-warning' do
+    %td= image_variant_tag product.cover_image, :icon
+    %td
+      = link_to edit_admin_product_path(product), remote: true  do
+        %strong= product.title
+        = product.subtitle
+    %td= product.codes
+    %td
+      - if product.page.present?
+        = icon('file-o', title: col(Product, :has_page), data: {toggle: 'tooltip'})
+    %td
+      - unless product.live?
+        = icon('warning', title: col(Product, :not_live), data: {toggle: 'tooltip'})
+    %td
+      - if product.icon.present?
+        = icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})
+    %td
+      - if product.vendor.present?
+        = icon('truck', title: "#{col(Product, :vendor_id)}: #{product.vendor}", data: {toggle: 'tooltip'})

@@ -1,0 +1,32 @@
+= bootstrap_form_for [:admin, @product], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset
+        = f.text_field :title, required: true
+        = f.text_field :subtitle
+        = f.select :category_ids, current_user.category_options, {}, {multiple: true, class: 'selectize'}
+        .row
+          .col-sm-6
+            = f.text_field :trade_price, class: 'text-right', append: '€'
+          .col-sm-6
+            = f.text_field :retail_price, class: 'text-right', append: '€'
+        .row
+          .col-sm-6
+            = f.text_field :available_at,
+                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+          .col-sm-6
+            = f.text_field :deleted_at,
+                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+    .panel-footer
+      - if current_user.can_read?(@product)
+        = link_to icon('info', t('actions.show')), admin_product_path(@product), class: 'btn btn-default btn-sm'
+      - if current_user.can_update?(@product)
+        = link_to icon('edit', t('actions.edit')), edit_admin_product_path(@product), class: 'btn btn-default btn-sm'
+      - if @product.page.present?
+        = link_to icon('file-o', t('.edit_page')), edit_admin_page_path(@product.page), class: 'btn btn-default btn-sm'
+      - if current_user.can_update?(@product)
+        .pull-right
+          = link_to icon('copy', t('.duplicate.button')), duplicate_admin_product_path(@product), method: :post, class: 'btn btn-warning btn-sm', data: {confirm: t('.duplicate.confirm', klass: Product.model_name.human, name: @product.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('.duplicate.proceed'), 'confirm-cancel': t('.duplicate.cancel')}
+
+= render partial: 'admin/images/edit_table', object: @product, as: :imageable
+= render partial: 'admin/images/dropzone', object: @product, as: :imageable

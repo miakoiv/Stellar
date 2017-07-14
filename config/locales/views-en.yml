@@ -156,12 +156,13 @@ en:
         edit_page: Edit page
       search:
         availability: "[Availability]"
-      table:
+      edit:
         duplicate:
           button: Duplicate
           confirm: "Are you sure you want to duplicate %{klass} %{name}?"
           proceed: Duplicate
           cancel: Cancel
+        edit_page: Edit page
       new:
         new_product: New product
       form:
