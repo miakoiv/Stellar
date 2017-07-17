@@ -14,9 +14,9 @@
       #category-form
 
 :coffee
-  $('.quick-edit-panel').affix
-    offset:
-      top: $('.quick-edit-panel').offset().top - 80
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('.row')
+    offset_top: 80
 
   $('#category-list').nestable().on 'change', ->
     data = {rearrange: {categories: $(this).nestable('serialize')}}

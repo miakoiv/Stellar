@@ -16,9 +16,9 @@
 
 
 :coffee
-  $('.quick-edit-panel').affix
-    offset:
-      top: $('.quick-edit-panel').offset().top - 80
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('.row')
+    offset_top: 80
 
   $('#page-list').nestable().on 'change', ->
     data = {rearrange: {pages: $(this).nestable('serialize')}}
