@@ -6,7 +6,7 @@
       %ol.dd-list
         = render partial: 'page', collection: @pages
   .col-md-5
-    .quick-edit-panel{data: {spy: 'affix'}}
+    .quick-edit-panel
       .header
         - if current_user.can_create?(Page)
           = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do
@@ -16,8 +16,9 @@
 
 
 :coffee
-  $(window).scrollTo $('##{dom_id(@page)}'), 300,
-    offset: -$('.navbar').outerHeight true
+  $('.quick-edit-panel').affix
+    offset:
+      top: $('.quick-edit-panel').offset().top - 80
 
   $('#page-list').nestable().on 'change', ->
     data = {rearrange: {pages: $(this).nestable('serialize')}}
@@ -26,3 +27,6 @@
       url: '#{rearrange_admin_pages_path}'
       data: JSON.stringify data
       contentType: 'application/json; charset=utf-8'
+
+  $(window).scrollTo $('##{dom_id(@page)}'), 300,
+    offset: -$('.navbar').outerHeight true

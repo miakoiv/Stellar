@@ -464,7 +464,7 @@ img.img-center {
  */
 .quick-edit-panel { }
 .quick-edit-panel.affix {
-  top: $navbar-height + 20px;
+  top: 80px;
 }
 .quick-edit-panel .header {
   @extend .clearfix;
@@ -473,6 +473,10 @@ img.img-center {
 
   .btn { float: right; }
   .btn + .btn { margin-right: 8px; }
+}
+
+@media (max-width: $screen-sm-max) {
+  .quick-edit-panel.affix { position: static; }
 }
 
 /* These widths match exactly with .col-md-5 */

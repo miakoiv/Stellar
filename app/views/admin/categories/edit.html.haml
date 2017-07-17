@@ -6,7 +6,7 @@
       %ol.dd-list
         = render @categories
   .col-md-5
-    .quick-edit-panel{data: {spy: 'affix'}}
+    .quick-edit-panel
       .header
         - if current_user.can_create?(Category)
           = link_to new_admin_category_path, remote: true, class: 'btn btn-primary' do
@@ -15,8 +15,9 @@
         = render partial: 'form'
 
 :coffee
-  $(window).scrollTo $('##{dom_id(@category)}'), 300,
-    offset: -$('.navbar').outerHeight true
+  $('.quick-edit-panel').affix
+    offset:
+      top: $('.quick-edit-panel').offset().top - 80
 
   $('#category-list').nestable().on 'change', ->
     data = {rearrange: {categories: $(this).nestable('serialize')}}
@@ -25,3 +26,6 @@
       url: '#{rearrange_admin_categories_path}'
       data: JSON.stringify data
       contentType: 'application/json; charset=utf-8'
+
+  $(window).scrollTo $('##{dom_id(@category)}'), 300,
+    offset: -$('.navbar').outerHeight true
