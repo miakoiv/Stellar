@@ -28,5 +28,6 @@
         .pull-right
           = link_to icon('copy', t('.duplicate.button')), duplicate_admin_product_path(@product), method: :post, class: 'btn btn-warning btn-sm', data: {confirm: t('.duplicate.confirm', klass: Product.model_name.human, name: @product.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('.duplicate.proceed'), 'confirm-cancel': t('.duplicate.cancel')}
 
-= render partial: 'admin/images/edit_table', object: @product, as: :imageable
-= render partial: 'admin/images/dropzone', object: @product, as: :imageable
+= render partial: 'admin/inventory_items/table_for_product', object: @product, as: :product
+- if current_user.can_create?(InventoryItem)
+  = render partial: 'admin/inventory_items/form_for_product', object: @product, as: :product
