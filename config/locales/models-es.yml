@@ -278,7 +278,6 @@ es:
         mass: Peso
         dimensions: Dimensiones
         lead_time: Tiempo de entrega
-        lead_time_unit: Días
         out_of_stock: Vendido
         shipping_notes: Notas
         iframes: Encastrar

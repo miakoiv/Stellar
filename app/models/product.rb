@@ -342,6 +342,12 @@ class Product < ActiveRecord::Base
     live? && (lead_time.present? || available > 0)
   end
 
+  # Lead times that look like integers are parsed as number of days,
+  # other non-blank strings are considered to be zero days.
+  def lead_time_days
+    lead_time.present? && lead_time.to_i
+  end
+
   # Coalesced amount available by inventory.
   def available_by_inventory
     amounts = inventory_items.online.group(:inventory_id).sum('on_hand - reserved')

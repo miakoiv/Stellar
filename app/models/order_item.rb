@@ -126,14 +126,18 @@ class OrderItem < ActiveRecord::Base
     subtotal_sans_tax_cents
   end
 
-  # Lead time for an order item is zero if the amount is readily available,
-  # product lead time otherwise.
+  # If ordered amount exceeds availability, this item gets its lead time
+  # from the product, otherwise it's readily available with nil lead time.
   def lead_time
     if amount > product.available
-      product.lead_time || 0
+      product.lead_time
     else
-      0
+      nil
     end
+  end
+
+  def lead_time_days
+    lead_time.present? ? lead_time.to_i : 0
   end
 
   # Date used in reports is the completion date of the order.

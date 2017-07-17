@@ -357,12 +357,12 @@ class Order < ActiveRecord::Base
   end
 
   # Order lead time is the maximum of its items.
-  def lead_time
-    order_items.map(&:lead_time).max
+  def lead_time_days
+    order_items.map(&:lead_time_days).max
   end
 
   def earliest_shipping_at
-     (completed_at || Date.current).to_date + lead_time.days
+     (completed_at || Date.current).to_date + lead_time_days.days
   end
 
   # An order is empty when it's empty of real products.

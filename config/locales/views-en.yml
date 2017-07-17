@@ -168,6 +168,7 @@ en:
       form:
         tax_included_in_retail_html: Price <strong>includes tax</strong>.
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Price <strong>excludes tax</strong>.
+        lead_time_help_html: Lead times of <em>n days</em> enable automatic shipping date calculation. Other formats are advisory only.
         shipping_notes_help: Extra information for shopping cart and order rows.
       upload_modal:
         title: Upload CSV or XLS file
@@ -272,7 +273,7 @@ en:
       shopping_cart: Shopping cart
       delete: Empty cart
       confirm_delete: Really empty your shopping cart?
-      lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{days} days.
+      lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{lead_time}.
     pricing_groups:
       default: <default>
   albums:

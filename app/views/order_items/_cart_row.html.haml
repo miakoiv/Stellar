@@ -19,10 +19,10 @@
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-    - if order_item.lead_time > 0
+    - if order_item.lead_time.present?
       .small
         = icon('warning')
-        = t('store.cart.lead_time_warning', days: order_item.lead_time)
+        = t('store.cart.lead_time_warning', lead_time: order_item.lead_time)
   %td
     - if order_item.real?
       = order_item.product_codes

@@ -76,7 +76,7 @@
                   %span.input-group-addon ⨯
                   = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
                   %span.input-group-addon mm
-            = f.text_field :lead_time, append: col(Product, :lead_time_unit), class: 'text-right'
+            = f.text_field :lead_time, help: t('.lead_time_help_html')
             = f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 
       - unless locked

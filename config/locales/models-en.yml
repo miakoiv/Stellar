@@ -283,7 +283,6 @@ en:
         mass: Shipping weight
         dimensions: Shipping dimensions
         lead_time: Lead time
-        lead_time_unit: days
         out_of_stock: Sold out
         shipping_notes: Notes
         iframes: Embeds
