@@ -234,6 +234,7 @@ fi:
   store:
     front: Etusivu
     front_blurb: Kauppa avataan pian, tervetuloa lähipäivinä!
+    product_not_found: Tuotetta ei löytynyt. Kokeile sen sijaan näitä.
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
     requisite_products: Katso myös nämä
