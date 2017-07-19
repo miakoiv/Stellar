@@ -254,6 +254,7 @@ en:
   store:
     front: Front page
     front_blurb: Store opening soon! Please check back later.
+    product_not_found: The product was not found. Try these instead.
     all_products: All products
     product_variants: Alternatives for this product
     requisite_products: Recommended products

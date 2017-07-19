@@ -105,7 +105,7 @@ class StoreController < ApplicationController
 
   # GET /product/:product_id(/:category_id)
   def show_product
-    @category = if params[:category_id].present?
+    @category ||= if params[:category_id].present?
       @live_categories.friendly.find(params[:category_id])
     else
       @product.category
@@ -147,13 +147,32 @@ class StoreController < ApplicationController
     end
 
     # Find product by friendly id in `product_id`, redirecting to its
-    # first variant if applicable.
+    # first variant if applicable. If the product is not found, attempt
+    # applying an older routing scheme before giving up.
     def find_product
-      selected = current_store.products.live.friendly.find(params[:product_id])
+      selected = current_store.products.live.find_by(slug: params[:product_id])
+      if selected.nil?
+        redirect_old_product_routes and return
+        return redirect_to front_path, notice: t('store.product_not_found')
+      end
       @product = selected.first_variant
       if @product != selected
         return redirect_to show_product_path(@product, @category)
       end
+    end
+
+    # If a product can't be found but category id is given, attempt to
+    # redirect with the url params in reverse order as found in older
+    # product routes.
+    def redirect_old_product_routes
+      if params[:category_id].present?
+        selected = current_store.products.live.find_by(slug: params[:category_id])
+        if selected.present?
+          @category = @live_categories.friendly.find(params[:product_id])
+          return redirect_to show_product_path(selected, @category)
+        end
+      end
+      false
     end
 
     # Find page by friendly id in `slug`, including history.
