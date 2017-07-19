@@ -47,6 +47,7 @@ class Page < ActiveRecord::Base
   # Resource is anything the page may refer to, depending on its purpose.
   belongs_to :resource, polymorphic: true
 
+  has_many :sections, dependent: :destroy
   has_and_belongs_to_many :albums
 
   scope :live, -> { where(live: true) }

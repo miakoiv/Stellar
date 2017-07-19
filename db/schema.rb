@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713084330) do
+ActiveRecord::Schema.define(version: 20170718102301) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -124,6 +124,22 @@ ActiveRecord::Schema.define(version: 20170713084330) do
   end
 
   add_index "component_entries", ["product_id"], name: "index_component_entries_on_product_id", using: :btree
+
+  create_table "content_blocks", force: :cascade do |t|
+    t.integer  "section_id",    limit: 4,                 null: false
+    t.integer  "template",      limit: 4,     default: 0, null: false
+    t.integer  "resource_id",   limit: 4
+    t.string   "resource_type", limit: 255
+    t.string   "headline",      limit: 255
+    t.string   "subhead",       limit: 255
+    t.text     "body",          limit: 65535
+    t.integer  "priority",      limit: 4,     default: 0, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "content_blocks", ["resource_type", "resource_id"], name: "index_content_blocks_on_resource_type_and_resource_id", using: :btree
+  add_index "content_blocks", ["section_id"], name: "index_content_blocks_on_section_id", using: :btree
 
   create_table "countries", id: false, force: :cascade do |t|
     t.string "code", limit: 2,   null: false
@@ -564,6 +580,18 @@ ActiveRecord::Schema.define(version: 20170713084330) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "page_id",    limit: 4,                 null: false
+    t.string   "layout",     limit: 255,               null: false
+    t.integer  "width",      limit: 4,   default: 12,  null: false
+    t.integer  "height",     limit: 4,   default: 400, null: false
+    t.integer  "priority",   limit: 4,   default: 0,   null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "shipments", force: :cascade do |t|
     t.integer  "order_id",           limit: 4,     null: false

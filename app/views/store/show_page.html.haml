@@ -1,10 +1,11 @@
 - meta_tags_for(@page)
 
 #static-wrap{class: @page.albums.any? && 'has-sidebar'}
-  %div{class: @page.wysiwyg? ? 'container' : 'freeform'}
-    - if current_user.can_update?(Page)
-      = link_to icon('scissors'), layout_admin_page_path(@page), class: 'btn btn-sm btn-default', style: 'position: absolute; right: 15px;'
-    = @page.content.html_safe if @page.content.present?
+  - if @page.sections.any?
+    = render @page.sections
+  - else
+    %div{class: @page.wysiwyg? && 'container'}
+      = @page.content.html_safe if @page.content.present?
 
 - if @page.albums.any?
   = render partial: 'albums/sidebar', object: @page.albums, as: :albums

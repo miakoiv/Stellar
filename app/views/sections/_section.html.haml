@@ -1,0 +1,11 @@
+%section.section{class: section.layout, style: section.to_style}
+  - if section.width
+    .container
+      .row
+        %div{class: section.width_classes}
+          .row
+            = render partial: 'sections/content_blocks', object: section.content_blocks
+  - else
+    .container-fluid
+      .row
+        = render partial: 'sections/content_blocks', object: section.content_blocks
