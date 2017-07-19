@@ -13,18 +13,20 @@ module Uploaders
 
     def initialize(params)
       @store = Store.find(params[:store_id])
+      @inventory = @store.inventories.first
       @file = params[:file]
       @code = @file.original_filename
       @response = []
     end
 
     def process
-      if @file.content_type =~ /excel/
-        process_spreadsheetml
-      else
-        process_csv
+      unless @inventory.nil?
+        if @file.content_type =~ /excel/
+          process_spreadsheetml
+        else
+          process_csv
+        end
       end
-
       @response
     end
 
@@ -55,7 +57,7 @@ module Uploaders
     end
 
     def update_product_from(row)
-      if product = Product.update_from_csv_row(@store, row, @code)
+      if product = Product.update_from_csv_row(@store, @inventory, row, @code)
         @response << product.as_json(
           only: [:code, :title, :subtitle], methods: [:formatted_price_string]
         )

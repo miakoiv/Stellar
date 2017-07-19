@@ -19,6 +19,7 @@
     dictDefaultMessage: "#{I18n.t('admin.products.upload_modal.dropzone_message')}"
     paramName: 'file'
     acceptedFiles: '.csv,.xls'
+    timeout: 600000
     init: ->
       @on 'success', (file, response) ->
         $ul = $('#upload-complete > ul')

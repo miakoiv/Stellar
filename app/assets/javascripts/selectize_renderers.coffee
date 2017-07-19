@@ -4,7 +4,7 @@ $.fn.selectize.renderers =
   item: (item, escape) ->
     """
     <div>
-      <img src="#{item.icon_image || BLANK_IMAGE}" alt="">
+      <img src="#{item.icon_image_url || BLANK_IMAGE}" alt="">
       <strong>#{escape(item.title)}</strong>
       #{if item.subtitle then escape(item.subtitle) else ''}
     </div>
@@ -20,7 +20,7 @@ $.fn.selectize.renderers =
           #{escape(item.code)}
         </span>
       </div>
-      <img src="#{item.icon_image || BLANK_IMAGE}" alt="">
+      <img src="#{item.icon_image_url || BLANK_IMAGE}" alt="">
       <strong>#{escape(item.title)}</strong>
       #{if item.subtitle then escape(item.subtitle) else ''}
     </div>

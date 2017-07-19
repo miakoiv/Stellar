@@ -152,14 +152,14 @@ class Product < ActiveRecord::Base
     ]
   end
 
-  # Takes a CSV::Row and updates a product from its data in the given store.
-  # Returns the updated product, or nil if it fails. Supported fields:
+  # Takes a CSV::Row and updates a product from its data in the given store
+  # and inventory. Returns the updated product, or nil if it fails.
+  # Supported fields:
   # product_code     : required
   # retail_price     : anything supported by Monetize.parse
   # inventory_amount : targets the first inventory
-  def self.update_from_csv_row(store, row, code)
+  def self.update_from_csv_row(store, inventory, row, code)
     product = store.products.where(code: row[:product_code]).first
-    inventory = store.inventories.first
     return nil if product.nil? || inventory.nil?
 
     begin
@@ -455,9 +455,14 @@ class Product < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(only: [:id, :code, :customer_code, :title, :subtitle]).merge(
-      icon_image: cover_image(:presentational).url(:icon)
-    )
+    super({
+      only: [:id, :code, :customer_code, :title, :subtitle],
+      methods: [:icon_image_url]
+    }.merge(options))
+  end
+
+  def icon_image_url
+    cover_image.present? && cover_image(:presentational).url(:icon)
   end
 
   # Retail price string representation for JSON.
