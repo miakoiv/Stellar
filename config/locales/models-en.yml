@@ -86,6 +86,9 @@ en:
       role:
         one: role
         other: roles
+      section:
+        one: section
+        other: sections
       shipment:
         one: shipment
         other: shipments
@@ -342,6 +345,10 @@ en:
         requisite_id: Requisite product
       role:
         name: Name
+      section:
+        layout: Layout
+        width: Width
+        height: Height
       shipment:
         shipping_method_id: Shipping method
         number: Number

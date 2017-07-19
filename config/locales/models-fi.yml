@@ -86,6 +86,9 @@ fi:
       role:
         one: rooli
         other: roolit
+      section:
+        one: lohko
+        other: lohkot
       shipment:
         one: toimitus
         other: toimitukset
@@ -342,6 +345,10 @@ fi:
         requisite_id: Tarvittava tuote
       role:
         name: Nimi
+      section:
+        layout: Asettelu
+        width: Leveys
+        height: Korkeus
       shipment:
         shipping_method_id: Toimitustapa
         number: Numero
