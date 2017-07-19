@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class ContentBlock < ActiveRecord::Base
+class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
     :map_latitude,    # map location
@@ -33,6 +33,6 @@ class ContentBlock < ActiveRecord::Base
 
   #---
   def to_partial_path
-    "content_blocks/templates/#{template}"
+    "segments/templates/#{template}"
   end
 end

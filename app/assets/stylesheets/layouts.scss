@@ -1,11 +1,11 @@
 .single-col {
-  .block { @extend .col-xs-12; }
+  .segment { @extend .col-xs-12; }
 }
 
 .double-col {
-  .block { @extend .col-xs-12, .col-sm-6; }
+  .segment { @extend .col-xs-12, .col-sm-6; }
 }
 
 .triple-col {
-  .block { @extend .col-xs-12, .col-sm-12, .col-md-4; }
+  .segment { @extend .col-xs-12, .col-sm-12, .col-md-4; }
 }

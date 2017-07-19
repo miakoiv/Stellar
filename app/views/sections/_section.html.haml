@@ -4,8 +4,8 @@
       .row
         %div{class: section.width_classes}
           .row
-            = render partial: 'sections/content_blocks', object: section.content_blocks
+            = render partial: 'sections/section_segments', object: section.segments
   - else
     .container-fluid
       .row
-        = render partial: 'sections/content_blocks', object: section.content_blocks
+        = render partial: 'sections/section_segments', object: section.segments

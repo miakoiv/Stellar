@@ -1,6 +1,6 @@
-class CreateContentBlocks < ActiveRecord::Migration
+class CreateSegments < ActiveRecord::Migration
   def change
-    create_table :content_blocks do |t|
+    create_table :segments do |t|
       t.belongs_to :section, null: false, index: true
       t.integer :template, null: false, default: 0
       t.belongs_to :resource, polymorphic: true, index: true

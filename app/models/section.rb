@@ -1,11 +1,11 @@
 #encoding: utf-8
 #
-# Sections are page subdivisions defining the layout of its content blocks.
-# The blocks contain the actual content and have optional associations to
+# Sections are page subdivisions defining the layout of its content segments.
+# The segments contain the actual content and have optional associations to
 # external resources like images, products, promotions, etc.
 #
 # The layout for a section is selected from presets that specify how many
-# blocks of what size are created inside.
+# contained segments are created.
 #
 class Section < ActiveRecord::Base
 
@@ -33,7 +33,7 @@ class Section < ActiveRecord::Base
 
   #---
   belongs_to :page
-  has_many :content_blocks, dependent: :destroy
+  has_many :segments, dependent: :destroy
 
   default_scope { sorted }
 
