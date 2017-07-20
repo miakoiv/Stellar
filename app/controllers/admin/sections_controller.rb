@@ -4,7 +4,6 @@ class Admin::SectionsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_page, only: [:new, :create]
   before_action :set_section, only: [:edit, :update, :destroy]
 
   authority_actions reorder: 'update'
@@ -14,6 +13,7 @@ class Admin::SectionsController < ApplicationController
 
   # GET /admin/pages/1/sections/new.js
   def new
+    @page = current_store.pages.friendly.find(params[:page_id])
     @section = @page.sections.build
 
     respond_to :js
@@ -26,11 +26,11 @@ class Admin::SectionsController < ApplicationController
 
   # POST /admin/pages/1/sections/create.js
   def create
-    @section = @page.sections.build(section_params.merge(priority: @page.sections.count))
+    page = current_store.pages.friendly.find(params[:page_id])
+    @section = page.sections.build(section_params.merge(priority: page.sections.count))
 
     respond_to do |format|
       if @section.save
-        @page = nil
         format.js { flash.now[:notice] = t('.notice', section: @section) }
       else
         format.js { render json: @section.errors, status: :unprocessable_entity }
@@ -50,11 +50,7 @@ class Admin::SectionsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-    def set_page
-      @page = current_store.pages.friendly.find(params[:page_id])
-    end
-
+    # Use callbacks to share common setup or constraints between actions.
     def set_section
       @section = Section.find(params[:id])
     end
