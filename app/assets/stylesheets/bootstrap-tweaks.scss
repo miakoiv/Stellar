@@ -460,6 +460,30 @@ img.img-center {
 
 
 /*
+ * Layout editor elements
+ */
+.section-list { }
+.section-list .section-list-item {
+  @extend .panel, .panel-default;
+}
+.section-list-item .section-heading {
+  @extend .panel-heading;
+}
+.section-list-item .section-body {
+  @extend .panel-body;
+  padding-left: 0;
+  padding-right: 0;
+}
+.section-body a {
+  display: block;
+  color: inherit;
+}
+.section-body .segment { }
+
+.section-list .sortable-placeholder { margin-bottom: 20px; }
+
+
+/*
  * Quick edit panel
  */
 .quick-edit-panel { }
@@ -594,7 +618,7 @@ fieldset[disabled] .help-block { display: none; }
 /*
  * Sortable tables
  */
-.table > tbody.sortable .handle { cursor: grab; }
+ .sortable .handle { cursor: grab; }
 .sortable-placeholder {
   background-color: rgba($brand-primary, 0.333);
   outline: $brand-primary solid 1px;
