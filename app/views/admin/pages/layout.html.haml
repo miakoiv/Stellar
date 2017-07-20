@@ -9,6 +9,9 @@
     .col-md-5
       .quick-edit-panel
         .header
+          - if current_user.can_create?(Section)
+            = link_to new_admin_page_section_path(@page), remote: true, class: 'btn btn-primary' do
+              = icon('plus', t('.new_section'))
           = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
             = icon('chevron-circle-left', t('actions.back'))
         #layout-form
@@ -26,7 +29,7 @@
       opacity: 0.5
       revert: 200
     ).bind 'sortupdate', (e, ui) ->
-      $.post '#{reorder_admin_sections_path}',
+      $.post '#{reorder_admin_page_sections_path(@page)}',
         {reorder: $(this).sortable('toArray')}
 
 - else
