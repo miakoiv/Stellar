@@ -1,2 +1,4 @@
+$('#page-list .dd-item').removeClass('active');
+$("##{dom_id(@page)}").closest('.dd-item').addClass('active');
 $('#page-form').html("#{j render partial: 'admin/pages/edit'}");
 $('#page-form').initialize();
