@@ -7,6 +7,7 @@ class CreateSegments < ActiveRecord::Migration
       t.string :headline
       t.string :subhead
       t.text :body
+      t.text :metadata
       t.integer :priority, null: false, default: 0
 
       t.timestamps null: false

@@ -585,6 +585,7 @@ ActiveRecord::Schema.define(version: 20170719115936) do
     t.string   "headline",      limit: 255
     t.string   "subhead",       limit: 255
     t.text     "body",          limit: 65535
+    t.text     "metadata",      limit: 65535
     t.integer  "priority",      limit: 4,     default: 0, null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
