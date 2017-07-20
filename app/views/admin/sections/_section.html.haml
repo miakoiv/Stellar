@@ -1,7 +1,10 @@
 .section-list-item[section]
   .section-heading
-    = drag_handle
-    = section.layout
+    .section-handle
+      = drag_handle
+    = link_to edit_admin_section_path(section), remote: true do
+      .section-title
+        = section
   .section-body
-    .section-container{class: [section.layout, section.width_classes]}
+    .section-container{class: [section.layout, section.width]}
       = render partial: 'admin/sections/section_segments', object: section.segments

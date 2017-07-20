@@ -9,6 +9,8 @@
 #
 class Section < ActiveRecord::Base
 
+  resourcify
+  include Authority::Abilities
   include Imageable
   include Reorderable
 
@@ -18,17 +20,9 @@ class Section < ActiveRecord::Base
     single-col double-col triple-col
   }.freeze
 
-  # Available widths with Bootstrap grid CSS classes. Nil width denotes
-  # full viewport width, using a fluid container.
-  WIDTH_CLASSES = {
-    12 => %w{col-xs-12},
-    10 => %w{col-xs-12
-             col-sm-10 col-sm-offset-1},
-     8 => %w{col-xs-10 col-xs-offset-1
-             col-sm-8 col-sm-offset-2},
-     6 => %w{col-xs-10 col-xs-offset-1
-             col-sm-8 col-sm-offset-2
-             col-md-6 col-md-offset-3},
+  # Available widths defined in layouts.css.
+  WIDTHS = %w{
+    fluid twelve ten eight six
   }.freeze
 
   #---
@@ -39,12 +33,21 @@ class Section < ActiveRecord::Base
 
   #---
   validates :page_id, presence: true
-  validates :width, inclusion: {in: WIDTH_CLASSES.keys}, allow_nil: true
+  validates :width, inclusion: {in: WIDTHS}
   validates :height, numericality: {only_integer: true}, allow_nil: true
 
   #---
-  def width_classes
-    width && WIDTH_CLASSES[width]
+  def self.layout_options
+    LAYOUTS.map { |l| [Section.human_attribute_value(:layout, l), l] }
+  end
+
+  def self.width_options
+    WIDTHS.map { |w| [Section.human_attribute_value(:width, w), w] }
+  end
+
+  #---
+  def fluid?
+    width == 'fluid'
   end
 
   def to_style
@@ -52,5 +55,13 @@ class Section < ActiveRecord::Base
       height.present? && styles << "height: #{height}em;"
       cover_image.present? && styles << "background-image: url(#{cover_image.url(:lightbox)}); background-size: cover; background-repeat: no-repeat;"
     end.join ' '
+  end
+
+  def geometry
+    "#{Section.human_attribute_value(:layout, layout)}, #{Section.human_attribute_value(:width, width)}"
+  end
+
+  def to_s
+    geometry
   end
 end

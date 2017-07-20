@@ -566,13 +566,13 @@ ActiveRecord::Schema.define(version: 20170719115936) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sections", force: :cascade do |t|
-    t.integer  "page_id",    limit: 4,                null: false
-    t.string   "layout",     limit: 255,              null: false
-    t.integer  "width",      limit: 4,   default: 12
+    t.integer  "page_id",    limit: 4,                      null: false
+    t.string   "layout",     limit: 255,                    null: false
+    t.string   "width",      limit: 255, default: "twelve", null: false
     t.integer  "height",     limit: 4
-    t.integer  "priority",   limit: 4,   default: 0,  null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "priority",   limit: 4,   default: 0,        null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
   end
 
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree

@@ -61,6 +61,13 @@ en:
           inventory_manage: manage inventory
           store_admin: store administrator
           superuser: superuser
+      section:
+        width:
+          fluid: window width
+          twelve: page width (12 columns)
+          ten: narrow margins (10 columns)
+          eight: wide margins (8 columns)
+          six: half page width (6 columns)
       user:
         group:
           guest: Guest

@@ -1,0 +1,8 @@
+= bootstrap_form_for [:admin, @page, @section], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset
+        = f.select :layout, Section.layout_options, {}, {required: true, class: 'selectize'}
+        - unless @section.new_record?
+          = f.select :width, Section.width_options, {}, {required: true, class: 'selectize'}
+          = f.text_field :height

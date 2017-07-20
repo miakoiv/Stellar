@@ -61,6 +61,17 @@ fi:
           inventory_manage: varastojen hallinta
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
+      section:
+        layout:
+          'single-col': yksi palsta
+          'double-col': kaksi palstaa
+          'triple-col': kolme palstaa
+        width:
+          fluid: ikkunan leveys
+          twelve: sivun leveys (12 palstaa)
+          ten: kapeat marginaalit (10 palstaa)
+          eight: leveät marginaalit (8 palstaa)
+          six: puoli sivun leveyttä (6 palstaa)
       user:
         group:
           guest: Vieras

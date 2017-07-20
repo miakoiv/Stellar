@@ -463,13 +463,25 @@ img.img-center {
  * Layout editor elements
  */
 .section-list { }
-.section-list .section-list-item {
+.section-list-item {
   @extend .panel, .panel-default;
 }
-.section-list-item .section-heading {
+.section-heading {
   @extend .panel-heading;
+  font-style: italic;
+
+    &:hover { background-color: darken($panel-default-heading-bg, 15%); }
 }
-.section-list-item .section-body {
+.section-heading a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.section-handle {
+  @extend .pull-left;
+  margin-right: 15px;
+}
+.section-body {
   @extend .panel-body;
   padding-left: 0;
   padding-right: 0;

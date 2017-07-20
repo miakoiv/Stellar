@@ -117,6 +117,8 @@ fi:
         new_page: Uusi sivu
       form:
         show_resource: Näytä kohde
+      layout:
+        new_section: Uusi lohko
     portals:
       index:
         new_portal: Uusi portaali

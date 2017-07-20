@@ -1,0 +1,4 @@
+$("##{dom_id(@section)}").replaceWith("#{j render @section}");
+$("##{dom_id(@section)} > .section-heading").effect('highlight');
+$('#layout-form').html("#{j render partial: 'admin/sections/edit'}");
+$('#layout-form').initialize();

@@ -137,6 +137,8 @@ en:
         new_page: New page
       form:
         show_resource: Show target
+      layout:
+        new_section: New section
     portals:
       index:
         new_portal: New portal
