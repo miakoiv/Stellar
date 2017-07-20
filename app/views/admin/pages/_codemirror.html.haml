@@ -1,0 +1,12 @@
+= bootstrap_form_for [:admin, @page], layout: :vertical do |f|
+  %fieldset
+  = f.text_area :content, rows: 40, class: 'monospace input-sm'
+  %fieldset.actions
+    = f.form_group do
+      = f.primary
+
+:coffee
+  $content = $('#page_content')[0]
+  cm = CodeMirror.fromTextArea $content,
+    mode: 'text/html'
+    lineWrapping: true

@@ -1,23 +1,33 @@
-.page-header
-  = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
-    = icon('chevron-circle-left', t('actions.back'))
-  %h1= icon('file-text-o', @page)
-
 - if @page.wysiwyg?
-  = render partial: 'wysiwyg_content'
 
-= bootstrap_form_for [:admin, @page], layout: :vertical do |f|
-  - if @page.wysiwyg?
-    = f.hidden_field :content
-  - else
-    = f.text_area :content, rows: 40, class: 'monospace input-sm'
+  .row
+    .col-md-7
+      .page-header
+        %h1= icon('scissors', @page)
+      #section-list.section-list.sortable
+        = render @page.sections
+    .col-md-5
+      .quick-edit-panel
+        .header
+          = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
+            = icon('chevron-circle-left', t('actions.back'))
+        #layout-form
 
-    :coffee
-      $content = $('#page_content')[0]
-      cm = CodeMirror.fromTextArea $content,
-        mode: 'text/html'
-        lineWrapping: true
+  :coffee
+    $('.quick-edit-panel').stick_in_parent
+      parent: $('.row')
+      offset_top: 80
 
-  %fieldset.actions
-    = f.form_group do
-      = f.primary
+    $('#section-list').sortable(
+      items: '> .section-list-item'
+      handle: '.handle'
+      placeholder: 'sortable-placeholder'
+      forcePlaceholderSize: true
+      opacity: 0.5
+      revert: 200
+    ).bind 'sortupdate', (e, ui) ->
+      $.post '#{reorder_admin_sections_path}',
+        {reorder: $(this).sortable('toArray')}
+
+- else
+  = render partial: 'codemirror'

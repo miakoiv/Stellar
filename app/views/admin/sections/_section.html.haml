@@ -1,0 +1,7 @@
+.section-list-item[section]
+  .section-heading
+    = drag_handle
+    = section.layout
+  .section-body
+    .section-container{class: [section.layout, section.width_classes]}
+      = render partial: 'admin/sections/section_segments', object: section.segments
