@@ -110,10 +110,10 @@ Rails.application.routes.draw do
       resources :images, shallow: true
       post :rearrange, on: :collection
       get :layout, on: :member
-    end
-    resources :sections do
-      resources :segments, shallow: true
-      post :reorder, on: :collection
+      resources :sections, shallow: true do
+        resources :segments
+        post :reorder, on: :collection
+      end
     end
     resources :albums do
       resources :images, shallow: true
