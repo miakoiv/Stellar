@@ -49,6 +49,15 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
+  # DELETE /admin/sections/1.js
+  def destroy
+    respond_to do |format|
+      if @section.destroy
+        format.js { flash.now[:notice] = t('.notice', section: @section) }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section

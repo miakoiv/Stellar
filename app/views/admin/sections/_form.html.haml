@@ -6,3 +6,8 @@
         - unless @section.new_record?
           = f.select :width, Section.width_options, {}, {required: true, class: 'selectize'}
           = f.text_field :height
+    - unless @section.new_record?
+      .panel-footer
+        - if current_user.can_delete?(@section)
+          .pull-right
+            = link_to icon('remove', t('actions.delete')), admin_section_path(@section), method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Section.model_name.human, name: @section.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
