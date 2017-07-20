@@ -19,6 +19,13 @@
   border-radius: $list-group-border-radius;
 
   &:hover { background-color: $list-group-hover-bg; }
+  &.active {
+    color: $list-group-active-color;
+    background-color: $list-group-active-bg;
+    border-color: $list-group-active-border;
+
+    &:hover { background-color: darken($list-group-active-bg, 5%); }
+  }
 
   .dd-handle {
     @extend .pull-left;
