@@ -470,7 +470,7 @@ img.img-center {
   @extend .panel-heading;
   font-style: italic;
 
-    &:hover { background-color: darken($panel-default-heading-bg, 15%); }
+  &:hover { background-color: darken($panel-default-heading-bg, 15%); }
 }
 .section-heading a {
   display: block;
@@ -492,6 +492,11 @@ img.img-center {
 }
 .section-body .segment { }
 
+.section-list-item.active {
+  @extend .panel-primary;
+
+  .section-heading:hover { background-color: darken($panel-primary-heading-bg, 15%); }
+}
 .section-list .sortable-placeholder { margin-bottom: 20px; }
 
 
