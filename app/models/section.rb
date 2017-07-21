@@ -15,9 +15,12 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Available layouts defined as CSS classes found in layouts.css.
-  LAYOUTS = %w{
-    single-col double-col triple-col
+  # Available layout names defined in layouts.css, with default
+  # initial content segment templates.
+  LAYOUTS = {
+    'single-col' => %w{column},
+    'double-col' => %w{column column},
+    'triple-col' => %w{column column column},
   }.freeze
 
   # Available widths defined in layouts.css.
@@ -37,8 +40,11 @@ class Section < ActiveRecord::Base
   validates :height, numericality: {only_integer: true}, allow_nil: true
 
   #---
+  after_create :create_segments
+
+  #---
   def self.layout_options
-    LAYOUTS.map { |l| [Section.human_attribute_value(:layout, l), l] }
+    LAYOUTS.keys.map { |l| [Section.human_attribute_value(:layout, l), l] }
   end
 
   def self.width_options
@@ -64,4 +70,11 @@ class Section < ActiveRecord::Base
   def to_s
     geometry
   end
+
+  private
+    def create_segments
+      LAYOUTS[layout].each do |template|
+        segments.create(template: template)
+      end
+    end
 end
