@@ -485,13 +485,40 @@ img.img-center {
   @extend .panel-body;
   padding-left: 0;
   padding-right: 0;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVQY02N4//79f2T869cvFMxABwXoAuga6KAAAHEJ9yHgX6ZvAAAAAElFTkSuQmCC);
 }
 .section-body a {
   display: block;
   color: inherit;
 }
-.section-body .segment { }
+.section-body .segment {
+  padding: 4px;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border: 1px dotted $table-border-color;
+  background-color: #fff;
 
+  .segment-content {
+    font-size: 60%;
+    min-height: 1.42857em;
+  }
+  &.active {
+    background-color: $brand-primary;
+    color: #fff;
+  }
+  &:hover:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba($brand-primary, 0.333);
+  }
+}
+
+/* Active item and sorting placeholder */
 .section-list-item.active {
   @extend .panel-primary;
 

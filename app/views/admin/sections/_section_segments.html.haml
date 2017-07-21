@@ -1,4 +1,5 @@
 - section_segments.each_with_index do |segment, number|
   = link_to edit_admin_segment_path(segment), remote: true do
     .segment{class: "segment-#{number}"}
-      = render segment
+      .segment-content
+        = render segment
