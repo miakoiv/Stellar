@@ -32,6 +32,11 @@ class Segment < ActiveRecord::Base
   default_scope { sorted }
 
   #---
+  def self.template_options
+    Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
+  end
+
+  #---
   def to_partial_path
     "segments/templates/#{template}"
   end
