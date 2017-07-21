@@ -68,6 +68,17 @@ en:
           ten: narrow margins (10 columns)
           eight: wide margins (8 columns)
           six: half page width (6 columns)
+      segment:
+        template:
+          plain: plain text
+          column: text column
+          header: page header
+          picture: picture
+          gallery: gallery
+          map: map
+          category: category
+          product: product
+          promotion: promotion
       user:
         group:
           guest: Guest

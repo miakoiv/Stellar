@@ -89,6 +89,9 @@ en:
       section:
         one: section
         other: sections
+      segment:
+        one: this part of the page
+        other: these parts of the page
       shipment:
         one: shipment
         other: shipments
@@ -349,6 +352,11 @@ en:
         layout: Layout
         width: Width
         height: Height
+      segment:
+        template: Content type
+        headline: Headline
+        subhead: Subhead
+        body: Body text
       shipment:
         shipping_method_id: Shipping method
         number: Number

@@ -1,0 +1,4 @@
+$("##{dom_id(@segment)} > .segment-content").html("#{j render @segment}");
+$("##{dom_id(@segment)}").addClass('active');
+$('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
+$('#layout-form').initialize();

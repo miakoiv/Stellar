@@ -1,0 +1,6 @@
+$('#section-list > .section-list-item').removeClass('active');
+$('#section-list > .section-list-item .segment').removeClass('active');
+$("##{dom_id(@segment.section)}").addClass('active');
+$("##{dom_id(@segment)}").addClass('active');
+$('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
+$('#layout-form').initialize();

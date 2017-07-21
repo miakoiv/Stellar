@@ -89,6 +89,9 @@ fi:
       section:
         one: lohko
         other: lohkot
+      segment:
+        one: tämä sivun osa
+        other: nämä sivun osat
       shipment:
         one: toimitus
         other: toimitukset
@@ -349,6 +352,11 @@ fi:
         layout: Asettelu
         width: Leveys
         height: Korkeus
+      segment:
+        template: Sisällön tyyppi
+        headline: Otsikko
+        subhead: Alaotsikko
+        body: Leipäteksti
       shipment:
         shipping_method_id: Toimitustapa
         number: Numero

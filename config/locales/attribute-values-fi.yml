@@ -72,6 +72,17 @@ fi:
           ten: kapeat marginaalit (10 palstaa)
           eight: leveät marginaalit (8 palstaa)
           six: puoli sivun leveyttä (6 palstaa)
+      segment:
+        template:
+          plain: muotoilematon teksti
+          column: tekstipalsta
+          header: sivun otsake
+          picture: kuva
+          gallery: galleria
+          map: kartta
+          category: tuoteryhmä
+          product: tuote
+          promotion: kampanja
       user:
         group:
           guest: Vieras
