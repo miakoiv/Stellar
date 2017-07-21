@@ -1,0 +1,5 @@
+- if column.headline.present?
+  %h2
+    = column.headline
+    %small= column.subhead
+= column.body.html_safe if column.body.present?
