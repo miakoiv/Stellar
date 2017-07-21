@@ -487,35 +487,40 @@ img.img-center {
   padding-right: 0;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVQY02N4//79f2T869cvFMxABwXoAuga6KAAAHEJ9yHgX6ZvAAAAAElFTkSuQmCC);
 }
-.section-body a {
-  display: block;
-  color: inherit;
-}
 .section-body .segment {
   padding: 4px;
-  margin-right: -1px;
-  margin-bottom: -1px;
   border: 1px dotted $table-border-color;
   background-color: #fff;
 
   .segment-content {
-    font-size: 60%;
-    min-height: 1.42857em;
+    min-height: 40px;
+    font-size: 0.6em;
   }
-  &.active {
-    background-color: $brand-primary;
-    color: #fff;
-  }
-  &:hover:before {
-    content: '';
-    display: block;
+  .segment-link {
+    display: none;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba($brand-primary, 0.333);
+    background-color: rgba($brand-primary, 0.667);
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      color: #fff;
+      font-size: 150%;
+      text-align: right;
+    }
   }
+
+  &.active {
+    outline: 2px solid $brand-primary;
+    outline-offset: 1px;
+  }
+  &:hover .segment-link { display: block; }
 }
 
 /* Active item and sorting placeholder */

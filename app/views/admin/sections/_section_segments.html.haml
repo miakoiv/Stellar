@@ -1,5 +1,6 @@
 - section_segments.each_with_index do |segment, number|
-  = link_to edit_admin_segment_path(segment), remote: true do
-    .segment{class: "segment-#{number}"}
-      .segment-content
-        = render segment
+  .segment[segment]{class: "segment-#{number}"}
+    .segment-content
+      = render segment
+    .segment-link
+      = link_to icon('pencil'), edit_admin_segment_path(segment), remote: true
