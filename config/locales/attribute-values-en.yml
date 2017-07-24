@@ -70,7 +70,7 @@ en:
           six: half page width (6 columns)
       segment:
         template:
-          plain: plain text
+          raw: ʜᴛᴍʟ code
           column: text column
           header: page header
           picture: picture
