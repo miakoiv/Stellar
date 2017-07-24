@@ -1,5 +1,13 @@
-- if column.headline.present?
-  %h2
-    = column.headline
-    %small= column.subhead
-= column.body.html_safe if column.body.present?
+= f.text_area :body, rows: 10, skip_label: true
+
+:coffee
+  $('#segment_body').summernote
+    lang: "#{t('culture')}"
+    toolbar: [
+      ['para', ['style', 'ul', 'ol', 'paragraph']]
+      ['font', ['bold', 'italic', 'clear']]
+      ['insert', ['table', 'hr', 'link', 'picture', 'video']]
+      ['misc', ['codeview']]
+    ]
+    dialogsFade: true
+    disableDragAndDrop: true

@@ -1,1 +1,7 @@
-= plain.body.html_safe if plain.body.present?
+= f.text_area :body, rows: 10, skip_label: true
+
+:coffee
+  $content = $('#segment_body')[0]
+  cm = CodeMirror.fromTextArea $content,
+    mode: 'text/html'
+    lineWrapping: true

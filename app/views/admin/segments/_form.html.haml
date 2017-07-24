@@ -5,18 +5,7 @@
         = f.select :template, Segment.template_options, {}, {required: true, class: 'selectize'}
         = f.text_field :headline
         = f.text_field :subhead
-        = f.text_area :body, rows: 10, skip_label: true
+        = render partial: "admin/#{@segment.to_partial_path}", locals: {f: f}
       %fieldset.actions
         = f.form_group do
           = f.primary
-
-:coffee
-  $('#segment_body').summernote
-    lang: "#{t('culture')}"
-    toolbar: [
-      ['para', ['style', 'ul', 'ol', 'paragraph']]
-      ['font', ['bold', 'italic', 'clear']]
-      ['insert', ['picture', 'hr']]
-      ['misc', ['codeview']]
-    ]
-    dialogsFade: true
