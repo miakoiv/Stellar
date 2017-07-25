@@ -20,7 +20,7 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_user.incoming_order_types
     return redirect_to admin_reports_path if @order_types.empty?
     @query = saved_search_query('order_item', 'admin_order_item_search')
-    @sales = Reports::Sales.new(search_params)
+    @sales_data = Reports::Sales.new(search_params)
   end
 
   # GET /admin/reports/purchases
@@ -28,7 +28,7 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_user.outgoing_order_types
     return redirect_to admin_reports_path if @order_types.empty?
     @query = saved_search_query('order_item', 'admin_order_item_search')
-    @purchases = Reports::Purchases.new(search_params)
+    @purchases_data = Reports::Purchases.new(search_params)
   end
 
   private

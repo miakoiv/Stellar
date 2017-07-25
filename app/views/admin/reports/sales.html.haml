@@ -9,11 +9,11 @@
   .report-body
     %dl.dl-horizontal
       %dt= t('admin.reports.sales.total_value')
-      %dd= humanized_money_with_symbol @sales.total_value
+      %dd= humanized_money_with_symbol @sales_data.total_value
       %dt= t('admin.reports.sales.total_items')
-      %dd= @sales.total_items
+      %dd= @sales_data.total_items
       %dt= t('admin.reports.sales.products')
-      %dd= @sales.by_product.keys.size
+      %dd= @sales_data.by_product.keys.size
 
 = render partial: 'sales_query'
 = render partial: 'sales_chart'

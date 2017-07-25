@@ -10,7 +10,7 @@
         %th.col-xs-1.text-right= col(OrderItem, :subtotal)
 
     %tbody
-      - @purchases.by_product.each do |product, items|
+      - @purchases_data.by_product.each do |product, items|
         %tr.expandable{data: {toggle: 'collapse', target: ".#{dom_id(product)}"}}
           %td= icon('plus')
           %td

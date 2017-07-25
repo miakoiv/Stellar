@@ -1,14 +1,20 @@
 .panel.panel-default
   .panel-body
-    %canvas#purchases-chart
+    %canvas#purchases-chart{data: {labels: @purchases_data.labels, dataset: @purchases_data.dataset}}
 
 :coffee
   moment.locale '#{I18n.locale}'
-  data = #{@purchases.chart_data.to_json}
-  ctx = $('#purchases-chart')
-  chart = new Chart ctx,
+  $ctx = $('#purchases-chart')
+  chart = new Chart $ctx,
     type: 'bar',
-    data: data,
+    data:
+      labels: $ctx.data 'labels'
+      datasets: [
+        {
+          label: '#{j I18n.t("admin.reports.purchases.chart.daily")}'
+          data: $ctx.data 'dataset'
+        }
+      ]
     options:
       legend:
         display: false

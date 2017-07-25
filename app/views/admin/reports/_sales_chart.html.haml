@@ -1,14 +1,20 @@
 .panel.panel-default
   .panel-body
-    %canvas#sales-chart
+    %canvas#sales-chart{data: {labels: @sales_data.labels, dataset: @sales_data.dataset}}
 
 :coffee
   moment.locale '#{I18n.locale}'
-  data = #{@sales.chart_data.to_json}
-  ctx = $('#sales-chart')
-  chart = new Chart ctx,
+  $ctx = $('#sales-chart')
+  chart = new Chart $ctx,
     type: 'bar',
-    data: data,
+    data:
+      labels: $ctx.data 'labels'
+      datasets: [
+        {
+          label: '#{j I18n.t("admin.reports.sales.chart.daily")}'
+          data: $ctx.data 'dataset'
+        }
+      ]
     options:
       legend:
         display: false
