@@ -29,4 +29,9 @@
         {reorder: $(this).sortable('toArray')}
 
 - else
+  .page-header
+    = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+    %h1= icon('scissors', @page)
+
   = render partial: 'codemirror'
