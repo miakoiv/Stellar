@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'execjs'
 
 # Asset precompilation in parallel
-gem 'turbo-sprockets-rails4'
+#gem 'turbo-sprockets-rails4'
 
 # ActiveJob backend and its runner daemon
 gem 'delayed_job_active_record'
