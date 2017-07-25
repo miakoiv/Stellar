@@ -538,7 +538,7 @@ class Order < ActiveRecord::Base
       className: (concluded? ? 'success' : 'warning'),
       content: I18n.l(approved_at.to_date),
       start: approved_at.to_date,
-    end: concluded_at.try(:to_date) || Time.current
+      end: concluded_at.try(:to_date) || Time.current
     } if approved?
 
     events << {
