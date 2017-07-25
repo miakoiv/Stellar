@@ -10,20 +10,25 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
+// Gem assets
+
 //= require moment
-//= require moment/fi.js
+//= require moment/fi
 //= require jquery
-//= require wiselinks
-//= require wiselinks_init
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
 //= require jquery.sticky-kit
+//= require jquery-tablesorter
+//= require jquery.infinite-pages
+//= require wiselinks
+//= require wiselinks_init
 //= require bootstrap
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fi
 //= require twitter/bootstrap/rails/confirm
-//= require summernote
-//= require summernote/locales
 //= require codemirror
 //= require codemirror/modes/javascript
 //= require codemirror/modes/css
@@ -32,25 +37,27 @@
 //= require dropzone
 //= require magnific-popup
 //= require selectize
-//= require masonry.pkgd.min
-//= require imagesloaded.pkgd.min
-//= require jquery-tablesorter
-//= require jquery.infinite-pages
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.fi.js
 //= require unobtrusive_flash
-//= require bootstrap-notify.min.js
 //= require outdatedbrowser/outdatedBrowser
 //= require nprogress
 //= require clipboard
-//= require parallax.min.js
-//= require numbro.min.js
-//= require languages.min.js
-//= require jquery.grideditor.js
-//= require jquery.grideditor.summernote.js
-//= require jquery.grideditor.settings.js
-//= require Chart.min.js
 //= require vis
+
+// Vendor assets
+
+//= require bootstrap-notify.min
+//= require Chart.min
+//= require imagesloaded.pkgd.min
+//= require masonry.pkgd.min
+//= require numbro.min
+//= require numbro/languages.min
+//= require parallax.min
+//= require summernote.min
+//= require summernote/locales
+
+
+// App assets
+
 //= require_directory ./admin
 //= require_directory ./jasny-bootstrap
 //= require_directory .

@@ -729,13 +729,6 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
- * Summernote fixes
- */
-.note-editable .table th,
-.note-editable .table td { position: relative; }
-
-
-/*
  * Report panels
  */
 .reports { @extend .row, .list-group; }
