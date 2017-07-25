@@ -1,6 +1,18 @@
 = f.text_area :body, rows: 10, skip_label: true
 
 :coffee
+  sendAttachment = (file, callback) ->
+    data = new FormData()
+    data.append 'image[attachment]', file
+    $.ajax
+      url: '#{admin_segment_images_path(@segment)}'
+      data: data
+      processData: false
+      contentType: false
+      type: 'POST'
+      success: (data) ->
+        callback data
+
   $('#segment_body').summernote
     lang: "#{t('culture')}"
     toolbar: [
@@ -11,3 +23,13 @@
     ]
     dialogsFade: true
     disableDragAndDrop: true
+    callbacks:
+      onImageUpload: (files) ->
+        sendAttachment files[0], (data) =>
+          $img = $('<img>', {
+            id: 'image_' + data.id
+            src: data.wysiwyg_url
+            'data-id': data.id
+          })
+          $(this).summernote 'insertNode', $img[0]
+          $('#layout-form input[type=file]').val ''
