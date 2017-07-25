@@ -1,18 +1,17 @@
-#timeline
+#timeline{data: {events: @timeline_orders.map(&:timeline_events).flatten.to_json}}
   - @timeline_orders.each do |order|
     = content_tag_for :span, order, :vis, data: {id: order.id, url: admin_order_path(order), summary: order.summary}
 
 :coffee
+  console.log $('#timeline').data 'events'
   container = $('#timeline')[0]
   groups = (
     {
-      id: $(item).data('id')
+      id: $(item).data 'id'
       content: '<a href="' + $(item).data('url') + '">' + $(item).data('summary') + '</a>'
     } for item in $('#timeline > span')
   )
-  items = new vis.DataSet(
-    #{@timeline_orders.map(&:timeline_events).flatten.to_json}
-  )
+  items = new vis.DataSet($('#timeline').data 'events')
   options =
     locale: '#{I18n.locale}'
     stack: false

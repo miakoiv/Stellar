@@ -6,7 +6,7 @@
       .row
         .col-sm-6
           .form-group
-            = f.select :product_id, [], {}, {multiple: true, placeholder: col(CustomerAsset, :product_id), class: 'selectize-tall selectize-list-group'}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: col(CustomerAsset, :product_id), class: 'selectize-tall selectize-list-group', data: {customer_assets: @customer_assets.map(&:product), selected: @search.raw_options['product_id']}}
         .col-sm-4
           .form-group
             = f.select :user_id, current_store.users.with_assets.map { |u| [u.to_s, u.id] }, {}, {multiple: true, placeholder: col(CustomerAsset, :user_id), class: 'selectize'}
@@ -15,14 +15,16 @@
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
 :coffee
-  items = #{@search.raw_options['product_id'].to_json}
+  $product = $('#customer_asset_search_product_id')
+  customer_assets = $product.data 'customerAssets'
+  selected = $product.data 'selected'
 
-  $('#customer_asset_search_product_id').selectize
+  $product.selectize
     plugins: ['remove_button']
     dropdownParent: 'body'
     preload: true
-    options: #{@customer_assets.map(&:product).to_json}
-    items: #{@search.raw_options['product_id'].to_json}
+    options: customer_assets
+    items: selected
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']

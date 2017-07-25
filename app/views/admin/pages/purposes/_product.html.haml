@@ -1,12 +1,14 @@
 = f.hidden_field :resource_type, value: 'Product'
-= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group'}
+= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: [@page.resource], selected: [@page.resource_id]}}
 
 :coffee
-  $('#page_resource_id').selectize
-    dropdownParent: 'body'
+  $product = $('#page_resource_id')
+  resources = $product.data 'resources'
+  selected = $product.data 'selected'
+  $product.selectize
     preload: true
-    options: [#{@page.resource.present? && @page.resource.to_json}]
-    items: [#{@page.resource_id}]
+    options: resources
+    items: selected
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']

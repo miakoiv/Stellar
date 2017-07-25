@@ -17,7 +17,7 @@
       %tbody
         %tr
           %td.col-xs-4
-            = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {include_blank: true}, {placeholder: col(AlternatePrice, :pricing_group_id), class: 'form-control'}
+            = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {include_blank: true}, {placeholder: col(AlternatePrice, :pricing_group_id), class: 'form-control', data: {markup_percents: current_store.pricing_groups.map { |p| [p.id, p.markup_percent.to_f] }.to_h}}
           %td.col-xs-3= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
           %td.col-xs-2= f.text_field :markup_percent, class: 'form-control text-right', disabled: true
           %td.col-xs-2
@@ -27,7 +27,7 @@
 
 :coffee
   jQuery ->
-    markup_percents = #{current_store.pricing_groups.map { |p| [p.id, p.markup_percent.to_f] }.to_h.to_json}
+    markup_percents = $('#alternate_price_pricing_group_id').data 'markupPercents'
 
     numbro.culture "#{t('culture')}"
     $pricing_group_select = $('#alternate_price_pricing_group_id').selectize

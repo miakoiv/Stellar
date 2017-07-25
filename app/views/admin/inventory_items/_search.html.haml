@@ -12,7 +12,7 @@
             = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
         .col-sm-6.col-md-4
           .form-group
-            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall selectize-list-group'}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall selectize-list-group', data: {inventory_items: @inventory_items.map(&:product), selected: @search.raw_options['product_id']}}
         .col-sm-3.col-md-2
           .form-group
             = f.select :live, Product.availability_options, {include_blank: t('admin.products.search.availability')}, {placeholder: t('admin.products.search.availability'), class: 'form-control selectize'}
@@ -21,12 +21,16 @@
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
 :coffee
-  $('#inventory_item_search_product_id').selectize
+  $product = $('#inventory_item_search_product_id')
+  inventory_items = $product.data 'inventoryItems'
+  selected = $product.data 'selected'
+
+  $product.selectize
     plugins: ['remove_button']
     dropdownParent: 'body'
     preload: true
-    options: #{@inventory_items.map(&:product).to_json}
-    items: #{@search.raw_options['product_id'].to_json}
+    options: inventory_items
+    items: selected
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']
