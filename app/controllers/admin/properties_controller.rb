@@ -21,7 +21,7 @@ class Admin::PropertiesController < ApplicationController
   # GET /admin/properties/1.json
   def show
     respond_to do |format|
-      format.json { render json: @property.product_properties.to_json, status: 200 }
+      format.json { render json: @property.product_properties, status: 200 }
       format.html
     end
   end
