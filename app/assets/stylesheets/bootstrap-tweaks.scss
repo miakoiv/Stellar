@@ -719,16 +719,6 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
- * Snippet panels in wysiwyg content
- */
-.wysiwyg-content a.snip {
-  @extend .panel, .panel-default;
-  display: block;
-  min-height: 3em;
-}
-
-
-/*
  * Report panels
  */
 .reports { @extend .row, .list-group; }
