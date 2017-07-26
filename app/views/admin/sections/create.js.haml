@@ -1,6 +1,0 @@
-$("#{j render @section}").appendTo('#section-list');
-$("##{dom_id(@section)}").addClass('active');
-$('#section-list').sortable('refresh');
-$('#layout-form').html("#{j render partial: 'admin/sections/edit'}");
-$('#layout-form').initialize();
-$(window).scrollTo($('##{dom_id(@section)}'), 300, {offset: -$('.navbar').outerHeight(true)});

@@ -87,7 +87,7 @@ en:
       destroy:
         notice: "Property %{property} deleted."
     sections:
-      create:
+      new:
         notice: "Section %{section} created."
       update:
         notice: "Section %{section} updated."

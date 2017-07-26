@@ -1,0 +1,8 @@
+= render partial: @segment.to_partial_path, object: @segment
+%hr
+%fieldset
+  .row
+    .col-sm-6
+      = f.text_field :headline
+    .col-sm-6
+      = f.text_field :subhead

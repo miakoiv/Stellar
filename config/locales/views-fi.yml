@@ -295,6 +295,7 @@ fi:
     back: Palaa
     show: Näytä
     edit: Muokkaa
+    cancel: Kumoa
     delete: Poista
     select: Valitse
     view: Katso

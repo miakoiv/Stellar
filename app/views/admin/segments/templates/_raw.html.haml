@@ -1,3 +1,5 @@
+= render partial: @segment.to_partial_path, object: @segment
+%hr
 = f.text_area :body, rows: 10, skip_label: true
 
 :coffee
@@ -5,3 +7,4 @@
   cm = CodeMirror.fromTextArea $content,
     mode: 'text/html'
     lineWrapping: true
+    autoRefresh: true

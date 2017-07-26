@@ -1,4 +1,3 @@
-$('#section-list > .section-list-item').removeClass('active');
-$('#section-list > .section-list-item .segment').removeClass('active');
-$('#layout-form').html("#{j render partial: 'admin/sections/new'}");
-$('#layout-form').initialize();
+$("#{j render @section}").appendTo('#section-list');
+$('#section-list').sortable('refresh');
+$(window).scrollTo($("##{dom_id(@section)}"), 300, {offset: -$('#section-list').offset().top});

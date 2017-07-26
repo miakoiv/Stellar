@@ -87,7 +87,7 @@ fi:
       destroy:
         notice: "Ominaisuus %{property} poistettu."
     sections:
-      create:
+      new:
         notice: "Lohko %{section} luotu."
       update:
         notice: "Lohko %{section} päivitetty."

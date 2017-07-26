@@ -1,6 +1,9 @@
+$segment = $("##{dom_id(@segment)}");
 $('#section-list > .section-list-item').removeClass('active');
 $('#section-list > .section-list-item .segment').removeClass('active');
-$("##{dom_id(@segment.section)}").addClass('active');
-$("##{dom_id(@segment)}").addClass('active');
+$segment.addClass('active');
 $('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
 $('#layout-form').initialize();
+$('#layout-form').show();
+$('#layout-form').css({width: $segment.css('width')});
+$('#layout-form').offset($segment.find('.layout-form-anchor').offset());

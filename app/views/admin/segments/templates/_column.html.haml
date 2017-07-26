@@ -1,5 +1,5 @@
 = f.text_area :body, rows: 10, skip_label: true
-
+%hr
 :coffee
   sendAttachment = (file, callback) ->
     data = new FormData()
@@ -15,21 +15,31 @@
 
   $('#segment_body').summernote
     lang: "#{t('culture')}"
-    toolbar: [
-      ['para', ['style', 'ul', 'ol', 'paragraph']]
-      ['font', ['bold', 'italic', 'clear']]
-      ['insert', ['table', 'hr', 'link', 'picture', 'video']]
-      ['misc', ['codeview']]
-    ]
+    airMode: true
+    popover:
+      air: [
+        ['para', ['style', 'ul', 'ol', 'paragraph']]
+        ['font', ['bold', 'italic', 'clear']]
+        ['insert', ['table', 'hr', 'link', 'picture', 'video']]
+      ]
+      image: [
+        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+        ['remove', ['removeMedia']]
+      ]
+      link: [
+        ['link', ['linkDialogShow', 'unlink']]
+      ]
+    dialogsInBody: true
     dialogsFade: true
     disableDragAndDrop: true
     callbacks:
       onImageUpload: (files) ->
         sendAttachment files[0], (data) =>
-          $img = $('<img>', {
+          $p = $('<p>').append $('<img>', {
             id: 'image_' + data.id
             src: data.wysiwyg_url
             'data-id': data.id
           })
-          $(this).summernote 'insertNode', $img[0]
+          $(this).summernote 'insertNode', $p[0]
           $('#layout-form input[type=file]').val ''

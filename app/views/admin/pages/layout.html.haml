@@ -1,20 +1,27 @@
 - if @page.wysiwyg?
 
-  .row
-    .col-md-7
-      .page-header
-        %h1= icon('scissors', @page)
-      #section-list.section-list.sortable
-        = render @page.sections
-    .col-md-5
-      .quick-edit-panel
-        .header
-          = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
-            = icon('chevron-circle-left', t('actions.back'))
-          - if current_user.can_create?(Section)
-            = link_to new_admin_page_section_path(@page), remote: true, class: 'btn btn-primary' do
+  %nav#page-nav.navbar.navbar-default{role: 'navigation'}
+    .container
+      .navbar-header
+        .navbar-brand= icon('scissors', @page)
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user.can_create?(Section)
+          %li.dropdown
+            %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = icon('plus', t('.new_section'))
-        #layout-form
+            %ul.dropdown-menu
+              - Section.layout_options.each do |name, layout|
+                %li
+                  = link_to new_admin_page_section_path(@page, params: {section: {layout: layout}}), remote: true do
+                    = name
+        %li
+          = link_to edit_admin_page_path(@page) do
+            = icon('chevron-circle-left', t('actions.back'))
+
+  #section-list.section-list.sortable
+    = render @page.sections
+
+  #layout-form{style: 'display: none;'}
 
   :coffee
     $('#section-list').sortable(
@@ -29,9 +36,10 @@
         {reorder: $(this).sortable('toArray')}
 
 - else
-  .page-header
-    = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
-      = icon('chevron-circle-left', t('actions.back'))
-    %h1= icon('scissors', @page)
+  .container
+    .page-header
+      = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
+        = icon('chevron-circle-left', t('actions.back'))
+      %h1= icon('scissors', @page)
 
-  = render partial: 'codemirror'
+    = render partial: 'codemirror'

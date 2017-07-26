@@ -1,10 +1,13 @@
-.section-list-item[section]
-  .section-heading
-    .section-handle
-      = drag_handle
-    = link_to edit_admin_section_path(section), remote: true do
-      .section-title
-        = section
-  .section-body
-    .section-container{class: [section.layout, section.width]}
-      = render partial: 'admin/sections/section_segments', object: section.segments
+%section.section.section-list-item[section]{class: section.layout, style: section.to_style}
+  - if section.fluid?
+    .container-fluid
+      .row
+        = render partial: 'admin/sections/section_segments', object: section.segments
+        = render partial: 'admin/sections/section_nav', object: section, as: :section
+  - else
+    .container
+      .row
+        %div{class: section.width}
+          .row
+            = render partial: 'admin/sections/section_segments', object: section.segments
+            = render partial: 'admin/sections/section_nav', object: section, as: :section

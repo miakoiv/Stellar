@@ -4,7 +4,7 @@ class Admin::SectionsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_section, only: [:edit, :update, :destroy]
+  before_action :set_section, only: [:update, :destroy]
 
   authority_actions reorder: 'update'
   authorize_actions_for Section
@@ -14,20 +14,7 @@ class Admin::SectionsController < ApplicationController
   # GET /admin/pages/1/sections/new.js
   def new
     @page = current_store.pages.friendly.find(params[:page_id])
-    @section = @page.sections.build
-
-    respond_to :js
-  end
-
-  # GET /admin/sections/1/edit.js
-  def edit
-    respond_to :js
-  end
-
-  # POST /admin/pages/1/sections/create.js
-  def create
-    page = current_store.pages.friendly.find(params[:page_id])
-    @section = page.sections.build(section_params.merge(priority: page.sections.count))
+    @section = @page.sections.build(section_params.merge(priority: @page.sections.count))
 
     respond_to do |format|
       if @section.save

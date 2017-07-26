@@ -48,9 +48,8 @@ body {
 /*
  * Main navigation
  */
-.navbar { }
-.navbar .navbar-brand { padding: 10px 15px; }
-.navbar .navbar-brand {
+#main-nav .navbar-brand { padding: 10px 15px; }
+#main-nav .navbar-brand {
   img {
     display: inline-block;
     max-height: 30px;
@@ -460,42 +459,44 @@ img.img-center {
 
 
 /*
- * Layout editor elements
+ * Layout editor sections and segments
  */
-.section-list { }
-.section-list-item {
-  @extend .panel, .panel-default;
-}
-.section-heading {
-  @extend .panel-heading;
-  font-style: italic;
-
-  &:hover { background-color: darken($panel-default-heading-bg, 5%); }
-}
-.section-heading a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-}
-.section-handle {
-  @extend .pull-left;
-  margin-right: 15px;
-}
-.section-body {
-  @extend .panel-body;
-  padding-left: 0;
-  padding-right: 0;
+.section-list {
+  padding-bottom: 1200px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVQY02N4//79f2T869cvFMxABwXoAuga6KAAAHEJ9yHgX6ZvAAAAAElFTkSuQmCC);
 }
-.section-body .segment {
-  padding: 4px;
-  border: 1px solid $table-border-color;
-  background-color: #fff;
+.section-list-item > .container-fluid > .row { position: relative; }
+.section-list-item {
+  outline: 1px solid rgba($brand-warning, 0.6);
+}
+.section-list-item .navbar {
+  @include transition(opacity ease-in-out .15s);
+  z-index: 3;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: darken($brand-primary, 20%);
 
-  .segment-content {
-    min-height: 40px;
-    font-size: 0.6em;
+  .dropdown-menu {
+    z-index: 4;
+    width: 320px;
+    padding: 15px;
+    border: 0;
+    border-radius: 0;
+    background-color: darken($brand-primary, 20%);
+    color: #fff;
   }
+}
+.section-list-item:hover .navbar { opacity: 1; }
+
+.section-list-item .segment {
+  background-color: #fff;
+  outline: 1px solid rgba($brand-success, 0.6);
+
+  .segment-content { min-height: 40px; }
   .segment-link {
     display: none;
     position: absolute;
@@ -503,34 +504,52 @@ img.img-center {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba($input-border-focus, 0.6);
 
     a {
       display: block;
       width: 100%;
       height: 100%;
       padding: 10px;
-      color: #fff;
+      color: inherit;
       font-size: 150%;
       text-align: right;
     }
   }
 
-  &.active {
-    @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
-    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($input-border-focus, 0.6));
-    border-color: $input-border-focus;
-  }
+  &.active { z-index: 2; }
   &:hover .segment-link { display: block; }
 }
 
 /* Active item and sorting placeholder */
-.section-list-item.active {
-  @extend .panel-primary;
+.section-list-item.active { }
+.section-list .sortable-placeholder { }
 
-  .section-heading:hover { background-color: darken($panel-primary-heading-bg, 5%); }
+
+/*
+ * Layout editor form box
+ */
+#layout-form {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  @include segment-padding;
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+  background-color: $body-bg;
+  @include transition(box-shadow ease-in-out .15s);
+  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($input-border-focus, 0.6));
 }
-.section-list .sortable-placeholder { margin-bottom: 20px; }
+#layout-form .CodeMirror { height: 300px; }
+
+/* Handle to anchor #layout-form to */
+.layout-form-anchor {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 
 
 /*
@@ -545,8 +564,7 @@ img.img-center {
   .btn { float: right; }
   .btn + .btn { margin-right: 8px; }
 }
-.quick-edit-panel .panel {
-  @extend .panel-primary;
+.quick-edit-panel .panel-primary {
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
 }
 
