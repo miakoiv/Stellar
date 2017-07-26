@@ -86,6 +86,7 @@ class Admin::PagesController < ApplicationController
   # GET /admin/pages/1/layout
   def layout
     authorize_action_for @page
+    render layout: 'layout_editor'
   end
 
   private
