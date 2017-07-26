@@ -34,6 +34,7 @@
 //= require codemirror/modes/css
 //= require codemirror/modes/xml
 //= require codemirror/modes/htmlmixed
+//= require codemirror/addons/display/autorefresh
 //= require dropzone
 //= require magnific-popup
 //= require selectize
