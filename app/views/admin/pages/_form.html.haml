@@ -1,5 +1,5 @@
 = bootstrap_form_for [:admin, @page], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
-  .panel.panel-default
+  .panel.panel-primary
     .panel-body
       %fieldset
         = f.select :purpose, Page.purpose_options, {}, {disabled: !@page.new_record?, class: 'selectize'}

@@ -1,5 +1,5 @@
 = bootstrap_form_for [:admin, @page, @section], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
-  .panel.panel-default
+  .panel.panel-primary
     .panel-body
       %fieldset
         = f.select :layout, Section.layout_options, {}, {required: true, class: 'selectize'}
