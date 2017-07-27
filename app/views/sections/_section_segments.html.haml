@@ -1,4 +1,4 @@
 - section_segments.each_with_index do |segment, number|
   .segment{class: "segment-#{number}"}
-    .segment-content
+    .segment-content{class: segment.template}
       = render segment
