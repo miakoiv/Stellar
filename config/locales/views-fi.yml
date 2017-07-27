@@ -179,6 +179,10 @@ fi:
         new_property: Uusi ominaisuus
       new:
         new_property: Uusi ominaisuus
+    segments:
+      defaults:
+        column:
+          body: "<p>Kirjoita tekstiä tähän</p>"
     shipping_methods:
       index:
         new_shipping_method: Uusi toimitustapa

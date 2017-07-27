@@ -32,6 +32,9 @@ class Segment < ActiveRecord::Base
   default_scope { sorted }
 
   #---
+  before_create :fill_default_content
+
+  #---
   def self.template_options
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
   end
@@ -40,4 +43,12 @@ class Segment < ActiveRecord::Base
   def to_partial_path
     "segments/templates/#{template}"
   end
+
+  private
+    def fill_default_content
+      defaults = I18n.t("admin.segments.defaults.#{template}")
+      if defaults.is_a?(Hash)
+        self.attributes = defaults
+      end
+    end
 end
