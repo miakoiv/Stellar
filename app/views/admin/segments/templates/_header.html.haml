@@ -1,4 +1,6 @@
-= render partial: @segment.to_partial_path, object: @segment
+- content_for :segment_content do
+  = render partial: @segment.to_partial_path, object: @segment
+
 %hr
 %fieldset
   .row

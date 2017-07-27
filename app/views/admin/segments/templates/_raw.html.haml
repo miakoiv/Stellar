@@ -1,6 +1,9 @@
-= render partial: @segment.to_partial_path, object: @segment
+- content_for :segment_content do
+  = render partial: @segment.to_partial_path, object: @segment
+
 %hr
-= f.text_area :body, rows: 10, skip_label: true
+%fieldset
+  = f.text_area :body, rows: 10, skip_label: true
 
 :coffee
   $content = $('#segment_body')[0]
