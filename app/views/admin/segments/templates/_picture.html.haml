@@ -1,0 +1,15 @@
+- content_for :segment_content do
+  = render partial: @segment.to_partial_path, object: @segment
+
+- content_for :segment_head do
+  %hr
+  = render partial: 'admin/images/edit_table', object: @segment, as: :imageable
+  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+
+%hr
+%fieldset
+  .row
+    .col-sm-6
+      = f.text_field :headline
+    .col-sm-6
+      = f.text_field :subhead
