@@ -1,5 +1,6 @@
-= f.text_area :body, rows: 10, skip_label: true
+= f.text_area :body, rows: 10, skip_label: true, class: 'summernote'
 %hr
+
 :coffee
   sendAttachment = (file, callback) ->
     data = new FormData()
@@ -13,7 +14,7 @@
       success: (data) ->
         callback data
 
-  $('#segment_body').summernote
+  $('.summernote').summernote
     lang: "#{t('culture')}"
     airMode: true
     popover:
