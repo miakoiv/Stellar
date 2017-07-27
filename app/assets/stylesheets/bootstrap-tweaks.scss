@@ -335,7 +335,7 @@ h1 {
   font-weight: 400;
   letter-spacing: -0.05em;
 
-  .small { letter-spacing: 0; }
+  small, .small { letter-spacing: 0; }
 }
 h2 {
   font-size: 1.6em;
