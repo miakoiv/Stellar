@@ -7,3 +7,6 @@
       %ul.dropdown-menu
         %li
           = render partial: 'admin/sections/form', object: section, as: :section
+    - if current_user.can_delete?(section)
+      %li
+        = link_to icon('remove'), admin_section_path(section), method: :delete, remote: true, data: {confirm: t('actions.confirm.body', klass: Section.model_name.human, name: section.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
