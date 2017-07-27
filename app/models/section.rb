@@ -18,6 +18,7 @@ class Section < ActiveRecord::Base
   # Available layout names defined in layouts.css, with default
   # initial content segment templates.
   LAYOUTS = {
+    'box' => %w{empty},
     'single-col' => %w{column},
     'double-col' => %w{column column},
     'triple-col' => %w{column column column},

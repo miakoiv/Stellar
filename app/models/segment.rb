@@ -14,7 +14,7 @@ class Segment < ActiveRecord::Base
 
   #---
   enum template: {
-    raw: 0,
+    empty: 0,
     column: 1,
     header: 2,
     picture: 3,
@@ -23,6 +23,7 @@ class Segment < ActiveRecord::Base
     category: 11,
     product: 12,
     promotion: 13,
+    raw: 99,
   }
 
   #---

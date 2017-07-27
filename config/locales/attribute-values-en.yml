@@ -62,6 +62,11 @@ en:
           store_admin: store administrator
           superuser: superuser
       section:
+        layout:
+          'box': box
+          'single-col': one column
+          'double-col': two columns
+          'triple-col': three columns
         width:
           fluid: window width
           twelve: page width (12 columns)
@@ -70,7 +75,7 @@ en:
           six: half page width (6 columns)
       segment:
         template:
-          raw: ʜᴛᴍʟ code
+          empty: empty
           column: text column
           header: page header
           picture: picture
@@ -79,6 +84,7 @@ en:
           category: category
           product: product
           promotion: promotion
+          raw: ʜᴛᴍʟ code
       user:
         group:
           guest: Guest

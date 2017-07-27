@@ -63,6 +63,7 @@ fi:
           superuser: pääkäyttäjä
       section:
         layout:
+          'box': laatikko
           'single-col': yksi palsta
           'double-col': kaksi palstaa
           'triple-col': kolme palstaa
@@ -74,7 +75,7 @@ fi:
           six: puoli sivun leveyttä (6 palstaa)
       segment:
         template:
-          raw: ʜᴛᴍʟ-koodia
+          empty: tyhjä
           column: tekstipalsta
           header: sivun otsake
           picture: kuva
@@ -83,6 +84,7 @@ fi:
           category: tuoteryhmä
           product: tuote
           promotion: kampanja
+          raw: ʜᴛᴍʟ-koodia
       user:
         group:
           guest: Vieras
