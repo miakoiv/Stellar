@@ -1,9 +1,7 @@
 - form = capture :segment_form do
   = render partial: 'form'
 
-.segment-content{class: @segment.template}
-  = yield :segment_content
-
+= yield :segment_content
 = yield :segment_head
 = form
 = yield :segment_tail
