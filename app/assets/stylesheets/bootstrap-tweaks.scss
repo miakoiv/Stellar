@@ -330,17 +330,6 @@ body {
  * General style resets and additions
  */
 h1, h2, h3, h4, h5, h6, th, dt, label, b, strong, .label { font-weight: 500; }
-h1 {
-  font-size: 2.5em;
-  font-weight: 400;
-  letter-spacing: -0.05em;
-
-  small, .small { letter-spacing: 0; }
-}
-h2 {
-  font-size: 1.6em;
-  font-weight: 400;
-}
 a, a:focus { outline: 0 !important; }
 a.disabled, .disabled > a { pointer-events: none; }
 
