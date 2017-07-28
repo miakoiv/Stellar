@@ -1,5 +1,4 @@
-$("#{j render partial: 'admin/images/edit_row', object: @image, as: :image}").appendTo('#images-tbody');
+$("#{j render partial: 'admin/images/edit_row', object: @image, as: :image}").appendTo('##{dom_id(@imageable, :images)}');
 $("##{dom_id(@image)}").initialize();
 $("##{dom_id(@image)}").effect('highlight');
-
-$('#images-tbody').sortable('refresh');
+$('##{dom_id(@imageable, :images)}').sortable('refresh');

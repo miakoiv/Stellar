@@ -11,6 +11,7 @@ class Admin::ImagesController < ApplicationController
   # This is only called by Dropzone as callback for success.
   def show
     @image = Image.find(params[:id])
+    @imageable = @image.imageable
 
     respond_to do |format|
       format.js
@@ -46,6 +47,7 @@ class Admin::ImagesController < ApplicationController
   # DELETE /admin/images/1
   def destroy
     @image = Image.find(params[:id])
+    @imageable = @image.imageable
 
     respond_to do |format|
       if @image.destroy

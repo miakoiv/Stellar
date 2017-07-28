@@ -1,3 +1,5 @@
+- id = dom_id(imageable, :images)
+
 .table-responsive
   %table.table.table-striped.table-hover.table-loose
     %thead
@@ -7,11 +9,11 @@
         %th.col-xs-6= col(Image, :purpose)
         %th.actions
 
-    %tbody#images-tbody.sortable
+    %tbody.sortable{id: id}
       = render partial: 'admin/images/edit_row', collection: imageable.images, as: :image
 
 :coffee
-  $('#images-tbody').sortable(
+  $('##{id}').sortable(
     items: '> tr'
     handle: '.handle'
     placeholder: 'sortable-placeholder'
