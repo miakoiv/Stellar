@@ -469,33 +469,24 @@ img.img-center {
  * Layout editor sections and segments
  */
 .section-list { padding-bottom: 1200px; }
-.section-list-item > .container-fluid > .row { position: relative; }
-.section-list-item {
+.section-list-item { position: relative; }
+.section-list-item .section {
   outline: 1px solid rgba(255, 0, 255, 0.333);
 }
-.section-list-item .navbar {
-  @include transition(opacity ease-in-out .15s);
-  z-index: 3;
-  opacity: 0.333;
+.section-list-item .section-nav {
   position: absolute;
   top: 0;
   left: 0;
   border: 0;
   border-radius: 0;
-  background-color: darken($brand-primary, 20%);
 
   .dropdown-menu {
-    z-index: 4;
     width: 240px;
     padding: 15px;
     border: 0;
     border-radius: 0;
-    background-color: darken($brand-primary, 20%);
-    color: #fff;
   }
 }
-.section-list-item:hover .navbar { opacity: 1; }
-
 .section-list-item .segment {
   outline: 1px solid rgba(0, 255, 255, 0.333);
 

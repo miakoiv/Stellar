@@ -1,4 +1,4 @@
-= bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate'} do |f|
+= bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
   %fieldset
     = f.select :width, Section.width_options, {}, {required: true}
     = f.text_field :height

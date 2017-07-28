@@ -1,4 +1,4 @@
-$("#{j render @section}").appendTo('#section-list');
+$("#{j render partial: 'admin/sections/list_item', object: @section, as: :section}").appendTo('#section-list');
 $('#section-list').sortable('refresh');
 $section = $("##{dom_id(@section)}");
 $(window).scrollTo($section, 300, {offset: $section.outerHeight() - $(window).height()});
