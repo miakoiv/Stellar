@@ -461,10 +461,7 @@ img.img-center {
 /*
  * Layout editor sections and segments
  */
-.section-list {
-  padding-bottom: 1200px;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAHklEQVQY02N4//79f2T869cvFMxABwXoAuga6KAAAHEJ9yHgX6ZvAAAAAElFTkSuQmCC);
-}
+.section-list { padding-bottom: 1200px; }
 .section-list-item > .container-fluid > .row { position: relative; }
 .section-list-item {
   outline: 1px solid rgba(255, 0, 255, 0.333);
@@ -472,7 +469,7 @@ img.img-center {
 .section-list-item .navbar {
   @include transition(opacity ease-in-out .15s);
   z-index: 3;
-  opacity: 0;
+  opacity: 0.333;
   position: absolute;
   top: 0;
   left: 0;
@@ -493,7 +490,6 @@ img.img-center {
 .section-list-item:hover .navbar { opacity: 1; }
 
 .section-list-item .segment {
-  background-color: #fff;
   outline: 1px solid rgba(0, 255, 255, 0.333);
 
   .segment-content { min-height: 40px; }
@@ -593,6 +589,9 @@ img.img-center {
     right: 10px;
     left: 10px;
   }
+}
+.thumbnail-grid.sortable .thumbnail {
+  cursor: grab;
 }
 .thumbnail-grid-placeholder {
   @extend .sortable-placeholder;
