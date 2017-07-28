@@ -60,7 +60,7 @@ class Section < ActiveRecord::Base
   def to_style
     [].tap do |styles|
       height.present? && styles << "height: #{height}em;"
-      cover_image.present? && styles << "background-image: url(#{cover_image.url(:lightbox)}); background-size: cover; background-repeat: no-repeat;"
+      cover_image.present? && styles << "background-image: url(#{cover_image.url(:lightbox)}); background-size: cover; background-position: center center; background-repeat: no-repeat;"
     end.join ' '
   end
 
