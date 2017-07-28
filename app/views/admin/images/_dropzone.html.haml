@@ -1,12 +1,13 @@
-= form_for [:admin, imageable, imageable.images.new],
-    html: {multipart: true, class: 'dropzone well'} do |f|
+- id = dom_id(imageable, :new_image)
+
+= form_for [:admin, imageable, imageable.images.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
   .fallback
     = f.file_field :attachment
     = f.submit class: 'btn btn-primary'
 
 :coffee
   Dropzone.autoDiscover = false
-  $('#new_image').dropzone
+  $('##{id}').dropzone
     dictDefaultMessage: "#{I18n.t('dropzone.default_message')}"
     paramName: 'image[attachment]'
     init: ->
