@@ -18,7 +18,7 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.js { flash.now[:notice] = t('.notice', section: @section) }
+        format.js
       else
         format.js { render json: @section.errors, status: :unprocessable_entity }
       end
@@ -29,7 +29,7 @@ class Admin::SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.js { flash.now[:notice] = t('.notice', section: @section) }
+        format.js
       else
         format.js { render json: @section.errors, status: :unprocessable_entity }
       end
@@ -40,7 +40,7 @@ class Admin::SectionsController < ApplicationController
   def destroy
     respond_to do |format|
       if @section.destroy
-        format.js { flash.now[:notice] = t('.notice', section: @section) }
+        format.js
       end
     end
   end
