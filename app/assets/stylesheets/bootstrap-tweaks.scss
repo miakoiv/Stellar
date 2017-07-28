@@ -357,6 +357,17 @@ i.icon {
 
 
 /*
+ * Page headers
+ */
+.page-header h1 {
+  font-weight: 400;
+  letter-spacing: -0.04em;
+
+  small, .small { letter-spacing: 0; }
+}
+
+
+/*
  * Rounded buttons
  */
 .btn-round {
