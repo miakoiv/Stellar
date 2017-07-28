@@ -3,6 +3,7 @@ $('#section-list > .section-list-item').removeClass('active');
 $('#section-list > .section-list-item .segment').removeClass('active');
 $segment.addClass('active');
 $('.summernote').summernote('destroy');
+$('.navbar-toolbar').empty();
 $('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
 $('#layout-form').initialize();
 $('#layout-form').show();

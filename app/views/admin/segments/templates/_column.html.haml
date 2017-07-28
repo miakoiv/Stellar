@@ -16,13 +16,13 @@
 
   $('.summernote').summernote
     lang: "#{t('culture')}"
-    airMode: true
+    toolbar: [
+      ['style', ['style']]
+      ['para', ['paragraph', 'fontsize', 'height', 'ul', 'ol']]
+      ['font', ['color', 'bold', 'italic', 'clear']]
+      ['insert', ['table', 'hr', 'link', 'picture', 'video']]
+    ]
     popover:
-      air: [
-        ['para', ['style', 'ul', 'ol', 'paragraph']]
-        ['font', ['bold', 'italic', 'clear']]
-        ['insert', ['table', 'hr', 'link', 'picture', 'video']]
-      ]
       image: [
         ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
         ['float', ['floatLeft', 'floatRight', 'floatNone']],
@@ -34,6 +34,18 @@
     dialogsInBody: true
     dialogsFade: true
     disableDragAndDrop: true
+    toolbarContainer: '.navbar-toolbar'
+    fontSizes: ['9', '10', '12', '14', '16', '18', '20', '24', '28', '32', '36', '44', '52', '60', '72']
+    colors: [
+      ['#000000', '#424242', '#636363', '#9c9c94', '#cec6ce', '#efefef', '#f7f7f7', '#ffffff']
+      ['#ff0000', '#ff9c00', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#9c00ff', '#ff00ff']
+      ['#f7c6ce', '#ffe7ce', '#ffefc6', '#d6efd6', '#cedee7', '#cee7f7', '#d6d6e7', '#e7d6de']
+      ['#e79c9c', '#ffc69c', '#ffe79c', '#b5d6a5', '#a5c6ce', '#9cc6ef', '#b5a5d6', '#d6a5bd']
+      ['#e76363', '#f7ad6b', '#ffd663', '#94bd7b', '#73a5ad', '#6badde', '#8c7bc6', '#c67ba5']
+      ['#ce0000', '#e79439', '#efc631', '#6ba54a', '#4a7b8c', '#3984c6', '#634aa5', '#a54a7b']
+      ['#9c0000', '#b56308', '#bd9400', '#397b21', '#104a5a', '#085294', '#311873', '#731842']
+      ['#630000', '#7b3900', '#846300', '#295218', '#083139', '#003163', '#21104a', '#4a1031']
+    ]
     callbacks:
       onImageUpload: (files) ->
         sendAttachment files[0], (data) =>

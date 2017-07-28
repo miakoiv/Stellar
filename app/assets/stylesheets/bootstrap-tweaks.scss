@@ -123,11 +123,18 @@ body {
 
 
 /*
- * Secondary navigation bar
+ * Secondary navigation bar with integrated toolbar
  */
 #page-nav {
   margin-bottom: 0;
   border-radius: 0;
+
+  .container { position: relative; }
+  .navbar-toolbar {
+    position: absolute;
+    top: 5px;
+    left: 0;
+  }
 }
 
 
@@ -522,7 +529,7 @@ img.img-center {
 
 
 /*
- * Layout editor form box
+ * Layout editor form box containing the segment form
  */
 #layout-form {
   position: absolute;
@@ -544,6 +551,19 @@ img.img-center {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+/* Overrides for different segment templates */
+#layout-form .segment-form.column .note-editor {
+  margin: -20px -15px 0;
+  border: 0;
+  border-radius: 0;
+
+  .note-editing-area .note-editable {
+    @include segment-padding;
+    padding-left: $grid-gutter-width/2;
+    padding-right: $grid-gutter-width/2;
+  }
 }
 
 

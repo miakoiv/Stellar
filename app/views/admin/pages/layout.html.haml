@@ -2,8 +2,6 @@
 
   %nav#page-nav.navbar.navbar-default{role: 'navigation'}
     .container
-      .navbar-header
-        .navbar-brand= icon('scissors', @page)
       %ul.nav.navbar-nav.navbar-right
         - if current_user.can_create?(Section)
           %li.dropdown
@@ -17,6 +15,7 @@
         %li
           = link_to edit_admin_page_path(@page) do
             = icon('chevron-circle-left', t('actions.back'))
+      .navbar-toolbar
 
   #section-list.section-list.sortable
     = render @page.sections
