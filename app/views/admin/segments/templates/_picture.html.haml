@@ -3,7 +3,7 @@
 
 - content_for :segment_head do
   %hr
-  = render partial: 'admin/images/edit_table', object: @segment, as: :imageable
+  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
 
 %hr

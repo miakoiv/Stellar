@@ -22,4 +22,4 @@
       = tab_pane 'hostnames', class: 'in active' do
         = render partial: 'admin/hostnames/table', object: @store, as: :resource
       = tab_pane 'images' do
-        = render partial: 'admin/images/table', object: @store, as: :imageable
+        = render partial: 'admin/images/collection', object: @store, as: :imageable

@@ -21,5 +21,5 @@
       = tab_pane 'hostnames', class: 'in active' do
         = render partial: 'admin/hostnames/edit_table', object: @store, as: :resource
       = tab_pane 'images' do
-        = render partial: 'admin/images/edit_table', object: @store, as: :imageable
+        = render partial: 'admin/images/edit_collection', object: @store, as: :imageable
         = render partial: 'admin/images/dropzone', object: @store, as: :imageable

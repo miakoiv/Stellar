@@ -569,6 +569,38 @@ img.img-center {
 
 
 /*
+ * Image thumbnail grid
+ */
+.thumbnail-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding-bottom: 20px;
+
+  .thumbnail-grid-item {
+    flex: 0 0 auto;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}
+.thumbnail-grid-item .thumbnail {
+  position: relative;
+  margin-bottom: 0;
+
+  .thumbnail-widgets {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
+}
+.thumbnail-grid-placeholder {
+  @extend .sortable-placeholder;
+  margin-right: 10px;
+}
+
+
+/*
  * Tabbed panels and smaller nav variant
  */
 .nav-tabs.panel-tabs {
@@ -691,8 +723,7 @@ fieldset[disabled] .help-block { display: none; }
  */
  .sortable .handle { cursor: grab; }
 .sortable-placeholder {
-  background-color: rgba($brand-primary, 0.333);
-  outline: $brand-primary solid 1px;
+  background-color: rgba($gray-light, 0.333);
 }
 
 

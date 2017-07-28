@@ -1,0 +1,9 @@
+.thumbnail-grid-item
+  .thumbnail
+    = image_variant_tag image, :matchbox
+    .caption
+      %small= image.attachment_file_name
+    .thumbnail-widgets
+      .pull-right
+        %button.btn.btn-default.btn-xs.clipboard{data: {'clipboard-text': image.attachment.url(:original, timestamp: false)}}= icon('link')
+      .label.label-primary= image.human_attribute_value(:purpose)

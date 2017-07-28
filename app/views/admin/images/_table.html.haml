@@ -1,9 +1,0 @@
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-8= title(Image)
-        %th.col-xs-4= col(Image, :purpose)
-        %th= col(Image, :link)
-    %tbody
-      = render partial: 'admin/images/row', collection: imageable.images, as: :image

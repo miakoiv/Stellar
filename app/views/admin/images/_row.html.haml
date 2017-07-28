@@ -1,5 +1,0 @@
-= content_tag_for :tr, image do
-  %td= image_variant_tag image, :matchbox, title: image.attachment_file_name, data: {toggle: 'tooltip'}
-  %td= image.human_attribute_value(:purpose)
-  %td
-    %button.btn.btn-default.btn-sm.clipboard{data: {'clipboard-text' => image.attachment.url(:original, timestamp: false)}}= icon('link')

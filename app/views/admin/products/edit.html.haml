@@ -23,7 +23,7 @@
 
     .tab-content
       = tab_pane 'images', class: 'in active' do
-        = render partial: 'admin/images/edit_table', object: @product, as: :imageable
+        = render partial: 'admin/images/edit_collection', object: @product, as: :imageable
         = render partial: 'admin/images/dropzone', object: @product, as: :imageable
       = tab_pane 'inventory' do
         = render partial: 'admin/inventory_items/table_for_product', object: @product, as: :product

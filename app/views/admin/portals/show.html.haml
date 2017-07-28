@@ -21,4 +21,4 @@
       = tab_pane 'hostnames', class: 'in active' do
         = render partial: 'admin/hostnames/table', object: @portal, as: :resource
       = tab_pane 'images' do
-        = render partial: 'admin/images/table', object: @portal, as: :imageable
+        = render partial: 'admin/images/collection', object: @portal, as: :imageable

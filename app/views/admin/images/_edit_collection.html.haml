@@ -1,0 +1,16 @@
+- id = dom_id(imageable, :images)
+
+.thumbnail-grid.sortable{id: id}
+  = render partial: 'admin/images/edit', collection: imageable.images, as: :image
+
+:coffee
+  $('##{id}').sortable(
+    items: '> .thumbnail-grid-item'
+    handle: '.thumbnail'
+    placeholder: 'thumbnail-grid-placeholder'
+    forcePlaceholderSize: true
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_images_path}',
+      {reorder: $(this).sortable('toArray')}
