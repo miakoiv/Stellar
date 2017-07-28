@@ -68,11 +68,11 @@ fi:
           'double-col': kaksi palstaa
           'triple-col': kolme palstaa
         width:
-          fluid: ikkunan leveys
-          twelve: sivun leveys (12 palstaa)
-          ten: kapeat marginaalit (10 palstaa)
-          eight: leveät marginaalit (8 palstaa)
-          six: puoli sivun leveyttä (6 palstaa)
+          fluid: aukeama
+          twelve: koko sivu
+          ten: kapeat marginaalit
+          eight: leveät marginaalit
+          six: puoli sivua
       segment:
         template:
           empty: tyhjä
