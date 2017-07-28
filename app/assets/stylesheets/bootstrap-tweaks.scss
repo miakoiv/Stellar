@@ -809,6 +809,16 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
+ * Dropzone.js styles
+ */
+.dropzone {
+  border: 4px dashed rgba($brand-primary, 0.6);
+  background: transparent;
+  color: inherit;
+}
+
+
+/*
  * Vis.js styles
  */
 .vis-timeline {
