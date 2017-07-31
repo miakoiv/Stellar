@@ -1,2 +1,6 @@
+- image = picture.cover_image
 .segment-content.picture
-  = image_variant_tag picture.cover_image, :original
+  - if image.present?
+    = image_variant_tag image, :original
+  - else
+    = image_tag 'placeholder.svg', class: 'img-center'

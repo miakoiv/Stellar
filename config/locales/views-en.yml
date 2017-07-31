@@ -199,10 +199,6 @@ en:
         new_property: New property
       new:
         new_property: New property
-    segments:
-      defaults:
-        column:
-          body: "<p>Write content here</p>"
     shipping_methods:
       index:
         new_shipping_method: New shipping method
