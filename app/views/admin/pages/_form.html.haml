@@ -14,8 +14,7 @@
       .panel-footer
         - if @page.can_have_content?
           = link_to icon('scissors', col(Page, :layout)), layout_admin_page_path(@page), class: 'btn btn-primary btn-sm'
-          = link_to icon('eye', t('actions.view')), show_page_path(@page),
-              class: 'btn btn-default btn-sm'
+          = link_to icon('eye', t('actions.view')), show_page_path(@page), class: 'btn btn-default btn-sm'
         - if @page.resource.present?
           = link_to icon('external-link', t('.show_resource')), [:admin, @page.resource], class: 'btn btn-default btn-sm'
         - if current_user.can_delete?(@page)
