@@ -1,11 +1,10 @@
 /*
- * Percentage based heights for segment content
+ * Flex layout for sections, alignment options for segments
  */
 .section > .container-fluid,
 .section > .container, .section > .container > .row,
 .section .section-content,
-.section .section-content > .row,
-.section .section-content .segment {
+.section .section-content > .row {
   height: 100%;
 }
 
@@ -13,50 +12,94 @@
 /*
  * Section content widths
  */
-.section .section-content.twelve {
+.section .section-content.width-page {
   @extend .col-xs-12;
 }
-.section .section-content.ten {
+.section .section-content.width-10 {
   @extend .col-xs-12, .col-sm-10, .col-sm-offset-1;
 }
-.section .section-content.eight {
+.section .section-content.width-8 {
   @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2;
 }
-.section .section-content.six {
+.section .section-content.width-6 {
   @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2, .col-md-6, .col-md-offset-3;
 }
 
 
 /*
- * Segment styles for section layouts:
- * each segment has .segment and .segment-n
- * where n starts from 0
+ * Section and segment styles for section layouts
  */
+@mixin section-flex {
+  .section-content .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .section-content .segment {
+    flex: 0 0 auto;
+
+    &.top { align-self: flex-start; }
+    &.middle { align-self: center; }
+    &.bottom { align-self: flex-end; }
+  }
+}
 @mixin segment-padding($padding: 20px) {
   padding-top: $padding;
   padding-bottom: $padding;
 }
 
-.single-col {
+.col-12 {
+  @include section-flex;
+
   .segment {
     @extend .col-xs-12;
     @include segment-padding;
   }
 }
 
-.double-col {
+.col-6-6 {
+  @include section-flex;
+
   .segment {
     @extend .col-xs-12, .col-sm-6;
     @include segment-padding;
   }
 }
 
-.triple-col {
+.col-4-4-4 {
+  @include section-flex;
+
   .segment {
     @extend .col-xs-12, .col-sm-12, .col-md-4;
     @include segment-padding;
   }
 }
+
+.col-8-4 {
+  @include section-flex;
+
+  .segment:first-child {
+    @extend .col-xs-12, .col-sm-8;
+    @include segment-padding;
+  }
+  .segment:last-child {
+    @extend .col-xs-12, .col-sm-4;
+    @include segment-padding;
+  }
+}
+
+.col-4-8 {
+  @include section-flex;
+
+  .segment:first-child {
+    @extend .col-xs-12, .col-sm-4;
+    @include segment-padding;
+  }
+  .segment:last-child {
+    @extend .col-xs-12, .col-sm-8;
+    @include segment-padding;
+  }
+}
+
 
 /*
  * Segment content styles

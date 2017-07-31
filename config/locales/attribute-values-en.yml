@@ -63,16 +63,17 @@ en:
           superuser: superuser
       section:
         layout:
-          'box': box
-          'single-col': one column
-          'double-col': two columns
-          'triple-col': three columns
+          'col-12': 12 columns
+          'col-6-6': 6+6 columns
+          'col-4-4-4': 4+4+4 columns
+          'col-8-4': 8+4 columns
+          'col-4-8': 4+8 columns
         width:
-          fluid: spread
-          twelve: full page
-          ten: narrow margins
-          eight: wide margins
-          six: half page
+          'width-spread': spread
+          'width-page': full page
+          'width-10': 10 columns
+          'width-8': 8 columns
+          'width-6': 6 columns
       segment:
         template:
           empty: empty

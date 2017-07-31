@@ -15,18 +15,34 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Available layout names defined in layouts.css, with default
+  # Available text and box layouts, with default
   # initial content segment templates.
   LAYOUTS = {
-    'box' => %w{empty},
-    'single-col' => %w{column},
-    'double-col' => %w{column column},
-    'triple-col' => %w{column column column},
+    'col-12' => {
+      group: :text,
+      segments: %w{column}
+    },
+    'col-6-6' => {
+      group: :text,
+      segments: %w{column column}
+    },
+    'col-4-4-4' => {
+      group: :text,
+      segments: %w{column column column}
+    },
+    'col-8-4' => {
+      group: :text,
+      segments: %w{column column}
+    },
+    'col-4-8' => {
+      group: :text,
+      segments: %w{column column}
+    },
   }.freeze
 
   # Available widths defined in layouts.css.
   WIDTHS = %w{
-    fluid twelve ten eight six
+    width-spread width-page width-10 width-8 width-6
   }.freeze
 
   #---
@@ -54,7 +70,7 @@ class Section < ActiveRecord::Base
 
   #---
   def fluid?
-    width == 'fluid'
+    width == 'width-spread'
   end
 
   def background_image
@@ -71,7 +87,7 @@ class Section < ActiveRecord::Base
 
   private
     def create_segments
-      LAYOUTS[layout].each do |template|
+      LAYOUTS[layout][:segments].each do |template|
         segments.create(template: template)
       end
     end

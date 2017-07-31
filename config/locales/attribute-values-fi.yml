@@ -63,16 +63,17 @@ fi:
           superuser: pääkäyttäjä
       section:
         layout:
-          'box': laatikko
-          'single-col': yksi palsta
-          'double-col': kaksi palstaa
-          'triple-col': kolme palstaa
+          'col-12': 12 palstaa
+          'col-6-6': 6+6 palstaa
+          'col-4-4-4': 4+4+4 palstaa
+          'col-8-4': 8+4 palstaa
+          'col-4-8': 4+8 palstaa
         width:
-          fluid: aukeama
-          twelve: koko sivu
-          ten: kapeat marginaalit
-          eight: leveät marginaalit
-          six: puoli sivua
+          'width-spread': aukeama
+          'width-page': koko sivu
+          'width-10': 10 palstaa
+          'width-8': 8 palstaa
+          'width-6': 6 palstaa
       segment:
         template:
           empty: tyhjä

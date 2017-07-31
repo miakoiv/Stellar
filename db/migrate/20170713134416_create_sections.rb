@@ -3,7 +3,7 @@ class CreateSections < ActiveRecord::Migration
     create_table :sections do |t|
       t.belongs_to :page, null: false, index: true
       t.string :layout, null: false
-      t.string :width, null: false, default: 'twelve'
+      t.string :width, null: false, default: 'width-page'
       t.integer :height
       t.integer :priority, null: false, default: 0
 
