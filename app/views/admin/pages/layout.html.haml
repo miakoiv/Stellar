@@ -8,10 +8,12 @@
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = icon('plus', t('.new_section'))
             %ul.dropdown-menu
-              - Section.layout_options.each do |name, layout|
-                %li
-                  = link_to new_admin_page_section_path(@page, params: {section: {layout: layout}}), remote: true do
-                    = name
+              - Section.layout_options.each do |group, layouts|
+                %li.dropdown-header= group
+                - layouts.each do |layout|
+                  %li
+                    = link_to new_admin_page_section_path(@page, params: {section: {layout: layout}}), remote: true do
+                      = Section.human_attribute_value(:layout, layout)
         %li
           = link_to edit_admin_page_path(@page) do
             = icon('chevron-circle-left', t('actions.back'))

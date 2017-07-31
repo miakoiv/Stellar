@@ -15,30 +15,25 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Available text and box layouts, with default
-  # initial content segment templates.
+  # Available column and box layouts.
   LAYOUTS = {
-    'col-12' => {
-      group: :text,
-      segments: %w{column}
-    },
-    'col-6-6' => {
-      group: :text,
-      segments: %w{column column}
-    },
-    'col-4-4-4' => {
-      group: :text,
-      segments: %w{column column column}
-    },
-    'col-8-4' => {
-      group: :text,
-      segments: %w{column column}
-    },
-    'col-4-8' => {
-      group: :text,
-      segments: %w{column column}
-    },
+    columns: ['col-12', 'col-6-6', 'col-4-4-4', 'col-8-4', 'col-4-8'],
+    boxen: ['box-12', 'box-6-6', 'box-4-4-4', 'box-8-4-4', 'box-4-4-8'],
   }.freeze
+
+  # Initial segment templates for each layout.
+  SEGMENTS = {
+    'col-12' => %w{column},
+    'col-6-6' => %w{column column},
+    'col-4-4-4' => %w{column column column},
+    'col-8-4' => %w{column column},
+    'col-4-8' => %w{column column},
+    'box-12' => %w{empty},
+    'box-6-6' => %w{empty empty},
+    'box-4-4-4' => %w{empty empty empty},
+    'box-8-4-4' => %w{empty empty empty},
+    'box-4-4-8' => %w{empty empty empty},
+  }
 
   # Available widths defined in layouts.css.
   WIDTHS = %w{
@@ -61,7 +56,7 @@ class Section < ActiveRecord::Base
 
   #---
   def self.layout_options
-    LAYOUTS.keys.map { |l| [Section.human_attribute_value(:layout, l), l] }
+    LAYOUTS
   end
 
   def self.width_options
@@ -87,7 +82,7 @@ class Section < ActiveRecord::Base
 
   private
     def create_segments
-      LAYOUTS[layout][:segments].each do |template|
+      SEGMENTS[layout].each do |template|
         segments.create(template: template)
       end
     end
