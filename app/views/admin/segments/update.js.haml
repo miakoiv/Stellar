@@ -1,6 +1,5 @@
-$("##{dom_id(@segment)} > .segment-content").replaceWith("#{j render partial: @segment.to_partial_path, object: @segment}");
-$("##{dom_id(@segment)}").removeClass('active');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
+$("##{dom_id(@segment)}").replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
 $('#layout-form').hide();
 $('#layout-form').html('');

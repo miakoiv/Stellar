@@ -3,10 +3,10 @@
     .container-fluid
       .section-content
         .row
-          = render partial: 'admin/sections/section_segments', object: section.segments
+          = render partial: 'admin/segments/segment', collection: section.segments
   - else
     .container
       .row
         .section-content{class: section.width}
           .row
-            = render partial: 'admin/sections/section_segments', object: section.segments
+            = render partial: 'admin/segments/segment', collection: section.segments
