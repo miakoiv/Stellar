@@ -580,10 +580,9 @@ ActiveRecord::Schema.define(version: 20170719115936) do
   create_table "segments", force: :cascade do |t|
     t.integer  "section_id",    limit: 4,                 null: false
     t.integer  "template",      limit: 4,     default: 0, null: false
+    t.integer  "alignment",     limit: 4,     default: 0, null: false
     t.integer  "resource_id",   limit: 4
     t.string   "resource_type", limit: 255
-    t.string   "headline",      limit: 255
-    t.string   "subhead",       limit: 255
     t.text     "body",          limit: 65535
     t.text     "metadata",      limit: 65535
     t.integer  "priority",      limit: 4,     default: 0, null: false
