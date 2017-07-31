@@ -16,10 +16,9 @@ class Segment < ActiveRecord::Base
   enum template: {
     empty: 0,
     column: 1,
-    header: 2,
-    picture: 3,
-    gallery: 4,
-    map: 5,
+    picture: 2,
+    gallery: 3,
+    map: 4,
     category: 11,
     product: 12,
     promotion: 13,

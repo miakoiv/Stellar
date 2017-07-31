@@ -66,18 +66,4 @@
 .picture.segment-content {
   img { @extend .img-responsive; }
   overflow: hidden;
-
-  .caption {
-    position: absolute;
-    bottom: 20px;
-    left: 15px;
-    padding: 15px;
-    border-radius: $border-radius-large;
-    background-color: rgba(255, 255, 255, 0.6);
-
-    h1, small {
-      display: block;
-      margin: 0;
-    }
-  }
 }

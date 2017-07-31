@@ -1,8 +1,2 @@
 .segment-content.picture
   = image_variant_tag picture.cover_image, :original
-
-  - if picture.headline.present?
-    .caption
-      %h1
-        = picture.headline
-        %small= picture.subhead
