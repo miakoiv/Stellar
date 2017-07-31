@@ -350,7 +350,7 @@ fi:
         name: Nimi
       section:
         layout: Asettelu
-        width: Leveys
+        width: Sisällön leveys
         height: Korkeus
       segment:
         template: Sisällön tyyppi

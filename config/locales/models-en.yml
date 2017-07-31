@@ -350,7 +350,7 @@ en:
         name: Name
       section:
         layout: Layout
-        width: Width
+        width: Content width
         height: Height
       segment:
         template: Content type
