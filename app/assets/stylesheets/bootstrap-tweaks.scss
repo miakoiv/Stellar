@@ -491,7 +491,7 @@ img.img-center {
 .section-list-item .segment {
   outline: 1px solid rgba(0, 255, 255, 0.333);
 
-  .segment-content { min-height: 40px; }
+  .segment-content { min-height: 120px; }
   .segment-link {
     display: none;
     position: absolute;
@@ -525,11 +525,15 @@ img.img-center {
   left: 0;
   top: 0;
   z-index: 4;
+  background-color: $body-bg;
+  @include box-shadow(0 0 18px rgba($brand-primary, 0.8));
+}
+#layout-form .segment-form,
+#layout-form .segment-head,
+#layout-form .segment-tail {
   @include segment-padding;
   padding-left: $grid-gutter-width/2;
   padding-right: $grid-gutter-width/2;
-  background-color: $body-bg;
-  @include box-shadow(0 0 18px rgba($brand-primary, 0.8));
 }
 #layout-form .CodeMirror { height: 300px; }
 
@@ -553,9 +557,6 @@ img.img-center {
     padding-left: $grid-gutter-width/2;
     padding-right: $grid-gutter-width/2;
   }
-}
-#layout-form .segment-content.picture {
-  margin: -20px -15px 0;
 }
 
 

@@ -2,6 +2,13 @@
   = render partial: 'form'
 
 = yield :segment_content
-= yield :segment_head
+
+- if content_for?(:segment_head)
+  .segment-head
+    = yield :segment_head
+
 = form
-= yield :segment_tail
+
+- if content_for?(:segment_tail)
+  .segment-tail
+    = yield :segment_tail

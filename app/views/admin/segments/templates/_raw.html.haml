@@ -1,7 +1,6 @@
 - content_for :segment_content do
   = render partial: @segment.to_partial_path, object: @segment
 
-%hr
 %fieldset
   = f.text_area :body, rows: 10, skip_label: true
 
