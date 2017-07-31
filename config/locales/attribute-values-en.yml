@@ -85,6 +85,10 @@ en:
           product: product
           promotion: promotion
           raw: ʜᴛᴍʟ code
+        alignment:
+          top: top
+          middle: middle
+          bottom: bottom
       user:
         group:
           guest: Guest

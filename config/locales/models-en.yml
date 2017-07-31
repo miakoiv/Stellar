@@ -354,8 +354,7 @@ en:
         height: Height
       segment:
         template: Content type
-        headline: Headline
-        subhead: Subhead
+        alignment: Content alignment
         body: Body text
       shipment:
         shipping_method_id: Shipping method

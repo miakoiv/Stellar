@@ -85,6 +85,10 @@ fi:
           product: tuote
           promotion: kampanja
           raw: ʜᴛᴍʟ-koodia
+        alignment:
+          top: ylös
+          middle: keskelle
+          bottom: alas
       user:
         group:
           guest: Vieras

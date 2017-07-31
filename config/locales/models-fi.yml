@@ -354,8 +354,7 @@ fi:
         height: Korkeus
       segment:
         template: Sisällön tyyppi
-        headline: Otsikko
-        subhead: Alaotsikko
+        alignment: Sisällön tasaus
         body: Leipäteksti
       shipment:
         shipping_method_id: Toimitustapa
