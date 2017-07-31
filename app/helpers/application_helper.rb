@@ -82,6 +82,13 @@ module ApplicationHelper
     end
   end
 
+  def section_style(section)
+    [].tap do |s|
+      section.height.present? && s << "height: #{section.height}em;"
+      section.background_image.present? && s << "background-image: url(#{section.background_image.url(:original)}); background-size: cover; background-position: center center; background-repeat: no-repeat;"
+    end.join ' '
+  end
+
   def branding(object)
     image_variant_tag(object.cover_image, :technical) +
       content_tag(:span, object.to_s)
