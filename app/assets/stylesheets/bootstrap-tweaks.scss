@@ -311,6 +311,7 @@ body {
   background-color: transparent;
 }
 
+
 /*
  * Search panel
  */
@@ -514,10 +515,6 @@ img.img-center {
   &:hover .segment-link { display: block; }
 }
 
-/* Active item and sorting placeholder */
-.section-list-item.active { }
-.section-list .sortable-placeholder { }
-
 
 /*
  * Layout editor form box containing the segment form
@@ -704,6 +701,7 @@ fieldset[disabled] .help-block { display: none; }
   font-size: $font-size-base;
   font-weight: 400;
 }
+
 
 /*
  * Jumbotrons
