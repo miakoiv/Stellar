@@ -1,11 +1,13 @@
 /*
- * Flex layout for sections, alignment options for segments
+ * Forced 100% height for containers and rows
+ * to accommodate percentage heights for segments
  */
 .section > .container-fluid,
 .section > .container, .section > .container > .row,
 .section .section-content,
 .section .section-content > .row {
   height: 100%;
+  line-height: 1.4; // default to sane value for summernote
 }
 
 
