@@ -1,12 +1,6 @@
 $.fn.extend
   initialize: ->
 
-    $('#static-wrap a[href^="/snippets/"]').each ->
-      $.ajax
-        url: $(this).attr 'href'
-        success: (data, status, xhr) =>
-          $(this).replaceWith data
-
     $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'
