@@ -85,7 +85,7 @@ module ApplicationHelper
   def section_style(section)
     [].tap do |s|
       section.height.present? && s << "height: #{section.height}em;"
-      section.background_image.present? && s << "background-image: url(#{section.background_image.url(:original)}); background-size: cover; background-position: center center; background-repeat: no-repeat;"
+      section.background_image.present? && s << "background-image: url(#{section.background_image.url(:lightbox)}); background-size: cover; background-position: center center; background-repeat: no-repeat;"
     end.join ' '
   end
 

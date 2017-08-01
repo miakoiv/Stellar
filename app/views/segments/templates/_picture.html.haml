@@ -1,7 +1,6 @@
-- image = picture.cover_image
 .segment-content.picture
-  - if image.present?
-    = image_variant_tag image, :original
+  - if picture.images.any?
+    = image_variant_tag picture.cover_image, :lightbox
   - else
     :coffee
       # Responsive placeholder image technology from
