@@ -18,22 +18,34 @@
     toolbar: [
       ['style', ['style']]
       ['para', ['paragraph', 'fontsize', 'height', 'ul', 'ol']]
-      ['font', ['color', 'bold', 'italic', 'clear']]
-      ['insert', ['table', 'hr', 'link', 'picture', 'video']]
+      ['font', ['fontname', 'color', 'bold', 'italic', 'clear']]
+      ['table', ['table']]
+      ['insert', ['hr', 'link', 'picture', 'video']]
     ]
     popover:
       image: [
-        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']]
+        ['float', ['floatLeft', 'floatRight', 'floatNone']]
         ['remove', ['removeMedia']]
       ]
       link: [
         ['link', ['linkDialogShow', 'unlink']]
       ]
+      table: [
+        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
+      ]
     dialogsInBody: true
     dialogsFade: true
     disableDragAndDrop: true
     toolbarContainer: '.navbar-toolbar'
+    styleTags: ['p', 'h1', 'h2', 'h3']
+    fontNames: [
+      'Fira Sans', 'Droid Serif', 'Helvetica Neue', 'Helvetica', 'Montserrat'
+    ]
+    fontNamesIgnoreCheck: [
+      'Fira Sans', 'Droid Serif', 'Montserrat'
+    ]
     fontSizes: ['9', '10', '12', '14', '16', '18', '20', '24', '28', '32', '36', '44', '52', '60', '72']
     colors: [
       ['#000000', '#424242', '#636363', '#9c9c94', '#cec6ce', '#efefef', '#f7f7f7', '#ffffff']
@@ -45,6 +57,7 @@
       ['#9c0000', '#b56308', '#bd9400', '#397b21', '#104a5a', '#085294', '#311873', '#731842']
       ['#630000', '#7b3900', '#846300', '#295218', '#083139', '#003163', '#21104a', '#4a1031']
     ]
+    tableClassName: 'table'
     callbacks:
       onImageUpload: (files) ->
         sendAttachment files[0], (data) =>
