@@ -502,7 +502,6 @@ img.img-center {
 .section-list-item .segment {
   outline: 1px solid rgba(0, 255, 255, 0.333);
 
-  .segment-content { min-height: 120px; }
   .segment-link {
     display: none;
     position: absolute;
@@ -563,13 +562,16 @@ img.img-center {
   margin: -20px -15px 0;
   border: 0;
   border-radius: 0;
+  caret-color: $brand-primary;
 
-  .note-editing-area .note-editable {
+  .note-editing-area .note-editable,
+  .note-editing-area .note-placeholder {
     @include segment-padding;
     padding-left: $grid-gutter-width/2;
     padding-right: $grid-gutter-width/2;
   }
   .table { @extend .table-bordered; }
+  font { text-shadow: 0 0 1px rgba(0, 0, 0, 0.6); }
 }
 
 

@@ -35,10 +35,6 @@
         ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
         ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
       ]
-    dialogsInBody: true
-    dialogsFade: true
-    disableDragAndDrop: true
-    toolbarContainer: '.navbar-toolbar'
     styleTags: ['p', 'h1', 'h2', 'h3']
     fontNames: [
       'Fira Sans', 'Droid Serif', 'Helvetica Neue', 'Helvetica', 'Montserrat'
@@ -58,6 +54,12 @@
       ['#630000', '#7b3900', '#846300', '#295218', '#083139', '#003163', '#21104a', '#4a1031']
     ]
     tableClassName: 'table'
+    toolbarContainer: '.navbar-toolbar'
+    dialogsInBody: true
+    dialogsFade: true
+    disableDragAndDrop: true
+    minHeight: $("##{dom_id(@segment)}").outerHeight()
+    placeholder: '#{column_placeholder}'
     callbacks:
       onImageUpload: (files) ->
         sendAttachment files[0], (data) =>

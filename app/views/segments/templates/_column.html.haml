@@ -1,2 +1,5 @@
 .segment-content.column
-  = column.body.html_safe if column.body.present?
+  - if column.body.present?
+    = column.body.html_safe
+  - else
+    %p.text-muted= column_placeholder
