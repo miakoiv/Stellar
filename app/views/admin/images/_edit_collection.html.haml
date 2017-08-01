@@ -1,7 +1,7 @@
 - id = dom_id(imageable, :images)
 
 .thumbnail-grid.sortable{id: id}
-  = render partial: 'admin/images/edit', collection: imageable.images, as: :image
+  = render partial: 'admin/images/edit', collection: imageable.images, as: :image, locals: {options: imageable.image_options}
 
 :coffee
   $('##{id}').sortable(

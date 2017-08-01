@@ -2,13 +2,14 @@
   .thumbnail
     = image_variant_tag image, :matchbox
     .caption
-      %small= image.attachment_file_name
+      %small= truncate(image.attachment_file_name, length: 20, omission: '…')
     .thumbnail-widgets
       .pull-right
         = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
       = form_for [:admin, image], remote: true, html: {class: 'immediate'} do |f|
-        .btn-group-vertical.btn-group-xs{data: {toggle: 'buttons'}}
-          - image.applicable_purposes.each do |purpose|
-            %label.btn.btn-default{class: image.purpose == purpose && 'active'}
-              = f.radio_button :purpose, purpose
-              = Image.human_attribute_value(:purpose, purpose)
+        - if options[:purpose]
+          .btn-group-vertical.btn-group-xs{data: {toggle: 'buttons'}}
+            - image.applicable_purposes.each do |purpose|
+              %label.btn.btn-default{class: image.purpose == purpose && 'active'}
+                = f.radio_button :purpose, purpose
+                = Image.human_attribute_value(:purpose, purpose)

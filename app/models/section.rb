@@ -68,6 +68,10 @@ class Section < ActiveRecord::Base
     width == 'width-spread'
   end
 
+  def image_options
+    {purpose: false}
+  end
+
   def background_image
     cover_image
   end

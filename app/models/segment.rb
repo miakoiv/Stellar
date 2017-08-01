@@ -43,6 +43,10 @@ class Segment < ActiveRecord::Base
   end
 
   #---
+  def image_options
+    {purpose: false}
+  end
+
   def to_partial_path
     "segments/templates/#{template}"
   end
