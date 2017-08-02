@@ -17,8 +17,13 @@ class Section < ActiveRecord::Base
   #---
   # Available column and box layouts.
   LAYOUTS = {
-    columns: ['col-12', 'col-6-6', 'col-4-4-4', 'col-8-4', 'col-4-8'],
-    boxen: ['box-12', 'box-6-6', 'box-4-4-4', 'box-8-4-4', 'box-4-4-8'],
+    columns: [
+      'col-12', 'col-6-6', 'col-4-4-4', 'col-8-4', 'col-4-8'
+    ],
+    boxen: [
+      'box-12', 'box-6-6', 'box-4-4-4', 'box-8-4', 'box-4-8',
+      'box-8-4-4', 'box-4-4-8'
+    ],
   }.freeze
 
   # Initial segment templates for each layout.
@@ -28,11 +33,13 @@ class Section < ActiveRecord::Base
     'col-4-4-4' => %w{column column column},
     'col-8-4' => %w{column column},
     'col-4-8' => %w{column column},
-    'box-12' => %w{empty},
-    'box-6-6' => %w{empty empty},
-    'box-4-4-4' => %w{empty empty empty},
-    'box-8-4-4' => %w{empty empty empty},
-    'box-4-4-8' => %w{empty empty empty},
+    'box-12' => %w{picture},
+    'box-6-6' => %w{picture picture},
+    'box-4-4-4' => %w{picture picture picture},
+    'box-8-4' => %w{picture picture},
+    'box-4-8' => %w{picture picture},
+    'box-8-4-4' => %w{picture picture picture},
+    'box-4-4-8' => %w{picture picture picture},
   }
 
   # Available widths defined in layouts.css.
@@ -64,7 +71,7 @@ class Section < ActiveRecord::Base
   end
 
   #---
-  def fluid?
+  def spread?
     width == 'width-spread'
   end
 

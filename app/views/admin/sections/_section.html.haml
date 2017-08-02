@@ -1,9 +1,8 @@
 %section.section{class: section.layout, style: section_style(section)}
-  - if section.fluid?
-    .container-fluid
-      .section-content
-        .row
-          = render partial: 'admin/segments/segment', collection: section.segments
+  - if section.spread?
+    .section-content
+      .row
+        = render partial: 'admin/segments/segment', collection: section.segments
   - else
     .container
       .row
