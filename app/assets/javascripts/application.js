@@ -55,6 +55,7 @@
 //= require parallax.min
 //= require summernote.min
 //= require summernote/locales
+//= require swiper.jquery.min
 
 
 // App assets
