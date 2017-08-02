@@ -509,6 +509,7 @@ img.img-center {
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 1;
 
     a {
       display: block;
@@ -522,7 +523,6 @@ img.img-center {
     }
   }
 
-  &.active { z-index: 2; }
   &:hover .segment-link { display: block; }
 }
 
@@ -534,7 +534,7 @@ img.img-center {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 4;
+  z-index: 2;
   background-color: $body-bg;
   line-height: 1.4; // matches layouts.css
   @include box-shadow(0 0 18px rgba($brand-primary, 0.8));
