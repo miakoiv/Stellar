@@ -1,6 +1,21 @@
 .segment-content.picture
   - if picture.images.any?
-    = image_variant_tag picture.cover_image, :lightbox
+    - if picture.images.count > 1
+      .swiper-container
+        .swiper-wrapper
+          - picture.images.each do |image|
+            .swiper-slide
+              = image_variant_tag image, :lightbox
+
+      :coffee
+        jQuery ->
+          $swiper = new Swiper $("##{dom_id(picture)} .swiper-container"),
+            autoplay: 5000
+            loop: true
+            effect: 'fade'
+    - else
+      = image_variant_tag picture.cover_image, :lightbox
+
   - else
     :coffee
       # Responsive placeholder image technology from

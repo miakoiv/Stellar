@@ -111,4 +111,10 @@
 .picture.segment-content {
   img { @extend .img-responsive; }
   overflow: hidden;
+
+  .swiper-slide {
+    height: auto;
+    background-color: $body-bg;
+  }
+  .swiper-slide img { margin: 0 auto; }
 }
