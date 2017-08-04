@@ -148,10 +148,20 @@
     background-color: $body-bg;
   }
 }
-.section-content-wrap.fixed-ratio .section-content.block .segment-content.picture {
+.fixed-ratio .block .segment-content.picture {
   .swiper-slide { height: 100%; }
   .image-container img,
   .swiper-container img {
     @extend .img-center;
   }
+}
+
+.segment-content.map {
+  .map-container {
+    width: 100%;
+    height: 20em;
+  }
+}
+.fixed-ratio .block .segment-content.map {
+  .map-container { height: 100%; }
 }

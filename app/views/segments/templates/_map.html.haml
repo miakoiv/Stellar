@@ -1,0 +1,21 @@
+.segment-content.map
+  .map-container{data: {lat: map.map_latitude || 60.2495, lng: map.map_longitude || 24.0669, zoom: map.map_zoom || 10}}
+
+- map_id = dom_id(map, :map)
+
+:coffee
+  $map = $("##{dom_id(map)}").find '.map-container'
+  loc = {lat: $map.data('lat'), lng: $map.data('lng')}
+  jQuery ->
+    map = new google.maps.Map($map[0],
+      center: loc
+      zoom: $map.data 'zoom'
+      disableDefaultUI: true
+      draggable: false
+      scrollwheel: false
+      gesturehandling: 'none'
+    )
+    marker = new google.maps.Marker(
+      position: loc
+      map: map
+    )
