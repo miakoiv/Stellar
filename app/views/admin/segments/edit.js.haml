@@ -1,4 +1,5 @@
 $segment = $("##{dom_id(@segment)}");
+$content = $segment.find('.segment-content');
 $('#section-list > .section-list-item .segment').removeClass('active');
 $segment.addClass('active');
 $('.summernote').summernote('destroy');
@@ -6,8 +7,5 @@ $('.navbar-toolbar').empty();
 $('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
 $('#layout-form').initialize();
 $('#layout-form').show();
-$('#layout-form').offset($segment.find('.layout-form-anchor').offset());
-$('#layout-form').css({'width': $segment.css('width')});
-$('#layout-form .segment-content').css({'padding-top': $segment.css('padding-top')});
-$('#layout-form .segment-content').css({'padding-right': $segment.css('padding-right')});
-$('#layout-form .segment-content').css({'padding-left': $segment.css('padding-left')});
+$('#layout-form').offset($content.offset());
+$('#layout-form').css({'width': $content.css('width')});

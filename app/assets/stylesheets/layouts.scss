@@ -1,120 +1,157 @@
 /*
- * Forced 100% height for containers and rows
- * to accommodate percentage heights for segments
+ * Mixins
  */
-.section > .container-fluid,
-.section > .container, .section > .container > .row,
-.section .section-content,
-.section .section-content > .row {
-  height: 100%;
-  line-height: 1.4; // default to sane value for summernote
+@mixin padding-horizontal($padding: $grid-gutter-width/2) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+@mixin padding-vertical($padding: 20px) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+@mixin gutters($top, $right, $bottom, $left) {
+  @if $top { padding-top: 20px; }
+  @if $right { padding-right: $grid-gutter-width/2; }
+  @if $bottom { padding-bottom: 20px; }
+  @if $left { padding-left: $grid-gutter-width/2; }
 }
 
 
 /*
  * Section content widths
  */
-.section .section-content.width-page {
+.section .section-content.col-12 {
   @extend .col-xs-12;
 }
-.section .section-content.width-10 {
+.section .section-content.col-10 {
   @extend .col-xs-12, .col-sm-10, .col-sm-offset-1;
 }
-.section .section-content.width-8 {
+.section .section-content.col-8 {
   @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2;
 }
-.section .section-content.width-6 {
+.section .section-content.col-6 {
   @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2, .col-md-6, .col-md-offset-3;
 }
 
 
 /*
- * Section and segment styles for section layouts
+ * Section layouts
  */
-@mixin section-flex {
-  .section-content .row {
+.section-content.column .segment {
+  @include padding-vertical;
+}
+.section-content.block {
+  @include padding-horizontal;
+}
+.section-content.block > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.section-content.block .segment {
+  @include padding-horizontal(0);
+}
+.section-content.column.spread > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.section-content.block.spread > .row {
+  margin-left: -$grid-gutter-width/2;
+  margin-right: -$grid-gutter-width/2;
+}
+.section-content .segment {
+  .segment-content { min-height: 10px; }
+}
+
+
+/*
+ * Section content dimensioning and alignment
+ */
+.section { position: relative; }
+.section-content-wrap.fixed-ratio {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.section-content-wrap .container,
+.section-content-wrap .row,
+.section-content-wrap .section-content {
+  height: 100%;
+}
+
+/* Column section segments can be aligned */
+@media (min-width: $screen-sm-min) {
+  .section-content.column.align-top > .row,
+  .section-content.column.align-middle > .row,
+  .section-content.column.align-bottom > .row {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row nowrap;
   }
-  .section-content .segment {
-    flex: 0 0 auto;
-
-    &.top { align-self: flex-start; }
-    &.middle { align-self: center; }
-    &.bottom { align-self: flex-end; }
-  }
-}
-@mixin segment-padding($padding: 20px) {
-  padding-top: $padding;
-  padding-bottom: $padding;
+  .section-content.column.align-top > .row { align-items: flex-start; }
+  .section-content.column.align-middle > .row { align-items: center; }
+  .section-content.column.align-bottom > .row { align-items: flex-end; }
 }
 
-.col-12 {
-  @include section-flex;
+/* Block section segments have predetermined heights */
+.section-content.block .segment.full { height: 100%; }
+.section-content.block .segment.half { height: 50%; }
 
-  .segment {
-    @extend .col-xs-12;
-    @include segment-padding;
-  }
+
+/*
+ * Segment measures
+ */
+.segment.col-12 {
+  @extend .col-xs-12;
 }
-
-.col-6-6 {
-  @include section-flex;
-
-  .segment {
-    @extend .col-xs-12, .col-sm-6;
-    @include segment-padding;
-  }
+.segment.col-8 {
+  @extend .col-xs-12, .col-sm-8;
 }
-
-.col-4-4-4 {
-  @include section-flex;
-
-  .segment {
-    @extend .col-xs-12, .col-sm-12, .col-md-4;
-    @include segment-padding;
-  }
+.segment.col-8-push {
+  @extend .col-xs-12, .col-sm-8, .col-sm-push-4;
 }
-
-.col-8-4 {
-  @include section-flex;
-
-  .segment:first-child {
-    @extend .col-xs-12, .col-sm-8;
-    @include segment-padding;
-  }
-  .segment:last-child {
-    @extend .col-xs-12, .col-sm-4;
-    @include segment-padding;
-  }
+.segment.col-6 {
+  @extend .col-xs-12, .col-sm-6;
 }
-
-.col-4-8 {
-  @include section-flex;
-
-  .segment:first-child {
-    @extend .col-xs-12, .col-sm-4;
-    @include segment-padding;
-  }
-  .segment:last-child {
-    @extend .col-xs-12, .col-sm-8;
-    @include segment-padding;
-  }
+.segment.col-4 {
+  @extend .col-xs-6, .col-sm-4;
+}
+.segment.col-4-pull {
+  @extend .col-xs-6, .col-sm-4, .col-sm-pull-8;
 }
 
 
 /*
  * Segment content styles
  */
-.segment-content { position: relative; }
+.segment-content {
+  height: 100%;
+  line-height: 1.4; // default to sane value for summernote
+}
 
-.picture.segment-content {
-  img { @extend .img-responsive; }
+.segment-content.picture {
   overflow: hidden;
 
+  .image-container,
+  .swiper-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .image-container img,
+  .swiper-container img {
+    @extend .img-responsive;
+    margin: auto;
+  }
   .swiper-slide {
     height: auto;
     background-color: $body-bg;
   }
-  .swiper-slide img { margin: 0 auto; }
+}
+.section-content-wrap.fixed-ratio .section-content.block .segment-content.picture {
+  .swiper-slide { height: 100%; }
+  .image-container img,
+  .swiper-container img {
+    @extend .img-center;
+  }
 }

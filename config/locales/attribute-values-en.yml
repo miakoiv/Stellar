@@ -63,17 +63,19 @@ en:
           superuser: superuser
       section:
         layout:
-          'col-12': 12 columns
-          'col-6-6': 6+6 columns
-          'col-4-4-4': 4+4+4 columns
-          'col-8-4': 8+4 columns
-          'col-4-8': 4+8 columns
+          block: blocks
+          column: columns
         width:
-          'width-spread': spread
-          'width-page': full page
-          'width-10': 10 columns
-          'width-8': 8 columns
-          'width-6': 6 columns
+          'spread': spread
+          'col-12': full page
+          'col-10': 10 columns
+          'col-8': 8 columns
+          'col-6': 6 columns
+        alignment:
+          'none': none
+          'align-top': top
+          'align-middle': middle
+          'align-bottom': bottom
       segment:
         template:
           empty: empty
@@ -86,10 +88,6 @@ en:
           product: product
           promotion: promotion
           raw: ʜᴛᴍʟ code
-        alignment:
-          top: top
-          middle: middle
-          bottom: bottom
       user:
         group:
           guest: Guest

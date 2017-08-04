@@ -351,10 +351,11 @@ en:
       section:
         layout: Layout
         width: Content width
-        height: Height
+        aspect_ratio: Fixed aspect ratio
+        alignment: Column alignment
+        background_color: Background color
       segment:
         template: Content type
-        alignment: Content alignment
         body: Body text
       shipment:
         shipping_method_id: Shipping method

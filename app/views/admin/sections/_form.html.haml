@@ -1,7 +1,24 @@
 = bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
   %fieldset
+    .form-group
+      = f.label col(Section, :layout)
+      .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+        - Section.layouts.keys.each do |layout|
+          %label.btn.btn-default{class: section.layout == layout && 'active'}
+            = f.radio_button_without_bootstrap :layout, layout
+            = Section.human_attribute_value(:layout, layout)
+    = f.select :aspect_ratio, Section.aspect_ratio_options, {include_blank: blank}
     = f.select :width, Section.width_options, {}, {required: true}
-    = f.text_field :height
+    .form-group
+      = f.label col(Section, :alignment)
+      .btn-group{data: {toggle: 'buttons'}}
+        - Section.alignment_options.each do |label, value|
+          %label.btn.btn-default{class: section.alignment == value && 'active'}
+            = f.radio_button_without_bootstrap :alignment, value
+            = Section.human_attribute_value(:alignment, value)
+    = f.color_field :background_color
 
 :coffee
+  $('#section_#{section.id}_section_aspect_ratio').selectize
+    allowEmptyOption: true
   $('#section_#{section.id}_section_width').selectize()

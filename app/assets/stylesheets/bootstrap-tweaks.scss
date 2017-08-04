@@ -459,7 +459,7 @@ i.icon {
 /*
  * Images contained and centered
  */
-img.img-contain {
+.img-contain {
   display: block;
   position: absolute;
   left: 0;
@@ -469,7 +469,7 @@ img.img-contain {
   width: auto;
   height: auto;
 }
-img.img-center {
+.img-center {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -491,39 +491,32 @@ img.img-center {
   left: 0;
   border: 0;
   border-radius: 0;
+  background-color: #a0a;
 
   .dropdown-menu {
-    width: 240px;
+    width: 320px;
     padding: 15px;
     border: 0;
     border-radius: 0;
   }
 }
-.section-list-item .segment {
+.section-list-item .segment-content {
   outline: 1px solid rgba(0, 255, 255, 0.333);
+}
 
-  .segment-link {
+.section-list-item .segment {
+  .segment-nav {
     display: none;
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
     z-index: 1;
-
-    a {
-      display: block;
-      width: 100%;
-      height: 100%;
-      padding: 10px;
-      background-color: rgba($brand-primary, 0.6);
-      color: inherit;
-      font-size: 150%;
-      text-align: right;
-    }
+    border: 0;
+    border-radius: 0;
+    background-color: #0aa;
   }
 
-  &:hover .segment-link { display: block; }
+  &:hover .segment-nav { display: block; }
 }
 
 
@@ -537,25 +530,25 @@ img.img-center {
   z-index: 2;
   background-color: $body-bg;
   line-height: 1.4; // matches layouts.css
+}
+#layout-form:before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  right: -15px;
+  top: -20px;
+  bottom: 0;
+  z-index: -1;
+  background-color: $body-bg;
   @include box-shadow(0 0 18px rgba($brand-primary, 0.8));
 }
 #layout-form .segment-form,
 #layout-form .segment-head,
 #layout-form .segment-tail {
-  @include segment-padding;
-  padding-left: $grid-gutter-width/2;
-  padding-right: $grid-gutter-width/2;
+  @include padding-horizontal;
+  @include padding-vertical;
 }
 #layout-form .CodeMirror { height: 300px; }
-
-/* Handle to anchor #layout-form to */
-.layout-form-anchor {
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 
 /* Overrides for different segment templates */
 #layout-form .segment-form.column .note-editor {
@@ -566,9 +559,7 @@ img.img-center {
 
   .note-editing-area .note-editable,
   .note-editing-area .note-placeholder {
-    @include segment-padding;
-    padding-left: $grid-gutter-width/2;
-    padding-right: $grid-gutter-width/2;
+    padding: 0;
   }
   .table { @extend .table-bordered; }
   font[color] { text-shadow: 0 0 1px rgba(0, 0, 0, 0.6); }

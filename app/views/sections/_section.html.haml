@@ -1,11 +1,12 @@
-%section.section{class: section.layout, style: section_style(section)}
-  - if section.spread?
-    .section-content
-      .row
-        = render partial: 'segments/segment', collection: section.segments
-  - else
-    .container
-      .row
-        .section-content{class: section.width}
-          .row
-            = render partial: 'segments/segment', collection: section.segments
+%section.section{style: section_style(section)}
+  .section-content-wrap{class: section.fixed_ratio? && 'fixed-ratio'}
+    - if section.spread?
+      .section-content{class: [section.layout, section.width, section.alignment]}
+        .row
+          = render partial: 'segments/segment', collection: section.segments
+    - else
+      .container
+        .row
+          .section-content{class: [section.layout, section.width, section.alignment]}
+            .row
+              = render partial: 'segments/segment', collection: section.segments

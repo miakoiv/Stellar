@@ -87,8 +87,8 @@ fi:
         one: rooli
         other: roolit
       section:
-        one: lohko
-        other: lohkot
+        one: alue
+        other: alueet
       segment:
         one: tämä sivun osa
         other: nämä sivun osat
@@ -351,10 +351,11 @@ fi:
       section:
         layout: Asettelu
         width: Sisällön leveys
-        height: Korkeus
+        aspect_ratio: Kiinteä kuvasuhde
+        alignment: Palstojen tasaus
+        background_color: Taustaväri
       segment:
         template: Sisällön tyyppi
-        alignment: Sisällön tasaus
         body: Leipäteksti
       shipment:
         shipping_method_id: Toimitustapa

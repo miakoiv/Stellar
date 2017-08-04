@@ -1,5 +1,3 @@
-.segment[segment]{class: segment.alignment}
+.segment[segment]{class: segment.measure}
   = render partial: segment.to_partial_path, object: segment
-  .segment-link
-    = link_to icon('pencil'), edit_admin_segment_path(segment), remote: true
-  .layout-form-anchor
+  = render partial: 'admin/segments/segment_nav', object: segment, as: :segment

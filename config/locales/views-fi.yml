@@ -179,6 +179,10 @@ fi:
         new_property: Uusi ominaisuus
       new:
         new_property: Uusi ominaisuus
+    sections:
+      section_nav:
+        delete:
+          confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     shipping_methods:
       index:
         new_shipping_method: Uusi toimitustapa

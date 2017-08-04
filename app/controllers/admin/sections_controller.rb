@@ -18,6 +18,7 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
+        create_segments!
         format.js
       else
         format.js { render json: @section.errors, status: :unprocessable_entity }
@@ -51,10 +52,19 @@ class Admin::SectionsController < ApplicationController
       @section = Section.find(params[:id])
     end
 
+    # Create segments according to given layout preset.
+    def create_segments!
+      preset = params[:preset]
+      template = @section.block? ? 'picture' : 'column'
+      Section::SEGMENTS[preset].each do |measure|
+        @section.segments.create(template: template, measure: measure)
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
       params.require(:section).permit(
-        :layout, :width, :height
+        :width, :layout, :aspect_ratio, :alignment, :background_color
       )
     end
 end

@@ -63,17 +63,19 @@ fi:
           superuser: pääkäyttäjä
       section:
         layout:
-          'col-12': 12 palstaa
-          'col-6-6': 6+6 palstaa
-          'col-4-4-4': 4+4+4 palstaa
-          'col-8-4': 8+4 palstaa
-          'col-4-8': 4+8 palstaa
+          block: lohkot
+          column: palstat
         width:
-          'width-spread': aukeama
-          'width-page': koko sivu
-          'width-10': 10 palstaa
-          'width-8': 8 palstaa
-          'width-6': 6 palstaa
+          'spread': aukeama
+          'col-12': koko sivu
+          'col-10': 10 palstaa
+          'col-8': 8 palstaa
+          'col-6': 6 palstaa
+        alignment:
+          'none': ei tasausta
+          'align-top': ylös
+          'align-middle': keskelle
+          'align-bottom': alas
       segment:
         template:
           empty: tyhjä
@@ -86,10 +88,6 @@ fi:
           product: tuote
           promotion: kampanja
           raw: ʜᴛᴍʟ-koodia
-        alignment:
-          top: ylös
-          middle: keskelle
-          bottom: alas
       user:
         group:
           guest: Vieras

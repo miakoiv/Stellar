@@ -14,7 +14,8 @@
             loop: true
             effect: 'fade'
     - else
-      = image_variant_tag picture.cover_image, :lightbox
+      .image-container
+        = image_variant_tag picture.cover_image, :lightbox
 
   - else
     :coffee

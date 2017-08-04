@@ -24,8 +24,6 @@ class Segment < ActiveRecord::Base
     promotion: 13,
     raw: 99,
   }
-  enum alignment: [:top, :middle, :bottom]
-
 
   #---
   belongs_to :section
@@ -36,10 +34,6 @@ class Segment < ActiveRecord::Base
   #---
   def self.template_options
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
-  end
-
-  def self.alignment_options
-    Segment.alignments.keys.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
   end
 
   #---
