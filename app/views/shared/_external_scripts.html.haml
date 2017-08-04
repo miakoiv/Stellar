@@ -8,6 +8,9 @@
     ga('create', '#{current_store.tracking_code}', 'auto');
     ga('send', 'pageview');
 
+- if current_store.maps_api_key.present?
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{current_store.maps_api_key}"
+
 - if current_store.facebook_pixel_id.present?
   :javascript
     !function(f,b,e,v,n,t,s)

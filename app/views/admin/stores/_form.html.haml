@@ -24,6 +24,7 @@
             = f.form_group do
               = f.check_box :accept_credit_cards
             = f.text_field :tracking_code
+            = f.text_field :maps_api_key
             = f.text_field :facebook_pixel_id
             = f.text_field :tawkto_site_id
             = f.select :manufacturer_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
