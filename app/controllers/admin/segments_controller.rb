@@ -40,7 +40,7 @@ class Admin::SegmentsController < ApplicationController
     def segment_params
       params.require(:segment).permit(
         :resource_id, :resource_type, :template, :measure,
-        :body, :map_latitude, :map_longitude
+        :body, :map_latitude, :map_longitude, :map_zoom
       )
     end
 end

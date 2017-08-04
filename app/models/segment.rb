@@ -5,6 +5,7 @@ class Segment < ActiveRecord::Base
   store :metadata, accessors: [
     :map_latitude,    # map location
     :map_longitude,   # coordinates
+    :map_zoom,
   ], coder: JSON
 
   resourcify
