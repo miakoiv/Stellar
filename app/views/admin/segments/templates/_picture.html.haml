@@ -1,5 +1,5 @@
 - content_for :segment_content do
-  = render partial: @segment.to_partial_path, object: @segment
+  = render partial: @segment.to_partial_path, object: @segment, locals: {context: :edit}
 
 - content_for :segment_head do
   = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable

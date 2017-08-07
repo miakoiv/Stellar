@@ -1,4 +1,4 @@
-.segment-content.column{id: segment_content_id(column)}
+.segment-content.column{id: segment_content_id(column, context)}
   - if column.body.present?
     = column.body.html_safe
   - else

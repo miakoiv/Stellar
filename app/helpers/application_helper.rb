@@ -90,12 +90,10 @@ module ApplicationHelper
     end.join ' '
   end
 
-  # Generates a segment content id in a specific context, which defaults
-  # to current action name. Scripts that generate segment content may
-  # use this method to target the content element that was just rendered,
-  # or specify 'layout' context to target the layout editor instance, or
-  # 'edit' to target the instance rendered into the layout form element.
-  def segment_content_id(segment, context = action_name)
+  # Generates a segment content id in a specific context. Scripts that
+  # generate segment content may use this method to target the segment
+  # content either in layout or the layout form box.
+  def segment_content_id(segment, context)
     [context, segment.template, dom_id(segment)].join '_'
   end
 

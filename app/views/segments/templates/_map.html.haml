@@ -1,9 +1,9 @@
-.segment-content.map{id: segment_content_id(map)}
+.segment-content.map{id: segment_content_id(map, context)}
   .map-container{data: {lat: map.map_latitude || 60.2495, lng: map.map_longitude || 24.0669, zoom: map.map_zoom || 10}}
 
 :coffee
   jQuery ->
-    $map = $('##{segment_content_id(map)}').find '.map-container'
+    $map = $('##{segment_content_id(map, context)}').find '.map-container'
     loc = {lat: parseFloat($map.data('lat')), lng: parseFloat($map.data('lng'))}
     map = new google.maps.Map($map[0],
       center: loc
