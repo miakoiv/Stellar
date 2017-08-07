@@ -560,6 +560,12 @@ i.icon {
   .note-editing-area .note-editable,
   .note-editing-area .note-placeholder {
     padding: 0;
+
+    h1:first-child,
+    h2:first-child,
+    h3:first-child {
+      margin-top: 0;
+    }
   }
   .table { @extend .table-bordered; }
   font[color] { text-shadow: 0 0 1px rgba(0, 0, 0, 0.6); }
