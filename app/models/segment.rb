@@ -3,6 +3,7 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
+    :thumbnail_size,
     :map_latitude,    # map location
     :map_longitude,   # coordinates
     :map_zoom,
@@ -12,6 +13,9 @@ class Segment < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
   include Reorderable
+
+  #---
+  THUMBNAIL_SIZES = %w{icon thumbnail matchbox postcard}
 
   #---
   enum template: {
@@ -35,6 +39,10 @@ class Segment < ActiveRecord::Base
   #---
   def self.template_options
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
+  end
+
+  def self.thumbnail_size_options
+    THUMBNAIL_SIZES.map { |s| [Segment.human_attribute_value(:thumbnail_size, s), s] }
   end
 
   #---

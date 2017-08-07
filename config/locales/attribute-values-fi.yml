@@ -88,6 +88,11 @@ fi:
           product: tuote
           promotion: kampanja
           raw: ʜᴛᴍʟ-koodia
+        thumbnail_size:
+          icon: mini
+          thumbnail: pieni
+          matchbox: keskikokoinen
+          postcard: suuri
       user:
         group:
           guest: Vieras

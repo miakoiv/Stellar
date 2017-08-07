@@ -357,6 +357,7 @@ fi:
       segment:
         template: Sisällön tyyppi
         body: Leipäteksti
+        thumbnail_size: Diakuvan koko
       shipment:
         shipping_method_id: Toimitustapa
         number: Numero

@@ -88,6 +88,11 @@ en:
           product: product
           promotion: promotion
           raw: ʜᴛᴍʟ code
+        thumbnail_size:
+          icon: mini
+          thumbnail: small
+          matchbox: medium
+          postcard: large
       user:
         group:
           guest: Guest

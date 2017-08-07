@@ -357,6 +357,7 @@ en:
       segment:
         template: Content type
         body: Body text
+        thumbnail_size: Slide size
       shipment:
         shipping_method_id: Shipping method
         number: Number
