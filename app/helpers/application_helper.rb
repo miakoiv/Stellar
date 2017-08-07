@@ -90,13 +90,13 @@ module ApplicationHelper
     end.join ' '
   end
 
-  # Generates a segment content DOM id that includes the template name, and
-  # the current action name, allowing us to target the segment content in
-  # any context. For segment 42 using the 'map' template, the content id
-  # is 'map_show_page_segment_42' when called from StoreController#show_page,
-  # and 'map_edit_segment_42' when called from SegmentsController#edit.
-  def segment_content_id(segment)
-    "#{segment.template}_#{dom_id(segment, action_name)}"
+  # Generates a segment content id in a specific context, which defaults
+  # to current action name. Scripts that generate segment content may
+  # use this method to target the content element that was just rendered,
+  # or specify 'layout' context to target the layout editor instance, or
+  # 'edit' to target the instance rendered into the layout form element.
+  def segment_content_id(segment, context = action_name)
+    [context, segment.template, dom_id(segment)].join '_'
   end
 
   def branding(object)

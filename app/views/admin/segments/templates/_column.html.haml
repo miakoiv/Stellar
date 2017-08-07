@@ -1,4 +1,4 @@
-= f.text_area :body, rows: 10, skip_label: true, class: 'summernote'
+= f.text_area :body, rows: 10, skip_label: true
 
 :coffee
   sendAttachment = (file, callback) ->
@@ -13,7 +13,7 @@
       success: (data) ->
         callback data
 
-  $('.summernote').summernote
+  $('#segment_body').summernote
     lang: "#{t('culture')}"
     toolbar: [
       ['style', ['style']]
@@ -58,6 +58,7 @@
     dialogsInBody: true
     dialogsFade: true
     disableDragAndDrop: true
+    minHeight: $('##{segment_content_id(@segment, :layout)}').height()
     placeholder: '#{column_placeholder}'
     callbacks:
       onImageUpload: (files) ->
