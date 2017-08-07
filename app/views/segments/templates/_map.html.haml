@@ -1,19 +1,24 @@
 .segment-content.map{id: segment_content_id(map, context)}
-  .map-container{data: {lat: map.map_latitude || 60.2495, lng: map.map_longitude || 24.0669, zoom: map.map_zoom || 10}}
+  .map-container{data: {location: map.map_location || 'Infinite Loop, Cupertino, CA', zoom: map.map_zoom || 10}}
 
 :coffee
   jQuery ->
     $map = $('##{segment_content_id(map, context)}').find '.map-container'
-    loc = {lat: parseFloat($map.data('lat')), lng: parseFloat($map.data('lng'))}
-    map = new google.maps.Map($map[0],
-      center: loc
+    options =
       zoom: $map.data 'zoom'
       disableDefaultUI: true
       draggable: false
       scrollwheel: false
       gesturehandling: 'none'
-    )
-    marker = new google.maps.Marker(
-      position: loc
-      map: map
-    )
+    map = new google.maps.Map $map[0], options
+    geocoder = new google.maps.Geocoder
+    loc = $map.data 'location'
+    results = geocoder.geocode {address: loc}, (results, status) ->
+      if status is 'OK'
+        latlng = results[0].geometry.location
+      else
+        latlng = {lat: 37.3320003, lng: -122.0329752}
+      map.setCenter latlng
+      marker = new google.maps.Marker
+        position: latlng
+        map: map

@@ -357,6 +357,8 @@ fi:
       segment:
         template: Sisällön tyyppi
         body: Leipäteksti
+        map_location: Sijainnin osoite
+        map_zoom: Kartan koko
         thumbnail_size: Diakuvan koko
       shipment:
         shipping_method_id: Toimitustapa
