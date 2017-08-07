@@ -90,6 +90,15 @@ module ApplicationHelper
     end.join ' '
   end
 
+  # Generates a segment content DOM id that includes the template name, and
+  # the current action name, allowing us to target the segment content in
+  # any context. For segment 42 using the 'map' template, the content id
+  # is 'map_show_page_segment_42' when called from StoreController#show_page,
+  # and 'map_edit_segment_42' when called from SegmentsController#edit.
+  def segment_content_id(segment)
+    "#{segment.template}_#{dom_id(segment, action_name)}"
+  end
+
   def branding(object)
     image_variant_tag(object.cover_image, :technical) +
       content_tag(:span, object.to_s)
