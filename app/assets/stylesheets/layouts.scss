@@ -62,6 +62,12 @@
   .segment-content { min-height: 10px; }
 }
 
+/* Fix padding of stacked segments on mobile */
+@media (max-width: $screen-xs-max) {
+  .section-content.column .segment { padding-bottom: 0; }
+  .section-content.column .segment:last-child { padding-bottom: 20px; }
+}
+
 
 /*
  * Section content dimensioning and alignment
@@ -114,10 +120,10 @@
   @extend .col-xs-12, .col-sm-6;
 }
 .segment.col-4 {
-  @extend .col-xs-6, .col-sm-4;
+  @extend .col-xs-12, .col-sm-4;
 }
 .segment.col-4-pull {
-  @extend .col-xs-6, .col-sm-4, .col-sm-pull-8;
+  @extend .col-xs-12, .col-sm-4, .col-sm-pull-8;
 }
 
 
@@ -135,6 +141,7 @@
   h3:first-child {
     margin-top: 0;
   }
+  :last-child { margin-bottom: 0; }
 }
 
 .segment-content.picture {
