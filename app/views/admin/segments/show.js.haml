@@ -1,5 +1,5 @@
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
+$('#layout-panel').trigger('sticky_kit:detach');
+$('#layout-panel').remove();
 $("##{dom_id(@segment)}").removeClass('active');
-$('#layout-form').hide();
-$('#layout-form').html('');

@@ -1,5 +1,6 @@
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
-$("##{dom_id(@segment)}").replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
-$('#layout-form').hide();
-$('#layout-form').html('');
+$('#layout-panel').trigger('sticky_kit:detach');
+$('#layout-panel').fadeOut(200, function() { this.remove(); });
+$('##{dom_id(@segment)}').replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
+$('##{dom_id(@segment)}').animateCss('fadeIn');

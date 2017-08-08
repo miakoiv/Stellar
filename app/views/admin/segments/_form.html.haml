@@ -3,7 +3,7 @@
     = render partial: "admin/#{@segment.to_partial_path}", locals: {f: f}
     %fieldset
       .row
-        .col-sm-6
+        .col-sm-12
           = f.select :template, Segment.template_options, {}, {required: true, class: 'selectize'}
     %fieldset.actions
       .pull-right
