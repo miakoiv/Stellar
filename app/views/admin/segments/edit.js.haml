@@ -1,11 +1,21 @@
-$segment = $("##{dom_id(@segment)}");
-$content = $segment.find('.segment-content');
+var $segment = $("##{dom_id(@segment)}");
+var $content = $segment.find('.segment-content');
 $('#section-list > .section-list-item .segment').removeClass('active');
 $segment.addClass('active');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
-$('#layout-form').show();
-$('#layout-form').offset($content.offset());
-$('#layout-form').css({'width': $content.css('width')});
-$('#layout-form').html("#{j render partial: 'admin/segments/edit'}");
-$('#layout-form').initialize();
+$('#layout-panel').trigger('sticky_kit:detach');
+$('#layout-panel').remove();
+var $panel = $('<div>', {id: 'layout-panel'});
+$panel.hide();
+$panel.html("#{j render partial: 'admin/segments/edit'}");
+$panel.initialize();
+- if @segment.edit_in_place?
+  $panel.appendTo($('body'));
+  $panel.offset($content.offset());
+  $panel.css({'width': $content.css('width')});
+  $panel.show();
+- else
+  $panel.appendTo($('#content-wrap'));
+  $panel.show();
+  $panel.stick_in_parent({offset_top: 200, spacer: false});

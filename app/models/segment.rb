@@ -44,6 +44,10 @@ class Segment < ActiveRecord::Base
   end
 
   #---
+  def edit_in_place?
+    column?
+  end
+
   def image_options
     {purpose: false}
   end
