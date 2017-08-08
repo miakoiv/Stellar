@@ -325,12 +325,11 @@ $bg-tone:           #f6f6f6;
 .product-grid .product {
   @extend .col-xs-6, .col-sm-4, .col-md-3;
   margin-bottom: 10px;
-
-  &:hover {
-    a { border-color: $gray-lighter; }
-    .product-image { transform: scale(1.05); }
-    .buy-now .btn { @extend .btn-danger; }
-  }
+}
+.product-grid .product:hover {
+  a { border-color: $gray-lighter; }
+  .product-image { transform: scale(1.05); }
+  .buy-now .btn { @extend .btn-danger; }
 }
 .product-grid .product a {
   display: block;
@@ -347,7 +346,7 @@ $bg-tone:           #f6f6f6;
   position: relative;
   height: 0;
   padding-bottom: 100%;
-  transition: all 0.4s ease-in-out 0.2s;
+  transition: all 0.2s ease-in-out 0s;
 
   img { @extend .img-contain, .img-center; }
 }
@@ -396,7 +395,6 @@ $bg-tone:           #f6f6f6;
   @extend .btn-default, .btn-block;
   font-size: 16px;
   border: 0;
-  border-radius: 0;
   transition: all 0.4s ease-in-out 0s;
 }
 .product-grid .price {
@@ -417,6 +415,76 @@ $bg-tone:           #f6f6f6;
 .product-table .product-title a { color: inherit; }
 .product-table .price {
   font-size: 16px;
+  color: $gray-base;
+}
+
+
+/*
+ * Product cards in other contexts
+ */
+.product-card:hover {
+ .product-image { transform: scale(1.05); }
+ .buy-now .btn { @extend .btn-danger; }
+}
+.product-card a {
+  padding: 30px;
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out 0s;
+}
+.product-card .product-image {
+  transition: all 0.2s ease-in-out 0s;
+
+  img {
+    @extend .img-responsive;
+    margin: 0 auto;
+  }
+}
+.product-card .product-text {
+  margin-top: 10px;
+  text-align: center;
+}
+.product-card .product-text h2 {
+  font-size: $font-size-large;
+  font-weight: bold;
+}
+.product-card .product-text h3 {
+  margin: 0;
+  font-size: $font-size-base;
+  font-weight: normal;
+
+  .small { font-size: inherit; }
+}
+.product-card .promotions {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+.product-card .promotion {
+  @extend .label, .label-danger;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+  border-radius: 50px;
+  font-size: $font-size-large;
+}
+.product-card .buy-now {
+  padding: 30px;
+}
+.product-card .buy-now-form {
+  text-align: center;
+}
+.product-card .buy-now-form .btn {
+  @extend .btn-default, .btn-block;
+  font-size: 16px;
+  border: 0;
+  transition: all 0.4s ease-in-out 0s;
+}
+.product-card .price {
+  text-align: center;
+  font-size: 24px;
   color: $gray-base;
 }
 
