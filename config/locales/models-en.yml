@@ -355,8 +355,10 @@ en:
         alignment: Column alignment
         background_color: Background color
       segment:
+        resource_id: Target
         template: Content type
         body: Body text
+        headline: Headline
         map_location: Location address
         map_zoom: Map zoom
         thumbnail_size: Slide size

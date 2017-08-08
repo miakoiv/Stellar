@@ -355,8 +355,10 @@ fi:
         alignment: Palstojen tasaus
         background_color: Taustaväri
       segment:
+        resource_id: Kohde
         template: Sisällön tyyppi
         body: Leipäteksti
+        headline: Otsikko
         map_location: Sijainnin osoite
         map_zoom: Kartan koko
         thumbnail_size: Diakuvan koko

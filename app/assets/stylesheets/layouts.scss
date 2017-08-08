@@ -180,3 +180,23 @@
 .fixed-ratio .block .segment-content.map {
   .map-container { height: 100%; }
 }
+
+.segment-content.product {
+  .product-card {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .product-card a {
+    display: block;
+    position: relative;
+    flex: 0 1 auto;
+  }
+  .product-card .buy-now {
+    flex: 0 1 auto;
+  }
+}
+.fixed-ratio .block .segment-content.product {
+  .product-card { height: 100%; }
+}

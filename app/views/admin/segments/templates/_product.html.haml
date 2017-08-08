@@ -1,0 +1,33 @@
+%fieldset
+  .row
+    .col-sm-12
+      = f.hidden_field :resource_type, value: 'Product'
+      = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: @segment.resource.present? ? [@segment.resource] : [], selected: @segment.resource.present? ? [@segment.resource_id] : []}}
+    .col-sm-12
+      = f.text_field :headline
+
+:coffee
+  $product = $('#segment_resource_id')
+  resources = $product.data 'resources'
+  selected = $product.data 'selected'
+  $product.selectize
+    preload: true
+    options: resources
+    items: selected
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        data:
+          q: query
+          purposes: ['vanilla', 'master', 'variant', 'bundle', 'composite', 'virtual']
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)

@@ -3,6 +3,7 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
+    :headline,
     :thumbnail_size,
     :map_location, :map_zoom,
   ], coder: JSON
