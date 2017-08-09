@@ -58,9 +58,6 @@
   margin-left: -$grid-gutter-width/2;
   margin-right: -$grid-gutter-width/2;
 }
-.section-content .segment {
-  .segment-content { min-height: 10px; }
-}
 
 /* Fix padding of stacked segments on mobile */
 @media (max-width: $screen-xs-max) {
@@ -131,6 +128,7 @@
  * Segment content styles
  */
 .segment-content {
+  min-height: 3.5714286em;
   line-height: 1.4; // default to sane value for summernote
 }
 
