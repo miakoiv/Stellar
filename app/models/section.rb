@@ -44,6 +44,8 @@ class Section < ActiveRecord::Base
   # Section layout decides whether to use gutters between segments.
   enum layout: [:block, :column]
 
+  before_create :set_default_block_height, if: -> { block? }
+
   #---
   belongs_to :page
   has_many :segments, dependent: :destroy
@@ -84,4 +86,9 @@ class Section < ActiveRecord::Base
   def to_s
     priority + 1
   end
+
+  private
+    def set_default_block_height
+      self.height ||= 20
+    end
 end
