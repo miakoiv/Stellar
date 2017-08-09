@@ -73,33 +73,24 @@
  * Section content dimensioning and alignment
  */
 .section { position: relative; }
-.section-content-wrap.fixed-ratio {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.section-content-wrap .container,
-.section-content-wrap .row,
-.section-content-wrap .section-content {
+.section .container,
+.section .row,
+.section .section-content {
   height: 100%;
 }
 
 /* Column section segments can be aligned */
-@media (min-width: $screen-sm-min) {
-  .section-content.column.align-top > .row,
-  .section-content.column.align-middle > .row,
-  .section-content.column.align-bottom > .row {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-  .section-content.column.align-top > .row { align-items: flex-start; }
-  .section-content.column.align-middle > .row { align-items: center; }
-  .section-content.column.align-bottom > .row { align-items: flex-end; }
+.column.align-top > .row,
+.column.align-middle > .row,
+.column.align-bottom > .row {
+  display: flex;
+  flex-flow: row wrap;
 }
+.column.align-top > .row { align-items: flex-start; }
+.column.align-middle > .row { align-items: center; }
+.column.align-bottom > .row { align-items: flex-end; }
 
-/* Block section segments have predetermined heights */
+/* Block section segments have predetermined height */
 .section-content.block .segment.full { height: 100%; }
 .section-content.block .segment.half { height: 50%; }
 
@@ -113,17 +104,26 @@
 .segment.col-8 {
   @extend .col-xs-12, .col-sm-8;
 }
-.segment.col-8-push {
-  @extend .col-xs-12, .col-sm-8, .col-sm-push-4;
-}
 .segment.col-6 {
   @extend .col-xs-12, .col-sm-6;
 }
 .segment.col-4 {
   @extend .col-xs-12, .col-sm-4;
 }
-.segment.col-4-pull {
-  @extend .col-xs-12, .col-sm-4, .col-sm-pull-8;
+.segment.col-8-left {
+  @extend .col-xs-12, .col-sm-8;
+}
+.segment.col-8-right {
+  @extend .col-xs-12, .col-sm-8, .col-sm-push-4;
+}
+.segment.col-4-left {
+  @extend .col-xs-6, .col-sm-4, .col-sm-pull-8;
+}
+.segment.col-4-right {
+  @extend .col-xs-6, .col-sm-4;
+}
+.segment.col-3 {
+  @extend .col-xs-6, .col-sm-3;
 }
 
 
@@ -131,7 +131,6 @@
  * Segment content styles
  */
 .segment-content {
-  height: 100%;
   line-height: 1.4; // default to sane value for summernote
 }
 
@@ -145,8 +144,6 @@
 }
 
 .segment-content.picture {
-  overflow: hidden;
-
   .image-container,
   .swiper-container {
     position: relative;
@@ -163,11 +160,18 @@
     background-color: $body-bg;
   }
 }
-.fixed-ratio .block .segment-content.picture {
-  .swiper-slide { height: 100%; }
-  .image-container img,
-  .swiper-container img {
-    @extend .img-center;
+
+@media (min-width: $screen-sm-min) {
+  .block .segment-content.picture {
+    height: 100%;
+
+    .image-container,
+    .swiper-container {
+      overflow: hidden;
+    }
+    .image-container img,
+    .swiper-container img {
+    }
   }
 }
 
@@ -177,8 +181,9 @@
     height: 20em;
   }
 }
-.fixed-ratio .block .segment-content.map {
-  .map-container { height: 100%; }
+.block .segment-content.map,
+.block .segment-content.map .map-container {
+  height: 100%;
 }
 
 .segment-content.product {
@@ -197,6 +202,6 @@
     flex: 0 1 auto;
   }
 }
-.fixed-ratio .block .segment-content.product {
+.block .segment-content.product {
   .product-card { height: 100%; }
 }

@@ -351,7 +351,7 @@ en:
       section:
         layout: Layout
         width: Content width
-        aspect_ratio: Fixed aspect ratio
+        height: Fixed height
         alignment: Column alignment
         background_color: Background color
       segment:
