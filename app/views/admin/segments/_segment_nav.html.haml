@@ -1,4 +1,10 @@
 %nav.segment-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav
-    %li
-      = link_to icon('pencil'), edit_admin_segment_path(segment), remote: true
+    %li.dropdown
+      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = icon('paint-brush')
+      %ul.dropdown-menu.dropdown-menu-right
+        - Segment.template_options.each do |title, template|
+          %li
+            = link_to admin_segment_path(segment, params: {segment: {template: template}}), remote: true, method: :patch do
+              = title

@@ -509,23 +509,37 @@ i.icon {
   }
 }
 .section-list-item .segment-content {
+  position: relative;
+  z-index: 0;
   outline: 1px solid rgba(0, 255, 255, 0.333);
 }
 .section-list-item .segment.active .segment-content {
   @extend .animated, .pulse;
 }
 .section-list-item .segment {
+  position: relative;
+
+  .segment-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 255, 255, 0.2);
+  }
+  .segment-overlay span { display: none; }
   .segment-nav {
     display: none;
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 1;
     border: 0;
     border-radius: 0;
     background-color: #0aa;
   }
 
+  &:hover .segment-overlay,
   &:hover .segment-nav { display: block; }
 }
 
@@ -549,7 +563,7 @@ i.icon {
   top: -45px;
   right: -41px;
   z-index: 1;
-  padding: 12px 14.5px 12px 14.5px;
+  padding: 11.5px 14px 12px 14.5px;
   font-size: 24px;
   line-height: 1;
   border: 1px solid $panel-default-border;
@@ -557,6 +571,8 @@ i.icon {
   color: inherit;
   background-color: #fff;
   box-shadow: 0 0 12px rgba(0,0,0,0.2);
+
+  &:hover { background-color: #f0f0f0; }
 }
 #layout-panel:before {
   content: '';
