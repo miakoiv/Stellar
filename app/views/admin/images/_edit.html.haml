@@ -1,8 +1,8 @@
 .grid-item[image]
   .thumbnail
     = image_variant_tag image, :matchbox
-    .caption
-      %small= truncate(image.attachment_file_name, length: 20, omission: '…')
+    .caption.truncate
+      %small= image.attachment_file_name
     .thumbnail-widgets
       .pull-right
         = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
