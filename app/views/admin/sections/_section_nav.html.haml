@@ -20,5 +20,5 @@
         = link_to icon('trash-o'), admin_section_path(section), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
-  $(document).on 'imageable:added imageable:removed imageable:reordered', ->
+  $('##{dom_id(section)}').on 'imageable:added imageable:removed imageable:reordered', ->
     $('##{dom_id(section, :nav)}').find('form.triggered').trigger 'submit.rails'

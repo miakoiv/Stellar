@@ -3,5 +3,5 @@
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
 
 :coffee
-  $(document).on 'imageable:added imageable:removed', ->
+  $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
     $(document.body).trigger 'sticky_kit:recalc'

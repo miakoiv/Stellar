@@ -17,4 +17,4 @@
     $.post '#{admin_reorder_images_path}',
       {reorder: $(this).sortable('toArray')},
       (data, status, xhr) ->
-        $(document).trigger 'imageable:reordered'
+        $('##{dom_id(imageable)}').trigger 'imageable:reordered'
