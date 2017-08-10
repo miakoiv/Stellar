@@ -1,3 +1,7 @@
 - content_for :segment_head do
   = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+
+:coffee
+  $(document).on 'imageable:added imageable:removed', ->
+    $(document.body).trigger 'sticky_kit:recalc'

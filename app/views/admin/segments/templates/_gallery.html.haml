@@ -12,3 +12,7 @@
             %label.btn.btn-default{class: @segment.grid_columns == columns && 'active'}
               = f.radio_button_without_bootstrap :grid_columns, columns
               = columns
+
+:coffee
+  $(document).on 'imageable:added imageable:removed', ->
+    $(document.body).trigger 'sticky_kit:recalc'
