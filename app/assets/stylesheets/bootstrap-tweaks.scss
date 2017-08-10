@@ -595,25 +595,34 @@ i.icon {
 
 
 /*
- * Image thumbnail grid
+ * Grid of 1 to 12 columns, masonry and sortable savvy
  */
-.thumbnail-grid {
+.grid {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;
-
-  .thumbnail-grid-item {
-    flex: 0 0 33.333333%;
-    padding: 5px;
-  }
-  &.grid-columns-1 .thumbnail-grid-item { flex: 0 0 100%; }
-  &.grid-columns-2 .thumbnail-grid-item { flex: 0 0 50%; }
-  &.grid-columns-3 .thumbnail-grid-item { flex: 0 0 33.333333%; }
-  &.grid-columns-4 .thumbnail-grid-item { flex: 0 0 25%; }
-  &.grid-columns-6 .thumbnail-grid-item { flex: 0 0 16.666667%; }
-  &.grid-columns-12 .thumbnail-grid-item { flex: 0 0 8.333333%; }
 }
-.thumbnail-grid-item .thumbnail {
+.grid .grid-item {
+  flex: 0 0 auto;
+  width: 33.333333%;
+  padding: 5px;
+}
+.grid.grid-columns-1 .grid-item { width: 100%; }
+.grid.grid-columns-2 .grid-item { width: 50%; }
+.grid.grid-columns-3 .grid-item { width: 33.333333%; }
+.grid.grid-columns-4 .grid-item { width: 25%; }
+.grid.grid-columns-6 .grid-item { width: 16.666667%; }
+.grid.grid-columns-12 .grid-item { width: 8.333333%; }
+
+.grid.sortable { padding-bottom: 40px; }
+.grid.sortable { padding-bottom: 40px; }
+.grid.sortable .grid-item { cursor: grab; }
+.grid-placeholder { padding: 5px; }
+
+
+/*
+ * Image thumbnail grid
+ */
+.thumbnail-grid .grid-item .thumbnail {
   position: relative;
   margin-bottom: 0;
 
@@ -626,11 +635,6 @@ i.icon {
     left: 10px;
   }
 }
-.thumbnail-grid.sortable { padding-bottom: 40px; }
-.thumbnail-grid.sortable .thumbnail {
-  cursor: grab;
-}
-.thumbnail-grid-placeholder { padding: 5px; }
 
 
 /*

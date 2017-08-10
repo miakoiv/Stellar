@@ -1,7 +1,15 @@
 .segment-content.gallery{id: segment_content_id(gallery, context)}
-  .thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
+  .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
     - gallery.images.each do |image|
-      .thumbnail-grid-item
+      .grid-item
         = link_to image.url(:lightbox), class: 'image-link' do
           .thumbnail
             = image_variant_tag image, :technical
+
+:coffee
+  $grid = $('##{segment_content_id(gallery, context)}').find '.grid'
+  $grid.imagesLoaded ->
+    $grid.masonry
+      itemSelector: '.grid-item'
+      columnWidth: '.grid-item'
+      percentPosition: true

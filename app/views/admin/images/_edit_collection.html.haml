@@ -1,14 +1,14 @@
 - id = dom_id(imageable, :images)
 
-.thumbnail-grid.sortable{id: id}
+.grid.thumbnail-grid.sortable{id: id}
   = render partial: 'admin/images/edit', collection: imageable.images, as: :image
 
 :coffee
   $('##{id}').sortable(
-    items: '> .thumbnail-grid-item'
+    items: '> .grid-item'
     handle: '.thumbnail'
     tolerance: 'pointer'
-    placeholder: 'thumbnail-grid-placeholder'
+    placeholder: 'grid-placeholder'
     forcePlaceholderSize: true
     opacity: 0.5
     revert: 200
