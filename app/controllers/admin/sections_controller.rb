@@ -11,8 +11,8 @@ class Admin::SectionsController < ApplicationController
 
   # No layout, this controller never renders HTML.
 
-  # GET /admin/pages/1/sections/new.js
-  def new
+  # GET /admin/pages/1/sections/create.js
+  def create
     @page = current_store.pages.friendly.find(params[:page_id])
     @section = @page.sections.build(section_params.merge(priority: @page.sections.count))
 
