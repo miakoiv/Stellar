@@ -1,6 +1,8 @@
 - form = capture :segment_form do
   = render partial: 'form'
 
+= link_to icon('close'), admin_segment_path(@segment), remote: true, class: 'panel-close'
+
 = yield :segment_content
 
 - if content_for?(:segment_head)

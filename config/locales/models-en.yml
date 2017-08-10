@@ -1,4 +1,8 @@
 en:
+  helpers:
+    submit:
+      segment:
+        update: Save this %{template}
   activemodel:
     models:
       shipping_gateway/customer_pickup: customer pick-up
@@ -90,8 +94,8 @@ en:
         one: section
         other: sections
       segment:
-        one: this part of the page
-        other: these parts of the page
+        one: segment
+        other: segments
       shipment:
         one: shipment
         other: shipments

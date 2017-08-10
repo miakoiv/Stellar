@@ -1,4 +1,8 @@
 fi:
+  helpers:
+    submit:
+      segment:
+        update: Tallenna tämä %{template}
   activemodel:
     models:
       shipping_gateway/customer_pickup: asiakas noutaa
@@ -90,8 +94,8 @@ fi:
         one: alue
         other: alueet
       segment:
-        one: tämä sivun osa
-        other: nämä sivun osat
+        one: osa
+        other: osat
       shipment:
         one: toimitus
         other: toimitukset
