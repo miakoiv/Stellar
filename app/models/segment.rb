@@ -13,7 +13,7 @@ class Segment < ActiveRecord::Base
   include Reorderable
 
   #---
-  GRID_COLUMNS = [1, 2, 3, 4, 6, 12]
+  GRID_COLUMNS = %w{1 2 3 4 6 12}
 
   #---
   enum template: {
@@ -46,6 +46,10 @@ class Segment < ActiveRecord::Base
   #---
   def edit_in_place?
     column?
+  end
+
+  def grid_columns
+    super.presence || '3'
   end
 
   def image_options

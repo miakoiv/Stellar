@@ -5,4 +5,10 @@
 %fieldset
   .row
     .col-sm-6
-      = f.select :grid_columns, Segment.grid_columns_options, {}, {class: 'selectize'}
+      .form-group
+        = f.label col(Segment, :grid_columns)
+        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+          - Segment.grid_columns_options.each do |columns|
+            %label.btn.btn-default{class: @segment.grid_columns == columns && 'active'}
+              = f.radio_button_without_bootstrap :grid_columns, columns
+              = columns
