@@ -1,3 +1,4 @@
 $("#{j render partial: 'admin/images/edit', object: @image, as: :image}").appendTo('##{dom_id(@imageable, :images)}');
 $("##{dom_id(@image)}").initialize();
 $('##{dom_id(@imageable, :images)}').sortable('refresh');
+$('##{dom_id(@imageable, :images)}').imagesLoaded(function () { $(document).trigger('imageable:added'); });
