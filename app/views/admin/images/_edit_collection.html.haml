@@ -8,9 +8,8 @@
   $('##{id}').sortable(
     items: '> .grid-item'
     handle: '.thumbnail'
-    tolerance: 'pointer'
-    placeholder: 'grid-placeholder'
-    forcePlaceholderSize: true
+    placeholder: 'grid-item'
+    helper: 'clone'
     opacity: 0.5
     revert: 200
   ).bind 'sortupdate', (e, ui) ->
