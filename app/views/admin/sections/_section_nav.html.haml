@@ -20,5 +20,5 @@
         = link_to icon('remove'), admin_section_path(section), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
-  $('##{dom_id(section, :nav)} .dropdown').on 'hidden.bs.dropdown', ->
+  $(document).on 'imageable:added imageable:removed imageable:reordered', ->
     $('##{dom_id(section, :nav)}').find('form.triggered').trigger 'submit.rails'
