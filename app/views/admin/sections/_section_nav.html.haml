@@ -13,7 +13,7 @@
         = icon('image')
       %ul.dropdown-menu
         %li
-        = render partial: 'admin/images/edit_collection', object: section, as: :imageable
+        = render partial: 'admin/images/edit_collection', object: section, as: :imageable, locals: {grid_columns: 2}
         = render partial: 'admin/images/dropzone', object: section, as: :imageable
     - if current_user.can_delete?(section)
       %li

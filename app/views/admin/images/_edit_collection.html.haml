@@ -1,6 +1,7 @@
 - id = dom_id(imageable, :images)
+- grid_columns ||= 3
 
-.grid.thumbnail-grid.sortable{id: id}
+.grid.thumbnail-grid.sortable{id: id, class: "grid-columns-#{grid_columns}"}
   = render partial: 'admin/images/edit', collection: imageable.images, as: :image
 
 :coffee

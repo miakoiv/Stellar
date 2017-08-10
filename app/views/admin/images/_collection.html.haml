@@ -1,2 +1,4 @@
-.grid.thumbnail-grid{id: dom_id(imageable, :images)}
+- grid_columns ||= 3
+
+.grid.thumbnail-grid{id: dom_id(imageable, :images), class: "grid-columns-#{grid_columns}"}
   = render partial: 'admin/images/image', collection: imageable.images, as: :image
