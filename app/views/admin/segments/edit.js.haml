@@ -18,4 +18,4 @@ $panel.initialize();
 - else
   $panel.appendTo($('#content-wrap'));
   $panel.show();
-  $panel.stick_in_parent({offset_top: 200, spacer: false});
+  $panel.imagesLoaded(function () { $panel.stick_in_parent({offset_top: 200, spacer: false}); });
