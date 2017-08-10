@@ -14,4 +14,6 @@
     revert: 200
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{admin_reorder_images_path}',
-      {reorder: $(this).sortable('toArray')}
+      {reorder: $(this).sortable('toArray')},
+      (data, status, xhr) ->
+        $(document).trigger 'imageable:reordered'
