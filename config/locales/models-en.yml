@@ -358,6 +358,7 @@ en:
         resource_id: Target
         template: Content type
         body: Body text
+        grid_columns: Grid columns
         headline: Headline
         map_location: Location address
         map_zoom: Map zoom

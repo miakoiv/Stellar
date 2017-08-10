@@ -3,8 +3,7 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
-    :headline,
-    :thumbnail_size,
+    :grid_columns, :headline,
     :map_location, :map_zoom,
   ], coder: JSON
 
@@ -14,7 +13,7 @@ class Segment < ActiveRecord::Base
   include Reorderable
 
   #---
-  THUMBNAIL_SIZES = %w{icon thumbnail matchbox postcard}
+  GRID_COLUMNS = [1, 2, 3, 4, 6, 12]
 
   #---
   enum template: {
@@ -40,8 +39,8 @@ class Segment < ActiveRecord::Base
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
   end
 
-  def self.thumbnail_size_options
-    THUMBNAIL_SIZES.map { |s| [Segment.human_attribute_value(:thumbnail_size, s), s] }
+  def self.grid_columns_options
+    GRID_COLUMNS
   end
 
   #---

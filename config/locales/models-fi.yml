@@ -358,6 +358,7 @@ fi:
         resource_id: Kohde
         template: Sisällön tyyppi
         body: Leipäteksti
+        grid_columns: Sarakkeita
         headline: Otsikko
         map_location: Sijainnin osoite
         map_zoom: Kartan koko
