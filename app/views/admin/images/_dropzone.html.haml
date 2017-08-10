@@ -12,6 +12,6 @@
     paramName: 'image[attachment]'
     init: ->
       @on 'success', (file, image) ->
-        $.get('/admin/images/' + image['id']);
+        $.get '/admin/images/' + image['id']
       @on 'complete', (file) ->
-        this.removeFile(file);
+        this.removeFile file
