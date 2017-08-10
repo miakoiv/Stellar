@@ -80,7 +80,6 @@ en:
         template:
           empty: empty
           column: text column
-          header: page header
           picture: picture
           gallery: gallery
           map: map

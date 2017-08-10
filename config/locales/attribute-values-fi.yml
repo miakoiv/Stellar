@@ -80,7 +80,6 @@ fi:
         template:
           empty: tyhjä
           column: tekstipalsta
-          header: sivun otsake
           picture: kuva
           gallery: galleria
           map: kartta
