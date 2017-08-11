@@ -35,7 +35,7 @@
 
 
 /*
- * Section layouts
+ * Vertical padding for columns, gutterless blocks
  */
 .section-content.column .segment {
   @include padding-vertical;
@@ -132,7 +132,8 @@
   line-height: 1.4; // default to sane value for summernote
 }
 
-.segment-content.column {
+.segment-content.column,
+.segment-content.raw {
   h1:first-child,
   h2:first-child,
   h3:first-child {
