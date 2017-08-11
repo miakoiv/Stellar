@@ -62,7 +62,7 @@ fi:
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
       section:
-        layout:
+        outline:
           block: lohkot
           column: palstat
         width:
@@ -71,11 +71,6 @@ fi:
           'col-10': 10 palstaa
           'col-8': 8 palstaa
           'col-6': 6 palstaa
-        alignment:
-          'none': ei tasausta
-          'align-top': ylös
-          'align-middle': keskelle
-          'align-bottom': alas
       segment:
         template:
           empty: tyhjä
@@ -87,11 +82,10 @@ fi:
           product: tuote
           promotion: kampanja
           raw: ʜᴛᴍʟ-koodia
-        thumbnail_size:
-          icon: mini
-          thumbnail: pieni
-          matchbox: keskikokoinen
-          postcard: suuri
+        alignment:
+          'align-top': ylös
+          'align-middle': keskelle
+          'align-bottom': alas
       user:
         group:
           guest: Vieras

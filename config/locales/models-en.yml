@@ -353,14 +353,14 @@ en:
       role:
         name: Name
       section:
+        outline: Outline
         layout: Layout
         width: Content width
-        height: Fixed height
-        alignment: Column alignment
         background_color: Background color
       segment:
         resource_id: Target
         template: Content type
+        alignment: Content alignment
         body: Body text
         grid_columns: Grid columns
         headline: Headline

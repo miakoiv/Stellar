@@ -62,7 +62,7 @@ en:
           store_admin: store administrator
           superuser: superuser
       section:
-        layout:
+        outline:
           block: blocks
           column: columns
         width:
@@ -71,11 +71,6 @@ en:
           'col-10': 10 columns
           'col-8': 8 columns
           'col-6': 6 columns
-        alignment:
-          'none': none
-          'align-top': top
-          'align-middle': middle
-          'align-bottom': bottom
       segment:
         template:
           empty: empty
@@ -87,11 +82,10 @@ en:
           product: product
           promotion: promotion
           raw: ʜᴛᴍʟ code
-        thumbnail_size:
-          icon: mini
-          thumbnail: small
-          matchbox: medium
-          postcard: large
+        alignment:
+          'align-top': top
+          'align-middle': middle
+          'align-bottom': bottom
       user:
         group:
           guest: Guest

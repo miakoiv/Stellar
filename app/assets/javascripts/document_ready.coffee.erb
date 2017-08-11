@@ -1,6 +1,8 @@
 $.fn.extend
   initialize: ->
 
+    viewportUpdate()
+
     $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'

@@ -13,6 +13,8 @@ class Segment < ActiveRecord::Base
   include Reorderable
 
   #---
+  ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
+
   GRID_COLUMNS = %w{1 2 3 4 6 12}
 
   #---
@@ -37,6 +39,10 @@ class Segment < ActiveRecord::Base
   #---
   def self.template_options
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
+  end
+
+  def self.alignment_options
+    ALIGNMENTS.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
   end
 
   def self.grid_columns_options

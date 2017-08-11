@@ -353,14 +353,14 @@ fi:
       role:
         name: Nimi
       section:
+        outline: Malli
         layout: Asettelu
         width: Sisällön leveys
-        height: Kiinteä korkeus
-        alignment: Palstojen tasaus
         background_color: Taustaväri
       segment:
         resource_id: Kohde
         template: Sisällön tyyppi
+        alignment: Sisällön tasaus
         body: Leipäteksti
         grid_columns: Sarakkeita
         headline: Otsikko

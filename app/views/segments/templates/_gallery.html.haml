@@ -8,8 +8,10 @@
 
 :coffee
   $grid = $('##{segment_content_id(gallery, context)}').find '.grid'
+  reversed = $grid.closest('.segment').hasClass 'align-bottom'
   $grid.imagesLoaded ->
     $grid.masonry
       itemSelector: '.grid-item'
       columnWidth: '.grid-item'
       percentPosition: true
+      originTop: !reversed

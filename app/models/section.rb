@@ -15,36 +15,36 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Preset column and box layouts.
-  PRESETS = {
-    column: ['12', '6-6', '4-4-4', '8-4', '4-8', '3-3-3-3'],
-    block: ['12', '6-6', '4-4-4', '8-4-4', '4-4-8', '3-3-3-3'],
-  }.freeze
+  # Preset layouts for column and block outlines.
+  PRESETS = [
+    [:column, [
+      [1, 'viewport'],
+      [1, 'twelve'],
+      [2, 'six-six'],
+      [3, 'four-four-four'],
+      [4, 'three-three-three-three'],
+    ]],
+    [:block, [
+      [1, 'viewport'],
+      [1, 'twelve'],
+      [2, 'six-six'],
+      [3, 'four-four-four'],
+      [4, 'three-three-three-three'],
+      [3, 'eight-four-four'],
+      [3, 'four-four-eight'],
+    ]],
+  ].freeze
 
-  # Segment widths for preset layouts.
-  SEGMENTS = {
-    '12' => ['col-12 full'],
-    '6-6' => ['col-6 full', 'col-6 full'],
-    '4-4-4' => ['col-4 full', 'col-4 full', 'col-4 full'],
-    '8-4' => ['col-8 full', 'col-4 full'],
-    '4-8' => ['col-4 full', 'col-8 full'],
-    '8-4-4' => ['col-8-left full', 'col-4-right half', 'col-4-right half'],
-    '4-4-8' => ['col-8-right full', 'col-4-left half', 'col-4-left half'],
-    '3-3-3-3' => ['col-3 full', 'col-3 full', 'col-3 full', 'col-3 full'],
-  }.freeze
-
-  # Available widths defined in layouts.css.
+  # Available content widths defined in layouts.css.
   WIDTHS = %w{
     spread col-12 col-10 col-8 col-6
   }.freeze
 
-  ALIGNMENTS = %w{none align-top align-middle align-bottom}.freeze
-
   #---
-  # Section layout decides whether to use gutters between segments.
-  enum layout: [:block, :column]
-
-  before_create :set_default_block_height, if: -> { block? }
+  # Section outline affects the arrangement of its segments.
+  # Column sections are ideal for text and other content that requires
+  # gutters. Block sections lack gutters, allowing seamless layouts.
+  enum outline: [:block, :column]
 
   #---
   belongs_to :page
@@ -55,10 +55,9 @@ class Section < ActiveRecord::Base
   #---
   validates :page_id, presence: true
   validates :width, inclusion: {in: WIDTHS}
-  validates :height, numericality: {greater_than: 0, allow_nil: true}
 
   #---
-  def self.preset_options
+  def self.preset_menu_options
     PRESETS
   end
 
@@ -66,13 +65,16 @@ class Section < ActiveRecord::Base
     WIDTHS.map { |w| [Section.human_attribute_value(:width, w), w] }
   end
 
-  def self.alignment_options
-    ALIGNMENTS.map { |a| [Section.human_attribute_value(:alignment, a), a] }
-  end
-
   #---
   def spread?
     width == 'spread'
+  end
+
+  # FIXME: this should be dependent on the outline,
+  # but we'll need a dynamically updated selector
+  # to pull that off in the UI
+  def layout_options
+    PRESETS.to_h[:block].map { |l| l.last }
   end
 
   def image_options
@@ -86,9 +88,4 @@ class Section < ActiveRecord::Base
   def to_s
     priority + 1
   end
-
-  private
-    def set_default_block_height
-      self.height ||= 20
-    end
 end

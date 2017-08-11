@@ -54,17 +54,17 @@ class Admin::SectionsController < ApplicationController
 
     # Create segments according to given layout preset.
     def create_segments!
-      preset = params[:preset]
+      segments = params[:segments].to_i
       template = @section.block? ? 'picture' : 'column'
-      Section::SEGMENTS[preset].each do |measure|
-        @section.segments.create(template: template, measure: measure)
+      segments.times do
+        @section.segments.create(template: template)
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
       params.require(:section).permit(
-        :width, :layout, :height, :alignment, :background_color
+        :width, :outline, :layout, :background_color
       )
     end
 end

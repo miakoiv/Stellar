@@ -39,7 +39,7 @@ class Admin::SegmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def segment_params
       params.fetch(:segment) {{}}.permit(
-        :resource_id, :resource_type, :template, :measure,
+        :resource_id, :resource_type, :template, :alignment,
         :body, :grid_columns, :headline,
         :map_location, :map_zoom
       )

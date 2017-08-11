@@ -5,7 +5,7 @@
   padding-left: $padding;
   padding-right: $padding;
 }
-@mixin padding-vertical($padding: 20px) {
+@mixin padding-vertical($padding: 40px) {
   padding-top: $padding;
   padding-bottom: $padding;
 }
@@ -35,7 +35,7 @@
 
 
 /*
- * Vertical padding for columns, gutterless blocks
+ * Section outlines, column and block.
  */
 .section-content.column .segment {
   @include padding-vertical;
@@ -67,6 +67,35 @@
 
 
 /*
+ * Section layouts declared with less specificity
+ * to retain the outline rules above.
+ */
+.viewport {
+  height: 100vh;
+  .segment { @extend .col-xs-12; }
+}
+.twelve {
+  .segment { @extend .col-xs-12; }
+}
+.six-six {
+  .segment { @extend .col-xs-12, .col-sm-6; }
+}
+.four-four-four {
+  .segment { @extend .col-xs-12, .col-sm-4; }
+}
+.three-three-three-three {
+  .segment { @extend .col-xs-6, .col-sm-3; }
+}
+.eight-four-four {
+  .segment:first-child { @extend .col-xs-12, .col-sm-8; }
+  .segment:nth-last-child(-n+2) { @extend .col-xs-6, .col-sm-4; }
+}
+.four-four-eight {
+  .segment:first-child { @extend .col-xs-12, .col-sm-8, .col-sm-push-4; }
+  .segment:nth-last-child(-n+2) { @extend .col-xs-6, .col-sm-4, .col-sm-pull-8; }
+}
+
+/*
  * Section content dimensioning and alignment
  */
 .section { position: relative; }
@@ -76,52 +105,14 @@
   height: 100%;
 }
 
-/* Column section segments can be aligned */
-.column.align-top > .row,
-.column.align-middle > .row,
-.column.align-bottom > .row {
+/* Segment content alignment for column sections */
+.section-content.column > .row {
   display: flex;
   flex-flow: row wrap;
 }
-.column.align-top > .row { align-items: flex-start; }
-.column.align-middle > .row { align-items: center; }
-.column.align-bottom > .row { align-items: flex-end; }
-
-/* Block section segments have predetermined height */
-.section-content.block .segment.full { height: 100%; }
-.section-content.block .segment.half { height: 50%; }
-
-
-/*
- * Segment measures
- */
-.segment.col-12 {
-  @extend .col-xs-12;
-}
-.segment.col-8 {
-  @extend .col-xs-12, .col-sm-8;
-}
-.segment.col-6 {
-  @extend .col-xs-12, .col-sm-6;
-}
-.segment.col-4 {
-  @extend .col-xs-12, .col-sm-4;
-}
-.segment.col-8-left {
-  @extend .col-xs-12, .col-sm-8;
-}
-.segment.col-8-right {
-  @extend .col-xs-12, .col-sm-8, .col-sm-push-4;
-}
-.segment.col-4-left {
-  @extend .col-xs-6, .col-sm-4, .col-sm-pull-8;
-}
-.segment.col-4-right {
-  @extend .col-xs-6, .col-sm-4;
-}
-.segment.col-3 {
-  @extend .col-xs-6, .col-sm-3;
-}
+.segment.align-top { align-self: flex-start; }
+.segment.align-middle { align-self: center; }
+.segment.align-bottom { align-self: flex-end; }
 
 
 /*
@@ -175,14 +166,12 @@
 }
 
 .segment-content.map {
+  height: 25vh;
+
   .map-container {
     width: 100%;
-    height: 20em;
+    height: 100%;
   }
-}
-.block .segment-content.map,
-.block .segment-content.map .map-container {
-  height: 100%;
 }
 
 .segment-content.product {
