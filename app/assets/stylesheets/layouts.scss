@@ -80,6 +80,14 @@
 .six-six {
   .segment { @extend .col-xs-12, .col-sm-6; }
 }
+.eight-four {
+  .segment:first-child { @extend .col-xs-12, .col-sm-8; }
+  .segment:last-child { @extend .col-xs-12, .col-sm-4; }
+}
+.four-eight {
+  .segment:first-child { @extend .col-xs-12, .col-sm-4; }
+  .segment:last-child { @extend .col-xs-12, .col-sm-8; }
+}
 .four-four-four {
   .segment { @extend .col-xs-12, .col-sm-4; }
 }
