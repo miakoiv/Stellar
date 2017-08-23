@@ -1,6 +1,8 @@
 - zipcode = params[:zipcode] || @order.shipping_postalcode
 - postcode, locations = @shipping_gateway.smartpost_lookup(zipcode)
 
+#gateway{data: {postcode: postcode.to_json, locations: locations.to_json}}
+
 .thumbnail{style: 'position: relative; height: 0; padding-bottom: 61.8%; background-color: #eee;'}
   #map{style: 'position: absolute; left: 0; right: 0; top: 0; bottom: 0;'}
 
@@ -13,7 +15,7 @@
           = icon('search', t('.zipcode'))
 
 = form_tag ship_path(@order, @shipping_method), remote: true, id: 'smartpost-form' do
-  = hidden_field_tag 'metadata'
+  = hidden_field_tag :metadata
   .form-group
     .btn-group-vertical.center-block{data: {toggle: 'buttons'}}
       - locations.each do |loc|
@@ -27,8 +29,9 @@
     = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'
 
 :coffee
-  postcode = #{postcode.to_json}
-  locations = #{locations.to_json}
+  $gateway = $('#gateway')
+  postcode = $gateway.data 'postcode'
+  locations = $gateway.data 'locations'
   metadata = {}
 
   $map = $('#map')[0]
