@@ -10,13 +10,6 @@
             = f.text_field :trade_price, class: 'text-right', append: '€'
           .col-sm-6
             = f.text_field :retail_price, class: 'text-right', append: '€'
-        .row
-          .col-sm-6
-            = f.text_field :available_at,
-                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-          .col-sm-6
-            = f.text_field :deleted_at,
-                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
     .panel-footer
       - if current_user.can_read?(@product)
         = link_to icon('info', t('actions.show')), admin_product_path(@product), class: 'btn btn-default btn-sm'
