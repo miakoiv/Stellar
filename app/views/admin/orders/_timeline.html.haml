@@ -3,7 +3,6 @@
     = content_tag_for :span, order, :vis, data: {id: order.id, url: admin_order_path(order), summary: order.summary}
 
 :coffee
-  console.log $('#timeline').data 'events'
   container = $('#timeline')[0]
   groups = (
     {
