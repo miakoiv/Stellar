@@ -283,6 +283,7 @@ en:
         customer_code: Customer code
         title: Title
         subtitle: Subtitle
+        keyword: Keyword search
         description: Description
         available_at: Availability starts
         deleted_at: Availability ends

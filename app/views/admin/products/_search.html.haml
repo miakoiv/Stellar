@@ -4,12 +4,12 @@
   .panel-body
     = form_for @search, url: admin_products_path, method: :get do |f|
       .row
-        .col-sm-6.col-md-2
-          .form-group
-            = f.search_field :code, autocomplete: 'off', placeholder: col(Product, :code), class: 'form-control'
         .col-sm-6.col-md-3
           .form-group
-            = f.search_field :keyword, autocomplete: 'off', placeholder: col(Product, :title), class: 'form-control'
+            = f.search_field :keyword, autocomplete: 'off', placeholder: col(Product, :keyword), class: 'form-control'
+        .col-sm-6.col-md-2
+          .form-group
+            = f.select :purposes, Product.purpose_options, {}, {multiple: true, placeholder: col(Product, :purpose), class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
             = f.select :categories, current_user.category_options, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}

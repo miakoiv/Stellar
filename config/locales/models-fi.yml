@@ -283,6 +283,7 @@ fi:
         customer_code: Asiakkaan koodi
         title: Nimike
         subtitle: Alanimi
+        keyword: Hakusana
         description: Kuvaus
         available_at: Myynnin alkamispvm
         deleted_at: Myynnin päättymispvm
