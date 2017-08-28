@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
+  paginates_per 30
 
   enum purpose: {
     # Regular product
