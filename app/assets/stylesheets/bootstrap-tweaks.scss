@@ -782,7 +782,7 @@ fieldset[disabled] .help-block { display: none; }
 .table .expandable { cursor: pointer; }
 .table .subrow th,
 .table .subrow td {
-  border-top: 1px dotted #ddd;
+  border-top-style: dotted;
   padding: 4px 8px;
 }
 .table .col-min { width: 1px; }
