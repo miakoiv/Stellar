@@ -4,11 +4,11 @@
 
 $footer-bg: #d4d4d4;
 
-@import "bootstrap-font-awesome.scss";
-@import "bootstrap-generators.scss";
-@import "bootstrap-tweaks.scss";
-@import "fonts.scss";
-@import "print.scss";
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
+@import "fonts";
+@import "print";
 
 #main-nav {
   @include box-shadow(0 0 12px 0 rgba(0,0,0,0.333));
