@@ -57,6 +57,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = current_store.products.build(product_params)
     @product.vendor = current_user if current_user.vendor?
+    @product.priority = @product.master_product.variants.count if @product.variant?
 
     respond_to do |format|
       if @product.save
