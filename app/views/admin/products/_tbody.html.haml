@@ -1,0 +1,6 @@
+%tbody.rowlink{data: {link: 'row'}}
+  = render partial: 'admin/products/row', object: product, as: :product
+
+- if product.has_variants?
+  %tbody.rowlink.subtable.sortable{data: {link: 'row'}}
+    = render partial: 'admin/products/row', collection: product.variants.sorted, as: :product

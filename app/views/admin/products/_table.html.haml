@@ -1,5 +1,5 @@
 .table-responsive
-  %table#products-table.table.table-hover.table-loose
+  %table#products-table.table.table-hover.table-loose.table-nested
     %thead
       %tr
         %th.col-min
@@ -11,5 +11,15 @@
         %th.col-min
         %th.col-min
 
-    %tbody.rowlink{data: {link: 'row'}}
-      = render partial: 'admin/products/row', collection: @products, as: :product
+    = render partial: 'admin/products/tbody', collection: @products, as: :product
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_products_path}',
+      {reorder: $(this).sortable('toArray')}

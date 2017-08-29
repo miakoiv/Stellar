@@ -1,11 +1,11 @@
 - cache [I18n.locale, :admin_product_row, product] do
-  %tr[product]{class: [product.variant? && 'subrow small', product.live? || 'warning text-warning']}
+  %tr[product]{class: product.live? || 'warning text-warning'}
     %td.rowlink-skip
       = drag_handle if product.variant?
     %td
       = image_variant_tag product.cover_image, :icon
     %td
-      = link_to edit_admin_product_path(product), remote: true  do
+      = link_to edit_admin_product_path(product), remote: true do
         %strong= product.title
         = product.subtitle
     %td= product.codes
@@ -21,5 +21,3 @@
     %td
       - if product.vendor.present?
         = icon('truck', title: "#{col(Product, :vendor_id)}: #{product.vendor}", data: {toggle: 'tooltip'})
-
-= render partial: 'admin/products/row', collection: product.variants, as: :product
