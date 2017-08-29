@@ -13,8 +13,6 @@ class Product < ActiveRecord::Base
   enum purpose: {
     # Regular product
     vanilla: 0,
-    # Master and its variants
-    master: 1, variant: 2,
     # Bundles consist solely of their components
     bundle: 3,
     # Composites come with their components
@@ -29,8 +27,6 @@ class Product < ActiveRecord::Base
 
   PURPOSE_ICONS = {
     'vanilla' => nil,
-    'master' => 'square',
-    'variant' => 'square-o',
     'bundle' => 'archive',
     'composite' => 'object-group',
     'virtual' => 'magic',
@@ -82,7 +78,7 @@ class Product < ActiveRecord::Base
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
-  has_many :variants, -> { merge(variant) }, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
+  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
 
   has_many :inventory_items, dependent: :destroy
   has_many :order_items
@@ -113,16 +109,15 @@ class Product < ActiveRecord::Base
 
   scope :live, -> { where(live: true) }
 
-  # Visible products are shown in storefront views. They include live
-  # vanilla, master, bundle, composite, and virtual products.
-  scope :visible, -> {
-    live.where(purpose: [0, 1, 3, 4, 5])
-  }
+  # Scopes for master and variant products based on associations present.
+  scope :master, -> { where(master_product_id: nil) }
+  scope :variant, -> { where.not(master_product_id: nil) }
+  scope :having_variants, -> { joins(:variants).uniq }
 
-  # Purchasable products can be added to the cart by the customer.
-  # These are live vanilla, variant, bundle, composite, and virtual products.
-  scope :purchasable, -> {
-    live.where(purpose: [0, 2, 3, 4, 5])
+  # Visible products are shown in storefront views. They include live
+  # vanilla, bundle, composite, and virtual products, but not variants.
+  scope :visible, -> {
+    live.master.where(purpose: [0, 3, 4, 5])
   }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -184,12 +179,26 @@ class Product < ActiveRecord::Base
     !internal?
   end
 
+  # Master products are merely those that are not variants,
+  # regardless if they have any assigned variants.
+  def master?
+    !variant?
+  end
+
+  def variant?
+    master_product.present?
+  end
+
+  def has_variants?
+    variants.any?
+  end
+
   def visible?
-    live? && (vanilla? || master? || bundle? || composite? || virtual?)
+    live? && master? && (vanilla? || bundle? || composite? || virtual?)
   end
 
   def purchasable?
-    live? && (vanilla? || variant? || bundle? || composite? || virtual?)
+    live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?) && available?
   end
 
   # Finds the first live variant for this product.
@@ -207,7 +216,7 @@ class Product < ActiveRecord::Base
   end
 
   def variants_with_master_properties
-    return {} unless master?
+    return {} unless has_variants?
     variants.live.includes(product_properties: :property)
       .map { |v|
         [v, v.product_properties.where(properties: {id: properties})]
@@ -224,9 +233,9 @@ class Product < ActiveRecord::Base
   end
 
   # Finds the set of unique properties across all variants of a master product.
-  # Returns a hash keyed by property, or an empty set if not a master product.
+  # Returns a hash keyed by property, or an empty set if there are no variants.
   def unique_properties
-    return [] unless master?
+    return [] unless has_variants?
     variants.map(&:product_properties).flatten.group_by(&:property).select { |p, v| v.uniq(&:value).count > 1 }
   end
 
@@ -301,7 +310,7 @@ class Product < ActiveRecord::Base
 
   # Returns the range of price tags across variants of a master product.
   def price_range(pricing_group)
-    return nil unless master?
+    return nil unless has_variants?
     variants.map { |variant| variant.price_tag(pricing_group) }.compact.minmax
   end
 
@@ -322,10 +331,9 @@ class Product < ActiveRecord::Base
     (bundle? || composite?) && component_entries.live.any?
   end
 
-  # Stock is not tracked for master products, bundles,
-  # virtual or internal products.
+  # Stock is not tracked for bundles, virtual or internal products.
   def tracked_stock?
-    vanilla? || variant? || composite?
+    vanilla? || composite?
   end
 
   # Amount available in all inventories.
@@ -393,12 +401,24 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def master_product_options
-    store.products.master.map { |p| [p.to_s, p.id] }
-  end
-
   def available_variant_options
     store.products.variant.map { |p| [p.to_s, p.id] }
+  end
+
+  # Copies certain attributes from given master to create a valid variant.
+  def vary_from(master)
+    self.assign_attributes(
+      purpose: master.purpose,
+      master_product: master,
+      categories: master.categories,
+      code: master.generate_variant_code,
+      title: master.title,
+      subtitle: master.subtitle,
+      cost_price_cents: master.cost_price_cents,
+      trade_price_cents: master.trade_price_cents,
+      retail_price_cents: master.retail_price_cents,
+      tax_category: master.tax_category,
+    )
   end
 
   # Creates a duplicate of this product, including associations.
@@ -423,6 +443,10 @@ class Product < ActiveRecord::Base
         )
       end
     end
+  end
+
+  def generate_variant_code
+    "#{code}-#{variants.count}"
   end
 
   def slugger
@@ -472,11 +496,11 @@ class Product < ActiveRecord::Base
   end
 
   # Resets the live status of the product, according to these criteria:
-  # - retail price is not nil (or it's a master product)
+  # - retail price is not nil (or there are variants)
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
-    update_columns(live: (master? || retail_price_cents.present?) &&
+    update_columns(live: (retail_price_cents.present? || has_variants?) &&
       (available_at.present? && !available_at.future?) &&
       (deleted_at.nil? || deleted_at.future?))
     touch

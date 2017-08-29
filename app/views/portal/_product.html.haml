@@ -11,7 +11,7 @@
       - product.active_promoted_items.each do |item|
         .promotion
           %p= item.description
-    - if !product.master?
+    - if !product.has_variants?
       .buy-now
         %p.store
           = image_variant_tag product.store.cover_image, :icon

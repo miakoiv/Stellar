@@ -11,4 +11,7 @@
     %td= property_string(product.searchable_product_properties)
     - if can_see_pricing?
       %td.price.currency.text-right
-        = humanized_money_with_symbol product.price_tag(current_pricing)
+        - if product.has_variants?
+          = humanized_money_range product.price_range(current_pricing)
+        - else
+          = humanized_money_with_symbol product.price_tag(current_pricing)

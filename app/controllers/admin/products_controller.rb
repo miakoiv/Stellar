@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
   def index
     @query = saved_search_query('product', 'admin_product_search')
     @search = ProductSearch.new(search_params)
-    @products = @search.results.alphabetical.page(params[:page])
+    @products = @search.results.master.alphabetical.page(params[:page])
   end
 
   # GET /admin/products/query.json?q=keyword
@@ -35,11 +35,13 @@ class Admin::ProductsController < ApplicationController
 
   # GET /admin/products/new
   def new
+    master = current_store.products.find_by(slug: params[:master])
     @product = current_store.products.build(
       vendor: current_user.vendor? ? current_user : nil,
       available_at: Date.current,
       tax_category: current_store.tax_categories.first
     )
+    @product.vary_from(master) if master.present?
   end
 
   # GET /admin/products/1/edit

@@ -3,8 +3,8 @@
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'product-meta', col(Product, :metadata), class: 'active'
     = nav_tab 'product-text', col(Product, :text)
-    = nav_tab 'product-pricing', col(Product, :pricing), class: @product.master? ? 'master-disable disabled' : 'master-disable'
-    = nav_tab 'product-shipping', col(Product, :shipping), class: @product.master? ? 'master-disable disabled' : 'master-disable'
+    = nav_tab 'product-pricing', col(Product, :pricing), class: @product.has_variants? && 'disabled'
+    = nav_tab 'product-shipping', col(Product, :shipping), class: @product.has_variants? && 'disabled'
 
   .panel.panel-default.tabbed-panel
     .panel-body
@@ -12,10 +12,7 @@
         = tab_pane 'product-meta', class: 'in active' do
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
-            .variant-only.collapse{class: @product.variant? && 'in'}
-              = f.select :master_product_id, @product.master_product_options, {include_blank: blank}, {class: 'selectize'}
-            .master-only.collapse{class: @product.master? && 'in'}
-              = f.select :variant_ids, @product.available_variant_options, {}, {multiple: true, class: 'selectize'}
+            = f.hidden_field :master_product_id
             = f.select :category_ids, current_user.category_options, {}, {multiple: true, class: 'selectize'}
             = f.select :vendor_id, current_store.users.vendor.map { |u| [u.name, u.id] }, {include_blank: blank}, {class: 'selectize', disabled: current_user.vendor?}
             = f.text_field :code, required: true
@@ -120,25 +117,6 @@
         else
           $('#tax-included').collapse 'hide'
           $('#tax-excluded').collapse 'show'
-
-  $('#product_purpose').on 'change', (e) ->
-    switch $(e.target).val()
-      when 'master'
-        $('.variant-only').collapse 'hide'
-        $('.master-only').collapse 'show'
-        $('.master-disable').addClass 'disabled'
-        $('#product_master_product_id')[0].selectize.setValue ''
-      when 'variant'
-        $('.master-only').collapse 'hide'
-        $('.variant-only').collapse 'show'
-        $('.master-disable').removeClass 'disabled'
-        $('#product_variant_ids')[0].selectize.setValue ''
-      else
-        $('.master-only').collapse 'hide'
-        $('.variant-only').collapse 'hide'
-        $('.master-disable').removeClass 'disabled'
-        $('#product_variant_ids')[0].selectize.setValue ''
-        $('#product_master_product_id')[0].selectize.setValue ''
 
   $('#product_description').summernote
     lang: "#{t('culture')}"

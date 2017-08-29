@@ -145,6 +145,7 @@ fi:
           proceed: Kopioi
           cancel: Kumoa
         edit_page: Muokkaa sivua
+        new_variant: Uusi variantti
       new:
         new_product: Uusi tuote
       form:

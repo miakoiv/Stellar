@@ -165,6 +165,7 @@ en:
           proceed: Duplicate
           cancel: Cancel
         edit_page: Edit page
+        new_variant: New variant
       new:
         new_product: New product
       form:
