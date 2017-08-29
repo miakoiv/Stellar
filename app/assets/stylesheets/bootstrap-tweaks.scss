@@ -792,9 +792,21 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
+ * Nested tables (multiple tbodies)
+ */
+.table.table-nested > tbody + tbody { border-top: 0; }
+.table.table-nested > tbody.subtable > tr > th,
+.table.table-nested > tbody.subtable > tr > td {
+  @extend .small;
+  padding: 4px 8px;
+  border-top-style: dotted;
+}
+
+
+/*
  * Sortable tables
  */
- .sortable .handle { cursor: grab; }
+.sortable .handle { cursor: grab; }
 .sortable-placeholder {
   background-color: rgba($gray-light, 0.333);
 }
