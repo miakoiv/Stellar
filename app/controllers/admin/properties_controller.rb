@@ -38,7 +38,7 @@ class Admin::PropertiesController < ApplicationController
   # POST /admin/properties
   # POST /admin/properties.json
   def create
-    @property = current_store.properties.build(property_params)
+    @property = current_store.properties.build(property_params.merge(priority: current_store.properties.count))
 
     respond_to do |format|
       if @property.save
