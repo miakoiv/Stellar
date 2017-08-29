@@ -121,7 +121,11 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for @product
 
     @master = @product.master_product
-    @master.update_attributes primary_variant: @product
+    if @master.update primary_variant: @product
+      @master.variants.each do |variant|
+        variant.touch
+      end
+    end
 
     respond_to :js
   end
