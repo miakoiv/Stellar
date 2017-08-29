@@ -136,6 +136,7 @@ Rails.application.routes.draw do
       get :query, on: :collection
       post :add_requisite_entries, on: :member
       post :duplicate, on: :member
+      patch :make_primary, on: :member
       post :reorder, on: :collection
       post :upload_file, on: :collection
     end

@@ -8,7 +8,9 @@
       = link_to edit_admin_product_path(product), remote: true do
         %strong= product.title
         = product.subtitle
-    %td= product.codes
+    %td
+      = product.codes
+      = icon('star') if product.primary?
     %td
       - if product.page.present?
         = icon('file-o', title: col(Product, :has_page), data: {toggle: 'tooltip'})

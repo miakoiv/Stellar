@@ -79,6 +79,7 @@ class Product < ActiveRecord::Base
   # trigger a live status update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
+  belongs_to :primary_variant, class_name: 'Product'
 
   has_many :inventory_items, dependent: :destroy
   has_many :order_items
@@ -193,6 +194,10 @@ class Product < ActiveRecord::Base
     variants.any?
   end
 
+  def primary?
+    variant? && master_product.primary_variant == self
+  end
+
   def visible?
     live? && master? && (vanilla? || bundle? || composite? || virtual?)
   end
@@ -201,10 +206,10 @@ class Product < ActiveRecord::Base
     live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?) && available?
   end
 
-  # Finds the first live variant for this product.
+  # Finds the primary or first live variant for this product.
   # Returns self if not a master product or there are no variants.
   def first_variant
-    master? && variants.live.sorted.first || self
+    master? && primary_variant || variants.live.sorted.first || self
   end
 
   def sibling_variants
@@ -217,7 +222,7 @@ class Product < ActiveRecord::Base
 
   def variants_with_master_properties
     return {} unless has_variants?
-    variants.live.includes(product_properties: :property)
+    variants.live.sorted.includes(product_properties: :property)
       .map { |v|
         [v, v.product_properties.where(properties: {id: properties})]
       }

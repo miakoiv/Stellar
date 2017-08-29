@@ -166,6 +166,7 @@ en:
           cancel: Cancel
         edit_page: Edit page
         new_variant: New variant
+        make_primary: Set as primary
       new:
         new_product: New product
       form:

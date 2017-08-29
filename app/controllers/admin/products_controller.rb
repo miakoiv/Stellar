@@ -4,10 +4,10 @@ class Admin::ProductsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries]
+  before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries, :make_primary]
 
-  authority_actions query: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', duplicate: 'create'
-  authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries]
+  authority_actions query: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', duplicate: 'create'
+  authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries, :make_primary]
 
   layout 'admin'
 
@@ -113,9 +113,17 @@ class Admin::ProductsController < ApplicationController
       ).update(priority: @product.requisite_entries.count)
     end
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
+  end
+
+  # PATCH/PUT /admin/products/1/make_primary.js
+  def make_primary
+    authorize_action_for @product
+
+    @master = @product.master_product
+    @master.update_attributes primary_variant: @product
+
+    respond_to :js
   end
 
   # POST /admin/products/upload_file
