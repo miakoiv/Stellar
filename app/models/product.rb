@@ -75,6 +75,10 @@ class Product < ActiveRecord::Base
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
 
+  # If a product has associated shipping methods, only those shipping methods
+  # are available when ordering this product.
+  has_and_belongs_to_many :shipping_methods
+
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants
@@ -360,6 +364,12 @@ class Product < ActiveRecord::Base
   # other non-blank strings are considered to be zero days.
   def lead_time_days
     lead_time.present? && lead_time.to_i
+  end
+
+  # Finds the available shipping methods from associated active
+  # shipping methods if any, defaulting to all active shipping methods.
+  def available_shipping_methods
+    shipping_methods.active.presence || store.shipping_methods.active
   end
 
   # Coalesced amount available by inventory.

@@ -159,6 +159,10 @@ class Store < ActiveRecord::Base
     properties.merge(Property.searchable).merge(Property.sorted)
   end
 
+  def shipping_method_options
+    shipping_methods.map { |s| [s.name, s.id] }
+  end
+
   # Countries where concluded orders have been shipped to.
   # Useful as sales report search option.
   def countries_shipped_to

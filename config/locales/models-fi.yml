@@ -291,6 +291,7 @@ fi:
         not_live: Ei myynnissä
         has_page: Tuotteella on sivu
         memo: Muistio
+        shipping_method_ids: Sallitut toimitustavat
         mass: Pakkauksen paino
         dimensions: Pakkauksen mitat
         lead_time: Toimitusaika

@@ -62,6 +62,7 @@
 
         = tab_pane 'product-shipping' do
           %fieldset{disabled: locked}
+            = f.select :shipping_method_ids, current_store.shipping_method_options, {}, {multiple: true, class: 'selectize', placeholder: t('.all_shipping_methods')}
             = f.text_field :mass, append: 'g', class: 'text-right'
             .form-group
               %label.control-label.col-sm-4= col(Product, :dimensions)

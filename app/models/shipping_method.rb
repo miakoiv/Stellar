@@ -15,6 +15,9 @@ class ShippingMethod < ActiveRecord::Base
   # Reference to an internal product acting as the shipping cost for this method.
   belongs_to :shipping_cost_product, class_name: 'Product'
 
+  # Products specifying this shipping method can be used to ship them.
+  has_and_belongs_to_many :products
+
   # A reference to a page containing pertinent details displayed during
   # checkout as a button opening the page contents in a modal.
   belongs_to :detail_page, class_name: 'Page'

@@ -248,6 +248,15 @@ class Order < ActiveRecord::Base
     reload
   end
 
+  # Finds the shipping methods available for this order based on which
+  # methods are common to all ordered items. In case the order needs no
+  # shipping, no shipping methods are returned.
+  def available_shipping_methods
+    return ShippingMethod.none unless has_shipping?
+    ids = order_items.map { |item| item.product.available_shipping_methods.pluck(:id) }.inject(:&)
+    store.shipping_methods.where(id: ids)
+  end
+
   # Applies the shipping cost incurred by given shipping method, if any.
   # Existing shipping costs are removed first.
   def apply_shipping_cost!(shipping_method, pricing = nil)

@@ -31,7 +31,7 @@ class CheckoutController < ApplicationController
       return redirect_to cart_path
     end
 
-    @shipping_methods = active_shipping_methods
+    @shipping_methods = @order.available_shipping_methods
     @order.shipments.destroy_all
     @order.clear_shipping_costs!
     @order.address_to(current_user)
@@ -47,7 +47,7 @@ class CheckoutController < ApplicationController
   # product price to the order, replacing existing shipping costs.
   # Called via Ajax.
   def shipping_method
-    @shipping_methods = active_shipping_methods
+    @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
     @order.apply_shipping_cost!(@shipping_method, current_pricing)
     @shipping_gateway = if @shipping_method.shipping_gateway.present?
@@ -62,7 +62,7 @@ class CheckoutController < ApplicationController
   # A shipment record is created, and the JS response will trigger an
   # order update.
   def ship
-    @shipping_methods = active_shipping_methods
+    @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
     @shipment = @order.shipments.build(
       shipping_method: @shipping_method,
@@ -109,7 +109,7 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/return
   def return
-    @shipping_methods = active_shipping_methods
+    @shipping_methods = @order.available_shipping_methods
     @payment_gateway = @order.payment_gateway_class.new(order: @order)
     status = @payment_gateway.return(params)
 
@@ -152,13 +152,5 @@ class CheckoutController < ApplicationController
   private
     def set_order
       @order = current_user.orders.find(params[:order_id])
-    end
-
-    def active_shipping_methods
-      if @order.has_shipping?
-        current_store.shipping_methods.active
-      else
-        ShippingMethod.none
-      end
     end
 end

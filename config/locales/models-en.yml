@@ -291,6 +291,7 @@ en:
         not_live: Not available
         has_page: Product has a page
         memo: Memo
+        shipping_method_ids: Available shipping methods
         mass: Shipping weight
         dimensions: Shipping dimensions
         lead_time: Lead time
