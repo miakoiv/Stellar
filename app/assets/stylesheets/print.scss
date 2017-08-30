@@ -32,6 +32,8 @@
     overflow: auto;
   }
 
+  .section:first-child .section-content.column .segment { padding-top: 0; }
+
   .container {
     width: 100% !important;
     padding: 0 !important;
