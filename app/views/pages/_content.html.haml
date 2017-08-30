@@ -1,0 +1,5 @@
+- page.sections.each do |section|
+  %section.section{style: section_style(section)}
+    .section-content{class: [section.outline, section.layout, section.width]}
+      .row
+        = render partial: 'segments/segment', collection: section.segments
