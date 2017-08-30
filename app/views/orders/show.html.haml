@@ -22,5 +22,5 @@
         = render partial: 'order_items/table', object: @order, as: :order
 
     - if @order.is_quote?
-      .visible-print.small
-        = @order.store.quotation_boilerplate.html_safe
+      .visible-print
+        = render partial: 'pages/content', object: @order.store.quotation_boilerplate, as: :page

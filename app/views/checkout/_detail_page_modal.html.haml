@@ -4,10 +4,10 @@
 %hr
 
 #detail-page-modal.modal.fade{data: {backdrop: 'static'}}
-  .modal-dialog
+  .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %button.close{data: {dismiss: 'modal'}}= icon('close')
         %h4.modal-title= detail_page.title
       .modal-body
-        = detail_page.content.html_safe
+        = render partial: 'pages/content', object: detail_page, as: :page

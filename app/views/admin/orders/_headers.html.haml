@@ -1,4 +1,5 @@
-= @order.store.letterhead(current_user).html_safe
+= render partial: 'pages/layout', object: @order.store.letterhead(current_user), as: :page
+
 .page-header
   %h1
     - if @order.incoming_for?(current_user)

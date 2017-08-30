@@ -196,17 +196,15 @@ class Store < ActiveRecord::Base
     users.with_role(:correspondence)
   end
 
-  # Serves the contents of the letterhead template for given user.
+  # Finds the letterhead template page for given user.
   def letterhead(user)
     page_id = send("#{user.group}_template_id")
-    return '' unless page_id.present?
-    pages.find(page_id).content
+    pages.find_by(id: page_id)
   end
 
-  # Quotation boilerplate is the template page contents.
+  # Finds the quotation boilerplate page.
   def quotation_boilerplate
-    return '' unless quotation_template_id.present?
-    pages.find(quotation_template_id).content
+    pages.find_by(id: quotation_template_id)
   end
 
   # CSV header conversion table for uploaded products.
