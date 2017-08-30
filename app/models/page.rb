@@ -36,8 +36,8 @@ class Page < ActiveRecord::Base
     'promotion' => {icon: 'tag', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
-    'dropdown' => {icon: 'files-o'},
-    'megamenu' => {icon: 'window-maximize'},
+    'dropdown' => {icon: 'files-o', appearance: 'primary'},
+    'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
     'template' => {icon: 'file-o', appearance: 'warning'},
   }.freeze
 
@@ -67,7 +67,7 @@ class Page < ActiveRecord::Base
   def self.available_purposes
     purposes.slice(
       :route, :primary, :category, :product, :promotion,
-      :dropdown, :megamenu
+      :dropdown, :megamenu, :template
     )
   end
 
@@ -90,7 +90,7 @@ class Page < ActiveRecord::Base
 
   def movable?
     route? || primary? || category? || product? || promotion? ||
-    dropdown? || megamenu?
+    dropdown? || megamenu? || template?
   end
 
   def can_have_albums?
