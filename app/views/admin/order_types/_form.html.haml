@@ -24,6 +24,9 @@
             = f.check_box :has_installation
           = f.form_group do
             = f.check_box :is_exported
+      %fieldset.gap{disabled: locked}
+        #payment-gateway.collapse{class: @order_type.has_payment? && 'in'}
+          = f.select :payment_gateway, Store.payment_gateway_options, {}, {class: 'selectize'}
       - unless locked
         %fieldset.actions
           = f.form_group do
@@ -50,3 +53,9 @@
           </span>
         </div>
         """
+
+  $('#order_type_has_payment').on 'change', (e) ->
+    if $(e.target).is ':checked'
+      $('#payment-gateway').collapse 'show'
+    else
+      $('#payment-gateway').collapse 'hide'
