@@ -22,7 +22,9 @@ class Admin::OrderTypesController < ApplicationController
 
   # GET /admin/order_types/new
   def new
-    @order_type = current_store.order_types.build
+    @order_type = current_store.order_types.build(
+      has_shipping: true, has_payment: true
+    )
   end
 
   # GET /admin/order_types/1/edit
