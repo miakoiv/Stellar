@@ -1,0 +1,50 @@
+.page-header
+  - if current_user.can_create?(OrderType)
+    = link_to new_admin_order_type_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_order_type'))
+  %h1= icon('gears', title(OrderType, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2= col(OrderType, :workflow)
+        %th.col-xs-3= col(OrderType, :name)
+        %th.col-xs-1
+        %th.col-xs-1
+        - if current_store.b2b_sales?
+          %th.col-xs-1
+          %th.col-xs-1
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @order_types do |order_type|
+        %td
+          %span.label{class: "label-#{order_type.source_appearance}"}
+            = order_type.source_label
+          %i.fa.fa-arrow-right.fa-fw.fa-lg
+          %span.label{class: "label-#{order_type.destination_appearance}"}
+            = order_type.destination_label
+        %td= order_type.name
+        %td
+          - if order_type.has_payment?
+            %span.label.label-success= col(OrderType, :has_payment)
+        %td
+          - if order_type.has_shipping?
+            %span.label.label-primary= col(OrderType, :has_shipping)
+        - if current_store.b2b_sales?
+          %td
+            - if order_type.has_installation?
+              %span.label.label-danger= col(OrderType, :has_installation)
+          %td
+            - if order_type.is_exported?
+              %span.label.label-info= col(OrderType, :is_exported)
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_order_type_path(order_type),
+              class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(OrderType)
+            = link_to icon('edit', t('actions.edit')), edit_admin_order_type_path(order_type),
+                class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(order_type)
+            = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
+                  klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

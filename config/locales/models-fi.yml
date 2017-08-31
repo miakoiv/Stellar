@@ -54,8 +54,8 @@ fi:
         one: tilausrivi
         other: tilausrivit
       order_type:
-        one: tilaustyyppi
-        other: tilaustyypit
+        one: tilauslaji
+        other: tilauslajit
       page:
         one: sivu
         other: sivut
@@ -243,6 +243,16 @@ fi:
         product_customer_code: Asiakkaan koodi
         product_title: Tuotenimike
         product_retail_price: Myyntihinta
+      order_type:
+        name: Nimi
+        workflow: Työnkulku
+        source_group: Mistä
+        destination_group: Minne
+        has_shipping: Toimitettava
+        has_installation: Asennettava
+        has_payment: Maksettava
+        payment_gateway: Maksukanava
+        is_exported: Tietojen vienti
       page:
         purpose: Sivun tyyppi
         parent_id: Pääsivu

@@ -110,6 +110,11 @@ en:
         new_inventory: New inventory
       new:
         new_inventory: New inventory
+    order_types:
+      index:
+        new_order_type: New order type
+      new:
+        new_order_type: New order type
     orders:
       row:
         approve: Approve

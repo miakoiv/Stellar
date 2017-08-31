@@ -1,0 +1,52 @@
+= bootstrap_form_for [:admin, @order_type], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        .form-group
+          = f.label col(OrderType, :workflow), class: 'control-label col-sm-4'
+          .col-sm-8
+            = f.select_without_bootstrap :source_group, OrderType.group_options, {}, {class: 'selectize-label', required: true}
+        .form-group
+          .col-sm-8.col-sm-offset-4
+            %p{style: 'margin-left: 1em;'}
+              %i.fa.fa-arrow-down
+              = title(Order)
+            = f.select_without_bootstrap :destination_group, OrderType.group_options, {}, {class: 'selectize-label', required: true}
+      %fieldset.gap{disabled: locked}
+        = f.text_field :name, required: true
+        = f.form_group do
+          = f.check_box :has_payment
+        = f.form_group do
+          = f.check_box :has_shipping
+        - if current_store.b2b_sales?
+          = f.form_group do
+            = f.check_box :has_installation
+          = f.form_group do
+            = f.check_box :is_exported
+      - unless locked
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
+
+:coffee
+  $('.selectize-label').selectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render:
+      item: (item, escape) ->
+        """
+        <div class="item">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """
+      option: (item, escape) ->
+        """
+        <div class="option">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """

@@ -243,6 +243,16 @@ en:
         product_customer_code: Customer code
         product_title: Product title
         product_retail_price: Retail price
+      order_type:
+        name: Name
+        workflow: Workflow
+        source_group: From
+        destination_group: To
+        has_shipping: Shipping
+        has_installation: Installation
+        has_payment: Payment
+        payment_gateway: Payment gateway
+        is_exported: Data export
       page:
         purpose: Page type
         parent_id: Parent page

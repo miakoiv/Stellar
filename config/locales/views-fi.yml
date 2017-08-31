@@ -90,6 +90,11 @@ fi:
         new_inventory: Uusi varasto
       new:
         new_inventory: Uusi varasto
+    order_types:
+      index:
+        new_order_type: Uusi tilauslaji
+      new:
+        new_order_type: Uusi tilauslaji
     orders:
       row:
         approve: Hyväksy
