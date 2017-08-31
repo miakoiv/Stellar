@@ -5,6 +5,7 @@ fi:
         update: Tallenna tämä %{template}
   activemodel:
     models:
+      payment_gateway/paybyway: Bambora PayForm
       shipping_gateway/customer_pickup: asiakas noutaa
       shipping_gateway/letter: postitus kirjeenä
       shipping_gateway/smart_post: Posti SmartPOST

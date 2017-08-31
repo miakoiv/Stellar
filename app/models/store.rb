@@ -113,6 +113,13 @@ class Store < ActiveRecord::Base
     }
   end
 
+  # Options for payment gateways found in the PaymentGateway module.
+  def self.payment_gateway_options
+    Payment.available_gateways.map do |gateway|
+      ["PaymentGateway::#{gateway}".constantize.model_name.human, gateway]
+    end
+  end
+
   # Options for shipping gateways found in the ShippingGateway module.
   def self.shipping_gateway_options
     Shipment.available_gateways.map do |gateway|

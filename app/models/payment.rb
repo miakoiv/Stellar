@@ -9,4 +9,8 @@ class Payment < ActiveRecord::Base
 
   default_scope { order(created_at: :desc) }
 
+  #---
+  def self.available_gateways
+    %w{Paybyway}
+  end
 end
