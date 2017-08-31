@@ -95,6 +95,9 @@ fi:
         new_order_type: Uusi tilauslaji
       new:
         new_order_type: Uusi tilauslaji
+      form:
+        has_shipping_help: Tilauslaji on toimitettava, jos tilaajalle lähetetään tavaraa. Tilaukseen on sisällytettävä toimitusosoite.
+        has_payment_help: Tilauslaji on maksettava, jos tilaukset on maksettava ennen tilauksen hyväksymistä. Jätä tämä tyhjäksi jos laskutus tapahtuu muuta kautta.
     orders:
       row:
         approve: Hyväksy

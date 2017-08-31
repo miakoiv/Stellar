@@ -15,16 +15,16 @@
             = f.select_without_bootstrap :destination_group, OrderType.group_options, {}, {class: 'selectize-label', required: true}
       %fieldset.gap{disabled: locked}
         = f.text_field :name, required: true
-        = f.form_group do
-          = f.check_box :has_payment
-        = f.form_group do
+        = f.form_group help: t('.has_shipping_help') do
           = f.check_box :has_shipping
         - if current_store.b2b_sales?
           = f.form_group do
             = f.check_box :has_installation
           = f.form_group do
             = f.check_box :is_exported
-      %fieldset.gap{disabled: locked}
+      %fieldset{disabled: locked}
+        = f.form_group help: t('.has_payment_help') do
+          = f.check_box :has_payment
         #payment-gateway.collapse{class: @order_type.has_payment? && 'in'}
           = f.select :payment_gateway, Store.payment_gateway_options, {}, {class: 'selectize'}
       - unless locked
