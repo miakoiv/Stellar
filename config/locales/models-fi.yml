@@ -377,7 +377,8 @@ fi:
         body: Leipäteksti
         headline: Otsikko
         grid_columns: Sarakkeita
-        max_items: Max määrä
+        max_items: Maksimimäärä
+        show_more: Linkki lisäsisältöön
         product_scope: Tuotteiden järjestys
         map_location: Sijainnin osoite
         map_zoom: Kartan koko

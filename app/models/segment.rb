@@ -4,7 +4,7 @@ class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
     :headline,
-    :grid_columns, :max_items, :product_scope,
+    :grid_columns, :max_items, :show_more, :product_scope,
     :map_location, :map_zoom,
   ], coder: JSON
 
@@ -51,6 +51,10 @@ class Segment < ActiveRecord::Base
   end
 
   #---
+  def show_more?
+    ['1', 1, true].include?(show_more)
+  end
+
   def edit_in_place?
     column?
   end

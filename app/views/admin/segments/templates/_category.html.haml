@@ -4,7 +4,7 @@
       = f.hidden_field :resource_type, value: 'Category'
       = f.select :resource_id, current_store.categories.live.map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
   .row
-    .col-sm-12
+    .col-sm-6
       .form-group
         = f.label col(Segment, :grid_columns)
         .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
@@ -15,5 +15,7 @@
   .row
     .col-sm-6
       = f.text_field :max_items
+      = f.form_group do
+        = f.check_box :show_more
     .col-sm-6
       = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: true}, {class: 'selectize'}
