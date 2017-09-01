@@ -407,6 +407,14 @@ $bg-tone:           #f6f6f6;
   color: $gray-base;
 }
 
+/* Link to more at the bottom of a grid */
+.more-items-link {
+  @extend .pull-right;
+}
+.more-items-link a {
+  @extend .btn, .btn-sm, .btn-primary;
+}
+
 
 /*
  * Products in product table
@@ -422,23 +430,29 @@ $bg-tone:           #f6f6f6;
 /*
  * Product cards in other contexts
  */
+.product-card {
+  position: relative;
+  padding: 10px;
+  border: 5px solid transparent;
+}
 .product-card:hover {
+  border-color: $gray-lighter;
  .product-image { transform: scale(1.05); }
  .buy-now .btn { @extend .btn-danger; }
 }
 .product-card a {
-  padding: 30px;
+  display: block;
   color: inherit;
   text-decoration: none;
   transition: all 0.2s ease-in-out 0s;
 }
 .product-card .product-image {
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
   transition: all 0.2s ease-in-out 0s;
 
-  img {
-    @extend .img-responsive;
-    margin: 0 auto;
-  }
+  img { @extend .img-contain, .img-center; }
 }
 .product-card .product-text {
   margin-top: 10px;
@@ -457,21 +471,19 @@ $bg-tone:           #f6f6f6;
 }
 .product-card .promotions {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: -5px;
+  left: -5px;
 }
 .product-card .promotion {
   @extend .label, .label-danger;
+  @include box-shadow(0 0 4px 4px rgba(255,255,255,1));
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   padding: 0;
-  border-radius: 50px;
-  font-size: $font-size-large;
-}
-.product-card .buy-now {
-  padding: 30px;
+  border-radius: 20px;
+  font-size: $font-size-base;
 }
 .product-card .buy-now-form {
   text-align: center;
@@ -484,7 +496,7 @@ $bg-tone:           #f6f6f6;
 }
 .product-card .price {
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
   color: $gray-base;
 }
 
