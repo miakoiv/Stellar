@@ -429,7 +429,7 @@ $bg-tone:           #f6f6f6;
 
 
 /*
- * Product cards in other contexts
+ * Product cards and grids in layout content
  */
 .product-card {
   position: relative;
@@ -500,6 +500,21 @@ $bg-tone:           #f6f6f6;
   text-align: center;
   font-size: 20px;
   color: $gray-base;
+}
+.segment-content .grid {
+  .grid-item {
+    padding: 0;
+    border-left: 1px solid $gray-lighter;
+    border-top: 1px solid $gray-lighter;
+  }
+  &.grid-columns-1 .grid-item:first-child,
+  &.grid-columns-2 .grid-item:nth-child(-n+2),
+  &.grid-columns-3 .grid-item:nth-child(-n+3),
+  &.grid-columns-4 .grid-item:nth-child(-n+4),
+  &.grid-columns-6 .grid-item:nth-child(-n+6),
+  &.grid-columns-12 .grid-item:nth-child(-n+12) {
+    border-top: 0;
+  }
 }
 
 
