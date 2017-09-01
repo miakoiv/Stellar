@@ -1,9 +1,9 @@
 - resource = promotion.resource
 - max_items = promotion.max_items.presence
-- products = resource.products.sorted(promotion.product_scope.presence)
+- products = resource.is_a?(Promotion) && resource.products.sorted(promotion.product_scope.presence)
 
 .segment-content.promotion{id: segment_content_id(promotion, context)}
-  - if resource.is_a?(Promotion)
+  - if products
     .grid{class: "grid-columns-#{promotion.grid_columns || 3}"}
       = render partial: 'products/product_card', layout: 'shared/grid_item', collection: max_items ? products.first(max_items) : products, as: :product
     - if products.count > max_items.to_i
