@@ -1,0 +1,19 @@
+%fieldset
+  .row
+    .col-sm-12
+      = f.hidden_field :resource_type, value: 'Promotion'
+      = f.select :resource_id, current_store.promotions.active.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
+  .row
+    .col-sm-12
+      .form-group
+        = f.label col(Segment, :grid_columns)
+        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+          - Segment.grid_columns_options.each do |columns|
+            %label.btn.btn-default{class: @segment.grid_columns == columns && 'active'}
+              = f.radio_button_without_bootstrap :grid_columns, columns
+              = columns
+  .row
+    .col-sm-6
+      = f.text_field :max_items
+    .col-sm-6
+      = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: true}, {class: 'selectize'}
