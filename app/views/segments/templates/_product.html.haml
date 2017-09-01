@@ -1,24 +1,5 @@
-- resource = product.resource || current_store.products.visible.random.first
+- resource = product.resource
 
 .segment-content.product{id: segment_content_id(product, context)}
-  .product-card
-    = link_to show_product_path(resource) do
-      .product-image= image_variant_tag resource.cover_image(current_store.card_image_type), :postcard
-      .product-text
-        %h2= product.headline
-        %h3
-          = resource.title
-          %span.small= resource.subtitle
-      .promotions
-        - resource.active_promoted_items.each do |item|
-          .promotion= item.description
-    .buy-now
-      - if can_see_pricing?
-        - if resource.has_variants?
-          %p.price= humanized_money_range resource.price_range(current_pricing)
-        - else
-          %p.price= humanized_money_with_symbol resource.price_tag(current_pricing)
-      - if can_shop? && may_shop_at?(resource.category) && resource.purchasable?
-        = form_tag order_product_path(resource), method: :post, remote: true, class: 'form-inline buy-now-form' do
-          = hidden_field_tag :amount, 1
-          %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
+  - if resource.is_a?(Product)
+    = render partial: 'products/product_card', object: resource, as: :product, locals: {headline: product.headline}
