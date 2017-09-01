@@ -3,7 +3,8 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
-    :grid_columns, :headline,
+    :headline,
+    :grid_columns, :max_items, :product_scope,
     :map_location, :map_zoom,
   ], coder: JSON
 

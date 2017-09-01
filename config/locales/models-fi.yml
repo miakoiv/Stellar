@@ -375,8 +375,10 @@ fi:
         template: Sisällön tyyppi
         alignment: Sisällön tasaus
         body: Leipäteksti
-        grid_columns: Sarakkeita
         headline: Otsikko
+        grid_columns: Sarakkeita
+        max_items: Max määrä
+        product_scope: Tuotteiden järjestys
         map_location: Sijainnin osoite
         map_zoom: Kartan koko
         thumbnail_size: Diakuvan koko

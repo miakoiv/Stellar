@@ -375,8 +375,10 @@ en:
         template: Content type
         alignment: Content alignment
         body: Body text
-        grid_columns: Grid columns
         headline: Headline
+        grid_columns: Grid columns
+        max_items: Max items
+        product_scope: Product sorting
         map_location: Location address
         map_zoom: Map zoom
         thumbnail_size: Slide size
