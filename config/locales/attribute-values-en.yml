@@ -73,7 +73,7 @@ en:
           'col-6': 6 columns
       segment:
         template:
-          empty: empty
+          empty: empty area
           column: text column
           picture: picture
           gallery: gallery
@@ -81,7 +81,7 @@ en:
           category: category
           product: product
           promotion: promotion
-          raw: ʜᴛᴍʟ code
+          raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top
           'align-middle': middle

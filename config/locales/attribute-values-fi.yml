@@ -73,7 +73,7 @@ fi:
           'col-6': 6 palstaa
       segment:
         template:
-          empty: tyhjä
+          empty: tyhjä tila
           column: tekstipalsta
           picture: kuva
           gallery: galleria
@@ -81,7 +81,7 @@ fi:
           category: tuoteryhmä
           product: tuote
           promotion: kampanja
-          raw: ʜᴛᴍʟ-koodia
+          raw: ʜᴛᴍʟ-osio
         alignment:
           'align-top': ylös
           'align-middle': keskelle
