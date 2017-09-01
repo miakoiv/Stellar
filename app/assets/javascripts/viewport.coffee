@@ -1,6 +1,6 @@
 $.fn.extend
   fillViewport: ->
-    $(this).height $(window).height() - $(this).offset().top
+    $(this).height $(window).height() - $('.layout-container').offset().top
 
 @viewportUpdate = ->
   $('.viewport').each ->

@@ -84,9 +84,17 @@ module ApplicationHelper
 
   def section_style(section)
     [].tap do |s|
-      section.background_image.present? && s << "background-image: url(#{section.background_image.url(:lightbox)}); background-size: cover; background-position: center center; background-repeat: no-repeat;"
-      s << "background-color: #{section.background_color};"
-    end.join ' '
+      if section.background_image.present?
+        s << "background-image: url(#{section.background_image.url(:lightbox)})"
+        s << "background-size: cover"
+        s << "background-position: center center"
+        s << "background-repeat: no-repeat"
+        if section.layout == 'viewport'
+          s << "background-attachment: fixed"
+        end
+      end
+      s << "background-color: #{section.background_color}"
+    end.join '; '
   end
 
   # Generates a segment content id in a specific context. Scripts that

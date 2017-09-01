@@ -1,6 +1,6 @@
 - meta_tags_for(@page)
 
-#static-wrap{class: @page.albums.any? && 'has-sidebar'}
+#static-wrap.layout-container{class: @page.albums.any? && 'has-sidebar'}
   - if @page.sections.any?
     = render @page.sections
   - else

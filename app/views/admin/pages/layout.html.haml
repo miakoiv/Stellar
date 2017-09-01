@@ -19,7 +19,7 @@
             = icon('chevron-circle-left', t('actions.back'))
       .navbar-toolbar
 
-  #section-list.section-list.sortable
+  #section-list.section-list.layout-container.sortable
     = render partial: 'admin/sections/list_item', collection: @page.sections, as: :section
 
   :coffee
