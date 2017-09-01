@@ -19,3 +19,4 @@
         = f.check_box :show_more
     .col-sm-6
       = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: true}, {class: 'selectize'}
+      = f.check_box :masonry

@@ -377,6 +377,7 @@ en:
         body: Body text
         headline: Headline
         grid_columns: Grid columns
+        masonry: Pack rows tightly
         max_items: Max items
         show_more: Link to further content
         product_scope: Product sorting

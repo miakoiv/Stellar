@@ -11,3 +11,12 @@
         = link_to show_promotion_path(resource) do
           = resource
           = icon('arrow-circle-right')
+
+- if promotion.masonry?
+  :coffee
+    $grid = $('##{segment_content_id(promotion, context)}').find '.grid'
+    $grid.imagesLoaded ->
+      $grid.masonry
+        itemSelector: '.grid-item'
+        columnWidth: '.grid-item'
+        percentPosition: true

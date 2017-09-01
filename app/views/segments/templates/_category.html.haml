@@ -11,3 +11,12 @@
         = link_to show_category_path(resource) do
           = resource
           = icon('arrow-circle-right')
+
+- if category.masonry?
+  :coffee
+    $grid = $('##{segment_content_id(category, context)}').find '.grid'
+    $grid.imagesLoaded ->
+      $grid.masonry
+        itemSelector: '.grid-item'
+        columnWidth: '.grid-item'
+        percentPosition: true

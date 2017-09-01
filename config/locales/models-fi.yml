@@ -377,6 +377,7 @@ fi:
         body: Leipäteksti
         headline: Otsikko
         grid_columns: Sarakkeita
+        masonry: Tiivistä rivit
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön
         product_scope: Tuotteiden järjestys
