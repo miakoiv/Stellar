@@ -11,9 +11,12 @@
       .promotions
         - product.active_promoted_items.each do |item|
           .promotion= item.description
-    - if !product.has_variants?
-      .buy-now
+      .product-pricing
+        %p.price
+          - if product.has_variants?
+            = humanized_money_range product.price_range(current_pricing)
+          - else
+            = humanized_money_with_symbol product.price_tag(current_pricing)
         %p.store
           = image_variant_tag product.store.cover_image, :icon
           = product.store
-        %p.price= humanized_money_with_symbol product.price_tag(nil)
