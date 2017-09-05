@@ -156,7 +156,7 @@ en:
         category_ids: Categories
       hostname:
         fqdn: Hostname
-        is_subdomain: Subdomain
+        parent_hostname_id: Top level domain
       iframe:
         html: HTML code
       image:

@@ -4,7 +4,7 @@
       %tr
         %th.col-min.hidden-print
         %th= col(Hostname, :fqdn)
-        %th.col-xs-3= col(Hostname, :is_subdomain)
+        %th.col-xs-4= col(Hostname, :parent_hostname_id)
         %th.col-xs-1.actions
 
     %tbody#hostnames-tbody.sortable
@@ -14,12 +14,10 @@
     %tbody
       = form_for [:admin, resource, resource.hostnames.new], remote: true do |f|
         %tr
-          %td= f.text_field :fqdn, class: 'form-control'
-          %td.col-xs-3
-            .btn-group{data: {toggle: 'buttons'}}
-              %label.btn.btn-default
-                = f.check_box :is_subdomain
-                = icon('globe')
+          %td
+            = f.text_field :fqdn, class: 'form-control'
+          %td.col-xs-4
+            = f.select :parent_hostname_id, Hostname.portal.map { |h| [h.to_s, h.id] }, {include_blank: true}, {class: 'selectize'}
           %td.col-xs-1.actions
             = f.button class: 'btn btn-default' do
               = icon('check')

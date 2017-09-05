@@ -51,7 +51,7 @@ class Admin::HostnamesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def hostname_params
       params.require(:hostname).permit(
-        :fqdn, :is_subdomain
+        :parent_hostname_id, :fqdn
       )
     end
 end

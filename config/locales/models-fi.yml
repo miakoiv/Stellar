@@ -156,7 +156,7 @@ fi:
         category_ids: Tuoteryhmät
       hostname:
         fqdn: Verkkotunnus
-        is_subdomain: Alitunnus
+        parent_hostname_id: Toimialue
       iframe:
         html: HTML-koodi
       image:

@@ -1,8 +1,8 @@
 - headline ||= nil
 
 .product-card
-  = link_to show_product_path(product) do
-    .product-image= image_variant_tag product.cover_image(current_store.card_image_type), :postcard
+  = link_to standalone_store? ? show_product_path(product) : show_product_url(product, host: product.store.hostname_at(current_portal).fqdn) do
+    .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :postcard
     .product-text
       - if headline.present?
         %h2= headline
@@ -13,12 +13,11 @@
       - product.active_promoted_items.each do |item|
         .promotion= item.description
   .buy-now
-    - if can_see_pricing?
-      - if product.has_variants?
-        %p.price= humanized_money_range product.price_range(current_pricing)
-      - else
-        %p.price= humanized_money_with_symbol product.price_tag(current_pricing)
-    - if can_shop? && may_shop_at?(product.category) && product.purchasable?
+    - if product.has_variants?
+      %p.price= humanized_money_range product.price_range(current_pricing)
+    - else
+      %p.price= humanized_money_with_symbol product.price_tag(current_pricing)
+    - if current_store.present? && product.purchasable?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
         = hidden_field_tag :amount, 1
         %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

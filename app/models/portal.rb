@@ -14,6 +14,7 @@ class Portal < ActiveRecord::Base
   #---
   # A portal has one or more hostnames it can be found at.
   has_many :hostnames, as: :resource, dependent: :destroy
+  has_many :subdomain_hostnames, through: :hostnames
 
   # Portals combine any number of stores together, while
   # stores may belong to multiple portals.

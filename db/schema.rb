@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830065737) do
+ActiveRecord::Schema.define(version: 20170905071601) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -187,16 +187,17 @@ ActiveRecord::Schema.define(version: 20170830065737) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "hostnames", force: :cascade do |t|
-    t.integer  "resource_id",   limit: 4
-    t.string   "resource_type", limit: 255
-    t.string   "fqdn",          limit: 255,                 null: false
-    t.boolean  "is_subdomain",              default: false, null: false
-    t.integer  "priority",      limit: 4,   default: 0,     null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.integer  "resource_id",        limit: 4
+    t.integer  "parent_hostname_id", limit: 4
+    t.string   "resource_type",      limit: 255
+    t.string   "fqdn",               limit: 255,             null: false
+    t.integer  "priority",           limit: 4,   default: 0, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "hostnames", ["fqdn"], name: "index_hostnames_on_fqdn", using: :btree
+  add_index "hostnames", ["parent_hostname_id"], name: "index_hostnames_on_parent_hostname_id", using: :btree
   add_index "hostnames", ["resource_type", "resource_id"], name: "index_hostnames_on_resource_type_and_resource_id", using: :btree
 
   create_table "iframes", force: :cascade do |t|

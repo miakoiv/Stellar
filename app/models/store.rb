@@ -145,10 +145,8 @@ class Store < ActiveRecord::Base
     }
   end
 
-  # Tries to find a subdomain hostname for this store at given domain,
-  # defaulting to any hostname at all.
-  def hostname_at(domain)
-    hostnames.subdomain.at(domain).first || hostnames.first
+  def hostname_at(portal)
+    hostnames.subdomain.find_by(parent_hostname: portal.hostnames)
   end
 
   # Returns the first hostname for mailers and such with no request context.
