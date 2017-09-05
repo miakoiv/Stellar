@@ -1,3 +1,6 @@
 - meta_tags_for(current_portal)
 
 #portal-wrap
+  - current_portal.stores.shuffle.each do |store|
+    - random_page = store.pages.portal.sample
+    = render partial: 'pages/layout', object: store.pages.portal.sample, as: :page if random_page.present?

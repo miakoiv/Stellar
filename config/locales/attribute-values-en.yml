@@ -19,6 +19,7 @@ en:
           dropdown: Dropdown menu
           megamenu: Mega menu
           template: Template
+          portal: Portal promotion
       property:
         value_type:
           string: String

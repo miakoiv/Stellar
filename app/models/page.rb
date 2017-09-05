@@ -26,6 +26,7 @@ class Page < ActiveRecord::Base
     dropdown: 20,       # dropdown container for other pages
     megamenu: 21,       # megamenu container for other pages
     template: 30,       # printed page template
+    portal: 40,         # promotional material for portals
   }
 
   PRESENTATION = {
@@ -39,6 +40,7 @@ class Page < ActiveRecord::Base
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
     'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
     'template' => {icon: 'file-o', appearance: 'warning'},
+    'portal' => {icon: 'globe', appearance: 'success'}
   }.freeze
 
   #---
@@ -67,7 +69,7 @@ class Page < ActiveRecord::Base
   def self.available_purposes
     purposes.slice(
       :route, :primary, :category, :product, :promotion,
-      :dropdown, :megamenu, :template
+      :dropdown, :megamenu, :template, :portal
     )
   end
 
@@ -81,16 +83,16 @@ class Page < ActiveRecord::Base
   end
 
   def can_have_content?
-    primary? || template?
+    primary? || template? || portal?
   end
 
   def needs_resource?
-    category? || product? || promotion?
+    category? || product? || promotion? || portal?
   end
 
   def movable?
     route? || primary? || category? || product? || promotion? ||
-    dropdown? || megamenu? || template?
+    dropdown? || megamenu? || template? || portal?
   end
 
   def can_have_albums?
@@ -148,6 +150,8 @@ class Page < ActiveRecord::Base
       show_promotion_path(resource)
     when dropdown? || megamenu?
       children.first.path
+    when portal?
+      resource.to_url
     else nil
     end
   end
