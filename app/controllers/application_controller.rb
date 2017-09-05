@@ -13,17 +13,19 @@ class ApplicationController < ActionController::Base
 
   #---
   # Before doing anything else, set current_store, current_portal,
-  # or both based on request.host and request.domain.
+  # current_portal_hostname, based on request.host and request.domain.
   def set_current_portal_and_store
     hostname = Hostname.find_by(fqdn: request.host)
     resource = hostname.resource
     if resource.is_a?(Portal)
       @current_portal = resource
+      @current_portal_hostname = hostname
     else
       @current_store = resource
       if hostname.is_subdomain?
         domain = Hostname.find_by(fqdn: request.domain)
         @current_portal = domain.resource
+        @current_portal_hostname = domain
       end
     end
   end
@@ -63,10 +65,14 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_portal, :current_store, :current_site_name, :current_theme, :standalone_store?, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
+  helper_method :current_portal, :current_portal_hostname, :current_store, :current_site_name, :current_theme, :standalone_store?, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
 
   def current_portal
     @current_portal
+  end
+
+  def current_portal_hostname
+    @current_portal_hostname
   end
 
   def current_store
