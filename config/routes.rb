@@ -49,9 +49,6 @@ Rails.application.routes.draw do
   # 7) show a receipt
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 
-  # Snippets
-  get '/snippets/:type/:id', to: 'snippets#show', as: :show_snippet
-
   # Product specific routes.
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
 
