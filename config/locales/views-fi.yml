@@ -127,11 +127,6 @@ fi:
         show_resource: Näytä kohde
       layout:
         new_section: Uusi lohko
-    portals:
-      index:
-        new_portal: Uusi portaali
-      new:
-        new_portal: Uusi portaali
     pricing_groups:
       index:
         new_pricing_group: Uusi hintaryhmä
@@ -207,7 +202,6 @@ fi:
       new:
         new_store: Uusi kauppa
       form:
-        subdomain_help_html: Tämä aladomain muodostaa kaupan osoitteen portaalin sisällä.
         slug_help_html: Tunniste luodaan automaattisesti.
         order_sequence_help_html: "Ensimmäinen tilaus saa tämän arvon plus yksi: <strong>0000</strong> antaa <strong>0001</strong>, <strong>AAA</strong> antaa <strong>AAB</strong>"
     tax_categories:

@@ -162,7 +162,7 @@ class Admin::ProductsController < ApplicationController
 
     # Restrict searching to products in current store.
     def search_params
-      params = {store_id: current_store.id}
+      params = {store: current_store}
       params.merge!(vendor_id: current_user.id) if current_user.vendor?
       @query.merge(params)
     end

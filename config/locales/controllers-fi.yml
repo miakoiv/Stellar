@@ -58,13 +58,6 @@ fi:
         notice: "Sivu %{page} päivitetty."
       destroy:
         notice: "Sivu %{page} poistettu."
-    portals:
-      create:
-        notice: "Portaali %{portal} luotu."
-      update:
-        notice: "Portaali %{portal} päivitetty."
-      destroy:
-        notice: "Portaali %{portal} poistettu."
     pricing_groups:
       create:
         notice: "Hintaryhmä %{pricing_group} luotu."

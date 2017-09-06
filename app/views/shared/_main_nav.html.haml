@@ -2,7 +2,7 @@
   %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#side-nav'}}
     = icon('bars')
   .navbar-header
-    = link_to branding(current_store), standalone_store? ? root_path : root_url(host: current_hostname.parent_hostname.fqdn), class: 'navbar-brand'
+    = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).fqdn), class: 'navbar-brand'
   - unless current_store.detach_menu?
     %ul.nav.navbar-nav.responsive
       = render partial: @header.children.live, locals: {navmenu: false}

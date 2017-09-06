@@ -4,7 +4,7 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        = f.select :category_ids, current_portal.category_options, {}, {multiple: true, class: 'selectize'}
+        = f.select :category_ids, option_groups_from_collection_for_select(current_store.member_stores, :available_categories, :name, :id, :to_option, @department.categories.pluck(:id)), {}, {multiple: true, class: 'selectize selectize-tall'}
       - unless locked
         %fieldset.actions
           = f.form_group do

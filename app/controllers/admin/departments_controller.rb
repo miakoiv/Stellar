@@ -14,7 +14,7 @@ class Admin::DepartmentsController < ApplicationController
   # GET /admin/departments
   # GET /admin/departments.json
   def index
-    @departments = current_portal.departments
+    @departments = current_store.departments
   end
 
   # GET /admin/departments/1
@@ -24,7 +24,7 @@ class Admin::DepartmentsController < ApplicationController
 
   # GET /admin/departments/new
   def new
-    @department = current_portal.departments.build
+    @department = current_store.departments.build
   end
 
   # GET /admin/departments/1/edit
@@ -34,7 +34,7 @@ class Admin::DepartmentsController < ApplicationController
   # POST /admin/departments
   # POST /admin/departments.json
   def create
-    @department = current_portal.departments.build(department_params)
+    @department = current_store.departments.build(department_params.merge(priority: current_store.departments.count))
 
     respond_to do |format|
       if @department.save
@@ -77,7 +77,7 @@ class Admin::DepartmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_department
-      @department = current_portal.departments.friendly.find(params[:id])
+      @department = current_store.departments.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

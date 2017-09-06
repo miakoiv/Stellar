@@ -2,6 +2,8 @@
   = menu_item 'cube', title(Product, count: 2), admin_products_path
 - if current_user.has_cached_role?(:category_editor)
   = menu_item 'sitemap', title(Category, count: 2), admin_categories_path
+- if current_store.portal? && current_user.has_cached_role?(:superuser)
+  = menu_item 'umbrella', title(Department, count: 2), admin_departments_path
 - if current_user.has_cached_role?(:property_editor)
   = menu_item 'eyedropper', title(Property, count: 2), admin_properties_path
 - if current_user.has_cached_role?(:page_editor)

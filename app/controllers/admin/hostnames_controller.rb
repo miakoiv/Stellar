@@ -4,16 +4,16 @@ class Admin::HostnamesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
+  before_action :set_store, only: [:create]
 
   authority_actions reorder: 'update'
   authorize_actions_for Hostname
 
   # No layout, this controller never renders HTML.
 
-  # POST /admin/resource/1/hostnames
+  # POST /admin/stores/1/hostnames
   def create
-    @resource = find_resource
-    @hostname = @resource.hostnames.build(hostname_params)
+    @hostname = @store.hostnames.build(hostname_params)
 
     respond_to do |format|
       if @hostname.save
@@ -37,15 +37,8 @@ class Admin::HostnamesController < ApplicationController
   end
 
   private
-    # Finds the associated resource by looking through params.
-    def find_resource
-      params.each do |name, value|
-        if name =~ /(.+)_id$/
-          klass = $1.classify.constantize
-          return klass.find(value)
-        end
-      end
-      nil
+    def set_store
+      @store = Store.find(params[:store_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

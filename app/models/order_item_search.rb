@@ -19,8 +19,8 @@ class OrderItemSearch < Searchlight::Search
     end
   end
 
-  def search_store_id
-    query.where(orders: {store_id: store_id})
+  def search_store
+    query.where(orders: {store_id: store})
   end
 
   def search_order_type_id

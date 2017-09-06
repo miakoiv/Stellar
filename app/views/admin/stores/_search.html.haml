@@ -1,0 +1,18 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_stores_path, method: :get do |f|
+      .row
+        .col-sm-3
+          .form-group
+            = f.text_field :name, placeholder: col(Store, :name), class: 'form-control'
+        .col-sm-3
+          .form-group
+            = f.text_field :hostname, placeholder: col(Store, :hostnames), class: 'form-control'
+        .col-sm-4
+          .form-group
+            = f.select :domain, Hostname.domain.map { |h| [h.to_s, h.id] }, {}, {multiple: true, placeholder: col(Hostname, :parent_hostname_id), class: 'selectize'}
+        .col-sm-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

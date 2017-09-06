@@ -63,9 +63,6 @@ fi:
       payment:
         one: maksu
         other: maksut
-      portal:
-        one: portaali
-        other: portaalit
       pricing_group:
         one: hintaryhmä
         other: hintaryhmät
@@ -269,14 +266,6 @@ fi:
         order_id: Tilaus
         amount: Maksettu
         created_at: Päiväys
-      portal:
-        hostnames: Osoitteet
-        images: Kuvat
-        name: Nimi
-        store_ids: Kaupat
-        department_ids: Osastot
-        theme: Ulkoasun teema
-        locale: Kieli
       pricing_group:
         name: Nimi
         markup_percent: Lisä-%
@@ -411,9 +400,10 @@ fi:
         order_xml: Tilauksien XML-vienti
         superuser: Lisäasetukset
         hostnames: Osoitteet
+        network: Verkosto
         images: Kuvat
-        portal_ids: Portaalit
         erp_number: ERP-numero
+        portal: Kauppaportaali
         name: Nimi
         slug: Tunniste
         theme: Ulkoasun teema

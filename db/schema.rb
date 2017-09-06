@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905071601) do
+ActiveRecord::Schema.define(version: 20170905122049) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -163,15 +163,13 @@ ActiveRecord::Schema.define(version: 20170905071601) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "departments", force: :cascade do |t|
-    t.integer  "portal_id",  limit: 4
-    t.string   "name",       limit: 255
-    t.string   "slug",       limit: 255
-    t.integer  "priority",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer "store_id", limit: 4
+    t.string  "name",     limit: 255
+    t.string  "slug",     limit: 255
+    t.integer "priority", limit: 4
   end
 
-  add_index "departments", ["portal_id"], name: "index_departments_on_portal_id", using: :btree
+  add_index "departments", ["store_id"], name: "index_departments_on_store_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",           limit: 255, null: false
@@ -187,9 +185,8 @@ ActiveRecord::Schema.define(version: 20170905071601) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "hostnames", force: :cascade do |t|
-    t.integer  "resource_id",        limit: 4
+    t.integer  "store_id",           limit: 4,               null: false
     t.integer  "parent_hostname_id", limit: 4
-    t.string   "resource_type",      limit: 255
     t.string   "fqdn",               limit: 255,             null: false
     t.integer  "priority",           limit: 4,   default: 0, null: false
     t.datetime "created_at",                                 null: false
@@ -198,7 +195,7 @@ ActiveRecord::Schema.define(version: 20170905071601) do
 
   add_index "hostnames", ["fqdn"], name: "index_hostnames_on_fqdn", using: :btree
   add_index "hostnames", ["parent_hostname_id"], name: "index_hostnames_on_parent_hostname_id", using: :btree
-  add_index "hostnames", ["resource_type", "resource_id"], name: "index_hostnames_on_resource_type_and_resource_id", using: :btree
+  add_index "hostnames", ["store_id"], name: "index_hostnames_on_store_id", using: :btree
 
   create_table "iframes", force: :cascade do |t|
     t.integer  "product_id", limit: 4
@@ -407,20 +404,6 @@ ActiveRecord::Schema.define(version: 20170905071601) do
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
-
-  create_table "portals", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.text     "settings",   limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "portals_stores", id: false, force: :cascade do |t|
-    t.integer "portal_id", limit: 4, null: false
-    t.integer "store_id",  limit: 4, null: false
-  end
-
-  add_index "portals_stores", ["portal_id", "store_id"], name: "index_portals_stores_on_portal_id_and_store_id", unique: true, using: :btree
 
   create_table "pricing_groups", force: :cascade do |t|
     t.integer  "store_id",       limit: 4
@@ -635,12 +618,13 @@ ActiveRecord::Schema.define(version: 20170905071601) do
 
   create_table "stores", force: :cascade do |t|
     t.integer  "erp_number",   limit: 4
+    t.boolean  "portal",                     default: false, null: false
     t.string   "name",         limit: 255
     t.string   "slug",         limit: 255
-    t.string   "country_code", limit: 2,     null: false
+    t.string   "country_code", limit: 2,                     null: false
     t.text     "settings",     limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   create_table "tax_categories", force: :cascade do |t|

@@ -12,7 +12,9 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores
   # GET /admin/stores.json
   def index
-    @stores = Store.all
+    @query = saved_search_query('store', 'admin_store_search')
+    @search = StoreSearch.new(@query)
+    @stores = @search.results
   end
 
   # GET /admin/stores/1
@@ -79,7 +81,7 @@ class Admin::StoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(
-        :name, :locale, :country_code,
+        :portal, :name, :locale, :country_code,
         :admit_guests, :allow_shopping, :accept_credit_cards,
         :tracking_code, :maps_api_key, :facebook_pixel_id, :tawkto_site_id,
         :manufacturer_template_id, :reseller_template_id, :quotation_template_id,

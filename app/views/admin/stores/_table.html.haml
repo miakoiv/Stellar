@@ -1,0 +1,26 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-4= col(Store, :name)
+        %th.col-min
+        %th= col(Store, :network)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @stores do |store|
+        %td= image_variant_tag store.cover_image
+        %td= store.name
+        %td= icon('globe') if store.portal?
+        %td
+          - store.store_portals.each do |portal|
+            %span.label.label-primary= portal
+          - store.member_stores.each do |member|
+            %span.label.label-default= member
+        %td.actions
+          - if current_store != store && store.hostnames.any?
+            = link_to icon('bookmark', t('actions.select')), admin_stores_url(host: (store.hostname_at(current_store) || store.primary_host).fqdn), class: 'btn btn-default btn-sm'
+          = link_to icon('info', t('actions.show')), admin_store_path(store), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(store)
+            = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store), class: 'btn btn-default btn-sm'

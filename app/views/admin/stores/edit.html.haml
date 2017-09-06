@@ -19,7 +19,7 @@
 
     .tab-content
       = tab_pane 'hostnames', class: 'in active' do
-        = render partial: 'admin/hostnames/edit_table', object: @store, as: :resource
+        = render partial: 'admin/hostnames/edit_table', object: @store, as: :store
       = tab_pane 'images' do
         = render partial: 'admin/images/edit_collection', object: @store, as: :imageable
         = render partial: 'admin/images/dropzone', object: @store, as: :imageable

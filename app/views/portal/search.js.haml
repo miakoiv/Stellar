@@ -1,9 +1,0 @@
-$masonry = $('.masonry-grid');
-$items = $("#{j render partial: 'product', collection: @products}");
-
-$masonry.masonryReveal($items);
-
-- if @products.last_page?
-  $('.pagination').html('');
-- else
-  $('.pagination').html("#{j link_to_next_page(@products, loading_spinner, params: params, remote: true)}")

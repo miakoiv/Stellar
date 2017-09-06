@@ -63,7 +63,7 @@ class Admin::CustomerAssetsController < ApplicationController
     # Restrict searching to customer assets in current store.
     def search_params
       @query.merge(
-        store_id: current_store.id
+        store: current_store
       )
     end
 end

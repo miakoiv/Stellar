@@ -19,13 +19,16 @@ class StoreController < ApplicationController
 
   before_action :set_header_and_footer
   before_action :set_categories,
-    only: [:front, :search, :show_page, :cart, :show_category, :show_promotion, :show_product]
+    except: [:index, :lookup, :delete_cart, :pricing, :order_product]
+  before_action :set_departments,
+    except: [:index, :lookup, :delete_cart, :pricing, :order_product]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category]
+  before_action :find_department, only: [:show_department]
   before_action :find_promotion, only: [:show_promotion]
   before_action :find_product, only: [:show_product]
   before_action :enable_navbar_search,
-    only: [:front, :show_category, :show_promotion, :show_product]
+    only: [:front, :show_category, :show_department, :show_promotion, :show_product]
 
   # GET /
   def index
@@ -98,6 +101,13 @@ class StoreController < ApplicationController
     @products = @search.results.visible.sorted(@category.product_scope)
   end
 
+  # GET /department/:department_id
+  def show_department
+    @products = @department.products.live.random.page(params[:page]).per(24)
+
+    respond_to :js, :html
+  end
+
   # GET /promotion/:promotion_id
   def show_promotion
     @products = @promotion.products.visible
@@ -138,6 +148,14 @@ class StoreController < ApplicationController
       @category = selected.first_with_products
       if @category != selected
         return redirect_to show_category_path(@category)
+      end
+    end
+
+    # Find department by friendly id in `department_id`, including history.
+    def find_department
+      @department = @departments.friendly.find(params[:department_id])
+      if request.path != show_department_path(@department)
+        return redirect_to show_department_path(@department), status: :moved_permanently
       end
     end
 
@@ -190,11 +208,11 @@ class StoreController < ApplicationController
 
     # Restrict searching to live products in current store.
     def search_params
-      @query.merge(store_id: current_store.id, live: true)
+      @query.merge(store: current_store.member_stores.presence || current_store, live: true)
     end
 
     # Product filtering in the current category.
     def filter_params
-      @query.merge(store_id: current_store.id, live: true, categories: [@category])
+      @query.merge(store: current_store, live: true, categories: [@category])
     end
 end

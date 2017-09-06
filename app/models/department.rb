@@ -9,7 +9,7 @@ class Department < ActiveRecord::Base
   friendly_id :slugger, use: [:slugged, :history]
 
   #---
-  belongs_to :portal
+  belongs_to :store
 
   # Departments may be connected to any number of product categories.
   has_and_belongs_to_many :categories, -> { merge(Category.live) }
@@ -22,7 +22,7 @@ class Department < ActiveRecord::Base
 
   #---
   def slugger
-    [:name, [:name, -> { portal.name }]]
+    [:name, [:name, -> { store.name }]]
   end
 
   def should_generate_new_friendly_id?

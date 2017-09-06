@@ -51,13 +51,6 @@ es:
         notice: "Página %{page} subido."
       destroy:
         notice: "Página %{page} eliminado."
-    portals:
-      create:
-        notice: "Portal %{portal} creado."
-      update:
-        notice: "Portal %{portal} subido."
-      destroy:
-        notice: "Portal %{portal} eliminado."
     pricing_groups:
       create:
         notice: "Grupo de precios %{pricing_group} creado."

@@ -1,4 +1,0 @@
-= form_for @search, url: portal_search_path, method: :get, enforce_utf8: false, html: {id: 'portal-search', class: 'navbar-form navbar-left', role: 'search'} do
-  .form-group.has-feedback
-    = search_field :search, :keyword, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
-    %span.form-control-feedback= icon('search')

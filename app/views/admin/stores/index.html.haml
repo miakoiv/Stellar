@@ -4,25 +4,5 @@
       = icon('plus', t('.new_store'))
   %h1= icon('paw', title(Store, count: 2))
 
-.table-responsive
-  %table.table.table-striped.table-hover.table-loose
-    %thead
-      %tr
-        %th.col-xs-1
-        %th= col(Store, :name)
-        %th= col(Store, :portal_ids)
-        %th.actions
-
-    %tbody
-      = content_tag_for :tr, @stores do |store|
-        %td= image_variant_tag store.cover_image
-        %td= store.name
-        %td
-          - store.portals.each do |portal|
-            = image_variant_tag(portal.cover_image, :icon, title: portal, data: {toggle: 'tooltip'})
-        %td.actions
-          - if current_store != store && store.hostnames.any?
-            = link_to icon('bookmark', t('actions.select')), admin_stores_url(host: store.portals.include?(current_portal) ? store.hostname_at(current_portal).fqdn : store.primary_host.fqdn), class: 'btn btn-default btn-sm'
-          = link_to icon('info', t('actions.show')), admin_store_path(store), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_store_path(store), class: 'btn btn-default btn-sm'
+= render partial: 'search'
+= render partial: 'table'

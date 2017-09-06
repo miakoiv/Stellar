@@ -117,11 +117,6 @@ es:
         new_page: Nueva página
       new:
         new_page: Nueva página
-    portals:
-      index:
-        new_portal: Nuevo portal
-      new:
-        new_portal: Nuevo portal
     pricing_groups:
       index:
         new_pricing_group: Nuevo grupo de precios
@@ -184,7 +179,6 @@ es:
       new:
         new_store: Nueva tienda
       form:
-        subdomain_help_html: Esto es el subdominio para esta tienda dentro del portal de los dominios
         slug_help_html: Esto es un campo generado automaticamente
         order_sequence_help_html: "El numero de predido inicial sera este más uno: <strong>0000</strong> se convierte en <strong>0001</strong>, <strong>AAA</strong> se convierte en <strong>AAB</strong>"
     tax_categories:

@@ -58,9 +58,6 @@ es:
       payment:
         one: Metodo de pago
         other: Metodos de pago
-      portal:
-        one: Portal
-        other: Portales
       pricing_group:
         one: Grupo de precios
         other: Grupos de precios
@@ -244,14 +241,6 @@ es:
         order_id: Pedido
         amount: Pagado
         created_at: Fecha
-      portal:
-        hostnames: Direcciones
-        images: Imagenes
-        name: Nombre
-        store_ids: Tiendas
-        department_ids: Departamentos
-        theme: Tema de exhibición
-        locale: Idioma
       pricing_group:
         name: Nombre
         markup_percent: Incremento del precio %
@@ -364,8 +353,8 @@ es:
         superuser: Avanzado
         hostnames: Direcciones
         images: Imagenes
-        portal_ids: Portales
         erp_number: Número ERP
+        portal: Portal
         name: Nombre
         slug: Abreviatura
         theme: Tema de exhibición

@@ -11,8 +11,8 @@ class InventoryItemSearch < Searchlight::Search
     InventoryItem.includes(:product).order('products.title', 'products.subtitle')
   end
 
-  def search_store_id
-    query.joins(:inventory).where(inventories: {store_id: store_id})
+  def search_store
+    query.joins(:inventory).where(inventories: {store_id: store})
   end
 
   def search_code

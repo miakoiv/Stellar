@@ -26,8 +26,8 @@ class ProductSearch < Searchlight::Search
     Product.includes(:categories)
   end
 
-  def search_store_id
-    query.where(store_id: store_id)
+  def search_store
+    query.where(store: store)
   end
 
   def search_vendor_id

@@ -2,7 +2,7 @@
   .row
     .col-sm-12
       = f.hidden_field :resource_type, value: 'Category'
-      = f.select :resource_id, current_store.categories.live.map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
+      = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
   .row
     .col-sm-6
       .form-group

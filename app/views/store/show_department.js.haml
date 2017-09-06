@@ -1,0 +1,4 @@
+$masonry = $('.masonry-grid');
+$items = $("#{j render partial: 'departments/product_card', collection: @products, as: :product}");
+
+$masonry.masonryReveal($items);

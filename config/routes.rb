@@ -1,20 +1,6 @@
-class PortalConstraint
-  def matches?(request)
-    hostname = Hostname.find_by(fqdn: request.host)
-    hostname.resource.is_a?(Portal)
-  end
-end
-
 Rails.application.routes.draw do
 
   devise_for :users
-
-  # Portal routes.
-  constraints(PortalConstraint.new) do
-    get '/', to: 'portal#index'
-    get '/search', to: 'portal#search', as: :portal_search
-    get '/department/:department_id', to: 'portal#show_department', as: :show_department
-  end
 
   root 'store#index'
 
@@ -69,8 +55,9 @@ Rails.application.routes.draw do
   # Product specific routes.
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
 
-  # Category, promotion and product views.
+  # Category, department, promotion, and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/department/:department_id', to: 'store#show_department', as: :show_department
   get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
   get '/product/:product_id(/:category_id)', to: 'store#show_product', as: :show_product
 

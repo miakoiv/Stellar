@@ -46,16 +46,20 @@ class Store < ActiveRecord::Base
   # Home country, used as default shipping and billing country.
   belongs_to :country, foreign_key: :country_code
 
-  # A store has one or more hostnames it can be found at.
-  has_many :hostnames, as: :resource, dependent: :destroy
+  # The hostnames assigned to a store form a network of store portals
+  # and member stores through domain/subdomain associations.
+  has_many :hostnames, dependent: :destroy
+  has_many :domain_hostnames, through: :hostnames
+  has_many :subdomain_hostnames, through: :hostnames
 
-  # A store may appear at multiple portals.
-  has_and_belongs_to_many :portals
+  has_many :store_portals, -> {distinct}, through: :domain_hostnames, source: :store
+  has_many :member_stores, -> {distinct}, through: :subdomain_hostnames, source: :store
 
   # All these associations are dependent of the store.
   with_options dependent: :destroy do |store|
     store.has_many :inventories
     store.has_many :categories
+    store.has_many :departments
     store.has_many :products
     store.has_many :properties
     store.has_many :orders
@@ -80,6 +84,7 @@ class Store < ActiveRecord::Base
   accepts_nested_attributes_for :users, limit: 1
   accepts_nested_attributes_for :tax_categories, limit: 1
 
+  scope :portal, -> { where(portal: true) }
   scope :all_except, -> (this) { where.not(id: this) }
 
   #---
@@ -145,8 +150,9 @@ class Store < ActiveRecord::Base
     }
   end
 
-  def hostname_at(portal)
-    hostnames.subdomain.find_by(parent_hostname: portal.hostnames)
+  # Finds a subdomain hostname belonging to given domain hostname.
+  def hostname_at(domain)
+    hostnames.subdomain.find_by(domain_hostname: domain.hostnames)
   end
 
   # Returns the first hostname for mailers and such with no request context.
@@ -157,6 +163,10 @@ class Store < ActiveRecord::Base
   # Returns the first category. See Page#path.
   def first_category
     categories.live.root
+  end
+
+  def available_categories
+    categories.live.order(:lft)
   end
 
   # Properties flagged searchable.

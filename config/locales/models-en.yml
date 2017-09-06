@@ -63,9 +63,6 @@ en:
       payment:
         one: payment
         other: payments
-      portal:
-        one: portal
-        other: portals
       pricing_group:
         one: pricing group
         other: pricing groups
@@ -269,14 +266,6 @@ en:
         order_id: Order
         amount: Paid
         created_at: Date
-      portal:
-        hostnames: Addresses
-        images: Images
-        name: Name
-        store_ids: Stores
-        department_ids: Departments
-        theme: Display theme
-        locale: Language
       pricing_group:
         name: Name
         markup_percent: Markup %
@@ -411,9 +400,10 @@ en:
         order_xml: Order XML export
         superuser: Advanced
         hostnames: Addresses
+        network: Network
         images: Images
-        portal_ids: Portals
         erp_number: ERP number
+        portal: Store portal
         name: Name
         slug: Slug
         theme: Display theme

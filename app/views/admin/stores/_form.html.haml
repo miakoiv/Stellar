@@ -14,6 +14,8 @@
       .tab-content
         = tab_pane 'store-admin', class: 'in active' do
           %fieldset{disabled: locked}
+            = f.form_group do
+              = f.check_box :portal
             = f.text_field :name, required: true
             = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
             = f.select :country_code, Store.country_options, {}, {class: 'selectize'}

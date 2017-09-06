@@ -7,24 +7,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #---
-  prepend_before_action :set_current_portal_and_store
+  prepend_before_action :orientate
   before_action :set_locale
   after_action :prepare_unobtrusive_flash
 
   #---
-  # Before doing anything else, set current_hostname, current_store,
-  # current_portal, based on request.host and request.domain.
-  def set_current_portal_and_store
-    @current_hostname = hostname = Hostname.find_by(fqdn: request.host)
-    resource = hostname.resource
-    if resource.is_a?(Portal)
-      @current_portal = resource
-    else
-      @current_store = resource
-      if hostname.parent_hostname.present?
-        @current_portal = hostname.parent_hostname.resource
-      end
-    end
+  # Before doing anything else, set current hostname and current store
+  # based on request.host.
+  def orientate
+    @current_hostname = Hostname.find_by(fqdn: request.host)
+    return render nothing: true, status: :bad_request if @current_hostname.nil?
+    @current_store = @current_hostname.store
   end
 
   # Authenticate user, but skip authentication if guests are admitted.
@@ -62,14 +55,10 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_portal, :current_store, :current_site_name, :current_theme, :standalone_store?, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_site_name, :current_theme, :current_pricing, :shopping_cart, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
-  end
-
-  def current_portal
-    @current_portal
   end
 
   def current_store
@@ -77,15 +66,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_site_name
-    @current_store.present? && @current_store.name || @current_portal.name
+    @current_store.present? && @current_store.name
   end
 
   def current_theme
-    @current_store.present? && @current_store.theme || @current_portal.theme
-  end
-
-  def standalone_store?
-    @current_portal.nil?
+    @current_store.present? && @current_store.theme
   end
 
   def current_pricing
@@ -136,6 +121,10 @@ class ApplicationController < ActionController::Base
     def set_categories
       @live_categories = current_store.categories.live.order(:lft)
       @categories = @live_categories.roots
+    end
+
+    def set_departments
+      @departments = current_store.departments
     end
 
     # Pricing group is set by a before_action. Changing the pricing group
