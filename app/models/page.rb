@@ -93,6 +93,7 @@ class Page < ActiveRecord::Base
   end
 
   def movable?
+    return false if needs_resource? && resource.nil?
     route? || primary? || category? || product? || promotion? ||
     department? || dropdown? || megamenu? || template? || portal?
   end
