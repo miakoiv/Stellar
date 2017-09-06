@@ -14,6 +14,7 @@ en:
           category: Category
           product: Product
           promotion: Promotion
+          department: Department
           header: Header navigation
           footer: Footer navigation
           dropdown: Dropdown menu

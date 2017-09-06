@@ -21,6 +21,7 @@ class Page < ActiveRecord::Base
     category: 2,        # link to category
     product: 3,         # link to product
     promotion: 4,       # link to promotion
+    department: 5,      # link to department
     header: 10,         # container for main navigation
     footer: 11,         # container for footer links
     dropdown: 20,       # dropdown container for other pages
@@ -35,6 +36,7 @@ class Page < ActiveRecord::Base
     'category' => {icon: 'sitemap', appearance: 'info'},
     'product' => {icon: 'cube', appearance: 'info'},
     'promotion' => {icon: 'tag', appearance: 'info'},
+    'department' => {icon: 'umbrella', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
@@ -68,7 +70,7 @@ class Page < ActiveRecord::Base
 
   def self.available_purposes
     purposes.slice(
-      :route, :primary, :category, :product, :promotion,
+      :route, :primary, :category, :product, :promotion, :department,
       :dropdown, :megamenu, :template, :portal
     )
   end
@@ -87,12 +89,12 @@ class Page < ActiveRecord::Base
   end
 
   def needs_resource?
-    category? || product? || promotion? || portal?
+    category? || product? || promotion? || department? || portal?
   end
 
   def movable?
     route? || primary? || category? || product? || promotion? ||
-    dropdown? || megamenu? || template? || portal?
+    department? || dropdown? || megamenu? || template? || portal?
   end
 
   def can_have_albums?
@@ -136,8 +138,9 @@ class Page < ActiveRecord::Base
   end
 
   # Path to a page object depends on its purpose. Route and primary pages
-  # use plain page routes, product/category/promotion pages point to their
-  # resource. Dropdown and megamenu pages point to their first child.
+  # use plain page routes, product/category/promotion/department pages
+  # point to their resource. Dropdown and megamenu pages point to their
+  # first child.
   def path
     case
     when route? || primary?
@@ -148,6 +151,8 @@ class Page < ActiveRecord::Base
       show_product_path(resource)
     when promotion?
       show_promotion_path(resource)
+    when department?
+      show_department_path(resource)
     when dropdown? || megamenu?
       children.first.path
     when portal?
@@ -162,7 +167,7 @@ class Page < ActiveRecord::Base
   def active_link_options
     case slug
     when 'front'
-      [['store'], ['show_category', 'show_product', 'show_promotion']]
+      [['store'], ['show_category', 'show_product', 'show_promotion', 'show_department']]
     when 'cart'
       [['store'], ['cart']]
     end

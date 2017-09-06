@@ -14,6 +14,7 @@ fi:
           category: Tuoteryhmä
           product: Tuote
           promotion: Kampanja
+          department: Osasto
           header: Päävalikko
           footer: Alavalikko
           dropdown: Pudotusvalikko
