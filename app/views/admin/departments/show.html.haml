@@ -5,8 +5,10 @@
     = link_to edit_admin_department_path(@department), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1
-    = icon('umbrella', @department.name)
+    = icon('umbrella', @department)
 
 .row
   .col-md-6
     = render partial: 'form', locals: {locked: true}
+  .col-md-6
+    = render partial: 'admin/images/collection', object: @department, as: :imageable

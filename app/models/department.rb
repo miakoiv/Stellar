@@ -4,6 +4,7 @@ class Department < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Imageable
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
