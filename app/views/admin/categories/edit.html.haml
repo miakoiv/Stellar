@@ -27,5 +27,7 @@
       data: JSON.stringify data
       contentType: 'application/json; charset=utf-8'
 
+  $('##{dom_id(@category)}').closest('.dd-item').addClass 'active'
+
   $(window).scrollTo $('##{dom_id(@category)}'), 300,
     offset: -$('.navbar').outerHeight true
