@@ -8,7 +8,7 @@ class StoreSearch < Searchlight::Search
 
   #---
   def base_query
-    Store.order({portal: :desc}, :name)
+    Store.order(:name)
   end
 
   def search_name
