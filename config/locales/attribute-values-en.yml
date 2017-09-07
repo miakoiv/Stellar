@@ -10,7 +10,7 @@ en:
       page:
         purpose:
           route: Routing entry
-          primary: Primary content
+          primary: Content page
           category: Category
           product: Product
           promotion: Promotion
@@ -20,7 +20,8 @@ en:
           dropdown: Dropdown menu
           megamenu: Mega menu
           template: Template
-          portal: Portal promotion
+          portal: Portal page
+          proxy: Member store page
       property:
         value_type:
           string: String

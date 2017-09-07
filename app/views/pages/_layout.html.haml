@@ -1,1 +1,2 @@
-= render partial: 'sections/section', collection: page.sections, as: :section
+- sections = page.proxy? ? page.resource.sections : page.sections
+= render partial: 'sections/section', collection: sections, as: :section

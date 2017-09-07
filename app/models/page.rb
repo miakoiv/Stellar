@@ -27,7 +27,8 @@ class Page < ActiveRecord::Base
     dropdown: 20,       # dropdown container for other pages
     megamenu: 21,       # megamenu container for other pages
     template: 30,       # printed page template
-    portal: 40,         # promotional material for portals
+    portal: 40,         # page with content sections meant for portals
+    proxy: 41,          # proxy to a portal page for portal navigation
   }
 
   PRESENTATION = {
@@ -42,7 +43,8 @@ class Page < ActiveRecord::Base
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
     'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
     'template' => {icon: 'file-o', appearance: 'warning'},
-    'portal' => {icon: 'globe', appearance: 'success'}
+    'portal' => {icon: 'globe', appearance: 'success'},
+    'proxy' => {icon: 'share', appearance: 'success'},
   }.freeze
 
   #---
@@ -71,7 +73,7 @@ class Page < ActiveRecord::Base
   def self.available_purposes
     purposes.slice(
       :route, :primary, :category, :product, :promotion, :department,
-      :dropdown, :megamenu, :template, :portal
+      :dropdown, :megamenu, :template, :portal, :proxy
     )
   end
 
@@ -89,13 +91,13 @@ class Page < ActiveRecord::Base
   end
 
   def needs_resource?
-    category? || product? || promotion? || department? || portal?
+    category? || product? || promotion? || department? || portal? || proxy?
   end
 
   def movable?
     return false if needs_resource? && resource.nil?
     route? || primary? || category? || product? || promotion? ||
-    department? || dropdown? || megamenu? || template? || portal?
+    department? || dropdown? || megamenu? || template? || portal? || proxy?
   end
 
   def can_have_albums?
@@ -138,13 +140,11 @@ class Page < ActiveRecord::Base
     "pages/purposes/#{purpose}"
   end
 
-  # Path to a page object depends on its purpose. Route and primary pages
-  # use plain page routes, product/category/promotion/department pages
-  # point to their resource. Dropdown and megamenu pages point to their
-  # first child.
+  # Path to a page object based on purpose for rendering
+  # navigation nodes pointing to the right place.
   def path
     case
-    when route? || primary?
+    when route? || primary? || proxy?
       show_page_path(self)
     when category?
       show_category_path(resource)

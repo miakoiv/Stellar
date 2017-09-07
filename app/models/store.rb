@@ -78,6 +78,9 @@ class Store < ActiveRecord::Base
   has_one :header, -> { merge(Page.header) }, class_name: 'Page'
   has_one :footer, -> { merge(Page.footer) }, class_name: 'Page'
 
+  # Pages intended for portals.
+  has_many :portal_pages, -> { merge(Page.portal).merge(Page.live) }, class_name: 'Page'
+
   has_many :inventory_items, through: :inventories
   has_many :shipping_cost_products, through: :shipping_methods
 

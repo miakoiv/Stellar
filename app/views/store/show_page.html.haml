@@ -1,7 +1,9 @@
 - meta_tags_for(@page)
 
 #static-wrap.layout-container{class: @page.albums.any? && 'has-sidebar'}
-  - if @page.sections.any?
+  - if @page.proxy?
+    = render @page.resource.sections
+  - elsif @page.sections.any?
     = render @page.sections
   - else
     %div{class: @page.wysiwyg? && 'container'}

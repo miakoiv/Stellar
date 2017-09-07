@@ -1,0 +1,2 @@
+= f.hidden_field :resource_type, value: 'Page'
+= f.select :resource_id, option_groups_from_collection_for_select(current_store.member_stores, :portal_pages, :to_s, :id, :to_s, @page.resource_id), {include_blank: blank}, {class: 'selectize'}

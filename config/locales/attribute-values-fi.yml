@@ -10,7 +10,7 @@ fi:
       page:
         purpose:
           route: Reitityspiste
-          primary: Ensisijainen sisältö
+          primary: Sisältösivu
           category: Tuoteryhmä
           product: Tuote
           promotion: Kampanja
@@ -20,7 +20,8 @@ fi:
           dropdown: Pudotusvalikko
           megamenu: Megamenu
           template: Sivupohja
-          portal: Portaalimainos
+          portal: Verkostosivu
+          proxy: Jäsenkaupan sivu
       property:
         value_type:
           string: sanallinen

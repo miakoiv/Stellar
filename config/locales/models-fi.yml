@@ -404,7 +404,7 @@ fi:
         network: Verkosto
         images: Kuvat
         erp_number: ERP-numero
-        portal: Kauppaportaali
+        portal: Kauppaverkosto
         name: Nimi
         slug: Tunniste
         theme: Ulkoasun teema
