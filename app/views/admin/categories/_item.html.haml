@@ -1,4 +1,5 @@
 = link_to edit_admin_category_path(category), remote: true do
+  .dd-handle= drag_handle
   = category
   - unless category.live?
     .dd-widget= icon('eye-slash', title: col(Category, :not_live), data: {toggle: 'tooltip'})

@@ -1,5 +1,4 @@
 %li.dd-item{data: {id: category.id}}
-  .dd-handle= drag_handle
   .dd-content[category]
     = render partial: 'item', object: category, as: :category
   - if category.children_count > 0

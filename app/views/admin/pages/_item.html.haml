@@ -1,4 +1,6 @@
 = link_to edit_admin_page_path(page), remote: true do
+  - if page.movable?
+    .dd-handle= drag_handle
   .dd-icon= icon(page.icon)
   = page
   .dd-widget
