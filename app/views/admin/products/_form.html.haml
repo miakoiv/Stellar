@@ -142,6 +142,8 @@
         url: '#{query_admin_products_path}'
         type: 'GET'
         dataType: 'json'
+        data:
+          exclusions: #{@product.id}
         error: ->
           callback()
         success: (response) ->
