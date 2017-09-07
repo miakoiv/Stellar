@@ -7,7 +7,7 @@
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
         .navbar-header
-          = link_to branding(current_store.presence || current_portal.presence), root_path, class: 'navbar-brand'
+          = link_to branding(current_store.presence), root_path, class: 'navbar-brand'
     #content-wrap
       #static-wrap.layout-container
         = yield
