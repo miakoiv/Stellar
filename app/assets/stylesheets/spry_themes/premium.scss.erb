@@ -440,11 +440,13 @@ $bg-tone:           #f6f6f6;
   padding: 10px;
   border: 5px solid transparent;
   background-color: $body-bg;
-}
-.product-card:hover {
-  border-color: $gray-lighter;
- .product-image { transform: scale(1.05); }
- .buy-now .btn { @extend .btn-danger; }
+
+  &:hover {
+    border-color: $gray-lighter;
+
+    > a .product-image { transform: scale(1.05); }
+    > .buy-now .btn { }
+  }
 }
 .product-card a {
   display: block;
