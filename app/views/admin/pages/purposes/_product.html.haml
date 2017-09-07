@@ -1,5 +1,5 @@
 = f.hidden_field :resource_type, value: 'Product'
-= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: @page.resource.present? ? [@page.resource] : [], selected: @page.resource.present? ? [@page.resource_id] : []}}
+= f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: [@page.resource].compact, selected: [@page.resource_id].compact}}
 
 :coffee
   $product = $('#page_resource_id')

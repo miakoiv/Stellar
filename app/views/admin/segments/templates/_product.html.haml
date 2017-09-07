@@ -2,7 +2,7 @@
   .row
     .col-sm-12
       = f.hidden_field :resource_type, value: 'Product'
-      = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: @segment.resource.present? ? [@segment.resource] : [], selected: @segment.resource.present? ? [@segment.resource_id] : []}}
+      = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: [@segment.resource].compact, selected: [@segment.resource_id].compact}}
     .col-sm-12
       = f.text_field :headline
 
