@@ -149,6 +149,7 @@ en:
         amount: Amount
         value: Value
       department:
+        has_page: Department has a page
         name: Name
         category_ids: Categories
       hostname:

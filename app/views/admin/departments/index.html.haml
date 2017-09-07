@@ -11,6 +11,7 @@
         %th.col-min.hidden-print
         %th.col-min
         %th.col-xs-3= col(Department, :name)
+        %th.col-min
         %th= col(Department, :category_ids)
         %th.actions
 
@@ -19,6 +20,9 @@
         %td.hidden-print= drag_handle
         %td= image_variant_tag department.cover_image
         %td= department.name
+        %td
+          - if department.page.present?
+            = icon('file-o', title: col(Department, :has_page), data: {toggle: 'tooltip'})
         %td
           - department.categories.group_by(&:store).each do |store, categories|
             %span.label.label-primary= store

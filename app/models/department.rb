@@ -16,6 +16,8 @@ class Department < ActiveRecord::Base
   has_and_belongs_to_many :categories, -> { merge(Category.live) }
   has_many :products, through: :categories
 
+  has_one :page, as: :resource, dependent: :destroy
+
   default_scope { sorted }
 
   #---

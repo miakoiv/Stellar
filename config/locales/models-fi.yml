@@ -149,6 +149,7 @@ fi:
         amount: Määrä
         value: Arvo
       department:
+        has_page: Osastolla on sivu
         name: Nimi
         category_ids: Tuoteryhmät
       hostname:

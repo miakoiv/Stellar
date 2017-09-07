@@ -105,6 +105,8 @@ en:
         new_department: New department
       new:
         new_department: New department
+      show:
+        edit_page: Edit page
     inventories:
       index:
         new_inventory: New inventory
