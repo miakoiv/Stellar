@@ -8,6 +8,7 @@ class Promotion < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Imageable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 

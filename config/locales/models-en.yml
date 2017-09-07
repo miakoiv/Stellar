@@ -333,6 +333,7 @@ en:
         not_active: Not in effect
         product_ids_string: Products to add
         category_ids_string: Categories to add
+        images: Images
         has_page: Promotion has a page
       promotion_handler:
         description: Description

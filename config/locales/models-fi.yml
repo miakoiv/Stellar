@@ -333,6 +333,7 @@ fi:
         not_active: Ei voimassa
         product_ids_string: Lisättävät tuotteet
         category_ids_string: Lisättävät tuoteryhmät
+        images: Kuvat
         has_page: Kampanjalla on sivu
       promotion_handler:
         description: Selite

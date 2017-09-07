@@ -13,6 +13,7 @@
   .col-md-7
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
       = nav_tab 'promoted', title(PromotedItem, count: 2), class: 'active'
+      = nav_tab 'images', col(Promotion, :images)
       = nav_tab 'products', t('.add_products')
       = nav_tab 'categories', t('.add_categories')
 
@@ -20,6 +21,9 @@
       = tab_pane 'promoted', class: 'in active' do
         %h2.visible-print-block= title(PromotedItem, count: 2)
         = render partial: 'admin/promoted_items/edit_table', object: @promotion, as: :promotion
+      = tab_pane 'images' do
+        = render partial: 'admin/images/edit_collection', object: @promotion, as: :imageable
+        = render partial: 'admin/images/dropzone', object: @promotion, as: :imageable
       = tab_pane 'products' do
         = render partial: 'admin/promotions/add_products', object: @promotion, as: :promotion
       = tab_pane 'categories' do

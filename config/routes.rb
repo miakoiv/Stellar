@@ -127,6 +127,7 @@ Rails.application.routes.draw do
     end
     resources :promotions do
       resources :promoted_items, shallow: true
+      resources :images, shallow: true
       post :add_products, on: :member
       post :add_categories, on: :member
     end
