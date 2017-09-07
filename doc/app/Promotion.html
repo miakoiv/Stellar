@@ -71,6 +71,10 @@
     <li><span class="include">Authority::Abilities</span>
   
   
+  
+    <li><span class="include">FriendlyId</span>
+  
+  
   </ul>
 </div>
 
@@ -96,6 +100,10 @@
     <li ><a href="#method-i-deactivate_at">#deactivate_at</a>
     
     <li ><a href="#method-i-item_from_order_item">#item_from_order_item</a>
+    
+    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    
+    <li ><a href="#method-i-slugger">#slugger</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -190,10 +198,11 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="handler_types-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">handler_types</span>
   [
     <span class="ruby-string">&#39;PromotionHandler::BulkDiscount&#39;</span>,
+    <span class="ruby-string">&#39;PromotionHandler::BundlePricing&#39;</span>,
     <span class="ruby-string">&#39;PromotionHandler::FreebieBundle&#39;</span>,
     <span class="ruby-string">&#39;PromotionHandler::Vanilla&#39;</span>,
   ]
@@ -235,7 +244,7 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="activate_at-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">activate_at</span>
   <span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">midnight</span>
 <span class="ruby-keyword">end</span></pre>
@@ -268,7 +277,7 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="active-3F-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active?</span>
   (<span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">future?</span>) <span class="ruby-operator">&amp;&amp;</span>
   (<span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">past?</span>)
@@ -303,9 +312,9 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="apply-21-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">order</span>)
-  <span class="ruby-identifier">promotion_handler</span>.<span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">matching_items</span>(<span class="ruby-identifier">order</span>))
+  <span class="ruby-identifier">promotion_handler</span>.<span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">matching_items</span>(<span class="ruby-identifier">order</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -336,9 +345,9 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="available_categories-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_categories</span>
-  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -369,7 +378,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="available_products-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_products</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">products</span>
 <span class="ruby-keyword">end</span></pre>
@@ -402,7 +411,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="deactivate_at-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deactivate_at</span>
   <span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">tomorrow</span>.<span class="ruby-identifier">midnight</span>
 <span class="ruby-keyword">end</span></pre>
@@ -435,9 +444,80 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="item_from_order_item-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">item_from_order_item</span>(<span class="ruby-identifier">order_item</span>)
   <span class="ruby-identifier">promoted_items</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">should_generate_new_friendly_id?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
+  <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-slugger" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">slugger</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="slugger-source">
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
+  [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">store</span>.<span class="ruby-identifier">name</span> }]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -468,7 +548,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -490,7 +570,7 @@ with the matching items.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

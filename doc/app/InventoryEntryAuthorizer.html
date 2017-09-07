@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Portal - Rails Application Documentation</title>
+<title>class InventoryEntryAuthorizer - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,26 +58,11 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActiveRecord::Base
+  <p class="link"><a href="ApplicationAuthorizer.html">ApplicationAuthorizer</a>
   
 </div>
 
-    <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
-
-  <ul class="link-list">
-  
-  
-    <li><span class="include">Authority::Abilities</span>
-  
-  
-  
-    <li><a class="include" href="Imageable.html">Imageable</a>
-  
-  
-  </ul>
-</div>
-
+    
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -85,13 +70,13 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-store_options">::store_options</a>
+    <li ><a href="#method-c-creatable_by-3F">::creatable_by?</a>
     
-    <li ><a href="#method-i-category_options">#category_options</a>
+    <li ><a href="#method-c-deletable_by-3F">::deletable_by?</a>
     
-    <li ><a href="#method-i-description">#description</a>
+    <li ><a href="#method-c-readable_by-3F">::readable_by?</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-c-updatable_by-3F">::updatable_by?</a>
     
   </ul>
 </div>
@@ -99,9 +84,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Portal">
-  <h1 id="class-Portal" class="class">
-    class Portal
+<main role="main" aria-labelledby="class-InventoryEntryAuthorizer">
+  <h1 id="class-InventoryEntryAuthorizer" class="class">
+    class InventoryEntryAuthorizer
   </h1>
 
   <section class="description">
@@ -127,11 +112,11 @@
        </header>
 
     
-      <div id="method-c-store_options" class="method-detail ">
+      <div id="method-c-creatable_by-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">store_options</span><span
-            class="method-args">()</span>
+          <span class="method-name">creatable_by?</span><span
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -145,10 +130,10 @@
           
 
           
-          <div class="method-source-code" id="store_options-source">
-            <pre><span class="ruby-comment"># File app/models/portal.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store_options</span>
-  <span class="ruby-constant">Store</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">s</span>.<span class="ruby-identifier">id</span>] }
+          <div class="method-source-code" id="creatable_by-3F-source">
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_entry_authorizer.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">creatable_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:inventory_manage</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -160,19 +145,11 @@
       </div>
 
     
-    </section>
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Instance Methods</h3>
-       </header>
-
-    
-      <div id="method-i-category_options" class="method-detail ">
+      <div id="method-c-deletable_by-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">category_options</span><span
-            class="method-args">()</span>
+          <span class="method-name">deletable_by?</span><span
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -186,10 +163,10 @@
           
 
           
-          <div class="method-source-code" id="category_options-source">
-            <pre><span class="ruby-comment"># File app/models/portal.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">category_options</span>
-  <span class="ruby-identifier">available_categories</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-node">&quot;#{c.store} ⯈ #{c}&quot;</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>] }.<span class="ruby-identifier">sort</span>
+          <div class="method-source-code" id="deletable_by-3F-source">
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_entry_authorizer.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -201,11 +178,11 @@
       </div>
 
     
-      <div id="method-i-description" class="method-detail ">
+      <div id="method-c-readable_by-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">description</span><span
-            class="method-args">()</span>
+          <span class="method-name">readable_by?</span><span
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -219,10 +196,10 @@
           
 
           
-          <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/portal.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="readable_by-3F-source">
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_entry_authorizer.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">readable_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:inventory_manage</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -234,11 +211,11 @@
       </div>
 
     
-      <div id="method-i-to_s" class="method-detail ">
+      <div id="method-c-updatable_by-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
+          <span class="method-name">updatable_by?</span><span
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -252,10 +229,10 @@
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/portal.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="updatable_by-3F-source">
+            <pre><span class="ruby-comment"># File app/authorizers/inventory_entry_authorizer.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -275,7 +252,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

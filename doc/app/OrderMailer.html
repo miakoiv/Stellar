@@ -85,6 +85,10 @@
     
     <li ><a href="#method-i-order_confirmation">#order_confirmation</a>
     
+    <li ><a href="#method-i-order_notification">#order_notification</a>
+    
+    <li ><a href="#method-i-order_receipt">#order_receipt</a>
+    
     <li ><a href="#method-i-quotation">#quotation</a>
     
     <li class="calls-super" ><a href="#method-i-roadie_options">#roadie_options</a>
@@ -145,13 +149,13 @@ as per confirmations.</p>
 
           
           <div class="method-source-code" id="order_cancellation-source">
-            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_cancellation</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
   <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
 
   <span class="ruby-identifier">headers</span> = {
-    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.host}&quot;</span>,
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
     <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{@order.customer_name} &lt;#{@order.customer_email}&gt;&quot;</span>,
     <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
     <span class="ruby-identifier">cc</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">notified_users</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)
@@ -187,16 +191,100 @@ as per confirmations.</p>
 
           
           <div class="method-source-code" id="order_confirmation-source">
-            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_confirmation</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
   <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
 
   <span class="ruby-identifier">headers</span> = {
-    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.host}&quot;</span>,
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
     <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{@order.customer_name} &lt;#{@order.customer_email}&gt;&quot;</span>,
     <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
-    <span class="ruby-identifier">cc</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">notified_users</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">contact_string</span>
+    <span class="ruby-identifier">cc</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">notified_users</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)
+  }
+  <span class="ruby-identifier">roadie_mail</span>(<span class="ruby-identifier">headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-order_notification" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">order_notification</span><span
+            class="method-args">(order)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Order.html">Order</a> notification for the contact person.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="order_notification-source">
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">order_notification</span>(<span class="ruby-identifier">order</span>)
+  <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
+  <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
+
+  <span class="ruby-identifier">headers</span> = {
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
+    <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">contact_string</span>,
+    <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
+  }
+  <span class="ruby-identifier">roadie_mail</span>(<span class="ruby-identifier">headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-order_receipt" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">order_receipt</span><span
+            class="method-args">(order)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Order.html">Order</a> receipt sent instead of confirmation in
+non-b2b stores. Carbon copies as per confirmation, but blind.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="order_receipt-source">
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">order_receipt</span>(<span class="ruby-identifier">order</span>)
+  <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
+  <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
+
+  <span class="ruby-identifier">headers</span> = {
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
+    <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{@order.customer_name} &lt;#{@order.customer_email}&gt;&quot;</span>,
+    <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
+    <span class="ruby-identifier">bcc</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">notified_users</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_s</span>)
   }
   <span class="ruby-identifier">roadie_mail</span>(<span class="ruby-identifier">headers</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -230,7 +318,7 @@ the sender.</p>
 
           
           <div class="method-source-code" id="quotation-source">
-            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">quotation</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
   <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
@@ -274,14 +362,14 @@ supplied items.</p>
 
           
           <div class="method-source-code" id="vendor_notification-source">
-            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">vendor_notification</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">vendor</span>, <span class="ruby-identifier">items</span>)
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">order</span>
   <span class="ruby-ivar">@store</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>
   <span class="ruby-ivar">@order_items</span> = <span class="ruby-identifier">items</span>
 
   <span class="ruby-identifier">headers</span> = {
-    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.host}&quot;</span>,
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
     <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">to_s</span>,
     <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>)
   }
@@ -329,9 +417,9 @@ supplied items.</p>
 
           
           <div class="method-source-code" id="roadie_options-source">
-            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">roadie_options</span>
-  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">url_options</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">scheme</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;http&#39;</span>})
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">url_options</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">primary_host</span>.<span class="ruby-identifier">fqdn</span>})
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -351,7 +439,7 @@ supplied items.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

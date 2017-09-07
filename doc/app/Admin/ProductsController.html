@@ -91,6 +91,8 @@
     
     <li ><a href="#method-i-index">#index</a>
     
+    <li ><a href="#method-i-make_primary">#make_primary</a>
+    
     <li ><a href="#method-i-new">#new</a>
     
     <li ><a href="#method-i-query">#query</a>
@@ -98,6 +100,8 @@
     <li ><a href="#method-i-show">#show</a>
     
     <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-upload_file">#upload_file</a>
     
   </ul>
 </div>
@@ -152,7 +156,7 @@
 
           
           <div class="method-source-code" id="add_requisite_entries-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 94</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_requisite_entries</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@product</span>
 
@@ -165,9 +169,7 @@
     ).<span class="ruby-identifier">update</span>(<span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">requisite_entries</span>.<span class="ruby-identifier">count</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -198,10 +200,11 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">product_params</span>)
   <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vendor</span> = <span class="ruby-identifier">current_user</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">vendor?</span>
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">priority</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">variants</span>.<span class="ruby-identifier">count</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">variant?</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">save</span>
@@ -243,7 +246,7 @@
 
           
           <div class="method-source-code" id="duplicate-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 84</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@product</span>
   <span class="ruby-identifier">original</span> = <span class="ruby-ivar">@product</span>
@@ -275,15 +278,17 @@
 
         <div class="method-description">
           
-          <p>GET /admin/products/1/edit</p>
+          <p>GET /admin/products/1/edit GET /admin/products/1/edit.js</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@product</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:html</span>, <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -318,7 +323,49 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;product&#39;</span>, <span class="ruby-string">&#39;admin_product_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ProductSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">master</span>.<span class="ruby-identifier">alphabetical</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-make_primary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">make_primary</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/products/1/make_primary.js</p>
+          
+          
+
+          
+          <div class="method-source-code" id="make_primary-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_primary</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@product</span>
+
+  <span class="ruby-ivar">@master</span> = <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">master_product</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@master</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">primary_variant</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>
+    <span class="ruby-ivar">@master</span>.<span class="ruby-identifier">variants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">variant</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">variant</span>.<span class="ruby-identifier">touch</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -351,10 +398,13 @@
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">master</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">slug</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:master</span>])
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">build</span>(
     <span class="ruby-identifier">vendor</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">vendor?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">current_user</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
-    <span class="ruby-identifier">available_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>
+    <span class="ruby-identifier">available_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>,
+    <span class="ruby-identifier">tax_category</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tax_categories</span>.<span class="ruby-identifier">first</span>
   )
+  <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">vary_from</span>(<span class="ruby-identifier">master</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">master</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -448,13 +498,14 @@ widgets populated via Ajax.</p>
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/products/1 PATCH/PUT /admin/products/1.json</p>
+          <p>PATCH/PUT /admin/products/1 PATCH/PUT /admin/products/1.js PATCH/PUT
+/admin/products/1.json</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@product</span>
 
@@ -462,11 +513,50 @@ widgets populated via Ajax.</p>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">product_params</span>)
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_product_path</span>(<span class="ruby-ivar">@product</span>),
         <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>) }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_product_path</span>(<span class="ruby-ivar">@product</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-upload_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upload_file</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /admin/products/upload_file</p>
+          
+          
+
+          
+          <div class="method-source-code" id="upload_file-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/products_controller.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_file</span>
+  <span class="ruby-identifier">uploader</span> = <span class="ruby-constant">Uploaders</span><span class="ruby-operator">::</span><span class="ruby-constant">Products</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">id</span>))
+  <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">uploader</span>.<span class="ruby-identifier">process</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-identifier">updated</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span> }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -487,7 +577,7 @@ widgets populated via Ajax.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

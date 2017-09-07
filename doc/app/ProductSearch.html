@@ -95,9 +95,13 @@
     
     <li ><a href="#method-i-search_live">#search_live</a>
     
+    <li ><a href="#method-i-search_price_max">#search_price_max</a>
+    
+    <li ><a href="#method-i-search_price_min">#search_price_min</a>
+    
     <li ><a href="#method-i-search_purposes">#search_purposes</a>
     
-    <li ><a href="#method-i-search_store_id">#search_store_id</a>
+    <li ><a href="#method-i-search_store">#search_store</a>
     
     <li ><a href="#method-i-search_vendor_id">#search_vendor_id</a>
     
@@ -201,7 +205,7 @@ to match multiple properties at the same time.</p>
           <div class="method-source-code" id="base_query-source">
             <pre><span class="ruby-comment"># File app/models/product_search.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
-  <span class="ruby-constant">Product</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:categories</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:title</span>, <span class="ruby-value">:subtitle</span>)
+  <span class="ruby-constant">Product</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:categories</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -267,7 +271,7 @@ to match multiple properties at the same time.</p>
           <div class="method-source-code" id="search_code-source">
             <pre><span class="ruby-comment"># File app/models/product_search.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_code</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;code LIKE ? OR customer_code LIKE ?&#39;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;products.code LIKE ? OR products.customer_code LIKE ?&#39;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>, <span class="ruby-node">&quot;#{code}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -298,7 +302,7 @@ to match multiple properties at the same time.</p>
 
           
           <div class="method-source-code" id="search_exclusions-source">
-            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_exclusions</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">exclusions</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -333,7 +337,7 @@ to match multiple properties at the same time.</p>
           <div class="method-source-code" id="search_keyword-source">
             <pre><span class="ruby-comment"># File app/models/product_search.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, code, customer_code, title, subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, products.code, products.customer_code, products.title, products.subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -379,6 +383,72 @@ to match multiple properties at the same time.</p>
       </div>
 
     
+      <div id="method-i-search_price_max" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_price_max</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_price_max-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_price_max</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;retail_price_cents &lt;= ?&#39;</span>, <span class="ruby-identifier">price_max</span>.<span class="ruby-identifier">to_money</span>.<span class="ruby-identifier">cents</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_price_min" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_price_min</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_price_min-source">
+            <pre><span class="ruby-comment"># File app/models/product_search.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_price_min</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;retail_price_cents &gt;= ?&#39;</span>, <span class="ruby-identifier">price_min</span>.<span class="ruby-identifier">to_money</span>.<span class="ruby-identifier">cents</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-search_purposes" class="method-detail ">
         
         <div class="method-heading">
@@ -412,10 +482,10 @@ to match multiple properties at the same time.</p>
       </div>
 
     
-      <div id="method-i-search_store_id" class="method-detail ">
+      <div id="method-i-search_store" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">search_store_id</span><span
+          <span class="method-name">search_store</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -430,10 +500,10 @@ to match multiple properties at the same time.</p>
           
 
           
-          <div class="method-source-code" id="search_store_id-source">
+          <div class="method-source-code" id="search_store-source">
             <pre><span class="ruby-comment"># File app/models/product_search.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store_id</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store_id</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -486,7 +556,7 @@ to match multiple properties at the same time.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class SnippetsController - Rails Application Documentation</title>
+<title>class Shipment - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  <p class="link">ActiveRecord::Base
   
 </div>
 
@@ -70,9 +70,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-i-current_user">#current_user</a>
+    <li ><a href="#method-c-available_gateways">::available_gateways</a>
     
-    <li ><a href="#method-i-show">#show</a>
+    <li ><a href="#method-i-parsed_metadata">#parsed_metadata</a>
+    
+    <li ><a href="#method-i-shipping_gateway">#shipping_gateway</a>
     
   </ul>
 </div>
@@ -80,9 +82,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-SnippetsController">
-  <h1 id="class-SnippetsController" class="class">
-    class SnippetsController
+<main role="main" aria-labelledby="class-Shipment">
+  <h1 id="class-Shipment" class="class">
+    class Shipment
   </h1>
 
   <section class="description">
@@ -102,16 +104,16 @@
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-current_user" class="method-detail ">
+      <div id="method-c-available_gateways" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">current_user</span><span
+          <span class="method-name">available_gateways</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -121,20 +123,15 @@
 
         <div class="method-description">
           
-          <p>This controller is aware of unauthenticated guests.</p>
           
           
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
           
 
           
-          <div class="method-source-code" id="current_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/snippets_controller.rb, line 5</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_user</span>
-  <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">guest_user</span>
+          <div class="method-source-code" id="available_gateways-source">
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_gateways</span>
+  <span class="ruby-node">%w{CustomerPickup Letter SmartPost Vendor}</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -146,10 +143,18 @@
       </div>
 
     
-      <div id="method-i-show" class="method-detail ">
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-parsed_metadata" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show</span><span
+          <span class="method-name">parsed_metadata</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -159,18 +164,49 @@
 
         <div class="method-description">
           
-          <p>GET /snippet/:type/:id</p>
+          
           
           
 
           
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/snippets_controller.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">type</span>, <span class="ruby-identifier">id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:type</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]
-  <span class="ruby-ivar">@snippable</span> = <span class="ruby-identifier">find_snippable</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">id</span>)
+          <div class="method-source-code" id="parsed_metadata-source">
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parsed_metadata</span>
+  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">metadata</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">metadata</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
 
-  <span class="ruby-identifier">render</span> <span class="ruby-identifier">partial</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{type}&quot;</span>, <span class="ruby-identifier">object</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@snippable</span>, <span class="ruby-identifier">as</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-shipping_gateway" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">shipping_gateway</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="shipping_gateway-source">
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shipping_gateway</span>
+  <span class="ruby-node">&quot;ShippingGateway::#{shipping_method.shipping_gateway}&quot;</span>.<span class="ruby-identifier">constantize</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -190,7 +226,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

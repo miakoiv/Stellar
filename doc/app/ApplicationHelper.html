@@ -63,6 +63,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-blank">#blank</a>
+    
     <li ><a href="#method-i-branding">#branding</a>
     
     <li ><a href="#method-i-col">#col</a>
@@ -75,9 +77,21 @@
     
     <li ><a href="#method-i-loading_spinner">#loading_spinner</a>
     
+    <li ><a href="#method-i-menu_item">#menu_item</a>
+    
+    <li ><a href="#method-i-menu_title">#menu_title</a>
+    
     <li ><a href="#method-i-meta_tags_for">#meta_tags_for</a>
     
+    <li ><a href="#method-i-nav_tab">#nav_tab</a>
+    
     <li ><a href="#method-i-order_type_label">#order_type_label</a>
+    
+    <li ><a href="#method-i-section_style">#section_style</a>
+    
+    <li ><a href="#method-i-segment_content_id">#segment_content_id</a>
+    
+    <li ><a href="#method-i-tab_pane">#tab_pane</a>
     
     <li ><a href="#method-i-title">#title</a>
     
@@ -115,6 +129,39 @@
        </header>
 
     
+      <div id="method-i-blank" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">blank</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="blank-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">blank</span>
+  <span class="ruby-string">&quot;\u00a0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-branding" class="method-detail ">
         
         <div class="method-heading">
@@ -134,7 +181,7 @@
 
           
           <div class="method-source-code" id="branding-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">branding</span>(<span class="ruby-identifier">object</span>)
   <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_image</span>, <span class="ruby-value">:technical</span>) <span class="ruby-operator">+</span>
     <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>)
@@ -202,7 +249,7 @@ of the file name.</p>
 
           
           <div class="method-source-code" id="document_icon_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">size</span>
   <span class="ruby-keyword">when</span> <span class="ruby-value">:icon</span>
@@ -242,7 +289,7 @@ of the file name.</p>
 
           
           <div class="method-source-code" id="drag_handle-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">drag_handle</span>
   <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;handle&#39;</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;opacity: 0.5&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">icon</span>(<span class="ruby-string">&#39;ellipsis-v&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-lg fa-fw&#39;</span>)
@@ -277,7 +324,7 @@ of the file name.</p>
 
           
           <div class="method-source-code" id="image_variant_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">is_bitmap?</span>
@@ -317,9 +364,75 @@ of the file name.</p>
 
           
           <div class="method-source-code" id="loading_spinner-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">loading_spinner</span>
   <span class="ruby-identifier">icon</span>(<span class="ruby-string">&#39;chevron-down&#39;</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;spinner&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;animated infinite flip&#39;</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;display: none&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-menu_item" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">menu_item</span><span
+            class="method-args">(icon, text, path, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="menu_item-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">menu_item</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">active_link_to</span> <span class="ruby-identifier">menu_title</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>), <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">wrap_tag</span><span class="ruby-operator">:</span> <span class="ruby-value">:li</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-menu_title" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">menu_title</span><span
+            class="method-args">(icon, text)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="menu_title-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">menu_title</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>)
+  <span class="ruby-identifier">icon</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-fw&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -370,6 +483,41 @@ of the file name.</p>
       </div>
 
     
+      <div id="method-i-nav_tab" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nav_tab</span><span
+            class="method-args">(id, text, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="nav_tab-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nav_tab</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:li</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;presentation&#39;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">text</span>, <span class="ruby-node">&quot;#tab-#{id}&quot;</span>, <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tab&#39;</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tab&#39;</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-order_type_label" class="method-detail ">
         
         <div class="method-heading">
@@ -389,9 +537,126 @@ of the file name.</p>
 
           
           <div class="method-source-code" id="order_type_label-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_type_label</span>(<span class="ruby-identifier">order_type</span>, <span class="ruby-identifier">user</span>)
   <span class="ruby-node">&quot;#{order_type.incoming_for?(user) ? &#39;↘&#39; : &#39;↖&#39;} #{order_type.to_s}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-section_style" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">section_style</span><span
+            class="method-args">(section)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="section_style-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">section_style</span>(<span class="ruby-identifier">section</span>)
+  [].<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">section</span>.<span class="ruby-identifier">background_image</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;background-image: url(#{section.background_image.url(:lightbox)})&quot;</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;background-size: cover&quot;</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;background-position: center center&quot;</span>
+      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;background-repeat: no-repeat&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">section</span>.<span class="ruby-identifier">layout</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;viewport&#39;</span>
+        <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;background-attachment: fixed&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;background-color: #{section.background_color}&quot;</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span> <span class="ruby-string">&#39;; &#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-segment_content_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">segment_content_id</span><span
+            class="method-args">(segment, context)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates a segment content id in a specific context. Scripts that generate
+segment content may use this method to target the segment content either in
+layout or the layout panel.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="segment_content_id-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">segment_content_id</span>(<span class="ruby-identifier">segment</span>, <span class="ruby-identifier">context</span>)
+  [<span class="ruby-identifier">context</span>, <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">template</span>, <span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">segment</span>)].<span class="ruby-identifier">join</span> <span class="ruby-string">&#39;_&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tab_pane" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tab_pane</span><span
+            class="method-args">(id, options = {}) { || ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tab_pane-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tab_pane</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">classes</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>
+  <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;tab-pane fade&#39;</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:div</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;tab-#{id}&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -444,7 +709,7 @@ of the file name.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

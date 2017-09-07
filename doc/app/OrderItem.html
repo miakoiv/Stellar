@@ -89,11 +89,39 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-adjustment_total_cents">#adjustment_total_cents</a>
+    <li ><a href="#method-i-adjustments_sans_tax_cents">#adjustments_sans_tax_cents</a>
+    
+    <li ><a href="#method-i-adjustments_with_tax_cents">#adjustments_with_tax_cents</a>
     
     <li ><a href="#method-i-archive-21">#archive!</a>
     
-    <li ><a href="#method-i-subtotal_cents">#subtotal_cents</a>
+    <li ><a href="#method-i-is_subitem-3F">#is_subitem?</a>
+    
+    <li ><a href="#method-i-lead_time">#lead_time</a>
+    
+    <li ><a href="#method-i-lead_time_days">#lead_time_days</a>
+    
+    <li ><a href="#method-i-price_for_export_cents">#price_for_export_cents</a>
+    
+    <li ><a href="#method-i-price_sans_tax_cents">#price_sans_tax_cents</a>
+    
+    <li ><a href="#method-i-price_with_tax_cents">#price_with_tax_cents</a>
+    
+    <li ><a href="#method-i-product_codes">#product_codes</a>
+    
+    <li ><a href="#method-i-report_date">#report_date</a>
+    
+    <li ><a href="#method-i-reset_subitems-21">#reset_subitems!</a>
+    
+    <li ><a href="#method-i-subtotal_for_export_cents">#subtotal_for_export_cents</a>
+    
+    <li ><a href="#method-i-subtotal_sans_tax_cents">#subtotal_sans_tax_cents</a>
+    
+    <li ><a href="#method-i-subtotal_with_tax_cents">#subtotal_with_tax_cents</a>
+    
+    <li ><a href="#method-i-tax_cents">#tax_cents</a>
+    
+    <li ><a href="#method-i-tax_subtotal_cents">#tax_subtotal_cents</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -131,10 +159,10 @@
        </header>
 
     
-      <div id="method-i-adjustment_total_cents" class="method-detail ">
+      <div id="method-i-adjustments_sans_tax_cents" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">adjustment_total_cents</span><span
+          <span class="method-name">adjustments_sans_tax_cents</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -149,10 +177,43 @@
           
 
           
-          <div class="method-source-code" id="adjustment_total_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustment_total_cents</span>
-  <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount_cents</span>)
+          <div class="method-source-code" id="adjustments_sans_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_sans_tax_cents</span>
+  <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:amount_sans_tax_cents</span>).<span class="ruby-identifier">sum</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-adjustments_with_tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">adjustments_with_tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="adjustments_with_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_with_tax_cents</span>
+  <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:amount_with_tax_cents</span>).<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -183,7 +244,7 @@
 
           
           <div class="method-source-code" id="archive-21-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">archive!</span>
   <span class="ruby-identifier">update</span>(
     <span class="ruby-identifier">product_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">code</span>,
@@ -202,10 +263,10 @@
       </div>
 
     
-      <div id="method-i-subtotal_cents" class="method-detail ">
+      <div id="method-i-is_subitem-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">subtotal_cents</span><span
+          <span class="method-name">is_subitem?</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -220,10 +281,477 @@
           
 
           
-          <div class="method-source-code" id="subtotal_cents-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_cents</span>
-  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">price_cents</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>)
+          <div class="method-source-code" id="is_subitem-3F-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_subitem?</span>
+  <span class="ruby-identifier">parent_item</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lead_time" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lead_time</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If ordered amount exceeds availability, this item gets its lead time from
+the product, otherwise it&#39;s readily available with nil lead time.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="lead_time-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lead_time</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">available</span>
+    <span class="ruby-identifier">product</span>.<span class="ruby-identifier">lead_time</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lead_time_days" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lead_time_days</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="lead_time_days-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lead_time_days</span>
+  <span class="ruby-identifier">lead_time</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">lead_time</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-price_for_export_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">price_for_export_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Price for exported orders, always without tax, vendor products are listed
+without prices.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="price_for_export_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">price_for_export_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-identifier">price_sans_tax_cents</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-price_sans_tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">price_sans_tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Price without tax deducts the tax portion if it&#39;s included in the
+attribute.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="price_sans_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">price_sans_tax_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_includes_tax?</span>
+    <span class="ruby-identifier">price_cents</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tax_cents</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">price_cents</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-price_with_tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">price_with_tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Price with tax adds the tax portion if it wasn&#39;t included.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="price_with_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">price_with_tax_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_includes_tax?</span>
+    <span class="ruby-identifier">price_cents</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">price_sans_tax_cents</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tax_cents</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-product_codes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">product_codes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="product_codes-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">product_codes</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product_customer_code</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-node">&quot;#{product_customer_code} ⧸ #{product_code}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">product_code</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-report_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">report_date</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Date used in reports is the completion date of the order.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="report_date-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">report_date</span>
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">to_date</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-reset_subitems-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reset_subitems!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>When an order item is updated, its subitems must be updated to reflect the
+new amount according to the component entries of the product on this order
+item.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="reset_subitems-21-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_subitems!</span>
+  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">component_entries</span>
+  <span class="ruby-identifier">subitems</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subitem</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">component</span> = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">component</span><span class="ruby-operator">:</span> <span class="ruby-identifier">subitem</span>.<span class="ruby-identifier">product</span>)
+    <span class="ruby-identifier">subitem</span>.<span class="ruby-identifier">update!</span> <span class="ruby-identifier">amount</span><span class="ruby-operator">:</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">component</span>.<span class="ruby-identifier">quantity</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">reload</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-subtotal_for_export_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">subtotal_for_export_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="subtotal_for_export_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_for_export_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-identifier">subtotal_sans_tax_cents</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-subtotal_sans_tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">subtotal_sans_tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="subtotal_sans_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_sans_tax_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">price_sans_tax_cents</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-subtotal_with_tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">subtotal_with_tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="subtotal_with_tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_with_tax_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">price_with_tax_cents</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tax_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tax_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Tax is calculated from the price attribute, which may include tax.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="tax_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_includes_tax?</span>
+    <span class="ruby-identifier">price_cents</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">+</span> <span class="ruby-value">100</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">price_cents</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tax_subtotal_cents" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tax_subtotal_cents</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tax_subtotal_cents-source">
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_subtotal_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price_cents</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tax_cents</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -254,7 +782,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 59</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
@@ -276,7 +804,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

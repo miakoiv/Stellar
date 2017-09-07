@@ -68,15 +68,15 @@
   <ul class="link-list">
   
   
+    <li><span class="include">Rails</span>
+  
+  
+  
     <li><span class="include">Authority::Abilities</span>
   
   
   
     <li><a class="include" href="Imageable.html">Imageable</a>
-  
-  
-  
-    <li><a class="include" href="Reorderable.html">Reorderable</a>
   
   
   
@@ -93,21 +93,39 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-available_purposes">#available_purposes</a>
+    <li ><a href="#method-c-available_purposes">::available_purposes</a>
     
-    <li ><a href="#method-i-can_be_nested-3F">#can_be_nested?</a>
+    <li ><a href="#method-c-entry_point">::entry_point</a>
+    
+    <li ><a href="#method-c-purpose_options">::purpose_options</a>
+    
+    <li ><a href="#method-i-active_link_options">#active_link_options</a>
+    
+    <li ><a href="#method-i-appearance">#appearance</a>
     
     <li ><a href="#method-i-can_have_albums-3F">#can_have_albums?</a>
     
+    <li ><a href="#method-i-can_have_children-3F">#can_have_children?</a>
+    
+    <li ><a href="#method-i-can_have_content-3F">#can_have_content?</a>
+    
     <li ><a href="#method-i-description">#description</a>
     
-    <li ><a href="#method-i-needs_content-3F">#needs_content?</a>
+    <li ><a href="#method-i-icon">#icon</a>
     
-    <li ><a href="#method-i-purpose_options">#purpose_options</a>
+    <li ><a href="#method-i-label">#label</a>
+    
+    <li ><a href="#method-i-movable-3F">#movable?</a>
+    
+    <li ><a href="#method-i-needs_resource-3F">#needs_resource?</a>
+    
+    <li ><a href="#method-i-path">#path</a>
     
     <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
     
     <li ><a href="#method-i-slugger">#slugger</a>
+    
+    <li ><a href="#method-i-to_partial_path">#to_partial_path</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -135,17 +153,31 @@
     
 
     
-
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="PRESENTATION">PRESENTATION
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-available_purposes" class="method-detail ">
+      <div id="method-c-available_purposes" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">available_purposes</span><span
@@ -164,11 +196,12 @@
 
           
           <div class="method-source-code" id="available_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_purposes</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_record?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-string">&#39;route&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">route?</span>
-  <span class="ruby-constant">Page</span>.<span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-string">&#39;primary&#39;</span>, <span class="ruby-string">&#39;secondary&#39;</span>, <span class="ruby-string">&#39;banner&#39;</span>, <span class="ruby-string">&#39;template&#39;</span>)
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_purposes</span>
+  <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">slice</span>(
+    <span class="ruby-value">:route</span>, <span class="ruby-value">:primary</span>, <span class="ruby-value">:category</span>, <span class="ruby-value">:product</span>, <span class="ruby-value">:promotion</span>, <span class="ruby-value">:department</span>,
+    <span class="ruby-value">:dropdown</span>, <span class="ruby-value">:megamenu</span>, <span class="ruby-value">:template</span>, <span class="ruby-value">:portal</span>, <span class="ruby-value">:proxy</span>
+  )
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -180,10 +213,10 @@
       </div>
 
     
-      <div id="method-i-can_be_nested-3F" class="method-detail ">
+      <div id="method-c-entry_point" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">can_be_nested?</span><span
+          <span class="method-name">entry_point</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -198,10 +231,124 @@
           
 
           
-          <div class="method-source-code" id="can_be_nested-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_nested?</span>
-  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secondary?</span>
+          <div class="method-source-code" id="entry_point-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_point</span>
+  <span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-purpose_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">purpose_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="purpose_options-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
+  <span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-active_link_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">active_link_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Route pages ask this method to render their links with active_link_to,
+since the page with a slug of &#39;front&#39; should be active for all
+category and product pages.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="active_link_options-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">active_link_options</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">slug</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;front&#39;</span>
+    [[<span class="ruby-string">&#39;store&#39;</span>], [<span class="ruby-string">&#39;show_category&#39;</span>, <span class="ruby-string">&#39;show_product&#39;</span>, <span class="ruby-string">&#39;show_promotion&#39;</span>, <span class="ruby-string">&#39;show_department&#39;</span>]]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;cart&#39;</span>
+    [[<span class="ruby-string">&#39;store&#39;</span>], [<span class="ruby-string">&#39;cart&#39;</span>]]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-appearance" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appearance</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="appearance-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
+  <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -232,9 +379,75 @@
 
           
           <div class="method-source-code" id="can_have_albums-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_albums?</span>
-  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">secondary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">banner?</span>
+  <span class="ruby-identifier">primary?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-can_have_children-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_have_children?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="can_have_children-3F-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_children?</span>
+  <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-can_have_content-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_have_content?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="can_have_content-3F-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_content?</span>
+  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -265,7 +478,7 @@
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
@@ -279,10 +492,10 @@
       </div>
 
     
-      <div id="method-i-needs_content-3F" class="method-detail ">
+      <div id="method-i-icon" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">needs_content?</span><span
+          <span class="method-name">icon</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -297,10 +510,10 @@
           
 
           
-          <div class="method-source-code" id="needs_content-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_content?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">route?</span>
+          <div class="method-source-code" id="icon-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
+  <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -312,10 +525,10 @@
       </div>
 
     
-      <div id="method-i-purpose_options" class="method-detail ">
+      <div id="method-i-label" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">purpose_options</span><span
+          <span class="method-name">label</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -330,10 +543,129 @@
           
 
           
-          <div class="method-source-code" id="purpose_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">purpose_options</span>
-  <span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
+          <div class="method-source-code" id="label-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">slug</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">route?</span>
+  <span class="ruby-identifier">resource</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">purpose</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-movable-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">movable?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="movable-3F-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">movable?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">needs_resource?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">route?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">promotion?</span> <span class="ruby-operator">||</span>
+  <span class="ruby-identifier">department?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-needs_resource-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">needs_resource?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="needs_resource-3F-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_resource?</span>
+  <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">promotion?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">department?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">path</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Path to a page object based on purpose for rendering navigation nodes
+pointing to the right place.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="path-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">case</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">route?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span>
+    <span class="ruby-identifier">show_page_path</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">category?</span>
+    <span class="ruby-identifier">show_category_path</span>(<span class="ruby-identifier">resource</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">product?</span>
+    <span class="ruby-identifier">show_product_path</span>(<span class="ruby-identifier">resource</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">promotion?</span>
+    <span class="ruby-identifier">show_promotion_path</span>(<span class="ruby-identifier">resource</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">department?</span>
+    <span class="ruby-identifier">show_department_path</span>(<span class="ruby-identifier">resource</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span>
+    <span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">portal?</span>
+    <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">to_url</span>
+  <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -369,7 +701,7 @@
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">route?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -402,9 +734,42 @@
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [<span class="ruby-value">:title</span>, [<span class="ruby-value">:title</span>, <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">store</span>.<span class="ruby-identifier">name</span> }]]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_partial_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_partial_path</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pages are rendered with partials corresponding to purpose.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_partial_path-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
+  <span class="ruby-node">&quot;pages/purposes/#{purpose}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -435,8 +800,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>
   <span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -457,7 +823,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

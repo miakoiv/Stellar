@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Admin::PortalsController - Rails Application Documentation</title>
+<title>class Admin::TaxCategoriesController - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -62,7 +62,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../Reorderer.html">Reorderer</a>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -90,9 +101,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Admin::PortalsController">
-  <h1 id="class-Admin::PortalsController" class="class">
-    class Admin::PortalsController
+<main role="main" aria-labelledby="class-Admin::TaxCategoriesController">
+  <h1 id="class-Admin::TaxCategoriesController" class="class">
+    class Admin::TaxCategoriesController
   </h1>
 
   <section class="description">
@@ -131,24 +142,24 @@
 
         <div class="method-description">
           
-          <p>POST /admin/portals POST /admin/portals.json</p>
+          <p>POST /admin/tax_categories POST /admin/tax_categories.json</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@portal</span> = <span class="ruby-constant">Portal</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">portal_params</span>)
+  <span class="ruby-ivar">@tax_category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tax_categories</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">tax_category_params</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@portal</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_portal_path</span>(<span class="ruby-ivar">@portal</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">portal</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@portal</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_portal_path</span>(<span class="ruby-ivar">@portal</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tax_category</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_tax_category_path</span>(<span class="ruby-ivar">@tax_category</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tax_category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tax_category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_tax_category_path</span>(<span class="ruby-ivar">@tax_category</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@portal</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tax_category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -175,18 +186,18 @@
 
         <div class="method-description">
           
-          <p>DELETE /admin/portals/1 DELETE /admin/portals/1.json</p>
+          <p>DELETE /admin/tax_categories/1 DELETE /admin/tax_categories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@portal</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@tax_category</span>.<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_portals_path</span>,
-      <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">portal</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@portal</span>) }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_tax_categories_path</span>,
+      <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tax_category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tax_category</span>) }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -213,13 +224,13 @@
 
         <div class="method-description">
           
-          <p>GET /admin/portals/1/edit</p>
+          <p>GET /admin/tax_categories/1/edit</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -245,15 +256,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/portals</p>
+          <p>GET /admin/tax_categories GET /admin/tax_categories.json</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@portals</span> = <span class="ruby-constant">Portal</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@tax_categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tax_categories</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -278,15 +289,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/portals/new</p>
+          <p>GET /admin/tax_categories/new</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@portal</span> = <span class="ruby-constant">Portal</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@tax_category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tax_categories</span>.<span class="ruby-identifier">build</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -311,13 +322,13 @@
 
         <div class="method-description">
           
-          <p>GET /admin/portals/1</p>
+          <p>GET /admin/tax_categories/1 GET /admin/tax_categories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -343,22 +354,22 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/portals/1 PATCH/PUT /admin/portals/1.json</p>
+          <p>PATCH/PUT /admin/tax_categories/1 PATCH/PUT /admin/tax_categories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/portals_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tax_categories_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@portal</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">portal_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_portal_path</span>(<span class="ruby-ivar">@portal</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">portal</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@portal</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_portal_path</span>(<span class="ruby-ivar">@portal</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tax_category</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">tax_category_params</span>)
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_tax_category_path</span>(<span class="ruby-ivar">@tax_category</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tax_category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tax_category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_tax_category_path</span>(<span class="ruby-ivar">@tax_category</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@portal</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tax_category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -380,7 +391,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

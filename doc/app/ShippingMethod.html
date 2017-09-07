@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class PortalController - Rails Application Documentation</title>
+<title>class ShippingMethod - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,11 +58,26 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  <p class="link">ActiveRecord::Base
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Authority::Abilities</span>
+  
+  
+  
+    <li><a class="include" href="Imageable.html">Imageable</a>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -70,11 +85,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-i-active-3F">#active?</a>
     
-    <li ><a href="#method-i-search">#search</a>
+    <li ><a href="#method-i-shipping_gateway_class">#shipping_gateway_class</a>
     
-    <li ><a href="#method-i-show_department">#show_department</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
     
   </ul>
 </div>
@@ -82,18 +97,13 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-PortalController">
-  <h1 id="class-PortalController" class="class">
-    class PortalController
+<main role="main" aria-labelledby="class-ShippingMethod">
+  <h1 id="class-ShippingMethod" class="class">
+    class ShippingMethod
   </h1>
 
   <section class="description">
     
-<p><a href="PortalController.html">PortalController</a> is the entry point to
-the app. The current portal is selected by matching request.host to a
-portal domain name. Stores participating in the portal live under
-subdomains of that domain.</p>
-
   </section>
 
   
@@ -115,10 +125,10 @@ subdomains of that domain.</p>
        </header>
 
     
-      <div id="method-i-index" class="method-detail ">
+      <div id="method-i-active-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">index</span><span
+          <span class="method-name">active?</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -128,14 +138,16 @@ subdomains of that domain.</p>
 
         <div class="method-description">
           
-          <p>GET /</p>
+          
           
           
 
           
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+          <div class="method-source-code" id="active-3F-source">
+            <pre><span class="ruby-comment"># File app/models/shipping_method.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">active?</span>
+  (<span class="ruby-identifier">enabled_at</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">enabled_at</span>.<span class="ruby-identifier">future?</span>) <span class="ruby-operator">&amp;&amp;</span>
+  (<span class="ruby-identifier">disabled_at</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">disabled_at</span>.<span class="ruby-identifier">future?</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -147,10 +159,10 @@ subdomains of that domain.</p>
       </div>
 
     
-      <div id="method-i-search" class="method-detail ">
+      <div id="method-i-shipping_gateway_class" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">search</span><span
+          <span class="method-name">shipping_gateway_class</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -160,17 +172,15 @@ subdomains of that domain.</p>
 
         <div class="method-description">
           
-          <p>GET /portal/search</p>
+          
           
           
 
           
-          <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]).<span class="ruby-identifier">per</span>(<span class="ruby-value">30</span>)
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>, <span class="ruby-value">:html</span>
+          <div class="method-source-code" id="shipping_gateway_class-source">
+            <pre><span class="ruby-comment"># File app/models/shipping_method.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shipping_gateway_class</span>
+  <span class="ruby-node">&quot;ShippingGateway::#{shipping_gateway}&quot;</span>.<span class="ruby-identifier">constantize</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -182,10 +192,10 @@ subdomains of that domain.</p>
       </div>
 
     
-      <div id="method-i-show_department" class="method-detail ">
+      <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show_department</span><span
+          <span class="method-name">to_s</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -195,17 +205,15 @@ subdomains of that domain.</p>
 
         <div class="method-description">
           
-          <p>GET /department/:department_id</p>
+          
           
           
 
           
-          <div class="method-source-code" id="show_department-source">
-            <pre><span class="ruby-comment"># File app/controllers/portal_controller.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_department</span>
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@department</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">random</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]).<span class="ruby-identifier">per</span>(<span class="ruby-value">30</span>)
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>, <span class="ruby-value">:html</span>
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/shipping_method.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -225,7 +233,7 @@ subdomains of that domain.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

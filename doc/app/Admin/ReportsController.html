@@ -72,6 +72,12 @@
     
     <li ><a href="#method-i-index">#index</a>
     
+    <li ><a href="#method-i-inventory">#inventory</a>
+    
+    <li ><a href="#method-i-purchases">#purchases</a>
+    
+    <li ><a href="#method-i-sales">#sales</a>
+    
   </ul>
 </div>
 
@@ -127,7 +133,111 @@
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@inventory</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventory_valuation</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-inventory" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inventory</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/reports/inventory</p>
+          
+          
+
+          
+          <div class="method-source-code" id="inventory-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inventory</span>
+  <span class="ruby-ivar">@inventory</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-purchases" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">purchases</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/reports/purchases</p>
+          
+          
+
+          
+          <div class="method-source-code" id="purchases-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">purchases</span>
+  <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">outgoing_order_types</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_reports_path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_item&#39;</span>, <span class="ruby-string">&#39;admin_order_item_search&#39;</span>)
+  <span class="ruby-ivar">@purchases_data</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Purchases</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sales" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sales</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/reports/sales</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sales-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sales</span>
+  <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">incoming_order_types</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_reports_path</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_item&#39;</span>, <span class="ruby-string">&#39;admin_order_item_search&#39;</span>)
+  <span class="ruby-ivar">@sales_data</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Sales</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -147,7 +257,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -82,7 +82,7 @@
     
     <li ><a href="#method-i-can_shop-3F">#can_shop?</a>
     
-    <li ><a href="#method-i-current_portal">#current_portal</a>
+    <li ><a href="#method-i-current_hostname">#current_hostname</a>
     
     <li ><a href="#method-i-current_pricing">#current_pricing</a>
     
@@ -96,11 +96,11 @@
     
     <li ><a href="#method-i-may_shop_at-3F">#may_shop_at?</a>
     
+    <li ><a href="#method-i-orientate">#orientate</a>
+    
     <li ><a href="#method-i-saved_search_query">#saved_search_query</a>
     
     <li ><a href="#method-i-shopping_cart">#shopping_cart</a>
-    
-    <li ><a href="#method-i-standalone_store-3F">#standalone_store?</a>
     
   </ul>
 </div>
@@ -149,15 +149,17 @@
 
         <div class="method-description">
           
-          
+          <p>Authenticate user, but skip authentication if guests are admitted. This
+method is the first before_action callback in controllers that optionally
+serve guests, and will fail early if the current store can&#39;t be found.</p>
           
           
 
           
           <div class="method-source-code" id="authenticate_user_or_skip-21-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate_user_or_skip!</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">admit_guests?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">admit_guests?</span>
   <span class="ruby-identifier">authenticate_user!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -189,7 +191,7 @@
 
           
           <div class="method-source-code" id="authority_forbidden-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">authority_forbidden</span>(<span class="ruby-identifier">error</span>)
   <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">message</span>)
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">referrer</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">root_path</span>,
@@ -224,7 +226,7 @@
 
           
           <div class="method-source-code" id="can_manage-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_manage?</span>
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:manager</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -257,7 +259,7 @@
 
           
           <div class="method-source-code" id="can_see_pricing-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 83</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_see_pricing?</span>
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:see_pricing</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -290,7 +292,7 @@
 
           
           <div class="method-source-code" id="can_see_stock-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 87</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_see_stock?</span>
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:see_stock</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -323,7 +325,7 @@
 
           
           <div class="method-source-code" id="can_shop-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_shop?</span>
   <span class="ruby-ivar">@can_shop</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">can?</span>(<span class="ruby-value">:shop</span>, <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@can_shop</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@can_shop</span>
@@ -338,10 +340,10 @@
       </div>
 
     
-      <div id="method-i-current_portal" class="method-detail ">
+      <div id="method-i-current_hostname" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">current_portal</span><span
+          <span class="method-name">current_hostname</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -356,10 +358,10 @@
           
 
           
-          <div class="method-source-code" id="current_portal-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_portal</span>
-  <span class="ruby-ivar">@current_portal</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">current_portal_by_request</span>
+          <div class="method-source-code" id="current_hostname-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">current_hostname</span>
+  <span class="ruby-ivar">@current_hostname</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -390,7 +392,7 @@
 
           
           <div class="method-source-code" id="current_pricing-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_pricing</span>
   <span class="ruby-ivar">@pricing_group</span>
 <span class="ruby-keyword">end</span></pre>
@@ -423,9 +425,9 @@
 
           
           <div class="method-source-code" id="current_site_name-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_site_name</span>
-  <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">current_portal</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -456,9 +458,9 @@
 
           
           <div class="method-source-code" id="current_store-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@current_store</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">user_signed_in?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">store</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">current_store_by_request</span>
+  <span class="ruby-ivar">@current_store</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -489,9 +491,9 @@
 
           
           <div class="method-source-code" id="current_theme-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_theme</span>
-  <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">theme</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">current_portal</span>.<span class="ruby-identifier">theme</span>
+  <span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@current_store</span>.<span class="ruby-identifier">theme</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -522,7 +524,7 @@
 
           
           <div class="method-source-code" id="guest_user-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">guest_user</span>
   <span class="ruby-ivar">@cached_guest</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:guest_user_id</span>]) <span class="ruby-keyword">rescue</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[<span class="ruby-value">:guest_user_id</span>] = <span class="ruby-identifier">create_guest_user</span>.<span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -557,9 +559,44 @@ shopping is only allowed in the assigned categories.</p>
 
           
           <div class="method-source-code" id="may_shop_at-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 98</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">may_shop_at?</span>(<span class="ruby-identifier">category</span>)
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">category</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-orientate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">orientate</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="orientate-source">
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">orientate</span>
+  <span class="ruby-ivar">@current_hostname</span> = <span class="ruby-constant">Hostname</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">fqdn</span><span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@current_hostname</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-ivar">@current_store</span> = <span class="ruby-ivar">@current_hostname</span>.<span class="ruby-identifier">store</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -590,7 +627,7 @@ shopping is only allowed in the assigned categories.</p>
 
           
           <div class="method-source-code" id="saved_search_query-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-identifier">search_model</span>, <span class="ruby-identifier">cookie_key</span>)
   <span class="ruby-identifier">param</span> = <span class="ruby-node">&quot;#{search_model}_search&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">param</span>]
@@ -630,42 +667,9 @@ shopping is only allowed in the assigned categories.</p>
 
           
           <div class="method-source-code" id="shopping_cart-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shopping_cart</span>
   <span class="ruby-ivar">@shopping_cart</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">shopping_cart</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-standalone_store-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">standalone_store?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="standalone_store-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/application_controller.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">standalone_store?</span>
-  <span class="ruby-identifier">current_portal</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -685,7 +689,7 @@ shopping is only allowed in the assigned categories.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

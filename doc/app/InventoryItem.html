@@ -62,7 +62,18 @@
   
 </div>
 
-    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Authority::Abilities</span>
+  
+  
+  </ul>
+</div>
+
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -70,9 +81,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-adjustment">#adjustment</a>
+    <li ><a href="#method-i-available">#available</a>
     
-    <li ><a href="#method-i-appearance">#appearance</a>
+    <li ><a href="#method-i-destock-21">#destock!</a>
     
     <li ><a href="#method-i-title">#title</a>
     
@@ -112,10 +123,10 @@
        </header>
 
     
-      <div id="method-i-adjustment" class="method-detail ">
+      <div id="method-i-available" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">adjustment</span><span
+          <span class="method-name">available</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -130,15 +141,10 @@
           
 
           
-          <div class="method-source-code" id="adjustment-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustment</span>
-  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-value">:order_type</span>)
-    .<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Order</span>.<span class="ruby-identifier">current</span>)
-    .<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_types</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">inventory_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory</span>})
-    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">item</span>.<span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">adjustment_multiplier</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span>
-    }.<span class="ruby-identifier">sum</span>
+          <div class="method-source-code" id="available-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available</span>
+  <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reserved</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -150,11 +156,11 @@
       </div>
 
     
-      <div id="method-i-appearance" class="method-detail ">
+      <div id="method-i-destock-21" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">appearance</span><span
-            class="method-args">()</span>
+          <span class="method-name">destock!</span><span
+            class="method-args">(amount, source = nil, recorded_at = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -163,15 +169,24 @@
 
         <div class="method-description">
           
-          
+          <p>Reduces on hand stock from this inventory item.</p>
           
           
 
           
-          <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
-  <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">purpose</span>
+          <div class="method-source-code" id="destock-21-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destock!</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">source</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">recorded_at</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">recorded_at</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
+  <span class="ruby-identifier">inventory_entries</span>.<span class="ruby-identifier">create</span>(
+    <span class="ruby-identifier">recorded_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">recorded_at</span>,
+    <span class="ruby-identifier">source</span><span class="ruby-operator">:</span> <span class="ruby-identifier">source</span>,
+    <span class="ruby-identifier">on_hand</span><span class="ruby-operator">:</span> <span class="ruby-operator">-</span><span class="ruby-identifier">amount</span>,
+    <span class="ruby-identifier">reserved</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
+    <span class="ruby-identifier">pending</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
+    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
+  )
+  <span class="ruby-identifier">update_counts_and_value!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -202,7 +217,7 @@
 
           
           <div class="method-source-code" id="title-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">title</span>
   <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -235,10 +250,10 @@
 
           
           <div class="method-source-code" id="total_value_cents-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_value_cents</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value_cents</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">value_cents</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">on_hand</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value_cents</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">value_cents</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -258,7 +273,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

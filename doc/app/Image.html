@@ -160,7 +160,7 @@
 
           
           <div class="method-source-code" id="applicable_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">applicable_purposes</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;presentational&#39;</span>, <span class="ruby-string">&#39;technical&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_bitmap?</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;vector&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_vector?</span>
@@ -201,7 +201,7 @@
 
           
           <div class="method-source-code" id="as_json-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 117</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">methods</span><span class="ruby-operator">:</span> [<span class="ruby-value">:wysiwyg_url</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -234,7 +234,7 @@
 
           
           <div class="method-source-code" id="assign_purpose-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_purpose</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">applicable_purposes</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -267,10 +267,10 @@
 
           
           <div class="method-source-code" id="dimensions-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 98</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">style</span> = <span class="ruby-value">:original</span>)
   <span class="ruby-ivar">@dimensions</span> <span class="ruby-operator">||=</span> {}
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span>
+  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>))
   <span class="ruby-ivar">@dimensions</span>[<span class="ruby-identifier">style</span>] <span class="ruby-operator">||=</span> [<span class="ruby-value">:width</span>, <span class="ruby-value">:height</span>].<span class="ruby-identifier">zip</span>(<span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>))).<span class="ruby-identifier">to_h</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -302,7 +302,7 @@
 
           
           <div class="method-source-code" id="document_icon-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 84</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">attachment_content_type</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r{\Avideo/}</span>
@@ -344,7 +344,7 @@
 
           
           <div class="method-source-code" id="is_bitmap-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_bitmap?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/(bmp|jpeg|jpg|png|x-png)/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -377,7 +377,7 @@
 
           
           <div class="method-source-code" id="is_vector-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 67</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_vector?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/svg/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -410,7 +410,7 @@
 
           
           <div class="method-source-code" id="is_video-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_video?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/video\//</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -443,7 +443,7 @@
 
           
           <div class="method-source-code" id="landscape-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 109</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">landscape?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">portrait?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -476,7 +476,7 @@
 
           
           <div class="method-source-code" id="portrait-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">portrait?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span>
   <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:height</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:width</span>]
@@ -510,7 +510,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 113</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">attachment_file_name</span>.<span class="ruby-identifier">humanize</span>
 <span class="ruby-keyword">end</span></pre>
@@ -544,7 +544,7 @@ documents and other non-bitmaps.</p>
 
           
           <div class="method-source-code" id="wysiwyg_style-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 76</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wysiwyg_style</span>
   <span class="ruby-identifier">is_bitmap?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:lightbox</span> <span class="ruby-operator">:</span> <span class="ruby-value">:original</span>
 <span class="ruby-keyword">end</span></pre>
@@ -577,7 +577,7 @@ documents and other non-bitmaps.</p>
 
           
           <div class="method-source-code" id="wysiwyg_url-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 80</span>
+            <pre><span class="ruby-comment"># File app/models/image.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">wysiwyg_url</span>
   <span class="ruby-identifier">url</span>(<span class="ruby-identifier">wysiwyg_style</span>, <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -599,7 +599,7 @@ documents and other non-bitmaps.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

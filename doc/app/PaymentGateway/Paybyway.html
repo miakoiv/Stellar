@@ -125,6 +125,19 @@
       </header>
 
       
+      <div id="attribute-i-notify_url" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">notify_url</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-order" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">order</span><span
@@ -185,13 +198,13 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">attributes</span> = {})
   <span class="ruby-keyword">super</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-ivar">@api_key</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">pbw_api_key</span>
   <span class="ruby-ivar">@private_key</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">pbw_private_key</span>
-  <span class="ruby-ivar">@version</span> = <span class="ruby-string">&#39;w3&#39;</span>
+  <span class="ruby-ivar">@version</span> = <span class="ruby-string">&#39;w3.1&#39;</span>
   <span class="ruby-ivar">@connector</span> = <span class="ruby-constant">PaybywayConnector</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -231,7 +244,7 @@
 
           
           <div class="method-source-code" id="charge_credit_card-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">charge_credit_card</span>(<span class="ruby-identifier">params</span> = {})
   <span class="ruby-identifier">request</span> = <span class="ruby-identifier">token_request</span>(<span class="ruby-identifier">payment_method</span><span class="ruby-operator">:</span> {
     <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;card&#39;</span>, <span class="ruby-identifier">register_card_token</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
@@ -274,12 +287,12 @@
 
           
           <div class="method-source-code" id="charge_e_payment-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">charge_e_payment</span>(<span class="ruby-identifier">params</span> = {})
   <span class="ruby-identifier">request</span> = <span class="ruby-identifier">token_request</span>(<span class="ruby-identifier">payment_method</span><span class="ruby-operator">:</span> {
     <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;e-payment&#39;</span>,
     <span class="ruby-identifier">return_url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">return_url</span>,
-    <span class="ruby-identifier">notify_url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">return_url</span>,
+    <span class="ruby-identifier">notify_url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">notify_url</span>,
     <span class="ruby-identifier">lang</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fi&#39;</span>,
     <span class="ruby-identifier">token_valid_until</span><span class="ruby-operator">:</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span> <span class="ruby-operator">+</span> <span class="ruby-value">6</span>.<span class="ruby-identifier">hours</span>).<span class="ruby-identifier">to_i</span>,
     <span class="ruby-identifier">selected</span><span class="ruby-operator">:</span> [<span class="ruby-identifier">params</span>[<span class="ruby-value">:selected</span>]]
@@ -318,7 +331,7 @@
 
           
           <div class="method-source-code" id="return-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 88</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">return</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">return_code</span>  = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;RETURN_CODE&#39;</span>]
   <span class="ruby-identifier">order_number</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;ORDER_NUMBER&#39;</span>]
@@ -326,6 +339,7 @@
   <span class="ruby-identifier">contact_id</span>   = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;CONTACT_ID&#39;</span>]
   <span class="ruby-identifier">incident_id</span>  = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;INCIDENT_ID&#39;</span>]
   <span class="ruby-identifier">authcode</span>     = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;AUTHCODE&#39;</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">return_code</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;0&#39;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">return_code</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_number</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">authcode</span>.<span class="ruby-identifier">present?</span>
     <span class="ruby-identifier">cleartext</span> = [<span class="ruby-identifier">return_code</span>, <span class="ruby-identifier">order_number</span>, <span class="ruby-identifier">settled</span>, <span class="ruby-identifier">contact_id</span>, <span class="ruby-identifier">incident_id</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">authcode</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sha256</span>(<span class="ruby-ivar">@private_key</span>, <span class="ruby-identifier">cleartext</span>)
@@ -363,7 +377,7 @@
 
           
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
   <span class="ruby-string">&#39;payment_gateway/paybyway&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -396,7 +410,7 @@
 
           
           <div class="method-source-code" id="verify-source">
-            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/models/payment_gateway/paybyway.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verify</span>(<span class="ruby-identifier">token</span>)
   <span class="ruby-identifier">request</span> = <span class="ruby-identifier">verify_request</span>(<span class="ruby-identifier">token</span>)
   <span class="ruby-identifier">response</span> = <span class="ruby-ivar">@connector</span>.<span class="ruby-identifier">check_payment_status</span>(<span class="ruby-identifier">request</span>).<span class="ruby-identifier">parsed_response</span>
@@ -420,7 +434,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

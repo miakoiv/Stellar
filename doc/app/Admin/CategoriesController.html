@@ -68,7 +68,7 @@
   <ul class="link-list">
   
   
-    <li><a class="include" href="../Reorderer.html">Reorderer</a>
+    <li><a class="include" href="../AwesomeNester.html">AwesomeNester</a>
   
   
   </ul>
@@ -144,23 +144,25 @@
 
         <div class="method-description">
           
-          <p>POST /admin/categories POST /admin/categories.json</p>
+          <p>POST /admin/categories POST /admin/categories.js POST
+/admin/categories.json</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">category_params</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_category_path</span>(<span class="ruby-ivar">@category</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_category_path</span>(<span class="ruby-ivar">@category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_category_path</span>(<span class="ruby-ivar">@category</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">edit_admin_category_path</span>(<span class="ruby-ivar">@category</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -194,9 +196,11 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@category</span>
   <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">destroy</span>
+
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_categories_path</span>,
       <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
@@ -226,14 +230,17 @@
 
         <div class="method-description">
           
-          <p>GET /admin/categories/1/edit</p>
+          <p>GET /admin/categories/1/edit GET /admin/categories/1/edit.js</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">roots</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:html</span>, <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -266,7 +273,7 @@
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>
+  <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">roots</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -291,7 +298,7 @@
 
         <div class="method-description">
           
-          <p>GET /admin/categories/new</p>
+          <p>GET /admin/categories/new.js</p>
           
           
 
@@ -330,9 +337,9 @@
 
           
           <div class="method-source-code" id="reorder_products-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reorder_products</span>
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">real</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
+  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">visible</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -357,14 +364,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/categories/1 GET /admin/categories/1.json</p>
+          <p>GET /admin/categories/1</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_category_path</span>(<span class="ruby-ivar">@category</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -389,21 +397,25 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/categories/1 PATCH/PUT /admin/categories/1.json</p>
+          <p>PATCH/PUT /admin/categories/1 PATCH/PUT /admin/categories/1.js PATCH/PUT
+/admin/categories/1.json</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">category_params</span>)
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_category_path</span>(<span class="ruby-ivar">@category</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
+      <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">roots</span>
+
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_category_path</span>(<span class="ruby-ivar">@category</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>) }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_category_path</span>(<span class="ruby-ivar">@category</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -426,7 +438,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

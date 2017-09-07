@@ -115,6 +115,10 @@
     
     <li ><a href="#method-i-price_for_cents">#price_for_cents</a>
     
+    <li ><a href="#method-i-price_includes_tax-3F">#price_includes_tax?</a>
+    
+    <li ><a href="#method-i-self_and_peers">#self_and_peers</a>
+    
     <li ><a href="#method-i-shopping_cart">#shopping_cart</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
@@ -191,9 +195,12 @@
 
           
           <div class="method-source-code" id="find_for_authentication-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_for_authentication</span>(<span class="ruby-identifier">warden_conditions</span>)
-  <span class="ruby-identifier">joins</span>(<span class="ruby-value">:store</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;users.email = ? AND (stores.host = ? OR stores.subdomain = ?)&#39;</span>, <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:email</span>], <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:host</span>], <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:subdomain</span>]).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">joins</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-value">:hostnames</span>)
+    .<span class="ruby-identifier">where</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:email</span>])
+    .<span class="ruby-identifier">where</span>(<span class="ruby-identifier">hostnames</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">fqdn</span><span class="ruby-operator">:</span> <span class="ruby-identifier">warden_conditions</span>[<span class="ruby-value">:host</span>]})
+    .<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -232,7 +239,7 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 159</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">GROUP_LABELS</span>[<span class="ruby-identifier">group</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -265,7 +272,7 @@
 
           
           <div class="method-source-code" id="available_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 119</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_order_types</span>
   <span class="ruby-identifier">incoming_order_types</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">outgoing_order_types</span>
 <span class="ruby-keyword">end</span></pre>
@@ -298,7 +305,7 @@
 
           
           <div class="method-source-code" id="can_select_pricing_group-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_select_pricing_group?</span>
   <span class="ruby-identifier">reseller?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -331,10 +338,10 @@
 
           
           <div class="method-source-code" id="category_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 148</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">category_options</span>
   <span class="ruby-identifier">available_categories</span> = <span class="ruby-identifier">vendor?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">categories</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>
-  <span class="ruby-identifier">available_categories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">indented_name</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>] }
+  <span class="ruby-identifier">available_categories</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_option</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -366,7 +373,7 @@ completed orders.</p>
 
           
           <div class="method-source-code" id="existing_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">existing_order_types</span>
   <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:order_type</span>).<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
@@ -399,7 +406,7 @@ completed orders.</p>
 
           
           <div class="method-source-code" id="grantable_group_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 127</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_group_options</span>
   <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> [<span class="ruby-constant">User</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>, <span class="ruby-identifier">group</span>), <span class="ruby-identifier">group</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -433,7 +440,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="grantable_role_options-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 133</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_role_options</span>
   <span class="ruby-identifier">roles</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>)
     <span class="ruby-constant">Role</span>.<span class="ruby-identifier">all</span>
@@ -471,7 +478,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="incoming_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">incoming_for</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -504,7 +511,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="label_for-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 93</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label_for</span>(<span class="ruby-identifier">product</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:group</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">reseller?</span>
   <span class="ruby-identifier">promoted_item</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">best_promoted_item</span>
@@ -542,7 +549,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="managed_groups-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_groups</span>
   <span class="ruby-constant">User</span><span class="ruby-operator">::</span><span class="ruby-constant">MANAGED_GROUPS</span>[<span class="ruby-identifier">group</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -575,7 +582,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="managed_users-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_users</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">managed_groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>] })
 <span class="ruby-keyword">end</span></pre>
@@ -609,7 +616,7 @@ going through checkout.</p>
 
           
           <div class="method-source-code" id="outgoing_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 109</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">outgoing_order_types</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">outgoing_for</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -642,11 +649,78 @@ going through checkout.</p>
 
           
           <div class="method-source-code" id="price_for_cents-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_for_cents</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">pricing_group</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">cost_price_cents</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price_cents</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">reseller?</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">price_cents</span>(<span class="ruby-identifier">pricing_group</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-price_includes_tax-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">price_includes_tax?</span><span
+            class="method-args">(product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Manufacturer and reseller users always deal with prices sans tax.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="price_includes_tax-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">price_includes_tax?</span>(<span class="ruby-identifier">product</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">manufacturer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">reseller?</span>
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">tax_category</span>.<span class="ruby-identifier">included_in_retail?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-self_and_peers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">self_and_peers</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="self_and_peers-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">self_and_peers</span>
+  <span class="ruby-identifier">store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">groups</span>[<span class="ruby-identifier">group</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -677,7 +751,7 @@ going through checkout.</p>
 
           
           <div class="method-source-code" id="shopping_cart-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shopping_cart</span>
   <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">incomplete</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span>
     <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">create</span>(
@@ -716,7 +790,7 @@ going through checkout.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 163</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{name} &lt;#{email}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -757,7 +831,7 @@ going through checkout.</p>
 
           
           <div class="method-source-code" id="password_required-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 168</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 185</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password_required?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">persisted?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">password_confirmation</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -779,7 +853,7 @@ going through checkout.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
