@@ -275,9 +275,10 @@ fi:
         text: Teksti
         pricing: Hinnat
         shipping: Toimitus
+        variants: Variaatiot
         vendor_id: Tavarantoimittaja
         purpose: Tyyppi
-        master_product_id: Päätuote
+        master_product_id: Varioitava tuote
         variant_ids: Variantit
         category_ids: Tuoteryhmät
         code: Tuotekoodi

@@ -5,6 +5,7 @@
     = nav_tab 'product-text', col(Product, :text)
     = nav_tab 'product-pricing', col(Product, :pricing), class: @product.has_variants? && 'disabled'
     = nav_tab 'product-shipping', col(Product, :shipping), class: @product.has_variants? && 'disabled'
+    = nav_tab 'product-variants', col(Product, :variants)
 
   .panel.panel-default.tabbed-panel
     .panel-body
@@ -12,7 +13,6 @@
         = tab_pane 'product-meta', class: 'in active' do
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
-            = f.hidden_field :master_product_id
             = f.select :category_ids, current_user.category_options, {}, {multiple: true, class: 'selectize'}
             = f.select :vendor_id, current_store.users.vendor.map { |u| [u.name, u.id] }, {include_blank: blank}, {class: 'selectize', disabled: current_user.vendor?}
             = f.text_field :code, required: true
@@ -77,6 +77,10 @@
             = f.text_field :lead_time, help: t('.lead_time_help_html')
             = f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 
+        = tab_pane 'product-variants' do
+          %fieldset{disabled: locked}
+            = f.select :master_product_id, [], {}, {placeholder: t('.assign_master_product'), class: 'selectize-tall selectize-list-group', data: {products: [@product.master_product].compact, selected: [@product.master_product_id].compact}}
+
       - unless locked
         %fieldset.actions
           = f.form_group do
@@ -118,6 +122,30 @@
         else
           $('#tax-included').collapse 'hide'
           $('#tax-excluded').collapse 'show'
+
+  $master_product = $('#product_master_product_id')
+  products = $master_product.data 'products'
+  selected = $master_product.data 'selected'
+
+  $master_product.selectize
+    dropdownParent: 'body'
+    preload: true
+    options: products
+    items: selected
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)
 
   $('#product_description').summernote
     lang: "#{t('culture')}"

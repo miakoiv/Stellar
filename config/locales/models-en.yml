@@ -275,9 +275,10 @@ en:
         text: Text
         pricing: Pricing
         shipping: Shipping
+        variants: Varieties
         vendor_id: Supplier
         purpose: Type
-        master_product_id: Master product
+        master_product_id: Variant of
         variant_ids: Variants
         category_ids: Categories
         code: Product code

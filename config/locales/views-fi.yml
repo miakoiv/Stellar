@@ -155,6 +155,7 @@ fi:
       new:
         new_product: Uusi tuote
       form:
+        assign_master_product: Valitse tuote jota varioidaan…
         tax_included_in_retail_html: Hinta <strong>sisältää veron</strong>.
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Hinta on <strong>veroton</strong>.
         all_shipping_methods: Kaikki toimitustavat käytettävissä
