@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
     # Unless given by param, locale is set from user preference first, then
     # from portal settings if any, and finally from store settings.
     def set_locale
-      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || @current_portal.present? && @current_portal.locale || @current_store.locale || I18n.default_locale
+      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || @current_store.locale || I18n.default_locale
     end
 
     def set_header_and_footer
