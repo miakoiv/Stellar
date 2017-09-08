@@ -4,5 +4,5 @@ $('.go-checkout').replaceWith("#{j render partial: 'store/go_checkout'}");
 if (typeof ga === 'function') ga('send', 'pageview', '/add_to_cart')
 
 - if @product.requisite_products.visible.any?
-  $("#{j render partial: 'products/list_requisites', object: @product, as: :product}").appendTo($('#offer-requisites-modal .modal-body ul'));
+  $('#offer-requisites-modal .modal-body ul').html($("#{j render partial: 'products/list_requisites', object: @product, as: :product}"));
   $('#offer-requisites-modal').modal('show');
