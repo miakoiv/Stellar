@@ -302,7 +302,9 @@ $bg-tone:           #f6f6f6;
   bottom: 10px;
 }
 .product-list .buy-now-form .btn {
-  @extend .btn-default, .btn-block;
+  @extend .btn-default;
+  display: block;
+  width: 100%;
   font-size: 16px;
   border: 0;
   border-radius: 0;
@@ -312,6 +314,7 @@ $bg-tone:           #f6f6f6;
   font-size: 20px;
   color: $gray-base;
 }
+
 
 /*
  * Products in product grid
@@ -394,7 +397,9 @@ $bg-tone:           #f6f6f6;
 }
 .product-grid .buy-now-form { text-align: center; }
 .product-grid .buy-now-form .btn {
-  @extend .btn-default, .btn-block;
+  @extend .btn-default;
+  display: block;
+  width: 100%;
   font-size: 16px;
   border: 0;
   transition: all 0.4s ease-in-out 0s;
@@ -433,7 +438,7 @@ $bg-tone:           #f6f6f6;
 
 
 /*
- * Product cards and grids in layout content
+ * Product cards in layout content
  */
 .product-card {
   position: relative;
@@ -444,8 +449,8 @@ $bg-tone:           #f6f6f6;
   &:hover {
     border-color: $gray-lighter;
 
-    > a .product-image { transform: scale(1.05); }
-    > .buy-now .btn { }
+    .product-image { transform: scale(1.05); }
+    .buy-now .btn { @extend .btn-danger; }
   }
 }
 .product-card a {
@@ -495,18 +500,26 @@ $bg-tone:           #f6f6f6;
 }
 .product-card .buy-now-form {
   text-align: center;
-}
-.product-card .buy-now-form .btn {
-  @extend .btn-default, .btn-block;
-  font-size: 16px;
-  border: 0;
-  transition: all 0.4s ease-in-out 0s;
+
+  .btn {
+    @extend .btn-default;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    border: 0;
+    transition: all 0.4s ease-in-out 0s;
+  }
 }
 .product-card .price {
   text-align: center;
   font-size: 20px;
   color: $gray-base;
 }
+
+
+/*
+ * Separator rules for category and promotion grids
+ */
 .segment-content.category .grid,
 .segment-content.promotion .grid {
   .grid-item {
@@ -521,6 +534,14 @@ $bg-tone:           #f6f6f6;
   &.grid-columns-6 .grid-item:nth-child(-n+6),
   &.grid-columns-12 .grid-item:nth-child(-n+12) {
     border-top: 0;
+  }
+  &.grid-columns-1 .grid-item:first-child,
+  &.grid-columns-2 .grid-item:nth-child(2n+1),
+  &.grid-columns-3 .grid-item:nth-child(3n+1),
+  &.grid-columns-4 .grid-item:nth-child(4n+1),
+  &.grid-columns-6 .grid-item:nth-child(6n+1),
+  &.grid-columns-12 .grid-item:nth-child(12n+1) {
+    border-left: 0;
   }
 }
 
@@ -652,15 +673,25 @@ $bg-tone:           #f6f6f6;
 .product-meta .order-form {
   margin-top: 20px;
 
-  .btn { @extend .btn-lg, .btn-block, .btn-success; }
+  .btn {
+    @extend .btn-lg, .btn-success;
+    display: block;
+    width: 100%;
+  }
 }
-.product-meta .go-checkout .btn { @extend .btn-block; }
+.product-meta .go-checkout .btn {
+  display: block;
+  width: 100%;
+}
 
 /* Variant products dropdown */
 .product-meta .variant-products {
   margin-bottom: 40px;
 
-  .btn { @extend .btn-block; }
+  .btn {
+    display: block;
+    width: 100%;
+  }
   .dropdown-menu { @extend .dropdown-menu-right; }
   .dropdown-menu .media-heading {
     font-size: $font-size-h5;
@@ -769,6 +800,3 @@ $bg-tone:           #f6f6f6;
     margin-bottom: 10px;
   }
 }
-
-/* Product offerings in modal */
-#offer-requisites-modal .requisite-products { @extend .product-grid; }
