@@ -98,8 +98,9 @@ class Admin::PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(
-        :store_id, :purpose, :resource_type, :resource_id, :live,
-        :title, :slug, :content, :wysiwyg, album_ids: []
+        :store_id, :purpose, :resource_type, :resource_id,
+        :live, :title, :slug,
+        :url
       )
     end
 end

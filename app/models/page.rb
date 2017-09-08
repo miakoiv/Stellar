@@ -2,6 +2,10 @@
 
 class Page < ActiveRecord::Base
 
+  store :metadata, accessors: [
+    :url
+  ], coder: JSON
+
   # Pages must be aware of their routes since they may link to anything.
   include Rails.application.routes.url_helpers
 
@@ -29,6 +33,7 @@ class Page < ActiveRecord::Base
     template: 30,       # printed page template
     portal: 40,         # page with content sections meant for portals
     proxy: 41,          # proxy to a portal page for portal navigation
+    external: 42,       # link to an external page (url)
   }
 
   PRESENTATION = {
@@ -45,6 +50,7 @@ class Page < ActiveRecord::Base
     'template' => {icon: 'file-o', appearance: 'warning'},
     'portal' => {icon: 'globe', appearance: 'success'},
     'proxy' => {icon: 'share', appearance: 'success'},
+    'external' => {icon: 'share', appearance: 'danger'},
   }.freeze
 
   #---
@@ -71,10 +77,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.available_purposes
-    purposes.slice(
-      :route, :primary, :category, :product, :promotion, :department,
-      :dropdown, :megamenu, :template, :portal, :proxy
-    )
+    purposes.except :header, :footer
   end
 
   def self.purpose_options
@@ -96,8 +99,7 @@ class Page < ActiveRecord::Base
 
   def movable?
     return false if needs_resource? && resource.nil?
-    route? || primary? || category? || product? || promotion? ||
-    department? || dropdown? || megamenu? || template? || portal? || proxy?
+    !(header? || footer?)
   end
 
   def can_have_albums?
@@ -108,9 +110,9 @@ class Page < ActiveRecord::Base
     [:title, [:title, -> { store.name }]]
   end
 
-  # Prevent FriendlyId from changing slugs on route pages.
+  # Prevent FriendlyId from changing slugs on route and external pages.
   def should_generate_new_friendly_id?
-    !route? && title_changed? || super
+    !(route? || external?) && title_changed? || super
   end
 
   def to_s

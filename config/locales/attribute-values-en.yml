@@ -22,6 +22,7 @@ en:
           template: Template
           portal: Portal page
           proxy: Member store page
+          external: External page
       property:
         value_type:
           string: String

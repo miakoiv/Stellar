@@ -22,6 +22,7 @@ fi:
           template: Sivupohja
           portal: Verkostosivu
           proxy: Jäsenkaupan sivu
+          external: Ulkoinen sivu
       property:
         value_type:
           string: sanallinen

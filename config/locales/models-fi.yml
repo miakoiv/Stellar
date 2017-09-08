@@ -260,6 +260,7 @@ fi:
         not_live: Sivu ei aktiivinen
         title: Otsake
         slug: Kohde
+        url: Osoite
         content: Sisältö
         wysiwyg: Näytä ulkoasu
         album_ids: Albumit

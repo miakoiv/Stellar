@@ -260,6 +260,7 @@ en:
         not_live: Page is disabled
         title: Title
         slug: Target
+        url: Osoite
         content: Content
         wysiwyg: Show layout
         album_ids: Albums
