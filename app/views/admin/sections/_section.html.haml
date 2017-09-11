@@ -1,11 +1,11 @@
 %section.section{style: section_style(section)}
   - if section.spread?
-    .section-content{class: [section.outline, section.layout, section.width]}
+    .section-content{class: [section.outline, section.layout, section.fixed_or_fluid, section.shape, section.width]}
       .row
         = render partial: 'admin/segments/segment', collection: section.segments
   - else
     .container
       .row
-        .section-content{class: [section.outline, section.layout, section.width]}
+        .section-content{class: [section.outline, section.layout, section.fixed_or_fluid, section.shape, section.width]}
           .row
             = render partial: 'admin/segments/segment', collection: section.segments

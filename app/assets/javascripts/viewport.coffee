@@ -3,7 +3,7 @@ $.fn.extend
     $(this).height $(window).height() - $('.layout-container').offset().top
 
 @viewportUpdate = ->
-  $('.viewport').each ->
+  $('.section-content.shape-viewport').each ->
     $(this).fillViewport()
 
 $(window).resize -> viewportUpdate()

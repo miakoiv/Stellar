@@ -18,7 +18,6 @@ class Section < ActiveRecord::Base
   # Preset layouts for column and block outlines.
   PRESETS = [
     [:column, [
-      [1, 'viewport'],
       [1, 'twelve'],
       [2, 'six-six'],
       [2, 'eight-four'],
@@ -27,7 +26,6 @@ class Section < ActiveRecord::Base
       [4, 'three-three-three-three'],
     ]],
     [:block, [
-      [1, 'viewport'],
       [1, 'twelve'],
       [2, 'six-six'],
       [2, 'eight-four'],
@@ -43,6 +41,18 @@ class Section < ActiveRecord::Base
   WIDTHS = %w{
     spread col-12 col-10 col-8 col-6
   }.freeze
+
+  # Section shape presets to control block segment aspect ratios.
+  SHAPES = [
+    ['viewport', 'shape-viewport'],
+    ['1:1', 'shape-square'],
+    ['4:3', 'shape-4-3'],
+    ['16:9', 'shape-16-9'],
+    ['2:1', 'shape-two-one'],
+    ['21:9', 'shape-21-9'],
+    ['3:1', 'shape-three-one'],
+    ['4:1', 'shape-four-one'],
+  ].freeze
 
   #---
   # Section outline affects the arrangement of its segments.
@@ -69,9 +79,21 @@ class Section < ActiveRecord::Base
     WIDTHS.map { |w| [Section.human_attribute_value(:width, w), w] }
   end
 
+  def self.shape_options
+    SHAPES
+  end
+
   #---
   def spread?
     width == 'spread'
+  end
+
+  def viewport?
+    shape == 'shape-viewport'
+  end
+
+  def fixed_or_fluid
+    shape.present? ? 'fixed-ratio' : 'fluid-ratio'
   end
 
   # FIXME: this should be dependent on the outline,

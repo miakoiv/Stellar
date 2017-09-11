@@ -1,2 +1,4 @@
 .segment[segment]{class: segment.alignment}
-  = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}
+  .segment-shape{class: segment.shape}
+    .segment-content-wrap{class: segment.alignment}
+      = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}

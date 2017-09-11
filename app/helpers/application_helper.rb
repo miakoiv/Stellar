@@ -89,7 +89,7 @@ module ApplicationHelper
         s << "background-size: cover"
         s << "background-position: center center"
         s << "background-repeat: no-repeat"
-        if section.layout == 'viewport'
+        if section.viewport?
           s << "background-attachment: fixed"
         end
       end

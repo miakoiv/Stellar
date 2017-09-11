@@ -189,6 +189,8 @@ fi:
       new:
         new_property: Uusi ominaisuus
     sections:
+      form:
+        fluid_ratio: sisällön mukaan
       section_nav:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.

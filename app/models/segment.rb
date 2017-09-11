@@ -33,6 +33,7 @@ class Segment < ActiveRecord::Base
 
   #---
   belongs_to :section
+  delegate :shape, to: :section
   belongs_to :resource, polymorphic: true
 
   default_scope { sorted }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908114901) do
+ActiveRecord::Schema.define(version: 20170908130202) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -563,6 +563,7 @@ ActiveRecord::Schema.define(version: 20170908114901) do
     t.string   "width",            limit: 255, default: "col-12",  null: false
     t.integer  "outline",          limit: 4,   default: 1,         null: false
     t.string   "layout",           limit: 255, default: "twelve",  null: false
+    t.string   "shape",            limit: 255
     t.string   "background_color", limit: 255, default: "#FFFFFF", null: false
     t.integer  "priority",         limit: 4,   default: 0,         null: false
     t.datetime "created_at",                                       null: false

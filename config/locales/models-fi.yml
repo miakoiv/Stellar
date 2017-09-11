@@ -361,6 +361,7 @@ fi:
       section:
         outline: Malli
         layout: Asettelu
+        shape: Lohkon muoto
         width: Sisällön leveys
         background_color: Taustaväri
       segment:

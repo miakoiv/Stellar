@@ -361,6 +361,7 @@ en:
       section:
         outline: Outline
         layout: Layout
+        shape: Block shape
         width: Content width
         background_color: Background color
       segment:

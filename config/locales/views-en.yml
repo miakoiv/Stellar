@@ -209,6 +209,8 @@ en:
       new:
         new_property: New property
     sections:
+      form:
+        fluid_ratio: from content
       section_nav:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.

@@ -8,9 +8,12 @@
             = f.radio_button_without_bootstrap :outline, outline
             = Section.human_attribute_value(:outline, outline)
     = f.select :layout, section.layout_options, {}, {required: true}
+    = f.select :shape, Section.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
     = f.select :width, Section.width_options, {}, {required: true}
     = f.color_field :background_color
 
 :coffee
   $('#section_#{section.id}_section_layout').selectize()
+  $('#section_#{section.id}_section_shape').selectize
+      allowEmptyOption: true
   $('#section_#{section.id}_section_width').selectize()
