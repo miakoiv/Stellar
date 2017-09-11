@@ -41,7 +41,7 @@ class Admin::SegmentsController < ApplicationController
       params.fetch(:segment) {{}}.permit(
         :resource_id, :resource_type, :template, :alignment,
         :body, :headline,
-        :grid_columns, :masonry,
+        :min_height, :grid_columns, :masonry,
         :max_items, :product_scope, :show_more,
         :map_location, :map_zoom
       )

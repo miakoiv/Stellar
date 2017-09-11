@@ -370,6 +370,7 @@ fi:
         alignment: Sisällön tasaus
         body: Leipäteksti
         headline: Otsikko
+        min_height: Korkeus
         grid_columns: Sarakkeita
         masonry: Tiivistä rivit
         max_items: Maksimimäärä

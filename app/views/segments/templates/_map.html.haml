@@ -1,5 +1,5 @@
 .segment-content.map{id: segment_content_id(map, context)}
-  .map-container{data: {location: map.map_location || 'Infinite Loop, Cupertino, CA', zoom: map.map_zoom || 10}}
+  .map-container{style: map.min_height.present? && "min-height: #{map.min_height}em;", data: {location: map.map_location || 'Infinite Loop, Cupertino, CA', zoom: map.map_zoom || 10}}
 
 :coffee
   jQuery ->

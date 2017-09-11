@@ -370,6 +370,7 @@ en:
         alignment: Content alignment
         body: Body text
         headline: Headline
+        min_height: Height
         grid_columns: Grid columns
         masonry: Pack rows tightly
         max_items: Max items
