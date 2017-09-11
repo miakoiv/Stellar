@@ -103,6 +103,22 @@
   .segment:nth-last-child(-n+2) { @extend .col-xs-6, .col-sm-4, .col-sm-pull-8; }
 }
 
+
+/*
+ * Section background settings
+ */
+.section {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+@media (min-width: $screen-sm-min) {
+  .section.shape-viewport {
+    background-attachment: fixed;
+  }
+}
+
+
 /*
  * Section content dimensioning and alignment
  */

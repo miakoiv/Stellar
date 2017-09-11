@@ -86,12 +86,6 @@ module ApplicationHelper
     [].tap do |s|
       if section.background_image.present?
         s << "background-image: url(#{section.background_image.url(:lightbox)})"
-        s << "background-size: cover"
-        s << "background-position: center center"
-        s << "background-repeat: no-repeat"
-        if section.viewport?
-          s << "background-attachment: fixed"
-        end
       end
       s << "background-color: #{section.background_color}"
     end.join '; '
