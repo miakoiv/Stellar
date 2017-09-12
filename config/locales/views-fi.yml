@@ -200,6 +200,7 @@ fi:
       new:
         new_shipping_method: Uusi toimitustapa
       form:
+        maps_api_reminder: Toimitustapa voi vaatia Google Mapsin käyttöä. Varmista että kaupalla on Google Maps -avain asetettuna.
         detail_page_help: Linkki tähän lisätietosivuun näytetään kun asiakas valitsee tämän toimitustavan.
     stores:
       index:

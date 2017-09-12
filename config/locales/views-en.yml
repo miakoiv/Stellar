@@ -220,6 +220,7 @@ en:
       new:
         new_shipping_method: New shipping method
       form:
+        maps_api_reminder: The shipping method may require Google Maps, make sure the store has a Google Maps key.
         detail_page_help: A link to this page is shown during checkout to provide further details on this shipping method.
     stores:
       index:
