@@ -17,6 +17,10 @@ module ShippingGateway
 
     attr_accessor :order
 
+    def self.requires_maps?
+      true
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
