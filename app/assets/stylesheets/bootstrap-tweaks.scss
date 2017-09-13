@@ -653,6 +653,14 @@ i.icon {
 .grid.sortable { padding-bottom: 40px; }
 .grid.sortable .grid-item { cursor: grab; }
 
+@media (max-width: $screen-xs-max) {
+  .grid.grid-columns-2 .grid-item { width: 100%; }
+  .grid.grid-columns-3 .grid-item { width: 33.333333%; }
+  .grid.grid-columns-4 .grid-item { width: 50%; }
+  .grid.grid-columns-6 .grid-item { width: 33.333333%; }
+  .grid.grid-columns-12 .grid-item { width: 16.666667%; }
+}
+
 
 /*
  * Image thumbnail grid
