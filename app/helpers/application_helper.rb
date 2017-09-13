@@ -69,6 +69,11 @@ module ApplicationHelper
     end
   end
 
+  def background_image_style(image, size = :lightbox)
+    return nil if image.nil?
+    "background-image: url(#{image.url(size)})"
+  end
+
   # Different sized icons for documents and video files.
   # Comes with a tooltip of the file name.
   def document_icon_tag(image, size = :icon)
@@ -92,9 +97,7 @@ module ApplicationHelper
   end
 
   def segment_style(segment)
-    [].tap do |s|
-      s << "min-height: #{segment.min_height}em" if segment.min_height.present?
-    end.join '; '
+    "min-height: #{segment.min_height}em;" if segment.min_height.present?
   end
 
   # Generates a segment content id in a specific context. Scripts that
