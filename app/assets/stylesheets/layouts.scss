@@ -47,9 +47,11 @@
 .section-content.block {
   @include padding-horizontal;
 }
-.section-content.block > .row {
-  margin-left: 0;
-  margin-right: 0;
+@media (min-width: $screen-sm-min) {
+  .section-content.block > .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 .section-content.block .segment {
   @include padding-horizontal(0);
