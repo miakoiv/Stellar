@@ -91,6 +91,12 @@ module ApplicationHelper
     end.join '; '
   end
 
+  def segment_style(segment)
+    [].tap do |s|
+      s << "min-height: #{segment.min_height}em" if segment.min_height.present?
+    end.join '; '
+  end
+
   # Generates a segment content id in a specific context. Scripts that
   # generate segment content may use this method to target the segment
   # content either in layout or the layout panel.
