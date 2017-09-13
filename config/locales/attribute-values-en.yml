@@ -85,6 +85,9 @@ en:
           category: category
           product: product
           promotion: promotion
+          category_banner: category feature
+          product_banner: product feature
+          promotion_banner: promotion feature
           raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top

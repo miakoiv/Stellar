@@ -1,0 +1,38 @@
+- content_for :segment_head do
+  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
+  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+
+%fieldset
+  .row
+    .col-sm-12
+      = f.hidden_field :resource_type, value: 'Product'
+      = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: [@segment.resource].compact, selected: [@segment.resource_id].compact}}
+
+:coffee
+  $product = $('#segment_resource_id')
+  resources = $product.data 'resources'
+  selected = $product.data 'selected'
+  $product.selectize
+    preload: true
+    options: resources
+    items: selected
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.renderers
+    load: (query, callback) ->
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        data:
+          q: query
+          purposes: ['vanilla', 'bundle', 'composite', 'virtual']
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)
+
+  $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
+    $(document.body).trigger 'sticky_kit:recalc'

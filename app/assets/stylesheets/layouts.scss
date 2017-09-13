@@ -250,3 +250,16 @@
 .block .segment-content.product {
   .product-card { height: 100%; }
 }
+
+.segment-content.category_feature,
+.segment-content.product_feature,
+.segment-content.promotion_feature {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .foreground, .foreground img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}

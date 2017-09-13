@@ -85,6 +85,9 @@ fi:
           category: tuoteryhmä
           product: tuote
           promotion: kampanja
+          category_feature: tuoteryhmämainos
+          product_feature: tuotemainos
+          promotion_feature: kampanjamainos
           raw: ʜᴛᴍʟ-osio
         alignment:
           'align-top': ylös

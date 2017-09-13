@@ -1,0 +1,9 @@
+- content_for :segment_head do
+  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
+  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+
+%fieldset
+  .row
+    .col-sm-12
+      = f.hidden_field :resource_type, value: 'Promotion'
+      = f.select :resource_id, current_store.promotions.active.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
