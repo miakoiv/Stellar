@@ -130,13 +130,14 @@
 }
 
 /* With fluid aspect ratio, alignment happens within the .row */
-.section-content.fluid-ratio > .row {
+.section-content.column.fluid-ratio > .row {
   display: flex;
   flex-flow: row wrap;
+
+  .segment.align-top { align-self: flex-start; }
+  .segment.align-middle { align-self: center; }
+  .segment.align-bottom { align-self: flex-end; }
 }
-.segment.align-top { align-self: flex-start; }
-.segment.align-middle { align-self: center; }
-.segment.align-bottom { align-self: flex-end; }
 
 /* With fixed aspect ratio, alignment is based on .segment-content-wrap */
 .section-content.fixed-ratio .segment-shape {
