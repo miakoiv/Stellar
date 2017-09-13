@@ -11,7 +11,8 @@
                 = title
     %li.dropdown
       %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-        = icon('paint-brush')
+        = segment
+        %i.caret
       %ul.dropdown-menu.dropdown-menu-right
         - Segment.template_options.each do |title, template|
           %li{class: segment.template == template && 'active'}

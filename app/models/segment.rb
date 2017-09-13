@@ -82,6 +82,10 @@ class Segment < ActiveRecord::Base
     end
   end
 
+  def to_s
+    human_attribute_value(:template).capitalize
+  end
+
   def to_partial_path
     "segments/templates/#{template}"
   end
