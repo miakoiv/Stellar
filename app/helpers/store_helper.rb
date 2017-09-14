@@ -7,13 +7,13 @@ module StoreHelper
   end
 
   def unit_price_string(price, unit)
-    "#{price_tag price} / #{unit}"
+    "#{price_tag price} / #{unit}".html_safe
   end
 
   def price_tag(price)
     sep = price.separator
     units, subunits = humanized_money(price).split sep
-    "#{units}#{sep}#{content_tag(:span, subunits, class: 'cents')}#{currency_symbol}".html_safe
+    "#{units}#{content_tag(:span, sep, class: 'sep')}#{content_tag(:span, subunits, class: 'cents')}#{currency_symbol}".html_safe
   end
 
   def price_range(range)
