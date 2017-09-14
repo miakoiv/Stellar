@@ -43,7 +43,8 @@ class Admin::SegmentsController < ApplicationController
         :body, :headline,
         :min_height, :grid_columns, :masonry,
         :max_items, :product_scope, :show_more,
-        :map_location, :map_zoom
+        :map_location, :map_zoom,
+        :video_url
       )
     end
 end

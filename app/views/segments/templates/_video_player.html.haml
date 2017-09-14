@@ -1,0 +1,4 @@
+.segment-content.video_player{id: segment_content_id(video_player, context)}
+  - if video_player.video_url.present?
+    .video-container
+      %iframe{src: video_player.video_url, frameborder: 0, allowfullscreen: true, mozallowfullscreen: true, webkitAllowFullScreen: true}

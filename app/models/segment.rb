@@ -7,6 +7,7 @@ class Segment < ActiveRecord::Base
     :min_height, :grid_columns, :masonry,
     :max_items, :show_more, :product_scope,
     :map_location, :map_zoom,
+    :video_url,
   ], coder: JSON
 
   resourcify
@@ -26,6 +27,7 @@ class Segment < ActiveRecord::Base
     picture: 2,
     gallery: 3,
     map: 4,
+    video_player: 5,
     category: 11,
     product: 12,
     promotion: 13,

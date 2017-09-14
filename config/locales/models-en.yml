@@ -378,6 +378,7 @@ en:
         product_scope: Product sorting
         map_location: Location address
         map_zoom: Map zoom
+        video_url: Video URL for embedding
         thumbnail_size: Slide size
       shipment:
         shipping_method_id: Shipping method

@@ -82,6 +82,7 @@ en:
           picture: picture
           gallery: gallery
           map: map
+          video_player: video embed
           category: category
           product: product
           promotion: promotion

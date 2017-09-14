@@ -82,6 +82,7 @@ fi:
           picture: kuva
           gallery: galleria
           map: kartta
+          video_player: videoupotus
           category: tuoteryhmä
           product: tuote
           promotion: kampanja
