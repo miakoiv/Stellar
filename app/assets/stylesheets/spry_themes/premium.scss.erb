@@ -231,6 +231,23 @@ $bg-tone:           #f6f6f6;
 
 
 /*
+ * Prices with superscript cents
+ */
+@mixin pretty-price {
+  line-height: 0.88;
+  word-spacing: -0.1em;
+  .sep { font-size: 75%; }
+  .cents {
+    @extend sup;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.22em;
+    left: -0.08em;
+  }
+}
+
+
+/*
  * Products in product list
  */
 .product-list > ul {
@@ -394,6 +411,7 @@ $bg-tone:           #f6f6f6;
   right: 30px;
   bottom: 15px;
   left: 30px;
+  text-align: center;
 }
 .product-grid .buy-now-form { text-align: center; }
 .product-grid .buy-now-form .btn {
@@ -405,9 +423,10 @@ $bg-tone:           #f6f6f6;
   transition: all 0.4s ease-in-out 0s;
 }
 .product-grid .price {
-  text-align: center;
-  font-size: 20px;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-size: 24px;
   color: $gray-base;
+  @include pretty-price;
 }
 .product-grid .buy-now .price {
   position: absolute;
@@ -415,7 +434,10 @@ $bg-tone:           #f6f6f6;
   bottom: 30px;
   left: 0;
 }
-.product-grid .product-pricing .store { text-align: center; }
+.product-grid .product-pricing .store {
+  @extend .label, .label-primary;
+  display: inline-block;
+}
 
 /* Link to more at the bottom of a grid */
 .more-items-link {
@@ -512,8 +534,10 @@ $bg-tone:           #f6f6f6;
 }
 .product-card .price {
   text-align: center;
-  font-size: 20px;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-size: 24px;
   color: $gray-base;
+  @include pretty-price;
 }
 
 
@@ -650,9 +674,10 @@ $bg-tone:           #f6f6f6;
 .product-meta .price {
   display: inline-block;
   margin-bottom: 0;
-  font-size: 42px;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+  font-size: 56px;
   font-weight: 300;
-  letter-spacing: -0.02em;
+  @include pretty-price;
 
   .fa {
     position: relative;
@@ -664,8 +689,7 @@ $bg-tone:           #f6f6f6;
     @extend .text-muted;
     display: inline-block;
     margin-left: 0.5em;
-    font-size: $font-size-base;
-    letter-spacing: normal;
+    font-size: $font-size-large;
   }
 }
 .product-meta .retail-price {
