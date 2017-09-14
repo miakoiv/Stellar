@@ -14,9 +14,9 @@
         .promotion= item.description
   .buy-now
     - if product.has_variants?
-      %p.price= humanized_money_range product.price_range(current_pricing)
+      %p.price= price_range product.price_range(current_pricing)
     - else
-      %p.price= humanized_money_with_symbol product.price_tag(current_pricing)
+      %p.price= price_tag product.price_tag(current_pricing)
     - if current_store.present? && product.purchasable?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
         = hidden_field_tag :amount, 1

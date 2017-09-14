@@ -13,9 +13,9 @@
       .product-pricing
         %p.price
           - if product.has_variants?
-            = humanized_money_range product.price_range(current_pricing)
+            = price_range product.price_range(current_pricing)
           - else
-            = humanized_money_with_symbol product.price_tag(current_pricing)
+            = price_tag product.price_tag(current_pricing)
         %p.store
           = image_variant_tag product.store.cover_image, :icon
           = product.store

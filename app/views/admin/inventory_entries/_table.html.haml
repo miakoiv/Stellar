@@ -19,5 +19,5 @@
         %td.text-right= inventory_entry.on_hand
         %td.text-right= inventory_entry.reserved
         %td.text-right= inventory_entry.pending
-        %td.text-right.currency= humanized_money_with_symbol inventory_entry.value
+        %td.text-right.currency= price_tag inventory_entry.value
         %td= inventory_entry.note

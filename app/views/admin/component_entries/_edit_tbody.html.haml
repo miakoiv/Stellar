@@ -6,10 +6,10 @@
     = entry.component.subtitle
   %td.text-right.currency
     - if entry.component.retail_price.present?
-      = humanized_money_with_symbol entry.component.retail_price
+      = price_tag entry.component.retail_price
   %td.text-right= entry.quantity
   %td.text-right.currency
     - if entry.component.retail_price.present?
-      = humanized_money_with_symbol entry.quantity * entry.component.retail_price
+      = price_tag entry.quantity * entry.component.retail_price
   %td.actions
     = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-danger'

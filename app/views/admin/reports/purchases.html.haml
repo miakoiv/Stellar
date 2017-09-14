@@ -9,7 +9,7 @@
   .report-body
     %dl.dl-horizontal
       %dt= t('admin.reports.purchases.total_value')
-      %dd= humanized_money_with_symbol @purchases.total_value
+      %dd= price_tag @purchases.total_value.to_money
       %dt= t('admin.reports.purchases.total_items')
       %dd= @purchases.total_items
       %dt= t('admin.reports.purchases.products')

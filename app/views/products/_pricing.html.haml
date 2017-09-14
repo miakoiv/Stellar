@@ -3,7 +3,7 @@
 
 - if can_see_pricing? && price.present?
   %p.price.currency
-    = icon('tag', humanized_money_with_symbol(price))
+    = icon('tag', price_tag(price))
     - if current_store.b2b_sales?
       %span.tax-rate= "(#{product.tax_category})"
     - unless unit_price.nil?
@@ -11,4 +11,4 @@
         = unit_price_string(unit_price, product.base_unit)
   - if product.promoted_price.present?
     %p.retail-price.currency
-      = humanized_money_with_symbol(product.retail_price)
+      = price_tag(product.retail_price)

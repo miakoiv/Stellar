@@ -21,7 +21,7 @@
           %td= product.categories.to_sentence
           %td.text-right= items.map(&:amount).sum
           %td.text-right.currency
-            = humanized_money_with_symbol items.map(&:subtotal_sans_tax).compact.sum
+            = price_tag items.map(&:subtotal_sans_tax).compact.sum
 
         - items.each do |item|
           %tr.subrow.collapse{class: dom_id(product)}
@@ -33,7 +33,7 @@
             %td
             %td.text-right= item.amount
             %td.text-right.currency
-              = humanized_money_with_symbol item.subtotal_sans_tax
+              = price_tag item.subtotal_sans_tax
 
 :coffee
   $('#purchases-table').tablesorter

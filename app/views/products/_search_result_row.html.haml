@@ -12,6 +12,6 @@
     - if can_see_pricing?
       %td.price.currency.text-right
         - if product.has_variants?
-          = humanized_money_range product.price_range(current_pricing)
+          = price_range product.price_range(current_pricing)
         - else
-          = humanized_money_with_symbol product.price_tag(current_pricing)
+          = price_tag product.price_tag(current_pricing)

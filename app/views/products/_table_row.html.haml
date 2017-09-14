@@ -10,7 +10,7 @@
     - if can_see_pricing? && can_shop? && may_shop_at?(@category)
       %td.price.currency.text-right
         - if product.purchasable?
-          = humanized_money_with_symbol product.price_tag(current_pricing)
+          = price_tag product.price_tag(current_pricing)
     %td.actions
       - if can_shop? && may_shop_at?(@category) && product.purchasable?
         = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline' do

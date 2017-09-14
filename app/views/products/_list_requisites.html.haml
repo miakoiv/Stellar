@@ -7,7 +7,7 @@
         %span.small= product.subtitle
     .buy-now
       - if can_see_pricing? && can_shop?
-        %p.price= humanized_money_with_symbol product.price_tag(current_pricing)
+        %p.price= price_tag product.price_tag(current_pricing)
         = form_tag order_product_path(product), method: :post, remote: true, class: 'buy-now-form' do
           .input-group.input-group-sm
             = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control text-right'

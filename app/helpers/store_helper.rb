@@ -7,15 +7,21 @@ module StoreHelper
   end
 
   def unit_price_string(price, unit)
-    "#{humanized_money_with_symbol price} / #{unit}"
+    "#{price_tag price} / #{unit}"
   end
 
-  def humanized_money_range(range)
+  def price_tag(price)
+    sep = price.separator
+    units, subunits = humanized_money(price).split sep
+    "#{units}#{sep}#{content_tag(:span, subunits, class: 'cents')}#{currency_symbol}".html_safe
+  end
+
+  def price_range(range)
     min, max = range
     if min == max
-      humanized_money_with_symbol min
+      price_tag min
     else
-      "#{humanized_money_with_symbol min} – #{humanized_money_with_symbol max}"
+      "#{price_tag min}–#{price_tag max}".html_safe
     end
   end
 

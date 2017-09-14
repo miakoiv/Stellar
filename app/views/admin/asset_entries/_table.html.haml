@@ -16,6 +16,6 @@
           - if asset_entry.source.present?
             = link_to_if current_user.can_read?(asset_entry.source.class), "#{title(asset_entry.source.class)} #{asset_entry.source}", [:admin, asset_entry.source]
         %td.text-right= asset_entry.amount
-        %td.hidden.text-right.currency= humanized_money_with_symbol asset_entry.value
+        %td.hidden.text-right.currency= price_tag asset_entry.value
         %td= asset_entry.note
         %td
