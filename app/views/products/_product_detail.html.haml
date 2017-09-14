@@ -21,6 +21,9 @@
         = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
       .buy-now
+        .promotions
+          - product.active_promoted_items.each do |item|
+            .promotion= item.description
         .product-pricing
           = render partial: 'products/pricing', object: product, as: :product
         - if product.includes_components?
