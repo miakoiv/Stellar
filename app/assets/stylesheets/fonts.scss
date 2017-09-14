@@ -3,131 +3,241 @@
  */
 
 @font-face {
- font-family: 'Fira Sans';
- src: font-url('firasans-light-webfont.eot');
- src: font-url('firasans-light-webfont.eot?#iefix') format('embedded-opentype'),
- font-url('firasans-light-webfont.woff') format('woff'),
- font-url('firasans-light-webfont.ttf') format('truetype');
- font-weight: 300;
- font-style: normal;
-}
-
-@font-face {
- font-family: 'Fira Sans';
- src: font-url('firasans-lightitalic-webfont.eot');
- src: font-url('firasans-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
- font-url('firasans-lightitalic-webfont.woff') format('woff'),
- font-url('firasans-lightitalic-webfont.ttf') format('truetype');
- font-weight: 300;
- font-style: italic;
+  font-family: 'Fira Sans';
+  src: font-url('subset-FiraSans-Light.eot');
+  src: font-url('subset-FiraSans-Light.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-Light.woff') format('woff'),
+  font-url('subset-FiraSans-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-regular-webfont.eot');
-  src: font-url('firasans-regular-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-regular-webfont.woff') format('woff'),
-  font-url('firasans-regular-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-LightItalic.eot');
+  src: font-url('subset-FiraSans-LightItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-LightItalic.woff') format('woff'),
+  font-url('subset-FiraSans-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: font-url('subset-FiraSans-Regular.eot');
+  src: font-url('subset-FiraSans-Regular.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-Regular.woff') format('woff'),
+  font-url('subset-FiraSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-italic-webfont.eot');
-  src: font-url('firasans-italic-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-italic-webfont.woff') format('woff'),
-  font-url('firasans-italic-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-Italic.eot');
+  src: font-url('subset-FiraSans-Italic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-Italic.woff') format('woff'),
+  font-url('subset-FiraSans-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-medium-webfont.eot');
-  src: font-url('firasans-medium-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-medium-webfont.woff') format('woff'),
-  font-url('firasans-medium-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-Medium.eot');
+  src: font-url('subset-FiraSans-Medium.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-Medium.woff') format('woff'),
+  font-url('subset-FiraSans-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-mediumitalic-webfont.eot');
-  src: font-url('firasans-mediumitalic-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-mediumitalic-webfont.woff') format('woff'),
-  font-url('firasans-mediumitalic-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-MediumItalic.eot');
+  src: font-url('subset-FiraSans-MediumItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-MediumItalic.woff') format('woff'),
+  font-url('subset-FiraSans-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-bold-webfont.eot');
-  src: font-url('firasans-bold-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-bold-webfont.woff') format('woff'),
-  font-url('firasans-bold-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-Bold.eot');
+  src: font-url('subset-FiraSans-Bold.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-Bold.woff') format('woff'),
+  font-url('subset-FiraSans-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: font-url('firasans-bolditalic-webfont.eot');
-  src: font-url('firasans-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('firasans-bolditalic-webfont.woff') format('woff'),
-  font-url('firasans-bolditalic-webfont.ttf') format('truetype');
+  src: font-url('subset-FiraSans-BoldItalic.eot');
+  src: font-url('subset-FiraSans-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSans-BoldItalic.woff') format('woff'),
+  font-url('subset-FiraSans-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-Light.eot');
+  src: font-url('subset-FiraSansExtraCondensed-Light.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-Light.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-LightItalic.eot');
+  src: font-url('subset-FiraSansExtraCondensed-LightItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-LightItalic.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-Regular.eot');
+  src: font-url('subset-FiraSansExtraCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-Regular.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-Italic.eot');
+  src: font-url('subset-FiraSansExtraCondensed-Italic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-Italic.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-Medium.eot');
+  src: font-url('subset-FiraSansExtraCondensed-Medium.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-Medium.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-MediumItalic.eot');
+  src: font-url('subset-FiraSansExtraCondensed-MediumItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-MediumItalic.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-Bold.eot');
+  src: font-url('subset-FiraSansExtraCondensed-Bold.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-Bold.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: font-url('subset-FiraSansExtraCondensed-BoldItalic.eot');
+  src: font-url('subset-FiraSansExtraCondensed-BoldItalic?#iefix') format('embedded-opentype'),
+  font-url('subset-FiraSansExtraCondensed-BoldItalic.woff') format('woff'),
+  font-url('subset-FiraSansExtraCondensed-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Droid Serif';
-  src: font-url('droidserif-webfont.eot');
-  src: font-url('droidserif-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('droidserif-webfont.woff') format('woff'),
-  font-url('droidserif-webfont.ttf') format('truetype');
+  src: font-url('subset-DroidSerif.eot');
+  src: font-url('subset-DroidSerif.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-DroidSerif.woff') format('woff'),
+  font-url('subset-DroidSerif.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Droid Serif';
-  src: font-url('droidserif-italic-webfont.eot');
-  src: font-url('droidserif-italic-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('droidserif-italic-webfont.woff') format('woff'),
-  font-url('droidserif-italic-webfont.ttf') format('truetype');
+  src: font-url('subset-DroidSerif-Italic.eot');
+  src: font-url('subset-DroidSerif-Italic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-DroidSerif-Italic.woff') format('woff'),
+  font-url('subset-DroidSerif-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Droid Serif';
-  src: font-url('droidserif-bold-webfont.eot');
-  src: font-url('droidserif-bold-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('droidserif-bold-webfont.woff') format('woff'),
-  font-url('droidserif-bold-webfont.ttf') format('truetype');
+  src: font-url('subset-DroidSerif-Bold.eot');
+  src: font-url('subset-DroidSerif-Bold.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-DroidSerif-Bold.woff') format('woff'),
+  font-url('subset-DroidSerif-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Droid Serif';
-  src: font-url('droidserif-bolditalic-webfont.eot');
-  src: font-url('droidserif-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('droidserif-bolditalic-webfont.woff') format('woff'),
-  font-url('droidserif-bolditalic-webfont.ttf') format('truetype');
+  src: font-url('subset-DroidSerif-BoldItalic.eot');
+  src: font-url('subset-DroidSerif-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-DroidSerif-BoldItalic.woff') format('woff'),
+  font-url('subset-DroidSerif-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: font-url('montserrat-bold-webfont.eot');
-  src: font-url('montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
-  font-url('montserrat-bold-webfont.woff') format('woff'),
-  font-url('montserrat-bold-webfont.ttf') format('truetype');
-  font-weight: 500;
+  src: font-url('subset-Montserrat-Bold.eot');
+  src: font-url('subset-Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-Montserrat-Bold.woff') format('woff'),
+  font-url('subset-Montserrat-Bold.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: font-url('subset-Montserrat-BoldItalic.eot');
+  src: font-url('subset-Montserrat-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-Montserrat-BoldItalic.woff') format('woff'),
+  font-url('subset-Montserrat-BoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: font-url('subset-Montserrat-Black.eot');
+  src: font-url('subset-Montserrat-Black.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-Montserrat-Black.woff') format('woff'),
+  font-url('subset-Montserrat-Black.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: font-url('subset-Montserrat-BlackItalic.eot');
+  src: font-url('subset-Montserrat-BlackItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('subset-Montserrat-BlackItalic.woff') format('woff'),
+  font-url('subset-Montserrat-BlackItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
 }
