@@ -11,6 +11,7 @@
 
     %tbody
       - @purchases_data.by_product.each do |product, items|
+        - subtotal = items.map(&:subtotal_sans_tax).compact.sum
         %tr.expandable{data: {toggle: 'collapse', target: ".#{dom_id(product)}"}}
           %td= icon('plus')
           %td
@@ -20,10 +21,11 @@
           %td= product.codes
           %td= product.categories.to_sentence
           %td.text-right= items.map(&:amount).sum
-          %td.text-right.currency
-            = price_tag items.map(&:subtotal_sans_tax).compact.sum
+          %td.text-right.currency{data: {text: subtotal.cents}}
+            = price_tag subtotal
 
         - items.each do |item|
+          - subtotal = item.subtotal_sans_tax
           %tr.subrow.collapse{class: dom_id(product)}
             %td
             %td
@@ -32,8 +34,8 @@
             %td
             %td
             %td.text-right= item.amount
-            %td.text-right.currency
-              = price_tag item.subtotal_sans_tax
+            %td.text-right.currency{data: {text: subtotal.cents}}
+              = price_tag subtotal
 
 :coffee
   $('#purchases-table').tablesorter
