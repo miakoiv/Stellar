@@ -41,9 +41,12 @@ class ApplicationController < ActionController::Base
     @cached_guest ||= User.find(session[:guest_user_id]) rescue User.find(session[:guest_user_id] = create_guest_user.id)
   end
 
-  # Preserves search query param in a cookie.
-  def saved_search_query(search_model, cookie_key)
+  # Preserves search query params in a cookie, tagged by user id
+  # to prevent params from propagating to another user if logged
+  # on from the same client.
+  def saved_search_query(search_model, query_key)
     param = "#{search_model}_search"
+    cookie_key = "#{query_key}_#{current_user.id}"
     if params[param]
       cookies[cookie_key] = {
         value: params[param].to_json,
