@@ -21,6 +21,7 @@ UnobtrusiveFlash.showFlashMessage = (message, type) ->
       placement:
         from: 'top'
         align: 'center'
+      offset: 120
       z_index: 1051
       mouse_over: 'pause'
       animate:
