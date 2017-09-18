@@ -1,16 +1,49 @@
-= render partial: 'header'
+.page-header
+  = link_to admin_reports_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+  %h1= icon('eur', t('admin.reports.inventory.title'))
 
 .reports
-  .report-panel
-    = link_to admin_reports_path do
-      = icon('eur')
-      = t('admin.reports.inventory.title')
-
   .report-body
     %dl.dl-horizontal
       %dt= t('admin.reports.inventory.total_value')
-      %dd= price_tag @inventory.total_value
+      %dd#total-value
       %dt= t('admin.reports.inventory.items')
-      %dd= @inventory.items.size
+      %dd#item-count
 
-= render partial: 'inventory_table'
+.table-responsive
+  #inventory-table
+
+:coffee
+  $('#inventory-table').one 'view:tableHead', ->
+    $('#inventory-table .form-control').attr 'placeholder', "#{t('actions.search')}"
+
+  $('#inventory-table').on 'view:afterRender', (event, data) ->
+    $('#total-value').html data.total_value
+    $('#item-count').html data.item_count
+
+  tabular.start '#inventory-table',
+    columns: [
+      {title: '#{col(Product, :title)}', name: 'title'}
+      {title: '#{col(Product, :code)}', name: 'code'}
+      {title: '#{col(Product, :stock)}', name: 'on_hand'}
+      {title: 'à', name: 'value', class: 'currency text-right'}
+      {title: '#{col(Product, :value)}', name: 'total_value'}
+    ]
+    source: '#{admin_inventory_report_path(format: :json)}'
+    sort:
+      name: 'title'
+      dir: 'asc'
+    plugins: [
+      'Model'
+      'Loader'
+      'Sort'
+      {
+        Search:
+          formClass: 'col-sm-6 col-md-4'
+          inputClass: 'form-control form-control-sm'
+      }
+    ]
+    tableClass: 'table table-condensed table-hover'
+    headerClass: 'row'

@@ -8,7 +8,7 @@ class InventoryItemSearch < Searchlight::Search
 
   #---
   def base_query
-    InventoryItem.includes(:product).order('products.title', 'products.subtitle')
+    InventoryItem.unscoped.includes(:product).with_totals.order('products.title', 'products.subtitle')
   end
 
   def search_store
@@ -17,6 +17,10 @@ class InventoryItemSearch < Searchlight::Search
 
   def search_code
     query.where(code: code)
+  end
+
+  def search_keyword
+    query.where("CONCAT_WS(' ', products.code, products.customer_code, products.title, products.subtitle) LIKE ?", "%#{keyword}%")
   end
 
   def search_inventory_id

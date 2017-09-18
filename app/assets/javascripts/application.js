@@ -56,7 +56,7 @@
 //= require summernote.min
 //= require summernote/locales
 //= require swiper.jquery.min
-
+//= require tabular.min
 
 // App assets
 
