@@ -101,14 +101,14 @@
                               %em= order_item.product.shipping_notes
                         %td.alignright.nowrap= order_item.amount
                         %td.alignright.nowrap
-                          = price_tag order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+                          = humanized_money_with_symbol order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
                         %td.alignright.nowrap
-                          = price_tag order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+                          = humanized_money_with_symbol order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
                     %tr.total
                       %td.alignright{colspan: 4}
                         = Order.human_attribute_name(:grand_total)
                       %td.alignright.nowrap
-                        = price_tag @order.includes_tax? ? @order.grand_total_with_tax(@order_items) : @order.grand_total_sans_tax(@order_items)
+                        = humanized_money_with_symbol @order.includes_tax? ? @order.grand_total_with_tax(@order_items) : @order.grand_total_sans_tax(@order_items)
 
 .footer
   %table{width: '100%'}
