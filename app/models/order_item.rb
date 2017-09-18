@@ -114,6 +114,15 @@ class OrderItem < ActiveRecord::Base
     adjustments.map(&:amount_with_tax_cents).sum
   end
 
+  # Grand totals include adjustments.
+  def grand_total_sans_tax_cents
+    subtotal_sans_tax_cents + adjustments_sans_tax_cents
+  end
+
+  def grand_total_with_tax_cents
+    subtotal_with_tax_cents + adjustments_with_tax_cents
+  end
+
   # Price for exported orders, always without tax,
   # vendor products are listed without prices.
   def price_for_export_cents

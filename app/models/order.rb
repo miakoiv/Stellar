@@ -453,16 +453,12 @@ class Order < ActiveRecord::Base
 
   # Grand total for the given items (or whole order), without tax.
   def grand_total_sans_tax_cents(items = order_items)
-    items.map { |item|
-      (item.subtotal_sans_tax_cents || 0) + item.adjustments_sans_tax_cents
-    }.sum + adjustments_sans_tax_cents
+    items.map { |item| item.grand_total_sans_tax_cents || 0 }.sum + adjustments_sans_tax_cents
   end
 
   # Same as above, with tax.
   def grand_total_with_tax_cents(items = order_items)
-    items.map { |item|
-      (item.subtotal_with_tax_cents || 0) + item.adjustments_with_tax_cents
-    }.sum + adjustments_with_tax_cents
+    items.map { |item| item.grand_total_with_tax_cents || 0 }.sum + adjustments_with_tax_cents
   end
 
   # Total tax for the given items.
