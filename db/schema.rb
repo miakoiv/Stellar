@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908130202) do
+ActiveRecord::Schema.define(version: 20170918110517) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -304,6 +304,24 @@ ActiveRecord::Schema.define(version: 20170908130202) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["parent_item_id"], name: "index_order_items_on_parent_item_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "order_report_rows", force: :cascade do |t|
+    t.integer  "order_type_id",         limit: 4, null: false
+    t.integer  "user_id",               limit: 4, null: false
+    t.string   "shipping_country_code", limit: 2
+    t.integer  "product_id",            limit: 4, null: false
+    t.date     "ordered_at",                      null: false
+    t.integer  "amount",                limit: 4, null: false
+    t.integer  "total_value_cents",     limit: 4, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "order_report_rows", ["order_type_id"], name: "index_order_report_rows_on_order_type_id", using: :btree
+  add_index "order_report_rows", ["ordered_at"], name: "index_order_report_rows_on_ordered_at", using: :btree
+  add_index "order_report_rows", ["product_id"], name: "index_order_report_rows_on_product_id", using: :btree
+  add_index "order_report_rows", ["shipping_country_code"], name: "index_order_report_rows_on_shipping_country_code", using: :btree
+  add_index "order_report_rows", ["user_id"], name: "index_order_report_rows_on_user_id", using: :btree
 
   create_table "order_types", force: :cascade do |t|
     t.integer  "store_id",          limit: 4
