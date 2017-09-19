@@ -307,7 +307,7 @@ ActiveRecord::Schema.define(version: 20170918110517) do
 
   create_table "order_report_rows", force: :cascade do |t|
     t.integer  "order_type_id",         limit: 4, null: false
-    t.integer  "user_id",               limit: 4, null: false
+    t.integer  "user_id",               limit: 4
     t.string   "shipping_country_code", limit: 2
     t.integer  "product_id",            limit: 4, null: false
     t.date     "ordered_at",                      null: false

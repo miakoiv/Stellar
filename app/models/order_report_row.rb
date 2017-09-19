@@ -15,10 +15,14 @@ class OrderReportRow < ActiveRecord::Base
   belongs_to :product
 
   #---
+  # Creates or updates a report row from given order and its item.
+  # Rows are aggregated by order type, shipping country, and product
+  # to collect as many order items to a single slot as possible.
+  # Orders made by non-guest users are further distinguished by user.
   def self.from_order_and_item(order, order_item)
     report_row = where(
       order_type: order.order_type,
-      user: order.user,
+      user: order.user.guest? ? nil : order.user,
       shipping_country_code: order.shipping_country_code,
       product: order_item.product,
       ordered_at: order.completed_at.to_date
