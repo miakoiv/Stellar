@@ -11,6 +11,7 @@ module StoreHelper
   end
 
   def price_tag(price)
+    return nil if price.nil?
     sep = price.separator
     units, subunits = humanized_money(price).split sep
     "#{units}#{content_tag(:span, sep, class: 'sep')}#{content_tag(:span, subunits, class: 'cents')}#{currency_symbol}".html_safe
