@@ -812,6 +812,20 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
+ * Tabular styles
+ */
+.tabular .tabular-header {
+  margin-bottom: 20px;
+
+  form { @extend .form-inline; }
+  input {
+    @extend .form-control, .input-sm;
+    border-radius: $input-height-small/2;
+  }
+}
+
+
+/*
  * Vis.js styles
  */
 .vis-timeline {
