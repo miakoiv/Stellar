@@ -242,6 +242,14 @@ en:
         product_customer_code: Customer code
         product_title: Product title
         product_retail_price: Retail price
+      order_report_row:
+        order_type_id: Order type
+        user_id: User
+        shipping_country_code: Country
+        product_id: Product
+        ordered_at: Date
+        amount: Amount
+        total_value: Total value
       order_type:
         name: Name
         workflow: Workflow

@@ -1,47 +1,29 @@
-.table-responsive
-  %table#purchases-table.table.table-hover
-    %thead
-      %tr
-        %th.col-min{data: {sorter: 'false'}}
-        %th= col(Product, :title)
-        %th.col-xs-2= col(Product, :code)
-        %th.col-xs-2= col(Product, :category_ids)
-        %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
-
-    %tbody
-      - @purchases_data.by_product.each do |product, items|
-        - subtotal = items.map(&:subtotal_sans_tax).compact.sum
-        %tr.expandable{data: {toggle: 'collapse', target: ".#{dom_id(product)}"}}
-          %td= icon('plus')
-          %td
-            = link_to admin_product_path(product) do
-              %strong= product.title
-              = product.subtitle
-          %td= product.codes
-          %td= product.categories.to_sentence
-          %td.text-right= items.map(&:amount).sum
-          %td.text-right.currency{data: {text: subtotal.cents}}
-            = price_tag subtotal
-
-        - items.each do |item|
-          - subtotal = item.subtotal_sans_tax
-          %tr.subrow.collapse{class: dom_id(product)}
-            %td
-            %td
-              = link_to admin_order_path(item.order) do
-                = l(item.report_date, format: :iso)
-            %td
-            %td
-            %td.text-right= item.amount
-            %td.text-right.currency{data: {text: subtotal.cents}}
-              = price_tag subtotal
+#purchases-table
 
 :coffee
-  $('#purchases-table').tablesorter
-    theme: 'bootstrap'
-    widthFixed: true
-    widgets: ['uiTheme', 'saveSort']
-    headerTemplate: '{content} {icon}'
-    cssChildRow: 'subrow'
-    sortList: [[1,0]]
+  $('#purchases-table').one 'view:tableHead', ->
+    $('#purchases-table').tabular_search_widget()
+
+  $('#purchases-table').on 'view:afterRender', (event, data) ->
+    $('#grand-total').html data.grand_total
+    $('#unit-count').html data.unit_count
+    $('#product-count').html data.product_count
+
+  tabular.start '#purchases-table',
+    columns: [
+      {title: '#{col(Product, :title)}', name: 'product_title'}
+      {title: '#{col(Product, :code)}', name: 'product_code'}
+      {title: '#{col(OrderReportRow, :amount)}', name: 'amount', css: 'text-right'}
+      {title: '#{col(OrderReportRow, :total_value)}', name: 'subtotal_value', css: 'text-right currency'}
+    ]
+    source: '#{admin_purchases_report_path(format: :json)}'
+    sort:
+      name: 'product_title'
+      dir: 'asc'
+    plugins: [
+      'Model'
+      'Loader'
+      'Sort'
+      'Search'
+    ]
+    tableClass: 'table table-condensed table-hover'

@@ -2,7 +2,7 @@
   .panel-heading
     %h4.panel-title= t('actions.search')
   .panel-body
-    = form_for @purchases_data.search, url: admin_purchases_report_path, method: :get do |f|
+    = form_for @search, url: admin_purchases_report_path, method: :get do |f|
       .row
         .col-sm-6.col-md-3
           .form-group
@@ -13,9 +13,9 @@
         .col-sm-8.col-md-4
           .form-group
             .input-group
-              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
               %span.input-group-addon= icon('ellipsis-h')
-              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
         .col-sm-4.col-md-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

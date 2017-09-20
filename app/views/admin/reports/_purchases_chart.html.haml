@@ -1,31 +1,47 @@
-.panel.panel-default
-  .panel-body
-    %canvas#purchases-chart{data: {labels: @purchases_data.labels, dataset: @purchases_data.dataset}}
+%canvas#purchases-chart
 
 :coffee
   moment.locale '#{I18n.locale}'
   $ctx = $('#purchases-chart')
-  chart = new Chart $ctx,
-    type: 'bar',
-    data:
-      labels: $ctx.data 'labels'
-      datasets: [
-        {
-          label: '#{j I18n.t("admin.reports.purchases.chart.daily")}'
-          data: $ctx.data 'dataset'
-        }
-      ]
-    options:
-      legend:
-        display: false
-      scales:
-        xAxes: [{
-          type: 'category'
-          categoryPercentage: 0.95
-          barPercentage: 1.0
-        }]
-      elements:
-        rectangle:
-          borderWidth: 1
-          borderColor: 'rgba(255,255,255,0.25)'
-          backgroundColor: 'rgba(20,48,72,0.5)'
+  $.ajax
+    url: '#{admin_purchases_report_path(format: :json)}'
+    dataType: 'json'
+  .done (data) ->
+    chart = new Chart $ctx,
+      type: 'bar'
+      data:
+        datasets: [
+          {
+            yAxisID: 'value'
+            label: '#{j I18n.t("admin.reports.purchases.chart.value")}'
+            data: data.daily_value
+            type: 'line'
+            fill: false
+          }
+          {
+            yAxisID: 'items'
+            label: '#{j I18n.t("admin.reports.purchases.chart.units")}'
+            data: data.daily_units
+          }
+        ]
+      options:
+        legend:
+          display: false
+        scales:
+          xAxes: [
+            {
+              type: 'time'
+              time: {unit: 'week'}
+              gridLines: {display: false}
+            }
+          ]
+          yAxes: [
+            {
+              id: 'value'
+            }
+            {
+              id: 'items'
+              position: 'right'
+              gridLines: {display: false}
+            }
+          ]

@@ -15,11 +15,6 @@ class InventoryItem < ActiveRecord::Base
   has_many :inventory_entries, dependent: :destroy
   accepts_nested_attributes_for :inventory_entries, limit: 1
 
-  scope :with_totals, -> {
-    select('*')
-    .select('value_cents * GREATEST(0, on_hand) AS total_value_cents')
-  }
-
   default_scope { order(:created_at) }
 
   # Inventory items are considered online if they have stock available.

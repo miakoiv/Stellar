@@ -9,6 +9,7 @@ class OrderItem < ActiveRecord::Base
   monetize :price_cents, allow_nil: true
   monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents, disable_validation: true
   monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents, disable_validation: true
+  monetize :grand_total_sans_tax_cents, :grand_total_with_tax_cents, disable_validation: true
   monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
   monetize :price_for_export_cents, :subtotal_for_export_cents, disable_validation: true
 

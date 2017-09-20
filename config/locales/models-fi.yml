@@ -242,6 +242,14 @@ fi:
         product_customer_code: Asiakkaan koodi
         product_title: Tuotenimike
         product_retail_price: Myyntihinta
+      order_report_row:
+        order_type_id: Tilaustyyppi
+        user_id: Käyttäjä
+        shipping_country_code: Maa
+        product_id: Tuote
+        ordered_at: Päiväys
+        amount: Määrä
+        total_value: Arvo yhteensä
       order_type:
         name: Nimi
         workflow: Työnkulku

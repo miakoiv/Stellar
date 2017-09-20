@@ -2,20 +2,25 @@ module Reports
 
   class Inventory
 
-    COLUMNS = {
-      'title' => 'products.title',
-      'code' => '(products.code * 1)',
-      'on_hand' => 'inventory_items.on_hand',
-      'value' => 'inventory_items.value_cents',
-      'total_value' => 'total_value_cents'
-    }.freeze
+    def initialize(search)
+      @items = search.results.reorder(search.raw_options[:sort])
+    end
 
-    attr_reader :items, :total_value
+    def with_subtotals
+      @items.select <<-SQL
+        products.id AS product_id, products.code AS product_code,
+        products.title AS product_title, products.subtitle AS product_subtitle,
+        on_hand, value_cents AS unit_value,
+        value_cents * GREATEST(0, on_hand) AS subtotal_value
+      SQL
+    end
 
-    def initialize(params)
-      @search = InventoryItemSearch.new(params)
-      @items = @search.results.reorder(params[:sort])
-      @total_value = @items.map { |item| item.total_value }.sum
+    def grand_total
+      @items.sum('value_cents * GREATEST(0, on_hand)')
+    end
+
+    def product_count
+      @items.distinct.count(:product_id)
     end
   end
 end

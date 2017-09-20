@@ -8,42 +8,36 @@
   .report-body
     %dl.dl-horizontal
       %dt= t('admin.reports.inventory.total_value')
-      %dd#total-value
+      %dd#grand-total
       %dt= t('admin.reports.inventory.items')
-      %dd#item-count
+      %dd#product-count
 
-.table-responsive
-  #inventory-table
+#inventory-table
 
 :coffee
   $('#inventory-table').one 'view:tableHead', ->
-    $('#inventory-table .form-control').attr 'placeholder', "#{t('actions.search')}"
+    $('#inventory-table').tabular_search_widget()
 
   $('#inventory-table').on 'view:afterRender', (event, data) ->
-    $('#total-value').html data.total_value
-    $('#item-count').html data.item_count
+    $('#grand-total').html data.grand_total
+    $('#product-count').html data.product_count
 
   tabular.start '#inventory-table',
     columns: [
-      {title: '#{col(Product, :title)}', name: 'title'}
-      {title: '#{col(Product, :code)}', name: 'code'}
-      {title: '#{col(Product, :stock)}', name: 'on_hand'}
-      {title: 'à', name: 'value'}
-      {title: '#{col(Product, :value)}', name: 'total_value'}
+      {title: '#{col(Product, :title)}', name: 'product_title'}
+      {title: '#{col(Product, :code)}', name: 'product_code'}
+      {title: '#{col(Product, :stock)}', name: 'on_hand', css: 'text-right'}
+      {title: 'à', name: 'unit_value', css: 'text-right'}
+      {title: '#{col(InventoryItem, :value)}', name: 'subtotal_value', css: 'text-right currency'}
     ]
     source: '#{admin_inventory_report_path(format: :json)}'
     sort:
-      name: 'title'
+      name: 'product_title'
       dir: 'asc'
     plugins: [
       'Model'
       'Loader'
       'Sort'
-      {
-        Search:
-          formClass: 'col-sm-6 col-md-4'
-          inputClass: 'form-control form-control-sm'
-      }
+      'Search'
     ]
     tableClass: 'table table-condensed table-hover'
-    headerClass: 'row'

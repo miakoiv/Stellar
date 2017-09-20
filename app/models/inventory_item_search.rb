@@ -8,7 +8,7 @@ class InventoryItemSearch < Searchlight::Search
 
   #---
   def base_query
-    InventoryItem.unscoped.includes(:product).with_totals.order('products.title', 'products.subtitle')
+    InventoryItem.joins(:product)
   end
 
   def search_store

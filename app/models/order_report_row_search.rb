@@ -7,7 +7,7 @@ class OrderReportRowSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    OrderReportRow.all
+    OrderReportRow.joins(:product)
   end
 
   def options
@@ -32,6 +32,10 @@ class OrderReportRowSearch < Searchlight::Search
 
   def search_product_id
     query.where(product_id: product_id)
+  end
+
+  def search_keyword
+    query.where("CONCAT_WS(' ', products.code, products.customer_code, products.title, products.subtitle) LIKE ?", "%#{keyword}%")
   end
 
   def search_since_date

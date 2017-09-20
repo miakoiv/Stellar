@@ -58,19 +58,20 @@ en:
       sales:
         title: Sales
         total_value: Total value before tax
-        total_items: Total items sold
+        total_units: Total units sold
         products: Products
         search:
           since_date: Since date
           until_date: Until date
           countries: Destination countries
         chart:
-          daily: Daily sales €
+          units: Units
+          value: Sales €
           total: Total sales €
       purchases:
         title: Purchases
         total_value: Total value before tax
-        total_items: Total items purchased
+        total_units: Total units purchased
         products: Products
         search:
           since_date: Since date
@@ -78,7 +79,8 @@ en:
           users: Users
           countries: Destination countries
         chart:
-          daily: Daily purchases €
+          units: Units
+          value: Purchases €
           total: Total purchases €
     manage: Manage
     return_to_storefront: Return to storefront

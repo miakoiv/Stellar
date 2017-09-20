@@ -38,19 +38,20 @@ fi:
       sales:
         title: Myynnit
         total_value: Arvo ennen veroja
-        total_items: Myytyjä kappaleita
+        total_units: Myytyjä kappaleita
         products: Tuotteita
         search:
           since_date: Pvm alkaen
           until_date: Pvm päättyen
           countries: Kohdemaat
         chart:
-          daily: Päiväkohtainen €
+          units: Kpl
+          value: Myynti €
           total: Yhteensä €
       purchases:
         title: Ostot
         total_value: Arvo ennen veroja
-        total_items: Ostettuja kappaleita
+        total_units: Ostettuja kappaleita
         products: Tuotteita
         search:
           since_date: Pvm alkaen
@@ -58,7 +59,8 @@ fi:
           users: Käyttäjät
           countries: Kohdemaat
         chart:
-          daily: Päiväkohtainen €
+          units: Kpl
+          value: Ostot €
           total: Yhteensä €
     manage: Hallinta
     return_to_storefront: Palaa etusivulle
