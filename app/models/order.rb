@@ -588,6 +588,7 @@ class Order < ActiveRecord::Base
     # Concluding an order creates asset entries for it.
     def conclude!
       reload # to clear changes and prevent a callback loop
+      OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
       true
     end
