@@ -20,11 +20,13 @@ class OrderReportRow < ActiveRecord::Base
   # to collect as many order items to a single slot as possible.
   # Orders made by non-guest users are further distinguished by user.
   def self.create_from_order_and_item(order, order_item)
+    product = order_item.product
+    return false unless product.present?
     report_row = where(
       order_type: order.order_type,
       user: order.user.guest? ? nil : order.user,
       shipping_country_code: order.shipping_country_code,
-      product: order_item.product,
+      product: product,
       ordered_at: order.completed_at.to_date
     ).first_or_initialize do |row|
       row.amount = 0
