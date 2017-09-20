@@ -31,7 +31,7 @@ class OrderReportRow < ActiveRecord::Base
       row.total_value_cents = 0
     end
     report_row.amount += order_item.amount
-    report_row.total_value_cents += order_item.grand_total_sans_tax_cents
+    report_row.total_value_cents += order_item.grand_total_sans_tax.cents
     report_row.save
   end
 end
