@@ -62,4 +62,5 @@
 
 //= require_directory ./admin
 //= require_directory ./jasny-bootstrap
+//= require palette
 //= require_directory .

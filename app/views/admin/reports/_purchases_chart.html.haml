@@ -16,6 +16,7 @@
             label: '#{j I18n.t("admin.reports.purchases.chart.value")}'
             data: data.daily_value
             type: 'line'
+            cubicInterpolationMode: 'monotone'
             fill: false
           }
           {
@@ -25,8 +26,6 @@
           }
         ]
       options:
-        legend:
-          display: false
         scales:
           xAxes: [
             {
