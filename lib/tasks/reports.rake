@@ -5,9 +5,7 @@ namespace :reports do
   task generate: :environment do |task, args|
     OrderReportRow.delete_all
     Order.concluded.find_each(batch_size: 50) do |order|
-      order.order_items.each do |item|
-        OrderReportRow.from_order_and_item(order, item)
-      end
+      OrderReportRow.create_from(order)
     end
   end
 end

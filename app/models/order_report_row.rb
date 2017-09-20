@@ -19,7 +19,7 @@ class OrderReportRow < ActiveRecord::Base
   # Rows are aggregated by order type, shipping country, and product
   # to collect as many order items to a single slot as possible.
   # Orders made by non-guest users are further distinguished by user.
-  def self.from_order_and_item(order, order_item)
+  def self.create_from_order_and_item(order, order_item)
     report_row = where(
       order_type: order.order_type,
       user: order.user.guest? ? nil : order.user,
@@ -33,5 +33,13 @@ class OrderReportRow < ActiveRecord::Base
     report_row.amount += order_item.amount
     report_row.total_value_cents += order_item.grand_total_sans_tax.cents
     report_row.save
+  end
+
+  def self.create_from(order)
+    transaction do
+      order.order_items.each do |item|
+        create_from_order_and_item(order, item)
+      end
+    end
   end
 end
