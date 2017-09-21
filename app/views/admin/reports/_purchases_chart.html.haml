@@ -4,7 +4,7 @@
   moment.locale '#{I18n.locale}'
   $ctx = $('#purchases-chart')
   $.ajax
-    url: '#{admin_purchases_report_path(format: :json)}'
+    url: '#{admin_purchases_report_path(format: :json, variant: :chart)}'
     dataType: 'json'
   .done (data) ->
     chart = new Chart $ctx,

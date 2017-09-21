@@ -3,6 +3,7 @@
 class Admin::ReportsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_variant, only: [:sales, :purchases]
 
   layout 'admin'
 
@@ -53,6 +54,11 @@ class Admin::ReportsController < ApplicationController
   end
 
   private
+    # Chart views can be requested as variants.
+    def set_variant
+      request.variant = :chart if params[:variant] == 'chart'
+    end
+
     def order_report_params
       @query.reverse_merge({
         'order_type_id' => @order_types.first.id
