@@ -23,6 +23,10 @@ fi:
   admin:
     dashboard:
       title: Konsoli
+      orders:
+        title: Tilaukset
+        pending_orders: odottavaa tilausta
+        total_orders: tilausta yhteensä
     content:
       title: Sisältö
     configuration:

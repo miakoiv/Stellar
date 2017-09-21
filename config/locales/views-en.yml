@@ -43,6 +43,10 @@ en:
   admin:
     dashboard:
       title: Dashboard
+      orders:
+        title: Orders
+        pending_orders: orders need attention
+        total_orders: orders total
     content:
       title: Content
     configuration:

@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title= t('.title')
+  .panel-body
+    .row.stats-row
+      .col-sm-4.stats-box-vertical
+        .stat
+          .stat-value= current_store.orders.current.count
+          .stat-text= t('.pending_orders')
+        .stat
+          .stat-value= current_store.orders.complete.count
+          .stat-text= t('.total_orders')
+      .col-sm-8.stats-box-horizontal
+        %canvas#sales-chart{data: {source: admin_sales_report_path(format: :json, variant: :chart), value_label: t('admin.reports.sales.chart.value'), units_label: t('admin.reports.sales.chart.units')}}
+
+:coffee
+  $('#sales-chart').revenue_chart
+    order_report_row_search:
+      since_date: '#{Date.current - 7.days}'
+      until_date: '#{Date.current}'
