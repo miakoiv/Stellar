@@ -1,13 +1,13 @@
-%canvas#sales-chart
+%canvas#sales-chart{data: {source: admin_sales_report_path(format: :json, variant: :chart)}}
 
 :coffee
   moment.locale '#{I18n.locale}'
   $ctx = $('#sales-chart')
   $.ajax
-    url: '#{admin_sales_report_path(format: :json, variant: :chart)}'
+    url: $ctx.data 'source'
     dataType: 'json'
   .done (data) ->
-    chart = new Chart $ctx,
+    $ctx.data 'chart', new Chart $ctx,
       type: 'bar'
       data:
         datasets: [
@@ -44,3 +44,12 @@
               gridLines: {display: false}
             }
           ]
+  $ctx.on 'chart:update', (data) ->
+    chart = $(this).data 'chart'
+    $.ajax
+      url: $(this).data 'source'
+      dataType: 'json'
+    .done (data) ->
+      chart.data.datasets[0].data = data.daily_value
+      chart.data.datasets[1].data = data.daily_units
+      chart.update()

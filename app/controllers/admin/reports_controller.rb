@@ -29,13 +29,9 @@ class Admin::ReportsController < ApplicationController
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
     @search = OrderReportRowSearch.new(order_report_params)
+    @sales = Reports::Sales.new(@search)
 
-    respond_to do |format|
-      format.html
-      format.json {
-        @sales = Reports::Sales.new(@search)
-      }
-    end
+    respond_to :html, :js, :json
   end
 
   # GET /admin/reports/purchases
@@ -44,13 +40,9 @@ class Admin::ReportsController < ApplicationController
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
     @search = OrderReportRowSearch.new(order_report_params)
+    @purchases = Reports::Sales.new(@search)
 
-    respond_to do |format|
-      format.html
-      format.json {
-        @purchases = Reports::Sales.new(@search)
-      }
-    end
+    respond_to :html, :js, :json
   end
 
   private

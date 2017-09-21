@@ -2,7 +2,7 @@
   .panel-heading
     %h4.panel-title= t('actions.search')
   .panel-body
-    = form_for @search, url: admin_purchases_report_path, method: :get do |f|
+    = form_for @search, url: admin_purchases_report_path, method: :get, remote: true do |f|
       .row
         .col-sm-6.col-md-3
           .form-group
