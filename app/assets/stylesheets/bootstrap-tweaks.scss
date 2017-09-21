@@ -15,6 +15,7 @@ body {
   padding-bottom: 40px;
 }
 
+
 /*
  * Side nav slides open from the left
  */
@@ -656,7 +657,6 @@ fieldset[disabled] .help-block { display: none; }
  */
 .table.table-loose > tbody > tr > th,
 .table.table-loose > tbody > tr > td { line-height: 2; }
-.table .expandable { cursor: pointer; }
 .table .subrow th,
 .table .subrow td {
   border-top-style: dotted;
@@ -716,19 +716,6 @@ fieldset[disabled] .help-block { display: none; }
 .well > .list-group {
   margin-left: -20px;
   margin-right: -20px;
-}
-
-
-/*
- * Tablesorter fixes
- */
-.tablesorter-bootstrap thead th,
-.tablesorter-bootstrap thead td,
-.tablesorter-bootstrap tfoot th,
-.tablesorter-bootstrap tfoot td {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 500;
 }
 
 

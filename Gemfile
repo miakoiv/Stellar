@@ -116,9 +116,6 @@ gem 'twitter-bootstrap-rails-confirm'
 # Outdated browser warnings
 gem 'outdatedbrowser_rails'
 
-# Sortable tables
-gem 'jquery-tablesorter'
-
 # Codemirror for syntax highlighting
 gem 'codemirror-rails'
 

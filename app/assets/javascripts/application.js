@@ -21,7 +21,6 @@
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
 //= require jquery.sticky-kit
-//= require jquery-tablesorter
 //= require jquery.infinite-pages
 //= require wiselinks
 //= require wiselinks_init
