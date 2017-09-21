@@ -2,6 +2,7 @@ jQuery ->
 
   if $('body').hasClass 'wiselinks'
     window.wiselinks = new Wiselinks $('#content-wrap')
+    Wiselinks.scrollTop = true
 
     originalCall = window._Wiselinks.Page.prototype._call
     window._Wiselinks.Page.prototype._call = (state) ->
