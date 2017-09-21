@@ -26,7 +26,7 @@ class Admin::ReportsController < ApplicationController
   # GET /admin/reports/sales
   def sales
     @order_types = current_user.incoming_order_types
-    return redirect_to admin_reports_path if @order_types.empty?
+    return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
     @search = OrderReportRowSearch.new(order_report_params)
 
@@ -41,7 +41,7 @@ class Admin::ReportsController < ApplicationController
   # GET /admin/reports/purchases
   def purchases
     @order_types = current_user.outgoing_order_types
-    return redirect_to admin_reports_path if @order_types.empty?
+    return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
     @search = OrderReportRowSearch.new(order_report_params)
 
