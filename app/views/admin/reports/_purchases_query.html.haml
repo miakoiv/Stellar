@@ -12,10 +12,10 @@
             = f.select :user_id, current_user.self_and_peers.map { |u| [u.to_s, u.id] }, {}, {multiple: true, placeholder: t('admin.reports.purchases.search.users'), class: 'form-control selectize'}
         .col-sm-8.col-md-4
           .form-group
-            .input-group
-              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.since_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
-              %span.input-group-addon= icon('ellipsis-h')
-              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
+            .input-group.input-daterange{data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}}
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.since_date'), class: 'form-control'
+              %span.input-group-addon= icon('caret-right')
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.purchases.search.until_date'), class: 'form-control'
         .col-sm-4.col-md-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
