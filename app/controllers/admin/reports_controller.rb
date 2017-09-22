@@ -63,7 +63,7 @@ class Admin::ReportsController < ApplicationController
 
     # Params specifying a view but not saved with the search query.
     def view_params
-      params[:view_params] || {}
+      params.fetch(:view_params) {{}}
     end
 
     # Params specific to the inherent controls tabular provides.
