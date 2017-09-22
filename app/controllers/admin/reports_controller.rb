@@ -54,11 +54,16 @@ class Admin::ReportsController < ApplicationController
     def order_report_params
       @query.reverse_merge({
         'order_type_id' => @order_types.first.id
-      }).merge(tabular_params)
+      }).merge(view_params).merge(tabular_params)
     end
 
     def inventory_params
       {store: current_store.id}.merge(tabular_params)
+    end
+
+    # Params specifying a view but not saved with the search query.
+    def view_params
+      params[:view_params] || {}
     end
 
     # Params specific to the inherent controls tabular provides.
