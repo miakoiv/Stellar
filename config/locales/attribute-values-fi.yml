@@ -7,6 +7,12 @@ fi:
           technical: tekninen
           document: dokumentti
           vector: vektorikuva
+      order:
+        status:
+          current: odottaa hyväksyntää
+          pending: odottaa toimitusta
+          concluded: arkistoitu
+          cancelled: peruttu
       page:
         purpose:
           route: Reitityspiste

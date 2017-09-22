@@ -5,24 +5,7 @@
         = icon('plus', t('.new_order'))
     %h1= icon('truck', title(Order, count: 2))
 
-  .panel.panel-info
-    .panel-heading
-      %h4.panel-title= t('actions.search')
-    .panel-body
-      = form_for @search, url: admin_orders_path, method: :get do |f|
-        .row
-          .col-sm-6.col-md-3
-            .form-group
-              = f.select :order_type_id, current_user.available_order_types.map { |o| [order_type_label(o, current_user), o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
-          .col-sm-6.col-md-3
-            .form-group
-              = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
-          .col-sm-6.col-md-4
-            .form-group
-              = f.search_field :customer, autocomplete: 'off', placeholder: col(Order, :customer_name), class: 'form-control'
-          .col-sm-6.col-md-2
-            .form-group
-              = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+  = render partial: 'search'
 
   - if @timeline_orders.any?
     .panel.panel-default

@@ -7,6 +7,12 @@ en:
           technical: Technical
           document: Document
           vector: Vector image
+      order:
+        status:
+          current: awaiting approval
+          pending: pending delivery
+          concluded: archived
+          cancelled: cancelled
       page:
         purpose:
           route: Routing entry

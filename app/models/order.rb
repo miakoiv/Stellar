@@ -32,6 +32,9 @@ class Order < ActiveRecord::Base
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
 
+  # Pending orders are approved, not yet concluded orders.
+  scope :pending, -> { where.not(approved_at: nil).where(concluded_at: nil) }
+
   # Complete orders, approved or not.
   scope :complete, -> { where.not(completed_at: nil) }
 
@@ -46,6 +49,10 @@ class Order < ActiveRecord::Base
 
   # Cancelled orders.
   scope :cancelled, -> { unscope(where: :cancelled_at).where.not(cancelled_at: nil) }
+
+  def self.statuses
+    [:current, :pending, :concluded, :cancelled]
+  end
 
   # Orders that are not concluded or have been concluded not longer than
   # one week ago are topical. This is used for timeline data.

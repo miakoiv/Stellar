@@ -26,6 +26,12 @@ class OrderSearch < Searchlight::Search
     query.where(order_type_id: order_type_id)
   end
 
+  def search_status
+    return query if empty?(status)
+    return query unless Order.statuses.include?(status.to_sym)
+    query.merge(Order.send(status))
+  end
+
   def search_date
     query.where('DATE(completed_at) = ?', date)
   end
