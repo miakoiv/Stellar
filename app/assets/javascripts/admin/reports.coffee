@@ -34,7 +34,9 @@ $.fn.extend
             xAxes: [
               {
                 type: 'time'
-                time: {unit: 'week'}
+                time: {unit: 'day'}
+                barPercentage: 1.0
+                categoryPercentage: 0.9
                 gridLines: {display: false}
               }
             ]
