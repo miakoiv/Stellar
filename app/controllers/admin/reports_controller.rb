@@ -28,10 +28,20 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_user.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @search = OrderReportRowSearch.new(order_report_params)
-    @sales = Reports::Sales.new(@search)
+    @query.reverse_merge!('order_type_id' => @order_types.first.id)
 
-    respond_to :html, :js, :json
+    respond_to do |format|
+      format.html {
+        @search = OrderReportRowSearch.new(@query)
+      }
+      format.js
+      format.json {
+        search = OrderReportRowSearch.new(
+          @query.merge(view_params).merge(tabular_params)
+        )
+        @sales = Reports::Sales.new(search)
+      }
+    end
   end
 
   # GET /admin/reports/purchases
@@ -39,22 +49,26 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_user.outgoing_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @search = OrderReportRowSearch.new(order_report_params)
-    @purchases = Reports::Sales.new(@search)
+    @query.reverse_merge!('order_type_id' => @order_types.first.id)
 
-    respond_to :html, :js, :json
+    respond_to do |format|
+      format.html {
+        @search = OrderReportRowSearch.new(@query)
+      }
+      format.js
+      format.json {
+        search = OrderReportRowSearch.new(
+          @query.merge(view_params).merge(tabular_params)
+        )
+        @purchases = Reports::Sales.new(search)
+      }
+    end
   end
 
   private
     # Chart views can be requested as variants.
     def set_variant
       request.variant = :chart if params[:variant] == 'chart'
-    end
-
-    def order_report_params
-      @query.reverse_merge({
-        'order_type_id' => @order_types.first.id
-      }).merge(view_params).merge(tabular_params)
     end
 
     def inventory_params
