@@ -4,10 +4,13 @@
   .panel-body
     .row.stats-row
       .col-sm-4.stats-box-vertical
-        .stat
+        = link_to admin_orders_path(order_search: {status: :current}), class: 'stat' do
           .stat-value= current_store.orders.current.count
+          .stat-text= t('.current_orders')
+        = link_to admin_orders_path(order_search: {status: :pending}), class: 'stat' do
+          .stat-value= current_store.orders.pending.count
           .stat-text= t('.pending_orders')
-        .stat
+        = link_to admin_orders_path(order_search: {status: ''}), class: 'stat' do
           .stat-value= current_store.orders.complete.count
           .stat-text= t('.total_orders')
       .col-sm-8.stats-box-horizontal

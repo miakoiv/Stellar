@@ -553,6 +553,7 @@ i.icon {
 /*
  * Dashboard components
  */
+.dashboard-row:first-child { margin-top: 40px; }
 .stats-row {
   display: flex;
 
@@ -570,8 +571,10 @@ i.icon {
   }
 }
 .stat {
+  display: block;
   flex: 0 0 auto;
   padding: 20px;
+  &:hover { text-decoration: none; }
 }
 .stats-box-horizontal .stat {
   border-right: 1px solid $table-border-color;

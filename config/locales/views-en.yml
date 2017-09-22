@@ -45,8 +45,12 @@ en:
       title: Dashboard
       orders:
         title: Orders
-        pending_orders: orders need attention
+        current_orders: orders need attention
+        pending_orders: orders need shipping
         total_orders: orders total
+      products:
+        title: Products
+        live_products: products for sale
     content:
       title: Content
     configuration:

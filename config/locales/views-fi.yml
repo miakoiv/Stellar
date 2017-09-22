@@ -25,8 +25,12 @@ fi:
       title: Konsoli
       orders:
         title: Tilaukset
-        pending_orders: odottavaa tilausta
+        current_orders: odottavaa tilausta
+        pending_orders: toimittamatonta tilausta
         total_orders: tilausta yhteensä
+      products:
+        title: Tuotteet
+        live_products: tuotetta myynnissä
     content:
       title: Sisältö
     configuration:
