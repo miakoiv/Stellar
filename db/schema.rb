@@ -163,10 +163,12 @@ ActiveRecord::Schema.define(version: 20170918110517) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "departments", force: :cascade do |t|
-    t.integer "store_id", limit: 4
-    t.string  "name",     limit: 255
-    t.string  "slug",     limit: 255
-    t.integer "priority", limit: 4
+    t.integer  "store_id",   limit: 4
+    t.string   "name",       limit: 255
+    t.string   "slug",       limit: 255
+    t.integer  "priority",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "departments", ["store_id"], name: "index_departments_on_store_id", using: :btree
