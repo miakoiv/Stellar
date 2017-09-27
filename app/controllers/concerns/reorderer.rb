@@ -3,8 +3,10 @@ module Reorderer
 
   # POST /admin/orderable/reorder
   def reorder
-    reordered_items.each_with_index do |item, index|
-      item.update(priority: index)
+    ActiveRecord::Base.transaction do
+      reordered_items.each_with_index do |item, index|
+        item.update_columns(priority: index)
+      end
     end
     render nothing: true
   end
