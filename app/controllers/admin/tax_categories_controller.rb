@@ -7,33 +7,37 @@ class Admin::TaxCategoriesController < ApplicationController
   before_action :set_tax_category, only: [:show, :edit, :update, :destroy]
 
   authority_actions reorder: 'update'
-  authorize_actions_for TaxCategory
 
   layout 'admin'
 
   # GET /admin/tax_categories
   # GET /admin/tax_categories.json
   def index
+    authorize_action_for TaxCategory, at: current_store
     @tax_categories = current_store.tax_categories
   end
 
   # GET /admin/tax_categories/1
   # GET /admin/tax_categories/1.json
   def show
+    authorize_action_for @tax_category, at: current_store
   end
 
   # GET /admin/tax_categories/new
   def new
+    authorize_action_for TaxCategory, at: current_store
     @tax_category = current_store.tax_categories.build
   end
 
   # GET /admin/tax_categories/1/edit
   def edit
+    authorize_action_for TaxCategory, at: current_store
   end
 
   # POST /admin/tax_categories
   # POST /admin/tax_categories.json
   def create
+    authorize_action_for TaxCategory, at: current_store
     @tax_category = current_store.tax_categories.build(tax_category_params)
 
     respond_to do |format|
@@ -51,6 +55,8 @@ class Admin::TaxCategoriesController < ApplicationController
   # PATCH/PUT /admin/tax_categories/1
   # PATCH/PUT /admin/tax_categories/1.json
   def update
+    authorize_action_for @tax_category, at: current_store
+
     respond_to do |format|
       if @tax_category.update(tax_category_params)
         format.html { redirect_to admin_tax_category_path(@tax_category),
@@ -66,6 +72,7 @@ class Admin::TaxCategoriesController < ApplicationController
   # DELETE /admin/tax_categories/1
   # DELETE /admin/tax_categories/1.json
   def destroy
+    authorize_action_for @tax_category, at: current_store
     @tax_category.destroy
     respond_to do |format|
       format.html { redirect_to admin_tax_categories_path,

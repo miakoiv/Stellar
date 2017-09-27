@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Store)
+  - if current_user.can_create?(Store, at: current_store)
     = link_to new_admin_store_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_store'))
   %h1= icon('paw', title(Store, count: 2))

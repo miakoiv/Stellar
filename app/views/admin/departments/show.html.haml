@@ -1,7 +1,7 @@
 .page-header
   = link_to admin_departments_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(Department)
+  - if current_user.can_update?(@department, at: current_store)
     = link_to edit_admin_department_path(@department), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   - if @department.page.present?

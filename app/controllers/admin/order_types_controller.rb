@@ -5,23 +5,24 @@ class Admin::OrderTypesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order_type, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for OrderType, except: [:destroy]
-
   layout 'admin'
 
   # GET /admin/order_types
   # GET /admin/order_types.json
   def index
+    authorize_action_for OrderType, at: current_store
     @order_types = current_store.order_types
   end
 
   # GET /admin/order_types/1
   # GET /admin/order_types/1.json
   def show
+    authorize_action_for @order_type, at: current_store
   end
 
   # GET /admin/order_types/new
   def new
+    authorize_action_for OrderType, at: current_store
     @order_type = current_store.order_types.build(
       has_shipping: true, has_payment: true
     )
@@ -29,11 +30,13 @@ class Admin::OrderTypesController < ApplicationController
 
   # GET /admin/order_types/1/edit
   def edit
+    authorize_action_for @order_type, at: current_store
   end
 
   # POST /admin/order_types
   # POST /admin/order_types.json
   def create
+    authorize_action_for OrderType, at: current_store
     @order_type = current_store.order_types.build(order_type_params)
 
     respond_to do |format|
@@ -51,6 +54,8 @@ class Admin::OrderTypesController < ApplicationController
   # PATCH/PUT /admin/order_types/1
   # PATCH/PUT /admin/order_types/1.json
   def update
+    authorize_action_for @order_type, at: current_store
+
     respond_to do |format|
       if @order_type.update(order_type_params)
         format.html { redirect_to admin_order_type_path(@order_type),
@@ -66,7 +71,7 @@ class Admin::OrderTypesController < ApplicationController
   # DELETE /admin/order_types/1
   # DELETE /admin/order_types/1.json
   def destroy
-    authorize_action_for @order_type
+    authorize_action_for @order_type, at: current_store
     @order_type.destroy
 
     respond_to do |format|

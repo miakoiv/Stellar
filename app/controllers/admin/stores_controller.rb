@@ -5,13 +5,12 @@ class Admin::StoresController < ApplicationController
   before_action :authenticate_user!
   before_action :set_store, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for Store, except: [:show, :edit, :update]
-
   layout 'admin'
 
   # GET /admin/stores
   # GET /admin/stores.json
   def index
+    authorize_action_for Store, at: current_store
     @query = saved_search_query('store', 'admin_store_search')
     @search = StoreSearch.new(@query)
     @stores = @search.results
@@ -20,11 +19,12 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores/1
   # GET /admin/stores/1.json
   def show
-    authorize_action_for @store
+    authorize_action_for @store, at: current_store
   end
 
   # GET /admin/stores/new
   def new
+    authorize_action_for Store, at: current_store
     @store = Store.new
     @store.users.build(
       group: User.groups[:manufacturer],
@@ -35,12 +35,13 @@ class Admin::StoresController < ApplicationController
 
   # GET /admin/stores/1/edit
   def edit
-    authorize_action_for @store
+    authorize_action_for @store, at: current_store
   end
 
   # POST /admin/stores
   # POST /admin/stores.json
   def create
+    authorize_action_for Store, at: current_store
     @store = Store.new(store_params.merge(Store.default_settings))
 
     respond_to do |format|
@@ -58,7 +59,7 @@ class Admin::StoresController < ApplicationController
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json
   def update
-    authorize_action_for @store
+    authorize_action_for @store, at: current_store
 
     respond_to do |format|
       if @store.update(store_params)

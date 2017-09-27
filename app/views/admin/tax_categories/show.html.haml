@@ -1,7 +1,7 @@
 .page-header
   = link_to admin_tax_categories_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(TaxCategory)
+  - if current_user.can_update?(@tax_category, at: current_store)
     = link_to edit_admin_tax_category_path(@tax_category), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1= icon('percent', @tax_category)

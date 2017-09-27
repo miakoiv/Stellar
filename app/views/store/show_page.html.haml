@@ -12,6 +12,6 @@
 - if @page.albums.any?
   = render partial: 'albums/sidebar', object: @page.albums, as: :albums
 
-- if @page.can_have_content? && current_user.can_update?(@page)
+- if @page.can_have_content? && current_user.can_update?(@page, at: current_store)
   - content_for :main_nav_right do
     %li= link_to icon('scissors', col(Page, :layout)), layout_admin_page_path(@page)

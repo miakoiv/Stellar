@@ -2,20 +2,19 @@
 
 class InventoryItemAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
-    user.has_cached_role?(:inventory_manage)
+  def self.creatable_by?(user, opts)
+    user.has_cached_role?(:inventory_manage, opts[:at])
   end
 
-  def self.readable_by?(user)
-    user.has_cached_role?(:inventory_manage)
+  def self.readable_by?(user, opts)
+    user.has_cached_role?(:inventory_manage, opts[:at])
   end
 
-  def self.updatable_by?(user)
-    user.has_cached_role?(:inventory_manage)
+  def self.updatable_by?(user, opts)
+    user.has_cached_role?(:inventory_manage, opts[:at])
   end
 
-  def self.deletable_by?(user)
-    user.has_cached_role?(:inventory_manage)
+  def self.deletable_by?(user, opts)
+    user.has_cached_role?(:inventory_manage, opts[:at])
   end
-
 end

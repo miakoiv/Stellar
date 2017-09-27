@@ -1,7 +1,7 @@
 .page-header
   = link_to admin_order_types_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(OrderType)
+  - if current_user.can_update?(@order_type, at: current_store)
     = link_to edit_admin_order_type_path(@order_type), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1

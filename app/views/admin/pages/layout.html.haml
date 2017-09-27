@@ -3,7 +3,7 @@
   %nav#page-nav.navbar.navbar-default{role: 'navigation'}
     .container
       %ul.nav.navbar-nav.navbar-right
-        - if current_user.can_create?(Section)
+        - if current_user.can_create?(Section, at: current_store)
           %li.dropdown
             %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
               = icon('plus', t('.new_section'))

@@ -15,7 +15,7 @@
         %td= l(inventory_entry.recorded_at)
         %td
           - if inventory_entry.source.present?
-            = link_to_if current_user.can_read?(inventory_entry.source.class), "#{title(inventory_entry.source.class)} #{inventory_entry.source}", [:admin, inventory_entry.source]
+            = link_to_if current_user.can_read?(inventory_entry.source.class, at: current_store), "#{title(inventory_entry.source.class)} #{inventory_entry.source}", [:admin, inventory_entry.source]
         %td.text-right= inventory_entry.on_hand
         %td.text-right= inventory_entry.reserved
         %td.text-right= inventory_entry.pending

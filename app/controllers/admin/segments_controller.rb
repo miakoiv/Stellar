@@ -5,22 +5,26 @@ class Admin::SegmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_segment, only: [:show, :edit, :update]
 
-  authorize_actions_for Segment
-
   # No layout, this controller never renders HTML.
 
   # GET /admin/segments/1.js
   def show
+    authorize_action_for @segment, at: current_store
+
     respond_to :js
   end
 
   # GET /admin/segments/1/edit.js
   def edit
+    authorize_action_for @segment, at: current_store
+
     respond_to :js
   end
 
   # PATCH/PUT /admin/segments/1.js
   def update
+    authorize_action_for @segment, at: current_store
+
     respond_to do |format|
       if @segment.update(segment_params)
         format.js

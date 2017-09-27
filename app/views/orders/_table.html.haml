@@ -28,10 +28,10 @@
             = price_tag order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
           %td.actions
             = link_to icon('info', t('actions.show')), order_path(order), class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(order)
+            - if current_user.can_update?(order, at: current_store)
               = link_to icon('edit', t('actions.edit')), edit_order_path(order),
                   class: 'btn btn-default btn-sm'
-            - if current_user.can_delete?(order)
+            - if current_user.can_delete?(order, at: current_store)
               = link_to icon('remove', t('.cancel.button')), order_path(order), method: :delete, class: 'btn btn-sm btn-warning',
                   data: {confirm: t('.cancel.confirm',
                     klass: Order.model_name.human, name: order.to_s),

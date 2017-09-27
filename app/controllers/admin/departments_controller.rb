@@ -7,33 +7,37 @@ class Admin::DepartmentsController < ApplicationController
   before_action :set_department, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions reorder: 'update'
-  authorize_actions_for Department
 
   layout 'admin'
 
   # GET /admin/departments
   # GET /admin/departments.json
   def index
+    authorize_action_for Department, at: current_store
     @departments = current_store.departments
   end
 
   # GET /admin/departments/1
   # GET /admin/departments/1.json
   def show
+    authorize_action_for @department, at: current_store
   end
 
   # GET /admin/departments/new
   def new
+    authorize_action_for Department, at: current_store
     @department = current_store.departments.build
   end
 
   # GET /admin/departments/1/edit
   def edit
+    authorize_action_for @department, at: current_store
   end
 
   # POST /admin/departments
   # POST /admin/departments.json
   def create
+    authorize_action_for Department, at: current_store
     @department = current_store.departments.build(department_params.merge(priority: current_store.departments.count))
 
     respond_to do |format|
@@ -51,6 +55,8 @@ class Admin::DepartmentsController < ApplicationController
   # PATCH/PUT /admin/departments/1
   # PATCH/PUT /admin/departments/1.json
   def update
+    authorize_action_for @department, at: current_store
+
     respond_to do |format|
       if @department.update(department_params)
         format.html { redirect_to admin_department_path(@department),
@@ -66,7 +72,9 @@ class Admin::DepartmentsController < ApplicationController
   # DELETE /admin/departments/1
   # DELETE /admin/departments/1.json
   def destroy
+    authorize_action_for @department, at: current_store
     @department.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_departments_path,
         notice: t('.notice', department: @department) }

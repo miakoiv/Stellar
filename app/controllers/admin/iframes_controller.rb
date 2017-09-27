@@ -7,12 +7,12 @@ class Admin::IframesController < ApplicationController
   before_action :set_iframe, only: [:update, :destroy]
 
   authority_actions reorder: 'update'
-  authorize_actions_for Iframe
 
   # No layout, this controller never renders HTML.
 
   # POST /admin/products/1/iframes
   def create
+    authorize_action_for Iframe, at: current_store
     @product = Product.friendly.find(params[:product_id])
     @iframe = @product.iframes.build(iframe_params)
 
@@ -27,6 +27,8 @@ class Admin::IframesController < ApplicationController
 
   # PATCH/PUT /admin/iframes/1
   def update
+    authorize_action_for @iframe, at: current_store
+
     respond_to do |format|
       if @iframe.update(iframe_params)
         format.js
@@ -38,6 +40,8 @@ class Admin::IframesController < ApplicationController
 
   # DELETE /admin/iframes/1
   def destroy
+    authorize_action_for @iframe, at: current_store
+
     respond_to do |format|
       if @iframe.destroy
         format.js

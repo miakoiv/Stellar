@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Property)
+  - if current_user.can_create?(Property, at: current_store)
     = link_to new_admin_property_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_property'))
   %h1= icon('eyedropper', title(Property, count: 2))
@@ -24,9 +24,9 @@
           %td= property.value_type_name
           %td.actions
             = link_to icon('info', t('actions.show')), admin_property_path(property), class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(Property)
+            - if current_user.can_update?(property, at: current_store)
               = link_to icon('edit', t('actions.edit')), edit_admin_property_path(property), class: 'btn btn-default btn-sm'
-            - if current_user.can_delete?(Property)
+            - if current_user.can_delete?(property, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_property_path(property),
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',

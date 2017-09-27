@@ -2,7 +2,7 @@
 
 class SectionAuthorizer < ApplicationAuthorizer
 
-  def self.default(able, user)
-    user.has_cached_role?(:page_editor)
+  def self.default(able, user, opts)
+    user.has_cached_role?(:page_editor, opts[:at])
   end
 end

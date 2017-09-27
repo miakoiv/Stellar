@@ -5,12 +5,12 @@ class Admin::OrderItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order_and_item
 
-  authorize_actions_for OrderItem
-
   # No layout, this controller never renders HTML.
 
   # PATCH/PUT /admin/order_items/1
   def update
+    authorize_action_for @order_item, at: current_store
+
     respond_to do |format|
       if @order_item.update(order_item_params)
         @order_item.reload

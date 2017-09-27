@@ -16,5 +16,5 @@
         %td.text-right= customer_asset.amount
         %td.actions
           = link_to icon('info', t('actions.show')), admin_customer_asset_path(customer_asset), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(CustomerAsset)
+          - if current_user.can_update?(customer_asset, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_customer_asset_path(customer_asset), class: 'btn btn-default btn-sm'

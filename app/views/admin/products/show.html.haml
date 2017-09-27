@@ -1,7 +1,7 @@
 .page-header
   = link_to admin_products_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(Product)
+  - if current_user.can_update?(@product, at: current_store)
     = link_to edit_admin_product_path(@product), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   - if @product.page.present?

@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_read?(Store)
+  - if current_user.can_read?(Store, at: current_store)
     = link_to admin_stores_path, class: 'btn btn-default' do
       = icon('chevron-circle-left', t('actions.back'))
   = link_to admin_store_path(@store), class: 'btn btn-primary' do

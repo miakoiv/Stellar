@@ -10,7 +10,7 @@ class ApplicationAuthorizer < Authority::Authorizer
   # @param [Symbol] adjective; example: `:creatable`
   # @param [Object] user - whatever represents the current user in your app
   # @return [Boolean]
-  def self.default(adjective, user)
+  def self.default(adjective, user, opts = {})
     # 'Whitelist' strategy for security: anything not explicitly allowed is
     # considered forbidden.
     false
@@ -18,11 +18,11 @@ class ApplicationAuthorizer < Authority::Authorizer
 
   # General authorization to perform any shopping related action
   # at the specified store, given in options.
-  def self.authorizes_to_shop?(user, options = {})
-    current_store = options[:store]
-    return false unless current_store.allow_shopping?
+  def self.authorizes_to_shop?(user, opts = {})
+    store = opts[:at]
+    return false unless store.allow_shopping?
     user.reseller? ||
     user.customer? ||
-    user.guest? && current_store.admit_guests?
+    user.guest? && store.admit_guests?
   end
 end

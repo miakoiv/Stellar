@@ -5,10 +5,9 @@ class Admin::InventoryEntriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_item, only: [:create]
 
-  authorize_actions_for InventoryEntry
-
   # POST /admin/inventory_items/1/inventory_entries
   def create
+    authorize_action_for InventoryEntry, at: current_store
     @inventory_entry = @inventory_item.inventory_entries.build(inventory_entry_params)
 
     respond_to do |format|

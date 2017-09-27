@@ -5,13 +5,12 @@ class Admin::InventoryItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit]
 
-  authorize_actions_for InventoryItem
-
   layout 'admin'
 
   # GET /admin/inventory_items
   # GET /admin/inventory_items.json
   def index
+    authorize_action_for InventoryItem, at: current_store
     @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
     @search = InventoryItemSearch.new(search_params)
     @inventory_items = @search.results.page(params[:page])
@@ -19,20 +18,25 @@ class Admin::InventoryItemsController < ApplicationController
 
   # GET /admin/inventory_items/1
   def show
+    authorize_action_for @inventory_item, at: current_store
   end
 
   # GET /admin/inventory_items/new
   def new
+    authorize_action_for InventoryItem, at: current_store
     @inventory_item = current_store.inventory_items.build
   end
 
   # GET /admin/inventory_items/1/edit
   def edit
+    authorize_action_for @inventory_item, at: current_store
   end
 
   # POST /admin/inventory_items
   # POST /admin/inventory_items.json
   def create
+    authorize_action_for InventoryItem, at: current_store
+
     # Creating an inventory item updates an existing item with a matching code.
     @inventory_item = InventoryItem.find_or_initialize_by(
       inventory_item_params.slice(:inventory_id, :product_id, :code)

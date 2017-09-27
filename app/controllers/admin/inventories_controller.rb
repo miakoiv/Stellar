@@ -5,33 +5,36 @@ class Admin::InventoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for Inventory
-
   layout 'admin'
 
   # GET /admin/inventories
   # GET /admin/inventories.json
   def index
+    authorize_action_for Inventory, at: current_store
     @inventories = current_store.inventories
   end
 
   # GET /admin/inventories/1
   # GET /admin/inventories/1.json
   def show
+    authorize_action_for @inventory, at: current_store
   end
 
   # GET /admin/inventories/new
   def new
+    authorize_action_for Inventory, at: current_store
     @inventory = current_store.inventories.build
   end
 
   # GET /admin/inventories/1/edit
   def edit
+    authorize_action_for @inventory, at: current_store
   end
 
   # POST /admin/inventories
   # POST /admin/inventories.json
   def create
+    authorize_action_for Inventory, at: current_store
     @inventory = current_store.inventories.build(inventory_params)
 
     respond_to do |format|
@@ -49,6 +52,8 @@ class Admin::InventoriesController < ApplicationController
   # PATCH/PUT /admin/inventories/1
   # PATCH/PUT /admin/inventories/1.json
   def update
+    authorize_action_for @inventory, at: current_store
+
     respond_to do |format|
       if @inventory.update(inventory_params)
         format.html { redirect_to admin_inventory_path(@inventory),
@@ -64,7 +69,9 @@ class Admin::InventoriesController < ApplicationController
   # DELETE /admin/inventories/1
   # DELETE /admin/inventories/1.json
   def destroy
+    authorize_action_for @inventory, at: current_store
     @inventory.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_inventories_path,
         notice: t('.notice', inventory: @inventory) }

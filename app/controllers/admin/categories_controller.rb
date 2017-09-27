@@ -7,13 +7,13 @@ class Admin::CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions rearrange: 'update', reorder_products: 'update'
-  authorize_actions_for Category, except: [:destroy]
 
   layout 'admin'
 
   # GET /admin/categories
   # GET /admin/categories.json
   def index
+    authorize_action_for Category, at: current_store
     @categories = current_store.categories.roots
   end
 
@@ -24,12 +24,14 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /admin/categories/new.js
   def new
+    authorize_action_for Category, at: current_store
     @category = current_store.categories.build
   end
 
   # GET /admin/categories/1/edit
   # GET /admin/categories/1/edit.js
   def edit
+    authorize_action_for @category, at: current_store
     @categories = current_store.categories.roots
 
     respond_to :html, :js
@@ -39,6 +41,7 @@ class Admin::CategoriesController < ApplicationController
   # POST /admin/categories.js
   # POST /admin/categories.json
   def create
+    authorize_action_for Category, at: current_store
     @category = current_store.categories.build(category_params)
 
     respond_to do |format|
@@ -58,6 +61,8 @@ class Admin::CategoriesController < ApplicationController
   # PATCH/PUT /admin/categories/1.js
   # PATCH/PUT /admin/categories/1.json
   def update
+    authorize_action_for @category, at: current_store
+
     respond_to do |format|
       if @category.update(category_params)
         @categories = current_store.categories.roots
@@ -76,7 +81,7 @@ class Admin::CategoriesController < ApplicationController
   # DELETE /admin/categories/1
   # DELETE /admin/categories/1.json
   def destroy
-    authorize_action_for @category
+    authorize_action_for @category, at: current_store
     @category.destroy
 
     respond_to do |format|
@@ -88,6 +93,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /admin/categories/1/reorder_products
   def reorder_products
+    authorize_action_for @category, at: current_store
     @products = @category.products.visible.sorted(@category.product_scope)
   end
 

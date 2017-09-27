@@ -5,12 +5,11 @@ class Admin::AssetEntriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_customer_asset, only: [:create]
 
-  authorize_actions_for AssetEntry
-
   # No layout, this controller never renders HTML.
 
   # POST /admin/customer_assets/1/asset_entries
   def create
+    authorize_action_for AssetEntry, at: current_store
     @asset_entry = @customer_asset.asset_entries.build(asset_entry_params)
 
     respond_to do |format|

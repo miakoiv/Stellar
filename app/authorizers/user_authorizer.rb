@@ -2,19 +2,19 @@
 
 class UserAuthorizer < ApplicationAuthorizer
 
-  def self.creatable_by?(user)
-    user.has_cached_role?(:user_manager)
+  def self.creatable_by?(user, opts)
+    user.has_cached_role?(:user_manager, opts[:at])
   end
 
-  def self.readable_by?(user)
-    user.has_cached_role?(:user_manager)
+  def self.readable_by?(user, opts)
+    user.has_cached_role?(:user_manager, opts[:at])
   end
 
-  def self.deletable_by?(user)
-    user.has_cached_role?(:superuser)
+  def deletable_by?(user, opts)
+    user.has_cached_role?(:superuser, opts[:at])
   end
 
-  def updatable_by?(user)
-    user.has_cached_role?(:user_manager) || user == resource
+  def updatable_by?(user, opts)
+    user.has_cached_role?(:user_manager, opts[:at]) || user == resource
   end
 end

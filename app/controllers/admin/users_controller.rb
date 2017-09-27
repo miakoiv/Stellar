@@ -5,34 +5,36 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for User, except: [:edit, :update]
-
   layout 'admin'
 
   # GET /admin/users
   # GET /admin/users.json
   def index
+    authorize_action_for User, at: current_store
     @users = current_user.managed_users
   end
 
   # GET /admin/users/1
   # GET /admin/users/1.json
   def show
+    authorize_action_for @user, at: current_store
   end
 
   # GET /admin/users/new
   def new
+    authorize_action_for User, at: current_store
     @user = current_store.users.build
   end
 
   # GET /admin/users/1/edit
   def edit
-    authorize_action_for @user
+    authorize_action_for @user, at: current_store
   end
 
   # POST /admin/users
   # POST /admin/users.json
   def create
+    authorize_action_for User, at: current_store
     @user = current_store.users.build(user_params)
 
     respond_to do |format|
@@ -50,7 +52,7 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /admin/users/1
   # PATCH/PUT /admin/users/1.json
   def update
-    authorize_action_for @user
+    authorize_action_for @user, at: current_store
 
     respond_to do |format|
       if @user.update(user_params)
@@ -66,6 +68,7 @@ class Admin::UsersController < ApplicationController
 
   # DELETE /admin/users/1
   def destroy
+    authorize_action_for @user, at: current_store
     @user.destroy
     respond_to do |format|
       format.html { redirect_to admin_users_path,

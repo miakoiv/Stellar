@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Inventory)
+  - if current_user.can_create?(Inventory, at: current_store)
     = link_to new_admin_inventory_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_inventory'))
   %h1= icon('cubes', title(Inventory, count: 2))
@@ -22,9 +22,9 @@
             = icon('low-vision', title: col(Inventory, :fuzzy), data: {toggle: 'tooltip'})
         %td.actions
           = link_to icon('info', t('actions.show')), admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Inventory)
+          - if current_user.can_update?(inventory, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Inventory)
+          - if current_user.can_delete?(inventory, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_inventory_path(inventory),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',

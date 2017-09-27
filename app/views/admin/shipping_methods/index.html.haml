@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(ShippingMethod)
+  - if current_user.can_create?(ShippingMethod, at: current_store)
     = link_to new_admin_shipping_method_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_shipping_method'))
   %h1= icon('ship', title(ShippingMethod, count: 2))
@@ -29,9 +29,9 @@
           %td= shipping_method.disabled_at.present? ? l(shipping_method.disabled_at) : nil
           %td.actions
             = link_to icon('info', t('actions.show')), admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(ShippingMethod)
+            - if current_user.can_update?(shipping_method, at: current_store)
               = link_to icon('edit', t('actions.edit')), edit_admin_shipping_method_path(shipping_method), class: 'btn btn-default btn-sm'
-            - if current_user.can_delete?(ShippingMethod)
+            - if current_user.can_delete?(shipping_method, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_shipping_method_path(shipping_method),
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',

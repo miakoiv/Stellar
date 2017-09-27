@@ -7,19 +7,21 @@ class Admin::PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   authority_actions reorder: 'update'
-  authorize_actions_for Property
 
   layout 'admin'
 
   # GET /admin/properties
   # GET /admin/properties.json
   def index
+    authorize_action_for Property, at: current_store
     @properties = current_store.properties
   end
 
   # GET /admin/properties/1
   # GET /admin/properties/1.json
   def show
+    authorize_action_for @property, at: current_store
+
     respond_to do |format|
       format.json { render json: @property.product_properties, status: 200 }
       format.html
@@ -28,16 +30,19 @@ class Admin::PropertiesController < ApplicationController
 
   # GET /admin/properties/new
   def new
+    authorize_action_for Property, at: current_store
     @property = current_store.properties.build
   end
 
   # GET /admin/properties/1/edit
   def edit
+    authorize_action_for @property, at: current_store
   end
 
   # POST /admin/properties
   # POST /admin/properties.json
   def create
+    authorize_action_for Property, at: current_store
     @property = current_store.properties.build(property_params.merge(priority: current_store.properties.count))
 
     respond_to do |format|
@@ -55,6 +60,8 @@ class Admin::PropertiesController < ApplicationController
   # PATCH/PUT /admin/properties/1
   # PATCH/PUT /admin/properties/1.json
   def update
+    authorize_action_for @property, at: current_store
+
     respond_to do |format|
       if @property.update(property_params)
         format.html { redirect_to admin_property_path(@property),
@@ -70,7 +77,9 @@ class Admin::PropertiesController < ApplicationController
   # DELETE /admin/properties/1
   # DELETE /admin/properties/1.json
   def destroy
+    authorize_action_for @property, at: current_store
     @property.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_properties_path,
         notice: t('.notice', property: @property) }

@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Promotion)
+  - if current_user.can_create?(Promotion, at: current_store)
     = link_to new_admin_promotion_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_promotion'))
   %h1= icon('tag', title(Promotion, count: 2))
@@ -34,10 +34,10 @@
           %td.actions
             = link_to icon('info', t('actions.show')), admin_promotion_path(promotion),
                 class: 'btn btn-default btn-sm'
-            - if current_user.can_update?(Promotion)
+            - if current_user.can_update?(promotion, at: current_store)
               = link_to icon('edit', t('actions.edit')), edit_admin_promotion_path(promotion),
                   class: 'btn btn-default btn-sm'
-            - if current_user.can_delete?(Promotion)
+            - if current_user.can_delete?(promotion, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_promotion_path(promotion),
                   method: :delete, class: 'btn btn-sm btn-danger',
                   data: {confirm: t('actions.confirm.body',

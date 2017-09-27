@@ -1,10 +1,10 @@
-- if current_user.has_cached_role?(:store_admin)
+- if current_user_has_role?(:store_admin)
   = menu_item 'cube', title(Store), edit_admin_store_path(current_store)
-- if current_user.has_cached_role?(:user_manager)
+- if current_user_has_role?(:user_manager)
   = menu_item 'users', title(User, count: 2), admin_users_path
-- if current_user.has_cached_role?(:inventory_manage)
+- if current_user_has_role?(:inventory_manage)
   = menu_item 'cubes', title(Inventory, count: 2), admin_inventories_path
-- if current_user.has_cached_role?(:superuser) || current_user.has_cached_role?(:store_admin)
+- if current_user_has_role?(:superuser) || current_user_has_role?(:store_admin)
   = menu_item 'percent', title(TaxCategory, count: 2), admin_tax_categories_path
   = menu_item 'gears', title(OrderType, count: 2), admin_order_types_path
   = menu_item 'ship', title(ShippingMethod, count: 2), admin_shipping_methods_path

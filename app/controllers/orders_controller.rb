@@ -29,12 +29,12 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    authorize_action_for @order
+    authorize_action_for @order, at: current_store
   end
 
   # GET /orders/1/edit
   def edit
-    authorize_action_for @order
+    authorize_action_for @order, at: current_store
   end
 
   # PATCH/PUT /orders/1
@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
   # Completes an order if it's ready for completion. Responses are in JSON.
   # HTML responses are sent when the user edits her own completed orders.
   def update
-    authorize_action_for @order
+    authorize_action_for @order, at: current_store
 
     respond_to do |format|
       if @order.update(order_params)
@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1
   def destroy
-    authorize_action_for @order
+    authorize_action_for @order, at: current_store
 
     @order.update(cancelled_at: Time.current)
     OrderMailer.order_cancellation(@order).deliver_later

@@ -6,13 +6,13 @@ class Admin::OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :approve, :review, :conclude, :add_products]
 
   authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update', add_products: 'update'
-  authorize_actions_for Order
 
   layout 'admin'
 
   # GET /admin/orders
   # GET /admin/orders.json
   def index
+    authorize_action_for Order, at: current_store
     @query = saved_search_query('order', 'admin_order_search')
     @search = OrderSearch.new(search_params)
     results = @search.results
@@ -22,20 +22,24 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/1
   def show
+    authorize_action_for Order, at: current_store
   end
 
   # GET /admin/orders/new
   def new
+    authorize_action_for Order, at: current_store
     @order = current_store.orders.build(completed_at: Time.current)
   end
 
   # GET /admin/orders/1/edit
   def edit
+    authorize_action_for Order, at: current_store
   end
 
   # POST /admin/orders
   # POST /admin/orders.json
   def create
+    authorize_action_for Order, at: current_store
     @order = current_store.orders.build(order_params)
 
     respond_to do |format|
@@ -53,6 +57,8 @@ class Admin::OrdersController < ApplicationController
   # PATCH/PUT /admin/orders/1
   # PATCH/PUT /admin/orders/1.json
   def update
+    authorize_action_for Order, at: current_store
+
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to admin_order_path(@order),
@@ -67,12 +73,14 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/1/quote
   def quote
+    authorize_action_for Order, at: current_store
     OrderMailer.quotation(@order).deliver_later
     redirect_to admin_order_path(@order), notice: t('.notice', order: @order)
   end
 
   # GET /admin/orders/1/forward
   def forward
+    authorize_action_for Order, at: current_store
     @order.forward_to(shopping_cart)
     shopping_cart.reappraise!(current_pricing)
     shopping_cart.recalculate!
@@ -82,6 +90,7 @@ class Admin::OrdersController < ApplicationController
 
   # PATCH/PUT /admin/orders/1/approve
   def approve
+    authorize_action_for Order, at: current_store
     @order.update(approved_at: Date.current)
 
     respond_to do |format|
@@ -91,10 +100,12 @@ class Admin::OrdersController < ApplicationController
 
   # GET /admin/orders/1/review
   def review
+    authorize_action_for Order, at: current_store
   end
 
   # PATCH/PUT /admin/orders/1/conclude
   def conclude
+    authorize_action_for Order, at: current_store
     @order.update(concluded_at: Date.current)
 
     respond_to do |format|
@@ -104,6 +115,7 @@ class Admin::OrdersController < ApplicationController
 
   # POST /admin/orders/1/add_products
   def add_products
+    authorize_action_for Order, at: current_store
     product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
 
     product_ids.each do |product_id|

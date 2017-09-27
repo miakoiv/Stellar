@@ -5,13 +5,12 @@ class Admin::CustomerAssetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_customer_asset, only: [:show, :edit]
 
-  authorize_actions_for CustomerAsset
-
   layout 'admin'
 
   # GET /admin/customer_assets
   # GET /admin/customer_assets.json
   def index
+    authorize_action_for CustomerAsset, at: current_store
     @query = saved_search_query('customer_asset', 'admin_customer_asset_search')
     @search = CustomerAssetSearch.new(search_params)
     @customer_assets = @search.results.page(params[:page])
@@ -19,20 +18,24 @@ class Admin::CustomerAssetsController < ApplicationController
 
   # GET /admin/customer_assets/1
   def show
+    authorize_action_for @customer_asset, at: current_store
   end
 
   # GET /admin/customer_assets/new
   def new
+    authorize_action_for CustomerAsset, at: current_store
     @customer_asset = current_store.customer_assets.build
   end
 
   # GET /admin/customer_assets/1/edit
   def edit
+    authorize_action_for @customer_asset, at: current_store
   end
 
   # POST /admin/customer_assets
   # POST /admin/customer_assets.json
   def create
+    authorize_action_for CustomerAsset, at: current_store
     @customer_asset = current_store.customer_assets.build(customer_asset_params)
 
     respond_to do |format|

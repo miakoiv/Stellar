@@ -8,7 +8,7 @@
   .col-md-5
     .quick-edit-panel
       .header
-        - if current_user.can_create?(Category)
+        - if current_user.can_create?(Category, at: current_store)
           = link_to new_admin_category_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_category'))
       #category-form

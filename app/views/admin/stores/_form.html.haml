@@ -3,7 +3,7 @@
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'store-admin', col(Store, :admin), class: 'active'
     = nav_tab 'store-files', col(Store, :files)
-    - if current_user.has_cached_role?(:superuser)
+    - if current_user_has_role?(:superuser)
       = nav_tab 'store-superuser', col(Store, :superuser)
     - if @store.new_record?
       = nav_tab 'store-new-user', col(Store, :new_user)
@@ -42,7 +42,7 @@
           %fieldset{disabled: locked}
             %legend= col(Store, :order_xml)
             = f.text_field :order_xml_path
-        - if current_user.has_cached_role?(:superuser)
+        - if current_user_has_role?(:superuser)
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
               = f.number_field :erp_number

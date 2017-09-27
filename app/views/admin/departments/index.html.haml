@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Department)
+  - if current_user.can_create?(Department, at: current_store)
     = link_to new_admin_department_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_department'))
   %h1= icon('umbrella', title(Department, count: 2))
@@ -30,9 +30,9 @@
               %span.label.label-default= category.to_option
         %td.actions
           = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Department)
+          - if current_user.can_update?(department, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_department_path(department), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Department)
+          - if current_user.can_delete?(department, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_department_path(department),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',

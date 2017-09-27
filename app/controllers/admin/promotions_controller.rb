@@ -6,35 +6,38 @@ class Admin::PromotionsController < ApplicationController
   before_action :set_promotion,
     only: [:show, :edit, :update, :destroy, :add_products, :add_categories]
 
-  authority_actions add_products: 'update'
-  authority_actions add_categories: 'update'
-  authorize_actions_for Promotion
+  authority_actions add_products: 'update', add_categories: 'update'
 
   layout 'admin'
 
   # GET /admin/promotions
   # GET /admin/promotions.json
   def index
+    authorize_action_for Promotion, at: current_store
     @promotions = current_store.promotions
   end
 
   # GET /admin/promotions/1
   # GET /admin/promotions/1.json
   def show
+    authorize_action_for @promotion, at: current_store
   end
 
   # GET /admin/promotions/new
   def new
+    authorize_action_for Promotion, at: current_store
     @promotion = current_store.promotions.build
   end
 
   # GET /admin/promotions/1/edit
   def edit
+    authorize_action_for @promotion, at: current_store
   end
 
   # POST /admin/promotions
   # POST /admin/promotions.json
   def create
+    authorize_action_for Promotion, at: current_store
     @promotion = current_store.promotions.build(promotion_params)
     @promotion.build_promotion_handler(type: @promotion.promotion_handler_type)
 
@@ -53,6 +56,8 @@ class Admin::PromotionsController < ApplicationController
   # PATCH/PUT /admin/promotions/1
   # PATCH/PUT /admin/promotions/1.json
   def update
+    authorize_action_for @promotion, at: current_store
+
     respond_to do |format|
       if @promotion.update(promotion_params)
         format.html { redirect_to admin_promotion_path(@promotion),
@@ -68,7 +73,9 @@ class Admin::PromotionsController < ApplicationController
   # DELETE /admin/promotions/1
   # DELETE /admin/promotions/1.json
   def destroy
+    authorize_action_for @promotion, at: current_store
     @promotion.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_promotions_path,
         notice: t('.notice', promotion: @promotion) }
@@ -78,6 +85,7 @@ class Admin::PromotionsController < ApplicationController
 
   # POST /admin/promotions/1/add_products
   def add_products
+    authorize_action_for @promotion, at: current_store
     product_ids = params[:promotion][:product_ids_string]
       .split(',').map(&:to_i)
 
@@ -94,6 +102,7 @@ class Admin::PromotionsController < ApplicationController
 
   # POST /admin/promotions/1/add_categories
   def add_categories
+    authorize_action_for @promotion, at: current_store
     category_ids = params[:promotion][:category_ids_string]
       .split(',').map(&:to_i)
 

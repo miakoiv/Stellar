@@ -5,33 +5,36 @@ class Admin::AlbumsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_album, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for Album
-
   layout 'admin'
 
   # GET /admin/albums
   # GET /admin/albums.json
   def index
+    authorize_action_for Album, at: current_store
     @albums = current_store.albums
   end
 
   # GET /admin/albums/1
   # GET /admin/albums/1.json
   def show
+    authorize_action_for @album, at: current_store
   end
 
   # GET /admin/albums/new
   def new
+    authorize_action_for Album, at: current_store
     @album = current_store.albums.build
   end
 
   # GET /admin/albums/1/edit
   def edit
+    authorize_action_for @album, at: current_store
   end
 
   # POST /admin/albums
   # POST /admin/albums.json
   def create
+    authorize_action_for Album, at: current_store
     @album = current_store.albums.build(album_params)
 
     respond_to do |format|
@@ -49,6 +52,8 @@ class Admin::AlbumsController < ApplicationController
   # PATCH/PUT /admin/albums/1
   # PATCH/PUT /admin/albums/1.json
   def update
+    authorize_action_for @album, at: current_store
+
     respond_to do |format|
       if @album.update(album_params)
         format.html { redirect_to admin_album_path(@album),
@@ -64,7 +69,9 @@ class Admin::AlbumsController < ApplicationController
   # DELETE /admin/albums/1
   # DELETE /admin/albums/1.json
   def destroy
+    authorize_action_for @album, at: current_store
     @album.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_albums_path,
         notice: t('.notice', album: @album) }

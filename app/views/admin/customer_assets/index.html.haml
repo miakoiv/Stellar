@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(CustomerAsset)
+  - if current_user.can_create?(CustomerAsset, at: current_store)
     = link_to new_admin_customer_asset_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_customer_asset'))
   %h1= icon('archive', title(CustomerAsset, count: 2))

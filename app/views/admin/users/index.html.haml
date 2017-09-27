@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(User)
+  - if current_user.can_create?(User, at: current_store)
     = link_to new_admin_user_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_user'))
   %h1= icon('users', title(User, count: 2))

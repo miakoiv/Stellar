@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(Album)
+  - if current_user.can_create?(Album, at: current_store)
     = link_to new_admin_album_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_album'))
   %h1= icon('camera-retro', title(Album, count: 2))
@@ -23,10 +23,10 @@
         %td.actions
           = link_to icon('info', t('actions.show')), admin_album_path(album),
               class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(Album)
+          - if current_user.can_update?(album, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_album_path(album),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(Album)
+          - if current_user.can_delete?(album, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_album_path(album),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',

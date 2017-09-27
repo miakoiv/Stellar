@@ -7,25 +7,26 @@ class Admin::PagesController < ApplicationController
   before_action :set_page, only: [:edit, :update, :destroy, :layout]
 
   authority_actions rearrange: 'update', layout: 'update'
-  authorize_actions_for Page, except: [:edit, :update, :destroy, :layout]
 
   layout 'admin'
 
   # GET /admin/pages
   # GET /admin/pages.json
   def index
+    authorize_action_for Page, at: current_store
     @pages = current_store.pages.roots
   end
 
   # GET /admin/pages/new.js
   def new
+    authorize_action_for Page, at: current_store
     @page = current_store.pages.build
   end
 
   # GET /admin/pages/1/edit
   # GET /admin/pages/1/edit.js
   def edit
-    authorize_action_for @page
+    authorize_action_for @page, at: current_store
     @pages = current_store.pages.roots
 
     respond_to :html, :js
@@ -35,6 +36,7 @@ class Admin::PagesController < ApplicationController
   # POST /admin/pages.js
   # POST /admin/pages.json
   def create
+    authorize_action_for Page, at: current_store
     @page = current_store.pages.build(page_params)
     @page.slug = 'front' if @page.route?
 
@@ -55,7 +57,7 @@ class Admin::PagesController < ApplicationController
   # PATCH/PUT /admin/pages/1.js
   # PATCH/PUT /admin/pages/1.json
   def update
-    authorize_action_for @page
+    authorize_action_for @page, at: current_store
 
     respond_to do |format|
       if @page.update(page_params)
@@ -73,7 +75,7 @@ class Admin::PagesController < ApplicationController
   # DELETE /admin/pages/1
   # DELETE /admin/pages/1.json
   def destroy
-    authorize_action_for @page
+    authorize_action_for @page, at: current_store
     @page.destroy
 
     respond_to do |format|
@@ -85,7 +87,8 @@ class Admin::PagesController < ApplicationController
 
   # GET /admin/pages/1/layout
   def layout
-    authorize_action_for @page
+    authorize_action_for @page, at: current_store
+
     render layout: 'layout_editor'
   end
 

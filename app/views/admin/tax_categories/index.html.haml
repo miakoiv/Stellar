@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(TaxCategory)
+  - if current_user.can_create?(TaxCategory, at: current_store)
     = link_to new_admin_tax_category_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_tax_category'))
   %h1= icon('percent', title(TaxCategory, count: 2))
@@ -14,7 +14,7 @@
         %th
         %th.actions
 
-    %tbody{class: current_user.can_update?(TaxCategory) && 'sortable'}
+    %tbody{class: current_user.can_update?(TaxCategory, at: current_store) && 'sortable'}
       = content_tag_for :tr, @tax_categories do |tax_category|
         %td.hidden-print= drag_handle
         %td= tax_category.name
@@ -27,10 +27,10 @@
         %td.actions
           = link_to icon('info', t('actions.show')), admin_tax_category_path(tax_category),
               class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(TaxCategory)
+          - if current_user.can_update?(tax_category, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_tax_category_path(tax_category),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(TaxCategory)
+          - if current_user.can_delete?(tax_category, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_tax_category_path(tax_category),
                 method: :delete, class: 'btn btn-sm btn-danger',
                 data: {confirm: t('actions.confirm.body',

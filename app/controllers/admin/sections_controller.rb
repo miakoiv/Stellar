@@ -7,12 +7,12 @@ class Admin::SectionsController < ApplicationController
   before_action :set_section, only: [:update, :destroy]
 
   authority_actions reorder: 'update'
-  authorize_actions_for Section
 
   # No layout, this controller never renders HTML.
 
   # GET /admin/pages/1/sections/create.js
   def create
+    authorize_action_for Section, at: current_store
     @page = current_store.pages.friendly.find(params[:page_id])
     @section = @page.sections.build(section_params.merge(priority: @page.sections.count))
 
@@ -28,6 +28,8 @@ class Admin::SectionsController < ApplicationController
 
   # PATCH/PUT /admin/sections/1.js
   def update
+    authorize_action_for @section, at: current_store
+
     respond_to do |format|
       if @section.update(section_params)
         format.js
@@ -39,6 +41,8 @@ class Admin::SectionsController < ApplicationController
 
   # DELETE /admin/sections/1.js
   def destroy
+    authorize_action_for @section, at: current_store
+
     respond_to do |format|
       if @section.destroy
         format.js

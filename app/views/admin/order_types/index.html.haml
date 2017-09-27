@@ -1,5 +1,5 @@
 .page-header
-  - if current_user.can_create?(OrderType)
+  - if current_user.can_create?(OrderType, at: current_store)
     = link_to new_admin_order_type_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_order_type'))
   %h1= icon('gears', title(OrderType, count: 2))
@@ -42,9 +42,9 @@
         %td.actions
           = link_to icon('info', t('actions.show')), admin_order_type_path(order_type),
               class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(OrderType)
+          - if current_user.can_update?(order_type, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_order_type_path(order_type),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(order_type)
+          - if current_user.can_delete?(order_type, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
                   klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

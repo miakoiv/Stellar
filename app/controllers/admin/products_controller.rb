@@ -7,13 +7,13 @@ class Admin::ProductsController < ApplicationController
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries, :make_primary]
 
   authority_actions query: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', duplicate: 'create'
-  authorize_actions_for Product, except: [:show, :edit, :update, :duplicate, :add_requisite_entries, :make_primary]
 
   layout 'admin'
 
   # GET /admin/products
   # GET /admin/products.json
   def index
+    authorize_action_for Product, at: current_store
     @query = saved_search_query('product', 'admin_product_search')
     @search = ProductSearch.new(search_params)
     @products = @search.results.master.alphabetical.page(params[:page])
@@ -22,6 +22,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/query.json?q=keyword
   # This method serves selectize widgets populated via Ajax.
   def query
+    authorize_action_for Product, at: current_store
     @query = {'keyword' => params[:q], live: true}.merge(params)
     @search = ProductSearch.new(search_params)
     @products = @search.results
@@ -30,11 +31,12 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/1
   # GET /admin/products/1.json
   def show
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
   end
 
   # GET /admin/products/new
   def new
+    authorize_action_for Product, at: current_store
     master = current_store.products.find_by(slug: params[:master])
     @product = current_store.products.build(
       vendor: current_user.vendor? ? current_user : nil,
@@ -47,7 +49,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/1/edit
   # GET /admin/products/1/edit.js
   def edit
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
 
     respond_to :html, :js
   end
@@ -55,6 +57,7 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products
   # POST /admin/products.json
   def create
+    authorize_action_for Product, at: current_store
     @product = current_store.products.build(product_params)
     @product.vendor = current_user if current_user.vendor?
     @product.priority = @product.master_product.variants.count if @product.variant?
@@ -75,7 +78,7 @@ class Admin::ProductsController < ApplicationController
   # PATCH/PUT /admin/products/1.js
   # PATCH/PUT /admin/products/1.json
   def update
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
 
     respond_to do |format|
       if @product.update(product_params)
@@ -92,7 +95,7 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products/1/duplicate
   def duplicate
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
     original = @product
     @product = original.duplicate!
 
@@ -102,7 +105,7 @@ class Admin::ProductsController < ApplicationController
 
   # POST /admin/products/1/add_requisite_entries
   def add_requisite_entries
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
 
     requisite_ids = params[:product][:requisite_ids_string]
       .split(',').map(&:to_i)
@@ -118,7 +121,7 @@ class Admin::ProductsController < ApplicationController
 
   # PATCH/PUT /admin/products/1/make_primary.js
   def make_primary
-    authorize_action_for @product
+    authorize_action_for @product, at: current_store
 
     @master = @product.master_product
     if @master.update primary_variant: @product

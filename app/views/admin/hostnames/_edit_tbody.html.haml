@@ -3,5 +3,6 @@
   %td= hostname
   %td= hostname.domain_hostname
   %td.actions
-    = link_to icon('remove'), admin_hostname_path(hostname),
-        remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    - if current_user.can_delete?(hostname, at: current_store)
+      = link_to icon('remove'), admin_hostname_path(hostname),
+          remote: true, method: :delete, class: 'btn btn-sm btn-danger'

@@ -7,12 +7,12 @@ class Admin::HostnamesController < ApplicationController
   before_action :set_store, only: [:create]
 
   authority_actions reorder: 'update'
-  authorize_actions_for Hostname
 
   # No layout, this controller never renders HTML.
 
   # POST /admin/stores/1/hostnames
   def create
+    authorize_action_for Hostname, at: current_store
     @hostname = @store.hostnames.build(hostname_params)
 
     respond_to do |format|
@@ -28,6 +28,7 @@ class Admin::HostnamesController < ApplicationController
   # DELETE /admin/hostnames/1
   def destroy
     @hostname = Hostname.find(params[:id])
+    authorize_action_for @hostname, at: current_store
 
     respond_to do |format|
       if @hostname.destroy

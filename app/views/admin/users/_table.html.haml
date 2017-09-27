@@ -16,9 +16,9 @@
             %span.label{class: "label-#{role.appearance}"}= role
         %td.actions
           = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(user)
+          - if current_user.can_update?(user, at: current_store)
             = link_to icon('edit', t('actions.edit')), edit_admin_user_path(user), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(User)
+          - if current_user.can_delete?(user, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
                   klass: User.model_name.human, name: user.name),
                   'confirm-title': t('actions.confirm.title'),

@@ -1,7 +1,7 @@
 .page-header.hidden-print
   = link_to admin_orders_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  - if current_user.can_update?(Order)
+  - if current_user.can_update?(Order, at: current_store)
     = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   - if @order.incoming_for?(current_user)
