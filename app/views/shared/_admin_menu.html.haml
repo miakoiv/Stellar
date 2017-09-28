@@ -1,0 +1,15 @@
+= menu_item 'dashboard', t('admin.dashboard.title'), admin_dashboard_path
+- if current_user_has_role?(:order_review) || current_user_has_role?(:order_manage)
+  = menu_item 'truck', title(Order, count: 2), admin_orders_path
+- if current_user_has_role?(:reports)
+  = menu_item 'line-chart', t('admin.reports.title'), admin_reports_path
+- if current_user_has_role?(:promotion_editor)
+  = menu_item 'tag', title(Promotion, count: 2), admin_promotions_path
+%li.divider
+- if current_user_has_role?(:product_editor)
+  = menu_item 'cube', title(Product, count: 2), admin_products_path
+- if current_user_has_role?(:category_editor)
+  = menu_item 'sitemap', title(Category, count: 2), admin_categories_path
+- if current_user_has_role?(:page_editor)
+  = menu_item 'files-o', title(Page, count: 2), admin_pages_path
+%li.divider

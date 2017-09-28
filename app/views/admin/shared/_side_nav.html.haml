@@ -20,7 +20,6 @@
     = current_user.name
   %ul.nav.navmenu-nav
     = render partial: 'shared/user_menu'
-    = menu_item 'home', t('admin.return_to_storefront'), front_path
 - else
   %ul.nav.navmenu-nav
     = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path

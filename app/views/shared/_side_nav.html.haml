@@ -6,9 +6,9 @@
     %span.label{class: "label-#{current_user.appearance}"}= icon('user')
     = current_user.name
   %ul.nav.navmenu-nav
-    = render partial: 'shared/user_menu'
     - if can_manage?
-      = menu_item 'wrench', t('admin.manage'), admin_dashboard_path
+      = render partial: 'shared/admin_menu'
+    = render partial: 'shared/user_menu'
 - else
   .navmenu-title
   %ul.nav.navmenu-nav

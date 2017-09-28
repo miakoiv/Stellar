@@ -36,7 +36,7 @@
           = current_user.name.split.first
           %span.caret
         %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-          = render partial: 'admin/shared/user_menu'
+          = render partial: 'shared/admin_menu'
+          = render partial: 'shared/user_menu'
     - else
       %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
-    %li= link_to icon('home', class: 'fa-lg'), front_path, title: t('admin.return_to_storefront'), data: {toggle: 'tooltip', placement: 'bottom'}
