@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926084115) do
+ActiveRecord::Schema.define(version: 20170927112810) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -568,7 +568,6 @@ ActiveRecord::Schema.define(version: 20170926084115) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
-    t.string   "appearance",    limit: 255, default: "default", null: false
     t.integer  "resource_id",   limit: 4
     t.string   "resource_type", limit: 255
     t.datetime "created_at"

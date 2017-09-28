@@ -6,5 +6,7 @@
   %h1= icon('user', @user)
 
 .row
-  .col-sm-6
+  .col-sm-8
     = render partial: 'form', locals: {locked: false}
+  .col-sm-4
+    = render partial: 'admin/roles/edit_list', object: @user, as: :user

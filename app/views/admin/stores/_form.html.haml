@@ -62,7 +62,6 @@
                 = ff.telephone_field :phone, required: true
                 = ff.password_field :password, required: true
                 = ff.password_field :password_confirmation, required: true
-                = ff.select :role_ids, Role.all.map { |r| [r.to_s, r.id] }, {}, {multiple: true, class: 'selectize'}
           = tab_pane 'store-new-tax-category' do
             = f.fields_for :tax_categories do |ff|
               %fieldset{disabled: locked}

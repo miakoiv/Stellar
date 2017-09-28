@@ -452,7 +452,7 @@ fi:
         addresses: Osoitteet
         name: Nimi
         group: Ryhmä
-        role_ids: Roolit
+        roles: Roolit
         category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä
         locale: Kieli

@@ -26,10 +26,7 @@ class Admin::StoresController < ApplicationController
   def new
     authorize_action_for Store, at: current_store
     @store = Store.new
-    @store.users.build(
-      group: User.groups[:manufacturer],
-      roles: Role.where(name: 'superuser')
-    )
+    @store.users.build(group: User.groups[:manufacturer])
     @store.tax_categories.build
   end
 
@@ -90,7 +87,7 @@ class Admin::StoresController < ApplicationController
         :order_xml_path, :erp_number, :order_sequence, :theme, :detach_menu,
         users_attributes: [
           :name, :email, :phone, :locale, :pricing_factor,
-          :password, :password_confirmation, :group, role_ids: []
+          :password, :password_confirmation, :group
         ],
         tax_categories_attributes: [
           :name, :rate, :included_in_retail

@@ -51,26 +51,43 @@ fi:
           random: satunnainen
       role:
         name:
-          see_pricing: näkee hinnat
-          see_stock: näkee varastosaldon
-          manager: ylläpitäjä
+          see_pricing: hinnat
+          see_stock: saldot
           correspondence: yhteydenotot
           reports: raportit
-          property_editor: ominaisuuksien muokkaus
-          category_editor: tuoteryhmien muokkaus
-          order_editor: tilauksien käsittely (poistettu)
-          order_review: tilauksien katselu
-          order_manage: tilauksien hallinta
+          property_editor: ominaisuudet
+          category_editor: tuoteryhmät
+          order_review: tilaukset (luku)
+          order_manage: tilaukset
           order_notify: tilausvahvistukset
-          page_editor: sivujen muokkaus
-          product_editor: tuotteiden muokkaus
-          promotion_editor: kampanjoiden muokkaus
-          user_manager: käyttäjien hallinta
-          album_editor: albumien muokkaus
-          asset_editor: omistuksien muokkaus
-          inventory_manage: varastojen hallinta
+          page_editor: sivut
+          product_editor: tuotteet
+          promotion_editor: kampanjat
+          user_manager: käyttäjät
+          album_editor: albumit
+          asset_editor: omistukset
+          inventory_manage: varastot
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
+        description:
+          see_pricing: tuotteiden hintojen näkyvyys kaupassa
+          see_stock: tuotteiden varastosaldon näkyvyys kaupassa
+          correspondence: asiakkaiden yhteydenotot sähköpostitse
+          reports: raporttien lukeminen ja ajaminen
+          property_editor: tuoteominaisuuksien määritykset
+          category_editor: tuoteryhmien hallinta
+          order_review: tilauksien selaaminen ja katselu, ei käsittely
+          order_manage: kaikki tilauksien käsittelyyn liittyvät toiminnot
+          order_notify: tilausvahvistukset sähköpostitse
+          page_editor: sivujen ja navigaation hallinta
+          product_editor: tuotteiden hallinta
+          promotion_editor: kampanjoiden hallinta
+          user_manager: käyttäjien ja käyttöoikeuksien hallinta
+          album_editor: kuva-albumien hallinta
+          asset_editor: asiakkaille myytyjen tuotteiden hallinta
+          inventory_manage: varastojen hallinta
+          store_admin: kaupan asetukset ja verkko-osoitteet
+          superuser: kauppojen perustaminen ja järjestelmäasetukset
       section:
         outline:
           block: lohkot

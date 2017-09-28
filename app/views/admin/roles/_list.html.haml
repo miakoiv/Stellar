@@ -1,0 +1,4 @@
+#roles-list.list-group
+  - current_user.grantable_roles.each do |role|
+    .list-group-item{class: user.has_cached_role?(role, current_store) && 'active'}
+      = render partial: 'admin/roles/list_item', locals: {role: role}

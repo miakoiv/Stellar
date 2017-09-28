@@ -4,7 +4,7 @@
       %tr
         %th.col-xs-2= col(User, :name)
         %th.col-xs-3= col(User, :email)
-        %th= col(User, :role_ids)
+        %th= col(User, :roles)
         %th.actions
 
     %tbody
@@ -13,7 +13,7 @@
         %td= user.email
         %td
           - user.roles.each do |role|
-            %span.label{class: "label-#{role.appearance}"}= role
+            = icon(role.icon, title: role, class: 'fa-fw', data: {toggle: 'tooltip'})
         %td.actions
           = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(user, at: current_store)

@@ -201,7 +201,7 @@ de:
         inventory_ids: Lager
       user:
         name: Name
-        role_ids: Rollen
+        roles: Rollen
         sign_in_count: Anzahl Anmeldungen
         current_sign_in_at: Aktuelle Anmeldung
         last_sign_in_at: Letzte Anmeldung

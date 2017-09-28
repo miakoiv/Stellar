@@ -1,0 +1,5 @@
+#roles-list.list-group
+  - current_user.grantable_roles.each do |role|
+    - css = user.has_cached_role?(role, current_store) ? 'list-group-item active' : 'list-group-item'
+    = link_to toggle_admin_user_role_path(user, role), class: css, remote: true, method: :patch do
+      = render partial: 'admin/roles/list_item', locals: {role: role}

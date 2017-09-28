@@ -146,7 +146,13 @@ Rails.application.routes.draw do
     resources :properties do
       post :reorder, on: :collection
     end
-    resources :users
+    resources :users do
+      resources :roles, only: [] do
+        member do
+          patch :toggle
+        end
+      end
+    end
     resources :customer_assets do
       resources :asset_entries, shallow: true, only: :create
     end

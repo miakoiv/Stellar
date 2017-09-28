@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
 
   default_scope { order(group: :desc, name: :asc) }
 
-  scope :by_role, -> (role_name) { joins(:roles).where(roles: {name: role_name}) }
   scope :non_guest, -> { where.not(group: groups[:guest]) }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
@@ -148,13 +147,9 @@ class User < ActiveRecord::Base
 
   # Roles that a user manager may grant to other users. The superuser
   # may promote others to superusers.
-  def grantable_role_options
-    roles = if has_cached_role?(:superuser)
-      Role.all
-    else
-      Role.where.not(name: [:superuser])
-    end
-    roles.map { |r| [r.to_s, r.id] }
+  def grantable_roles
+    roles = Role.available_roles
+    has_cached_role?(:superuser) ? roles : roles - ['superuser']
   end
 
   # Other users the user may manage.
@@ -167,7 +162,6 @@ class User < ActiveRecord::Base
     available_categories = vendor? ? categories : store.categories
     available_categories.order(:lft).map { |c| [c.to_option, c.id] }
   end
-
 
   # Reseller users are able to select a pricing group to use for retail.
   def can_select_pricing_group?

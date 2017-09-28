@@ -386,7 +386,7 @@ es:
         addresses: Direcciones
         name: Nombres
         group: Grupos
-        role_ids: Roles
+        roles: Roles
         category_ids: Categorias permitidas
         pricing_group_id: Grupo de precios
         locale: Idioma

@@ -47,7 +47,6 @@ es:
           reports: Informes
           property_editor: Editor de propiedades
           category_editor: Editor de categorias
-          order_editor: Editor de pedido (obsoleto)
           order_review: Ver pedido
           order_manage: Administrar pedido
           order_notify: Notificaciones del pedido

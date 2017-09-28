@@ -452,7 +452,7 @@ en:
         addresses: Addresses
         name: Name
         group: Group
-        role_ids: Roles
+        roles: Roles
         category_ids: Allowed categories
         pricing_group_id: Pricing group
         locale: Language

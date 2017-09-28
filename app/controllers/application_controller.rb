@@ -103,7 +103,9 @@ class ApplicationController < ActionController::Base
   end
 
   def can_manage?
-    current_user_has_role?(:manager)
+    @can_manage ||= Role.administrative.any? { |role|
+      current_user_has_role?(role)
+    }
   end
 
   # The ability to shop at any given category depends on possible restricted
@@ -147,12 +149,15 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # Create a record for a guest user and schedule its cleanup
-    # to happen after two weeks.
+    # Create a record for a guest user, assign their default roles,
+    # and schedule a cleanup in two weeks.
     def create_guest_user
-      guest = @current_store.users.new(@current_store.guest_user_defaults(request.host))
+      defaults = @current_store.guest_user_defaults(@current_hostname)
+      guest = @current_store.users.new(defaults)
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
+      guest.add_role('see_pricing', @current_store)
+      guest.add_role('see_stock', @current_store)
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
     end

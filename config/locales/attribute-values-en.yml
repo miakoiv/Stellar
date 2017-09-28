@@ -51,26 +51,43 @@ en:
           random: randomly
       role:
         name:
-          see_pricing: see pricing
-          see_stock: see stock
-          manager: manager
+          see_pricing: pricing
+          see_stock: stock
           correspondence: correspondence
-          reports: reporting
-          property_editor: property editor
-          category_editor: category editor
-          order_editor: order editor (deprecated)
-          order_review: review orders
-          order_manage: manage orders
+          reports: reports
+          property_editor: properties
+          category_editor: categories
+          order_review: orders (review)
+          order_manage: orders
           order_notify: order notifications
-          page_editor: page editor
-          product_editor: product editor
-          promotion_editor: promotion editor
-          user_manager: user manager
-          album_editor: album editor
-          asset_editor: asset editor
-          inventory_manage: manage inventory
+          page_editor: pages
+          product_editor: products
+          promotion_editor: promotions
+          user_manager: users
+          album_editor: albums
+          asset_editor: assets
+          inventory_manage: inventories
           store_admin: store administrator
           superuser: superuser
+        description:
+          see_pricing: pricing visible at storefront
+          see_stock: product stock visible at storefont
+          correspondence: customer correspondence by e-mail
+          reports: viewing and running reports
+          property_editor: product property definitions
+          category_editor: product category management
+          order_review: order reviews only
+          order_manage: order management
+          order_notify: order notifications by e-mail
+          page_editor: page and navigation management
+          product_editor: product management
+          promotion_editor: promotion management
+          user_manager: user and privilege management
+          album_editor: photo album management
+          asset_editor: management of products sold to customers
+          inventory_manage: inventory management
+          store_admin: store settings and web addresses
+          superuser: store creation and system settings
       section:
         outline:
           block: blocks

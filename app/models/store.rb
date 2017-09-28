@@ -141,15 +141,13 @@ class Store < ActiveRecord::Base
   end
 
   #---
-  # Defaults for guest users reveal pricing and stock, and will allow shopping
-  # if admit_guests is also enabled, to get in without authentication.
-  def guest_user_defaults(host)
+  # Guest users are assigned a random name and put in the guest group.
+  def guest_user_defaults(hostname)
     name = "#{Time.now.to_i}#{rand(100)}"
     {
       name: name,
-      email: "#{name}@#{host}",
-      group: User.groups[:guest],
-      roles: Role.where(name: %w[see_pricing see_stock])
+      email: "#{name}@#{hostname.fqdn}",
+      group: User.groups[:guest]
     }
   end
 

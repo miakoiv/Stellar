@@ -25,7 +25,6 @@
             = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
             = f.select :pricing_group_id, current_store.pricing_groups.map { |g| [g.to_s, g.id] }, {include_blank: blank}, {class: 'selectize'}
             = f.select :category_ids, current_store.categories.order(:lft).map { |c| [c.to_option, c.id] }, {}, {multiple: true, class: 'selectize', placeholder: t('.no_categories')}
-            = f.select :role_ids, current_user.grantable_role_options, {}, {multiple: true, class: 'selectize'}
         = tab_pane 'user-addresses' do
           %fieldset{disabled: locked}
             = f.text_field :shipping_address

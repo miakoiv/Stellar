@@ -1,0 +1,5 @@
+%h5.list-group-item-heading
+  = icon(Role.icon_for(role), class: 'fa-fw')
+  = Role.human_attribute_value(:name, role)
+%p.list-group-item-text.small
+  = Role.human_attribute_value(:description, role)

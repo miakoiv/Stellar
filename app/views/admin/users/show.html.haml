@@ -7,11 +7,10 @@
   %h1= icon('user', @user)
 
 .row
-  .col-sm-6
+  .col-sm-8
     = render partial: 'form', locals: {locked: true}
 
-  - unless @user.guest?
-    .col-sm-6
+    - unless @user.guest?
       = bootstrap_form_for [:admin, @user], layout: :horizontal,
           label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
         .panel.panel-default
@@ -19,3 +18,6 @@
             = f.text_field :last_sign_in_at, value: @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :iso) : nil
             = f.text_field :last_sign_in_ip
             = f.text_field :sign_in_count
+
+  .col-sm-4
+    = render partial: 'admin/roles/list', object: @user, as: :user

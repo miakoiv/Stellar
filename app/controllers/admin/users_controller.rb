@@ -91,7 +91,7 @@ class Admin::UsersController < ApplicationController
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
         :locale, :password, :password_confirmation,
-        :group, :pricing_group_id, role_ids: [], category_ids: []
+        :group, :pricing_group_id, category_ids: []
       )
     end
 end
