@@ -5,10 +5,10 @@
   %h1= icon('users', title(User, count: 2))
 %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
   - current_user.managed_groups.reverse.each_with_index do |group, index|
-    = nav_tab group, User.human_attribute_value(:group, group), class: index == 0 ? 'active' : nil
+    = nav_tab group, User.human_attribute_value(:group, group), class: index == 1 ? 'active' : nil
 
 .panel.panel-default.tabbed-panel
   .tab-content
     - current_user.managed_groups.reverse.each_with_index do |group, index|
-      = tab_pane group, class: index == 0 ? 'in active' : nil do
+      = tab_pane group, class: index == 1 ? 'in active' : nil do
         = render partial: 'table', object: @users.send(group), as: :users
