@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927112810) do
+ActiveRecord::Schema.define(version: 20170929075944) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -436,6 +436,13 @@ ActiveRecord::Schema.define(version: 20170927112810) do
 
   add_index "pricing_groups", ["store_id"], name: "index_pricing_groups_on_store_id", using: :btree
 
+  create_table "pricing_groups_users", id: false, force: :cascade do |t|
+    t.integer "pricing_group_id", limit: 4, null: false
+    t.integer "user_id",          limit: 4, null: false
+  end
+
+  add_index "pricing_groups_users", ["pricing_group_id", "user_id"], name: "index_pricing_groups_users_on_pricing_group_id_and_user_id", unique: true, using: :btree
+
   create_table "product_properties", force: :cascade do |t|
     t.integer  "product_id",  limit: 4,                            null: false
     t.integer  "property_id", limit: 4,                            null: false
@@ -663,7 +670,6 @@ ActiveRecord::Schema.define(version: 20170927112810) do
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",               limit: 4,                null: false
     t.integer  "group",                  limit: 4,   default: 0,  null: false
-    t.integer  "pricing_group_id",       limit: 4
     t.string   "name",                   limit: 255,              null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255
@@ -689,7 +695,6 @@ ActiveRecord::Schema.define(version: 20170927112810) do
     t.datetime "updated_at",                                      null: false
   end
 
-  add_index "users", ["pricing_group_id"], name: "index_users_on_pricing_group_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["store_id", "email"], name: "index_users_on_store_id_and_email", unique: true, using: :btree
   add_index "users", ["store_id"], name: "index_users_on_store_id", using: :btree

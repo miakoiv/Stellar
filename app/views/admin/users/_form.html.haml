@@ -2,7 +2,6 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'user-personal', col(User, :personal), class: 'active'
-    = nav_tab 'user-privileges', col(User, :privileges)
     = nav_tab 'user-addresses', col(User, :addresses)
 
   .panel.panel-default.tabbed-panel
@@ -10,6 +9,7 @@
       .tab-content
         = tab_pane 'user-personal', class: 'in active' do
           %fieldset{disabled: locked}
+            = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize-label'}
             = f.text_field :name, required: true
             = f.text_field :email, required: true
             = f.telephone_field :phone, required: true
@@ -20,11 +20,6 @@
                 .col-sm-8.col-sm-offset-4
                   = render partial: 'shared/password_strength'
               = f.password_field :password_confirmation, required: true
-        = tab_pane 'user-privileges' do
-          %fieldset{disabled: locked}
-            = f.select :group, current_user.grantable_group_options, {}, {class: 'selectize'}
-            = f.select :pricing_group_id, current_store.pricing_groups.map { |g| [g.to_s, g.id] }, {include_blank: blank}, {class: 'selectize'}
-            = f.select :category_ids, current_store.categories.order(:lft).map { |c| [c.to_option, c.id] }, {}, {multiple: true, class: 'selectize', placeholder: t('.no_categories')}
         = tab_pane 'user-addresses' do
           %fieldset{disabled: locked}
             = f.text_field :shipping_address
@@ -45,3 +40,25 @@
         %fieldset.actions
           = f.form_group do
             = f.primary
+
+:coffee
+  $('.selectize-label').selectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render:
+      item: (item, escape) ->
+        """
+        <div class="item">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """
+      option: (item, escape) ->
+        """
+        <div class="option">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """

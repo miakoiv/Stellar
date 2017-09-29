@@ -152,6 +152,10 @@ Rails.application.routes.draw do
           patch :toggle
         end
       end
+      member do
+        patch :set_pricing_group
+        patch :toggle_category
+      end
     end
     resources :customer_assets do
       resources :asset_entries, shallow: true, only: :create

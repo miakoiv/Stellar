@@ -382,7 +382,6 @@ es:
         included_in_retail: Precio de venta incluyendo tasas
       user:
         personal: Información personal
-        privileges: Privilegios
         addresses: Direcciones
         name: Nombres
         group: Grupos

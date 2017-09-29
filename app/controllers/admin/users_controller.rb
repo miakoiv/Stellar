@@ -3,7 +3,9 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_pricing_group, :toggle_category]
+
+  authority_actions set_pricing_group: 'update', toggle_category: 'update'
 
   layout 'admin'
 
@@ -70,10 +72,39 @@ class Admin::UsersController < ApplicationController
   def destroy
     authorize_action_for @user, at: current_store
     @user.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_users_path,
         notice: t('.notice', user: @user) }
     end
+  end
+
+  # PATCH /admin/users/1/set_pricing_group
+  def set_pricing_group
+    authorize_action_for @user, at: current_store
+    group = current_store.pricing_groups.find(params[:group_id])
+
+    # Selecting the current pricing group clears the selection.
+    clear = @user.pricing_group(current_store) == group
+    @user.pricing_groups.at(current_store).each do |group|
+      @user.pricing_groups.delete(group)
+    end
+    @user.pricing_groups << group unless clear
+
+    respond_to :js
+  end
+
+  # PATCH /admin/users/1/toggle_category
+  def toggle_category
+    authorize_action_for @user, at: current_store
+    @category = current_store.categories.find(params[:category_id])
+    if @user.categories.include?(@category)
+      @user.categories.delete(@category)
+    else
+      @user.categories << @category
+    end
+
+    respond_to :js
   end
 
   private
@@ -91,7 +122,7 @@ class Admin::UsersController < ApplicationController
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
         :locale, :password, :password_confirmation,
-        :group, :pricing_group_id, category_ids: []
+        :group
       )
     end
 end

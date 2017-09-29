@@ -448,7 +448,6 @@ en:
         included_in_retail: Retail prices include tax
       user:
         personal: Personal information
-        privileges: Privileges
         addresses: Addresses
         name: Name
         group: Group

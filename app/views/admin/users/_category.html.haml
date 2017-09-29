@@ -1,0 +1,10 @@
+%li.dd-item[category]{class: @user.categories.include?(category) && 'active'}
+  .dd-content
+    - if locked
+      = category
+    - else
+      = link_to toggle_category_admin_user_path(@user, params: {category_id: category.id}), remote: true, method: :patch do
+        = category
+  - if category.children_count > 0
+    %ol.dd-list
+      = render partial: 'category', collection: category.children, locals: {locked: locked}

@@ -448,7 +448,6 @@ fi:
         included_in_retail: Myyntihinnat sisältävät veron
       user:
         personal: Omat tiedot
-        privileges: Käyttöoikeudet
         addresses: Osoitteet
         name: Nimi
         group: Ryhmä

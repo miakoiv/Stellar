@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
   belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
 
-  # User may optionally have a fixed pricing group set.
-  belongs_to :pricing_group
+  # User may optionally have pricing groups in various stores.
+  has_and_belongs_to_many :pricing_groups
 
   # User may have a set of categories she's restricted to for shopping.
   has_and_belongs_to_many :categories
@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
   end
 
   def grantable_group_options
-    managed_groups.map { |group| [User.human_attribute_value(:group, group), group] }
+    managed_groups.map { |group| [User.human_attribute_value(:group, group), group, data: {appearance: GROUP_LABELS[group]}.to_json] }
   end
 
   # Roles that a user manager may grant to other users. The superuser
@@ -161,6 +161,11 @@ class User < ActiveRecord::Base
   def category_options
     available_categories = vendor? ? categories : store.categories
     available_categories.order(:lft).map { |c| [c.to_option, c.id] }
+  end
+
+  # Finds the assigned pricing group at store, if any.
+  def pricing_group(store)
+    pricing_groups.find_by(store: store)
   end
 
   # Reseller users are able to select a pricing group to use for retail.
