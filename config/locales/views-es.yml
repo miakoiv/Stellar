@@ -44,8 +44,6 @@ es:
       title: Contenido
     configuration:
       title: Configuración
-    global:
-      title: Global
     reports:
       title: Informes
       inventory:

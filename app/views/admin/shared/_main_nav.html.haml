@@ -22,12 +22,6 @@
         %span.caret
       %ul.dropdown-menu
         = render partial: 'admin/shared/configuration_menu'
-    %li.dropdown
-      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-        = menu_title 'globe', t('admin.global.title')
-        %span.caret
-      %ul.dropdown-menu
-        = render partial: 'admin/shared/global_menu'
   %ul.nav.navbar-nav.navbar-right.responsive
     - if user_signed_in? && !current_user.guest?
       %li.dropdown

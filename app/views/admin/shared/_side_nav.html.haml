@@ -10,10 +10,6 @@
 %ul.nav.navmenu-nav
   = render partial: 'admin/shared/configuration_menu'
 
-.navmenu-title= menu_title 'globe', t('admin.global.title')
-%ul.nav.navmenu-nav
-  = render partial: 'admin/shared/global_menu'
-
 - if user_signed_in? && !current_user.guest?
   .navmenu-title
     %span.label{class: "label-#{current_user.appearance}"}= icon('user')

@@ -35,8 +35,6 @@ fi:
       title: Sisältö
     configuration:
       title: Asetukset
-    global:
-      title: Ympäristö
     reports:
       title: Raportit
       inventory:

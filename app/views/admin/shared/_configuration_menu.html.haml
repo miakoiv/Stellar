@@ -1,3 +1,5 @@
+- if current_user_has_role?(:superuser)
+  = menu_item 'paw', title(Store, count: 2), admin_stores_path
 - if current_user_has_role?(:store_admin)
   = menu_item 'cube', title(Store), edit_admin_store_path(current_store)
 - if current_user_has_role?(:user_manager)

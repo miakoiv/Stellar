@@ -55,8 +55,6 @@ en:
       title: Content
     configuration:
       title: Configuration
-    global:
-      title: Global
     reports:
       title: Reports
       inventory:
