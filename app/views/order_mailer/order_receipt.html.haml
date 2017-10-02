@@ -4,7 +4,7 @@
       %table{width: '100%', cellpadding: 0, cellspacing: 0}
         %tr
           %td.content-block
-            %div= image_tag @store.cover_image.url(:matchbox)
+            %div= image_variant_tag @store.cover_image, :matchbox
             %h1
               = t('.title')
               %span.small
