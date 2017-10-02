@@ -1,5 +1,5 @@
 :ruby
-  order_types = current_user.outgoing_order_types
+  order_types = current_user.outgoing_order_types(current_store)
 
 - if order_types.count > 1
   .row

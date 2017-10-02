@@ -112,24 +112,24 @@ class User < ActiveRecord::Base
   end
 
   # Order types seen in the user's set of completed orders.
-  def existing_order_types
-    orders.complete.map(&:order_type).uniq
+  def existing_order_types(store)
+    orders.at(store).complete.map(&:order_type).uniq
   end
 
   # Available outgoing order types. These are what the user has available
   # when going through checkout.
-  def outgoing_order_types
+  def outgoing_order_types(store)
     store.order_types.outgoing_for(self)
   end
 
   # Available incoming order types.
-  def incoming_order_types
+  def incoming_order_types(store)
     store.order_types.incoming_for(self)
   end
 
   # Both of the above
-  def available_order_types
-    incoming_order_types + outgoing_order_types
+  def available_order_types(store)
+    store.order_types.available_for(self)
   end
 
   def self_and_peers

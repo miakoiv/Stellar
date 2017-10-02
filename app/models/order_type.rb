@@ -28,6 +28,11 @@ class OrderType < ActiveRecord::Base
   # Scopes for outgoing and incoming order types based on given user's group.
   scope :outgoing_for, -> (user) { where(source_group: User.groups[user.group]) }
   scope :incoming_for, -> (user) { where(destination_group: User.groups[user.group]) }
+  scope :available_for, -> (user) { where(
+      arel_table[:source_group].eq(User.groups[user.group])
+      .or(arel_table[:destination_group].eq(User.groups[user.group]))
+    )
+  }
 
   #---
   def self.group_options
