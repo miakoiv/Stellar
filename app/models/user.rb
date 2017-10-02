@@ -78,11 +78,10 @@ class User < ActiveRecord::Base
 
   #---
   # A user's shopping cart is technically an order singleton,
-  # the one and only incomplete order.
-  def shopping_cart
-    orders.incomplete.first ||
-      orders.create(
-        store: store,
+  # the one and only incomplete order at given store.
+  def shopping_cart(store)
+    orders.at(store).incomplete.first ||
+      orders.at(store).create(
         customer_name: guest? ? nil : name,
         customer_email: guest? ? nil : email,
         customer_phone: guest? ? nil : phone
