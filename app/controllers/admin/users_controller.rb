@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users.json
   def index
     authorize_action_for User, at: current_store
-    @users = current_user.managed_users
+    @users = current_user.managed_users(current_store)
   end
 
   # GET /admin/users/1
@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/new
   def new
     authorize_action_for User, at: current_store
-    @user = current_store.users.build
+    @user = User.new(store: current_store)
   end
 
   # GET /admin/users/1/edit
@@ -37,10 +37,13 @@ class Admin::UsersController < ApplicationController
   # POST /admin/users.json
   def create
     authorize_action_for User, at: current_store
-    @user = current_store.users.build(user_params)
+    @user = User.new(user_params.merge(store: current_store))
 
     respond_to do |format|
       if @user.save
+        @user.add_role('see_pricing', current_store)
+        @user.add_role('see_stock', current_store)
+
         format.html { redirect_to edit_admin_user_path(@user),
           notice: t('.notice', user: @user) }
         format.json { render :show, status: :created, location: admin_user_path(@user) }

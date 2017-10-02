@@ -68,7 +68,6 @@ class Store < ActiveRecord::Base
     store.has_many :pages
     store.has_many :albums
     store.has_many :promotions
-    store.has_many :users
     store.has_many :customer_assets
     store.has_many :pricing_groups
     store.has_many :tax_categories
@@ -84,7 +83,9 @@ class Store < ActiveRecord::Base
   has_many :inventory_items, through: :inventories
   has_many :shipping_cost_products, through: :shipping_methods
 
-  accepts_nested_attributes_for :users, limit: 1
+  # Assigned roles determine which users belong to a store.
+  has_many :users, -> { distinct }, through: :roles
+
   accepts_nested_attributes_for :tax_categories, limit: 1
 
   scope :portal, -> { where(portal: true) }

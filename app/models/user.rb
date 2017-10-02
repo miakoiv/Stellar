@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   }.freeze
 
   #---
-  # Users are restricted to interacting with only one store.
+  # FIXME: Remove this association only after migrating to a state
+  # where users don't require a store association anymore.
   belongs_to :store
 
   # Preset shipping and billing addresses have country associations.
@@ -132,7 +133,7 @@ class User < ActiveRecord::Base
     store.order_types.available_for(self)
   end
 
-  def self_and_peers
+  def self_and_peers(store)
     store.users.where(group: User.groups[group])
   end
 
@@ -152,7 +153,7 @@ class User < ActiveRecord::Base
   end
 
   # Other users the user may manage.
-  def managed_users
+  def managed_users(store)
     store.users.where(group: managed_groups.map { |group| User.groups[group] })
   end
 
