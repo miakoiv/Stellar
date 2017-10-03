@@ -26,7 +26,6 @@ class Admin::StoresController < ApplicationController
   def new
     authorize_action_for Store, at: current_store
     @store = Store.new
-    @store.users.build(group: User.groups[:manufacturer])
     @store.tax_categories.build
   end
 
