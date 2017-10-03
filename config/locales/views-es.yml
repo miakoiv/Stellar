@@ -74,6 +74,8 @@ es:
         new_category: Nueva categoria
       new:
         new_category: Nueva categoria
+      edit:
+        new_category: Nueva categoria
     customer_assets:
       index:
         new_customer_asset: Nuevo bien

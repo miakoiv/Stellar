@@ -80,6 +80,8 @@ fi:
         new_category: Uusi tuoteryhmä
       new:
         new_category: Uusi tuoteryhmä
+      edit:
+        new_category: Uusi tuoteryhmä
       form:
         edit_page: Muokkaa sivua
     customer_assets:
