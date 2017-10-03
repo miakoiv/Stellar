@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
   end
 
   # Categories available to this user when creating and editing products.
-  def category_options
+  def category_options(store)
     available_categories = vendor? ? categories : store.categories
     available_categories.order(:lft).map { |c| [c.to_option, c.id] }
   end

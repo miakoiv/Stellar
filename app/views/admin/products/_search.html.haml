@@ -12,7 +12,7 @@
             = f.select :purposes, Product.purpose_options, {}, {multiple: true, placeholder: col(Product, :purpose), class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
-            = f.select :categories, current_user.category_options, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
+            = f.select :categories, current_user.category_options(current_store), {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
         .col-sm-3.col-md-2
           .form-group
             = f.select :live, Product.availability_options, {include_blank: t('.availability')}, {placeholder: t('.availability'), class: 'form-control selectize'}
