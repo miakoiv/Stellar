@@ -8,8 +8,8 @@ class AssignRoleResources < ActiveRecord::Migration
         store, roles = user.store, user.roles.pluck(:name)
         roles.each do |role|
           next if role == 'superuser'
-          user.remove_role role
-          user.add_role role, store
+          user.revoke role
+          user.grant role, store
         end
       end
     end
@@ -21,8 +21,8 @@ class AssignRoleResources < ActiveRecord::Migration
         store, roles = user.store, user.roles.pluck(:name)
         roles.each do |role|
           next if role == 'superuser'
-          user.remove_role role, store
-          user.add_role role
+          user.revoke role, store
+          user.grant role
         end
       end
     end

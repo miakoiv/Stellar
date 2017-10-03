@@ -13,9 +13,9 @@ class Admin::RolesController < ApplicationController
   def toggle
     authorize_action_for Role, at: current_store
     if @user.has_cached_role?(@role, current_store)
-      @user.remove_role(@role, current_store)
+      @user.revoke(@role, current_store)
     else
-      @user.add_role(@role, current_store)
+      @user.grant(@role, current_store)
     end
 
     respond_to :js

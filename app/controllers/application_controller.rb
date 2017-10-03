@@ -156,8 +156,8 @@ class ApplicationController < ActionController::Base
       guest = @current_store.users.new(defaults)
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
-      guest.add_role('see_pricing', @current_store)
-      guest.add_role('see_stock', @current_store)
+      guest.grant(:see_pricing, @current_store)
+      guest.grant(:see_stock, @current_store)
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
     end

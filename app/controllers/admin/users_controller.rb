@@ -41,8 +41,8 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        @user.add_role('see_pricing', current_store)
-        @user.add_role('see_stock', current_store)
+        @user.grant(:see_pricing, current_store)
+        @user.grant(:see_stock, current_store)
 
         format.html { redirect_to edit_admin_user_path(@user),
           notice: t('.notice', user: @user) }
