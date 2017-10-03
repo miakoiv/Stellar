@@ -408,7 +408,6 @@ en:
         detail_page_id: Information page
       store:
         admin: Settings
-        new_user: Create admin
         new_tax_category: Set taxation
         files: Files
         product_csv: Product CSV import

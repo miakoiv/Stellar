@@ -345,7 +345,6 @@ es:
         detail_page_id: Información
       store:
         admin: Ajustes
-        new_user: Crear administrador
         new_tax_category: Establecer impuestos
         files: Archivos
         product_csv: Importar producto CSV

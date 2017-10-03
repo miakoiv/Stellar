@@ -6,7 +6,6 @@
     - if current_user_has_role?(:superuser)
       = nav_tab 'store-superuser', col(Store, :superuser)
     - if @store.new_record?
-      = nav_tab 'store-new-user', col(Store, :new_user)
       = nav_tab 'store-new-tax-category', col(Store, :new_tax_category)
 
   .panel.panel-default.tabbed-panel
@@ -53,15 +52,6 @@
               = f.form_group do
                 = f.check_box :detach_menu
         - if @store.new_record?
-          = tab_pane 'store-new-user' do
-            = f.fields_for :users do |ff|
-              %fieldset{disabled: locked}
-                = ff.hidden_field :group
-                = ff.text_field :name, required: true
-                = ff.text_field :email, required: true
-                = ff.telephone_field :phone, required: true
-                = ff.password_field :password, required: true
-                = ff.password_field :password_confirmation, required: true
           = tab_pane 'store-new-tax-category' do
             = f.fields_for :tax_categories do |ff|
               %fieldset{disabled: locked}

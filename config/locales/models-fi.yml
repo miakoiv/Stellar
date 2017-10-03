@@ -408,7 +408,6 @@ fi:
         detail_page_id: Lisätietosivu
       store:
         admin: Asetukset
-        new_user: Luo ylläpitäjä
         new_tax_category: Aseta verotus
         files: Tiedostot
         product_csv: Tuotteiden CSV-tuonti
