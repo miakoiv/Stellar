@@ -153,7 +153,7 @@ class ApplicationController < ActionController::Base
     # and schedule a cleanup in two weeks.
     def create_guest_user
       defaults = @current_store.guest_user_defaults(@current_hostname)
-      guest = @current_store.users.new(defaults)
+      guest = User.new(defaults.merge(store: @current_store))
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
       guest.grant(:see_pricing, @current_store)
