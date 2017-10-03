@@ -6,4 +6,8 @@ class Country < ActiveRecord::Base
 
   default_scope { order(:name) }
 
+  #---
+  def self.default
+    find_by(code: I18n.default_locale.upcase)
+  end
 end

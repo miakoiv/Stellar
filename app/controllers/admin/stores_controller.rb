@@ -25,7 +25,7 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores/new
   def new
     authorize_action_for Store, at: current_store
-    @store = Store.new
+    @store = Store.new(country: Country.default)
     @store.tax_categories.build
   end
 
