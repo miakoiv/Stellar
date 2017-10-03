@@ -122,7 +122,8 @@ class Order < ActiveRecord::Base
 
   # Notify users with order_notify role in the destination group.
   def notified_users
-    store.users.where(group: order_type.destination_group).with_role(:order_notify)
+    User.where(group: order_type.destination_group)
+      .with_role(:order_notify, store)
   end
 
   def has_contact_info?
