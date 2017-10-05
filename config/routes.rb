@@ -74,17 +74,13 @@ Rails.application.routes.draw do
     get '/reports/sales', to: 'reports#sales', as: :sales_report
     get '/reports/purchases', to: 'reports#purchases', as: :purchases_report
 
-    resources :portals do
+    resources :stores do
       resources :hostnames, shallow: true
       resources :images, shallow: true
     end
     resources :departments do
       resources :images, shallow: true
       post :reorder, on: :collection
-    end
-    resources :stores do
-      resources :hostnames, shallow: true
-      resources :images, shallow: true
     end
     resources :categories do
       resources :images, shallow: true
