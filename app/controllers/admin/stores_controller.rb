@@ -84,10 +84,6 @@ class Admin::StoresController < ApplicationController
         :manufacturer_template_id, :reseller_template_id, :quotation_template_id,
         :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :order_sequence, :theme, :detach_menu,
-        users_attributes: [
-          :name, :email, :phone, :locale, :pricing_factor,
-          :password, :password_confirmation, :group
-        ],
         tax_categories_attributes: [
           :name, :rate, :included_in_retail
         ]
