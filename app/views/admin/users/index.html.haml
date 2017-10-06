@@ -2,7 +2,7 @@
   - if current_user.can_create?(User, at: current_store)
     = link_to new_admin_user_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_user'))
-  %h1= icon('users', title(User, count: 2))
+  %h1= icon('user', title(User, count: 2))
 %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
   - current_user.managed_groups.reverse.each_with_index do |group, index|
     = nav_tab group, User.human_attribute_value(:group, group), class: index == 1 ? 'active' : nil
