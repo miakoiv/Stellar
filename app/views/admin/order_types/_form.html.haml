@@ -36,23 +36,7 @@
   $('.selectize-label').selectize
     labelField: 'title'
     dataAttr: 'data'
-    render:
-      item: (item, escape) ->
-        """
-        <div class="item">
-          <span class="label label-\#{item.appearance}">
-            \#{escape(item.title)}
-          </span>
-        </div>
-        """
-      option: (item, escape) ->
-        """
-        <div class="option">
-          <span class="label label-\#{item.appearance}">
-            \#{escape(item.title)}
-          </span>
-        </div>
-        """
+    render: $.fn.selectize.label_renderer
 
   $('#order_type_has_payment').on 'change', (e) ->
     if $(e.target).is ':checked'
