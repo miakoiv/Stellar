@@ -41,7 +41,7 @@
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']
     diacritics: false
-    render: $.fn.selectize.renderers
+    render: $.fn.selectize.product_renderer
     load: (query, callback) ->
       return callback() unless query
       $.ajax

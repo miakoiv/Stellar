@@ -1,6 +1,6 @@
 @BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
-$.fn.selectize.renderers =
+$.fn.selectize.product_renderer =
   item: (item, escape) ->
     """
     <div>
