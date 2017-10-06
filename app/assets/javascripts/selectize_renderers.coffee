@@ -1,9 +1,9 @@
 @BLANK_IMAGE = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
 
-$.fn.selectize.renderers =
+$.fn.selectize.product_renderer =
   item: (item, escape) ->
     """
-    <div>
+    <div class="item">
       <img src="#{item.icon_image_url || BLANK_IMAGE}" alt="">
       <strong>#{escape(item.title)}</strong>
       #{if item.subtitle then escape(item.subtitle) else ''}
@@ -11,7 +11,7 @@ $.fn.selectize.renderers =
     """
   option: (item, escape) ->
     """
-    <div class="list-group-item">
+    <div class="option list-group-item">
       <div class="pull-right">
         <span class="small">
           #{if item.customer_code then escape(item.customer_code) else ''}
@@ -23,5 +23,23 @@ $.fn.selectize.renderers =
       <img src="#{item.icon_image_url || BLANK_IMAGE}" alt="">
       <strong>#{escape(item.title)}</strong>
       #{if item.subtitle then escape(item.subtitle) else ''}
+    </div>
+    """
+
+$.fn.selectize.label_renderer =
+  item: (item, escape) ->
+    """
+    <div class="item">
+      <span class="label label-#{item.appearance}">
+        #{escape(item.title)}
+      </span>
+    </div>
+    """
+  option: (item, escape) ->
+    """
+    <div class="option">
+      <span class="label label-#{item.appearance}">
+        #{escape(item.title)}
+      </span>
     </div>
     """
