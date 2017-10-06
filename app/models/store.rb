@@ -71,6 +71,7 @@ class Store < ActiveRecord::Base
     store.has_many :customer_assets
     store.has_many :pricing_groups
     store.has_many :tax_categories
+    store.has_many :groups
   end
 
   # The header and footer pages for presentation.

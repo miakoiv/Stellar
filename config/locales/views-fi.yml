@@ -97,6 +97,11 @@ fi:
         new_department: Uusi osasto
       show:
         edit_page: Muokkaa sivua
+    groups:
+      index:
+        new_group: Uusi ryhmä
+      new:
+        new_group: Uusi ryhmä
     inventories:
       index:
         new_inventory: Uusi varasto

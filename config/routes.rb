@@ -142,6 +142,9 @@ Rails.application.routes.draw do
     resources :properties do
       post :reorder, on: :collection
     end
+    resources :groups do
+      post :reorder, on: :collection
+    end
     resources :users do
       resources :roles, only: [] do
         member do

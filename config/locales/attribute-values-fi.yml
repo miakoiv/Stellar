@@ -1,6 +1,17 @@
 fi:
   activerecord:
     values:
+      group:
+        appearance:
+          default: harmaa
+          success: vihreä
+          info: sininen
+          warning: oranssi
+          danger: punainen
+        price_base:
+          retail: myyntihinta
+          trade: valmistajan hinta
+          cost: omakustannushinta
       image:
         purpose:
           presentational: esittävä

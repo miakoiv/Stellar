@@ -24,6 +24,13 @@ fi:
         notice: "Osasto %{department} päivitetty."
       destroy:
         notice: "Osasto %{department} poistettu."
+    groups:
+      create:
+        notice: "Ryhmä %{group} luotu."
+      update:
+        notice: "Ryhmä %{group} päivitetty."
+      destroy:
+        notice: "Ryhmä %{group} poistettu."
     images:
       create:
         error: "Kuvan lisääminen epäonnistui."

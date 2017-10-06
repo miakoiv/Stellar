@@ -1,0 +1,38 @@
+= bootstrap_form_for [:admin, @group], layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.text_field :name, required: true
+        = f.select :appearance, Group.appearance_options, {}, {class: 'selectize-label', required: true}
+      %fieldset.gap{disabled: locked}
+        = f.select :price_base, Group.price_base_options, {}, {class: 'selectize', required: true}
+        = f.text_field :price_markup_percent, append: '%', class: 'text-right', required: true
+        = f.form_group do
+          = f.check_box :price_tax_included
+      - unless locked
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
+
+:coffee
+  $('.selectize-label').selectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render:
+      item: (item, escape) ->
+        """
+        <div class="item">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """
+      option: (item, escape) ->
+        """
+        <div class="option">
+          <span class="label label-\#{item.appearance}">
+            \#{escape(item.title)}
+          </span>
+        </div>
+        """

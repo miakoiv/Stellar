@@ -30,6 +30,9 @@ en:
       department:
         one: department
         other: departments
+      group:
+        one: group
+        other: groups
       hostname:
         one: address
         other: addresses
@@ -152,6 +155,12 @@ en:
         has_page: Department has a page
         name: Name
         category_ids: Categories
+      group:
+        name: Name
+        price_base: Pricing base
+        price_markup_percent: Pricing markup
+        price_tax_included: Prices include tax
+        appearance: Appearance
       hostname:
         fqdn: Hostname
         parent_hostname_id: Top level domain

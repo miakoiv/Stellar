@@ -117,6 +117,11 @@ en:
         new_department: New department
       show:
         edit_page: Edit page
+    groups:
+      index:
+        new_group: New group
+      new:
+        new_group: New group
     inventories:
       index:
         new_inventory: New inventory

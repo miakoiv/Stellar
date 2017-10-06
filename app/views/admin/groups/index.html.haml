@@ -1,0 +1,47 @@
+.page-header
+  - if current_user.can_create?(Group, at: current_store)
+    = link_to new_admin_group_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_group'))
+  %h1= icon('users', title(Group, count: 2))
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min.hidden-print
+        %th.col-xs-4= col(Group, :name)
+        %th.col-xs-2= col(Group, :price_base)
+        %th.col-xs-2= col(Group, :price_markup_percent)
+        %th.actions
+
+    %tbody{class: current_user.can_update?(Group, at: current_store) && 'sortable'}
+      = content_tag_for :tr, @groups do |group|
+        %td.hidden-print= drag_handle
+        %td
+          %span.label{class: "label-#{group.appearance}"}= icon('user')
+          = group.name
+        %td= group.human_attribute_value(:price_base)
+        %td= number_with_precision(group.price_markup_percent, precision: 2)
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_group_path(group), class: 'btn btn-default btn-sm'
+          - if current_user.can_update?(group, at: current_store)
+            = link_to icon('edit', t('actions.edit')), edit_admin_group_path(group), class: 'btn btn-default btn-sm'
+          - if current_user.can_delete?(group, at: current_store)
+            = link_to icon('remove', t('actions.delete')), admin_group_path(group),
+                method: :delete, class: 'btn btn-sm btn-danger',
+                data: {confirm: t('actions.confirm.body',
+                  klass: Group.model_name.human, name: group.name),
+                  'confirm-title': t('actions.confirm.title'),
+                  'confirm-proceed': t('actions.confirm.proceed'),
+                  'confirm-cancel': t('actions.confirm.cancel')}
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_groups_path}',
+      {reorder: $(this).sortable('toArray')}

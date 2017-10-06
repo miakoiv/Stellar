@@ -24,6 +24,13 @@ en:
         notice: "Department %{department} updated."
       destroy:
         notice: "Department %{department} deleted."
+    groups:
+      create:
+        notice: "Group %{group} created."
+      update:
+        notice: "Group %{group} updated."
+      destroy:
+        notice: "Group %{group} deleted."
     images:
       create:
         error: "Image upload failed."

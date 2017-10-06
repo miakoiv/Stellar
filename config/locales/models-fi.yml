@@ -30,6 +30,9 @@ fi:
       department:
         one: osasto
         other: osastot
+      group:
+        one: ryhmä
+        other: ryhmät
       hostname:
         one: osoite
         other: osoitteet
@@ -152,6 +155,12 @@ fi:
         has_page: Osastolla on sivu
         name: Nimi
         category_ids: Tuoteryhmät
+      group:
+        name: Nimi
+        price_base: Hinnoitteluperuste
+        price_markup_percent: Hinnan korotus
+        price_tax_included: Hinnat verollisina
+        appearance: Väritys
       hostname:
         fqdn: Verkkotunnus
         parent_hostname_id: Toimialue

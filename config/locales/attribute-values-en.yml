@@ -1,6 +1,17 @@
 en:
   activerecord:
     values:
+      group:
+        appearance:
+          default: gray
+          success: green
+          info: blue
+          warning: orange
+          danger: red
+        price_base:
+          retail: retail price
+          trade: trade price
+          cost: cost price
       image:
         purpose:
           presentational: Presentational
