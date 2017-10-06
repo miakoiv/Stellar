@@ -129,7 +129,7 @@ fi:
           'align-middle': keskelle
           'align-bottom': alas
       user:
-        group:
+        level:
           guest: Vieras
           customer: Asiakas
           reseller: Jälleenmyyjä

@@ -9,7 +9,7 @@
       .tab-content
         = tab_pane 'user-personal', class: 'in active' do
           %fieldset{disabled: locked}
-            = f.select :group, current_user.grantable_group_options
+            = f.select :level, current_user.grantable_level_options
             = f.text_field :name, required: true
             = f.text_field :email, required: true
             = f.telephone_field :phone, required: true
@@ -42,7 +42,7 @@
             = f.primary
 
 :coffee
-  $('#user_group').selectize
+  $('#user_level').selectize
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer

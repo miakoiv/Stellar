@@ -18,8 +18,8 @@ class OrderSearch < Searchlight::Search
     query.where(user_id: user_id)
   end
 
-  def search_group
-    query.where(users: {group: group})
+  def search_level
+    query.where(users: {level: level})
   end
 
   def search_order_type_id

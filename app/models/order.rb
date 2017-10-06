@@ -122,7 +122,7 @@ class Order < ActiveRecord::Base
 
   # Notify users with order_notify role in the destination group.
   def notified_users
-    User.where(group: order_type.destination_group)
+    User.where(level: order_type.destination_group)
       .with_role(:order_notify, store)
   end
 
@@ -144,7 +144,7 @@ class Order < ActiveRecord::Base
 
   # Inserts amount of product to this order in the context of given pricing
   # group and parent item. Bundles are inserted as components right away.
-  # Pricing is initially for retail. Depending on the user's group,
+  # Pricing is initially for retail. Depending on the user's level,
   # different pricing may be applied at checkout by Order#reappraise!
   def insert(product, amount, pricing = nil, parent_item = nil)
     if product.bundle?
@@ -531,8 +531,8 @@ class Order < ActiveRecord::Base
 
   # Letterhead for this order based on its destination.
   def letterhead
-    group = User.groups.key(order_type.destination_group)
-    page_id = store.send("#{group}_template_id")
+    level = User.levels.key(order_type.destination_group)
+    page_id = store.send("#{level}_template_id")
     return '' unless page_id.present?
     store.pages.find(page_id).content
   end

@@ -383,7 +383,7 @@ es:
         personal: Información personal
         addresses: Direcciones
         name: Nombres
-        group: Grupos
+        level: Grupos
         roles: Roles
         category_ids: Categorias permitidas
         pricing_group_id: Grupo de precios

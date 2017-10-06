@@ -4,11 +4,11 @@
       = icon('plus', t('.new_user'))
   %h1= icon('user', title(User, count: 2))
 %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-  - current_user.managed_groups.reverse.each_with_index do |group, index|
-    = nav_tab group, User.human_attribute_value(:group, group), class: index == 1 ? 'active' : nil
+  - current_user.managed_levels.reverse.each_with_index do |level, index|
+    = nav_tab level, User.human_attribute_value(:level, level), class: index == 1 ? 'active' : nil
 
 .panel.panel-default.tabbed-panel
   .tab-content
-    - current_user.managed_groups.reverse.each_with_index do |group, index|
-      = tab_pane group, class: index == 1 ? 'in active' : nil do
-        = render partial: 'table', object: @users.send(group), as: :users
+    - current_user.managed_levels.reverse.each_with_index do |level, index|
+      = tab_pane level, class: index == 1 ? 'in active' : nil do
+        = render partial: 'table', object: @users.send(level), as: :users

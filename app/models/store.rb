@@ -143,13 +143,13 @@ class Store < ActiveRecord::Base
   end
 
   #---
-  # Guest users are assigned a random name and put in the guest group.
+  # Guest users are assigned a random name and put in the guest level.
   def guest_user_defaults(hostname)
     name = "#{Time.now.to_i}#{rand(100)}"
     {
       name: name,
       email: "#{name}@#{hostname.fqdn}",
-      group: User.groups[:guest]
+      level: User.levels[:guest]
     }
   end
 
@@ -217,7 +217,7 @@ class Store < ActiveRecord::Base
 
   # Finds the letterhead template page for given user.
   def letterhead(user)
-    page_id = send("#{user.group}_template_id")
+    page_id = send("#{user.level}_template_id")
     pages.find_by(id: page_id)
   end
 

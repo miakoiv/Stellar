@@ -90,7 +90,7 @@ class Admin::OrderTypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_type_params
       params.require(:order_type).permit(
-        :name, :source_group, :destination_group,
+        :name, :source_level, :destination_level,
         :has_shipping, :has_installation,
         :has_payment, :payment_gateway,
         :is_exported

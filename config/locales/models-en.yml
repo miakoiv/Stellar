@@ -262,8 +262,8 @@ en:
       order_type:
         name: Name
         workflow: Workflow
-        source_group: From
-        destination_group: To
+        source_level: From
+        destination_level: To
         has_shipping: Shipping
         has_installation: Installation
         has_payment: Payment
@@ -458,7 +458,7 @@ en:
         personal: Personal information
         addresses: Addresses
         name: Name
-        group: Group
+        level: Level
         roles: Roles
         category_ids: Allowed categories
         pricing_group_id: Pricing group

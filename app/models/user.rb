@@ -16,9 +16,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     request_keys: [:host]
 
-  enum group: {guest: -1, customer: 0, reseller: 1, manufacturer: 2, vendor: 3}
+  enum level: {guest: -1, customer: 0, reseller: 1, manufacturer: 2, vendor: 3}
 
-  MANAGED_GROUPS = {
+  MANAGED_LEVELS = {
     'guest' => [],
     'customer' => ['customer'],
     'reseller' => ['customer', 'reseller'],
@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     'vendor' => []
   }.freeze
 
-  GROUP_LABELS = {
+  LEVEL_LABELS = {
     'guest' => 'default',
     'customer' => 'success',
     'reseller' => 'info',
@@ -54,9 +54,9 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
-  default_scope { order(group: :desc, name: :asc) }
+  default_scope { order(level: :desc, name: :asc) }
 
-  scope :non_guest, -> { where.not(group: groups[:guest]) }
+  scope :non_guest, -> { where.not(level: levels[:guest]) }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
       )
   end
 
-  # Looks up the relevant price for given product depending on user group.
+  # Looks up the relevant price for given product depending on user level.
   def price_for_cents(product, pricing_group)
     return product.cost_price_cents if manufacturer?
     return product.trade_price_cents if reseller?
@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
 
   # Constructs a label for given product, depending on its active promotions.
   def label_for(product)
-    return human_attribute_value(:group) if manufacturer? || reseller?
+    return human_attribute_value(:level) if manufacturer? || reseller?
     promoted_item = product.best_promoted_item
     if promoted_item.present?
       return promoted_item.description
@@ -134,15 +134,15 @@ class User < ActiveRecord::Base
   end
 
   def self_and_peers(store)
-    store.users.where(group: User.groups[group])
+    store.users.where(level: User.levels[level])
   end
 
-  def managed_groups
-    User::MANAGED_GROUPS[group]
+  def managed_levels
+    User::MANAGED_LEVELS[level]
   end
 
-  def grantable_group_options
-    managed_groups.map { |group| [User.human_attribute_value(:group, group), group, data: {appearance: GROUP_LABELS[group]}.to_json] }
+  def grantable_level_options
+    managed_levels.map { |level| [User.human_attribute_value(:level, level), level, data: {appearance: LEVEL_LABELS[level]}.to_json] }
   end
 
   # Roles that a user manager may grant to other users. The superuser
@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
 
   # Other users the user may manage.
   def managed_users(store)
-    store.users.where(group: managed_groups.map { |group| User.groups[group] })
+    store.users.where(level: managed_levels.map { |level| User.levels[level] })
   end
 
   # Categories available to this user when creating and editing products.
@@ -174,7 +174,7 @@ class User < ActiveRecord::Base
   end
 
   def appearance
-    GROUP_LABELS[group]
+    LEVEL_LABELS[level]
   end
 
   def to_s

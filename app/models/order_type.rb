@@ -5,10 +5,10 @@ class OrderType < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  # This is User.groups transposed for convenience, since order type
-  # source group and destination group attributes use the same values,
+  # This is User.levels transposed for convenience, since order type
+  # source level and destination level attributes use the same values,
   # but it's not possible to declare multiple identical enum sets.
-  GROUPS = {
+  LEVELS = {
     -1 => 'guest',
      0 => 'customer',
      1 => 'reseller',
@@ -25,27 +25,27 @@ class OrderType < ActiveRecord::Base
 
   scope :has_shipping, -> { where(has_shipping: true) }
 
-  # Scopes for outgoing and incoming order types based on given user's group.
-  scope :outgoing_for, -> (user) { where(source_group: User.groups[user.group]) }
-  scope :incoming_for, -> (user) { where(destination_group: User.groups[user.group]) }
+  # Scopes for outgoing and incoming order types based on given user's level.
+  scope :outgoing_for, -> (user) { where(source_level: User.levels[user.level]) }
+  scope :incoming_for, -> (user) { where(destination_level: User.levels[user.level]) }
   scope :available_for, -> (user) { where(
-      arel_table[:source_group].eq(User.groups[user.group])
-      .or(arel_table[:destination_group].eq(User.groups[user.group]))
+      arel_table[:source_level].eq(User.levels[user.level])
+      .or(arel_table[:destination_level].eq(User.levels[user.level]))
     )
   }
 
   #---
-  def self.group_options
-    GROUPS.map { |enum, name| [User.human_attribute_value(:group, name), enum, data: {appearance: User::GROUP_LABELS[name]}.to_json] }
+  def self.level_options
+    LEVELS.map { |enum, name| [User.human_attribute_value(:level, name), enum, data: {appearance: User::LEVEL_LABELS[name]}.to_json] }
   end
 
   #---
   def outgoing_for?(user)
-    source_group == User.groups[user.group]
+    source_level == User.levels[user.level]
   end
 
   def incoming_for?(user)
-    destination_group == User.groups[user.group]
+    destination_level == User.levels[user.level]
   end
 
   def payment_gateway_class
@@ -59,19 +59,19 @@ class OrderType < ActiveRecord::Base
   end
 
   def source_label
-    User.human_attribute_value(:group, GROUPS[source_group])
+    User.human_attribute_value(:level, LEVELS[source_level])
   end
 
   def destination_label
-    User.human_attribute_value(:group, GROUPS[destination_group])
+    User.human_attribute_value(:level, LEVELS[destination_level])
   end
 
   def source_appearance
-    User::GROUP_LABELS[GROUPS[source_group]]
+    User::LEVEL_LABELS[LEVELS[source_level]]
   end
 
   def destination_appearance
-    User::GROUP_LABELS[GROUPS[destination_group]]
+    User::LEVEL_LABELS[LEVELS[destination_level]]
   end
 
   def to_s

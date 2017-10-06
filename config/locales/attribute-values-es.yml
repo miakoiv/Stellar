@@ -60,7 +60,7 @@ es:
           store_admin: Administrador de tienda
           superuser: Super Usuario
       user:
-        group:
+        level:
           guest: Invitado
           customer: Cliente
           reseller: Distribuidor

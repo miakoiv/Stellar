@@ -262,8 +262,8 @@ fi:
       order_type:
         name: Nimi
         workflow: Työnkulku
-        source_group: Mistä
-        destination_group: Minne
+        source_level: Mistä
+        destination_level: Minne
         has_shipping: Toimitettava
         has_installation: Asennettava
         has_payment: Maksettava
@@ -458,7 +458,7 @@ fi:
         personal: Omat tiedot
         addresses: Osoitteet
         name: Nimi
-        group: Ryhmä
+        level: Taso
         roles: Roolit
         category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä
