@@ -15,7 +15,7 @@ class Group < ActiveRecord::Base
 
   #---
   belongs_to :store
-  has_many :users
+  has_and_belongs_to_many :users
 
   default_scope { sorted }
 

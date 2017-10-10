@@ -39,9 +39,8 @@ class User < ActiveRecord::Base
   # where users don't require a store association anymore.
   belongs_to :store
 
-  # Preset shipping and billing addresses have country associations.
-  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
-  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
+  # Users may belong to any number of groups to be part of stores.
+  has_and_belongs_to_many :groups
 
   # User may optionally have pricing groups in various stores.
   has_and_belongs_to_many :pricing_groups
@@ -53,6 +52,10 @@ class User < ActiveRecord::Base
   has_many :customer_assets, dependent: :destroy
 
   has_many :orders, dependent: :destroy
+
+  # Preset shipping and billing addresses have country associations.
+  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
+  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
 
   default_scope { order(level: :desc, name: :asc) }
 
