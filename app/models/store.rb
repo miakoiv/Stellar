@@ -213,7 +213,7 @@ class Store < ActiveRecord::Base
   end
 
   def correspondents
-    users.with_role(:correspondence)
+    users.with_role(:correspondence, self)
   end
 
   # Finds the letterhead template page for given user.
