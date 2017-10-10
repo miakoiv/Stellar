@@ -161,6 +161,7 @@ en:
         price_markup_percent: Pricing markup
         price_tax_included: Prices include tax
         appearance: Appearance
+        default_name: "[Guests]"
       hostname:
         fqdn: Hostname
         parent_hostname_id: Top level domain

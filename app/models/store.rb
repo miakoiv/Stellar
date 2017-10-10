@@ -40,6 +40,7 @@ class Store < ActiveRecord::Base
 
   #---
   after_create :assign_slug
+  after_create :create_guest_group
   after_create :create_header_and_footer
 
   #---
@@ -262,6 +263,10 @@ class Store < ActiveRecord::Base
         len += 1
       end while taken_slugs.include?(slug)
       update(slug: slug)
+    end
+
+    def create_guest_group
+      groups.create name: Group.human_attribute_name(:default_name)
     end
 
     def create_header_and_footer
