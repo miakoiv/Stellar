@@ -85,8 +85,8 @@ class Store < ActiveRecord::Base
   has_many :inventory_items, through: :inventories
   has_many :shipping_cost_products, through: :shipping_methods
 
-  # Assigned roles determine which users belong to a store.
-  has_many :users, -> { distinct }, through: :roles
+  # Assigned groups determine which users belong to a store.
+  has_many :users, through: :groups
 
   accepts_nested_attributes_for :tax_categories, limit: 1
 
