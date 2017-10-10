@@ -120,9 +120,9 @@ class Order < ActiveRecord::Base
     !is_quote?
   end
 
-  # Notify users with order_notify role in the destination group.
+  # Notify users with order_notify role at the destination level.
   def notified_users
-    User.where(level: order_type.destination_group)
+    User.where(level: order_type.destination_level)
       .with_role(:order_notify, store)
   end
 
@@ -531,7 +531,7 @@ class Order < ActiveRecord::Base
 
   # Letterhead for this order based on its destination.
   def letterhead
-    level = User.levels.key(order_type.destination_group)
+    level = User.levels.key(order_type.destination_level)
     page_id = store.send("#{level}_template_id")
     return '' unless page_id.present?
     store.pages.find(page_id).content
