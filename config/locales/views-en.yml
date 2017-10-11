@@ -122,6 +122,8 @@ en:
         new_group: New group
       new:
         new_group: New group
+      edit:
+        new_group: New group
     inventories:
       index:
         new_inventory: New inventory

@@ -1,12 +1,23 @@
-.page-header
-  - if current_user.can_read?(Group, at: current_store)
-    = link_to admin_groups_path, class: 'btn btn-default' do
-      = icon('chevron-circle-left', t('actions.back'))
-  = link_to admin_group_path(@group), class: 'btn btn-primary' do
-    = icon('info-circle', t('actions.show'))
-  %h1
-    = icon('group', @group)
-
 .row
-  .col-md-6
-    = render partial: 'form', locals: {locked: false}
+  .col-md-7
+    .page-header
+      %h1= icon('users', title(Group, count: 2))
+    = render partial: 'admin/groups/table', object: @groups, as: :groups
+  .col-md-5
+    .quick-edit-panel
+      .header
+        - if current_user.can_create?(Group, at: current_store)
+          = link_to new_admin_group_path, remote: true, class: 'btn btn-primary' do
+            = icon('plus', t('.new_group'))
+      #group-form
+        = render partial: 'form'
+
+:coffee
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('.row')
+    offset_top: 80
+
+  $('##{dom_id(@group)}').addClass 'active'
+
+  $(window).scrollTo $('##{dom_id(@group)}'), 300,
+    offset: -$('.navbar').outerHeight true

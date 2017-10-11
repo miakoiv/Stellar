@@ -1,0 +1,12 @@
+= content_tag_for :tr, group do
+  %td.rowlink-skip= drag_handle
+  %td
+    = link_to edit_admin_group_path(group), remote: true do
+      %span.label{class: "label-#{group.appearance}"}= icon('user')
+      = group.name
+  %td.text-right= group.users.count
+  %td
+    = group.human_attribute_value(:price_base)
+    - if group.price_markup_percent.nonzero?
+      %span.badge
+        = number_to_signed_percentage(group.price_markup_percent, precision: 2, strip_insignificant_zeros: true)

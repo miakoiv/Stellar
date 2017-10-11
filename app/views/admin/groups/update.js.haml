@@ -1,0 +1,4 @@
+$("##{dom_id(@group)}").replaceWith("#{j render partial: 'row', object: @group, as: :group}");
+$("##{dom_id(@group)}").addClass('active');
+$('#group-form').html("#{j render partial: 'admin/groups/edit'}");
+$('#group-form').initialize();

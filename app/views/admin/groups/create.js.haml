@@ -1,0 +1,5 @@
+$("#{j render partial: 'admin/groups/row', object: @group, as: :group}").appendTo('#groups-table > tbody');
+$("##{dom_id(@group)}").addClass('active');
+$('#group-form').html("#{j render partial: 'admin/groups/edit'}");
+$('#group-form').initialize();
+$(window).scrollTo($('##{dom_id(@group)}'), 300, {offset: -$('.navbar').outerHeight(true)});

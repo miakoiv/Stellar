@@ -18,23 +18,27 @@ class Admin::GroupsController < ApplicationController
   end
 
   # GET /admin/groups/1
-  # GET /admin/groups/1.json
   def show
-    authorize_action_for @group, at: current_store
+    redirect_to edit_admin_group_path(@group)
   end
 
-  # GET /admin/groups/new
+  # GET /admin/groups/new.js
   def new
     authorize_action_for Group, at: current_store
     @group = current_store.groups.build
   end
 
   # GET /admin/groups/1/edit
+  # GET /admin/groups/1/edit.js
   def edit
     authorize_action_for @group, at: current_store
+    @groups = current_store.groups
+
+    respond_to :html, :js
   end
 
   # POST /admin/departments
+  # POST /admin/departments.js
   # POST /admin/departments.json
   def create
     authorize_action_for Group, at: current_store
@@ -44,26 +48,33 @@ class Admin::GroupsController < ApplicationController
       if @group.save
         format.html { redirect_to edit_admin_group_path(@group),
           notice: t('.notice', group: @group) }
-        format.json { render :show, status: :created, location: admin_group_path(@group) }
+        format.js { flash.now[:notice] = t('.notice', group: @group) }
+        format.json { render :edit, status: :created, location: edit_admin_group_path(@group) }
       else
         format.html { render :new }
+        format.js { render json: @group.errors, status: :unprocessable_entity }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /admin/groups/1
+  # PATCH/PUT /admin/groups/1.js
   # PATCH/PUT /admin/groups/1.json
   def update
     authorize_action_for @group, at: current_store
 
     respond_to do |format|
       if @group.update(group_params)
+        @groups = current_store.groups
+
         format.html { redirect_to admin_group_path(@group),
           notice: t('.notice', group: @group) }
+        format.js { flash.now[:notice] = t('.notice', group: @group) }
         format.json { render :show, status: :ok, location: admin_group_path(@group) }
       else
         format.html { render :edit }
+        format.js { render json: @group.errors, status: :unprocessable_entity }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end

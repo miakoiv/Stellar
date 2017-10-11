@@ -1,21 +1,30 @@
-= bootstrap_form_for [:admin, @group], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  .panel.panel-default
+= bootstrap_form_for [:admin, @group], remote: true, layout: :vertical,
+    html: {class: 'immediate'} do |f|
+  .panel.panel-primary
     .panel-body
-      %fieldset{disabled: locked}
+      %fieldset
         = f.text_field :name, required: true
         = f.select :appearance, Group.appearance_options, {}, {class: 'selectize-label', required: true}
-      %fieldset.gap{disabled: locked}
-        = f.select :price_base, Group.price_base_options, {}, {class: 'selectize', required: true}
-        = f.text_field :price_markup_percent, append: '%', class: 'text-right', required: true
+        %label.control-label= col(Group, :pricing)
+        .row
+          .col-sm-8
+            = f.select :price_base, Group.price_base_options, {hide_label: true}, {class: 'selectize', required: true}
+          .col-sm-4
+            = f.hidden_field :price_markup_percent
+            .form-group
+              %label.control-label.sr-only= col(Group, :price_markup_percent)
+              .input-group
+                = text_field_tag :markup_percent, number_with_precision_and_sign(@group.price_markup_percent, precision: 2, strip_insignificant_zeros: true), class: 'form-control text-right', required: true
+                %span.input-group-addon %
         = f.form_group do
           = f.check_box :price_tax_included
-      - unless locked
-        %fieldset.actions
-          = f.form_group do
-            = f.primary
 
 :coffee
+  numbro.culture "#{t('culture')}"
+  $('#markup_percent').on 'change', (e) ->
+    markup_percent = numbro().unformat $('#markup_percent').val()
+    $('#group_price_markup_percent').val markup_percent
+
   $('.selectize-label').selectize
     labelField: 'title'
     dataAttr: 'data'

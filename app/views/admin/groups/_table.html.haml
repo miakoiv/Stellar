@@ -1,0 +1,22 @@
+.table-responsive
+  %table#groups-table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min.hidden-print
+        %th= col(Group, :name)
+        %th.col-xs-3.text-right= col(Group, :user_count)
+        %th.col-xs-4= col(Group, :pricing)
+
+    %tbody.rowlink{class: current_user.can_update?(Group, at: current_store) && 'sortable', data: {link: 'row'}}
+      = render partial: 'admin/groups/row', collection: groups, as: :group
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_groups_path}',
+      {reorder: $(this).sortable('toArray')}

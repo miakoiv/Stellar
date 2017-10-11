@@ -115,4 +115,20 @@ module ApplicationHelper
   def order_type_label(order_type, user)
     "#{order_type.incoming_for?(user) ? '↘' : '↖'} #{order_type.to_s}"
   end
+
+  def number_with_precision_and_sign(number, options = {})
+    if number < 0
+      "-#{number_with_precision(-number, options)}"
+    else
+      "+#{number_with_precision(number, options)}"
+    end
+  end
+
+  def number_to_signed_percentage(number, options = {})
+    if number < 0
+      "-#{number_to_percentage(-number, options)}"
+    else
+      "+#{number_to_percentage(number, options)}"
+    end
+  end
 end

@@ -158,9 +158,11 @@ en:
       group:
         name: Name
         price_base: Pricing base
-        price_markup_percent: Pricing markup
+        price_markup_percent: Price adjustment
         price_tax_included: Prices include tax
+        pricing: Pricing
         appearance: Appearance
+        user_count: Members
         default_name: "[Guests]"
       hostname:
         fqdn: Hostname

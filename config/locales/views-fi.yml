@@ -102,6 +102,8 @@ fi:
         new_group: Uusi ryhmä
       new:
         new_group: Uusi ryhmä
+      edit:
+        new_group: Uusi ryhmä
     inventories:
       index:
         new_inventory: Uusi varasto

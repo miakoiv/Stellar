@@ -158,9 +158,11 @@ fi:
       group:
         name: Nimi
         price_base: Hinnoitteluperuste
-        price_markup_percent: Hinnan korotus
+        price_markup_percent: Hintamuutos
         price_tax_included: Hinnat verollisina
+        pricing: Hinnoittelu
         appearance: Väritys
+        user_count: Jäseniä
         default_name: "[Vieraat]"
       hostname:
         fqdn: Verkkotunnus
