@@ -207,7 +207,7 @@ class Product < ActiveRecord::Base
   end
 
   def purchasable?
-    live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?) && available?
+    live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?)
   end
 
   # Finds the primary or first live variant for this product.
@@ -354,10 +354,24 @@ class Product < ActiveRecord::Base
     end
   end
 
-  # Product is considered available when it's live and has either inventory
-  # available, or a defined lead time.
+  # Available means there's stock on hand.
   def available?
-    live? && (lead_time.present? || available > 0)
+    available > 0
+  end
+
+  # Out of stock is the opposite of available.
+  def out_of_stock?
+    !available?
+  end
+
+  # But out of stock products may be back orderable.
+  def back_orderable?
+    lead_time.present?
+  end
+
+  # Either available or back orderable means it can be ordered.
+  def orderable?
+    available? || back_orderable?
   end
 
   # Lead times that look like integers are parsed as number of days,

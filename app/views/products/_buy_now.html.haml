@@ -1,7 +1,7 @@
 - if can_shop? && may_shop_at?(@category) && product.purchasable?
 
-  - if product.available == 0
-    - if product.available?
+  - if product.out_of_stock?
+    - if product.back_orderable?
       %p.text-info
         = icon('exclamation-circle')
         = col(Product, :lead_time)
@@ -11,7 +11,7 @@
         = icon('exclamation-circle')
         = col(Product, :out_of_stock)
 
-  - if product.available?
+  - if product.orderable?
     = form_tag order_product_path(product), class: 'order-form', method: :post, remote: true do
       .form-group
         = hidden_field_tag :amount, 1

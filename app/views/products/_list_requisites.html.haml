@@ -6,7 +6,7 @@
         = product.title
         %span.small= product.subtitle
     .buy-now
-      - if can_see_pricing? && can_shop?
+      - if can_see_pricing? && can_shop? && product.purchasable? && product.orderable?
         %p.price= price_tag product.price_tag(current_pricing)
         = form_tag order_product_path(product), method: :post, remote: true, class: 'buy-now-form' do
           .input-group.input-group-sm
