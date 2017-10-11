@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010071756) do
+ActiveRecord::Schema.define(version: 20171011082435) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -469,7 +469,7 @@ ActiveRecord::Schema.define(version: 20171010071756) do
     t.integer  "product_id",  limit: 4,                            null: false
     t.integer  "property_id", limit: 4,                            null: false
     t.string   "value",       limit: 255,                          null: false
-    t.integer  "value_i",     limit: 4
+    t.integer  "value_i",     limit: 8
     t.decimal  "value_f",                 precision: 10, scale: 2
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
