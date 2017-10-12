@@ -44,6 +44,9 @@ class Store < ActiveRecord::Base
   after_create :create_header_and_footer
 
   #---
+  # Default group for users if not otherwise specified, guests especially.
+  belongs_to :default_group, class_name: 'Group'
+
   # Home country, used as default shipping and billing country.
   belongs_to :country, foreign_key: :country_code
 
@@ -144,12 +147,6 @@ class Store < ActiveRecord::Base
   end
 
   #---
-  # The first group with retail pricing is the default for guests.
-  # Failing that, any group will do.
-  def default_group
-    groups.retail.first || groups.first
-  end
-
   # Guest users are assigned a random name and put in the guest level.
   def guest_user_defaults(hostname)
     name = "#{Time.now.to_i}#{rand(100)}"

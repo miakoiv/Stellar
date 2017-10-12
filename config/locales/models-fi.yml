@@ -163,6 +163,7 @@ fi:
         pricing: Hinnoittelu
         appearance: Väritys
         user_count: Jäseniä
+        default: Vieraille
         default_name: Vieras
       hostname:
         fqdn: Verkkotunnus

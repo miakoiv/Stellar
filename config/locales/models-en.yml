@@ -163,6 +163,7 @@ en:
         pricing: Pricing
         appearance: Appearance
         user_count: Members
+        default: For guests
         default_name: Guest
       hostname:
         fqdn: Hostname
