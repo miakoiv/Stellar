@@ -114,12 +114,16 @@ Rails.application.routes.draw do
       resources :requisite_entries, shallow: true do
         post :reorder, on: :collection
       end
-      get :query, on: :collection
-      post :add_requisite_entries, on: :member
-      post :duplicate, on: :member
-      patch :make_primary, on: :member
-      post :reorder, on: :collection
-      post :upload_file, on: :collection
+      collection do
+        get :query
+        post :reorder
+        post :upload_file
+      end
+      member do
+        post :add_requisite_entries
+        post :duplicate
+        patch :make_primary
+      end
     end
     resources :promotions do
       resources :promoted_items, shallow: true
@@ -147,9 +151,7 @@ Rails.application.routes.draw do
     end
     resources :users do
       resources :roles, only: [] do
-        member do
-          patch :toggle
-        end
+        patch :toggle, on: :member
       end
       member do
         patch :set_pricing_group
