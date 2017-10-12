@@ -17,7 +17,8 @@ class GroupAuthorizer < ApplicationAuthorizer
     user.has_cached_role?(:store_admin, opts[:at])
   end
 
-  def self.deletable_by?(user, opts)
+  def deletable_by?(user, opts)
+    return false if resource.users.count > 0
     user.has_cached_role?(:superuser, opts[:at]) ||
     user.has_cached_role?(:store_admin, opts[:at])
   end
