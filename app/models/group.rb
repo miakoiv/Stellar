@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   default_scope { sorted }
+  scope :at, -> (store) { where(store: store) }
 
   #---
   validates :name, presence: true

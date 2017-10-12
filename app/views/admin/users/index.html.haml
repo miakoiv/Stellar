@@ -3,12 +3,7 @@
     = link_to new_admin_user_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_user'))
   %h1= icon('user', title(User, count: 2))
-%ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-  - current_user.managed_levels.reverse.each_with_index do |level, index|
-    = nav_tab level, User.human_attribute_value(:level, level), class: index == 1 ? 'active' : nil
 
-.panel.panel-default.tabbed-panel
-  .tab-content
-    - current_user.managed_levels.reverse.each_with_index do |level, index|
-      = tab_pane level, class: index == 1 ? 'in active' : nil do
-        = render partial: 'table', object: @users.send(level), as: :users
+= render partial: 'search'
+= render partial: 'admin/users/table', object: @users, as: :users
+= paginate @users

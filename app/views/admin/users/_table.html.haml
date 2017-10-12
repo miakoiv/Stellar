@@ -2,6 +2,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th
         %th.col-xs-2= col(User, :name)
         %th.col-xs-3= col(User, :email)
         %th= col(User, :roles)
@@ -9,6 +10,9 @@
 
     %tbody
       = content_tag_for :tr, users do |user|
+        %td
+          %span.label{class: "label-#{user.group(current_store).appearance}"}
+            = user.group(current_store)
         %td= user.name
         %td= user.email
         %td

@@ -1,0 +1,22 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_users_path, method: :get do |f|
+      .row
+        .col-sm-5.col-md-6
+          .form-group
+            = f.search_field :keyword, autocomplete: 'off', placeholder: col(User, :keyword), class: 'form-control'
+        .col-sm-5.col-md-5
+          .form-group
+            = f.select :groups, current_store.group_options, {}, {multiple: true, placeholder: col(User, :groups), class: 'form-control selectize-label'}
+        .col-sm-2.col-md-1
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+:coffee
+  $('.selectize-label').selectize
+    plugins: ['remove_button']
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer

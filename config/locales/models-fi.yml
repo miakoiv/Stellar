@@ -463,6 +463,8 @@ fi:
         addresses: Osoitteet
         name: Nimi
         level: Taso
+        groups: Ryhmät
+        keyword: Nimi tai sähköpostiosoite
         roles: Roolit
         category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä

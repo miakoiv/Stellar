@@ -182,6 +182,10 @@ class Store < ActiveRecord::Base
     properties.merge(Property.searchable).merge(Property.sorted)
   end
 
+  def group_options
+    groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }
+  end
+
   def shipping_method_options
     shipping_methods.map { |s| [s.name, s.id] }
   end

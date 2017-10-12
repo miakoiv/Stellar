@@ -463,6 +463,8 @@ en:
         addresses: Addresses
         name: Name
         level: Level
+        groups: Groups
+        keyword: Name or email
         roles: Roles
         category_ids: Allowed categories
         pricing_group_id: Pricing group

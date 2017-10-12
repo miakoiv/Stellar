@@ -155,15 +155,14 @@ class User < ActiveRecord::Base
     has_cached_role?(:superuser) ? roles : roles - ['superuser']
   end
 
-  # Other users the user may manage.
-  def managed_users(store)
-    store.users.where(level: managed_levels.map { |level| User.levels[level] })
-  end
-
   # Categories available to this user when creating and editing products.
   def category_options(store)
     available_categories = vendor? ? categories : store.categories
     available_categories.order(:lft).map { |c| [c.to_option, c.id] }
+  end
+
+  def group(store)
+    groups.at(store).first
   end
 
   # Finds the assigned pricing group at store, if any.

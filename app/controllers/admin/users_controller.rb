@@ -13,7 +13,9 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users.json
   def index
     authorize_action_for User, at: current_store
-    @users = current_user.managed_users(current_store)
+    @query = saved_search_query('user', 'admin_user_search')
+    @search = UserSearch.new(search_params)
+    @users = @search.results.page(params[:page])
   end
 
   # GET /admin/users/1
@@ -127,5 +129,12 @@ class Admin::UsersController < ApplicationController
         :locale, :password, :password_confirmation,
         :level
       )
+    end
+
+    # Restrict searching to users at current store.
+    def search_params
+      @query.merge(store: current_store).reverse_merge({
+        'groups' => current_user.groups.at(current_store).pluck(:id)
+      })
     end
 end
