@@ -163,7 +163,7 @@ en:
         pricing: Pricing
         appearance: Appearance
         user_count: Members
-        default_name: "[Guests]"
+        default_name: Guest
       hostname:
         fqdn: Hostname
         parent_hostname_id: Top level domain

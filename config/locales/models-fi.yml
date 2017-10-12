@@ -163,7 +163,7 @@ fi:
         pricing: Hinnoittelu
         appearance: Väritys
         user_count: Jäseniä
-        default_name: "[Vieraat]"
+        default_name: Vieras
       hostname:
         fqdn: Verkkotunnus
         parent_hostname_id: Toimialue
