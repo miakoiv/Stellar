@@ -1,12 +1,12 @@
 :ruby
   classes = [].tap do |c|
-    c << 'warning text-warning' unless order_item.product.available?
+    c << 'warning text-warning' unless order_item.product.orderable?
     c << 'subrow' if order_item.is_subitem?
   end
 
 = content_tag_for :tr, order_item, class: classes.join(' ') do
   %td
-    - unless order_item.product.available?
+    - unless order_item.product.orderable?
       = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
     %strong
       - if order_item.real? && order_item.live?

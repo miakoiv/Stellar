@@ -394,10 +394,10 @@ class Order < ActiveRecord::Base
     is_quote? && contact_email.present?
   end
 
-  # An order is checkoutable when all its real items are available.
+  # An order is checkoutable when all its real items are orderable.
   def checkoutable?
     products.real.each do |product|
-      return false unless product.available?
+      return false unless product.orderable?
     end
     true
   end
