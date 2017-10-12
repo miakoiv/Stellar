@@ -463,6 +463,7 @@ fi:
         addresses: Osoitteet
         name: Nimi
         level: Taso
+        group: Ryhmä
         groups: Ryhmät
         keyword: Nimi tai sähköpostiosoite
         roles: Roolit

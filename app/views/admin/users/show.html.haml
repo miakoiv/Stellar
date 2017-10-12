@@ -15,12 +15,15 @@
 
   .col-lg-5
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'roles', col(User, :roles), class: 'active'
+      = nav_tab 'group', col(User, :group), class: 'active'
+      = nav_tab 'roles', col(User, :roles)
       = nav_tab 'pricing_group', col(User, :pricing_group_id)
       = nav_tab 'categories', col(User, :category_ids)
 
     .tab-content
-      = tab_pane 'roles', class: 'in active' do
+      = tab_pane 'group', class: 'in active' do
+        = render partial: 'group', object: @user, as: :user, locals: {locked: true}
+      = tab_pane 'roles' do
         = render partial: 'admin/roles/list', object: @user, as: :user
       = tab_pane 'pricing_group' do
         = render partial: 'pricing_group', object: @user, as: :user, locals: {locked: true}

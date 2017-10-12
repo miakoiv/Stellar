@@ -155,6 +155,7 @@ Rails.application.routes.draw do
         patch :toggle, on: :member
       end
       member do
+        patch :set_group
         patch :set_pricing_group
         patch :toggle_category
       end

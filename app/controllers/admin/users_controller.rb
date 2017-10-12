@@ -3,9 +3,9 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_pricing_group, :toggle_category]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group, :set_pricing_group, :toggle_category]
 
-  authority_actions set_pricing_group: 'update', toggle_category: 'update'
+  authority_actions set_group: 'update', set_pricing_group: 'update', toggle_category: 'update'
 
   layout 'admin'
 
@@ -82,6 +82,19 @@ class Admin::UsersController < ApplicationController
       format.html { redirect_to admin_users_path,
         notice: t('.notice', user: @user) }
     end
+  end
+
+  # PATCH /admin/users/1/set_group
+  def set_group
+    authorize_action_for @user, at: current_store
+    group = current_store.groups.find(params[:group_id])
+
+    @user.groups.at(current_store).each do |group|
+      @user.groups.delete(group)
+    end
+    @user.groups << group
+
+    respond_to :js
   end
 
   # PATCH /admin/users/1/set_pricing_group
