@@ -148,6 +148,7 @@ Rails.application.routes.draw do
     end
     resources :groups do
       post :reorder, on: :collection
+      patch :make_default, on: :member
     end
     resources :users do
       resources :roles, only: [] do

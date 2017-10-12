@@ -4,9 +4,9 @@ class Admin::GroupsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default]
 
-  authority_actions reorder: 'update'
+  authority_actions reorder: 'update', make_default: 'update'
 
   layout 'admin'
 
@@ -91,6 +91,15 @@ class Admin::GroupsController < ApplicationController
         notice: t('.notice', group: @group) }
       format.json { head :no_content }
     end
+  end
+
+  # PATCH /admin/groups/1/make_default.js
+  def make_default
+    authorize_action_for @group, at: current_store
+    @group.store.update default_group: @group
+    @groups = current_store.groups
+
+    respond_to :js
   end
 
   private

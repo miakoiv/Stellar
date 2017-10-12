@@ -104,6 +104,8 @@ fi:
         new_group: Uusi ryhmä
       edit:
         new_group: Uusi ryhmä
+      form:
+        make_default: Aseta vierasryhmäksi
     inventories:
       index:
         new_inventory: Uusi varasto

@@ -1,0 +1,4 @@
+$('#groups-table > tbody').html("#{j render partial: 'admin/groups/row', collection: @groups, as: :group}");
+$("##{dom_id(@group)}").addClass('active');
+$('#group-form').html("#{j render partial: 'admin/groups/edit'}");
+$('#group-form').initialize();
