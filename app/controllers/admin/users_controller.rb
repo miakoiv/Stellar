@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        @user.groups << current_user.group(current_store)
+        @user.groups << current_group
         @user.grant(:see_pricing, current_store)
         @user.grant(:see_stock, current_store)
 
