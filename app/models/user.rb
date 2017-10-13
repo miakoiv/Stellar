@@ -161,6 +161,7 @@ class User < ActiveRecord::Base
     available_categories.order(:lft).map { |c| [c.to_option, c.id] }
   end
 
+  # Finds the group this user has at the given store.
   def group(store)
     groups.at(store).first
   end
