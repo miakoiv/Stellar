@@ -80,6 +80,7 @@ en:
           inventory_manage: inventories
           store_admin: store administrator
           superuser: superuser
+          third_party: third party
         description:
           see_pricing: pricing visible at storefront
           see_stock: product stock visible at storefont
@@ -99,6 +100,7 @@ en:
           inventory_manage: inventory management
           store_admin: store settings and web addresses
           superuser: store creation and system settings
+          third_party: limited access from a third party
       section:
         outline:
           block: blocks

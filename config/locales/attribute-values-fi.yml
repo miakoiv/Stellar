@@ -80,6 +80,7 @@ fi:
           inventory_manage: varastot
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
+          third_party: ulkopuolinen taho
         description:
           see_pricing: tuotteiden hintojen näkyvyys kaupassa
           see_stock: tuotteiden varastosaldon näkyvyys kaupassa
@@ -99,6 +100,7 @@ fi:
           inventory_manage: varastojen hallinta
           store_admin: kaupan asetukset ja verkko-osoitteet
           superuser: kauppojen perustaminen ja järjestelmäasetukset
+          third_party: rajoitetut oikeudet kolmannelle osapuolelle
       section:
         outline:
           block: lohkot
