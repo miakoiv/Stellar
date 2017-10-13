@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_site_name, :current_theme, :current_pricing, :shopping_cart, :current_user_has_role?, :can_shop?, :can_see_pricing?, :can_see_stock?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :current_pricing, :shopping_cart, :current_user_has_role?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -66,6 +66,10 @@ class ApplicationController < ActionController::Base
 
   def current_store
     @current_store
+  end
+
+  def current_group
+    @current_group ||= current_user.group(@current_store)
   end
 
   def current_site_name
@@ -100,6 +104,10 @@ class ApplicationController < ActionController::Base
 
   def can_see_stock?
     current_user_has_role?(:see_stock)
+  end
+
+  def third_party?
+    current_user_has_role?(:third_party)
   end
 
   def can_manage?
