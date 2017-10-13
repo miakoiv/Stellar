@@ -156,9 +156,13 @@ class User < ActiveRecord::Base
   end
 
   # Categories available to this user when creating and editing products.
+  # FIXME: this will change when categories are reassociated with groups.
+  def available_categories(store)
+    categories.any? ? categories.order(:lft) : store.categories.order(:lft)
+  end
+
   def category_options(store)
-    available_categories = vendor? ? categories : store.categories
-    available_categories.order(:lft).map { |c| [c.to_option, c.id] }
+    available_categories(store).map { |c| [c.to_option, c.id] }
   end
 
   # Finds the group this user has at the given store.

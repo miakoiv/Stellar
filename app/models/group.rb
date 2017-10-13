@@ -33,6 +33,10 @@ class Group < ActiveRecord::Base
   end
 
   #---
+  def notified_users
+    users.with_role(:order_notify, store)
+  end
+
   def to_s
     name
   end

@@ -65,8 +65,8 @@ class Product < ActiveRecord::Base
   #---
   belongs_to :store
 
-  # A product may belong to a specific vendor user who's responsible for it.
-  belongs_to :vendor, class_name: 'User'
+  # A product may belong to a specific vendor group who's responsible for it.
+  belongs_to :vendor, class_name: 'Group'
 
   # Products must have a tax category
   belongs_to :tax_category, required: true

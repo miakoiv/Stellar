@@ -18,12 +18,16 @@ class ProductAuthorizer < ApplicationAuthorizer
     user.has_cached_role?(:product_editor, opts[:at])
   end
 
-  # Vendors may only interact with their own products.
+  # Third parties have access to products they are vendors for.
   def readable_by?(user, opts)
-    user.has_cached_role?(:product_editor, opts[:at]) && (!user.vendor? || user.vendor? && resource.vendor == user)
+    return false unless user.has_cached_role?(:product_editor, opts[:at])
+    return true unless user.has_cached_role?(:third_party, opts[:at])
+    resource.vendor == user.group(opts[:at])
   end
 
   def updatable_by?(user, opts)
-    user.has_cached_role?(:product_editor, opts[:at]) && (!user.vendor? || user.vendor? && resource.vendor == user)
+    return false unless user.has_cached_role?(:product_editor, opts[:at])
+    return true unless user.has_cached_role?(:third_party, opts[:at])
+    resource.vendor == user.group(opts[:at])
   end
 end

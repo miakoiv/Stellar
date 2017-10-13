@@ -39,7 +39,7 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for Product, at: current_store
     master = current_store.products.find_by(slug: params[:master])
     @product = current_store.products.build(
-      vendor: current_user.vendor? ? current_user : nil,
+      vendor: third_party? ? current_group : nil,
       available_at: Date.current,
       tax_category: current_store.tax_categories.first
     )
@@ -59,7 +59,7 @@ class Admin::ProductsController < ApplicationController
   def create
     authorize_action_for Product, at: current_store
     @product = current_store.products.build(product_params)
-    @product.vendor = current_user if current_user.vendor?
+    @product.vendor = current_group if third_party?
     @product.priority = @product.master_product.variants.count if @product.variant?
 
     respond_to do |format|
@@ -166,7 +166,7 @@ class Admin::ProductsController < ApplicationController
     # Restrict searching to products in current store.
     def search_params
       params = {store: current_store}
-      params.merge!(vendor_id: current_user.id) if current_user.vendor?
+      params.merge!(vendor_id: current_group) if third_party?
       @query.merge(params)
     end
 end
