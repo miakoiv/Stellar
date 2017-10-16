@@ -1,0 +1,7 @@
+%li.dd-item[category]{class: @group.categories.include?(category) && 'active'}
+  .dd-content
+    = link_to toggle_category_admin_group_path(@group, params: {category_id: category.id}), remote: true, method: :patch do
+      = category
+  - if category.children_count > 0
+    %ol.dd-list
+      = render partial: 'category', collection: category.children

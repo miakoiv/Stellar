@@ -106,6 +106,7 @@ fi:
         new_group: Uusi ryhmä
       form:
         make_default: Aseta vierasryhmäksi
+        select_categories: Valitse tuoteryhmät
     inventories:
       index:
         new_inventory: Uusi varasto

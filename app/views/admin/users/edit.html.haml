@@ -14,7 +14,6 @@
       = nav_tab 'group', col(User, :group), class: 'active'
       = nav_tab 'roles', col(User, :roles)
       = nav_tab 'pricing_group', col(User, :pricing_group_id)
-      = nav_tab 'categories', col(User, :category_ids)
 
     .tab-content
       = tab_pane 'group', class: 'in active' do
@@ -23,5 +22,3 @@
         = render partial: 'admin/roles/edit_list', object: @user, as: :user
       = tab_pane 'pricing_group' do
         = render partial: 'pricing_group', object: @user, as: :user, locals: {locked: false}
-      = tab_pane 'categories' do
-        = render partial: 'categories', object: @user, as: :user, locals: {locked: false}

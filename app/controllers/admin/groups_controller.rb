@@ -4,9 +4,9 @@ class Admin::GroupsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default, :select_categories, :toggle_category]
 
-  authority_actions reorder: 'update', make_default: 'update'
+  authority_actions reorder: 'update', make_default: 'update', select_categories: 'update', toggle_category: 'update'
 
   layout 'admin'
 
@@ -98,6 +98,24 @@ class Admin::GroupsController < ApplicationController
     authorize_action_for @group, at: current_store
     @group.store.update default_group: @group
     @groups = current_store.groups
+
+    respond_to :js
+  end
+
+  # GET /admin/groups/1/select_categories
+  def select_categories
+    authorize_action_for @group, at: current_store
+  end
+
+  # PATCH /admin/groups/1/toggle_category
+  def toggle_category
+    authorize_action_for @group, at: current_store
+    @category = current_store.categories.find(params[:category_id])
+    if @group.categories.include?(@category)
+      @group.categories.delete(@category)
+    else
+      @group.categories << @category
+    end
 
     respond_to :js
   end

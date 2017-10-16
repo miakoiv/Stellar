@@ -17,6 +17,9 @@ class Group < ActiveRecord::Base
   belongs_to :store
   has_and_belongs_to_many :users
 
+  # Categories the group members are limited to, if any.
+  has_and_belongs_to_many :categories
+
   default_scope { sorted }
   scope :at, -> (store) { where(store: store) }
 

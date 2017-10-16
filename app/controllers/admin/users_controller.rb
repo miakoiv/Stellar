@@ -3,9 +3,9 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group, :set_pricing_group, :toggle_category]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group, :set_pricing_group]
 
-  authority_actions set_group: 'update', set_pricing_group: 'update', toggle_category: 'update'
+  authority_actions set_group: 'update', set_pricing_group: 'update'
 
   layout 'admin'
 
@@ -109,19 +109,6 @@ class Admin::UsersController < ApplicationController
       @user.pricing_groups.delete(group)
     end
     @user.pricing_groups << group unless clear
-
-    respond_to :js
-  end
-
-  # PATCH /admin/users/1/toggle_category
-  def toggle_category
-    authorize_action_for @user, at: current_store
-    @category = current_store.categories.find(params[:category_id])
-    if @user.categories.include?(@category)
-      @user.categories.delete(@category)
-    else
-      @user.categories << @category
-    end
 
     respond_to :js
   end

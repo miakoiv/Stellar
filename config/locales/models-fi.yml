@@ -160,6 +160,7 @@ fi:
         price_base: Hinnoitteluperuste
         price_markup_percent: Hintamuutos
         price_tax_included: Hinnat verollisina
+        category_ids: Sallitut tuoteryhmät
         pricing: Hinnoittelu
         appearance: Väritys
         user_count: Jäseniä
@@ -467,7 +468,6 @@ fi:
         groups: Ryhmät
         keyword: Nimi tai sähköpostiosoite
         roles: Roolit
-        category_ids: Sallitut tuoteryhmät
         pricing_group_id: Hintaryhmä
         locale: Kieli
         phone: Puhelinnumero

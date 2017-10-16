@@ -160,6 +160,7 @@ en:
         price_base: Pricing base
         price_markup_percent: Price adjustment
         price_tax_included: Prices include tax
+        category_ids: Allowed categories
         pricing: Pricing
         appearance: Appearance
         user_count: Members
@@ -467,7 +468,6 @@ en:
         groups: Groups
         keyword: Name or email
         roles: Roles
-        category_ids: Allowed categories
         pricing_group_id: Pricing group
         locale: Language
         phone: Phone number

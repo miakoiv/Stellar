@@ -117,10 +117,10 @@ class ApplicationController < ActionController::Base
   end
 
   # The ability to shop at any given category depends on possible restricted
-  # categories given to the current user. If any category assignments
+  # categories given to the current group. If any category assignments
   # exist, shopping is only allowed in the assigned categories.
   def may_shop_at?(category)
-    current_user.categories.empty? || current_user.categories.include?(category)
+    current_group.categories.empty? || current_group.categories.include?(category)
   end
 
   private

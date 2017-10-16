@@ -147,8 +147,12 @@ Rails.application.routes.draw do
       post :reorder, on: :collection
     end
     resources :groups do
+      member do
+        patch :make_default
+        get :select_categories
+        patch :toggle_category
+      end
       post :reorder, on: :collection
-      patch :make_default, on: :member
     end
     resources :users do
       resources :roles, only: [] do
@@ -157,7 +161,6 @@ Rails.application.routes.draw do
       member do
         patch :set_group
         patch :set_pricing_group
-        patch :toggle_category
       end
     end
     resources :customer_assets do

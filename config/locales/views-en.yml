@@ -126,6 +126,7 @@ en:
         new_group: New group
       form:
         make_default: Set as guest group
+        select_categories: Select categories
     inventories:
       index:
         new_inventory: New inventory

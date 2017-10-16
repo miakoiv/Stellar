@@ -1,0 +1,8 @@
+.page-header
+  = link_to edit_admin_group_path(@group), class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1= icon('group', @group)
+
+.row
+  .col-md-7
+    = render partial: 'categories', object: @group, as: :group

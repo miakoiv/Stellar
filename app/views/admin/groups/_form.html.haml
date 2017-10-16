@@ -20,8 +20,10 @@
           = f.check_box :price_tax_included
     - unless @group.new_record?
       .panel-footer
-        - if @group != current_store.default_group && current_user.can_update?(@group, at: current_store)
-          = link_to icon('star', t('.make_default')), make_default_admin_group_path(@group), remote: true, method: :patch, class: 'btn btn-primary btn-sm'
+        - if current_user.can_update?(@group, at: current_store)
+          - if @group != current_store.default_group
+            = link_to icon('star', t('.make_default')), make_default_admin_group_path(@group), remote: true, method: :patch, class: 'btn btn-primary btn-sm'
+          = link_to icon('sitemap', t('.select_categories')), select_categories_admin_group_path(@group), class: 'btn btn-default btn-sm'
         - if current_user.can_delete?(@group, at: current_store)
           .pull-right
             = link_to icon('remove', t('actions.delete')), admin_group_path(@group), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Group.model_name.human, name: @group.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
