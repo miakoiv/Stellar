@@ -36,6 +36,15 @@ class Group < ActiveRecord::Base
   end
 
   #---
+  # Categories available to this group when creating and editing products.
+  def available_categories(store)
+    categories.any? ? categories.order(:lft) : store.categories.order(:lft)
+  end
+
+  def category_options(store)
+    available_categories(store).map { |c| [c.to_option, c.id] }
+  end
+
   def notified_users
     users.with_role(:order_notify, store)
   end

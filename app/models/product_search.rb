@@ -50,6 +50,10 @@ class ProductSearch < Searchlight::Search
     query.where(categories: {id: categories})
   end
 
+  def search_permitted_categories
+    query.where(categories: {id: permitted_categories})
+  end
+
   def search_live
     return query if empty?(live)
     query.where(live: checked?(live))

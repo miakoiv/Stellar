@@ -45,9 +45,6 @@ class User < ActiveRecord::Base
   # User may optionally have pricing groups in various stores.
   has_and_belongs_to_many :pricing_groups
 
-  # User may have a set of categories she's restricted to for shopping.
-  has_and_belongs_to_many :categories
-
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 
@@ -153,16 +150,6 @@ class User < ActiveRecord::Base
   def grantable_roles
     roles = Role.available_roles
     has_cached_role?(:superuser) ? roles : roles - ['superuser']
-  end
-
-  # Categories available to this user when creating and editing products.
-  # FIXME: this will change when categories are reassociated with groups.
-  def available_categories(store)
-    categories.any? ? categories.order(:lft) : store.categories.order(:lft)
-  end
-
-  def category_options(store)
-    available_categories(store).map { |c| [c.to_option, c.id] }
   end
 
   # Finds the group this user has at the given store.

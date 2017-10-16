@@ -6,7 +6,7 @@
           = f.search_field :keyword, autocomplete: 'off', placeholder: t('search_panel.keyword'), class: 'form-control'
       .col-xs-12.col-sm-6
         .form-group
-          = f.select :categories, current_user.category_options(current_store), {}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
+          = f.select :categories, current_group.category_options(current_store), {}, {multiple: true, placeholder: t('search_panel.all_categories'), class: 'form-control'}
       - current_store.searchable_properties.each do |property|
         .col-xs-6.col-sm-3
           .form-group

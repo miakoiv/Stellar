@@ -13,7 +13,7 @@
         = tab_pane 'product-meta', class: 'in active' do
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
-            = f.select :category_ids, current_user.category_options(current_store), {}, {multiple: true, class: 'selectize'}
+            = f.select :category_ids, current_group.category_options(current_store), {}, {multiple: true, class: 'selectize'}
             = f.select :vendor_id, current_store.group_options, {include_blank: blank}, {class: 'selectize-label', disabled: third_party?}
             = f.text_field :code, required: true
             = f.text_field :customer_code
