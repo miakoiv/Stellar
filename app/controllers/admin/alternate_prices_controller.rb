@@ -10,7 +10,7 @@ class Admin::AlternatePricesController < ApplicationController
   # POST /admin/products/1/alternate_prices
   def create
     @alternate_price = @product.alternate_prices.find_or_initialize_by(
-      pricing_group_id: params[:alternate_price][:pricing_group_id]
+      group_id: params[:alternate_price][:group_id]
     )
     respond_to do |format|
       if @alternate_price.update(alternate_price_params)
@@ -40,7 +40,7 @@ class Admin::AlternatePricesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def alternate_price_params
       params.require(:alternate_price).permit(
-        :pricing_group_id, :retail_price
+        :group_id, :price
       )
     end
 end

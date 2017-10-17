@@ -17,6 +17,9 @@ class Group < ActiveRecord::Base
   belongs_to :store
   has_and_belongs_to_many :users
 
+  # Group-specific prices for products.
+  has_many :alternate_prices
+
   # Categories the group members are limited to, if any.
   has_and_belongs_to_many :categories
 
@@ -36,6 +39,10 @@ class Group < ActiveRecord::Base
   end
 
   #---
+  def price_method
+    "#{price_base}_price".to_sym
+  end
+
   # Categories available to this group when creating and editing products.
   def available_categories(store)
     categories.any? ? categories.order(:lft) : store.categories.order(:lft)

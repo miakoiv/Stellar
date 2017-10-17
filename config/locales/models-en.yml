@@ -120,12 +120,11 @@ en:
         images: Photos
         page_ids: Shown on pages
       alternate_price:
-        pricing_group_id: Pricing group
+        group_id: Group
         product_id: Product
-        retail_price: Retail price
+        price: Price
         markup_percent: Markup %
         margin_percent: Margin %
-        price_factor: Factor
       asset_entry:
         customer_asset_id: Customer asset
         recorded_at: Date

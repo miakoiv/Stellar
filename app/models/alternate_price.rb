@@ -2,24 +2,28 @@
 
 class AlternatePrice < ActiveRecord::Base
 
-  monetize :retail_price_cents, numericality: {
+  monetize :price_cents, numericality: {
     greater_than: 0
   }
 
   #---
-  belongs_to :pricing_group
+  belongs_to :group
   belongs_to :product, touch: true
 
   #---
-  # Markup percentage from trade price to this alternate price.
+  # Markup percentage from group base price to this alternate price.
   def markup_percent
-    return nil if product.trade_price.nil? || retail_price.nil? || product.trade_price == 0
-    100 * (retail_price - product.trade_price) / product.trade_price
+    return nil if group.nil?
+    base_price = product.send(group.price_method)
+    return nil if base_price.nil? || price.nil? || base_price.zero?
+    100 * (price - base_price) / base_price
   end
 
-  # Margin percentage from trade price to this alternate price.
+  # Margin percentage between group base price and this alternate price.
   def margin_percent
-    return nil if product.trade_price.nil? || retail_price.nil? || retail_price == 0
-    100 * (retail_price - product.trade_price) / retail_price
+    return nil if group.nil?
+    base_price = product.send(group.price_method)
+    return nil if base_price.nil? || price.nil? || price.zero?
+    100 * (price - base_price) / price
   end
 end

@@ -120,12 +120,11 @@ fi:
         images: Kuvat
         page_ids: Näytetään sivuilla
       alternate_price:
-        pricing_group_id: Hintaryhmä
+        group_id: Ryhmä
         product_id: Tuote
-        retail_price: Myyntihinta
+        price: Hinta
         markup_percent: Lisä-%
         margin_percent: Kate-%
-        price_factor: Kerroin
       asset_entry:
         customer_asset_id: Asiakkaan omistus
         recorded_at: Pvm

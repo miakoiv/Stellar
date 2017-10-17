@@ -1,6 +1,8 @@
 = content_tag_for :tr, product.alternate_prices do |alternate_price|
-  %td= alternate_price.pricing_group
-  %td.text-right.currency= price_tag alternate_price.retail_price
+  %td
+    %span.label{class: "label-#{alternate_price.group.appearance}"}
+      = alternate_price.group
+  %td.text-right.currency= price_tag alternate_price.price
   %td.text-right= number_with_precision(alternate_price.markup_percent, precision: 2)
   %td.text-right= number_with_precision(alternate_price.margin_percent, precision: 2)
   %td.actions

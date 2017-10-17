@@ -162,9 +162,10 @@ class User < ActiveRecord::Base
     pricing_groups.find_by(store: store)
   end
 
-  # Reseller users are able to select a pricing group to use for retail.
+  # FIXME: Pricing groups are deprecated, and this method can be removed
+  # once the transition is complete.
   def can_select_pricing_group?
-    reseller?
+    false
   end
 
   def appearance

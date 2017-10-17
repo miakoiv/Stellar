@@ -2,8 +2,8 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-4= col(AlternatePrice, :pricing_group_id)
-        %th.col-xs-3.text-right= col(AlternatePrice, :retail_price)
+        %th.col-xs-4= col(AlternatePrice, :group_id)
+        %th.col-xs-3.text-right= col(AlternatePrice, :price)
         %th.col-xs-2.text-right= col(AlternatePrice, :markup_percent)
         %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
         %th.actions
@@ -17,8 +17,8 @@
       %tbody
         %tr
           %td.col-xs-4
-            = f.select :pricing_group_id, current_store.pricing_groups.map { |p| [p.to_s, p.id] }, {include_blank: true}, {placeholder: col(AlternatePrice, :pricing_group_id), class: 'form-control', data: {markup_percents: current_store.pricing_groups.map { |p| [p.id, p.markup_percent.to_f] }.to_h}}
-          %td.col-xs-3= f.text_field :retail_price, placeholder: col(AlternatePrice, :retail_price), class: 'form-control text-right'
+            = f.select :group_id, current_store.group_options, {include_blank: true}, {placeholder: col(AlternatePrice, :group_id), class: 'form-control', data: {group_pricing: current_store.groups.map { |g| [g.id, {markup: g.price_markup_percent.to_f, price: product.send(g.price_method).to_f}] }.to_h}}
+          %td.col-xs-3= f.text_field :price, placeholder: col(AlternatePrice, :price), class: 'form-control text-right'
           %td.col-xs-2= f.text_field :markup_percent, class: 'form-control text-right', disabled: true
           %td.col-xs-2
           %td.actions
@@ -27,17 +27,18 @@
 
 :coffee
   jQuery ->
-    markup_percents = $('#alternate_price_pricing_group_id').data 'markupPercents'
+    group_pricing = $('#alternate_price_group_id').data 'groupPricing'
 
     numbro.culture "#{t('culture')}"
-    $pricing_group_select = $('#alternate_price_pricing_group_id').selectize
+    $pricing_group_select = $('#alternate_price_group_id').selectize
       dropdownParent: 'body'
+      labelField: 'title'
+      dataAttr: 'data'
+      render: $.fn.selectize.label_renderer
       onChange: (index) ->
-        markup_percent = markup_percents[index]
-        trade_price = numbro().unformat $('#product_trade_price').val()
-        if markup_percent
-          $('#alternate_price_markup_percent').val numbro(markup_percent).format('0.00')
-          $('#alternate_price_retail_price').val numbro((1 + markup_percent/100) * trade_price).format('0.00')
+        if group = group_pricing[index]
+          $('#alternate_price_markup_percent').val numbro(group.markup).format('0.00')
+          $('#alternate_price_price').val numbro((1 + group.markup/100) * group.price).format('0.00')
           $('#create_alternate_price').attr disabled: false
         else
           $('#alternate_price_markup_percent').val ''

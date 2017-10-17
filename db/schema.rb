@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016081957) do
+ActiveRecord::Schema.define(version: 20171017072258) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -45,14 +45,14 @@ ActiveRecord::Schema.define(version: 20171016081957) do
   add_index "albums_pages", ["page_id", "album_id"], name: "index_albums_pages_on_page_id_and_album_id", unique: true, using: :btree
 
   create_table "alternate_prices", force: :cascade do |t|
-    t.integer  "pricing_group_id",   limit: 4, null: false
-    t.integer  "product_id",         limit: 4, null: false
-    t.integer  "retail_price_cents", limit: 4, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "group_id",    limit: 4, null: false
+    t.integer  "product_id",  limit: 4, null: false
+    t.integer  "price_cents", limit: 4, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  add_index "alternate_prices", ["pricing_group_id"], name: "index_alternate_prices_on_pricing_group_id", using: :btree
+  add_index "alternate_prices", ["group_id"], name: "index_alternate_prices_on_group_id", using: :btree
   add_index "alternate_prices", ["product_id"], name: "index_alternate_prices_on_product_id", using: :btree
 
   create_table "asset_entries", force: :cascade do |t|
