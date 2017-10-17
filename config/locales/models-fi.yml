@@ -157,7 +157,7 @@ fi:
       group:
         name: Nimi
         price_base: Hinnoitteluperuste
-        price_markup_percent: Hintamuutos
+        price_modifier: Hintamuunnin
         price_tax_included: Hinnat verollisina
         category_ids: Sallitut tuoteryhmät
         pricing: Hinnoittelu

@@ -7,10 +7,14 @@ class AlternatePrice < ActiveRecord::Base
   }
 
   #---
-  belongs_to :group
   belongs_to :product, touch: true
+  belongs_to :group
 
   #---
+  def modifier
+    group.present? && group.modifier || nil
+  end
+
   # Markup percentage from group base price to this alternate price.
   def markup_percent
     return nil if group.nil?

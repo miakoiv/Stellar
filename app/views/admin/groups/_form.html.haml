@@ -10,11 +10,11 @@
           .col-sm-8
             = f.select :price_base, Group.price_base_options, {hide_label: true}, {class: 'selectize', required: true}
           .col-sm-4
-            = f.hidden_field :price_markup_percent
+            = f.hidden_field :price_modifier
             .form-group
-              %label.control-label.sr-only= col(Group, :price_markup_percent)
+              %label.control-label.sr-only= col(Group, :price_modifier)
               .input-group
-                = text_field_tag :markup_percent, number_with_precision_and_sign(@group.price_markup_percent, precision: 2, strip_insignificant_zeros: true), class: 'form-control text-right', required: true
+                = text_field_tag :modifier, number_with_precision_and_sign(@group.price_modifier, precision: 2, strip_insignificant_zeros: true), class: 'form-control text-right', required: true
                 %span.input-group-addon %
         = f.form_group do
           = f.check_box :price_tax_included
@@ -30,9 +30,9 @@
 
 :coffee
   numbro.culture "#{t('culture')}"
-  $('#markup_percent').on 'change', (e) ->
-    markup_percent = numbro().unformat $('#markup_percent').val()
-    $('#group_price_markup_percent').val markup_percent
+  $('#modifier').on 'change', (e) ->
+    modifier = numbro().unformat $('#modifier').val()
+    $('#group_price_modifier').val modifier
 
   $('.selectize-label').selectize
     labelField: 'title'

@@ -17,9 +17,9 @@
       %tbody
         %tr
           %td.col-xs-4
-            = f.select :group_id, current_store.group_options, {include_blank: true}, {placeholder: col(AlternatePrice, :group_id), class: 'form-control', data: {group_pricing: current_store.groups.map { |g| [g.id, {markup: g.price_markup_percent.to_f, price: product.send(g.price_method).to_f}] }.to_h}}
+            = f.select :group_id, current_store.group_options, {include_blank: true}, {placeholder: col(AlternatePrice, :group_id), class: 'form-control', data: {group_pricing: current_store.groups.map { |g| [g.id, {modifier: g.price_modifier.to_f, price: product.send(g.price_method).to_f}] }.to_h}}
           %td.col-xs-3= f.text_field :price, placeholder: col(AlternatePrice, :price), class: 'form-control text-right'
-          %td.col-xs-2= f.text_field :markup_percent, class: 'form-control text-right', disabled: true
+          %td.col-xs-2= f.text_field :modifier, class: 'form-control text-right', disabled: true
           %td.col-xs-2
           %td.actions
             = f.button id: 'create_alternate_price', class: 'btn btn-default', disabled: true do
@@ -37,10 +37,10 @@
       render: $.fn.selectize.label_renderer
       onChange: (index) ->
         if group = group_pricing[index]
-          $('#alternate_price_markup_percent').val numbro(group.markup).format('0.00')
-          $('#alternate_price_price').val numbro((1 + group.markup/100) * group.price).format('0.00')
+          $('#alternate_price_modifier').val numbro(group.modifier).format('0.00')
+          $('#alternate_price_price').val numbro((1 + group.modifier/100) * group.price).format('0.00')
           $('#create_alternate_price').attr disabled: false
         else
-          $('#alternate_price_markup_percent').val ''
+          $('#alternate_price_modifier').val ''
           $('#alternate_price_retail_price').val ''
           $('#create_alternate_price').attr disabled: true

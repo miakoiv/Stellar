@@ -157,7 +157,7 @@ en:
       group:
         name: Name
         price_base: Pricing base
-        price_markup_percent: Price adjustment
+        price_modifier: Price modifier
         price_tax_included: Prices include tax
         category_ids: Allowed categories
         pricing: Pricing

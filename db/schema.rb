@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017072258) do
+ActiveRecord::Schema.define(version: 20171017132816) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -187,15 +187,15 @@ ActiveRecord::Schema.define(version: 20171017072258) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "groups", force: :cascade do |t|
-    t.integer  "store_id",             limit: 4,                                               null: false
-    t.string   "name",                 limit: 255,                                             null: false
-    t.integer  "price_base",           limit: 4,                           default: 1,         null: false
-    t.decimal  "price_markup_percent",             precision: 5, scale: 2, default: 0.0,       null: false
-    t.boolean  "price_tax_included",                                       default: true,      null: false
-    t.string   "appearance",           limit: 255,                         default: "default", null: false
-    t.integer  "priority",             limit: 4,                           default: 0,         null: false
-    t.datetime "created_at",                                                                   null: false
-    t.datetime "updated_at",                                                                   null: false
+    t.integer  "store_id",           limit: 4,                                               null: false
+    t.string   "name",               limit: 255,                                             null: false
+    t.integer  "price_base",         limit: 4,                           default: 1,         null: false
+    t.decimal  "price_modifier",                 precision: 5, scale: 2, default: 0.0,       null: false
+    t.boolean  "price_tax_included",                                     default: true,      null: false
+    t.string   "appearance",         limit: 255,                         default: "default", null: false
+    t.integer  "priority",           limit: 4,                           default: 0,         null: false
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
   end
 
   add_index "groups", ["store_id"], name: "index_groups_on_store_id", using: :btree
