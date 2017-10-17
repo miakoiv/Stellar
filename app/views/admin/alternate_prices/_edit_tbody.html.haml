@@ -3,7 +3,7 @@
     %span.label{class: "label-#{alternate_price.group.appearance}"}
       = alternate_price.group
   %td.text-right.currency= price_tag alternate_price.price
-  %td.text-right= number_with_precision(alternate_price.markup_percent, precision: 2)
-  %td.text-right= number_with_precision(alternate_price.margin_percent, precision: 2)
+  %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
+  %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)
   %td.actions
     = link_to icon('remove'), admin_alternate_price_path(alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
