@@ -51,13 +51,6 @@ es:
         notice: "Página %{page} subido."
       destroy:
         notice: "Página %{page} eliminado."
-    pricing_groups:
-      create:
-        notice: "Grupo de precios %{pricing_group} creado."
-      update:
-        notice: "Grupo de precios %{pricing_group} subido."
-      destroy:
-        notice: "Grupo de precios %{pricing_group} eliminado."
     products:
       create:
         notice: "Producto %{product} creado."

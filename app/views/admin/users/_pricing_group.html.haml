@@ -1,9 +1,0 @@
-#pricing-groups-list.list-group
-  - current_store.pricing_groups.each do |group|
-    - css = user.pricing_group(current_store) == group ? 'list-group-item active' : 'list-group-item'
-    - if locked
-      .list-group-item{class: css}
-        %h5.list-group-item-heading= group
-    - else
-      = link_to set_pricing_group_admin_user_path(user, params: {group_id: group}), class: css, remote: true, method: :patch do
-        %h5.list-group-item-heading= group

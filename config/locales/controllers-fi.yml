@@ -65,13 +65,6 @@ fi:
         notice: "Sivu %{page} päivitetty."
       destroy:
         notice: "Sivu %{page} poistettu."
-    pricing_groups:
-      create:
-        notice: "Hintaryhmä %{pricing_group} luotu."
-      update:
-        notice: "Hintaryhmä %{pricing_group} päivitetty."
-      destroy:
-        notice: "Hintaryhmä %{pricing_group} poistettu."
     products:
       create:
         notice: "Tuote %{product} luotu."

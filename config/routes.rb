@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get  '/store', to: 'store#index', as: :store
   get  '/store/search', to: 'store#search', as: :search
   get  '/store/lookup', to: 'store#lookup', as: :lookup
-  get  '/store/pricing/(:pricing_group_id)', to: 'store#pricing', as: :pricing
   get  '/cart/delete',  to: 'store#delete_cart', as: :delete_cart
   post '/correspondence/mail_form', to: 'correspondence#mail_form',
     as: :mail_form
@@ -158,15 +157,11 @@ Rails.application.routes.draw do
       resources :roles, only: [] do
         patch :toggle, on: :member
       end
-      member do
-        patch :set_group
-        patch :set_pricing_group
-      end
+      patch :set_group, on: :member
     end
     resources :customer_assets do
       resources :asset_entries, shallow: true, only: :create
     end
-    resources :pricing_groups
     resources :tax_categories do
       post :reorder, on: :collection
     end

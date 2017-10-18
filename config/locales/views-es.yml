@@ -117,13 +117,6 @@ es:
         new_page: Nueva página
       new:
         new_page: Nueva página
-    pricing_groups:
-      index:
-        new_pricing_group: Nuevo grupo de precios
-      new:
-        new_pricing_group: Nuevo grupo de precios
-      form:
-        markup_percent_help: The default markup applied to alternate prices.
     products:
       index:
         new_product: Nuevo producto
@@ -239,8 +232,6 @@ es:
       delete: Carro vacio
       confirm_delete: ¿Quieres vaciar tu carro?
       lead_time_warning: La cantidad pedida excede el inventario, se espera un retraso de %{lead_time}.
-    pricing_groups:
-      default: <Estandar>
   albums:
     sidebar:
       included_albums: Mostrar albumes

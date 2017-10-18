@@ -169,13 +169,6 @@ en:
         show_resource: Show target
       layout:
         new_section: New section
-    pricing_groups:
-      index:
-        new_pricing_group: New pricing group
-      new:
-        new_pricing_group: New pricing group
-      form:
-        markup_percent_help: The default markup applied to alternate prices.
     products:
       index:
         new_product: New product
@@ -312,8 +305,6 @@ en:
       delete: Empty cart
       confirm_delete: Really empty your shopping cart?
       lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{lead_time}.
-    pricing_groups:
-      default: <default>
   albums:
     sidebar:
       included_albums: Show albums

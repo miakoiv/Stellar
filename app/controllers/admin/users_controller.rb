@@ -3,9 +3,9 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group, :set_pricing_group]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group]
 
-  authority_actions set_group: 'update', set_pricing_group: 'update'
+  authority_actions set_group: 'update'
 
   layout 'admin'
 
@@ -94,21 +94,6 @@ class Admin::UsersController < ApplicationController
       @user.groups.delete(group)
     end
     @user.groups << group
-
-    respond_to :js
-  end
-
-  # PATCH /admin/users/1/set_pricing_group
-  def set_pricing_group
-    authorize_action_for @user, at: current_store
-    group = current_store.pricing_groups.find(params[:group_id])
-
-    # Selecting the current pricing group clears the selection.
-    clear = @user.pricing_group(current_store) == group
-    @user.pricing_groups.at(current_store).each do |group|
-      @user.pricing_groups.delete(group)
-    end
-    @user.pricing_groups << group unless clear
 
     respond_to :js
   end

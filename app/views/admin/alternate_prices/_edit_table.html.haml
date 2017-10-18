@@ -30,7 +30,7 @@
     group_pricing = $('#alternate_price_group_id').data 'groupPricing'
 
     numbro.culture "#{t('culture')}"
-    $pricing_group_select = $('#alternate_price_group_id').selectize
+    $('#alternate_price_group_id').selectize
       dropdownParent: 'body'
       labelField: 'title'
       dataAttr: 'data'

@@ -66,9 +66,6 @@ en:
       payment:
         one: payment
         other: payments
-      pricing_group:
-        one: pricing group
-        other: pricing groups
       product:
         one: product
         other: products
@@ -289,9 +286,6 @@ en:
         order_id: Order
         amount: Paid
         created_at: Date
-      pricing_group:
-        name: Name
-        markup_percent: Markup %
       product:
         metadata: General
         text: Text
@@ -467,7 +461,6 @@ en:
         groups: Groups
         keyword: Name or email
         roles: Roles
-        pricing_group_id: Pricing group
         locale: Language
         phone: Phone number
         billing_address: Billing address

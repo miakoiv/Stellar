@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :current_pricing, :shopping_cart, :current_user_has_role?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -78,10 +78,6 @@ class ApplicationController < ActionController::Base
 
   def current_theme
     @current_store.present? && @current_store.theme
-  end
-
-  def current_pricing
-    @pricing_group
   end
 
   def shopping_cart
@@ -143,12 +139,6 @@ class ApplicationController < ActionController::Base
 
     def set_departments
       @departments = @current_store.departments
-    end
-
-    # FIXME: Pricing groups are deprecated, and this method can be
-    # removed once the transition is complete.
-    def set_pricing_group
-      @pricing_group = nil
     end
 
     # Create a record for a guest user, put her in the default group,

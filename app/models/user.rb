@@ -42,9 +42,6 @@ class User < ActiveRecord::Base
   # Users may belong to any number of groups to be part of stores.
   has_and_belongs_to_many :groups
 
-  # User may optionally have pricing groups in various stores.
-  has_and_belongs_to_many :pricing_groups
-
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 
@@ -155,17 +152,6 @@ class User < ActiveRecord::Base
   # Finds the group this user has at the given store.
   def group(store)
     groups.at(store).first
-  end
-
-  # Finds the assigned pricing group at store, if any.
-  def pricing_group(store)
-    pricing_groups.find_by(store: store)
-  end
-
-  # FIXME: Pricing groups are deprecated, and this method can be removed
-  # once the transition is complete.
-  def can_select_pricing_group?
-    false
   end
 
   def appearance

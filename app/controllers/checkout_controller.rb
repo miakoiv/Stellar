@@ -11,7 +11,6 @@ class CheckoutController < ApplicationController
   before_action :set_header_and_footer
   before_action :set_categories, only: [:checkout, :return]
   before_action :set_order, except: [:notify]
-  before_action :set_pricing_group
 
   # POST /checkout/1/order_type/2.js
   # Setting an order type allows the user to proceed to checkout.

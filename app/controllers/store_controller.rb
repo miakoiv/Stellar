@@ -12,7 +12,6 @@ class StoreController < ApplicationController
   end
 
   before_action :set_mail_host
-  before_action :set_pricing_group
 
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
@@ -80,17 +79,6 @@ class StoreController < ApplicationController
     @products = @search.results.visible.limit(Product::INLINE_SEARCH_RESULTS)
 
     respond_to :js
-  end
-
-  # GET /store/pricing/(:pricing_group_id)
-  def pricing
-    pricing_group_id = params[:pricing_group_id]
-    cookies[:pricing_group_id] = pricing_group_id
-
-    @pricing_group = current_store.pricing_groups.find_by(id: pricing_group_id)
-    shopping_cart.reappraise!(@pricing_group)
-
-    redirect_to store_path, alert: t('.alert', pricing: @pricing_group.try(:name) || t('store.pricing_groups.default'))
   end
 
   # GET /category/:category_id

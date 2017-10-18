@@ -66,9 +66,6 @@ fi:
       payment:
         one: maksu
         other: maksut
-      pricing_group:
-        one: hintaryhmä
-        other: hintaryhmät
       product:
         one: tuote
         other: tuotteet
@@ -289,9 +286,6 @@ fi:
         order_id: Tilaus
         amount: Maksettu
         created_at: Päiväys
-      pricing_group:
-        name: Nimi
-        markup_percent: Lisä-%
       product:
         metadata: Yleistä
         text: Teksti
@@ -467,7 +461,6 @@ fi:
         groups: Ryhmät
         keyword: Nimi tai sähköpostiosoite
         roles: Roolit
-        pricing_group_id: Hintaryhmä
         locale: Kieli
         phone: Puhelinnumero
         billing_address: Laskutusosoite

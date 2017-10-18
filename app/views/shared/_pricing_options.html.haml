@@ -1,7 +1,0 @@
-%li.dropdown-header= title(PricingGroup, count: 2)
-%li{class: current_pricing.nil? ? 'active' : nil}
-  = link_to t('store.pricing_groups.default'), pricing_path
-- current_store.pricing_groups.each do |pricing_group|
-  %li{class: current_pricing == pricing_group ? 'active' : nil}
-    = link_to pricing_group, pricing_path(pricing_group)
-%li.divider

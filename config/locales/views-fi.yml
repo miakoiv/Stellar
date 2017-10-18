@@ -149,13 +149,6 @@ fi:
         show_resource: Näytä kohde
       layout:
         new_section: Uusi lohko
-    pricing_groups:
-      index:
-        new_pricing_group: Uusi hintaryhmä
-      new:
-        new_pricing_group: Uusi hintaryhmä
-      form:
-        markup_percent_help: Oletuslisäprosentti hintaryhmän hinnoille.
     products:
       index:
         new_product: Uusi tuote
@@ -292,8 +285,6 @@ fi:
       delete: Tyhjennä kori
       confirm_delete: Tyhjennetäänkö ostoskori?
       lead_time_warning: Tilattua määrää ei varastossa. Toimitusaika %{lead_time}.
-    pricing_groups:
-      default: <oletus>
   albums:
     sidebar:
       included_albums: Näytä albumit

@@ -58,9 +58,6 @@ es:
       payment:
         one: Metodo de pago
         other: Metodos de pago
-      pricing_group:
-        one: Grupo de precios
-        other: Grupos de precios
       product:
         one: Producto
         other: Productos
@@ -106,7 +103,6 @@ es:
         images: Fotos
         page_ids: Mostrar en páginas
       alternate_price:
-        pricing_group_id: Grupo de precios
         product_id: Producto
         retail_price: Precio de venta
         markup_percent: Incremento del precio %
@@ -241,9 +237,6 @@ es:
         order_id: Pedido
         amount: Pagado
         created_at: Fecha
-      pricing_group:
-        name: Nombre
-        markup_percent: Incremento del precio %
       product:
         metadata: General
         text: Texto
@@ -386,7 +379,6 @@ es:
         level: Grupos
         roles: Roles
         category_ids: Categorias permitidas
-        pricing_group_id: Grupo de precios
         locale: Idioma
         phone: Número de teléfono
         billing_address: Dirección de facturación

@@ -7,8 +7,6 @@ class OrdersController < ApplicationController
     super || guest_user
   end
 
-  before_action :set_pricing_group
-
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
   authority_actions duplicate: 'read'
