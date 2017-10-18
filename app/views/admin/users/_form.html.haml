@@ -9,7 +9,7 @@
       .tab-content
         = tab_pane 'user-personal', class: 'in active' do
           %fieldset{disabled: locked}
-            = f.select :level, current_user.grantable_level_options
+            = f.select :level, current_user.grantable_level_options, {}, {class: 'selectize-label'}
             = f.text_field :name, required: true
             = f.text_field :email, required: true
             = f.telephone_field :phone, required: true

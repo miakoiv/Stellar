@@ -17,7 +17,7 @@
       %tbody
         %tr
           %td.col-xs-4
-            = f.select :group_id, current_store.group_options, {include_blank: true}, {placeholder: col(AlternatePrice, :group_id), class: 'form-control', data: {group_pricing: current_store.groups.map { |g| [g.id, {modifier: g.price_modifier.to_f, price: product.send(g.price_method).to_f}] }.to_h}}
+            = f.select :group_id, current_store.group_options, {include_blank: true}, {placeholder: col(AlternatePrice, :group_id), class: 'form-control selectize-label', data: {group_pricing: current_store.groups.map { |g| [g.id, {modifier: g.price_modifier.to_f, price: product.send(g.price_method).to_f}] }.to_h}}
           %td.col-xs-3= f.text_field :price, placeholder: col(AlternatePrice, :price), class: 'form-control text-right'
           %td.col-xs-2= f.text_field :modifier, class: 'form-control text-right', disabled: true
           %td.col-xs-2
