@@ -29,10 +29,8 @@ $.fn.selectize.product_renderer =
 $.fn.selectize.label_renderer =
   item: (item, escape) ->
     """
-    <div class="item">
-      <span class="label label-#{item.appearance}">
-        #{escape(item.title)}
-      </span>
+    <div class="item label label-#{item.appearance}">
+      #{escape(item.title)}
     </div>
     """
   option: (item, escape) ->
