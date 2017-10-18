@@ -263,8 +263,8 @@ en:
       order_type:
         name: Name
         workflow: Workflow
-        source_level: From
-        destination_level: To
+        source_id: From
+        destination_id: To
         has_shipping: Shipping
         has_installation: Installation
         has_payment: Payment

@@ -19,6 +19,11 @@ class OrderType < ActiveRecord::Base
   #---
   belongs_to :store
 
+  # Source and destination reference groups to define the workflow
+  # for orders of this type.
+  belongs_to :source, class_name: 'Group'
+  belongs_to :destination, class_name: 'Group'
+
   # Orders are destroyed along with their order type, but see below.
   # Order types should never be destroyed if completed orders exist.
   has_many :orders, dependent: :destroy
@@ -33,11 +38,6 @@ class OrderType < ActiveRecord::Base
       .or(arel_table[:destination_level].eq(User.levels[user.level]))
     )
   }
-
-  #---
-  def self.level_options
-    LEVELS.map { |enum, name| [User.human_attribute_value(:level, name), enum, data: {appearance: User::LEVEL_LABELS[name]}.to_json] }
-  end
 
   #---
   def outgoing_for?(user)
@@ -56,22 +56,6 @@ class OrderType < ActiveRecord::Base
   # or not. Used by the authorizer to check against deletion.
   def has_any_orders?
     orders.complete.unscope(where: :cancelled_at).any?
-  end
-
-  def source_label
-    User.human_attribute_value(:level, LEVELS[source_level])
-  end
-
-  def destination_label
-    User.human_attribute_value(:level, LEVELS[destination_level])
-  end
-
-  def source_appearance
-    User::LEVEL_LABELS[LEVELS[source_level]]
-  end
-
-  def destination_appearance
-    User::LEVEL_LABELS[LEVELS[destination_level]]
   end
 
   def to_s

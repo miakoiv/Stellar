@@ -20,11 +20,11 @@
     %tbody
       = content_tag_for :tr, @order_types do |order_type|
         %td
-          %span.label{class: "label-#{order_type.source_appearance}"}
-            = order_type.source_label
+          %span.label{class: "label-#{order_type.source.appearance}"}
+            = order_type.source
           %i.fa.fa-arrow-right.fa-fw.fa-lg
-          %span.label{class: "label-#{order_type.destination_appearance}"}
-            = order_type.destination_label
+          %span.label{class: "label-#{order_type.destination.appearance}"}
+            = order_type.destination
         %td= order_type.name
         %td
           - if order_type.has_payment?

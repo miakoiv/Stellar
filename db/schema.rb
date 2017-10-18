@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018071421) do
+ActiveRecord::Schema.define(version: 20171018093431) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -349,6 +349,8 @@ ActiveRecord::Schema.define(version: 20171018071421) do
 
   create_table "order_types", force: :cascade do |t|
     t.integer  "store_id",          limit: 4
+    t.integer  "source_id",         limit: 4,                   null: false
+    t.integer  "destination_id",    limit: 4,                   null: false
     t.string   "name",              limit: 255
     t.integer  "source_level",      limit: 4
     t.integer  "destination_level", limit: 4
@@ -363,6 +365,8 @@ ActiveRecord::Schema.define(version: 20171018071421) do
     t.datetime "updated_at",                                    null: false
   end
 
+  add_index "order_types", ["destination_id"], name: "index_order_types_on_destination_id", using: :btree
+  add_index "order_types", ["source_id"], name: "index_order_types_on_source_id", using: :btree
   add_index "order_types", ["store_id"], name: "index_order_types_on_store_id", using: :btree
 
   create_table "orders", force: :cascade do |t|

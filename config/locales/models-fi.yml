@@ -263,8 +263,8 @@ fi:
       order_type:
         name: Nimi
         workflow: Työnkulku
-        source_level: Mistä
-        destination_level: Minne
+        source_id: Mistä
+        destination_id: Minne
         has_shipping: Toimitettava
         has_installation: Asennettava
         has_payment: Maksettava

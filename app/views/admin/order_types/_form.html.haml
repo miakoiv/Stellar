@@ -6,13 +6,13 @@
         .form-group
           = f.label col(OrderType, :workflow), class: 'control-label col-sm-4'
           .col-sm-8
-            = f.select_without_bootstrap :source_level, OrderType.level_options, {}, {class: 'selectize-label', required: true}
+            = f.select_without_bootstrap :source_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
         .form-group
           .col-sm-8.col-sm-offset-4
             %p{style: 'margin-left: 1em;'}
               %i.fa.fa-arrow-down
               = title(Order)
-            = f.select_without_bootstrap :destination_level, OrderType.level_options, {}, {class: 'selectize-label', required: true}
+            = f.select_without_bootstrap :destination_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
       %fieldset.gap{disabled: locked}
         = f.text_field :name, required: true
         = f.form_group help: t('.has_shipping_help') do
