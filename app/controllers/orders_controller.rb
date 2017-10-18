@@ -73,7 +73,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order
 
     @order.copy_items_to(shopping_cart)
-    shopping_cart.reappraise!(current_pricing)
+    shopping_cart.reappraise!(nil)
     shopping_cart.recalculate!
 
     redirect_to cart_path, notice: t('.notice', order: @order)

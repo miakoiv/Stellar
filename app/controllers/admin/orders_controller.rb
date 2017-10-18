@@ -82,7 +82,7 @@ class Admin::OrdersController < ApplicationController
   def forward
     authorize_action_for Order, at: current_store
     @order.forward_to(shopping_cart)
-    shopping_cart.reappraise!(current_pricing)
+    shopping_cart.reappraise!(nil)
     shopping_cart.recalculate!
 
     redirect_to cart_path, notice: t('.notice', order: @order)
@@ -119,7 +119,7 @@ class Admin::OrdersController < ApplicationController
     product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
 
     product_ids.each do |product_id|
-      @order.insert(@current_store.products.live.find(product_id), 1, current_pricing)
+      @order.insert(@current_store.products.live.find(product_id), 1, nil)
     end
     @order.recalculate!
 

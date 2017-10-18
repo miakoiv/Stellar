@@ -10,7 +10,7 @@
           - if method.shipping_cost_product.present?
             .pull-right.label.label-primary
               = icon('plus')
-              = price_tag method.shipping_cost_product.price_tag(current_pricing)
+              = price_tag method.shipping_cost_product.price_tag(nil)
           - if method.delivery_time.present?
             = t('checkout.delivery_time', days: method.delivery_time)
 .description

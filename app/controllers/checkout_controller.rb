@@ -19,7 +19,7 @@ class CheckoutController < ApplicationController
   def order_type
     @order.order_type = current_store.order_types.find(params[:order_type_id])
     @order.save!(validate: false)
-    @order.reappraise!(current_pricing)
+    @order.reappraise!(nil)
   end
 
   # GET /checkout/1
@@ -48,7 +48,7 @@ class CheckoutController < ApplicationController
   def shipping_method
     @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
-    @order.apply_shipping_cost!(@shipping_method, current_pricing)
+    @order.apply_shipping_cost!(@shipping_method, nil)
     @shipping_gateway = if @shipping_method.shipping_gateway.present?
       @shipping_method.shipping_gateway_class.new(order: @order)
     else

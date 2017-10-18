@@ -14,9 +14,9 @@
       - if can_see_pricing?
         %p.price
           - if product.has_variants?
-            = price_range product.price_range(current_pricing)
+            = price_range product.price_range(nil)
           - else
-            = price_tag product.price_tag(current_pricing)
+            = price_tag product.price_tag(nil)
       - if can_shop? && may_shop_at?(@category) && product.purchasable?
         - if product.out_of_stock? && !product.back_orderable?
           %p.text-danger
