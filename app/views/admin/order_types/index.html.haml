@@ -9,7 +9,8 @@
     %thead
       %tr
         %th.col-xs-2= col(OrderType, :workflow)
-        %th.col-xs-3= col(OrderType, :name)
+        %th.col-xs-2= col(OrderType, :name)
+        %th.col-xs-2= col(OrderType, :label)
         %th.col-xs-1
         %th.col-xs-1
         - if current_store.b2b_sales?
@@ -26,6 +27,7 @@
           %span.label{class: "label-#{order_type.destination.appearance}"}
             = order_type.destination
         %td= order_type.name
+        %td= order_type.label
         %td
           - if order_type.has_payment?
             %span.label.label-success= col(OrderType, :has_payment)
