@@ -262,6 +262,7 @@ fi:
         total_value: Arvo yhteensä
       order_type:
         name: Nimi
+        label: Otsake
         workflow: Työnkulku
         source_id: Mistä
         destination_id: Minne

@@ -12,7 +12,7 @@
               - order_types.each do |order_type|
                 %label.btn.btn-default{class: order_type == order.order_type && 'active'}
                   = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
-                  = order_type.name
+                  = order_type.label
   :coffee
     $('#order-type-form input').on 'change', (e) ->
       $('#order-type-form').trigger 'submit.rails'
