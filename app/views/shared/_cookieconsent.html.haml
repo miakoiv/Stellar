@@ -1,4 +1,4 @@
-- if !user_signed_in? || current_user.guest?
+- if !user_signed_in? || guest?
   :javascript
     // Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent
     window.cookieconsent_options = {domain: '#{request.domain}', expiryDays: 3650, message: "#{t('cookieconsent.message')}", dismiss: "#{t('cookieconsent.dismiss')}", learnMore: "#{t('cookieconsent.more_info')}", link: 'http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002L0058:en:HTML', theme: 'dark-bottom'};

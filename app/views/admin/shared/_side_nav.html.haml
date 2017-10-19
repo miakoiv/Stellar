@@ -10,9 +10,9 @@
 %ul.nav.navmenu-nav
   = render partial: 'admin/shared/configuration_menu'
 
-- if user_signed_in? && !current_user.guest?
+- if user_signed_in? && !guest?
   .navmenu-title
-    %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+    %span.label{class: "label-#{current_group.appearance}"}= icon('user')
     = current_user.name
   %ul.nav.navmenu-nav
     = render partial: 'shared/user_menu'

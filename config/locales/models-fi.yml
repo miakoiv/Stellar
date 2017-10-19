@@ -265,6 +265,8 @@ fi:
         workflow: Työnkulku
         source_id: Mistä
         destination_id: Minne
+        incoming: Saapuvat tilaukset
+        outgoing: Lähtevät tilaukset
         has_shipping: Toimitettava
         has_installation: Asennettava
         has_payment: Maksettava

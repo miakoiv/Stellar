@@ -347,7 +347,7 @@ class Product < ActiveRecord::Base
 
   # Amount available in all inventories.
   def available
-    if tracked_stock?
+    @available ||= if tracked_stock?
       inventory_items.online.map(&:available).sum
     else
       Float::INFINITY
@@ -369,9 +369,16 @@ class Product < ActiveRecord::Base
     lead_time.present?
   end
 
-  # Either available or back orderable means it can be ordered.
+  # Orderable means in stock or back orderable, but stock may not
+  # be enough to satisfy the ordered amount, check #satisfies?
+  # as soon as the amount is known.
   def orderable?
     available? || back_orderable?
+  end
+
+  # Check if ordering an amount of product can be satisfied.
+  def satisfies?(amount)
+    available >= amount || back_orderable?
   end
 
   # Lead times that look like integers are parsed as number of days,

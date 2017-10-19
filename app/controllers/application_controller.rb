@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -87,6 +87,11 @@ class ApplicationController < ActionController::Base
   # Convenience method to check current user roles at current store.
   def current_user_has_role?(role)
     current_user.has_cached_role?(role, @current_store)
+  end
+
+  # Belonging to the default group is considered being a guest.
+  def guest?
+    @guest ||= @current_group == @current_store.default_group
   end
 
   def can_shop?

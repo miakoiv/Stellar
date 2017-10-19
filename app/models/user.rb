@@ -18,22 +18,6 @@ class User < ActiveRecord::Base
 
   enum level: {guest: -1, customer: 0, reseller: 1, manufacturer: 2, vendor: 3}
 
-  MANAGED_LEVELS = {
-    'guest' => [],
-    'customer' => ['customer'],
-    'reseller' => ['customer', 'reseller'],
-    'manufacturer' => ['customer', 'reseller', 'manufacturer', 'vendor'],
-    'vendor' => []
-  }.freeze
-
-  LEVEL_LABELS = {
-    'guest' => 'default',
-    'customer' => 'success',
-    'reseller' => 'info',
-    'manufacturer' => 'warning',
-    'vendor' => 'danger'
-  }.freeze
-
   #---
   # FIXME: Remove this association only after migrating to a state
   # where users don't require a store association anymore.
@@ -47,13 +31,14 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
 
+  # Order types from outgoing orders. See #existing_order_types below.
+  has_many :order_types, -> { joins(:source) }, through: :orders
+
   # Preset shipping and billing addresses have country associations.
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
   belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
 
-  default_scope { order(level: :desc, name: :asc) }
-
-  scope :non_guest, -> { where.not(level: levels[:guest]) }
+  default_scope { order(:name) }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
@@ -80,9 +65,9 @@ class User < ActiveRecord::Base
   def shopping_cart(store)
     orders.at(store).incomplete.first ||
       orders.at(store).create(
-        customer_name: guest? ? nil : name,
-        customer_email: guest? ? nil : email,
-        customer_phone: guest? ? nil : phone
+        customer_name: guest?(store) ? nil : name,
+        customer_email: guest?(store) ? nil : email,
+        customer_phone: guest?(store) ? nil : phone
       )
   end
 
@@ -93,53 +78,18 @@ class User < ActiveRecord::Base
     product.price_cents(pricing_group)
   end
 
-  # Manufacturer and reseller users always deal with prices sans tax.
+  # FIXME: tax inclusion should not be user specific
   def price_includes_tax?(product)
-    return false if manufacturer? || reseller?
     product.tax_category.included_in_retail?
-  end
-
-  # Constructs a label for given product, depending on its active promotions.
-  def label_for(product)
-    return human_attribute_value(:level) if manufacturer? || reseller?
-    promoted_item = product.best_promoted_item
-    if promoted_item.present?
-      return promoted_item.description
-    end
-    nil
   end
 
   # Order types seen in the user's set of completed orders.
   def existing_order_types(store)
-    orders.at(store).complete.map(&:order_type).uniq
-  end
-
-  # Available outgoing order types. These are what the user has available
-  # when going through checkout.
-  def outgoing_order_types(store)
-    store.order_types.outgoing_for(self)
-  end
-
-  # Available incoming order types.
-  def incoming_order_types(store)
-    store.order_types.incoming_for(self)
-  end
-
-  # Both of the above
-  def available_order_types(store)
-    store.order_types.available_for(self)
+    order_types.merge(Order.complete).where(orders: {store: store}).uniq
   end
 
   def self_and_peers(store)
     store.users.where(level: User.levels[level])
-  end
-
-  def managed_levels
-    User::MANAGED_LEVELS[level]
-  end
-
-  def grantable_level_options
-    managed_levels.map { |level| [User.human_attribute_value(:level, level), level, data: {appearance: LEVEL_LABELS[level]}.to_json] }
   end
 
   # Roles that a user manager may grant to other users. The superuser
@@ -149,13 +99,17 @@ class User < ActiveRecord::Base
     has_cached_role?(:superuser) ? roles : roles - ['superuser']
   end
 
-  # Finds the group this user has at the given store.
+  # Finds the group this user belongs to at the given store.
   def group(store)
-    groups.at(store).first
+    groups.find_by(store: store)
   end
 
-  def appearance
-    LEVEL_LABELS[level]
+  def guest?(store)
+    group(store) == store.default_group
+  end
+
+  def appearance(store)
+    group(store).appearance
   end
 
   def to_s

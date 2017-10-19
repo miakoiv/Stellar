@@ -17,6 +17,9 @@ class Group < ActiveRecord::Base
   belongs_to :store
   has_and_belongs_to_many :users
 
+  has_many :outgoing_order_types, class_name: 'OrderType', foreign_key: :source_id, inverse_of: :source
+  has_many :incoming_order_types, class_name: 'OrderType', foreign_key: :destination_id, inverse_of: :destination
+
   # Group-specific prices for products.
   has_many :alternate_prices
 

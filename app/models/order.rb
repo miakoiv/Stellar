@@ -62,14 +62,6 @@ class Order < ActiveRecord::Base
 
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
-  # Incoming and outgoing orders for given user, based on order type.
-  scope :incoming_for, -> (user) { joins(:order_type).merge(OrderType.incoming_for(user)) }
-  scope :outgoing_for, -> (user) { joins(:order_type).merge(OrderType.outgoing_for(user)) }
-
-  # The corresponding methods for above scopes are found in OrderType.
-  delegate :incoming_for?, to: :order_type
-  delegate :outgoing_for?, to: :order_type
-
   #---
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
@@ -110,6 +102,15 @@ class Order < ActiveRecord::Base
     concluded? ? self[:order_type_name] : order_type.name
   end
 
+  # Order source group is independent of order type.
+  def source
+    user.group(store)
+  end
+
+  # Order destination depends on the order type since there may be
+  # multiple order types to choose from at checkout.
+  delegate :destination, to: :order_type
+
   # Allow adding and editing order items on quotations only.
   def editable_items?
     is_quote?
@@ -120,10 +121,9 @@ class Order < ActiveRecord::Base
     !is_quote?
   end
 
-  # Notify users with order_notify role at the destination level.
+  # Notify users with order_notify role in the destination group.
   def notified_users
-    User.where(level: order_type.destination_level)
-      .with_role(:order_notify, store)
+    destination.users.with_role(:order_notify, store)
   end
 
   def has_contact_info?
@@ -181,26 +181,13 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Inserts the contents of given order item to this order.
-  # This is useful for copying order items from another order.
-  def insert_order_item(item, parent_item = nil)
-    order_item = order_items.create_with(
-      amount: 0,
-      priority: order_items_count
-    ).find_or_create_by(product: item.product, parent_item: parent_item)
-    order_item.amount += item.amount
-    order_item.price_cents = item.price_cents
-    order_item.save!
-    item.subitems.each do |subitem|
-      insert_order_item(subitem, order_item)
-    end
-  end
-
-  # Copies the top level order items on this order to another order.
-  # Any subitems are recursively copied by #insert_order_item.
+  # Copies the contents of this order to another order by inserting
+  # the top level real items.
   def copy_items_to(another_order)
-    order_items.top_level.real.each do |order_item|
-      another_order.insert_order_item(order_item)
+    transaction do
+      order_items.top_level.real.each do |item|
+        another_order.insert(item.product, item.amount)
+      end
     end
   end
 
@@ -239,7 +226,7 @@ class Order < ActiveRecord::Base
         order_item.update(
           price_cents: user.price_for_cents(order_item.product, pricing_group),
           price_includes_tax: user.price_includes_tax?(order_item.product),
-          label: user.label_for(order_item.product)
+          label: order_item.label
         )
       else
         order_item.update(
@@ -396,8 +383,8 @@ class Order < ActiveRecord::Base
 
   # An order is checkoutable when all its real items are orderable.
   def checkoutable?
-    products.real.each do |product|
-      return false unless product.orderable?
+    order_items.real.each do |item|
+      return false unless item.product.satisfies?(item.amount)
     end
     true
   end
@@ -442,7 +429,7 @@ class Order < ActiveRecord::Base
 
   # Do prices shown include tax?
   def includes_tax?
-    !store.b2b_sales?
+    source.price_tax_included?
   end
 
   def has_shipping?

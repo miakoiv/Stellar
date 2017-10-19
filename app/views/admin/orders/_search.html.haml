@@ -6,7 +6,7 @@
       .row
         .col-sm-6.col-md-3
           .form-group
-            = f.select :order_type_id, current_user.available_order_types(current_store).map { |o| [order_type_label(o, current_user), o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            = f.select :order_type_id, grouped_options_for_select([[col(OrderType, :incoming), current_group.incoming_order_types.map { |o| [o.to_s, o.id] }], [col(OrderType, :outgoing), current_group.outgoing_order_types.map { |o| [o.to_s, o.id] }]], @search.order_type_id), {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-3
           .form-group
             = f.select :status, Order.statuses.map { |s| [Order.human_attribute_value(:status, s), s] }, {include_blank: col(Order, :status)}, {class: 'form-control selectize'}

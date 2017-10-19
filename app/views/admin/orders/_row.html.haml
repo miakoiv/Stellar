@@ -11,10 +11,10 @@
   %td.text-right.currency
     = price_tag order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
   %td.actions
-    - if current_user.can_update?(Order, at: current_store) && !order.approved? && order.incoming_for?(current_user)
+    - if current_user.can_update?(Order, at: current_store) && !order.approved? && order.destination == current_group
       = link_to icon('check', t('.approve')), approve_admin_order_path(order),
           remote: true, method: :patch, class: 'btn btn-sm btn-success'
-    - if current_user.can_update?(Order, at: current_store) && order.approved? && !order.concluded? && order.incoming_for?(current_user)
+    - if current_user.can_update?(Order, at: current_store) && order.approved? && !order.concluded? && order.destination == current_group
       = link_to icon('search', t('.review')), review_admin_order_path(order),
           remote: true, class: 'btn btn-sm btn-primary'
     = link_to icon('info', t('actions.show')), admin_order_path(order),

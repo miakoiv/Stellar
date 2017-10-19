@@ -6,12 +6,12 @@
     = link_to admin_inventory_report_path do
       = icon('eur')
       = t('admin.reports.inventory.title')
-  - if current_user.incoming_order_types(current_store).any?
+  - if current_group.incoming_order_types.any?
     .report-panel
       = link_to admin_sales_report_path do
         = icon('shopping-cart')
         = t('admin.reports.sales.title')
-  - if current_user.outgoing_order_types(current_store).any?
+  - if current_group.outgoing_order_types.any?
     .report-panel
       = link_to admin_purchases_report_path do
         = icon('money')

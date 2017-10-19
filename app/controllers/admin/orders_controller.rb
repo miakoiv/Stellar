@@ -153,7 +153,7 @@ class Admin::OrdersController < ApplicationController
     # Limit the search to available order types and default to the first one.
     def search_params
       @query.merge(store: current_store).reverse_merge({
-        'order_type_id' => current_user.available_order_types(current_store).first.id
+        'order_type_id' => OrderType.available_for(current_group).first.id
       })
     end
 end

@@ -4,7 +4,7 @@
   - if current_user.can_update?(Order, at: current_store)
     = link_to edit_admin_order_path(@order), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
-  - if @order.incoming_for?(current_user)
+  - if @order.destination == current_group
     - if @order.approved?
       = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
         = icon('share', t('.forward'))

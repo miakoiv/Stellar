@@ -112,10 +112,6 @@ module ApplicationHelper
       content_tag(:span, object.to_s)
   end
 
-  def order_type_label(order_type, user)
-    "#{order_type.incoming_for?(user) ? '↘' : '↖'} #{order_type.to_s}"
-  end
-
   def number_with_precision_and_sign(number, options = {})
     if number < 0
       "-#{number_with_precision(-number, options)}"

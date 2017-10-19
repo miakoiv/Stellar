@@ -23,10 +23,10 @@
       %ul.dropdown-menu
         = render partial: 'admin/shared/configuration_menu'
   %ul.nav.navbar-nav.navbar-right.responsive
-    - if user_signed_in? && !current_user.guest?
+    - if user_signed_in? && !guest?
       %li.dropdown
         %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-          %span.label{class: "label-#{current_user.appearance}"}= icon('user')
+          %span.label{class: "label-#{current_group.appearance}"}= icon('user')
           = current_user.name.split.first
           %span.caret
         %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}

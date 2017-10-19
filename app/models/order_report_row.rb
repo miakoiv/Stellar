@@ -24,7 +24,7 @@ class OrderReportRow < ActiveRecord::Base
     return false unless product.present?
     report_row = where(
       order_type: order.order_type,
-      user: order.user.guest? ? nil : order.user,
+      user: order.user.guest?(order.store) ? nil : order.user,
       shipping_country_code: order.shipping_country_code,
       product: product,
       ordered_at: order.completed_at.to_date

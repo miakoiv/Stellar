@@ -265,6 +265,8 @@ en:
         workflow: Workflow
         source_id: From
         destination_id: To
+        incoming: Incoming orders
+        outgoing: Outgoing orders
         has_shipping: Shipping
         has_installation: Installation
         has_payment: Payment

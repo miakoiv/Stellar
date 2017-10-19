@@ -6,7 +6,7 @@
       .row
         .col-sm-6.col-md-3
           .form-group
-            = f.select :order_type_id, current_user.incoming_order_types(current_store).map { |o| [order_type_label(o, current_user), o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            = f.select :order_type_id, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-3
           .form-group
             = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.sales.search.countries'), class: 'form-control selectize'}

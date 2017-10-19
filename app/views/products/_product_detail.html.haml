@@ -1,4 +1,4 @@
-- cache_if current_user.guest?, [I18n.locale, :product_detail, product] do
+- cache_if guest?, [I18n.locale, :product_detail, product] do
   .product-header
     .breadcrumbs.visible-print
       = render partial: 'products/breadcrumbs', object: @category, as: :category

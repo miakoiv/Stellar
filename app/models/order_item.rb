@@ -172,6 +172,11 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+  def label
+    promoted_item = product.best_promoted_item
+    promoted_item.present? && promoted_item.description || nil
+  end
+
   def to_s
     product.title
   end
