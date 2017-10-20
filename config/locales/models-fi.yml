@@ -345,6 +345,7 @@ fi:
         amount_available: Saatavuus
         amount_sold: Myyty
       promotion:
+        group_id: Kohderyhmä
         promotion_handler_type: Menetelmä
         name: Nimi
         first_date: Alkamispäivä

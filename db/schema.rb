@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019134923) do
+ActiveRecord::Schema.define(version: 20171020065250) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -532,21 +532,22 @@ ActiveRecord::Schema.define(version: 20171019134923) do
   add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
 
   create_table "promotion_handlers", force: :cascade do |t|
-    t.integer  "promotion_id",      limit: 4,     null: false
-    t.string   "type",              limit: 255,   null: false
-    t.text     "description",       limit: 65535
+    t.integer  "promotion_id",      limit: 4,   null: false
+    t.string   "type",              limit: 255, null: false
+    t.string   "description",       limit: 255
     t.integer  "order_total_cents", limit: 4
     t.integer  "required_items",    limit: 4
     t.integer  "items_total_cents", limit: 4
     t.integer  "discount_percent",  limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "promotion_handlers", ["promotion_id"], name: "index_promotion_handlers_on_promotion_id", using: :btree
 
   create_table "promotions", force: :cascade do |t|
     t.integer  "store_id",               limit: 4,   null: false
+    t.integer  "group_id",               limit: 4,   null: false
     t.string   "promotion_handler_type", limit: 255, null: false
     t.string   "name",                   limit: 255
     t.string   "slug",                   limit: 255, null: false
@@ -556,6 +557,7 @@ ActiveRecord::Schema.define(version: 20171019134923) do
     t.datetime "updated_at",                         null: false
   end
 
+  add_index "promotions", ["group_id"], name: "index_promotions_on_group_id", using: :btree
   add_index "promotions", ["slug"], name: "index_promotions_on_slug", using: :btree
   add_index "promotions", ["store_id"], name: "index_promotions_on_store_id", using: :btree
 

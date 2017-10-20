@@ -26,6 +26,9 @@ class Group < ActiveRecord::Base
   # Categories the group members are limited to, if any.
   has_and_belongs_to_many :categories
 
+  # Promotions targeting this group.
+  has_many :promotions
+
   default_scope { sorted }
   scope :at, -> (store) { where(store: store) }
 

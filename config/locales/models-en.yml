@@ -345,6 +345,7 @@ en:
         amount_available: Availability
         amount_sold: Sold
       promotion:
+        group_id: Target group
         promotion_handler_type: Method
         name: Name
         first_date: Starts at

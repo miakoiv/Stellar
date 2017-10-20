@@ -3,15 +3,22 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
+        = f.select :group_id, current_store.group_options, {}, {class: 'selectize-label'}
         = f.text_field :name, required: true
         = f.select :promotion_handler_type, Promotion.handler_types.map { |h| [h.constantize.model_name.human, h] }, {}, {class: 'selectize', disabled: !@promotion.new_record?}
         - unless @promotion.new_record?
           = f.text_field :first_date, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           = f.text_field :last_date, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           = f.fields_for :promotion_handler do |ff|
-            = ff.text_area :description, rows: 3, required: true
+            = ff.text_field :description, required: true
             = render partial: @promotion.promotion_handler, locals: {f: ff}
       - unless locked
         %fieldset.actions
           = f.form_group do
             = f.primary
+
+:coffee
+  $('.selectize-label').selectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer

@@ -129,7 +129,8 @@ class Admin::PromotionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def promotion_params
       params.require(:promotion).permit(
-        :name, :promotion_handler_type, :first_date, :last_date,
+        :name, :group_id, :promotion_handler_type,
+        :first_date, :last_date,
         promotion_handler_attributes: [
           :id, :description,
           :order_total, :required_items, :items_total, :discount_percent
