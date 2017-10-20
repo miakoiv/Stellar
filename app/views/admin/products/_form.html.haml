@@ -32,7 +32,7 @@
         = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
             = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, t.included_in_retail?] }.to_h}
-            - if current_user.manufacturer?
+            - if current_group.cost?
               = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
             .form-group
               %label.control-label.col-sm-4= col(Product, :trade_price)
