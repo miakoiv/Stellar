@@ -29,6 +29,8 @@ class Group < ActiveRecord::Base
   # Promotions targeting this group.
   has_many :promotions
 
+  has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
+
   default_scope { sorted }
   scope :at, -> (store) { where(store: store) }
 
