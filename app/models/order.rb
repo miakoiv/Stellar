@@ -516,14 +516,6 @@ class Order < ActiveRecord::Base
     [store.erp_number, number].join '/'
   end
 
-  # Letterhead for this order based on its destination.
-  def letterhead
-    level = User.levels.key(order_type.destination_level)
-    page_id = store.send("#{level}_template_id")
-    return '' unless page_id.present?
-    store.pages.find(page_id).content
-  end
-
   # Vis.js timeline representation of order events.
   def timeline_events
     events = []

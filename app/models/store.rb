@@ -24,9 +24,7 @@ class Store < ActiveRecord::Base
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
     :order_sequence, # base value for order numbers if no numbering exists
-    :manufacturer_template_id, # page references to templates
-    :reseller_template_id,
-    :quotation_template_id,
+    :quotation_template_id, # page reference to quotation boilerplate
     :csv_encoding,         # CSV encoding of uploaded files
     :csv_product_code,     # CSV field headers for product code,
     :csv_retail_price,     # retail price, and inventory amount
@@ -220,12 +218,6 @@ class Store < ActiveRecord::Base
 
   def correspondents
     users.with_role(:correspondence, self)
-  end
-
-  # Finds the letterhead template page for given user.
-  def letterhead(user)
-    page_id = send("#{user.level}_template_id")
-    pages.find_by(id: page_id)
   end
 
   # Finds the quotation boilerplate page.

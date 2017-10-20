@@ -360,8 +360,6 @@ es:
         tawkto_site_id: página de tawk.to
         order_sequence: Numeración de pedido
         inventory_ids: Inventarios
-        manufacturer_template_id: Membrete del fabricante
-        reseller_template_id: Membrete del vendedor
         quotation_template_id: Calificación de la cotización
         csv_encoding: Conjunto de caracteres
         csv_product_code: Codigos de producto

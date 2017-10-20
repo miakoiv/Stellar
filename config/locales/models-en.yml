@@ -444,8 +444,6 @@ en:
         tawkto_site_id: tawk.to site
         order_sequence: Order numbering
         inventory_ids: Inventories
-        manufacturer_template_id: Manufacturer letterhead
-        reseller_template_id: Reseller letterhead
         quotation_template_id: Quotation boilerplate
         csv_encoding: Character set
         csv_product_code: Product code field

@@ -1,4 +1,7 @@
-= order.letterhead.html_safe
+- letterhead = order.destination.letterhead
+- if letterhead.present?
+  .visible-print
+    = render partial: 'pages/content', object: letterhead, as: :page
 
 .page-header
   %h1= t('checkout.receipt')

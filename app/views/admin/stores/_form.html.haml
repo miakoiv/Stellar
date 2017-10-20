@@ -29,8 +29,6 @@
             = f.text_field :facebook_pixel_id
             = f.text_field :tawkto_site_id
             - unless @store.new_record?
-              = f.select :manufacturer_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
-              = f.select :reseller_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}

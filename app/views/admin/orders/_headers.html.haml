@@ -1,6 +1,6 @@
-- letterhead = @order.store.letterhead(current_user)
+- letterhead = @order.destination.letterhead
 - if letterhead.present?
-  = render partial: 'pages/layout', object: letterhead, as: :page
+  = render partial: 'pages/content', object: letterhead, as: :page
 
 .page-header
   %h1

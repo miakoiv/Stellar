@@ -444,8 +444,6 @@ fi:
         tawkto_site_id: tawk.to -tunnus
         order_sequence: Tilausnumerointi
         inventory_ids: Varastot
-        manufacturer_template_id: Valmistajan kirjepohja
-        reseller_template_id: Jälleenmyyjän kirjepohja
         quotation_template_id: Tarjouksen tekstisisältö
         csv_encoding: Tiedoston merkistö
         csv_product_code: Tuotekoodisarake
