@@ -419,6 +419,7 @@ fi:
         detail_page_id: Lisätietosivu
       store:
         admin: Asetukset
+        apis: Liitynnät
         new_tax_category: Aseta verotus
         files: Tiedostot
         product_csv: Tuotteiden CSV-tuonti

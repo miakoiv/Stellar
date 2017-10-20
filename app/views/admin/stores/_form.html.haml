@@ -2,6 +2,7 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'store-admin', col(Store, :admin), class: 'active'
+    = nav_tab 'store-apis', col(Store, :apis)
     = nav_tab 'store-files', col(Store, :files)
     - if current_user_has_role?(:superuser)
       = nav_tab 'store-superuser', col(Store, :superuser)
@@ -22,12 +23,6 @@
               = f.check_box :admit_guests
             = f.form_group do
               = f.check_box :allow_shopping
-            = f.form_group do
-              = f.check_box :accept_credit_cards
-            = f.text_field :tracking_code
-            = f.text_field :maps_api_key
-            = f.text_field :facebook_pixel_id
-            = f.text_field :tawkto_site_id
             - unless @store.new_record?
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-files' do
@@ -40,6 +35,12 @@
           %fieldset{disabled: locked}
             %legend= col(Store, :order_xml)
             = f.text_field :order_xml_path
+        = tab_pane 'store-apis' do
+          %fieldset{disabled: locked}
+            = f.text_field :tracking_code
+            = f.text_field :maps_api_key
+            = f.text_field :facebook_pixel_id
+            = f.text_field :tawkto_site_id
         - if current_user_has_role?(:superuser)
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
