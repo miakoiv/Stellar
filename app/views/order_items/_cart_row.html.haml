@@ -8,7 +8,7 @@
       - else
         = order_item.product_title
     = order_item.product_subtitle
-    %span.label.label-primary= order_item.label
+    = bootstrap_label(order_item, appearance: :primary)
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')

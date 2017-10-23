@@ -2,11 +2,11 @@
   %td.rowlink-skip= drag_handle
   %td
     = link_to edit_admin_group_path(group), remote: true do
-      %span.label{class: "label-#{group.appearance}"}= icon('user')
+      = bootstrap_label(group, icon: 'user', text: '')
       = group.name
   %td
     - if group == current_store.default_group
-      %span.label.label-primary= col(Group, :default)
+      = bootstrap_label(group, text: col(Group, :default), appearance: :primary)
   %td.text-right
     = group.users.count
   %td

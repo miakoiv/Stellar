@@ -19,9 +19,7 @@
     %tbody
       - @promotions.each do |promotion|
         = content_tag_for :tr, promotion, class: promotion.active? ? nil : 'warning text-warning' do
-          %td
-            %span.label{class: "label-#{promotion.group.appearance}"}
-              = promotion.group
+          %td= bootstrap_label(promotion.group)
           %td= promotion.name
           %td= title(promotion.promotion_handler)
           %td

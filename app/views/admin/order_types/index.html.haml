@@ -21,26 +21,24 @@
     %tbody
       = content_tag_for :tr, @order_types do |order_type|
         %td
-          %span.label{class: "label-#{order_type.source.appearance}"}
-            = order_type.source
+          = bootstrap_label(order_type.source)
           %i.fa.fa-arrow-right.fa-fw.fa-lg
-          %span.label{class: "label-#{order_type.destination.appearance}"}
-            = order_type.destination
+          = bootstrap_label(order_type.destination)
         %td= order_type.name
         %td= order_type.label
         %td
           - if order_type.has_payment?
-            %span.label.label-success= col(OrderType, :has_payment)
+            = bootstrap_label(order_type, text: col(OrderType, :has_payment), appearance: :success)
         %td
           - if order_type.has_shipping?
-            %span.label.label-primary= col(OrderType, :has_shipping)
+            = bootstrap_label(order_type, text: col(OrderType, :has_shipping), appearance: :primary)
         - if current_store.b2b_sales?
           %td
             - if order_type.has_installation?
-              %span.label.label-danger= col(OrderType, :has_installation)
+              = bootstrap_label(order_type, text: col(OrderType, :has_installation), appearance: :danger)
           %td
             - if order_type.is_exported?
-              %span.label.label-info= col(OrderType, :is_exported)
+              = bootstrap_label(order_type, text: col(OrderType, :is_exported), appearance: :info)
         %td.actions
           = link_to icon('info', t('actions.show')), admin_order_type_path(order_type),
               class: 'btn btn-default btn-sm'

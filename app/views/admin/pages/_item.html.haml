@@ -4,6 +4,6 @@
   .dd-icon= icon(page.icon)
   = page
   .dd-widget
-    %span.label{class: "label-#{page.appearance}"}= page.label
+    = bootstrap_label(page)
   - unless page.live?
     .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})

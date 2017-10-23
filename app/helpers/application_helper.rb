@@ -43,6 +43,18 @@ module ApplicationHelper
     end
   end
 
+  def bootstrap_label(object, options = {})
+    appearance = options.delete(:appearance) || object.try(:appearance) || :default
+    options.reverse_merge!(class: "label label-#{appearance}")
+    icon = options.delete(:icon)
+    text = options.delete(:text) || object.try(:label) || object.to_s
+    if icon
+      content_tag :span, icon(icon, text), options
+    else
+      content_tag :span, text, options
+    end
+  end
+
   def drag_handle
     content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
       icon('ellipsis-v', class: 'fa-lg fa-fw')

@@ -10,9 +10,7 @@
 
     %tbody
       = content_tag_for :tr, users do |user|
-        %td
-          %span.label{class: "label-#{user.appearance(current_store)}"}
-            = user.group(current_store)
+        %td= bootstrap_label(user.group(current_store))
         %td= user.name
         %td= user.email
         %td

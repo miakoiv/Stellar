@@ -3,7 +3,7 @@
 
 - if user_signed_in? && !guest?
   .navmenu-title
-    %span.label{class: "label-#{current_group.appearance}"}= icon('user')
+    = bootstrap_label(current_group, icon: 'user', text: '')
     = current_user.name
   %ul.nav.navmenu-nav
     - if can_manage?

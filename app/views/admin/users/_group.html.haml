@@ -4,10 +4,8 @@
     - if locked
       .list-group-item{class: css}
         %h5.list-group-item-heading
-          %span.label{class: "label-#{group.appearance}"}
-            = group
+          = bootstrap_label(group)
     - else
       = link_to set_group_admin_user_path(user, params: {group_id: group}), class: css, remote: true, method: :patch do
         %h5.list-group-item-heading
-          %span.label{class: "label-#{group.appearance}"}
-            = group
+          = bootstrap_label(group)
