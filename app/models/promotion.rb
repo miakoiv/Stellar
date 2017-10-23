@@ -66,10 +66,6 @@ class Promotion < ActiveRecord::Base
     promoted_items.find_by(product_id: order_item.product_id)
   end
 
-  def available_products
-    store.products.live - products
-  end
-
   def available_categories
     store.categories.order(:lft)
   end
