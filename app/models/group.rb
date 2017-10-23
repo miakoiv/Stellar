@@ -52,12 +52,17 @@ class Group < ActiveRecord::Base
   end
 
   # Categories available to this group when creating and editing products.
-  def available_categories(store)
-    categories.any? ? categories.order(:lft) : store.categories.order(:lft)
+  def available_categories
+    limited_categories? ? categories.order(:lft) : store.categories.order(:lft)
   end
 
-  def category_options(store)
-    available_categories(store).map { |c| [c.to_option, c.id] }
+  def category_options
+    available_categories.map { |c| [c.to_option, c.id] }
+  end
+
+  # Category selection is limited if any are set.
+  def limited_categories?
+    categories.any?
   end
 
   def notified_users

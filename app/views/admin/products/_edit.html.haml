@@ -8,7 +8,7 @@
       %fieldset
         = f.text_field :title, required: true
         = f.text_field :subtitle
-        = f.select :category_ids, current_group.category_options(current_store), {}, {multiple: true, class: 'selectize'}
+        = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
         .row
           .col-sm-6
             = f.text_field :trade_price, class: 'text-right', append: '€'

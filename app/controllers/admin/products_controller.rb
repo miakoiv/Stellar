@@ -167,7 +167,7 @@ class Admin::ProductsController < ApplicationController
     def search_params
       params = {store: current_store}
       params.merge!(vendor_id: current_group) if third_party?
-      params.merge!(permitted_categories: current_group.available_categories(current_store))
+      params.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       @query.merge(params)
     end
 end
