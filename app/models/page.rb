@@ -129,6 +129,7 @@ class Page < ActiveRecord::Base
   end
 
   def label
+    return '' if header? || footer?
     return slug if route?
     resource || Page.human_attribute_value(:purpose, purpose)
   end
