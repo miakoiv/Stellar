@@ -108,10 +108,6 @@ class User < ActiveRecord::Base
     group(store) == store.default_group
   end
 
-  def appearance(store)
-    group(store).appearance
-  end
-
   def to_s
     "#{name} <#{email}>"
   end
