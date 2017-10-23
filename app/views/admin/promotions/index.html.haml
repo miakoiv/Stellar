@@ -8,7 +8,7 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th.col-min
+        %th.col-xs-1
         %th.col-xs-3= col(Promotion, :name)
         %th.col-xs-3= col(Promotion, :promotion_handler_type)
         %th.col-min
@@ -19,7 +19,9 @@
     %tbody
       - @promotions.each do |promotion|
         = content_tag_for :tr, promotion, class: promotion.active? ? nil : 'warning text-warning' do
-          %td= image_variant_tag promotion.cover_image
+          %td
+            %span.label{class: "label-#{promotion.group.appearance}"}
+              = promotion.group
           %td= promotion.name
           %td= title(promotion.promotion_handler)
           %td
