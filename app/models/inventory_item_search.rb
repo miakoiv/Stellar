@@ -35,4 +35,10 @@ class InventoryItemSearch < Searchlight::Search
     return query if empty?(live)
     query.where(products: {live: checked?(live)})
   end
+
+  # Reports include inventory items for products that
+  # have at least once been available.
+  def search_reported
+    query.where.not(products: {available_at: nil})
+  end
 end
