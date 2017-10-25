@@ -6,8 +6,8 @@ class Group < ActiveRecord::Base
   include Authority::Abilities
   include Reorderable
 
-  # This group purchases products at price base plus markup.
-  enum price_base: {retail: 1, trade: 2, cost: 3}
+  # This group purchases products at price base plus price modifier.
+  enum price_base: {retail_price: 1, trade_price: 2, cost_price: 3}
 
   APPEARANCES = [
     :default, :success, :info, :warning, :danger
@@ -48,7 +48,7 @@ class Group < ActiveRecord::Base
 
   #---
   def price_method
-    "#{price_base}_price".to_sym
+    price_base.to_sym
   end
 
   # Categories available to this group when creating and editing products.
