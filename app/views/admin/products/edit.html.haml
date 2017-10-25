@@ -14,12 +14,12 @@
   .col-lg-6
     %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
       = nav_tab 'images', col(Product, :images), class: 'active'
-      = nav_tab 'inventory', col(Product, :inventory)
-      = nav_tab 'alternate-prices', col(Product, :alternate_prices)
-      = nav_tab 'properties', col(Product, :product_properties)
-      = nav_tab 'iframes', col(Product, :iframes)
-      = nav_tab 'requisite-entries', col(Product, :requisite_entries)
-      = nav_tab 'component-entries', col(Product, :component_entries)
+      = nav_tab 'inventory', col(Product, :inventory), class: (@product.has_variants? || @product.bundle?) && 'disabled'
+      = nav_tab 'alternate-prices', col(Product, :alternate_prices), class: (@product.has_variants? || @product.bundle?) && 'disabled'
+      = nav_tab 'properties', col(Product, :product_properties), class: (@product.has_variants? || @product.bundle?) && 'disabled'
+      = nav_tab 'iframes', col(Product, :iframes), class: @product.has_variants? && 'disabled'
+      = nav_tab 'requisite-entries', col(Product, :requisite_entries), class: @product.has_variants? && 'disabled'
+      = nav_tab 'component-entries', col(Product, :component_entries), class: @product.has_variants? && 'disabled'
 
     .tab-content
       = tab_pane 'images', class: 'in active' do

@@ -3,7 +3,7 @@
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'product-meta', col(Product, :metadata), class: 'active'
     = nav_tab 'product-text', col(Product, :text)
-    = nav_tab 'product-pricing', col(Product, :pricing), class: @product.has_variants? && 'disabled'
+    = nav_tab 'product-pricing', col(Product, :pricing), class: (@product.has_variants? || @product.bundle?) && 'disabled'
     = nav_tab 'product-shipping', col(Product, :shipping), class: @product.has_variants? && 'disabled'
     = nav_tab 'product-variants', col(Product, :variants)
 
