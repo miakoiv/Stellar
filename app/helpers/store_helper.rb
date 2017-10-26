@@ -6,23 +6,53 @@ module StoreHelper
     amount > 25 ? t('number.more_than', number: 25) : amount
   end
 
-  def unit_price_string(price, unit)
-    "#{price_tag price} / #{unit}".html_safe
+  def money(amount)
+    humanized_money_with_symbol(amount)
   end
 
-  def price_tag(price)
-    return nil if price.nil?
-    sep = price.separator
-    units, subunits = humanized_money(price).split sep
-    "#{units}#{content_tag(:span, sep, class: 'sep')}#{content_tag(:span, subunits, class: 'cents')}#{currency_symbol}".html_safe
+  def fancy_price(price)
+    return nil if price.amount.nil?
+    amount = incl_tax? ? price.with_tax : price.sans_tax
+    sep = amount.separator
+    units, subunits = humanized_money(amount).split sep
+    capture do
+      concat units
+      concat content_tag(:span, sep, class: 'sep')
+      concat content_tag(:span, subunits, class: 'cents')
+      concat currency_symbol
+    end
   end
 
-  def price_range(range)
-    min, max = range
-    if min == max
-      price_tag min
+  def fancy_price_range(from, to)
+    if from == to
+      fancy_price(from)
     else
-      "#{price_tag min}–#{price_tag max}".html_safe
+      capture do
+        concat fancy_price(from)
+        concat '–'
+        concat fancy_price(to)
+      end
+    end
+  end
+
+  def price_tag(final_price, regular_price = nil)
+    content_tag(:span, class: regular_price ? 'special-price' : 'final-price') do
+      concat fancy_price(final_price)
+      if regular_price
+        concat content_tag(:span, class: 'regular-price') { fancy_price(regular_price) }
+      end
+    end
+  end
+
+  def price_range(from, to)
+    content_tag(:span, class: 'final-price price-range') do
+      fancy_price_range(from, to)
+    end
+  end
+
+  def unit_pricing_string(price, quantity, unit)
+    unless quantity.zero?
+      "#{price_tag(price / quantity)} / #{unit}".html_safe
     end
   end
 

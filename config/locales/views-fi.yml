@@ -271,6 +271,7 @@ fi:
     product_description: Tuotekuvaus
     product_documentation: Dokumentaatio
     product_properties: Ominaisuudet
+    pricing_sans_tax: Veroton hinta
     component_entries: Sisältyvät osat
     add_to_cart: Lisää koriin
     offer_requisites: Muista myös nämä

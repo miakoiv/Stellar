@@ -8,15 +8,15 @@
           %span.small= product.subtitle
         .description= product.description.html_safe
       .promotions
-        - product.active_promoted_items.each do |item|
+        - product.active_promoted_items(current_group).each do |item|
           .promotion= item.description
     .buy-now
-      - if can_see_pricing?
-        %p.price
+      %p.price.currency
+        - if can_see_pricing?
           - if product.has_variants?
-            = price_range product.price_range(nil)
+            = price_range *pricing.range_for_display(product)
           - else
-            = price_tag product.price_tag(nil)
+            = price_tag *pricing.for_display(product)
       - if can_shop? && may_shop_at?(@category) && product.purchasable?
         - if product.out_of_stock? && !product.back_orderable?
           %p.text-danger

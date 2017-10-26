@@ -246,6 +246,29 @@ $bg-tone:           #f6f6f6;
   }
 }
 
+/* Price context styles */
+.special-price {
+  @extend .text-danger;
+  font-weight: 500;
+}
+.regular-price {
+  display: inline-block;
+  position: relative;
+  margin-left: 0.5em;
+  color: $text-color;
+  font-weight: 300;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 2px solid $brand-primary;
+  }
+}
+
 
 /*
  * Products in product list
@@ -706,16 +729,15 @@ $bg-tone:           #f6f6f6;
     font-size: $font-size-large;
     color: $brand-danger;
   }
-  .unit-price {
-    @extend .text-muted;
-    display: inline-block;
-    margin-left: 0.5em;
-    font-size: $font-size-large;
-  }
 }
-.product-meta .retail-price {
-  margin-left: 1.5em;
-  text-decoration: line-through;
+.product-meta .unit-price {
+  @extend .text-muted;
+  display: block;
+  margin-left: 0.5em;
+  font-size: $font-size-base;
+}
+.product-meta .regular-price {
+  font-size: 50%;
 }
 .product-meta .order-form {
   margin-top: 20px;

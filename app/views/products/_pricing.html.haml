@@ -1,14 +1,10 @@
-- price = product.price_tag(nil)
-- unit_price = product.unit_price(product.price_tag_cents(nil))
-
-- if can_see_pricing? && price.present?
+- if can_see_pricing?
+  - final_price, regular_price = pricing.for_display(product)
   %p.price.currency
-    = icon('tag', price_tag(price))
-    - if current_store.b2b_sales?
-      %span.tax-rate= "(#{product.tax_category})"
-    - unless unit_price.nil?
-      %span.unit-price.currency
-        = unit_price_string(unit_price, product.base_unit)
-  - if product.promoted_price.present?
-    %p.retail-price.currency
-      = price_tag(product.retail_price)
+    = price_tag final_price, regular_price
+  - unless incl_tax?
+    .pull-right
+      = bootstrap_label(current_group, text: t('store.pricing_sans_tax'))
+  - if quantity_and_unit = product.pricing_quantity_and_unit
+    .unit-price
+      = unit_pricing_string(final_price, *quantity_and_unit)

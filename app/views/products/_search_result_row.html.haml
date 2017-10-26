@@ -12,6 +12,6 @@
     - if can_see_pricing?
       %td.price.currency.text-right
         - if product.has_variants?
-          = price_range product.price_range(nil)
+          = price_range *pricing.range_for_display(product)
         - else
-          = price_tag product.price_tag(nil)
+          = price_tag *pricing.for_display(product)

@@ -291,6 +291,7 @@ en:
     product_description: Description
     product_documentation: Documentation
     product_properties: Properties
+    pricing_sans_tax: Tax not included
     component_entries: Incl. components
     add_to_cart: Add to cart
     offer_requisites: Recommended purchases

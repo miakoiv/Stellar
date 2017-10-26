@@ -11,6 +11,10 @@ class AlternatePrice < ActiveRecord::Base
   belongs_to :group
 
   #---
+  def self.for(group)
+    find_by(group: group)
+  end
+
   def modifier
     group.present? && group.modifier || nil
   end

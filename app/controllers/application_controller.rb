@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :pricing, :incl_tax?, :can_see_stock?, :third_party?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -69,38 +69,50 @@ class ApplicationController < ActionController::Base
   end
 
   def current_group
-    @current_group ||= current_user.group(@current_store)
+    @current_group ||= current_user.group(current_store)
   end
 
   def current_site_name
-    @current_store.present? && @current_store.name
+    current_store.present? && current_store.name
   end
 
   def current_theme
-    @current_store.present? && @current_store.theme
+    current_store.present? && current_store.theme
   end
 
   def shopping_cart
-    @shopping_cart ||= current_user.shopping_cart(@current_store)
+    @shopping_cart ||= current_user.shopping_cart(current_store)
   end
 
   # Convenience method to check current user roles at current store.
   def current_user_has_role?(role)
-    current_user.has_cached_role?(role, @current_store)
+    current_user.has_cached_role?(role, current_store)
   end
 
   # Belonging to the default group is considered being a guest.
   def guest?
-    @guest ||= @current_group == @current_store.default_group
+    @guest ||= current_group == current_store.default_group
   end
 
   def can_shop?
-    @can_shop = current_user.can?(:shop, at: @current_store) if @can_shop.nil?
+    @can_shop = current_user.can?(:shop, at: current_store) if @can_shop.nil?
     @can_shop
   end
 
   def can_see_pricing?
     current_user_has_role?(:see_pricing)
+  end
+
+  # Pricing currently in effect is handled by appraisers
+  # initialized with the current group.
+  def pricing
+    @product_appraiser ||= Appraiser::Product.new(current_group)
+  end
+
+  # Convenience method to tell if the current group sees prices
+  # with or without tax.
+  def incl_tax?
+    @tax_included ||= current_group.price_tax_included?
   end
 
   def can_see_stock?
@@ -129,33 +141,33 @@ class ApplicationController < ActionController::Base
     # Unless given by param, locale is set from user preference first, then
     # from portal settings if any, and finally from store settings.
     def set_locale
-      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || @current_store.locale || I18n.default_locale
+      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
     end
 
     def set_header_and_footer
-      @header = @current_store.header
-      @footer = @current_store.footer
+      @header = current_store.header
+      @footer = current_store.footer
     end
 
     def set_categories
-      @live_categories = @current_store.categories.live.order(:lft)
+      @live_categories = current_store.categories.live.order(:lft)
       @categories = @live_categories.roots
     end
 
     def set_departments
-      @departments = @current_store.departments
+      @departments = current_store.departments
     end
 
     # Create a record for a guest user, put her in the default group,
     # grant her the baseline roles, and schedule a cleanup in two weeks.
     def create_guest_user
-      defaults = @current_store.guest_user_defaults(@current_hostname)
-      guest = User.new(defaults.merge(store: @current_store))
+      defaults = current_store.guest_user_defaults(current_hostname)
+      guest = User.new(defaults.merge(store: current_store))
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
-      guest.groups << @current_store.default_group
-      guest.grant(:see_pricing, @current_store)
-      guest.grant(:see_stock, @current_store)
+      guest.groups << current_store.default_group
+      guest.grant(:see_pricing, current_store)
+      guest.grant(:see_stock, current_store)
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
     end

@@ -172,9 +172,11 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+  # FIXME: the label should be figured out earlier, not by looking at
+  # the promotions yet again
   def label
-    promoted_item = product.best_promoted_item
-    promoted_item.present? && promoted_item.description || ''
+    #promoted_item = product.best_promoted_item
+    #promoted_item.present? && promoted_item.description || ''
   end
 
   def to_s

@@ -40,12 +40,6 @@ class Product < ActiveRecord::Base
   monetize :retail_price_cents, allow_nil: true
   monetize :promoted_price_cents, allow_nil: true
 
-  # Monetize aggregate methods.
-  monetize :price_cents, disable_validation: true
-  monetize :price_tag_cents, disable_validation: true
-  monetize :component_total_price_cents, disable_validation: true
-  monetize :unit_price_cents, disable_validation: true
-
   INLINE_SEARCH_RESULTS = 20
 
   # Additional sorting scopes through Reorderable.
@@ -101,7 +95,7 @@ class Product < ActiveRecord::Base
 
   has_many :iframes, dependent: :destroy
 
-  # Alternate retail prices in pricing groups.
+  # Alternate prices for different groups.
   has_many :alternate_prices, dependent: :destroy
 
   # Customer assets referring to this product.
@@ -263,64 +257,26 @@ class Product < ActiveRecord::Base
     product_properties.pluck(:property_id, :value).to_h
   end
 
-  def active_promoted_items
-    promoted_items.joins(:promotion).merge(Promotion.active)
+  def active_promoted_items(group)
+    promoted_items.joins(:promotion)
+      .merge(Promotion.active)
+      .where(promotions: {group_id: group})
   end
 
   # Finds the promoted item with the lowest quoted price.
-  def best_promoted_item
-    lowest = active_promoted_items.pluck(:price_cents).compact.min
+  def best_promoted_item(group)
+    lowest = active_promoted_items(group).pluck(:price_cents).compact.min
     return nil if lowest.nil?
-    active_promoted_items.find_by(price_cents: lowest)
+    active_promoted_items(group).find_by(price_cents: lowest)
   end
 
-  # Returns the retail price in given pricing group. If no group is specified,
-  # uses the promoted price, if any. Bundles sum their components if no price
-  # is specified.
-  def price_cents(pricing_group)
-    if bundle? && retail_price_cents.nil?
-      return component_total_price_cents(pricing_group)
-    end
-    if pricing_group.present?
-      return alternate_prices.find_by(pricing_group: pricing_group).try(:retail_price_cents) || retail_price_cents
-    end
-    promoted_price_cents || retail_price_cents
-  end
-
-  # Returns the display price in given pricing group. The price tag displays
-  # retail price, with components added on for composite products.
-  def price_tag_cents(pricing_group)
-    return price_cents(pricing_group) unless composite?
-    price_cents(pricing_group) + component_total_price_cents(pricing_group)
-  end
-
-  # Total price of components.
-  def component_total_price_cents(pricing_group)
-    component_entries.map { |entry| entry.quantity * (entry.component.price_cents(pricing_group) || 0) }.sum
-  end
-
-  # Calculates unit price from given total cents by finding a product
-  # property that declares unit pricing.
-  def unit_price_cents(total_cents)
-    return nil if total_cents.nil?
+  # Finds the quantity in base units for unit pricing.
+  def pricing_quantity_and_unit
     product_property = unit_pricing_property
     return nil if product_property.nil? || product_property.value.nil?
-    measure = product_property.value.tr(',', '.').to_f
-    return nil if measure == 0
-    total_cents / (measure * product_property.property.measurement_unit.factor)
-  end
-
-  # Returns the unit (if any) that unit pricing is based on.
-  def base_unit
-    product_property = unit_pricing_property
-    return nil if product_property.nil?
-    product_property.property.measurement_unit.pricing_base
-  end
-
-  # Returns the range of price tags across variants of a master product.
-  def price_range(pricing_group)
-    return nil unless has_variants?
-    variants.map { |variant| variant.price_tag(pricing_group) }.compact.minmax
+    unit = product_property.property.measurement_unit
+    quantity = product_property.value_f * unit.factor
+    [quantity, unit.pricing_base]
   end
 
   # Markup percentage from trade price to retail price.
@@ -532,23 +488,26 @@ class Product < ActiveRecord::Base
   end
 
   # Resets the live status of the product, according to these criteria:
-  # - retail price is not nil (or there are variants)
+  # - retail price is not nil (or product is a bundle or has variants)
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
   def reset_live_status!
-    update_columns(live: (retail_price_cents.present? || has_variants?) &&
-      (available_at.present? && !available_at.future?) &&
-      (deleted_at.nil? || deleted_at.future?))
+    update_columns(
+      live: (retail_price_cents.present? || bundle? || has_variants?) &&
+        (available_at.present? && !available_at.future?) &&
+        (deleted_at.nil? || deleted_at.future?)
+    )
     touch
     true
   end
 
   # Resets the promoted price of the product by looking for the lowest price
   # from currently active promotions. Resets to nil if no promotions are found.
+  # FIXME: this has been deprecated since the best promotion is now
+  # group dependent and the promoted price attribute is going away
   def reset_promoted_price!
-    lowest = best_promoted_item
-    update_columns(promoted_price_cents: lowest.present? ? lowest.price_cents : nil)
-    touch
+    #lowest = best_promoted_item
+    #update_columns(promoted_price_cents: lowest.present? ? lowest.price_cents : nil)
     true
   end
 

@@ -6,18 +6,20 @@
 class Price
   include Comparable
 
+  DEFAULT_TAX_RATE = 24.0
+
   attr_accessor :amount, :tax_included, :tax_rate
 
   #---
-  def initialize(attributes = {})
-    @amount = attributes[:amount]
-    @tax_included = attributes[:tax_included]
-    @tax_rate = attributes[:tax_rate]
+  def initialize(amount, tax_included = true, tax_rate = DEFAULT_TAX_RATE)
+    @amount       = amount
+    @tax_included = tax_included
+    @tax_rate     = tax_rate
   end
 
   # All-purpose zero, compatible with any taxation.
   def self.zero
-    new(amount: Money.zero, tax_included: nil, tax_rate: nil)
+    new(Money.zero)
   end
 
   #---
@@ -56,17 +58,22 @@ class Price
   # NOTE: Arithmetic operations are only meaningful between prices
   # with the exact same taxation.
   def +(other)
-    dup.tap { |this| this.amount += other.amount }
+    return Price.zero if amount.nil?
+    self.class.new(amount + other.amount, tax_included, tax_rate)
   end
 
   def *(x)
     return Price.zero if amount.nil?
-    dup.tap { |this| this.amount *= x }
+    self.class.new(amount * x, tax_included, tax_rate)
   end
 
   def /(x)
     raise ZeroDivisionError if x.zero?
     return Price.zero if amount.nil?
-    dup.tap { |this| this.amount /= x }
+    self.class.new(amount / x, tax_included, tax_rate)
+  end
+
+  def to_s
+    amount.to_s
   end
 end

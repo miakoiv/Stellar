@@ -10,13 +10,14 @@
         = product.title
         %span.small= product.subtitle
     .promotions
-      - product.active_promoted_items.each do |item|
+      - product.active_promoted_items(current_group).each do |item|
         .promotion= item.description
   .buy-now
-    - if product.has_variants?
-      %p.price= price_range product.price_range(nil)
-    - else
-      %p.price= price_tag product.price_tag(nil)
+    %p.price.currency
+      - if product.has_variants?
+        = price_range *pricing.range_for_display(product)
+      - else
+        = price_tag *pricing.for_display(product)
     - if current_store.present? && product.purchasable? && product.orderable?
       = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
         = hidden_field_tag :amount, 1
