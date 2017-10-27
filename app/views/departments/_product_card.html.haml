@@ -11,9 +11,10 @@
         - product.active_promoted_items(current_group).each do |item|
           .promotion= item.description
       .product-pricing
-        - if product.has_variants?
-          = price_range *pricing.range_for_display(product)
-        - else
-          = price_tag *pricing.for_display(product)
+        %p.price.currency
+          - if product.has_variants?
+            = price_range *pricing.range_for_display(product)
+          - else
+            = price_tag *pricing.for_display(product)
         %p.store
           = product.store
