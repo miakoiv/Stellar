@@ -21,13 +21,13 @@
                 data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             = f.text_field :deleted_at,
                 data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-            = f.text_area :memo, rows: 2
+            ~ f.text_area :memo, rows: 2
 
         = tab_pane 'product-text' do
           %fieldset{disabled: locked}
             = f.text_field :title, required: true
             = f.text_field :subtitle
-            = f.text_area :description
+            ~ f.text_area :description
 
         = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
@@ -75,7 +75,7 @@
                   = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
                   %span.input-group-addon mm
             = f.text_field :lead_time, help: t('.lead_time_help_html')
-            = f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
+            ~ f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 
         = tab_pane 'product-variants' do
           %fieldset{disabled: locked}

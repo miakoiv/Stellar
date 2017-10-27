@@ -38,7 +38,7 @@
               = f.text_field_without_bootstrap :billing_city, class: 'form-control'
           = f.select :billing_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
       %fieldset.gap{disabled: locked}
-        = f.text_area :notes, rows: 7
+        ~ f.text_area :notes, rows: 7
       - unless locked
         = f.form_group do
           = f.primary

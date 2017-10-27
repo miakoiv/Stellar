@@ -15,7 +15,7 @@
         = f.select :shipping_cost_product_id, current_store.products.internal.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
         = f.text_field :free_shipping_from, append: '€', class: 'text-right'
         = f.select :detail_page_id, current_store.pages.primary.map { |p| [p.to_s, p.id] }, {include_blank: blank, help: t('.detail_page_help')}, {class: 'selectize'}
-        = f.text_area :description
+        ~ f.text_area :description
       - unless locked
         %fieldset.actions
           = f.form_group do
