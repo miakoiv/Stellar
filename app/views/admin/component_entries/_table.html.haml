@@ -15,8 +15,8 @@
           = entry.component.subtitle
         %td.text-right.currency
           - if entry.component.retail_price.present?
-            = price_tag entry.component.retail_price
+            = money entry.component.retail_price
         %td.text-right= entry.quantity
         %td.text-right.currency
           - if entry.component.retail_price.present?
-            = price_tag entry.quantity * entry.component.retail_price
+            = money entry.quantity * entry.component.retail_price

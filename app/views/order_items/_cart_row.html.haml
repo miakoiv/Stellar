@@ -29,9 +29,9 @@
       = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right',
           disabled: order_item.is_subitem? || order_item.internal?
   %td.text-right.currency
-    = price_tag order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+    = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
-    = price_tag order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+    = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
     - unless order_item.is_subitem? || order_item.internal?
       = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

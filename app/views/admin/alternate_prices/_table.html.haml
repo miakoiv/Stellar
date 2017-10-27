@@ -10,6 +10,6 @@
     %tbody
       = content_tag_for :tr, product.alternate_prices do |alternate_price|
         %td= bootstrap_label(alternate_price.group)
-        %td.text-right.currency= price_tag alternate_price.price
+        %td.text-right.currency= money alternate_price.price
         %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
         %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)

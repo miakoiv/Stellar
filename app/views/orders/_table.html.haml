@@ -25,7 +25,7 @@
             %td= order.installation_at.present? ? l(order.installation_at) : nil
           %td.text-right= order.order_items_count
           %td.text-right.currency
-            = price_tag order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
+            = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
           %td.actions
             = link_to icon('info', t('actions.show')), order_path(order), class: 'btn btn-default btn-sm'
             - if current_user.can_update?(order, at: current_store)

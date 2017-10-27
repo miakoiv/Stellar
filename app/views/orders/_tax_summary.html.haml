@@ -11,20 +11,20 @@
       %tr
         %th.text-right= col(Order, :grand_total)
         %th.text-right.currency
-          = price_tag order.grand_total_sans_tax
+          = money order.grand_total_sans_tax
         %th.text-right.currency
-          = price_tag order.tax_total
+          = money order.tax_total
         %th.text-right.currency
-          = price_tag order.grand_total_with_tax
+          = money order.grand_total_with_tax
         %th
     %tbody
       - order.order_items.group_by(&:tax_rate).each do |tax_rate, items|
         %tr
           %td= number_to_percentage tax_rate, precision: 0
           %td.text-right.currency
-            = price_tag order.grand_total_sans_tax(items)
+            = money order.grand_total_sans_tax(items)
           %td.text-right.currency
-            = price_tag order.tax_total(items)
+            = money order.tax_total(items)
           %td.text-right.currency
-            = price_tag order.grand_total_with_tax(items)
+            = money order.grand_total_with_tax(items)
           %td

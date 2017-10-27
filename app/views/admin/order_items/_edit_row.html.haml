@@ -18,6 +18,6 @@
         = f.text_field :price, class: 'form-control text-right', placeholder: humanized_money(order_item.product.retail_price), tabindex: 2
         %span.input-group-addon €
   %td.text-right.currency
-    = price_tag order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+    = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
     = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
