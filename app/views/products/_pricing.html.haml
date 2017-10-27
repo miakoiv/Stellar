@@ -1,6 +1,7 @@
 - if can_see_pricing?
   - final_price, regular_price = pricing.for_display(product)
   %p.price.currency
+    = icon('tag', class: 'text-primary')
     = price_tag final_price, regular_price
   - unless incl_tax?
     .pull-right

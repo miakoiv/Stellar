@@ -35,8 +35,10 @@ module StoreHelper
     end
   end
 
+  # Displays a fancy price tag with a single final price,
+  # or dual special/regular prices.
   def price_tag(final_price, regular_price = nil)
-    content_tag(:span, class: regular_price ? 'special-price' : 'final-price') do
+    content_tag(:span, class: regular_price && 'special-price') do
       concat fancy_price(final_price)
       if regular_price
         concat content_tag(:span, class: 'regular-price') { fancy_price(regular_price) }
@@ -44,8 +46,9 @@ module StoreHelper
     end
   end
 
+  # Displays a fancy price range from two final prices.
   def price_range(from, to)
-    content_tag(:span, class: 'final-price price-range') do
+    content_tag(:span, class: 'price-range') do
       fancy_price_range(from, to)
     end
   end
