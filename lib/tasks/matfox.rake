@@ -159,7 +159,7 @@ namespace :matfox do
         product[:quantity_on_hand],
         product[:quantity_reserved],
         product[:quantity_pending],
-        product[:cost_price]
+        product[:trade_price]
       )
     end
   end
