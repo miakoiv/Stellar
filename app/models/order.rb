@@ -5,10 +5,6 @@ class Order < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Adjustable
-  monetize :balance_cents, disable_validation: true
-  monetize :grand_total_sans_tax_cents, :tax_total_cents, :grand_total_with_tax_cents, disable_validation: true
-  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
-  monetize :grand_total_for_export_cents, disable_validation: true
 
   #---
   belongs_to :store
@@ -144,18 +140,28 @@ class Order < ActiveRecord::Base
 
   # Inserts amount of product to this order in the context of given
   # parent item. Bundles are inserted as components right away.
-  # Pricing is given as an Appraiser::Product object.
-  def insert(product, amount, pricing, parent_item = nil)
+  def insert(product, amount, group = nil, parent_item = nil)
     if product.bundle?
-      insert_components(product, amount, pricing, parent_item)
+      insert_components(product, amount, group, parent_item)
     else
-      insert_single(product, amount, pricing, parent_item, product.composite?)
+      insert_single(product, amount, group, parent_item, product.composite?)
+    end
+  end
+
+  # Inserts the component products of given product to this order as
+  # subitems of the given parent item.
+  def insert_components(product, amount, group, parent_item)
+    product.component_entries.each do |entry|
+      insert(entry.component, amount * entry.quantity, group, parent_item)
     end
   end
 
   # Inserts a single product to this order, optionally with separate components.
-  def insert_single(product, amount, pricing, parent_item, separate_components)
+  # Pricing is according to order source group if not specified.
+  def insert_single(product, amount, group, parent_item, separate_components)
+    pricing = Appraiser::Product.new(group || source)
     final_price = pricing.for_order(product)
+    label = product.best_promoted_item(group).try(:description)
     order_item = order_items.create_with(
       amount: 0,
       priority: order_items_count
@@ -164,30 +170,22 @@ class Order < ActiveRecord::Base
       amount: order_item.amount + amount,
       price: final_price.amount,
       tax_rate: final_price.tax_rate,
-      price_includes_tax: final_price.tax_included
+      price_includes_tax: final_price.tax_included,
+      label: label || ''
     )
     if separate_components
-      insert_components(product, amount, pricing, order_item)
+      insert_components(product, amount, group, order_item)
     end
     order_item
-  end
-
-  # Inserts the component products of given product to this order as
-  # subitems of the given parent item.
-  def insert_components(product, amount, pricing, parent_item)
-    product.component_entries.each do |entry|
-      insert(entry.component, amount * entry.quantity, pricing, parent_item)
-    end
   end
 
   # Copies the contents of this order to another order by inserting
   # the top level real items. Pricing is according to the source group
   # of the target order.
   def copy_items_to(another_order)
-    pricing = Appraiser::Product.new(another_order.source)
     transaction do
       order_items.top_level.real.each do |item|
-        another_order.insert(item.product, item.amount, pricing)
+        another_order.insert(item.product, item.amount, another_order.source)
       end
     end
   end
@@ -423,38 +421,38 @@ class Order < ActiveRecord::Base
     order_type.present? && order_type.has_payment?
   end
 
-  def balance_cents
-    grand_total_with_tax_cents - payments.sum(:amount_cents)
+  def balance
+    grand_total_with_tax - payments.sum(:amount)
   end
 
   # Grand total for the given items (or whole order), without tax.
-  def grand_total_sans_tax_cents(items = order_items)
-    items.map { |item| item.grand_total_sans_tax_cents || 0 }.sum + adjustments_sans_tax_cents
+  def grand_total_sans_tax(items = order_items)
+    items.map { |item| item.grand_total_sans_tax || 0 }.sum + adjustments_sans_tax
   end
 
   # Same as above, with tax.
-  def grand_total_with_tax_cents(items = order_items)
-    items.map { |item| item.grand_total_with_tax_cents || 0 }.sum + adjustments_with_tax_cents
+  def grand_total_with_tax(items = order_items)
+    items.map { |item| item.grand_total_with_tax || 0 }.sum + adjustments_with_tax
   end
 
   # Total tax for the given items.
-  def tax_total_cents(items = order_items)
-    items.map { |item| item.tax_subtotal_cents || 0 }.sum
+  def tax_total(items = order_items)
+    items.map { |item| item.tax_subtotal || 0 }.sum
   end
 
-  def adjustments_sans_tax_cents
-    adjustments.map { |a| a.amount_sans_tax_cents || 0 }.sum
+  def adjustments_sans_tax
+    adjustments.map { |a| a.amount_sans_tax || 0 }.sum
   end
 
-  def adjustments_with_tax_cents
-    adjustments.map { |a| a.amount_with_tax_cents || 0 }.sum
+  def adjustments_with_tax
+    adjustments.map { |a| a.amount_with_tax || 0 }.sum
   end
 
   # Grand total for exported orders.
-  def grand_total_for_export_cents(items = order_items)
+  def grand_total_for_export(items = order_items)
     items.map { |item|
-      (item.subtotal_for_export_cents || 0) + item.adjustments_sans_tax_cents
-    }.sum + adjustments_sans_tax_cents
+      (item.subtotal_for_export || 0) + item.adjustments_sans_tax
+    }.sum + adjustments_sans_tax
   end
 
   def summary

@@ -7,11 +7,6 @@ class OrderItem < ActiveRecord::Base
   include Adjustable
   include Reorderable
   monetize :price_cents, allow_nil: true
-  monetize :price_sans_tax_cents, :tax_cents, :price_with_tax_cents, disable_validation: true
-  monetize :subtotal_sans_tax_cents, :tax_subtotal_cents, :subtotal_with_tax_cents, disable_validation: true
-  monetize :grand_total_sans_tax_cents, :grand_total_with_tax_cents, disable_validation: true
-  monetize :adjustments_sans_tax_cents, :adjustments_with_tax_cents, disable_validation: true
-  monetize :price_for_export_cents, :subtotal_for_export_cents, disable_validation: true
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
@@ -63,77 +58,77 @@ class OrderItem < ActiveRecord::Base
   end
 
   # Price without tax deducts the tax portion if it's included in the attribute.
-  def price_sans_tax_cents
-    return nil if price_cents.nil?
+  def price_sans_tax
+    return nil if price.nil?
     if price_includes_tax?
-      price_cents - tax_cents
+      price - tax
     else
-      price_cents
+      price
     end
   end
 
   # Tax is calculated from the price attribute, which may include tax.
-  def tax_cents
-    return nil if price_cents.nil?
+  def tax
+    return nil if price.nil?
     if price_includes_tax?
-      price_cents * tax_rate / (tax_rate + 100)
+      price * tax_rate / (tax_rate + 100)
     else
-      price_cents * tax_rate / 100
+      price * tax_rate / 100
     end
   end
 
   # Price with tax adds the tax portion if it wasn't included.
-  def price_with_tax_cents
-    return nil if price_cents.nil?
+  def price_with_tax
+    return nil if price.nil?
     if price_includes_tax?
-      price_cents
+      price
     else
-      price_sans_tax_cents + tax_cents
+      price_sans_tax + tax
     end
   end
 
-  def subtotal_sans_tax_cents
-    return nil if price_cents.nil?
-    amount * price_sans_tax_cents
+  def subtotal_sans_tax
+    return nil if price.nil?
+    amount * price_sans_tax
   end
 
-  def tax_subtotal_cents
-    return nil if price_cents.nil?
-    amount * tax_cents
+  def tax_subtotal
+    return nil if price.nil?
+    amount * tax
   end
 
-  def subtotal_with_tax_cents
-    return nil if price_cents.nil?
-    amount * price_with_tax_cents
+  def subtotal_with_tax
+    return nil if price.nil?
+    amount * price_with_tax
   end
 
-  def adjustments_sans_tax_cents
-    adjustments.map(&:amount_sans_tax_cents).sum
+  def adjustments_sans_tax
+    adjustments.map(&:amount_sans_tax).sum
   end
 
-  def adjustments_with_tax_cents
-    adjustments.map(&:amount_with_tax_cents).sum
+  def adjustments_with_tax
+    adjustments.map(&:amount_with_tax).sum
   end
 
   # Grand totals include adjustments.
-  def grand_total_sans_tax_cents
-    (subtotal_sans_tax_cents || 0) + adjustments_sans_tax_cents
+  def grand_total_sans_tax
+    (subtotal_sans_tax || 0) + adjustments_sans_tax
   end
 
-  def grand_total_with_tax_cents
-    (subtotal_with_tax_cents || 0) + adjustments_with_tax_cents
+  def grand_total_with_tax
+    (subtotal_with_tax || 0) + adjustments_with_tax
   end
 
   # Price for exported orders, always without tax,
   # vendor products are listed without prices.
-  def price_for_export_cents
+  def price_for_export
     return nil if product.vendor.present?
-    price_sans_tax_cents
+    price_sans_tax
   end
 
-  def subtotal_for_export_cents
+  def subtotal_for_export
     return nil if product.vendor.present?
-    subtotal_sans_tax_cents
+    subtotal_sans_tax
   end
 
   # If ordered amount exceeds availability, this item gets its lead time
@@ -170,13 +165,6 @@ class OrderItem < ActiveRecord::Base
     else
       product_code
     end
-  end
-
-  # FIXME: the label should be figured out earlier, not by looking at
-  # the promotions yet again
-  def label
-    #promoted_item = product.best_promoted_item
-    #promoted_item.present? && promoted_item.description || ''
   end
 
   def to_s
