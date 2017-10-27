@@ -257,17 +257,19 @@ class Product < ActiveRecord::Base
     product_properties.pluck(:property_id, :value).to_h
   end
 
-  def active_promoted_items(group)
+  def live_promoted_items(group)
     promoted_items.joins(:promotion)
-      .merge(Promotion.active)
+      .merge(Promotion.live)
       .where(promotions: {group_id: group})
   end
 
   # Finds the promoted item with the lowest quoted price.
   def best_promoted_item(group)
-    lowest = active_promoted_items(group).pluck(:price_cents).compact.min
-    return nil if lowest.nil?
-    active_promoted_items(group).find_by(price_cents: lowest)
+    promoted_items.joins(:promotion)
+      .merge(Promotion.live)
+      .where(promotions: {group_id: group})
+      .order(:price_cents)
+      .first
   end
 
   # Finds the quantity in base units for unit pricing.
@@ -501,22 +503,9 @@ class Product < ActiveRecord::Base
     true
   end
 
-  # Resets the promoted price of the product by looking for the lowest price
-  # from currently active promotions. Resets to nil if no promotions are found.
-  # FIXME: this has been deprecated since the best promotion is now
-  # group dependent and the promoted price attribute is going away
-  def reset_promoted_price!
-    #lowest = best_promoted_item
-    #update_columns(promoted_price_cents: lowest.present? ? lowest.price_cents : nil)
-    true
-  end
-
   protected
     def reset_itself!(context)
-      if persisted?
-        reset_live_status!
-        reset_promoted_price!
-      end
+      reset_live_status! if persisted?
     end
 
     def touch_categories

@@ -1,2 +1,2 @@
 = f.hidden_field :resource_type, value: 'Promotion'
-= f.select :resource_id, current_store.promotions.active.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
+= f.select :resource_id, current_store.promotions.live.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}

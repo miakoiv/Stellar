@@ -10,7 +10,7 @@
         = product.title
         %span.small= product.subtitle
     .promotions
-      - product.active_promoted_items(current_group).each do |item|
+      - product.live_promoted_items(current_group).each do |item|
         .promotion= item.description
   .buy-now
     %p.price.currency

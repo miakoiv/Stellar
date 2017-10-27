@@ -23,15 +23,13 @@ class Promotion < ActiveRecord::Base
 
   has_one :page, as: :resource, dependent: :destroy
 
-  scope :active, -> { where '(promotions.first_date IS NULL OR promotions.first_date <= :today) AND (promotions.last_date IS NULL OR promotions.last_date >= :today)', today: Date.current }
+  scope :live, -> { where(live: true) }
 
   #---
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
 
-  after_save :schedule_product_reset
-  after_save :reset_products
-  around_destroy :clean_up
+  after_save :reset_live_status!
 
   #---
   # These attributes allow adding products and categories en masse
@@ -75,16 +73,6 @@ class Promotion < ActiveRecord::Base
     (last_date.nil? || !last_date.past?)
   end
 
-  # Exact time the promotion is activated.
-  def activate_at
-    first_date.present? && first_date.midnight
-  end
-
-  # Exact time the promotion is deactivated.
-  def deactivate_at
-    last_date.present? && last_date.tomorrow.midnight
-  end
-
   def slugger
     [:name, [:name, -> { store.name }]]
   end
@@ -97,37 +85,15 @@ class Promotion < ActiveRecord::Base
     name
   end
 
+  def reset_live_status!
+    update_columns(live: active?)
+    touch
+    true
+  end
+
   private
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
-    end
-
-    # Schedules PromotionActivationJob to reset promoted prices
-    # when the promotion is set to activate or deactivate.
-    def schedule_product_reset
-      if activate_at && activate_at.future?
-        PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
-      end
-      if deactivate_at && deactivate_at.future?
-        PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
-      end
-    end
-
-    # Called after save, all affected products have their promoted price reset.
-    def reset_products
-      products.each do |product|
-        product.reset_promoted_price!
-      end
-    end
-
-    # Called around destroy, grab the affected products and reset their
-    # promoted prices after the promotion is gone.
-    def clean_up
-      affected_products = products
-      yield
-      affected_products.each do |product|
-        product.reset_promoted_price!
-      end
     end
 end

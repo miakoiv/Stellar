@@ -2,7 +2,7 @@
   .row
     .col-sm-12
       = f.hidden_field :resource_type, value: 'Promotion'
-      = f.select :resource_id, current_store.promotions.active.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
+      = f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
   .row
     .col-sm-6
       .form-group

@@ -147,9 +147,9 @@ class StoreController < ApplicationController
       end
     end
 
-    # Find promotion from active promotions by friendly id.
+    # Find promotion from live promotions by friendly id.
     def find_promotion
-      @promotion = current_store.promotions.active.friendly.find(params[:promotion_id])
+      @promotion = current_store.promotions.live.friendly.find(params[:promotion_id])
     end
 
     # Find product by friendly id in `product_id`, redirecting to its

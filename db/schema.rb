@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020065250) do
+ActiveRecord::Schema.define(version: 20171027080346) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -491,7 +491,6 @@ ActiveRecord::Schema.define(version: 20171020065250) do
     t.integer  "trade_price_cents",       limit: 4
     t.date     "trade_price_modified_at"
     t.integer  "retail_price_cents",      limit: 4
-    t.integer  "promoted_price_cents",    limit: 4
     t.integer  "tax_category_id",         limit: 4,                     null: false
     t.integer  "priority",                limit: 4,     default: 0,     null: false
     t.date     "available_at"
@@ -528,6 +527,7 @@ ActiveRecord::Schema.define(version: 20171020065250) do
     t.datetime "updated_at",                                                     null: false
   end
 
+  add_index "promoted_items", ["price_cents"], name: "index_promoted_items_on_price_cents", using: :btree
   add_index "promoted_items", ["product_id"], name: "index_promoted_items_on_product_id", using: :btree
   add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
 
@@ -546,15 +546,16 @@ ActiveRecord::Schema.define(version: 20171020065250) do
   add_index "promotion_handlers", ["promotion_id"], name: "index_promotion_handlers_on_promotion_id", using: :btree
 
   create_table "promotions", force: :cascade do |t|
-    t.integer  "store_id",               limit: 4,   null: false
-    t.integer  "group_id",               limit: 4,   null: false
-    t.string   "promotion_handler_type", limit: 255, null: false
+    t.integer  "store_id",               limit: 4,                   null: false
+    t.integer  "group_id",               limit: 4,                   null: false
+    t.string   "promotion_handler_type", limit: 255,                 null: false
+    t.boolean  "live",                               default: false, null: false
     t.string   "name",                   limit: 255
-    t.string   "slug",                   limit: 255, null: false
+    t.string   "slug",                   limit: 255,                 null: false
     t.date     "first_date"
     t.date     "last_date"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "promotions", ["group_id"], name: "index_promotions_on_group_id", using: :btree

@@ -279,7 +279,7 @@ class Order < ActiveRecord::Base
     adjustments.destroy_all
     order_items.each { |order_item| order_item.adjustments.destroy_all }
 
-    store.promotions.active.each do |promotion|
+    store.promotions.live.each do |promotion|
       promotion.apply!(self)
     end
   end

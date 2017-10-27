@@ -18,7 +18,7 @@
 
     %tbody
       - @promotions.each do |promotion|
-        = content_tag_for :tr, promotion, class: promotion.active? ? nil : 'warning text-warning' do
+        = content_tag_for :tr, promotion, class: promotion.live? ? nil : 'warning text-warning' do
           %td= bootstrap_label(promotion.group)
           %td= promotion.name
           %td= title(promotion.promotion_handler)
@@ -26,7 +26,7 @@
             - if promotion.page.present?
               = icon('file-o', title: col(Promotion, :has_page), data: {toggle: 'tooltip'})
           %td
-            - if promotion.active?
+            - if promotion.live?
               = promotion.first_date.present? ? l(promotion.first_date) : nil
             - else
               = icon('warning', promotion.first_date.present? ? l(promotion.first_date) : nil, data: {toggle: 'tooltip'}, title: col(Promotion, :not_active))
