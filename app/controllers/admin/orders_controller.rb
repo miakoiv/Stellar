@@ -82,7 +82,6 @@ class Admin::OrdersController < ApplicationController
   def forward
     authorize_action_for Order, at: current_store
     @order.forward_to(shopping_cart)
-    shopping_cart.reappraise!(nil)
     shopping_cart.recalculate!
 
     redirect_to cart_path, notice: t('.notice', order: @order)

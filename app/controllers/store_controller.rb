@@ -115,7 +115,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @product = current_store.products.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
-    @order.insert(@product, amount, nil)
+    @order.insert(@product, amount, pricing)
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)

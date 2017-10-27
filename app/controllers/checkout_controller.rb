@@ -14,12 +14,9 @@ class CheckoutController < ApplicationController
 
   # POST /checkout/1/order_type/2.js
   # Setting an order type allows the user to proceed to checkout.
-  # The order type tells us how to reappraise the order with user specific
-  # pricing.
   def order_type
     @order.order_type = current_store.order_types.find(params[:order_type_id])
     @order.save!(validate: false)
-    @order.reappraise!(nil)
   end
 
   # GET /checkout/1

@@ -142,11 +142,10 @@ class Order < ActiveRecord::Base
     !!concluded_at.present?
   end
 
-  # Inserts amount of product to this order in the context of given pricing
-  # group and parent item. Bundles are inserted as components right away.
-  # Pricing is initially for retail. Depending on the user's level,
-  # different pricing may be applied at checkout by Order#reappraise!
-  def insert(product, amount, pricing = nil, parent_item = nil)
+  # Inserts amount of product to this order in the context of given
+  # parent item. Bundles are inserted as components right away.
+  # Pricing is given as an Appraiser::Product object.
+  def insert(product, amount, pricing, parent_item = nil)
     if product.bundle?
       insert_components(product, amount, pricing, parent_item)
     else
@@ -156,16 +155,16 @@ class Order < ActiveRecord::Base
 
   # Inserts a single product to this order, optionally with separate components.
   def insert_single(product, amount, pricing, parent_item, separate_components)
-    price_cents = product.price_cents(pricing)
+    final_price = pricing.for_order(product)
     order_item = order_items.create_with(
       amount: 0,
       priority: order_items_count
     ).find_or_create_by(product: product, parent_item: parent_item)
     order_item.update!(
       amount: order_item.amount + amount,
-      price_cents: price_cents,
-      tax_rate: product.tax_category.rate,
-      price_includes_tax: product.tax_category.included_in_retail
+      price: final_price.amount,
+      tax_rate: final_price.tax_rate,
+      price_includes_tax: final_price.tax_included
     )
     if separate_components
       insert_components(product, amount, pricing, order_item)
@@ -182,11 +181,13 @@ class Order < ActiveRecord::Base
   end
 
   # Copies the contents of this order to another order by inserting
-  # the top level real items.
+  # the top level real items. Pricing is according to the source group
+  # of the target order.
   def copy_items_to(another_order)
+    pricing = Appraiser::Product.new(another_order.source)
     transaction do
       order_items.top_level.real.each do |item|
-        another_order.insert(item.product, item.amount)
+        another_order.insert(item.product, item.amount, pricing)
       end
     end
   end
@@ -216,30 +217,8 @@ class Order < ActiveRecord::Base
     )
   end
 
-  # Reappraising the order modifies the order item prices according to
-  # given pricing group. This is called whenever the order type changes.
-  def reappraise!(pricing_group)
-    user_specific = order_type.present? && !is_quote?
-    order_items.each do |order_item|
-      next if order_item.product.internal?
-      if user_specific
-        order_item.update(
-          price_cents: user.price_for_cents(order_item.product, pricing_group),
-          price_includes_tax: user.price_includes_tax?(order_item.product),
-          label: order_item.label
-        )
-      else
-        order_item.update(
-          price_cents: order_item.product.price_cents(pricing_group),
-          price_includes_tax: order_item.product.tax_category.included_in_retail?,
-          label: nil
-        )
-      end
-    end
-  end
-
-  # Recalculate things that may take some heavy lifting. This should be called
-  # when the contents of the order have changed.
+  # Recalculates things that may take some heavy lifting.
+  # This should be called when the contents of the order have changed.
   def recalculate!
     apply_promotions!
     reload
