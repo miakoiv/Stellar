@@ -59,47 +59,32 @@ class OrderItem < ActiveRecord::Base
 
   # Price without tax deducts the tax portion if it's included in the attribute.
   def price_sans_tax
-    return nil if price.nil?
-    if price_includes_tax?
-      price - tax
-    else
-      price
-    end
+    price_as_price.sans_tax
   end
 
   # Tax is calculated from the price attribute, which may include tax.
   def tax
-    return nil if price.nil?
-    if price_includes_tax?
-      price * tax_rate / (tax_rate + 100)
-    else
-      price * tax_rate / 100
-    end
+    price_as_price.tax
   end
 
   # Price with tax adds the tax portion if it wasn't included.
   def price_with_tax
-    return nil if price.nil?
-    if price_includes_tax?
-      price
-    else
-      price_sans_tax + tax
-    end
+    price_as_price.with_tax
   end
 
   def subtotal_sans_tax
     return nil if price.nil?
-    amount * price_sans_tax
+    price_as_price.sans_tax * amount
   end
 
   def tax_subtotal
     return nil if price.nil?
-    amount * tax
+    price_as_price.tax * amount
   end
 
   def subtotal_with_tax
     return nil if price.nil?
-    amount * price_with_tax
+    price_as_price.with_tax * amount
   end
 
   def adjustments_sans_tax
@@ -170,4 +155,10 @@ class OrderItem < ActiveRecord::Base
   def to_s
     product.title
   end
+
+  private
+    # Price represented as a Price object for tax calculations.
+    def price_as_price
+      @price_as_price ||= Price.new(price, price_includes_tax?, tax_rate)
+    end
 end
