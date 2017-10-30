@@ -77,6 +77,7 @@ class Order < ActiveRecord::Base
   attr_accessor :product_ids_string
 
   #---
+  before_save :set_tax_inclusion
   before_save :copy_billing_address, unless: :has_billing_address?
 
   # Approve the order when approved_at first gets a value.
@@ -106,12 +107,6 @@ class Order < ActiveRecord::Base
   # Order destination depends on the order type since there may be
   # multiple order types to choose from at checkout.
   delegate :destination, to: :order_type
-
-  # Tax inclusion ultimately comes from the order type once that
-  # has been set. Meanwhile look at the source group setting.
-  def includes_tax?
-    order_type.present? && order_type.includes_tax? || source.price_tax_included?
-  end
 
   # Allow adding and editing order items on quotations only.
   def editable_items?
@@ -531,6 +526,10 @@ class Order < ActiveRecord::Base
   end
 
   private
+    def set_tax_inclusion
+      self.includes_tax = source.price_tax_included?
+    end
+
     def copy_billing_address
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
