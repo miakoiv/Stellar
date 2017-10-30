@@ -267,6 +267,7 @@ class Product < ActiveRecord::Base
     promoted_items.joins(:promotion)
       .merge(Promotion.live)
       .where(promotions: {group_id: group})
+      .where.not(price_cents: nil)
       .order(:price_cents)
       .first
   end
