@@ -56,13 +56,19 @@ module StoreHelper
 
   def unit_pricing_string(price, quantity, unit)
     unless quantity.zero?
-      "#{price_tag(price / quantity)} / #{unit}".html_safe
+      capture do
+        concat price_tag(price / quantity)
+        concat '/'
+        concat unit
+      end
     end
   end
 
   def property_string(product_properties)
-    product_properties.map { |pp|
-      content_tag(:span, pp.value, class: 'label label-default')
-    }.join(' ').html_safe
+    capture do
+      product_properties.each do |pp|
+        concat content_tag(:span, pp.value, class: 'label label-default')
+      end
+    end
   end
 end
