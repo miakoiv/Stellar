@@ -7,6 +7,7 @@ module StoreHelper
   end
 
   def money(amount)
+    return nil if amount.nil?
     humanized_money_with_symbol(amount)
   end
 
