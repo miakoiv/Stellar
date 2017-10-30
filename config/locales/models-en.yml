@@ -266,6 +266,7 @@ en:
         workflow: Workflow
         source_id: From
         destination_id: To
+        includes_tax: Orders include tax
         incoming: Incoming orders
         outgoing: Outgoing orders
         has_shipping: Shipping

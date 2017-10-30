@@ -266,6 +266,7 @@ fi:
         workflow: Työnkulku
         source_id: Mistä
         destination_id: Minne
+        includes_tax: Tilaukset verollisena
         incoming: Saapuvat tilaukset
         outgoing: Lähtevät tilaukset
         has_shipping: Toimitettava
