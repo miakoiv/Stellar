@@ -87,7 +87,9 @@ module Appraiser
       # Final price is used for the sum, therefore bundle and composite
       # prices may change due to group pricing or promotions.
       def component_total_price(product)
-        product.component_entries.map { |entry|
+        entries = product.component_entries
+        return Price.zero if entries.empty?
+        entries.map { |entry|
           final_price(entry.component) * entry.quantity
         }.sum
       end
