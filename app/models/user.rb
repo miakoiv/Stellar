@@ -74,10 +74,6 @@ class User < ActiveRecord::Base
     order_types.merge(Order.complete).where(orders: {store: store}).uniq
   end
 
-  def self_and_peers(store)
-    store.users.where(level: User.levels[level])
-  end
-
   # Roles that a user manager may grant to other users. The superuser
   # may promote others to superusers.
   def grantable_roles
