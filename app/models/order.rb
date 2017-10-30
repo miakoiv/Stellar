@@ -528,6 +528,7 @@ class Order < ActiveRecord::Base
   private
     def set_tax_inclusion
       self.includes_tax = source.price_tax_included?
+      true
     end
 
     def copy_billing_address
