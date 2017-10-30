@@ -38,7 +38,6 @@ class Product < ActiveRecord::Base
   monetize :cost_price_cents, allow_nil: true
   monetize :trade_price_cents, allow_nil: true
   monetize :retail_price_cents, allow_nil: true
-  monetize :promoted_price_cents, allow_nil: true
 
   INLINE_SEARCH_RESULTS = 20
 
