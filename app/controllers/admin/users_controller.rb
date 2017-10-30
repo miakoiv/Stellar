@@ -112,8 +112,7 @@ class Admin::UsersController < ApplicationController
         :billing_city, :billing_country_code,
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :locale, :password, :password_confirmation,
-        :level
+        :locale, :password, :password_confirmation
       )
     end
 

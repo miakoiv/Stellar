@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable,
     request_keys: [:host]
 
-  enum level: {guest: -1, customer: 0, reseller: 1, manufacturer: 2, vendor: 3}
-
   #---
   # FIXME: Remove this association only after migrating to a state
   # where users don't require a store association anymore.

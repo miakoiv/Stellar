@@ -374,7 +374,6 @@ es:
         personal: Información personal
         addresses: Direcciones
         name: Nombres
-        level: Grupos
         roles: Roles
         category_ids: Categorias permitidas
         locale: Idioma

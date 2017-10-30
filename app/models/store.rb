@@ -144,13 +144,12 @@ class Store < ActiveRecord::Base
   end
 
   #---
-  # Guest users are assigned a random name and put in the guest level.
+  # Guest users are assigned a random name and email.
   def guest_user_defaults(hostname)
     name = "#{Time.now.to_i}#{rand(100)}"
     {
       name: name,
-      email: "#{name}@#{hostname.fqdn}",
-      level: User.levels[:guest]
+      email: "#{name}@#{hostname.fqdn}"
     }
   end
 

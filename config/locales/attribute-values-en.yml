@@ -130,10 +130,3 @@ en:
           'align-top': top
           'align-middle': middle
           'align-bottom': bottom
-      user:
-        level:
-          guest: Guest
-          customer: Customer
-          reseller: Reseller
-          manufacturer: Manufacturer
-          vendor: Supplier

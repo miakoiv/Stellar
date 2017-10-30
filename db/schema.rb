@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030103550) do
+ActiveRecord::Schema.define(version: 20171030125519) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -684,7 +684,6 @@ ActiveRecord::Schema.define(version: 20171030103550) do
 
   create_table "users", force: :cascade do |t|
     t.integer  "store_id",               limit: 4,                null: false
-    t.integer  "level",                  limit: 4,   default: 0,  null: false
     t.string   "name",                   limit: 255,              null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255

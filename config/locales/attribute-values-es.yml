@@ -59,10 +59,3 @@ es:
           inventory_manage: Inventario
           store_admin: Administrador de tienda
           superuser: Super Usuario
-      user:
-        level:
-          guest: Invitado
-          customer: Cliente
-          reseller: Distribuidor
-          manufacturer: Fabricante
-          vendor: Suministrador

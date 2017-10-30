@@ -130,10 +130,3 @@ fi:
           'align-top': ylös
           'align-middle': keskelle
           'align-bottom': alas
-      user:
-        level:
-          guest: Vieras
-          customer: Asiakas
-          reseller: Jälleenmyyjä
-          manufacturer: Valmistaja
-          vendor: Tavarantoimittaja
