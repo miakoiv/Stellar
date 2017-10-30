@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030130944) do
+ActiveRecord::Schema.define(version: 20171030143450) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -348,22 +348,20 @@ ActiveRecord::Schema.define(version: 20171030130944) do
   add_index "order_report_rows", ["user_id"], name: "index_order_report_rows_on_user_id", using: :btree
 
   create_table "order_types", force: :cascade do |t|
-    t.integer  "store_id",          limit: 4
-    t.integer  "source_id",         limit: 4,                   null: false
-    t.integer  "destination_id",    limit: 4,                   null: false
-    t.string   "name",              limit: 255
-    t.string   "label",             limit: 255
-    t.integer  "source_level",      limit: 4
-    t.integer  "destination_level", limit: 4
-    t.boolean  "has_shipping",                  default: false, null: false
-    t.boolean  "has_installation",              default: false, null: false
-    t.boolean  "has_payment",                   default: false, null: false
-    t.string   "payment_gateway",   limit: 255
-    t.boolean  "is_rfq",                        default: false, null: false
-    t.boolean  "is_quote",                      default: false, null: false
-    t.boolean  "is_exported",                   default: false, null: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer  "store_id",         limit: 4
+    t.integer  "source_id",        limit: 4,                   null: false
+    t.integer  "destination_id",   limit: 4,                   null: false
+    t.string   "name",             limit: 255
+    t.string   "label",            limit: 255
+    t.boolean  "has_shipping",                 default: false, null: false
+    t.boolean  "has_installation",             default: false, null: false
+    t.boolean  "has_payment",                  default: false, null: false
+    t.string   "payment_gateway",  limit: 255
+    t.boolean  "is_rfq",                       default: false, null: false
+    t.boolean  "is_quote",                     default: false, null: false
+    t.boolean  "is_exported",                  default: false, null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
   add_index "order_types", ["destination_id"], name: "index_order_types_on_destination_id", using: :btree
