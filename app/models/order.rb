@@ -16,7 +16,6 @@ class Order < ActiveRecord::Base
 
   belongs_to :order_type
   delegate :is_rfq?, :is_quote?, to: :order_type
-  delegate :includes_tax?, to: :order_type
   delegate :payment_gateway_class, to: :order_type
 
   has_many :order_items, dependent: :destroy, inverse_of: :order
@@ -107,6 +106,12 @@ class Order < ActiveRecord::Base
   # Order destination depends on the order type since there may be
   # multiple order types to choose from at checkout.
   delegate :destination, to: :order_type
+
+  # Tax inclusion ultimately comes from the order type once that
+  # has been set. Meanwhile look at the source group setting.
+  def includes_tax?
+    order_type.present? && order_type.includes_tax? || source.price_tax_included?
+  end
 
   # Allow adding and editing order items on quotations only.
   def editable_items?
