@@ -91,6 +91,10 @@ class OrderItem < ActiveRecord::Base
     adjustments.map(&:amount_sans_tax).sum
   end
 
+  def adjustments_tax
+    adjustments.map(&:tax).sum
+  end
+
   def adjustments_with_tax
     adjustments.map(&:amount_with_tax).sum
   end
@@ -98,6 +102,10 @@ class OrderItem < ActiveRecord::Base
   # Grand totals include adjustments.
   def grand_total_sans_tax
     (subtotal_sans_tax || 0) + adjustments_sans_tax
+  end
+
+  def tax_total
+    (tax_subtotal || 0) + adjustments_tax
   end
 
   def grand_total_with_tax

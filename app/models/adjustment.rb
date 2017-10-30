@@ -36,7 +36,7 @@ class Adjustment < ActiveRecord::Base
   end
 
   def tax
-    account_for_taxes? ? amount_as_price.tax : nil
+    account_for_taxes? ? amount_as_price.tax : Price.zero
   end
 
   def amount_with_tax

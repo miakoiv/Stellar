@@ -437,7 +437,7 @@ class Order < ActiveRecord::Base
 
   # Total tax for the given items.
   def tax_total(items = order_items)
-    items.map { |item| item.tax_subtotal || 0 }.sum
+    items.map { |item| item.tax_total || 0 }.sum
   end
 
   def adjustments_sans_tax
