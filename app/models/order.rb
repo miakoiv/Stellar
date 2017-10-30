@@ -418,7 +418,7 @@ class Order < ActiveRecord::Base
   end
 
   def balance
-    grand_total_with_tax - payments.sum(:amount)
+    grand_total_with_tax - payments.map(&:amount).sum
   end
 
   # Grand total for the given items (or whole order), without tax.
