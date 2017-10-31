@@ -1,10 +1,11 @@
 %li{class: active_link_to_class(category.path)}
-  = link_to category.path do
-    - if category.resource.cover_image.present?
-      .page-image
-        = image_variant_tag category.resource.cover_image, navmenu ? :icon : :matchbox
-    .page-title
-      = category
+  - cache [navmenu, I18n.locale, :category_page, category] do
+    = link_to category.path do
+      - if category.resource.cover_image.present?
+        .page-image
+          = image_variant_tag category.resource.cover_image, navmenu ? :icon : :matchbox
+      .page-title
+        = category
   - if category.children_count > 0
     %ul{class: navmenu && 'nav navmenu-nav'}
       = render partial: category.children.live, locals: {navmenu: navmenu}

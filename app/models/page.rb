@@ -71,6 +71,9 @@ class Page < ActiveRecord::Base
     on: :update
 
   #---
+  after_save :touch_resource
+
+  #---
   # Finds the first page that returns a non-nil path.
   def self.entry_point
     find { |page| page.path }
@@ -176,4 +179,9 @@ class Page < ActiveRecord::Base
       [['store'], ['cart']]
     end
   end
+
+  private
+    def touch_resource
+      resource.touch if resource.present?
+    end
 end
