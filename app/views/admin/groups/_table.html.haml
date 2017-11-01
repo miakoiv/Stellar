@@ -5,7 +5,6 @@
         %th.col-min.hidden-print
         %th= col(Group, :name)
         %th
-        %th.col-xs-3.text-right= col(Group, :user_count)
         %th.col-xs-4= col(Group, :pricing)
 
     %tbody.rowlink{class: current_user.can_update?(Group, at: current_store) && 'sortable', data: {link: 'row'}}

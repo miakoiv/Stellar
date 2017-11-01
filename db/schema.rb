@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030143450) do
+ActiveRecord::Schema.define(version: 20171031142737) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -681,7 +681,6 @@ ActiveRecord::Schema.define(version: 20171030143450) do
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.integer  "store_id",               limit: 4,                null: false
     t.string   "name",                   limit: 255,              null: false
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255
@@ -707,9 +706,8 @@ ActiveRecord::Schema.define(version: 20171030143450) do
     t.datetime "updated_at",                                      null: false
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["store_id", "email"], name: "index_users_on_store_id_and_email", unique: true, using: :btree
-  add_index "users", ["store_id"], name: "index_users_on_store_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id", limit: 4

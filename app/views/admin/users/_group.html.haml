@@ -6,6 +6,6 @@
         %h5.list-group-item-heading
           = bootstrap_label(group)
     - else
-      = link_to set_group_admin_user_path(user, params: {group_id: group}), class: css, remote: true, method: :patch do
+      = link_to join_admin_group_user_path(group, user), class: css, remote: true, method: :patch do
         %h5.list-group-item-heading
           = bootstrap_label(group)

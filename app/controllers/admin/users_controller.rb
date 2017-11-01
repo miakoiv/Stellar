@@ -3,14 +3,15 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :set_group]
+  before_action :set_group, only: [:index, :new, :create, :join]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :join]
 
-  authority_actions set_group: 'update'
+  authority_actions join: 'update'
 
   layout 'admin'
 
-  # GET /admin/users
-  # GET /admin/users.json
+  # GET /admin/groups/1/users
+  # GET /admin/groups/1/users.json
   def index
     authorize_action_for User, at: current_store
     @query = saved_search_query('user', 'admin_user_search')
@@ -24,10 +25,10 @@ class Admin::UsersController < ApplicationController
     authorize_action_for @user, at: current_store
   end
 
-  # GET /admin/users/new
+  # GET /admin/groups/1/users/new
   def new
     authorize_action_for User, at: current_store
-    @user = User.new(store: current_store)
+    @user = User.new
   end
 
   # GET /admin/users/1/edit
@@ -35,11 +36,11 @@ class Admin::UsersController < ApplicationController
     authorize_action_for @user, at: current_store
   end
 
-  # POST /admin/users
-  # POST /admin/users.json
+  # POST /admin/groups/1/users
+  # POST /admin/groups/1/users.json
   def create
     authorize_action_for User, at: current_store
-    @user = User.new(user_params.merge(store: current_store))
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
@@ -85,23 +86,26 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # PATCH /admin/users/1/set_group
-  def set_group
+  # PATCH /admin/groups/1/users/2/join
+  def join
     authorize_action_for @user, at: current_store
-    group = current_store.groups.find(params[:group_id])
 
     @user.groups.at(current_store).each do |group|
       @user.groups.delete(group)
     end
-    @user.groups << group
+    @user.groups << @group
 
     respond_to :js
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_group
+      @group = current_store.groups.find(params[:group_id])
+    end
+
     def set_user
-      @user = current_store.users.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -116,10 +120,8 @@ class Admin::UsersController < ApplicationController
       )
     end
 
-    # Restrict searching to users at current store.
+    # Restrict searching to users in selected group.
     def search_params
-      @query.merge(store: current_store).reverse_merge({
-        'groups' => current_user.groups.at(current_store).pluck(:id)
-      })
+      @query.merge(group: @group)
     end
 end

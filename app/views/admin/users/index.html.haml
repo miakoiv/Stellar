@@ -1,8 +1,9 @@
 .page-header
-  - if current_user.can_create?(User, at: current_store)
-    = link_to new_admin_user_path, class: 'btn btn-primary' do
-      = icon('plus', t('.new_user'))
-  %h1= icon('user', title(User, count: 2))
+  = link_to admin_group_path(@group), class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('user', title(User, count: 2))
+    = bootstrap_label(@group)
 
 = render partial: 'search'
 = render partial: 'admin/users/table', object: @users, as: :users

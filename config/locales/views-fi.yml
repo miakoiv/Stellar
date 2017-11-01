@@ -35,6 +35,7 @@ fi:
       title: Sisältö
     configuration:
       title: Asetukset
+      groups_users: Ryhmät ja käyttäjät
     reports:
       title: Raportit
       inventory:
@@ -105,8 +106,9 @@ fi:
       edit:
         new_group: Uusi ryhmä
       form:
-        make_default: Aseta vierasryhmäksi
-        select_categories: Valitse tuoteryhmät
+        make_default: Vieraille
+        select_categories: Tuoteryhmät
+        join: Liity
     inventories:
       index:
         new_inventory: Uusi varasto

@@ -23,6 +23,8 @@
         - if current_user.can_update?(@group, at: current_store)
           - if @group != current_store.default_group
             = link_to icon('star', t('.make_default')), make_default_admin_group_path(@group), remote: true, method: :patch, class: 'btn btn-primary btn-sm'
+          - if @group != current_group
+            = link_to icon('home', t('.join')), join_admin_group_user_path(@group, current_user), remote: true, method: :patch, class: 'btn btn-default btn-sm'
           = link_to icon('sitemap', t('.select_categories')), select_categories_admin_group_path(@group), class: 'btn btn-default btn-sm'
         - if current_user.can_delete?(@group, at: current_store)
           .pull-right

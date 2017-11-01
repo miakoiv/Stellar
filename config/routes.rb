@@ -146,6 +146,9 @@ Rails.application.routes.draw do
       post :reorder, on: :collection
     end
     resources :groups do
+      resources :users, only: [:index, :new, :create] do
+        patch :join, on: :member
+      end
       member do
         patch :make_default
         get :select_categories
@@ -153,11 +156,10 @@ Rails.application.routes.draw do
       end
       post :reorder, on: :collection
     end
-    resources :users do
+    resources :users, except: [:index, :new, :create] do
       resources :roles, only: [] do
         patch :toggle, on: :member
       end
-      patch :set_group, on: :member
     end
     resources :customer_assets do
       resources :asset_entries, shallow: true, only: :create

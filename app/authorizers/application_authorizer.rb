@@ -21,6 +21,8 @@ class ApplicationAuthorizer < Authority::Authorizer
   def self.authorizes_to_shop?(user, opts = {})
     store = opts[:at]
     return false unless store.allow_shopping?
-    user.group(store).outgoing_order_types.any?
+    group = user.group(store)
+    return false if group.nil?
+    group.outgoing_order_types.any?
   end
 end

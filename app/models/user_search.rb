@@ -14,8 +14,8 @@ class UserSearch < Searchlight::Search
     query.where(groups: {store: store})
   end
 
-  def search_groups
-    query.where(groups: {id: groups})
+  def search_group
+    query.where(groups: {id: group})
   end
 
   def search_keyword

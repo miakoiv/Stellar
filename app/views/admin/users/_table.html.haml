@@ -2,7 +2,6 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
-        %th
         %th.col-xs-2= col(User, :name)
         %th.col-xs-3= col(User, :email)
         %th= col(User, :roles)
@@ -10,11 +9,10 @@
 
     %tbody
       = content_tag_for :tr, users do |user|
-        %td= bootstrap_label(user.group(current_store))
         %td= user.name
         %td= user.email
         %td
-          - user.roles.each do |role|
+          - user.roles.at(current_store).each do |role|
             = icon(role.icon, title: role, class: 'fa-fw', data: {toggle: 'tooltip'})
         %td.actions
           = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'

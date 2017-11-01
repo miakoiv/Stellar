@@ -162,7 +162,7 @@ class ApplicationController < ActionController::Base
     # grant her the baseline roles, and schedule a cleanup in two weeks.
     def create_guest_user
       defaults = current_store.guest_user_defaults(current_hostname)
-      guest = User.new(defaults.merge(store: current_store))
+      guest = User.new(defaults)
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
       guest.groups << current_store.default_group

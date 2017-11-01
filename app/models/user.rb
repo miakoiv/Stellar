@@ -11,14 +11,9 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable,
-    request_keys: [:host]
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable
 
   #---
-  # FIXME: Remove this association only after migrating to a state
-  # where users don't require a store association anymore.
-  belongs_to :store
-
   # Users may belong to any number of groups to be part of stores.
   has_and_belongs_to_many :groups
 
@@ -40,20 +35,10 @@ class User < ActiveRecord::Base
 
   #---
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: {scope: :store}
+  validates :email, presence: true, uniqueness: true
   validates :phone, presence: true
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
-
-  #---
-  # Override Devise hook to find users in the scope of a store, by matching
-  # against their host or subdomain attributes.
-  def self.find_for_authentication(warden_conditions)
-    joins(store: :hostnames)
-      .where(email: warden_conditions[:email])
-      .where(hostnames: {fqdn: warden_conditions[:host]})
-      .first
-  end
 
   #---
   # A user's shopping cart is technically an order singleton,

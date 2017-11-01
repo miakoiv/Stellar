@@ -12,10 +12,10 @@ class Admin::RolesController < ApplicationController
   # PATCH /admin/users/1/roles/el_presidente/toggle.js
   def toggle
     authorize_action_for Role, at: current_store
-    if @user.has_cached_role?(@role, current_store)
-      @user.revoke(@role, current_store)
+    if @role == :superuser
+      @user.has_cached_role?(@role) ? @user.revoke(@role) : @user.grant(@role)
     else
-      @user.grant(@role, current_store)
+      @user.has_cached_role?(@role, current_store) ? @user.revoke(@role, current_store) : @user.grant(@role, current_store)
     end
 
     respond_to :js
@@ -24,6 +24,6 @@ class Admin::RolesController < ApplicationController
   private
     def set_user_and_role
       @user = User.find(params[:user_id])
-      @role = params[:id]
+      @role = params[:id].to_sym
     end
 end

@@ -55,6 +55,7 @@ en:
       title: Content
     configuration:
       title: Configuration
+      groups_users: Groups and users
     reports:
       title: Reports
       inventory:
@@ -125,8 +126,9 @@ en:
       edit:
         new_group: New group
       form:
-        make_default: Set as guest group
-        select_categories: Select categories
+        make_default: For guests
+        select_categories: Categories
+        join: Join
     inventories:
       index:
         new_inventory: New inventory
