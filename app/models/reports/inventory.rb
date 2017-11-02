@@ -7,12 +7,13 @@ module Reports
     end
 
     def with_subtotals
-      @items.select <<-SQL
-        products.id AS product_id, products.code AS product_code,
+      @items.select(
+        'products.id AS product_id, products.code AS product_code,
         products.title AS product_title, products.subtitle AS product_subtitle,
-        on_hand, value_cents AS unit_value,
-        value_cents * GREATEST(0, on_hand) AS subtotal_value
-      SQL
+        SUM(on_hand) AS on_hand,
+        SUM(value_cents * on_hand) / SUM(on_hand) AS unit_value,
+        GREATEST(0, SUM(value_cents * on_hand)) AS subtotal_value'
+      ).group(:product_id)
     end
 
     def grand_total
