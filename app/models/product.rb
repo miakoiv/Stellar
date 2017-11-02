@@ -98,7 +98,7 @@ class Product < ActiveRecord::Base
   has_many :alternate_prices, dependent: :destroy
 
   # Customer assets referring to this product.
-  has_many :customer_assets
+  has_many :customer_assets, dependent: :destroy
 
   has_one :page, as: :resource
 
