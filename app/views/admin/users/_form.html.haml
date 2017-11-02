@@ -16,11 +16,11 @@
               = f.telephone_field :phone, required: true
               = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
               - unless locked
-                = f.password_field :password, required: @user.password_required?
+                = f.password_field :password, required: @user.require_password?
                 .form-group
                   .col-sm-8.col-sm-offset-4
                     = render partial: 'shared/password_strength'
-                = f.password_field :password_confirmation, required: @user.password_required?
+                = f.password_field :password_confirmation, required: @user.require_password?
         - unless @user.new_record?
           = tab_pane 'user-addresses' do
             %fieldset{disabled: locked}

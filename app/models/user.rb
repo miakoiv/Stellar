@@ -77,15 +77,16 @@ class User < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
-  def has_password?
-    encrypted_password.present?
+  def require_password?
+    encrypted_password.blank?
   end
 
-  def password_required?
-    persisted? && (
-      !has_password? ||
-      !password.nil? ||
-      !password_confirmation.nil?
-    )
-  end
+  protected
+    def password_required?
+      persisted? && (
+        encrypted_password.nil? ||
+        password.present? ||
+        password_confirmation.present?
+      )
+    end
 end
