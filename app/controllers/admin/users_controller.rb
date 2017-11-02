@@ -40,11 +40,11 @@ class Admin::UsersController < ApplicationController
   # POST /admin/groups/1/users.json
   def create
     authorize_action_for User, at: current_store
-    @user = User.new(user_params)
+    @user = User.find_or_initialize_by(user_params)
 
     respond_to do |format|
       if @user.save
-        @user.groups << current_group
+        @user.groups << @group unless @user.groups.include?(@group)
         @user.grant(:see_pricing, current_store)
         @user.grant(:see_stock, current_store)
 
@@ -78,10 +78,11 @@ class Admin::UsersController < ApplicationController
   # DELETE /admin/users/1
   def destroy
     authorize_action_for @user, at: current_store
+    @group = @user.group(current_store)
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_users_path,
+      format.html { redirect_to admin_group_users_path(@group),
         notice: t('.notice', user: @user) }
     end
   end

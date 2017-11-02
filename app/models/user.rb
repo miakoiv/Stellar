@@ -34,9 +34,9 @@ class User < ActiveRecord::Base
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
   #---
-  validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :phone, presence: true
+  validates :name, presence: true, on: :update
+  validates :phone, presence: true, on: :update
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
 
@@ -77,8 +77,15 @@ class User < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
-  protected
-    def password_required?
-      !persisted? || !password.nil? || !password_confirmation.nil?
-    end
+  def has_password?
+    encrypted_password.present?
+  end
+
+  def password_required?
+    persisted? && (
+      !has_password? ||
+      !password.nil? ||
+      !password_confirmation.nil?
+    )
+  end
 end

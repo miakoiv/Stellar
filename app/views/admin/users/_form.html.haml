@@ -1,40 +1,43 @@
-= bootstrap_form_for [:admin, @user], layout: :horizontal,
+= bootstrap_form_for [:admin, @group, @user], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
     = nav_tab 'user-personal', col(User, :personal), class: 'active'
-    = nav_tab 'user-addresses', col(User, :addresses)
+    - unless @user.new_record?
+      = nav_tab 'user-addresses', col(User, :addresses)
 
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
         = tab_pane 'user-personal', class: 'in active' do
           %fieldset{disabled: locked}
-            = f.text_field :name, required: true
             = f.text_field :email, required: true
-            = f.telephone_field :phone, required: true
-            = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
-            - if @user.new_record?
-              = f.password_field :password, required: true
+            - unless @user.new_record?
+              = f.text_field :name, required: true
+              = f.telephone_field :phone, required: true
+              = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
+              - unless locked
+                = f.password_field :password, required: @user.password_required?
+                .form-group
+                  .col-sm-8.col-sm-offset-4
+                    = render partial: 'shared/password_strength'
+                = f.password_field :password_confirmation, required: @user.password_required?
+        - unless @user.new_record?
+          = tab_pane 'user-addresses' do
+            %fieldset{disabled: locked}
+              = f.text_field :shipping_address
               .form-group
-                .col-sm-8.col-sm-offset-4
-                  = render partial: 'shared/password_strength'
-              = f.password_field :password_confirmation, required: true
-        = tab_pane 'user-addresses' do
-          %fieldset{disabled: locked}
-            = f.text_field :shipping_address
-            .form-group
-              .col-sm-offset-4.col-sm-3
-                = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
-              .col-sm-5
-                = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
-            = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
-            = f.text_field :billing_address
-            .form-group
-              .col-sm-offset-4.col-sm-3
-                = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
-              .col-sm-5
-                = f.text_field_without_bootstrap :billing_city, class: 'form-control'
-            = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+                .col-sm-offset-4.col-sm-3
+                  = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
+                .col-sm-5
+                  = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
+              = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+              = f.text_field :billing_address
+              .form-group
+                .col-sm-offset-4.col-sm-3
+                  = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
+                .col-sm-5
+                  = f.text_field_without_bootstrap :billing_city, class: 'form-control'
+              = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
       - unless locked
         %fieldset.actions
           = f.form_group do

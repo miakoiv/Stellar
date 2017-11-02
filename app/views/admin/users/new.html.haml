@@ -1,5 +1,5 @@
 .page-header
-  = link_to admin_users_path, class: 'btn btn-default' do
+  = link_to admin_group_users_path(@group), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('user', t('.new_user'))
 
