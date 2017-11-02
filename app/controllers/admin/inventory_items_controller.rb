@@ -77,7 +77,7 @@ class Admin::InventoryItemsController < ApplicationController
     # Restrict searching to inventories in current store.
     def search_params
       @query.merge(
-        store: current_store
+        store_id: current_store.id
       )
     end
 end

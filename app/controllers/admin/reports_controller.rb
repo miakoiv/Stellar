@@ -72,7 +72,7 @@ class Admin::ReportsController < ApplicationController
     end
 
     def inventory_params
-      {store: current_store.id, reported: true}.merge(tabular_params)
+      {store_id: current_store.id, reported: true}.merge(tabular_params)
     end
 
     # Params specifying a view but not saved with the search query.
