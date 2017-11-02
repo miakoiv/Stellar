@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031142737) do
+ActiveRecord::Schema.define(version: 20171101134828) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -205,8 +205,7 @@ ActiveRecord::Schema.define(version: 20171031142737) do
     t.integer "user_id",  limit: 4, null: false
   end
 
-  add_index "groups_users", ["group_id"], name: "index_groups_users_on_group_id", using: :btree
-  add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id", using: :btree
+  add_index "groups_users", ["group_id", "user_id"], name: "index_groups_users_on_group_id_and_user_id", unique: true, using: :btree
 
   create_table "hostnames", force: :cascade do |t|
     t.integer  "store_id",           limit: 4,               null: false
@@ -681,7 +680,7 @@ ActiveRecord::Schema.define(version: 20171031142737) do
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 255,              null: false
+    t.string   "name",                   limit: 255
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "phone",                  limit: 255
     t.string   "billing_address",        limit: 255
