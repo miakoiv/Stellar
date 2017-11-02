@@ -28,6 +28,7 @@ class InventoryItem < ActiveRecord::Base
 
   #---
   after_save :update_counts_and_value!
+  after_touch :update_counts_and_value!
 
   #---
   def available
