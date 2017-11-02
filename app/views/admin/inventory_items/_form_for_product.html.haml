@@ -19,8 +19,8 @@
               = f.button t('.submit'), class: 'btn btn-default' do
                 = icon('check')
 
+  %p.help-block= t('.inventory_entry_help_html', path: admin_inventory_items_path(params: {inventory_item_search: {product_id: [product.id]}}))
+
   :coffee
     $('#inventory_item_inventory_id').selectize
       dropdownParent: 'body'
-
-%p.help-block= t('.inventory_entry_help_html', path: admin_inventory_items_path(params: {inventory_item_search: {product_id: [product.id]}}))
