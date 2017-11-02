@@ -195,6 +195,7 @@ fi:
         reserved: Varattu
         pending: Tulossa
         value: Arvo
+        total_value: Arvo yhteensä
       order:
         number: tilaus nro
         external_number: Ulkoinen nro

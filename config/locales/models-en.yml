@@ -195,6 +195,7 @@ en:
         reserved: Reserved
         pending: Pending
         value: Value
+        total_value: Total value
       order:
         number: order №
         external_number: External №

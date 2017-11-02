@@ -2,5 +2,35 @@
   %h1= icon('bar-chart', title(InventoryItem, count: 2))
 
 = render partial: 'search'
-= render partial: 'table'
+
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(InventoryItem, :code)
+        %th= col(InventoryItem, :inventory_id)
+        %th= col(InventoryItem, :product_id)
+        %th.col-xs-1.text-right= col(InventoryItem, :on_hand)
+        %th.col-xs-1.text-right= col(InventoryItem, :reserved)
+        %th.col-xs-1.text-right= col(InventoryItem, :pending)
+        %th.col-xs-1.text-right.currency à
+        %th.col-xs-1.text-right= col(InventoryItem, :value)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @inventory_items do |inventory_item|
+        %td= inventory_item.code
+        %td= inventory_item.inventory.name
+        %td
+          = link_to admin_product_path(inventory_item.product) do
+            %strong= inventory_item.product.title
+            = inventory_item.product.subtitle
+        %td.text-right= inventory_item.on_hand
+        %td.text-right= inventory_item.reserved
+        %td.text-right= inventory_item.pending
+        %td.text-right.currency= money inventory_item.value
+        %td.text-right.currency= money inventory_item.total_value
+        %td.actions
+          = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item), class: 'btn btn-primary btn-sm'
+
 = paginate @inventory_items

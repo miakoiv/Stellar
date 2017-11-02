@@ -115,7 +115,7 @@ fi:
       new:
         new_inventory: Uusi varasto
     inventory_items:
-      form_for_product:
+      form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
     order_types:
       index:

@@ -1,13 +1,26 @@
-= bootstrap_form_for [:admin, @inventory_item], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  .panel.panel-default
-    .panel-body
-      %fieldset{disabled: locked}
-        = f.text_field :code, required: true
-        = f.text_field :on_hand, readonly: true
-        = f.text_field :reserved, readonly: true
-        = f.text_field :pending, readonly: true
-      - unless locked
-        %fieldset.actions
-          = f.form_group do
-            = f.primary
+#inventory-item-form.table-responsive
+  = form_for [:admin, product, product.inventory_items.build.tap { |item| item.inventory_entries.build(recorded_at: Date.today) }], remote: true, method: :post do |f|
+    = f.hidden_field :product_id
+    = f.fields_for :inventory_entries do |ff|
+      %table.table.table-loose
+        %tbody
+          %tr
+            %td.col-xs-3
+              = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
+            %td.col-xs-3
+              = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {placeholder: col(InventoryItem, :inventory_id)}
+            %td.col-xs-2= ff.text_field :value, value: product.cost_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
+            %td.col-xs-2
+              = ff.number_field :on_hand, value: 1, min: 1, class: 'form-control text-right'
+              = ff.hidden_field :reserved, value: 0
+              = ff.hidden_field :pending, value: 0
+              = ff.hidden_field :recorded_at
+            %td.actions
+              = f.button t('.submit'), class: 'btn btn-default' do
+                = icon('check')
+
+  %p.help-block= t('.inventory_entry_help_html', path: admin_inventory_items_path(params: {inventory_item_search: {product_id: [product.id]}}))
+
+  :coffee
+    $('#inventory_item_inventory_id').selectize
+      dropdownParent: 'body'

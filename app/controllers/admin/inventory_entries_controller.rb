@@ -12,6 +12,7 @@ class Admin::InventoryEntriesController < ApplicationController
 
     respond_to do |format|
       if @inventory_entry.save
+        @inventory_item.reload
         format.js { render 'create' }
       else
         format.json { render json: @inventory_entry.errors, status: :unprocessable_entity }

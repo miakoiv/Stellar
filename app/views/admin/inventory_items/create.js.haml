@@ -1,4 +1,4 @@
 - if @inventory_item.valid?
   $('#inventory-items-tbody').html("#{j render partial: 'admin/inventory_items/tbody', object: @product, as: :product}");
-  $('#add-inventory-item').replaceWith("#{j render partial: 'admin/inventory_items/form_for_product', object: @product, as: :product}");
+  $('#inventory-item-form').replaceWith("#{j render partial: 'admin/inventory_items/form', object: @product, as: :product}");
   $("##{dom_id(@inventory_item)}").effect('highlight');
