@@ -13,6 +13,7 @@ class PromotedItem < ActiveRecord::Base
   #---
   belongs_to :promotion, touch: true
   belongs_to :product
+  delegate :group, to: :promotion
 
   #---
   validates :discount_percent,
@@ -47,13 +48,18 @@ class PromotedItem < ActiveRecord::Base
   # The calculations set a flag to prevent before_validation hooks from
   # firing again as the linked attribute changes.
   def calculate_price
-    self.price_cents = product.retail_price_cents * (1 - discount_percent/100)
+    self.price = base_price * (1 - discount_percent/100)
     self.calculated = true
   end
 
   def calculate_discount
-    self.discount_percent = 100 * (product.retail_price_cents - price_cents).to_f / product.retail_price_cents
+    self.discount_percent = 100 * (base_price - price) / base_price
     self.calculated = true
+  end
+
+  # Base prices are according to the target group of the promotion.
+  def base_price
+    product.send(group.price_method)
   end
 
   private
