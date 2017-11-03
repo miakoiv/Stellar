@@ -9,6 +9,7 @@ class Promotion < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
+  include Pageable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
 
@@ -20,8 +21,6 @@ class Promotion < ActiveRecord::Base
   has_many :products, through: :promoted_items
   has_one :promotion_handler, dependent: :destroy
   accepts_nested_attributes_for :promotion_handler
-
-  has_one :page, as: :resource, dependent: :destroy
 
   scope :live, -> { where(live: true) }
 

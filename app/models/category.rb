@@ -5,6 +5,7 @@ class Category < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
+  include Pageable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
   acts_as_nested_set scope: :store,
@@ -15,8 +16,6 @@ class Category < ActiveRecord::Base
   #---
   belongs_to :store
   has_and_belongs_to_many :products
-
-  has_one :page, as: :resource, dependent: :destroy
 
   # Categories may appear at any number of portal departments.
   has_and_belongs_to_many :departments

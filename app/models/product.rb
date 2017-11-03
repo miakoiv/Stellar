@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
+  include Pageable
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :history]
@@ -96,8 +97,6 @@ class Product < ActiveRecord::Base
 
   # Customer assets referring to this product.
   has_many :customer_assets, dependent: :destroy
-
-  has_one :page, as: :resource
 
   # Real products are everything but internal costs.
   scope :real, -> { where.not(purpose: purposes[:internal]) }
