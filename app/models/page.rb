@@ -71,6 +71,7 @@ class Page < ActiveRecord::Base
     on: :update
 
   #---
+  before_save :conditionally_disable
   after_save :touch_resource
 
   #---
@@ -107,6 +108,11 @@ class Page < ActiveRecord::Base
 
   def can_have_albums?
     primary?
+  end
+
+  # Pages with a resource can't be live if the resource isn't.
+  def can_be_live?
+    resource.nil? || resource.live?
   end
 
   def slugger
@@ -183,5 +189,10 @@ class Page < ActiveRecord::Base
   private
     def touch_resource
       resource.touch if resource.present?
+    end
+
+    def conditionally_disable
+      self.live = false unless can_be_live?
+      true
     end
 end
