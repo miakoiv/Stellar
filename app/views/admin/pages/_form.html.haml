@@ -4,8 +4,9 @@
       %fieldset
         = f.select :purpose, Page.purpose_options, {}, {disabled: !@page.new_record?, class: 'selectize'}
         = f.text_field :title, required: true
-        = f.form_group do
-          = f.check_box :live
+        - if @page.can_be_live?
+          = f.form_group do
+            = f.check_box :live
         - unless @page.new_record?
           = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
           - if @page.can_have_albums?
