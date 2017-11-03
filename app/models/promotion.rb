@@ -29,6 +29,7 @@ class Promotion < ActiveRecord::Base
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
 
+  after_save :touch_products
   after_save :reset_live_status!
 
   #---
@@ -92,6 +93,12 @@ class Promotion < ActiveRecord::Base
   end
 
   private
+    def touch_products
+      products.each do |product|
+        product.touch
+      end
+    end
+
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
