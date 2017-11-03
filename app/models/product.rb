@@ -86,10 +86,7 @@ class Product < ActiveRecord::Base
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-
-  # Products can be added to promotions, and any change will trigger
-  # recalculation of its promoted price.
-  has_many :promoted_items, after_add: :reset_itself!, after_remove: :reset_itself!
+  has_many :promoted_items
   has_many :promotions, through: :promoted_items
 
   has_many :iframes, dependent: :destroy
