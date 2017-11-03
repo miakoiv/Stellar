@@ -1,6 +1,6 @@
 - resource = promotion.resource
 - max_items = promotion.max_items.presence
-- products = resource.is_a?(Promotion) && resource.products.sorted(promotion.product_scope.presence)
+- products = resource.is_a?(Promotion) && resource.products.live.sorted(promotion.product_scope.presence)
 
 .segment-content.promotion{id: segment_content_id(promotion, context)}
   - if products
