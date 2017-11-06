@@ -1,23 +1,29 @@
 fi:
   order_mailer:
-    order_confirmation:
-      subject: "%{store} – Tilausvahvistus"
-      title: Tilausvahvistus
-      thank_you: "%{store} kiittää tilauksestanne!"
-    order_receipt:
+    receipt:
       subject: "%{store} – Kuitti"
       title: Kuitti
       thank_you: "%{store} kiittää tilauksestanne!"
-    order_cancellation:
+    acknowledge:
+      subject: "%{store} – Tilaus vastaanotettu"
+      title: Tilauksenne
+      thank_you: "%{store} kiittää tilauksestanne!"
+    processing:
+      subject: "%{store} – Tilaustanne käsitellään"
+      title: Tilauksenne
+      thank_you: "%{store} kiittää tilauksestanne!"
+    confirmation:
+      subject: "%{store} – Tilausvahvistus"
+      title: Tilausvahvistus
+      thank_you: "%{store} kiittää tilauksestanne!"
+    shipment:
+      subject: "%{store} – Tilauksenne on lähetetty"
+      title: "Tilauksenne on matkalla"
+      thank_you: "%{store} kiittää tilauksestanne!"
+    notification:
+      subject: "%{store} – Ilmoitus tilauksesta"
+      title: "Ilmoitus tilauksesta"
+    cancellation:
       subject: "%{store} – Tilauksen peruutus"
       title: Tilauksen peruutus
       body_html: <p>Tilauksenne nro %{order} on peruttu.</p>
-    order_notification:
-      subject: "%{store} – Lähete"
-      title: Lähete
-    vendor_notification:
-      subject: "%{store} – Ilmoitus tilauksesta"
-      title: "Ilmoitus tilauksesta"
-    quotation:
-      subject: "%{store} – Uusi tarjous"
-      title: Tarjous

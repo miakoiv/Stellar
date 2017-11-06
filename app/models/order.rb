@@ -113,14 +113,13 @@ class Order < ActiveRecord::Base
     is_quote?
   end
 
-  # Confirmation mail is not sent for quotations.
-  def send_confirmation?
-    !is_quote?
-  end
-
   # Notify users with order_notify role in the destination group.
   def notified_users
     destination.users.with_role(:order_notify, store)
+  end
+
+  def customer_string
+    "#{customer_name} <#{customer_email}>"
   end
 
   def has_contact_info?
@@ -269,11 +268,11 @@ class Order < ActiveRecord::Base
   end
 
   # Completing an order assigns it a number, archives it, sends
-  # order confirmation(s), and triggers an XML export job.
+  # order receipt/acknowledge, and triggers an XML export job.
   def complete!
     assign_number!
     archive!
-    send_confirmations
+    email(has_payment? ? :receipt : :acknowledge, customer_string).deliver_later
     export_xml
   end
 
@@ -308,19 +307,6 @@ class Order < ActiveRecord::Base
       order_items.each do |item|
         item.product.consume!(item.amount, self)
       end
-    end
-  end
-
-  # Sends an order confirmation/receipt to the customer, and additional
-  # notifications to vendors if the order contains any of their products.
-  # A separate order notification is sent to the contact person, if applicable.
-  def send_confirmations
-    return unless send_confirmation?
-    method = store.b2b_sales? ? :order_confirmation : :order_receipt
-    OrderMailer.send(method, self).deliver_later
-    OrderMailer.order_notification(self).deliver_later if has_contact_info?
-    items_by_vendor.each do |vendor, items|
-      OrderMailer.vendor_notification(self, vendor, items).deliver_later
     end
   end
 
@@ -525,6 +511,10 @@ class Order < ActiveRecord::Base
     events
   end
 
+  def email(message, to, items = nil, pricing = true)
+    OrderMailer.send(message, self, to, items, pricing)
+  end
+
   private
     def set_tax_inclusion
       self.includes_tax = source.price_tax_included?
@@ -546,15 +536,32 @@ class Order < ActiveRecord::Base
     end
 
     # Approving an order consumes stock for the ordered items.
+    # If the order has already been paid, a processing notification
+    # is sent. Otherwise an order confirmation is sent, and a copy
+    # without pricing information is cc'd to the contact person.
     def approve!
       reload # to clear changes and prevent a callback loop
+      if has_payment?
+        email(:processing, customer_string).deliver_later
+      else
+        email(:confirmation, customer_string).deliver_later
+        email(:confirmation, contact_string, nil, false).deliver_later if has_contact_info?
+      end
+      items_by_vendor.each do |vendor, items|
+        vendor.notified_users.each do |user|
+          email(:notification, user.to_s, items, false).deliver_later
+        end
+      end
       consume_stock!
       true
     end
 
     # Concluding an order creates asset entries for it.
+    # A notification of shipment is sent.
     def conclude!
       reload # to clear changes and prevent a callback loop
+      email(:shipment, customer_string).deliver_later
+      email(:shipment, contact_string, nil, false).deliver_later if has_contact_info?
       OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
       true

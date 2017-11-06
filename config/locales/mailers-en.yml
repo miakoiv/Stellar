@@ -1,23 +1,29 @@
 en:
   order_mailer:
-    order_confirmation:
-      subject: "Order confirmation from %{store}"
-      title: Order confirmation
-      thank_you: "Thank you for shopping at %{store}!"
-    order_receipt:
+    receipt:
       subject: "Receipt for your order from %{store}"
       title: Receipt
       thank_you: "Thank you for shopping at %{store}!"
-    order_cancellation:
+    acknowledge:
+      subject: "Your order has been received by %{store}"
+      title: Your order
+      thank_you: "Thank you for shopping at %{store}!"
+    processing:
+      subject: "Your order is being processed at %{store}"
+      title: Your order
+      thank_you: "Thank you for shopping at %{store}!"
+    confirmation:
+      subject: "Order confirmation from %{store}"
+      title: Order confirmation
+      thank_you: "Thank you for shopping at %{store}!"
+    shipment:
+      subject: "Your order has been shipped from %{store}"
+      title: "Your order is on its way"
+      thank_you: "Thank you for shopping at %{store}!"
+    notification:
+      subject: "Order notification from %{store}"
+      title: "Order notification"
+    cancellation:
       subject: "Order cancelled"
       title: Order cancellation
       body_html: <p>Your order № %{order} from %{store} has been cancelled.</p>
-    order_notification:
-      subject: "Delivery note from %{store}"
-      title: Delivery note
-    vendor_notification:
-      subject: "Order notification from %{store}"
-      title: "Order notification"
-    quotation:
-      subject: "New quotation from %{store}"
-      title: Quotation

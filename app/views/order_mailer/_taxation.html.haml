@@ -1,0 +1,22 @@
+%tr
+  %td= TaxCategory.human_attribute_name(:rate)
+  %td.alignright= Order.human_attribute_name(:total_sans_tax)
+  %td.alignright= Order.human_attribute_name(:tax_total)
+  %td.alignright= Order.human_attribute_name(:total_with_tax)
+- @order.order_items.group_by(&:tax_rate).each do |tax_rate, items|
+  %tr
+    %td= number_to_percentage tax_rate, precision: 0
+    %td.alignright.nowrap
+      = humanized_money_with_symbol @order.grand_total_sans_tax(items)
+    %td.alignright.nowrap
+      = humanized_money_with_symbol @order.tax_total(items)
+    %td.alignright.nowrap
+      = humanized_money_with_symbol @order.grand_total_with_tax(items)
+%tr
+  %th.alignright.nowrap= Order.human_attribute_name(:grand_total)
+  %th.alignright.nowrap
+    = humanized_money_with_symbol @order.grand_total_sans_tax
+  %th.alignright.nowrap
+    = humanized_money_with_symbol @order.tax_total
+  %th.alignright.nowrap
+    = humanized_money_with_symbol @order.grand_total_with_tax

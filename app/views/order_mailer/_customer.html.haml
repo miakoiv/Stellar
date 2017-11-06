@@ -1,0 +1,32 @@
+%tr
+  %td= Order.human_attribute_name(:customer_name)
+  %td
+    %b= @order.customer_name
+  %td= Order.human_attribute_name(:customer_phone)
+  %td
+    %b= @order.customer_phone
+%tr
+  %td
+    = Order.human_attribute_name(:billing_address)
+  %td
+    %b= @order.billing_address
+    %br
+    %b= @order.billing_postalcode
+    %b= @order.billing_city
+  %td
+    = Order.human_attribute_name(:shipping_address)
+  %td
+    %b= @order.shipping_address
+    %br
+    %b= @order.shipping_postalcode
+    %b= @order.shipping_city
+- if @order.contact_person.present? || @order.company_name.present?
+  %tr
+    %td
+      = Order.human_attribute_name(:contact_person)
+    %td
+      %b= @order.contact_person
+    %td
+      = Order.human_attribute_name(:company_name)
+    %td
+      %b= @order.company_name

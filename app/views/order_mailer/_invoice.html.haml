@@ -1,0 +1,35 @@
+- if @pricing
+  %caption.alignright
+    %em= @order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')
+%tr
+  %td= OrderItem.human_attribute_name(:product_code)
+  %td= OrderItem.human_attribute_name(:product_title)
+  %td.alignright= OrderItem.human_attribute_name(:amount)
+  - if @pricing
+    %td.alignright= OrderItem.human_attribute_name(:price)
+    %td.alignright= OrderItem.human_attribute_name(:subtotal)
+- @order.order_items.each do |order_item|
+  %tr[order_item]
+    %td= order_item.product_codes
+    %td
+      %b= order_item.product_title
+      = order_item.product_subtitle
+      - if order_item.product.vendor.present?
+        .small
+          = "#{Product.human_attribute_name(:vendor_id)}:"
+          = order_item.product.vendor.name
+      - if order_item.product.shipping_notes.present?
+        .small
+          %em= order_item.product.shipping_notes
+    %td.alignright.nowrap= order_item.amount
+    - if @pricing
+      %td.alignright.nowrap
+        = humanized_money_with_symbol @order.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+      %td.alignright.nowrap
+        = humanized_money_with_symbol @order.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+- if @pricing
+  %tr.total
+    %td.alignright{colspan: 4}
+      = Order.human_attribute_name(:grand_total)
+    %td.alignright.nowrap
+      = humanized_money_with_symbol @order.includes_tax? ? @order.grand_total_with_tax : @order.grand_total_sans_tax

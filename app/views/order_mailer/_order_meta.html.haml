@@ -1,0 +1,29 @@
+%tr
+  - if @order.shipping_at.present?
+    %td= Order.human_attribute_name(:shipping_at)
+    %td
+      %b= l(@order.shipping_at)
+  - if @order.installation_at.present?
+    %td= Order.human_attribute_name(:installation_at)
+    %td
+      %b= l(@order.installation_at)
+%tr
+  %td= Order.human_attribute_name(:your_reference)
+  %td
+    %b= @order.your_reference
+  %td= Order.human_attribute_name(:our_reference)
+  %td
+    %b= @order.our_reference
+%tr
+  %td= Order.human_attribute_name(:message)
+  %td
+    %b= @order.message
+  - if @store.b2b_sales?
+    %td= Order.human_attribute_name(:order_type_id)
+    %td
+      %b= @order.order_type
+%tr
+  %td
+    = Order.human_attribute_name(:notes)
+  %td{colspan: 3}
+    = @order.notes

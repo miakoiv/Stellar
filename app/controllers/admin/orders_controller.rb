@@ -74,7 +74,6 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/1/quote
   def quote
     authorize_action_for Order, at: current_store
-    OrderMailer.quotation(@order).deliver_later
     redirect_to admin_order_path(@order), notice: t('.notice', order: @order)
   end
 

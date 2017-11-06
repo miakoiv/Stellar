@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order, at: current_store
 
     @order.update(cancelled_at: Time.current)
-    OrderMailer.order_cancellation(@order).deliver_later
+    @order.email(:cancellation, @order.customer_string).deliver_later
 
     respond_to do |format|
       format.html { redirect_to orders_path,
