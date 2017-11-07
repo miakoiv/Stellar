@@ -7,6 +7,10 @@ class CheckoutController < ApplicationController
     super || guest_user
   end
 
+  def current_group
+    delegate_group || super
+  end
+
   before_action :authenticate_user_or_skip!
   before_action :set_header_and_footer
   before_action :set_categories, only: [:checkout, :return]

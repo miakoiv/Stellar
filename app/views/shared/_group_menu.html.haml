@@ -1,0 +1,6 @@
+- current_store.groups.each do |group|
+  - next if group == current_store.default_group
+  %li{class: group == current_group && 'active'}
+    = link_to delegate_path(group) do
+      = bootstrap_label group
+%li.divider

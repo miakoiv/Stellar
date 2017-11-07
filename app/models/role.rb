@@ -13,6 +13,7 @@ class Role < ActiveRecord::Base
     'superuser' => {icon: 'snowflake-o', appearance: 'danger'},
     'store_admin' => {icon: 'user-circle', appearance: 'danger'},
     'third_party' => {icon: 'user-circle-o', appearance: 'danger'},
+    'group_delegate' => {icon: 'share-alt', appearance: 'danger'},
     'user_manager' => {icon: 'users', appearance: 'success'},
     'inventory_manage' => {icon: 'cubes', appearance: 'success'},
     'asset_editor' => {icon: 'archive', appearance: 'success'},

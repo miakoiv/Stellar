@@ -7,6 +7,10 @@ class OrdersController < ApplicationController
     super || guest_user
   end
 
+  def current_group
+    delegate_group || super
+  end
+
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
   authority_actions duplicate: 'read'

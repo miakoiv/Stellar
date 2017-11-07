@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   get  '/store/search', to: 'store#search', as: :search
   get  '/store/lookup', to: 'store#lookup', as: :lookup
   get  '/cart/delete',  to: 'store#delete_cart', as: :delete_cart
-  post '/correspondence/mail_form', to: 'correspondence#mail_form',
-    as: :mail_form
+  post '/correspondence/mail_form', to: 'correspondence#mail_form', as: :mail_form
+  get '/delegate/:group_id', to: 'store#delegate', as: :delegate
 
   # Routes for the checkout process:
   #

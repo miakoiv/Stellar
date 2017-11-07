@@ -18,6 +18,8 @@
           = current_user.name.split.first
           %span.caret
         %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+          - if group_delegate?
+            = render partial: 'shared/group_menu'
           - if can_manage?
             = render partial: 'shared/admin_menu'
           = render partial: 'shared/user_menu'

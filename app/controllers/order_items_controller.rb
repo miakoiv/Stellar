@@ -9,6 +9,10 @@ class OrderItemsController < ApplicationController
     super || guest_user
   end
 
+  def current_group
+    delegate_group || super
+  end
+
   # Guest users may edit their shopping cart contents.
   before_action :authenticate_user_or_skip!
 

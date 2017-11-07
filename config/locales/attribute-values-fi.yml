@@ -81,6 +81,7 @@ fi:
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
           third_party: ulkopuolinen taho
+          group_delegate: ryhmän edustaja
         description:
           see_pricing: tuotteiden hintojen näkyvyys kaupassa
           see_stock: tuotteiden varastosaldon näkyvyys kaupassa
@@ -101,6 +102,7 @@ fi:
           store_admin: kaupan asetukset ja verkko-osoitteet
           superuser: kauppojen perustaminen ja järjestelmäasetukset
           third_party: rajoitetut oikeudet kolmannelle osapuolelle
+          group_delegate: väliaikainen toimiminen toisessa ryhmässä
       section:
         outline:
           block: lohkot

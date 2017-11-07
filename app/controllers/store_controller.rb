@@ -11,6 +11,10 @@ class StoreController < ApplicationController
     super || guest_user
   end
 
+  def current_group
+    delegate_group || super
+  end
+
   before_action :set_mail_host
 
   # Unauthenticated guests may visit the store.
@@ -120,6 +124,18 @@ class StoreController < ApplicationController
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
     respond_to :js
+  end
+
+  # GET /delegate/:group_id
+  def delegate
+    @group = current_store.groups.find(params[:group_id])
+    if group_delegate? && @group.present? && @group != current_user.group(current_store)
+      cookies.signed[:delegate_group_id] = @group.id
+      redirect_to store_path, alert: t('.notice', group: @group)
+    else
+      cookies.delete(:delegate_group_id)
+      redirect_to store_path, alert: t('.default')
+    end
   end
 
   private
