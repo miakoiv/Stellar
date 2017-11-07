@@ -90,7 +90,7 @@ class Admin::UsersController < ApplicationController
   # PATCH /admin/groups/1/users/2/join
   def join
     authorize_action_for @user, at: current_store
-
+    @groups = current_store.groups
     @user.groups.at(current_store).each do |group|
       @user.groups.delete(group)
     end
