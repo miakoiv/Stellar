@@ -162,6 +162,7 @@ en:
         user_count: Members
         default: For guests
         default_name: Guest
+        home: Home group
       hostname:
         fqdn: Hostname
         parent_hostname_id: Top level domain

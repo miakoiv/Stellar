@@ -6,7 +6,9 @@
       = group.name
   %td
     - if group == current_store.default_group
-      = bootstrap_label(group, text: col(Group, :default), appearance: :primary)
+      = bootstrap_label(group, text: col(Group, :default), appearance: :default)
+    - if group == current_group
+      = icon('home', title: col(Group, :home), data: {toggle: 'tooltip'})
   %td
     = group.human_attribute_value(:price_base)
     - if group.price_modifier.nonzero?
