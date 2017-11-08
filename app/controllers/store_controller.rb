@@ -131,9 +131,11 @@ class StoreController < ApplicationController
     @group = current_store.groups.find(params[:group_id])
     if group_delegate? && @group.present? && @group != current_user.group(current_store)
       cookies.signed[:delegate_group_id] = @group.id
+      shopping_cart.destroy
       redirect_to store_path, alert: t('.notice', group: @group)
     else
       cookies.delete(:delegate_group_id)
+      shopping_cart.destroy
       redirect_to store_path, alert: t('.default')
     end
   end
