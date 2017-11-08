@@ -5,7 +5,7 @@
         = icon('shopping-cart', t('checkout.back_to_cart'))
       %h1.hidden-print
         = icon('shopping-cart')
-        = @order.order_type
+        = @order.order_type.label || @order.order_type
 
     #message-failure.collapse
       .alert.alert-danger
