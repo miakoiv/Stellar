@@ -291,6 +291,9 @@ fi:
       delete: Tyhjennä kori
       confirm_delete: Tyhjennetäänkö ostoskori?
       lead_time_warning: Tilattua määrää ei varastossa. Toimitusaika %{lead_time}.
+    delegation:
+      select: Liity väliaikaiseen ryhmään
+      cannot_delegate: Ei ryhmiä – ostoskori ei ole tyhjä
   albums:
     sidebar:
       included_albums: Näytä albumit

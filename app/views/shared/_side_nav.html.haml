@@ -6,10 +6,10 @@
     = bootstrap_label(current_group, icon: 'user', text: '')
     = current_user.name
   %ul.nav.navmenu-nav
-    - if group_delegate?
-      = render partial: 'shared/group_menu'
     - if can_manage?
       = render partial: 'shared/admin_menu'
+    - if group_delegate?
+      = render partial: 'shared/group_menu'
     = render partial: 'shared/user_menu'
 - else
   .navmenu-title
