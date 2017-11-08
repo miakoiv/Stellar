@@ -960,8 +960,12 @@ fieldset[disabled] .help-block { display: none; }
  */
 .live-chat {
   position: fixed;
+  pointer-events: none;
   left: 0;
   right: 0;
   bottom: 20px;
 }
-.live-chat .btn { float: right; }
+.live-chat .live-chat-toggle {
+  float: right;
+  pointer-events: auto;
+}
