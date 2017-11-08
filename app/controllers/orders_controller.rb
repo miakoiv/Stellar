@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order
 
     @order.copy_items_to(shopping_cart)
-    shopping_cart.recalculate!
+    shopping_cart.recalculate!(current_group)
 
     redirect_to cart_path, notice: t('.notice', order: @order)
   end

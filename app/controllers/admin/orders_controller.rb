@@ -81,7 +81,7 @@ class Admin::OrdersController < ApplicationController
   def forward
     authorize_action_for Order, at: current_store
     @order.forward_to(shopping_cart)
-    shopping_cart.recalculate!
+    shopping_cart.recalculate!(current_group)
 
     redirect_to cart_path, notice: t('.notice', order: @order)
   end
@@ -119,7 +119,7 @@ class Admin::OrdersController < ApplicationController
     product_ids.each do |product_id|
       @order.insert(@current_store.products.live.find(product_id), 1, nil)
     end
-    @order.recalculate!
+    @order.recalculate!(current_group)
 
     respond_to do |format|
       format.js

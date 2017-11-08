@@ -216,8 +216,8 @@ class Order < ActiveRecord::Base
 
   # Recalculates things that may take some heavy lifting.
   # This should be called when the contents of the order have changed.
-  def recalculate!
-    apply_promotions!
+  def recalculate!(group)
+    apply_promotions!(group)
     reload
   end
 
@@ -251,11 +251,11 @@ class Order < ActiveRecord::Base
 
   # Applies active promotions on the order, first removing all existing
   # adjustments from the order and its items.
-  def apply_promotions!
+  def apply_promotions!(group)
     adjustments.destroy_all
     order_items.each { |order_item| order_item.adjustments.destroy_all }
 
-    store.promotions.live.each do |promotion|
+    group.promotions.live.each do |promotion|
       promotion.apply!(self)
     end
   end

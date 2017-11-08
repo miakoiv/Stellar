@@ -14,7 +14,7 @@ class Admin::OrderItemsController < ApplicationController
     respond_to do |format|
       if @order_item.update(order_item_params)
         @order_item.reload
-        @order.recalculate!
+        @order.recalculate!(current_group)
         format.js { render :update }
       else
         format.js { render :rollback }

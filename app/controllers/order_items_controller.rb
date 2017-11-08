@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
           format.js { render :destroy }
         else
           @order_item.reset_subitems!
-          @order.recalculate!
+          @order.recalculate!(current_group)
           format.js { render :update }
         end
       else
@@ -39,7 +39,7 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1
   def destroy
     if @order_item.destroy
-      @order.recalculate!
+      @order.recalculate!(current_group)
     end
   end
 
