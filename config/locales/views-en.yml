@@ -346,6 +346,10 @@ en:
       charging: Processing payment…
       token_request_error: There was a problem communicating with the payment provider. Try again later.
       charge_error: There was a problem processing your payment, check your card details.
+    preflight:
+      title: Unexpected error
+      body_html: <p class="lead">We cannot ship your order.</p><p>Some of the products you ordered have been sold out or discontinued.</p><p>We are sorry for the inconvenience.</p>
+      close: Return to shopping cart
   actions:
     back: Back
     show: Show

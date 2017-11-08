@@ -56,3 +56,15 @@
       .modal-body
       .modal-footer.hidden-print
         = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+
+#order-preflight-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title= t('checkout.preflight.title')
+      .modal-body
+        .row
+          .col-sm-4.text-center= icon('meh-o', class: 'fa-5x')
+          .col-sm-8= t('checkout.preflight.body_html')
+      .modal-footer
+        = link_to icon('close', t('checkout.preflight.close')), cart_path, class: 'btn btn-primary'

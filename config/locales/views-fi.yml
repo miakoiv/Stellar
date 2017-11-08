@@ -326,6 +326,10 @@ fi:
       charging: Odotetaan maksutapahtuman valmistumista…
       token_request_error: Virhe maksutapahtuman aloittamisessa. Yritä myöhemmin uudelleen.
       charge_error: Virhe maksutapahtumassa. Tarkista kortin tiedot.
+    preflight:
+      title: Odottamaton virhe
+      body_html: <p class="lead">Emme voi toimittaa tilaustasi.</p><p>Tilaamasi tuote on myyty loppuun tai poistunut valikoimasta.</p><p>Pahoittelemme tilannetta.</p>
+      close: Palaa ostoskoriin
   actions:
     back: Palaa
     show: Näytä

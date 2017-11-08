@@ -42,12 +42,14 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # The checkout process calls this via AJAX any time the order status changes.
   # Completes an order if it's ready for completion. Responses are in JSON.
+  # Returns an error if the order itself does not validate, or it has become
+  # uncheckoutable until completed.
   # HTML responses are sent when the user edits her own completed orders.
   def update
     authorize_action_for @order, at: current_store
 
     respond_to do |format|
-      if @order.update(order_params)
+      if @order.update(order_params) && (@order.checkoutable? || @order.complete?)
         @order.complete! if @order.should_complete?
 
         format.json { render json: @order }

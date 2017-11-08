@@ -20,5 +20,8 @@ jQuery ->
 
   # This callback is triggered by user submission of #checkout-form, and
   # externally by actions that create shipments or payments.
-  $('#checkout-form').on 'ajax:success', (e, data, status, xhr) ->
-    $.do_checkout_phase data.checkout_phase
+  $('#checkout-form')
+    .on 'ajax:success', (e, data, status, xhr) ->
+      $.do_checkout_phase data.checkout_phase
+    .on 'ajax:error', (e, xhr, status, error) ->
+      $('#order-preflight-modal').modal 'show'
