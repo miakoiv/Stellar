@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def can_shop?
-    @can_shop = current_user.can?(:shop, at: current_store) if @can_shop.nil?
+    @can_shop = current_user.can?(:shop, as: current_group) if @can_shop.nil?
     @can_shop
   end
 
