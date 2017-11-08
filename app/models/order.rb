@@ -77,7 +77,6 @@ class Order < ActiveRecord::Base
   attr_accessor :product_ids_string
 
   #---
-  before_save :set_tax_inclusion
   before_save :copy_billing_address, unless: :has_billing_address?
 
   # Approve the order when approved_at first gets a value.
@@ -516,11 +515,6 @@ class Order < ActiveRecord::Base
   end
 
   private
-    def set_tax_inclusion
-      self.includes_tax = source.price_tax_included?
-      true
-    end
-
     def copy_billing_address
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
