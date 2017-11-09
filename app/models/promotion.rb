@@ -30,6 +30,8 @@ class Promotion < ActiveRecord::Base
 
   after_save :touch_products
   after_save :reset_live_status!
+  after_save :schedule_activation
+  before_destroy :touch_products
 
   #---
   # These attributes allow adding products and categories en masse
@@ -81,6 +83,16 @@ class Promotion < ActiveRecord::Base
     name_changed? || super
   end
 
+  # Exact time the promotion is activated.
+  def activate_at
+    first_date.present? && first_date.midnight
+  end
+
+  # Exact time the promotion is deactivated.
+  def deactivate_at
+    last_date.present? && last_date.tomorrow.midnight
+  end
+
   def to_s
     name
   end
@@ -91,15 +103,26 @@ class Promotion < ActiveRecord::Base
     true
   end
 
-  private
-    def touch_products
+  def touch_products
+    transaction do
       products.each do |product|
         product.touch
       end
     end
+  end
 
+  private
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
+    end
+
+    def schedule_activation
+      if activate_at && activate_at.future?
+        PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
+      end
+      if deactivate_at && deactivate_at.future?
+        PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
+      end
     end
 end
