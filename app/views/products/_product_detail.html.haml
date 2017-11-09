@@ -1,10 +1,6 @@
 - cache [current_group, I18n.locale, :product_detail, product] do
   .product-header
-    .breadcrumbs.visible-print
-      = render partial: 'products/breadcrumbs', object: @category, as: :category
     .actions
-      - if current_user.can_update?(product, at: current_store)
-        = link_to icon('edit', t('actions.edit')), edit_admin_product_path(product), class: 'btn btn-default'
       = link_to icon('times'), '#back', class: 'btn btn-default'
     %h1.product-title
       = product.title

@@ -611,18 +611,14 @@ $bg-tone:           #f6f6f6;
 .product-detail .product-header,
 .product-detail .product-footer { @extend .row; }
 
-/* Product header with breadcrumbs, actions */
+/* Product header with actions */
 .product-detail .product-header {
   position: relative;
   height: 240px;
 
-  .breadcrumbs {
-    display: block !important;
-    @extend .col-xs-12, .col-md-8;
-  }
   .actions {
-    @extend .col-xs-12, .col-md-4;
-    @extend .text-right;
+    @extend .pull-right;
+    margin-right: $grid-gutter-width/2;
 
     .btn {
       @extend .btn-sm;
@@ -665,7 +661,7 @@ $bg-tone:           #f6f6f6;
 .product-detail .images.presentational {
   @extend .col-xs-12, .col-md-8;
   min-height: 400px;
-  margin-top: -200px;
+  margin-top: -240px;
   margin-bottom: 60px;
 }
 

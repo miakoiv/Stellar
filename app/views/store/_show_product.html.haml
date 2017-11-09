@@ -9,3 +9,4 @@
 
 :coffee
   $('.product-detail').initialize()
+  $('.aux-nav').html "#{j render partial: 'products/context_menu', object: @product, as: :product}"

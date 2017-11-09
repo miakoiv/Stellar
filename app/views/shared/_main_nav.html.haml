@@ -6,8 +6,8 @@
   - unless current_store.detach_menu?
     %ul.nav.navbar-nav.responsive
       = render partial: @header.children.live, locals: {navmenu: false}
-    %ul.nav.navbar-nav.navbar-right
-      = yield :main_nav_right
+    %ul.aux-nav.nav.navbar-nav.navbar-right
+      = yield :auxiliary_nav
   %ul.nav.navbar-nav.navbar-right
     = render partial: 'shared/navbar_charms'
   %ul.nav.navbar-nav.navbar-right.responsive
