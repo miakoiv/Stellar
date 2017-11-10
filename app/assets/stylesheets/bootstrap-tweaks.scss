@@ -202,7 +202,18 @@ body {
 /*
  * Product filtering
  */
-.filter-bar {
+.filter-bar .dropdown-menu {
+  > li .checkbox,
+  > li .radio {
+    margin: 0;
+    padding: 3px 20px;
+
+    &:hover,
+    &:focus {
+      color: $dropdown-link-hover-color;
+      background-color: $dropdown-link-hover-bg;
+    }
+  }
 }
 
 @media (max-width: $screen-xs-max) {
