@@ -137,6 +137,7 @@ fi:
         name: Nimi
         subtitle: Alaotsikko
         product_scope: Tuotteiden järjestys
+        filtering: Tuotteiden suodatus
       component_entry:
         product_id: Tuote
         component_id: Komponentti

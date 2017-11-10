@@ -137,6 +137,7 @@ en:
         name: Name
         subtitle: Subtitle
         product_scope: Product sorting
+        filtering: Product filtering
       component_entry:
         product_id: Product
         component_id: Component

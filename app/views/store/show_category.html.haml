@@ -13,8 +13,9 @@
           .page-header.visible-print
             %h1= @category.to_s
             %p.lead= @category.subtitle
-          .product-filter
-            = render partial: 'products/filtering'
+          - if @category.filtering?
+            .product-filter
+              = render partial: 'products/filtering'
         .product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products

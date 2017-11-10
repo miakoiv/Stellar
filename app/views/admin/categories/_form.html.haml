@@ -6,6 +6,8 @@
         ~ f.text_area :subtitle, rows: 3
         = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
         = f.form_group do
+          = f.check_box :filtering
+        = f.form_group do
           = f.check_box :live
     - unless @category.new_record?
       .panel-footer
