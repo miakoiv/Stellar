@@ -1,2 +1,3 @@
+$('#groups-list').replaceWith("#{j render partial: 'admin/users/group', object: @user, as: :user, locals: {locked: false}}");
 $('#groups-table > tbody').html("#{j render partial: 'admin/groups/row', collection: @groups, as: :group}");
 $('#groups-table').initialize();
