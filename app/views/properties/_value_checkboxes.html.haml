@@ -1,9 +1,0 @@
-- if values.any?
-  %fieldset
-    %legend= property.name_with_units
-    .form-group
-      - values.each do |value|
-        .checkbox
-          %label
-            = check_box_tag "product_search[#{param}][]", value, search.options[param].present? && search.options[param].include?(value)
-            = value

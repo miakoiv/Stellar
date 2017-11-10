@@ -49,8 +49,17 @@ body {
 /*
  * Main navigation
  */
-#main-nav .navbar-brand { padding: 10px 15px; }
+#main-nav > .container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+#main-nav .navbar-header { flex: 0 0 auto; }
+#main-nav .navbar-body { flex: 1 0 auto; }
+#main-nav .navbar-charms { flex: 0 0 auto; }
+
 #main-nav .navbar-brand {
+  padding: 10px 15px;
+
   img {
     display: inline-block;
     max-height: 30px;
@@ -62,10 +71,50 @@ body {
   span { display: none; }
 }
 
+/* Always desktop margins and floats since main nav never collapses */
+#main-nav .navbar-left {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  > li { float: left; }
+}
+#main-nav .navbar-right {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  > li { float: left; }
+}
+
+#navbar-search {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  .form-group, .form-control { width: 100%; }
+}
+
+/* On small screen and above, search is relative to .navbar-body. */
+@media (min-width: $screen-sm-min) {
+  #main-nav .navbar-body { position: relative; }
+}
+
+@media (max-width: $screen-xs-max) {
+  #navbar-search {
+    top: 100%;
+    background-color: $brand-primary;
+
+    .navbar-form {
+      padding: 10px 15px 5px;
+      margin: 0;
+      border: 0;
+    }
+  }
+}
+
 /* Hamburger for toggling the side nav on mobile */
 .navbar .offcanvas-toggle {
   @extend .btn, .navbar-btn, .visible-xs;
-  float: right;
   margin-top: 0;
   margin-bottom: 0;
   margin-left: $grid-gutter-width/2;
@@ -153,43 +202,17 @@ body {
 /*
  * Product filtering
  */
-.product-filter-toggle { @extend .pull-right; }
-.product-filter-toggle .offcanvas-toggle {
-  @extend .btn, .btn-default, .btn-sm;
-  border: 0;
-  background: transparent;
+.filter-bar {
 }
-#filter-panel { width: 240px; }
-#filter-panel .offcanvas-toggle {
-  @extend .btn, .btn-default, .pull-right;
-  margin-right: 15px;
-  margin-top: 20px;
-  border: 0;
-  background: transparent;
-}
-#filter-panel .filter-form {
-  margin-top: 80px;
-}
-.filter-form fieldset {
-  padding-left: $grid-gutter-width/2;
-  padding-right: $grid-gutter-width/2;
-}
-.filter-form fieldset legend {
-  @extend .text-muted;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: $font-size-base;
-  font-weight: 400;
-}
-.filter-form .form-group {
-  margin-bottom: 0;
-}
-.filter-form .form-group .checkbox {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: $font-size-small;
 
-  input[type="checkbox"] { margin-top: 2px; }
+@media (max-width: $screen-xs-max) {
+  .navbar-form-inline {
+    display: inline-block;
+    max-width: 240px;
+    margin: 0;
+    padding: 10px 15px;
+    border: 0;
+  }
 }
 
 
@@ -239,9 +262,6 @@ body {
  * Navbar search dropdown
  */
 #search-dropdown {
-  right: 0;
-  left: auto;
-  min-width: 320px;
   max-height: 600px;
   overflow-y: scroll;
 }

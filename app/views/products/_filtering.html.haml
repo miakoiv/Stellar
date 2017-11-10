@@ -1,23 +1,16 @@
-.product-filter-toggle
-  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
-    = icon('search-plus', t('actions.filter'))
-
-#filter-panel.offcanvas.navmenu.navmenu-default.navmenu-fixed-right{class: @filter_enabled && 'open'}
-  .inner-wrap
-    %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#filter-panel'}}
-      = icon('close')
-    .filter-form
-      = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
+= form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
+  %nav.navbar.navbar-default.filter-bar
+    .navbar-header
+      .navbar-form.navbar-form-inline
+        .form-group.has-feedback
+          = f.search_field :keyword, placeholder: t('search_panel.keyword'), class: 'form-control'
+          %span.form-control-feedback= icon('search')
+      %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#filter-nav'}}
+        = icon('caret-down')
+    #filter-nav.collapse.navbar-collapse
+      %ul.nav.navbar-nav
         - current_store.searchable_properties.each do |property|
-          = render partial: 'properties/value_checkboxes', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible)}
-        %fieldset
-          %legend= col(Product, :price)
-          .form-group
-            .input-group.input-group-sm
-              = f.text_field :price_min, class: 'form-control'
-              %span.input-group-addon= icon('caret-right')
-              = f.text_field :price_max, class: 'form-control'
-              %span.input-group-addon €
+          = render partial: 'properties/filter_menu', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible)}
 
 :coffee
   $('#filter-form').on 'change', (e) ->

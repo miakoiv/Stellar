@@ -1,13 +1,12 @@
-- if @navbar_search
+= form_tag lookup_path, method: :get, class: 'navbar-form', role: 'search' do
+  .form-group
+    = search_field_tag 'product_search[keyword]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
+  %ul#search-dropdown.dropdown-menu.media-list
 
-  = form_tag lookup_path, method: :get, id: 'navbar-search', class: 'navbar-form navbar-right hidden-xs', role: 'search' do
-    .form-group.has-feedback
-      = search_field_tag 'product_search[keyword]', nil, autocomplete: 'off', class: 'form-control', placeholder: t('search_panel.keyword')
-      %span.form-control-feedback= icon('search')
-      %ul#search-dropdown.dropdown-menu.media-list
-
-  :coffee
-    $('#navbar-search').on 'submit', (e) ->
-      e.preventDefault()
-    $('#product_search_keyword').smartkeyup ->
-      $.get '#{lookup_path}?product_search[keyword]=' + encodeURIComponent($(this).val())
+:coffee
+  $('#navbar-search').on 'shown.bs.collapse', (e) ->
+    $('#navbar-search input').focus()
+  $('#navbar-search > form').on 'submit', (e) ->
+    e.preventDefault()
+  $('#product_search_keyword').smartkeyup ->
+    $.get '#{lookup_path}?product_search[keyword]=' + encodeURIComponent($(this).val())

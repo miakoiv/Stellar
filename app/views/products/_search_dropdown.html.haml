@@ -1,9 +1,5 @@
-%li
-  = link_to search_path(params: {product_search: {keyword: params[:product_search][:keyword]}}) do
-    = t('actions.advanced_search', keyword: params[:product_search][:keyword])
-%li.divider
 = content_tag_for :li, @products, class: 'media' do |product|
-  = link_to show_product_path(product), data: {push: 'partial', target: '#store-body'} do
+  = link_to show_product_path(product) do
     .media-left
       .box-thumbnail
         = image_variant_tag product.cover_image, :thumbnail

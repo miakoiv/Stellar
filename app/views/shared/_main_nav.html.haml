@@ -1,28 +1,30 @@
 .container
-  %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#side-nav'}}
-    = icon('bars')
   .navbar-header
     = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).fqdn), class: 'navbar-brand'
-  - unless current_store.detach_menu?
-    %ul.nav.navbar-nav.responsive
-      = render partial: @header.children.live, locals: {navmenu: false}
-    %ul.aux-nav.nav.navbar-nav.navbar-right
-      = yield :auxiliary_nav
-  %ul.nav.navbar-nav.navbar-right
-    = render partial: 'shared/navbar_charms'
-  %ul.nav.navbar-nav.navbar-right.responsive
-    - if user_signed_in? && !guest?
-      %li.dropdown
-        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
-          = bootstrap_label(current_group, icon: 'user', text: '')
-          = current_user.name.split.first
-          %span.caret
-        %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
-          - if can_manage?
-            = render partial: 'shared/admin_menu'
-          - if group_delegate?
-            = render partial: 'shared/group_menu'
-          = render partial: 'shared/user_menu'
-    - else
-      %li.lg= link_to icon('sign-in'), new_user_session_path
-  = render partial: 'shared/keyword_search'
+  .navbar-body
+    - unless current_store.detach_menu?
+      %ul.nav.navbar-nav.navbar-left.responsive
+        = render partial: @header.children.live, locals: {navmenu: false}
+      %ul.nav.navbar-nav.navbar-right.responsive.aux-nav
+        = yield :auxiliary_nav
+    #navbar-search.collapse
+      = render partial: 'shared/keyword_search'
+  .navbar-charms
+    %ul.nav.navbar-nav.navbar-right
+      = render partial: 'shared/navbar_charms'
+      - if user_signed_in? && !guest?
+        %li.dropdown.hidden-xs
+          %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+            = bootstrap_label(current_group, icon: 'user', text: '')
+            = current_user.name.split.first
+            %span.caret
+          %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+            - if can_manage?
+              = render partial: 'shared/admin_menu'
+            - if group_delegate?
+              = render partial: 'shared/group_menu'
+            = render partial: 'shared/user_menu'
+      - else
+        %li.lg= link_to icon('sign-in'), new_user_session_path
+      %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#side-nav'}}
+        = icon('bars')

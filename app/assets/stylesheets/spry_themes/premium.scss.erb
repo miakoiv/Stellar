@@ -52,9 +52,6 @@ $bg-tone:           #f6f6f6;
 /* Push content below the navbar */
 #content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
 
-/* Rounded navbar search */
-#navbar-search input { border-radius: $input-height-base/2; }
-
 
 /*
  * Less prominent mobile navbar
@@ -152,6 +149,7 @@ $bg-tone:           #f6f6f6;
   @extend .label, .label-primary;
   display: block;
   margin-top: 10px;
+  font-size: inherit;
 }
 .mega-dropdown-menu li ul li a .page-image { display: none; }
 
@@ -181,21 +179,7 @@ $bg-tone:           #f6f6f6;
 /*
  * Product filtering
  */
-#filter-panel {
-  display: block;
-  left: 100%;
-  right: auto;
-  transform: translateX(0);
-  transform: translateX(0) translateZ(0);
-  transition: 0.4s ease all;
-  backface-visibility: hidden;
-  background-color: $body-bg;
-}
-#filter-panel.open {
-  transform: translateX(-240px);
-  transform: translateX(-240px) translateZ(0);
-  @include box-shadow(0 0 6px 0 rgba(0,0,0,0.1));
-}
+#filter-nav .navbar-form input { border-radius: $input-height-base/2; }
 
 
 /*

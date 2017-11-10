@@ -1,3 +1,6 @@
+%li.lg
+  %a{href: '#', data: {toggle: 'collapse', target: '#navbar-search'}}
+    = icon('search')
 - if user_signed_in? && can_shop?
   %li.lg
     = link_to cart_path do

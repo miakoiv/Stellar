@@ -30,8 +30,6 @@ class StoreController < ApplicationController
   before_action :find_department, only: [:show_department]
   before_action :find_promotion, only: [:show_promotion]
   before_action :find_product, only: [:show_product]
-  before_action :enable_navbar_search,
-    only: [:front, :show_category, :show_department, :show_promotion, :show_product]
 
   # GET /
   def index
@@ -205,11 +203,6 @@ class StoreController < ApplicationController
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
-    end
-
-    # Enable navbar search widget when applicable.
-    def enable_navbar_search
-      @navbar_search = true
     end
 
     # Restrict searching to live products in current store.
