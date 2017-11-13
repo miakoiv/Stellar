@@ -2,7 +2,7 @@
   %ul.nav.navbar-nav
     - if segment.section.column?
       %li.dropdown
-        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = dropdown_toggle do
           = icon('crop')
         %ul.dropdown-menu.dropdown-menu-right
           - Segment.alignment_options.each do |title, alignment|
@@ -10,7 +10,7 @@
               = link_to admin_segment_path(segment, params: {segment: {alignment: alignment}}), remote: true, method: :patch do
                 = title
     %li.dropdown
-      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+      = dropdown_toggle do
         = segment
         %i.caret
       %ul.dropdown-menu.dropdown-menu-right

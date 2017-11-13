@@ -20,6 +20,12 @@ module ApplicationHelper
     set_meta_tags(og: tags)
   end
 
+  def dropdown_toggle
+    content_tag :a, data: {toggle: 'dropdown'}, role: 'button', tabindex: 0 do
+      yield
+    end
+  end
+
   def menu_title(icon, text)
     icon(icon, text, class: 'fa-fw')
   end

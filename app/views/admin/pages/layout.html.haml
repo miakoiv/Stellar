@@ -5,7 +5,7 @@
       %ul.nav.navbar-nav.navbar-right
         - if current_user.can_create?(Section, at: current_store)
           %li.dropdown
-            %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+            = dropdown_toggle do
               = icon('plus', t('.new_section'))
             %ul.dropdown-menu
               - Section.preset_menu_options.each do |outline, layouts|

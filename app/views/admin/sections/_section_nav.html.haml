@@ -1,15 +1,15 @@
 %nav.section-nav.navbar.navbar-inverse{id: dom_id(section, :nav)}
   %ul.nav.navbar-nav
     %li
-      %a{href: '#'}= drag_handle
+      %a{role: 'button'}= drag_handle
     %li.dropdown
-      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+      = dropdown_toggle do
         = icon('paint-brush')
       %ul.dropdown-menu
         %li
           = render partial: 'admin/sections/form', object: section, as: :section
     %li.dropdown
-      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+      = dropdown_toggle do
         = icon('image')
       %ul.dropdown-menu
         %li

@@ -4,19 +4,19 @@
   .navbar-body
     %ul.nav.navbar-nav.responsive
       %li.dropdown
-        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = dropdown_toggle do
           = menu_title 'tachometer', t('admin.dashboard.title')
           %span.caret
         %ul.dropdown-menu
           = render partial: 'admin/shared/dashboard_menu'
       %li.dropdown
-        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = dropdown_toggle do
           = menu_title 'cube', t('admin.content.title')
           %span.caret
         %ul.dropdown-menu
           = render partial: 'admin/shared/content_menu'
       %li.dropdown
-        %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+        = dropdown_toggle do
           = menu_title 'cog', t('admin.configuration.title')
           %span.caret
         %ul.dropdown-menu
@@ -25,7 +25,7 @@
     %ul.nav.navbar-nav.navbar-right.responsive
       - if user_signed_in? && !guest?
         %li.dropdown
-          %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+          = dropdown_toggle do
             = bootstrap_label(current_group, icon: 'user', text: '')
             = current_user.name.split.first
             %span.caret

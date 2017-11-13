@@ -8,7 +8,7 @@
         = render partial: megamenu.children.live, locals: {navmenu: true}
   - else
     %li.dropdown.mega-dropdown
-      %a.dropdown-toggle{href: '#', data: {toggle: 'dropdown'}}
+      = dropdown_toggle do
         = megamenu
         %span.caret
       %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
