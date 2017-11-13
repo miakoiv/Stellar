@@ -381,7 +381,6 @@ body {
  * General style resets and additions
  */
 h1, h2, h3, h4, h5, h6, th, dt, label, .label { font-weight: 500; }
-a, a:focus { outline: 0 !important; }
 a.disabled, .disabled > a { pointer-events: none; }
 
 input[type="number"] { min-width: 60px; }
