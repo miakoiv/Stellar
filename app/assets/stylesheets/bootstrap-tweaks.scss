@@ -205,8 +205,16 @@ body {
  * Product filtering
  */
 .filter-bar .dropdown-menu {
-  > li .checkbox,
-  > li .radio {
+  min-width: 240px;
+}
+.filter-bar .dropdown-columns {
+  max-height: 400px;
+  display: flex;
+  flex-flow: column wrap;
+
+  > .checkbox,
+  > .radio {
+    flex: 0 0 auto;
     margin: 0;
     padding: 3px 20px;
 
