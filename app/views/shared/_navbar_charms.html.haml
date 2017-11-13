@@ -1,5 +1,5 @@
 %li.lg
-  %a{href: '#', data: {toggle: 'collapse', target: '#navbar-search'}}
+  %a{data: {toggle: 'collapse', target: '#navbar-search'}, tabindex: 0, role: 'button'}
     = icon('search')
 - if user_signed_in? && can_shop?
   %li.lg
