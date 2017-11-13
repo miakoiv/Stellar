@@ -18,7 +18,7 @@ module Pageable
     # awesome_nested_set incompatibility.
     # See <https://github.com/collectiveidea/awesome_nested_set/issues/276>
     def conditionally_disable_page
-      if page.present? && !live?
+      if page.present? && respond_to?(:live) && !live?
         page.update(live: false)
       end
       true

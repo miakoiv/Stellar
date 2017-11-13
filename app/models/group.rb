@@ -69,11 +69,6 @@ class Group < ActiveRecord::Base
     users.with_role(:order_notify, store)
   end
 
-  # Groups are always live if someone asks. Pages do.
-  def live?
-    true
-  end
-
   def to_s
     name
   end

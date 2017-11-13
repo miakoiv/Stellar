@@ -110,9 +110,10 @@ class Page < ActiveRecord::Base
     primary?
   end
 
-  # Pages with a resource can't be live if the resource isn't.
+  # Pages with a resource can be live if the resource is live, or
+  # doesn't understand the concept of being live in the first place.
   def can_be_live?
-    resource.nil? || resource.live?
+    resource.nil? || !resource.respond_to?(:live) || resource.live?
   end
 
   def slugger
