@@ -112,6 +112,7 @@ $bg-tone:           #f6f6f6;
 }
 .mega-dropdown-menu .row > li {
   @extend .col-sm-3, .col-md-2;
+  flex: 0 1 auto;
   margin-bottom: 20px;
 }
 .mega-dropdown-menu .row > li > a {
@@ -149,7 +150,9 @@ $bg-tone:           #f6f6f6;
   @extend .label, .label-primary;
   display: block;
   margin-top: 10px;
-  font-size: inherit;
+  font-size: 85.714%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .mega-dropdown-menu li ul li a .page-image { display: none; }
 
