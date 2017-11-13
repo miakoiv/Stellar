@@ -176,6 +176,8 @@ body {
  * Secondary navigation bar with integrated toolbar
  */
 #page-nav {
+  position: relative;
+  z-index: 1010;
   margin-bottom: 0;
   border-radius: 0;
 
