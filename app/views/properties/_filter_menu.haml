@@ -2,12 +2,14 @@
   %li.dropdown
     = dropdown_toggle do
       = property.name
+      - if selected
+        %span.badge= selected.size
       %span.caret
-    %ul.dropdown-menu
-      - values.each do |value|
-        %li
+    .dropdown-menu
+      .dropdown-columns
+        - values.each do |value|
           .checkbox
             %label
-              = check_box_tag "product_search[#{param}][]", value, search.options[param].present? && search.options[param].include?(value)
+              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
               = value
               = property.measurement_unit
