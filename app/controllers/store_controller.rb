@@ -87,7 +87,6 @@ class StoreController < ApplicationController
   def show_category
     @query = params[:product_search] || {}
     @search = ProductSearch.new(filter_params)
-    logger.info "Product search: #{@search.inspect}"
     @products = @search.results.visible.sorted(@category.product_scope)
   end
 
