@@ -205,13 +205,6 @@ body {
  * Product filtering
  */
 .filter-bar .dropdown-menu {
-  min-width: 240px;
-}
-.filter-bar .dropdown-columns {
-  max-height: 400px;
-  display: flex;
-  flex-flow: column wrap;
-
   > .checkbox,
   > .radio {
     flex: 0 0 auto;
@@ -225,7 +218,15 @@ body {
     }
   }
 }
-
+.filter-bar .dropdown:last-child > .dropdown-menu {
+  @extend .dropdown-menu-right;
+}
+@media (min-width: $screen-sm-min) {
+  .filter-bar .dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
 @media (max-width: $screen-xs-max) {
   .navbar-form-inline {
     display: inline-block;

@@ -6,10 +6,9 @@
         %span.badge= selected.size
       %span.caret
     .dropdown-menu
-      .dropdown-columns
-        - values.each do |value|
-          .checkbox
-            %label
-              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
-              = value
-              = property.measurement_unit
+      - values.each do |value|
+        .checkbox
+          %label
+            = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
+            = value
+            = property.measurement_unit
