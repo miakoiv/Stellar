@@ -170,11 +170,15 @@ body {
       margin: 0;
       border: 0;
       background-color: $brand-primary;
+
+      .form-group { margin-bottom: 0; }
+      input {
+        font-size: 16px;
+        line-height: 1.25;
+      }
     }
-    .navbar-form .form-group { margin-bottom: 0; }
   }
-}
-@media (max-width: $screen-xs-max) {
+
   #lookup-dropdown {
     top: $input-height-base + 20px;
     bottom: 0;

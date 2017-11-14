@@ -2,9 +2,5 @@
   $('#lookup-dropdown .category-results').html("#{j render partial: 'categories/lookup_results', object: @category_results, as: :categories}");
   $('#lookup-dropdown .product-results').html("#{j render partial: 'products/lookup_results', object: @product_results, as: :products}");
   $('#lookup-dropdown').show('fade', 150);
-  $('#navbar-lookup input').on('focus', function(e) { $('#lookup-dropdown').show('fade', 150) });
-  $('#navbar-lookup input').on('blur', function(e) { $('#lookup-dropdown').hide('fade') });
 - else
-  $('#navbar-lookup input').off('focus');
-  $('#navbar-lookup input').off('blur');
   $('#lookup-dropdown').hide('fade');

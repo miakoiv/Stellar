@@ -8,7 +8,14 @@
 :coffee
   $('#navbar-lookup').on 'shown.bs.collapse', (e) ->
     $('#navbar-lookup input').focus()
+    $('#lookup-open').hide()
+    $('#lookup-close').show()
+  $('#navbar-lookup').on 'hidden.bs.collapse', (e) ->
+    $('#lookup-close').hide()
+    $('#lookup-open').show()
   $('#navbar-lookup > form').on 'submit', (e) ->
     e.preventDefault()
   $('#keyword').smartkeyup ->
-    $.get '#{lookup_path}?keyword=' + encodeURIComponent($(this).val())
+    q = $(this).val()
+    if q?.length > 1
+      $.get '#{lookup_path}?keyword=' + encodeURIComponent(q)
