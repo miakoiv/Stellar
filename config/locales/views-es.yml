@@ -276,7 +276,6 @@ es:
     upload: Subir archivo
     reorder: Reordenar
     search: Busqueda
-    advanced_search: Busqueda avanzada con ”%{keyword}”…
     query: Escribe para buscar…
     confirm:
       title: 'Estas seguro?'
@@ -294,8 +293,3 @@ es:
   branding:
     heading: Stellar Storefront
     body_html: <p>Proporcionado por Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2017</p>
-  search_panel:
-    search: Busqueda
-    keyword: Palabra clave
-    budget: Precio Máximo
-    all_categories: Todas las categorias

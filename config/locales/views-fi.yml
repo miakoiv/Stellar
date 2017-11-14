@@ -264,11 +264,14 @@ fi:
     edit:
       duplicate: Kopioi ostoskoriin
   products:
+    filtering:
+      keyword: Hakusana…
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
   store:
     front: Etusivu
     front_blurb: Kauppa avataan pian, tervetuloa lähipäivinä!
+    lookup: Hae mitä vain…
     product_not_found: Tuotetta ei löytynyt. Kokeile sen sijaan näitä.
     all_products: Kaikki tuotteet
     product_variants: Vaihtoehtoisia tuotteita
@@ -343,7 +346,6 @@ fi:
     reorder: Järjestele
     search: Etsi
     filter: Hae tuotteista
-    advanced_search: Tarkennettu haku sanalla ”%{keyword}”…
     query: Kirjoita hakeaksesi…
     confirm:
       title: 'Oletko varma?'
@@ -361,8 +363,3 @@ fi:
   branding:
     heading: Stellar Storefront
     body_html: <p>Tuottanut Leasit Oy</p><p><i class="fa fa-copyright"></i> 2015–2017</p>
-  search_panel:
-    search: Etsi
-    keyword: Hakusana
-    budget: Hinta enintään
-    all_categories: Kaikki tuoteryhmät

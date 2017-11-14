@@ -63,22 +63,15 @@ class StoreController < ApplicationController
     redirect_to front_path, notice: t('.notice')
   end
 
-  # GET /store/search
-  # GET /store/search.js
-  def search
-    @query = saved_search_query('product', 'product_search')
-    @search = ProductSearch.new(search_params)
-    @products = @search.results.visible.page(params[:page])
-    @properties = current_store.properties.searchable
-
-    respond_to :js, :html
-  end
-
   # GET /store/lookup.js
   def lookup
-    @query = params[:product_search]
-    @search = ProductSearch.new(search_params)
-    @products = @search.results.visible.limit(Product::INLINE_SEARCH_RESULTS)
+    @query = params
+    category_search = CategorySearch.new(category_lookup_params)
+    product_search = ProductSearch.new(product_lookup_params)
+    @category_results = category_search.results
+    @product_results = product_search.results.visible
+      .limit(Product::INLINE_SEARCH_RESULTS)
+    @results = @category_results.any? || @product_results.any?
 
     respond_to :js
   end
@@ -200,8 +193,14 @@ class StoreController < ApplicationController
       end
     end
 
-    # Restrict searching to live products in current store.
-    def search_params
+    # Restrict category lookup to live categories in current store.
+    def category_lookup_params
+      @query.merge(store: current_store, live: true)
+    end
+
+    # Restrict product lookup to live products in current store,
+    # or member stores if defined (applies to portals).
+    def product_lookup_params
       @query.merge(store: current_store.member_stores.presence || current_store, live: true)
     end
 

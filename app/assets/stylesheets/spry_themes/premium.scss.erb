@@ -75,6 +75,15 @@ $bg-tone:           #f6f6f6;
 
 
 /*
+ * Navbar lookup widget
+ */
+#navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
+@media (max-width: $screen-xs-max) {
+  #navbar-lookup { top: 60px; }
+}
+
+
+/*
  * Rounded buttons all over
  */
 #static-wrap .btn,
@@ -165,7 +174,6 @@ $bg-tone:           #f6f6f6;
 #categories-wrap { display: none; }
 #products-wrap { }
 #product-detail-wrap { }
-#search-panel-wrap { }
 
 /* Slightly darker right column on medium and up */
 @media (min-width: $screen-md-min) {
@@ -183,14 +191,11 @@ $bg-tone:           #f6f6f6;
 /*
  * Product filtering
  */
-#filter-nav .navbar-form input { border-radius: $input-height-base/2; }
-
-
-/*
- * Search panel with search form
- */
-#search-panel-wrap { background-color: $bg-tone; }
-.search-panel .search-form { @extend .container; }
+.filter-bar { border-radius: $navbar-height/2; }
+.filter-bar .navbar-form {
+  padding-left: 9px;
+  input { border-radius: $input-height-base/2; }
+}
 
 
 /*

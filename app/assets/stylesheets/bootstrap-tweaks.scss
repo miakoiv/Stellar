@@ -54,7 +54,12 @@ body {
   flex-flow: row nowrap;
 }
 #main-nav .navbar-header { flex: 0 0 auto; }
-#main-nav .navbar-body { flex: 1 0 auto; }
+
+/* Relatively positioned body for the lookup widget */
+#main-nav .navbar-body {
+  flex: 1 0 auto;
+  position: relative;
+}
 #main-nav .navbar-charms { flex: 0 0 auto; }
 
 #main-nav .navbar-brand {
@@ -71,45 +76,13 @@ body {
   span { display: none; }
 }
 
-/* Always desktop margins and floats since main nav never collapses */
-#main-nav .navbar-left {
-  margin-top: 0;
-  margin-bottom: 0;
-
-  > li { float: left; }
-}
+/* Use desktop margins and floats since main nav never collapses */
+#main-nav .navbar-left,
 #main-nav .navbar-right {
   margin-top: 0;
   margin-bottom: 0;
 
   > li { float: left; }
-}
-
-#navbar-search {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-
-  .form-group, .form-control { width: 100%; }
-}
-
-/* On small screen and above, search is relative to .navbar-body. */
-@media (min-width: $screen-sm-min) {
-  #main-nav .navbar-body { position: relative; }
-}
-
-@media (max-width: $screen-xs-max) {
-  #navbar-search {
-    top: 100%;
-    background-color: $brand-primary;
-
-    .navbar-form {
-      padding: 10px 15px 5px;
-      margin: 0;
-      border: 0;
-    }
-  }
 }
 
 /* Hamburger for toggling the side nav on mobile */
@@ -170,6 +143,71 @@ body {
     display: inline-block;
   }
 }
+
+
+/*
+ * Navbar lookup widget and associated dropdown
+ */
+#navbar-lookup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  .form-group, .form-control { width: 100%; }
+}
+
+@media (max-width: $screen-xs-max) {
+  #navbar-lookup {
+    position: fixed;
+    top: $navbar-height;
+    bottom: 0;
+
+    .navbar-form {
+      padding: 10px 15px;
+      margin: 0;
+      border: 0;
+      background-color: $brand-primary;
+    }
+    .navbar-form .form-group { margin-bottom: 0; }
+  }
+}
+@media (max-width: $screen-xs-max) {
+  #lookup-dropdown {
+    top: $input-height-base + 20px;
+    bottom: 0;
+    overflow-y: auto;
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  #lookup-dropdown {
+    columns: 2;
+    column-rule: 1px solid $dropdown-divider-bg;
+    max-height: 600px;
+    overflow-x: scroll;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+#lookup-dropdown .media { margin: 0; }
+#lookup-dropdown .media a {
+  display: block;
+  clear: both;
+  padding: 10px 20px;
+  color: $dropdown-link-color;
+  border-bottom: 1px solid $dropdown-divider-bg;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $dropdown-link-hover-color;
+    background-color: $dropdown-link-hover-bg;
+  }
+}
+#lookup-dropdown .divider + .media { margin-top: -9px; }
 
 
 /*
@@ -281,21 +319,6 @@ body {
 
 
 /*
- * Navbar search dropdown
- */
-#search-dropdown {
-  max-height: 600px;
-  overflow-y: scroll;
-}
-#search-dropdown .media { margin: 0; }
-#search-dropdown .media a {
-  padding: 10px 20px;
-  border-bottom: 1px solid $dropdown-divider-bg;
-}
-#search-dropdown .divider + .media { margin-top: -9px; }
-
-
-/*
  * Extra sidebar containing photo albums
  */
 .sidebar {
@@ -363,15 +386,6 @@ body {
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: transparent;
-}
-
-
-/*
- * Search panel
- */
-.search-panel {
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 

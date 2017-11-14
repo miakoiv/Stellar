@@ -7,8 +7,8 @@
         = render partial: @header.children.live, locals: {navmenu: false}
       %ul.nav.navbar-nav.navbar-right.responsive.aux-nav
         = yield :auxiliary_nav
-    #navbar-search.collapse
-      = render partial: 'shared/keyword_search'
+    #navbar-lookup.collapse
+      = render partial: 'shared/lookup'
   .navbar-charms
     %ul.nav.navbar-nav.navbar-right
       = render partial: 'shared/navbar_charms'

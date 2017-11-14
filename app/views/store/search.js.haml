@@ -1,6 +1,0 @@
-$("#{j render partial: 'products/search_result_row', collection: @products, as: :product}").appendTo($('.infinite-table > table > tbody'));
-
-- if @products.last_page?
-  $('.pagination').html('');
-- else
-  $('.pagination').html("#{j link_to_next_page(@products, loading_spinner, remote: true)}")

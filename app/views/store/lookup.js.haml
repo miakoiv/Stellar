@@ -1,9 +1,10 @@
-- if @products.any?
-  $('#search-dropdown').html("#{j render partial: 'products/search_dropdown', object: @products, as: :products}");
-  $('#search-dropdown').show('fade', 150);
-  $('#navbar-search input').on('focus', function(e) { $('#search-dropdown').show('fade', 150) });
-  $('#navbar-search input').on('blur', function(e) { $('#search-dropdown').hide('fade') });
+- if @results
+  $('#lookup-dropdown .category-results').html("#{j render partial: 'categories/lookup_results', object: @category_results, as: :categories}");
+  $('#lookup-dropdown .product-results').html("#{j render partial: 'products/lookup_results', object: @product_results, as: :products}");
+  $('#lookup-dropdown').show('fade', 150);
+  $('#navbar-lookup input').on('focus', function(e) { $('#lookup-dropdown').show('fade', 150) });
+  $('#navbar-lookup input').on('blur', function(e) { $('#lookup-dropdown').hide('fade') });
 - else
-  $('#navbar-search input').off('focus');
-  $('#navbar-search input').off('blur');
-  $('#search-dropdown').hide('fade');
+  $('#navbar-lookup input').off('focus');
+  $('#navbar-lookup input').off('blur');
+  $('#lookup-dropdown').hide('fade');

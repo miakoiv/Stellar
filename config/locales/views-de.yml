@@ -139,7 +139,6 @@ de:
     print: Drucken
     reorder: Sortieren
     search: Suchen
-    advanced_search: Erweiterte Suche mit ”%{keyword}”
     confirm:
       title: 'Sind Sie sicher?'
       body: "Sind Sie sich sicher, dass Sie %{klass} ”%{name}” löschen möchten?"
@@ -153,8 +152,3 @@ de:
   branding:
     heading: Stellar Storefront
     body_html: Provided by Leasit Oy <i class="fa fa-copyright"></i> 2015
-  search_panel:
-    search: Suche
-    keyword: Stichwort
-    budget: Höchstpreis
-    all_categories: Alle Kategorien

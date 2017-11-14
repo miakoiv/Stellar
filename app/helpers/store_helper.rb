@@ -63,12 +63,4 @@ module StoreHelper
       end
     end
   end
-
-  def property_string(product_properties)
-    capture do
-      product_properties.each do |pp|
-        concat content_tag(:span, pp.value, class: 'label label-default')
-      end
-    end
-  end
 end

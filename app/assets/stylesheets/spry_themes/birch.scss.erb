@@ -21,9 +21,6 @@ $brand-primary: #013183;
   max-height: 40px;
   margin: 0;
 }
-#navbar-search .form-control {
-  max-width: 120px;
-}
 
 .navbar-nav > li.lg > a {
   padding-top: 10px;
@@ -37,27 +34,6 @@ $brand-primary: #013183;
 
 @media (max-width: $screen-sm-min) {
   .products, .product-detail { padding-top: 30px; }
-}
-
-#search-panel-wrap {
-  padding-top: 10px;
-  background-image: url(<%= asset_path('birch.jpg') %>);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  .search-panel {
-    @extend .container;
-  }
-}
-
-#search-results-wrap {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  .products {
-    @extend .container;
-  }
 }
 
 #store-wrap {}
@@ -438,7 +414,6 @@ $brand-primary: #013183;
 
 @media print {
   #categories-wrap { padding: 0 !important; }
-  #search-panel-wrap { display: none; }
   #products-wrap {
     .products {
       margin-top: 0;

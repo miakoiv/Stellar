@@ -3,7 +3,7 @@
     .navbar-header
       .navbar-form.navbar-form-inline
         .form-group.has-feedback
-          = f.search_field :keyword, placeholder: t('search_panel.keyword'), class: 'form-control'
+          = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
           %span.form-control-feedback= icon('search')
       %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#filter-nav'}}
         = icon('caret-down')

@@ -1,0 +1,11 @@
+- if categories.any?
+  %li.dropdown-header= title(Category, count: 2)
+  - categories.each do |category|
+    %li.media
+      = link_to show_category_path(category) do
+        .media-left
+          .box-thumbnail
+            = image_variant_tag category.cover_image, :thumbnail
+        .media-body
+          .media-heading
+            %strong= category

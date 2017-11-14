@@ -1,0 +1,18 @@
+- if products.any?
+  %li.dropdown-header= title(Product, count: 2)
+  - products.each do |product|
+    %li.media
+      = link_to show_product_path(product) do
+        .media-left
+          .box-thumbnail
+            = image_variant_tag product.cover_image, :thumbnail
+        .media-body
+          .media-heading
+            %strong= product.title
+            .small= product.subtitle
+          - if can_see_pricing?
+            %p.currency.text-right
+              - if product.has_variants?
+                = price_range *pricing.range_for_display(product)
+              - else
+                = price_tag *pricing.for_display(product)

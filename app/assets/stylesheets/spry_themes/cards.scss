@@ -95,24 +95,6 @@ $footer-bg: #d4d4d4;
   }
 }
 
-#search-panel-wrap {
-  padding-top: 10px;
-  background-color: $gray-light;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAF0lEQVQI12NgYGAIYYAAGI3CCWEgqAIAVZQCoRIAGyYAAAAASUVORK5CYII=);
-
-  .search-panel {
-    @extend .container;
-  }
-}
-
-#search-results-wrap {
-  margin-top: 20px;
-
-  .products {
-    @extend .container;
-  }
-}
-
 #categories-wrap {
   position: relative;
   padding-bottom: 30px;
