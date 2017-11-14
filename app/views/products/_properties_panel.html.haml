@@ -5,6 +5,9 @@
         %td{colspan: 2}
           .small= t('store.product_properties')
     %tbody
-      = content_tag_for :tr, product.product_properties do |product_property|
-        %th= product_property.property
-        %td= product_property.value_with_units
+      - product.product_properties.group_by(&:property).each do |property, product_properties|
+        %tr[property]
+          %th= property
+          %td
+            - product_properties.each do |product_property|
+              = product_property.value_with_units

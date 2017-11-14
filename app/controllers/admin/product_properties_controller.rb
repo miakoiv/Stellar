@@ -9,11 +9,10 @@ class Admin::ProductPropertiesController < ApplicationController
 
   # POST /admin/products/1/product_properties
   def create
-    @product_property = @product.product_properties.find_or_initialize_by(
-      property_id: params[:product_property][:property_id]
-    )
+    @product_property = @product.product_properties
+      .find_or_initialize_by(product_property_params)
     respond_to do |format|
-      if @product_property.update(product_property_params)
+      if @product_property.save
         @product.touch
         format.js { render :create }
       else
