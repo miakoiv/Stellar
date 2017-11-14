@@ -25,7 +25,9 @@ body {
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
   transition: 0.4s ease all;
+  overflow-y: scroll;
   backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 #side-nav.open {
   transform: translateX($navmenu-width);
@@ -176,7 +178,8 @@ body {
   #lookup-dropdown {
     top: $input-height-base + 20px;
     bottom: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     margin-top: 0;
     border: 0;
     border-radius: 0;
