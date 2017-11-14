@@ -27,24 +27,14 @@ class Category < ActiveRecord::Base
   validates :product_scope, presence: true
 
   #---
-  # Finds the first live category with visible products.
-  def self.first_with_products
-    live.find { |category| category.products.visible.any? }
-  end
-
-  #---
   # Category is inside another category if it's the category itself,
   # or one of its descendants.
   def inside?(category)
     category == self || is_descendant_of?(category)
   end
 
-  # Finds the first live descendant category with visible products if this one
-  # has none. Defaults to self if descendants contain no visible products.
-  def first_with_products
-    return self if products.visible.any?
-    first = descendants.live.first_with_products
-    return first || self
+  def self_and_maybe_descendants
+    products.visible.any? ? Category.where(id: self) : self_and_descendants
   end
 
   def slugger

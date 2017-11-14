@@ -31,8 +31,13 @@ class Property < ActiveRecord::Base
 
   def values_for(scope)
     sort_attribute = numeric? ? :value_f : :value
-    product_properties.joins(:product).merge(scope).order(sort_attribute).
-      pluck(:value).uniq
+    product_properties
+      .joins(product: :categories)
+      .merge(Product.live)
+      .merge(scope)
+      .reorder(sort_attribute)
+      .pluck(:value)
+      .uniq
   end
 
   def value_type_name

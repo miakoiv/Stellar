@@ -10,7 +10,7 @@
     #filter-nav.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - current_store.searchable_properties.each do |property|
-          = render partial: 'properties/filter_menu', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.products.visible), selected: @search.options[property.sluggify]}
+          = render partial: 'properties/filter_menu', object: property, as: :property, locals: {search: @search, param: property.sluggify, values: property.values_for(@category.self_and_maybe_descendants), selected: @search.options[property.sluggify]}
 
 :coffee
   $('#filter-form').on 'change', (e) ->

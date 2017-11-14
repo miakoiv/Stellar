@@ -39,7 +39,7 @@ class StoreController < ApplicationController
 
   # GET /front
   def front
-    @category = @live_categories.first_with_products
+    @category = @live_categories.first
     if @category.present?
       return redirect_to show_category_path(@category)
     end
@@ -144,13 +144,9 @@ class StoreController < ApplicationController
 
     # Find category from live categories by friendly id, including history.
     def find_category
-      selected = @live_categories.friendly.find(params[:category_id])
-      if params[:product_id].nil? && request.path != show_category_path(selected)
-        return redirect_to show_category_path(selected), status: :moved_permanently
-      end
-      @category = selected.first_with_products
-      if @category != selected
-        return redirect_to show_category_path(@category)
+      @category = @live_categories.friendly.find(params[:category_id])
+      if params[:product_id].nil? && request.path != show_category_path(@category)
+        return redirect_to show_category_path(@category), status: :moved_permanently
       end
     end
 
@@ -209,8 +205,14 @@ class StoreController < ApplicationController
       @query.merge(store: current_store.member_stores.presence || current_store, live: true)
     end
 
-    # Product filtering in the current category.
+    # Product filtering in the current category asks the category
+    # whether to include its descendants in the view.
     def filter_params
-      @query.merge(store: current_store, live: true, categories: [@category])
+      @query.merge(
+        store: current_store,
+        live: true
+      ).reverse_merge(
+        'categories' => @category.self_and_maybe_descendants
+      )
     end
 end
