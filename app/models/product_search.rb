@@ -11,7 +11,11 @@ class ProductSearch < Searchlight::Search
   def self.define_search_method(property)
     key = property.sluggify
     define_method("search_#{key}") do
-      query.where("EXISTS (SELECT 1 FROM product_properties WHERE product_id = products.id AND property_id = #{property.id} AND value IN (?))", send(key))
+      query.where('EXISTS (
+        SELECT 1 FROM product_properties
+        WHERE property_id = ? AND value IN (?)
+          AND product_id = products.id
+        )', property, send(key))
     end
   end
 
