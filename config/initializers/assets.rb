@@ -30,4 +30,5 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/solar.css       spry_themes/solar.js
   spry_themes/stellar.css     spry_themes/stellar.js
   email/mailgun.css
+  hamburgers/hamburgers.css
 )

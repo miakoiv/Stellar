@@ -79,40 +79,23 @@ body {
 }
 
 /* Use desktop margins and floats since main nav never collapses */
-#main-nav .navbar-left,
-#main-nav .navbar-right {
-  margin-top: 0;
-  margin-bottom: 0;
+#main-nav .navbar-left {
+  float: left !important;
+  margin: 0 -15px;
 
   > li { float: left; }
 }
 
 /* Hamburger for toggling the side nav on mobile */
-.navbar .offcanvas-toggle {
-  @extend .btn, .navbar-btn, .visible-xs;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: $grid-gutter-width/2;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  line-height: 40px;
-  font-size: 20px;
-  color: $navbar-default-link-color;
-  background-color: transparent;
-  border-color: transparent;
-
-  &:hover, &:focus {
-    color: $navbar-default-link-hover-color;
-    background-color: transparent;
-    border-color: transparent;
-  }
+.offcanvas-toggle {
+  float: right;
+  margin-left: 15px;
 }
-.navbar-inverse .offcanvas-toggle {
-  color: $navbar-inverse-link-color;
-
-  &:hover, &:focus {
-    color: $navbar-inverse-link-hover-color;
-  }
+.hamburger-box { top: 3px; }
+.navbar-inverse .hamburger-box .hamburger-inner,
+.navbar-inverse .hamburger-box .hamburger-inner:before,
+.navbar-inverse .hamburger-box .hamburger-inner:after {
+  background-color: #fff;
 }
 
 /* Large navbar widgets */

@@ -34,5 +34,4 @@
             = render partial: 'shared/user_menu'
       - else
         %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
-    %button.offcanvas-toggle{type: 'button', data: {toggle: 'offcanvas', target: '#side-nav'}}
-      = icon('bars', class: 'fa-lg')
+    = render partial: 'shared/offcanvas_toggle'
