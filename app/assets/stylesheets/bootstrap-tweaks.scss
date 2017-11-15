@@ -24,7 +24,7 @@ body {
   left: -1*$navmenu-width;
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
-  transition: 0.4s ease all;
+  transition: 0.25s ease all;
   overflow-y: scroll;
   backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
