@@ -193,9 +193,15 @@ class StoreController < ApplicationController
       end
     end
 
-    # Restrict category lookup to live categories in current store.
+    # Category lookup includes categories in current store that are
+    # live and have a category page contained in the store header,
+    # thus they are navigable.
     def category_lookup_params
-      @query.merge(store: current_store, live: true)
+      @query.merge(
+        store: current_store,
+        live: true,
+        within: current_store.header
+      )
     end
 
     # Restrict product lookup to live products in current store,
