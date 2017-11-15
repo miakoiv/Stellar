@@ -25,5 +25,6 @@
               = render partial: 'shared/group_menu'
             = render partial: 'shared/user_menu'
       - else
-        %li.lg= link_to icon('sign-in'), new_user_session_path
+        %li.lg.hidden-xs
+          = link_to icon('sign-in'), new_user_session_path
     = render partial: 'shared/offcanvas_toggle'
