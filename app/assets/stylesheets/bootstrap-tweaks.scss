@@ -174,12 +174,16 @@ body {
 }
 @media (min-width: $screen-sm-min) {
   #lookup-dropdown {
-    columns: 2;
-    column-rule: 1px solid $dropdown-divider-bg;
     max-height: 600px;
-    overflow-x: scroll;
+    overflow-y: scroll;
     margin-left: 15px;
     margin-right: 15px;
+
+    .lookup-results {
+      columns: 2 320px;
+      column-gap: 30px;
+      column-rule: 1px solid $dropdown-divider-bg;
+    }
   }
 }
 #lookup-dropdown .media { margin: 0; }

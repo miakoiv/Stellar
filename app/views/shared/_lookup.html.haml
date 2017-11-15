@@ -2,8 +2,9 @@
   .form-group
     = search_field_tag 'keyword', nil, autocomplete: 'off', class: 'form-control', placeholder: t('store.lookup')
   #lookup-dropdown.dropdown-menu
-    %ul.category-results.media-list
-    %ul.product-results.media-list
+    .lookup-results
+      %ul.category-results.media-list
+      %ul.product-results.media-list
 
 :coffee
   $('#navbar-lookup').on 'shown.bs.collapse', (e) ->
