@@ -13,6 +13,8 @@
   $('#navbar-lookup').on 'hidden.bs.collapse', (e) ->
     $('#lookup-close').hide()
     $('#lookup-open').show()
+  $('#side-nav').on 'shown.offcanvas', (e) ->
+    $('#navbar-lookup').collapse 'hide'
   $('#navbar-lookup > form').on 'submit', (e) ->
     e.preventDefault()
   $('#keyword').smartkeyup ->
