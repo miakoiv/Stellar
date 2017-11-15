@@ -209,9 +209,8 @@ class StoreController < ApplicationController
     def filter_params
       @query.merge(
         store: current_store,
-        live: true
-      ).reverse_merge(
-        'categories' => @category.self_and_maybe_descendants
+        live: true,
+        permitted_categories: @category.self_and_maybe_descendants
       )
     end
 end

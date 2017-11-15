@@ -1,0 +1,13 @@
+- if category.descendants.any?
+  %li.dropdown
+    = dropdown_toggle do
+      = title(Category)
+      - if selected
+        %span.badge= selected.size
+      %span.caret
+    .dropdown-menu
+      - category.descendants.each do |descendant|
+        .checkbox
+          %label
+            = check_box_tag "product_search[categories][]", descendant.id, selected.present? && selected.include?(descendant.id.to_s)
+            = descendant
