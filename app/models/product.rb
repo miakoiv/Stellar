@@ -126,6 +126,7 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
+  before_save :generate_description, if: -> (product) { product.description.blank? }
   after_save :touch_categories
   after_save :reset_live_status!
 
@@ -515,6 +516,13 @@ class Product < ActiveRecord::Base
         branch = ' (0)' if branch.empty?
         self[:code] = "#{trunk}#{branch.succ}"
       end
+    end
+
+    # Generates the description as a plain text representation of overview.
+    def generate_description
+      html = Nokogiri::HTML(overview)
+      lines = html.search('//text()').map(&:text)
+      self[:description] = lines.join("\n")
     end
 
   private

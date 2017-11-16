@@ -6,7 +6,7 @@
         %h3
           = product.title
           %span.small= product.subtitle
-        .description= product.description.html_safe
+        .description= product.description
       .promotions
         - product.live_promoted_items(current_group).each do |item|
           .promotion= item.description

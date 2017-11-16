@@ -46,7 +46,7 @@
       .tab-content
         = tab_pane 'description', class: 'in active' do
           .body-text><
-            = product.description.html_safe if product.description.present?
+            = product.overview.html_safe if product.overview.present?
         - if product.images.document.any?
           = tab_pane 'documents' do
             .documents.list-group

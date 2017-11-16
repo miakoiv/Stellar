@@ -154,7 +154,7 @@ class Admin::ProductsController < ApplicationController
       params.require(:product).permit(
         :purpose, :master_product_id, {variant_ids: []},
         :vendor_id, :code, :customer_code,
-        :title, :subtitle, :description, :memo,
+        :title, :subtitle, :description, :overview, :memo,
         :mass, :dimension_u, :dimension_v, :dimension_w,
         :lead_time, :shipping_notes,
         :cost_price, :trade_price, :retail_price, :tax_category_id,

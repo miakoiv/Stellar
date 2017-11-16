@@ -15,7 +15,7 @@ module ApplicationHelper
       title: object.to_s,
       url: request.original_url,
       image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational)) : nil,
-      description: object.description.present? ? Nokogiri::HTML(object.description).css('body').children.map(&:text).join("\n") : nil
+      description: object.description.presence
     }
     set_meta_tags(og: tags)
   end

@@ -309,6 +309,7 @@ en:
         subtitle: Subtitle
         keyword: Keyword search
         description: Description
+        overview: Product information
         available_at: Availability starts
         deleted_at: Availability ends
         live: Available

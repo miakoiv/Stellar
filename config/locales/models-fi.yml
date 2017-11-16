@@ -309,6 +309,7 @@ fi:
         subtitle: Alanimi
         keyword: Hakusana
         description: Kuvaus
+        overview: Tuotetiedot
         available_at: Myynnin alkamispvm
         deleted_at: Myynnin päättymispvm
         live: Myynnissä
