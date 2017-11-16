@@ -265,6 +265,7 @@ $bg-tone:           #f6f6f6;
 }
 .product-list .product {
   @extend .list-group-item, .clearfix;
+  width: 100%; // explicit width for masonry
   margin-bottom: 0;
   padding: 10px;
   border-width: 5px;
@@ -300,7 +301,7 @@ $bg-tone:           #f6f6f6;
 
   .small { font-size: inherit; }
 }
-.product-list .product-text .description { display: none; }
+.product-list .product-text .description {}
 
 /* Product promotions */
 .product-list .promotions {
