@@ -42,7 +42,7 @@ jQuery ->
         Wiselinks.scrollPage()
     $(document).off 'page:done'
       .on 'page:done', (event, $target, status, url, data) ->
-        $(document).rebuild_parallax()
-        $(document).rebuild_masonry()
+        $(document).parallax_refresh()
+        $('.products').masonry_build()
         ga?('send', 'pageview', window.location.pathname)
         fbq?('track', 'PageView')

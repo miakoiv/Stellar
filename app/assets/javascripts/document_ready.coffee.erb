@@ -37,14 +37,14 @@ $.fn.extend
   make_room: (element) ->
     $(this).css 'padding-bottom', element.height()
 
-  rebuild_parallax: ->
+  parallax_refresh: ->
     $('.parallax-mirror').remove()
     $parallax = $('.parallax-window')
     $parallax.imagesLoaded ->
       $parallax.parallax($parallax.data())
 
-  rebuild_masonry: ->
-    $masonry = $('.masonry-grid')
+  masonry_build: ->
+    $masonry = $('.masonry-grid', this)
     $masonry.imagesLoaded ->
       $masonry.masonry
         itemSelector: '.masonry-item'
@@ -52,10 +52,14 @@ $.fn.extend
         percentPosition: true
       if window.wiselinks? then Wiselinks.scrollPage()
 
+  masonry_refresh: ->
+    $masonry = $('.masonry-grid', this)
+    $masonry.masonry()
+
 jQuery ->
 
   $(document).initialize()
-  $(document).rebuild_masonry()
+  $('.products').masonry_build()
 
   new Clipboard('.clipboard')
 
