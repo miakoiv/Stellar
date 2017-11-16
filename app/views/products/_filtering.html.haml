@@ -1,5 +1,10 @@
-= form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
-  %nav.navbar.navbar-default.filter-bar
+%nav.navbar.navbar-default.filter-bar
+  #product-view-selector.view-selector.btn-group
+    %button.btn.navbar-btn.btn-default.active{title: t('.grid_view'), data: {toggle: 'tooltip', container: 'body', parent: '#product-view-selector', 'view-mode': 'product-grid', target: '#product-view'}}
+      = icon('th')
+    %button.btn.navbar-btn.btn-default{title: t('.list_view'), data: {toggle: 'tooltip', container: 'body', parent: '#product-view-selector', 'view-mode': 'product-list', target: '#product-view'}}
+      = icon('list')
+  = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
     .navbar-header
       .navbar-form.navbar-form-inline
         .form-group.has-feedback

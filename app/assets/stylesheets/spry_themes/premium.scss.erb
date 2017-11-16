@@ -84,6 +84,18 @@ $bg-tone:           #f6f6f6;
 #store-wrap .btn {
   @extend .btn-round;
 }
+#static-wrap .btn-group > .btn:not(:first-child):not(:last-child),
+#store-wrap .btn-group > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+#static-wrap .btn-group > .btn:first-child:not(:last-child),
+#store-wrap .btn-group > .btn:first-child:not(:last-child) {
+  @include border-right-radius(0);
+}
+#static-wrap .btn-group > .btn:last-child:not(:first-child),
+#store-wrap .btn-group > .btn:last-child:not(:first-child) {
+  @include border-left-radius(0);
+}
 
 
 /*
@@ -190,6 +202,7 @@ $bg-tone:           #f6f6f6;
   padding-left: 9px;
   input { border-radius: $input-height-base/2; }
 }
+.filter-bar .view-selector { margin-right: 9px; }
 
 
 /*
@@ -271,11 +284,10 @@ $bg-tone:           #f6f6f6;
   border-width: 5px;
   border-color: transparent;
   border-radius: 0 !important;
-  transition: all 0.2s ease-in-out 0s;
 
   &:hover {
     border-color: $gray-lighter;
-    .product-image { transform: scale(1.05); }
+    .product-image { transform: scale(1.15); }
     .buy-now .btn { @extend .btn-danger; }
   }
 }
@@ -289,7 +301,7 @@ $bg-tone:           #f6f6f6;
 /* Product image and text */
 .product-list .product-image {
   @extend .pull-left, .box-thumbnail;
-  transition: all 0.4s ease-in-out 0.2s;
+  transition: transform 0.4s ease-in-out 0.2s;
 
   img { bottom: auto; }
 }
@@ -337,7 +349,7 @@ $bg-tone:           #f6f6f6;
   font-size: 16px;
   border: 0;
   border-radius: 0;
-  transition: all 0.4s ease-in-out 0s;
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 .product-list .price {
   font-size: 20px;
@@ -371,7 +383,6 @@ $bg-tone:           #f6f6f6;
   border: 5px solid transparent;
   color: inherit;
   text-decoration: none;
-  transition: all 0.2s ease-in-out 0s;
 }
 
 /* Product image and text */
@@ -379,7 +390,7 @@ $bg-tone:           #f6f6f6;
   position: relative;
   height: 0;
   padding-bottom: 100%;
-  transition: all 0.2s ease-in-out 0s;
+  transition: transform 0.2s ease-in-out 0s;
 
   img { @extend .img-contain, .img-center; }
 }
@@ -433,7 +444,7 @@ $bg-tone:           #f6f6f6;
   width: 100%;
   font-size: 16px;
   border: 0;
-  transition: all 0.4s ease-in-out 0s;
+  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 .product-grid .price {
   font-family: "Fira Sans Extra Condensed", sans-serif;

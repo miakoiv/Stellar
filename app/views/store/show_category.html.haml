@@ -16,6 +16,6 @@
           - if @category.filtering?
             .product-filter
               = render partial: 'products/filtering'
-        .product-grid
+        #product-view.product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products

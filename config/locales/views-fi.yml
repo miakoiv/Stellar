@@ -266,6 +266,8 @@ fi:
   products:
     filtering:
       keyword: Hakusana…
+      grid_view: Ruudukkonäkymä
+      list_view: Listanäkymä
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
   store:

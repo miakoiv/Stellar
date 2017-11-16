@@ -259,12 +259,20 @@ body {
     overflow-y: auto;
   }
 }
+.filter-bar .view-selector {
+  float: right;
+  margin-right: 15px;
+}
 @media (max-width: $screen-xs-max) {
+  .filter-bar .view-selector .navbar-btn {
+    margin-top: 11px;
+    margin-bottom: 11px;
+  }
   .navbar-form-inline {
     display: inline-block;
-    max-width: 240px;
+    max-width: 150px;
     margin: 0;
-    padding: 10px 15px;
+    padding: 10px 0 10px 15px;
     border: 0;
   }
 }

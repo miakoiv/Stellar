@@ -286,6 +286,8 @@ en:
   products:
     filtering:
       keyword: Keyword…
+      grid_view: Grid view
+      list_view: List view
     product_detail:
       variants: Alternatives for this product…
   store:
