@@ -136,10 +136,17 @@ class StoreController < ApplicationController
     end
 
     # Find category from live categories by friendly id, including history.
+    # If the category contains no products of its own and has no filtering
+    # enabled, redirect to the first descendant category.
     def find_category
       @category = @live_categories.friendly.find(params[:category_id])
       if params[:product_id].nil? && request.path != show_category_path(@category)
         return redirect_to show_category_path(@category), status: :moved_permanently
+      end
+      if @category.products.visible.empty? && !@category.filtering
+        if first_child = @category.children.live.first
+          return redirect_to show_category_path(first_child)
+        end
       end
     end
 
