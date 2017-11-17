@@ -263,7 +263,7 @@ class Store < ActiveRecord::Base
     end
 
     def create_guest_group
-      groups.create name: Group.human_attribute_name(:default_name)
+      update(default_group: groups.create(name: Group.human_attribute_name(:default_name)))
     end
 
     def create_header_and_footer

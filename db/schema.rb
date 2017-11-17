@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116103233) do
+ActiveRecord::Schema.define(version: 20171117112645) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -662,7 +662,7 @@ ActiveRecord::Schema.define(version: 20171116103233) do
     t.boolean  "portal",                         default: false, null: false
     t.string   "name",             limit: 255
     t.string   "slug",             limit: 255
-    t.integer  "default_group_id", limit: 4,                     null: false
+    t.integer  "default_group_id", limit: 4
     t.string   "country_code",     limit: 2,                     null: false
     t.text     "settings",         limit: 65535
     t.datetime "created_at",                                     null: false
