@@ -389,7 +389,7 @@ $bg-tone:           #f6f6f6;
 }
 .product-grid .product:hover {
   a { border-color: $gray-lighter; }
-  .product-image { transform: scale(1.12); }
+  .product-image { transform: scale(1.04); }
   .buy-now .btn { @extend .btn-danger; }
 }
 .product-grid .product a {
@@ -400,6 +400,11 @@ $bg-tone:           #f6f6f6;
   border: 5px solid transparent;
   color: inherit;
   text-decoration: none;
+
+  &:focus {
+    outline: 0;
+    border-color: $gray-lighter;
+  }
 }
 
 /* Product image and text */
