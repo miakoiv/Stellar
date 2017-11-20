@@ -147,6 +147,8 @@ GEM
       railties (> 3.1, < 5.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    js_cookie_rails (2.1.4)
+      railties (>= 3.1)
     json (1.8.6)
     kaminari (1.0.1)
       activesupport (>= 4.1.0)
@@ -365,6 +367,7 @@ DEPENDENCIES
   jquery-rails
   jquery-scrollto-rails
   jquery-ui-rails
+  js_cookie_rails
   kaminari
   magnific-popup-rails
   meta-tags

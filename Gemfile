@@ -113,6 +113,9 @@ gem 'bootstrap-datepicker-rails'
 # Bootstrappy confirmation dialogs
 gem 'twitter-bootstrap-rails-confirm'
 
+# Cookies with Coffee
+gem 'js_cookie_rails'
+
 # Outdated browser warnings
 gem 'outdatedbrowser_rails'
 

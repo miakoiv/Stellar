@@ -36,6 +36,7 @@
 //= require codemirror/addons/display/autorefresh
 //= require dropzone
 //= require magnific-popup
+//= require js.cookie
 //= require selectize
 //= require unobtrusive_flash
 //= require outdatedbrowser/outdatedBrowser
