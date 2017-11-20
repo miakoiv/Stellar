@@ -24,17 +24,17 @@ class Price
 
   #---
   def sans_tax
-    return nil if amount.nil?
+    return nil if nil?
     tax_included ? amount - tax : amount
   end
 
   def with_tax
-    return nil if amount.nil?
+    return nil if nil?
     tax_included ? amount : amount + tax
   end
 
   def tax
-    return nil if amount.nil?
+    return nil if nil?
     if tax_included
       amount * tax_rate / (tax_rate + 100)
     else
@@ -47,8 +47,12 @@ class Price
   end
 
   def modify!(percent)
-    self.amount += amount * percent / 100 unless amount.nil? || zero?
+    self.amount += amount * percent / 100 unless nil? || zero?
     self
+  end
+
+  def nil?
+    amount.nil?
   end
 
   def <=>(other)
@@ -58,18 +62,18 @@ class Price
   # NOTE: Arithmetic operations are only meaningful between prices
   # with the exact same taxation.
   def +(other)
-    return Price.zero if amount.nil?
+    return Price.zero if nil?
     self.class.new(amount + other.amount, tax_included, tax_rate)
   end
 
   def *(x)
-    return Price.zero if amount.nil?
+    return Price.zero if nil?
     self.class.new(amount * x, tax_included, tax_rate)
   end
 
   def /(x)
     raise ZeroDivisionError if x.zero?
-    return Price.zero if amount.nil?
+    return Price.zero if nil?
     self.class.new(amount / x, tax_included, tax_rate)
   end
 
