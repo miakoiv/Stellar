@@ -1,8 +1,8 @@
 %nav.navbar.navbar-default.filter-bar
   #product-view-selector.view-selector.btn-group
-    %button.btn.navbar-btn.btn-default.active{data: {parent: '#product-view-selector', 'view-mode': 'product-grid', target: '#product-view'}}
+    %button.btn.navbar-btn.btn-default{class: @view_mode == 'product-grid' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-grid', target: '#product-view'}}
       = icon('th')
-    %button.btn.navbar-btn.btn-default{data: {parent: '#product-view-selector', 'view-mode': 'product-list', target: '#product-view'}}
+    %button.btn.navbar-btn.btn-default{class: @view_mode == 'product-list' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-list', target: '#product-view'}}
       = icon('list')
   = form_for @search, url: show_category_path(@category), method: :get, enforce_utf8: false, data: {push: 'partial', target: '#store-body', 'optimize-url-params': false}, html: {id: 'filter-form'} do |f|
     .navbar-header

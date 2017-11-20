@@ -81,6 +81,7 @@ class StoreController < ApplicationController
     @query = params[:product_search] || {}
     @search = ProductSearch.new(filter_params)
     @products = @search.results.visible.sorted(@category.product_scope)
+    @view_mode = get_view_mode_setting(@category)
   end
 
   # GET /department/:department_id
@@ -198,6 +199,16 @@ class StoreController < ApplicationController
       if request.path != show_page_path(@page)
         return redirect_to show_page_path(@page), status: :moved_permanently
       end
+    end
+
+    def get_view_mode_setting(category)
+      settings = if cookies[:view_mode_settings].present?
+        JSON.parse(cookies[:view_mode_settings])
+      else
+        {}
+      end
+      key = ActionView::RecordIdentifier.dom_id(category)
+      settings[key] || 'product-grid'
     end
 
     # Category lookup includes categories in current store that are
