@@ -7,11 +7,8 @@
   #store-body
     #products-wrap
       .products
-        - if @category.present?
-          .breadcrumbs.visible-print
-            = render partial: 'categories/breadcrumbs', object: @category, as: :category
-          .page-header.visible-print
-            %h1= @promotion.to_s
+        .page-header.visible-print
+          %h1= @promotion.to_s
         #product-view.product-grid
           %ul{class: current_store.masonry? && 'masonry-grid'}
             = render @products
