@@ -448,6 +448,8 @@ fi:
         maps_api_key: Google Maps -avain
         facebook_pixel_id: Facebook-pikselitunnus
         tawkto_site_id: tawk.to -tunnus
+        pbw_api_key: Rajapinta-avain
+        pbw_private_key: Yksityinen avain
         order_sequence: Tilausnumerointi
         inventory_ids: Varastot
         quotation_template_id: Tarjouksen tekstisisältö

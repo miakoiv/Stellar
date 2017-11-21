@@ -81,6 +81,7 @@ class Admin::StoresController < ApplicationController
         :portal, :name, :locale, :country_code,
         :admit_guests, :allow_shopping, :accept_credit_cards,
         :tracking_code, :maps_api_key, :facebook_pixel_id, :tawkto_site_id,
+        :pbw_api_key, :pbw_private_key,
         :quotation_template_id,
         :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :order_sequence, :theme, :detach_menu,

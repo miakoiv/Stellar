@@ -448,6 +448,8 @@ en:
         maps_api_key: Google Maps key
         facebook_pixel_id: Facebook Pixel ID
         tawkto_site_id: tawk.to site
+        pbw_api_key: API key
+        pbw_private_key: Private key
         order_sequence: Order numbering
         inventory_ids: Inventories
         quotation_template_id: Quotation boilerplate

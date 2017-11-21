@@ -41,6 +41,10 @@
             = f.text_field :maps_api_key
             = f.text_field :facebook_pixel_id
             = f.text_field :tawkto_site_id
+          %fieldset{disabled: locked}
+            %legend= PaymentGateway::Paybyway.model_name.human
+            = f.text_field :pbw_api_key
+            = f.text_field :pbw_private_key
         - if current_user_has_role?(:superuser)
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
