@@ -1,6 +1,10 @@
 en:
   activerecord:
     values:
+      category:
+        view_mode:
+          'product-grid': grid
+          'product-list': list
       group:
         appearance:
           default: gray

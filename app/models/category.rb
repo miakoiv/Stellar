@@ -13,6 +13,11 @@ class Category < ActiveRecord::Base
                      counter_cache: :children_count,
                      touch: true
 
+  VIEW_MODES = [
+    'product-grid',
+    'product-list'
+  ].freeze
+
   #---
   belongs_to :store
   has_and_belongs_to_many :products
@@ -25,6 +30,11 @@ class Category < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :product_scope, presence: true
+
+  #---
+  def self.view_mode_options
+    VIEW_MODES.map { |m| [Category.human_attribute_value(:view_mode, m), m] }
+  end
 
   #---
   # Category is inside another category if it's the category itself,

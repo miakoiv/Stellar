@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117112645) do
+ActiveRecord::Schema.define(version: 20171121102023) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -71,20 +71,21 @@ ActiveRecord::Schema.define(version: 20171117112645) do
   add_index "asset_entries", ["source_type", "source_id"], name: "index_asset_entries_on_source_type_and_source_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.integer  "store_id",       limit: 4,                     null: false
+    t.integer  "store_id",       limit: 4,                              null: false
     t.integer  "parent_id",      limit: 4
     t.integer  "lft",            limit: 4
     t.integer  "rgt",            limit: 4
-    t.integer  "depth",          limit: 4,     default: 0,     null: false
-    t.integer  "children_count", limit: 4,     default: 0,     null: false
-    t.boolean  "live",                         default: true,  null: false
+    t.integer  "depth",          limit: 4,     default: 0,              null: false
+    t.integer  "children_count", limit: 4,     default: 0,              null: false
+    t.boolean  "live",                         default: true,           null: false
     t.string   "name",           limit: 255
     t.text     "subtitle",       limit: 65535
-    t.string   "slug",           limit: 255,                   null: false
+    t.string   "slug",           limit: 255,                            null: false
     t.string   "product_scope",  limit: 255
-    t.boolean  "filtering",                    default: false, null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.boolean  "filtering",                    default: false,          null: false
+    t.string   "view_mode",      limit: 255,   default: "product-grid", null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   add_index "categories", ["depth"], name: "index_categories_on_depth", using: :btree

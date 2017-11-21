@@ -138,6 +138,7 @@ fi:
         subtitle: Alaotsikko
         product_scope: Tuotteiden järjestys
         filtering: Tuotteiden suodatus
+        view_mode: Oletusnäkymä
       component_entry:
         product_id: Tuote
         component_id: Komponentti

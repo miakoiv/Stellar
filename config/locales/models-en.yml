@@ -138,6 +138,7 @@ en:
         subtitle: Subtitle
         product_scope: Product sorting
         filtering: Product filtering
+        view_mode: Default view
       component_entry:
         product_id: Product
         component_id: Component

@@ -1,6 +1,10 @@
 fi:
   activerecord:
     values:
+      category:
+        view_mode:
+          'product-grid': ruudukko
+          'product-list': lista
       group:
         appearance:
           default: harmaa

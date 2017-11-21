@@ -208,7 +208,7 @@ class StoreController < ApplicationController
         {}
       end
       key = ActionView::RecordIdentifier.dom_id(category)
-      settings[key] || 'product-grid'
+      settings[key] || category.view_mode
     end
 
     # Category lookup includes categories in current store that are
