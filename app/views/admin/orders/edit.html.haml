@@ -14,13 +14,13 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-lg-7
-    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'order-items', title(OrderItem, count: 2), class: 'active'
+    = tab_set 'order-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'order-items', title(OrderItem, count: 2), default: true
       = nav_tab 'shipments', title(Shipment, count: 2)
       = nav_tab 'payments', title(Payment, count: 2)
 
     .tab-content
-      = tab_pane 'order-items', class: 'in active page-break' do
+      = tab_pane 'order-items', default: true, class: 'page-break' do
         %h2.visible-print-block= title(OrderItem, count: 2)
         - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
@@ -35,3 +35,6 @@
       = tab_pane 'payments' do
         %h2.visible-print-block= title(Payment, count: 2)
         = render partial: 'admin/payments/table', object: @order, as: :order
+
+:coffee
+  persist_tabs 'order-side'

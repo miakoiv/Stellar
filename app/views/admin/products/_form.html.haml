@@ -1,7 +1,7 @@
 = bootstrap_form_for [:admin, @product], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    = nav_tab 'product-meta', col(Product, :metadata), class: 'active'
+  = tab_set 'product-main', class: 'panel-tabs' do
+    = nav_tab 'product-meta', col(Product, :metadata), default: true
     = nav_tab 'product-text', col(Product, :text)
     = nav_tab 'product-pricing', col(Product, :pricing), class: (@product.has_variants? || @product.bundle?) && 'disabled'
     = nav_tab 'product-shipping', col(Product, :shipping), class: @product.has_variants? && 'disabled'
@@ -10,7 +10,7 @@
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        = tab_pane 'product-meta', class: 'in active' do
+        = tab_pane 'product-meta', default: true do
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
@@ -88,6 +88,8 @@
             = f.primary
 
 :coffee
+  persist_tabs 'product-main'
+
   numbro.culture "#{t('culture')}"
   $('#product_trade_price').on 'change', (e) ->
     update_markup_margin()

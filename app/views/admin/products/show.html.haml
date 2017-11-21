@@ -18,8 +18,8 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-lg-6
-    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'images', col(Product, :images), class: 'active'
+    = tab_set 'product-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'images', col(Product, :images), default: true
       = nav_tab 'inventory', col(Product, :inventory), class: (@product.has_variants? || @product.bundle?) && 'disabled'
       = nav_tab 'alternate-prices', col(Product, :alternate_prices), class: (@product.has_variants? || @product.bundle?) && 'disabled'
       = nav_tab 'properties', col(Product, :product_properties), class: (@product.has_variants? || @product.bundle?) && 'disabled'
@@ -28,7 +28,7 @@
       = nav_tab 'component-entries', col(Product, :component_entries), class: @product.has_variants? && 'disabled'
 
     .tab-content
-      = tab_pane 'images', class: 'in active' do
+      = tab_pane 'images', default: true do
         = render partial: 'admin/images/collection', object: @product, as: :imageable
       = tab_pane 'inventory' do
         = render partial: 'admin/inventory_items/table', object: @product, as: :product
@@ -42,3 +42,6 @@
         = render partial: 'admin/requisite_entries/table', object: @product, as: :product
       = tab_pane 'component-entries' do
         = render partial: 'admin/component_entries/table', object: @product, as: :product
+
+:coffee
+  persist_tabs 'product-side'

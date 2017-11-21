@@ -12,12 +12,15 @@
     = render partial: 'sign_in_info'
 
   .col-lg-5
-    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'group', col(User, :group), class: 'active'
+    = tab_set 'user-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'group', col(User, :group), default: true
       = nav_tab 'roles', col(User, :roles)
 
     .tab-content
-      = tab_pane 'group', class: 'in active' do
+      = tab_pane 'group', default: true do
         = render partial: 'group', object: @user, as: :user, locals: {locked: true}
       = tab_pane 'roles' do
         = render partial: 'admin/roles/list', object: @user, as: :user
+
+:coffee
+  persist_tabs 'user-side'

@@ -14,12 +14,15 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-md-6
-    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'hostnames', col(Store, :hostnames), class: 'active'
+    = tab_set 'store-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'hostnames', col(Store, :hostnames), default: true
       = nav_tab 'images', col(Store, :images)
 
     .tab-content
-      = tab_pane 'hostnames', class: 'in active' do
+      = tab_pane 'hostnames', default: true do
         = render partial: 'admin/hostnames/table', object: @store, as: :store
       = tab_pane 'images' do
         = render partial: 'admin/images/collection', object: @store, as: :imageable
+
+:coffee
+  persist_tabs 'store-side'

@@ -1,14 +1,14 @@
 = bootstrap_form_for [:admin, @group, @user], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    = nav_tab 'user-personal', col(User, :personal), class: 'active'
+  = tab_set 'user-main', class: 'panel-tabs' do
+    = nav_tab 'user-personal', col(User, :personal), default: true
     - unless @user.new_record?
       = nav_tab 'user-addresses', col(User, :addresses)
 
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        = tab_pane 'user-personal', class: 'in active' do
+        = tab_pane 'user-personal', default: true do
           %fieldset{disabled: locked}
             = f.text_field :email, required: true
             - unless @user.new_record?
@@ -42,3 +42,6 @@
         %fieldset.actions
           = f.form_group do
             = f.primary
+
+:coffee
+  persist_tabs 'user-main'

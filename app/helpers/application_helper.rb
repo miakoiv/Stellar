@@ -34,17 +34,32 @@ module ApplicationHelper
     active_link_to menu_title(icon, text), path, options.merge(wrap_tag: :li)
   end
 
+  def tab_set(id, options = {})
+    classes = (options[:class] || '').split
+    classes << 'nav nav-tabs'
+    options[:class] = classes.join(' ')
+    content_tag :ul, options.merge(id: id, role: 'tablist') do
+      yield
+    end
+  end
+
   def nav_tab(id, text, options = {})
+    href = "#tab-#{id}"
+    classes = (options[:class] || '').split
+    classes << 'active' if options.delete(:default)
+    options[:class] = classes.join(' ')
     content_tag :li, options.merge(role: 'presentation') do
-      link_to text, "#tab-#{id}", role: 'tab', data: {toggle: 'tab'}
+      link_to text, href, role: 'tab', data: {toggle: 'tab'}
     end
   end
 
   def tab_pane(id, options = {})
+    id = "tab-#{id}"
     classes = (options[:class] || '').split
     classes << 'tab-pane fade'
+    classes << 'in active' if options.delete(:default)
     options[:class] = classes.join(' ')
-    content_tag :div, options.merge(id: "tab-#{id}") do
+    content_tag :div, options.merge(id: id) do
       yield
     end
   end

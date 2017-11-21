@@ -14,15 +14,18 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-md-7
-    %ul.nav.nav-tabs.nav-justified.nav-sm{role: 'tablist'}
-      = nav_tab 'promoted', title(PromotedItem, count: 2), class: 'active'
+    = tab_set 'promotion-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'promoted', title(PromotedItem, count: 2), default: true
       = nav_tab 'images', col(Promotion, :images)
       = nav_tab 'products', t('admin.promotions.edit.add_products'), class: 'disabled'
       = nav_tab 'categories', t('admin.promotions.edit.add_categories'), class: 'disabled'
 
     .tab-content
-      = tab_pane 'promoted', class: 'in active' do
+      = tab_pane 'promoted', default: true do
         %h2.visible-print-block= title(PromotedItem, count: 2)
         = render partial: 'admin/promoted_items/table', object: @promotion, as: :promotion
       = tab_pane 'images' do
         = render partial: 'admin/images/collection', object: @promotion, as: :imageable
+
+:coffee
+  persist_tabs 'promotion-side'

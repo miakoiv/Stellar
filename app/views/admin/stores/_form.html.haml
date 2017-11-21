@@ -1,7 +1,7 @@
 = bootstrap_form_for [:admin, @store], layout: :horizontal,
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-  %ul.nav.nav-tabs.panel-tabs{role: 'tablist'}
-    = nav_tab 'store-admin', col(Store, :admin), class: 'active'
+  = tab_set 'store-main', class: 'panel-tabs' do
+    = nav_tab 'store-admin', col(Store, :admin), default: true
     = nav_tab 'store-apis', col(Store, :apis)
     = nav_tab 'store-files', col(Store, :files)
     - if current_user_has_role?(:superuser)
@@ -12,7 +12,7 @@
   .panel.panel-default.tabbed-panel
     .panel-body
       .tab-content
-        = tab_pane 'store-admin', class: 'in active' do
+        = tab_pane 'store-admin', default: true do
           %fieldset{disabled: locked}
             = f.form_group do
               = f.check_box :portal
@@ -68,3 +68,6 @@
         %fieldset.actions
           = f.form_group do
             = f.primary
+
+:coffee
+  persist_tabs 'store-main'
