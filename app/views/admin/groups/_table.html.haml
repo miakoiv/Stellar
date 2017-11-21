@@ -6,6 +6,7 @@
         %th= col(Group, :name)
         %th
         %th.col-xs-4= col(Group, :pricing)
+        %th.actions
 
     %tbody.rowlink{class: current_user.can_update?(Group, at: current_store) && 'sortable', data: {link: 'row'}}
       = render partial: 'admin/groups/row', collection: groups, as: :group
