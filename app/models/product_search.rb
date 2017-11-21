@@ -14,7 +14,12 @@ class ProductSearch < Searchlight::Search
       query.where('EXISTS (
         SELECT 1 FROM product_properties
         WHERE property_id = ? AND value IN (?)
-          AND product_id = products.id
+          AND (product_id = products.id OR
+            product_id IN (
+              SELECT id FROM products p
+              WHERE p.master_product_id = products.id
+            )
+          )
         )', property, send(key))
     end
   end
