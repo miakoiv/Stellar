@@ -4,12 +4,18 @@
       %fieldset
         = f.text_field :name, required: true
         ~ f.text_area :subtitle, rows: 3
-        = f.form_group do
-          = f.check_box :live
-        = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
-        = f.form_group do
-          = f.check_box :filtering
-        = f.select :view_mode, Category.view_mode_options, {}, {class: 'selectize'}
+        .row
+          .col-sm-6
+            = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
+          .col-sm-6
+            = f.select :view_mode, Category.view_mode_options, {}, {class: 'selectize'}
+        .row
+          .col-sm-6
+            = f.form_group do
+              = f.check_box :live
+          .col-sm-6
+            = f.form_group do
+              = f.check_box :filtering
     - unless @category.new_record?
       .panel-footer
         - if @category.product_scope == 'manual'
