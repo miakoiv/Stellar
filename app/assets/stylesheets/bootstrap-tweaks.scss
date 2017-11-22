@@ -410,6 +410,10 @@ body {
 h1, h2, h3, h4, h5, h6, th, dt, label, .label { font-weight: 500; }
 a.disabled, .disabled > a { pointer-events: none; }
 
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
 input[type="number"] { min-width: 60px; }
 
 i.icon {
