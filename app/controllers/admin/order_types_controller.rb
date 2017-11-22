@@ -94,7 +94,7 @@ class Admin::OrderTypesController < ApplicationController
         :name, :label,
         :has_shipping, :has_installation,
         :has_payment, :payment_gateway,
-        :is_exported
+        :prepaid_stock, :is_exported
       )
     end
 end

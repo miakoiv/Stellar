@@ -29,6 +29,9 @@
           = f.check_box :has_payment
         #payment-gateway.collapse{class: @order_type.has_payment? && 'in'}
           = f.select :payment_gateway, Store.payment_gateway_options, {}, {class: 'selectize'}
+        #prepaid-stock.collapse{class: @order_type.has_payment? || 'in'}
+          = f.form_group do
+            = f.check_box :prepaid_stock
       - unless locked
         %fieldset.actions
           = f.form_group do
@@ -43,5 +46,8 @@
   $('#order_type_has_payment').on 'change', (e) ->
     if $(e.target).is ':checked'
       $('#payment-gateway').collapse 'show'
+      $('#prepaid-stock').collapse 'hide'
+      $('#order_type_prepaid_stock').prop 'checked', false
     else
       $('#payment-gateway').collapse 'hide'
+      $('#prepaid-stock').collapse 'show'

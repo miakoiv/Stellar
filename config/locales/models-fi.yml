@@ -276,6 +276,7 @@ fi:
         has_installation: Asennettava
         has_payment: Maksettava
         payment_gateway: Maksukanava
+        prepaid_stock: Tilaa ennalta maksetusta varastosta
         is_exported: Tietojen vienti
       page:
         purpose: Sivun tyyppi

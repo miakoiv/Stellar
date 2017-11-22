@@ -276,6 +276,7 @@ en:
         has_installation: Installation
         has_payment: Payment
         payment_gateway: Payment gateway
+        prepaid_stock: Order from prepaid stock
         is_exported: Data export
       page:
         purpose: Page type

@@ -112,16 +112,23 @@ class OrderItem < ActiveRecord::Base
     (subtotal_with_tax || 0) + adjustments_with_tax
   end
 
-  # Price for exported orders, always without tax,
-  # vendor products are listed without prices.
+  # Price for exported orders, always without tax.
+  # Vendor products and items from prepaid stock are
+  # listed without prices.
   def price_for_export
     return nil if product.vendor.present?
+    return nil if use_prepaid_stock? && product.available?
     price_sans_tax
   end
 
   def subtotal_for_export
     return nil if product.vendor.present?
+    return nil if use_prepaid_stock? && product.available?
     subtotal_sans_tax
+  end
+
+  def use_prepaid_stock?
+    order.order_type.prepaid_stock?
   end
 
   # If ordered amount exceeds availability, this item gets its lead time
