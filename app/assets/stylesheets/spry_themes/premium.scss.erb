@@ -362,6 +362,7 @@ $bg-tone:           #f6f6f6;
     display: block;
     width: 100%;
     font-size: 16px;
+    line-height: 1.125;
     border: 0;
     border-radius: 0;
     transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
@@ -460,6 +461,7 @@ $bg-tone:           #f6f6f6;
   display: block;
   width: 100%;
   font-size: 16px;
+  line-height: 1.125;
   border: 0;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
@@ -743,17 +745,14 @@ $bg-tone:           #f6f6f6;
 .product-meta .order-form {
   margin-top: 20px;
 
-  #amount { display: none; }
-  .btn {
-    @extend .btn-lg, .btn-success;
-    display: block;
-    width: 100%;
+  .input-group { @extend .input-group-lg; }
+  .input-group .form-control { display: none; }
+  .input-group .btn {
+    @extend .btn-block, .btn-success;
+    margin-left: 0;
   }
 }
-.product-meta .go-checkout .btn {
-  display: block;
-  width: 100%;
-}
+.product-meta .go-checkout .btn { @extend .btn-block; }
 
 /* Variant products dropdown */
 .product-meta .variant-products {
