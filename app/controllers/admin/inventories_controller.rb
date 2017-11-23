@@ -2,8 +2,11 @@
 
 class Admin::InventoriesController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
   before_action :set_inventory, only: [:show, :edit, :update, :destroy]
+
+  authority_actions reorder: 'update'
 
   layout 'admin'
 
