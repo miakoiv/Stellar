@@ -226,7 +226,15 @@ $border-radius-small: 0;
 
 
 .products { @extend .row; }
-.products .product-table { @extend .col-xs-12; }
+
+.products .product-list ul {
+  @extend .list-group;
+}
+.products .product-list .product {
+  @extend .list-group-item;
+}
+
+
 .products .product-grid ul {
   @extend .clearfix;
   list-style: none;
@@ -320,6 +328,11 @@ $border-radius-small: 0;
   line-height: 2;
   margin-bottom: 0;
   border-radius: 0;
+
+  .regular-price {
+    margin-left: 0.5em;
+    text-decoration: line-through;
+  }
 }
 .product-grid .product .store {
   @extend .pull-right;
@@ -395,12 +408,28 @@ $border-radius-small: 0;
 }
 .product-body .product-meta .buy-now {
   @extend .well;
-  .btn { @extend .btn-block, .btn-lg; }
+  .btn { @extend .btn-block; }
+}
+.product-body .promotion {
+  @extend .label, .label-info;
+  display: block;
+  margin-bottom: 10px;
+  font-size: $font-size-large;
+}
+.product-body .product-meta .order-form {
   .form-group { margin-top: 20px; }
-  .form-group .btn { @extend .btn-success; }
+  .input-group {
+    @extend .input-group-lg;
+    .form-control { display: none; }
+    .btn {
+      @extend .btn-success;
+      margin-left: 0;
+    }
+  }
 }
 .product-body .product-pricing .price {
   @extend .lead, .text-primary;
+  display: inline-block;
   margin-right: 0.5em;
   margin-bottom: 0;
   font-weight: 500;
@@ -414,7 +443,12 @@ $border-radius-small: 0;
   .tax-rate { margin-left: 0.5em; }
   .unit-price { display: block; }
 }
-.product-body .product-pricing .retail-price { text-decoration: line-through; }
+.product-body .product-pricing .regular-price {
+  @extend .text-muted;
+  margin-left: 0.5em;
+  font-size: $font-size-base;
+  text-decoration: line-through;
+}
 .product-body .variant-products {
   margin-bottom: 20px;
   .btn { @extend .btn-block; }

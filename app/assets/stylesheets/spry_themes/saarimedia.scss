@@ -201,12 +201,17 @@
               text-decoration: line-through;
             }
           }
-          form {
+          .order-form {
             .form-group {
               margin-top: 20px;
 
-              button {
-                @extend .btn-block, .btn-lg, .btn-success;
+              .input-group {
+                @extend .input-group-lg;
+                .form-control { display: none; }
+              }
+              .btn {
+                @extend .btn-block, .btn-success;
+                margin-left: 0;
                 transition: all 0.2s ease-in-out 0s;
               }
             }

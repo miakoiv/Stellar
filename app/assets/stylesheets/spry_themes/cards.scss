@@ -281,6 +281,7 @@ $footer-bg: #d4d4d4;
           .product-pricing {
             .price {
               @extend .lead, .text-primary;
+              display: inline-block;
               margin-right: 0.5em;
               margin-bottom: 0;
               font-weight: 500;
@@ -298,12 +299,15 @@ $footer-bg: #d4d4d4;
               text-decoration: line-through;
             }
           }
-          form {
-            .form-group {
-              margin-top: 20px;
+          .order-form {
+            .form-group { margin-top: 20px; }
+            .input-group {
+              @extend .input-group-lg;
 
-              button {
-                @extend .btn-block, .btn-lg, .btn-success;
+              #amount { @include border-right-radius(0); }
+              .btn:last-child {
+                @include border-left-radius(0);
+                @extend .btn-success;
                 transition: all 0.2s ease-in-out 0s;
               }
             }
