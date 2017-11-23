@@ -461,12 +461,14 @@ i.icon {
   padding-right: $padding-base-horizontal - 1px;
   border-radius: (0.5 * $font-size-base * $line-height-base) + $padding-base-vertical;
 }
-.btn-lg.btn-round {
+.btn-lg.btn-round,
+.input-group-lg .btn-round {
   padding-left: $padding-large-horizontal - 1px;
   padding-right: $padding-large-horizontal - 1px;
   border-radius: (0.5 * $font-size-large * $line-height-large) + $padding-large-vertical;
 }
-.btn-sm.btn-round {
+.btn-sm.btn-round,
+.input-group-sm .btn-round {
   padding-left: $padding-small-horizontal - 1px;
   padding-right: $padding-small-horizontal - 1px;
   border-radius: (0.5 * $font-size-small * $line-height-small) + $padding-small-vertical;
