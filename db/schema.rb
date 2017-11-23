@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122081028) do
+ActiveRecord::Schema.define(version: 20171123113012) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 20171122081028) do
     t.boolean  "fuzzy",                      default: false, null: false
     t.string   "name",           limit: 255
     t.string   "inventory_code", limit: 255
+    t.integer  "priority",       limit: 4,   default: 0,     null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end

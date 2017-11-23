@@ -2,8 +2,11 @@
 
 class Admin::InventoriesController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
   before_action :set_inventory, only: [:show, :edit, :update, :destroy]
+
+  authority_actions reorder: 'update'
 
   layout 'admin'
 
@@ -35,7 +38,7 @@ class Admin::InventoriesController < ApplicationController
   # POST /admin/inventories.json
   def create
     authorize_action_for Inventory, at: current_store
-    @inventory = current_store.inventories.build(inventory_params)
+    @inventory = current_store.inventories.build(inventory_params.merge(priority: current_store.inventories.count))
 
     respond_to do |format|
       if @inventory.save

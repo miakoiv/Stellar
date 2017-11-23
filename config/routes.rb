@@ -166,7 +166,9 @@ Rails.application.routes.draw do
     resources :tax_categories do
       post :reorder, on: :collection
     end
-    resources :inventories
+    resources :inventories do
+      post :reorder, on: :collection
+    end
     resources :inventory_items do
       resources :inventory_entries, shallow: true, only: :create
     end

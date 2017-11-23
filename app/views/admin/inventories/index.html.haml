@@ -8,13 +8,15 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %th.col-min.hidden-print
         %th.col-xs-6= col(Inventory, :name)
         %th.col-xs-2= col(Inventory, :inventory_code)
         %th.col-min
         %th.actions
 
-    %tbody
+    %tbody{class: current_user.can_update?(Inventory, at: current_store) && 'sortable'}
       = content_tag_for :tr, @inventories do |inventory|
+        %td.hidden-print= drag_handle
         %td= inventory.name
         %td= inventory.inventory_code
         %td
@@ -32,3 +34,14 @@
                   'confirm-title': t('actions.confirm.title'),
                   'confirm-proceed': t('actions.confirm.proceed'),
                   'confirm-cancel': t('actions.confirm.cancel')}
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_inventories_path}',
+      {reorder: $(this).sortable('toArray')}
