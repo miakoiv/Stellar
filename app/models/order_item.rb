@@ -115,15 +115,15 @@ class OrderItem < ActiveRecord::Base
   # Price for exported orders, always without tax.
   # Vendor products and items from prepaid stock are
   # listed without prices.
-  def price_for_export
+  def price_for_export(inventory)
     return nil if product.vendor.present?
-    return nil if use_prepaid_stock? && product.available?
+    return nil if use_prepaid_stock? && product.available?(inventory)
     price_sans_tax
   end
 
-  def subtotal_for_export
+  def subtotal_for_export(inventory)
     return nil if product.vendor.present?
-    return nil if use_prepaid_stock? && product.available?
+    return nil if use_prepaid_stock? && product.available?(inventory)
     subtotal_sans_tax
   end
 
@@ -131,18 +131,9 @@ class OrderItem < ActiveRecord::Base
     order.order_type.prepaid_stock?
   end
 
-  # If ordered amount exceeds availability, this item gets its lead time
-  # from the product, otherwise it's readily available with nil lead time.
-  def lead_time
-    if amount > product.available
-      product.lead_time
-    else
-      nil
-    end
-  end
-
-  def lead_time_days
-    lead_time.present? ? lead_time.to_i : 0
+  # Can this order item be satisfied by given inventory?
+  def satisfied?(inventory)
+    product.satisfies?(inventory, amount)
   end
 
   # Date used in reports is the completion date of the order.

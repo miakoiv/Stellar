@@ -27,7 +27,7 @@ class CheckoutController < ApplicationController
   # Entering checkout destroys any existing shipments and shipping costs
   # to allow re-entry to the checkout process.
   def checkout
-    if @order.complete? || @order.empty? || !@order.checkoutable?
+    if @order.complete? || @order.empty? || !@order.checkoutable?(current_inventory)
       return redirect_to cart_path
     end
 

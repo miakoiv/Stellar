@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :pricing, :incl_tax?, :can_see_stock?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_inventory, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :pricing, :incl_tax?, :can_see_stock?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -70,6 +70,11 @@ class ApplicationController < ActionController::Base
 
   def current_group
     @current_group ||= current_user.group(current_store)
+  end
+
+  # For now, current inventory is always the primary one.
+  def current_inventory
+    @current_inventory ||= current_store.inventories.first
   end
 
   def current_site_name

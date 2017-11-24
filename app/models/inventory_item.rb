@@ -20,6 +20,8 @@ class InventoryItem < ActiveRecord::Base
   # Inventory items are considered online if they have stock available.
   scope :online, -> { where('on_hand - reserved > 0') }
 
+  scope :in, -> (inventory) { where(inventory: inventory) }
+
   #---
   validates :inventory_id, presence: true
   validates :product_id, presence: true

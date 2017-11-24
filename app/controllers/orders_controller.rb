@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
     authorize_action_for @order, at: current_store
 
     respond_to do |format|
-      if @order.update(order_params) && (@order.checkoutable? || @order.complete?)
+      if @order.update(order_params) && (@order.checkoutable?(current_inventory) || @order.complete?)
         @order.complete! if @order.should_complete?
 
         format.json { render json: @order }

@@ -39,12 +39,12 @@ xml.order do
         xml.title item.product_title
         xml.subtitle item.product_subtitle
         xml.amount item.amount
-        xml.unitPrice item.price_for_export
-        xml.subTotal item.subtotal_for_export
+        xml.unitPrice item.price_for_export(current_inventory)
+        xml.subTotal item.subtotal_for_export(current_inventory)
         xml.shippingDate @order.shipping_at
       end
     end
   end
 
-  xml.grandTotal @order.grand_total_for_export
+  xml.grandTotal @order.grand_total_for_export(current_inventory)
 end

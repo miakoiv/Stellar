@@ -18,11 +18,11 @@
           - else
             = price_tag *pricing.for_display(product)
       - if can_shop? && may_shop_at?(@category) && product.purchasable?
-        - if product.out_of_stock? && !product.back_orderable?
+        - if product.out_of_stock?(current_inventory) && !product.back_orderable?
           %p.text-danger
             = icon('exclamation-circle')
             = col(Product, :out_of_stock)
-        - if product.orderable?
+        - if product.orderable?(current_inventory)
           = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
             = hidden_field_tag :amount, 1
             %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

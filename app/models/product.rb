@@ -300,23 +300,23 @@ class Product < ActiveRecord::Base
     vanilla? || composite?
   end
 
-  # Amount available in all inventories.
-  def available
+  # Amount available in given inventory.
+  def available(inventory)
     @available ||= if tracked_stock?
-      inventory_items.online.map(&:available).sum
+      inventory_items.in(inventory).online.map(&:available).sum
     else
       Float::INFINITY
     end
   end
 
-  # Available means there's stock on hand.
-  def available?
-    available > 0
+  # Available means there's at least given amount on hand.
+  def available?(inventory, amount = 1)
+    available(inventory) >= amount
   end
 
   # Out of stock is the opposite of available.
-  def out_of_stock?
-    !available?
+  def out_of_stock?(inventory)
+    !available?(inventory)
   end
 
   # But out of stock products may be back orderable.
@@ -327,13 +327,13 @@ class Product < ActiveRecord::Base
   # Orderable means in stock or back orderable, but stock may not
   # be enough to satisfy the ordered amount, check #satisfies?
   # as soon as the amount is known.
-  def orderable?
-    available? || back_orderable?
+  def orderable?(inventory)
+    available?(inventory) || back_orderable?
   end
 
   # Check if ordering an amount of product can be satisfied.
-  def satisfies?(amount)
-    available >= amount || back_orderable?
+  def satisfies?(inventory, amount)
+    available?(inventory, amount) || back_orderable?
   end
 
   # Lead times that look like integers are parsed as number of days,
@@ -346,12 +346,6 @@ class Product < ActiveRecord::Base
   # shipping methods if any, defaulting to all active shipping methods.
   def available_shipping_methods
     shipping_methods.active.presence || store.shipping_methods.active
-  end
-
-  # Coalesced amount available by inventory.
-  def available_by_inventory
-    amounts = inventory_items.online.group(:inventory_id).sum('on_hand - reserved')
-    amounts.transform_keys { |id| Inventory.find(id) }
   end
 
   # Restocks given inventory with amount of this product with given lot code,
@@ -373,13 +367,13 @@ class Product < ActiveRecord::Base
     item.save!
   end
 
-  # Consumes given amount of this product from inventory, starting from
+  # Consumes given amount of this product from given inventory, starting from
   # the oldest stock. Multiple inventory items may be affected to satisfy
   # the consumed amount. Returns false if we have insufficient stock available.
-  def consume!(amount, source = nil)
+  def consume!(inventory, amount, source = nil)
     return true if !tracked_stock?
-    return false if amount > available
-    inventory_items.online.each do |item|
+    return false unless available?(inventory, amount)
+    inventory_items.in(inventory).online.each do |item|
       if item.available >= amount
         # This inventory item satisfies the amount, destock and finish.
         item.destock!(amount, source)

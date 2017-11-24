@@ -299,12 +299,11 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Consumes stock for the order contents if it includes shipping.
-  def consume_stock!
-    return true unless has_shipping?
+  # Consumes stock for the order contents.
+  def consume_stock!(inventory)
     transaction do
       order_items.each do |item|
-        item.product.consume!(item.amount, self)
+        item.product.consume!(inventory, item.amount, self)
       end
     end
   end
@@ -325,13 +324,17 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Order lead time is the maximum of its items.
-  def lead_time_days
-    order_items.map(&:lead_time_days).max
+  # Order lead time is based on its back ordered items.
+  def lead_time_days(inventory)
+    order_items.reject { |item|
+      item.product.available?(inventory, item.amount)
+    }.map { |item|
+      item.product.lead_time_days
+    }.max
   end
 
-  def earliest_shipping_at
-     (completed_at || Date.current).to_date + lead_time_days.days
+  def earliest_shipping_at(inventory)
+    (completed_at || Date.current).to_date + lead_time_days(inventory).days
   end
 
   # An order is empty when it's empty of real products.
@@ -344,10 +347,11 @@ class Order < ActiveRecord::Base
     is_quote? && contact_email.present?
   end
 
-  # An order is checkoutable when all its real items are orderable.
-  def checkoutable?
+  # An order is checkoutable when all its real items can be
+  # satisfied from given inventory.
+  def checkoutable?(inventory)
     order_items.real.each do |item|
-      return false unless item.product.satisfies?(item.amount)
+      return false unless item.satisfied?(inventory)
     end
     true
   end
@@ -430,9 +434,9 @@ class Order < ActiveRecord::Base
   end
 
   # Grand total for exported orders.
-  def grand_total_for_export(items = order_items)
+  def grand_total_for_export(inventory, items = order_items)
     items.map { |item|
-      (item.subtotal_for_export || 0) + item.adjustments_sans_tax
+      (item.subtotal_for_export(inventory) || 0) + item.adjustments_sans_tax
     }.sum + adjustments_sans_tax
   end
 
@@ -529,7 +533,7 @@ class Order < ActiveRecord::Base
       end
     end
 
-    # Approving an order consumes stock for the ordered items.
+    # Approving an order sends the appropriate notifications.
     # If the order has already been paid, a processing notification
     # is sent. Otherwise an order confirmation is sent, and a copy
     # without pricing information is cc'd to the contact person.
@@ -546,7 +550,6 @@ class Order < ActiveRecord::Base
           email(:notification, user.to_s, items, false).deliver_later
         end
       end
-      consume_stock!
       true
     end
 
