@@ -773,17 +773,12 @@ $bg-tone:           #f6f6f6;
 }
 
 .product-meta .product-stock { margin-bottom: 40px; }
-.product-meta .product-stock .list-group-item {
-  padding-left: 0;
-  padding-right: 0;
-  border-right: 0;
-  border-bottom: 0;
-  border-left: 0;
-  border-radius: 0;
-  background-color: transparent;
+.product-meta .stock-amount {
+  @extend .pull-right;
+  margin-left: 0.5em;
 }
-.product-meta .product-stock span {
-  @extend .badge, .pull-right;
+.product-meta .list-group-item .stock-amount {
+  font-size: $font-size-small;
 }
 
 /* Product description and properties */

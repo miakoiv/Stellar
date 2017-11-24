@@ -436,12 +436,15 @@ $border-radius-small: 0;
               text-decoration: line-through;
             }
           }
-          form {
-            .form-group {
-              margin-top: 20px;
-
-              button {
-                @extend .btn-block, .btn-lg, .btn-success;
+          .order-form {
+            .form-group { margin-top: 20px; }
+            .btn { @extend .btn-block; }
+            .input-group {
+              @extend .input-group-lg;
+              .form-control { display: none; }
+              .btn {
+                @extend .btn-success;
+                margin-left: 0;
               }
             }
           }
@@ -457,12 +460,12 @@ $border-radius-small: 0;
             @extend .dropdown-menu-right;
           }
         }
-        .product-stock {
-          ul {
-            font-size: $font-size-small;
-
-            > li > span { @extend .badge; }
-          }
+        .stock-amount {
+          @extend .pull-right;
+          margin-left: 0.5em;
+        }
+        .list-group-item .stock-amount {
+          font-size: $font-size-small;
         }
       }
 

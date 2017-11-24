@@ -454,9 +454,12 @@ $border-radius-small: 0;
   .btn { @extend .btn-block; }
   .dropdown-menu { @extend .dropdown-menu-right; }
 }
-.product-body .product-stock ul {
+.product-body .product-meta .stock-amount {
+  @extend .pull-right;
+  margin-left: 0.5em;
+}
+.product-body .product-meta .list-group-item .stock-amount {
   font-size: $font-size-small;
-  > li > span { @extend .badge; }
 }
 .product-body .product-description {
   @extend .col-xs-12, .col-sm-12, .col-md-12, .col-lg-6;

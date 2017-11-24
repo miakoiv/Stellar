@@ -325,12 +325,12 @@ $footer-bg: #d4d4d4;
             @extend .dropdown-menu-right;
           }
         }
-        .product-stock {
-          ul {
-            font-size: $font-size-small;
-
-            > li > span { @extend .badge; }
-          }
+        .stock-amount {
+          @extend .pull-right;
+          margin-left: 0.5em;
+        }
+        .list-group-item .stock-amount {
+          font-size: $font-size-small;
         }
       }
       .product-description {
