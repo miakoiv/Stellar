@@ -1,7 +1,11 @@
 %h5= t('store.component_entries')
 %ul.list-group.list-scroller
   = content_tag_for :li, product.component_entries.live, class: 'list-group-item' do |entry|
-    %span.badge= entry.quantity
+    - if can_see_stock? && entry.component.tracked_stock?
+      .stock-amount
+        = icon('cube', product_stock(current_inventory, entry.component))
+    = entry.quantity
+    ⨉
     %strong= entry.component.title
     = entry.component.subtitle
     - if entry.component.vendor.present?

@@ -6,6 +6,11 @@ module StoreHelper
     amount > 25 ? t('number.more_than', number: 25) : amount
   end
 
+  def product_stock(inventory, product)
+    available = product.available(inventory)
+    inventory.fuzzy? ? fuzzy_amount(available) : available
+  end
+
   def money(amount)
     return nil if amount.nil?
     humanized_money_with_symbol(amount)

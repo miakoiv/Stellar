@@ -1,4 +1,5 @@
 - if can_see_stock? && product.tracked_stock?
   %p
-    = icon('cube', current_inventory)
-    %span= current_inventory.fuzzy? ? fuzzy_amount(product.available(current_inventory)) : product.available(current_inventory)
+    .stock-amount
+      = icon('cube', product_stock(current_inventory, product))
+    = current_inventory

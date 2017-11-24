@@ -13,4 +13,10 @@ class ComponentEntry < ActiveRecord::Base
   #---
   validates :quantity, numericality: {only_integer: true, greater_than: 0}
   validates :component_id, presence: true
+
+  #---
+  # Availability of the component in the context of this entry.
+  def available(inventory)
+    component.available(inventory) / quantity
+  end
 end

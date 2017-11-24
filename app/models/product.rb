@@ -295,17 +295,26 @@ class Product < ActiveRecord::Base
     (bundle? || composite?) && component_entries.live.any?
   end
 
-  # Stock is not tracked for bundles, virtual or internal products.
+  # Stock is not tracked for virtual or internal products.
   def tracked_stock?
-    vanilla? || composite?
+    vanilla? || bundle? || composite?
   end
 
-  # Amount available in given inventory.
+  # Minimum availability of components, used by #available.
+  def component_availability(inventory)
+    component_entries.map { |entry| entry.available(inventory) }.min
+  end
+
+  # Amount available in given inventory, calculated from product
+  # availability and/or minimum component availability, recursively.
   def available(inventory)
-    @available ||= if tracked_stock?
-      inventory_items.in(inventory).online.map(&:available).sum
+    return @available = Float::INFINITY unless tracked_stock?
+    @available ||= if bundle?
+      component_availability(inventory)
+    elsif composite?
+      [availability(inventory), component_availability(inventory)].min
     else
-      Float::INFINITY
+      availability(inventory)
     end
   end
 
@@ -520,6 +529,12 @@ class Product < ActiveRecord::Base
     end
 
   private
+    # Availability based on the inventory items for this product,
+    # used by #available for calculations.
+    def availability(inventory)
+      inventory_items.in(inventory).online.map(&:available).sum
+    end
+
     def unit_pricing_property
       product_properties.joins(:property).merge(Property.unit_pricing).first
     end
