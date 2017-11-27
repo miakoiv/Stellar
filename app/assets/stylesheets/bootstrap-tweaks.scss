@@ -311,7 +311,9 @@ body {
 .dropdown.mega-dropdown {
   position: static !important;
 }
-.mega-dropdown-menu {
+.navbar-left .mega-dropdown-menu,
+.navbar-right .mega-dropdown-menu {
+  left: 0;
   right: 0;
   padding: 20px 0;
   border-left: 0;
