@@ -8,6 +8,6 @@
             %small= @department
         .product-grid.infinite-table
           %ul.masonry-grid
-            = render partial: 'departments/product_card', collection: @products, as: :product
+            = render partial: 'departments/product', collection: @products, as: :product
           .pagination
             = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'
