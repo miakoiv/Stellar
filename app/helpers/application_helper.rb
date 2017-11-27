@@ -86,6 +86,12 @@ module ApplicationHelper
     "\u00a0"
   end
 
+  def placeholder(type)
+    content_tag(:div, class: 'placeholder') do
+      image_tag("placeholders/#{type}.svg")
+    end
+  end
+
   def loading_spinner
     icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
   end

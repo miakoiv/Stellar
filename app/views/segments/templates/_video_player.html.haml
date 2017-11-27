@@ -2,3 +2,5 @@
   - if video_player.video_url.present?
     .video-container
       %iframe{src: video_player.video_url, frameborder: 0, allowfullscreen: true, mozallowfullscreen: true, webkitAllowFullScreen: true}
+  - else
+    = placeholder :video_player

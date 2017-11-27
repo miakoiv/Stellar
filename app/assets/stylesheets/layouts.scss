@@ -186,7 +186,12 @@
   min-height: 3.5714286em;
   line-height: 1.4; // default to sane value for summernote
 }
-
+.segment-content .placeholder {
+  min-width: 192px;
+  min-height: 120px;
+  margin: 0 auto;
+  img { @extend .img-center; }
+}
 .segment-content.column,
 .segment-content.raw {
   h1:first-child,
