@@ -23,6 +23,7 @@ class Section < ActiveRecord::Base
       [2, 'eight-four'],
       [2, 'four-eight'],
       [3, 'four-four-four'],
+      [3, 'three-six-three'],
       [4, 'three-three-three-three'],
     ]],
     [:block, [
@@ -31,6 +32,7 @@ class Section < ActiveRecord::Base
       [2, 'eight-four'],
       [2, 'four-eight'],
       [3, 'four-four-four'],
+      [3, 'three-six-three'],
       [4, 'three-three-three-three'],
       [3, 'eight-four-four'],
       [3, 'four-four-eight'],

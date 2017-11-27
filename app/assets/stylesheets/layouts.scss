@@ -93,16 +93,21 @@
 .four-four-four {
   .segment { @extend .col-xs-12, .col-sm-4; }
 }
+.three-six-three {
+  .segment:first-child { @extend .col-xs-12, .col-sm-6, .col-sm-push-3; }
+  .segment:not(:first-child):not(:last-child) { @extend .col-xs-6, .col-sm-3, .col-sm-pull-6; }
+  .segment:last-child { @extend .col-xs-6, .col-sm-3; }
+}
 .three-three-three-three {
   .segment { @extend .col-xs-6, .col-sm-3; }
 }
 .eight-four-four {
   .segment:first-child { @extend .col-xs-12, .col-sm-8; }
-  .segment:nth-last-child(-n+2) { @extend .col-xs-6, .col-sm-4; }
+  .segment:not(:first-child) { @extend .col-xs-6, .col-sm-4; }
 }
 .four-four-eight {
   .segment:first-child { @extend .col-xs-12, .col-sm-8, .col-sm-push-4; }
-  .segment:nth-last-child(-n+2) { @extend .col-xs-6, .col-sm-4, .col-sm-pull-8; }
+  .segment:not(:first-child) { @extend .col-xs-6, .col-sm-4, .col-sm-pull-8; }
 }
 
 
