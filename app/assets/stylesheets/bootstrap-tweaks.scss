@@ -768,7 +768,12 @@ fieldset[disabled] .help-block { display: none; }
 /*
  * Jumbotrons
  */
-.jumbotron { background-color: transparent; }
+.jumbotron {
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: transparent;
+}
 
 
 /*
