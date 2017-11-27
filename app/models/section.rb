@@ -102,7 +102,7 @@ class Section < ActiveRecord::Base
   # but we'll need a dynamically updated selector
   # to pull that off in the UI
   def layout_options
-    PRESETS.to_h[:block].map { |l| l.last }
+    PRESETS.to_h[:block].map { |l| l[1] }
   end
 
   def image_options
