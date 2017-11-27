@@ -34,8 +34,8 @@ class Section < ActiveRecord::Base
       [3, 'four-four-four'],
       [3, 'three-six-three'],
       [4, 'three-three-three-three'],
-      [3, 'eight-four-four'],
-      [3, 'four-four-eight'],
+      [3, 'eight-four-four', 'shape-16-9'],
+      [3, 'four-four-eight', 'shape-16-9'],
     ]],
   ].freeze
 
