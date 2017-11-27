@@ -1,0 +1,13 @@
+- content_for :segment_head do
+  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
+  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+
+%fieldset
+  .row
+    .col-sm-12
+      = f.hidden_field :resource_type, value: 'Department'
+      = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: true}, {class: 'selectize'}
+
+:coffee
+  $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
+    $(document.body).trigger 'sticky_kit:recalc'

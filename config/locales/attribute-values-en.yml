@@ -128,9 +128,11 @@ en:
           category: category
           product: product
           promotion: promotion
+          department: department
           category_feature: category feature
           product_feature: product feature
           promotion_feature: promotion feature
+          department_feature: department feature
           raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top

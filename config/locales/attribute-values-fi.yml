@@ -128,9 +128,11 @@ fi:
           category: tuoteryhmä
           product: tuote
           promotion: kampanja
+          department: osasto
           category_feature: tuoteryhmämainos
           product_feature: tuotemainos
           promotion_feature: kampanjamainos
+          department_feature: osastomainos
           raw: ʜᴛᴍʟ-osio
         alignment:
           'align-top': ylös

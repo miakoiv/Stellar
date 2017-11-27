@@ -1,0 +1,18 @@
+.product-card
+  = link_to current_store.portal? ? show_product_url(product, host: product.store.hostname_at(current_store).fqdn) : show_product_path(product) do
+    .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :postcard
+    .product-text
+      %h3
+        = product.title
+        %span.small= product.subtitle
+    .promotions
+      - product.live_promoted_items(current_group).each do |item|
+        .promotion= item.description
+    .product-pricing
+      %p.price.currency
+        - if product.has_variants?
+          = price_range *pricing.range_for_display(product)
+        - else
+          = price_tag *pricing.for_display(product)
+      %p.store
+        = product.store

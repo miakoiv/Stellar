@@ -1,0 +1,23 @@
+- resource = department.resource
+- max_items = department.max_items.presence
+- products = resource.is_a?(Department) && resource.products.visible.sorted(department.product_scope.presence)
+
+.segment-content.department{id: segment_content_id(department, context)}
+  - if products
+    .grid{class: "grid-columns-#{department.grid_columns || 3}"}
+      = render partial: 'departments/product_card', layout: 'shared/grid_item', collection: max_items ? products.first(max_items) : products, as: :product
+    - if department.show_more? && products.count > max_items.to_i
+      .more-items-link
+        = link_to show_department_path(resource) do
+          = resource
+          = icon('arrow-circle-right')
+
+- if department.masonry?
+  :coffee
+    $grid = $('##{segment_content_id(department, context)}').find '.grid'
+    $grid.imagesLoaded ->
+      $grid.masonry
+        itemSelector: '.grid-item'
+        columnWidth: '.grid-item'
+        percentPosition: true
+        horizontalOrder: true

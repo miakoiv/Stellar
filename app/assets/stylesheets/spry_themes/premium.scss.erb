@@ -577,12 +577,17 @@ $bg-tone:           #f6f6f6;
     transition: all 0.4s ease-in-out 0s;
   }
 }
+.product-card .product-pricing { text-align: center; }
 .product-card .price {
   text-align: center;
   font-family: "Fira Sans Extra Condensed", sans-serif;
   font-size: 24px;
   color: $gray-base;
   @include pretty-price;
+}
+.product-card .store {
+  @extend .label, .label-primary;
+  display: inline-block;
 }
 
 

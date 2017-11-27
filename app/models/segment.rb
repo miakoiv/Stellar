@@ -31,9 +31,11 @@ class Segment < ActiveRecord::Base
     category: 11,
     product: 12,
     promotion: 13,
+    department: 14,
     category_feature: 21,
     product_feature: 22,
     promotion_feature: 23,
+    department_feature: 24,
     raw: 99,
   }
 
