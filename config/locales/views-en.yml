@@ -172,7 +172,7 @@ en:
         new_page: New page
       form:
         show_resource: Show target
-      layout:
+      layout_menu:
         new_section: New section
     products:
       index:

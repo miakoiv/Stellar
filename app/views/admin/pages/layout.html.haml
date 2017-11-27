@@ -4,16 +4,7 @@
     .container
       %ul.nav.navbar-nav.navbar-right
         - if current_user.can_create?(Section, at: current_store)
-          %li.dropdown
-            = dropdown_toggle do
-              = icon('plus', t('.new_section'))
-            %ul.dropdown-menu
-              - Section.preset_menu_options.each do |outline, layouts|
-                %li.dropdown-header= Section.human_attribute_value(:outline, outline)
-                - layouts.each do |segments, layout|
-                  %li
-                    = link_to admin_page_sections_path(@page, params: {section: {outline: outline, layout: layout}, segments: segments}), remote: true, method: :post do
-                      = layout
+          = render partial: 'layout_menu'
         %li
           = link_to edit_admin_page_path(@page) do
             = icon('chevron-circle-left', t('actions.back'))

@@ -152,7 +152,7 @@ fi:
         new_page: Uusi sivu
       form:
         show_resource: Näytä kohde
-      layout:
+      layout_menu:
         new_section: Uusi lohko
     products:
       index:
