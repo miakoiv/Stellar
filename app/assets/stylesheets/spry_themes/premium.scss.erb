@@ -125,11 +125,15 @@ $bg-tone:           #f6f6f6;
 .mega-dropdown-menu .row {
   display: flex;
   flex-wrap: wrap;
+
+  > li {
+    @extend .col-sm-3, .col-md-2;
+    flex: 0 1 auto;
+    margin-bottom: 20px;
+  }
 }
-.mega-dropdown-menu .row > li {
-  @extend .col-sm-3, .col-md-2;
-  flex: 0 1 auto;
-  margin-bottom: 20px;
+.mega-dropdown-menu-compact .row {
+  flex-wrap: nowrap;
 }
 .mega-dropdown-menu .row > li > a {
   text-align: center;
@@ -151,6 +155,13 @@ $bg-tone:           #f6f6f6;
   text-decoration: none;
 
   &:hover { color: $link-hover-color; }
+}
+.mega-dropdown-menu h4 {
+  @extend .text-center, .text-muted;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 /* Only top level items get images and styled titles */
