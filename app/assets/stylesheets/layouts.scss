@@ -277,15 +277,23 @@
 
 
 /*
- * Segments with product cards must be rows to accommodate
- * product cards that have column gutters. Grids inside
- * have their gutters removed.
+ * Multicolumn content
  */
-.segment-content.product { @extend .row; }
-.segment-content.category > .grid,
-.segment-content.promotion > .grid,
-.segment-content.department > .grid {
-  @extend .row;
-
-  .grid-item { padding: 0; }
+.row.columns-1 {
+  > * { @extend .col-xs-12; }
+}
+.row.columns-2 {
+  > * { @extend .col-xs-6; }
+}
+.row.columns-3 {
+  > * { @extend .col-xs-6, .col-sm-4; }
+}
+.row.columns-4 {
+  > * { @extend .col-xs-6, .col-sm-3; }
+}
+.row.columns-6 {
+  > * { @extend .col-xs-6, .col-sm-3, .col-md-2; }
+}
+.row.columns-12 {
+  > * { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
 }

@@ -4,8 +4,8 @@
 
 .segment-content.category{id: segment_content_id(category, context)}
   - if products
-    .grid{class: "grid-columns-#{category.grid_columns || 3}"}
-      = render partial: 'products/product_card', layout: 'shared/grid_item', collection: max_items ? products.first(max_items) : products, as: :product
+    .row{class: "columns-#{category.grid_columns || 3}"}
+      = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if category.show_more? && products.count > max_items.to_i
       .more-items-link
         = link_to show_category_path(resource) do

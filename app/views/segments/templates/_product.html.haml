@@ -2,4 +2,5 @@
 
 .segment-content.product{id: segment_content_id(product, context)}
   - if resource.is_a?(Product)
-    = render partial: 'products/product_card', object: resource, as: :product
+    .row
+      = render partial: 'products/product_card', object: resource, as: :product
