@@ -17,5 +17,5 @@
         - else
           = price_tag *pricing.for_display(product)
       .store-link
-        = link_to root_url(host: product.store.hostname_at(current_store).fqdn) do
+        = link_to root_url(host: product.store.hostname_at(current_store).fqdn), class: 'btn btn-sm' do
           = product.store
