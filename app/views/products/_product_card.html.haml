@@ -1,11 +1,7 @@
-- headline ||= nil
-
 .product-card
   = link_to current_store.portal? ? show_product_url(product, host: product.store.hostname_at(current_store).fqdn) : show_product_path(product) do
     .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :postcard
     .product-text
-      - if headline.present?
-        %h2= headline
       %h3
         = product.title
         %span.small= product.subtitle
