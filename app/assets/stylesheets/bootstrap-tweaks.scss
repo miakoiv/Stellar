@@ -576,27 +576,27 @@ i.icon {
 .grid .grid-item { padding: 5px; }
 .grid.grid-columns-1 .grid-item {
   width: 100%;
-  flex: 0 1 100%;
+  flex: 0 0 100%;
 }
 .grid.grid-columns-2 .grid-item {
   width: 50%;
-  flex: 0 1 50%;
+  flex: 0 0 50%;
 }
 .grid.grid-columns-3 .grid-item {
   width: 33.333333%;
-  flex: 0 1 33.333333%;
+  flex: 0 0 33.333333%;
 }
 .grid.grid-columns-4 .grid-item {
   width: 25%;
-  flex: 0 1 25%;
+  flex: 0 0 25%;
 }
 .grid.grid-columns-6 .grid-item {
   width: 16.66667%;
-  flex: 0 1 16.666667%;
+  flex: 0 0 16.666667%;
 }
 .grid.grid-columns-12 .grid-item {
   width: 8.333333%;
-  flex: 0 1 8.333333%;
+  flex: 0 0 8.333333%;
 }
 
 .grid.sortable { padding-bottom: 40px; }
@@ -606,23 +606,23 @@ i.icon {
 @media (max-width: $screen-xs-max) {
   .grid.grid-columns-2 .grid-item {
     width: 50%;
-    flex: 0 1 50%;
+    flex: 0 0 50%;
   }
   .grid.grid-columns-3 .grid-item {
     width: 33.333333%;
-    flex: 0 1 33.333333%;
+    flex: 0 0 33.333333%;
   }
   .grid.grid-columns-4 .grid-item {
     width: 50%;
-    flex: 0 1 50%;
+    flex: 0 0 50%;
   }
   .grid.grid-columns-6 .grid-item {
     width: 50%;
-    flex: 0 1 50%;
+    flex: 0 0 50%;
   }
   .grid.grid-columns-12 .grid-item {
     width: 25%;
-    flex: 0 1 25%;
+    flex: 0 0 25%;
   }
 }
 
