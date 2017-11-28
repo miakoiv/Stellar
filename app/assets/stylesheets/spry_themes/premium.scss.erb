@@ -396,6 +396,7 @@ $bg-tone:           #f6f6f6;
 }
 .product-card {
   position: relative;
+  min-width: 160px; /* two-up on mobile */
   padding-left: $grid-gutter-width/2;
   padding-right: $grid-gutter-width/2;
   margin-bottom: 10px;
@@ -506,6 +507,7 @@ $bg-tone:           #f6f6f6;
   @extend .btn-default;
   display: block;
   width: 100%;
+  overflow: hidden;
   border: 0;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
