@@ -3,6 +3,9 @@
   %nav#page-nav.navbar.navbar-default{role: 'navigation'}
     .container
       %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to show_page_path(@page) do
+            = icon('eye', t('actions.show'))
         - if current_user.can_create?(Section, at: current_store)
           = render partial: 'layout_menu'
         %li
