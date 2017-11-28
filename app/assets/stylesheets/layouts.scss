@@ -261,26 +261,6 @@
   }
 }
 
-.segment-content.product {
-  .product-card {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: stretch;
-  }
-  .product-card a {
-    display: block;
-    position: relative;
-    flex: 0 1 auto;
-  }
-  .product-card .buy-now {
-    flex: 0 1 auto;
-  }
-}
-.block .segment-content.product {
-  .product-card { height: 100%; }
-}
-
 .segment-content.category_feature,
 .segment-content.product_feature,
 .segment-content.promotion_feature,
@@ -293,4 +273,19 @@
     width: 100%;
     height: auto;
   }
+}
+
+
+/*
+ * Segments with product cards must be rows to accommodate
+ * product cards that have column gutters. Grids inside
+ * have their gutters removed.
+ */
+.segment-content.product { @extend .row; }
+.segment-content.category > .grid,
+.segment-content.promotion > .grid,
+.segment-content.department > .grid {
+  @extend .row;
+
+  .grid-item { padding: 0; }
 }
