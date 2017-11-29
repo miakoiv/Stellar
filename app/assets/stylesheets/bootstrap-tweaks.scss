@@ -571,7 +571,7 @@ i.icon {
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  margin: -5px;
 }
 .grid .grid-item { padding: 5px; }
 .grid.grid-columns-1 .grid-item {
