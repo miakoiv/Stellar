@@ -13,7 +13,7 @@ class Admin::HostnamesController < ApplicationController
   # POST /admin/stores/1/hostnames
   def create
     authorize_action_for Hostname, at: current_store
-    @hostname = @store.hostnames.build(hostname_params)
+    @hostname = @store.hostnames.build(hostname_params.merge(priority: @store.hostnames.count))
 
     respond_to do |format|
       if @hostname.save
