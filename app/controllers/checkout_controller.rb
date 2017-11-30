@@ -98,9 +98,7 @@ class CheckoutController < ApplicationController
     status = @payment_gateway.verify(token)
 
     if status
-      unless @order.paid?
-        @order.payments.create(amount: @order.grand_total_with_tax)
-      end
+      @order.payments.create(amount: @order.grand_total_with_tax)
       head :ok
     else
       head :bad_request
@@ -111,12 +109,12 @@ class CheckoutController < ApplicationController
   def return
     @shipping_methods = @order.available_shipping_methods
     @payment_gateway = @order.payment_gateway_class.new(order: @order)
-    status = @payment_gateway.return(params)
+    number = @payment_gateway.return(params)
 
-    if status
-      unless @order.paid?
-        @order.payments.create(amount: @order.grand_total_with_tax)
-      end
+    if number
+      @order.payments
+        .find_or_create_by(number: number)
+        .update(amount: @order.grand_total_with_tax)
       @order.complete! if @order.should_complete?
       render :success
     else
@@ -132,12 +130,12 @@ class CheckoutController < ApplicationController
   def notify
     @order = Order.find(params[:order_id])
     @payment_gateway = @order.payment_gateway_class.new(order: @order)
-    status = @payment_gateway.return(params)
+    number = @payment_gateway.return(params)
 
-    if status
-      unless @order.paid?
-        @order.payments.create(amount: @order.grand_total_with_tax)
-      end
+    if number
+      @order.payments
+        .find_or_create_by(number: number)
+        .update(amount: @order.grand_total_with_tax)
       @order.complete! if @order.should_complete?
       render nothing: true, status: :ok
     else

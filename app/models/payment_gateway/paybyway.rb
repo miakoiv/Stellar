@@ -87,6 +87,7 @@ module PaymentGateway
     end
 
     # Checks the return params from a bank e-payment.
+    # Returns the unique order number if successful, nil otherwise.
     def return(params)
       return_code  = params['RETURN_CODE']
       order_number = params['ORDER_NUMBER']
@@ -94,14 +95,14 @@ module PaymentGateway
       contact_id   = params['CONTACT_ID']
       incident_id  = params['INCIDENT_ID']
       authcode     = params['AUTHCODE']
-      return false unless return_code == '0'
+      return nil unless return_code == '0'
       if return_code.present? && order_number.present? && authcode.present?
         cleartext = [return_code, order_number, settled, contact_id, incident_id].compact.join('|')
         if authcode == sha256(@private_key, cleartext)
-          return true
+          return order_number
         end
       end
-      false
+      nil
     end
 
     def to_partial_path
@@ -120,7 +121,7 @@ module PaymentGateway
           order_number: number,
           amount: order.grand_total_with_tax.cents,
           currency: order.grand_total_with_tax.currency_as_string,
-          email: "noreply@#{order.store.primary_host.fqdn}",
+          email: order.customer_email,
           authcode: sha256(@private_key, "#{@api_key}|#{number}"),
           customer: {
             firstname: first,
