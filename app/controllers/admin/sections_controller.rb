@@ -60,8 +60,8 @@ class Admin::SectionsController < ApplicationController
     def create_segments!
       segments = params[:segments].to_i
       template = @section.block? ? 'picture' : 'column'
-      segments.times do
-        @section.segments.create(template: template)
+      segments.times do |i|
+        @section.segments.create(template: template, priority: i)
       end
     end
 
