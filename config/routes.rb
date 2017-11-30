@@ -93,6 +93,7 @@ Rails.application.routes.draw do
         resources :images
         resources :segments do
           resources :images
+          post :switch, on: :member
         end
         post :reorder, on: :collection
       end

@@ -1,5 +1,7 @@
 %nav.segment-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav
+    %li.drag-handle
+      %a{role: 'button'}= icon('arrows')
     - if segment.section.column?
       %li.dropdown
         = dropdown_toggle do

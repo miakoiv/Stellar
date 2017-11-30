@@ -1,0 +1,3 @@
+- @sections.each do |section|
+  $("##{dom_id(section)} > .section").replaceWith("#{j render section}");
+viewportUpdate();

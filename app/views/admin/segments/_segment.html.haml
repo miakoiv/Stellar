@@ -1,6 +1,37 @@
-.segment[segment]{class: segment.alignment, style: segment_style(segment)}
+.segment[segment]{class: segment.alignment, style: segment_style(segment), data: {id: segment.id}}
   .segment-shape{class: segment.shape}
     .segment-content-wrap{class: segment.alignment}
       = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}
       = render partial: 'admin/segments/segment_overlay', object: segment, as: :segment
       = render partial: 'admin/segments/segment_nav', object: segment, as: :segment
+
+:coffee
+  $('##{dom_id(segment)}').draggable
+    scope: 'segments'
+    addClasses: false
+    revert: 'invalid'
+    handle: '.drag-handle'
+    helper: 'clone'
+    opacity: 0.6
+    appendTo: '#content-wrap'
+    start: (e, ui) ->
+      $source = $(this)
+      $payload = ui.helper
+      $payload.css
+        width: $source.css 'width'
+        paddingTop: $source.css 'paddingTop'
+        paddingRight: $source.css 'paddingRight'
+        paddingBottom: $source.css 'paddingBottom'
+        paddingLeft: $source.css 'paddingLeft'
+  .droppable
+    scope: 'segments'
+    addClasses: false
+    accept: '.segment'
+    tolerance: 'pointer'
+    drop: (e, ui) ->
+      $payload = $(ui.draggable[0])
+      $.ajax
+        url: '#{switch_admin_segment_path(segment)}'
+        type: 'POST'
+        data:
+          other_id: $payload.data 'id'

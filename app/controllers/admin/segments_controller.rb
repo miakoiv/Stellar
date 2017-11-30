@@ -3,7 +3,9 @@
 class Admin::SegmentsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :update]
+  before_action :set_segment, only: [:show, :edit, :update, :switch]
+
+  authority_actions switch: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -32,6 +34,16 @@ class Admin::SegmentsController < ApplicationController
         format.js { render json: @segment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # POST /admin/segments/1/switch.js
+  def switch
+    authorize_action_for @segment, at: current_store
+    @other = Segment.joins(:section).find(params[:other_id])
+    @segment.switch(@other)
+    @sections = [@segment.section, @other.section].uniq
+
+    respond_to :js
   end
 
   private

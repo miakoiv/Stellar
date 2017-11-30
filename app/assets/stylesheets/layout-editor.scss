@@ -32,7 +32,8 @@
 .section-list-item .segment.active .segment-content {
   @extend .animated, .pulse;
 }
-.section-list-item .segment {
+.section-list-item .segment,
+.segment.ui-draggable-dragging {
   position: relative;
 
   .segment-overlay {
@@ -54,9 +55,26 @@
     border-radius: 0;
     background-color: #088;
   }
-
-  &:hover .segment-overlay,
-  &:hover .segment-nav { display: block; }
+}
+.section-list-item .segment:hover {
+  .segment-overlay,
+  .segment-nav { display: block; }
+}
+.segment.ui-draggable-dragging {
+  .segment-content { position: relative; }
+  /* Transparent overlay prevents interaction with dragged content */
+  .segment-overlay {
+    display: block;
+    background-color: transparent;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    cursor: grabbing;
+  }
+}
+.segment.ui-droppable-active .segment-content {
+  outline: 4px solid rgba(0, 255, 255, 1);
+}
+.segment.ui-droppable-hover .segment-content {
+  filter: blur(3px);
 }
 
 
