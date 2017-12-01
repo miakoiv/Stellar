@@ -10,7 +10,8 @@
     #navbar-lookup.collapse
       = render partial: 'shared/lookup'
   .navbar-charms
-    %ul.nav.navbar-nav.navbar-left
+    = render partial: 'shared/offcanvas_toggle'
+    %ul.nav.navbar-nav.navbar-right
       = render partial: 'shared/navbar_charms'
       - if user_signed_in? && !guest?
         %li.dropdown.hidden-xs
@@ -27,4 +28,3 @@
       - else
         %li.lg.hidden-xs
           = link_to icon('sign-in'), new_user_session_path
-    = render partial: 'shared/offcanvas_toggle'

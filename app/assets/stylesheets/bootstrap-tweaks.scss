@@ -85,6 +85,12 @@ body {
 
   > li { float: left; }
 }
+#main-nav .navbar-right {
+  float: right !important;
+  margin: 0 -15px;
+
+  > li { float: left; }
+}
 
 /* Hamburger for toggling the side nav on mobile */
 .offcanvas-toggle {

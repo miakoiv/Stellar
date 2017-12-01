@@ -22,6 +22,7 @@
         %ul.dropdown-menu
           = render partial: 'admin/shared/configuration_menu'
   .navbar-charms
+    = render partial: 'shared/offcanvas_toggle'
     %ul.nav.navbar-nav.navbar-right.responsive
       - if user_signed_in? && !guest?
         %li.dropdown
@@ -34,4 +35,3 @@
             = render partial: 'shared/user_menu'
       - else
         %li= link_to icon('sign-in', class: 'fa-lg'), new_user_session_path
-    = render partial: 'shared/offcanvas_toggle'
