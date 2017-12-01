@@ -1021,6 +1021,7 @@ fieldset[disabled] .help-block { display: none; }
 .footer {
   padding-top: 20px;
   padding-bottom: 20px;
+  color: $footer-color;
   font-size: $font-size-small;
   @include gradient-vertical(darken($footer-bg, 10%), $footer-bg, 0, 10px);
 }
