@@ -425,6 +425,7 @@ fi:
         detail_page_id: Lisätietosivu
       store:
         admin: Asetukset
+        appearance: Ulkoasu
         apis: Liitynnät
         new_tax_category: Aseta verotus
         files: Tiedostot
@@ -438,7 +439,8 @@ fi:
         portal: Kauppaverkosto
         name: Nimi
         slug: Tunniste
-        theme: Ulkoasun teema
+        theme: Teema
+        styles: Yksityiskohtaiset tyylit
         detach_menu: Irroita päävalikko
         locale: Kieli
         country_code: Kotimaa

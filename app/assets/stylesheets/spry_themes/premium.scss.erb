@@ -1,18 +1,3 @@
-/*
- * Theme specific styles
- */
-
-$body-bg:         #fff;
-$brand-primary:   #3472f7;
-$brand-success:   #05ae0e;
-$brand-info:      #2ca8ff;
-$brand-warning:   #ff9500;
-$brand-danger:    #ff3b30;
-
-$navbar-inverse-bg: #555;
-$footer-bg:         #f6f6f6;
-$bg-tone:           #f6f6f6;
-
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
 @import "bootstrap-tweaks";
@@ -195,12 +180,12 @@ $bg-tone:           #f6f6f6;
 /* Slightly darker right column on medium and up */
 @media (min-width: $screen-md-min) {
   #product-detail-wrap {
-    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 970px) / 2 + 646px), $bg-tone calc((100% - 970px) / 2 + 646px), $bg-tone);
+    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 970px) / 2 + 646px), $footer-bg calc((100% - 970px) / 2 + 646px), $footer-bg);
   }
 }
 @media (min-width: $screen-lg-min) {
   #product-detail-wrap {
-    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 1170px) / 2 + 780px), $bg-tone calc((100% - 1170px) / 2 + 780px), $bg-tone);
+    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 1170px) / 2 + 780px), $footer-bg calc((100% - 1170px) / 2 + 780px), $footer-bg);
   }
 }
 
@@ -717,7 +702,7 @@ $bg-tone:           #f6f6f6;
 @media (min-width: $screen-md-min) {
   .product-detail .images.technical .gallery {
     min-height: 200px;
-    background-color: $bg-tone;
+    background-color: $footer-bg;
   }
 }
 

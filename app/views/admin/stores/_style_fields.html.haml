@@ -1,0 +1,4 @@
+- Store::STYLE_ATTRS.each do |key, attr|
+  .form-group
+    %label.control-label= key.to_s.humanize
+    = f.send "#{attr[:type]}_field_without_bootstrap", key, class: 'form-control input-sm'

@@ -4,7 +4,7 @@
 = display_meta_tags site: current_site_name
 
 = stylesheet_link_tag 'application', media: 'all'
-= stylesheet_link_tag "spry_themes/#{current_theme}", media: 'all'
+= stylesheet_link_tag current_store.stylesheet_source, media: 'all'
 = javascript_include_tag 'application'
 = javascript_include_tag "spry_themes/#{current_theme}"
 

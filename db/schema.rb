@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129093652) do
+ActiveRecord::Schema.define(version: 20171201100642) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -662,15 +662,20 @@ ActiveRecord::Schema.define(version: 20171129093652) do
   add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.integer  "erp_number",       limit: 4
-    t.boolean  "portal",                         default: false, null: false
-    t.string   "name",             limit: 255
-    t.string   "slug",             limit: 255
-    t.integer  "default_group_id", limit: 4
-    t.string   "country_code",     limit: 2,                     null: false
-    t.text     "settings",         limit: 65535
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.integer  "erp_number",              limit: 4
+    t.boolean  "portal",                                default: false, null: false
+    t.string   "name",                    limit: 255
+    t.string   "slug",                    limit: 255
+    t.integer  "default_group_id",        limit: 4
+    t.string   "country_code",            limit: 2,                     null: false
+    t.text     "settings",                limit: 65535
+    t.text     "styles",                  limit: 65535
+    t.datetime "stylesheet_updated_at"
+    t.integer  "stylesheet_file_size",    limit: 4
+    t.string   "stylesheet_content_type", limit: 255
+    t.string   "stylesheet_file_name",    limit: 255
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
   end
 
   create_table "tax_categories", force: :cascade do |t|

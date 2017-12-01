@@ -9,10 +9,10 @@
     = @store
 
 .row
-  .col-md-6
+  .col-md-7
     = render partial: 'form', locals: {locked: false}
 
-  .col-md-6
+  .col-md-5
     = tab_set 'store-side', class: 'nav-justified nav-sm' do
       = nav_tab 'hostnames', col(Store, :hostnames), default: true
       = nav_tab 'images', col(Store, :images)

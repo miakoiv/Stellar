@@ -2,6 +2,7 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   = tab_set 'store-main', class: 'panel-tabs' do
     = nav_tab 'store-admin', col(Store, :admin), default: true
+    = nav_tab 'store-appearance', col(Store, :appearance)
     = nav_tab 'store-apis', col(Store, :apis)
     = nav_tab 'store-files', col(Store, :files)
     - if current_user_has_role?(:superuser)
@@ -25,16 +26,13 @@
               = f.check_box :allow_shopping
             - unless @store.new_record?
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
-        = tab_pane 'store-files' do
+        = tab_pane 'store-appearance' do
           %fieldset{disabled: locked}
-            %legend= col(Store, :product_csv)
-            = f.text_field :csv_encoding
-            = f.text_field :csv_product_code
-            = f.text_field :csv_retail_price
-            = f.text_field :csv_inventory_amount
-          %fieldset{disabled: locked}
-            %legend= col(Store, :order_xml)
-            = f.text_field :order_xml_path
+            = f.form_group do
+              = f.check_box :detach_menu
+            = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
+          %fieldset.inline{disabled: locked}
+            = render partial: 'style_fields', locals: {f: f}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
             = f.text_field :tracking_code
@@ -45,6 +43,16 @@
             %legend= PaymentGateway::Paybyway.model_name.human
             = f.text_field :pbw_api_key
             = f.text_field :pbw_private_key
+        = tab_pane 'store-files' do
+          %fieldset{disabled: locked}
+            %legend= col(Store, :product_csv)
+            = f.text_field :csv_encoding
+            = f.text_field :csv_product_code
+            = f.text_field :csv_retail_price
+            = f.text_field :csv_inventory_amount
+          %fieldset{disabled: locked}
+            %legend= col(Store, :order_xml)
+            = f.text_field :order_xml_path
         - if current_user_has_role?(:superuser)
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
@@ -52,9 +60,6 @@
               - unless @store.new_record?
                 = f.text_field :slug, readonly: true, help: t('.slug_help_html')
               = f.text_field :order_sequence, help: t('.order_sequence_help_html')
-              = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
-              = f.form_group do
-                = f.check_box :detach_menu
         - if @store.new_record?
           = tab_pane 'store-new-tax-category' do
             = f.fields_for :tax_categories do |ff|

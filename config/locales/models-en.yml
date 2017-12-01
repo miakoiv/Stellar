@@ -425,6 +425,7 @@ en:
         detail_page_id: Information page
       store:
         admin: Settings
+        appearance: Appearance
         apis: Interfaces
         new_tax_category: Set taxation
         files: Files
@@ -439,6 +440,7 @@ en:
         name: Name
         slug: Slug
         theme: Display theme
+        styles: Detailed styles
         detach_menu: Detach main navigation
         locale: Language
         country_code: Country

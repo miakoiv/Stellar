@@ -32,6 +32,43 @@ class Store < ActiveRecord::Base
     :order_xml_path   # where to upload XML files of completed orders
   ], coder: JSON
 
+  STYLE_ATTRS = {
+    body_bg: {type: :color},
+    text_color: {type: :color},
+    link_color: {type: :color},
+    navbar_default_bg: {type: :color},
+    navbar_default_color: {type: :color},
+    navbar_link_color: {type: :color},
+    navbar_link_hover_color: {type: :color},
+    navbar_inverse_bg: {type: :color},
+    navbar_inverse_color: {type: :color},
+    navbar_inverse_link_color: {type: :color},
+    navbar_inverse_link_hover_color: {type: :color},
+    footer_bg: {type: :color},
+    footer_color: {type: :color},
+    brand_primary: {type: :color},
+    brand_success: {type: :color},
+    brand_info: {type: :color},
+    brand_warning: {type: :color},
+    brand_danger: {type: :color},
+    font_family_base: {type: :text},
+    font_size_base: {type: :text},
+    line_height_base: {type: :text},
+    headings_font_family: {type: :text},
+    headings_font_weight: {type: :text},
+    headings_line_height: {type: :text},
+  }.freeze
+
+  store :styles, accessors: STYLE_ATTRS.keys, coder: JSON
+
+  # Attached stylesheet compiled by StyleGenerator from the styles above.
+  # See #stylesheet_source.
+  has_attached_file :stylesheet, {
+    url: '/system/:class/:attachment/:filename.css'
+  }
+  do_not_validate_attachment_file_type :stylesheet
+  before_post_process -> { false }
+
   resourcify
   include Authority::Abilities
   include Imageable
@@ -40,6 +77,8 @@ class Store < ActiveRecord::Base
   after_create :assign_slug
   after_create :create_guest_group
   after_create :create_header_and_footer
+  after_save :generate_stylesheet,
+    if: -> (store) { store.settings_changed? || store.styles_changed? }
 
   #---
   # Default group for users if not otherwise specified, guests especially.
@@ -119,8 +158,10 @@ class Store < ActiveRecord::Base
 
   # Looks up the names of precompiled stylesheets for themes.
   def self.theme_options
-    @@themes ||= Rails.application.config.assets.precompile.select { |a|
-      a.is_a?(String) && a.sub!(/spry_themes\/([^.]+)\.css/, "\\1")
+    @@themes ||= %w{
+      alcoholic apprentice birch boutique budget carbon cards
+      compass fanletti hiustalo lepola penumbra premium
+      saarimedia solar stellar
     }
   end
 
@@ -144,6 +185,10 @@ class Store < ActiveRecord::Base
   end
 
   #---
+  def stylesheet_source
+    stylesheet.present? && stylesheet.url || "spry_themes/#{theme}"
+  end
+
   # Guest users are assigned a random name and email.
   def guest_user_defaults(hostname)
     name = "#{Time.now.to_i}#{rand(100)}"
@@ -250,6 +295,11 @@ class Store < ActiveRecord::Base
   end
 
   private
+    def generate_stylesheet
+      reload
+      StyleGenerator.new(self).compile
+    end
+
     def assign_slug
       taken_slugs = Store.all_except(self).map(&:slug)
       len = 3
