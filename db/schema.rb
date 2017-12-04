@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201100642) do
+ActiveRecord::Schema.define(version: 20171204095943) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -669,6 +669,7 @@ ActiveRecord::Schema.define(version: 20171201100642) do
     t.integer  "default_group_id",        limit: 4
     t.string   "country_code",            limit: 2,                     null: false
     t.text     "settings",                limit: 65535
+    t.string   "theme",                   limit: 255
     t.text     "styles",                  limit: 65535
     t.datetime "stylesheet_updated_at"
     t.integer  "stylesheet_file_size",    limit: 4
