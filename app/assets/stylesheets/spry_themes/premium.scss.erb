@@ -63,27 +63,6 @@
 
 
 /*
- * Rounded buttons all over
- */
-#static-wrap .btn,
-#store-wrap .btn {
-  @extend .btn-round;
-}
-#static-wrap .btn-group > .btn:not(:first-child):not(:last-child),
-#store-wrap .btn-group > .btn:not(:first-child):not(:last-child) {
-  border-radius: 0;
-}
-#static-wrap .btn-group > .btn:first-child:not(:last-child),
-#store-wrap .btn-group > .btn:first-child:not(:last-child) {
-  @include border-right-radius(0);
-}
-#static-wrap .btn-group > .btn:last-child:not(:first-child),
-#store-wrap .btn-group > .btn:last-child:not(:first-child) {
-  @include border-left-radius(0);
-}
-
-
-/*
  * Dropdown opening animation
  */
 .dropdown.open .dropdown-menu:not(.datepicker) {
@@ -198,7 +177,10 @@
   padding-left: 9px;
   input { border-radius: $input-height-base/2; }
 }
-.filter-bar .view-selector { margin-right: 9px; }
+.filter-bar .view-selector {
+  margin-right: 9px;
+  .btn { @extend .btn-round; }
+}
 
 
 /*
@@ -478,7 +460,7 @@
 }
 .product-grid .buy-now-form .btn,
 .product-card .buy-now-form .btn {
-  @extend .btn-default;
+  @extend .btn-default, .btn-round;
   display: block;
   width: 100%;
   font-size: 16px;
@@ -488,7 +470,7 @@
 }
 .product-grid .store-link > a,
 .product-card .store-link > a {
-  @extend .btn-default;
+  @extend .btn-default, .btn-round;
   display: block;
   width: 100%;
   overflow: hidden;
@@ -499,9 +481,9 @@
 /* Link to more at the bottom of a grid */
 .more-items-link {
   @extend .pull-right;
-}
-.more-items-link a {
-  @extend .btn, .btn-sm, .btn-primary;
+  > a {
+    @extend .btn, .btn-sm, .btn-primary;
+  }
 }
 
 
@@ -527,7 +509,7 @@
     margin-right: $grid-gutter-width/2;
 
     .btn {
-      @extend .btn-sm;
+      @extend .btn-sm, .btn-round;
       background-color: transparent;
       border-color: transparent;
 
@@ -647,20 +629,17 @@
   .input-group { @extend .input-group-lg; }
   .input-group .form-control { display: none; }
   .input-group .btn {
-    @extend .btn-block, .btn-success;
+    @extend .btn-block, .btn-success, .btn-round;
     margin-left: 0;
   }
 }
-.product-meta .go-checkout .btn { @extend .btn-block; }
+.product-meta .go-checkout .btn { @extend .btn-block, .btn-round; }
 
 /* Variant products dropdown */
 .product-meta .variant-products {
   margin-bottom: 40px;
 
-  .btn {
-    display: block;
-    width: 100%;
-  }
+  .btn { @extend .btn-block, .btn-round; }
   .dropdown-menu { @extend .dropdown-menu-right; }
   .dropdown-menu .media-heading {
     font-size: $font-size-h5;
