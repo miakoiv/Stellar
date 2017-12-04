@@ -4,7 +4,6 @@ class Store < ActiveRecord::Base
 
   store :settings, accessors: [
     :locale,   # see #locale_options for supported locales
-    :theme,    # see app/stylesheets/spry_themes
     :brand_image, # additional branding image displayed in the footer
     :detach_menu, # boolean, detach the primary navigation as #page-menu
     :wiselinks,   # boolean, use wiselinks for storefront navigation
@@ -78,7 +77,7 @@ class Store < ActiveRecord::Base
   after_create :create_guest_group
   after_create :create_header_and_footer
   after_save :generate_stylesheet,
-    if: -> (store) { store.settings_changed? || store.styles_changed? }
+    if: -> (store) { store.theme_changed? || store.styles_changed? }
 
   #---
   # Default group for users if not otherwise specified, guests especially.
