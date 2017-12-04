@@ -33,6 +33,7 @@ module ShippingGateway
     # Returns a tuple of both results.
     def smartpost_lookup(zipcode)
       postcode = @pickup_connector.lookup(zipcode: zipcode).parsed_response[0]
+      return [nil, nil] if postcode.nil?
       query = {
         type: 'smartpost',
         longitude: postcode['MapLongitude'],

@@ -378,6 +378,7 @@ en:
     default_message: Click to add images, or drop image files here.
   shipping_gateway:
     smart_post:
+      lookup_error: No pickup points found. Please check your zip code.
       zipcode: Search by zipcode
   errors:
     header: Oops!
