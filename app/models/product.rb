@@ -75,7 +75,7 @@ class Product < ActiveRecord::Base
 
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
-  belongs_to :master_product, class_name: 'Product', inverse_of: :variants
+  belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
   belongs_to :primary_variant, class_name: 'Product'
 
