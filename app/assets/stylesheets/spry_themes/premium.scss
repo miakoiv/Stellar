@@ -4,6 +4,7 @@
 @import "fonts";
 @import "print";
 
+$body-tone-bg: darken($body-bg, 4%);
 
 /*
  * Extra tall navbar
@@ -159,12 +160,12 @@
 /* Slightly darker right column on medium and up */
 @media (min-width: $screen-md-min) {
   #product-detail-wrap {
-    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 970px) / 2 + 646px), $footer-bg calc((100% - 970px) / 2 + 646px), $footer-bg);
+    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 970px) / 2 + 646px), $body-tone-bg calc((100% - 970px) / 2 + 646px), $body-tone-bg);
   }
 }
 @media (min-width: $screen-lg-min) {
   #product-detail-wrap {
-    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 1170px) / 2 + 780px), $footer-bg calc((100% - 1170px) / 2 + 780px), $footer-bg);
+    background-image: linear-gradient(to right, $body-bg, $body-bg calc((100% - 1170px) / 2 + 780px), $body-tone-bg calc((100% - 1170px) / 2 + 780px), $body-tone-bg);
   }
 }
 
@@ -548,9 +549,9 @@
 /* Presentational images */
 .product-detail .images.presentational {
   @extend .col-xs-12, .col-md-8;
-  min-height: 400px;
+  height: 600px;
   margin-top: -240px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 /* On small viewports header and presentational images stack */
@@ -560,7 +561,10 @@
 
     .product-title { position: static; }
   }
-  .product-detail .images.presentational { margin-top: 0; }
+  .product-detail .images.presentational {
+    height: 360px;
+    margin-top: 0;
+  }
 }
 
 /* Product meta */
@@ -677,18 +681,15 @@
 .product-detail .images.technical {
   @extend .col-xs-12, .col-sm-8, .col-sm-offset-2;
   @extend .col-md-3, .col-md-offset-0, .col-md-pull-9;
+  height: 290px;
 }
 @media (min-width: $screen-md-min) {
   .product-detail .images.technical .gallery {
-    min-height: 200px;
-    background-color: $footer-bg;
+    background-color: $body-tone-bg;
   }
 }
 
 /* Product image galleries */
-.product-detail .images {
-  position: relative;
-}
 .product-detail .images .nav {
   @extend .nav-pills;
   display: flex;
@@ -708,16 +709,30 @@
   }
   > a img { @extend .img-circle; }
 }
-.product-detail .images .gallery {
-  .image-link { display: block; }
-
+.product-detail .images {
+  .gallery {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .image-link {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   img {
-    @extend .img-responsive;
-    margin: 0 auto;
-    border: 5px solid transparent;
-    transition: all 0.2s ease-in-out 0s;
-
-    &:hover { border-color: $gray-lighter; }
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    transition: transform 0.4s ease-in-out 0.2s;
+    &:hover { transform: scale(1.02); }
   }
 }
 
