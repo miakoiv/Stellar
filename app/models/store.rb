@@ -31,43 +31,6 @@ class Store < ActiveRecord::Base
     :order_xml_path   # where to upload XML files of completed orders
   ], coder: JSON
 
-  STYLE_ATTRS = {
-    body_bg: {type: :color},
-    text_color: {type: :color},
-    link_color: {type: :color},
-    navbar_default_bg: {type: :color},
-    navbar_default_color: {type: :color},
-    navbar_link_color: {type: :color},
-    navbar_link_hover_color: {type: :color},
-    navbar_inverse_bg: {type: :color},
-    navbar_inverse_color: {type: :color},
-    navbar_inverse_link_color: {type: :color},
-    navbar_inverse_link_hover_color: {type: :color},
-    footer_bg: {type: :color},
-    footer_color: {type: :color},
-    brand_primary: {type: :color},
-    brand_success: {type: :color},
-    brand_info: {type: :color},
-    brand_warning: {type: :color},
-    brand_danger: {type: :color},
-    font_family_base: {type: :text},
-    font_size_base: {type: :text},
-    line_height_base: {type: :text},
-    headings_font_family: {type: :text},
-    headings_font_weight: {type: :text},
-    headings_line_height: {type: :text},
-  }.freeze
-
-  store :styles, accessors: STYLE_ATTRS.keys, coder: JSON
-
-  # Attached stylesheet compiled by StyleGenerator from the styles above.
-  # See #stylesheet_source.
-  has_attached_file :stylesheet, {
-    url: '/system/:class/:attachment/:filename.css'
-  }
-  do_not_validate_attachment_file_type :stylesheet
-  before_post_process -> { false }
-
   resourcify
   include Authority::Abilities
   include Imageable
@@ -76,8 +39,7 @@ class Store < ActiveRecord::Base
   after_create :assign_slug
   after_create :create_guest_group
   after_create :create_header_and_footer
-  after_save :generate_stylesheet,
-    if: -> (store) { store.theme_changed? || store.styles_changed? }
+  after_save :reapply_style, if: -> (store) { store.theme_changed? }
 
   #---
   # Default group for users if not otherwise specified, guests especially.
@@ -112,6 +74,8 @@ class Store < ActiveRecord::Base
     store.has_many :tax_categories
     store.has_many :groups
   end
+
+  has_one :style
 
   # The header and footer pages for presentation.
   has_one :header, -> { merge(Page.header) }, class_name: 'Page'
@@ -185,7 +149,7 @@ class Store < ActiveRecord::Base
 
   #---
   def stylesheet_source
-    stylesheet.present? && stylesheet.url || "spry_themes/#{theme}"
+    style.present? && style.stylesheet.present? && style.stylesheet.url || "spry_themes/#{theme}"
   end
 
   # Guest users are assigned a random name and email.
@@ -294,9 +258,12 @@ class Store < ActiveRecord::Base
   end
 
   private
-    def generate_stylesheet
-      reload
-      StyleGenerator.new(self).compile
+    def reapply_style
+      if style.present?
+        reload
+        Styles::Generator.new(theme, style).compile
+      end
+      true
     end
 
     def assign_slug

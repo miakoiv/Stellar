@@ -1,0 +1,12 @@
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header.hidden-print
+      %button.close{data: {dismiss: 'modal'}}= icon('close')
+      %h4.modal-title= t('.title')
+    = render partial: 'modal_form'
+    .processing
+      .spinner= icon('cog', class: 'fa-spin fa-3x')
+
+  :coffee
+    $('#style-modal form').on 'submit', ->
+      $('#style-modal .processing').show()

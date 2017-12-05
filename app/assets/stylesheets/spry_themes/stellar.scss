@@ -192,7 +192,7 @@ $border-radius-small: 0;
   a {
     font-weight: 500;
     background-color: transparent;
-    background-image: url(<%= asset_path('leasit-bar-gradient.svg') %>);
+    background-image: asset-url('leasit-bar-gradient.svg');
     background-position: top left;
     background-size: cover;
 
@@ -213,7 +213,7 @@ $border-radius-small: 0;
   .subcategories-wrap { display: block; }
   > a {
     background-color: transparent;
-    background-image: url(<%= asset_path('leasit-bar.svg') %>);
+    background-image: asset-url('leasit-bar.svg');
   }
 }
 .categories .subcategories > ul {
@@ -321,7 +321,7 @@ $border-radius-small: 0;
 .product-grid .product .price {
   @extend .pull-left, .label, .label-primary;
   background-color: transparent;
-  background-image: url(<%= asset_path('leasit-bar.svg') %>);
+  background-image: asset-url('leasit-bar.svg');
   background-position: top left;
   background-size: cover;
   font-size: 12px;

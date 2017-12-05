@@ -13,7 +13,7 @@ $brand-primary: #e6172b;
 body.hiustalo {
   padding-top: $navbar-height + 4;
   overflow-y: scroll;
-  background-image: url(<%= asset_path('hiustalo-bg.jpg') %>);
+  background-image: asset-url('hiustalo-bg.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -126,7 +126,7 @@ body.hiustalo {
           left: 30px;
           right: 30px;
           height: 200px;
-          background-image: url(<%= asset_path('triangle.png') %>);
+          background-image: asset-url('triangle.png');
           background-repeat: no-repeat;
           background-size: 100%;
 

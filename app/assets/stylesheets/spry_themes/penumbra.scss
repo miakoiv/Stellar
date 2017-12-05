@@ -15,7 +15,7 @@ $navbar-inverse-toggle-border-color: #aaa;
 @import "print";
 
 .penumbra {
-  background-image: url(<%= asset_path('bokeh-3.jpg') %>);
+  background-image: asset-url('bokeh-3.jpg');
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;

@@ -17,7 +17,7 @@ body {
   overflow-y: scroll;
   padding-top: 50px;
   background-color: lighten(#fab20b, 46%);
-  background-image: url(<%= asset_path('lepola-bg.svg') %>);
+  background-image: asset-url('lepola-bg.svg');
   background-position: bottom left;
   background-repeat: no-repeat;
   background-size: 1000px 1000px;

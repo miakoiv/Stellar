@@ -75,6 +75,7 @@ Rails.application.routes.draw do
     resources :stores do
       resources :hostnames, shallow: true
       resources :images, shallow: true
+      resource :style
     end
     resources :departments do
       resources :images, shallow: true

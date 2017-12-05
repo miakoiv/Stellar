@@ -30,9 +30,14 @@
           %fieldset{disabled: locked}
             = f.form_group do
               = f.check_box :detach_menu
-            = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
-          %fieldset.inline{disabled: locked}
-            = render partial: 'style_fields', locals: {f: f}
+            .form-group
+              = f.label col(Store, :theme), class: 'control-label col-sm-4'
+              .col-sm-5
+                = f.select_without_bootstrap :theme, Store.theme_options, {}, {class: 'selectize'}
+              - unless locked
+                .col-sm-3
+                  = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
+                    = icon('paint-brush', t('.edit_style'))
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
             = f.text_field :tracking_code

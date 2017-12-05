@@ -20,6 +20,9 @@ $.fn.extend
       dropdownParent: 'body'
       allowEmptyOption: true
 
+    $('input.color', this).minicolors
+      theme: 'bootstrap'
+
     $('.infinite-table', this).infinitePages
       loading: ->
         $('#spinner').show()

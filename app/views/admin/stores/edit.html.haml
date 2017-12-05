@@ -24,5 +24,7 @@
         = render partial: 'admin/images/edit_collection', object: @store, as: :imageable
         = render partial: 'admin/images/dropzone', object: @store, as: :imageable
 
+#style-modal.modal{data: {backdrop: 'static'}}
+
 :coffee
   persist_tabs 'store-side'
