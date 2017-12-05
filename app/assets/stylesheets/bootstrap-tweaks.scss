@@ -91,6 +91,7 @@ body {
 
   > li { float: left; }
 }
+#main-nav .navbar-charms .navbar-right { margin-left: 15px; }
 
 /* Hamburger for toggling the side nav on mobile */
 .offcanvas-toggle {
@@ -1082,7 +1083,7 @@ fieldset[disabled] .help-block { display: none; }
   width: 60px;
   height: 60px;
 }
-.branding .media-object.tall { height: 100px; }
+.branding .media-object.tall { width: 40px; }
 .branding .media-object img {
   max-width: 100%;
   max-height: 100%;
