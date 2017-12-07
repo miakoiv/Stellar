@@ -60,6 +60,7 @@ class Page < ActiveRecord::Base
   belongs_to :resource, polymorphic: true
 
   has_many :sections, dependent: :destroy
+  has_many :segments, through: :sections
 
   scope :live, -> { where(live: true) }
 
@@ -140,7 +141,7 @@ class Page < ActiveRecord::Base
   end
 
   def description
-    content
+    segments.map(&:content).join("\n")
   end
 
   # Pages are rendered with partials corresponding to purpose.

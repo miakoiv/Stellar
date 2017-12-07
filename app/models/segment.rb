@@ -39,11 +39,18 @@ class Segment < ActiveRecord::Base
   }
 
   #---
-  belongs_to :section
+  belongs_to :section, touch: true
   delegate :shape, to: :section
   belongs_to :resource, polymorphic: true
 
-  default_scope { sorted }
+  after_save :schedule_content_update
+
+  default_scope {
+    joins(:section)
+    .order('sections.priority, segments.priority')
+  }
+  scope :with_content, -> { where(template: [1, 99]) }
+
 
   #---
   def self.template_options
@@ -59,6 +66,10 @@ class Segment < ActiveRecord::Base
   end
 
   #---
+  def has_content?
+    column? || raw?
+  end
+
   def edit_in_place?
     column?
   end
@@ -103,4 +114,10 @@ class Segment < ActiveRecord::Base
   def to_partial_path
     "segments/templates/#{template}"
   end
+
+  private
+    def schedule_content_update
+      ContentGenerationJob.perform_later(self)
+      true
+    end
 end

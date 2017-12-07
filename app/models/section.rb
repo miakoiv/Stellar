@@ -63,7 +63,7 @@ class Section < ActiveRecord::Base
   enum outline: [:block, :column]
 
   #---
-  belongs_to :page
+  belongs_to :page, touch: true
   has_many :segments, dependent: :destroy
 
   default_scope { sorted }
