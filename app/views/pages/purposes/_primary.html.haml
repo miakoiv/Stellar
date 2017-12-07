@@ -1,4 +1,8 @@
 %li{class: active_link_to_class(primary.path)}
-  = link_to primary.path do
-    .page-title
-      = primary
+  - cache [navmenu, I18n.locale, :primary_page, primary] do
+    = link_to primary.path do
+      - if primary.cover_image.present?
+        .page-image
+          = image_variant_tag primary.cover_image, navmenu ? :icon : :matchbox
+      .page-title
+        = primary
