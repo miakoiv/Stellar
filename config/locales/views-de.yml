@@ -107,9 +107,6 @@ de:
       duplicate: In Warenkorb duplizieren
     edit:
       duplicate: In Warenkorb duplizieren
-  pages:
-    show:
-      included_albums: Fotoalben anzeigen
   products:
     product_detail:
       amount: Anzahl

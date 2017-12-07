@@ -68,33 +68,6 @@ $footer-bg: #d4d4d4;
 .mega-dropdown-menu li ul li a .page-image { display: none; }
 
 
-#static-wrap .sidebar {
-  background-color: lighten($brand-primary, 25%);
-
-  &.active { @include box-shadow(-6px 0 12px 0 rgba(0,0,0,0.25)); }
-  .container { padding-top: 70px; }
-
-  .albums {
-    .album {
-      @extend .clearfix;
-      background-color: rgba(255,255,255,0.8);
-
-      .gallery {
-        padding-top: 5px;
-
-        a {
-          float: left;
-          margin-right: 5px;
-          margin-bottom: 5px;
-
-          &:hover { @include box-shadow(0 0 4px $link-color); }
-          img { @extend .img-thumbnail; }
-        }
-      }
-    }
-  }
-}
-
 #categories-wrap {
   position: relative;
   padding-bottom: 30px;

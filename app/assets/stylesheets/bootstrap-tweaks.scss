@@ -357,66 +357,6 @@ body {
 
 
 /*
- * Extra sidebar containing photo albums
- */
-.sidebar {
-  @include box-shadow(0 0 6px 0 rgba(0,0,0,0.25));
-  float: right;
-  position: fixed;
-  z-index: $zindex-navbar;
-  overflow-x: visible;
-  top: 50%;
-  height: 70vh;
-  transform: translateY(-50%);
-  background-color: $navbar-default-bg;
-  border: 1px solid $navbar-default-border;
-  border-radius: $border-radius-large;
-  transition: all 0.5s ease 0s;
-}
-.sidebar .albums.container {
-  height: 100%;
-  overflow-y: scroll;
-  padding-right: 0;
-}
-.sidebar .albums .list-group {
-  margin: 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.sidebar-right {
-  width: 320px;
-  right: -290px;
-}
-.sidebar.active { right: -15px; }
-
-.sidebar .sidebar-toggle {
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  animation-delay: 3s;
-
-  .btn {
-    @include box-shadow(0 0 6px 0 rgba(0,0,0,0.333));
-    border-radius: 50%;
-  }
-}
-@media (min-width: $screen-sm-min) {
-  .sidebar-right {
-    width: 640px;
-    right: -610px;
-  }
-}
-
-/* Parent element having a sidebar */
-.has-sidebar {
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-
-/*
  * Breadcrumbs
  */
 .breadcrumbs .breadcrumb {

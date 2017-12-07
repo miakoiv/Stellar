@@ -231,8 +231,6 @@ es:
         title: Título
         slug: Objetivo
         content: Contenido
-        wysiwyg: Mostrar plano
-        album_ids: Álbumes
       payment:
         order_id: Pedido
         amount: Pagado

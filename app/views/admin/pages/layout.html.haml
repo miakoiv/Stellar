@@ -1,38 +1,27 @@
-- if @page.wysiwyg?
-
-  %nav#page-nav.navbar.navbar-default{role: 'navigation'}
-    .container
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to show_page_path(@page) do
-            = icon('eye', t('actions.show'))
-        - if current_user.can_create?(Section, at: current_store)
-          = render partial: 'layout_menu'
-        %li
-          = link_to edit_admin_page_path(@page) do
-            = icon('chevron-circle-left', t('actions.back'))
-      .navbar-toolbar
-
-  #section-list.section-list.layout-container.sortable
-    = render partial: 'admin/sections/list_item', collection: @page.sections, as: :section
-
-  :coffee
-    $('#section-list').sortable(
-      items: '> .section-list-item'
-      handle: '.handle'
-      placeholder: 'sortable-placeholder'
-      forcePlaceholderSize: true
-      opacity: 0.5
-      revert: 200
-    ).bind 'sortupdate', (e, ui) ->
-      $.post '#{reorder_admin_page_sections_path(@page)}',
-        {reorder: $(this).sortable('toArray')}
-
-- else
+%nav#page-nav.navbar.navbar-default{role: 'navigation'}
   .container
-    .page-header
-      = link_to edit_admin_page_path(@page), class: 'btn btn-default' do
-        = icon('chevron-circle-left', t('actions.back'))
-      %h1= icon('scissors', @page)
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        = link_to show_page_path(@page) do
+          = icon('eye', t('actions.show'))
+      - if current_user.can_create?(Section, at: current_store)
+        = render partial: 'layout_menu'
+      %li
+        = link_to edit_admin_page_path(@page) do
+          = icon('chevron-circle-left', t('actions.back'))
+    .navbar-toolbar
 
-    = render partial: 'codemirror'
+#section-list.section-list.layout-container.sortable
+  = render partial: 'admin/sections/list_item', collection: @page.sections, as: :section
+
+:coffee
+  $('#section-list').sortable(
+    items: '> .section-list-item'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    forcePlaceholderSize: true
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_page_sections_path(@page)}',
+      {reorder: $(this).sortable('toArray')}

@@ -60,7 +60,6 @@ class Page < ActiveRecord::Base
   belongs_to :resource, polymorphic: true
 
   has_many :sections, dependent: :destroy
-  has_and_belongs_to_many :albums
 
   scope :live, -> { where(live: true) }
 
@@ -104,10 +103,6 @@ class Page < ActiveRecord::Base
   def movable?
     return false if needs_resource? && resource.nil?
     !(header? || footer?)
-  end
-
-  def can_have_albums?
-    primary?
   end
 
   # Pages with a resource can be live if the resource is live, or

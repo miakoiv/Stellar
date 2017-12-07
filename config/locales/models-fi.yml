@@ -288,8 +288,6 @@ fi:
         slug: Kohde
         url: Osoite
         content: Sisältö
-        wysiwyg: Näytä ulkoasu
-        album_ids: Albumit
       payment:
         order_id: Tilaus
         amount: Maksettu

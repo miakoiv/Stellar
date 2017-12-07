@@ -306,9 +306,6 @@ fi:
     delegation:
       select: Liity väliaikaiseen ryhmään
       cannot_delegate: Ei ryhmiä – ostoskori ei ole tyhjä
-  albums:
-    sidebar:
-      included_albums: Näytä albumit
   checkout:
     panels:
       address_panel: Yhteystiedot

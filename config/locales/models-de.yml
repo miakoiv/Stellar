@@ -133,8 +133,6 @@ de:
         title: Titel
         slug: Adresse
         content: Inhalt
-        wysiwyg: Froala-Editor nutzen
-        album_ids: Fotoalben
       product:
         category_ids: Kategorien
         compound: Verbindung Produkt

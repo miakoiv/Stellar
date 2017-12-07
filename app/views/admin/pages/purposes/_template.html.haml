@@ -1,9 +1,6 @@
 = f.hidden_field :resource_type, value: 'Group'
 = f.select :resource_id, current_store.group_options, {}, {class: 'selectize-label'}
 
-= f.form_group do
-  = f.check_box :wysiwyg
-
 :coffee
   $('#page_resource_id').selectize
     labelField: 'title'

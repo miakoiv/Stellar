@@ -9,8 +9,6 @@
             = f.check_box :live
         - unless @page.new_record?
           = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
-          - if @page.can_have_albums?
-            = f.select :album_ids, current_store.album_options, {}, {multiple: true, class: 'selectize'}
     - unless @page.new_record?
       .panel-footer
         - if @page.can_have_content?

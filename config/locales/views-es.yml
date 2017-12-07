@@ -232,9 +232,6 @@ es:
       delete: Carro vacio
       confirm_delete: ¿Quieres vaciar tu carro?
       lead_time_warning: La cantidad pedida excede el inventario, se espera un retraso de %{lead_time}.
-  albums:
-    sidebar:
-      included_albums: Mostrar albumes
   checkout:
     panels:
       address_panel: Información de contacto

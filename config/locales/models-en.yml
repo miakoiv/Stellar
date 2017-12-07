@@ -288,8 +288,6 @@ en:
         slug: Target
         url: Osoite
         content: Content
-        wysiwyg: Show layout
-        album_ids: Albums
       payment:
         order_id: Order
         amount: Paid

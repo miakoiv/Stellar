@@ -326,9 +326,6 @@ en:
     delegation:
       select: Join a temporary group
       cannot_delegate: No groups – shopping cart not empty
-  albums:
-    sidebar:
-      included_albums: Show albums
   checkout:
     panels:
       address_panel: Contact information
