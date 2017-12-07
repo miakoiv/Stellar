@@ -55,7 +55,10 @@ body {
   display: flex;
   flex-flow: row nowrap;
 }
-#main-nav .navbar-header { flex: 0 0 auto; }
+#main-nav .navbar-header {
+  flex: 0 0 auto;
+  max-width: 300px;
+}
 
 /* Relatively positioned body for the lookup widget */
 #main-nav .navbar-body {
@@ -65,17 +68,33 @@ body {
 #main-nav .navbar-charms { flex: 0 0 auto; }
 
 #main-nav .navbar-brand {
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+  max-width: 100%;
   padding: 10px 15px;
 
   img {
-    display: inline-block;
+    display: block;
+    max-width: 100%;
     max-height: 30px;
     width: auto;
     height: auto;
-    margin: 0 10px 0 0;
+    margin: 0;
   }
   /* Hide brand name by default */
   span { display: none; }
+}
+
+/* Limit navbar header size to ensure navbar charms will fit */
+@media (max-width: $screen-sm-max) {
+  #main-nav .navbar-header { max-width: 225px; }
+}
+@media (max-width: $screen-xs-max) {
+  #main-nav .navbar-header { max-width: 180px; }
+}
+@media (max-width: 359px) {
+  #main-nav .navbar-header { max-width: 150px; }
 }
 
 /* Use desktop margins and floats since main nav never collapses */
