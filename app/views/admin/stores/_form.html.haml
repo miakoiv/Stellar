@@ -34,7 +34,7 @@
               = f.label col(Store, :theme), class: 'control-label col-sm-4'
               .col-sm-5
                 = f.select_without_bootstrap :theme, Store.theme_options, {}, {class: 'selectize'}
-              - unless locked
+              - unless locked || @store.new_record?
                 .col-sm-3
                   = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
                     = icon('paint-brush', t('.edit_style'))
