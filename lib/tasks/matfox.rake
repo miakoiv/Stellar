@@ -73,19 +73,19 @@ namespace :matfox do
         # is found by the customer's ERP number.
         if data[:customers].present?
           data[:customers].each do |row|
-            store = Store.find_by(erp_number: row[:erp_number])
-            next if store.nil?
-            product = find_or_create_product(store, code, data)
-            next if product.nil?
-            product.update(customer_code: row[:customer_code]) if product.customer_code.nil?
-            trade_price = row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price]
-            if trade_price.present? && trade_price.to_f > 0
-              product.update(
-                trade_price: trade_price,
-                trade_price_modified_at: data[:product][:trade_price_modified_at]
-              )
+            Store.where(erp_number: row[:erp_number]).each do |store|
+              product = find_or_create_product(store, code, data)
+              next if product.nil?
+              product.update(customer_code: row[:customer_code]) if product.customer_code.nil?
+              trade_price = row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price]
+              if trade_price.present? && trade_price.to_f > 0
+                product.update(
+                  trade_price: trade_price,
+                  trade_price_modified_at: data[:product][:trade_price_modified_at]
+                )
+              end
+              update_inventory(store, product, data[:product], data[:inventories])
             end
-            update_inventory(store, product, data[:product], data[:inventories])
             #update_structure(store, product, data[:structure])
           end
         end
