@@ -140,6 +140,13 @@ body {
 }
 
 #cart-badge { background-color: $brand-primary; }
+@media (max-width: $screen-xs-max) {
+  #cart-badge {
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+}
 
 /* Adding .responsive hides a nav on mobile */
 .navbar-nav.responsive { @extend .hidden-xs; }
