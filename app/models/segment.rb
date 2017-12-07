@@ -6,7 +6,7 @@ class Segment < ActiveRecord::Base
     :min_height, :grid_columns, :masonry,
     :max_items, :show_more, :product_scope,
     :map_location, :map_zoom,
-    :video_url,
+    :url, :video_url,
   ], coder: JSON
 
   resourcify

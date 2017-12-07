@@ -401,7 +401,7 @@ fi:
         product_scope: Tuotteiden järjestys
         map_location: Sijainnin osoite
         map_zoom: Kartan koko
-        video_url: Videon upotuksen osoite
+        url: Sisällön osoite
         thumbnail_size: Diakuvan koko
       shipment:
         shipping_method_id: Toimitustapa

@@ -56,11 +56,10 @@ class Admin::SegmentsController < ApplicationController
     def segment_params
       params.fetch(:segment) {{}}.permit(
         :resource_id, :resource_type, :template, :alignment,
-        :body,
+        :body, :url,
         :min_height, :grid_columns, :masonry,
         :max_items, :product_scope, :show_more,
-        :map_location, :map_zoom,
-        :video_url
+        :map_location, :map_zoom
       )
     end
 end
