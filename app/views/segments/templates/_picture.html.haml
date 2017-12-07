@@ -16,7 +16,11 @@
             effect: 'fade'
     - else
       .image-container
-        = image_variant_tag picture.cover_image, :lightbox
+        - if picture.url.present?
+          = link_to picture.url do
+            = image_variant_tag picture.cover_image, :lightbox
+        - else
+          = image_variant_tag picture.cover_image, :lightbox
 
   - else
     = placeholder :picture

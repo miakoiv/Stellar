@@ -2,6 +2,8 @@
   = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
 
+= f.text_field :url, placeholder: 'http://'
+
 :coffee
   $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
     $(document.body).trigger 'sticky_kit:recalc'
