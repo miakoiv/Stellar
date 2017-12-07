@@ -203,6 +203,7 @@
 }
 
 .segment-content.picture {
+  a { display: block; }
   .image-container,
   .swiper-container {
     position: relative;
