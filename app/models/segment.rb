@@ -3,10 +3,10 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
+    :url,
     :min_height, :grid_columns, :masonry,
     :max_items, :show_more, :product_scope,
-    :map_location, :map_zoom,
-    :url, :video_url,
+    :map_location, :map_zoom
   ], coder: JSON
 
   resourcify
