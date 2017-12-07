@@ -12,7 +12,7 @@
           = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('admin.pages.index.new_page'))
       #page-form
-        = render partial: 'form'
+        = render partial: 'edit'
 
 :coffee
   $('.quick-edit-panel').stick_in_parent

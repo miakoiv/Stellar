@@ -1,1 +1,4 @@
 = render partial: 'form'
+- if @page.can_have_content?
+  = render partial: 'admin/images/edit_collection', object: @page, as: :imageable
+  = render partial: 'admin/images/dropzone', object: @page, as: :imageable
