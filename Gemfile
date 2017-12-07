@@ -89,6 +89,9 @@ gem 'fastimage'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
+# HTML/XML parsing
+gem 'nokogiri'
+
 # SpreadsheetML parser for uploaded files
 gem 'SpreadsheetML'
 
