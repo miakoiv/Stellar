@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207121530) do
+ActiveRecord::Schema.define(version: 20171207140938) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -426,7 +426,6 @@ ActiveRecord::Schema.define(version: 20171207121530) do
     t.string   "title",          limit: 255
     t.string   "slug",           limit: 255,                  null: false
     t.text     "metadata",       limit: 65535
-    t.text     "content",        limit: 65535
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
@@ -615,6 +614,7 @@ ActiveRecord::Schema.define(version: 20171207121530) do
     t.string   "alignment",     limit: 255,   default: "align-top", null: false
     t.text     "body",          limit: 65535
     t.text     "metadata",      limit: 65535
+    t.text     "content",       limit: 65535
     t.integer  "priority",      limit: 4,     default: 0,           null: false
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
