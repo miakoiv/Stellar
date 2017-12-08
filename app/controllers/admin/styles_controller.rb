@@ -55,7 +55,7 @@ class Admin::StylesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
     def style_params
       params.require(:style).permit(
-        Style::VARIABLES.keys
+        :preamble, Style::VARIABLES.keys
       )
     end
 end

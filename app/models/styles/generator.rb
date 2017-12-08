@@ -39,8 +39,6 @@ module Styles
         )
       end
 
-      # Style header consists of style variables
-      # formatted as SCSS variable declarations.
       def style_header
         style.to_scss
       end

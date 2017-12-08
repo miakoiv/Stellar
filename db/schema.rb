@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207140938) do
+ActiveRecord::Schema.define(version: 20171208145442) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -672,6 +672,7 @@ ActiveRecord::Schema.define(version: 20171207140938) do
     t.integer  "stylesheet_file_size",    limit: 4
     t.string   "stylesheet_content_type", limit: 255
     t.string   "stylesheet_file_name",    limit: 255
+    t.text     "preamble",                limit: 65535
     t.text     "variables",               limit: 65535
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false

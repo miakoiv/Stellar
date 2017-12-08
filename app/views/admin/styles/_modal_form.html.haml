@@ -1,5 +1,7 @@
 = bootstrap_form_for [@store, @style], url: admin_store_style_path(@store), remote: true do |f|
   .modal-body
+    %fieldset
+      = f.text_area :preamble, rows: 4
     %fieldset.row
       - Style::VARIABLES.each do |key, attr|
         .form-group

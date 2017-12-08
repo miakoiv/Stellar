@@ -459,6 +459,8 @@ fi:
         csv_retail_price: Myyntihintasarake
         csv_inventory_amount: Varastosaldosarake
         order_xml_path: Kansion sijainti
+      style:
+        preamble: Esipuhe
       tax_category:
         name: Nimi
         rate: Verokanta

@@ -459,6 +459,8 @@ en:
         csv_retail_price: Retail price field
         csv_inventory_amount: Inventory field
         order_xml_path: Folder path
+      style:
+        preamble: Preamble
       tax_category:
         name: Name
         rate: Tax rate

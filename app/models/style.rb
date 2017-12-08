@@ -42,14 +42,14 @@ class Style < ActiveRecord::Base
   do_not_validate_attachment_file_type :stylesheet
 
   before_post_process -> { false }
-  after_save :generate_stylesheet, if: -> (style) { style.variables_changed? }
+  after_save :generate_stylesheet, if: -> (style) { style.preamble_changed? || style.variables_changed? }
 
   #---
   belongs_to :store
 
   #---
   def to_scss
-    variables
+    preamble + "\n\n" + variables
       .reject { |_, v| v.blank? }
       .map { |k, v| "$%s: %s;\n" % [k.dasherize, v] }.join
   end
