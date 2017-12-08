@@ -44,7 +44,7 @@ module Styles
       end
 
       def style_footer
-        "\n" + style.preamble
+        "\n#{style.preamble}"
       end
 
       def scss_source
