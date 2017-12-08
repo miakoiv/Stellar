@@ -49,7 +49,7 @@ class Style < ActiveRecord::Base
 
   #---
   def to_scss
-    "#{preamble}\n\n" + variables
+    variables
       .reject { |_, v| v.blank? }
       .map { |k, v| "$%s: %s;\n" % [k.dasherize, v] }.join
   end

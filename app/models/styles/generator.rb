@@ -43,9 +43,13 @@ module Styles
         style.to_scss
       end
 
+      def style_footer
+        "\n" + style.preamble
+      end
+
       def scss_source
         theme_body = ERB.new(File.read(theme_file)).result(binding)
-        style_header + theme_body
+        style_header + theme_body + style_footer
       end
 
       def scss_tmpfile_path
