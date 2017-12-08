@@ -523,6 +523,7 @@ class Order < ActiveRecord::Base
       self.billing_address = shipping_address
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
+      self.billing_country = shipping_country
     end
 
     # Perform XML export if specified by order type, and
