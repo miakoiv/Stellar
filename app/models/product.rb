@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   include Pageable
   include Reorderable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged, :history]
+  friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
   paginates_per 30
 
   enum purpose: {
@@ -444,7 +444,7 @@ class Product < ActiveRecord::Base
   end
 
   def slugger
-    [[:title, :subtitle, :code], [:title, :subtitle, :code, -> { store.name }]]
+    [[:title, :code], [:title, :code, :id]]
   end
 
   def should_generate_new_friendly_id?

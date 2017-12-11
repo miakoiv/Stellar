@@ -7,7 +7,7 @@ class Department < ActiveRecord::Base
   include Imageable
   include Reorderable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged, :history]
+  friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
 
   #---
   belongs_to :store
@@ -25,7 +25,7 @@ class Department < ActiveRecord::Base
 
   #---
   def slugger
-    [:name, [:name, -> { store.name }]]
+    [:name, [:name, :id]]
   end
 
   def should_generate_new_friendly_id?

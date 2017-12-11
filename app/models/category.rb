@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
   include Imageable
   include Pageable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged, :history]
+  friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
   acts_as_nested_set scope: :store,
                      dependent: :destroy,
                      counter_cache: :children_count,
@@ -48,7 +48,7 @@ class Category < ActiveRecord::Base
   end
 
   def slugger
-    [:name, [:name, -> { store.name }]]
+    [:name, [:name, :id]]
   end
 
   def should_generate_new_friendly_id?

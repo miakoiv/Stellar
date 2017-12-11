@@ -13,7 +13,7 @@ class Page < ActiveRecord::Base
   include Authority::Abilities
   include Imageable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged, :history]
+  friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
   acts_as_nested_set scope: :store,
                      dependent: :destroy,
                      counter_cache: :children_count
@@ -113,7 +113,7 @@ class Page < ActiveRecord::Base
   end
 
   def slugger
-    [:title, [:title, -> { store.name }]]
+    [:title, [:title, :id]]
   end
 
   # Prevent FriendlyId from changing slugs on route and external pages.
