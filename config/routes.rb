@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
   # 6b) handle online payment notify if the user failed to return herself
   get  '/checkout/:order_id/notify', to: 'checkout#notify', as: :notify
+  # 6c) confirm order when payment is not collected
+  post '/checkout/:order_id/confirm', to: 'checkout#confirm', as: :confirm
   # 7) show a receipt
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 

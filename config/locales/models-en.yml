@@ -5,6 +5,7 @@ en:
         update: Save this %{template}
   activemodel:
     models:
+      payment_gateway/none: "[External billing]"
       payment_gateway/paybyway: Bambora PayForm
       shipping_gateway/customer_pickup: customer pick-up
       shipping_gateway/letter: letter via mail

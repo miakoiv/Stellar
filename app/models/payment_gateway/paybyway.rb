@@ -105,6 +105,12 @@ module PaymentGateway
       nil
     end
 
+    # Orders using this payment gateway can't be confirmed
+    # without collecting a payment.
+    def confirm
+      false
+    end
+
     def to_partial_path
       'payment_gateway/paybyway'
     end

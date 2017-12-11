@@ -1,0 +1,6 @@
+= bootstrap_form_tag url: confirm_path(@order), html: {id: 'none-confirm-form'} do |f|
+  .row
+    .col-xs-12.confirm-button
+      = f.button t('checkout.confirm'), class: 'btn btn-block btn-lg btn-primary'
+
+= javascript_include_tag 'payment_gateway/none'

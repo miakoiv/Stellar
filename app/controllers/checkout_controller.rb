@@ -143,6 +143,20 @@ class CheckoutController < ApplicationController
     end
   end
 
+  # POST /checkout/1/confirm.js
+  # This action is called when the customer wants to confirm her order
+  # without having a payment collected. For security reasons the validity
+  # of this operation is queried from the payment gateway.
+  def confirm
+    @payment_gateway = @order.payment_gateway_class.new(order: @order)
+    if @payment_gateway.confirm
+      @order.payments.create(amount: @order.grand_total_with_tax)
+      head :ok
+    else
+      head :bad_request
+    end
+  end
+
   # GET /checkout/1/receipt.js
   def receipt
   end

@@ -328,6 +328,7 @@ fi:
     card_expiry: Voimassa (kk/vv)
     card_cvc: Kortin tarkiste (CVC)
     charge: Maksa nyt
+    confirm: Vahvista tilaus
     messages:
       vat_number_reminder: Muista Y-tunnus ulkomaan tilauksissa!
       cannot_checkout_html: <p class="text-danger"><i class="fa fa-warning"></i> <strong>Ostoskorisi sisältää tuotteita, joita ei ole enää saatavana.</strong></p><p>Ole hyvä ja poista merkityt tuotteet.</p>

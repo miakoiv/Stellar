@@ -11,6 +11,6 @@ class Payment < ActiveRecord::Base
 
   #---
   def self.available_gateways
-    %w{Paybyway}
+    %w{None Paybyway}
   end
 end
