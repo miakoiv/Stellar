@@ -11,6 +11,9 @@
     = f.select :shape, Section.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
     = f.select :width, Section.width_options, {}, {required: true}
     = f.color_field :background_color
+    = f.form_group do
+      = f.check_box :fixed_background
+
 
 :coffee
   $('#section_#{section.id}_section_layout').selectize()

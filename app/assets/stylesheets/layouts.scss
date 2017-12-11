@@ -120,7 +120,7 @@
   background-repeat: no-repeat;
 }
 @media (min-width: $screen-sm-min) {
-  .section.shape-viewport {
+  .section.fixed-background {
     background-attachment: fixed;
   }
 }

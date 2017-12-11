@@ -388,6 +388,7 @@ en:
         shape: Block shape
         width: Content width
         background_color: Background color
+        fixed_background: Fixed background
       segment:
         resource_id: Target
         template: Content type

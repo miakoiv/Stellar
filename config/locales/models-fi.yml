@@ -388,6 +388,7 @@ fi:
         shape: Lohkon muoto
         width: Sisällön leveys
         background_color: Taustaväri
+        fixed_background: Kiinteä tausta
       segment:
         resource_id: Kohde
         template: Sisällön tyyppi
