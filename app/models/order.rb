@@ -330,7 +330,7 @@ class Order < ActiveRecord::Base
       item.product.available?(inventory, item.amount)
     }.map { |item|
       item.product.lead_time_days
-    }.max || 0
+    }.compact.max || 0
   end
 
   def earliest_shipping_at(inventory)

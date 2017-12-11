@@ -348,7 +348,7 @@ class Product < ActiveRecord::Base
   # Lead times that look like integers are parsed as number of days,
   # other non-blank strings are considered to be zero days.
   def lead_time_days
-    lead_time.present? && lead_time.to_i
+    lead_time.presence && lead_time.to_i
   end
 
   # Finds the available shipping methods from associated active
