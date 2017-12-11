@@ -101,15 +101,15 @@ class OrderItem < ActiveRecord::Base
 
   # Grand totals include adjustments.
   def grand_total_sans_tax
-    (subtotal_sans_tax || 0) + adjustments_sans_tax
+    (subtotal_sans_tax || 0.to_money) + adjustments_sans_tax
   end
 
   def tax_total
-    (tax_subtotal || 0) + adjustments_tax
+    (tax_subtotal || 0.to_money) + adjustments_tax
   end
 
   def grand_total_with_tax
-    (subtotal_with_tax || 0) + adjustments_with_tax
+    (subtotal_with_tax || 0.to_money) + adjustments_with_tax
   end
 
   # Price for exported orders, always without tax.

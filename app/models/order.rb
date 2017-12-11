@@ -412,31 +412,31 @@ class Order < ActiveRecord::Base
 
   # Grand total for the given items (or whole order), without tax.
   def grand_total_sans_tax(items = order_items)
-    items.map { |item| item.grand_total_sans_tax || 0 }.sum + adjustments_sans_tax
+    items.map { |item| item.grand_total_sans_tax || 0.to_money }.sum + adjustments_sans_tax
   end
 
   # Same as above, with tax.
   def grand_total_with_tax(items = order_items)
-    items.map { |item| item.grand_total_with_tax || 0 }.sum + adjustments_with_tax
+    items.map { |item| item.grand_total_with_tax || 0.to_money }.sum + adjustments_with_tax
   end
 
   # Total tax for the given items.
   def tax_total(items = order_items)
-    items.map { |item| item.tax_total || 0 }.sum
+    items.map { |item| item.tax_total || 0.to_money }.sum
   end
 
   def adjustments_sans_tax
-    adjustments.map { |a| a.amount_sans_tax || 0 }.sum
+    adjustments.map { |a| a.amount_sans_tax || 0.to_money }.sum
   end
 
   def adjustments_with_tax
-    adjustments.map { |a| a.amount_with_tax || 0 }.sum
+    adjustments.map { |a| a.amount_with_tax || 0.to_money }.sum
   end
 
   # Grand total for exported orders.
   def grand_total_for_export(inventory, items = order_items)
     items.map { |item|
-      (item.subtotal_for_export(inventory) || 0) + item.adjustments_sans_tax
+      (item.subtotal_for_export(inventory) || 0.to_money) + item.adjustments_sans_tax
     }.sum + adjustments_sans_tax
   end
 
