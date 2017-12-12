@@ -43,7 +43,7 @@ class Segment < ActiveRecord::Base
   delegate :shape, to: :section
   belongs_to :resource, polymorphic: true
 
-  after_save :schedule_content_update
+  after_save :schedule_content_update, if: -> (segment) { segment.body_changed? }
 
   default_scope {
     joins(:section)
