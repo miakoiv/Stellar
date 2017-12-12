@@ -44,7 +44,8 @@
 .section-content.column .segment {
   @include padding-vertical;
 }
-.section-content.block {
+.section-content.block,
+.section-content.column {
   @include padding-horizontal;
 }
 @media (min-width: $screen-sm-min) {

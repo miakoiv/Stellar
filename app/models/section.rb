@@ -90,6 +90,10 @@ class Section < ActiveRecord::Base
     width == 'spread'
   end
 
+  def jumbotron?
+    width == 'jumbotron'
+  end
+
   def viewport?
     shape == 'shape-viewport'
   end
