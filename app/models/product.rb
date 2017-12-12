@@ -302,14 +302,14 @@ class Product < ActiveRecord::Base
 
   # Minimum availability of components, used by #available.
   def component_availability(inventory)
-    component_entries.map { |entry| entry.available(inventory) }.min
+    component_entries.map { |entry| entry.available(inventory) }.min || 0
   end
 
   # Amount available in given inventory, calculated from product
   # availability and/or minimum component availability, recursively.
   def available(inventory)
-    return @available = Float::INFINITY unless tracked_stock?
-    @available ||= if bundle?
+    return Float::INFINITY unless tracked_stock?
+    if bundle?
       component_availability(inventory)
     elsif composite?
       [availability(inventory), component_availability(inventory)].min
