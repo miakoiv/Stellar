@@ -25,7 +25,10 @@ PRODUCT_FILES = {
   customers: {
     file: 'www-nimike_asiakas-utf8.csv',
     multiple: true,
-    headers: [:code, :erp_number, nil, :customer_code, :trade_price],
+    headers: [
+      :code, :erp_number, nil, :customer_code,
+      :trade_price, nil, nil, :trade_price_modified_at
+    ],
   },
   # VARASTO,NRO,HYLLY,
   # VARASTOLKM,VARATTULKM,TULOSSA,
@@ -68,25 +71,17 @@ namespace :matfox do
       @data_by_product_code.each do |code, data|
         next if data[:product].nil?
 
-        # Each product may exist in one or several stores separately.
-        # If the product has customers assigned, the corresponding store
-        # is found by the customer's ERP number.
-        if data[:customers].present?
-          data[:customers].each do |row|
-            Store.where(erp_number: row[:erp_number]).each do |store|
-              product = find_or_create_product(store, code, data)
+        # Each product may exist in one or several stores separately,
+        # based on entries in inventories data.
+        if data[:inventories].present?
+          data[:inventories].each do |row|
+            inventories = Inventory.where(inventory_code: row[:inventory_code])
+            inventories.each do |inventory|
+              product = find_or_create_product(inventory.store, code, data)
               next if product.nil?
-              product.update(customer_code: row[:customer_code]) if product.customer_code.nil?
-              trade_price = row[:trade_price].present? ? row[:trade_price] : data[:product][:trade_price]
-              if trade_price.present? && trade_price.to_f > 0
-                product.update(
-                  trade_price: trade_price,
-                  trade_price_modified_at: data[:product][:trade_price_modified_at]
-                )
-              end
-              update_inventory(store, product, data[:product], data[:inventories])
+              inventory_data = row[:quantity_on_hand].present? ? row : data[:product]
+              update_inventory(inventory, product, inventory_data)
             end
-            #update_structure(store, product, data[:structure])
           end
         end
 
@@ -100,15 +95,21 @@ namespace :matfox do
             next if store.nil?
             product = find_or_create_product(store, code, data)
             next if product.nil?
-            trade_price = data[:product][:trade_price]
-            if trade_price.present? && trade_price.to_f > 0
-              product.update(
-                trade_price: data[:product][:trade_price],
-                trade_price_modified_at: data[:product][:trade_price_modified_at]
-              )
+            update_trade_price(product, data[:product])
+          end
+        end
+
+        # Customer data is used to update product data in stores
+        # with a matching ERP number.
+        if data[:customers].present?
+          data[:customers].each do |row|
+            Store.where(erp_number: row[:erp_number]).each do |store|
+              product = store.products.find_by(code: code)
+              next if product.nil?
+              product.update(customer_code: row[:customer_code]) if product.customer_code.nil?
+              price_data = row[:trade_price].present? ? row : data[:product]
+              update_trade_price(product, price_data)
             end
-            update_inventory(store, product, data[:product], data[:inventories])
-            #update_structure(store, product, data[:structure])
           end
         end
       end
@@ -133,35 +134,16 @@ namespace :matfox do
     end
   end
 
-  # Updates the inventory item entry for `product` at `store`.
-  def update_inventory(store, product, product_data, inventory_data)
-
-    return false unless store.inventories.any?
-
-    # Entries in `inventory_data` are placed into inventories with matching
-    # `inventory_code` fields. If no `inventory_data` exists, quantities in
-    # `product_data` are placed into the first inventory.
-    if inventory_data.present?
-      inventory_data.each do |row|
-        inventory = store.inventories.find_by(inventory_code: row[:inventory_code])
-        next if inventory.nil?
-        create_inventory_item(
-          inventory, product,
-          row[:quantity_on_hand],
-          row[:quantity_reserved],
-          row[:quantity_pending],
-          row[:value]
-        )
-      end
-    else
-      create_inventory_item(
-        store.inventories.first, product,
-        product[:quantity_on_hand],
-        product[:quantity_reserved],
-        product[:quantity_pending],
-        product[:trade_price]
-      )
-    end
+  # Updates the inventory item entry for `product` in `inventory`.
+  # Given `data` must contain the inventory data fields.
+  def update_inventory(inventory, product, data)
+    create_inventory_item(
+      inventory, product,
+      data[:quantity_on_hand],
+      data[:quantity_reserved],
+      data[:quantity_pending],
+      data[:value]
+    )
   end
 
   # Import specified files into a hash of hashes, where the top level key 'i'
@@ -199,6 +181,18 @@ namespace :matfox do
     else
       puts product.errors.full_messages.map { |m| "! #{m}"}
       nil
+    end
+  end
+
+  # Updates product trade price data from given `data`.
+  def update_trade_price(product, data)
+    trade_price = data[:trade_price]
+    if trade_price.present? && trade_price.to_f > 0
+      product.update(
+        trade_price: trade_price,
+        trade_price_modified_at: data[:trade_price_modified_at]
+      )
+      puts "€ #{product.code} #{product.title} #{product.subtitle} #{trade_price}"
     end
   end
 
