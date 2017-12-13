@@ -18,9 +18,9 @@
     $('#navbar-lookup').collapse 'hide'
   $('#navbar-lookup > form').on 'submit', (e) ->
     e.preventDefault()
-  $('#keyword').smartkeyup ->
+  $('#keyword').smartkeyup (e) ->
     q = $(this).val().replace /^\s+|\s+$/g, ''
-    if q?.length > 1
+    if q?.length > 1 and e.keyCode isnt 27
       $.get '#{lookup_path}?keyword=' + encodeURIComponent(q)
     else
       $('#lookup-dropdown').hide 'fade'
