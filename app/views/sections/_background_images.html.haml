@@ -1,18 +1,21 @@
-- if section.images.any?
-  .section-bg-container
-    - if section.images.count > 1
-      .swiper-container
-        .swiper-wrapper
-          - section.images.each do |image|
-            .swiper-slide
-              = image_variant_tag image, :lightbox, class: 'image-bg'
+- if section.fixed_background?
+  .section-bg-container.fixed-background{style: [section_style(section), background_image_style(section.cover_image)].join(';')}
+- else
+  .section-bg-container{style: section_style(section)}
+    - if section.images.any?
+      - if section.images.count > 1
+        .swiper-container
+          .swiper-wrapper
+            - section.images.each do |image|
+              .swiper-slide
+                = image_variant_tag image, :lightbox, class: 'image-bg'
 
-      :coffee
-        jQuery ->
-          $section = $('##{dom_id(section)}')
-          $swiper = new Swiper $section.find('.swiper-container'),
-            autoplay: 5000
-            loop: true
-            effect: 'fade'
-    - else
-      = image_variant_tag section.cover_image, :lightbox, class: 'image-bg'
+        :coffee
+          jQuery ->
+            $section = $('##{dom_id(section)}')
+            $swiper = new Swiper $section.find('.swiper-container'),
+              autoplay: 5000
+              loop: true
+              effect: 'fade'
+      - else
+        = image_variant_tag section.cover_image, :lightbox, class: 'image-bg'
