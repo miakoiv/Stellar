@@ -127,12 +127,7 @@ module ApplicationHelper
   end
 
   def section_style(section)
-    [].tap do |s|
-      if section.background_image.present?
-        s << "background-image: url(#{section.background_image.url(:lightbox)})"
-      end
-      s << "background-color: #{section.background_color}"
-    end.join '; '
+    "background-color: #{section.background_color}"
   end
 
   def segment_style(segment)
