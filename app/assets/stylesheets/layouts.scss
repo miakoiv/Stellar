@@ -66,6 +66,17 @@
   margin-right: -$grid-gutter-width/2;
 }
 
+/* Override jumbotrons to fit the layout */
+.section .jumbotron {
+  margin-bottom: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+.section-content.column.jumbotron .segment {
+  @include padding-vertical(60px);
+}
+
 /* Fix padding of stacked segments on mobile */
 @media (max-width: $screen-xs-max) {
   .section-content.column .segment { padding-bottom: 0; }
@@ -208,6 +219,7 @@
   margin: 0 auto;
   img { @extend .img-center; }
 }
+
 .segment-content.column,
 .segment-content.raw {
   h1:first-child,
@@ -314,3 +326,9 @@
 .row.columns-12 {
   > * { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
 }
+
+/*
+ * Generic styling classes
+ */
+.text-white { color: #fff !important; }
+.text-shadow { text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); }
