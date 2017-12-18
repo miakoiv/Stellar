@@ -210,14 +210,18 @@
  * Segment content styles
  */
 .segment-content {
-  min-height: 3.5714286em;
   line-height: 1.4; // default to sane value for summernote
 }
 .segment-content .placeholder {
-  min-width: 192px;
-  min-height: 120px;
-  margin: 0 auto;
-  img { @extend .img-center; }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .fa {
+    display: block;
+    opacity: 0.333;
+  }
 }
 
 .segment-content.column,

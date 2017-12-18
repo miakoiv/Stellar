@@ -59,7 +59,7 @@
     dialogsFade: true
     disableDragAndDrop: true
     minHeight: $('##{segment_content_id(@segment, :layout)}').height()
-    placeholder: '#{column_placeholder}'
+    placeholder: ''
     callbacks:
       onImageUpload: (files) ->
         sendAttachment files[0], (data) =>

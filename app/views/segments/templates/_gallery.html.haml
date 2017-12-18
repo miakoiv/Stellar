@@ -1,10 +1,13 @@
 .segment-content.gallery{id: segment_content_id(gallery, context)}
-  .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
-    - gallery.images.each do |image|
-      .grid-item
-        = link_to image.url(:lightbox), class: 'image-link' do
-          .thumbnail
-            = image_variant_tag image, :technical
+  - if gallery.images.any?
+    .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
+      - gallery.images.each do |image|
+        .grid-item
+          = link_to image.url(:lightbox), class: 'image-link' do
+            .thumbnail
+              = image_variant_tag image, :technical
+  - else
+    = render partial: 'segments/placeholders/gallery'
 
 :coffee
   $grid = $('##{segment_content_id(gallery, context)}').find '.grid'

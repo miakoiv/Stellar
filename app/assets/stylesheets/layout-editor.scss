@@ -23,6 +23,10 @@
     border: 0;
     border-radius: 0;
   }
+  .navbar-nav > li > a {
+    color: lighten($brand-primary, 35%);
+    &:hover, &:focus { color: #fff; }
+  }
 }
 .section-list-item .segment-content {
   position: relative;
@@ -57,6 +61,11 @@
     border: 0;
     border-radius: 0;
     background-color: darken($brand-info, 15%);
+
+    .navbar-nav > li > a {
+      color: lighten($brand-info, 35%);
+      &:hover, &:focus { color: #fff; }
+    }
   }
 }
 .section-list-item .segment:hover {

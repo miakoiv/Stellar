@@ -11,6 +11,8 @@
         = link_to show_category_path(resource) do
           = resource
           = icon('arrow-circle-right')
+  - else
+    = render partial: 'segments/placeholders/category'
 
 - if category.masonry?
   :coffee
