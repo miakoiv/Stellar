@@ -1,7 +1,7 @@
 var $segment = $("##{dom_id(@segment)}");
 var $content = $segment.find('.segment-content');
-$('#section-list > .section-list-item .segment').removeClass('active');
-$segment.addClass('active');
+$('#section-list > .section-list-item .segment').removeClass('active').addClass('disabled');
+$segment.removeClass('disabled').addClass('active');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
 $('#layout-panel').trigger('sticky_kit:detach');
