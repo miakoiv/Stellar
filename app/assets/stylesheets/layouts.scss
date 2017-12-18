@@ -162,6 +162,13 @@
 .section .section-content {
   height: 100%;
 }
+.section-content.block {
+  .segment-shape,
+  .segment-content-wrap,
+  .segment-content {
+    min-height: $navbar-height;
+  }
+}
 
 /* With fluid aspect ratio, alignment happens within the .row */
 .section-content.column.fluid-ratio > .row {
@@ -212,16 +219,22 @@
 .segment-content {
   line-height: 1.4; // default to sane value for summernote
 }
+
 .segment-content .placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
 
   .fa {
     display: block;
     opacity: 0.333;
   }
+}
+.section-content .placeholder {
+  min-height: $navbar-height;
+}
+.section-content.fixed-ratio .placeholder {
+  height: 100%;
 }
 
 .segment-content.column,
