@@ -43,6 +43,7 @@ class Segment < ActiveRecord::Base
   delegate :shape, to: :section
   belongs_to :resource, polymorphic: true
 
+  before_validation :clear_unwanted_attributes
   after_save :schedule_content_update, if: -> (segment) { segment.body_changed? }
 
   default_scope {
@@ -68,6 +69,10 @@ class Segment < ActiveRecord::Base
   #---
   def has_content?
     column? || raw?
+  end
+
+  def has_min_height?
+    empty? || map?
   end
 
   def edit_in_place?
@@ -116,6 +121,10 @@ class Segment < ActiveRecord::Base
   end
 
   private
+    def clear_unwanted_attributes
+      self.min_height = nil unless has_min_height?
+    end
+
     def schedule_content_update
       ContentGenerationJob.perform_later(self)
       true
