@@ -45,7 +45,8 @@
   @include padding-vertical;
 }
 .section-content.block,
-.section-content.column {
+.section-content.column,
+.section-content.jumbotron {
   @include padding-horizontal;
 }
 @media (min-width: $screen-sm-min) {
@@ -67,14 +68,14 @@
 }
 
 /* Override jumbotrons to fit the layout */
-.section .jumbotron {
+.section > .jumbotron {
   margin-bottom: 0;
   padding: 0;
   background-color: transparent;
-  border-radius: 0;
 }
-.section-content.column.jumbotron .segment {
-  @include padding-vertical(60px);
+.section-content.jumbotron {
+  margin-bottom: 0;
+  border-radius: 0;
 }
 
 /* Fix padding of stacked segments on mobile */
