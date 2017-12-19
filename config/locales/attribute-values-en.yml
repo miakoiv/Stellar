@@ -133,6 +133,7 @@ en:
           product_feature: product feature
           promotion_feature: promotion feature
           department_feature: department feature
+          navigation_menu: navigation menu
           raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top

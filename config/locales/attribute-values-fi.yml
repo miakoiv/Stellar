@@ -133,6 +133,7 @@ fi:
           product_feature: tuotemainos
           promotion_feature: kampanjamainos
           department_feature: osastomainos
+          navigation_menu: sivuvalikko
           raw: ʜᴛᴍʟ-osio
         alignment:
           'align-top': ylös

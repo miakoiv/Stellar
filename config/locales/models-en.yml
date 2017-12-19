@@ -397,6 +397,7 @@ en:
         headline: Headline
         min_height: Height
         grid_columns: Grid columns
+        inverse: Inverse colors
         masonry: Pack rows tightly
         max_items: Max items
         show_more: Link to further content

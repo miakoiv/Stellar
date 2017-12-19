@@ -397,6 +397,7 @@ fi:
         headline: Otsikko
         min_height: Korkeus
         grid_columns: Sarakkeita
+        inverse: Käänteiset värit
         masonry: Tiivistä rivit
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön

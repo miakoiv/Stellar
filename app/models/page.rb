@@ -64,6 +64,9 @@ class Page < ActiveRecord::Base
 
   scope :live, -> { where(live: true) }
 
+  # Containers for other pages. Segments target these to build navs.
+  scope :container, -> { where(purpose: [20, 21]) }
+
   #---
   validates :title, presence: true
   validates :resource, presence: true,

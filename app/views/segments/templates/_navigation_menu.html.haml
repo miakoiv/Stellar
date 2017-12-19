@@ -1,0 +1,6 @@
+.segment-content.navigation_menu{id: segment_content_id(navigation_menu, context)}
+  - if navigation_menu.resource.present?
+    %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
+      %ul.nav.navmenu-nav
+        - navigation_menu.resource.children.live.each do |page|
+          = render partial: "pages/purposes/#{page.purpose}", object: page, locals: {navmenu: true}
