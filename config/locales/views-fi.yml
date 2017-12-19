@@ -313,7 +313,7 @@ fi:
       payment_panel: Maksaminen
       complete_panel: Tilaus valmis
     continue_shopping: Jatka ostoksia
-    back_to_cart: Takaisin ostoskoriin
+    back_to_cart: Ostoskoriin
     cancel_checkout: Keskeytä ja palaa takaisin yhteystietoihin
     select_order_type: "Valitse ja jatka kassalle:"
     address: Vahvista yhteystiedot

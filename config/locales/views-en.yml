@@ -333,7 +333,7 @@ en:
       payment_panel: Payment
       complete_panel: Order complete
     continue_shopping: Continue shopping
-    back_to_cart: Return to shopping cart
+    back_to_cart: Shopping cart
     cancel_checkout: Cancel and return to contact information
     select_order_type: "Select to proceed:"
     address: Submit contact information

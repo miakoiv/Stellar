@@ -2,10 +2,10 @@
   = f.hidden_field :order_type_id
   %fieldset
     .row
-      .col-sm-4
-        = f.text_field :customer_name, required: true
-      .col-sm-4
+      .col-sm-12
         = f.email_field :customer_email, required: true
+      .col-sm-8
+        = f.text_field :customer_name, required: true
       .col-sm-4
         = f.telephone_field :customer_phone, required: true
   - if current_store.b2b_sales?
@@ -24,12 +24,15 @@
       .row
         .col-sm-12
           = f.text_field :shipping_address, required: true
-        .col-sm-4
+        .col-xs-6.col-sm-4
           = f.text_field :shipping_postalcode, required: true
-        .col-sm-4
+        .col-xs-6.col-sm-4
           = f.text_field :shipping_city, required: true
-        .col-sm-4.collapse{class: current_store.global_sales? && 'in'}
-          = f.select :shipping_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
+        .col-sm-4
+          - if current_store.global_sales?
+            = f.select :shipping_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
+          - else
+            = f.hidden_field :shipping_country_code
       - if current_store.b2b_sales?
         .row
           .col-sm-4
@@ -43,12 +46,15 @@
         .row
           .col-sm-12
             = f.text_field :billing_address
-          .col-sm-4
+          .col-xs-6.col-sm-4
             = f.text_field :billing_postalcode
-          .col-sm-4
+          .col-xs-6.col-sm-4
             = f.text_field :billing_city
-          .col-sm-4.collapse{class: current_store.global_sales? && 'in'}
-            = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
+          .col-sm-4
+            - if current_store.global_sales?
+              = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
+            - else
+              = f.hidden_field :billing_country_code
   %fieldset.bg-warning
     %p.text-warning= icon('exclamation-circle', t('checkout.business_orders_only'))
     .row

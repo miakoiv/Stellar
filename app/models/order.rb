@@ -63,13 +63,11 @@ class Order < ActiveRecord::Base
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update
 
-  validates :shipping_address, :shipping_postalcode, :shipping_city,
-    presence: true, on: :update,
+  validates :shipping_address, :shipping_postalcode, :shipping_city, :shipping_country_code, presence: true, on: :update,
     if: :has_shipping?
 
-  validates :billing_address, :billing_postalcode, :billing_city,
-    presence: true, on: :update,
-    if: -> (order) { order.has_shipping? && order.has_billing_address? }
+  validates :billing_address, :billing_postalcode, :billing_city, :billing_country_code, presence: true, on: :update,
+    if: :has_payment?
 
   #---
   # This attribute allows adding products en masse
@@ -77,7 +75,8 @@ class Order < ActiveRecord::Base
   attr_accessor :product_ids_string
 
   #---
-  before_save :copy_billing_address, unless: :has_billing_address?
+  before_validation :copy_billing_address, unless: :has_billing_address?
+  before_validation :ensure_valid_countries, on: :update
 
   # Approve the order when approved_at first gets a value.
   after_save :approve!, if: -> (order) { order.approved_at_changed?(from: nil) }
@@ -369,23 +368,20 @@ class Order < ActiveRecord::Base
   end
 
   # Addresses this order to the given user if she has any addresses defined.
-  # The country on both addresses is set to store default if none is set yet.
   def address_to(user)
     if user.shipping_address.present?
-      self.shipping_address ||= user.shipping_address
-      self.shipping_postalcode ||= user.shipping_postalcode
-      self.shipping_city ||= user.shipping_city
-      self.shipping_country ||= user.shipping_country
+      self.shipping_address = user.shipping_address
+      self.shipping_postalcode = user.shipping_postalcode
+      self.shipping_city = user.shipping_city
+      self.shipping_country = user.shipping_country
     end
     if user.billing_address.present?
       self.has_billing_address = true
-      self.billing_address ||= user.billing_address
-      self.billing_postalcode ||= user.billing_postalcode
-      self.billing_city ||= user.billing_city
-      self.billing_country ||= user.billing_country
+      self.billing_address = user.billing_address
+      self.billing_postalcode = user.billing_postalcode
+      self.billing_city = user.billing_city
+      self.billing_country = user.billing_country
     end
-    self.shipping_country ||= store.country
-    self.billing_country ||= store.country
   end
 
   def billing_address_components
@@ -524,6 +520,11 @@ class Order < ActiveRecord::Base
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
       self.billing_country = shipping_country
+    end
+
+    def ensure_valid_countries
+      self.shipping_country = store.country if shipping_country.nil?
+      self.billing_country = store.country if billing_country.nil?
     end
 
     # Perform XML export if specified by order type, and

@@ -1,9 +1,9 @@
 #static-wrap.layout-container.hidden-print
   .container
-    .page-header
+    .page-header.hidden-print
       = link_to cart_path, class: 'btn btn-default' do
         = icon('shopping-cart', t('checkout.back_to_cart'))
-      %h1.hidden-print
+      %h1
         = icon('shopping-cart')
         = @order.order_type.label || @order.order_type
 
