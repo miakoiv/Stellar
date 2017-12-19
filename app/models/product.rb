@@ -307,8 +307,10 @@ class Product < ActiveRecord::Base
 
   # Amount available in given inventory, calculated from product
   # availability and/or minimum component availability, recursively.
+  # Returns infinite if inventory is not specified or product stock
+  # is not tracked.
   def available(inventory)
-    return Float::INFINITY unless tracked_stock?
+    return Float::INFINITY if inventory.nil? || !tracked_stock?
     if bundle?
       component_availability(inventory)
     elsif composite?
@@ -319,7 +321,10 @@ class Product < ActiveRecord::Base
   end
 
   # Available means there's at least given amount on hand.
+  # It's not necessary to check further if inventory is not specified
+  # or product stock is not tracked.
   def available?(inventory, amount = 1)
+    return true if inventory.nil? || !tracked_stock?
     available(inventory) >= amount
   end
 
@@ -379,8 +384,10 @@ class Product < ActiveRecord::Base
   # Consumes given amount of this product from given inventory, starting from
   # the oldest stock. Multiple inventory items may be affected to satisfy
   # the consumed amount. Returns false if we have insufficient stock available.
+  # Immediately returns true if no inventory is specified, or stock is not
+  # tracked for this product.
   def consume!(inventory, amount, source = nil)
-    return true if !tracked_stock?
+    return true if inventory.nil? || !tracked_stock?
     return false unless available?(inventory, amount)
     inventory_items.in(inventory).online.each do |item|
       if item.available >= amount

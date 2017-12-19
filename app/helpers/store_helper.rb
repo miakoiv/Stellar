@@ -6,9 +6,12 @@ module StoreHelper
     amount > 25 ? t('number.more_than', number: 25) : amount
   end
 
+  # Returns a potentially fuzzy stock reading for given product.
+  # If no inventory is given, fuzziness is applied to infinity.
+  # See Product#available.
   def product_stock(inventory, product)
     available = product.available(inventory)
-    inventory.fuzzy? ? fuzzy_amount(available) : available
+    inventory.nil? || inventory.fuzzy? ? fuzzy_amount(available) : available
   end
 
   def money(amount)
