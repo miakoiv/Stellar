@@ -12,6 +12,7 @@ class Page < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Imageable
+  include Pageable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
   acts_as_nested_set scope: :store,
@@ -34,6 +35,7 @@ class Page < ActiveRecord::Base
     portal: 40,         # page with content sections meant for portals
     proxy: 41,          # proxy to a portal page for portal navigation
     external: 42,       # link to an external page (url)
+    internal: 43,       # link to an internal page
   }
 
   PRESENTATION = {
@@ -51,6 +53,7 @@ class Page < ActiveRecord::Base
     'portal' => {icon: 'globe', appearance: 'success'},
     'proxy' => {icon: 'share', appearance: 'success'},
     'external' => {icon: 'share', appearance: 'danger'},
+    'internal' => {icon: 'share-alt', appearance: 'danger'},
   }.freeze
 
   #---
@@ -63,6 +66,7 @@ class Page < ActiveRecord::Base
   has_many :segments, through: :sections
 
   scope :live, -> { where(live: true) }
+  scope :excluding, -> (page) { where.not(id: page) }
 
   # Containers for other pages. Segments target these to build navs.
   scope :container, -> { where(purpose: [20, 21]) }
@@ -170,6 +174,8 @@ class Page < ActiveRecord::Base
       children.first.path
     when portal?
       resource.to_url
+    when internal?
+      show_page_path(resource)
     else nil
     end
   end
@@ -184,6 +190,10 @@ class Page < ActiveRecord::Base
     when 'cart'
       [['store'], ['cart']]
     end
+  end
+
+  def to_option
+    self_and_ancestors.join " \u23f5 "
   end
 
   private

@@ -1,0 +1,5 @@
+- if internal.resource.present?
+  %li{class: active_link_to_class(internal.resource.path)}
+    = link_to internal.resource.path do
+      .page-title
+        = internal

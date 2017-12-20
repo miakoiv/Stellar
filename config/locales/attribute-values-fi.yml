@@ -44,6 +44,7 @@ fi:
           portal: Verkostosivu
           proxy: Jäsenkaupan sivu
           external: Ulkoinen sivu
+          internal: Sisäinen sivu
       property:
         value_type:
           string: sanallinen
