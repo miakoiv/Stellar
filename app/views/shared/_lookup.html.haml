@@ -20,7 +20,9 @@
     e.preventDefault()
   $('#keyword').smartkeyup (e) ->
     q = $(this).val().replace /^\s+|\s+$/g, ''
-    if q?.length > 1 and e.keyCode isnt 27
+    if e.keyCode is 27
+      $('#navbar-lookup').collapse 'hide'
+    else if q?.length > 1
       $.get '#{lookup_path}?keyword=' + encodeURIComponent(q)
     else
       $('#lookup-dropdown').hide 'fade'
