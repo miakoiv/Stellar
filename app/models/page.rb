@@ -73,9 +73,6 @@ class Page < ActiveRecord::Base
 
   #---
   validates :title, presence: true
-  validates :resource, presence: true,
-    if: -> (page) { page.needs_resource? },
-    on: :update
 
   #---
   before_save :conditionally_disable
@@ -105,18 +102,18 @@ class Page < ActiveRecord::Base
   end
 
   def needs_resource?
-    category? || product? || promotion? || department? || portal? || proxy?
+    category? || product? || promotion? || department? || portal? || proxy? || internal?
   end
 
   def movable?
-    return false if needs_resource? && resource.nil?
     !(header? || footer?)
   end
 
-  # Pages with a resource can be live if the resource is live, or
+  # Pages needing a resource can be live if the resource is live, or
   # doesn't understand the concept of being live in the first place.
   def can_be_live?
-    resource.nil? || !resource.respond_to?(:live) || resource.live?
+    return true unless needs_resource?
+    resource.present? && (!resource.respond_to?(:live) || resource.live?)
   end
 
   def slugger
