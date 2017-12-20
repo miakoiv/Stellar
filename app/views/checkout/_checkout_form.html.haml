@@ -40,16 +40,19 @@
           - if @order.has_installation?
             .col-sm-4
               = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at(current_inventory), 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-      = f.form_group do
-        = f.check_box :has_billing_address
-      #billing-address.collapse{class: @order.has_billing_address? && 'in'}
+  - if @order.has_shipping? && @order.has_payment?
+    = f.form_group do
+      = f.check_box :has_billing_address
+  - if @order.has_payment?
+    #billing-address.collapse{class: @order.billing_address_required? && 'in'}
+      %fieldset
         .row
           .col-sm-12
-            = f.text_field :billing_address
+            = f.text_field :billing_address, required: @order.billing_address_required?
           .col-xs-6.col-sm-4
-            = f.text_field :billing_postalcode
+            = f.text_field :billing_postalcode, required: @order.billing_address_required?
           .col-xs-6.col-sm-4
-            = f.text_field :billing_city
+            = f.text_field :billing_city, required: @order.billing_address_required?
           .col-sm-4
             - if current_store.global_sales?
               = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}

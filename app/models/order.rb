@@ -67,7 +67,7 @@ class Order < ActiveRecord::Base
     if: :has_shipping?
 
   validates :billing_address, :billing_postalcode, :billing_city, :billing_country_code, presence: true, on: :update,
-    if: :has_payment?
+    if: :billing_address_required?
 
   #---
   # This attribute allows adding products en masse
@@ -75,7 +75,7 @@ class Order < ActiveRecord::Base
   attr_accessor :product_ids_string
 
   #---
-  before_validation :copy_billing_address, unless: :has_billing_address?
+  before_validation :copy_billing_address, if: :should_copy_billing_address?
   before_validation :ensure_valid_countries, on: :update
 
   # Approve the order when approved_at first gets a value.
@@ -315,7 +315,7 @@ class Order < ActiveRecord::Base
   # VAT numbers are not mandatory, but expected to be present in orders
   # billed at a different country from the store home country.
   def vat_number_expected?
-    return false unless has_shipping?
+    return false unless has_payment?
     if has_billing_address?
       billing_country != store.country
     else
@@ -382,6 +382,7 @@ class Order < ActiveRecord::Base
       self.billing_city = user.billing_city
       self.billing_country = user.billing_country
     end
+    ensure_valid_countries
   end
 
   def billing_address_components
@@ -400,6 +401,14 @@ class Order < ActiveRecord::Base
 
   def has_payment?
     order_type.present? && order_type.has_payment?
+  end
+
+  def should_copy_billing_address?
+    has_shipping? && has_payment? && !has_billing_address?
+  end
+
+  def billing_address_required?
+    has_billing_address? || has_payment? && !has_shipping?
   end
 
   def balance
@@ -520,11 +529,13 @@ class Order < ActiveRecord::Base
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
       self.billing_country = shipping_country
+      true
     end
 
     def ensure_valid_countries
       self.shipping_country = store.country if shipping_country.nil?
       self.billing_country = store.country if billing_country.nil?
+      true
     end
 
     # Perform XML export if specified by order type, and
