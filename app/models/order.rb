@@ -220,6 +220,14 @@ class Order < ActiveRecord::Base
     reload
   end
 
+  # Finds the order types applicable to this order in the context
+  # of given group. These are the outgoing order types for the group,
+  # excluding those that are not suitable for one or more products
+  # present in the order items.
+  def available_order_types(group)
+    group.outgoing_order_types.where(has_shipping: requires_shipping?)
+  end
+
   # Finds the shipping methods available for this order based on which
   # methods are common to all ordered items. In case the order needs no
   # shipping, no shipping methods are returned.
@@ -391,8 +399,17 @@ class Order < ActiveRecord::Base
       [shipping_address, shipping_postalcode, shipping_city]
   end
 
+  # Order having shipping is simply from the order type,
+  # once it has been assigned. See below.
   def has_shipping?
     order_type.present? && order_type.has_shipping?
+  end
+
+  # Order requiring shipping is determined by its contents.
+  # A single item that requires shipping will demand shipping
+  # for the whole order.
+  def requires_shipping?
+    order_items.tangible.any?
   end
 
   def has_installation?

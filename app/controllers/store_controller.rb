@@ -52,6 +52,7 @@ class StoreController < ApplicationController
   # GET /cart
   def cart
     @order = shopping_cart
+    @order_types = @order.available_order_types(current_group)
     return redirect_to front_path if @order.empty?
   end
 

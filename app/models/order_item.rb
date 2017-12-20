@@ -22,6 +22,7 @@ class OrderItem < ActiveRecord::Base
   scope :top_level, -> { where(parent_item_id: nil) }
   scope :live, -> { joins(:product).merge(Product.live) }
   scope :real, -> { joins(:product).merge(Product.real) }
+  scope :tangible, -> { joins(:product).merge(Product.tangible) }
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---

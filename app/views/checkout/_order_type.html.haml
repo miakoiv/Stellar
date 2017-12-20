@@ -1,7 +1,4 @@
-:ruby
-  order_types = current_group.outgoing_order_types
-
-- if order_types.count > 1
+- if @order_types.count > 1
   .row
     .col-xs-12
       .pull-right
@@ -9,7 +6,7 @@
           .form-group
             %label= t('checkout.select_order_type')
             .btn-group{data: {toggle: 'buttons'}}
-              - order_types.each do |order_type|
+              - @order_types.each do |order_type|
                 %label.btn.btn-default{class: order_type == order.order_type && 'active'}
                   = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
                   = order_type.label
@@ -18,11 +15,11 @@
       $('#order-type-form').trigger 'submit.rails'
       $('#checkout-button').collapse 'show'
 
-- elsif order_types.count == 1
+- elsif @order_types.count == 1
   :coffee
     jQuery ->
       request = $.post '#{order_type_path(order)}',
-        order_type_id: #{order_types.first.id}
+        order_type_id: #{@order_types.first.id}
       request.done (data) ->
         $('#checkout-button').collapse 'show'
 

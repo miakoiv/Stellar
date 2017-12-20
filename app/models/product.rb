@@ -99,7 +99,10 @@ class Product < ActiveRecord::Base
   has_many :customer_assets, dependent: :destroy
 
   # Real products are everything but internal costs.
-  scope :real, -> { where.not(purpose: purposes[:internal]) }
+  scope :real, -> { where.not(purpose: 6) }
+
+  # Tangible products require shipping.
+  scope :tangible, -> { where.not(purpose: [5, 6]) }
 
   scope :live, -> { where(live: true) }
 
