@@ -11,6 +11,8 @@
         = link_to show_promotion_path(resource) do
           = resource
           = icon('arrow-circle-right')
+  - else
+    = render partial: 'segments/placeholders/promotion'
 
 - if promotion.masonry?
   :coffee

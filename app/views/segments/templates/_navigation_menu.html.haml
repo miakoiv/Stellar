@@ -4,3 +4,5 @@
       %ul.nav.navmenu-nav
         - navigation_menu.resource.children.live.each do |page|
           = render partial: "pages/purposes/#{page.purpose}", object: page, locals: {navmenu: true}
+  - else
+    = render partial: 'segments/placeholders/navigation_menu'
