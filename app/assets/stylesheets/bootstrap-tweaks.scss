@@ -347,6 +347,8 @@ body {
   border-top: 1px solid $navmenu-default-border;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
+  &:first-child { margin-top: 0; }
 }
 .navmenu.navmenu-inverse .navmenu-title {
   color: $navmenu-inverse-brand-color;
