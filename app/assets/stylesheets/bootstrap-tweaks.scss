@@ -272,6 +272,27 @@ body {
 
 
 /*
+ * Switchboard
+ */
+.switchboard { @extend .list-group; }
+.switchboard > a {
+  @extend .list-group-item;
+  height: 50px;
+
+  img {
+    float: right;
+    max-width: 50%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  span {
+    display: block;
+  }
+}
+
+
+/*
  * Product filtering
  */
 .filter-bar .dropdown-menu {

@@ -15,8 +15,6 @@ class StoreController < ApplicationController
     delegate_group || super
   end
 
-  before_action :set_mail_host
-
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
@@ -33,8 +31,11 @@ class StoreController < ApplicationController
 
   # GET /
   def index
-    entry_point = @header.descendants.live.entry_point
-    redirect_to entry_point.present? ? entry_point.path : front_path
+    if current_store.present?
+      entry_point = @header.descendants.live.entry_point
+      return redirect_to entry_point.present? ? entry_point.path : front_path
+    end
+    render :index, layout: 'devise'
   end
 
   # GET /front
@@ -133,10 +134,6 @@ class StoreController < ApplicationController
   end
 
   private
-    def set_mail_host
-      ActionMailer::Base.default_url_options = {host: request.host}
-    end
-
     # Find category from live categories by friendly id, including history.
     # If the category contains no products of its own and has no filtering
     # enabled, redirect to the first descendant category.

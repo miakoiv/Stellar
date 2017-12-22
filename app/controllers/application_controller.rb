@@ -13,11 +13,19 @@ class ApplicationController < ActionController::Base
 
   #---
   # Before doing anything else, set current hostname and current store
-  # based on request.host.
+  # based on request.host. Unknown hosts trigger a bad request response
+  # except for the default url host, which can be used with Devise without
+  # current store.
   def orientate
     @current_hostname = Hostname.find_by(fqdn: request.host)
-    return render nothing: true, status: :bad_request if @current_hostname.nil?
-    @current_store = @current_hostname.store
+    if @current_hostname.present?
+      @current_store = @current_hostname.store
+    else
+      unless request.host == ENV['DEFAULT_URL_HOST']
+        render nothing: true, status: :bad_request
+      end
+      @current_store = nil
+    end
   end
 
   # Authenticate user, but skip authentication if guests are admitted.
@@ -25,7 +33,7 @@ class ApplicationController < ActionController::Base
   # optionally serve guests, and will fail early if the current store
   # can't be found.
   def authenticate_user_or_skip!
-    return true if @current_store.admit_guests?
+    return true if current_store.admit_guests?
     authenticate_user!
   end
 
@@ -38,6 +46,7 @@ class ApplicationController < ActionController::Base
 
   # Find the guest user stored in session, or create it.
   def guest_user
+    return nil if current_store.nil?
     @cached_guest ||= User.find(session[:guest_user_id]) rescue User.find(session[:guest_user_id] = create_guest_user.id)
   end
 
@@ -155,12 +164,17 @@ class ApplicationController < ActionController::Base
     # Unless given by param, locale is set from user preference first, then
     # from portal settings if any, and finally from store settings.
     def set_locale
-      I18n.locale = params[:locale] || user_signed_in? && current_user.locale.presence || current_store.locale || I18n.default_locale
+      I18n.locale = params[:locale] ||
+        user_signed_in? && current_user.locale.presence ||
+        current_store.present? && current_store.locale ||
+        I18n.default_locale
     end
 
     def set_header_and_footer
-      @header = current_store.header
-      @footer = current_store.footer
+      if current_store.present?
+        @header = current_store.header
+        @footer = current_store.footer
+      end
     end
 
     def set_categories

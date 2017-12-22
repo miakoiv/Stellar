@@ -15,7 +15,10 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = {host: '10.2.0.84', port: 80}
+  config.action_mailer.default_url_options = {
+    host: ENV['DEFAULT_URL_HOST'],
+    port: ENV['DEFAULT_URL_PORT'] || 80
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
