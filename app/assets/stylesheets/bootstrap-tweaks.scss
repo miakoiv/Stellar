@@ -85,6 +85,9 @@ body {
   /* Hide brand name by default */
   span { display: none; }
 }
+#main-nav.navbar-inverse .navbar-brand {
+  filter: saturate(0) invert(1);
+}
 
 /* Limit navbar header size to ensure navbar charms will fit */
 @media (max-width: $screen-sm-max) {
