@@ -11,12 +11,12 @@
                 = image_variant_tag image, :lightbox, class: 'image-bg'
 
         :coffee
-          $section = $('##{dom_id(section)}')
-          new Swiper $section.find('.section-bg-container > .swiper-container'),
-            autoplay:
-              delay: 5000
-            loop: true
-            effect: 'fade'
-            observeParents: true
+          jQuery ->
+            $section = $('##{dom_id(section)}')
+            new Swiper $section.find('.section-bg-container > .swiper-container'),
+              autoplay:
+                delay: 5000
+              loop: true
+              effect: 'fade'
       - else
         = image_variant_tag section.cover_image, :lightbox, class: 'image-bg'
