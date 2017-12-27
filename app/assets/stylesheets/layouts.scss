@@ -238,6 +238,18 @@
   height: 100%;
 }
 
+.segment-content.category {
+  .swiper-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide .product-card {
+    padding: 0;
+    margin: 0;
+  }
+}
+
 .segment-content.column,
 .segment-content.raw {
   h1:first-child,

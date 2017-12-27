@@ -8,12 +8,13 @@
               = image_variant_tag image, :lightbox
 
       :coffee
-        jQuery ->
-          $segment = $('##{segment_content_id(picture, context)}')
-          $swiper = new Swiper $segment.find('.swiper-container'),
-            autoplay: 5000
-            loop: true
-            effect: 'fade'
+        $segment = $('##{segment_content_id(picture, context)}')
+        $swiper = new Swiper $segment.find('.swiper-container'),
+          autoplay:
+            delay: 5000
+          loop: true
+          effect: 'fade'
+          observeParents: true
     - else
       .image-container
         - if picture.url.present?

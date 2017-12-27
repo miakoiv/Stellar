@@ -1,11 +1,17 @@
 - resource = category.resource
 - max_items = category.max_items.presence
 - products = resource.is_a?(Category) && resource.products.visible.sorted(category.product_scope.presence)
+- swiper = category.grid_columns == '1'
 
 .segment-content.category{id: segment_content_id(category, context)}
   - if products
-    .row{class: "columns-#{category.grid_columns || 3}"}
-      = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
+    - if swiper
+      .swiper-container
+        .swiper-wrapper
+          = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+    - else
+      .row{class: "columns-#{category.grid_columns || 3}"}
+        = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if category.show_more? && products.count > max_items.to_i
       .more-items-link
         = link_to show_category_path(resource) do
@@ -14,7 +20,15 @@
   - else
     = render partial: 'segments/placeholders/category'
 
-- if category.masonry?
+- if swiper
+  :coffee
+    $segment = $('##{segment_content_id(category, context)}')
+    $swiper = new Swiper $segment.find('.swiper-container'),
+      autoplay:
+        delay: 3000
+        disableOnInteraction: false
+      observeParents: true
+- elsif category.masonry?
   :coffee
     $grid = $('##{segment_content_id(category, context)}').find '.grid'
     $grid.imagesLoaded ->
