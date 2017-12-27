@@ -9,7 +9,7 @@
 
       :coffee
         $segment = $('##{segment_content_id(picture, context)}')
-        $swiper = new Swiper $segment.find('.swiper-container'),
+        new Swiper $segment.find('.swiper-container'),
           autoplay:
             delay: 5000
           loop: true

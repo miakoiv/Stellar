@@ -12,7 +12,7 @@
 
         :coffee
           $section = $('##{dom_id(section)}')
-          $swiper = new Swiper $section.find('.swiper-container'),
+          new Swiper $section.find('.section-bg-container > .swiper-container'),
             autoplay:
               delay: 5000
             loop: true

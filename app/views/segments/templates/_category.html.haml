@@ -23,7 +23,7 @@
 - if swiper
   :coffee
     $segment = $('##{segment_content_id(category, context)}')
-    $swiper = new Swiper $segment.find('.swiper-container'),
+    new Swiper $segment.find('.swiper-container'),
       autoplay:
         delay: 3000
         disableOnInteraction: false
