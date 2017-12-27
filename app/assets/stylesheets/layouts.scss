@@ -43,6 +43,7 @@
  */
 .section-content.column .segment {
   @include padding-vertical;
+  margin-right: -1px; // safari workaround
 }
 .section-content.block,
 .section-content.column,
@@ -57,6 +58,7 @@
 }
 .section-content.block .segment {
   @include padding-horizontal(0);
+  margin-right: -1px; // safari workaround
 }
 .section-content.column.spread > .row {
   margin-left: 0;
