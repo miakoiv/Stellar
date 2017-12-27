@@ -64,7 +64,8 @@ class Admin::ImagesController < ApplicationController
         if name =~ /(.+)_id$/
           klass = $1.classify.constantize
           if klass.respond_to?(:friendly)
-            return klass.friendly.find(value)
+            association_method = $1.tableize
+            return current_store.send(association_method).friendly.find(value)
           else
             return klass.find(value)
           end
