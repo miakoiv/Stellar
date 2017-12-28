@@ -43,7 +43,6 @@
  */
 .section-content.column .segment {
   @include padding-vertical;
-  margin-right: -1px; // safari workaround
 }
 .section-content.block,
 .section-content.column,
@@ -58,7 +57,6 @@
 }
 .section-content.block .segment {
   @include padding-horizontal(0);
-  margin-right: -1px; // safari workaround
 }
 .section-content.column.spread > .row {
   margin-left: 0;
@@ -181,6 +179,10 @@
   .segment.align-top { align-self: flex-start; }
   .segment.align-middle { align-self: center; }
   .segment.align-bottom { align-self: flex-end; }
+
+  /* Nuking pseudo elements to work around a Safari glitch */
+  &:before,
+  &:after { display: none; }
 }
 
 /* With fixed aspect ratio, alignment is based on .segment-content-wrap */
