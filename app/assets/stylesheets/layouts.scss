@@ -267,6 +267,8 @@
 }
 
 .segment-content.picture {
+  height: 100%;
+
   a { display: block; }
   .image-container,
   .swiper-container {
@@ -276,26 +278,10 @@
   }
   .image-container img,
   .swiper-container img {
-    @extend .img-responsive;
-    margin: auto;
-  }
-  .swiper-slide {
-    height: auto;
-    background-color: $body-bg;
-  }
-}
-
-@media (min-width: $screen-sm-min) {
-  .block .segment-content.picture {
+    width: 100%;
     height: 100%;
-
-    .image-container,
-    .swiper-container {
-      overflow: hidden;
-    }
-    .image-container img,
-    .swiper-container img {
-    }
+    object-fit: cover;
+    object-position: center;
   }
 }
 
