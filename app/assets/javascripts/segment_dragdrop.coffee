@@ -1,6 +1,5 @@
 $.fn.extend
   segment_dragdrop: ->
-    console.log "Drag & drop url: #{$(this).data('dragdropUrl')}"
     this.draggable
       scope: 'segments'
       addClasses: false
