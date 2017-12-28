@@ -228,7 +228,7 @@
 .segment-content {
   line-height: 1.4; // default to sane value for summernote
 }
-
+.segment-content .page-header { margin-top: 0; }
 .segment-content .placeholder {
   display: flex;
   align-items: center;

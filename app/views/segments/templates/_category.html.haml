@@ -4,6 +4,11 @@
 - swiper = category.grid_columns == '1'
 
 .segment-content.category{id: segment_content_id(category, context)}
+  - if category.header.present?
+    .page-header
+      %h1= category.header
+      - if category.subhead.present?
+        %p.lead= category.subhead
   - if products
     - if swiper
       .swiper-container

@@ -194,10 +194,12 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 /* Category header for products */
+.category .page-header,
 .products .page-header {
   @extend .text-center;
   display: block !important;
 }
+.category .page-header h1,
 .products .page-header h1 {
   margin-top: 0;
   margin-bottom: 0;
@@ -205,6 +207,7 @@ $body-tone-bg: darken($body-bg, 4%);
   letter-spacing: -0.05em;
 }
 @media (min-width: $screen-sm-min) {
+  .category .page-header h1,
   .products .page-header h1 { font-size: 3.6em; }
 }
 

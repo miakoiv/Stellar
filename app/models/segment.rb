@@ -3,7 +3,7 @@
 class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
-    :url,
+    :header, :subhead, :url,
     :min_height, :grid_columns, :masonry,
     :max_items, :show_more, :product_scope,
     :map_location, :map_zoom,

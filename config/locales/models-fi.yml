@@ -394,7 +394,8 @@ fi:
         template: Sisällön tyyppi
         alignment: Sisällön tasaus
         body: Leipäteksti
-        headline: Otsikko
+        header: Otsikko
+        subhead: Alaotsikko
         min_height: Korkeus
         grid_columns: Sarakkeita
         inverse: Käänteiset värit

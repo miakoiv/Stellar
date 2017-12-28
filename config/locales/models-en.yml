@@ -394,7 +394,8 @@ en:
         template: Content type
         alignment: Content alignment
         body: Body text
-        headline: Headline
+        header: Headline
+        subhead: Subhead
         min_height: Height
         grid_columns: Grid columns
         inverse: Inverse colors
