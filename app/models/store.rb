@@ -119,12 +119,9 @@ class Store < ActiveRecord::Base
     ]
   end
 
-  # Looks up the names of precompiled stylesheets for themes.
   def self.theme_options
     @@themes ||= %w{
-      alcoholic apprentice birch boutique budget carbon cards
-      compass fanletti hiustalo lepola penumbra premium
-      saarimedia solar stellar
+      birch boutique cards cottage premium
     }
   end
 
