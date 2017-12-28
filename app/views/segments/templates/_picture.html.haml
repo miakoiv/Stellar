@@ -1,20 +1,14 @@
+- has_images = picture.images.any?
+- swiper = picture.images.count > 1
+
 .segment-content.picture{id: segment_content_id(picture, context)}
-  - if picture.images.any?
-    - if picture.images.count > 1
+  - if has_images
+    - if swiper
       .swiper-container
         .swiper-wrapper
           - picture.images.each do |image|
             .swiper-slide
               = image_variant_tag image, :lightbox
-
-      :coffee
-        jQuery ->
-          $segment = $('##{segment_content_id(picture, context)}')
-          new Swiper $segment.find('.swiper-container'),
-            autoplay:
-              delay: 5000
-            loop: true
-            effect: 'fade'
     - else
       .image-container
         - if picture.url.present?
@@ -25,3 +19,12 @@
 
   - else
     = render partial: 'segments/placeholders/picture'
+
+- if swiper
+  :coffee
+    $segment = $('##{segment_content_id(picture, context)}')
+    new Swiper $segment.find('.swiper-container'),
+      autoplay:
+        delay: 5000
+      loop: true
+      effect: 'fade'

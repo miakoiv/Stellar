@@ -1,28 +1,30 @@
+- has_map = map.map_location.present?
+
 .segment-content.map{id: segment_content_id(map, context)}
-  - if map.map_location.present?
+  - if has_map
     .map-container{style: segment_style(map), data: {location: map.map_location, zoom: map.map_zoom || 10}}
-
-      :coffee
-        jQuery ->
-          $map = $('##{segment_content_id(map, context)}').find '.map-container'
-          options =
-            zoom: $map.data 'zoom'
-            disableDefaultUI: true
-            draggable: false
-            scrollwheel: false
-            gesturehandling: 'none'
-          map = new google.maps.Map $map[0], options
-          geocoder = new google.maps.Geocoder
-          loc = $map.data 'location'
-          results = geocoder.geocode {address: loc}, (results, status) ->
-            if status is 'OK'
-              latlng = results[0].geometry.location
-            else
-              latlng = {lat: 37.3320003, lng: -122.0329752}
-            map.setCenter latlng
-            marker = new google.maps.Marker
-              position: latlng
-              map: map
-
   - else
     = render partial: 'segments/placeholders/map'
+
+- if has_map
+  :coffee
+    jQuery ->
+      $map = $('##{segment_content_id(map, context)}').find '.map-container'
+      options =
+        zoom: $map.data 'zoom'
+        disableDefaultUI: true
+        draggable: false
+        scrollwheel: false
+        gesturehandling: 'none'
+      map = new google.maps.Map $map[0], options
+      geocoder = new google.maps.Geocoder
+      loc = $map.data 'location'
+      results = geocoder.geocode {address: loc}, (results, status) ->
+        if status is 'OK'
+          latlng = results[0].geometry.location
+        else
+          latlng = {lat: 37.3320003, lng: -122.0329752}
+        map.setCenter latlng
+        marker = new google.maps.Marker
+          position: latlng
+          map: map
