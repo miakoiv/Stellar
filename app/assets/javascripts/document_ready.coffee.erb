@@ -23,6 +23,9 @@ $.fn.extend
     $('input.color', this).minicolors
       theme: 'bootstrap'
 
+    $('.segment[data-dragdroppable]', this).each ->
+      $(this).segment_dragdrop()
+
     $('.infinite-table', this).infinitePages
       loading: ->
         $('#spinner').show()
