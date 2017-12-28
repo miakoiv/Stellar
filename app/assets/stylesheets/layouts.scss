@@ -148,9 +148,13 @@
   object-position: center;
 }
 .section-bg-container.fixed-background {
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
+}
+@media (min-width: $screen-sm-min) {
+  .section-bg-container.fixed-background {
+    background-attachment: fixed;
+  }
 }
 
 
