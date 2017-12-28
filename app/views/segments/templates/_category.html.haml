@@ -27,11 +27,12 @@
 
 - if swiper
   :coffee
-    $segment = $('##{segment_content_id(category, context)}')
-    new Swiper $segment.find('.swiper-container'),
-      autoplay:
-        delay: 3000
-        disableOnInteraction: false
+    jQuery ->
+      $segment = $('##{segment_content_id(category, context)}')
+      new Swiper $segment.find('.swiper-container'),
+        autoplay:
+          delay: 3000
+          disableOnInteraction: false
 - elsif category.masonry?
   :coffee
     $grid = $('##{segment_content_id(category, context)}').find '.grid'
