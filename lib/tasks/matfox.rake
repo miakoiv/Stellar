@@ -79,8 +79,7 @@ namespace :matfox do
             inventories.each do |inventory|
               product = find_or_create_product(inventory.store, code, data)
               next if product.nil?
-              inventory_data = row[:quantity_on_hand].present? ? row : data[:product]
-              update_inventory(inventory, product, inventory_data)
+              update_inventory(inventory, product, row)
             end
           end
         end
