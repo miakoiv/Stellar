@@ -1,17 +1,38 @@
 - resource = department.resource
 - max_items = department.max_items.presence
 - products = resource.is_a?(Department) && resource.products.visible.sorted(department.product_scope.presence)
+- swiper = department.grid_columns == '1'
 
 .segment-content.department{id: segment_content_id(department, context)}
+  - if department.header.present?
+    .page-header
+      %h1= department.header
+      - if department.subhead.present?
+        %p.lead= department.subhead
   - if products
-    .row{class: "columns-#{department.grid_columns || 3}"}
-      = render partial: 'departments/product_card', collection: max_items ? products.first(max_items) : products, as: :product
+    - if swiper
+      .swiper-container
+        .swiper-wrapper
+          = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+    - else
+      .row{class: "columns-#{department.grid_columns || 3}"}
+        = render partial: 'departments/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if department.show_more? && products.count > max_items.to_i
       .more-items-link
         = link_to show_department_path(resource) do
           = resource
           = icon('arrow-circle-right')
+  - else
+    = render partial: 'segments/placeholders/department'
 
+- if swiper
+  :coffee
+    jQuery ->
+      $segment = $('##{segment_content_id(department, context)}')
+      new Swiper $segment.find('.swiper-container'),
+        autoplay:
+          delay: 3000
+          disableOnInteraction: false
 - if department.masonry?
   :coffee
     $grid = $('##{segment_content_id(department, context)}').find '.grid'

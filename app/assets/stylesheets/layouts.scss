@@ -246,7 +246,9 @@
   height: 100%;
 }
 
-.segment-content.category {
+.segment-content.category,
+.segment-content.promotion,
+.segment-content.department {
   .swiper-container {
     position: relative;
     width: 100%;

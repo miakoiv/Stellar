@@ -1,11 +1,22 @@
 - resource = promotion.resource
 - max_items = promotion.max_items.presence
 - products = resource.is_a?(Promotion) && resource.products.live.sorted(promotion.product_scope.presence)
+- swiper = promotion.grid_columns == '1'
 
 .segment-content.promotion{id: segment_content_id(promotion, context)}
+  - if promotion.header.present?
+    .page-header
+      %h1= promotion.header
+      - if promotion.subhead.present?
+        %p.lead= promotion.subhead
   - if products
-    .row{class: "columns-#{promotion.grid_columns || 3}"}
-      = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
+    - if swiper
+      .swiper-container
+        .swiper-wrapper
+          = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+    - else
+      .row{class: "columns-#{promotion.grid_columns || 3}"}
+        = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if promotion.show_more? && products.count > max_items.to_i
       .more-items-link
         = link_to show_promotion_path(resource) do
@@ -14,6 +25,14 @@
   - else
     = render partial: 'segments/placeholders/promotion'
 
+- if swiper
+  :coffee
+    jQuery ->
+      $segment = $('##{segment_content_id(promotion, context)}')
+      new Swiper $segment.find('.swiper-container'),
+        autoplay:
+          delay: 3000
+          disableOnInteraction: false
 - if promotion.masonry?
   :coffee
     $grid = $('##{segment_content_id(promotion, context)}').find '.grid'

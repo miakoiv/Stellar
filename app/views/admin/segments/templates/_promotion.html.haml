@@ -5,6 +5,11 @@
       = f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
   .row
     .col-sm-6
+      = f.text_field :header
+    .col-sm-6
+      = f.text_field :subhead
+  .row
+    .col-sm-6
       .form-group
         = f.label col(Segment, :grid_columns)
         .btn-group.btn-group-justified{data: {toggle: 'buttons'}}

@@ -193,13 +193,17 @@ $body-tone-bg: darken($body-bg, 4%);
   padding-bottom: 20px;
 }
 
-/* Category header for products */
+/* Page header for products in various contexts */
 .category .page-header,
+.department .page-header,
+.promotion .page-header,
 .products .page-header {
   @extend .text-center;
   display: block !important;
 }
 .category .page-header h1,
+.department .page-header h1,
+.promotion .page-header h1,
 .products .page-header h1 {
   margin-top: 0;
   margin-bottom: 0;
@@ -208,6 +212,8 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 @media (min-width: $screen-sm-min) {
   .category .page-header h1,
+  .department .page-header h1,
+  .promotion .page-header h1,
   .products .page-header h1 { font-size: 3.6em; }
 }
 
