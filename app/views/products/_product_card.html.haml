@@ -1,6 +1,8 @@
+- url = current_store.portal? ? show_product_url(product, host: product.store.hostname_at(current_store).fqdn) : show_product_path(product)
+
 .product-card
-  = link_to current_store.portal? ? show_product_url(product, host: product.store.hostname_at(current_store).fqdn) : show_product_path(product) do
-    .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :presentational
+  = link_to url do
+    .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :postcard
     .product-text
       %h3
         = product.title
@@ -10,11 +12,21 @@
         .promotion= item.description
   .buy-now
     %p.price.currency
-      - if product.has_variants?
-        = price_range *pricing.range_for_display(product)
-      - else
-        = price_tag *pricing.for_display(product)
-    - if current_store.present? && product.purchasable? && product.orderable?(current_inventory)
-      = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
-        = hidden_field_tag :amount, 1
-        %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
+      - if can_see_pricing?
+        - if product.has_variants?
+          = price_range *pricing.range_for_display(product)
+        - else
+          = price_tag *pricing.for_display(product)
+    - if can_shop?
+      - if product.has_variants? && product.visible?
+        .product-link
+          = link_to icon('search'), url, class: 'btn btn-sm'
+      - elsif product.purchasable?
+        - if product.out_of_stock?(current_inventory) && !product.back_orderable?
+          %p.text-danger
+            = icon('exclamation-circle')
+            = col(Product, :out_of_stock)
+        - if product.orderable?(current_inventory)
+          = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
+            = hidden_field_tag :amount, 1
+            %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
