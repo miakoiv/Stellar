@@ -365,6 +365,11 @@ fi:
     smart_post:
       lookup_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
       zipcode: Hae postinumerolla
+    truckload:
+      distance: Kuljetettava matka
+      loads: Kuormien määrä
+      price: Hinta
+      lookup_error: Matkan laskenta epäonnistui. Ole hyvä ja tarkista toimitusosoite.
   errors:
     header: Hopsis!
     blurb: "Emme pystyneet palvelemaan teitä teknisen virheen takia:"

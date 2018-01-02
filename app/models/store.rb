@@ -28,7 +28,8 @@ class Store < ActiveRecord::Base
     :csv_product_code,     # CSV field headers for product code,
     :csv_retail_price,     # retail price, and inventory amount
     :csv_inventory_amount, # in uploaded files
-    :order_xml_path   # where to upload XML files of completed orders
+    :order_xml_path,  # where to upload XML files of completed orders
+    :shipping_origin, # geolocation-compatible origin for shipping calculations
   ], coder: JSON
 
   resourcify

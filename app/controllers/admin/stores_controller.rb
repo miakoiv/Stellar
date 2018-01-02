@@ -78,7 +78,7 @@ class Admin::StoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(
-        :portal, :name, :locale, :country_code,
+        :portal, :name, :locale, :country_code, :shipping_origin,
         :admit_guests, :allow_shopping, :accept_credit_cards,
         :tracking_code, :maps_api_key, :facebook_pixel_id, :tawkto_site_id,
         :pbw_api_key, :pbw_private_key,

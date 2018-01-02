@@ -11,6 +11,7 @@ fi:
       shipping_gateway/letter: postitus kirjeenä
       shipping_gateway/smart_post: Posti SmartPOST
       shipping_gateway/vendor: tavarantoimittaja kuljettaa
+      shipping_gateway/truckload: kuorma-autokuljetus
   activerecord:
     models:
       album:
@@ -463,6 +464,7 @@ fi:
         csv_retail_price: Myyntihintasarake
         csv_inventory_amount: Varastosaldosarake
         order_xml_path: Kansion sijainti
+        shipping_origin: Google Maps -sijaintitieto
       style:
         preamble: Esipuhe
       tax_category:

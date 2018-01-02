@@ -385,6 +385,11 @@ en:
     smart_post:
       lookup_error: No pickup points found. Please check your zip code.
       zipcode: Search by zipcode
+    truckload:
+      distance: Shipping distance
+      loads: Number of loads
+      price: Price
+      lookup_error: Shipping distance calculation failed. Please check your shipping address.
   errors:
     header: Oops!
     blurb: "We couldn't process your request for the following technical reason:"

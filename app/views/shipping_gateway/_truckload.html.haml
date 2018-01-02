@@ -1,0 +1,29 @@
+- origin = current_store.shipping_origin
+- destination = @shipping_gateway.distance_lookup(origin, I18n.locale)
+
+.truckload-error.alert.alert-danger{style: 'display: none;'}
+  = icon('warning', t('.lookup_error'))
+
+- if destination.present?
+  = form_tag ship_path(@order, @shipping_method), remote: true, id: 'truckload-form' do
+    = hidden_field_tag :metadata, destination
+    %fieldset(disabled)
+      .row
+        .col-sm-4
+          .form-group
+            %label.control-label= t('.distance')
+            = text_field_tag 'distance', destination['distance']['text'], class: 'form-control'
+        .col-sm-4
+          .form-group
+            %label.control-label= t('.loads')
+            = text_field_tag 'loads', 1, class: 'form-control'
+        .col-sm-4
+          .form-group
+            %label.control-label= t('.price')
+            = text_field_tag 'price', 0, class: 'form-control'
+    .ship-button.hidden-print
+      = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'
+
+- else
+  :coffee
+    $('.truckload-error').show()

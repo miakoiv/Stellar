@@ -10,7 +10,7 @@ class Shipment < ActiveRecord::Base
 
   #---
   def self.available_gateways
-    %w{CustomerPickup Letter SmartPost Vendor}
+    %w{CustomerPickup Letter SmartPost Truckload Vendor}
   end
 
   #---
