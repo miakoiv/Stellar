@@ -7,7 +7,7 @@
           = image_variant_tag method.cover_image, :thumbnail, class: 'media-object'
         .media-body
           %h4.media-heading= method.name
-          - if method.shipping_cost_product.present?
+          - if method.shipping_gateway_class.fixed_cost? && method.shipping_cost_product.present?
             .pull-right.label.label-primary
               = icon('plus')
               = price_tag *pricing.for_display(method.shipping_cost_product)

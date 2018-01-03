@@ -21,10 +21,18 @@ module ShippingGateway
       true
     end
 
+    def self.fixed_cost?
+      true
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
       @pickup_connector = SmartPostPickupConnector.new
+    end
+
+    def calculated_cost(base_price, metadata)
+      base_price
     end
 
     # Performs a lookup of SmartPost pickup locations by given zip code.

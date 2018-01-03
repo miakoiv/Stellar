@@ -21,15 +21,24 @@ module ShippingGateway
       true
     end
 
+    def self.fixed_cost?
+      false
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
       @truckload_connector = TruckloadConnector.new
     end
 
+    def calculated_cost(base_price, metadata)
+      kilometers = (metadata['distance']['value'].to_f / 1000).round
+      base_price * kilometers
+    end
+
     # Performs a distance matrix lookup from given origin to
-    # the shipping address of the order. Returns the first row
-    # of results as the destination, if any.
+    # the shipping address of the order. If successful, returns
+    # the first element.
     def distance_lookup(origin, locale)
       query = {
         key: order.store.maps_api_key,
@@ -39,9 +48,9 @@ module ShippingGateway
       }
       response = @truckload_connector.lookup(query).parsed_response
       if response['status'] == 'OK'
-        return response['rows'][0]['elements'][0]
+        response['rows'][0]['elements'][0]
       else
-        return nil
+        nil
       end
     end
 

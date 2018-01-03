@@ -43,13 +43,11 @@ class CheckoutController < ApplicationController
 
   # GET /checkout/1/shipping_method/2.js
   # Selecting a shipping method sets up a shipping gateway object that will
-  # render its own interface within the view. Adds associated shipping cost
-  # product price to the order, replacing existing shipping costs.
+  # render its own interface within the view.
   # Called via Ajax.
   def shipping_method
     @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
-    @order.apply_shipping_cost!(@shipping_method, nil)
     @shipping_gateway = if @shipping_method.shipping_gateway.present?
       @shipping_method.shipping_gateway_class.new(order: @order)
     else
@@ -59,8 +57,8 @@ class CheckoutController < ApplicationController
 
   # POST /checkout/1/ship/2.js
   # Shipping gateway views submit their form to this action via Ajax.
-  # A shipment record is created, and the JS response will trigger an
-  # order update.
+  # A shipment record is created, shipping cost added, and the JS response
+  # will trigger an order update.
   def ship
     @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
@@ -70,6 +68,7 @@ class CheckoutController < ApplicationController
     )
     respond_to do |format|
       if @shipment.save
+        @order.apply_shipping_cost!(@shipment, current_group)
         format.js { render 'ship' }
       else
         head :bad_request

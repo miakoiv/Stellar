@@ -10,5 +10,3 @@ $('#shipping-panel .description').html("#{j @shipping_method.description.html_sa
   $('#shipping-panel .details').html("#{j render partial: 'checkout/detail_page_modal', object: @shipping_method.detail_page, as: :detail_page}");
 - if @shipping_gateway.present?
   $('#shipping-panel .gateway-content').html("#{j render @shipping_gateway}");
-
-$('#order-items-table').replaceWith("#{j render partial: 'order_items/table', object: @order, as: :order}");

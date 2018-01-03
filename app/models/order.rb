@@ -237,23 +237,28 @@ class Order < ActiveRecord::Base
     store.shipping_methods.where(id: ids)
   end
 
-  # Applies the shipping cost incurred by given shipping method, if any.
-  # Existing shipping costs are removed first.
-  def apply_shipping_cost!(shipping_method, pricing = nil)
-    clear_shipping_costs!
-    product = shipping_method.shipping_cost_product
-    return if product.nil?
-    threshold = shipping_method.free_shipping_from
-    total = includes_tax? ? grand_total_with_tax : grand_total_sans_tax
-    if threshold.nil? || total < threshold
-      item = insert(product, 1, pricing)
-      item.update(priority: 1e9)
+  # Inserts an order item for the shipping cost using the shipping cost
+  # product with the price queried from the given shipment.
+  def apply_shipping_cost!(shipment, group)
+    pricing = Appraiser::Product.new(group || source)
+    cost = shipment.cost(pricing)
+    unless cost.nil?
+      order_items.create(
+        product: shipment.shipping_cost_product,
+        amount: 1,
+        priority: 1e9,
+        price: cost.amount,
+        tax_rate: cost.tax_rate,
+        price_includes_tax: cost.tax_included,
+        label: ''
+      )
     end
     order_items.reload
   end
 
   def clear_shipping_costs!
     order_items.where(product: store.shipping_cost_products).destroy_all
+    order_items.reload
   end
 
   # Applies active promotions on the order, first removing all existing

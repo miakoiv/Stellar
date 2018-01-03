@@ -1,1 +1,2 @@
+$('#order-items-table').replaceWith("#{j render partial: 'order_items/table', object: @order, as: :order}");
 $('#checkout-form').trigger('submit.rails');
