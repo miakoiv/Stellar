@@ -388,7 +388,6 @@ en:
     truckload:
       distance: Shipping distance
       loads: Number of loads
-      price: Price
       lookup_error: Shipping distance calculation failed. Please check your shipping address.
   errors:
     header: Oops!

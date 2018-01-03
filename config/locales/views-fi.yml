@@ -368,7 +368,6 @@ fi:
     truckload:
       distance: Kuljetettava matka
       loads: Kuormien määrä
-      price: Hinta
       lookup_error: Matkan laskenta epäonnistui. Ole hyvä ja tarkista toimitusosoite.
   errors:
     header: Hopsis!
