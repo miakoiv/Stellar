@@ -130,6 +130,9 @@ en:
     duplicate:
       notice: "Order %{order} copied to shopping cart."
       failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"
+  profiles:
+    update:
+      notice: "Profile updated."
   store:
     order_product:
       notice: "%{amount} of ”%{product}” added to cart."

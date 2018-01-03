@@ -1,0 +1,10 @@
+#static-wrap.layout-container
+  .container
+    .page-header
+      = link_to profile_path, class: 'btn btn-default' do
+        = icon('info-circle', t('actions.show'))
+      %h1= icon('user', current_user)
+
+    .row
+      .col-md-7
+        = render partial: 'form', locals: {locked: false}

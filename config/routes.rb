@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get :duplicate, on: :member
     get :quote, on: :member
   end
+  resource :profile, only: [:show, :edit, :update]
 
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store', to: 'store#index', as: :store

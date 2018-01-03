@@ -1,0 +1,20 @@
+#static-wrap.layout-container
+  .container
+    .page-header
+      = link_to edit_profile_path, class: 'btn btn-default' do
+        = icon('edit', t('actions.edit'))
+      %h1= icon('user', current_user)
+
+    .row
+      .col-md-7
+        = render partial: 'form', locals: {locked: true}
+      .col-md-5
+        .panel.panel-default
+          .panel-body
+            %dl.dl-horizontal
+              %dt= col(User, :last_sign_in_at)
+              %dd= current_user.last_sign_in_at.present? ? l(current_user.last_sign_in_at, format: :iso) : nil
+              %dt= col(User, :last_sign_in_ip)
+              %dd= current_user.last_sign_in_ip
+              %dt= col(User, :sign_in_count)
+              %dd= current_user.sign_in_count

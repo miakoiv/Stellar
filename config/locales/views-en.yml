@@ -326,6 +326,7 @@ en:
     delegation:
       select: Join a temporary group
       cannot_delegate: No groups – shopping cart not empty
+    profile: Your profile
   checkout:
     panels:
       address_panel: Contact information

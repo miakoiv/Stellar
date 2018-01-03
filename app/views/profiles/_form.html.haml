@@ -1,0 +1,44 @@
+= bootstrap_form_for current_user, url: profile_path, layout: :horizontal,
+    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+  = tab_set 'user-main', class: 'panel-tabs' do
+    = nav_tab 'user-personal', col(User, :personal), default: true
+    = nav_tab 'user-addresses', col(User, :addresses)
+
+  .panel.panel-default.tabbed-panel
+    .panel-body
+      .tab-content
+        = tab_pane 'user-personal', default: true do
+          %fieldset{disabled: locked}
+            = f.text_field :email, required: true
+            = f.text_field :name, required: true
+            = f.telephone_field :phone, required: true
+            = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
+            - unless locked
+              = f.password_field :password
+              .form-group
+                .col-sm-8.col-sm-offset-4
+                  = render partial: 'shared/password_strength'
+              = f.password_field :password_confirmation
+        = tab_pane 'user-addresses' do
+          %fieldset{disabled: locked}
+            = f.text_field :shipping_address
+            .form-group
+              .col-sm-offset-4.col-sm-3
+                = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
+              .col-sm-5
+                = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
+            = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+            = f.text_field :billing_address
+            .form-group
+              .col-sm-offset-4.col-sm-3
+                = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
+              .col-sm-5
+                = f.text_field_without_bootstrap :billing_city, class: 'form-control'
+            = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+      - unless locked
+        %fieldset.actions
+          = f.form_group do
+            = f.primary
+
+:coffee
+  persist_tabs 'user-main'
