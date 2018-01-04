@@ -102,11 +102,6 @@ module ApplicationHelper
     end
   end
 
-  def background_image_style(image, size = :lightbox)
-    return nil if image.nil?
-    "background-image: url(#{image.url(size)})"
-  end
-
   # Different sized icons for documents and video files.
   # Comes with a tooltip of the file name.
   def document_icon_tag(image, size = :icon)
@@ -118,14 +113,6 @@ module ApplicationHelper
     else
       icon(image.document_icon, image.attachment_file_name.truncate(20, omission: '…'), class: 'fa-3x', title: image.attachment_file_name, data: {toggle: 'tooltip'})
     end
-  end
-
-  def section_style(section)
-    "background-color: #{section.background_color}"
-  end
-
-  def segment_style(segment)
-    "min-height: #{segment.min_height}em;" if segment.min_height.present?
   end
 
   # Generates a segment content id in a specific context. Scripts that
@@ -154,5 +141,27 @@ module ApplicationHelper
     else
       "+#{number_to_percentage(number, options)}"
     end
+  end
+
+  # Converts given styles hash to a string of CSS rules.
+  def css(styles)
+    styles.reject { |_, rule| rule.nil? }.map { |selector, rule|
+      "#{selector.to_s.underscore.dasherize}: #{rule};"
+    }.join ' '
+  end
+
+  def background_image_style(image, size = :lightbox)
+    return nil if image.nil?
+    css(backgroundImage: "url(#{image.url(size)})")
+  end
+
+  def section_style(section)
+    css(backgroundColor: section.background_color)
+  end
+
+  def segment_style(segment)
+    css({
+      minHeight: segment.min_height.present? ? "#{segment.min_height}em" : nil
+    })
   end
 end
