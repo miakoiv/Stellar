@@ -227,7 +227,7 @@ en:
       new:
         new_property: New property
     sections:
-      form:
+      settings:
         fluid_ratio: from content
       section_nav:
         delete:

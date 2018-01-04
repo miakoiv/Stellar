@@ -207,7 +207,7 @@ fi:
       new:
         new_property: Uusi ominaisuus
     sections:
-      form:
+      settings:
         fluid_ratio: sisällön mukaan
       section_nav:
         delete:
