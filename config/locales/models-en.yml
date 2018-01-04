@@ -394,6 +394,7 @@ en:
         resource_id: Target
         template: Content type
         alignment: Content alignment
+        inset: Content inset
         body: Body text
         header: Headline
         subhead: Subhead

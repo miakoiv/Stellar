@@ -394,6 +394,7 @@ fi:
         resource_id: Kohde
         template: Sisällön tyyppi
         alignment: Sisällön tasaus
+        inset: Sisällön sisennys
         body: Leipäteksti
         header: Otsikko
         subhead: Alaotsikko

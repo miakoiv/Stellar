@@ -18,7 +18,9 @@ class Segment < ActiveRecord::Base
   #---
   ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
 
-  GRID_COLUMNS = %w{1 2 3 4 6 12}
+  GRID_COLUMNS = %w{1 2 3 4 6 12}.freeze
+
+  INSETS = %w{inset-none inset-half inset-full}.freeze
 
   #---
   enum template: {
@@ -66,6 +68,10 @@ class Segment < ActiveRecord::Base
 
   def self.grid_columns_options
     GRID_COLUMNS
+  end
+
+  def self.inset_options
+    INSETS.map { |i| [Segment.human_attribute_value(:inset, i), i] }
   end
 
   #---

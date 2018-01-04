@@ -62,6 +62,13 @@
     border-radius: 0;
     background-color: darken($brand-info, 15%);
 
+    .dropdown-menu {
+      width: 280px;
+      border: 0;
+      border-radius: 0;
+
+      form { padding: 15px; }
+    }
     .navbar-nav > li > a {
       color: lighten($brand-info, 35%);
       &:hover, &:focus { color: #fff; }

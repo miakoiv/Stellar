@@ -140,3 +140,7 @@ en:
           'align-top': top
           'align-middle': middle
           'align-bottom': bottom
+        inset:
+          'inset-none': 0
+          'inset-half': ½
+          'inset-full': 1

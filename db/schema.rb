@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211134638) do
+ActiveRecord::Schema.define(version: 20180104134551) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -608,17 +608,18 @@ ActiveRecord::Schema.define(version: 20171211134638) do
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
-    t.integer  "section_id",    limit: 4,                           null: false
+    t.integer  "section_id",    limit: 4,                            null: false
     t.integer  "resource_id",   limit: 4
     t.string   "resource_type", limit: 255
-    t.integer  "template",      limit: 4,     default: 0,           null: false
-    t.string   "alignment",     limit: 255,   default: "align-top", null: false
+    t.integer  "template",      limit: 4,     default: 0,            null: false
+    t.string   "alignment",     limit: 255,   default: "align-top",  null: false
+    t.string   "inset",         limit: 255,   default: "inset-none", null: false
     t.text     "body",          limit: 65535
     t.text     "metadata",      limit: 65535
     t.text     "content",       limit: 65535
-    t.integer  "priority",      limit: 4,     default: 0,           null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.integer  "priority",      limit: 4,     default: 0,            null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "segments", ["resource_type", "resource_id"], name: "index_segments_on_resource_type_and_resource_id", using: :btree

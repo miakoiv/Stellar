@@ -140,3 +140,7 @@ fi:
           'align-top': ylös
           'align-middle': keskelle
           'align-bottom': alas
+        inset:
+          'inset-none': 0
+          'inset-half': ½
+          'inset-full': 1

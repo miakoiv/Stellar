@@ -1,0 +1,16 @@
+= bootstrap_form_for [:admin, segment], namespace: [:segment, segment.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+  %fieldset
+    .form-group
+      = f.label col(Segment, :alignment)
+      .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+        - Segment.alignment_options.each do |title, alignment|
+          %label.btn.btn-default{class: segment.alignment == alignment && 'active'}
+            = f.radio_button_without_bootstrap :alignment, alignment
+            = title
+    .form-group
+      = f.label col(Segment, :inset)
+      .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+        - Segment.inset_options.each do |title, inset|
+          %label.btn.btn-default{class: segment.inset == inset && 'active'}
+            = f.radio_button_without_bootstrap :inset, inset
+            = title
