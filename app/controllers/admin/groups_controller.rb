@@ -130,7 +130,8 @@ class Admin::GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(
         :name, :appearance,
-        :price_base, :price_modifier, :price_tax_included
+        :pricing_shown, :stock_shown,
+        :price_base, :price_modifier, :price_tax_included,
       )
     end
 end

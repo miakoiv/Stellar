@@ -157,6 +157,8 @@ en:
         category_ids: Categories
       group:
         name: Name
+        pricing_shown: Product pricing shown
+        stock_shown: Product stock shown
         price_base: Pricing base
         price_modifier: Price modifier
         price_tax_included: Prices include tax
@@ -448,7 +450,6 @@ en:
         detach_menu: Detach main navigation
         locale: Language
         country_code: Country
-        allow_shopping: Enable shopping
         admit_guests: Admit guests to the store
         accept_credit_cards: Accept credit card payments
         tracking_code: Google Analytics key

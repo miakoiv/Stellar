@@ -2,7 +2,7 @@
   %a{data: {toggle: 'collapse', target: '#navbar-lookup'}, tabindex: 0, role: 'button'}
     = icon('search', id: 'lookup-open')
     = icon('search-minus', id: 'lookup-close', style: 'display: none;')
-- if user_signed_in? && can_shop?
+- if user_signed_in? && can_order?
   %li.lg
     = link_to cart_path do
       = icon('shopping-cart')

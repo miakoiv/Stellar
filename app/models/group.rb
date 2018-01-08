@@ -51,6 +51,10 @@ class Group < ActiveRecord::Base
     "#{price_base}_price".to_sym
   end
 
+  def ordering_allowed?
+    outgoing_order_types.any?
+  end
+
   # Categories available to this group when creating and editing products.
   def available_categories
     limited_categories? ? categories.order(:lft) : store.categories.order(:lft)

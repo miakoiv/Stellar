@@ -1,4 +1,4 @@
-- if can_see_stock? && product.tracked_stock?
+- if stock_shown? && product.tracked_stock?
   %p
     .stock-amount
       = icon('cube', product_stock(current_inventory, product))

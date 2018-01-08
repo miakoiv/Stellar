@@ -193,7 +193,6 @@ de:
         settings: Einstellungen
         theme: Ausstellungs-Thema
         locale: Sprache
-        allow_shopping: Einkaufen erlauben
         admit_guests: Gäste erlauben
         tracking_code: GA Verfolgungs-Code
         inventory_ids: Lager

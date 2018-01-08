@@ -45,8 +45,6 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.groups << @group unless @user.groups.include?(@group)
-        @user.grant(:see_pricing, current_store)
-        @user.grant(:see_stock, current_store)
 
         format.html { redirect_to edit_admin_user_path(@user),
           notice: t('.notice', user: @user) }

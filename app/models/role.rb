@@ -28,8 +28,6 @@ class Role < ActiveRecord::Base
     'reports' => {icon: 'line-chart', appearance: 'primary'},
     'order_notify' => {icon: 'envelope', appearance: 'primary'},
     'correspondence' => {icon: 'envelope', appearance: 'primary'},
-    'see_pricing' => {icon: 'eye', appearance: 'warning'},
-    'see_stock' => {icon: 'eye', appearance: 'warning'},
   }.freeze
 
   #---
@@ -58,7 +56,7 @@ class Role < ActiveRecord::Base
 
   # Roles that imply administrative capacity.
   def self.administrative
-    available_roles - [:order_notify, :correspondence, :see_pricing, :see_stock]
+    available_roles - [:order_notify, :correspondence]
   end
 
   def self.icon_for(name)

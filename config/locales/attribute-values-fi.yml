@@ -67,8 +67,6 @@ fi:
           random: satunnainen
       role:
         name:
-          see_pricing: hinnat
-          see_stock: saldot
           correspondence: yhteydenotot
           reports: raportit
           property_editor: ominaisuudet
@@ -88,8 +86,6 @@ fi:
           third_party: ulkopuolinen taho
           group_delegate: ryhmän edustaja
         description:
-          see_pricing: tuotteiden hintojen näkyvyys kaupassa
-          see_stock: tuotteiden varastosaldon näkyvyys kaupassa
           correspondence: asiakkaiden yhteydenotot sähköpostitse
           reports: raporttien lukeminen ja ajaminen
           property_editor: tuoteominaisuuksien määritykset

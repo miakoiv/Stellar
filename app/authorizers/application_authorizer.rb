@@ -16,11 +16,10 @@ class ApplicationAuthorizer < Authority::Authorizer
     false
   end
 
-  # General authorization to perform any shopping related action
+  # General authorization to initiate orders
   # as a member of the group specified in opts.
-  def self.authorizes_to_shop?(user, opts = {})
+  def self.authorizes_to_order?(user, opts = {})
     group = opts[:as]
-    return false if group.nil? || !group.store.allow_shopping?
-    group.outgoing_order_types.any?
+    return false if group.nil? || !group.ordering_allowed?
   end
 end

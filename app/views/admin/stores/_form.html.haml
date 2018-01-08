@@ -22,8 +22,6 @@
             = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
             = f.form_group do
               = f.check_box :admit_guests
-            = f.form_group do
-              = f.check_box :allow_shopping
             - unless @store.new_record?
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-appearance' do

@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_inventory, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_shop?, :can_see_pricing?, :pricing, :incl_tax?, :can_see_stock?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_inventory, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -105,13 +105,17 @@ class ApplicationController < ActionController::Base
     @guest ||= current_group == current_store.default_group
   end
 
-  def can_shop?
-    @can_shop = current_user.can?(:shop, as: current_group) if @can_shop.nil?
-    @can_shop
+  def can_order?
+    @can_order = current_user.can?(:order, as: current_group) if @can_order.nil?
+    @can_order
   end
 
-  def can_see_pricing?
-    current_user_has_role?(:see_pricing)
+  def pricing_shown?
+    current_group.pricing_shown?
+  end
+
+  def stock_shown?
+    current_group.stock_shown?
   end
 
   # Pricing currently in effect is handled by appraisers
@@ -124,10 +128,6 @@ class ApplicationController < ActionController::Base
   # with or without tax.
   def incl_tax?
     @tax_included ||= current_group.price_tax_included?
-  end
-
-  def can_see_stock?
-    current_user_has_role?(:see_stock)
   end
 
   def third_party?
@@ -191,8 +191,6 @@ class ApplicationController < ActionController::Base
       guest.save!(validate: false)
       session[:guest_user_id] = guest.id
       guest.groups << current_store.default_group
-      guest.grant(:see_pricing, current_store)
-      guest.grant(:see_stock, current_store)
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
     end

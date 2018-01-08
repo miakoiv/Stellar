@@ -40,8 +40,6 @@ es:
           random: Aleatorio
       role:
         name:
-          see_pricing: Ver precios
-          see_stock: Ver stock
           manager: Administrador
           correspondence: Correspondencia
           reports: Informes

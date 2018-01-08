@@ -12,12 +12,12 @@
         .promotion= item.description
   .buy-now
     %p.price.currency
-      - if can_see_pricing?
+      - if pricing_shown?
         - if product.has_variants?
           = price_range *pricing.range_for_display(product)
         - else
           = price_tag *pricing.for_display(product)
-    - if can_shop?
+    - if can_order?
       - if product.has_variants? && product.visible?
         .product-link
           = link_to icon('search'), url, class: 'btn btn-sm'

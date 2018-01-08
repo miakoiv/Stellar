@@ -350,7 +350,6 @@ es:
         theme: Tema de exhibición
         locale: Idioma
         country_code: País
-        allow_shopping: Compra disponible
         admit_guests: Invitado admitido de la tienda
         accept_credit_cards: Aceptar pagos con tarjeta
         tracking_code: Clave Google Analytics

@@ -67,8 +67,6 @@ en:
           random: randomly
       role:
         name:
-          see_pricing: pricing
-          see_stock: stock
           correspondence: correspondence
           reports: reports
           property_editor: properties
@@ -88,8 +86,6 @@ en:
           third_party: third party
           group_delegate: group delegate
         description:
-          see_pricing: pricing visible at storefront
-          see_stock: product stock visible at storefont
           correspondence: customer correspondence by e-mail
           reports: viewing and running reports
           property_editor: product property definitions

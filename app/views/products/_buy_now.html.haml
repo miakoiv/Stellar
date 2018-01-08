@@ -1,4 +1,4 @@
-- if can_shop? && may_shop_at?(@category) && product.purchasable?
+- if can_order? && may_shop_at?(@category) && product.purchasable?
 
   - if product.out_of_stock?(current_inventory)
     - if product.back_orderable?

@@ -5,6 +5,10 @@
       %fieldset
         = f.text_field :name, required: true
         = f.select :appearance, Group.appearance_options, {}, {class: 'selectize-label', required: true}
+        = f.form_group do
+          = f.check_box :pricing_shown
+        = f.form_group do
+          = f.check_box :stock_shown
         %label.control-label= col(Group, :pricing)
         .row
           .col-sm-8

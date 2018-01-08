@@ -157,6 +157,8 @@ fi:
         category_ids: Tuoteryhmät
       group:
         name: Nimi
+        pricing_shown: Tuotteiden hinnat näkyvissä
+        stock_shown: Tuotteiden saldot näkyvissä
         price_base: Hinnoitteluperuste
         price_modifier: Hintamuunnin
         price_tax_included: Hinnat verollisina
@@ -448,7 +450,6 @@ fi:
         detach_menu: Irroita päävalikko
         locale: Kieli
         country_code: Kotimaa
-        allow_shopping: Salli ostokset
         admit_guests: Salli pääsy kauppaan vieraana
         accept_credit_cards: Hyväksy luottokorttimaksut
         tracking_code: Google Analytics -koodi
