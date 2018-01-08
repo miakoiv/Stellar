@@ -29,9 +29,6 @@ class ApplicationController < ActionController::Base
   end
 
   # Authenticate user, but skip authentication if guests are admitted.
-  # This method is the first before_action callback in controllers that
-  # optionally serve guests, and will fail early if the current store
-  # can't be found.
   def authenticate_user_or_skip!
     return true if current_store.admit_guests?
     authenticate_user!
