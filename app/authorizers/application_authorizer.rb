@@ -20,6 +20,6 @@ class ApplicationAuthorizer < Authority::Authorizer
   # as a member of the group specified in opts.
   def self.authorizes_to_order?(user, opts = {})
     group = opts[:as]
-    return false if group.nil? || !group.ordering_allowed?
+    group.present? && group.ordering_allowed?
   end
 end
