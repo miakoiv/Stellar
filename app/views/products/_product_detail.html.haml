@@ -52,7 +52,7 @@
             .documents.list-group
               - product.images.document.each do |document|
                 = link_to(icon('paperclip', document.to_s),
-                    document.url(:original), class: 'list-group-item')
+                    document.url(:original, timestamp: false), class: 'list-group-item')
 
     .product-properties
       - if product.product_properties.any?

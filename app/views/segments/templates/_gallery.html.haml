@@ -3,7 +3,7 @@
     .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
       - gallery.images.each do |image|
         .grid-item
-          = link_to image.url(:lightbox), class: 'image-link' do
+          = link_to image.url(:lightbox, timestamp: false), class: 'image-link' do
             .thumbnail
               = image_variant_tag image, :technical
   - else

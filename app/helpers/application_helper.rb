@@ -14,7 +14,7 @@ module ApplicationHelper
     tags = {
       title: object.to_s,
       url: request.original_url,
-      image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational)) : nil,
+      image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational, timestamp: false)) : nil,
       description: object.description.presence
     }
     set_meta_tags(og: tags)
@@ -94,9 +94,9 @@ module ApplicationHelper
   def image_variant_tag(image, size = :icon, options = {})
     return ''.html_safe if image.nil?
     if image.is_bitmap?
-      image_tag(image.url(size), options.merge(image.dimensions(size)))
+      image_tag(image.url(size, timestamp: false), options.merge(image.dimensions(size)))
     elsif image.is_vector?
-      image_tag(image.url(:original), options.merge(class: 'img-responsive'))
+      image_tag(image.url(:original, timestamp: false), options.merge(class: 'img-responsive'))
     else
       document_icon_tag(image, size)
     end
@@ -152,7 +152,7 @@ module ApplicationHelper
 
   def background_image_style(image, size = :lightbox)
     return nil if image.nil?
-    css(backgroundImage: "url(#{image.url(size)})")
+    css(backgroundImage: "url(#{image.url(size, timestamp: false)})")
   end
 
   def section_style(section)

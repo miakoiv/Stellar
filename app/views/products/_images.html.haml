@@ -10,5 +10,5 @@
 .tab-content.gallery
   - images.each_with_index do |image, index|
     .tab-pane.fade[image]{class: index == 0 && 'in active'}
-      = link_to image.url(:lightbox), class: 'image-link' do
+      = link_to image.url(:lightbox, timestamp: false), class: 'image-link' do
         = image_variant_tag image, purpose
