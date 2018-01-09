@@ -11,18 +11,18 @@ class OrderMailerPreview < ActionMailer::Preview
           order.email(:receipt, order.customer_string)
         end
         define_method "#{store} #{order} processing" do
-          order.email(:processing, order.customer_string)
+          order.email(:processing, order.customer_string, nil, bcc: false)
         end
       else
         define_method "#{store} #{order} acknowledge" do
           order.email(:acknowledge, order.customer_string)
         end
         define_method "#{store} #{order} confirmation" do
-          order.email(:confirmation, order.customer_string)
+          order.email(:confirmation, order.customer_string, nil, bcc: false)
         end
       end
       define_method "#{store} #{order} shipment" do
-        order.email(:shipment, order.customer_string)
+        order.email(:shipment, order.customer_string, nil, bcc: false)
       end
       define_method "#{store} #{order} cancellation" do
         order.email(:cancellation, order.customer_string)
@@ -30,7 +30,7 @@ class OrderMailerPreview < ActionMailer::Preview
       order.items_by_vendor.each do |vendor, items|
         vendor.notified_users.each do |user|
           define_method "#{store} #{order} notify vendor #{user.name}" do
-            order.email(:notification, user.to_s, items, false)
+            order.email(:notification, user.to_s, items, bcc: false, pricing: false)
           end
         end
       end

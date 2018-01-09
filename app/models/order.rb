@@ -541,8 +541,12 @@ class Order < ActiveRecord::Base
     events
   end
 
-  def email(message, to, items = nil, pricing = true)
-    OrderMailer.send(message, self, to, items, pricing)
+  def email(message, to, items = nil, options = {})
+    options.reverse_merge!(
+      bcc: true,
+      pricing: true
+    )
+    OrderMailer.send(message, self, to, items, options)
   end
 
   private
@@ -575,14 +579,14 @@ class Order < ActiveRecord::Base
     def approve!
       reload # to clear changes and prevent a callback loop
       if has_payment?
-        email(:processing, customer_string).deliver_later
+        email(:processing, customer_string, nil, bcc: false).deliver_later
       else
-        email(:confirmation, customer_string).deliver_later
-        email(:confirmation, contact_string, nil, false).deliver_later if has_contact_info?
+        email(:confirmation, customer_string, nil, bcc: false).deliver_later
+        email(:confirmation, contact_string, nil, bcc: false, pricing: false).deliver_later if has_contact_info?
       end
       items_by_vendor.each do |vendor, items|
         vendor.notified_users.each do |user|
-          email(:notification, user.to_s, items, false).deliver_later
+          email(:notification, user.to_s, items, bcc: false, pricing: false).deliver_later
         end
       end
       true
@@ -592,8 +596,8 @@ class Order < ActiveRecord::Base
     # A notification of shipment is sent.
     def conclude!
       reload # to clear changes and prevent a callback loop
-      email(:shipment, customer_string).deliver_later
-      email(:shipment, contact_string, nil, false).deliver_later if has_contact_info?
+      email(:shipment, customer_string, nil, bcc: false).deliver_later
+      email(:shipment, contact_string, nil, bcc: false, pricing: false).deliver_later if has_contact_info?
       OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
       true

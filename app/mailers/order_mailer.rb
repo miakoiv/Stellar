@@ -4,18 +4,21 @@ class OrderMailer < ApplicationMailer
 
   include Roadie::Rails::Mailer
 
-  def send_mail(order, to, items, pricing)
+  def send_mail(order, to, items, options)
     @store = order.store
     @order = order
     @order_items = items || order.order_items
-    @pricing = pricing
+    @bcc = options.delete(:bcc)
+    @pricing = options.delete(:pricing)
 
-    roadie_mail({
+    headers = {
       from: "noreply@#{@store.primary_host.fqdn}",
       to: to,
       subject: default_i18n_subject(store: @store),
-      bcc: @order.notified_users.map(&:to_s)
-    })
+    }
+    headers[:bcc] = @order.notified_users.map(&:to_s) if @bcc
+
+    roadie_mail(headers)
   end
 
   alias_method :receipt, :send_mail
