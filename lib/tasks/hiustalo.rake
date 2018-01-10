@@ -36,3 +36,32 @@ namespace :products do
     end
   end
 end
+
+namespace :products do
+  desc "Import Hiustalo product data and images from CSV input"
+  task :hiustalo_data, [:file] => :environment do |task, args|
+    store = Store.find_by name: 'Hiustalo Outlet'
+
+    CSV.foreach(args.file,
+      col_sep: ';',
+      headers: true,
+    ) do |row|
+      customer_code = 'CMH-' + row['Tuote-ID']
+      overview = row['Tuotekuvaus'].gsub(/\\\n/, '')
+      image_urls = row['Tuotekuvat'].split(',')
+
+      product = store.products.find_by customer_code: customer_code
+      next if product.nil?
+      product.images.destroy_all
+
+      product.update(overview: overview)
+      image_urls.each do |url|
+        begin
+          product.images.create!(attachment: URI.parse(url))
+        rescue
+          $stderr.print $!
+        end
+      end
+    end
+  end
+end
