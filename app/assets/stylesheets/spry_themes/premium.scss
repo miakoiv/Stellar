@@ -280,6 +280,7 @@ $body-tone-bg: darken($body-bg, 4%);
     .buy-now .btn { @extend .btn-danger; }
   }
 }
+.product-list .product.out-of-stock { opacity: 0.4; }
 .product-list .product a {
   display: block;
   flex: 1 1 auto;
@@ -377,6 +378,8 @@ $body-tone-bg: darken($body-bg, 4%);
   padding-right: $grid-gutter-width/2;
   margin-bottom: 10px;
 }
+.product-grid .product.out-of-stock,
+.product-card.out-of-stock { opacity: 0.4; }
 .product-grid .product:hover,
 .product-card:hover {
   a { border-color: $gray-lighter; }
