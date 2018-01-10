@@ -11,3 +11,4 @@
     .container
       .row
         = render partial: 'admin/sections/content', object: section, as: :section
+  = link_to icon('plus'), admin_section_segments_path(section), remote: true, method: :post, class: 'create-segment'

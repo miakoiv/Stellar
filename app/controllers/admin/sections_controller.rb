@@ -59,7 +59,7 @@ class Admin::SectionsController < ApplicationController
     # Create segments according to given layout preset.
     def create_segments!
       segments = params[:segments].to_i
-      template = @section.block? ? 'picture' : 'column'
+      template = @section.default_segment_template
       segments.times do |i|
         @section.segments.create(template: template, priority: i)
       end

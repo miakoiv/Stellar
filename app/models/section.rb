@@ -117,6 +117,10 @@ class Section < ActiveRecord::Base
     cover_image
   end
 
+  def default_segment_template
+    block? ? 'picture' : 'column'
+  end
+
   def to_s
     priority + 1
   end

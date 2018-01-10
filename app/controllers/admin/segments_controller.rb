@@ -3,7 +3,7 @@
 class Admin::SegmentsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :update, :switch]
+  before_action :set_segment, only: [:show, :edit, :update, :destroy, :switch]
 
   authority_actions switch: 'update'
 
@@ -23,6 +23,21 @@ class Admin::SegmentsController < ApplicationController
     respond_to :js
   end
 
+  # POST /admin/sections/1/segments.js
+  def create
+    @section = Section.find(params[:section_id])
+    authorize_action_for @section, at: current_store
+    @segment = @section.segments.build(segment_params.merge(template: @section.default_segment_template, priority: @section.segments.count))
+
+    respond_to do |format|
+      if @segment.save
+        format.js { render 'create' }
+      else
+        format.json { render json: @segment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /admin/segments/1.js
   def update
     authorize_action_for @segment, at: current_store
@@ -32,6 +47,17 @@ class Admin::SegmentsController < ApplicationController
         format.js
       else
         format.js { render json: @segment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /admin/segments/1.js
+  def destroy
+    authorize_action_for @segment, at: current_store
+
+    respond_to do |format|
+      if @segment.destroy
+        format.js
       end
     end
   end

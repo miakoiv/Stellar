@@ -232,6 +232,10 @@ en:
       section_nav:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
+    segments:
+      segment_nav:
+        delete:
+          confirm: The segment and its contents will be deleted. This cannot be undone.
     shipping_methods:
       index:
         new_shipping_method: New shipping method
