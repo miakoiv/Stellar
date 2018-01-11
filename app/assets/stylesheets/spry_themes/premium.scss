@@ -451,6 +451,32 @@ $body-tone-bg: darken($body-bg, 4%);
   font-size: 16px;
 }
 
+/* Premium teaser and pricing */
+.product-grid .premium-price,
+.product-card .premium-price {
+  @extend .label, .label-default;
+  @include box-shadow(0 0 2px 0 rgba(0,0,0,0.2));
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-color: $btn-default-bg;
+  color: $btn-default-color;
+  border: 1px solid $btn-default-border;
+
+  .teaser {
+    display: block;
+    margin-bottom: 3px;
+  }
+  .price {
+    margin-bottom: 0;
+    font-family: "Fira Sans Extra Condensed", sans-serif;
+    font-size: 1.7143em;
+    @include pretty-price;
+  }
+}
+
 /* Buy now widget and pricing */
 .product-grid .buy-now,
 .product-card .buy-now {
@@ -464,10 +490,11 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-card .buy-now .price {
   position: absolute;
   right: 0;
-  bottom: 30px;
+  bottom: 40px;
   left: 0;
+  margin-bottom: 0;
   font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-size: 24px;
+  font-size: 1.7143em;
   color: $gray-base;
   @include pretty-price;
 }

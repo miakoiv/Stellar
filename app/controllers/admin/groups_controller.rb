@@ -132,6 +132,7 @@ class Admin::GroupsController < ApplicationController
         :name, :appearance,
         :pricing_shown, :stock_shown,
         :price_base, :price_modifier, :price_tax_included,
+        :premium_group_id, :premium_teaser
       )
     end
 end

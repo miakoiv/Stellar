@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_inventory, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_inventory, :current_site_name, :current_theme, :shopping_cart, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
 
   def current_hostname
     @current_hostname
@@ -122,6 +122,12 @@ class ApplicationController < ActionController::Base
   # initialized with the current group.
   def pricing
     @product_appraiser ||= Appraiser::Product.new(current_group)
+  end
+
+  # Pricing for the premium group of current group, if any.
+  def premium_pricing
+    return nil if current_group.premium_group.nil?
+    @premium_appraiser ||= Appraiser::Product.new(current_group.premium_group)
   end
 
   # Convenience method to tell if the current group sees prices

@@ -22,6 +22,9 @@
                 %span.input-group-addon %
         = f.form_group do
           = f.check_box :price_tax_included
+        = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: blank}, {class: 'selectize-label'}
+        .premium-teaser.collapse{class: @group.premium_group.present? && 'in'}
+          = f.text_field :premium_teaser
     - unless @group.new_record?
       .panel-footer
         - if current_user.can_update?(@group, at: current_store)
@@ -43,4 +46,5 @@
   $('.selectize-label').selectize
     labelField: 'title'
     dataAttr: 'data'
+    allowEmptyOption: true
     render: $.fn.selectize.label_renderer
