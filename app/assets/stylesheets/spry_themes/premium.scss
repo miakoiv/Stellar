@@ -283,6 +283,7 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-list .product.out-of-stock { opacity: 0.4; }
 .product-list .product a {
   display: block;
+  position: relative;
   flex: 1 1 auto;
   padding-right: $grid-gutter-width/2;
   color: inherit;
@@ -314,7 +315,11 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 /* Product promotions */
-.product-list .promotions { padding-left: 88px; }
+.product-list .promotions {
+  position: absolute;
+  top: -2px;
+  right: 15px;
+}
 .product-list .promotion {
   @extend .label, .label-danger;
   display: inline-block;
@@ -325,6 +330,28 @@ $body-tone-bg: darken($body-bg, 4%);
   border-radius: 15px;
   font-family: "Fira Sans Extra Condensed", sans-serif;
   font-size: 14px;
+}
+
+/* Premium teaser and pricing */
+.product-list .premium-price,
+.product-list .premium-price {
+  @extend .label, .label-default;
+  position: absolute;
+  right: 15px;
+  bottom: 0;
+  padding: 5px;
+  border-radius: 0;
+  background-color: $btn-default-bg;
+  color: $btn-default-color;
+  border: 1px solid $btn-default-border;
+
+  .price {
+    display: inline-block;
+    margin-bottom: 0;
+    font-family: "Fira Sans Extra Condensed", sans-serif;
+    font-size: 24px;
+    @include pretty-price;
+  }
 }
 
 /* Buy now widget and price */
@@ -472,7 +499,7 @@ $body-tone-bg: darken($body-bg, 4%);
   .price {
     margin-bottom: 0;
     font-family: "Fira Sans Extra Condensed", sans-serif;
-    font-size: 1.7143em;
+    font-size: 24px;
     @include pretty-price;
   }
 }
@@ -494,7 +521,7 @@ $body-tone-bg: darken($body-bg, 4%);
   left: 0;
   margin-bottom: 0;
   font-family: "Fira Sans Extra Condensed", sans-serif;
-  font-size: 1.7143em;
+  font-size: 24px;
   color: $gray-base;
   @include pretty-price;
 }
