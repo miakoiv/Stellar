@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108104850) do
+ActiveRecord::Schema.define(version: 20180111130033) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(version: 20180108104850) do
     t.integer  "price_base",         limit: 4,                           default: 1,         null: false
     t.decimal  "price_modifier",                 precision: 5, scale: 2, default: 0.0,       null: false
     t.boolean  "price_tax_included",                                     default: true,      null: false
+    t.integer  "premium_group_id",   limit: 4
+    t.string   "premium_teaser",     limit: 255
     t.string   "appearance",         limit: 255,                         default: "default", null: false
     t.integer  "priority",           limit: 4,                           default: 0,         null: false
     t.datetime "created_at",                                                                 null: false

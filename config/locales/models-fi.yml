@@ -164,6 +164,8 @@ fi:
         price_tax_included: Hinnat verollisina
         category_ids: Sallitut tuoteryhmät
         pricing: Hinnoittelu
+        premium_group_id: Premium-ryhmä
+        premium_teaser: Premium-houkutin
         appearance: Väritys
         user_count: Jäseniä
         default: Vieraille

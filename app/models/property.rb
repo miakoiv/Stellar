@@ -25,12 +25,10 @@ class Property < ActiveRecord::Base
 
   #---
   def values
-    sort_attribute = numeric? ? :value_f : :value
-    product_properties.order(sort_attribute).pluck(:value).uniq
+    product_properties.reorder(sort_attribute).pluck(:value).uniq
   end
 
   def values_for(scope)
-    sort_attribute = numeric? ? :value_f : :value
     product_properties
       .joins(product: :categories)
       .merge(Product.live)
@@ -38,6 +36,10 @@ class Property < ActiveRecord::Base
       .reorder(sort_attribute)
       .pluck(:value)
       .uniq
+  end
+
+  def value_counts
+    product_properties.reorder(sort_attribute).group(:value).count
   end
 
   def value_type_name
@@ -57,6 +59,10 @@ class Property < ActiveRecord::Base
   end
 
   private
+    def sort_attribute
+      numeric? ? :value_f : :value
+    end
+
     def define_search_method
       ProductSearch.define_search_method(self)
     end

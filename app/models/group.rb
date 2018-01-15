@@ -29,10 +29,14 @@ class Group < ActiveRecord::Base
   # Promotions targeting this group.
   has_many :promotions
 
+  # Reference to another group with premium features and/or better prices.
+  belongs_to :premium_group, class_name: 'Group'
+
   has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
 
   default_scope { sorted }
   scope :at, -> (store) { where(store: store) }
+  scope :not_including, -> (this) { where.not(id: this) }
 
   #---
   validates :name, presence: true

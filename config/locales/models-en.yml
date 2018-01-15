@@ -164,6 +164,8 @@ en:
         price_tax_included: Prices include tax
         category_ids: Allowed categories
         pricing: Pricing
+        premium_group_id: Premium group
+        premium_teaser: Premium teaser
         appearance: Appearance
         user_count: Members
         default: For guests
