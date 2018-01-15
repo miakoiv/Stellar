@@ -390,14 +390,15 @@ en:
       section:
         layout: Layout
         gutters: Gutters
-        shape: Block shape
+        viewport: Use viewport height
         width: Content width
         background_color: Background color
         fixed_background: Fixed background
       segment:
         resource_id: Target
         template: Content type
-        alignment: Content alignment
+        alignment: Vertical alignment
+        shape: Block shape
         inset: Content inset
         body: Body text
         header: Headline

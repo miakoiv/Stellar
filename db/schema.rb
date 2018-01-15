@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115091102) do
+ActiveRecord::Schema.define(version: 20180115131327) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -108,6 +108,17 @@ ActiveRecord::Schema.define(version: 20180115091102) do
   end
 
   add_index "categories_products", ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true, using: :btree
+
+  create_table "columns", force: :cascade do |t|
+    t.integer  "section_id", limit: 4,                         null: false
+    t.string   "align",      limit: 255, default: "align-top", null: false
+    t.boolean  "pivot",                  default: false,       null: false
+    t.integer  "priority",   limit: 4,   default: 0,           null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
+  add_index "columns", ["section_id"], name: "index_columns_on_section_id", using: :btree
 
   create_table "component_entries", force: :cascade do |t|
     t.integer  "product_id",   limit: 4,             null: false
@@ -601,6 +612,7 @@ ActiveRecord::Schema.define(version: 20180115091102) do
     t.string   "width",            limit: 255, default: "col-12",  null: false
     t.string   "layout",           limit: 255, default: "twelve",  null: false
     t.boolean  "gutters",                      default: true,      null: false
+    t.boolean  "viewport",                     default: false,     null: false
     t.string   "shape",            limit: 255
     t.string   "background_color", limit: 255, default: "#FFFFFF", null: false
     t.boolean  "fixed_background",             default: false,     null: false
@@ -613,9 +625,11 @@ ActiveRecord::Schema.define(version: 20180115091102) do
 
   create_table "segments", force: :cascade do |t|
     t.integer  "section_id",    limit: 4,                            null: false
+    t.integer  "column_id",     limit: 4,                            null: false
     t.integer  "resource_id",   limit: 4
     t.string   "resource_type", limit: 255
     t.integer  "template",      limit: 4,     default: 0,            null: false
+    t.string   "shape",         limit: 255
     t.string   "alignment",     limit: 255,   default: "align-top",  null: false
     t.string   "inset",         limit: 255,   default: "inset-none", null: false
     t.text     "body",          limit: 65535
@@ -626,6 +640,7 @@ ActiveRecord::Schema.define(version: 20180115091102) do
     t.datetime "updated_at",                                         null: false
   end
 
+  add_index "segments", ["column_id"], name: "index_segments_on_column_id", using: :btree
   add_index "segments", ["resource_type", "resource_id"], name: "index_segments_on_resource_type_and_resource_id", using: :btree
   add_index "segments", ["section_id"], name: "index_segments_on_section_id", using: :btree
 

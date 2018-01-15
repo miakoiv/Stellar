@@ -227,12 +227,12 @@ en:
       new:
         new_property: New property
     sections:
-      settings:
-        fluid_ratio: from content
       section_nav:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
     segments:
+      settings:
+        fluid_ratio: from content
       segment_nav:
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.

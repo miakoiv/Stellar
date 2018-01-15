@@ -15,17 +15,15 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Preset layouts.
+  # Presets as layout, column count tuples.
   PRESETS = [
-    [1, 'twelve'],
-    [2, 'six-six'],
-    [2, 'eight-four'],
-    [2, 'four-eight'],
-    [3, 'four-four-four'],
-    [3, 'three-six-three'],
-    [4, 'three-three-three-three'],
-    [3, 'eight-four-four'],
-    [3, 'four-four-eight'],
+    ['twelve', 1],
+    ['six-six', 2],
+    ['eight-four', 2],
+    ['four-eight', 2],
+    ['four-four-four', 3],
+    ['three-six-three', 3],
+    ['three-three-three-three', 4],
   ].freeze
 
   # Available content widths defined in layouts.css.
@@ -33,20 +31,9 @@ class Section < ActiveRecord::Base
     jumbotron spread col-12 col-10 col-8 col-6
   }.freeze
 
-  # Section shape presets to control block segment aspect ratios.
-  SHAPES = [
-    ['viewport', 'shape-viewport'],
-    ['1:1', 'shape-square'],
-    ['4:3', 'shape-4-3'],
-    ['16:9', 'shape-16-9'],
-    ['2:1', 'shape-two-one'],
-    ['21:9', 'shape-21-9'],
-    ['3:1', 'shape-three-one'],
-    ['4:1', 'shape-four-one'],
-  ].freeze
-
   #---
   belongs_to :page, touch: true
+  has_many :columns, dependent: :destroy
   has_many :segments, dependent: :destroy
 
   default_scope { sorted }
@@ -64,10 +51,6 @@ class Section < ActiveRecord::Base
     WIDTHS.map { |w| [Section.human_attribute_value(:width, w), w] }
   end
 
-  def self.shape_options
-    SHAPES
-  end
-
   #---
   def spread?
     width == 'spread'
@@ -77,20 +60,12 @@ class Section < ActiveRecord::Base
     width == 'jumbotron'
   end
 
-  def viewport?
-    shape == 'shape-viewport'
-  end
-
   def gutter
     gutters? ? 'gutters' : 'no-gutters'
   end
 
-  def fixed_or_fluid
-    shape.present? ? 'fixed-ratio' : 'fluid-ratio'
-  end
-
   def layout_options
-    PRESETS.map { |l| l[1] }
+    PRESETS.map { |l| l.first }
   end
 
   def image_options
@@ -99,10 +74,6 @@ class Section < ActiveRecord::Base
 
   def background_image
     cover_image
-  end
-
-  def default_segment_template
-    'column'
   end
 
   def to_s

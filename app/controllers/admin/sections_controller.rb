@@ -18,7 +18,7 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        create_segments!
+        create_columns!
         format.js
       else
         format.js { render json: @section.errors, status: :unprocessable_entity }
@@ -56,19 +56,20 @@ class Admin::SectionsController < ApplicationController
       @section = Section.find(params[:id])
     end
 
-    # Create segments according to given layout preset.
-    def create_segments!
-      segments = params[:segments].to_i
-      template = @section.default_segment_template
-      segments.times do |i|
-        @section.segments.create(template: template, priority: i)
+    # Create columns and segments according to given layout preset.
+    # FIXME: drop the section association when possible
+    def create_columns!
+      columns = params[:columns].to_i
+      columns.times do |i|
+        column = @section.columns.create(priority: i)
+        column.segments.create(section: @section, template: 'text')
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
       params.require(:section).permit(
-        :width, :layout, :gutters, :shape,
+        :width, :layout, :gutters, :viewport,
         :background_color, :fixed_background
       )
     end

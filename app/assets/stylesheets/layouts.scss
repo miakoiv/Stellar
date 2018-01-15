@@ -12,41 +12,62 @@
 
 
 /*
- * Section content widths
+ * Section and column flexboxen
  */
-.section .section-content.spread {
-  outline: 4px solid red;
+.section { position: relative; }
+.section-content > .row {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+
+  /* Nuking pseudo elements to work around a Safari glitch */
+  &:before,
+  &:after { display: none; }
 }
-.section .section-content.col-12 {
-  @extend .col-xs-12;
-  float: none;
+.column {
+  display: flex;
+  flex-flow: column nowrap;
+  max-height: 100%;
 }
-.section .section-content.col-10 {
-  @extend .col-xs-12, .col-sm-10, .col-sm-offset-1;
-  float: none;
+
+@media (min-width: $screen-sm-min) {
+  .column.align-top { justify-content: flex-start; }
+  .column.align-center { justify-content: center; }
+  .column.align-bottom { justify-content: flex-end; }
 }
-.section .section-content.col-8 {
-  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2;
-  float: none;
+
+/* Gutters */
+.section.gutters .section-content .column {
+  @include padding-vertical;
 }
-.section .section-content.col-6 {
-  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2, .col-md-6, .col-md-offset-3;
-  float: none;
+.section.no-gutters .section-content > .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.section.no-gutters .section-content .column {
+  @include padding-horizontal(0);
 }
 
 
 /*
- * Sections with or without gutters.
+ * Section content widths
  */
-.gutters .segment {
-  @include padding-vertical;
+.section-content.spread {}
+.section-content.col-12 {
+  @extend .col-xs-12;
+  float: none;
 }
-.no-gutters > .container > .row {
-  margin-left: 0;
-  margin-right: 0;
+.section-content.col-10 {
+  @extend .col-xs-12, .col-sm-10, .col-sm-offset-1;
+  float: none;
 }
-.no-gutters .segment {
-  @include padding-horizontal(0);
+.section-content.col-8 {
+  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2;
+  float: none;
+}
+.section-content.col-6 {
+  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2, .col-md-6, .col-md-offset-3;
+  float: none;
 }
 
 /* Override jumbotrons to fit the layout */
@@ -58,44 +79,38 @@
 .section-content.jumbotron {
   margin-bottom: 0;
   border-radius: 0;
+  @include padding-horizontal;
+  @include padding-vertical(0);
 }
 
 
 /*
- * Section layouts
+ * Column widths for each layout
  */
 .twelve {
-  .segment { @extend .col-xs-12; }
+  .column { @extend .col-xs-12; }
 }
 .six-six {
-  .segment { @extend .col-xs-12, .col-sm-6; }
+  .column { @extend .col-xs-12, .col-sm-6; }
 }
 .eight-four {
-  .segment:first-child { @extend .col-xs-12, .col-sm-8; }
-  .segment:last-child { @extend .col-xs-12, .col-sm-4; }
+  .column:first-child { @extend .col-xs-12, .col-sm-8; }
+  .column:last-child { @extend .col-xs-12, .col-sm-4; }
 }
 .four-eight {
-  .segment:first-child { @extend .col-xs-12, .col-sm-4; }
-  .segment:last-child { @extend .col-xs-12, .col-sm-8; }
+  .column:first-child { @extend .col-xs-12, .col-sm-4; }
+  .column:last-child { @extend .col-xs-12, .col-sm-8; }
 }
 .four-four-four {
-  .segment { @extend .col-xs-12, .col-sm-4; }
+  .column { @extend .col-xs-12, .col-sm-4; }
 }
 .three-six-three {
-  .segment:first-child { @extend .col-xs-12, .col-sm-6, .col-sm-push-3; }
-  .segment:not(:first-child):not(:last-child) { @extend .col-xs-6, .col-sm-3, .col-sm-pull-6; }
-  .segment:last-child { @extend .col-xs-6, .col-sm-3; }
+  .column:first-child { @extend .col-xs-12, .col-sm-6, .col-sm-push-3; }
+  .column:not(:first-child):not(:last-child) { @extend .col-xs-6, .col-sm-3, .col-sm-pull-6; }
+  .column:last-child { @extend .col-xs-6, .col-sm-3; }
 }
 .three-three-three-three {
-  .segment { @extend .col-xs-6, .col-sm-3; }
-}
-.eight-four-four {
-  .segment:first-child { @extend .col-xs-12, .col-sm-8; }
-  .segment:not(:first-child) { @extend .col-xs-6, .col-sm-4; }
-}
-.four-four-eight {
-  .segment:first-child { @extend .col-xs-12, .col-sm-8, .col-sm-push-4; }
-  .segment:not(:first-child) { @extend .col-xs-6, .col-sm-4, .col-sm-pull-8; }
+  .column { @extend .col-xs-6, .col-sm-3; }
 }
 
 
@@ -134,77 +149,38 @@
 
 
 /*
- * Section content dimensioning and alignment
- */
-.section { position: relative; }
-.section .container,
-.section .row,
-.section .section-content {
-  height: 100%;
-}
-.section-content.block {
-  .segment-shape,
-  .segment-content-wrap,
-  .segment-content {
-    min-height: $navbar-height;
-  }
-}
-.segment-content-wrap.inset-half { padding: $grid-gutter-width/2; }
-.segment-content-wrap.inset-full { padding: $grid-gutter-width; }
-
-/* With fluid aspect ratio, alignment happens within the .row */
-.section-content.column.fluid-ratio > .row {
-  display: flex;
-  flex-flow: row wrap;
-
-  .segment.align-top { align-self: flex-start; }
-  .segment.align-middle { align-self: center; }
-  .segment.align-bottom { align-self: flex-end; }
-
-  /* Nuking pseudo elements to work around a Safari glitch */
-  &:before,
-  &:after { display: none; }
-}
-
-/* With fixed aspect ratio, alignment is based on .segment-content-wrap */
-.section-content.fixed-ratio .segment-shape {
-  position: relative;
-  height: 0;
-}
-.section-content.fixed-ratio .segment-content-wrap {
-  display: flex;
-  flex-flow: column nowrap;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  &.align-top { justify-content: flex-start; }
-  &.align-middle { justify-content: center; }
-  &.align-bottom { justify-content: flex-end; }
-}
-
-/* Aspect ratios */
-.section-content.fixed-ratio {
-  &.shape-viewport .segment { height: 100%; }
-  .segment-shape.shape-viewport { height: 100%; }
-  .segment-shape.shape-square { padding-bottom: 100%; }
-  .segment-shape.shape-4-3 { padding-bottom: 75%; }
-  .segment-shape.shape-16-9 { padding-bottom: 56.25%; }
-  .segment-shape.shape-two-one { padding-bottom: 50%; }
-  .segment-shape.shape-21-9 { padding-bottom: 42.85714%; }
-  .segment-shape.shape-three-one { padding-bottom: 33.33333%; }
-  .segment-shape.shape-four-one { padding-bottom: 25%; }
-}
-
-
-/*
  * Segment content styles
  */
 .segment-content {
   line-height: 1.4; // default to sane value for summernote
 }
+
+/* Insets */
+.segment-content-wrap.inset-half { padding: $grid-gutter-width/2; }
+.segment-content-wrap.inset-full { padding: $grid-gutter-width; }
+
+/* Aspect ratios */
+.segment-shape.fixed-ratio {
+  height: 0;
+  overflow: hidden;
+
+  .segment-content-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+.segment-shape.shape-viewport { height: auto; }
+.segment-shape.shape-square { padding-bottom: 100%; }
+.segment-shape.shape-4-3 { padding-bottom: 75%; }
+.segment-shape.shape-16-9 { padding-bottom: 56.25%; }
+.segment-shape.shape-two-one { padding-bottom: 50%; }
+.segment-shape.shape-21-9 { padding-bottom: 42.85714%; }
+.segment-shape.shape-three-one { padding-bottom: 33.33333%; }
+.segment-shape.shape-four-one { padding-bottom: 25%; }
+
 .segment-content .page-header { margin-top: 0; }
 .segment-content .placeholder {
   display: flex;
@@ -219,9 +195,6 @@
 .section-content .placeholder {
   min-height: $navbar-height;
 }
-.section-content.fixed-ratio .placeholder {
-  height: 100%;
-}
 
 .segment-content.category,
 .segment-content.promotion,
@@ -232,14 +205,13 @@
     height: 100%;
   }
   .swiper-slide .product-card {
-    max-width: 320px;
     max-height: 100%;
     padding: 0;
     margin: 0 auto;
   }
 }
 
-.segment-content.column,
+.segment-content.text,
 .segment-content.raw {
   h1:first-child,
   h2:first-child,

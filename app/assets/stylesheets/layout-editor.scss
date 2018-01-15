@@ -28,21 +28,22 @@
     &:hover, &:focus { color: #fff; }
   }
 }
-.section-list-item .create-segment {
-  display: block;
-  position: absolute;
-  bottom: -9px;
-  right: 20px;
-  z-index: 1;
-  padding: 6px 8px 6.5px 8px;
-  line-height: 1;
-  border: 1px solid $panel-default-border;
-  border-radius: 14px;
-  color: inherit;
-  background-color: #fff;
-  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+.section-list-item .column {
+  position: relative;
+  outline: 1px solid rgba($brand-warning, 0.333);
 
-  &:hover { background-color: #f0f0f0; }
+  .column-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    border: 0;
+    border-radius: 0;
+    background-color: darken($brand-warning, 15%);
+  }
+}
+.section-list-item .column:hover {
+  .column-nav { display: block; }
 }
 .section-list-item .segment-content {
   position: relative;
@@ -162,7 +163,7 @@
 #layout-panel .CodeMirror { height: 300px; }
 
 /* Overrides for different segment templates */
-#layout-panel .segment-form.column .note-editor {
+#layout-panel .segment-form.text .note-editor {
   border: 0;
   border-radius: 0;
   caret-color: $brand-primary;

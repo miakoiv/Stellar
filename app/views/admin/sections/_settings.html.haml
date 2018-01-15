@@ -3,7 +3,8 @@
     = f.select :layout, section.layout_options, {}, {required: true}
     = f.form_group do
       = f.check_box :gutters
-    = f.select :shape, Section.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
+    = f.form_group do
+      = f.check_box :viewport
     = f.select :width, Section.width_options, {}, {required: true}
     = f.color_field :background_color
     = f.form_group do
@@ -12,6 +13,4 @@
 
 :coffee
   $('#section_#{section.id}_section_layout').selectize()
-  $('#section_#{section.id}_section_shape').selectize
-      allowEmptyOption: true
   $('#section_#{section.id}_section_width').selectize()

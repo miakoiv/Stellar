@@ -207,12 +207,12 @@ fi:
       new:
         new_property: Uusi ominaisuus
     sections:
-      settings:
-        fluid_ratio: sisällön mukaan
       section_nav:
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     segments:
+      settings:
+        fluid_ratio: sisällön mukaan
       segment_nav:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.

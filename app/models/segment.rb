@@ -18,6 +18,16 @@ class Segment < ActiveRecord::Base
   #---
   ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
 
+  SHAPES = [
+    ['1:1', 'shape-square'],
+    ['4:3', 'shape-4-3'],
+    ['16:9', 'shape-16-9'],
+    ['2:1', 'shape-two-one'],
+    ['21:9', 'shape-21-9'],
+    ['3:1', 'shape-three-one'],
+    ['4:1', 'shape-four-one'],
+  ].freeze
+
   GRID_COLUMNS = %w{1 2 3 4 6 12}.freeze
 
   INSETS = %w{inset-none inset-half inset-full}.freeze
@@ -25,7 +35,7 @@ class Segment < ActiveRecord::Base
   #---
   enum template: {
     empty: 0,
-    column: 1,
+    text: 1,
     picture: 2,
     gallery: 3,
     map: 4,
@@ -44,7 +54,7 @@ class Segment < ActiveRecord::Base
 
   #---
   belongs_to :section, touch: true
-  delegate :shape, to: :section
+  belongs_to :column, touch: true
   belongs_to :resource, polymorphic: true
 
   before_validation :clear_unwanted_attributes
@@ -62,8 +72,8 @@ class Segment < ActiveRecord::Base
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
   end
 
-  def self.alignment_options
-    ALIGNMENTS.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
+  def self.shape_options
+    SHAPES
   end
 
   def self.grid_columns_options
@@ -76,7 +86,7 @@ class Segment < ActiveRecord::Base
 
   #---
   def has_content?
-    column? || raw?
+    text? || raw?
   end
 
   def has_min_height?
@@ -84,7 +94,11 @@ class Segment < ActiveRecord::Base
   end
 
   def edit_in_place?
-    column?
+    text?
+  end
+
+  def fixed_ratio?
+    shape.present?
   end
 
   def grid_columns

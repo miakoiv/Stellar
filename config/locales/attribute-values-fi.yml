@@ -5,6 +5,11 @@ fi:
         view_mode:
           'product-grid': ruudukko
           'product-list': lista
+      column:
+        alignment:
+          'align-top': ylös
+          'align-middle': keskelle
+          'align-bottom': alas
       group:
         appearance:
           default: harmaa
@@ -114,7 +119,7 @@ fi:
       segment:
         template:
           empty: tyhjä tila
-          column: tekstipalsta
+          text: tekstipalsta
           picture: kuva
           gallery: galleria
           map: kartta
@@ -129,10 +134,6 @@ fi:
           department_feature: osastomainos
           navigation_menu: sivuvalikko
           raw: ʜᴛᴍʟ-osio
-        alignment:
-          'align-top': ylös
-          'align-middle': keskelle
-          'align-bottom': alas
         inset:
           'inset-none': 0
           'inset-half': ½

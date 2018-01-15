@@ -5,6 +5,11 @@ en:
         view_mode:
           'product-grid': grid
           'product-list': list
+      column:
+        alignment:
+          'align-top': top
+          'align-middle': middle
+          'align-bottom': bottom
       group:
         appearance:
           default: gray
@@ -114,7 +119,7 @@ en:
       segment:
         template:
           empty: empty area
-          column: text column
+          text: text column
           picture: picture
           gallery: gallery
           map: map
@@ -129,10 +134,6 @@ en:
           department_feature: department feature
           navigation_menu: navigation menu
           raw: ʜᴛᴍʟ snippet
-        alignment:
-          'align-top': top
-          'align-middle': middle
-          'align-bottom': bottom
         inset:
           'inset-none': 0
           'inset-half': ½

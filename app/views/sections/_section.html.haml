@@ -1,4 +1,4 @@
-%section.section{id: dom_id(section), class: [section.gutter, section.shape]}
+%section.section{id: dom_id(section), class: section.gutter}
   = render partial: 'sections/background_images', object: section, as: :section
   - if section.spread?
     = render partial: 'sections/content', object: section, as: :section

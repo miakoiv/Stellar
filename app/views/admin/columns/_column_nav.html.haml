@@ -1,0 +1,10 @@
+%nav.column-nav.navbar.navbar-inverse
+  %ul.nav.navbar-nav
+    %li.dropdown
+      = dropdown_toggle do
+        = icon('paint-brush')
+      %ul.dropdown-menu
+        %li
+          = render partial: 'admin/columns/settings', object: column, as: :column
+    %li
+      = link_to icon('plus'), admin_column_segments_path(column), remote: true, method: :post

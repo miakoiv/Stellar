@@ -4,8 +4,8 @@
   %ul.dropdown-menu.mega-dropdown-menu.mega-dropdown-menu-compact
     .container
       .row
-        - Section.preset_menu_options.each do |segments, layout|
+        - Section.preset_menu_options.each do |layout, columns|
           %li
-            = link_to admin_page_sections_path(@page, params: {section: {layout: layout}, segments: segments}), remote: true, method: :post do
+            = link_to admin_page_sections_path(@page, params: {section: {layout: layout}, columns: columns}), remote: true, method: :post do
               .page-image
                 = image_tag "layouts/#{layout}.svg"

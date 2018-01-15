@@ -95,9 +95,11 @@ Rails.application.routes.draw do
       get :layout, on: :member
       resources :sections, shallow: true do
         resources :images
-        resources :segments do
-          resources :images
-          post :switch, on: :member
+        resources :columns do
+          resources :segments do
+            resources :images
+            post :switch, on: :member
+          end
         end
         post :reorder, on: :collection
       end

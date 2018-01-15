@@ -1,7 +1,0 @@
-.segment-content.column{id: segment_content_id(column, context)}
-  - if column.body.present?
-    .note-editor
-      .note-editing-area
-        = column.body.html_safe
-  - else
-    = render partial: 'segments/placeholders/column'

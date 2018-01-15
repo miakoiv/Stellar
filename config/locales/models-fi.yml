@@ -390,14 +390,15 @@ fi:
       section:
         layout: Asettelu
         gutters: Palstavälit
-        shape: Lohkon muoto
+        viewport: Tasaa ikkunan korkeuteen
         width: Sisällön leveys
         background_color: Taustaväri
         fixed_background: Kiinteä tausta
       segment:
         resource_id: Kohde
         template: Sisällön tyyppi
-        alignment: Sisällön tasaus
+        alignment: Pystytasaus
+        shape: Lohkon muoto
         inset: Sisällön sisennys
         body: Leipäteksti
         header: Otsikko
