@@ -52,11 +52,11 @@ PRODUCT_FILES = {
 
 ORDER_FILES = {
 
-  # TILNRO,VAIHE1,OMAVIITE,ASTILNRO
+  # TILNRO,LSTNO,ASTILNRO,VAIHE1
   order: {
     file: 'www-tilaus-utf8.csv',
     multiple: false,
-    headers: [:code, :status, nil, :number],
+    headers: [:code, :erp_number, :number, :status],
   },
 }
 
@@ -122,7 +122,9 @@ namespace :matfox do
         # Orders are found by the number field, which might not match
         # any known order, or may refer to an already concluded one.
         next unless data[:number] =~ /\A\d+\Z/
-        order = Order.find_by(number: data[:number])
+        store = Store.find_by(erp_number: data[:erp_number])
+        next if store.nil?
+        order = store.orders.find_by(number: data[:number])
         next if order.nil? || order.concluded?
 
         # Each order has a status of 2..4, where status 2 triggers
