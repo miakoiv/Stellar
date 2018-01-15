@@ -1,13 +1,8 @@
 = bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
   %fieldset
-    .form-group
-      = f.label col(Section, :outline)
-      .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-        - Section.outlines.keys.each do |outline|
-          %label.btn.btn-default{class: section.outline == outline && 'active'}
-            = f.radio_button_without_bootstrap :outline, outline
-            = Section.human_attribute_value(:outline, outline)
     = f.select :layout, section.layout_options, {}, {required: true}
+    = f.form_group do
+      = f.check_box :gutters
     = f.select :shape, Section.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
     = f.select :width, Section.width_options, {}, {required: true}
     = f.color_field :background_color

@@ -105,9 +105,6 @@ fi:
           third_party: rajoitetut oikeudet kolmannelle osapuolelle
           group_delegate: väliaikainen toimiminen toisessa ryhmässä
       section:
-        outline:
-          block: lohkot
-          column: palstat
         width:
           'spread': aukeama
           'col-12': koko sivu

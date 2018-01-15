@@ -105,9 +105,6 @@ en:
           third_party: limited access from a third party
           group_delegate: temporary assignment to another group
       section:
-        outline:
-          block: blocks
-          column: columns
         width:
           'spread': spread
           'col-12': full page

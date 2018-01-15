@@ -388,8 +388,8 @@ en:
       role:
         name: Name
       section:
-        outline: Outline
         layout: Layout
+        gutters: Gutters
         shape: Block shape
         width: Content width
         background_color: Background color

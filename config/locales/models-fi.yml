@@ -388,8 +388,8 @@ fi:
       role:
         name: Nimi
       section:
-        outline: Malli
         layout: Asettelu
+        gutters: Palstavälit
         shape: Lohkon muoto
         width: Sisällön leveys
         background_color: Taustaväri

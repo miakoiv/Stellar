@@ -9,17 +9,14 @@
   padding-top: $padding;
   padding-bottom: $padding;
 }
-@mixin gutters($top, $right, $bottom, $left) {
-  @if $top { padding-top: 20px; }
-  @if $right { padding-right: $grid-gutter-width/2; }
-  @if $bottom { padding-bottom: 20px; }
-  @if $left { padding-left: $grid-gutter-width/2; }
-}
 
 
 /*
  * Section content widths
  */
+.section .section-content.spread {
+  outline: 4px solid red;
+}
 .section .section-content.col-12 {
   @extend .col-xs-12;
   float: none;
@@ -39,32 +36,17 @@
 
 
 /*
- * Section outlines, column and block.
+ * Sections with or without gutters.
  */
-.section-content.column .segment {
+.gutters .segment {
   @include padding-vertical;
 }
-.section-content.block,
-.section-content.column,
-.section-content.jumbotron {
-  @include padding-horizontal;
-}
-@media (min-width: $screen-sm-min) {
-  .section-content.block > .row {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
-.section-content.block .segment {
-  @include padding-horizontal(0);
-}
-.section-content.column.spread > .row {
+.no-gutters > .container > .row {
   margin-left: 0;
   margin-right: 0;
 }
-.section-content.block.spread > .row {
-  margin-left: -$grid-gutter-width/2;
-  margin-right: -$grid-gutter-width/2;
+.no-gutters .segment {
+  @include padding-horizontal(0);
 }
 
 /* Override jumbotrons to fit the layout */
@@ -78,16 +60,9 @@
   border-radius: 0;
 }
 
-/* Fix padding of stacked segments on mobile */
-@media (max-width: $screen-xs-max) {
-  .section-content.column .segment { padding-bottom: 0; }
-  .section-content.column .segment:last-child { padding-bottom: 20px; }
-}
-
 
 /*
- * Section layouts declared with less specificity
- * to retain the outline rules above.
+ * Section layouts
  */
 .twelve {
   .segment { @extend .col-xs-12; }

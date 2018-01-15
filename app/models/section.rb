@@ -15,28 +15,17 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Preset layouts for column and block outlines.
+  # Preset layouts.
   PRESETS = [
-    [:column, [
-      [1, 'twelve'],
-      [2, 'six-six'],
-      [2, 'eight-four'],
-      [2, 'four-eight'],
-      [3, 'four-four-four'],
-      [3, 'three-six-three'],
-      [4, 'three-three-three-three'],
-    ]],
-    [:block, [
-      [1, 'twelve'],
-      [2, 'six-six'],
-      [2, 'eight-four'],
-      [2, 'four-eight'],
-      [3, 'four-four-four'],
-      [3, 'three-six-three'],
-      [4, 'three-three-three-three'],
-      [3, 'eight-four-four', 'shape-16-9'],
-      [3, 'four-four-eight', 'shape-16-9'],
-    ]],
+    [1, 'twelve'],
+    [2, 'six-six'],
+    [2, 'eight-four'],
+    [2, 'four-eight'],
+    [3, 'four-four-four'],
+    [3, 'three-six-three'],
+    [4, 'three-three-three-three'],
+    [3, 'eight-four-four'],
+    [3, 'four-four-eight'],
   ].freeze
 
   # Available content widths defined in layouts.css.
@@ -55,12 +44,6 @@ class Section < ActiveRecord::Base
     ['3:1', 'shape-three-one'],
     ['4:1', 'shape-four-one'],
   ].freeze
-
-  #---
-  # Section outline affects the arrangement of its segments.
-  # Column sections are ideal for text and other content that requires
-  # gutters. Block sections lack gutters, allowing seamless layouts.
-  enum outline: [:block, :column]
 
   #---
   belongs_to :page, touch: true
@@ -98,15 +81,16 @@ class Section < ActiveRecord::Base
     shape == 'shape-viewport'
   end
 
+  def gutter
+    gutters? ? 'gutters' : 'no-gutters'
+  end
+
   def fixed_or_fluid
     shape.present? ? 'fixed-ratio' : 'fluid-ratio'
   end
 
-  # FIXME: this should be dependent on the outline,
-  # but we'll need a dynamically updated selector
-  # to pull that off in the UI
   def layout_options
-    PRESETS.to_h[:block].map { |l| l[1] }
+    PRESETS.map { |l| l[1] }
   end
 
   def image_options
@@ -118,7 +102,7 @@ class Section < ActiveRecord::Base
   end
 
   def default_segment_template
-    block? ? 'picture' : 'column'
+    'column'
   end
 
   def to_s
