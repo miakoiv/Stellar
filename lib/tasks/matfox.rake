@@ -52,11 +52,11 @@ PRODUCT_FILES = {
 
 ORDER_FILES = {
 
-  # TILNRO,VAIHE1,OMAVIITE
+  # TILNRO,VAIHE1,OMAVIITE,ASTILNRO
   order: {
     file: 'www-tilaus-utf8.csv',
     multiple: false,
-    headers: [:code, :status, :number],
+    headers: [:code, :status, nil, :number],
   },
 }
 
