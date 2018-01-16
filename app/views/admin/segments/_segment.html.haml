@@ -3,4 +3,4 @@
     .segment-content-wrap{class: [segment.alignment, segment.inset]}
       = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}
       = render partial: 'admin/segments/segment_overlay', object: segment, as: :segment
-      = render partial: 'admin/segments/segment_nav', object: segment, as: :segment
+  = render partial: 'admin/segments/segment_nav', object: segment, as: :segment

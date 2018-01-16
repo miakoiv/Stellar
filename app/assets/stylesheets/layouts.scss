@@ -168,6 +168,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    overflow: hidden;
   }
 }
 .segment-shape.shape-viewport { height: auto; }
@@ -204,6 +205,7 @@
 }
 
 .segment-content.category,
+.segment-content.product,
 .segment-content.promotion,
 .segment-content.department {
   .swiper-container {
