@@ -2,6 +2,13 @@
   %fieldset
     = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
     .form-group
+      = f.label col(Segment, :alignment)
+      .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+        - Segment.alignment_options.each do |title, alignment|
+          %label.btn.btn-default{class: segment.alignment == alignment && 'active'}
+            = f.radio_button_without_bootstrap :alignment, alignment
+            = title
+    .form-group
       = f.label col(Segment, :inset)
       .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
         - Segment.inset_options.each do |title, inset|

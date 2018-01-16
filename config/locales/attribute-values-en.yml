@@ -134,6 +134,10 @@ en:
           department_feature: department feature
           navigation_menu: navigation menu
           raw: ʜᴛᴍʟ snippet
+        alignment:
+          'align-top': top
+          'align-middle': middle
+          'align-bottom': bottom
         inset:
           'inset-none': 0
           'inset-half': ½

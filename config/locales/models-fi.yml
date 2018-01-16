@@ -400,6 +400,7 @@ fi:
         resource_id: Kohde
         template: Sisällön tyyppi
         shape: Lohkon muoto
+        alignment: Sisällön tasaus
         inset: Sisällön sisennys
         body: Leipäteksti
         header: Otsikko

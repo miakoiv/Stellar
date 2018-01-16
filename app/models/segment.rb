@@ -76,6 +76,10 @@ class Segment < ActiveRecord::Base
     SHAPES
   end
 
+  def self.alignment_options
+    ALIGNMENTS.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
+  end
+
   def self.grid_columns_options
     GRID_COLUMNS
   end

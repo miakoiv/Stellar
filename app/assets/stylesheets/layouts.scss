@@ -155,16 +155,14 @@
   line-height: 1.4; // default to sane value for summernote
 }
 
-/* Insets */
-.segment-content-wrap.inset-half { padding: $grid-gutter-width/2; }
-.segment-content-wrap.inset-full { padding: $grid-gutter-width; }
-
 /* Aspect ratios */
 .segment-shape.fixed-ratio {
   height: 0;
   overflow: hidden;
 
   .segment-content-wrap {
+    display: flex;
+    flex-flow: column nowrap;
     position: absolute;
     top: 0;
     right: 0;
@@ -180,6 +178,15 @@
 .segment-shape.shape-21-9 { padding-bottom: 42.85714%; }
 .segment-shape.shape-three-one { padding-bottom: 33.33333%; }
 .segment-shape.shape-four-one { padding-bottom: 25%; }
+
+/* Content alignment */
+.segment-content-wrap.align-top { justify-content: flex-start; }
+.segment-content-wrap.align-middle { justify-content: center; }
+.segment-content-wrap.align-bottom { justify-content: flex-end; }
+
+/* Insets */
+.segment-content-wrap.inset-half { padding: $grid-gutter-width/2; }
+.segment-content-wrap.inset-full { padding: $grid-gutter-width; }
 
 .segment-content .page-header { margin-top: 0; }
 .segment-content .placeholder {

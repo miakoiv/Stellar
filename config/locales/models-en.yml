@@ -400,6 +400,7 @@ en:
         resource_id: Target
         template: Content type
         shape: Block shape
+        alignment: Content alignment
         inset: Content inset
         body: Body text
         header: Headline
