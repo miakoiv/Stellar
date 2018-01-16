@@ -60,10 +60,7 @@ class Segment < ActiveRecord::Base
   before_validation :clear_unwanted_attributes
   after_save :schedule_content_update, if: -> (segment) { segment.body_changed? }
 
-  default_scope {
-    joins(:section)
-    .order('sections.priority, segments.priority')
-  }
+  default_scope { sorted }
   scope :with_content, -> { where(template: [1, 99]) }
 
 

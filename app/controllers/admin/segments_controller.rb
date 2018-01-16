@@ -23,11 +23,12 @@ class Admin::SegmentsController < ApplicationController
     respond_to :js
   end
 
-  # POST /admin/sections/1/segments.js
+  # POST /admin/columns/1/segments.js
+  # FIXME: drop the section association when possible
   def create
-    @section = Section.find(params[:section_id])
-    authorize_action_for @section, at: current_store
-    @segment = @section.segments.build(segment_params.merge(template: @section.default_segment_template, priority: @section.segments.count))
+    @column = Column.find(params[:column_id])
+    authorize_action_for @column, at: current_store
+    @segment = @column.segments.build(segment_params.merge(section: @column.section, template: 'text', priority: @column.segments.count))
 
     respond_to do |format|
       if @segment.save
@@ -75,7 +76,7 @@ class Admin::SegmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_segment
-      @segment = Segment.joins(:section).find(params[:id])
+      @segment = Segment.joins(:column).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
