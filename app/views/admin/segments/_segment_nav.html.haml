@@ -18,5 +18,5 @@
           %li{class: segment.template == template && 'active'}
             = link_to admin_segment_path(segment, params: {segment: {template: template}}), remote: true, method: :patch do
               = title
-    %li.drag-handle
+    %li.segment-handle
       %a{role: 'button'}= icon('arrows')

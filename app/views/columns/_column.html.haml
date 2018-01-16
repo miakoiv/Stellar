@@ -1,2 +1,2 @@
-.column[column]{class: [column.alignment, column.pivot? && 'pivot']}
+.column[column]{class: column_class(column)}
   = render partial: 'segments/segment', collection: column.segments

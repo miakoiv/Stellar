@@ -23,5 +23,16 @@
     opacity: 0.5
     revert: 200
   ).bind 'sortupdate', (e, ui) ->
-    $.post '#{reorder_admin_page_sections_path(@page)}',
-      {reorder: $(this).sortable('toArray')}
+    if $(e.target).hasClass 'section-list'
+      $.post '#{reorder_admin_page_sections_path(@page)}',
+        {reorder: $(this).sortable('toArray')}
+
+  $('.column').sortable(
+    connectWith: '.column'
+    items: '> .segment'
+    handle: '.segment-handle'
+    placeholder: 'sortable-placeholder'
+    forcePlaceholderSize: true
+    opacity: 0.5
+    revert: 200
+  )

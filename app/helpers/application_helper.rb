@@ -159,6 +159,10 @@ module ApplicationHelper
     css(backgroundColor: section.background_color)
   end
 
+  def column_class(column)
+    ['column', column.alignment, column.pivot? && 'pivot'].join ' '
+  end
+
   def segment_style(segment)
     css({
       minHeight: segment.min_height.present? ? "#{segment.min_height}em" : nil
