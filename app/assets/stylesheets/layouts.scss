@@ -27,14 +27,12 @@
 .column {
   display: flex;
   flex-flow: column nowrap;
+  float: none !important;
   max-height: 100%;
 }
-
-@media (min-width: $screen-sm-min) {
-  .column.align-top { justify-content: flex-start; }
-  .column.align-middle { justify-content: center; }
-  .column.align-bottom { justify-content: flex-end; }
-}
+.column.align-top { justify-content: flex-start; }
+.column.align-middle { justify-content: center; }
+.column.align-bottom { justify-content: flex-end; }
 
 /* Gutters */
 .section.gutters .section-content .column {
@@ -105,12 +103,26 @@
   .column { @extend .col-xs-12, .col-sm-4; }
 }
 .three-six-three {
-  .column:first-child { @extend .col-xs-12, .col-sm-6, .col-sm-push-3; }
-  .column:not(:first-child):not(:last-child) { @extend .col-xs-6, .col-sm-3, .col-sm-pull-6; }
-  .column:last-child { @extend .col-xs-6, .col-sm-3; }
+  .column:first-child { @extend .col-xs-12, .col-sm-6; }
+  .column:not(:first-child) { @extend .col-xs-6, .col-sm-3; }
 }
 .three-three-three-three {
   .column { @extend .col-xs-6, .col-sm-3; }
+}
+
+/* Reordering of columns based on viewport size */
+@media (max-width: $screen-xs-max) {
+  .four-eight {
+    .column:first-child { order: 2; }
+    .column:last-child { order: 1; }
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .three-six-three {
+    .column:first-child { order: 2; }
+    .column:nth-child(2) { order: 1; }
+    .column:last-child { order: 3; }
+  }
 }
 
 
