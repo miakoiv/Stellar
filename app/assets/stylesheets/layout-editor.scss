@@ -13,6 +13,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  min-height: 40px;
   border: 0;
   border-radius: 0;
   background-color: darken($brand-primary, 15%);
@@ -24,6 +25,7 @@
     border-radius: 0;
   }
   .navbar-nav > li > a {
+    padding: 10px 15px;
     color: lighten($brand-primary, 35%);
     &:hover, &:focus { color: #fff; }
   }
@@ -36,10 +38,23 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: 1;
+    min-height: 40px;
+    margin-bottom: 0;
     border: 0;
     border-radius: 0;
-    background-color: darken($brand-warning, 15%);
+    background-color: darken($brand-warning, 25%);
+
+    .dropdown-menu {
+      width: 320px;
+      padding: 15px;
+      border: 0;
+      border-radius: 0;
+    }
+    .navbar-nav > li > a {
+      padding: 10px 15px;
+      color: lighten($brand-warning, 10%);
+      &:hover, &:focus { color: #fff; }
+    }
   }
 }
 .section-list-item .column:hover {
@@ -75,6 +90,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    min-height: 40px;
     border: 0;
     border-radius: 0;
     background-color: darken($brand-info, 15%);
@@ -87,7 +103,8 @@
       form { padding: 15px; }
     }
     .navbar-nav > li > a {
-      color: lighten($brand-info, 35%);
+      padding: 10px 15px;
+      color: lighten($brand-info, 25%);
       &:hover, &:focus { color: #fff; }
     }
   }
