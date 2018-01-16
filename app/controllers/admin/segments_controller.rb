@@ -2,10 +2,11 @@
 
 class Admin::SegmentsController < ApplicationController
 
+  include Reorderer
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :update, :destroy, :switch]
+  before_action :set_segment, only: [:show, :edit, :update, :destroy]
 
-  authority_actions switch: 'update'
+  authority_actions reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -50,6 +51,20 @@ class Admin::SegmentsController < ApplicationController
         format.js { render json: @segment.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # POST /admin/columns/1/segments/reorder
+  # FIXME: drop the section association when possible
+  def reorder
+    @column = Column.find(params[:column_id])
+    authorize_action_for @column, at: current_store
+
+    ActiveRecord::Base.transaction do
+      reordered_items.each_with_index do |item, index|
+        item.update(section: @column.section, column: @column, priority: index)
+      end
+    end
+    render nothing: true
   end
 
   # DELETE /admin/segments/1.js

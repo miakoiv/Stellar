@@ -1,4 +1,5 @@
 $('.dropdown.open > a').dropdown('toggle');
 $("#{j render partial: 'admin/sections/list_item', object: @section, as: :section}").appendTo('#section-list');
+$('##{dom_id(@section)}').initialize();
 $('#section-list').sortable('refresh');
 viewportUpdate();
