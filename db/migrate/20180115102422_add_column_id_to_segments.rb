@@ -9,6 +9,7 @@ class AddColumnIdToSegments < ActiveRecord::Migration
           alignment: segment.alignment,
           priority: segment.priority
         )
+        segment.update_columns(priority: 0)
         column.segments << segment
       end
     end
