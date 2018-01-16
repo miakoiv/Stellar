@@ -151,6 +151,10 @@
 /*
  * Segment content styles
  */
+.segment-content-wrap {
+  display: flex;
+  flex-flow: column nowrap;
+}
 .segment-content {
   line-height: 1.4; // default to sane value for summernote
 }
@@ -161,8 +165,6 @@
   overflow: hidden;
 
   .segment-content-wrap {
-    display: flex;
-    flex-flow: column nowrap;
     position: absolute;
     top: 0;
     right: 0;
@@ -201,7 +203,7 @@
   }
 }
 .section-content .placeholder {
-  min-height: $navbar-height;
+  min-height: 10em;
 }
 
 .segment-content.category,
