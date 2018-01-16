@@ -1,6 +1,3 @@
 - page.sections.each do |section|
-  %section.section{class: section.shape, style: section_style(section)}
-    .row
-      .section-content{class: [section.layout, section.fixed_or_fluid, section.shape, section.width]}
-        .row
-          = render partial: 'segments/segment', collection: section.segments
+  %section.section{class: section.gutter}
+    = render partial: 'sections/content', object: section, as: :section
