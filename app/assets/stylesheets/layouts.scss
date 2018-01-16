@@ -173,6 +173,7 @@
 
 /* Aspect ratios */
 .segment-shape.fixed-ratio {
+  position: relative;
   height: 0;
   overflow: hidden;
 
