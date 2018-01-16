@@ -141,6 +141,8 @@ en:
         product_scope: Product sorting
         filtering: Product filtering
         view_mode: Default view
+      column:
+        alignment: Vertical alignment
       component_entry:
         product_id: Product
         component_id: Component
@@ -397,7 +399,6 @@ en:
       segment:
         resource_id: Target
         template: Content type
-        alignment: Vertical alignment
         shape: Block shape
         inset: Content inset
         body: Body text

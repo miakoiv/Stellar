@@ -20,7 +20,7 @@ class Column < ActiveRecord::Base
 
   #---
   def self.alignment_options
-    ALIGNMENTS.map { |a| [Column.human_attribute_value(:align, a), a] }
+    ALIGNMENTS.map { |a| [Column.human_attribute_value(:alignment, a), a] }
   end
 
   #---

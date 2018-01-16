@@ -141,6 +141,8 @@ fi:
         product_scope: Tuotteiden järjestys
         filtering: Tuotteiden suodatus
         view_mode: Oletusnäkymä
+      column:
+        alignment: Pystytasaus
       component_entry:
         product_id: Tuote
         component_id: Komponentti
@@ -397,7 +399,6 @@ fi:
       segment:
         resource_id: Kohde
         template: Sisällön tyyppi
-        alignment: Pystytasaus
         shape: Lohkon muoto
         inset: Sisällön sisennys
         body: Leipäteksti

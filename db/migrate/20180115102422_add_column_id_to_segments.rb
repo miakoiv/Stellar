@@ -6,7 +6,7 @@ class AddColumnIdToSegments < ActiveRecord::Migration
     Section.find_each(batch_size: 25) do |section|
       section.segments.each do |segment|
         column = section.columns.create(
-          align: segment.alignment,
+          alignment: segment.alignment,
           priority: segment.priority
         )
         column.segments << segment

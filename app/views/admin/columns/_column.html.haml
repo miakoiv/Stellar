@@ -1,3 +1,3 @@
-.column{class: [column.align, column.pivot? && 'pivot']}
+.column{class: [column.alignment, column.pivot? && 'pivot']}
   = render partial: 'admin/segments/segment', collection: column.segments
   = render partial: 'admin/columns/column_nav', object: column, as: :column
