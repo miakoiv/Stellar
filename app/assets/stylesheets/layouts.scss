@@ -32,7 +32,7 @@
 
 @media (min-width: $screen-sm-min) {
   .column.align-top { justify-content: flex-start; }
-  .column.align-center { justify-content: center; }
+  .column.align-middle { justify-content: center; }
   .column.align-bottom { justify-content: flex-end; }
 }
 
