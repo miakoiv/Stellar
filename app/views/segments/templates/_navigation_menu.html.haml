@@ -1,9 +1,11 @@
+- resource = navigation_menu.resource
+
 .segment-content.navigation_menu{id: segment_content_id(navigation_menu, context)}
-  - if navigation_menu.resource.present? && navigation_menu.resource.is_a?(Page)
+  - if resource.present? && resource.is_a?(Page)
     %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
-      .navmenu-title= navigation_menu.resource
+      .navmenu-title= resource
       %ul.nav.navmenu-nav
-        - navigation_menu.resource.children.live.each do |page|
-          = render partial: "pages/purposes/#{page.purpose}", object: page, locals: {navmenu: true}
+        - resource.children.live.each do |page|
+          = render partial: page.to_partial_path, object: page, locals: {navmenu: true}
   - else
     = render partial: 'segments/placeholders/navigation_menu'
