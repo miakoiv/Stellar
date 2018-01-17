@@ -32,9 +32,10 @@
 }
 .section-list-item .column {
   position: relative;
-  outline: 1px solid rgba($brand-warning, 0.333);
+  outline: 1px solid rgba($gray-base, 0.1667);
 
   .column-nav {
+    display: none;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -42,20 +43,13 @@
     margin-bottom: 0;
     border: 0;
     border-radius: 0;
-    background-color: darken($brand-warning, 25%);
 
-    .dropdown-menu {
-      width: 320px;
-      padding: 15px;
-      border: 0;
-      border-radius: 0;
-    }
-    .navbar-nav > li > a {
-      padding: 10px 15px;
-      color: lighten($brand-warning, 10%);
-      &:hover, &:focus { color: #fff; }
-    }
+    .navbar-nav > li { float: none; }
+    .navbar-nav > li > a { padding: 10px 15px; }
   }
+}
+.section-list-item .column:hover {
+  .column-nav { display: block; }
 }
 .section-list-item .segment-content {
   position: relative;
