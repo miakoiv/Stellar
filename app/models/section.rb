@@ -28,7 +28,7 @@ class Section < ActiveRecord::Base
 
   # Available content widths defined in layouts.css.
   WIDTHS = %w{
-    jumbotron spread col-12 col-10 col-8 col-6
+    spread col-12 col-10 col-8 col-6
   }.freeze
 
   #---
