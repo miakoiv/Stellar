@@ -56,10 +56,6 @@ class Section < ActiveRecord::Base
     width == 'spread'
   end
 
-  def jumbotron?
-    width == 'jumbotron'
-  end
-
   def gutter
     gutters? ? 'gutters' : 'no-gutters'
   end
