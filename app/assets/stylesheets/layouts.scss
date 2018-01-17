@@ -63,9 +63,11 @@
 }
 
 /* 12 columns without gutters spread to full width in mobile viewports */
-.section.no-gutters .section-content.col-12 > .row {
-  margin-left: $grid-gutter-width/-2;
-  margin-right: $grid-gutter-width/-2;
+@media (max-width: $screen-xs-max) {
+  .section.no-gutters .section-content.col-12 > .row {
+    margin-left: $grid-gutter-width/-2;
+    margin-right: $grid-gutter-width/-2;
+  }
 }
 
 
