@@ -76,16 +76,6 @@ class Admin::SegmentsController < ApplicationController
     end
   end
 
-  # POST /admin/segments/1/switch.js
-  def switch
-    authorize_action_for @segment, at: current_store
-    @other = Segment.joins(:section).find(params[:other_id])
-    @segment.switch(@other)
-    @sections = [@segment.section, @other.section].uniq
-
-    respond_to :js
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_segment
