@@ -1,4 +1,4 @@
-.segment[segment]{style: segment_style(segment)}
+.segment[segment]
   .segment-shape{class: [segment.shape, segment.fixed_ratio? && 'fixed-ratio']}
     .segment-content-wrap{class: [segment.alignment, segment.inset]}
       = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}

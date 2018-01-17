@@ -219,6 +219,10 @@
   min-height: 10em;
 }
 
+.segment-content.empty {
+  min-height: 40px;
+}
+
 .segment-content.category,
 .segment-content.product,
 .segment-content.promotion,
@@ -266,6 +270,7 @@
 
 .segment-content.map {
   height: 100%;
+  min-height: 40px;
 
   .map-container {
     width: 100%;
