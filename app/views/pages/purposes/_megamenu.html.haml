@@ -5,7 +5,8 @@
         = megamenu
         %span.caret
       %ul.nav.navmenu-nav
-        = render partial: megamenu.children.live, locals: {navmenu: true}
+        - megamenu.children.live.each do |child|
+          = render partial: child.to_partial_path, object: child, locals: {navmenu: true}
   - else
     %li.dropdown.mega-dropdown
       = dropdown_toggle do
@@ -14,4 +15,5 @@
       %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
         .container
           .row
-            = render partial: megamenu.children.live, locals: {navmenu: false}
+            - megamenu.children.live.each do |child|
+              = render partial: child.to_partial_path, object: child, locals: {navmenu: false}

@@ -5,11 +5,13 @@
         = dropdown
         %span.caret
       %ul.nav.navmenu-nav
-        = render partial: dropdown.children.live, locals: {navmenu: true}
+        - dropdown.children.live.each do |child|
+          = render partial: child.to_partial_path, object: child, locals: {navmenu: true}
   - else
     %li.dropdown
       = dropdown_toggle do
         = dropdown
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
-        = render partial: dropdown.children.live, locals: {navmenu: false}
+        - dropdown.children.live.each do |child|
+          = render partial: child.to_partial_path, object: child, locals: {navmenu: false}
