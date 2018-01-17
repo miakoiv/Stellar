@@ -2,7 +2,10 @@
   = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
 
-= f.text_field :url, placeholder: 'http://'
+%fieldset
+  = f.form_group do
+    = f.check_box :picture_cover
+  = f.text_field :url, placeholder: 'http://'
 
 :coffee
   $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->

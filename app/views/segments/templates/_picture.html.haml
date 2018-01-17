@@ -1,16 +1,17 @@
 - has_images = picture.images.any?
 - swiper = picture.images.count > 1
+- cover = picture.picture_cover && 'picture-cover'
 
 .segment-content.picture{id: segment_content_id(picture, context)}
   - if has_images
     - if swiper
-      .swiper-container
+      .swiper-container{class: cover}
         .swiper-wrapper
           - picture.images.each do |image|
             .swiper-slide
               = image_variant_tag image, :lightbox
     - else
-      .image-container
+      .image-container{class: cover}
         - if picture.url.present?
           = link_to picture.url do
             = image_variant_tag picture.cover_image, :lightbox
