@@ -13,7 +13,8 @@ $panel.initialize();
 - if @segment.edit_in_place?
   $panel.appendTo($('body'));
   $panel.offset($content.offset());
-  $panel.addClass('#{@segment.column.section.width}');
+  - if @segment.jumbotron?
+    $panel.addClass('jumbotron');
   $panel.css({'width': $content.css('width')});
   $panel.show();
 - else
