@@ -4,5 +4,8 @@
       %li{class: column.alignment == alignment && 'active'}
         = link_to admin_column_path(column, params: {column: {alignment: alignment}}), remote: true, method: :patch do
           = icon(icon)
+    %li{class: column.pivot? && 'active'}
+      = link_to admin_column_path(column, params: {column: {pivot: !column.pivot}}), remote: true, method: :patch do
+        = icon('mobile', class: 'fa-lg')
     %li
       = link_to icon('plus'), admin_column_segments_path(column), remote: true, method: :post
