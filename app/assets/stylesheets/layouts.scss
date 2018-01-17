@@ -184,6 +184,12 @@
   display: flex;
   flex-flow: column nowrap;
 }
+.segment-content-wrap.jumbotron {
+  padding: inherit;
+  border-radius: inherit;
+  margin: inherit;
+  background-color: inherit;
+}
 .segment-content {
   line-height: 1.4; // default to sane value for summernote
 }

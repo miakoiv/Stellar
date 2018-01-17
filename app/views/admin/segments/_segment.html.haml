@@ -1,6 +1,6 @@
 .segment[segment]
   .segment-shape{class: [segment.shape, segment.fixed_ratio? && 'fixed-ratio']}
-    .segment-content-wrap{class: [segment.alignment, segment.inset]}
+    .segment-content-wrap{class: [segment.alignment, segment.inset, segment.jumbotron? && 'jumbotron']}
       = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}
       = render partial: 'admin/segments/segment_overlay', object: segment, as: :segment
   = render partial: 'admin/segments/segment_nav', object: segment, as: :segment

@@ -2,11 +2,6 @@
   = render partial: 'sections/background_images', object: section, as: :section
   - if section.spread?
     = render partial: 'admin/sections/content', object: section, as: :section
-  - elsif section.jumbotron?
-    .jumbotron
-      .container
-        .row
-          = render partial: 'admin/sections/content', object: section, as: :section
   - else
     .container
       .row
