@@ -13,7 +13,7 @@ $panel.initialize();
 - if @segment.edit_in_place?
   $panel.appendTo($('body'));
   $panel.offset($content.offset());
-  $panel.addClass('#{@segment.section.width}');
+  $panel.addClass('#{@segment.column.section.width}');
   $panel.css({'width': $content.css('width')});
   $panel.show();
 - else
