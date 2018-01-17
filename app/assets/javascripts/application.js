@@ -18,8 +18,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
-//= require jquery-ui/widgets/draggable
-//= require jquery-ui/widgets/droppable
 //= require jquery-ui/effect.all
 //= require jquery.scrollTo
 //= require jquery.sticky-kit
