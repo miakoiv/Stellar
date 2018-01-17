@@ -94,6 +94,9 @@
       min-width: 0;
     }
   }
+  .column.pivot.align-top { align-items: flex-start }
+  .column.pivot.align-middle { align-items: center; }
+  .column.pivot.align-bottom { align-items: flex-end; }
 }
 
 
