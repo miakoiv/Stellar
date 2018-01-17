@@ -1,6 +1,10 @@
-.segment-content.department_feature{id: segment_content_id(department_feature, context), style: background_image_style(department_feature.cover_image)}
-  - if department_feature.resource.present?
-    = link_to show_department_path(department_feature.resource), class: 'foreground' do
-      = image_variant_tag department_feature.foreground_image, :lightbox
+- resource = department_feature.resource
+- foreground = department_feature.foreground_image
+- background = department_feature.cover_image
+
+.segment-content.department_feature{id: segment_content_id(department_feature, context), style: background_image_style(background)}
+  - if resource.present? && resource.is_a?(Department) && foreground.present?
+    = link_to show_department_path(resource), class: 'foreground' do
+      = image_variant_tag foreground, :lightbox
   - else
     = render partial: 'segments/placeholders/department_feature'

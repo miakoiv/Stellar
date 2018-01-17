@@ -1,6 +1,10 @@
-.segment-content.category_feature{id: segment_content_id(category_feature, context), style: background_image_style(category_feature.cover_image)}
-  - if category_feature.resource.present?
-    = link_to show_category_path(category_feature.resource), class: 'foreground' do
-      = image_variant_tag category_feature.foreground_image, :lightbox
+- resource = category_feature.resource
+- foreground = category_feature.foreground_image
+- background = category_feature.cover_image
+
+.segment-content.category_feature{id: segment_content_id(category_feature, context), style: background_image_style(background)}
+  - if resource.present? && resource.is_a?(Category) && foreground.present?
+    = link_to show_category_path(resource), class: 'foreground' do
+      = image_variant_tag foreground, :lightbox
   - else
     = render partial: 'segments/placeholders/category_feature'

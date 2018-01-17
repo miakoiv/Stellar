@@ -1,5 +1,5 @@
 .segment-content.navigation_menu{id: segment_content_id(navigation_menu, context)}
-  - if navigation_menu.resource.present?
+  - if navigation_menu.resource.present? && navigation_menu.resource.is_a?(Page)
     %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
       .navmenu-title= navigation_menu.resource
       %ul.nav.navmenu-nav

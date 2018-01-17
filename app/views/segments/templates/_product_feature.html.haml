@@ -1,6 +1,10 @@
-.segment-content.product_feature{id: segment_content_id(product_feature, context), style: background_image_style(product_feature.cover_image)}
-  - if product_feature.resource.present?
-    = link_to show_product_path(product_feature.resource), class: 'foreground' do
-      = image_variant_tag product_feature.foreground_image, :lightbox
+- resource = product_feature.resource
+- foreground = product_feature.foreground_image
+- background = product_feature.cover_image
+
+.segment-content.product_feature{id: segment_content_id(product_feature, context), style: background_image_style(background)}
+  - if resource.present? && resource.is_a?(Product) && foreground.present?
+    = link_to show_product_path(resource), class: 'foreground' do
+      = image_variant_tag foreground, :lightbox
   - else
     = render partial: 'segments/placeholders/product_feature'

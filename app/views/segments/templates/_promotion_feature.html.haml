@@ -1,4 +1,10 @@
-.segment-content.promotion_feature{id: segment_content_id(promotion_feature, context), style: background_image_style(promotion_feature.cover_image)}
-  - if promotion_feature.resource.present?
-    = link_to show_promotion_path(promotion_feature.resource), class: 'foreground' do
-      = image_variant_tag promotion_feature.foreground_image, :lightbox
+- resource = promotion_feature.resource
+- foreground = promotion_feature.foreground_image
+- background = promotion_feature.cover_image
+
+.segment-content.promotion_feature{id: segment_content_id(promotion_feature, context), style: background_image_style(background)}
+  - if resource.present? && resource.is_a?(Promotion) && foreground.present?
+    = link_to show_promotion_path(resource), class: 'foreground' do
+      = image_variant_tag foreground, :lightbox
+  - else
+    = render partial: 'segments/placeholders/promotion_feature'
