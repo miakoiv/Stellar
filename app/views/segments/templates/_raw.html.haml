@@ -1,2 +1,5 @@
 .segment-content.raw
-  = raw.body.html_safe if raw.body.present?
+  - if raw.body.present?
+    = raw.body.html_safe
+  - else
+    = render partial: 'segments/placeholders/raw'

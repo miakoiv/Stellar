@@ -2,3 +2,5 @@
   - if category_feature.resource.present?
     = link_to show_category_path(category_feature.resource), class: 'foreground' do
       = image_variant_tag category_feature.foreground_image, :lightbox
+  - else
+    = render partial: 'segments/placeholders/category_feature'
