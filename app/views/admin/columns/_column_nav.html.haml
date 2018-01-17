@@ -1,10 +1,8 @@
 %nav.column-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav
-    %li.dropup
-      = dropdown_toggle do
-        = icon('paint-brush')
-      %ul.dropdown-menu
-        %li
-          = render partial: 'admin/columns/settings', object: column, as: :column
+    - Column.alignment_options.each do |icon, alignment|
+      %li{class: column.alignment == alignment && 'active'}
+        = link_to admin_column_path(column, params: {column: {alignment: alignment}}), remote: true, method: :patch do
+          = icon(icon)
     %li
       = link_to icon('plus'), admin_column_segments_path(column), remote: true, method: :post

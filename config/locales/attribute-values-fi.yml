@@ -5,11 +5,6 @@ fi:
         view_mode:
           'product-grid': ruudukko
           'product-list': lista
-      column:
-        alignment:
-          'align-top': ylös
-          'align-middle': keskelle
-          'align-bottom': alas
       group:
         appearance:
           default: harmaa
