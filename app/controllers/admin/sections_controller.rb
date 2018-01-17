@@ -57,12 +57,11 @@ class Admin::SectionsController < ApplicationController
     end
 
     # Create columns and segments according to given layout preset.
-    # FIXME: drop the section association when possible
     def create_columns!
       columns = params[:columns].to_i
       columns.times do |i|
         column = @section.columns.create(priority: i)
-        column.segments.create(section: @section, template: 'text')
+        column.segments.create(template: 'text')
       end
     end
 

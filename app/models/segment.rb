@@ -53,14 +53,16 @@ class Segment < ActiveRecord::Base
   }
 
   #---
-  belongs_to :section, touch: true
   belongs_to :column, touch: true
   belongs_to :resource, polymorphic: true
 
   before_validation :clear_unwanted_attributes
   after_save :schedule_content_update, if: -> (segment) { segment.body_changed? }
 
-  default_scope { sorted }
+  default_scope {
+    joins(:column)
+    .order('columns.priority, segments.priority')
+  }
   scope :with_content, -> { where(template: [1, 99]) }
 
 

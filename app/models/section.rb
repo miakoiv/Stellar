@@ -34,7 +34,7 @@ class Section < ActiveRecord::Base
   #---
   belongs_to :page, touch: true
   has_many :columns, dependent: :destroy
-  has_many :segments, dependent: :destroy
+  has_many :segments, through: :columns
 
   default_scope { sorted }
 

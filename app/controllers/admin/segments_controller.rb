@@ -25,11 +25,10 @@ class Admin::SegmentsController < ApplicationController
   end
 
   # POST /admin/columns/1/segments.js
-  # FIXME: drop the section association when possible
   def create
     @column = Column.find(params[:column_id])
     authorize_action_for @column, at: current_store
-    @segment = @column.segments.build(segment_params.merge(section: @column.section, template: 'text', priority: @column.segments.count))
+    @segment = @column.segments.build(segment_params.merge(template: 'text', priority: @column.segments.count))
 
     respond_to do |format|
       if @segment.save
@@ -54,14 +53,13 @@ class Admin::SegmentsController < ApplicationController
   end
 
   # POST /admin/columns/1/segments/reorder
-  # FIXME: drop the section association when possible
   def reorder
     @column = Column.find(params[:column_id])
     authorize_action_for @column, at: current_store
 
     ActiveRecord::Base.transaction do
       reordered_items.each_with_index do |item, index|
-        item.update(section: @column.section, column: @column, priority: index)
+        item.update(column: @column, priority: index)
       end
     end
     render nothing: true

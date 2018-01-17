@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115131327) do
+ActiveRecord::Schema.define(version: 20180117073350) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20180115131327) do
 
   create_table "columns", force: :cascade do |t|
     t.integer  "section_id", limit: 4,                         null: false
-    t.string   "align",      limit: 255, default: "align-top", null: false
+    t.string   "alignment",  limit: 255, default: "align-top", null: false
     t.boolean  "pivot",                  default: false,       null: false
     t.integer  "priority",   limit: 4,   default: 0,           null: false
     t.datetime "created_at",                                   null: false
@@ -624,7 +624,6 @@ ActiveRecord::Schema.define(version: 20180115131327) do
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
-    t.integer  "section_id",    limit: 4,                            null: false
     t.integer  "column_id",     limit: 4,                            null: false
     t.integer  "resource_id",   limit: 4
     t.string   "resource_type", limit: 255
@@ -642,7 +641,6 @@ ActiveRecord::Schema.define(version: 20180115131327) do
 
   add_index "segments", ["column_id"], name: "index_segments_on_column_id", using: :btree
   add_index "segments", ["resource_type", "resource_id"], name: "index_segments_on_resource_type_and_resource_id", using: :btree
-  add_index "segments", ["section_id"], name: "index_segments_on_section_id", using: :btree
 
   create_table "shipments", force: :cascade do |t|
     t.integer  "order_id",           limit: 4,     null: false
