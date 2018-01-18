@@ -279,6 +279,8 @@
   a { display: block; }
   .image-container,
   .swiper-container {
+    display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
     height: 100%;
@@ -286,34 +288,46 @@
   .image-container img,
   .swiper-container img {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: scale-down;
+    max-width: 100%;
+    height: auto;
   }
   .image-container.sizing-contain img,
   .swiper-container.sizing-contain img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
   .image-container.sizing-cover img,
   .swiper-container.sizing-cover img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 }
 .segment-content-wrap.align-top .segment-content.picture {
-  .image-container img,
-  .swiper-container img {
+  .image-container.sizing-original { align-items: flex-start;}
+  .image-container.sizing-contain img,
+  .swiper-container.sizing-contain img,
+  .image-container.sizing-cover img,
+  .swiper-container.sizing-cover img {
     object-position: top;
   }
 }
 .segment-content-wrap.align-middle .segment-content.picture {
-  .image-container img,
-  .swiper-container img {
+  .image-container.sizing-original { align-items: center;}
+  .image-container.sizing-contain img,
+  .swiper-container.sizing-contain img,
+  .image-container.sizing-cover img,
+  .swiper-container.sizing-cover img {
     object-position: center;
   }
 }
 .segment-content-wrap.align-bottom .segment-content.picture {
-  .image-container img,
-  .swiper-container img {
+  .image-container.sizing-original { align-items: flex-end;}
+  .image-container.sizing-contain img,
+  .swiper-container.sizing-contain img,
+  .image-container.sizing-cover img,
+  .swiper-container.sizing-cover img {
     object-position: bottom;
   }
 }
