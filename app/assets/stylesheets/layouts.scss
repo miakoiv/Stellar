@@ -288,10 +288,14 @@
     display: block;
     width: 100%;
     height: 100%;
+    object-fit: scale-down;
+  }
+  .image-container.sizing-contain img,
+  .swiper-container.sizing-contain img {
     object-fit: contain;
   }
-  .image-container.picture-cover img,
-  .swiper-container.picture-cover img {
+  .image-container.sizing-cover img,
+  .swiper-container.sizing-cover img {
     object-fit: cover;
   }
 }

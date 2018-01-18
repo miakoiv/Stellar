@@ -88,10 +88,10 @@ class Admin::SegmentsController < ApplicationController
         :resource_id, :resource_type,
         :template, :alignment, :shape, :inset,
         :body, :header, :subhead, :url,
-        :min_height, :grid_columns, :masonry,
+        :min_height, :grid_columns, :masonry, :image_sizing,
         :max_items, :product_scope, :show_more,
         :map_location, :map_zoom,
-        :inverse, :jumbotron, :picture_cover
+        :inverse, :jumbotron
       )
     end
 end

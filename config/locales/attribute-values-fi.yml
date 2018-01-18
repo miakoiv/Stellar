@@ -133,6 +133,10 @@ fi:
           'align-top': ylös
           'align-middle': keskelle
           'align-bottom': alas
+        image_sizing:
+          'sizing-original': alkuperäinen
+          'sizing-contain': sovita
+          'sizing-cover': täytä
         inset:
           'inset-none': 0
           'inset-half': ½

@@ -3,8 +3,13 @@
   = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
 
 %fieldset
-  = f.form_group do
-    = f.check_box :picture_cover
+  .form-group
+    = f.label col(Segment, :image_sizing)
+    .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+      - Segment.image_sizing_options.each do |title, size|
+        %label.btn.btn-default{class: @segment.image_sizing == size && 'active'}
+          = f.radio_button_without_bootstrap :image_sizing, size
+          = title
   = f.text_field :url, placeholder: 'http://'
 
 :coffee

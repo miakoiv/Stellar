@@ -133,6 +133,10 @@ en:
           'align-top': top
           'align-middle': middle
           'align-bottom': bottom
+        image_sizing:
+          'sizing-original': original
+          'sizing-contain': fit
+          'sizing-cover': fill
         inset:
           'inset-none': 0
           'inset-half': ½

@@ -4,7 +4,7 @@ class Segment < ActiveRecord::Base
 
   store :metadata, accessors: [
     :header, :subhead, :url,
-    :min_height, :grid_columns, :masonry,
+    :min_height, :grid_columns, :masonry, :image_sizing,
     :max_items, :show_more, :product_scope,
     :map_location, :map_zoom,
     :inverse, :jumbotron,
@@ -30,6 +30,8 @@ class Segment < ActiveRecord::Base
   ].freeze
 
   GRID_COLUMNS = %w{1 2 3 4 6 12}.freeze
+
+  IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
 
   INSETS = %w{inset-none inset-half inset-full}.freeze
 
@@ -82,6 +84,10 @@ class Segment < ActiveRecord::Base
 
   def self.grid_columns_options
     GRID_COLUMNS
+  end
+
+  def self.image_sizing_options
+    IMAGE_SIZES.map { |s| [Segment.human_attribute_value(:image_sizing, s), s] }
   end
 
   def self.inset_options

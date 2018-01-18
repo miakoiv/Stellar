@@ -409,7 +409,7 @@ fi:
         grid_columns: Sarakkeita
         inverse: Käänteiset värit
         jumbotron: Jättikoko
-        picture_cover: Kuva täyttää laatikon
+        image_sizing: Kuvan koko
         masonry: Tiivistä rivit
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön
