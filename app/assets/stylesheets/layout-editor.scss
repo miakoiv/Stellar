@@ -26,16 +26,20 @@
   border-radius: 0;
   background-color: darken($brand-primary, 15%);
 
+  .navbar-nav {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  .navbar-nav > li > a {
+    padding: 10px 11px;
+    color: lighten($brand-primary, 35%);
+    &:hover, &:focus { color: #fff; }
+  }
   .dropdown-menu {
     width: 320px;
     padding: 15px;
     border: 0;
     border-radius: 0;
-  }
-  .navbar-nav > li > a {
-    padding: 10px 15px;
-    color: lighten($brand-primary, 35%);
-    &:hover, &:focus { color: #fff; }
   }
 }
 .section-list-item .column {
@@ -62,8 +66,12 @@
     opacity: 0;
     transition: all 0.4s ease-in-out 0s;
 
-    .navbar-nav > li { float: none; }
-    .navbar-nav > li > a { padding: 10px 15px; }
+    .navbar-nav {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-end;
+    }
+    .navbar-nav > li > a { padding: 10px 11px; }
   }
 }
 .section-list-item .column:hover {
@@ -116,18 +124,24 @@
     transition: all 0.4s ease-in-out 0s;
     background-color: darken($brand-info, 15%);
 
+    .navbar-nav {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-end;
+    }
+    .navbar-nav > li > a {
+      padding: 10px 11px;
+      color: lighten($brand-info, 25%);
+      &:hover, &:focus { color: #fff; }
+    }
     .dropdown-menu {
-      width: 280px;
+      width: 260px;
       border: 0;
       border-radius: 0;
 
       form { padding: 15px; }
     }
-    .navbar-nav > li > a {
-      padding: 10px 15px;
-      color: lighten($brand-info, 25%);
-      &:hover, &:focus { color: #fff; }
-    }
+    .dropdown-menu-right { width: 180px; }
   }
 }
 .section-list-item .segment:hover {
