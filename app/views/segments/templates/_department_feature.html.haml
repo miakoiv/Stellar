@@ -2,7 +2,7 @@
 - foreground = department_feature.foreground_image
 - background = department_feature.cover_image
 
-.segment-content.department_feature{id: segment_content_id(department_feature, context), style: background_image_style(background)}
+.segment-content.department_feature{id: segment_content_id(department_feature, context), style: css(background_image_style(background))}
   - if resource.present? && resource.is_a?(Department) && foreground.present?
     = link_to show_department_path(resource), class: 'foreground' do
       = image_variant_tag foreground, :lightbox

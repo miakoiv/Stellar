@@ -115,13 +115,6 @@ module ApplicationHelper
     end
   end
 
-  # Generates a segment content id in a specific context. Scripts that
-  # generate segment content may use this method to target the segment
-  # content either in layout or the layout panel.
-  def segment_content_id(segment, context)
-    [context, segment.template, dom_id(segment)].join '_'
-  end
-
   def branding(object)
     image_variant_tag(object.cover_image, :technical) +
       content_tag(:span, object.to_s)
@@ -143,6 +136,17 @@ module ApplicationHelper
     end
   end
 
+  # Generates a segment content id in a specific context. Scripts that
+  # generate segment content may use this method to target the segment
+  # content either in layout or the layout panel.
+  def segment_content_id(segment, context)
+    [context, segment.template, dom_id(segment)].join '_'
+  end
+
+  def column_class(column)
+    ['column', column.alignment, column.pivot? && 'pivot'].join ' '
+  end
+
   # Converts given styles hash to a string of CSS rules.
   def css(styles)
     styles.reject { |_, rule| rule.nil? }.map { |selector, rule|
@@ -152,20 +156,20 @@ module ApplicationHelper
 
   def background_image_style(image, size = :lightbox)
     return nil if image.nil?
-    css(backgroundImage: "url(#{image.url(size, timestamp: false)})")
+    {
+      backgroundImage: "url(#{image.url(size, timestamp: false)})"
+    }
   end
 
-  def section_style(section)
-    css(backgroundColor: section.background_color)
-  end
-
-  def column_class(column)
-    ['column', column.alignment, column.pivot? && 'pivot'].join ' '
+  def background_color_style(element)
+    {
+      backgroundColor: element.background_color.presence
+    }
   end
 
   def segment_style(segment)
-    css({
+    {
       minHeight: segment.min_height.present? ? "#{segment.min_height}em" : nil
-    })
+    }
   end
 end

@@ -1,7 +1,7 @@
 - if section.fixed_background?
-  .section-bg-container.fixed-background{style: [section_style(section), background_image_style(section.cover_image)].join(';')}
+  .section-bg-container.fixed-background{style: css(background_color_style(section).merge(background_image_style(section.cover_image)))}
 - else
-  .section-bg-container{style: section_style(section)}
+  .section-bg-container{style: css(background_color_style(section))}
     - if section.images.any?
       - if section.images.count > 1
         .swiper-container

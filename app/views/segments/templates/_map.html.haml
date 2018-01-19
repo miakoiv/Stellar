@@ -1,8 +1,8 @@
 - has_map = map.map_location.present?
 
-.segment-content.map{id: segment_content_id(map, context), style: segment_style(map)}
+.segment-content.map{id: segment_content_id(map, context), style: css(segment_style(map))}
   - if has_map
-    .map-container{style: segment_style(map), data: {location: map.map_location, zoom: map.map_zoom || 10}}
+    .map-container{style: css(segment_style(map)), data: {location: map.map_location, zoom: map.map_zoom || 10}}
   - else
     = render partial: 'segments/placeholders/map'
 
