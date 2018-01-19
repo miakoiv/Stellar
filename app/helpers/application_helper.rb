@@ -155,7 +155,7 @@ module ApplicationHelper
   end
 
   def background_image_style(image, size = :lightbox)
-    return nil if image.nil?
+    return {} if image.nil?
     {
       backgroundImage: "url(#{image.url(size, timestamp: false)})"
     }
