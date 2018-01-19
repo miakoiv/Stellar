@@ -3,6 +3,7 @@
     = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
     = f.form_group do
       = f.check_box :jumbotron
+    = f.text_field :background_color
     .form-group
       = f.label col(Segment, :alignment)
       .btn-group.btn-group-justified{data: {toggle: 'buttons'}}

@@ -402,6 +402,7 @@ fi:
         shape: Lohkon muoto
         alignment: Sisällön tasaus
         inset: Sisällön sisennys
+        background_color: Taustaväri
         body: Leipäteksti
         header: Otsikko
         subhead: Alaotsikko

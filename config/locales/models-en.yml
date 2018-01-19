@@ -402,6 +402,7 @@ en:
         shape: Block shape
         alignment: Content alignment
         inset: Content inset
+        background_color: Background color
         body: Body text
         header: Headline
         subhead: Subhead
