@@ -624,20 +624,20 @@ ActiveRecord::Schema.define(version: 20180118140643) do
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
 
   create_table "segments", force: :cascade do |t|
-    t.integer  "column_id",        limit: 4,                            null: false
+    t.integer  "column_id",        limit: 4,                             null: false
     t.integer  "resource_id",      limit: 4
     t.string   "resource_type",    limit: 255
-    t.integer  "template",         limit: 4,     default: 0,            null: false
+    t.integer  "template",         limit: 4,     default: 0,             null: false
     t.string   "shape",            limit: 255
-    t.string   "alignment",        limit: 255,   default: "align-top",  null: false
-    t.string   "inset",            limit: 255,   default: "inset-none", null: false
-    t.string   "background_color", limit: 255
+    t.string   "alignment",        limit: 255,   default: "align-top",   null: false
+    t.string   "inset",            limit: 255,   default: "inset-none",  null: false
+    t.string   "background_color", limit: 255,   default: "transparent", null: false
     t.text     "body",             limit: 65535
     t.text     "metadata",         limit: 65535
     t.text     "content",          limit: 65535
-    t.integer  "priority",         limit: 4,     default: 0,            null: false
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.integer  "priority",         limit: 4,     default: 0,             null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   add_index "segments", ["column_id"], name: "index_segments_on_column_id", using: :btree
