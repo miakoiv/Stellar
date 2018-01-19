@@ -8,6 +8,8 @@
       %ul.dropdown-menu
         %li
           = render partial: 'admin/segments/settings', object: segment, as: :segment
+    %li.navbar-color
+      = text_field_tag "#{dom_id(segment)}_background_color", segment.background_color, class: 'form-control input-sm', data: {url: modify_admin_segment_path(segment)}
     %li.dropdown
       = dropdown_toggle do
         = segment
@@ -20,3 +22,20 @@
     - if current_user.can_delete?(segment, at: current_store)
       %li
         = link_to icon('trash-o', class: 'fa-fw'), admin_segment_path(segment), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
+
+:coffee
+  $('##{dom_id(segment)}_background_color').minicolors
+    theme: 'bootstrap'
+    position: 'bottom right'
+    format: 'rgb'
+    opacity: true
+    keywords: 'transparent'
+    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+    change: (value) ->
+      $.ajax
+        url: $(this).data 'url'
+        type: 'PATCH'
+        data:
+          segment:
+            background_color: value
+    changeDelay: 500

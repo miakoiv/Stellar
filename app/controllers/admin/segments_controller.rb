@@ -4,9 +4,9 @@ class Admin::SegmentsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :update, :destroy]
+  before_action :set_segment, only: [:show, :edit, :update, :modify, :destroy]
 
-  authority_actions reorder: 'update'
+  authority_actions modify: 'update', reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -51,6 +51,7 @@ class Admin::SegmentsController < ApplicationController
       end
     end
   end
+  alias_method :modify, :update
 
   # POST /admin/columns/1/segments/reorder
   def reorder

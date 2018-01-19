@@ -98,6 +98,7 @@ Rails.application.routes.draw do
         resources :columns do
           resources :segments do
             resources :images
+            patch :modify, on: :member
             post :reorder, on: :collection
           end
         end
