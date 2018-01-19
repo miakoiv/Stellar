@@ -129,11 +129,13 @@
       flex-flow: row wrap;
       justify-content: flex-end;
     }
-    .navbar-nav > li > a { padding: 10px 11px; }
     .navbar-nav > li > a,
-    .minicolors-input {
+    .navbar-nav > li input {
       color: lighten($brand-info, 25%);
       &:hover, &:focus { color: #fff; }
+    }
+    .navbar-nav > li > a {
+      padding: 10px 11px;
     }
     .dropdown-menu {
       width: 260px;
@@ -156,16 +158,25 @@
 
 /* Navbar item for minicolors */
 .navbar-color {
-  padding: 6px;
+  padding: 5px 6px;
 
-  .minicolors-theme-bootstrap.minicolors-position-right .minicolors-input {
-    width: 14em;
-    padding-left: 0;
-    padding-right: 36px;
-    background-color: transparent;
-    border: 0;
-    box-shadow: none;
-    text-align: right;
+  .minicolors-theme-bootstrap.minicolors-position-right {
+    .minicolors-input {
+      width: 0;
+      padding-left: 0;
+      padding-right: 28px;
+      background-color: transparent;
+      color: transparent;
+      border: 0;
+      box-shadow: none;
+      text-align: right;
+      transition: all 0.4s ease-in-out 0s;
+    }
+    &.minicolors-focus .minicolors-input {
+      width: 14em;
+      padding-right: 36px;
+      color: inherit;
+    }
   }
 }
 
