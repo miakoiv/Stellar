@@ -119,6 +119,7 @@ en:
           gallery: gallery
           map: map
           video_player: video embed
+          documentation: document list
           category: category
           product: product
           promotion: promotion

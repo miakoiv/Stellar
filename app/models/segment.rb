@@ -13,6 +13,7 @@ class Segment < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Documentable
   include Imageable
   include Reorderable
 
@@ -43,6 +44,7 @@ class Segment < ActiveRecord::Base
     gallery: 3,
     map: 4,
     video_player: 5,
+    documentation: 6,
     category: 11,
     product: 12,
     promotion: 13,

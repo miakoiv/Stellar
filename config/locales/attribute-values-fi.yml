@@ -119,6 +119,7 @@ fi:
           gallery: galleria
           map: kartta
           video_player: videoupotus
+          documentation: dokumenttilista
           category: tuoteryhmä
           product: tuote
           promotion: kampanja

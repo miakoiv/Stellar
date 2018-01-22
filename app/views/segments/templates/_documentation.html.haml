@@ -1,0 +1,6 @@
+.segment-content.documentation{id: segment_content_id(documentation, context)}
+  - if documentation.documents.any?
+    .list-group
+      = render documentation.documents
+  - else
+    = render partial: 'segments/placeholders/documentation'
