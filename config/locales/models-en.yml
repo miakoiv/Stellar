@@ -32,6 +32,9 @@ en:
       department:
         one: department
         other: departments
+      document:
+        one: document
+        other: documents
       group:
         one: group
         other: groups
@@ -330,7 +333,7 @@ en:
         lead_time: Lead time
         out_of_stock: Sold out
         shipping_notes: Notes
-        iframes: Embeds
+        documents: Documents
         images: Images
         product_properties: Properties
         component_entries: Structure

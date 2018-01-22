@@ -365,7 +365,8 @@ fi:
       proceed: 'Poista'
       cancel: 'Kumoa'
   dropzone:
-    default_message: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
+    upload_images: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
+    upload_documents: Napsauta tätä valitaksesi dokumentteja, tai pudota dokumentit tähän.
   shipping_gateway:
     smart_post:
       lookup_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.

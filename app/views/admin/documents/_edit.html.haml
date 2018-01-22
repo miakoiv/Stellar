@@ -1,0 +1,5 @@
+.list-group-item.sortable[document]
+  .pull-right
+    = link_to icon('remove'), admin_document_path(document), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
+  %span.hidden-print= drag_handle
+  = icon(document_icon_tag(document), document.attachment_file_name.truncate(40, omission: '…'))

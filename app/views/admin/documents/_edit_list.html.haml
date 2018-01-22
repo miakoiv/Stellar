@@ -1,0 +1,15 @@
+- id = dom_id(documentable, :documents)
+
+.list-group{id: id}
+  = render partial: 'admin/documents/edit', collection: documentable.documents, as: :document
+
+:coffee
+  $('##{id}').sortable(
+    items: '> .list-group-item'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_documents_path}',
+      {reorder: $(this).sortable('toArray')}

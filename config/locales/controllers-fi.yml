@@ -24,6 +24,13 @@ fi:
         notice: "Osasto %{department} päivitetty."
       destroy:
         notice: "Osasto %{department} poistettu."
+    documents:
+      create:
+        notice: "Dokumentti %{document} luotu."
+      update:
+        notice: "Dokumentti %{document} päivitetty."
+      destroy:
+        notice: "Dokumentti %{document} poistettu."
     groups:
       create:
         notice: "Ryhmä %{group} luotu."
