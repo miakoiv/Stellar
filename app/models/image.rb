@@ -69,19 +69,6 @@ class Image < ActiveRecord::Base
     url(wysiwyg_style, false)
   end
 
-  def document_icon
-    case attachment_content_type
-    when %r{\Avideo/}
-      'file-video-o'
-    when %r{\Aapplication/pdf}
-      'file-pdf-o'
-    when %r{\Aapplication/(msword|vnd.openxmlformats)}
-      'file-word-o'
-    else
-      'file-o'
-    end
-  end
-
   # Image dimensions courtesy of FastImage, cached.
   def dimensions(style = :original)
     @dimensions ||= {}

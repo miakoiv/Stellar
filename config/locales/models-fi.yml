@@ -32,6 +32,9 @@ fi:
       department:
         one: osasto
         other: osastot
+      document:
+        one: dokumentti
+        other: dokumentit
       group:
         one: ryhmä
         other: ryhmät
@@ -330,7 +333,7 @@ fi:
         lead_time: Toimitusaika
         out_of_stock: Loppuunmyyty
         shipping_notes: Lisätietoja
-        iframes: Upotukset
+        documents: Dokumentit
         images: Kuvat
         product_properties: Ominaisuudet
         component_entries: Rakenne

@@ -941,11 +941,9 @@ fieldset[disabled] .help-block { display: none; }
   width: 100%;
   height: 100%;
 }
-@media (max-width: $screen-xs-max) {
-  .mfp-iframe-scaler {
-    height: 480px;
-    padding-bottom: 0;
-  }
+.mfp-iframe-scaler {
+  height: calc(100vh - 100px);
+  padding-bottom: 0;
 }
 
 

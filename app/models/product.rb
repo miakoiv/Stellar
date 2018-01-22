@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Documentable
   include Imageable
   include Pageable
   include Reorderable

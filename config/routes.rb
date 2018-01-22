@@ -110,6 +110,7 @@ Rails.application.routes.draw do
     end
     resources :products do
       resources :images, shallow: true
+      resources :documents, shallow: true
       resources :product_properties, shallow: true
       resources :alternate_prices, shallow: true
       resources :iframes, shallow: true
@@ -187,7 +188,9 @@ Rails.application.routes.draw do
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/images/reorder', to: 'images#reorder', as: :reorder_images
+    post '/documents/reorder', to: 'documents#reorder', as: :reorder_documents
     post '/images/delete', to: 'images#delete', as: :delete_image
+    post '/documents/delete', to: 'documents#delete', as: :delete_document
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
 end

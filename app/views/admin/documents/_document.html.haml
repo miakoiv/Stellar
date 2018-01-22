@@ -1,0 +1,3 @@
+= link_to document.url(nil, timestamp: false), class: 'list-group-item' do
+  = icon(document_icon_tag(document), document.attachment_file_name.truncate(40, omission: '…'))
+  %span.badge= number_to_human_size document.attachment_file_size

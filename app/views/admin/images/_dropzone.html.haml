@@ -8,7 +8,7 @@
 :coffee
   Dropzone.autoDiscover = false
   $('##{id}').dropzone
-    dictDefaultMessage: "#{I18n.t('dropzone.default_message')}"
+    dictDefaultMessage: "#{I18n.t('dropzone.upload_images')}"
     paramName: 'image[attachment]'
     init: ->
       @on 'success', (file, image) ->

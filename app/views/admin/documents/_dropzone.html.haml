@@ -1,0 +1,17 @@
+- id = dom_id(documentable, :new_document)
+
+= form_for [:admin, documentable, documentable.documents.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
+  .fallback
+    = f.file_field :attachment
+    = f.submit class: 'btn btn-primary'
+
+:coffee
+  Dropzone.autoDiscover = false
+  $('##{id}').dropzone
+    dictDefaultMessage: "#{I18n.t('dropzone.upload_documents')}"
+    paramName: 'document[attachment]'
+    init: ->
+      @on 'success', (file, document) ->
+        $.get '/admin/documents/' + document['id']
+      @on 'complete', (file) ->
+        this.removeFile file

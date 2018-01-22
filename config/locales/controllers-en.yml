@@ -24,6 +24,13 @@ en:
         notice: "Department %{department} updated."
       destroy:
         notice: "Department %{department} deleted."
+    documents:
+      create:
+        notice: "Document %{document} created."
+      update:
+        notice: "Document %{document} updated."
+      destroy:
+        notice: "Document %{document} deleted."
     groups:
       create:
         notice: "Group %{group} created."
