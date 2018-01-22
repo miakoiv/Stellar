@@ -41,36 +41,26 @@ class Image < ActiveRecord::Base
     content_type: {
       content_type: [
         %r{\Aimage/(bmp|jpeg|jpg|png|x-png|svg)},
-        %r{\Avideo/(mp4|webm)},
-        %r{\Aapplication/(pdf|msword)},
-        %r{\Aapplication/vnd.openxmlformats},
       ]
     }
 
   #---
-  def available_purposes
+  def self.available_purposes
     ['presentational', 'technical']
   end
 
+  #---
   # Assign first available purpose.
   def assign_purpose
-    self.purpose ||= available_purposes.first
+    self.purpose ||= Image.available_purposes.first
   end
 
   def is_bitmap?
     !!(attachment_content_type =~ /\/(bmp|jpeg|jpg|png|x-png)/)
   end
 
-  def is_vector?
-    !!(attachment_content_type =~ /\/svg/)
-  end
-
-  def is_video?
-    !!(attachment_content_type =~ /video\//)
-  end
-
   # The style given to Summernote is lightbox sized for bitmaps,
-  # original for documents and other non-bitmaps.
+  # original for non-bitmaps.
   def wysiwyg_style
     is_bitmap? ? :lightbox : :original
   end

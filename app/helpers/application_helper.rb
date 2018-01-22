@@ -95,10 +95,8 @@ module ApplicationHelper
     return ''.html_safe if image.nil?
     if image.is_bitmap?
       image_tag(image.url(size, timestamp: false), options.merge(image.dimensions(size)))
-    elsif image.is_vector?
-      image_tag(image.url(:original, timestamp: false), options.merge(class: 'img-responsive'))
     else
-      document_icon_tag(image, size)
+      image_tag(image.url(:original, timestamp: false), options.merge(class: 'img-responsive'))
     end
   end
 
