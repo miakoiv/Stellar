@@ -4,7 +4,7 @@ class Admin::SectionsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_section, only: [:update, :destroy]
+  before_action :set_section, only: [:edit, :update, :destroy]
 
   authority_actions reorder: 'update'
 
@@ -24,6 +24,13 @@ class Admin::SectionsController < ApplicationController
         format.js { render json: @section.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /admin/pages/1/sections/edit.js
+  def edit
+    authorize_action_for @section, at: current_store
+
+    respond_to :js
   end
 
   # PATCH/PUT /admin/sections/1.js

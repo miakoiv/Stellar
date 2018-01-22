@@ -11,10 +11,13 @@
           = icon('chevron-circle-left', t('actions.back'))
     .navbar-toolbar
 
-#section-list.section-list.layout-container.sortable
-  = render partial: 'admin/sections/list_item', collection: @page.sections, as: :section
+#section-list.section-list.layout-container.sortable{data: {sections: @page.sections.map { |section| edit_admin_section_path(section) }.as_json}}
+  = render partial: 'admin/sections/loader', collection: @page.sections, as: :section
 
 :coffee
+  for section in $('#section-list').data 'sections'
+    $.get section
+
   $('#section-list').sortable(
     items: '> .section-list-item'
     handle: '.handle'
