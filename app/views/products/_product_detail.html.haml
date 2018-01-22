@@ -40,19 +40,17 @@
     .product-description
       %ul.nav.nav-tabs.nav-sm{role: 'tablist'}
         = nav_tab 'description', t('store.product_description'), class: 'active'
-        - if product.images.document.any?
+        - if product.documents.any?
           = nav_tab 'documents', t('store.product_documentation')
 
       .tab-content
         = tab_pane 'description', class: 'in active' do
           .body-text><
             = product.overview.html_safe if product.overview.present?
-        - if product.images.document.any?
+        - if product.documents.any?
           = tab_pane 'documents' do
             .documents.list-group
-              - product.images.document.each do |document|
-                = link_to(icon('paperclip', document.to_s),
-                    document.url(:original, timestamp: false), class: 'list-group-item')
+              = render product.documents
 
     .product-properties
       - if product.product_properties.any?

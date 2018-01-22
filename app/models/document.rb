@@ -39,6 +39,10 @@ class Document < ActiveRecord::Base
     !!(attachment_content_type =~ /(ms-powerpoint|presentationml\.presentation|opendocument\.presentation)/)
   end
 
+  def popuppable?
+    is_pdf?
+  end
+
   def icon
     return 'file-pdf-o' if is_pdf?
     return 'file-word-o' if is_text?
