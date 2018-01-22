@@ -23,18 +23,27 @@ class Document < ActiveRecord::Base
     }
 
   #---
+  def is_pdf?
+    !!(attachment_content_type =~ /\Aapplication\/pdf/)
+  end
+
+  def is_text?
+    !!(attachment_content_type =~ /(msword|wordprocessingml\.document|opendocument\.text)/)
+  end
+
+  def is_spreadsheet?
+    !!(attachment_content_type =~ /(ms-excel|spreadsheetml\.sheet|opendocument\.spreadsheet)/)
+  end
+
+  def is_presentation?
+    !!(attachment_content_type =~ /(ms-powerpoint|presentationml\.presentation|opendocument\.presentation)/)
+  end
+
   def icon
-    case attachment_content_type
-    when %r{\Aapplication/pdf}
-      'file-pdf-o'
-    when %r{(msword|wordprocessingml\.document|opendocument\.text)}
-      'file-word-o'
-    when %r{ms-excel|spreadsheetml\.sheet|opendocument\.spreadsheet}
-      'file-excel-o'
-    when %r{ms-powerpoint|presentationml\.presentation|opendocument\.presentation}
-      'file-powerpoint-o'
-    else
-      'file-o'
-    end
+    return 'file-pdf-o' if is_pdf?
+    return 'file-word-o' if is_text?
+    return 'file-excel-o' if is_spreadsheet?
+    return 'file-powerpoint-o' if is_presentation?
+    'file-o'
   end
 end
