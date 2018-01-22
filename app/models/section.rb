@@ -65,7 +65,7 @@ class Section < ActiveRecord::Base
   end
 
   def image_options
-    {purpose: false}
+    {purpose: ['presentational']}
   end
 
   def background_image

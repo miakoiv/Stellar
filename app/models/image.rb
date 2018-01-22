@@ -48,17 +48,13 @@ class Image < ActiveRecord::Base
     }
 
   #---
-  # Applicable purposes based on attachment bitmappiness.
-  def applicable_purposes
-    return ['presentational', 'technical'] if is_bitmap?
-    return ['vector'] if is_vector?
-    return ['video'] if is_video?
-    ['document']
+  def available_purposes
+    ['presentational', 'technical']
   end
 
-  # Assign first applicable purpose.
+  # Assign first available purpose.
   def assign_purpose
-    self.purpose ||= applicable_purposes.first
+    self.purpose ||= available_purposes.first
   end
 
   def is_bitmap?
