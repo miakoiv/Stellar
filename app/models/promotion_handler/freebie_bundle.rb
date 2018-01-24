@@ -14,8 +14,16 @@ class PromotionHandler
       }, on: :update
 
     #---
+    # Freebies in bundles are found by flattening and sorting the items
+    # by descending price and adding an adjustment to the last one.
+    # The order decides the tax treatment used for sorting.
     def apply!(order, items)
-      items_by_price = flatten(items.unscope(:order).order(price_cents: :desc))
+      price_method = order.includes_tax? ? :price_with_tax : :price_sans_tax
+
+      items_by_price = flatten(items).sort { |a, b|
+        b.send(price_method) <=> a.send(price_method)
+      }
+
       items_by_price.each_slice(required_items) do |bundle|
         break if bundle.size < required_items
         last_item = bundle.last
