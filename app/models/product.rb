@@ -88,7 +88,7 @@ class Product < ActiveRecord::Base
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-  has_many :promoted_items
+  has_many :promoted_items, dependent: :destroy
   has_many :promotions, through: :promoted_items
 
   has_many :iframes, dependent: :destroy
