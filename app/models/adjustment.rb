@@ -2,8 +2,9 @@
 #
 # Adjustments are modifiers affecting the price of an adjustable object.
 # Anything adjustable may have an adjustment that adds its amount to
-# the price of the adjustable. Tax rate and inclusion of the adjustment
-# is regarded identical to the adjustable.
+# the price of the adjustable. The adjustable must respond to methods
+# #tax_rate and #price_includes_tax? so that the adjustable can return
+# its amount with or without tax.
 # The attached label provides detailed information. If an adjustment has
 # an associated source, it should respond to `description` that defines
 # the contents of the label.
@@ -16,11 +17,10 @@ class Adjustment < ActiveRecord::Base
   belongs_to :adjustable, polymorphic: true
   belongs_to :source, polymorphic: true
 
+  delegate :tax_rate, :price_includes_tax?, to: :adjustable
+
   scope :credit, -> { where('amount_cents <= ?', 0) }
   scope :charge, -> { where('amount_cents > ?', 0) }
-
-  #---
-  delegate :price_includes_tax?, :tax_rate, to: :adjustable
 
   #---
   def credit?
@@ -32,21 +32,15 @@ class Adjustment < ActiveRecord::Base
   end
 
   def amount_sans_tax
-    account_for_taxes? ? amount_as_price.sans_tax : amount_as_price
+    amount_as_price.sans_tax
   end
 
   def tax
-    account_for_taxes? ? amount_as_price.tax : Price.zero
+    amount_as_price.tax
   end
 
   def amount_with_tax
-    account_for_taxes? ? amount_as_price.with_tax : amount_as_price
-  end
-
-  # Adjustment amounts may be subject to tax, in which case the associated
-  # adjustable will respond to #price_includes_tax?.
-  def account_for_taxes?
-    adjustable.respond_to?(:price_includes_tax?)
+    amount_as_price.with_tax
   end
 
   private
