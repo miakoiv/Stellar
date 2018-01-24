@@ -24,7 +24,7 @@ class PromotionHandler
         last_item.adjustments.create(
           source: promoted_item,
           label: "#{promoted_item.description} (#{product_titles})",
-          amount: (last_item.price || 0) * discount_percent/-100
+          amount: (last_item.price || 0.to_money) * discount_percent/-100
         )
       end
     end
