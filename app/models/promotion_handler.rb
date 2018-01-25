@@ -20,4 +20,13 @@ class PromotionHandler < ActiveRecord::Base
       [item] * n
     }.flatten
   end
+
+  # Does the opposite of flatten, combining given items by id.
+  def recombine(items)
+    items.chunk(&:id).map { |id, items|
+      item = items.first
+      item.amount = items.count
+      item
+    }
+  end
 end
