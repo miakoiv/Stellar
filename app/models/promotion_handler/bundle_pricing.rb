@@ -34,18 +34,22 @@ class PromotionHandler
           subtotals[item.id] = item.send(subtotal_method)
         }.sum
         difference = items_total - bundle_total
+        applied = 0.to_money
         product_titles = bundle.map(&:product).to_sentence
 
-        # Discount is calculated from prices visible to the customer,
-        # which may or may not include taxes. Using a Price object,
-        # taxation metadata can be taken into account to create an
-        # adjustment with the correct amount.
-        bundle.each do |item|
-          discount = Price.new(
-            subtotals[item.id] / bundle_total * difference,
-            tax_included,
-            item.tax_rate
-          )
+        bundle.each_with_index do |item, i|
+
+          # The last item gets the remainder to avoid rounding errors.
+          # Others calculate a portion and add it to applied amounts.
+          amount = if i == bundle.count - 1
+            difference - applied
+          else
+            subtotals[item.id] / bundle_total * difference
+          end
+          applied += amount
+
+          # Discount as a Price object to include taxation metadata.
+          discount = Price.new(amount, tax_included, item.tax_rate)
           item.adjustments.create(
             source: promotion,
             label: "#{promotion.description} (#{product_titles})",
