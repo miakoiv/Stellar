@@ -13,18 +13,45 @@ class PromotionHandler
       on: :update
 
     #---
+    # Bundle prices are achieved by sorting the items by descending price,
+    # picking up bundles of items, and adding an adjustment to each item
+    # proportionally, totalling the difference between bundle subtotal and
+    # the target price set by the promotion.
     def apply!(order, items)
-      price_method = order.includes_tax? ? :price_with_tax : :price_sans_tax
-      items_by_price = flatten(items.unscope(:order).order(price_cents: :desc))
-      items_by_price.each_slice(required_items) do |bundle|
-        break if bundle.size < required_items
-        bundle_total = bundle.map { |item| item.send(price_method) || 0 }.sum
+      tax_included = order.includes_tax?
+      price_method = tax_included ? :price_with_tax : :price_sans_tax
+      subtotal_method = tax_included ? :subtotal_with_tax : :subtotal_sans_tax
+
+      items_by_price = flatten(items).sort { |a, b|
+        b.send(price_method) <=> a.send(price_method)
+      }
+
+      items_by_price.each_slice(required_items) do |slice|
+        break if slice.size < required_items
+        bundle = recombine(slice)
+        subtotals = {}
+        bundle_total = bundle.map { |item|
+          subtotals[item.id] = item.send(subtotal_method)
+        }.sum
+        difference = items_total - bundle_total
         product_titles = bundle.map(&:product).to_sentence
-        order.adjustments.create(
-          source: promotion,
-          label: "#{promotion.description} (#{product_titles})",
-          amount: [items_total - bundle_total, 0].min
-        )
+
+        # Discount is calculated from prices visible to the customer,
+        # which may or may not include taxes. Using a Price object,
+        # taxation metadata can be taken into account to create an
+        # adjustment with the correct amount.
+        bundle.each do |item|
+          discount = Price.new(
+            subtotals[item.id] / bundle_total * difference,
+            tax_included,
+            item.tax_rate
+          )
+          item.adjustments.create(
+            source: promotion,
+            label: "#{promotion.description} (#{product_titles})",
+            amount: item.price_includes_tax? ? discount.with_tax : discount.sans_tax
+          )
+        end
       end
     end
 
