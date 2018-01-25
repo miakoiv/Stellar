@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/duplicate
   def duplicate
-    authorize_action_for @order
+    authorize_action_for @order, at: current_store
 
     @order.copy_items_to(shopping_cart)
     shopping_cart.recalculate!
