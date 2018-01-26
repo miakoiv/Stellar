@@ -121,10 +121,10 @@ namespace :matfox do
 
         # Orders are found by the number field, which might not match
         # any known order, or may refer to an already concluded one.
-        next unless data[:number] =~ /\A\d+\Z/
-        store = Store.find_by(erp_number: data[:erp_number])
+        next unless data[:order][:number] =~ /\A\d+\Z/
+        store = Store.find_by(erp_number: data[:order][:erp_number])
         next if store.nil?
-        order = store.orders.find_by(number: data[:number])
+        order = store.orders.find_by(number: data[:order][:number])
         next if order.nil? || order.concluded?
 
         # Each order has a status of 2..4, where status 2 triggers
