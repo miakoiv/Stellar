@@ -38,6 +38,8 @@
                     = icon('paint-brush', t('.edit_style'))
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
+            = f.form_group do
+              = f.check_box :disable_mail
             = f.text_field :tracking_code
             = f.text_field :maps_api_key
             = f.text_field :shipping_origin

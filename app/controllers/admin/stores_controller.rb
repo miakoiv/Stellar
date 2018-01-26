@@ -79,7 +79,7 @@ class Admin::StoresController < ApplicationController
     def store_params
       params.require(:store).permit(
         :portal, :name, :locale, :country_code, :shipping_origin,
-        :admit_guests, :accept_credit_cards,
+        :admit_guests, :accept_credit_cards, :disable_mail,
         :tracking_code, :maps_api_key, :facebook_pixel_id, :tawkto_site_id,
         :pbw_api_key, :pbw_private_key,
         :quotation_template_id,

@@ -283,7 +283,7 @@ class Order < ActiveRecord::Base
   def complete!
     assign_number!
     archive!
-    email(has_payment? ? :receipt : :acknowledge, customer_string).deliver_later
+    email(has_payment? ? :receipt : :acknowledge, customer_string)
     export_xml
   end
 
@@ -546,7 +546,12 @@ class Order < ActiveRecord::Base
       bcc: true,
       pricing: true
     )
-    OrderMailer.send(message, self, to, items, options)
+    if store.disable_mail?
+      logger.info "Sending of e-mail is currently disabled, aborting"
+      return false
+    else
+      OrderMailer.send(message, self, to, items, options).deliver_later
+    end
   end
 
   private
@@ -579,14 +584,14 @@ class Order < ActiveRecord::Base
     def approve!
       reload # to clear changes and prevent a callback loop
       if has_payment?
-        email(:processing, customer_string, nil, bcc: false).deliver_later
+        email(:processing, customer_string, nil, bcc: false)
       else
-        email(:confirmation, customer_string, nil, bcc: false).deliver_later
-        email(:confirmation, contact_string, nil, bcc: false, pricing: false).deliver_later if has_contact_info?
+        email(:confirmation, customer_string, nil, bcc: false)
+        email(:confirmation, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
       end
       items_by_vendor.each do |vendor, items|
         vendor.notified_users.each do |user|
-          email(:notification, user.to_s, items, bcc: false, pricing: false).deliver_later
+          email(:notification, user.to_s, items, bcc: false, pricing: false)
         end
       end
       true
@@ -596,8 +601,8 @@ class Order < ActiveRecord::Base
     # A notification of shipment is sent.
     def conclude!
       reload # to clear changes and prevent a callback loop
-      email(:shipment, customer_string, nil, bcc: false).deliver_later
-      email(:shipment, contact_string, nil, bcc: false, pricing: false).deliver_later if has_contact_info?
+      email(:shipment, customer_string, nil, bcc: false)
+      email(:shipment, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
       OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
       true

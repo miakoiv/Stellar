@@ -463,6 +463,7 @@ fi:
         country_code: Kotimaa
         admit_guests: Salli pääsy kauppaan vieraana
         accept_credit_cards: Hyväksy luottokorttimaksut
+        disable_mail: Estä sähköpostin lähetys
         tracking_code: Google Analytics -koodi
         maps_api_key: Google Maps -avain
         facebook_pixel_id: Facebook-pikselitunnus
