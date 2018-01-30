@@ -440,9 +440,14 @@ i.icon {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.page-header { border-bottom: 0; }
-.page-header .btn { float: right; }
-.page-header .btn + .btn { margin-right: 8px; }
+.page-header {
+  border-bottom: 0;
+
+  > .btn,
+  > .dropdown { float: right; }
+  > .btn + .btn,
+  > .dropdown + .btn { margin-right: 8px; }
+}
 .panel-footer { @extend .clearfix; }
 .panel-footer .btn { margin-bottom: 5px; }
 .panel-footer .btn + .btn { margin-left: 8px; }
