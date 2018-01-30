@@ -106,9 +106,8 @@ class Order < ActiveRecord::Base
   # multiple order types to choose from at checkout.
   delegate :destination, to: :order_type
 
-  # Allow adding and editing order items on quotations only.
   def editable_items?
-    is_quote?
+    !complete?
   end
 
   # Notify users with order_notify role in the destination group.

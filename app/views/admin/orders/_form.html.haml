@@ -2,13 +2,14 @@
     label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
   .panel.panel-default
     .panel-body
-      - if @order.destination == current_group
+      - if @order.complete? && @order.destination == current_group
         %fieldset.bg-warning{disabled: locked}
           = f.text_field :approved_at, disabled: @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.approved_at_help')
           .conclusion.collapse{class: @order.approved? && 'in'}
             = f.text_field :concluded_at, disabled: !@order.approved? || @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.concluded_at_help')
-      %fieldset.gap{disabled: true}
-        = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
+      - if @order.complete?
+        %fieldset.gap{disabled: true}
+          = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.bg-info{disabled: locked}
         = f.text_field :external_number
         = f.text_field :vat_number

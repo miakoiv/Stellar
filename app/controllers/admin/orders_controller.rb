@@ -28,7 +28,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/new
   def new
     authorize_action_for Order, at: current_store
-    @order = current_store.orders.build(completed_at: Time.current)
+    @order = current_store.orders.build
   end
 
   # GET /admin/orders/1/edit
@@ -41,6 +41,7 @@ class Admin::OrdersController < ApplicationController
   def create
     authorize_action_for Order, at: current_store
     @order = current_store.orders.build(order_params)
+    @order.address_to(@order.user)
 
     respond_to do |format|
       if @order.save
@@ -118,7 +119,8 @@ class Admin::OrdersController < ApplicationController
     product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
 
     product_ids.each do |product_id|
-      @order.insert(@current_store.products.live.find(product_id), 1, nil)
+      product = @current_store.products.live.find(product_id)
+      @order.insert(product, 1)
     end
     @order.recalculate!
 
@@ -136,7 +138,7 @@ class Admin::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :order_type_id, :completed_at, :shipping_at, :installation_at,
+        :user_id, :order_type_id, :completed_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :vat_number,
         :external_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,

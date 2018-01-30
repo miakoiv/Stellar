@@ -3,9 +3,10 @@
 class OrderAuthorizer < ApplicationAuthorizer
 
   # Class methods are called when authorizing an admin
-  # to handle incoming orders.
+  # to handle incoming orders or create new orders.
   def self.creatable_by?(user, opts)
-    false
+    user.has_cached_role?(:order_review, opts[:at]) ||
+    user.has_cached_role?(:order_manage, opts[:at])
   end
 
   def self.readable_by?(user, opts)

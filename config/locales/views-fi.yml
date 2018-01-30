@@ -126,6 +126,10 @@ fi:
         has_shipping_help: Tilauslaji on toimitettava, jos tilaajalle lähetetään tavaraa. Tilaukseen on sisällytettävä toimitusosoite.
         has_payment_help: Tilauslaji on maksettava, jos tilaukset on maksettava ennen tilauksen hyväksymistä. Jätä tämä tyhjäksi jos laskutus tapahtuu muuta kautta.
     orders:
+      index:
+        new_order: Uusi tilaus
+      new:
+        new_order: Uusi tilaus
       row:
         approve: Hyväksy
         review: Tarkasta
