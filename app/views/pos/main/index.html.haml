@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2
+      .form-group
+        .input-group.input-group-lg.input-group-round
+          %span.input-group-addon= icon('barcode')
+          = text_field_tag 'ean', nil, class: 'form-control'
+
+:coffee
+  $('#ean').focus()

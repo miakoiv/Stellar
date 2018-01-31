@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    = render partial: 'shared/metadata'
+    = render partial: 'favicon'
+  %body{class: current_theme}
+    %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
+      .inner-wrap
+    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      = render partial: 'pos/shared/main_nav'
+
+    #point-of-sale-wrap
+      = yield

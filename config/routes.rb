@@ -10,9 +10,10 @@ Rails.application.routes.draw do
     defaults: {status: '500'},
     via: :all
 
-  # Redirect old product urls still found in the wild.
-  get '/category/:category_id/product/:product_id',
-    to: redirect('/product/:category_id/:product_id')
+  # Point-of-sale interface.
+  namespace :pos do
+    root 'main#index'
+  end
 
   resources :orders do
     resources :order_items, shallow: true

@@ -826,3 +826,23 @@ $body-tone-bg: darken($body-bg, 4%);
     margin-bottom: 10px;
   }
 }
+
+/*
+ * Point of sale look and feel
+ */
+#point-of-sale-wrap {
+  padding-top: 160px;
+}
+
+.input-group-lg.input-group-round {
+  .input-group-addon {
+    border-radius: $input-height-large/2;
+    &:first-child { @include border-right-radius(0); }
+    &:last-child { @include border-left-radius(0); }
+  }
+  > .form-control {
+    border-radius: $input-height-large/2;
+    &:first-child { @include border-right-radius(0); }
+    &:last-child { @include border-left-radius(0); }
+  }
+}
