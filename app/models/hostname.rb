@@ -13,6 +13,7 @@ class Hostname < ActiveRecord::Base
   belongs_to :domain_hostname, class_name: 'Hostname', foreign_key: :parent_hostname_id
   has_many :subdomain_hostnames, class_name: 'Hostname', foreign_key: :parent_hostname_id
 
+
   default_scope { sorted }
 
   # Hostnames assigned to store portals are semantically domains.
@@ -23,6 +24,12 @@ class Hostname < ActiveRecord::Base
   validates :fqdn, presence: true, uniqueness: true
 
   #---
+  # The store specified by domain hostname, if any.
+  def store_portal
+    return nil if domain_hostname.nil?
+    domain_hostname.store
+  end
+
   def to_url
     "//#{fqdn}"
   end

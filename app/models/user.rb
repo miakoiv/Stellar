@@ -44,11 +44,10 @@ class User < ActiveRecord::Base
   #---
   # A user's shopping cart is technically an order singleton,
   # the one and only incomplete order at given store.
-  # The group argument is given only to initialize the cart
-  # in the correct context.
-  def shopping_cart(store, group)
+  def shopping_cart(store, store_portal, group)
     orders.at(store).incomplete.first ||
       orders.at(store).create(
+        store_portal: store_portal,
         includes_tax: group.price_tax_included?,
         customer_name: guest?(store) ? nil : name,
         customer_email: guest?(store) ? nil : email,

@@ -7,7 +7,11 @@ class Order < ActiveRecord::Base
   include Adjustable
 
   #---
+  # Store is the current store, store portal is an optional store id
+  # for the portal store the originating hostname points to.
   belongs_to :store
+  belongs_to :store_portal, class_name: 'Store'
+
   belongs_to :user
 
   # Shipping and billing addresses have country associations.

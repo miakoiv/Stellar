@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122090756) do
+ActiveRecord::Schema.define(version: 20180201071848) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -356,6 +356,7 @@ ActiveRecord::Schema.define(version: 20180122090756) do
   create_table "order_report_rows", force: :cascade do |t|
     t.integer  "order_type_id",         limit: 4, null: false
     t.integer  "user_id",               limit: 4
+    t.integer  "store_portal_id",       limit: 4
     t.string   "shipping_country_code", limit: 2
     t.integer  "product_id",            limit: 4, null: false
     t.date     "ordered_at",                      null: false
@@ -369,6 +370,7 @@ ActiveRecord::Schema.define(version: 20180122090756) do
   add_index "order_report_rows", ["ordered_at"], name: "index_order_report_rows_on_ordered_at", using: :btree
   add_index "order_report_rows", ["product_id"], name: "index_order_report_rows_on_product_id", using: :btree
   add_index "order_report_rows", ["shipping_country_code"], name: "index_order_report_rows_on_shipping_country_code", using: :btree
+  add_index "order_report_rows", ["store_portal_id"], name: "index_order_report_rows_on_store_portal_id", using: :btree
   add_index "order_report_rows", ["user_id"], name: "index_order_report_rows_on_user_id", using: :btree
 
   create_table "order_types", force: :cascade do |t|
@@ -395,6 +397,7 @@ ActiveRecord::Schema.define(version: 20180122090756) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "store_id",              limit: 4,                     null: false
+    t.integer  "store_portal_id",       limit: 4
     t.integer  "order_items_count",     limit: 4
     t.string   "number",                limit: 255
     t.string   "external_number",       limit: 255

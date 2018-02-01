@@ -11,6 +11,7 @@ class OrderReportRow < ActiveRecord::Base
   #---
   belongs_to :order_type
   belongs_to :user
+  belongs_to :store_portal, class_name: 'Store'
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
   belongs_to :product
 
@@ -25,6 +26,7 @@ class OrderReportRow < ActiveRecord::Base
     report_row = where(
       order_type: order.order_type,
       user: order.user.guest?(order.store) ? nil : order.user,
+      store_portal: order.store_portal,
       shipping_country_code: order.shipping_country_code,
       product: product,
       ordered_at: order.completed_at.to_date

@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
   end
 
   def shopping_cart
-    @shopping_cart ||= current_user.shopping_cart(current_store, current_group)
+    @shopping_cart ||= current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
   end
 
   # Convenience method to check current user roles at current store.
