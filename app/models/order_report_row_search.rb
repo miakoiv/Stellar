@@ -26,6 +26,10 @@ class OrderReportRowSearch < Searchlight::Search
     query.where(user_id: user_id)
   end
 
+  def search_store_portal_id
+    query.where(store_portal_id: store_portal_id)
+  end
+
   def search_shipping_country_code
     query.where(shipping_country_code: shipping_country_code)
   end

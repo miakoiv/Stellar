@@ -71,6 +71,7 @@ en:
           since_date: Since date
           until_date: Until date
           countries: Destination countries
+          store_portals: Store portals
         chart:
           units: Units
           value: Sales €

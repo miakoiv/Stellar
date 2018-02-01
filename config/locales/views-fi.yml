@@ -51,6 +51,7 @@ fi:
           since_date: Pvm alkaen
           until_date: Pvm päättyen
           countries: Kohdemaat
+          store_portals: Kauppaverkostot
         chart:
           units: Kpl
           value: Myynti €
