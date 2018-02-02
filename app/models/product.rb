@@ -10,7 +10,6 @@ class Product < ActiveRecord::Base
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
-  paginates_per 30
 
   enum purpose: {
     # Regular product
@@ -26,22 +25,6 @@ class Product < ActiveRecord::Base
     # Component products may not be purchased separately
     component: 7
   }
-
-  PURPOSE_ICONS = {
-    'vanilla' => nil,
-    'bundle' => 'archive',
-    'composite' => 'object-group',
-    'virtual' => 'magic',
-    'internal' => 'link',
-    'component' => 'puzzle-piece'
-  }.freeze
-
-  # Monetize product attributes.
-  monetize :cost_price_cents, allow_nil: true
-  monetize :trade_price_cents, allow_nil: true
-  monetize :retail_price_cents, allow_nil: true
-
-  INLINE_SEARCH_RESULTS = 20
 
   # Additional sorting scopes through Reorderable.
   define_scope :alphabetical do
@@ -63,9 +46,6 @@ class Product < ActiveRecord::Base
   # A product may belong to a specific vendor group who's responsible for it.
   belongs_to :vendor, class_name: 'Group'
 
-  # Products must have a tax category
-  belongs_to :tax_category, required: true
-
   # A product may belong to multiple categories, and must update its own
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
@@ -80,7 +60,6 @@ class Product < ActiveRecord::Base
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
   belongs_to :primary_variant, class_name: 'Product'
 
-  has_many :inventory_items, dependent: :destroy
   has_many :order_items
   has_many :component_entries, dependent: :destroy
   has_many :component_products, through: :component_entries, source: :component
@@ -88,13 +67,7 @@ class Product < ActiveRecord::Base
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy
   has_many :properties, through: :product_properties
-  has_many :promoted_items, dependent: :destroy
-  has_many :promotions, through: :promoted_items
-
   has_many :iframes, dependent: :destroy
-
-  # Alternate prices for different groups.
-  has_many :alternate_prices, dependent: :destroy
 
   # Customer assets referring to this product.
   has_many :customer_assets, dependent: :destroy
@@ -130,7 +103,6 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
-  before_save :generate_description, if: -> (product) { product.description.blank? }
   after_save :touch_categories
   after_save :reset_live_status!
 
@@ -257,153 +229,15 @@ class Product < ActiveRecord::Base
     product_properties.pluck(:property_id, :value).to_h
   end
 
-  def live_promoted_items(group)
-    promoted_items.joins(:promotion)
-      .merge(Promotion.live)
-      .where(promotions: {group_id: group})
-  end
-
-  # Finds the promoted item with the lowest quoted price.
-  def best_promoted_item(group)
-    promoted_items.joins(:promotion)
-      .merge(Promotion.live)
-      .where(promotions: {group_id: group})
-      .where.not(price_cents: nil)
-      .order(:price_cents)
-      .first
-  end
-
-  # Finds the quantity in base units for unit pricing.
-  def pricing_quantity_and_unit
-    product_property = unit_pricing_property
-    return nil if product_property.nil? || product_property.value.nil?
-    unit = product_property.property.measurement_unit
-    quantity = product_property.value_f * unit.factor
-    [quantity, unit.pricing_base]
-  end
-
-  # Markup percentage from trade price to retail price.
-  def markup_percent
-    return nil if trade_price.nil? || retail_price.nil? || trade_price == 0
-    100 * (retail_price - trade_price) / trade_price
-  end
-
-  # Margin percentage from trade price to retail price.
-  def margin_percent
-    return nil if trade_price.nil? || retail_price.nil? || retail_price == 0
-    100 * (retail_price - trade_price) / retail_price
-  end
-
   # Bundles and composites include components when ordered, if any are live.
   def includes_components?
     (bundle? || composite?) && component_entries.live.any?
-  end
-
-  # Stock is not tracked for virtual or internal products.
-  def tracked_stock?
-    vanilla? || bundle? || composite?
-  end
-
-  # Minimum availability of components, used by #available.
-  def component_availability(inventory)
-    component_entries.map { |entry| entry.available(inventory) }.min || 0
-  end
-
-  # Amount available in given inventory, calculated from product
-  # availability and/or minimum component availability, recursively.
-  # Returns infinite if inventory is not specified or product stock
-  # is not tracked.
-  def available(inventory)
-    return Float::INFINITY if inventory.nil? || !tracked_stock?
-    if bundle?
-      component_availability(inventory)
-    elsif composite?
-      [availability(inventory), component_availability(inventory)].min
-    else
-      availability(inventory)
-    end
-  end
-
-  # Available means there's at least given amount on hand.
-  # It's not necessary to check further if inventory is not specified
-  # or product stock is not tracked.
-  def available?(inventory, amount = 1)
-    return true if inventory.nil? || !tracked_stock?
-    available(inventory) >= amount
-  end
-
-  # Out of stock is the opposite of available.
-  def out_of_stock?(inventory)
-    !available?(inventory)
-  end
-
-  # But out of stock products may be back orderable.
-  def back_orderable?
-    lead_time.present?
-  end
-
-  # Orderable means in stock or back orderable, but stock may not
-  # be enough to satisfy the ordered amount, check #satisfies?
-  # as soon as the amount is known.
-  def orderable?(inventory)
-    available?(inventory) || back_orderable?
-  end
-
-  # Check if ordering an amount of product can be satisfied.
-  def satisfies?(inventory, amount)
-    available?(inventory, amount) || back_orderable?
-  end
-
-  # Lead times that look like integers are parsed as number of days,
-  # other non-blank strings are considered to be zero days.
-  def lead_time_days
-    lead_time.presence && lead_time.to_i
   end
 
   # Finds the available shipping methods from associated active
   # shipping methods if any, defaulting to all active shipping methods.
   def available_shipping_methods
     shipping_methods.active.presence || store.shipping_methods.active
-  end
-
-  # Restocks given inventory with amount of this product with given lot code,
-  # at given value. If value is not specified, uses the current value of the
-  # targeted inventory item, defaulting to product cost price.
-  def restock!(inventory, code, amount, value = nil, recorded_at = nil)
-    recorded_at ||= Date.today
-    item = inventory_items.find_or_initialize_by(
-      inventory: inventory,
-      code: code
-    )
-    item.inventory_entries.build(
-      recorded_at: recorded_at,
-      on_hand: amount,
-      reserved: 0,
-      pending: 0,
-      value: value || item.value || cost_price || 0
-    )
-    item.save!
-  end
-
-  # Consumes given amount of this product from given inventory, starting from
-  # the oldest stock. Multiple inventory items may be affected to satisfy
-  # the consumed amount. Returns false if we have insufficient stock available.
-  # Immediately returns true if no inventory is specified, or stock is not
-  # tracked for this product.
-  def consume!(inventory, amount, source = nil)
-    return true if inventory.nil? || !tracked_stock?
-    return false unless available?(inventory, amount)
-    inventory_items.in(inventory).online.each do |item|
-      if item.available >= amount
-        # This inventory item satisfies the amount, destock and finish.
-        item.destock!(amount, source)
-        break
-      else
-        # Continue with remaining amount after destocking all of this item.
-        amount -= item.available
-        item.destock!(item.available, source)
-      end
-    end
   end
 
   def available_variant_options
@@ -466,40 +300,6 @@ class Product < ActiveRecord::Base
     [self] + requisite_products
   end
 
-  # Limelighting a product in portal views needs both images and text.
-  def limelightable?
-    cover_image.present? && description.present?
-  end
-
-  # Icon name based on purpose.
-  def icon
-    PURPOSE_ICONS[purpose]
-  end
-
-  def codes
-    customer_code.present? ? "#{customer_code} ⧸ #{code}" : code
-  end
-
-  def to_s
-    "#{title} #{subtitle}"
-  end
-
-  def as_json(options = {})
-    super({
-      only: [:id, :code, :customer_code, :title, :subtitle],
-      methods: [:icon_image_url]
-    }.merge(options))
-  end
-
-  def icon_image_url
-    cover_image.present? && cover_image(:presentational).url(:icon, timestamp: false)
-  end
-
-  # Retail price string representation for JSON.
-  def formatted_price_string
-    retail_price.present? ? retail_price.format : ''
-  end
-
   # Resets the live status of the product, according to these criteria:
   # - retail price is not nil (or product is a bundle or has variants)
   # - set to be available at a certain date which is not in the future
@@ -529,24 +329,11 @@ class Product < ActiveRecord::Base
         trunk, branch = code.partition(/ \(\d+\)/)
         branch = ' (0)' if branch.empty?
         self[:code] = "#{trunk}#{branch.succ}"
+        true
       end
     end
-
-    # Generates the description as a plain text representation of overview.
-    def generate_description
-      html = Nokogiri::HTML(overview)
-      lines = html.search('//text()').map(&:text)
-      self[:description] = lines.join("\n")
-    end
-
-  private
-    # Availability based on the inventory items for this product,
-    # used by #available for calculations.
-    def availability(inventory)
-      inventory_items.in(inventory).online.map(&:available).sum
-    end
-
-    def unit_pricing_property
-      product_properties.joins(:property).merge(Property.unit_pricing).first
-    end
 end
+
+require_dependency 'product/pricing'
+require_dependency 'product/inventory'
+require_dependency 'product/presentation'
