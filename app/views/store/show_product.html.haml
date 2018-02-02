@@ -7,9 +7,4 @@
         %ul= render @categories
 
   #store-body
-    #product-detail-wrap
-      .product-detail
-        = render partial: 'products/product_detail', object: @product, as: :product
-
-- content_for :auxiliary_nav do
-  = render partial: 'products/context_menu', object: @product, as: :product
+    = render partial: 'show_product'

@@ -7,14 +7,4 @@
         %ul= render @categories
 
   #store-body
-    #products-wrap
-      .products
-        .page-header.visible-print
-          %h1= @category.to_s
-          %p.lead= @category.subtitle
-        - if @category.filtering?
-          .product-filter
-            = render partial: 'products/filtering'
-        #product-view{class: @view_mode, data: {'view-key': dom_id(@category)}}
-          %ul{class: current_store.masonry? && 'masonry-grid'}
-            = render @products
+    = render partial: 'show_category'
