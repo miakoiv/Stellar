@@ -1,10 +1,19 @@
-.container
-  .row
-    .col-xs-12.col-md-8.col-md-offset-2
-      .form-group
-        .input-group.input-group-lg.input-group-round
-          %span.input-group-addon= icon('barcode')
-          = text_field_tag 'ean', nil, class: 'form-control'
+#barcode-panel
+  .container
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+        .form-group
+          .input-group.input-group-lg.input-group-round
+            %span.input-group-addon= icon('barcode')
+            = text_field_tag 'ean', nil, class: 'form-control'
+
+#static-wrap.layout-container
+  .container
+    .row
+      .col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+        = render partial: 'pos/order_items/new', object: @order, as: :order
+        .panel.panel-default
+          = render partial: 'pos/cart_contents', object: @order, as: :order
 
 :coffee
   $('#ean').focus()

@@ -721,7 +721,7 @@ i.icon {
 .selectize-list-group {
   .selectize-input img {
     @extend .pull-left, .box-icon;
-    margin-right: 10px;
+    margin: -2px 10px -3px 0;
   }
   .selectize-dropdown-content {
     padding: 0;

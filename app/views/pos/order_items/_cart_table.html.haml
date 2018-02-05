@@ -1,0 +1,22 @@
+#cart-table.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(OrderItem, :product_title)
+        %th
+        %th.col-xs-1.text-right= col(OrderItem, :amount)
+        %th
+        %th.col-xs-1.text-right= col(OrderItem, :subtotal)
+        %th.col-xs-1.actions
+    %tfoot
+      %tr.info
+        %th{colspan: 2}
+        %th.text-right= col(Order, :grand_total)
+        %th
+        %th#grand-total.text-right.currency
+          = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
+        %th
+    %tbody
+      = render partial: 'pos/order_items/cart_row', collection: order.order_items, as: :order_item
+      - if order.adjustments.any?
+        = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment, locals: {includes_tax: order.includes_tax?}

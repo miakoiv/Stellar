@@ -1,0 +1,7 @@
+#static-wrap.layout-container
+  .container
+    .page-header
+      - if current_user.can_create?(Order, at: current_store)
+        = link_to new_pos_order_path, class: 'btn btn-primary' do
+          = icon('plus', t('.new_order'))
+      %h1= icon('truck', title(Order, count: 2))

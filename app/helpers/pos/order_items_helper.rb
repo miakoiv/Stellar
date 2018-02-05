@@ -1,0 +1,2 @@
+module Pos::OrderItemsHelper
+end

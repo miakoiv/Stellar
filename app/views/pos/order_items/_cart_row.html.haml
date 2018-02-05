@@ -1,0 +1,17 @@
+%tr[order_item]
+  %td
+    %strong= order_item.product_title
+    = order_item.product_subtitle
+  %td
+  %td.text-right
+    = form_for [:pos, order_item], remote: true, html: {class: 'pull-right immediate'} do |f|
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', disabled: order_item.is_subitem? || order_item.internal?
+  %td
+  %td.text-right.currency
+    = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+  %td.actions
+    - unless order_item.is_subitem? || order_item.internal?
+      = link_to icon('remove'), pos_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+
+- if order_item.adjustments.any?
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

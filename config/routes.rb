@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   # Point-of-sale interface.
   namespace :pos do
     root 'main#index'
+    resources :orders do
+      resources :order_items, shallow: true
+    end
   end
 
   resources :orders do
