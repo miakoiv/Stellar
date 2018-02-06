@@ -12,6 +12,11 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   belongs_to :product
 
+  # Order items may reference a specific inventory item and optionally
+  # an inventory entry for ordering directly from inventory.
+  belongs_to :inventory_item
+  belongs_to :inventory_entry
+
   # Order items may have subitems that update with their parent, and are not
   # directly updatable or removable.
   belongs_to :parent_item, class_name: 'OrderItem'
@@ -26,6 +31,7 @@ class OrderItem < ActiveRecord::Base
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
+  validates :product_id, presence: true
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
 
   #---

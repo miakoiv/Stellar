@@ -192,6 +192,7 @@ fi:
         fuzzy: Epätarkat saldot
         inventory_code: Inventaariokoodi
       inventory_entry:
+        serial_number: Sarjanumero
         recorded_at: Pvm
         source_id: Viite
         on_hand: Varastossa
@@ -259,6 +260,8 @@ fi:
       order_item:
         order_id: Tilaus
         product_id: Tuote
+        inventory_item_id: Eräkoodi
+        inventory_entry_id: Sarjanumero
         amount: kpl
         price: à-hinta
         subtotal: Yhteensä
