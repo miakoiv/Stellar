@@ -28,7 +28,9 @@ class Admin::InventoryEntriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_entry_params
       params.require(:inventory_entry).permit(
-        :recorded_at, :on_hand, :reserved, :pending, :value, :note
+        :serial_number, :recorded_at,
+        :on_hand, :reserved, :pending,
+        :value, :note
       )
     end
 end

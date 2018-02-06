@@ -59,6 +59,10 @@ class InventoryItem < ActiveRecord::Base
     inventory.name
   end
 
+  def to_s
+    code
+  end
+
   private
     # After save, update the inventory counts and value from the entries.
     # Value is calculated from on hand inventory, using a weighted average

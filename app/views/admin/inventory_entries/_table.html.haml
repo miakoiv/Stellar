@@ -2,13 +2,12 @@
   %table.table.table-striped.table-hover.table-loose
     %thead
       %tr
+        %td.col-min
         %th.col-xs-2= col(InventoryEntry, :recorded_at)
-        %th.col-xs-2= col(InventoryEntry, :source_id)
+        %th.col-xs-2= col(InventoryEntry, :serial_number)
+        %th.col-xs-4= col(InventoryEntry, :note)
         %th.col-xs-1.text-right.no-wrap= col(InventoryEntry, :on_hand)
-        %th.col-xs-1.text-right.no-wrap= col(InventoryEntry, :reserved)
-        %th.col-xs-1.text-right.no-wrap= col(InventoryEntry, :pending)
         %th.col-xs-2.text-right= col(InventoryEntry, :value)
-        %th= col(InventoryEntry, :note)
-
+        %th.col-xs-1
     %tbody#inventory-entries-tbody
       = render partial: 'admin/inventory_entries/tbody', object: @inventory_item, as: :inventory_item

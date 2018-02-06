@@ -1,4 +1,5 @@
 $('#inventory-entries-tbody').html("#{j render partial: 'admin/inventory_entries/tbody', object: @inventory_item, as: :inventory_item}");
+$('#inventory-entries-tbody').initialize();
 $('#inventory-entry-form').replaceWith("#{j render partial: 'admin/inventory_entries/form', object: @inventory_item, as: :inventory_item}");
 $('#inventory-item').replaceWith("#{j render partial: 'admin/inventory_items/item', object: @inventory_item, as: :inventory_item}");
 $("##{dom_id(@inventory_entry)}").effect('highlight');
