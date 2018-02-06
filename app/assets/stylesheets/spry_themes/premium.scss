@@ -848,6 +848,21 @@ $body-tone-bg: darken($body-bg, 4%);
     }
   }
 }
+#error-indicator {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+
+  .fa {
+    @extend .fa-3x;
+    display: block;
+    color: $brand-danger;
+  }
+}
 #order-item-form {
   padding-bottom: 40px;
 }

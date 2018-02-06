@@ -3,11 +3,15 @@
     %fieldset
       .row
         .col-sm-9
-          = f.select :product_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group'}
+          = f.select :product_id, [], {skip_label: true}, {placeholder: title(Product), class: 'selectize-tall selectize-list-group'}
         .col-sm-3
-          = f.number_field :amount, min: 1, max: 999, class: 'text-right'
+          = f.number_field :amount, min: 1, max: 999, skip_label: true, placeholder: col(OrderItem, :amount)
       .row
-        .col-xs-12
+        .col-sm-5
+          = f.select :inventory_item_id, [], {skip_label: true}, {placeholder: col(OrderItem, :inventory_item_id), class: 'selectize'}
+        .col-sm-4
+          = f.select :inventory_entry_id, [], {skip_label: true}, {placeholder: col(OrderItem, :inventory_entry_id), class: 'selectize'}
+        .col-sm-3
           = f.button class: 'btn btn-block btn-primary' do
             = icon('check')
 

@@ -1,3 +1,4 @@
 $('#cart-contents').replaceWith("#{j render partial: 'pos/cart_contents', object: @order, as: :order}");
 $('#order-item-form').replaceWith("#{j render partial: 'pos/order_items/new', object: @order, as: :order}");
+$('#order-item-form').initialize();
 $("##{dom_id(@order_item)}").effect('highlight');

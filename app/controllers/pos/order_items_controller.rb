@@ -12,12 +12,21 @@ class Pos::OrderItemsController < ApplicationController
   # POST /pos/orders/1/order_items
   # Use Order#insert to create order items correctly.
   def create
-    @product = current_store.products.live.find(order_item_params[:product_id])
+    @product = current_store.products.live.find_by(id: order_item_params[:product_id])
+    find_inventory_item_and_entry(@product) if @product.present?
     amount = order_item_params[:amount].to_i
-    @order_item = @order.insert(@product, amount, current_group)
-    @order.recalculate!
-
-    respond_to :js
+    options = {
+      inventory_item: @inventory_item,
+      inventory_entry: @inventory_entry
+    }
+    respond_to do |format|
+      if @order_item = @order.insert(@product, amount, current_group, options)
+        @order.recalculate!
+        format.js { render :create }
+      else
+        format.js { render :error }
+      end
+    end
   end
 
   # PATCH/PUT /pos/order_items/1
@@ -55,9 +64,14 @@ class Pos::OrderItemsController < ApplicationController
       @order_types = @order.available_order_types(current_group)
     end
 
+    def find_inventory_item_and_entry(product)
+      @inventory_item = product.inventory_items.find_by(id: order_item_params[:inventory_item_id])
+      @inventory_entry = @inventory_item.present? ? @inventory_item.entries.find_by(id: order_item_params[:inventory_entry_id]) : nil
+    end
+
     def order_item_params
       params.require(:order_item).permit(
-        :product_id, :amount
+        :product_id, :amount, :inventory_item_id, :inventory_entry_id
       )
     end
 end

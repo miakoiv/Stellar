@@ -11,6 +11,8 @@
   .container
     .row
       .col-xs-12.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+        #error-indicator
+          = icon('warning')
         = render partial: 'pos/order_items/new', object: @order, as: :order
         .panel.panel-default
           = render partial: 'pos/cart_contents', object: @order, as: :order
