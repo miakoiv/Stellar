@@ -120,7 +120,7 @@ class Admin::OrdersController < ApplicationController
 
     product_ids.each do |product_id|
       product = @current_store.products.live.find(product_id)
-      @order.insert(product, 1)
+      @order.insert(product, 1, nil)
     end
     @order.recalculate!
 

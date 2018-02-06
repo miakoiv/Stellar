@@ -4,33 +4,44 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_items
 
   # Inserts amount of product to this order in the context of given
-  # parent item. Bundles are inserted as components right away.
-  def insert(product, amount, group = nil, parent_item = nil)
+  # group. Options may include a parent item for grouping the order items,
+  # a specific inventory item reference, and an inventory entry reference.
+  def insert(product, amount, group, options = {})
+    return nil if product.nil?
     if product.bundle?
-      insert_components(product, amount, group, parent_item)
+      insert_components(product, amount, group,
+        parent_item: options[:parent_item]
+      )
     else
-      insert_single(product, amount, group, parent_item, product.composite?)
+      insert_single(product, amount, group, options.merge(
+        separate_components: product.composite?
+      ))
     end
   end
 
-  # Inserts the component products of given product to this order as
-  # subitems of the given parent item.
-  def insert_components(product, amount, group, parent_item)
+  # Inserts the component products of given product to this order.
+  # Options may include a parent item only, other references are lost.
+  def insert_components(product, amount, group, options = {})
     product.component_entries.each do |entry|
-      insert(entry.component, amount * entry.quantity, group, parent_item)
+      insert(entry.component, amount * entry.quantity, group, options)
     end
   end
 
   # Inserts a single product to this order, optionally with separate components.
   # Pricing is according to order source group if not specified.
-  def insert_single(product, amount, group, parent_item, separate_components)
+  def insert_single(product, amount, group, options = {})
     pricing = Appraiser::Product.new(group || source)
     final_price = pricing.for_order(product)
     label = product.best_promoted_item(group).try(:description)
     order_item = order_items.create_with(
       amount: 0,
       priority: order_items_count
-    ).find_or_create_by(product: product, parent_item: parent_item)
+    ).find_or_create_by(
+      product: product,
+      parent_item: options[:parent_item],
+      inventory_item: options[:inventory_item],
+      inventory_entry: options[:inventory_entry]
+    )
     order_item.update!(
       amount: order_item.amount + amount,
       price: final_price.amount,
@@ -38,8 +49,8 @@ class Order < ActiveRecord::Base
       price_includes_tax: final_price.tax_included,
       label: label || ''
     )
-    if separate_components
-      insert_components(product, amount, group, order_item)
+    if options[:separate_components]
+      insert_components(product, amount, group, parent_item: order_item)
     end
     order_item
   end
