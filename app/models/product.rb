@@ -56,8 +56,8 @@ class Product < ActiveRecord::Base
 
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
-  belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true
-  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, after_add: :reset_itself!, after_remove: :reset_itself!
+  belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true, counter_cache: :variants_count
+  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, counter_cache: :variants_count, after_add: :reset_itself!, after_remove: :reset_itself!
   belongs_to :primary_variant, class_name: 'Product'
 
   has_many :order_items
@@ -83,7 +83,6 @@ class Product < ActiveRecord::Base
   # Scopes for master and variant products based on associations present.
   scope :master, -> { where(master_product_id: nil) }
   scope :variant, -> { where.not(master_product_id: nil) }
-  scope :having_variants, -> { joins(:variants).uniq }
 
   # Visible products are shown in storefront views. They include live
   # vanilla, bundle, composite, and virtual products, but not variants.
@@ -161,7 +160,7 @@ class Product < ActiveRecord::Base
   end
 
   def has_variants?
-    variants.any?
+    variants_count > 0
   end
 
   def primary?
@@ -240,10 +239,6 @@ class Product < ActiveRecord::Base
     shipping_methods.active.presence || store.shipping_methods.active
   end
 
-  def available_variant_options
-    store.products.variant.map { |p| [p.to_s, p.id] }
-  end
-
   # Copies certain attributes from given master to create a valid variant.
   def vary_from(master)
     self.assign_attributes(
@@ -285,7 +280,7 @@ class Product < ActiveRecord::Base
   end
 
   def generate_variant_code
-    "#{code}-#{variants.count}"
+    "#{code}-#{variants_count}"
   end
 
   def slugger

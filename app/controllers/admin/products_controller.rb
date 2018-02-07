@@ -60,7 +60,7 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for Product, at: current_store
     @product = current_store.products.build(product_params)
     @product.vendor = current_group if third_party?
-    @product.priority = @product.master_product.variants.count if @product.variant?
+    @product.priority = @product.master_product.variants_count if @product.variant?
 
     respond_to do |format|
       if @product.save
