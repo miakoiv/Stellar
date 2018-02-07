@@ -66,7 +66,7 @@ class Pos::OrderItemsController < ApplicationController
 
     def find_inventory_item_and_entry(product)
       @inventory_item = product.inventory_items.find_by(id: order_item_params[:inventory_item_id])
-      @inventory_entry = @inventory_item.present? ? @inventory_item.entries.find_by(id: order_item_params[:inventory_entry_id]) : nil
+      @inventory_entry = @inventory_item.present? ? @inventory_item.inventory_entries.find_by(id: order_item_params[:inventory_entry_id]) : nil
     end
 
     def order_item_params
