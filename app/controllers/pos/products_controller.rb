@@ -9,7 +9,7 @@ class Pos::ProductsController < ApplicationController
   # GET /pos/products/query.json?q=keyword
   # This method serves selectize widgets populated via Ajax.
   def query
-    @query = {'keyword' => params[:q], live: true}.merge(params)
+    @query = {'keyword' => params[:q], 'having_variants' => params[:having_variants], live: true}.merge(params)
     @search = ProductSearch.new(search_params)
     @products = @search.results
   end

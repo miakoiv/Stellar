@@ -68,6 +68,11 @@ class ProductSearch < Searchlight::Search
     query.where(live: checked?(live))
   end
 
+  def search_having_variants
+    return query if checked?(having_variants)
+    query.where(variants_count: 0)
+  end
+
   def search_price_min
     query.where('retail_price_cents >= ?', price_min.to_money.cents)
   end
