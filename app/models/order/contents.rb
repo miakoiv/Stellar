@@ -82,8 +82,9 @@ class Order < ActiveRecord::Base
 
   # Order requiring shipping is determined by its contents.
   # A single item that requires shipping will demand shipping
-  # for the whole order.
+  # for the whole order. Returns nil for not applicable (no items).
   def requires_shipping?
+    return nil unless order_items.any?
     order_items.tangible.any?
   end
 

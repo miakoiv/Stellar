@@ -96,6 +96,8 @@ class Order < ActiveRecord::Base
   # excluding those that are not suitable for one or more products
   # present in the order items.
   def available_order_types(group)
+    shipping_requirement = requires_shipping?
+    return group.outgoing_order_types if shipping_requirement.nil?
     group.outgoing_order_types.where(has_shipping: requires_shipping?)
   end
 
