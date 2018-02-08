@@ -835,6 +835,10 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-bottom: 0;
   background-color: lighten($brand-primary, 38%);
 
+  .form-group {
+    margin-left: -2px;
+    margin-right: -2px;
+  }
   .input-group-lg.input-group-round {
     .input-group-addon {
       border-radius: $input-height-large/2;
