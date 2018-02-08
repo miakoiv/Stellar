@@ -9,6 +9,6 @@ class Pos::MainController < ApplicationController
   # GET /pos/index
   def index
     @order = shopping_cart
-    @order_types = @order.available_order_types(current_group)
+    @order_types = current_group.outgoing_order_types
   end
 end
