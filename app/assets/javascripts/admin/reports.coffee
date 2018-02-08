@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $.fn.extend
-  revenue_chart: (params = {})->
+  revenue_chart: (params = {}) ->
     $canvas = this
     moment.locale '#{I18n.locale}'
     $.ajax
