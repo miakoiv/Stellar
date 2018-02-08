@@ -47,6 +47,25 @@ $.fn.extend
       valueField: 'id'
       labelField: 'code'
       searchField: 'code'
+      render:
+        item: (item, escape) ->
+          """
+          <div class="item">
+            <strong>#{escape(item.code)}</strong>
+            <span class="small">
+              #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+            </span>
+          </div>
+          """
+        option: (item, escape) ->
+          """
+          <div class="option">
+            <strong>#{escape(item.code)}</strong>
+            <span class="small">
+              #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+            </span>
+          </div>
+          """
       onChange: (id) ->
         entry_select.clearOptions()
         if id
