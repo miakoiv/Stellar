@@ -17,6 +17,8 @@ class InventoryEntry < ActiveRecord::Base
 
   default_scope { order(recorded_at: :desc, created_at: :desc) }
 
+  scope :with_serial_number, -> { where.not(serial_number: nil) }
+
   #---
   validates :recorded_at, presence: true, on: :create
   validates :on_hand, numericality: {only_integer: true}

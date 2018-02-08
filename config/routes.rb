@@ -17,9 +17,7 @@ Rails.application.routes.draw do
       resources :order_items, shallow: true
     end
     resources :products do
-      collection do
-        get :query
-      end
+      get :query, on: :collection
     end
   end
 

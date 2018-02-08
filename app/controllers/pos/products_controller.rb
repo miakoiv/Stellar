@@ -3,8 +3,14 @@
 class Pos::ProductsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_product,  only: [:show]
 
   layout 'point_of_sale'
+
+  # GET /post/products/1
+  # This method supplies product data JSON for UI widgets.
+  def show
+  end
 
   # GET /pos/products/query.json?q=keyword
   # This method serves selectize widgets populated via Ajax.
@@ -15,6 +21,11 @@ class Pos::ProductsController < ApplicationController
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product
+      @product = current_store.products.friendly.find(params[:id])
+    end
+
     # Restrict searching to products in current store.
     def search_params
       params = {store: current_store}
