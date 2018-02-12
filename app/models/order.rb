@@ -11,7 +11,10 @@ class Order < ActiveRecord::Base
   # for the portal store the originating hostname points to.
   belongs_to :store
   belongs_to :store_portal, class_name: 'Store'
+
+  # User created the order, and is usually the customer too.
   belongs_to :user
+  belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
 
   belongs_to :order_type
   delegate :is_rfq?, :is_quote?, to: :order_type

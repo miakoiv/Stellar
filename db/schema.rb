@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207085656) do
+ActiveRecord::Schema.define(version: 20180212103553) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -412,6 +412,7 @@ ActiveRecord::Schema.define(version: 20180207085656) do
     t.string   "our_reference",         limit: 255
     t.string   "message",               limit: 255
     t.integer  "user_id",               limit: 4,                     null: false
+    t.integer  "customer_id",           limit: 4,                     null: false
     t.integer  "order_type_id",         limit: 4
     t.boolean  "includes_tax",                        default: true,  null: false
     t.datetime "completed_at"
@@ -446,6 +447,7 @@ ActiveRecord::Schema.define(version: 20180207085656) do
     t.string   "order_type_name",       limit: 255
   end
 
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   add_index "orders", ["order_type_id"], name: "index_orders_on_order_type_id", using: :btree
   add_index "orders", ["store_id"], name: "index_orders_on_store_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree

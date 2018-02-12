@@ -219,6 +219,7 @@ fi:
         our_reference: Viitteemme
         message: Merkki
         user_id: Tilaaja
+        customer_id: Asiakas
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm
         shipping_at: Haluttu toimituspvm

@@ -219,6 +219,7 @@ en:
         our_reference: Our reference
         message: Message
         user_id: From
+        customer_id: Customer
         order_type_id: Order type
         completed_at: Ordered
         shipping_at: Requested shipping at
