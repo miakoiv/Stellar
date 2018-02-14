@@ -24,7 +24,6 @@ $.fn.extend
             callback(response)
       onChange: (id) ->
         item_select.clearOptions()
-        entry_select.clearOptions()
         if id
           item_select.load (callback) ->
             $.ajax
@@ -39,7 +38,6 @@ $.fn.extend
                 $item_select.data 'entries', response.inventory_entries
         else
           item_select.disable()
-          entry_select.disable()
 
     $item_select = $('#order_item_inventory_item_id').selectize
       dropdownParent: 'body'
@@ -66,20 +64,6 @@ $.fn.extend
             </span>
           </div>
           """
-      onChange: (id) ->
-        entry_select.clearOptions()
-        if id
-          entry_select.enable()
-          entry_select.addOption $item_select.data('entries')[id]
-        else
-          entry_select.disable()
-
-    $entry_select = $('#order_item_inventory_entry_id').selectize
-      dropdownParent: 'body'
-      allowEmptyOption: true
-      valueField: 'id'
-      labelField: 'serial_number'
 
     product_select = $product_select[0].selectize
     item_select = $item_select[0].selectize
-    entry_select = $entry_select[0].selectize

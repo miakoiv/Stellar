@@ -2,16 +2,14 @@
   = bootstrap_form_for [:pos, order, OrderItem.new(amount: 1)], remote: true do |f|
     %fieldset
       .row
-        .col-sm-9
+        .col-sm-8
           = f.select :product_id, [], {skip_label: true}, {placeholder: title(Product), class: 'selectize-tall selectize-list-group'}
-        .col-sm-3
+        .col-sm-4
           = f.number_field :amount, min: 1, max: 999, skip_label: true, placeholder: col(OrderItem, :amount)
       .row
-        .col-sm-5
+        .col-sm-8
           = f.select :inventory_item_id, [], {skip_label: true}, {disabled: true, placeholder: col(OrderItem, :inventory_item_id)}
         .col-sm-4
-          = f.select :inventory_entry_id, [], {skip_label: true}, {disabled: true, placeholder: col(OrderItem, :inventory_entry_id)}
-        .col-sm-3
           = f.button class: 'btn btn-block btn-primary' do
             = icon('check')
 

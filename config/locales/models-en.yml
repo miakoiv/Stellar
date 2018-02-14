@@ -192,7 +192,6 @@ en:
         fuzzy: Approximate quantities
         inventory_code: Inventory code
       inventory_entry:
-        serial_number: Serial number
         recorded_at: Date
         source_id: Reference
         on_hand: On hand
@@ -262,7 +261,6 @@ en:
         order_id: Order
         product_id: Product
         inventory_item_id: Lot code
-        inventory_entry_id: Serial number
         amount: pc
         price: à
         subtotal: Subtotal

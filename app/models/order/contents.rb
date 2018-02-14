@@ -38,8 +38,7 @@ class Order < ActiveRecord::Base
     ).find_or_create_by(
       product: product,
       parent_item: options[:parent_item],
-      inventory_item: options[:inventory_item],
-      inventory_entry: options[:inventory_entry]
+      inventory_item: options[:inventory_item]
     )
     order_item.update!(
       amount: order_item.amount + amount,

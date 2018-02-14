@@ -4,8 +4,7 @@
       %tr
         %td.col-min
         %th.col-xs-2= col(InventoryEntry, :recorded_at)
-        %th.col-xs-2= col(InventoryEntry, :serial_number)
-        %th.col-xs-4= col(InventoryEntry, :note)
+        %th= col(InventoryEntry, :note)
         %th.col-xs-1.text-right.no-wrap= col(InventoryEntry, :on_hand)
         %th.col-xs-2.text-right= col(InventoryEntry, :value)
         %th.col-xs-1

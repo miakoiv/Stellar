@@ -192,7 +192,6 @@ fi:
         fuzzy: Epätarkat saldot
         inventory_code: Inventaariokoodi
       inventory_entry:
-        serial_number: Sarjanumero
         recorded_at: Pvm
         source_id: Viite
         on_hand: Varastossa

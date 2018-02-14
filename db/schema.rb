@@ -283,7 +283,6 @@ ActiveRecord::Schema.define(version: 20180212103553) do
 
   create_table "inventory_entries", force: :cascade do |t|
     t.integer  "inventory_item_id", limit: 4,   null: false
-    t.string   "serial_number",     limit: 255
     t.date     "recorded_at"
     t.integer  "source_id",         limit: 4
     t.string   "source_type",       limit: 255
@@ -338,7 +337,6 @@ ActiveRecord::Schema.define(version: 20180212103553) do
     t.integer  "order_id",              limit: 4,                                           null: false
     t.integer  "product_id",            limit: 4,                                           null: false
     t.integer  "inventory_item_id",     limit: 4
-    t.integer  "inventory_entry_id",    limit: 4
     t.string   "label",                 limit: 255
     t.integer  "amount",                limit: 4
     t.integer  "price_cents",           limit: 4
@@ -353,7 +351,6 @@ ActiveRecord::Schema.define(version: 20180212103553) do
     t.string   "product_subtitle",      limit: 255
   end
 
-  add_index "order_items", ["inventory_entry_id"], name: "index_order_items_on_inventory_entry_id", using: :btree
   add_index "order_items", ["inventory_item_id"], name: "index_order_items_on_inventory_item_id", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["parent_item_id"], name: "index_order_items_on_parent_item_id", using: :btree
