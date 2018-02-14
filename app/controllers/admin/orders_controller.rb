@@ -40,8 +40,8 @@ class Admin::OrdersController < ApplicationController
   # POST /admin/orders.json
   def create
     authorize_action_for Order, at: current_store
-    @order = current_store.orders.build(order_params)
-    @order.address_to(@order.user)
+    @order = current_store.orders.build(order_params.merge(user: current_user))
+    @order.address_to(@order.customer)
 
     respond_to do |format|
       if @order.save
@@ -120,7 +120,7 @@ class Admin::OrdersController < ApplicationController
 
     product_ids.each do |product_id|
       product = @current_store.products.live.find(product_id)
-      @order.insert(product, 1, nil)
+      @order.insert(product, 1, @order.source)
     end
     @order.recalculate!
 
@@ -138,7 +138,8 @@ class Admin::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(
-        :user_id, :order_type_id, :completed_at, :shipping_at, :installation_at,
+        :user_id, :order_type_id, :customer_id,
+        :completed_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :vat_number,
         :external_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,

@@ -28,9 +28,8 @@ class Order < ActiveRecord::Base
   end
 
   # Inserts a single product to this order, optionally with separate components.
-  # Pricing is according to order source group if not specified.
   def insert_single(product, amount, group, options = {})
-    pricing = Appraiser::Product.new(group || source)
+    pricing = Appraiser::Product.new(group)
     final_price = pricing.for_order(product)
     label = product.best_promoted_item(group).try(:description)
     order_item = order_items.create_with(

@@ -13,7 +13,7 @@
         .panel-body
           %fieldset
             = f.select :order_type_id, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {class: 'selectize'}
-            = f.select :user_id, current_store.users.map { |u| [u.to_s, u.id] }, {}, {class: 'selectize'}
+            = f.select :customer_id, current_store.users.map { |u| [u.to_s, u.id] }, {}, {class: 'selectize'}
           %fieldset.actions
             = f.form_group do
               = f.primary

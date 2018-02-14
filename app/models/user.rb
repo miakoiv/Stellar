@@ -43,16 +43,14 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
 
   #---
-  # A user's shopping cart is technically an order singleton,
-  # the one and only incomplete order at given store.
+  # A user's shopping cart is the only incomplete order at given store.
+  # Shopping carts have the user as the customer by default.
   def shopping_cart(store, store_portal, group)
     orders.at(store).incomplete.first ||
       orders.at(store).create(
+        customer: self,
         store_portal: store_portal,
-        includes_tax: group.price_tax_included?,
-        customer_name: guest?(store) ? nil : name,
-        customer_email: guest?(store) ? nil : email,
-        customer_phone: guest?(store) ? nil : phone
+        includes_tax: group.price_tax_included?
       )
   end
 

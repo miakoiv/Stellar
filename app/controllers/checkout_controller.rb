@@ -7,10 +7,6 @@ class CheckoutController < ApplicationController
     super || guest_user
   end
 
-  def current_group
-    delegate_group || super
-  end
-
   before_action :authenticate_user_or_skip!
   before_action :set_header_and_footer
   before_action :set_categories, only: [:checkout, :return]
@@ -34,7 +30,7 @@ class CheckoutController < ApplicationController
     @shipping_methods = @order.available_shipping_methods
     @order.shipments.destroy_all
     @order.clear_shipping_costs!
-    @order.address_to(current_user)
+    @order.address_to(@order.customer) unless guest?
 
     if @order.has_payment?
       @payment_gateway = @order.payment_gateway_class.new(order: @order)
@@ -68,7 +64,7 @@ class CheckoutController < ApplicationController
     )
     respond_to do |format|
       if @shipment.save
-        @order.apply_shipping_cost!(@shipment, current_group)
+        @order.apply_shipping_cost!(@shipment)
         format.js { render 'ship' }
       else
         head :bad_request

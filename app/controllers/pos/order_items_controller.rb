@@ -61,7 +61,7 @@ class Pos::OrderItemsController < ApplicationController
   private
     def set_order_types
       @order = shopping_cart
-      @order_types = @order.available_order_types(current_group)
+      @order_types = @order.available_order_types
     end
 
     def find_inventory_item_and_entry(product)

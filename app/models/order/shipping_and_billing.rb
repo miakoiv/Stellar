@@ -67,6 +67,9 @@ class Order < ActiveRecord::Base
 
   # Addresses this order to the given user if she has any addresses defined.
   def address_to(user)
+    self.customer_email = user.email if customer_email.blank?
+    self.customer_name = user.name if customer_name.blank?
+    self.customer_phone = user.phone if customer_phone.blank?
     if user.shipping_address.present?
       self.shipping_address = user.shipping_address
       self.shipping_postalcode = user.shipping_postalcode
@@ -85,9 +88,8 @@ class Order < ActiveRecord::Base
 
   # Inserts an order item for the shipping cost using the shipping cost
   # product with the price queried from the given shipment.
-  def apply_shipping_cost!(shipment, group)
-    pricing = Appraiser::Product.new(group || source)
-    cost = shipment.cost(pricing)
+  def apply_shipping_cost!(shipment)
+    cost = shipment.cost(customer_pricing)
     unless cost.nil?
       order_items.create(
         product: shipment.shipping_cost_product,

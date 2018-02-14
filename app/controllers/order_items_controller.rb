@@ -46,7 +46,7 @@ class OrderItemsController < ApplicationController
   private
     def set_order_and_item
       @order = shopping_cart
-      @order_types = @order.available_order_types(current_group)
+      @order_types = @order.available_order_types
       @order_item = @order.order_items.find(params[:id])
     end
 

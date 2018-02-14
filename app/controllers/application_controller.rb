@@ -118,8 +118,7 @@ class ApplicationController < ActionController::Base
     current_group.stock_shown?
   end
 
-  # Pricing currently in effect is handled by appraisers
-  # initialized with the current group.
+  # Pricing in views is handled by an appraiser for the current group.
   def pricing
     @product_appraiser ||= Appraiser::Product.new(current_group)
   end
@@ -130,8 +129,7 @@ class ApplicationController < ActionController::Base
     @premium_appraiser ||= Appraiser::Product.new(current_group.premium_group)
   end
 
-  # Convenience method to tell if the current group sees prices
-  # with or without tax.
+  # Convenience method to tell if prices in views are with or without tax.
   def incl_tax?
     @tax_included ||= current_group.price_tax_included?
   end

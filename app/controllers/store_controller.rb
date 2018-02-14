@@ -20,9 +20,9 @@ class StoreController < ApplicationController
 
   before_action :set_header_and_footer
   before_action :set_categories,
-    except: [:index, :lookup, :delete_cart, :pricing, :order_product]
+    except: [:index, :lookup, :delete_cart, :order_product]
   before_action :set_departments,
-    except: [:index, :lookup, :delete_cart, :pricing, :order_product]
+    except: [:index, :lookup, :delete_cart, :order_product]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category]
   before_action :find_department, only: [:show_department]
@@ -46,25 +46,6 @@ class StoreController < ApplicationController
     end
   end
 
-  # GET /:slug
-  def show_page
-  end
-
-  # GET /cart
-  def cart
-    @order = shopping_cart
-    @order_types = @order.available_order_types(current_group)
-    return redirect_to front_path if @order.empty?
-  end
-
-  # GET /cart/delete
-  def delete_cart
-    @order = shopping_cart
-    @order.destroy
-
-    redirect_to front_path, notice: t('.notice')
-  end
-
   # GET /store/lookup.js
   def lookup
     @query = params
@@ -76,6 +57,25 @@ class StoreController < ApplicationController
     @results = @category_results.any? || @product_results.any?
 
     respond_to :js
+  end
+
+  # GET /:slug
+  def show_page
+  end
+
+  # GET /cart
+  def cart
+    @order = shopping_cart
+    @order_types = @order.available_order_types
+    return redirect_to front_path if @order.empty?
+  end
+
+  # GET /cart/delete
+  def delete_cart
+    @order = shopping_cart
+    @order.destroy
+
+    redirect_to front_path, notice: t('.notice')
   end
 
   # GET /category/:category_id
@@ -112,7 +112,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @product = current_store.products.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
-    @order.insert(@product, amount, current_group)
+    @order.insert(@product, amount, @order.source)
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)

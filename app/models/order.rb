@@ -50,6 +50,7 @@ class Order < ActiveRecord::Base
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
   #---
+  validates :customer, presence: true, on: :update
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update
@@ -85,23 +86,32 @@ class Order < ActiveRecord::Base
     concluded? ? self[:order_type_name] : order_type.name
   end
 
+  # Orders made out to another customer, not the user herself.
+  def customer?
+    user != customer
+  end
+
   # Order source group is independent of order type.
   def source
-    user.group(store)
+    customer.group(store)
+  end
+
+  # Pricing applied to this order, based on source group.
+  def customer_pricing
+    Appraiser::Product.new(source)
   end
 
   # Order destination depends on the order type since there may be
   # multiple order types to choose from at checkout.
   delegate :destination, to: :order_type
 
-  # Finds the order types applicable to this order in the context
-  # of given group. These are the outgoing order types for the group,
-  # excluding those that are not suitable for one or more products
-  # present in the order items.
-  def available_order_types(group)
+  # Finds the order types available to this order. These are the outgoing
+  # order types for the source group, excluding those that are not suitable
+  # for one or more products present in the order items.
+  def available_order_types
     shipping_requirement = requires_shipping?
-    return group.outgoing_order_types if shipping_requirement.nil?
-    group.outgoing_order_types.where(has_shipping: requires_shipping?)
+    return source.outgoing_order_types if shipping_requirement.nil?
+    source.outgoing_order_types.where(has_shipping: requires_shipping?)
   end
 
   def editable_items?
