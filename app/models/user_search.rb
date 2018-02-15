@@ -18,6 +18,10 @@ class UserSearch < Searchlight::Search
     query.where(groups: {id: group})
   end
 
+  def search_except_group
+    query.where.not(groups: {id: except_group})
+  end
+
   def search_keyword
     query.where("CONCAT_WS(' ', users.email, users.name) LIKE ?", "%#{keyword}%")
   end
