@@ -40,7 +40,7 @@ class Admin::UsersController < ApplicationController
   # POST /admin/groups/1/users.json
   def create
     authorize_action_for User, at: current_store
-    @user = User.find_or_initialize_by(user_params)
+    @user = User.new(user_params.merge(approved: true))
 
     respond_to do |format|
       if @user.save
