@@ -79,6 +79,11 @@ class User < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
+  # Overrides Devise method to ensure the user is approved.
+  def active_for_authentication?
+    super && approved?
+  end
+
   def require_password?
     encrypted_password.blank?
   end
