@@ -122,6 +122,7 @@ fi:
     users:
       create:
         notice: "Käyttäjä %{user} luotu."
+        exists: "Käyttäjä %{user} löydetty."
       update:
         notice: "Käyttäjä %{user} päivitetty."
       destroy:

@@ -40,6 +40,9 @@ class Admin::UsersController < ApplicationController
   # POST /admin/groups/1/users.json
   def create
     authorize_action_for User, at: current_store
+    if user = User.find_by(email: user_params[:email])
+      return redirect_to edit_admin_user_path(user), alert: t('.exists', user: user)
+    end
     @user = User.new(user_params.merge(approved: true))
 
     respond_to do |format|

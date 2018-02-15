@@ -122,6 +122,7 @@ en:
     users:
       create:
         notice: "User %{user} created."
+        exists: "User %{user} found."
       update:
         notice: "User %{user} updated."
       destroy:
