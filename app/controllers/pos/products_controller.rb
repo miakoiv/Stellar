@@ -7,7 +7,7 @@ class Pos::ProductsController < ApplicationController
 
   layout 'point_of_sale'
 
-  # GET /post/products/1
+  # GET /pos/products/1
   # This method supplies product data JSON for UI widgets.
   def show
   end
