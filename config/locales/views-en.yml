@@ -151,6 +151,8 @@ en:
         new_order: New order
       new:
         new_order: New order
+      form_for_new:
+        new_customer: "[New customer]"
       row:
         approve: Approve
         review: Review

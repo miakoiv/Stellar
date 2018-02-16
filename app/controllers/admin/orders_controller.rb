@@ -3,7 +3,8 @@
 class Admin::OrdersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :quote, :forward, :approve, :review, :conclude, :add_products]
+  before_action :set_order, except: [:index, :new, :create]
+  before_action :set_customers, only: [:new, :create]
 
   authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update', add_products: 'update'
 
@@ -28,7 +29,27 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/new
   def new
     authorize_action_for Order, at: current_store
-    @order = current_store.orders.build
+
+    if order_params[:customer_id].present?
+      customer = current_store.users.find(order_params[:customer_id])
+      @group = customer.group(current_store)
+      @groups = [@group]
+    else
+      customer = User.new(
+        shipping_country: Country.default,
+        billing_country: Country.default
+      )
+      @groups = all_groups
+      @group = @groups.first
+    end
+
+    @order = current_store.orders.build(
+      group_id: @group.id,
+      order_type: @group.outgoing_order_types.first
+    )
+    @order.customer = customer
+
+    respond_to :html, :js
   end
 
   # GET /admin/orders/1/edit
@@ -40,11 +61,18 @@ class Admin::OrdersController < ApplicationController
   # POST /admin/orders.json
   def create
     authorize_action_for Order, at: current_store
+
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.address_to(@order.customer)
+    new_customer = @order.customer.new_record?
+
+    @group = current_store.groups.find(order_params[:group_id])
+    @groups = new_customer ? all_groups : [@group]
 
     respond_to do |format|
       if @order.save
+        @order.customer.groups << @group if new_customer
+
         format.html { redirect_to edit_admin_order_path(@order),
           notice: t('.notice', order: @order) }
         format.json { render :show, status: :created, location: admin_order_path(@order) }
@@ -135,10 +163,21 @@ class Admin::OrdersController < ApplicationController
       @order = current_store.orders.find(params[:id])
     end
 
+    def set_customers
+      @customers = UserSearch.new(
+        store: current_store,
+        except_group: current_store.default_group
+      ).results
+    end
+
+    def all_groups
+      current_store.groups.not_including(current_store.default_group)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(
-        :user_id, :order_type_id, :customer_id,
+      params.fetch(:order) {{}}.permit(
+        :user_id, :group_id, :order_type_id, :customer_id,
         :completed_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :vat_number,
         :external_number, :your_reference, :our_reference, :message,
@@ -148,7 +187,14 @@ class Admin::OrdersController < ApplicationController
         :billing_city, :billing_country_code,
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :notes
+        :notes,
+        customer_attributes: [
+          :id, :initial_group_id, :email, :name, :phone,
+          :shipping_address, :shipping_postalcode,
+          :shipping_city, :shipping_country_code,
+          :billing_address, :billing_postalcode,
+          :billing_city, :billing_country_code
+        ]
       )
     end
 

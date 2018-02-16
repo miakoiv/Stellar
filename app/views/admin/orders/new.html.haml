@@ -6,14 +6,5 @@
     %span.small= @order.to_s
 
 .row
-  .col-sm-6
-    = bootstrap_form_for [:admin, @order], layout: :horizontal,
-        label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
-      .panel.panel-default
-        .panel-body
-          %fieldset
-            = f.select :order_type_id, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {class: 'selectize'}
-            = f.select :customer_id, current_store.users.map { |u| [u.to_s, u.id] }, {}, {class: 'selectize'}
-          %fieldset.actions
-            = f.form_group do
-              = f.primary
+  .col-sm-7
+    = render partial: 'form_for_new', object: @order, as: :order

@@ -131,6 +131,8 @@ fi:
         new_order: Uusi tilaus
       new:
         new_order: Uusi tilaus
+      form_for_new:
+        new_customer: "[Uusi asiakas]"
       row:
         approve: Hyväksy
         review: Tarkasta

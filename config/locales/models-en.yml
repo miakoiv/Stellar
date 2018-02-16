@@ -219,6 +219,7 @@ en:
         message: Message
         user_id: From
         customer_id: Customer
+        group_id: Customer group
         order_type_id: Order type
         completed_at: Ordered
         shipping_at: Requested shipping at
