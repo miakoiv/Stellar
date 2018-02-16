@@ -47,8 +47,8 @@ class User < ActiveRecord::Base
   # Shopping carts have the user as the customer by default.
   def shopping_cart(store, store_portal, group)
     orders.at(store).incomplete.first ||
-      orders.at(store).create(
-        customer: self,
+      orders.at(store).create!(
+        customer_id: id,
         store_portal: store_portal,
         includes_tax: group.price_tax_included?
       )
