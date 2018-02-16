@@ -19,7 +19,10 @@ class Admin::GroupsController < ApplicationController
 
   # GET /admin/groups/1
   def show
-    redirect_to edit_admin_group_path(@group)
+    respond_to do |format|
+      format.html { redirect_to edit_admin_group_path(@group) }
+      format.json
+    end
   end
 
   # GET /admin/groups/new.js
