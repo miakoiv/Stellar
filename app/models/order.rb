@@ -15,6 +15,7 @@ class Order < ActiveRecord::Base
   # User created the order, and is usually the customer too.
   belongs_to :user
   belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
+  accepts_nested_attributes_for :customer
 
   belongs_to :order_type
   delegate :is_rfq?, :is_quote?, to: :order_type
@@ -59,6 +60,10 @@ class Order < ActiveRecord::Base
   # This attribute allows adding products en masse
   # through a string of comma-separated ids.
   attr_accessor :product_ids_string
+
+  # This attribute allows specifying a group for an order
+  # created from scratch with nested customer data.
+  attr_accessor :group_id
 
   #---
   # Approve the order when approved_at first gets a value.
