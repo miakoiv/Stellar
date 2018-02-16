@@ -18,7 +18,7 @@ class Admin::OrdersController < ApplicationController
     @search = OrderSearch.new(search_params)
     results = @search.results
     @orders = results.page(params[:page])
-    @timeline_orders = results.has_shipping.topical
+    @timeline_orders = results.complete.has_shipping.topical
   end
 
   # GET /admin/orders/1
@@ -90,6 +90,7 @@ class Admin::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
+        @order.complete! if should_complete?
         format.html { redirect_to admin_order_path(@order),
           notice: t('.notice', order: @order) }
         format.json { render :show, status: :ok, location: admin_order_path(@order) }
@@ -97,6 +98,17 @@ class Admin::OrdersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # DELETE /admin/orders/1
+  def destroy
+    authorize_action_for Order, at: current_store
+    @order.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admin_orders_path,
+        notice: t('.notice', order: @order) }
     end
   end
 
@@ -174,6 +186,10 @@ class Admin::OrdersController < ApplicationController
       current_store.groups.not_including(current_store.default_group)
     end
 
+    def should_complete?
+      order_params[:is_complete] == '1'
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.fetch(:order) {{}}.permit(
@@ -187,7 +203,7 @@ class Admin::OrdersController < ApplicationController
         :billing_city, :billing_country_code,
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :notes,
+        :notes, :is_complete,
         customer_attributes: [
           :id, :initial_group_id, :email, :name, :phone,
           :shipping_address, :shipping_postalcode,

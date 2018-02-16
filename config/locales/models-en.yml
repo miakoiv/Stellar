@@ -222,6 +222,7 @@ en:
         group_id: Customer group
         order_type_id: Order type
         completed_at: Ordered
+        is_complete: Order is ready
         shipping_at: Requested shipping at
         installation_at: Installation at
         approved_at: Approved

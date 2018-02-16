@@ -7,7 +7,7 @@ class OrderSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    Order.complete.order(completed_at: :desc)
+    Order.order(completed_at: :desc)
   end
 
   def search_store

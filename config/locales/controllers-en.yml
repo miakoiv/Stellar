@@ -60,6 +60,8 @@ en:
         notice: "Order %{order} created."
       update:
         notice: "Order %{order} updated."
+      destroy:
+        notice: "Order %{order} deleted."
       quote:
         notice: "Quotation %{order} sent."
       forward:

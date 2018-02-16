@@ -1,12 +1,13 @@
 class Order < ActiveRecord::Base
 
   def to_s
-    number
+    number || "[#{id}]"
   end
 
   # CSS class based on order status.
   def appearance
     return nil if concluded?
+    return 'text-muted' if incomplete?
     approved? && 'warning text-warning' || 'danger text-danger'
   end
 
@@ -17,6 +18,7 @@ class Order < ActiveRecord::Base
   # Icon name based on order status.
   def icon
     return nil if concluded?
+    return 'pencil' if incomplete?
     approved? && 'cog' || 'warning'
   end
 

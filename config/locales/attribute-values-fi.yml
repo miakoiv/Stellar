@@ -28,6 +28,7 @@ fi:
           pending: odottaa toimitusta
           concluded: arkistoitu
           cancelled: peruttu
+          incomplete: keskeneräinen
       page:
         purpose:
           route: Reitityspiste

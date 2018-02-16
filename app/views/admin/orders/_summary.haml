@@ -2,7 +2,7 @@
   .col-xs-4
     %dl
       %dt= col(Order, :completed_at)
-      %dd= l(@order.completed_at.to_date, format: :iso)
+      %dd= @order.completed_at.present? ? l(@order.completed_at.to_date, format: :iso) : '–'
       %dt= col(Order, :customer_name)
       %dd= @order.customer_name
       %dt= col(Order, :customer_email)

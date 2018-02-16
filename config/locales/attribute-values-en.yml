@@ -28,6 +28,7 @@ en:
           pending: pending delivery
           concluded: archived
           cancelled: cancelled
+          incomplete: draft
       page:
         purpose:
           route: Routing entry

@@ -60,6 +60,8 @@ fi:
         notice: "Tilaus %{order} luotu."
       update:
         notice: "Tilaus %{order} päivitetty."
+      destroy:
+        notice: "Tilaus %{order} poistettu."
       quote:
         notice: "Tarjous %{order} lähetetty."
       forward:

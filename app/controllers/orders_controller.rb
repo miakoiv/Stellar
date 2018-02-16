@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
   def index
     @query = saved_search_query('order', 'order_search')
     @search = OrderSearch.new(search_params)
-    results = @search.results
+    results = @search.results.complete
     @orders = results.page(params[:page])
     @timeline_orders = results.has_shipping.topical
   end

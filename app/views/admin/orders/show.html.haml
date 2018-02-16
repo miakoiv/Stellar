@@ -8,7 +8,8 @@
     - if @order.approved?
       = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
         = icon('share', t('.forward'))
-    = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
+    - if @order.complete?
+      = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
   - if @order.quotable?
     = link_to quote_admin_order_path(@order), class: 'btn btn-info' do
       = icon('envelope', t('.quote'))

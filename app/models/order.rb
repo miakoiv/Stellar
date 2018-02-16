@@ -65,6 +65,9 @@ class Order < ActiveRecord::Base
   # created from scratch with nested customer data.
   attr_accessor :group_id
 
+  # This attribute allows admins to manually complete an order.
+  attr_accessor :is_complete
+
   #---
   # Approve the order when approved_at first gets a value.
   after_save :approve!, if: -> (order) { order.approved_at_changed?(from: nil) }
@@ -75,7 +78,7 @@ class Order < ActiveRecord::Base
   #---
   # Statuses that can be queried against.
   def self.statuses
-    [:current, :pending, :concluded, :cancelled]
+    [:current, :pending, :concluded, :cancelled, :incomplete]
   end
 
   #---
@@ -120,11 +123,15 @@ class Order < ActiveRecord::Base
   end
 
   def editable_items?
-    !complete?
+    incomplete?
   end
 
   def complete?
     completed_at.present?
+  end
+
+  def incomplete?
+    !complete?
   end
 
   def cancelled?
@@ -142,7 +149,7 @@ class Order < ActiveRecord::Base
   # Order should complete when it reaches complete phase at checkout
   # but hasn't been completed yet.
   def should_complete?
-    !complete? && checkout_phase == :complete
+    incomplete? && checkout_phase == :complete
   end
 
   # Completing an order assigns it a number, archives it, sends
