@@ -24,7 +24,7 @@
         %h2.visible-print-block= title(OrderItem, count: 2)
         - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
-          = render partial: 'admin/orders/add_products', object: @order, as: :order
+          = render partial: 'admin/orders/edit', object: @order, as: :order
         - else
           = render partial: 'admin/order_items/table', object: @order, as: :order
 
@@ -38,3 +38,7 @@
 
 :coffee
   persist_tabs 'order-side'
+
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('.row')
+    offset_top: 80

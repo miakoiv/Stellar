@@ -141,6 +141,8 @@ fi:
         quote: Lähetä tarjous
         print_delivery_note: Tulosta lähete
         print_quotation: Tulosta tarjous
+      edit:
+        add_order_items: Lisää tilausrivejä tilaukselle
       form:
         approved_at_help: Päivä, jona tilaus otettiin vastaan ja hyväksyttiin.
         concluded_at_help: Päivä, jona tilaus toimitettiin ja arkistoitiin.

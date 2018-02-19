@@ -20,4 +20,4 @@
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
-    = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+    = link_to icon('remove'), admin_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

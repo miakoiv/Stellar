@@ -161,6 +161,8 @@ en:
         quote: Send quotation
         print_delivery_note: Print delivery note
         print_quotation: Print quotation
+      edit:
+        add_order_items: Add items to this order
       form:
         approved_at_help: Date when the order was received and approved.
         concluded_at_help: Date when the order was shipped and archived.
