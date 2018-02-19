@@ -17,7 +17,7 @@ class Pos::OrderItemsController < ApplicationController
     amount = order_item_params[:amount].to_i
     options = {inventory_item: @inventory_item}
     respond_to do |format|
-      if @order_item = @order.insert(@product, amount, current_group, options)
+      if @order_item = @order.insert(@product, amount, @order.source, options)
         @order.recalculate!
         format.js { render :create }
       else
@@ -48,7 +48,8 @@ class Pos::OrderItemsController < ApplicationController
 
   # DELETE /pos/order_items/1
   def destroy
-    @order_item = @order.order_items.find(params[:id])
+    @order_item = OrderItem.find(params[:id])
+    @order = @order_item.order
 
     if @order_item.destroy
       @order.recalculate!
