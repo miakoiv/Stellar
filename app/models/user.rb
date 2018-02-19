@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   #---
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, on: :update
-  validates :phone, presence: true, on: :update
+  validates :phone, presence: true, on: :update, if: :approved?
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
 
