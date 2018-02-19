@@ -41,7 +41,7 @@
     onChange: (id) ->
       $('#order_item_inventory_item_id')[0].selectize.clearOptions()
       if id
-        item_select.load (callback) ->
+        $('#order_item_inventory_item_id')[0].selectize.load (callback) ->
           $.ajax
             url: $('#order_item_product_id')[0].selectize.options[id].url
             type: 'GET'
