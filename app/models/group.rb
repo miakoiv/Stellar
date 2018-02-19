@@ -20,6 +20,9 @@ class Group < ActiveRecord::Base
   has_many :outgoing_order_types, class_name: 'OrderType', foreign_key: :source_id, inverse_of: :source
   has_many :incoming_order_types, class_name: 'OrderType', foreign_key: :destination_id, inverse_of: :destination
 
+  # Customer groups are sources of order types for this group's incoming orders.
+  has_many :customer_groups, class_name: 'Group', through: :incoming_order_types, source: :source
+
   # Group-specific prices for products.
   has_many :alternate_prices
 
