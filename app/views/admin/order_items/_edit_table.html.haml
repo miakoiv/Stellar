@@ -19,3 +19,5 @@
           %th
       %tbody
         = render partial: 'admin/order_items/edit_row', collection: order.order_items, as: :order_item
+        - if order.adjustments.any?
+          = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment, locals: {includes_tax: order.includes_tax?}

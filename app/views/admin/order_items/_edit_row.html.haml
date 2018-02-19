@@ -1,4 +1,4 @@
-= content_tag_for :tr, order_item do
+%tr[order_item]
   %td
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)
@@ -21,3 +21,6 @@
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
     = link_to icon('remove'), admin_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+
+- if order_item.adjustments.any?
+  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}
