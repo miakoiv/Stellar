@@ -35,7 +35,6 @@ $.fn.extend
               success: (response) ->
                 item_select.enable()
                 callback(response.inventory_items)
-                $item_select.data 'entries', response.inventory_entries
         else
           item_select.disable()
 
