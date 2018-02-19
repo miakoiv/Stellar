@@ -15,10 +15,7 @@ class Pos::OrderItemsController < ApplicationController
     @product = current_store.products.live.find_by(id: order_item_params[:product_id])
     find_inventory_item(@product) if @product.present?
     amount = order_item_params[:amount].to_i
-    options = {
-      inventory_item: @inventory_item,
-      inventory_entry: @inventory_entry
-    }
+    options = {inventory_item: @inventory_item}
     respond_to do |format|
       if @order_item = @order.insert(@product, amount, current_group, options)
         @order.recalculate!
