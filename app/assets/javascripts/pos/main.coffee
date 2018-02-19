@@ -42,7 +42,6 @@ $.fn.extend
       dropdownParent: 'body'
       allowEmptyOption: true
       valueField: 'id'
-      labelField: 'code'
       searchField: 'code'
       render:
         item: (item, escape) ->
