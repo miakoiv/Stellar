@@ -1,4 +1,4 @@
-#order-item-form{data: {'product-query-url': query_pos_products_path}}
+#pos-order-item-form{data: {'product-query-url': query_pos_products_path}}
   = bootstrap_form_for [:pos, order, OrderItem.new(amount: 1)], remote: true do |f|
     %fieldset
       .row
@@ -14,4 +14,4 @@
             = icon('check')
 
 :coffee
-  $('#order-item-form').point_of_sale_form()
+  $('#pos-order-item-form').point_of_sale_form()

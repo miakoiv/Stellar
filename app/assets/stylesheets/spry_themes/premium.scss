@@ -830,7 +830,7 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Point of sale look and feel
  */
-#barcode-panel {
+#pos-barcode-panel {
   @extend .jumbotron;
   margin-bottom: 0;
   background-color: lighten($brand-primary, 38%);
@@ -839,20 +839,21 @@ $body-tone-bg: darken($body-bg, 4%);
     margin-left: -2px;
     margin-right: -2px;
   }
-  .input-group-lg.input-group-round {
-    .input-group-addon {
-      border-radius: $input-height-large/2;
-      &:first-child { @include border-right-radius(0); }
-      &:last-child { @include border-left-radius(0); }
-    }
-    > .form-control {
-      border-radius: $input-height-large/2;
-      &:first-child { @include border-right-radius(0); }
-      &:last-child { @include border-left-radius(0); }
-    }
+}
+.input-group-lg.input-group-round {
+  .input-group-addon {
+    border-radius: $input-height-large/2;
+    &:first-child { @include border-right-radius(0); }
+    &:last-child { @include border-left-radius(0); }
+  }
+  > .form-control {
+    border-radius: $input-height-large/2;
+    &:first-child { @include border-right-radius(0); }
+    &:last-child { @include border-left-radius(0); }
   }
 }
-#error-indicator {
+
+#pos-error-indicator {
   position: absolute;
   top: -60px;
   left: 0;
@@ -867,6 +868,6 @@ $body-tone-bg: darken($body-bg, 4%);
     color: $brand-danger;
   }
 }
-#order-item-form {
+#pos-order-item-form {
   padding-bottom: 40px;
 }
