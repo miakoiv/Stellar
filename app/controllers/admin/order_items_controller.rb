@@ -34,10 +34,9 @@ class Admin::OrderItemsController < ApplicationController
       if @order_item.update(order_item_params)
         @order_item.reload
         @order.recalculate!
-        format.js { render :update }
-      else
-        format.js { render :rollback }
       end
+
+      format.js
     end
   end
 
