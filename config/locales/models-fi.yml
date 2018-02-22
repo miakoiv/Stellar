@@ -219,6 +219,7 @@ fi:
         message: Merkki
         user_id: Tilaaja
         customer_id: Asiakas
+        inventory_id: Varasto
         group_id: Asiakasryhmä
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm
