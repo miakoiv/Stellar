@@ -155,7 +155,6 @@ Rails.application.routes.draw do
         patch :approve
         get :review
         patch :conclude
-        post :add_products
       end
     end
     resources :properties do

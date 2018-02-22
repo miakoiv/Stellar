@@ -166,8 +166,6 @@ en:
       form:
         approved_at_help: Date when the order was received and approved.
         concluded_at_help: Date when the order was shipped and archived.
-      add_products:
-        submit: Add products
       headers:
         delivery_note: Delivery note
         quotation: Quotation

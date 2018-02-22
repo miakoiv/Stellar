@@ -146,8 +146,6 @@ fi:
       form:
         approved_at_help: Päivä, jona tilaus otettiin vastaan ja hyväksyttiin.
         concluded_at_help: Päivä, jona tilaus toimitettiin ja arkistoitiin.
-      add_products:
-        submit: Lisää tuotteet
       headers:
         delivery_note: Lähete
         quotation: Tarjous

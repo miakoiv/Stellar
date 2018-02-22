@@ -104,8 +104,6 @@ es:
       form:
         approved_at_help: Fecha en la que se recibe y acepta el pedido
         concluded_at_help: Fecha en la que el pedido es enviado y archivado
-      add_products:
-        submit: Añadir producto
       headers:
         delivery_note: Nota de envío
         quotation: Cotización

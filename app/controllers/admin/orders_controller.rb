@@ -6,7 +6,7 @@ class Admin::OrdersController < ApplicationController
   before_action :set_order, except: [:index, :new, :create]
   before_action :set_customers, only: [:new, :create]
 
-  authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update', add_products: 'update'
+  authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
 
   layout 'admin'
 
@@ -147,22 +147,6 @@ class Admin::OrdersController < ApplicationController
     authorize_action_for Order, at: current_store
     @order.update(concluded_at: Date.current)
     @order.consume_stock! if @order.has_shipping?
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  # POST /admin/orders/1/add_products
-  def add_products
-    authorize_action_for Order, at: current_store
-    product_ids = params[:order][:product_ids_string].split(',').map(&:to_i)
-
-    product_ids.each do |product_id|
-      product = @current_store.products.live.find(product_id)
-      @order.insert(product, 1, @order.source)
-    end
-    @order.recalculate!
 
     respond_to do |format|
       format.js
