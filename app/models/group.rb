@@ -62,6 +62,11 @@ class Group < ActiveRecord::Base
     outgoing_order_types.any?
   end
 
+  # TODO: this could use some business logic.
+  def available_inventories
+    store.inventories
+  end
+
   # Categories available to this group when creating and editing products.
   def available_categories
     limited_categories? ? categories.order(:lft) : store.categories.order(:lft)

@@ -177,7 +177,8 @@ class Admin::OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.fetch(:order) {{}}.permit(
-        :user_id, :group_id, :order_type_id, :customer_id,
+        :user_id, :group_id,
+        :order_type_id, :customer_id, :inventory_id,
         :completed_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :vat_number,
         :external_number, :your_reference, :our_reference, :message,
