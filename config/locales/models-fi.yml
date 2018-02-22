@@ -211,7 +211,7 @@ fi:
         value: Arvo
         total_value: Arvo yhteensä
       order:
-        number: tilaus nro
+        number: Nro
         external_number: Ulkoinen nro
         vat_number: Y-tunnus
         your_reference: Viitteenne
@@ -225,6 +225,7 @@ fi:
         is_complete: Tilaus on valmis
         shipping_at: Haluttu toimituspvm
         installation_at: Asennuspvm
+        shipping_installation_at: Toimitus/asennus
         approved_at: Hyväksytty
         concluded_at: Päätetty
         status: Tila

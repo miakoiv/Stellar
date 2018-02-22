@@ -17,9 +17,7 @@
 
   %h1
     = @order.order_type
-    %span.small
-      = col(Order, :number)
-      = @order.to_s
+    %span.small= @order.to_s
 
 .visible-print
   = render partial: 'headers'

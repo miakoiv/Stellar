@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
 
   def to_s
-    number || "[#{id}]"
+    return "#{Order.human_attribute_name(:number)} #{number}" if complete?
+    Order.human_attribute_value(:status, :incomplete)
   end
 
   # CSS class based on order status.

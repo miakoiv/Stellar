@@ -211,7 +211,7 @@ en:
         value: Value
         total_value: Total value
       order:
-        number: order №
+        number: №
         external_number: External №
         vat_number: VAT number
         your_reference: Your reference
@@ -225,6 +225,7 @@ en:
         is_complete: Order is ready
         shipping_at: Requested shipping at
         installation_at: Installation at
+        shipping_installation_at: Shipping/installation
         approved_at: Approved
         concluded_at: Concluded
         status: Status

@@ -3,26 +3,29 @@
     %thead
       %tr
         %th.col-min
-        %th.col-xs-1= col(Order, :completed_at)
+        %th.col-xs-1= col(Order, :number)
+        %th= col(Order, :completed_at)
         - if current_store.b2b_sales?
+          %th.col-xs-2= col(Order, :shipping_installation_at)
           %th= col(Order, :summary)
-        %th= col(Order, :shipping_at)
-        - if current_store.b2b_sales?
-          %th= col(Order, :installation_at)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.text-right= col(Order, :grand_total)
         %th.actions
 
     %tbody
       - orders.each do |order|
-        = content_tag_for :tr, order, class: order.appearance do
+        %tr[order]{class: order.appearance}
           %td= icon(order.icon)
+          %td
+            %strong= order.number
           %td= l(order.completed_at.to_date)
           - if current_store.b2b_sales?
-            %td= order.summary
-          %td= order.shipping_at.present? ? l(order.shipping_at) : nil
-          - if current_store.b2b_sales?
-            %td= order.installation_at.present? ? l(order.installation_at) : nil
+            %td
+              = order.shipping_at.present? ? l(order.shipping_at) : nil
+              \/
+              = order.installation_at.present? ? l(order.installation_at) : nil
+            %td.no-wrap
+              %strong.small= order.summary
           %td.text-right= order.order_items_count
           %td.text-right.currency
             = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax

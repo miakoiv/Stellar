@@ -3,16 +3,15 @@
     %thead
       %tr
         %th.col-min
+        %th.col-xs-1= col(Order, :number)
         %th.col-xs-1= col(Order, :completed_at)
         - if current_store.b2b_sales?
+          %th.col-xs-2= col(Order, :shipping_installation_at)
           %th= col(Order, :summary)
-        %th.col-xs-1= col(Order, :shipping_at)
-        - if current_store.b2b_sales?
-          %th.col-xs-1= col(Order, :installation_at)
-        %th.col-xs-2= col(Order, :user_id)
+        %th= col(Order, :customer_id)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.col-xs-1.text-right= col(Order, :grand_total)
-        %th.actions
+        %th.col-xs-2.actions
 
     %tbody
       = render partial: 'admin/orders/row', collection: orders, as: :order
