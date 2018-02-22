@@ -501,6 +501,7 @@ fi:
         keyword: Nimi tai sähköpostiosoite
         roles: Roolit
         locale: Kieli
+        approved: Aktiivinen
         phone: Puhelinnumero
         billing_address: Laskutusosoite
         billing_postalcode: Postinumero
