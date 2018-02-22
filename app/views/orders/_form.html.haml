@@ -9,9 +9,9 @@
       - if @order.has_shipping?
         %fieldset.bg-warning{disabled: locked}
           = f.text_field :shipping_at,
-              data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at(current_inventory), 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           = f.text_field :installation_at,
-              data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at(current_inventory), 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
       %fieldset.bg-info{disabled: locked}
         = f.text_field :vat_number
         = f.text_field :your_reference

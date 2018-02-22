@@ -27,7 +27,7 @@
         .product-link
           = link_to icon('search'), url, class: 'btn btn-sm'
       - elsif product.purchasable?
-        - if product.orderable?(current_inventory)
+        - if product.orderable?(default_inventory, nil)
           = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
             = hidden_field_tag :amount, 1
             %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')

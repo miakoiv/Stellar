@@ -10,7 +10,10 @@ class OrderItem < ActiveRecord::Base
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
+  delegate :inventory, :includes_tax?, :approved?, :concluded?, to: :order
+
   belongs_to :product
+  delegate :live?, :real?, :internal?, :back_orderable?, to: :product
 
   # Order items may reference a specific inventory item.
   belongs_to :inventory_item
@@ -31,10 +34,6 @@ class OrderItem < ActiveRecord::Base
   #---
   validates :product_id, presence: true
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
-
-  #---
-  delegate :live?, :visible?, :real?, :virtual?, :internal?, to: :product
-  delegate :includes_tax?, :approved?, :concluded?, to: :order
 
   #---
   def is_subitem?
@@ -120,15 +119,15 @@ class OrderItem < ActiveRecord::Base
   # Price for exported orders, always without tax.
   # Vendor products and items from prepaid stock are
   # listed without prices.
-  def price_for_export(inventory)
+  def price_for_export
     return nil if product.vendor.present?
-    return nil if use_prepaid_stock? && product.available?(inventory)
+    return nil if use_prepaid_stock? && available?
     price_sans_tax
   end
 
-  def subtotal_for_export(inventory)
+  def subtotal_for_export
     return nil if product.vendor.present?
-    return nil if use_prepaid_stock? && product.available?(inventory)
+    return nil if use_prepaid_stock? && available?
     subtotal_sans_tax
   end
 
@@ -136,9 +135,17 @@ class OrderItem < ActiveRecord::Base
     order.order_type.prepaid_stock?
   end
 
-  # Can this order item be satisfied by given inventory?
-  def satisfied?(inventory)
-    product.satisfies?(inventory, amount)
+  # Stock calculations are offloaded to the product.
+  def available?
+    product.available?(inventory, inventory_item, amount)
+  end
+
+  def out_of_stock?
+    !available?
+  end
+
+  def satisfied?
+    product.satisfies?(inventory, inventory_item, amount)
   end
 
   # Date used in reports is the completion date of the order.

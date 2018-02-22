@@ -1,6 +1,6 @@
-%tr[order_item]{class: [order_item.is_subitem? && 'subrow', order_item.satisfied?(current_inventory) || 'warning text-warning']}
+%tr[order_item]{class: [order_item.is_subitem? && 'subrow', order_item.satisfied? || 'warning text-warning']}
   %td
-    - unless order_item.satisfied?(current_inventory)
+    - unless order_item.satisfied?
       = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
     %strong
       - if order_item.real? && order_item.live?
@@ -13,7 +13,7 @@
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-    - if !order_item.product.available?(current_inventory, order_item.amount) && order_item.product.back_orderable?
+    - if order_item.out_of_stock? && order_item.back_orderable?
       .small
         = icon('warning')
         = t('store.cart.lead_time_warning', lead_time: order_item.product.lead_time)

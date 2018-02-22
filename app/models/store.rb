@@ -170,6 +170,12 @@ class Store < ActiveRecord::Base
     hostnames.first
   end
 
+  # Let's assume the first inventory is the default one.
+  # May be nil if the store doesn't keep stock.
+  def default_inventory
+    inventories.first
+  end
+
   # Returns the first category. See Page#path.
   def first_category
     categories.live.root

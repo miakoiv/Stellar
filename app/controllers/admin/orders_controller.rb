@@ -146,7 +146,7 @@ class Admin::OrdersController < ApplicationController
   def conclude
     authorize_action_for Order, at: current_store
     @order.update(concluded_at: Date.current)
-    @order.consume_stock!(current_inventory) if @order.has_shipping?
+    @order.consume_stock! if @order.has_shipping?
 
     respond_to do |format|
       format.js

@@ -48,7 +48,8 @@ class User < ActiveRecord::Base
   def shopping_cart(store, store_portal, group)
     orders.at(store).incomplete.first ||
       orders.at(store).create!(
-        customer_id: id,
+        customer: self,
+        inventory: store.default_inventory,
         store_portal: store_portal,
         includes_tax: group.price_tax_included?
       )

@@ -1,5 +1,5 @@
 - if stock_shown? && product.tracked_stock?
   %p
     .stock-amount
-      = icon('cube', product_stock(current_inventory, product))
-    = current_inventory
+      = icon('cube', product_stock(default_inventory, product))
+    = default_inventory

@@ -1,5 +1,5 @@
 #cart-contents
   = render partial: 'pos/order_items/cart_table', object: order, as: :order
 
-  - if order.checkoutable?(current_inventory)
+  - if order.checkoutable?
     %p Finalize order here

@@ -1,6 +1,6 @@
 - if can_order? && may_shop_at?(@category) && product.purchasable?
 
-  - if product.out_of_stock?(current_inventory)
+  - if product.out_of_stock?(default_inventory, nil)
     - if product.back_orderable?
       %p.text-info
         = icon('exclamation-circle')
@@ -11,7 +11,7 @@
         = icon('exclamation-circle')
         = col(Product, :out_of_stock)
 
-  - if product.orderable?(current_inventory)
+  - if product.orderable?(default_inventory, nil)
     = form_tag order_product_path(product), class: 'order-form', method: :post, remote: true do
       .form-group
         .input-group

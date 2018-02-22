@@ -3,9 +3,15 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy, inverse_of: :order
   has_many :products, through: :order_items
 
+  # The inventory this order ships from by default.
+  # If nil, the store doesn't keep stock.
+  # TODO: shipments should include their own inventory reference to allow
+  # shipping orders from multiple inventories.
+  belongs_to :inventory
+
   # Inserts amount of product to this order in the context of given
   # group. Options may include a parent item for grouping the order items,
-  # a specific inventory item reference, and an inventory entry reference.
+  # and a specific inventory item reference.
   def insert(product, amount, group, options = {})
     return nil if product.nil?
     if product.bundle?
@@ -70,10 +76,10 @@ class Order < ActiveRecord::Base
   end
 
   # An order is checkoutable when all its real items can be
-  # satisfied from given inventory.
-  def checkoutable?(inventory)
+  # satisfied from the target inventory.
+  def checkoutable?
     order_items.real.each do |item|
-      return false unless item.satisfied?(inventory)
+      return false unless item.satisfied?
     end
     true
   end
@@ -94,10 +100,10 @@ class Order < ActiveRecord::Base
   end
 
   # Consumes stock for the order contents.
-  def consume_stock!(inventory)
+  def consume_stock!
     transaction do
       order_items.each do |item|
-        item.product.consume!(inventory, item.amount, self)
+        item.product.consume!(inventory, item, item.amount, self)
       end
     end
   end
@@ -133,9 +139,9 @@ class Order < ActiveRecord::Base
   end
 
   # Order lead time is based on its back ordered items.
-  def lead_time_days(inventory)
+  def lead_time_days
     order_items.reject { |item|
-      item.product.available?(inventory, item.amount)
+      item.available?
     }.map { |item|
       item.product.lead_time_days
     }.compact.max || 0

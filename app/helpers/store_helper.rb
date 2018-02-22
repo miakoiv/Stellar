@@ -10,7 +10,7 @@ module StoreHelper
   # If no inventory is given, fuzziness is applied to infinity.
   # See Product#available.
   def product_stock(inventory, product)
-    available = product.available(inventory)
+    available = product.available(inventory, nil)
     inventory.nil? || inventory.fuzzy? ? fuzzy_amount(available) : available
   end
 

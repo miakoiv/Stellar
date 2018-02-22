@@ -17,6 +17,6 @@ class ComponentEntry < ActiveRecord::Base
   #---
   # Availability of the component in the context of this entry.
   def available(inventory)
-    component.available(inventory) / quantity
+    component.available(inventory, nil) / quantity
   end
 end

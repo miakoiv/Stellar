@@ -31,8 +31,8 @@ class Order < ActiveRecord::Base
   end
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
-  def earliest_shipping_at(inventory)
-    (completed_at || Date.current).to_date + lead_time_days(inventory).days
+  def earliest_shipping_at
+    (completed_at || Date.current).to_date + lead_time_days.days
   end
 
   # Finds the shipping methods available for this order based on which

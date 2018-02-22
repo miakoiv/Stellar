@@ -3,7 +3,7 @@
   = content_tag_for :li, product.component_entries.live, class: 'list-group-item' do |entry|
     - if stock_shown? && entry.component.tracked_stock?
       .stock-amount
-        = icon('cube', product_stock(current_inventory, entry.component))
+        = icon('cube', product_stock(default_inventory, entry.component))
     = entry.quantity
     ⨉
     %strong= entry.component.title

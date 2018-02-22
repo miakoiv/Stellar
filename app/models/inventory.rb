@@ -10,6 +10,9 @@ class Inventory < ActiveRecord::Base
   belongs_to :store
   has_many :inventory_items, dependent: :destroy
 
+  # Orders may specify a target inventory.
+  has_many :orders
+
   default_scope { sorted }
 
   #---

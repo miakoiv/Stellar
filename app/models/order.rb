@@ -226,9 +226,9 @@ class Order < ActiveRecord::Base
   end
 
   # Grand total for exported orders.
-  def grand_total_for_export(inventory, items = order_items)
+  def grand_total_for_export(items = order_items)
     items.map { |item|
-      (item.subtotal_for_export(inventory) || 0.to_money) + item.adjustments_sans_tax
+      (item.subtotal_for_export || 0.to_money) + item.adjustments_sans_tax
     }.sum + adjustments_sans_tax
   end
 

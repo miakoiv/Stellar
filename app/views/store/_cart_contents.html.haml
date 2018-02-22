@@ -7,7 +7,7 @@
     - else
       = render partial: 'order_items/cart_table', object: order, as: :order
       .panel-footer
-        - if order.checkoutable?(current_inventory)
+        - if order.checkoutable?
           = render partial: 'checkout/order_type', object: order, as: :order
         - else
           .pull-right= t('checkout.messages.cannot_checkout_html')
