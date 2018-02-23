@@ -103,7 +103,7 @@ class Order < ActiveRecord::Base
   def consume_stock!
     transaction do
       order_items.each do |item|
-        item.product.consume!(inventory, item, item.amount, self)
+        item.product.consume!(inventory, item.inventory_item, item.amount, self)
       end
     end
   end
