@@ -2,8 +2,6 @@
   = bootstrap_form_for [:admin, order, OrderItem.new(amount: 1)], remote: true do |f|
     %fieldset.gap
       .row
-        .col-sm-12
-      .row
         .col-sm-8
           = f.select :product_id, [], {skip_label: true}, {placeholder: title(Product), class: 'selectize-tall selectize-list-group'}
         .col-sm-4
