@@ -190,6 +190,7 @@ Rails.application.routes.draw do
     end
     resources :transfers do
       resources :transfer_items, shallow: true
+      patch :complete, on: :member
     end
     resources :order_types
     resources :shipping_methods do

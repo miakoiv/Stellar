@@ -254,6 +254,8 @@ fi:
     transfers:
       index:
         new_transfer: Uusi varastosiirto
+      show:
+        complete: Suorita
       new:
         new_transfer: Uusi varastosiirto
       edit:

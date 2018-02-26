@@ -274,6 +274,8 @@ en:
     transfers:
       index:
         new_transfer: New stock transfer
+      show:
+        complete: Complete
       new:
         new_transfer: New stock transfer
       edit:

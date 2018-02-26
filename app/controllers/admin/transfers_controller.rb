@@ -5,6 +5,8 @@ class Admin::TransfersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transfer, except: [:index, :new, :create]
 
+  authority_actions complete: 'update'
+
   layout 'admin'
 
   # GET /admin/transfers
@@ -77,6 +79,21 @@ class Admin::TransfersController < ApplicationController
       format.html { redirect_to admin_transfers_path,
         notice: t('.notice', transfer: @transfer) }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /admin/transfers/1/complete
+  def complete
+    authorize_action_for @transfer, at: current_store
+
+    respond_to do |format|
+      if @transfer.complete!
+        format.html { redirect_to admin_transfer_path(@transfer), notice: t('.notice', transfer: @transfer) }
+        format.json { render :show, status: :ok, location: admin_transfer_path(@transfer) }
+      else
+        format.html { render :show }
+        format.json { render json: @transfer.errors, status: :unprocessable_entity }
+      end
     end
   end
 

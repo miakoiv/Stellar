@@ -126,6 +126,8 @@ en:
         notice: "Stock transfer %{transfer} created."
       update:
         notice: "Stock transfer %{transfer} updated."
+      complete:
+        notice: "Stock transfer %{transfer} completed."
       destroy:
         notice: "Stock transfer %{transfer} deleted."
     users:

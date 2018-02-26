@@ -24,6 +24,24 @@ class Inventory < ActiveRecord::Base
     [items, items.map(&:value).sum]
   end
 
+  # Restocks the inventory from given inventory item from another inventory.
+  def restock!(another_item, amount, recorded_at, source = nil)
+    item = inventory_items.find_or_initialize_by(
+      product: another_item.product,
+      code: another_item.code,
+      expires_at: another_item.expires_at
+    )
+    item.inventory_entries.build(
+      recorded_at: recorded_at,
+      source: source,
+      on_hand: amount,
+      reserved: 0,
+      pending: 0,
+      value: another_item.value
+    )
+    item.save!
+  end
+
   def to_s
     name
   end

@@ -33,6 +33,20 @@ class Transfer < ActiveRecord::Base
     !complete?
   end
 
+  # Completes the transfer by creating inventory entries corresponding to
+  # the changes made to the source and destination inventories by the
+  # transfer items.
+  def complete!
+    completed_at = Time.current
+    ActiveRecord::Base.transaction do
+      transfer_items.each do |item|
+        item.inventory_item.destock!(item.amount, self, completed_at)
+        destination.restock!(item.inventory_item, item.amount, completed_at, self)
+      end
+      update completed_at: completed_at
+    end
+  end
+
   def appearance
     incomplete? && 'warning text-warning'
   end

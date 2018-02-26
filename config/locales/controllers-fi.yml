@@ -126,6 +126,8 @@ fi:
         notice: "Varastosiirto %{transfer} luotu."
       update:
         notice: "Varastosiirto %{transfer} päivitetty."
+      complete:
+        notice: "Varastosiirto %{transfer} suoritettu."
       destroy:
         notice: "Varastosiirto %{transfer} poistettu."
     users:
