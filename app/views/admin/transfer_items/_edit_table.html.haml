@@ -1,0 +1,13 @@
+#transfer-items-table
+  .table-responsive
+    %table.table.table-striped.table-hover.table-loose
+      %thead
+        %tr
+          %th= col(TransferItem, :product_title)
+          %th= col(TransferItem, :product_code)
+          %th.col-xs-2= col(TransferItem, :inventory_item_id)
+          %th.col-xs-1.text-right= col(TransferItem, :amount)
+          %th.actions
+
+      %tbody
+        = render partial: 'admin/transfer_items/edit_row', collection: transfer.transfer_items, as: :transfer_item

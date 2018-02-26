@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_transfers_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('retweet', t('.new_transfer'))
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: false}

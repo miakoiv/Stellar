@@ -1,0 +1,10 @@
+%tr[transfer_item]
+  %td
+    %strong
+      = link_to transfer_item.product.title, admin_product_path(transfer_item.product)
+    = transfer_item.product.subtitle
+  %td= transfer_item.product.code
+  %td= transfer_item.inventory_item
+  %td.text-right= transfer_item.amount
+  %td.actions
+    = link_to icon('remove'), admin_transfer_item_path(transfer_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

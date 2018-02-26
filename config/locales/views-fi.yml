@@ -251,6 +251,13 @@ fi:
         new_tax_category: Uusi veroluokka
       new:
         new_tax_category: Uusi veroluokka
+    transfers:
+      index:
+        new_transfer: Uusi varastosiirto
+      new:
+        new_transfer: Uusi varastosiirto
+      edit:
+        add_transfer_items: Lisää siirtorivejä
     users:
       index:
         new_user: Uusi käyttäjä

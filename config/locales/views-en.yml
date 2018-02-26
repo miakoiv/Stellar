@@ -271,6 +271,13 @@ en:
         new_tax_category: New tax category
       new:
         new_tax_category: New tax category
+    transfers:
+      index:
+        new_transfer: New stock transfer
+      new:
+        new_transfer: New stock transfer
+      edit:
+        add_transfer_items: Add items to transfer
     users:
       index:
         new_user: New user

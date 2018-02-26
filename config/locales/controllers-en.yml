@@ -121,6 +121,13 @@ en:
         notice: "Tax category %{tax_category} updated."
       destroy:
         notice: "Tax category %{tax_category} deleted."
+    transfers:
+      create:
+        notice: "Stock transfer %{transfer} created."
+      update:
+        notice: "Stock transfer %{transfer} updated."
+      destroy:
+        notice: "Stock transfer %{transfer} deleted."
     users:
       create:
         notice: "User %{user} created."

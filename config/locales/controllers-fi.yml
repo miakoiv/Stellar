@@ -121,6 +121,13 @@ fi:
         notice: "Veroluokka %{tax_category} päivitetty."
       destroy:
         notice: "Veroluokka %{tax_category} poistettu."
+    transfers:
+      create:
+        notice: "Varastosiirto %{transfer} luotu."
+      update:
+        notice: "Varastosiirto %{transfer} päivitetty."
+      destroy:
+        notice: "Varastosiirto %{transfer} poistettu."
     users:
       create:
         notice: "Käyttäjä %{user} luotu."

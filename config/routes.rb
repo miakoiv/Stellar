@@ -188,6 +188,9 @@ Rails.application.routes.draw do
     resources :inventory_items do
       resources :inventory_entries, shallow: true, only: :create
     end
+    resources :transfers do
+      resources :transfer_items, shallow: true
+    end
     resources :order_types
     resources :shipping_methods do
       resources :images, shallow: true

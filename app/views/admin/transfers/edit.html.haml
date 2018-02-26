@@ -1,0 +1,22 @@
+.page-header
+  = link_to admin_transfers_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_transfer_path(@transfer), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('retweet', title(Transfer))
+    %span.small= l(@transfer.created_at, format: :iso)
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: true}
+
+  .col-md-7
+    = render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer
+    %hr
+    = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
+
+:coffee
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('.row')
+    offset_top: 80

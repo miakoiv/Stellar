@@ -1,0 +1,17 @@
+.page-header
+  = link_to admin_transfers_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(@transfer, at: current_store)
+    = link_to edit_admin_transfer_path(@transfer), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+  %h1
+    = icon('retweet', title(Transfer))
+    %span.small= l(@transfer.created_at, format: :iso)
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: true}
+
+  .col-md-7
+    = render partial: 'admin/transfer_items/table', object: @transfer, as: :transfer

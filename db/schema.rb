@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220091251) do
+ActiveRecord::Schema.define(version: 20180222144656) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -736,6 +736,33 @@ ActiveRecord::Schema.define(version: 20180220091251) do
   end
 
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
+
+  create_table "transfer_items", force: :cascade do |t|
+    t.integer  "transfer_id",       limit: 4,             null: false
+    t.integer  "product_id",        limit: 4,             null: false
+    t.integer  "inventory_item_id", limit: 4,             null: false
+    t.integer  "amount",            limit: 4, default: 0, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "transfer_items", ["inventory_item_id"], name: "index_transfer_items_on_inventory_item_id", using: :btree
+  add_index "transfer_items", ["product_id"], name: "index_transfer_items_on_product_id", using: :btree
+  add_index "transfer_items", ["transfer_id"], name: "index_transfer_items_on_transfer_id", using: :btree
+
+  create_table "transfers", force: :cascade do |t|
+    t.integer  "store_id",       limit: 4,   null: false
+    t.integer  "source_id",      limit: 4,   null: false
+    t.integer  "destination_id", limit: 4,   null: false
+    t.string   "note",           limit: 255
+    t.datetime "completed_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "transfers", ["destination_id"], name: "index_transfers_on_destination_id", using: :btree
+  add_index "transfers", ["source_id"], name: "index_transfers_on_source_id", using: :btree
+  add_index "transfers", ["store_id"], name: "index_transfers_on_store_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255

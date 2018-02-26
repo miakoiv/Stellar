@@ -111,6 +111,9 @@ fi:
       tax_category:
         one: veroluokka
         other: veroluokat
+      transfer:
+        one: varastosiirto
+        other: varastosiirrot
       user:
         one: käyttäjä
         other: käyttäjät
@@ -492,6 +495,18 @@ fi:
         name: Nimi
         rate: Verokanta
         included_in_retail: Myyntihinnat sisältävät veron
+      transfer:
+        source_id: Mistä
+        destination_id: Mihin
+        note: Huomautus
+        keyword: Tekstihaku
+        created_at: Päiväys
+      transfer_item:
+        product_id: Tuote
+        product_title: Tuotenimike
+        product_code: Tuotekoodi
+        inventory_item_id: Eräkoodi
+        amount: Määrä
       user:
         personal: Omat tiedot
         addresses: Osoitteet
@@ -516,3 +531,9 @@ fi:
         last_sign_in_at: Edellinen kirjautuminen
         current_sign_in_ip: IP-osoite
         last_sign_in_ip: IP-osoite
+    errors:
+      models:
+        transfer:
+          attributes:
+            destination_id:
+              same_as_source: ei voi olla sama kuin lähde

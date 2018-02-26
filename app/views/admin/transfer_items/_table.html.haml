@@ -1,0 +1,18 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(TransferItem, :product_title)
+        %th= col(TransferItem, :product_code)
+        %th.col-xs-2= col(TransferItem, :inventory_item_id)
+        %th.col-xs-1.text-right= col(TransferItem, :amount)
+
+    %tbody
+      = content_tag_for :tr, transfer.transfer_items do |transfer_item|
+        %td
+          %strong
+            = link_to transfer_item.product.title, admin_product_path(transfer_item.product)
+          = transfer_item.product.subtitle
+        %td= transfer_item.product.code
+        %td= transfer_item.inventory_item
+        %td.text-right= transfer_item.amount

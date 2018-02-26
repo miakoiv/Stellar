@@ -1,0 +1,26 @@
+.quick-edit-panel
+  .panel.panel-primary
+    .panel-heading
+      .pull-right
+        .panel-error-indicator= icon('warning')
+      %h4.panel-title
+        = t('.add_transfer_items')
+    .panel-body
+      %fieldset#admin-barcode-panel.bg-info
+        .form-group.hidden
+          .input-group.input-group-round
+            %span.input-group-addon= icon('barcode')
+            = text_field_tag 'ean', nil, class: 'form-control'
+        .form-group
+          = select_tag 'categories', options_for_select(current_group.category_options), multiple: true, placeholder: col(Product, :category_ids)
+      = render partial: 'admin/transfer_items/new', object: transfer, as: :transfer
+
+:coffee
+  $('#ean').focus()
+
+  $('#categories').selectize
+    plugins: ['remove_button']
+    dropdownParent: 'body'
+    allowEmptyOption: true
+    onChange: (id) ->
+      $('#transfer_item_product_id')[0].selectize.clearOptions()

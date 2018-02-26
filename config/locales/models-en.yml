@@ -111,6 +111,9 @@ en:
       tax_category:
         one: tax category
         other: tax categories
+      transfer:
+        one: stock transfer
+        other: stock transfers
       user:
         one: user
         other: users
@@ -491,6 +494,18 @@ en:
         name: Name
         rate: Tax rate
         included_in_retail: Retail prices include tax
+      transfer:
+        source_id: From inventory
+        destination_id: To inventory
+        note: Note
+        keyword: Keyword search
+        created_at: Date
+      transfer_item:
+        product_id: Product
+        product_title: Product title
+        product_code: Product code
+        inventory_item_id: Lot code
+        amount: Amount
       user:
         personal: Personal information
         addresses: Addresses
@@ -515,3 +530,9 @@ en:
         last_sign_in_at: Last sign in
         current_sign_in_ip: IP address
         last_sign_in_ip: IP address
+    errors:
+      models:
+        transfer:
+          attributes:
+            destination_id:
+              same_as_source: can't be the same as source

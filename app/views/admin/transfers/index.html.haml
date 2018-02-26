@@ -1,0 +1,10 @@
+.page-header
+  - if current_user.can_create?(Transfer, at: current_store)
+    = link_to new_admin_transfer_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_transfer'))
+  %h1= icon('retweet', title(Transfer, count: 2))
+
+= render partial: 'search'
+
+= render partial: 'admin/transfers/table', object: @transfers, as: :transfers
+= paginate @transfers

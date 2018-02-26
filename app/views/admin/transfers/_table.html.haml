@@ -1,0 +1,13 @@
+.table-responsive
+  %table.table.table-striped.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-2= col(Transfer, :created_at)
+        %th.col-xs-2= col(Transfer, :source_id)
+        %th.col-xs-2= col(Transfer, :destination_id)
+        %th= col(Transfer, :note)
+        %th.col-xs-2.actions
+
+    %tbody
+      = render partial: 'admin/transfers/row', collection: transfers, as: :transfer

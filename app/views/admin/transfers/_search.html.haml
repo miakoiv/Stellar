@@ -1,0 +1,18 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_transfers_path, method: :get do |f|
+      .row
+        .col-sm-6.col-md-3
+          .form-group
+            = f.select :source, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: col(Transfer, :source_id)}, {class: 'form-control selectize'}
+        .col-sm-6.col-md-3
+          .form-group
+            = f.select :destination, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: col(Transfer, :destination_id)}, {class: 'form-control selectize'}
+        .col-sm-6.col-md-4
+          .form-group
+            = f.search_field :keyword, placeholder: col(Transfer, :keyword), class: 'form-control'
+        .col-sm-6.col-md-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
