@@ -61,6 +61,7 @@
         """
         <div class="item">
           <strong>\#{escape(item.code)}</strong>
+          <i class="fa fa-cube fa-fw"></i> \#{item.available}
           <span class="small">
             \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
           </span>
@@ -70,6 +71,7 @@
         """
         <div class="option">
           <strong>\#{escape(item.code)}</strong>
+          <i class="fa fa-cube fa-fw"></i> \#{item.available}
           <span class="small">
             \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
           </span>
