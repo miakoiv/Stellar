@@ -40,6 +40,7 @@
     onChange: (id) ->
       $('#transfer_item_inventory_item_id')[0].selectize.clearOptions()
       if id
+        source = $('#admin-transfer-item-form').data 'inventoryId'
         $('#transfer_item_inventory_item_id')[0].selectize.load (callback) ->
           $.ajax
             url: $('#transfer_item_product_id')[0].selectize.options[id].url
@@ -48,8 +49,9 @@
             error: ->
               callback()
             success: (response) ->
+              items = (item for item in response.inventory_items when item.inventory_id is source)
               $('#transfer_item_inventory_item_id')[0].selectize.enable()
-              callback(response.inventory_items)
+              callback(items)
 
 
   $('#transfer_item_inventory_item_id').selectize
