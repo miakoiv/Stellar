@@ -55,6 +55,12 @@ class ProductSearch < Searchlight::Search
     query.where(purpose: Product.purposes.slice(*purposes).values)
   end
 
+  def search_inventories
+    query.includes(inventory_items: :inventory).where(
+      inventory_items: {inventory_id: inventories}
+    )
+  end
+
   def search_categories
     query.where(categories: {id: categories})
   end
