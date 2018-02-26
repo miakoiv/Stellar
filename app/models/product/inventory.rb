@@ -54,21 +54,18 @@ class Product < ActiveRecord::Base
     lead_time.presence && lead_time.to_i
   end
 
-  # Restocks given inventory with amount of this product with given lot code,
-  # at given value. If value is not specified, uses the current value of the
-  # targeted inventory item, defaulting to product cost price.
-  def restock!(inventory, code, amount, value = nil, recorded_at = nil)
-    recorded_at ||= Date.today
+  # Restocks given inventory with amount of this product with given lot code.
+  def restock!(inventory, code, amount)
     item = inventory_items.find_or_initialize_by(
       inventory: inventory,
       code: code
     )
     item.inventory_entries.build(
-      recorded_at: recorded_at,
+      recorded_at: Date.today,
       on_hand: amount,
       reserved: 0,
       pending: 0,
-      value: value || item.value || cost_price || 0
+      value: item.value || cost_price || 0
     )
     item.save!
   end
