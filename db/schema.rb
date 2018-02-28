@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222144656) do
+ActiveRecord::Schema.define(version: 20180228092948) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -669,7 +669,7 @@ ActiveRecord::Schema.define(version: 20180222144656) do
   add_index "segments", ["resource_type", "resource_id"], name: "index_segments_on_resource_type_and_resource_id", using: :btree
 
   create_table "shipments", force: :cascade do |t|
-    t.integer  "order_id",           limit: 4,     null: false
+    t.integer  "order_id",           limit: 4
     t.integer  "shipping_method_id", limit: 4
     t.string   "number",             limit: 255
     t.datetime "shipped_at"
@@ -752,8 +752,9 @@ ActiveRecord::Schema.define(version: 20180222144656) do
 
   create_table "transfers", force: :cascade do |t|
     t.integer  "store_id",       limit: 4,   null: false
-    t.integer  "source_id",      limit: 4,   null: false
-    t.integer  "destination_id", limit: 4,   null: false
+    t.integer  "shipment_id",    limit: 4
+    t.integer  "source_id",      limit: 4
+    t.integer  "destination_id", limit: 4
     t.string   "note",           limit: 255
     t.datetime "completed_at"
     t.datetime "created_at",                 null: false
@@ -761,6 +762,7 @@ ActiveRecord::Schema.define(version: 20180222144656) do
   end
 
   add_index "transfers", ["destination_id"], name: "index_transfers_on_destination_id", using: :btree
+  add_index "transfers", ["shipment_id"], name: "index_transfers_on_shipment_id", using: :btree
   add_index "transfers", ["source_id"], name: "index_transfers_on_source_id", using: :btree
   add_index "transfers", ["store_id"], name: "index_transfers_on_store_id", using: :btree
 
