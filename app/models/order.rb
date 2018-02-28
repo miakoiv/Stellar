@@ -46,8 +46,7 @@ class Order < ActiveRecord::Base
   # Cancelled orders.
   scope :cancelled, -> { unscope(where: :cancelled_at).where.not(cancelled_at: nil) }
 
-  # Orders that are not concluded or have been concluded not longer than
-  # one week ago are topical. This is used for timeline data.
+  # Orders not concluded or concluded recently for timeline data.
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
   #---
