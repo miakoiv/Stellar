@@ -2,8 +2,8 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :source_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {class: 'selectize'}
-        = f.select :destination_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {class: 'selectize'}
+        = f.select :source_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: blank}, {class: 'selectize'}
+        = f.select :destination_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: blank}, {class: 'selectize'}
         = f.text_field :note
       - unless locked
         %fieldset.actions

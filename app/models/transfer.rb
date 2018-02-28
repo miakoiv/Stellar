@@ -17,8 +17,6 @@ class Transfer < ActiveRecord::Base
   scope :complete, -> { where.not(completed_at: nil) }
 
   #---
-  validates :source, presence: true
-  validates :destination, presence: true
   validates :destination_id, exclusion: {
     in: -> (transfer) { [transfer.source_id] },
     message: :same_as_source
