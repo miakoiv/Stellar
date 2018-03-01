@@ -11,9 +11,8 @@ class Admin::OrderItemsController < ApplicationController
   def create
     @order = current_store.orders.find(params[:order_id])
     @product = current_store.products.live.find_by(id: order_item_params[:product_id])
-    find_inventory_item(@product) if @product.present?
     amount = order_item_params[:amount].to_i
-    options = {inventory_item: @inventory_item}
+    options = {lot_code: order_item_params[:lot_code]}
     respond_to do |format|
       if @order.insert(@product, amount, @order.source, options)
         @order.recalculate!
@@ -51,13 +50,9 @@ class Admin::OrderItemsController < ApplicationController
   end
 
   private
-    def find_inventory_item(product)
-      @inventory_item = product.inventory_items.find_by(id: order_item_params[:inventory_item_id])
-    end
-
     def order_item_params
       params.require(:order_item).permit(
-        :product_id, :amount, :inventory_item_id, :price
+        :product_id, :amount, :lot_code, :price
       )
     end
 end

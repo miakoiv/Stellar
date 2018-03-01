@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
 
   # Inserts amount of product to this order in the context of given
   # group. Options may include a parent item for grouping the order items,
-  # and a specific inventory item reference.
+  # and a specific lot code.
   def insert(product, amount, group, options = {})
     return nil if product.nil?
     if product.bundle?
@@ -44,7 +44,7 @@ class Order < ActiveRecord::Base
     ).find_or_create_by(
       product: product,
       parent_item: options[:parent_item],
-      inventory_item: options[:inventory_item]
+      lot_code: options[:lot_code]
     )
     order_item.update!(
       amount: order_item.amount + amount,

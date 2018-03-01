@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228092948) do
+ActiveRecord::Schema.define(version: 20180228100241) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -336,7 +336,7 @@ ActiveRecord::Schema.define(version: 20180228092948) do
     t.integer  "parent_item_id",        limit: 4
     t.integer  "order_id",              limit: 4,                                           null: false
     t.integer  "product_id",            limit: 4,                                           null: false
-    t.integer  "inventory_item_id",     limit: 4
+    t.string   "lot_code",              limit: 255
     t.string   "label",                 limit: 255
     t.integer  "amount",                limit: 4
     t.integer  "price_cents",           limit: 4
@@ -351,7 +351,6 @@ ActiveRecord::Schema.define(version: 20180228092948) do
     t.string   "product_subtitle",      limit: 255
   end
 
-  add_index "order_items", ["inventory_item_id"], name: "index_order_items_on_inventory_item_id", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["parent_item_id"], name: "index_order_items_on_parent_item_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
@@ -738,15 +737,14 @@ ActiveRecord::Schema.define(version: 20180228092948) do
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "transfer_items", force: :cascade do |t|
-    t.integer  "transfer_id",       limit: 4,             null: false
-    t.integer  "product_id",        limit: 4,             null: false
-    t.integer  "inventory_item_id", limit: 4,             null: false
-    t.integer  "amount",            limit: 4, default: 0, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "transfer_id", limit: 4,               null: false
+    t.integer  "product_id",  limit: 4,               null: false
+    t.string   "lot_code",    limit: 255
+    t.integer  "amount",      limit: 4,   default: 0, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "transfer_items", ["inventory_item_id"], name: "index_transfer_items_on_inventory_item_id", using: :btree
   add_index "transfer_items", ["product_id"], name: "index_transfer_items_on_product_id", using: :btree
   add_index "transfer_items", ["transfer_id"], name: "index_transfer_items_on_transfer_id", using: :btree
 

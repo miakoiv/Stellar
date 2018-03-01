@@ -267,8 +267,7 @@ fi:
       order_item:
         order_id: Tilaus
         product_id: Tuote
-        inventory_item_id: Eräkoodi
-        inventory_entry_id: Sarjanumero
+        lot_code: Eräkoodi
         amount: kpl
         price: à-hinta
         subtotal: Yhteensä
@@ -505,7 +504,7 @@ fi:
         product_id: Tuote
         product_title: Tuotenimike
         product_code: Tuotekoodi
-        inventory_item_id: Eräkoodi
+        lot_code: Eräkoodi
         amount: Määrä
       user:
         personal: Omat tiedot

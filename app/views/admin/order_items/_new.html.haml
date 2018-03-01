@@ -1,4 +1,4 @@
-#admin-order-item-form{data: {'product-query-url': query_admin_products_path}}
+#admin-order-item-form{data: {'product-query-url': query_admin_products_path, inventory: order.inventory.present? && order.inventory.id}}
   = bootstrap_form_for [:admin, order, OrderItem.new(amount: 1)], remote: true do |f|
     %fieldset.gap
       .row
@@ -8,7 +8,7 @@
           = f.number_field :amount, min: 1, max: 999, skip_label: true, placeholder: col(OrderItem, :amount)
       .row
         .col-sm-8
-          = f.select :inventory_item_id, [], {skip_label: true}, {disabled: true, placeholder: col(OrderItem, :inventory_item_id)}
+          = f.text_field :lot_code, skip_label: true, disabled: true, placeholder: col(OrderItem, :lot_code)
         .col-sm-4
           = f.button class: 'btn btn-block btn-primary' do
             = icon('check')
@@ -37,9 +37,11 @@
         success: (response) ->
           callback(response)
     onChange: (id) ->
-      $('#order_item_inventory_item_id')[0].selectize.clearOptions()
-      if id
-        $('#order_item_inventory_item_id')[0].selectize.load (callback) ->
+      $lot_code = $('#order_item_lot_code')[0].selectize
+      inventory = $('#admin-order-item-form').data 'inventory'
+      if id and inventory?
+        $lot_code.clearOptions()
+        $lot_code.load (callback) ->
           $.ajax
             url: $('#order_item_product_id')[0].selectize.options[id].url
             type: 'GET'
@@ -47,21 +49,20 @@
             error: ->
               callback()
             success: (response) ->
-              $('#order_item_inventory_item_id')[0].selectize.enable()
-              callback(response.inventory_items)
+              $lot_code.enable()
+              callback(response.inventory[inventory])
 
-
-  $('#order_item_inventory_item_id').selectize
+  $('#order_item_lot_code').selectize
     dropdownParent: 'body'
-    allowEmptyOption: true
-    valueField: 'id'
+    valueField: 'code'
     searchField: 'code'
+    maxItems: 1
     render:
       item: (item, escape) ->
         """
         <div class="item">
           <strong>\#{escape(item.code)}</strong>
-          <i class="fa fa-cube fa-fw"></i> \#{item.available}
+          \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
           <span class="small">
             \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
           </span>
@@ -71,7 +72,7 @@
         """
         <div class="option">
           <strong>\#{escape(item.code)}</strong>
-          <i class="fa fa-cube fa-fw"></i> \#{item.available}
+          \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
           <span class="small">
             \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
           </span>

@@ -143,6 +143,8 @@ class Admin::OrdersController < ApplicationController
   end
 
   # PATCH/PUT /admin/orders/1/conclude
+  # FIXME: orders shouldn't consume stock themselves,
+  # but have their shipment create a transfer to do it
   def conclude
     authorize_action_for Order, at: current_store
     @order.update(concluded_at: Date.current)

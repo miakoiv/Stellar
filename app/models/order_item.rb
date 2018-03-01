@@ -15,9 +15,6 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
   delegate :live?, :real?, :internal?, :back_orderable?, to: :product
 
-  # Order items may reference a specific inventory item.
-  belongs_to :inventory_item
-
   # Order items may have subitems that update with their parent, and are not
   # directly updatable or removable.
   belongs_to :parent_item, class_name: 'OrderItem'
@@ -137,7 +134,7 @@ class OrderItem < ActiveRecord::Base
 
   # Stock calculations are offloaded to the product.
   def available?
-    product.available?(inventory, inventory_item, amount)
+    product.available?(inventory, lot_code, amount)
   end
 
   def out_of_stock?
@@ -145,7 +142,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def satisfied?
-    product.satisfies?(inventory, inventory_item, amount)
+    product.satisfies?(inventory, lot_code, amount)
   end
 
   # Date used in reports is the completion date of the order.

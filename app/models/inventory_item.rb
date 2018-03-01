@@ -42,6 +42,9 @@ class InventoryItem < ActiveRecord::Base
   end
 
   # Reduces on hand stock from this inventory item.
+  # FIXME: this method should be deprecated along with the caller,
+  # Product#consume! since restocking and destocking inventories should
+  # be done through transfers
   def destock!(amount, source = nil, recorded_at = nil)
     recorded_at ||= Date.today
     inventory_entries.create(

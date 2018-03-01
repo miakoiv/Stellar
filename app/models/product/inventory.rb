@@ -7,28 +7,32 @@ class Product < ActiveRecord::Base
     vanilla? || bundle? || composite?
   end
 
-  # Amount available in given inventory or inventory item, calculated
-  # from product availability and/or minimum component availability,
-  # recursively. Returns infinite if inventory is not specified or
-  # product stock is not tracked.
-  def available(inventory, item)
+  # Amount available in given inventory, calculated from product
+  # availability and/or minimum component availability, recursively.
+  # An optional lot code may be specified to target an inventory item.
+  # Returns infinite if inventory is not specified or product stock
+  # is not tracked.
+  def available(inventory, lot_code)
     return Float::INFINITY if inventory.nil? || !tracked_stock?
     return component_stock(inventory) if bundle?
-    return [stock(inventory, item), component_stock(inventory)].min if composite?
-    stock(inventory, item)
+    return [
+      stock(inventory, lot_code),
+      component_stock(inventory)
+    ].min if composite?
+    stock(inventory, lot_code)
   end
 
   # Available means there's at least given amount on hand.
   # It's not necessary to check further if inventory is not specified
   # or product stock is not tracked.
-  def available?(inventory, item, amount = 1)
+  def available?(inventory, lot_code, amount = 1)
     return true if inventory.nil? || !tracked_stock?
-    available(inventory, item) >= amount
+    available(inventory, lot_code) >= amount
   end
 
   # Out of stock is the opposite of available.
-  def out_of_stock?(inventory, item, amount = 1)
-    !available?(inventory, item, amount)
+  def out_of_stock?(inventory, lot_code, amount = 1)
+    !available?(inventory, lot_code, amount)
   end
 
   # But out of stock products may be back orderable.
@@ -39,13 +43,13 @@ class Product < ActiveRecord::Base
   # Orderable means in stock or back orderable, but stock may not
   # be enough to satisfy the ordered amount, check #satisfies?
   # as soon as the amount is known.
-  def orderable?(inventory, item)
-    satisfies?(inventory, item, 1)
+  def orderable?(inventory, lot_code)
+    satisfies?(inventory, lot_code, 1)
   end
 
   # Check if ordering an amount of product can be satisfied.
-  def satisfies?(inventory, item, amount)
-    back_orderable? || available?(inventory, item, amount)
+  def satisfies?(inventory, lot_code, amount)
+    back_orderable? || available?(inventory, lot_code, amount)
   end
 
   # Lead times that look like integers are parsed as number of days,
@@ -55,10 +59,10 @@ class Product < ActiveRecord::Base
   end
 
   # Restocks given inventory with amount of this product with given lot code.
-  def restock!(inventory, code, amount)
+  def restock!(inventory, lot_code, amount)
     item = inventory_items.find_or_initialize_by(
       inventory: inventory,
-      code: code
+      code: lot_code
     )
     item.inventory_entries.build(
       recorded_at: Date.today,
@@ -71,15 +75,16 @@ class Product < ActiveRecord::Base
   end
 
   # Consumes given amount of this product from given inventory, either from
-  # given inventory item only, or starting from the oldest stock.
+  # a single inventory item by lot code, or starting from the oldest stock.
   # When no item is specified, multiple inventory items may be used to satisfy
   # the consumed amount. Returns false if we have insufficient stock available.
   # Immediately returns true if no inventory is specified, or stock is not
   # tracked for this product.
-  def consume!(inventory, item, amount, source = nil)
+  def consume!(inventory, lot_code, amount, source = nil)
     return true if inventory.nil? || !tracked_stock?
-    return false unless available?(inventory, item, amount)
-    if item.present?
+    return false unless available?(inventory, lot_code, amount)
+    if lot_code.present?
+      item = inventory.item_by_code(lot_code)
       item.destock!(amount, source)
       return true
     end
@@ -97,10 +102,13 @@ class Product < ActiveRecord::Base
   end
 
   private
-    # Stock from given inventory, optionally a specific inventory item,
+    # Stock from given inventory, optionally with a specific lot code,
     # used by #available for calculations.
-    def stock(inventory, item)
-      return item.available if item.present?
+    def stock(inventory, lot_code)
+      if lot_code
+        item = inventory.item_by_code(lot_code)
+        return item.available
+      end
       inventory_items.in(inventory).online.map(&:available).sum
     end
 

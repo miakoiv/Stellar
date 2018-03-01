@@ -267,7 +267,7 @@ en:
       order_item:
         order_id: Order
         product_id: Product
-        inventory_item_id: Lot code
+        lot_code: Lot code
         amount: pc
         price: à
         subtotal: Subtotal
@@ -504,7 +504,7 @@ en:
         product_id: Product
         product_title: Product title
         product_code: Product code
-        inventory_item_id: Lot code
+        lot_code: Lot code
         amount: Amount
       user:
         personal: Personal information

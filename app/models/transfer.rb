@@ -35,13 +35,13 @@ class Transfer < ActiveRecord::Base
   # the changes made to the source and destination inventories by the
   # transfer items.
   def complete!
-    completed_at = Time.current
+    now = Time.current
     ActiveRecord::Base.transaction do
       transfer_items.each do |item|
-        item.inventory_item.destock!(item.amount, self, completed_at)
-        destination.restock!(item.inventory_item, item.amount, completed_at, self)
+        source.present? && source.destock!(item, now, self)
+        destination.present? && destination.restock!(item, now, self)
       end
-      update completed_at: completed_at
+      update completed_at: now
     end
   end
 

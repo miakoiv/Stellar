@@ -23,9 +23,9 @@ $.fn.extend
           success: (response) ->
             callback(response)
       onChange: (id) ->
-        item_select.clearOptions()
+        lot_code.clearOptions()
         if id
-          item_select.load (callback) ->
+          lot_code.load (callback) ->
             $.ajax
               url: product_select.options[id].url
               type: 'GET'
@@ -33,35 +33,37 @@ $.fn.extend
               error: ->
                 callback()
               success: (response) ->
-                item_select.enable()
+                lot_code.enable()
                 callback(response.inventory_items)
         else
           item_select.disable()
 
-    $item_select = $('#order_item_inventory_item_id').selectize
+    $lot_code = $('#order_item_lot_code').selectize
       dropdownParent: 'body'
-      allowEmptyOption: true
-      valueField: 'id'
+      valueField: 'code'
       searchField: 'code'
+      maxItems: 1
       render:
         item: (item, escape) ->
           """
           <div class="item">
-            <strong>#{escape(item.code)}</strong>
+            <strong>\#{escape(item.code)}</strong>
+            \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
             <span class="small">
-              #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+              \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
             </span>
           </div>
           """
         option: (item, escape) ->
           """
           <div class="option">
-            <strong>#{escape(item.code)}</strong>
+            <strong>\#{escape(item.code)}</strong>
+            \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
             <span class="small">
-              #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+              \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
             </span>
           </div>
           """
 
     product_select = $product_select[0].selectize
-    item_select = $item_select[0].selectize
+    lot_code = $lot_code[0].selectize

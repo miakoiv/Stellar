@@ -19,25 +19,49 @@ class Inventory < ActiveRecord::Base
   validates :name, presence: true
 
   #---
+  # Finds an item by its lot code.
+  def item_by_code(code)
+    inventory_items.find_by(code: code)
+  end
+
   def stock
     items = inventory_items
     [items, items.map(&:value).sum]
   end
 
-  # Restocks the inventory from given inventory item from another inventory.
-  def restock!(another_item, amount, recorded_at, source = nil)
+  # Restocks the inventory with given transfer item that specifies
+  # a product, a lot code, and an amount. New inventory items may
+  # be created if not seen before.
+  def restock!(transfer_item, timestamp, source = nil)
     item = inventory_items.find_or_initialize_by(
-      product: another_item.product,
-      code: another_item.code,
-      expires_at: another_item.expires_at
+      product: transfer_item.product,
+      code: transfer_item.lot_code
     )
     item.inventory_entries.build(
-      recorded_at: recorded_at,
+      recorded_at: timestamp,
       source: source,
-      on_hand: amount,
+      on_hand: transfer_item.amount,
       reserved: 0,
       pending: 0,
-      value: another_item.value
+      value: item.value || transfer_item.product.cost_price || 0
+    )
+    item.save!
+  end
+
+  # Destocks the inventory from given transfer item that specifies
+  # a product, a lot code, and an amount. The inventory item must exist.
+  def destock!(transfer_item, timestamp, source = nil)
+    item = inventory_items.find_by(
+      product: transfer_item.product,
+      code: transfer_item.lot_code
+    )
+    item.inventory_entries.build(
+      recorded_at: timestamp,
+      source: source,
+      on_hand: -transfer_item.amount,
+      reserved: 0,
+      pending: 0,
+      value: item.value
     )
     item.save!
   end
