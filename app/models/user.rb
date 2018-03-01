@@ -51,7 +51,9 @@ class User < ActiveRecord::Base
         customer: self,
         inventory: store.default_inventory,
         store_portal: store_portal,
-        includes_tax: group.price_tax_included?
+        includes_tax: group.price_tax_included?,
+        shipping_country: store.country,
+        billing_country: store.country
       )
   end
 
