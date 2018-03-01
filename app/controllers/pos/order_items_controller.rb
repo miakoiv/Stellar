@@ -13,9 +13,8 @@ class Pos::OrderItemsController < ApplicationController
   # Use Order#insert to create order items correctly.
   def create
     @product = current_store.products.live.find_by(id: order_item_params[:product_id])
-    find_inventory_item(@product) if @product.present?
     amount = order_item_params[:amount].to_i
-    options = {inventory_item: @inventory_item}
+    options = {lot_code: order_item_params[:lot_code]}
     respond_to do |format|
       if @order_item = @order.insert(@product, amount, @order.source, options)
         @order.recalculate!
@@ -62,13 +61,9 @@ class Pos::OrderItemsController < ApplicationController
       @order_types = @order.available_order_types
     end
 
-    def find_inventory_item(product)
-      @inventory_item = product.inventory_items.find_by(id: order_item_params[:inventory_item_id])
-    end
-
     def order_item_params
       params.require(:order_item).permit(
-        :product_id, :amount, :inventory_item_id
+        :product_id, :amount, :lot_code
       )
     end
 end
