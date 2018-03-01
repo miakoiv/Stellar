@@ -6,6 +6,9 @@ class Shipment < ActiveRecord::Base
   belongs_to :shipping_method
   delegate :shipping_cost_product, :free_shipping_from, to: :shipping_method
 
+  # Shipments must refer to a transfer to handle the stock changes.
+  has_one :transfer
+
   default_scope { order(created_at: :desc) }
   scope :pending, -> { where(shipped_at: nil) }
 
