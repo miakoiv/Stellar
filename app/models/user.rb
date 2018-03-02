@@ -43,18 +43,20 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
 
   #---
-  # A user's shopping cart is the only incomplete order at given store.
-  # Shopping carts have the user as the customer by default.
+  # A user's shopping cart is the only incomplete order at given store
+  # with her as the customer.
   def shopping_cart(store, store_portal, group)
-    orders.at(store).incomplete.first ||
-      orders.at(store).create!(
-        customer: self,
-        inventory: store.default_inventory,
-        store_portal: store_portal,
-        includes_tax: group.price_tax_included?,
-        shipping_country: store.country,
-        billing_country: store.country
-      )
+    cart = orders.at(store).for(self).incomplete.first
+    return cart unless cart.nil?
+
+    cart = orders.at(store).for(self).build(
+      inventory: store.default_inventory,
+      store_portal: store_portal,
+      includes_tax: group.price_tax_included?
+    )
+    cart.address_to_customer(group.guest?)
+    cart.save!
+    cart
   end
 
   # Order types seen in the user's set of completed orders.

@@ -65,23 +65,21 @@ class Order < ActiveRecord::Base
     end
   end
 
-  # Addresses this order to the given user if she has any addresses defined.
-  def address_to(user)
-    self.customer_email = user.email if customer_email.blank?
-    self.customer_name = user.name if customer_name.blank?
-    self.customer_phone = user.phone if customer_phone.blank?
-    if user.shipping_address.present?
-      self.shipping_address = user.shipping_address
-      self.shipping_postalcode = user.shipping_postalcode
-      self.shipping_city = user.shipping_city
-      self.shipping_country = user.shipping_country
-    end
-    if user.billing_address.present?
-      self.has_billing_address = true
-      self.billing_address = user.billing_address
-      self.billing_postalcode = user.billing_postalcode
-      self.billing_city = user.billing_city
-      self.billing_country = user.billing_country
+  # Addresses the order to its customer unless guest mode is specified.
+  # In any case will ensure that country codes are set.
+  def address_to_customer(guest = false)
+    unless guest
+      self.customer_email = customer.email
+      self.customer_name = customer.name
+      self.customer_phone = customer.phone
+      self.shipping_address = customer.shipping_address
+      self.shipping_postalcode = customer.shipping_postalcode
+      self.shipping_city = customer.shipping_city
+      self.shipping_country = customer.shipping_country
+      self.billing_address = customer.billing_address
+      self.billing_postalcode = customer.billing_postalcode
+      self.billing_city = customer.billing_city
+      self.billing_country = customer.billing_country
     end
     ensure_valid_countries
   end

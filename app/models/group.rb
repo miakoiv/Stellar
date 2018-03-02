@@ -54,6 +54,10 @@ class Group < ActiveRecord::Base
   end
 
   #---
+  def guest?
+    store.default_group == self
+  end
+
   def price_method
     "#{price_base}_price".to_sym
   end

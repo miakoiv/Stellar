@@ -30,7 +30,6 @@ class CheckoutController < ApplicationController
     @shipping_methods = @order.available_shipping_methods
     @order.shipments.destroy_all
     @order.clear_shipping_costs!
-    @order.address_to(@order.customer) unless guest?
 
     if @order.has_payment?
       @payment_gateway = @order.payment_gateway_class.new(order: @order)

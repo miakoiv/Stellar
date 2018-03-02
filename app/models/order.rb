@@ -24,6 +24,7 @@ class Order < ActiveRecord::Base
   default_scope { where(cancelled_at: nil) }
 
   scope :at, -> (store) { where(store: store) }
+  scope :for, -> (customer) { where(customer: customer) }
 
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
