@@ -5,11 +5,10 @@
         = icon('chevron-circle-left', t('actions.back'))
       = link_to order_path(@order), class: 'btn btn-primary' do
         = icon('info-circle', t('actions.show'))
+
       %h1
         = @order.order_type
-        %span.small
-          = col(Order, :number)
-          = @order.to_s
+        %span.small= @order.to_s
 
     .row
       .col-lg-5
