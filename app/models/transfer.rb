@@ -60,6 +60,19 @@ class Transfer < ActiveRecord::Base
     true
   end
 
+  # Creates transfer items based on given order items.
+  def create_items_for(order_items)
+    transaction do
+      order_items.each do |order_item|
+        transfer_items.create(
+          product: order_item.product,
+          lot_code: order_item.lot_code,
+          amount: order_item.amount
+        )
+      end
+    end
+  end
+
   def appearance
     if incomplete?
       return 'danger text-danger' unless feasible?

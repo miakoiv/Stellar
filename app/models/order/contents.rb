@@ -5,8 +5,6 @@ class Order < ActiveRecord::Base
 
   # The inventory this order ships from by default.
   # If nil, the store doesn't keep stock.
-  # TODO: shipments should include their own inventory reference to allow
-  # shipping orders from multiple inventories.
   belongs_to :inventory
 
   # Inserts amount of product to this order in the context of given
@@ -157,5 +155,16 @@ class Order < ActiveRecord::Base
       source.promotions.live.each do |promotion|
         promotion.apply!(self)
       end
+    end
+
+    # Creates the initial transfer containing the tangible order items,
+    # associated with the initial shipment, which may already exist.
+    # Does nothing if the order has no associated inventory or doesn't
+    # require shipping anything.
+    def create_initial_transfer!
+      return nil unless inventory.present? && requires_shipping?
+      shipment = shipments.first_or_create
+      transfer = shipment.create_transfer(store: store, source: inventory)
+      transfer.create_items_for(order_items.tangible)
     end
 end

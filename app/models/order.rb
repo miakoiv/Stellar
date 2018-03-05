@@ -269,10 +269,9 @@ class Order < ActiveRecord::Base
       end
     end
 
-    # Approving an order sends the appropriate notifications.
-    # If the order has already been paid, a processing notification
-    # is sent. Otherwise an order confirmation is sent, and a copy
-    # without pricing information is cc'd to the contact person.
+    # Approving an order prepares its initial transfer by creating it
+    # attached to the initial shipment, which in turn is created if needed.
+    # The appropriate parties are sent email notifications.
     def approve!
       reload # to clear changes and prevent a callback loop
       if has_payment?
@@ -286,6 +285,7 @@ class Order < ActiveRecord::Base
           email(:notification, user.to_s, items, bcc: false, pricing: false)
         end
       end
+      create_initial_transfer!
       true
     end
 
