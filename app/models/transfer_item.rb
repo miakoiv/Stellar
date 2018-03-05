@@ -21,7 +21,6 @@ class TransferItem < ActiveRecord::Base
     greater_than_or_equal_to: 1
   }
 
-
   #---
   # The source inventory item associated with this tranfer item
   # is found by product and lot code from the source inventory.
@@ -34,7 +33,7 @@ class TransferItem < ActiveRecord::Base
 
   # Transfer items are feasible if there's enough stock.
   def feasible?
-    source_item.nil? || source_item.available >= amount
+    source_item.present? && source_item.available >= amount
   end
 
   # Checks if this item is part of a transfer associated with a shipment,
