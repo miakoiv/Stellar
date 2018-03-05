@@ -4,8 +4,9 @@
   - if current_user.can_update?(@transfer, at: current_store)
     = link_to edit_admin_transfer_path(@transfer), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
-    = link_to complete_admin_transfer_path(@transfer), class: 'btn btn-warning', method: :patch do
-      = icon('cogs', t('.complete'))
+    - if @transfer.feasible?
+      = link_to complete_admin_transfer_path(@transfer), class: 'btn btn-warning', method: :patch do
+        = icon('cogs', t('.complete'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1
     = icon('retweet', title(Transfer))

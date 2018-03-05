@@ -42,7 +42,7 @@ class Transfer < ActiveRecord::Base
   # transfer items.
   def complete!
     now = Time.current
-    ActiveRecord::Base.transaction do
+    transaction do
       transfer_items.each do |item|
         source.present? && source.destock!(item, now, self)
         destination.present? && destination.restock!(item, now, self)
@@ -51,12 +51,27 @@ class Transfer < ActiveRecord::Base
     end
   end
 
+  # Transfer is considered feasible only if all its items can be
+  # transferred, given current stock levels.
+  def feasible?
+    transfer_items.each do |item|
+      return false unless item.feasible?
+    end
+    true
+  end
+
   def appearance
-    incomplete? && 'warning text-warning'
+    if incomplete?
+      return 'danger text-danger' unless feasible?
+      'warning text-warning'
+    end
   end
 
   def icon
-    incomplete? && 'cog'
+    if incomplete?
+      return 'warning' unless feasible?
+      'cog'
+    end
   end
 
   def to_s
