@@ -21,11 +21,7 @@ class CreateTransfersForShipments < ActiveRecord::Migration
         note: "#{Order.model_name.human} #{order}"
       )
       order.order_items.tangible.each do |order_item|
-        transfer.transfer_items.create(
-          product: order_item.product,
-          lot_code: '[legacy]',
-          amount: order_item.amount
-        )
+        transfer.create_item_from(order_item, '[legacy]')
       end
     end
   end

@@ -11,6 +11,9 @@ class TransferItem < ActiveRecord::Base
   belongs_to :transfer
   delegate :complete?, :source, :destination, to: :transfer
 
+  # Transfer items may reference an order item they were created for.
+  belongs_to :order_item
+
   belongs_to :product
 
   #---

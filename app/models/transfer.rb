@@ -69,6 +69,15 @@ class Transfer < ActiveRecord::Base
     end
   end
 
+  def create_item_from(order_item, lot_code = nil, amount = nil)
+    transfer_items.create(
+      order_item: order_item,
+      product: order_item.product,
+      lot_code: lot_code || order_item.lot_code,
+      amount: amount || order_item.amount
+    )
+  end
+
   def appearance
     if incomplete?
       return 'danger text-danger' unless feasible?
@@ -93,30 +102,16 @@ class Transfer < ActiveRecord::Base
     # used for a single transfer item. Otherwise the amount of product is
     # found from the source inventory starting from oldest stock.
     def load_item!(order_item)
-      if order_item.lot_code.present?
-        return transfer_items.create(
-          product: order_item.product,
-          lot_code: order_item.lot_code,
-          amount: order_item.amount
-        )
-      end
+      return create_item_from(order_item) if order_item.lot_code.present?
 
       amount = order_item.amount
       source.inventory_items.for(order_item.product).online.each do |item|
         if item.available >= amount
           # This inventory item satisfies the amount, we're done.
-          return transfer_items.create(
-            product: order_item.product,
-            lot_code: item.code,
-            amount: amount
-          )
+          return create_item_from(order_item, item.code, amount)
         else
           # Load all of this item and continue with the remaining amount.
-          transfer_items.create(
-            product: order_item.product,
-            lot_code: item.code,
-            amount: item.available
-          )
+          create_item_from(order_item, item.code, item.available)
           amount -= item.available
         end
       end

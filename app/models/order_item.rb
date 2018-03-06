@@ -12,6 +12,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   delegate :inventory, :includes_tax?, :approved?, :concluded?, to: :order
 
+  has_many :transfer_items
   belongs_to :product
   delegate :live?, :real?, :internal?, :back_orderable?, to: :product
 
