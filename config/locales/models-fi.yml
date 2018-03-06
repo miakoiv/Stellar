@@ -495,11 +495,11 @@ fi:
         rate: Verokanta
         included_in_retail: Myyntihinnat sisältävät veron
       transfer:
+        completed_at: Siirretty
         source_id: Mistä
         destination_id: Mihin
         note: Huomautus
         keyword: Tekstihaku
-        created_at: Päiväys
       transfer_item:
         product_id: Tuote
         product_title: Tuotenimike
