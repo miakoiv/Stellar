@@ -433,7 +433,7 @@ en:
         thumbnail_size: Slide size
       shipment:
         shipping_method_id: Shipping method
-        number: Number
+        number: №
         shipped_at: Shipping date
         cancelled_at: Cancellation date
         metadata: Details

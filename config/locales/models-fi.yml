@@ -214,7 +214,7 @@ fi:
         value: Arvo
         total_value: Arvo yhteensä
       order:
-        number: Nro
+        number: nro
         external_number: Ulkoinen nro
         vat_number: Y-tunnus
         your_reference: Viitteenne
@@ -433,7 +433,7 @@ fi:
         thumbnail_size: Diakuvan koko
       shipment:
         shipping_method_id: Toimitustapa
-        number: Numero
+        number: nro
         shipped_at: Toimituspvm
         cancelled_at: Peruutuspvm
         metadata: Yksityiskohdat
