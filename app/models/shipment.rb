@@ -18,6 +18,10 @@ class Shipment < ActiveRecord::Base
   end
 
   #---
+  def shipped?
+    shipped_at.present?
+  end
+
   # Calculates the actual shipment cost based on the shipping cost product
   # and given pricing, adjusted by the gateway using the parsed metadata
   # obtained earlier.
@@ -42,5 +46,9 @@ class Shipment < ActiveRecord::Base
 
   def shipping_gateway
     "ShippingGateway::#{shipping_method.shipping_gateway}".constantize
+  end
+
+  def to_s
+    "#{Shipment.human_attribute_name(:number)} #{id}"
   end
 end
