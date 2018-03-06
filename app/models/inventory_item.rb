@@ -15,12 +15,15 @@ class InventoryItem < ActiveRecord::Base
   has_many :inventory_entries, dependent: :destroy
   accepts_nested_attributes_for :inventory_entries, limit: 1
 
-  default_scope { order(:created_at) }
+  # The order is by expiration first with nil expiration sorted last,
+  # creation date second.
+  default_scope { order('expires_at IS NULL', :expires_at, :created_at) }
 
   # Inventory items are considered online if they have stock available.
   scope :online, -> { where('on_hand - reserved > 0') }
 
   scope :in, -> (inventory) { where(inventory: inventory) }
+  scope :for, -> (product) { where(product: product) }
 
   #---
   validates :inventory_id, presence: true
@@ -39,23 +42,6 @@ class InventoryItem < ActiveRecord::Base
 
   def total_value_cents
     [0, on_hand].max * (value_cents || 0)
-  end
-
-  # Reduces on hand stock from this inventory item.
-  # FIXME: this method should be deprecated along with the caller,
-  # Product#consume! since restocking and destocking inventories should
-  # be done through transfers
-  def destock!(amount, source = nil, recorded_at = nil)
-    recorded_at ||= Date.today
-    inventory_entries.create(
-      recorded_at: recorded_at,
-      source: source,
-      on_hand: -amount,
-      reserved: 0,
-      pending: 0,
-      value: value
-    )
-    update_counts_and_value!
   end
 
   def title
