@@ -60,15 +60,11 @@ class Transfer < ActiveRecord::Base
     true
   end
 
-  # Creates transfer items based on given order items.
-  def create_items_for(order_items)
+  # Loads the given order items into the transfer.
+  def load!(order_items)
     transaction do
       order_items.each do |order_item|
-        transfer_items.create(
-          product: order_item.product,
-          lot_code: order_item.lot_code,
-          amount: order_item.amount
-        )
+        load_item!(order_item)
       end
     end
   end
@@ -90,4 +86,39 @@ class Transfer < ActiveRecord::Base
   def to_s
     note
   end
+
+  private
+    # Loads a single order item into the transfer as one or more
+    # transfer items. If the order item specifies a lot code, it will be
+    # used for a single transfer item. Otherwise the amount of product is
+    # found from the source inventory starting from oldest stock.
+    def load_item!(order_item)
+      if order_item.lot_code.present?
+        return transfer_items.create(
+          product: order_item.product,
+          lot_code: order_item.lot_code,
+          amount: order_item.amount
+        )
+      end
+
+      amount = order_item.amount
+      source.inventory_items.for(order_item.product).online.each do |item|
+        if item.available >= amount
+          # This inventory item satisfies the amount, we're done.
+          return transfer_items.create(
+            product: order_item.product,
+            lot_code: item.code,
+            amount: amount
+          )
+        else
+          # Load all of this item and continue with the remaining amount.
+          transfer_items.create(
+            product: order_item.product,
+            lot_code: item.code,
+            amount: item.available
+          )
+          amount -= item.available
+        end
+      end
+    end
 end

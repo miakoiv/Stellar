@@ -97,15 +97,6 @@ class Order < ActiveRecord::Base
     reload
   end
 
-  # Consumes stock for the order contents.
-  def consume_stock!
-    transaction do
-      order_items.each do |item|
-        item.product.consume!(inventory, item.inventory_item, item.amount, self)
-      end
-    end
-  end
-
   # Forwards this order as another order by replacing its items with
   # items from this order, and copying some relevant info over.
   def forward_to(another_order)
@@ -165,6 +156,6 @@ class Order < ActiveRecord::Base
       return nil unless inventory.present? && requires_shipping?
       shipment = shipments.first_or_create
       transfer = shipment.create_transfer(store: store, source: inventory)
-      transfer.create_items_for(order_items.tangible)
+      transfer.load!(order_items.tangible)
     end
 end

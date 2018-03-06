@@ -74,33 +74,6 @@ class Product < ActiveRecord::Base
     item.save!
   end
 
-  # Consumes given amount of this product from given inventory, either from
-  # a single inventory item by lot code, or starting from the oldest stock.
-  # When no item is specified, multiple inventory items may be used to satisfy
-  # the consumed amount. Returns false if we have insufficient stock available.
-  # Immediately returns true if no inventory is specified, or stock is not
-  # tracked for this product.
-  def consume!(inventory, lot_code, amount, source = nil)
-    return true if inventory.nil? || !tracked_stock?
-    return false unless available?(inventory, lot_code, amount)
-    if lot_code.present?
-      item = inventory.item_by_code(lot_code)
-      item.destock!(amount, source)
-      return true
-    end
-    inventory_items.in(inventory).online.each do |item|
-      if item.available >= amount
-        # This inventory item satisfies the amount, destock and finish.
-        item.destock!(amount, source)
-        break
-      else
-        # Continue with remaining amount after destocking all of this item.
-        amount -= item.available
-        item.destock!(item.available, source)
-      end
-    end
-  end
-
   private
     # Stock from given inventory, optionally with a specific lot code,
     # used by #available for calculations.
