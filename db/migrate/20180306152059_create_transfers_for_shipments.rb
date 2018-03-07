@@ -13,7 +13,7 @@ class CreateTransfersForShipments < ActiveRecord::Migration
   def up
     Shipment.find_each(batch_size: 20) do |shipment|
       order = shipment.order
-      next unless order.inventory.present? && order.requires_shipping?
+      next unless order.approved? && order.inventory.present? && order.requires_shipping?
       transfer = shipment.create_transfer(
         store: order.store,
         source: order.inventory,
