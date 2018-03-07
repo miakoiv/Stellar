@@ -3,12 +3,13 @@
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)
     = order_item.product_subtitle
+    - if order_item.real?
+      %span.label.label-default= order_item.product_codes
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  %td= order_item.product_codes
-  %td
+  %td{colspan: 2}
     = form_for [:admin, order_item], remote: true,
         html: {class: 'pull-right immediate'} do |f|
       = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1

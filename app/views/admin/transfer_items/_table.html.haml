@@ -1,9 +1,8 @@
 .table-responsive
-  %table.table.table-striped.table-hover.table-loose
+  %table.table.table-hover.table-loose
     %thead
       %tr
         %th= col(TransferItem, :product_title)
-        %th= col(TransferItem, :product_code)
         %th.col-xs-2= col(TransferItem, :lot_code)
         %th.col-xs-1.text-right= col(TransferItem, :amount)
 
@@ -14,6 +13,6 @@
             %strong
               = link_to transfer_item.product.title, admin_product_path(transfer_item.product)
             = transfer_item.product.subtitle
-          %td= transfer_item.product.code
+            %span.label.label-default= transfer_item.product.code
           %td= transfer_item.lot_code
           %td.text-right= transfer_item.amount

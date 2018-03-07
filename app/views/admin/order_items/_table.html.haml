@@ -3,8 +3,8 @@
     %thead
       %tr
         %th= col(OrderItem, :product_title)
-        %th= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
+        %th.col-xs-1.text-right= icon('truck')
         %th.col-xs-2.text-right= col(OrderItem, :price)
         %th.col-xs-2.text-right= col(OrderItem, :subtotal)
     %tfoot
