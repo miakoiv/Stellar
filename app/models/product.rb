@@ -149,6 +149,10 @@ class Product < ActiveRecord::Base
     !internal?
   end
 
+  def tangible?
+    !(virtual? || internal?)
+  end
+
   # Master products are merely those that are not variants,
   # regardless if they have any assigned variants.
   def master?

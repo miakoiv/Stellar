@@ -14,7 +14,7 @@ class OrderItem < ActiveRecord::Base
 
   has_many :transfer_items
   belongs_to :product
-  delegate :live?, :real?, :internal?, :back_orderable?, to: :product
+  delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
 
   # Order items may have subitems that update with their parent, and are not
   # directly updatable or removable.
@@ -144,6 +144,14 @@ class OrderItem < ActiveRecord::Base
 
   def satisfied?
     product.satisfies?(inventory, lot_code, amount)
+  end
+
+  def amount_shipped
+    transfer_items.sum(:amount)
+  end
+
+  def pending_shipment?
+    tangible? && amount_shipped < amount
   end
 
   # Date used in reports is the completion date of the order.
