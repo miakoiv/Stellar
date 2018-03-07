@@ -23,6 +23,7 @@ class CreateTransfersForShipments < ActiveRecord::Migration
       order.order_items.tangible.each do |order_item|
         transfer.create_item_from(order_item, '[legacy]')
       end
+      shipment.update_columns(shipped_at: order.concluded_at) if order.concluded?
     end
   end
 
