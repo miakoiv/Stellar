@@ -149,6 +149,7 @@ Rails.application.routes.draw do
     resources :orders do
       resources :images, shallow: true
       resources :order_items, shallow: true
+      resources :shipments, shallow: true
       member do
         get :forward
         get :quote
