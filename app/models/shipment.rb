@@ -10,6 +10,7 @@ class Shipment < ActiveRecord::Base
   has_one :transfer
 
   default_scope { order(created_at: :desc) }
+  scope :shipped, -> { where.not(shipped_at: nil) }
   scope :pending, -> { where(shipped_at: nil) }
 
   #---
@@ -20,6 +21,10 @@ class Shipment < ActiveRecord::Base
   #---
   def shipped?
     shipped_at.present?
+  end
+
+  def pending?
+    !shipped?
   end
 
   # Calculates the actual shipment cost based on the shipping cost product
