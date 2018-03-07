@@ -437,6 +437,7 @@ fi:
         shipped_at: Toimituspvm
         cancelled_at: Peruutuspvm
         metadata: Yksityiskohdat
+        pending: Odottaa toimitusta
       shipping_method:
         name: Nimi
         shipping_gateway: Toimintamalli

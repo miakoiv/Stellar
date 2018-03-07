@@ -1,0 +1,24 @@
+.panel.panel-default
+  .panel-heading
+    %span.pull-right
+      - if shipment.metadata.present?
+        %a{role: 'button', data: {toggle: 'collapse'}, href: "##{dom_id(shipment, :metadata)}"}
+          = icon('info-circle', class: 'fa-lg')
+    %h4.panel-title
+      = title(Shipment)
+      = shipment
+      %small= shipment.shipping_method
+
+  .collapse{id: dom_id(shipment, :metadata)}
+    .panel-body
+      %small
+        = metadata_table(shipment.parsed_metadata)
+
+  = render partial: locked ? 'admin/transfer_items/table' : 'admin/transfer_items/edit_table', object: shipment.transfer, as: :transfer
+
+  .panel-footer
+    - if shipment.shipped?
+      = icon('retweet', col(Shipment, :shipped_at))
+      = l(shipment.shipped_at.to_date)
+    - else
+      = icon('cog', col(Shipment, :pending), class: 'fa-spin')
