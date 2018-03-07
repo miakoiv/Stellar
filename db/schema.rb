@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180228100241) do
+ActiveRecord::Schema.define(version: 20180306152059) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -737,14 +737,16 @@ ActiveRecord::Schema.define(version: 20180228100241) do
   add_index "tax_categories", ["store_id"], name: "index_tax_categories_on_store_id", using: :btree
 
   create_table "transfer_items", force: :cascade do |t|
-    t.integer  "transfer_id", limit: 4,               null: false
-    t.integer  "product_id",  limit: 4,               null: false
-    t.string   "lot_code",    limit: 255
-    t.integer  "amount",      limit: 4,   default: 0, null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.integer  "transfer_id",   limit: 4,               null: false
+    t.integer  "order_item_id", limit: 4
+    t.integer  "product_id",    limit: 4,               null: false
+    t.string   "lot_code",      limit: 255
+    t.integer  "amount",        limit: 4,   default: 0, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
+  add_index "transfer_items", ["order_item_id"], name: "index_transfer_items_on_order_item_id", using: :btree
   add_index "transfer_items", ["product_id"], name: "index_transfer_items_on_product_id", using: :btree
   add_index "transfer_items", ["transfer_id"], name: "index_transfer_items_on_transfer_id", using: :btree
 
