@@ -14,7 +14,7 @@
         = metadata_table(shipment.parsed_metadata)
 
   - if shipment.transfer.present?
-    = render partial: locked ? 'admin/transfer_items/table' : 'admin/transfer_items/edit_table', object: shipment.transfer, as: :transfer
+    = render partial: locked || shipment.shipped? ? 'admin/transfer_items/table' : 'admin/transfer_items/edit_table', object: shipment.transfer, as: :transfer
 
     .panel-footer
       - if shipment.shipped?
