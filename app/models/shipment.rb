@@ -22,13 +22,14 @@ class Shipment < ActiveRecord::Base
   end
 
   #---
-  # Loads the transfer of this shipment from order contents
-  # that have not been shipped yet.
+  # Loads this shipment into the associated transfer,
+  # from order items still pending shipping.
   def load!
     transfer = find_or_create_transfer
     transfer.load!(order.items_pending_shipping)
   end
 
+  # Forcibly reloads the shipment to pick up new inventory.
   def reload!
     transfer = find_or_create_transfer
     transfer.transfer_items.destroy_all
