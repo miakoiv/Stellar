@@ -223,6 +223,15 @@ fi:
       segment_nav:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
+    shipments:
+      item:
+        complete:
+          button: Toimita tämä
+          confirm: "Toimitetaanko varmasti %{klass} %{name}?"
+          proceed: Toimita
+          cancel: Kumoa
+      new:
+        new_shipment: Uusi toimitus
     shipping_methods:
       index:
         new_shipping_method: Uusi toimitustapa

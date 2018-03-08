@@ -1,0 +1,13 @@
+.panel.panel-primary
+  .panel-heading
+    %h4.panel-title
+      = t('.new_shipment')
+  .panel-body
+    = bootstrap_form_for [:admin, order, Shipment.new], remote: true do |f|
+      %fieldset
+        .row
+          .col-sm-10
+            = f.select :shipping_method_id, current_store.shipping_method_options, {skip_label: true}, {placeholder: title(ShippingMethod), class: 'selectize'}
+          .col-sm-2
+            = f.button class: 'btn btn-block btn-primary' do
+              = icon('check')

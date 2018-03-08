@@ -243,6 +243,15 @@ en:
       segment_nav:
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.
+    shipments:
+      item:
+        complete:
+          button: Ship this
+          confirm: "Are you sure you want to ship %{klass} %{name}?"
+          proceed: Ship
+          cancel: Cancel
+      new:
+        new_shipment: New shipment
     shipping_methods:
       index:
         new_shipping_method: New shipping method

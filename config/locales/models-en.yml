@@ -437,7 +437,6 @@ en:
         shipped_at: Shipping date
         cancelled_at: Cancellation date
         metadata: Details
-        pending: Pending shipment
       shipping_method:
         name: Name
         shipping_gateway: Shipping mode
