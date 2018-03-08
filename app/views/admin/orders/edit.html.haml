@@ -28,7 +28,8 @@
 
       = tab_pane 'shipments' do
         %h2.visible-print-block= title(Shipment, count: 2)
-        = render partial: 'admin/shipments/item', collection: @order.shipments, as: :shipment, locals: {locked: @order.concluded?}
+        #shipments-list
+          = render partial: 'admin/shipments/item', collection: @order.shipments, as: :shipment, locals: {locked: @order.concluded?}
         - if current_user.can_create?(Shipment, for: @order, at: current_store)
           = render partial: 'admin/shipments/new', object: @order, as: :order
 
