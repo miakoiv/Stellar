@@ -225,6 +225,7 @@ fi:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     shipments:
       item:
+        refresh: Päivitä toimitus
         complete:
           button: Toimita tämä
           confirm: "Toimitetaanko varmasti %{klass} %{name}?"

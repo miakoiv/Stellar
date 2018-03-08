@@ -1,0 +1,2 @@
+$("#{j render partial: 'admin/shipments/item', object: @shipment, as: :shipment, locals: {locked: false}}").prependTo('#shipments-list');
+$("##{dom_id(@shipment)}").effect('highlight');
