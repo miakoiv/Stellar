@@ -1,5 +1,5 @@
 %tr[order_item]{class: order_item.is_subitem? && 'subrow'}
-  %td
+  %td{colspan: 2}
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)
     = order_item.product_subtitle
@@ -13,8 +13,6 @@
   %td.text-right{class: order_item.pending_shipment? && 'warning text-warning'}
     - if order_item.tangible?
       = order_item.amount_shipped
-  %td.text-right.currency
-    = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td

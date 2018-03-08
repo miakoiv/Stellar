@@ -269,6 +269,8 @@ en:
         product_id: Product
         lot_code: Lot code
         amount: pc
+        ordered: ordered
+        shipped: shipped
         price: à
         subtotal: Subtotal
         tax_rate: VAT

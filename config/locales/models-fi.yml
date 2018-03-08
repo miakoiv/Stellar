@@ -269,6 +269,8 @@ fi:
         product_id: Tuote
         lot_code: Eräkoodi
         amount: kpl
+        ordered: tilattu
+        shipped: toimitettu
         price: à-hinta
         subtotal: Yhteensä
         tax_rate: ALV

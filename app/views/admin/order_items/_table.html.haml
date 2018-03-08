@@ -1,18 +1,18 @@
-.table-responsive
+#order-items-table.table-responsive
   %table.table.table-hover
     %thead
       %tr
-        %th= col(OrderItem, :product_title)
-        %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.col-xs-1.text-right= icon('truck')
-        %th.col-xs-2.text-right= col(OrderItem, :price)
+        %th{colspan: 2}= col(OrderItem, :product_title)
+        %th.col-xs-1.text-right= col(OrderItem, :ordered)
+        %th.col-xs-1.text-right= col(OrderItem, :shipped)
         %th.col-xs-2.text-right= col(OrderItem, :subtotal)
+        %th
     %tfoot
       %tr
-        %th
-        %th
+        %th{colspan: 2}
         %th.text-right{colspan: 2}= col(Order, :grand_total)
         %th.text-right.currency
           = render partial: 'admin/orders/grand_total', object: order, as: :order
+        %th
     %tbody
       = render partial: 'admin/order_items/row', collection: order.order_items, as: :order_item
