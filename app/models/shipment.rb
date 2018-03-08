@@ -9,7 +9,7 @@ class Shipment < ActiveRecord::Base
   belongs_to :shipping_method
   delegate :shipping_cost_product, :free_shipping_from, to: :shipping_method
 
-  # Shipments must refer to a transfer to handle the stock changes.
+  # Shipments refer to a transfer to handle the stock changes.
   has_one :transfer
 
   default_scope { order(created_at: :desc) }
@@ -22,6 +22,19 @@ class Shipment < ActiveRecord::Base
   end
 
   #---
+  # Loads the transfer of this shipment from order contents
+  # that have not been shipped yet.
+  def load!
+    transfer = find_or_create_transfer
+    transfer.load!(order.items_pending_shipping)
+  end
+
+  def reload!
+    transfer = find_or_create_transfer
+    transfer.transfer_items.destroy_all
+    load!
+  end
+
   def shipped?
     shipped_at.present?
   end
@@ -59,4 +72,12 @@ class Shipment < ActiveRecord::Base
   def to_s
     "#{Shipment.human_attribute_name(:number)} #{id}"
   end
+
+  private
+    def find_or_create_transfer
+      self.transfer ||= create_transfer(
+        store: order.store,
+        source: order.inventory
+      )
+    end
 end

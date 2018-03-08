@@ -106,6 +106,12 @@ class Order < ActiveRecord::Base
     order_items.reload
   end
 
+  # Collects order items that have not been fully shipped yet.
+  # FIXME: actually implement this
+  def items_pending_shipping
+    order_items.tangible
+  end
+
   def clear_shipping_costs!
     order_items.where(product: store.shipping_cost_products).destroy_all
     order_items.reload

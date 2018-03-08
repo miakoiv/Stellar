@@ -155,7 +155,6 @@ class Order < ActiveRecord::Base
     def create_initial_transfer!
       return nil unless inventory.present? && requires_shipping?
       shipment = shipments.first_or_create
-      transfer = shipment.create_transfer(store: store, source: inventory)
-      transfer.load!(order_items.tangible)
+      shipment.load!
     end
 end
