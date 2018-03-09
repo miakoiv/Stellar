@@ -1,19 +1,21 @@
-.table-responsive
-  %table.table.table-hover
-    %caption= icon('exclamation-circle', t('.title'))
-    %thead
-      %tr
-        %th= col(OrderItem, :product_title)
-        %th.col-xs-1.text-right= col(OrderItem, :ordered)
-        %th.col-xs-1.text-right= col(OrderItem, :shipped)
-    %tbody
-      - order.items_pending_shipping.each do |order_item|
-        %tr
-          %td
-            %strong
-              = link_to order_item.product_title, admin_product_path(order_item.product)
-            = order_item.product_subtitle
-            - if order_item.real?
-              %span.label.label-default= order_item.product_codes
-          %td.text-right= order_item.amount
-          %td.text-right.warning.text-warning= order_item.amount_shipped
+#pending-items-table
+  - if order.items_pending_shipping.any?
+    .table-responsive
+      %table.table.table-hover
+        %caption= icon('exclamation-circle', t('.title'))
+        %thead
+          %tr
+            %th= col(OrderItem, :product_title)
+            %th.col-xs-1.text-right= col(OrderItem, :ordered)
+            %th.col-xs-1.text-right= col(OrderItem, :shipped)
+        %tbody
+          - order.items_pending_shipping.each do |order_item|
+            %tr
+              %td
+                %strong
+                  = link_to order_item.product_title, admin_product_path(order_item.product)
+                = order_item.product_subtitle
+                - if order_item.real?
+                  %span.label.label-default= order_item.product_codes
+              %td.text-right= order_item.amount
+              %td.text-right.warning.text-warning= order_item.amount_shipped

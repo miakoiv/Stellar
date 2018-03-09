@@ -1,2 +1,4 @@
 $("#{j render partial: 'admin/shipments/item', object: @shipment, as: :shipment, locals: {locked: false}}").prependTo('#shipments-list');
+$('#pending-items-table').replaceWith("#{j render partial: 'admin/order_items/pending', object: @shipment.order, as: :order}");
+$('#order-items-table').replaceWith("#{j render partial: 'admin/order_items/table', object: @shipment.order, as: :order}");
 $("##{dom_id(@shipment)}").effect('highlight');

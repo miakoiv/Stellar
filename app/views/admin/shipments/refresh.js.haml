@@ -1,2 +1,3 @@
 $("##{dom_id(@shipment)} .transfer-items-table").replaceWith("#{j render partial: 'admin/transfer_items/edit_table', object: @shipment.transfer, as: :transfer}");
+$('#pending-items-table').replaceWith("#{j render partial: 'admin/order_items/pending', object: @shipment.order, as: :order}");
 $('#order-items-table').replaceWith("#{j render partial: 'admin/order_items/table', object: @shipment.order, as: :order}");
