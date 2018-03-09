@@ -150,7 +150,7 @@ class OrderItem < ActiveRecord::Base
     transfer_items.sum(:amount)
   end
 
-  def pending_shipment?
+  def pending_shipping?
     tangible? && amount_shipped < amount
   end
 
