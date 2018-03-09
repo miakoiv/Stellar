@@ -126,6 +126,10 @@ class Order < ActiveRecord::Base
     incomplete?
   end
 
+  def current?
+    complete? && !approved?
+  end
+
   def complete?
     completed_at.present?
   end
