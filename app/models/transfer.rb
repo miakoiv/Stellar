@@ -74,7 +74,7 @@ class Transfer < ActiveRecord::Base
       order_item: order_item,
       product: order_item.product,
       lot_code: lot_code || order_item.lot_code,
-      amount: amount || order_item.amount
+      amount: amount || order_item.amount_pending
     )
   end
 
@@ -104,7 +104,7 @@ class Transfer < ActiveRecord::Base
     def load_item!(order_item)
       return create_item_from(order_item) if order_item.lot_code.present?
 
-      amount = order_item.amount
+      amount = order_item.amount_pending
       source.inventory_items.for(order_item.product).online.each do |item|
         if item.available >= amount
           # This inventory item satisfies the amount, we're done.
