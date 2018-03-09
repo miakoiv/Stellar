@@ -36,6 +36,14 @@ class Admin::ShipmentsController < ApplicationController
   # PATCH/PUT /admin/shipments/1/complete
   def complete
     authorize_action_for @shipment, at: current_store
+
+    respond_to do |format|
+      if @shipment.complete!
+        format.js { render :complete }
+      else
+        format.js { render :error }
+      end
+    end
   end
 
   private
