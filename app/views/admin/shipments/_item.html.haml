@@ -1,4 +1,4 @@
-.panel.panel-default[shipment]
+.panel[shipment]{class: shipment.shipped? ? 'panel-default' : 'panel-warning'}
   .panel-heading
     %span.pull-right
       - if shipment.metadata.present?
@@ -21,7 +21,8 @@
         = icon('retweet', col(Shipment, :shipped_at))
         = l(shipment.shipped_at.to_date)
       - else
-        - if current_user.can_update?(Shipment, at: current_store)
+        - if !locked && current_user.can_update?(Shipment, at: current_store)
           .pull-right
+            = link_to icon('refresh', t('.refresh')), refresh_admin_shipment_path(shipment), remote: true, method: :patch, class: 'btn btn-default btn-sm'
             = link_to icon('cog', t('.complete.button'), class: 'fa-spin'), complete_admin_shipment_path(shipment), remote: true, method: :patch, class: 'btn btn-primary btn-sm', data: {confirm: t('.complete.confirm', klass: Shipment.model_name.human, name: shipment.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('.complete.proceed'), 'confirm-cancel': t('.complete.cancel')}
-          = link_to icon('refresh', t('.refresh')), refresh_admin_shipment_path(shipment), remote: true, method: :patch, class: 'btn btn-default btn-sm'
+        = icon('exclamation-circle', col(Shipment, :pending))
