@@ -150,8 +150,12 @@ class OrderItem < ActiveRecord::Base
     transfer_items.sum(:amount)
   end
 
+  def amount_pending
+    amount - amount_shipped
+  end
+
   def pending_shipping?
-    tangible? && amount_shipped < amount
+    tangible? && amount_pending > 0
   end
 
   # Date used in reports is the completion date of the order.
