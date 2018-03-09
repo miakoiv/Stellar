@@ -9,7 +9,8 @@ class Order < ActiveRecord::Base
   def appearance
     return nil if concluded?
     return 'text-muted' if incomplete?
-    approved? && 'warning text-warning' || 'danger text-danger'
+    return 'text-danger' if current?
+    fully_shipped? && 'text-warning' || 'warning text-warning'
   end
 
   def summary
@@ -20,7 +21,8 @@ class Order < ActiveRecord::Base
   def icon
     return nil if concluded?
     return 'pencil' if incomplete?
-    approved? && 'cog' || 'warning'
+    return 'check' if current?
+    fully_shipped? && 'search' || 'truck'
   end
 
   def as_json(options = {})

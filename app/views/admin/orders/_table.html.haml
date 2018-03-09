@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table.table-striped.table-hover.table-loose
+  %table.table.table-hover.table-loose
     %thead
       %tr
         %th.col-min
@@ -7,7 +7,7 @@
         %th.col-xs-1= col(Order, :completed_at)
         - if current_store.b2b_sales?
           %th.col-xs-2= col(Order, :shipping_installation_at)
-          %th= col(Order, :summary)
+          %th.col-xs-3= col(Order, :summary)
         %th= col(Order, :customer_id)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.col-xs-1.text-right= col(Order, :grand_total)
