@@ -5,7 +5,8 @@ class ShipmentAuthorizer < ApplicationAuthorizer
   def self.creatable_by?(user, opts)
     order = opts[:for]
     user.has_cached_role?(:order_manage, opts[:at]) &&
-    order.complete? && !order.concluded? && !order.has_pending_shipment?
+    order.complete? &&
+      !(order.concluded? || order.has_pending_shipment? || order.fully_shipped?)
   end
 
   def self.readable_by?(user, opts)

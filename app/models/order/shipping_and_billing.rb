@@ -35,6 +35,10 @@ class Order < ActiveRecord::Base
     shipments.pending.any?
   end
 
+  def fully_shipped?
+    !(has_pending_shipment? || items_pending_shipping.any?)
+  end
+
   def earliest_shipping_at
     (completed_at || Date.current).to_date + lead_time_days.days
   end
