@@ -30,6 +30,7 @@
         %h2.visible-print-block= title(Shipment, count: 2)
         #shipments-list
           = render partial: 'admin/shipments/item', collection: @order.shipments, as: :shipment, locals: {locked: @order.concluded?}
+        = render partial: 'admin/order_items/pending', object: @order, as: :order
         - if current_user.can_create?(Shipment, for: @order, at: current_store)
           = render partial: 'admin/shipments/new', object: @order, as: :order
 
