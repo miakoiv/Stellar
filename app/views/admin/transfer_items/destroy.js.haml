@@ -1,1 +1,3 @@
 $('.transfer-items-table').replaceWith("#{j render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer}");
+- if @transfer.shipment.present?
+  $('#pending-items-table').replaceWith("#{j render partial: 'admin/order_items/pending', object: @transfer.shipment.order, as: :order}");
