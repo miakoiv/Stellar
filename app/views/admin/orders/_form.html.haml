@@ -39,13 +39,14 @@
             .col-sm-5
               = f.text_field_without_bootstrap :shipping_city, class: 'form-control', required: true
           = f.select :shipping_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
-          = f.text_field :billing_address, required: true
-          .form-group
-            .col-sm-offset-4.col-sm-3
-              = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control', required: true
-            .col-sm-5
-              = f.text_field_without_bootstrap :billing_city, class: 'form-control', required: true
-          = f.select :billing_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
+          - if @order.has_payment?
+            = f.text_field :billing_address, required: @order.billing_address_required?
+            .form-group
+              .col-sm-offset-4.col-sm-3
+                = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control', required: @order.billing_address_required?
+              .col-sm-5
+                = f.text_field_without_bootstrap :billing_city, class: 'form-control', required: @order.billing_address_required?
+            = f.select :billing_country_code, Store.country_options, {skip_label: true}, {required: @order.billing_address_required?, class: 'selectize'}
         ~ f.text_area :notes, rows: 7
       - unless locked
         %fieldset.actions
