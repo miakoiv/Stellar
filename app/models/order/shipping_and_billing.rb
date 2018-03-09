@@ -107,9 +107,8 @@ class Order < ActiveRecord::Base
   end
 
   # Collects order items that have not been fully shipped yet.
-  # FIXME: actually implement this
   def items_pending_shipping
-    order_items.tangible
+    order_items.select { |item| item.pending_shipping? }
   end
 
   def clear_shipping_costs!
