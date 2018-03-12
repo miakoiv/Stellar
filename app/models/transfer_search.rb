@@ -7,7 +7,7 @@ class TransferSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    Transfer.all
+    Transfer.manual
   end
 
   def search_store

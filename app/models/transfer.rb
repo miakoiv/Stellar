@@ -21,6 +21,7 @@ class Transfer < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
   scope :complete, -> { where.not(completed_at: nil) }
+  scope :manual, -> { where(shipment_id: nil) }
 
   #---
   validates :destination_id, exclusion: {
