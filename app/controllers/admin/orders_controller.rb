@@ -18,7 +18,8 @@ class Admin::OrdersController < ApplicationController
     @search = OrderSearch.new(search_params)
     results = @search.results
     @orders = results.page(params[:page])
-    @timeline_orders = results.complete.has_shipping.topical
+    @timeline_orders = []
+    #@timeline_orders = results.complete.has_shipping.topical
   end
 
   # GET /admin/orders/1
