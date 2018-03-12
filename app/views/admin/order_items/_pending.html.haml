@@ -16,6 +16,6 @@
                   = link_to order_item.product_title, admin_product_path(order_item.product)
                 = order_item.product_subtitle
                 - if order_item.real?
-                  %span.label.label-default= order_item.product_codes
+                  %span.badge= order_item.product_codes
               %td.text-right= order_item.amount
               %td.text-right.warning.text-warning= order_item.amount_shipped
