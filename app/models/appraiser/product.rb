@@ -37,7 +37,7 @@ module Appraiser
     # are taken from tuples returned by #for_display and minmaxed.
     def range_for_display(product)
       return nil unless product.has_variants?
-      product.variants.map { |variant| for_display(variant).first }
+      product.variants.live.map { |variant| for_display(variant).first }
         .reject(&:nil?).minmax
     end
 
