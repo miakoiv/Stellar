@@ -63,6 +63,7 @@ fi:
         sorting:
           manual: käsin
           alphabetical: aakkosjärjestys
+          available_at_desc: uusimmat ensin
           retail_price_asc: halvin ensin
           retail_price_desc: kallein ensin
           random: satunnainen

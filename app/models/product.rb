@@ -30,6 +30,9 @@ class Product < ActiveRecord::Base
   define_scope :alphabetical do
     order(:title, :subtitle)
   end
+  define_scope :available_at_desc do
+    order(available_at: :desc, created_at: :desc)
+  end
   define_scope :retail_price_asc do
     order(retail_price_cents: :asc)
   end

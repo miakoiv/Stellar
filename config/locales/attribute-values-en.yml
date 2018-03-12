@@ -63,6 +63,7 @@ en:
         sorting:
           manual: manually
           alphabetical: alphabetical
+          available_at_desc: newest first
           retail_price_asc: least expensive first
           retail_price_desc: most expensive first
           random: randomly
