@@ -13,17 +13,21 @@ class CreateTransfersForShipments < ActiveRecord::Migration
   def up
     Shipment.find_each(batch_size: 20) do |shipment|
       order = shipment.order
-      next unless order.concluded? && order.inventory.present? && order.requires_shipping?
-      transfer = shipment.create_transfer(
-        store: order.store,
-        source: order.inventory,
-        completed_at: order.concluded_at,
-        note: "#{Order.model_name.human} #{order}"
-      )
-      order.order_items.tangible.each do |order_item|
-        transfer.create_item_from(order_item, '[legacy]')
+      next unless order.approved? && order.inventory.present? && order.requires_shipping?
+      if order.concluded?
+        transfer = shipment.create_transfer(
+          store: order.store,
+          source: order.inventory,
+          completed_at: order.concluded_at,
+          note: "#{Order.model_name.human} #{order}"
+        )
+        order.order_items.tangible.each do |order_item|
+          transfer.create_item_from(order_item, '[legacy]')
+        end
+        shipment.update_columns(shipped_at: order.concluded_at) if order.concluded?
+      else
+        shipment.load!
       end
-      shipment.update_columns(shipped_at: order.concluded_at) if order.concluded?
     end
   end
 
