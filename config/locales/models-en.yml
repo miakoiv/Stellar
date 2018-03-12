@@ -474,8 +474,8 @@ en:
         locale: Language
         country_code: Country
         admit_guests: Admit guests to the store
-        accept_credit_cards: Accept credit card payments
         disable_mail: Disable sending of e-mail
+        disable_shipment_transfers: No stock transfers for shipments
         tracking_code: Google Analytics key
         maps_api_key: Google Maps key
         facebook_pixel_id: Facebook Pixel ID
