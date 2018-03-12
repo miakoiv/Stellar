@@ -31,6 +31,11 @@ class Order < ActiveRecord::Base
   end
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
+  # Shipments are tracked via transfers, unless the store has them disabled.
+  def track_shipments?
+    !store.disable_shipment_transfers?
+  end
+
   def has_pending_shipment?
     shipments.pending.any?
   end

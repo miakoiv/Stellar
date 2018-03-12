@@ -289,7 +289,7 @@ class Order < ActiveRecord::Base
           email(:notification, user.to_s, items, bcc: false, pricing: false)
         end
       end
-      create_initial_transfer!
+      create_initial_transfer! if track_shipments?
       true
     end
 

@@ -18,7 +18,7 @@
     - if current_user.can_update?(Order, at: current_store) && order.complete? && !order.approved? && order.destination == current_group
       = link_to icon('check', t('.approve')), approve_admin_order_path(order),
           remote: true, method: :patch, class: 'btn btn-sm btn-success'
-    - if current_user.can_update?(Order, at: current_store) && order.approved? && !order.concluded? && order.fully_shipped? && order.destination == current_group
+    - if current_user.can_update?(Order, at: current_store) && order.approved? && !order.concluded? && (!order.track_shipments? || order.fully_shipped?) && order.destination == current_group
       = link_to icon('search', t('.review')), review_admin_order_path(order),
           remote: true, class: 'btn btn-sm btn-primary'
     = link_to icon('info', t('actions.show')), admin_order_path(order),

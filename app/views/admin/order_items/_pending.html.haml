@@ -1,5 +1,5 @@
 #pending-items-table
-  - if order.items_pending_shipping.any?
+  - if order.track_shipments? && order.items_pending_shipping.any?
     .table-responsive
       %table.table.table-hover
         %caption= icon('exclamation-circle', t('.title'))

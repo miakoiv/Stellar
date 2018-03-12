@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
     return nil if concluded?
     return 'text-muted' if incomplete?
     return 'text-danger' if current?
-    fully_shipped? && 'text-warning' || 'warning text-warning'
+    (!track_shipments? || fully_shipped?) ? 'text-warning' : 'warning text-warning'
   end
 
   def summary
@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
     return nil if concluded?
     return 'pencil' if incomplete?
     return 'check' if current?
-    fully_shipped? && 'search' || 'truck'
+    (!track_shipments? || fully_shipped?) && 'search' || 'truck'
   end
 
   def as_json(options = {})
