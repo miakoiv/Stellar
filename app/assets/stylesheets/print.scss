@@ -32,7 +32,13 @@
     overflow: auto;
   }
 
-  .section:first-child .section-content.column .segment { padding-top: 0; }
+  .compact {
+    > .section:first-child .section-content .column {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .page-header { margin-top: 0; }
+  }
 
   .container {
     width: 100% !important;
