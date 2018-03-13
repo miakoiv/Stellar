@@ -36,6 +36,15 @@ class InventoryItem < ActiveRecord::Base
   after_touch :update_counts_and_value!
 
   #---
+  # Options for a search form.
+  def self.online_options
+    [
+      [human_attribute_value(:status, :online), true],
+      [human_attribute_value(:status, :all), false]
+    ]
+  end
+
+  #---
   def available
     on_hand - reserved
   end

@@ -22,6 +22,10 @@ en:
           technical: Technical
           document: Document
           vector: Vector image
+      inventory_item:
+        status:
+          online: active only
+          all: all items
       order:
         status:
           current: awaiting approval

@@ -11,6 +11,12 @@ class InventoryItemSearch < Searchlight::Search
     InventoryItem.joins(:product)
   end
 
+  def options
+    super.tap do |opts|
+      opts[:online] ||= true
+    end
+  end
+
   def search_store_id
     query.joins(:inventory).where(inventories: {store_id: store_id})
   end
@@ -29,6 +35,11 @@ class InventoryItemSearch < Searchlight::Search
 
   def search_product_id
     query.where(product_id: product_id)
+  end
+
+  def search_online
+    return query unless checked?(online)
+    query.where('on_hand - reserved > 0')
   end
 
   def search_live
