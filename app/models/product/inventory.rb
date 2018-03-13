@@ -78,9 +78,9 @@ class Product < ActiveRecord::Base
     # Stock from given inventory, optionally with a specific lot code,
     # used by #available for calculations.
     def stock(inventory, lot_code)
-      if lot_code
+      if lot_code.present?
         item = inventory.item_by_code(lot_code)
-        return item.present? && item.available || 0
+        return item.available
       end
       inventory_items.in(inventory).online.map(&:available).sum
     end
