@@ -6,6 +6,7 @@
         %thead
           %tr
             %th= col(OrderItem, :product_title)
+            %th.col-xs-2= col(OrderItem, :lot_code)
             %th.col-xs-1.text-right= col(OrderItem, :ordered)
             %th.col-xs-1.text-right= col(OrderItem, :shipped)
         %tbody
@@ -17,5 +18,6 @@
                 = order_item.product_subtitle
                 - if order_item.real?
                   %span.badge= order_item.product_codes
+              %td= order_item.lot_code
               %td.text-right= order_item.amount
               %td.text-right.warning.text-warning= order_item.amount_shipped
