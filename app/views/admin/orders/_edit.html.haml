@@ -7,16 +7,19 @@
         = t('.add_order_items')
     .panel-body
       %fieldset#admin-barcode-panel.bg-info
-        .form-group.hidden
-          .input-group.input-group-round
+        .form-group
+          .input-group.input-group-lg
             %span.input-group-addon= icon('barcode')
-            = text_field_tag 'ean', nil, class: 'form-control'
+            = text_field_tag 'barcode', nil, class: 'form-control monospace'
         .form-group
           = select_tag 'categories', options_for_select(current_group.category_options), multiple: true, placeholder: col(Product, :category_ids)
       = render partial: 'admin/order_items/new', object: order, as: :order
 
 :coffee
-  $('#ean').focus()
+  $('#barcode').switchboard
+    callbacks:
+      'GS1-128': (data) ->
+        $('#barcode').val(data).select().effect 'highlight'
 
   $('#categories').selectize
     plugins: ['remove_button']
