@@ -53,8 +53,10 @@ class Transfer < ActiveRecord::Base
   end
 
   # Transfer is considered feasible only if all its items can be
-  # transferred, given current stock levels.
+  # transferred, given current stock levels. Immediately returns
+  # true if the source is nil, denoting an external source.
   def feasible?
+    return true if source.nil?
     transfer_items.each do |item|
       return false unless item.feasible?
     end

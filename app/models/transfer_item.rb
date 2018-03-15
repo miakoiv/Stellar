@@ -36,6 +36,7 @@ class TransferItem < ActiveRecord::Base
 
   # Transfer items are feasible if there's enough stock.
   def feasible?
+    return true if source.nil?
     source_item.present? && source_item.available >= amount
   end
 
