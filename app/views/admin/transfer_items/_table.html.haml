@@ -4,6 +4,7 @@
       %tr
         %th= col(TransferItem, :product_title)
         %th.col-xs-2= col(TransferItem, :lot_code)
+        %th.col-xs-2= col(TransferItem, :expires_at)
         %th.col-xs-1.text-right= col(TransferItem, :amount)
 
     %tbody
@@ -15,4 +16,5 @@
             = transfer_item.product.subtitle
             %span.badge= transfer_item.product.code
           %td= transfer_item.lot_code
+          %td= transfer_item.expires_at
           %td.text-right= transfer_item.amount

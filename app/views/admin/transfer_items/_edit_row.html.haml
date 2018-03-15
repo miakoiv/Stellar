@@ -5,6 +5,7 @@
     = transfer_item.product.subtitle
     %span.badge= transfer_item.product.code
   %td= transfer_item.lot_code
+  %td= transfer_item.expires_at
   %td.text-right= transfer_item.amount
   %td.actions
     = link_to icon('remove'), admin_transfer_item_path(transfer_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
