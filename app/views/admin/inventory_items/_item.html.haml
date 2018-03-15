@@ -3,6 +3,7 @@
     = bootstrap_form_for [:admin, inventory_item], layout: :horizontal, label_col: 'col-sm-5', control_col: 'col-sm-7' do |f|
       %fieldset{disabled: true}
         = f.text_field :code
+        = f.text_field :expires_at
         = f.text_field :inventory_id, value: inventory_item.inventory
         = f.text_field :on_hand
         = f.text_field :reserved
