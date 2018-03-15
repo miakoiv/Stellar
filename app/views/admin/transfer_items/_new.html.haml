@@ -7,10 +7,10 @@
         .col-sm-4
           = f.number_field :amount, min: 1, max: 999, skip_label: true, placeholder: col(TransferItem, :amount)
       .row
-        .col-sm-4
+        .col-sm-5
           = f.text_field :lot_code, skip_label: true, disabled: transfer.source.present?, placeholder: col(TransferItem, :lot_code)
-        .col-sm-4
-          = f.text_field :expires_at, skip_label: true, disabled: transfer.source.present?, placeholder: col(TransferItem, :expires_at)
+        .col-sm-3
+          = f.text_field :expires_at, skip_label: true, readonly: transfer.source.present?, placeholder: col(TransferItem, :expires_at)
         .col-sm-4
           = f.button class: 'btn btn-block btn-primary' do
             = icon('check')
@@ -84,3 +84,6 @@
           </span>
         </div>
         """
+    onChange: (code) ->
+      if code
+        $('#transfer_item_expires_at').val this.options[code].expires_at
