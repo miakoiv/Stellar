@@ -30,13 +30,13 @@ class Inventory < ActiveRecord::Base
   end
 
   # Restocks the inventory with given transfer item that specifies
-  # a product, a lot code, and an amount. New inventory items may
-  # be created if not seen before.
+  # the product, a lot code, expiration, and amount. New inventory
+  # items may be created if not seen before.
   def restock!(transfer_item, timestamp, source = nil)
     item = inventory_items.find_or_initialize_by(
       product: transfer_item.product,
       code: transfer_item.lot_code
-    )
+    ) { |item| item.expires_at = transfer_item.expires_at }
     item.inventory_entries.build(
       recorded_at: timestamp,
       source: source,
