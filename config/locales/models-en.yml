@@ -207,6 +207,7 @@ en:
         inventory_id: Inventory
         product_id: Product
         code: Lot code
+        expires_at: Exp. date
         shelf: Shelf
         on_hand: On hand
         reserved: Reserved
@@ -509,6 +510,7 @@ en:
         product_code: Product code
         lot_code: Lot code
         amount: Amount
+        expires_at: Exp. date
       user:
         personal: Personal information
         addresses: Addresses

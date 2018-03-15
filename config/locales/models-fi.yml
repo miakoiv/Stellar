@@ -207,6 +207,7 @@ fi:
         inventory_id: Varasto
         product_id: Tuote
         code: Eräkoodi
+        expires_at: Viim. käyttö
         shelf: Hylly
         on_hand: Varastossa
         reserved: Varattu
@@ -509,6 +510,7 @@ fi:
         product_code: Tuotekoodi
         lot_code: Eräkoodi
         amount: Määrä
+        expires_at: Viim. käyttö
       user:
         personal: Omat tiedot
         addresses: Osoitteet
