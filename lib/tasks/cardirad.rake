@@ -5,23 +5,26 @@ require 'csv'
 namespace :products do
   desc "Import Cardirad products from CSV input"
   task :cardirad, [:file] => :environment do |task, args|
-    #store = Store.find_by name: 'Cardirad'
-    #tax_category = store.tax_categories.first
-    #store.products.destroy_all
+    store = Store.find_by name: 'Cardirad Finland'
+    tax_category = store.tax_categories.first
+
+    store.products.destroy_all
 
     CSV.foreach(args.file,
-      encoding: 'iso-8859-1',
+      encoding: 'utf-8',
       col_sep: ';',
-      row_sep: "\r\r\n",
       skip_blanks: true,
-      headers: true,
-      header_converters: [
-        lambda { |h| h.tr 'åäöÅÄÖ', 'aaoAAO'},
-        :downcase,
-        :symbol
-      ]
+      headers: [:title, :modified, nil, :ref, :gtin],
     ) do |row|
-      puts row.inspect
+      product = store.products.create(
+        code: row[:ref],
+        customer_code: row[:gtin],
+        title: row[:title],
+        available_at: row[:modified],
+        retail_price_cents: 7500,
+        tax_category: tax_category,
+      )
+      puts product
     end
   end
 end
