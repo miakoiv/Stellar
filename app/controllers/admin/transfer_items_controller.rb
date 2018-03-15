@@ -36,7 +36,7 @@ class Admin::TransferItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transfer_item_params
       params.require(:transfer_item).permit(
-        :product_id, :lot_code, :amount
+        :product_id, :lot_code, :expires_at, :amount
       )
     end
 end
