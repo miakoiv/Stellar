@@ -28,16 +28,14 @@ class TransferItem < ActiveRecord::Base
   # The source inventory item associated with this tranfer item
   # is found by product and lot code from the source inventory.
   def source_item
-    source.inventory_items.find_by(
-      product: product,
-      code: lot_code
-    )
+    source.item_by_product_and_code(product, lot_code)
   end
 
   # Transfer items are feasible if there's enough stock.
   def feasible?
     return true if source.nil?
-    source_item.present? && source_item.available >= amount
+    inventory_item = source_item
+    inventory_item.present? && inventory_item.available >= amount
   end
 
   def appearance
