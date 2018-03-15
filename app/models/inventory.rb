@@ -19,9 +19,9 @@ class Inventory < ActiveRecord::Base
   validates :name, presence: true
 
   #---
-  # Finds an item by its lot code.
-  def item_by_code(code)
-    inventory_items.find_by(code: code)
+  # Finds an item by product and lot code.
+  def item_by_product_and_code(product, code)
+    inventory_items.for(product).find_by(code: code)
   end
 
   def stock
