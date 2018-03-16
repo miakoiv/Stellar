@@ -10,7 +10,11 @@ class Admin::OrderItemsController < ApplicationController
   # Use Order#insert to create order items correctly.
   def create
     @order = current_store.orders.find(params[:order_id])
-    @product = current_store.products.live.find_by(id: order_item_params[:product_id])
+    @product = if order_item_params[:customer_code].present?
+      current_store.products.live.find_by(customer_code: order_item_params[:customer_code])
+    else
+      current_store.products.live.find_by(id: order_item_params[:product_id])
+    end
     amount = order_item_params[:amount].to_i
     options = {lot_code: order_item_params[:lot_code]}
     respond_to do |format|
@@ -52,7 +56,8 @@ class Admin::OrderItemsController < ApplicationController
   private
     def order_item_params
       params.require(:order_item).permit(
-        :product_id, :amount, :lot_code, :price
+        :product_id, :amount, :lot_code, :price,
+        :customer_code
       )
     end
 end
