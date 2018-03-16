@@ -9,5 +9,9 @@
     %nav#main-nav.navbar.navbar-inverse.navbar-fixed-top{role: 'navigation'}
       = render partial: 'admin/shared/main_nav'
     #content-wrap
+      - if content_for?(:secondary_nav)
+        %nav#page-nav.navbar.navbar-default{role: 'navigation'}
+          .container
+            = yield :secondary_nav
       .container
         = yield
