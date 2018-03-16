@@ -20,6 +20,20 @@ class Admin::TransferItemsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /admin/transfer_items/1
+  def update
+    @transfer_item = TransferItem.find(params[:id])
+    @transfer = @transfer_item.transfer
+
+    respond_to do |format|
+      if @transfer_item.update(transfer_item_params)
+        format.js { render :update }
+      else
+        format.js { render :error }
+      end
+    end
+  end
+
   # DELETE /admin/transfers/1
   def destroy
     @transfer_item = TransferItem.find(params[:id])

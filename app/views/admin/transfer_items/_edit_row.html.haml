@@ -6,6 +6,9 @@
     %span.badge= transfer_item.product.code
   %td= transfer_item.lot_code
   %td= transfer_item.expires_at
-  %td.text-right= transfer_item.amount
+  %td
+    = form_for [:admin, transfer_item], remote: true,
+        html: {class: 'pull-right immediate'} do |f|
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1
   %td.actions
     = link_to icon('remove'), admin_transfer_item_path(transfer_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
