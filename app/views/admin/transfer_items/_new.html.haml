@@ -44,6 +44,7 @@
       source = $('#admin-transfer-item-form').data 'source'
       if id and source?
         $lot_code.clearOptions()
+        $('#transfer_item_expires_at').val ''
         $lot_code.load (callback) ->
           $.ajax
             url: $('#transfer_item_product_id')[0].selectize.options[id].url
@@ -85,5 +86,5 @@
         </div>
         """
     onChange: (code) ->
-      if code
-        $('#transfer_item_expires_at').val this.options[code].expires_at
+      expires = if code then this.options[code].expires_at else undefined
+      $('#transfer_item_expires_at').val expires
