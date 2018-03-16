@@ -41,4 +41,8 @@ class TransferItem < ActiveRecord::Base
   def appearance
     complete? || feasible? || 'danger text-danger'
   end
+
+  def customer_code=(val)
+    self.product = Product.find_by(customer_code: val)
+  end
 end
