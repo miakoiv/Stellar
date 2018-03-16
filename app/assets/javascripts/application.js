@@ -46,6 +46,7 @@
 
 // Vendor assets
 
+//= require BarcodeParser.min
 //= require bootstrap-notify.min
 //= require Chart.min
 //= require imagesloaded.pkgd.min
