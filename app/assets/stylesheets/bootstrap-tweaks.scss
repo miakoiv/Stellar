@@ -260,6 +260,11 @@ body {
     top: 5px;
     left: 0;
   }
+  .navbar-form {
+    min-width: 32em;
+
+    .form-group, .form-control { width: 100%; }
+  }
 }
 
 
@@ -573,6 +578,7 @@ i.icon {
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
 }
 .panel-error-indicator { opacity: 0; }
+
 
 /*
  * Grid of 1 to 12 columns, masonry and sortable savvy

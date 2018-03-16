@@ -55,9 +55,10 @@ $body-tone-bg: darken($body-bg, 4%);
 
 
 /*
- * Navbar lookup widget
+ * Navbar lookup widget, barcode widget
  */
-#navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
+#navbar-lookup .navbar-form input,
+#page-nav .navbar-form input { border-radius: $input-height-base/2; }
 @media (max-width: $screen-xs-max) {
   #navbar-lookup { top: 60px; }
 }
