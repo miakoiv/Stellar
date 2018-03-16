@@ -1,15 +1,19 @@
 class Switchboard
 
-  @formats =
-    '1': 'GS1-128'
-
-  @mapping =
-    'Dead': String.fromCharCode(29) # ctrl-] to FNC1
-
+  #
+  # Options available/expected:
+  # formats: hash of accepted barcode formats keyed by symbology identifier,
+  #          for example {'1': 'GS1-128'}
+  # mapping: hash of translations performed on the captured keydown events
+  #          to convert from the HID conventions to actual barcode data,
+  #          for example {'Dead': String.fromCharCode(29)} to map the FI/SE
+  #          dead key to GS1-128 FNC1 control code
+  # callbacks: hash of functions keyed by format to postprocess captured data
+  #
   constructor: (element, @options) ->
     @state = 0
 
-    # Switchboard state machine
+    # Switchboard state machine:
     # 0: [idle] ctrl-a triggers barcode capture
     # 1: [start] awaiting format identifier
     # 2: [capture] Enter terminates and calls back with captured data
@@ -25,7 +29,7 @@ class Switchboard
             @capture = ''
         when 1
           e.preventDefault()
-          @format = Switchboard.formats[k]
+          @format = @options.formats[k]
           @state = 2
         when 2
           e.preventDefault()
@@ -33,7 +37,7 @@ class Switchboard
             @state = 0
             @options.callbacks[@format](@capture)
           else
-            @capture += Switchboard.mapping[k] || k
+            @capture += @options.mapping[k] || k
         else
           console.log "Unknown state #{@state}"
 

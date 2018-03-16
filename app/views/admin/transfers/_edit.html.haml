@@ -17,9 +17,16 @@
 
 :coffee
   $('#barcode').switchboard
+    formats:
+      '1': 'GS1-128'
+    mapping:
+      'Dead': String.fromCharCode(29) # ctrl-] to FNC1
     callbacks:
-      'GS1-128': (data) ->
-        $('#barcode').val(data).select().effect 'highlight'
+      'GS1-128': (code) ->
+        data = parseBarcode "]C1\#{code}"
+        console.log data
+
+        $('#barcode').val(code).select().effect 'highlight'
 
   $('#categories').selectize
     plugins: ['remove_button']
