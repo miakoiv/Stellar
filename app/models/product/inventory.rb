@@ -80,7 +80,7 @@ class Product < ActiveRecord::Base
     def stock(inventory, lot_code)
       if lot_code.present?
         item = inventory.item_by_product_and_code(self, lot_code)
-        return item.available
+        return item.present? ? item.available : 0
       end
       inventory_items.in(inventory).online.map(&:available).sum
     end
