@@ -4,7 +4,9 @@
       %tr
         %th{colspan: 2}= col(OrderItem, :product_title)
         %th.col-xs-1.text-right= col(OrderItem, :ordered)
-        %th.col-xs-1.text-right= col(OrderItem, :shipped)
+        %th.col-xs-1.text-right
+          - if order.track_shipments?
+            = col(OrderItem, :shipped)
         %th.col-xs-2.text-right= col(OrderItem, :subtotal)
         %th
     %tfoot

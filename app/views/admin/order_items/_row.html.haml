@@ -11,7 +11,7 @@
         = order_item.product.shipping_notes
   %td.text-right= order_item.amount
   %td.text-right{class: order_item.pending_shipping? && 'warning text-warning'}
-    - if order_item.tangible?
+    - if order_item.track_shipments? && order_item.tangible?
       = order_item.amount_shipped
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
