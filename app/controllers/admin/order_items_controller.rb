@@ -16,7 +16,9 @@ class Admin::OrderItemsController < ApplicationController
       current_store.products.live.find_by(id: order_item_params[:product_id])
     end
     amount = order_item_params[:amount].to_i
-    options = {lot_code: order_item_params[:lot_code]}
+    options = {
+      lot_code: order_item_params[:serial] || order_item_params[:lot_code]
+    }
     respond_to do |format|
       if @order.insert(@product, amount, @order.source, options)
         @order.recalculate!

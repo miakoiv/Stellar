@@ -24,6 +24,9 @@ class TransferItem < ActiveRecord::Base
     greater_than_or_equal_to: 1
   }
 
+  attr_accessor :serial
+  before_validation :override_lot_code_with_serial
+
   #---
   # The source inventory item associated with this tranfer item
   # is found by product and lot code from the source inventory.
@@ -45,4 +48,9 @@ class TransferItem < ActiveRecord::Base
   def customer_code=(val)
     self.product = Product.find_by(customer_code: val)
   end
+
+  private
+    def override_lot_code_with_serial
+      self[:lot_code] = serial if serial.present?
+    end
 end
