@@ -39,7 +39,7 @@
             .col-sm-5
               = f.text_field_without_bootstrap :shipping_city, class: 'form-control', required: true
           = f.select :shipping_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
-          - if @order.has_payment?
+          - if @order.store.b2b_sales? || @order.has_payment?
             = f.text_field :billing_address, required: @order.billing_address_required?
             .form-group
               .col-sm-offset-4.col-sm-3
