@@ -21,7 +21,7 @@ namespace :products do
         customer_code: row[:gtin],
         title: row[:title],
         available_at: row[:modified],
-        retail_price_cents: 7500,
+        retail_price_cents: 0,
         tax_category: tax_category,
       )
       puts product
