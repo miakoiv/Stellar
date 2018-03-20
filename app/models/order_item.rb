@@ -10,7 +10,7 @@ class OrderItem < ActiveRecord::Base
 
   #---
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
-  delegate :inventory, :includes_tax?, :approved?, :concluded?, to: :order
+  delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
   has_many :transfer_items
   belongs_to :product
@@ -155,7 +155,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def pending_shipping?
-    tangible? && amount_pending > 0
+    track_shipments? && tangible? && amount_pending > 0
   end
 
   # Date used in reports is the completion date of the order.
