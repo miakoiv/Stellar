@@ -85,7 +85,7 @@ class Admin::StoresController < ApplicationController
         :quotation_template_id,
         :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :order_sequence,
-        :theme, :detach_menu,
+        :theme, :detach_menu, :footer_page_id,
         tax_categories_attributes: [
           :name, :rate, :included_in_retail
         ]

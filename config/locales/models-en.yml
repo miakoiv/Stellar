@@ -472,6 +472,7 @@ en:
         theme: Display theme
         styles: Detailed styles
         detach_menu: Detach main navigation
+        footer_page_id: Footer page
         locale: Language
         country_code: Country
         admit_guests: Admit guests to the store

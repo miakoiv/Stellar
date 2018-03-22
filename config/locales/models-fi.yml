@@ -472,6 +472,7 @@ fi:
         theme: Teema
         styles: Yksityiskohtaiset tyylit
         detach_menu: Irroita päävalikko
+        footer_page_id: Alatunnistesivu
         locale: Kieli
         country_code: Kotimaa
         admit_guests: Salli pääsy kauppaan vieraana

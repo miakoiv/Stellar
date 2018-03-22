@@ -34,8 +34,9 @@
                 = f.select_without_bootstrap :theme, Store.theme_options, {}, {class: 'selectize'}
               - unless locked || @store.new_record?
                 .col-sm-3
-                  = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
+                  = link_to edit_admin_store_style_path(@store), class: 'btn btn-default btn-block', remote: true do
                     = icon('paint-brush', t('.edit_style'))
+            = f.select :footer_page_id, @store.footer_page_options, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
             = f.form_group do

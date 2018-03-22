@@ -83,6 +83,9 @@ class Store < ActiveRecord::Base
   has_one :header, -> { merge(Page.header) }, class_name: 'Page'
   has_one :footer, -> { merge(Page.footer) }, class_name: 'Page'
 
+  # User supplied footer page, if any.
+  belongs_to :footer_page, class_name: 'Page'
+
   # Pages intended for portals.
   has_many :portal_pages, -> { merge(Page.portal).merge(Page.live) }, class_name: 'Page'
 
@@ -209,6 +212,10 @@ class Store < ActiveRecord::Base
 
   def user_options
     users.map { |u| [u.to_s, u.id] }
+  end
+
+  def footer_page_options
+    pages.primary.live.map { |p| [p.to_s, p.id] }
   end
 
   def album_options

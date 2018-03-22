@@ -251,6 +251,7 @@ fi:
         new_store: Uusi kauppa
       form:
         edit_style: Tyylit
+        default_footer: "[Oletus]"
         slug_help_html: Tunniste luodaan automaattisesti.
         order_sequence_help_html: "Ensimmäinen tilaus saa tämän arvon plus yksi: <strong>0000</strong> antaa <strong>0001</strong>, <strong>AAA</strong> antaa <strong>AAB</strong>"
     styles:
