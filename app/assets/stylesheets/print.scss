@@ -14,6 +14,8 @@
     font-size: inherit;
   }
 
+  footer { display: none !important; }
+
   h2 { font-size: 14pt; }
 
   .table > thead > tr > th,
@@ -112,7 +114,7 @@
     content: "";
   }
 
-  .product-actions, .documents, .footer {
+  .product-actions, .documents {
     display: none !important;
   }
 }

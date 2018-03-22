@@ -1049,22 +1049,22 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
- * Site footer
+ * Default site footer
  */
-.footer {
+.default-footer {
   padding-top: 20px;
   padding-bottom: 20px;
   color: $footer-color;
   font-size: $font-size-small;
   @include gradient-vertical(darken($footer-bg, 10%), $footer-bg, 0, 10px);
 }
-.footer .navmenu {
+.default-footer .navmenu {
   width: auto;
   margin-bottom: 40px;
   border: 0;
   border-radius: 0;
 }
-.footer .bordered {
+.default-footer .bordered {
   border-left: 1px solid darken($footer-bg, 10%);
   border-right: 1px solid darken($footer-bg, 10%);
 }
