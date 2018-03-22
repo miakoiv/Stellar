@@ -51,7 +51,7 @@ class Admin::TransferItemsController < ApplicationController
     def transfer_item_params
       params.require(:transfer_item).permit(
         :product_id, :lot_code, :expires_at, :amount,
-        :customer_code
+        :customer_code, :serial
       )
     end
 end
