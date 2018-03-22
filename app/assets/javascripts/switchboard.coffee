@@ -1,47 +1,36 @@
 class Switchboard
 
-  #
   # Options available/expected:
   # formats: hash of accepted barcode formats keyed by symbology identifier,
-  #          for example {'1': 'GS1-128'}
+  #          for example {']C1': 'GS1-128'}
   # mapping: hash of translations performed on the captured keydown events
   #          to convert from the HID conventions to actual barcode data,
   #          for example {'Dead': String.fromCharCode(29)} to map the FI/SE
   #          dead key to GS1-128 FNC1 control code
   # callbacks: hash of functions keyed by format to postprocess captured data
   #
-  constructor: (element, @options) ->
-    @state = 0
+  constructor: (id, @options) ->
+    @element = document.getElementById id
+    @mapped = (key for key, _ of @options.mapping)
 
-    # Switchboard state machine:
-    # 0: [idle] ctrl-a triggers barcode capture
-    # 1: [start] awaiting format identifier
-    # 2: [capture] Enter terminates and calls back with captured data
-    element.on 'keydown', (e) =>
+    @element.addEventListener 'keydown', (e) =>
       k = e.key
-      return if k is 'Control' or k is 'Shift'
 
-      switch @state
-        when 0
-          if k is 'a' and e.ctrlKey
-            @state = 1
-            @format = undefined
-            @capture = ''
-        when 1
-          e.preventDefault()
-          @format = @options.formats[k]
-          @state = 2
-        when 2
-          e.preventDefault()
-          if k is 'Enter'
-            @state = 0
-            @options.callbacks[@format](@capture)
-          else
-            @capture += @options.mapping[k] || k
-        else
-          console.log "Unknown state #{@state}"
+      if k in @mapped
+        e.preventDefault()
+        @element.value = @element.value + @options.mapping[k]
 
-    element.focus()
+    @element.addEventListener 'keypress', (e) =>
+      if e.key is 'Enter'
+        e.preventDefault()
+        code = @element.value
+        ident = code.substr 0, 3
+        format = @options.formats[ident]
+        callback = @options.callbacks[format]
+        callback?(code)
+      if e.key is 'Backspace'
+        @element.value = ''
 
-$.fn.switchboard = (options) ->
-    this.switchboard = new Switchboard this, options
+    @element.focus()
+
+(exports ? this).Switchboard = Switchboard

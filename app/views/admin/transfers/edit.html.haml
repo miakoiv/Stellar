@@ -1,9 +1,3 @@
-- content_for :secondary_nav do
-  #barcode-panel.navbar-form.navbar-right{data: {url: admin_transfer_transfer_items_path(@transfer)}}
-    .form-group.has-feedback
-      = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace'
-      %span.form-control-feedback= icon('barcode')
-
 .page-header
   = link_to admin_transfers_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
@@ -24,31 +18,38 @@
     = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
 
 :coffee
-  fields =
-    '01': 'customer_code'
-    '10': 'lot_code'
-    '17': 'expires_at'
-    '21': 'serial'
-    '30': 'amount'
-
-  $('#barcode').switchboard
-    formats:
-      '1': 'GS1-128'
-    mapping:
-      'Dead': String.fromCharCode(29) # ctrl-] to FNC1
-    callbacks:
-      'GS1-128': (code) ->
-        data = parseBarcode "]C1\#{code}"
-        item = {}
-        for i in data.parsedCodeItems
-          item[fields[i.ai]] = i.data if fields[i.ai]?
-        $.ajax
-          url: $('#barcode-panel').data 'url'
-          type: 'POST'
-          data:
-            transfer_item: item
-        $('#barcode').val(code).select().effect 'highlight'
-
   $('.quick-edit-panel').stick_in_parent
     parent: $('.row')
     offset_top: 80
+
+- content_for :secondary_nav do
+  #barcode-panel.navbar-form.navbar-right{data: {url: admin_transfer_transfer_items_path(@transfer)}}
+    .form-group.has-feedback
+      = password_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace'
+      %span.form-control-feedback= icon('barcode')
+
+  :coffee
+    fields =
+      '01': 'customer_code'
+      '10': 'lot_code'
+      '17': 'expires_at'
+      '21': 'serial'
+      '30': 'amount'
+
+    new Switchboard 'barcode',
+      formats:
+        ']C1': 'GS1'
+      mapping:
+        'Dead': String.fromCharCode(29) # ctrl-] to FNC1
+      callbacks:
+        'GS1': (code) ->
+          data = parseBarcode code
+          item = {amount: 1}
+          for i in data.parsedCodeItems
+            item[fields[i.ai]] = i.data if fields[i.ai]?
+          $('#barcode').val ''
+          $.ajax
+            url: $('#barcode-panel').data 'url'
+            type: 'POST'
+            data:
+              transfer_item: item
