@@ -69,7 +69,7 @@ class Page < ActiveRecord::Base
   scope :excluding, -> (page) { where.not(id: page) }
 
   # Containers for other pages. Segments target these to build navs.
-  scope :container, -> { where(purpose: [20, 21]) }
+  scope :container, -> { where(purpose: [10, 11, 20, 21]) }
 
   #---
   validates :title, presence: true
