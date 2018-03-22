@@ -13,3 +13,6 @@
           %label.btn.btn-default{class: @segment.inverse? && 'active'}
             = f.radio_button_without_bootstrap :inverse, 1
             = icon('sticky-note')
+  .row
+    .col-sm-12
+      = f.text_field :header
