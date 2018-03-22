@@ -36,7 +36,7 @@
                 .col-sm-3
                   = link_to edit_admin_store_style_path(@store), class: 'btn btn-default btn-block', remote: true do
                     = icon('paint-brush', t('.edit_style'))
-            = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_s, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
+            = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_option, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
             = f.form_group do
