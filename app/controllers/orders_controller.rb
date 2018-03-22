@@ -109,6 +109,6 @@ class OrdersController < ApplicationController
 
     # The search is limited to the current user's personal history.
     def search_params
-      @query.merge(user_id: current_user.id)
+      @query.merge(store: current_store, user_id: current_user.id)
     end
 end
