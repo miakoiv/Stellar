@@ -214,10 +214,6 @@ class Store < ActiveRecord::Base
     users.map { |u| [u.to_s, u.id] }
   end
 
-  def footer_page_options
-    pages.primary.live.map { |p| [p.to_s, p.id] }
-  end
-
   def album_options
     albums.map { |a| [a.to_s, a.id] }
   end
