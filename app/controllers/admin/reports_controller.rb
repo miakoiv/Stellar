@@ -28,7 +28,7 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @query.reverse_merge!('order_type_id' => @order_types.first.id)
+    @query.reverse_merge!('order_type' => @order_types.first)
 
     respond_to do |format|
       format.html {
@@ -49,7 +49,7 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_group.outgoing_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @query.reverse_merge!('order_type_id' => @order_types.first.id)
+    @query.reverse_merge!('order_type' => @order_types.first)
 
     respond_to do |format|
       format.html {

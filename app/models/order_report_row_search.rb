@@ -18,8 +18,8 @@ class OrderReportRowSearch < Searchlight::Search
     end
   end
 
-  def search_order_type_id
-    query.where(order_type_id: order_type_id)
+  def search_order_type
+    query.where(order_type: order_type)
   end
 
   def search_user_id

@@ -6,7 +6,7 @@
       .row
         .col-sm-6.col-md-4
           .form-group
-            = f.select :order_type_id, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
             .input-group.input-daterange{data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}}
