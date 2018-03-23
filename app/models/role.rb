@@ -56,7 +56,7 @@ class Role < ActiveRecord::Base
 
   # Roles that imply administrative capacity.
   def self.administrative
-    available_roles - [:order_notify, :correspondence]
+    available_roles - ['order_notify', 'correspondence']
   end
 
   def self.icon_for(name)
