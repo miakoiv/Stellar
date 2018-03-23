@@ -55,8 +55,12 @@ class Image < ActiveRecord::Base
     self.purpose ||= Image.available_purposes.first
   end
 
+  def is_vector?
+    !!(attachment_content_type =~ /\/svg/)
+  end
+
   def is_bitmap?
-    !!(attachment_content_type =~ /\/(bmp|jpeg|jpg|png|x-png)/)
+    !is_vector?
   end
 
   # The style given to Summernote is lightbox sized for bitmaps,
@@ -95,6 +99,6 @@ class Image < ActiveRecord::Base
 
   private
     def resize_bitmaps
-      return false unless is_bitmap?
+      return false if is_vector?
     end
 end
