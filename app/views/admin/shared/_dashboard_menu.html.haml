@@ -1,6 +1,9 @@
 = menu_item 'dashboard', t('admin.dashboard.title'), admin_dashboard_path
 - if current_user_has_role?(:order_review) || current_user_has_role?(:order_manage)
-  = menu_item 'truck', title(Order, count: 2), admin_orders_path
+  - if current_group.incoming_order_types.any?
+    = menu_item 'inbox', t('admin.orders.incoming.title'), incoming_admin_orders_path
+  - if current_group.outgoing_order_types.any?
+    = menu_item 'paper-plane', t('admin.orders.outgoing.title'), outgoing_admin_orders_path
 - if current_user_has_role?(:reports)
   = menu_item 'line-chart', t('admin.reports.title'), admin_reports_path
 - if current_user_has_role?(:inventory_manage)

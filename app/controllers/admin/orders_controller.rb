@@ -3,10 +3,10 @@
 class Admin::OrdersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_order, except: [:index, :new, :create]
+  before_action :set_order, except: [:index, :incoming, :outgoing, :new, :create]
   before_action :set_customers, only: [:new, :create]
 
-  authority_actions quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
+  authority_actions incoming: 'read', outgoing: 'read', quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
 
   layout 'admin'
 
@@ -18,8 +18,34 @@ class Admin::OrdersController < ApplicationController
     @search = OrderSearch.new(search_params)
     results = @search.results
     @orders = results.page(params[:page])
-    @timeline_orders = []
-    #@timeline_orders = results.complete.has_shipping.topical
+  end
+
+  # GET /admin/orders/incoming
+  def incoming
+    authorize_action_for Order, at: current_store
+
+    @order_types = current_group.incoming_order_types
+    return render nothing: true, status: :bad_request if @order_types.empty?
+
+    @query = saved_search_query('order', 'incoming_admin_order_search')
+    @query.reverse_merge!('order_type' => @order_types.first)
+    @search = OrderSearch.new(search_params)
+    results = @search.results
+    @orders = results.page(params[:page])
+  end
+
+  # GET /admin/orders/outgoing
+  def outgoing
+    authorize_action_for Order, at: current_store
+
+    @order_types = current_group.outgoing_order_types
+    return render nothing: true, status: :bad_request if @order_types.empty?
+
+    @query = saved_search_query('order', 'outgoing_admin_order_search')
+    @query.reverse_merge!('order_type' => @order_types.first)
+    @search = OrderSearch.new(search_params)
+    results = @search.results
+    @orders = results.page(params[:page])
   end
 
   # GET /admin/orders/1
@@ -201,8 +227,6 @@ class Admin::OrdersController < ApplicationController
 
     # Limit the search to available order types and default to the first one.
     def search_params
-      @query.merge(store: current_store).reverse_merge({
-        'order_type_id' => OrderType.available_for(current_group).first.id
-      })
+      @query.merge(store: current_store)
     end
 end

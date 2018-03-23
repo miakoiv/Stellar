@@ -5,16 +5,14 @@
         = icon('plus', t('.new_order'))
     %h1= icon('truck', title(Order, count: 2))
 
-  = render partial: 'search'
-
-  - if @timeline_orders.any?
-    .panel.panel-default
-      .panel-heading
-        %span.pull-right= icon('question-circle', class: 'fa-lg', title: t('orders.index.timeline_help_html'), data: {toggle: 'tooltip'})
-        %h4.panel-title= t('orders.index.timeline_header')
-      = render partial: 'timeline'
-
-  = render partial: 'admin/orders/table', object: @orders, as: :orders
-  = paginate @orders
-
-#orders-review-modal.modal{data: {backdrop: 'static'}}
+.reports
+  - if current_group.incoming_order_types.any?
+    .report-panel
+      = link_to incoming_admin_orders_path do
+        = icon('inbox')
+        = t('admin.orders.incoming.title')
+  - if current_group.outgoing_order_types.any?
+    .report-panel
+      = link_to outgoing_admin_orders_path do
+        = icon('paper-plane')
+        = t('admin.orders.outgoing.title')

@@ -1,5 +1,5 @@
 .page-header
-  = link_to admin_orders_path, class: 'btn btn-default' do
+  = link_to back_path_for(@order), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   = link_to admin_order_path(@order), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))

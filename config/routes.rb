@@ -157,6 +157,10 @@ Rails.application.routes.draw do
           patch :complete
         end
       end
+      collection do
+        get :incoming
+        get :outgoing
+      end
       member do
         get :forward
         get :quote

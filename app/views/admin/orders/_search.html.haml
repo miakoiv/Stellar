@@ -2,11 +2,11 @@
   .panel-heading
     %h4.panel-title= t('actions.search')
   .panel-body
-    = form_for @search, url: admin_orders_path, method: :get do |f|
+    = form_for @search, url: url, method: :get do |f|
       .row
         .col-sm-6.col-md-3
           .form-group
-            = f.select :order_type_id, grouped_options_for_select([[col(OrderType, :incoming), current_group.incoming_order_types.map { |o| [o.to_s, o.id] }], [col(OrderType, :outgoing), current_group.outgoing_order_types.map { |o| [o.to_s, o.id] }]], @search.order_type_id), {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
+            = f.select :order_type, order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-3
           .form-group
             = f.select :status, Order.statuses.map { |s| [Order.human_attribute_value(:status, s), s] }, {include_blank: col(Order, :status)}, {class: 'form-control selectize'}

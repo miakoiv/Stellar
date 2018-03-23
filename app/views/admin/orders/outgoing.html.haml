@@ -1,0 +1,11 @@
+.hidden-print
+  .page-header
+    - if current_user.can_create?(Order, at: current_store)
+      = link_to new_admin_order_path, class: 'btn btn-primary' do
+        = icon('plus', t('admin.orders.index.new_order'))
+    %h1= icon('paper-plane', t('.title'))
+
+  = render partial: 'search', locals: {url: outgoing_admin_orders_path, order_types: current_group.outgoing_order_types}
+
+  = render partial: 'admin/orders/table', object: @orders, as: :orders
+  = paginate @orders
