@@ -34,6 +34,18 @@ class ApplicationController < ActionController::Base
     authenticate_user!
   end
 
+  # After sign in, users who can manage are taken to the dashboard.
+  # Everyone else goes to the default root path.
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) ||
+      if resource.is_a?(User) &&
+          Role.administrative.any? { |role| resource.has_role?(role) }
+        admin_dashboard_url
+      else
+        super
+      end
+  end
+
   # Send the user back where she came from if not authorized.
   def authority_forbidden(error)
     Rails.logger.warn(error.message)
