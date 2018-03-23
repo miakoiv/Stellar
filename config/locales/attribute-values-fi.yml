@@ -20,8 +20,7 @@ fi:
         purpose:
           presentational: esittävä
           technical: tekninen
-          document: dokumentti
-          vector: vektorikuva
+          promotional: mainos
       inventory_item:
         status:
           online: vain aktiiviset

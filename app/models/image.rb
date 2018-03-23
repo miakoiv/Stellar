@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
 
   include Reorderable
 
-  enum purpose: {presentational: 0, technical: 1}
+  enum purpose: {presentational: 0, technical: 1, promotional: 2}
 
   #---
   belongs_to :imageable, polymorphic: true, touch: true
@@ -46,7 +46,7 @@ class Image < ActiveRecord::Base
 
   #---
   def self.available_purposes
-    ['presentational', 'technical']
+    purposes.keys
   end
 
   #---

@@ -18,10 +18,9 @@ en:
           cost: cost price
       image:
         purpose:
-          presentational: Presentational
-          technical: Technical
-          document: Document
-          vector: Vector image
+          presentational: presentational
+          technical: technical
+          promotional: promotional
       inventory_item:
         status:
           online: active only
