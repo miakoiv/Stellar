@@ -5,6 +5,15 @@
 %fieldset
   .row
     .col-sm-12
+      .form-group
+        = f.label col(Segment, :image_sizing)
+        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+          - Segment.image_sizing_options.each do |title, size|
+            %label.btn.btn-default{class: @segment.image_sizing == size && 'active'}
+              = f.radio_button_without_bootstrap :image_sizing, size
+              = title
+  .row
+    .col-sm-12
       = f.hidden_field :resource_type, value: 'Category'
       = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
 

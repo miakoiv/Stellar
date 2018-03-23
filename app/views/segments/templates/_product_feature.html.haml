@@ -1,10 +1,14 @@
 - resource = product_feature.resource
-- foreground = product_feature.foreground_image
-- background = product_feature.cover_image
+- images = product_feature.images.reverse
+- sizing = product_feature.image_sizing
 
-.segment-content.product_feature{id: segment_content_id(product_feature, context), style: css(background_image_style(background))}
-  - if resource.present? && resource.is_a?(Product) && foreground.present?
-    = link_to show_product_path(resource), class: 'foreground' do
-      = image_variant_tag foreground, :lightbox
+.segment-content.product_feature{id: segment_content_id(product_feature, context)}
+  - if resource.present? && resource.is_a?(Product) && images.any?
+    .image-container{class: sizing}
+      = link_to show_category_path(resource) do
+        = image_variant_tag images.pop, :lightbox
+    - images.each do |image|
+      .image-container.stacked{class: sizing}
+        = image_variant_tag image, :lightbox
   - else
     = render partial: 'segments/placeholders/product_feature'

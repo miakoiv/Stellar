@@ -285,7 +285,11 @@
   :last-child { margin-bottom: 0; }
 }
 
-.segment-content.picture {
+.segment-content.picture,
+.segment-content.category_feature,
+.segment-content.product_feature,
+.segment-content.promotion_feature,
+.segment-content.department_feature {
   height: 100%;
 
   a { display: block; }
@@ -296,6 +300,15 @@
     position: relative;
     width: 100%;
     height: 100%;
+  }
+  .image-container.stacked,
+  .swiper-container.stacked {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
   }
   .image-container img,
   .swiper-container img {
@@ -316,7 +329,11 @@
     object-fit: cover;
   }
 }
-.segment-content-wrap.align-top .segment-content.picture {
+.segment-content-wrap.align-top .segment-content.picture,
+.segment-content-wrap.align-top .segment-content.category_feature,
+.segment-content-wrap.align-top .segment-content.product_feature,
+.segment-content-wrap.align-top .segment-content.promotion_feature,
+.segment-content-wrap.align-top .segment-content.department_feature {
   .image-container.sizing-original { align-items: flex-start;}
   .image-container.sizing-contain img,
   .swiper-container.sizing-contain img,
@@ -325,7 +342,11 @@
     object-position: top;
   }
 }
-.segment-content-wrap.align-middle .segment-content.picture {
+.segment-content-wrap.align-middle .segment-content.picture,
+.segment-content-wrap.align-middle .segment-content.category_feature,
+.segment-content-wrap.align-middle .segment-content.product_feature,
+.segment-content-wrap.align-middle .segment-content.promotion_feature,
+.segment-content-wrap.align-middle .segment-content.department_feature {
   .image-container.sizing-original { align-items: center;}
   .image-container.sizing-contain img,
   .swiper-container.sizing-contain img,
@@ -334,7 +355,11 @@
     object-position: center;
   }
 }
-.segment-content-wrap.align-bottom .segment-content.picture {
+.segment-content-wrap.align-bottom .segment-content.picture,
+.segment-content-wrap.align-bottom .segment-content.category_feature,
+.segment-content-wrap.align-bottom .segment-content.product_feature,
+.segment-content-wrap.align-bottom .segment-content.promotion_feature,
+.segment-content-wrap.align-bottom .segment-content.department_feature {
   .image-container.sizing-original { align-items: flex-end;}
   .image-container.sizing-contain img,
   .swiper-container.sizing-contain img,
@@ -369,20 +394,6 @@
       width: 100%;
       height: 100%;
     }
-  }
-}
-
-.segment-content.category_feature,
-.segment-content.product_feature,
-.segment-content.promotion_feature,
-.segment-content.department_feature {
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  .foreground, .foreground img {
-    display: block;
-    width: 100%;
-    height: auto;
   }
 }
 
