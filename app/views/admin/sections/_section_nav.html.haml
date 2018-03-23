@@ -8,6 +8,8 @@
       %ul.dropdown-menu
         %li
           = render partial: 'admin/sections/settings', object: section, as: :section
+    %li.navbar-color
+      = text_field_tag "#{dom_id(section)}_background_color", section.background_color, class: 'form-control input-sm', data: {url: modify_admin_section_path(section)}
     %li.dropdown
       = dropdown_toggle do
         = icon('image', class: 'fa-fw')
@@ -20,5 +22,21 @@
         = link_to icon('trash-o', class: 'fa-fw'), admin_section_path(section), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
+  $('##{dom_id(section)}_background_color').minicolors
+    theme: 'bootstrap'
+    position: 'bottom left'
+    format: 'rgb'
+    opacity: true
+    keywords: 'transparent'
+    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+    change: (value) ->
+      $.ajax
+        url: $(this).data 'url'
+        type: 'PATCH'
+        data:
+          section:
+            background_color: value
+    changeDelay: 500
+
   $('##{dom_id(section)}').on 'imageable:added imageable:removed imageable:reordered', ->
     $('##{dom_id(section, :nav)}').find('form.triggered').trigger 'submit.rails'

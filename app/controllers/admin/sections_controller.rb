@@ -4,9 +4,9 @@ class Admin::SectionsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_section, only: [:edit, :update, :destroy]
+  before_action :set_section, only: [:edit, :update, :modify, :destroy]
 
-  authority_actions reorder: 'update'
+  authority_actions modify: 'update', reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -45,6 +45,7 @@ class Admin::SectionsController < ApplicationController
       end
     end
   end
+  alias_method :modify, :update
 
   # DELETE /admin/sections/1.js
   def destroy
