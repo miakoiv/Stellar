@@ -1,2 +1,3 @@
 .column[column]{class: column_class(column)}
+  = render partial: 'columns/background', object: column, as: :column
   = render partial: 'segments/segment', collection: column.segments

@@ -4,8 +4,27 @@
       %li{class: column.alignment == alignment && 'active'}
         = link_to admin_column_path(column, params: {column: {alignment: alignment}}), remote: true, method: :patch do
           = icon(icon, class: 'fa-fw')
+    %li.navbar-color
+      = hidden_field_tag "#{dom_id(column)}_background_color", column.background_color, class: 'form-control input-sm', data: {url: modify_admin_column_path(column)}
     %li{class: column.pivot? && 'active'}
       = link_to admin_column_path(column, params: {column: {pivot: !column.pivot}}), remote: true, method: :patch do
         = icon('mobile', class: 'fa-fw')
     %li
       = link_to icon('plus', class: 'fa-fw'), admin_column_segments_path(column), remote: true, method: :post
+
+:coffee
+  $('##{dom_id(column)}_background_color').minicolors
+    theme: 'bootstrap'
+    position: 'bottom left'
+    format: 'rgb'
+    opacity: true
+    keywords: 'transparent'
+    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+    change: (value) ->
+      $.ajax
+        url: $(this).data 'url'
+        type: 'PATCH'
+        data:
+          column:
+            background_color: value
+    changeDelay: 500

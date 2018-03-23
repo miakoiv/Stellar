@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322095526) do
+ActiveRecord::Schema.define(version: 20180323075326) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -110,12 +110,13 @@ ActiveRecord::Schema.define(version: 20180322095526) do
   add_index "categories_products", ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true, using: :btree
 
   create_table "columns", force: :cascade do |t|
-    t.integer  "section_id", limit: 4,                         null: false
-    t.string   "alignment",  limit: 255, default: "align-top", null: false
-    t.boolean  "pivot",                  default: false,       null: false
-    t.integer  "priority",   limit: 4,   default: 0,           null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.integer  "section_id",       limit: 4,                           null: false
+    t.string   "alignment",        limit: 255, default: "align-top",   null: false
+    t.boolean  "pivot",                        default: false,         null: false
+    t.string   "background_color", limit: 255, default: "transparent", null: false
+    t.integer  "priority",         limit: 4,   default: 0,             null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
   end
 
   add_index "columns", ["section_id"], name: "index_columns_on_section_id", using: :btree

@@ -5,6 +5,8 @@ class Admin::ColumnsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_column
 
+  authority_actions modify: 'update'
+
   # No layout, this controller never renders HTML.
 
   # PATCH/PUT /admin/columns/1.js
@@ -19,6 +21,7 @@ class Admin::ColumnsController < ApplicationController
       end
     end
   end
+  alias_method :modify, :update
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -29,7 +32,7 @@ class Admin::ColumnsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def column_params
       params.require(:column).permit(
-        :alignment, :pivot
+        :alignment, :pivot, :background_color
       )
     end
 end
