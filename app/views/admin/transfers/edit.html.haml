@@ -25,7 +25,7 @@
 - content_for :secondary_nav do
   #barcode-panel.navbar-form.navbar-right{data: {url: admin_transfer_transfer_items_path(@transfer)}}
     .form-group.has-feedback
-      = password_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace'
+      = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace'
       %span.form-control-feedback= icon('barcode')
 
   :coffee
