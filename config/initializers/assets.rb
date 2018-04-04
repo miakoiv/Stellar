@@ -22,6 +22,7 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/boutique.css    spry_themes/boutique.js
   spry_themes/cards.css       spry_themes/cards.js
   spry_themes/cottage.css     spry_themes/cottage.js
+  spry_themes/material.css    spry_themes/material.js
   spry_themes/premium.css     spry_themes/premium.js
   email/mailgun.css
   hamburgers/hamburgers.css

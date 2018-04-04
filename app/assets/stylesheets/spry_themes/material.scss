@@ -1,0 +1,74 @@
+/*
+ * Theme specific styles
+ */
+
+$brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
+
+$navbar-height: 90px;
+$navbar-default-bg: #fff;
+$navbar-default-link-active-color: $brand-primary;
+$navbar-default-link-active-bg: transparent;
+$navbar-inverse-link-active-bg: transparent;
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-size-base: 16px;
+
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+
+$btn-default-bg: transparent;
+
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
+@import "print";
+
+#main-nav {
+  .navbar-brand img { max-height: 50px; }
+  .navbar-body {
+
+    /* Right aligned navs */
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 -15px;
+
+    .navbar-left {
+      @extend .navbar-right;
+      float: none !important;
+      margin: 0;
+    }
+    .navbar-right {
+      margin: 0;
+    }
+  }
+  /* Active link underlining */
+  .navbar-nav > li.active:before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 0;
+    border-bottom: 3px solid $brand-primary;
+  }
+}
+
+/* Change the responsive breakpoint for navs to screen-sm */
+.offcanvas-toggle { @extend .visible-sm; }
+.navbar-nav.responsive { @extend .hidden-sm; }
+
+.hamburger { padding: 30.5px 15px; }
+
+/* Large navbar widgets */
+.navbar-nav > li.lg > a {
+  padding-top: 34px;
+  padding-bottom: 34px;
+  line-height: 22px;
+  font-size: 20px;
+
+  span { font-size: inherit; }
+}
