@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323075326) do
+ActiveRecord::Schema.define(version: 20180404131202) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -634,6 +634,7 @@ ActiveRecord::Schema.define(version: 20180323075326) do
 
   create_table "sections", force: :cascade do |t|
     t.integer  "page_id",          limit: 4,                       null: false
+    t.string   "name",             limit: 255
     t.string   "width",            limit: 255, default: "col-12",  null: false
     t.string   "layout",           limit: 255, default: "twelve",  null: false
     t.boolean  "gutters",                      default: true,      null: false

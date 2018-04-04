@@ -1,5 +1,6 @@
 = bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
   %fieldset
+    = f.text_field :name, prepend: '#'
     = f.select :layout, section.layout_options, {}, {required: true}
     = f.form_group do
       = f.check_box :gutters
