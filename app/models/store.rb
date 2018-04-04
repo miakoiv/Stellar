@@ -89,6 +89,9 @@ class Store < ActiveRecord::Base
   # Pages intended for portals.
   has_many :portal_pages, -> { merge(Page.portal).merge(Page.live) }, class_name: 'Page'
 
+  # Named sections through pages to point anchors to.
+  has_many :sections, through: :pages
+
   has_many :inventory_items, through: :inventories
   has_many :shipping_cost_products, through: :shipping_methods
 

@@ -37,6 +37,8 @@ class Section < ActiveRecord::Base
   has_many :segments, through: :columns
 
   default_scope { sorted }
+  scope :live, -> { joins(:page).merge(Page.live) }
+  scope :named, -> { where.not(name: nil) }
 
   #---
   validates :page_id, presence: true
