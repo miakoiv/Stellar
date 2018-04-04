@@ -43,7 +43,7 @@
     flex-flow: row nowrap;
   }
   .navbar-nav > li > a,
-  .navbar-nav > li input {
+  .navbar-nav > li.navbar-color input {
     color: lighten($brand-primary, 35%);
     &:hover, &:focus { color: #fff; }
   }
