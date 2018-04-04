@@ -39,9 +39,9 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.update(section_params)
-        format.js
+        format.js { render :update }
       else
-        format.js { render json: @section.errors, status: :unprocessable_entity }
+        format.js { render :rollback }
       end
     end
   end

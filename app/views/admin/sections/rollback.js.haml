@@ -1,4 +1,1 @@
-$("##{dom_id(@section)} > .section").replaceWith("#{j render @section}");
-$('##{dom_id(@section)}').initialize();
 $('##{dom_id(@section)} .section-nav form').replaceWith("#{j render partial: 'admin/sections/settings', object: @section, as: :section}");
-viewportUpdate();
