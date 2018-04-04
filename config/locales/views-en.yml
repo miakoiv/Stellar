@@ -170,6 +170,7 @@ en:
         print_quotation: Print quotation
       edit:
         add_order_items: Add items to this order
+        barcode: Scan a barcode here
       form:
         approved_at_help: Date when the order was received and approved.
         concluded_at_help: Date when the order was shipped and archived.
@@ -298,6 +299,7 @@ en:
         new_transfer: New stock transfer
       edit:
         add_transfer_items: Add items to transfer
+        barcode: Scan a barcode here
     users:
       index:
         new_user: New user
