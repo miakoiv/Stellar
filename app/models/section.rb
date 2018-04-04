@@ -76,6 +76,6 @@ class Section < ActiveRecord::Base
   end
 
   def to_s
-    priority + 1
+    name || priority + 1
   end
 end
