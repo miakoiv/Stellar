@@ -22,8 +22,6 @@
 //= require jquery.scrollTo
 //= require jquery.sticky-kit
 //= require jquery.infinite-pages
-//= require wiselinks
-//= require wiselinks_init
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi
