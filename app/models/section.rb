@@ -37,9 +37,11 @@ class Section < ActiveRecord::Base
   has_many :segments, through: :columns
 
   default_scope { sorted }
+  scope :named, -> { where.not(name: nil) }
 
   #---
   validates :page_id, presence: true
+  validates :name, uniqueness: {scope: :page}, allow_nil: true
   validates :width, inclusion: {in: WIDTHS}
 
   #---
@@ -73,6 +75,6 @@ class Section < ActiveRecord::Base
   end
 
   def to_s
-    priority + 1
+    name || priority + 1
   end
 end

@@ -1,2 +1,4 @@
 - sections = page.proxy? ? page.resource.sections : page.sections
-= render partial: 'sections/section', collection: sections, as: :section
+
+.page-wrapper{id: page.slug}
+  = render partial: 'sections/section', collection: sections, as: :section

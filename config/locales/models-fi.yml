@@ -405,6 +405,7 @@ fi:
       role:
         name: Nimi
       section:
+        name: ID
         layout: Asettelu
         gutters: Palstavälit
         viewport: Tasaa ikkunan korkeuteen

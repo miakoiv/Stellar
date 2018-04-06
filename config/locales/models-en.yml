@@ -405,6 +405,7 @@ en:
       role:
         name: Name
       section:
+        name: ID
         layout: Layout
         gutters: Gutters
         viewport: Use viewport height

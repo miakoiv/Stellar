@@ -39,9 +39,9 @@ class Admin::SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.update(section_params)
-        format.js
+        format.js { render :update }
       else
-        format.js { render json: @section.errors, status: :unprocessable_entity }
+        format.js { render :rollback }
       end
     end
   end
@@ -76,7 +76,7 @@ class Admin::SectionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
       params.require(:section).permit(
-        :width, :layout, :gutters, :viewport,
+        :name, :width, :layout, :gutters, :viewport,
         :background_color, :fixed_background
       )
     end
