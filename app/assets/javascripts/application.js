@@ -38,7 +38,6 @@
 //= require selectize
 //= require unobtrusive_flash
 //= require outdatedbrowser/outdatedBrowser
-//= require nprogress
 //= require clipboard
 //= require vis
 
