@@ -11,20 +11,19 @@ class Switchboard
     @element = document.getElementById id
     @mapped = (key for key, _ of @options.mapping)
 
-    @element.addEventListener 'keydown', (e) =>
+    @element.addEventListener 'keypress', (e) =>
       k = e.key
 
       if k in @mapped
         e.preventDefault()
         @element.value = @element.value + @options.mapping[k]
 
-    @element.addEventListener 'keypress', (e) =>
-      if e.key is 'Enter'
+      if k is 'Enter'
         e.preventDefault()
         code = @element.value
         callback = @options.callback
         callback?(code)
-      if e.key is 'Backspace'
+      if k is 'Backspace'
         @element.value = ''
 
     @element.focus()
