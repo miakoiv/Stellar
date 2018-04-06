@@ -14,14 +14,16 @@ namespace :products do
       encoding: 'utf-8',
       col_sep: ';',
       skip_blanks: true,
-      headers: [:title, :modified, nil, :ref, :gtin],
+      headers: [:title, :subtitle, :ref, :gtin, :trade_price, :retail_price],
     ) do |row|
       product = store.products.create(
         code: row[:ref],
         customer_code: row[:gtin],
         title: row[:title],
-        available_at: row[:modified],
-        retail_price_cents: 0,
+        subtitle: row[:subtitle],
+        trade_price: row[:trade_price].to_money,
+        retail_price: row[:retail_price].to_money,
+        available_at: Date.today,
         tax_category: tax_category,
       )
       puts product
