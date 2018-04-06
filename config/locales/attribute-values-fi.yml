@@ -44,6 +44,7 @@ fi:
           footer: Alavalikko
           dropdown: Pudotusvalikko
           megamenu: Megamenu
+          continuous: Yhdistetyt sivut
           template: Sivupohja
           portal: Verkostosivu
           proxy: Jäsenkaupan sivu

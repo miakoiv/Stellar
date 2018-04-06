@@ -31,6 +31,7 @@ class Page < ActiveRecord::Base
     footer: 11,         # container for footer links
     dropdown: 20,       # dropdown container for other pages
     megamenu: 21,       # megamenu container for other pages
+    continuous: 22,     # single page container for other pages
     template: 30,       # printed page template
     portal: 40,         # page with content sections meant for portals
     proxy: 41,          # proxy to a portal page for portal navigation
@@ -49,6 +50,7 @@ class Page < ActiveRecord::Base
     'footer' => {icon: 'paragraph'},
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
     'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
+    'continuous' => {icon: 'scissors', appearance: 'primary'},
     'template' => {icon: 'file-o', appearance: 'warning'},
     'portal' => {icon: 'globe', appearance: 'success'},
     'proxy' => {icon: 'share', appearance: 'success'},
@@ -69,7 +71,7 @@ class Page < ActiveRecord::Base
   scope :excluding, -> (page) { where.not(id: page) }
 
   # Containers for other pages. Segments target these to build navs.
-  scope :container, -> { where(purpose: [10, 11, 20, 21]) }
+  scope :container, -> { where(purpose: [10, 11, 20, 21, 22]) }
 
   #---
   validates :title, presence: true
@@ -93,8 +95,12 @@ class Page < ActiveRecord::Base
   end
 
   #---
+  def part_of_continuous_page?
+    parent.present? && parent.continuous?
+  end
+
   def can_have_children?
-    category? || header? || footer? || dropdown? || megamenu?
+    category? || header? || footer? || dropdown? || megamenu? || continuous?
   end
 
   def can_have_content?
@@ -157,7 +163,9 @@ class Page < ActiveRecord::Base
   # navigation nodes pointing to the right place.
   def path
     case
-    when route? || primary? || proxy?
+    when primary?
+      part_of_continuous_page? ? show_page_path(parent, anchor: slug) : show_page_path(self)
+    when route? || proxy?
       show_page_path(self)
     when category?
       show_category_path(resource)
@@ -168,7 +176,9 @@ class Page < ActiveRecord::Base
     when department?
       show_department_path(resource)
     when dropdown? || megamenu?
-      children.first.path
+      children.live.first.path
+    when continuous?
+      show_page_path(self, anchor: children.live.primary.first.slug)
     when portal?
       resource.to_url
     when internal?
