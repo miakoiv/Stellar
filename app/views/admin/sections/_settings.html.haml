@@ -1,16 +1,16 @@
-= bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
-  %fieldset
-    = f.text_field :name, prepend: '#'
-    = f.select :layout, section.layout_options, {}, {required: true}
-    = f.form_group do
-      = f.check_box :gutters
-    = f.form_group do
-      = f.check_box :viewport
-    = f.select :width, Section.width_options, {}, {required: true}
-    = f.form_group do
-      = f.check_box :fixed_background
+.settings
+  = bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+    %fieldset
+      = f.text_field :name, prepend: '#'
+      = f.select :layout, section.layout_options, {}, {required: true}
+      = f.form_group do
+        = f.check_box :gutters
+      = f.form_group do
+        = f.check_box :viewport
+      = f.select :width, Section.width_options, {}, {required: true}
+      = f.form_group do
+        = f.check_box :fixed_background
 
-
-:coffee
-  $('#section_#{section.id}_section_layout').selectize()
-  $('#section_#{section.id}_section_width').selectize()
+  :coffee
+    $('#section_#{section.id}_section_layout').selectize()
+    $('#section_#{section.id}_section_width').selectize()
