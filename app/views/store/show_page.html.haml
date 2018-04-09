@@ -5,7 +5,7 @@
     = render partial: 'pages/layout', collection: @page.children, as: :page
 
     :coffee
-      new SmoothScroll '#main-nav .navbar-body a'
+      new SmoothScroll '#main-nav .continuous > a'
 
   - else
     = render partial: 'pages/layout', object: @page, as: :page
