@@ -164,7 +164,9 @@ class Page < ActiveRecord::Base
   def path
     case
     when primary?
-      part_of_continuous_page? ? show_page_path(parent, anchor: slug) : show_page_path(self)
+      part_of_continuous_page? ?
+        show_page_path(parent, trailing_slash: true, anchor: slug) :
+        show_page_path(self)
     when route? || proxy?
       show_page_path(self)
     when category?
@@ -178,7 +180,7 @@ class Page < ActiveRecord::Base
     when dropdown? || megamenu?
       children.live.first.path
     when continuous?
-      show_page_path(self, anchor: children.live.primary.first.slug)
+      show_page_path(self, trailing_slash: true, anchor: children.live.primary.first.slug)
     when portal?
       resource.to_url
     when internal?
