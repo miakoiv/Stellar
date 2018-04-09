@@ -30,6 +30,10 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Push content below the navbar */
 #content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
+.page-wrapper {
+  margin-top: -132px;
+  padding-top: 132px;
+}
 
 
 /*
@@ -37,7 +41,10 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 @media (max-width: $screen-xs-max) {
   #content-wrap, .offcanvas .inner-wrap { padding-top: 60px; }
-
+  .page-wrapper {
+    margin-top: -60px;
+    padding-top: 60px;
+  }
   #main-nav {
     @include box-shadow(0 0 4px 0 rgba(0,0,0,0.75));
   }
