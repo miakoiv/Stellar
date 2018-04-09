@@ -45,6 +45,7 @@
 //= require BarcodeParser.min
 //= require bootstrap-notify.min
 //= require Chart.min
+//= require gumshoe.min
 //= require imagesloaded.pkgd.min
 //= require masonry.pkgd.min
 //= require numbro.min

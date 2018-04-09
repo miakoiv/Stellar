@@ -3,6 +3,12 @@ $.fn.extend
 
     viewportUpdate()
 
+    $('#content-wrap').imagesLoaded ->
+      new SmoothScroll '#main-nav .continuous > a'
+      gumshoe.init
+        selector: '#main-nav .continuous > a'
+        offset: 40
+
     $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'
