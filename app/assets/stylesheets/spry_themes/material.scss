@@ -72,3 +72,31 @@ $btn-default-bg: transparent;
 
   span { font-size: inherit; }
 }
+
+/* Navbar lookup widget */
+#navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
+
+
+/*
+ * Mega dropdown menu
+ */
+.mega-dropdown-menu .row {
+  display: flex;
+  flex-wrap: wrap;
+
+  > li {
+    @extend .col-sm-3, .col-md-2;
+    flex: 0 1 auto;
+    margin-bottom: 20px;
+  }
+}
+.mega-dropdown-menu-compact .row {
+  flex-wrap: nowrap;
+}
+.mega-dropdown-menu .row > li > a {
+  display: block;
+  text-align: center;
+}
+.mega-dropdown-menu .page-image img {
+  @extend .img-responsive;
+}
