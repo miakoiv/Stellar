@@ -14,7 +14,7 @@ class Page < ActiveRecord::Base
   include Imageable
   include Pageable
   include FriendlyId
-  friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store
+  friendly_id :slugger, use: [:slugged, :scoped], scope: :store
   acts_as_nested_set scope: :store,
                      dependent: :destroy,
                      counter_cache: :children_count

@@ -191,12 +191,9 @@ class StoreController < ApplicationController
       false
     end
 
-    # Find page by friendly id in `slug`, including history.
+    # Find page by friendly id in `slug`.
     def find_page
       @page = current_store.pages.friendly.find(params[:slug])
-      if request.path != show_page_path(@page)
-        return redirect_to show_page_path(@page), status: :moved_permanently
-      end
     end
 
     def get_view_mode_setting(category)
