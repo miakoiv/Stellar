@@ -4,9 +4,9 @@ $.fn.extend
     viewportUpdate()
 
     $('#content-wrap').imagesLoaded ->
-      new SmoothScroll '#main-nav .continuous > a'
+      new SmoothScroll '.nav > .scroll > a'
       gumshoe.init
-        selector: '#main-nav .continuous > a'
+        selector: '.nav > .scroll > a'
         offset: 40
 
     $('.gallery', this).each ->
