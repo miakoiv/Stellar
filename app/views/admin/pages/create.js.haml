@@ -2,4 +2,5 @@ $("#{j render partial: 'page', object: @page}").appendTo('#page-list > .dd-list'
 $("##{dom_id(@page)}").closest('.dd-item').addClass('active');
 $('#page-form').html("#{j render partial: 'admin/pages/edit'}");
 $('#page-form').initialize();
-$(window).scrollTo($('##{dom_id(@page)}'), 300, {offset: -$('.navbar').outerHeight(true)});
+var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
+scroll.animateScroll($('##{dom_id(@page)}')[0], null, {speed: 300});

@@ -2,4 +2,5 @@ $("#{j render partial: 'admin/groups/row', object: @group, as: :group}").appendT
 $("##{dom_id(@group)}").addClass('active');
 $('#group-form').html("#{j render partial: 'admin/groups/edit'}");
 $('#group-form').initialize();
-$(window).scrollTo($('##{dom_id(@group)}'), 300, {offset: -$('.navbar').outerHeight(true)});
+var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
+scroll.animateScroll($('##{dom_id(@group)}')[0], null, {speed: 300});

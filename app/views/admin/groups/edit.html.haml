@@ -19,5 +19,5 @@
 
   $('##{dom_id(@group)}').addClass 'active'
 
-  $(window).scrollTo $('##{dom_id(@group)}'), 300,
-    offset: -$('.navbar').outerHeight true
+  scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+  scroll.animateScroll $('##{dom_id(@group)}')[0], null, speed: 300

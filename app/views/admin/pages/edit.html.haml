@@ -29,5 +29,5 @@
 
   $('##{dom_id(@page)}').closest('.dd-item').addClass 'active'
 
-  $(window).scrollTo $('##{dom_id(@page)}'), 300,
-    offset: -$('.navbar').outerHeight true
+  scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+  scroll.animateScroll $('##{dom_id(@page)}')[0], null, speed: 300

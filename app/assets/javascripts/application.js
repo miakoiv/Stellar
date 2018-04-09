@@ -19,7 +19,6 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
-//= require jquery.scrollTo
 //= require jquery.sticky-kit
 //= require jquery.infinite-pages
 //= require bootstrap
@@ -51,6 +50,7 @@
 //= require numbro.min
 //= require numbro/languages.min
 //= require parallax.min
+//= require smooth-scroll.min
 //= require summernote.min
 //= require summernote/locales
 //= require swiper.min

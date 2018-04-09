@@ -3,9 +3,13 @@
 #static-wrap.layout-container
   - if @page.continuous?
     = render partial: 'pages/layout', collection: @page.children, as: :page
+
+    :coffee
+      new SmoothScroll '#main-nav .navbar-body a'
+
   - else
     = render partial: 'pages/layout', object: @page, as: :page
 
-- if @page.can_have_content? && current_user.can_update?(@page, at: current_store)
-  - content_for :auxiliary_nav do
-    %li= link_to icon('scissors', col(Page, :layout)), layout_admin_page_path(@page)
+  - if @page.can_have_content? && current_user.can_update?(@page, at: current_store)
+    - content_for :auxiliary_nav do
+      %li= link_to icon('scissors', col(Page, :layout)), layout_admin_page_path(@page)

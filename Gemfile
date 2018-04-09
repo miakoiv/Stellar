@@ -57,7 +57,6 @@ gem 'money-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-scrollto-rails'
 
 # Backport of ApplicationController.renderer from Rails 5
 gem 'backport_new_renderer'
