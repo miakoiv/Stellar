@@ -17,6 +17,7 @@ class Segment < ActiveRecord::Base
     :map_zoom,        # zoom factor of google map segments
     :inverse,         # flag to invert colors in navigation menu segments
     :jumbotron,       # flag to apply the jumbotron class to segment contents
+    :animation,       # animation applied to the segment via AniView
   ], coder: JSON
 
   resourcify
@@ -43,6 +44,13 @@ class Segment < ActiveRecord::Base
   IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
 
   INSETS = %w{inset-none inset-half inset-full}.freeze
+
+  ANIMATIONS = %w{
+    bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp
+    fadeIn fadeInDown fadeInLeft fadeInRight fadeInUp
+    zoomIn zoomInDown zoomInLeft zoomInRight zoomInUp
+    slideIn slideInDown slideInLeft slideInRight slideInUp
+  }
 
   #---
   enum template: {
@@ -104,6 +112,10 @@ class Segment < ActiveRecord::Base
     INSETS.map { |i| [Segment.human_attribute_value(:inset, i), i] }
   end
 
+  def self.animation_options
+    ANIMATIONS
+  end
+
   #---
   def has_content?
     text? || raw?
@@ -119,6 +131,10 @@ class Segment < ActiveRecord::Base
 
   def fixed_ratio?
     shape.present?
+  end
+
+  def animated?
+    animation.present?
   end
 
   def grid_columns

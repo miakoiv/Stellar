@@ -228,6 +228,7 @@ fi:
     segments:
       settings:
         fluid_ratio: sisällön mukaan
+        not_animated: ei animaatiota
       segment_nav:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.

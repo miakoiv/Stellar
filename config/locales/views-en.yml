@@ -248,6 +248,7 @@ en:
     segments:
       settings:
         fluid_ratio: from content
+        not_animated: not animated
       segment_nav:
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.

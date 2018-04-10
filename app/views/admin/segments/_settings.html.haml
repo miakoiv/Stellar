@@ -18,7 +18,10 @@
             %label.btn.btn-default{class: segment.inset == inset && 'active'}
               = f.radio_button_without_bootstrap :inset, inset
               = title
+      = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated')}
 
   :coffee
     $('#segment_#{segment.id}_segment_shape').selectize
+        allowEmptyOption: true
+    $('#segment_#{segment.id}_segment_animation').selectize
         allowEmptyOption: true

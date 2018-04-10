@@ -8,6 +8,9 @@ $.fn.extend
       gumshoe.init
         selector: '.nav > .scroll > a'
         offset: 40
+      $('.animation').AniView
+        animateThreshold: 40
+        scrollPollInterval: 100
 
     $('.gallery', this).each ->
       $(this).magnificPopup
