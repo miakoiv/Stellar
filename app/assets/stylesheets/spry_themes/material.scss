@@ -8,7 +8,7 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-$navbar-height: 90px;
+$main-nav-height: 90px;
 $navbar-default-bg: #fff;
 $navbar-default-link-active-color: $brand-primary;
 $navbar-default-link-active-bg: transparent;
@@ -28,11 +28,34 @@ $btn-default-bg: transparent;
 @import "bootstrap-tweaks";
 @import "print";
 
-#main-nav {
-  .navbar-brand img { max-height: 50px; }
-  .navbar-body {
 
-    /* Right aligned navs */
+/*
+ * Content and page wrappers
+ */
+#content-wrap {
+  padding-top: $main-nav-height;
+}
+.page-wrapper {
+  margin-top: -1*$main-nav-height;
+  padding-top: $main-nav-height;
+}
+
+
+/*
+ * Main navigation, right aligned, 90px tall
+ */
+#main-nav {
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    > img { max-height: 50px; }
+  }
+  .navbar-body {
     display: flex;
     justify-content: flex-end;
     margin: 0 -15px;
@@ -52,7 +75,7 @@ $btn-default-bg: transparent;
     position: absolute;
     left: 15px;
     right: 15px;
-    top: 0;
+    top: -20px;
     border-bottom: 3px solid $brand-primary;
   }
 }
@@ -61,20 +84,13 @@ $btn-default-bg: transparent;
 .offcanvas-toggle { @extend .visible-sm; }
 .navbar-nav.responsive { @extend .hidden-sm; }
 
-.hamburger { padding: 30.5px 15px; }
-
-/* Large navbar widgets */
-.navbar-nav > li.lg > a {
-  padding-top: 34px;
-  padding-bottom: 34px;
-  line-height: 22px;
-  font-size: 20px;
-
-  span { font-size: inherit; }
-}
-
 /* Navbar lookup widget */
+#navbar-lookup { top: $main-nav-height; }
 #navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
+
+#page-nav { width: 100% !important; }
+
+.offcanvas .inner-wrap { padding-top: $main-nav-height; }
 
 
 /*

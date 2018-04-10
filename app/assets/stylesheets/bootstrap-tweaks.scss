@@ -105,13 +105,15 @@ body {
 }
 
 /* Use desktop margins and floats since main nav never collapses */
-#main-nav .navbar-left {
+#main-nav .navbar-left,
+#page-nav .navbar-left {
   float: left !important;
   margin: 0 -15px;
 
   > li { float: left; }
 }
-#main-nav .navbar-right {
+#main-nav .navbar-right,
+#page-nav .navbar-right {
   float: right !important;
   margin: 0 -15px;
 
