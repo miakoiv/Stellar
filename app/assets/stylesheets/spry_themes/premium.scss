@@ -100,13 +100,10 @@ $body-tone-bg: darken($body-bg, 4%);
   flex-wrap: wrap;
 
   > li {
-    @extend .col-sm-3, .col-md-2;
+    @extend .col-xs-4, .col-sm-3, .col-md-2;
     flex: 0 1 auto;
     margin-bottom: 20px;
   }
-}
-.mega-dropdown-menu-compact .row {
-  flex-wrap: nowrap;
 }
 .mega-dropdown-menu .row > li > a {
   text-align: center;
@@ -155,6 +152,12 @@ $body-tone-bg: darken($body-bg, 4%);
   text-overflow: ellipsis;
 }
 .mega-dropdown-menu li ul li a .page-image { display: none; }
+
+@media (min-width: $screen-sm-min) {
+  .mega-dropdown-menu-compact .row {
+    flex-wrap: nowrap;
+  }
+}
 
 
 /*
