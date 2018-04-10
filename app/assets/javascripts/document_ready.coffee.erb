@@ -49,12 +49,6 @@ $.fn.extend
   make_room: (element) ->
     $(this).css 'padding-bottom', element.height()
 
-  parallax_refresh: ->
-    $('.parallax-mirror').remove()
-    $parallax = $('.parallax-window')
-    $parallax.imagesLoaded ->
-      $parallax.parallax($parallax.data())
-
   masonry_build: ->
     $masonry = $('.masonry-grid', this)
     $masonry.imagesLoaded ->

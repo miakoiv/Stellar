@@ -50,7 +50,6 @@
 //= require masonry.pkgd.min
 //= require numbro.min
 //= require numbro/languages.min
-//= require parallax.min
 //= require smooth-scroll.min
 //= require summernote.min
 //= require summernote/locales
