@@ -108,14 +108,16 @@ body {
 #main-nav .navbar-left,
 #page-nav .navbar-left {
   float: left !important;
-  margin: 0 -15px;
+  margin-left: -15px;
+  margin-right: -15px;
 
   > li { float: left; }
 }
 #main-nav .navbar-right,
 #page-nav .navbar-right {
   float: right !important;
-  margin: 0 -15px;
+  margin-left: -15px;
+  margin-right: -15px;
 
   > li { float: left; }
 }
