@@ -19,6 +19,13 @@
               = f.radio_button_without_bootstrap :inset, inset
               = title
       = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated')}
+      .form-group
+        = f.label col(Segment, :velocity)
+        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+          - Segment.velocity_options.each do |title, velocity|
+            %label.btn.btn-default{class: segment.velocity == velocity && 'active'}
+              = f.radio_button_without_bootstrap :velocity, velocity
+              = title
 
   :coffee
     $('#segment_#{segment.id}_segment_shape').selectize

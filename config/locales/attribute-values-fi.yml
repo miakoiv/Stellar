@@ -148,3 +148,7 @@ fi:
           'inset-none': 0
           'inset-half': ½
           'inset-full': 1
+        velocity:
+          'velocity-slow': <i class="fa fa-bicycle"></i>
+          'velocity-normal': <i class="fa fa-car"></i>
+          'velocity-fast': <i class="fa fa-rocket"></i>

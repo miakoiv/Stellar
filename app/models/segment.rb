@@ -18,6 +18,7 @@ class Segment < ActiveRecord::Base
     :inverse,         # flag to invert colors in navigation menu segments
     :jumbotron,       # flag to apply the jumbotron class to segment contents
     :animation,       # animation applied to the segment via AniView
+    :velocity,        # animation velocity, one of slow, normal, fast
   ], coder: JSON
 
   resourcify
@@ -50,7 +51,9 @@ class Segment < ActiveRecord::Base
     fadeIn fadeInDown fadeInLeft fadeInRight fadeInUp
     zoomIn zoomInDown zoomInLeft zoomInRight zoomInUp
     slideIn slideInDown slideInLeft slideInRight slideInUp
-  }
+  }.freeze
+
+  VELOCITIES = %w{velocity-slow velocity-normal velocity-fast}.freeze
 
   #---
   enum template: {
@@ -116,6 +119,10 @@ class Segment < ActiveRecord::Base
     ANIMATIONS
   end
 
+  def self.velocity_options
+    VELOCITIES.map { |v| [Segment.human_attribute_value(:velocity, v).html_safe, v] }
+  end
+
   #---
   def has_content?
     text? || raw?
@@ -133,8 +140,9 @@ class Segment < ActiveRecord::Base
     shape.present?
   end
 
-  def animated?
-    animation.present?
+  def animation_class
+    return nil unless animation.present?
+    "animation #{velocity}"
   end
 
   def grid_columns

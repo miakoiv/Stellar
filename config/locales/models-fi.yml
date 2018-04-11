@@ -436,6 +436,7 @@ fi:
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         animation: Animoitu esittely
+        velocity: Animaation nopeus
       shipment:
         shipping_method_id: Toimitustapa
         number: nro

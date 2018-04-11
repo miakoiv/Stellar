@@ -92,7 +92,8 @@ class Admin::SegmentsController < ApplicationController
         :min_height, :grid_columns, :masonry, :image_sizing,
         :max_items, :product_scope, :show_more,
         :map_location, :map_zoom,
-        :inverse, :jumbotron, :animation
+        :inverse, :jumbotron,
+        :animation, :velocity
       )
     end
 end
