@@ -1,4 +1,5 @@
 %tr.subrow{class: adjustment.credit? ? 'success text-success' : 'warning text-warning'}
+  %td.visible-print
   %th{colspan: 4}= adjustment.label
   %td.text-right.currency
     = money includes_tax ? adjustment.amount_with_tax : adjustment.amount_sans_tax

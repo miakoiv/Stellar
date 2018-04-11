@@ -1,4 +1,6 @@
 %tr[order_item]{class: order_item.is_subitem? && 'subrow'}
+  %td.visible-print
+    %span.badge= order_item_counter + 1
   %td{colspan: 2}
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)

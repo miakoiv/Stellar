@@ -2,6 +2,7 @@
   %table.table.table-hover
     %thead
       %tr
+        %th.col-min.visible-print
         %th= col(OrderItem, :product_title)
         %th= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
@@ -10,6 +11,7 @@
         %th.col-min
     %tfoot
       %tr
+        %th.visible-print
         %th{colspan: 2}
         %th.text-right{colspan: 2}= col(Order, :grand_total)
         %th.text-right.currency

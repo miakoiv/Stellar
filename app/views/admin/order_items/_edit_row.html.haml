@@ -1,4 +1,6 @@
 %tr[order_item]
+  %td.visible-print
+    %span.badge= order_item_counter + 1
   %td
     %strong
       = link_to order_item.product_title, admin_product_path(order_item.product)

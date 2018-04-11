@@ -4,6 +4,7 @@
       %em.small= order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')
     %thead
       %tr
+        %th.col-min.visible-print
         %th= col(OrderItem, :product_title)
         %th.col-xs-2= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
@@ -12,6 +13,7 @@
         %th.col-xs-1.actions
     %tfoot
       %tr.info
+        %th.visible-print
         %th{colspan: 3}
         %th.text-right= col(Order, :grand_total)
         %th#grand-total.text-right.currency
