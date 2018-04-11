@@ -28,7 +28,11 @@ class Admin::SegmentsController < ApplicationController
   def create
     @column = Column.find(params[:column_id])
     authorize_action_for @column, at: current_store
-    @segment = @column.segments.build(segment_params.merge(template: 'text', priority: @column.segments.count))
+    @segment = @column.segments.build(
+      segment_params
+        .merge(Segment.default_settings)
+        .merge(priority: @column.segments.count)
+    )
 
     respond_to do |format|
       if @segment.save

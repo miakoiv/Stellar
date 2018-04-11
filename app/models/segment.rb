@@ -91,6 +91,14 @@ class Segment < ActiveRecord::Base
 
 
   #---
+  def self.default_settings
+    {
+      template: 'text',
+      image_sizing: 'sizing-original',
+      velocity: 'velocity-normal'
+    }
+  end
+
   def self.template_options
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
   end
