@@ -4,7 +4,6 @@ class Store < ActiveRecord::Base
 
   store :settings, accessors: [
     :locale,   # see #locale_options for supported locales
-    :brand_image, # additional branding image displayed in the footer
     :detach_menu, # boolean, detach the primary navigation as #page-menu
     :wiselinks,   # boolean, use wiselinks for storefront navigation
     :masonry,     # boolean, use masonry in storefront products view
@@ -109,7 +108,6 @@ class Store < ActiveRecord::Base
   # The minimal set of default settings for a newly created store.
   def self.default_settings
     {
-      brand_image: 'leasit.svg',
       card_image_type: 'presentational',
       list_image_type: 'presentational'
     }

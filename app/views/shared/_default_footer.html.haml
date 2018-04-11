@@ -9,9 +9,10 @@
       .col-xs-8.col-sm-4.col-sm-pull-5
         = render partial: 'shared/branding'
       .col-xs-4.col-sm-3
-        - if current_store.try(:brand_image).present?
-          .branding
-            .media
-              .media-body
-              .media-right
-                .media-object= image_tag(current_store.brand_image)
+        .branding
+          .media
+            .media-body
+            .media-right
+              .media-object
+                %a{href: 'https://leasit.fi/', target: '_blank'}
+                  = image_tag('leasit.svg')
