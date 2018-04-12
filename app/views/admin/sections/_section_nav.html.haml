@@ -2,6 +2,8 @@
   %ul.nav.navbar-nav
     %li
       %a{role: 'button'}= drag_handle
+    %li
+      = link_to icon('edit', class: 'fa-fw'), edit_admin_section_path(section), remote: true
     %li.dropdown
       = dropdown_toggle do
         = icon('sliders', class: 'fa-fw')

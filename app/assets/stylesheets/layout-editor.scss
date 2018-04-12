@@ -201,6 +201,25 @@
 
 
 /*
+ * Layout editor side panel
+ */
+#side-panel {
+  display: block;
+  left: -1*$navmenu-width;
+  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
+  transition: 0.15s ease all;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+#side-panel.open {
+  transform: translateX($navmenu-width);
+  transform: translateX($navmenu-width) translateZ(0);
+  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
+}
+
+
+/*
  * Layout editor panel containing the segment form
  */
 #layout-panel {

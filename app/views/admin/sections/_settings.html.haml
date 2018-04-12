@@ -1,5 +1,5 @@
 .settings
-  = bootstrap_form_for [:admin, section], namespace: [:section, section.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+  = bootstrap_form_for [:admin, section], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
     %fieldset
       = f.text_field :name, prepend: '#'
       = f.select :layout, section.layout_options, {}, {required: true}
@@ -12,5 +12,5 @@
         = f.check_box :fixed_background
 
   :coffee
-    $('#section_#{section.id}_section_layout').selectize()
-    $('#section_#{section.id}_section_width').selectize()
+    $('#section_layout').selectize()
+    $('#section_width').selectize()
