@@ -68,7 +68,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    border: 1px solid rgba($gray-base, 0.1667);
+    border-left: 1px solid rgba($gray-base, 0.1667);
+    border-right: 1px solid rgba($gray-base, 0.1667);
   }
   .column-nav {
     position: absolute;
@@ -90,6 +91,8 @@
   }
 }
 .section-list-item .column:hover {
+  &:before { border-width: 0 3px; }
+
   .column-nav {
     z-index: 1;
     opacity: 1;
@@ -98,13 +101,12 @@
 .section-list-item .segment.active,
 .section-list-item .segment.disabled {
   .segment-content { outline: none; }
-  .segment-overlay,
   .segment-nav { display: none !important; }
 }
 .section-list-item .segment {
   position: relative;
 
-  &:after {
+  &:before {
     content: '';
     pointer-events: none;
     position: absolute;
@@ -114,16 +116,6 @@
     bottom: 0;
     border: 1px solid rgba($brand-info, 0.333);
   }
-  .segment-overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba($brand-info, 0.2);
-  }
-  .segment-overlay span { display: none; }
   .segment-nav {
     position: absolute;
     top: 0;
@@ -157,10 +149,11 @@
     }
     .dropdown-menu-right { width: 180px; }
   }
+  .segment-content-wrap { pointer-events: none; }
 }
 .section-list-item .segment:hover {
+  &:before { border-width: 3px; }
   .segment-content { min-height: 40px; }
-  .segment-overlay { display: block; }
   .segment-nav {
     z-index: 2;
     opacity: 1;

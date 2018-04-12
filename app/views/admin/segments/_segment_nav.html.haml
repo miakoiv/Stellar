@@ -2,9 +2,12 @@
   %ul.nav.navbar-nav
     %li.segment-handle
       %a{role: 'button'}= icon('arrows', class: 'fa-fw')
+    %li
+      = link_to edit_admin_segment_path(segment), remote: true do
+        = icon('pencil')
     %li.dropdown
       = dropdown_toggle do
-        = icon('paint-brush', class: 'fa-fw')
+        = icon('sliders', class: 'fa-fw')
       %ul.dropdown-menu
         %li
           = render partial: 'admin/segments/settings', object: segment, as: :segment
@@ -12,8 +15,7 @@
       = text_field_tag "#{dom_id(segment)}_background_color", segment.background_color, class: 'form-control input-sm', data: {url: modify_admin_segment_path(segment)}
     %li.dropdown
       = dropdown_toggle do
-        = segment
-        %i.caret
+        = icon('cog')
       %ul.dropdown-menu.dropdown-menu-right
         - Segment.template_options.each do |title, template|
           %li{class: segment.template == template && 'active'}
