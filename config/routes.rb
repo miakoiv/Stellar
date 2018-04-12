@@ -111,7 +111,10 @@ Rails.application.routes.draw do
           end
           patch :modify, on: :member
         end
-        patch :modify, on: :member
+        member do
+          get :preload
+          patch :modify
+        end
         post :reorder, on: :collection
       end
     end

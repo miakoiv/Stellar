@@ -11,7 +11,7 @@
           = icon('chevron-circle-left', t('actions.back'))
     .navbar-toolbar
 
-#section-list.section-list.layout-container.sortable{data: {sections: @page.sections.map { |section| edit_admin_section_path(section) }.as_json}}
+#section-list.section-list.layout-container.sortable{data: {sections: @page.sections.map { |section| preload_admin_section_path(section) }.as_json}}
   = render partial: 'admin/sections/loader', collection: @page.sections, as: :section
 
 :coffee
