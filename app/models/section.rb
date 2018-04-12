@@ -41,7 +41,7 @@ class Section < ActiveRecord::Base
 
   #---
   validates :page_id, presence: true
-  validates :name, uniqueness: {scope: :page}, allow_nil: true
+  validates :name, uniqueness: {scope: :page, allow_blank: true}
   validates :width, inclusion: {in: WIDTHS}
 
   #---
