@@ -14,7 +14,10 @@
       .premium-price
         %span.teaser= current_group.premium_teaser
         %p.price.currency
-          = price_tag *premium_pricing.for_display(product)
+          - if product.has_variants?
+            = price_range *premium_pricing.range_for_display(product)
+          - else
+            = price_tag *premium_pricing.for_display(product)
   .buy-now
     - if pricing_shown?
       %p.price.currency
