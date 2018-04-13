@@ -1,0 +1,16 @@
+.section-form
+  = bootstrap_form_for [:admin, section], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+    %fieldset
+      = f.text_field :name, prepend: '#'
+      = f.select :layout, section.layout_options, {}, {required: true}
+      = f.form_group do
+        = f.check_box :gutters
+      = f.form_group do
+        = f.check_box :viewport
+      = f.select :width, Section.width_options, {}, {required: true}
+      = f.form_group do
+        = f.check_box :fixed_background
+
+  :coffee
+    $('#section_layout').selectize()
+    $('#section_width').selectize()

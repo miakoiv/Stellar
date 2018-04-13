@@ -1,16 +1,36 @@
-.section-settings
-  = bootstrap_form_for [:admin, section], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
-    %fieldset
-      = f.text_field :name, prepend: '#'
-      = f.select :layout, section.layout_options, {}, {required: true}
-      = f.form_group do
-        = f.check_box :gutters
-      = f.form_group do
-        = f.check_box :viewport
-      = f.select :width, Section.width_options, {}, {required: true}
-      = f.form_group do
-        = f.check_box :fixed_background
+= render partial: 'admin/sections/form', object: section, as: :section
 
-  :coffee
-    $('#section_layout').selectize()
-    $('#section_width').selectize()
+%fieldset
+  .form-group
+    %label.control-label= col(Section, :background_color)
+    = text_field_tag 'section_background_color', section.background_color, class: 'form-control', data: {url: modify_admin_section_path(section)}
+
+:coffee
+  $('#section_background_color').minicolors
+    theme: 'bootstrap'
+    position: 'bottom left'
+    format: 'rgb'
+    opacity: true
+    keywords: 'transparent'
+    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+    change: (value) ->
+      $.ajax
+        url: $(this).data 'url'
+        type: 'PATCH'
+        data:
+          section:
+            background_color: value
+    changeDelay: 500
+
+%hr
+= render partial: 'admin/images/edit_collection', object: section, as: :imageable, locals: {grid_columns: 2}
+= render partial: 'admin/images/dropzone', object: section, as: :imageable
+
+:coffee
+  $('##{dom_id(section)}').on 'imageable:added imageable:removed imageable:reordered', ->
+    $('.section-form').find('form.triggered').trigger 'submit.rails'
+
+- if current_user.can_delete?(section, at: current_store)
+  %hr
+  %fieldset.actions
+    = link_to icon('trash-o'), admin_section_path(section), method: :delete, remote: true, class: 'btn btn-danger btn-block', data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

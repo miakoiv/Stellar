@@ -106,13 +106,20 @@ Rails.application.routes.draw do
           resources :segments do
             resources :images
             resources :documents
-            patch :modify, on: :member
+            member do
+              get :settings
+              patch :modify
+            end
             post :reorder, on: :collection
           end
-          patch :modify, on: :member
+          member do
+            get :settings
+            patch :modify
+          end
         end
         member do
           get :preload
+          get :settings
           patch :modify
         end
         post :reorder, on: :collection

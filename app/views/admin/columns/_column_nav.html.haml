@@ -1,6 +1,6 @@
 %nav.column-nav.navbar.navbar-default
   %ul.nav.navbar-nav.navbar-left
     %li
-      = link_to icon('edit', class: 'fa-fw'), edit_admin_column_path(column), remote: true
+      = link_to icon('cog', class: 'fa-fw'), settings_admin_column_path(column), remote: true
     %li
       = link_to icon('plus', class: 'fa-fw'), admin_column_segments_path(column), remote: true, method: :post

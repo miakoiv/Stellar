@@ -4,9 +4,9 @@ class Admin::SectionsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_section, only: [:edit, :preload, :update, :modify, :destroy]
+  before_action :set_section, only: [:settings, :preload, :update, :modify, :destroy]
 
-  authority_actions reorder: 'update'
+  authority_actions settings: 'update', reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -26,8 +26,8 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-  # GET /admin/sections/1/edit.js
-  def edit
+  # GET /admin/sections/1/settings.js
+  def settings
     authorize_action_for @section, at: current_store
 
     respond_to :js

@@ -1,0 +1,11 @@
+.column-form
+  = bootstrap_form_for [:admin, column], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+    %fieldset
+      .form-group
+        = f.label col(Column, :alignment)
+        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+          - Column.alignment_options.each do |title, alignment|
+            %label.btn.btn-default{class: @column.alignment == alignment && 'active'}
+              = f.radio_button_without_bootstrap :alignment, alignment
+              = title
+      = f.check_box :pivot

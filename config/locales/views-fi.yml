@@ -222,7 +222,7 @@ fi:
       new:
         new_property: Uusi ominaisuus
     sections:
-      edit:
+      settings:
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     segments:

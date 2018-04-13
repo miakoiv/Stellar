@@ -5,12 +5,12 @@ class Admin::ColumnsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_column
 
-  authority_actions modify: 'update'
+  authority_actions settings: 'update', modify: 'update'
 
   # No layout, this controller never renders HTML.
 
-  # GET /admin/columns/1/edit.js
-  def edit
+  # GET /admin/columns/1/settings.js
+  def settings
     authorize_action_for @column, at: current_store
 
     respond_to :js
