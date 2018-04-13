@@ -242,7 +242,7 @@ en:
       new:
         new_property: New property
     sections:
-      section_nav:
+      edit:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
     segments:

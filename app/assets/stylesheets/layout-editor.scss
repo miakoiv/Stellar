@@ -1,4 +1,32 @@
 /*
+ * Layout editor side panel
+ */
+#side-panel {
+  display: block;
+  left: -1*$navmenu-width;
+  z-index: 1019; // just below #side-nav
+  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
+  transition: 0.15s ease all;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+#side-panel.open {
+  transform: translateX($navmenu-width);
+  transform: translateX($navmenu-width) translateZ(0);
+  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
+}
+#side-panel .panel-toggle {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#side-panel .inner-wrap {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/*
  * Layout editor sections and segments
  */
 .section-list {
@@ -33,28 +61,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 40px;
   border: 0;
   border-radius: 0;
-  background-color: darken($brand-primary, 15%);
 
-  .navbar-nav {
-    display: flex;
-    flex-flow: row nowrap;
-  }
-  .navbar-nav > li > a,
-  .navbar-nav > li.navbar-color input {
-    color: lighten($brand-primary, 35%);
-    &:hover, &:focus { color: #fff; }
-  }
-  .navbar-nav > li > a {
-    padding: 10px 11px;
-  }
-  .dropdown-menu {
-    width: 320px;
-    padding: 15px;
-    border: 0;
-    border-radius: 0;
+  > .navbar-nav {
+    float: left !important;
+    margin-left: 0;
+    margin-right: 0;
+
+    > li { float: left !important; }
   }
 }
 .section-list-item .column {
@@ -201,26 +216,7 @@
 
 
 /*
- * Layout editor side panel
- */
-#side-panel {
-  display: block;
-  left: -1*$navmenu-width;
-  transform: translateX(0);
-  transform: translateX(0) translateZ(0);
-  transition: 0.15s ease all;
-  backface-visibility: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-#side-panel.open {
-  transform: translateX($navmenu-width);
-  transform: translateX($navmenu-width) translateZ(0);
-  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
-}
-
-
-/*
- * Layout editor panel containing the segment form
+ * Layout panel for in-place editing of segments
  */
 #layout-panel {
   @extend .col-xs-10, .col-sm-6, .col-md-4;
@@ -245,7 +241,7 @@
   border-radius: 25px;
   color: inherit;
   background-color: #fff;
-  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
 
   &:hover { background-color: #f0f0f0; }
 }
@@ -258,7 +254,7 @@
   bottom: 0;
   z-index: -1;
   background-color: $body-bg;
-  @include box-shadow(0 0 36px rgba(0, 0, 0, 0.8));
+  @include box-shadow(0 0 12px rgba(0, 0, 0, 0.8));
 }
 #layout-panel .segment-form,
 #layout-panel .segment-head,

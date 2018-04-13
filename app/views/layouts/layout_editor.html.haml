@@ -7,8 +7,7 @@
     %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left{role: 'navigation'}
       .inner-wrap= render partial: 'admin/shared/side_nav'
     %nav#side-panel.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
-      .inner-wrap
-        #editor-panel
+      .inner-wrap= render partial: 'admin/shared/side_panel'
     %nav#main-nav.navbar.navbar-inverse.navbar-fixed-top{role: 'navigation'}
       = render partial: 'admin/shared/main_nav'
     #content-wrap
