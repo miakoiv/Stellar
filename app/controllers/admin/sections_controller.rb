@@ -6,7 +6,7 @@ class Admin::SectionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_section, only: [:edit, :preload, :update, :modify, :destroy]
 
-  authority_actions modify: 'update', reorder: 'update'
+  authority_actions reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -50,7 +50,12 @@ class Admin::SectionsController < ApplicationController
       end
     end
   end
-  alias_method :modify, :update
+
+  # PATCH/PUT /admin/sections/1/modify.js
+  def modify
+    @section.update(section_params)
+    respond_to :js
+  end
 
   # DELETE /admin/sections/1.js
   def destroy
