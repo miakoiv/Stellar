@@ -90,19 +90,11 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    min-height: 40px;
     margin-bottom: 0;
     border: 0;
     border-radius: 0;
     opacity: 0;
     transition: all 0.4s ease-in-out 0s;
-
-    .navbar-nav {
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: flex-end;
-    }
-    .navbar-nav > li > a { padding: 10px 11px; }
   }
 }
 .section-list-item .column:hover {
@@ -172,45 +164,6 @@
   .segment-nav {
     z-index: 2;
     opacity: 1;
-  }
-}
-
-/* Navbar item for minicolors */
-.navbar-color {
-  padding: 5px 8px;
-
-  .minicolors-theme-bootstrap {
-    .minicolors-swatch { cursor: pointer; }
-    .minicolors-input {
-      width: 0;
-      background-color: transparent;
-      color: transparent;
-      border: 0;
-      box-shadow: none;
-      transition: all 0.4s ease-in-out 0s;
-    }
-    &.minicolors-position-left {
-      .minicolors-input {
-        padding-left: 28px;
-        padding-right: 0;
-        text-align: left;
-      }
-      &.minicolors-focus .minicolors-input {
-        width: 14em;
-        padding-left: 36px;
-      }
-    }
-    &.minicolors-position-right {
-      .minicolors-input {
-        padding-left: 0;
-        padding-right: 28px;
-        text-align: right;
-      }
-      &.minicolors-focus .minicolors-input {
-        width: 14em;
-        padding-right: 36px;
-      }
-    }
   }
 }
 

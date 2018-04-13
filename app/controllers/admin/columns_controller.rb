@@ -9,6 +9,13 @@ class Admin::ColumnsController < ApplicationController
 
   # No layout, this controller never renders HTML.
 
+  # GET /admin/columns/1/edit.js
+  def edit
+    authorize_action_for @column, at: current_store
+
+    respond_to :js
+  end
+
   # PATCH/PUT /admin/columns/1.js
   def update
     authorize_action_for @column, at: current_store
@@ -21,7 +28,12 @@ class Admin::ColumnsController < ApplicationController
       end
     end
   end
-  alias_method :modify, :update
+
+  # PATCH/PUT /admin/columns/1/modify.js
+  def modify
+    @column.update(column_params)
+    respond_to :js
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

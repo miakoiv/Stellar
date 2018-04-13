@@ -149,6 +149,8 @@ en:
         view_mode: Default view
       column:
         alignment: Vertical alignment
+        background_color: Background color
+        pivot: Horizontal layout on mobile
       component_entry:
         product_id: Product
         component_id: Component

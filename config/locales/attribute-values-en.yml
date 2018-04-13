@@ -5,6 +5,11 @@ en:
         view_mode:
           'product-grid': grid
           'product-list': list
+      column:
+        alignment:
+          'align-top': top
+          'align-middle': middle
+          'align-bottom': bottom
       group:
         appearance:
           default: gray

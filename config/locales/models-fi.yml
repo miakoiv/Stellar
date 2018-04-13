@@ -149,6 +149,8 @@ fi:
         view_mode: Oletusnäkymä
       column:
         alignment: Pystytasaus
+        background_color: Taustaväri
+        pivot: Kääntö vaakatasoon mobiilinäytöllä
       component_entry:
         product_id: Tuote
         component_id: Komponentti

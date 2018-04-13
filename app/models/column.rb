@@ -7,11 +7,7 @@ class Column < ActiveRecord::Base
   include Reorderable
 
   #---
-  ALIGNMENTS = [
-    ['sort-up', 'align-top'],
-    ['sort', 'align-middle'],
-    ['sort-down', 'align-bottom']
-  ].freeze
+  ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
 
   #---
   belongs_to :section, touch: true
@@ -24,7 +20,7 @@ class Column < ActiveRecord::Base
 
   #---
   def self.alignment_options
-    ALIGNMENTS
+    ALIGNMENTS.map { |a| [Column.human_attribute_value(:alignment, a), a] }
   end
 
   #---
