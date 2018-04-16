@@ -1,4 +1,6 @@
 $('.dropdown.open > a').dropdown('toggle');
+$('#editor-panel').html("#{j render partial: 'admin/sections/settings', object: @section, as: :section}");
+$('#side-panel').addClass('open');
 $("#{j render partial: 'admin/sections/list_item', object: @section, as: :section}").appendTo('#section-list');
 $('##{dom_id(@section)}').initialize();
 $('#section-list').sortable('refresh');
