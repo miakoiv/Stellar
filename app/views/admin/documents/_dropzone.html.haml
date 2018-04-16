@@ -1,6 +1,6 @@
 - id = dom_id(documentable, :new_document)
 
-= form_for [:admin, documentable, documentable.documents.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
+= form_for [:admin, documentable, Document.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
   .fallback
     = f.file_field :attachment
     = f.submit class: 'btn btn-primary'
