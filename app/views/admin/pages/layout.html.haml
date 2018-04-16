@@ -29,3 +29,6 @@
     if $(e.target).hasClass 'section-list'
       $.post '#{reorder_admin_page_sections_path(@page)}',
         {reorder: $(this).sortable('toArray')}
+
+  $(document).on 'imageable:added imageable:removed imageable:reordered', ->
+    $('#editor-panel').find('form.triggered').trigger 'submit.rails'

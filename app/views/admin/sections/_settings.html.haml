@@ -26,10 +26,6 @@
 = render partial: 'admin/images/edit_collection', object: section, as: :imageable, locals: {grid_columns: 2}
 = render partial: 'admin/images/dropzone', object: section, as: :imageable
 
-:coffee
-  $('##{dom_id(section)}').on 'imageable:added imageable:removed imageable:reordered', ->
-    $('.section-form').find('form.triggered').trigger 'submit.rails'
-
 - if current_user.can_delete?(section, at: current_store)
   %hr
   %fieldset.actions
