@@ -1,6 +1,6 @@
 - id = dom_id(imageable, :new_image)
 
-= form_for [:admin, imageable, imageable.images.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
+= form_for [:admin, imageable, Image.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
   .fallback
     = f.file_field :attachment
     = f.submit class: 'btn btn-primary'
