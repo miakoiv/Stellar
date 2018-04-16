@@ -3,7 +3,7 @@
     %fieldset
       .form-group
         = f.label col(Column, :alignment)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
+        .btn-group{data: {toggle: 'buttons'}}
           - Column.alignment_options.each do |title, alignment|
             %label.btn.btn-default{class: @column.alignment == alignment && 'active'}
               = f.radio_button_without_bootstrap :alignment, alignment
