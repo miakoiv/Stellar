@@ -3,7 +3,7 @@
 - products = resource.is_a?(Promotion) && resource.products.live.sorted(promotion.product_scope.presence)
 - swiper = promotion.grid_columns == '1'
 
-.segment-content.promotion{id: segment_content_id(promotion, context)}
+.segment-content.promotion{id: dom_id(promotion)}
   - if promotion.header.present?
     .page-header
       %h1= promotion.header
@@ -28,14 +28,14 @@
 - if swiper
   :coffee
     jQuery ->
-      $segment = $('##{segment_content_id(promotion, context)}')
+      $segment = $('##{dom_id(promotion)}')
       new Swiper $segment.find('.swiper-container'),
         autoplay:
           delay: 3000
           disableOnInteraction: false
 - if promotion.masonry?
   :coffee
-    $grid = $('##{segment_content_id(promotion, context)}').find '.grid'
+    $grid = $('##{dom_id(promotion)}').find '.grid'
     $grid.imagesLoaded ->
       $grid.masonry
         itemSelector: '.grid-item'

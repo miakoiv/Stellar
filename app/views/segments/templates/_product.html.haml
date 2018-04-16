@@ -1,6 +1,6 @@
 - resource = product.resource
 
-.segment-content.product{id: segment_content_id(product, context)}
+.segment-content.product{id: dom_id(product)}
   - if resource.is_a?(Product)
     .row
       = render partial: 'products/product_card', object: resource, as: :product

@@ -1,34 +1,30 @@
-.settings
-  = bootstrap_form_for [:admin, segment], namespace: [:segment, segment.id], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
-    %fieldset
-      = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
-      = f.form_group do
-        = f.check_box :jumbotron
-      .form-group
-        = f.label col(Segment, :alignment)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.alignment_options.each do |title, alignment|
-            %label.btn.btn-default{class: segment.alignment == alignment && 'active'}
-              = f.radio_button_without_bootstrap :alignment, alignment
-              = title
-      .form-group
-        = f.label col(Segment, :inset)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.inset_options.each do |title, inset|
-            %label.btn.btn-default{class: segment.inset == inset && 'active'}
-              = f.radio_button_without_bootstrap :inset, inset
-              = title
-      = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated')}
-      .form-group
-        = f.label col(Segment, :velocity)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.velocity_options.each do |title, velocity|
-            %label.btn.btn-default{class: segment.velocity == velocity && 'active'}
-              = f.radio_button_without_bootstrap :velocity, velocity
-              = title
+= render partial: 'admin/segments/form', object: segment, as: :segment
+%fieldset
+  .form-group
+    %label.control-label= col(Segment, :background_color)
+    = text_field_tag 'segment_background_color', segment.background_color, class: 'form-control', data: {url: modify_admin_segment_path(segment)}
 
-  :coffee
-    $('#segment_#{segment.id}_segment_shape').selectize
-        allowEmptyOption: true
-    $('#segment_#{segment.id}_segment_animation').selectize
-        allowEmptyOption: true
+- if content_for?(:supplemental)
+  = yield :supplemental
+
+:coffee
+  $('#segment_background_color').minicolors
+    theme: 'bootstrap'
+    position: 'bottom left'
+    format: 'rgb'
+    opacity: true
+    keywords: 'transparent'
+    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+    change: (value) ->
+      $.ajax
+        url: $(this).data 'url'
+        type: 'PATCH'
+        data:
+          segment:
+            background_color: value
+    changeDelay: 500
+
+- if current_user.can_delete?(segment, at: current_store)
+  %hr
+  %fieldset.actions
+    = link_to icon('trash-o'), admin_segment_path(segment), method: :delete, remote: true, class: 'btn btn-danger btn-block', data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

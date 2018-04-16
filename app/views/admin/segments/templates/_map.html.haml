@@ -1,8 +1,7 @@
 %fieldset
+  = f.text_field :map_location
   .row
     .col-sm-6
-      = f.text_field :map_location
-    .col-sm-3
       = f.text_field :map_zoom
-    .col-sm-3
+    .col-sm-6
       = f.text_field :min_height, append: 'em', class: 'text-right'

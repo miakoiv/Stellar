@@ -1,22 +1,19 @@
-- content_for :segment_head do
-  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
-  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+- content_for :supplemental do
+  = render partial: 'admin/images/edit_collection', object: segment, as: :imageable, locals: {grid_columns: 2}
+  = render partial: 'admin/images/dropzone', object: segment, as: :imageable
+  %hr
 
 %fieldset
-  .row
-    .col-sm-12
-      .form-group
-        = f.label col(Segment, :image_sizing)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.image_sizing_options.each do |title, size|
-            %label.btn.btn-default{class: @segment.image_sizing == size && 'active'}
-              = f.radio_button_without_bootstrap :image_sizing, size
-              = title
-  .row
-    .col-sm-12
-      = f.hidden_field :resource_type, value: 'Category'
-      = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
+  .form-group
+    = f.label col(Segment, :image_sizing)
+    .btn-group{data: {toggle: 'buttons'}}
+      - Segment.image_sizing_options.each do |title, size|
+        %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
+          = f.radio_button_without_bootstrap :image_sizing, size
+          = title
+  = f.hidden_field :resource_type, value: 'Category'
+  = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: blank}, {class: 'selectize'}
 
 :coffee
-  $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
-    $(document.body).trigger 'sticky_kit:recalc'
+  $('#segment_resource_id').selectize
+    allowEmptyOption: true

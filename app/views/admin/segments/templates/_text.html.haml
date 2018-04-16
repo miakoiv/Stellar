@@ -1,11 +1,12 @@
-~ f.text_area :body, rows: 10, skip_label: true
+%fieldset
+  ~ f.text_area :body, rows: 10, skip_label: true
 
 :coffee
   sendAttachment = (file, callback) ->
     data = new FormData()
     data.append 'image[attachment]', file
     $.ajax
-      url: '#{admin_segment_images_path(@segment)}'
+      url: '#{admin_segment_images_path(segment)}'
       data: data
       processData: false
       contentType: false
@@ -58,7 +59,7 @@
     dialogsInBody: true
     dialogsFade: true
     disableDragAndDrop: true
-    minHeight: $('##{segment_content_id(@segment, :layout)}').height()
+    minHeight: $('##{dom_id(segment)}').height()
     placeholder: ''
     callbacks:
       onImageUpload: (files) ->

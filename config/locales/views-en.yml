@@ -246,10 +246,10 @@ en:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
     segments:
-      settings:
+      form:
         fluid_ratio: from content
         not_animated: not animated
-      segment_nav:
+      settings:
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.
     shipments:

@@ -3,8 +3,10 @@
  */
 #side-panel {
   display: block;
-  left: -1*$navmenu-width;
+  width: 320px;
+  left: -320px;
   z-index: 1019; // just below #side-nav
+  border-right: 8px solid $brand-primary;
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
   transition: 0.15s ease all;
@@ -12,10 +14,14 @@
   -webkit-overflow-scrolling: touch;
 }
 #side-panel.open {
-  transform: translateX($navmenu-width);
-  transform: translateX($navmenu-width) translateZ(0);
+  transform: translateX(320px);
+  transform: translateX(320px) translateZ(0);
   @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
 }
+#side-panel.section-panel { border-right-color: $brand-primary; }
+#side-panel.column-panel { border-right-color: $gray-light; }
+#side-panel.segment-panel { border-right-color: $brand-info; }
+
 #side-panel .panel-toggle {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -23,6 +29,10 @@
 #side-panel .inner-wrap {
   padding-left: 15px;
   padding-right: 15px;
+}
+#side-panel .btn-group {
+  display: block;
+  @include clearfix;
 }
 
 
@@ -63,6 +73,7 @@
   left: 0;
   border: 0;
   border-radius: 0;
+  background-color: darken($brand-primary, 15%);
 
   > .navbar-nav {
     float: left !important;
@@ -70,6 +81,13 @@
     margin-right: 0;
 
     > li { float: left !important; }
+    > li > a {
+      color: lighten($brand-primary, 35%);
+      &:hover, &:focus {
+        color: #fff;
+        > .fa-cog { @extend .fa-spin; }
+      }
+    }
   }
 }
 .section-list-item .column {
@@ -95,11 +113,15 @@
     border-radius: 0;
     opacity: 0;
     transition: all 0.4s ease-in-out 0s;
+
+    > .navbar-nav > li > a {
+      &:hover, &:focus {
+        > .fa-cog { @extend .fa-spin; }
+      }
+    }
   }
 }
 .section-list-item .column:hover {
-  &:before { border-width: 0 3px; }
-
   .column-nav {
     z-index: 1;
     opacity: 1;
@@ -127,40 +149,31 @@
     position: absolute;
     top: 0;
     right: 0;
-    min-height: 40px;
     border: 0;
     border-radius: 0;
     opacity: 0;
     transition: all 0.4s ease-in-out 0s;
     background-color: darken($brand-info, 15%);
 
-    .navbar-nav {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-end;
-    }
-    .navbar-nav > li > a,
-    .navbar-nav > li input {
-      color: lighten($brand-info, 25%);
-      &:hover, &:focus { color: #fff; }
-    }
-    .navbar-nav > li > a {
-      padding: 10px 11px;
-    }
-    .dropdown-menu {
-      width: 260px;
-      border: 0;
-      border-radius: 0;
+    > .navbar-nav {
+      float: right !important;
+      margin-left: 0;
+      margin-right: 0;
 
-      form { padding: 15px; }
+      > li { float: left !important; }
+      > li > a {
+        color: lighten($brand-info, 25%);
+        &:hover, &:focus {
+          color: #fff;
+          > .fa-cog { @extend .fa-spin; }
+        }
+      }
     }
-    .dropdown-menu-right { width: 180px; }
   }
   .segment-content-wrap { pointer-events: none; }
 }
 .section-list-item .segment:hover {
-  &:before { border-width: 3px; }
-  .segment-content { min-height: 40px; }
+  .segment-content { min-height: 50px; }
   .segment-nav {
     z-index: 2;
     opacity: 1;
@@ -169,19 +182,16 @@
 
 
 /*
- * Layout panel for in-place editing of segments
+ * Content panel for in-place editing of segments
  */
-#layout-panel {
-  @extend .col-xs-10, .col-sm-6, .col-md-4;
+#content-panel {
   position: absolute;
-  top: 200px;
-  right: 10%;
   z-index: 2;
   padding: 0;
   background-color: $body-bg;
   line-height: 1.4; // matches layouts.css
 }
-#layout-panel .panel-close {
+#content-panel .panel-close {
   display: block;
   position: absolute;
   top: -45px;
@@ -198,7 +208,7 @@
 
   &:hover { background-color: #f0f0f0; }
 }
-#layout-panel:before {
+#content-panel:before {
   content: '';
   position: absolute;
   left: -15px;
@@ -209,15 +219,7 @@
   background-color: $body-bg;
   @include box-shadow(0 0 12px rgba(0, 0, 0, 0.8));
 }
-#layout-panel .segment-form,
-#layout-panel .segment-head,
-#layout-panel .segment-tail {
-  padding-bottom: 20px;
-}
-#layout-panel .CodeMirror { height: 300px; }
-
-/* Overrides for different segment templates */
-#layout-panel .segment-form.text .note-editor {
+#content-panel .segment-form.text .note-editor {
   border: 0;
   border-radius: 0;
   caret-color: $brand-primary;

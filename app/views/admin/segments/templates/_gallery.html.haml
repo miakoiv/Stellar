@@ -1,18 +1,13 @@
-- content_for :segment_head do
-  = render partial: 'admin/images/edit_collection', object: @segment, as: :imageable
-  = render partial: 'admin/images/dropzone', object: @segment, as: :imageable
+- content_for :supplemental do
+  = render partial: 'admin/images/edit_collection', object: segment, as: :imageable, locals: {grid_columns: 2}
+  = render partial: 'admin/images/dropzone', object: segment, as: :imageable
+  %hr
 
 %fieldset
-  .row
-    .col-sm-6
-      .form-group
-        = f.label col(Segment, :grid_columns)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.grid_columns_options.each do |columns|
-            %label.btn.btn-default{class: @segment.grid_columns == columns && 'active'}
-              = f.radio_button_without_bootstrap :grid_columns, columns
-              = columns
-
-:coffee
-  $('##{dom_id(@segment)}').on 'imageable:added imageable:removed', ->
-    $(document.body).trigger 'sticky_kit:recalc'
+  .form-group
+    = f.label col(Segment, :grid_columns)
+    .btn-group{data: {toggle: 'buttons'}}
+      - Segment.grid_columns_options.each do |columns|
+        %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
+          = f.radio_button_without_bootstrap :grid_columns, columns
+          = columns

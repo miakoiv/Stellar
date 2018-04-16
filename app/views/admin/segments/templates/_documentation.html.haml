@@ -1,3 +1,4 @@
-- content_for :segment_head do
-  = render partial: 'admin/documents/edit_list', object: @segment, as: :documentable
-  = render partial: 'admin/documents/dropzone', object: @segment, as: :documentable
+- content_for :supplemental do
+  = render partial: 'admin/documents/edit_list', object: segment, as: :documentable
+  = render partial: 'admin/documents/dropzone', object: segment, as: :documentable
+  %hr

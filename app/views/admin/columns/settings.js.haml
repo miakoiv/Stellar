@@ -1,2 +1,3 @@
 $('#editor-panel').html("#{j render partial: 'admin/columns/settings', object: @column, as: :column}");
+$('#side-panel').removeClass('section-panel segment-panel').addClass('column-panel');
 $('#side-panel').addClass('open');

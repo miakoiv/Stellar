@@ -1,43 +1,10 @@
-%nav.segment-nav.navbar.navbar-inverse
-  %ul.nav.navbar-nav
+%nav.segment-nav.navbar.navbar-default
+  %ul.nav.navbar-nav.navbar-right
     %li.segment-handle
       %a{role: 'button'}= icon('arrows', class: 'fa-fw')
-    %li
-      = link_to edit_admin_segment_path(segment), remote: true do
-        = icon('pencil')
-    %li.dropdown
-      = dropdown_toggle do
-        = icon('sliders', class: 'fa-fw')
-      %ul.dropdown-menu
-        %li
-          = render partial: 'admin/segments/settings', object: segment, as: :segment
-    %li.navbar-color
-      = text_field_tag "#{dom_id(segment)}_background_color", segment.background_color, class: 'form-control input-sm', data: {url: modify_admin_segment_path(segment)}
-    %li.dropdown
-      = dropdown_toggle do
-        = icon('cog')
-      %ul.dropdown-menu.dropdown-menu-right
-        - Segment.template_options.each do |title, template|
-          %li{class: segment.template == template && 'active'}
-            = link_to admin_segment_path(segment, params: {segment: {template: template}}), remote: true, method: :patch do
-              = title
-    - if current_user.can_delete?(segment, at: current_store)
+    - if segment.edit_in_place?
       %li
-        = link_to icon('trash-o', class: 'fa-fw'), admin_segment_path(segment), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
-
-:coffee
-  $('##{dom_id(segment)}_background_color').minicolors
-    theme: 'bootstrap'
-    position: 'bottom right'
-    format: 'rgb'
-    opacity: true
-    keywords: 'transparent'
-    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
-    change: (value) ->
-      $.ajax
-        url: $(this).data 'url'
-        type: 'PATCH'
-        data:
-          segment:
-            background_color: value
-    changeDelay: 500
+        = link_to edit_admin_segment_path(segment), remote: true do
+          = icon('edit')
+    %li
+      = link_to icon('cog', class: 'fa-fw'), settings_admin_segment_path(segment), remote: true

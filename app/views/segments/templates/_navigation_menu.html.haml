@@ -1,6 +1,6 @@
 - resource = navigation_menu.resource
 
-.segment-content.navigation_menu{id: segment_content_id(navigation_menu, context)}
+.segment-content.navigation_menu{id: dom_id(navigation_menu)}
   - if resource.present? && resource.is_a?(Page)
     %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
       - if navigation_menu.header.present?

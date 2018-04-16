@@ -141,7 +141,7 @@ class Segment < ActiveRecord::Base
   end
 
   def edit_in_place?
-    text?
+    has_content?
   end
 
   def fixed_ratio?

@@ -1,27 +1,23 @@
 %fieldset
-  .row
-    .col-sm-12
-      = f.hidden_field :resource_type, value: 'Department'
-      = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: true}, {class: 'selectize'}
-  .row
-    .col-sm-6
-      = f.text_field :header
-    .col-sm-6
-      = f.text_field :subhead
-  .row
-    .col-sm-6
-      .form-group
-        = f.label col(Segment, :grid_columns)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          - Segment.grid_columns_options.each do |columns|
-            %label.btn.btn-default{class: @segment.grid_columns == columns && 'active'}
-              = f.radio_button_without_bootstrap :grid_columns, columns
-              = columns
-  .row
-    .col-sm-6
-      = f.text_field :max_items
-      = f.form_group do
-        = f.check_box :show_more
-    .col-sm-6
-      = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: true}, {class: 'selectize'}
-      = f.check_box :masonry
+  = f.hidden_field :resource_type, value: 'Department'
+  = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: blank}, {class: 'selectize'}
+  = f.text_field :header
+  = f.text_field :subhead
+  .form-group
+    = f.label col(Segment, :grid_columns)
+    .btn-group{data: {toggle: 'buttons'}}
+      - Segment.grid_columns_options.each do |columns|
+        %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
+          = f.radio_button_without_bootstrap :grid_columns, columns
+          = columns
+  = f.text_field :max_items
+  = f.form_group do
+    = f.check_box :show_more
+  = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: blank}, {class: 'selectize'}
+  = f.check_box :masonry
+
+:coffee
+  $('#segment_resource_id').selectize
+    allowEmptyOption: true
+  $('#segment_product_scope').selectize
+    allowEmptyOption: true

@@ -1,4 +1,4 @@
-.segment-content.gallery{id: segment_content_id(gallery, context)}
+.segment-content.gallery{id: dom_id(gallery)}
   - if gallery.images.any?
     .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
       - gallery.images.each do |image|
@@ -10,7 +10,7 @@
     = render partial: 'segments/placeholders/gallery'
 
 :coffee
-  $grid = $('##{segment_content_id(gallery, context)}').find '.grid'
+  $grid = $('##{dom_id(gallery)}').find '.grid'
   reversed = $grid.closest('.segment').hasClass 'align-bottom'
   $grid.imagesLoaded ->
     $grid.masonry

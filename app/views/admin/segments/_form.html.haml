@@ -1,6 +1,40 @@
-.segment-form{class: @segment.template}
-  = bootstrap_form_for [:admin, @segment], remote: true, layout: :vertical do |f|
-    = render partial: "admin/#{@segment.to_partial_path}", locals: {f: f}
-    %fieldset.actions
+.segment-form{class: segment.template}
+  = bootstrap_form_for [:admin, segment], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+    %fieldset
+      = f.select :template, Segment.template_options
+    - unless segment.edit_in_place?
+      = render partial: "admin/#{segment.to_partial_path}", object: segment, as: :segment, locals: {f: f}
+    %hr
+    %fieldset
+      = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
       = f.form_group do
-        = f.primary t('helpers.submit.segment.update', template: @segment.human_attribute_value(:template)), class: 'btn btn-primary btn-block'
+        = f.check_box :jumbotron
+      .form-group
+        = f.label col(Segment, :alignment)
+        .btn-group{data: {toggle: 'buttons'}}
+          - Segment.alignment_options.each do |title, alignment|
+            %label.btn.btn-default{class: segment.alignment == alignment && 'active'}
+              = f.radio_button_without_bootstrap :alignment, alignment
+              = title
+      .form-group
+        = f.label col(Segment, :inset)
+        .btn-group{data: {toggle: 'buttons'}}
+          - Segment.inset_options.each do |title, inset|
+            %label.btn.btn-default{class: segment.inset == inset && 'active'}
+              = f.radio_button_without_bootstrap :inset, inset
+              = title
+      = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated')}
+      .form-group
+        = f.label col(Segment, :velocity)
+        .btn-group{data: {toggle: 'buttons'}}
+          - Segment.velocity_options.each do |title, velocity|
+            %label.btn.btn-default{class: segment.velocity == velocity && 'active'}
+              = f.radio_button_without_bootstrap :velocity, velocity
+              = title
+
+:coffee
+  $('#segment_template').selectize()
+  $('#segment_shape').selectize
+    allowEmptyOption: true
+  $('#segment_animation').selectize
+    allowEmptyOption: true

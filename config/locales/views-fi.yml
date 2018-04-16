@@ -226,10 +226,10 @@ fi:
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     segments:
-      settings:
+      form:
         fluid_ratio: sisällön mukaan
         not_animated: ei animaatiota
-      segment_nav:
+      settings:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     shipments:

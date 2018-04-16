@@ -3,7 +3,7 @@
 - products = resource.is_a?(Category) && resource.products.visible.sorted(category.product_scope.presence)
 - swiper = category.grid_columns == '1'
 
-.segment-content.category{id: segment_content_id(category, context)}
+.segment-content.category{id: dom_id(category)}
   - if category.header.present?
     .page-header
       %h1= category.header
@@ -28,14 +28,14 @@
 - if swiper
   :coffee
     jQuery ->
-      $segment = $('##{segment_content_id(category, context)}')
+      $segment = $('##{dom_id(category)}')
       new Swiper $segment.find('.swiper-container'),
         autoplay:
           delay: 3000
           disableOnInteraction: false
 - elsif category.masonry?
   :coffee
-    $grid = $('##{segment_content_id(category, context)}').find '.grid'
+    $grid = $('##{dom_id(category)}').find '.grid'
     $grid.imagesLoaded ->
       $grid.masonry
         itemSelector: '.grid-item'

@@ -4,9 +4,9 @@ class Admin::SegmentsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :update, :modify, :destroy]
+  before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :destroy]
 
-  authority_actions modify: 'update', reorder: 'update'
+  authority_actions settings: 'update', modify: 'update', reorder: 'update'
 
   # No layout, this controller never renders HTML.
 
@@ -19,6 +19,13 @@ class Admin::SegmentsController < ApplicationController
 
   # GET /admin/segments/1/edit.js
   def edit
+    authorize_action_for @segment, at: current_store
+
+    respond_to :js
+  end
+
+  # GET /admin/segments/1/settings.js
+  def settings
     authorize_action_for @segment, at: current_store
 
     respond_to :js
@@ -49,13 +56,18 @@ class Admin::SegmentsController < ApplicationController
 
     respond_to do |format|
       if @segment.update(segment_params)
-        format.js
+        format.js { render :update }
       else
-        format.js { render json: @segment.errors, status: :unprocessable_entity }
+        format.js { render :rollback }
       end
     end
   end
-  alias_method :modify, :update
+
+  # PATCH/PUT /admin/segments/1/modify.js
+  def modify
+    @segment.update(segment_params)
+    respond_to :js
+  end
 
   # POST /admin/columns/1/segments/reorder
   def reorder

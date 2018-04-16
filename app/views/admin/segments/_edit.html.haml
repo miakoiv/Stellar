@@ -1,16 +1,8 @@
-- form = capture :segment_form do
-  = render partial: 'form'
+= link_to icon('close'), admin_segment_path(segment), remote: true, class: 'panel-close'
 
-= link_to icon('close'), admin_segment_path(@segment), remote: true, class: 'panel-close'
-
-= yield :segment_content
-
-- if content_for?(:segment_head)
-  .segment-head
-    = yield :segment_head
-
-= form
-
-- if content_for?(:segment_tail)
-  .segment-tail
-    = yield :segment_tail
+.segment-form{class: segment.template}
+  = bootstrap_form_for [:admin, segment], remote: true, layout: :vertical do |f|
+    = render partial: "admin/#{segment.to_partial_path}", object: segment, as: :segment, locals: {f: f}
+    %fieldset.actions
+      = f.form_group do
+        = f.primary t('helpers.submit.segment.update', template: segment.human_attribute_value(:template)), class: 'btn btn-primary btn-block'

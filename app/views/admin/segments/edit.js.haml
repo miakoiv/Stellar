@@ -1,23 +1,18 @@
 var $segment = $("##{dom_id(@segment)}");
-var $content = $segment.find('.segment-content');
 $('#section-list > .section-list-item .segment').removeClass('active').addClass('disabled');
 $segment.removeClass('disabled').addClass('active');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
-$('#layout-panel').trigger('sticky_kit:detach');
-$('#layout-panel').remove();
-var $panel = $('<div>', {id: 'layout-panel'});
+$('#content-panel').remove();
+$('#side-panel').removeClass('open');
+var $panel = $('<div>', {id: 'content-panel'});
 $panel.hide();
-$panel.html("#{j render partial: 'admin/segments/edit'}");
+$panel.html("#{j render partial: 'admin/segments/edit', object: @segment, as: :segment}");
 $panel.initialize();
-- if @segment.edit_in_place?
-  $panel.appendTo($('body'));
-  $panel.offset($content.offset());
-  - if @segment.jumbotron?
-    $panel.addClass('jumbotron');
-  $panel.css({'width': $content.css('width')});
-  $panel.show();
-- else
-  $panel.appendTo($('#content-wrap'));
-  $panel.show();
-  $panel.imagesLoaded(function () { $panel.stick_in_parent({offset_top: 200, spacer: false}); });
+var $content = $segment.find('.segment-content');
+$panel.appendTo($('body'));
+$panel.offset($content.offset());
+- if @segment.jumbotron?
+  $panel.addClass('jumbotron');
+$panel.css({'width': $content.css('width')});
+$panel.show();

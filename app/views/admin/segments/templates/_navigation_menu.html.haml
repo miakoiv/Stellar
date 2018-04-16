@@ -1,18 +1,17 @@
 %fieldset
-  .row
-    .col-sm-8
-      = f.hidden_field :resource_type, value: 'Page'
-      = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: true}, {class: 'selectize'}
-    .col-sm-4
-      .form-group
-        = f.label col(Segment, :inverse)
-        .btn-group.btn-group-justified{data: {toggle: 'buttons'}}
-          %label.btn.btn-default{class: @segment.inverse? || 'active'}
-            = f.radio_button_without_bootstrap :inverse, 0
-            = icon('sticky-note-o')
-          %label.btn.btn-default{class: @segment.inverse? && 'active'}
-            = f.radio_button_without_bootstrap :inverse, 1
-            = icon('sticky-note')
-  .row
-    .col-sm-12
-      = f.text_field :header
+  = f.hidden_field :resource_type, value: 'Page'
+  = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: blank}, {class: 'selectize'}
+  .form-group
+    = f.label col(Segment, :inverse)
+    .btn-group{data: {toggle: 'buttons'}}
+      %label.btn.btn-default{class: segment.inverse? || 'active'}
+        = f.radio_button_without_bootstrap :inverse, 0
+        = icon('sticky-note-o')
+      %label.btn.btn-default{class: segment.inverse? && 'active'}
+        = f.radio_button_without_bootstrap :inverse, 1
+        = icon('sticky-note')
+  = f.text_field :header
+
+:coffee
+  $('#segment_resource_id').selectize
+    allowEmptyOption: true
