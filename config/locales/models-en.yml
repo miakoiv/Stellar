@@ -487,6 +487,7 @@ en:
         disable_shipment_transfers: No stock transfers for shipments
         tracking_code: Google Analytics key
         maps_api_key: Google Maps key
+        facebook_access_token: Facebook access token
         facebook_pixel_id: Facebook Pixel ID
         tawkto_site_id: tawk.to site
         pbw_api_key: API key

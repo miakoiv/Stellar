@@ -17,6 +17,7 @@ class Store < ActiveRecord::Base
     :disable_shipment_transfers, # boolean, disable transfers for shipments
     :tracking_code,   # Google Analytics code
     :maps_api_key,    # Google Maps API key
+    :facebook_access_token,  # Facebook API key
     :facebook_pixel_id, # Facebook Pixel id
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key

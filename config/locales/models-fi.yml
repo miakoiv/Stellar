@@ -487,6 +487,7 @@ fi:
         disable_shipment_transfers: Ei varastosiirtoja toimituksille
         tracking_code: Google Analytics -koodi
         maps_api_key: Google Maps -avain
+        facebook_access_token: Facebook-rajapinta-avain
         facebook_pixel_id: Facebook-pikselitunnus
         tawkto_site_id: tawk.to -tunnus
         pbw_api_key: Rajapinta-avain

@@ -126,6 +126,9 @@ gem 'stickykit-rails'
 #  Making HTML emails comfortable for the Rails rockstars
 gem 'roadie-rails'
 
+# Facebook integration
+gem 'koala'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

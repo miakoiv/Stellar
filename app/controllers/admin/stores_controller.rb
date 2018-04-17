@@ -80,8 +80,9 @@ class Admin::StoresController < ApplicationController
       params.require(:store).permit(
         :portal, :name, :locale, :country_code, :shipping_origin,
         :admit_guests, :disable_mail, :disable_shipment_transfers,
-        :tracking_code, :maps_api_key, :facebook_pixel_id, :tawkto_site_id,
-        :pbw_api_key, :pbw_private_key,
+        :tracking_code, :maps_api_key,
+        :facebook_access_token, :facebook_pixel_id,
+        :tawkto_site_id, :pbw_api_key, :pbw_private_key,
         :quotation_template_id,
         :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :order_sequence,
