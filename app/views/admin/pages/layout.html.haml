@@ -32,3 +32,6 @@
 
   $(document).on 'imageable:added imageable:removed imageable:reordered', ->
     $('#editor-panel').find('form.triggered').trigger 'submit.rails'
+
+  $('#content-wrap').on 'click', ->
+    $('#side-panel').removeClass 'open'

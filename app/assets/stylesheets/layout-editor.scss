@@ -24,7 +24,12 @@
 
 #side-panel .panel-toggle {
   margin-top: 10px;
-  margin-bottom: 10px;
+  @include clearfix;
+
+  .btn {
+    border: 0;
+    font-size: 24px;
+  }
 }
 #side-panel .inner-wrap {
   padding-left: 15px;
