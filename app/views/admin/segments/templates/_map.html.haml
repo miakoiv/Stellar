@@ -1,7 +1,10 @@
 %fieldset
   = f.text_field :map_location
+  = f.form_group do
+    = f.check_box :map_marker
   .row
     .col-sm-6
-      = f.text_field :map_zoom
+      = f.number_field :map_zoom
     .col-sm-6
-      = f.text_field :min_height, append: 'em', class: 'text-right'
+      = f.number_field :min_height, append: 'em', class: 'text-right'
+  ~ f.text_area :map_theme

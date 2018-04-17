@@ -107,7 +107,7 @@ class Admin::SegmentsController < ApplicationController
         :body, :header, :subhead, :url,
         :min_height, :grid_columns, :masonry, :image_sizing,
         :max_items, :product_scope, :show_more,
-        :map_location, :map_zoom,
+        :map_location, :map_marker, :map_zoom, :map_theme,
         :inverse, :jumbotron,
         :animation, :velocity
       )

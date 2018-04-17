@@ -434,7 +434,9 @@ en:
         show_more: Link to further content
         product_scope: Product sorting
         map_location: Location address
+        map_marker: Show location marker
         map_zoom: Map zoom
+        map_theme: Theme definition
         url: Content URL
         thumbnail_size: Slide size
         animation: Animated entry

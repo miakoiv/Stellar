@@ -434,7 +434,9 @@ fi:
         show_more: Linkki lisäsisältöön
         product_scope: Tuotteiden järjestys
         map_location: Sijainnin osoite
+        map_marker: Näytä sijainti kartalla
         map_zoom: Kartan koko
+        map_theme: Teemamääritykset
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         animation: Animoitu esittely
