@@ -426,6 +426,14 @@
   .navmenu { width: 100%; }
 }
 
+.segment-content.facebook_feed {
+  .post { @extend .panel, .panel-default; }
+  .post .header { @extend .panel-heading; }
+  .post .timestamp { @extend .pull-right; }
+  .post .body { @extend .panel-body; }
+  .post .picture img { @extend .img-responsive; }
+}
+
 
 /*
  * Multicolumn content

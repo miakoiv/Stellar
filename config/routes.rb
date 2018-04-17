@@ -70,6 +70,9 @@ Rails.application.routes.draw do
   get '/front', to: 'store#front', as: :front
   get '/cart',  to: 'store#cart',  as: :cart
 
+  # Koala actions
+  get 'koala/feed'
+
   # If we get here, the url is seen as a slug of a page. If the page
   # is internal, its slug will match one of the above routes.
   get '/:slug', to: 'store#show_page', as: :show_page, slug: /[a-z0-9_-]+/

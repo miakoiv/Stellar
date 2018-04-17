@@ -17,6 +17,7 @@ class Segment < ActiveRecord::Base
     :map_marker,      # flag to display the location marker
     :map_zoom,        # zoom factor of google map segments
     :map_theme,       # map theme as a JS snippet
+    :facebook_page,   # page id for facebook feeds
     :inverse,         # flag to invert colors in navigation menu segments
     :jumbotron,       # flag to apply the jumbotron class to segment contents
     :animation,       # animation applied to the segment via AniView
@@ -74,6 +75,7 @@ class Segment < ActiveRecord::Base
     product_feature: 22,
     promotion_feature: 23,
     department_feature: 24,
+    facebook_feed: 30,
     navigation_menu: 50,
     raw: 99,
   }

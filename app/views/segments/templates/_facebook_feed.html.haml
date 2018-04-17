@@ -1,0 +1,19 @@
+.segment-content.facebook_feed{id: dom_id(facebook_feed)}
+  .feed-container.row{class: "columns-#{facebook_feed.grid_columns || 3}", data: {page: facebook_feed.facebook_page, items: facebook_feed.max_items.presence || 10}}
+    = render partial: 'segments/placeholders/facebook_feed'
+
+- if facebook_feed.facebook_page.present?
+  :coffee
+    $container = $('##{dom_id(facebook_feed)} > .feed-container')
+    $.ajax
+      url: '#{koala_feed_path}'
+      data: $container.data()
+      success: (response) ->
+        $container.html response
+        $container.imagesLoaded ->
+          console.log "Enabling masonry on #{$container}"
+          $container.masonry
+            itemSelector: '.feed-item'
+            columnWidth: '.feed-item'
+            percentPosition: true
+            #horizontalOrder: true

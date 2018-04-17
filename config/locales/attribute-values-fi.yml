@@ -139,6 +139,7 @@ fi:
           product_feature: tuotemainos
           promotion_feature: kampanjamainos
           department_feature: osastomainos
+          facebook_feed: Facebook-päivitykset
           navigation_menu: sivuvalikko
           raw: ʜᴛᴍʟ-osio
         alignment:

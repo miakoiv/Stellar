@@ -1,0 +1,8 @@
+.feed-item
+  .post
+    .header
+      = icon('facebook-official')
+      %span.timestamp= Time.parse(post['created_time']).to_formatted_s(:short)
+    .picture= image_tag post['full_picture']
+    .body
+      %p= post['message']
