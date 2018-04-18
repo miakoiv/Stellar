@@ -63,11 +63,15 @@ class Transfer < ActiveRecord::Base
     true
   end
 
-  # Loads the given order items into the transfer.
+  # Loads the given order items into the transfer. To keep track of
+  # inventory during the load, matching inventory items are preloaded
+  # and updated by each #load_item! call.
   def load!(order_items)
     transaction do
+      products = order_items.map(&:product)
+      stock = source.inventory_items.online.for(products)
       order_items.each do |order_item|
-        load_item!(order_item)
+        load_item!(order_item, stock)
       end
     end
   end
@@ -103,28 +107,34 @@ class Transfer < ActiveRecord::Base
   end
 
   private
-    # Loads a single order item into the transfer as one or more
-    # transfer items. If the order item specifies a lot code, it will be
-    # used for a single transfer item. Otherwise the amount of product is
-    # found from the source inventory starting from oldest stock.
-    def load_item!(order_item)
+    # Loads a single order item from given stock into the transfer
+    # as one or more transfer items. Updates the stock accordingly.
+    def load_item!(order_item, stock)
+      stock_items = stock.select { |item| item.product == order_item.product }
+      return false if stock_items.none?
+
+      # Ordering by lot code selects inventory item by that code.
       if order_item.lot_code.present? &&
-        inventory_item = source.item_by_product_and_code(
-          order_item.product,
-          order_item.lot_code
-        )
-        return create_item_from(order_item, order_item.lot_code, inventory_item.expires_at)
+        item = stock_items.find { |item| order_item.lot_code == item.code }
+
+        item.reserved += order_item.amount
+        return create_item_from(order_item, order_item.lot_code, item.expires_at)
       end
 
       amount = order_item.amount_pending
-      source.inventory_items.for(order_item.product).online.each do |item|
-        if item.available >= amount
+      stock_items.each do |item|
+        all = item.available
+        next if all <= 0
+
+        if amount <= all
           # This inventory item satisfies the amount, we're done.
+          item.reserved += amount
           return create_item_from(order_item, item.code, item.expires_at, amount)
         else
           # Load all of this item and continue with the remaining amount.
-          create_item_from(order_item, item.code, item.expires_at, item.available)
-          amount -= item.available
+          item.reserved += all
+          create_item_from(order_item, item.code, item.expires_at, all)
+          amount -= all
         end
       end
     end
