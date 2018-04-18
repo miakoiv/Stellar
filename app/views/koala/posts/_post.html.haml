@@ -5,4 +5,4 @@
       %span.timestamp= l(post.created_at, format: :long)
     .picture= image_tag post.picture
     .body
-      %p= post.message
+      %p= auto_link post.message, html: {target: '_blank'}

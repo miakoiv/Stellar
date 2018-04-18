@@ -6,6 +6,8 @@
 class Koala::Post
 
   include ActiveModel::Model
+  include ActionView::Helpers::TextHelper
+  require 'rails_rinku'
 
   attr_accessor :message, :picture, :link, :type, :created_at
 
