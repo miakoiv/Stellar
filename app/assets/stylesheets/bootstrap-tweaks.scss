@@ -1108,19 +1108,3 @@ fieldset[disabled] .help-block { display: none; }
 }
 .branding .media p { margin: 0; }
 .branding .media p.lead { font-size: $font-size-base; }
-
-
-/*
- * Live chat widget
- */
-.live-chat {
-  position: fixed;
-  pointer-events: none;
-  left: 0;
-  right: 0;
-  bottom: 20px;
-}
-.live-chat .live-chat-toggle {
-  float: right;
-  pointer-events: auto;
-}

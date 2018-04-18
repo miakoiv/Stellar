@@ -1,13 +1,11 @@
 - if current_store.tawkto_site_id.present?
-  .live-chat
-    .container
-      %button.btn.btn-success.btn-sm.btn-round.live-chat-toggle
-        = icon('comment', t('live_chat.title'))
-
-  :coffee
-    $('.live-chat-toggle').on 'click', ->
-      $.magnificPopup.open
-        items: [{src: 'https://tawk.to/chat/#{current_store.tawkto_site_id}/default/?$_tawk_popout=true'}]
-        type: 'iframe'
-        closeBtnInside: false
-        closeOnBgClick: false
+  :javascript
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/#{current_store.tawkto_site_id}/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
