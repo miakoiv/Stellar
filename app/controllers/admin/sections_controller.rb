@@ -14,7 +14,7 @@ class Admin::SectionsController < ApplicationController
   def create
     authorize_action_for Section, at: current_store
     @page = current_store.pages.friendly.find(params[:page_id])
-    @section = @page.sections.build(section_params.merge(priority: @page.sections.count))
+    @section = @page.sections.build(section_params.merge(priority: 1 + @page.sections.maximum(:priority)))
 
     respond_to do |format|
       if @section.save
