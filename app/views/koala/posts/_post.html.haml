@@ -1,7 +1,7 @@
 .feed-item
   .post
     .header
-      = link_to icon('facebook-official', class: 'fa-lg'), post.link
+      = link_to icon('facebook-official', class: 'fa-lg'), post.link, target: '_blank'
       %span.timestamp= l(post.created_at, format: :long)
     .picture= image_tag post.picture
     .body
