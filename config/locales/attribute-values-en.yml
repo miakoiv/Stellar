@@ -10,6 +10,7 @@ en:
           'align-top': top
           'align-middle': middle
           'align-bottom': bottom
+          'align-fill': fill
       group:
         appearance:
           default: gray

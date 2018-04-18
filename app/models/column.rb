@@ -7,7 +7,7 @@ class Column < ActiveRecord::Base
   include Reorderable
 
   #---
-  ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
+  ALIGNMENTS = %w{align-top align-middle align-bottom align-fill}.freeze
 
   #---
   belongs_to :section, touch: true

@@ -10,6 +10,7 @@ fi:
           'align-top': ylös
           'align-middle': keskelle
           'align-bottom': alas
+          'align-fill': täytä
       group:
         appearance:
           default: harmaa

@@ -112,6 +112,9 @@
 .column.align-top { justify-content: flex-start; }
 .column.align-middle { justify-content: center; }
 .column.align-bottom { justify-content: flex-end; }
+.column.align-fill {
+  .segment, .segment-shape, .segment-content-wrap { height: 100%; }
+}
 
 /* Column pivoting on mobile viewports */
 @media (max-width: $screen-xs-max) {
@@ -207,7 +210,7 @@
 /* Aspect ratios */
 .segment-shape.fixed-ratio {
   position: relative;
-  height: 0;
+  height: 0 !important;
   overflow: hidden;
 
   .segment-content-wrap {
