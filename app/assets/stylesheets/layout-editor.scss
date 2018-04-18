@@ -140,16 +140,6 @@
 .section-list-item .segment {
   position: relative;
 
-  &:before {
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid rgba($brand-info, 0.333);
-  }
   .segment-nav {
     position: absolute;
     top: 0;
@@ -175,7 +165,19 @@
       }
     }
   }
-  .segment-content-wrap { pointer-events: none; }
+  .segment-content-wrap {
+    pointer-events: none;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid rgba($brand-info, 0.333);
+    }
+  }
 }
 .section-list-item .segment:hover {
   .segment-content { min-height: 50px; }
