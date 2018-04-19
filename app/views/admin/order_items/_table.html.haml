@@ -8,9 +8,9 @@
         %th.col-xs-1.text-right
           - if order.track_shipments?
             = col(OrderItem, :shipped)
-        %th.col-xs-2.text-right
+        %th.col-xs-2.text-right.zero-width-print
           .hidden-print= col(OrderItem, :subtotal)
-        %th
+        %th.zero-width-print
     %tfoot.hidden-print
       %tr
         %th.visible-print

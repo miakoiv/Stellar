@@ -15,10 +15,10 @@
   %td.text-right{class: order_item.pending_shipping? && 'warning text-warning'}
     - if order_item.track_shipments? && order_item.tangible?
       = order_item.amount_shipped
-  %td.text-right.currency
+  %td.text-right.currency.zero-width-print
     .hidden-print
       = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
-  %td
+  %td.zero-width-print
 
 - if order_item.adjustments.any?
   .hidden-print

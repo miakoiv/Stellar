@@ -110,6 +110,15 @@
     display: none;
   }
 
+  .label, .badge {
+    border: 1px solid #c0c0c0;
+    font-size: 88%;
+    font-weight: 300;
+  }
+
+  th.zero-width-print,
+  td.zero-width-print { width: 0 !important; }
+
   a[href]:after {
     content: "";
   }
