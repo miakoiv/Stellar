@@ -16,8 +16,10 @@
     - if order_item.track_shipments? && order_item.tangible?
       = order_item.amount_shipped
   %td.text-right.currency
-    = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+    .hidden-print
+      = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td
 
 - if order_item.adjustments.any?
-  = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}
+  .hidden-print
+    = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

@@ -1,8 +1,9 @@
 .row
   .col-xs-4
     %dl
-      %dt= col(Order, :completed_at)
-      %dd= @order.completed_at.present? ? l(@order.completed_at.to_date, format: :iso) : '–'
+      - if @order.completed_at.present?
+        %dt= col(Order, :completed_at)
+        %dd= l(@order.completed_at.to_date, format: :iso)
       %dt= col(Order, :customer_name)
       %dd= @order.customer_name
       %dt= col(Order, :customer_email)
@@ -11,12 +12,25 @@
       %dd= @order.customer_phone
   .col-xs-4
     %dl
-      %dt= col(Order, :company_name)
-      %dd= @order.company_name
-      %dt= col(Order, :contact_person)
-      %dd= @order.contact_person
-      %dt= col(Order, :contact_phone)
-      %dd= @order.contact_phone
+      - if @order.company_name.present?
+        %dt= col(Order, :company_name)
+        %dd= @order.company_name
+      - if @order.contact_person.present?
+        %dt= col(Order, :contact_person)
+        %dd= @order.contact_person
+      - if @order.contact_phone.present?
+        %dt= col(Order, :contact_phone)
+        %dd= @order.contact_phone
+    %dl
+      - if @order.your_reference.present?
+        %dt= col(Order, :your_reference)
+        %dd= @order.your_reference
+      - if @order.our_reference.present?
+        %dt= col(Order, :our_reference)
+        %dd= @order.our_reference
+      - if @order.message.present?
+        %dt= col(Order, :message)
+        %dd= @order.message
   .col-xs-4
     %dl
       - if @order.has_shipping?
