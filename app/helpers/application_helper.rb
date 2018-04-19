@@ -126,13 +126,6 @@ module ApplicationHelper
     end
   end
 
-  # Generates a segment content id in a specific context. Scripts that
-  # generate segment content may use this method to target the segment
-  # content either in layout or the layout panel.
-  def segment_content_id(segment, context)
-    [context, segment.template, dom_id(segment)].join '_'
-  end
-
   def column_class(column)
     ['column', column.alignment, column.pivot? && 'pivot'].join ' '
   end
