@@ -133,6 +133,15 @@ p li, ul li, ol li {
   list-style-position: inside;
 }
 
+.badge {
+  display: inline-block;
+  padding: 0 7px;
+  font-size: 88%;
+  text-align: center;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
 /* -------------------------------------
     LINKS & BUTTONS
 ------------------------------------- */
@@ -231,7 +240,6 @@ a {
 .invoice .invoice-items td {
   padding: 5px;
   border-top: 1px solid #eee;
-  border-left: 1px solid #eee;
 }
 .invoice .invoice-items td.nowrap {
   white-space: nowrap;
