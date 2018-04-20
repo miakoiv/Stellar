@@ -1,8 +1,8 @@
 = bootstrap_form_for [:admin, @page], layout: :vertical do |f|
   %fieldset
     ~ f.text_area :content, rows: 40, skip_label: true, class: 'monospace input-sm'
-  %fieldset.actions
-    = f.form_group do
+  %fieldset.actions.fixed
+    .container
       = f.primary
 
 :coffee

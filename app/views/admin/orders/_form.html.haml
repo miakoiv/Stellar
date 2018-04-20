@@ -49,8 +49,8 @@
             = f.select :billing_country_code, Store.country_options, {skip_label: true}, {required: @order.billing_address_required?, class: 'selectize'}
         ~ f.text_area :notes, rows: 7
       - unless locked
-        %fieldset.actions
-          = f.form_group do
+        %fieldset.actions.fixed
+          .container
             = f.primary
 
 :coffee

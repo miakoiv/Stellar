@@ -83,8 +83,8 @@
             = f.select :master_product_id, [], {}, {placeholder: t('.assign_master_product'), class: 'selectize-tall selectize-list-group', data: {products: [@product.master_product].compact, selected: [@product.master_product_id].compact}}
 
       - unless locked
-        %fieldset.actions
-          = f.form_group do
+        %fieldset.actions.fixed
+          .container
             = f.primary
 
 :coffee

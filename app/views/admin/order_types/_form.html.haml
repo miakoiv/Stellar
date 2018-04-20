@@ -33,8 +33,8 @@
           = f.form_group do
             = f.check_box :prepaid_stock
       - unless locked
-        %fieldset.actions
-          = f.form_group do
+        %fieldset.actions.fixed
+          .container
             = f.primary
 
 :coffee

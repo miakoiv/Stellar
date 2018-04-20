@@ -36,8 +36,8 @@
                 = f.text_field_without_bootstrap :billing_city, class: 'form-control'
             = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
       - unless locked
-        %fieldset.actions
-          = f.form_group do
+        %fieldset.actions.fixed
+          .container
             = f.primary
 
 :coffee

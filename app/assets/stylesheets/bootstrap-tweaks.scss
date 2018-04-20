@@ -808,7 +808,7 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
- * Fieldsets in panels, fieldset legend
+ * Fieldsets in panels, fixed fieldsets, fieldset legend
  */
 .panel-body .gap { padding-top: 15px; }
 .panel-body fieldset {
@@ -824,6 +824,17 @@ fieldset[disabled] .help-block { display: none; }
       margin-top: -15px;
     }
   }
+}
+fieldset.fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px $grid-gutter-width;
+  z-index: $zindex-navbar;
+  background-color: $navbar-default-bg;
+
+  .btn { @extend .pull-right; }
 }
 
 

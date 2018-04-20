@@ -13,8 +13,8 @@
             = ff.text_field :description, required: true
             = render partial: @promotion.promotion_handler, locals: {f: ff}
       - unless locked
-        %fieldset.actions
-          = f.form_group do
+        %fieldset.actions.fixed
+          .container
             = f.primary
 
 :coffee

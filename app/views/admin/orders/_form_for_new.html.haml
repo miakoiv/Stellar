@@ -10,9 +10,9 @@
       %hr
       %fieldset
         = render partial: 'customer_fields', locals: {f: f}
-      %fieldset.actions
-        = f.form_group do
-          = f.primary
+        %fieldset.actions.fixed
+          .container
+            = f.primary
 
 :coffee
   $customer_select = $('#order_customer_id').selectize
