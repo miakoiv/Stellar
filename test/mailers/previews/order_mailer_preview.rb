@@ -6,7 +6,7 @@ class OrderMailerPreview < ActionMailer::Preview
 
   [:receipt, :acknowledge, :processing, :confirmation, :shipment, :notification, :cancellation].each do |type|
     define_method type do
-      order = Order.concluded.sample
+      order = Order.concluded.last
       to = order.customer_string
       options = {bcc: true, pricing: true}
       OrderMailer.send(type, order, to, nil, options)
