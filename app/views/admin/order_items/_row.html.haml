@@ -1,12 +1,8 @@
 %tr[order_item]{class: order_item.is_subitem? && 'subrow'}
   %td.visible-print
     %span.badge= order_item_counter + 1
-  %td{colspan: 2}
-    %strong
-      = link_to order_item.product_title, admin_product_path(order_item.product)
-    = order_item.product_subtitle
-    - if order_item.real?
-      %span.badge= order_item.product_codes
+  %td
+    = product_header order_item
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')
@@ -18,7 +14,7 @@
   %td.text-right.currency.zero-width-print
     .hidden-print
       = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
-  %td.zero-width-print
+  %td.actions
 
 - if order_item.adjustments.any?
   .hidden-print

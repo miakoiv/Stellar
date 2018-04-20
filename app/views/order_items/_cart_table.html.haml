@@ -1,4 +1,4 @@
-#cart-table.table-responsive
+#cart-table
   %table.table.table-hover.table-loose
     %caption.text-right
       %em.small= order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')
@@ -6,7 +6,6 @@
       %tr
         %th.col-min.visible-print
         %th= col(OrderItem, :product_title)
-        %th.col-xs-2= col(OrderItem, :product_code)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
         %th.col-xs-1.text-right= col(OrderItem, :price)
         %th.col-xs-1.text-right= col(OrderItem, :subtotal)
@@ -14,11 +13,11 @@
     %tfoot
       %tr.info
         %th.visible-print
-        %th{colspan: 3}
+        %th{colspan: 2}
         %th.text-right= col(Order, :grand_total)
         %th#grand-total.text-right.currency
           = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
-        %th
+        %th.actions
     %tbody
       = render partial: 'order_items/cart_row', collection: order.order_items, as: :order_item
       - if order.adjustments.any?

@@ -1,23 +1,21 @@
-#order-items-table.table-responsive
+#order-items-table
   %table.table.table-hover.table-loose
     %thead
       %tr
         %th.col-min.visible-print
         %th= col(OrderItem, :product_title)
         %th.col-xs-1.text-right= col(OrderItem, :amount)
-        %th.col-min
         %th.col-xs-2.text-right= col(OrderItem, :price)
         %th.col-xs-2.text-right= col(OrderItem, :subtotal)
-        %th.col-min
+        %th.col-min.actions
     %tfoot
       %tr
         %th.visible-print
         %th
-        %th
         %th.text-right{colspan: 2}= col(Order, :grand_total)
         %th.text-right.currency
           = render partial: 'admin/orders/grand_total', object: order, as: :order
-        %th
+        %th.actions
     %tbody
       = render partial: 'admin/order_items/edit_row', collection: order.order_items, as: :order_item
       - if order.adjustments.any?

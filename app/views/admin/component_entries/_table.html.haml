@@ -10,9 +10,10 @@
     %tbody
       = content_tag_for :tr, product.component_entries do |entry|
         %td
-          %strong
-            = link_to entry.component.title, admin_product_path(entry.component), title: entry.component.codes, data: {toggle: 'tooltip'}
-          = entry.component.subtitle
+          .product
+            = link_to entry.component.title, admin_product_path(entry.component)
+            %span.small= entry.component.subtitle
+            .badge= entry.component.codes
         %td.text-right.currency
           - if entry.component.retail_price.present?
             = money entry.component.retail_price

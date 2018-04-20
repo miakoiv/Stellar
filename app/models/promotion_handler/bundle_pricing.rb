@@ -35,7 +35,6 @@ class PromotionHandler
         }.sum
         difference = items_total - bundle_total
         applied = 0.to_money
-        product_titles = bundle.map(&:product).to_sentence
 
         bundle.each_with_index do |item, i|
 
@@ -52,7 +51,7 @@ class PromotionHandler
           discount = Price.new(amount, tax_included, item.tax_rate)
           item.adjustments.create(
             source: promotion,
-            label: "#{promotion.description} (#{product_titles})",
+            label: promotion.description,
             amount: item.price_includes_tax? ? discount.with_tax : discount.sans_tax
           )
         end

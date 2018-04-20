@@ -3,12 +3,11 @@
     %thead
       %tr
         %th= col(Product, :title)
-        %th.col-xs-2= col(Product, :code)
 
     %tbody
       = content_tag_for :tr, product.requisite_entries do |entry|
         %td
-          %strong
+          .product
             = link_to entry.requisite.title, admin_product_path(entry.requisite)
-          = entry.requisite.subtitle
-        %td= entry.requisite.codes
+            %span.small= entry.requisite.subtitle
+            .badge= entry.requisite.codes

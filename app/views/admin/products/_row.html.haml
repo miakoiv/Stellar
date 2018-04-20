@@ -6,11 +6,12 @@
       = image_variant_tag product.cover_image, :icon
     %td
       = link_to edit_admin_product_path(product), remote: true do
-        %strong= product.title
-        = product.subtitle
-    %td
-      = product.codes
-      = icon('star') if product.primary?
+        .product
+          %strong= product.title
+          .badge= product.codes
+          .small
+            = product.subtitle
+            = icon('star') if product.primary?
     %td
       - if product.page.present?
         = icon('file-o', title: col(Product, :has_page), data: {toggle: 'tooltip'})

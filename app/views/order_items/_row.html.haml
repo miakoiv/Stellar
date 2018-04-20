@@ -1,27 +1,19 @@
-= content_tag_for :tr, order_item, class: order_item.is_subitem? ? 'subrow' : nil do
+%tr[order_item]{class: order_item.is_subitem? && 'subrow'}
   %td.visible-print
     %span.badge= order_item_counter + 1
   %td
-    %strong
-      - if order_item.real? && order_item.live?
-        = link_to order_item.product_title, show_product_path(order_item.product)
-      - else
-        = order_item.product_title
-    = order_item.product_subtitle
+    = product_header order_item
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  %td
-    - if order_item.real?
-      = order_item.product_codes
   %td.text-right
     = order_item.amount
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
-  %td
+  %td.actions
 
 - if order_item.adjustments.any?
   = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

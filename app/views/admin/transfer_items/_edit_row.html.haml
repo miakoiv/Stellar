@@ -1,9 +1,5 @@
 %tr[transfer_item]{class: transfer_item.appearance}
-  %td
-    %strong
-      = link_to transfer_item.product.title, admin_product_path(transfer_item.product)
-    = transfer_item.product.subtitle
-    %span.badge= transfer_item.product.code
+  %td= product_header transfer_item
   %td= transfer_item.lot_code
   %td= transfer_item.expires_at
   %td

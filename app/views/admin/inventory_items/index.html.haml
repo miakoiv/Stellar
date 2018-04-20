@@ -21,10 +21,7 @@
       = content_tag_for :tr, @inventory_items do |inventory_item|
         %td= inventory_item.code
         %td= inventory_item.inventory.name
-        %td
-          = link_to admin_product_path(inventory_item.product) do
-            %strong= inventory_item.product.title
-            = inventory_item.product.subtitle
+        %td= product_header inventory_item
         %td.text-right= inventory_item.on_hand
         %td.text-right= inventory_item.reserved
         %td.text-right= inventory_item.pending

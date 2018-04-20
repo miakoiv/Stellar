@@ -16,7 +16,7 @@ $.fn.selectize.product_renderer =
         <span class="small">
           #{if item.customer_code then escape(item.customer_code) else ''}
         </span>
-        <span class="label label-default">
+        <span class="badge">
           #{escape(item.code)}
         </span>
       </div>

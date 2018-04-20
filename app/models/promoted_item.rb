@@ -12,8 +12,10 @@ class PromotedItem < ActiveRecord::Base
 
   #---
   belongs_to :promotion, touch: true
-  belongs_to :product
   delegate :group, to: :promotion
+
+  belongs_to :product
+  delegate :real?, to: :product
 
   #---
   validates :discount_percent,
@@ -60,6 +62,18 @@ class PromotedItem < ActiveRecord::Base
   # Base prices are according to the target group of the promotion.
   def base_price
     product.send(group.price_method)
+  end
+
+  def product_codes
+    product.codes
+  end
+
+  def product_title
+    product.title
+  end
+
+  def product_subtitle
+    product.subtitle
   end
 
   private

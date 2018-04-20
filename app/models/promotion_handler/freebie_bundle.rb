@@ -28,10 +28,9 @@ class PromotionHandler
         break if bundle.size < required_items
         last_item = bundle.last
         promoted_item = promotion.item_from_order_item(last_item)
-        product_titles = bundle.map(&:product).to_sentence
         last_item.adjustments.create(
           source: promoted_item,
-          label: "#{promoted_item.description} (#{product_titles})",
+          label: promoted_item.description,
           amount: (last_item.price || 0.to_money) * discount_percent/-100
         )
       end

@@ -2,16 +2,12 @@
   %td.visible-print
     %span.badge= order_item_counter + 1
   %td
-    %strong
-      = link_to order_item.product_title, admin_product_path(order_item.product)
-    = order_item.product_subtitle
-    - if order_item.real?
-      %span.badge= order_item.product_codes
+    = product_header order_item
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  %td{colspan: 2}
+  %td
     = form_for [:admin, order_item], remote: true,
         html: {class: 'pull-right immediate'} do |f|
       = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1

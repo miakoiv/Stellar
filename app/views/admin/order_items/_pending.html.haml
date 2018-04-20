@@ -12,12 +12,7 @@
         %tbody
           - order.items_pending_shipping.each do |order_item|
             %tr
-              %td
-                %strong
-                  = link_to order_item.product_title, admin_product_path(order_item.product)
-                = order_item.product_subtitle
-                - if order_item.real?
-                  %span.badge= order_item.product_codes
+              %td= product_header order_item
               %td= order_item.lot_code
               %td.text-right= order_item.amount
               %td.text-right.warning.text-warning= order_item.amount_shipped

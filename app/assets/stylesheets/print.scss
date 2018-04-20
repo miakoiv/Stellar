@@ -113,7 +113,7 @@
   .label, .badge {
     border: 1px solid #c0c0c0;
     font-size: 88%;
-    font-weight: 300;
+    font-weight: normal;
   }
 
   th.zero-width-print,
@@ -123,7 +123,7 @@
     content: "";
   }
 
-  .product-actions, .documents {
+  .actions, .product-actions, .documents {
     display: none !important;
   }
 }

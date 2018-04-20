@@ -20,6 +20,18 @@ module ApplicationHelper
     set_meta_tags(og: tags)
   end
 
+  # Product header based on given item, which should respond to
+  # #product, #product_title, #product_subtitle, #product_codes
+  def product_header(item)
+    content_tag(:div, class: 'product') do
+      concat link_to(item.product_title, admin? ? admin_product_path(item.product) : show_product_path(item.product))
+      if item.real?
+        concat content_tag(:span, item.product_codes, class: 'badge')
+      end
+      concat content_tag(:div, item.product_subtitle, class: 'small')
+    end
+  end
+
   def dropdown_toggle
     content_tag :a, data: {toggle: 'dropdown'}, role: 'button', tabindex: 0 do
       yield

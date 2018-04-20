@@ -4,13 +4,18 @@
   %td
     - unless order_item.satisfied?
       = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
-    %strong
+    .product
       - if order_item.real? && order_item.live?
         = link_to order_item.product_title, show_product_path(order_item.product)
+        .badge= order_item.product_codes
       - else
         = order_item.product_title
-    = order_item.product_subtitle
-    = bootstrap_label(order_item, appearance: :primary)
+      = bootstrap_label(order_item, appearance: :primary)
+      .small
+        = order_item.product_subtitle
+        - if order_item.product.vendor.present?
+          = icon('truck')
+          %strong= order_item.product.vendor.name
     - if order_item.product.shipping_notes.present?
       .small
         = icon('info-circle')
@@ -19,13 +24,6 @@
       .small
         = icon('warning')
         = t('store.cart.lead_time_warning', lead_time: order_item.product.lead_time)
-  %td
-    - if order_item.real?
-      = order_item.product_codes
-    - if order_item.product.vendor.present?
-      .small
-        = icon('truck')
-        %strong= order_item.product.vendor.name
   %td.text-right
     = form_for order_item, remote: true, html: {class: 'pull-right immediate'} do |f|
       = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right',

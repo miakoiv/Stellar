@@ -11,6 +11,7 @@ class InventoryItem < ActiveRecord::Base
   #---
   belongs_to :inventory
   belongs_to :product, touch: true
+  delegate :real?, to: :product
 
   has_many :inventory_entries, dependent: :destroy
   accepts_nested_attributes_for :inventory_entries, limit: 1
@@ -55,6 +56,18 @@ class InventoryItem < ActiveRecord::Base
 
   def title
     inventory.name
+  end
+
+  def product_codes
+    product.codes
+  end
+
+  def product_title
+    product.title
+  end
+
+  def product_subtitle
+    product.subtitle
   end
 
   def to_s

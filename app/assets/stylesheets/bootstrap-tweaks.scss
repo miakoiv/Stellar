@@ -878,6 +878,12 @@ fieldset[disabled] .help-block { display: none; }
 .table .actions {
   @extend .text-right, .no-wrap, .hidden-print;
 }
+.table td .product {
+  a { font-weight: bold; }
+  .badge { margin-left: 0.333em; }
+}
+#cart-table .table { margin-bottom: 0; }
+#cart-table caption { margin: 0 $grid-gutter-width/2; }
 
 
 /*
@@ -1020,53 +1026,6 @@ fieldset[disabled] .help-block { display: none; }
     border-radius: $input-height-small/2;
   }
 }
-
-
-/*
- * Vis.js styles
- */
-.vis-timeline {
-  border: 0;
-  font-size: 12px;
-  line-height: 1.2;
-}
-.vis-timeline .vis-item,
-.vis-timeline .vis-range {
-  font-size: 10px;
-  font-weight: 500;
-  border-radius: $border-radius-base;
-  background-color: $btn-default-bg;
-  color: $btn-default-color;
-  border-color: $btn-default-border;
-
-  &.primary {
-    background-color: $btn-primary-bg;
-    color: $btn-primary-color;
-    border-color: $btn-primary-border;
-  }
-  &.success {
-    background-color: $btn-success-bg;
-    color: $btn-success-color;
-    border-color: $btn-success-border;
-  }
-  &.info {
-    background-color: $btn-info-bg;
-    color: $btn-info-color;
-    border-color: $btn-info-border;
-  }
-  &.warning {
-    background-color: $btn-warning-bg;
-    color: $btn-warning-color;
-    border-color: $btn-warning-border;
-  }
-  &.danger {
-    background-color: $btn-danger-bg;
-    color: $btn-danger-color;
-    border-color: $btn-danger-border;
-  }
-}
-.vis-timeline .item.background { font-weight: normal; }
-.vis-timeline .item.box { border-radius: $border-radius-large !important; }
 
 
 /*
