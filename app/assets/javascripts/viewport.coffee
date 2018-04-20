@@ -1,6 +1,6 @@
 $.fn.extend
   fillViewport: ->
-    $(this).height $(window).height() - $('.layout-container').offset().top
+    $(this).height $(window).height() - $('#main-nav').outerHeight() - $('#page-nav').outerHeight()
 
 @viewportUpdate = ->
   $('.section-content.viewport').each ->
