@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?, :admin?
 
   def current_hostname
     @current_hostname
@@ -169,6 +169,10 @@ class ApplicationController < ActionController::Base
   # exist, shopping is only allowed in the assigned categories.
   def may_shop_at?(category)
     current_group.categories.empty? || current_group.categories.include?(category)
+  end
+
+  def admin?
+    self.class.parent == Admin
   end
 
   private
