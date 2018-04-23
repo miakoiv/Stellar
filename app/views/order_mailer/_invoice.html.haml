@@ -11,7 +11,7 @@
   %tr[order_item]
     %td
       %b= order_item.product_title
-      %span.badge= order_item.product_codes
+      %span.badge= order_item.product_code
       %br
       = order_item.product_subtitle
       - if order_item.product.vendor.present?

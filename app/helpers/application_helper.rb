@@ -21,12 +21,12 @@ module ApplicationHelper
   end
 
   # Product header based on given item, which should respond to
-  # #product, #product_title, #product_subtitle, #product_codes
+  # #product, #product_title, #product_subtitle, #product_code
   def product_header(item)
     content_tag(:div, class: 'product') do
       concat link_to(item.product_title, admin? ? admin_product_path(item.product) : show_product_path(item.product))
       if item.real?
-        concat content_tag(:span, item.product_codes, class: 'badge')
+        concat content_tag(:span, item.product_code, class: 'badge', title: item.product_customer_code, data: {toggle: 'tooltip', placement: 'right'})
       end
       concat content_tag(:div, item.product_subtitle, class: 'small')
     end

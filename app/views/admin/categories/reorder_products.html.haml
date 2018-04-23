@@ -18,7 +18,7 @@
           .product
             %strong= product.title
             %span.small= product.subtitle
-            .badge= product.codes
+            .badge= product.code
         %td
           - if product.icon.present?
             = icon(product.icon, title: product.human_attribute_value(:purpose), data: {toggle: 'tooltip'})

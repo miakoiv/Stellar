@@ -13,7 +13,7 @@
           .product
             = link_to customer_asset.product.title, admin_product_path(customer_asset.product)
             %span.small= customer_asset.product.subtitle
-            .badge= customer_asset.product.codes
+            .badge= customer_asset.product.code
         %td= customer_asset.user
         %td.text-right= customer_asset.amount
         %td.actions

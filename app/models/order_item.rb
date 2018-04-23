@@ -172,14 +172,6 @@ class OrderItem < ActiveRecord::Base
     )
   end
 
-  def product_codes
-    if product_customer_code.present?
-      "#{product_customer_code} ⧸ #{product_code}"
-    else
-      product_code
-    end
-  end
-
   def to_s
     product.title
   end

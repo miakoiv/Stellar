@@ -7,7 +7,7 @@
     .product
       - if order_item.real? && order_item.live?
         = link_to order_item.product_title, show_product_path(order_item.product)
-        .badge= order_item.product_codes
+        .badge= order_item.product_code
       - else
         = order_item.product_title
       = bootstrap_label(order_item, appearance: :primary)

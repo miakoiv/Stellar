@@ -16,6 +16,7 @@ class TransferItem < ActiveRecord::Base
 
   belongs_to :product
   delegate :real?, to: :product
+  delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   #---
   validates :product_id, presence: true
@@ -48,18 +49,6 @@ class TransferItem < ActiveRecord::Base
 
   def customer_code=(val)
     self.product = Product.find_by(customer_code: val)
-  end
-
-  def product_codes
-    product.codes
-  end
-
-  def product_title
-    product.title
-  end
-
-  def product_subtitle
-    product.subtitle
   end
 
   private

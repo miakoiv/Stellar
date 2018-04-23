@@ -4,7 +4,7 @@
     .product
       = link_to entry.component.title, admin_product_path(entry.component)
       %span.small= entry.component.subtitle
-      .badge= entry.component.codes
+      .badge= entry.component.code
   %td.text-right.currency
     - if entry.component.retail_price.present?
       = money entry.component.retail_price
