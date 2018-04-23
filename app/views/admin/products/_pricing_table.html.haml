@@ -1,0 +1,13 @@
+.table-responsive
+  %table#products-table.table.table-hover.table-loose.table-nested
+    %thead
+      %tr
+        %th= col(Product, :title)
+        %th.col-xs-2.text-right= col(Product, :trade_price)
+        %th.col-xs-2.text-right= col(Product, :retail_price)
+    - @products.each do |product|
+      %tbody
+        = render partial: 'admin/products/pricing_row', object: product, as: :product
+        - if product.has_variants?
+          %tbody.subtable
+            = render partial: 'admin/products/pricing_row', collection: product.variants.sorted, as: :product

@@ -146,6 +146,7 @@ Rails.application.routes.draw do
       end
       collection do
         get :query
+        get :pricing
         post :reorder
         post :upload_file
       end

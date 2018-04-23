@@ -2,8 +2,10 @@
   - if current_user.can_create?(Product, at: current_store)
     = link_to new_admin_product_path, class: 'btn btn-primary' do
       = icon('plus', t('.new_product'))
-    %button.btn.btn-default{data: {toggle: 'modal', target: '#products-upload-modal'}}
-      = icon('cloud-upload', t('actions.upload'))
+  = link_to pricing_admin_products_path, class: 'btn btn-default' do
+    = icon('tag', col(Product, :pricing))
+  %button.btn.btn-default{data: {toggle: 'modal', target: '#products-upload-modal'}}
+    = icon('cloud-upload', t('actions.upload'))
   %h1= icon('cube', title(Product, count: 2))
 
 = render partial: 'search'

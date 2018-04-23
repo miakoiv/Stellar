@@ -1,0 +1,18 @@
+%tr[product]{class: product.live? || 'warning text-warning'}
+  %td
+    .product
+      %strong= product.title
+      .badge= product.code
+      .small= product.subtitle
+  %td
+    = form_for [:admin, product], remote: true, html: {class: 'pull-right immediate'} do |f|
+      = hidden_field_tag :pricing, 1
+      .input-group.input-group-sm
+        = f.text_field :trade_price, class: 'form-control text-right', placeholder: humanized_money(product.trade_price), tabindex: 1
+        %span.input-group-addon €
+  %td
+    = form_for [:admin, product], remote: true, html: {class: 'pull-right immediate'} do |f|
+      = hidden_field_tag :pricing, 1
+      .input-group.input-group-sm
+        = f.text_field :retail_price, class: 'form-control text-right', placeholder: humanized_money(product.retail_price), tabindex: 2
+        %span.input-group-addon €

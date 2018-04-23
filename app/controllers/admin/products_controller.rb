@@ -6,7 +6,7 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries, :make_primary]
 
-  authority_actions query: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', duplicate: 'create'
+  authority_actions query: 'read', pricing: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', duplicate: 'create'
 
   layout 'admin'
 
@@ -26,6 +26,11 @@ class Admin::ProductsController < ApplicationController
     @query = {'keyword' => params[:q], live: true}.merge(params)
     @search = ProductSearch.new(search_params)
     @products = @search.results
+  end
+
+  # GET /admin/products/pricing
+  def pricing
+    index
   end
 
   # GET /admin/products/1
@@ -79,12 +84,13 @@ class Admin::ProductsController < ApplicationController
   # PATCH/PUT /admin/products/1.json
   def update
     authorize_action_for @product, at: current_store
+    pricing = params[:pricing].present?
 
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_product_path(@product),
           notice: t('.notice', product: @product) }
-        format.js { flash.now[:notice] = t('.notice', product: @product) }
+        format.js { render pricing ? :pricing : :update }
         format.json { render :show, status: :ok, location: admin_product_path(@product) }
       else
         format.html { render :edit }
