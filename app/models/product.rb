@@ -125,13 +125,17 @@ class Product < ActiveRecord::Base
   # and inventory. Returns the updated product, or nil if it fails.
   # Supported fields:
   # product_code     : required
-  # retail_price     : anything supported by Monetize.parse
+  # trade_price:     : anything supported by Monetize.parse
+  # retail_price     : same as above
   # inventory_amount : targets the first inventory
   def self.update_from_csv_row(store, inventory, row, code)
     product = store.products.where(code: row[:product_code]).first
     return nil if product.nil? || inventory.nil?
 
     begin
+      if row[:trade_price].present?
+        product.update!(trade_price: row[:trade_price].to_money)
+      end
       if row[:retail_price].present?
         product.update!(retail_price: row[:retail_price].to_money)
       end

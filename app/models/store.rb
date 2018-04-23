@@ -26,8 +26,9 @@ class Store < ActiveRecord::Base
     :quotation_template_id, # page reference to quotation boilerplate
     :csv_encoding,         # CSV encoding of uploaded files
     :csv_product_code,     # CSV field headers for product code,
-    :csv_retail_price,     # retail price, and inventory amount
-    :csv_inventory_amount, # in uploaded files
+    :csv_trade_price,      # trade price,
+    :csv_retail_price,     # retail price, and
+    :csv_inventory_amount, # inventory amount
     :order_xml_path,  # where to upload XML files of completed orders
     :shipping_origin, # geolocation-compatible origin for shipping calculations
   ], coder: JSON
@@ -243,6 +244,7 @@ class Store < ActiveRecord::Base
   def csv_headers
     {
       csv_product_code => :product_code,
+      csv_trade_price => :trade_price,
       csv_retail_price => :retail_price,
       csv_inventory_amount => :inventory_amount
     }

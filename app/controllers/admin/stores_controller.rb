@@ -84,7 +84,8 @@ class Admin::StoresController < ApplicationController
         :facebook_access_token, :facebook_pixel_id,
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
         :quotation_template_id,
-        :csv_encoding, :csv_product_code, :csv_retail_price, :csv_inventory_amount,
+        :csv_encoding, :csv_product_code,
+        :csv_trade_price, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :order_sequence,
         :theme, :detach_menu, :footer_page_id,
         tax_categories_attributes: [

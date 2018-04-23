@@ -497,6 +497,7 @@ fi:
         quotation_template_id: Tarjouksen tekstisisältö
         csv_encoding: Tiedoston merkistö
         csv_product_code: Tuotekoodisarake
+        csv_trade_price: Valmistajan hinta -sarake
         csv_retail_price: Myyntihintasarake
         csv_inventory_amount: Varastosaldosarake
         order_xml_path: Kansion sijainti

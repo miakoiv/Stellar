@@ -497,6 +497,7 @@ en:
         quotation_template_id: Quotation boilerplate
         csv_encoding: Character set
         csv_product_code: Product code field
+        csv_trade_price: Trade price field
         csv_retail_price: Retail price field
         csv_inventory_amount: Inventory field
         order_xml_path: Folder path
