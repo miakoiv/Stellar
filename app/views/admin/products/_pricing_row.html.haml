@@ -2,8 +2,8 @@
   %td
     .product
       %strong= product.title
+      %span.small= product.subtitle
       .badge= product.code
-      .small= product.subtitle
   %td
     = form_for [:admin, product], remote: true, html: {class: 'pull-right immediate'} do |f|
       = hidden_field_tag :pricing, 1
