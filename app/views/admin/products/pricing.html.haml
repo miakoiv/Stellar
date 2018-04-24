@@ -3,7 +3,7 @@
     = icon('chevron-circle-left', t('actions.back'))
   %h1= icon('tag', col(Product, :pricing))
 
-= render partial: 'search'
+= render partial: 'search', locals: {url: pricing_admin_products_path}
 = render partial: 'admin/products/upload_modal'
 
 = render partial: 'admin/products/pricing_table', object: @products, as: :products

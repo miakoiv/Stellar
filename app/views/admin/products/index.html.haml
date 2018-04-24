@@ -8,7 +8,7 @@
     = icon('cloud-upload', t('actions.upload'))
   %h1= icon('cube', title(Product, count: 2))
 
-= render partial: 'search'
+= render partial: 'search', locals: {url: admin_products_path}
 = render partial: 'admin/products/upload_modal'
 
 .row
