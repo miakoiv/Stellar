@@ -192,6 +192,9 @@ en:
     products:
       index:
         new_product: New product
+        pricing: Pricing tool
+      pricing:
+        no_group: "[No group]"
       show:
         edit_page: Edit page
       search:

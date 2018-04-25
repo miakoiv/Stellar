@@ -135,7 +135,7 @@ Rails.application.routes.draw do
       resources :images, shallow: true
       resources :documents, shallow: true
       resources :product_properties, shallow: true
-      resources :alternate_prices, shallow: true
+      resources :alternate_prices
       resources :iframes, shallow: true
       resources :inventory_items, shallow: true
       resources :component_entries, shallow: true do
@@ -146,13 +146,14 @@ Rails.application.routes.draw do
       end
       collection do
         get :query
-        get :pricing
+        get 'pricing(/:group_id)', action: :pricing, as: :pricing
         post :reorder
         post :upload_file
       end
       member do
         post :add_requisite_entries
         post :duplicate
+        patch 'set_price(/:group_id)', action: :set_price, as: :set_price
         patch :make_primary
       end
     end

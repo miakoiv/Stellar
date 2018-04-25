@@ -4,9 +4,10 @@ class Admin::ProductsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_product,  only: [:show, :edit, :update, :destroy, :duplicate, :add_requisite_entries, :make_primary]
+  before_action :set_product,  only: [:show, :edit, :update, :destroy, :set_price, :duplicate, :add_requisite_entries, :make_primary]
+  before_action :set_group, only: [:pricing, :set_price]
 
-  authority_actions query: 'read', pricing: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', duplicate: 'create'
+  authority_actions query: 'read', pricing: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', set_price: 'update', duplicate: 'create'
 
   layout 'admin'
 
@@ -26,11 +27,6 @@ class Admin::ProductsController < ApplicationController
     @query = {'keyword' => params[:q], live: true}.merge(params)
     @search = ProductSearch.new(search_params)
     @products = @search.results
-  end
-
-  # GET /admin/products/pricing
-  def pricing
-    index
   end
 
   # GET /admin/products/1
@@ -84,16 +80,35 @@ class Admin::ProductsController < ApplicationController
   # PATCH/PUT /admin/products/1.json
   def update
     authorize_action_for @product, at: current_store
-    pricing = params[:pricing].present?
 
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_product_path(@product),
           notice: t('.notice', product: @product) }
-        format.js { render pricing ? :pricing : :update }
+        format.js { flash.now[:notice] = t('.notice', product: @product) }
         format.json { render :show, status: :ok, location: admin_product_path(@product) }
       else
         format.html { render :edit }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /admin/products/pricing(/1)
+  def pricing
+    index
+  end
+
+  # PATCH/PUT /admin/products/1/set_price(/2)
+  # Sets a price on the product, optionally in a group context to
+  # have the view include the alternate price column when needed.
+  def set_price
+    authorize_action_for @product, at: current_store
+
+    respond_to do |format|
+      if @product.update(product_params)
+        format.js { render :set_price }
+      else
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
@@ -153,6 +168,10 @@ class Admin::ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = current_store.products.friendly.find(params[:id])
+    end
+
+    def set_group
+      @group = current_store.groups.find_by(id: params[:group_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

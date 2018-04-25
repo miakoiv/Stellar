@@ -1,2 +1,3 @@
 $('#alternate-prices-tbody').html("#{j render partial: 'admin/alternate_prices/edit_tbody', object: @product, as: :product}");
 $("##{dom_id(@alternate_price)}").effect('highlight');
+$("##{dom_id(@product)}").replaceWith("#{j render partial: 'admin/products/pricing_row', object: @product, as: :product}");

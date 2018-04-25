@@ -473,6 +473,7 @@ i.icon {
   > .btn,
   > .dropdown { float: right; }
   > .btn + .btn,
+  > .btn + .dropdown,
   > .dropdown + .btn { margin-right: 8px; }
 }
 .panel-footer { @extend .clearfix; }

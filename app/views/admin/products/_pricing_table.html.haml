@@ -5,6 +5,13 @@
         %th= col(Product, :title)
         %th.col-xs-2.text-right= col(Product, :trade_price)
         %th.col-xs-2.text-right= col(Product, :retail_price)
+        - if @group.present?
+          %th.col-xs-2.text-right
+            = bootstrap_label(@group)
+            = @group.human_attribute_value(:price_base).capitalize
+            - if @group.price_modifier.nonzero?
+              = number_to_signed_percentage(@group.price_modifier, precision: 2, strip_insignificant_zeros: true)
+
     - @products.each do |product|
       %tbody
         = render partial: 'admin/products/pricing_row', object: product, as: :product

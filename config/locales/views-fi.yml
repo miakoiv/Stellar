@@ -172,6 +172,9 @@ fi:
     products:
       index:
         new_product: Uusi tuote
+        pricing: Hinnoittelutyökalu
+      pricing:
+        no_group: "[Ei ryhmää]"
       show:
         edit_page: Muokkaa sivua
       search:

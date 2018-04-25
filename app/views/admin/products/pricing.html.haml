@@ -1,9 +1,25 @@
 .page-header
   = link_to admin_products_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  %h1= icon('tag', col(Product, :pricing))
+  .dropdown
+    %button.btn.btn-default{data: {toggle: 'dropdown'}}
+      - if @group.present?
+        = bootstrap_label(@group)
+      - else
+        = title(Group)
+      %span.caret
+    %ul.dropdown-menu{role: 'menu'}
+      %li{class: @group.nil? && 'active'}
+        = link_to t('.no_group'), pricing_admin_products_path
+      %li.divider
+      - current_store.groups.each do |group|
+        %li{class: group == @group && 'active'}
+          = link_to bootstrap_label(group), pricing_admin_products_path(group)
+  %h1
+    = icon('tag', col(Product, :pricing))
+    %span.small= bootstrap_label(@group)
 
-= render partial: 'search', locals: {url: pricing_admin_products_path}
+= render partial: 'search', locals: {url: pricing_admin_products_path(@group)}
 = render partial: 'admin/products/upload_modal'
 
 = render partial: 'admin/products/pricing_table', object: @products, as: :products
