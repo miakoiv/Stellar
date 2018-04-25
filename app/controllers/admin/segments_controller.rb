@@ -43,7 +43,7 @@ class Admin::SegmentsController < ApplicationController
 
     respond_to do |format|
       if @segment.save
-        format.js { render 'create' }
+        format.js { render :create }
       else
         format.json { render json: @segment.errors, status: :unprocessable_entity }
       end

@@ -17,7 +17,7 @@ class Admin::ComponentEntriesController < ApplicationController
 
     respond_to do |format|
       if @component_entry.update(component_entry_params)
-        format.js { render 'create' }
+        format.js { render :create }
       else
         format.json { render json: @component_entry.errors, status: :unprocessable_entity }
       end

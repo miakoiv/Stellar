@@ -64,7 +64,7 @@ class CheckoutController < ApplicationController
     respond_to do |format|
       if @shipment.save
         @order.apply_shipping_cost!(@shipment)
-        format.js { render 'ship' }
+        format.js { render :ship }
       else
         head :bad_request
       end

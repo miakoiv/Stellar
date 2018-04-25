@@ -14,7 +14,7 @@ class Admin::AssetEntriesController < ApplicationController
 
     respond_to do |format|
       if @asset_entry.save
-        format.js { render 'create' }
+        format.js { render :create }
       else
         format.json { render json: @asset_entry.errors, status: :unprocessable_entity }
       end

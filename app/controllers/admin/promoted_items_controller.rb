@@ -27,9 +27,9 @@ class Admin::PromotedItemsController < ApplicationController
       if @promoted_item.valid?
         @promoted_item.save
         @promoted_item.reload
-        format.js { render 'update' }
+        format.js { render :update }
       else
-        format.js { render 'rollback' }
+        format.js { render :rollback }
       end
     end
   end
