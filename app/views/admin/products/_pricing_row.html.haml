@@ -18,7 +18,7 @@
         %span.input-group-addon €
   - if @group.present?
     %td
-      = form_for [:admin, product, product.alternate_prices.where(group: @group).first_or_initialize], remote: true, html: {class: 'pull-right immediate'} do |f|
+      = form_for [:admin, product, product.alternate_prices.where(group: @group).first_or_initialize], remote: true, namespace: dom_id(product), html: {class: 'pull-right immediate'} do |f|
         = f.hidden_field :group_id, value: @group.id
         .input-group.input-group-sm
           = f.text_field :price, class: 'form-control text-right', placeholder: humanized_money(product.send(@group.price_method))
