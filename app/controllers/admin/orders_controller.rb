@@ -91,6 +91,7 @@ class Admin::OrdersController < ApplicationController
 
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.address_to_customer
+    @order.includes_tax = @order.source.price_tax_included?
     new_customer = @order.customer.new_record?
 
     @group = current_store.groups.find(order_params[:group_id])
