@@ -14,11 +14,13 @@ class Admin::AlternatePricesController < ApplicationController
     @alternate_price = @product.alternate_prices.find_or_initialize_by(
       group: @group
     )
+    @alternate_price.assign_attributes(alternate_price_params)
+
     respond_to do |format|
-      if @alternate_price.update(alternate_price_params)
+      if @alternate_price.save
         format.js { render :create }
       else
-        format.json { render json: @alternate_price.errors, status: :unprocessable_entity }
+        format.js { render :error }
       end
     end
   end
@@ -35,7 +37,7 @@ class Admin::AlternatePricesController < ApplicationController
       elsif @alternate_price.save
         format.js { render :update }
       else
-        format.json { render json: @alternate_price.errors, status: :unprocessable_entity }
+        format.js { render :error }
       end
     end
   end
