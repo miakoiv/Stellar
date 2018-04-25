@@ -299,11 +299,14 @@ en:
         new_transfer: New stock transfer
       show:
         complete: Complete
+        print_delivery_note: Print delivery note
       new:
         new_transfer: New stock transfer
       edit:
         add_transfer_items: Add items to transfer
         barcode: Scan a barcode here
+      headers:
+        delivery_note: Delivery note
     users:
       index:
         new_user: New user

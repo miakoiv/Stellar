@@ -1,4 +1,4 @@
-.page-header
+.page-header.hidden-print
   = link_to admin_transfers_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(@transfer, at: current_store)
@@ -7,11 +7,16 @@
     - if @transfer.feasible?
       = link_to complete_admin_transfer_path(@transfer), class: 'btn btn-warning', method: :patch do
         = icon('cogs', t('.complete'))
-  = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+  - if @transfer.complete?
+    = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
   %h1
     = icon('retweet', title(Transfer))
     - if @transfer.complete?
       %span.small= l(@transfer.completed_at.to_date, format: :iso)
+
+- if @transfer.complete?
+  .visible-print.compact
+    = render partial: 'headers'
 
 .row
   .col-md-5

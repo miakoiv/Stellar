@@ -279,11 +279,14 @@ fi:
         new_transfer: Uusi varastosiirto
       show:
         complete: Suorita
+        print_delivery_note: Tulosta lähete
       new:
         new_transfer: Uusi varastosiirto
       edit:
         add_transfer_items: Lisää siirtorivejä
         barcode: Skannaa viivakoodi tähän
+      headers:
+        delivery_note: Lähete
     users:
       index:
         new_user: Uusi käyttäjä
