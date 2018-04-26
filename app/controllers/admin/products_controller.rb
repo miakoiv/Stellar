@@ -97,6 +97,7 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products/pricing(/1)
   def pricing
     index
+    @appraiser = Appraiser::Product.new(@group)
   end
 
   # PATCH/PUT /admin/products/1/set_price(/2)

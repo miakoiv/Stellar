@@ -17,6 +17,11 @@ module Appraiser
       final_price(product)
     end
 
+    # Base price modified for group, used for pricing.
+    def for_pricing(product)
+      base_price(product).modify!(group.price_modifier)
+    end
+
     # Price used for display purposes, including any aggregated
     # component prices for bundle or composite products.
     # Returns a tuple of final price, regular price, where the latter
