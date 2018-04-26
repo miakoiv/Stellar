@@ -172,7 +172,12 @@ class Order < ActiveRecord::Base
 
   def assign_number!
     Order.with_advisory_lock('order_numbering') do
-      current_max = store.orders.complete.maximum(:number).presence || store.order_sequence.presence || 0
+      completed_orders = store.orders.complete
+      current_max = if completed_orders.any?
+        completed_orders.order('CAST(number AS UNSIGNED) DESC').first.number
+      else
+        store.order_sequence.presence || 0
+      end
       update(number: current_max.succ, completed_at: Time.current)
     end
   end
