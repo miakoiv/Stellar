@@ -520,6 +520,37 @@ i.icon {
 
 
 /*
+ * Button toggles with more contrast
+ */
+[data-toggle="buttons"] {
+  > .btn,
+  > .btn-group > .btn {
+    &.btn-default {
+      @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+      &.active {
+        color: $btn-primary-color;
+        background-color: $btn-primary-bg;
+      }
+    }
+    &.btn-success {
+      @include button-variant($btn-success-bg, $btn-default-bg, $btn-success-border);
+      &.active {
+        color: $btn-success-color;
+        background-color: $btn-success-bg;
+      }
+    }
+    &.btn-primary {
+      @include button-variant($btn-primary-bg, $btn-default-bg, $btn-primary-border);
+      &.active {
+        color: $btn-primary-color;
+        background-color: $btn-primary-bg;
+      }
+    }
+  }
+}
+
+
+/*
  * Image boxes of various sizes, with image centered inside
  */
 .box-matchbox {
@@ -836,7 +867,13 @@ fieldset.fixed {
   z-index: $zindex-navbar;
   background-color: $navbar-default-bg;
 
-  .btn { @extend .pull-right; }
+  .container {
+    display: flex;
+    justify-content: flex-end;
+
+    > .btn,
+    > .btn-group { margin-left: 8px; }
+  }
 }
 
 
