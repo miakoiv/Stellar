@@ -65,8 +65,9 @@ class Order < ActiveRecord::Base
   # created from scratch with nested customer data.
   attr_accessor :group_id
 
-  # This attribute allows admins to manually complete an order.
-  attr_accessor :is_complete
+  # This attribute allows admins to finalize an order,
+  # both completing and approving it at once.
+  attr_accessor :is_final
 
   #---
   # Approve the order when approved_at first gets a value.
@@ -162,10 +163,10 @@ class Order < ActiveRecord::Base
 
   # Completing an order assigns it a number, archives it, sends
   # order receipt/acknowledge, and triggers an XML export job.
-  def complete!
+  def complete!(acknowledge = true)
     assign_number!
     archive!
-    email(has_payment? ? :receipt : :acknowledge, customer_string)
+    email(has_payment? ? :receipt : :acknowledge, customer_string) if acknowledge
     export_xml
   end
 
@@ -269,14 +270,6 @@ class Order < ActiveRecord::Base
   end
 
   private
-    # Perform XML export if specified by order type, and
-    # store settings have a path defined.
-    def export_xml
-      if order_type.is_exported? && store.order_xml_path.present?
-        OrderExportJob.perform_later(self, store.order_xml_path)
-      end
-    end
-
     # Approving an order prepares its initial transfer by creating it
     # attached to the initial shipment, which in turn is created if needed.
     # The appropriate parties are sent email notifications.
@@ -306,6 +299,14 @@ class Order < ActiveRecord::Base
       OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
       true
+    end
+
+    # Perform XML export if specified by order type, and
+    # store settings have a path defined.
+    def export_xml
+      if order_type.is_exported? && store.order_xml_path.present?
+        OrderExportJob.perform_later(self, store.order_xml_path)
+      end
     end
 end
 

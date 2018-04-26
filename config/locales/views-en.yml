@@ -172,8 +172,8 @@ en:
         add_order_items: Add items to this order
         barcode: Scan a barcode here
       form:
-        approved_at_help: Date when the order was received and approved.
-        concluded_at_help: Date when the order was shipped and archived.
+        approved_at_help: Customer information is correct and the order contents are final.
+        concluded_at_help: Order has been shipped in full and is ready for archival.
       headers:
         delivery_note: Delivery note
         quotation: Quotation

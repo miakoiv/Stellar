@@ -118,8 +118,11 @@ class Admin::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
-        @order.complete! if should_complete?
-        format.html { redirect_to admin_order_path(@order),
+        if should_finalize?
+          @order.complete!(false)
+          @order.update(approved_at: Date.current)
+        end
+        format.html { redirect_to edit_admin_order_path(@order),
           notice: t('.notice', order: @order) }
         format.json { render :show, status: :ok, location: admin_order_path(@order) }
       else
@@ -197,8 +200,8 @@ class Admin::OrdersController < ApplicationController
       current_store.groups.not_including(current_store.default_group)
     end
 
-    def should_complete?
-      order_params[:is_complete] == '1'
+    def should_finalize?
+      order_params[:is_final] == '1'
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -215,7 +218,7 @@ class Admin::OrdersController < ApplicationController
         :billing_city, :billing_country_code,
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :notes, :is_complete,
+        :notes, :is_final,
         customer_attributes: [
           :id, :initial_group_id, :email, :name, :phone,
           :shipping_address, :shipping_postalcode,

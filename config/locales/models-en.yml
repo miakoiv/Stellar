@@ -229,7 +229,7 @@ en:
         group_id: Customer group
         order_type_id: Order type
         completed_at: Ordered
-        is_complete: Order is ready
+        is_final: Mark as complete
         shipping_at: Requested shipping at
         installation_at: Installation at
         shipping_installation_at: Shipping/installation

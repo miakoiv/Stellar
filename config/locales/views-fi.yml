@@ -152,8 +152,8 @@ fi:
         add_order_items: Lisää tilausrivejä tilaukselle
         barcode: Skannaa viivakoodi tähän
       form:
-        approved_at_help: Päivä, jona tilaus otettiin vastaan ja hyväksyttiin.
-        concluded_at_help: Päivä, jona tilaus toimitettiin ja arkistoitiin.
+        approved_at_help: Tilaajan tiedot ovat oikein ja tilauksen sisältö on lopullinen.
+        concluded_at_help: Tilaus on kokonaan toimitettu ja voidaan arkistoida.
       headers:
         delivery_note: Lähete
         quotation: Tarjous
