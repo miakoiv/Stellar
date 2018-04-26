@@ -38,8 +38,12 @@
         %h2.visible-print-block= title(Payment, count: 2)
         = render partial: 'admin/payments/table', object: @order, as: :order
 
-:coffee
-  persist_tabs 'order-side'
+- if @order.complete?
+  :coffee
+    $('[href="#tab-shipments"]').tab 'show'
+- else
+  :coffee
+    $('[href="#tab-order-items"]').tab 'show'
 
 - if @order.editable_items?
   - content_for :secondary_nav do
