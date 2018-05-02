@@ -2,11 +2,12 @@
   .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
     .panel.panel-default
       .panel-heading
-        %h4.panel-title= t('.forgot_your_password', :default => 'Forgot your password?')
+        %h4.panel-title= t('.forgot_your_password', default: 'Forgot your password?')
       .panel-body
-        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form" }) do |f|
+        = form_for resource, as: resource_name, url: password_path(resource_name) do |f|
           .form-group
-            = f.label :email
-            = f.email_field :email, autofocus: true, class: "form-control"
-          = f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: "btn btn-primary"
-    = render "devise/shared/links"
+            = f.label :email, class: 'control-label'
+            = f.email_field :email, autofocus: true, class: 'form-control'
+          = f.submit t('.send_me_reset_password_instructions', default: 'Send me reset password instructions'), class: 'btn btn-primary'
+
+    = render 'devise/shared/links'

@@ -436,6 +436,11 @@
 .row.columns-12 {
   > * { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
 }
+@media (max-width: $screen-xs-max) {
+  .row.grid-disable-xs {
+    > * { width: 100%; }
+  }
+}
 
 
 /*

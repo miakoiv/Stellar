@@ -426,6 +426,7 @@ fi:
         subhead: Alaotsikko
         min_height: Korkeus
         grid_columns: Sarakkeita
+        grid_disable_xs: Ei sarakkeita mobiilinäytöllä
         inverse: Käänteiset värit
         jumbotron: Jättikoko
         image_sizing: Kuvan koko
@@ -437,6 +438,7 @@ fi:
         map_marker: Näytä sijainti kartalla
         map_zoom: Kartan koko
         map_theme: Teemamääritykset
+        facebook_page: Facebook-sivun nimi
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         animation: Animoitu esittely
