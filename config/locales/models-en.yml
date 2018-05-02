@@ -437,6 +437,7 @@ en:
         map_marker: Show location marker
         map_zoom: Map zoom
         map_theme: Theme definition
+        facebook_page: Facebook page name
         url: Content URL
         thumbnail_size: Slide size
         animation: Animated entry
