@@ -1,14 +1,9 @@
-= bootstrap_form_for [:admin, @shipping_method], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @shipping_method] do |f|
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        .form-group
-          = f.label col(ShippingMethod, :shipping_gateway), class: 'col-sm-4 control-label'
-          .col-sm-8
-            = f.select_without_bootstrap :shipping_gateway, Store.shipping_gateway_options, {}, {class: 'selectize'}
-            %span.help-block= t('.maps_api_reminder')
+        = f.select :shipping_gateway, Store.shipping_gateway_options, {help: t('.maps_api_reminder')}, {class: 'selectize'}
         = f.text_field :delivery_time, append: col(ShippingMethod, :delivery_time_unit), class: 'text-right'
         = f.text_field :enabled_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         = f.text_field :disabled_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}

@@ -24,10 +24,10 @@
   = render partial: 'summary'
 
 .row
-  .col-lg-5.hidden-print
+  .col-lg-4.hidden-print
     = render partial: 'form', locals: {locked: true}
 
-  .col-lg-7
+  .col-lg-8
     = tab_set 'order-side', class: 'nav-justified nav-sm' do
       = nav_tab 'shipments', title(Shipment, count: 2), default: true
       = nav_tab 'order-items', title(OrderItem, count: 2)

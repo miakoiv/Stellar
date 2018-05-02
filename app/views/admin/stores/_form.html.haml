@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @store], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @store] do |f|
   = tab_set 'store-main', class: 'panel-tabs' do
     = nav_tab 'store-admin', col(Store, :admin), default: true
     = nav_tab 'store-appearance', col(Store, :appearance)
@@ -17,25 +16,23 @@
           %fieldset{disabled: locked}
             = f.form_group do
               = f.check_box :portal
+            = f.form_group do
+              = f.check_box :admit_guests
+            %hr
             = f.text_field :name, required: true
             = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
             = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
-            = f.form_group do
-              = f.check_box :admit_guests
             - unless @store.new_record?
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-appearance' do
           %fieldset{disabled: locked}
             = f.form_group do
               = f.check_box :detach_menu
-            .form-group
-              = f.label col(Store, :theme), class: 'control-label col-sm-4'
-              .col-sm-5
-                = f.select_without_bootstrap :theme, Store.theme_options, {}, {class: 'selectize'}
-              - unless locked || @store.new_record?
-                .col-sm-3
-                  = link_to edit_admin_store_style_path(@store), class: 'btn btn-default btn-block', remote: true do
-                    = icon('paint-brush', t('.edit_style'))
+            = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
+            - unless locked || @store.new_record?
+              %p
+                = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
+                  = icon('paint-brush', t('.edit_style'))
             = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_option, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
@@ -43,6 +40,7 @@
               = f.check_box :disable_mail
             = f.form_group do
               = f.check_box :disable_shipment_transfers
+            %hr
             = f.text_field :tracking_code
             = f.text_field :maps_api_key
             = f.text_field :shipping_origin

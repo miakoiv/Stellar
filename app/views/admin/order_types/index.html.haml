@@ -5,10 +5,10 @@
   %h1= icon('gears', title(OrderType, count: 2))
 
 .table-responsive
-  %table.table.table-striped.table-hover.table-loose
+  %table.table.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-2= col(OrderType, :workflow)
+        %th.col-xs-3= col(OrderType, :workflow)
         %th.col-xs-2= col(OrderType, :name)
         %th.col-xs-2= col(OrderType, :label)
         %th.col-xs-1

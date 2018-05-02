@@ -1,5 +1,5 @@
 .column-form
-  = bootstrap_form_for [:admin, column], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+  = bootstrap_form_for [:admin, column], remote: true, html: {class: 'immediate triggered'} do |f|
     %fieldset
       .form-group
         = f.label col(Column, :alignment)

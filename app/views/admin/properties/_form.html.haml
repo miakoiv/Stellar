@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @property], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @property] do |f|
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}

@@ -10,10 +10,10 @@
   %h1= icon('user', @user)
 
 .row
-  .col-lg-7
+  .col-lg-6
     = render partial: 'form', locals: {locked: false}
 
-  .col-lg-5
+  .col-lg-6
     = tab_set 'user-side', class: 'nav-justified nav-sm' do
       = nav_tab 'group', col(User, :group), default: true
       = nav_tab 'roles', col(User, :roles)

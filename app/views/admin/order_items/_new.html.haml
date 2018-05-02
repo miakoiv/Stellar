@@ -1,6 +1,6 @@
 #admin-order-item-form{data: {'product-query-url': query_admin_products_path, inventory: order.inventory.present? && order.inventory.id}}
   = bootstrap_form_for [:admin, order, OrderItem.new(amount: 1)], remote: true do |f|
-    %fieldset.gap
+    %fieldset
       .row
         .col-sm-8
           = f.select :product_id, [], {skip_label: true}, {placeholder: title(Product), class: 'selectize-tall selectize-list-group'}

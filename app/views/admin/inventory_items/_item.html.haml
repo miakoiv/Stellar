@@ -1,6 +1,6 @@
 #inventory-item.panel.panel-default
   .panel-body
-    = bootstrap_form_for [:admin, inventory_item], layout: :horizontal, label_col: 'col-sm-5', control_col: 'col-sm-7' do |f|
+    = bootstrap_form_for [:admin, inventory_item] do |f|
       %fieldset{disabled: true}
         = f.text_field :code
         = f.text_field :expires_at

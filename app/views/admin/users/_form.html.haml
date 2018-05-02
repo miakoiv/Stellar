@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @group, @user], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @group, @user] do |f|
   = tab_set 'user-main', class: 'panel-tabs' do
     = nav_tab 'user-personal', col(User, :personal), default: true
     - unless @user.new_record?
@@ -18,10 +17,9 @@
               = f.telephone_field :phone, required: true
               = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
               - unless locked
+                %hr
                 = f.password_field :password, required: @user.require_password?
-                .form-group
-                  .col-sm-8.col-sm-offset-4
-                    = render partial: 'shared/password_strength'
+                = render partial: 'shared/password_strength'
                 = f.password_field :password_confirmation, required: @user.require_password?
         - unless @user.new_record?
           = tab_pane 'user-addresses' do

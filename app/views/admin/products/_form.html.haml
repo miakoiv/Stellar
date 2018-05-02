@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @product], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @product] do |f|
   = tab_set 'product-main', class: 'panel-tabs' do
     = nav_tab 'product-meta', col(Product, :metadata), default: true
     = nav_tab 'product-text', col(Product, :text)
@@ -17,10 +16,13 @@
             = f.select :vendor_id, current_store.group_options, {include_blank: blank}, {class: 'selectize-label', disabled: third_party?}
             = f.text_field :code, required: true
             = f.text_field :customer_code
-            = f.text_field :available_at,
-                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-            = f.text_field :deleted_at,
-                data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+            .row
+              .col-md-6
+                = f.text_field :available_at,
+                    data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              .col-md-6
+                = f.text_field :deleted_at,
+                    data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             ~ f.text_area :memo, rows: 2
 
         = tab_pane 'product-text' do
@@ -34,47 +36,44 @@
           %fieldset{disabled: locked}
             = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, t.included_in_retail?] }.to_h}
             - if current_group.cost?
-              = f.text_field :cost_price, append: '€', control_col: 'col-sm-4', class: 'text-right'
-            .form-group
-              %label.control-label.col-sm-4= col(Product, :trade_price)
-              .col-sm-4
-                .input-group
-                  = f.text_field_without_bootstrap :trade_price, class: 'form-control text-right'
-                  %span.input-group-addon €
-              .col-sm-4
-                .input-group
-                  %span.input-group-addon= col(Product, :markup_percent)
-                  = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), class: 'form-control text-right'
-            .form-group
-              %label.control-label.col-sm-4= col(Product, :retail_price)
-              .col-sm-4
-                .input-group
-                  = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
-                  %span.input-group-addon €
-                .help-block
-                  #tax-included.collapse{class: @product.tax_category.included_in_retail? && 'in'}
-                    = t('.tax_included_in_retail_html')
-                  #tax-excluded.collapse{class: @product.tax_category.included_in_retail? || 'in'}
-                    = t('.tax_excluded_in_retail_html')
-              .col-sm-4
-                .input-group
-                  %span.input-group-addon= col(Product, :margin_percent)
-                  = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), class: 'form-control text-right'
+              .row
+                .col-md-8
+                  = f.text_field :cost_price, append: '€', class: 'text-right'
+            .row
+              .col-md-8
+                = f.text_field :trade_price, append: '€', class: 'text-right'
+              .col-md-4
+                %label.control-label= col(Product, :markup_percent)
+                = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), class: 'form-control text-right'
+            .row
+              .col-md-8
+                .form-group
+                  %label.control-label= col(Product, :retail_price)
+                  .input-group
+                    = f.text_field_without_bootstrap :retail_price, class: 'form-control text-right'
+                    %span.input-group-addon €
+                  .help-block
+                    #tax-included.collapse{class: @product.tax_category.included_in_retail? && 'in'}
+                      = t('.tax_included_in_retail_html')
+                    #tax-excluded.collapse{class: @product.tax_category.included_in_retail? || 'in'}
+                      = t('.tax_excluded_in_retail_html')
+              .col-md-4
+                %label.control-label= col(Product, :margin_percent)
+                = text_field_tag :margin_percent, number_with_precision(@product.margin_percent, precision: 2), class: 'form-control text-right'
 
         = tab_pane 'product-shipping' do
           %fieldset{disabled: locked}
             = f.select :shipping_method_ids, current_store.shipping_method_options, {}, {multiple: true, class: 'selectize', placeholder: t('.all_shipping_methods')}
             = f.text_field :mass, append: 'g', class: 'text-right'
             .form-group
-              %label.control-label.col-sm-4= col(Product, :dimensions)
-              .col-sm-8
-                .input-group
-                  = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
-                  %span.input-group-addon ⨯
-                  = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
-                  %span.input-group-addon ⨯
-                  = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
-                  %span.input-group-addon mm
+              %label.control-label= col(Product, :dimensions)
+              .input-group
+                = f.text_field_without_bootstrap :dimension_u, class: 'form-control text-right'
+                %span.input-group-addon ⨯
+                = f.text_field_without_bootstrap :dimension_v, class: 'form-control text-right'
+                %span.input-group-addon ⨯
+                = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
+                %span.input-group-addon mm
             = f.text_field :lead_time, help: t('.lead_time_help_html')
             ~ f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 
