@@ -5,7 +5,7 @@
   %h1= icon('eyedropper', title(Property, count: 2))
 
 .table-responsive
-  %table.table.table-striped.table-hover.table-loose
+  %table.table.table-hover.table-loose
     %thead
       %tr
         %th.col-min.hidden-print
@@ -16,7 +16,7 @@
 
     %tbody.sortable
       - @properties.each do |property|
-        = content_tag_for :tr, property, class: property.searchable? ? 'info text-info' : nil do
+        = content_tag_for :tr, property do
           %td.hidden-print= drag_handle
           %td
             = property.searchable? ? icon('search-plus', property.name, data: {toggle: 'tooltip'}, title: col(Property, :searchable)) : property.name

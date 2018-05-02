@@ -8,10 +8,10 @@
     %span.small= @order.to_s
 
 .row
-  .col-lg-5
+  .col-lg-4
     = render partial: 'form', locals: {locked: false}
 
-  .col-lg-7
+  .col-lg-8
     = tab_set 'order-side', class: 'nav-justified nav-sm' do
       = nav_tab 'shipments', title(Shipment, count: 2), default: true
       = nav_tab 'order-items', title(OrderItem, count: 2)

@@ -10,10 +10,10 @@
     = icon('tag', @promotion)
 
 .row
-  .col-md-5
+  .col-md-4
     = render partial: 'form', locals: {locked: true}
 
-  .col-md-7
+  .col-md-8
     = tab_set 'promotion-side', class: 'nav-justified nav-sm' do
       = nav_tab 'promoted', title(PromotedItem, count: 2), default: true
       = nav_tab 'images', col(Promotion, :images)

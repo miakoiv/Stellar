@@ -8,10 +8,10 @@
     %span.small= @product.subtitle
 
 .row
-  .col-lg-6
+  .col-lg-5
     = render partial: 'form', locals: {locked: false}
 
-  .col-lg-6
+  .col-lg-7
     = tab_set 'product-side', class: 'nav-justified nav-sm' do
       = nav_tab 'images', col(Product, :images), default: true
       = nav_tab 'inventory', col(Product, :inventory), class: (@product.has_variants? || @product.bundle?) && 'disabled'

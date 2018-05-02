@@ -1,5 +1,5 @@
 .segment-form{class: segment.template}
-  = bootstrap_form_for [:admin, segment], remote: true, layout: :vertical, html: {class: 'immediate triggered'} do |f|
+  = bootstrap_form_for [:admin, segment], remote: true, html: {class: 'immediate triggered'} do |f|
     %fieldset
       = f.select :template, Segment.template_options
     - unless segment.edit_in_place?

@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @user], layout: :horizontal,
-    label_col: 'col-sm-4', control_col: 'col-sm-8' do |f|
+= bootstrap_form_for [:admin, @user] do |f|
   .panel.panel-default
     %fieldset.panel-body{disabled: true}
       = f.text_field :last_sign_in_at, value: @user.last_sign_in_at.present? ? l(@user.last_sign_in_at, format: :iso) : nil

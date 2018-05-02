@@ -6,12 +6,12 @@
       %h1= icon('user', current_user)
 
     .row
-      .col-md-7
+      .col-md-6
         = render partial: 'form', locals: {locked: true}
-      .col-md-5
+      .col-md-6
         .panel.panel-default
           .panel-body
-            %dl.dl-horizontal
+            %dl
               %dt= col(User, :last_sign_in_at)
               %dd= current_user.last_sign_in_at.present? ? l(current_user.last_sign_in_at, format: :iso) : nil
               %dt= col(User, :last_sign_in_ip)

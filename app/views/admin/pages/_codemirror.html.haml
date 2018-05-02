@@ -1,4 +1,4 @@
-= bootstrap_form_for [:admin, @page], layout: :vertical do |f|
+= bootstrap_form_for [:admin, @page] do |f|
   %fieldset
     ~ f.text_area :content, rows: 40, skip_label: true, class: 'monospace input-sm'
   %fieldset.actions.fixed

@@ -1,4 +1,4 @@
-= bootstrap_form_for @order, remote: true, layout: :vertical, data: {type: 'json'}, html: {id: 'checkout-form', class: 'collapse in'} do |f|
+= bootstrap_form_for @order, remote: true, data: {type: 'json'}, html: {id: 'checkout-form', class: 'collapse in'} do |f|
   = f.hidden_field :order_type_id
   %fieldset
     .row
@@ -9,7 +9,7 @@
       .col-sm-4
         = f.telephone_field :customer_phone, required: true
   - if current_store.b2b_sales?
-    %fieldset.bg-info
+    %fieldset.info
       .row
         .col-sm-6
           = f.text_field :company_name
@@ -20,7 +20,7 @@
         .col-sm-6
           = f.telephone_field :contact_phone
   - if @order.has_shipping?
-    %fieldset.bg-info
+    %fieldset
       .row
         .col-sm-12
           = f.text_field :shipping_address, required: true
@@ -58,7 +58,7 @@
               = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
             - else
               = f.hidden_field :billing_country_code
-  %fieldset.bg-warning
+  %fieldset.warning
     %p.text-warning= icon('exclamation-circle', t('checkout.business_orders_only'))
     .row
       .col-sm-6
@@ -74,7 +74,7 @@
         = f.text_field :your_reference
       .col-sm-6
         = f.text_field :our_reference
-  %fieldset.gap
+  %fieldset
     ~ f.text_area :notes, rows: 4
 
   #continue-order.hidden-print
