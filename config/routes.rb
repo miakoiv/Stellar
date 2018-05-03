@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   # 3) select a shipping method
   get  '/checkout/:order_id/shipping_method/:method_id', to: 'checkout#shipping_method', as: :shipping_method
   # 4) create a shipment
-  post '/checkout/:order_id/ship/:method_id', to: 'checkout#ship', as: :ship
+  post '/checkout/:order_id/ship', to: 'checkout#ship', as: :ship
   # 5) enter payment information
   get  '/checkout/:order_id/pay/:method', to: 'checkout#pay', as: :pay
   # 6) verify credit card payment or return from online payment

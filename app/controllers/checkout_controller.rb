@@ -55,12 +55,8 @@ class CheckoutController < ApplicationController
   # A shipment record is created, shipping cost added, and the JS response
   # will trigger an order update.
   def ship
-    @shipping_methods = @order.available_shipping_methods
-    @shipping_method = @shipping_methods.find(params[:method_id])
-    @shipment = @order.shipments.build(
-      shipping_method: @shipping_method,
-      metadata: params[:metadata]
-    )
+    @shipment = @order.shipments.build(shipment_params)
+
     respond_to do |format|
       if @shipment.save
         @order.apply_shipping_cost!(@shipment)
@@ -158,5 +154,12 @@ class CheckoutController < ApplicationController
   private
     def set_order
       @order = current_user.orders.find(params[:order_id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def shipment_params
+      params.require(:shipment).permit(
+        :shipping_method_id, :pickup_point_id, :metadata
+      )
     end
 end

@@ -19,13 +19,14 @@
           = icon('search', t('.postalcode'))
 
 - if locations.present?
-  = form_tag ship_path(@order, @shipping_method), remote: true, id: 'gateway-form' do
-    = hidden_field_tag :metadata
+  = form_for [@order, @order.shipments.build(shipping_method: @shipping_method)], url: ship_path(@order), remote: true, html: {id: 'gateway-form'} do |f|
+    = f.hidden_field :shipping_method_id
+    = f.hidden_field :metadata
     .form-group
       .btn-group-vertical.center-block{data: {toggle: 'buttons'}}
         - locations.each do |loc|
           %label.btn.btn-default{style: 'text-align: left;'}
-            = radio_button_tag 'pickup_point_id', loc['pickup_point_id']
+            = f.radio_button :pickup_point_id, loc['pickup_point_id']
             %strong= loc['name']
             = loc['street_address']
             = loc['city']
@@ -57,7 +58,7 @@
         map: map
         position: position
         title: loc.name + "\n" + loc.street_address
-        target: '#pickup_point_id_' + loc.pickup_point_id
+        target: '#shipment_pickup_point_id_' + loc.pickup_point_id
       marker.activate = ->
         v.setAnimation null for k, v of markers
         map.panTo this.getPosition()
@@ -65,11 +66,11 @@
       marker.addListener 'click', ->
         this.activate()
         $(this.target).trigger 'click'
-      markers['pickup_point_id_' + loc.pickup_point_id] = marker
+      markers['shipment_pickup_point_id_' + loc.pickup_point_id] = marker
 
     $('#gateway-form').on 'change', (e) ->
       meta = metadata[$(e.target).val()]
-      $('#metadata').val JSON.stringify(meta)
+      $('#shipment_metadata').val JSON.stringify(meta)
       markers[e.target.id].activate()
       $('.ship-button').collapse 'show'
 
