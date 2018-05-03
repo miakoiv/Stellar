@@ -449,6 +449,8 @@ en:
       shipment:
         shipping_method_id: Shipping method
         number: №
+        tracking_code: Tracking code
+        pickup_point_id: Pickup point №
         shipped_at: Shipping date
         cancelled_at: Cancellation date
         metadata: Details

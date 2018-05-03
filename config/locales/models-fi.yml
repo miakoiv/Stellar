@@ -449,6 +449,8 @@ fi:
       shipment:
         shipping_method_id: Toimitustapa
         number: nro
+        tracking_code: Seurantakoodi
+        pickup_point_id: Noutopisteen nro
         shipped_at: Toimituspvm
         cancelled_at: Peruutuspvm
         metadata: Yksityiskohdat
