@@ -1,0 +1,80 @@
+- postalcode = params[:postalcode] || @order.shipping_postalcode
+- locations = @shipping_gateway.search_pickup_points(postalcode)
+
+#gateway{data: {locations: locations.to_json}}
+
+.gateway-success{style: 'display: none;'}
+  .thumbnail{style: 'position: relative; height: 0; padding-bottom: 61.8%; background-color: #eee;'}
+    #map{style: 'position: absolute; left: 0; right: 0; top: 0; bottom: 0;'}
+
+.gateway-error.alert.alert-danger{style: 'display: none;'}
+  = icon('warning', t('.gateway_error'))
+
+= form_tag shipping_method_path(@order, @shipping_method), method: :get, remote: true do
+  .form-group.postalcode-lookup
+    .input-group
+      = text_field_tag :postalcode, postalcode, class: 'form-control text-right'
+      .input-group-btn
+        = button_tag class: 'btn btn-default' do
+          = icon('search', t('.postalcode'))
+
+- if locations.present?
+  = form_tag ship_path(@order, @shipping_method), remote: true, id: 'gateway-form' do
+    = hidden_field_tag :metadata
+    .form-group
+      .btn-group-vertical.center-block{data: {toggle: 'buttons'}}
+        - locations.each do |loc|
+          %label.btn.btn-default{style: 'text-align: left;'}
+            = radio_button_tag 'pickup_point_id', loc['pickup_point_id']
+            %strong= loc['name']
+            = loc['street_address']
+            = loc['city']
+    .ship-button.collapse.hidden-print
+      = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'
+
+  :coffee
+    $('.gateway-success').show()
+
+    $gateway = $('#gateway')
+    locations = $gateway.data 'locations'
+    metadata = {}
+
+    $map = $('#map')[0]
+    markers = {}
+    map = new google.maps.Map $map,
+      center:
+        lat: parseFloat locations[0].map_latitude
+        lng: parseFloat locations[0].map_longitude
+      zoom: 12
+      mapTypeControl: false
+      streetViewControl: false
+    for loc in locations
+      metadata[loc.pickup_point_id] = loc
+      position =
+        lat: parseFloat loc.map_latitude
+        lng: parseFloat loc.map_longitude
+      marker = new google.maps.Marker
+        map: map
+        position: position
+        title: loc.name + "\n" + loc.street_address
+        target: '#pickup_point_id_' + loc.pickup_point_id
+      marker.activate = ->
+        v.setAnimation null for k, v of markers
+        map.panTo this.getPosition()
+        this.setAnimation google.maps.Animation.BOUNCE
+      marker.addListener 'click', ->
+        this.activate()
+        $(this.target).trigger 'click'
+      markers['pickup_point_id_' + loc.pickup_point_id] = marker
+
+    $('#gateway-form').on 'change', (e) ->
+      meta = metadata[$(e.target).val()]
+      $('#metadata').val JSON.stringify(meta)
+      markers[e.target.id].activate()
+      $('.ship-button').collapse 'show'
+
+- else
+  :coffee
+    $('.gateway-error').show()
+    $('.postalcode-lookup').addClass 'has-error'
+    $('#postalcode').focus().select()

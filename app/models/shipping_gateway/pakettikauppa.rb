@@ -7,6 +7,7 @@
 # For API docs, see <https://www.pakettikauppa.fi/tekniset-ohjeet/>
 
 module ShippingGateway
+
   module Pakettikauppa
 
     class PakettikauppaConnector
@@ -14,16 +15,23 @@ module ShippingGateway
       base_uri 'https://apitest.pakettikauppa.fi/'
       logger Rails.logger
 
-      def list_shipping_methods(request)
-        self.class.post('/shipping-methods/list', query: request)
+      def list_shipping_methods(query)
+        self.class.post '/shipping-methods/list', query: query
+      end
+
+      def search_pickup_points(query)
+        self.class.post '/pickup-points/search', query: query
       end
     end
 
     class Base
-
       include ActiveModel::Model
 
       attr_accessor :order, :shipment
+
+      def self.fixed_cost?
+        true
+      end
 
       def initialize(attributes = {})
         super
@@ -34,20 +42,32 @@ module ShippingGateway
         @connector = PakettikauppaConnector.new
       end
 
+      def calculated_cost(base_price, metadata)
+        base_price
+      end
+
       def list_shipping_methods
-        request = hmac_request(
-          api_key: @api_key,
-          timestamp: unix_time,
-          language: @locale
-        )
+        request = hmac_request(language: @locale)
         response = @connector.list_shipping_methods(request).parsed_response
+      end
+
+      def search_pickup_points(postalcode, provider)
+        request = hmac_request(
+          postcode: postalcode,
+          service_provider: provider
+        )
+        @connector.search_pickup_points(request).parsed_response
       end
 
       private
 
         def hmac_request(params = {})
-          plaintext = params.sort.map { |_, v| v }.join('&')
-          params.merge(hash: sha256(@secret, plaintext))
+          request = params.merge(
+            api_key: @api_key,
+            timestamp: unix_time
+          )
+          plaintext = request.sort.map { |_, v| v }.join('&')
+          request.merge(hash: sha256(@secret, plaintext))
         end
 
         def sha256(secret, data)
@@ -59,28 +79,31 @@ module ShippingGateway
         end
     end
 
-    class SchenkerNouto < Base
+    class DbSchenker < Base
+      def self.requires_maps?
+        true
+      end
+
+      def search_pickup_points(postalcode)
+        super(postalcode, 'Db Schenker')
+      end
+
       def to_partial_path
-        'shipping_gateway/pakettikauppa/schenker_nouto'
+        'shipping_gateway/pakettikauppa/db_schenker'
       end
     end
 
-    class MatkahuoltoBussi < Base
+    class Matkahuolto < Base
+      def self.requires_maps?
+        false
+      end
+
       def to_partial_path
-        'shipping_gateway/pakettikauppa/matkahuolto_bussi'
+        'shipping_gateway/pakettikauppa/matkahuolto'
       end
     end
 
-    class MatkahuoltoJako < Base
-      def to_partial_path
-        'shipping_gateway/pakettikauppa/matkahuolto_jako'
-      end
-    end
-
-    class PostiExpress < Base
-      def to_partial_path
-        'shipping_gateway/pakettikauppa/posti_express'
-      end
+    class Posti < Base
     end
   end
 end

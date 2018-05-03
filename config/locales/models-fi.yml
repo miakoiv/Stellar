@@ -12,6 +12,9 @@ fi:
       shipping_gateway/smart_post: Posti SmartPOST
       shipping_gateway/vendor: tavarantoimittaja kuljettaa
       shipping_gateway/truckload: kuorma-autokuljetus
+      shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
+      shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
+      shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
   activerecord:
     models:
       album:

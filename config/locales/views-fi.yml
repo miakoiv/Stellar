@@ -411,6 +411,10 @@ fi:
     upload_images: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
     upload_documents: Napsauta tätä valitaksesi dokumentteja, tai pudota dokumentit tähän.
   shipping_gateway:
+    pakettikauppa:
+      db_schenker:
+        gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
+        postalcode: Hae postinumerolla
     smart_post:
       lookup_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
       zipcode: Hae postinumerolla

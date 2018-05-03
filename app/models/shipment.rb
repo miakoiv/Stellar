@@ -18,7 +18,16 @@ class Shipment < ActiveRecord::Base
 
   #---
   def self.available_gateways
-    %w{CustomerPickup Letter SmartPost Truckload Vendor}
+    %w{
+      Pakettikauppa::Matkahuolto
+      Pakettikauppa::Posti
+      Pakettikauppa::DbSchenker
+      SmartPost
+      CustomerPickup
+      Letter
+      Truckload
+      Vendor
+    }
   end
 
   #---
@@ -76,7 +85,7 @@ class Shipment < ActiveRecord::Base
   end
 
   def shipping_gateway
-    "ShippingGateway::#{shipping_method.shipping_gateway}".constantize
+    shipping_method.shipping_gateway_class
   end
 
   def to_s

@@ -20,7 +20,7 @@
         = content_tag_for :tr, shipping_method, class: shipping_method.active? ? nil : 'warning text-warning' do
           %td= image_variant_tag shipping_method.cover_image
           %td= shipping_method.name
-          %td= "ShippingGateway::#{shipping_method.shipping_gateway}".constantize.model_name.human
+          %td= shipping_method.shipping_gateway_class.model_name.human
           %td
             - if shipping_method.active?
               = shipping_method.enabled_at.present? ? l(shipping_method.enabled_at) : nil

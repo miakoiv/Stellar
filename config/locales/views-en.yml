@@ -431,6 +431,10 @@ en:
     upload_images: Click to add images, or drop image files here.
     upload_documents: Click to add documents, or drop document files here.
   shipping_gateway:
+    pakettikauppa:
+      db_schenker:
+        gateway_error: No pickup points found. Please check your zip code.
+        postalcode: Search by zipcode
     smart_post:
       lookup_error: No pickup points found. Please check your zip code.
       zipcode: Search by zipcode
