@@ -281,7 +281,7 @@ es:
     default_message: Click para añadir imagenes, o arrastra la imagen aquí.
   shipping_gateway:
     smart_post:
-      zipcode: Buscar por Código zip
+      postalcode: Buscar por Código zip
   errors:
     header: ¡Oops!
     blurb: "No hemos podido proceder por las siguiente razones técnicas:"

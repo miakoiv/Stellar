@@ -416,8 +416,8 @@ fi:
         gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
         postalcode: Hae postinumerolla
     smart_post:
-      lookup_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
-      zipcode: Hae postinumerolla
+      gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
+      postalcode: Hae postinumerolla
     truckload:
       distance: Kuljetettava matka
       loads: Kuormien määrä

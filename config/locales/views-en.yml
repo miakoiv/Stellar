@@ -434,10 +434,10 @@ en:
     pakettikauppa:
       db_schenker:
         gateway_error: No pickup points found. Please check your zip code.
-        postalcode: Search by zipcode
+        postalcode: Search by postcode
     smart_post:
-      lookup_error: No pickup points found. Please check your zip code.
-      zipcode: Search by zipcode
+      gateway_error: No pickup points found. Please check your zip code.
+      postalcode: Search by postcode
     truckload:
       distance: Shipping distance
       loads: Number of loads

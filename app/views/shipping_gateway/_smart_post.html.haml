@@ -1,25 +1,25 @@
-- zipcode = params[:zipcode] || @order.shipping_postalcode
-- postcode, locations = @shipping_gateway.smartpost_lookup(zipcode)
+- postalcode = params[:postalcode] || @order.shipping_postalcode
+- areacode, locations = @shipping_gateway.smartpost_lookup(postalcode)
 
-#gateway{data: {postcode: postcode.to_json, locations: locations.to_json}}
+#gateway{data: {areacode: areacode.to_json, locations: locations.to_json}}
 
-.smartpost-success{style: 'display: none;'}
+.gateway-success{style: 'display: none;'}
   .thumbnail{style: 'position: relative; height: 0; padding-bottom: 61.8%; background-color: #eee;'}
     #map{style: 'position: absolute; left: 0; right: 0; top: 0; bottom: 0;'}
 
-.smartpost-error.alert.alert-danger{style: 'display: none;'}
-  = icon('warning', t('.lookup_error'))
+.gateway-error.alert.alert-danger{style: 'display: none;'}
+  = icon('warning', t('.gateway_error'))
 
 = form_tag shipping_method_path(@order, @shipping_method), method: :get, remote: true do
-  .form-group.zipcode-lookup
+  .form-group.postalcode-lookup
     .input-group
-      = text_field_tag :zipcode, zipcode, class: 'form-control text-right'
+      = text_field_tag :postalcode, postalcode, class: 'form-control text-right'
       .input-group-btn
         = button_tag class: 'btn btn-default' do
-          = icon('search', t('.zipcode'))
+          = icon('search', t('.postalcode'))
 
 - if locations.present?
-  = form_tag ship_path(@order, @shipping_method), remote: true, id: 'smartpost-form' do
+  = form_tag ship_path(@order, @shipping_method), remote: true, id: 'gateway-form' do
     = hidden_field_tag :metadata
     .form-group
       .btn-group-vertical.center-block{data: {toggle: 'buttons'}}
@@ -34,17 +34,17 @@
       = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'
 
   :coffee
-    $('.smartpost-success').show()
+    $('.gateway-success').show()
 
     $gateway = $('#gateway')
-    postcode = $gateway.data 'postcode'
+    areacode = $gateway.data 'areacode'
     locations = $gateway.data 'locations'
     metadata = {}
 
     $map = $('#map')[0]
     markers = {}
     map = new google.maps.Map $map,
-      center: {lat: postcode.MapLatitude, lng: postcode.MapLongitude}
+      center: {lat: areacode.MapLatitude, lng: areacode.MapLongitude}
       zoom: 12
       mapTypeControl: false
       streetViewControl: false
@@ -64,7 +64,7 @@
         $(this.target).trigger 'click'
       markers['pup_code_' + loc.PupCode] = marker
 
-    $('#smartpost-form').on 'change', (e) ->
+    $('#gateway-form').on 'change', (e) ->
       meta = metadata[$(e.target).val()]
       $('#metadata').val JSON.stringify(meta)
       markers[e.target.id].activate()
@@ -72,6 +72,6 @@
 
 - else
   :coffee
-    $('.smartpost-error').show()
-    $('.zipcode-lookup').addClass 'has-error'
-    $('#zipcode').focus().select()
+    $('.gateway-error').show()
+    $('.postalcode-lookup').addClass 'has-error'
+    $('#postalcode').focus().select()
