@@ -32,7 +32,7 @@ module ShippingGateway
     class Base
       include ActiveModel::Model
 
-      attr_accessor :order, :shipment
+      attr_accessor :order, :shipment, :user
 
       def self.fixed_cost?
         true
@@ -41,6 +41,7 @@ module ShippingGateway
       def initialize(attributes = {})
         super
         raise ArgumentError if order.nil?
+        @store = order.store
         @api_key = '00000000-0000-0000-0000-000000000000'
         @secret = '1234567890ABCDEF'
         @locale = I18n.locale
@@ -65,16 +66,26 @@ module ShippingGateway
       end
 
       def create_shipment
-        raise ArgumentError if shipment.nil?
-        builder = Nokogiri::XML::Builder(encoding: 'UTF-8').new do |xml|
-          xml.eChannel {
-            xml.routing {}
-            xml.shipment {
-              xml.create_element 'shipment.sender'
-            }
-          }
+        raise ArgumentError if shipment.nil? || user.nil?
+        PakettikauppaConnector.create_shipment(shipment_xml)
+      end
+
+      def shipment_xml
+        builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+          xml.eChannel do
+            xml.shipment do
+              xml.send 'shipment.sender' do
+                xml.send 'sender.name1', @store.name
+                xml.send 'sender.addr1', user.shipping_address
+                xml.send 'sender.postcode', user.shipping_postalcode
+                xml.send 'sender.city', user.shipping_city
+                xml.send 'sender.country', user.shipping_country_code
+                xml.send 'sender.vatcode', @store.vat_number
+              end
+            end
+          end
         end
-        PakettikauppaConnector.create_shipment(builder.to_xml)
+        builder.to_xml
       end
 
       private
