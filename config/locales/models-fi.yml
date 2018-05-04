@@ -457,7 +457,10 @@ fi:
         pending: Ei vielä toimitettu
       shipping_method:
         name: Nimi
+        code: Tunnuskoodi
         shipping_gateway: Toimintamalli
+        has_pickup_points: Käyttää noutopisteitä
+        home_delivery: Kotiinkuljetus
         delivery_time: Minimi toimitusaika
         delivery_time_unit: päivää
         enabled_at: Käytössä alkaen

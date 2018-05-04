@@ -3,8 +3,20 @@
     .panel-body
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
-        = f.select :shipping_gateway, Store.shipping_gateway_options, {help: t('.maps_api_reminder')}, {class: 'selectize'}
+        .row
+          .col-md-8
+            = f.select :shipping_gateway, Store.shipping_gateway_options, {help: t('.maps_api_reminder')}, {class: 'selectize'}
+          .col-md-4
+            = f.text_field :code
+        .row
+          .col-md-6
+            = f.form_group do
+              = f.check_box :has_pickup_points
+          .col-md-6
+            = f.form_group do
+              = f.check_box :home_delivery
         = f.text_field :delivery_time, append: col(ShippingMethod, :delivery_time_unit), class: 'text-right'
+        %hr
         .row
           .col-md-6
             = f.text_field :enabled_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}

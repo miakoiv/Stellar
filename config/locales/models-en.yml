@@ -457,7 +457,10 @@ en:
         pending: Not shipped yet
       shipping_method:
         name: Name
+        code: Code
         shipping_gateway: Shipping mode
+        has_pickup_points: Uses pickup points
+        home_delivery: Home delivery
         delivery_time: Minimum delivery time
         delivery_time_unit: days
         enabled_at: Active since

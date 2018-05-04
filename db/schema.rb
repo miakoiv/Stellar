@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504091228) do
+ActiveRecord::Schema.define(version: 20180504132436) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -685,9 +685,12 @@ ActiveRecord::Schema.define(version: 20180504091228) do
   add_index "shipments", ["order_id"], name: "index_shipments_on_order_id", using: :btree
 
   create_table "shipping_methods", force: :cascade do |t|
-    t.integer  "store_id",                 limit: 4,     null: false
-    t.string   "name",                     limit: 255,   null: false
+    t.integer  "store_id",                 limit: 4,                     null: false
+    t.string   "name",                     limit: 255,                   null: false
+    t.string   "code",                     limit: 255
     t.string   "shipping_gateway",         limit: 255
+    t.boolean  "has_pickup_points",                      default: false, null: false
+    t.boolean  "home_delivery",                          default: false, null: false
     t.integer  "delivery_time",            limit: 4
     t.date     "enabled_at"
     t.date     "disabled_at"
@@ -695,8 +698,8 @@ ActiveRecord::Schema.define(version: 20180504091228) do
     t.integer  "shipping_cost_product_id", limit: 4
     t.integer  "free_shipping_from_cents", limit: 4
     t.integer  "detail_page_id",           limit: 4
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   add_index "shipping_methods", ["store_id"], name: "index_shipping_methods_on_store_id", using: :btree
