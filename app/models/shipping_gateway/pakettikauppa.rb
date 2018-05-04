@@ -22,6 +22,11 @@ module ShippingGateway
       def search_pickup_points(query)
         self.class.post '/pickup-points/search', query: query
       end
+
+      def create_shipment(body)
+        headers = {'Content-Type' => 'application/xml'}
+        self.class.post '/prinetti/create-shipment', headers: headers, body: body
+      end
     end
 
     class Base
@@ -57,6 +62,10 @@ module ShippingGateway
           service_provider: provider
         )
         @connector.search_pickup_points(request).parsed_response
+      end
+
+      def create_shipment
+        raise ArgumentError if @shipment.nil?
       end
 
       private
