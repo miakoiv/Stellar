@@ -2,8 +2,8 @@
 #
 # Implementation of several shipping methods available through
 # the Pakettikauppa API, using DB Schenker, Matkahuolto, and Posti
-# as service providers. Each shipping method is defined in a subclass
-# of ShippingGateway::Pakettikauppa.
+# as service providers. Each shipping method is defined as a subclass
+# of ShippingGateway::Pakettikauppa::Base.
 # For API docs, see <https://www.pakettikauppa.fi/tekniset-ohjeet/>
 
 module ShippingGateway
@@ -23,7 +23,8 @@ module ShippingGateway
 
     def self.create_shipment(body)
       headers = {'Content-Type' => 'application/xml'}
-      post '/prinetti/create-shipment', headers: headers, body: body
+      post '/prinetti/create-shipment', format: :xml,
+        headers: headers, body: body
     end
   end
 
@@ -67,28 +68,62 @@ module ShippingGateway
 
       def create_shipment
         raise ArgumentError if shipment.nil? || user.nil?
-        PakettikauppaConnector.create_shipment(shipment_xml)
-      end
-
-      def shipment_xml
-        builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-          xml.eChannel do
-            xml.shipment do
-              xml.send 'shipment.sender' do
-                xml.send 'sender.name1', @store.name
-                xml.send 'sender.addr1', user.shipping_address
-                xml.send 'sender.postcode', user.shipping_postalcode
-                xml.send 'sender.city', user.shipping_city
-                xml.send 'sender.country', user.shipping_country_code
-                xml.send 'sender.vatcode', @store.vat_number
-              end
-            end
-          end
-        end
-        builder.to_xml
+        PakettikauppaConnector.create_shipment(shipment_xml).parsed_response
       end
 
       private
+
+        def shipment_xml
+          id = order.number
+          shipping_method = shipment.shipping_method
+
+          builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+            xml.eChannel do
+              xml.ROUTING do
+                xml.send 'Routing.Account', @api_key
+                xml.send 'Routing.Key', md5(@api_key, id, @secret)
+                xml.send 'Routing.Id', id
+                xml.send 'Routing.Time', unix_time
+              end
+              xml.Shipment do
+                xml.send 'Shipment.Sender' do
+                  xml.send 'Sender.Name1', @store.name
+                  xml.send 'Sender.Addr1', user.shipping_address
+                  xml.send 'Sender.Postcode', user.shipping_postalcode
+                  xml.send 'Sender.City', user.shipping_city
+                  xml.send 'Sender.Country', user.shipping_country_code
+                  xml.send 'Sender.Vatcode', @store.vat_number
+                end
+                xml.send 'Shipment.Recipient' do
+                  xml.send 'Recipient.Name1', order.customer_name
+                  xml.send 'Recipient.Addr1', order.shipping_address
+                  xml.send 'Recipient.Postcode', order.shipping_postalcode
+                  xml.send 'Recipient.City', order.shipping_city
+                  xml.send 'Recipient.Country', order.shipping_country_code
+                  xml.send 'Recipient.Phone', order.customer_phone
+                  xml.send 'Recipient.Email', order.customer_email
+                end
+                xml.send 'Shipment.Consignment' do
+                  xml.send 'Consignment.Reference', order.number
+                  xml.send 'Consignment.Product', shipping_method.code
+                  xml.send 'Consignment.Parcel' do
+                    xml.send 'Parcel.Packagetype', 'PC'
+                    xml.send 'Parcel.Weight', 1.0
+                    xml.send 'Parcel.Volume', 0.001
+                    xml.send 'Parcel.Contents', 'generic'
+                  end
+                  if shipment.pickup_point_id.present?
+                    xml.send 'Consignment.AdditionalService' do
+                      xml.send 'AdditionalService.Servicecode', 2106
+                      xml.send 'AdditionalService.Specifier', shipment.pickup_point_id, name: 'pickup_point_id'
+                    end
+                  end
+                end
+              end
+            end
+          end
+          builder.to_xml
+        end
 
         def hmac_request(params = {})
           request = params.merge(
@@ -101,6 +136,10 @@ module ShippingGateway
 
         def sha256(secret, data)
           OpenSSL::HMAC.hexdigest('sha256', secret, data)
+        end
+
+        def md5(*parts)
+          Digest::MD5.hexdigest(parts.join)
         end
 
         def unix_time
