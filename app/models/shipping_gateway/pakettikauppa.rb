@@ -65,7 +65,16 @@ module ShippingGateway
       end
 
       def create_shipment
-        raise ArgumentError if @shipment.nil?
+        raise ArgumentError if shipment.nil?
+        builder = Nokogiri::XML::Builder(encoding: 'UTF-8').new do |xml|
+          xml.eChannel {
+            xml.routing {}
+            xml.shipment {
+              xml.create_element 'shipment.sender'
+            }
+          }
+        end
+        PakettikauppaConnector.create_shipment(builder.to_xml)
       end
 
       private
