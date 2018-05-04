@@ -25,18 +25,19 @@
           = tab_pane 'user-addresses' do
             %fieldset{disabled: locked}
               = f.text_field :shipping_address
-              .form-group
-                .col-sm-offset-4.col-sm-3
-                  = f.text_field_without_bootstrap :shipping_postalcode, class: 'form-control'
-                .col-sm-5
-                  = f.text_field_without_bootstrap :shipping_city, class: 'form-control'
+              .row
+                .col-md-4
+                  = f.text_field :shipping_postalcode
+                .col-md-8
+                  = f.text_field :shipping_city
               = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+              %hr
               = f.text_field :billing_address
-              .form-group
-                .col-sm-offset-4.col-sm-3
-                  = f.text_field_without_bootstrap :billing_postalcode, class: 'form-control'
-                .col-sm-5
-                  = f.text_field_without_bootstrap :billing_city, class: 'form-control'
+              .row
+                .col-md-4
+                  = f.text_field :billing_postalcode
+                .col-md-8
+                  = f.text_field :billing_city
               = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
       - unless locked
         %fieldset.actions.fixed

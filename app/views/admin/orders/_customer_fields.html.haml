@@ -3,6 +3,7 @@
   = ff.text_field :email, required: true
   = ff.text_field :name, required: true
   = ff.telephone_field :phone, required: true
+  %hr
   = ff.text_field :shipping_address
   .row
     .col-md-4
@@ -10,6 +11,7 @@
     .col-md-8
       = ff.text_field :shipping_city
   = ff.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+  %hr
   = ff.text_field :billing_address
   .row
     .col-md-4

@@ -14,8 +14,11 @@
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
             = f.select :vendor_id, current_store.group_options, {include_blank: blank}, {class: 'selectize-label', disabled: third_party?}
-            = f.text_field :code, required: true
-            = f.text_field :customer_code
+            .row
+              .col-md-6
+                = f.text_field :code, required: true
+              .col-md-6
+                = f.text_field :customer_code
             .row
               .col-md-6
                 = f.text_field :available_at,

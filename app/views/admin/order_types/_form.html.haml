@@ -3,12 +3,16 @@
     .panel-body
       %fieldset{disabled: locked}
         %legend= col(OrderType, :workflow)
-        = f.select :source_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
-        = f.select :destination_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
+        .row
+          .col-md-6
+            = f.select :source_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
+          .col-md-6
+            = f.select :destination_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
       %hr
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
         = f.text_field :label, required: true
+        %hr
         = f.form_group help: t('.has_shipping_help') do
           = f.check_box :has_shipping
         - if current_store.b2b_sales?

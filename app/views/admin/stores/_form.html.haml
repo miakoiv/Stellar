@@ -20,8 +20,11 @@
               = f.check_box :admit_guests
             %hr
             = f.text_field :name, required: true
-            = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
-            = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
+            .row
+              .col-md-6
+                = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
+              .col-md-6
+                = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
             - unless @store.new_record?
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-appearance' do
@@ -41,24 +44,41 @@
             = f.form_group do
               = f.check_box :disable_shipment_transfers
             %hr
-            = f.text_field :tracking_code
-            = f.text_field :maps_api_key
+            .row
+              .col-md-6
+                = f.text_field :tracking_code
+              .col-md-6
+                = f.text_field :maps_api_key
             = f.text_field :shipping_origin
-            = f.text_field :facebook_access_token
-            = f.text_field :facebook_pixel_id
+            %hr
+            .row
+              .col-md-6
+                = f.text_field :facebook_access_token
+              .col-md-6
+                = f.text_field :facebook_pixel_id
+            %hr
             = f.text_field :tawkto_site_id
           %fieldset{disabled: locked}
             %legend= PaymentGateway::Paybyway.model_name.human
-            = f.text_field :pbw_api_key
-            = f.text_field :pbw_private_key
+            .row
+              .col-md-6
+                = f.text_field :pbw_api_key
+              .col-md-6
+                = f.text_field :pbw_private_key
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)
             = f.text_field :csv_encoding
-            = f.text_field :csv_product_code
-            = f.text_field :csv_trade_price
-            = f.text_field :csv_retail_price
-            = f.text_field :csv_inventory_amount
+            .row
+              .col-md-6
+                = f.text_field :csv_product_code
+              .col-md-6
+                = f.text_field :csv_trade_price
+            .row
+              .col-md-6
+                = f.text_field :csv_retail_price
+              .col-md-6
+                = f.text_field :csv_inventory_amount
           %fieldset{disabled: locked}
             %legend= col(Store, :order_xml)
             = f.text_field :order_xml_path

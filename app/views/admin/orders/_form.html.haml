@@ -13,6 +13,12 @@
         %fieldset{disabled: true}
           = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset.info{disabled: locked}
+        - if @order.store.b2b_sales? && @order.has_shipping?
+          .row
+            .col-md-6
+              = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+            .col-md-6
+              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         .row
           .col-md-6
             = f.text_field :vat_number
@@ -23,19 +29,19 @@
             = f.text_field :your_reference
           .col-md-6
             = f.text_field :our_reference
-        = f.text_field :external_number
-      %fieldset{disabled: locked || @order.approved?}
+        - if @order.store.b2b_sales?
+          = f.text_field :external_number
+      %fieldset{disabled: locked}
         = f.text_field :customer_name, required: true
         = f.text_field :customer_email, required: true
         = f.telephone_field :customer_phone, required: true
-        - if @order.has_shipping?
-          = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-          = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+        %hr
         = f.text_field :company_name
         = f.text_field :contact_person
         = f.text_field :contact_email
         = f.telephone_field :contact_phone
         - if @order.has_shipping?
+          %hr
           = f.text_field :shipping_address, required: true
           .row
             .col-md-4
@@ -44,6 +50,7 @@
               = f.text_field :shipping_city, required: true
           = f.select :shipping_country_code, Store.country_options, {}, required: true, class: 'selectize'
           - if @order.store.b2b_sales? || @order.has_payment?
+            %hr
             = f.text_field :billing_address, required: @order.billing_address_required?
             .row
               .col-md-4
@@ -51,6 +58,7 @@
               .col-md-8
                 = f.text_field :billing_city, required: @order.billing_address_required?
             = f.select :billing_country_code, Store.country_options, {}, required: @order.billing_address_required?, class: 'selectize'
+        %hr
         ~ f.text_area :notes, rows: 7
       - unless locked
         %fieldset.actions.fixed
