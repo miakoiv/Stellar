@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180503121630) do
+ActiveRecord::Schema.define(version: 20180504091228) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -703,6 +703,7 @@ ActiveRecord::Schema.define(version: 20180503121630) do
 
   create_table "stores", force: :cascade do |t|
     t.integer  "erp_number",       limit: 4
+    t.string   "vat_number",       limit: 255
     t.boolean  "portal",                         default: false, null: false
     t.string   "name",             limit: 255
     t.string   "slug",             limit: 255

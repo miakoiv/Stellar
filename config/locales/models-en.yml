@@ -480,6 +480,7 @@ en:
         network: Network
         images: Images
         erp_number: ERP number
+        vat_number: VAT number
         portal: Store portal
         name: Name
         slug: Slug

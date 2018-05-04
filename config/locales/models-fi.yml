@@ -480,6 +480,7 @@ fi:
         network: Verkosto
         images: Kuvat
         erp_number: ERP-numero
+        vat_number: Y-tunnus
         portal: Kauppaverkosto
         name: Nimi
         slug: Tunniste

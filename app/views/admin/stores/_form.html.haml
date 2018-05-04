@@ -85,6 +85,7 @@
         - if current_user_has_role?(:superuser)
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
+              = f.text_field :vat_number
               = f.number_field :erp_number
               - unless @store.new_record?
                 = f.text_field :slug, readonly: true, help: t('.slug_help_html')
