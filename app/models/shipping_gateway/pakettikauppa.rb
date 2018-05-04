@@ -8,26 +8,26 @@
 
 module ShippingGateway
 
-  module Pakettikauppa
+  class PakettikauppaConnector
+    include HTTParty
+    base_uri 'https://apitest.pakettikauppa.fi/'
+    logger Rails.logger
 
-    class PakettikauppaConnector
-      include HTTParty
-      base_uri 'https://apitest.pakettikauppa.fi/'
-      logger Rails.logger
-
-      def list_shipping_methods(query)
-        self.class.post '/shipping-methods/list', query: query
-      end
-
-      def search_pickup_points(query)
-        self.class.post '/pickup-points/search', query: query
-      end
-
-      def create_shipment(body)
-        headers = {'Content-Type' => 'application/xml'}
-        self.class.post '/prinetti/create-shipment', headers: headers, body: body
-      end
+    def self.list_shipping_methods(query)
+      post '/shipping-methods/list', query: query
     end
+
+    def self.search_pickup_points(query)
+      post '/pickup-points/search', query: query
+    end
+
+    def self.create_shipment(body)
+      headers = {'Content-Type' => 'application/xml'}
+      post '/prinetti/create-shipment', headers: headers, body: body
+    end
+  end
+
+  module Pakettikauppa
 
     class Base
       include ActiveModel::Model
@@ -44,7 +44,6 @@ module ShippingGateway
         @api_key = '00000000-0000-0000-0000-000000000000'
         @secret = '1234567890ABCDEF'
         @locale = I18n.locale
-        @connector = PakettikauppaConnector.new
       end
 
       def calculated_cost(base_price, metadata)
@@ -53,7 +52,8 @@ module ShippingGateway
 
       def list_shipping_methods
         request = hmac_request(language: @locale)
-        response = @connector.list_shipping_methods(request).parsed_response
+        response = PakettikauppaConnector.list_shipping_methods(request)
+          .parsed_response
       end
 
       def search_pickup_points(postalcode, provider)
@@ -61,7 +61,7 @@ module ShippingGateway
           postcode: postalcode,
           service_provider: provider
         )
-        @connector.search_pickup_points(request).parsed_response
+        PakettikauppaConnector.search_pickup_points(request).parsed_response
       end
 
       def create_shipment

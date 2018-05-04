@@ -15,20 +15,20 @@ module PaymentGateway
     format :json
     logger Rails.logger
 
-    def auth_payment(token_request)
-      self.class.post('/auth_payment', body: token_request.to_json)
+    def self.auth_payment(token_request)
+      post('/auth_payment', body: token_request.to_json)
     end
 
-    def check_payment_status(verify_request)
-      self.class.post('/check_payment_status', body: verify_request.to_json)
+    def self.check_payment_status(verify_request)
+      post('/check_payment_status', body: verify_request.to_json)
     end
 
-    def charge_url
-      "#{self.class.base_uri}/charge"
+    def self.charge_url
+      "#{base_uri}/charge"
     end
 
-    def token_url(token)
-      "#{self.class.base_uri}/token/#{token}"
+    def self.token_url(token)
+      "#{base_uri}/token/#{token}"
     end
   end
 
@@ -44,7 +44,6 @@ module PaymentGateway
       @api_key = order.store.pbw_api_key
       @private_key = order.store.pbw_private_key
       @version = 'w3.1'
-      @connector = PaybywayConnector.new
     end
 
     #
@@ -54,13 +53,13 @@ module PaymentGateway
       request = token_request(payment_method: {
         type: 'card', register_card_token: 0
       })
-      response = @connector.auth_payment(request).parsed_response
+      response = PaybywayConnector.auth_payment(request).parsed_response
       {
         result: response['result'],
         token: response['token'],
         amount: request[:amount],
         currency: request[:currency],
-        payment_url: @connector.charge_url
+        payment_url: PaybywayConnector.charge_url
       }
     end
 
@@ -73,16 +72,16 @@ module PaymentGateway
         token_valid_until: (Time.current + 6.hours).to_i,
         selected: [params[:selected]]
       })
-      response = @connector.auth_payment(request).parsed_response
+      response = PaybywayConnector.auth_payment(request).parsed_response
       {
-        payment_url: @connector.token_url(response['token'])
+        payment_url: PaybywayConnector.token_url(response['token'])
       }
     end
 
     # Sends a payment status request.
     def verify(token)
       request = verify_request(token)
-      response = @connector.check_payment_status(request).parsed_response
+      response = PaybywayConnector.check_payment_status(request).parsed_response
       response['result'] == 0
     end
 

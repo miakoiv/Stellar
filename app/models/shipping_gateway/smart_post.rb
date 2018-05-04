@@ -7,8 +7,8 @@ module ShippingGateway
     base_uri 'https://ohjelmat.posti.fi/pup/v1/'
     logger Rails.logger
 
-    def lookup(query)
-      self.class.get '/pickuppoints', query: query
+    def self.lookup(query)
+      get '/pickuppoints', query: query
     end
   end
 
@@ -28,7 +28,6 @@ module ShippingGateway
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
-      @pickup_connector = SmartPostPickupConnector.new
     end
 
     def calculated_cost(base_price, metadata)
@@ -40,7 +39,7 @@ module ShippingGateway
     # using its locations to look for the nearest five locations around it.
     # Returns a tuple of both results.
     def smartpost_lookup(postalcode)
-      areacode = @pickup_connector.lookup(zipcode: postalcode).parsed_response[0]
+      areacode = SmartPostPickupConnector.lookup(zipcode: postalcode).parsed_response[0]
       return [nil, nil] if areacode.nil?
       query = {
         type: 'smartpost',
@@ -48,7 +47,7 @@ module ShippingGateway
         latitude: areacode['MapLatitude'],
         top: 5
       }
-      locations = @pickup_connector.lookup(query).parsed_response
+      locations = SmartPostPickupConnector.lookup(query).parsed_response
       return [areacode, locations]
     end
 
