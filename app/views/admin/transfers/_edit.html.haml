@@ -5,10 +5,11 @@
         .panel-error-indicator= icon('warning')
       %h4.panel-title
         = t('.add_transfer_items')
-    .panel-body
-      %fieldset.bg-info
+    .panel-body.bg-info
+      %fieldset
         .form-group
           = select_tag 'categories', options_for_select(current_group.category_options), multiple: true, placeholder: col(Product, :category_ids)
+    .panel-body
       = render partial: 'admin/transfer_items/new', object: transfer, as: :transfer
 
 :coffee

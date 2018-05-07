@@ -5,10 +5,11 @@
         .panel-error-indicator= icon('warning')
       %h4.panel-title
         = t('.add_order_items')
-    .panel-body
-      %fieldse.bg-info
+    .panel-body.bg-info
+      %fieldset
         .form-group
           = select_tag 'categories', options_for_select(current_group.category_options), multiple: true, placeholder: col(Product, :category_ids)
+    .panel-body
       = render partial: 'admin/order_items/new', object: order, as: :order
 
 :coffee

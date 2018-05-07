@@ -443,7 +443,8 @@ body {
 h1, h2, h3, h4, h5, h6, th, dt, label, .label { font-weight: 500; }
 a.disabled, .disabled > a { pointer-events: none; }
 
-.control-label { @extend .small; }
+.control-label,
+.table > thead > tr > th { @extend .small; }
 textarea {
   overflow: auto;
   resize: vertical;
