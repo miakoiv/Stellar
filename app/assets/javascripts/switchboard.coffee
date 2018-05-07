@@ -11,7 +11,7 @@ class Switchboard
     @element = document.getElementById id
     @mapped = (key for key, _ of @options.mapping)
 
-    @element.addEventListener 'keypress', (e) =>
+    @element.addEventListener 'keydown', (e) =>
       k = e.key
 
       if k in @mapped
