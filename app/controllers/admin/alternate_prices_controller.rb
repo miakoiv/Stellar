@@ -11,6 +11,7 @@ class Admin::AlternatePricesController < ApplicationController
   # POST /admin/products/1/alternate_prices
   def create
     @group = current_store.groups.find(params[:alternate_price][:group_id])
+    @appraiser = Appraiser::Product.new(@group)
     @alternate_price = @product.alternate_prices.find_or_initialize_by(
       group: @group
     )
@@ -28,6 +29,7 @@ class Admin::AlternatePricesController < ApplicationController
   # PATCH/PUT /admin/products/1/alternate_prices/2
   def update
     @group = @alternate_price.group
+    @appraiser = Appraiser::Product.new(@group)
     @alternate_price.assign_attributes(alternate_price_params)
 
     respond_to do |format|
