@@ -12,9 +12,24 @@ class Shipment < ActiveRecord::Base
   # Shipments refer to a transfer to handle the stock changes.
   has_one :transfer
 
+  #---
+  PACKAGE_TYPES = %w{PC PU ZPF ZPE ZPT CG ZPX PM TB TC TU LTK KA VA}.freeze
+
   default_scope { order(created_at: :desc) }
   scope :shipped, -> { where.not(shipped_at: nil) }
   scope :pending, -> { where(shipped_at: nil) }
+
+  #---
+  with_options on: :update, if: :requires_dimensions?,
+    allow_nil: false, numericality: {
+    only_integer: true,
+    greater_than: 0
+  } do |shipment|
+    shipment.validates :mass
+    shipment.validates :dimension_u
+    shipment.validates :dimension_v
+    shipment.validates :dimension_w
+  end
 
   #---
   def self.available_gateways
@@ -28,6 +43,10 @@ class Shipment < ActiveRecord::Base
       Truckload
       Vendor
     }
+  end
+
+  def self.package_type_options
+    PACKAGE_TYPES
   end
 
   #---
@@ -62,6 +81,10 @@ class Shipment < ActiveRecord::Base
     !shipped?
   end
 
+  def requires_dimensions?
+    shipping_gateway.requires_dimensions?
+  end
+
   # Calculates the actual shipment cost based on the shipping cost product
   # and given pricing, adjusted by the gateway using the parsed metadata
   # obtained earlier.
@@ -77,6 +100,18 @@ class Shipment < ActiveRecord::Base
     return false if free_shipping_from.nil?
     total = order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
     total >= free_shipping_from
+  end
+
+  # Shipment weight as APIs call it, in kilograms.
+  def weight
+    return nil if mass.nil?
+    mass / 1000.0
+  end
+
+  # Volume in square metres from dimensions in mm.
+  def volume
+    return nil if dimension_u.nil? || dimension_v.nil? || dimension_w.nil?
+    (dimension_u * dimension_v * dimension_w) / 1_000_000_000.0
   end
 
   def parsed_metadata

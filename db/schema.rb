@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180504132436) do
+ActiveRecord::Schema.define(version: 20180508071517) do
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4
@@ -675,6 +675,11 @@ ActiveRecord::Schema.define(version: 20180504132436) do
     t.string   "number",             limit: 255
     t.string   "tracking_code",      limit: 255
     t.string   "pickup_point_id",    limit: 255
+    t.string   "package_type",       limit: 255
+    t.integer  "mass",               limit: 4
+    t.integer  "dimension_u",        limit: 4
+    t.integer  "dimension_v",        limit: 4
+    t.integer  "dimension_w",        limit: 4
     t.datetime "shipped_at"
     t.datetime "cancelled_at"
     t.text     "metadata",           limit: 65535

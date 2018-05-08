@@ -451,6 +451,12 @@ fi:
         number: nro
         tracking_code: Seurantakoodi
         pickup_point_id: Noutopisteen nro
+        package_type: Paketointi
+        mass: Paino
+        dimensions: Mitat
+        dimension_u: Leveys
+        dimension_v: Korkeus
+        dimension_w: Syvyys
         shipped_at: Toimituspvm
         cancelled_at: Peruutuspvm
         metadata: Yksityiskohdat

@@ -1,0 +1,15 @@
+.modal-dialog
+  = bootstrap_form_for [:admin, @shipment], remote: true do |f|
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title
+          = @shipment.shipping_method
+          = @shipment
+      .modal-body
+        = render partial: 'package_fields', locals: {f: f}
+      .modal-footer
+        = f.primary
+
+  :coffee
+    $('#shipment_package_type').selectize()

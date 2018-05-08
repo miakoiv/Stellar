@@ -237,11 +237,12 @@ fi:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     shipments:
       item:
-        refresh: Päivitä toimitus
+        refresh: Keräile varastosta
+        edit: Lähetyksen tiedot
         complete:
-          button: Toimita tämä
-          confirm: "Toimitetaanko varmasti %{klass} %{name}?"
-          proceed: Toimita
+          button: Lähetä toimitus
+          confirm: "Lähetetäänkö varmasti %{klass} %{name}?"
+          proceed: Lähetä
           cancel: Kumoa
       new:
         new_shipment: Uusi toimitus

@@ -1,0 +1,13 @@
+%fieldset
+  .row
+    .col-md-6
+      = f.select :package_type, Shipment.package_type_options
+    .col-md-6
+      = f.text_field :mass, append: 'g', class: 'text-right'
+  .row
+    .col-md-4
+      = f.text_field :dimension_u, append: 'mm', class: 'text-right'
+    .col-md-4
+      = f.text_field :dimension_v, append: 'mm', class: 'text-right'
+    .col-md-4
+      = f.text_field :dimension_w, append: 'mm', class: 'text-right'

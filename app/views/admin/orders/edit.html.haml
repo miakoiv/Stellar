@@ -38,6 +38,8 @@
         %h2.visible-print-block= title(Payment, count: 2)
         = render partial: 'admin/payments/table', object: @order, as: :order
 
+#shipments-edit-modal.modal{data: {backdrop: 'static'}}
+
 - if @order.approved?
   :coffee
     $('[href="#tab-shipments"]').tab 'show'

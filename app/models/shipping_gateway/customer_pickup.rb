@@ -15,6 +15,10 @@ module ShippingGateway
       true
     end
 
+    def self.requires_dimensions?
+      false
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
@@ -22,6 +26,10 @@ module ShippingGateway
 
     def calculated_cost(base_price, metadata)
       base_price
+    end
+
+    def send_shipment
+      return [true, nil]
     end
 
     def to_partial_path

@@ -39,6 +39,10 @@ module ShippingGateway
         true
       end
 
+      def self.requires_dimensions?
+        true
+      end
+
       def initialize(attributes = {})
         super
         raise ArgumentError if order.nil?
@@ -66,9 +70,16 @@ module ShippingGateway
         PakettikauppaConnector.search_pickup_points(request).parsed_response
       end
 
-      def create_shipment
+      def send_shipment
         raise ArgumentError if shipment.nil? || user.nil?
-        PakettikauppaConnector.create_shipment(shipment_xml).parsed_response
+        response = PakettikauppaConnector.create_shipment(shipment_xml)
+          .parsed_response['Response']
+        status = response['response.status'] == '0'
+
+        return [
+          status,
+          status && response['response.trackingcode']['__content__']
+        ]
       end
 
       private
@@ -107,10 +118,10 @@ module ShippingGateway
                   xml.send 'Consignment.Reference', order.number
                   xml.send 'Consignment.Product', shipping_method.code
                   xml.send 'Consignment.Parcel' do
-                    xml.send 'Parcel.Packagetype', 'PC'
-                    xml.send 'Parcel.Weight', 1.0
-                    xml.send 'Parcel.Volume', 0.001
-                    xml.send 'Parcel.Contents', 'generic'
+                    xml.send 'Parcel.Packagetype', shipment.package_type
+                    xml.send 'Parcel.Weight', shipment.weight
+                    xml.send 'Parcel.Volume', shipment.volume
+                    xml.send 'Parcel.Contents', 'M' # Merchandise
                   end
                   if shipment.pickup_point_id.present?
                     xml.send 'Consignment.AdditionalService' do

@@ -451,6 +451,12 @@ en:
         number: №
         tracking_code: Tracking code
         pickup_point_id: Pickup point №
+        package_type: Packaging
+        mass: Weight
+        dimensions: Dimensions
+        dimension_u: Width
+        dimension_v: Height
+        dimension_w: Depth
         shipped_at: Shipping date
         cancelled_at: Cancellation date
         metadata: Details

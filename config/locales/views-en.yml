@@ -257,10 +257,11 @@ en:
           confirm: The segment and its contents will be deleted. This cannot be undone.
     shipments:
       item:
-        refresh: Reload shipment
+        refresh: Reload from stock
+        edit: Shipment details
         complete:
-          button: Ship this
-          confirm: "Are you sure you want to ship %{klass} %{name}?"
+          button: Send shipment
+          confirm: "Are you sure you want to send %{klass} %{name}?"
           proceed: Ship
           cancel: Cancel
       new:

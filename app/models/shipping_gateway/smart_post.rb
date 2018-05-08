@@ -25,6 +25,10 @@ module ShippingGateway
       true
     end
 
+    def self.requires_dimensions?
+      false
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?
@@ -49,6 +53,10 @@ module ShippingGateway
       }
       locations = SmartPostPickupConnector.lookup(query).parsed_response
       return [areacode, locations]
+    end
+
+    def send_shipment
+      return [true, nil]
     end
 
     def to_partial_path
