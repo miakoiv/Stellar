@@ -85,6 +85,10 @@ class Shipment < ActiveRecord::Base
     shipping_gateway.requires_dimensions?
   end
 
+  def has_label?
+    shipping_gateway.generates_labels?
+  end
+
   # Calculates the actual shipment cost based on the shipping cost product
   # and given pricing, adjusted by the gateway using the parsed metadata
   # obtained earlier.

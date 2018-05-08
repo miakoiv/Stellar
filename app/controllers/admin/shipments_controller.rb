@@ -6,7 +6,7 @@ class Admin::ShipmentsController < ApplicationController
   before_action :set_order, only: [:create]
   before_action :set_shipment, except: [:create]
 
-  authority_actions refresh: 'update', complete: 'update'
+  authority_actions refresh: 'update', complete: 'update', label: 'read'
 
   # No layout, this controller never renders HTML.
 
@@ -59,14 +59,30 @@ class Admin::ShipmentsController < ApplicationController
     shipping_gateway = @shipment.shipping_gateway.new(
       order: @shipment.order, shipment: @shipment, user: current_user
     )
-    status, tracking_code = shipping_gateway.send_shipment
+    status, number, tracking_code = shipping_gateway.send_shipment
 
     respond_to do |format|
-      if status && @shipment.update(tracking_code: tracking_code) && @shipment.complete!
+      if status && @shipment.update(
+        number: number,
+        tracking_code: tracking_code
+      ) && @shipment.complete!
         format.js { render :complete }
       else
         format.js { render :error }
       end
+    end
+  end
+
+  # GET /admin/shipments/1/label
+  def label
+    authorize_action_for @shipment, at: current_store
+    shipping_gateway = @shipment.shipping_gateway.new(
+      order: @shipment.order, shipment: @shipment, user: current_user
+    )
+    status, file = shipping_gateway.fetch_label
+
+    respond_to do |format|
+      format.pdf { send_data(file, filename: "#{@shipment.number}.pdf", type: 'application/pdf') }
     end
   end
 

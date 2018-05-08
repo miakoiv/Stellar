@@ -170,6 +170,7 @@ Rails.application.routes.draw do
         member do
           patch :refresh
           patch :complete
+          get :label
         end
       end
       collection do

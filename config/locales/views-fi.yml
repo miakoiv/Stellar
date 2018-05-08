@@ -244,6 +244,7 @@ fi:
           confirm: "Lähetetäänkö varmasti %{klass} %{name}?"
           proceed: Lähetä
           cancel: Kumoa
+        label: Hae pakettikortti
       new:
         new_shipment: Uusi toimitus
     shipping_methods:

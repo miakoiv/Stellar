@@ -29,6 +29,10 @@ module ShippingGateway
       false
     end
 
+    def self.generates_labels?
+      false
+    end
+
     def initialize(attributes = {})
       super
       raise ArgumentError if order.nil?

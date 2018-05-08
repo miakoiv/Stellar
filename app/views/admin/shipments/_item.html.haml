@@ -18,6 +18,9 @@
 
     .panel-footer
       - if shipment.shipped?
+        - if shipment.has_label?
+          .pull-right
+            = link_to icon('file-pdf-o', t('.label')), label_admin_shipment_path(shipment, format: :pdf), class: 'btn btn-default btn-sm'
         = icon('retweet', col(Shipment, :shipped_at))
         = l(shipment.shipped_at.to_date)
       - else

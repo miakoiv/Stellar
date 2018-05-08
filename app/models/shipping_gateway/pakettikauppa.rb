@@ -26,6 +26,12 @@ module ShippingGateway
       post '/prinetti/create-shipment', format: :xml,
         headers: headers, body: body
     end
+
+    def self.get_shipping_label(body)
+      headers = {'Content-Type' => 'application/xml'}
+      post '/prinetti/get-shipping-label', format: :xml,
+        headers: headers, body: body
+    end
   end
 
   module Pakettikauppa
@@ -40,6 +46,10 @@ module ShippingGateway
       end
 
       def self.requires_dimensions?
+        true
+      end
+
+      def self.generates_labels?
         true
       end
 
@@ -78,7 +88,20 @@ module ShippingGateway
 
         return [
           status,
+          status && response['response.reference']['__content__'],
           status && response['response.trackingcode']['__content__']
+        ]
+      end
+
+      def fetch_label
+        raise ArgumentError if shipment.nil?
+        response = PakettikauppaConnector.get_shipping_label(label_xml)
+          .parsed_response['Response']
+        status = response['response.status'] == '0'
+
+        return [
+          status,
+          status && Base64.decode64(response['response.file']['__content__'])
         ]
       end
 
@@ -130,6 +153,27 @@ module ShippingGateway
                     end
                   end
                 end
+              end
+            end
+          end
+          builder.to_xml
+        end
+
+        def label_xml
+          id = order.number
+
+          builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+            xml.eChannel do
+              xml.ROUTING do
+                xml.send 'Routing.Account', @api_key
+                xml.send 'Routing.Key', md5(@api_key, id, @secret)
+                xml.send 'Routing.Id', id
+                xml.send 'Routing.Name', order.customer_name
+                xml.send 'Routing.Time', unix_time
+              end
+              xml.PrintLabel do
+                xml.Reference shipment.number
+                xml.TrackingCode shipment.tracking_code
               end
             end
           end
