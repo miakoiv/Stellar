@@ -2,12 +2,13 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :name, required: true
         = f.form_group do
           = f.check_box :searchable
-        = f.select :value_type,
-            Property.value_types.keys.map { |t| [Property.human_attribute_value(:value_type, t), t] },
-            {}, {class: 'selectize', disabled: !@property.new_record?}
+        .row
+          .col-md-8
+            = f.text_field :name, required: true
+          .col-md-4
+            = f.select :value_type, Property.value_types.keys.map { |t| [Property.human_attribute_value(:value_type, t), t] }, {}, {class: 'selectize', disabled: !@property.new_record?}
       .measurement_unit.collapse{class: @property.numeric? && 'in'}
         %fieldset{disabled: locked}
           = f.select :measurement_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: blank}, {class: 'selectize'}

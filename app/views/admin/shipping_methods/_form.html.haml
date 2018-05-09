@@ -15,7 +15,6 @@
           .col-md-6
             = f.form_group do
               = f.check_box :home_delivery
-        = f.text_field :delivery_time, append: col(ShippingMethod, :delivery_time_unit), class: 'text-right'
         %hr
         .row
           .col-md-6
@@ -27,7 +26,11 @@
             = f.select :shipping_cost_product_id, current_store.products.internal.map { |p| [p.to_s, p.id] }, {include_blank: blank}, {class: 'selectize'}
           .col-md-6
             = f.text_field :free_shipping_from, append: '€', class: 'text-right'
-        = f.select :detail_page_id, current_store.pages.primary.map { |p| [p.to_s, p.id] }, {include_blank: blank, help: t('.detail_page_help')}, {class: 'selectize'}
+        .row
+          .col-md-6
+            = f.text_field :delivery_time, append: col(ShippingMethod, :delivery_time_unit), class: 'text-right'
+          .col-md-6
+            = f.select :detail_page_id, current_store.pages.primary.map { |p| [p.to_s, p.id] }, {include_blank: blank, help: t('.detail_page_help')}, {class: 'selectize'}
         ~ f.text_area :description
       - unless locked
         %fieldset.actions.fixed

@@ -26,16 +26,21 @@
               .col-md-6
                 = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
             - unless @store.new_record?
+              %hr
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-appearance' do
           %fieldset{disabled: locked}
-            = f.form_group do
-              = f.check_box :detach_menu
+            .row
+              .col-md-6
+                = f.form_group do
+                  = f.check_box :detach_menu
+              - unless locked || @store.new_record?
+                .col-md-6
+                  .pull-right
+                    = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
+                      = icon('paint-brush', t('.edit_style'))
             = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
-            - unless locked || @store.new_record?
-              %p
-                = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
-                  = icon('paint-brush', t('.edit_style'))
+            %hr
             = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_option, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
@@ -86,9 +91,12 @@
           = tab_pane 'store-superuser' do
             %fieldset{disabled: locked}
               = f.text_field :vat_number
-              = f.number_field :erp_number
-              - unless @store.new_record?
-                = f.text_field :slug, readonly: true, help: t('.slug_help_html')
+              .row
+                .col-md-6
+                  = f.number_field :erp_number
+                - unless @store.new_record?
+                  .col-md-6
+                    = f.text_field :slug, readonly: true, help: t('.slug_help_html')
               = f.text_field :order_sequence, help: t('.order_sequence_help_html')
         - if @store.new_record?
           = tab_pane 'store-new-tax-category' do
