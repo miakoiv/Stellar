@@ -22,5 +22,7 @@ class KoalaController < ApplicationController
         created_at: item['created_time']
       )
     end
+  rescue StandardError => e
+    @error_message = e.message
   end
 end
