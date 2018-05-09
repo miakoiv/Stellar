@@ -1,4 +1,5 @@
-= form_tag ship_path(@order, @shipping_method), remote: true, id: 'customer-pickup-form' do
+= form_for [@order, @order.shipments.build(shipping_method: @shipping_method)], url: ship_path(@order), remote: true, html: {id: 'gateway-form'} do |f|
+  = f.hidden_field :shipping_method_id
   .ship-button.hidden-print
     = button_tag class: 'btn btn-block btn-lg btn-primary' do
       = icon('check', t('checkout.ship'))
