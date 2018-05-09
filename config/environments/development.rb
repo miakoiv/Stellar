@@ -56,4 +56,8 @@ Rails.application.configure do
 
   # Whitelist our virtual IP address block to the web console.
   config.web_console.whitelisted_ips = '10.2.0.0/16'
+
+  # API configuration.
+  config.x.pakettikauppa.api_uri = 'https://apitest.pakettikauppa.fi/'
+  config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
 end

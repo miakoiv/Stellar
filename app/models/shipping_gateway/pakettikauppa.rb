@@ -10,7 +10,7 @@ module ShippingGateway
 
   class PakettikauppaConnector
     include HTTParty
-    base_uri 'https://apitest.pakettikauppa.fi/'
+    base_uri Rails.configuration.x.pakettikauppa.api_uri
     logger Rails.logger
 
     def self.list_shipping_methods(query)

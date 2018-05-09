@@ -84,4 +84,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # API configuration.
+  config.x.pakettikauppa.api_uri = 'https://api.pakettikauppa.fi/'
+  config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
 end

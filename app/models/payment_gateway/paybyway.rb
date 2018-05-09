@@ -10,17 +10,17 @@ module PaymentGateway
 
   class PaybywayConnector
     include HTTParty
-    base_uri 'https://payform.bambora.com/pbwapi/'
+    base_uri Rails.configuration.x.paybyway.api_uri
     headers 'Content-Type' => 'application/json'
     format :json
     logger Rails.logger
 
     def self.auth_payment(token_request)
-      post('/auth_payment', body: token_request.to_json)
+      post '/auth_payment', body: token_request.to_json
     end
 
     def self.check_payment_status(verify_request)
-      post('/check_payment_status', body: verify_request.to_json)
+      post '/check_payment_status', body: verify_request.to_json
     end
 
     def self.charge_url
