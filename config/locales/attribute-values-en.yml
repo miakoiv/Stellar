@@ -96,7 +96,7 @@ en:
           store_admin: store administrator
           superuser: superuser
           third_party: third party
-          group_delegate: group delegate
+          customer_selection: customer selection
         description:
           correspondence: customer correspondence by e-mail
           reports: viewing and running reports
@@ -115,7 +115,7 @@ en:
           store_admin: store settings and web addresses
           superuser: store creation and system settings
           third_party: limited access from a third party
-          group_delegate: temporary assignment to another group
+          customer_selection: alternate customer selection for own shopping cart
       section:
         width:
           'spread': spread

@@ -96,7 +96,7 @@ fi:
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
           third_party: ulkopuolinen taho
-          group_delegate: ryhmän edustaja
+          customer_selection: asiakkaan valinta
         description:
           correspondence: asiakkaiden yhteydenotot sähköpostitse
           reports: raporttien lukeminen ja ajaminen
@@ -115,7 +115,7 @@ fi:
           store_admin: kaupan asetukset ja verkko-osoitteet
           superuser: kauppojen perustaminen ja järjestelmäasetukset
           third_party: rajoitetut oikeudet kolmannelle osapuolelle
-          group_delegate: väliaikainen toimiminen toisessa ryhmässä
+          customer_selection: vaihtoehtoisen asiakkaan valinta omalle ostoskorille
       section:
         width:
           'spread': aukeama

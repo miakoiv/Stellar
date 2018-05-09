@@ -11,10 +11,6 @@ class StoreController < ApplicationController
     super || guest_user
   end
 
-  def current_group
-    delegate_group || super
-  end
-
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
@@ -117,20 +113,6 @@ class StoreController < ApplicationController
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
     respond_to :js
-  end
-
-  # GET /delegate/:group_id
-  def delegate
-    @group = current_store.groups.find(params[:group_id])
-    if group_delegate? && @group.present? && @group != current_user.group(current_store)
-      cookies.signed[:delegate_group_id] = @group.id
-      shopping_cart.destroy
-      redirect_to store_path, alert: t('.notice', group: @group)
-    else
-      cookies.delete(:delegate_group_id)
-      shopping_cart.destroy
-      redirect_to store_path, alert: t('.default')
-    end
   end
 
   private

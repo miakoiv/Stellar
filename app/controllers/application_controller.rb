@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :group_delegate?, :can_manage?, :may_shop_at?, :admin?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :can_manage?, :may_shop_at?, :admin?
 
   def current_hostname
     @current_hostname
@@ -147,15 +147,6 @@ class ApplicationController < ActionController::Base
 
   def third_party?
     current_user_has_role?(:third_party)
-  end
-
-  def group_delegate?
-    current_user_has_role?(:group_delegate)
-  end
-
-  def delegate_group
-    group_id = cookies.signed[:delegate_group_id]
-    group_delegate? && current_store.groups.find_by(id: group_id)
   end
 
   def can_manage?

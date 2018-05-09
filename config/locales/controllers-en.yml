@@ -157,6 +157,3 @@ en:
       notice: "%{amount} of ”%{product}” added to cart."
     delete_cart:
       notice: "Shopping cart emptied."
-    delegate:
-      notice: "Temporarily joined group %{group}."
-      default: "Joined home group."

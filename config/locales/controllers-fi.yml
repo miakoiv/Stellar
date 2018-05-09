@@ -157,6 +157,3 @@ fi:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
     delete_cart:
       notice: "Ostoskori tyhjennetty."
-    delegate:
-      notice: "Väliaikaiseksi ryhmäksi valittu %{group}."
-      default: "Ryhmäksi valittu kotiryhmä."
