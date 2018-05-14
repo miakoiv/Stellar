@@ -33,7 +33,7 @@ module ShippingGateway
     end
 
     def send_shipment
-      return [true, nil]
+      return [true, nil, nil]
     end
 
     def to_partial_path
