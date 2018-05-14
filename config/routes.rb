@@ -23,8 +23,11 @@ Rails.application.routes.draw do
 
   resources :orders do
     resources :order_items, shallow: true
-    get :duplicate, on: :member
-    get :quote, on: :member
+    member do
+      get :select
+      get :duplicate
+      get :quote
+    end
   end
   resource :profile, only: [:show, :edit, :update]
 

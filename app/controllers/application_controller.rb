@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :can_manage?, :may_shop_at?, :admin?
+  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :can_manage?, :may_shop_at?, :admin?, :can_select_customer?, :selected_customer, :selected_group
 
   def current_hostname
     @current_hostname
@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   end
 
   def shopping_cart
-    @shopping_cart ||= current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
+    @shopping_cart ||= selected_shopping_cart || current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
   end
 
   # Convenience method to check current user roles at current store.
@@ -117,32 +117,32 @@ class ApplicationController < ActionController::Base
   end
 
   def can_order?
-    @can_order = current_user.can?(:order, as: current_group) if @can_order.nil?
+    @can_order = current_user.can?(:order, as: selected_group) if @can_order.nil?
     @can_order
   end
 
   def pricing_shown?
-    current_group.pricing_shown?
+    selected_group.pricing_shown?
   end
 
   def stock_shown?
-    current_group.stock_shown?
+    selected_group.stock_shown?
   end
 
-  # Pricing in views is handled by an appraiser for the current group.
+  # Pricing in views is handled by an appraiser for the selected group.
   def pricing
-    @product_appraiser ||= Appraiser::Product.new(current_group)
+    @product_appraiser ||= Appraiser::Product.new(selected_group)
   end
 
   # Pricing for the premium group of current group, if any.
   def premium_pricing
-    return nil if current_group.premium_group.nil?
-    @premium_appraiser ||= Appraiser::Product.new(current_group.premium_group)
+    return nil if selected_group.premium_group.nil?
+    @premium_appraiser ||= Appraiser::Product.new(selected_group.premium_group)
   end
 
   # Convenience method to tell if prices in views are with or without tax.
   def incl_tax?
-    @tax_included ||= current_group.price_tax_included?
+    @tax_included ||= selected_group.price_tax_included?
   end
 
   def third_party?
@@ -164,6 +164,18 @@ class ApplicationController < ActionController::Base
 
   def admin?
     self.class.parent == Admin
+  end
+
+  def can_select_customer?
+    current_user_has_role?(:customer_selection)
+  end
+
+  def selected_customer
+    can_select_customer? && shopping_cart.customer || current_user
+  end
+
+  def selected_group
+    selected_customer.group(current_store)
   end
 
   private
@@ -203,5 +215,9 @@ class ApplicationController < ActionController::Base
       guest.groups << current_store.default_group
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
+    end
+
+    def selected_shopping_cart
+      can_select_customer? && user_session['shopping_cart_id'].present? && current_user.orders.incomplete.find_by(id: user_session['shopping_cart_id'])
     end
 end

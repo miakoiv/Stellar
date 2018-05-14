@@ -306,6 +306,10 @@ fi:
     index:
       timeline_header: Toimitettavat tilaukset
       timeline_help_html: Aktivoi aikajana klikkaamalla
+    new:
+      new_order: Uusi tilaus
+    form_for_new:
+      new_customer: "[Uusi asiakas]"
     table:
       cancel:
         button: Peru
@@ -352,6 +356,7 @@ fi:
       delete: Tyhjennä kori
       confirm_delete: Tyhjennetäänkö ostoskori?
       lead_time_warning: Tilattua määrää ei varastossa. Toimitusaika %{lead_time}.
+      orders: Avoimet tilaukset
     profile: Omat tiedot
   checkout:
     panels:

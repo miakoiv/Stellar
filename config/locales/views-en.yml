@@ -326,6 +326,10 @@ en:
     index:
       timeline_header: Orders that require shipping
       timeline_help_html: Click on the timeline to activate scrolling and zooming
+    new:
+      new_order: New order
+    form_for_new:
+      new_customer: "[New customer]"
     table:
       cancel:
         button: Cancel
@@ -372,6 +376,7 @@ en:
       delete: Empty cart
       confirm_delete: Really empty your shopping cart?
       lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{lead_time}.
+      orders: Pending orders
     profile: Your profile
   checkout:
     panels:

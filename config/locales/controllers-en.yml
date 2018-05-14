@@ -142,6 +142,8 @@ en:
     mail_form:
       thank_you: Thank you for contacting us!
   orders:
+    create:
+      notice: "Order %{order} created."
     update:
       notice: "Order %{order} updated."
     destroy:

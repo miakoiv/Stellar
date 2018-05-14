@@ -142,6 +142,8 @@ fi:
     mail_form:
       thank_you: Kiitos yhteydenotostanne!
   orders:
+    create:
+      notice: "Tilaus %{order} luotu."
     update:
       notice: "Tilaus %{order} päivitetty."
     destroy:

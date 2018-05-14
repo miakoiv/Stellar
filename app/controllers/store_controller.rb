@@ -63,7 +63,6 @@ class StoreController < ApplicationController
   def cart
     @order = shopping_cart
     @order_types = @order.available_order_types
-    return redirect_to front_path if @order.empty?
   end
 
   # GET /cart/delete

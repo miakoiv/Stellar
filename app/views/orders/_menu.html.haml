@@ -1,0 +1,5 @@
+- current_user.orders.at(current_store).incomplete.each do |order|
+  %li{class: order == shopping_cart && 'active'}
+    = link_to select_order_path(order) do
+      = bootstrap_label(order.source)
+      = order.customer_name

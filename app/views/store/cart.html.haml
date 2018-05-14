@@ -1,11 +1,23 @@
 #static-wrap.layout-container
   .container
     .page-header
+      - if can_select_customer?
+        = link_to new_order_path, class: 'btn btn-primary' do
+          = icon('plus', t('orders.new.new_order'))
       = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
       %h1.hidden-print
         = icon('shopping-cart', t('.shopping_cart'))
         - if @order.customer?
-          %span.small= bootstrap_label(@order.customer, appearance: @order.source.appearance)
+          %span.small= bootstrap_label(@order.customer, appearance: @order.source.appearance, text: @order.customer.name.split.first)
       %h1.visible-print-block= current_store
 
     = render partial: 'cart_contents', object: @order, as: :order
+
+- if can_select_customer?
+  - content_for :auxiliary_nav do
+    %li.dropdown
+      = dropdown_toggle do
+        = t('.orders')
+        %span.caret
+      %ul.dropdown-menu{role: 'menu'}
+        = render partial: 'orders/menu'
