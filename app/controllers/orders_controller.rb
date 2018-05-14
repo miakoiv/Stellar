@@ -89,7 +89,8 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   # The checkout process calls this via AJAX any time the order status changes.
-  # Completes an order if it's ready for completion. Responses are in JSON.
+  # Completes an order if it's ready for completion. Orders created for another
+  # customer are approved at completion. Responses are in JSON.
   # Returns an error if the order itself does not validate, or it has become
   # uncheckoutable until completed.
   # HTML responses are sent when the user edits her own completed orders.
@@ -98,7 +99,10 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params) && (@order.checkoutable? || @order.complete?)
-        @order.complete! if @order.should_complete?
+        if @order.should_complete?
+          @order.complete!
+          @order.update(approved_at: Date.current) if @order.customer?
+        end
 
         format.json { render json: @order }
         format.html { redirect_to order_path(@order), notice: t('.notice', order: @order) }
