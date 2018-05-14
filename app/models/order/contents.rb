@@ -153,8 +153,9 @@ class Order < ActiveRecord::Base
     # Does nothing if the order has no associated inventory or doesn't
     # require shipping anything.
     def create_initial_transfer!
-      return nil unless inventory.present? && requires_shipping?
-      shipment = shipments.first_or_create
+      shipping_method = store.shipping_methods.active.first
+      return nil unless shipping_method.present? && inventory.present? && requires_shipping?
+      shipment = shipments.first_or_create(shipping_method: shipping_method)
       shipment.load!
     end
 end
