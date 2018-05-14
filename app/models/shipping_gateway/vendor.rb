@@ -5,7 +5,7 @@ module ShippingGateway
   class Vendor
     include ActiveModel::Model
 
-    attr_accessor :order
+    attr_accessor :order, :shipment, :user
 
     def self.requires_maps?
       false

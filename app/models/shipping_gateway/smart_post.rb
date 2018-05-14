@@ -15,7 +15,7 @@ module ShippingGateway
   class SmartPost
     include ActiveModel::Model
 
-    attr_accessor :order
+    attr_accessor :order, :shipment, :user
 
     def self.requires_maps?
       true
