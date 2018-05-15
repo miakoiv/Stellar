@@ -5,11 +5,7 @@
         = f.form_group do
           = f.check_box :searchable
         %hr
-        .row
-          .col-md-8
-            = f.text_field :name, required: true
-          .col-md-4
-            = f.text_field :external_name
+        = f.text_field :name, required: true
       %fieldset{disabled: locked}
         .row
           .col-md-6
@@ -22,6 +18,8 @@
             .unit_pricing.collapse{class: @property.measurement_unit.present? && 'in'}
               = f.form_group do
                 = f.check_box :unit_pricing, disabled: @property.measurement_unit.nil?
+        %hr
+        = f.text_field :external_name, help: t('.external_name_help')
       - unless locked
         %fieldset.actions.fixed
           .container

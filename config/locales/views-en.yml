@@ -244,6 +244,8 @@ en:
         new_property: New property
       new:
         new_property: New property
+      form:
+        external_name_help: Property name in CSV files for importing product properties.
     sections:
       settings:
         delete:
