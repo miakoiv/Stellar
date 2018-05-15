@@ -1,29 +1,40 @@
 = bootstrap_form_for [:admin, order] do |f|
-  .panel.panel-default
-    .panel-body
-      %fieldset
-        = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}
-        = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {url: admin_group_path(g), appearance: g.appearance}.to_json] }
-        = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
-        = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }, {}
-      %hr
-      %fieldset
-        = render partial: 'customer_fields', locals: {f: f}
-        %fieldset.actions.fixed
-          .container
-            = f.primary
+  .col-lg-5
+    .panel.panel-primary
+      .panel-body
+        %fieldset
+          = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}, {placeholder: t('.new_customer')}
+          = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {url: admin_group_path(g), appearance: g.appearance}.to_json] }
+          = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
+          = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }, {}
+  .col-lg-6.col-lg-offset-1
+    .panel.panel-default
+      .panel-body
+        %fieldset
+          = render partial: 'customer_fields', locals: {f: f}
+          %fieldset.actions.fixed
+            .container
+              = f.primary
 
 :coffee
+  refresh = (customer_id) ->
+    $.ajax
+      url: '#{new_admin_order_path}'
+      type: 'GET'
+      dataType: 'script'
+      data:
+        order:
+          customer_id: customer_id
   $customer_select = $('#order_customer_id').selectize
     allowEmptyOption: true
+    onFocus: ->
+      this.clear true unless this.getValue()
+    onBlur: ->
+      id = this.getValue()
+      refresh id unless id
     onChange: (id) ->
-      $.ajax
-        url: '#{new_admin_order_path}'
-        type: 'GET'
-        dataType: 'script'
-        data:
-          order:
-            customer_id: id
+      if this.items.length
+        refresh id
 
   $group_select = $('#order_group_id').selectize
     labelField: 'title'
