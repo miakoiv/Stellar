@@ -21,6 +21,7 @@ class Property < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates :external_name, uniqueness: {scope: :store, allow_blank: true}
   after_save :define_search_method
 
   #---
