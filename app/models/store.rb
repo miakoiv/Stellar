@@ -194,6 +194,13 @@ class Store < ActiveRecord::Base
     properties.merge(Property.searchable).merge(Property.sorted)
   end
 
+  # Mapping of properties by external name
+  def property_map
+    properties.reject { |p| p.external_name.blank? }
+      .map { |p| [p.external_name.to_sym, p] }
+      .to_h
+  end
+
   def group_options
     groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }
   end
