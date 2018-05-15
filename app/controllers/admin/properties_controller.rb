@@ -96,7 +96,8 @@ class Admin::PropertiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       params.require(:property).permit(
-        :value_type, :measurement_unit_id, :unit_pricing, :searchable, :name
+        :value_type, :measurement_unit_id, :unit_pricing, :searchable,
+        :name, :external_name
       )
     end
 end

@@ -404,6 +404,7 @@ fi:
         unit_pricing: Käytä yksikköhintaa
         searchable: Lisää tuotehakuun
         name: Nimi
+        external_name: Ulkoinen nimi
       requisite_entry:
         product_id: Tuote
         requisite_id: Tarvittava tuote

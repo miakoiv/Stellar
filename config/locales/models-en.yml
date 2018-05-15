@@ -404,6 +404,7 @@ en:
         unit_pricing: Use unit pricing
         searchable: Include in product search
         name: Name
+        external_name: External name
       requisite_entry:
         product_id: Product
         requisite_id: Requisite product
