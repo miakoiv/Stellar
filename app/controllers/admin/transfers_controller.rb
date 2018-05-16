@@ -42,6 +42,7 @@ class Admin::TransfersController < ApplicationController
 
     respond_to do |format|
       if @transfer.save
+        track @transfer
         format.html { redirect_to edit_admin_transfer_path(@transfer),
           notice: t('.notice', transfer: @transfer) }
         format.json { render :show, status: :created, location: admin_transfer_path(@transfer) }
@@ -59,6 +60,7 @@ class Admin::TransfersController < ApplicationController
 
     respond_to do |format|
       if @transfer.update(transfer_params)
+        track @transfer
         format.html { redirect_to admin_transfer_path(@transfer),
           notice: t('.notice', transfer: @transfer) }
         format.json { render :show, status: :ok, location: admin_transfer_path(@transfer) }
@@ -73,6 +75,7 @@ class Admin::TransfersController < ApplicationController
   # DELETE /admin/transfers/1.json
   def destroy
     authorize_action_for @transfer, at: current_store
+    track @transfer
     @transfer.destroy
 
     respond_to do |format|
@@ -88,6 +91,7 @@ class Admin::TransfersController < ApplicationController
 
     respond_to do |format|
       if @transfer.complete!
+        track @transfer, nil, {action: 'conclude'}
         format.html { redirect_to admin_transfer_path(@transfer), notice: t('.notice', transfer: @transfer) }
         format.json { render :show, status: :ok, location: admin_transfer_path(@transfer) }
       else

@@ -4,6 +4,7 @@ class Department < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Imageable
   include Reorderable
   include FriendlyId

@@ -4,6 +4,7 @@ class Hostname < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Reorderable
 
   #---

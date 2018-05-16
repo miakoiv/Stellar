@@ -13,6 +13,7 @@ class Admin::TransferItemsController < ApplicationController
 
     respond_to do |format|
       if @transfer_item.save
+        track @transfer_item, @transfer
         format.js { render :create }
       else
         format.js { render :error }
@@ -27,6 +28,7 @@ class Admin::TransferItemsController < ApplicationController
 
     respond_to do |format|
       if @transfer_item.update(transfer_item_params)
+        track @transfer_item, @transfer
         format.js { render :update }
       else
         format.js { render :error }
@@ -38,6 +40,7 @@ class Admin::TransferItemsController < ApplicationController
   def destroy
     @transfer_item = TransferItem.find(params[:id])
     @transfer = @transfer_item.transfer
+    track @transfer_item, @transfer
 
     @transfer_item.destroy
   end

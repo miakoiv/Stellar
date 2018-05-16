@@ -8,6 +8,7 @@ class Promotion < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Imageable
   include Pageable
   include FriendlyId

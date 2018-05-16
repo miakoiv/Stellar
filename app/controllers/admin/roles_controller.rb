@@ -13,9 +13,21 @@ class Admin::RolesController < ApplicationController
   def toggle
     authorize_action_for Role, at: current_store
     if @role == :superuser
-      @user.has_cached_role?(@role) ? @user.revoke(@role) : @user.grant(@role)
+      if @user.has_cached_role?(@role)
+        @user.revoke(@role)
+        track @user, nil, {action: 'revoke', differences: {role: @role}}
+      else
+        @user.grant(@role)
+        track @user, nil, {action: 'grant', differences: {role: @role}}
+      end
     else
-      @user.has_cached_role?(@role, current_store) ? @user.revoke(@role, current_store) : @user.grant(@role, current_store)
+      if @user.has_cached_role?(@role, current_store)
+        @user.revoke(@role, current_store)
+        track @user, nil, {action: 'revoke', differences: {role: @role}}
+      else
+        @user.grant(@role, current_store)
+        track @user, nil, {action: 'grant', differences: {role: @role}}
+      end
     end
 
     respond_to :js

@@ -9,6 +9,7 @@ class CustomerAsset < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
 
   monetize :value_cents
 

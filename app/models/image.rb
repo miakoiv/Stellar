@@ -2,6 +2,7 @@
 
 class Image < ActiveRecord::Base
 
+  include Trackable
   include Reorderable
 
   enum purpose: {presentational: 0, technical: 1}

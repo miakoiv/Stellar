@@ -178,6 +178,26 @@ class ApplicationController < ActionController::Base
     selected_customer.group(current_store)
   end
 
+  # Tracks activity for given resource in given context, with current store
+  # and current user. Stores the action taken on given resource, storing any
+  # changes made as differences, except changes between two blank values.
+  # Options may be supplied to override the recorded action and/or differences.
+  def track(resource, context = nil, options = {})
+    action = options[:action] || action_name
+    differences = options[:differences].presence || resource.previous_changes
+      .except('encrypted_password', 'created_at', 'updated_at')
+      .reject { |_, value| value.reject(&:blank?).empty? }
+
+    activity = Activity.create(
+      store: current_store,
+      user: current_user,
+      action: action,
+      resource: resource,
+      context: context || resource,
+      differences: differences
+    )
+  end
+
   private
 
     # Unless given by param, locale is set from user preference first, then

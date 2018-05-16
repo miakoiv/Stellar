@@ -17,6 +17,7 @@ class Admin::HostnamesController < ApplicationController
 
     respond_to do |format|
       if @hostname.save
+        track @hostname
         format.js { render :create }
         format.json { render json: @hostname, status: 200 }
       else
@@ -29,6 +30,7 @@ class Admin::HostnamesController < ApplicationController
   def destroy
     @hostname = Hostname.find(params[:id])
     authorize_action_for @hostname, at: current_store
+    track @hostname
 
     respond_to do |format|
       if @hostname.destroy

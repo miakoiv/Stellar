@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   # Adds `creatable_by?(user)`, etc.
   include Authority::UserAbilities
   include Authority::Abilities
+  include Trackable
   resourcify
   rolify
 

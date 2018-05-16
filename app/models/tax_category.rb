@@ -4,6 +4,7 @@ class TaxCategory < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Reorderable
 
   #---

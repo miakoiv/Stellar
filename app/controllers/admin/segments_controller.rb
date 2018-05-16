@@ -43,6 +43,7 @@ class Admin::SegmentsController < ApplicationController
 
     respond_to do |format|
       if @segment.save
+        track @segment, @segment.column.section.page
         format.js { render :create }
       else
         format.json { render json: @segment.errors, status: :unprocessable_entity }
@@ -56,6 +57,7 @@ class Admin::SegmentsController < ApplicationController
 
     respond_to do |format|
       if @segment.update(segment_params)
+        track @segment, @segment.column.section.page
         format.js { render :update }
       else
         format.js { render :rollback }
@@ -85,6 +87,7 @@ class Admin::SegmentsController < ApplicationController
   # DELETE /admin/segments/1.js
   def destroy
     authorize_action_for @segment, at: current_store
+    track @segment, @segment.column.section.page
 
     respond_to do |format|
       if @segment.destroy

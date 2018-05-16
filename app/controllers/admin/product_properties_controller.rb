@@ -13,6 +13,7 @@ class Admin::ProductPropertiesController < ApplicationController
       .find_or_initialize_by(product_property_params)
     respond_to do |format|
       if @product_property.save
+        track @product_property, @product
         @product.touch
         format.js { render :create }
       else
@@ -25,6 +26,7 @@ class Admin::ProductPropertiesController < ApplicationController
   def destroy
     @product_property = ProductProperty.find(params[:id])
     @product = @product_property.product
+    track @product_property, @product
 
     respond_to do |format|
       if @product_property.destroy

@@ -35,6 +35,7 @@ class Store < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Imageable
 
   #---

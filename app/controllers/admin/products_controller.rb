@@ -65,6 +65,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        track @product
         format.html { redirect_to edit_admin_product_path(@product),
           notice: t('.notice', product: @product) }
         format.json { render :show, status: :created, location: admin_product_path(@product) }
@@ -83,6 +84,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update(product_params)
+        track @product
         format.html { redirect_to admin_product_path(@product),
           notice: t('.notice', product: @product) }
         format.js { flash.now[:notice] = t('.notice', product: @product) }
@@ -108,6 +110,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update(product_params)
+        track @product
         format.js { render :set_price }
       else
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -120,6 +123,7 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for @product, at: current_store
     original = @product
     @product = original.duplicate!
+    track @product
 
     redirect_to edit_admin_product_path(@product),
       notice: t('.notice', product: original)
@@ -128,14 +132,18 @@ class Admin::ProductsController < ApplicationController
   # POST /admin/products/1/add_requisite_entries
   def add_requisite_entries
     authorize_action_for @product, at: current_store
-
     requisite_ids = params[:product][:requisite_ids_string]
       .split(',').map(&:to_i)
-
-    requisite_ids.each do |requisite_id|
-      @product.requisite_entries.find_or_create_by(
-        requisite: Product.find(requisite_id)
-      ).update(priority: @product.requisite_entries.count)
+    track @product, nil, {
+      action: 'update',
+      differences: {added_requisites: requisite_ids}
+    }
+    ActiveRecord::Base.transaction do
+      requisite_ids.each do |requisite_id|
+        @product.requisite_entries.find_or_create_by(
+          requisite: Product.find(requisite_id)
+        ).update(priority: @product.requisite_entries.count)
+      end
     end
 
     respond_to :js

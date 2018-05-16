@@ -12,6 +12,7 @@ class Admin::InventoryEntriesController < ApplicationController
 
     respond_to do |format|
       if @inventory_entry.save
+        track @inventory_entry, @inventory_item.product
         @inventory_item.reload
         format.js { render :create }
       else

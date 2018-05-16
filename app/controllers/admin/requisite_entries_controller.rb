@@ -4,13 +4,13 @@ class Admin::RequisiteEntriesController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_product, only: [:create]
 
   # No layout, this controller never renders HTML.
 
   # DELETE /admin/requisite_entries/1
   def destroy
     @requisite_entry = RequisiteEntry.find(params[:id])
+    track @requisite_entry, @requisite_entry.product
 
     respond_to do |format|
       if @requisite_entry.destroy

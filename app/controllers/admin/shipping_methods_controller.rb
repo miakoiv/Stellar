@@ -39,6 +39,7 @@ class Admin::ShippingMethodsController < ApplicationController
 
     respond_to do |format|
       if @shipping_method.save
+        track @shipping_method
         format.html { redirect_to admin_shipping_method_path(@shipping_method),
           notice: t('.notice', shipping_method: @shipping_method) }
         format.json { render :show, status: :created, location: admin_shipping_method_path(@shipping_method) }
@@ -56,6 +57,7 @@ class Admin::ShippingMethodsController < ApplicationController
 
     respond_to do |format|
       if @shipping_method.update(shipping_method_params)
+        track @shipping_method
         format.html { redirect_to admin_shipping_method_path(@shipping_method),
           notice: t('.notice', shipping_method: @shipping_method) }
         format.json { render :show, status: :ok, location: admin_shipping_method_path(@shipping_method) }
@@ -70,6 +72,7 @@ class Admin::ShippingMethodsController < ApplicationController
   # DELETE /admin/shipping_methods/1.json
   def destroy
     authorize_action_for @shipping_method, at: current_store
+    track @shipping_method
     @shipping_method.destroy
 
     respond_to do |format|

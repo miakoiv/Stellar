@@ -51,6 +51,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/1
   def show
     authorize_action_for Order, at: current_store
+    track @order
   end
 
   # GET /admin/orders/new
@@ -82,6 +83,7 @@ class Admin::OrdersController < ApplicationController
   # GET /admin/orders/1/edit
   def edit
     authorize_action_for Order, at: current_store
+    track @order
   end
 
   # POST /admin/orders
@@ -99,6 +101,7 @@ class Admin::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        track @order
         @order.customer.groups << @group if new_customer
 
         format.html { redirect_to edit_admin_order_path(@order),
@@ -118,6 +121,7 @@ class Admin::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.update(order_params)
+        track @order
         if should_finalize?
           @order.complete!(false)
           @order.update(approved_at: Date.current)
@@ -135,6 +139,7 @@ class Admin::OrdersController < ApplicationController
   # DELETE /admin/orders/1
   def destroy
     authorize_action_for Order, at: current_store
+    track @order
     @order.destroy
 
     respond_to do |format|
@@ -162,6 +167,7 @@ class Admin::OrdersController < ApplicationController
   def approve
     authorize_action_for Order, at: current_store
     @order.update(approved_at: Date.current)
+    track @order
 
     respond_to do |format|
       format.js
@@ -177,6 +183,7 @@ class Admin::OrdersController < ApplicationController
   def conclude
     authorize_action_for Order, at: current_store
     @order.update(concluded_at: Date.current)
+    track @order
 
     respond_to do |format|
       format.js

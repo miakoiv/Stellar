@@ -32,6 +32,7 @@ class Admin::CategoriesController < ApplicationController
   # GET /admin/categories/1/edit.js
   def edit
     authorize_action_for @category, at: current_store
+    track @category
     @categories = current_store.categories.roots
 
     respond_to :html, :js
@@ -46,6 +47,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
+        track @category
         format.html { redirect_to edit_admin_category_path(@category), notice: t('.notice', category: @category) }
         format.js { flash.now[:notice] = t('.notice', category: @category) }
         format.json { render :edit, status: :created, location: edit_admin_category_path(@category) }
@@ -65,6 +67,7 @@ class Admin::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.update(category_params)
+        track @category
         @categories = current_store.categories.roots
 
         format.html { redirect_to admin_category_path(@category), notice: t('.notice', category: @category) }
@@ -82,6 +85,7 @@ class Admin::CategoriesController < ApplicationController
   # DELETE /admin/categories/1.json
   def destroy
     authorize_action_for @category, at: current_store
+    track @category
     @category.destroy
 
     respond_to do |format|

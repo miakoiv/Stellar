@@ -42,6 +42,7 @@ class Admin::InventoriesController < ApplicationController
 
     respond_to do |format|
       if @inventory.save
+        track @inventory
         format.html { redirect_to admin_inventory_path(@inventory),
           notice: t('.notice', inventory: @inventory) }
         format.json { render :show, status: :created, location: admin_inventory_path(@inventory) }
@@ -59,6 +60,7 @@ class Admin::InventoriesController < ApplicationController
 
     respond_to do |format|
       if @inventory.update(inventory_params)
+        track @inventory
         format.html { redirect_to admin_inventory_path(@inventory),
           notice: t('.notice', inventory: @inventory) }
         format.json { render :show, status: :ok, location: admin_inventory_path(@inventory) }
@@ -73,6 +75,7 @@ class Admin::InventoriesController < ApplicationController
   # DELETE /admin/inventories/1.json
   def destroy
     authorize_action_for @inventory, at: current_store
+    track @inventory
     @inventory.destroy
 
     respond_to do |format|

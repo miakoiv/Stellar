@@ -42,6 +42,7 @@ class Admin::StoresController < ApplicationController
 
     respond_to do |format|
       if @store.save
+        track @store
         format.html { redirect_to edit_admin_store_path(@store),
           notice: t('.notice', store: @store) }
         format.json { render :show, status: :created, location: admin_store_path(@store) }
@@ -59,6 +60,7 @@ class Admin::StoresController < ApplicationController
 
     respond_to do |format|
       if @store.update(store_params)
+        track @store
         format.html { redirect_to admin_store_path(@store),
           notice: t('.notice', store: @store) }
         format.json { render :show, status: :ok, location: admin_store_path(@store) }

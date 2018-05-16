@@ -2,6 +2,7 @@
 
 class Document < ActiveRecord::Base
 
+  include Trackable
   include Reorderable
 
   #---

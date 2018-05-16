@@ -43,6 +43,7 @@ class Admin::PromotionsController < ApplicationController
 
     respond_to do |format|
       if @promotion.save
+        track @promotion
         format.html { redirect_to edit_admin_promotion_path(@promotion),
           notice: t('.notice', promotion: @promotion) }
         format.json { render :show, status: :created, location: admin_promotion_path(@promotion) }
@@ -60,6 +61,7 @@ class Admin::PromotionsController < ApplicationController
 
     respond_to do |format|
       if @promotion.update(promotion_params)
+        track @promotion
         format.html { redirect_to admin_promotion_path(@promotion),
           notice: t('.notice', promotion: @promotion) }
         format.json { render :show, status: :ok, location: admin_promotion_path(@promotion) }
@@ -74,6 +76,7 @@ class Admin::PromotionsController < ApplicationController
   # DELETE /admin/promotions/1.json
   def destroy
     authorize_action_for @promotion, at: current_store
+    track @promotion
     @promotion.destroy
 
     respond_to do |format|
@@ -88,16 +91,18 @@ class Admin::PromotionsController < ApplicationController
     authorize_action_for @promotion, at: current_store
     product_ids = params[:promotion][:product_ids_string]
       .split(',').map(&:to_i)
-
-    product_ids.each do |product_id|
-      @promotion.promoted_items.find_or_create_by(
-        product: Product.find(product_id)
-      )
+    track @promotion, nil, {
+      action: 'update',
+      differences: {added_products: product_ids}
+    }
+    ActiveRecord::Base.transaction do
+      product_ids.each do |product_id|
+        @promotion.promoted_items.find_or_create_by(
+          product: Product.find(product_id)
+        )
+      end
     end
-
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   # POST /admin/promotions/1/add_categories
@@ -105,19 +110,21 @@ class Admin::PromotionsController < ApplicationController
     authorize_action_for @promotion, at: current_store
     category_ids = params[:promotion][:category_ids_string]
       .split(',').map(&:to_i)
-
-    category_ids.each do |category_id|
-      category = Category.find(category_id)
-      category.products.live.each do |product|
-        @promotion.promoted_items.find_or_create_by(
-          product: product
-        )
+    track @promotion, nil, {
+      action: 'update',
+      differences: {added_categories: category_ids}
+    }
+    ActiveRecord::Base.transaction do
+      category_ids.each do |category_id|
+        category = Category.find(category_id)
+        category.products.live.each do |product|
+          @promotion.promoted_items.find_or_create_by(
+            product: product
+          )
+        end
       end
     end
-
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   private

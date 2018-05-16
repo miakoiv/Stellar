@@ -14,6 +14,7 @@ class Admin::AssetEntriesController < ApplicationController
 
     respond_to do |format|
       if @asset_entry.save
+        track @asset_entry, @customer_asset
         format.js { render :create }
       else
         format.json { render json: @asset_entry.errors, status: :unprocessable_entity }

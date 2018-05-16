@@ -4,6 +4,7 @@ class Category < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Imageable
   include Pageable
   include FriendlyId

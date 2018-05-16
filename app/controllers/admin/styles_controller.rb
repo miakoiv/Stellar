@@ -18,6 +18,7 @@ class Admin::StylesController < ApplicationController
 
     respond_to do |format|
       if @style.save
+        track @style, @store
         format.js
       else
         format.json { render json: @style.errors, status: :unprocessable_entity }
@@ -31,6 +32,7 @@ class Admin::StylesController < ApplicationController
 
     respond_to do |format|
       if @style.update(style_params)
+        track @style, @store
         format.js
       else
         format.json { render json: @style.errors, status: :unprocessable_entity }
@@ -41,6 +43,7 @@ class Admin::StylesController < ApplicationController
   # DELETE /admin/stores/1/style.js
   def destroy
     @style = @store.style
+    track @style, @store
     @style.destroy
 
     respond_to :js

@@ -41,6 +41,7 @@ class Admin::OrderTypesController < ApplicationController
 
     respond_to do |format|
       if @order_type.save
+        track @order_type
         format.html { redirect_to edit_admin_order_type_path(@order_type),
           notice: t('.notice', order_type: @order_type) }
         format.json { render :show, status: :created, location: admin_order_type_path(@order_type) }
@@ -58,6 +59,7 @@ class Admin::OrderTypesController < ApplicationController
 
     respond_to do |format|
       if @order_type.update(order_type_params)
+        track @order_type
         format.html { redirect_to admin_order_type_path(@order_type),
           notice: t('.notice', order_type: @order_type) }
         format.json { render :show, status: :ok, location: admin_order_type_path(@order_type) }
@@ -72,6 +74,7 @@ class Admin::OrderTypesController < ApplicationController
   # DELETE /admin/order_types/1.json
   def destroy
     authorize_action_for @order_type, at: current_store
+    track @order_type
     @order_type.destroy
 
     respond_to do |format|

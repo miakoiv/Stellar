@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Reorderable
 
   # This group purchases products at price base plus price modifier.

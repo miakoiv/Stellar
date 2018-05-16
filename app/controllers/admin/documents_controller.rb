@@ -25,6 +25,7 @@ class Admin::DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
+        track @document, @documentable
         format.json { render json: @document, status: 200 } # for dropzone
       else
         format.html { render json: {error: t('.error')} }
@@ -37,6 +38,7 @@ class Admin::DocumentsController < ApplicationController
   def destroy
     @document = Document.find(params[:id])
     @documentable = @document.documentable
+    track @document, @documentable
 
     respond_to do |format|
       if @document.destroy

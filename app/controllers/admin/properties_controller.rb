@@ -47,6 +47,7 @@ class Admin::PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.save
+        track @property
         format.html { redirect_to edit_admin_property_path(@property),
           notice: t('.notice', property: @property) }
         format.json { render :show, status: :created, location: admin_property_path(@property) }
@@ -64,6 +65,7 @@ class Admin::PropertiesController < ApplicationController
 
     respond_to do |format|
       if @property.update(property_params)
+        track @property
         format.html { redirect_to admin_property_path(@property),
           notice: t('.notice', property: @property) }
         format.json { render :show, status: :ok, location: admin_property_path(@property) }
@@ -78,6 +80,7 @@ class Admin::PropertiesController < ApplicationController
   # DELETE /admin/properties/1.json
   def destroy
     authorize_action_for @property, at: current_store
+    track @property
     @property.destroy
 
     respond_to do |format|

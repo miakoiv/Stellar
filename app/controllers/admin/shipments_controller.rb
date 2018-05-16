@@ -24,6 +24,7 @@ class Admin::ShipmentsController < ApplicationController
 
     respond_to do |format|
       if @shipment.save
+        track @shipment, @order
         @shipment.load!
         format.js { render :create }
       else
@@ -38,6 +39,7 @@ class Admin::ShipmentsController < ApplicationController
 
     respond_to do |format|
       if @shipment.update(shipment_params)
+        track @shipment, @shipment.order
         format.js { render :update }
       else
         format.js { render :rollback }
@@ -48,6 +50,10 @@ class Admin::ShipmentsController < ApplicationController
   # PATCH/PUT /admin/shipments/1/refresh
   def refresh
     authorize_action_for @shipment, at: current_store
+    track @shipment, @shipment.order, {
+      action: 'update',
+      differences: @shipment.transfer.transfer_items
+    }
     @shipment.reload!
 
     respond_to :js
@@ -66,6 +72,7 @@ class Admin::ShipmentsController < ApplicationController
         number: number,
         tracking_code: tracking_code
       ) && @shipment.complete!
+        track @shipment, @shipment.order, {action: 'conclude'}
         format.js { render :complete }
       else
         format.js { render :error }

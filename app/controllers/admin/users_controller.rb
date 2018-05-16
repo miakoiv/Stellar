@@ -23,6 +23,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/1.json
   def show
     authorize_action_for @user, at: current_store
+    track @user
   end
 
   # GET /admin/groups/1/users/new
@@ -34,6 +35,7 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/1/edit
   def edit
     authorize_action_for @user, at: current_store
+    track @user
   end
 
   # POST /admin/groups/1/users
@@ -47,6 +49,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        track @user
         @user.groups << @group unless @user.groups.include?(@group)
 
         format.html { redirect_to edit_admin_user_path(@user),
@@ -66,6 +69,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(user_params)
+        track @user
         format.html { redirect_to admin_user_path(@user),
           notice: t('.notice', user: @user) }
         format.json { render :show, status: :ok, location: admin_user_path(@user) }
@@ -80,6 +84,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     authorize_action_for @user, at: current_store
     @group = @user.group(current_store)
+    track @user
     @user.destroy
 
     respond_to do |format|
@@ -96,6 +101,7 @@ class Admin::UsersController < ApplicationController
       @user.groups.delete(group)
     end
     @user.groups << @group
+    track @user, nil, {action: 'update', differences: {group: @group}}
 
     respond_to :js
   end

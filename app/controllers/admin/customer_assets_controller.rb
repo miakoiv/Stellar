@@ -25,6 +25,7 @@ class Admin::CustomerAssetsController < ApplicationController
   def new
     authorize_action_for CustomerAsset, at: current_store
     @customer_asset = current_store.customer_assets.build
+    track @customer_asset
   end
 
   # GET /admin/customer_assets/1/edit
@@ -40,6 +41,7 @@ class Admin::CustomerAssetsController < ApplicationController
 
     respond_to do |format|
       if @customer_asset.save
+        track @customer_asset
         format.html { redirect_to edit_admin_customer_asset_path(@customer_asset),
           notice: t('.notice', customer_asset: @customer_asset) }
         format.json { render :show, status: :created, location: admin_customer_asset_path(@customer_asset) }

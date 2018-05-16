@@ -42,6 +42,7 @@ class Admin::TaxCategoriesController < ApplicationController
 
     respond_to do |format|
       if @tax_category.save
+        track @tax_category
         format.html { redirect_to admin_tax_category_path(@tax_category),
           notice: t('.notice', tax_category: @tax_category) }
         format.json { render :show, status: :created, location: admin_tax_category_path(@tax_category) }
@@ -59,6 +60,7 @@ class Admin::TaxCategoriesController < ApplicationController
 
     respond_to do |format|
       if @tax_category.update(tax_category_params)
+        track @tax_category
         format.html { redirect_to admin_tax_category_path(@tax_category),
           notice: t('.notice', tax_category: @tax_category) }
         format.json { render :show, status: :ok, location: admin_tax_category_path(@tax_category) }
@@ -73,7 +75,9 @@ class Admin::TaxCategoriesController < ApplicationController
   # DELETE /admin/tax_categories/1.json
   def destroy
     authorize_action_for @tax_category, at: current_store
+    track @tax_category
     @tax_category.destroy
+
     respond_to do |format|
       format.html { redirect_to admin_tax_categories_path,
         notice: t('.notice', tax_category: @tax_category) }

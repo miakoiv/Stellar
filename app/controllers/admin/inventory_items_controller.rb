@@ -46,6 +46,7 @@ class Admin::InventoryItemsController < ApplicationController
     respond_to do |format|
       if @inventory_item.save
         @product = @inventory_item.product
+        track @inventory_item, @product
         format.js
         format.html { redirect_to edit_admin_inventory_item_path(@inventory_item),
           notice: t('.notice', inventory_item: @inventory_item) }

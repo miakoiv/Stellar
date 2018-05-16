@@ -20,7 +20,8 @@ class Admin::OrderItemsController < ApplicationController
       lot_code: order_item_params[:serial] || order_item_params[:lot_code]
     }
     respond_to do |format|
-      if @order.insert(@product, amount, @order.source, options)
+      if order_item = @order.insert(@product, amount, @order.source, options)
+        track order_item, @order
         @order.recalculate!
         format.js { render :create }
       else
@@ -37,6 +38,7 @@ class Admin::OrderItemsController < ApplicationController
 
     respond_to do |format|
       if @order_item.update(order_item_params)
+        track @order_item, @order
         @order_item.reload
         @order.recalculate!
       end

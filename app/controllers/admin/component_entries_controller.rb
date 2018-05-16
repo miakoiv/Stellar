@@ -17,6 +17,7 @@ class Admin::ComponentEntriesController < ApplicationController
 
     respond_to do |format|
       if @component_entry.update(component_entry_params)
+        track @component_entry, @product
         format.js { render :create }
       else
         format.json { render json: @component_entry.errors, status: :unprocessable_entity }
@@ -27,6 +28,7 @@ class Admin::ComponentEntriesController < ApplicationController
   # DELETE /admin/component_entries/1
   def destroy
     @component_entry = ComponentEntry.find(params[:id])
+    track @component_entry, @component_entry.product
 
     respond_to do |format|
       if @component_entry.destroy

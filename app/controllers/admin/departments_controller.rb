@@ -42,6 +42,7 @@ class Admin::DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.save
+        track @department
         format.html { redirect_to edit_admin_department_path(@department),
           notice: t('.notice', department: @department) }
         format.json { render :show, status: :created, location: admin_department_path(@department) }
@@ -59,6 +60,7 @@ class Admin::DepartmentsController < ApplicationController
 
     respond_to do |format|
       if @department.update(department_params)
+        track @department
         format.html { redirect_to admin_department_path(@department),
           notice: t('.notice', department: @department) }
         format.json { render :show, status: :ok, location: admin_department_path(@department) }
@@ -73,6 +75,7 @@ class Admin::DepartmentsController < ApplicationController
   # DELETE /admin/departments/1.json
   def destroy
     authorize_action_for @department, at: current_store
+    track @department
     @department.destroy
 
     respond_to do |format|

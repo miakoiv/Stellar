@@ -25,6 +25,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.save
+        track @image, @imageable
         format.json { render json: @image, status: 200 } # for dropzone and summernote
       else
         format.html { render json: {error: t('.error')} }
@@ -39,6 +40,7 @@ class Admin::ImagesController < ApplicationController
 
     respond_to do |format|
       if @image.update(image_params)
+        track @image, @imageable
         format.js
       end
     end
@@ -48,6 +50,7 @@ class Admin::ImagesController < ApplicationController
   def destroy
     @image = Image.find(params[:id])
     @imageable = @image.imageable
+    track @image, @imageable
 
     respond_to do |format|
       if @image.destroy

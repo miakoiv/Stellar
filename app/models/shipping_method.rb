@@ -4,6 +4,7 @@ class ShippingMethod < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
   include Imageable
 
   monetize :free_shipping_from_cents, allow_nil: true

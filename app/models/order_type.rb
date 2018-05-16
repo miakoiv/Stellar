@@ -4,6 +4,7 @@ class OrderType < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Trackable
 
   #---
   belongs_to :store

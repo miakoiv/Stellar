@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180515084319) do
+ActiveRecord::Schema.define(version: 20180516080737) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "store_id",      limit: 4,     null: false
+    t.integer  "user_id",       limit: 4,     null: false
+    t.string   "action",        limit: 255
+    t.integer  "resource_id",   limit: 4,     null: false
+    t.string   "resource_type", limit: 255,   null: false
+    t.integer  "context_id",    limit: 4,     null: false
+    t.string   "context_type",  limit: 255,   null: false
+    t.text     "differences",   limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "activities", ["context_type", "context_id"], name: "index_activities_on_context_type_and_context_id", using: :btree
+  add_index "activities", ["store_id"], name: "index_activities_on_store_id", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "adjustments", force: :cascade do |t|
     t.integer  "adjustable_id",   limit: 4

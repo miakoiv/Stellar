@@ -35,6 +35,7 @@ class Admin::GroupsController < ApplicationController
   # GET /admin/groups/1/edit.js
   def edit
     authorize_action_for @group, at: current_store
+    track @group
     @groups = current_store.groups
 
     respond_to :html, :js
@@ -49,6 +50,7 @@ class Admin::GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
+        track @group
         format.html { redirect_to edit_admin_group_path(@group),
           notice: t('.notice', group: @group) }
         format.js { flash.now[:notice] = t('.notice', group: @group) }
@@ -69,6 +71,7 @@ class Admin::GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update(group_params)
+        track @group
         @groups = current_store.groups
 
         format.html { redirect_to admin_group_path(@group),
@@ -87,6 +90,7 @@ class Admin::GroupsController < ApplicationController
   # DELETE /admin/groups/1.json
   def destroy
     authorize_action_for @group, at: current_store
+    track @group
     @group.destroy
 
     respond_to do |format|

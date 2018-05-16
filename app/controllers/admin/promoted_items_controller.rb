@@ -13,6 +13,7 @@ class Admin::PromotedItemsController < ApplicationController
 
     respond_to do |format|
       if @promoted_item.save
+        track @promoted_item, @promotion
         format.js
       end
     end
@@ -26,6 +27,7 @@ class Admin::PromotedItemsController < ApplicationController
     respond_to do |format|
       if @promoted_item.valid?
         @promoted_item.save
+        track @promoted_item, @promoted_item.promotion
         @promoted_item.reload
         format.js { render :update }
       else
@@ -38,6 +40,7 @@ class Admin::PromotedItemsController < ApplicationController
   def destroy
     @promoted_item = PromotedItem.find(params[:id])
     @promotion = @promoted_item.promotion
+    track @promoted_item, @promotion
 
     respond_to do |format|
       if @promoted_item.destroy

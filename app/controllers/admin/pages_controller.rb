@@ -42,6 +42,7 @@ class Admin::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
+        track @page
         format.html { redirect_to edit_admin_page_path(@page), notice: t('.notice', page: @page) }
         format.js { flash.now[:notice] = t('.notice', page: @page) }
         format.json { render :edit, status: :created, location: edit_admin_page_path(@page) }
@@ -61,6 +62,7 @@ class Admin::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.update(page_params)
+        track @page
         format.html { redirect_to edit_admin_page_path(@page), notice: t('.notice', page: @page) }
         format.js { flash.now[:notice] = t('.notice', page: @page) }
         format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }
@@ -76,6 +78,7 @@ class Admin::PagesController < ApplicationController
   # DELETE /admin/pages/1.json
   def destroy
     authorize_action_for @page, at: current_store
+    track @page
     @page.destroy
 
     respond_to do |format|

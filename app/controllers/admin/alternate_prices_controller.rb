@@ -19,6 +19,7 @@ class Admin::AlternatePricesController < ApplicationController
 
     respond_to do |format|
       if @alternate_price.save
+        track @alternate_price, @product
         format.js { render :create }
       else
         format.js { render :error }
@@ -35,8 +36,10 @@ class Admin::AlternatePricesController < ApplicationController
     respond_to do |format|
       if @alternate_price.price.zero?
         @alternate_price.destroy
+        track @alternate_price, @product
         format.js { render :update }
       elsif @alternate_price.save
+        track @alternate_price, @product
         format.js { render :update }
       else
         format.js { render :error }
@@ -46,6 +49,7 @@ class Admin::AlternatePricesController < ApplicationController
 
   # DELETE /admin/products/1/alternate_prices/2
   def destroy
+    track @alternate_price, @product
     @alternate_price.destroy
 
     respond_to :js
