@@ -372,6 +372,9 @@ en:
       shopping_cart: Shopping cart
       order_or_quote: Order/quote
       orders_menu: Pending orders/quotes
+      send_quote: Send quotation
+      quote_self: e-mail myself
+      quote_customer: e-mail customer
       complete_order: Complete order
       delete_cart: Empty cart
       delete_order: Delete order/quote

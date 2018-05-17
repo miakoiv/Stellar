@@ -4,6 +4,14 @@
       - if can_select_customer?
         = link_to new_order_path, class: 'btn btn-primary' do
           = icon('plus', t('orders.new.new_order'))
+      - if @order.targeted?
+        #quote-dropdown.dropdown
+          %button.btn.btn-default.dropdown-toggle{type: 'button', data: {toggle: 'dropdown'}}
+            = t('.send_quote')
+            %span.caret
+          %ul.dropdown-menu
+            %li= link_to icon('envelope-open-o', t('.quote_self')), send_quote_path(recipient: :self), remote: true
+            %li= link_to icon('envelope-o', t('.quote_customer')), send_quote_path(recipient: :customer), remote: true
       = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
       %h1.hidden-print
         - if @order.targeted?

@@ -27,3 +27,6 @@ fi:
       subject: "%{store} – Tilauksen peruutus"
       title: Tilauksen peruutus
       body_html: <p>Tilauksenne nro %{order} on peruttu.</p>
+    quotation:
+      subject: "%{store} – Tarjous"
+      title: Tarjous

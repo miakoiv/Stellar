@@ -155,5 +155,7 @@ en:
   store:
     order_product:
       notice: "%{amount} of ”%{product}” added to cart."
+    quote:
+      notice: "Quotation sent to <%{email}>."
     delete_cart:
       notice: "Shopping cart emptied."

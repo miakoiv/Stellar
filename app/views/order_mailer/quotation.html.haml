@@ -1,0 +1,22 @@
+%table.main{width: '100%', cellpadding: 0, cellspacing: 0}
+  %tr
+    %td.content-wrap.aligncenter
+      %table{width: '100%', cellpadding: 0, cellspacing: 0}
+        %tr
+          %td.content-block
+            = render partial: 'masthead', locals: {title: t('.title')}
+        %tr
+          %td.content-block
+        %tr
+          %td.content-block
+            %table.invoice
+              %tr
+                %td
+                  %table{width: '100%', cellpadding: 0, cellspacing: 5}
+                    = render partial: 'customer'
+              %tr
+                %td
+                  %table.invoice-items{cellpadding: 5, cellspacing: 0}
+                    = render partial: 'invoice'
+
+= render partial: 'footer'

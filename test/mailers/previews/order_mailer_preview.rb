@@ -4,7 +4,7 @@
 
 class OrderMailerPreview < ActionMailer::Preview
 
-  [:receipt, :acknowledge, :processing, :confirmation, :shipment, :notification, :cancellation].each do |type|
+  [:receipt, :acknowledge, :processing, :confirmation, :shipment, :notification, :cancellation, :quotation].each do |type|
     define_method type do
       order = Order.concluded.last
       to = order.customer_string

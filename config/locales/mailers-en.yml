@@ -27,3 +27,6 @@ en:
       subject: "Order cancelled"
       title: Order cancellation
       body_html: <p>Your order № %{order} from %{store} has been cancelled.</p>
+    quotation:
+      subject: "Quotation from %{store}"
+      title: Quotation

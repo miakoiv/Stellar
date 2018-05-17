@@ -28,6 +28,7 @@ class OrderMailer < ApplicationMailer
   alias_method :shipment, :send_mail
   alias_method :notification, :send_mail
   alias_method :cancellation, :send_mail
+  alias_method :quotation, :send_mail
 
   protected
     def roadie_options

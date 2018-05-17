@@ -155,5 +155,7 @@ fi:
   store:
     order_product:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
+    quote:
+      notice: "Tarjous lähetetty osoitteeseen <%{email}>."
     delete_cart:
       notice: "Ostoskori tyhjennetty."

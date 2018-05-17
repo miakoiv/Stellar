@@ -65,6 +65,23 @@ class StoreController < ApplicationController
     @order_types = @order.available_order_types
   end
 
+  # Get /cart/quote/:recipient
+  def quote
+    @order = shopping_cart
+    @recipient = case params[:recipient]
+    when 'self'
+      current_user
+    when 'customer'
+      @order.customer
+    else
+      return head :bad_request
+    end
+    @order.email(:quotation, @recipient.to_s)
+
+    flash.now[:notice] = t('.notice', email: @recipient.email)
+    respond_to :js
+  end
+
   # GET /cart/delete
   def delete_cart
     @order = shopping_cart
