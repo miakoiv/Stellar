@@ -18,6 +18,3 @@ es:
     vendor_notification:
       subject: "Notificación del pedido de %{store}"
       title: "Notificación del pedido"
-    quotation:
-      subject: "Nueva cita de %{store}"
-      title: Cita

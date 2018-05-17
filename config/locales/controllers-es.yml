@@ -39,8 +39,6 @@ es:
         notice: "Pedido %{order} creado."
       update:
         notice: "Pedido %{order} subido."
-      quote:
-        notice: "Cita %{order} enviada."
       forward:
         notice: "Pedido %{order} enviado al carro."
         failed: "Pedido %{order} enviado al carro, excepto los sigueinte productos no disponibles: %{failed}"

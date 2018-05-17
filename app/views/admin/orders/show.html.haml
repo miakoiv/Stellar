@@ -10,10 +10,6 @@
         = icon('share', t('.forward'))
     - if @order.complete?
       = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
-  - if @order.quotable?
-    = link_to quote_admin_order_path(@order), class: 'btn btn-info' do
-      = icon('envelope', t('.quote'))
-    = link_to icon('print', t('.print_quotation')), '#print', class: 'btn btn-default'
 
   %h1
     = @order.order_type

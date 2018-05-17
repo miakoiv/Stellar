@@ -62,8 +62,6 @@ en:
         notice: "Order %{order} updated."
       destroy:
         notice: "Order %{order} deleted."
-      quote:
-        notice: "Quotation %{order} sent."
       forward:
         notice: "Order %{order} forwarded to shopping cart."
         failed: "Order %{order} forwarded to shopping cart, except the following unavailable products: %{failed}"

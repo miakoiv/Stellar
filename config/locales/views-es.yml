@@ -98,15 +98,12 @@ es:
         review: Revisión
       show:
         forward: Ir a la caja
-        quote: Enviar ctización
         print_delivery_note: Imprimir la nota de envió
-        print_quotation: Imprimir cotización
       form:
         approved_at_help: Fecha en la que se recibe y acepta el pedido
         concluded_at_help: Fecha en la que el pedido es enviado y archivado
       headers:
         delivery_note: Nota de envío
-        quotation: Cotización
       review_modal:
         title: Resumen del pedido
         conclude: Concluir pedido y cerrar

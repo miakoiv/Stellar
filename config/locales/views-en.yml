@@ -165,9 +165,7 @@ en:
         review: Review
       show:
         forward: Forward to cart
-        quote: Send quotation
         print_delivery_note: Print delivery note
-        print_quotation: Print quotation
       edit:
         add_order_items: Add items to this order
         barcode: Scan a barcode here
@@ -176,7 +174,6 @@ en:
         concluded_at_help: Order has been shipped in full and is ready for archival.
       headers:
         delivery_note: Delivery note
-        quotation: Quotation
       review_modal:
         title: Order review
         conclude: Conclude order and close

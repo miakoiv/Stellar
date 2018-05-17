@@ -19,7 +19,6 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :customer
 
   belongs_to :order_type
-  delegate :is_rfq?, :is_quote?, to: :order_type
   delegate :payment_gateway_class, to: :order_type
 
   default_scope { where(cancelled_at: nil) }
@@ -205,11 +204,6 @@ class Order < ActiveRecord::Base
 
   def has_installation?
     order_type.present? && order_type.has_installation?
-  end
-
-  # An order is quotable if it's a quote and there's a contact address.
-  def quotable?
-    is_quote? && contact_email.present?
   end
 
   def paid?

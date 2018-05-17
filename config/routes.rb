@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     member do
       get :select
       get :duplicate
-      get :quote
     end
   end
   resource :profile, only: [:show, :edit, :update]
@@ -181,7 +180,6 @@ Rails.application.routes.draw do
       end
       member do
         get :forward
-        get :quote
         patch :approve
         get :review
         patch :conclude

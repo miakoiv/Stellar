@@ -6,7 +6,7 @@ class Admin::OrdersController < ApplicationController
   before_action :set_order, except: [:index, :incoming, :outgoing, :new, :create]
   before_action :set_customers, only: [:new, :create]
 
-  authority_actions incoming: 'read', outgoing: 'read', quote: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
+  authority_actions incoming: 'read', outgoing: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
 
   layout 'admin'
 
@@ -146,12 +146,6 @@ class Admin::OrdersController < ApplicationController
       format.html { redirect_to admin_orders_path,
         notice: t('.notice', order: @order) }
     end
-  end
-
-  # GET /admin/orders/1/quote
-  def quote
-    authorize_action_for Order, at: current_store
-    redirect_to admin_order_path(@order), notice: t('.notice', order: @order)
   end
 
   # GET /admin/orders/1/forward

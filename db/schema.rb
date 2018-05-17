@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516080737) do
+ActiveRecord::Schema.define(version: 20180517083929) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -404,8 +404,6 @@ ActiveRecord::Schema.define(version: 20180516080737) do
     t.boolean  "has_payment",                  default: false, null: false
     t.string   "payment_gateway",  limit: 255
     t.boolean  "prepaid_stock",                default: false, null: false
-    t.boolean  "is_rfq",                       default: false, null: false
-    t.boolean  "is_quote",                     default: false, null: false
     t.boolean  "is_exported",                  default: false, null: false
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
