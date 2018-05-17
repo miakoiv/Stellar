@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     authorize_action_for @order, at: current_store
+    track @order
   end
 
   # GET /orders/new
@@ -52,6 +53,12 @@ class OrdersController < ApplicationController
     respond_to :html, :js
   end
 
+  # GET /orders/1/edit
+  def edit
+    authorize_action_for @order, at: current_store
+    track @order
+  end
+
   # POST /orders
   def create
     authorize_action_for Order, at: current_store
@@ -65,6 +72,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        track @order
         @order.customer.groups << @group if new_customer
         user_session['shopping_cart_id'] = @order.id
 
@@ -73,11 +81,6 @@ class OrdersController < ApplicationController
         format.html { render :new }
       end
     end
-  end
-
-  # GET /orders/1/edit
-  def edit
-    authorize_action_for @order, at: current_store
   end
 
   # PATCH/PUT /orders/1
@@ -109,6 +112,7 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   def destroy
     authorize_action_for @order, at: current_store
+    track @order
 
     @order.update(cancelled_at: Time.current)
     @order.email(:cancellation, @order.customer_string)
