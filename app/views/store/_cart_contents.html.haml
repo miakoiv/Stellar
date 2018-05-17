@@ -2,8 +2,11 @@
   .panel.panel-default
     - if order.empty?
       .panel-body
-        %p.lead= t('store.empty_cart')
-        %p= link_to t('store.go_shopping'), front_path
+        - if order.targeted?
+          = t('.empty_order_html')
+        - else
+          %p.lead= t('.empty_cart')
+          %p= link_to t('.go_shopping'), front_path
     - else
       = render partial: 'order_items/cart_table', object: order, as: :order
       .panel-footer
@@ -13,10 +16,8 @@
           .pull-right= t('checkout.messages.cannot_checkout_html')
 
   .actions
-    = link_to t('checkout.continue_shopping'), front_path, class: 'btn btn-sm btn-default'
-    = link_to icon('remove', t('store.cart.delete')), delete_cart_path,
-        class: 'btn btn-sm btn-danger',
-        data: {confirm: t('store.cart.confirm_delete'),
-          'confirm-title': t('actions.confirm.title'),
-          'confirm-proceed': t('store.cart.delete'),
-          'confirm-cancel': t('actions.confirm.cancel')}
+    - if order.targeted?
+      = link_to icon('remove', t('store.cart.delete_order')), delete_cart_path, class: 'btn btn-sm btn-danger', data: {confirm: t('store.cart.confirm_delete_order'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('store.cart.delete_order'), 'confirm-cancel': t('actions.confirm.cancel')}
+    - else
+      = link_to t('checkout.continue_shopping'), front_path, class: 'btn btn-sm btn-default'
+      = link_to icon('remove', t('store.cart.delete_cart')), delete_cart_path, class: 'btn btn-sm btn-danger', data: {confirm: t('store.cart.confirm_delete_cart'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('store.cart.delete_cart'), 'confirm-cancel': t('actions.confirm.cancel')}

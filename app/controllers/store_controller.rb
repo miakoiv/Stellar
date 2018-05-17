@@ -70,7 +70,7 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @order.destroy
 
-    redirect_to front_path, notice: t('.notice')
+    redirect_to cart_path, notice: t('.notice')
   end
 
   # GET /category/:category_id

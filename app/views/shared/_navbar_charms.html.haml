@@ -6,8 +6,8 @@
   %li.lg
     - if can_select_customer?
       = link_to cart_path do
-        - if shopping_cart.customer?
-          = bootstrap_label(selected_group, icon: 'shopping-cart', text: selected_customer.name.split.first)
+        - if shopping_cart.targeted?
+          = icon('inbox', selected_customer.name.split.first)
         - else
           = icon('shopping-cart')
         = render partial: 'store/cart_badge'

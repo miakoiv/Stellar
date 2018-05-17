@@ -6,9 +6,11 @@
           = icon('plus', t('orders.new.new_order'))
       = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
       %h1.hidden-print
-        = icon('shopping-cart', t('.shopping_cart'))
-        - if @order.customer?
+        - if @order.targeted?
+          = icon('inbox', t('.order_or_quote'))
           %span.small= bootstrap_label(@order.customer, appearance: @order.source.appearance, text: @order.customer.name.split.first)
+        - else
+          = icon('shopping-cart', t('.shopping_cart'))
       %h1.visible-print-block= current_store
 
     = render partial: 'cart_contents', object: @order, as: :order
@@ -17,7 +19,7 @@
   - content_for :auxiliary_nav do
     %li.dropdown
       = dropdown_toggle do
-        = t('.orders')
+        = t('.orders_menu')
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
         = render partial: 'orders/menu'

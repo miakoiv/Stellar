@@ -329,7 +329,7 @@ en:
       timeline_header: Orders that require shipping
       timeline_help_html: Click on the timeline to activate scrolling and zooming
     new:
-      new_order: New order
+      new_order: New order/quote
     form_for_new:
       new_customer: "[New customer]"
     table:
@@ -368,17 +368,22 @@ en:
     add_to_cart: Add to cart
     offer_requisites: Recommended purchases
     continue_to_cart: Proceed to shopping cart
-    empty_cart: Your shopping cart is empty.
-    go_shopping: Go shopping.
     order_history: Order history
     no_orders: Your order history is empty.
     go_checkout: Checkout
     cart:
       shopping_cart: Shopping cart
-      delete: Empty cart
-      confirm_delete: Really empty your shopping cart?
+      order_or_quote: Order/quote
+      orders_menu: Pending orders/quotes
+      complete_order: Complete order
+      delete_cart: Empty cart
+      delete_order: Delete order/quote
+      confirm_delete_cart: Really empty your shopping cart?
+      confirm_delete_order: Really delete this order or quote?
       lead_time_warning: Ordered amount exceeds inventory, expect a delay of %{lead_time}.
-      orders: Pending orders
+    cart_contents:
+      empty_cart: Your shopping cart is empty.
+      go_shopping: Go shopping.
     profile: Your profile
   checkout:
     panels:

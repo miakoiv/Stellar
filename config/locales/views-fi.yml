@@ -309,7 +309,7 @@ fi:
       timeline_header: Toimitettavat tilaukset
       timeline_help_html: Aktivoi aikajana klikkaamalla
     new:
-      new_order: Uusi tilaus
+      new_order: Uusi tilaus/tarjous
     form_for_new:
       new_customer: "[Uusi asiakas]"
     table:
@@ -348,17 +348,23 @@ fi:
     add_to_cart: Lisää koriin
     offer_requisites: Muista myös nämä
     continue_to_cart: Jatka ostoskoriin
-    empty_cart: Ostoskorisi on tyhjä.
-    go_shopping: Ostoksille!
     order_history: Tilaushistoria
     no_orders: Tilaushistoriasi on tyhjä.
     go_checkout: Jatka kassalle
     cart:
       shopping_cart: Ostoskori
-      delete: Tyhjennä kori
-      confirm_delete: Tyhjennetäänkö ostoskori?
+      order_or_quote: Tilaus/tarjous
+      orders_menu: Avoimet tilaukset/tarjoukset
+      complete_order: Lähetä tilaus
+      delete_cart: Tyhjennä kori
+      delete_order: Poista tilaus/tarjous
+      confirm_delete_cart: Tyhjennetäänkö ostoskori?
+      confirm_delete_order: Poistetaanko tämä tilaus tai tarjous?
       lead_time_warning: Tilattua määrää ei varastossa. Toimitusaika %{lead_time}.
-      orders: Avoimet tilaukset
+    cart_contents:
+      empty_cart: Ostoskorisi on tyhjä.
+      go_shopping: Ostoksille!
+      empty_order_html: <p class="lead">Uuden tilauksen tai tarjouksen laatiminen</p><p>Lisää tuotteita ostoskoriin lisätäksesi ne tälle tilaukselle. Voit halutessasi lähettää tarjoussähköposteja, kunnes hyväksyt tilauksen lähettämällä sen, tai poistat tilauksen.</p>
     profile: Omat tiedot
   checkout:
     panels:

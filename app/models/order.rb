@@ -26,6 +26,7 @@ class Order < ActiveRecord::Base
 
   scope :at, -> (store) { where(store: store) }
   scope :for, -> (customer) { where(customer: customer) }
+  scope :targeted, -> { where('user_id != customer_id') }
 
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
@@ -96,8 +97,10 @@ class Order < ActiveRecord::Base
     concluded? ? self[:order_type_name] : order_type.name
   end
 
-  # Orders made out to another customer, not the user herself.
-  def customer?
+  # Orders targeted at another customer, not the user herself.
+  # This also indicates the order is considered to be a quote
+  # when incomplete.
+  def targeted?
     user != customer
   end
 

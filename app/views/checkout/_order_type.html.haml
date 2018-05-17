@@ -28,4 +28,7 @@
     .pull-right
       #checkout-button.collapse{class: order.order_type.present? && 'in'}
         = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
-          = icon('check-circle', t('store.go_checkout'))
+          - if order.targeted?
+            = icon('share', t('store.cart.complete_order'))
+          - else
+            = icon('check-circle', t('store.go_checkout'))
