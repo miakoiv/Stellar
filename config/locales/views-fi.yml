@@ -140,6 +140,7 @@ fi:
         new_order: Uusi tilaus
       form_for_new:
         new_customer: "[Uusi asiakas]"
+        group_id: Asiakasryhmä/hinnoittelu
       row:
         approve: Hyväksy
         review: Tarkasta
@@ -309,6 +310,7 @@ fi:
       new_order: Uusi tilaus/tarjous
     form_for_new:
       new_customer: "[Uusi asiakas]"
+      group_id: Asiakasryhmä/hinnoittelu
     table:
       cancel:
         button: Peru

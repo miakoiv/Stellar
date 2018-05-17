@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
   before_action :set_header_and_footer
   before_action :set_categories, only: [:index, :show, :edit]
   before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate, :select]
-  before_action :set_customers, only: [:new, :create]
 
   # GET /orders
   def index
@@ -36,24 +35,19 @@ class OrdersController < ApplicationController
   def new
     authorize_action_for Order, at: current_store
 
-    if order_params[:customer_id].present?
-      customer = current_store.users.find(order_params[:customer_id])
-      @group = customer.group(current_store)
-      @groups = [@group]
-    else
-      customer = User.new(
-        shipping_country: Country.default,
-        billing_country: Country.default
-      )
-      @groups = all_groups
-      @group = @groups.first
-    end
-
+    @groups = all_groups
+    @group = find_selected_group || @groups.first
+    @customers = customer_selection
+    @customer = find_selected_customer || User.new(
+      shipping_country: Country.default,
+      billing_country: Country.default
+    )
     @order = current_store.orders.build(
       group_id: @group.id,
+      customer: @customer,
       order_type: @group.outgoing_order_types.first
     )
-    @order.customer = customer
+    @order.customer = @customer
 
     respond_to :html, :js
   end
@@ -62,13 +56,12 @@ class OrdersController < ApplicationController
   def create
     authorize_action_for Order, at: current_store
 
+    @groups = all_groups
+    @group = find_selected_group
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.address_to_customer
-    new_customer = @order.customer.new_record?
-
-    @group = current_store.groups.find(order_params[:group_id])
     @order.includes_tax = @group.price_tax_included?
-    @groups = new_customer ? all_groups : [@group]
+    new_customer = @order.customer.new_record?
 
     respond_to do |format|
       if @order.save
@@ -161,15 +154,27 @@ class OrdersController < ApplicationController
       @order = current_user.orders.find(params[:id])
     end
 
-    def set_customers
-      @customers = UserSearch.new(
-        store: current_store,
-        except_group: current_store.default_group
-      ).results
-    end
-
+    # All groups except the default are available for selection.
     def all_groups
       current_store.groups.not_including(current_store.default_group)
+    end
+
+    def find_selected_group
+      order_params[:group_id].present? &&
+        current_store.groups.find_by(id: order_params[:group_id])
+    end
+
+    def find_selected_customer
+      order_params[:customer_id].present? &&
+        current_store.users.find_by(id: order_params[:customer_id])
+    end
+
+    # Customers can be selected from the selected group only.
+    def customer_selection
+      UserSearch.new(
+        store: current_store,
+        group: @group
+      ).results
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

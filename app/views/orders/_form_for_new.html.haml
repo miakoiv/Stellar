@@ -3,10 +3,14 @@
     .panel.panel-primary
       .panel-body
         %fieldset
+          = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, label: t('.group_id')
           = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}, {placeholder: t('.new_customer')}
-          = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {url: admin_group_path(g), appearance: g.appearance}.to_json] }
-          = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
-          = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }, {}
+          %hr
+          .row
+            .col-md-6
+              = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
+            .col-md-6
+              = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }, {}
         %fieldset.actions
           = f.primary
   .col-lg-6.col-lg-offset-1
@@ -17,13 +21,29 @@
 
 :coffee
   refresh = (customer_id) ->
+    group_id = group_select.getValue()
     $.ajax
       url: '#{new_order_path}'
       type: 'GET'
       dataType: 'script'
       data:
         order:
+          group_id: group_id
           customer_id: customer_id
+
+  $group_select = $('#order_group_id').selectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer
+    onChange: (id) ->
+      $.ajax
+        url: '#{new_order_path}'
+        type: 'GET'
+        dataType: 'script'
+        data:
+          order:
+            group_id: id
+
   $customer_select = $('#order_customer_id').selectize
     allowEmptyOption: true
     onFocus: ->
@@ -35,29 +55,6 @@
       if this.items.length
         refresh id
 
-  $group_select = $('#order_group_id').selectize
-    labelField: 'title'
-    dataAttr: 'data'
-    render: $.fn.selectize.label_renderer
-    onChange: (id) ->
-      order_type_select.clearOptions()
-      inventory_select.clearOptions()
-      $.ajax
-        url: group_select.options[id].url
-        type: 'GET'
-        dataType: 'json'
-        success: (response) ->
-          order_type_select.load (callback) ->
-            types = response.outgoing_order_types
-            if types.length
-              callback(types)
-              order_type_select.setValue types[0].id
-          inventory_select.load (callback) ->
-            inventories = response.available_inventories
-            if inventories.length
-              callback(inventories)
-              inventory_select.setValue inventories[0].id
-
   $order_type_select = $('#order_order_type_id').selectize
     valueField: 'id'
     labelField: 'name'
@@ -66,7 +63,7 @@
     valueField: 'id'
     labelField: 'name'
 
-  customer_select = $customer_select[0].selectize
   group_select = $group_select[0].selectize
+  customer_select = $customer_select[0].selectize
   order_type_select = $order_type_select[0].selectize
   inventory_select = $inventory_select[0].selectize

@@ -160,6 +160,7 @@ en:
         new_order: New order
       form_for_new:
         new_customer: "[New customer]"
+        group_id: Customer group/pricing
       row:
         approve: Approve
         review: Review
@@ -329,6 +330,7 @@ en:
       new_order: New order/quote
     form_for_new:
       new_customer: "[New customer]"
+      group_id: Customer group/pricing
     table:
       cancel:
         button: Cancel
