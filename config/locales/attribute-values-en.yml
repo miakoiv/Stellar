@@ -96,7 +96,7 @@ en:
           store_admin: store administrator
           superuser: superuser
           third_party: third party
-          customer_selection: customer selection
+          customer_selection: customer orders
         description:
           correspondence: customer correspondence by e-mail
           reports: viewing and running reports
@@ -115,7 +115,7 @@ en:
           store_admin: store settings and web addresses
           superuser: store creation and system settings
           third_party: limited access from a third party
-          customer_selection: alternate customer selection for own shopping cart
+          customer_selection: orders and quotes for selected customers
       section:
         width:
           'spread': spread
