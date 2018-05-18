@@ -1,12 +1,2 @@
-- children = continuous.children.primary.live
-
-- if children.any?
-  - if navmenu
-    %li{class: active_link_to_class(continuous.path)}
-      - cache [navmenu, I18n.locale, :continuous_page, continuous] do
-        = link_to children.first.path do
-          .page-title
-            = children.first
-  - else
-    - children.each do |child|
-      = render partial: child.to_partial_path, object: child, locals: {navmenu: false}
+- continuous.children.primary.live.each do |child|
+  = render partial: child.to_partial_path, object: child, locals: {navmenu: navmenu}
