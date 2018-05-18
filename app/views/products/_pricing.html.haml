@@ -5,7 +5,7 @@
     = price_tag final_price, regular_price
   - unless incl_tax?
     .pull-right
-      = bootstrap_label(current_group, text: t('store.pricing_sans_tax'))
+      = bootstrap_label(selected_group, text: t('store.pricing_sans_tax'))
   - if quantity_and_unit = product.pricing_quantity_and_unit
     .unit-price
       = unit_pricing_string(final_price, *quantity_and_unit)

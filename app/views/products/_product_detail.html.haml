@@ -1,4 +1,4 @@
-- cache [current_group, I18n.locale, :product_detail, product] do
+- cache [selected_group, I18n.locale, :product_detail, product] do
   .product-header
     .actions
       = link_to icon('times'), '#back', class: 'btn btn-default'
@@ -18,7 +18,7 @@
 
       .buy-now
         .promotions
-          - product.live_promoted_items(current_group).each do |item|
+          - product.live_promoted_items(selected_group).each do |item|
             .promotion= item.description
         .product-pricing
           = render partial: 'products/pricing', object: product, as: :product
