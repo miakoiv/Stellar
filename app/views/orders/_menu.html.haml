@@ -1,8 +1,12 @@
-- current_user.orders.at(current_store).incomplete.each do |order|
+%li{class: user_shopping_cart == shopping_cart && 'active'}
+  = link_to select_order_path(user_shopping_cart) do
+    .badge.pull-right= user_shopping_cart.size
+    = icon('shopping-cart')
+    = t('store.cart.shopping_cart')
+%li.divider
+- current_user.orders.at(current_store).targeted.incomplete.each do |order|
   %li{class: order == shopping_cart && 'active'}
     = link_to select_order_path(order) do
-      - if order.targeted?
-        = bootstrap_label(order.source)
-        = order.customer_name
-      - else
-        = icon('shopping-cart', t('store.cart.shopping_cart'))
+      .badge.pull-right= order.size
+      = bootstrap_label(order.source)
+      = order.customer_name

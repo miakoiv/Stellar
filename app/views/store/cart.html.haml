@@ -29,5 +29,5 @@
       = dropdown_toggle do
         = t('.orders_menu')
         %span.caret
-      %ul.dropdown-menu{role: 'menu'}
+      %ul#orders-menu.dropdown-menu{role: 'menu'}
         = render partial: 'orders/menu'

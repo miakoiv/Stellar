@@ -1,5 +1,2 @@
-- if shopping_cart.empty?
-  %span#cart-badge.badge
-- else
-  %span#cart-badge.badge.animated.infinite.tada<
-    = shopping_cart.order_items.real.sum(:amount)
+%span#cart-badge.badge.animated.infinite.tada<
+  = shopping_cart.size

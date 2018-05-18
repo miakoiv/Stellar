@@ -289,6 +289,25 @@ body {
   background-color: #fff;
 }
 
+/* Orders menu */
+#orders-menu {
+  min-width: 320px;
+
+  > li > a {
+    padding: 10px 20px;
+
+    .fa, .label {
+      display: inline-block;
+      margin-right: 0.333em;
+    }
+    .badge { background-color: $brand-primary; }
+  }
+  > li.active > a .badge {
+    color: $brand-primary;
+    background-color: #fff;
+  }
+}
+
 
 /*
  * Wrapper for app boilerplate

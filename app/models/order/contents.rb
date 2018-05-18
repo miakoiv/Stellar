@@ -73,6 +73,11 @@ class Order < ActiveRecord::Base
     products.real.empty?
   end
 
+  def size
+    real_items = order_items.real.sum(:amount)
+    real_items > 0 ? real_items : nil
+  end
+
   # An order is checkoutable when all its real items can be
   # satisfied from the target inventory.
   def checkoutable?
