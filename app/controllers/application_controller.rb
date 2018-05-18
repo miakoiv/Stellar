@@ -76,84 +76,106 @@ class ApplicationController < ActionController::Base
 
   # The methods below are for convenience and to cache often repeated
   # database queries on current user and her roles.
-  helper_method :current_hostname, :current_store, :current_group, :current_site_name, :current_theme, :shopping_cart, :default_inventory, :current_user_has_role?, :guest?, :can_order?, :pricing_shown?, :pricing, :premium_pricing, :incl_tax?, :stock_shown?, :third_party?, :can_manage?, :may_shop_at?, :admin?, :can_select_customer?, :selected_customer, :selected_group
 
   def current_hostname
     @current_hostname
   end
+  helper_method :current_hostname
 
   def current_store
     @current_store
   end
+  helper_method :current_store
 
   def current_group
     @current_group ||= current_user.group(current_store)
   end
-
-  def default_inventory
-    current_store.default_inventory
-  end
+  helper_method :current_group
 
   def current_site_name
     current_store.present? && current_store.name
   end
+  helper_method :current_site_name
 
   def current_theme
     current_store.present? && current_store.theme
   end
+  helper_method :current_theme
 
+  # Selected shopping cart, if any.
   def shopping_cart
-    @shopping_cart ||= selected_shopping_cart || current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
+    @shopping_cart ||= selected_shopping_cart || user_shopping_cart
   end
+  helper_method :shopping_cart
+
+  def user_shopping_cart
+    current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
+  end
+  helper_method :user_shopping_cart
 
   # Convenience method to check current user roles at current store.
   def current_user_has_role?(role)
     current_user.has_cached_role?(role, current_store)
   end
+  helper_method :current_user_has_role?
 
   # Belonging to the default group is considered being a guest.
   def guest?
     @guest ||= current_group == current_store.default_group
   end
+  helper_method :guest?
 
   def can_order?
     @can_order = current_user.can?(:order, as: selected_group) if @can_order.nil?
     @can_order
   end
+  helper_method :can_order?
+
+  def default_inventory
+    current_store.default_inventory
+  end
+  helper_method :default_inventory
 
   def pricing_shown?
     selected_group.pricing_shown?
   end
+  helper_method :pricing_shown?
 
   def stock_shown?
     selected_group.stock_shown?
   end
+  helper_method :stock_shown?
 
   # Pricing in views is handled by an appraiser for the selected group.
   def pricing
     @product_appraiser ||= Appraiser::Product.new(selected_group)
   end
+  helper_method :pricing
 
   # Pricing for the premium group of current group, if any.
   def premium_pricing
     return nil if selected_group.premium_group.nil?
     @premium_appraiser ||= Appraiser::Product.new(selected_group.premium_group)
   end
+  helper_method :premium_pricing
 
   # Convenience method to tell if prices in views are with or without tax.
   def incl_tax?
     @tax_included ||= selected_group.price_tax_included?
   end
+  helper_method :incl_tax?
 
   def third_party?
     current_user_has_role?(:third_party)
   end
+  helper_method :third_party?
 
   def can_manage?
     @can_manage ||= Role.administrative.any? { |role|
       current_user_has_role?(role)
     }
   end
+  helper_method :can_manage?
 
   # The ability to shop at any given category depends on possible restricted
   # categories given to the current group. If any category assignments
@@ -161,22 +183,27 @@ class ApplicationController < ActionController::Base
   def may_shop_at?(category)
     current_group.categories.empty? || current_group.categories.include?(category)
   end
+  helper_method :may_shop_at?
 
   def admin?
     self.class.parent == Admin
   end
+  helper_method :admin?
 
   def can_select_customer?
     current_user_has_role?(:customer_selection)
   end
+  helper_method :can_select_customer?
 
   def selected_customer
     can_select_customer? && shopping_cart.customer || current_user
   end
+  helper_method :selected_customer
 
   def selected_group
     selected_customer.group(current_store)
   end
+  helper_method :selected_group
 
   # Tracks activity for given resource in given context, with current store
   # and current user. Stores the action taken on given resource, storing any
