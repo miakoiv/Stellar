@@ -65,6 +65,7 @@ class OrdersController < ApplicationController
 
     @groups = all_groups
     @group = find_selected_group
+    @customers = customer_selection
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.address_to_customer
     @order.includes_tax = @group.price_tax_included?
