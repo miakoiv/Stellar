@@ -13,6 +13,9 @@ class Policy < ActiveRecord::Base
   scope :pending, -> { where(mandatory: true, accepted_at: nil) }
 
   #---
+  validates :title, presence: true
+
+  #---
   attr_accessor :accepted
 
   #---

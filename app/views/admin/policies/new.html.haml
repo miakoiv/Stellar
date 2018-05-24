@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_policies_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('briefcase', t('.new_policy'))
+
+.row
+  .col-md-8
+    = render partial: 'form', locals: {locked: false}
