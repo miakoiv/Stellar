@@ -72,6 +72,15 @@ fi:
         notice: "Sivu %{page} päivitetty."
       destroy:
         notice: "Sivu %{page} poistettu."
+    policies:
+      create:
+        notice: "Sopimus %{policy} luotu."
+      update:
+        notice: "Sopimus %{policy} päivitetty."
+      accept:
+        notice: "Suostumus sopimukseen %{policy} vastaanotettu."
+      destroy:
+        notice: "Sopimus %{policy} poistettu."
     products:
       create:
         notice: "Tuote %{product} luotu."

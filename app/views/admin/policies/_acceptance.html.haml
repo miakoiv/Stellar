@@ -1,0 +1,19 @@
+.panel.panel-primary
+  .panel-heading
+    %h3.panel-title= t('.title')
+  - if @policy.accepted?
+    .panel-body
+      %dl
+        %dt= col(Policy, :accepted_at)
+        %dd= l(@policy.accepted_at.to_date, format: :iso)
+        %dt= col(Policy, :accepted_by)
+        %dd= @policy.accepted_by
+  - elsif current_user.can_accept?(@policy, at: current_store)
+    = bootstrap_form_for [:accept, :admin, @policy] do |f|
+      .panel-body
+        %p.lead= t('.blurb')
+      .panel-footer
+        = f.form_group do
+          = f.check_box :accepted
+        .form-group.actions
+          = f.primary t('.confirm')

@@ -225,6 +225,9 @@ Rails.application.routes.draw do
     resources :shipping_methods do
       resources :images, shallow: true
     end
+    resources :policies do
+      patch :accept, on: :member
+    end
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/images/reorder', to: 'images#reorder', as: :reorder_images

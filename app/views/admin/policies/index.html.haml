@@ -1,0 +1,40 @@
+.page-header
+  - if current_user.can_create?(Policy, at: current_store)
+    = link_to new_admin_policy_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_policy'))
+  %h1= icon('briefcase', title(Policy, count: 2))
+
+- if @policies.pending.any?
+  .alert.alert-warning
+    = t('.pending')
+
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-2= col(Policy, :created_at)
+        %th= col(Policy, :title)
+        %th.col-xs-2
+        %th.col-xs-2= col(Policy, :accepted_at)
+        %th.actions
+
+    %tbody
+      - @policies.each do |policy|
+        %tr[policy]{class: policy.pending? && 'warning text-warning'}
+          %td
+            - if policy.pending?
+              = icon('exclamation-circle')
+          %td= l(policy.created_at.to_date, format: :iso)
+          %td= policy.title
+          %td
+            - if policy.mandatory?
+              = bootstrap_label(policy, text: col(Policy, :mandatory), appearance: :primary)
+          %td
+            - if policy.accepted?
+              = l(policy.accepted_at.to_date, format: :iso)
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_policy_path(policy),
+                class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(policy, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_policy_path(policy), class: 'btn btn-default btn-sm'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517083929) do
+ActiveRecord::Schema.define(version: 20180523141315) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -500,6 +500,19 @@ ActiveRecord::Schema.define(version: 20180517083929) do
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
+
+  create_table "policies", force: :cascade do |t|
+    t.integer  "store_id",       limit: 4,                    null: false
+    t.string   "title",          limit: 255
+    t.text     "content",        limit: 65535
+    t.boolean  "mandatory",                    default: true, null: false
+    t.datetime "accepted_at"
+    t.integer  "accepted_by_id", limit: 4
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
+  add_index "policies", ["store_id"], name: "index_policies_on_store_id", using: :btree
 
   create_table "product_properties", force: :cascade do |t|
     t.integer  "product_id",  limit: 4,                            null: false

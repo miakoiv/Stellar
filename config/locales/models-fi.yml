@@ -71,6 +71,9 @@ fi:
       page:
         one: sivu
         other: sivut
+      policy:
+        one: sopimus
+        other: sopimukset
       payment:
         one: maksu
         other: maksut
@@ -320,6 +323,14 @@ fi:
         order_id: Tilaus
         amount: Maksettu
         created_at: Päiväys
+      policy:
+        title: Otsikko
+        content: Sisältö
+        mandatory: Pakollinen suostumus
+        accepted: Hyväksyn ehdot
+        created_at: Julkaistu
+        accepted_at: Suostumus annettu
+        accepted_by: Suostumuksen antanut
       product:
         metadata: Yleistä
         text: Teksti

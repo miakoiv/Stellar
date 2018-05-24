@@ -167,6 +167,16 @@ fi:
         show_resource: Näytä kohde
       layout_menu:
         new_section: Uusi lohko
+    policies:
+      index:
+        pending: Sinulla on hyväksymättömiä sopimuksia. Ole hyvä ja tarkista keltaisella merkityt sopimukset.
+        new_policy: Uusi sopimus
+      new:
+        new_policy: Uusi sopimus
+      acceptance:
+        title: Järjestelmäasiakkaan suostumus
+        blurb: Olen lukenut ja hyväksyn oheiset sopimusehdot.
+        confirm: Varmista hyväksyminen
     products:
       index:
         new_product: Uusi tuote

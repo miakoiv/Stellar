@@ -71,6 +71,9 @@ en:
       page:
         one: page
         other: pages
+      policy:
+        one: policy
+        other: policies
       payment:
         one: payment
         other: payments
@@ -320,6 +323,14 @@ en:
         order_id: Order
         amount: Paid
         created_at: Date
+      policy:
+        title: Title
+        content: Content
+        mandatory: Mandatory agreement
+        accepted: I accept
+        created_at: Published
+        accepted_at: Policy accepted
+        accepted_by: Accepting party
       product:
         metadata: General
         text: Text

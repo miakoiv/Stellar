@@ -35,12 +35,12 @@ class ApplicationController < ActionController::Base
   end
 
   # After sign in, users who can manage are taken to the dashboard.
-  # Everyone else goes to the default root path.
+  # Everyone else goes to the default root path. Store admin with
+  # pending policies are shown the policies index however.
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
-      if resource.is_a?(User) &&
-          Role.administrative.any? { |role| resource.has_role?(role) }
-        admin_dashboard_url
+      if can_manage?
+        policies_pending? ? admin_policies_url : admin_dashboard_url
       else
         super
       end
@@ -51,6 +51,10 @@ class ApplicationController < ActionController::Base
     Rails.logger.warn(error.message)
     redirect_to request.referrer.presence || root_path,
       alert: 'You are not authorized to complete that action.'
+  end
+
+  def policies_pending?
+    current_user.can_accept?(Policy, at: current_store) && current_store.policies.pending.any?
   end
 
   # Find the guest user stored in session, or create it.

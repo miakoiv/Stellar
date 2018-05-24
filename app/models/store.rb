@@ -77,6 +77,7 @@ class Store < ActiveRecord::Base
     store.has_many :customer_assets
     store.has_many :tax_categories
     store.has_many :groups
+    store.has_many :policies
   end
 
   has_one :style

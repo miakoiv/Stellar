@@ -187,6 +187,16 @@ en:
         show_resource: Show target
       layout_menu:
         new_section: New section
+    policies:
+      index:
+        pending: You have pending policies. Please review the marked policies.
+        new_policy: New policy
+      new:
+        new_policy: New policy
+      acceptance:
+        title: Agreement to terms of service
+        blurb: I have read and accept the terms of service.
+        confirm: Confirm acceptance
     products:
       index:
         new_product: New product

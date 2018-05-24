@@ -1,0 +1,14 @@
+.page-header
+  - if current_user.can_read?(Policy, at: current_store)
+    = link_to admin_policies_path, class: 'btn btn-default' do
+      = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_policy_path(@policy), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('briefcase', @policy)
+    - if @policy.mandatory?
+      %small= bootstrap_label(@policy, text: col(Policy, :mandatory), appearance: :primary)
+
+.row
+  .col-md-8
+    = render partial: 'form', locals: {locked: false}

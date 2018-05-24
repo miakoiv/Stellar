@@ -72,6 +72,15 @@ en:
         notice: "Page %{page} updated."
       destroy:
         notice: "Page %{page} deleted."
+    policies:
+      create:
+        notice: "Policy %{policy} created."
+      update:
+        notice: "Policy %{policy} updated."
+      accept:
+        notice: "Acceptance to policy %{policy} received."
+      destroy:
+        notice: "Policy %{policy} deleted."
     products:
       create:
         notice: "Product %{product} created."

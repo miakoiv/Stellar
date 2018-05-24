@@ -1,0 +1,18 @@
+.page-header
+  = link_to admin_policies_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(@policy, at: current_store)
+    = link_to edit_admin_policy_path(@policy), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1
+    = icon('briefcase', @policy)
+    - if @policy.mandatory?
+      %small= bootstrap_label(@policy, text: col(Policy, :mandatory), appearance: :primary)
+
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-body
+        = @policy.content.html_safe
+  .col-md-4
+    = render partial: 'acceptance'
