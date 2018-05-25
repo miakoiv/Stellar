@@ -5,7 +5,7 @@
     $('#sales-table').tabular_search_widget()
 
   $('#sales-table').on 'view:afterRender', (event, data) ->
-    $('#grand-total').html data.grand_total
+    $('#grand-total').html data.grand_total_sans_tax
     $('#unit-count').html data.unit_count
     $('#product-count').html data.product_count
 
@@ -14,7 +14,7 @@
       {title: '#{col(Product, :title)}', name: 'product_title'}
       {title: '#{col(Product, :code)}', name: 'product_code'}
       {title: '#{col(OrderReportRow, :amount)}', name: 'amount', css: 'text-right'}
-      {title: '#{col(OrderReportRow, :total_value)}', name: 'subtotal_value', css: 'text-right currency'}
+      {title: '#{col(OrderReportRow, :value_sans_tax)}', name: 'value_sans_tax', css: 'text-right currency'}
     ]
     source: '#{admin_sales_report_path(format: :json)}'
     sort:

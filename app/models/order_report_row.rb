@@ -6,7 +6,9 @@
 #
 class OrderReportRow < ActiveRecord::Base
 
-  monetize :total_value_cents, disable_validation: true
+  monetize :total_sans_tax_cents, disable_validation: true
+  monetize :total_with_tax_cents, disable_validation: true
+  monetize :total_tax_cents, disable_validation: true
 
   #---
   belongs_to :order_type
@@ -23,20 +25,20 @@ class OrderReportRow < ActiveRecord::Base
   def self.create_from_order_and_item(order, order_item)
     product = order_item.product
     return false unless product.present?
-    report_row = where(
+    row = where(
       order_type: order.order_type,
       user: order.user.guest?(order.store) ? nil : order.user,
       store_portal: order.store_portal,
       shipping_country_code: order.shipping_country_code,
       product: product,
-      ordered_at: order.completed_at.to_date
-    ).first_or_initialize do |row|
-      row.amount = 0
-      row.total_value_cents = 0
-    end
-    report_row.amount += order_item.amount
-    report_row.total_value_cents += order_item.grand_total_sans_tax.cents
-    report_row.save
+      ordered_at: order.completed_at.to_date,
+      tax_rate: order_item.tax_rate
+    ).first_or_initialize { |row| row.total_value_cents = 0 }
+    row.amount += order_item.amount
+    row.total_sans_tax_cents += order_item.grand_total_sans_tax.cents
+    row.total_with_tax_cents += order_item.grand_total_with_tax.cents
+    row.total_tax_cents += order_item.tax_total.cents
+    row.save
   end
 
   def self.create_from(order)

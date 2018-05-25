@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180523141315) do
+ActiveRecord::Schema.define(version: 20180525110012) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -374,16 +374,20 @@ ActiveRecord::Schema.define(version: 20180523141315) do
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
 
   create_table "order_report_rows", force: :cascade do |t|
-    t.integer  "order_type_id",         limit: 4, null: false
+    t.integer  "order_type_id",         limit: 4,                                       null: false
     t.integer  "user_id",               limit: 4
     t.integer  "store_portal_id",       limit: 4
     t.string   "shipping_country_code", limit: 2
-    t.integer  "product_id",            limit: 4, null: false
-    t.date     "ordered_at",                      null: false
-    t.integer  "amount",                limit: 4, null: false
-    t.integer  "total_value_cents",     limit: 4, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "product_id",            limit: 4,                                       null: false
+    t.date     "ordered_at",                                                            null: false
+    t.integer  "amount",                limit: 4,                         default: 0,   null: false
+    t.integer  "total_value_cents",     limit: 4,                                       null: false
+    t.integer  "total_sans_tax_cents",  limit: 4,                         default: 0,   null: false
+    t.integer  "total_tax_cents",       limit: 4,                         default: 0,   null: false
+    t.integer  "total_with_tax_cents",  limit: 4,                         default: 0,   null: false
+    t.decimal  "tax_rate",                        precision: 5, scale: 2, default: 0.0, null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
   end
 
   add_index "order_report_rows", ["order_type_id"], name: "index_order_report_rows_on_order_type_id", using: :btree
