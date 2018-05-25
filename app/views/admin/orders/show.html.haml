@@ -43,7 +43,7 @@
         %h2.visible-print-block= title(Payment, count: 2)
         = render partial: 'admin/payments/table', object: @order, as: :order
 
-- if @order.approved?
+- if @order.approved? && @order.track_shipments?
   :coffee
     $('[href="#tab-shipments"]').tab 'show'
 - else

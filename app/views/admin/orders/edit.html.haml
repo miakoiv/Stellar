@@ -40,7 +40,7 @@
 
 #shipments-edit-modal.modal{data: {backdrop: 'static'}}
 
-- if @order.approved?
+- if @order.approved? && @order.track_shipments?
   :coffee
     $('[href="#tab-shipments"]').tab 'show'
 - else
