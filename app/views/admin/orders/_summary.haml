@@ -25,17 +25,15 @@
       - if @order.your_reference.present?
         %dt= col(Order, :your_reference)
         %dd= @order.your_reference
-      - if @order.our_reference.present?
-        %dt= col(Order, :our_reference)
-        %dd= @order.our_reference
       - if @order.message.present?
         %dt= col(Order, :message)
         %dd= @order.message
   .col-xs-4
     %dl
       - if @order.has_shipping?
-        %dt= col(Order, :shipping_at)
-        %dd= @order.shipping_at.present? ? l(@order.shipping_at) : '–'
+        - if @order.shipping_at.present?
+          %dt= col(Order, :shipping_at)
+          %dd= l(@order.shipping_at)
         %dt= col(Order, :shipping_address)
         %dd= @order.shipping_address
         %dd
