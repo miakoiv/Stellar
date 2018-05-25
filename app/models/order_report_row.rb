@@ -33,7 +33,7 @@ class OrderReportRow < ActiveRecord::Base
       product: product,
       ordered_at: order.completed_at.to_date,
       tax_rate: order_item.tax_rate
-    ).first_or_initialize { |row| row.total_value_cents = 0 }
+    ).first_or_initialize
     row.amount += order_item.amount
     row.total_sans_tax_cents += order_item.grand_total_sans_tax.cents
     row.total_with_tax_cents += order_item.grand_total_with_tax.cents

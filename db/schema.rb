@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525110012) do
+ActiveRecord::Schema.define(version: 20180525125351) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -381,7 +381,6 @@ ActiveRecord::Schema.define(version: 20180525110012) do
     t.integer  "product_id",            limit: 4,                                       null: false
     t.date     "ordered_at",                                                            null: false
     t.integer  "amount",                limit: 4,                         default: 0,   null: false
-    t.integer  "total_value_cents",     limit: 4,                                       null: false
     t.integer  "total_sans_tax_cents",  limit: 4,                         default: 0,   null: false
     t.integer  "total_tax_cents",       limit: 4,                         default: 0,   null: false
     t.integer  "total_with_tax_cents",  limit: 4,                         default: 0,   null: false
