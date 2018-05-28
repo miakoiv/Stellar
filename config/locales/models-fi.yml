@@ -294,7 +294,9 @@ fi:
         product_id: Tuote
         ordered_at: Päiväys
         amount: Määrä
+        tax_rate: Verokanta
         value_sans_tax: Yhteensä ilman veroa
+        value_tax: Vero yhteensä
         value_with_tax: Yhteensä veroineen
       order_type:
         name: Nimi

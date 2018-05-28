@@ -294,7 +294,9 @@ en:
         product_id: Product
         ordered_at: Date
         amount: Amount
+        tax_rate: Tax rate
         value_sans_tax: Total without tax
+        value_tax: Total tax
         value_with_tax: Total with tax
       order_type:
         name: Name

@@ -44,6 +44,23 @@ class Admin::ReportsController < ApplicationController
     end
   end
 
+  # GET /admin/reports/sales_tax
+  def sales_tax
+    @order_types = current_group.incoming_order_types
+    return render nothing: true, status: :bad_request if @order_types.empty?
+    @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
+    @query.reverse_merge!('order_type' => @order_types.first)
+
+    respond_to do |format|
+      format.json {
+        search = OrderReportRowSearch.new(
+          @query.merge(view_params).merge(tabular_params)
+        )
+        @sales = Reports::Sales.new(search)
+      }
+    end
+  end
+
   # GET /admin/reports/purchases
   def purchases
     @order_types = current_group.outgoing_order_types

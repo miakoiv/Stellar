@@ -22,6 +22,15 @@ module Reports
       ).group(:product_id).reorder(@sort)
     end
 
+    def by_tax_rate
+      @items.select(
+        'tax_rate, SUM(amount) AS amount,
+        SUM(total_sans_tax_cents) AS value_sans_tax,
+        SUM(total_with_tax_cents) AS value_with_tax,
+        SUM(total_tax_cents) AS value_tax'
+      ).group(:tax_rate)
+    end
+
     def grand_total_sans_tax
       @items.sum(:total_sans_tax_cents)
     end
