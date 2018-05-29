@@ -69,7 +69,7 @@ class Product < ActiveRecord::Base
       on_hand: amount,
       reserved: 0,
       pending: 0,
-      value: item.value || cost_price || 0
+      value: item.value || trade_price || 0
     )
     item.save!
   end

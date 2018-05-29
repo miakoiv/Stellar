@@ -44,7 +44,7 @@ class Inventory < ActiveRecord::Base
       on_hand: transfer_item.amount,
       reserved: 0,
       pending: 0,
-      value: item.value || transfer_item.product.cost_price || 0
+      value: item.value || transfer_item.product.trade_price || 0
     )
     item.save!
   end
