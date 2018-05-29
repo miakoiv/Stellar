@@ -47,7 +47,9 @@ $.fn.extend
               {
                 id: 'items'
                 position: 'right'
-                ticks: {min: 0}
+                ticks:
+                  min: 0
+                  suggestedMax: data.units_max * 2
                 gridLines: {display: false}
               }
             ]

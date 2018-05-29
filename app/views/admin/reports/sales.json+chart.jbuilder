@@ -4,3 +4,4 @@ json.set! :daily_value, @sales.by_date.map { |i|
 json.set! :daily_units, @sales.by_date.map { |i|
   {t: i.date, y: i.amount}
 }
+json.units_max @sales.units_max

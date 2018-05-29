@@ -39,6 +39,10 @@ module Reports
       @items.sum(:amount)
     end
 
+    def units_max
+      by_date.map(&:amount).max
+    end
+
     def product_count
       @items.distinct.count(:product_id)
     end
