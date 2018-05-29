@@ -14,7 +14,7 @@ class Admin::ReportsController < ApplicationController
   # GET /admin/reports/inventory
   def inventory
     @query = saved_search_query('inventory_item', 'admin_inventory_item_report_search')
-    @query.merge(store_id: current_store.id, reported: true)
+    @query.merge!(store_id: current_store.id, reported: true)
 
     respond_to do |format|
       format.html {
