@@ -13,12 +13,18 @@ class Admin::ReportsController < ApplicationController
 
   # GET /admin/reports/inventory
   def inventory
-    @search = InventoryItemSearch.new(inventory_params)
+    @query = saved_search_query('inventory_item', 'admin_inventory_item_report_search')
+    @query.merge(store_id: current_store.id, reported: true)
 
     respond_to do |format|
-      format.html
+      format.html {
+        @search = InventoryItemSearch.new(@query)
+      }
       format.json {
-        @inventory = Reports::Inventory.new(@search)
+        search = InventoryItemSearch.new(
+          @query.merge(tabular_params)
+        )
+        @inventory = Reports::Inventory.new(search)
       }
     end
   end
@@ -86,10 +92,6 @@ class Admin::ReportsController < ApplicationController
     # Chart views can be requested as variants.
     def set_variant
       request.variant = :chart if params[:variant] == 'chart'
-    end
-
-    def inventory_params
-      {store_id: current_store.id, reported: true}.merge(tabular_params)
     end
 
     # Params specifying a view but not saved with the search query.

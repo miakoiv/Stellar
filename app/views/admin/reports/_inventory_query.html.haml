@@ -1,0 +1,12 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_inventory_report_path, method: :get do |f|
+      .row
+        .col-sm-8
+          .form-group
+            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
+        .col-sm-4
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

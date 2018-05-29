@@ -1,0 +1,29 @@
+#inventory-table
+
+:coffee
+  $('#inventory-table').one 'view:tableHead', ->
+    $('#inventory-table').tabular_search_widget()
+
+  $('#inventory-table').on 'view:afterRender', (event, data) ->
+    $('#grand-total').html data.grand_total
+    $('#product-count').html data.product_count
+
+  tabular.start '#inventory-table',
+    columns: [
+      {title: '#{col(Product, :title)}', name: 'product_title'}
+      {title: '#{col(Product, :code)}', name: 'product_code'}
+      {title: '#{col(Product, :stock)}', name: 'on_hand', css: 'text-right'}
+      {title: 'à', name: 'unit_value', css: 'text-right'}
+      {title: '#{col(InventoryItem, :value)}', name: 'subtotal_value', css: 'text-right currency'}
+    ]
+    source: '#{admin_inventory_report_path(format: :json)}'
+    sort:
+      name: 'product_title'
+      dir: 'asc'
+    plugins: [
+      'Model'
+      'Loader'
+      'Sort'
+      'Search'
+    ]
+    tableClass: 'table table-condensed table-hover'

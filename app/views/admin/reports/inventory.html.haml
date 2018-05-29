@@ -4,6 +4,8 @@
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
   %h1= icon('eur', t('admin.reports.inventory.title'))
 
+= render partial: 'inventory_query'
+
 .reports
   .report-body
     %dl.dl-horizontal
@@ -12,32 +14,5 @@
       %dt= t('admin.reports.inventory.items')
       %dd#product-count
 
-#inventory-table
-
-:coffee
-  $('#inventory-table').one 'view:tableHead', ->
-    $('#inventory-table').tabular_search_widget()
-
-  $('#inventory-table').on 'view:afterRender', (event, data) ->
-    $('#grand-total').html data.grand_total
-    $('#product-count').html data.product_count
-
-  tabular.start '#inventory-table',
-    columns: [
-      {title: '#{col(Product, :title)}', name: 'product_title'}
-      {title: '#{col(Product, :code)}', name: 'product_code'}
-      {title: '#{col(Product, :stock)}', name: 'on_hand', css: 'text-right'}
-      {title: 'à', name: 'unit_value', css: 'text-right'}
-      {title: '#{col(InventoryItem, :value)}', name: 'subtotal_value', css: 'text-right currency'}
-    ]
-    source: '#{admin_inventory_report_path(format: :json)}'
-    sort:
-      name: 'product_title'
-      dir: 'asc'
-    plugins: [
-      'Model'
-      'Loader'
-      'Sort'
-      'Search'
-    ]
-    tableClass: 'table table-condensed table-hover'
+%hr
+= render partial: 'inventory_table'
