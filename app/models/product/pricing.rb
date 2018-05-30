@@ -37,16 +37,29 @@ class Product < ActiveRecord::Base
     [quantity, unit.pricing_base]
   end
 
+  def trade_price_with_tax
+    return nil if trade_price.nil?
+    Price.new(trade_price, tax_category.included_in_trade?, tax_category.rate).with_tax
+  end
+
   # Markup percentage from trade price to retail price.
   def markup_percent
     return nil if trade_price.nil? || retail_price.nil? || trade_price == 0
-    100 * (retail_price - trade_price) / trade_price
+    if tax_category.included_in_retail?
+      100 * (retail_price - trade_price_with_tax) / trade_price_with_tax
+    else
+      100 * (retail_price - trade_price) / trade_price
+    end
   end
 
   # Margin percentage from trade price to retail price.
   def margin_percent
     return nil if trade_price.nil? || retail_price.nil? || retail_price == 0
-    100 * (retail_price - trade_price) / retail_price
+    if tax_category.included_in_retail?
+      100 * (retail_price - trade_price_with_tax) / retail_price
+    else
+      100 * (retail_price - trade_price) / retail_price
+    end
   end
 
   private
