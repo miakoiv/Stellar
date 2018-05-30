@@ -64,6 +64,7 @@
     new Switchboard 'barcode',
       mapping:
         'Dead': String.fromCharCode(29) #dead key to FNC1
+        '¨': String.fromCharCode(29)
       callback: (code) ->
         data = parseBarcode code
         item = {amount: 1}
