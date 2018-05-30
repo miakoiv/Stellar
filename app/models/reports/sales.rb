@@ -18,7 +18,10 @@ module Reports
       @items.select(
         'products.id AS product_id, products.code AS product_code,
         products.title AS product_title, products.subtitle AS product_subtitle,
-        SUM(amount) AS amount, SUM(total_sans_tax_cents) AS value_sans_tax'
+        tax_rate, SUM(amount) AS amount,
+        SUM(total_sans_tax_cents) AS value_sans_tax,
+        SUM(total_with_tax_cents) AS value_with_tax,
+        SUM(total_tax_cents) AS value_tax'
       ).group(:product_id).reorder(@sort)
     end
 

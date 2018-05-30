@@ -220,7 +220,8 @@ en:
         new_product: New product
       form:
         assign_master_product: Select product to vary…
-        tax_included_in_retail_html: Price <strong>includes tax</strong>.
+        trade_price_help: Trade price is excluding tax.
+        tax_included_in_retail_html: Price <strong>includes tax</strong>. Markup and margin are calculated from trade price with tax.
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Price <strong>excludes tax</strong>.
         all_shipping_methods: All shipping methods available
         lead_time_help_html: Lead times of <em>n days</em> enable automatic shipping date calculation. Other formats are advisory only.

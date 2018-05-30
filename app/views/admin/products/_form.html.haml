@@ -37,14 +37,15 @@
 
         = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
-            = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, t.included_in_retail?] }.to_h}
+            = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, {incl_tax: t.included_in_retail?, rate: t.rate.to_f}] }.to_h}
             - if current_group.cost?
               .row
                 .col-md-8
                   = f.text_field :cost_price, append: '€', class: 'text-right'
             .row
               .col-md-8
-                = f.text_field :trade_price, append: '€', class: 'text-right'
+                = f.text_field :trade_price, append: '€', class: 'text-right', help: t('.trade_price_help')
+                = f.hidden_field :trade_price_with_tax
               .col-md-4
                 %label.control-label= col(Product, :markup_percent)
                 = text_field_tag :markup_percent, number_with_precision(@product.markup_percent, precision: 2), class: 'form-control text-right'
@@ -92,8 +93,11 @@
 :coffee
   persist_tabs 'product-main'
 
+
   numbro.culture "#{t('culture')}"
+
   $('#product_trade_price').on 'change', (e) ->
+    update_trade_price_with_tax()
     update_markup_margin()
     $('#markup_percent, #margin_percent').effect 'highlight'
   $('#product_retail_price').on 'change', (e) ->
@@ -102,7 +106,7 @@
 
   $('#markup_percent').on 'change', (e) ->
     markup_percent = numbro().unformat $('#markup_percent').val()
-    trade_price = numbro().unformat $('#product_trade_price').val()
+    trade_price = numbro().unformat if incl_tax() then $('#product_trade_price_with_tax').val() else $('#product_trade_price').val()
     retail_price = trade_price * (1 + markup_percent/100.0)
     $('#product_retail_price').val numbro(retail_price).format('0.00')
     update_markup_margin()
@@ -110,18 +114,17 @@
 
   $('#margin_percent').on 'change', (e) ->
     margin_percent = numbro().unformat $('#margin_percent').val()
-    trade_price = numbro().unformat $('#product_trade_price').val()
+    trade_price = numbro().unformat if incl_tax() then $('#product_trade_price_with_tax').val() else $('#product_trade_price').val()
     retail_price = - trade_price / (margin_percent/100.0 - 1)
     $('#product_retail_price').val numbro(retail_price).format('0.00')
     update_markup_margin()
     $('#product_retail_price, #markup_percent').effect 'highlight'
 
-  tax_categories = $('#product_tax_category_id').data 'taxCategories'
-
   $('#product_tax_category_id').selectize
       dropdownParent: 'body'
       onChange: (index) ->
-        if tax_categories[index]
+        update_markup_margin()
+        if incl_tax()
           $('#tax-included').collapse 'show'
           $('#tax-excluded').collapse 'hide'
         else

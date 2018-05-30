@@ -13,8 +13,11 @@
     columns: [
       {title: '#{col(Product, :title)}', name: 'product_title'}
       {title: '#{col(Product, :code)}', name: 'product_code'}
+      {title: '#{col(OrderReportRow, :tax_rate)}', name: 'tax_rate'}
       {title: '#{col(OrderReportRow, :amount)}', name: 'amount', css: 'text-right'}
       {title: '#{col(OrderReportRow, :value_sans_tax)}', name: 'value_sans_tax', css: 'text-right currency'}
+      {title: '#{col(OrderReportRow, :value_tax)}', name: 'value_tax', css: 'text-right currency'}
+      {title: '#{col(OrderReportRow, :value_with_tax)}', name: 'value_with_tax', css: 'text-right currency'}
     ]
     source: '#{admin_sales_report_path(format: :json)}'
     sort:
