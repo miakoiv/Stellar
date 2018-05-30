@@ -7,7 +7,7 @@ class OrderReportRowSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    OrderReportRow.joins(:product)
+    OrderReportRow.joins(product: :categories)
   end
 
   def options
@@ -32,6 +32,10 @@ class OrderReportRowSearch < Searchlight::Search
 
   def search_shipping_country_code
     query.where(shipping_country_code: shipping_country_code)
+  end
+
+  def search_categories
+    query.where(categories: {id: categories})
   end
 
   def search_product_id

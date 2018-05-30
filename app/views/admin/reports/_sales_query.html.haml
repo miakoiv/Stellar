@@ -9,6 +9,9 @@
             = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
+            = f.select :categories, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
+        .col-sm-6.col-md-4
+          .form-group
             .input-group.input-daterange{data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}}
               = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.since_date'), class: 'form-control'
               %span.input-group-addon= icon('caret-right')
