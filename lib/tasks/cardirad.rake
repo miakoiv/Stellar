@@ -28,3 +28,31 @@ namespace :products do
     end
   end
 end
+
+namespace :inventory do
+  desc "Import Cardirad inventory data from CSV input"
+  task :cardirad, [:code, :file] => :environment do |task, args|
+    store = Store.find_by name: 'Cardirad Finland'
+    inventory = store.inventories.find_by(inventory_code: args.code)
+    inventory.inventory_items.destroy_all
+
+    CSV.foreach(args.file,
+      encoding: 'utf-8',
+      col_sep: ';',
+      skip_blanks: true,
+      headers: [:title, :gtin, :lot, :expires, :amount]
+    ) do |row|
+      product = store.products.find_by(customer_code: row[:gtin])
+      if product.present?
+        lot_code = row[:lot]
+        expires_at = row[:expires]
+        amount = row[:amount].to_i
+        next if amount < 1
+        product.restock!(inventory, lot_code, expires_at, amount)
+        puts "+ #{product} LOT #{lot_code} ##{amount}"
+      else
+        puts "! #{row[:title]} GTIN #{row[:gtin]}"
+      end
+    end
+  end
+end

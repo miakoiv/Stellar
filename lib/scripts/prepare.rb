@@ -14,7 +14,7 @@ require 'csv'
 
 input = CSV.read ARGV.shift,
   col_sep: ';',
-  row_sep: "\r\r\n",
+  row_sep: "\r\n",
   headers: true,
   header_converters: :symbol,
   skip_blanks: true,
@@ -22,7 +22,7 @@ input = CSV.read ARGV.shift,
 
 output = CSV.new $stdout,
   col_sep: ';',
-  headers: [:gtin, :lot, :expires, :amount]
+  headers: [:title, :gtin, :lot, :expires, :amount]
 
 stock = {}
 input.each do |row|
@@ -35,6 +35,7 @@ input.each do |row|
   key = [gtin, lot]
   warn "+#{gtin}|#{lot}" if stock[key].nil?
   stock[key] ||= {
+    title: row[:nimi],
     gtin: gtin,
     lot: lot,
     expires: expires,
