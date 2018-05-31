@@ -144,7 +144,7 @@ class Product < ActiveRecord::Base
         product.inventory_items.destroy_all
         amount = row[:inventory_amount].to_i
         amount = 0 if amount < 0
-        product.restock!(inventory, code, amount)
+        product.restock!(inventory, code, nil, amount)
       end
       product
     rescue

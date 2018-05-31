@@ -58,11 +58,13 @@ class Product < ActiveRecord::Base
     lead_time.presence && lead_time.to_i
   end
 
-  # Restocks given inventory with amount of this product with given lot code.
-  def restock!(inventory, lot_code, amount)
+  # Restocks given inventory with amount of this product with given lot code
+  # and expiration date.
+  def restock!(inventory, lot_code, expires_at, amount)
     item = inventory_items.find_or_initialize_by(
       inventory: inventory,
-      code: lot_code
+      code: lot_code,
+      expires_at: expires_at
     )
     item.inventory_entries.build(
       recorded_at: Date.today,
