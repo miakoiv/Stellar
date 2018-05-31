@@ -23,13 +23,15 @@ class TaxCategory < ActiveRecord::Base
   end
 
   # As of now, cost and trade prices are considered to be sans tax.
-  def included_in_cost?
+  def included_in_cost
     false
   end
+  alias_method :included_in_cost?, :included_in_cost
 
-  def included_in_trade?
+  def included_in_trade
     false
   end
+  alias_method :included_trade?, :included_in_trade
 
   def to_s
     name
