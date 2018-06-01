@@ -541,6 +541,7 @@ en:
         rate: Tax rate
         included_in_retail: Retail prices include tax
       transfer:
+        number: №
         completed_at: Transfer date
         source_id: From inventory
         destination_id: To inventory

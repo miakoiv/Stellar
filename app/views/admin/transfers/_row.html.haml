@@ -1,5 +1,6 @@
 %tr[transfer]{class: transfer.appearance}
   %td= icon(transfer.icon)
+  %td= transfer.id
   %td= transfer.completed_at.present? ? l(transfer.completed_at.to_date, format: :iso) : nil
   %td= transfer.source
   %td= transfer.destination

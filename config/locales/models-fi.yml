@@ -541,6 +541,7 @@ fi:
         rate: Verokanta
         included_in_retail: Myyntihinnat sisältävät veron
       transfer:
+        number: nro
         completed_at: Siirretty
         source_id: Mistä
         destination_id: Mihin

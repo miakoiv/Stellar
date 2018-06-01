@@ -5,4 +5,7 @@
 .page-header
   %h1
     = t('.delivery_note')
-    %span.small= l(@transfer.completed_at.to_date, format: :iso)
+    %span.small
+      = Transfer.human_attribute_name(:number)
+      = @transfer.id
+      = surround('(', ')') { l(@transfer.completed_at.to_date, format: :iso) }

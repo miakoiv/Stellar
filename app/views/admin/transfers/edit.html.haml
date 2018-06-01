@@ -5,8 +5,11 @@
     = icon('info-circle', t('actions.show'))
   %h1
     = icon('retweet', title(Transfer))
-    - if @transfer.complete?
-      %span.small= l(@transfer.completed_at.to_date, format: :iso)
+    %span.small
+      = Transfer.human_attribute_name(:number)
+      = @transfer.id
+      - if @transfer.complete?
+        = surround('(', ')') { l(@transfer.completed_at.to_date, format: :iso) }
 
 .row
   .col-md-5

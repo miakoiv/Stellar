@@ -11,8 +11,11 @@
     = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
   %h1
     = icon('retweet', title(Transfer))
-    - if @transfer.complete?
-      %span.small= l(@transfer.completed_at.to_date, format: :iso)
+    %span.small
+      = Transfer.human_attribute_name(:number)
+      = @transfer.id
+      - if @transfer.complete?
+        = surround('(', ')') { l(@transfer.completed_at.to_date, format: :iso) }
 
 - if @transfer.complete?
   .visible-print.compact
@@ -20,7 +23,8 @@
 
 .row
   .col-md-5
-    = render partial: 'form', locals: {locked: true}
+    .hidden-print
+      = render partial: 'form', locals: {locked: true}
 
   .col-md-7
     = render partial: 'admin/transfer_items/table', object: @transfer, as: :transfer
