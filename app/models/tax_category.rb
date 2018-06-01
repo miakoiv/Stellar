@@ -31,7 +31,7 @@ class TaxCategory < ActiveRecord::Base
   def included_in_trade
     false
   end
-  alias_method :included_trade?, :included_in_trade
+  alias_method :included_in_trade?, :included_in_trade
 
   def to_s
     name
