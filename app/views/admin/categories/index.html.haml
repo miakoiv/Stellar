@@ -15,8 +15,11 @@
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
-    parent: $('.row')
+    parent: $('#content-wrap')
     offset_top: 80
+    bottoming: false
+    spacer: false
+    recalc_every: 50
 
   $('#category-list').nestable().on 'change', ->
     data = {rearrange: {categories: $(this).nestable('serialize')}}
