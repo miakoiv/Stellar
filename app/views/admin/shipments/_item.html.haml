@@ -6,6 +6,8 @@
           = icon('info-circle', class: 'fa-lg')
     %h4.panel-title
       = shipment.shipping_method
+      = t('.inventory')
+      = shipment.order.inventory
       %small= shipment
 
   .collapse{id: dom_id(shipment, :metadata)}

@@ -272,6 +272,7 @@ en:
           confirm: The segment and its contents will be deleted. This cannot be undone.
     shipments:
       item:
+        inventory: from inventory
         refresh: Reload from stock
         edit: Shipment details
         complete:
