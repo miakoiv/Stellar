@@ -79,7 +79,7 @@ module ApplicationHelper
   def bootstrap_label(object, options = {})
     appearance = options.delete(:appearance) || object.try(:appearance) || :default
     options.reverse_merge!(class: "label label-#{appearance}")
-    icon = options.delete(:icon)
+    icon = options.delete(:icon) || object.try(:icon)
     text = options.delete(:text) || object.try(:label) || object.to_s
     if icon
       content_tag :span, icon(icon, text), options
