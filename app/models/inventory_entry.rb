@@ -33,4 +33,12 @@ class InventoryEntry < ActiveRecord::Base
   def total_value_cents
     on_hand * value_cents
   end
+
+  def to_s
+    "%s (%s) %d/%d/%d" % [
+      inventory_item.product,
+      inventory_item.code,
+      on_hand, reserved, pending
+    ]
+  end
 end

@@ -51,6 +51,10 @@ class TransferItem < ActiveRecord::Base
     self.product = Product.find_by(customer_code: val)
   end
 
+  def to_s
+    "%d⨉ %s (%s)" % [amount, product, lot_code]
+  end
+
   private
     def override_lot_code_with_serial
       self[:lot_code] = serial if serial.present?
