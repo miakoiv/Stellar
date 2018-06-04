@@ -17,6 +17,9 @@ fi:
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
   activerecord:
     models:
+      activity:
+        one: tapahtuma
+        other: tapahtumat
       album:
         one: albumi
         other: albumit
@@ -124,6 +127,13 @@ fi:
         one: käyttäjä
         other: käyttäjät
     attributes:
+      activity:
+        created_at: Aikaleima
+        user_id: Käyttäjä
+        action: Toimenpide
+        resource: Kohde
+        context: Asiayhteys
+        differences: Tehdyt muutokset
       album:
         title: Otsikko
         created_at: Päiväys

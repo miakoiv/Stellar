@@ -229,6 +229,7 @@ Rails.application.routes.draw do
     resources :policies do
       patch :accept, on: :member
     end
+    resources :activities, only: [:index, :show]
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/images/reorder', to: 'images#reorder', as: :reorder_images

@@ -1,0 +1,35 @@
+.page-header
+  = link_to admin_activities_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1= icon('heartbeat', @activity)
+
+.row
+  .col-md-5
+    = bootstrap_form_for [:admin, @activity] do |f|
+      .panel.panel-default
+        .panel-body
+          %fieldset{disabled: true}
+            .row
+              .col-md-6
+                = f.static_control :created_at
+              .col-md-6
+                .form-group
+                  %label.control-label= col(Activity, :action)
+                  %p.form-control-static= bootstrap_label @activity, text: @activity.action
+            .form-group
+              %label.control-label= col(Activity, :resource)
+              - if @activity.resource.present?
+                %p.form-control-static
+                  = @activity.resource.model_name.human
+                  %strong= @activity.resource
+            .form-group
+              %label.control-label= col(Activity, :context)
+              - if @activity.context.present?
+                %p.form-control-static
+                  = @activity.context.model_name.human
+                  %strong= @activity.context
+            = f.static_control :user, label: col(Activity, :user_id)
+
+  - if @activity.context.present?
+    .col-md-7
+      = render partial: 'admin/activities/history', object: @activity.context, as: :context

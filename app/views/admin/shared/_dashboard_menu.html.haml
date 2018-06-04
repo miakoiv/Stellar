@@ -13,3 +13,5 @@
   = menu_item 'tag', title(Promotion, count: 2), admin_promotions_path
 - if current_user_has_role?(:asset_editor)
   = menu_item 'archive', title(CustomerAsset, count: 2), admin_customer_assets_path
+- if current_user_has_role?(:superuser) || current_user_has_role?(:store_admin)
+  = menu_item 'heartbeat', title(Activity, count: 2), admin_activities_path

@@ -17,6 +17,9 @@ en:
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
   activerecord:
     models:
+      activity:
+        one: activity
+        other: activities
       album:
         one: album
         other: albums
@@ -124,6 +127,13 @@ en:
         one: user
         other: users
     attributes:
+      activity:
+        created_at: Timestamp
+        user_id: User
+        action: Action
+        resource: Target
+        context: Context
+        differences: Changes made
       album:
         title: Title
         created_at: Date

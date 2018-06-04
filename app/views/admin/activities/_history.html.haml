@@ -1,0 +1,13 @@
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(Activity, :created_at)
+        %th= col(Activity, :action)
+        %th= col(Activity, :user_id)
+    %tbody
+      - context.activities.each do |activity|
+        %tr[activity]{class: activity == @activity && 'active'}
+          %td= l(activity.created_at, format: :iso)
+          %td= bootstrap_label activity, text: activity.action
+          %td= activity.user

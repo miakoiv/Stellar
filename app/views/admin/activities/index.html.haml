@@ -1,0 +1,26 @@
+.page-header
+  %h1= icon('heartbeat', title(Activity, count: 2))
+
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-xs-2= col(Activity, :created_at)
+        %th.col-xs-1= col(Activity, :action)
+        %th.col-xs-4= col(Activity, :resource)
+        %th.col-xs-4= col(Activity, :user_id)
+        %th.actions
+
+    %tbody
+      = content_tag_for :tr, @activities do |activity|
+        %td= l(activity.created_at, format: :iso)
+        %td= bootstrap_label activity, text: activity.action
+        %td
+          - if activity.resource.present?
+            = activity.resource.model_name.human
+            = link_to activity.resource, [:admin, activity.context]
+        %td= activity.user
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_activity_path(activity), class: 'btn btn-default btn-sm'
+
+= paginate @activities
