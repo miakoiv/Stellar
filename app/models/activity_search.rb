@@ -14,4 +14,12 @@ class ActivitySearch < Searchlight::Search
   def search_store
     query.where(store: store)
   end
+
+  def search_user_id
+    query.where(user_id: user_id)
+  end
+
+  def search_until_date
+    query.where('DATE(created_at) <= ?', until_date)
+  end
 end

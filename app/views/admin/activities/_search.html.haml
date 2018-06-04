@@ -1,0 +1,15 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_activities_path, method: :get do |f|
+      .row
+        .col-sm-6
+          .form-group
+            = f.select :user_id, current_store.users.with_activities.map { |u| [u.to_s, u.id] }, {}, {multiple: true, placeholder: t('.user'), class: 'selectize'}
+        .col-sm-4
+          .form-group
+            = f.search_field :until_date, autocomplete: 'off', placeholder: t('.until_date'), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
+        .col-sm-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

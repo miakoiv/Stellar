@@ -21,6 +21,10 @@
 
 fi:
   admin:
+    activities:
+      search:
+        user: Tapahtuman tekijä
+        until_date: Tapahtumapäivä viimeistään
     dashboard:
       title: Konsoli
       orders:

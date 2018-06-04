@@ -5,9 +5,9 @@
         %th= col(Activity, :created_at)
         %th= col(Activity, :action)
         %th= col(Activity, :user_id)
-    %tbody
+    %tbody.rowlink{data: {link: 'row'}}
       - context.activities.each do |activity|
         %tr[activity]{class: activity == @activity && 'active'}
-          %td= l(activity.created_at, format: :iso)
+          %td= link_to l(activity.created_at, format: :iso), admin_activity_path(activity)
           %td= bootstrap_label activity, text: activity.action
           %td= activity.user

@@ -32,9 +32,12 @@ class User < ActiveRecord::Base
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
   belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
 
+  has_many :performed_activities, class_name: 'Activity', foreign_key: :user_id
+
   default_scope { order(:name) }
 
   scope :with_assets, -> { joins(:customer_assets).distinct }
+  scope :with_activities, -> { joins(:performed_activities).distinct }
 
   #---
   validates :email, presence: true, uniqueness: true
