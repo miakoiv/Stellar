@@ -501,6 +501,7 @@ fi:
         shipping_cost_product_id: Toimituskustannusten tuote
         free_shipping_from: Ilmainen toimitus alkaen
         detail_page_id: Lisätietosivu
+        images: Kuvat
       store:
         admin: Asetukset
         appearance: Ulkoasu

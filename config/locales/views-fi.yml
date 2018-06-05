@@ -22,6 +22,7 @@
 fi:
   admin:
     activities:
+      title: Historia
       search:
         user: Tapahtuman tekijä
         until_date: Tapahtumapäivä viimeistään

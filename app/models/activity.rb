@@ -6,6 +6,8 @@
 #
 class Activity < ActiveRecord::Base
 
+  paginates_per 15
+
   include Authority::Abilities
 
   belongs_to :store

@@ -41,11 +41,7 @@
 
   - if @activity.context.present?
     .col-md-7
-      #context-activities
+      #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @activity.context.to_global_id}}
 
     :coffee
-      $.ajax
-        type: 'GET'
-        url: '#{context_admin_activities_path(format: :js)}'
-        data:
-          gid: '#{@activity.context.to_global_id.to_s}'
+      $('#context-activities').fetch_context()

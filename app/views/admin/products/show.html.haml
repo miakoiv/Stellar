@@ -26,6 +26,7 @@
       = nav_tab 'documents', col(Product, :documents)
       = nav_tab 'requisite-entries', col(Product, :requisite_entries), class: @product.has_variants? && 'disabled'
       = nav_tab 'component-entries', col(Product, :component_entries), class: @product.has_variants? && 'disabled'
+      = nav_tab 'history', t('admin.activities.title')
 
     .tab-content
       = tab_pane 'images', default: true do
@@ -42,6 +43,9 @@
         = render partial: 'admin/requisite_entries/table', object: @product, as: :product
       = tab_pane 'component-entries' do
         = render partial: 'admin/component_entries/table', object: @product, as: :product
+      = tab_pane 'history' do
+        #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
 
 :coffee
   persist_tabs 'product-side'
+  $('#context-activities').fetch_context()
