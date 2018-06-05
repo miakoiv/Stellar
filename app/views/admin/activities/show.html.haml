@@ -37,7 +37,7 @@
                 %dl.dl-horizontal.small
                   - @activity.differences.each do |key, values|
                     %dt= col(@activity.resource.class, key)
-                    %dd= values.join(' ➡ ')
+                    %dd= values.is_a?(Array) ? values.join(' ➡ ') : values
 
   - if @activity.context.present?
     .col-md-7
