@@ -29,7 +29,7 @@
                   = @activity.context.model_name.human
                   %strong= @activity.context
             = f.static_control :user, label: col(Activity, :user_id)
-        - if @activity.differences.any?
+        - if @activity.resource.present? && @activity.differences.any?
           .panel-footer
             %fieldset{disabled: true}
               .form-group
@@ -41,4 +41,4 @@
 
   - if @activity.context.present?
     .col-md-7
-      = render partial: 'admin/activities/history', object: @activity.context, as: :context
+      = render partial: 'admin/activities/context', object: @activity.context, as: :context

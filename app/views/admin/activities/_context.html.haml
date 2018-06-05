@@ -2,12 +2,17 @@
   %table.table.table-hover.table-loose
     %thead
       %tr
-        %th= col(Activity, :created_at)
-        %th= col(Activity, :action)
+        %th.col-xs-3= col(Activity, :created_at)
+        %th.col-xs-1= col(Activity, :action)
+        %th= col(Activity, :resource)
         %th= col(Activity, :user_id)
     %tbody.rowlink{data: {link: 'row'}}
       - context.activities.each do |activity|
         %tr[activity]{class: activity == @activity && 'active'}
           %td= link_to l(activity.created_at, format: :iso), admin_activity_path(activity)
           %td= bootstrap_label activity, text: activity.action
-          %td= activity.user
+          %td
+            - if activity.resource.present?
+              = activity.resource.model_name.human
+              = activity.resource
+          %td= activity.user.name
