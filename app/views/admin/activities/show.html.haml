@@ -18,10 +18,8 @@
                   %p.form-control-static= bootstrap_label @activity, text: @activity.action
             .form-group
               %label.control-label= col(Activity, :resource)
-              - if @activity.resource.present?
-                %p.form-control-static
-                  = @activity.resource.model_name.human
-                  %strong= @activity.resource
+              %p.form-control-static
+                = resource_name(@activity)
             .form-group
               %label.control-label= col(Activity, :context)
               - if @activity.context.present?
@@ -29,14 +27,14 @@
                   = @activity.context.model_name.human
                   %strong= @activity.context
             = f.static_control :user, label: col(Activity, :user_id)
-        - if @activity.resource.present? && @activity.differences.any?
+        - if @activity.differences.any?
           .panel-footer
             %fieldset{disabled: true}
               .form-group
                 %label.control-label= col(Activity, :differences)
                 %dl.dl-horizontal.small
                   - @activity.differences.each do |key, values|
-                    %dt= col(@activity.resource.class, key)
+                    %dt= @activity.resource_class.human_attribute_name(key)
                     %dd= values.is_a?(Array) ? values.join(' ➡ ') : values
 
   - if @activity.context.present?

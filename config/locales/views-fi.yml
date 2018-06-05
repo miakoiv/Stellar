@@ -23,6 +23,7 @@ fi:
   admin:
     activities:
       title: Historia
+      deleted: poistettu
       search:
         user: Tapahtuman tekijä
         until_date: Tapahtumapäivä viimeistään

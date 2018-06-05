@@ -41,6 +41,10 @@ class Activity < ActiveRecord::Base
     ACTIONS[action.to_sym][:appearance]
   end
 
+  def resource_class
+    resource_type.constantize
+  end
+
   def to_s
     "#{model_name.human.capitalize} #{created_at.year}-#{id}"
   end

@@ -43,6 +43,7 @@ en:
   admin:
     activities:
       title: History
+      deleted: deleted
       search:
         user: Activity performed by
         until_date: Activity date until

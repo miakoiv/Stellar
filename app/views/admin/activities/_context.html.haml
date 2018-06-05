@@ -11,9 +11,8 @@
           %td= link_to l(activity.created_at, format: :iso), admin_activity_path(activity)
           %td
             = bootstrap_label activity, text: activity.action
-            - if activity.resource.present? && activity.resource != activity.context
-              = activity.resource.model_name.human
-              = activity.resource
+            - if activity.resource != activity.context
+              = resource_name(activity)
           %td= activity.user.name
 
 = paginate @context, param_name: :context_page, remote: true

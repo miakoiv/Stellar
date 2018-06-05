@@ -17,10 +17,7 @@
       = content_tag_for :tr, @activities do |activity|
         %td= l(activity.created_at, format: :iso)
         %td= bootstrap_label activity, text: activity.action
-        %td
-          - if activity.resource.present?
-            = activity.resource.model_name.human
-            = link_to activity.resource, [:admin, activity.context]
+        %td= resource_link(activity)
         %td= activity.user
         %td.actions
           = link_to icon('info', t('actions.show')), admin_activity_path(activity), class: 'btn btn-default btn-sm'
