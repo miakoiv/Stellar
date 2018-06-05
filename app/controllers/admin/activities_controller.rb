@@ -16,6 +16,19 @@ class Admin::ActivitiesController < ApplicationController
     @activities = @search.results.page(params[:page])
   end
 
+  # GET /activities/1
+  # GET /activities/1.json
+  def show
+    authorize_action_for Activity, at: current_store
+  end
+
+  # GET /activities/context
+  def context
+    @resource = GlobalID::Locator.locate(params[:gid])
+    @context = @resource.activities.page(params[:context_page])
+
+    respond_to :js
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

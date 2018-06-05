@@ -41,4 +41,11 @@
 
   - if @activity.context.present?
     .col-md-7
-      = render partial: 'admin/activities/context', object: @activity.context, as: :context
+      #context-activities
+
+    :coffee
+      $.ajax
+        type: 'GET'
+        url: '#{context_admin_activities_path(format: :js)}'
+        data:
+          gid: '#{@activity.context.to_global_id.to_s}'

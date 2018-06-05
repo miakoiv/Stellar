@@ -3,16 +3,17 @@
     %thead
       %tr
         %th.col-xs-3= col(Activity, :created_at)
-        %th.col-xs-1= col(Activity, :action)
-        %th= col(Activity, :resource)
-        %th= col(Activity, :user_id)
+        %th= col(Activity, :action)
+        %th.col-xs-3= col(Activity, :user_id)
     %tbody.rowlink{data: {link: 'row'}}
-      - context.activities.each do |activity|
+      - @context.each do |activity|
         %tr[activity]{class: activity == @activity && 'active'}
           %td= link_to l(activity.created_at, format: :iso), admin_activity_path(activity)
-          %td= bootstrap_label activity, text: activity.action
           %td
-            - if activity.resource.present?
+            = bootstrap_label activity, text: activity.action
+            - if activity.resource.present? && activity.resource != activity.context
               = activity.resource.model_name.human
               = activity.resource
           %td= activity.user.name
+
+= paginate @context, param_name: :context_page, remote: true
