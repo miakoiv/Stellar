@@ -12,7 +12,7 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-md-6
-    #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @order_type.to_global_id}}
+    #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @order_type.to_global_id}}
 
 :coffee
   $('#context-activities').fetch_context()

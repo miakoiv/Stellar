@@ -45,7 +45,7 @@
         = render partial: 'admin/payments/table', object: @order, as: :order
 
       = tab_pane 'history' do
-        #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @order.to_global_id}}
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @order.to_global_id}}
 
 :coffee
   $('#context-activities').fetch_context()

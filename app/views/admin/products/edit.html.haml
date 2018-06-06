@@ -43,7 +43,7 @@
       = tab_pane 'component-entries' do
         = render partial: 'admin/component_entries/edit_table', object: @product, as: :product
       = tab_pane 'history' do
-        #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
 
 :coffee
   persist_tabs 'product-side'

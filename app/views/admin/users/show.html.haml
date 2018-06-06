@@ -27,7 +27,7 @@
       = tab_pane 'roles' do
         = render partial: 'admin/roles/list', object: @user, as: :user
       = tab_pane 'history' do
-        #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @user.to_global_id}}
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @user.to_global_id}}
 
 :coffee
   persist_tabs 'user-side'

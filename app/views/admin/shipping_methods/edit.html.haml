@@ -21,7 +21,7 @@
         = render partial: 'admin/images/edit_collection', object: @shipping_method, as: :imageable
         = render partial: 'admin/images/dropzone', object: @shipping_method, as: :imageable
       = tab_pane 'history' do
-        #context-activities{data: {url: context_admin_activities_path(format: :js), gid: @shipping_method.to_global_id}}
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @shipping_method.to_global_id}}
 
 :coffee
   persist_tabs 'shipping-method-side'
