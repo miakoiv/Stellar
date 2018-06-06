@@ -13,7 +13,9 @@
 
   %h1
     = @order.order_type
-    %span.small= @order.to_s
+    %span.small
+      = @order.to_s
+      = surround('[', ']') { @order.inventory.to_s }
 
 .visible-print.compact
   = render partial: 'headers'
