@@ -191,6 +191,7 @@
 /*
  * Segment content styles
  */
+.segment { position: relative; }
 .segment-content-wrap {
   display: flex;
   flex-flow: column nowrap;
