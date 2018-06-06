@@ -104,7 +104,7 @@ class Transfer < ActiveRecord::Base
   end
 
   def to_s
-    note
+    "%s %s ➡ %s" % [note, source, destination]
   end
 
   private
