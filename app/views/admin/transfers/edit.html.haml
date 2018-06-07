@@ -25,14 +25,6 @@
         %hr
         = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
 
-:coffee
-  $('.quick-edit-panel').stick_in_parent
-    parent: $('#content-wrap')
-    offset_top: 80
-    bottoming: false
-    spacer: false
-    recalc_every: 50
-
 - content_for :secondary_nav do
   #barcode-panel.navbar-form.navbar-right{data: {url: admin_transfer_transfer_items_path(@transfer)}}
     .form-group.has-feedback
