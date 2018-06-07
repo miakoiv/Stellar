@@ -8,7 +8,7 @@
               = f.text_field :approved_at, disabled: @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.approved_at_help')
             .col-md-6
               .conclusion.collapse{class: @order.approved? && 'in'}
-                = f.text_field :concluded_at, disabled: !@order.approved? || @order.concluded?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.concluded_at_help')
+                = f.text_field :concluded_at, disabled: !@order.concludable?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.concluded_at_help')
       - if @order.complete?
         %fieldset{disabled: true}
           = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
