@@ -123,6 +123,9 @@ en:
       transfer:
         one: stock transfer
         other: stock transfers
+      transfer_item:
+        one: transfer item
+        other: transfer items
       user:
         one: user
         other: users
@@ -556,6 +559,7 @@ en:
         completed_at: Transfer date
         source_id: From inventory
         destination_id: To inventory
+        transfer_items: Transfer items
         note: Note
         keyword: Keyword search
       transfer_item:

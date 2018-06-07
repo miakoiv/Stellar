@@ -16,9 +16,14 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-md-7
-    = render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer
-    %hr
-    = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
+    = tab_set 'transfer-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'items', col(Transfer, :transfer_items), default: true
+
+    .tab-content
+      = tab_pane 'items', default: true do
+        = render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer
+        %hr
+        = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
 
 :coffee
   $('.quick-edit-panel').stick_in_parent

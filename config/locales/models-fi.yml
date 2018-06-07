@@ -123,6 +123,9 @@ fi:
       transfer:
         one: varastosiirto
         other: varastosiirrot
+      transfer_item:
+        one: siirtorivi
+        other: siirtorivit
       user:
         one: käyttäjä
         other: käyttäjät
@@ -556,6 +559,7 @@ fi:
         completed_at: Siirretty
         source_id: Mistä
         destination_id: Mihin
+        transfer_items: Siirtorivit
         note: Huomautus
         keyword: Tekstihaku
       transfer_item:

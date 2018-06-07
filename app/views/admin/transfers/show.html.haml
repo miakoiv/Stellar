@@ -27,4 +27,15 @@
       = render partial: 'form', locals: {locked: true}
 
   .col-md-7
-    = render partial: 'admin/transfer_items/table', object: @transfer, as: :transfer
+    = tab_set 'transfer-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'items', col(Transfer, :transfer_items), default: true
+      = nav_tab 'history', t('admin.activities.title')
+
+    .tab-content
+      = tab_pane 'items', default: true do
+        = render partial: 'admin/transfer_items/table', object: @transfer, as: :transfer
+      = tab_pane 'history' do
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @transfer.to_global_id}}
+
+:coffee
+  $('#context-activities').fetch_context()
