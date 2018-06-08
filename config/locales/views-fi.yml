@@ -460,3 +460,11 @@ fi:
   branding:
     heading: Stellar Storefront
     body_html: <p>Tuottanut LeasIT Oy</p><p><i class="fa fa-copyright"></i> 2015–2018</p>
+  tips:
+    order:
+      concluded: <i class="fa fa-info-circle"></i> <b>Tämä tilaus on loppuun käsitelty ja arkistoitu.</b> Siihen ei voi enää tehdä muutoksia.
+      incomplete: <i class="fa fa-info-circle"></i> <b>Tämä on keskeneräinen tilaus.</b> Täytä tarvittavat tilaustiedot ja lisää tilausrivit, ennen kuin merkitset tilauksen valmiiksi. Valmiin tilauksen sisältöä ei voi enää muuttaa. Jos keskeneräistä tilausta ei halutakaan tehdä, sen voi poistaa.
+      current: <i class="fa fa-warning"></i> <b>Tämä tilaus on saapunut, mutta sitä ei ole hyväksytty.</b> Kun olet tarkistanut tilauksen tiedot ja tilausrivit, sekä varmistanut, että se voidaan toimittaa, hyväksy tilaus täyttämällä allaoleva <b>Hyväksytty</b>-päiväys. Hyväksynnästä lähetetään asiakkaalle viesti.
+      shipped: <i class="fa fa-warning"></i> <b>Tämä tilaus on kokonaan toimitettu</b> ja sen voi päättää. Täytä allaoleva <b>Päätetty</b>-päiväys. Päättämisestä lähetetään asiakkaalle viesti.
+      pending: <i class="fa fa-exclamation-circle"></i> <b>Tilausta ei ole kokonaan toimitettu.</b> Varastosta löytyneet tuotteet on valmiiksi keräilty ensimmäiseen toimitukseen, joka on valmis lähetettäväksi. Toimitusta odottaville tuotteille pitää tehdä uusia toimituksia varastotilanteen salliessa.
+      cancelled: <i class="fa fa-exclamation-circle"></i> <b>Tämä tilaus on peruttu.</b>

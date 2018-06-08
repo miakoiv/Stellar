@@ -88,6 +88,16 @@ module ApplicationHelper
     end
   end
 
+  def life_pro_tip(object)
+    appearance, message = object.life_pro_tip
+    return nil if message.nil?
+    content_tag :div, id: 'life-pro-tip', class: 'hidden-print' do
+      content_tag :div, class: "alert alert-#{appearance}", role: 'alert' do
+        t("tips.#{object.model_name.i18n_key}#{message}").html_safe
+      end
+    end
+  end
+
   def drag_handle
     content_tag(:span, class: 'handle', style: 'opacity: 0.5') do
       icon('ellipsis-v', class: 'fa-lg fa-fw')

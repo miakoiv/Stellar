@@ -13,6 +13,14 @@ class Order < ActiveRecord::Base
     (!track_shipments? || fully_shipped?) ? 'text-warning' : 'warning text-warning'
   end
 
+  def life_pro_tip
+    return [:info, '.concluded'] if concluded?
+    return [:info, '.incomplete'] if incomplete?
+    return [:danger, '.current'] if current?
+    return [:warning, '.shipped'] if concludable?
+    [:warning, '.pending']
+  end
+
   def summary
     [company_name, contact_person, shipping_city].compact.reject(&:empty?).join(', ')
   end

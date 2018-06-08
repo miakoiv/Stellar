@@ -9,6 +9,8 @@
       = @order.to_s
       = surround('[', ']') { @order.inventory.to_s }
 
+= render partial: 'life_pro_tip', object: @order, as: :order
+
 .row
   .col-lg-4
     = render partial: 'form', locals: {locked: false}
