@@ -53,6 +53,9 @@
 //= require smooth-scroll.min
 //= require summernote.min
 //= require summernote/locales
+//= require summernote/summernote-add-text-tags
+//= require summernote/summernote-table-headers
+//= require summernote/summernote-table-styles
 //= require swiper.min
 //= require tabular.min
 
