@@ -13,8 +13,6 @@
         %th.col-xs-1.text-right= col(InventoryItem, :on_hand)
         %th.col-xs-1.text-right= col(InventoryItem, :reserved)
         %th.col-xs-1.text-right= col(InventoryItem, :pending)
-        %th.col-xs-1.text-right.currency à
-        %th.col-xs-1.text-right= col(InventoryItem, :value)
         %th.actions
 
     %tbody
@@ -25,8 +23,6 @@
         %td.text-right= inventory_item.on_hand
         %td.text-right= inventory_item.reserved
         %td.text-right= inventory_item.pending
-        %td.text-right.currency= money inventory_item.value
-        %td.text-right.currency= money inventory_item.total_value
         %td.actions
           = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item), class: 'btn btn-primary btn-sm'
 
