@@ -1,4 +1,2 @@
 $('.transfer-items-table').replaceWith("#{j render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer}");
 $('#admin-transfer-item-form').replaceWith("#{j render partial: 'admin/transfer_items/new', object: @transfer, as: :transfer}");
-var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
-scroll.animateScroll($('.quick-edit-panel')[0], null, {speed: 300});
