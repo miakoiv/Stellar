@@ -114,8 +114,8 @@
     break-before: always;
   }
 
-  .btn {
-    display: none;
+  .btn, .alert {
+    display: none !important;
   }
 
   .label, .badge {
