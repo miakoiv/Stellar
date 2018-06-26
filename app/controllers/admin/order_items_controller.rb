@@ -17,7 +17,7 @@ class Admin::OrderItemsController < ApplicationController
     end
     amount = order_item_params[:amount].to_i
     options = {
-      lot_code: order_item_params[:serial] || order_item_params[:lot_code]
+      lot_code: order_item_params[:lot_code].presence || order_item_params[:serial]
     }
     respond_to do |format|
       if order_item = @order.insert(@product, amount, @order.source, options)

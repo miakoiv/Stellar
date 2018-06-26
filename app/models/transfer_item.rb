@@ -27,7 +27,7 @@ class TransferItem < ActiveRecord::Base
   }
 
   attr_accessor :serial
-  before_validation :override_lot_code_with_serial
+  before_validation :use_serial_as_lot_code
 
   #---
   # The source inventory item associated with this tranfer item
@@ -56,7 +56,7 @@ class TransferItem < ActiveRecord::Base
   end
 
   private
-    def override_lot_code_with_serial
-      self[:lot_code] = serial if serial.present?
+    def use_serial_as_lot_code
+      self[:lot_code] = serial if !lot_code.present? && serial.present?
     end
 end
