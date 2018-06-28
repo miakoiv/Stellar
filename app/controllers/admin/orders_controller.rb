@@ -26,11 +26,8 @@ class Admin::OrdersController < ApplicationController
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
 
-    @customers = UserSearch.new(
-      store: current_store,
-      group: @order_types.map(&:source),
-      except_group: current_store.default_group
-    ).results
+    @users = current_store.users.with_role(:order_manage, current_store)
+    @customers = user_search(@order_types.map(&:source))
     @query = saved_search_query('order', 'incoming_admin_order_search')
     @query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(search_params)
@@ -45,11 +42,8 @@ class Admin::OrdersController < ApplicationController
     @order_types = current_group.outgoing_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
 
-    @customers = UserSearch.new(
-      store: current_store,
-      group: @order_types.map(&:destination),
-      except_group: current_store.default_group
-    ).results
+    @users = current_store.users.with_role(:order_manage, current_store)
+    @customers = user_search(@order_types.map(&:destination))
     @query = saved_search_query('order', 'outgoing_admin_order_search')
     @query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(search_params)
@@ -192,6 +186,12 @@ class Admin::OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = current_store.orders.find(params[:id])
+    end
+
+    def user_search(groups = nil)
+      options = {store: current_store, except_group: current_store.default_group}
+      options.merge(group: groups) if groups.present?
+      UserSearch.new(options).results
     end
 
     # All groups except the default are available for selection.

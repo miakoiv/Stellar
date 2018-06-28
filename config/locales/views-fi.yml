@@ -157,7 +157,8 @@ fi:
         order_type: Valitse tilauslaji
         status: "[Kaikki vaiheet]"
         summary: Etsi hakusanalla
-        customer: Tilaava asiakas
+        customer: Valitse asiakas
+        user: Valitse tilauksen laatija
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle
         barcode: Skannaa viivakoodi tähän

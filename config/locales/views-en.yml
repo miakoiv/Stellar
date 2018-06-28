@@ -177,7 +177,8 @@ en:
         order_type: Select order type
         status: "[All statuses]"
         summary: Keyword search
-        customer: Ordering customer
+        customer: Select customer
+        user: Select order author
       edit:
         add_order_items: Add items to this order
         barcode: Scan a barcode here
