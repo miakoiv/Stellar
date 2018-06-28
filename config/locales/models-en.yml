@@ -577,6 +577,7 @@ en:
         groups: Groups
         keyword: Name or email
         roles: Roles
+        orders: Orders
         locale: Language
         approved: Active
         phone: Phone number

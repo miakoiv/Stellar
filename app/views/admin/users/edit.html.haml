@@ -17,6 +17,7 @@
     = tab_set 'user-side', class: 'nav-justified nav-sm' do
       = nav_tab 'group', col(User, :group), default: true
       = nav_tab 'roles', col(User, :roles)
+      = nav_tab 'orders', col(User, :orders)
       = nav_tab 'history', t('admin.activities.title')
 
     .tab-content
@@ -24,6 +25,8 @@
         = render partial: 'group', object: @user, as: :user, locals: {locked: false}
       = tab_pane 'roles' do
         = render partial: 'admin/roles/edit_list', object: @user, as: :user
+      = tab_pane 'orders' do
+        = render partial: 'admin/orders/list', object: @user.orders, as: :orders
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @user.to_global_id}}
 

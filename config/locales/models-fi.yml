@@ -577,6 +577,7 @@ fi:
         groups: Ryhmät
         keyword: Nimi tai sähköpostiosoite
         roles: Roolit
+        orders: Tilaukset
         locale: Kieli
         approved: Aktiivinen
         phone: Puhelinnumero
