@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   end
 
   def summary
-    [company_name, contact_person, shipping_city].compact.reject(&:empty?).join(', ')
+    [contact_person, shipping_city].compact.reject(&:empty?).join(', ')
   end
 
   # Icon name based on order status.

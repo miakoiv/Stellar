@@ -8,9 +8,11 @@
       = order.shipping_at.present? ? l(order.shipping_at) : nil
       \/
       = order.installation_at.present? ? l(order.installation_at) : nil
+  %td.no-wrap
+    %strong= order.customer_name
+  - if current_store.b2b_sales?
     %td
-      %strong.small= order.summary
-  %td.no-wrap= order.customer_name
+      .small= order.summary
   %td.text-right= order.order_items_count
   %td.text-right.currency
     = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax

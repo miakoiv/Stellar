@@ -284,7 +284,7 @@ fi:
         total_sans_tax: Veroton
         tax_total: Vero
         total_with_tax: Verollinen
-        summary: Yhteenveto
+        summary: Info
         product_ids_string: Lisättävät tuotteet
       order_item:
         order_id: Tilaus
