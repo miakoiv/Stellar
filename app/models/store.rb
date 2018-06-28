@@ -98,6 +98,10 @@ class Store < ActiveRecord::Base
   # Assigned groups determine which users belong to a store.
   has_many :users, through: :groups
 
+  # Customers who have completed orders at this store.
+  has_many :customer_orders, -> { merge(Order.complete) }, through: :users
+  has_many :customers, through: :customer_orders
+
   accepts_nested_attributes_for :tax_categories, limit: 1
 
   scope :portal, -> { where(portal: true) }
