@@ -153,6 +153,11 @@ fi:
       show:
         forward: Välitä ostoskoriin
         print_delivery_note: Tulosta lähete
+      search:
+        order_type: Valitse tilauslaji
+        status: "[Kaikki vaiheet]"
+        summary: Etsi hakusanalla
+        customer: Tilaava asiakas
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle
         barcode: Skannaa viivakoodi tähän

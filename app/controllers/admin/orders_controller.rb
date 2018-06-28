@@ -26,6 +26,11 @@ class Admin::OrdersController < ApplicationController
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
 
+    @customers = UserSearch.new(
+      store: current_store,
+      group: @order_types.map(&:source),
+      except_group: current_store.default_group
+    ).results
     @query = saved_search_query('order', 'incoming_admin_order_search')
     @query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(search_params)
@@ -40,6 +45,11 @@ class Admin::OrdersController < ApplicationController
     @order_types = current_group.outgoing_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
 
+    @customers = UserSearch.new(
+      store: current_store,
+      group: @order_types.map(&:destination),
+      except_group: current_store.default_group
+    ).results
     @query = saved_search_query('order', 'outgoing_admin_order_search')
     @query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(search_params)

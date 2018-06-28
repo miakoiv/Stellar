@@ -173,6 +173,11 @@ en:
       show:
         forward: Forward to cart
         print_delivery_note: Print delivery note
+      search:
+        order_type: Select order type
+        status: "[All statuses]"
+        summary: Keyword search
+        customer: Ordering customer
       edit:
         add_order_items: Add items to this order
         barcode: Scan a barcode here

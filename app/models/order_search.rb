@@ -18,6 +18,10 @@ class OrderSearch < Searchlight::Search
     query.where(user_id: user_id)
   end
 
+  def search_customer_id
+    query.where(customer_id: customer_id)
+  end
+
   def search_order_type
     query.where(order_type: order_type)
   end
