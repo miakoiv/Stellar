@@ -472,6 +472,7 @@ en:
         facebook_page: Facebook page name
         url: Content URL
         thumbnail_size: Slide size
+        thumbnails: Use thumbnail links
         animation: Animated entry
         velocity: Animation speed
       shipment:

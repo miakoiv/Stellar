@@ -472,6 +472,7 @@ fi:
         facebook_page: Facebook-sivun nimi
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
+        thumbnails: Käytä diakuvalinkkejä
         animation: Animoitu esittely
         velocity: Animaation nopeus
       shipment:

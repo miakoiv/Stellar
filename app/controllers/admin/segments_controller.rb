@@ -108,7 +108,7 @@ class Admin::SegmentsController < ApplicationController
         :resource_id, :resource_type,
         :template, :alignment, :shape, :inset, :background_color,
         :body, :header, :subhead, :url,
-        :min_height, :grid_columns, :grid_disable_xs, :masonry, :image_sizing,
+        :min_height, :grid_columns, :grid_disable_xs, :masonry, :image_sizing, :thumbnails,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
         :facebook_page,
