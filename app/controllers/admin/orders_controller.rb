@@ -194,13 +194,6 @@ class Admin::OrdersController < ApplicationController
       @order = current_store.orders.find(params[:id])
     end
 
-    def set_customers
-      @customers = UserSearch.new(
-        store: current_store,
-        except_group: current_store.default_group
-      ).results
-    end
-
     # All groups except the default are available for selection.
     def all_groups
       current_store.groups.not_including(current_store.default_group)
