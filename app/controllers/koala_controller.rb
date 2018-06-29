@@ -10,7 +10,7 @@ class KoalaController < ApplicationController
     items = params[:items]
     graph = Koala::Facebook::API.new(current_store.facebook_access_token)
     feed = graph.get_connection(page, 'posts', {
-      api_version: '3.0',
+      api_version: 'v3.0',
       limit: items,
       fields: %w{message full_picture link type created_time}
     })
