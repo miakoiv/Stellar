@@ -77,6 +77,9 @@ class Order < ActiveRecord::Base
   # Conclude the order when concluded_at first gets a value.
   after_save :conclude!, if: -> (order) { order.concluded_at_changed?(from: nil) }
 
+  # Cancel the order when cancelled_at first gets a value.
+  after_save :cancel!, if: -> (order) { order.cancelled_at_changed?(from: nil) }
+
   #---
   # Statuses that can be queried against.
   def self.statuses
