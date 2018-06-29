@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class Price - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Object
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Comparable</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-zero">::zero</a>
+    
+    <li ><a href="#method-i-2A">#*</a>
+    
+    <li ><a href="#method-i-2B">#+</a>
+    
+    <li ><a href="#method-i-2F">#/</a>
+    
+    <li ><a href="#method-i-3C-3D-3E">#&lt;=&gt;</a>
+    
+    <li ><a href="#method-i-modify-21">#modify!</a>
+    
+    <li ><a href="#method-i-nil-3F">#nil?</a>
+    
+    <li ><a href="#method-i-sans_tax">#sans_tax</a>
+    
+    <li ><a href="#method-i-tax">#tax</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-with_tax">#with_tax</a>
+    
+    <li ><a href="#method-i-zero-3F">#zero?</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Price">
+  <h1 id="class-Price" class="class">
+    class Price
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Price.html">Price</a> is a wrapper around Money with taxation
+metadata and methods for the amount with or without tax, and the tax
+itself.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DEFAULT_TAX_RATE">DEFAULT_TAX_RATE
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-amount" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">amount</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tax_included" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tax_included</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-tax_rate" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">tax_rate</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(amount, tax_included = true, tax_rate = DEFAULT_TAX_RATE)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">tax_included</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">tax_rate</span> = <span class="ruby-constant">DEFAULT_TAX_RATE</span>)
+  <span class="ruby-ivar">@amount</span>       = <span class="ruby-identifier">amount</span>
+  <span class="ruby-ivar">@tax_included</span> = <span class="ruby-identifier">tax_included</span>
+  <span class="ruby-ivar">@tax_rate</span>     = <span class="ruby-identifier">tax_rate</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-zero" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">zero</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>All-purpose zero, compatible with any taxation.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="zero-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">zero</span>
+  <span class="ruby-identifier">new</span>(<span class="ruby-constant">Money</span>.<span class="ruby-identifier">zero</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-2A" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">*</span><span
+            class="method-args">(x)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="2A-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">*</span>(<span class="ruby-identifier">x</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Price</span>.<span class="ruby-identifier">zero</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">tax_included</span>, <span class="ruby-identifier">tax_rate</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-2B" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">+</span><span
+            class="method-args">(other)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>NOTE: Arithmetic operations are only meaningful between prices with the
+exact same taxation.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="2B-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">+</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Price</span>.<span class="ruby-identifier">zero</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">amount</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">tax_included</span>, <span class="ruby-identifier">tax_rate</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-2F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">/</span><span
+            class="method-args">(x)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="2F-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">/</span>(<span class="ruby-identifier">x</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ZeroDivisionError</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">zero?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Price</span>.<span class="ruby-identifier">zero</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">amount</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">x</span>, <span class="ruby-identifier">tax_included</span>, <span class="ruby-identifier">tax_rate</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-3C-3D-3E" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">&lt;=&gt;</span><span
+            class="method-args">(other)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="3C-3D-3E-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">sans_tax</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">sans_tax</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-modify-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">modify!</span><span
+            class="method-args">(percent)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="modify-21-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">modify!</span>(<span class="ruby-identifier">percent</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">amount</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">percent</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">zero?</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-nil-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nil?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="nil-3F-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sans_tax" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sans_tax</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sans_tax-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sans_tax</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">tax_included</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tax</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">amount</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-tax" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tax</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="tax-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">tax</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tax_included</span>
+    <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">+</span> <span class="ruby-value">100</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">amount</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">tax_rate</span> <span class="ruby-operator">/</span> <span class="ruby-value">100</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-with_tax" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">with_tax</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="with_tax-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">with_tax</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">tax_included</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">amount</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tax</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-zero-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">zero?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="zero-3F-source">
+            <pre><span class="ruby-comment"># File app/models/price.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">zero?</span>
+  <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">zero?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

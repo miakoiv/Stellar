@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class Admin::OrdersController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-approve">#approve</a>
+    
+    <li ><a href="#method-i-conclude">#conclude</a>
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
+    <li ><a href="#method-i-edit">#edit</a>
+    
+    <li ><a href="#method-i-forward">#forward</a>
+    
+    <li ><a href="#method-i-incoming">#incoming</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-outgoing">#outgoing</a>
+    
+    <li ><a href="#method-i-review">#review</a>
+    
+    <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Admin::OrdersController">
+  <h1 id="class-Admin::OrdersController" class="class">
+    class Admin::OrdersController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-approve" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">approve</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/orders/1/approve</p>
+          
+          
+
+          
+          <div class="method-source-code" id="approve-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">approve</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">approved_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>)
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-conclude" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">conclude</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/orders/1/conclude</p>
+          
+          
+
+          
+          <div class="method-source-code" id="conclude-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">conclude</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">concluded_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>)
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /admin/orders POST /admin/orders.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-ivar">@groups</span> = <span class="ruby-identifier">all_groups</span>
+  <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">find_selected_group</span>
+  <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">customer_selection</span>
+  <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">order_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">user</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>))
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">address_to_customer</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">includes_tax</span> = <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">price_tax_included?</span>
+  <span class="ruby-identifier">new_customer</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">new_record?</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+      <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">customer</span>.<span class="ruby-identifier">groups</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@group</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_customer</span>
+
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_order_path</span>(<span class="ruby-ivar">@order</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_order_path</span>(<span class="ruby-ivar">@order</span>) }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DELETE /admin/orders/1</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_orders_path</span>,
+      <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>) }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-edit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">edit</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1/edit</p>
+          
+          
+
+          
+          <div class="method-source-code" id="edit-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-forward" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">forward</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1/forward</p>
+          
+          
+
+          
+          <div class="method-source-code" id="forward-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">forward</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">forward_to</span>(<span class="ruby-identifier">shopping_cart</span>)
+  <span class="ruby-identifier">shopping_cart</span>.<span class="ruby-identifier">recalculate!</span>
+
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">cart_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-incoming" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incoming</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/incoming</p>
+          
+          
+
+          
+          <div class="method-source-code" id="incoming-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">incoming</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-ivar">@users</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">current_store</span>)
+  <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">user_search</span>(<span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:source</span>))
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;incoming_admin_order_search&#39;</span>)
+  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+  <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders GET /admin/orders.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;admin_order_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+  <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/new</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-ivar">@groups</span> = <span class="ruby-identifier">all_groups</span>
+  <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">find_selected_group</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@groups</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">customer_selection</span>
+  <span class="ruby-ivar">@customer</span> = <span class="ruby-identifier">find_selected_customer</span> <span class="ruby-operator">||</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">shipping_country</span><span class="ruby-operator">:</span> <span class="ruby-constant">Country</span>.<span class="ruby-identifier">default</span>,
+    <span class="ruby-identifier">billing_country</span><span class="ruby-operator">:</span> <span class="ruby-constant">Country</span>.<span class="ruby-identifier">default</span>
+  )
+  <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">build</span>(
+    <span class="ruby-identifier">group_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">id</span>,
+    <span class="ruby-identifier">customer</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@customer</span>,
+    <span class="ruby-identifier">order_type</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">outgoing_order_types</span>.<span class="ruby-identifier">first</span>
+  )
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">customer</span> = <span class="ruby-ivar">@customer</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:html</span>, <span class="ruby-value">:js</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-outgoing" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">outgoing</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/outgoing</p>
+          
+          
+
+          
+          <div class="method-source-code" id="outgoing-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">outgoing</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">outgoing_order_types</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-ivar">@users</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">current_store</span>)
+  <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">user_search</span>(<span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:destination</span>))
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;outgoing_admin_order_search&#39;</span>)
+  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+  <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-review" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">review</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1/review</p>
+          
+          
+
+          
+          <div class="method-source-code" id="review-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">review</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/orders/1 PATCH/PUT /admin/orders/1.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_params</span>)
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">should_finalize?</span>
+        <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">complete!</span>(<span class="ruby-keyword">false</span>)
+        <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">approved_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_order_path</span>(<span class="ruby-ivar">@order</span>),
+        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_order_path</span>(<span class="ruby-ivar">@order</span>) }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.3.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
