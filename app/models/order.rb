@@ -123,7 +123,7 @@ class Order < ActiveRecord::Base
   def available_order_types
     shipping_requirement = requires_shipping?
     return source.outgoing_order_types if shipping_requirement.nil?
-    source.outgoing_order_types.where(has_shipping: requires_shipping?)
+    source.outgoing_order_types.where(has_shipping: shipping_requirement)
   end
 
   def editable_items?
