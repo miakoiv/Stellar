@@ -70,7 +70,7 @@ class Order < ActiveRecord::Base
 
   # An order is empty when it's empty of real products.
   def empty?
-    products.real.empty?
+    order_items.real.empty?
   end
 
   def size
