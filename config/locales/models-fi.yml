@@ -254,6 +254,7 @@ fi:
         shipping_installation_at: Toimitus/asennus
         approved_at: Hyväksytty
         concluded_at: Päätetty
+        cancelled_at: Peruttu
         status: Tila
         not_approved: Ei vielä käsitelty
         items: Tuotteita

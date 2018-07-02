@@ -7,13 +7,14 @@ class Order < ActiveRecord::Base
 
   # CSS class based on order status.
   def appearance
+    return 'text-muted' if incomplete? || cancelled?
     return nil if concluded?
-    return 'text-muted' if incomplete?
     return 'text-danger' if current?
     (!track_shipments? || fully_shipped?) ? 'text-warning' : 'warning text-warning'
   end
 
   def life_pro_tip
+    return [:info, '.cancelled'] if cancelled?
     return [:info, '.concluded'] if concluded?
     return [:info, '.incomplete'] if incomplete?
     return [:danger, '.current'] if current?
@@ -27,8 +28,9 @@ class Order < ActiveRecord::Base
 
   # Icon name based on order status.
   def icon
-    return nil if concluded?
+    return 'ban' if cancelled?
     return 'pencil' if incomplete?
+    return nil if concluded?
     return 'check' if current?
     (!track_shipments? || fully_shipped?) && 'search' || 'truck'
   end

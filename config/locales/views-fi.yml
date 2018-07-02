@@ -165,6 +165,8 @@ fi:
       form:
         approved_at_help: Tilaajan tiedot ovat oikein ja tilauksen sisältö on lopullinen.
         concluded_at_help: Tilaus on kokonaan toimitettu ja voidaan arkistoida.
+        cancelled_at_help: Tilauksen perumiseksi täytä tämä aikaleima. Tehdyt toimitukset palautetaan varastoon, ja maksut palautetaan muuten kuin toimituskulujen osalta.
+        cancel_now: Peru nyt
       headers:
         delivery_note: Lähete
       review_modal:

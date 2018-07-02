@@ -185,6 +185,8 @@ en:
       form:
         approved_at_help: Customer information is correct and the order contents are final.
         concluded_at_help: Order has been shipped in full and is ready for archival.
+        cancelled_at_help: To cancel the order, fill in this timestamp. Any completed shipments are returned to inventory, and payments reimbursed except for shipping and handling costs.
+        cancel_now: Cancel now
       headers:
         delivery_note: Delivery note
       review_modal:

@@ -254,6 +254,7 @@ en:
         shipping_installation_at: Shipping/installation
         approved_at: Approved
         concluded_at: Concluded
+        cancelled_at: Cancelled
         status: Status
         not_approved: Not processed yet
         items: Items

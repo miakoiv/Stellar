@@ -1,7 +1,7 @@
 = bootstrap_form_for [:admin, @order] do |f|
   .panel.panel-default
     .panel-body
-      - if @order.complete? && @order.destination == current_group
+      - if @order.complete? && !@order.cancelled? && @order.destination == current_group
         %fieldset.warning{disabled: locked}
           .row
             .col-md-6
@@ -9,6 +9,9 @@
             .col-md-6
               .conclusion.collapse{class: @order.approved? && 'in'}
                 = f.text_field :concluded_at, disabled: !@order.concludable?, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}, help: t('.concluded_at_help')
+      - if @order.cancelled?
+        %fieldset.danger{disabled: true}
+          = f.text_field :cancelled_at, value: l(@order.cancelled_at, format: :iso)
       - if @order.complete?
         %fieldset{disabled: true}
           = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
@@ -60,6 +63,16 @@
             = f.select :billing_country_code, Store.country_options, {}, required: @order.billing_address_required?, class: 'selectize'
         %hr
         ~ f.text_area :notes, rows: 7
+      - unless locked || @order.cancelled?
+        %fieldset.danger
+          .form-group
+            %label.control-label= col(Order, :cancelled_at)
+            .input-group
+              = f.text_field_without_bootstrap :cancelled_at, class: 'form-control'
+              %span.input-group-btn
+                %button#cancel-now.btn.btn-danger{type: 'button'}
+                  = t('.cancel_now')
+            .help-block= t('.cancelled_at_help')
       - unless locked
         %fieldset.actions.fixed
           .container
@@ -78,3 +91,6 @@
     else
       $('.conclusion').collapse 'hide'
       $('#order_concluded_at').attr 'disabled', true
+
+  $('#cancel-now').on 'click', (e) ->
+    $('#order_cancelled_at').val moment().format('YYYY-MM-DD HH:MM:ss')
