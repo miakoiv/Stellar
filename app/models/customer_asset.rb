@@ -47,6 +47,11 @@ class CustomerAsset < ActiveRecord::Base
     end
   end
 
+  # Cancelling is a no-op since customer assets are being deprecated.
+  def self.cancel_entries_from(order)
+    true
+  end
+
   #---
   def to_s
     "#{product} – #{user}"

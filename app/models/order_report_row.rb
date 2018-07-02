@@ -22,7 +22,7 @@ class OrderReportRow < ActiveRecord::Base
   # Rows are aggregated by order type, shipping country, and product
   # to collect as many order items to a single slot as possible.
   # Orders made by non-guest users are further distinguished by user.
-  def self.create_from_order_and_item(order, order_item)
+  def self.create_from_order_and_item(order, order_item, factor = 1)
     product = order_item.product
     return false unless product.present?
     row = where(
@@ -34,10 +34,10 @@ class OrderReportRow < ActiveRecord::Base
       ordered_at: order.completed_at.to_date,
       tax_rate: order_item.tax_rate
     ).first_or_initialize
-    row.amount += order_item.amount
-    row.total_sans_tax_cents += order_item.grand_total_sans_tax.cents
-    row.total_with_tax_cents += order_item.grand_total_with_tax.cents
-    row.total_tax_cents += order_item.tax_total.cents
+    row.amount += factor * order_item.amount
+    row.total_sans_tax_cents += factor * order_item.grand_total_sans_tax.cents
+    row.total_with_tax_cents += factor * order_item.grand_total_with_tax.cents
+    row.total_tax_cents += factor * order_item.tax_total.cents
     row.save
   end
 
@@ -45,6 +45,16 @@ class OrderReportRow < ActiveRecord::Base
     transaction do
       order.order_items.each do |item|
         create_from_order_and_item(order, item)
+      end
+    end
+  end
+
+  # Reporting a cancelled order is done by creating report rows
+  # with a factor of minus one to cancel the earlier entries.
+  def self.cancel_entries_from(order)
+    transaction do
+      order.order_items.each do |item|
+        create_from_order_and_item(order, item, -1)
       end
     end
   end

@@ -311,6 +311,25 @@ class Order < ActiveRecord::Base
       true
     end
 
+    # Cancelling an order rolls back any changes made earlier by
+    # backtracking its life cycle from conclusion to creation.
+    def cancel!
+      reload # to clear changes and prevent a callback loop
+      if concluded?
+        CustomerAsset.cancel_entries_from(self)
+        OrderReportRow.cancel_entries_from(self)
+      end
+      payments.each do |payment|
+        payments.create(amount: -payment.amount)
+      end
+      if track_shipments?
+        shipments.each do |shipment|
+          shipment.cancel!
+        end
+      end
+      true
+    end
+
     # Perform XML export if specified by order type, and
     # store settings have a path defined.
     def export_xml

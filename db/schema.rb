@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180525125351) do
+ActiveRecord::Schema.define(version: 20180702065836) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -798,14 +798,15 @@ ActiveRecord::Schema.define(version: 20180525125351) do
   add_index "transfer_items", ["transfer_id"], name: "index_transfer_items_on_transfer_id", using: :btree
 
   create_table "transfers", force: :cascade do |t|
-    t.integer  "store_id",       limit: 4,   null: false
+    t.integer  "store_id",       limit: 4,                   null: false
     t.integer  "shipment_id",    limit: 4
     t.integer  "source_id",      limit: 4
     t.integer  "destination_id", limit: 4
+    t.boolean  "return",                     default: false, null: false
     t.string   "note",           limit: 255
     t.datetime "completed_at"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "transfers", ["destination_id"], name: "index_transfers_on_destination_id", using: :btree

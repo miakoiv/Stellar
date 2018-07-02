@@ -89,6 +89,16 @@ class Transfer < ActiveRecord::Base
     )
   end
 
+  # Duplicates given existing transfer items into this transfer,
+  # useful for creating return transfers.
+  def duplicate_items_from(items)
+    transaction do
+      items.each do |item|
+        transfer_items << item.dup
+      end
+    end
+  end
+
   def appearance
     if incomplete?
       return 'danger text-danger' unless feasible?

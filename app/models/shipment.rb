@@ -10,7 +10,10 @@ class Shipment < ActiveRecord::Base
   delegate :shipping_cost_product, :free_shipping_from, to: :shipping_method
 
   # Shipments refer to a transfer to handle the stock changes.
-  has_one :transfer
+  has_one :transfer, -> { where(return: false) }
+
+  # If the shipment is returned, another transfer is needed.
+  has_one :return_transfer, -> { where(return: true) }, class_name: 'Transfer'
 
   #---
   PACKAGE_TYPES = %w{PC PU ZPF ZPE ZPT CG ZPX PM TB TC TU LTK KA VA}.freeze
@@ -73,12 +76,38 @@ class Shipment < ActiveRecord::Base
     update shipped_at: Time.current
   end
 
+  # Cancels the shipment and returns it if it was already shipped.
+  def cancel!
+    return! if transfer.present? && transfer.complete?
+    update cancelled_at: Time.current
+  end
+
+  # Returns the shipment by creating and running a return transfer
+  # with the items found in the original transfer, using the original
+  # source as destination.
+  def return!
+    self.return_transfer = create_return_transfer(
+      store: transfer.store,
+      destination: transfer.source
+    )
+    return_transfer.duplicate_items_from(transfer.transfer_items)
+    return_transfer.complete!
+  end
+
   def shipped?
     shipped_at.present?
   end
 
   def pending?
     !shipped?
+  end
+
+  def cancelled?
+    cancelled_at.present?
+  end
+
+  def returned?
+    cancelled? && return_transfer.present?
   end
 
   def requires_dimensions?
