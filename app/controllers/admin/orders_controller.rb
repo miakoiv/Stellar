@@ -185,7 +185,7 @@ class Admin::OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = current_store.orders.find(params[:id])
+      @order = current_store.orders.unscope(where: :cancelled_at).find(params[:id])
     end
 
     def user_search(groups = nil)
