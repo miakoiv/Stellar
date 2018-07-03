@@ -85,6 +85,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-cancel_entries_from">::cancel_entries_from</a>
+    
     <li ><a href="#method-c-create_from">::create_from</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
@@ -126,6 +128,39 @@ created.</p>
        <header>
          <h3>Public Class Methods</h3>
        </header>
+
+    
+      <div id="method-c-cancel_entries_from" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cancel_entries_from</span><span
+            class="method-args">(order)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Cancelling is a no-op since customer assets are being deprecated.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="cancel_entries_from-source">
+            <pre><span class="ruby-comment"># File app/models/customer_asset.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cancel_entries_from</span>(<span class="ruby-identifier">order</span>)
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-c-create_from" class="method-detail ">
@@ -202,7 +237,7 @@ created.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/customer_asset.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/models/customer_asset.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{product} – #{user}&quot;</span>
 <span class="ruby-keyword">end</span></pre>

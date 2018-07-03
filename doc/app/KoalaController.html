@@ -131,6 +131,7 @@
   <span class="ruby-identifier">items</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:items</span>]
   <span class="ruby-identifier">graph</span> = <span class="ruby-constant">Koala</span><span class="ruby-operator">::</span><span class="ruby-constant">Facebook</span><span class="ruby-operator">::</span><span class="ruby-constant">API</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">facebook_access_token</span>)
   <span class="ruby-identifier">feed</span> = <span class="ruby-identifier">graph</span>.<span class="ruby-identifier">get_connection</span>(<span class="ruby-identifier">page</span>, <span class="ruby-string">&#39;posts&#39;</span>, {
+    <span class="ruby-identifier">api_version</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;v3.0&#39;</span>,
     <span class="ruby-identifier">limit</span><span class="ruby-operator">:</span> <span class="ruby-identifier">items</span>,
     <span class="ruby-identifier">fields</span><span class="ruby-operator">:</span> <span class="ruby-node">%w{message full_picture link type created_time}</span>
   })

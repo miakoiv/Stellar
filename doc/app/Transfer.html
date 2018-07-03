@@ -93,6 +93,8 @@
     
     <li ><a href="#method-i-create_item_from">#create_item_from</a>
     
+    <li ><a href="#method-i-duplicate_items_from">#duplicate_items_from</a>
+    
     <li ><a href="#method-i-feasible-3F">#feasible?</a>
     
     <li ><a href="#method-i-icon">#icon</a>
@@ -156,7 +158,7 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">incomplete?</span>
     <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;danger text-danger&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">feasible?</span>
@@ -288,6 +290,44 @@ product, lot code, and amount, if not overridden by arguments.</p>
       </div>
 
     
+      <div id="method-i-duplicate_items_from" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duplicate_items_from</span><span
+            class="method-args">(items)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Duplicates given existing transfer items into this transfer, useful for
+creating return transfers.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="duplicate_items_from-source">
+            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate_items_from</span>(<span class="ruby-identifier">items</span>)
+  <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">transfer_items</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-feasible-3F" class="method-detail ">
         
         <div class="method-heading">
@@ -346,7 +386,7 @@ true if the source is nil, denoting an external source.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 98</span>
+            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">incomplete?</span>
     <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;warning&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">feasible?</span>
@@ -456,7 +496,7 @@ load_item! call.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 105</span>
+            <pre><span class="ruby-comment"># File app/models/transfer.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-string">&quot;%s %s ➡ %s&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">note</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">destination</span>]
 <span class="ruby-keyword">end</span></pre>
