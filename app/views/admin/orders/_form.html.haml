@@ -19,9 +19,9 @@
         - if @order.store.b2b_sales? && @order.has_shipping?
           .row
             .col-md-6
-              = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
             .col-md-6
-              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         .row
           .col-md-6
             = f.text_field :vat_number
