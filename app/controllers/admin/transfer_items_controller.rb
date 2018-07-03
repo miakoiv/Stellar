@@ -36,7 +36,7 @@ class Admin::TransferItemsController < ApplicationController
     end
   end
 
-  # DELETE /admin/transfers/1
+  # DELETE /admin/transfer_items/1
   def destroy
     @transfer_item = TransferItem.find(params[:id])
     @transfer = @transfer_item.transfer
