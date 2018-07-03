@@ -21,6 +21,8 @@ class Shipment < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
   scope :shipped, -> { where.not(shipped_at: nil) }
   scope :pending, -> { where(shipped_at: nil) }
+  scope :cancelled, -> { where.not(cancelled_at: nil) }
+  scope :active, -> { where(cancelled_at: nil) }
 
   #---
   with_options on: :update, if: :requires_dimensions?,

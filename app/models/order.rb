@@ -324,7 +324,7 @@ class Order < ActiveRecord::Base
         payments.create(amount: -total_for_real_items)
       end
       if track_shipments?
-        shipments.each do |shipment|
+        shipments.active.each do |shipment|
           shipment.cancel!
         end
       end
