@@ -320,7 +320,9 @@ class Order < ActiveRecord::Base
         OrderReportRow.cancel_entries_from(self)
       end
       total_for_real_items = grand_total_with_tax(order_items.real)
-      payments.create(amount: -total_for_real_items)
+      if has_payment? && paid?
+        payments.create(amount: -total_for_real_items)
+      end
       if track_shipments?
         shipments.each do |shipment|
           shipment.cancel!
