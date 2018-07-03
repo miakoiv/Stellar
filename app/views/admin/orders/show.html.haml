@@ -41,7 +41,8 @@
 
       = tab_pane 'shipments', default: true do
         %h2.visible-print-block= title(Shipment, count: 2)
-        = render partial: 'admin/order_items/pending', object: @order, as: :order
+        - if !@order.cancelled?
+          = render partial: 'admin/order_items/pending', object: @order, as: :order
         = render partial: 'admin/shipments/item', collection: @order.shipments, as: :shipment, locals: {locked: true}
 
       = tab_pane 'payments', class: 'hidden-print' do

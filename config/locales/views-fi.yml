@@ -265,6 +265,7 @@ fi:
         inventory: varastosta
         refresh: Keräile varastosta
         edit: Lähetyksen tiedot
+        cancelled: Peruttu ja palautettu varastoon
         complete:
           button: Lähetä toimitus
           confirm: "Lähetetäänkö varmasti %{klass} %{name}?"
