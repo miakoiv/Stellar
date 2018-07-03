@@ -47,6 +47,17 @@ class Admin::ShipmentsController < ApplicationController
     end
   end
 
+  # DELETE /admin/shipments/1
+  def destroy
+    authorize_action_for @shipment, at: current_store
+    @order = @shipment.order
+    track @shipment, @order
+    @shipment.transfer.destroy
+    @shipment.destroy
+
+    respond_to :js
+  end
+
   # PATCH/PUT /admin/shipments/1/refresh
   def refresh
     authorize_action_for @shipment, at: current_store

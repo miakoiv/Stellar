@@ -283,9 +283,9 @@ en:
     shipments:
       item:
         inventory: from inventory
+      active:
         refresh: Reload from stock
         edit: Shipment details
-        cancelled: Cancelled and returned to inventory at
         complete:
           button: Send shipment
           confirm: "Are you sure you want to send %{klass} %{name}?"
@@ -294,6 +294,8 @@ en:
         label: Fetch package label
       new:
         new_shipment: New shipment
+      cancelled:
+        message: Cancelled and returned to inventory at
     shipping_methods:
       index:
         new_shipping_method: New shipping method

@@ -20,21 +20,8 @@
 
     .panel-footer
       - if shipment.cancelled?
-        = icon('reply', t('.cancelled'))
-        = l(shipment.cancelled_at, format: :iso)
-      - else
-        - if shipment.shipped?
-          - if shipment.has_label?
-            .pull-right
-              = link_to icon('file-pdf-o', t('.label')), label_admin_shipment_path(shipment, format: :pdf), class: 'btn btn-default btn-sm'
-          = icon('retweet', col(Shipment, :shipped_at))
-          = l(shipment.shipped_at.to_date)
-        - else
-          - if !locked && current_user.can_update?(Shipment, at: current_store)
-            .pull-right
-              = link_to icon('refresh', t('.refresh')), refresh_admin_shipment_path(shipment), remote: true, method: :patch, class: 'btn btn-default btn-sm'
-              - if shipment.requires_dimensions?
-                = link_to icon('gift', t('.edit')), edit_admin_shipment_path(shipment), remote: true, class: 'btn btn-default btn-sm'
-              - if shipment.valid?
-                = link_to icon('cog', t('.complete.button'), class: 'fa-spin'), complete_admin_shipment_path(shipment), remote: true, method: :patch, class: 'btn btn-primary btn-sm', data: {confirm: t('.complete.confirm', klass: Shipment.model_name.human, name: shipment.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('.complete.proceed'), 'confirm-cancel': t('.complete.cancel')}
-          = icon('exclamation-circle', col(Shipment, :pending))
+        = render partial: 'admin/shipments/cancelled', object: shipment, as: :shipment
+      - elsif shipment.shipped?
+        = render partial: 'admin/shipments/shipped', object: shipment, as: :shipment
+      - elsif !locked && current_user.can_update?(Shipment, at: current_store)
+        = render partial: 'admin/shipments/active', object: shipment, as: :shipment
