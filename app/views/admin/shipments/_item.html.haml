@@ -23,5 +23,7 @@
         = render partial: 'admin/shipments/cancelled', object: shipment, as: :shipment
       - elsif shipment.shipped?
         = render partial: 'admin/shipments/shipped', object: shipment, as: :shipment
-      - elsif !locked && current_user.can_update?(Shipment, at: current_store)
-        = render partial: 'admin/shipments/active', object: shipment, as: :shipment
+      - else
+        - if !locked && current_user.can_update?(Shipment, at: current_store)
+          = render partial: 'admin/shipments/active', object: shipment, as: :shipment
+        = icon('exclamation-circle', col(Shipment, :pending))
