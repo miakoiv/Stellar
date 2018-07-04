@@ -9,3 +9,10 @@
       = Transfer.human_attribute_name(:number)
       = @transfer.id
       = surround('(', ')') { l(@transfer.completed_at.to_date, format: :iso) }
+
+.row
+  .col-xs-4
+    %dl
+      - if @transfer.note.present?
+        %dt= col(Transfer, :note)
+        %dd= @transfer.note
