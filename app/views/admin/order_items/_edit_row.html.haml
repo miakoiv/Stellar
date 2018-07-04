@@ -1,3 +1,5 @@
+- locked = !current_user.can_update?(order_item, at: current_store)
+
 %tr[order_item]
   %td.visible-print
     %span.badge= order_item_counter + 1
@@ -10,13 +12,14 @@
   %td
     = form_for [:admin, order_item], remote: true,
         html: {class: 'pull-right immediate'} do |f|
-      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', tabindex: 1, disabled: locked
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
-    = link_to icon('remove'), admin_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+    - unless locked
+      = link_to icon('remove'), admin_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
   = render partial: 'adjustments/row', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

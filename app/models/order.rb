@@ -129,8 +129,10 @@ class Order < ActiveRecord::Base
     source.outgoing_order_types.where(has_shipping: shipping_requirement)
   end
 
+  # Changing the order contents is allowed for incomplete orders,
+  # targeted orders, but they must not be concluded or cancelled.
   def editable_items?
-    incomplete?
+    incomplete? || targeted? && !(concluded? || cancelled?)
   end
 
   def current?
