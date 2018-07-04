@@ -20,7 +20,7 @@ class Shipment < ActiveRecord::Base
 
   default_scope { order(created_at: :desc) }
   scope :shipped, -> { where.not(shipped_at: nil) }
-  scope :pending, -> { where(shipped_at: nil) }
+  scope :pending, -> { where(shipped_at: nil, cancelled_at: nil) }
   scope :cancelled, -> { where.not(cancelled_at: nil) }
   scope :active, -> { where(cancelled_at: nil) }
 
@@ -79,9 +79,15 @@ class Shipment < ActiveRecord::Base
   end
 
   # Cancels the shipment and returns it if it was already shipped.
+  # Pending shipments are destroyed along with their transfer.
   def cancel!
-    return! if transfer.present? && transfer.complete?
-    update cancelled_at: Time.current
+    if transfer.present? && transfer.complete?
+      return!
+      update cancelled_at: Time.current
+    else
+      transfer.destroy! if transfer.present?
+      destroy!
+    end
   end
 
   # Returns the shipment by creating and running a return transfer
@@ -101,11 +107,15 @@ class Shipment < ActiveRecord::Base
   end
 
   def pending?
-    !shipped?
+    !shipped? && !cancelled?
   end
 
   def cancelled?
     cancelled_at.present?
+  end
+
+  def active?
+    !cancelled?
   end
 
   def returned?

@@ -292,6 +292,12 @@ en:
           proceed: Ship
           cancel: Cancel
         label: Fetch package label
+      shipped:
+        cancel:
+          button: Return shipment
+          confirm: "Are you sure you want to return %{klass} %{name}?"
+          proceed: Return
+          cancel: Cancel
       new:
         new_shipment: New shipment
       cancelled:

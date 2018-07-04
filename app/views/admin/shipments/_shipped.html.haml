@@ -1,5 +1,7 @@
-- if shipment.has_label?
-  .pull-right
+.pull-right
+  - if !locked
+    = link_to icon('reply', t('.cancel.button')), admin_shipment_path(shipment), remote: true, method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('.cancel.confirm', klass: Shipment.model_name.human, name: shipment.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('.cancel.proceed'), 'confirm-cancel': t('.cancel.cancel')}
+  - if shipment.has_label?
     = link_to icon('file-pdf-o', t('.label')), label_admin_shipment_path(shipment, format: :pdf), class: 'btn btn-default btn-sm'
 = icon('retweet', col(Shipment, :shipped_at))
 = l(shipment.shipped_at.to_date)

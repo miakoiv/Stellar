@@ -20,10 +20,10 @@
 
     .panel-footer
       - if shipment.cancelled?
-        = render partial: 'admin/shipments/cancelled', object: shipment, as: :shipment
+        = render partial: 'admin/shipments/cancelled', object: shipment, as: :shipment, locals: {locked: locked}
       - elsif shipment.shipped?
-        = render partial: 'admin/shipments/shipped', object: shipment, as: :shipment
+        = render partial: 'admin/shipments/shipped', object: shipment, as: :shipment, locals: {locked: locked}
       - else
         - if !locked && current_user.can_update?(Shipment, at: current_store)
-          = render partial: 'admin/shipments/active', object: shipment, as: :shipment
+          = render partial: 'admin/shipments/active', object: shipment, as: :shipment, locals: {locked: locked}
         = icon('exclamation-circle', col(Shipment, :pending))

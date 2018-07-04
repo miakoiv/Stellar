@@ -1,3 +1,1 @@
-$('##{dom_id(@shipment)}').fadeOut(200, function() { this.remove(); });
-$('#pending-items-table').replaceWith("#{j render partial: 'admin/order_items/pending', object: @shipment.order, as: :order}");
-$('#order-items-table').replaceWith("#{j render partial: 'admin/order_items/table', object: @shipment.order, as: :order}");
+$('form.edit_order').trigger('submit.rails');

@@ -272,6 +272,12 @@ fi:
           proceed: Lähetä
           cancel: Kumoa
         label: Hae pakettikortti
+      shipped:
+        cancel:
+          button: Palauta toimitus
+          confirm: "Palautetaanko varmasti %{klass} %{name}?"
+          proceed: Palauta
+          cancel: Kumoa
       new:
         new_shipment: Uusi toimitus
       cancelled:

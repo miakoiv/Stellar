@@ -52,8 +52,7 @@ class Admin::ShipmentsController < ApplicationController
     authorize_action_for @shipment, at: current_store
     @order = @shipment.order
     track @shipment, @order
-    @shipment.transfer.destroy
-    @shipment.destroy
+    @shipment.cancel!
 
     respond_to :js
   end
@@ -61,7 +60,8 @@ class Admin::ShipmentsController < ApplicationController
   # PATCH/PUT /admin/shipments/1/refresh
   def refresh
     authorize_action_for @shipment, at: current_store
-    track @shipment, @shipment.order, {
+    @order = @shipment.order
+    track @shipment, @order, {
       action: 'update',
       differences: @shipment.transfer.transfer_items
     }
@@ -73,8 +73,9 @@ class Admin::ShipmentsController < ApplicationController
   # PATCH/PUT /admin/shipments/1/complete
   def complete
     authorize_action_for @shipment, at: current_store
+    @order = @shipment.order
     shipping_gateway = @shipment.shipping_gateway.new(
-      order: @shipment.order, shipment: @shipment, user: current_user
+      order: @order, shipment: @shipment, user: current_user
     )
     status, number, tracking_code = shipping_gateway.send_shipment
 
@@ -83,7 +84,7 @@ class Admin::ShipmentsController < ApplicationController
         number: number,
         tracking_code: tracking_code
       ) && @shipment.complete!
-        track @shipment, @shipment.order, {action: 'conclude'}
+        track @shipment, @order, {action: 'conclude'}
         format.js { render :complete }
       else
         format.js { render :error }
@@ -94,8 +95,9 @@ class Admin::ShipmentsController < ApplicationController
   # GET /admin/shipments/1/label
   def label
     authorize_action_for @shipment, at: current_store
+    @order = @shipment.order
     shipping_gateway = @shipment.shipping_gateway.new(
-      order: @shipment.order, shipment: @shipment, user: current_user
+      order: @order, shipment: @shipment, user: current_user
     )
     status, file = shipping_gateway.fetch_label
 

@@ -12,7 +12,9 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
-  has_many :transfer_items
+  # Related transfer items in active shipments, see #amount_shipped.
+  has_many :active_transfer_items, -> { joins(transfer: :shipment).merge(Shipment.active) }, class_name: 'TransferItem'
+
   belongs_to :product
   delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
 
@@ -147,7 +149,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def amount_shipped
-    transfer_items.sum(:amount)
+    active_transfer_items.sum(:amount)
   end
 
   def amount_pending

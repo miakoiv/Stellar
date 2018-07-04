@@ -1,0 +1,4 @@
+#shipments-list
+  - if !locked
+    = render partial: 'admin/shipments/new', object: order, as: :order
+  = render partial: 'admin/shipments/item', collection: order.shipments, as: :shipment, locals: {locked: locked}
