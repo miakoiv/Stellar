@@ -6,9 +6,10 @@ class KoalaController < ApplicationController
 
   # GET /koala/feed
   def feed
+    resource = GlobalID::Locator.locate(params[:gid])
     page = params[:page]
     items = params[:items]
-    graph = Koala::Facebook::API.new(current_store.facebook_access_token)
+    graph = Koala::Facebook::API.new(resource.facebook_token)
     feed = graph.get_connection(page, 'posts', {
       api_version: 'v3.0',
       limit: items,

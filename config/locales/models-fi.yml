@@ -471,6 +471,7 @@ fi:
         map_zoom: Kartan koko
         map_theme: Teemamääritykset
         facebook_page: Facebook-sivun nimi
+        facebook_token: Facebook-pääsykoodi
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         thumbnails: Käytä diakuvalinkkejä

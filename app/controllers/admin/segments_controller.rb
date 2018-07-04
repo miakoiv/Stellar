@@ -111,7 +111,7 @@ class Admin::SegmentsController < ApplicationController
         :min_height, :grid_columns, :grid_disable_xs, :masonry, :image_sizing, :thumbnails,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
-        :facebook_page,
+        :facebook_page, :facebook_token,
         :inverse, :jumbotron,
         :animation, :velocity
       )
