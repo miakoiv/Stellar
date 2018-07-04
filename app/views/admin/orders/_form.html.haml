@@ -63,7 +63,7 @@
             = f.select :billing_country_code, Store.country_options, {}, required: @order.billing_address_required?, class: 'selectize'
         %hr
         ~ f.text_area :notes, rows: 7
-      - unless locked || @order.cancelled?
+      - unless locked || @order.cancelled? || @order.incomplete?
         %fieldset.danger
           .form-group
             %label.control-label= col(Order, :cancelled_at)
