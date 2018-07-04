@@ -1,4 +1,4 @@
-Tue, 03 Jul 2018 10:38:34 +0300
+Wed, 04 Jul 2018 16:01:20 +0300
 README.rdoc	Mon, 15 Jun 2015 09:37:50 +0300
 app/authorizers/activity_authorizer.rb	Mon, 04 Jun 2018 15:18:52 +0300
 app/authorizers/album_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
@@ -25,7 +25,7 @@ app/authorizers/property_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
 app/authorizers/role_authorizer.rb	Wed, 01 Nov 2017 11:59:30 +0200
 app/authorizers/section_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
 app/authorizers/segment_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
-app/authorizers/shipment_authorizer.rb	Mon, 12 Mar 2018 13:54:53 +0200
+app/authorizers/shipment_authorizer.rb	Wed, 04 Jul 2018 15:01:42 +0300
 app/authorizers/shipping_method_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
 app/authorizers/store_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
 app/authorizers/tax_category_authorizer.rb	Tue, 03 Oct 2017 13:58:35 +0300
@@ -64,13 +64,13 @@ app/controllers/admin/reports_controller.rb	Tue, 29 May 2018 14:19:02 +0300
 app/controllers/admin/requisite_entries_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/roles_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/sections_controller.rb	Thu, 19 Apr 2018 16:24:04 +0300
-app/controllers/admin/segments_controller.rb	Thu, 28 Jun 2018 16:39:47 +0300
-app/controllers/admin/shipments_controller.rb	Thu, 17 May 2018 10:09:49 +0300
+app/controllers/admin/segments_controller.rb	Wed, 04 Jul 2018 15:48:23 +0300
+app/controllers/admin/shipments_controller.rb	Wed, 04 Jul 2018 12:42:59 +0300
 app/controllers/admin/shipping_methods_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/stores_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/styles_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/tax_categories_controller.rb	Thu, 17 May 2018 10:09:49 +0300
-app/controllers/admin/transfer_items_controller.rb	Thu, 17 May 2018 10:09:49 +0300
+app/controllers/admin/transfer_items_controller.rb	Wed, 04 Jul 2018 12:42:59 +0300
 app/controllers/admin/transfers_controller.rb	Thu, 17 May 2018 10:09:49 +0300
 app/controllers/admin/users_controller.rb	Tue, 05 Jun 2018 10:50:44 +0300
 app/controllers/application_controller.rb	Thu, 24 May 2018 12:44:08 +0300
@@ -79,7 +79,7 @@ app/controllers/concerns/awesome_nester.rb	Fri, 24 Feb 2017 16:28:01 +0200
 app/controllers/concerns/reorderer.rb	Tue, 16 Jan 2018 17:06:56 +0200
 app/controllers/correspondence_controller.rb	Fri, 26 Jan 2018 10:14:58 +0200
 app/controllers/errors_controller.rb	Fri, 05 Aug 2016 14:38:17 +0300
-app/controllers/koala_controller.rb	Fri, 29 Jun 2018 13:12:51 +0300
+app/controllers/koala_controller.rb	Wed, 04 Jul 2018 15:48:23 +0300
 app/controllers/order_items_controller.rb	Wed, 09 May 2018 14:52:08 +0300
 app/controllers/orders_controller.rb	Thu, 28 Jun 2018 17:00:10 +0300
 app/controllers/pos/main_controller.rb	Mon, 19 Feb 2018 15:45:11 +0200
@@ -172,11 +172,11 @@ app/models/inventory_item.rb	Mon, 23 Apr 2018 16:31:33 +0300
 app/models/inventory_item_search.rb	Tue, 13 Mar 2018 17:31:04 +0200
 app/models/koala/post.rb	Wed, 18 Apr 2018 12:40:49 +0300
 app/models/measurement_unit.rb	Thu, 21 Jan 2016 16:47:50 +0200
-app/models/order.rb	Tue, 03 Jul 2018 10:31:56 +0300
+app/models/order.rb	Wed, 04 Jul 2018 12:42:59 +0300
 app/models/order/contents.rb	Tue, 03 Jul 2018 10:31:56 +0300
 app/models/order/presentation.rb	Tue, 03 Jul 2018 10:31:56 +0300
 app/models/order/shipping_and_billing.rb	Mon, 12 Mar 2018 13:54:53 +0200
-app/models/order_item.rb	Wed, 16 May 2018 11:27:20 +0300
+app/models/order_item.rb	Wed, 04 Jul 2018 12:42:59 +0300
 app/models/order_report_row.rb	Tue, 03 Jul 2018 10:31:56 +0300
 app/models/order_report_row_search.rb	Mon, 02 Jul 2018 09:21:54 +0300
 app/models/order_search.rb	Thu, 28 Jun 2018 11:40:21 +0300
@@ -206,8 +206,8 @@ app/models/reports/sales.rb	Wed, 30 May 2018 15:49:12 +0300
 app/models/requisite_entry.rb	Fri, 19 Aug 2016 13:08:40 +0300
 app/models/role.rb	Wed, 09 May 2018 14:52:08 +0300
 app/models/section.rb	Thu, 12 Apr 2018 16:25:53 +0300
-app/models/segment.rb	Thu, 28 Jun 2018 16:39:47 +0300
-app/models/shipment.rb	Tue, 03 Jul 2018 10:31:56 +0300
+app/models/segment.rb	Wed, 04 Jul 2018 15:48:23 +0300
+app/models/shipment.rb	Wed, 04 Jul 2018 12:42:59 +0300
 app/models/shipping_gateway/customer_pickup.rb	Mon, 14 May 2018 13:42:50 +0300
 app/models/shipping_gateway/letter.rb	Mon, 14 May 2018 13:42:50 +0300
 app/models/shipping_gateway/pakettikauppa.rb	Wed, 09 May 2018 10:00:27 +0300

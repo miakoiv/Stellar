@@ -136,7 +136,7 @@
   <span class="ruby-identifier">order</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-value">:for</span>]
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>]) <span class="ruby-operator">&amp;&amp;</span>
   <span class="ruby-identifier">order</span>.<span class="ruby-identifier">complete?</span> <span class="ruby-operator">&amp;&amp;</span>
-    <span class="ruby-operator">!</span>(<span class="ruby-identifier">order</span>.<span class="ruby-identifier">concluded?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">has_pending_shipment?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">fully_shipped?</span>)
+    <span class="ruby-operator">!</span>(<span class="ruby-identifier">order</span>.<span class="ruby-identifier">concluded?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">cancelled?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">has_pending_shipment?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">fully_shipped?</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
