@@ -31,6 +31,9 @@ class Image < ActiveRecord::Base
       matchbox:       '-quality 70',
       thumbnail:      '-quality 70',
       icon:           '-quality 70',
+    },
+    adapter_options: {
+      hash_digest: Digest::SHA256
     }
   before_post_process :resize_bitmaps
   before_create :assign_purpose
