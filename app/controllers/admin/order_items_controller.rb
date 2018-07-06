@@ -16,9 +16,7 @@ class Admin::OrderItemsController < ApplicationController
       current_store.products.live.find_by(id: order_item_params[:product_id])
     end
     amount = order_item_params[:amount].to_i
-    options = {
-      lot_code: order_item_params[:lot_code].presence || order_item_params[:serial]
-    }
+    options = {lot_code: concatenated_lot_code}
     respond_to do |format|
       if order_item = @order.insert(@product, amount, @order.source, options)
         track order_item, @order
@@ -60,8 +58,15 @@ class Admin::OrderItemsController < ApplicationController
   private
     def order_item_params
       params.require(:order_item).permit(
-        :product_id, :amount, :lot_code, :price,
-        :customer_code
+        :product_id, :amount, :lot_code, :serial,
+        :price, :customer_code
       )
+    end
+
+    # Lot codes and serials are joined by hyphen if both are present,
+    # either one alone is used as the lot code.
+    def concatenated_lot_code
+      [:lot_code, :serial].map { |k| order_item_params[k].presence }
+        .compact.join('-')
     end
 end
