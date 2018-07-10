@@ -13,7 +13,8 @@
     .product-meta
       %p.product-code
         - if product.customer_code.present?
-          = icon('barcode', product.customer_code, class: 'fa-lg')
+          %span.customer-code
+            = icon('barcode', product.customer_code, class: 'fa-lg')
         = icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
 
       .buy-now
