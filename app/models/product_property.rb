@@ -13,8 +13,10 @@ class ProductProperty < ActiveRecord::Base
   def value=(string)
     self[:value] = string
     numeric = string.gsub(/[^\d,.-]/, '').sub(',', '.')
-    self[:value_i] = numeric.to_i
-    self[:value_f] = numeric.to_f
+    if is_numeric?(string)
+      self[:value_i] = numeric.to_i
+      self[:value_f] = numeric.to_f
+    end
   end
 
   def value_with_units(spacing = true)
@@ -24,5 +26,9 @@ class ProductProperty < ActiveRecord::Base
 
   def to_s
     "#{property} #{value_with_units}"
+  end
+
+  def is_numeric?(value)
+    value.match(/\A[+-]?\d+?(_?\d+)*(\.\d+e?\d*)?\Z/) == nil ? false : true
   end
 end
