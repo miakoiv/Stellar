@@ -113,28 +113,38 @@ $body-tone-bg: darken($body-bg, 4%);
     @extend .col-xs-4, .col-sm-3, .col-md-2;
     flex: 0 1 auto;
     margin-bottom: 20px;
+    border-right: 1px solid $table-border-color;
+
+    &:last-child { border-right: 0; }
   }
 }
-.mega-dropdown-menu .row > li > a {
-  text-align: center;
+.mega-dropdown-menu li > a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover { color: $link-hover-color; }
 }
 .mega-dropdown-menu li a:hover {
   .page-image { transform: scale(1.05); }
 }
 .mega-dropdown-menu li ul {
   list-style: none;
-  padding-left: $grid-gutter-width/2;
-  border-left: 1px dotted $brand-primary;
+  padding-left: 0;
   font-size: $font-size-small;
   line-height: 1;
 }
 .mega-dropdown-menu li ul li a {
   display: block;
-  padding: 5px 0;
-  color: inherit;
-  text-decoration: none;
+  padding: 5px 0 0 10px;
 
-  &:hover { color: $link-hover-color; }
+  &:before {
+    @extend .fa, .fa-lg;
+    content: "\f0da";
+    display: inline-block;
+    position: relative;
+    left: -10px;
+  }
+  .page-title { display: inline-block; }
 }
 .mega-dropdown-menu h4 {
   @extend .text-center, .text-muted;
@@ -154,10 +164,10 @@ $body-tone-bg: darken($body-bg, 4%);
   img { @extend .img-contain, .img-center; }
 }
 .mega-dropdown-menu .row > li > a > .page-title {
-  @extend .label, .label-primary;
   display: block;
   margin-top: 10px;
-  font-size: 85.714%;
+  margin-bottom: 5px;
+  font-size: $font-size-base;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -435,9 +445,10 @@ $body-tone-bg: darken($body-bg, 4%);
 
     .btn {
       @extend .pull-right;
-      @extend .btn-sm, .btn-round;
+      @extend .btn-sm;
       background-color: transparent;
-      border-color: transparent;
+
+      > .fa { @extend .fa-2x; }
 
       &:hover {
         background-color: $brand-primary;
