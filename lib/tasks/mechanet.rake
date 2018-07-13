@@ -51,7 +51,6 @@ end
 namespace :products do
   desc "Import Mechanet product data"
   task :mechanet, [:file] => :environment do |task, args|
-    puts args.file
     store = Store.find_by name: 'Mechanet'
     tax_category = store.tax_categories.first
     property_map = store.property_map
@@ -59,16 +58,18 @@ namespace :products do
     xlsx = Creek::Book.new args.file
     xlsx.sheets.each do |sheet|
       puts "[<] Sheet #{sheet.name}"
-      rows = sheet.rows.each
-      columns = rows.next.values
-      category = nil
+      rows = sheet.rows.each_with_index
+      columns = rows.next[0].values
       loop do
-        row = rows.next.values
-        next if row.empty?
-        data = columns.zip(row).to_h
-        category ||= find_or_create_category(store, data)
+        row, line = rows.next
+        values = row.values
+        next if values.empty?
+        data = columns.zip(values).to_h
+        next unless data['Tuotenimi'].present?
+        category = find_or_create_category(store, data)
         product = find_or_create_product(store, category, tax_category, data)
         assign_properties(product, data, property_map)
+        puts "[%s%4d] %-16s" % [product.new_record? ? '+' : '–', line+1, product.code]
       end
     end
   end
@@ -81,11 +82,10 @@ namespace :products do
     product.title = data['Tuotenimi']
     product.subtitle = data['Materiaali']
     product.available_at ||= Date.current
-    product.retail_price = data['Ulosmyyntihinta EUR']
-    product.trade_price = data['Toimittajan hinta 2018']
+    product.retail_price = data['Ulosmyyntihinta EUR'].to_money
+    product.trade_price = data['Toimittajan hinta 2018'].to_money
     product.categories = [category]
     product.tax_category = tax_category
-    puts "[%s] %-16s" % [product.new_record? ? '+' : '–', code]
     product.save!
     product
   end
@@ -93,7 +93,11 @@ namespace :products do
   # Finds the category matching given data, creating it on demand.
   def find_or_create_category(store, data)
     parent = store.categories.find_or_create_by!(name: data['Päätuoteryhmän nimi'], product_scope: :alphabetical)
-    store.categories.find_or_create_by!(name: data['Alatuoteryhmän nimi'], parent: parent, product_scope: :alphabetical)
+    if data['Alatuoteryhmän nimi'].present?
+      return store.categories.find_or_create_by!(name: data['Alatuoteryhmän nimi'], parent: parent, product_scope: :alphabetical)
+    else
+      return parent
+    end
   end
 
   # Assigns product properties to the given product from data,
@@ -105,9 +109,18 @@ namespace :products do
         v = data[c.to_s]
         ProductProperty.new(
           property: p,
-          value: p.numeric? ? v.to_s.sub('.', ',') : v.to_s
+          value: excel_to_property_value(p, v)
         )
       }
     product.product_properties = properties
   end
+
+  private
+    def excel_to_property_value(p, v)
+      return v.to_s if p.string?
+      i = v.to_i
+      d = v.to_f.round(2)
+      return i.to_s if i == d
+      d.to_s.sub('.', ',')
+    end
 end
