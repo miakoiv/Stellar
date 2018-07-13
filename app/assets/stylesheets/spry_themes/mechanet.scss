@@ -131,18 +131,18 @@ $body-tone-bg: darken($body-bg, 4%);
   list-style: none;
   padding-left: 0;
   font-size: $font-size-small;
-  line-height: 1;
+  line-height: 1.2;
 }
 .mega-dropdown-menu li ul li a {
   display: block;
+  position: relative;
   padding: 5px 0 0 10px;
 
   &:before {
     @extend .fa, .fa-lg;
     content: "\f0da";
-    display: inline-block;
-    position: relative;
-    left: -10px;
+    position: absolute;
+    left: 0;
   }
   .page-title { display: inline-block; }
 }
