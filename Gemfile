@@ -91,6 +91,9 @@ gem 'rinku'
 # SpreadsheetML parser for uploaded files
 gem 'SpreadsheetML'
 
+# Stream parser for large Excel files
+gem 'creek'
+
 # Clipboard handling
 gem 'clipboard-rails'
 

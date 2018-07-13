@@ -50,3 +50,21 @@ kW:
   base_unit_id: 9
   exponent: 3
   name: kW
+kgcm2:
+  id: 13
+  name: kg/cm²
+hz:
+  id: 14
+  name: Hz
+nmm2:
+  id: 15
+  name: N/mm²
+nm:
+  id: 16
+  name: Nm
+inch:
+  id: 17
+  name: \"
+kgm:
+  id: 18
+  name: kg/m
