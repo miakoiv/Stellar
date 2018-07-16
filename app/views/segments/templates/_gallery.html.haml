@@ -1,15 +1,15 @@
 .segment-content.gallery{id: dom_id(gallery)}
-  - if gallery.images.any?
+  - if gallery.pictures.any?
     .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
-      - gallery.images.each do |image|
+      - gallery.pictures.each do |picture|
         .grid-item
           - if gallery.thumbnails?
-            = link_to image.url(:lightbox, timestamp: false), class: 'image-link' do
+            = link_to picture.image.url(:lightbox, timestamp: false), class: 'image-link' do
               .thumbnail
-                = image_variant_tag image, :technical
+                = picture_variant_tag picture, :technical
           - else
             .image-container{class: gallery.image_sizing}
-              = image_variant_tag image, :technical
+              = picture_variant_tag picture, :technical
   - else
     = render partial: 'segments/placeholders/gallery'
 

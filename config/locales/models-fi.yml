@@ -50,9 +50,6 @@ fi:
       iframe:
         one: upotus
         other: upotukset
-      image:
-        one: kuva
-        other: kuvat
       inventory:
         one: varasto
         other: varastot
@@ -74,6 +71,9 @@ fi:
       page:
         one: sivu
         other: sivut
+      picture:
+        one: kuva
+        other: kuvat
       policy:
         one: sopimus
         other: sopimukset

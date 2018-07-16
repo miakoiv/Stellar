@@ -14,7 +14,7 @@ module ApplicationHelper
     tags = {
       title: object.to_s,
       url: request.original_url,
-      image: object.cover_image.present? ? image_url(object.cover_image.url(:presentational, timestamp: false)) : nil,
+      image: object.cover_picture.present? ? image_url(object.cover_picture.image.url(:presentational, timestamp: false)) : nil,
       description: object.description.presence
     }
     set_meta_tags(og: tags)
@@ -112,6 +112,11 @@ module ApplicationHelper
     icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
   end
 
+  def picture_variant_tag(picture, size = :icon, options = {})
+    return ''.html_safe if picture.nil?
+    image_variant_tag(picture.image, size, options)
+  end
+
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, size = :icon, options = {})
     return ''.html_safe if image.nil?
@@ -128,7 +133,7 @@ module ApplicationHelper
   end
 
   def branding(object)
-    image_variant_tag(object.cover_image, :technical) +
+    picture_variant_tag(object.cover_picture, :technical) +
       content_tag(:span, object.to_s)
   end
 
@@ -159,10 +164,10 @@ module ApplicationHelper
     }.join ' '
   end
 
-  def background_image_style(image, size = :lightbox)
-    return {} if image.nil?
+  def background_picture_style(picture, size = :lightbox)
+    return {} if picture.nil?
     {
-      backgroundImage: "url(#{image.url(size, timestamp: false)})"
+      backgroundImage: "url(#{picture.image.url(size, timestamp: false)})"
     }
   end
 

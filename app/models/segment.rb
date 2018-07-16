@@ -31,7 +31,7 @@ class Segment < ActiveRecord::Base
   include Authority::Abilities
   include Trackable
   include Documentable
-  include Imageable
+  include Pictureable
   include Reorderable
 
   #---

@@ -38,9 +38,6 @@ fi:
         notice: "Ryhmä %{group} päivitetty."
       destroy:
         notice: "Ryhmä %{group} poistettu."
-    images:
-      create:
-        error: "Kuvan lisääminen epäonnistui."
     inventories:
       create:
         notice: "Varasto %{inventory} luotu."
@@ -72,6 +69,9 @@ fi:
         notice: "Sivu %{page} päivitetty."
       destroy:
         notice: "Sivu %{page} poistettu."
+    pictures:
+      create:
+        error: "Kuvan lisääminen epäonnistui."
     policies:
       create:
         notice: "Sopimus %{policy} luotu."

@@ -5,7 +5,7 @@
   = link_to admin_store_path(@store), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1
-    = image_variant_tag @store.cover_image
+    = picture_variant_tag @store.cover_picture
     = @store
 
 .row
@@ -21,8 +21,8 @@
       = tab_pane 'hostnames', default: true do
         = render partial: 'admin/hostnames/edit_table', object: @store, as: :store
       = tab_pane 'images' do
-        = render partial: 'admin/images/edit_collection', object: @store, as: :imageable
-        = render partial: 'admin/images/dropzone', object: @store, as: :imageable
+        = render partial: 'admin/pictures/edit_collection', object: @store, as: :pictureable
+        = render partial: 'admin/pictures/dropzone', object: @store, as: :pictureable
 
 #style-modal.modal{data: {backdrop: 'static'}}
 

@@ -5,7 +5,7 @@
       = link_to show_product_path(product) do
         .media-left
           .box-thumbnail
-            = image_variant_tag product.cover_image, :thumbnail
+            = picture_variant_tag product.cover_picture, :thumbnail
         .media-body
           .media-heading
             %strong= product.title

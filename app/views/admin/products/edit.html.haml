@@ -24,8 +24,7 @@
 
     .tab-content
       = tab_pane 'images', default: true do
-        = render partial: 'admin/images/edit_collection', object: @product, as: :imageable
-        = render partial: 'admin/images/dropzone', object: @product, as: :imageable
+        = render partial: 'admin/pictures/edit_collection', object: @product, as: :pictureable
       = tab_pane 'inventory' do
         = render partial: 'admin/inventory_items/table', object: @product, as: :product
         - if current_user.can_create?(InventoryItem, at: current_store)

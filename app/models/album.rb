@@ -4,7 +4,7 @@ class Album < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
-  include Imageable
+  include Pictureable
 
   #---
   belongs_to :store

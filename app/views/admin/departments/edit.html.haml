@@ -11,5 +11,5 @@
   .col-md-6
     = render partial: 'form', locals: {locked: false}
   .col-md-6
-    = render partial: 'admin/images/edit_collection', object: @department, as: :imageable
-    = render partial: 'admin/images/dropzone', object: @department, as: :imageable
+    = render partial: 'admin/pictures/edit_collection', object: @department, as: :pictureable
+    = render partial: 'admin/pictures/dropzone', object: @department, as: :pictureable

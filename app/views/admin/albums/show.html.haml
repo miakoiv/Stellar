@@ -5,7 +5,7 @@
     = link_to edit_admin_album_path(@album), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1
-    = image_variant_tag @album.cover_image
+    = picture_variant_tag @album.cover_picture
     = @album
 
 .row
@@ -13,4 +13,4 @@
     = render partial: 'form', locals: {locked: true}
 
   .col-md-6
-    = render partial: 'admin/images/collection', object: @album, as: :imageable
+    = render partial: 'admin/pictures/collection', object: @album, as: :pictureable

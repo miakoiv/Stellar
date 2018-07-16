@@ -90,27 +90,27 @@ Rails.application.routes.draw do
 
     resources :stores do
       resources :hostnames, shallow: true
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       resource :style
     end
     resources :departments do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       post :reorder, on: :collection
     end
     resources :categories do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       post :rearrange, on: :collection
       get :reorder_products, on: :member
     end
     resources :pages do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       post :rearrange, on: :collection
       get :layout, on: :member
       resources :sections, shallow: true do
-        resources :images
+        resources :pictures
         resources :columns do
           resources :segments do
-            resources :images
+            resources :pictures
             resources :documents
             member do
               get :settings
@@ -132,10 +132,10 @@ Rails.application.routes.draw do
       end
     end
     resources :albums do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
     end
     resources :products do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       resources :documents, shallow: true
       resources :product_properties, shallow: true
       resources :alternate_prices
@@ -162,12 +162,12 @@ Rails.application.routes.draw do
     end
     resources :promotions do
       resources :promoted_items, shallow: true
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       post :add_products, on: :member
       post :add_categories, on: :member
     end
     resources :orders do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
       resources :order_items, shallow: true
       resources :shipments, shallow: true do
         member do
@@ -224,7 +224,7 @@ Rails.application.routes.draw do
     end
     resources :order_types
     resources :shipping_methods do
-      resources :images, shallow: true
+      resources :pictures, shallow: true
     end
     resources :policies do
       patch :accept, on: :member
@@ -234,9 +234,9 @@ Rails.application.routes.draw do
     end
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
-    post '/images/reorder', to: 'images#reorder', as: :reorder_images
+    post '/pictures/reorder', to: 'pictures#reorder', as: :reorder_pictures
     post '/documents/reorder', to: 'documents#reorder', as: :reorder_documents
-    post '/images/delete', to: 'images#delete', as: :delete_image
+    post '/pictures/delete', to: 'pictures#delete', as: :delete_picture
     post '/documents/delete', to: 'documents#delete', as: :delete_document
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end

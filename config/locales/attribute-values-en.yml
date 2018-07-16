@@ -22,11 +22,6 @@ en:
           retail: retail price
           trade: trade price
           cost: cost price
-      image:
-        purpose:
-          presentational: presentational
-          technical: technical
-          promotional: promotional
       inventory_item:
         status:
           online: active only
@@ -56,6 +51,11 @@ en:
           proxy: Member store page
           external: External page
           internal: Internal page
+      picture:
+        purpose:
+          presentational: presentational
+          technical: technical
+          promotional: promotional
       property:
         value_type:
           string: String

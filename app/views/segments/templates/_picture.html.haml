@@ -1,22 +1,22 @@
-- has_images = picture.images.any?
-- swiper = picture.images.count > 1
+- has_pictures = picture.pictures.any?
+- swiper = picture.pictures.count > 1
 - sizing = picture.image_sizing
 
 .segment-content.picture{id: dom_id(picture)}
-  - if has_images
+  - if has_pictures
     - if swiper
       .swiper-container{class: sizing}
         .swiper-wrapper
-          - picture.images.each do |image|
+          - picture.pictures.each do |picture|
             .swiper-slide
-              = image_variant_tag image, :lightbox
+              = picture_variant_tag picture, :lightbox
     - else
       .image-container{class: sizing}
         - if picture.url.present?
           = link_to picture.url do
-            = image_variant_tag picture.cover_image, :lightbox
+            = picture_variant_tag picture.cover_picture, :lightbox
         - else
-          = image_variant_tag picture.cover_image, :lightbox
+          = picture_variant_tag picture.cover_picture, :lightbox
 
   - else
     = render partial: 'segments/placeholders/picture'

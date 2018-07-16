@@ -9,7 +9,7 @@ class Promotion < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Trackable
-  include Imageable
+  include Pictureable
   include Pageable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store

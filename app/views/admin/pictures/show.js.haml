@@ -1,0 +1,6 @@
+$("#{j render partial: 'admin/pictures/edit', object: @picture, as: :picture}").appendTo('##{dom_id(@pictureable, :pictures)}');
+$("##{dom_id(@picture)}").initialize();
+$('##{dom_id(@pictureable, :pictures)}').sortable('refresh');
+$('##{dom_id(@pictureable, :pictures)}').imagesLoaded(function () {                |
+  $(document).trigger('pictureable:added');                                      |
+});                                                                            |

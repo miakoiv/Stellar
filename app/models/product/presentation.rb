@@ -35,7 +35,7 @@ class Product < ActiveRecord::Base
   end
 
   def icon_image_url
-    cover_image.present? && cover_image(:presentational).url(:icon, timestamp: false)
+    cover_picture.present? && cover_picture(:presentational).image.url(:icon, timestamp: false)
   end
 
   # Retail price string representation for JSON.

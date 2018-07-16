@@ -36,7 +36,7 @@ class Store < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Trackable
-  include Imageable
+  include Pictureable
 
   #---
   after_create :assign_slug

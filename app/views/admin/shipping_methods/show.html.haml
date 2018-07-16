@@ -5,7 +5,7 @@
     = link_to edit_admin_shipping_method_path(@shipping_method), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1
-    = image_variant_tag @shipping_method.cover_image
+    = picture_variant_tag @shipping_method.cover_picture
     = @shipping_method
 
 .row
@@ -19,7 +19,7 @@
 
     .tab-content
       = tab_pane 'images', default: true do
-        = render partial: 'admin/images/collection', object: @shipping_method, as: :imageable
+        = render partial: 'admin/pictures/collection', object: @shipping_method, as: :pictureable
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @shipping_method.to_global_id}}
 

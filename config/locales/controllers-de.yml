@@ -14,9 +14,6 @@ de:
         notice: "Kategorie %{category} aktualisiert."
       destroy:
         notice: "Kategorie %{category} gelöscht."
-    images:
-      create:
-        error: "Hochladen des Bildes fehlgeschlagen."
     orders:
       create:
         notice: "Bestellung %{order} erstellt."
@@ -29,6 +26,9 @@ de:
         notice: "Seite %{page} aktualisiert."
       destroy:
         notice: "Seite %{page} gelöscht."
+    pictures:
+      create:
+        error: "Hochladen des Bildes fehlgeschlagen."
     products:
       create:
         notice: "Produkt %{product} erstellt."

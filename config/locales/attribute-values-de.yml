@@ -1,7 +1,7 @@
 de:
   activerecord:
     values:
-      image:
+      picture:
         purpose:
           presentational: Präsentation
           technical: Technisch

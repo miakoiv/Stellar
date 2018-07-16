@@ -25,7 +25,7 @@
         %h2.visible-print-block= title(PromotedItem, count: 2)
         = render partial: 'admin/promoted_items/table', object: @promotion, as: :promotion
       = tab_pane 'images' do
-        = render partial: 'admin/images/collection', object: @promotion, as: :imageable
+        = render partial: 'admin/pictures/collection', object: @promotion, as: :pictureable
 
 :coffee
   persist_tabs 'promotion-side'

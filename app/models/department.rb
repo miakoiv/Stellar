@@ -5,7 +5,7 @@ class Department < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Trackable
-  include Imageable
+  include Pictureable
   include Reorderable
   include FriendlyId
   friendly_id :slugger, use: [:slugged, :scoped, :history], scope: :store

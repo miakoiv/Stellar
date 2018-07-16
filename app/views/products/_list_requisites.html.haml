@@ -1,6 +1,6 @@
 = content_tag_for :li, @product.requisite_products.visible do |product|
   %a
-    .product-image= image_variant_tag product.cover_image(current_store.list_image_type), :matchbox
+    .product-image= picture_variant_tag product.cover_picture(current_store.list_image_type), :matchbox
     .product-text
       %h3
         = product.title

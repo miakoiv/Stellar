@@ -22,11 +22,6 @@ fi:
           retail: myyntihinta
           trade: valmistajan hinta
           cost: omakustannushinta
-      image:
-        purpose:
-          presentational: esittävä
-          technical: tekninen
-          promotional: mainos
       inventory_item:
         status:
           online: vain aktiiviset
@@ -56,6 +51,11 @@ fi:
           proxy: Jäsenkaupan sivu
           external: Ulkoinen sivu
           internal: Sisäinen sivu
+      picture:
+        purpose:
+          presentational: esittävä
+          technical: tekninen
+          promotional: mainos
       property:
         value_type:
           string: sanallinen

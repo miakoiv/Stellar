@@ -18,7 +18,7 @@
     %tbody
       - @shipping_methods.each do |shipping_method|
         = content_tag_for :tr, shipping_method, class: shipping_method.active? ? nil : 'warning text-warning' do
-          %td= image_variant_tag shipping_method.cover_image
+          %td= picture_variant_tag shipping_method.cover_picture
           %td= shipping_method.name
           %td= shipping_method.shipping_gateway_class.model_name.human
           %td

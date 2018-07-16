@@ -11,7 +11,7 @@ class Section < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
-  include Imageable
+  include Pictureable
   include Reorderable
 
   #---
@@ -70,8 +70,8 @@ class Section < ActiveRecord::Base
     {purpose: ['presentational']}
   end
 
-  def background_image
-    cover_image
+  def background_picture
+    cover_picture
   end
 
   def to_s

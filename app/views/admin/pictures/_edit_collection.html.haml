@@ -1,0 +1,20 @@
+- id = dom_id(pictureable, :pictures)
+- grid_columns ||= 3
+
+.grid.thumbnail-grid.sortable{id: id, class: "grid-columns-#{grid_columns}"}
+  = render partial: 'admin/pictures/edit', collection: pictureable.pictures, as: :picture
+  = render partial: 'admin/pictures/new', object: pictureable, as: :pictureable
+
+:coffee
+  $('##{id}').sortable(
+    items: '> .grid-item'
+    handle: '.thumbnail'
+    placeholder: 'grid-item'
+    helper: 'clone'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_pictures_path}',
+      {reorder: $(this).sortable('toArray')},
+      (data, status, xhr) ->
+        $(document).trigger 'pictureable:reordered'

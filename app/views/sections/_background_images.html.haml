@@ -1,14 +1,14 @@
 - if section.fixed_background?
-  .section-bg-container.fixed-background{style: css(background_color_style(section).merge(background_image_style(section.cover_image)))}
+  .section-bg-container.fixed-background{style: css(background_color_style(section).merge(background_picture_style(section.cover_picture)))}
 - else
   .section-bg-container{style: css(background_color_style(section))}
-    - if section.images.any?
-      - if section.images.count > 1
+    - if section.pictures.any?
+      - if section.pictures.count > 1
         .swiper-container
           .swiper-wrapper
-            - section.images.each do |image|
+            - section.pictures.each do |picture|
               .swiper-slide
-                = image_variant_tag image, :lightbox, class: 'image-bg'
+                = picture_variant_tag picture, :lightbox, class: 'image-bg'
 
         :coffee
           jQuery ->
@@ -19,4 +19,4 @@
               loop: true
               effect: 'fade'
       - else
-        = image_variant_tag section.cover_image, :lightbox, class: 'image-bg'
+        = picture_variant_tag section.cover_picture, :lightbox, class: 'image-bg'

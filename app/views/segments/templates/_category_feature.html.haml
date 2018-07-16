@@ -1,14 +1,14 @@
 - resource = category_feature.resource
-- images = category_feature.images.reverse
+- pictures = category_feature.pictures.reverse
 - sizing = category_feature.image_sizing
 
 .segment-content.category_feature{id: dom_id(category_feature)}
-  - if resource.present? && resource.is_a?(Category) && images.any?
+  - if resource.present? && resource.is_a?(Category) && pictures.any?
     .image-container{class: sizing}
       = link_to show_category_path(resource) do
-        = image_variant_tag images.pop, :lightbox
-    - images.each do |image|
+        = picture_variant_tag pictures.pop, :lightbox
+    - pictures.each do |picture|
       .image-container.stacked{class: sizing}
-        = image_variant_tag image, :lightbox
+        = picture_variant_tag picture, :lightbox
   - else
     = render partial: 'segments/placeholders/category_feature'

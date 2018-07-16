@@ -2,7 +2,7 @@
 
 .product-card
   = link_to url do
-    .product-image= image_variant_tag product.cover_image(product.store.card_image_type), :postcard
+    .product-image= picture_variant_tag product.cover_picture(product.store.card_image_type), :postcard
     .product-text
       %h3
         = product.title

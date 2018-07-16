@@ -50,9 +50,6 @@ en:
       iframe:
         one: embed
         other: embeds
-      image:
-        one: image
-        other: images
       inventory:
         one: inventory
         other: inventories
@@ -74,6 +71,9 @@ en:
       page:
         one: page
         other: pages
+      picture:
+        one: picture
+        other: pictures
       policy:
         one: policy
         other: policies

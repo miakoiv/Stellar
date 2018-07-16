@@ -24,9 +24,6 @@ es:
         notice: "Departamento %{department} subido."
       destroy:
         notice: "Departamento %{department} eliminado."
-    images:
-      create:
-        error: "Error al subir la imagen."
     inventories:
       create:
         notice: "Inventario %{inventory} creado."
@@ -49,6 +46,9 @@ es:
         notice: "Página %{page} subido."
       destroy:
         notice: "Página %{page} eliminado."
+    pictures:
+      create:
+        error: "Error al subir la imagen."
     products:
       create:
         notice: "Producto %{product} creado."

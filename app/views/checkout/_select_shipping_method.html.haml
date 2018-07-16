@@ -4,7 +4,7 @@
     = link_to shipping_method_path(@order, method), remote: true, id: dom_id(method), class: 'list-group-item' do
       .media
         .media-left
-          = image_variant_tag method.cover_image, :thumbnail, class: 'media-object'
+          = picture_variant_tag method.cover_picture, :thumbnail, class: 'media-object'
         .media-body
           %h4.media-heading= method.name
           - if method.shipping_gateway_class.fixed_cost? && (product = method.shipping_cost_product).present?

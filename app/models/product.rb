@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   include Authority::Abilities
   include Trackable
   include Documentable
-  include Imageable
+  include Pictureable
   include Pageable
   include Reorderable
   include FriendlyId
@@ -281,11 +281,13 @@ class Product < ActiveRecord::Base
         alternate_prices: alternate_prices.map(&:dup),
         product_properties: product_properties.map(&:dup)
       )
-      images.each do |image|
-        c.images.create(
-          priority: image.priority,
-          purpose: image.purpose,
-          attachment: image.attachment
+      pictures.each do |picture|
+        c.pictures.create(
+          priority: picture.priority,
+          purpose: picture.purpose,
+          image: picture.image,
+          caption: picture.caption,
+          url: picture.url
         )
       end
     end

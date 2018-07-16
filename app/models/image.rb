@@ -3,14 +3,12 @@
 class Image < ActiveRecord::Base
 
   include Trackable
-  include Reorderable
-
-  enum purpose: {presentational: 0, technical: 1}
 
   #---
-  belongs_to :imageable, polymorphic: true, touch: true
+  has_many :pictures, dependent: :destroy
 
-  default_scope { sorted }
+  # FIXME: the imageable mixin is deprecated
+  belongs_to :imageable, polymorphic: true, touch: true
 
   has_attached_file :attachment,
     styles: {
@@ -36,7 +34,6 @@ class Image < ActiveRecord::Base
       hash_digest: Digest::SHA256
     }
   before_post_process :resize_bitmaps
-  before_create :assign_purpose
 
   delegate :url, to: :attachment
 
@@ -49,16 +46,6 @@ class Image < ActiveRecord::Base
     }
 
   #---
-  def self.available_purposes
-    purposes.keys
-  end
-
-  #---
-  # Assign first available purpose.
-  def assign_purpose
-    self.purpose ||= Image.available_purposes.first
-  end
-
   def is_vector?
     !!(attachment_content_type =~ /\/svg/)
   end

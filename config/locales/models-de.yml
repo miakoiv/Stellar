@@ -10,9 +10,6 @@ de:
       iframe:
         one: Eingebunder iFrame
         other: Eingebundene iFrames
-      image:
-        one: Bild
-        other: Bilder
       inventory:
         one: Bestand
         other: Bestände
@@ -31,6 +28,9 @@ de:
       page:
         one: Seite
         other: Seiten
+      picture:
+        one: Bild
+        other: Bilder
       product:
         one: Produkt
         other: Produkte
