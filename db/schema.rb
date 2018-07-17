@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706123237) do
+ActiveRecord::Schema.define(version: 20180717124514) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(version: 20180706123237) do
   add_index "iframes", ["product_id"], name: "index_iframes_on_product_id", using: :btree
 
   create_table "images", force: :cascade do |t|
+    t.integer  "store_id",                limit: 4
     t.integer  "imageable_id",            limit: 4
     t.string   "imageable_type",          limit: 255
     t.integer  "purpose",                 limit: 4,               null: false
@@ -504,6 +505,21 @@ ActiveRecord::Schema.define(version: 20180706123237) do
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
+
+  create_table "pictures", force: :cascade do |t|
+    t.integer  "image_id",         limit: 4,               null: false
+    t.integer  "pictureable_id",   limit: 4
+    t.string   "pictureable_type", limit: 255
+    t.integer  "purpose",          limit: 4,               null: false
+    t.string   "caption",          limit: 255
+    t.string   "url",              limit: 255
+    t.integer  "priority",         limit: 4,   default: 0, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "pictures", ["image_id"], name: "index_pictures_on_image_id", using: :btree
+  add_index "pictures", ["pictureable_type", "pictureable_id"], name: "index_pictures_on_pictureable_type_and_pictureable_id", using: :btree
 
   create_table "policies", force: :cascade do |t|
     t.integer  "store_id",       limit: 4,                    null: false

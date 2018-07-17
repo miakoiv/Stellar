@@ -80,6 +80,18 @@ class Image < ActiveRecord::Base
     !portrait?
   end
 
+  def calculated_store_id
+    return imageable.store_id if imageable.respond_to?(:store_id)
+    return case imageable
+    when Store
+      imageable.id
+    when Section
+      imageable.page.store_id
+    when Segment
+      imageable.column.section.page.store_id
+    end
+  end
+
   def to_s
     attachment_file_name.humanize
   end
