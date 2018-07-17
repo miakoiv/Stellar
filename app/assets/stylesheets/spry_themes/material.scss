@@ -179,7 +179,11 @@ $border-radius-small: 0;
 .product-card .product-image {
   position: relative;
 
-  img { width: 100%; }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 .product-grid .product-text,
 .product-card .product-text {
