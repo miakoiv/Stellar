@@ -2,7 +2,7 @@
 - pictures = department_feature.pictures.reverse
 - sizing = department_feature.image_sizing
 
-.segment-content.department_feature{id: dom_id(department_feature)}
+.segment-content.department_feature
   - if resource.present? && resource.is_a?(Department) && pictures.any?
     .image-container{class: sizing}
       = link_to show_department_path(resource) do

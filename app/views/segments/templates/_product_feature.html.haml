@@ -2,7 +2,7 @@
 - pictures = product_feature.pictures.reverse
 - sizing = product_feature.image_sizing
 
-.segment-content.product_feature{id: dom_id(product_feature)}
+.segment-content.product_feature
   - if resource.present? && resource.is_a?(Product) && pictures.any?
     .image-container{class: sizing}
       = link_to show_product_path(resource) do

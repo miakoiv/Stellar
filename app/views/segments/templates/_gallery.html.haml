@@ -1,4 +1,4 @@
-.segment-content.gallery{id: dom_id(gallery)}
+.segment-content.gallery{id: dom_id(gallery, :content)}
   - if gallery.pictures.any?
     .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
       - gallery.pictures.each do |picture|
@@ -15,7 +15,7 @@
 
 - if gallery.masonry?
   :coffee
-    $grid = $('##{dom_id(gallery)}').find '.grid'
+    $grid = $('##{dom_id(gallery, :content)}').find '.grid'
     reversed = $grid.closest('.segment').hasClass 'align-bottom'
     $grid.imagesLoaded ->
       $grid.masonry

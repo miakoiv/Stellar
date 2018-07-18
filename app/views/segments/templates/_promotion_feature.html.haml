@@ -2,7 +2,7 @@
 - pictures = promotion_feature.pictures.reverse
 - sizing = promotion_feature.image_sizing
 
-.segment-content.promotion_feature{id: dom_id(promotion_feature)}
+.segment-content.promotion_feature
   - if resource.present? && resource.is_a?(Promotion) && pictures.any?
     .image-container{class: sizing}
       = link_to show_promotion_path(resource) do

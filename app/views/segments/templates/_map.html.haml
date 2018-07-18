@@ -1,6 +1,6 @@
 - has_map = map.map_location.present?
 
-.segment-content.map{id: dom_id(map), style: css(segment_style(map))}
+.segment-content.map{id: dom_id(map, :content), style: css(segment_style(map))}
   - if has_map
     .map-container{style: css(segment_style(map)), data: {location: map.map_location, marker: map.map_marker?, zoom: map.map_zoom || 10, theme: map.map_theme}}
   - else
@@ -9,7 +9,7 @@
 - if has_map
   :coffee
     jQuery ->
-      $map = $('##{dom_id(map)}').find '.map-container'
+      $map = $('##{dom_id(map, :content)}').find '.map-container'
       options =
         zoom: $map.data 'zoom'
         disableDefaultUI: true
