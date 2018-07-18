@@ -2,7 +2,7 @@
 - swiper = picture.images.count > 1
 - sizing = picture.image_sizing
 
-.segment-content.picture{id: dom_id(picture)}
+.segment-content.picture{id: dom_id(picture, :content)}
   - if has_images
     - if swiper
       .swiper-container{class: sizing}
@@ -24,7 +24,7 @@
 - if swiper
   :coffee
     jQuery ->
-      $segment = $('##{dom_id(picture)}')
+      $segment = $('##{dom_id(picture, :content)}')
       new Swiper $segment.find('.swiper-container'),
         autoplay:
           delay: 5000
