@@ -336,6 +336,9 @@ en:
         slug: Target
         url: Osoite
         content: Content
+      picture:
+        caption: Caption
+        url: ᴡᴡᴡ address
       payment:
         order_id: Order
         amount: Paid

@@ -340,6 +340,9 @@ fi:
         order_id: Tilaus
         amount: Maksettu
         created_at: Päiväys
+      picture:
+        caption: Kuvateksti
+        url: ᴡᴡᴡ-osoite
       policy:
         title: Otsikko
         content: Sisältö

@@ -18,6 +18,15 @@ class Admin::PicturesController < ApplicationController
     end
   end
 
+  # GET /admin/pictureable/1/pictures/new
+  def new
+    @pictureable = find_pictureable
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # POST /admin/pictureable/1/pictures
   def create
     @pictureable = find_pictureable
@@ -26,8 +35,10 @@ class Admin::PicturesController < ApplicationController
     respond_to do |format|
       if @picture.save
         track @picture, @pictureable
+        format.js
         format.json { render json: @picture, status: 200 } # for dropzone and summernote
       else
+        format.js
         format.html { render json: {error: t('.error')} }
         format.json { render json: {error: @picture.errors.full_messages.join(', ')}, status: 400 }
       end

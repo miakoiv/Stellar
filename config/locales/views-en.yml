@@ -201,6 +201,11 @@ en:
         show_resource: Show target
       layout_menu:
         new_section: New section
+    pictures:
+      edit_collection:
+        new: New picture
+      new_modal:
+        title: Select or add a new picture
     policies:
       index:
         pending: You have pending policies. Please review the marked policies.

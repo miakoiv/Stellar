@@ -1,9 +1,12 @@
 - id = dom_id(pictureable, :pictures)
 - grid_columns ||= 3
 
+%p.new-picture
+  = link_to [:new, :admin, pictureable, :picture], remote: true, class: 'btn btn-primary btn-block' do
+    = icon('plus', t('.new'))
+
 .grid.thumbnail-grid.sortable{id: id, class: "grid-columns-#{grid_columns}"}
   = render partial: 'admin/pictures/edit', collection: pictureable.pictures, as: :picture
-  = render partial: 'admin/pictures/new', object: pictureable, as: :pictureable
 
 :coffee
   $('##{id}').sortable(

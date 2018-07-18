@@ -181,6 +181,11 @@ fi:
         show_resource: Näytä kohde
       layout_menu:
         new_section: Uusi lohko
+    pictures:
+      edit_collection:
+        new: Uusi kuva
+      new_modal:
+        title: Valitse tai lisää uusi kuva
     policies:
       index:
         pending: Sinulla on hyväksymättömiä sopimuksia. Ole hyvä ja tarkista keltaisella merkityt sopimukset.
