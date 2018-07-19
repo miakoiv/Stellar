@@ -15,9 +15,10 @@ class CreatePictures < ActiveRecord::Migration
     # using duplicates of the same image based on the fingerprint.
     fingerprints = {}
     Image.find_each(batch_size: 25) do |image|
-      chosen = (fingerprints[image.attachment_fingerprint] ||= image)
+      key = "#{image.store_id}-#{image.attachment_fingerprint}"
+      fingerprints[key] ||= image
       Picture.create(
-        image: chosen,
+        image: fingerprints[key],
         pictureable: image.imageable,
         purpose: image.purpose,
         priority: image.priority,
