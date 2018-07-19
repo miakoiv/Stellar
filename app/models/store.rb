@@ -62,6 +62,7 @@ class Store < ActiveRecord::Base
 
   # All these associations are dependent of the store.
   with_options dependent: :destroy do |store|
+    store.has_many :images
     store.has_many :inventories
     store.has_many :transfers
     store.has_many :categories

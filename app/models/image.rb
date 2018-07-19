@@ -6,6 +6,7 @@ class Image < ActiveRecord::Base
 
   #---
   has_many :pictures, dependent: :destroy
+  belongs_to :store
 
   # FIXME: the imageable mixin is deprecated
   belongs_to :imageable, polymorphic: true, touch: true
@@ -34,6 +35,8 @@ class Image < ActiveRecord::Base
       hash_digest: Digest::SHA256
     }
   before_post_process :resize_bitmaps
+
+  default_scope { order(created_at: :desc) }
 
   delegate :url, to: :attachment
 
