@@ -1,0 +1,10 @@
+- grid_columns ||= 3
+
+.grid.selectable.thumbnail-grid{class: "grid-columns-#{grid_columns}", style: 'opacity: 0;'}
+  - images.each do |image|
+    .grid-item{data: {id: image.id}}
+      .thumbnail
+        .thumbnail-square
+          = image_variant_tag image, :matchbox, class: 'img-responsive'
+
+= paginate images, remote: true

@@ -1,16 +1,17 @@
 - id = dom_id(pictureable, :pictures)
 - grid_columns ||= 3
 
-%p.new-picture
-  = link_to [:new, :admin, pictureable, :picture], remote: true, class: 'btn btn-primary btn-block' do
-    = icon('plus', t('.new'))
 
 .grid.thumbnail-grid.sortable{id: id, class: "grid-columns-#{grid_columns}"}
+  .grid-item.fixed
+    .thumbnail
+      = link_to [:new, :admin, pictureable, :picture], class: 'btn btn-default', remote: true do
+        = image_tag 'plus.svg'
   = render partial: 'admin/pictures/edit', collection: pictureable.pictures, as: :picture
 
 :coffee
   $('##{id}').sortable(
-    items: '> .grid-item'
+    items: '> .grid-item:not(.fixed)'
     handle: '.thumbnail'
     placeholder: 'grid-item'
     helper: 'clone'

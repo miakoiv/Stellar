@@ -13,18 +13,22 @@ class Admin::PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     @pictureable = @picture.pictureable
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
   end
 
   # GET /admin/pictureable/1/pictures/new
   def new
     @pictureable = find_pictureable
+    @picture = @pictureable.pictures.build(purpose: @pictureable.available_purposes.first)
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to :js
+  end
+
+  # GET /admin/pictures/1/edit
+  def edit
+    @picture = Picture.find(params[:id])
+
+    respond_to :js
   end
 
   # POST /admin/pictureable/1/pictures
@@ -48,6 +52,7 @@ class Admin::PicturesController < ApplicationController
   # PATCH/PUT /admin/pictures/1
   def update
     @picture = Picture.find(params[:id])
+    @pictureable = @picture.pictureable
 
     respond_to do |format|
       if @picture.update(picture_params)
@@ -91,7 +96,7 @@ class Admin::PicturesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def picture_params
       params.require(:picture).permit(
-        :purpose, :caption, :url
+        :image_id, :purpose, :caption, :url
       )
     end
 end

@@ -1,0 +1,2 @@
+$('#image-browser').html("#{j render partial: 'admin/images/browser', object: @images, as: :images, locals: {grid_columns: 6}}");
+$('#image-browser > .grid').imagesLoaded(function () { $('#image-browser > .grid').animateCss('fadeIn', function () { $('#image-browser > .grid').css({opacity: 1}); }); });

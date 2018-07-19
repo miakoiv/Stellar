@@ -66,7 +66,7 @@ class Section < ActiveRecord::Base
     PRESETS.map { |l| l.first }
   end
 
-  def image_options
+  def picture_options
     {purpose: ['presentational']}
   end
 

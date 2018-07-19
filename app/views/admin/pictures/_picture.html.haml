@@ -2,7 +2,7 @@
   .thumbnail
     = picture_variant_tag picture, :matchbox, class: 'img-responsive'
     .caption.truncate
-      %small= picture.image.attachment_file_name.truncate(15, omission: '…')
+      %small= picture.image.attachment_file_name
     .thumbnail-widgets
       .pull-right
         %button.btn.btn-default.btn-xs.clipboard{data: {'clipboard-text': picture.image.attachment.url(:original, timestamp: false)}}= icon('link')

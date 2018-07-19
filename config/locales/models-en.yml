@@ -206,7 +206,6 @@ en:
       iframe:
         html: HTML code
       image:
-        purpose: Image type
         attachment_file_name: File name
         attachment_content_type: File type
         attachment_file_size: File size
@@ -337,6 +336,7 @@ en:
         url: Osoite
         content: Content
       picture:
+        purpose: Image type
         caption: Caption
         url: ᴡᴡᴡ address
       payment:

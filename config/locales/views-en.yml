@@ -204,7 +204,7 @@ en:
     pictures:
       edit_collection:
         new: New picture
-      new_modal:
+      modal:
         title: Select or add a new picture
     policies:
       index:

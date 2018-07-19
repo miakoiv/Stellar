@@ -484,6 +484,7 @@ i.icon {
   white-space: nowrap;
 }
 .truncate {
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -541,8 +542,12 @@ i.icon {
 
 
 /*
- * Button toggles with more contrast
+ * Block level button toggles, buttons with more contrast
  */
+.btn-group-block {
+  @extend .clearfix;
+  display: block;
+}
 [data-toggle="buttons"] {
   > .btn,
   > .btn-group > .btn {
@@ -574,6 +579,16 @@ i.icon {
 /*
  * Image boxes of various sizes, with image centered inside
  */
+ .box-postcard {
+   position: relative;
+   width: 300px;
+   height: 300px;
+
+   img {
+     max-width: 300px;
+     max-height: 300px;
+   }
+ }
 .box-matchbox {
   position: relative;
   width: 200px;
@@ -666,32 +681,50 @@ i.icon {
 .grid .grid-item { padding: 5px; }
 .grid.grid-columns-1 .grid-item {
   width: 100%;
+  max-width: 100%;
   flex: 0 0 100%;
 }
 .grid.grid-columns-2 .grid-item {
   width: 50%;
+  max-width: 50%;
   flex: 0 0 50%;
 }
 .grid.grid-columns-3 .grid-item {
   width: 33.333333%;
+  max-width: 33.333333%;
   flex: 0 0 33.333333%;
 }
 .grid.grid-columns-4 .grid-item {
   width: 25%;
+  max-width: 25%;
   flex: 0 0 25%;
 }
 .grid.grid-columns-6 .grid-item {
   width: 16.66667%;
+  max-width: 16.66667%;
   flex: 0 0 16.666667%;
 }
 .grid.grid-columns-12 .grid-item {
   width: 8.333333%;
+  max-width: 8.333333%;
   flex: 0 0 8.333333%;
 }
 
 .grid.sortable { padding-bottom: 40px; }
 .grid.sortable { padding-bottom: 40px; }
 .grid.sortable .grid-item { cursor: grab; }
+.grid.selectable .grid-item {
+  cursor: pointer;
+
+  &:hover .thumbnail, &:focus .thumbnail {
+    outline: 1px solid $list-group-active-border;
+  }
+  &.active .thumbnail,
+  &.active:hover .thumbnail,
+  &.active:focus .thumbnail {
+    outline: 5px solid $list-group-active-border;
+  }
+}
 
 @media (max-width: $screen-xs-max) {
   .grid.grid-columns-2 .grid-item {
@@ -732,6 +765,14 @@ i.icon {
     right: 10px;
     left: 10px;
   }
+}
+.thumbnail > .thumbnail-square {
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+  overflow: hidden;
+
+  img { @extend .img-contain, .img-center; }
 }
 
 

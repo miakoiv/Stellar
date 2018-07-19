@@ -2,13 +2,8 @@
   .thumbnail
     = picture_variant_tag picture, :matchbox, class: 'img-responsive'
     .caption.truncate
-      %small= picture.image.attachment_file_name.truncate(15, omission: '…')
+      %small= picture.image.attachment_file_name
     .thumbnail-widgets
       .pull-right
         = link_to icon('remove'), admin_picture_path(picture), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
-      = form_for [:admin, picture], remote: true, html: {class: 'immediate'} do |f|
-        .btn-group-vertical.btn-group-xs{data: {toggle: 'buttons'}}
-          - picture.pictureable.available_purposes.each do |purpose|
-            %label.btn.btn-default{class: picture.purpose == purpose && 'active'}
-              = f.radio_button :purpose, purpose
-              = Picture.human_attribute_value(:purpose, purpose)
+      = link_to icon('pencil'), edit_admin_picture_path(picture), remote: true, class: 'btn btn-xs btn-default'

@@ -1,0 +1,4 @@
+$('#picture-modal').remove();
+$("#{j render partial: 'admin/pictures/modal', object: @picture, as: :pictureable}").appendTo('body');
+$('#picture-modal').initialize();
+$('#picture-modal').modal('show');

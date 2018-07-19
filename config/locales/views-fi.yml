@@ -184,7 +184,7 @@ fi:
     pictures:
       edit_collection:
         new: Uusi kuva
-      new_modal:
+      modal:
         title: Valitse tai lisää uusi kuva
     policies:
       index:

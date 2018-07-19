@@ -206,7 +206,6 @@ fi:
       iframe:
         html: HTML-koodi
       image:
-        purpose: Kuvatyyppi
         attachment_file_name: Tiedostonimi
         attachment_content_type: Tyyppi
         attachment_file_size: Koko
@@ -341,6 +340,7 @@ fi:
         amount: Maksettu
         created_at: Päiväys
       picture:
+        purpose: Kuvatyyppi
         caption: Kuvateksti
         url: ᴡᴡᴡ-osoite
       policy:

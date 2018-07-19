@@ -1,0 +1,40 @@
+#picture-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog.modal-lg
+    = bootstrap_form_for @picture.new_record? ? [:admin, @picture.pictureable, @picture] : [:admin, @picture], remote: true do |f|
+      .modal-content
+        .modal-header
+          %button.close{type: 'button', data: {dismiss: 'modal'}}= icon('close')
+          %h4.modal-title= t('.title')
+        #image-browser.well
+        .modal-body
+          .row
+            .col-sm-5
+              .box-postcard
+                = picture_variant_tag @picture, :postcard, class: 'img-contain img-center'
+              = f.hidden_field :image_id
+            .col-sm-7
+              .form-group
+                %label.control-label= col(Picture, :purpose)
+                .btn-group.btn-group-block{data: {toggle: 'buttons'}}
+                  - @picture.pictureable.available_purposes.each do |purpose|
+                    %label.btn.btn-default{class: @picture.purpose == purpose && 'active'}
+                      = f.radio_button_without_bootstrap :purpose, purpose
+                      = Picture.human_attribute_value(:purpose, purpose)
+              = f.text_field :caption
+              = f.text_field :url
+        .modal-footer
+          %button.btn.btn-default{type: 'button', data: {dismiss: 'modal'}}
+            = t('actions.cancel')
+          = f.primary
+
+:coffee
+  $.ajax
+    type: 'GET'
+    url: '#{admin_images_path}'
+
+  # FIXME: replace this with bona fide links that do an Ajax GET
+  # to update the image id field and the visible postcard
+  $(document).on 'click', '#image-browser > .grid > .grid-item', (e) ->
+    $('#image-browser > .grid > .grid-item').removeClass 'active'
+    $('#picture_image_id').val $(this).data('id')
+    $(this).addClass 'active'

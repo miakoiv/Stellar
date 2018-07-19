@@ -21,7 +21,7 @@ class Picture < ActiveRecord::Base
   validates :image, presence: true
 
   #---
-  before_create :assign_purpose
+  before_validation :assign_purpose
 
   #---
   def self.available_purposes
