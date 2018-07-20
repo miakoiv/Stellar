@@ -1,9 +1,8 @@
 .grid-item[picture]
-  .thumbnail
+  = link_to edit_admin_picture_path(picture), class: 'thumbnail', remote: true do
     = picture_variant_tag picture, :matchbox, class: 'img-responsive'
     .caption.truncate
       %small= picture.image.attachment_file_name
-    .thumbnail-widgets
-      .pull-right
-        = link_to icon('remove'), admin_picture_path(picture), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
-      = link_to icon('pencil'), edit_admin_picture_path(picture), remote: true, class: 'btn btn-xs btn-default'
+  .thumbnail-widgets
+    .pull-right
+      = link_to icon('remove'), admin_picture_path(picture), remote: true, method: :delete, class: 'btn btn-xs btn-danger'

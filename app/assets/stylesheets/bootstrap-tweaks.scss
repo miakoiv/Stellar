@@ -713,18 +713,6 @@ i.icon {
 .grid.sortable { padding-bottom: 40px; }
 .grid.sortable { padding-bottom: 40px; }
 .grid.sortable .grid-item { cursor: grab; }
-.grid.selectable .grid-item {
-  cursor: pointer;
-
-  &:hover .thumbnail, &:focus .thumbnail {
-    outline: 1px solid $list-group-active-border;
-  }
-  &.active .thumbnail,
-  &.active:hover .thumbnail,
-  &.active:focus .thumbnail {
-    outline: 5px solid $list-group-active-border;
-  }
-}
 
 @media (max-width: $screen-xs-max) {
   .grid.grid-columns-2 .grid-item {
@@ -753,17 +741,19 @@ i.icon {
 /*
  * Image thumbnail grid
  */
-.thumbnail-grid .grid-item .thumbnail {
+.thumbnail-grid .grid-item {
   position: relative;
-  margin-bottom: 0;
 
-  img { @extend .img-responsive; }
+  .thumbnail {
+    margin-bottom: 0;
 
+    img { @extend .img-responsive; }
+  }
   .thumbnail-widgets {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    left: 10px;
+    top: 15px;
+    right: 15px;
+    left: 15px;
   }
 }
 .thumbnail > .thumbnail-square {
@@ -771,6 +761,7 @@ i.icon {
   height: 0;
   padding-bottom: 100%;
   overflow: hidden;
+  background-color: $body-bg;
 
   img { @extend .img-contain, .img-center; }
 }

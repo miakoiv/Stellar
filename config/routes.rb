@@ -131,7 +131,9 @@ Rails.application.routes.draw do
         post :reorder, on: :collection
       end
     end
-    resources :images
+    resources :images do
+      get :select, on: :member
+    end
     resources :albums do
       resources :pictures, shallow: true
     end

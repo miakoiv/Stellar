@@ -1,0 +1,2 @@
+$('#picture_image_id').val(#{@image.id});
+$('#image-preview').html("#{j render partial: 'admin/images/preview', object: @image, as: :image}");

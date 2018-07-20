@@ -13,6 +13,11 @@ class Admin::ImagesController < ApplicationController
     respond_to :js
   end
 
+  # GET /admin/images/1/select
+  def select
+    @image = current_store.images.find(params[:id])
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params

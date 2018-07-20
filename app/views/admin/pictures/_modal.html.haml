@@ -9,8 +9,8 @@
         .modal-body
           .row
             .col-sm-5
-              .box-postcard
-                = picture_variant_tag @picture, :postcard, class: 'img-contain img-center'
+              #image-preview.box-postcard
+                = render partial: 'admin/images/preview', object: @picture.image, as: :image
               = f.hidden_field :image_id
             .col-sm-7
               .form-group
@@ -31,10 +31,3 @@
   $.ajax
     type: 'GET'
     url: '#{admin_images_path}'
-
-  # FIXME: replace this with bona fide links that do an Ajax GET
-  # to update the image id field and the visible postcard
-  $(document).on 'click', '#image-browser > .grid > .grid-item', (e) ->
-    $('#image-browser > .grid > .grid-item').removeClass 'active'
-    $('#picture_image_id').val $(this).data('id')
-    $(this).addClass 'active'
