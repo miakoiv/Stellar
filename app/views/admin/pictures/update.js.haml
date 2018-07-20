@@ -1,2 +1,3 @@
 $('#picture-modal').modal('hide');
-$('##{dom_id(@pictureable, :pictures)}').imagesLoaded(function () { $(document).trigger('pictureable:added'); });
+$('##{dom_id(@picture)}').replaceWith("#{j render partial: 'admin/pictures/edit', object: @picture, as: :picture}");
+$('##{dom_id(@pictureable, :pictures)}').imagesLoaded(function () { $(document).trigger('pictureable:changed'); });

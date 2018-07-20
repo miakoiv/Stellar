@@ -30,7 +30,7 @@
       $.post '#{reorder_admin_page_sections_path(@page)}',
         {reorder: $(this).sortable('toArray')}
 
-  $(document).on 'pictureable:added pictureable:removed pictureable:reordered', ->
+  $(document).on 'pictureable:added pictureable:changed pictureable:removed pictureable:reordered', ->
     $('#editor-panel').find('form.triggered').trigger 'submit.rails'
 
   $('#content-wrap').on 'click', ->
