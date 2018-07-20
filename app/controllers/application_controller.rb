@@ -216,7 +216,7 @@ class ApplicationController < ActionController::Base
   def track(resource, context = nil, options = {})
     action = options[:action] || action_name
     differences = options[:differences].presence || resource.previous_changes
-      .except('encrypted_password', 'created_at', 'updated_at')
+      .except('body', 'encrypted_password', 'created_at', 'updated_at')
       .reject { |_, value| value.reject(&:blank?).empty? }
 
     activity = Activity.create(
