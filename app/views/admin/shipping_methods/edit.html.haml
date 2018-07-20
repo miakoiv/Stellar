@@ -19,7 +19,6 @@
     .tab-content
       = tab_pane 'images', default: true do
         = render partial: 'admin/pictures/edit_collection', object: @shipping_method, as: :pictureable
-        = render partial: 'admin/pictures/dropzone', object: @shipping_method, as: :pictureable
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @shipping_method.to_global_id}}
 

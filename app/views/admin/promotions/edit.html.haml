@@ -23,7 +23,6 @@
         = render partial: 'admin/promoted_items/edit_table', object: @promotion, as: :promotion
       = tab_pane 'images' do
         = render partial: 'admin/pictures/edit_collection', object: @promotion, as: :pictureable
-        = render partial: 'admin/pictures/dropzone', object: @promotion, as: :pictureable
       = tab_pane 'products' do
         = render partial: 'admin/promotions/add_products', object: @promotion, as: :promotion
       = tab_pane 'categories' do

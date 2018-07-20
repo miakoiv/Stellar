@@ -24,7 +24,6 @@
 
 %hr
 = render partial: 'admin/pictures/edit_collection', object: section, as: :pictureable, locals: {grid_columns: 2}
-= render partial: 'admin/pictures/dropzone', object: section, as: :pictureable
 
 - if current_user.can_delete?(section, at: current_store)
   %hr
