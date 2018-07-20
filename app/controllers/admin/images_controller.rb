@@ -13,6 +13,21 @@ class Admin::ImagesController < ApplicationController
     respond_to :js
   end
 
+  # POST /admin/images
+  def create
+    @image = current_store.images.build(image_params)
+
+    respond_to do |format|
+      if @image.save
+        track @image
+        format.json { render json: @image, status: 200 } # for dropzone and summernote
+      else
+        format.html { render json: {error: t('.error')} }
+        format.json { render json: {error: @image.errors.full_messages.join(', ')}, status: 400 }
+      end
+    end
+  end
+
   # GET /admin/images/1/select
   def select
     @image = current_store.images.find(params[:id])

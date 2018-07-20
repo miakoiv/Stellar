@@ -1,11 +1,13 @@
 #picture-modal.modal{data: {backdrop: 'static'}}
   .modal-dialog.modal-lg
-    = bootstrap_form_for @picture.new_record? ? [:admin, @picture.pictureable, @picture] : [:admin, @picture], remote: true do |f|
-      .modal-content
-        .modal-header
-          %button.close{type: 'button', data: {dismiss: 'modal'}}= icon('close')
-          %h4.modal-title= t('.title')
-        #image-browser.well
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('.title')
+      .well
+        #image-browser
+      = render partial: 'admin/images/dropzone'
+      = bootstrap_form_for @picture.new_record? ? [:admin, @picture.pictureable, @picture] : [:admin, @picture], remote: true do |f|
         .modal-body
           .row
             .col-sm-5

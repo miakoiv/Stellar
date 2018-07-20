@@ -768,15 +768,29 @@ i.icon {
 
 
 /*
- * Image browser component for the picture editing modal
+ * Picture modal dialog and its components
  */
+#picture-modal .well { margin-bottom: 0; }
 #image-browser {
-  margin-bottom: 0;
-
   .pagination {
-    margin-top: 20px;
-    margin-bottom: 0;
+    position: absolute;
+    top: 0;
+    right: 60px;
+    margin: 0.75em 0;
   }
+}
+.dropzone {
+  border: 4px dashed rgba($brand-primary, 0.6);
+  background: transparent;
+  color: inherit;
+}
+#picture-modal .dropzone {
+  min-height: 0;
+  border: 0;
+  background-color: lighten($brand-primary, 30%);
+
+  .dz-message { margin: 0.5em 0; }
+  &.dz-drag-hover { background-color: $brand-primary; }
 }
 
 
@@ -1127,16 +1141,6 @@ fieldset > legend {
 }
 .CodeMirror-focused {
   @extend .form-control:focus;
-}
-
-
-/*
- * Dropzone.js styles
- */
-.dropzone {
-  border: 4px dashed rgba($brand-primary, 0.6);
-  background: transparent;
-  color: inherit;
 }
 
 

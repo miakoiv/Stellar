@@ -7,4 +7,4 @@
         .thumbnail-square
           = image_variant_tag image, :matchbox, class: 'img-responsive'
 
-= paginate images, remote: true
+= paginate images, window: 2, remote: true
