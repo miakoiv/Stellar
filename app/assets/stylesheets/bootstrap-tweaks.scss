@@ -579,16 +579,16 @@ i.icon {
 /*
  * Image boxes of various sizes, with image centered inside
  */
- .box-postcard {
-   position: relative;
-   width: 300px;
-   height: 300px;
+.box-postcard {
+  position: relative;
+  width: 300px;
+  height: 300px;
 
-   img {
-     max-width: 300px;
-     max-height: 300px;
-   }
- }
+  img {
+   max-width: 300px;
+   max-height: 300px;
+  }
+}
 .box-matchbox {
   position: relative;
   width: 200px;
@@ -619,7 +619,7 @@ i.icon {
     max-height: 25px;
   }
 }
-.box-matchbox img, .box-thumbnail img, .box-icon img {
+.box-postcard img, .box-matchbox img, .box-thumbnail img, .box-icon img {
   position: absolute;
   width: auto;
   height: auto;
@@ -764,6 +764,19 @@ i.icon {
   background-color: $body-bg;
 
   img { @extend .img-contain, .img-center; }
+}
+
+
+/*
+ * Image browser component for the picture editing modal
+ */
+#image-browser {
+  margin-bottom: 0;
+
+  .pagination {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
 }
 
 

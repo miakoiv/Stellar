@@ -2,7 +2,7 @@
 
 class Image < ActiveRecord::Base
 
-  paginates_per 18
+  paginates_per 12
 
   include Trackable
 
