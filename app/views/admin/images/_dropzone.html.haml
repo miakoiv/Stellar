@@ -10,6 +10,7 @@
     paramName: 'image[attachment]'
     init: ->
       @on 'success', (file, image) ->
-        $.get '#{admin_images_path}'
+        $.get '/admin/images'
+        $.get '/admin/images/' + image.id + '/select'
       @on 'complete', (file) ->
         this.removeFile file
