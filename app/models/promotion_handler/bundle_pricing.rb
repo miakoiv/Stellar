@@ -6,7 +6,7 @@ class PromotionHandler
     monetize :items_total_cents, allow_nil: true
 
     validates :required_items,
-      numericality: {only_integer: true, greater_than: 1},
+      numericality: {only_integer: true, greater_than: 0},
       on: :update
     validates :items_total_cents,
       numericality: {greater_than: 0},
