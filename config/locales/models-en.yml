@@ -473,6 +473,7 @@ en:
         map_marker: Show location marker
         map_zoom: Map zoom
         map_theme: Theme definition
+        shadow: Shadow
         facebook_page: Facebook page name
         facebook_token: Facebook token
         url: Content URL

@@ -155,6 +155,11 @@ en:
           'inset-none': 0
           'inset-half': ½
           'inset-full': 1
+        shadow:
+          'shadow-none': none
+          'shadow-light': light
+          'shadow-medium': medium
+          'shadow-heavy': heavy
         velocity:
           'velocity-slowest': <i class="fa fa-bicycle"></i>
           'velocity-slow': <i class="fa fa-car"></i>

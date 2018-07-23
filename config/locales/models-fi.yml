@@ -475,6 +475,7 @@ fi:
         map_theme: Teemamääritykset
         facebook_page: Facebook-sivun nimi
         facebook_token: Facebook-pääsykoodi
+        shadow: Varjo
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         thumbnails: Käytä diakuvalinkkejä

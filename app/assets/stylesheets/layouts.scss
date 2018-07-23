@@ -246,6 +246,11 @@
   .segment-content-wrap.inset-full { padding: $grid-gutter-width/2; }
 }
 
+/* Shadows */
+.segment-content-wrap.shadow-light { @include box-shadow(0 1px 1px rgba(0,0,0,0.1)); }
+.segment-content-wrap.shadow-medium { @include box-shadow(0 2px 2px rgba(0,0,0,0.25)); }
+.segment-content-wrap.shadow-heavy { @include box-shadow(0 3px 3px rgba(0,0,0,0.5)); }
+
 .segment-content .page-header { margin-top: 0; }
 .segment-content .placeholder {
   display: flex;

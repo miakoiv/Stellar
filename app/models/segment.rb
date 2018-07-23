@@ -22,6 +22,7 @@ class Segment < ActiveRecord::Base
     :facebook_page,   # page id for facebook feeds
     :facebook_token,  # access token for the facebook feed
     :inverse,         # flag to invert colors in navigation menu segments
+    :shadow,          # drop shadow selection
     :jumbotron,       # flag to apply the jumbotron class to segment contents
     :animation,       # animation applied to the segment via AniView
     :velocity,        # animation velocity, one of slowest, slow, normal, fast
@@ -52,6 +53,8 @@ class Segment < ActiveRecord::Base
   IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
 
   INSETS = %w{inset-none inset-half inset-full}.freeze
+
+  SHADOWS = %w{shadow-none shadow-light shadow-medium shadow-heavy}.freeze
 
   ANIMATIONS = %w{
     bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp
@@ -104,6 +107,7 @@ class Segment < ActiveRecord::Base
       template: 'text',
       image_sizing: 'sizing-original',
       thumbnails: true,
+      shadow: 'shadow-none',
       velocity: 'velocity-slow'
     }
   end
@@ -130,6 +134,10 @@ class Segment < ActiveRecord::Base
 
   def self.inset_options
     INSETS.map { |i| [Segment.human_attribute_value(:inset, i), i] }
+  end
+
+  def self.shadow_options
+    SHADOWS.map { |s| [Segment.human_attribute_value(:shadow, s), s] }
   end
 
   def self.animation_options

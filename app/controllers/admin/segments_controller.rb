@@ -112,7 +112,7 @@ class Admin::SegmentsController < ApplicationController
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
         :facebook_page, :facebook_token,
-        :inverse, :jumbotron,
+        :inverse, :jumbotron, :shadow,
         :animation, :velocity
       )
     end
