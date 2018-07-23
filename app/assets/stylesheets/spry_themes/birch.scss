@@ -130,6 +130,7 @@ $brand-primary: #013183;
 #products-wrap {
   position: relative;
 
+  .categories { display: none; }
   .products {
     @extend .container;
     position: relative;
@@ -236,6 +237,7 @@ $brand-primary: #013183;
 
         .btn { display: inline-block; }
       }
+      .categories { display: none; }
       .product-title {
         margin-top: 0;
         margin-bottom: 20px;

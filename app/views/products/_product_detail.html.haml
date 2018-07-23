@@ -2,6 +2,8 @@
   .product-header
     .actions
       = link_to icon('times'), '#back', class: 'btn btn-default'
+    .categories
+      = render partial: 'products/categories', object: product, as: :product
     %h1.product-title
       = product.title
       %span.small= product.subtitle

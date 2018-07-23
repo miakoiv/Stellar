@@ -1,0 +1,4 @@
+%ul.breadcrumb
+  - product.categories.live.order(:lft).each do |category|
+    %li{class: category == @category && 'active'}
+      = link_to category, show_category_path(category)

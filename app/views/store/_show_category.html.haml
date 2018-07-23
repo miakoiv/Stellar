@@ -1,4 +1,7 @@
 #products-wrap
+  .categories
+    %ol.breadcrumb
+      = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
   .products
     .page-header.visible-print
       %h1= @category.to_s

@@ -156,6 +156,8 @@ $footer-bg: #d4d4d4;
 #products-wrap {
   position: relative;
 
+  .categories { display: none; }
+
   .products {
     @extend .container;
     padding-top: 20px;
@@ -229,6 +231,7 @@ $footer-bg: #d4d4d4;
 
         .btn { display: inline-block; }
       }
+      .categories { display: none; }
       .product-title {
         margin-top: 0;
         margin-bottom: 20px;

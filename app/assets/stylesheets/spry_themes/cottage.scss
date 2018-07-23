@@ -80,6 +80,8 @@
 }
 
 #products-wrap {
+  .categories { display: none; }
+
   .products {
     @extend .container;
     padding-top: 20px;
@@ -137,6 +139,7 @@
 
         .btn { display: inline-block; }
       }
+      .categories { display: none; }
       .product-title {
         margin-top: 0;
         margin-bottom: 20px;

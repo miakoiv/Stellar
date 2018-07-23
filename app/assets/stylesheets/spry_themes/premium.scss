@@ -182,7 +182,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 
 /*
- * Product filtering
+ * Product filtering and breadcrumbs
  */
 .filter-bar { border-radius: $navbar-height/2; }
 .filter-bar .navbar-form {
@@ -192,6 +192,19 @@ $body-tone-bg: darken($body-bg, 4%);
 .filter-bar .view-selector {
   margin-right: 9px;
   .btn { @extend .btn-round; }
+}
+#products-wrap > .categories {
+  @extend .container;
+  min-height: 53px;
+  padding-top: 20px;
+
+  .breadcrumb {
+    @extend .small;
+    margin-bottom: 0;
+    background-color: transparent;
+
+    .active { @extend strong; }
+  }
 }
 
 
@@ -585,8 +598,10 @@ $body-tone-bg: darken($body-bg, 4%);
   height: 240px;
 
   .actions {
-    @extend .pull-right;
-    margin-right: $grid-gutter-width/2;
+    position: absolute;
+    top: 0;
+    right: $grid-gutter-width/2;
+    z-index: 1;
 
     .btn {
       @extend .btn-sm, .btn-round;
@@ -598,6 +613,14 @@ $body-tone-bg: darken($body-bg, 4%);
         color: $body-bg;
       }
     }
+    .fa { @extend .fa-lg; }
+  }
+  .categories {
+    @extend .col-xs-12, .col-md-4, .col-md-offset-8;
+    @extend .small;
+    padding-right: $grid-gutter-width*2;
+
+    .active { @extend strong; }
   }
 }
 
