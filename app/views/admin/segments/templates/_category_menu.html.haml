@@ -1,0 +1,17 @@
+%fieldset
+  = f.hidden_field :resource_type, value: 'Category'
+  = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: blank}, {class: 'selectize'}
+  .form-group
+    = f.label col(Segment, :inverse)
+    .btn-group{data: {toggle: 'buttons'}}
+      %label.btn.btn-default{class: segment.inverse? || 'active'}
+        = f.radio_button_without_bootstrap :inverse, 0
+        = icon('sticky-note-o')
+      %label.btn.btn-default{class: segment.inverse? && 'active'}
+        = f.radio_button_without_bootstrap :inverse, 1
+        = icon('sticky-note')
+  = f.text_field :header
+
+:coffee
+  $('#segment_resource_id').selectize
+    allowEmptyOption: true

@@ -1,0 +1,12 @@
+- resource = category_menu.resource
+
+.segment-content.category_menu
+  - if resource.present? && resource.is_a?(Category)
+    %nav.navmenu{class: category_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
+      - if category_menu.header.present?
+        .navmenu-title= category_menu.header
+      %ul.nav.navmenu-nav
+        - resource.children.live.each do |category|
+          %li= link_to category, show_category_path(category)
+  - else
+    = render partial: 'segments/placeholders/category_menu'

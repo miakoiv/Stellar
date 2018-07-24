@@ -142,6 +142,7 @@ en:
           department_feature: department feature
           facebook_feed: Facebook posts
           navigation_menu: navigation menu
+          category_menu: category menu
           raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top

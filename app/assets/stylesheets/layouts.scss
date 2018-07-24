@@ -436,6 +436,11 @@
   .navmenu { width: 100%; }
 }
 
+.segment-content.category_menu {
+  .navmenu { width: 100%; }
+}
+
+
 .segment-content.facebook_feed {
   .post { @extend .panel, .panel-default; }
   .post .header { @extend .panel-heading; }

@@ -84,6 +84,7 @@ class Segment < ActiveRecord::Base
     department_feature: 24,
     facebook_feed: 30,
     navigation_menu: 50,
+    category_menu: 51,
     raw: 99,
   }
 

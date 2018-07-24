@@ -142,6 +142,7 @@ fi:
           department_feature: osastomainos
           facebook_feed: Facebook-päivitykset
           navigation_menu: sivuvalikko
+          category_menu: tuoteryhmävalikko
           raw: ʜᴛᴍʟ-osio
         alignment:
           'align-top': ylös
