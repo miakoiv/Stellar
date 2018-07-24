@@ -31,8 +31,22 @@
        y="-4"
        x="4"
        height="120"
-       width="192"
-       id="rect4293"
+       width="48"
+       id="rect4599"
+       style="opacity:1;fill:#3337ab;fill-opacity:0.3516949224;fill-rule:nonzero;stroke:#3337ab;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="-4"
+       x="52"
+       height="120"
+       width="48"
+       id="rect4601"
+       style="opacity:1;fill:#3337ab;fill-opacity:0.3516949224;fill-rule:nonzero;stroke:#3337ab;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="-4"
+       x="100"
+       height="120"
+       width="96"
+       id="rect4603"
        style="opacity:1;fill:#3337ab;fill-opacity:0.3516949224;fill-rule:nonzero;stroke:#3337ab;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

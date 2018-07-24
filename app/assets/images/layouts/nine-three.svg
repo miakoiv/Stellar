@@ -31,8 +31,15 @@
        y="-4"
        x="4"
        height="120"
-       width="192"
-       id="rect4293"
+       width="144"
+       id="rect4624"
+       style="opacity:1;fill:#3337ab;fill-opacity:0.3516949224;fill-rule:nonzero;stroke:#3337ab;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <rect
+       y="-4"
+       x="148"
+       height="120"
+       width="48"
+       id="rect4626"
        style="opacity:1;fill:#3337ab;fill-opacity:0.3516949224;fill-rule:nonzero;stroke:#3337ab;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

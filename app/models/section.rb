@@ -15,15 +15,24 @@ class Section < ActiveRecord::Base
   include Reorderable
 
   #---
-  # Presets as layout, column count tuples.
+  # Presets as layout, name, column count tuples.
   PRESETS = [
-    ['twelve', 1],
-    ['six-six', 2],
-    ['eight-four', 2],
-    ['four-eight', 2],
-    ['four-four-four', 3],
-    ['three-six-three', 3],
-    ['three-three-three-three', 4],
+    [
+      ['twelve', '12', 1],
+      ['eight-four', '8+4', 2],
+      ['four-eight', '4+8', 2],
+      ['four-four-four', '4+4+4', 3],
+      ['two-two-two-two-two-two', '2+2+2+2+2+2', 6],
+    ],
+    [
+      ['six-six', '6+6', 2],
+      ['nine-three', '9+3', 2],
+      ['three-nine', '3+9', 2],
+      ['six-three-three', '6+3+3', 3],
+      ['three-six-three', '3+6+3', 3],
+      ['three-three-six', '3+3+6', 3],
+      ['three-three-three-three', '3+3+3+3', 4],
+    ]
   ].freeze
 
   # Available content widths defined in layouts.css.
@@ -63,7 +72,7 @@ class Section < ActiveRecord::Base
   end
 
   def layout_options
-    PRESETS.map { |l| l.first }
+    PRESETS.flatten(1).map { |l| [l[1], l[0]] }
   end
 
   def picture_options
