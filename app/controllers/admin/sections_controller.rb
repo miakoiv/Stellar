@@ -79,7 +79,7 @@ class Admin::SectionsController < ApplicationController
       columns = params[:columns].to_i
       columns.times do |i|
         column = @section.columns.create(priority: i)
-        column.segments.create(template: 'text')
+        column.segments.create(Segment.default_settings)
       end
     end
 
