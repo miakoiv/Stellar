@@ -138,6 +138,7 @@ namespace :products do
     else
       product.pictures.technical.destroy_all
     end
+    product.touch
   end
 
   private
