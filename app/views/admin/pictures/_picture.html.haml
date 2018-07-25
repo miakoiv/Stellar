@@ -1,9 +1,10 @@
 .grid-item
   .thumbnail
     = picture_variant_tag picture, :matchbox, class: 'img-responsive'
-    .caption.truncate
-      %small= picture.image.attachment_file_name
-  .thumbnail-widgets
+  .grid-widgets
     .pull-right
       %button.btn.btn-default.btn-xs.clipboard{data: {'clipboard-text': picture.image.attachment.url(:original, timestamp: false)}}= icon('link')
     .label.label-primary= picture.human_attribute_value(:purpose)
+  .badge
+    .truncate{title: picture.image.attachment_file_name}
+      = picture.image.attachment_file_name

@@ -6,6 +6,7 @@
 #
 class Picture < ActiveRecord::Base
 
+  include Authority::Abilities
   include Trackable
   include Reorderable
 

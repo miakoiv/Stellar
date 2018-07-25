@@ -2,9 +2,16 @@
 
 .grid.thumbnail-grid{class: "grid-columns-#{grid_columns}", style: 'opacity: 0;'}
   - images.each do |image|
-    .grid-item{data: {id: image.id}}
+    .grid-item[image]{data: {id: image.id}}
       = link_to select_admin_image_path(image), class: 'thumbnail', remote: true do
         .thumbnail-square
           = image_variant_tag image, :matchbox, class: 'img-responsive'
+      .grid-widgets
+        .pull-right
+          - if current_user.can_delete?(image, at: current_store)
+            = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
+      .badge
+        .truncate{title: image.attachment_file_name}
+          = image.attachment_file_name
 
 = paginate images, window: 2, remote: true

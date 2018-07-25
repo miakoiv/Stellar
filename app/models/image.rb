@@ -4,6 +4,7 @@ class Image < ActiveRecord::Base
 
   paginates_per 12
 
+  include Authority::Abilities
   include Trackable
 
   #---

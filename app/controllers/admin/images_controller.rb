@@ -28,6 +28,19 @@ class Admin::ImagesController < ApplicationController
     end
   end
 
+  # DELETE /admin/images/1
+  def destroy
+    @image = current_store.images.find(params[:id])
+    authorize_action_for @image, at: current_store
+
+    respond_to do |format|
+      if @image.destroy
+        track @image
+        format.js
+      end
+    end
+  end
+
   # GET /admin/images/1/select
   def select
     @image = current_store.images.find(params[:id])

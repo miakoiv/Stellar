@@ -8,7 +8,7 @@ class ImageSearch < Searchlight::Search
 
   #---
   def base_query
-    Image.all
+    Image.includes(:pictures)
   end
 
   def search_store
