@@ -79,6 +79,7 @@ namespace :products do
         category = find_or_create_category(store, data)
         product = find_or_create_product(store, category, tax_category, data)
         assign_properties(product, data, property_map)
+        assign_image(store, product, data)
         puts "[%s%4d] %-16s" % [product.new_record? ? '+' : '–', line+1, product.code]
       end
     end
@@ -123,6 +124,20 @@ namespace :products do
         )
       }
     product.product_properties = properties
+  end
+
+  # Assign product (technical) image by first creating the picture to
+  # contain it if necessary, then finding the correct image by file name.
+  def assign_image(store, product, data)
+    filename = data['Tuotekuvan kuvatiedosto']
+    image = store.images.find_by(attachment_file_name: filename)
+    if image.present?
+      picture = product.pictures.technical.first_or_initialize
+      picture.image = image
+      picture.save!
+    else
+      product.pictures.technical.destroy_all
+    end
   end
 
   private
