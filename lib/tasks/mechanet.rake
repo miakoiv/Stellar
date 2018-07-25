@@ -48,6 +48,16 @@ namespace :properties do
   end
 end
 
+namespace :images do
+  desc "Import Mechanet image files"
+  task :mechanet, [:path, :file] => :environment do |task, args|
+    store = Store.find_by name: 'Mechanet'
+    image = store.images.find_or_initialize_by(attachment_file_name: args.file)
+    image.attachment = File.new("#{args.path}/#{args.file}")
+    image.save!
+  end
+end
+
 namespace :products do
   desc "Import Mechanet product data"
   task :mechanet, [:file] => :environment do |task, args|
