@@ -6,3 +6,4 @@
   .thumbnail-widgets
     .pull-right
       = link_to icon('remove'), admin_picture_path(picture), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
+    .label.label-primary= picture.human_attribute_value(:purpose)
