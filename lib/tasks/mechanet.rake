@@ -137,7 +137,7 @@ namespace :products do
       picture = collection.first_or_initialize
       picture.image = image
       picture.save!
-      puts "[%.4s] %s" % filename
+      puts "[%.4s] %s" % [purpose, filename]
     else
       collection.destroy_all
     end
