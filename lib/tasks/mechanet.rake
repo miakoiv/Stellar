@@ -2,6 +2,8 @@
 
 require 'creek'
 
+DROPBOX_PATH = '/opt/dropbox/Dropbox/Mechanet_verkkokauppa'
+
 namespace :properties do
   desc "Import Mechanet property definitions"
   task :mechanet, [:file] => :environment do |task, args|
@@ -80,6 +82,7 @@ namespace :products do
         product = find_or_create_product(store, category, tax_category, data)
         puts "[%4d] %-16s" % [line+1, product.code]
         assign_properties(product, data, property_map)
+        assign_documentation(product, "#{DROPBOX_PATH}/Mechanet_CAD_kuvat", data['CAD kuvan kuvatiedosto'])
         assign_image(store, product, 0, data['Kaaviokuvan kuvatiedosto'])
         assign_image(store, product, 1, data['Tuotekuvan kuvatiedosto'])
         product.touch
@@ -126,6 +129,17 @@ namespace :products do
         )
       }
     product.product_properties = properties
+  end
+
+  # Assigns product documentation from given file.
+  def assign_documentation(product, pathname, filename)
+    collection = product.documents
+    collection.destroy_all
+    path = "#{pathname}/#{filename}"
+    if !filename.blank? && File.exist?(path)
+      collection.create(priority: 0, attachment: File.new(path))
+      puts "[doc0] %s" % [filename]
+    end
   end
 
   # Assign technical image with given priority by first creating the picture
