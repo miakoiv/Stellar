@@ -78,9 +78,11 @@ namespace :products do
         next unless data['Tuotenimi'].present?
         category = find_or_create_category(store, data)
         product = find_or_create_product(store, category, tax_category, data)
+        puts "[%4d] %-16s" % [line+1, product.code]
         assign_properties(product, data, property_map)
-        assign_image(store, product, data)
-        puts "[%s%4d] %-16s" % [product.new_record? ? '+' : '–', line+1, product.code]
+        assign_image(store, product, :technical, data['Kaaviokuvan kuvatiedosto'])
+        assign_image(store, product, :presentational, data['Tuotekuvan kuvatiedosto'])
+        product.touch
       end
     end
   end
@@ -126,19 +128,19 @@ namespace :products do
     product.product_properties = properties
   end
 
-  # Assign product (technical) image by first creating the picture to
+  # Assign presentational or technical image by first creating the picture to
   # contain it if necessary, then finding the correct image by file name.
-  def assign_image(store, product, data)
-    filename = data['Tuotekuvan kuvatiedosto']
+  def assign_image(store, product, purpose, filename)
+    collection = product.pictures.send(purpose)
     image = store.images.find_by(attachment_file_name: filename)
     if image.present?
-      picture = product.pictures.technical.first_or_initialize
+      picture = collection.first_or_initialize
       picture.image = image
       picture.save!
+      puts "[%.4s] %s" % filename
     else
-      product.pictures.technical.destroy_all
+      collection.destroy_all
     end
-    product.touch
   end
 
   private
