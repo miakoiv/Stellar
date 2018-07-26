@@ -137,7 +137,7 @@ namespace :products do
     collection.destroy_all
     path = "#{pathname}/#{filename}"
     if !filename.blank? && File.exist?(path)
-      collection.create(priority: 0, attachment: File.new(path))
+      collection.create!(priority: 0, attachment: File.new(path))
       puts "[doc0] %s" % [filename]
     end
   end
