@@ -20,6 +20,7 @@ class Document < ActiveRecord::Base
         %r{\Aapplication/(pdf|xml|msword|vnd\.ms-excel|vnd\.ms-powerpoint)},
         %r{\Aapplication/vnd\.openxmlformats},
         %r{\Aapplication/vnd\.oasis\.opendocument\.(text|spreadsheet|presentation)},
+        %r{\Aapplication/octet-stream},
         %r{\Aimage/vnd\.dwg},
       ]
     }
