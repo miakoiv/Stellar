@@ -80,8 +80,8 @@ namespace :products do
         product = find_or_create_product(store, category, tax_category, data)
         puts "[%4d] %-16s" % [line+1, product.code]
         assign_properties(product, data, property_map)
-        assign_image(store, product, :technical, data['Kaaviokuvan kuvatiedosto'])
-        assign_image(store, product, :presentational, data['Tuotekuvan kuvatiedosto'])
+        assign_image(store, product, 0, data['Kaaviokuvan kuvatiedosto'])
+        assign_image(store, product, 1, data['Tuotekuvan kuvatiedosto'])
         product.touch
       end
     end
@@ -128,16 +128,16 @@ namespace :products do
     product.product_properties = properties
   end
 
-  # Assign presentational or technical image by first creating the picture to
-  # contain it if necessary, then finding the correct image by file name.
-  def assign_image(store, product, purpose, filename)
-    collection = product.pictures.send(purpose)
+  # Assign technical image with given priority by first creating the picture
+  # to contain it if necessary, then finding the correct image by file name.
+  def assign_image(store, product, priority, filename)
+    collection = product.pictures.technical
     image = store.images.find_by(attachment_file_name: filename)
     if image.present?
-      picture = collection.first_or_initialize
+      picture = collection.find_or_initialize_by(priority: priority)
       picture.image = image
       picture.save!
-      puts "[%.4s] %s" % [purpose, filename]
+      puts "[pic%1d] %s" % [priority, filename]
     else
       collection.destroy_all
     end
