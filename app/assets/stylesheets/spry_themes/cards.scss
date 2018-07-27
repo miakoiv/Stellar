@@ -17,11 +17,13 @@ $footer-bg: #d4d4d4;
 .navbar-nav > li > .mega-dropdown-menu {
   background-color: $navbar-default-bg;
 }
-.mega-dropdown-menu .row {
+.mega-dropdown-menu ul.row {
   display: flex;
   flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
 }
-.mega-dropdown-menu .row > li {
+.mega-dropdown-menu ul.row > li {
   @extend .col-sm-3, .col-md-2;
   margin-bottom: 20px;
 }
@@ -52,7 +54,7 @@ $footer-bg: #d4d4d4;
 }
 .mega-dropdown-menu li ul li a { text-decoration: none; }
 
-.mega-dropdown-menu .row > li > a > .page-image {
+.mega-dropdown-menu ul.row > li > a > .page-image {
   @extend .thumbnail;
   position: relative;
   height: 0;
@@ -61,7 +63,7 @@ $footer-bg: #d4d4d4;
 
   img { @extend .img-contain, .img-center; }
 }
-.mega-dropdown-menu .row > li > a > .page-title {
+.mega-dropdown-menu ul.row > li > a > .page-title {
   margin-top: 0.333em;
   margin-bottom: 0.333em;
 }

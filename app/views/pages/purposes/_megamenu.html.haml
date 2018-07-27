@@ -9,11 +9,13 @@
           = render partial: child.to_partial_path, object: child, locals: {navmenu: true}
   - else
     %li.dropdown.mega-dropdown
-      = dropdown_toggle do
+      %a{data: {toggle: 'dropdown', target: "##{dom_id(megamenu, :menu)}"}, role: 'button'}
         = megamenu
         %span.caret
-      %ul.dropdown-menu.mega-dropdown-menu{role: 'menu'}
+
+    - content_for :mega_dropdown_content do
+      .dropdown-menu.mega-dropdown-menu{id: dom_id(megamenu, :menu), role: 'menu'}
         .container
-          .row
+          %ul.row
             - megamenu.children.live.each do |child|
               = render partial: child.to_partial_path, object: child, locals: {navmenu: false}

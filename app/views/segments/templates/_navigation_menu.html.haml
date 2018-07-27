@@ -2,7 +2,7 @@
 
 .segment-content.navigation_menu
   - if resource.present? && resource.is_a?(Page)
-    %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default', role: 'navigation'}
+    %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default'}
       - if navigation_menu.header.present?
         .navmenu-title= navigation_menu.header
       %ul.nav.navmenu-nav

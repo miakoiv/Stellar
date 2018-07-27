@@ -1,0 +1,5 @@
+.container
+  %ul.nav.navbar-nav.responsive
+    = render partial: @header.children.live, locals: {navmenu: false}
+  %ul.aux-nav.nav.navbar-nav.navbar-right
+    = yield :auxiliary_nav

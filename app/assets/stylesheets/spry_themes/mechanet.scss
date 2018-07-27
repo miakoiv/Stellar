@@ -1,3 +1,4 @@
+$main-nav-height: 80px;
 $border-radius-base:        0;
 $border-radius-large:       0;
 $border-radius-small:       0;
@@ -18,33 +19,25 @@ $body-tone-bg: darken($body-bg, 4%);
 #main-nav {
   @include box-shadow(0 0 24px 0 rgba(0,0,0,0.5));
 }
-#main-nav .container {
+#main-nav > .container {
   padding-top: 15px;
   padding-bottom: 15px;
-}
-#main-nav .navbar-brand {
-  padding-top: 0;
-  padding-bottom: 0;
 
-  img { max-height: 50px; }
+  .navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    img { max-height: 50px; }
+  }
 }
 
-#page-nav { width: 100% !important; }
-#page-nav .navbar-nav > li > a {
+#secondary-nav .navbar-nav > li > a {
   font-weight: 500;
   text-transform: uppercase;
 }
 
 #side-nav { opacity: 0; }
 #side-nav.open { opacity: 1; }
-
-/* Push content below the navbar */
-#content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
-.page-wrapper {
-  margin-top: -132px;
-  padding-top: 132px;
-}
-
 
 /*
  * Less prominent mobile navbar
@@ -68,6 +61,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
     img { max-height: 30px; }
   }
+  #navbar-lookup { top: 60px; }
 }
 
 
@@ -76,9 +70,6 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 #navbar-lookup .navbar-form input,
 #page-nav .navbar-form input { border-radius: $input-height-base/2; }
-@media (max-width: $screen-xs-max) {
-  #navbar-lookup { top: 60px; }
-}
 
 
 /*
@@ -105,9 +96,11 @@ $body-tone-bg: darken($body-bg, 4%);
 .navbar-nav > li > .mega-dropdown-menu {
   background-color: #fff;
 }
-.mega-dropdown-menu .row {
+.mega-dropdown-menu ul.row {
   display: flex;
   flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
 
   > li {
     @extend .col-xs-4, .col-sm-3, .col-md-2;
@@ -155,7 +148,7 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 /* Only top level items get images and styled titles */
-.mega-dropdown-menu .row > li > a > .page-image {
+.mega-dropdown-menu ul.row > li > a > .page-image {
   position: relative;
   height: 0;
   padding-bottom: 100%;
@@ -163,7 +156,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
   img { @extend .img-contain, .img-center; }
 }
-.mega-dropdown-menu .row > li > a > .page-title {
+.mega-dropdown-menu ul.row > li > a > .page-title {
   display: block;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -174,7 +167,7 @@ $body-tone-bg: darken($body-bg, 4%);
 .mega-dropdown-menu li ul li a .page-image { display: none; }
 
 @media (min-width: $screen-sm-min) {
-  .mega-dropdown-menu-compact .row {
+  .mega-dropdown-menu-compact ul.row {
     flex-wrap: nowrap;
   }
 }

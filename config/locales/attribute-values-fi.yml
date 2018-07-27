@@ -46,6 +46,7 @@ fi:
           dropdown: Pudotusvalikko
           megamenu: Megamenu
           continuous: Yhdistetyt sivut
+          contentmenu: Sivumuotoinen menu
           template: Sivupohja
           portal: Verkostosivu
           proxy: Jäsenkaupan sivu

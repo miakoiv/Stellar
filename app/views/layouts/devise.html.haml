@@ -12,7 +12,7 @@
     = csrf_meta_tags
     = render partial: 'favicon'
   %body{class: current_theme || 'premium'}
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+    %nav#main-nav.navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
           - if current_store.present?

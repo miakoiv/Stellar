@@ -3,15 +3,14 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
-  %body.admin
-    %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left{role: 'navigation'}
+  %body.admin{class: content_for?(:secondary_nav) && 'dual-nav'}
+    %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left
       .inner-wrap= render partial: 'admin/shared/side_nav'
-    %nav#main-nav.navbar.navbar-inverse.navbar-fixed-top{role: 'navigation'}
+    %nav#main-nav.navbar.navbar-inverse.navbar-fixed-top
       = render partial: 'admin/shared/main_nav'
-    #content-wrap
       - if content_for?(:secondary_nav)
-        %nav#page-nav.navbar.navbar-default{role: 'navigation'}
-          .container
-            = yield :secondary_nav
+        %nav#secondary-nav.navbar.navbar-default
+          = yield :secondary_nav
+    #content-wrap
       .container
         = yield

@@ -46,6 +46,7 @@ en:
           dropdown: Dropdown menu
           megamenu: Mega menu
           continuous: Combined pages
+          contentmenu: Page as menu
           template: Template
           portal: Portal page
           proxy: Member store page

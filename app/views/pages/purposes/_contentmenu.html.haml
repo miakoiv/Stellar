@@ -1,0 +1,9 @@
+- unless navmenu
+  %li.dropdown.mega-dropdown
+    %a{data: {toggle: 'dropdown', target: "##{dom_id(contentmenu, :menu)}"}, role: 'button'}
+      = contentmenu
+      %span.caret
+
+  - content_for :mega_dropdown_content do
+    .dropdown-menu.mega-dropdown-menu{id: dom_id(contentmenu, :menu), role: 'menu'}
+      = render partial: 'pages/layout', object: contentmenu, as: :page

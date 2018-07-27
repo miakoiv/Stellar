@@ -4,20 +4,17 @@
     = render partial: 'shared/metadata'
     = render partial: 'shared/cookieconsent'
     = render partial: 'favicon'
-  %body{class: [current_theme, current_store.wiselinks? && 'wiselinks']}
-    %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left{role: 'navigation'}
+  %body{class: [current_theme, current_store.detach_menu? && 'dual-nav']}
+    %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
       .inner-wrap= render partial: 'shared/side_nav'
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+    %nav#main-nav.navbar.navbar-default.navbar-fixed-top
       = render partial: 'shared/main_nav'
-    #content-wrap
       - if current_store.detach_menu? && @header.children_count > 0
-        %nav#page-nav.navbar.navbar-inverse.hidden-xs{role: 'navigation'}
-          .container
-            %ul.nav.navbar-nav.responsive
-              = render partial: @header.children.live, locals: {navmenu: false}
-            %ul.aux-nav.nav.navbar-nav.navbar-right
-              = yield :auxiliary_nav
-
+        %nav#secondary-nav.navbar.navbar-inverse.hidden-xs
+          = render partial: 'shared/secondary_nav'
+      #mega-dropdown-wrap
+        = yield :mega_dropdown_content
+    #content-wrap
       = yield
 
     = render partial: 'shared/footer'

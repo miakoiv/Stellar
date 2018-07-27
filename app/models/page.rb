@@ -33,6 +33,7 @@ class Page < ActiveRecord::Base
     dropdown: 20,       # dropdown container for other pages
     megamenu: 21,       # megamenu container for other pages
     continuous: 22,     # single page container for other pages
+    contentmenu: 23,    # megamenu with its own layout and content
     template: 30,       # printed page template
     portal: 40,         # page with content sections meant for portals
     proxy: 41,          # proxy to a portal page for portal navigation
@@ -52,6 +53,7 @@ class Page < ActiveRecord::Base
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
     'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
     'continuous' => {icon: 'scissors', appearance: 'primary'},
+    'contentmenu' => {icon: 'address-card-o', appearance: 'primary'},
     'template' => {icon: 'file-o', appearance: 'warning'},
     'portal' => {icon: 'globe', appearance: 'success'},
     'proxy' => {icon: 'share', appearance: 'success'},
@@ -105,7 +107,7 @@ class Page < ActiveRecord::Base
   end
 
   def can_have_content?
-    primary? || template? || portal?
+    primary? || template? || contentmenu? || portal?
   end
 
   def needs_resource?

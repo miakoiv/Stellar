@@ -1,10 +1,10 @@
 %li#layout-menu.dropdown.mega-dropdown
   = dropdown_toggle do
     = icon('plus', t('.new_section'))
-  %ul.dropdown-menu.mega-dropdown-menu.mega-dropdown-menu-compact
+  .dropdown-menu.mega-dropdown-menu.mega-dropdown-menu-compact
     .container
       - Section.preset_menu_options.each do |row|
-        .row
+        %ul.row
           - row.each do |layout, name, columns|
             %li
               = link_to admin_page_sections_path(@page, params: {section: {layout: layout}, columns: columns}), remote: true, method: :post do
