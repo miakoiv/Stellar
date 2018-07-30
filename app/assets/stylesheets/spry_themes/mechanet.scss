@@ -336,6 +336,8 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 .product-grid { @extend .row; }
 .product-grid > ul {
+  display: flex;
+  flex-flow: row wrap;
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
