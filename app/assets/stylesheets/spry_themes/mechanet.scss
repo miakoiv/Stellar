@@ -75,7 +75,8 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Dropdown opening animation
  */
-.dropdown.open .dropdown-menu:not(.datepicker) {
+.dropdown.open .dropdown-menu:not(.datepicker),
+.mega-dropdown-menu.open {
   animation: dropdown 0.2s ease-in 0s;
 }
 @keyframes dropdown {
@@ -93,8 +94,15 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Mega dropdown menu
  */
-.navbar-nav > li > .mega-dropdown-menu {
-  background-color: #fff;
+.mega-dropdown .mega-dropdown-menu {
+  max-height: calc(100vh - #{$main-nav-height + $navbar-height} - 2px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  .container {
+    padding: 10px $grid-gutter-width 20px;
+  }
 }
 .mega-dropdown-menu ul.row {
   display: flex;
@@ -105,7 +113,6 @@ $body-tone-bg: darken($body-bg, 4%);
   > li {
     @extend .col-xs-4, .col-sm-3, .col-md-2;
     flex: 0 1 auto;
-    margin-bottom: 20px;
     border-right: 1px solid $table-border-color;
 
     &:last-child { border-right: 0; }
@@ -176,7 +183,7 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Storefront and content wrappers
  */
-#store-wrap { }
+#store-wrap { min-height: 100vh; }
 #categories-wrap { display: none; }
 #products-wrap { }
 #product-detail-wrap { }

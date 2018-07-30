@@ -33,6 +33,7 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 @media (max-width: $screen-xs-max) {
   #content-wrap, .offcanvas .inner-wrap { padding-top: 60px; }
+  #mega-dropdown-wrap { top: 60px; }
   .page-wrapper {
     margin-top: -60px;
     padding-top: 60px;
@@ -83,9 +84,7 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Mega dropdown menu
  */
-.mega-dropdown-menu {
-  background-color: #fff;
-}
+.mega-dropdown .mega-dropdown-menu { padding-top: 10px; }
 .mega-dropdown-menu ul.row {
   display: flex;
   flex-wrap: wrap;

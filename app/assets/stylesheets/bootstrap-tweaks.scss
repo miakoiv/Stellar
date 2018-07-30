@@ -59,6 +59,7 @@ body {
 @media (min-width: $screen-sm-min) {
   .dual-nav {
     #content-wrap { padding-top: $main-nav-height + $navbar-height; }
+    #mega-dropdown-wrap { top: $main-nav-height + $navbar-height; }
     .page-wrapper {
       margin-top: -$main-nav-height - $navbar-height;
       padding-top: $main-nav-height + $navbar-height;
@@ -432,20 +433,41 @@ body {
 
 
 /*
- * Mega dropdowns
+ * Mega dropdowns in navbars at full container width
  */
-.dropdown.mega-dropdown { position: static !important; }
-.dropdown-menu.mega-dropdown-menu {
+.dropdown.mega-dropdown {
+  position: static !important;
+
+  .dropdown-menu.mega-dropdown-menu {
+    left: 0;
+    right: 0;
+    background-color: $body-bg;
+  }
+}
+
+
+/*
+ * Mega dropdowns in a dedicated container to fill the viewport
+ */
+#mega-dropdown-wrap {
+  position: fixed;
+  top: $main-nav-height;
   left: 0;
   right: 0;
-}
-#mega-dropdown-wrap {
-  position: relative;
-  top: -2px;
+  bottom: 0;
+  pointer-events: none;
 }
 #mega-dropdown-wrap .mega-dropdown-menu {
-  border-left: 0;
-  border-right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  float: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 0;
   border-radius: 0;
 
   &.open { display: block; }
