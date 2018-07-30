@@ -102,8 +102,14 @@ namespace :products do
     product.trade_price = data['Toimittajan hinta 2018'].to_money
     product.categories = [category]
     product.tax_category = tax_category
-    product.save!
-    product
+    if product.save
+      return product
+    else
+      product.errors.messages.each do |f, m|
+        warn "#{f}: #{m.to_sentence}"
+      end
+      return false
+    end
   end
 
   # Finds the category matching given data, creating it on demand.
