@@ -14,6 +14,10 @@ class Product < ActiveRecord::Base
   has_many :promoted_items, dependent: :destroy
   has_many :promotions, through: :promoted_items
 
+  def live_promotions(group)
+    promotions.merge(Promotion.live)
+  end
+
   def live_promoted_items(group)
     promoted_items.joins(:promotion)
       .merge(Promotion.live)
