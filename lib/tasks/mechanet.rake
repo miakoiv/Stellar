@@ -80,7 +80,6 @@ namespace :products do
         next unless data['Tuotenimi'].present?
         category = find_or_create_category(store, data)
         product = find_or_create_product(store, category, tax_category, data)
-        puts "[%4d] %-16s" % [line+1, product.code]
         assign_properties(product, data, property_map)
         assign_documentation(product, "#{DROPBOX_PATH}/Mechanet_CAD_kuvat", data['CAD kuvan kuvatiedosto'])
         assign_image(store, product, 0, data['Kaaviokuvan kuvatiedosto'])
@@ -100,25 +99,28 @@ namespace :products do
     product.available_at ||= Date.current
     product.retail_price = data['Ulosmyyntihinta EUR'].to_money
     product.trade_price = data['Toimittajan hinta 2018'].to_money
-    product.categories = [category]
+    product.categories = [category] unless category.nil?
     product.tax_category = tax_category
+    puts "[%4s] %-16s" % [data['Code Mechanet unit number'], product.title]
     if product.save
       return product
     else
-      product.errors.messages.each do |f, m|
-        warn "#{f}: #{m.to_sentence}"
-      end
+      display_errors(product)
       return false
     end
   end
 
   # Finds the category matching given data, creating it on demand.
   def find_or_create_category(store, data)
-    parent = store.categories.find_or_create_by!(name: data['Päätuoteryhmän nimi'], product_scope: :alphabetical)
-    if data['Alatuoteryhmän nimi'].present?
-      return store.categories.find_or_create_by!(name: data['Alatuoteryhmän nimi'], parent: parent, product_scope: :alphabetical)
+    if data['Päätuoteryhmän nimi'].present?
+      parent = store.categories.find_or_create_by!(name: data['Päätuoteryhmän nimi'], product_scope: :alphabetical)
+      if data['Alatuoteryhmän nimi'].present?
+        return store.categories.find_or_create_by!(name: data['Alatuoteryhmän nimi'], parent: parent, product_scope: :alphabetical)
+      else
+        return parent
+      end
     else
-      return parent
+      return nil
     end
   end
 
@@ -143,8 +145,13 @@ namespace :products do
     collection.destroy_all
     path = "#{pathname}/#{filename}"
     if !filename.blank? && File.exist?(path)
-      collection.create!(priority: 0, attachment: File.new(path))
       puts "[doc0] %s" % [filename]
+      if document = collection.create(priority: 0, attachment: File.new(path))
+        return document
+      else
+        display_errors(document)
+        return false
+      end
     end
   end
 
@@ -156,8 +163,13 @@ namespace :products do
     if image.present?
       picture = collection.find_or_initialize_by(priority: priority)
       picture.image = image
-      picture.save!
       puts "[pic%1d] %s" % [priority, filename]
+      if picture.save
+        return picture
+      else
+        display_errors(picture)
+        return false
+      end
     else
       collection.destroy_all
     end
@@ -170,5 +182,11 @@ namespace :products do
       d = v.to_f.round(2)
       return i.to_s if i == d
       d.to_s.sub('.', ',')
+    end
+
+    def display_errors(record)
+      record.errors.full_messages.each do |message|
+        warn "[!!!!] #{message}"
+      end
     end
 end
