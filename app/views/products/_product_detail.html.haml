@@ -68,6 +68,10 @@
 
   .product-footer
 
+    .related-promotions
+      - product.live_promotions(selected_group).each do |promotion|
+        = render partial: promotion.promotion_handler, locals: {promotion: promotion, context: product}
+
     - if product.variant? && !product.has_master_properties?
       %h2.footer-header= t('store.product_variants')
       .variant-products
@@ -80,14 +84,14 @@
         .product-grid
           %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
 
-    #offer-requisites-modal.modal{data: {backdrop: 'static'}}
-      .modal-dialog.modal-lg
-        .modal-content
-          .modal-header
-            %button.close{data: {dismiss: 'modal'}}= icon('close')
-            %h4.modal-title= t('store.offer_requisites')
-          .modal-body.requisite-products.product-grid
-            %ul
-          .modal-footer
-            = link_to cart_path, class: 'btn btn-primary' do
-              = icon('shopping-cart', t('store.continue_to_cart'))
+  #offer-requisites-modal.modal{data: {backdrop: 'static'}}
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          %button.close{data: {dismiss: 'modal'}}= icon('close')
+          %h4.modal-title= t('store.offer_requisites')
+        .modal-body.requisite-products.product-grid
+          %ul
+        .modal-footer
+          = link_to cart_path, class: 'btn btn-primary' do
+            = icon('shopping-cart', t('store.continue_to_cart'))

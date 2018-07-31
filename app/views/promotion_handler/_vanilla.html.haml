@@ -1,0 +1,8 @@
+%h2.footer-header= t('.title')
+.promoted-products
+  .product-grid
+    %ul= render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(4)
+  .more-items-link
+    = link_to show_promotion_path(promotion) do
+      = promotion
+      = icon('arrow-circle-right')
