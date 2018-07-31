@@ -46,7 +46,7 @@ $border-radius-small: 0;
     .navbar-body {
       display: flex;
       justify-content: flex-end;
-      margin: 0 -15px;
+      margin: 0 -15px 0 0;
 
       .navbar-left {
         @extend .navbar-right;
@@ -74,10 +74,7 @@ $border-radius-small: 0;
 .navbar-nav.responsive { @extend .hidden-sm; }
 
 /* Navbar lookup widget */
-#navbar-lookup { top: $main-nav-height; }
 #navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
-
-.offcanvas .inner-wrap { padding-top: $main-nav-height; }
 
 
 /*
