@@ -80,7 +80,7 @@
   
   
   
-    <li><a class="include" href="Imageable.html">Imageable</a>
+    <li><a class="include" href="Pictureable.html">Pictureable</a>
   
   
   
@@ -776,11 +776,13 @@ the product may have are not duplicated.</p>
       <span class="ruby-identifier">alternate_prices</span><span class="ruby-operator">:</span> <span class="ruby-identifier">alternate_prices</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>),
       <span class="ruby-identifier">product_properties</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product_properties</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:dup</span>)
     )
-    <span class="ruby-identifier">images</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">image</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">create</span>(
-        <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">priority</span>,
-        <span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">purpose</span>,
-        <span class="ruby-identifier">attachment</span><span class="ruby-operator">:</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">attachment</span>
+    <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">picture</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">create</span>(
+        <span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">priority</span>,
+        <span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">purpose</span>,
+        <span class="ruby-identifier">image</span><span class="ruby-operator">:</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>,
+        <span class="ruby-identifier">caption</span><span class="ruby-operator">:</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">caption</span>,
+        <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">url</span>
       )
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -881,7 +883,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="generate_variant_code-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 293</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 295</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_variant_code</span>
   <span class="ruby-node">&quot;#{code}-#{variants_count}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1015,7 +1017,7 @@ not a master product or there are no variants.</p>
           <div class="method-source-code" id="icon_image_url-source">
             <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon_image_url</span>
-  <span class="ruby-identifier">cover_image</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cover_image</span>(<span class="ruby-value">:presentational</span>).<span class="ruby-identifier">url</span>(<span class="ruby-value">:icon</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">cover_picture</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cover_picture</span>(<span class="ruby-value">:presentational</span>).<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:icon</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1505,7 +1507,7 @@ href="Product.html#method-i-distinct_properties">distinct_properties</a>.</p>
 
           
           <div class="method-source-code" id="reset_live_status-21-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 313</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 315</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_live_status!</span>
   <span class="ruby-identifier">update_columns</span>(
     <span class="ruby-identifier">live</span><span class="ruby-operator">:</span> (<span class="ruby-identifier">retail_price_cents</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">has_variants?</span>) <span class="ruby-operator">&amp;&amp;</span>
@@ -1661,7 +1663,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 301</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 303</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   (<span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">subtitle_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">code_changed?</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1727,7 +1729,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 297</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [[<span class="ruby-value">:title</span>, <span class="ruby-value">:code</span>], [<span class="ruby-value">:title</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -2075,7 +2077,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="with_requisite_products-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 305</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 307</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">with_requisite_products</span>
   [<span class="ruby-keyword">self</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">requisite_products</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2116,7 +2118,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="reset_code-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 333</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 335</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_code</span>
   <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>
     <span class="ruby-identifier">trunk</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-identifier">code</span>.<span class="ruby-identifier">partition</span>(<span class="ruby-regexp">/ \(\d+\)/</span>)
@@ -2154,7 +2156,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="reset_itself-21-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 324</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 326</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_itself!</span>(<span class="ruby-identifier">context</span>)
   <span class="ruby-identifier">reset_live_status!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2187,7 +2189,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="touch_categories-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 328</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 330</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">touch_categories</span>
   <span class="ruby-identifier">categories</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:touch</span>)
 <span class="ruby-keyword">end</span></pre>

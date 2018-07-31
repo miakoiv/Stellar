@@ -62,18 +62,7 @@
   
 </div>
 
-    <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
-
-  <ul class="link-list">
-  
-  
-    <li><a class="include" href="../Reorderer.html">Reorderer</a>
-  
-  
-  </ul>
-</div>
-
+    
     
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
@@ -85,9 +74,9 @@
     
     <li ><a href="#method-i-destroy">#destroy</a>
     
-    <li ><a href="#method-i-show">#show</a>
+    <li ><a href="#method-i-index">#index</a>
     
-    <li ><a href="#method-i-update">#update</a>
+    <li ><a href="#method-i-select">#select</a>
     
   </ul>
 </div>
@@ -136,20 +125,19 @@
 
         <div class="method-description">
           
-          <p>POST /admin/imageable/1/images</p>
+          <p>POST /admin/images</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@imageable</span> = <span class="ruby-identifier">find_imageable</span>
-  <span class="ruby-ivar">@image</span> = <span class="ruby-ivar">@imageable</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">image_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@imageable</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">count</span>))
+  <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">image_params</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@image</span>, <span class="ruby-ivar">@imageable</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@image</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@image</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">200</span> } <span class="ruby-comment"># for dropzone and summernote</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">error</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.error&#39;</span>)} }
@@ -186,14 +174,14 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@imageable</span> = <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">imageable</span>
-  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@image</span>, <span class="ruby-ivar">@imageable</span>
+  <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@image</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">destroy</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@image</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -208,10 +196,10 @@
       </div>
 
     
-      <div id="method-i-show" class="method-detail ">
+      <div id="method-i-index" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show</span><span
+          <span class="method-name">index</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -221,21 +209,19 @@
 
         <div class="method-description">
           
-          <p>GET /admin/images/1 This is only called by Dropzone as callback for
-success.</p>
+          <p>GET /admin/images</p>
           
           
 
           
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@imageable</span> = <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">imageable</span>
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;image&#39;</span>, <span class="ruby-string">&#39;admin_image_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ImageSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-ivar">@images</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -247,10 +233,10 @@ success.</p>
       </div>
 
     
-      <div id="method-i-update" class="method-detail ">
+      <div id="method-i-select" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">update</span><span
+          <span class="method-name">select</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -260,22 +246,15 @@ success.</p>
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/images/1</p>
+          <p>GET /admin/images/1/select</p>
           
           
 
           
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-ivar">@image</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@image</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">image_params</span>)
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@image</span>, <span class="ruby-ivar">@imageable</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
+          <div class="method-source-code" id="select-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>
+  <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           

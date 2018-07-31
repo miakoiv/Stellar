@@ -72,7 +72,7 @@
   
   
   
-    <li><a class="include" href="Imageable.html">Imageable</a>
+    <li><a class="include" href="Pictureable.html">Pictureable</a>
   
   
   
@@ -93,13 +93,13 @@
     
     <li ><a href="#method-c-width_options">::width_options</a>
     
-    <li ><a href="#method-i-background_image">#background_image</a>
+    <li ><a href="#method-i-background_picture">#background_picture</a>
     
     <li ><a href="#method-i-gutter">#gutter</a>
     
-    <li ><a href="#method-i-image_options">#image_options</a>
-    
     <li ><a href="#method-i-layout_options">#layout_options</a>
+    
+    <li ><a href="#method-i-picture_options">#picture_options</a>
     
     <li ><a href="#method-i-spread-3F">#spread?</a>
     
@@ -184,7 +184,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="preset_menu_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preset_menu_options</span>
   <span class="ruby-constant">PRESETS</span>
 <span class="ruby-keyword">end</span></pre>
@@ -217,7 +217,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="width_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">width_options</span>
   <span class="ruby-constant">WIDTHS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Section</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:width</span>, <span class="ruby-identifier">w</span>), <span class="ruby-identifier">w</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -239,10 +239,10 @@ contained segments are created.</p>
        </header>
 
     
-      <div id="method-i-background_image" class="method-detail ">
+      <div id="method-i-background_picture" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">background_image</span><span
+          <span class="method-name">background_picture</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -257,10 +257,10 @@ contained segments are created.</p>
           
 
           
-          <div class="method-source-code" id="background_image-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_image</span>
-  <span class="ruby-identifier">cover_image</span>
+          <div class="method-source-code" id="background_picture-source">
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture</span>
+  <span class="ruby-identifier">cover_picture</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -291,42 +291,9 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="gutter-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">gutter</span>
   <span class="ruby-identifier">gutters?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;gutters&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;no-gutters&#39;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-image_options" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">image_options</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="image_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">image_options</span>
-  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> [<span class="ruby-string">&#39;presentational&#39;</span>]}
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -357,9 +324,42 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="layout_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">layout_options</span>
-  <span class="ruby-constant">PRESETS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">first</span> }
+  <span class="ruby-constant">PRESETS</span>.<span class="ruby-identifier">flatten</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">l</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">l</span>[<span class="ruby-value">0</span>]] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-picture_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">picture_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="picture_options-source">
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_options</span>
+  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> [<span class="ruby-string">&#39;presentational&#39;</span>]}
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -390,7 +390,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="spread-3F-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 56</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">spread?</span>
   <span class="ruby-identifier">width</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;spread&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -423,7 +423,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 76</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">priority</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Department - Rails Application Documentation</title>
+<title>class ImageSearch - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActiveRecord::Base
+  <p class="link">Searchlight::Search
   
 </div>
 
@@ -68,23 +68,7 @@
   <ul class="link-list">
   
   
-    <li><span class="include">Authority::Abilities</span>
-  
-  
-  
-    <li><a class="include" href="Trackable.html">Trackable</a>
-  
-  
-  
-    <li><a class="include" href="Pictureable.html">Pictureable</a>
-  
-  
-  
-    <li><a class="include" href="Reorderable.html">Reorderable</a>
-  
-  
-  
-    <li><span class="include">FriendlyId</span>
+    <li><span class="include">Searchlight::Adapters::ActionView</span>
   
   
   </ul>
@@ -97,11 +81,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    <li ><a href="#method-i-base_query">#base_query</a>
     
-    <li ><a href="#method-i-slugger">#slugger</a>
-    
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-search_store">#search_store</a>
     
   </ul>
 </div>
@@ -109,9 +91,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Department">
-  <h1 id="class-Department" class="class">
-    class Department
+<main role="main" aria-labelledby="class-ImageSearch">
+  <h1 id="class-ImageSearch" class="class">
+    class ImageSearch
   </h1>
 
   <section class="description">
@@ -137,10 +119,10 @@
        </header>
 
     
-      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
+      <div id="method-i-base_query" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">should_generate_new_friendly_id?</span><span
+          <span class="method-name">base_query</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -153,17 +135,12 @@
           
           
           
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
 
           
-          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
-  <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+          <div class="method-source-code" id="base_query-source">
+            <pre><span class="ruby-comment"># File app/models/image_search.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
+  <span class="ruby-constant">Image</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:pictures</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -175,10 +152,10 @@
       </div>
 
     
-      <div id="method-i-slugger" class="method-detail ">
+      <div id="method-i-search_store" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">slugger</span><span
+          <span class="method-name">search_store</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -193,43 +170,10 @@
           
 
           
-          <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
-  [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="search_store-source">
+            <pre><span class="ruby-comment"># File app/models/image_search.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

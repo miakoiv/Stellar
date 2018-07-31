@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Department - Rails Application Documentation</title>
+<title>class Picture - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -76,15 +76,7 @@
   
   
   
-    <li><a class="include" href="Pictureable.html">Pictureable</a>
-  
-  
-  
     <li><a class="include" href="Reorderable.html">Reorderable</a>
-  
-  
-  
-    <li><span class="include">FriendlyId</span>
   
   
   </ul>
@@ -97,11 +89,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    <li ><a href="#method-c-available_purposes">::available_purposes</a>
     
-    <li ><a href="#method-i-slugger">#slugger</a>
-    
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-assign_purpose">#assign_purpose</a>
     
   </ul>
 </div>
@@ -109,13 +99,16 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Department">
-  <h1 id="class-Department" class="class">
-    class Department
+<main role="main" aria-labelledby="class-Picture">
+  <h1 id="class-Picture" class="class">
+    class Picture
   </h1>
 
   <section class="description">
     
+<p>Pictures are instances of images used in different contexts, connecting the
+images with pictureable objects, and containing metadata about the context.</p>
+
   </section>
 
   
@@ -131,54 +124,57 @@
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-available_purposes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_purposes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="available_purposes-source">
+            <pre><span class="ruby-comment"># File app/models/picture.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_purposes</span>
+  <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
+      <div id="method-i-assign_purpose" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">should_generate_new_friendly_id?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
-
-          
-          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
-  <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-slugger" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">slugger</span><span
+          <span class="method-name">assign_purpose</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -193,43 +189,10 @@
           
 
           
-          <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
-  [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_s" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_s</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="assign_purpose-source">
+            <pre><span class="ruby-comment"># File app/models/picture.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_purpose</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -417,7 +417,7 @@ case will ensure that country codes are set.</p>
 
           
           <div class="method-source-code" id="adjustments_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 238</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_sans_tax</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">amount_sans_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span> }.<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -450,7 +450,7 @@ case will ensure that country codes are set.</p>
 
           
           <div class="method-source-code" id="adjustments_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 242</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 244</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_with_tax</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">amount_with_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span> }.<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -565,7 +565,7 @@ with the price queried from the given shipment.</p>
 
           
           <div class="method-source-code" id="approved-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 159</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">approved?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">approved_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -599,7 +599,7 @@ to change.</p>
 
           
           <div class="method-source-code" id="archive-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 196</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">archive!</span>
   <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">update</span>(
@@ -681,7 +681,7 @@ to change.</p>
 
           
           <div class="method-source-code" id="assign_number-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 182</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_number!</span>
   <span class="ruby-constant">Order</span>.<span class="ruby-identifier">with_advisory_lock</span>(<span class="ruby-string">&#39;order_numbering&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">numbered</span> = <span class="ruby-identifier">store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">complete</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">number</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:completed_at</span>)
@@ -796,7 +796,7 @@ shipping methods are returned.</p>
 
           
           <div class="method-source-code" id="balance-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 219</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 221</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">balance</span>
   <span class="ruby-identifier">grand_total_with_tax</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">payments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:amount</span>).<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -897,7 +897,7 @@ shipping methods are returned.</p>
 
           
           <div class="method-source-code" id="cancelled-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 151</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cancelled?</span>
   <span class="ruby-identifier">cancelled_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -932,7 +932,7 @@ corresponding form elements.</p>
 
           
           <div class="method-source-code" id="checkout_phase-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 256</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout_phase</span>
   <span class="ruby-keyword">return</span> <span class="ruby-value">:address</span>  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-value">:shipping</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_shipping?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">shipments</span>.<span class="ruby-identifier">empty?</span>
@@ -1040,7 +1040,7 @@ receipt/acknowledge, and triggers an XML export job.</p>
 
           
           <div class="method-source-code" id="complete-21-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 175</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete!</span>(<span class="ruby-identifier">acknowledge</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">assign_number!</span>
   <span class="ruby-identifier">archive!</span>
@@ -1076,7 +1076,7 @@ receipt/acknowledge, and triggers an XML export job.</p>
 
           
           <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 139</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
   <span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1109,7 +1109,7 @@ receipt/acknowledge, and triggers an XML export job.</p>
 
           
           <div class="method-source-code" id="concludable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">concludable?</span>
   <span class="ruby-identifier">pending?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">cancelled?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">track_shipments?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">fully_shipped?</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1142,7 +1142,7 @@ receipt/acknowledge, and triggers an XML export job.</p>
 
           
           <div class="method-source-code" id="concluded-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 163</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">concluded?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">concluded_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1247,7 +1247,7 @@ order.</p>
 
           
           <div class="method-source-code" id="current-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 135</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">current?</span>
   <span class="ruby-identifier">complete?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">approved?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1373,15 +1373,16 @@ order.</p>
 
         <div class="method-description">
           
-          
+          <p>Changing the order contents is allowed for incomplete orders, targeted
+orders, but they must not be concluded or cancelled.</p>
           
           
 
           
           <div class="method-source-code" id="editable_items-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 131</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">editable_items?</span>
-  <span class="ruby-identifier">incomplete?</span>
+  <span class="ruby-identifier">incomplete?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">targeted?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">concluded?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">cancelled?</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1412,7 +1413,7 @@ order.</p>
 
           
           <div class="method-source-code" id="email-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 268</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">email</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">items</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span>(
     <span class="ruby-identifier">bcc</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>,
@@ -1606,7 +1607,7 @@ this order, and copying some relevant info over.</p>
 
           
           <div class="method-source-code" id="grand_total_for_export-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 247</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_for_export</span>(<span class="ruby-identifier">items</span> = <span class="ruby-identifier">order_items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
     (<span class="ruby-identifier">item</span>.<span class="ruby-identifier">subtotal_for_export</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">adjustments_sans_tax</span>
@@ -1641,7 +1642,7 @@ this order, and copying some relevant info over.</p>
 
           
           <div class="method-source-code" id="grand_total_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 224</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_sans_tax</span>(<span class="ruby-identifier">items</span> = <span class="ruby-identifier">order_items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">grand_total_sans_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustments_sans_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1674,7 +1675,7 @@ this order, and copying some relevant info over.</p>
 
           
           <div class="method-source-code" id="grand_total_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 229</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_with_tax</span>(<span class="ruby-identifier">items</span> = <span class="ruby-identifier">order_items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">grand_total_with_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span> }.<span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustments_with_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1740,7 +1741,7 @@ this order, and copying some relevant info over.</p>
 
           
           <div class="method-source-code" id="has_installation-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 211</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 213</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_installation?</span>
   <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">has_installation?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1911,7 +1912,7 @@ href="Order.html#method-i-requires_shipping-3F">requires_shipping?</a></p>
 
           
           <div class="method-source-code" id="incomplete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">complete?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2221,7 +2222,7 @@ items.</p>
 
           
           <div class="method-source-code" id="notified_users-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 264</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">notified_users</span>
   <span class="ruby-identifier">destination</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_notify</span>, <span class="ruby-identifier">store</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2287,7 +2288,7 @@ items.</p>
 
           
           <div class="method-source-code" id="paid-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 215</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">paid?</span>
   <span class="ruby-identifier">balance</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2320,7 +2321,7 @@ items.</p>
 
           
           <div class="method-source-code" id="pending-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 147</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pending?</span>
   <span class="ruby-identifier">approved?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">concluded?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2425,7 +2426,7 @@ phase at checkout but hasn&#39;t been completed yet.</p>
 
           
           <div class="method-source-code" id="should_complete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 169</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_complete?</span>
   <span class="ruby-identifier">incomplete?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">checkout_phase</span> <span class="ruby-operator">==</span> <span class="ruby-value">:complete</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2625,7 +2626,7 @@ indicates the order is considered to be a quote when incomplete.</p>
 
           
           <div class="method-source-code" id="tax_total-source">
-            <pre><span class="ruby-comment"># File app/models/order.rb, line 234</span>
+            <pre><span class="ruby-comment"># File app/models/order.rb, line 236</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_total</span>(<span class="ruby-identifier">items</span> = <span class="ruby-identifier">order_items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">tax_total</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span> }.<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>

@@ -80,7 +80,7 @@
   
   
   
-    <li><a class="include" href="Imageable.html">Imageable</a>
+    <li><a class="include" href="Pictureable.html">Pictureable</a>
   
   
   
@@ -208,7 +208,7 @@
 
           
           <div class="method-source-code" id="available_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 89</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_purposes</span>
   <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">except</span> <span class="ruby-value">:header</span>, <span class="ruby-value">:footer</span>
 <span class="ruby-keyword">end</span></pre>
@@ -241,7 +241,7 @@
 
           
           <div class="method-source-code" id="entry_point-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_point</span>
   <span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -274,7 +274,7 @@
 
           
           <div class="method-source-code" id="purpose_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 93</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
   <span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -317,7 +317,7 @@ category and product pages.</p>
 
           
           <div class="method-source-code" id="active_link_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 195</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_link_options</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">slug</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;front&#39;</span>
@@ -355,7 +355,7 @@ category and product pages.</p>
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -389,7 +389,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_be_live-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 120</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_live?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">needs_resource?</span>
   <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:live</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">live?</span>)
@@ -423,7 +423,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_have_children-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 102</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_children?</span>
   <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">continuous?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -456,9 +456,9 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_have_content-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 106</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_content?</span>
-  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span>
+  <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">contentmenu?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -489,7 +489,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 153</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:content</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -522,7 +522,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 139</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -555,7 +555,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 147</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">slug</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">route?</span>
@@ -590,7 +590,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="movable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">movable?</span>
   <span class="ruby-operator">!</span>(<span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -623,7 +623,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="needs_resource-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 110</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_resource?</span>
   <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">promotion?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">department?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">internal?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -656,7 +656,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="part_of_continuous_page-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 98</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">part_of_continuous_page?</span>
   <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">continuous?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -690,7 +690,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 164</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
   <span class="ruby-keyword">case</span>
   <span class="ruby-keyword">when</span> <span class="ruby-identifier">primary?</span>
@@ -752,7 +752,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 130</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   <span class="ruby-operator">!</span>(<span class="ruby-identifier">route?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">external?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -785,7 +785,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 125</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [<span class="ruby-value">:title</span>, [<span class="ruby-value">:title</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -818,7 +818,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="to_option-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 204</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_option</span>
   <span class="ruby-identifier">self_and_ancestors</span>.<span class="ruby-identifier">join</span> <span class="ruby-string">&quot; \u23f5 &quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -851,7 +851,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
   <span class="ruby-node">&quot;pages/purposes/#{purpose}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -884,7 +884,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>
   <span class="ruby-identifier">title</span>

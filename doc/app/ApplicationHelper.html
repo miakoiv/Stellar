@@ -65,7 +65,7 @@
     
     <li ><a href="#method-i-background_color_style">#background_color_style</a>
     
-    <li ><a href="#method-i-background_image_style">#background_image_style</a>
+    <li ><a href="#method-i-background_picture_style">#background_picture_style</a>
     
     <li ><a href="#method-i-blank">#blank</a>
     
@@ -102,6 +102,8 @@
     <li ><a href="#method-i-number_to_signed_percentage">#number_to_signed_percentage</a>
     
     <li ><a href="#method-i-number_with_precision_and_sign">#number_with_precision_and_sign</a>
+    
+    <li ><a href="#method-i-picture_variant_tag">#picture_variant_tag</a>
     
     <li ><a href="#method-i-product_header">#product_header</a>
     
@@ -166,7 +168,7 @@
 
           
           <div class="method-source-code" id="background_color_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 168</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">background_color_style</span>(<span class="ruby-identifier">element</span>)
   {
     <span class="ruby-identifier">backgroundColor</span><span class="ruby-operator">:</span> <span class="ruby-identifier">element</span>.<span class="ruby-identifier">background_color</span>.<span class="ruby-identifier">presence</span>
@@ -182,11 +184,11 @@
       </div>
 
     
-      <div id="method-i-background_image_style" class="method-detail ">
+      <div id="method-i-background_picture_style" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">background_image_style</span><span
-            class="method-args">(image, size = :lightbox)</span>
+          <span class="method-name">background_picture_style</span><span
+            class="method-args">(picture, size = :lightbox)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -200,12 +202,12 @@
           
 
           
-          <div class="method-source-code" id="background_image_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_image_style</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:lightbox</span>)
-  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">nil?</span>
+          <div class="method-source-code" id="background_picture_style-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture_style</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:lightbox</span>)
+  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
   {
-    <span class="ruby-identifier">backgroundImage</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;url(#{image.url(size, timestamp: false)})&quot;</span>
+    <span class="ruby-identifier">backgroundImage</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;url(#{picture.image.url(size, timestamp: false)})&quot;</span>
   }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -311,9 +313,9 @@
 
           
           <div class="method-source-code" id="branding-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 129</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">branding</span>(<span class="ruby-identifier">object</span>)
-  <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_image</span>, <span class="ruby-value">:technical</span>) <span class="ruby-operator">+</span>
+  <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_picture</span>, <span class="ruby-value">:technical</span>) <span class="ruby-operator">+</span>
     <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -378,7 +380,7 @@
 
           
           <div class="method-source-code" id="column_class-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 150</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_class</span>(<span class="ruby-identifier">column</span>)
   [<span class="ruby-string">&#39;column&#39;</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">pivot?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;pivot&#39;</span>].<span class="ruby-identifier">join</span> <span class="ruby-string">&#39; &#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -411,7 +413,7 @@
 
           
           <div class="method-source-code" id="css-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">css</span>(<span class="ruby-identifier">styles</span>)
   <span class="ruby-identifier">styles</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">nil?</span> }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span>
     <span class="ruby-node">&quot;#{selector.to_s.underscore.dasherize}: #{rule};&quot;</span>
@@ -446,7 +448,7 @@
 
           
           <div class="method-source-code" id="document_icon_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 125</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 130</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon_tag</span>(<span class="ruby-identifier">document</span>)
   <span class="ruby-identifier">icon</span>(<span class="ruby-identifier">document</span>.<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-lg icon&#39;</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">document</span>.<span class="ruby-identifier">attachment_file_name</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tooltip&#39;</span>})
 <span class="ruby-keyword">end</span></pre>
@@ -549,13 +551,13 @@
 
           
           <div class="method-source-code" id="image_variant_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 115</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">is_bitmap?</span>
-    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">size</span>)))
+    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">size</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">size</span>)))
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:original</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;img-responsive&#39;</span>))
+    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:original</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;img-responsive&#39;</span>))
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -730,7 +732,7 @@
   <span class="ruby-identifier">tags</span> = {
     <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>,
     <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">original_url</span>,
-    <span class="ruby-identifier">image</span><span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_image</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">image_url</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:presentational</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
+    <span class="ruby-identifier">image</span><span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_picture</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">image_url</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_picture</span>.<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:presentational</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
     <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">description</span>.<span class="ruby-identifier">presence</span>
   }
   <span class="ruby-identifier">set_meta_tags</span>(<span class="ruby-identifier">og</span><span class="ruby-operator">:</span> <span class="ruby-identifier">tags</span>)
@@ -803,7 +805,7 @@
 
           
           <div class="method-source-code" id="number_to_signed_percentage-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_to_signed_percentage</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
     <span class="ruby-node">&quot;-#{number_to_percentage(-number, options)}&quot;</span>
@@ -840,13 +842,47 @@
 
           
           <div class="method-source-code" id="number_with_precision_and_sign-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_with_precision_and_sign</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
     <span class="ruby-node">&quot;-#{number_with_precision(-number, options)}&quot;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-node">&quot;+#{number_with_precision(number, options)}&quot;</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-picture_variant_tag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">picture_variant_tag</span><span
+            class="method-args">(picture, size = :icon, options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="picture_variant_tag-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span>, <span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -917,7 +953,7 @@ respond to product, product_title, product_subtitle, product_code</p>
 
           
           <div class="method-source-code" id="segment_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 174</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">segment_style</span>(<span class="ruby-identifier">segment</span>)
   {
     <span class="ruby-identifier">minHeight</span><span class="ruby-operator">:</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">min_height</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{segment.min_height}em&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>

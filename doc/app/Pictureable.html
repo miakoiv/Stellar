@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Department - Rails Application Documentation</title>
+<title>module Pictureable - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -18,7 +18,7 @@
 
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -54,54 +54,31 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">ActiveRecord::Base
-  
-</div>
-
-    <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+    
+    
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
 
   <ul class="link-list">
+    
   
-  
-    <li><span class="include">Authority::Abilities</span>
-  
-  
-  
-    <li><a class="include" href="Trackable.html">Trackable</a>
-  
-  
-  
-    <li><a class="include" href="Pictureable.html">Pictureable</a>
-  
-  
-  
-    <li><a class="include" href="Reorderable.html">Reorderable</a>
-  
-  
-  
-    <li><span class="include">FriendlyId</span>
+    <li><span class="extend">ActiveSupport::Concern</span>
   
   
   </ul>
 </div>
 
-    
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
     
-    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    <li ><a href="#method-i-available_purposes">#available_purposes</a>
     
-    <li ><a href="#method-i-slugger">#slugger</a>
+    <li ><a href="#method-i-cover_picture">#cover_picture</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-picture_options">#picture_options</a>
     
   </ul>
 </div>
@@ -109,9 +86,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Department">
-  <h1 id="class-Department" class="class">
-    class Department
+<main role="main" aria-labelledby="module-Pictureable">
+  <h1 id="module-Pictureable" class="module">
+    module Pictureable
   </h1>
 
   <section class="description">
@@ -137,10 +114,10 @@
        </header>
 
     
-      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
+      <div id="method-i-available_purposes" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">should_generate_new_friendly_id?</span><span
+          <span class="method-name">available_purposes</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -153,17 +130,12 @@
           
           
           
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
 
           
-          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
-  <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+          <div class="method-source-code" id="available_purposes-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_purposes</span>
+  <span class="ruby-identifier">picture_options</span>[<span class="ruby-value">:purpose</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">available_purposes</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -175,11 +147,11 @@
       </div>
 
     
-      <div id="method-i-slugger" class="method-detail ">
+      <div id="method-i-cover_picture" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">slugger</span><span
-            class="method-args">()</span>
+          <span class="method-name">cover_picture</span><span
+            class="method-args">(purpose = :presentational)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -193,10 +165,10 @@
           
 
           
-          <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
-  [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
+          <div class="method-source-code" id="cover_picture-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cover_picture</span>(<span class="ruby-identifier">purpose</span> = <span class="ruby-value">:presentational</span>)
+  <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">purpose</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">presentational</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -208,10 +180,10 @@
       </div>
 
     
-      <div id="method-i-to_s" class="method-detail ">
+      <div id="method-i-picture_options" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_s</span><span
+          <span class="method-name">picture_options</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -221,15 +193,16 @@
 
         <div class="method-description">
           
-          
+          <p>Editing options available to pictureables by default, may be overridden on
+a class by class basis.</p>
           
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/department.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">name</span>
+          <div class="method-source-code" id="picture_options-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_options</span>
+  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>}
 <span class="ruby-keyword">end</span></pre>
           </div>
           

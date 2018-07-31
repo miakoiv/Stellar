@@ -76,7 +76,7 @@
   
   
   
-    <li><a class="include" href="Imageable.html">Imageable</a>
+    <li><a class="include" href="Pictureable.html">Pictureable</a>
   
   
   </ul>
@@ -196,7 +196,7 @@
 
           
           <div class="method-source-code" id="country_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 153</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">country_options</span>
   <span class="ruby-identifier">@@country_options</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Country</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">code</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -229,7 +229,7 @@
 
           
           <div class="method-source-code" id="default_settings-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 116</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_settings</span>
   {
     <span class="ruby-identifier">card_image_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;presentational&#39;</span>,
@@ -265,7 +265,7 @@
 
           
           <div class="method-source-code" id="locale_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">locale_options</span>
   <span class="ruby-identifier">@@locale_options</span> <span class="ruby-operator">||=</span> [
     [<span class="ruby-string">&#39;English&#39;</span>, <span class="ruby-string">&#39;en&#39;</span>],
@@ -304,7 +304,7 @@ href="PaymentGateway.html">PaymentGateway</a> module.</p>
 
           
           <div class="method-source-code" id="payment_gateway_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 139</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">payment_gateway_options</span>
   <span class="ruby-constant">Payment</span>.<span class="ruby-identifier">available_gateways</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gateway</span><span class="ruby-operator">|</span>
     [<span class="ruby-node">&quot;PaymentGateway::#{gateway}&quot;</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>, <span class="ruby-identifier">gateway</span>]
@@ -340,7 +340,7 @@ href="ShippingGateway.html">ShippingGateway</a> module.</p>
 
           
           <div class="method-source-code" id="shipping_gateway_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 146</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shipping_gateway_options</span>
   <span class="ruby-constant">Shipment</span>.<span class="ruby-identifier">available_gateways</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gateway</span><span class="ruby-operator">|</span>
     [<span class="ruby-node">&quot;ShippingGateway::#{gateway}&quot;</span>.<span class="ruby-identifier">constantize</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>, <span class="ruby-identifier">gateway</span>]
@@ -375,10 +375,10 @@ href="ShippingGateway.html">ShippingGateway</a> module.</p>
 
           
           <div class="method-source-code" id="theme_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 132</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">theme_options</span>
   <span class="ruby-identifier">@@themes</span> <span class="ruby-operator">||=</span> <span class="ruby-node">%w{
-    birch boutique cards cottage material premium
+    birch boutique cards cottage material mechanet premium
   }</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -418,7 +418,7 @@ href="ShippingGateway.html">ShippingGateway</a> module.</p>
 
           
           <div class="method-source-code" id="album_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 229</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 230</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">album_options</span>
   <span class="ruby-identifier">albums</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">a</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -451,7 +451,7 @@ href="ShippingGateway.html">ShippingGateway</a> module.</p>
 
           
           <div class="method-source-code" id="available_categories-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 193</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_categories</span>
   <span class="ruby-identifier">categories</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -484,7 +484,7 @@ href="ShippingGateway.html">ShippingGateway</a> module.</p>
 
           
           <div class="method-source-code" id="correspondents-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 246</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">correspondents</span>
   <span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:correspondence</span>, <span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -518,7 +518,7 @@ report search option.</p>
 
           
           <div class="method-source-code" id="countries_shipped_to-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 219</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">countries_shipped_to</span>
   <span class="ruby-identifier">country_codes</span> = <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">concluded</span>.<span class="ruby-identifier">select</span>(<span class="ruby-value">:shipping_country_code</span>)
     .<span class="ruby-identifier">distinct</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:shipping_country_code</span>)
@@ -553,7 +553,7 @@ report search option.</p>
 
           
           <div class="method-source-code" id="csv_headers-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 256</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">csv_headers</span>
   {
     <span class="ruby-identifier">csv_product_code</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:product_code</span>,
@@ -591,7 +591,7 @@ report search option.</p>
 
           
           <div class="method-source-code" id="csv_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 265</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 266</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">csv_options</span>
   {
     <span class="ruby-identifier">col_sep</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;;&#39;</span>,
@@ -629,7 +629,7 @@ store doesn&#39;t keep stock.</p>
 
           
           <div class="method-source-code" id="default_inventory-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 184</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 185</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_inventory</span>
   <span class="ruby-identifier">inventories</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -662,7 +662,7 @@ store doesn&#39;t keep stock.</p>
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 277</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -696,7 +696,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="first_category-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 189</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">first_category</span>
   <span class="ruby-identifier">categories</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">root</span>
 <span class="ruby-keyword">end</span></pre>
@@ -729,7 +729,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="group_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 209</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 210</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group_options</span>
   <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">g</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">g</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">appearance</span><span class="ruby-operator">:</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">appearance</span>}.<span class="ruby-identifier">to_json</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -762,7 +762,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="guest_user_defaults-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 163</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">guest_user_defaults</span>(<span class="ruby-identifier">hostname</span>)
   <span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;#{Time.now.to_i}#{rand(100)}&quot;</span>
   {
@@ -799,7 +799,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="hostname_at-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 172</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 173</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">hostname_at</span>(<span class="ruby-identifier">portal</span>)
   <span class="ruby-identifier">hostnames</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">domain_hostname</span><span class="ruby-operator">:</span> <span class="ruby-value">:store</span>)
     .<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">domain_hostnames_hostnames</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">portal</span>})
@@ -833,7 +833,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="primary_host-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">primary_host</span>
   <span class="ruby-identifier">hostnames</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -866,7 +866,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="property_map-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 203</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">property_map</span>
   <span class="ruby-identifier">properties</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">external_name</span>.<span class="ruby-identifier">blank?</span> }
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">external_name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">p</span>] }
@@ -901,7 +901,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="quotation_boilerplate-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 251</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 252</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">quotation_boilerplate</span>
   <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">quotation_template_id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -934,7 +934,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="searchable_properties-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 198</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchable_properties</span>
   <span class="ruby-identifier">properties</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Property</span>.<span class="ruby-identifier">searchable</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Property</span>.<span class="ruby-identifier">sorted</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -967,7 +967,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="shipping_method_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 213</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shipping_method_options</span>
   <span class="ruby-identifier">shipping_methods</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">s</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -1000,7 +1000,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="stylesheet_source-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stylesheet_source</span>
   <span class="ruby-identifier">style</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">style</span>.<span class="ruby-identifier">stylesheet</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">style</span>.<span class="ruby-identifier">stylesheet</span>.<span class="ruby-identifier">url</span> <span class="ruby-operator">||</span> <span class="ruby-node">&quot;spry_themes/#{theme}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1033,7 +1033,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="template_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 233</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">template_options</span>
   <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">template</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -1066,7 +1066,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 273</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 274</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1099,7 +1099,7 @@ href="Page.html#method-i-path">Page#path</a>.</p>
 
           
           <div class="method-source-code" id="user_options-source">
-            <pre><span class="ruby-comment"># File app/models/store.rb, line 225</span>
+            <pre><span class="ruby-comment"># File app/models/store.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">user_options</span>
   <span class="ruby-identifier">users</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">u</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">u</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
