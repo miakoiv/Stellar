@@ -13,7 +13,7 @@ class PromotionHandler
     end
 
     def to_partial_path
-      'admin/promotion_handler/vanilla'
+      'promotion_handler/vanilla'
     end
   end
 end

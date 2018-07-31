@@ -63,7 +63,7 @@ class PromotionHandler
     end
 
     def to_partial_path
-      'admin/promotion_handler/bundle_pricing'
+      'promotion_handler/bundle_pricing'
     end
   end
 end

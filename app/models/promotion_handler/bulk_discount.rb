@@ -34,7 +34,7 @@ class PromotionHandler
     end
 
     def to_partial_path
-      'admin/promotion_handler/bulk_discount'
+      'promotion_handler/bulk_discount'
     end
   end
 end

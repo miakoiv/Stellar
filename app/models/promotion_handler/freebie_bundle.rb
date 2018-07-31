@@ -41,7 +41,7 @@ class PromotionHandler
     end
 
     def to_partial_path
-      'admin/promotion_handler/freebie_bundle'
+      'promotion_handler/freebie_bundle'
     end
   end
 end
