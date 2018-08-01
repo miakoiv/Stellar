@@ -94,7 +94,8 @@ class StoreController < ApplicationController
   def show_category
     @query = params[:product_search] || {}
     @search = ProductSearch.new(filter_params)
-    @products = @search.results.visible.sorted(@category.product_scope)
+    results = @search.results.visible.sorted(@category.product_scope)
+    @products = results.page(params[:page])
     @view_mode = get_view_mode_setting(@category)
   end
 
