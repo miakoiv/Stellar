@@ -2,11 +2,11 @@
  * Theme specific styles
  */
 
-$brand-primary:         darken(#428bca, 6.5%) !default; // #337ab7
-$brand-success:         #5cb85c !default;
-$brand-info:            #5bc0de !default;
-$brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
+$brand-primary:         #337ab7;
+$brand-success:         #5cb85c;
+$brand-info:            #5bc0de;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
 
 $main-nav-height: 90px;
 $navbar-default-bg: #fff;
@@ -18,9 +18,9 @@ $navbar-inverse-link-active-bg: transparent;
 $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 $font-size-base: 16px;
 
-$border-radius-base: 0;
-$border-radius-large: 0;
-$border-radius-small: 0;
+$border-radius-base: 2px;
+$border-radius-large: 3px;
+$border-radius-small: 1px;
 
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
@@ -30,9 +30,38 @@ $border-radius-small: 0;
 
 
 /*
+ * Mixins
+ */
+@mixin covering-image {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+@mixin shadow-lower {
+  @include box-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+@mixin shadow-higher {
+  @include box-shadow(0 6px 12px rgba(0,0,0,.175));
+}
+
+
+/*
  * Main navigation, right aligned, 90px tall
  */
 #main-nav {
+  @include box-shadow(0 4px 10px rgba(0,0,0,0.2));
+
   > .container {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -68,6 +97,9 @@ $border-radius-small: 0;
     }
   }
 }
+#secondary-nav {
+  @include box-shadow(inset 0 2px 4px rgba(0,0,0,0.5));
+}
 
 /* Change the responsive breakpoint for navs to screen-sm */
 .offcanvas-toggle { @extend .visible-sm; }
@@ -80,27 +112,92 @@ $border-radius-small: 0;
 /*
  * Mega dropdown menu
  */
+.mega-dropdown-menu {
+  left: 0 !important;
+}
 .mega-dropdown-menu ul.row {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 10px;
   padding-left: 0;
   list-style: none;
+
+  a { text-decoration: none; }
+  .page-title {
+    padding: 5px 0;
+    line-height: 1;
+  }
 
   > li {
     @extend .col-sm-3, .col-md-2;
     flex: 0 1 auto;
-    margin-bottom: 20px;
+    border-right: 1px solid $table-border-color;
+
+    &:last-child { border-right: 0; }
+    > a {
+      display: block;
+      border-top: 3px solid transparent;
+
+      &:hover, &:focus {
+        border-top-color: $brand-primary;
+      }
+      .page-image {
+        @include covering-image;
+        height: 0;
+        margin: 5px 0;
+        padding-bottom: 100%;
+      }
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: $font-size-small;
+
+      > li {
+        > a {
+          .page-image { display: none; }
+          .page-title {
+            padding-left: 15px;
+            &:before {
+              @extend .fa;
+              content: '\f0da';
+              display: inline-block;
+              float: left;
+              width: 15px;
+              margin-left: -15px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 .mega-dropdown-menu-compact ul.row {
   flex-wrap: nowrap;
 }
-.mega-dropdown-menu ul.row > li > a {
-  display: block;
-  text-align: center;
+
+
+/* Price context styles */
+.special-price {
+  color: $brand-danger;
+  font-weight: 400;
 }
-.mega-dropdown-menu .page-image img {
-  @extend .img-responsive;
+.regular-price {
+  display: inline-block;
+  position: relative;
+  margin-left: 0.5em;
+  color: $text-color;
+  font-weight: 300;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 2px solid $text-color;
+  }
 }
 
 
@@ -134,24 +231,25 @@ $border-radius-small: 0;
 }
 .product-grid .product {
   @extend .col-xs-6, .col-sm-4, .col-md-3;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .product-card {
   position: relative;
   padding-left: $grid-gutter-width/2;
   padding-right: $grid-gutter-width/2;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .product-grid .product.out-of-stock,
 .product-card.out-of-stock { opacity: 0.4; }
 .product-grid .product:hover,
 .product-card:hover {
-  .buy-now-form .btn { @extend .btn-danger; }
-  .store-link > a { @extend .btn-primary; }
+  > a {
+    @include shadow-higher;
+  }
 }
 .product-grid .product > a,
 .product-card > a {
-  @include box-shadow(0 2px 4x 4px rgba(0,0,0,0.1));
+  @include shadow-lower;
   display: block;
   position: relative;
   padding-bottom: 95px;
@@ -165,7 +263,6 @@ $border-radius-small: 0;
 /* Product image and text */
 .product-grid .product-image,
 .product-card .product-image {
-  position: relative;
   max-height: 400px;
   overflow: hidden;
 
@@ -188,54 +285,32 @@ $border-radius-small: 0;
   font-size: $font-size-base;
   font-weight: normal;
 
-  .small { font-size: inherit; }
+  .small {
+    display: block;
+    margin-top: 5px;
+    font-size: $font-size-small;
+  }
 }
 .product-grid .product-text .description { display: none; }
 
 /* Product promotions */
 .product-grid .promotions,
 .product-card .promotions {
-  position: absolute;
-  top: 5px;
-  left: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .product-grid .promotion,
 .product-card .promotion {
-  @extend .label, .label-danger;
-  @include box-shadow(0 0 4px 4px rgba(255,255,255,1));
+  margin-top: 10px;
+  @extend .badge;
   display: inline-block;
-  min-width: 40px;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 0.5em;
-  border-radius: 20px;
-  font-family: "Fira Sans Extra Condensed", sans-serif;
+  background-color: $brand-primary;
   font-size: 16px;
 }
 
 /* Premium teaser and pricing */
 .product-grid .premium-price,
 .product-card .premium-price {
-  @extend .label, .label-default;
-  @include box-shadow(0 0 2px 0 rgba(0,0,0,0.2));
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px 15px;
-  border-radius: 20px;
-  background-color: $btn-default-bg;
-  color: $btn-default-color;
-  border: 1px solid $btn-default-border;
-
-  .teaser {
-    display: block;
-    margin-bottom: 3px;
-  }
-  .price {
-    margin-bottom: 0;
-    font-family: "Fira Sans Extra Condensed", sans-serif;
-    font-size: 24px;
-  }
 }
 
 /* Buy now widget and pricing */
@@ -253,7 +328,6 @@ $border-radius-small: 0;
   bottom: 40px;
   left: 0;
   margin-bottom: 0;
-  font-family: "Fira Sans Extra Condensed", sans-serif;
   font-size: 24px;
   color: $gray-base;
 }
@@ -261,17 +335,21 @@ $border-radius-small: 0;
 .product-card .buy-now-form .btn,
 .product-grid .buy-now .product-link > a,
 .product-card .buy-now .product-link > a {
-  @extend .btn-default, .btn-round;
+  @extend .btn-default;
+  width: 50%;
+  border: 0;
+  text-align: left;
   font-size: 16px;
   line-height: 1.125;
-  border: 0;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 .product-grid .store-link > a,
 .product-card .store-link > a {
-  @extend .btn-default, .btn-round;
+  @extend .btn-default;
+  width: 50%;
   overflow: hidden;
   border: 0;
+  text-align: left;
   transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
