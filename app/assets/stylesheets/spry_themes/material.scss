@@ -22,6 +22,12 @@ $border-radius-base: 2px;
 $border-radius-large: 3px;
 $border-radius-small: 1px;
 
+$footer-color: #e5e5e5;
+$footer-bg:    #555555;
+$navmenu-inverse-bg: transparent;
+$navmenu-inverse-link-color: #aaa;
+$navmenu-inverse-link-hover-bg: $brand-primary;
+
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
 @import "bootstrap-tweaks";
@@ -715,6 +721,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
     font-size: $font-size-base;
     font-weight: normal;
     text-transform: none;
+    color: #fff;
   }
 }
 .product-footer > .requisite-products,
@@ -744,4 +751,19 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
       padding-bottom: 100%;
     }
   }
+}
+
+
+/*
+ * Default site footer
+ */
+.default-footer {
+  @include gradient-vertical(darken($footer-bg, 18%), $footer-bg, 0%, 75%);
+}
+.default-footer .navmenu {
+  @extend .navmenu-inverse;
+}
+.default-footer .bordered {
+  border-left: 1px solid lighten($footer-bg, 10%);
+  border-right: 1px solid lighten($footer-bg, 10%);
 }
