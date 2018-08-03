@@ -108,7 +108,7 @@ class StoreController < ApplicationController
 
   # GET /promotion/:promotion_id
   def show_promotion
-    @products = @promotion.products.visible
+    @products = @promotion.products.visible.page(params[:page])
   end
 
   # GET /product/:product_id(/:category_id)

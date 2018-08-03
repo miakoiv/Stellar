@@ -185,7 +185,7 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-right: 9px;
   .btn { @extend .btn-round; }
 }
-#products-wrap > .categories {
+#products-wrap > .context {
   @extend .container;
   min-height: 53px;
   padding-top: 20px;

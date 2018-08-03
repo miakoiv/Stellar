@@ -1,0 +1,14 @@
+#products-wrap
+  .context
+    %ol.breadcrumb
+      - current_store.promotions.live.each do |promotion|
+        %li{class: promotion == @promotion && 'active'}
+          = link_to promotion, show_promotion_path(promotion)
+  .products
+    .page-header.visible-print
+      %h1= @promotion.to_s
+    #product-view.product-grid
+      %ul{class: current_store.masonry? && 'masonry-grid'}
+        = render @products
+      .pagination
+        = paginate @products
