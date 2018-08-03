@@ -303,12 +303,11 @@ $footer-bg: #d4d4d4;
             @extend .dropdown-menu-right;
           }
         }
-        .stock-amount {
-          @extend .pull-right;
-          margin-left: 0.5em;
-        }
-        .list-group-item .stock-amount {
+        .product-stock {
           font-size: $font-size-small;
+
+          dt { @extend .pull-left; }
+          dd { @extend .pull-right; }
         }
       }
       .product-description {

@@ -1,9 +1,9 @@
-%h2.footer-header
-  = t('.title')
-  %span.small
-    = icon('exclamation-circle')
-    = t('.help', amount: promotion.promotion_handler.required_items, price: humanized_money_with_symbol(promotion.promotion_handler.items_total))
 .promoted-products
+  %h2.footer-header
+    = t('.title')
+    %span.small
+      = icon('exclamation-circle')
+      = t('.help', amount: promotion.promotion_handler.required_items, price: humanized_money_with_symbol(promotion.promotion_handler.items_total))
   .product-grid
     %ul= render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(promotion.promotion_handler.required_items * 4)
   .more-items-link

@@ -1,4 +1,4 @@
-- cache [selected_group, I18n.locale, :product_detail, product] do
+- cache [selected_group, I18n.locale, :product_detail_header, product] do
   .product-header
     .actions
       = link_to icon('times'), '#back', class: 'btn btn-default'
@@ -8,6 +8,7 @@
       = product.title
       %span.small= product.subtitle
 
+- cache [selected_group, I18n.locale, :product_detail_body, product] do
   .product-body
     .images.presentational
       = render partial: 'products/images', locals: {product: product, purpose: :presentational}
@@ -66,32 +67,30 @@
       .iframes
         = render partial: 'iframes/gallery', object: product, as: :product, locals: {inline: current_store.inline_iframes}
 
-  .product-footer
+.product-footer
+  - product.live_promotions(selected_group).each do |promotion|
+    = render partial: promotion.promotion_handler, locals: {promotion: promotion, context: product}
 
-    .related-promotions
-      - product.live_promotions(selected_group).each do |promotion|
-        = render partial: promotion.promotion_handler, locals: {promotion: promotion, context: product}
-
-    - if product.variant? && !product.has_master_properties?
+  - if product.variant? && !product.has_master_properties?
+    .variant-products
       %h2.footer-header= t('store.product_variants')
-      .variant-products
-        .product-grid
-          %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
+      .product-grid
+        %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
 
-    - if product.requisite_products.live.any?
+  - if product.requisite_products.live.any?
+    .requisite-products
       %h2.footer-header= t('store.requisite_products')
-      .requisite-products
-        .product-grid
-          %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
+      .product-grid
+        %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
 
-  #offer-requisites-modal.modal{data: {backdrop: 'static'}}
-    .modal-dialog.modal-lg
-      .modal-content
-        .modal-header
-          %button.close{data: {dismiss: 'modal'}}= icon('close')
-          %h4.modal-title= t('store.offer_requisites')
-        .modal-body.requisite-products.product-grid
-          %ul
-        .modal-footer
-          = link_to cart_path, class: 'btn btn-primary' do
-            = icon('shopping-cart', t('store.continue_to_cart'))
+#offer-requisites-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('store.offer_requisites')
+      .modal-body.requisite-products.product-grid
+        %ul
+      .modal-footer
+        = link_to cart_path, class: 'btn btn-primary' do
+          = icon('shopping-cart', t('store.continue_to_cart'))

@@ -1,5 +1,5 @@
-%h2.footer-header= t('.title')
 .promoted-products
+  %h2.footer-header= t('.title')
   .product-grid
     %ul= render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(4)
   .more-items-link

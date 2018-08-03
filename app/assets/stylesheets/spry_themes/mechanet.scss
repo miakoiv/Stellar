@@ -554,13 +554,11 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 .product-meta .go-checkout .btn { @extend .btn-block; }
 
-.product-meta .product-stock { margin-bottom: 40px; }
-.product-meta .stock-amount {
-  @extend .pull-right;
-  margin-left: 0.5em;
-}
-.product-meta .list-group-item .stock-amount {
-  font-size: $font-size-small;
+.product-meta .product-stock {
+  margin-bottom: 40px;
+
+  dt { @extend .pull-left; }
+  dd { @extend .pull-right; }
 }
 
 /* Product description and properties */

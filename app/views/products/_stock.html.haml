@@ -1,5 +1,4 @@
 - if stock_shown? && product.tracked_stock?
-  %p
-    %span.stock-amount
-      = icon('cube', product_stock(default_inventory, product))
-    = default_inventory
+  %dl
+    %dt= default_inventory
+    %dd= icon('cube', product_stock(default_inventory, product))
