@@ -255,6 +255,12 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /*
+ * Product filtering
+ */
+.filter-bar { background-color: rgba($brand-primary, 0.15); }
+
+
+/*
  * Containers for product grid and product table
  */
 .products {
@@ -263,6 +269,119 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   padding-bottom: 20px;
 }
 
+
+/*
+ * Products in product list
+ */
+.product-list > ul {
+  @extend .list-group;
+}
+.product-list .product {
+  @extend .list-group-item;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    z-index: 2;
+    @include shadow-higher;
+  }
+
+  > a {
+    @extend .row;
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: inherit;
+
+    .product-image {
+      @extend .col-xs-4, .col-sm-2;
+
+      img {
+        @extend .img-responsive;
+        margin: 0 auto;
+      }
+    }
+    .product-text {
+      @extend .col-xs-8, .col-sm-10;
+      padding-bottom: 30px;
+
+      h3 {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 5px;
+        font-size: $font-size-base;
+        font-weight: 700;
+
+        .small { font-size: $font-size-small; }
+      }
+      .description { font-size: $font-size-small; }
+    }
+    .promotions {
+      @extend .col-xs-8, .col-xs-offset-4;
+      @extend .col-sm-10, .col-sm-offset-2;
+      margin-top: -25px;
+
+      .promotion {
+        @extend .badge;
+        margin-right: 5px;
+        background-color: $brand-danger;
+      }
+    }
+  }
+  .buy-now {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 100px;
+    padding: 10px 15px;
+    background-color: lighten($body-tone-bg, 5%);
+
+    .price {
+      margin-bottom: 0;
+      font-size: $font-size-h4;
+      text-align: right;
+
+      .special-price { @extend .clearfix; }
+      .regular-price { font-size: $font-size-base; }
+    }
+    .buy-now-form {
+      margin-left: $grid-gutter-width/2;
+
+      .btn {
+        @extend .btn-default, .btn-lg;
+        border: 0;
+        text-align: left;
+        transition: background-color 100ms $material-easing;
+      }
+    }
+  }
+}
+@media (min-width: $screen-sm-min) {
+  .product-list .product {
+    display: flex;
+    flex-flow: row nowrap;
+
+    .buy-now {
+      flex-flow: column nowrap;
+      .regular-price {
+        display: block;
+        float: right;
+        margin-left: 0;
+      }
+      .buy-now-form {
+        margin-top: 20px;
+        margin-left: 0;
+      }
+    }
+  }
+}
 
 /*
  * Products in product grid, product cards
@@ -276,7 +395,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 .product-grid .product {
   @extend .col-xs-6, .col-sm-4, .col-md-3;
   margin-bottom: 30px;
-  transition: all 300ms $material-easing;
+  transition: box-shadow 300ms $material-easing;
 }
 .product-card {
   position: relative;
