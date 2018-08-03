@@ -30,5 +30,5 @@ $(document).on 'click', '[data-view-mode]', (e) ->
   settings[key] = mode
   Cookies.set 'view_mode_settings', settings
 
-
-  $target.find('.masonry-grid').masonry()
+  $target.imagesLoaded ->
+    $target.find('.masonry-grid').masonry('layout')
