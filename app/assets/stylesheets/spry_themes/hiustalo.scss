@@ -1,0 +1,39 @@
+$hiustalo-green: #a2b982;
+$hiustalo-red:   #ed1944;
+$hiustalo-blue:  #007db6;
+
+$brand-primary: $hiustalo-blue;
+$brand-success: #86bc2a;
+$brand-info:    lighten($hiustalo-blue, 25%);
+$brand-warning: #ffa538;
+$brand-danger:  $hiustalo-red;
+
+@import "material";
+
+/*
+ * Overrides to the material theme for Hiustalo
+ */
+
+/* Product filtering */
+.filter-bar { background-color: rgba($hiustalo-green, 0.2); }
+
+/* Promotions positioned outside the static product-meta */
+.product-meta .promotions {
+  left: $grid-gutter-width/2;
+
+  .promotion {
+    text-align: right;
+
+    .promotion-image {
+      display: block;
+      margin-top: -24px;
+
+      img {
+        @extend .img-responsive;
+        margin: 0 auto;
+      }
+    }
+    .promotion-text { display: inline-block; }
+    .promotion-image + .promotion-text { display: none; }
+  }
+}
