@@ -171,7 +171,8 @@ namespace :products do
         return false
       end
     else
-      collection.destroy_all
+      puts "[!!!!] Image #{filename} missing!"
+      collection.where(priority: priority).destroy_all
     end
   end
 
@@ -186,7 +187,7 @@ namespace :products do
 
     def display_errors(record)
       record.errors.full_messages.each do |message|
-        warn "[!!!!] #{message}"
+        puts "[!!!!] #{message}"
       end
     end
 end
