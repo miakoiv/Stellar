@@ -899,8 +899,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 @media (min-width: $screen-md-min) {
   .product-footer {
-    .swiper-button-prev { left: -$grid-gutter-width; }
-    .swiper-button-next { right: -$grid-gutter-width; }
+    .swiper-button-prev { left: -2 * $grid-gutter-width; }
+    .swiper-button-next { right: -2 * $grid-gutter-width; }
   }
 }
 

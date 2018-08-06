@@ -37,3 +37,15 @@ $brand-danger:  $hiustalo-red;
     .promotion-image + .promotion-text { display: none; }
   }
 }
+
+/* Product footer elements */
+.product-footer {
+  .swiper-button-prev, .swiper-button-next {
+    width: 30px;
+    height: 90px;
+    margin-top: -45px;
+    background-size: 100% 100%;
+  }
+  .swiper-button-next { background-image: asset-url('hiustalo-next.svg'); }
+  .swiper-button-prev { background-image: asset-url('hiustalo-prev.svg'); }
+}
