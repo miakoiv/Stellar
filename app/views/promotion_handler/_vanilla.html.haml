@@ -1,8 +1,21 @@
-.promoted-products
+.promoted-products[promotion]
   %h2.footer-header= t('.title')
-  .product-grid
-    %ul= render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(4)
+  .swiper-container.product-grid
+    %ul.swiper-wrapper
+      = render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(8), layout: 'shared/swiper_slide'
+  .swiper-button-prev
+  .swiper-button-next
   .more-items-link
     = link_to show_promotion_path(promotion) do
       = promotion
       = icon('arrow-circle-right')
+
+:coffee
+  jQuery ->
+    $promotion = $('##{dom_id(promotion)}')
+    new Swiper $promotion.find('.swiper-container'),
+      slidesPerView: 'auto'
+      watchOverflow: true
+      navigation:
+        nextEl: '##{dom_id(promotion)} .swiper-button-next'
+        prevEl: '##{dom_id(promotion)} .swiper-button-prev'
