@@ -336,7 +336,8 @@ $body-tone-bg: darken($body-bg, 4%);
   top: -2px;
   right: 15px;
 }
-.product-list .promotion {
+.product-list .promotion-image { display: none; }
+.product-list .promotion-text {
   @extend .label, .label-danger;
   display: inline-block;
   min-width: 30px;
@@ -480,8 +481,10 @@ $body-tone-bg: darken($body-bg, 4%);
   top: 5px;
   left: 5px;
 }
-.product-grid .promotion,
-.product-card .promotion {
+.product-grid .promotion-image,
+.product-card .promotion-image { display: none; }
+.product-grid .promotion-text,
+.product-card .promotion-text {
   @extend .label, .label-danger;
   @include box-shadow(0 0 4px 4px rgba(255,255,255,1));
   display: inline-block;
@@ -681,6 +684,13 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-top: -10px;
 }
 .product-meta .promotion {
+  display: inline-block;
+}
+.product-meta .promotion-image img {
+  @extend .img-responsive;
+  margin: 0 auto;
+}
+.product-meta .promotion-text {
   @extend .label, .label-danger;
   @include box-shadow(0 0 4px 4px rgba(255,255,255,1));
   display: inline-block;
@@ -692,6 +702,7 @@ $body-tone-bg: darken($body-bg, 4%);
   font-family: "Fira Sans Extra Condensed", sans-serif;
   font-size: 20px;
 }
+.product-meta .promotion-image + .promotion-text { display: none; }
 .product-meta .product-code {
   position: absolute;
   top: -28px;

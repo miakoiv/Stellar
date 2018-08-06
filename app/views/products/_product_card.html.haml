@@ -8,8 +8,7 @@
         = product.title
         %span.small= product.subtitle
     .promotions
-      - product.live_promoted_items(selected_group).each do |item|
-        .promotion= item.description
+      = render partial: 'products/promoted_item', collection: product.live_promoted_items(selected_group)
     - if pricing_shown? && premium_pricing.present?
       .premium-price
         %span.teaser= selected_group.premium_teaser
