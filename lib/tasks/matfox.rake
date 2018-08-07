@@ -63,8 +63,8 @@ ORDER_FILES = {
 namespace :matfox do
   desc "Import data from Matfox"
   task import: :environment do |task, args|
-    @data_by_product_code = import_data(PRODUCT_FILES)
-    @data_by_order_code = import_data(ORDER_FILES)
+    @data_by_product_code = mf_import_data(PRODUCT_FILES)
+    @data_by_order_code = mf_import_data(ORDER_FILES)
 
     Product.transaction do
 
@@ -77,9 +77,9 @@ namespace :matfox do
           data[:inventories].each do |row|
             inventories = Inventory.where(inventory_code: row[:inventory_code])
             inventories.each do |inventory|
-              product = find_or_create_product(inventory.store, code, data)
+              product = mf_find_or_create_product(inventory.store, code, data)
               next if product.nil?
-              update_inventory(inventory, product, row)
+              mf_update_inventory(inventory, product, row)
             end
           end
         end
@@ -92,9 +92,9 @@ namespace :matfox do
           slugs.mb_chars.scan(/[[:word:]]+/).map(&:downcase).each do |slug|
             store = Store.find_by(slug: slug)
             next if store.nil?
-            product = find_or_create_product(store, code, data)
+            product = mf_find_or_create_product(store, code, data)
             next if product.nil?
-            update_trade_price(product, data[:product])
+            mf_update_trade_price(product, data[:product])
           end
         end
 
@@ -107,7 +107,7 @@ namespace :matfox do
               next if product.nil?
               product.update(customer_code: row[:customer_code]) if product.customer_code.nil?
               price_data = row[:trade_price].present? ? row : data[:product]
-              update_trade_price(product, price_data)
+              mf_update_trade_price(product, price_data)
             end
           end
         end
@@ -129,16 +129,16 @@ namespace :matfox do
 
         # Each order has a status of 2..4, where status 2 triggers
         # approval, and 4 triggers conclusion.
-        approve_order(order)  if data[:order][:status] == '2'
-        conclude_order(order) if data[:order][:status] == '4'
+        mf_approve_order(order)  if data[:order][:status] == '2'
+        mf_conclude_order(order) if data[:order][:status] == '4'
       end
     end
   end
 
   # Updates the inventory item entry for `product` in `inventory`.
   # Given `data` must contain the inventory data fields.
-  def update_inventory(inventory, product, data)
-    create_inventory_item(
+  def mf_update_inventory(inventory, product, data)
+    mf_create_inventory_item(
       inventory, product,
       data[:quantity_on_hand],
       data[:quantity_reserved],
@@ -150,7 +150,7 @@ namespace :matfox do
   # Import specified files into a hash of hashes, where the top level key 'i'
   # is the field 'code', the second level key 'j' is the files hash key.
   # Import file options may specify either single or multiple record mode.
-  def import_data(files)
+  def mf_import_data(files)
     data = {}
     files.each do |j, options|
       CSV.foreach(IMPORT_PATH.join(options[:file]), headers: options[:headers]) do |row|
@@ -169,7 +169,7 @@ namespace :matfox do
 
   # Finds or creates a product by `code` in the scope of `store`,
   # specified in the hash `data`.
-  def find_or_create_product(store, code, data)
+  def mf_find_or_create_product(store, code, data)
     product = Product.find_or_initialize_by(store: store, code: code)
     product.title ||= data[:product][:title].try(:mb_chars).try(:titleize)
     product.subtitle ||= data[:product][:subtitle].try(:mb_chars).try(:titleize)
@@ -186,7 +186,7 @@ namespace :matfox do
   end
 
   # Updates product trade price data from given `data`.
-  def update_trade_price(product, data)
+  def mf_update_trade_price(product, data)
     trade_price = data[:trade_price]
     if trade_price.present? && trade_price.to_f > 0
       product.update(
@@ -198,7 +198,7 @@ namespace :matfox do
   end
 
   # Creates an inventory item for `product` in `inventory`.
-  def create_inventory_item(inventory, product, on_hand, reserved, pending, value)
+  def mf_create_inventory_item(inventory, product, on_hand, reserved, pending, value)
     puts "→ #{inventory.name} #{on_hand} #{reserved} #{pending}"
 
     # Purges any existing inventory items for this product.
@@ -219,7 +219,7 @@ namespace :matfox do
   end
 
   # Sets the approval timestamp of given order, if currently unset.
-  def approve_order(order)
+  def mf_approve_order(order)
     return false if order.approved?
     order.update(approved_at: Time.current)
     puts "#{order.number} approved"
@@ -227,8 +227,8 @@ namespace :matfox do
 
   # Sets the conclusion timestamp of given order, if currently unset.
   # Ensures the order is approved first.
-  def conclude_order(order)
-    approve_order(order)
+  def mf_conclude_order(order)
+    mf_approve_order(order)
     return false if order.concluded?
     order.update(concluded_at: Time.current)
     puts "#{order.number} concluded"
