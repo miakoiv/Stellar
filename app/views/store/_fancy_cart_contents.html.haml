@@ -1,0 +1,8 @@
+#cart-contents
+  - if order.empty?
+    - if order.targeted?
+      = t('store.cart_contents.empty_order_html')
+    - else
+      %h5= t('store.cart_contents.empty_cart')
+  - else
+    = render partial: 'order_items/cart_list', object: order, as: :order

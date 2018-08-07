@@ -30,16 +30,19 @@
               = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
         = tab_pane 'store-appearance' do
           %fieldset{disabled: locked}
+            = f.form_group do
+              = f.check_box :detach_menu
+            = f.form_group do
+              = f.check_box :fancy_cart
             .row
-              .col-md-6
-                = f.form_group do
-                  = f.check_box :detach_menu
+              .col-md-8
+                = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
               - unless locked || @store.new_record?
-                .col-md-6
-                  .pull-right
-                    = link_to edit_admin_store_style_path(@store), class: 'btn btn-default', remote: true do
-                      = icon('paint-brush', t('.edit_style'))
-            = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
+                .col-md-4
+                  .form-group
+                    %label.control-label= t('.edit_style')
+                    = link_to edit_admin_store_style_path(@store), class: 'btn btn-default btn-block', remote: true do
+                      = icon('paint-brush', t('actions.edit'))
             %hr
             = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_option, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do

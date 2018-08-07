@@ -1,0 +1,14 @@
+.cart-list-item.list-group-item[order_item]{class: [order_item.is_subitem? && 'subitem', order_item.satisfied? || 'list-group-item-warning']}
+  .cart-item-row
+    .cart-item-picture
+      .product-image= picture_variant_tag order_item.product.cover_picture(current_store.card_image_type), :postcard
+    .cart-item-content
+      .product-text
+        %h4.list-group-item-heading
+          - if order_item.real? && order_item.live?
+            = link_to order_item.product_title, show_product_path(order_item.product)
+          - else
+            = order_item.product_title
+          .small= order_item.product_subtitle
+        = bootstrap_label(order_item, appearance: :primary)
+        .badge= order_item.product_code

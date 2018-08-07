@@ -3,10 +3,10 @@
     - if order.empty?
       .panel-body
         - if order.targeted?
-          = t('.empty_order_html')
+          = t('store.cart_contents.empty_order_html')
         - else
-          %p.lead= t('.empty_cart')
-          %p= link_to t('.go_shopping'), front_path
+          %p.lead= t('store.cart_contents.empty_cart')
+          %p= link_to t('store.cart_contents.go_shopping'), front_path
     - else
       = render partial: 'order_items/cart_table', object: order, as: :order
       .panel-footer

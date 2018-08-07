@@ -532,6 +532,7 @@ fi:
         theme: Teema
         styles: Yksityiskohtaiset tyylit
         detach_menu: Irroita päävalikko
+        fancy_cart: Moderni ostoskori
         footer_page_id: Alatunnistesivu
         locale: Kieli
         country_code: Kotimaa

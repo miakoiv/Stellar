@@ -532,6 +532,7 @@ en:
         theme: Display theme
         styles: Detailed styles
         detach_menu: Detach main navigation
+        fancy_cart: Modern shopping cart
         footer_page_id: Footer page
         locale: Language
         country_code: Country

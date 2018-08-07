@@ -63,6 +63,8 @@ class StoreController < ApplicationController
   def cart
     @order = shopping_cart
     @order_types = @order.available_order_types
+
+    render current_store.fancy_cart? ? :fancy_cart : :cart
   end
 
   # Get /cart/quote/:recipient

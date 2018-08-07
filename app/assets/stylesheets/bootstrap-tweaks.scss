@@ -339,6 +339,30 @@ body {
 
 
 /*
+ * Fancy shopping cart
+ */
+.cart-list { }
+.cart-list .cart-list-item {
+  .cart-item-row {
+    @extend .row;
+
+    .cart-item-picture {
+      @extend .col-xs-4, .col-sm-3, .col-md-2;
+
+      .product-image {
+        height: 0;
+        padding-bottom: 100%;
+
+        img { @extend .img-contain, .img-center; }
+      }
+    }
+    .cart-item-content {
+      @extend .col-xs-8, .col-sm-9, .col-md-10;
+    }
+  }
+}
+
+/*
  * Switchboard
  */
 .switchboard { @extend .list-group; }
