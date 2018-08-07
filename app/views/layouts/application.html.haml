@@ -4,14 +4,30 @@
     = render partial: 'shared/metadata'
     = render partial: 'shared/cookieconsent'
     = render partial: 'favicon'
-  %body{class: [current_theme, current_store.detach_menu? && 'dual-nav']}
+  %body{class: [current_theme, (current_store.detach_menu? || content_for?(:auxiliary_nav)) && 'dual-nav']}
     %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
       .inner-wrap= render partial: 'shared/side_nav'
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top
-      = render partial: 'shared/main_nav'
-      - if current_store.detach_menu? && @header.children_count > 0
+      .container
+        .navbar-header
+          = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).fqdn), class: 'navbar-brand'
+        .navbar-body
+          - unless current_store.detach_menu?
+            = render partial: 'shared/main_nav'
+          #navbar-lookup.collapse
+            = render partial: 'shared/lookup'
+        .navbar-charms
+          = render partial: 'shared/offcanvas_toggle'
+          %ul.nav.navbar-nav.navbar-right
+            = render partial: 'shared/navbar_charms'
+            = render partial: 'shared/user_widget'
+      - if current_store.detach_menu? || content_for?(:auxiliary_nav)
         %nav#secondary-nav.navbar.navbar-inverse.hidden-xs
-          = render partial: 'shared/secondary_nav'
+          .container
+            - if current_store.detach_menu?
+              = render partial: 'shared/main_nav'
+            %ul.aux-nav.nav.navbar-nav.navbar-right
+              = yield :auxiliary_nav
     #content-wrap
       = yield
 

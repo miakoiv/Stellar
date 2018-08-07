@@ -1,0 +1,13 @@
+- if user_signed_in? && !guest?
+  %li.dropdown.hidden-xs
+    = dropdown_toggle do
+      = bootstrap_label(current_group, icon: 'user', text: '')
+      = current_user.name.split.first
+      %span.caret
+    %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
+      - if can_manage?
+        = render partial: 'shared/admin_menu'
+      = render partial: 'shared/user_menu'
+- else
+  %li.lg.hidden-xs
+    = link_to icon('sign-in'), new_user_session_path
