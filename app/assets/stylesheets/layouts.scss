@@ -453,27 +453,41 @@
 /*
  * Multicolumn content
  */
+@mixin flex-columns {
+  display: flex;
+  flex-flow: row wrap;
+  &:before,
+  &:after { display: none; }
+
+  > div { align-self: flex-start; }
+}
 .row.columns-1 {
-  > * { @extend .col-xs-12; }
+  @include flex-columns;
+  > div { @extend .col-xs-12; }
 }
 .row.columns-2 {
-  > * { @extend .col-xs-6; }
+  @include flex-columns;
+  > div { @extend .col-xs-6; }
 }
 .row.columns-3 {
-  > * { @extend .col-xs-6, .col-sm-4; }
+  @include flex-columns;
+  > div { @extend .col-xs-6, .col-sm-4; }
 }
 .row.columns-4 {
-  > * { @extend .col-xs-6, .col-sm-3; }
+  @include flex-columns;
+  > div { @extend .col-xs-6, .col-sm-3; }
 }
 .row.columns-6 {
-  > * { @extend .col-xs-6, .col-sm-3, .col-md-2; }
+  @include flex-columns;
+  > div { @extend .col-xs-6, .col-sm-3, .col-md-2; }
 }
 .row.columns-12 {
-  > * { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
+  @include flex-columns;
+  > div { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
 }
 @media (max-width: $screen-xs-max) {
   .row.grid-disable-xs {
-    > * { width: 100%; }
+    > div { width: 100%; }
   }
 }
 
