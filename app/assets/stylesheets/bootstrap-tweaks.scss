@@ -534,6 +534,11 @@ i.icon {
 .page-header {
   border-bottom: 0;
 
+  > h1 > img {
+    display: inline-block;
+    max-height: 1em;
+    width: auto;
+  }
   > .btn,
   > .dropdown { float: right; }
   > .btn + .btn,
