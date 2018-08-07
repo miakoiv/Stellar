@@ -364,6 +364,12 @@ fi:
       duplicate: Kopioi ostoskoriin
     edit:
       duplicate: Kopioi ostoskoriin
+    menu:
+      title: Avoimet tilaukset/tarjoukset
+    quote:
+      title: Lähetä tarjous
+      send_self: sähköpostina minulle
+      send_customer: sähköpostina asiakkaalle
   products:
     filtering:
       keyword: Hakusana…
@@ -399,10 +405,6 @@ fi:
     cart:
       shopping_cart: Ostoskori
       order_or_quote: Tilaus/tarjous
-      orders_menu: Avoimet tilaukset/tarjoukset
-      send_quote: Lähetä tarjous
-      quote_self: sähköpostina minulle
-      quote_customer: sähköpostina asiakkaalle
       complete_order: Lähetä tilaus
       delete_cart: Tyhjennä kori
       delete_order: Poista tilaus/tarjous
