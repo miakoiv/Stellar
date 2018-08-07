@@ -485,8 +485,9 @@ body {
 
 
 /*
- * Pagination controls for infinite tables
+ * Pagination controls for infinite tables and product grids
  */
+.pagination-block { @extend .col-xs-12; }
 .infinite-table .pagination { display: block; }
 .infinite-table .pagination a {
   @extend .btn, .btn-lg, .btn-block, .btn-default;

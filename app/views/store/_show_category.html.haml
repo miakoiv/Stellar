@@ -12,7 +12,7 @@
     #product-view{class: @view_mode, data: {'view-key': dom_id(@category)}}
       %ul{class: current_store.masonry? && 'masonry-grid'}
         = render @products
-      .pagination
+      .pagination-block
         = paginate @products
 
 :coffee

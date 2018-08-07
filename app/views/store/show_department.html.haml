@@ -9,5 +9,5 @@
         .product-grid.infinite-table
           %ul.masonry-grid
             = render partial: 'departments/product', collection: @products, as: :product
-          .pagination
+          .pagination-block
             = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'

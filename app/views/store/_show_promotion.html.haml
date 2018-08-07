@@ -10,5 +10,5 @@
     #product-view.product-grid
       %ul{class: current_store.masonry? && 'masonry-grid'}
         = render @products
-      .pagination
+      .pagination-block
         = paginate @products
