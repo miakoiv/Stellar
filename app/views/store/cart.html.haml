@@ -8,7 +8,7 @@
       = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
       = render 'cart_title'
 
-    = render partial: 'cart_contents', object: @order, as: :order
+    = render partial: current_store.cart_contents_partial, object: @order, as: :order
 
 - if can_select_customer?
   - content_for :auxiliary_nav do

@@ -158,6 +158,10 @@ class Store < ActiveRecord::Base
   end
 
   #---
+  def cart_contents_partial
+    fancy_cart? ? 'store/fancy_cart_contents' : 'store/cart_contents'
+  end
+
   def stylesheet_source
     style.present? && style.stylesheet.present? && style.stylesheet.url || "spry_themes/#{theme}"
   end

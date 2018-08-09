@@ -355,12 +355,72 @@ body {
 
         img { @extend .img-contain, .img-center; }
       }
+      .badge {
+        position: absolute;
+        left: -10px;
+        top: 1px;
+      }
     }
-    .cart-item-content {
-      @extend .col-xs-8, .col-sm-9, .col-md-10;
+    .cart-item-product {
+      @extend .col-xs-8, .col-sm-6, .col-md-8;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+
+      .product-title {
+        @extend .list-group-item-heading;
+        margin-bottom: 10px;
+        font-weight: 700;
+
+        .small { font-weight: normal; }
+      }
+      .product-info .label { font-size: inherit; }
+      .product-code {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 75%;
+      }
+    }
+    .cart-item-pricing {
+      @extend .col-xs-8, .col-xs-offset-4, .col-sm-3, .col-sm-offset-0, .col-md-2, .col-md-offset-0;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+
+      .actions form {
+        @extend .pull-right;
+        max-width: 160px;
+      }
+      .unit-price {
+        @extend .text-muted;
+      }
+      .subtotal {
+        @extend .list-group-item-heading;
+      }
     }
   }
 }
+.cart-list .caption {
+  @extend .pull-left, .small;
+  max-width: 50%;
+}
+
+/* On small and larger viewports, force 100% height on cart list rows */
+@media (min-width: $screen-sm-min) {
+  .cart-item-row {
+    display: flex;
+
+    &:before,
+    &:after { display: none; }
+    .cart-item-picture,
+    .cart-item-product,
+    .cart-item-pricing {
+      flex: 0 0 auto;
+      float: none;
+    }
+  }
+}
+
 
 /*
  * Switchboard

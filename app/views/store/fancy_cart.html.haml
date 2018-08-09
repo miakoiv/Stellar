@@ -7,7 +7,9 @@
         = render 'orders/quote'
       = render 'cart_title'
 
-    = render partial: 'fancy_cart_contents', object: @order, as: :order
+    .row
+      .col-xs-12.col-md-9.col-lg-8
+        = render partial: current_store.cart_contents_partial, object: @order, as: :order
 
 - if can_select_customer?
   - content_for :auxiliary_nav do

@@ -2,13 +2,37 @@
   .cart-item-row
     .cart-item-picture
       .product-image= picture_variant_tag order_item.product.cover_picture(current_store.card_image_type), :postcard
-    .cart-item-content
-      .product-text
-        %h4.list-group-item-heading
-          - if order_item.real? && order_item.live?
-            = link_to order_item.product_title, show_product_path(order_item.product)
-          - else
-            = order_item.product_title
-          .small= order_item.product_subtitle
+      .badge= order_item_counter + 1
+    .cart-item-product
+      .product-title
+        = link_to_if order_item.real? && order_item.live?, order_item.product_title, show_product_path(order_item.product)
+        .small= order_item.product_subtitle
+      .product-info
+        - if order_item.product.shipping_notes.present?
+          .text-info.small
+            = icon('info-circle', order_item.product.shipping_notes)
+        - if order_item.out_of_stock? && order_item.back_orderable?
+          .text-info.small
+            = icon('warning', t('store.cart.lead_time_warning', lead_time: order_item.product.lead_time))
+        - unless order_item.satisfied?
+          = bootstrap_label(order_item, icon: 'warning', text: col(Product, :not_live), appearance: :warning)
         = bootstrap_label(order_item, appearance: :primary)
-        .badge= order_item.product_code
+        - if order_item.product.vendor.present?
+          = bootstrap_label(order_item.product.vendor, icon: 'truck')
+      %p.product-code
+        %span= col(OrderItem, :product_code)
+        = order_item.product_code
+    .cart-item-pricing
+      .actions
+        = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
+          .form-group
+            .input-group
+              = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', disabled: order_item.is_subitem? || order_item.internal?
+              - unless order_item.is_subitem? || order_item.internal?
+                .input-group-btn
+                  = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+      %p.unit-price.text-right
+        à
+        %span.currency= money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+      %h4.subtotal.text-right
+        %span.currency= money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
