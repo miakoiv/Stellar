@@ -61,23 +61,28 @@ $.fn.extend
         transitionDuration: 0
       if window.wiselinks? then Wiselinks.scrollPage()
 
+$(document).on 'keypress', 'form.immediate .form-control', (e) ->
+  if e.key is 'Enter'
+    e.preventDefault()
+    $(e.currentTarget).trigger 'submit.rails'
+
+$(document).on 'change', 'form.immediate', (e) ->
+  $(e.currentTarget).trigger 'submit.rails'
+
+$(document).on 'click', '[data-toggle=sidebar]', (e) ->
+  $('.sidebar').toggleClass 'active'
+
+$(document).on 'click', 'a[href="#back"]', (e) ->
+  e.preventDefault()
+  history.back()
+
+$(document).on 'click', 'a[href="#print"]', (e) ->
+  e.preventDefault()
+  $.print()
+
 jQuery ->
 
   $(document).initialize()
   $('.products').masonry_build()
 
   new Clipboard('.clipboard')
-
-  $(document).on 'change', 'form.immediate', (e) ->
-    $(e.currentTarget).trigger('submit.rails')
-
-  $(document).on 'click', '[data-toggle=sidebar]', (e) ->
-    $('.sidebar').toggleClass 'active'
-
-  $(document).on 'click', 'a[href="#back"]', (e) ->
-    e.preventDefault()
-    history.back()
-
-  $(document).on 'click', 'a[href="#print"]', (e) ->
-    e.preventDefault()
-    $.print()
