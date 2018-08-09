@@ -24,11 +24,16 @@
         = order_item.product_code
     .cart-item-pricing
       .actions
-        = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
+        - if locked || order_item.is_subitem? || order_item.internal?
           .form-group
-            .input-group
-              = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', disabled: order_item.is_subitem? || order_item.internal?
-              - unless order_item.is_subitem? || order_item.internal?
+            %p.form-control-static.text-right
+              ⨉
+              = order_item.amount
+        - else
+          = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
+            .form-group
+              .input-group
+                = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
                 .input-group-btn
                   = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
       %p.unit-price.text-right
@@ -36,3 +41,6 @@
         %span.currency= money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
       %h4.subtotal.text-right
         %span.currency= money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+
+- if order_item.adjustments.any?
+  = render partial: 'adjustments/item', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

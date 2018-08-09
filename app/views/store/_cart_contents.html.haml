@@ -8,7 +8,7 @@
           %p.lead= t('store.cart_contents.empty_cart')
           %p= link_to t('store.cart_contents.go_shopping'), front_path
     - else
-      = render partial: 'order_items/cart_table', object: order, as: :order
+      = render partial: 'order_items/cart_table', object: order, as: :order, locals: {locked: false}
       .panel-footer
         - if order.checkoutable?
           = render partial: 'checkout/order_type', object: order, as: :order
@@ -16,8 +16,4 @@
           .pull-right= t('checkout.messages.cannot_checkout_html')
 
   .actions
-    - if order.targeted?
-      = link_to icon('remove', t('store.cart.delete_order')), delete_cart_path, class: 'btn btn-sm btn-danger', data: {confirm: t('store.cart.confirm_delete_order'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('store.cart.delete_order'), 'confirm-cancel': t('actions.confirm.cancel')}
-    - else
-      = link_to t('checkout.continue_shopping'), front_path, class: 'btn btn-sm btn-default'
-      = link_to icon('remove', t('store.cart.delete_cart')), delete_cart_path, class: 'btn btn-sm btn-danger', data: {confirm: t('store.cart.confirm_delete_cart'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('store.cart.delete_cart'), 'confirm-cancel': t('actions.confirm.cancel')}
+    = render partial: 'orders/actions', object: order, as: :order

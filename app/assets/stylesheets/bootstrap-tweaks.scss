@@ -343,6 +343,11 @@ body {
  */
 .cart-list { }
 .cart-list .cart-list-item {
+  &.subrow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 0;
+  }
   .cart-item-row {
     @extend .row;
 
@@ -359,10 +364,11 @@ body {
         position: absolute;
         left: -10px;
         top: 1px;
+        background-color: $brand-primary;
       }
     }
     .cart-item-product {
-      @extend .col-xs-8, .col-sm-6, .col-md-8;
+      @extend .col-xs-8, .col-sm-5, .col-md-7;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
@@ -382,19 +388,30 @@ body {
       }
     }
     .cart-item-pricing {
-      @extend .col-xs-8, .col-xs-offset-4, .col-sm-3, .col-sm-offset-0, .col-md-2, .col-md-offset-0;
+      @extend .col-xs-8, .col-xs-offset-4, .col-sm-4, .col-sm-offset-0, .col-md-3, .col-md-offset-0;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
 
       .actions form {
         @extend .pull-right;
-        max-width: 160px;
+        max-width: 120px;
       }
       .unit-price {
         @extend .text-muted;
       }
       .subtotal {
+        @extend .list-group-item-heading;
+      }
+    }
+    .adjustment-label {
+      @extend .col-xs-12, .col-sm-8, .col-md-9;
+      p { margin-bottom: 5px; }
+    }
+    .adjustment-amount {
+      @extend .col-xs-12, .col-sm-4, .col-md-3;
+
+      h4 {
         @extend .list-group-item-heading;
       }
     }
@@ -414,8 +431,10 @@ body {
     &:after { display: none; }
     .cart-item-picture,
     .cart-item-product,
-    .cart-item-pricing {
-      flex: 0 0 auto;
+    .cart-item-pricing,
+    .adjustment-label,
+    .adjustment-amount {
+      flex: 1 1 auto;
       float: none;
     }
   }

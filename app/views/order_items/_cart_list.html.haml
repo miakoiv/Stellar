@@ -1,5 +1,5 @@
 .cart-list.list-group
-  = render partial: 'order_items/cart_list_item', collection: order.order_items, as: :order_item
+  = render partial: 'order_items/cart_list_item', collection: order.order_items, as: :order_item, locals: {locked: locked}
   .list-group-item.list-group-item-info
     .caption
       = order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')

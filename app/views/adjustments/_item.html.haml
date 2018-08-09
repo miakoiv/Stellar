@@ -1,0 +1,7 @@
+.cart-list-item.list-group-item.subrow[adjustment]{class: adjustment.credit? ? 'list-group-item-success' : 'list-group-item-danger'}
+  .cart-item-row
+    .adjustment-label
+      %p= adjustment.label
+    .adjustment-amount
+      %h4.text-right
+        %span.currency= money includes_tax ? adjustment.amount_with_tax : adjustment.amount_sans_tax

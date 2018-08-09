@@ -19,6 +19,6 @@
           = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
         %th.actions
     %tbody
-      = render partial: 'order_items/cart_row', collection: order.order_items, as: :order_item
+      = render partial: 'order_items/cart_row', collection: order.order_items, as: :order_item, locals: {locked: locked}
       - if order.adjustments.any?
         = render partial: 'adjustments/row', collection: order.adjustments, as: :adjustment, locals: {includes_tax: order.includes_tax?}

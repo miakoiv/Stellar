@@ -1,1 +1,1 @@
-$('#cart-table').replaceWith("#{j render partial: 'order_items/cart_table', object: @order, as: :order}");
+$('#cart-table').replaceWith("#{j render partial: 'order_items/cart_table', object: @order, as: :order, locals: {locked: false}}");

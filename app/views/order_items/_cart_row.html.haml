@@ -26,14 +26,13 @@
         = t('store.cart.lead_time_warning', lead_time: order_item.product.lead_time)
   %td.text-right
     = form_for order_item, remote: true, html: {class: 'pull-right immediate'} do |f|
-      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right',
-          disabled: order_item.is_subitem? || order_item.internal?
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', disabled: locked || order_item.is_subitem? || order_item.internal?
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
-    - unless order_item.is_subitem? || order_item.internal?
+    - unless locked || order_item.is_subitem? || order_item.internal?
       = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
 
 - if order_item.adjustments.any?
