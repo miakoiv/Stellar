@@ -107,6 +107,7 @@ class Admin::ProductsController < ApplicationController
   # have the view include the alternate price column when needed.
   def set_price
     authorize_action_for @product, at: current_store
+    @appraiser = Appraiser::Product.new(@group)
 
     respond_to do |format|
       if @product.update(product_params)

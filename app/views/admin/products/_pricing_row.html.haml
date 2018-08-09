@@ -6,23 +6,23 @@
       .badge= product.code
   %td
     - unless product.has_variants?
-      = form_for [:set_price, :admin, product], remote: true, html: {class: 'pull-right immediate'} do |f|
-        = hidden_field_tag :group_id, @group && @group.id
+      = form_for [:set_price, :admin, product], namespace: [:trade_price, product.id], remote: true, html: {class: 'pull-right immediate'} do |f|
+        = hidden_field_tag :group_id, @group && @group.id, id: nil
         .input-group.input-group-sm
           = f.text_field :trade_price, class: 'form-control text-right', placeholder: humanized_money(product.trade_price), tabindex: 1
           %span.input-group-addon €
   %td
     - unless product.has_variants?
-      = form_for [:set_price, :admin, product], remote: true, html: {class: 'pull-right immediate'} do |f|
-        = hidden_field_tag :group_id, @group && @group.id
+      = form_for [:set_price, :admin, product], namespace: [:retail_price, product.id], remote: true, html: {class: 'pull-right immediate'} do |f|
+        = hidden_field_tag :group_id, @group && @group.id, id: nil
         .input-group.input-group-sm
           = f.text_field :retail_price, class: 'form-control text-right', placeholder: humanized_money(product.retail_price), tabindex: 2
           %span.input-group-addon €
   - if @group.present?
     %td
       - unless product.has_variants?
-        = form_for [:admin, product, product.alternate_prices.where(group: @group).first_or_initialize], remote: true, namespace: dom_id(product), html: {class: 'pull-right immediate'} do |f|
-          = f.hidden_field :group_id, value: @group.id
+        = form_for [:admin, product, product.alternate_prices.where(group: @group).first_or_initialize], namespace: [:alternate_price, product.id], remote: true, html: {class: 'pull-right immediate'} do |f|
+          = f.hidden_field :group_id, value: @group.id, id: nil
           .input-group.input-group-sm
             = f.text_field :price, class: 'form-control text-right', placeholder: humanized_money(@appraiser.for_pricing(product).amount)
             %span.input-group-addon €
