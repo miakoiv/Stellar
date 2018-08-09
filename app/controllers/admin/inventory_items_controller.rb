@@ -13,7 +13,9 @@ class Admin::InventoryItemsController < ApplicationController
     authorize_action_for InventoryItem, at: current_store
     @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
     @search = InventoryItemSearch.new(search_params)
-    @inventory_items = @search.results.page(params[:page])
+    results = @search.results.reorder(nil)
+      .merge(Product.alphabetical).order(:code)
+    @inventory_items = results.page(params[:page])
   end
 
   # GET /admin/inventory_items/1
