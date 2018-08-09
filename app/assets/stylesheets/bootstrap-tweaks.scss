@@ -1024,7 +1024,21 @@ i.icon {
 /*
  * Selectize layout fixes, disabled form controls
  */
-.selectize-input { vertical-align: top; }
+.selectize-input {
+  min-height: $input-height-base;
+  vertical-align: top;
+  border-radius: $input-border-radius;
+
+  &.dropdown-active {
+    border-radius: $input-border-radius;
+  }
+}
+.selectize-dropdown,
+.selectize-input,
+.selectize-input input {
+  line-height: $line-height-base;
+  color: $input-color;
+}
 .selectize-tall .selectize-dropdown-content { min-height: 400px; }
 .selectize-list-group {
   .selectize-input img {
