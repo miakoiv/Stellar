@@ -199,6 +199,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .mega-dropdown-menu-compact ul.row {
   flex-wrap: nowrap;
+
+  > li > a .page-image { @include contained-image; }
 }
 
 
