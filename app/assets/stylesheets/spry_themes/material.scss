@@ -404,37 +404,31 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   margin-bottom: 30px;
   transition: box-shadow 300ms $material-easing;
 }
-.product-card {
-  position: relative;
-  padding-left: $grid-gutter-width/2;
-  padding-right: $grid-gutter-width/2;
-  margin-bottom: 30px;
-}
 .product-grid .product.out-of-stock,
 .product-card.out-of-stock { opacity: 0.4; }
-.product-grid .product:hover,
-.product-card:hover {
+.product-grid .product:hover {
   > a {
     @include shadow-higher;
   }
 }
 .product-grid .product > a,
 .product-card > a {
-  @include shadow-lower;
   display: block;
   position: relative;
   padding-bottom: 100px;
   background-color: $body-bg;
-  border: 1px solid $table-border-color;
-  border-radius: $border-radius-base;
   color: inherit;
   text-decoration: none;
+}
+.product-grid .product > a {
+  @include shadow-lower;
+  border: 1px solid $table-border-color;
+  border-radius: $border-radius-base;
   transition: box-shadow 200ms $material-easing;
 }
 
 /* Product image and text */
-.product-grid .product-image,
-.product-card .product-image {
+.product-grid .product-image {
   img {
     @extend .img-responsive;
     margin: 0 auto;
@@ -487,8 +481,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /* Buy now widget and pricing */
-.product-grid .buy-now,
-.product-card .buy-now {
+.product-grid .buy-now {
   position: absolute;
   right: 30px;
   bottom: 15px;
@@ -517,8 +510,6 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 .product-grid .store-link > a,
 .product-card .store-link > a {
   @extend .btn-default;
-  width: 50%;
-  overflow: hidden;
   border: 0;
   text-align: left;
   transition: background-color 100ms $material-easing;
@@ -534,6 +525,42 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
     padding-right: 15px;
   }
 }
+
+/* Product cards with borderless design */
+.product-card {
+  position: relative;
+  padding-left: $grid-gutter-width/2;
+  padding-right: $grid-gutter-width/2;
+  margin-bottom: 30px;
+}
+.product-card > a { padding-bottom: 90px; }
+.product-card:hover {
+  @include shadow-lower;
+}
+.product-card .product-image {
+  position: relative;
+  height: 0;
+  padding-bottom: 100%;
+
+  img { @extend .img-contain, .img-center; }
+}
+.product-card .product-text {
+  padding-left: 0;
+  padding-right: 0;
+}
+.product-card .promotions {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: -3px;
+  margin-right: -3px;
+}
+.product-card .buy-now {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  left: 15px;
+}
+
 
 /* Link to more at the bottom of a grid */
 .more-items-link {
