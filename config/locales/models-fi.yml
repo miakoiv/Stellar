@@ -461,6 +461,7 @@ fi:
         subhead: Alaotsikko
         min_height: Korkeus
         grid_columns: Sarakkeita
+        grid_lines: Sarakelinjat
         grid_disable_xs: Ei sarakkeita mobiilinäytöllä
         inverse: Käänteiset värit
         jumbotron: Jättikoko

@@ -461,6 +461,7 @@ en:
         subhead: Subhead
         min_height: Height
         grid_columns: Grid columns
+        grid_lines: Grid lines
         grid_disable_xs: Disable grid on mobile
         inverse: Inverse colors
         jumbotron: Jumbotron

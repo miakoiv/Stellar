@@ -491,6 +491,62 @@
   }
 }
 
+/* Grid lines for columns */
+@mixin no-right-border {
+  &:after { border-right: 0; }
+}
+@mixin no-bottom-border {
+  &:after { border-bottom: 0; }
+}
+@mixin grid-line-removal($n) {
+  > div:nth-child(#{$n}n) { @include no-right-border; }
+  > div:nth-last-child(-n+#{$n}) { @include no-bottom-border; }
+}
+.row.grid-lines {
+  > div { align-self: stretch; }
+  > div:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-right: 1px solid $table-border-color;
+    border-bottom: 1px solid $table-border-color;
+    pointer-events: none;
+  }
+}
+
+/* Removal of grid lines at the right and bottom edges */
+.row.grid-lines.columns-1 {
+  > div {
+    @include no-right-border;
+    @include no-bottom-border;
+  }
+}
+.row.grid-lines.columns-2 { @include grid-line-removal(2); }
+@media (max-width: $screen-xs-max) {
+  .row.grid-lines { @include grid-line-removal(2); }
+}
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
+  .row.grid-lines.columns-4,
+  .row.grid-lines.columns-6,
+  .row.grid-lines.columns-12 { @include grid-line-removal(4); }
+}
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
+  .row.grid-lines.columns-4 { @include grid-line-removal(4); }
+  .row.grid-lines.columns-6,
+  .row.grid-lines.columns-12 { @include grid-line-removal(6); }
+}
+@media (min-width: $screen-lg-min) {
+  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
+  .row.grid-lines.columns-4 { @include grid-line-removal(4); }
+  .row.grid-lines.columns-6 { @include grid-line-removal(6); }
+  .row.grid-lines.columns-12 { @include grid-line-removal(12); }
+}
+
 
 /*
  * Segment animation velocities

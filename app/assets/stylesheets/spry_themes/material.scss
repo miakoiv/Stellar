@@ -529,12 +529,12 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 /* Product cards with borderless design */
 .product-card {
   position: relative;
-  padding-left: $grid-gutter-width/2;
-  padding-right: $grid-gutter-width/2;
-  margin-bottom: 30px;
+  padding: 10px $grid-gutter-width/2;
+  background-color: $body-bg;
 }
 .product-card > a { padding-bottom: 90px; }
 .product-card:hover {
+  z-index: 2;
   @include shadow-lower;
 }
 .product-card .product-image {
