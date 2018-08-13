@@ -461,37 +461,37 @@
 
   > div { align-self: flex-start; }
 }
-.row.columns-1 {
+.columns-1 {
   @include flex-columns;
   > div { @extend .col-xs-12; }
 }
-.row.columns-2 {
+.columns-2 {
   @include flex-columns;
   > div { @extend .col-xs-6; }
 }
-.row.columns-3 {
+.columns-3 {
   @include flex-columns;
   > div { @extend .col-xs-6, .col-sm-4; }
 }
-.row.columns-4 {
+.columns-4 {
   @include flex-columns;
   > div { @extend .col-xs-6, .col-sm-3; }
 }
-.row.columns-6 {
+.columns-6 {
   @include flex-columns;
   > div { @extend .col-xs-6, .col-sm-3, .col-md-2; }
 }
-.row.columns-12 {
+.columns-12 {
   @include flex-columns;
   > div { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
 }
 @media (max-width: $screen-xs-max) {
-  .row.grid-disable-xs {
+  .grid-disable-xs {
     > div { width: 100%; }
   }
 }
 
-/* Grid lines for columns */
+/* Grid lines for grids */
 @mixin no-right-border {
   &:after { border-right: 0; }
 }
@@ -499,12 +499,16 @@
   &:after { border-bottom: 0; }
 }
 @mixin grid-line-removal($n) {
-  > div:nth-child(#{$n}n) { @include no-right-border; }
-  > div:nth-last-child(-n+#{$n}) { @include no-bottom-border; }
+  > :nth-child(#{$n}n) { @include no-right-border; }
+  > :nth-last-child(-n+#{$n}) { @include no-bottom-border; }
+  > :last-child {
+    @include no-right-border;
+    @include no-bottom-border;
+  }
 }
-.row.grid-lines {
-  > div { align-self: stretch; }
-  > div:after {
+.grid-lines {
+  > div, li { align-self: stretch; }
+  > :after {
     content: '';
     position: absolute;
     top: 0;
@@ -518,33 +522,33 @@
 }
 
 /* Removal of grid lines at the right and bottom edges */
-.row.grid-lines.columns-1 {
-  > div {
+.grid-lines.columns-1 {
+  > div, li {
     @include no-right-border;
     @include no-bottom-border;
   }
 }
-.row.grid-lines.columns-2 { @include grid-line-removal(2); }
+.grid-lines.columns-2 { @include grid-line-removal(2); }
 @media (max-width: $screen-xs-max) {
-  .row.grid-lines { @include grid-line-removal(2); }
+  .grid-lines { @include grid-line-removal(2); }
 }
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
-  .row.grid-lines.columns-4,
-  .row.grid-lines.columns-6,
-  .row.grid-lines.columns-12 { @include grid-line-removal(4); }
+  .grid-lines.columns-3 { @include grid-line-removal(3); }
+  .grid-lines.columns-4,
+  .grid-lines.columns-6,
+  .grid-lines.columns-12 { @include grid-line-removal(4); }
 }
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
-  .row.grid-lines.columns-4 { @include grid-line-removal(4); }
-  .row.grid-lines.columns-6,
-  .row.grid-lines.columns-12 { @include grid-line-removal(6); }
+  .grid-lines.columns-3 { @include grid-line-removal(3); }
+  .grid-lines.columns-4 { @include grid-line-removal(4); }
+  .grid-lines.columns-6,
+  .grid-lines.columns-12 { @include grid-line-removal(6); }
 }
 @media (min-width: $screen-lg-min) {
-  .row.grid-lines.columns-3 { @include grid-line-removal(3); }
-  .row.grid-lines.columns-4 { @include grid-line-removal(4); }
-  .row.grid-lines.columns-6 { @include grid-line-removal(6); }
-  .row.grid-lines.columns-12 { @include grid-line-removal(12); }
+  .grid-lines.columns-3 { @include grid-line-removal(3); }
+  .grid-lines.columns-4 { @include grid-line-removal(4); }
+  .grid-lines.columns-6 { @include grid-line-removal(6); }
+  .grid-lines.columns-12 { @include grid-line-removal(12); }
 }
 
 
