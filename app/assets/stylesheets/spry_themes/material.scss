@@ -396,14 +396,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 /*
  * Products and product cards in straight and staggered grids
  */
-.product-grid { @extend .row; }
+.product-grid > ul {
+  list-style: none;
+  padding-left: 0;
+}
 .product-grid > .straight-grid,
 .product-grid > .staggered-grid {
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
-  list-style: none;
-  padding-left: 0;
   margin-bottom: 0;
 }
 .product-grid .product {
@@ -529,6 +530,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 
 /* Staggered grid includes shadows */
 .product-grid .staggered-grid {
+  @extend .row;
+
   .product > a {
     @include shadow-lower;
     border: 1px solid $table-border-color;
