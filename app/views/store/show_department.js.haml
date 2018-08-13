@@ -1,4 +1,4 @@
-$masonry = $('.masonry-grid');
+$masonry = $('.staggered-grid');
 $items = $("#{j render partial: 'departments/product', collection: @products, as: :product}");
 
 $masonry.masonryReveal($items);

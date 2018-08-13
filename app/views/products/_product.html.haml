@@ -1,5 +1,5 @@
 - cache [selected_group, I18n.locale, :product_card, product] do
-  %li.masonry-item.single[product]{class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
+  %li.grid-item.single[product]{class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
     = link_to show_product_path(product, @category), data: {push: 'partial', target: '#store-body'} do
       .product-image= picture_variant_tag product.cover_picture(current_store.card_image_type), :postcard
       .product-text

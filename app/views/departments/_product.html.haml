@@ -1,5 +1,5 @@
 - cache [selected_group, I18n.locale, :department_product_card, product] do
-  %li.masonry-item.single[product]
+  %li.grid-item.single[product]
     = link_to show_product_url(product, host: product.store.hostname_at(current_store).fqdn) do
       .product-image= picture_variant_tag product.cover_picture, :postcard
       .product-text

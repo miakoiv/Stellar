@@ -52,10 +52,10 @@ $.fn.extend
     $(this).css 'padding-bottom', element.height()
 
   masonry_build: ->
-    $masonry = $('.masonry-grid', this)
-    $masonry.imagesLoaded ->
-      $masonry.masonry
-        itemSelector: '.masonry-item'
+    $grid = $('.staggered-grid', this)
+    $grid.imagesLoaded ->
+      $grid.masonry
+        itemSelector: '.grid-item'
         columnWidth: '.single'
         percentPosition: true
         transitionDuration: 0

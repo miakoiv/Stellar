@@ -31,4 +31,4 @@ $(document).on 'click', '[data-view-mode]', (e) ->
   Cookies.set 'view_mode_settings', settings
 
   $target.imagesLoaded ->
-    $target.find('.masonry-grid').masonry('layout')
+    $target.find('.staggered-grid').masonry('layout')

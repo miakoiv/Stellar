@@ -7,7 +7,7 @@
             = current_store
             %small= @department
         .product-grid.infinite-table
-          %ul.masonry-grid
+          %ul.staggered-grid
             = render partial: 'departments/product', collection: @products, as: :product
           .pagination-block
             = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'

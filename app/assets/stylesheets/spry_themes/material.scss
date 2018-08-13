@@ -292,6 +292,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   &:focus {
     z-index: 2;
     @include shadow-higher;
+
+    .product-text h3 { color: $link-hover-color; }
   }
 
   > a {
@@ -301,6 +303,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
     text-decoration: none;
     color: inherit;
 
+    &:focus { outline: 0; }
     .product-image {
       @extend .col-xs-4, .col-sm-2;
 
@@ -319,6 +322,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
         margin-bottom: 5px;
         font-size: $font-size-base;
         font-weight: 700;
+        color: $link-color;
 
         .small { font-size: $font-size-small; }
       }
@@ -391,10 +395,14 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /*
- * Products in product grid, product cards
+ * Products and product cards in straight and staggered grids
  */
 .product-grid { @extend .row; }
-.product-grid > ul {
+.product-grid > .straight-grid,
+.product-grid > .staggered-grid {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
@@ -406,11 +414,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .product-grid .product.out-of-stock,
 .product-card.out-of-stock { opacity: 0.4; }
-.product-grid .product:hover {
-  > a {
-    @include shadow-higher;
-  }
-}
+
 .product-grid .product > a,
 .product-card > a {
   display: block;
@@ -419,12 +423,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   background-color: $body-bg;
   color: inherit;
   text-decoration: none;
-}
-.product-grid .product > a {
-  @include shadow-lower;
-  border: 1px solid $table-border-color;
-  border-radius: $border-radius-base;
-  transition: box-shadow 200ms $material-easing;
+
+  &:hover .product-text h3 { color: $link-hover-color; }
+  &:focus { outline: 0; }
 }
 
 /* Product image and text */
@@ -445,6 +446,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   margin: 0;
   font-size: $font-size-base;
   font-weight: normal;
+  color: $link-color;
 
   .small {
     display: block;
@@ -526,45 +528,70 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 }
 
-/* Product cards with borderless design */
+/* Staggered grid includes shadows */
+.product-grid .staggered-grid {
+  .product > a {
+    @include shadow-lower;
+    border: 1px solid $table-border-color;
+    border-radius: $border-radius-base;
+    transition: box-shadow 200ms $material-easing;
+  }
+  .product:hover > a {
+    @include shadow-higher;
+  }
+}
+
+/* Straight grid variant, default for product cards */
+.product-grid .straight-grid {
+  @extend .grid-lines, .columns-4;
+
+  .product {
+    @extend .col-sm-3;
+    margin-bottom: 0;
+  }
+}
+.product-grid .straight-grid .product,
 .product-card {
   position: relative;
   padding: 10px $grid-gutter-width/2;
   background-color: $body-bg;
-}
-.product-card > a { padding-bottom: 90px; }
-.product-card:hover {
-  z-index: 2;
-  @include shadow-lower;
-}
-.product-card .product-image {
-  position: relative;
-  height: 0;
-  padding-bottom: 100%;
 
-  img { @extend .img-contain, .img-center; }
-}
-.product-card .product-text {
-  padding-left: 0;
-  padding-right: 0;
-}
-.product-card .promotions {
-  padding-left: 0;
-  padding-right: 0;
-  margin-left: -3px;
-  margin-right: -3px;
-}
-.product-card .buy-now {
-  position: absolute;
-  right: 15px;
-  bottom: 5px;
-  left: 15px;
+  > a { padding-bottom: 90px; }
+  &:hover {
+    z-index: 2;
+    @include shadow-lower;
+  }
+  .product-image {
+    position: relative;
+    height: 0;
+    padding-bottom: 100%;
+
+    img { @extend .img-contain, .img-center; }
+  }
+  .product-text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .promotions {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -3px;
+    margin-right: -3px;
+  }
+  .buy-now {
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
+    left: 15px;
+  }
 }
 
 
 /* Link to more at the bottom of a grid */
 .more-items-link {
   @extend .pull-right;
+  margin-top: 20px;
+
   > a {
     @extend .btn, .btn-sm, .btn-primary;
   }

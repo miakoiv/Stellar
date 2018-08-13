@@ -10,7 +10,7 @@
       .product-filter
         = render partial: 'products/filtering'
     #product-view{class: @view_mode, data: {'view-key': dom_id(@category)}}
-      %ul{class: current_store.masonry? && 'masonry-grid'}
+      %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
         = render @products
       .pagination-block
         = paginate @products
