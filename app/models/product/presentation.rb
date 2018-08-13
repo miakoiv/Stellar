@@ -12,8 +12,24 @@ class Product < ActiveRecord::Base
     'component' => 'puzzle-piece'
   }.freeze
 
+  #---
   before_save :generate_description, if: -> (product) { product.description.blank? }
 
+  #---
+  def self.to_csv
+    attributes = %w{code customer_code title subtitle}
+    CSV.generate(
+      headers: true,
+      col_sep: ';'
+    ) do |csv|
+      csv << attributes
+      all.each do |product|
+        csv << attributes.map { |k| product.send(k) }
+      end
+    end
+  end
+
+  #---
   # Icon name based on purpose.
   def icon
     PURPOSE_ICONS[purpose]

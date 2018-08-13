@@ -17,7 +17,12 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for Product, at: current_store
     @query = saved_search_query('product', 'admin_product_search')
     @search = ProductSearch.new(search_params)
-    @products = @search.results.master.alphabetical.page(params[:page])
+    results = @search.results.master.alphabetical
+
+    respond_to do |format|
+      format.html { @products = results.page(params[:page]) }
+      format.csv { send_data(results.to_csv, filename: "products-#{current_store.slug}-#{Date.today}.csv") }
+    end
   end
 
   # GET /admin/products/query.json?q=keyword
