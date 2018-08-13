@@ -432,6 +432,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 .product-grid .product-image {
   img {
     @extend .img-responsive;
+    width: 100%;
+    max-width: none;
     margin: 0 auto;
   }
 }
