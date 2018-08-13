@@ -128,22 +128,15 @@ body {
   #main-nav .navbar-header { max-width: 150px; }
 }
 
-/* Use desktop margins and floats since main nav never collapses */
-#main-nav .navbar-left {
-  float: left !important;
-  margin-left: -15px;
-  margin-right: -15px;
+/* Always use desktop margins and floats for navbar charms */
+#main-nav .navbar-charms {
+  .navbar-right {
+    float: right !important;
+    margin: 0 -15px 0 15px;
 
-  > li { float: left; }
+    > li { float: left; }
+  }
 }
-#main-nav .navbar-right {
-  float: right !important;
-  margin-left: -15px;
-  margin-right: -15px;
-
-  > li { float: left; }
-}
-#main-nav .navbar-charms .navbar-right { margin-left: 15px; }
 
 /* Hamburger for toggling the side nav on mobile */
 .offcanvas-toggle {
