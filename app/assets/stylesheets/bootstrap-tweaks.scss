@@ -599,11 +599,11 @@ body {
  * Pagination controls for infinite tables and product grids
  */
 .pagination-block { @extend .col-xs-12; }
-.infinite-table .pagination { display: block; }
-.infinite-table .pagination a {
+.infinite-table .pagination-block a {
   @extend .btn, .btn-lg, .btn-block, .btn-default;
   background-color: transparent;
   border-color: transparent;
+  pointer-events: none;
 
   .fa { @extend .fa-2x; }
 }
