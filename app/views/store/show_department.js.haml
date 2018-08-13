@@ -1,4 +1,4 @@
-$masonry = $('.staggered-grid');
+$grid = $('#product-view > ul');
 $items = $("#{j render partial: 'departments/product', collection: @products, as: :product}");
 
-$masonry.masonryReveal($items);
+$grid.hasClass('staggered-grid') ? $grid.masonryReveal($items) : $items.appendTo($grid);
