@@ -24,7 +24,6 @@ $border-radius-small: 1px;
 
 $footer-color: #e5e5e5;
 $footer-bg:    #555555;
-$navmenu-inverse-bg: transparent;
 $navmenu-inverse-link-color: #aaa;
 $navmenu-inverse-link-hover-bg: $brand-primary;
 
@@ -120,7 +119,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 }
 #secondary-nav {
-  @include box-shadow(inset 0 2px 4px rgba(0,0,0,0.5));
+  @include box-shadow(inset 0 4px 4px -4px rgba(0,0,0,0.5));
 }
 
 /* Change the responsive breakpoint for navs to screen-sm */
