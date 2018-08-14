@@ -229,8 +229,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
 /* Static content headers */
 .page-header h1 {
   font-size: $font-size-h3;
+  font-weight: 500;
   line-height: 1.333;
   text-transform: uppercase;
+  letter-spacing: normal;
 
   .small {
     display: block;

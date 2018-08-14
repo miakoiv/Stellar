@@ -642,6 +642,8 @@ i.icon {
 .page-header {
   border-bottom: 0;
 
+  > h1 > .fa,
+  > h1 > img { margin-right: 5px; }
   > h1 > img {
     display: inline-block;
     max-height: 1em;
@@ -653,6 +655,13 @@ i.icon {
   > .btn + .dropdown,
   > .dropdown + .btn { margin-right: 8px; }
 }
+@media (max-width: $screen-xs-max) {
+  .page-header > h1 {
+    clear: both;
+    padding-top: 20px;
+  }
+}
+
 .panel-footer { @extend .clearfix; }
 .panel-footer .btn { margin-bottom: 5px; }
 .panel-footer .btn + .btn { margin-left: 8px; }
@@ -1059,7 +1068,6 @@ i.icon {
 .selectize-dropdown,
 .selectize-input,
 .selectize-input input {
-  line-height: $line-height-base;
   color: $input-color;
 }
 .selectize-tall .selectize-dropdown-content { min-height: 400px; }
