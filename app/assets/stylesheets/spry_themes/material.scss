@@ -30,6 +30,7 @@ $navmenu-inverse-link-hover-bg: $brand-primary;
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
 @import "bootstrap-tweaks";
+@import "bootstrap-outline-buttons";
 @import "fonts";
 @import "print";
 
@@ -223,6 +224,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
     top: 50%;
     border-top: 2px solid $text-color;
   }
+}
+
+/* Shopping cart */
+#cart-contents {
+  .btn-danger { @include button-outline-variant($btn-danger-bg); }
 }
 
 
@@ -597,7 +603,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   margin-top: 20px;
 
   > a {
-    @extend .btn, .btn-sm, .btn-primary;
+    @extend .btn, .btn-sm, .btn-outline-primary;
   }
 }
 
