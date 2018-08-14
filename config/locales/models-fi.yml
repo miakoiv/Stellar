@@ -533,6 +533,7 @@ fi:
         theme: Teema
         styles: Yksityiskohtaiset tyylit
         detach_menu: Irroita päävalikko
+        masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori
         footer_page_id: Alatunnistesivu
         locale: Kieli
