@@ -1,4 +1,4 @@
-#cart-contents
+#cart-contents.fancy-cart
   - if order.empty?
     - if order.targeted?
       = t('store.cart_contents.empty_order_html')
@@ -10,7 +10,7 @@
     - if order.checkoutable?
       = render partial: 'checkout/order_type', object: order, as: :order
     - else
-      .pull-right= t('checkout.messages.cannot_checkout_html')
+      .text-right= t('checkout.messages.cannot_checkout_html')
 
   .actions
     = render partial: 'orders/actions', object: order, as: :order

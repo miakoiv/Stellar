@@ -339,8 +339,12 @@ body {
 
 
 /*
- * Fancy shopping cart
+ * Fancy shopping cart and mobile friendly cart list view
  */
+#cart-contents.fancy-cart {
+  #checkout-button .btn { @extend .btn-success; }
+  > .actions { padding-top: 20px; }
+}
 .cart-list { }
 .cart-list .cart-list-item {
   &.subrow {
