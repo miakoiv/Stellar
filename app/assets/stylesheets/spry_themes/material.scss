@@ -226,6 +226,19 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
   }
 }
 
+/* Static content headers */
+.page-header h1 {
+  font-size: $font-size-h3;
+  line-height: 1.333;
+  text-transform: uppercase;
+
+  .small {
+    display: block;
+    margin-top: 5px;
+    text-transform: none;
+  }
+}
+
 /* Shopping cart */
 #cart-contents {
   .btn-danger { @include button-outline-variant($btn-danger-bg); }
