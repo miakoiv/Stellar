@@ -611,15 +611,14 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 }
 
-
 /* Link to more at the bottom of a grid */
 .more-items-link {
-  @extend .pull-right;
-  margin-top: 20px;
-
   > a {
     @extend .btn, .btn-sm, .btn-outline-primary;
   }
+}
+#static-wrap .more-items-link {
+  margin-top: 20px;
 }
 
 
@@ -970,6 +969,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     flex: 0 0 auto;
     align-self: flex-start;
     float: none;
+    margin-bottom: 0;
 
     .product-image {
       @include contained-image;

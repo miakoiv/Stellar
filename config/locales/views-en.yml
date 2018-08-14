@@ -397,12 +397,12 @@ en:
       list_view: List view
     product_detail:
       variants: Alternatives for this product…
-  promotion_handler:
-    bundle_pricing:
-      title: Combine with other products for a package deal
-      help: Buy any %{amount} of these products for a total of %{price}
-    vanilla:
-      title: Other products on sale right now
+    promotion_handler:
+      bundle_pricing:
+        title: Combine with other products for a package deal
+        help: Buy any %{amount} of these products for a total of %{price}
+      vanilla:
+        title: Other products on sale right now
   store:
     front: Front page
     front_blurb: Store opening soon! Please check back later.

@@ -343,7 +343,11 @@ body {
  */
 #cart-contents.fancy-cart {
   #checkout-button .btn { @extend .btn-success; }
-  > .actions { padding-top: 20px; }
+  > .actions {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid $list-group-border;
+  }
 }
 .cart-list { }
 .cart-list .cart-list-item {

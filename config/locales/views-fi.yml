@@ -377,12 +377,12 @@ fi:
       list_view: Listanäkymä
     product_detail:
       variants: Vaihtoehtoisia tuotteita…
-  promotion_handler:
-    bundle_pricing:
-      title: Pakettitarjouksia tälle tuotteelle
-      help: Osta näitä tuotteita yhteensä %{amount} kpl tarjoushintaan %{price}
-    vanilla:
-      title: Muita tarjoustuotteita
+    promotion_handler:
+      bundle_pricing:
+        title: Pakettitarjouksia tälle tuotteelle
+        help: Osta näitä tuotteita yhteensä %{amount} kpl tarjoushintaan %{price}
+      vanilla:
+        title: Muita tarjoustuotteita
   store:
     front: Etusivu
     front_blurb: Kauppa avataan pian, tervetuloa lähipäivinä!

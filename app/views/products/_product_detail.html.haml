@@ -68,7 +68,7 @@
 
 .product-footer
   - product.live_promotions(selected_group).each do |promotion|
-    = render partial: promotion.promotion_handler, locals: {promotion: promotion, context: product}
+    = render partial: "products/#{promotion.promotion_handler.to_partial_path}", locals: {promotion: promotion, context: product}
 
   - if product.variant? && !product.has_master_properties?
     .variant-products
