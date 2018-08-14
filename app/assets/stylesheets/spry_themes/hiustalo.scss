@@ -2,13 +2,13 @@ $hiustalo-green: #a2b982;
 $hiustalo-red:   #ed1944;
 $hiustalo-blue:  #007db6;
 
-$brand-primary: $hiustalo-blue;
-$brand-success: #86bc2a;
-$brand-info:    lighten($hiustalo-blue, 25%);
-$brand-warning: #ffa538;
-$brand-danger:  $hiustalo-red;
+$brand-primary: $hiustalo-blue !default;
+$brand-success: #86bc2a !default;
+$brand-info:    lighten($hiustalo-blue, 25%) !default;
+$brand-warning: #ffa538 !default;
+$brand-danger:  $hiustalo-red !default;
 
-@import "material";
+@import "spry_themes/material";
 
 /*
  * Overrides to the material theme for Hiustalo

@@ -8,24 +8,24 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-$main-nav-height: 90px;
-$navbar-default-bg: #fff;
-$navbar-default-link-active-color: $brand-primary;
-$navbar-default-link-active-bg: transparent;
-$navbar-inverse-bg: darken($brand-primary, 17%);
-$navbar-inverse-link-active-bg: transparent;
+$main-nav-height: 90px !default;
+$navbar-default-bg: #fff !default;
+$navbar-default-link-active-color: $brand-primary !default;
+$navbar-default-link-active-bg: transparent !default;
+$navbar-inverse-bg: darken($brand-primary, 17%) !default;
+$navbar-inverse-link-active-bg: transparent !default;
 
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$font-size-base: 16px;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+$font-size-base: 16px !default;
 
-$border-radius-base: 2px;
-$border-radius-large: 3px;
-$border-radius-small: 1px;
+$border-radius-base: 2px !default;
+$border-radius-large: 3px !default;
+$border-radius-small: 1px !default;
 
-$footer-color: #e5e5e5;
-$footer-bg:    #555555;
-$navmenu-inverse-link-color: #aaa;
-$navmenu-inverse-link-hover-bg: $brand-primary;
+$footer-color: #e5e5e5 !default;
+$footer-bg:    #555555 !default;
+$navmenu-inverse-link-color: #aaa !default;
+$navmenu-inverse-link-hover-bg: $brand-primary !default;
 
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
@@ -34,8 +34,8 @@ $navmenu-inverse-link-hover-bg: $brand-primary;
 @import "fonts";
 @import "print";
 
-$body-tone-bg: darken($body-bg, 6%);
-$material-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+$body-tone-bg: darken($body-bg, 6%) !default;
+$material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 
 /*
