@@ -20,7 +20,8 @@ class Product < ActiveRecord::Base
     attributes = %w{code customer_code title subtitle}
     CSV.generate(
       headers: true,
-      col_sep: ';'
+      col_sep: ';',
+      force_quotes: true
     ) do |csv|
       csv << attributes
       all.each do |product|
