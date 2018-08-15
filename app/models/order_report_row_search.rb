@@ -13,8 +13,8 @@ class OrderReportRowSearch < Searchlight::Search
   def options
     this_month = Date.current.all_month
     super.tap do |opts|
-      opts[:since_date] = raw_options[:since_date].present? ? Date.parse(raw_options[:since_date]) : this_month.first
-      opts[:until_date] = raw_options[:until_date].present? ? Date.parse(raw_options[:until_date]) : this_month.last
+      opts[:since_date] = date_param(raw_options[:since_date], this_month.first)
+      opts[:until_date] = date_param(raw_options[:until_date], this_month.last)
     end
   end
 
@@ -53,4 +53,11 @@ class OrderReportRowSearch < Searchlight::Search
   def search_until_date
     query.where('ordered_at <= ?', until_date)
   end
+
+  private
+    def date_param(param, default)
+      return default unless param.present?
+      return param if param.is_a?(Date)
+      Date.parse(param)
+    end
 end
