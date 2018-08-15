@@ -94,6 +94,7 @@ class Product < ActiveRecord::Base
     live.master.where(purpose: [0, 3, 4, 5])
   }
 
+  scope :by_category_id, -> (id) { joins(:categories).where(categories: {id: id})}
   scope :not_including, -> (this) { where.not(id: this) }
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
