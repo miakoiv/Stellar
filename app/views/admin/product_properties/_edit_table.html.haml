@@ -46,7 +46,7 @@
             persist: false
             preload: true
             load: (query, callback) ->
-              callback() if !query
+              return callback() unless query
               $.ajax
                 url: show_paths[index]
                 success: (response) ->

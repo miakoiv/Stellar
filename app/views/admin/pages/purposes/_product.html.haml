@@ -6,7 +6,6 @@
   resources = $product.data 'resources'
   selected = $product.data 'selected'
   $product.selectize
-    preload: true
     options: resources
     items: selected
     valueField: 'id'
@@ -15,6 +14,7 @@
     diacritics: false
     render: $.fn.selectize.product_renderer
     load: (query, callback) ->
+      return callback() unless query.length > 2
       $.ajax
         url: '#{query_admin_products_path}'
         type: 'GET'

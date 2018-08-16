@@ -31,7 +31,6 @@
   $product.selectize
     plugins: ['remove_button']
     dropdownParent: 'body'
-    preload: true
     options: inventory_items
     items: selected
     valueField: 'id'
@@ -40,10 +39,14 @@
     diacritics: false
     render: $.fn.selectize.product_renderer
     load: (query, callback) ->
+      return callback() unless query.length > 2
       $.ajax
         url: '#{query_admin_products_path}'
         type: 'GET'
         dataType: 'json'
+        data:
+          q: query
+          having_variants: false
         error: ->
           callback()
         success: (response) ->

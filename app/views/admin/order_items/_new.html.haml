@@ -22,7 +22,7 @@
     diacritics: false
     render: $.fn.selectize.product_renderer
     load: (query, callback) ->
-      return callback() unless query
+      return callback() unless query.length > 2
       $.ajax
         url: $('#admin-order-item-form').data 'productQueryUrl'
         type: 'GET'
