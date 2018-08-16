@@ -60,6 +60,33 @@ namespace :images do
   end
 end
 
+namespace :categories do
+  desc "Import Mechanet category data"
+  task :mechanet, [:file] => :environment do |task, args|
+    store = Store.find_by name: 'Mechanet'
+    xlsx = Creek::Book.new args.file
+    xlsx.sheets.each do |sheet|
+      puts "[<] Sheet #{sheet.name}"
+      rows = sheet.rows.each_with_index
+      columns = rows.next[0].values
+      loop do
+        row, line = rows.next
+        values = row.values
+        next if values.empty?
+        data = columns.zip(values).to_h
+        category = find_or_create_category(store, data)
+        description = data['Tuotekuvaus']
+        lead_time = data['Toimitusaika']
+        category.products.update_all(
+          description: description,
+          lead_time: lead_time
+        )
+        puts "[%s] %-20s '%s'" % [category, lead_time, description]
+      end
+    end
+  end
+end
+
 namespace :products do
   desc "Import Mechanet product data"
   task :mechanet, [:file] => :environment do |task, args|
