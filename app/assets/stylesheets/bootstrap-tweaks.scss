@@ -339,8 +339,44 @@ body {
 
 
 /*
- * Fancy shopping cart and mobile friendly cart list view
+ * Shopping cart
  */
+#static-wrap.shopping-cart > .container {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .page-header { margin-top: 40px; }
+}
+#promoted-products {
+  margin-top: 40px;
+  padding: 10px $grid-gutter-width/2;
+
+  h2 { margin: 20px 0; }
+}
+.product-stripe {
+  display: flex;
+  flex-flow: row wrap;
+}
+.product-stripe .product-card {
+  flex: 1 1 auto;
+  max-width: 230px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: $screen-sm-min) {
+  #promoted-products {
+    margin-top: 0;
+    height: calc(100vh - #{$main-nav-height});
+    overflow-y: scroll;
+  }
+  .dual-nav #promoted-products {
+    height: calc(100vh - #{$main-nav-height} - #{$navbar-height});
+  }
+  .product-stripe .product-card { margin-right: 0; }
+}
+
+
+/* Fancy shopping cart and mobile friendly cart list view */
 #cart-contents.fancy-cart {
   #checkout-button .btn { @extend .btn-success; }
   > .actions {

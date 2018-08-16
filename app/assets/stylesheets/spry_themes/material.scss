@@ -245,6 +245,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 #cart-contents {
   .btn-danger { @include button-outline-variant($btn-danger-bg); }
 }
+#promoted-products {
+  background-color: $body-tone-bg;
+
+  h2 { font-size: $font-size-h4; }
+}
 
 
 /*
@@ -413,6 +418,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
 }
+
 
 /*
  * Products and product cards in straight and staggered grids

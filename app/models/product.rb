@@ -73,6 +73,8 @@ class Product < ActiveRecord::Base
   has_many :properties, through: :product_properties
   has_many :iframes, dependent: :destroy
 
+  has_many :order_report_rows, dependent: :destroy
+
   # Customer assets referring to this product.
   has_many :customer_assets, dependent: :destroy
 
@@ -122,6 +124,27 @@ class Product < ActiveRecord::Base
       [human_attribute_name(:live), true],
       [human_attribute_name(:not_live), false]
     ]
+  end
+
+  # Finds the top 10 best selling products in the context of given order,
+  # matching given order types, excepting items already present.
+  def self.best_selling(order, order_types)
+    if order_types.any?
+      existing_ids = order.order_items.pluck(:product_id)
+      search = OrderReportRowSearch.new(
+        order_type: order_types,
+        real_only: true,
+        live: true,
+        except_product_id: existing_ids,
+        since_date: 1.month.ago.to_date,
+        until_date: Date.current,
+        sort: 'amount DESC, order_report_rows.created_at DESC'
+      )
+      top10 = Reports::Sales.new(search).by_product.limit(10)
+      Product.find(top10.map(&:product_id))
+    else
+      Product.none
+    end
   end
 
   # Takes a CSV::Row and updates a product from its data in the given store

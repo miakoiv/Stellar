@@ -415,6 +415,8 @@ fi:
       empty_cart: Ostoskorisi on tyhjä.
       go_shopping: Ostoksille!
       empty_order_html: <p class="lead">Uuden tilauksen tai tarjouksen laatiminen</p><p>Lisää tuotteita ostoskoriin lisätäksesi ne tälle tilaukselle. Voit halutessasi lähettää tarjoussähköposteja, kunnes hyväksyt tilauksen lähettämällä sen, tai poistat tilauksen.</p>
+    cart_promotion:
+      title: Myydyimmät tuotteet
     profile: Omat tiedot
   checkout:
     panels:

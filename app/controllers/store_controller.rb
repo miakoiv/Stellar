@@ -67,7 +67,15 @@ class StoreController < ApplicationController
     render current_store.fancy_cart? ? :fancy_cart : :cart
   end
 
-  # Get /cart/quote/:recipient
+  # GET /products/promoted/1.js
+  def show_promoted_products
+    order_types = selected_group.outgoing_order_types
+    @products = Product.best_selling(shopping_cart, order_types)
+
+    respond_to :js
+  end
+
+  # GET /cart/quote/:recipient
   def quote
     @order = shopping_cart
     @recipient = case params[:recipient]
@@ -125,6 +133,7 @@ class StoreController < ApplicationController
   # POST /product/:product_id/order.js
   def order_product
     @order = shopping_cart
+    @order_types = @order.available_order_types
     @product = current_store.products.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
     @order.insert(@product, amount, @order.source)

@@ -42,6 +42,20 @@ class OrderReportRowSearch < Searchlight::Search
     query.where(product_id: product_id)
   end
 
+  def search_except_product_id
+    query.where.not(product_id: except_product_id)
+  end
+
+  def search_live
+    return query if empty?(live)
+    query.where(products: {live: checked?(live)})
+  end
+
+  def search_real_only
+    return query unless checked?(real_only)
+    query.where.not(products: {purpose: Product.purposes[:internal]})
+  end
+
   def search_keyword
     query.where("CONCAT_WS(' ', products.code, products.customer_code, products.title, products.subtitle) LIKE ?", "%#{keyword}%")
   end

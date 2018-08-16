@@ -435,6 +435,8 @@ en:
       empty_cart: Your shopping cart is empty.
       go_shopping: Go shopping.
       empty_order_html: <p class="lead">New order or quote</p><p>Add items to the shopping cart to include them in this order. You can send quotations by e-mail until approving the order by completing it, or deleting the order.</p>
+    cart_promotion:
+      title: Best sellers
     profile: Your profile
   checkout:
     panels:
