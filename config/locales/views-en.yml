@@ -142,6 +142,8 @@ en:
       new:
         new_inventory: New inventory
     inventory_items:
+      search:
+        select_inventory: Select inventory
       form:
         inventory_entry_help_html: Purchases only. Corrections and transfers via <a href="%{path}">Inventory levels</a>.
     order_items:

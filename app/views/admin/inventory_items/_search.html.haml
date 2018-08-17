@@ -9,7 +9,7 @@
             = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
         .col-sm-4.col-md-4
           .form-group
-            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: col(InventoryItem, :inventory_id), class: 'selectize'}
+            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: t('.select_inventory')}, {class: 'selectize'}
         .col-sm-4.col-md-4
           .form-group
             = f.select :online, InventoryItem.online_options, {}, {class: 'form-control selectize'}

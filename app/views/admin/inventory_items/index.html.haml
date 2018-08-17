@@ -7,8 +7,10 @@
   %table.table.table-hover.table-loose
     %thead
       %tr
+        - unless @search.inventory_id.present?
+          %th= col(InventoryItem, :inventory_id)
         %th= col(InventoryItem, :code)
-        %th= col(InventoryItem, :inventory_id)
+        %th= col(InventoryItem, :expires_at)
         %th= col(InventoryItem, :product_id)
         %th.col-xs-1.text-right= col(InventoryItem, :on_hand)
         %th.col-xs-1.text-right= col(InventoryItem, :reserved)
@@ -16,14 +18,17 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, @inventory_items do |inventory_item|
-        %td= inventory_item.code
-        %td= inventory_item.inventory.name
-        %td= product_header inventory_item
-        %td.text-right= inventory_item.on_hand
-        %td.text-right= inventory_item.reserved
-        %td.text-right= inventory_item.pending
-        %td.actions
-          = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item), class: 'btn btn-primary btn-sm'
+      - @inventory_items.each do |inventory_item|
+        %tr[inventory_item]
+          - unless @search.inventory_id.present?
+            %td= inventory_item.inventory
+          %td= inventory_item.code
+          %td= inventory_item.expires_at
+          %td= product_header inventory_item
+          %td.text-right= inventory_item.on_hand
+          %td.text-right= inventory_item.reserved
+          %td.text-right= inventory_item.pending
+          %td.actions
+            = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item), class: 'btn btn-primary btn-sm'
 
 = paginate @inventory_items

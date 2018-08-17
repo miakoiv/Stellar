@@ -122,6 +122,8 @@ fi:
       new:
         new_inventory: Uusi varasto
     inventory_items:
+      search:
+        select_inventory: Valitse varasto
       form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
     order_items:
