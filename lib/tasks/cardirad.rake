@@ -56,7 +56,7 @@ namespace :categories do
         parent = this
       end
       product = store.products.find_by(code: row[:code])
-      product.update!(categories: [this])
+      product.update!(categories: [this]) if product.present?
     end
   end
 end
