@@ -29,6 +29,38 @@ namespace :products do
   end
 end
 
+namespace :categories do
+  desc "Import Cardirad category data from CSV input"
+  task :cardirad, [:file] => :environment do |task, args|
+    store = Store.find_by name: 'Cardirad Finland'
+
+    CSV.foreach(args.file,
+      encoding: 'utf-8',
+      col_sep: ';',
+      skip_blanks: true,
+      headers: true,
+      header_converters: lambda { |h| h.parameterize('_').to_sym }
+    ) do |row|
+      categories = row
+        .to_h
+        .slice(:segment, :product_group, :product_family, :product_name)
+        .values
+        .compact
+        .map(&:strip)
+      parent = nil
+      this = nil
+      categories.each do |name|
+        this = store.categories
+          .create_with(product_scope: :alphabetical)
+          .find_or_create_by!(parent: parent, name: name)
+        parent = this
+      end
+      product = store.products.find_by(code: row[:code])
+      product.update!(categories: [this])
+    end
+  end
+end
+
 namespace :inventory do
   desc "Import Cardirad inventory data from CSV input"
   task :cardirad, [:code, :file] => :environment do |task, args|
