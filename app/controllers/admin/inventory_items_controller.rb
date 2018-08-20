@@ -5,6 +5,8 @@ class Admin::InventoryItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit]
 
+  authority_actions check: 'read'
+
   layout 'admin'
 
   # GET /admin/inventory_items
@@ -16,6 +18,9 @@ class Admin::InventoryItemsController < ApplicationController
     results = @search.results.reorder(nil)
       .merge(Product.alphabetical).order(:code)
     @inventory_items = results.page(params[:page])
+    @products = current_store.products
+      .find(@search.raw_options['product_id']
+      .reject(&:blank?))
   end
 
   # GET /admin/inventory_items/1
@@ -59,6 +64,11 @@ class Admin::InventoryItemsController < ApplicationController
         format.json { render json: @inventory_item.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /admin/inventory_items/check
+  def check
+    index
   end
 
   private

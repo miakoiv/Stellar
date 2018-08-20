@@ -94,6 +94,50 @@ Rails.application.routes.draw do
       resources :pictures, shallow: true
       resource :style
     end
+    resources :groups do
+      resources :users, only: [:index, :new, :create] do
+        patch :join, on: :member
+      end
+      member do
+        patch :make_default
+        get :select_categories
+        patch :toggle_category
+      end
+      post :reorder, on: :collection
+    end
+    resources :users, except: [:index, :new, :create] do
+      resources :roles, only: [] do
+        patch :toggle, on: :member
+      end
+    end
+    resources :policies do
+      patch :accept, on: :member
+    end
+    resources :tax_categories do
+      post :reorder, on: :collection
+    end
+    resources :inventories do
+      post :reorder, on: :collection
+    end
+    resources :inventory_items do
+      resources :inventory_entries, shallow: true, only: :create
+      collection do
+        get 'check', action: :check, as: :check
+      end
+    end
+    resources :properties do
+      post :reorder, on: :collection
+    end
+    resources :customer_assets do
+      resources :asset_entries, shallow: true, only: :create
+    end
+    resources :transfers do
+      resources :transfer_items, shallow: true
+      patch :complete, on: :member
+    end
+    resources :activities, only: [:index, :show] do
+      get :context, on: :collection
+    end
     resources :departments do
       resources :pictures, shallow: true
       post :reorder, on: :collection
@@ -170,6 +214,10 @@ Rails.application.routes.draw do
       post :add_products, on: :member
       post :add_categories, on: :member
     end
+    resources :order_types
+    resources :shipping_methods do
+      resources :pictures, shallow: true
+    end
     resources :orders do
       resources :pictures, shallow: true
       resources :order_items, shallow: true
@@ -190,51 +238,6 @@ Rails.application.routes.draw do
         get :review
         patch :conclude
       end
-    end
-    resources :properties do
-      post :reorder, on: :collection
-    end
-    resources :groups do
-      resources :users, only: [:index, :new, :create] do
-        patch :join, on: :member
-      end
-      member do
-        patch :make_default
-        get :select_categories
-        patch :toggle_category
-      end
-      post :reorder, on: :collection
-    end
-    resources :users, except: [:index, :new, :create] do
-      resources :roles, only: [] do
-        patch :toggle, on: :member
-      end
-    end
-    resources :customer_assets do
-      resources :asset_entries, shallow: true, only: :create
-    end
-    resources :tax_categories do
-      post :reorder, on: :collection
-    end
-    resources :inventories do
-      post :reorder, on: :collection
-    end
-    resources :inventory_items do
-      resources :inventory_entries, shallow: true, only: :create
-    end
-    resources :transfers do
-      resources :transfer_items, shallow: true
-      patch :complete, on: :member
-    end
-    resources :order_types
-    resources :shipping_methods do
-      resources :pictures, shallow: true
-    end
-    resources :policies do
-      patch :accept, on: :member
-    end
-    resources :activities, only: [:index, :show] do
-      get :context, on: :collection
     end
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
