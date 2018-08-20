@@ -1,9 +1,10 @@
-= link_to edit_admin_page_path(page), remote: true do
+.dd-content[page]
   - if page.movable?
     .dd-handle= drag_handle
-  .dd-icon= icon(page.icon)
-  = page
-  .dd-widget
-    = bootstrap_label(page)
-  - unless page.live?
-    .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})
+  = link_to edit_admin_page_path(page), remote: true do
+    .dd-icon= icon(page.icon)
+    = page
+    .dd-widget
+      = bootstrap_label(page)
+    - unless page.live?
+      .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})

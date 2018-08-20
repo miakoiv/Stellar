@@ -1,6 +1,0 @@
-$("#{j render @category}").appendTo('#category-list > .dd-list');
-$("##{dom_id(@category)}").closest('.dd-item').addClass('active');
-$('#category-form').html("#{j render partial: 'admin/categories/edit'}");
-$('#category-form').initialize();
-var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
-scroll.animateScroll($('##{dom_id(@category)}')[0], null, {speed: 300});

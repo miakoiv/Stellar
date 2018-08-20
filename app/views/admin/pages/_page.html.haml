@@ -1,6 +1,5 @@
 %li.dd-item{data: {id: page.id}, class: page.can_have_children? || 'dd-nochildren'}
-  .dd-content[page]
-    = render partial: 'item', object: page, as: :page
+  = render partial: 'item', object: page, as: :page
   - if page.children_count > 0
     %ol.dd-list
       = render partial: 'page', collection: page.children

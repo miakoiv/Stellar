@@ -33,7 +33,6 @@ class Admin::PagesController < ApplicationController
   end
 
   # POST /admin/pages
-  # POST /admin/pages.js
   # POST /admin/pages.json
   def create
     authorize_action_for Page, at: current_store
@@ -43,12 +42,11 @@ class Admin::PagesController < ApplicationController
     respond_to do |format|
       if @page.save
         track @page
+
         format.html { redirect_to edit_admin_page_path(@page), notice: t('.notice', page: @page) }
-        format.js { flash.now[:notice] = t('.notice', page: @page) }
         format.json { render :edit, status: :created, location: edit_admin_page_path(@page) }
       else
         format.html { render :new }
-        format.js { render json: @page.errors, status: :unprocessable_entity }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
@@ -63,6 +61,7 @@ class Admin::PagesController < ApplicationController
     respond_to do |format|
       if @page.update(page_params)
         track @page
+
         format.html { redirect_to edit_admin_page_path(@page), notice: t('.notice', page: @page) }
         format.js { flash.now[:notice] = t('.notice', page: @page) }
         format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }
@@ -104,9 +103,8 @@ class Admin::PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(
-        :purpose, :resource_type, :resource_id,
-        :live, :title, :slug,
-        :url
+        :parent_id, :purpose, :resource_type, :resource_id,
+        :live, :title, :slug, :url
       )
     end
 end

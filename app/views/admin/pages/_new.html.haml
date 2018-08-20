@@ -1,1 +1,10 @@
-= render partial: 'form'
+= bootstrap_form_for [:admin, @page] do |f|
+  .panel.panel-primary
+    .panel-body
+      %fieldset
+        = f.select :parent_id, current_store.pages.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: blank}, {class: 'selectize'}
+        = f.select :purpose, Page.purpose_options, {}, {class: 'selectize'}
+        = f.text_field :title, required: true
+        = f.hidden_field :live
+    .panel-footer
+      = f.primary

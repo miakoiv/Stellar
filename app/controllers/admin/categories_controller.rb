@@ -39,21 +39,19 @@ class Admin::CategoriesController < ApplicationController
   end
 
   # POST /admin/categories
-  # POST /admin/categories.js
   # POST /admin/categories.json
   def create
     authorize_action_for Category, at: current_store
-    @category = current_store.categories.build(category_params)
+    @category = current_store.categories.build(category_params.merge(product_scope: :alphabetical))
 
     respond_to do |format|
       if @category.save
         track @category
+
         format.html { redirect_to edit_admin_category_path(@category), notice: t('.notice', category: @category) }
-        format.js { flash.now[:notice] = t('.notice', category: @category) }
         format.json { render :edit, status: :created, location: edit_admin_category_path(@category) }
       else
         format.html { render :new }
-        format.js { render json: @category.errors, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -68,7 +66,6 @@ class Admin::CategoriesController < ApplicationController
     respond_to do |format|
       if @category.update(category_params)
         track @category
-        @categories = current_store.categories.roots
 
         format.html { redirect_to admin_category_path(@category), notice: t('.notice', category: @category) }
         format.js { flash.now[:notice] = t('.notice', category: @category) }
@@ -110,7 +107,8 @@ class Admin::CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(
-        :live, :name, :subtitle, :product_scope, :filtering, :view_mode
+        :parent_id, :live, :name, :subtitle,
+        :product_scope, :filtering, :view_mode
       )
     end
 end

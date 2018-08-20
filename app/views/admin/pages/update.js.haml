@@ -1,4 +1,4 @@
-$("##{dom_id(@page)}").html("#{j render partial: 'item', object: @page, as: :page}");
+$("##{dom_id(@page)}").replaceWith("#{j render partial: 'item', object: @page, as: :page}");
 $("##{dom_id(@page)}").closest('.dd-item').addClass('active');
 - if @page.page.present?
   $("##{dom_id(@page.page)}").html("#{j render partial: 'item', object: @page.page, as: :page}");
