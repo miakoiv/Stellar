@@ -153,6 +153,10 @@ module ApplicationHelper
     end
   end
 
+  def number_if_present(number, prefix = nil)
+    number == 0 ? '' : "#{prefix}#{number}"
+  end
+
   def column_class(column)
     ['column', column.alignment, column.pivot? && 'pivot'].join ' '
   end

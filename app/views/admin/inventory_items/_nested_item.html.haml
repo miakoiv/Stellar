@@ -1,0 +1,19 @@
+.list-group-item
+  .row
+    .col-xs-4.col-sm-3
+      = inventory_item.inventory
+    .col-xs-4.col-sm-2
+      - if inventory_item.expires_at.present?
+        = icon('hourglass-end', inventory_item.expires_at)
+    .col-xs-4.col-sm-2
+      .text-right
+        %strong= inventory_item.code
+    .col-xs-3.col-sm-1
+      .text-right.text-muted.small
+        = number_if_present(inventory_item.reserved, '–')
+    .col-xs-3.col-sm-1
+      .text-right.text-muted.small
+        = number_if_present(inventory_item.pending, '+')
+    .col-xs-3.col-sm-1
+      .text-right= inventory_item.on_hand
+    .col-xs-3.col-sm-2

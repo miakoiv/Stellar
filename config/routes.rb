@@ -122,7 +122,8 @@ Rails.application.routes.draw do
     resources :inventory_items do
       resources :inventory_entries, shallow: true, only: :create
       collection do
-        get 'check', action: :check, as: :check
+        get :query
+        get :check
       end
     end
     resources :properties do

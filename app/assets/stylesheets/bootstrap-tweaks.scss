@@ -1324,9 +1324,42 @@ fieldset > legend {
 /*
  * List groups
  */
+.list-group.nested {
+  > .list-group-item {
+    @extend a.list-group-item;
+
+    &.open .toggle { @extend .fa-rotate-180; }
+    &:hover { cursor: pointer; }
+  }
+  > .list-group-item .sub-list { margin: 0 -15px; }
+  > .list-group-item .list-group {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: $font-size-small;
+
+    &:hover { cursor: default; }
+    .list-group-item {
+      padding: 5px 15px;
+      border-left: 0;
+      border-right: 0;
+      border-radius: 0;
+    }
+  }
+}
+.list-group-item .row {
+  display: flex;
+  flex-flow: row wrap;
+
+  > div { flex: 0 0 auto; }
+}
+
 .well > .list-group {
   margin-left: -20px;
   margin-right: -20px;
+}
+.list-group-item .product {
+  a { font-weight: bold; }
+  .badge { margin-left: 0.333em; }
 }
 
 

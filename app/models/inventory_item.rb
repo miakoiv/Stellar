@@ -38,6 +38,16 @@ class InventoryItem < ActiveRecord::Base
   after_touch :update_counts_and_value!
 
   #---
+  def self.by_product
+    select(
+      'inventory_items.product_id,
+      SUM(on_hand) AS total_on_hand,
+      SUM(reserved) AS total_reserved,
+      SUM(pending) AS total_pending,
+      products.*'
+    ).group(:product_id)
+  end
+
   # Options for a search form.
   def self.online_options
     [

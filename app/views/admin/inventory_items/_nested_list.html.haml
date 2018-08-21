@@ -1,0 +1,35 @@
+#inventory-item-list
+  .list-group.nested
+    - @inventory_items.each do |inventory_item|
+      .list-group-item.expand{data: {product_id: inventory_item.product_id}}
+        .row
+          .col-xs-12.col-sm-7
+            = product_header inventory_item
+          .col-xs-3.col-sm-1
+            .text-right.text-muted.small
+              = number_if_present(inventory_item.total_reserved, '–')
+          .col-xs-3.col-sm-1
+            .text-right.text-muted.small
+              = number_if_present(inventory_item.total_pending, '+')
+          .col-xs-3.col-sm-1
+            .text-right
+              %strong= inventory_item.total_on_hand
+          .col-xs-3.col-sm-2
+            .text-right= icon('caret-down', class: 'toggle')
+        .sub-list.collapse[inventory_item.product]
+          .list-group
+
+:coffee
+  $('#inventory-item-list').on 'click', '.expand', (e) ->
+    $row = $(e.currentTarget);
+    if $row.hasClass 'open'
+      $row.removeClass 'open'
+      $row.find('.collapse').collapse 'hide'
+    else
+      $row.addClass 'open'
+      $.ajax
+        url: '#{query_admin_inventory_items_path}'
+        type: 'GET'
+        dataType: 'script'
+        data:
+          product_id: $row.data('productId')

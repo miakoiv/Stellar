@@ -5,7 +5,7 @@ class Admin::InventoryItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit]
 
-  authority_actions check: 'read'
+  authority_actions query: 'read', check: 'read'
 
   layout 'admin'
 
@@ -17,10 +17,20 @@ class Admin::InventoryItemsController < ApplicationController
     @search = InventoryItemSearch.new(search_params)
     results = @search.results.reorder(nil)
       .merge(Product.alphabetical).order(:code)
-    @inventory_items = results.page(params[:page])
+    @inventory_items = results.by_product.page(params[:page])
     @products = current_store.products
       .find(@search.raw_options['product_id']
       .reject(&:blank?))
+  end
+
+  # GET /admin/inventory_items/query.js
+  def query
+    authorize_action_for InventoryItem, at: current_store
+    @product = current_store.products.find(params[:product_id])
+    @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
+    @search = InventoryItemSearch.new(search_params.merge(params))
+    results = @search.results.reorder('inventories.name', 'code')
+    @inventory_items = results
   end
 
   # GET /admin/inventory_items/1
