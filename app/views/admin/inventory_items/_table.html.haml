@@ -2,11 +2,9 @@
   %table.table.table-hover.table-loose
     %thead
       %tr
-        %th.col-xs-3= col(InventoryItem, :code)
-        %th.col-xs-3= col(InventoryItem, :inventory_id)
+        %th.col-xs-2= col(InventoryItem, :code)
+        %th.col-xs-4= col(InventoryItem, :inventory_id)
         %th.col-xs-2.text-right à
-        %th.col-xs-2.text-right= icon('cube', title: col(InventoryItem, :on_hand), data: {toggle: 'tooltip'})
-        %th.col-xs-1.text-right= icon('arrow-down', title: col(InventoryItem, :reserved), data: {toggle: 'tooltip'})
-        %th.col-xs-1.text-right= icon('arrow-up', title: col(InventoryItem, :pending), data: {toggle: 'tooltip'})
+        %th.col-xs-2.text-right= col(InventoryItem, :on_hand)
     %tbody#inventory-items-tbody
       = render partial: 'admin/inventory_items/tbody', object: product, as: :product

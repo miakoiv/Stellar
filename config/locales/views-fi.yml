@@ -125,6 +125,8 @@ fi:
       search:
         all_inventories: "[Kaikki varastot]"
         product_query: Kirjoita hakeaksesi tuotteita…
+      nested_item:
+        open: Avaa
       form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
     order_items:

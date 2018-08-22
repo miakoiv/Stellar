@@ -19,5 +19,4 @@
     .col-xs-3.col-sm-2
       - if current_user.can_update?(inventory_item, at: current_store)
         .pull-right
-          = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item),
-                class: 'btn btn-default btn-xs'
+          = link_to icon('folder-open-o', t('.open')), edit_admin_inventory_item_path(inventory_item), remote: true, class: 'btn btn-default btn-xs'

@@ -6,6 +6,8 @@
         .sub-list.collapse
           .list-group
 
+#inventory-items-edit-modal.modal{data: {backdrop: 'static'}}
+
 :coffee
   $('#inventory-item-list').on 'click', '.expand .row', (e) ->
     $row = $(e.currentTarget).parent();

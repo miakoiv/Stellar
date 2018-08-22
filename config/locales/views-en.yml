@@ -145,6 +145,8 @@ en:
       search:
         all_inventories: "[All inventories]"
         product_query: Type to search for products…
+      nested_item:
+        open: Open
       form:
         inventory_entry_help_html: Purchases only. Corrections and transfers via <a href="%{path}">Inventory levels</a>.
     order_items:

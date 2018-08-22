@@ -45,8 +45,11 @@ class Admin::InventoryItemsController < ApplicationController
   end
 
   # GET /admin/inventory_items/1/edit
+  # GET /admin/inventory_items/1/edit.js
   def edit
     authorize_action_for @inventory_item, at: current_store
+
+    respond_to :html, :js
   end
 
   # POST /admin/inventory_items

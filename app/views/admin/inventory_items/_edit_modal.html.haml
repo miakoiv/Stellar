@@ -1,0 +1,14 @@
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header
+      %button.close{data: {dismiss: 'modal'}}= icon('close')
+      %h4.modal-title
+        = @inventory_item.inventory
+        %span.text-muted= col(InventoryItem, :code).downcase
+        = @inventory_item
+        .small
+          %strong= @inventory_item.product.title
+          = @inventory_item.product.subtitle
+    .modal-body
+      = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item
+      = render partial: 'admin/inventory_entries/form'

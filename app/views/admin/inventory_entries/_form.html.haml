@@ -16,5 +16,5 @@
             %td.col-xs-2
               = f.text_field :value, value: @inventory_item.product.trade_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
             %td.col-xs-1.actions
-              = f.button t('.submit'), class: 'btn btn-default' do
+              = f.button t('.submit'), class: 'btn btn-primary' do
                 = icon('check')
