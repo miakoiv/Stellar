@@ -16,7 +16,7 @@
               %strong= inventory_item.total_on_hand
           .col-xs-3.col-sm-2
             .text-right= icon('caret-down', class: 'toggle')
-        .sub-list.collapse[inventory_item.product]
+        .sub-list.collapse{id: dom_id(inventory_item.product)}
           .list-group
 
 :coffee
@@ -33,3 +33,5 @@
         dataType: 'script'
         data:
           product_id: $row.data('productId')
+  $('#inventory-item-list').on 'click', '.sub-list', (e) ->
+    e.stopPropagation()
