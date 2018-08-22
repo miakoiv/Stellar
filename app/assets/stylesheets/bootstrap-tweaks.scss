@@ -1358,8 +1358,8 @@ fieldset > legend {
   margin-right: -20px;
 }
 .list-group-item .product {
-  a { font-weight: bold; }
-  .badge { margin-left: 0.333em; }
+  > a { font-weight: bold; }
+  > .badge { margin-left: 0.333em; }
 }
 
 
