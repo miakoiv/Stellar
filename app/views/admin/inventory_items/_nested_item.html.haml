@@ -1,4 +1,4 @@
-.list-group-item
+.list-group-item[inventory_item]{class: inventory_item.on_hand == 0 && 'disabled'}
   .row
     .col-xs-4.col-sm-3
       = inventory_item.inventory
@@ -17,3 +17,7 @@
     .col-xs-3.col-sm-1
       .text-right= inventory_item.on_hand
     .col-xs-3.col-sm-2
+      - if current_user.can_update?(inventory_item, at: current_store)
+        .pull-right
+          = link_to icon('edit', t('actions.edit')), edit_admin_inventory_item_path(inventory_item),
+                class: 'btn btn-default btn-xs'
