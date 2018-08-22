@@ -4,22 +4,22 @@
   .panel-body
     = form_for @search, url: admin_inventory_items_path, method: :get do |f|
       .row
-        .col-sm-4.col-md-4
+        .col-sm-8.col-md-9
           .form-group
-            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {include_blank: t('.all_inventories')}, {class: 'selectize'}
-        .col-sm-4.col-md-4
-          .form-group
-            = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
-        .col-sm-4.col-md-4
+            = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: t('.all_inventories'), class: 'selectize'}
+        .col-sm-4.col-md-3
           .form-group
             = f.select :online, InventoryItem.online_options, {}, {class: 'form-control selectize'}
-        .col-sm-6.col-md-6
+        .col-sm-12.col-md-5
           .form-group
-            = f.select :product_id, [], {}, {multiple: true, placeholder: col(InventoryItem, :product_id), class: 'selectize-tall selectize-list-group', data: {products: @products, selected: @search.raw_options['product_id']}}
+            = f.select :product_id, [], {}, {multiple: true, placeholder: t('.product_query'), class: 'selectize-tall selectize-list-group', data: {products: @products, selected: @search.raw_options['product_id']}}
+        .col-sm-5.col-md-2
+          .form-group
+            = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'
         .col-sm-3.col-md-3
           .form-group
             = f.select :live, Product.availability_options, {include_blank: t('admin.products.search.availability')}, {placeholder: t('admin.products.search.availability'), class: 'form-control selectize'}
-        .col-sm-3.col-md-3
+        .col-sm-4.col-md-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
