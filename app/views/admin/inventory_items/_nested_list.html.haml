@@ -1,22 +1,9 @@
 #inventory-item-list
   .list-group.nested
     - @inventory_items.each do |inventory_item|
-      .list-group-item.expand{data: {product_id: inventory_item.product_id}}
-        .row
-          .col-xs-12.col-sm-7
-            = product_header inventory_item
-          .col-xs-3.col-sm-1
-            .text-right.text-muted.small
-              = number_if_present(inventory_item.total_reserved, '–')
-          .col-xs-3.col-sm-1
-            .text-right.text-muted.small
-              = number_if_present(inventory_item.total_pending, '+')
-          .col-xs-3.col-sm-1
-            .text-right
-              %strong= inventory_item.total_on_hand
-          .col-xs-3.col-sm-2
-            .text-right= icon('caret-down', class: 'toggle')
-        .sub-list.collapse{id: dom_id(inventory_item.product)}
+      .list-group-item.expand{id: dom_id(inventory_item.product), data: {product_id: inventory_item.product_id}}
+        = render partial: 'nested_list_row', object: inventory_item, as: :inventory_item
+        .sub-list.collapse
           .list-group
 
 :coffee

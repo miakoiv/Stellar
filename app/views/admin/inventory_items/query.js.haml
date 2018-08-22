@@ -1,2 +1,2 @@
-$('##{dom_id(@product)} .list-group').html("#{j render partial: 'nested_item', collection: @inventory_items, as: :inventory_item}");
-$('##{dom_id(@product)}').collapse('show');
+$('##{dom_id(@product)} .sub-list .list-group').html("#{j render partial: 'nested_item', collection: @inventory_items, as: :inventory_item}");
+$('##{dom_id(@product)} .collapse').collapse('show');

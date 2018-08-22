@@ -1,0 +1,14 @@
+.row
+  .col-xs-12.col-sm-7
+    = product_header inventory_item
+  .col-xs-3.col-sm-1
+    .text-right.text-muted.small
+      = number_if_present(inventory_item.total_reserved, '–')
+  .col-xs-3.col-sm-1
+    .text-right.text-muted.small
+      = number_if_present(inventory_item.total_pending, '+')
+  .col-xs-3.col-sm-1
+    .text-right
+      %strong= inventory_item.total_on_hand
+  .col-xs-3.col-sm-2
+    .text-right= icon('caret-down', class: 'toggle')
