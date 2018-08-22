@@ -7,8 +7,8 @@
           .list-group
 
 :coffee
-  $('#inventory-item-list').on 'click', '.expand', (e) ->
-    $row = $(e.currentTarget);
+  $('#inventory-item-list').on 'click', '.expand .row', (e) ->
+    $row = $(e.currentTarget).parent();
     if $row.hasClass 'open'
       $row.removeClass 'open'
       $row.find('.collapse').collapse 'hide'
@@ -20,5 +20,3 @@
         dataType: 'script'
         data:
           product_id: $row.data('productId')
-  $('#inventory-item-list').on 'click', '.sub-list', (e) ->
-    e.stopPropagation()
