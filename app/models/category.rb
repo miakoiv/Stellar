@@ -33,6 +33,10 @@ class Category < ActiveRecord::Base
   validates :product_scope, presence: true
 
   #---
+  def self.find_self_and_descendants(id)
+    find(id).self_and_descendants
+  end
+
   def self.view_mode_options
     VIEW_MODES.map { |m| [Category.human_attribute_value(:view_mode, m), m] }
   end
