@@ -9,7 +9,7 @@
 #inventory-items-edit-modal.modal{data: {backdrop: 'static'}}
 
 :coffee
-  $('#inventory-item-list').on 'click', '.expand .row', (e) ->
+  $('#inventory-item-list').on 'click', '.expand > .row', (e) ->
     $row = $(e.currentTarget).parent();
     if $row.hasClass 'open'
       $row.removeClass 'open'
