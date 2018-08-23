@@ -354,7 +354,7 @@ class Product < ActiveRecord::Base
       reset_live_status! if persisted?
     end
 
-    def touch_variants(context)
+    def touch_variants(context = nil)
       return true unless has_variants?
       transaction do
         variants.each(&:touch)
