@@ -13,8 +13,9 @@
               = f.number_field :on_hand, value: 0, class: 'form-control text-right'
               = f.hidden_field :reserved, value: 0
               = f.hidden_field :pending, value: 0
-            %td.col-xs-2
-              = f.text_field :value, value: @inventory_item.product.trade_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
-            %td.col-xs-1.actions
-              = f.button t('.submit'), class: 'btn btn-primary' do
-                = icon('check')
+            %td.col-xs-2.actions
+              .input-group
+                = f.text_field :value, value: @inventory_item.product.trade_price, placeholder: col(InventoryEntry, :value), class: 'form-control text-right'
+                %span.input-group-btn
+                  = f.button t('.submit'), class: 'btn btn-primary' do
+                    = icon('check')

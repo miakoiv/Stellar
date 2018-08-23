@@ -2,11 +2,10 @@
   %table.table.table-hover.table-loose
     %thead
       %tr
-        %td.col-min
+        %th.col-min
         %th.col-xs-2= col(InventoryEntry, :recorded_at)
         %th= col(InventoryEntry, :note)
         %th.col-xs-1.text-right.no-wrap= col(InventoryEntry, :on_hand)
         %th.col-xs-2.text-right= col(InventoryEntry, :value)
-        %th.col-xs-1
     %tbody#inventory-entries-tbody
       = render partial: 'admin/inventory_entries/tbody', object: @inventory_item, as: :inventory_item

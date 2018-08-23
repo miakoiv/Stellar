@@ -9,6 +9,7 @@
         .small
           %strong= @inventory_item.product.title
           = @inventory_item.product.subtitle
+    .modal-header.bg-info
+      = render partial: 'admin/inventory_entries/form'
     .modal-body
       = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item
-      = render partial: 'admin/inventory_entries/form'

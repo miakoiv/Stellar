@@ -708,6 +708,13 @@ i.icon {
 .panel-footer .btn { margin-bottom: 5px; }
 .panel-footer .btn + .btn { margin-left: 8px; }
 
+.modal-header .table {
+  margin-bottom: 0;
+
+  > tbody > tr > th,
+  > tbody > tr > td { border: 0; }
+}
+
 
 /*
  * Overrides to nested navmenus
