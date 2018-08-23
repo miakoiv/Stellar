@@ -9,6 +9,7 @@ class Admin::InventoryEntriesController < ApplicationController
   def create
     authorize_action_for InventoryEntry, at: current_store
     @inventory_entry = @inventory_item.inventory_entries.build(inventory_entry_params)
+    @inventory_entry.source ||= current_user
 
     respond_to do |format|
       if @inventory_entry.save
