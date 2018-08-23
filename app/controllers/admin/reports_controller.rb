@@ -33,7 +33,7 @@ class Admin::ReportsController < ApplicationController
   def sales
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
-    @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
+    @query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types
 
     respond_to do |format|
@@ -100,7 +100,9 @@ class Admin::ReportsController < ApplicationController
     end
 
     def set_default_order_types
-      @query['order_type'] = @order_types.pluck(:id) if @query['order_type'] == ['']
+      types = @query['order_type'] || []
+      types = @order_types.pluck(:id) if types.blank? || types == ['']
+      @query['order_type'] = types
     end
 
     # Params specific to the inherent controls tabular provides.
