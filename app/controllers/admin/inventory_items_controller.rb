@@ -19,8 +19,7 @@ class Admin::InventoryItemsController < ApplicationController
       .merge(Product.alphabetical).order(:code)
     @inventory_items = results.by_product.page(params[:page])
     @products = current_store.products
-      .find(@search.raw_options['product_id']
-      .reject(&:blank?))
+      .find((@query['product_id'] || []).reject(&:blank?))
   end
 
   # GET /admin/inventory_items/query.js
