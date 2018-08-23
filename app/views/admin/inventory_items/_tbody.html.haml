@@ -5,5 +5,5 @@
   %td.text-right
     = inventory_item.on_hand
     %span.text-muted
-      = number_if_present(rand(3), '–')
-      = number_if_present(rand(3), '+')
+      = number_if_present(inventory_item.reserved, '–')
+      = number_if_present(inventory_item.pending, '+')
