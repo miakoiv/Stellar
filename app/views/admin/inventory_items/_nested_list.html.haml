@@ -22,3 +22,12 @@
         dataType: 'script'
         data:
           product_id: $row.data('productId')
+
+  $('#inventory-items-edit-modal').on 'hide.bs.modal', (e) ->
+    $modal = $(this).find('.modal-dialog')
+    $.ajax
+      url: '#{refresh_admin_inventory_items_path}'
+      type: 'GET'
+      dataType: 'script'
+      data:
+        product_id: $modal.data('productId')

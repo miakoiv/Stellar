@@ -123,6 +123,7 @@ Rails.application.routes.draw do
       resources :inventory_entries, shallow: true, only: :create
       collection do
         get :query
+        get :refresh
         get :check
       end
     end

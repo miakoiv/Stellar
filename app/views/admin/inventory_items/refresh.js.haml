@@ -1,0 +1,3 @@
+$('##{dom_id(@product)} > .row').replaceWith("#{j render partial: 'admin/inventory_items/nested_list_row', object: @inventory_item, as: :inventory_item}");
+$('##{dom_id(@product)} .sub-list .list-group').html("#{j render partial: 'nested_item', collection: @inventory_items, as: :inventory_item}");
+$('##{dom_id(@product)}').effect('highlight');
