@@ -29,7 +29,7 @@ class Admin::ProductPropertiesController < ApplicationController
     track @product_property, @product
 
     respond_to do |format|
-      if @product_property.destroy
+      if @product.product_properties.destroy(@product_property)
         @product.touch
         format.js
       end

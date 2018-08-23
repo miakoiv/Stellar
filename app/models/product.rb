@@ -69,7 +69,7 @@ class Product < ActiveRecord::Base
   has_many :component_products, through: :component_entries, source: :component
   has_many :requisite_entries, dependent: :destroy
   has_many :requisite_products, through: :requisite_entries, source: :requisite
-  has_many :product_properties, dependent: :destroy
+  has_many :product_properties, dependent: :destroy, after_add: :touch_variants, after_remove: :touch_variants
   has_many :properties, through: :product_properties
   has_many :iframes, dependent: :destroy
 
@@ -110,6 +110,7 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
+  after_save :touch_variants
   after_save :touch_categories
   after_save :reset_live_status!
 
@@ -351,6 +352,13 @@ class Product < ActiveRecord::Base
   protected
     def reset_itself!(context)
       reset_live_status! if persisted?
+    end
+
+    def touch_variants(context)
+      return true unless has_variants?
+      transaction do
+        variants.each(&:touch)
+      end
     end
 
     def touch_categories
