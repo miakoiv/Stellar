@@ -68,16 +68,19 @@ en:
         title: Inventory value
         total_value: Total value
         items: Items
+      search:
+        all_order_types: "[All order types]"
+        all_categories: "[All categories]"
+        since_date: Since date
+        until_date: Until date
+        countries: "[All destination countries]"
+        store_portals: "[All store portals]"
+        users: "[All users]"
       sales:
         title: Sales
         total_value: Total value before tax
         total_units: Total units sold
         products: Products
-        search:
-          since_date: Since date
-          until_date: Until date
-          countries: Destination countries
-          store_portals: Store portals
         chart:
           units: Units
           value: Sales €
@@ -87,11 +90,6 @@ en:
         total_value: Total value before tax
         total_units: Total units purchased
         products: Products
-        search:
-          since_date: Since date
-          until_date: Until date
-          users: Users
-          countries: Destination countries
         chart:
           units: Units
           value: Purchases €

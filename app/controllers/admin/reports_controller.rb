@@ -34,7 +34,7 @@ class Admin::ReportsController < ApplicationController
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
     @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @query.reverse_merge!('order_type' => @order_types.first)
+    set_default_order_types
 
     respond_to do |format|
       format.html {
@@ -54,8 +54,8 @@ class Admin::ReportsController < ApplicationController
   def sales_tax
     @order_types = current_group.incoming_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
-    @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @query.reverse_merge!('order_type' => @order_types.first)
+    @query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
+    set_default_order_types
 
     respond_to do |format|
       format.json {
@@ -71,8 +71,8 @@ class Admin::ReportsController < ApplicationController
   def purchases
     @order_types = current_group.outgoing_order_types
     return render nothing: true, status: :bad_request if @order_types.empty?
-    @query = saved_search_query('order_report_row', 'admin_order_report_row_search')
-    @query.reverse_merge!('order_type' => @order_types.first)
+    @query = saved_search_query('order_report_row', 'admin_purchases_order_report_row_search')
+    set_default_order_types
 
     respond_to do |format|
       format.html {
@@ -97,6 +97,10 @@ class Admin::ReportsController < ApplicationController
     # Params specifying a view but not saved with the search query.
     def view_params
       params.fetch(:view_params) {{}}
+    end
+
+    def set_default_order_types
+      @query['order_type'] = @order_types.pluck(:id) if @query['order_type'] == ['']
     end
 
     # Params specific to the inherent controls tabular provides.

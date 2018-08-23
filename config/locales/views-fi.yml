@@ -48,16 +48,19 @@ fi:
         title: Varaston arvo
         total_value: Arvo yhteensä
         items: Nimikkeitä
+      search:
+        all_order_types: "[Kaikki tilaustyypit]"
+        all_categories: "[Kaikki tuoteryhmät]"
+        since_date: Pvm alkaen
+        until_date: Pvm päättyen
+        countries: "[Kaikki kohdemaat]"
+        store_portals: "[Kaikki kauppaverkostot]"
+        users: "[Kaikki käyttäjät]"
       sales:
         title: Myynnit
         total_value: Arvo ennen veroja
         total_units: Myytyjä kappaleita
         products: Tuotteita
-        search:
-          since_date: Pvm alkaen
-          until_date: Pvm päättyen
-          countries: Kohdemaat
-          store_portals: Kauppaverkostot
         chart:
           units: Kpl
           value: Myynti €
@@ -67,11 +70,6 @@ fi:
         total_value: Arvo ennen veroja
         total_units: Ostettuja kappaleita
         products: Tuotteita
-        search:
-          since_date: Pvm alkaen
-          until_date: Pvm päättyen
-          users: Käyttäjät
-          countries: Kohdemaat
         chart:
           units: Kpl
           value: Ostot €

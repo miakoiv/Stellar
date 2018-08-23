@@ -4,25 +4,24 @@
   .panel-body
     = form_for @search, url: admin_sales_report_path, method: :get, remote: true do |f|
       .row
-        .col-sm-6.col-md-4
+        .col-sm-12
           .form-group
-            = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: col(Order, :order_type_id), class: 'form-control selectize'}
-        .col-sm-6.col-md-4
+            = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_order_types'), class: 'form-control selectize'}
+        .col-sm-12
           .form-group
-            = f.select :categories, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {}, {multiple: true, placeholder: col(Product, :category_ids), class: 'form-control selectize'}
+            = f.select :categories, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
+        .col-sm-6
+          .form-group
+            = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.countries'), class: 'form-control selectize'}
+        .col-sm-6
+          .form-group
+            = f.select :store_portal_id, current_store.store_portals.map { |s| [s.to_s, s.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.store_portals'), class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
             .input-group.input-daterange{data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}}
-              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.since_date'), class: 'form-control'
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.search.since_date'), class: 'form-control'
               %span.input-group-addon= icon('caret-right')
-              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.sales.search.until_date'), class: 'form-control'
-        .clearfix.hidden-sm-block
-        .col-sm-4.col-md-4
-          .form-group
-            = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.sales.search.countries'), class: 'form-control selectize'}
-        .col-sm-4.col-md-4
-          .form-group
-            = f.select :store_portal_id, current_store.store_portals.map { |s| [s.to_s, s.id] }, {}, {multiple: true, placeholder: t('admin.reports.sales.search.store_portals'), class: 'form-control selectize'}
-        .col-sm-4.col-md-2.col-md-offset-2
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.search.until_date'), class: 'form-control'
+        .col-sm-3.col-sm-offset-3.col-md-offset-5
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
