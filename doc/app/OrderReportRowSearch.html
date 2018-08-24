@@ -87,11 +87,17 @@
     
     <li ><a href="#method-i-search_categories">#search_categories</a>
     
+    <li ><a href="#method-i-search_except_product_id">#search_except_product_id</a>
+    
     <li ><a href="#method-i-search_keyword">#search_keyword</a>
+    
+    <li ><a href="#method-i-search_live">#search_live</a>
     
     <li ><a href="#method-i-search_order_type">#search_order_type</a>
     
     <li ><a href="#method-i-search_product_id">#search_product_id</a>
+    
+    <li ><a href="#method-i-search_real_only">#search_real_only</a>
     
     <li ><a href="#method-i-search_shipping_country_code">#search_shipping_country_code</a>
     
@@ -158,7 +164,7 @@
           <div class="method-source-code" id="base_query-source">
             <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
-  <span class="ruby-constant">OrderReportRow</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-value">:categories</span>)
+  <span class="ruby-constant">OrderReportRow</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:product</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -198,8 +204,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">options</span>
   <span class="ruby-identifier">this_month</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>.<span class="ruby-identifier">all_month</span>
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">opts</span>[<span class="ruby-value">:since_date</span>] = <span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:since_date</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:since_date</span>]) <span class="ruby-operator">:</span> <span class="ruby-identifier">this_month</span>.<span class="ruby-identifier">first</span>
-    <span class="ruby-identifier">opts</span>[<span class="ruby-value">:until_date</span>] = <span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:until_date</span>].<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:until_date</span>]) <span class="ruby-operator">:</span> <span class="ruby-identifier">this_month</span>.<span class="ruby-identifier">last</span>
+    <span class="ruby-identifier">opts</span>[<span class="ruby-value">:since_date</span>] = <span class="ruby-identifier">date_param</span>(<span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:since_date</span>], <span class="ruby-identifier">this_month</span>.<span class="ruby-identifier">first</span>)
+    <span class="ruby-identifier">opts</span>[<span class="ruby-value">:until_date</span>] = <span class="ruby-identifier">date_param</span>(<span class="ruby-identifier">raw_options</span>[<span class="ruby-value">:until_date</span>], <span class="ruby-identifier">this_month</span>.<span class="ruby-identifier">last</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -233,7 +239,40 @@
           <div class="method-source-code" id="search_categories-source">
             <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_categories</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">categories</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">categories</span>})
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">by_category_id</span>(<span class="ruby-identifier">categories</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_except_product_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_except_product_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_except_product_id-source">
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_except_product_id</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">except_product_id</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -264,9 +303,43 @@
 
           
           <div class="method-source-code" id="search_keyword-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, products.code, products.customer_code, products.title, products.subtitle) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_live" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_live</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_live-source">
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_live</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty?</span>(<span class="ruby-identifier">live</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">products</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">live</span>)})
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -344,6 +417,40 @@
       </div>
 
     
+      <div id="method-i-search_real_only" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_real_only</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_real_only-source">
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_real_only</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">real_only</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">products</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">purposes</span>[<span class="ruby-value">:internal</span>]})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-search_shipping_country_code" class="method-detail ">
         
         <div class="method-heading">
@@ -396,7 +503,7 @@
 
           
           <div class="method-source-code" id="search_since_date-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_since_date</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;ordered_at &gt;= ?&#39;</span>, <span class="ruby-identifier">since_date</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -462,7 +569,7 @@
 
           
           <div class="method-source-code" id="search_until_date-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row_search.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_until_date</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;ordered_at &lt;= ?&#39;</span>, <span class="ruby-identifier">until_date</span>)
 <span class="ruby-keyword">end</span></pre>

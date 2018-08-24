@@ -97,6 +97,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-find_self_and_descendants">::find_self_and_descendants</a>
+    
     <li ><a href="#method-c-view_mode_options">::view_mode_options</a>
     
     <li ><a href="#method-i-description">#description</a>
@@ -161,6 +163,39 @@
        </header>
 
     
+      <div id="method-c-find_self_and_descendants" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_self_and_descendants</span><span
+            class="method-args">(id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_self_and_descendants-source">
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_self_and_descendants</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">self_and_descendants</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-c-view_mode_options" class="method-detail ">
         
         <div class="method-heading">
@@ -180,7 +215,7 @@
 
           
           <div class="method-source-code" id="view_mode_options-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">view_mode_options</span>
   <span class="ruby-constant">VIEW_MODES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Category</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:view_mode</span>, <span class="ruby-identifier">m</span>), <span class="ruby-identifier">m</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -221,7 +256,7 @@
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -254,7 +289,7 @@
 
           
           <div class="method-source-code" id="inside-3F-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inside?</span>(<span class="ruby-identifier">category</span>)
   <span class="ruby-identifier">category</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_descendant_of?</span>(<span class="ruby-identifier">category</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -287,7 +322,7 @@
 
           
           <div class="method-source-code" id="self_and_maybe_descendants-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">self_and_maybe_descendants</span>
   <span class="ruby-identifier">products</span>.<span class="ruby-identifier">visible</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Category</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">self_and_descendants</span>
 <span class="ruby-keyword">end</span></pre>
@@ -325,7 +360,7 @@
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -358,7 +393,7 @@
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -391,7 +426,7 @@
 
           
           <div class="method-source-code" id="to_option-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_option</span>
   <span class="ruby-identifier">self_and_ancestors</span>.<span class="ruby-identifier">join</span> <span class="ruby-string">&quot; \u23f5 &quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -424,7 +459,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/category.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/category.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>

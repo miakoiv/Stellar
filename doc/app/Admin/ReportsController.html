@@ -215,8 +215,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">purchases</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">outgoing_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_order_report_row_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_purchases_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
@@ -264,8 +264,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_order_report_row_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
@@ -313,8 +313,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales_tax</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_order_report_row_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> {

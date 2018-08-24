@@ -99,6 +99,8 @@
     
     <li ><a href="#method-i-nav_tab">#nav_tab</a>
     
+    <li ><a href="#method-i-number_if_present">#number_if_present</a>
+    
     <li ><a href="#method-i-number_to_signed_percentage">#number_to_signed_percentage</a>
     
     <li ><a href="#method-i-number_with_precision_and_sign">#number_with_precision_and_sign</a>
@@ -168,7 +170,7 @@
 
           
           <div class="method-source-code" id="background_color_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 173</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">background_color_style</span>(<span class="ruby-identifier">element</span>)
   {
     <span class="ruby-identifier">backgroundColor</span><span class="ruby-operator">:</span> <span class="ruby-identifier">element</span>.<span class="ruby-identifier">background_color</span>.<span class="ruby-identifier">presence</span>
@@ -203,7 +205,7 @@
 
           
           <div class="method-source-code" id="background_picture_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 166</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture_style</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:lightbox</span>)
   <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
   {
@@ -380,7 +382,7 @@
 
           
           <div class="method-source-code" id="column_class-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">column_class</span>(<span class="ruby-identifier">column</span>)
   [<span class="ruby-string">&#39;column&#39;</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">pivot?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;pivot&#39;</span>].<span class="ruby-identifier">join</span> <span class="ruby-string">&#39; &#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -413,7 +415,7 @@
 
           
           <div class="method-source-code" id="css-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 160</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">css</span>(<span class="ruby-identifier">styles</span>)
   <span class="ruby-identifier">styles</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">nil?</span> }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span>
     <span class="ruby-node">&quot;#{selector.to_s.underscore.dasherize}: #{rule};&quot;</span>
@@ -786,6 +788,39 @@
       </div>
 
     
+      <div id="method-i-number_if_present" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">number_if_present</span><span
+            class="method-args">(number, prefix = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="number_if_present-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">number_if_present</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">number</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{prefix}#{number}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-number_to_signed_percentage" class="method-detail ">
         
         <div class="method-heading">
@@ -953,7 +988,7 @@ respond to product, product_title, product_subtitle, product_code</p>
 
           
           <div class="method-source-code" id="segment_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 179</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">segment_style</span>(<span class="ruby-identifier">segment</span>)
   {
     <span class="ruby-identifier">minHeight</span><span class="ruby-operator">:</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">min_height</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{segment.min_height}em&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
