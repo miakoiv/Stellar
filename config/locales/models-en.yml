@@ -223,6 +223,13 @@ en:
         completed_at: Completed
         inventory_check_items: Inventory check items
         note: Note
+      inventory_check_item:
+        product_id: Product
+        product_title: Product title
+        product_code: Product code
+        lot_code: Lot code
+        amount: Amount
+        expires_at: Exp. date
       inventory_entry:
         recorded_at: Date
         source_id: Reference

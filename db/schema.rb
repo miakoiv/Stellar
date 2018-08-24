@@ -303,9 +303,9 @@ ActiveRecord::Schema.define(version: 20180824083338) do
     t.integer  "inventory_check_id", limit: 4,               null: false
     t.integer  "inventory_item_id",  limit: 4
     t.integer  "product_id",         limit: 4,               null: false
-    t.string   "code",               limit: 255,             null: false
-    t.integer  "on_hand",            limit: 4,   default: 0, null: false
+    t.string   "lot_code",           limit: 255
     t.date     "expires_at"
+    t.integer  "amount",             limit: 4,   default: 1, null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end

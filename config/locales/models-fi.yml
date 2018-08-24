@@ -223,6 +223,13 @@ fi:
         completed_at: Valmistunut
         inventory_check_items: Tarkastusrivit
         note: Huomautus
+      inventory_check_item:
+        product_id: Tuote
+        product_title: Tuotenimike
+        product_code: Tuotekoodi
+        lot_code: Eräkoodi
+        amount: Määrä
+        expires_at: Viim. käyttö
       inventory_entry:
         recorded_at: Pvm
         source_id: Viite
