@@ -53,6 +53,9 @@ en:
       inventory:
         one: inventory
         other: inventories
+      inventory_check:
+        one: inventory check
+        other: inventory checks
       inventory_entry:
         one: entry
         other: entries
@@ -214,6 +217,12 @@ en:
         name: Name
         fuzzy: Approximate quantities
         inventory_code: Inventory code
+      inventory_check:
+        inventory_id: Inventory
+        number: №
+        completed_at: Completed
+        inventory_check_items: Inventory check items
+        note: Note
       inventory_entry:
         recorded_at: Date
         source_id: Reference

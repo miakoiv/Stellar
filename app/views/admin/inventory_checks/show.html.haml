@@ -1,0 +1,36 @@
+.page-header
+  = link_to admin_inventory_checks_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(@inventory_check, at: current_store)
+    = link_to edit_admin_inventory_check_path(@inventory_check), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+    = link_to complete_admin_inventory_check_path(@inventory_check), class: 'btn btn-warning', method: :patch do
+      = icon('gavel', t('.complete'))
+  - if @inventory_check.complete?
+    = link_to icon('print', t('.print_inventory_check_report')), '#print', class: 'btn btn-default'
+  %h1
+    = icon('check-circle-o', title(InventoryCheck))
+    %span.small
+      = InventoryCheck.human_attribute_name(:number)
+      = @inventory_check.id
+      - if @inventory_check.complete?
+        = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
+
+.row
+  .col-md-5
+    .hidden-print
+      = render partial: 'form', locals: {locked: true}
+
+  .col-md-7
+    = tab_set 'inventory-check-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'items', col(InventoryCheck, :inventory_check_items), default: true
+      = nav_tab 'history', t('admin.activities.title')
+
+    .tab-content
+      = tab_pane 'items', default: true do
+        = render partial: 'admin/inventory_check_items/table', object: @inventory_check, as: :inventory_check
+      = tab_pane 'history' do
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @inventory_check.to_global_id}}
+
+:coffee
+  $('#context-activities').fetch_context()

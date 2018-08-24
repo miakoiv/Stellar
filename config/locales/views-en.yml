@@ -139,6 +139,20 @@ en:
         new_inventory: New inventory
       new:
         new_inventory: New inventory
+    inventory_checks:
+      index:
+        new_inventory_check: New check
+      show:
+        complete: Conclude
+        print_inventory_check_report: Print report
+      new:
+        new_inventory_check: New check
+      edit:
+        add_inventory_check_items: Add items to this check
+        barcode: Scan a barcode here
+      search:
+        all_inventories: "[All inventories]"
+        keyword: Keyword search
     inventory_items:
       search:
         all_inventories: "[All inventories]"

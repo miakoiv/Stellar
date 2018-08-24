@@ -53,6 +53,9 @@ fi:
       inventory:
         one: varasto
         other: varastot
+      inventory_check:
+        one: varastotarkastus
+        other: varastotarkastukset
       inventory_entry:
         one: kirjaus
         other: kirjaukset
@@ -214,6 +217,12 @@ fi:
         name: Nimi
         fuzzy: Epätarkat saldot
         inventory_code: Inventaariokoodi
+      inventory_check:
+        inventory_id: Varasto
+        number: nro
+        completed_at: Valmistunut
+        inventory_check_items: Tarkastusrivit
+        note: Huomautus
       inventory_entry:
         recorded_at: Pvm
         source_id: Viite

@@ -1,0 +1,17 @@
+%tr[inventory_check]{class: inventory_check.appearance}
+  %td= icon(inventory_check.icon)
+  %td= inventory_check.id
+  %td= inventory_check.completed_at.present? ? l(inventory_check.completed_at.to_date, format: :iso) : nil
+  %td= inventory_check.inventory
+  %td= inventory_check.note
+  %td.actions
+    - if current_user.can_update?(inventory_check, at: current_store)
+      = link_to icon('edit', t('actions.edit')), edit_admin_inventory_check_path(inventory_check), class: 'btn btn-default btn-sm'
+    = link_to icon('info', t('actions.show')), admin_inventory_check_path(inventory_check), class: 'btn btn-default btn-sm'
+    - if current_user.can_delete?(inventory_check, at: current_store)
+      = link_to icon('remove', t('actions.delete')), admin_inventory_check_path(inventory_check), method: :delete, class: 'btn btn-sm btn-danger',
+          data: {confirm: t('actions.confirm.body',
+            klass: InventoryCheck.model_name.human, name: inventory_check.to_s),
+            'confirm-title': t('actions.confirm.title'),
+            'confirm-proceed': t('actions.confirm.proceed'),
+            'confirm-cancel': t('actions.confirm.cancel')}

@@ -1,0 +1,9 @@
+.page-header
+  = link_to admin_inventory_checks_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('check-circle-o', t('.new_inventory_check'))
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: false}

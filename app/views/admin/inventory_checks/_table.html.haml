@@ -1,0 +1,13 @@
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th.col-min
+        %th.col-xs-1= col(InventoryCheck, :number)
+        %th.col-xs-2= col(InventoryCheck, :completed_at)
+        %th.col-xs-2= col(InventoryCheck, :inventory_id)
+        %th= col(InventoryCheck, :note)
+        %th.col-xs-2.actions
+
+    %tbody
+      = render partial: 'admin/inventory_checks/row', collection: inventory_checks, as: :inventory_check

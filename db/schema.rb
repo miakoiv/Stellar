@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180720134305) do
+ActiveRecord::Schema.define(version: 20180824083338) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -298,6 +298,33 @@ ActiveRecord::Schema.define(version: 20180720134305) do
   end
 
   add_index "inventories", ["store_id"], name: "index_inventories_on_store_id", using: :btree
+
+  create_table "inventory_check_items", force: :cascade do |t|
+    t.integer  "inventory_check_id", limit: 4,               null: false
+    t.integer  "inventory_item_id",  limit: 4
+    t.integer  "product_id",         limit: 4,               null: false
+    t.string   "code",               limit: 255,             null: false
+    t.integer  "on_hand",            limit: 4,   default: 0, null: false
+    t.date     "expires_at"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "inventory_check_items", ["inventory_check_id"], name: "index_inventory_check_items_on_inventory_check_id", using: :btree
+  add_index "inventory_check_items", ["inventory_item_id"], name: "index_inventory_check_items_on_inventory_item_id", using: :btree
+  add_index "inventory_check_items", ["product_id"], name: "index_inventory_check_items_on_product_id", using: :btree
+
+  create_table "inventory_checks", force: :cascade do |t|
+    t.integer  "store_id",     limit: 4,   null: false
+    t.integer  "inventory_id", limit: 4,   null: false
+    t.string   "note",         limit: 255
+    t.datetime "completed_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "inventory_checks", ["inventory_id"], name: "index_inventory_checks_on_inventory_id", using: :btree
+  add_index "inventory_checks", ["store_id"], name: "index_inventory_checks_on_store_id", using: :btree
 
   create_table "inventory_entries", force: :cascade do |t|
     t.integer  "inventory_item_id", limit: 4,   null: false

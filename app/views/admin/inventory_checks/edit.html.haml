@@ -1,0 +1,57 @@
+.page-header
+  = link_to admin_inventory_checks_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_inventory_check_path(@inventory_check), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('check-circle-o', title(InventoryCheck))
+    %span.small
+      = InventoryCheck.human_attribute_name(:number)
+      = @inventory_check.id
+      - if @inventory_check.complete?
+        = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
+
+.row
+  .col-md-5
+    = render partial: 'form', locals: {locked: true}
+
+  .col-md-7
+    = tab_set 'inventory-check-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'items', col(InventoryCheck, :inventory_check_items), default: true
+
+    .tab-content
+      = tab_pane 'items', default: true do
+        = render partial: 'admin/inventory_check_items/edit_table', object: @inventory_check, as: :inventory_check
+        %hr
+        = render partial: 'admin/inventory_checks/edit', object: @inventory_check, as: :inventory_check
+
+- content_for :secondary_nav do
+  .container
+    #barcode-panel.navbar-form.navbar-right{data: {url: admin_inventory_check_inventory_check_items_path(@inventory_check)}}
+      .form-group.has-feedback
+        = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace', placeholder: t('.barcode')
+        %span.form-control-feedback= icon('barcode')
+
+  :coffee
+    fields =
+      '01': 'customer_code'
+      '10': 'lot_code'
+      '17': 'expires_at'
+      '21': 'serial'
+      '30': 'amount'
+
+    new Switchboard 'barcode',
+      mapping:
+        'Dead': String.fromCharCode(29) #dead key to FNC1
+        '¨': String.fromCharCode(29)
+      callback: (code) ->
+        data = parseBarcode code
+        item = {amount: 1}
+        for i in data.parsedCodeItems
+          item[fields[i.ai]] = i.data if fields[i.ai]?
+        $('#barcode').val ''
+        $.ajax
+          url: $('#barcode-panel').data 'url'
+          type: 'POST'
+          data:
+            inventory_check_item: item

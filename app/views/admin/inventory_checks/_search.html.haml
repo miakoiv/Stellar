@@ -1,0 +1,15 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_inventory_checks_path, method: :get do |f|
+      .row
+        .col-sm-12.col-md-7
+          .form-group
+            = f.select :inventory, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {multiple: true, placeholder: t('.all_inventories'), class: 'selectize'}
+        .col-sm-8.col-md-3
+          .form-group
+            = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
+        .col-sm-4.col-md-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

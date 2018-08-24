@@ -1,0 +1,10 @@
+= bootstrap_form_for [:admin, @inventory_check] do |f|
+  .panel.panel-default
+    .panel-body
+      %fieldset{disabled: locked}
+        = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {class: 'selectize'}
+        = f.text_field :note
+      - unless locked
+        %fieldset.actions.fixed
+          .container
+            = f.primary

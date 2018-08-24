@@ -1,0 +1,10 @@
+.page-header
+  - if current_user.can_create?(InventoryCheck, at: current_store)
+    = link_to new_admin_inventory_check_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_inventory_check'))
+  %h1= icon('check-circle-o', title(InventoryCheck, count: 2))
+
+= render partial: 'search'
+
+= render partial: 'admin/inventory_checks/table', object: @inventory_checks, as: :inventory_checks
+= paginate @inventory_checks

@@ -119,6 +119,20 @@ fi:
         new_inventory: Uusi varasto
       new:
         new_inventory: Uusi varasto
+    inventory_checks:
+      index:
+        new_inventory_check: Uusi tarkastus
+      show:
+        complete: Päätä
+        print_inventory_check_report: Tulosta raportti
+      new:
+        new_inventory_check: Uusi tarkastus
+      edit:
+        add_inventory_check_items: Lisää tarkastusrivejä
+        barcode: Skannaa viivakoodi tähän
+      search:
+        all_inventories: "[Kaikki varastot]"
+        keyword: Hakusana
     inventory_items:
       search:
         all_inventories: "[Kaikki varastot]"

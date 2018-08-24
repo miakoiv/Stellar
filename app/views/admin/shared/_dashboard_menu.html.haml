@@ -9,6 +9,7 @@
 - if current_user_has_role?(:inventory_manage)
   = menu_item 'bar-chart', title(InventoryItem, count: 2), admin_inventory_items_path
   = menu_item 'retweet', title(Transfer, count: 2), admin_transfers_path
+  = menu_item 'check-circle-o', title(InventoryCheck, count: 2), admin_inventory_checks_path
 - if current_user_has_role?(:promotion_editor)
   = menu_item 'tag', title(Promotion, count: 2), admin_promotions_path
 - if current_user_has_role?(:asset_editor)
