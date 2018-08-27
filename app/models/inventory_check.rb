@@ -16,6 +16,9 @@ class InventoryCheck < ActiveRecord::Base
   scope :complete, -> { where.not(completed_at: nil) }
 
   #---
+  validates :inventory_id, presence: true
+
+  #---
   def complete?
     completed_at.present?
   end
