@@ -56,6 +56,9 @@ fi:
       inventory_check:
         one: varastotarkastus
         other: varastotarkastukset
+      inventory_check_item:
+        one: tarkastusrivi
+        other: tarkastusrivit
       inventory_entry:
         one: kirjaus
         other: kirjaukset
@@ -224,6 +227,7 @@ fi:
         inventory_check_items: Tarkastusrivit
         note: Huomautus
       inventory_check_item:
+        inventory_check_id: Varastotarkastus
         product_id: Tuote
         product_title: Tuotenimike
         product_code: Tuotekoodi

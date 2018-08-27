@@ -56,6 +56,9 @@ en:
       inventory_check:
         one: inventory check
         other: inventory checks
+      inventory_check_item:
+        one: inventory check item
+        other: inventory check items
       inventory_entry:
         one: entry
         other: entries
@@ -224,6 +227,7 @@ en:
         inventory_check_items: Inventory check items
         note: Note
       inventory_check_item:
+        inventory_check_id: Inventory check
         product_id: Product
         product_title: Product title
         product_code: Product code
