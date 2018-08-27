@@ -1,0 +1,16 @@
+.table-responsive
+  %table.table.table-hover.table-loose
+    %thead
+      %tr
+        %th= col(InventoryCheckItem, :product_title)
+        %th.col-xs-2= col(InventoryCheckItem, :lot_code)
+        %th.col-xs-2= col(InventoryCheckItem, :expires_at)
+        %th.col-xs-1.text-right= col(InventoryCheckItem, :amount)
+
+    %tbody
+      - inventory_check.inventory_check_items.each do |inventory_check_item|
+        %tr[inventory_check_item]{class: inventory_check_item.appearance}
+          %td= product_header inventory_check_item
+          %td= inventory_check_item.lot_code
+          %td= inventory_check_item.expires_at
+          %td.text-right= inventory_check_item.amount
