@@ -26,6 +26,30 @@ $.fn.selectize.product_renderer =
     </div>
     """
 
+$.fn.selectize.inventory_renderer =
+  option_create: (data, escape) ->
+    '<div class="create"><i class="fa fa-fw fa-plus-circle"></i> ' + escape(data.input) + '</div>'
+  item: (item, escape) ->
+    """
+    <div class="item">
+      <strong>#{escape(item.code)}</strong>
+      #{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
+      <span class="small">
+        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+      </span>
+    </div>
+    """
+  option: (item, escape) ->
+    """
+    <div class="option">
+      <strong>#{escape(item.code)}</strong>
+      #{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
+      <span class="small">
+        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+      </span>
+    </div>
+    """
+
 $.fn.selectize.label_renderer =
   item: (item, escape) ->
     """
