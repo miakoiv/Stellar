@@ -25,6 +25,7 @@ class OrderItem < ActiveRecord::Base
     dependent: :destroy
 
   default_scope { order(:priority) }
+  scope :lot_codes_first, -> { reorder(lot_code: :desc) }
   scope :top_level, -> { where(parent_item_id: nil) }
   scope :live, -> { joins(:product).merge(Product.live) }
   scope :real, -> { joins(:product).merge(Product.real) }

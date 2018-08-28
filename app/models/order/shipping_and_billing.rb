@@ -117,7 +117,7 @@ class Order < ActiveRecord::Base
 
   # Collects order items that have not been fully shipped yet.
   def items_pending_shipping
-    order_items.select { |item| item.pending_shipping? }
+    order_items.lot_codes_first.select { |item| item.pending_shipping? }
   end
 
   def clear_shipping_costs!
