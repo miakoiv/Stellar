@@ -7,6 +7,7 @@ class InventoryCheckItem < ActiveRecord::Base
 
   #---
   belongs_to :inventory_check
+  delegate :inventory, to: :inventory_check
 
   # Inventory check items have a product association and
   # attributes for lot code, expiration, and on hand amount,
@@ -27,6 +28,7 @@ class InventoryCheckItem < ActiveRecord::Base
 
   attr_accessor :serial
   before_validation :concatenate_lot_code
+  after_validation :assign_inventory_item, on: :create
 
   #---
   def appearance
@@ -45,5 +47,11 @@ class InventoryCheckItem < ActiveRecord::Base
     # is used as the lot code.
     def concatenate_lot_code
       self[:lot_code] = [lot_code, serial].map(&:presence).compact.join('-')
+    end
+
+    # The matching inventory item can be found by product and lot code
+    # from the inventory where the check is performed.
+    def assign_inventory_item
+      self.inventory_item = inventory.item_by_product_and_code(product, lot_code)
     end
 end
