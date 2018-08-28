@@ -305,7 +305,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     searchlight (4.1.0)
-    selectize-rails (0.12.4.1)
+    selectize-rails (0.12.5)
     sexp_processor (4.10.0)
     spring (2.0.2)
       activesupport (>= 4.2)
