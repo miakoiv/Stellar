@@ -27,7 +27,6 @@
         %h2.visible-print-block= title(OrderItem, count: 2)
         - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
-          = render partial: 'admin/orders/edit', object: @order, as: :order
         - else
           = render partial: 'admin/order_items/table', object: @order, as: :order
 
@@ -58,31 +57,4 @@
 
 - if @order.editable_items?
   - content_for :secondary_nav do
-    .container
-      #barcode-panel.navbar-form.navbar-right{data: {url: admin_order_order_items_path(@order)}}
-        .form-group.has-feedback
-          = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace', placeholder: t('.barcode')
-          %span.form-control-feedback= icon('barcode')
-
-  :coffee
-    fields =
-      '01': 'customer_code'
-      '10': 'lot_code'
-      '21': 'serial'
-      '30': 'amount'
-
-    new Switchboard 'barcode',
-      mapping:
-        'Dead': String.fromCharCode(29) #dead key to FNC1
-        '¨': String.fromCharCode(29)
-      callback: (code) ->
-        data = parseBarcode code
-        item = {amount: 1}
-        for i in data.parsedCodeItems
-          item[fields[i.ai]] = i.data if fields[i.ai]?
-        $('#barcode').val ''
-        $.ajax
-          url: $('#barcode-panel').data 'url'
-          type: 'POST'
-          data:
-            order_item: item
+    = render partial: 'admin/orders/edit', object: @order, as: :order

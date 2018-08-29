@@ -270,6 +270,7 @@ body {
 
 /*
  * Secondary navigation bar with integrated toolbar
+ * and optional navbar panel
  */
 #secondary-nav {
   margin-bottom: 0;
@@ -285,9 +286,15 @@ body {
 }
 @media (min-width: $screen-sm-min) {
   #secondary-nav .navbar-form {
-    min-width: 32em;
-
     .form-group, .form-control { width: 100%; }
+  }
+}
+#secondary-nav .navbar-panel {
+  padding-top: 15px;
+
+  .navbar-panel-extension {
+    padding-top: 15px;
+    border-top: 1px solid $table-border-color;
   }
 }
 

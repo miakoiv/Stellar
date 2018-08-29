@@ -149,10 +149,14 @@ en:
         new_inventory_check: New check
       edit:
         add_inventory_check_items: Add items to this check
-        barcode: Scan a barcode here
+        barcode: Read item from barcode
       search:
         all_inventories: "[All inventories]"
         keyword: Keyword search
+    inventory_check_items:
+      new:
+        product_query: Type to search for products…
+        submit: Add
     inventory_items:
       search:
         all_inventories: "[All inventories]"
@@ -162,6 +166,9 @@ en:
       form:
         inventory_entry_help_html: Purchases only. Corrections and transfers via <a href="%{path}">Inventory levels</a>.
     order_items:
+      new:
+        product_query: Type to search for products…
+        submit: Add
       pending:
         title: Products not included in shipments
     order_types:
@@ -198,7 +205,7 @@ en:
         user: Select order author
       edit:
         add_order_items: Add items to this order
-        barcode: Scan a barcode here
+        barcode: Read item from barcode
       form:
         approved_at_help: Customer information is correct and the order contents are final.
         concluded_at_help: Order has been shipped in full and is ready for archival.
@@ -363,9 +370,13 @@ en:
         new_transfer: New stock transfer
       edit:
         add_transfer_items: Add items to transfer
-        barcode: Scan a barcode here
+        barcode: Read item from barcode
       headers:
         delivery_note: Delivery note
+    transfer_items:
+      new:
+        product_query: Type to search for products…
+        submit: Add
     users:
       index:
         new_user: New user

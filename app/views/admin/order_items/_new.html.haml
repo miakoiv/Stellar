@@ -2,16 +2,17 @@
   = bootstrap_form_for [:admin, order, OrderItem.new(amount: 1)], remote: true do |f|
     %fieldset
       .row
-        .col-sm-8
-          = f.select :product_id, [], {skip_label: true}, {placeholder: title(Product), class: 'selectize-tall selectize-list-group'}
-        .col-sm-4
-          = f.number_field :amount, min: 1, max: 999, skip_label: true, placeholder: col(OrderItem, :amount)
-      .row
-        .col-sm-8
+        .col-xs-12.col-sm-12.col-md-6
+          = f.select :product_id, [], {skip_label: true}, {placeholder: t('.product_query'), class: 'selectize-tall selectize-list-group'}
+        .col-xs-6.col-sm-6.col-md-4
           = f.text_field :lot_code, skip_label: true, disabled: true, placeholder: col(OrderItem, :lot_code)
-        .col-sm-4
-          = f.button class: 'btn btn-block btn-primary' do
-            = icon('check')
+        .col-xs-6.col-sm-6.col-md-2
+          .form-group
+            .input-group
+              = f.number_field_without_bootstrap :amount, min: 1, max: 999, placeholder: col(OrderItem, :amount), class: 'form-control text-right'
+              .input-group-btn
+                = f.button class: 'btn btn-success' do
+                  = t('.submit')
 
 :coffee
   $('#order_item_product_id').selectize
@@ -30,7 +31,6 @@
         data:
           q: query
           purposes: ['vanilla', 'bundle', 'composite']
-          categories: $('#categories')[0].selectize.getValue()
           having_variants: false
         error: ->
           callback()
@@ -40,6 +40,7 @@
       $lot_code = $('#order_item_lot_code')[0].selectize
       inventory = $('#admin-order-item-form').data 'inventory'
       if id and inventory?
+        $lot_code.setValue null
         $lot_code.clearOptions()
         $lot_code.load (callback) ->
           $.ajax

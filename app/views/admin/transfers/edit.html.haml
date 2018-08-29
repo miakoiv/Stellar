@@ -22,36 +22,6 @@
     .tab-content
       = tab_pane 'items', default: true do
         = render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer
-        %hr
-        = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer
 
 - content_for :secondary_nav do
-  .container
-    #barcode-panel.navbar-form.navbar-right{data: {url: admin_transfer_transfer_items_path(@transfer)}}
-      .form-group.has-feedback
-        = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace', placeholder: t('.barcode')
-        %span.form-control-feedback= icon('barcode')
-
-  :coffee
-    fields =
-      '01': 'customer_code'
-      '10': 'lot_code'
-      '17': 'expires_at'
-      '21': 'serial'
-      '30': 'amount'
-
-    new Switchboard 'barcode',
-      mapping:
-        'Dead': String.fromCharCode(29) #dead key to FNC1
-        '¨': String.fromCharCode(29)
-      callback: (code) ->
-        data = parseBarcode code
-        item = {amount: 1}
-        for i in data.parsedCodeItems
-          item[fields[i.ai]] = i.data if fields[i.ai]?
-        $('#barcode').val ''
-        $.ajax
-          url: $('#barcode-panel').data 'url'
-          type: 'POST'
-          data:
-            transfer_item: item
+  = render partial: 'admin/transfers/edit', object: @transfer, as: :transfer

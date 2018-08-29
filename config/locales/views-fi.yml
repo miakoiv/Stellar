@@ -129,10 +129,14 @@ fi:
         new_inventory_check: Uusi tarkastus
       edit:
         add_inventory_check_items: Lisää tarkastusrivejä
-        barcode: Skannaa viivakoodi tähän
+        barcode: Lue rivi viivakoodista
       search:
         all_inventories: "[Kaikki varastot]"
         keyword: Hakusana
+    inventory_check_items:
+      new:
+        product_query: Kirjoita hakeaksesi tuotteita…
+        submit: Lisää
     inventory_items:
       search:
         all_inventories: "[Kaikki varastot]"
@@ -142,6 +146,9 @@ fi:
       form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
     order_items:
+      new:
+        product_query: Kirjoita hakeaksesi tuotteita…
+        submit: Lisää
       pending:
         title: Toimitusta odottavat tuotteet
     order_types:
@@ -178,7 +185,7 @@ fi:
         user: Valitse tilauksen laatija
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle
-        barcode: Skannaa viivakoodi tähän
+        barcode: Lue rivi viivakoodista
       form:
         approved_at_help: Tilaajan tiedot ovat oikein ja tilauksen sisältö on lopullinen.
         concluded_at_help: Tilaus on kokonaan toimitettu ja voidaan arkistoida.
@@ -343,9 +350,13 @@ fi:
         new_transfer: Uusi varastosiirto
       edit:
         add_transfer_items: Lisää siirtorivejä
-        barcode: Skannaa viivakoodi tähän
+        barcode: Lue rivi viivakoodista
       headers:
         delivery_note: Lähete
+    transfer_items:
+      new:
+        product_query: Kirjoita hakeaksesi tuotteita…
+        submit: Lisää
     users:
       index:
         new_user: Uusi käyttäjä

@@ -1,21 +1,37 @@
-.quick-edit-panel
-  .panel.panel-primary
-    .panel-heading
-      .pull-right
-        .panel-error-indicator= icon('warning')
-      %h4.panel-title
-        = t('.add_inventory_check_items')
-    .panel-body.bg-info
-      %fieldset
-        .form-group
-          = select_tag 'categories', options_for_select(current_group.category_options), multiple: true, placeholder: col(Product, :category_ids)
-    .panel-body
-      = render partial: 'admin/inventory_check_items/new', object: inventory_check, as: :inventory_check
+.navbar-panel
+  .container
+    %fieldset#barcode-panel{data: {url: admin_inventory_check_inventory_check_items_path(inventory_check)}}
+      .form-group
+        .input-group
+          = text_field_tag 'barcode', nil, autocomplete: 'off', class: 'form-control monospace', placeholder: t('.barcode')
+          .input-group-btn
+            %button.btn.btn-default{type: 'button', data: {toggle: 'collapse', target: '.navbar-panel .collapse'}}
+              = t('.add_inventory_check_items')
+              %span.caret
+    .collapse
+      .navbar-panel-extension
+        = render partial: 'admin/inventory_check_items/new', object: inventory_check, as: :inventory_check
 
 :coffee
-  $('#categories').selectize
-    plugins: ['remove_button']
-    dropdownParent: 'body'
-    allowEmptyOption: true
-    onChange: (id) ->
-      $('#inventory_check_item_product_id')[0].selectize.clearOptions()
+  fields =
+    '01': 'customer_code'
+    '10': 'lot_code'
+    '17': 'expires_at'
+    '21': 'serial'
+    '30': 'amount'
+
+  new Switchboard 'barcode',
+    mapping:
+      'Dead': String.fromCharCode(29) #dead key to FNC1
+      '¨': String.fromCharCode(29)
+    callback: (code) ->
+      data = parseBarcode code
+      item = {amount: 1}
+      for i in data.parsedCodeItems
+        item[fields[i.ai]] = i.data if fields[i.ai]?
+      $('#barcode').val ''
+      $.ajax
+        url: $('#barcode-panel').data 'url'
+        type: 'POST'
+        data:
+          inventory_check_item: item
