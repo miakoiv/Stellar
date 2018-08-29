@@ -16,6 +16,7 @@ Rails.application.config.assets.paths << File.join(
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w(
+  print.css
   jasny-bootstrap/rowlink.js
   payment_gateway/paybyway.js
   spry_themes/birch.css       spry_themes/birch.js
