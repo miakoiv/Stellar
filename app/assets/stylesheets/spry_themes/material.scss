@@ -31,8 +31,6 @@ $navmenu-inverse-link-hover-bg: $brand-primary !default;
 @import "bootstrap-generators";
 @import "bootstrap-tweaks";
 @import "bootstrap-outline-buttons";
-@import "fonts";
-@import "print";
 
 $body-tone-bg: darken($body-bg, 6%) !default;
 $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
