@@ -168,6 +168,11 @@ class Shipment < ActiveRecord::Base
     shipping_method.shipping_gateway_class
   end
 
+  def appearance
+    return 'default muted' if cancelled?
+    shipped? ? 'default' : 'primary'
+  end
+
   def to_s
     "#{Shipment.human_attribute_name(:number)} #{id}"
   end

@@ -1,4 +1,4 @@
-.panel[shipment]{class: shipment.shipped? ? 'panel-default' : 'panel-primary'}
+.panel[shipment]{class: "panel-#{shipment.appearance}"}
   .panel-heading
     %span.pull-right
       - if shipment.metadata.present?

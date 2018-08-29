@@ -711,9 +711,14 @@ i.icon {
   }
 }
 
+.panel.muted {
+  @extend .hidden-print;
+  opacity: 0.4;
+}
 .panel-footer { @extend .clearfix; }
 .panel-footer .btn { margin-bottom: 5px; }
 .panel-footer .btn + .btn { margin-left: 8px; }
+
 
 .modal-header .table {
   margin-bottom: 0;
