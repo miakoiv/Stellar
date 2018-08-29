@@ -18,8 +18,8 @@ class Admin::OrderItemsController < ApplicationController
     amount = order_item_params[:amount].to_i
     options = {lot_code: concatenated_lot_code}
     respond_to do |format|
-      if order_item = @order.insert(@product, amount, @order.source, options)
-        track order_item, @order
+      if @order_item = @order.insert(@product, amount, @order.source, options)
+        track @order_item, @order
         @order.recalculate!
         format.js { render :create }
       else
