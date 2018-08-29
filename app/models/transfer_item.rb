@@ -18,6 +18,8 @@ class TransferItem < ActiveRecord::Base
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
+  default_scope { order(updated_at: :desc) }
+
   #---
   validates :product_id, presence: true
   validates :lot_code, presence: true
