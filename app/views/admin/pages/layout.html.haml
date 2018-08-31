@@ -34,4 +34,5 @@
     $('#editor-panel').find('form.triggered').trigger 'submit.rails'
 
   $('#content-wrap').on 'click', ->
+    $('#editor-panel').destroySelectized();
     $('#side-panel').removeClass 'open'

@@ -1,3 +1,4 @@
 $('#category-list .dd-item').removeClass('active');
+$('#category-form').destroySelectized();
 $('#category-form').html("#{j render partial: 'admin/categories/new'}");
 $('#category-form').initialize();

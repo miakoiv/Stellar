@@ -6,7 +6,8 @@
   $product = $('#segment_resource_id')
   resources = $product.data 'resources'
   selected = $product.data 'selected'
-  $product.selectize
+  $product.betterSelectize
+    remove: true
     options: resources
     items: selected
     valueField: 'id'

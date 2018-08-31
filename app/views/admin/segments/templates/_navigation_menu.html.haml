@@ -1,6 +1,6 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Page'
-  = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: true}, {class: 'selectize'}
+  = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: t('.select_page')}
   .form-group
     = f.label col(Segment, :inverse)
     .btn-group{data: {toggle: 'buttons'}}
@@ -13,5 +13,4 @@
   = f.text_field :header
 
 :coffee
-  $('#segment_resource_id').selectize
-    allowEmptyOption: true
+  $('#segment_resource_id').betterSelectize()

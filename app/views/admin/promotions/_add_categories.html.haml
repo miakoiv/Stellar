@@ -5,18 +5,18 @@
     = f.text_field :category_ids_string, data: {categories: promotion.available_categories.map { |c| {id: c.id, name: c.to_option} }}
     = f.submit t('.submit')
 
-    :coffee
-      categories = $('#promotion_category_ids_string').data 'categories'
+  :coffee
+    categories = $('#promotion_category_ids_string').data 'categories'
 
-      $('#promotion_category_ids_string').betterSelectize
-        remove: true
-        options: categories
-        maxItems: null
-        valueField: 'id'
-        searchField: ['name']
-        diacritics: false
-        render:
-          item: (item, escape) ->
-            '<div class="item">' + escape(item.name) + '</div>'
-          option: (item, escape) ->
-            '<div class="option">' + escape(item.name) + '</div>'
+    $('#promotion_category_ids_string').betterSelectize
+      remove: true
+      options: categories
+      maxItems: null
+      valueField: 'id'
+      searchField: ['name']
+      diacritics: false
+      render:
+        item: (item, escape) ->
+          '<div class="item">' + escape(item.name) + '</div>'
+        option: (item, escape) ->
+          '<div class="option">' + escape(item.name) + '</div>'

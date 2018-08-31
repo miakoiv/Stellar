@@ -1,2 +1,3 @@
+$('#shipments-edit-modal').destroySelectized();
 $('#shipments-edit-modal').modal('hide');
 $("##{dom_id(@shipment)}").replaceWith("#{j render partial: 'admin/shipments/item', object: @shipment, as: :shipment, locals: {locked: false}}");

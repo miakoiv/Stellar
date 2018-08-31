@@ -10,10 +10,3 @@
         .col-sm-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
-
-:coffee
-  $('.selectize-label').selectize
-    plugins: ['remove_button']
-    labelField: 'title'
-    dataAttr: 'data'
-    render: $.fn.selectize.label_renderer

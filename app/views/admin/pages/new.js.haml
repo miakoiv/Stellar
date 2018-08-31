@@ -1,3 +1,4 @@
 $('#page-list .dd-item').removeClass('active');
+$('#page-form').destroySelectized();
 $('#page-form').html("#{j render partial: 'admin/pages/new'}");
 $('#page-form').initialize();

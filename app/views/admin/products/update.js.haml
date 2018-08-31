@@ -1,4 +1,5 @@
 $("##{dom_id(@product)}").replaceWith("#{j render partial: 'row', object: @product, as: :product}");
 $("##{dom_id(@product)}").addClass('active');
+$('#product-form').destroySelectized();
 $('#product-form').html("#{j render partial: 'admin/products/edit'}");
 $('#product-form').initialize();

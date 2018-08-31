@@ -10,7 +10,7 @@
       = ff.text_field :shipping_postalcode
     .col-md-8
       = ff.text_field :shipping_city
-  = ff.select :shipping_country_code, Store.country_options, {include_blank: true}
+  = ff.select :shipping_country_code, Store.country_options
   %hr
   = ff.text_field :billing_address
   .row
@@ -18,8 +18,8 @@
       = ff.text_field :billing_postalcode
     .col-md-8
       = ff.text_field :billing_city
-  = ff.select :billing_country_code, Store.country_options, {include_blank: true}
+  = ff.select :billing_country_code, Store.country_options
 
 :coffee
-  $('#order_customer_attributes_shipping_country_code').selectize()
-  $('#order_customer_attributes_billing_country_code').selectize()
+  $('#order_customer_attributes_shipping_country_code').betterSelectize()
+  $('#order_customer_attributes_billing_country_code').betterSelectize()

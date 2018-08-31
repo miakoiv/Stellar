@@ -1,6 +1,6 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Department'
-  = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: true}, {class: 'selectize'}
+  = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: t('.select_department')}
   = f.text_field :header
   = f.text_field :subhead
   .form-group
@@ -17,10 +17,8 @@
   = f.text_field :max_items
   = f.form_group do
     = f.check_box :show_more
-  = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: true}, {class: 'selectize'}
+  = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: t('.select_product_scope')}
 
 :coffee
-  $('#segment_resource_id').selectize
-    allowEmptyOption: true
-  $('#segment_product_scope').selectize
-    allowEmptyOption: true
+  $('#segment_resource_id').betterSelectize()
+  $('#segment_product_scope').betterSelectize()

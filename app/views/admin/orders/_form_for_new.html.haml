@@ -4,11 +4,11 @@
       .panel-body
         %fieldset
           = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, label: t('.group_id')
-          = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}, {placeholder: t('.new_customer')}
+          = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}
           %hr
           .row
             .col-md-6
-              = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
+              = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }
             .col-md-6
               = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }
   .col-lg-6.col-lg-offset-1

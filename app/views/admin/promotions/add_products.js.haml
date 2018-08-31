@@ -1,3 +1,4 @@
 $('#promoted-items-table').replaceWith("#{j render partial: 'admin/promoted_items/edit_table', object: @promotion, as: :promotion}");
 $('a[href="#tab-promoted"]').tab('show');
+$('#add-products').destroySelectized();
 $('#add-products').replaceWith("#{j render partial: 'admin/promotions/add_products', object: @promotion, as: :promotion}");

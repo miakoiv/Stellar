@@ -1,4 +1,5 @@
 $('#products-table .product').removeClass('active');
 $("##{dom_id(@product)}").addClass('active');
+$('#product-form').destroySelectized();
 $('#product-form').html("#{j render partial: 'admin/products/edit'}");
 $('#product-form').initialize();
