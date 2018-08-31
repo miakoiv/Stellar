@@ -334,6 +334,7 @@ en:
       order_type:
         name: Name
         label: Label
+        instructions: Instructions
         workflow: Workflow
         source_id: From
         destination_id: To
@@ -343,6 +344,7 @@ en:
         has_installation: Installation
         has_payment: Payment
         payment_gateway: Payment gateway
+        is_forwarded: Forwarded
         prepaid_stock: Order from prepaid stock
         is_exported: Data export
       page:

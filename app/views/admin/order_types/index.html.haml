@@ -11,11 +11,9 @@
         %th.col-xs-3= col(OrderType, :workflow)
         %th.col-xs-2= col(OrderType, :name)
         %th.col-xs-2= col(OrderType, :label)
-        %th.col-xs-1
-        %th.col-xs-1
+        %th.col-xs-2
         - if current_store.b2b_sales?
-          %th.col-xs-1
-          %th.col-xs-1
+          %th.col-xs-2
         %th.actions
 
     %tbody
@@ -29,14 +27,14 @@
         %td
           - if order_type.has_payment?
             = bootstrap_label(order_type, text: col(OrderType, :has_payment), appearance: :success)
-        %td
           - if order_type.has_shipping?
             = bootstrap_label(order_type, text: col(OrderType, :has_shipping), appearance: :primary)
         - if current_store.b2b_sales?
           %td
+            - if order_type.is_forwarded?
+              = bootstrap_label(order_type, text: col(OrderType, :is_forwarded), appearance: :warning)
             - if order_type.has_installation?
               = bootstrap_label(order_type, text: col(OrderType, :has_installation), appearance: :danger)
-          %td
             - if order_type.is_exported?
               = bootstrap_label(order_type, text: col(OrderType, :is_exported), appearance: :info)
         %td.actions

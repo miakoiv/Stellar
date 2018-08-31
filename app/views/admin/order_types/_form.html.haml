@@ -17,6 +17,8 @@
           = f.check_box :has_shipping
         - if current_store.b2b_sales?
           = f.form_group do
+            = f.check_box :is_forwarded
+          = f.form_group do
             = f.check_box :has_installation
           = f.form_group do
             = f.check_box :is_exported
@@ -27,6 +29,7 @@
         #prepaid-stock.collapse{class: @order_type.has_payment? || 'in'}
           = f.form_group do
             = f.check_box :prepaid_stock
+        ~ f.text_area :instructions, rows: 4
       - unless locked
         %fieldset.actions.fixed
           .container

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180824083338) do
+ActiveRecord::Schema.define(version: 20180831063353) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -425,18 +425,20 @@ ActiveRecord::Schema.define(version: 20180824083338) do
 
   create_table "order_types", force: :cascade do |t|
     t.integer  "store_id",         limit: 4
-    t.integer  "source_id",        limit: 4,                   null: false
-    t.integer  "destination_id",   limit: 4,                   null: false
+    t.integer  "source_id",        limit: 4,                     null: false
+    t.integer  "destination_id",   limit: 4,                     null: false
     t.string   "name",             limit: 255
     t.string   "label",            limit: 255
-    t.boolean  "has_shipping",                 default: false, null: false
-    t.boolean  "has_installation",             default: false, null: false
-    t.boolean  "has_payment",                  default: false, null: false
+    t.text     "instructions",     limit: 65535
+    t.boolean  "has_shipping",                   default: false, null: false
+    t.boolean  "has_installation",               default: false, null: false
+    t.boolean  "has_payment",                    default: false, null: false
     t.string   "payment_gateway",  limit: 255
-    t.boolean  "prepaid_stock",                default: false, null: false
-    t.boolean  "is_exported",                  default: false, null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.boolean  "is_forwarded",                   default: false, null: false
+    t.boolean  "prepaid_stock",                  default: false, null: false
+    t.boolean  "is_exported",                    default: false, null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   add_index "order_types", ["destination_id"], name: "index_order_types_on_destination_id", using: :btree

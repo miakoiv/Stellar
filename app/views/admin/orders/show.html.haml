@@ -17,6 +17,7 @@
       = @order.to_s
       = surround('[', ']') { @order.inventory.to_s }
 
+= render partial: 'instructions'
 = life_pro_tip @order
 
 .visible-print.compact
