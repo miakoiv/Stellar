@@ -13,7 +13,7 @@
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
-            = f.select :vendor_id, current_store.group_options, {include_blank: blank}, {class: 'selectize-label', disabled: third_party?}
+            = f.select :vendor_id, current_store.group_options, {include_blank: true}, {class: 'selectize-label', disabled: third_party?}
             .row
               .col-md-6
                 = f.text_field :code, required: true
@@ -120,23 +120,22 @@
     update_markup_margin()
     $('#product_retail_price, #markup_percent').effect 'highlight'
 
-  $('#product_tax_category_id').selectize
-      dropdownParent: 'body'
-      onChange: (index) ->
-        update_markup_margin()
-        if incl_tax()
-          $('#tax-included').collapse 'show'
-          $('#tax-excluded').collapse 'hide'
-        else
-          $('#tax-included').collapse 'hide'
-          $('#tax-excluded').collapse 'show'
+  $('#product_tax_category_id').betterSelectize
+    onChange: (index) ->
+      update_markup_margin()
+      if incl_tax()
+        $('#tax-included').collapse 'show'
+        $('#tax-excluded').collapse 'hide'
+      else
+        $('#tax-included').collapse 'hide'
+        $('#tax-excluded').collapse 'show'
 
   $master_product = $('#product_master_product_id')
   products = $master_product.data 'products'
   selected = $master_product.data 'selected'
 
-  $master_product.selectize
-    dropdownParent: 'body'
+  $master_product.betterSelectize
+    remove: true
     options: products
     items: selected
     valueField: 'id'
@@ -158,10 +157,9 @@
         success: (response) ->
           callback(response)
 
-  $('.selectize-label').selectize
+  $('select.selectize-label').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
-    allowEmptyOption: true
     render: $.fn.selectize.label_renderer
 
   $('#product_overview').summernote

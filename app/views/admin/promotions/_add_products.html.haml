@@ -4,9 +4,8 @@
     = f.submit t('.submit')
 
   :coffee
-    $('#promotion_product_ids_string').selectize
-      plugins: ['remove_button']
-      dropdownParent: 'body'
+    $('#promotion_product_ids_string').betterSelectize
+      remove: true
       valueField: 'id'
       sortField: [{field: 'title'}, {field: 'subtitle'}]
       searchField: ['code', 'customer_code', 'title', 'subtitle']

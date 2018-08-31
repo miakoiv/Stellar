@@ -15,7 +15,7 @@
             - unless @user.new_record?
               = f.text_field :name, required: true
               = f.telephone_field :phone, required: true
-              = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
+              = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
               - unless locked
                 %hr
                 = f.password_field :password, required: @user.require_password?
@@ -30,7 +30,7 @@
                   = f.text_field :shipping_postalcode
                 .col-md-8
                   = f.text_field :shipping_city
-              = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+              = f.select :shipping_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
               %hr
               = f.text_field :billing_address
               .row
@@ -38,7 +38,7 @@
                   = f.text_field :billing_postalcode
                 .col-md-8
                   = f.text_field :billing_city
-              = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+              = f.select :billing_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
       - unless locked
         %fieldset.actions.fixed
           .container

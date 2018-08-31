@@ -14,48 +14,46 @@
                 = f.button class: 'btn btn-success' do
                   = t('.submit')
 
-:coffee
-  $('#order_item_product_id').selectize
-    dropdownParent: 'body'
-    valueField: 'id'
-    sortField: [{field: 'title'}, {field: 'subtitle'}]
-    searchField: ['code', 'customer_code', 'title', 'subtitle']
-    diacritics: false
-    render: $.fn.selectize.product_renderer
-    load: (query, callback) ->
-      return callback() unless query.length > 2
-      $.ajax
-        url: $('#admin-order-item-form').data 'productQueryUrl'
-        type: 'GET'
-        dataType: 'json'
-        data:
-          q: query
-          purposes: ['vanilla', 'bundle', 'composite']
-          having_variants: false
-        error: ->
-          callback()
-        success: (response) ->
-          callback(response)
-    onChange: (id) ->
-      $lot_code = $('#order_item_lot_code')[0].selectize
-      inventory = $('#admin-order-item-form').data 'inventory'
-      if id and inventory?
-        $lot_code.setValue null
-        $lot_code.clearOptions()
-        $lot_code.load (callback) ->
-          $.ajax
-            url: $('#order_item_product_id')[0].selectize.options[id].url
-            type: 'GET'
-            dataType: 'json'
-            error: ->
-              callback()
-            success: (response) ->
-              $lot_code.enable()
-              callback(response.inventory[inventory])
+  :coffee
+    $('#order_item_product_id').betterSelectize
+      valueField: 'id'
+      sortField: [{field: 'title'}, {field: 'subtitle'}]
+      searchField: ['code', 'customer_code', 'title', 'subtitle']
+      diacritics: false
+      render: $.fn.selectize.product_renderer
+      load: (query, callback) ->
+        return callback() unless query.length > 2
+        $.ajax
+          url: $('#admin-order-item-form').data 'productQueryUrl'
+          type: 'GET'
+          dataType: 'json'
+          data:
+            q: query
+            purposes: ['vanilla', 'bundle', 'composite']
+            having_variants: false
+          error: ->
+            callback()
+          success: (response) ->
+            callback(response)
+      onChange: (id) ->
+        $lot_code = $('#order_item_lot_code')[0].selectize
+        inventory = $('#admin-order-item-form').data 'inventory'
+        if id and inventory?
+          $lot_code.setValue null
+          $lot_code.clearOptions()
+          $lot_code.load (callback) ->
+            $.ajax
+              url: $('#order_item_product_id')[0].selectize.options[id].url
+              type: 'GET'
+              dataType: 'json'
+              error: ->
+                callback()
+              success: (response) ->
+                $lot_code.enable()
+                callback(response.inventory[inventory])
 
-  $('#order_item_lot_code').selectize
-    dropdownParent: 'body'
-    valueField: 'code'
-    searchField: 'code'
-    maxItems: 1
-    render: $.fn.selectize.inventory_renderer
+    $('#order_item_lot_code').betterSelectize
+      valueField: 'code'
+      searchField: 'code'
+      maxItems: 1
+      render: $.fn.selectize.inventory_renderer

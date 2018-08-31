@@ -27,7 +27,7 @@
                 = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
             - unless @store.new_record?
               %hr
-              = f.select :quotation_template_id, @store.template_options, {include_blank: blank}, {class: 'selectize'}
+              = f.select :quotation_template_id, @store.template_options, {include_blank: true}, {class: 'selectize'}
         = tab_pane 'store-appearance' do
           %fieldset{disabled: locked}
             = f.form_group do

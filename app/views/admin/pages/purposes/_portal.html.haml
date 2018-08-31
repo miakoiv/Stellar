@@ -1,2 +1,2 @@
 = f.hidden_field :resource_type, value: 'Hostname'
-= f.select :resource_id, current_store.domain_hostnames.map { |h| [h.to_s, h.id] }, {include_blank: blank}, {class: 'selectize'}
+= f.select :resource_id, current_store.domain_hostnames.map { |h| [h.to_s, h.id] }, {include_blank: true}, {class: 'selectize'}

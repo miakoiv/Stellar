@@ -289,6 +289,9 @@ fi:
       settings:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
+      templates:
+        category_feature:
+          select_category: "[Valitse tuoteryhmä]"
     shipments:
       item:
         inventory: varastosta

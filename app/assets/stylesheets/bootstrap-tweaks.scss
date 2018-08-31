@@ -1160,7 +1160,9 @@ fieldset[disabled] .input-group .input-group-addon,
 .selectize-dropdown.form-control { z-index: 1035; }
 
 fieldset[disabled] .help-block { display: none; }
-.selectize-control.plugin-remove_button .selectize-input.disabled .remove,
+.selectize-control.plugin-remove_button .selectize-input.disabled {
+  .remove, .remove-single { display: none; }
+}
 .selectize-control.single .selectize-input.disabled::after { display: none; }
 
 .selectize-control.selectize-label .selectize-input > div {
@@ -1175,8 +1177,10 @@ fieldset[disabled] .help-block { display: none; }
   &.label-warning { @include label-variant($label-warning-bg); }
   &.label-danger { @include label-variant($label-danger-bg); }
 }
-.selectize-control.plugin-remove_button [data-value] .remove {
-  font-size: 1.1363em;
+.selectize-control.plugin-remove_button .item .remove,
+.selectize-control.plugin-remove_button .remove-single {
+  font-size: 1.2em;
+  text-decoration: none;
 }
 
 

@@ -1,5 +1,6 @@
 $("#{j render partial: 'admin/groups/row', object: @group, as: :group}").appendTo('#groups-table > tbody');
 $("##{dom_id(@group)}").addClass('active');
+$('#group-form').destroySelectized();
 $('#group-form').html("#{j render partial: 'admin/groups/edit'}");
 $('#group-form').initialize();
 var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});

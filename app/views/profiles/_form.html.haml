@@ -11,7 +11,7 @@
             = f.text_field :email, required: true
             = f.text_field :name, required: true
             = f.telephone_field :phone, required: true
-            = f.select :locale, Store.locale_options, {include_blank: blank}, {class: 'selectize'}
+            = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
             - unless locked
               = f.password_field :password
               = render partial: 'shared/password_strength'
@@ -24,14 +24,14 @@
                 = f.text_field :shipping_postalcode
               .col-md-8
                 = f.text_field :shipping_city
-            = f.select :shipping_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+            = f.select :shipping_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
             = f.text_field :billing_address
             .row
               .col-md-4
                 = f.text_field :billing_postalcode
               .col-md-8
                 = f.text_field :billing_city
-            = f.select :billing_country_code, Store.country_options, {include_blank: blank}, {class: 'selectize'}
+            = f.select :billing_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
       - unless locked
         %fieldset.actions
           = f.form_group do

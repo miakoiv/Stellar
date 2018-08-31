@@ -10,9 +10,7 @@
               = icon('check')
 
   :coffee
-    $('#product_requisite_ids_string').selectize
-      plugins: ['remove_button']
-      dropdownParent: 'body'
+    $('#product_requisite_ids_string').betterSelectize
       valueField: 'id'
       sortField: [{field: 'title'}, {field: 'subtitle'}]
       searchField: ['code', 'customer_code', 'title', 'subtitle']

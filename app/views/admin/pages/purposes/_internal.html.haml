@@ -1,2 +1,2 @@
 = f.hidden_field :resource_type, value: 'Page'
-= f.select :resource_id, current_store.pages.primary.excluding(@page).order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: blank}, {class: 'selectize'}
+= f.select :resource_id, current_store.pages.primary.excluding(@page).order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: true}, {class: 'selectize'}

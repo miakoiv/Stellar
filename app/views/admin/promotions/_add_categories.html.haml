@@ -8,7 +8,8 @@
     :coffee
       categories = $('#promotion_category_ids_string').data 'categories'
 
-      $('#promotion_category_ids_string').selectize
+      $('#promotion_category_ids_string').betterSelectize
+        remove: true
         options: categories
         maxItems: null
         valueField: 'id'
@@ -16,6 +17,6 @@
         diacritics: false
         render:
           item: (item, escape) ->
-            '<div>' + escape(item.name) + '</div>'
+            '<div class="item">' + escape(item.name) + '</div>'
           option: (item, escape) ->
-            '<div>' + escape(item.name) + '</div>'
+            '<div class="option">' + escape(item.name) + '</div>'

@@ -10,7 +10,7 @@
             .col-md-6
               = f.select :order_type_id, @group.outgoing_order_types.map { |o| [o.to_s, o.id] }, {}, {required: true}
             .col-md-6
-              = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }, {}
+              = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }
   .col-lg-6.col-lg-offset-1
     .panel.panel-default
       .panel-body
@@ -32,7 +32,7 @@
           group_id: group_id
           customer_id: customer_id
 
-  $group_select = $('#order_group_id').selectize
+  $group_select = $('#order_group_id').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer
@@ -45,8 +45,7 @@
           order:
             group_id: id
 
-  $customer_select = $('#order_customer_id').selectize
-    allowEmptyOption: true
+  $customer_select = $('#order_customer_id').betterSelectize
     onFocus: ->
       this.clear true unless this.getValue()
     onBlur: ->
@@ -56,11 +55,11 @@
       if this.items.length
         refresh id
 
-  $order_type_select = $('#order_order_type_id').selectize
+  $order_type_select = $('#order_order_type_id').betterSelectize
     valueField: 'id'
     labelField: 'name'
 
-  $inventory_select = $('#order_inventory_id').selectize
+  $inventory_select = $('#order_inventory_id').betterSelectize
     valueField: 'id'
     labelField: 'name'
 

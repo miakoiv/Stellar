@@ -1,2 +1,2 @@
 = f.hidden_field :resource_type, value: 'Department'
-= f.select :resource_id, current_store.departments.sorted.map { |d| [d.to_s, d.id] }, {include_blank: blank}, {class: 'selectize'}
+= f.select :resource_id, current_store.departments.sorted.map { |d| [d.to_s, d.id] }, {include_blank: true}, {class: 'selectize'}

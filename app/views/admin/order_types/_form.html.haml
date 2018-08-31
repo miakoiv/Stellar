@@ -5,9 +5,9 @@
         %legend= col(OrderType, :workflow)
         .row
           .col-md-6
-            = f.select :source_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
+            = f.select :source_id, current_store.group_options, {}, {class: 'selectize-label'}
           .col-md-6
-            = f.select :destination_id, current_store.group_options, {}, {class: 'selectize-label', required: true}
+            = f.select :destination_id, current_store.group_options, {}, {class: 'selectize-label'}
       %hr
       %fieldset{disabled: locked}
         = f.text_field :name, required: true
@@ -33,7 +33,7 @@
             = f.primary
 
 :coffee
-  $('.selectize-label').selectize
+  $('select.selectize-label').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer

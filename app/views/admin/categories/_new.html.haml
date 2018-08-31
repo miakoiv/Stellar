@@ -2,7 +2,7 @@
   .panel.panel-primary
     .panel-body
       %fieldset
-        = f.select :parent_id, current_store.categories.order(:lft).map { |c| [c.to_option, c.id] }, {include_blank: blank}, {class: 'selectize'}
+        = f.select :parent_id, current_store.categories.order(:lft).map { |c| [c.to_option, c.id] }, {include_blank: true}, {class: 'selectize'}
         = f.text_field :name, required: true
     .panel-footer
       = f.primary

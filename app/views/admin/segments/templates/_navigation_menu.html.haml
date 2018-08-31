@@ -1,6 +1,6 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Page'
-  = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: blank}, {class: 'selectize'}
+  = f.select :resource_id, current_store.pages.container.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: true}, {class: 'selectize'}
   .form-group
     = f.label col(Segment, :inverse)
     .btn-group{data: {toggle: 'buttons'}}

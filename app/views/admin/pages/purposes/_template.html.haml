@@ -2,7 +2,7 @@
 = f.select :resource_id, current_store.group_options, {}, {class: 'selectize-label'}
 
 :coffee
-  $('#page_resource_id').selectize
+  $('#page_resource_id').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer

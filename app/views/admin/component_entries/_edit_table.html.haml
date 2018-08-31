@@ -35,8 +35,8 @@
     $.post '#{reorder_admin_product_component_entries_path(@product)}',
       {reorder: $(this).sortable('toArray')}
 
-  $('#component_entry_component_id').selectize
-    dropdownParent: 'body'
+  $('#component_entry_component_id').betterSelectize
+    plugins: ['remove_button']
     valueField: 'id'
     sortField: [{field: 'title'}, {field: 'subtitle'}]
     searchField: ['code', 'customer_code', 'title', 'subtitle']

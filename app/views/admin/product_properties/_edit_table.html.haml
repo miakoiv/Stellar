@@ -26,8 +26,7 @@
   show_paths = $('#product_property_property_id').data 'showPaths'
   jQuery ->
     $value_select = $('#product_property_value')
-    $property_select = $('#product_property_property_id').selectize
-      dropdownParent: 'body'
+    $property_select = $('#product_property_property_id').betterSelectize
       onChange: (index) ->
         $value_select.attr 'disabled', true
         if $value_select[0].selectize
@@ -35,8 +34,7 @@
         $value_select.attr 'disabled', false
         if show_paths[index]
           $value_select.val(null)
-          $value_select.selectize
-            dropdownParent: 'body'
+          $value_select.betterSelectize
             valueField: 'value'
             labelField: 'value'
             searchField: 'value'
@@ -46,7 +44,6 @@
             persist: false
             preload: true
             load: (query, callback) ->
-              return callback() unless query
               $.ajax
                 url: show_paths[index]
                 success: (response) ->

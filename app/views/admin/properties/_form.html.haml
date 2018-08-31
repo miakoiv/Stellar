@@ -12,7 +12,7 @@
             = f.select :value_type, Property.value_types.keys.map { |t| [Property.human_attribute_value(:value_type, t), t] }, {}, {class: 'selectize'}
           .col-md-6
             .measurement_unit.collapse{class: @property.numeric? && 'in'}
-              = f.select :measurement_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: blank}, {class: 'selectize'}
+              = f.select :measurement_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: true}, {class: 'selectize'}
         .row
           .col-md-6.col-md-offset-6
             .unit_pricing.collapse{class: @property.measurement_unit.present? && 'in'}

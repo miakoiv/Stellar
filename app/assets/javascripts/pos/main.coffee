@@ -9,7 +9,7 @@ $.fn.extend
       diacritics: false
       render: $.fn.selectize.product_renderer
       load: (query, callback) ->
-        return callback() unless query
+        return callback() unless query.length > 2
         $.ajax
           url: $form.data 'productQueryUrl'
           type: 'GET'
@@ -23,6 +23,7 @@ $.fn.extend
           success: (response) ->
             callback(response)
       onChange: (id) ->
+        lot_code.setValue null
         lot_code.clearOptions()
         if id
           lot_code.load (callback) ->
@@ -43,27 +44,7 @@ $.fn.extend
       valueField: 'code'
       searchField: 'code'
       maxItems: 1
-      render:
-        item: (item, escape) ->
-          """
-          <div class="item">
-            <strong>\#{escape(item.code)}</strong>
-            \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
-            <span class="small">
-              \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
-            </span>
-          </div>
-          """
-        option: (item, escape) ->
-          """
-          <div class="option">
-            <strong>\#{escape(item.code)}</strong>
-            \#{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
-            <span class="small">
-              \#{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
-            </span>
-          </div>
-          """
+      render: $.fn.selectize.inventory_renderer
 
     product_select = $product_select[0].selectize
     lot_code = $lot_code[0].selectize

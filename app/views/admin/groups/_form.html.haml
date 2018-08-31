@@ -4,7 +4,7 @@
     .panel-body
       %fieldset
         = f.text_field :name, required: true
-        = f.select :appearance, Group.appearance_options, {}, {class: 'selectize-label', required: true}
+        = f.select :appearance, Group.appearance_options, {}, {class: 'selectize-label'}
         = f.form_group do
           = f.check_box :pricing_shown
         = f.form_group do
@@ -12,7 +12,7 @@
         %label.control-label= col(Group, :pricing)
         .row
           .col-sm-8
-            = f.select :price_base, Group.price_base_options, {hide_label: true}, {class: 'selectize', required: true}
+            = f.select :price_base, Group.price_base_options, {hide_label: true}, {class: 'selectize'}
           .col-sm-4
             = f.hidden_field :price_modifier
             .form-group
@@ -22,7 +22,7 @@
                 %span.input-group-addon %
         = f.form_group do
           = f.check_box :price_tax_included
-        = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: blank}, {class: 'selectize-label'}
+        = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: true}, {class: 'selectize-label'}
         .premium-teaser.collapse{class: @group.premium_group.present? && 'in'}
           = f.text_field :premium_teaser
     - unless @group.new_record?
@@ -43,8 +43,7 @@
     modifier = numbro().unformat $('#modifier').val()
     $('#group_price_modifier').val modifier
 
-  $('.selectize-label').selectize
+  $('select.selectize-label').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
-    allowEmptyOption: true
     render: $.fn.selectize.label_renderer

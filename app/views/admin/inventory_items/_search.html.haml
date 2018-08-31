@@ -28,9 +28,7 @@
   products = $product.data 'products'
   selected = $product.data 'selected'
 
-  $product.selectize
-    plugins: ['remove_button']
-    dropdownParent: 'body'
+  $product.betterSelectize
     options: products
     items: selected
     valueField: 'id'

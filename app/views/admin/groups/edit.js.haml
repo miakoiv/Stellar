@@ -1,4 +1,5 @@
 $('#groups-table .group').removeClass('active');
 $("##{dom_id(@group)}").addClass('active');
+$('#group-form').destroySelectized();
 $('#group-form').html("#{j render partial: 'admin/groups/edit'}");
 $('#group-form').initialize();

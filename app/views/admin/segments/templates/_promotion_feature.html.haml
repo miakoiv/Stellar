@@ -11,7 +11,7 @@
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
   = f.hidden_field :resource_type, value: 'Promotion'
-  = f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: blank}, {class: 'selectize'}
+  = f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: true}, {class: 'selectize'}
 
 :coffee
   $('#segment_resource_id').selectize

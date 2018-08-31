@@ -19,9 +19,7 @@
   customer_assets = $product.data 'customerAssets'
   selected = $product.data 'selected'
 
-  $product.selectize
-    plugins: ['remove_button']
-    dropdownParent: 'body'
+  $product.betterSelectize
     options: customer_assets
     items: selected
     valueField: 'id'
