@@ -94,10 +94,10 @@ class Admin::OrderTypesController < ApplicationController
     def order_type_params
       params.require(:order_type).permit(
         :source_id, :destination_id,
-        :name, :label,
+        :name, :label, :instructions,
         :has_shipping, :has_installation,
         :has_payment, :payment_gateway,
-        :prepaid_stock, :is_exported
+        :is_forwarded, :prepaid_stock, :is_exported
       )
     end
 end

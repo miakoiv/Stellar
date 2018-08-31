@@ -334,6 +334,7 @@ fi:
       order_type:
         name: Nimi
         label: Otsake
+        instructions: Ohjeistus
         workflow: Työnkulku
         source_id: Mistä
         destination_id: Minne
@@ -343,6 +344,7 @@ fi:
         has_installation: Asennettava
         has_payment: Maksettava
         payment_gateway: Maksukanava
+        is_forwarded: Välitettävä
         prepaid_stock: Tilaa ennalta maksetusta varastosta
         is_exported: Tietojen vienti
       page:

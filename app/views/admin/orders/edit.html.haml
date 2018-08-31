@@ -9,7 +9,8 @@
       = @order.to_s
       = surround('[', ']') { @order.inventory.to_s }
 
-= render partial: 'life_pro_tip', object: @order, as: :order
+= render partial: 'instructions'
+= life_pro_tip @order
 
 .row
   .col-lg-4

@@ -1,0 +1,4 @@
+- if @order.order_type.instructions.present?
+  .alert.alert-warning{role: 'alert'}
+    = icon('warning')
+    = @order.order_type.instructions
