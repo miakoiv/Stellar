@@ -12,10 +12,10 @@
         = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
 
 .row
-  .col-md-5
+  .col-md-4
     = render partial: 'form', locals: {locked: true}
 
-  .col-md-7
+  .col-md-8
     = tab_set 'inventory-check-side', class: 'nav-justified nav-sm' do
       = nav_tab 'items', col(InventoryCheck, :inventory_check_items), default: true
 
