@@ -194,7 +194,7 @@
 
           
           <div class="method-source-code" id="adjustments_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 93</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_sans_tax</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:amount_sans_tax</span>).<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +227,7 @@
 
           
           <div class="method-source-code" id="adjustments_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 97</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_tax</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:tax</span>).<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -260,7 +260,7 @@
 
           
           <div class="method-source-code" id="adjustments_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 101</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">adjustments_with_tax</span>
   <span class="ruby-identifier">adjustments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:amount_with_tax</span>).<span class="ruby-identifier">sum</span>
 <span class="ruby-keyword">end</span></pre>
@@ -293,7 +293,7 @@
 
           
           <div class="method-source-code" id="amount_pending-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 154</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">amount_pending</span>
   <span class="ruby-identifier">amount</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">amount_shipped</span>
 <span class="ruby-keyword">end</span></pre>
@@ -326,7 +326,7 @@
 
           
           <div class="method-source-code" id="amount_shipped-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 150</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">amount_shipped</span>
   <span class="ruby-identifier">active_transfer_items</span>.<span class="ruby-identifier">sum</span>(<span class="ruby-value">:amount</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -359,7 +359,7 @@
 
           
           <div class="method-source-code" id="archive-21-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 167</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 169</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">archive!</span>
   <span class="ruby-identifier">update</span>(
     <span class="ruby-identifier">product_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">code</span>,
@@ -397,7 +397,7 @@
 
           
           <div class="method-source-code" id="available-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 138</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available?</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">available?</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">lot_code</span>, <span class="ruby-identifier">amount</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -430,7 +430,7 @@
 
           
           <div class="method-source-code" id="grand_total_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 106</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_sans_tax</span>
   (<span class="ruby-identifier">subtotal_sans_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustments_sans_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -463,7 +463,7 @@
 
           
           <div class="method-source-code" id="grand_total_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grand_total_with_tax</span>
   (<span class="ruby-identifier">subtotal_with_tax</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustments_with_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -496,7 +496,7 @@
 
           
           <div class="method-source-code" id="is_subitem-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_subitem?</span>
   <span class="ruby-identifier">parent_item</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -529,7 +529,7 @@
 
           
           <div class="method-source-code" id="out_of_stock-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">out_of_stock?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">available?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -562,7 +562,7 @@
 
           
           <div class="method-source-code" id="pending_shipping-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pending_shipping?</span>
   <span class="ruby-identifier">track_shipments?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">tangible?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">amount_pending</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -596,7 +596,7 @@ Vendor products and items from prepaid stock are listed without prices.</p>
 
           
           <div class="method-source-code" id="price_for_export-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 121</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_for_export</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">present?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">use_prepaid_stock?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">available?</span>
@@ -632,7 +632,7 @@ it&#39;s included in the attribute.</p>
 
           
           <div class="method-source-code" id="price_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_sans_tax</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">sans_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -666,7 +666,7 @@ wasn&#39;t included.</p>
 
           
           <div class="method-source-code" id="price_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_with_tax</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">with_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -699,7 +699,7 @@ wasn&#39;t included.</p>
 
           
           <div class="method-source-code" id="report_date-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 163</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">report_date</span>
   <span class="ruby-identifier">order</span>.<span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">to_date</span>
 <span class="ruby-keyword">end</span></pre>
@@ -734,7 +734,7 @@ item.</p>
 
           
           <div class="method-source-code" id="reset_subitems-21-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_subitems!</span>
   <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">component_entries</span>
   <span class="ruby-identifier">subitems</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subitem</span><span class="ruby-operator">|</span>
@@ -772,7 +772,7 @@ item.</p>
 
           
           <div class="method-source-code" id="satisfied-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 146</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">satisfied?</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">satisfies?</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">lot_code</span>, <span class="ruby-identifier">amount</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -805,7 +805,7 @@ item.</p>
 
           
           <div class="method-source-code" id="subtotal_for_export-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 127</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_for_export</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">vendor</span>.<span class="ruby-identifier">present?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">use_prepaid_stock?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">available?</span>
@@ -840,7 +840,7 @@ item.</p>
 
           
           <div class="method-source-code" id="subtotal_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_sans_tax</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">sans_tax</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">amount</span>
@@ -874,7 +874,7 @@ item.</p>
 
           
           <div class="method-source-code" id="subtotal_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 88</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">subtotal_with_tax</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">with_tax</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">amount</span>
@@ -908,7 +908,7 @@ item.</p>
 
           
           <div class="method-source-code" id="tax-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -941,7 +941,7 @@ item.</p>
 
           
           <div class="method-source-code" id="tax_subtotal-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 83</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_subtotal</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">price_as_price</span>.<span class="ruby-identifier">tax</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">amount</span>
@@ -975,7 +975,7 @@ item.</p>
 
           
           <div class="method-source-code" id="tax_total-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 110</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_total</span>
   (<span class="ruby-identifier">tax_subtotal</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>.<span class="ruby-identifier">to_money</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">adjustments_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1008,7 +1008,7 @@ item.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 176</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">title</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1041,7 +1041,7 @@ item.</p>
 
           
           <div class="method-source-code" id="use_prepaid_stock-3F-source">
-            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 133</span>
+            <pre><span class="ruby-comment"># File app/models/order_item.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">use_prepaid_stock?</span>
   <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_type</span>.<span class="ruby-identifier">prepaid_stock?</span>
 <span class="ruby-keyword">end</span></pre>

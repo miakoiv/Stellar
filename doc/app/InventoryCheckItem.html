@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>module Imageable - Rails Application Documentation</title>
+<title>class InventoryCheckItem - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -18,7 +18,7 @@
 
 
 
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -54,31 +54,38 @@
 
   <div id="class-metadata">
     
-    
-    
-    <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
 
   <ul class="link-list">
-    
   
-    <li><span class="extend">ActiveSupport::Concern</span>
+  
+    <li><span class="include">Authority::Abilities</span>
   
   
   </ul>
 </div>
 
+    
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-available_purposes">#available_purposes</a>
+    <li ><a href="#method-i-appearance">#appearance</a>
     
-    <li ><a href="#method-i-cover_image">#cover_image</a>
+    <li ><a href="#method-i-customer_code-3D">#customer_code=</a>
     
-    <li ><a href="#method-i-image_options">#image_options</a>
+    <li ><a href="#method-i-to_s">#to_s</a>
     
   </ul>
 </div>
@@ -86,9 +93,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-Imageable">
-  <h1 id="module-Imageable" class="module">
-    module Imageable
+<main role="main" aria-labelledby="class-InventoryCheckItem">
+  <h1 id="class-InventoryCheckItem" class="class">
+    class InventoryCheckItem
   </h1>
 
   <section class="description">
@@ -106,6 +113,27 @@
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-serial" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">serial</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
 
     
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
@@ -114,10 +142,10 @@
        </header>
 
     
-      <div id="method-i-available_purposes" class="method-detail ">
+      <div id="method-i-appearance" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">available_purposes</span><span
+          <span class="method-name">appearance</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -132,10 +160,9 @@
           
 
           
-          <div class="method-source-code" id="available_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/imageable.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_purposes</span>
-  <span class="ruby-identifier">image_options</span>[<span class="ruby-value">:purpose</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Image</span>.<span class="ruby-identifier">available_purposes</span>
+          <div class="method-source-code" id="appearance-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -147,11 +174,11 @@
       </div>
 
     
-      <div id="method-i-cover_image" class="method-detail ">
+      <div id="method-i-customer_code-3D" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">cover_image</span><span
-            class="method-args">(purpose = :presentational)</span>
+          <span class="method-name">customer_code=</span><span
+            class="method-args">(val)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -165,10 +192,10 @@
           
 
           
-          <div class="method-source-code" id="cover_image-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/imageable.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cover_image</span>(<span class="ruby-identifier">purpose</span> = <span class="ruby-value">:presentational</span>)
-  <span class="ruby-identifier">images</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">purpose</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">images</span>.<span class="ruby-identifier">presentational</span>.<span class="ruby-identifier">first</span>
+          <div class="method-source-code" id="customer_code-3D-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">customer_code=</span>(<span class="ruby-identifier">val</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">customer_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">val</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -180,10 +207,10 @@
       </div>
 
     
-      <div id="method-i-image_options" class="method-detail ">
+      <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">image_options</span><span
+          <span class="method-name">to_s</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -193,16 +220,15 @@
 
         <div class="method-description">
           
-          <p>Editing options available to imageables by default, may be overridden on a
-class by class basis.</p>
+          
           
           
 
           
-          <div class="method-source-code" id="image_options-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/imageable.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">image_options</span>
-  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>}
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-string">&quot;%d⨉ %s (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">product</span>, <span class="ruby-identifier">lot_code</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Role - Rails Application Documentation</title>
+<title>class InventoryCheck - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -68,11 +68,11 @@
   <ul class="link-list">
   
   
-    <li><span class="include">Authority::UserAbilities</span>
-  
-  
-  
     <li><span class="include">Authority::Abilities</span>
+  
+  
+  
+    <li><a class="include" href="Trackable.html">Trackable</a>
   
   
   </ul>
@@ -85,15 +85,15 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-administrative">::administrative</a>
-    
-    <li ><a href="#method-c-available_roles">::available_roles</a>
-    
-    <li ><a href="#method-c-icon_for">::icon_for</a>
-    
     <li ><a href="#method-i-appearance">#appearance</a>
     
+    <li ><a href="#method-i-complete-21">#complete!</a>
+    
+    <li ><a href="#method-i-complete-3F">#complete?</a>
+    
     <li ><a href="#method-i-icon">#icon</a>
+    
+    <li ><a href="#method-i-incomplete-3F">#incomplete?</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -103,9 +103,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Role">
-  <h1 id="class-Role" class="class">
-    class Role
+<main role="main" aria-labelledby="class-InventoryCheck">
+  <h1 id="class-InventoryCheck" class="class">
+    class InventoryCheck
   </h1>
 
   <section class="description">
@@ -121,131 +121,10 @@
     
 
     
-    <section class="constants-list">
-      <header>
-        <h3>Constants</h3>
-      </header>
-      <dl>
-      
-        <dt id="ROLES">ROLES
-        
-        <dd>
-        
-      
-      </dl>
-    </section>
-    
 
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
-       <header>
-         <h3>Public Class Methods</h3>
-       </header>
-
-    
-      <div id="method-c-administrative" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">administrative</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Roles that imply administrative capacity.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="administrative-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">administrative</span>
-  <span class="ruby-identifier">available_roles</span> <span class="ruby-operator">-</span> [<span class="ruby-string">&#39;order_notify&#39;</span>, <span class="ruby-string">&#39;correspondence&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-available_roles" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">available_roles</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="available_roles-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_roles</span>
-  <span class="ruby-constant">ROLES</span>.<span class="ruby-identifier">keys</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-icon_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">icon_for</span><span
-            class="method-args">(name)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="icon_for-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">icon_for</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-    </section>
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -271,9 +150,75 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
-  <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:appearance</span>]
+  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;warning text-warning&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-complete-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">complete!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="complete-21-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete!</span>
+  <span class="ruby-identifier">update</span> <span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-complete-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">complete?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="complete-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
+  <span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -304,9 +249,42 @@
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
-  <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
+  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;cog&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-incomplete-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incomplete?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="incomplete-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">complete?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -337,9 +315,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:name</span>)
+  <span class="ruby-identifier">note</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

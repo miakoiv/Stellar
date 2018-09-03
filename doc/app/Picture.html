@@ -149,7 +149,7 @@ images with pictureable objects, and containing metadata about the context.</p>
 
           
           <div class="method-source-code" id="available_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/picture.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/models/picture.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_purposes</span>
   <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
@@ -190,7 +190,7 @@ images with pictureable objects, and containing metadata about the context.</p>
 
           
           <div class="method-source-code" id="assign_purpose-source">
-            <pre><span class="ruby-comment"># File app/models/picture.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/picture.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">assign_purpose</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>

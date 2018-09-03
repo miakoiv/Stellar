@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class InventoryEntry - Rails Application Documentation</title>
+<title>class InventoryCheckSearch - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActiveRecord::Base
+  <p class="link">Searchlight::Search
   
 </div>
 
@@ -68,7 +68,7 @@
   <ul class="link-list">
   
   
-    <li><span class="include">Authority::Abilities</span>
+    <li><span class="include">Searchlight::Adapters::ActionView</span>
   
   
   </ul>
@@ -81,11 +81,13 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-available">#available</a>
+    <li ><a href="#method-i-base_query">#base_query</a>
     
-    <li ><a href="#method-i-to_s">#to_s</a>
+    <li ><a href="#method-i-search_inventory">#search_inventory</a>
     
-    <li ><a href="#method-i-total_value_cents">#total_value_cents</a>
+    <li ><a href="#method-i-search_keyword">#search_keyword</a>
+    
+    <li ><a href="#method-i-search_store">#search_store</a>
     
   </ul>
 </div>
@@ -93,9 +95,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-InventoryEntry">
-  <h1 id="class-InventoryEntry" class="class">
-    class InventoryEntry
+<main role="main" aria-labelledby="class-InventoryCheckSearch">
+  <h1 id="class-InventoryCheckSearch" class="class">
+    class InventoryCheckSearch
   </h1>
 
   <section class="description">
@@ -121,10 +123,10 @@
        </header>
 
     
-      <div id="method-i-available" class="method-detail ">
+      <div id="method-i-base_query" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">available</span><span
+          <span class="method-name">base_query</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -139,10 +141,10 @@
           
 
           
-          <div class="method-source-code" id="available-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">available</span>
-  <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reserved</span>
+          <div class="method-source-code" id="base_query-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_search.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">base_query</span>
+  <span class="ruby-constant">InventoryCheck</span>.<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -154,10 +156,10 @@
       </div>
 
     
-      <div id="method-i-to_s" class="method-detail ">
+      <div id="method-i-search_inventory" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">to_s</span><span
+          <span class="method-name">search_inventory</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -172,14 +174,10 @@
           
 
           
-          <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-string">&quot;%s (%s) %d/%d/%d&quot;</span> <span class="ruby-operator">%</span> [
-    <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">product</span>,
-    <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">code</span>,
-    <span class="ruby-identifier">on_hand</span>, <span class="ruby-identifier">reserved</span>, <span class="ruby-identifier">pending</span>
-  ]
+          <div class="method-source-code" id="search_inventory-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_search.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_inventory</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">inventory</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -191,10 +189,10 @@
       </div>
 
     
-      <div id="method-i-total_value_cents" class="method-detail ">
+      <div id="method-i-search_keyword" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">total_value_cents</span><span
+          <span class="method-name">search_keyword</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -204,15 +202,48 @@
 
         <div class="method-description">
           
-          <p>Total value is calculated from amount on hand.</p>
+          
           
           
 
           
-          <div class="method-source-code" id="total_value_cents-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 33</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">total_value_cents</span>
-  <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">value_cents</span>
+          <div class="method-source-code" id="search_keyword-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_search.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;note LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_store" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_store</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_store-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_search.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

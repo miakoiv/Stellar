@@ -168,7 +168,7 @@ product and lot code.</p>
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">feasible?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;danger text-danger&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -201,7 +201,7 @@ product and lot code.</p>
 
           
           <div class="method-source-code" id="customer_code-3D-source">
-            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">customer_code=</span>(<span class="ruby-identifier">val</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">customer_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">val</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -235,7 +235,7 @@ enough stock.</p>
 
           
           <div class="method-source-code" id="feasible-3F-source">
-            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">feasible?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">inventory_item</span> = <span class="ruby-identifier">source_item</span>
@@ -270,7 +270,7 @@ enough stock.</p>
 
           
           <div class="method-source-code" id="source_item-source">
-            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">source_item</span>
   <span class="ruby-identifier">source</span>.<span class="ruby-identifier">item_by_product_and_code</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">lot_code</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -303,7 +303,7 @@ enough stock.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/transfer_item.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-string">&quot;%d⨉ %s (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">product</span>, <span class="ruby-identifier">lot_code</span>]
 <span class="ruby-keyword">end</span></pre>

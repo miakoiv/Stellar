@@ -141,7 +141,7 @@ that defines the contents of the label.</p>
 
           
           <div class="method-source-code" id="amount_sans_tax-source">
-            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">amount_sans_tax</span>
   <span class="ruby-identifier">amount_as_price</span>.<span class="ruby-identifier">sans_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -174,7 +174,7 @@ that defines the contents of the label.</p>
 
           
           <div class="method-source-code" id="amount_with_tax-source">
-            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">amount_with_tax</span>
   <span class="ruby-identifier">amount_as_price</span>.<span class="ruby-identifier">with_tax</span>
 <span class="ruby-keyword">end</span></pre>
@@ -207,7 +207,7 @@ that defines the contents of the label.</p>
 
           
           <div class="method-source-code" id="charge-3F-source">
-            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">charge?</span>
   <span class="ruby-identifier">amount_cents</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">amount_cents</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -240,7 +240,7 @@ that defines the contents of the label.</p>
 
           
           <div class="method-source-code" id="credit-3F-source">
-            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">credit?</span>
   <span class="ruby-identifier">amount_cents</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">amount_cents</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -273,7 +273,7 @@ that defines the contents of the label.</p>
 
           
           <div class="method-source-code" id="tax-source">
-            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/models/adjustment.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax</span>
   <span class="ruby-identifier">amount_as_price</span>.<span class="ruby-identifier">tax</span>
 <span class="ruby-keyword">end</span></pre>

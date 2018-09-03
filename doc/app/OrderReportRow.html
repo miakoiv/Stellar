@@ -134,7 +134,7 @@ of minus one to cancel the earlier entries.</p>
 
           
           <div class="method-source-code" id="cancel_entries_from-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cancel_entries_from</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
@@ -171,7 +171,7 @@ of minus one to cancel the earlier entries.</p>
 
           
           <div class="method-source-code" id="create_from-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_from</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
@@ -208,7 +208,7 @@ of minus one to cancel the earlier entries.</p>
 
           
           <div class="method-source-code" id="create_from_order_and_item-source">
-            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/models/order_report_row.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_from_order_and_item</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">order_item</span>, <span class="ruby-identifier">factor</span> = <span class="ruby-value">1</span>)
   <span class="ruby-identifier">product</span> = <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">present?</span>

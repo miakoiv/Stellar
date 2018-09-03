@@ -212,7 +212,7 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="handler_types-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">handler_types</span>
   [
     <span class="ruby-string">&#39;PromotionHandler::BulkDiscount&#39;</span>,
@@ -258,7 +258,7 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="activate_at-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 87</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">activate_at</span>
   <span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">midnight</span>
 <span class="ruby-keyword">end</span></pre>
@@ -291,7 +291,7 @@ handler that is created on the creation of the promotion.</p>
 
           
           <div class="method-source-code" id="active-3F-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active?</span>
   (<span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">first_date</span>.<span class="ruby-identifier">future?</span>) <span class="ruby-operator">&amp;&amp;</span>
   (<span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">past?</span>)
@@ -326,7 +326,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="apply-21-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">order</span>)
   <span class="ruby-identifier">promotion_handler</span>.<span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">matching_items</span>(<span class="ruby-identifier">order</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -359,7 +359,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="available_categories-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_categories</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -392,7 +392,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="deactivate_at-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 92</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">deactivate_at</span>
   <span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">last_date</span>.<span class="ruby-identifier">tomorrow</span>.<span class="ruby-identifier">midnight</span>
 <span class="ruby-keyword">end</span></pre>
@@ -425,7 +425,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="item_from_order_item-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">item_from_order_item</span>(<span class="ruby-identifier">order_item</span>)
   <span class="ruby-identifier">promoted_items</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item</span>.<span class="ruby-identifier">product_id</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -458,7 +458,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="reset_live_status-21-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_live_status!</span>
   <span class="ruby-identifier">update_columns</span>(<span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-identifier">active?</span>)
   <span class="ruby-identifier">touch</span>
@@ -498,7 +498,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 83</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -531,7 +531,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -564,7 +564,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 96</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
@@ -597,7 +597,7 @@ with the matching items.</p>
 
           
           <div class="method-source-code" id="touch_products-source">
-            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 106</span>
+            <pre><span class="ruby-comment"># File app/models/promotion.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">touch_products</span>
   <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">products</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span>
