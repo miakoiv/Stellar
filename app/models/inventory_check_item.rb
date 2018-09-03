@@ -10,9 +10,10 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :inventory, to: :inventory_check
 
   # Inventory check items have a product association and
-  # attributes for lot code, expiration, and on hand amount,
+  # attributes for lot code, expiration, and amount,
   # but may be associated with a matching inventory item.
   belongs_to :inventory_item
+  delegate :on_hand, to: :inventory_item
 
   belongs_to :product
   delegate :real?, to: :product
@@ -26,7 +27,7 @@ class InventoryCheckItem < ActiveRecord::Base
   validates :lot_code, presence: true
   validates :amount, numericality: {
     integer_only: true,
-    greater_than_or_equal_to: 1
+    greater_than_or_equal_to: 0
   }
 
   attr_accessor :serial
@@ -34,7 +35,24 @@ class InventoryCheckItem < ActiveRecord::Base
   after_validation :assign_inventory_item, on: :create
 
   #---
+  # We are stocked if a matching inventory item exists.
+  def stocked?
+    inventory_item.present?
+  end
+
+  def expected_amount?
+    stocked? && on_hand == amount
+  end
+
   def appearance
+    return 'danger text-danger' if !stocked?
+    expected_amount? || 'warning text-warning'
+  end
+
+  def icon
+    return nil if expected_amount?
+    return 'exclamation-circle' if !stocked?
+    amount > on_hand ? 'plus' : 'minus'
   end
 
   def customer_code=(val)
