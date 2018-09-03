@@ -15,10 +15,14 @@
  * Section flexboxen
  */
 .section { position: relative; }
+.section-content {
+  display: flex;
+  flex-flow: column nowrap;
+}
 .section-content > .row {
   display: flex;
   flex-flow: row wrap;
-  height: 100%;
+  flex-grow: 1;
 
   /* Nuking pseudo elements to work around a Safari glitch */
   &:before,
