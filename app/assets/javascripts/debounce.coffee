@@ -2,7 +2,7 @@
 # debouncing function from John Hann
 # http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
 
-debounce = (func, threshold, execAsap) ->
+@debounce = (func, threshold, execAsap) ->
   timeout = false
 
   return debounced = ->
