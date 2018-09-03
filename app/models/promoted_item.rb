@@ -19,6 +19,8 @@ class PromotedItem < ActiveRecord::Base
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   #---
+  validates :promotion_id, presence: true
+  validates :product_id, presence: true
   validates :discount_percent,
     numericality: {
       allow_nil: true,

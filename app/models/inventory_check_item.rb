@@ -21,6 +21,7 @@ class InventoryCheckItem < ActiveRecord::Base
   default_scope { order(updated_at: :desc) }
 
   #---
+  validates :inventory_check_id, presence: true
   validates :product_id, presence: true
   validates :lot_code, presence: true
   validates :amount, numericality: {

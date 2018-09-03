@@ -18,6 +18,7 @@ class InventoryEntry < ActiveRecord::Base
   default_scope { order(recorded_at: :desc, created_at: :desc) }
 
   #---
+  validates :inventory_item_id, presence: true
   validates :recorded_at, presence: true, on: :create
   validates :on_hand, numericality: {only_integer: true}
   validates :reserved, numericality: {only_integer: true}

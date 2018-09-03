@@ -9,6 +9,10 @@ class ProductProperty < ActiveRecord::Base
   default_scope { joins(:property).merge(Property.sorted) }
 
   #---
+  validates :product_id, presence: true
+  validates :property_id, presence: true
+
+  #---
   # Override value setter to convert numeric representations.
   def value=(string)
     self[:value] = string

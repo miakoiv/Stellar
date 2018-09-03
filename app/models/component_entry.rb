@@ -11,8 +11,9 @@ class ComponentEntry < ActiveRecord::Base
   scope :live, -> { joins(:component).merge(Product.live) }
 
   #---
-  validates :quantity, numericality: {only_integer: true, greater_than: 0}
+  validates :product_id, presence: true
   validates :component_id, presence: true
+  validates :quantity, numericality: {only_integer: true, greater_than: 0}
 
   #---
   # Availability of the component in the context of this entry.

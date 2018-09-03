@@ -102,6 +102,8 @@ class Segment < ActiveRecord::Base
   }
   scope :with_content, -> { where(template: [1, 99]) }
 
+  #---
+  validates :column_id, presence: true
 
   #---
   def self.default_settings

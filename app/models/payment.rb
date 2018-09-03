@@ -10,6 +10,9 @@ class Payment < ActiveRecord::Base
   default_scope { order(created_at: :desc) }
 
   #---
+  validates :order_id, presence: true, on: :update
+
+  #---
   def self.available_gateways
     %w{None Paybyway}
   end

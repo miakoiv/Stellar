@@ -23,6 +23,9 @@ class Adjustment < ActiveRecord::Base
   scope :charge, -> { where('amount_cents > ?', 0) }
 
   #---
+  validates :adjustable_id, presence: true
+
+  #---
   def credit?
     amount_cents.nil? || amount_cents < 0
   end

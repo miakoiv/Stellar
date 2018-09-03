@@ -25,6 +25,9 @@ class Shipment < ActiveRecord::Base
   scope :active, -> { where(cancelled_at: nil) }
 
   #---
+  validates :order_id, presence: true
+  validates :shipping_method_id, presence: true
+
   with_options on: :update, if: :requires_dimensions?,
     allow_nil: false, numericality: {
     only_integer: true,

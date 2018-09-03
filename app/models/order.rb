@@ -52,7 +52,8 @@ class Order < ActiveRecord::Base
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
   #---
-  validates :customer, presence: true, on: :update
+  validates :user_id, presence: true
+  validates :customer_id, presence: true, on: :update
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update

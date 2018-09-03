@@ -26,6 +26,7 @@ class Promotion < ActiveRecord::Base
   scope :live, -> { where(live: true) }
 
   #---
+  validates :group_id, presence: true
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
 

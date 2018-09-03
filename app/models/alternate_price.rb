@@ -11,6 +11,10 @@ class AlternatePrice < ActiveRecord::Base
   belongs_to :group
 
   #---
+  validates :product_id, presence: true
+  validates :group_id, presence: true
+
+  #---
   def self.for(group)
     find_by(group: group)
   end

@@ -45,6 +45,7 @@ class Role < ActiveRecord::Base
   }
 
   #---
+  validates :resource_id, presence: true
   validates :resource_type,
     inclusion: {in: Rolify.resource_types},
     allow_nil: true

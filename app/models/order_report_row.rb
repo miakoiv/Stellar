@@ -18,6 +18,10 @@ class OrderReportRow < ActiveRecord::Base
   belongs_to :product
 
   #---
+  validates :order_type_id, presence: true
+  validates :product_id, presence: true
+
+  #---
   # Creates or updates a report row from given order and its item.
   # Rows are aggregated by order type, shipping country, and product
   # to collect as many order items to a single slot as possible.

@@ -11,5 +11,6 @@ class RequisiteEntry < ActiveRecord::Base
   scope :live, -> { joins(:requisite).merge(Product.live) }
 
   #---
+  validates :product_id, presence: true
   validates :requisite_id, presence: true
 end

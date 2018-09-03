@@ -33,6 +33,7 @@ class OrderItem < ActiveRecord::Base
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
+  validates :order_id, presence: true
   validates :product_id, presence: true
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
 

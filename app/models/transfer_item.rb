@@ -21,6 +21,7 @@ class TransferItem < ActiveRecord::Base
   default_scope { order(updated_at: :desc) }
 
   #---
+  validates :transfer_id, presence: true
   validates :product_id, presence: true
   validates :lot_code, presence: true
   validates :amount, numericality: {
