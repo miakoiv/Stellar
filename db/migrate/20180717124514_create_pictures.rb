@@ -10,22 +10,6 @@ class CreatePictures < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
-    # Creates pictures from existing images, reusing images instead of
-    # using duplicates of the same image based on the fingerprint.
-    fingerprints = {}
-    Image.find_each(batch_size: 25) do |image|
-      key = "#{image.store_id}-#{image.attachment_fingerprint}"
-      fingerprints[key] ||= image
-      Picture.create(
-        image: fingerprints[key],
-        pictureable: image.imageable,
-        purpose: image.purpose,
-        priority: image.priority,
-        created_at: image.created_at,
-        updated_at: image.updated_at
-      )
-    end
   end
 
   def down

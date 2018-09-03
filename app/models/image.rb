@@ -11,9 +11,6 @@ class Image < ActiveRecord::Base
   has_many :pictures, dependent: :destroy
   belongs_to :store
 
-  # FIXME: the imageable mixin is deprecated
-  belongs_to :imageable, polymorphic: true, touch: true
-
   has_attached_file :attachment,
     styles: {
       lightbox:       '1920x1200>',
@@ -84,18 +81,6 @@ class Image < ActiveRecord::Base
 
   def landscape?
     !portrait?
-  end
-
-  def calculated_store_id
-    return imageable.store_id if imageable.respond_to?(:store_id)
-    return case imageable
-    when Store
-      imageable.id
-    when Section
-      imageable.page.store_id
-    when Segment
-      imageable.column.section.page.store_id
-    end
   end
 
   def to_s

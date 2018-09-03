@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180831063353) do
+ActiveRecord::Schema.define(version: 20180903085140) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -274,8 +274,6 @@ ActiveRecord::Schema.define(version: 20180831063353) do
 
   create_table "images", force: :cascade do |t|
     t.integer  "store_id",                limit: 4
-    t.integer  "imageable_id",            limit: 4
-    t.string   "imageable_type",          limit: 255
     t.string   "attachment_fingerprint",  limit: 255
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -284,8 +282,6 @@ ActiveRecord::Schema.define(version: 20180831063353) do
     t.integer  "attachment_file_size",    limit: 4
     t.datetime "attachment_updated_at"
   end
-
-  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "inventories", force: :cascade do |t|
     t.integer  "store_id",       limit: 4
