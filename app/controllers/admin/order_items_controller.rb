@@ -51,6 +51,7 @@ class Admin::OrderItemsController < ApplicationController
     @order = @order_item.order
 
     if @order_item.destroy
+      track @order_item, @order
       @order.recalculate!
     end
   end
