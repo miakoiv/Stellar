@@ -9,11 +9,16 @@ class Admin::InventoryCheckItemsController < ApplicationController
 
   # POST /admin/inventory_checks/1/inventory_check_items
   def create
-    @inventory_check_item = @inventory_check.inventory_check_items.build(inventory_check_item_params)
+    @inventory_check_item = @inventory_check.inventory_check_items
+      .find_or_initialize_by(
+        inventory_check_item_params.slice(:product_id, :lot_code)
+      )
+    @inventory_check_item.amount += inventory_check_item_params[:amount].to_i
+    action = @inventory_check_item.new_record? ? :create : :update
 
     respond_to do |format|
       if @inventory_check_item.save
-        track @inventory_check_item, @inventory_check
+        track @inventory_check_item, @inventory_check, {action: action}
         format.js { render :create }
       else
         format.js { render :error }
