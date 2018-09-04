@@ -7,12 +7,11 @@ class Iframe < ActiveRecord::Base
   include Reorderable
 
   #---
-  belongs_to :product
+  belongs_to :product, required: true
 
   default_scope { sorted }
 
   #---
-  validates :product_id, presence: true
   validates :html, presence: true
 
   #---

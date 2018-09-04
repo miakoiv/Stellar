@@ -7,12 +7,8 @@ class AlternatePrice < ActiveRecord::Base
   }
 
   #---
-  belongs_to :product, touch: true
-  belongs_to :group
-
-  #---
-  validates :product_id, presence: true
-  validates :group_id, presence: true
+  belongs_to :product, touch: true, required: true
+  belongs_to :group, required: true
 
   #---
   def self.for(group)

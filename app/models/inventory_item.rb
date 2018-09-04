@@ -10,7 +10,7 @@ class InventoryItem < ActiveRecord::Base
 
   #---
   belongs_to :inventory, required: true
-  belongs_to :product, touch: true
+  belongs_to :product, touch: true, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
@@ -28,7 +28,6 @@ class InventoryItem < ActiveRecord::Base
   scope :for, -> (product) { where(product: product) }
 
   #---
-  validates :product_id, presence: true
   validates :code, presence: true
   validates_associated :inventory_entries
 

@@ -8,21 +8,19 @@ class TransferItem < ActiveRecord::Base
   include Authority::Abilities
 
   #---
-  belongs_to :transfer
+  belongs_to :transfer, required: true
   delegate :complete?, :source, :destination, to: :transfer
 
   # Transfer items may reference an order item they were created for.
   belongs_to :order_item
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   default_scope { order(updated_at: :desc) }
 
   #---
-  validates :transfer_id, presence: true
-  validates :product_id, presence: true
   validates :lot_code, presence: true
   validates :amount, numericality: {
     integer_only: true,

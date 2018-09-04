@@ -15,14 +15,10 @@ class CustomerAsset < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :user
-  belongs_to :product
+  belongs_to :user, required: true
+  belongs_to :product, required: true
 
   has_many :asset_entries, dependent: :destroy
-
-  #---
-  validates :user_id, presence: true
-  validates :product_id, presence: true
 
   #---
   after_touch :update_amount_and_value

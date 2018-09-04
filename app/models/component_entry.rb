@@ -4,15 +4,13 @@ class ComponentEntry < ActiveRecord::Base
 
   include Reorderable
 
-  belongs_to :product, touch: true
-  belongs_to :component, class_name: 'Product'
+  belongs_to :product, touch: true, required: true
+  belongs_to :component, class_name: 'Product', required: true
 
   default_scope { sorted }
   scope :live, -> { joins(:component).merge(Product.live) }
 
   #---
-  validates :product_id, presence: true
-  validates :component_id, presence: true
   validates :quantity, numericality: {only_integer: true, greater_than: 0}
 
   #---

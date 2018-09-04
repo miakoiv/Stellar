@@ -16,7 +16,7 @@ class Promotion < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :group
+  belongs_to :group, required: true
 
   has_many :promoted_items, dependent: :destroy
   has_many :products, through: :promoted_items
@@ -26,7 +26,6 @@ class Promotion < ActiveRecord::Base
   scope :live, -> { where(live: true) }
 
   #---
-  validates :group_id, presence: true
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
 

@@ -6,7 +6,7 @@ class InventoryCheckItem < ActiveRecord::Base
   include Authority::Abilities
 
   #---
-  belongs_to :inventory_check
+  belongs_to :inventory_check, required: true
   delegate :inventory, to: :inventory_check
 
   # Inventory check items have a product association and
@@ -15,15 +15,13 @@ class InventoryCheckItem < ActiveRecord::Base
   belongs_to :inventory_item
   delegate :on_hand, to: :inventory_item
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   default_scope { order(updated_at: :desc) }
 
   #---
-  validates :inventory_check_id, presence: true
-  validates :product_id, presence: true
   validates :lot_code, presence: true
   validates :amount, numericality: {
     integer_only: true,

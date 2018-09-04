@@ -6,10 +6,9 @@
 #
 class PromotionHandler < ActiveRecord::Base
 
-  belongs_to :promotion
+  belongs_to :promotion, required: true
 
   #---
-  validates :promotion_id, presence: true
   validates :description, presence: true, on: :update
 
   #---

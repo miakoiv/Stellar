@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
   include Reorderable
 
   #---
-  belongs_to :documentable, polymorphic: true
+  belongs_to :documentable, polymorphic: true, required: true
 
   default_scope { sorted }
 
@@ -14,7 +14,6 @@ class Document < ActiveRecord::Base
   delegate :url, to: :attachment
 
   #---
-  validates :documentable_id, presence: true
   validates_attachment :attachment,
     content_type: {
       content_type: [

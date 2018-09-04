@@ -2,15 +2,11 @@
 
 class ProductProperty < ActiveRecord::Base
 
-  belongs_to :product, touch: true
-  belongs_to :property
+  belongs_to :product, touch: true, required: true
+  belongs_to :property, required: true
   delegate :string?, :numeric?, to: :property
 
   default_scope { joins(:property).merge(Property.sorted) }
-
-  #---
-  validates :product_id, presence: true
-  validates :property_id, presence: true
 
   #---
   # Override value setter to convert numeric representations.

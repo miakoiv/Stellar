@@ -5,8 +5,8 @@ class Shipment < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  belongs_to :order
-  belongs_to :shipping_method
+  belongs_to :order, required: true
+  belongs_to :shipping_method, required: true
   delegate :shipping_cost_product, :free_shipping_from, to: :shipping_method
 
   # Shipments refer to a transfer to handle the stock changes.
@@ -25,9 +25,6 @@ class Shipment < ActiveRecord::Base
   scope :active, -> { where(cancelled_at: nil) }
 
   #---
-  validates :order_id, presence: true
-  validates :shipping_method_id, presence: true
-
   with_options on: :update, if: :requires_dimensions?,
     allow_nil: false, numericality: {
     only_integer: true,

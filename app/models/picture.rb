@@ -13,14 +13,10 @@ class Picture < ActiveRecord::Base
   enum purpose: {presentational: 0, technical: 1}
 
   #---
-  belongs_to :image
-  belongs_to :pictureable, polymorphic: true, touch: true
+  belongs_to :image, required: true
+  belongs_to :pictureable, polymorphic: true, touch: true, required: true
 
   default_scope { sorted }
-
-  #---
-  validates :image_id, presence: true
-  validates :pictureable_id, presence: true
 
   #---
   before_validation :assign_purpose

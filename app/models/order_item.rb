@@ -9,13 +9,13 @@ class OrderItem < ActiveRecord::Base
   monetize :price_cents, allow_nil: true
 
   #---
-  belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
+  belongs_to :order, inverse_of: :order_items, touch: true, required: true, counter_cache: true
   delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
   # Related transfer items in active shipments, see #amount_shipped.
   has_many :active_transfer_items, -> { joins(transfer: :shipment).merge(Shipment.active) }, class_name: 'TransferItem'
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
 
   # Order items may have subitems that update with their parent, and are not
@@ -33,8 +33,6 @@ class OrderItem < ActiveRecord::Base
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
-  validates :order_id, presence: true
-  validates :product_id, presence: true
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
 
   #---

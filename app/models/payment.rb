@@ -5,12 +5,9 @@ class Payment < ActiveRecord::Base
   monetize :amount_cents
 
   #---
-  belongs_to :order
+  belongs_to :order, required: true
 
   default_scope { order(created_at: :desc) }
-
-  #---
-  validates :order_id, presence: true, on: :update
 
   #---
   def self.available_gateways

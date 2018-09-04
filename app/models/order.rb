@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   belongs_to :store_portal, class_name: 'Store'
 
   # User created the order, and is usually the customer too.
-  belongs_to :user
+  belongs_to :user, required: true
   belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
   accepts_nested_attributes_for :customer
 
@@ -52,8 +52,7 @@ class Order < ActiveRecord::Base
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
   #---
-  validates :user_id, presence: true
-  validates :customer_id, presence: true, on: :update
+  validates :customer, presence: true, on: :update
   validates :customer_name, presence: true, on: :update
   validates :customer_email, presence: true, on: :update
   validates :customer_phone, presence: true, on: :update

@@ -90,7 +90,7 @@ class Segment < ActiveRecord::Base
   }
 
   #---
-  belongs_to :column, touch: true
+  belongs_to :column, touch: true, required: true
   belongs_to :resource, polymorphic: true
 
   before_validation :clear_unwanted_attributes
@@ -101,9 +101,6 @@ class Segment < ActiveRecord::Base
     .order('columns.priority, segments.priority')
   }
   scope :with_content, -> { where(template: [1, 99]) }
-
-  #---
-  validates :column_id, presence: true
 
   #---
   def self.default_settings

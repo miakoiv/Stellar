@@ -11,15 +11,11 @@ class OrderReportRow < ActiveRecord::Base
   monetize :total_tax_cents, disable_validation: true
 
   #---
-  belongs_to :order_type
+  belongs_to :order_type, required: true
+  belongs_to :product, required: true
   belongs_to :user
   belongs_to :store_portal, class_name: 'Store'
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
-  belongs_to :product
-
-  #---
-  validates :order_type_id, presence: true
-  validates :product_id, presence: true
 
   #---
   # Creates or updates a report row from given order and its item.

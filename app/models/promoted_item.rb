@@ -11,16 +11,14 @@ class PromotedItem < ActiveRecord::Base
   attr_accessor :calculated
 
   #---
-  belongs_to :promotion, touch: true
+  belongs_to :promotion, touch: true, required: true
   delegate :group, to: :promotion
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   #---
-  validates :promotion_id, presence: true
-  validates :product_id, presence: true
   validates :discount_percent,
     numericality: {
       allow_nil: true,
