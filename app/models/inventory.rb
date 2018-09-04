@@ -34,11 +34,11 @@ class Inventory < ActiveRecord::Base
   # the product, a lot code, expiration, and amount. New inventory
   # items may be created if not seen before.
   def restock!(transfer_item, timestamp, source = nil)
-    item = inventory_items.find_or_initialize_by(
+    item = inventory_items.find_or_create_by!(
       product: transfer_item.product,
       code: transfer_item.lot_code
     ) { |item| item.expires_at = transfer_item.expires_at }
-    item.inventory_entries.build(
+    item.inventory_entries.create!(
       recorded_at: timestamp,
       source: source,
       on_hand: transfer_item.amount,
@@ -46,7 +46,6 @@ class Inventory < ActiveRecord::Base
       pending: 0,
       value: item.value || transfer_item.product.trade_price || 0
     )
-    item.save!
   end
 
   # Destocks the inventory from given transfer item that specifies
@@ -56,7 +55,7 @@ class Inventory < ActiveRecord::Base
       product: transfer_item.product,
       code: transfer_item.lot_code
     )
-    item.inventory_entries.build(
+    item.inventory_entries.create!(
       recorded_at: timestamp,
       source: source,
       on_hand: -transfer_item.amount,
@@ -64,7 +63,6 @@ class Inventory < ActiveRecord::Base
       pending: 0,
       value: item.value
     )
-    item.save!
   end
 
   def to_s

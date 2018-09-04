@@ -9,7 +9,7 @@ class InventoryEntry < ActiveRecord::Base
   monetize :value_cents
   monetize :total_value_cents, disable_validation: true
 
-  belongs_to :inventory_item, touch: true
+  belongs_to :inventory_item, touch: true, required: true
 
   # The source can be any object that's responsible for the existence
   # of this particular entry.
@@ -18,7 +18,6 @@ class InventoryEntry < ActiveRecord::Base
   default_scope { order(recorded_at: :desc, created_at: :desc) }
 
   #---
-  validates :inventory_item_id, presence: true
   validates :recorded_at, presence: true, on: :create
   validates :on_hand, numericality: {only_integer: true}
   validates :reserved, numericality: {only_integer: true}

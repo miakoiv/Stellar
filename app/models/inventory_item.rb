@@ -9,7 +9,7 @@ class InventoryItem < ActiveRecord::Base
   monetize :total_value_cents, disable_validation: true
 
   #---
-  belongs_to :inventory
+  belongs_to :inventory, required: true
   belongs_to :product, touch: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
@@ -28,7 +28,6 @@ class InventoryItem < ActiveRecord::Base
   scope :for, -> (product) { where(product: product) }
 
   #---
-  validates :inventory_id, presence: true
   validates :product_id, presence: true
   validates :code, presence: true
   validates_associated :inventory_entries
