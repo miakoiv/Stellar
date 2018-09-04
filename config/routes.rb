@@ -124,7 +124,6 @@ Rails.application.routes.draw do
       collection do
         get :query
         get :refresh
-        get :check
       end
     end
     resources :inventory_checks do

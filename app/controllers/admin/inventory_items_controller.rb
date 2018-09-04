@@ -5,7 +5,7 @@ class Admin::InventoryItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit]
 
-  authority_actions query: 'read', refresh: 'read', check: 'read'
+  authority_actions query: 'read', refresh: 'read'
 
   layout 'admin'
 
@@ -86,11 +86,6 @@ class Admin::InventoryItemsController < ApplicationController
         format.json { render json: @inventory_item.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # GET /admin/inventory_items/check
-  def check
-    index
   end
 
   private
