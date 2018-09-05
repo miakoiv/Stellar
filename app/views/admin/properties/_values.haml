@@ -1,5 +1,5 @@
 %ul.list-group
   - property.value_counts.each do |value, count|
     %li.list-group-item
-      = value
+      = value.presence || t('.empty')
       %span.badge= count

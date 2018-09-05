@@ -298,6 +298,8 @@ en:
         new_property: New property
       form:
         external_name_help: Property name in CSV files for importing product properties.
+      values:
+        empty: "[Empty]"
     sections:
       settings:
         delete:

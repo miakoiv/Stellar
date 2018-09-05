@@ -5,7 +5,7 @@
   %h1= icon('tag', title(Promotion, count: 2))
 
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-xs-1
@@ -25,7 +25,7 @@
           %td
             - if promotion.page.present?
               = icon('file-o', title: col(Promotion, :has_page), data: {toggle: 'tooltip'})
-          %td
+          %td.no-wrap
             - if promotion.live?
               = promotion.first_date.present? ? l(promotion.first_date) : nil
             - else
@@ -39,7 +39,7 @@
                   class: 'btn btn-default btn-sm'
             - if current_user.can_delete?(promotion, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_promotion_path(promotion),
-                  method: :delete, class: 'btn btn-sm btn-danger',
+                  method: :delete, class: 'btn btn-sm btn-outline-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: Promotion.model_name.human, name: promotion.name),
                     'confirm-title': t('actions.confirm.title'),

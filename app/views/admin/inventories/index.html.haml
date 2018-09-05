@@ -5,7 +5,7 @@
   %h1= icon('cubes', title(Inventory, count: 2))
 
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-min.hidden-print
@@ -28,7 +28,7 @@
             = link_to icon('edit', t('actions.edit')), edit_admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
           - if current_user.can_delete?(inventory, at: current_store)
             = link_to icon('remove', t('actions.delete')), admin_inventory_path(inventory),
-                method: :delete, class: 'btn btn-sm btn-danger',
+                method: :delete, class: 'btn btn-sm btn-outline-danger',
                 data: {confirm: t('actions.confirm.body',
                   klass: Inventory.model_name.human, name: inventory.name),
                   'confirm-title': t('actions.confirm.title'),

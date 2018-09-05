@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-xs-2= col(AssetEntry, :recorded_at)
@@ -14,17 +14,20 @@
 
 .table-responsive
   = form_for [:admin, customer_asset, customer_asset.asset_entries.build(recorded_at: Date.today, amount: 1, value: customer_asset.product.retail_price)], remote: true do |f|
-    %table.table.table-loose
-      %tbody
+    %table.table
+      %tfoot
         %tr
-          %td.col-xs-2= f.text_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           %td.col-xs-2
-          %td.col-xs-2= f.number_field :amount, class: 'form-control text-right'
+            = f.text_field :recorded_at, class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+          %td.col-xs-2
+          %td.col-xs-2
+            = f.number_field :amount, class: 'form-control text-right'
           %td.hidden
             .input-group
               = f.text_field :value, class: 'form-control text-right'
               .input-group-addon €
-          %td= f.text_field :note, class: 'form-control'
+          %td
+            = f.text_field :note, class: 'form-control'
           %td.actions
             = f.button class: 'btn btn-default' do
               = icon('check')

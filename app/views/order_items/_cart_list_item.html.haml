@@ -33,9 +33,9 @@
           = form_for order_item, remote: true, html: {class: 'immediate'} do |f|
             .form-group
               .input-group
-                = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right'
+                = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right'
                 .input-group-btn
-                  = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger btn-sm'
+                  = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger'
       %p.unit-price.text-right
         à
         %span.currency= money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax

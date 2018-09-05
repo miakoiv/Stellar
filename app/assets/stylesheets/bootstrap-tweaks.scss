@@ -1285,17 +1285,40 @@ fieldset > legend {
 /*
  * Tables
  */
-.table.table-loose > tbody > tr > th,
-.table.table-loose > tbody > tr > td { line-height: 2; }
 .table .subrow th,
 .table .subrow td {
   border-top-style: dotted;
   padding: 4px 8px;
 }
 .table .col-min { width: 1px; }
-.table .actions {
-  @extend .text-right, .no-wrap, .hidden-print;
+.table .actions { @extend .text-right, .no-wrap, .hidden-print; }
+.table tbody .actions {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
+
+.table.table-form {
+  td.control {
+    padding: 0 !important;
+    border-left: 1px solid $input-border;
+    border-right: 1px solid $input-border;
+
+    .form-control {
+      position: relative;
+      height: auto;
+      padding-top: $padding-base-vertical + 2px;
+      padding-bottom: $padding-base-vertical + 2px;
+      border: 0;
+
+      &:focus { z-index: 2; }
+    }
+    .input-group-addon {
+      border: 0;
+      background-color: transparent;
+    }
+  }
+}
+
 .table td .product {
   a { font-weight: bold; }
   .badge { margin-left: 0.333em; }

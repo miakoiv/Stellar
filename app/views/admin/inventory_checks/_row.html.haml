@@ -9,7 +9,7 @@
       = link_to icon('edit', t('actions.edit')), edit_admin_inventory_check_path(inventory_check), class: 'btn btn-default btn-sm'
     = link_to icon('info', t('actions.show')), admin_inventory_check_path(inventory_check), class: 'btn btn-default btn-sm'
     - if current_user.can_delete?(inventory_check, at: current_store)
-      = link_to icon('remove', t('actions.delete')), admin_inventory_check_path(inventory_check), method: :delete, class: 'btn btn-sm btn-danger',
+      = link_to icon('remove', t('actions.delete')), admin_inventory_check_path(inventory_check), method: :delete, class: 'btn btn-sm btn-outline-danger',
           data: {confirm: t('actions.confirm.body',
             klass: InventoryCheck.model_name.human, name: inventory_check.to_s),
             'confirm-title': t('actions.confirm.title'),

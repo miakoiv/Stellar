@@ -8,7 +8,7 @@
       = order.shipping_at.present? ? l(order.shipping_at) : nil
       \/
       = order.installation_at.present? ? l(order.installation_at) : nil
-  %td.no-wrap
+  %td
     %strong= order.customer_name
   - if current_store.b2b_sales?
     %td
@@ -30,7 +30,7 @@
           class: 'btn btn-default btn-sm'
     - if current_user.can_delete?(Order, at: current_store) && order.incomplete?
       = link_to icon('remove', t('actions.delete')), admin_order_path(order),
-          method: :delete, class: 'btn btn-sm btn-danger',
+          method: :delete, class: 'btn btn-sm btn-outline-danger',
           data: {confirm: t('actions.confirm.body',
             klass: Order.model_name.human, name: order.to_s),
             'confirm-title': t('actions.confirm.title'),

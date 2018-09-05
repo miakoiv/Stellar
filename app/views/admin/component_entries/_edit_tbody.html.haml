@@ -13,4 +13,4 @@
     - if entry.component.retail_price.present?
       = money entry.quantity * entry.component.retail_price
   %td.actions
-    = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'

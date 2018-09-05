@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-min.hidden-print
@@ -10,8 +10,8 @@
     %tbody#hostnames-tbody.sortable
       = render partial: 'admin/hostnames/edit_tbody', object: store, as: :store
 
-  %table.table.table-loose
-    %tbody
+  %table.table
+    %tfoot
       = form_for [:admin, store, store.hostnames.new], remote: true do |f|
         %tr
           %td

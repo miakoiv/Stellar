@@ -2,8 +2,8 @@
   = form_for [:admin, product, product.inventory_items.build.tap { |item| item.inventory_entries.build(recorded_at: Date.today) }], remote: true, method: :post do |f|
     = f.hidden_field :product_id
     = f.fields_for :inventory_entries do |ff|
-      %table.table.table-loose
-        %tbody
+      %table.table
+        %tfoot
           %tr
             %td.col-xs-2
               = f.text_field :code, placeholder: col(InventoryItem, :code), class: 'form-control'

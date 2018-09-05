@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-min.hidden-print
@@ -14,8 +14,8 @@
 
 .table-responsive
   = form_for [:admin, product, product.component_entries.build(quantity: 1)], remote: true do |f|
-    %table.table.table-loose
-      %tbody
+    %table.table
+      %tfoot
         %tr
           %td.col-xs-10
             = f.select :component_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group'}

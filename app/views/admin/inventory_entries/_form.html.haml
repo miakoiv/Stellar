@@ -1,8 +1,8 @@
 #inventory-entry-form
   = form_for [:admin, @inventory_item, InventoryEntry.new(recorded_at: Date.today)], remote: true do |f|
     .table-responsive
-      %table.table.table-loose
-        %tbody
+      %table.table
+        %thead
           %tr
             %td.col-min
             %td.col-xs-2

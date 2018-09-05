@@ -1,5 +1,5 @@
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-xs-6= col(ProductProperty, :property_id)
@@ -11,8 +11,8 @@
 
 .table-responsive
   = form_for [:admin, product, product.product_properties.new], remote: true do |f|
-    %table.table.table-loose
-      %tbody
+    %table.table
+      %tfoot
         %tr
           %td.col-xs-6
             = f.select :property_id, current_store.properties.map { |p| [p.name_with_units, p.id] }, {include_blank: true}, {placeholder: col(ProductProperty, :property_id), class: 'form-control', data: {show_paths: current_store.properties.string.map { |p| [p.id, admin_property_path(p)] }.to_h}}

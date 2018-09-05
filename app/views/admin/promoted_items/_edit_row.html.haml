@@ -1,20 +1,20 @@
 = content_tag_for :tr, promoted_item do
   %td= product_header promoted_item
-  %td.hidden
+  %td.control.hidden
     = form_for [:admin, promoted_item], namespace: [:amount, promoted_item.id], remote: true, html: {class: 'immediate'} do |f|
-      = f.text_field :amount_available, class: 'form-control input-sm text-right', tabindex: 1
+      = f.text_field :amount_available, class: 'form-control text-right', tabindex: 1
   - if promoted_item.promotion.editable_prices?
-    %td
+    %td.control
       = form_for [:admin, promoted_item], namespace: [:discount, promoted_item.id], remote: true, html: {class: 'immediate'} do |f|
-        .input-group.input-group-sm
+        .input-group
           = f.text_field :discount_percent, value: number_with_precision(promoted_item.discount_percent, precision: 2), tabindex: 2, class: 'form-control text-right'
           %span.input-group-addon %
-    %td
+    %td.control
       = form_for [:admin, promoted_item], namespace: [:price, promoted_item.id], remote: true, html: {class: 'immediate'} do |f|
-        .input-group.input-group-sm
+        .input-group
           = f.text_field :price, placeholder: promoted_item.product.retail_price.to_s, tabindex: 3, class: 'form-control text-right'
           %span.input-group-addon €
     %td.no-wrap
       %span.small= promoted_item.product.tax_category
   %td.actions
-    = link_to icon('remove'), admin_promoted_item_path(promoted_item), remote: true, method: :delete, class: 'btn btn-sm btn-danger'
+    = link_to icon('remove'), admin_promoted_item_path(promoted_item), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'

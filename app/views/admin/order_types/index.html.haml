@@ -5,7 +5,7 @@
   %h1= icon('gears', title(OrderType, count: 2))
 
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-xs-3= col(OrderType, :workflow)
@@ -44,5 +44,5 @@
             = link_to icon('edit', t('actions.edit')), edit_admin_order_type_path(order_type),
                 class: 'btn btn-default btn-sm'
           - if current_user.can_delete?(order_type, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: t('actions.confirm.body',
+            = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
                   klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

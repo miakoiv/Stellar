@@ -3,9 +3,9 @@
     %strong= order_item.product_title
     = order_item.product_subtitle
   %td
-  %td.text-right
+  %td.control
     = form_for [:pos, order_item], remote: true, html: {class: 'pull-right immediate'} do |f|
-      = f.number_field :amount, min: 1, max: 999, class: 'form-control input-sm text-right', disabled: order_item.is_subitem? || order_item.internal?
+      = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right', disabled: order_item.is_subitem? || order_item.internal?
   %td
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax

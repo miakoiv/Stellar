@@ -1,5 +1,5 @@
 .table-responsive
-  %table#products-table.table.table-hover.table-loose.table-nested
+  %table#products-table.table.table-hover.table-nested
     %thead
       %tr
         %th.col-min
@@ -10,7 +10,6 @@
         %th.col-min
         %th.col-min
         %th.actions
-
 
     = render partial: 'admin/products/tbody', collection: @products, as: :product
 

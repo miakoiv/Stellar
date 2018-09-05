@@ -278,6 +278,8 @@ fi:
         new_property: Uusi ominaisuus
       form:
         external_name_help: Ominaisuuden nimi tuotaessa tuotteiden ominaisuuksia CSV-tiedostosta.
+      values:
+        empty: "[Tyhjä]"
     sections:
       settings:
         delete:

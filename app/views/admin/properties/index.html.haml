@@ -5,7 +5,7 @@
   %h1= icon('eyedropper', title(Property, count: 2))
 
 .table-responsive
-  %table.table.table-hover.table-loose
+  %table.table.table-hover
     %thead
       %tr
         %th.col-min.hidden-print
@@ -28,7 +28,7 @@
               = link_to icon('edit', t('actions.edit')), edit_admin_property_path(property), class: 'btn btn-default btn-sm'
             - if current_user.can_delete?(property, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_property_path(property),
-                  method: :delete, class: 'btn btn-sm btn-danger',
+                  method: :delete, class: 'btn btn-sm btn-outline-danger',
                   data: {confirm: t('actions.confirm.body',
                     klass: Property.model_name.human, name: property.name),
                     'confirm-title': t('actions.confirm.title'),
