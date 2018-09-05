@@ -256,14 +256,10 @@ class ApplicationController < ActionController::Base
       @departments = current_store.departments
     end
 
-    # Create a record for a guest user, put her in the default group,
-    # grant her the baseline roles, and schedule a cleanup in two weeks.
+    # Create a record for a guest user and schedule a cleanup in two weeks.
     def create_guest_user
-      defaults = current_store.guest_user_defaults(current_hostname)
-      guest = User.new(defaults)
-      guest.save!(validate: false)
+      guest = User.generate_guest!(current_hostname, current_store.default_group)
       session[:guest_user_id] = guest.id
-      guest.groups << current_store.default_group
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
     end

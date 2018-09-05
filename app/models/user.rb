@@ -47,6 +47,18 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
 
   #---
+  # Generates a guest user visiting at hostname as member of group.
+  def self.generate_guest!(hostname, group)
+    uuid = SecureRandom.uuid
+    guest = User.create!(
+      name: uuid,
+      email: "#{uuid}@#{hostname.fqdn}"
+    )
+    guest.groups << group
+    guest
+  end
+
+  #---
   # A user's shopping cart is the only incomplete order at given store
   # with her as the customer.
   def shopping_cart(store, store_portal, group)

@@ -167,15 +167,6 @@ class Store < ActiveRecord::Base
     style.present? && style.stylesheet.present? && style.stylesheet.url || "spry_themes/#{theme}"
   end
 
-  # Guest users are assigned a random name and email.
-  def guest_user_defaults(hostname)
-    name = "#{Time.now.to_i}#{rand(100)}"
-    {
-      name: name,
-      email: "#{name}@#{hostname.fqdn}"
-    }
-  end
-
   # Finds a subdomain hostname belonging to the given store portal.
   def hostname_at(portal)
     hostnames.joins(domain_hostname: :store)
