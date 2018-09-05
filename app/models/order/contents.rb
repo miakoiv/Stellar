@@ -160,7 +160,9 @@ class Order < ActiveRecord::Base
     def create_initial_transfer!
       shipping_method = store.shipping_methods.active.first
       return nil unless shipping_method.present? && inventory.present? && requires_shipping?
-      shipment = shipments.first_or_create(shipping_method: shipping_method)
+      shipment = shipments.create_with(
+        shipping_method: shipping_method
+      ).first_or_create!
       shipment.load!
     end
 end
