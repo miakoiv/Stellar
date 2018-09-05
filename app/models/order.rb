@@ -52,10 +52,12 @@ class Order < ActiveRecord::Base
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
 
   #---
-  validates :customer, presence: true, on: :update
-  validates :customer_name, presence: true, on: :update
-  validates :customer_email, presence: true, on: :update
-  validates :customer_phone, presence: true, on: :update
+  with_options on: :update, if: :customer_required?, presence: true do |order|
+    order.validates :customer
+    order.validates :customer_name
+    order.validates :customer_email
+    order.validates :customer_phone
+  end
 
   #---
   # This attribute allows adding products en masse
@@ -97,6 +99,11 @@ class Order < ActiveRecord::Base
   end
   def order_type_name
     concluded? ? self[:order_type_name] : order_type.name
+  end
+
+  # Orders don't require customer information until order type has been set.
+  def customer_required?
+    order_type.present?
   end
 
   # Orders targeted at another customer, not the user herself.

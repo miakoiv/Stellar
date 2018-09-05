@@ -21,13 +21,15 @@ class Order < ActiveRecord::Base
   end
 
   def billing_address_required?
+    return false unless customer_required?
     has_billing_address? || has_payment? && !has_shipping?
   end
 
   # Order having shipping is simply from the order type,
   # once it has been assigned. See #requires_shipping?
   def has_shipping?
-    order_type.present? && order_type.has_shipping?
+    return false unless customer_required?
+    order_type.has_shipping?
   end
   scope :has_shipping, -> { joins(:order_type).merge(OrderType.has_shipping) }
 
