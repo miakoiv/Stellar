@@ -5,7 +5,7 @@ class ComponentEntry < ActiveRecord::Base
   include Reorderable
 
   belongs_to :product, touch: true
-  belongs_to :component, class_name: 'Product'
+  belongs_to :component, class_name: 'Product', required: true
 
   default_scope { sorted }
   scope :live, -> { joins(:component).merge(Product.live) }

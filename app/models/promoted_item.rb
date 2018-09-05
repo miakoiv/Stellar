@@ -14,7 +14,7 @@ class PromotedItem < ActiveRecord::Base
   belongs_to :promotion, touch: true
   delegate :group, to: :promotion
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 

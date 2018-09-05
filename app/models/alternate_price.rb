@@ -8,7 +8,7 @@ class AlternatePrice < ActiveRecord::Base
 
   #---
   belongs_to :product, touch: true
-  belongs_to :group
+  belongs_to :group, required: true
 
   #---
   def self.for(group)

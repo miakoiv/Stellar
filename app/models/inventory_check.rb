@@ -8,7 +8,7 @@ class InventoryCheck < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :inventory
+  belongs_to :inventory, required: true
   has_many :inventory_check_items, dependent: :destroy
 
   default_scope { order(created_at: :desc) }

@@ -15,7 +15,7 @@ class InventoryCheckItem < ActiveRecord::Base
   belongs_to :inventory_item
   delegate :on_hand, to: :inventory_item
 
-  belongs_to :product
+  belongs_to :product, required: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
