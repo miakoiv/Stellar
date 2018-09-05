@@ -16,7 +16,7 @@ class Promotion < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :group, required: true
+  belongs_to :group
 
   has_many :promoted_items, dependent: :destroy
   has_many :products, through: :promoted_items

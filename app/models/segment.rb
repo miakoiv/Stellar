@@ -90,7 +90,7 @@ class Segment < ActiveRecord::Base
   }
 
   #---
-  belongs_to :column, touch: true, required: true
+  belongs_to :column, touch: true
   belongs_to :resource, polymorphic: true
 
   before_validation :clear_unwanted_attributes

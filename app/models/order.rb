@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   belongs_to :store_portal, class_name: 'Store'
 
   # User created the order, and is usually the customer too.
-  belongs_to :user, required: true
+  belongs_to :user
   belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
   accepts_nested_attributes_for :customer
 

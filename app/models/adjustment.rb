@@ -14,7 +14,7 @@ class Adjustment < ActiveRecord::Base
   monetize :amount_cents, allow_nil: true
 
   #---
-  belongs_to :adjustable, polymorphic: true, required: true
+  belongs_to :adjustable, polymorphic: true
   belongs_to :source, polymorphic: true
 
   delegate :tax_rate, :price_includes_tax?, to: :adjustable

@@ -9,7 +9,7 @@ class InventoryEntry < ActiveRecord::Base
   monetize :value_cents
   monetize :total_value_cents, disable_validation: true
 
-  belongs_to :inventory_item, touch: true, required: true
+  belongs_to :inventory_item, touch: true
 
   # The source can be any object that's responsible for the existence
   # of this particular entry.

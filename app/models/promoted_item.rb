@@ -11,10 +11,10 @@ class PromotedItem < ActiveRecord::Base
   attr_accessor :calculated
 
   #---
-  belongs_to :promotion, touch: true, required: true
+  belongs_to :promotion, touch: true
   delegate :group, to: :promotion
 
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 

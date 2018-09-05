@@ -15,8 +15,8 @@ class CustomerAsset < ActiveRecord::Base
 
   #---
   belongs_to :store
-  belongs_to :user, required: true
-  belongs_to :product, required: true
+  belongs_to :user
+  belongs_to :product
 
   has_many :asset_entries, dependent: :destroy
 

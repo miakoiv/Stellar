@@ -2,8 +2,8 @@
 
 class ProductProperty < ActiveRecord::Base
 
-  belongs_to :product, touch: true, required: true
-  belongs_to :property, required: true
+  belongs_to :product, touch: true
+  belongs_to :property
   delegate :string?, :numeric?, to: :property
 
   default_scope { joins(:property).merge(Property.sorted) }

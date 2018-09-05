@@ -41,7 +41,7 @@ class Section < ActiveRecord::Base
   }.freeze
 
   #---
-  belongs_to :page, touch: true, required: true
+  belongs_to :page, touch: true
   has_many :columns, dependent: :destroy
   has_many :segments, through: :columns
 

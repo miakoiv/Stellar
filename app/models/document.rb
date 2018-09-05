@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
   include Reorderable
 
   #---
-  belongs_to :documentable, polymorphic: true, required: true
+  belongs_to :documentable, polymorphic: true
 
   default_scope { sorted }
 

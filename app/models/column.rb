@@ -10,7 +10,7 @@ class Column < ActiveRecord::Base
   ALIGNMENTS = %w{align-top align-middle align-bottom align-fill}.freeze
 
   #---
-  belongs_to :section, touch: true, required: true
+  belongs_to :section, touch: true
   has_many :segments, dependent: :destroy
 
   default_scope { sorted }

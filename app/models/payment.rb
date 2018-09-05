@@ -5,7 +5,7 @@ class Payment < ActiveRecord::Base
   monetize :amount_cents
 
   #---
-  belongs_to :order, required: true
+  belongs_to :order
 
   default_scope { order(created_at: :desc) }
 

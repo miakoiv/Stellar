@@ -15,7 +15,7 @@ class OrderItem < ActiveRecord::Base
   # Related transfer items in active shipments, see #amount_shipped.
   has_many :active_transfer_items, -> { joins(transfer: :shipment).merge(Shipment.active) }, class_name: 'TransferItem'
 
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
 
   # Order items may have subitems that update with their parent, and are not

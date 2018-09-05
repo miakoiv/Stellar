@@ -5,8 +5,8 @@ class Shipment < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  belongs_to :order, required: true
-  belongs_to :shipping_method, required: true
+  belongs_to :order
+  belongs_to :shipping_method
   delegate :shipping_cost_product, :free_shipping_from, to: :shipping_method
 
   # Shipments refer to a transfer to handle the stock changes.
