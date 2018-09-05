@@ -36,14 +36,14 @@ class Order < ActiveRecord::Base
     pricing = Appraiser::Product.new(group)
     final_price = pricing.for_order(product)
     label = product.best_promoted_item(group).try(:description)
-    order_item = order_items.create_with(
-      amount: 0,
-      priority: order_items_count
-    ).find_or_create_by(
+    order_item = order_items.where(
       product: product,
       parent_item: options[:parent_item],
       lot_code: options[:lot_code]
-    )
+    ).first_or_create! do |order_item|
+      order_item.amount = 0
+      order_item.priority = order_items_count
+    end
     order_item.update!(
       amount: order_item.amount + amount,
       price: final_price.amount,

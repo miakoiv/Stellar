@@ -9,7 +9,7 @@ class OrderItem < ActiveRecord::Base
   monetize :price_cents, allow_nil: true
 
   #---
-  belongs_to :order, inverse_of: :order_items, touch: true, required: true, counter_cache: true
+  belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
   # Related transfer items in active shipments, see #amount_shipped.
@@ -33,7 +33,7 @@ class OrderItem < ActiveRecord::Base
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
 
   #---
-  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}
+  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}, on: :update
 
   #---
   def is_subitem?
