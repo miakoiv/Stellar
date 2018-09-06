@@ -11,5 +11,5 @@
   .col-md-4
     = render partial: 'item', object: @inventory_item, as: :inventory_item
   .col-md-8
-    = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item
     = render partial: 'admin/inventory_entries/form'
+    = render partial: 'admin/inventory_entries/table', object: @inventory_item, as: :inventory_item
