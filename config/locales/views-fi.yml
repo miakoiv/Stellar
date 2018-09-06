@@ -177,6 +177,7 @@ fi:
       show:
         forward: Välitä ostoskoriin
         print_delivery_note: Tulosta lähete
+        shipped_items: Toimitetut tuotteet
       search:
         order_type: Valitse tilauslaji
         status: "[Kaikki vaiheet]"
@@ -186,6 +187,7 @@ fi:
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle
         barcode: Lue rivi viivakoodista
+        shipped_items: Toimitetut tuotteet
       form:
         approved_at_help: Tilaajan tiedot ovat oikein ja tilauksen sisältö on lopullinen.
         concluded_at_help: Tilaus on kokonaan toimitettu ja voidaan arkistoida.

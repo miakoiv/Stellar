@@ -16,6 +16,11 @@ class Order < ActiveRecord::Base
   before_validation :copy_billing_address, if: :should_copy_billing_address?
   before_validation :ensure_valid_countries, on: :update
 
+  #---
+  def last_completed_shipment
+    shipments.shipped.active.first
+  end
+
   def should_copy_billing_address?
     has_shipping? && has_payment? && !has_billing_address?
   end

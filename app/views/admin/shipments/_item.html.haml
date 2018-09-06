@@ -1,5 +1,5 @@
-.panel[shipment]{class: "panel-#{shipment.appearance}"}
-  .panel-heading
+.panel.print-borderless[shipment]{class: ["panel-#{shipment.appearance}", shipment_counter == 0 || 'hidden-print']}
+  .panel-heading.hidden-print
     %span.pull-right
       - if shipment.metadata.present?
         %a{role: 'button', data: {toggle: 'collapse'}, href: "##{dom_id(shipment, :metadata)}"}
@@ -9,7 +9,6 @@
       = t('.inventory')
       = shipment.order.inventory
       %small= shipment
-
   .collapse{id: dom_id(shipment, :metadata)}
     .panel-body
       %small

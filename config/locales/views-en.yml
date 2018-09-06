@@ -197,6 +197,7 @@ en:
       show:
         forward: Forward to cart
         print_delivery_note: Print delivery note
+        shipped_items: Shipment contents
       search:
         order_type: Select order type
         status: "[All statuses]"
@@ -206,6 +207,7 @@ en:
       edit:
         add_order_items: Add items to this order
         barcode: Read item from barcode
+        shipped_items: Shipment contents
       form:
         approved_at_help: Customer information is correct and the order contents are final.
         concluded_at_help: Order has been shipped in full and is ready for archival.

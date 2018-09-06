@@ -24,21 +24,20 @@
       = nav_tab 'history', t('admin.activities.title')
 
     .tab-content
+      = tab_pane 'shipments', default: true do
+        - if !@order.cancelled?
+          = render partial: 'admin/order_items/pending', object: @order, as: :order
+        %h4.visible-print-block= t('.shipped_items')
+        = render partial: 'admin/shipments/list', object: @order, as: :order, locals: {locked: @order.concluded?}
+
       = tab_pane 'order-items', class: 'page-break' do
-        %h2.visible-print-block= title(OrderItem, count: 2)
+        %h4.visible-print-block= title(OrderItem, count: 2)
         - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
         - else
           = render partial: 'admin/order_items/table', object: @order, as: :order
 
-      = tab_pane 'shipments', default: true do
-        %h2.visible-print-block= title(Shipment, count: 2)
-        - if !@order.cancelled?
-          = render partial: 'admin/order_items/pending', object: @order, as: :order
-        = render partial: 'admin/shipments/list', object: @order, as: :order, locals: {locked: @order.concluded?}
-
       = tab_pane 'payments', class: 'hidden-print' do
-        %h2.visible-print-block= title(Payment, count: 2)
         = render partial: 'admin/payments/table', object: @order, as: :order
 
       = tab_pane 'history' do
