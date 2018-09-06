@@ -171,7 +171,8 @@ class Shipment < ActiveRecord::Base
 
   def appearance
     return 'default muted' if cancelled?
-    shipped? ? 'default' : 'primary'
+    return 'primary hidden-print' if pending?
+    order.last_completed_shipment == self ? 'default' : 'default hidden-print'
   end
 
   def to_s

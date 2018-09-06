@@ -1,4 +1,4 @@
-.panel.print-borderless[shipment]{class: ["panel-#{shipment.appearance}", shipment_counter == 0 || 'hidden-print']}
+.panel.print-borderless[shipment]{class: "panel-#{shipment.appearance}"}
   .panel-heading.hidden-print
     %span.pull-right
       - if shipment.metadata.present?
