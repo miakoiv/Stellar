@@ -86,7 +86,7 @@ class InventoryItem < ActiveRecord::Base
         on_hand: total_on_hand,
         reserved: total_reserved,
         pending: total_pending,
-        value_cents: total_on_hand == 0 ? 0 : weighted_total_cents / total_on_hand
+        value_cents: total_on_hand == 0 ? nil : weighted_total_cents / total_on_hand
       )
     end
 end
