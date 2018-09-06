@@ -73,6 +73,7 @@ class Shipment < ActiveRecord::Base
   # setting the completion timestamp. Returns false if
   # the associated transfer is not feasible.
   def complete!
+    return false unless pending?
     return false unless transfer.feasible?
     transfer.complete!
     update shipped_at: Time.current
