@@ -1,0 +1,15 @@
+.page-header
+  = link_to admin_inventory_checks_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_inventory_check_path(@inventory_check), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  = link_to conclude_admin_inventory_check_path(@inventory_check), class: 'btn btn-warning', method: :patch do
+    = icon('gavel', t('.conclude'))
+  %h1
+    = icon('check-circle-o', title(InventoryCheck))
+    %span.small
+      = InventoryCheck.human_attribute_name(:number)
+      = @inventory_check.id
+      = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
+
+= render partial: 'admin/inventory_check_items/resolver_table', object: @inventory_check, as: :inventory_check

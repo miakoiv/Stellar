@@ -28,12 +28,22 @@ class InventoryCheck < ActiveRecord::Base
     update completed_at: Time.current
   end
 
+  def conclude!
+    update concluded_at: Time.current
+  end
+
+  def concluded?
+    concluded_at.present?
+  end
+
   def appearance
-    complete? || 'warning text-warning'
+    return nil if concluded?
+    complete? ? 'info text-info' : 'warning text-warning'
   end
 
   def icon
-    complete? || 'cog'
+    return nil if concluded?
+    complete? ? 'refresh' : 'cog'
   end
 
   def to_s

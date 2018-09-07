@@ -122,9 +122,14 @@ fi:
     inventory_checks:
       index:
         new_inventory_check: Uusi tarkastus
+      row:
+        resolve: Selvitä
       show:
-        complete: Päätä
+        complete: Valmista
+        resolve: Selvitä
         print_inventory_check_report: Tulosta raportti
+      resolve:
+        conclude: Päätä
       new:
         new_inventory_check: Uusi tarkastus
       edit:

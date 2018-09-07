@@ -51,7 +51,9 @@ fi:
       update:
         notice: "Varastotarkastus %{inventory_check} päivitetty."
       complete:
-        notice: "Varastotarkastus %{inventory_check} suoritettu."
+        notice: "Varastotarkastus %{inventory_check} valmistettu."
+      conclude:
+        notice: "Varastotarkastus %{inventory_check} päätetty."
       destroy:
         notice: "Varastotarkastus %{inventory_check} poistettu."
     order_types:

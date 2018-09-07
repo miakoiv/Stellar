@@ -2,11 +2,15 @@
   = link_to admin_inventory_checks_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   - if current_user.can_update?(@inventory_check, at: current_store)
-    = link_to edit_admin_inventory_check_path(@inventory_check), class: 'btn btn-primary' do
-      = icon('pencil-square', t('actions.edit'))
-    = link_to complete_admin_inventory_check_path(@inventory_check), class: 'btn btn-warning', method: :patch do
-      = icon('gavel', t('.complete'))
-  - if @inventory_check.complete?
+    - if @inventory_check.complete?
+      = link_to resolve_admin_inventory_check_path(@inventory_check), class: 'btn btn-info' do
+        = icon('refresh', t('.resolve'))
+    - else
+      = link_to edit_admin_inventory_check_path(@inventory_check), class: 'btn btn-primary' do
+        = icon('pencil-square', t('actions.edit'))
+      = link_to complete_admin_inventory_check_path(@inventory_check), class: 'btn btn-warning', method: :patch do
+        = icon('check-circle', t('.complete'))
+  - else
     = link_to icon('print', t('.print_inventory_check_report')), '#print', class: 'btn btn-default'
   %h1
     = icon('check-circle-o', title(InventoryCheck))

@@ -5,7 +5,7 @@ class Admin::InventoryChecksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory_check, except: [:index, :new, :create]
 
-  authority_actions complete: 'update'
+  authority_actions complete: 'update', resolve: 'update', conclude: 'update'
 
   layout 'admin'
 
@@ -91,12 +91,28 @@ class Admin::InventoryChecksController < ApplicationController
 
     respond_to do |format|
       if @inventory_check.complete!
-        track @inventory_check, nil, {action: 'conclude'}
-        format.html { redirect_to admin_inventory_check_path(@inventory_check), notice: t('.notice', inventory_check: @inventory_check) }
-        format.json { render :show, status: :ok, location: admin_inventory_check_path(@inventory_check) }
+        track @inventory_check, nil, {action: 'complete'}
+        format.html { redirect_to resolve_admin_inventory_check_path(@inventory_check), notice: t('.notice', inventory_check: @inventory_check) }
       else
         format.html { render :show }
-        format.json { render json: @inventory_check.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /admin/inventory_checks/1/resolve
+  def resolve
+  end
+
+  # PATCH/PUT /admin/inventory_checks/1/conclude
+  def conclude
+    authorize_action_for @inventory_check, at: current_store
+
+    respond_to do |format|
+      if @inventory_check.conclude!
+        track @inventory_check, nil, {action: 'conclude'}
+        format.html { redirect_to admin_inventory_check_path(@inventory_check), notice: t('.notice', inventory_check: @inventory_check) }
+      else
+        format.html { render :show }
       end
     end
   end

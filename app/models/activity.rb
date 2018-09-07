@@ -27,6 +27,7 @@ class Activity < ActiveRecord::Base
     update: {icon: 'pencil-square', appearance: 'success'},
     destroy: {icon: 'times-circle', appearance: 'warning'},
     approve: {icon: 'check', appearance: 'primary'},
+    complete: {icon: 'check', appearance: 'primary'},
     conclude: {icon: 'gavel', appearance: 'primary'},
     grant: {icon: 'dot-circle-o', appearance: 'danger'},
     revoke: {icon: 'circle-o', appearance: 'danger'}

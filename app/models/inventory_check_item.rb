@@ -20,6 +20,7 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   default_scope { order(updated_at: :desc) }
+  scope :mismatching, -> { joins('LEFT OUTER JOIN inventory_items ON inventory_items.id = inventory_item_id').where('inventory_items.id IS NULL OR inventory_items.on_hand != amount') }
 
   #---
   validates :lot_code, presence: true

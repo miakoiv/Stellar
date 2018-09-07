@@ -142,9 +142,14 @@ en:
     inventory_checks:
       index:
         new_inventory_check: New check
+      row:
+        resolve: Resolve
       show:
-        complete: Conclude
+        complete: Complete
+        resolve: Resolve
         print_inventory_check_report: Print report
+      resolve:
+        conclude: Conclude
       new:
         new_inventory_check: New check
       edit:

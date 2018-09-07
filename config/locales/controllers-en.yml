@@ -52,6 +52,8 @@ en:
         notice: "Inventory check %{inventory_check} updated."
       complete:
         notice: "Inventory check %{inventory_check} completed."
+      conclude:
+        notice: "Inventory check %{inventory_check} concluded."
       destroy:
         notice: "Inventory check %{inventory_check} deleted."
     order_types:

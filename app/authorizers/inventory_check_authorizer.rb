@@ -11,7 +11,7 @@ class InventoryCheckAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user, opts)
-    return false if resource.complete?
+    return false if resource.concluded?
     user.has_cached_role?(:inventory_manage, opts[:at])
   end
 

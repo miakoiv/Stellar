@@ -128,7 +128,11 @@ Rails.application.routes.draw do
     end
     resources :inventory_checks do
       resources :inventory_check_items, shallow: true
-      patch :complete, on: :member
+      member do
+        patch :complete
+        get :resolve
+        patch :conclude
+      end
     end
     resources :properties do
       post :reorder, on: :collection
