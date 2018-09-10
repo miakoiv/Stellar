@@ -32,7 +32,7 @@ class Inventory < ActiveRecord::Base
 
   # Restocks the inventory with given item that specifies a product,
   # lot code, expiration, and amount. New inventory items may be
-  # created if not seen before.
+  # created if not seen before. The affected inventory item is returned.
   def restock!(item, timestamp, source = nil)
     inventory_item = inventory_items.create_with(
       expires_at: item.expires_at
@@ -48,10 +48,12 @@ class Inventory < ActiveRecord::Base
       pending: 0,
       value: inventory_item.value || item.product.trade_price || 0
     )
+    inventory_item
   end
 
   # Destocks the inventory using given item that specifies
-  # a product, lot code, and amount. The inventory item must exist.
+  # a product, lot code, and amount. The inventory item must exist,
+  # and will be returned.
   def destock!(item, timestamp, source = nil)
     inventory_item = inventory_items.find_by(
       product: item.product,
@@ -65,6 +67,7 @@ class Inventory < ActiveRecord::Base
       pending: 0,
       value: inventory_item.value
     )
+    inventory_item
   end
 
   def to_s
