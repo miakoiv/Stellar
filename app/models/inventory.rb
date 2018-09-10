@@ -30,38 +30,40 @@ class Inventory < ActiveRecord::Base
     [items, items.map(&:value).sum]
   end
 
-  # Restocks the inventory with given transfer item that specifies
-  # the product, a lot code, expiration, and amount. New inventory
-  # items may be created if not seen before.
-  def restock!(transfer_item, timestamp, source = nil)
-    item = inventory_items.find_or_create_by!(
-      product: transfer_item.product,
-      code: transfer_item.lot_code
-    ) { |item| item.expires_at = transfer_item.expires_at }
-    item.inventory_entries.create!(
+  # Restocks the inventory with given item that specifies a product,
+  # lot code, expiration, and amount. New inventory items may be
+  # created if not seen before.
+  def restock!(item, timestamp, source = nil)
+    inventory_item = inventory_items.create_with(
+      expires_at: item.expires_at
+    ).find_or_create_by!(
+      product: item.product,
+      code: item.lot_code
+    )
+    inventory_item.inventory_entries.create!(
       recorded_at: timestamp,
       source: source,
-      on_hand: transfer_item.amount,
+      on_hand: item.amount,
       reserved: 0,
       pending: 0,
-      value: item.value || transfer_item.product.trade_price || 0
+      value: inventory_item.value || item.product.trade_price || 0
     )
   end
 
-  # Destocks the inventory from given transfer item that specifies
-  # a product, a lot code, and an amount. The inventory item must exist.
-  def destock!(transfer_item, timestamp, source = nil)
-    item = inventory_items.find_by(
-      product: transfer_item.product,
-      code: transfer_item.lot_code
+  # Destocks the inventory using given item that specifies
+  # a product, lot code, and amount. The inventory item must exist.
+  def destock!(item, timestamp, source = nil)
+    inventory_item = inventory_items.find_by(
+      product: item.product,
+      code: item.lot_code
     )
-    item.inventory_entries.create!(
+    inventory_item.inventory_entries.create!(
       recorded_at: timestamp,
       source: source,
-      on_hand: -transfer_item.amount,
+      on_hand: -item.amount,
       reserved: 0,
       pending: 0,
-      value: item.value
+      value: inventory_item.value
     )
   end
 
