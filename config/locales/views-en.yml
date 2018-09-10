@@ -162,6 +162,9 @@ en:
       new:
         product_query: Type to search for products…
         submit: Add
+      resolve_row:
+        approve: Approve
+        discard: Discard
     inventory_items:
       search:
         all_inventories: "[All inventories]"
@@ -569,6 +572,10 @@ en:
     heading: Stellar Storefront
     body_html: <p>Provided by LeasIT Oy</p><p><i class="fa fa-copyright"></i> 2015–2018</p>
   tips:
+    inventory_check:
+      concluded: <i class="fa fa-info-circle"></i> <b>This inventory check has been concluded and archived.</b> It cannot be modified further.
+      complete: <i class="fa fa-exclamation-circle"></i> <b>This inventory check is not resolved.</b> Select <i class="fa fa-refresh"></i> <b>Resolve</b> to begin an inventory update. Finally <i class="fa fa-gavel"></i> <b>Conclude</b> the check.
+      incomplete: <i class="fa fa-warning"></i> <b>This inventory check is a draft.</b> Edit the inventory check and add items until the inventory is fully accounted for. Finally <i class="fa fa-check-circle"></i> <b>Complete</b> the check.
     order:
       concluded: <i class="fa fa-info-circle"></i> <b>This order has been concluded and archived.</b> It cannot be modified further.
       incomplete: <i class="fa fa-info-circle"></i> <b>This order is a draft.</b> Fill in the required information and add order items before marking it complete. Order contents cannot be changed for complete orders. The order may still be deleted in this state.

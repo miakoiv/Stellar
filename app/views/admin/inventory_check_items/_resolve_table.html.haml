@@ -1,12 +1,12 @@
-.inventory-check-items-table.table-responsive
-  %table.table.table-form.table-hover
+.table-responsive
+  %table.table.table-hover
     %thead
       %tr
         %th= col(InventoryCheckItem, :product_title)
         %th.col-xs-2= col(InventoryCheckItem, :lot_code)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :on_hand)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :current)
+        %th.col-xs-1.text-right= col(InventoryCheckItem, :amount)
         %th.actions
-
     %tbody
-      = render partial: 'admin/inventory_check_items/edit_row', collection: inventory_check.inventory_check_items, as: :inventory_check_item
+      = render partial: 'admin/inventory_check_items/resolve_row', collection: inventory_check.inventory_check_items.mismatching, as: :inventory_check_item

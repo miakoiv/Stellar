@@ -12,4 +12,4 @@
       = @inventory_check.id
       = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
 
-= render partial: 'admin/inventory_check_items/resolver_table', object: @inventory_check, as: :inventory_check
+= render partial: 'admin/inventory_check_items/resolve_table', object: @inventory_check, as: :inventory_check

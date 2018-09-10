@@ -41,6 +41,12 @@ class InventoryCheck < ActiveRecord::Base
     complete? ? 'info text-info' : 'warning text-warning'
   end
 
+  def life_pro_tip
+    return [:info, '.concluded'] if concluded?
+    return [:warning, '.complete'] if complete?
+    [:danger, '.incomplete']
+  end
+
   def icon
     return nil if concluded?
     complete? ? 'refresh' : 'cog'

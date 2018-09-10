@@ -5,7 +5,7 @@
         %th= col(InventoryCheckItem, :product_title)
         %th.col-xs-2= col(InventoryCheckItem, :lot_code)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :on_hand)
-        %th.col-xs-1.text-right= col(InventoryCheckItem, :amount)
+        %th.col-xs-1.text-right= col(InventoryCheckItem, :current)
         %th.col-min
     %tbody
       - inventory_check.inventory_check_items.each do |inventory_check_item|
@@ -15,5 +15,5 @@
           %td.text-right
             - if inventory_check_item.stocked?
               = inventory_check_item.on_hand
-          %td.text-right= inventory_check_item.amount
+          %td.text-right= inventory_check_item.current
           %td.col-min= icon(inventory_check_item.icon)

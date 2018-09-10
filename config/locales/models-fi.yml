@@ -233,7 +233,8 @@ fi:
         product_code: Tuotekoodi
         lot_code: Eräkoodi
         on_hand: Varastossa
-        amount: Tarkastettu
+        current: Tarkastettu
+        amount: Korjaus
         expires_at: Viim. käyttö
       inventory_entry:
         recorded_at: Pvm

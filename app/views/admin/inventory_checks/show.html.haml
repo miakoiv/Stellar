@@ -20,6 +20,8 @@
       - if @inventory_check.complete?
         = surround('(', ')') { l(@inventory_check.completed_at.to_date, format: :iso) }
 
+= life_pro_tip @inventory_check
+
 .row
   .col-md-4
     .hidden-print

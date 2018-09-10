@@ -142,6 +142,9 @@ fi:
       new:
         product_query: Kirjoita hakeaksesi tuotteita…
         submit: Lisää
+      resolve_row:
+        approve: Hyväksy
+        discard: Hylkää
     inventory_items:
       search:
         all_inventories: "[Kaikki varastot]"
@@ -549,6 +552,10 @@ fi:
     heading: Stellar Storefront
     body_html: <p>Tuottanut LeasIT Oy</p><p><i class="fa fa-copyright"></i> 2015–2018</p>
   tips:
+    inventory_check:
+      concluded: <i class="fa fa-info-circle"></i> <b>Tämä varastotarkastus on loppuun käsitelty ja arkistoitu.</b> Siihen ei voi enää tehdä muutoksia.
+      complete: <i class="fa fa-exclamation-circle"></i> <b>Varastotarkastusta ei ole selvitetty.</b> Valitse <i class="fa fa-refresh"></i> <b>Selvitä</b> aloittaaksesi varaston päivitys ajan tasalle. Lopuksi <i class="fa fa-gavel"></i> <b>Päätä</b> tarkastus.
+      incomplete: <i class="fa fa-warning"></i> <b>Tämä varastotarkastus on avoimena.</b> Muokkaa tarkastusta ja lisää tarkastusrivejä, kunnes varaston sisältö on luettu. Lopuksi <i class="fa fa-check-circle"></i> <b>Valmista</b> tarkastus.
     order:
       concluded: <i class="fa fa-info-circle"></i> <b>Tämä tilaus on loppuun käsitelty ja arkistoitu.</b> Siihen ei voi enää tehdä muutoksia.
       incomplete: <i class="fa fa-info-circle"></i> <b>Tämä on keskeneräinen tilaus.</b> Täytä tarvittavat tilaustiedot ja lisää tilausrivit, ennen kuin merkitset tilauksen valmiiksi. Valmiin tilauksen sisältöä ei voi enää muuttaa. Jos keskeneräistä tilausta ei halutakaan tehdä, sen voi poistaa.

@@ -4,6 +4,7 @@ class Admin::InventoryCheckItemsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_inventory_check, only: [:create]
+  before_action :set_inventory_check_item, only: [:update, :destroy, :approve, :discard]
 
   # No layout, this controller never renders HTML.
 
@@ -13,7 +14,7 @@ class Admin::InventoryCheckItemsController < ApplicationController
       .find_or_initialize_by(
         inventory_check_item_params.slice(:product_id, :lot_code)
       )
-    @inventory_check_item.amount += inventory_check_item_params[:amount].to_i
+    @inventory_check_item.current += inventory_check_item_params[:current].to_i
     action = @inventory_check_item.new_record? ? :create : :update
 
     respond_to do |format|
@@ -28,7 +29,6 @@ class Admin::InventoryCheckItemsController < ApplicationController
 
   # PATCH/PUT /admin/inventory_check_items/1
   def update
-    @inventory_check_item = InventoryCheckItem.find(params[:id])
     @inventory_check = @inventory_check_item.inventory_check
 
     respond_to do |format|
@@ -43,14 +43,25 @@ class Admin::InventoryCheckItemsController < ApplicationController
 
   # DELETE /admin/inventory_check_items/1
   def destroy
-    @inventory_check_item = InventoryCheckItem.find(params[:id])
     @inventory_check = @inventory_check_item.inventory_check
     track @inventory_check_item, @inventory_check
 
     @inventory_check_item.destroy
   end
 
+  # PATCH/PUT /admin/inventory_check_items/1/approve
+  def approve
+  end
+
+  # PATCH/PUT /admin/inventory_check_items/1/discard
+  def discard
+  end
+
   private
+    def set_inventory_check_item
+      @inventory_check_item = InventoryCheckItem.find(params[:id])
+    end
+
     def set_inventory_check
       @inventory_check = current_store.inventory_checks.find(params[:inventory_check_id])
     end
@@ -58,7 +69,7 @@ class Admin::InventoryCheckItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_check_item_params
       params.require(:inventory_check_item).permit(
-        :product_id, :lot_code, :expires_at, :amount,
+        :product_id, :lot_code, :expires_at, :current,
         :customer_code, :serial
       )
     end

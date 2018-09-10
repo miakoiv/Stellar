@@ -127,7 +127,12 @@ Rails.application.routes.draw do
       end
     end
     resources :inventory_checks do
-      resources :inventory_check_items, shallow: true
+      resources :inventory_check_items, shallow: true do
+        member do
+          patch :approve
+          patch :discard
+        end
+      end
       member do
         patch :complete
         get :resolve

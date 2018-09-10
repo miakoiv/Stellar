@@ -10,7 +10,7 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :inventory, to: :inventory_check
 
   # Inventory check items have a product association and
-  # attributes for lot code, expiration, and amount,
+  # attributes for lot code, expiration, and current amount,
   # but may be associated with a matching inventory item.
   belongs_to :inventory_item
   delegate :on_hand, to: :inventory_item
@@ -20,11 +20,11 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   default_scope { order(updated_at: :desc) }
-  scope :mismatching, -> { joins('LEFT OUTER JOIN inventory_items ON inventory_items.id = inventory_item_id').where('inventory_items.id IS NULL OR inventory_items.on_hand != amount') }
+  scope :mismatching, -> { joins('LEFT OUTER JOIN inventory_items ON inventory_items.id = inventory_item_id').where('inventory_items.id IS NULL OR inventory_items.on_hand != current') }
 
   #---
   validates :lot_code, presence: true
-  validates :amount, numericality: {
+  validates :current, numericality: {
     integer_only: true,
     greater_than_or_equal_to: 0
   }
@@ -39,19 +39,28 @@ class InventoryCheckItem < ActiveRecord::Base
     inventory_item.present?
   end
 
-  def expected_amount?
-    stocked? && on_hand == amount
+  def matching?
+    stocked? && current == on_hand
   end
 
   def appearance
     return 'danger text-danger' if !stocked?
-    expected_amount? || 'warning text-warning'
+    matching? || 'warning text-warning'
+  end
+
+  # Amount needed to fix existing inventory item,
+  # or to initialize a new one if none exist.
+  def amount
+    stocked? ? current - on_hand : current
+  end
+
+  def apply_adjustment!
   end
 
   def icon
-    return nil if expected_amount?
+    return nil if matching?
     return 'exclamation-circle' if !stocked?
-    amount > on_hand ? 'plus' : 'minus'
+    current > on_hand ? 'plus' : 'minus'
   end
 
   def customer_code=(val)
@@ -59,7 +68,7 @@ class InventoryCheckItem < ActiveRecord::Base
   end
 
   def to_s
-    "%d⨉ %s (%s)" % [amount, product, lot_code]
+    "%d⨉ %s (%s)" % [current, product, lot_code]
   end
 
   private
