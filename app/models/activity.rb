@@ -29,6 +29,7 @@ class Activity < ActiveRecord::Base
     approve: {icon: 'check', appearance: 'primary'},
     complete: {icon: 'check', appearance: 'primary'},
     conclude: {icon: 'gavel', appearance: 'primary'},
+    discard: {icon: 'times', appearance: 'danger'},
     grant: {icon: 'dot-circle-o', appearance: 'danger'},
     revoke: {icon: 'circle-o', appearance: 'danger'}
   }.freeze
