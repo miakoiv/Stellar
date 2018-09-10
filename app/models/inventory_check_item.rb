@@ -20,7 +20,8 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
   default_scope { order(updated_at: :desc) }
-  scope :mismatching, -> { joins('LEFT OUTER JOIN inventory_items ON inventory_items.id = inventory_item_id').where('inventory_items.id IS NULL OR inventory_items.on_hand != current') }
+  scope :mismatching, -> { where.not(difference: 0) }
+  scope :pending, -> { where(adjustment: nil) }
 
   #---
   validates :lot_code, presence: true
@@ -32,35 +33,47 @@ class InventoryCheckItem < ActiveRecord::Base
   attr_accessor :serial
   before_validation :concatenate_lot_code
   after_validation :assign_inventory_item, on: :create
+  after_validation :calculate_difference
 
   #---
+  def final?
+    adjustment.present?
+  end
+
+  def pending?
+    !final?
+  end
+
   # We are stocked if a matching inventory item exists.
   def stocked?
     inventory_item.present?
   end
 
   def matching?
-    stocked? && current == on_hand
+    difference == 0
   end
 
   def appearance
+    return nil if final?
     return 'danger text-danger' if !stocked?
     matching? || 'warning text-warning'
   end
 
-  # Amount needed to fix existing inventory item,
-  # or to initialize a new one if none exist.
+  # Amount needed to restock the inventory is the difference.
   def amount
-    stocked? ? current - on_hand : current
+    difference
   end
 
-  def apply_adjustment!
+  # Approves the required adjustment to inventory
+  # by restocking with this item.
+  def approve!
+    inventory.restock!(self, Time.current, inventory_check)
+    update!(adjustment: difference)
   end
 
-  def icon
-    return nil if matching?
-    return 'exclamation-circle' if !stocked?
-    current > on_hand ? 'plus' : 'minus'
+  # Discards the item by setting its adjustment to zero.
+  def discard!
+    update!(adjustment: 0)
   end
 
   def customer_code=(val)
@@ -78,9 +91,18 @@ class InventoryCheckItem < ActiveRecord::Base
       self[:lot_code] = [lot_code, serial].map(&:presence).compact.join('-')
     end
 
-    # The matching inventory item can be found by product and lot code
-    # from the inventory where the check is performed.
+    # Existing, matching inventory item is associated after validation.
     def assign_inventory_item
       self.inventory_item = inventory.item_by_product_and_code(product, lot_code)
+      self
+    end
+
+    # The difference between current and on hand amounts
+    # is calculated after save.
+    def calculate_difference
+      unless final?
+        self.difference = stocked? ? current - on_hand : current
+      end
+      self
     end
 end

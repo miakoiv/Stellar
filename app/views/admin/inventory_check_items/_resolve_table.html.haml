@@ -6,7 +6,7 @@
         %th.col-xs-2= col(InventoryCheckItem, :lot_code)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :on_hand)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :current)
-        %th.col-xs-1.text-right= col(InventoryCheckItem, :amount)
+        %th.col-xs-1.text-right= col(InventoryCheckItem, :difference)
         %th.actions
     %tbody
-      = render partial: 'admin/inventory_check_items/resolve_row', collection: inventory_check.inventory_check_items.mismatching, as: :inventory_check_item
+      = render partial: 'admin/inventory_check_items/resolve_row', collection: inventory_check.inventory_check_items.pending.mismatching, as: :inventory_check_item

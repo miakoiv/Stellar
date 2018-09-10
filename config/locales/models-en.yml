@@ -234,7 +234,8 @@ en:
         lot_code: Lot code
         on_hand: Stock
         current: Current
-        amount: Adjustment
+        difference: Difference
+        adjustment: Adjustment
         expires_at: Exp. date
       inventory_entry:
         recorded_at: Date

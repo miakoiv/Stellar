@@ -6,8 +6,8 @@
       = inventory_check_item.on_hand
   %td.text-right= inventory_check_item.current
   %td.text-right
-    %strong= number_with_precision_and_sign inventory_check_item.amount, precision: 0
+    %strong= number_with_precision_and_sign inventory_check_item.difference, precision: 0
   %td.actions
-    - unless inventory_check_item.matching?
+    - if inventory_check_item.pending?
       = link_to icon('check', t('.approve')), approve_admin_inventory_check_item_path(inventory_check_item), remote: true, method: :patch, class: 'btn btn-outline-success btn-sm'
       = link_to icon('close', t('.discard')), discard_admin_inventory_check_item_path(inventory_check_item), remote: true, method: :patch, class: 'btn btn-outline-danger btn-sm'

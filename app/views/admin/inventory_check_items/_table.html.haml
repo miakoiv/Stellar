@@ -4,16 +4,26 @@
       %tr
         %th= col(InventoryCheckItem, :product_title)
         %th.col-xs-2= col(InventoryCheckItem, :lot_code)
-        %th.col-xs-1.text-right= col(InventoryCheckItem, :on_hand)
+        - if inventory_check.incomplete?
+          %th.col-xs-1.text-right= col(InventoryCheckItem, :on_hand)
         %th.col-xs-1.text-right= col(InventoryCheckItem, :current)
-        %th.col-min
+        %th.col-xs-1.text-right= col(InventoryCheckItem, :difference)
+        - if inventory_check.complete?
+          %th.col-xs-1.text-right= col(InventoryCheckItem, :adjustment)
     %tbody
       - inventory_check.inventory_check_items.each do |inventory_check_item|
         %tr[inventory_check_item]{class: inventory_check_item.appearance}
           %td= product_header inventory_check_item
           %td= inventory_check_item.lot_code
-          %td.text-right
-            - if inventory_check_item.stocked?
-              = inventory_check_item.on_hand
+          - if inventory_check.incomplete?
+            %td.text-right
+              - if inventory_check_item.stocked?
+                = inventory_check_item.on_hand
           %td.text-right= inventory_check_item.current
-          %td.col-min= icon(inventory_check_item.icon)
+          %td.text-right
+            - unless inventory_check_item.matching?
+              %strong= number_with_precision_and_sign inventory_check_item.difference, precision: 0
+          - if inventory_check.complete?
+            %td.text-right
+              - if inventory_check_item.final? && inventory_check_item.adjustment != 0
+                %strong= number_with_precision_and_sign inventory_check_item.adjustment, precision: 0

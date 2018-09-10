@@ -51,10 +51,16 @@ class Admin::InventoryCheckItemsController < ApplicationController
 
   # PATCH/PUT /admin/inventory_check_items/1/approve
   def approve
+    @inventory_check = @inventory_check_item.inventory_check
+    @inventory_check_item.approve!
+    track @inventory_check_item, @inventory_check
   end
 
   # PATCH/PUT /admin/inventory_check_items/1/discard
   def discard
+    @inventory_check = @inventory_check_item.inventory_check
+    @inventory_check_item.discard!
+    track @inventory_check_item, @inventory_check
   end
 
   private

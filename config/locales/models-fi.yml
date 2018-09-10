@@ -234,7 +234,8 @@ fi:
         lot_code: Eräkoodi
         on_hand: Varastossa
         current: Tarkastettu
-        amount: Korjaus
+        difference: Ero
+        adjustment: Korjattu
         expires_at: Viim. käyttö
       inventory_entry:
         recorded_at: Pvm

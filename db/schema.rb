@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910064759) do
+ActiveRecord::Schema.define(version: 20180910093017) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -302,6 +302,8 @@ ActiveRecord::Schema.define(version: 20180910064759) do
     t.string   "lot_code",           limit: 255
     t.date     "expires_at"
     t.integer  "current",            limit: 4,   default: 0, null: false
+    t.integer  "difference",         limit: 4
+    t.integer  "adjustment",         limit: 4
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
