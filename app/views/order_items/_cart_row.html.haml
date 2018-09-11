@@ -2,9 +2,9 @@
   %td.visible-print
     %span.badge= order_item_counter + 1
   %td
-    - unless order_item.satisfied?
-      = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
     .product
+      - unless order_item.satisfied?
+        = icon('warning', data: {toggle: 'tooltip'}, title: col(Product, :not_live))
       - if order_item.real? && order_item.live?
         = link_to order_item.product_title, show_product_path(order_item.product)
         .badge= order_item.product_code
