@@ -201,7 +201,7 @@ en:
         group_id: Customer group/pricing
       row:
         approve: Approve
-        review: Review
+        review: Conclude…
       show:
         forward: Forward to cart
         print_delivery_note: Print delivery note

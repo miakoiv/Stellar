@@ -28,7 +28,7 @@ fi:
           all: kaikki rivit
       order:
         status:
-          current: odottaa hyväksyntää
+          current: odottaa vahvistusta
           pending: odottaa toimitusta
           concluded: arkistoitu
           cancelled: peruttu

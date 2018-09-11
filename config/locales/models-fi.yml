@@ -274,7 +274,7 @@ fi:
         shipping_at: Haluttu toimituspvm
         installation_at: Asennuspvm
         shipping_installation_at: Toimitus/asennus
-        approved_at: Hyväksytty
+        approved_at: Vahvistettu
         concluded_at: Päätetty
         cancelled_at: Peruttu
         status: Tila
@@ -289,12 +289,12 @@ fi:
         contact_email: Sähköpostiosoite
         contact_phone: Puhelinnumero
         billing_address: Laskutusosoite
-        billing_postalcode: Postinumero
+        billing_postalcode: Postinro
         billing_city: Toimipaikka
         billing_country_code: Maa
         has_billing_address: Maksajan osoite eri kuin toimitusosoite
         shipping_address: Toimitusosoite
-        shipping_postalcode: Postinumero
+        shipping_postalcode: Postinro
         shipping_city: Toimipaikka
         shipping_country_code: Maa
         shipping_method: Toimitus

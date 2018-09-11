@@ -10,29 +10,20 @@
       = order.installation_at.present? ? l(order.installation_at) : nil
   %td
     %strong= order.customer_name
-  - if current_store.b2b_sales?
-    %td
+    - if current_store.b2b_sales?
       .small= order.summary
   %td.text-right= order.order_items_count
   %td.text-right.currency
     = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax
   %td.actions
-    - if current_user.can_update?(Order, at: current_store) && order.current? && order.destination == current_group
-      = link_to icon('check', t('.approve')), approve_admin_order_path(order),
-          remote: true, method: :patch, class: 'btn btn-sm btn-success'
-    - if current_user.can_update?(Order, at: current_store) && order.concludable? && order.destination == current_group
-      = link_to icon('search', t('.review')), review_admin_order_path(order),
-          remote: true, class: 'btn btn-sm btn-primary'
+    - if current_user.can_update?(Order, at: current_store) && order.destination == current_group
+      - if order.current?
+        = link_to icon('check', t('.approve')), approve_admin_order_path(order), remote: true, method: :patch, class: 'btn btn-sm btn-outline-primary'
+      - if order.concludable?
+        = link_to icon('gavel', t('.review')), review_admin_order_path(order), remote: true, class: 'btn btn-sm btn-outline-primary'
     = link_to icon('info', t('actions.show')), admin_order_path(order),
         class: 'btn btn-default btn-sm'
     - if current_user.can_update?(Order, at: current_store)
-      = link_to icon('edit', t('actions.edit')), edit_admin_order_path(order),
-          class: 'btn btn-default btn-sm'
+      = link_to icon('edit', t('actions.edit')), edit_admin_order_path(order), class: 'btn btn-default btn-sm'
     - if current_user.can_delete?(Order, at: current_store) && order.incomplete?
-      = link_to icon('remove', t('actions.delete')), admin_order_path(order),
-          method: :delete, class: 'btn btn-sm btn-outline-danger',
-          data: {confirm: t('actions.confirm.body',
-            klass: Order.model_name.human, name: order.to_s),
-            'confirm-title': t('actions.confirm.title'),
-            'confirm-proceed': t('actions.confirm.proceed'),
-            'confirm-cancel': t('actions.confirm.cancel')}
+      = link_to icon('remove', t('actions.delete')), admin_order_path(order), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body', klass: Order.model_name.human, name: order.to_s), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

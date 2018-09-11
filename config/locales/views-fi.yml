@@ -166,7 +166,7 @@ fi:
         new_order_type: Uusi tilauslaji
       form:
         has_shipping_help: Tilauslaji on toimitettava, jos tilaajalle lähetetään tavaraa. Tilaukseen on sisällytettävä toimitusosoite.
-        has_payment_help: Tilauslaji on maksettava, jos tilaukset on maksettava ennen tilauksen hyväksymistä. Jätä tämä tyhjäksi jos laskutus tapahtuu muuta kautta.
+        has_payment_help: Tilauslaji on maksettava, jos tilaukset on maksettava tilauksen yhteydessä. Jätä tämä tyhjäksi jos laskutus tapahtuu muuta kautta.
     orders:
       incoming:
         title: Saapuvat tilaukset
@@ -180,8 +180,8 @@ fi:
         new_customer: "[Uusi asiakas]"
         group_id: Asiakasryhmä/hinnoittelu
       row:
-        approve: Hyväksy
-        review: Tarkasta
+        approve: Vahvista
+        review: Päätä…
       show:
         forward: Välitä ostoskoriin
         print_delivery_note: Tulosta lähete
@@ -559,7 +559,7 @@ fi:
     order:
       concluded: <i class="fa fa-info-circle"></i> <b>Tämä tilaus on loppuun käsitelty ja arkistoitu.</b> Siihen ei voi enää tehdä muutoksia.
       incomplete: <i class="fa fa-info-circle"></i> <b>Tämä on keskeneräinen tilaus.</b> Täytä tarvittavat tilaustiedot ja lisää tilausrivit, ennen kuin merkitset tilauksen valmiiksi. Valmiin tilauksen sisältöä ei voi enää muuttaa. Jos keskeneräistä tilausta ei halutakaan tehdä, sen voi poistaa.
-      current: <i class="fa fa-warning"></i> <b>Tämä tilaus on saapunut, mutta sitä ei ole hyväksytty.</b> Kun olet tarkistanut tilauksen tiedot ja tilausrivit, sekä varmistanut, että se voidaan toimittaa, hyväksy tilaus täyttämällä allaoleva <b>Hyväksytty</b>-päiväys. Hyväksynnästä lähetetään asiakkaalle viesti.
+      current: <i class="fa fa-warning"></i> <b>Tämä tilaus on saapunut, mutta sitä ei ole vahvistettu.</b> Kun olet tarkistanut tilauksen tiedot ja tilausrivit, sekä varmistanut, että se voidaan toimittaa, vahvista tilaus täyttämällä allaoleva <b>Vahvistettu</b>-päiväys. Vahvistuksesta lähetetään asiakkaalle viesti.
       shipped: <i class="fa fa-warning"></i> <b>Tämä tilaus on kokonaan toimitettu</b> ja sen voi päättää. Täytä allaoleva <b>Päätetty</b>-päiväys. Päättämisestä lähetetään asiakkaalle viesti.
       pending: <i class="fa fa-exclamation-circle"></i> <b>Tilausta ei ole kokonaan toimitettu.</b> Varastosta löytyneet tuotteet on valmiiksi keräilty ensimmäiseen toimitukseen, joka on valmis lähetettäväksi. Toimitusta odottaville tuotteille pitää tehdä uusia toimituksia varastotilanteen salliessa.
       cancelled: <i class="fa fa-exclamation-circle"></i> <b>Tämä tilaus on peruttu.</b>

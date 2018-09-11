@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
   end
 
   def summary
-    [contact_person, shipping_city].compact.reject(&:empty?).join(', ')
+    [company_name, shipping_city].compact.reject(&:empty?).join(', ')
   end
 
   # Icon name based on order status.
@@ -31,8 +31,8 @@ class Order < ActiveRecord::Base
     return 'ban' if cancelled?
     return 'pencil' if incomplete?
     return nil if concluded?
-    return 'check' if current?
-    (!track_shipments? || fully_shipped?) && 'search' || 'truck'
+    return 'question-circle' if current?
+    (!track_shipments? || fully_shipped?) && 'exclamation-circle' || 'truck'
   end
 
   def as_json(options = {})
