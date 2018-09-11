@@ -2,4 +2,5 @@ $("##{dom_id(@category)}").replaceWith("#{j render partial: 'item', object: @cat
 $("##{dom_id(@category)}").closest('.dd-item').addClass('active');
 $('#category-form').destroySelectized();
 $('#category-form').html("#{j render partial: 'admin/categories/edit'}");
+$("##{dom_id(@category)}").initialize();
 $('#category-form').initialize();

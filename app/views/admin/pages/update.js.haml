@@ -4,4 +4,5 @@ $("##{dom_id(@page)}").closest('.dd-item').addClass('active');
   $("##{dom_id(@page.page)}").html("#{j render partial: 'item', object: @page.page, as: :page}");
 $('#page-form').destroySelectized();
 $('#page-form').html("#{j render partial: 'admin/pages/edit'}");
+$("##{dom_id(@page)}").initialize();
 $('#page-form').initialize();
