@@ -331,13 +331,13 @@ fi:
           confirm: "Lähetetäänkö varmasti %{klass} %{name}?"
           proceed: Lähetä
           cancel: Kumoa
-        label: Hae pakettikortti
       shipped:
         cancel:
           button: Palauta toimitus
           confirm: "Palautetaanko varmasti %{klass} %{name}?"
           proceed: Palauta
           cancel: Kumoa
+        label: Hae pakettikortti
       new:
         new_shipment: Uusi toimitus
       cancelled:
