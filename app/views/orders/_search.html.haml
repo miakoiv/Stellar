@@ -1,0 +1,18 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: orders_path, method: :get do |f|
+      .row
+        .col-sm-6.col-md-4
+          .form-group
+            = f.select :order_type, current_user.existing_order_types(current_store).map { |o| [o.name, o.id] }, {}, {placeholder: t('.order_type'), class: 'form-control selectize'}
+        .col-sm-6.col-md-3
+          .form-group
+            = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
+        .col-sm-6.col-md-4
+          .form-group
+            = f.search_field :summary, autocomplete: 'off', placeholder: t('.summary'), class: 'form-control'
+        .col-sm-6.col-md-1
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

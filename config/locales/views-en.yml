@@ -441,6 +441,9 @@ en:
       tax_excluded: Prices do not include taxes.
     show:
       duplicate: Duplicate to cart
+    search:
+      order_type: Select order type
+      summary: Keyword search
     edit:
       duplicate: Duplicate to cart
     menu:

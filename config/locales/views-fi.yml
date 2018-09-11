@@ -421,6 +421,9 @@ fi:
       tax_excluded: Hinnat ilman arvonlisäveroa.
     show:
       duplicate: Kopioi ostoskoriin
+    search:
+      order_type: Valitse tilauslaji
+      summary: Etsi hakusanalla
     edit:
       duplicate: Kopioi ostoskoriin
     menu:
