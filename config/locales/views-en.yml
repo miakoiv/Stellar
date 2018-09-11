@@ -357,6 +357,7 @@ en:
           confirm: "Are you sure you want to return %{klass} %{name}?"
           proceed: Return
           cancel: Cancel
+        download: Download
         label: Fetch package label
       new:
         new_shipment: New shipment

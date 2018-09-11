@@ -10,6 +10,13 @@ class Admin::ShipmentsController < ApplicationController
 
   # No layout, this controller never renders HTML.
 
+  # GET /admin/shipments/1
+  def show
+    respond_to do |format|
+      format.json { send_data(render_to_string(:show), type: 'application/json') }
+    end
+  end
+
   # GET /admin/shipments/1/edit
   def edit
     authorize_action_for @shipment, at: current_store
