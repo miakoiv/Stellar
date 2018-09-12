@@ -1,2 +1,2 @@
-$('#order-items-table').replaceWith("#{j render partial: 'order_items/table', object: @order, as: :order}");
+$('#cart-list').replaceWith("#{j render partial: 'order_items/cart_list', object: @order, as: :order, locals: {locked: true}}");
 $('#checkout-form').trigger('submit.rails');
