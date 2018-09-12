@@ -136,8 +136,12 @@ class OrderItem < ActiveRecord::Base
   end
 
   # Stock calculations are offloaded to the product.
+  def available
+    @available ||= product.available(inventory, lot_code)
+  end
+
   def available?
-    product.available?(inventory, lot_code, amount)
+    @in_stock ||= product.available?(inventory, lot_code, amount)
   end
 
   def out_of_stock?
@@ -176,6 +180,12 @@ class OrderItem < ActiveRecord::Base
 
   def to_s
     product.title
+  end
+
+  def appearance
+    return 'success' if available?
+    return 'warning' if satisfied?
+    'danger'
   end
 
   private
