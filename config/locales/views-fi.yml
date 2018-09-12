@@ -180,7 +180,7 @@ fi:
         new_customer: "[Uusi asiakas]"
         group_id: Asiakasryhmä/hinnoittelu
       row:
-        approve: Vahvista
+        preview: Vahvista…
         review: Päätä…
       show:
         forward: Välitä ostoskoriin
@@ -203,9 +203,16 @@ fi:
         cancel_now: Peru nyt
       headers:
         delivery_note: Lähete
+      preview_modal:
+        title: Tilauksen vahvistaminen
+        approve: Vahvista tilaus
+        shipments: Valittu toimitus
+        contents: Tilatut tuotteet ja varastotilanne
       review_modal:
-        title: Tilauksen tarkastus
-        conclude: Päätä tilaus ja sulje
+        title: Tilauksen päättäminen
+        conclude: Päätä tilaus
+        shipments: Tehdyt toimitukset
+        contents: Tilatut tuotteet
     pages:
       index:
         new_page: Uusi sivu

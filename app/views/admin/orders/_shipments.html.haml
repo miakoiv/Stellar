@@ -1,0 +1,7 @@
+%ul.list-group
+- @order.shipments.active.each do |shipment|
+  %li.list-group-item
+    - if shipment.shipped?
+      .badge= l(shipment.shipped_at.to_date)
+    %strong= shipment
+    = shipment.shipping_method

@@ -248,6 +248,7 @@ Rails.application.routes.draw do
       end
       member do
         get :forward
+        get :preview
         patch :approve
         get :review
         patch :conclude

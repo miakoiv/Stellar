@@ -1,6 +1,6 @@
 .modal-dialog.modal-lg
   .modal-content
-    .modal-header.bg-primary
+    .modal-header.bg-warning
       %button.close{data: {dismiss: 'modal'}}= icon('close')
       %h4.modal-title= t('.title')
     .modal-body
@@ -11,6 +11,6 @@
       = render partial: 'shipments'
     .modal-body
       %h5= t('.contents')
-      = render partial: 'contents', locals: {display_stock: false}
+      = render partial: 'contents', locals: {display_stock: true}
     .modal-footer
-      = link_to icon('gavel', t('.conclude')), conclude_admin_order_path(@order), remote: true, method: :patch, class: 'btn btn-primary'
+      = link_to icon('check', t('.approve')), approve_admin_order_path(@order), remote: true, method: :patch, class: 'btn btn-warning'

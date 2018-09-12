@@ -46,9 +46,10 @@
           = @order.billing_postalcode
           = @order.billing_city
         %dd= @order.billing_country.try(:name)
-.row
-  .col-xs-6
-    %dl
-      %dt= col(Order, :notes)
-      %dd
-        %p= @order.notes
+- if @order.notes.present?
+  .row
+    .col-xs-6
+      %dl
+        %dt= col(Order, :notes)
+        %dd
+          %p= @order.notes

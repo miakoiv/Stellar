@@ -1,13 +1,12 @@
-.hidden-print
-  .page-header
-    - if current_user.can_create?(Order, at: current_store)
-      = link_to new_admin_order_path, class: 'btn btn-primary' do
-        = icon('plus', t('admin.orders.index.new_order'))
-    %h1= icon('inbox', t('.title'))
+.page-header
+  - if current_user.can_create?(Order, at: current_store)
+    = link_to new_admin_order_path, class: 'btn btn-primary' do
+      = icon('plus', t('admin.orders.index.new_order'))
+  %h1= icon('inbox', t('.title'))
 
-  = render partial: 'search', locals: {url: incoming_admin_orders_path, order_types: current_group.incoming_order_types}
+= render partial: 'search', locals: {url: incoming_admin_orders_path, order_types: current_group.incoming_order_types}
 
-  = render partial: 'admin/orders/table', object: @orders, as: :orders
-  = paginate @orders
+= render partial: 'admin/orders/table', object: @orders, as: :orders
+= paginate @orders
 
-#orders-review-modal.modal{data: {backdrop: 'static'}}
+#orders-inspect-modal.modal{data: {backdrop: 'static'}}

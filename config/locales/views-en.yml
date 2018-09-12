@@ -200,7 +200,7 @@ en:
         new_customer: "[New customer]"
         group_id: Customer group/pricing
       row:
-        approve: Approve
+        preview: Approve…
         review: Conclude…
       show:
         forward: Forward to cart
@@ -223,9 +223,12 @@ en:
         cancel_now: Cancel now
       headers:
         delivery_note: Delivery note
+      preview_modal:
+        title: Order approval
+        approve: Approve order
       review_modal:
-        title: Order review
-        conclude: Conclude order and close
+        title: Order conclusion
+        conclude: Conclude order
     pages:
       index:
         new_page: New page

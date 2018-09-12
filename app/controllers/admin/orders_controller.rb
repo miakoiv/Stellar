@@ -5,7 +5,7 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order, except: [:index, :incoming, :outgoing, :new, :create]
 
-  authority_actions incoming: 'read', outgoing: 'read', forward: 'read', approve: 'update', review: 'update', conclude: 'update'
+  authority_actions incoming: 'read', outgoing: 'read', forward: 'read', preview: 'update', approve: 'update', review: 'update', conclude: 'update'
 
   layout 'admin'
 
@@ -153,6 +153,11 @@ class Admin::OrdersController < ApplicationController
     shopping_cart.recalculate!
 
     redirect_to cart_path, notice: t('.notice', order: @order)
+  end
+
+  # GET /admin/orders/1/preview
+  def preview
+    authorize_action_for Order, at: current_store
   end
 
   # PATCH/PUT /admin/orders/1/approve

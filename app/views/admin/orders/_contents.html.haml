@@ -1,0 +1,23 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th= col(OrderItem, :product_title)
+      %th= col(OrderItem, :lot_code)
+      %th.col-xs-1.text-right= col(OrderItem, :ordered)
+      - if display_stock
+        %th.col-xs-2.text-right= @order.inventory
+  %tbody
+    - @order.order_items.each do |order_item|
+      %tr[order_item]{class: order_item.is_subitem? && 'subrow'}
+        %td
+          .product= product_header order_item
+          - if order_item.product.shipping_notes.present?
+            .small
+              = icon('info-circle')
+              = order_item.product.shipping_notes
+        %td= order_item.lot_code
+        %td.text-right= order_item.amount
+        - if display_stock
+          %td.text-right
+            - if order_item.track_shipments? && order_item.tangible?
+              = bootstrap_label(order_item, text: order_item.available)
