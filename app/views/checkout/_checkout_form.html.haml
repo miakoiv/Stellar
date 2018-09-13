@@ -58,24 +58,28 @@
               = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
             - else
               = f.hidden_field :billing_country_code
-  %fieldset.warning
-    %p.text-warning= icon('exclamation-circle', t('checkout.business_orders_only'))
-    .row
-      .col-sm-6
-        = f.text_field :message
-      #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? && 'in'}
-        .form-group.has-feedback
-          = f.label :vat_number
-          = f.text_field_without_bootstrap :vat_number, class: 'form-control'
-          %span.form-control-feedback.fa.fa-warning.text-danger
-          %span.help-block= t('checkout.messages.vat_number_reminder')
-    .row
-      .col-sm-6
-        = f.text_field :your_reference
-      .col-sm-6
-        = f.text_field :our_reference
-  %fieldset
-    ~ f.text_area :notes, rows: 4
+  %p
+    %button.btn.btn-default{type: 'button', data: {toggle: 'collapse', target: '#order-meta'}}
+      = t('checkout.order_meta')
+      %span.caret
+  #order-meta.collapse{class: current_store.b2b_sales? && 'in'}
+    %fieldset
+      .row
+        .col-sm-6
+          = f.text_field :message
+        #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? && 'in'}
+          .form-group.has-feedback
+            = f.label :vat_number
+            = f.text_field_without_bootstrap :vat_number, class: 'form-control'
+            %span.form-control-feedback.fa.fa-warning.text-danger
+            %span.help-block= t('checkout.messages.vat_number_reminder')
+      .row
+        .col-sm-6
+          = f.text_field :your_reference
+        .col-sm-6
+          = f.text_field :our_reference
+    %fieldset
+      ~ f.text_area :notes, rows: 4
 
   #continue-order.hidden-print
     = f.form_group do

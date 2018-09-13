@@ -490,10 +490,10 @@ fi:
     profile: Omat tiedot
   checkout:
     panels:
-      address_panel: Yhteystiedot
-      shipping_panel: Toimitusvaihtoehdot
+      address_panel: Yhteystietosi
+      shipping_panel: Toimitustapa
       payment_panel: Maksaminen
-      complete_panel: Tilaus valmis
+      complete_panel: Tilauksen valmistuminen
     continue_shopping: Jatka ostoksia
     back_to_cart: Ostoskoriin
     cancel_checkout: Keskeytä ja palaa takaisin yhteystietoihin
@@ -502,6 +502,7 @@ fi:
     select_shipping_method: Valitse toimitustapa
     delivery_time: Toimitusaika-arvio %{days} arkipäivää.
     ship: Valitse tämä toimitustapa
+    order_meta: Tilauksen lisätiedot
     business_orders_only: Nämä tiedot vain yritystilauksille
     receipt: Kuitti
     creditcard_payment: Maksa luottokortilla
