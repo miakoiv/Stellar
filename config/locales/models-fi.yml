@@ -473,6 +473,9 @@ fi:
         viewport: Tasaa ikkunan korkeuteen
         width: Sisällön leveys
         background_color: Taustaväri
+        gradient_color: Liukuväri
+        gradient_type: Väriliu’un tyyppi
+        gradient_direction: Väriliu’un suunta
         fixed_background: Kiinteä tausta
       segment:
         resource_id: Kohde

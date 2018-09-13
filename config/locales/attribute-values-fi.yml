@@ -124,6 +124,19 @@ fi:
           'col-10': 10 palstaa
           'col-8': 8 palstaa
           'col-6': 6 palstaa
+        gradient_type:
+          linear: suora
+          circle: ympyrä
+          ellipse: soikio
+        gradient_direction:
+          'top left': ylös vasemmalle
+          'top': ylös
+          'top right': ylös oikealle
+          'left': vasemmalle
+          'right': oikealle
+          'bottom left': alas vasemmalle
+          'bottom': alas
+          'bottom right': alas oikealle
       segment:
         template:
           empty: tyhjä tila

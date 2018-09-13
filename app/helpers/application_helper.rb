@@ -163,8 +163,9 @@ module ApplicationHelper
 
   # Converts given styles hash to a string of CSS rules.
   def css(styles)
-    styles.reject { |_, rule| rule.nil? }.map { |selector, rule|
-      "#{selector.to_s.underscore.dasherize}: #{rule};"
+    styles.reject { |_, rule| rule.nil? }.map { |key, rule|
+      selector = key.to_s.underscore.dasherize
+      "#{selector}: #{rule};"
     }.join ' '
   end
 
@@ -176,14 +177,29 @@ module ApplicationHelper
   end
 
   def background_color_style(element)
-    {
-      backgroundColor: element.background_color.presence
-    }
+    style = {backgroundColor: element.background_color.presence}
+    if element.respond_to?(:gradient_type) && element.gradient_type.present?
+      style.merge! backgroundImage: build_gradient(
+        element.gradient_type, element.gradient_direction,
+        element.background_color, element.gradient_color
+      )
+    end
+    style
   end
 
   def segment_style(segment)
     {
       minHeight: segment.min_height.present? ? "#{segment.min_height}em" : nil
     }
+  end
+
+  def build_gradient(type, direction, start_color, stop_color)
+    to = direction.humanize(capitalize: false)
+    at = to.present? ? "at #{to}" : ''
+    if type == 'linear'
+      "linear-gradient(to #{to}, #{start_color}, #{stop_color})"
+    else
+      "radial-gradient(#{type} #{at}, #{stop_color}, #{start_color})"
+    end
   end
 end

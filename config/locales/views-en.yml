@@ -314,6 +314,9 @@ en:
       values:
         empty: "[Empty]"
     sections:
+      form:
+        solid_color: "[No gradient]"
+        gradient_center: centered
       settings:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.

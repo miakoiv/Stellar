@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910093017) do
+ActiveRecord::Schema.define(version: 20180913102642) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -708,18 +708,21 @@ ActiveRecord::Schema.define(version: 20180910093017) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sections", force: :cascade do |t|
-    t.integer  "page_id",          limit: 4,                       null: false
-    t.string   "name",             limit: 255
-    t.string   "width",            limit: 255, default: "col-12",  null: false
-    t.string   "layout",           limit: 255, default: "twelve",  null: false
-    t.boolean  "gutters",                      default: true,      null: false
-    t.boolean  "viewport",                     default: false,     null: false
-    t.string   "shape",            limit: 255
-    t.string   "background_color", limit: 255, default: "#FFFFFF", null: false
-    t.boolean  "fixed_background",             default: false,     null: false
-    t.integer  "priority",         limit: 4,   default: 0,         null: false
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.integer  "page_id",            limit: 4,                       null: false
+    t.string   "name",               limit: 255
+    t.string   "width",              limit: 255, default: "col-12",  null: false
+    t.string   "layout",             limit: 255, default: "twelve",  null: false
+    t.boolean  "gutters",                        default: true,      null: false
+    t.boolean  "viewport",                       default: false,     null: false
+    t.string   "shape",              limit: 255
+    t.string   "background_color",   limit: 255, default: "#FFFFFF", null: false
+    t.string   "gradient_color",     limit: 255, default: "#FFFFFF", null: false
+    t.string   "gradient_type",      limit: 255
+    t.string   "gradient_direction", limit: 255
+    t.boolean  "fixed_background",               default: false,     null: false
+    t.integer  "priority",           limit: 4,   default: 0,         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree

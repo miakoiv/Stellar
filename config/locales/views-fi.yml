@@ -298,6 +298,9 @@ fi:
       values:
         empty: "[Tyhjä]"
     sections:
+      form:
+        solid_color: "[Ei väriliukua]"
+        gradient_center: keskitetty
       settings:
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.

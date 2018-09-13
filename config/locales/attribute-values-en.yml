@@ -124,6 +124,19 @@ en:
           'col-10': 10 columns
           'col-8': 8 columns
           'col-6': 6 columns
+        gradient_type:
+          linear: linear
+          circle: circle
+          ellipse: ellipse
+        gradient_direction:
+          'top left': top left
+          'top': top
+          'top right': top right
+          'left': left
+          'right': right
+          'bottom left': bottom left
+          'bottom': bottom
+          'bottom right': bottom right
       segment:
         template:
           empty: empty area

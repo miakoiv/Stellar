@@ -87,7 +87,8 @@ class Admin::SectionsController < ApplicationController
     def section_params
       params.require(:section).permit(
         :name, :width, :layout, :gutters, :viewport,
-        :background_color, :fixed_background
+        :background_color, :fixed_background,
+        :gradient_color, :gradient_type, :gradient_direction
       )
     end
 end

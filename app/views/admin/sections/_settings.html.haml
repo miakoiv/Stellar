@@ -1,12 +1,13 @@
 = render partial: 'admin/sections/form', object: section, as: :section
 
-%fieldset
-  .form-group
-    %label.control-label= col(Section, :background_color)
-    = text_field_tag 'section_background_color', section.background_color, class: 'form-control', data: {url: modify_admin_section_path(section)}
+= bootstrap_form_for [:modify, :admin, section], remote: true, html: {id: dom_id(section, :colors)} do |f|
+  %fieldset
+    = f.text_field :background_color, class: 'color'
+    = f.text_field :gradient_color, class: 'color'
 
 :coffee
-  $('#section_background_color').minicolors
+  $form = $('##{dom_id(section, :colors)}')
+  $form.find('.color').minicolors
     theme: 'bootstrap'
     position: 'bottom left'
     format: 'rgb'
@@ -14,12 +15,7 @@
     keywords: 'transparent'
     swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
     change: (value) ->
-      $.ajax
-        url: $(this).data 'url'
-        type: 'PATCH'
-        data:
-          section:
-            background_color: value
+      $form.trigger 'submit.rails'
     changeDelay: 500
 
 %hr
