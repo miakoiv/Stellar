@@ -353,7 +353,7 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-grid .product:hover,
 .product-card:hover {
   .product-image { transform: scale(1.04); }
-  .buy-now-form .btn { @extend .btn-danger; }
+  .buy-now-form > .btn { @extend .btn-danger; }
   .store-link > a { @extend .btn-primary; }
 }
 .product-grid .product > a,
@@ -416,8 +416,8 @@ $body-tone-bg: darken($body-bg, 4%);
   font-size: 18px;
   color: $gray-base;
 }
-.product-grid .buy-now-form .btn,
-.product-card .buy-now-form .btn,
+.product-grid .buy-now-form > .btn,
+.product-card .buy-now-form > .btn,
 .product-grid .buy-now .product-link > a,
 .product-card .buy-now .product-link > a {
   @extend .btn-default;

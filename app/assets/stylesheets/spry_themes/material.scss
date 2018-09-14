@@ -525,8 +525,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   font-size: 24px;
   color: $gray-base;
 }
-.product-grid .buy-now-form .btn,
-.product-card .buy-now-form .btn,
+.product-grid .buy-now-form > .btn,
+.product-card .buy-now-form > .btn,
 .product-grid .buy-now .product-link > a,
 .product-card .buy-now .product-link > a {
   @extend .btn-default, .btn-lg;
