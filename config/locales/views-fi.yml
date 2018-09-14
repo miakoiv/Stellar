@@ -177,6 +177,8 @@ fi:
       new:
         new_order: Uusi tilaus
       form_for_new:
+        order_meta: Asiakkaan valinta ja tilauksen asetukset
+        customer: Asiakkaan tiedot
         new_customer: "[Uusi asiakas]"
         group_id: Asiakasryhmä/hinnoittelu
       row:
@@ -419,6 +421,8 @@ fi:
     new:
       new_order: Uusi tilaus/tarjous
     form_for_new:
+      order_meta: Asiakkaan valinta ja tilauksen asetukset
+      customer: Asiakkaan tiedot
       new_customer: "[Uusi asiakas]"
       group_id: Asiakasryhmä/hinnoittelu
     table:

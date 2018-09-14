@@ -197,6 +197,8 @@ en:
       new:
         new_order: New order
       form_for_new:
+        order_meta: Customer selection and order settings
+        customer: Customer information
         new_customer: "[New customer]"
         group_id: Customer group/pricing
       row:
@@ -435,6 +437,8 @@ en:
     new:
       new_order: New order/quote
     form_for_new:
+      order_meta: Customer selection and order settings
+      customer: Customer information
       new_customer: "[New customer]"
       group_id: Customer group/pricing
     table:

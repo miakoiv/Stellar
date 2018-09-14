@@ -1,6 +1,8 @@
 = bootstrap_form_for [:admin, order] do |f|
   .col-lg-5
     .panel.panel-primary
+      .panel-heading
+        %h4.panel-title= t('.order_meta')
       .panel-body
         %fieldset
           = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, label: t('.group_id')
@@ -13,6 +15,8 @@
               = f.select :inventory_id, @group.available_inventories.map { |i| [i.to_s, i.id] }
   .col-lg-6.col-lg-offset-1
     .panel.panel-default
+      .panel-heading
+        %h4.panel-title= t('.customer')
       .panel-body
         %fieldset
           = render partial: 'customer_fields', locals: {f: f}
