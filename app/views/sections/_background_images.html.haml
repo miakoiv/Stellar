@@ -1,7 +1,8 @@
 - if section.fixed_background?
-  .section-bg-container.fixed-background{style: css(background_color_style(section).merge(background_picture_style(section.cover_picture)))}
+  .section-bg-container.fixed-background{style: css(background_picture_style(section.cover_picture))}
+    .section-bg-overlay{style: css(background_color_style(section))}
 - else
-  .section-bg-container{style: css(background_color_style(section))}
+  .section-bg-container
     - if section.pictures.any?
       - if section.pictures.count > 1
         .swiper-container
@@ -20,3 +21,4 @@
               effect: 'fade'
       - else
         = picture_variant_tag section.cover_picture, :lightbox, class: 'image-bg'
+    .section-bg-overlay{style: css(background_color_style(section))}

@@ -46,9 +46,10 @@
 
 
 /*
- * Section background images
+ * Section background image container and color overlay
  */
-.section-bg-container {
+.section-bg-container,
+.section-bg-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -61,6 +62,8 @@
     z-index: 0;
   }
 }
+.section-bg-container { background-color: $body-bg; }
+.section-bg-overlay { background-color: transparent; }
 .image-bg {
   display: block;
   width: 100%;
