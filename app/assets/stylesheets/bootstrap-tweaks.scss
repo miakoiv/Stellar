@@ -668,6 +668,12 @@ textarea {
   resize: vertical;
 }
 input[type="number"] { min-width: 60px; }
+input[type="range"] {
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
 
 i.icon {
   display: inline-block;

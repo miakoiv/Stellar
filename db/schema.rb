@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914145656) do
+ActiveRecord::Schema.define(version: 20180914150351) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -719,6 +719,7 @@ ActiveRecord::Schema.define(version: 20180914145656) do
     t.string   "gradient_color",     limit: 255, default: "#FFFFFF",     null: false
     t.string   "gradient_type",      limit: 255
     t.string   "gradient_direction", limit: 255
+    t.integer  "gradient_balance",   limit: 4,   default: 0,             null: false
     t.boolean  "fixed_background",               default: false,         null: false
     t.integer  "priority",           limit: 4,   default: 0,             null: false
     t.datetime "created_at",                                             null: false

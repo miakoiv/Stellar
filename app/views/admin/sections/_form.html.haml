@@ -12,6 +12,7 @@
         = f.check_box :fixed_background
       = f.select :gradient_type, Section.gradient_type_options, {include_blank: true}, {placeholder: t('.solid_color')}
       = f.select :gradient_direction, Section.gradient_direction_options, {include_blank: true}, {placeholder: t('.gradient_center')}
+      = f.range_field :gradient_balance, min: -100, max: 100
 
   :coffee
     $('#section_layout').betterSelectize()

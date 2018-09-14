@@ -476,6 +476,7 @@ en:
         gradient_color: Gradient color
         gradient_type: Gradient type
         gradient_direction: Gradient direction
+        gradient_balance: Gradient middle point
         fixed_background: Fixed background
       segment:
         resource_id: Target

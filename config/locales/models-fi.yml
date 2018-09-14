@@ -476,6 +476,7 @@ fi:
         gradient_color: Liukuväri
         gradient_type: Väriliu’un tyyppi
         gradient_direction: Väriliu’un suunta
+        gradient_balance: Väriliu’un keskikohta
         fixed_background: Kiinteä tausta
       segment:
         resource_id: Kohde

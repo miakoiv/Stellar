@@ -177,14 +177,13 @@ module ApplicationHelper
   end
 
   def background_color_style(element)
-    style = {backgroundColor: element.background_color.presence}
     if element.respond_to?(:gradient_type) && element.gradient_type.present?
-      style.merge! backgroundImage: build_gradient(
-        element.gradient_type, element.gradient_direction,
-        element.background_color, element.gradient_color
-      )
+      {
+        backgroundImage: build_gradient(element.gradient_type, element.gradient_direction, element.background_color, element.gradient_color, element.gradient_balance.to_i)
+      }
+    else
+      {backgroundColor: element.background_color.presence}
     end
-    style
   end
 
   def segment_style(segment)
@@ -193,13 +192,16 @@ module ApplicationHelper
     }
   end
 
-  def build_gradient(type, direction, start_color, stop_color)
+  def build_gradient(type, direction, start_color, stop_color, balance)
     to = direction.humanize(capitalize: false)
     at = to.present? ? "at #{to}" : ''
+    start = balance > 0 ? balance : 0
+    stop = balance < 0 ? 100 + balance : 100
+    color_stops = "#{start_color} #{start}%, #{stop_color} #{stop}%"
     if type == 'linear'
-      "linear-gradient(to #{to}, #{start_color}, #{stop_color})"
+      "linear-gradient(to #{to}, #{color_stops})"
     else
-      "radial-gradient(#{type} #{at}, #{stop_color}, #{start_color})"
+      "radial-gradient(#{type} #{at}, #{color_stops})"
     end
   end
 end
