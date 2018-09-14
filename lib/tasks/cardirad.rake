@@ -12,11 +12,11 @@ namespace :products do
       encoding: 'utf-8',
       col_sep: ';',
       skip_blanks: true,
-      headers: [:ref, :gtin, :title, :subtitle, :trade_price, :retail_price],
+      headers: true,
     ) do |row|
       product = store.products.create(
-        code: row[:ref],
-        customer_code: row[:gtin],
+        code: row[:code],
+        customer_code: row[:customer_code],
         title: row[:title],
         subtitle: row[:subtitle],
         trade_price: row[:trade_price].to_money,
