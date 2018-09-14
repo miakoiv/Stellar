@@ -14,8 +14,8 @@
   .col-lg-7
     = tab_set 'product-side', class: 'nav-justified nav-sm' do
       = nav_tab 'images', col(Product, :images), default: true
-      = nav_tab 'inventory', col(Product, :inventory), class: (@product.has_variants? || @product.bundle?) && 'disabled'
-      = nav_tab 'alternate-prices', col(Product, :alternate_prices), class: (@product.has_variants? || @product.bundle?) && 'disabled'
+      = nav_tab 'inventory', col(Product, :inventory), class: @product.tracked_stock? || 'disabled'
+      = nav_tab 'alternate-prices', col(Product, :alternate_prices), class: @product.not_priced? && 'disabled'
       = nav_tab 'properties', col(Product, :product_properties), class: @product.bundle? && 'disabled'
       = nav_tab 'documents', col(Product, :documents)
       = nav_tab 'requisite-entries', col(Product, :requisite_entries), class: @product.has_variants? && 'disabled'

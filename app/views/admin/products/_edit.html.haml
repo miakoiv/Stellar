@@ -9,7 +9,7 @@
         = f.text_field :title, required: true
         = f.text_field :subtitle
         = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
-        - unless @product.has_variants? || @product.bundle?
+        - unless @product.not_priced?
           .row
             .col-sm-6
               = f.text_field :trade_price, class: 'text-right', append: '€'

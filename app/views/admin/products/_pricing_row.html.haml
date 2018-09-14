@@ -4,7 +4,7 @@
       %strong= product.title
       %span.small= product.subtitle
       .badge= product.code
-  - if product.has_variants?
+  - if product.not_priced?
     %td
     %td
   - else
@@ -17,7 +17,7 @@
         = hidden_field_tag :group_id, @group && @group.id, id: nil
         = f.text_field :retail_price, class: 'form-control text-right', placeholder: humanized_money(product.retail_price), tabindex: 2
   - if @group.present?
-    - if product.has_variants?
+    - if product.not_priced?
       %td
     - else
       %td.control

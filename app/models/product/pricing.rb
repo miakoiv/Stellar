@@ -14,6 +14,11 @@ class Product < ActiveRecord::Base
   has_many :promoted_items, dependent: :destroy
   has_many :promotions, through: :promoted_items
 
+  # Bundles and products having variants have no pricing of their own.
+  def not_priced?
+    bundle? || has_variants?
+  end
+
   def live_promotions(group)
     promotions.merge(Promotion.live)
   end
