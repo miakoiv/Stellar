@@ -47,9 +47,9 @@ module ApplicationHelper
   end
 
   def tab_set(id, options = {})
-    classes = (options[:class] || '').split
-    classes << 'nav nav-tabs'
-    options[:class] = classes.join(' ')
+    c = Array.wrap(options.delete(:class)).reject { |c| c.in? [true, false] }
+    c << 'nav nav-tabs'
+    options[:class] = c.join(' ')
     content_tag :ul, options.merge(id: id, role: 'tablist') do
       yield
     end
@@ -57,9 +57,9 @@ module ApplicationHelper
 
   def nav_tab(id, text, options = {})
     href = "#tab-#{id}"
-    classes = (options[:class] || '').split
-    classes << 'active' if options.delete(:default)
-    options[:class] = classes.join(' ')
+    c = Array.wrap(options.delete(:class)).reject { |c| c.in? [true, false] }
+    c << 'active' if options.delete(:default)
+    options[:class] = c.join(' ')
     content_tag :li, options.merge(role: 'presentation') do
       link_to text, href, role: 'tab', data: {toggle: 'tab'}
     end
@@ -67,10 +67,10 @@ module ApplicationHelper
 
   def tab_pane(id, options = {})
     id = "tab-#{id}"
-    classes = (options[:class] || '').split
-    classes << 'tab-pane fade'
-    classes << 'in active' if options.delete(:default)
-    options[:class] = classes.join(' ')
+    c = Array.wrap(options.delete(:class)).reject { |c| c.in? [true, false] }
+    c << 'tab-pane fade'
+    c << 'in active' if options.delete(:default)
+    options[:class] = c.join(' ')
     content_tag :div, options.merge(id: id) do
       yield
     end
