@@ -104,10 +104,6 @@ module ApplicationHelper
     end
   end
 
-  def blank
-    "\u00a0"
-  end
-
   def loading_spinner
     icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
   end
