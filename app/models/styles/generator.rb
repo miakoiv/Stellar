@@ -1,6 +1,6 @@
 #encoding: utf-8
 #
-# Style::Generator compiles store stylesheets on demand from the SCSS
+# Styles::Generator compiles store stylesheets on demand from the SCSS
 # of the theme file prepended by the style variables.
 #
 # Adapted from <https://github.com/DiatomEnterprises/custom-css-for-user>
