@@ -13,6 +13,7 @@ namespace :products do
       col_sep: ';',
       skip_blanks: true,
       headers: true,
+      header_converters: lambda { |h| h.to_sym }
     ) do |row|
       product = store.products.create(
         code: row[:code],
