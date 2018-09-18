@@ -13,6 +13,7 @@ class Section < ActiveRecord::Base
   include Authority::Abilities
   include Pictureable
   include Reorderable
+  include Stylable
 
   #---
   # Presets as layout, name, column count tuples.

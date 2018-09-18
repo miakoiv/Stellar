@@ -5,6 +5,7 @@ class Column < ActiveRecord::Base
   resourcify
   include Authority::Abilities
   include Reorderable
+  include Stylable
 
   #---
   ALIGNMENTS = %w{align-top align-middle align-bottom align-fill}.freeze

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914150351) do
+ActiveRecord::Schema.define(version: 20180918062538) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -127,13 +127,14 @@ ActiveRecord::Schema.define(version: 20180914150351) do
   add_index "categories_products", ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id", unique: true, using: :btree
 
   create_table "columns", force: :cascade do |t|
-    t.integer  "section_id",       limit: 4,                           null: false
-    t.string   "alignment",        limit: 255, default: "align-top",   null: false
-    t.boolean  "pivot",                        default: false,         null: false
-    t.string   "background_color", limit: 255, default: "transparent", null: false
-    t.integer  "priority",         limit: 4,   default: 0,             null: false
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.integer  "section_id",       limit: 4,                             null: false
+    t.string   "alignment",        limit: 255,   default: "align-top",   null: false
+    t.boolean  "pivot",                          default: false,         null: false
+    t.string   "background_color", limit: 255,   default: "transparent", null: false
+    t.text     "inline_styles",    limit: 65535
+    t.integer  "priority",         limit: 4,     default: 0,             null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   add_index "columns", ["section_id"], name: "index_columns_on_section_id", using: :btree
@@ -708,22 +709,23 @@ ActiveRecord::Schema.define(version: 20180914150351) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sections", force: :cascade do |t|
-    t.integer  "page_id",            limit: 4,                           null: false
+    t.integer  "page_id",            limit: 4,                             null: false
     t.string   "name",               limit: 255
-    t.string   "width",              limit: 255, default: "col-12",      null: false
-    t.string   "layout",             limit: 255, default: "twelve",      null: false
-    t.boolean  "gutters",                        default: true,          null: false
-    t.boolean  "viewport",                       default: false,         null: false
+    t.string   "width",              limit: 255,   default: "col-12",      null: false
+    t.string   "layout",             limit: 255,   default: "twelve",      null: false
+    t.boolean  "gutters",                          default: true,          null: false
+    t.boolean  "viewport",                         default: false,         null: false
     t.string   "shape",              limit: 255
-    t.string   "background_color",   limit: 255, default: "transparent", null: false
-    t.string   "gradient_color",     limit: 255, default: "#FFFFFF",     null: false
+    t.string   "background_color",   limit: 255,   default: "transparent", null: false
+    t.string   "gradient_color",     limit: 255,   default: "#FFFFFF",     null: false
     t.string   "gradient_type",      limit: 255
     t.string   "gradient_direction", limit: 255
-    t.integer  "gradient_balance",   limit: 4,   default: 0,             null: false
-    t.boolean  "fixed_background",               default: false,         null: false
-    t.integer  "priority",           limit: 4,   default: 0,             null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.integer  "gradient_balance",   limit: 4,     default: 0,             null: false
+    t.boolean  "fixed_background",                 default: false,         null: false
+    t.text     "inline_styles",      limit: 65535
+    t.integer  "priority",           limit: 4,     default: 0,             null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
   end
 
   add_index "sections", ["page_id"], name: "index_sections_on_page_id", using: :btree
@@ -740,6 +742,7 @@ ActiveRecord::Schema.define(version: 20180914150351) do
     t.text     "body",             limit: 16777215
     t.text     "metadata",         limit: 65535
     t.text     "content",          limit: 65535
+    t.text     "inline_styles",    limit: 65535
     t.integer  "priority",         limit: 4,        default: 0,             null: false
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false

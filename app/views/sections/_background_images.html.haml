@@ -1,6 +1,6 @@
 - if section.fixed_background?
-  .section-bg-container.fixed-background{style: css(background_picture_style(section.cover_picture))}
-    .section-bg-overlay{style: css(background_color_style(section))}
+  .section-bg-container.fixed-background{style: section.style(:backgroundImage)}
+    .section-bg-overlay{style: section.style(:backgroundColor)}
 - else
   .section-bg-container
     - if section.pictures.any?
@@ -21,4 +21,4 @@
               effect: 'fade'
       - else
         = picture_variant_tag section.cover_picture, :lightbox, class: 'image-bg'
-    .section-bg-overlay{style: css(background_color_style(section))}
+    .section-bg-overlay{style: section.style(:backgroundColor)}

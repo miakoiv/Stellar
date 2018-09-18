@@ -35,6 +35,7 @@ class Segment < ActiveRecord::Base
   include Documentable
   include Pictureable
   include Reorderable
+  include Stylable
 
   #---
   ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
