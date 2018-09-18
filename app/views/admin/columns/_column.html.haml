@@ -1,4 +1,4 @@
-.column[column]{class: column_class(column), data: {reorder: reorder_admin_column_segments_path(column)}}
+.column[column]{class: [column.alignment, column.pivot? && 'pivot'], data: {reorder: reorder_admin_column_segments_path(column)}}
   = render partial: 'columns/background', object: column, as: :column
   = render partial: 'admin/segments/segment', collection: column.segments
   = render partial: 'admin/columns/column_nav', object: column, as: :column
