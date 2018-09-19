@@ -25,7 +25,8 @@ class Order < ActiveRecord::Base
 
   scope :at, -> (store) { where(store: store) }
   scope :for, -> (customer) { where(customer: customer) }
-  scope :targeted, -> { where('user_id != customer_id') }
+  scope :targeted, -> { where('orders.user_id != orders.customer_id') }
+  scope :not_by, -> (user) { where.not(user: user) }
 
   # Current orders are completed, not yet approved orders.
   scope :current, -> { where.not(completed_at: nil).where(approved_at: nil) }
@@ -47,6 +48,9 @@ class Order < ActiveRecord::Base
 
   # Cancelled orders.
   scope :cancelled, -> { unscope(where: :cancelled_at).where.not(cancelled_at: nil) }
+
+  # Orders that are targeted and not yet completed are considered to be quotes.
+  scope :quote, -> { targeted.incomplete }
 
   # Orders not concluded or concluded recently for timeline data.
   scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
