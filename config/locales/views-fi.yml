@@ -441,12 +441,21 @@ fi:
       summary: Etsi hakusanalla
     edit:
       duplicate: Kopioi ostoskoriin
-    menu:
-      title: Avoimet tilaukset/tarjoukset
     quote:
       title: Lähetä tarjous
       send_self: sähköpostina minulle
       send_customer: sähköpostina asiakkaalle
+    pending_by_user:
+      title: Omat tarjoukset
+      header: Jatka aiemmin aloitettua tarjousta
+      none: Ei omia avoimia tarjouksia
+    pending_from_group:
+      title: Ryhmän tarjoukset
+      header: Siirrä tarjous ryhmältä itsellesi
+      none: Ei avoimia tarjouksia ryhmältä
+    preview_modal:
+      title: Tarjouksen siirtäminen ryhmältä
+      claim: Siirrä tämä tarjous
   products:
     filtering:
       keyword: Hakusana…
@@ -494,6 +503,8 @@ fi:
       empty_order_html: <p class="lead">Uuden tilauksen tai tarjouksen laatiminen</p><p>Lisää tuotteita ostoskoriin lisätäksesi ne tälle tilaukselle. Voit halutessasi lähettää tarjoussähköposteja, kunnes hyväksyt tilauksen lähettämällä sen, tai poistat tilauksen.</p>
     cart_promotion:
       title: Myydyimmät tuotteet
+    cart_selector:
+      return_to_shopping_cart: Palaa omaan ostoskoriin
     profile: Omat tiedot
   checkout:
     panels:

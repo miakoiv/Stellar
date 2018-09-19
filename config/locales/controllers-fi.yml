@@ -169,6 +169,8 @@ fi:
     duplicate:
       notice: "Tilaus %{order} kopioitu ostoskoriin."
       failed: "Tilaus %{order} kopioitu ostoskoriin, lukuunottamatta tuotteita jotka eivät ole saatavana: %{failed}"
+    claim:
+      notice: "Tarjous käyttäjältä %{from} siirretty ja valittu ostoskoriksi."
   profiles:
     update:
       notice: "Käyttäjätiedot päivitetty."

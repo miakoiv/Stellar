@@ -1,0 +1,8 @@
+- if user_shopping_cart != shopping_cart
+  %li
+    = link_to select_order_path(user_shopping_cart) do
+      = icon('shopping-cart')
+      = t('.return_to_shopping_cart')
+= render partial: 'orders/pending_by_user', object: current_user.orders.quote.at(current_store), as: :orders
+- if current_user.can_update?(Order, at: current_store)
+  = render partial: 'orders/pending_from_group', object: current_group.user_orders.quote.at(current_store).not_by(current_user), as: :orders

@@ -270,6 +270,7 @@ fi:
         group_id: Asiakasryhmä
         order_type_id: Tilaustyyppi
         completed_at: Tilauspvm
+        updated_at: Päivitetty
         is_final: Merkitse valmiiksi
         shipping_at: Haluttu toimituspvm
         installation_at: Asennuspvm

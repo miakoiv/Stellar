@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions duplicate: 'read', select: 'read'
+  authority_actions duplicate: 'read', select: 'read', preview: 'read', claim: 'update'
 
   before_action :set_header_and_footer
   before_action :set_categories, only: [:index, :show, :edit]
@@ -148,6 +148,28 @@ class OrdersController < ApplicationController
         user_session.delete('shopping_cart_id')
       end
       redirect_to cart_path
+    else
+      head :forbidden
+    end
+  end
+
+  # GET /orders/1/preview
+  # Users with customer selection role may preview quotes (orders)
+  # and claim them as their own to continue working on them.
+  def preview
+    @order = current_group.user_orders.at(current_store).find(params[:id])
+    authorize_action_for Order, at: current_store
+  end
+
+  # PATCH/PUT /orders/1/claim
+  def claim
+    authorize_action_for Order, at: current_store
+    @order = current_group.user_orders.at(current_store).find(params[:id])
+    if can_select_customer?
+      previous_owner = @order.user
+      @order.update(user: current_user)
+      user_session['shopping_cart_id'] = @order.id
+      redirect_to cart_path, notice: t('.notice', from: previous_owner)
     else
       head :forbidden
     end

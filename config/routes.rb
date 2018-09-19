@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :order_items, shallow: true
     member do
       get :select
+      get :preview
+      patch :claim
       get :duplicate
     end
   end

@@ -1,0 +1,43 @@
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header.bg-primary
+      %button.close{data: {dismiss: 'modal'}}= icon('close')
+      %h4.modal-title= t('.title')
+    .modal-body
+      .row.small
+        .col-xs-4
+          %dl
+            %dt= @order.order_type
+            %dd= @order.user.name
+            %dd= l(@order.updated_at, format: :long)
+        .col-xs-4
+          %dl
+            %dd= bootstrap_label(@order.destination)
+            %dd= @order.customer_name
+            %dd= @order.customer_email
+            %dd= @order.customer_phone
+        .col-xs-4
+          %dl
+            %dd= @order.shipping_address
+            %dd
+              = @order.shipping_postalcode
+              = @order.shipping_city
+            %dd= @order.shipping_country
+      %table.table.table-hover
+        %thead
+          %tr
+            %th= col(OrderItem, :product_title)
+            %th.col-xs-1.text-right= col(OrderItem, :ordered)
+        %tbody
+          - @order.order_items.each do |order_item|
+            %tr{class: order_item.is_subitem? && 'subrow'}
+              %td
+                .product= product_header order_item
+                - if order_item.product.shipping_notes.present?
+                  .small
+                    = icon('info-circle')
+                    = order_item.product.shipping_notes
+              %td.text-right= order_item.amount
+    .modal-footer
+      - if current_user.can_update?(Order, at: current_store)
+        = link_to icon('check-square-o', t('.claim')), claim_order_path(@order), method: :patch, class: 'btn btn-primary'

@@ -169,6 +169,8 @@ en:
     duplicate:
       notice: "Order %{order} copied to shopping cart."
       failed: "Order %{order} copied to shopping cart, except the following unavailable products: %{failed}"
+    claim:
+      notice: "Quote from %{from} claimed and selected as shopping cart."
   profiles:
     update:
       notice: "Profile updated."

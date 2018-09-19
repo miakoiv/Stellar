@@ -15,7 +15,9 @@
 
 - if can_select_customer?
   - content_for :auxiliary_nav do
-    = render partial: 'orders/menu'
+    = render partial: 'cart_selector'
+
+  #order-preview-modal.modal{data: {backdrop: 'static'}}
 
 :coffee
   $.ajax

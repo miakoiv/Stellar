@@ -457,12 +457,21 @@ en:
       summary: Keyword search
     edit:
       duplicate: Duplicate to cart
-    menu:
-      title: Pending orders/quotes
     quote:
       title: Send quotation
       send_self: e-mail myself
       send_customer: e-mail customer
+    pending_by_user:
+      title: Your quotes
+      header: Continue with an existing quote
+      none: No quotes currently pending
+    pending_from_group:
+      title: Group quotes
+      header: Claim a quote from your group
+      none: No quotes from your group currently pending
+    preview_modal:
+      title: Claiming a quote from your group
+      claim: Claim this quote
   products:
     filtering:
       keyword: Keyword…
@@ -510,6 +519,8 @@ en:
       empty_order_html: <p class="lead">New order or quote</p><p>Add items to the shopping cart to include them in this order. You can send quotations by e-mail until approving the order by completing it, or deleting the order.</p>
     cart_promotion:
       title: Best sellers
+    cart_selector:
+      return_to_shopping_cart: Return to your shopping cart
     profile: Your profile
   checkout:
     panels:

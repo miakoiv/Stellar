@@ -1,0 +1,16 @@
+%li.dropdown
+  = dropdown_toggle do
+    = t('.title')
+    %span.caret
+  %ul.orders-menu.dropdown-menu{role: 'menu'}
+    - if orders.any?
+      %li.dropdown-header= t('.header')
+      - orders.each do |order|
+        %li{class: order == shopping_cart && 'active'}
+          = link_to preview_order_path(order), remote: true do
+            .badge.pull-right= order.size
+            = bootstrap_label(order.user, text: order.user.name)
+            = order.customer_name
+            .small= l(order.created_at.to_date, format: :long)
+    - else
+      %li.dropdown-header= t('.none')
