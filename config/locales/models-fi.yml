@@ -281,7 +281,7 @@ fi:
         not_approved: Ei vielä käsitelty
         items: Tuotteita
         products: Tuotteet
-        customer_name: Tilaajan nimi
+        customer_name: Asiakkaan nimi
         customer_email: Sähköpostiosoite
         customer_phone: Puhelinnumero
         company_name: Yritys
