@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
 
   before_action :set_header_and_footer
   before_action :set_categories, only: [:index, :show, :edit]
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate, :select]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
 
   # GET /orders
   def index
@@ -139,6 +139,7 @@ class OrdersController < ApplicationController
   # a different order as the current shopping cart. If the selection
   # matches the default shopping cart, it is cleared instead.
   def select
+    @order = current_store.orders.find(params[:id])
     authorize_action_for @order, at: current_store
 
     if can_select_customer?
