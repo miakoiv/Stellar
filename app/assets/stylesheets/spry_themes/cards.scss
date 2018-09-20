@@ -328,7 +328,7 @@ $footer-bg: #d4d4d4;
   .iframes {}
   .images {
     .nav { @extend .nav-tabs, .nav-sm; }
-    .image {
+    .picture {
       position: relative;
       height: 0;
       padding-bottom: 61.8%; // golden ratio
