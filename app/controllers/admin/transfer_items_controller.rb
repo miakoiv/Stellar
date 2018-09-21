@@ -9,10 +9,7 @@ class Admin::TransferItemsController < ApplicationController
 
   # POST /admin/transfers/1/transfer_items
   def create
-    @transfer_item = @transfer.transfer_items.find_or_initialize_by(
-      transfer_item_params.slice(:product_id, :lot_code, :expires_at)
-    )
-    @transfer_item.amount += transfer_item_params[:amount].to_i
+    @transfer_item = @transfer.transfer_items.build(transfer_item_params)
 
     respond_to do |format|
       if @transfer_item.save
