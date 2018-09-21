@@ -1,14 +1,12 @@
 = render partial: 'admin/segments/form', object: segment, as: :segment
-%fieldset
-  .form-group
-    %label.control-label= col(Segment, :background_color)
-    = text_field_tag 'segment_background_color', segment.background_color, class: 'form-control', data: {url: modify_admin_segment_path(segment)}
 
-- if content_for?(:supplemental)
-  = yield :supplemental
+= bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
+  %fieldset
+    = f.text_field :background_color, class: 'color'
 
 :coffee
-  $('#segment_background_color').minicolors
+  $form = $('##{dom_id(segment, :colors)}')
+  $form.find('.color').minicolors
     theme: 'bootstrap'
     position: 'bottom left'
     format: 'rgb'
@@ -16,13 +14,11 @@
     keywords: 'transparent'
     swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
     change: (value) ->
-      $.ajax
-        url: $(this).data 'url'
-        type: 'PATCH'
-        data:
-          segment:
-            background_color: value
+      $form.trigger 'submit.rails'
     changeDelay: 500
+
+- if content_for?(:supplemental)
+  = yield :supplemental
 
 - if current_user.can_delete?(segment, at: current_store)
   %hr

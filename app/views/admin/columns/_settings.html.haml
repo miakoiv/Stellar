@@ -1,12 +1,12 @@
 = render partial: 'admin/columns/form', object: column, as: :column
 
-%fieldset
-  .form-group
-    %label.control-label= col(Column, :background_color)
-    = text_field_tag 'column_background_color', column.background_color, class: 'form-control', data: {url: modify_admin_column_path(column)}
+= bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors)} do |f|
+  %fieldset
+    = f.text_field :background_color, class: 'color'
 
 :coffee
-  $('#column_background_color').minicolors
+  $form = $('##{dom_id(column, :colors)}')
+  $form.find('.color').minicolors
     theme: 'bootstrap'
     position: 'bottom left'
     format: 'rgb'
@@ -14,10 +14,5 @@
     keywords: 'transparent'
     swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
     change: (value) ->
-      $.ajax
-        url: $(this).data 'url'
-        type: 'PATCH'
-        data:
-          column:
-            background_color: value
+      $form.trigger 'submit.rails'
     changeDelay: 500
