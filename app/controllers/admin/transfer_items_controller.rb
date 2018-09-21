@@ -9,11 +9,13 @@ class Admin::TransferItemsController < ApplicationController
 
   # POST /admin/transfers/1/transfer_items
   def create
-    @transfer_item = @transfer.transfer_items.build(transfer_item_params)
+    item = TransferItem.new(transfer_item_params)
+    @transfer_item = @transfer.transfer_items.merge(item)
+    action = @transfer_item.new_record? ? :create : :update
 
     respond_to do |format|
       if @transfer_item.save
-        track @transfer_item, @transfer
+        track @transfer_item, @transfer, {action: action}
         format.js { render :create }
       else
         format.js { render :error }

@@ -17,7 +17,20 @@ class Transfer < ActiveRecord::Base
   # If a shipment is associated, this transfer is for its stock changes.
   belongs_to :shipment
 
-  has_many :transfer_items, dependent: :destroy
+  # This association has an extension to merge a new transfer item with
+  # an existing similar item, because the item needs to be built first
+  # to include a product id needed for find_or_initialize_by
+  has_many :transfer_items, dependent: :destroy do
+    def merge(new_item)
+      find_or_initialize_by(
+        product: new_item.product,
+        lot_code: new_item.lot_code,
+        expires_at: new_item.expires_at
+      ).tap do |item|
+        item.amount += new_item.amount
+      end
+    end
+  end
 
   default_scope { order(created_at: :desc) }
 

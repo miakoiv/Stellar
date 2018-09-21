@@ -9,7 +9,20 @@ class InventoryCheck < ActiveRecord::Base
   #---
   belongs_to :store
   belongs_to :inventory, required: true
-  has_many :inventory_check_items, dependent: :destroy
+
+  # This association has an extension to merge a new inventory check item
+  # with an existing similar item, because the item needs to be built first
+  # to include a product id needed for find_or_initialize_by
+  has_many :inventory_check_items, dependent: :destroy do
+    def merge(new_item)
+      find_or_initialize_by(
+        product: new_item.product,
+        lot_code: new_item.lot_code
+      ).tap do |item|
+        item.current += new_item.current
+      end
+    end
+  end
 
   default_scope { order(created_at: :desc) }
 
