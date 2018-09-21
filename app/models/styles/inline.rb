@@ -20,15 +20,18 @@ module Styles
       write(:backgroundColor, background_color)
       write(:backgroundImage, background_image, true)
       write(:minHeight, min_height)
+      write(:margins, margins)
     end
 
     private
-      # Writes a CSS declaration into the inline styles attribute,
+      # Writes a list of CSS declaration into the inline styles attribute,
       # optionally applying Autoprefixer to the declaration.
-      def write(key, declaration, autoprefix = false)
-        property, rule = declaration
-        return r if property.nil? || rule.nil?
-        value = "#{property}: #{rule}"
+      def write(key, declarations, autoprefix = false)
+        return false unless declarations.present?
+        value = declarations.map { |declaration|
+          property, rule = declaration
+          property && rule && "#{property}: #{rule};"
+        }.compact.join ' '
         r.inline_styles[key] = if autoprefix
           AutoprefixerRails.process(value).css
         else
@@ -39,9 +42,9 @@ module Styles
       def background_color
         if r.respond_to?(:background_color)
           if r.respond_to?(:gradient_type) && r.gradient_type.present?
-            ['background-image', background_gradient]
+            [['background-image', background_gradient]]
           else
-            ['background-color', r.background_color.presence]
+            [['background-color', r.background_color.presence]]
           end
         end
       end
@@ -49,13 +52,22 @@ module Styles
       def background_image
         if r.respond_to?(:background_picture) && r.background_picture.present?
           url = r.background_picture.image.url(:lightbox, timestamp: false)
-          ['background-image', "url(#{url})"]
+          [['background-image', "url(#{url})"]]
         end
       end
 
       def min_height
         if r.respond_to?(:min_height) && r.min_height.present?
-          ['min-height', "#{r.min_height}em"]
+          [['min-height', "#{r.min_height}em"]]
+        end
+      end
+
+      def margins
+        if r.respond_to?(:margin_top)
+          [
+            ['margin-top', "#{r.margin_top}px"],
+            ['margin-bottom', "#{r.margin_bottom}px"]
+          ]
         end
       end
 

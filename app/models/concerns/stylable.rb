@@ -15,12 +15,13 @@ module Stylable
     before_save :update_inline_styles
   end
 
-  def style(feature)
-    inline_styles[feature]
+  def style(*features)
+    features.map { |f| inline_styles[f] }.join ' '
   end
 
   private
     def update_inline_styles
       Styles::Inline.new(self).write_inline_styles
+      true
     end
 end
