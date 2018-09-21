@@ -18,7 +18,7 @@
     '10': 'lot_code'
     '17': 'expires_at'
     '21': 'serial'
-    '30': 'amount'
+    '30': 'current'
 
   new Switchboard 'barcode',
     mapping:
@@ -26,7 +26,7 @@
       '¨': String.fromCharCode(29)
     callback: (code) ->
       data = parseBarcode code
-      item = {amount: 1}
+      item = {current: 1}
       for i in data.parsedCodeItems
         item[fields[i.ai]] = i.data if fields[i.ai]?
       $('#barcode').val ''
