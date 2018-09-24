@@ -10,14 +10,14 @@
       = f.range_field :margin_top, min: 0, max: 80, step: 10
       = f.range_field :margin_bottom, min: 0, max: 80, step: 10
       .form-group
-        = f.label col(Segment, :alignment)
+        = f.label col(Segment, :alignment), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Segment.alignment_options.each do |title, alignment|
             %label.btn.btn-default{class: segment.alignment == alignment && 'active'}
               = f.radio_button_without_bootstrap :alignment, alignment
               = title
       .form-group
-        = f.label col(Segment, :inset)
+        = f.label col(Segment, :inset), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Segment.inset_options.each do |title, inset|
             %label.btn.btn-default{class: segment.inset == inset && 'active'}
@@ -26,7 +26,7 @@
       = f.form_group do
         = f.check_box :jumbotron
       .form-group
-        = f.label col(Segment, :shadow)
+        = f.label col(Segment, :shadow), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Segment.shadow_options.each do |title, shadow|
             %label.btn.btn-default{class: segment.shadow == shadow && 'active'}
@@ -34,7 +34,7 @@
               = title
       = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated')}
       .form-group
-        = f.label col(Segment, :velocity)
+        = f.label col(Segment, :velocity), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Segment.velocity_options.each do |title, velocity|
             %label.btn.btn-default{class: segment.velocity == velocity && 'active'}

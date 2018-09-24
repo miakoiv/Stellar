@@ -2,7 +2,7 @@
   = bootstrap_form_for [:admin, column], remote: true, html: {class: 'immediate triggered'} do |f|
     %fieldset
       .form-group
-        = f.label col(Column, :alignment)
+        = f.label col(Column, :alignment), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Column.alignment_options.each do |title, alignment|
             %label.btn.btn-default{class: @column.alignment == alignment && 'active'}

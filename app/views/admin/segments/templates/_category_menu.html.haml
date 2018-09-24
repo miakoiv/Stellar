@@ -2,7 +2,7 @@
   = f.hidden_field :resource_type, value: 'Category'
   = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: t('.select_category')}
   .form-group
-    = f.label col(Segment, :inverse)
+    = f.label col(Segment, :inverse), class: 'control-label'
     .btn-group{data: {toggle: 'buttons'}}
       %label.btn.btn-default{class: segment.inverse? || 'active'}
         = f.radio_button_without_bootstrap :inverse, 0

@@ -69,7 +69,7 @@
           = f.text_field :message
         #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? && 'in'}
           .form-group.has-feedback
-            = f.label :vat_number
+            = f.label :vat_number, class: 'control-label'
             = f.text_field_without_bootstrap :vat_number, class: 'form-control'
             %span.form-control-feedback.fa.fa-warning.text-danger
             %span.help-block= t('checkout.messages.vat_number_reminder')

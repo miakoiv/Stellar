@@ -4,14 +4,14 @@
 
 %fieldset
   .form-group
-    = f.label col(Segment, :grid_columns)
+    = f.label col(Segment, :grid_columns), class: 'control-label'
     .btn-group{data: {toggle: 'buttons'}}
       - Segment.grid_columns_options.each do |columns|
         %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
           = f.radio_button_without_bootstrap :grid_columns, columns
           = columns
   .form-group
-    = f.label col(Segment, :image_sizing)
+    = f.label col(Segment, :image_sizing), class: 'control-label'
     .btn-group{data: {toggle: 'buttons'}}
       - Segment.image_sizing_options.each do |title, size|
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}

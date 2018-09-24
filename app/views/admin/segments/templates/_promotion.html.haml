@@ -4,7 +4,7 @@
   = f.text_field :header
   = f.text_field :subhead
   .form-group
-    = f.label col(Segment, :grid_columns)
+    = f.label col(Segment, :grid_columns), class: 'control-label'
     .btn-group{data: {toggle: 'buttons'}}
       - Segment.grid_columns_options.each do |columns|
         %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
