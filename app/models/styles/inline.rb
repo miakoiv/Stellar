@@ -27,15 +27,18 @@ module Styles
       # Writes a list of CSS declaration into the inline styles attribute,
       # optionally applying Autoprefixer to the declaration.
       def write(key, declarations, autoprefix = false)
-        return false unless declarations.present?
-        value = declarations.map { |declaration|
-          property, rule = declaration
-          property && rule && "#{property}: #{rule};"
-        }.compact.join ' '
-        r.inline_styles[key] = if autoprefix
-          AutoprefixerRails.process(value).css
+        if declarations.present?
+          value = declarations.map { |declaration|
+            property, rule = declaration
+            property && rule && "#{property}: #{rule};"
+          }.compact.join ' '
+          r.inline_styles[key] = if autoprefix
+            AutoprefixerRails.process(value).css
+          else
+            value
+          end
         else
-          value
+          r.inline_styles.delete(key)
         end
       end
 
