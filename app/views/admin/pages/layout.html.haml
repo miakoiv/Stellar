@@ -34,5 +34,9 @@
     $('#editor-panel').find('form.triggered').trigger 'submit.rails'
 
   $('#content-wrap').on 'click', ->
+    $('.section, .column, .segment').removeClass 'active';
     $('#editor-panel').destroySelectized();
     $('#side-panel').removeClass 'open'
+
+  $('#side-panel').on 'hidden.offcanvas', (e) ->
+    $('.section, .column, .segment').removeClass('active');

@@ -1,4 +1,5 @@
 $('#editor-panel').destroySelectized();
 $('#editor-panel').html("#{j render partial: 'admin/sections/settings', object: @section, as: :section}");
-$('#side-panel').removeClass('column-panel segment-panel').addClass('section-panel');
+$('.section, .column, .segment').removeClass('active');
+$('##{dom_id(@section)} > .section').addClass('active');
 $('#side-panel').addClass('open');

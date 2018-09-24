@@ -1,5 +1,6 @@
 var $segment = $("##{dom_id(@segment)}");
-$('#section-list > .section-list-item .segment').removeClass('active').addClass('disabled');
+$('.section, .column, .segment').removeClass('active');
+$('.segment').addClass('disabled');
 $segment.removeClass('disabled').addClass('active');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();

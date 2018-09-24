@@ -1,6 +1,8 @@
 $('.dropdown.open > a').dropdown('toggle');
 $('#editor-panel').destroySelectized();
 $('#editor-panel').html("#{j render partial: 'admin/sections/settings', object: @section, as: :section}");
+$('.section, .column, .segment').removeClass('active');
+$('##{dom_id(@section)} > .section').addClass('active');
 $('#side-panel').addClass('open');
 $("#{j render partial: 'admin/sections/list_item', object: @section, as: :section}").appendTo('#section-list');
 $('##{dom_id(@section)}').initialize();
