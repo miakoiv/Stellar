@@ -1,17 +1,18 @@
 /*
  * Layout editor side panel
  */
-$side-panel-width: 400px !default;
+$side-panel-width: 360px !default;
+$outline-width: 15px !default;
 
 #side-panel {
   display: block;
   width: $side-panel-width;
   left: -$side-panel-width;
   z-index: 1019; // just below #side-nav
-  border-right: 8px solid $brand-primary;
+  opacity: 0;
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
-  transition: 100ms ease-in transform;
+  transition: 100ms ease-in all;
   backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
 
@@ -26,14 +27,12 @@ $side-panel-width: 400px !default;
 #side-panel.open {
   transform: translateX($side-panel-width);
   transform: translateX($side-panel-width) translateZ(0);
+  opacity: 1;
   @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
 
   .panel-closed { display: none; }
   #editor-panel { display: block; }
 }
-#side-panel.section-panel { border-right-color: $brand-primary; }
-#side-panel.column-panel { border-right-color: $gray-light; }
-#side-panel.segment-panel { border-right-color: $brand-info; }
 
 #side-panel .panel-toggle {
   margin-top: 10px;
@@ -55,10 +54,12 @@ $side-panel-width: 400px !default;
 }
 
 /* Permanent side panel on the largest screens */
+/*
 @media (min-width: 1200px + $side-panel-width) {
   #section-list { margin-left: $side-panel-width; }
   #side-panel {
     left: 0;
+    opacity: 1;
     .panel-toggle { display: none; }
   }
   #side-panel.open {
@@ -67,7 +68,7 @@ $side-panel-width: 400px !default;
   }
   #side-panel #editor-panel { padding-top: 20px; }
 }
-
+*/
 
 /*
  * Layout editor sections and segments
@@ -88,17 +89,6 @@ $side-panel-width: 400px !default;
     transform: translate(-50%, -50%);
     color: #fff;
   }
-}
-.section-list-item .section-bg-container:before {
-  content: '';
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-top: 1px solid rgba($brand-primary, 0.333);
-  border-bottom: 1px solid rgba($brand-primary, 0.333);
 }
 .section-list-item .section-nav {
   position: absolute;
@@ -123,9 +113,28 @@ $side-panel-width: 400px !default;
     }
   }
 }
+.section-list-item .section {
+  &.active {
+    outline: $outline-width solid rgba($brand-primary, 0.333);
+  }
+  .section-bg-container:before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid rgba($brand-primary, 0.333);
+    border-bottom: 1px solid rgba($brand-primary, 0.333);
+  }
+}
 .section-list-item .column {
   position: relative;
 
+  &.active {
+    outline: $outline-width solid rgba($gray-base, 0.1667);
+  }
   &:before {
     content: '';
     pointer-events: none;
@@ -160,12 +169,13 @@ $side-panel-width: 400px !default;
     opacity: 1;
   }
 }
-.section-list-item .segment.active,
 .section-list-item .segment.disabled {
-  .segment-content { outline: none; }
   .segment-nav { display: none !important; }
 }
 .section-list-item .segment {
+  &.active {
+    outline: $outline-width solid rgba($brand-info, 0.333);
+  }
   .segment-nav {
     position: absolute;
     top: 0;
