@@ -30,9 +30,6 @@
 }
 
 /* Gutters */
-.section.gutters .section-content .column {
-  @include padding-vertical;
-}
 .section.no-gutters .container-fluid {
   @include padding-horizontal(0);
 }
