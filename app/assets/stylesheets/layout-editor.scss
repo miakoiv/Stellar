@@ -115,6 +115,7 @@ $outline-width: 15px !default;
 }
 .section-list-item .section {
   &.active {
+    z-index: 2;
     outline: $outline-width solid rgba($brand-primary, 0.333);
   }
   .section-bg-container:before {
@@ -133,6 +134,7 @@ $outline-width: 15px !default;
   position: relative;
 
   &.active {
+    z-index: 2;
     outline: $outline-width solid rgba($gray-base, 0.1667);
   }
   &:before {
@@ -174,6 +176,7 @@ $outline-width: 15px !default;
 }
 .section-list-item .segment {
   &.active {
+    z-index: 2;
     outline: $outline-width solid rgba($brand-info, 0.333);
   }
   .segment-nav {
