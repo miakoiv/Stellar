@@ -483,6 +483,8 @@ en:
         resource_id: Target
         template: Content type
         shape: Block shape
+        margin_top: Top margin
+        margin_bottom: Bottom margin
         alignment: Content alignment
         inset: Content inset
         background_color: Background color

@@ -483,6 +483,8 @@ fi:
         resource_id: Kohde
         template: Sisällön tyyppi
         shape: Lohkon muoto
+        margin_top: Ylämarginaali
+        margin_bottom: Alamarginaali
         alignment: Sisällön tasaus
         inset: Sisällön sisennys
         background_color: Taustaväri

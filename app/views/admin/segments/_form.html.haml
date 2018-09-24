@@ -7,8 +7,8 @@
     %hr
     %fieldset
       = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio')}
-      = f.form_group do
-        = f.check_box :jumbotron
+      = f.range_field :margin_top, min: 0, max: 80, step: 10
+      = f.range_field :margin_bottom, min: 0, max: 80, step: 10
       .form-group
         = f.label col(Segment, :alignment)
         .btn-group{data: {toggle: 'buttons'}}
@@ -23,6 +23,8 @@
             %label.btn.btn-default{class: segment.inset == inset && 'active'}
               = f.radio_button_without_bootstrap :inset, inset
               = title
+      = f.form_group do
+        = f.check_box :jumbotron
       .form-group
         = f.label col(Segment, :shadow)
         .btn-group{data: {toggle: 'buttons'}}
