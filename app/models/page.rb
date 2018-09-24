@@ -78,6 +78,7 @@ class Page < ActiveRecord::Base
 
   #---
   validates :title, presence: true
+  validates :slug, presence: true, format: {with: /\A[\w-]+\z/i}
 
   #---
   before_save :conditionally_disable
@@ -127,11 +128,6 @@ class Page < ActiveRecord::Base
 
   def slugger
     [:title, [:title, :id]]
-  end
-
-  # Prevent FriendlyId from changing slugs on route and external pages.
-  def should_generate_new_friendly_id?
-    !(route? || external?) && title_changed? || super
   end
 
   def to_s

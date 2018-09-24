@@ -67,7 +67,7 @@ class Admin::PagesController < ApplicationController
         format.json { render :edit, status: :ok, location: edit_admin_page_path(@page) }
       else
         format.html { render :edit }
-        format.js { render json: @page.errors, status: :unprocessable_entity }
+        format.js { render :rollback }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
