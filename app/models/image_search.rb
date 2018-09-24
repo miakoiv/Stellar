@@ -14,4 +14,8 @@ class ImageSearch < Searchlight::Search
   def search_store
     query.where(store: store)
   end
+
+  def search_keyword
+    query.where('attachment_file_name LIKE ?', "%#{keyword}%")
+  end
 end

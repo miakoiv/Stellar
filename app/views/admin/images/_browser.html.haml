@@ -14,4 +14,13 @@
         .truncate{title: image.attachment_file_name}
           = image.attachment_file_name
 
-= paginate images, window: 2, remote: true
+.row
+  .col-xs-8
+    = paginate images, window: 2, remote: true
+  .col-xs-4.search
+    = form_for @search, url: admin_images_path, method: :get, remote: true do |f|
+      .form-group
+        .input-group
+          = f.search_field 'keyword', autocomplete: 'off', class: 'form-control', placeholder: t('.search')
+          .input-group-btn
+            %button.btn.btn-default{type: 'submit'}= icon('search')

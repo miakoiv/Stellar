@@ -114,6 +114,9 @@ fi:
         make_default: Vieraille
         select_categories: Tuoteryhmät
         join: Liity
+    images:
+      browser:
+        search: Hae kuvan nimellä…
     inventories:
       index:
         new_inventory: Uusi varasto

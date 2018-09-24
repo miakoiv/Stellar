@@ -1062,11 +1062,13 @@ i.icon {
  */
 #picture-modal .well { margin-bottom: 0; }
 #image-browser {
+  .search {
+    margin-top: 20px;
+
+    .form-group { margin: 0; }
+  }
   .pagination {
-    position: absolute;
-    top: 0;
-    right: 60px;
-    margin: 0.75em 0;
+    margin: 20px 0 0;
   }
 }
 .dropzone {

@@ -134,6 +134,9 @@ en:
         make_default: For guests
         select_categories: Categories
         join: Join
+    images:
+      browser:
+        search: Search by image name…
     inventories:
       index:
         new_inventory: New inventory
