@@ -19,6 +19,9 @@ class Picture < ActiveRecord::Base
   default_scope { sorted }
 
   #---
+  validates :image, presence: true
+
+  #---
   before_validation :assign_purpose
 
   #---
