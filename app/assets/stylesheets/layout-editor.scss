@@ -52,6 +52,11 @@ $outline-width: 15px !default;
   display: block;
   @include clearfix;
 }
+#side-panel .actions {
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid $navmenu-default-border;
+}
 
 /* Permanent side panel on the largest screens */
 /*
