@@ -7,4 +7,7 @@
         = link_to edit_admin_segment_path(segment), remote: true do
           = icon('edit')
     %li
+      %a.copy-segment{role: 'button', data: {url: copy_admin_segment_path(segment)}}
+        = icon('copy', class: 'fa-fw')
+    %li
       = link_to icon('cog', class: 'fa-fw'), settings_admin_segment_path(segment), remote: true

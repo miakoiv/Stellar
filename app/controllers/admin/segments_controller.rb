@@ -4,9 +4,9 @@ class Admin::SegmentsController < ApplicationController
 
   include Reorderer
   before_action :authenticate_user!
-  before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :destroy]
+  before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :copy, :destroy]
 
-  authority_actions settings: 'update', modify: 'update', reorder: 'update'
+  authority_actions settings: 'update', modify: 'update', reorder: 'update', paste: 'create'
 
   # No layout, this controller never renders HTML.
 
@@ -40,7 +40,6 @@ class Admin::SegmentsController < ApplicationController
         .merge(Segment.default_settings)
         .merge(priority: @column.segments.count)
     )
-
     respond_to do |format|
       if @segment.save
         track @segment, @segment.column.section.page
@@ -84,6 +83,28 @@ class Admin::SegmentsController < ApplicationController
     render nothing: true
   end
 
+  # GET /admin/segments/1/copy.json
+  def copy
+    respond_to :json
+  end
+
+  # POST /admin/columns/1/segments/paste.js
+  def paste
+    @column = Column.find(params[:column_id])
+    authorize_action_for @column, at: current_store
+    @segment = @column.segments.build(
+      segment_attributes.merge(priority: @column.segments.count)
+    )
+    respond_to do |format|
+      if @segment.save
+        track @segment, @segment.column.section.page, {action: :create}
+        format.js { render :create }
+      else
+        format.json { render json: @segment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /admin/segments/1.js
   def destroy
     authorize_action_for @segment, at: current_store
@@ -117,5 +138,9 @@ class Admin::SegmentsController < ApplicationController
         :inverse, :jumbotron, :shadow,
         :animation, :velocity
       )
+    end
+
+    def segment_attributes
+      params.require(:segment).permit!
     end
 end

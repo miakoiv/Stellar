@@ -176,8 +176,12 @@ Rails.application.routes.draw do
             member do
               get :settings
               patch :modify
+              get :copy
             end
-            post :reorder, on: :collection
+            collection do
+              post :reorder
+              post :paste
+            end
           end
           member do
             get :settings

@@ -94,6 +94,8 @@ class Segment < ActiveRecord::Base
   belongs_to :column, touch: true
   belongs_to :resource, polymorphic: true
 
+  accepts_nested_attributes_for :pictures
+
   before_validation :clear_unwanted_attributes
   after_save :schedule_content_update, if: -> (segment) { segment.body_changed? }
 
