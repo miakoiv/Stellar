@@ -1,6 +1,9 @@
-%nav.section-nav.navbar.navbar-default
+%nav.section-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav.navbar-left
     %li
       %a{role: 'button'}= drag_handle
     %li
       = link_to icon('cog', class: 'fa-fw'), settings_admin_section_path(section), remote: true
+    - if current_user.can_delete?(section, at: current_store)
+      %li
+        = link_to icon('trash-o', class: 'fa-fw'), admin_section_path(section), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

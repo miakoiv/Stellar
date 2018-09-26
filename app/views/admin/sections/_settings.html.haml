@@ -19,7 +19,3 @@
     changeDelay: 500
 
 = render partial: 'admin/pictures/edit_collection', object: section, as: :pictureable, locals: {grid_columns: 2}
-
-%fieldset.actions
-  - if current_user.can_delete?(section, at: current_store)
-    = link_to icon('trash-o'), admin_section_path(section), method: :delete, remote: true, class: 'btn btn-danger btn-block', data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

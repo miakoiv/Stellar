@@ -19,7 +19,3 @@
 
 - if content_for?(:supplemental)
   = yield :supplemental
-
-%fieldset.actions
-  - if current_user.can_delete?(segment, at: current_store)
-    = link_to icon('trash-o'), admin_segment_path(segment), method: :delete, remote: true, class: 'btn btn-danger btn-block', data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
