@@ -6,6 +6,6 @@
     %li
       = link_to admin_column_segments_path(column), method: :post, remote: true, title: t('.tooltips.new'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('file-o', class: 'fa-fw')
-    %li
+    %li.info
       %a.paste-segment{title: t('.tooltips.paste'), role: 'button', data: {url: paste_admin_column_segments_path(column), toggle: 'tooltip', placement: 'bottom'}}
         = icon('paste', class: 'fa-fw')

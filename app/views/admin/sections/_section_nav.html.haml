@@ -7,6 +7,6 @@
       = link_to settings_admin_section_path(section), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('cog', class: 'fa-fw')
     - if current_user.can_delete?(section, at: current_store)
-      %li
+      %li.danger
         = link_to admin_section_path(section), method: :delete, remote: true, title: t('.tooltips.delete'), data: {toggle: 'tooltip', placement: 'bottom', confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')} do
           = icon('trash-o', class: 'fa-fw')
