@@ -3,10 +3,11 @@
 class Admin::OrderItemsController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :set_order_and_item, except: [:index, :create]
 
-  # No layout, this controller never renders HTML.
+  layout 'admin'
 
-  # POST /admin/orders/1/order_items
+  # POST /admin/orders/1/order_items.js
   # Use Order#insert to create order items correctly.
   def create
     @order = current_store.orders.find(params[:order_id])
@@ -17,6 +18,7 @@ class Admin::OrderItemsController < ApplicationController
     end
     amount = order_item_params[:amount].to_i
     options = {lot_code: concatenated_lot_code}
+
     respond_to do |format|
       if @order_item = @order.insert(@product, amount, @order.source, options)
         track @order_item, @order
@@ -28,35 +30,38 @@ class Admin::OrderItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /admin/order_items/1
+  # PATCH/PUT /admin/order_items/1.js
   def update
-    @order_item = OrderItem.find(params[:id])
-    @order = @order_item.order
     authorize_action_for @order_item, at: current_store
 
-    respond_to do |format|
-      if @order_item.update(order_item_params)
-        track @order_item, @order
-        @order_item.reload
-        @order.recalculate!
-      end
-
-      format.js
+    if @order_item.update(order_item_params)
+      track @order_item, @order
+      @order.recalculate!
     end
+
+    respond_to :js
   end
 
-  # DELETE /admin/order_items/1
+  # DELETE /admin/order_items/1.js
   def destroy
-    @order_item = OrderItem.find(params[:id])
-    @order = @order_item.order
+    authorize_action_for @order_item, at: current_store
 
     if @order_item.destroy
       track @order_item, @order
       @order.recalculate!
     end
+
+    respond_to :js
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_order_and_item
+      @order_item = OrderItem.find(params[:id])
+      @order = @order_item.order
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params
       params.require(:order_item).permit(
         :product_id, :amount, :lot_code, :serial,
