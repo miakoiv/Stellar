@@ -12,4 +12,6 @@
     revert: 200
   ).bind 'sortupdate', (e, ui) ->
     $.post '#{admin_reorder_documents_path}',
-      {reorder: $(this).sortable('toArray')}
+      {reorder: $(this).sortable('toArray')},
+      (data, status, xhr) ->
+        $(document).trigger 'documentable:reordered'

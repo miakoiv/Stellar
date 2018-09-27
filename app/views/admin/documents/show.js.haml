@@ -1,3 +1,4 @@
 $("#{j render partial: 'admin/documents/edit', object: @document, as: :document}").appendTo('##{dom_id(@documentable, :documents)}');
 $("##{dom_id(@document)}").initialize();
 $('##{dom_id(@documentable, :documents)}').sortable('refresh');
+$(document).trigger('documentable:added');
