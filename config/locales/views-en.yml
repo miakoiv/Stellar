@@ -110,6 +110,12 @@ en:
         new_category: New category
       form:
         edit_page: Edit page
+    columns:
+      column_nav:
+        tooltips:
+          settings: Settings
+          new: New
+          paste: Paste
     customer_assets:
       index:
         new_customer_asset: New asset
@@ -323,6 +329,10 @@ en:
         solid_color: "[No gradient]"
         gradient_center: centered
       section_nav:
+        tooltips:
+          reorder: Reorder
+          settings: Settings
+          delete: Delete
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
     segments:
@@ -330,6 +340,12 @@ en:
         fluid_ratio: from content
         not_animated: not animated
       segment_nav:
+        tooltips:
+          move: Move
+          edit: Edit
+          copy: Copy
+          settings: Settings
+          delete: Delete
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.
       templates:

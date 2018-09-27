@@ -1,16 +1,19 @@
 %nav.segment-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav.navbar-right
     %li.segment-handle
-      %a{role: 'button'}= icon('arrows', class: 'fa-fw')
+      %a{title: t('.tooltips.move'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'}}
+        = icon('arrows', class: 'fa-fw')
     - if segment.edit_in_place?
       %li
-        = link_to edit_admin_segment_path(segment), remote: true do
-          = icon('edit')
+        = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+          = icon('edit', class: 'fa-fw')
     %li
-      %a.copy-segment{role: 'button', data: {url: copy_admin_segment_path(segment)}}
+      %a.copy-segment{title: t('.tooltips.copy'), role: 'button', data: {url: copy_admin_segment_path(segment), toggle: 'tooltip', placement: 'bottom'}}
         = icon('copy', class: 'fa-fw')
     %li
-      = link_to icon('cog', class: 'fa-fw'), settings_admin_segment_path(segment), remote: true
+      = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+        = icon('cog', class: 'fa-fw')
     - if current_user.can_delete?(segment, at: current_store)
       %li
-        = link_to icon('trash-o', class: 'fa-fw'), admin_segment_path(segment), method: :delete, remote: true, data: {confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
+        = link_to admin_segment_path(segment), method: :delete, remote: true, title: t('.tooltips.delete'), data: {toggle: 'tooltip', placement: 'bottom', confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')} do
+          = icon('trash-o', class: 'fa-fw')

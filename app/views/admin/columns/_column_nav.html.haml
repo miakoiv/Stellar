@@ -1,9 +1,11 @@
 %nav.column-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav.navbar-left
     %li
-      = link_to icon('cog', class: 'fa-fw'), settings_admin_column_path(column), remote: true
+      = link_to settings_admin_column_path(column), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+        = icon('cog', class: 'fa-fw')
     %li
-      = link_to icon('file-o', class: 'fa-fw'), admin_column_segments_path(column), remote: true, method: :post
+      = link_to admin_column_segments_path(column), method: :post, remote: true, title: t('.tooltips.new'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+        = icon('file-o', class: 'fa-fw')
     %li
-      %a.paste-segment{role: 'button', data: {url: paste_admin_column_segments_path(column)}}
+      %a.paste-segment{title: t('.tooltips.paste'), role: 'button', data: {url: paste_admin_column_segments_path(column), toggle: 'tooltip', placement: 'bottom'}}
         = icon('paste', class: 'fa-fw')

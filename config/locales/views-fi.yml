@@ -90,6 +90,12 @@ fi:
         new_category: Uusi tuoteryhmä
       form:
         edit_page: Muokkaa sivua
+    columns:
+      column_nav:
+        tooltips:
+          settings: Asetukset
+          new: Uusi
+          paste: Liitä
     customer_assets:
       index:
         new_customer_asset: Uusi omistus
@@ -307,6 +313,10 @@ fi:
         solid_color: "[Ei väriliukua]"
         gradient_center: keskitetty
       section_nav:
+        tooltips:
+          reorder: Järjestele
+          settings: Asetukset
+          delete: Poista
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     segments:
@@ -314,6 +324,12 @@ fi:
         fluid_ratio: sisällön mukaan
         not_animated: ei animaatiota
       segment_nav:
+        tooltips:
+          move: Siirrä
+          edit: Muokkaa
+          copy: Kopioi
+          settings: Asetukset
+          delete: Poista
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
       templates:
