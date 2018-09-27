@@ -251,7 +251,7 @@ class Admin::OrdersController < ApplicationController
       )
     end
 
-    # Limit the search to available order types and default to the first one.
+    # Limit the search to orders in current store.
     def search_params
       @query.merge(store: current_store)
     end
