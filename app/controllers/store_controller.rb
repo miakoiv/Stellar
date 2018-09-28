@@ -145,7 +145,7 @@ class StoreController < ApplicationController
 
   # GET /store/favorites.js
   def show_favorites
-    @products = current_user.favorite_products
+    @products = current_user.favorite_products.at(current_store)
     respond_to :js
   end
 
