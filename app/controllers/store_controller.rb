@@ -143,13 +143,13 @@ class StoreController < ApplicationController
     respond_to :js
   end
 
-  # GET /store/show_favorites.js
+  # GET /store/favorites.js
   def show_favorites
     @products = current_user.favorite_products
     respond_to :js
   end
 
-  # PATCH/PUT /product/:product_id/add_favorite.js
+  # POST /store/favorites/:product_id.js
   def add_favorite
     @product = current_store.products.live.friendly.find(params[:product_id])
     favorites = current_user.favorite_products
@@ -157,7 +157,14 @@ class StoreController < ApplicationController
     respond_to :js
   end
 
-  # GET /product/:product_id/check_favorite.json
+  # DELETE /store/favorites/:product_id.js
+  def remove_favorite
+    @product = current_store.products.live.friendly.find(params[:product_id])
+    current_user.favorite_products.delete(@product)
+    respond_to :js
+  end
+
+  # GET /store/favorites/:product_id.json
   def check_favorite
     @product = current_store.products.live.friendly.find(params[:product_id])
     is_favorite = current_user.favorite_products.include?(@product)

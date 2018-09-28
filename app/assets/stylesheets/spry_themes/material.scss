@@ -612,6 +612,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     bottom: 5px;
     left: 15px;
   }
+  .remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 }
 
 /* Link to more at the bottom of a grid */
