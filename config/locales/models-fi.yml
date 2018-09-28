@@ -312,6 +312,7 @@ fi:
         product_ids_string: Lisättävät tuotteet
       order_item:
         order_id: Tilaus
+        order_number: Tilausnro
         product_id: Tuote
         lot_code: Eräkoodi
         amount: kpl

@@ -240,7 +240,7 @@ Rails.application.routes.draw do
     end
     resources :orders do
       resources :pictures, shallow: true
-      resources :order_items, shallow: true
+      resources :order_items, shallow: true, except: [:index]
       resources :shipments, shallow: true do
         member do
           patch :refresh
@@ -260,6 +260,7 @@ Rails.application.routes.draw do
         patch :conclude
       end
     end
+    resources :order_items, only: [:index]
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/pictures/reorder', to: 'pictures#reorder', as: :reorder_pictures

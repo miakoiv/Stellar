@@ -163,6 +163,8 @@ fi:
       form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
     order_items:
+      index:
+        title: Toimittamattomat tilausrivit
       new:
         product_query: Kirjoita hakeaksesi tuotteita…
         submit: Lisää
@@ -179,6 +181,7 @@ fi:
     orders:
       incoming:
         title: Saapuvat tilaukset
+        order_items: Toimittamattomat
       outgoing:
         title: Lähtevät tilaukset
       index:

@@ -2,6 +2,8 @@
   - if current_user.can_create?(Order, at: current_store)
     = link_to new_admin_order_path, class: 'btn btn-primary' do
       = icon('plus', t('admin.orders.index.new_order'))
+  = link_to admin_order_items_path, class: 'btn btn-default' do
+    = icon('list', t('.order_items'))
   %h1= icon('inbox', t('.title'))
 
 = render partial: 'search', locals: {url: incoming_admin_orders_path, order_types: current_group.incoming_order_types}

@@ -312,6 +312,7 @@ en:
         product_ids_string: Products to add
       order_item:
         order_id: Order
+        order_number: Order №
         product_id: Product
         lot_code: Lot code
         amount: pc

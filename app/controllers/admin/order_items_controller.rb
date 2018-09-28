@@ -7,6 +7,15 @@ class Admin::OrderItemsController < ApplicationController
 
   layout 'admin'
 
+  # GET /admin/order_items
+  def index
+    authorize_action_for OrderItem, at: current_store
+    @query = saved_search_query('order_item', 'admin_order_item_search')
+    @search = OrderItemSearch.new(search_params)
+    results = @search.results
+    @order_items = results.page(params[:page])
+  end
+
   # POST /admin/orders/1/order_items.js
   # Use Order#insert to create order items correctly.
   def create
@@ -67,6 +76,10 @@ class Admin::OrderItemsController < ApplicationController
         :product_id, :amount, :lot_code, :serial,
         :price, :customer_code
       )
+    end
+
+    def search_params
+      @query.merge(store: current_store)
     end
 
     # Lot codes and serials are joined by hyphen if both are present,

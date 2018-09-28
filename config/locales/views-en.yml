@@ -183,6 +183,8 @@ en:
       form:
         inventory_entry_help_html: Purchases only. Corrections and transfers via <a href="%{path}">Inventory levels</a>.
     order_items:
+      index:
+        title: Items pending shipping
       new:
         product_query: Type to search for products…
         submit: Add
@@ -199,6 +201,7 @@ en:
     orders:
       incoming:
         title: Incoming orders
+        order_items: Items pending
       outgoing:
         title: Outgoing orders
       index:

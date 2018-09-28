@@ -1,0 +1,30 @@
+.page-header
+  = link_to incoming_admin_orders_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1= icon('list', t('.title'))
+
+= render partial: 'search'
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= col(OrderItem, :order_number)
+      %th= col(OrderItem, :product_title)
+      %th.col-xs-1.text-right= col(OrderItem, :ordered)
+      %th.col-xs-1.text-right= col(OrderItem, :shipped)
+      %th.actions
+  %tbody
+    - @order_items.each do |order_item|
+      %tr[order_item]
+        %td= order_item.order.number
+        %td
+          - if order_item.lot_code.present?
+            .pull-right
+              .label.label-primary= order_item.lot_code
+          = product_header order_item
+        %td.text-right= order_item.amount
+        %td.text-right= order_item.amount_shipped
+        %td.actions
+          = link_to icon('info', t('actions.show')), admin_order_path(order_item.order), class: 'btn btn-default btn-sm'
+
+= paginate @order_items
