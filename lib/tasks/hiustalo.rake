@@ -3,6 +3,42 @@
 require 'csv'
 
 namespace :products do
+  desc "Import Hiustalo product stock from CSV input"
+  task :hiustalo_stock, [:file] => :environment do |task, args|
+    store = Store.find_by name: 'Hiustalo Outlet'
+    store.products.find_each(batch_size: 50) do |product|
+      product.update(available_at: nil)
+    end
+    inventory = store.inventories.first
+    inventory.inventory_items.destroy_all
+
+    CSV.foreach(args.file,
+      encoding: 'utf-8',
+      col_sep: ';',
+      skip_blanks: true,
+      headers: true,
+      header_converters: lambda { |h| h.downcase.to_sym }
+    ) do |row|
+      code = row[:viivakoodi2].presence || row[:viivakoodi].presence
+      amount = row[:myyntivarasto].to_i
+      next if code.nil? || amount <= 0
+      product = store.products.find_by(code: code)
+      if product.nil?
+        warn "! %-20s %4.0i %s" % [code, amount, row[:nimi]]
+        next
+      end
+      product.update(
+        trade_price: row[:ostohinta].to_money,
+        retail_price: row[:myyntihinta].to_money,
+        available_at: Date.today
+      )
+      product.restock!(inventory, Date.today.to_s, nil, amount)
+      puts "+ %-20s %4.0i %s" % [code, amount, product.title]
+    end
+  end
+end
+
+namespace :products do
   desc "Import Hiustalo products from CSV input"
   task :hiustalo, [:file] => :environment do |task, args|
     store = Store.find_by name: 'Hiustalo Outlet'
