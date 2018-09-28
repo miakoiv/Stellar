@@ -1,2 +1,3 @@
-$('#favorites-modal').find('.favorite-products > ul').html("#{j render partial: 'products/favorite_product', collection: @products, as: :product}");
-$('#favorites-modal').modal('show');
+- if @products.any?
+  $('#favorites-modal').find('.favorite-products > ul').html("#{j render partial: 'products/favorite_product', collection: @products, as: :product}");
+  $('#favorites-modal').modal('show');

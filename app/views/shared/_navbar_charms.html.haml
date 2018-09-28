@@ -3,7 +3,7 @@
     = icon('search', id: 'lookup-open')
     = icon('search-minus', id: 'lookup-close', style: 'display: none;')
 - if current_store.favorites?
-  %li#favorites.lg
+  %li#favorites.lg{class: current_user.favorite_products.any? && 'loaded'}
     = link_to favorites_path, remote: true do
       = icon('heart')
 - if user_signed_in?
