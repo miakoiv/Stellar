@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   # Catch bona fide storefront urls that are not accessible via slugs.
   get  '/store', to: 'store#index', as: :store
   get  '/store/lookup', to: 'store#lookup', as: :lookup
+  get  '/store/favorites', to: 'store#show_favorites', as: :favorites
   get '/cart/quote/:recipient', to: 'store#quote', as: :send_quote
   get  '/cart/delete',  to: 'store#delete_cart', as: :delete_cart
   post '/correspondence/mail_form', to: 'correspondence#mail_form', as: :mail_form
@@ -63,6 +64,8 @@ Rails.application.routes.draw do
 
   # Product specific routes.
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
+  patch '/product/:product_id/like', to: 'store#add_favorite', as: :add_favorite_product
+  get '/product/:product_id/check_favorite', to: 'store#check_favorite', as: :check_favorite
 
   # Category, department, promotion, and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category

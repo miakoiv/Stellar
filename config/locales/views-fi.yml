@@ -488,6 +488,8 @@ fi:
         help: Osta näitä tuotteita yhteensä %{amount} kpl tarjoushintaan %{price}
       vanilla:
         title: Muita tarjoustuotteita
+    add_favorite:
+      title: Tykkää
   store:
     front: Etusivu
     front_blurb: Kauppa avataan pian, tervetuloa lähipäivinä!
@@ -524,6 +526,8 @@ fi:
       title: Myydyimmät tuotteet
     cart_selector:
       return_to_shopping_cart: Palaa omaan ostoskoriin
+    favorites:
+      title: Suosikkituotteesi
     profile: Omat tiedot
   checkout:
     panels:

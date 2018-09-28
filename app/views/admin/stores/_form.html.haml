@@ -36,6 +36,8 @@
               = f.check_box :masonry
             = f.form_group do
               = f.check_box :fancy_cart
+            = f.form_group do
+              = f.check_box :favorites
             .row
               .col-md-8
                 = f.select :theme, Store.theme_options, {}, {class: 'selectize'}

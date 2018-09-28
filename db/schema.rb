@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920121906) do
+ActiveRecord::Schema.define(version: 20180928061121) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -625,6 +625,13 @@ ActiveRecord::Schema.define(version: 20180920121906) do
   end
 
   add_index "products_shipping_methods", ["product_id"], name: "index_products_shipping_methods_on_product_id", using: :btree
+
+  create_table "products_users", id: false, force: :cascade do |t|
+    t.integer "product_id", limit: 4, null: false
+    t.integer "user_id",    limit: 4, null: false
+  end
+
+  add_index "products_users", ["user_id", "product_id"], name: "index_products_users_on_user_id_and_product_id", unique: true, using: :btree
 
   create_table "promoted_items", force: :cascade do |t|
     t.integer  "promotion_id",     limit: 4,                                     null: false

@@ -567,6 +567,7 @@ fi:
         detach_menu: Irroita päävalikko
         masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori
+        favorites: Tuotteiden tykkäys
         footer_page_id: Alatunnistesivu
         locale: Kieli
         country_code: Kotimaa

@@ -1,0 +1,8 @@
+#favorites-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('store.favorites.title')
+      .modal-body.favorite-products.product-grid
+        %ul.straight-grid

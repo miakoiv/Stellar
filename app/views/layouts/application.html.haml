@@ -31,6 +31,8 @@
     #content-wrap
       = yield
 
+    - if current_store.favorites?
+      = render partial: 'shared/favorites_modal'
     = render partial: 'shared/footer'
     = render partial: 'shared/outdated_browser'
     = render partial: 'shared/external_scripts'
