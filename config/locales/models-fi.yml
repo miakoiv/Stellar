@@ -455,6 +455,8 @@ fi:
       promotion_handler/freebie_bundle:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa
+      promotion_handler/vanilla:
+        default_price: Oletushinta
       property:
         value_type: Tyyppi
         measurement_unit_id: Mittayksikkö

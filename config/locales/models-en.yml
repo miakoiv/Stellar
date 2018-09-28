@@ -455,6 +455,8 @@ en:
       promotion_handler/freebie_bundle:
         required_items: Number of items
         discount_percent: Apply discount
+      promotion_handler/vanilla:
+        default_price: Default price
       property:
         value_type: Type
         measurement_unit_id: Measurement unit
