@@ -1,7 +1,7 @@
 var $segment = $("##{dom_id(@segment)}");
 $('.section, .column, .segment').removeClass('active');
 $('.segment').addClass('disabled');
-$segment.removeClass('disabled').addClass('active');
+$segment.removeClass('disabled').addClass('editing');
 $('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
 $('#content-panel').remove();

@@ -1,9 +1,6 @@
-$('.summernote').summernote('destroy');
-$('.navbar-toolbar').empty();
-$('#content-panel').fadeOut(200, function() { this.remove(); });
-$('#section-list > .section-list-item .segment').removeClass('disabled');
+$segment = $('##{dom_id(@segment)}');
 $('#editor-panel').destroySelectized();
 $('#editor-panel').html("#{j render partial: 'admin/segments/settings', object: @segment, as: :segment}");
-$('##{dom_id(@segment)}').replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
-$('##{dom_id(@segment)}').addClass('active');
-$('##{dom_id(@segment)}').initialize();
+$segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
+$segment.addClass('active');
+$segment.initialize();

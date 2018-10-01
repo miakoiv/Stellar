@@ -53,11 +53,12 @@ class Admin::SegmentsController < ApplicationController
   # PATCH/PUT /admin/segments/1.js
   def update
     authorize_action_for @segment, at: current_store
+    in_place_edit = params[:in_place_edit].presence
 
     respond_to do |format|
       if @segment.update(segment_params)
         track @segment, @segment.column.section.page
-        format.js { render :update }
+        format.js { render in_place_edit ? :content_update : :update }
       else
         format.js { render :rollback }
       end

@@ -210,6 +210,9 @@ $navbar-icon-padding: 12px !default;
     z-index: 2;
     outline: $outline-width solid rgba($brand-info, 0.5);
   }
+  &.editing {
+    .segment-content { opacity: 0; }
+  }
   &.disabled {
     .segment-nav { display: none !important; }
   }
@@ -236,7 +239,6 @@ $navbar-icon-padding: 12px !default;
   position: absolute;
   z-index: 2;
   padding: 0;
-  background-color: $body-bg;
   line-height: 1.4; // matches layouts.css
 }
 #content-panel .panel-close {
@@ -261,20 +263,21 @@ $navbar-icon-padding: 12px !default;
   position: absolute;
   left: -15px;
   right: -15px;
-  top: -20px;
+  top: -15px;
   bottom: 0;
   z-index: -1;
-  background-color: $body-bg;
   @include box-shadow(0 0 12px rgba(0, 0, 0, 0.8));
 }
 #content-panel .segment-form.text .note-editor {
   border: 0;
   border-radius: 0;
+  background-color: transparent;
   caret-color: $brand-primary;
 
   .note-editing-area .note-editable,
   .note-editing-area .note-placeholder {
     padding: 0;
+    background-color: transparent;
 
     h1:first-child,
     h2:first-child,
