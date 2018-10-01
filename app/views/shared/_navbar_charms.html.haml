@@ -2,6 +2,10 @@
   %a{data: {toggle: 'collapse', target: '#navbar-lookup'}, tabindex: 0, role: 'button'}
     = icon('search', id: 'lookup-open')
     = icon('search-minus', id: 'lookup-close', style: 'display: none;')
+- if current_store.favorites?
+  %li#favorites.lg{class: current_user.favorite_products.at(current_store).any? && 'loaded'}
+    = link_to favorites_path, remote: true do
+      = icon('heart')
 - if user_signed_in?
   %li.lg
     - if can_select_customer?

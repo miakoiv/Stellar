@@ -612,6 +612,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     bottom: 5px;
     left: 15px;
   }
+  .remove {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
 }
 
 /* Link to more at the bottom of a grid */
@@ -811,6 +816,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   grid-row: 2 / span 1;
   order: 2;
   margin-bottom: 40px;
+
+  .add-favorite {
+    @extend .pull-right;
+    margin-top: -15px;
+
+    > a {
+      @extend .btn-outline-danger;
+    }
+  }
 
   .product-code {
     margin-bottom: 20px;

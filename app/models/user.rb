@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 
+  has_and_belongs_to_many :favorite_products, -> { uniq }, class_name: 'Product'
+
   has_many :orders, dependent: :destroy
   has_many :customer_orders, class_name: 'Order', foreign_key: :customer_id, inverse_of: :customer
 

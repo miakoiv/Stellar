@@ -97,9 +97,10 @@ class Admin::PromotionsController < ApplicationController
     }
     ActiveRecord::Base.transaction do
       product_ids.each do |product_id|
-        @promotion.promoted_items.find_or_create_by(
-          product: Product.find(product_id)
-        )
+        @promotion.promoted_items
+          .create_with(
+            price_cents: @promotion.promotion_handler.default_price_cents
+          ).find_or_create_by(product: Product.find(product_id))
       end
     end
     respond_to :js
@@ -118,9 +119,10 @@ class Admin::PromotionsController < ApplicationController
       category_ids.each do |category_id|
         category = Category.find(category_id)
         category.products.live.each do |product|
-          @promotion.promoted_items.find_or_create_by(
-            product: product
-          )
+          @promotion.promoted_items
+            .create_with(
+              price_cents: @promotion.promotion_handler.default_price_cents
+            ).find_or_create_by(product: Product.find(product_id))
         end
       end
     end
@@ -139,8 +141,9 @@ class Admin::PromotionsController < ApplicationController
         :name, :group_id, :promotion_handler_type,
         :first_date, :last_date,
         promotion_handler_attributes: [
-          :id, :description,
-          :order_total, :required_items, :items_total, :discount_percent
+          :id, :description, :default_price,
+          :order_total, :required_items, :items_total,
+          :discount_percent
         ]
       )
     end

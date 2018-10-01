@@ -1,0 +1,11 @@
+.add-favorite
+  = link_to icon('heart', t('.title')), add_favorite_path(product), method: :post, remote: true, id: 'add-favorite-button', class: 'btn btn-default disabled', data: {url: check_favorite_path(product)}
+
+  :coffee
+    $button = $('#add-favorite-button')
+    $.ajax
+      url: $button.data 'url'
+      dataType: 'json'
+    .done (data) ->
+      unless data.isFavorite
+        $('#add-favorite-button').removeClass 'disabled'

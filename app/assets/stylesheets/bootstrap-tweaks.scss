@@ -173,6 +173,8 @@ body {
     top: 5px;
   }
 }
+#favorites.loaded > a { @extend .text-danger; }
+
 
 /* Adding .responsive hides a nav on mobile */
 .navbar-nav.responsive { @extend .hidden-xs; }

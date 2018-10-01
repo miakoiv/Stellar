@@ -1,0 +1,30 @@
+%li.grid-item.single.product{id: dom_id(product, :favorite), class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
+  = link_to show_product_path(product) do
+    .product-image= picture_variant_tag product.cover_picture(current_store.card_image_type), :postcard
+    .product-text
+      %h3
+        = product.title
+        %span.small= product.subtitle
+    .promotions
+      = render partial: 'products/promoted_item', collection: product.live_promoted_items(selected_group)
+    - if pricing_shown? && premium_pricing.present?
+      .premium-price
+        %span.teaser= selected_group.premium_teaser
+        %p.price.currency
+          = price_tag *premium_pricing.for_display(product)
+  .buy-now
+    - if pricing_shown?
+      %p.price.currency
+        = price_tag *pricing.for_display(product)
+    - if can_order? && product.purchasable?
+      - if product.orderable?(default_inventory, nil)
+        = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
+          = hidden_field_tag :amount, 1
+          %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
+      - else
+        %p.text-danger
+          = icon('exclamation-circle')
+          = col(Product, :out_of_stock)
+  .remove
+    = link_to remove_favorite_path(product), method: :delete, remote: true, class: 'btn btn-xs btn-outline-danger' do
+      = icon('remove')

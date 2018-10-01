@@ -3,6 +3,9 @@
 class PromotionHandler
   class Vanilla < PromotionHandler
 
+    monetize :default_price_cents, allow_nil: true, numericality: {greater_than: 0}
+
+    #---
     # Vanilla promotions do not apply adjustments since order items
     # are created with the promoted price.
     def apply!(order, items)

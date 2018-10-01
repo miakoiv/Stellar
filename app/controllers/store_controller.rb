@@ -14,11 +14,11 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
-  before_action :set_header_and_footer
+  before_action :set_header_and_footer, except: [:show_favorites]
   before_action :set_categories,
-    except: [:index, :lookup, :delete_cart, :order_product]
+    except: [:index, :lookup, :delete_cart, :order_product, :show_favorites]
   before_action :set_departments,
-    except: [:index, :lookup, :delete_cart, :order_product]
+    except: [:index, :lookup, :delete_cart, :order_product, :show_favorites]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category]
   before_action :find_department, only: [:show_department]
@@ -141,6 +141,34 @@ class StoreController < ApplicationController
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
     respond_to :js
+  end
+
+  # GET /store/favorites.js
+  def show_favorites
+    @products = current_user.favorite_products.at(current_store)
+    respond_to :js
+  end
+
+  # POST /store/favorites/:product_id.js
+  def add_favorite
+    @product = current_store.products.live.friendly.find(params[:product_id])
+    favorites = current_user.favorite_products
+    favorites << @product unless favorites.include?(@product)
+    respond_to :js
+  end
+
+  # DELETE /store/favorites/:product_id.js
+  def remove_favorite
+    @product = current_store.products.live.friendly.find(params[:product_id])
+    current_user.favorite_products.delete(@product)
+    respond_to :js
+  end
+
+  # GET /store/favorites/:product_id.json
+  def check_favorite
+    @product = current_store.products.live.friendly.find(params[:product_id])
+    is_favorite = current_user.favorite_products.include?(@product)
+    render json: {isFavorite: is_favorite}
   end
 
   private

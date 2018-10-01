@@ -456,6 +456,8 @@ fi:
       promotion_handler/freebie_bundle:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa
+      promotion_handler/vanilla:
+        default_price: Oletushinta
       property:
         value_type: Tyyppi
         measurement_unit_id: Mittayksikkö
@@ -568,6 +570,7 @@ fi:
         detach_menu: Irroita päävalikko
         masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori
+        favorites: Tuotteiden tykkäys
         footer_page_id: Alatunnistesivu
         locale: Kieli
         country_code: Kotimaa

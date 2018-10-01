@@ -78,6 +78,8 @@ class Product < ActiveRecord::Base
   # Customer assets referring to this product.
   has_many :customer_assets, dependent: :destroy
 
+  scope :at, -> (store) { where(store: store) }
+
   # Real products are everything but internal costs.
   scope :real, -> { where.not(purpose: 6) }
 

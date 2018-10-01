@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920121906) do
+ActiveRecord::Schema.define(version: 20180928135248) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -626,6 +626,13 @@ ActiveRecord::Schema.define(version: 20180920121906) do
 
   add_index "products_shipping_methods", ["product_id"], name: "index_products_shipping_methods_on_product_id", using: :btree
 
+  create_table "products_users", id: false, force: :cascade do |t|
+    t.integer "product_id", limit: 4, null: false
+    t.integer "user_id",    limit: 4, null: false
+  end
+
+  add_index "products_users", ["user_id", "product_id"], name: "index_products_users_on_user_id_and_product_id", unique: true, using: :btree
+
   create_table "promoted_items", force: :cascade do |t|
     t.integer  "promotion_id",     limit: 4,                                     null: false
     t.integer  "product_id",       limit: 4,                                     null: false
@@ -642,15 +649,16 @@ ActiveRecord::Schema.define(version: 20180920121906) do
   add_index "promoted_items", ["promotion_id"], name: "index_promoted_items_on_promotion_id", using: :btree
 
   create_table "promotion_handlers", force: :cascade do |t|
-    t.integer  "promotion_id",      limit: 4,   null: false
-    t.string   "type",              limit: 255, null: false
-    t.string   "description",       limit: 255
-    t.integer  "order_total_cents", limit: 4
-    t.integer  "required_items",    limit: 4
-    t.integer  "items_total_cents", limit: 4
-    t.integer  "discount_percent",  limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "promotion_id",        limit: 4,   null: false
+    t.string   "type",                limit: 255, null: false
+    t.string   "description",         limit: 255
+    t.integer  "default_price_cents", limit: 4
+    t.integer  "order_total_cents",   limit: 4
+    t.integer  "required_items",      limit: 4
+    t.integer  "items_total_cents",   limit: 4
+    t.integer  "discount_percent",    limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "promotion_handlers", ["promotion_id"], name: "index_promotion_handlers_on_promotion_id", using: :btree
