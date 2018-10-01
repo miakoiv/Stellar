@@ -211,7 +211,13 @@ $navbar-icon-padding: 12px !default;
     outline: $outline-width solid rgba($brand-info, 0.5);
   }
   &.editing {
-    .segment-content { opacity: 0; }
+    &:hover {
+      .segment-nav { display: none; }
+    }
+    .segment-content-wrap {
+      &:after { display: none; }
+      .segment-content { opacity: 0; }
+    }
   }
   &.disabled {
     .segment-nav { display: none !important; }
@@ -241,34 +247,30 @@ $navbar-icon-padding: 12px !default;
   padding: 0;
   line-height: 1.4; // matches layouts.css
 }
-#content-panel .panel-close {
-  display: block;
+#content-panel .actions {
+  display: flex;
   position: absolute;
-  top: -45px;
-  right: -41px;
-  z-index: 1;
-  padding: 11.5px 14px 12px 14.5px;
-  font-size: 24px;
-  line-height: 1;
-  border: 1px solid $panel-default-border;
-  border-radius: 25px;
-  color: inherit;
-  background-color: #fff;
-  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  bottom: -50px;
+  right: -5px;
 
-  &:hover { background-color: #f0f0f0; }
+  .btn {
+    margin-left: -1px;
+    border-radius: 0;
+  }
 }
 #content-panel:before {
   content: '';
   position: absolute;
-  left: -15px;
-  right: -15px;
-  top: -15px;
+  left: 0;
+  right: 0;
+  top: 0;
   bottom: 0;
   z-index: -1;
-  @include box-shadow(0 0 12px rgba(0, 0, 0, 0.8));
+  outline: 5px solid rgba($gray-light, 0.667);
+  outline-offset: 5px;
 }
 #content-panel .segment-form.text .note-editor {
+  margin-bottom: 0;
   border: 0;
   border-radius: 0;
   background-color: transparent;

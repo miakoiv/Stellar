@@ -1,6 +1,6 @@
 %fieldset
   = hidden_field_tag :in_place_edit, true
-  ~ f.text_area :body, rows: 10, skip_label: true
+  ~ f.text_area_without_bootstrap :body, rows: 10
 
 :coffee
   $content = $('#segment_body')[0]

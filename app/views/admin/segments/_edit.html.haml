@@ -1,8 +1,7 @@
-= link_to icon('close'), admin_segment_path(segment), remote: true, class: 'panel-close'
-
 .segment-form{class: segment.template}
   = bootstrap_form_for [:admin, segment], remote: true do |f|
     = render partial: "admin/#{segment.to_partial_path}", object: segment, as: :segment, locals: {f: f}
     %fieldset.actions
-      = f.form_group do
-        = f.primary t('helpers.submit.segment.update', template: segment.human_attribute_value(:template)), class: 'btn btn-primary btn-block'
+      = link_to icon('close', t('actions.cancel')), admin_segment_path(segment), remote: true, class: 'btn btn-default'
+      = f.button class: 'btn btn-primary' do
+        = icon('check', t('actions.save'))
