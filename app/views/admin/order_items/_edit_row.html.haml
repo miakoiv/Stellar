@@ -1,5 +1,3 @@
-- locked = !current_user.can_update?(order_item, at: current_store)
-
 %tr[order_item]
   %td.visible-print
     %span.badge= order_item_counter + 1
@@ -12,20 +10,20 @@
       .small
         = icon('info-circle')
         = order_item.product.shipping_notes
-  - if locked
-    %td.text-right
-      = order_item.amount
-  - else
+  - if current_user.can_update?(order_item, at: current_store)
     %td.control
       = form_for [:admin, order_item], remote: true,
           html: {class: 'pull-right immediate'} do |f|
         = f.number_field :amount, min: 1, max: 999, class: 'form-control text-right', tabindex: 1
+  - else
+    %td.text-right
+      = order_item.amount
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
   %td.text-right.currency
     = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
   %td.actions
-    - unless locked
+    - if current_user.can_delete?(order_item, at: current_store)
       = link_to icon('remove'), admin_order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-outline-danger btn-sm'
 
 - if order_item.adjustments.any?

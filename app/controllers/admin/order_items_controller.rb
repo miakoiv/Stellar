@@ -19,6 +19,7 @@ class Admin::OrderItemsController < ApplicationController
   # POST /admin/orders/1/order_items.js
   # Use Order#insert to create order items correctly.
   def create
+    authorize_action_for OrderItem, at: current_store
     @order = current_store.orders.find(params[:order_id])
     @product = if order_item_params[:customer_code].present?
       current_store.products.live.find_by(customer_code: order_item_params[:customer_code])
