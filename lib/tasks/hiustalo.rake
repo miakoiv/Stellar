@@ -6,11 +6,8 @@ namespace :products do
   desc "Import Hiustalo product stock from CSV input"
   task :hiustalo_stock, [:file] => :environment do |task, args|
     store = Store.find_by name: 'Hiustalo Outlet'
-    store.products.find_each(batch_size: 50) do |product|
-      product.update(available_at: nil)
-    end
     inventory = store.inventories.first
-    inventory.inventory_items.destroy_all
+    tax_category = store.tax_categories.first
 
     CSV.foreach(args.file,
       encoding: 'utf-8',
@@ -19,21 +16,42 @@ namespace :products do
       headers: true,
       header_converters: lambda { |h| h.downcase.to_sym }
     ) do |row|
-      code = row[:viivakoodi2].presence || row[:viivakoodi].presence
+      ean = row[:viivakoodi2].presence || row[:viivakoodi].presence
+      next if ean.nil?
+      code = ean.rjust(13, '0')
       amount = row[:myyntivarasto].to_i
-      next if code.nil? || amount <= 0
-      product = store.products.find_by(code: code)
-      if product.nil?
-        warn "! %-20s %4.0i %s" % [code, amount, row[:nimi]]
-        next
-      end
+      category = row[:toimittaja].presence &&
+        store.categories.find_by(
+          'slug LIKE ?', "#{row[:toimittaja].parameterize.remove /\W/}%"
+        )
+      value = row[:pakkauskoko]
+      property = value.present? && row[:yksikkö].present? &&
+        store.properties.joins(:measurement_unit).find_by(
+          measurement_units: {name: row[:yksikkö]}
+        )
+      product = store.products
+        .create_with(
+          title: row[:nimi],
+          categories: [category].compact,
+          tax_category: tax_category
+        ).find_or_create_by(code: code)
       product.update(
         trade_price: row[:ostohinta].to_money,
         retail_price: row[:myyntihinta].to_money,
         available_at: Date.today
       )
-      product.restock!(inventory, Date.today.to_s, nil, amount)
-      puts "+ %-20s %4.0i %s" % [code, amount, product.title]
+      if property.present?
+        product.product_properties
+          .create_with(value: value).find_or_create_by(property: property)
+      end
+      if amount > 0
+        product.restock!(inventory, Date.today.to_s, nil, amount)
+      end
+      puts "%s %-15s %s" % [
+        product.new_record? ? '+' : ' ',
+        code,
+        product.title
+      ]
     end
   end
 end
