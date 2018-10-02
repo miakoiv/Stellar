@@ -1,8 +1,4 @@
 fi:
-  helpers:
-    submit:
-      segment:
-        update: Tallenna tämä %{template}
   activemodel:
     models:
       payment_gateway/none: "[Ulkopuolinen laskutus]"

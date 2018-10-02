@@ -571,6 +571,7 @@ fi:
     back: Palaa
     show: Näytä
     edit: Muokkaa
+    save: Tallenna
     cancel: Kumoa
     delete: Poista
     select: Valitse

@@ -1,8 +1,4 @@
 en:
-  helpers:
-    submit:
-      segment:
-        update: Save this %{template}
   activemodel:
     models:
       payment_gateway/none: "[External billing]"

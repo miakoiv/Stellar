@@ -586,6 +586,7 @@ en:
     back: Back
     show: Show
     edit: Edit
+    save: Save
     cancel: Cancel
     delete: Delete
     select: Select

@@ -63,21 +63,24 @@ $navbar-icon-padding: 12px !default;
 }
 
 /* Permanent side panel on the largest screens */
-/*
 @media (min-width: 1200px + $side-panel-width) {
   #section-list { margin-left: $side-panel-width; }
   #side-panel {
     left: 0;
     opacity: 1;
+    @include box-shadow(0 0 2px 0 rgba(0,0,0,0.8));
     .panel-toggle { display: none; }
   }
   #side-panel.open {
     transform: none;
-    box-shadow: none;
+    @include box-shadow(0 0 2px 0 rgba(0,0,0,0.8));
   }
   #side-panel #editor-panel { padding-top: 20px; }
+  .section-bg-container.fixed-background {
+    background-position-x: $side-panel-width/2;
+  }
 }
-*/
+
 
 /*
  * Layout editor navbars
@@ -109,6 +112,7 @@ $navbar-icon-padding: 12px !default;
 .section-nav {
   top: -1px;
   left: -1px;
+  z-index: 1;
 }
 .column-nav {
   bottom: -1px;
@@ -142,6 +146,13 @@ $navbar-icon-padding: 12px !default;
 .section-list {
   position: relative;
   padding-bottom: 600px;
+
+  &.editing .section-list-item {
+    .section-nav, .column-nav, .segment-nav { display: none; }
+    .section-bg-container:before,
+    .column:before,
+    .segment-content-wrap:after { display: none; }
+  }
 }
 .section-list-item { position: relative; }
 .section-list-item.loading {
@@ -158,7 +169,7 @@ $navbar-icon-padding: 12px !default;
 }
 .section-list-item .section {
   &.active {
-    z-index: 2;
+    z-index: 1;
     outline: $outline-width solid rgba($brand-primary, 0.5);
   }
   .section-bg-container:before {
@@ -210,8 +221,8 @@ $navbar-icon-padding: 12px !default;
     z-index: 2;
     outline: $outline-width solid rgba($brand-info, 0.5);
   }
-  &.disabled {
-    .segment-nav { display: none !important; }
+  &.editing {
+    .segment-content { opacity: 0; }
   }
   .segment-content-wrap {
     pointer-events: none;
@@ -236,45 +247,46 @@ $navbar-icon-padding: 12px !default;
   position: absolute;
   z-index: 2;
   padding: 0;
-  background-color: $body-bg;
   line-height: 1.4; // matches layouts.css
-}
-#content-panel .panel-close {
-  display: block;
-  position: absolute;
-  top: -45px;
-  right: -41px;
-  z-index: 1;
-  padding: 11.5px 14px 12px 14.5px;
-  font-size: 24px;
-  line-height: 1;
-  border: 1px solid $panel-default-border;
-  border-radius: 25px;
-  color: inherit;
-  background-color: #fff;
-  box-shadow: 0 0 6px rgba(0,0,0,0.2);
 
-  &:hover { background-color: #f0f0f0; }
+  &.jumbotron {
+    margin-bottom: 0;
+    background-color: transparent;
+  }
+}
+#content-panel .actions {
+  display: flex;
+  position: absolute;
+  bottom: -50px;
+  right: -5px;
+
+  .btn {
+    margin-left: -1px;
+    border-radius: 0;
+  }
 }
 #content-panel:before {
   content: '';
   position: absolute;
-  left: -15px;
-  right: -15px;
-  top: -20px;
+  left: 0;
+  right: 0;
+  top: 0;
   bottom: 0;
   z-index: -1;
-  background-color: $body-bg;
-  @include box-shadow(0 0 12px rgba(0, 0, 0, 0.8));
+  outline: 5px solid rgba($gray-light, 0.667);
+  outline-offset: 5px;
 }
 #content-panel .segment-form.text .note-editor {
+  margin-bottom: 0;
   border: 0;
   border-radius: 0;
+  background-color: transparent;
   caret-color: $brand-primary;
 
   .note-editing-area .note-editable,
   .note-editing-area .note-placeholder {
     padding: 0;
+    background-color: transparent;
 
     h1:first-child,
     h2:first-child,
