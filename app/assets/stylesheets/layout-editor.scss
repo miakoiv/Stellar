@@ -63,21 +63,24 @@ $navbar-icon-padding: 12px !default;
 }
 
 /* Permanent side panel on the largest screens */
-/*
 @media (min-width: 1200px + $side-panel-width) {
   #section-list { margin-left: $side-panel-width; }
   #side-panel {
     left: 0;
     opacity: 1;
+    @include box-shadow(0 0 2px 0 rgba(0,0,0,0.8));
     .panel-toggle { display: none; }
   }
   #side-panel.open {
     transform: none;
-    box-shadow: none;
+    @include box-shadow(0 0 2px 0 rgba(0,0,0,0.8));
   }
   #side-panel #editor-panel { padding-top: 20px; }
+  .section-bg-container.fixed-background {
+    background-position-x: $side-panel-width/2;
+  }
 }
-*/
+
 
 /*
  * Layout editor navbars
@@ -109,6 +112,7 @@ $navbar-icon-padding: 12px !default;
 .section-nav {
   top: -1px;
   left: -1px;
+  z-index: 1;
 }
 .column-nav {
   bottom: -1px;
@@ -165,7 +169,7 @@ $navbar-icon-padding: 12px !default;
 }
 .section-list-item .section {
   &.active {
-    z-index: 2;
+    z-index: 1;
     outline: $outline-width solid rgba($brand-primary, 0.5);
   }
   .section-bg-container:before {
