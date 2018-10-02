@@ -142,6 +142,13 @@ $navbar-icon-padding: 12px !default;
 .section-list {
   position: relative;
   padding-bottom: 600px;
+
+  &.editing .section-list-item {
+    .section-nav, .column-nav, .segment-nav { display: none; }
+    .section-bg-container:before,
+    .column:before,
+    .segment-content-wrap:after { display: none; }
+  }
 }
 .section-list-item { position: relative; }
 .section-list-item.loading {
@@ -211,16 +218,7 @@ $navbar-icon-padding: 12px !default;
     outline: $outline-width solid rgba($brand-info, 0.5);
   }
   &.editing {
-    &:hover {
-      .segment-nav { display: none; }
-    }
-    .segment-content-wrap {
-      &:after { display: none; }
-      .segment-content { opacity: 0; }
-    }
-  }
-  &.disabled {
-    .segment-nav { display: none !important; }
+    .segment-content { opacity: 0; }
   }
   .segment-content-wrap {
     pointer-events: none;
