@@ -1,5 +1,5 @@
 #pending-items-table
-  - if order.track_shipments? && order.items_pending_shipping.any?
+  - unless order.fully_shipped?
     .table-responsive
       %table.table.table-hover
         %caption= icon('exclamation-circle', t('.title'))
@@ -10,9 +10,10 @@
             %th.col-xs-1.text-right= col(OrderItem, :ordered)
             %th.col-xs-1.text-right= col(OrderItem, :shipped)
         %tbody
-          - order.items_pending_shipping.each do |order_item|
+          - order.order_items.pending.each do |order_item|
             %tr
               %td= product_header order_item
               %td= order_item.lot_code
               %td.text-right= order_item.amount
-              %td.text-right.warning.text-warning= order_item.amount_shipped
+              %td.text-right.warning.text-warning
+                = order_item.shipped || 0

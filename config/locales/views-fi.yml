@@ -169,7 +169,10 @@ fi:
         product_query: Kirjoita hakeaksesi tuotteita…
         submit: Lisää
       pending:
-        title: Toimitusta odottavat tuotteet
+        title: Toimittamattomat tuotteet
+      search:
+        customer: Valitse asiakas
+        product_query: Kirjoita hakeaksesi tuotteita…
     order_types:
       index:
         new_order_type: Uusi tilauslaji

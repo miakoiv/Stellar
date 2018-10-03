@@ -12,9 +12,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :order, inverse_of: :order_items, touch: true, counter_cache: true
   delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
-  # Related transfer items in active shipments, see #amount_shipped.
-  has_many :active_transfer_items, -> { joins(transfer: :shipment).merge(Shipment.active) }, class_name: 'TransferItem'
-
+  has_many :transfer_items
   belongs_to :product, required: true
   delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
 
@@ -31,6 +29,7 @@ class OrderItem < ActiveRecord::Base
   scope :real, -> { joins(:product).merge(Product.real) }
   scope :tangible, -> { joins(:product).merge(Product.tangible) }
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
+  scope :pending, -> { joins(:product).merge(Product.tangible).where('shipped IS NULL OR shipped < amount') }
 
   #---
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}, on: :update
@@ -152,16 +151,38 @@ class OrderItem < ActiveRecord::Base
     product.satisfies?(inventory, lot_code, amount)
   end
 
-  def amount_shipped
+  # Pending items have not been shipped. They may be loaded and
+  # awaiting shipment though, see #waiting? and #waiting below.
+  def pending?
+    tangible? && pending > 0
+  end
+
+  def pending
+    return 0 if !tangible?
+    amount - (shipped || 0)
+  end
+
+  # Updates the shipped amount from completed transfer items.
+  def update_shipped!
+    update!(shipped: completed_transfer_items.sum(:amount))
+  end
+
+  # Transfer items in active shipments, shipped or not. See #loaded below.
+  def active_transfer_items
+    transfer_items.joins(transfer: :shipment).merge(Shipment.active)
+  end
+
+  def loaded
     active_transfer_items.sum(:amount)
   end
 
-  def amount_pending
-    amount - amount_shipped
+  def waiting?
+    tangible? && waiting > 0
   end
 
-  def pending_shipping?
-    track_shipments? && tangible? && amount_pending > 0
+  def waiting
+    return 0 if !tangible?
+    amount - loaded
   end
 
   # Date used in reports is the completion date of the order.
@@ -189,6 +210,11 @@ class OrderItem < ActiveRecord::Base
   end
 
   private
+    # Transfer items in complete shipments, considered shipped.
+    def completed_transfer_items
+      transfer_items.joins(transfer: :shipment).merge(Shipment.complete)
+    end
+
     # Price represented as a Price object for tax calculations.
     def price_as_price
       @price_as_price ||= Price.new(price, price_includes_tax?, tax_rate)

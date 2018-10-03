@@ -1,0 +1,42 @@
+.panel.panel-info
+  .panel-heading
+    %h4.panel-title= t('actions.search')
+  .panel-body
+    = form_for @search, url: admin_order_items_path, method: :get do |f|
+      .row
+        .col-sm-12.col-md-12
+          .form-group
+            = f.select :product_id, [], {}, {multiple: true, placeholder: t('.product_query'), class: 'selectize-tall selectize-list-group', data: {products: @products, selected: @search.raw_options['product_id']}}
+        .col-sm-8.col-md-10
+          .form-group
+            = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.customer')}, {class: 'form-control selectize'}
+        .col-sm-4.col-md-2
+          .form-group
+            = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+:coffee
+  $product = $('#order_item_search_product_id')
+  products = $product.data 'products'
+  selected = $product.data 'selected'
+
+  $product.betterSelectize
+    options: products
+    items: selected
+    valueField: 'id'
+    sortField: [{field: 'title'}, {field: 'subtitle'}]
+    searchField: ['code', 'customer_code', 'title', 'subtitle']
+    diacritics: false
+    render: $.fn.selectize.product_renderer
+    load: (query, callback) ->
+      return callback() unless query.length > 2
+      $.ajax
+        url: '#{query_admin_products_path}'
+        type: 'GET'
+        dataType: 'json'
+        data:
+          q: query
+          having_variants: false
+        error: ->
+          callback()
+        success: (response) ->
+          callback(response)

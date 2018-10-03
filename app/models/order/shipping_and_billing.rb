@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
 
   #---
   def last_completed_shipment
-    shipments.shipped.active.first
+    shipments.complete.first
   end
 
   def should_copy_billing_address?
@@ -48,7 +48,8 @@ class Order < ActiveRecord::Base
   end
 
   def fully_shipped?
-    !(has_pending_shipment? || items_pending_shipping.any?)
+    return true if !track_shipments?
+    order_items.select(&:pending?).none?
   end
 
   def earliest_shipping_at
@@ -122,9 +123,17 @@ class Order < ActiveRecord::Base
     order_items.reload
   end
 
-  # Collects order items that have not been fully shipped yet.
-  def items_pending_shipping
-    order_items.lot_codes_first.select { |item| item.pending_shipping? }
+  def update_shipped!
+    transaction do
+      order_items.each do |order_item|
+        order_item.update_shipped!
+      end
+    end
+  end
+
+  # Collects order items that are awaiting shipping.
+  def items_waiting
+    order_items.lot_codes_first.select { |item| item.waiting? }
   end
 
   def clear_shipping_costs!

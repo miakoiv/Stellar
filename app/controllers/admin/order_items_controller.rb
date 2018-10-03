@@ -10,10 +10,20 @@ class Admin::OrderItemsController < ApplicationController
   # GET /admin/order_items
   def index
     authorize_action_for OrderItem, at: current_store
+
+    order_types = current_group.incoming_order_types
     @query = saved_search_query('order_item', 'admin_order_item_search')
+    @query.merge!('order_type' => order_types)
     @search = OrderItemSearch.new(search_params)
     results = @search.results
     @order_items = results.page(params[:page])
+    @customers = UserSearch.new(
+      store: current_store,
+      group: order_types.map(&:source),
+      except_group: current_store.default_group
+    ).results
+    @products = current_store.products
+      .find((@query['product_id'] || []).reject(&:blank?))
   end
 
   # POST /admin/orders/1/order_items.js

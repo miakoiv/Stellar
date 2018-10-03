@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928135248) do
+ActiveRecord::Schema.define(version: 20181003064042) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -384,6 +384,7 @@ ActiveRecord::Schema.define(version: 20180928135248) do
     t.string   "lot_code",              limit: 255
     t.string   "label",                 limit: 255
     t.integer  "amount",                limit: 4
+    t.integer  "shipped",               limit: 4
     t.integer  "price_cents",           limit: 4
     t.decimal  "tax_rate",                          precision: 5, scale: 2, default: 0.0,   null: false
     t.boolean  "price_includes_tax",                                        default: false, null: false

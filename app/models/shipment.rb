@@ -19,10 +19,20 @@ class Shipment < ActiveRecord::Base
   PACKAGE_TYPES = %w{PC PU ZPF ZPE ZPT CG ZPX PM TB TC TU LTK KA VA}.freeze
 
   default_scope { order(created_at: :desc) }
-  scope :shipped, -> { where.not(shipped_at: nil) }
-  scope :pending, -> { where(shipped_at: nil, cancelled_at: nil) }
-  scope :cancelled, -> { where.not(cancelled_at: nil) }
+
+  # Not cancelled is active.
   scope :active, -> { where(cancelled_at: nil) }
+
+  # Pending is not shipped yet but not cancelled either.
+  scope :pending, -> { where(shipped_at: nil, cancelled_at: nil) }
+
+  # Shipped once, whether cancelled or not.
+  scope :shipped, -> { where.not(shipped_at: nil) }
+
+  # Complete shipments have been shipped but not cancelled.
+  scope :complete, -> { where.not(shipped_at: nil).where(cancelled_at: nil) }
+
+  scope :cancelled, -> { where.not(cancelled_at: nil) }
 
   #---
   with_options on: :update, if: :requires_dimensions?,
@@ -56,10 +66,10 @@ class Shipment < ActiveRecord::Base
 
   #---
   # Loads this shipment into the associated transfer,
-  # from order items still pending shipping.
+  # from order items still awaiting shipping.
   def load!
     transfer = find_or_create_transfer
-    transfer.load!(order.items_pending_shipping)
+    transfer.load!(order.items_waiting)
   end
 
   # Forcibly reloads the shipment to pick up new inventory.
@@ -70,13 +80,13 @@ class Shipment < ActiveRecord::Base
   end
 
   # Completes the shipment by running its transfer and
-  # setting the completion timestamp. Returns false if
+  # setting the shipping timestamp. Returns false if
   # the associated transfer is not feasible.
   def complete!
-    return false unless pending?
-    return false unless transfer.feasible?
+    return false unless pending? && transfer.feasible?
     transfer.complete!
     update shipped_at: Time.current
+    order.update_shipped!
   end
 
   # Cancels the shipment and returns it if it was already shipped.
@@ -89,6 +99,7 @@ class Shipment < ActiveRecord::Base
       transfer.destroy! if transfer.present?
       destroy!
     end
+    order.update_shipped!
   end
 
   # Returns the shipment by creating and running a return transfer
@@ -103,20 +114,24 @@ class Shipment < ActiveRecord::Base
     return_transfer.complete!
   end
 
-  def shipped?
-    shipped_at.present?
+  def active?
+    !cancelled?
   end
 
   def pending?
     !shipped? && !cancelled?
   end
 
-  def cancelled?
-    cancelled_at.present?
+  def shipped?
+    shipped_at.present?
   end
 
-  def active?
-    !cancelled?
+  def complete?
+    shipped? && active?
+  end
+
+  def cancelled?
+    cancelled_at.present?
   end
 
   def returned?

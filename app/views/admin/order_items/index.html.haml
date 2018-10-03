@@ -23,7 +23,7 @@
               .label.label-primary= order_item.lot_code
           = product_header order_item
         %td.text-right= order_item.amount
-        %td.text-right= order_item.amount_shipped
+        %td.text-right= order_item.shipped
         %td.actions
           = link_to icon('info', t('actions.show')), admin_order_path(order_item.order), class: 'btn btn-default btn-sm'
 

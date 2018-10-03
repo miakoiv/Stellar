@@ -167,7 +167,7 @@ class Order < ActiveRecord::Base
   end
 
   def concludable?
-    pending? && !cancelled? && (!track_shipments? || fully_shipped?)
+    pending? && !cancelled? && fully_shipped?
   end
 
   def approved?

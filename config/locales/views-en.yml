@@ -189,7 +189,10 @@ en:
         product_query: Type to search for products…
         submit: Add
       pending:
-        title: Products not included in shipments
+        title: Products not shipped yet
+      search:
+        customer: Select customer
+        product_query: Type to search for products…
     order_types:
       index:
         new_order_type: New order type

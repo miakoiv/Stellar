@@ -98,7 +98,7 @@ class Transfer < ActiveRecord::Base
       product: order_item.product,
       lot_code: lot_code || order_item.lot_code,
       expires_at: expires_at,
-      amount: amount || order_item.amount_pending
+      amount: amount || order_item.waiting
     )
   end
 
@@ -145,7 +145,7 @@ class Transfer < ActiveRecord::Base
         return create_item_from(order_item, order_item.lot_code, item.expires_at)
       end
 
-      amount = order_item.amount_pending
+      amount = order_item.waiting
       stock_items.each do |item|
         all = item.available
         next if all <= 0
