@@ -3,12 +3,15 @@
     %thead
       %tr
         %th= col(TransferItem, :product_title)
-        %th.col-xs-2= col(TransferItem, :lot_code)
+        %th.col-xs-4= col(TransferItem, :lot_code)
         %th.col-xs-1.text-right= col(TransferItem, :amount)
 
     %tbody
       - transfer.transfer_items.each do |transfer_item|
         %tr[transfer_item]{class: transfer_item.appearance}
           %td= product_header transfer_item
-          %td= transfer_item.lot_code
+          %td
+            %strong= transfer_item.lot_code
+            - if transfer_item.expires_at.present?
+              %span.small= icon('hourglass-end', transfer_item.expires_at)
           %td.text-right= transfer_item.amount
