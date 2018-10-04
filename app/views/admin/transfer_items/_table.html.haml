@@ -3,7 +3,7 @@
     %thead
       %tr
         %th= col(TransferItem, :product_title)
-        %th.col-xs-4= col(TransferItem, :lot_code)
+        %th.col-xs-3= col(TransferItem, :lot_code)
         %th.col-xs-1.text-right= col(TransferItem, :amount)
 
     %tbody
@@ -13,5 +13,6 @@
           %td
             %strong= transfer_item.lot_code
             - if transfer_item.expires_at.present?
-              %span.small= icon('hourglass-end', transfer_item.expires_at)
+              %span.small.no-wrap
+                = icon('hourglass-end', transfer_item.expires_at)
           %td.text-right= transfer_item.amount

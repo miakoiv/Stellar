@@ -28,14 +28,14 @@ $.fn.selectize.product_renderer =
 
 $.fn.selectize.inventory_renderer =
   option_create: (data, escape) ->
-    '<div class="create"><i class="fa fa-fw fa-plus-circle"></i> ' + escape(data.input) + '</div>'
+    '<div class="create no-wrap"><i class="fa fa-fw fa-plus-circle"></i> ' + escape(data.input) + '</div>'
   item: (item, escape) ->
     """
     <div class="item">
       <strong>#{escape(item.code)}</strong>
-      #{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
-      <span class="small">
-        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+      #{if item.available? then '<span class="no-wrap"><i class="fa fa-cube fa-fw"></i> ' + item.available + '</span>' else ''}
+      <span class="small no-wrap">
+        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i>&#160;' + item.expires_at else ''}
       </span>
     </div>
     """
@@ -43,9 +43,9 @@ $.fn.selectize.inventory_renderer =
     """
     <div class="option">
       <strong>#{escape(item.code)}</strong>
-      #{if item.available? then '<i class="fa fa-cube fa-fw"></i> ' + item.available else ''}
-      <span class="small">
-        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i> ' + item.expires_at else ''}
+      #{if item.available? then '<span class="no-wrap"><i class="fa fa-cube fa-fw"></i> ' + item.available + '</span>' else ''}
+      <span class="small no-wrap">
+        #{if item.expires_at then '<i class="fa fa-hourglass-end fa-fw"></i>&#160;' + item.expires_at else ''}
       </span>
     </div>
     """
