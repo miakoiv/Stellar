@@ -3,7 +3,7 @@
   - if transfer_item.source.present?
     %td.control
       = form_for [:admin, transfer_item], remote: true, html: {id: nil, class: 'immediate'} do |f|
-        = f.select :lot_code, [], {}, id: dom_id(transfer_item, :lot_code), data: {source: transfer_item.source.id, selected: transfer_item.lot_code, url: admin_product_path(transfer_item.product, format: :json)}
+        = f.select :lot_code, [], {}, id: dom_id(transfer_item, :lot_code), data: {source_items: transfer_item.source_item_choices.online.map { |i| {code: i.code, available: i.available, expires_at: i.expires_at} }, selected: transfer_item.lot_code}
   - else
     %td
       %strong= transfer_item.lot_code
@@ -17,20 +17,11 @@
 
   :coffee
     $lot_code = $('##{dom_id(transfer_item, :lot_code)}')
+    source_items = $lot_code.data 'sourceItems'
+    selected = $lot_code.data 'selected'
     $lot_code.betterSelectize
+      options: source_items
+      items: [selected]
       valueField: 'code'
-      searchField: 'code'
       maxItems: 1
-      preload: true
       render: $.fn.selectize.inventory_renderer
-      load: (query, callback) ->
-        source = $lot_code.data 'source'
-        $.ajax
-          url: $lot_code.data 'url'
-          type: 'GET'
-          dataType: 'json'
-          error: ->
-            callback()
-          success: (response) ->
-            callback(response.inventory[source])
-            $lot_code[0].selectize.setValue $lot_code.data('selected'), true
