@@ -22,11 +22,11 @@
     = render partial: 'headers'
 
 .row
-  .col-md-5
+  .col-lg-4
     .hidden-print
       = render partial: 'form', locals: {locked: true}
 
-  .col-md-7
+  .col-lg-8
     = tab_set 'transfer-side', class: 'nav-justified nav-sm' do
       = nav_tab 'items', col(Transfer, :transfer_items), default: true
       = nav_tab 'history', t('admin.activities.title')
