@@ -37,6 +37,11 @@ class TransferItem < ActiveRecord::Base
     source.item_by_product_and_code(product, lot_code)
   end
 
+  # Finds the choices for source item by transferred product.
+  def source_item_choices
+    source.items_by_product(product)
+  end
+
   # Transfer items are feasible if there's enough stock.
   def feasible?
     return true if source.nil?

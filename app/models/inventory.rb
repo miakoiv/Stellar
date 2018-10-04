@@ -22,7 +22,12 @@ class Inventory < ActiveRecord::Base
   #---
   # Finds an item by product and lot code.
   def item_by_product_and_code(product, code)
-    inventory_items.for(product).find_by(code: code)
+    items_by_product(product).find_by(code: code)
+  end
+
+  # Finds items by product.
+  def items_by_product(product)
+    inventory_items.for(product)
   end
 
   def stock
