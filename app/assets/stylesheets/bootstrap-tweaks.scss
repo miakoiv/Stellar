@@ -1157,6 +1157,8 @@ i.icon {
  */
 .selectize-input {
   min-height: $input-height-base;
+  padding-bottom: $padding-base-vertical - 1px;
+  line-height: $line-height-base;
   vertical-align: top;
   border-radius: $input-border-radius;
 
@@ -1354,6 +1356,12 @@ fieldset > legend {
     .input-group-addon {
       border: 0;
       background-color: transparent;
+    }
+    .selectize-input {
+      padding-top: $padding-base-vertical + 2px;
+      padding-bottom: $padding-base-vertical + 2px;
+      border: 0;
+      border-radius: 0;
     }
   }
 }
