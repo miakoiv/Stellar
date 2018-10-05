@@ -375,6 +375,8 @@ body {
     padding-bottom: 0;
 
     .page-header { margin-top: 40px; }
+
+    #cart-contents { padding-bottom: 40px; }
   }
 }
 @media (max-width: $screen-xs-max) {
@@ -422,8 +424,6 @@ body {
 
 /* Fancy shopping cart and mobile friendly cart list view */
 #cart-contents.fancy-cart {
-  padding-bottom: 40px;
-
   #checkout-button .btn { @extend .btn-success; }
   > .actions {
     margin-top: 40px;
