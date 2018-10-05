@@ -1,7 +1,5 @@
 .segment-content.text
   - if text.body.present?
-    .note-editor
-      .note-editing-area
-        = text.body.html_safe
+    = text.body.html_safe
   - else
     = render partial: 'segments/placeholders/text'

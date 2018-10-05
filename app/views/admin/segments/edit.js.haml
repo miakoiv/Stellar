@@ -1,19 +1,6 @@
-var $segment = $("##{dom_id(@segment)}");
 $('.section, .column, .segment').removeClass('active');
 $('#section-list').addClass('editing');
-$segment.addClass('editing');
-$('.summernote').summernote('destroy');
 $('.navbar-toolbar').empty();
-$('#content-panel').remove();
 $('#side-panel').removeClass('open');
-var $panel = $('<div>', {id: 'content-panel'});
-$panel.hide();
-$panel.html("#{j render partial: 'admin/segments/edit', object: @segment, as: :segment}");
-$panel.initialize();
-var $content = $segment.find('.segment-content');
-$panel.appendTo($('body'));
-$panel.offset($content.offset());
-- if @segment.jumbotron?
-  $panel.addClass('jumbotron');
-$panel.css({'width': $content.css('width')});
-$panel.show();
+var $content = $("##{dom_id(@segment)} .segment-content");
+InlineEditor.create($content[0]);

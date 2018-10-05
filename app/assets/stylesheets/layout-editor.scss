@@ -225,8 +225,6 @@ $navbar-icon-padding: 12px !default;
     .segment-content { opacity: 0; }
   }
   .segment-content-wrap {
-    pointer-events: none;
-
     &:after {
       content: '';
       position: absolute;
