@@ -3,6 +3,6 @@
     = link_to primary.path do
       - if primary.cover_picture.present?
         .page-image
-          = picture_variant_tag primary.cover_picture, navmenu ? :icon : :matchbox
+          = picture_variant_tag primary.cover_picture, :matchbox
       .page-title
         = primary

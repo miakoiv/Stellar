@@ -3,7 +3,7 @@
     = link_to category.path do
       - if category.resource.cover_picture.present?
         .page-image
-          = picture_variant_tag category.resource.cover_picture, navmenu ? :icon : :matchbox
+          = picture_variant_tag category.resource.cover_picture, :matchbox
       .page-title
         = category
   - if category.children_count > 0
