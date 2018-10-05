@@ -1,4 +1,4 @@
-%li{class: active_link_to_class(promotion.path)}
+%li.has-image{class: active_link_to_class(promotion.path)}
   - cache [navmenu, I18n.locale, :promotion_page, promotion] do
     = link_to promotion.path do
       - if promotion.resource.cover_picture.present?

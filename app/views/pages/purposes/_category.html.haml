@@ -1,4 +1,4 @@
-%li{class: active_link_to_class(category.path)}
+%li.has-image{class: active_link_to_class(category.path)}
   - cache [navmenu, I18n.locale, :category_page, category] do
     = link_to category.path do
       - if category.resource.cover_picture.present?

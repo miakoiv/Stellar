@@ -322,7 +322,7 @@ body {
 }
 
 /* Navbar dropdowns with page icons */
-.navbar-nav .dropdown-menu > li > a {
+.navbar-nav .dropdown-menu > li.has-image > a {
   display: flex;
   flex-flow: row nowrap;
 
@@ -617,7 +617,7 @@ body {
 .navmenu-header { padding: $nav-link-padding; }
 .navmenu.navmenu-inverse .navmenu-header { color: $navmenu-inverse-brand-color; }
 
-.navmenu-nav > li > a {
+.navmenu-nav > li.has-image > a {
   display: flex;
   flex-flow: row nowrap;
 
