@@ -1,8 +1,8 @@
-%li{class: primary.part_of_continuous_page? ? 'scroll' : active_link_to_class(primary.path)}
+%li.has-image{class: primary.part_of_continuous_page? ? 'scroll' : active_link_to_class(primary.path)}
   - cache [navmenu, I18n.locale, :primary_page, primary] do
     = link_to primary.path do
       - if primary.cover_picture.present?
         .page-image
-          = picture_variant_tag primary.cover_picture, navmenu ? :icon : :matchbox
+          = picture_variant_tag primary.cover_picture, :matchbox
       .page-title
         = primary

@@ -1,8 +1,8 @@
-%li{class: active_link_to_class(product.path)}
+%li.has-image{class: active_link_to_class(product.path)}
   - cache [navmenu, I18n.locale, :product_page, product] do
     = link_to product.path do
       - if product.resource.cover_picture.present?
         .page-image
-          = picture_variant_tag product.resource.cover_picture, navmenu ? :icon : :matchbox
+          = picture_variant_tag product.resource.cover_picture, :matchbox
       .page-title
         = product

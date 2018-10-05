@@ -63,6 +63,7 @@ $navbar-icon-padding: 12px !default;
 }
 
 /* Permanent side panel on the largest screens */
+/*
 @media (min-width: 1200px + $side-panel-width) {
   #section-list { margin-left: $side-panel-width; }
   #side-panel {
@@ -80,6 +81,7 @@ $navbar-icon-padding: 12px !default;
     background-position-x: $side-panel-width/2;
   }
 }
+*/
 
 
 /*

@@ -1,8 +1,8 @@
-%li{class: active_link_to_class(department.path)}
+%li.has-image{class: active_link_to_class(department.path)}
   - cache [navmenu, I18n.locale, :department_page, department] do
     = link_to department.path do
       - if department.resource.cover_picture.present?
         .page-image
-          = picture_variant_tag department.resource.cover_picture, navmenu ? :icon : :matchbox
+          = picture_variant_tag department.resource.cover_picture, :matchbox
       .page-title
         = department

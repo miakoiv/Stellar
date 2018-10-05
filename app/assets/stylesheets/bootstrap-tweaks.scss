@@ -321,6 +321,15 @@ body {
   background-color: #fff;
 }
 
+/* Navbar dropdowns with page icons */
+.navbar-nav .dropdown-menu > li.has-image > a {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .page-image { margin: -3px 5px -2px -0; }
+  img { @extend .box-icon; }
+}
+
 /* Orders menu */
 .orders-menu {
   min-width: 320px;
@@ -366,6 +375,8 @@ body {
     padding-bottom: 0;
 
     .page-header { margin-top: 40px; }
+
+    #cart-contents { padding-bottom: 40px; }
   }
 }
 @media (max-width: $screen-xs-max) {
@@ -413,8 +424,6 @@ body {
 
 /* Fancy shopping cart and mobile friendly cart list view */
 #cart-contents.fancy-cart {
-  padding-bottom: 40px;
-
   #checkout-button .btn { @extend .btn-success; }
   > .actions {
     margin-top: 40px;
@@ -608,10 +617,12 @@ body {
 .navmenu-header { padding: $nav-link-padding; }
 .navmenu.navmenu-inverse .navmenu-header { color: $navmenu-inverse-brand-color; }
 
-.navmenu-nav a img {
-  @extend .box-icon, .pull-left;
-  margin-top: -2px;
-  margin-right: 10px;
+.navmenu-nav > li.has-image > a {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .page-image { margin: -3px 5px -2px -0; }
+  img { @extend .box-icon; }
 }
 .navmenu-nav { margin-bottom: 0; }
 .navmenu-nav .navmenu-nav { padding-left: 20px; }
