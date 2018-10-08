@@ -219,12 +219,10 @@ $navbar-icon-padding: 12px !default;
       opacity: 1;
     }
   }
-  &.active {
+  &.active,
+  &.editing {
     z-index: 2;
     outline: $outline-width solid rgba($brand-info, 0.5);
-  }
-  &.editing {
-    .segment-content { opacity: 0; }
   }
   .segment-content-wrap {
     &:after {
@@ -237,63 +235,4 @@ $navbar-icon-padding: 12px !default;
       border: 1px solid rgba($brand-info, 0.333);
     }
   }
-}
-
-
-/*
- * Content panel for in-place editing of segments
- */
-#content-panel {
-  position: absolute;
-  z-index: 2;
-  padding: 0;
-  line-height: 1.4; // matches layouts.css
-
-  &.jumbotron {
-    margin-bottom: 0;
-    background-color: transparent;
-  }
-}
-#content-panel .actions {
-  display: flex;
-  position: absolute;
-  bottom: -50px;
-  right: -5px;
-
-  .btn {
-    margin-left: -1px;
-    border-radius: 0;
-  }
-}
-#content-panel:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: -1;
-  outline: 5px solid rgba($gray-light, 0.667);
-  outline-offset: 5px;
-}
-#content-panel .segment-form.text .note-editor {
-  margin-bottom: 0;
-  border: 0;
-  border-radius: 0;
-  background-color: transparent;
-  caret-color: $brand-primary;
-
-  .note-editing-area .note-editable,
-  .note-editing-area .note-placeholder {
-    padding: 0;
-    background-color: transparent;
-
-    h1:first-child,
-    h2:first-child,
-    h3:first-child {
-      margin-top: 0;
-    }
-  }
-  .table { @extend .table-bordered; }
-  font[color] { text-shadow: 0 0 1px rgba(0, 0, 0, 0.6); }
 }

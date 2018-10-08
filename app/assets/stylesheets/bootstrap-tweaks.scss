@@ -284,11 +284,6 @@ body {
     position: absolute;
     top: 5px;
     left: 0;
-
-    > .note-toolbar {
-      position: relative !important;
-      width: auto !important;
-    }
   }
 }
 @media (min-width: $screen-sm-min) {
