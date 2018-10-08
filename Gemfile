@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.0'
 gem 'with_advisory_lock'
 gem 'yaml_db'
 # Use Haml for markup
@@ -70,13 +70,13 @@ gem 'httparty'
 
 # Authentication and authorization
 gem 'devise'
-gem 'devise-bootstrap-views'
+gem 'devise-bootstrap-views', '~> 0.0.11'
 gem 'authority'
 gem 'rolify'
 
 # Twitter Bootstrap scaffolds
 gem 'bootstrap-generators', '~> 3.3.4'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 4.7.0'
 
 # Image attachments and popups
 gem 'paperclip', '~> 5.3'
