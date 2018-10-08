@@ -1,7 +1,5 @@
 $segment = $('##{dom_id(@segment)}');
-$('.summernote').summernote('destroy');
-$('.navbar-toolbar').empty();
-$('#content-panel').fadeOut(200, function() { this.remove(); });
+//$('.navbar-toolbar').empty();
 $('#section-list').removeClass('editing');
 $segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
 $segment.initialize();

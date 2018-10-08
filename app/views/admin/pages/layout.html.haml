@@ -3,7 +3,7 @@
 
 - content_for :secondary_nav do
   .container
-    %ul.nav.navbar-nav.navbar-right
+    %ul.nav.navbar-nav.navbar-right.page-controls
       %li
         = link_to show_page_path(@page) do
           = icon('eye', t('actions.show'))
@@ -12,9 +12,18 @@
       %li
         = link_to edit_admin_page_path(@page) do
           = icon('chevron-circle-left', t('actions.back'))
+    %ul.nav.navbar-nav.navbar-right.segment-controls
+      %li
+        %button.btn.navbar-btn.btn-default{type: 'button'}
+          = icon('close', t('actions.cancel'))
+      %li
+        %button#segment-save.btn.navbar-btn.btn-primary{type: 'button'}
+          = icon('check', t('actions.save'))
     .navbar-toolbar
 
 :coffee
+  $('.segment-controls').hide()
+
   for section in $('#section-list').data 'sections'
     $.get section
 

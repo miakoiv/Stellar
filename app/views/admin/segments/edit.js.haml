@@ -1,6 +1,9 @@
+var $segment = $("##{dom_id(@segment)}");
+var $content = $segment.find('.segment-content');
 $('.section, .column, .segment').removeClass('active');
 $('#section-list').addClass('editing');
-$('.navbar-toolbar').empty();
+//$('.navbar-toolbar').empty();
+$('.page-controls').hide();
+$('.segment-controls').show();
 $('#side-panel').removeClass('open');
-var $content = $("##{dom_id(@segment)} .segment-content");
-InlineEditor.create($content[0]);
+DecoupledEditor.create($content[0], $.extend(DecoupledEditor.layoutConfig, {language: '#{current_store.locale}'})).then(function (editor) { window.editor = editor; $('.navbar-toolbar').append(editor.ui.view.toolbar.element); }).catch(function (error) { console.error(error); });
