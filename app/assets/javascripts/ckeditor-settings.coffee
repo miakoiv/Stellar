@@ -5,8 +5,3 @@ DecoupledEditor.layoutConfig =
       'Fira Sans', 'Fira Sans Extra Condensed',
       'Droid Serif', 'Montserrat'
     ]
-  toolbar: [
-    'heading', 'bulletedList', 'numberedList', '|',
-    'fontFamily', 'fontSize', 'textColor', '|',
-    'undo', 'redo'
-  ]
