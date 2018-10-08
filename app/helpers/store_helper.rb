@@ -22,7 +22,7 @@ module StoreHelper
   def fancy_price(price)
     return nil if price.nil?
     amount = incl_tax? ? price.with_tax : price.sans_tax
-    sep = amount.separator
+    sep = amount.decimal_mark
     units, subunits = humanized_money(amount).split sep
     capture do
       concat units
