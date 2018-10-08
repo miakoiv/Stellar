@@ -1,0 +1,14 @@
+:root {
+  --ck-focus-ring: 0;
+  --ck-border-radius: 0;
+  --ck-font-face: system-ui;
+  --ck-font-size-base: 13px;
+  --ck-inner-shadow: none;
+}
+.ck.ck-editor__editable_inline {
+  overflow: visible;
+  padding: 0;
+  border: 0;
+}
+.ck.ck-editor__editable_inline > :first-child { margin-top: 0; }
+.ck.ck-editor__editable_inline > :last-child { margin-bottom: 0; }
