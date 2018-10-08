@@ -1,5 +1,0 @@
-$segment = $('##{dom_id(@segment)}');
-//$('.navbar-toolbar').empty();
-$('#section-list').removeClass('editing');
-$segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
-$segment.initialize();

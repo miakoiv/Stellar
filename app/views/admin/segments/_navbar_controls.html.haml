@@ -1,0 +1,18 @@
+%ul.nav.navbar-nav.navbar-right.controls
+  %li
+    = link_to admin_segment_path(segment), remote: true do
+      = icon('close', t('actions.cancel'))
+  %li
+    %button#segment-save.btn.navbar-btn.btn-primary{type: 'button'}
+      = icon('check', t('actions.save'))
+
+  :coffee
+    $('#segment-save').on 'click', ->
+      data = window.editor.getData()
+      $.ajax
+        type: 'PATCH'
+        url: '#{admin_segment_path(segment)}'
+        data:
+          in_place_edit: true
+          segment:
+            body: data

@@ -3,22 +3,7 @@
 
 - content_for :secondary_nav do
   .container
-    %ul.nav.navbar-nav.navbar-right.page-controls
-      %li
-        = link_to show_page_path(@page) do
-          = icon('eye', t('actions.show'))
-      - if current_user.can_create?(Section, at: current_store)
-        = render partial: 'layout_menu'
-      %li
-        = link_to edit_admin_page_path(@page) do
-          = icon('chevron-circle-left', t('actions.back'))
-    %ul.nav.navbar-nav.navbar-right.segment-controls
-      %li
-        %button.btn.navbar-btn.btn-default{type: 'button'}
-          = icon('close', t('actions.cancel'))
-      %li
-        %button#segment-save.btn.navbar-btn.btn-primary{type: 'button'}
-          = icon('check', t('actions.save'))
+    = render partial: 'admin/pages/navbar_controls', object: @page, as: :page
     .navbar-toolbar
 
 :coffee

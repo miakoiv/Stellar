@@ -1,2 +1,7 @@
-$('.navbar-toolbar').empty();
+$segment = $('##{dom_id(@segment)}');
+$segment.removeClass('editing');
 $('#section-list').removeClass('editing');
+$('#secondary-nav .controls').replaceWith("#{j render partial: 'admin/pages/navbar_controls', object: @page, as: :page}");
+window.editor.destroy().then(function () { editor.ui.view.toolbar.element.remove(); editor.ui.view.editable.element.remove(); });
+$segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
+$segment.initialize();
