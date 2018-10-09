@@ -67,6 +67,15 @@ class CheckoutController < ApplicationController
     end
   end
 
+  # GET /checkout/1/payment_methods.js
+  def payment_methods
+    grand_total = @order.includes_tax? ? @order.grand_total_with_tax : @order.grand_total_sans_tax
+    @payment_gateway = @order.payment_gateway_class.new(order: @order)
+    @payment_methods = @payment_gateway.payment_methods.select { |method| method.valid_for?(grand_total.cents) }
+
+    respond_to :js
+  end
+
   # GET /checkout/1/pay/credit_card.json
   def pay
     method = params[:method]

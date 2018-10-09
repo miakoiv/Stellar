@@ -15,6 +15,10 @@ module PaymentGateway
     format :json
     logger Rails.logger
 
+    def self.payment_methods(payment_methods_request)
+      get '/merchant_payment_methods', body: payment_methods_request.to_json
+    end
+
     def self.auth_payment(token_request)
       post '/auth_payment', body: token_request.to_json
     end
@@ -44,6 +48,23 @@ module PaymentGateway
       @api_key = order.store.pbw_api_key
       @private_key = order.store.pbw_private_key
       @version = 'w3.1'
+    end
+
+    # Queries for available payment methods, returns a list of
+    # PaymentGateway::PaymentMethod objects.
+    def payment_methods
+      request = payment_methods_request
+      response = PaybywayConnector.payment_methods(request).parsed_response
+      response['payment_methods'].map { |method|
+        PaymentGateway::PaymentMethod.new(
+          group: method['group'].to_sym,
+          name: method['name'],
+          slug: method['selected_value'],
+          min_cents: method['min_amount'],
+          max_cents: method['max_amount'],
+          image_url: method['img']
+        )
+      }
     end
 
     #
@@ -115,6 +136,13 @@ module PaymentGateway
     end
 
     private
+      def payment_methods_request
+        {
+          version: '2',
+          api_key: @api_key,
+          authcode: sha256(@private_key, @api_key)
+        }
+      end
 
       def token_request(options = {})
         number = SecureRandom.hex(12)

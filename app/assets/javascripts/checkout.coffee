@@ -10,6 +10,7 @@ $.do_checkout_phase = (phase) ->
       $('#address-panel, #payment-panel, #complete-panel').collapse 'hide'
       $('#shipping-panel').collapse 'show'
     when 'payment'
+      $.get $('#payment-methods').data('url')
       $('#address-panel, #shipping-panel, #complete-panel').collapse 'hide'
       $('#payment-panel').collapse 'show'
     when 'complete'

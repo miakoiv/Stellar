@@ -49,16 +49,18 @@ Rails.application.routes.draw do
   get  '/checkout/:order_id/shipping_method/:method_id', to: 'checkout#shipping_method', as: :shipping_method
   # 4) create a shipment
   post '/checkout/:order_id/ship', to: 'checkout#ship', as: :ship
-  # 5) enter payment information
+  # 5) get payment methods
+  get  '/checkout/:order_id/payment_methods', to: 'checkout#payment_methods', as: :payment_methods
+  # 6) enter payment information
   get  '/checkout/:order_id/pay/:method', to: 'checkout#pay', as: :pay
-  # 6) verify credit card payment or return from online payment
+  # 7) verify credit card payment or return from online payment
   post '/checkout/:order_id/verify', to: 'checkout#verify', as: :verify
   get  '/checkout/:order_id/return', to: 'checkout#return', as: :return
-  # 6b) handle online payment notify if the user failed to return herself
+  # 7b) handle online payment notify if the user failed to return herself
   get  '/checkout/:order_id/notify', to: 'checkout#notify', as: :notify
-  # 6c) confirm order when payment is not collected
+  # 7c) confirm order when payment is not collected
   post '/checkout/:order_id/confirm', to: 'checkout#confirm', as: :confirm
-  # 7) show a receipt
+  # 8) show a receipt
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 
   # Product specific routes.

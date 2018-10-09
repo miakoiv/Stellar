@@ -2,25 +2,7 @@
 #messages{data: {token_request_error: t('checkout.messages.token_request_error'), charge_error: t('checkout.messages.charge_error')}}
 
 %h5= t('checkout.e_payment')
-.payment-buttons
-  .row
-    .col-xs-12
-      .payment-button.visa{data: {selected: 'creditcards'}}
-      .payment-button.mastercard{data: {selected: 'creditcards'}}
-  .row
-    .col-xs-12
-      .payment-button.nordea{data: {selected: 'nordea'}}
-      .payment-button.op{data: {selected: 'osuuspankki'}}
-      .payment-button.danske{data: {selected: 'danskebank'}}
-      .payment-button.saastopankki{data: {selected: 'saastopankki'}}
-      .payment-button.aktia{data: {selected: 'aktia'}}
-      .payment-button.handelsbanken{data: {selected: 'handelsbanken'}}
-      .payment-button.spankki{data: {selected: 'spankki'}}
-      .payment-button.omasaastopankki{data: {selected: 'omasaastopankki'}}
-      .payment-button.alandsbanken{data: {selected: 'alandsbanken'}}
-  .row
-    .col-xs-12
-      .payment-button.euroloan{data: {selected: 'euroloan'}}
-      .payment-button.joustoraha{data: {selected: 'joustoraha'}}
+#payment-methods{data: {url: payment_methods_path(@order)}}
+  .payment-buttons
 
 = javascript_include_tag 'payment_gateway/paybyway'
