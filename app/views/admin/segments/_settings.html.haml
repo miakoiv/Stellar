@@ -2,6 +2,8 @@
 
 = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
   %fieldset
+    = f.text_field :foreground_color, class: 'color'
+  %fieldset
     = f.text_field :background_color, class: 'color'
 
 :coffee

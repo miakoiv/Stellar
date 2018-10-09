@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003064042) do
+ActiveRecord::Schema.define(version: 20181009135030) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -749,6 +749,7 @@ ActiveRecord::Schema.define(version: 20181003064042) do
     t.integer  "margin_top",       limit: 4,        default: 0,             null: false
     t.integer  "margin_bottom",    limit: 4,        default: 0,             null: false
     t.string   "inset",            limit: 255,      default: "inset-none",  null: false
+    t.string   "foreground_color", limit: 255,      default: "#333",        null: false
     t.string   "background_color", limit: 255,      default: "transparent", null: false
     t.text     "body",             limit: 16777215
     t.text     "metadata",         limit: 65535

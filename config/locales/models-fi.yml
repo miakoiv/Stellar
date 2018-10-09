@@ -486,6 +486,7 @@ fi:
         margin_bottom: Alamarginaali
         alignment: Sisällön tasaus
         inset: Sisällön sisennys
+        foreground_color: Tekstiväri
         background_color: Taustaväri
         body: Leipäteksti
         header: Otsikko

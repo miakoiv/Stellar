@@ -1,2 +1,2 @@
-.segment-content-wrap{class: [segment.alignment, segment.inset, segment.jumbotron? && 'jumbotron'], style: segment.style(:backgroundColor)}
+.segment-content-wrap{class: [segment.alignment, segment.inset, segment.jumbotron? && 'jumbotron'], style: segment.style(:foregroundColor, :backgroundColor)}
   = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}

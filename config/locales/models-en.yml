@@ -486,6 +486,7 @@ en:
         margin_bottom: Bottom margin
         alignment: Content alignment
         inset: Content inset
+        foreground_color: Text color
         background_color: Background color
         body: Body text
         header: Headline
