@@ -13,7 +13,7 @@ gem 'erb2haml', group: :development
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '~> 8.6.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0', '< 4.0.0'
 # Use CoffeeScript for .coffee assets and views
