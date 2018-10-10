@@ -30,7 +30,7 @@
         %h4.visible-print-block= t('.shipped_items')
         = render partial: 'admin/shipments/list', object: @order, as: :order, locals: {locked: @order.concluded?}
 
-      = tab_pane 'order-items', class: 'page-break' do
+      = tab_pane 'order-items' do
         %h4.visible-print-block= title(OrderItem, count: 2)
         - if @order.editable_items?
           = render partial: 'admin/order_items/edit_table', object: @order, as: :order
