@@ -17,6 +17,7 @@ module Styles
 
     # Writes Autoprefixed rules into the inline styles attribute.
     def write_inline_styles
+      write(:foregroundColor, foreground_color)
       write(:backgroundColor, background_color)
       write(:backgroundImage, background_image, true)
       write(:minHeight, min_height)
@@ -39,6 +40,12 @@ module Styles
           end
         else
           r.inline_styles.delete(key)
+        end
+      end
+
+      def foreground_color
+        if r.respond_to?(:foreground_color)
+          [['color', r.foreground_color]]
         end
       end
 
