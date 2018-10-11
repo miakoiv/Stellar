@@ -40,7 +40,7 @@ class Admin::PicturesController < ApplicationController
       if @picture.save
         track @picture, @pictureable
         format.js { render :create }
-        format.json { render json: @picture, status: 200 } # for dropzone and summernote
+        format.json { render json: @picture, status: 200 } # for dropzone
       else
         format.js { render :error }
         format.html { render json: {error: t('.error')} }

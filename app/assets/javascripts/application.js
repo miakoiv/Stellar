@@ -53,8 +53,6 @@
 //= require numbro.min
 //= require numbro/languages.min
 //= require smooth-scroll.min
-//= require summernote.min
-//= require summernote/locales
 //= require swiper.min
 //= require tabular.min
 

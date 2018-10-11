@@ -57,16 +57,6 @@ class Image < ActiveRecord::Base
     !is_vector?
   end
 
-  # The style given to Summernote is lightbox sized for bitmaps,
-  # original for non-bitmaps.
-  def wysiwyg_style
-    is_bitmap? ? :lightbox : :original
-  end
-
-  def wysiwyg_url
-    url(wysiwyg_style, false)
-  end
-
   # Image dimensions courtesy of FastImage, cached.
   def dimensions(style = :original)
     @dimensions ||= {}
@@ -85,10 +75,6 @@ class Image < ActiveRecord::Base
 
   def to_s
     attachment_file_name.humanize
-  end
-
-  def as_json(options = {})
-    super(methods: [:wysiwyg_url])
   end
 
   private

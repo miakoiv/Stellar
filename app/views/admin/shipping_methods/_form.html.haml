@@ -31,17 +31,20 @@
             = f.text_field :delivery_time, append: col(ShippingMethod, :delivery_time_unit), class: 'text-right'
           .col-md-6
             = f.select :detail_page_id, current_store.pages.primary.map { |p| [p.to_s, p.id] }, {include_blank: true, help: t('.detail_page_help')}, {class: 'selectize'}
-        ~ f.text_area :description
+
+            - if locked
+              = f.form_group do
+                = f.label col(ShippingMethod, :description), class: 'control-label'
+                .form-control-static= @shipping_method.description.html_safe
+            - else
+              ~ f.text_area :description
+              :coffee
+                CKEDITOR.ClassicEditor.create(
+                  $('#shipping_method_description')[0]
+                  language: '#{current_store.locale}'
+                ).catch (error) -> console.log error
+
       - unless locked
         %fieldset.actions.fixed
           .container
             = f.primary
-
-:coffee
-  $('#shipping_method_description').summernote
-    lang: "#{t('culture')}"
-    toolbar: [
-      ['para', ['style', 'ul', 'ol', 'paragraph']]
-      ['font', ['bold', 'italic', 'clear']]
-    ]
-    dialogsFade: true
