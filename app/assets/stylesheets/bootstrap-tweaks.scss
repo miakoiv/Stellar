@@ -1523,8 +1523,10 @@ fieldset > legend {
  * CodeMirror styles
  */
 .CodeMirror {
-  @extend .form-control, .input-sm;
+  @extend .form-control;
   height: 600px;
+  font-size: 0.8em;
+  line-height: 1.2;
 }
 .CodeMirror-focused {
   @extend .form-control:focus;
