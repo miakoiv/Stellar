@@ -1,5 +1,5 @@
 var $segment = $("##{dom_id(@segment)}");
-var $content = $segment.find('.segment-content');
+var $content = $segment.find('.editable-content');
 $('#secondary-nav .controls').replaceWith("#{j render partial: 'admin/segments/navbar_controls', object: @segment, as: :segment}");
 $('.section, .column, .segment').removeClass('active');
 $segment.addClass('editing');

@@ -1,5 +1,6 @@
 .segment-content.text
-  - if text.body.present?
-    = text.body.html_safe
-  - else
-    = render partial: 'segments/placeholders/text'
+  .editable-content
+    - if text.body.present?
+      = text.body.html_safe
+    - else
+      = render partial: 'segments/placeholders/text'

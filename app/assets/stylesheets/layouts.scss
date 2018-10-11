@@ -311,8 +311,10 @@
 
 .segment-content.text,
 .segment-content.raw {
-  > :first-child { margin-top: 0; }
-  > :last-child { margin-bottom: 0; }
+  .editable-content {
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
 }
 
 .segment-content.picture,
