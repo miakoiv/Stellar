@@ -213,7 +213,8 @@ $navbar-icon-padding: 12px !default;
 }
 .section-list-item .segment {
   &:hover {
-    .segment-content { min-height: 50px; }
+    min-height: 45px;
+
     .segment-nav {
       z-index: 2;
       opacity: 1;
@@ -223,6 +224,12 @@ $navbar-icon-padding: 12px !default;
   &.editing {
     z-index: 2;
     outline: $outline-width solid rgba($brand-info, 0.5);
+  }
+  .editable-content {
+    *::selection {
+      background-color: rgba($brand-primary, 0.8);
+      color: inherit;
+    }
   }
   .segment-content-wrap {
     &:after {
