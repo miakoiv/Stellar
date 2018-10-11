@@ -146,6 +146,7 @@ fi:
           map: kartta
           video_player: videoupotus
           documentation: dokumenttilista
+          media: tekstipalsta kuvalla
           category: tuoteryhmä
           product: tuote
           promotion: kampanja

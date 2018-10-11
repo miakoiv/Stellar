@@ -76,6 +76,7 @@ class Segment < ActiveRecord::Base
     map: 4,
     video_player: 5,
     documentation: 6,
+    media: 7,
     category: 11,
     product: 12,
     promotion: 13,
@@ -103,7 +104,7 @@ class Segment < ActiveRecord::Base
     joins(:column)
     .order('columns.priority, segments.priority')
   }
-  scope :with_content, -> { where(template: [1, 99]) }
+  scope :with_content, -> { where(template: [1, 7, 99]) }
 
   #---
   def self.default_settings
@@ -154,11 +155,16 @@ class Segment < ActiveRecord::Base
 
   #---
   def has_content?
-    text? || raw?
+    text? || media? || raw?
   end
 
   def edit_in_place?
-    text?
+    text? || media?
+  end
+
+  # If true, the admin template is not rendered on the settings panel.
+  def without_settings?
+    text? || raw?
   end
 
   def has_min_height?

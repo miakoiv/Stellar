@@ -146,6 +146,7 @@ en:
           map: map
           video_player: video embed
           documentation: document list
+          media: text column with picture
           category: category
           product: product
           promotion: promotion
