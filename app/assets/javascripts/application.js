@@ -47,8 +47,6 @@
 //= require Chart.min
 //= require ckeditor5/ckeditor
 //= require ckeditor5/translations
-//= require ckeditor5-document/ckeditor
-//= require ckeditor5-document/translations
 //= require gumshoe.min
 //= require imagesloaded.pkgd.min
 //= require masonry.pkgd.min

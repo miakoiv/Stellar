@@ -1,4 +1,4 @@
-DecoupledEditor.layoutConfig =
+CKEDITOR.layoutConfig =
   fontFamily:
     options: [
       'system-ui',
