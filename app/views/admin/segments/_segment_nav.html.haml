@@ -1,19 +1,19 @@
 %nav.segment-nav.navbar.navbar-inverse
   %ul.nav.navbar-nav.navbar-right
     %li.segment-handle
-      %a{title: t('.tooltips.move'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'}}
+      %a{title: t('.tooltips.move'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'}}
         = icon('arrows', class: 'fa-fw')
     %li
-      = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+      = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
         = icon('cog', class: 'fa-fw')
     - if segment.has_content?
       %li
-        = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
+        = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
           = icon('edit', class: 'fa-fw')
     %li.info
-      %a.copy-segment{title: t('.tooltips.copy'), role: 'button', data: {url: copy_admin_segment_path(segment), toggle: 'tooltip', placement: 'bottom'}}
+      %a.copy-segment{title: t('.tooltips.copy'), role: 'button', data: {url: copy_admin_segment_path(segment), toggle: 'tooltip', placement: 'bottom', container: 'body'}}
         = icon('copy', class: 'fa-fw')
     - if current_user.can_delete?(segment, at: current_store)
       %li.danger
-        = link_to admin_segment_path(segment), method: :delete, remote: true, title: t('.tooltips.delete'), data: {toggle: 'tooltip', placement: 'bottom', confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')} do
+        = link_to admin_segment_path(segment), method: :delete, remote: true, title: t('.tooltips.delete'), data: {toggle: 'tooltip', placement: 'bottom', container: 'body', confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')} do
           = icon('trash-o', class: 'fa-fw')
