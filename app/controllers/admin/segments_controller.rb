@@ -6,13 +6,12 @@ class Admin::SegmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :copy, :destroy]
 
-  authority_actions settings: 'update', modify: 'update', reorder: 'update', paste: 'create'
+  authority_actions reorder: 'update', paste: 'create'
 
   # No layout, this controller never renders HTML.
 
   # GET /admin/segments/1.js
   def show
-    authorize_action_for @segment, at: current_store
     @page = @segment.column.section.page
 
     respond_to :js
@@ -20,15 +19,13 @@ class Admin::SegmentsController < ApplicationController
 
   # GET /admin/segments/1/edit.js
   def edit
-    authorize_action_for @segment, at: current_store
-
-    respond_to :js
+    respond_to do |format|
+      format.js { render @segment.edit_in_place? ? :edit_in_place : :edit }
+    end
   end
 
   # GET /admin/segments/1/settings.js
   def settings
-    authorize_action_for @segment, at: current_store
-
     respond_to :js
   end
 
@@ -55,6 +52,7 @@ class Admin::SegmentsController < ApplicationController
   def update
     authorize_action_for @segment, at: current_store
     @page = @segment.column.section.page
+    @content_mode = params[:content_mode].presence
     in_place_edit = params[:in_place_edit].presence
 
     respond_to do |format|

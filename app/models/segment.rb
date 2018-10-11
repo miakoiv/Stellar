@@ -157,12 +157,12 @@ class Segment < ActiveRecord::Base
     text? || raw?
   end
 
-  def has_min_height?
-    empty? || map?
+  def edit_in_place?
+    text?
   end
 
-  def edit_in_place?
-    has_content?
+  def has_min_height?
+    empty? || map?
   end
 
   def fixed_ratio?

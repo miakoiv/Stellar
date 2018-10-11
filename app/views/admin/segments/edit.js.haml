@@ -1,8 +1,6 @@
 var $segment = $("##{dom_id(@segment)}");
-var $content = $segment.find('.segment-content');
+$('#editor-panel').destroySelectized();
+$('#editor-panel').html("#{j render partial: 'admin/segments/edit', object: @segment, as: :segment}");
 $('.section, .column, .segment').removeClass('active');
-$segment.addClass('editing');
-$('#section-list').addClass('editing');
-$('#side-panel').removeClass('open');
-$('#secondary-nav .controls').replaceWith("#{j render partial: 'admin/segments/navbar_controls', object: @segment, as: :segment}");
-DecoupledEditor.create($content[0], $.extend(DecoupledEditor.layoutConfig, {language: '#{current_store.locale}'})).then(function (editor) { window.editor = editor; $('.navbar-toolbar').append(editor.ui.view.toolbar.element); }).catch(function (error) { console.error(error); });
+$segment.addClass('active');
+$('#side-panel').addClass('open');

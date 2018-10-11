@@ -2,6 +2,5 @@
   = bootstrap_form_for [:admin, segment], remote: true do |f|
     = render partial: "admin/#{segment.to_partial_path}", object: segment, as: :segment, locals: {f: f}
     %fieldset.actions
-      = link_to icon('close', t('actions.cancel')), admin_segment_path(segment), remote: true, class: 'btn btn-default'
-      = f.button class: 'btn btn-primary' do
+      = f.button class: 'btn btn-primary btn-block' do
         = icon('check', t('actions.save'))

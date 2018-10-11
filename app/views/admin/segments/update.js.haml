@@ -1,6 +1,7 @@
 $segment = $('##{dom_id(@segment)}');
-$('#editor-panel').destroySelectized();
-$('#editor-panel').html("#{j render partial: 'admin/segments/settings', object: @segment, as: :segment}");
+- unless @content_mode
+  $('#editor-panel').destroySelectized();
+  $('#editor-panel').html("#{j render partial: 'admin/segments/settings', object: @segment, as: :segment}");
 $segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
-$segment.addClass('active');
-$segment.initialize();
+$('##{dom_id(@segment)}').addClass('active');
+$('##{dom_id(@segment)}').initialize();

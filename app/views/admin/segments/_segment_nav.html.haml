@@ -6,7 +6,7 @@
     %li
       = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('cog', class: 'fa-fw')
-    - if segment.edit_in_place?
+    - if segment.has_content?
       %li
         = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
           = icon('edit', class: 'fa-fw')
