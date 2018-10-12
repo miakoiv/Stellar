@@ -18,7 +18,7 @@
     %tbody{class: current_user.can_update?(Department, at: current_store) && 'sortable'}
       = content_tag_for :tr, @departments do |department|
         %td.hidden-print= drag_handle
-        %td= picture_variant_tag department.cover_picture
+        %td= picture_variant_tag department.cover_picture, :icon
         %td= department.name
         %td
           - if department.page.present?

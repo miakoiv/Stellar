@@ -5,7 +5,7 @@
     = link_to edit_admin_shipping_method_path(@shipping_method), class: 'btn btn-primary' do
       = icon('pencil-square', t('actions.edit'))
   %h1
-    = picture_variant_tag @shipping_method.cover_picture
+    = picture_variant_tag @shipping_method.cover_picture, :icon
     = @shipping_method
 
 .row

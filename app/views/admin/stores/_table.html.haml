@@ -10,7 +10,7 @@
     %tbody
       - @stores.each do |store|
         = content_tag_for :tr, store, class: store.portal? && 'info text-info' do
-          %td= picture_variant_tag store.cover_picture
+          %td= picture_variant_tag store.cover_picture, :icon
           %td= store.name
           %td
             - store.store_portals.each do |portal|

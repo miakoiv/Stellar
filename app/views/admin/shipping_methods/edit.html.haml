@@ -4,7 +4,7 @@
   = link_to admin_shipping_method_path(@shipping_method), class: 'btn btn-primary' do
     = icon('info-circle', t('actions.show'))
   %h1
-    = picture_variant_tag @shipping_method.cover_picture
+    = picture_variant_tag @shipping_method.cover_picture, :icon
     = @shipping_method
 
 .row
