@@ -342,7 +342,7 @@ $brand-primary: #013183;
       }
       .images {
         .nav { @extend .nav-tabs, .nav-sm; }
-        .image {
+        .picture {
           position: relative;
           height: 0;
           padding-bottom: 61.8%; // golden ratio
