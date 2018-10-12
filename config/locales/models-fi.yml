@@ -364,6 +364,7 @@ fi:
         created_at: Päiväys
       picture:
         purpose: Kuvatyyppi
+        variant: Kokovaihtoehto
         caption: Kuvateksti
         url: ᴡᴡᴡ-osoite
       policy:

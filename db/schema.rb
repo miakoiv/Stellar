@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181009135030) do
+ActiveRecord::Schema.define(version: 20181012102958) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -539,6 +539,7 @@ ActiveRecord::Schema.define(version: 20181009135030) do
     t.integer  "pictureable_id",   limit: 4
     t.string   "pictureable_type", limit: 255
     t.integer  "purpose",          limit: 4,               null: false
+    t.string   "variant",          limit: 255
     t.string   "caption",          limit: 255
     t.string   "url",              limit: 255
     t.integer  "priority",         limit: 4,   default: 0, null: false

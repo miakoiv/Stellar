@@ -3,9 +3,9 @@
     .media-object
       - if media.url.present?
         = link_to media.url do
-          = picture_variant_tag media.cover_picture, :matchbox
+          = picture_variant_tag media.cover_picture
       - else
-        = picture_variant_tag media.cover_picture, :matchbox
+        = picture_variant_tag media.cover_picture
   .media-body
     .editable-content
       - if media.body.present?

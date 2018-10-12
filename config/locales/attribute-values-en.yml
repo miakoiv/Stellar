@@ -57,6 +57,14 @@ en:
           presentational: presentational
           technical: technical
           promotional: promotional
+        variant:
+          icon: icon
+          thumbnail: XS
+          matchbox: S
+          postcard: M
+          technical: L
+          presentational: XL
+          lightbox: XXL
       property:
         value_type:
           string: String

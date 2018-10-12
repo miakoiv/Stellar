@@ -108,16 +108,17 @@ module ApplicationHelper
     icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
   end
 
-  def picture_variant_tag(picture, size = :icon, options = {})
+  def picture_variant_tag(picture, variant = nil, options = {})
     return ''.html_safe if picture.nil?
-    image_variant_tag(picture.image, size, options)
+    variant ||= picture.variant || :lightbox
+    image_variant_tag(picture.image, variant, options)
   end
 
   # image_tag that supports size variants and non-bitmaps.
-  def image_variant_tag(image, size = :icon, options = {})
+  def image_variant_tag(image, variant = :icon, options = {})
     return ''.html_safe if image.nil?
     if image.is_bitmap?
-      image_tag(image.url(size), options.merge(image.dimensions(size)))
+      image_tag(image.url(variant), options.merge(image.dimensions(variant)))
     else
       image_tag(image.url(:original), options.merge(class: 'img-responsive'))
     end

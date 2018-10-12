@@ -9,14 +9,14 @@
         .swiper-wrapper
           - picture.pictures.each do |picture|
             .swiper-slide
-              = picture_variant_tag picture, :lightbox
+              = picture_variant_tag picture
     - else
       .image-container{class: sizing}
         - if picture.url.present?
           = link_to picture.url do
-            = picture_variant_tag picture.cover_picture, :lightbox
+            = picture_variant_tag picture.cover_picture
         - else
-          = picture_variant_tag picture.cover_picture, :lightbox
+          = picture_variant_tag picture.cover_picture
 
   - else
     = render partial: 'segments/placeholders/picture'

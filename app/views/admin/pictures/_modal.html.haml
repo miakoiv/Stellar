@@ -22,6 +22,14 @@
                     %label.btn.btn-default{class: @picture.purpose == purpose && 'active'}
                       = f.radio_button_without_bootstrap :purpose, purpose
                       = Picture.human_attribute_value(:purpose, purpose)
+              - if @picture.pictureable.available_variants.any?
+                .form-group
+                  %label.control-label= col(Picture, :variant)
+                  .btn-group.btn-group-block{data: {toggle: 'buttons'}}
+                    - @picture.pictureable.available_variants.each do |variant|
+                      %label.btn.btn-default{class: @picture.variant == variant && 'active'}
+                        = f.radio_button_without_bootstrap :variant, variant
+                        = Picture.human_attribute_value(:variant, variant)
               = f.text_field :caption
               = f.text_field :url
         .modal-footer

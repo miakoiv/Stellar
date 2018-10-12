@@ -360,6 +360,7 @@ en:
         content: Content
       picture:
         purpose: Image type
+        variant: Size variant
         caption: Caption
         url: ᴡᴡᴡ address
       payment:

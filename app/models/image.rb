@@ -2,6 +2,8 @@
 
 class Image < ActiveRecord::Base
 
+  STYLES = %w{icon thumbnail matchbox postcard technical presentational lightbox}
+
   paginates_per 12
 
   include Authority::Abilities
