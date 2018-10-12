@@ -32,22 +32,8 @@
           %fieldset{disabled: locked}
             = f.text_field :title, required: true
             = f.text_field :subtitle
-
-            - if locked
-              = f.form_group do
-                = f.label col(Product, :overview), class: 'control-label'
-                .form-control-static= @product.overview.html_safe
-            - else
-              ~ f.text_area :overview
-              :coffee
-                CKEDITOR.ClassicEditor.create(
-                  $('#product_overview')[0]
-                  toolbar: ['heading', 'bold', 'italic', 'alignment', 'numberedList', 'bulletedList', 'link', 'undo', 'redo']
-                  language: '#{current_store.locale}'
-                ).catch (error) -> console.log error
-
+            ~ f.text_area :overview
             ~ f.text_area :description, rows: 4
-
 
         = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
@@ -175,3 +161,10 @@
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer
+
+  CKEDITOR.ClassicEditor.create(
+    $('#product_overview')[0]
+    toolbar: ['heading', 'bold', 'italic', 'alignment', 'numberedList', 'bulletedList', 'link', 'undo', 'redo']
+    language: '#{current_store.locale}'
+  ).then (editor) -> editor.isReadOnly = #{locked}
+  .catch (error) -> console.log error
