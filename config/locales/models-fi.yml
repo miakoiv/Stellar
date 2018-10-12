@@ -496,6 +496,7 @@ fi:
         grid_lines: Sarakelinjat
         grid_disable_xs: Ei sarakkeita mobiilinäytöllä
         inverse: Käänteiset värit
+        direction: Suunta
         jumbotron: Jättikoko
         image_sizing: Kuvan koko
         masonry: Tiivistä rivit

@@ -1,12 +1,11 @@
-.segment-content.media{id: dom_id(media, :content)}
-  .media-left
-    - if media.pictures.any?
-      .media-object.image-container{class: media.image_sizing}
-        - if media.url.present?
-          = link_to media.url do
-            = picture_variant_tag media.cover_picture, :postcard
-        - else
-          = picture_variant_tag media.cover_picture, :postcard
+.segment-content.media{id: dom_id(media, :content), class: media.inverse? ? 'media-right' : 'media-left'}
+  - if media.pictures.any?
+    .media-object
+      - if media.url.present?
+        = link_to media.url do
+          = picture_variant_tag media.cover_picture, :matchbox
+      - else
+        = picture_variant_tag media.cover_picture, :matchbox
   .media-body
     .editable-content
       - if media.body.present?

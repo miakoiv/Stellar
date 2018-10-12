@@ -22,7 +22,7 @@ class Segment < ActiveRecord::Base
     :map_theme,       # map theme as a JS snippet
     :facebook_page,   # page id for facebook feeds
     :facebook_token,  # access token for the facebook feed
-    :inverse,         # flag to invert colors in navigation menu segments
+    :inverse,         # flag to invert things, like colour schemes or layouts
     :shadow,          # drop shadow selection
     :jumbotron,       # flag to apply the jumbotron class to segment contents
     :animation,       # animation applied to the segment via AniView

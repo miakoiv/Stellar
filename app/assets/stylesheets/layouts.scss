@@ -320,7 +320,6 @@
 
 .segment-content.picture,
 .segment-content.gallery,
-.segment-content.media,
 .segment-content.category_feature,
 .segment-content.product_feature,
 .segment-content.promotion_feature,
@@ -366,7 +365,6 @@
 }
 .segment-content-wrap.align-top .segment-content.picture,
 .segment-content-wrap.align-top .segment-content.gallery,
-.segment-content-wrap.align-top .segment-content.media,
 .segment-content-wrap.align-top .segment-content.category_feature,
 .segment-content-wrap.align-top .segment-content.product_feature,
 .segment-content-wrap.align-top .segment-content.promotion_feature,
@@ -381,7 +379,6 @@
 }
 .segment-content-wrap.align-middle .segment-content.picture,
 .segment-content-wrap.align-middle .segment-content.gallery,
-.segment-content-wrap.align-middle .segment-content.media,
 .segment-content-wrap.align-middle .segment-content.category_feature,
 .segment-content-wrap.align-middle .segment-content.product_feature,
 .segment-content-wrap.align-middle .segment-content.promotion_feature,
@@ -396,7 +393,6 @@
 }
 .segment-content-wrap.align-bottom .segment-content.picture,
 .segment-content-wrap.align-bottom .segment-content.gallery,
-.segment-content-wrap.align-bottom .segment-content.media,
 .segment-content-wrap.align-bottom .segment-content.category_feature,
 .segment-content-wrap.align-bottom .segment-content.product_feature,
 .segment-content-wrap.align-bottom .segment-content.promotion_feature,
@@ -442,17 +438,40 @@
   display: flex;
   flex-flow: row nowrap;
 
-  .media-left, .media-right, .media-body {
+  .media-object {
     display: block;
     flex: 0 0 auto;
     width: auto;
+
+    > a { display: block; }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
   }
   .media-body {
     display: flex;
+    flex: 1 0 auto;
     flex-flow: column nowrap;
+    width: auto;
   }
-  .media-left { padding-right: $grid-gutter-width/2; }
-  .media-right { padding-left: $grid-gutter-width/2; }
+  &.media-left {
+    padding-right: 0;
+
+    .media-object {
+      margin-right: $grid-gutter-width/2;
+    }
+  }
+  &.media-right {
+    padding-left: 0;
+
+    .media-object {
+      margin-left: $grid-gutter-width/2;
+      order: 2;
+    }
+    .media-body { order: 1; }
+  }
 }
 .segment-content-wrap.align-top .segment-content.media .media-body {
   justify-content: flex-start;

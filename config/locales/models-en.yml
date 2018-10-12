@@ -496,6 +496,7 @@ en:
         grid_lines: Grid lines
         grid_disable_xs: Disable grid on mobile
         inverse: Inverse colors
+        direction: Direction
         jumbotron: Jumbotron
         image_sizing: Image size
         masonry: Pack rows tightly
