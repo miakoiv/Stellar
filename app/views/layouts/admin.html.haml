@@ -3,6 +3,8 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
+    = javascript_include_tag 'ckeditor5/ckeditor'
+    = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"
   %body.admin{class: content_for?(:secondary_nav) && 'dual-nav'}
     %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left
       .inner-wrap= render partial: 'admin/shared/side_nav'
