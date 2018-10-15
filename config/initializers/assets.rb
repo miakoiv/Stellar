@@ -29,4 +29,6 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/premium.css     spry_themes/premium.js
   email/mailgun.css
   hamburgers/hamburgers.css
+  ckeditor5/ckeditor
+  ckeditor5/translations/fi
 )
