@@ -98,6 +98,7 @@ Rails.application.routes.draw do
     get '/reports/sales', to: 'reports#sales', as: :sales_report
     get '/reports/sales_tax', to: 'reports#sales_tax', as: :sales_tax_report
     get '/reports/purchases', to: 'reports#purchases', as: :purchases_report
+    get '/reports/product/:product_id/sales', to: 'reports#product_sales', as: :product_sales
 
     resources :stores do
       resources :hostnames, shallow: true

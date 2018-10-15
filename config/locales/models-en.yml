@@ -316,6 +316,7 @@ en:
         shipped: Shipped
         price: à
         subtotal: Subtotal
+        subtotal_sans_tax: Subtotal without tax
         tax_rate: VAT
         product_code: Product code
         product_customer_code: Customer code

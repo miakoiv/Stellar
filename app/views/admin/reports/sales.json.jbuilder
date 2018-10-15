@@ -7,6 +7,7 @@ json.data do
     json.value_sans_tax Money.new(item.value_sans_tax).format
     json.value_tax Money.new(item.value_tax).format
     json.value_with_tax Money.new(item.value_with_tax).format
+    json.product_sales link_to icon('search'), admin_product_sales_path(item.product_id), remote: true, class: 'btn btn-default btn-xs'
   end
 end
 json.grand_total_sans_tax Money.new(@sales.grand_total_sans_tax).format

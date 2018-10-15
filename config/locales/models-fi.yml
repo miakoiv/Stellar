@@ -316,6 +316,7 @@ fi:
         shipped: Toimitettu
         price: à-hinta
         subtotal: Yhteensä
+        subtotal_sans_tax: Veroton yhteensä
         tax_rate: ALV
         product_code: Tuotekoodi
         product_customer_code: Asiakkaan koodi

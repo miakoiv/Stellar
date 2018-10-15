@@ -67,6 +67,19 @@ class Admin::ReportsController < ApplicationController
     end
   end
 
+  # GET /admin/reports/product/1/sales.js
+  def product_sales
+    @product = current_store.products.find(params[:product_id])
+    @order_types = current_group.incoming_order_types
+    return render nothing: true, status: :bad_request if @order_types.empty?
+    @query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
+    set_default_order_types
+    @search = OrderItemSearch.new(@query.merge('product_id': @product.id))
+    @order_items = @search.results
+
+    respond_to :js
+  end
+
   # GET /admin/reports/purchases
   def purchases
     @order_types = current_group.outgoing_order_types

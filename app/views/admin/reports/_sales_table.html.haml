@@ -18,6 +18,7 @@
       {title: '#{col(OrderReportRow, :value_sans_tax)}', name: 'value_sans_tax', css: 'text-right currency'}
       {title: '#{col(OrderReportRow, :value_tax)}', name: 'value_tax', css: 'text-right currency'}
       {title: '#{col(OrderReportRow, :value_with_tax)}', name: 'value_with_tax', css: 'text-right currency'}
+      {title: '', name: 'product_sales', sort: false}
     ]
     source: '#{admin_sales_report_path(format: :json)}'
     sort:

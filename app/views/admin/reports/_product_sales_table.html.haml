@@ -1,0 +1,21 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th= col(OrderItem, :order_number)
+      %th= col(Order, :summary)
+      %th= col(Order, :completed_at)
+      %th.col-xs-1.text-right= col(OrderItem, :amount)
+      %th.col-xs-2.text-right= col(OrderItem, :subtotal_sans_tax)
+  %tbody
+    - @order_items.each do |order_item|
+      %tr
+        %td= link_to order_item.order.number, admin_order_path(order_item.order)
+        %td= order_item.order.summary
+        %td= l(order_item.order.completed_at.to_date)
+        %td.text-right= order_item.amount
+        %td.text-right.currency= money order_item.subtotal_sans_tax
+      - order_item.adjustments.each do |adjustment|
+        %tr.subrow
+          %th{colspan: 3}= adjustment.label
+          %td.text-right.currency
+            = money adjustment.amount_sans_tax
