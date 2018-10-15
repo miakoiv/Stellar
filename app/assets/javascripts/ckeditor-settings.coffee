@@ -1,4 +1,4 @@
-CKEDITOR.layoutConfig =
+window.ckLayoutConfig =
   fontFamily:
     options: [
       'system-ui',

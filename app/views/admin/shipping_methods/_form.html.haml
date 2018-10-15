@@ -41,6 +41,6 @@
 :coffee
   CKEDITOR.ClassicEditor.create(
     $('#shipping_method_description')[0]
-    language: '#{current_store.locale}'
+    language: '#{I18n.locale}'
   ).then (editor) -> editor.isReadOnly = #{locked}
   .catch (error) -> console.log error

@@ -9,7 +9,7 @@
           :coffee
             CKEDITOR.ClassicEditor.create(
               $('#policy_content')[0]
-              language: '#{current_store.locale}'
+              language: '#{I18n.locale}'
             ).catch (error) -> console.log error
 
         %fieldset.actions.fixed
