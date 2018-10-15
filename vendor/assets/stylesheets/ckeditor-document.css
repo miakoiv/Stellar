@@ -5,9 +5,3 @@
   --ck-font-size-base: 13px;
   --ck-inner-shadow: none;
 }
-.ck.ck-editor__editable_inline {
-  overflow: visible !important;
-  padding: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}

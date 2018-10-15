@@ -452,7 +452,7 @@
   }
   .media-body {
     display: flex;
-    flex: 1 0 auto;
+    flex: 0 1 100%;
     flex-flow: column nowrap;
     width: auto;
   }
@@ -631,3 +631,21 @@
  */
 .text-white { color: #fff !important; }
 .text-shadow { text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); }
+
+
+/*
+ * Content editable via ckeditor
+ */
+.editable-content, .editable-content.ck-content {
+  figure.table {
+    width: 100%;
+    table { @extend .table; }
+  }
+  blockquote {
+    padding: ($line-height-computed / 2) $line-height-computed;
+    margin: 0 0 $line-height-computed;
+    font-size: $blockquote-font-size;
+    font-style: normal;
+    border-left: 5px solid $blockquote-border-color;
+  }
+}

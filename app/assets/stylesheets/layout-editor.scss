@@ -243,3 +243,14 @@ $navbar-icon-padding: 12px !default;
     }
   }
 }
+
+
+/*
+ * ckeditor overrides
+ */
+.ck.ck-editor__editable_inline {
+  overflow: visible !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
