@@ -15,7 +15,7 @@ class Admin::OrderItemsController < ApplicationController
     @query = saved_search_query('order_item', 'admin_order_item_search')
     @query.merge!('order_type' => order_types)
     @search = OrderItemSearch.new(search_params)
-    results = @search.results
+    results = @search.results.pending
     @order_items = results.page(params[:page])
     @customers = UserSearch.new(
       store: current_store,

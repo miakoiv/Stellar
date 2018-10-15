@@ -8,7 +8,7 @@ class OrderItemSearch < Searchlight::Search
 
   def base_query
     OrderItem.joins(:order).merge(Order.approved)
-      .pending.order('order_items.created_at')
+      .order('order_items.created_at')
   end
 
   def search_store
