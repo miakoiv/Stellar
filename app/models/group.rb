@@ -47,6 +47,7 @@ class Group < ActiveRecord::Base
 
   #---
   validates :name, presence: true
+  validates :price_modifier, numericality: {greater_than: -100}
 
   #---
   def self.appearance_options

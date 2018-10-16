@@ -15,11 +15,13 @@
             = f.select :price_base, Group.price_base_options, {hide_label: true}, {class: 'selectize'}
           .col-sm-4
             = f.hidden_field :price_modifier
-            .form-group
+            .form-group{class: @group.errors[:price_modifier].present? && 'has-error'}
               %label.control-label.sr-only= col(Group, :price_modifier)
               .input-group
                 = text_field_tag :modifier, number_with_precision_and_sign(@group.price_modifier, precision: 2, strip_insignificant_zeros: true), class: 'form-control text-right', required: true
                 %span.input-group-addon %
+              - if @group.errors[:price_modifier].present?
+                %span.help-block= @group.errors[:price_modifier].join(', ')
         = f.form_group do
           = f.check_box :price_tax_included
         = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: true}, {class: 'selectize-label'}

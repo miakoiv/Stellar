@@ -57,7 +57,7 @@ class Admin::GroupsController < ApplicationController
         format.json { render :edit, status: :created, location: edit_admin_group_path(@group) }
       else
         format.html { render :new }
-        format.js { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
@@ -80,7 +80,7 @@ class Admin::GroupsController < ApplicationController
         format.json { render :show, status: :ok, location: admin_group_path(@group) }
       else
         format.html { render :edit }
-        format.js { render json: @group.errors, status: :unprocessable_entity }
+        format.js { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
