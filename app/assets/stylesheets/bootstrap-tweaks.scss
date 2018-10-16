@@ -1223,9 +1223,13 @@ fieldset[disabled] .help-block { display: none; }
   &.label-warning { @include label-variant($label-warning-bg); }
   &.label-danger { @include label-variant($label-danger-bg); }
 }
-.selectize-control.plugin-remove_button .item .remove,
-.selectize-control.plugin-remove_button .remove-single {
+.selectize-control.plugin-remove_button .item .remove {
   font-size: 1.2em;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.selectize-control.plugin-remove_button .remove-single {
+  line-height: 1;
   text-decoration: none;
 }
 
