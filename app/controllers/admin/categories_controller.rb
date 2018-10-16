@@ -72,7 +72,7 @@ class Admin::CategoriesController < ApplicationController
         format.json { render :show, status: :ok, location: admin_category_path(@category) }
       else
         format.html { render :edit }
-        format.js { render json: @category.errors, status: :unprocessable_entity }
+        format.js { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end

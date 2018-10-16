@@ -31,6 +31,7 @@ class Category < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :product_scope, presence: true
+  validates :view_mode, presence: true
 
   #---
   def self.find_self_and_descendants(id)
