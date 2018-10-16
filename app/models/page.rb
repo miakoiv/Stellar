@@ -78,7 +78,7 @@ class Page < ActiveRecord::Base
 
   #---
   validates :title, presence: true
-  validates :slug, presence: true, format: {with: /\A[\w-]+\z/i}
+  validates :slug, presence: true, uniqueness: {scope: :store}, format: {with: /\A[\w-]+\z/i}
 
   #---
   before_save :conditionally_disable
