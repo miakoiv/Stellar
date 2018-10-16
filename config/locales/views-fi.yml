@@ -237,6 +237,11 @@ fi:
         new_page: Uusi sivu
       form:
         show_resource: Näytä kohde
+        duplicate:
+          button: Monista
+          confirm: "Monistetaanko varmasti %{klass} %{name}?"
+          proceed: Monista
+          cancel: Kumoa
       layout_menu:
         new_section: Uusi lohko
     pictures:

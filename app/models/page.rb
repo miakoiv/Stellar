@@ -126,6 +126,21 @@ class Page < ActiveRecord::Base
     resource.present? && (!resource.respond_to?(:live) || resource.live?)
   end
 
+  # Creates a duplicate containing duplicates of sections on this page.
+  def duplicate!
+    clone = dup.tap do |c|
+      c.rename_as_copy
+      c.slug = nil
+      c.save
+      sections.each do |section|
+        c.sections << section.duplicate
+      end
+      pictures.each do |picture|
+        c.pictures << picture.duplicate
+      end
+    end
+  end
+
   def slugger
     [:title, [:title, :id]]
   end
@@ -203,6 +218,14 @@ class Page < ActiveRecord::Base
   def to_option
     self_and_ancestors.join " \u23f5 "
   end
+
+  protected
+    # Adds an incrementing duplicate number to the title.
+    def rename_as_copy
+      trunk, branch = title.partition(/ \(\d+\)/)
+      branch = ' (0)' if branch.empty?
+      self[:title] = "#{trunk}#{branch.succ}"
+    end
 
   private
     def touch_resource

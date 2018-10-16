@@ -4,9 +4,9 @@ class Admin::PagesController < ApplicationController
 
   include AwesomeNester
   before_action :authenticate_user!
-  before_action :set_page, only: [:edit, :update, :destroy, :layout]
+  before_action :set_page, only: [:edit, :update, :destroy, :layout, :duplicate]
 
-  authority_actions rearrange: 'update', layout: 'update'
+  authority_actions rearrange: 'update', layout: 'update', duplicate: 'create'
 
   layout 'admin'
 
@@ -92,6 +92,16 @@ class Admin::PagesController < ApplicationController
     authorize_action_for @page, at: current_store
 
     render layout: 'layout_editor'
+  end
+
+  # POST /admin/pages/1/duplicate
+  def duplicate
+    authorize_action_for Page, at: current_store
+    original = @page
+    @page = original.duplicate!
+    track @page
+
+    redirect_to edit_admin_page_path(@page), notice: t('.notice', page: original)
   end
 
   private

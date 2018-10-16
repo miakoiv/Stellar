@@ -80,6 +80,8 @@ en:
         notice: "Page %{page} updated."
       destroy:
         notice: "Page %{page} deleted."
+      duplicate:
+        notice: "Page %{page} duplicated."
     pictures:
       create:
         error: "Image upload failed."

@@ -80,6 +80,8 @@ fi:
         notice: "Sivu %{page} päivitetty."
       destroy:
         notice: "Sivu %{page} poistettu."
+      duplicate:
+        notice: "Sivu %{page} monistettu."
     pictures:
       create:
         error: "Kuvan lisääminen epäonnistui."

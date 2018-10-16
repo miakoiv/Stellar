@@ -174,8 +174,6 @@ Rails.application.routes.draw do
     end
     resources :pages do
       resources :pictures, shallow: true
-      post :rearrange, on: :collection
-      get :layout, on: :member
       resources :sections, shallow: true do
         resources :pictures
         resources :columns do
@@ -204,6 +202,11 @@ Rails.application.routes.draw do
         end
         post :reorder, on: :collection
       end
+      member do
+        get :layout
+        post :duplicate
+      end
+      post :rearrange, on: :collection
     end
     resources :images do
       get :select, on: :member

@@ -99,6 +99,19 @@ class Section < ActiveRecord::Base
     cover_picture
   end
 
+  # Generates a duplicate with duplicated columns.
+  def duplicate
+    dup.tap do |c|
+      c.page = nil
+      columns.each do |column|
+        c.columns << column.duplicate
+      end
+      pictures.each do |picture|
+        c.pictures << picture.duplicate
+      end
+    end
+  end
+
   def to_s
     name || priority + 1
   end

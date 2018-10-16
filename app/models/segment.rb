@@ -200,6 +200,16 @@ class Segment < ActiveRecord::Base
     end
   end
 
+  # Generates a duplicate with duplicated content.
+  def duplicate
+    dup.tap do |c|
+      c.column = nil
+      pictures.each do |picture|
+        c.pictures << picture.duplicate
+      end
+    end
+  end
+
   def to_s
     human_attribute_value(:template).capitalize
   end

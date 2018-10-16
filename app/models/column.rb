@@ -22,6 +22,16 @@ class Column < ActiveRecord::Base
   end
 
   #---
+  # Generates a duplicate with duplicated segments.
+  def duplicate
+    dup.tap do |c|
+      c.section = nil
+      segments.each do |segment|
+        c.segments << segment.duplicate
+      end
+    end
+  end
+
   def to_s
     priority + 1
   end
