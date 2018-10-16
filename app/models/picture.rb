@@ -30,6 +30,13 @@ class Picture < ActiveRecord::Base
   end
 
   #---
+  # Generates a duplicate not attached to any pictureable.
+  def duplicate
+    dup.tap do |c|
+      c.pictureable = nil
+    end
+  end
+
   # Assign first available purpose.
   def assign_purpose
     self.purpose ||= Picture.available_purposes.first

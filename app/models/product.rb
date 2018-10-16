@@ -310,13 +310,7 @@ class Product < ActiveRecord::Base
         product_properties: product_properties.map(&:dup)
       )
       pictures.each do |picture|
-        c.pictures.create(
-          priority: picture.priority,
-          purpose: picture.purpose,
-          image: picture.image,
-          caption: picture.caption,
-          url: picture.url
-        )
+        c.pictures << picture.duplicate
       end
     end
   end
