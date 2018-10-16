@@ -135,6 +135,7 @@ module ApplicationHelper
   end
 
   def number_with_precision_and_sign(number, options = {})
+    return '' if number.blank?
     if number < 0
       "-#{number_with_precision(-number, options)}"
     else
@@ -143,6 +144,7 @@ module ApplicationHelper
   end
 
   def number_to_signed_percentage(number, options = {})
+    return '' if number.blank?
     if number < 0
       "-#{number_to_percentage(-number, options)}"
     else
@@ -151,6 +153,7 @@ module ApplicationHelper
   end
 
   def number_if_present(number, prefix = nil)
+    return '' if number.blank?
     number == 0 ? '' : "#{prefix}#{number}"
   end
 end
