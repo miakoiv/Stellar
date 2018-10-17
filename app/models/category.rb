@@ -50,7 +50,7 @@ class Category < ActiveRecord::Base
   end
 
   def self_and_maybe_descendants
-    products.visible.any? ? Category.where(id: self) : self_and_descendants
+    filtering ? self_and_descendants : Category.where(id: self)
   end
 
   def slugger
