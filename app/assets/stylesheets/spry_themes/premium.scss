@@ -571,6 +571,9 @@ $body-tone-bg: darken($body-bg, 4%);
     @extend .btn, .btn-sm, .btn-primary;
   }
 }
+.layout-container .more-items-link {
+  margin-top: 10px;
+}
 
 
 /*
