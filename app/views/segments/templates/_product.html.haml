@@ -2,7 +2,6 @@
 
 .segment-content.product
   - if resource.is_a?(Product)
-    .row
-      = render partial: 'products/product_card', object: resource, as: :product
+    = render partial: 'products/product_card', object: resource, as: :product
   - else
     = render partial: 'segments/placeholders/product'

@@ -15,7 +15,7 @@
         .swiper-wrapper
           = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
     - else
-      .row{class: ["columns-#{promotion.grid_columns || 3}", promotion.grid_lines? && 'grid-lines']}
+      .columns{class: ["columns-#{promotion.grid_columns || 3}", promotion.grid_lines? && 'grid-lines']}
         = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if promotion.show_more? && products.count > max_items.to_i
       .more-items-link
