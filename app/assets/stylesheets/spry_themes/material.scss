@@ -434,7 +434,6 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 .product-grid .product {
   @extend .col-xs-6, .col-sm-4, .col-md-3;
   margin-bottom: 30px;
-  transition: box-shadow 300ms $material-easing;
 }
 .product-grid .product.out-of-stock,
 .product-card.out-of-stock { opacity: 0.4; }
@@ -558,14 +557,23 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 .product-grid .staggered-grid {
   @extend .row;
 
-  .product > a {
-    @include shadow-lower;
-    border: 1px solid $table-border-color;
-    border-radius: $border-radius-base;
-    transition: box-shadow 200ms $material-easing;
+  .product {
+    transform: translate3d(0, 0, 0);
+    transition: transform 200ms $material-easing;
+
+    > a {
+      @include shadow-lower;
+      border: 1px solid $table-border-color;
+      border-radius: $border-radius-base;
+      transition: box-shadow 200ms $material-easing;
+    }
   }
-  .product:hover > a {
-    @include shadow-higher;
+  .product:hover {
+    transform: perspective(250px) translate3d(0, -1px, 1px);
+
+    > a {
+      @include shadow-higher;
+    }
   }
 }
 
@@ -583,11 +591,12 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   position: relative;
   padding: 10px $grid-gutter-width/2;
   background-color: $body-bg;
+  transition: box-shadow 200ms $material-easing;
 
   > a { padding-bottom: 90px; }
   &:hover {
     z-index: 2;
-    @include shadow-lower;
+    @include shadow-higher;
   }
   .product-image {
     position: relative;
