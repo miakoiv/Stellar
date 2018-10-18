@@ -207,6 +207,10 @@ class Store < ActiveRecord::Base
       .to_h
   end
 
+  def tag_options
+    tags.map { |t| [t.name, t.id, data: {appearance: t.appearance}.to_json] }
+  end
+
   def group_options
     groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }
   end

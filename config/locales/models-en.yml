@@ -390,6 +390,7 @@ en:
         master_product_id: Variant of
         variant_ids: Variants
         category_ids: Categories
+        tags: Tags
         code: Product code
         customer_code: Customer code
         title: Title
