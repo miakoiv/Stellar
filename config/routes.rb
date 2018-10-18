@@ -153,6 +153,9 @@ Rails.application.routes.draw do
     resources :properties do
       post :reorder, on: :collection
     end
+    resources :tags do
+      resources :pictures, shallow: true
+    end
     resources :customer_assets do
       resources :asset_entries, shallow: true, only: :create
     end

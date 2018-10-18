@@ -1,0 +1,11 @@
+= link_to edit_admin_tag_path(tag), remote: true, id: dom_id(tag), class: "tag list-group-item list-group-item-#{tag.searchable? && 'info'}" do
+  .row
+    .col-xs-2
+      - if tag.cover_picture.present?
+        .box-thumbnail
+          = picture_variant_tag tag.cover_picture, :thumbnail
+      - else
+        = bootstrap_label(tag)
+    .col-xs-10
+      %h4.list-group-item-heading= tag
+      %p= t('.product_count', count: tag.products.count)

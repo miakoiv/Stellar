@@ -134,6 +134,13 @@ fi:
         notice: "Kauppa %{store} luotu."
       update:
         notice: "Kauppa %{store} päivitetty."
+    tags:
+      create:
+        notice: "Tagi %{tag} luotu."
+      update:
+        notice: "Tagi %{tag} päivitetty."
+      destroy:
+        notice: "Tagi %{tag} poistettu."
     tax_categories:
       create:
         notice: "Veroluokka %{tax_category} luotu."

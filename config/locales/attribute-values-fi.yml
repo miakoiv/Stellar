@@ -91,7 +91,7 @@ fi:
           correspondence: yhteydenotot
           reports: raportit
           property_editor: ominaisuudet
-          category_editor: tuoteryhmät
+          category_editor: tuoteryhmät ja tagit
           order_review: tilaukset (luku)
           order_manage: tilaukset
           order_notify: tilausvahvistukset
@@ -110,7 +110,7 @@ fi:
           correspondence: asiakkaiden yhteydenotot sähköpostitse
           reports: raporttien lukeminen ja ajaminen
           property_editor: tuoteominaisuuksien määritykset
-          category_editor: tuoteryhmien hallinta
+          category_editor: tuoteryhmien ja tagien hallinta
           order_review: tilauksien selaaminen ja katselu, ei käsittely
           order_manage: kaikki tilauksien käsittelyyn liittyvät toiminnot
           order_notify: tilausvahvistukset sähköpostitse
@@ -189,3 +189,10 @@ fi:
           'velocity-slow': <i class="fa fa-car"></i>
           'velocity-normal': <i class="fa fa-plane"></i>
           'velocity-fast': <i class="fa fa-rocket"></i>
+      tag:
+        appearance:
+          default: harmaa
+          success: vihreä
+          info: sininen
+          warning: oranssi
+          danger: punainen

@@ -1,0 +1,23 @@
+.row
+  .col-md-6
+    .page-header
+      %h1= icon('tags', title(Tag, count: 2))
+    = render partial: 'admin/tags/list', object: @tags, as: :tags
+  .col-md-6
+    .quick-edit-panel
+      .header
+        - if current_user.can_create?(Tag, at: current_store)
+          = link_to new_admin_tag_path, remote: true, class: 'btn btn-primary' do
+            = icon('plus', t('.new_tag'))
+      #tag-form
+
+:coffee
+  $('.quick-edit-panel').stick_in_parent
+    parent: $('#content-wrap')
+    offset_top: 80
+    bottoming: false
+    spacer: false
+    recalc_every: 50
+
+  $(document).on 'pictureable:added pictureable:changed pictureable:removed pictureable:reordered', ->
+    $('#tag-form').find('form.immediate').trigger 'submit.rails'

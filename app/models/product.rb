@@ -54,6 +54,8 @@ class Product < ActiveRecord::Base
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
 
+  has_and_belongs_to_many :tags
+
   # If a product has associated shipping methods, only those shipping methods
   # are available when ordering this product.
   has_and_belongs_to_many :shipping_methods

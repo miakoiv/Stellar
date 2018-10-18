@@ -1,0 +1,20 @@
+= bootstrap_form_for [:admin, @tag], remote: true, html: {class: 'immediate'} do |f|
+  .panel.panel-primary
+    .panel-body
+      %fieldset
+        = f.text_field :name, required: true
+        - unless @tag.new_record?
+          = f.select :appearance, Tag.appearance_options, {}, {class: 'selectize-label'}
+          = f.form_group do
+            = f.check_box :searchable
+    - unless @tag.new_record?
+      .panel-footer
+        - if current_user.can_delete?(@tag, at: current_store)
+          .pull-right
+            = link_to icon('remove', t('actions.delete')), admin_tag_path(@tag), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Tag.model_name.human, name: @tag.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
+
+:coffee
+  $('select.selectize-label').betterSelectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer

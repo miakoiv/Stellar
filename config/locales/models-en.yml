@@ -119,6 +119,9 @@ en:
       store:
         one: store
         other: stores
+      tag:
+        one: tag
+        other: tags
       tax_category:
         one: tax category
         other: tax categories
@@ -596,6 +599,10 @@ en:
         shipping_origin: Google Maps origin location
       style:
         preamble: Preamble
+      tag:
+        name: Name
+        appearance: Appearance
+        searchable: Include in product search
       tax_category:
         name: Name
         rate: Tax rate

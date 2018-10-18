@@ -2,6 +2,7 @@
   = menu_item 'cube', title(Product, count: 2), admin_products_path
 - if current_user_has_role?(:category_editor)
   = menu_item 'sitemap', title(Category, count: 2), admin_categories_path
+  = menu_item 'tags', title(Tag, count: 2), admin_tags_path
 - if current_store.portal? && current_user_has_role?(:superuser)
   = menu_item 'umbrella', title(Department, count: 2), admin_departments_path
 - if current_user_has_role?(:property_editor)

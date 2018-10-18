@@ -32,7 +32,7 @@ class ProductSearch < Searchlight::Search
 
   #---
   def base_query
-    Product.includes(:categories)
+    Product.includes(:categories, :tags)
   end
 
   def search_store
@@ -67,6 +67,10 @@ class ProductSearch < Searchlight::Search
 
   def search_permitted_categories
     query.where(categories: {id: permitted_categories})
+  end
+
+  def search_tags
+    query.where(tags: {id: tags})
   end
 
   def search_live

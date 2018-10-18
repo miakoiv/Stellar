@@ -409,6 +409,16 @@ fi:
       modal_form:
         save: Ota tyyli käyttöön
         delete: Poista tyyliasetukset
+    tags:
+      index:
+        new_tag: Uusi tagi
+      edit:
+        new_tag: Uusi tagi
+      item:
+        product_count:
+          zero: "ei tuotteita"
+          one: "%{count} tuote"
+          other: "%{count} tuotetta"
     tax_categories:
       index:
         new_tax_category: Uusi veroluokka

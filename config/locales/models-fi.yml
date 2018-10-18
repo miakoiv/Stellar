@@ -119,6 +119,9 @@ fi:
       store:
         one: kauppa
         other: kaupat
+      tag:
+        one: tagi
+        other: tagit
       tax_category:
         one: veroluokka
         other: veroluokat
@@ -596,6 +599,10 @@ fi:
         shipping_origin: Google Maps -sijaintitieto
       style:
         preamble: Esipuhe
+      tag:
+        name: Nimi
+        appearance: Väritys
+        searchable: Lisää tuotehakuun
       tax_category:
         name: Nimi
         rate: Verokanta

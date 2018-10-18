@@ -72,6 +72,7 @@ class Store < ActiveRecord::Base
     store.has_many :departments
     store.has_many :products
     store.has_many :properties
+    store.has_many :tags
     store.has_many :orders
     store.has_many :order_types
     store.has_many :shipping_methods

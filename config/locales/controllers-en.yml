@@ -134,6 +134,13 @@ en:
         notice: "Store %{store} created."
       update:
         notice: "Store %{store} updated."
+    tags:
+      create:
+        notice: "Tag %{tag} created."
+      update:
+        notice: "Tag %{tag} updated."
+      destroy:
+        notice: "Tag %{tag} deleted."
     tax_categories:
       create:
         notice: "Tax category %{tax_category} created."

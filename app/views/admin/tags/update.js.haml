@@ -1,0 +1,3 @@
+$("##{dom_id(@tag)}").replaceWith("#{j render partial: 'item', object: @tag, as: :tag}");
+$("##{dom_id(@tag)}").addClass('active');
+$('#tag-form').html("#{j render partial: 'admin/tags/edit'}");

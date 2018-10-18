@@ -1,0 +1,5 @@
+$('#tags-list').replaceWith("#{j render partial: 'admin/tags/list', object: @tags, as: :tags}");
+$("##{dom_id(@tag)}").addClass('active');
+$('#tag-form').html("#{j render partial: 'admin/tags/edit'}");
+var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
+scroll.animateScroll($('##{dom_id(@tag)}')[0], null, {speed: 300});

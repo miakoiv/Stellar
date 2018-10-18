@@ -91,7 +91,7 @@ en:
           correspondence: correspondence
           reports: reports
           property_editor: properties
-          category_editor: categories
+          category_editor: categories and tags
           order_review: orders (review)
           order_manage: orders
           order_notify: order notifications
@@ -110,7 +110,7 @@ en:
           correspondence: customer correspondence by e-mail
           reports: viewing and running reports
           property_editor: product property definitions
-          category_editor: product category management
+          category_editor: product category and tag management
           order_review: order reviews only
           order_manage: order management
           order_notify: order notifications by e-mail
@@ -189,3 +189,10 @@ en:
           'velocity-slow': <i class="fa fa-car"></i>
           'velocity-normal': <i class="fa fa-plane"></i>
           'velocity-fast': <i class="fa fa-rocket"></i>
+      tag:
+        appearance:
+          default: gray
+          success: green
+          info: blue
+          warning: orange
+          danger: red

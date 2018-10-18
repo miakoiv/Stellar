@@ -425,6 +425,16 @@ en:
       modal_form:
         save: Apply detailing
         delete: Discard detailing
+    tags:
+      index:
+        new_tag: New tag
+      edit:
+        new_tag: New tag
+      item:
+        product_count:
+          zero: "no products"
+          one: "%{count} product"
+          other: "%{count} products"
     tax_categories:
       index:
         new_tax_category: New tax category

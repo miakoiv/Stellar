@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181012102958) do
+ActiveRecord::Schema.define(version: 20181017123743) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -628,6 +628,13 @@ ActiveRecord::Schema.define(version: 20181012102958) do
 
   add_index "products_shipping_methods", ["product_id"], name: "index_products_shipping_methods_on_product_id", using: :btree
 
+  create_table "products_tags", id: false, force: :cascade do |t|
+    t.integer "product_id", limit: 4, null: false
+    t.integer "tag_id",     limit: 4, null: false
+  end
+
+  add_index "products_tags", ["product_id", "tag_id"], name: "index_products_tags_on_product_id_and_tag_id", unique: true, using: :btree
+
   create_table "products_users", id: false, force: :cascade do |t|
     t.integer "product_id", limit: 4, null: false
     t.integer "user_id",    limit: 4, null: false
@@ -832,6 +839,19 @@ ActiveRecord::Schema.define(version: 20181012102958) do
   end
 
   add_index "styles", ["store_id"], name: "index_styles_on_store_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "store_id",   limit: 4,                       null: false
+    t.string   "name",       limit: 255
+    t.string   "appearance", limit: 255, default: "default", null: false
+    t.boolean  "searchable",             default: true,      null: false
+    t.string   "slug",       limit: 255,                     null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "tags", ["slug"], name: "index_tags_on_slug", using: :btree
+  add_index "tags", ["store_id"], name: "index_tags_on_store_id", using: :btree
 
   create_table "tax_categories", force: :cascade do |t|
     t.integer  "store_id",           limit: 4
