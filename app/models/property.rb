@@ -23,7 +23,7 @@ class Property < ActiveRecord::Base
   #---
   validates :name, presence: true
   validates :external_name, uniqueness: {scope: :store, allow_blank: true}
-  after_save :define_search_method
+  after_save :define_property_search_method, if: -> (property) { property.searchable? }
 
   #---
   def values
@@ -65,7 +65,7 @@ class Property < ActiveRecord::Base
       numeric? ? :value_f : :value
     end
 
-    def define_search_method
-      ProductSearch.define_search_method(self)
+    def define_property_search_method
+      ProductSearch.define_property_search_method(self)
     end
 end

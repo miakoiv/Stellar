@@ -8,7 +8,7 @@ class ProductSearch < Searchlight::Search
 
   # Defines a search method for a property. Using subselects
   # makes it possible to match multiple properties at the same time.
-  def self.define_search_method(property)
+  def self.define_property_search_method(property)
     key = property.sluggify
     define_method("search_#{key}") do
       query.where('EXISTS (
@@ -25,9 +25,9 @@ class ProductSearch < Searchlight::Search
   end
 
   # Defines search methods for all existing properties. When a property
-  # is created or modified, call #define_search_method on it.
+  # is created or modified, call #define_property_search_method on it.
   Property.searchable.each do |property|
-    define_search_method(property)
+    define_property_search_method(property)
   end
 
   #---
