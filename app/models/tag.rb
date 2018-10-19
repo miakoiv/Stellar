@@ -21,6 +21,7 @@ class Tag < ActiveRecord::Base
 
   #---
   validates :name, presence: true, uniqueness: {scope: :store}
+  after_save :touch_products
 
   #---
   def self.appearance_options
@@ -43,4 +44,9 @@ class Tag < ActiveRecord::Base
   def to_s
     name
   end
+
+  private
+    def touch_products
+      products.each(&:touch)
+    end
 end

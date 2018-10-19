@@ -54,7 +54,7 @@ class Product < ActiveRecord::Base
   # live status when the relationships change.
   has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
 
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, after_add: :touch_itself, after_remove: :touch_itself
 
   # If a product has associated shipping methods, only those shipping methods
   # are available when ordering this product.
@@ -350,6 +350,10 @@ class Product < ActiveRecord::Base
   protected
     def reset_itself!(context)
       reset_live_status! if persisted?
+    end
+
+    def touch_itself(context)
+      touch if persisted?
     end
 
     def touch_variants(context = nil)
