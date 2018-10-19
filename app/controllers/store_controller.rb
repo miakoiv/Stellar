@@ -21,6 +21,7 @@ class StoreController < ApplicationController
     except: [:index, :lookup, :delete_cart, :order_product, :show_favorites]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category]
+  before_action :find_tag, only: [:show_tag]
   before_action :find_department, only: [:show_department]
   before_action :find_promotion, only: [:show_promotion]
   before_action :find_product, only: [:show_product]
@@ -109,6 +110,11 @@ class StoreController < ApplicationController
     @view_mode = get_view_mode_setting(@category)
   end
 
+  # GET /tag/:tag_id
+  def show_tag
+    @products = @tag.products.live.page(params[:page])
+  end
+
   # GET /department/:department_id
   def show_department
     @products = @department.products.live.random.page(params[:page]).per(24)
@@ -185,6 +191,11 @@ class StoreController < ApplicationController
           return redirect_to show_category_path(first_child)
         end
       end
+    end
+
+    # Find tag by friendly id in `tag_id`.
+    def find_tag
+      @tag = current_store.tags.friendly.find(params[:tag_id])
     end
 
     # Find department by friendly id in `department_id`, including history.

@@ -1,0 +1,13 @@
+#products-wrap
+  .context
+    %ol.breadcrumb
+      = render partial: 'tags/breadcrumb', collection: current_store.tags, as: :tag
+  .products
+    #product-view.product-grid
+      %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
+        = render @products
+      .pagination-block
+        = paginate @products
+
+:coffee
+  $('.navbar-form').show()

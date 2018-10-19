@@ -1,0 +1,6 @@
+- if tag == @tag
+  %li.active
+    = bootstrap_label(tag)
+- else
+  %li
+    = link_to tag, show_tag_path(tag)

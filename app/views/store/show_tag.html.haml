@@ -1,0 +1,10 @@
+- meta_tags_for(@tag)
+
+#store-wrap
+  #store-header
+    #categories-wrap
+      .categories.hidden-print
+        %ul= render @categories
+
+  #store-body
+    = render partial: 'show_tag'

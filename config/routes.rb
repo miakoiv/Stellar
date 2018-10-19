@@ -72,8 +72,9 @@ Rails.application.routes.draw do
   delete '/store/favorites/:product_id', to: 'store#remove_favorite', as: :remove_favorite
   get    '/store/favorites/:product_id', to: 'store#check_favorite', as: :check_favorite
 
-  # Category, department, promotion, and product views.
+  # Category, tag, department, promotion, and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/tag/:tag_id', to: 'store#show_tag', as: :show_tag
   get '/department/:department_id', to: 'store#show_department', as: :show_department
   get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
   get '/product/:product_id(/:category_id)', to: 'store#show_product', as: :show_product
