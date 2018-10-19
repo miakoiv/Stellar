@@ -390,7 +390,7 @@ fi:
         master_product_id: Varioitava tuote
         variant_ids: Variantit
         category_ids: Tuoteryhmät
-        tags: Tagit
+        tag_ids: Tagit
         code: Tuotekoodi
         customer_code: Asiakkaan koodi
         title: Nimike
