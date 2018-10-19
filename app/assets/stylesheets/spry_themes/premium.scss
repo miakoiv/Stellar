@@ -619,6 +619,12 @@ $body-tone-bg: darken($body-bg, 4%);
     .breadcrumb { background-color: transparent; }
     .active { @extend strong; }
   }
+  .tags {
+    @extend .col-xs-12, .col-md-4, .col-md-offset-8;
+
+    .nav { @extend .pull-right; }
+    .nav > li > a { padding: 0; }
+  }
 }
 
 /* Product title */

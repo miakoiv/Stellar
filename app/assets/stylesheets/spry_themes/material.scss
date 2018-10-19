@@ -680,6 +680,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
   .categories {
     @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+    margin-bottom: 20px;
 
     .breadcrumb {
       @extend .small;
@@ -690,8 +691,24 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       background-color: transparent;
     }
   }
+  .tags {
+    @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+
+    .nav {
+      display: flex;
+      flex-flow: row wrap;
+
+      > li {
+        margin-right: 5px;
+
+        &:last-child { margin-right: 0; }
+        > a { padding: 0; }
+      }
+    }
+  }
   .product-title {
     @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: $font-size-h3;
     line-height: 1;
@@ -705,18 +722,17 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 }
 
-/* Absolutely positioned header for medium and larger viewports */
+/* Flexbox header for medium and larger viewports */
 @media (min-width: $screen-md-min) {
   .product-detail .product-header {
     position: absolute;
     top: 0;
     width: 100%;
-    height: 180px;
+    height: 200px;
+    display: flex;
+    flex-flow: column nowrap;
 
-    .product-title {
-      position: absolute;
-      bottom: 0;
-    }
+    .categories { margin-bottom: auto; }
   }
 }
 
@@ -725,7 +741,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   .product-detail .product-body {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 200px auto auto auto;
+    grid-template-rows: 220px auto auto auto;
     background-image: linear-gradient(to right, $body-bg, $body-bg calc(50% - 5px), $body-tone-bg calc(50% - 1px), $body-bg 50%);
   }
   .product-detail .product-footer {
