@@ -13,6 +13,7 @@
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
             = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
+            = f.select :tag_ids, current_store.tag_options, {}, {multiple: true, class: 'selectize-label'}
             = f.select :vendor_id, current_store.group_options, {include_blank: true}, {class: 'selectize-label', disabled: third_party?}
             .row
               .col-md-6
@@ -92,7 +93,6 @@
 
 :coffee
   persist_tabs 'product-main'
-
 
   numbro.culture "#{t('culture')}"
 

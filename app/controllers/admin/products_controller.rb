@@ -198,7 +198,7 @@ class Admin::ProductsController < ApplicationController
         :mass, :dimension_u, :dimension_v, :dimension_w,
         :lead_time, :shipping_notes,
         :cost_price, :trade_price, :retail_price, :tax_category_id,
-        :available_at, :deleted_at, {category_ids: []},
+        :available_at, :deleted_at, {category_ids: []}, {tag_ids: []},
         {shipping_method_ids: []}
       )
     end

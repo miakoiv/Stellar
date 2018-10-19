@@ -9,6 +9,7 @@
         = f.text_field :title, required: true
         = f.text_field :subtitle
         = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
+        = f.select :tag_ids, current_store.tag_options, {}, {multiple: true, class: 'selectize-label'}
         - unless @product.not_priced?
           .row
             .col-sm-6
@@ -30,3 +31,9 @@
   = render partial: 'admin/inventory_items/table', object: @product, as: :product
   - if current_user.can_create?(InventoryItem, at: current_store)
     = render partial: 'admin/inventory_items/form', object: @product, as: :product
+
+:coffee
+  $('select.selectize-label').betterSelectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer
