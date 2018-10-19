@@ -18,6 +18,7 @@ class Tag < ActiveRecord::Base
 
   default_scope { order(:name) }
   scope :searchable, -> { where(searchable: true) }
+  scope :graphic, -> { joins(:pictures) }
 
   #---
   validates :name, presence: true, uniqueness: {scope: :store}
