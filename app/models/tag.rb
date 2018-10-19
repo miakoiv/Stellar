@@ -36,6 +36,10 @@ class Tag < ActiveRecord::Base
     name_changed? || super
   end
 
+  def description
+    name
+  end
+
   def to_s
     name
   end
