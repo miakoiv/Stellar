@@ -1,0 +1,5 @@
+%ul.nav.nav-pills
+  - product.tags.each do |tag|
+    %li
+      = link_to show_tag_path(tag) do
+        = bootstrap_label(tag)
