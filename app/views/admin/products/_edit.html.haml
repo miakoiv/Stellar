@@ -8,8 +8,10 @@
       %fieldset
         = f.text_field :title, required: true
         = f.text_field :subtitle
+      %fieldset{disabled: @product.variant?}
         = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
         = f.select :tag_ids, current_store.tag_options, {}, {multiple: true, class: 'selectize-label'}
+      %fieldset
         - unless @product.not_priced?
           .row
             .col-sm-6
