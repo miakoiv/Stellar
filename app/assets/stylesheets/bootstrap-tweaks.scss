@@ -1211,6 +1211,10 @@ fieldset[disabled] .help-block { display: none; }
 }
 .selectize-control.single .selectize-input.disabled::after { display: none; }
 
+.selectize-control.multi .selectize-input > div {
+  line-height: 1.333;
+}
+
 .selectize-control.selectize-label .selectize-input > div {
   padding: .2em .6em .3em;
   color: $label-color !important;
