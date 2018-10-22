@@ -490,7 +490,20 @@
 .segment-content.category_menu {
   .navmenu { width: 100%; }
 }
+@media (max-width: $screen-xs-max) {
+  .segment-content.media {
+    flex-flow: column nowrap;
 
+    &.media-left .media-object {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    &.media-right .media-object {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+}
 
 .segment-content.facebook_feed {
   .post { @extend .panel, .panel-default; }
