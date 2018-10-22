@@ -8,8 +8,9 @@ $.fn.extend
       gumshoe.init
         selector: '#main-nav .nav > .scroll > a'
         offset: 40
-      $('.animation').AniView
-        animateThreshold: 40
+
+    $('.animation', this).AniView
+      animateThreshold: 40
 
     $('.gallery', this).each ->
       $(this).magnificPopup
