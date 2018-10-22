@@ -10,7 +10,7 @@
     = link_to show_product_path(@product), class: 'btn btn-default' do
       = icon('eye', t('actions.view'))
   %h1
-    = icon('cube', @product.title)
+    = icon(@product.variant? ? 'adjust' : 'cube', @product.title)
     %span.small= @product.subtitle
 
 .row
