@@ -50,11 +50,9 @@ class Product < ActiveRecord::Base
   # A product may belong to a specific vendor group who's responsible for it.
   belongs_to :vendor, class_name: 'Group'
 
-  # A product may belong to multiple categories, and must update its own
-  # live status when the relationships change.
-  has_and_belongs_to_many :categories, after_add: :reset_itself!, after_remove: :reset_itself!
+  has_and_belongs_to_many :categories, after_add: :associations_changed, after_remove: :associations_changed
 
-  has_and_belongs_to_many :tags, after_add: :touch_itself, after_remove: :touch_itself
+  has_and_belongs_to_many :tags, after_add: :associations_changed, after_remove: :associations_changed
 
   # If a product has associated shipping methods, only those shipping methods
   # are available when ordering this product.
@@ -63,7 +61,7 @@ class Product < ActiveRecord::Base
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
   belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true, counter_cache: :variants_count
-  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, counter_cache: :variants_count, after_add: :reset_itself!, after_remove: :reset_itself!
+  has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, counter_cache: :variants_count, after_add: :associations_changed, after_remove: :associations_changed
   belongs_to :primary_variant, class_name: 'Product'
 
   has_many :order_items
@@ -71,7 +69,7 @@ class Product < ActiveRecord::Base
   has_many :component_products, through: :component_entries, source: :component
   has_many :requisite_entries, dependent: :destroy
   has_many :requisite_products, through: :requisite_entries, source: :requisite
-  has_many :product_properties, dependent: :destroy, after_add: :touch_variants, after_remove: :touch_variants
+  has_many :product_properties, dependent: :destroy, after_add: :associations_changed, after_remove: :associations_changed
   has_many :properties, through: :product_properties
   has_many :iframes, dependent: :destroy
 
@@ -114,9 +112,8 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
-  after_save :touch_variants
-  after_save :touch_categories
-  after_save :reset_live_status!
+  after_save :update_from_master, if: :should_update_from_master?
+  after_save :update_variants, if: :has_variants?
 
   #---
   def self.purpose_options
@@ -287,6 +284,7 @@ class Product < ActiveRecord::Base
       purpose: master.purpose,
       master_product: master,
       categories: master.categories,
+      tags: master.tags,
       code: master.generate_variant_code,
       title: master.title,
       subtitle: master.subtitle,
@@ -337,34 +335,46 @@ class Product < ActiveRecord::Base
   # - retail price is not nil (or product is a bundle or has variants)
   # - set to be available at a certain date which is not in the future
   # - if set to be deleted at a certain date which is in the future
-  def reset_live_status!
-    update_columns(
-      live: (retail_price_cents.present? || bundle? || has_variants?) &&
+  def reset_live_status
+    self.live = (retail_price_cents.present? || bundle? || has_variants?) &&
         (available_at.present? && !available_at.future?) &&
         (deleted_at.nil? || deleted_at.future?)
-    )
-    touch
-    true
   end
 
   protected
-    def reset_itself!(context)
-      reset_live_status! if persisted?
-    end
-
-    def touch_itself(context)
-      touch if persisted?
-    end
-
-    def touch_variants(context = nil)
-      return true unless has_variants?
-      transaction do
-        variants.each(&:touch)
+    # Callback to update the live status of the product itself, and touch
+    # the associated object that was added or removed.
+    def associations_changed(context)
+      if persisted?
+        reset_live_status
+        context.touch if context.persisted?
+        save
       end
+      true
     end
 
-    def touch_categories
-      categories.each(&:touch)
+    def update_variants
+      transaction do
+        variants.each do |variant|
+          variant.save
+        end
+      end
+      true
+    end
+
+    def should_update_from_master?
+      !@updated_from_master && variant?
+    end
+
+    # Variants don't have their own categories and tags,
+    # instead they are copied from their master product.
+    def update_from_master
+      @updated_from_master = true
+      update(
+        categories: master_product.categories,
+        tags: master_product.tags
+      )
+      true
     end
 
     # Adds an incrementing branch number to the product code.
