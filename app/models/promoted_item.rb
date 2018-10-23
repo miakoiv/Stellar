@@ -41,11 +41,11 @@ class PromotedItem < ActiveRecord::Base
 
   # Calculations should happen when the linked attribute changes but only once.
   def should_calculate_price
-    discount_percent_changed? && !calculated
+    discount_percent_changed? && !calculated && base_price.present?
   end
 
   def should_calculate_discount
-    price_cents_changed? && !calculated
+    price_cents_changed? && !calculated && base_price.present?
   end
 
   # The calculations set a flag to prevent before_validation hooks from
