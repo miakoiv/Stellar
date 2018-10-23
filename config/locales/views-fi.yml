@@ -296,6 +296,9 @@ fi:
         discount_percent_help: Jokainen ym. erä tuotteita alentaa tuotteiden hintaa kumulatiivisesti annetulla prosentilla.
       freebie_bundle:
         discount_percent_help: Alentaa halvimman tuotteen hintaa annetulla prosentilla, kun kampanjatuotteita ostetaan ym. määrä.
+      vanilla:
+        discount_percent_help: Lisätyt tuotteet saavat automaattisesti hinnan tämän perusteella.
+        default_price_help: Oletushintaa käytetään vain jos oletusalennus on tyhjä.
     promotions:
       index:
         new_promotion: Uusi kampanja

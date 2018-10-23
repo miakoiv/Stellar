@@ -312,6 +312,9 @@ en:
         discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.
       freebie_bundle:
         discount_percent_help: The cheapest item is discounted by this percentage when the number of items purchased matches.
+      vanilla:
+        discount_percent_help: Discount added products by this percentage.
+        default_price_help: Price for added products when default discount is blank.
     promotions:
       index:
         new_promotion: New promotion

@@ -459,6 +459,7 @@ fi:
         required_items: Tuotteiden määrä
         discount_percent: Alenna hintaa
       promotion_handler/vanilla:
+        discount_percent: Oletusalennus
         default_price: Oletushinta
       property:
         value_type: Tyyppi

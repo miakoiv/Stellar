@@ -1,1 +1,2 @@
-= f.text_field :default_price, append: '€', class: 'text-right'
+= f.text_field :discount_percent, prepend: '–', append: '%', help: t('.discount_percent_help')
+= f.text_field :default_price, append: '€', class: 'text-right', help: t('.default_price_help')

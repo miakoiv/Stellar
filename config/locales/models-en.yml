@@ -459,6 +459,7 @@ en:
         required_items: Number of items
         discount_percent: Apply discount
       promotion_handler/vanilla:
+        discount_percent: Default discount
         default_price: Default price
       property:
         value_type: Type
