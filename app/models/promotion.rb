@@ -56,6 +56,15 @@ class Promotion < ActiveRecord::Base
   delegate :description, to: :promotion_handler
   delegate :editable_prices?, to: :promotion_handler
 
+  # Adds given product to this promotion, applying the default discount,
+  # if any, or giving it the default price, if any.
+  def add(product)
+    discount = promotion_handler.discount_percent.presence
+    price = promotion_handler.default_price.presence
+    defaults = discount && {discount_percent: discount} || {price: price}
+    promoted_items.create_with(defaults).find_or_create_by(product: product)
+  end
+
   # Applies this promotion to the given order by calling the promotion
   # handler with the matching items.
   def apply!(order)
