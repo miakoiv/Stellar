@@ -122,7 +122,7 @@ class Admin::PromotionsController < ApplicationController
           @promotion.promoted_items
             .create_with(
               price_cents: @promotion.promotion_handler.default_price_cents
-            ).find_or_create_by(product: Product.find(product_id))
+            ).find_or_create_by(product: product)
         end
       end
     end
