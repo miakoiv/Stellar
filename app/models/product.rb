@@ -112,7 +112,8 @@ class Product < ActiveRecord::Base
   attr_accessor :requisite_ids_string
 
   #---
-  after_save :update_from_master, if: :should_update_from_master?
+  before_save :reset_live_status
+  before_save :inherit_from_master, if: :variant?
   after_save :update_variants, if: :has_variants?
 
   #---
@@ -331,25 +332,22 @@ class Product < ActiveRecord::Base
     [self] + requisite_products
   end
 
-  # Resets the live status of the product, according to these criteria:
-  # - retail price is not nil (or product is a bundle or has variants)
-  # - set to be available at a certain date which is not in the future
-  # - if set to be deleted at a certain date which is in the future
-  def reset_live_status
-    self.live = (retail_price_cents.present? || bundle? || has_variants?) &&
-        (available_at.present? && !available_at.future?) &&
-        (deleted_at.nil? || deleted_at.future?)
-  end
-
   protected
-    # Callback to update the live status of the product itself, and touch
-    # the associated object that was added or removed.
+    # Resets the live status of the product, according to these criteria:
+    # - set to be available at a certain date which is not in the future
+    # - retail price is not nil (or product is a bundle or has variants)
+    # - if set to be deleted at a certain date which is in the future
+    def reset_live_status
+      self.live =
+          (available_at.present? && !available_at.future?) &&
+          (retail_price_cents.present? || bundle? || has_variants?) &&
+          (deleted_at.nil? || deleted_at.future?)
+      true
+    end
+
+    # Callback to touch the associated object that was added or removed.
     def associations_changed(context)
-      if persisted?
-        reset_live_status
-        context.touch if context.persisted?
-        save
-      end
+      context.touch if persisted? && context.persisted?
       true
     end
 
@@ -362,18 +360,11 @@ class Product < ActiveRecord::Base
       true
     end
 
-    def should_update_from_master?
-      !@updated_from_master && variant?
-    end
-
     # Variants don't have their own categories and tags,
-    # instead they are copied from their master product.
-    def update_from_master
-      @updated_from_master = true
-      update(
-        categories: master_product.categories,
-        tags: master_product.tags
-      )
+    # instead they are inherited from their master product.
+    def inherit_from_master
+      self.categories = master_product.categories
+      self.tags = master_product.tags
       true
     end
 
