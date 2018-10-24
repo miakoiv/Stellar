@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     uuid = SecureRandom.uuid
     guest = User.create!(
       name: uuid,
-      email: "#{uuid}@#{hostname.fqdn}"
+      email: "#{uuid}@#{hostname}"
     )
     guest.groups << group
     guest

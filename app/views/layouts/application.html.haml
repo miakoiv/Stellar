@@ -10,7 +10,7 @@
     %nav#main-nav.navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
-          = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).fqdn), class: 'navbar-brand'
+          = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).to_s), class: 'navbar-brand'
         .navbar-body
           - unless current_store.detach_menu?
             = render partial: 'shared/main_nav'

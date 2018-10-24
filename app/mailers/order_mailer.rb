@@ -12,7 +12,7 @@ class OrderMailer < ApplicationMailer
     @pricing = options.delete(:pricing)
 
     headers = {
-      from: "noreply@#{@store.primary_host.fqdn}",
+      from: "noreply@#{@store.primary_host.to_s}",
       to: to,
       subject: default_i18n_subject(store: @store),
     }
@@ -32,6 +32,6 @@ class OrderMailer < ApplicationMailer
 
   protected
     def roadie_options
-      super.merge(url_options: {host: @store.primary_host.fqdn})
+      super.merge(url_options: {host: @store.primary_host.to_s})
     end
 end

@@ -1,6 +1,6 @@
 .container
   .navbar-header
-    = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).fqdn), class: 'navbar-brand'
+    = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).to_s), class: 'navbar-brand'
   .navbar-body
   .navbar-charms
     = render partial: 'shared/offcanvas_toggle'
