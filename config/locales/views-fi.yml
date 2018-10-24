@@ -532,6 +532,7 @@ fi:
     pricing_sans_tax: Veroton hinta
     component_entries: Sisältyvät osat
     add_to_cart: Lisää koriin
+    order_modal: Tilaa tuote…
     offer_requisites: Muista myös nämä
     continue_to_cart: Jatka ostoskoriin
     order_history: Tilaushistoria
