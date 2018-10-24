@@ -17,7 +17,7 @@
 
     .product-meta
       - if current_store.favorites?
-        = render partial: 'products/add_favorite', object: product, as: :product
+        = render partial: 'products/add_favorite', object: product, as: :product, locals: {text: true}
       %p.product-code
         - if product.customer_code.present?
           %span.customer-code

@@ -70,7 +70,6 @@ Rails.application.routes.draw do
   get    '/store/favorites', to: 'store#show_favorites', as: :favorites
   post   '/store/favorites/:product_id', to: 'store#add_favorite', as: :add_favorite
   delete '/store/favorites/:product_id', to: 'store#remove_favorite', as: :remove_favorite
-  get    '/store/favorites/:product_id', to: 'store#check_favorite', as: :check_favorite
 
   # Category, tag, department, promotion, and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category

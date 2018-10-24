@@ -1,0 +1,9 @@
+:coffee
+  $.ajax
+    url: '#{favorites_path}'
+    dataType: 'json'
+  .done (data) ->
+    $('.add-favorite > .btn').each (i, button) ->
+      id = $(button).data 'id'
+      if data.indexOf(id) is -1
+        $(button).removeClass 'disabled'
