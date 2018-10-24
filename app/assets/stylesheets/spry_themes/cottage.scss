@@ -181,18 +181,16 @@
             }
           }
           .order-form {
-            .form-group {
-              margin-top: 20px;
+            margin-top: 20px;
 
-              .input-group {
-                @extend .input-group-lg;
-                .form-control { display: none; }
-              }
-              .btn {
-                @extend .btn-block, .btn-success;
-                margin-left: 0;
-                transition: all 0.2s ease-in-out 0s;
-              }
+            .input-group {
+              @extend .input-group-lg;
+              .form-control { display: none; }
+            }
+            .btn {
+              @extend .btn-lg, .btn-block, .btn-success;
+              margin-left: 0;
+              transition: all 0.2s ease-in-out 0s;
             }
           }
           .go-checkout .btn {

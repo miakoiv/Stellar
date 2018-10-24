@@ -548,7 +548,7 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-top: 20px;
 
   .input-group { @extend .input-group-lg; }
-  .input-group .btn { @extend .btn-success; }
+  .btn { @extend .btn-lg, .btn-success; }
 }
 .product-meta .go-checkout .btn { @extend .btn-block; }
 

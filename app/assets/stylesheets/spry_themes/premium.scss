@@ -745,8 +745,8 @@ $body-tone-bg: darken($body-bg, 4%);
 
   .input-group { @extend .input-group-lg; }
   .input-group .form-control { display: none; }
-  .input-group .btn {
-    @extend .btn-block, .btn-success, .btn-round;
+  .btn {
+    @extend .btn-lg, .btn-block, .btn-success, .btn-round;
     margin-left: 0;
   }
 }

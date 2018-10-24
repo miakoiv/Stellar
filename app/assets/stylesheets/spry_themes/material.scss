@@ -889,7 +889,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     margin-top: 20px;
 
     .input-group { @extend .input-group-lg; }
-    .input-group .btn { @extend .btn-success; }
+    .btn { @extend .btn-lg, .btn-success; }
   }
   .go-checkout {
     @extend .col-sm-6;
