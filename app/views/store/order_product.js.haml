@@ -7,9 +7,4 @@ if (typeof ga === 'function') ga('send', 'pageview', '/add_to_cart');
 $('#order-product-modal').modal('hide');
 - if @product.requisite_products.visible.any?
   var $offer = $('#offer-requisites-modal');
-  if (!($offer.data('bs.modal') && $offer.data('bs.modal').isShown)) {        |
-    $offer.find('.modal-body ul').html(                                       |
-      $("#{j render partial: 'products/list_requisites', object: @product, as: :product}")                                                         |
-    );                                                                        |
-    $offer.modal('show');                                                     |
-  }                                                                           |
+  if (!($offer.data('bs.modal') && $offer.data('bs.modal').isShown)) { $offer.find('.modal-body ul').html($("#{j render partial: 'products/requisite_product', collection: @product.requisite_products.live, as: :product}")); $offer.modal('show'); }

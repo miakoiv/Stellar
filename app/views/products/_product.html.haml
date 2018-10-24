@@ -1,39 +1,15 @@
-- cache [selected_group, I18n.locale, :product_card, product] do
+- cache [selected_group, I18n.locale, :product, product, @category] do
   %li.grid-item.single[product]{class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
     = link_to show_product_path(product, @category), data: {push: 'partial', target: '#store-body'} do
-      .product-image= picture_variant_tag product.cover_picture(current_store.card_image_type), :postcard
-      .product-text
-        %h3
-          = product.title
-          %span.small= product.subtitle
-        .description= product.description
-      .promotions
-        = render partial: 'products/promoted_item', collection: product.live_promoted_items(selected_group)
-      - if pricing_shown? && premium_pricing.present?
-        .premium-price
-          %span.teaser= selected_group.premium_teaser
-          %p.price.currency
-            - if product.has_variants?
-              = price_range *premium_pricing.range_for_display(product)
-            - else
-              = price_tag *premium_pricing.for_display(product)
+      = render partial: 'products/card/card_image', object: product, as: :product
+      = render partial: 'products/card/full_text', object: product, as: :product
+      = render partial: 'products/card/promotions', object: product, as: :product
+      = render partial: 'products/card/premium', object: product, as: :product
     .buy-now
-      - if pricing_shown?
-        %p.price.currency
-          - if product.has_variants?
-            = price_range *pricing.range_for_display(product)
-          - else
-            = price_tag *pricing.for_display(product)
+      = render partial: 'products/card/pricing', object: product, as: :product
       - if can_order? && may_shop_at?(@category)
-        - if product.has_variants? && product.visible?
+        - if product.purchasable? && !product.modal_ordering?
+          = render partial: 'products/card/order_form', object: product, as: :product
+        - else
           .product-link
             = link_to icon('search'), show_product_path(product, @category), class: 'btn btn-sm', data: {push: 'partial', target: '#store-body'}
-        - elsif product.purchasable?
-          - if product.orderable?(default_inventory, nil)
-            = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
-              = hidden_field_tag :amount, 1
-              %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
-          - else
-            %p.text-danger
-              = icon('exclamation-circle')
-              = col(Product, :out_of_stock)

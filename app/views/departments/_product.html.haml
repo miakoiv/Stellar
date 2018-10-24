@@ -1,21 +1,10 @@
-- cache [selected_group, I18n.locale, :department_product_card, product] do
+- cache [selected_group, I18n.locale, :department_product, product] do
   %li.grid-item.single[product]
-    = link_to show_product_url(product, host: product.store.hostname_at(current_store).fqdn) do
-      .product-image= picture_variant_tag product.cover_picture, :postcard
-      .product-text
-        %h3
-          = product.title
-          %span.small= product.subtitle
-        .description= product.description
-      .promotions
-        - product.live_promoted_items(selected_group).each do |item|
-          .promotion= item.description
+    = link_to product_url(product) do
+      = render partial: 'products/card/card_image', object: product, as: :product
+      = render partial: 'products/card/full_text', object: product, as: :product
     .buy-now
-      %p.price.currency
-        - if product.has_variants?
-          = price_range *pricing.range_for_display(product)
-        - else
-          = price_tag *pricing.for_display(product)
+      = render partial: 'products/card/pricing', object: product, as: :product
       .store-link
-        = link_to root_url(host: product.store.hostname_at(current_store).fqdn), class: 'btn btn-sm' do
+        = link_to root_url(host: product.store.hostname_at(current_store).to_s), class: 'btn btn-sm' do
           = product.store

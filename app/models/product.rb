@@ -215,6 +215,11 @@ class Product < ActiveRecord::Base
     live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?)
   end
 
+  # If additional info needs to be prompted, use an ordering modal.
+  def modal_ordering?
+    additional_info_prompt.present?
+  end
+
   # Finds the primary or first live variant for this product.
   # Returns self if not a master product or there are no variants.
   def first_variant

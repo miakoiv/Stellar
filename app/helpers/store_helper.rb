@@ -2,6 +2,17 @@
 
 module StoreHelper
 
+  # Generates a product url that can be in another store
+  # if the current store is a portal.
+  def product_url(product, category = nil)
+    if current_store.portal?
+      host = product.store.hostname_at(current_store)
+      show_product_url(product, host: host.to_s)
+    else
+      show_product_path(product, category)
+    end
+  end
+
   def fuzzy_amount(amount)
     amount > 25 ? t('number.more_than', number: 25) : amount
   end

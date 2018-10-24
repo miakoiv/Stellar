@@ -6,7 +6,7 @@
       = t('.help', amount: promotion.promotion_handler.required_items, price: humanized_money_with_symbol(promotion.promotion_handler.items_total))
   .swiper-container.product-grid
     %ul.swiper-wrapper
-      = render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(promotion.promotion_handler.required_items * 4), layout: 'shared/swiper_slide'
+      = render partial: 'products/promoted_product', collection: promotion.products.live.random.not_including(context).first(promotion.promotion_handler.required_items * 4), as: :product, layout: 'shared/swiper_slide'
   .swiper-button-prev
   .swiper-button-next
   .more-items-link

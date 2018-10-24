@@ -398,15 +398,19 @@ body {
   h2 { margin: 20px 0; }
   &:empty { display: none; }
 }
-.product-stripe {
+.product-stripe > ul {
   display: flex;
   flex-flow: row wrap;
-}
-.product-stripe .product-card {
-  flex: 1 1 auto;
-  max-width: 230px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  list-style: none;
+  padding-left: 0;
+
+  > li {
+    @extend .product-card;
+    flex: 1 1 auto;
+    max-width: 230px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 }
 @media (min-width: $screen-sm-min) {
   #promoted-products {
@@ -414,7 +418,7 @@ body {
     margin-top: 0;
     overflow-y: scroll;
   }
-  .product-stripe .product-card { margin-right: 0; }
+  .product-stripe > ul > li { margin-right: 0; }
 }
 
 /* Fancy shopping cart and mobile friendly cart list view */

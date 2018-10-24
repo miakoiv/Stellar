@@ -12,4 +12,4 @@
         = col(Product, :out_of_stock)
 
   - if product.orderable?(default_inventory, nil)
-    = render partial: product.additional_info_prompt.present? ? 'products/order_modal' : 'products/order_form', object: product, as: :product
+    = render partial: product.modal_ordering? ? 'products/order_modal' : 'products/order_form', object: product, as: :product

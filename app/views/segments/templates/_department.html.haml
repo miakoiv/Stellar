@@ -13,7 +13,7 @@
     - if swiper
       .swiper-container
         .swiper-wrapper
-          = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+          = render partial: 'departments/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
     - else
       .columns{class: ["columns-#{department.grid_columns || 3}", department.grid_lines? && 'grid-lines']}
         = render partial: 'departments/product_card', collection: max_items ? products.first(max_items) : products, as: :product

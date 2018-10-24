@@ -1,6 +1,0 @@
-- promotion_picture = promoted_item.promotion.cover_picture
-
-.promotion
-  - if promotion_picture.present?
-    .promotion-image= picture_variant_tag promoted_item.promotion.cover_picture, :postcard
-  .promotion-text= promoted_item.description

@@ -78,12 +78,6 @@
   - product.live_promotions(selected_group).each do |promotion|
     = render partial: "products/#{promotion.promotion_handler.to_partial_path}", locals: {promotion: promotion, context: product}
 
-  - if product.variant? && !product.has_master_properties?
-    .variant-products
-      %h2.footer-header= t('store.product_variants')
-      .product-grid
-        %ul= render partial: 'products/variant_product', collection: product.sibling_variants.live.sorted, as: :product, locals: {context: product}
-
   - if product.requisite_products.live.any?
     .requisite-products
       %h2.footer-header= t('store.requisite_products')

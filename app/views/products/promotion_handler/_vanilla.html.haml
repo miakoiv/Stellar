@@ -2,7 +2,7 @@
   %h2.footer-header= t('.title')
   .swiper-container.product-grid
     %ul.swiper-wrapper
-      = render partial: 'products/product', collection: promotion.products.live.random.not_including(context).first(8), layout: 'shared/swiper_slide'
+      = render partial: 'products/promoted_product', collection: promotion.products.live.random.not_including(context).first(8), as: :product, layout: 'shared/swiper_slide'
   .swiper-button-prev
   .swiper-button-next
   .more-items-link

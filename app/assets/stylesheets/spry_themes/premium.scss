@@ -849,19 +849,10 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Product footer elements */
 .product-footer {
-  .promoted-products {
+  .promoted-products, .requisite-products {
     @extend .col-xs-12, .col-md-10, .col-md-offset-1;
     padding-top: 20px;
     padding-bottom: 20px;
-  }
-  .requisite-products,
-  .variant-products {
-    @extend .col-xs-12, .col-md-10, .col-md-offset-1;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    .product a { padding-bottom: 0; }
-    .product .product-text { margin-bottom: 10px; }
   }
 }
 .product-footer .footer-header {

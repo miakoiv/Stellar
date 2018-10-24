@@ -1,4 +1,4 @@
 - if products.any?
   %h2= t('.title')
   .product-stripe
-    = render partial: 'products/product_card', collection: products, as: :product
+    %ul= render partial: 'products/promoted_product', collection: products, as: :product
