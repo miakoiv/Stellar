@@ -524,6 +524,24 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   font-size: 24px;
   color: $gray-base;
 }
+.product-grid .add-favorite,
+.product-card .add-favorite {
+  @extend .pull-right;
+
+  > .btn {
+    @extend .btn-outline-danger, .btn-lg;
+    border: 0;
+    opacity: 0.333;
+    transition: opacity 100ms $material-easing;
+
+    &:hover {
+      opacity: 1;
+      background-color: transparent;
+      color: $btn-danger-border;
+    }
+    &.disabled { display: none; }
+  }
+}
 .product-grid .buy-now-form > .btn,
 .product-card .buy-now-form > .btn,
 .product-grid .buy-now .product-link > a,
