@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181017123743) do
+ActiveRecord::Schema.define(version: 20181023133828) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -383,6 +383,7 @@ ActiveRecord::Schema.define(version: 20181017123743) do
     t.integer  "product_id",            limit: 4,                                           null: false
     t.string   "lot_code",              limit: 255
     t.string   "label",                 limit: 255
+    t.string   "additional_info",       limit: 255
     t.integer  "amount",                limit: 4
     t.integer  "shipped",               limit: 4
     t.integer  "price_cents",           limit: 4
@@ -597,6 +598,7 @@ ActiveRecord::Schema.define(version: 20181017123743) do
     t.integer  "dimension_v",             limit: 4
     t.integer  "dimension_w",             limit: 4
     t.string   "lead_time",               limit: 255
+    t.string   "additional_info_prompt",  limit: 255
     t.text     "shipping_notes",          limit: 65535
     t.integer  "cost_price_cents",        limit: 4
     t.date     "cost_price_modified_at"

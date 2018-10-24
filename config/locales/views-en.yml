@@ -303,6 +303,7 @@ en:
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Price <strong>excludes tax</strong>.
         all_shipping_methods: All shipping methods available
         lead_time_help_html: Lead times of <em>n days</em> enable automatic shipping date calculation. Other formats are advisory only.
+        additional_info_help_html: Additional information asked upon ordering, which the customer is <strong>required</strong> to fill.
         shipping_notes_help: Extra information for shopping cart and order rows.
       upload_modal:
         title: Upload CSV or XLS file
@@ -516,6 +517,9 @@ en:
       title: Claiming a quote from your group
       claim: Claim this quote
   products:
+    order_modal:
+      title: Order this product
+      amount: Quantity
     filtering:
       keyword: Keyword…
       grid_view: Grid view

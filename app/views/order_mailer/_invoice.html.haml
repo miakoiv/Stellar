@@ -18,6 +18,10 @@
         .small
           = "#{Product.human_attribute_name(:vendor_id)}:"
           = order_item.product.vendor.name
+      - if order_item.additional_info.present?
+        .additional-info
+          = order_item.product.additional_info_prompt
+          %strong= order_item.additional_info
       - if order_item.product.shipping_notes.present?
         .small
           %em= order_item.product.shipping_notes

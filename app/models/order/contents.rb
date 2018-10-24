@@ -13,9 +13,9 @@ class Order < ActiveRecord::Base
   def insert(product, amount, group, options = {})
     return nil if product.nil?
     if product.bundle?
-      insert_components(product, amount, group,
+      insert_components(product, amount, group, options.merge(
         parent_item: options[:parent_item]
-      )
+      ))
     else
       insert_single(product, amount, group, options.merge(
         separate_components: product.composite?
@@ -42,7 +42,8 @@ class Order < ActiveRecord::Base
     ).where(
       product: product,
       parent_item: options[:parent_item],
-      lot_code: options[:lot_code]
+      lot_code: options[:lot_code],
+      additional_info: options[:additional_info]
     ).first_or_create!
     order_item.update!(
       amount: order_item.amount + amount,

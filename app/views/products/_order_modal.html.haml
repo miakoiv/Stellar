@@ -1,0 +1,23 @@
+.order-form
+  %button.btn.btn-success{type: 'button', data: {toggle: 'modal', target: '#order-product-modal'}}
+    = icon('cart-plus', t('store.add_to_cart'))
+
+#order-product-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-success
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('.title')
+      .modal-body
+        = product.overview.html_safe if product.overview.present?
+      = form_tag order_product_path(product), method: :post, remote: true do
+        .modal-body
+          .form-group
+            %label.control-label= product.additional_info_prompt
+            = text_field_tag :additional_info, nil, required: true, class: 'form-control input-lg'
+          .form-group
+            %label.control-label= t('.amount')
+            = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control input-lg'
+        .modal-footer
+          %button.btn.btn-lg.btn-success{type: 'submit'}
+            = icon('cart-plus', t('store.add_to_cart'))

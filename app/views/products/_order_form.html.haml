@@ -1,0 +1,7 @@
+= form_tag order_product_path(product), class: 'order-form', method: :post, remote: true do
+  .form-group
+    .input-group
+      = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control'
+      %span.input-group-btn
+        %button.btn.btn-default{type: 'submit'}
+          = icon('cart-plus', t('store.add_to_cart'))

@@ -287,6 +287,7 @@ fi:
         tax_excluded_in_retail_html: <i class="fa fa-warning"></i> Hinta on <strong>veroton</strong>.
         all_shipping_methods: Kaikki toimitustavat käytettävissä
         lead_time_help_html: Toimitusajat muodossa <em>n päivää</em> käsitellään automaattisesti. Muut formaatit ovat vain ohjeellisia.
+        additional_info_help_html: Tilatessa kysyttävä lisätietorivi, joka on <strong>pakollinen tieto</strong>.
         shipping_notes_help: Lisätietoja tilausriville ostoskoriin ja tilauksiin.
       upload_modal:
         title: Siirrä CSV tai XLS -tiedosto
@@ -500,6 +501,9 @@ fi:
       title: Tarjouksen siirtäminen ryhmältä
       claim: Siirrä tämä tarjous
   products:
+    order_modal:
+      title: Tilaa tuote
+      amount: Kappalemäärä
     filtering:
       keyword: Hakusana…
       grid_view: Ruudukkonäkymä

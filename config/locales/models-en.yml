@@ -314,6 +314,7 @@ en:
         order_number: Order №
         product_id: Product
         lot_code: Lot code
+        additional_info: Additional information
         amount: pc
         ordered: Ordered
         shipped: Shipped
@@ -409,6 +410,7 @@ en:
         dimensions: Shipping dimensions
         lead_time: Lead time
         out_of_stock: Sold out
+        additional_info_prompt: Prompt for additional info
         shipping_notes: Notes
         documents: Documents
         images: Images

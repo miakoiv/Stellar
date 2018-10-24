@@ -142,7 +142,9 @@ class StoreController < ApplicationController
     @order_types = @order.available_order_types
     @product = current_store.products.live.friendly.find(params[:product_id])
     amount = params[:amount].to_i
-    @order.insert(@product, amount, @order.source)
+    options = {}
+    options[:additional_info] = params[:additional_info] if params[:additional_info].present?
+    @order.insert(@product, amount, @order.source, options)
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)

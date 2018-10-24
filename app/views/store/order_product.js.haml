@@ -4,7 +4,7 @@ $('#cart-badge').replaceWith("#{j render partial: 'store/cart_badge'}");
 $('.go-checkout').replaceWith("#{j render partial: 'store/go_checkout'}");
 if (typeof ga === 'function') ga('send', 'pageview', '/add_to_cart');
 
-
+$('#order-product-modal').modal('hide');
 - if @product.requisite_products.visible.any?
   var $offer = $('#offer-requisites-modal');
   if (!($offer.data('bs.modal') && $offer.data('bs.modal').isShown)) {        |

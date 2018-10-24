@@ -22,6 +22,10 @@
       %p.product-code
         %span= col(OrderItem, :product_code)
         = order_item.product_code
+      - if order_item.additional_info.present?
+        %p.additional-info
+          = order_item.product.additional_info_prompt
+          %strong= order_item.additional_info
     .cart-item-pricing
       .actions
         - if locked || order_item.is_subitem? || order_item.internal?
