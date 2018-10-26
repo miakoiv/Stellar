@@ -158,6 +158,12 @@ class StoreController < ApplicationController
     respond_to :js, :json
   end
 
+  # GET /store/favorites/:product_id
+  def show_favorite
+    @product = current_store.products.live.friendly.find(params[:product_id])
+    redirect_to show_product_path(@product)
+  end
+
   # POST /store/favorites/:product_id.js
   def add_favorite
     @product = current_store.products.live.friendly.find(params[:product_id])

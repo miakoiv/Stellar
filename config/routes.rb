@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
   # Favorite manipulation.
   get    '/store/favorites', to: 'store#show_favorites', as: :favorites
+  get    '/store/favorites/:product_id', to: 'store#show_favorite', as: :show_favorite
   post   '/store/favorites/:product_id', to: 'store#add_favorite', as: :add_favorite
   delete '/store/favorites/:product_id', to: 'store#remove_favorite', as: :remove_favorite
 
