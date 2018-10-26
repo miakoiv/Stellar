@@ -1,33 +1,34 @@
 - has_map = map.map_location.present?
 
-.segment-content.map{id: dom_id(map, :content), style: map.style(:minHeight)}
-  - if has_map
-    .map-container{data: {location: map.map_location, marker: map.map_marker?, zoom: map.map_zoom || 10, theme: map.map_theme}, style: map.style(:minHeight)}
-  - else
-    = render partial: 'segments/placeholders/map'
+- cache [:segment_map, map] do
+  .segment-content.map{id: dom_id(map, :content), style: map.style(:minHeight)}
+    - if has_map
+      .map-container{data: {location: map.map_location, marker: map.map_marker?, zoom: map.map_zoom || 10, theme: map.map_theme}, style: map.style(:minHeight)}
+    - else
+      = render partial: 'segments/placeholders/map'
 
-- if has_map
-  :coffee
-    jQuery ->
-      $map = $('##{dom_id(map, :content)}').find '.map-container'
-      options =
-        zoom: $map.data 'zoom'
-        disableDefaultUI: true
-        draggable: false
-        scrollwheel: false
-        gesturehandling: 'none'
-      if $map.data('theme')?
-        options.styles = $map.data 'theme'
-      map = new google.maps.Map $map[0], options
-      geocoder = new google.maps.Geocoder
-      loc = $map.data 'location'
-      results = geocoder.geocode {address: loc}, (results, status) ->
-        if status is 'OK'
-          latlng = results[0].geometry.location
-        else
-          latlng = {lat: 37.3320003, lng: -122.0329752}
-        map.setCenter latlng
-        if $map.data('marker')?
-          marker = new google.maps.Marker
-            position: latlng
-            map: map
+  - if has_map
+    :coffee
+      jQuery ->
+        $map = $('##{dom_id(map, :content)}').find '.map-container'
+        options =
+          zoom: $map.data 'zoom'
+          disableDefaultUI: true
+          draggable: false
+          scrollwheel: false
+          gesturehandling: 'none'
+        if $map.data('theme')?
+          options.styles = $map.data 'theme'
+        map = new google.maps.Map $map[0], options
+        geocoder = new google.maps.Geocoder
+        loc = $map.data 'location'
+        results = geocoder.geocode {address: loc}, (results, status) ->
+          if status is 'OK'
+            latlng = results[0].geometry.location
+          else
+            latlng = {lat: 37.3320003, lng: -122.0329752}
+          map.setCenter latlng
+          if $map.data('marker')?
+            marker = new google.maps.Marker
+              position: latlng
+              map: map

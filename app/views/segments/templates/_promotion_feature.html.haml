@@ -2,13 +2,14 @@
 - pictures = promotion_feature.pictures.reverse
 - sizing = promotion_feature.image_sizing
 
-.segment-content.promotion_feature
-  - if resource.present? && resource.is_a?(Promotion) && pictures.any?
-    .image-container{class: sizing}
-      = link_to show_promotion_path(resource) do
-        = picture_variant_tag pictures.pop, :lightbox
-    - pictures.each do |picture|
-      .image-container.stacked{class: sizing}
-        = picture_variant_tag picture, :lightbox
-  - else
-    = render partial: 'segments/placeholders/promotion_feature'
+- cache [:segment_promotion_feature, promotion_feature] do
+  .segment-content.promotion_feature
+    - if resource.present? && resource.is_a?(Promotion) && pictures.any?
+      .image-container{class: sizing}
+        = link_to show_promotion_path(resource) do
+          = picture_variant_tag pictures.pop, :lightbox
+      - pictures.each do |picture|
+        .image-container.stacked{class: sizing}
+          = picture_variant_tag picture, :lightbox
+    - else
+      = render partial: 'segments/placeholders/promotion_feature'

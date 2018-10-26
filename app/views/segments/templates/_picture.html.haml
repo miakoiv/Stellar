@@ -2,31 +2,32 @@
 - swiper = picture.pictures.count > 1
 - sizing = picture.image_sizing
 
-.segment-content.picture{id: dom_id(picture, :content)}
-  - if has_pictures
-    - if swiper
-      .swiper-container{class: sizing}
-        .swiper-wrapper
-          - picture.pictures.each do |picture|
-            .swiper-slide
-              = picture_variant_tag picture
-    - else
-      .image-container{class: sizing}
-        - if picture.url.present?
-          = link_to picture.url do
+- cache [:segment_picture, picture] do
+  .segment-content.picture{id: dom_id(picture, :content)}
+    - if has_pictures
+      - if swiper
+        .swiper-container{class: sizing}
+          .swiper-wrapper
+            - picture.pictures.each do |picture|
+              .swiper-slide
+                = picture_variant_tag picture
+      - else
+        .image-container{class: sizing}
+          - if picture.url.present?
+            = link_to picture.url do
+              = picture_variant_tag picture.cover_picture
+          - else
             = picture_variant_tag picture.cover_picture
-        - else
-          = picture_variant_tag picture.cover_picture
 
-  - else
-    = render partial: 'segments/placeholders/picture'
+    - else
+      = render partial: 'segments/placeholders/picture'
 
-- if swiper
-  :coffee
-    jQuery ->
-      $segment = $('##{dom_id(picture, :content)}')
-      new Swiper $segment.find('.swiper-container'),
-        autoplay:
-          delay: 5000
-        loop: true
-        effect: 'fade'
+  - if swiper
+    :coffee
+      jQuery ->
+        $segment = $('##{dom_id(picture, :content)}')
+        new Swiper $segment.find('.swiper-container'),
+          autoplay:
+            delay: 5000
+          loop: true
+          effect: 'fade'

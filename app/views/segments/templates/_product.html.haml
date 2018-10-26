@@ -1,7 +1,8 @@
 - resource = product.resource
 
-.segment-content.product
-  - if resource.is_a?(Product)
-    = render partial: 'products/product_card', object: resource, as: :product
-  - else
-    = render partial: 'segments/placeholders/product'
+- cache [:segment_product, product] do
+  .segment-content.product
+    - if resource.is_a?(Product)
+      = render partial: 'products/product_card', object: resource, as: :product
+    - else
+      = render partial: 'segments/placeholders/product'

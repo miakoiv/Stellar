@@ -1,14 +1,15 @@
-.segment-content.media{id: dom_id(media, :content), class: media.inverse? ? 'media-right' : 'media-left'}
-  - if media.pictures.any?
-    .media-object
-      - if media.url.present?
-        = link_to media.url do
+- cache [:segment_media, media] do
+  .segment-content.media{id: dom_id(media, :content), class: media.inverse? ? 'media-right' : 'media-left'}
+    - if media.pictures.any?
+      .media-object
+        - if media.url.present?
+          = link_to media.url do
+            = picture_variant_tag media.cover_picture
+        - else
           = picture_variant_tag media.cover_picture
-      - else
-        = picture_variant_tag media.cover_picture
-  .media-body
-    .editable-content
-      - if media.body.present?
-        = media.body.html_safe
-      - else
-        = render partial: 'segments/placeholders/media'
+    .media-body
+      .editable-content
+        - if media.body.present?
+          = media.body.html_safe
+        - else
+          = render partial: 'segments/placeholders/media'

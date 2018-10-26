@@ -1,12 +1,13 @@
 - resource = navigation_menu.resource
 
-.segment-content.navigation_menu
-  - if resource.present? && resource.is_a?(Page)
-    %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default'}
-      - if navigation_menu.header.present?
-        .navmenu-title= navigation_menu.header
-      %ul.nav.navmenu-nav
-        - resource.children.live.each do |page|
-          = render partial: page.to_partial_path, object: page, locals: {navmenu: true}
-  - else
-    = render partial: 'segments/placeholders/navigation_menu'
+- cache [:segment_navigation_menu, navigation_menu] do
+  .segment-content.navigation_menu
+    - if resource.present? && resource.is_a?(Page)
+      %nav.navmenu{class: navigation_menu.inverse? ? 'navmenu-inverse' : 'navmenu-default'}
+        - if navigation_menu.header.present?
+          .navmenu-title= navigation_menu.header
+        %ul.nav.navmenu-nav
+          - resource.children.live.each do |page|
+            = render partial: page.to_partial_path, object: page, locals: {navmenu: true}
+    - else
+      = render partial: 'segments/placeholders/navigation_menu'

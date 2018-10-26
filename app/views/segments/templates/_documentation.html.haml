@@ -1,6 +1,7 @@
-.segment-content.documentation
-  - if documentation.documents.any?
-    .list-group
-      = render documentation.documents
-  - else
-    = render partial: 'segments/placeholders/documentation'
+- cache [:segment_documentation, documentation] do
+  .segment-content.documentation
+    - if documentation.documents.any?
+      .list-group
+        = render documentation.documents
+    - else
+      = render partial: 'segments/placeholders/documentation'
