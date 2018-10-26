@@ -521,7 +521,8 @@ fi:
         shadow: Varjo
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
-        thumbnails: Käytä diakuvalinkkejä
+        thumbnails: Kehystä diakuviksi
+        lightbox: Linkitä suureen kuvaan
         animation: Animoitu esittely
         velocity: Animaation nopeus
       shipment:

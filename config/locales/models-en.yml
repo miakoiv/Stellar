@@ -521,7 +521,8 @@ en:
         facebook_token: Facebook token
         url: Content URL
         thumbnail_size: Slide size
-        thumbnails: Use thumbnail links
+        thumbnails: Frame thumbnails
+        lightbox: Link to large images
         animation: Animated entry
         velocity: Animation speed
       shipment:

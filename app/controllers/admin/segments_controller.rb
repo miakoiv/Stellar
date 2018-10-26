@@ -132,7 +132,7 @@ class Admin::SegmentsController < ApplicationController
         :shape, :inset, :foreground_color, :background_color,
         :body, :header, :subhead, :url,
         :min_height, :grid_columns, :grid_lines, :grid_disable_xs,
-        :masonry, :image_sizing, :thumbnails,
+        :masonry, :image_sizing, :thumbnails, :lightbox,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
         :facebook_page, :facebook_token,

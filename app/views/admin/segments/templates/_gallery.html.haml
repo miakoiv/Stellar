@@ -16,5 +16,9 @@
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
-  = f.check_box :masonry
-  = f.check_box :thumbnails
+  = f.form_group do
+    = f.check_box :lightbox
+  = f.form_group do
+    = f.check_box :thumbnails
+  = f.form_group do
+    = f.check_box :masonry

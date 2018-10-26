@@ -1045,10 +1045,16 @@ i.icon {
 .thumbnail-grid .grid-item {
   position: relative;
 
+  > a { height: 100%; }
   .thumbnail {
+    display: flex;
+    height: 100%;
     margin-bottom: 0;
 
-    img { @extend .img-responsive; }
+    img {
+      @extend .img-responsive;
+      margin: auto;
+    }
   }
   .grid-widgets {
     position: absolute;
