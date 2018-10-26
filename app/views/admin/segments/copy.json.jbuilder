@@ -1,7 +1,7 @@
 json.segment do
   # Making a copy of a segment leaves out its id and column association,
   # to be filled in when a new record is pasted in another context.
-  json.extract! @segment, :resource_id, :resource_type, :template, :shape, :alignment, :margin_top, :margin_bottom, :inset, :background_color, :body, :metadata, :inline_styles
+  json.extract! @segment, :resource_id, :resource_type, :template, :shape, :alignment, :margin_top, :margin_bottom, :inset, :foreground_color, :background_color, :body, :metadata, :inline_styles
 
   # Included pictures without ids go to pictures_attributes
   # to comply with nested attributes in params.
