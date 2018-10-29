@@ -1,0 +1,14 @@
+$cardirad-green: #4ca845;
+$cardirad-blue:  #0091cf;
+
+$brand-primary: $cardirad-blue !default;
+$brand-success: $cardirad-green !default;
+$brand-info:    #70c1cc !default;
+$brand-warning: #efc92f !default;
+$brand-danger:  #d13a53 !default;
+
+@import "spry_themes/material";
+
+/*
+ * Overrides to the material theme for Cardirad
+ */

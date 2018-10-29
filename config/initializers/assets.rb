@@ -21,6 +21,7 @@ Rails.application.config.assets.precompile += %w(
   payment_gateway/paybyway.js
   spry_themes/birch.css       spry_themes/birch.js
   spry_themes/boutique.css    spry_themes/boutique.js
+  spry_themes/cardirad.css    spry_themes/cardirad.js
   spry_themes/cards.css       spry_themes/cards.js
   spry_themes/cottage.css     spry_themes/cottage.js
   spry_themes/hiustalo.css    spry_themes/hiustalo.js
