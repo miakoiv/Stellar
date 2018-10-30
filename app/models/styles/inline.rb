@@ -61,7 +61,8 @@ module Styles
 
       def background_image
         if r.respond_to?(:background_picture) && r.background_picture.present?
-          url = r.background_picture.image.url(:lightbox, timestamp: false)
+          variant = r.background_picture.image.is_bitmap? ? (r.background_picture.variant || :lightbox) : :original
+          url = r.background_picture.image.url(variant, timestamp: false)
           [['background-image', "url(#{url})"]]
         end
       end
