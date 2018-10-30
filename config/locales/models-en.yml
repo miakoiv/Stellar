@@ -488,6 +488,7 @@ en:
         gradient_balance: Gradient middle point
         fixed_background: Fixed background
       segment:
+        resource_type: Target type
         resource_id: Target
         template: Content type
         shape: Block shape

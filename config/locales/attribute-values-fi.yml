@@ -146,6 +146,12 @@ fi:
           'bottom': alas
           'bottom right': alas oikealle
       segment:
+        resource_type:
+          page: sivu
+          category: tuoteryhmä
+          promotion: kampanja
+          product: tuote
+          department: osasto
         template:
           empty: tyhjä tila
           text: tekstipalsta
@@ -156,13 +162,10 @@ fi:
           documentation: dokumenttilista
           media: tekstipalsta kuvalla
           category: tuoteryhmä
-          product: tuote
+          product: tuotekortti
           promotion: kampanja
           department: osasto
-          category_feature: tuoteryhmämainos
-          product_feature: tuotemainos
-          promotion_feature: kampanjamainos
-          department_feature: osastomainos
+          feature: mainoslaatikko
           facebook_feed: Facebook-päivitykset
           navigation_menu: sivuvalikko
           category_menu: tuoteryhmävalikko

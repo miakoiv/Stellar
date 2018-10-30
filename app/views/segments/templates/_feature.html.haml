@@ -1,0 +1,15 @@
+- resource = feature.resource
+- pictures = feature.pictures
+- sizing = feature.image_sizing
+
+- cache [:segment_feature, feature] do
+  .segment-content.feature{class: sizing, style: feature.style(:backgroundImage)}
+    - if pictures.count > 1
+      - pictures[1..-1].each do |picture|
+        .image-container.stacked{class: sizing}
+          = picture_variant_tag picture
+    .editable-content
+      - if feature.body.present?
+        = feature.body.html_safe
+    - if resource.present?
+      = link_to icon('link'), [:show, resource], class: 'feature-link'

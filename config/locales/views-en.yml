@@ -364,22 +364,26 @@ en:
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.
       templates:
+        feature:
+          select_resource_type: "[Select type]"
+        category_feature:
+          select_category: "[Select category]"
+        department_feature:
+          select_department: "[Select department]"
+        page_feature:
+          select_page: "[Select page]"
+        promotion_feature:
+          select_promotion: "[Select promotion]"
         category:
           select_category: "[Select category]"
           select_product_scope: "[Select sorting]"
-        category_feature:
-          select_category: "[Select category]"
         category_menu:
           select_category: "[Select category]"
         department:
           select_department: "[Select department]"
           select_product_scope: "[Select sorting]"
-        department_feature:
-          select_department: "[Select department]"
         navigation_menu:
           select_page: "[Select page]"
-        promotion_feature:
-          select_promotion: "[Select promotion]"
         promotion:
           select_promotion: "[Select promotion]"
     shipments:

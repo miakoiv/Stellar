@@ -488,6 +488,7 @@ fi:
         gradient_balance: Väriliu’un keskikohta
         fixed_background: Kiinteä tausta
       segment:
+        resource_type: Kohteen tyyppi
         resource_id: Kohde
         template: Sisällön tyyppi
         shape: Lohkon muoto

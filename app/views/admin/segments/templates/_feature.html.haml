@@ -1,0 +1,17 @@
+- content_for :supplemental do
+  = render partial: 'admin/pictures/edit_collection', object: segment, as: :pictureable, locals: {grid_columns: 2}
+
+%fieldset
+  = f.select :resource_type, Segment.resource_type_options, {include_blank: t('.select_resource_type')}
+  - if segment.resource_type.present?
+    = render partial: "admin/segments/templates/#{segment.resource_type.underscore}_feature", object: segment, as: :segment, locals: {f: f}
+  .form-group
+    = f.label col(Segment, :image_sizing), class: 'control-label'
+    .btn-group{data: {toggle: 'buttons'}}
+      - Segment.image_sizing_options.each do |title, size|
+        %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
+          = f.radio_button_without_bootstrap :image_sizing, size
+          = title
+
+:coffee
+  $('#segment_resource_type').betterSelectize()

@@ -1,16 +1,4 @@
-- content_for :supplemental do
-  = render partial: 'admin/pictures/edit_collection', object: segment, as: :pictureable, locals: {grid_columns: 2}
-
-%fieldset
-  .form-group
-    = f.label col(Segment, :image_sizing), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
-      - Segment.image_sizing_options.each do |title, size|
-        %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
-          = f.radio_button_without_bootstrap :image_sizing, size
-          = title
-  = f.hidden_field :resource_type, value: 'Department'
-  = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: t('.select_department')}
+= f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: t('.select_department')}
 
 :coffee
   $('#segment_resource_id').betterSelectize()

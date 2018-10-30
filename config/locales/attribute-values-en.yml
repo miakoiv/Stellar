@@ -146,6 +146,12 @@ en:
           'bottom': bottom
           'bottom right': bottom right
       segment:
+        resource_type:
+          page: page
+          category: category
+          promotion: promotion
+          product: product
+          department: department
         template:
           empty: empty area
           text: text column
@@ -159,10 +165,7 @@ en:
           product: product
           promotion: promotion
           department: department
-          category_feature: category feature
-          product_feature: product feature
-          promotion_feature: promotion feature
-          department_feature: department feature
+          feature: featured item
           facebook_feed: Facebook posts
           navigation_menu: navigation menu
           category_menu: category menu

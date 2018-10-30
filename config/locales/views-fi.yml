@@ -348,22 +348,26 @@ fi:
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
       templates:
+        feature:
+          select_resource_type: "[Valitse tyyppi]"
+        category_feature:
+          select_category: "[Valitse tuoteryhmä]"
+        department_feature:
+          select_department: "[Valitse osasto]"
+        page_feature:
+          select_page: "[Valitse sivu]"
+        promotion_feature:
+          select_promotion: "[Valitse kampanja]"
         category:
           select_category: "[Valitse tuoteryhmä]"
           select_product_scope: "[Valitse järjestys]"
-        category_feature:
-          select_category: "[Valitse tuoteryhmä]"
         category_menu:
           select_category: "[Valitse tuoteryhmä]"
         department:
           select_department: "[Valitse osasto]"
           select_product_scope: "[Valitse järjestys]"
-        department_feature:
-          select_department: "[Valitse osasto]"
         navigation_menu:
           select_page: "[Valitse sivu]"
-        promotion_feature:
-          select_promotion: "[Valitse kampanja]"
         promotion:
           select_promotion: "[Valitse kampanja]"
     shipments:
