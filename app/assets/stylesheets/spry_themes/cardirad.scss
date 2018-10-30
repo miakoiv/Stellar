@@ -1,17 +1,75 @@
 $cardirad-green: #4ca845;
 $cardirad-blue:  #0091cf;
 
-$brand-primary: $cardirad-blue !default;
-$brand-success: $cardirad-green !default;
+$brand-primary: #007eb5 !default;
+$brand-success: #82bf7e !default;
 $brand-info:    #70c1cc !default;
 $brand-warning: #efc92f !default;
 $brand-danger:  #d13a53 !default;
+
+$border-radius-base: 0 !default;
+$border-radius-large: 0 !default;
+$border-radius-small: 0 !default;
 
 @import "spry_themes/material";
 
 /*
  * Overrides to the material theme for Cardirad
  */
+#main-nav {
+  > .container {
+    .navbar-brand {
+      > img {
+        height: 70px;
+        max-height: 70px;
+      }
+    }
+  }
+}
+.offcanvas-toggle { @extend .visible-sm, .visible-md, .visible-lg; }
+.navbar-nav.responsive { @extend .hidden-sm, .hidden-md, .hidden-lg; }
+
+/* Layout overrides */
+.segment-content-wrap.jumbotron {
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+
+  .btn {
+    font-weight: bolder;
+    letter-spacing: 0.08em;
+  }
+  .btn {
+    padding: 2*$padding-base-vertical 2*$padding-base-horizontal;
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+  .btn-lg {
+    font-weight: bolder;
+    padding: 2*$padding-large-vertical 2*$padding-large-horizontal;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+.segment-content .editable-content {
+  h1, h2 {
+    margin-bottom: 0.5em;
+    padding-bottom: 0.25em;
+
+    span {
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -0.25em;
+        width: 100%;
+        border-bottom: 2px solid currentColor;
+      }
+    }
+  }
+}
 
 /* Feature box segments */
 .segment-content.feature {
