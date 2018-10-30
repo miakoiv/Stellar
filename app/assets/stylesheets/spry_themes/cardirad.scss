@@ -12,3 +12,15 @@ $brand-danger:  #d13a53 !default;
 /*
  * Overrides to the material theme for Cardirad
  */
+
+/* Feature box segments */
+.segment-content.feature {
+  filter: none;
+  background-blend-mode: overlay;
+  transition: background-color 250ms $material-easing;
+
+  &:hover {
+    filter: none;
+    background-color: transparent !important;
+  }
+}
