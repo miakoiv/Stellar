@@ -7,6 +7,8 @@ $brand-info:    #70c1cc !default;
 $brand-warning: #efc92f !default;
 $brand-danger:  #d13a53 !default;
 
+$font-size-base: 15px !default;
+
 $border-radius-base: 0 !default;
 $border-radius-large: 0 !default;
 $border-radius-small: 0 !default;
@@ -29,14 +31,16 @@ $border-radius-small: 0 !default;
 .offcanvas-toggle { @extend .visible-sm, .visible-md, .visible-lg; }
 .navbar-nav.responsive { @extend .hidden-sm, .hidden-md, .hidden-lg; }
 
-/* Layout overrides */
+/* Jumbotron applies rounded corners on self and buttons */
 .segment-content-wrap.jumbotron {
   border-top-left-radius: 40px;
   border-bottom-right-radius: 40px;
 
+  p { font-weight: normal; }
+
   .btn {
-    font-weight: bolder;
-    letter-spacing: 0.08em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
   }
   .btn {
     padding: 2*$padding-base-vertical 2*$padding-base-horizontal;
@@ -44,14 +48,25 @@ $border-radius-small: 0 !default;
     border-bottom-right-radius: 12px;
   }
   .btn-lg {
-    font-weight: bolder;
     padding: 2*$padding-large-vertical 2*$padding-large-horizontal;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
 }
+
+/* All caps, loosely kerned headlines in editable content */
 .segment-content .editable-content {
-  h1, h2 {
+  h2 { font-size: 1.8em; }
+  h3 { font-size: 1.6em; }
+  h2, h3 {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
+
+/* Underlined headers in text segments */
+.segment-content.text .editable-content {
+  h2, h3 {
     margin-bottom: 0.5em;
     padding-bottom: 0.25em;
 
@@ -71,7 +86,7 @@ $border-radius-small: 0 !default;
   }
 }
 
-/* Feature box segments */
+/* Background blending and text shadow in feature box segments */
 .segment-content.feature {
   filter: none;
   background-blend-mode: overlay;
@@ -80,5 +95,8 @@ $border-radius-small: 0 !default;
   &:hover {
     filter: none;
     background-color: transparent !important;
+  }
+  .editable-content {
+    text-shadow: 0 0 12px rgba(0,0,0,0.667);
   }
 }
