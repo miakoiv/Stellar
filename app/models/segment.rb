@@ -44,11 +44,14 @@ class Segment < ActiveRecord::Base
   ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
 
   SHAPES = [
-    ['1:1', 'shape-square'],
-    ['4:3', 'shape-4-3'],
-    ['16:9', 'shape-16-9'],
+    ['2:3', 'shape-2-3'],
+    ['3:4', 'shape-3-4'],
+    ['1:1 square', 'shape-square'],
+    ['4:3 TV', 'shape-4-3'],
+    ['3:2 film', 'shape-3-2'],
+    ['16:9 widescreen', 'shape-16-9'],
     ['2:1', 'shape-two-one'],
-    ['21:9', 'shape-21-9'],
+    ['21:9 cinema', 'shape-21-9'],
     ['3:1', 'shape-three-one'],
     ['4:1', 'shape-four-one'],
   ].freeze
