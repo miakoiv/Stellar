@@ -24,7 +24,7 @@ class Image < ActiveRecord::Base
       icon:           '25x25#',
     },
     convert_options: {
-      all:            '-set colorspace sRGB -strip -unsharp 0.25x0.08+8.3+0.045',
+      all:            '-colorspace sRGB -strip -unsharp 0.25x0.08+8.3+0.045',
       lightbox:       '-quality 80',
       presentational: '-quality 80',
       technical:      '-quality 80',
