@@ -121,8 +121,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 
 /* Change the responsive breakpoint for navs to screen-sm */
-.offcanvas-toggle { @extend .visible-sm; }
-.navbar-nav.responsive { @extend .hidden-sm; }
+@media (max-width: $screen-md-min) {
+  .offcanvas-toggle { display: block !important; }
+  .navbar-nav.responsive { display: none !important; }
+}
 
 /* Navbar lookup widget */
 #navbar-lookup .navbar-form input { border-radius: $input-height-base/2; }
