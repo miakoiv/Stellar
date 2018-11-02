@@ -276,6 +276,9 @@ GEM
       railties (>= 3.0, < 5.3)
       roadie (~> 3.1)
     rolify (5.2.0)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
     ruby-graphviz (1.2.3)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
@@ -400,6 +403,7 @@ DEPENDENCIES
   rinku
   roadie-rails
   rolify
+  roo (~> 2.7.0)
   sass-rails (~> 5.0)
   sassc-rails
   sdoc (~> 0.4.0)

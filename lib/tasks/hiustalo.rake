@@ -3,6 +3,51 @@
 require 'csv'
 
 namespace :products do
+  desc "Import Hiustalo product data"
+  task :hiustalo, [:file] => :environment do |task, args|
+    store = Store.find_by name: 'Hiustalo Outlet'
+    property_ml = store.properties
+      .joins(:measurement_unit)
+      .find_by(measurement_units: {name: 'ml'})
+
+    ods = Roo::Spreadsheet.open args.file
+    ods.each_with_pagename do |name, sheet|
+      sheet.parse(
+        ean: /\AEAN/i,
+        title: /NIMI/i,
+        description: /KUVAUS/i,
+        brand: /TOIMITTAJA/i,
+        ml: /\Aml/,
+        trade_price: /OSTOHINTA/i,
+        retail_price: /MYYNTIHINTA/i,
+      ).each do |row|
+        next unless row[:ean].present?
+        code = row[:ean].to_s.rjust(13, '0')
+        product = store.products.find_by(code: code)
+        if product.nil?
+          warn "err %s not found" % code
+          next
+        end
+        product.update(
+          title: row[:title],
+          overview: row[:description],
+          trade_price: row[:trade_price].to_money,
+          retail_price: row[:retail_price].to_money
+        )
+        tag = store.tags.find_or_create_by(name: row[:brand])
+        product.tags << tag unless product.tags.include?(tag)
+
+        prop = product.product_properties
+          .find_or_initialize_by(property: property_ml)
+        prop.value = row[:ml].to_s
+        prop.save
+        puts "[p] %-15s %s" % [code, row[:title]]
+      end
+    end
+  end
+end
+
+namespace :products do
   desc "Import Hiustalo product stock from CSV input"
   task :hiustalo_stock, [:file] => :environment do |task, args|
     store = Store.find_by name: 'Hiustalo Outlet'
@@ -52,41 +97,6 @@ namespace :products do
         code,
         product.title
       ]
-    end
-  end
-end
-
-namespace :products do
-  desc "Import Hiustalo products from CSV input"
-  task :hiustalo, [:file] => :environment do |task, args|
-    store = Store.find_by name: 'Hiustalo Outlet'
-    tax_category = store.tax_categories.first
-    brand_property = store.properties.find_by(name: 'Tuotemerkki')
-    store.products.destroy_all
-
-    CSV.foreach(args.file,
-      col_sep: ';',
-      headers: true,
-    ) do |row|
-      category_slug = (row['Kategoriapolku'] || '').split('/').last
-      product = store.products.create(
-        code: row['EAN-koodi'],
-        customer_code: row['SKU'],
-        title: row['Nimi'],
-        retail_price: Monetize.parse(row['Tuotteen hinta']),
-        categories: [
-          store.categories.find_by(slug: category_slug),
-          store.categories.find_by(name: row['Tuotemerkki'])
-        ].compact,
-        tax_category: tax_category
-      )
-      raise RuntimeError.new(row['EAN-koodi']) unless product.valid?
-      if row['Tuotemerkki'].present?
-        product.product_properties.create(
-          property: brand_property,
-          value: row['Tuotemerkki']
-        )
-      end
     end
   end
 end

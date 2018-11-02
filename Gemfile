@@ -88,6 +88,9 @@ gem 'magnific-popup-rails'
 gem 'nokogiri'
 gem 'rinku'
 
+# OpenDocument (.ods) support
+gem 'roo', '~> 2.7.0'
+
 # SpreadsheetML parser for uploaded files
 gem 'SpreadsheetML'
 
