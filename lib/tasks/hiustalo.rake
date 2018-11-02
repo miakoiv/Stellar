@@ -129,9 +129,13 @@ namespace :images do
     file = File.absolute_path(args.file, args.path)
     code = /\A\d+/.match(args.file).to_s
 
+    # Copy the file into a tempfile to ensure paperclip can unlink it.
+    tmp = Tempfile.new(code)
+    tmp.write(File.read(file))
+
     # Store image by filename, whether it will be used or not.
     image = store.images.find_or_initialize_by(attachment_file_name: args.file)
-    image.attachment = File.new(file)
+    image.attachment = tmp
     image.save!
     puts "[i] %s" % args.file
 
@@ -141,9 +145,9 @@ namespace :images do
       pictures = product.pictures.presentational
       pictures.destroy_all
       pictures.create(image: image)
-      puts "[p] %s" % product
+      puts "[p] %s %s" % [code, product]
     else
-      warn "err product %s not found" % code
+      warn "err %s not found" % code
     end
   end
 end
