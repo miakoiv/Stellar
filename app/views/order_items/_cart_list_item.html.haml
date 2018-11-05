@@ -9,10 +9,10 @@
         .small= order_item.product_subtitle
       .product-info
         - if order_item.product.shipping_notes.present?
-          .text-info.small
+          %p.text-info.small
             = icon('info-circle', order_item.product.shipping_notes)
         - if order_item.out_of_stock? && order_item.back_orderable?
-          .text-info.small
+          %p.text-info.small
             = icon('warning', t('store.cart.lead_time_warning', lead_time: order_item.product.lead_time))
         - unless order_item.satisfied?
           = bootstrap_label(order_item, icon: 'warning', text: col(Product, :not_live), appearance: :warning)
