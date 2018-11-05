@@ -14,7 +14,7 @@ module Appraiser
 
     # Final price to use for order items.
     def for_order(product)
-      final_price(product)
+      regular_price(product)
     end
 
     # Base price modified for group, used for pricing.

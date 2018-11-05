@@ -6,9 +6,16 @@ class PromotionHandler
     monetize :default_price_cents, allow_nil: true, numericality: {greater_than: 0}
 
     #---
-    # Vanilla promotions do not apply adjustments since order items
-    # are created with the promoted price.
     def apply!(order, items)
+      items.each do |item|
+        promoted_item = promotion.item_from_order_item(item)
+        discount = promoted_item.price - item.price
+        item.adjustments.create(
+          source: promotion,
+          label: promotion.description,
+          amount: item.amount * discount
+        )
+      end
     end
 
     def editable_prices?
