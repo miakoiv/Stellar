@@ -80,11 +80,6 @@ class Promotion < ActiveRecord::Base
     store.categories.order(:lft)
   end
 
-  def active?
-    (first_date.nil? || !first_date.future?) &&
-    (last_date.nil? || !last_date.past?)
-  end
-
   def slugger
     [:name, [:name, :id]]
   end
@@ -108,7 +103,10 @@ class Promotion < ActiveRecord::Base
   end
 
   def reset_live_status!
-    update_columns(live: active?)
+    update_columns(
+      live: (first_date.nil? || !first_date.future?) &&
+            (last_date.nil? || !last_date.past?)
+    )
     touch
     true
   end
