@@ -229,6 +229,10 @@ class ApplicationController < ActionController::Base
     )
   end
 
+  def not_found
+    render nothing: true, status: 404
+  end
+
   private
 
     # Unless given by param, locale is set from user preference first, then

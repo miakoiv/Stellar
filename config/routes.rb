@@ -285,4 +285,6 @@ Rails.application.routes.draw do
     post '/documents/delete', to: 'documents#delete', as: :delete_document
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
+
+  get '*unmatched_route', to: 'application#not_found'
 end
