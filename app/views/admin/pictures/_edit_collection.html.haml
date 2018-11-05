@@ -1,7 +1,6 @@
 - id = dom_id(pictureable, :pictures)
 - grid_columns ||= 3
 
-
 .grid.thumbnail-grid.sortable{id: id, class: "grid-columns-#{grid_columns}"}
   .grid-item.fixed
     = link_to [:new, :admin, pictureable, :picture], class: 'thumbnail', remote: true do

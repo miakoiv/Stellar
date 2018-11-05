@@ -1,0 +1,5 @@
+= bootstrap_form_for [:modify, :admin, pictureable], remote: true, html: {class: 'triggered'} do
+  %fieldset
+
+.well
+  = render partial: 'admin/pictures/edit_collection', object: pictureable, as: :pictureable, locals: {grid_columns: 2}

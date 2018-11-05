@@ -331,6 +331,7 @@ fi:
         tooltips:
           reorder: Järjestele
           settings: Asetukset
+          pictures: Kuvat
           delete: Poista
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
@@ -344,6 +345,7 @@ fi:
           edit: Muokkaa
           copy: Kopioi
           settings: Asetukset
+          pictures: Kuvat
           delete: Poista
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.

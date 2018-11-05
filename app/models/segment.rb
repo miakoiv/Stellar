@@ -165,6 +165,10 @@ class Segment < ActiveRecord::Base
     text? || media? || feature? || raw?
   end
 
+  def has_pictures?
+    picture? || gallery? || media? || feature?
+  end
+
   def edit_in_place?
     text? || media? || feature?
   end

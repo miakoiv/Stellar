@@ -7,6 +7,15 @@ class Admin::PicturesController < ApplicationController
 
   # No layout, this controller never renders HTML.
 
+  # GET /admin/pictureable/1/pictures.js
+  def index
+    @pictureable = find_pictureable
+
+    # JS response for layout editor, shows
+    # the pictures in the editor panel.
+    respond_to :js
+  end
+
   # GET /admin/pictures/1
   # This is only called by Dropzone as callback for success.
   def show

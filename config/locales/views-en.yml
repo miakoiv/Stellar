@@ -347,6 +347,7 @@ en:
         tooltips:
           reorder: Reorder
           settings: Settings
+          pictures: Pictures
           delete: Delete
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
@@ -360,6 +361,7 @@ en:
           edit: Edit
           copy: Copy
           settings: Settings
+          pictures: Pictures
           delete: Delete
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.

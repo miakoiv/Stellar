@@ -1,6 +1,3 @@
-- content_for :supplemental do
-  = render partial: 'admin/pictures/edit_collection', object: segment, as: :pictureable, locals: {grid_columns: 2}
-
 %fieldset
   = f.select :resource_type, Segment.resource_type_options, {include_blank: t('.select_resource_type')}
   - if segment.resource_type.present?

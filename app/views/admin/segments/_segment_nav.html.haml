@@ -6,6 +6,10 @@
     %li
       = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
         = icon('cog', class: 'fa-fw')
+    - if segment.has_pictures?
+      %li
+        = link_to admin_segment_pictures_path(segment), remote: true, title: t('.tooltips.pictures'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
+          = icon('photo', class: 'fa-fw')
     - if segment.has_content?
       %li
         = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do

@@ -85,7 +85,7 @@ class Admin::SectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
-      params.require(:section).permit(
+      params.fetch(:section) {{}}.permit(
         :name, :width, :layout, :gutters, :viewport,
         :background_color, :fixed_background,
         :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
