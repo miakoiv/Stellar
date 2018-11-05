@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
   # Inserts a single product to this order, optionally with separate components.
   def insert_single(product, amount, group, options = {})
     pricing = Appraiser::Product.new(group)
-    final_price = pricing.for_order(product)
+    price = pricing.for_order(product)
     label = product.best_promoted_item(group).try(:description)
     order_item = order_items.create_with(
       amount: 0,
@@ -47,9 +47,9 @@ class Order < ActiveRecord::Base
     ).first_or_create!
     order_item.update!(
       amount: order_item.amount + amount,
-      price: final_price.amount,
-      tax_rate: final_price.tax_rate,
-      price_includes_tax: final_price.tax_included,
+      price: price.amount,
+      tax_rate: price.tax_rate,
+      price_includes_tax: price.tax_included,
       label: label || ''
     )
     if options[:separate_components]
