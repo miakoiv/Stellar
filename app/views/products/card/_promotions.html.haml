@@ -1,4 +1,4 @@
 .promotions
-  - product.live_promoted_items(selected_group).each do |item|
+  - product.active_promoted_items(selected_group).each do |item|
     .promotion
       .promotion-text= item.description

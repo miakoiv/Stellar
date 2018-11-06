@@ -444,6 +444,7 @@ en:
         name: Name
         first_date: Starts at
         last_date: Expires at
+        activation_code: Campaign code
         not_active: Not in effect
         product_ids_string: Products to add
         category_ids_string: Categories to add

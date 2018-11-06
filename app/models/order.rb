@@ -21,6 +21,9 @@ class Order < ActiveRecord::Base
   belongs_to :order_type
   delegate :payment_gateway_class, to: :order_type
 
+  # Locked promotions that have been activated on the order.
+  has_and_belongs_to_many :activated_promotions, class_name: 'Promotion', inverse_of: :participating_orders
+
   default_scope { where(cancelled_at: nil) }
 
   scope :at, -> (store) { where(store: store) }

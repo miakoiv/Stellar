@@ -577,6 +577,10 @@ en:
       title: Best sellers
     cart_selector:
       return_to_shopping_cart: Return to your shopping cart
+    activate_code:
+      activation_code: Campaign code
+      activation_code_help: If you have a campaign code, input it here.
+      activate: Activate
     favorites:
       title: Your favourite products
     profile: Your profile

@@ -133,7 +133,7 @@ class Admin::PromotionsController < ApplicationController
     def promotion_params
       params.require(:promotion).permit(
         :name, :group_id, :promotion_handler_type,
-        :first_date, :last_date,
+        :first_date, :last_date, :activation_code,
         promotion_handler_attributes: [
           :id, :description, :default_price,
           :order_total, :required_items, :items_total,

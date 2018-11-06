@@ -14,11 +14,11 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
-  before_action :set_header_and_footer, except: [:show_favorites]
+  before_action :set_header_and_footer, except: [:activate_code, :show_favorites]
   before_action :set_categories,
-    except: [:index, :lookup, :delete_cart, :order_product, :show_favorites]
+    except: [:index, :lookup, :activate_code, :delete_cart, :order_product, :show_favorites]
   before_action :set_departments,
-    except: [:index, :lookup, :delete_cart, :order_product, :show_favorites]
+    except: [:index, :lookup, :activate_code, :delete_cart, :order_product, :show_favorites]
   before_action :find_page, only: [:show_page]
   before_action :find_category, only: [:show_category]
   before_action :find_tag, only: [:show_tag]
@@ -72,6 +72,23 @@ class StoreController < ApplicationController
   def show_promoted_products
     order_types = selected_group.outgoing_order_types
     @products = Product.best_selling(shopping_cart, order_types)
+
+    respond_to :js
+  end
+
+  # POST /cart/activate_code
+  def activate_code
+    activation_code = params[:activation_code]
+    @order = shopping_cart
+    @order_types = @order.available_order_types
+    @promotion = current_store.promotions.live.locked.find_by(
+      activation_code: activation_code
+    )
+    if @promotion.present? && @order.activated_promotions.exclude?(@promotion)
+      @order.activated_promotions << @promotion
+      @order.recalculate!
+      flash.now[:notice] = t('.notice', promotion: @promotion)
+    end
 
     respond_to :js
   end
@@ -208,9 +225,10 @@ class StoreController < ApplicationController
       end
     end
 
-    # Find promotion from live promotions by friendly id.
+    # Find promotion from active promotions by friendly id.
     def find_promotion
-      @promotion = current_store.promotions.live.friendly.find(params[:promotion_id])
+      @promotion = current_store.promotions
+        .active.friendly.find(params[:promotion_id])
     end
 
     # Find product by friendly id in `product_id`, redirecting to its

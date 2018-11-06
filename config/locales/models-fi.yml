@@ -444,6 +444,7 @@ fi:
         name: Nimi
         first_date: Alkamispäivä
         last_date: Päättymispäivä
+        activation_code: Kampanjakoodi
         not_active: Ei voimassa
         product_ids_string: Lisättävät tuotteet
         category_ids_string: Lisättävät tuoteryhmät

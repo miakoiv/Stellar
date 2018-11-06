@@ -188,5 +188,7 @@ en:
       notice: "%{amount} of ”%{product}” added to cart."
     quote:
       notice: "Quotation sent to <%{email}>."
+    activate_code:
+      notice: "Promotion %{promotion} activated."
     delete_cart:
       notice: "Shopping cart emptied."

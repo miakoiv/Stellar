@@ -146,11 +146,16 @@ class Order < ActiveRecord::Base
     # Applies active promotions on the order, first removing all existing
     # adjustments from the order and its items.
     def apply_promotions!
-      adjustments.destroy_all
-      order_items.each { |order_item| order_item.adjustments.destroy_all }
+      transaction do
+        adjustments.destroy_all
+        order_items.each { |order_item| order_item.adjustments.destroy_all }
 
-      source.promotions.live.each do |promotion|
-        promotion.apply!(self)
+        source.promotions.active.each do |promotion|
+          promotion.apply!(self)
+        end
+        activated_promotions.live.each do |promotion|
+          promotion.apply!(self)
+        end
       end
     end
 

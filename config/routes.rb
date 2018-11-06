@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get  '/store/lookup', to: 'store#lookup', as: :lookup
   get  '/cart/quote/:recipient', to: 'store#quote', as: :send_quote
   get  '/cart/delete',  to: 'store#delete_cart', as: :delete_cart
+  post '/cart/activate_code', to: 'store#activate_code', as: :activate_code
   post '/correspondence/mail_form', to: 'correspondence#mail_form', as: :mail_form
 
   # Routes for the checkout process:

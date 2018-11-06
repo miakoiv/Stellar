@@ -561,6 +561,10 @@ fi:
       title: Myydyimmät tuotteet
     cart_selector:
       return_to_shopping_cart: Palaa omaan ostoskoriin
+    activate_code:
+      activation_code: Kampanjakoodi
+      activation_code_help: Jos sinulla on kampanjakoodi, syötä se tähän.
+      activate: Aktivoi
     favorites:
       title: Suosikkituotteesi
     profile: Omat tiedot

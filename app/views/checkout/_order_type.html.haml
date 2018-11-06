@@ -1,34 +1,28 @@
 - if @order_types.count > 1
-  .row
-    .col-xs-12
-      .pull-right
-        = form_tag order_type_path(order), method: :post, remote: true, id: 'order-type-form' do
-          .form-group
-            %label= t('checkout.select_order_type')
-            .btn-group{data: {toggle: 'buttons'}}
-              - @order_types.each do |order_type|
-                %label.btn.btn-default{class: order_type == order.order_type && 'active'}
-                  = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
-                  = order_type.label
+  = form_tag order_type_path(order), method: :post, remote: true, id: 'order-type-form' do
+    .form-group
+      %label= t('checkout.select_order_type')
+      .btn-group{data: {toggle: 'buttons'}}
+        - @order_types.each do |order_type|
+          %label.btn.btn-default{class: order_type == order.order_type && 'active'}
+            = radio_button_tag :order_type_id, order_type.id, order_type == order.order_type
+            = order_type.label
   :coffee
     $('#order-type-form input').on 'change', (e) ->
       $('#order-type-form').trigger 'submit.rails'
       $('#checkout-button').collapse 'show'
 
 - elsif @order_types.count == 1
+  #checkout-button.collapse{class: order.order_type.present? && 'in'}
+    = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
+      - if order.targeted?
+        = icon('share', t('store.cart.complete_order'))
+      - else
+        = icon('check-circle', t('store.go_checkout'))
+
   :coffee
     jQuery ->
       request = $.post '#{order_type_path(order)}',
         order_type_id: #{@order_types.first.id}
       request.done (data) ->
         $('#checkout-button').collapse 'show'
-
-.row
-  .col-xs-12
-    .pull-right
-      #checkout-button.collapse{class: order.order_type.present? && 'in'}
-        = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
-          - if order.targeted?
-            = icon('share', t('store.cart.complete_order'))
-          - else
-            = icon('check-circle', t('store.go_checkout'))

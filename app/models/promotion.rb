@@ -23,7 +23,16 @@ class Promotion < ActiveRecord::Base
   has_one :promotion_handler, dependent: :destroy
   accepts_nested_attributes_for :promotion_handler
 
+  # Orders that have activated this promotion. Only for locked promotions.
+  has_and_belongs_to_many :participating_orders, class_name: 'Order', inverse_of: :activated_promotions
+
   scope :live, -> { where(live: true) }
+
+  # Having an activation code means the promotion is locked.
+  scope :locked, -> { where.not(activation_code: nil) }
+  scope :open, -> { where(activation_code: nil) }
+
+  scope :active, -> { live.open }
 
   #---
   validates :name, presence: true

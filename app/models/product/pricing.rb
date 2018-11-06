@@ -19,19 +19,19 @@ class Product < ActiveRecord::Base
     bundle? || has_variants?
   end
 
-  def live_promotions(group)
-    promotions.merge(Promotion.live)
+  def active_promotions(group)
+    promotions.active
   end
 
-  def live_promoted_items(group)
+  def active_promoted_items(group)
     promoted_items.joins(:promotion)
-      .merge(Promotion.live)
+      .merge(Promotion.active)
       .where(promotions: {group_id: group})
   end
 
   # Finds the promoted item with the lowest quoted price.
   def best_promoted_item(group)
-    live_promoted_items(group)
+    active_promoted_items(group)
       .where.not(price_cents: nil)
       .order(:price_cents)
       .first

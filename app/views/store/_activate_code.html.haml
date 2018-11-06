@@ -1,0 +1,2 @@
+= bootstrap_form_tag url: activate_code_path, remote: true do |f|
+  = f.text_field :activation_code, skip_label: true, append: f.primary(t('.activate')), placeholder: t('.activation_code'), help: t('.activation_code_help')

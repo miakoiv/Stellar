@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023133828) do
+ActiveRecord::Schema.define(version: 20181106123140) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -500,6 +500,13 @@ ActiveRecord::Schema.define(version: 20181023133828) do
   add_index "orders", ["store_id"], name: "index_orders_on_store_id", using: :btree
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "orders_promotions", id: false, force: :cascade do |t|
+    t.integer "order_id",     limit: 4, null: false
+    t.integer "promotion_id", limit: 4, null: false
+  end
+
+  add_index "orders_promotions", ["order_id", "promotion_id"], name: "index_orders_promotions_on_order_id_and_promotion_id", unique: true, using: :btree
+
   create_table "pages", force: :cascade do |t|
     t.integer  "store_id",       limit: 4,                    null: false
     t.integer  "purpose",        limit: 4,     default: 1,    null: false
@@ -683,6 +690,7 @@ ActiveRecord::Schema.define(version: 20181023133828) do
     t.string   "slug",                   limit: 255,                 null: false
     t.date     "first_date"
     t.date     "last_date"
+    t.string   "activation_code",        limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
   end

@@ -26,7 +26,7 @@
 
       .buy-now
         .promotions
-          = render partial: 'products/promoted_item', collection: product.live_promoted_items(selected_group)
+          = render partial: 'products/promoted_item', collection: product.active_promoted_items(selected_group)
         .product-pricing
           = render partial: 'products/pricing', object: product, as: :product
         - if product.includes_components?
@@ -75,7 +75,7 @@
         = render partial: 'iframes/gallery', object: product, as: :product, locals: {inline: current_store.inline_iframes}
 
 .product-footer
-  - product.live_promotions(selected_group).each do |promotion|
+  - product.active_promotions(selected_group).each do |promotion|
     = render partial: "products/#{promotion.promotion_handler.to_partial_path}", locals: {promotion: promotion, context: product}
 
   - if product.requisite_products.live.any?

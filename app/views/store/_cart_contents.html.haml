@@ -10,10 +10,11 @@
     - else
       = render partial: 'order_items/cart_table', object: order, as: :order, locals: {locked: false}
       .panel-footer
-        - if order.checkoutable?
-          = render partial: 'checkout/order_type', object: order, as: :order
-        - else
-          .pull-right= t('checkout.messages.cannot_checkout_html')
+        .pull-right
+          - if order.checkoutable?
+            = render partial: 'checkout/order_type', object: order, as: :order
+          - else
+            %p= t('checkout.messages.cannot_checkout_html')
 
   .actions
     = render partial: 'orders/actions', object: order, as: :order

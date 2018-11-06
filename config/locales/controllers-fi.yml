@@ -188,5 +188,7 @@ fi:
       notice: "%{amount} kpl tuotetta ”%{product}” lisätty koriin."
     quote:
       notice: "Tarjous lähetetty osoitteeseen <%{email}>."
+    activate_code:
+      notice: "Kampanja %{promotion} aktivoitu."
     delete_cart:
       notice: "Ostoskori tyhjennetty."
