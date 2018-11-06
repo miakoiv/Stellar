@@ -8,6 +8,10 @@ class PromotionHandler < ActiveRecord::Base
 
   belongs_to :promotion
 
+  monetize :default_price_cents, allow_nil: true, numericality: {greater_than: 0}
+  monetize :order_total_cents, allow_nil: true, numericality: {greater_than: 0}
+  monetize :items_total_cents, allow_nil: true, numericality: {greater_than: 0}
+
   #---
   validates :description, presence: true, on: :update
 

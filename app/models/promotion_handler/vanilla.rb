@@ -3,9 +3,6 @@
 class PromotionHandler
   class Vanilla < PromotionHandler
 
-    monetize :default_price_cents, allow_nil: true, numericality: {greater_than: 0}
-
-    #---
     def apply!(order, items)
       items.each do |item|
         promoted_item = promotion.item_from_order_item(item)
