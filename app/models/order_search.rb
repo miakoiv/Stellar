@@ -40,7 +40,7 @@ class OrderSearch < Searchlight::Search
     query.where('customer_name LIKE ?', "%#{customer}%")
   end
 
-  def search_summary
-    query.where("CONCAT_WS(' ', company_name, contact_person, shipping_city) LIKE ?", "%#{summary}%")
+  def search_keyword
+    query.where("CONCAT_WS(' ', customer_name, company_name, contact_person, shipping_city) LIKE ?", "%#{keyword}%")
   end
 end

@@ -226,7 +226,7 @@ en:
       search:
         order_type: Select order type
         status: "[All statuses]"
-        summary: Keyword search
+        keyword: Keyword search
         customer: Select customer
         user: Select order author
       edit:

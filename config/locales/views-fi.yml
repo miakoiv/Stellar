@@ -206,7 +206,7 @@ fi:
       search:
         order_type: Valitse tilauslaji
         status: "[Kaikki vaiheet]"
-        summary: Etsi hakusanalla
+        keyword: Etsi hakusanalla
         customer: Valitse asiakas
         user: Valitse tilauksen laatija
       edit:
