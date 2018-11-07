@@ -1,4 +1,4 @@
-= f.select :resource_id, current_store.pages.primary.order(:lft).map { |p| [p.to_option, p.id] }, {include_blank: t('.select_page')}
+= f.select :resource_id, Page.options_for_select(current_store.pages.primary) { |p, l| [indent(p.to_s, l), p.id] }, {include_blank: t('.select_page')}
 
 :coffee
   $('#segment_resource_id').betterSelectize()

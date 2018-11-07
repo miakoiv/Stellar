@@ -9,7 +9,7 @@
             = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_order_types'), class: 'form-control selectize'}
         .col-sm-12
           .form-group
-            = f.select :categories, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
+            = f.select :categories, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
         .col-sm-6
           .form-group
             = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.countries'), class: 'form-control selectize'}

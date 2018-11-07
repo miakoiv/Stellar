@@ -1,6 +1,6 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Category'
-  = f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: t('.select_category')}
+  = f.select :resource_id, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {include_blank: t('.select_category')}
   = f.text_field :header
   = f.text_field :subhead
   .form-group

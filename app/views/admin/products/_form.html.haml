@@ -13,7 +13,7 @@
           %fieldset{disabled: locked}
             = f.select :purpose, Product.purpose_options, {}, {class: 'selectize'}
           %fieldset{disabled: locked || @product.variant?}
-            = f.select :category_ids, current_group.category_options, {}, {multiple: true, class: 'selectize'}
+            = f.select :category_ids, Category.options_for_select(current_group.available_categories) { |c, l| [indent(c.to_s, l), c.id] }, {}, {multiple: true, class: 'selectize'}
             = f.select :tag_ids, current_store.tag_options, {}, {multiple: true, class: 'selectize-label'}
           %fieldset{disabled: locked}
             = f.select :vendor_id, current_store.group_options, {include_blank: true}, {class: 'selectize-label', disabled: third_party?}

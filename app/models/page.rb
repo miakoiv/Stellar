@@ -98,6 +98,14 @@ class Page < ActiveRecord::Base
     available_purposes.keys.map { |p| [Page.human_attribute_value(:purpose, p), p] }
   end
 
+  def self.options_for_select(pages)
+    [].tap do |options|
+      each_with_level(pages.order(:lft)) do |p, l|
+        options << yield(p, l)
+      end
+    end
+  end
+
   #---
   def part_of_continuous_page?
     parent.present? && parent.continuous?
@@ -213,10 +221,6 @@ class Page < ActiveRecord::Base
     when 'cart'
       [['store'], ['cart']]
     end
-  end
-
-  def to_option
-    self_and_ancestors.join " \u23f5 "
   end
 
   protected

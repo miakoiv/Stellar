@@ -48,7 +48,7 @@
                     = link_to edit_admin_store_style_path(@store), class: 'btn btn-default btn-block', remote: true do
                       = icon('paint-brush', t('actions.edit'))
             %hr
-            = f.select :footer_page_id, @store.pages.primary.map { |p| [p.to_option, p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
+            = f.select :footer_page_id, Page.options_for_select(@store.pages.primary) { |p, l| [indent(p.to_s, l), p.id] }, {include_blank: t('.default_footer')}, {class: 'selectize'}
         = tab_pane 'store-apis' do
           %fieldset{disabled: locked}
             = f.form_group do

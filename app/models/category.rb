@@ -38,6 +38,14 @@ class Category < ActiveRecord::Base
     find(id).self_and_descendants
   end
 
+  def self.options_for_select(categories)
+    [].tap do |options|
+      each_with_level(categories.order(:lft)) do |c, l|
+        options << yield(c, l)
+      end
+    end
+  end
+
   def self.view_mode_options
     VIEW_MODES.map { |m| [Category.human_attribute_value(:view_mode, m), m] }
   end
@@ -66,6 +74,10 @@ class Category < ActiveRecord::Base
   end
 
   def to_option
+    "%s%s" % ["\u00a0\u00a0\u00a0\u00a0" * depth, to_s]
+  end
+
+  def to_path
     self_and_ancestors.join " \u23f5 "
   end
 

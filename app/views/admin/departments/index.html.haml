@@ -27,7 +27,7 @@
           - department.categories.group_by(&:store).each do |store, categories|
             = bootstrap_label(store, appearance: :primary)
             - categories.each do |category|
-              = bootstrap_label(category, text: category.to_option)
+              = bootstrap_label(category, text: category.to_path)
         %td.actions
           = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
           - if current_user.can_update?(department, at: current_store)

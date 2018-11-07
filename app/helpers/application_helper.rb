@@ -10,6 +10,10 @@ module ApplicationHelper
     klass.human_attribute_name(attribute_name)
   end
 
+  def indent(text, level = 0, indent = "\u00a0\u00a0\u00a0\u00a0")
+    "%s%s" % [indent * level.to_i, text]
+  end
+
   def meta_tags_for(object)
     tags = {
       title: object.to_s,

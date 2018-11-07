@@ -1,4 +1,4 @@
-= f.select :resource_id, current_store.categories.order(:lft).live.map { |c| [c.to_option, c.id] }, {include_blank: t('.select_category')}
+= f.select :resource_id, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {include_blank: t('.select_category')}
 
 :coffee
   $('#segment_resource_id').betterSelectize()

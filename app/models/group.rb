@@ -81,10 +81,6 @@ class Group < ActiveRecord::Base
     limited_categories? ? categories.order(:lft) : store.categories.order(:lft)
   end
 
-  def category_options
-    available_categories.map { |c| [c.to_option, c.id] }
-  end
-
   # Category selection is limited if any are set.
   def limited_categories?
     categories.any?
