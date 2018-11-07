@@ -333,6 +333,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   > a {
     @extend .row;
     display: block;
+    flex: 1 1 auto;
     padding: 10px 15px;
     text-decoration: none;
     color: inherit;
@@ -343,6 +344,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
       img {
         @extend .img-responsive;
+        max-height: 200px;
+        width: auto;
         margin: 0 auto;
       }
     }
@@ -378,16 +381,26 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
         }
       }
     }
+    .premium-price {
+      @extend .col-xs-8, .col-xs-offset-4;
+      @extend .col-sm-10, .col-sm-offset-2;
+
+      .price {
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
   }
   .buy-now {
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
     align-items: center;
-    min-width: 100px;
+    min-width: 160px;
     padding: 10px 15px;
     background-color: lighten($body-tone-bg, 5%);
 
+    p { @extend .small; }
     .price {
       margin-bottom: 0;
       font-size: $font-size-h4;
@@ -395,6 +408,21 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
       .special-price { @extend .clearfix; }
       .regular-price { font-size: $font-size-base; }
+    }
+    .add-favorite {
+      > .btn {
+        @extend .btn-outline-danger, .btn-lg;
+        border: 0;
+        opacity: 0.333;
+        transition: opacity 100ms $material-easing;
+
+        &:hover {
+          opacity: 1;
+          background-color: transparent;
+          color: $btn-danger-border;
+        }
+        &.disabled { display: none; }
+      }
     }
     .buy-now-form {
       margin-left: $grid-gutter-width/2;
