@@ -16,7 +16,9 @@ class Image < ActiveRecord::Base
   has_attached_file :attachment,
     styles: {
       lightbox:       '1920x1200>',
+      laptop:         '1440x900>',
       presentational: '1000x600>',
+      shoebox:        '720x480>',
       technical:      '400x400>',
       postcard:       '300x300>',
       matchbox:       '200x200>',
@@ -24,9 +26,11 @@ class Image < ActiveRecord::Base
       icon:           '25x25#',
     },
     convert_options: {
-      all:            '-colorspace sRGB -strip -unsharp 0.25x0.08+8.3+0.045',
+      all:            '-colorspace sRGB -strip',
       lightbox:       '-quality 80',
+      laptop:         '-quality 80',
       presentational: '-quality 80',
+      shoebox:        '-quality 80',
       technical:      '-quality 80',
       postcard:       '-quality 80',
       matchbox:       '-quality 70',
