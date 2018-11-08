@@ -115,7 +115,9 @@ module ApplicationHelper
   def picture_variant_tag(picture, variant = nil, options = {})
     return ''.html_safe if picture.nil?
     variant ||= picture.variant || :lightbox
-    image_variant_tag(picture.image, variant, options)
+    content_tag :figure do
+      image_variant_tag(picture.image, variant, options)
+    end
   end
 
   # image_tag that supports size variants and non-bitmaps.
@@ -124,7 +126,7 @@ module ApplicationHelper
     if image.is_bitmap?
       image_tag(image.url(variant), options.merge(image.dimensions(variant)))
     else
-      image_tag(image.url(:original), options.merge(class: 'img-responsive'))
+      image_tag(image.url(:original), options)
     end
   end
 

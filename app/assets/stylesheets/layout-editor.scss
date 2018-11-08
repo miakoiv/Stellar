@@ -87,6 +87,11 @@ $navbar-icon-padding: 12px !default;
 /*
  * Layout editor navbars
  */
+#layout-menu {
+  .mega-dropdown-menu .page-image figure {
+    @include contained-image;
+  }
+}
 .section-nav, .column-nav, .segment-nav {
   position: absolute;
   min-height: auto;

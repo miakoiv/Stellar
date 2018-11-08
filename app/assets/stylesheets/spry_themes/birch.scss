@@ -16,11 +16,6 @@ $brand-primary: #013183;
   @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.333));
 }
 
-.navbar .navbar-brand img {
-  max-height: 40px;
-  margin: 0;
-}
-
 .navbar-nav > li.lg > a {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -387,11 +382,11 @@ $brand-primary: #013183;
 
               .product-image {
                 position: relative;
-                height: 0;
-                padding-bottom: 100%;
 
-                img {
-                  @extend .img-contain, .img-center;
+                figure {
+                  height: 0;
+                  padding-bottom: 100%;
+                  @include contained-image;
                 }
               }
 

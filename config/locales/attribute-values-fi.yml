@@ -175,7 +175,7 @@ fi:
           'align-middle': keskelle
           'align-bottom': alas
         image_sizing:
-          'sizing-original': alkuperäinen
+          'sizing-original': ei sovitusta
           'sizing-contain': sovita
           'sizing-cover': täytä
         inset:

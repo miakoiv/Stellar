@@ -22,10 +22,11 @@ $body-tone-bg: darken($body-bg, 4%);
   padding-bottom: 15px;
 
   .navbar-brand {
+    height: 50px;
     padding-top: 0;
     padding-bottom: 0;
 
-    img { max-height: 50px; }
+    figure > img { height: 50px; }
   }
 }
 
@@ -155,11 +156,13 @@ $body-tone-bg: darken($body-bg, 4%);
 /* Only top level items get images and styled titles */
 .mega-dropdown-menu ul.row > li > a > .page-image {
   position: relative;
-  height: 0;
-  padding-bottom: 100%;
   transition: all 0.4s ease-in-out 0s;
 
-  img { @extend .img-contain, .img-center; }
+  figure {
+    height: 0;
+    padding-bottom: 100%;
+    @include contained-image;
+  }
 }
 .mega-dropdown-menu ul.row > li > a > .page-title {
   display: block;
@@ -369,11 +372,13 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-grid .product-image,
 .product-card .product-image {
   position: relative;
-  height: 0;
-  padding-bottom: 100%;
   transition: transform 0.4s ease-in-out 0.2s;
 
-  img { @extend .img-contain, .img-center; }
+  figure {
+    height: 0;
+    padding-bottom: 100%;
+    @include contained-image;
+  }
 }
 .product-grid .product-text,
 .product-card .product-text {

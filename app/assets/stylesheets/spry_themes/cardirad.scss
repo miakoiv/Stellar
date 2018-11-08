@@ -19,12 +19,13 @@ $border-radius-small: 0 !default;
  * Overrides to the material theme for Cardirad
  */
 #main-nav {
-  > .container {
+  .navbar-header {
     .navbar-brand {
-      > img {
-        height: 70px;
-        max-height: 70px;
-      }
+      height: 60px;
+      margin-top: -5px;
+      margin-bottom: -5px;
+
+      figure > img { height: 60px; }
     }
   }
 }

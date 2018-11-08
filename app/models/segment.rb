@@ -113,7 +113,9 @@ class Segment < ActiveRecord::Base
   def self.default_settings
     {
       template: 'text',
-      image_sizing: 'sizing-original',
+      margin_top: 20,
+      margin_bottom: 20,
+      image_sizing: 'sizing-contain',
       thumbnails: true,
       shadow: 'shadow-none',
       velocity: 'velocity-slow'

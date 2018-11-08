@@ -175,7 +175,7 @@ en:
           'align-middle': middle
           'align-bottom': bottom
         image_sizing:
-          'sizing-original': original
+          'sizing-original': none
           'sizing-contain': fit
           'sizing-cover': fill
         inset:

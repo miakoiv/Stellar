@@ -1,7 +1,6 @@
 .grid-item
   .thumbnail
-    .thumbnail-square
-      = picture_variant_tag picture, :matchbox, class: 'img-responsive'
+    = picture_variant_tag picture, :matchbox
   .grid-widgets
     .pull-right
       %button.btn.btn-default.btn-xs.clipboard{data: {'clipboard-text': picture.image.attachment.url(:original, timestamp: false)}}= icon('link')

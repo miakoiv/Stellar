@@ -509,7 +509,7 @@ fi:
         inverse: Käänteiset värit
         direction: Suunta
         jumbotron: Jättikoko
-        image_sizing: Kuvan koko
+        image_sizing: Kuvan sovitus
         masonry: Tiivistä rivit
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön

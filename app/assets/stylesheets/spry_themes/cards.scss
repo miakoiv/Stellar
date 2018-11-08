@@ -55,11 +55,13 @@ $footer-bg: #d4d4d4;
 .mega-dropdown-menu ul.row > li > a > .page-image {
   @extend .thumbnail;
   position: relative;
-  height: 0;
-  padding-bottom: 100%;
   margin-bottom: 0;
 
-  img { @extend .img-contain, .img-center; }
+  figure {
+    height: 0;
+    padding-bottom: 100%;
+    @include contained-image;
+  }
 }
 .mega-dropdown-menu ul.row > li > a > .page-title {
   margin-top: 0.333em;
@@ -370,11 +372,11 @@ $footer-bg: #d4d4d4;
 
         .product-image {
           position: relative;
-          height: 0;
-          padding-bottom: 100%;
 
-          img {
-            @extend .img-contain, .img-center;
+          figure {
+            height: 0;
+            padding-bottom: 100%;
+            @include contained-image;
           }
         }
         .product-text {

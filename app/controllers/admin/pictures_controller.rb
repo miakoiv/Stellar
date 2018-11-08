@@ -28,7 +28,10 @@ class Admin::PicturesController < ApplicationController
   # GET /admin/pictureable/1/pictures/new
   def new
     @pictureable = find_pictureable
-    @picture = @pictureable.pictures.build(purpose: @pictureable.available_purposes.first)
+    @picture = @pictureable.pictures.build(
+      purpose: @pictureable.available_purposes.first,
+      variant: 'presentational'
+    )
 
     respond_to :js
   end

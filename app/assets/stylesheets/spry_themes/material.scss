@@ -38,35 +38,6 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /*
  * Mixins
  */
-@mixin fill-up {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-}
-@mixin contained-image {
-  position: relative;
-  overflow: hidden;
-
-  img {
-    @include fill-up;
-    object-fit: contain;
-    object-position: center;
-  }
-}
-@mixin covering-image {
-  position: relative;
-  overflow: hidden;
-
-  img {
-    @include fill-up;
-    object-fit: cover;
-    object-position: center;
-  }
-}
 @mixin shadow-lower {
   @include box-shadow(0 1px 2px rgba(0,0,0,0.2));
 }
@@ -88,8 +59,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     .navbar-brand {
       padding-top: 0;
       padding-bottom: 0;
-
-      > img { max-height: 50px; }
+      height: 50px;
     }
     .navbar-body {
       display: flex;
@@ -166,10 +136,13 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
         border-top-color: $brand-primary;
       }
       .page-image {
-        @include covering-image;
-        height: 0;
         margin: 5px 0;
-        padding-bottom: 100%;
+
+        figure {
+          height: 0;
+          padding-bottom: 100%;
+          @include covering-image;
+        }
       }
     }
     ul {
@@ -342,11 +315,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     .product-image {
       @extend .col-xs-4, .col-sm-2;
 
-      img {
-        @extend .img-responsive;
-        max-height: 200px;
-        width: auto;
-        margin: 0 auto;
+      > figure {
+        height: 0;
+        padding-bottom: 100%;
+        @include contained-image;
       }
     }
     .product-text {
@@ -658,10 +630,12 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
   .product-image {
     position: relative;
-    height: 0;
-    padding-bottom: 100%;
 
-    img { @extend .img-contain, .img-center; }
+    figure {
+      height: 0;
+      padding-bottom: 100%;
+      @include contained-image;
+    }
   }
   .product-text {
     padding-left: 0;
@@ -1085,9 +1059,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     margin-bottom: 0;
 
     .product-image {
-      @include contained-image;
       height: 0;
       padding-bottom: 100%;
+      @include contained-image;
     }
   }
   .swiper-slide {

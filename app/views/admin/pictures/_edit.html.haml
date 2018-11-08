@@ -1,7 +1,6 @@
 .grid-item[picture]
   = link_to edit_admin_picture_path(picture), class: 'thumbnail', remote: true do
-    .thumbnail-square
-      = picture_variant_tag picture, :matchbox, class: 'img-responsive'
+    = picture_variant_tag picture, :matchbox
   .grid-widgets
     .pull-right
       = link_to icon('remove'), admin_picture_path(picture), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
@@ -9,3 +8,4 @@
   .badge
     .truncate{title: picture.image.attachment_file_name}
       = picture.image.attachment_file_name
+      

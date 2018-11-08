@@ -1,24 +1,16 @@
 - cache [:segment_gallery, gallery] do
   .segment-content.gallery{id: dom_id(gallery, :content)}
     - if gallery.pictures.any?
-      .grid.thumbnail-grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
+      .grid{class: "grid-columns-#{gallery.grid_columns || 3}"}
         - gallery.pictures.each do |picture|
           .grid-item
             - if gallery.lightbox?
               = link_to picture.image.url(:lightbox, timestamp: false), class: 'image-link' do
-                - if gallery.thumbnails?
-                  .thumbnail
-                    = picture_variant_tag picture, :technical
-                - else
-                  .image-container{class: gallery.image_sizing}
-                    = picture_variant_tag picture, :technical
+                .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
+                  = picture_variant_tag picture
             - else
-              - if gallery.thumbnails?
-                .thumbnail
-                  = picture_variant_tag picture, :technical
-              - else
-                .image-container{class: gallery.image_sizing}
-                  = picture_variant_tag picture, :technical
+              .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
+                = picture_variant_tag picture
 
     - else
       = render partial: 'segments/placeholders/gallery'
