@@ -407,7 +407,8 @@
 }
 .segment-content-wrap.align-middle {
   .segment-content.picture,
-  .segment-content.gallery {
+  .segment-content.gallery,
+  .segment-content.feature {
     .image-container figure img,
     .swiper-container figure img {
       object-position: center center;
@@ -416,7 +417,8 @@
 }
 .segment-content-wrap.align-bottom {
   .segment-content.picture,
-  .segment-content.gallery {
+  .segment-content.gallery,
+  .segment-content.feature {
     .image-container figure img,
     .swiper-container figure img {
       object-position: center bottom;
