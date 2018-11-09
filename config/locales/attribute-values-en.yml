@@ -58,13 +58,15 @@ en:
           technical: technical
           promotional: promotional
         variant:
-          icon: icon
-          thumbnail: XS
-          matchbox: S
-          postcard: M
-          technical: L
-          presentational: XL
-          lightbox: XXL
+          icon: 25×25
+          thumbnail: 75×75
+          matchbox: 200×200
+          postcard: 300×300
+          technical: 400×400
+          shoebox: 720×480
+          presentational: 1000×600
+          laptop: 1440×900
+          lightbox: 1920×1200
       property:
         value_type:
           string: String

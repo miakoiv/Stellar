@@ -23,13 +23,7 @@
                       = f.radio_button_without_bootstrap :purpose, purpose
                       = Picture.human_attribute_value(:purpose, purpose)
               - if @picture.pictureable.available_variants.any?
-                .form-group
-                  %label.control-label= col(Picture, :variant)
-                  .btn-group.btn-group-block{data: {toggle: 'buttons'}}
-                    - @picture.pictureable.available_variants.each do |variant|
-                      %label.btn.btn-default{class: @picture.variant == variant && 'active'}
-                        = f.radio_button_without_bootstrap :variant, variant
-                        = Picture.human_attribute_value(:variant, variant)
+                = f.select :variant, @picture.pictureable.available_variants.map { |v| [Picture.human_attribute_value(:variant, v), v] }, {include_blank: true}
               = f.text_field :caption
               = f.text_field :url
         .modal-footer
@@ -38,6 +32,9 @@
           = f.primary
 
 :coffee
+  $('#picture_variant').betterSelectize
+    dropdownParent: null
+
   $.ajax
     type: 'GET'
     url: '#{admin_images_path}'

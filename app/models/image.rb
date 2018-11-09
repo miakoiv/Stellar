@@ -2,7 +2,7 @@
 
 class Image < ActiveRecord::Base
 
-  STYLES = %w{icon thumbnail matchbox postcard technical presentational lightbox}
+  STYLES = %w{icon thumbnail matchbox postcard technical shoebox presentational laptop lightbox}
 
   paginates_per 12
 
