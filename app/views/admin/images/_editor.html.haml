@@ -25,7 +25,7 @@
       imageSmoothingQuality: 'medium'
     canvas.toBlob (blob) ->
       data = new FormData()
-      data.append 'image[attachment]', blob
+      data.append 'image[attachment]', blob, '#{image.attachment_file_name}'
       $.ajax
         url: '#{admin_images_path}'
         type: 'POST'
@@ -33,7 +33,6 @@
         processData: false
         contentType: false
         success: (response) ->
-          console.log response.select_url
           editor.cleanUp()
           $.ajax
             type: 'GET'
