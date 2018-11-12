@@ -105,6 +105,7 @@ $footer-bg: #d4d4d4;
           text-decoration: none;
           transition: all 0.2s ease-in-out 0s;
 
+          img { @extend .img-responsive; }
           > p {
             margin: 0.5em 0.25em 0;
             font-size: $font-size-small;
