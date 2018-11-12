@@ -15,6 +15,16 @@
   $image = $('#image-editor > .canvas > img')
   editor = new Cropper $image[0]
 
+  $('#editor-save').on 'click', ->
+    canvas = editor.getCroppedCanvas
+      maxWidth: 4096
+      maxHeight: 4096
+      imageSmoothingQuality: 'medium'
+    canvas.toBlob (blob) ->
+      data = new FormData()
+      console.log data
+    , '#{image.attachment_content_type}', 0.8
+
   $('#editor-cancel').on 'click', ->
     editor.destroy()
     $.magnificPopup.close()
