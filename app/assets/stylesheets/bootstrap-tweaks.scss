@@ -877,6 +877,23 @@ i.icon {
 
 
 /*
+ * Contextual variants for inverse navbar icons
+ */
+@mixin navbar-icon-variant($color) {
+  > a:hover {
+    background-color: darken($color, 10%);
+  }
+}
+.navbar-inverse .navbar-nav > li {
+  &.primary { @include navbar-icon-variant($btn-primary-bg); }
+  &.success { @include navbar-icon-variant($btn-success-bg); }
+  &.info { @include navbar-icon-variant($btn-info-bg); }
+  &.warning { @include navbar-icon-variant($btn-warning-bg); }
+  &.danger { @include navbar-icon-variant($btn-danger-bg); }
+}
+
+
+/*
  * Image boxes of various sizes, with image centered inside
  */
 .box-postcard {

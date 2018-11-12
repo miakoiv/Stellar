@@ -132,20 +132,6 @@ $navbar-icon-padding: 12px !default;
   opacity: 0;
 }
 
-/* Contextual variants for navbar icons */
-@mixin navbar-icon-variant($color) {
-  > a:hover {
-    background-color: darken($color, 10%);
-  }
-}
-.section-list .navbar-nav > li {
-  &.primary { @include navbar-icon-variant($btn-primary-bg); }
-  &.success { @include navbar-icon-variant($btn-success-bg); }
-  &.info { @include navbar-icon-variant($btn-info-bg); }
-  &.warning { @include navbar-icon-variant($btn-warning-bg); }
-  &.danger { @include navbar-icon-variant($btn-danger-bg); }
-}
-
 
 /*
  * Layout editor sections and segments
