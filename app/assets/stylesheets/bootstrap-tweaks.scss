@@ -1078,6 +1078,42 @@ i.icon {
 
 
 /*
+ * Image editor components
+ */
+#image-editor {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .navbar {
+    min-height: auto;
+    margin: 0;
+    border-radius: 0;
+    background-color: $navbar-background;
+    border-color: transparent;
+    transition: all 150ms ease-in-out 0s;
+
+    > .navbar-nav {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 0;
+
+      > li > a {
+        padding: $navbar-icon-padding;
+        font-size: $navbar-icon-size;
+      }
+    }
+  }
+  .canvas {
+    flex: 1 1 auto;
+    overflow: hidden;
+
+    > img { max-width: 100%; }
+  }
+}
+
+
+/*
  * Dashboard components
  */
 .dashboard-row:first-child { margin-top: 40px; }
@@ -1498,6 +1534,13 @@ fieldset > legend {
 .mfp-iframe-scaler {
   height: calc(100vh - 100px);
   padding-bottom: 0;
+}
+.mfp-fullscreen {
+  .mfp-content {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
 }
 
 

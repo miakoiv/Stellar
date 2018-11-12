@@ -9,6 +9,8 @@
         .pull-right
           - if current_user.can_delete?(image, at: current_store)
             = link_to icon('remove'), admin_image_path(image), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
+        = link_to edit_admin_image_path(image), remote: true, class: 'btn btn-xs btn-default' do
+          = icon('edit')
       .badge
         .truncate{title: image.attachment_file_name}
           = image.attachment_file_name

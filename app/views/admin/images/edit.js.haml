@@ -1,0 +1,2 @@
+$('#picture-modal').modal('hide');
+$.magnificPopup.open({items: {src: "#{j render partial: 'admin/images/editor', object: @image, as: :image}"}, mainClass: 'mfp-fullscreen', alignTop: true, overflowY: 'hidden', modal: true});

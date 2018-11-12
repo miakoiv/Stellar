@@ -1,0 +1,21 @@
+#image-editor
+  %nav.navbar.navbar-inverse
+    %ul.nav.navbar-nav.navbar-right
+      %li.danger
+        %a#editor-cancel{role: 'button'}
+          = icon('close', t('actions.cancel'), class: 'fa-fw')
+      %li.success
+        %a#editor-save{role: 'button'}
+          = icon('save', t('actions.save'), class: 'fa-fw')
+
+  .canvas
+    = image_variant_tag image, :original
+
+:coffee
+  $image = $('#image-editor > .canvas > img')
+  editor = new Cropper $image[0]
+
+  $('#editor-cancel').on 'click', ->
+    editor.destroy()
+    $.magnificPopup.close()
+    $('#picture-modal').modal('show');

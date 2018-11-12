@@ -13,6 +13,13 @@ class Admin::ImagesController < ApplicationController
     respond_to :js
   end
 
+  # GET /admin/images/1/edit.js
+  def edit
+    @image = current_store.images.find(params[:id])
+
+    respond_to :js
+  end
+
   # POST /admin/images
   def create
     @image = current_store.images.build(image_params)
