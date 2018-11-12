@@ -1,2 +1,3 @@
 $('#picture_image_id').val(#{@image.id});
 $('#image-preview').html("#{j render partial: 'admin/images/preview', object: @image, as: :image}");
+$('#image-edit-link').html("#{j render partial: 'admin/images/edit', object: @image, as: :image}");

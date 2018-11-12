@@ -123,6 +123,8 @@ fi:
     images:
       browser:
         search: Hae kuvan nimellä…
+      edit:
+        button: Skaalaa ja rajaa…
     inventories:
       index:
         new_inventory: Uusi varasto

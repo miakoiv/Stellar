@@ -27,6 +27,9 @@
               = f.text_field :caption
               = f.text_field :url
         .modal-footer
+          #image-edit-link.pull-left
+            - if @picture.image.present?
+              = render partial: 'admin/images/edit', object: @picture.image, as: :image
           %button.btn.btn-default{type: 'button', data: {dismiss: 'modal'}}
             = t('actions.cancel')
           = f.primary

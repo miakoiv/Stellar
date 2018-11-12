@@ -143,6 +143,8 @@ en:
     images:
       browser:
         search: Search by image name…
+      edit:
+        button: Scale and crop…
     inventories:
       index:
         new_inventory: New inventory

@@ -32,13 +32,20 @@
         data: data
         processData: false
         contentType: false
-        success: ->
+        success: (response) ->
+          console.log response.select_url
           editor.cleanUp()
-          $('#picture-modal').modal('show');
+          $.ajax
+            type: 'GET'
+            url: '#{admin_images_path}'
+            success: ->
+              $('#picture-modal').modal 'show';
+              $.get response.select_url
         error: ->
-          console.log 'Error saving image'
+          editor.cleanUp()
+          $('#picture-modal').modal 'show';
     , '#{image.attachment_content_type}', 0.8
 
   $('#editor-cancel').on 'click', ->
     editor.cleanUp()
-    $('#picture-modal').modal('show');
+    $('#picture-modal').modal 'show';
