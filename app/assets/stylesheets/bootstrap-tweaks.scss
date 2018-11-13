@@ -300,17 +300,36 @@ body {
 /* Never collapse secondary nav */
 #secondary-nav .navbar-left {
   float: left !important;
-
-  > li { float: left; }
+  margin: 0 !important;
 }
 #secondary-nav .navbar-right {
   float: right !important;
-
-  > li { float: left; }
+  margin: 0 !important;
+}
+#secondary-nav .navbar-left,
+#secondary-nav .navbar-right {
+  > li {
+    float: left !important;
+    > a {
+      padding-top: $navbar-padding-vertical;
+      padding-bottom: $navbar-padding-vertical;
+    }
+  }
 }
 #secondary-nav .open .dropdown-menu {
   position: absolute;
   background-color: #fff;
+}
+@media (max-width: $screen-xs-max) {
+  #secondary-nav {
+    .navbar-left { margin-left: 0 !important; }
+    .navbar-right { margin-right: 0 !important; }
+    .navbar-toolbar {
+      position: fixed;
+      top: auto;
+      bottom: 0;
+    }
+  }
 }
 
 /* Navbar dropdowns with page icons */
