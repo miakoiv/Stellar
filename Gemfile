@@ -61,6 +61,9 @@ gem 'money-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+# Progressive rendering for the slower parts
+gem 'progressive_render'
+
 # Backport of ApplicationController.renderer from Rails 5
 gem 'backport_new_renderer'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

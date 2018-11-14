@@ -21,6 +21,7 @@
 //= require jquery-ui/effect.all
 //= require jquery.sticky-kit
 //= require jquery.infinite-pages
+//= require progressive_render
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fi
