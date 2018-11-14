@@ -17,8 +17,8 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    @query = saved_search_query('order', 'order_search')
-    @search = OrderSearch.new(search_params)
+    query = saved_search_query('order', 'order_search')
+    @search = OrderSearch.new(query.merge(search_params))
     results = @search.results.complete
     @orders = results.page(params[:page])
     @timeline_orders = []
@@ -231,6 +231,9 @@ class OrdersController < ApplicationController
 
     # The search is limited to the current user's personal history.
     def search_params
-      @query.merge(store: current_store, user_id: current_user.id)
+      {
+        store: current_store,
+        user_id: current_user.id
+      }
     end
 end

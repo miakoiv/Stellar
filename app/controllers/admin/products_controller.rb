@@ -15,8 +15,8 @@ class Admin::ProductsController < ApplicationController
   # GET /admin/products.json
   def index
     authorize_action_for Product, at: current_store
-    @query = saved_search_query('product', 'admin_product_search')
-    @search = ProductSearch.new(search_params)
+    query = saved_search_query('product', 'admin_product_search')
+    @search = ProductSearch.new(query.merge(search_params))
     results = @search.results.master.alphabetical
 
     respond_to do |format|
@@ -29,8 +29,8 @@ class Admin::ProductsController < ApplicationController
   # This method serves selectize widgets populated via Ajax.
   def query
     authorize_action_for Product, at: current_store
-    @query = {'keyword' => params[:q], live: true}.merge(params)
-    @search = ProductSearch.new(search_params)
+    query = {'keyword' => params[:q], live: true}.merge(params)
+    @search = ProductSearch.new(query.merge(search_params))
     @products = @search.results
   end
 
@@ -205,9 +205,9 @@ class Admin::ProductsController < ApplicationController
 
     # Restrict searching to products in current store.
     def search_params
-      params = {store: current_store}
-      params.merge!(vendor_id: current_group) if third_party?
-      params.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
-      @query.merge(params)
+      {store: current_store}.tap do |params|
+        params.merge!(vendor_id: current_group) if third_party?
+        params.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
+      end
     end
 end

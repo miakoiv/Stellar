@@ -11,8 +11,8 @@ class Admin::CustomerAssetsController < ApplicationController
   # GET /admin/customer_assets.json
   def index
     authorize_action_for CustomerAsset, at: current_store
-    @query = saved_search_query('customer_asset', 'admin_customer_asset_search')
-    @search = CustomerAssetSearch.new(search_params)
+    query = saved_search_query('customer_asset', 'admin_customer_asset_search')
+    @search = CustomerAssetSearch.new(query.merge(search_params))
     @customer_assets = @search.results.page(params[:page])
   end
 
@@ -67,8 +67,8 @@ class Admin::CustomerAssetsController < ApplicationController
 
     # Restrict searching to customer assets in current store.
     def search_params
-      @query.merge(
+      {
         store: current_store
-      )
+      }
     end
 end

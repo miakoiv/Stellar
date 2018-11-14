@@ -11,8 +11,8 @@ class Admin::StoresController < ApplicationController
   # GET /admin/stores.json
   def index
     authorize_action_for Store, at: current_store
-    @query = saved_search_query('store', 'admin_store_search')
-    @search = StoreSearch.new(@query)
+    query = saved_search_query('store', 'admin_store_search')
+    @search = StoreSearch.new(query)
     @stores = @search.results
   end
 

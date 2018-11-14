@@ -47,8 +47,8 @@ class StoreController < ApplicationController
   # GET /category/:category_id
   def show_category
     find_category && redirect_to_first_descendant_category
-    @query = params[:product_search] || {}
-    @search = ProductSearch.new(filter_params)
+    query = params[:product_search] || {}
+    @search = ProductSearch.new(query.merge(filter_params))
     results = @search.results.visible.sorted(@category.product_scope)
     @products = results.page(params[:page])
     @view_mode = get_view_mode_setting(@category)
@@ -92,9 +92,9 @@ class StoreController < ApplicationController
 
   # GET /store/lookup.js
   def lookup
-    @query = params
-    category_search = CategorySearch.new(category_lookup_params)
-    product_search = ProductSearch.new(product_lookup_params)
+    query = params
+    category_search = CategorySearch.new(query.merge(category_lookup_params))
+    product_search = ProductSearch.new(query.merge(product_lookup_params))
     @category_results = category_search.results
     @product_results = product_search.results.visible
       .limit(Product::INLINE_SEARCH_RESULTS)
@@ -256,26 +256,29 @@ class StoreController < ApplicationController
     # live and have a category page contained in the store header,
     # thus they are navigable.
     def category_lookup_params
-      @query.merge(
+      {
         store: current_store,
         live: true,
         within: current_store.header
-      )
+      }
     end
 
     # Restrict product lookup to live products in current store,
     # or member stores if defined (applies to portals).
     def product_lookup_params
-      @query.merge(store: current_store.member_stores.presence || current_store, live: true)
+      {
+        store: current_store.member_stores.presence || current_store,
+        live: true
+      }
     end
 
     # Product filtering in the current category asks the category
     # whether to include its descendants in the view.
     def filter_params
-      @query.merge(
+      {
         store: current_store,
         live: true,
         permitted_categories: @category.self_and_maybe_descendants
-      )
+      }
     end
 end

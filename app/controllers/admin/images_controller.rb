@@ -6,8 +6,8 @@ class Admin::ImagesController < ApplicationController
 
   # GET /admin/images
   def index
-    @query = saved_search_query('image', 'admin_image_search')
-    @search = ImageSearch.new(search_params)
+    query = saved_search_query('image', 'admin_image_search')
+    @search = ImageSearch.new(query.merge(search_params))
     @images = @search.results.page(params[:page])
 
     respond_to :js
@@ -61,8 +61,8 @@ class Admin::ImagesController < ApplicationController
 
     # Restrict searching to images in current store.
     def search_params
-      @query.merge(
+      {
         store: current_store
-      )
+      }
     end
 end

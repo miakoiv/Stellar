@@ -13,21 +13,21 @@ class Admin::InventoryItemsController < ApplicationController
   # GET /admin/inventory_items.json
   def index
     authorize_action_for InventoryItem, at: current_store
-    @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(search_params)
+    query = saved_search_query('inventory_item', 'admin_inventory_item_search')
+    @search = InventoryItemSearch.new(query.merge(search_params))
     results = @search.results.reorder(nil)
       .merge(Product.alphabetical).order(:code)
     @inventory_items = results.by_product.page(params[:page])
     @products = current_store.products
-      .find((@query['product_id'] || []).reject(&:blank?))
+      .find((query['product_id'] || []).reject(&:blank?))
   end
 
   # GET /admin/inventory_items/query.js
   def query
     authorize_action_for InventoryItem, at: current_store
     @product = current_store.products.find(params[:product_id])
-    @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(search_params.merge(params))
+    query = saved_search_query('inventory_item', 'admin_inventory_item_search')
+    @search = InventoryItemSearch.new(query.merge(search_params).merge(params))
     results = @search.results.reorder('inventories.name', 'code')
     @inventory_items = results
   end
@@ -35,8 +35,8 @@ class Admin::InventoryItemsController < ApplicationController
   # GET /admin/inventory_items/refresh.js
   def refresh
     @product = current_store.products.find(params[:product_id])
-    @query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(search_params.merge(params))
+    query = saved_search_query('inventory_item', 'admin_inventory_item_search')
+    @search = InventoryItemSearch.new(query.merge(search_params).merge(params))
     results = @search.results.reorder('inventories.name', 'code')
     @inventory_item = results.by_product.first
     @inventory_items = results
@@ -106,8 +106,8 @@ class Admin::InventoryItemsController < ApplicationController
 
     # Restrict searching to inventories in current store.
     def search_params
-      @query.merge(
+      {
         store_id: current_store.id
-      )
+      }
     end
 end

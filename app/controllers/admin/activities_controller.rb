@@ -11,8 +11,8 @@ class Admin::ActivitiesController < ApplicationController
   # GET /activities.json
   def index
     authorize_action_for Activity, at: current_store
-    @query = saved_search_query('activity', 'admin_activity_search')
-    @search = ActivitySearch.new(search_params)
+    query = saved_search_query('activity', 'admin_activity_search')
+    @search = ActivitySearch.new(query.merge(search_params))
     @activities = @search.results.page(params[:page])
   end
 
@@ -38,8 +38,8 @@ class Admin::ActivitiesController < ApplicationController
 
     # Restrict searching to activities in current store.
     def search_params
-      @query.merge(
+      {
         store: current_store
-      )
+      }
     end
 end

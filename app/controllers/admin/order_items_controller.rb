@@ -12,9 +12,9 @@ class Admin::OrderItemsController < ApplicationController
     authorize_action_for OrderItem, at: current_store
 
     order_types = current_group.incoming_order_types
-    @query = saved_search_query('order_item', 'admin_order_item_search')
-    @query.merge!('order_type' => order_types)
-    @search = OrderItemSearch.new(search_params)
+    query = saved_search_query('order_item', 'admin_order_item_search')
+    query.merge!('order_type' => order_types)
+    @search = OrderItemSearch.new(query.merge(search_params))
     results = @search.results.pending
     @order_items = results.page(params[:page])
     @customers = UserSearch.new(
@@ -23,7 +23,7 @@ class Admin::OrderItemsController < ApplicationController
       except_group: current_store.default_group
     ).results
     @products = current_store.products
-      .find((@query['product_id'] || []).reject(&:blank?))
+      .find((query['product_id'] || []).reject(&:blank?))
   end
 
   # POST /admin/orders/1/order_items.js
@@ -90,7 +90,9 @@ class Admin::OrderItemsController < ApplicationController
     end
 
     def search_params
-      @query.merge(store: current_store)
+      {
+        store: current_store
+      }
     end
 
     # Lot codes and serials are joined by hyphen if both are present,
