@@ -236,9 +236,11 @@ class Product < ActiveRecord::Base
 
   def variants_with_master_properties
     return {} unless has_variants?
+    pids = properties.pluck(:id)
     variants.live.sorted.includes(product_properties: :property)
       .map { |v|
-        [v, v.product_properties.where(properties: {id: properties})]
+        props = v.product_properties.map { |pp| [pp.property_id, pp] }.to_h
+        [v, pids.map { |p| props[p] }]
       }
   end
 

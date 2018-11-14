@@ -15,4 +15,6 @@
               = link_to show_product_path(variant), data: {push: 'partial', target: '#store-body'} do
                 = icon('circle-o', class: 'fa-lg')
           - product_properties.each do |product_property|
-            %td= product_property.value_with_units
+            %td
+              - if product_property.present?
+                = product_property.value_with_units
