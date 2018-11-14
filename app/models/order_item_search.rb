@@ -51,6 +51,11 @@ class OrderItemSearch < Searchlight::Search
   def search_until_date
     query.where('DATE(orders.completed_at) <= ?', until_date)
   end
+
+  def search_concluded_only
+    return query unless checked?(concluded_only)
+    query.merge(Order.concluded)
+  end
 end
 
 private

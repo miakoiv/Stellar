@@ -74,7 +74,7 @@ class Admin::ReportsController < ApplicationController
     return render nothing: true, status: :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types!(query)
-    @search = OrderItemSearch.new(query.merge('product_id': @product.id))
+    @search = OrderItemSearch.new(query.merge('product_id': @product.id, concluded_only: true))
     @order_items = @search.results
 
     respond_to :js
