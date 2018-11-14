@@ -167,7 +167,7 @@
 
   CKEDITOR.ClassicEditor.create(
     $('#product_overview')[0]
-    toolbar: ['heading', 'bold', 'italic', 'alignment', 'numberedList', 'bulletedList', 'link', 'undo', 'redo']
+    toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList', 'link', 'undo', 'redo']
     language: '#{I18n.locale}'
   ).then (editor) -> editor.isReadOnly = #{locked}
   .catch (error) -> console.log error
