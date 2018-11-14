@@ -91,7 +91,8 @@ class Admin::OrderItemsController < ApplicationController
 
     def search_params
       {
-        store: current_store
+        store: current_store,
+        all_time: true
       }
     end
 

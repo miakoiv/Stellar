@@ -12,6 +12,7 @@ class OrderItemSearch < Searchlight::Search
   end
 
   def options
+    return super if raw_options[:all_time].present?
     this_month = Date.current.all_month
     super.tap do |opts|
       opts[:since_date] = date_param(raw_options[:since_date], this_month.first)
