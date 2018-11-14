@@ -14,17 +14,10 @@ class StoreController < ApplicationController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
-  before_action :set_header_and_footer, except: [:activate_code, :show_favorites]
-  before_action :set_categories,
-    except: [:index, :lookup, :activate_code, :delete_cart, :order_product, :show_favorites]
-  before_action :set_departments,
-    except: [:index, :lookup, :activate_code, :delete_cart, :order_product, :show_favorites]
-  before_action :find_page, only: [:show_page]
-  before_action :find_category, only: [:show_category]
-  before_action :find_tag, only: [:show_tag]
-  before_action :find_department, only: [:show_department]
-  before_action :find_promotion, only: [:show_promotion]
-  before_action :find_product, only: [:show_product]
+  with_options only: [:front, :cart, :show_category, :show_department, :show_page, :show_product, :show_promotion, :show_tag] do
+    before_action :set_categories
+    before_action :set_departments
+  end
 
   # GET /
   def index
@@ -43,6 +36,60 @@ class StoreController < ApplicationController
     end
   end
 
+  # GET /cart
+  def cart
+    @order = shopping_cart
+    @order_types = @order.available_order_types
+
+    render current_store.fancy_cart? ? :fancy_cart : :cart
+  end
+
+  # GET /category/:category_id
+  def show_category
+    find_category && redirect_to_first_descendant_category
+    @query = params[:product_search] || {}
+    @search = ProductSearch.new(filter_params)
+    results = @search.results.visible.sorted(@category.product_scope)
+    @products = results.page(params[:page])
+    @view_mode = get_view_mode_setting(@category)
+  end
+
+  # GET /department/:department_id
+  def show_department
+    find_department
+    @products = @department.products.live.random.page(params[:page]).per(24)
+
+    respond_to :js, :html
+  end
+
+  # GET /:slug
+  def show_page
+    @page = current_store.pages.friendly.find(params[:slug])
+  end
+
+  # GET /product/:product_id(/:category_id)
+  def show_product
+    find_first_variant_product
+    @category ||= if params[:category_id].present?
+      @live_categories.friendly.find(params[:category_id])
+    else
+      @product.category
+    end
+  end
+
+  # GET /promotion/:promotion_id
+  def show_promotion
+    @promotion = current_store.promotions
+      .active.friendly.find(params[:promotion_id])
+    @products = @promotion.products.visible.page(params[:page])
+  end
+
+  # GET /tag/:tag_id
+  def show_tag
+    @tag = current_store.tags.friendly.find(params[:tag_id])
+    @products = @tag.products.live.page(params[:page])
+  end
+
   # GET /store/lookup.js
   def lookup
     @query = params
@@ -54,18 +101,6 @@ class StoreController < ApplicationController
     @results = @category_results.any? || @product_results.any?
 
     respond_to :js
-  end
-
-  # GET /:slug
-  def show_page
-  end
-
-  # GET /cart
-  def cart
-    @order = shopping_cart
-    @order_types = @order.available_order_types
-
-    render current_store.fancy_cart? ? :fancy_cart : :cart
   end
 
   # GET /products/promoted/1.js
@@ -118,46 +153,11 @@ class StoreController < ApplicationController
     redirect_to cart_path, notice: t('.notice')
   end
 
-  # GET /category/:category_id
-  def show_category
-    @query = params[:product_search] || {}
-    @search = ProductSearch.new(filter_params)
-    results = @search.results.visible.sorted(@category.product_scope)
-    @products = results.page(params[:page])
-    @view_mode = get_view_mode_setting(@category)
-  end
-
-  # GET /tag/:tag_id
-  def show_tag
-    @products = @tag.products.live.page(params[:page])
-  end
-
-  # GET /department/:department_id
-  def show_department
-    @products = @department.products.live.random.page(params[:page]).per(24)
-
-    respond_to :js, :html
-  end
-
-  # GET /promotion/:promotion_id
-  def show_promotion
-    @products = @promotion.products.visible.page(params[:page])
-  end
-
-  # GET /product/:product_id(/:category_id)
-  def show_product
-    @category ||= if params[:category_id].present?
-      @live_categories.friendly.find(params[:category_id])
-    else
-      @product.category
-    end
-  end
-
   # POST /product/:product_id/order.js
   def order_product
     @order = shopping_cart
     @order_types = @order.available_order_types
-    @product = current_store.products.live.friendly.find(params[:product_id])
+    find_product
     amount = params[:amount].to_i
     options = {}
     options[:additional_info] = params[:additional_info] if params[:additional_info].present?
@@ -177,13 +177,13 @@ class StoreController < ApplicationController
 
   # GET /store/favorites/:product_id
   def show_favorite
-    @product = current_store.products.live.friendly.find(params[:product_id])
+    find_product
     redirect_to show_product_path(@product)
   end
 
   # POST /store/favorites/:product_id.js
   def add_favorite
-    @product = current_store.products.live.friendly.find(params[:product_id])
+    find_product
     favorites = current_user.favorite_products
     favorites << @product unless favorites.include?(@product)
     respond_to :js
@@ -191,30 +191,29 @@ class StoreController < ApplicationController
 
   # DELETE /store/favorites/:product_id.js
   def remove_favorite
-    @product = current_store.products.live.friendly.find(params[:product_id])
+    find_product
     current_user.favorite_products.delete(@product)
     respond_to :js
   end
 
   private
     # Find category from live categories by friendly id, including history.
-    # If the category contains no products of its own and has no filtering
-    # enabled, redirect to the first descendant category.
     def find_category
       @category = @live_categories.friendly.find(params[:category_id])
-      if params[:product_id].nil? && request.path != show_category_path(@category)
+      if request.path != show_category_path(@category)
         return redirect_to show_category_path(@category), status: :moved_permanently
       end
+      true
+    end
+
+    # If the current category is empty and has filtering disabled,
+    # redirect to its first descendant category, if any.
+    def redirect_to_first_descendant_category
       if @category.products.visible.empty? && !@category.filtering
         if first_child = @category.children.live.first
           return redirect_to show_category_path(first_child)
         end
       end
-    end
-
-    # Find tag by friendly id in `tag_id`.
-    def find_tag
-      @tag = current_store.tags.friendly.find(params[:tag_id])
     end
 
     # Find department by friendly id in `department_id`, including history.
@@ -225,44 +224,22 @@ class StoreController < ApplicationController
       end
     end
 
-    # Find promotion from active promotions by friendly id.
-    def find_promotion
-      @promotion = current_store.promotions
-        .active.friendly.find(params[:promotion_id])
+    # Find product by friendly id in `product_id`.
+    def find_product
+      @product = current_store.products.live.friendly.find(params[:product_id])
     end
 
     # Find product by friendly id in `product_id`, redirecting to its
-    # first variant if applicable. If the product is not found, attempt
-    # applying an older routing scheme before giving up.
-    def find_product
+    # first variant if applicable.
+    def find_first_variant_product
       selected = current_store.products.live.find_by(slug: params[:product_id])
       if selected.nil?
-        redirect_old_product_routes and return
         return redirect_to front_path, notice: t('store.product_not_found')
       end
       @product = selected.first_variant
       if @product != selected
         return redirect_to show_product_path(@product, @category)
       end
-    end
-
-    # If a product can't be found but category id is given, attempt to
-    # redirect with the url params in reverse order as found in older
-    # product routes.
-    def redirect_old_product_routes
-      if params[:category_id].present?
-        selected = current_store.products.live.find_by(slug: params[:category_id])
-        if selected.present?
-          @category = @live_categories.friendly.find(params[:product_id])
-          return redirect_to show_product_path(selected, @category)
-        end
-      end
-      false
-    end
-
-    # Find page by friendly id in `slug`.
-    def find_page
-      @page = current_store.pages.friendly.find(params[:slug])
     end
 
     def get_view_mode_setting(category)

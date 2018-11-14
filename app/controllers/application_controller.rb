@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   #---
   prepend_before_action :orientate
   before_action :set_locale
+  before_action :set_header_and_footer
   after_action :prepare_unobtrusive_flash
 
   #---
@@ -245,7 +246,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_header_and_footer
-      if current_store.present?
+      if !request.xhr? && current_store.present?
         @header = current_store.header
         @footer = current_store.footer
       end
