@@ -8,7 +8,7 @@
         - if @page.can_be_live?
           = f.form_group do
             = f.check_box :live
-        = f.text_field :slug, required: true
+        = f.text_field :slug, required: true, help: t('.slug_help_html')
         = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
     .panel-footer
       - if @page.can_have_content?

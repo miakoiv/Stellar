@@ -255,6 +255,7 @@ en:
         new_page: New page
       form:
         show_resource: Show target
+        slug_help_html: Slug becomes part of the ᴡᴡᴡ address
         duplicate:
           button: Duplicate
           confirm: "Are you sure you want to duplicate %{klass} %{name}?"

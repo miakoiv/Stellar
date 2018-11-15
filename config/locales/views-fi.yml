@@ -239,6 +239,7 @@ fi:
         new_page: Uusi sivu
       form:
         show_resource: Näytä kohde
+        slug_help_html: Tunnistetta käytetään sivun ᴡᴡᴡ-osoitteena
         duplicate:
           button: Monista
           confirm: "Monistetaanko varmasti %{klass} %{name}?"
