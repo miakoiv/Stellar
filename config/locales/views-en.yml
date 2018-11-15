@@ -288,6 +288,8 @@ en:
         edit_page: Edit page
       search:
         availability: "[Availability]"
+        described: "[Product information]"
+        illustrated: "[Images]"
       edit:
         duplicate:
           button: Duplicate

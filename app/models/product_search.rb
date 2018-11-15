@@ -83,6 +83,29 @@ class ProductSearch < Searchlight::Search
     query.where(variants_count: 0)
   end
 
+  def search_described
+    return query if empty?(described)
+    if checked?(described)
+      query.where("description != ''")
+    else
+      query.where("description IS NULL OR description = ''")
+    end
+  end
+
+  def search_illustrated
+    return query if empty?(illustrated)
+    has_pictures = "EXISTS (
+      SELECT 1 FROM pictures
+      WHERE pictures.pictureable_type = 'Product'
+        AND pictures.pictureable_id = products.id
+      )"
+    if checked?(illustrated)
+      query.where(has_pictures)
+    else
+      query.where.not(has_pictures)
+    end
+  end
+
   def search_price_min
     query.where('retail_price_cents >= ?', price_min.to_money.cents)
   end

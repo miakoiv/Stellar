@@ -404,6 +404,10 @@ fi:
         live: Myynnissä
         not_live: Ei myynnissä
         has_page: Tuotteella on sivu
+        described: Sisältää tuotetiedot
+        not_described: Ei tuotetietoja
+        illustrated: Sisältää kuvia
+        not_illustrated: Ei kuvia
         memo: Muistio
         shipping_method_ids: Sallitut toimitustavat
         mass: Pakkauksen paino

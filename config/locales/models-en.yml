@@ -404,6 +404,10 @@ en:
         live: Available
         not_live: Not available
         has_page: Product has a page
+        described: Includes product information
+        not_described: No product information
+        illustrated: Includes images
+        not_illustrated: No images
         memo: Memo
         shipping_method_ids: Available shipping methods
         mass: Shipping weight

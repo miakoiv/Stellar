@@ -272,6 +272,8 @@ fi:
         edit_page: Muokkaa sivua
       search:
         availability: "[Saatavuus]"
+        described: "[Tuotetiedot]"
+        illustrated: "[Kuvasisältö]"
       edit:
         duplicate:
           button: Kopioi

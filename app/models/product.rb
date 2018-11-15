@@ -129,6 +129,20 @@ class Product < ActiveRecord::Base
     ]
   end
 
+  def self.described_options
+    [
+      [human_attribute_name(:described), true],
+      [human_attribute_name(:not_described), false]
+    ]
+  end
+
+  def self.illustrated_options
+    [
+      [human_attribute_name(:illustrated), true],
+      [human_attribute_name(:not_illustrated), false]
+    ]
+  end
+
   # Finds the top 10 best selling products in the context of given order,
   # matching given order types, excepting items already present.
   def self.best_selling(order, order_types)
