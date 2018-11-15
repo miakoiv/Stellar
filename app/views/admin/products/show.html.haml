@@ -30,26 +30,19 @@
 
     .tab-content
       = tab_pane 'images', default: true do
-        = progressive_render do
-          = render partial: 'admin/pictures/collection', object: @product, as: :pictureable
+        = render partial: 'admin/pictures/collection', object: @product, as: :pictureable
       = tab_pane 'inventory' do
-        = progressive_render do
-          = render partial: 'admin/inventory_items/table', object: @product, as: :product
+        = render partial: 'admin/inventory_items/table', object: @product, as: :product
       = tab_pane 'alternate-prices' do
-        = progressive_render do
-          = render partial: 'admin/alternate_prices/table', object: @product, as: :product
+        = render partial: 'admin/alternate_prices/table', object: @product, as: :product
       = tab_pane 'properties' do
-        = progressive_render do
-          = render partial: 'admin/product_properties/table', object: @product, as: :product
+        = render partial: 'admin/product_properties/table', object: @product, as: :product
       = tab_pane 'documents' do
-        = progressive_render do
-          = render partial: 'admin/documents/list', object: @product, as: :documentable
+        = render partial: 'admin/documents/list', object: @product, as: :documentable
       = tab_pane 'requisite-entries' do
-        = progressive_render do
-          = render partial: 'admin/requisite_entries/table', object: @product, as: :product
+        = render partial: 'admin/requisite_entries/table', object: @product, as: :product
       = tab_pane 'component-entries' do
-        = progressive_render do
-          = render partial: 'admin/component_entries/table', object: @product, as: :product
+        = render partial: 'admin/component_entries/table', object: @product, as: :product
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
 
