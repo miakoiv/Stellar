@@ -223,15 +223,6 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    progressive_render (0.7.0)
-      coffee-rails
-      jquery-rails
-      nokogiri
-      rails (>= 4.1)
-      railties
-      sass
-      sass-rails
-      uglifier
     public_suffix (3.0.3)
     rack (1.6.10)
     rack-test (0.6.3)
@@ -414,7 +405,6 @@ DEPENDENCIES
   nokogiri
   outdatedbrowser_rails
   paperclip (~> 5.3)
-  progressive_render
   rails (= 4.2.10)
   rails-erd
   rails_real_favicon
