@@ -24,23 +24,30 @@
 
     .tab-content
       = tab_pane 'images', default: true do
-        = render partial: 'admin/pictures/edit_collection', object: @product, as: :pictureable
+        = progressive_render do
+          = render partial: 'admin/pictures/edit_collection', object: @product, as: :pictureable
       = tab_pane 'inventory' do
-        = render partial: 'admin/inventory_items/table', object: @product, as: :product
-        - if current_user.can_create?(InventoryItem, at: current_store)
-          = render partial: 'admin/inventory_items/form', object: @product, as: :product
+        = progressive_render do
+          = render partial: 'admin/inventory_items/table', object: @product, as: :product
+          - if current_user.can_create?(InventoryItem, at: current_store)
+            = render partial: 'admin/inventory_items/form', object: @product, as: :product
       = tab_pane 'alternate-prices' do
-        = render partial: 'admin/alternate_prices/edit_table', object: @product, as: :product
+        = progressive_render do
+          = render partial: 'admin/alternate_prices/edit_table', object: @product, as: :product
       = tab_pane 'properties' do
-        = render partial: 'admin/product_properties/edit_table', object: @product, as: :product
+        = progressive_render do
+          = render partial: 'admin/product_properties/edit_table', object: @product, as: :product
       = tab_pane 'documents' do
-        = render partial: 'admin/documents/edit_list', object: @product, as: :documentable
-        = render partial: 'admin/documents/dropzone', object: @product, as: :documentable
+        = progressive_render do
+          = render partial: 'admin/documents/edit_list', object: @product, as: :documentable
+          = render partial: 'admin/documents/dropzone', object: @product, as: :documentable
       = tab_pane 'requisite-entries' do
-        = render partial: 'admin/requisite_entries/edit_table', object: @product, as: :product
-        = render partial: 'add_requisite_entries', object: @product, as: :product
+        = progressive_render do
+          = render partial: 'admin/requisite_entries/edit_table', object: @product, as: :product
+          = render partial: 'add_requisite_entries', object: @product, as: :product
       = tab_pane 'component-entries' do
-        = render partial: 'admin/component_entries/edit_table', object: @product, as: :product
+        = progressive_render do
+          = render partial: 'admin/component_entries/edit_table', object: @product, as: :product
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
 
