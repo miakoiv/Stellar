@@ -22,4 +22,8 @@ module Pictureable
   def cover_picture(purpose = :presentational)
     pictures.send(purpose).first || pictures.presentational.first
   end
+
+  def picture_count
+    pictures.count
+  end
 end

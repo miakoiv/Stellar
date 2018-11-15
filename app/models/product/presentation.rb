@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
 
   #---
   def self.to_csv
-    attributes = %w{code customer_code title subtitle}
+    attributes = %w{code customer_code title subtitle picture_count description}
     CSV.generate(
       headers: true,
       col_sep: ';',
