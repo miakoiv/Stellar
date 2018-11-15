@@ -205,8 +205,9 @@ class StoreController < ApplicationController
     # Find category from live categories by friendly id, including history.
     def find_category
       @category = @live_categories.friendly.find(params[:category_id])
-      if request.path != show_category_path(@category)
-        return redirect_to show_category_path(@category), status: :moved_permanently
+      category_path = url_for(params.slice(:controller, :action).merge(category_id: @category, only_path: true))
+      if request.path != category_path
+        return redirect_to category_path, status: :moved_permanently
       end
       true
     end
