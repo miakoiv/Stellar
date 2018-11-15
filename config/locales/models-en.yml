@@ -360,8 +360,8 @@ en:
         live: Enabled
         not_live: Page is disabled
         title: Title
-        slug: Target
-        url: Osoite
+        slug: Slug
+        url: Address
         content: Content
       picture:
         purpose: Image type

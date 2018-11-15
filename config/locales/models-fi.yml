@@ -360,7 +360,7 @@ fi:
         live: Aktiivinen
         not_live: Sivu ei aktiivinen
         title: Otsake
-        slug: Kohde
+        slug: Tunniste
         url: Osoite
         content: Sisältö
       payment:
