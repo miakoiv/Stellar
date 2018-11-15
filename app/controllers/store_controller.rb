@@ -47,11 +47,16 @@ class StoreController < ApplicationController
   # GET /category/:category_id
   def show_category
     find_category && redirect_to_first_descendant_category
-    query = params[:product_search] || {}
-    @search = ProductSearch.new(query.merge(filter_params))
-    results = @search.results.visible.sorted(@category.product_scope)
+    @search, results = search_category_products
     @products = results.page(params[:page])
     @view_mode = get_view_mode_setting(@category)
+  end
+
+  # GET /category/:category_id/order
+  def show_category_order
+    find_category
+    @search, results = search_category_products
+    @products = results.page(params[:page])
   end
 
   # GET /department/:department_id
@@ -222,6 +227,15 @@ class StoreController < ApplicationController
       if request.path != show_department_path(@department)
         return redirect_to show_department_path(@department), status: :moved_permanently
       end
+    end
+
+    # Performs a product search in current category.
+    # Returns a tuple with search object, search results.
+    def search_category_products
+      query = params[:product_search] || {}
+      search = ProductSearch.new(query.merge(filter_params))
+      results = search.results.visible.sorted(@category.product_scope)
+      [search, results]
     end
 
     # Find product by friendly id in `product_id`.
