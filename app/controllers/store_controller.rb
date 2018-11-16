@@ -176,6 +176,17 @@ class StoreController < ApplicationController
     respond_to :js
   end
 
+  # GET /product/:product_id/set_order_amount.js
+  def set_order_amount
+    @order = shopping_cart
+    find_product
+    amount = params[:amount].to_i
+    @order.set_amount(@product, amount, @order.source)
+    @order.recalculate!
+
+    respond_to :js
+  end
+
   # GET /store/favorites.js
   # GET /store/favorites.json
   def show_favorites

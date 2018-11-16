@@ -1,0 +1,5 @@
+$('#cart-badge').replaceWith("#{j render partial: 'store/cart_badge'}");
+$product = $("##{dom_id(@product)}");
+$product.find('.set-order-amount').replaceWith("#{j render partial: 'products/set_order_amount', object: @product, as: :product}");
+$product.category_order_form('#{cart_path}');
+$product.effect('highlight');

@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   # Product specific routes.
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
+  post '/product/:product_id/set_order_amount', to: 'store#set_order_amount', as: :set_order_amount
 
   # Favorite manipulation.
   get    '/store/favorites', to: 'store#show_favorites', as: :favorites

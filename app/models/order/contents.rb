@@ -58,6 +58,18 @@ class Order < ActiveRecord::Base
     order_item
   end
 
+  # Sets the amount of an existing order item, or inserts the item as new
+  # if it doesn't exist. Amounts less than zero delete the item.
+  def set_amount(product, amount, group, options = {})
+    return nil if product.nil?
+    if amount > 0
+      order_item = order_items.find_by(product: product) || insert_single(product, amount, group)
+      order_item.update(amount: amount)
+    else
+      order_items.where(product: product).destroy_all
+    end
+  end
+
   # Copies the contents of this order to another order by inserting
   # the top level real items. Pricing is according to the source group
   # of the target order.
