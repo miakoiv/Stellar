@@ -56,7 +56,7 @@ class StoreController < ApplicationController
   def show_category_order
     find_category
     @search, results = search_category_products
-    @products = results.page(params[:page])
+    @products = results.simple.page(params[:page])
   end
 
   # GET /department/:department_id
