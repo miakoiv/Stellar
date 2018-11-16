@@ -549,6 +549,7 @@ fi:
     order_history: Tilaushistoria
     no_orders: Tilaushistoriasi on tyhjä.
     go_checkout: Jatka kassalle
+    category_order: Tilauslomake
     cart:
       shopping_cart: Ostoskori
       order_or_quote: Tilaus/tarjous

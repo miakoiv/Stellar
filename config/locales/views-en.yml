@@ -565,6 +565,7 @@ en:
     order_history: Order history
     no_orders: Your order history is empty.
     go_checkout: Checkout
+    category_order: Order form
     cart:
       shopping_cart: Shopping cart
       order_or_quote: Order/quote
