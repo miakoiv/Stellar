@@ -30,6 +30,8 @@ class OrdersController < ApplicationController
   def show
     authorize_action_for @order, at: current_store
     track @order
+
+    respond_to :js, :json
   end
 
   # GET /orders/new
