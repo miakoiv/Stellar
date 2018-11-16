@@ -280,6 +280,103 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 
 /*
+ * Products in category order form
+ */
+.product-order-list > ul {
+  @extend .list-group;
+}
+.product-order-list .product {
+  @extend .list-group-item;
+  display: flex;
+  flex-flow: row nowrap;
+
+  &.header {
+    > a {
+      .product-pricing { display: none; }
+    }
+  }
+  &.variant {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 0;
+
+    &:not(:last-child) { border-bottom: 0; }
+
+    > a .product-text {
+      @extend .col-sm-offset-2, .col-md-offset-1;
+
+      h3 .small { display: inline-block; }
+    }
+  }
+  > a {
+    @extend .row;
+    flex: 1 1 auto;
+    margin-right: $grid-gutter-width;
+
+    .product-image {
+      @extend .hidden-xs, .col-sm-2, .col-md-1;
+
+      > figure {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        @include contained-image;
+      }
+    }
+    .product-text {
+      @extend .col-xs-9, .col-sm-8, .col-md-9;
+
+      h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: $font-size-base;
+        font-weight: 700;
+
+        .small {
+          @extend .text-muted;
+          display: block;
+          margin-top: 5px;
+          font-size: $font-size-small;
+        }
+      }
+    }
+    .product-pricing {
+      @extend .col-xs-3, .col-sm-2, .col-md-2;
+      color: $text-color;
+
+      .price.currency {
+        text-align: right;
+        white-space: normal;
+      }
+      .regular-price { display: none; }
+
+      .promotions {
+        .promotion {
+          @extend .pull-right;
+
+          .promotion-image { display: none; }
+          .promotion-text {
+            @extend .badge;
+            margin-left: 5px;
+            background-color: $brand-danger;
+          }
+        }
+      }
+    }
+  }
+  .order-now {
+    flex: 0 0 80px;
+
+    .form-group {
+      margin-bottom: 0;
+
+      .form-control { @extend .text-right; }
+    }
+  }
+}
+
+
+/*
  * Products in product list
  */
 .product-list > ul {
