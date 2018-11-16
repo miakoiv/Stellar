@@ -41,7 +41,10 @@ class StoreController < ApplicationController
     @order = shopping_cart
     @order_types = @order.available_order_types
 
-    render current_store.fancy_cart? ? :fancy_cart : :cart
+    respond_to do |format|
+      format.html { render current_store.fancy_cart? ? :fancy_cart : :cart }
+      format.json
+    end
   end
 
   # GET /category/:category_id
