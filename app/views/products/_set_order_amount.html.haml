@@ -2,4 +2,4 @@
   - if !product.has_variants? && product.orderable?(default_inventory, nil)
     = form_tag set_order_amount_path(product), method: :post, remote: true, class: 'immediate' do
       .form-group
-        = text_field_tag :amount, 0, id: dom_id(product, :set_order_amount), class: 'form-control', tabindex: 1
+        = text_field_tag :amount, nil, id: dom_id(product, :set_order_amount), class: 'form-control', tabindex: 1
