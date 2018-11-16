@@ -98,6 +98,11 @@ class Product < ActiveRecord::Base
     live.master.where(purpose: [0, 3, 4, 5])
   }
 
+  # Simple products exclude bundles and composites.
+  scope :simple, -> {
+    where.not(purpose: [3, 4])
+  }
+
   scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.find_self_and_descendants(id).pluck(:id) }}) }
   scope :not_including, -> (this) { where.not(id: this) }
   scope :with_assets, -> { joins(:customer_assets).distinct }
