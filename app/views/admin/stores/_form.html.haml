@@ -18,6 +18,8 @@
               = f.check_box :portal
             = f.form_group do
               = f.check_box :admit_guests
+            = f.form_group do
+              = f.check_box :favorites
             %hr
             = f.text_field :name, required: true
             .row
@@ -36,8 +38,6 @@
               = f.check_box :masonry
             = f.form_group do
               = f.check_box :fancy_cart
-            = f.form_group do
-              = f.check_box :favorites
             .row
               .col-md-8
                 = f.select :theme, Store.theme_options, {}, {class: 'selectize'}
