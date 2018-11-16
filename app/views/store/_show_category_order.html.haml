@@ -1,0 +1,17 @@
+#products-wrap
+  .context
+    %ol.breadcrumb
+      = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
+  .products
+    .product-filter.without-view-selector
+      = render partial: 'products/filtering'
+    #product-view.product-order-list
+      %ul
+        = render partial: 'products/order_list_item', collection: @products, as: :product
+      .pagination-block
+        = paginate @products
+
+:coffee
+  $('.category').deactivate()
+  $("##{dom_id(@category)}").activate()
+  $('.navbar-form').show()

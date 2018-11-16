@@ -1,0 +1,15 @@
+- cache [selected_group, I18n.locale, :product_order_list_item, product, @category] do
+  %li[product]{class: product.has_variants? && 'header'}
+    = link_to show_product_path(product, @category), data: {push: 'partial', target: '#store-body'} do
+      = render partial: 'products/card/list_image', object: product, as: :product
+      = render partial: 'products/card/title_text', object: product, as: :product
+      .product-pricing
+        = render partial: 'products/card/pricing', object: product, as: :product
+        = render partial: 'products/card/promotions', object: product, as: :product
+    .order-now
+      - if !product.has_variants? && product.orderable?(default_inventory, nil)
+        = form_tag order_product_path(product), method: :post, remote: true do
+          .form-group
+            = text_field_tag :amount, 0, class: 'form-control', tabindex: 1
+  - if product.has_variants?
+    = render partial: 'products/order_list_variant', collection: product.variants, as: :product

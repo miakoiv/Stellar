@@ -75,6 +75,7 @@ Rails.application.routes.draw do
 
   # Category, tag, department, promotion, and product views.
   get '/category/:category_id', to: 'store#show_category', as: :show_category
+  get '/category/:category_id/order', to: 'store#show_category_order', as: :show_category_order
   get '/tag/:tag_id', to: 'store#show_tag', as: :show_tag
   get '/department/:department_id', to: 'store#show_department', as: :show_department
   get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
