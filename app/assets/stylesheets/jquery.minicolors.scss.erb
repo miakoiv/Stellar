@@ -53,7 +53,7 @@
 
 /* Panel positioning */
 .minicolors-position-top .minicolors-panel {
-  top: -154px;
+  bottom: $input-height-base;
 }
 
 .minicolors-position-right .minicolors-panel {
@@ -258,6 +258,60 @@
 }
 
 /* Bootstrap theme */
+.minicolors-theme-bootstrap .minicolors-panel {
+  padding: 4px;
+  background-color: $popover-bg;
+  border: 1px solid $popover-border-color;
+  border-radius: $border-radius-large;
+  @include box-shadow(0 5px 10px rgba(0,0,0,.2));
+  z-index: $zindex-popover;
+
+  &:before, &:after {
+    position: absolute;
+    left: 50%;
+    border: solid transparent;
+    content: ' ';
+    width: 0;
+    height: 0;
+  }
+  &:before {
+    border-color: rgba($popover-border-color, 0);
+    border-width: $popover-arrow-outer-width;
+    margin-left: -$popover-arrow-outer-width;
+  }
+  &:after {
+    border-color: rgba($popover-bg, 0);
+    border-width: $popover-arrow-width;
+    margin-left: -$popover-arrow-width;
+  }
+  .minicolors-slider {
+    top: 5px;
+    left: 156px;
+  }
+  .minicolors-opacity-slider {
+    top: 5px;
+    left: 177px;
+  }
+  .minicolors-swatches {
+    margin: 7px 0 0 2px;
+  }
+}
+.minicolors-theme-bootstrap {
+  &.minicolors-position-top .minicolors-panel {
+    bottom: $input-height-base + $popover-arrow-width;
+
+    &:before, &:after { top: 100%; }
+    &:before { border-top-color: $popover-border-color; }
+    &:after { border-top-color: $popover-bg; }
+  }
+  &.minicolors-position-bottom .minicolors-panel {
+    top: $input-height-base + $popover-arrow-width;
+
+    &:before, &:after { bottom: 100%; }
+    &:before { border-bottom-color: $popover-border-color; }
+    &:after { border-bottom-color: $popover-bg; }
+  }
+}
 .minicolors-theme-bootstrap .minicolors-swatch {
   z-index: 2;
   top: 3px;
