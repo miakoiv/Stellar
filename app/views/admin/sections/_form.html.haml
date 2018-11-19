@@ -1,15 +1,14 @@
 .section-form
   = bootstrap_form_for [:admin, section], remote: true, html: {class: 'immediate triggered'} do |f|
     %fieldset
-      = f.text_field :name, prepend: '#'
       = f.select :layout, section.layout_options
       = f.form_group do
         = f.check_box :gutters
       = f.form_group do
         = f.check_box :viewport
-      = f.select :width, Section.width_options
       = f.form_group do
         = f.check_box :fixed_background
+      = f.select :width, Section.width_options
       = f.select :gradient_type, Section.gradient_type_options, {include_blank: true}, {placeholder: t('.solid_color')}
       = f.select :gradient_direction, Section.gradient_direction_options, {include_blank: true}, {placeholder: t('.gradient_center')}
       = f.range_field :gradient_balance, min: -100, max: 100
