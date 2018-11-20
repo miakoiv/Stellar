@@ -68,6 +68,10 @@ class OrderReportRowSearch < Searchlight::Search
     query.where('ordered_at <= ?', until_date)
   end
 
+  def search_temporal_unit
+    query
+  end
+
   private
     def date_param(param, default)
       return default unless param.present?

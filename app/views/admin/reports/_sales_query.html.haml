@@ -22,6 +22,13 @@
               = f.search_field :since_date, autocomplete: 'off', placeholder: t('admin.reports.search.since_date'), class: 'form-control'
               %span.input-group-addon= icon('caret-right')
               = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.search.until_date'), class: 'form-control'
-        .col-sm-3.col-sm-offset-3.col-md-offset-5
+        .col-sm-6.col-md-4
+          .form-group
+            .btn-group{data: {toggle: 'buttons'}}
+              - Reports::Sales::TEMPORAL_UNITS.each do |unit|
+                %label.btn.btn-default{class: @search.temporal_unit == unit && 'active'}
+                  = f.radio_button :temporal_unit, unit
+                  = t(unit, scope: 'date.units')
+        .col-sm-3.col-sm-offset-9.col-md-offset-1
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

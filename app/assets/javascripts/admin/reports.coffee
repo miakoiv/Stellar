@@ -18,7 +18,7 @@ $.fn.extend
             {
               yAxisID: 'value'
               label: $canvas.data 'valueLabel'
-              data: data.daily_value
+              data: data.temporal_value
               type: 'line'
               cubicInterpolationMode: 'monotone'
               fill: false
@@ -26,7 +26,7 @@ $.fn.extend
             {
               yAxisID: 'items'
               label: $canvas.data 'unitsLabel'
-              data: data.daily_units
+              data: data.temporal_units
             }
           ]
         options:
@@ -62,6 +62,6 @@ $.fn.extend
           url: $canvas.data 'source'
           dataType: 'json'
         .done (data) ->
-          $chart.data.datasets[0].data = data.daily_value
-          $chart.data.datasets[1].data = data.daily_units
+          $chart.data.datasets[0].data = data.temporal_value
+          $chart.data.datasets[1].data = data.temporal_units
           $chart.update()

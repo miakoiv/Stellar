@@ -55,6 +55,11 @@ fi:
     - :day
     - :month
     - :year
+    units:
+      day: päivä
+      week: viikko
+      month: kuukausi
+      year: vuosi
   datetime:
     distance_in_words:
       about_x_hours:

@@ -2,16 +2,12 @@ module Reports
 
   class Sales
 
+    TEMPORAL_UNITS = %w{day week month}.freeze
+
     def initialize(search)
+      @unit = search.options['temporal_unit']
       @sort = search.raw_options[:sort]
       @items = search.results
-    end
-
-    def by_date
-      @by_date ||= @items.select(
-        'ordered_at AS date,
-        SUM(amount) AS amount, SUM(total_sans_tax_cents) AS value_sans_tax'
-      ).group(:ordered_at).reorder(:ordered_at)
     end
 
     def by_product
@@ -42,12 +38,39 @@ module Reports
       @items.sum(:amount)
     end
 
+    def temporal_data
+      @temporal_data ||= send("by_#{@unit}")
+    end
+
     def units_max
-      by_date.map(&:amount).max
+      temporal_data.map(&:amount).max
     end
 
     def product_count
       @items.distinct.count(:product_id)
     end
+
+    private
+      # Temporal data gathering methods, called by #temporal_data.
+      def by_day
+        @items.select(
+          'ordered_at AS datum,
+          SUM(amount) AS amount, SUM(total_sans_tax_cents) AS value_sans_tax'
+        ).group('datum').reorder('datum')
+      end
+
+      def by_week
+        @items.select(
+          "DATE_FORMAT(ordered_at, '%xW%v') AS datum,
+          SUM(amount) AS amount, SUM(total_sans_tax_cents) AS value_sans_tax"
+        ).group('datum').reorder('datum')
+      end
+
+      def by_month
+        @items.select(
+          "DATE_FORMAT(ordered_at, '%Y-%m') AS datum,
+          SUM(amount) AS amount, SUM(total_sans_tax_cents) AS value_sans_tax"
+        ).group('datum').reorder('datum')
+      end
   end
 end

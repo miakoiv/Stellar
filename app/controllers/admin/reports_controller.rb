@@ -35,6 +35,7 @@ class Admin::ReportsController < ApplicationController
     return render nothing: true, status: :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types!(query)
+    query['temporal_unit'] ||= 'day'
 
     respond_to do |format|
       format.html {
@@ -86,6 +87,7 @@ class Admin::ReportsController < ApplicationController
     return render nothing: true, status: :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_purchases_order_report_row_search')
     set_default_order_types!(query)
+    query['temporal_unit'] ||= 'day'
 
     respond_to do |format|
       format.html {
