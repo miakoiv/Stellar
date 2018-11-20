@@ -173,7 +173,7 @@ class Page < ActiveRecord::Base
   end
 
   def description
-    segments.map(&:content).join("\n")
+    segments.reorder('sections.priority, columns.priority, segments.priority').map(&:content).join("\n")
   end
 
   # Pages are rendered with partials corresponding to purpose.
