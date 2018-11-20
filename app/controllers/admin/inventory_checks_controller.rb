@@ -91,7 +91,7 @@ class Admin::InventoryChecksController < ApplicationController
 
     respond_to do |format|
       if @inventory_check.complete!
-        track @inventory_check, nil, {action: 'complete'}
+        track @inventory_check
         format.html { redirect_to resolve_admin_inventory_check_path(@inventory_check), notice: t('.notice', inventory_check: @inventory_check) }
       else
         format.html { render :show }
@@ -109,7 +109,7 @@ class Admin::InventoryChecksController < ApplicationController
 
     respond_to do |format|
       if @inventory_check.conclude!
-        track @inventory_check, nil, {action: 'conclude'}
+        track @inventory_check
         format.html { redirect_to admin_inventory_check_path(@inventory_check), notice: t('.notice', inventory_check: @inventory_check) }
       else
         format.html { render :show }

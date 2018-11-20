@@ -116,7 +116,7 @@ class Admin::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update(product_params)
-        track @product
+        track @product, nil, {action: 'update'}
         format.js { render :set_price }
       else
         format.json { render json: @product.errors, status: :unprocessable_entity }

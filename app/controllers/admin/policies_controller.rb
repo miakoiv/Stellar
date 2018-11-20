@@ -75,7 +75,7 @@ class Admin::PoliciesController < ApplicationController
     respond_to do |format|
       if params[:policy][:accepted] == '1'
         @policy.update!(accepted_at: Time.current, accepted_by: current_user)
-        track @policy
+        track @policy, nil, {action: 'approve'}
         format.html { redirect_to admin_policy_path(@policy), notice: t('.notice', policy: @policy) }
       else
         format.html { render :show }
