@@ -41,4 +41,8 @@ class Picture < ActiveRecord::Base
   def assign_purpose
     self.purpose ||= Picture.available_purposes.first
   end
+
+  def to_s
+    image.attachment_file_name
+  end
 end

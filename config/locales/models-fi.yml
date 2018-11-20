@@ -46,6 +46,9 @@ fi:
       iframe:
         one: upotus
         other: upotukset
+      image:
+        one: kuvatiedosto
+        other: kuvatiedostot
       inventory:
         one: varasto
         other: varastot
