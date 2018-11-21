@@ -18,7 +18,7 @@
               = f.search_field :until_date, autocomplete: 'off', placeholder: t('admin.reports.search.until_date'), class: 'form-control'
         .col-sm-6.col-md-4
           .form-group
-            .btn-group{data: {toggle: 'buttons'}}
+            .btn-group.temporal-unit-select{data: {toggle: 'buttons'}}
               - Reports::Sales::TEMPORAL_UNITS.each do |unit|
                 %label.btn.btn-default{class: @search.temporal_unit == unit && 'active'}
                   = f.radio_button :temporal_unit, unit
@@ -26,3 +26,7 @@
         .col-sm-3.col-sm-offset-9.col-md-offset-1
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
+
+  :coffee
+    $('.temporal-unit-select :input').on 'change', ->
+      $('#new_order_report_row_search').trigger 'submit.rails'
