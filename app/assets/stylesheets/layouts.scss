@@ -366,52 +366,61 @@
 .segment-content.picture,
 .segment-content.gallery,
 .segment-content.feature {
+
+  // containers are full size flexboxen to align
+  // sizing-original figures to top/center/bottom
   .image-container,
   .swiper-container {
     width: 100%;
     height: 100%;
-  }
-  .image-container.stacked,
-  .swiper-container.stacked {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    &.stacked {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    // sizing original gets img-responsive,
+    // other sizings get top center positioning
+    figure {
+      img {
+        @extend .img-responsive;
+        margin: auto;
+        object-position: top center;
+      }
+    }
+    // contain and cover sizings expand both figure and img
+    // to full size to apply object-fit and object-position
+    &.sizing-contain figure,
+    &.sizing-cover figure {
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.sizing-contain figure img { object-fit: contain; }
+    &.sizing-cover figure img { object-fit: cover; }
   }
   .thumbnail {
     margin-bottom: 0;
     padding: 2%;
-  }
-  .image-container figure,
-  .swiper-container figure {
-    width: 100%;
-    height: 100%;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      margin: auto;
-      object-fit: none;
-      object-position: center top;
-    }
-  }
-  .image-container.sizing-contain figure img,
-  .swiper-container.sizing-contain figure img {
-    object-fit: contain;
-  }
-  .image-container.sizing-cover figure img,
-  .swiper-container.sizing-cover figure img {
-    object-fit: cover;
   }
 }
 .segment-content-wrap.align-middle {
   .segment-content.picture,
   .segment-content.gallery,
   .segment-content.feature {
-    .image-container figure img,
-    .swiper-container figure img {
-      object-position: center center;
+    .image-container,
+    .swiper-container {
+      align-items: center;
+
+      img { object-position: center center; }
     }
   }
 }
@@ -419,9 +428,11 @@
   .segment-content.picture,
   .segment-content.gallery,
   .segment-content.feature {
-    .image-container figure img,
-    .swiper-container figure img {
-      object-position: center bottom;
+    .image-container,
+    .swiper-container {
+      align-items: flex-end;
+
+      img { object-position: bottom center; }
     }
   }
 }
