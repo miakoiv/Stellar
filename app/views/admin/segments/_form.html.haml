@@ -17,6 +17,13 @@
               = f.radio_button_without_bootstrap :alignment, alignment
               = title
       .form-group
+        = f.label col(Segment, :justification), class: 'control-label'
+        .btn-group{data: {toggle: 'buttons'}}
+          - Segment.justification_options.each do |title, justification|
+            %label.btn.btn-default{class: segment.justification == justification && 'active'}
+              = f.radio_button_without_bootstrap :justification, justification
+              = title
+      .form-group
         = f.label col(Segment, :inset), class: 'control-label'
         .btn-group{data: {toggle: 'buttons'}}
           - Segment.inset_options.each do |title, inset|

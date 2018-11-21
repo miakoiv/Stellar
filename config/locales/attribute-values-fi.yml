@@ -184,6 +184,10 @@ fi:
           'inset-none': 0
           'inset-half': ½
           'inset-full': 1
+        justification:
+          'justify-left': vasemmalle
+          'justify-center': keskelle
+          'justify-right': oikealle
         shadow:
           'shadow-none': ei
           'shadow-light': vaalea

@@ -389,7 +389,7 @@
       img {
         @extend .img-responsive;
         margin: auto;
-        object-position: top center;
+        object-position: top;
       }
     }
     // contain and cover sizings expand both figure and img
@@ -412,27 +412,39 @@
     padding: 2%;
   }
 }
-.segment-content-wrap.align-middle {
-  .segment-content.picture,
-  .segment-content.gallery,
-  .segment-content.feature {
-    .image-container,
-    .swiper-container {
+.segment-content-wrap.align-middle .segment-content {
+  &.picture, &.gallery, &.feature {
+    .image-container, .swiper-container {
       align-items: center;
 
-      img { object-position: center center; }
+      img { object-position: center; }
     }
   }
 }
-.segment-content-wrap.align-bottom {
-  .segment-content.picture,
-  .segment-content.gallery,
-  .segment-content.feature {
-    .image-container,
-    .swiper-container {
+.segment-content-wrap.align-bottom .segment-content {
+  &.picture, &.gallery, &.feature {
+    .image-container, .swiper-container {
       align-items: flex-end;
 
-      img { object-position: bottom center; }
+      img { object-position: bottom; }
+    }
+  }
+}
+.segment-content-wrap.justify-left .segment-content {
+  &.picture, &.gallery, &.feature {
+    .image-container, .swiper-container {
+      justify-content: flex-start;
+
+      img { object-position: left; }
+    }
+  }
+}
+.segment-content-wrap.justify-right .segment-content {
+  &.picture, &.gallery, &.feature {
+    .image-container, .swiper-container {
+      justify-content: flex-end;
+
+      img { object-position: right; }
     }
   }
 }

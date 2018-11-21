@@ -502,7 +502,8 @@ fi:
         shape: Lohkon muoto
         margin_top: Ylämarginaali
         margin_bottom: Alamarginaali
-        alignment: Sisällön tasaus
+        alignment: Sisällön pystytasaus
+        justification: Sisällön vaakatasaus
         inset: Sisällön sisennys
         foreground_color: Tekstiväri
         background_color: Taustaväri

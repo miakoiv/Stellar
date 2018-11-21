@@ -184,6 +184,10 @@ en:
           'inset-none': 0
           'inset-half': ½
           'inset-full': 1
+        justification:
+          'justify-left': left
+          'justify-center': center
+          'justify-right': right
         shadow:
           'shadow-none': none
           'shadow-light': light

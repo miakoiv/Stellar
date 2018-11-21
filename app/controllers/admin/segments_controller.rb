@@ -128,10 +128,11 @@ class Admin::SegmentsController < ApplicationController
     def segment_params
       params.fetch(:segment) {{}}.permit(
         :resource_id, :resource_type,
-        :template, :alignment, :margin_top, :margin_bottom,
+        :template, :alignment, :justification,
         :shape, :inset, :foreground_color, :background_color,
         :body, :header, :subhead, :url,
-        :min_height, :grid_columns, :grid_lines, :grid_disable_xs,
+        :margin_top, :margin_bottom, :min_height,
+        :grid_columns, :grid_lines, :grid_disable_xs,
         :masonry, :image_sizing, :thumbnails, :lightbox,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,

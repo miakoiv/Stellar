@@ -43,6 +43,8 @@ class Segment < ActiveRecord::Base
 
   ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
 
+  JUSTIFICATIONS = %w{justify-left justify-center justify-right}.freeze
+
   SHAPES = [
     ['2:3', 'shape-2-3'],
     ['3:4', 'shape-3-4'],
@@ -136,6 +138,10 @@ class Segment < ActiveRecord::Base
 
   def self.alignment_options
     ALIGNMENTS.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
+  end
+
+  def self.justification_options
+    JUSTIFICATIONS.map { |j| [Segment.human_attribute_value(:justification, j), j] }
   end
 
   def self.grid_columns_options
