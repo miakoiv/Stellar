@@ -176,6 +176,9 @@ $navbar-icon-padding: 12px !default;
     border-top: 1px solid rgba($brand-primary, 0.333);
     border-bottom: 1px solid rgba($brand-primary, 0.333);
   }
+  .section-content {
+    min-height: 45px;
+  }
 }
 .section-list-item .column {
   position: relative;
