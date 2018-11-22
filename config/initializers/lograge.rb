@@ -3,7 +3,7 @@ Rails.application.configure do
 
   config.lograge.custom_payload do |controller|
     {
-      store: controller.current_store,
+      store: controller.try(:current_store),
       user: controller.current_user.try(:id)
     }
   end
