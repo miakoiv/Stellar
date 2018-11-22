@@ -1,0 +1,24 @@
+.form-inverse {
+  color: $gray-lighter;
+
+  legend {
+    color: $gray-light;
+    border-color: $gray-dark;
+  }
+  .form-control {
+    color: $gray-lighter;
+    background-color: $gray-dark;
+
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+      background-color: transparent;
+    }
+  }
+  .help-block {
+    color: $gray-light;
+  }
+  hr {
+    border-top-color: $gray-dark;
+  }
+}

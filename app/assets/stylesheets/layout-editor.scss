@@ -52,6 +52,11 @@ $navbar-icon-padding: 12px !default;
   padding-left: 15px;
   padding-right: 15px;
 }
+//#side-panel form { @extend .form-inverse; }
+#side-panel .well {
+  //background-color: $gray-dark;
+  //border-color: lighten($gray-dark, 7%);
+}
 #side-panel .btn-group {
   display: block;
   @include clearfix;
@@ -59,7 +64,7 @@ $navbar-icon-padding: 12px !default;
 #side-panel .actions {
   margin-top: 10px;
   padding-top: 20px;
-  border-top: 1px solid $navmenu-default-border;
+  border-top: 1px solid $navmenu-inverse-border;
 }
 
 /* Permanent side panel on the largest screens */
