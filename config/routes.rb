@@ -289,5 +289,7 @@ Rails.application.routes.draw do
     post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
 
-  get '*unmatched_route', to: 'application#not_found'
+  if Rails.env.production?
+    match "*any", via: :all, to: redirect('/404')
+  end
 end
