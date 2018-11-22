@@ -9,7 +9,7 @@ class PromotionHandler
         discount = promoted_item.price - item.price
         item.adjustments.create(
           source: promotion,
-          label: promotion.description,
+          label: promoted_item.description,
           amount: item.amount * discount
         )
       end
