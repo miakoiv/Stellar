@@ -38,6 +38,7 @@ class Promotion < ActiveRecord::Base
   validates :name, presence: true
   validates_associated :promoted_items, on: :update
 
+  before_validation :nullify_activation_code
   after_save :touch_products
   after_save :reset_live_status!
   after_save :schedule_activation
@@ -129,6 +130,10 @@ class Promotion < ActiveRecord::Base
   end
 
   private
+    def nullify_activation_code
+      self[:activation_code] = nil if activation_code.blank?
+    end
+
     # Takes an order object and returns order items that match this promotion.
     def matching_items(order)
       order.order_items.where(product_id: promoted_items.pluck(:product_id))
