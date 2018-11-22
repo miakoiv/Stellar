@@ -1067,6 +1067,7 @@ i.icon {
     figure {
       height: 0;
       padding-bottom: 100%;
+      @include checkerboard-pattern;
       @include contained-image;
     }
   }
@@ -1111,6 +1112,9 @@ i.icon {
 
   .dz-message { margin: 0.5em 0; }
   &.dz-drag-hover { background-color: $brand-primary; }
+}
+#picture-modal #image-preview {
+  @include checkerboard-pattern;
 }
 
 
