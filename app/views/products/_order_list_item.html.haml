@@ -8,4 +8,4 @@
         = render partial: 'products/card/promotions', object: product, as: :product
     = render partial: 'products/set_order_amount', object: product, as: :product
   - if product.has_variants?
-    = render partial: 'products/order_list_variant', collection: product.variants, as: :product
+    = render partial: 'products/order_list_variant', collection: product.variants.sorted, as: :product
