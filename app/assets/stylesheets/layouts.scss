@@ -317,7 +317,7 @@
 .segment-content.feature,
 .segment-content.media {
   .editable-content {
-    hyphens: auto;
+    p { hyphens: auto; }
 
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
