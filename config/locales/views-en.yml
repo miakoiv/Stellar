@@ -485,6 +485,11 @@ en:
     more_info: More info
   live_chat:
     title: Contact us
+  adjustments:
+    item:
+      valid_until: valid until %{date}
+    row:
+      valid_until: valid until %{date}
   orders:
     index:
       timeline_header: Orders that require shipping

@@ -1,7 +1,10 @@
 .cart-list-item.list-group-item.subrow[adjustment]{class: adjustment.credit? ? 'list-group-item-success' : 'list-group-item-danger'}
   .cart-item-row
     .adjustment-label
-      %p= adjustment.label
+      %p
+        = adjustment.label
+        - if adjustment.validity_last_date.present?
+          %em= t('.valid_until', date: l(adjustment.validity_last_date))
     .adjustment-amount
       %h4.text-right
         %span.currency= money includes_tax ? adjustment.amount_with_tax : adjustment.amount_sans_tax

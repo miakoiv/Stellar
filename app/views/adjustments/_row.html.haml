@@ -1,6 +1,9 @@
 %tr.subrow{class: adjustment.credit? ? 'success text-success' : 'warning text-warning'}
   %td.visible-print
-  %th{colspan: 3}= adjustment.label
+  %th{colspan: 3}
+    = adjustment.label
+    - if adjustment.validity_last_date.present?
+      %em= t('.valid_until', date: l(adjustment.validity_last_date))
   %td.text-right.currency
     = money includes_tax ? adjustment.amount_with_tax : adjustment.amount_sans_tax
   %td.actions

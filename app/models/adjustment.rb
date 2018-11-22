@@ -43,6 +43,10 @@ class Adjustment < ActiveRecord::Base
     amount_as_price.with_tax
   end
 
+  def validity_last_date
+    source.present? && source.last_date.presence
+  end
+
   private
     def amount_as_price
       @amount_as_price ||= Price.new(amount, price_includes_tax?, tax_rate)
