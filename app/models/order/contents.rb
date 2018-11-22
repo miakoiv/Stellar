@@ -115,6 +115,12 @@ class Order < ActiveRecord::Base
     reload
   end
 
+  # Triggers a recalculate if the order has gone stale,
+  # potentionally having out of date promotions applied on it.
+  def refresh!
+    recalculate! if updated_at < 5.minutes.ago
+  end
+
   # Forwards this order as another order by replacing its items with
   # items from this order, and copying some relevant info over.
   def forward_to(another_order)

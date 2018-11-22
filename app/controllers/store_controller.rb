@@ -39,6 +39,7 @@ class StoreController < ApplicationController
   # GET /cart
   def cart
     @order = shopping_cart
+    @order.refresh!
     @order_types = @order.available_order_types
 
     respond_to do |format|
