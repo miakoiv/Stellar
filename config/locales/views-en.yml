@@ -570,7 +570,6 @@ en:
     order_history: Order history
     no_orders: Your order history is empty.
     go_checkout: Checkout
-    category_order: Order form
     cart:
       shopping_cart: Shopping cart
       order_or_quote: Order/quote
@@ -595,6 +594,10 @@ en:
     favorites:
       title: Your favourite products
     profile: Your profile
+    show_category:
+      category_order: Order form
+    show_category_order:
+      close: Close form
   checkout:
     panels:
       address_panel: Contact information

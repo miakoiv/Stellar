@@ -554,7 +554,6 @@ fi:
     order_history: Tilaushistoria
     no_orders: Tilaushistoriasi on tyhjä.
     go_checkout: Jatka kassalle
-    category_order: Tilauslomake
     cart:
       shopping_cart: Ostoskori
       order_or_quote: Tilaus/tarjous
@@ -579,6 +578,10 @@ fi:
     favorites:
       title: Suosikkituotteesi
     profile: Omat tiedot
+    show_category:
+      category_order: Tilauslomake
+    show_category_order:
+      close: Sulje tilauslomake
   checkout:
     panels:
       address_panel: Yhteystietosi

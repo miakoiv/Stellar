@@ -2,7 +2,7 @@
   .context
     .pull-right
       = link_to show_category_path(@category, params.slice(:page)), class: 'btn btn-default btn-sm' do
-        = icon('chevron-circle-left', t('actions.back'))
+        = icon('times', t('.close'))
     %ol.breadcrumb
       = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
   .products

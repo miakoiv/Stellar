@@ -3,7 +3,7 @@
     - if current_store.category_order?
       .pull-right
         = link_to show_category_order_path(@category, params.slice(:page)), class: 'btn btn-default btn-sm' do
-          = icon('list-ul', t('store.category_order'))
+          = icon('list-ul', t('.category_order'))
     %ol.breadcrumb
       = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
   .products
