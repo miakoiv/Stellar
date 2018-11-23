@@ -41,6 +41,7 @@ en:
           product: Product
           promotion: Promotion
           department: Department
+          category_order: Order form for category
           header: Header navigation
           footer: Footer navigation
           dropdown: Dropdown menu

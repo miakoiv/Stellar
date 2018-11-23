@@ -1,0 +1,8 @@
+%li.has-image{class: active_link_to_class(category_order.path)}
+  - cache [navmenu, I18n.locale, :category_order_page, category_order] do
+    = link_to category_order.path do
+      - if category_order.resource.cover_picture.present?
+        .page-image
+          = picture_variant_tag category_order.resource.cover_picture, :matchbox
+      .page-title
+        = category_order

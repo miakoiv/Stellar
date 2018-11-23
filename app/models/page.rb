@@ -28,6 +28,7 @@ class Page < ActiveRecord::Base
     product: 3,         # link to product
     promotion: 4,       # link to promotion
     department: 5,      # link to department
+    category_order: 6,  # link to category order
     header: 10,         # container for main navigation
     footer: 11,         # container for footer links
     dropdown: 20,       # dropdown container for other pages
@@ -48,6 +49,7 @@ class Page < ActiveRecord::Base
     'product' => {icon: 'cube', appearance: 'info'},
     'promotion' => {icon: 'tag', appearance: 'info'},
     'department' => {icon: 'umbrella', appearance: 'info'},
+    'category_order' => {icon: 'list-ul', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
@@ -120,7 +122,7 @@ class Page < ActiveRecord::Base
   end
 
   def needs_resource?
-    category? || product? || promotion? || department? || portal? || proxy? || internal?
+    category? || product? || promotion? || department? || category_order? || portal? || proxy? || internal?
   end
 
   def movable?
@@ -199,6 +201,8 @@ class Page < ActiveRecord::Base
       show_promotion_path(resource)
     when department?
       show_department_path(resource)
+    when category_order?
+      show_category_order_path(resource)
     when dropdown? || megamenu?
       children.live.first.path
     when continuous?
@@ -217,7 +221,7 @@ class Page < ActiveRecord::Base
   def active_link_options
     case slug
     when 'front'
-      [['store'], ['show_category', 'show_product', 'show_promotion', 'show_department']]
+      [['store'], ['show_category', 'show_product', 'show_promotion', 'show_department', 'show_category_order']]
     when 'cart'
       [['store'], ['cart']]
     end

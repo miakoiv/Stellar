@@ -41,6 +41,7 @@ fi:
           product: Tuote
           promotion: Kampanja
           department: Osasto
+          category_order: Tilauslomake tuoteryhmälle
           header: Päävalikko
           footer: Alavalikko
           dropdown: Pudotusvalikko
