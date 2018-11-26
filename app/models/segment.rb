@@ -62,7 +62,7 @@ class Segment < ActiveRecord::Base
 
   IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
 
-  INSETS = %w{inset-none inset-half inset-full}.freeze
+  INSETS = %w{inset-none inset-quarter inset-half inset-full inset-extra inset-double}.freeze
 
   SHADOWS = %w{shadow-none shadow-light shadow-medium shadow-heavy}.freeze
 
