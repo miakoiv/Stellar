@@ -1,3 +1,19 @@
+@mixin button-inverse-variant($color, $background, $border) {
+  @include button-variant($color, $background, $border);
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: lighten($background, 10%);
+    border-color: lighten($border, 25%);
+  }
+  &:hover {
+    color: $color;
+    background-color: lighten($background, 10%);
+    border-color: lighten($border, 12%);
+  }
+}
+
 .form-inverse {
   color: $gray-lighter;
 
@@ -8,6 +24,7 @@
   .form-control {
     color: $gray-lighter;
     background-color: $gray-dark;
+    border-color: $gray;
 
     &[disabled],
     &[readonly],
@@ -15,9 +32,42 @@
       background-color: transparent;
     }
   }
+  .input-group-addon {
+    color: $gray-lighter;
+    background-color: $gray-dark;
+    border-color: $gray;
+  }
   .help-block {
     color: $gray-light;
   }
+
+  .btn-default {
+    @include button-inverse-variant($gray-lighter, $gray-dark, $gray);
+  }
+  [data-toggle="buttons"] {
+    > .btn,
+    > .btn-group > .btn {
+      &.btn-default {
+        @include button-inverse-variant($gray-lighter, $gray-dark, $gray);
+        &.active {
+          color: $btn-primary-color;
+          background-color: $btn-primary-bg;
+          border-color: $gray;
+        }
+      }
+    }
+  }
+
+  .selectize-input,
+  .selectize-input input {
+    color: $gray-lighter;
+    background-color: $gray-dark;
+    border-color: $gray;
+  }
+  .selectize-input:after {
+    border-top-color: $gray-light;
+  }
+
   hr {
     border-top-color: $gray-dark;
   }

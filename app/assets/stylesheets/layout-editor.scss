@@ -43,6 +43,7 @@ $navbar-icon-padding: 12px !default;
   @include clearfix;
 
   .btn {
+    @include button-inverse-variant($gray-lighter, $gray-dark, $gray);
     border: 0;
     background-color: transparent;
     font-size: 24px;
@@ -52,10 +53,10 @@ $navbar-icon-padding: 12px !default;
   padding-left: 15px;
   padding-right: 15px;
 }
-//#side-panel form { @extend .form-inverse; }
+#side-panel form { @extend .form-inverse; }
 #side-panel .well {
-  //background-color: $gray-dark;
-  //border-color: lighten($gray-dark, 7%);
+  background-color: $gray-dark;
+  border-color: lighten($gray-dark, 7%);
 }
 #side-panel .btn-group {
   display: block;
