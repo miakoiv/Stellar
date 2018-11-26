@@ -77,22 +77,22 @@ class Segment < ActiveRecord::Base
 
   #---
   enum template: {
-    empty: 0,
     text: 1,
+    media: 7,
     picture: 2,
     gallery: 3,
-    map: 4,
-    video_player: 5,
-    documentation: 6,
-    media: 7,
-    category: 11,
     product: 12,
+    category: 11,
     promotion: 13,
     department: 14,
     feature: 20,
+    map: 4,
+    video_player: 5,
+    documentation: 6,
     facebook_feed: 30,
     navigation_menu: 50,
     category_menu: 51,
+    empty: 0,
     raw: 99,
   }
 
