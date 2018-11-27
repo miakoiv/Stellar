@@ -20,7 +20,7 @@
             = picture_variant_tag picture.cover_picture
 
     - else
-      = render partial: 'segments/placeholders/picture'
+      = segment_placeholder(picture)
 
   - if swiper
     :coffee

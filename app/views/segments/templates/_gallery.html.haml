@@ -13,7 +13,7 @@
                 = picture_variant_tag picture
 
     - else
-      = render partial: 'segments/placeholders/gallery'
+      = segment_placeholder(gallery)
 
   - if gallery.masonry?
     :coffee

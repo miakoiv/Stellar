@@ -10,4 +10,4 @@
           - resource.children.live.each do |category|
             %li= link_to category, show_category_path(category)
     - else
-      = render partial: 'segments/placeholders/category_menu'
+      = segment_placeholder(category_menu)

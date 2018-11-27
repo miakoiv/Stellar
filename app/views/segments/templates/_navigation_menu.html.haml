@@ -10,4 +10,4 @@
           - resource.children.live.each do |page|
             = render partial: page.to_partial_path, object: page, locals: {navmenu: true}
     - else
-      = render partial: 'segments/placeholders/navigation_menu'
+      = segment_placeholder(navigation_menu)

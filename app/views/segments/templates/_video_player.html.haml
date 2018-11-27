@@ -3,4 +3,4 @@
     .video-container
       %iframe{src: video_player.url, frameborder: 0, allowfullscreen: true, mozallowfullscreen: true, webkitAllowFullScreen: true}
   - else
-    = render partial: 'segments/placeholders/video_player'
+    = segment_placeholder(video_player)

@@ -12,4 +12,4 @@
         - if media.body.present?
           = media.body.html_safe
         - else
-          = render partial: 'segments/placeholders/media'
+          = segment_placeholder(media)

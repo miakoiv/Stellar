@@ -11,5 +11,7 @@
     .editable-content
       - if feature.body.present?
         = feature.body.html_safe
+      - else
+        = segment_placeholder(feature)
     - if resource.present?
       = link_to icon('link'), [:show, resource], class: 'feature-link'

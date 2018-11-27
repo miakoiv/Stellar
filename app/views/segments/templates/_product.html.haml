@@ -5,4 +5,4 @@
     - if resource.is_a?(Product)
       = render partial: 'products/product_card', object: resource, as: :product
     - else
-      = render partial: 'segments/placeholders/product'
+      = segment_placeholder(product)

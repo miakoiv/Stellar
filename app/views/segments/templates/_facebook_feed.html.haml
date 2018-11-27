@@ -1,7 +1,7 @@
 - cache [:segment_facebook_feed, facebook_feed] do
   .segment-content.facebook_feed{id: dom_id(facebook_feed, :content)}
     .feed-container.row{class: facebook_feed.grid_columns_class, data: {gid: facebook_feed.to_global_id, page: facebook_feed.facebook_page, items: facebook_feed.max_items.presence || 10}}
-      = render partial: 'segments/placeholders/facebook_feed'
+      = segment_placeholder(facebook_feed)
 
   - if facebook_feed.facebook_page.present?
     :coffee

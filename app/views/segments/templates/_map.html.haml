@@ -5,7 +5,7 @@
     - if has_map
       .map-container{data: {location: map.map_location, marker: map.map_marker?, zoom: map.map_zoom || 10, theme: map.map_theme}, style: map.style(:minHeight)}
     - else
-      = render partial: 'segments/placeholders/map'
+      = segment_placeholder(map)
 
   - if has_map
     :coffee

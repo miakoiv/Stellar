@@ -3,4 +3,4 @@
     - if raw.body.present?
       = raw.body.html_safe
     - else
-      = render partial: 'segments/placeholders/raw'
+      = segment_placeholder(raw)

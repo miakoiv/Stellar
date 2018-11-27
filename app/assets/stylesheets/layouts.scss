@@ -286,10 +286,7 @@
   align-items: center;
   justify-content: center;
 
-  .fa {
-    display: block;
-    opacity: 0.333;
-  }
+  figure { opacity: 0.333; }
 }
 .section-content .placeholder {
   min-height: 10em;

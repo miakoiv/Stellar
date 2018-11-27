@@ -3,4 +3,4 @@
     - if text.body.present?
       = text.body.html_safe
     - else
-      = render partial: 'segments/placeholders/text'
+      = segment_placeholder(text)
