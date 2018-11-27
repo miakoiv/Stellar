@@ -136,6 +136,49 @@ $navbar-icon-padding: 12px !default;
   top: -1px;
   right: -1px;
   opacity: 0;
+
+  .mega-dropdown-menu {
+    left: auto !important;
+    width: 420px !important;
+
+    ul.row {
+      margin: 0;
+
+      > li {
+        width: 25% !important;
+        padding: 15px;
+        border: 0;
+
+        &:hover {
+          background-color: $dropdown-link-hover-bg;
+          > a figure figcaption { color: $dropdown-link-hover-color; }
+        }
+        &.active {
+          background-color: $dropdown-link-active-bg;
+          > a figure {
+            img { filter: invert(1); }
+            figcaption { color: $dropdown-link-active-color; }
+          }
+        }
+        > a {
+          border: 0;
+
+          figure {
+            img {
+              width: 60%;
+              margin: 0 auto 5px;
+              opacity: 0.6667;
+            }
+            figcaption {
+              @extend .text-center, .text-muted;
+              font-size: 75%;
+              hyphens: auto;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 
@@ -222,8 +265,10 @@ $navbar-icon-padding: 12px !default;
   }
   &.active,
   &.editing {
-    z-index: 2;
-    outline: $outline-width solid rgba($brand-info, 0.5);
+    .segment-content-wrap {
+      z-index: 2;
+      outline: $outline-width solid rgba($brand-info, 0.5);
+    }
   }
   .editable-content {
     *::selection {
