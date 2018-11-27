@@ -156,20 +156,20 @@ fi:
           product: tuote
           department: osasto
         template:
-          empty: tyhjä tila
-          text: tekstipalsta
+          empty: tyhjä
+          text: teksti
           picture: kuva
           gallery: galleria
           map: kartta
-          video_player: videoupotus
-          documentation: dokumenttilista
-          media: tekstipalsta kuvalla
+          video_player: video
+          documentation: dokumentointi
+          media: kuvitettu teksti
           category: tuoteryhmä
           product: tuotekortti
           promotion: kampanja
           department: osasto
-          feature: mainoslaatikko
-          facebook_feed: Facebook-päivitykset
+          feature: juliste
+          facebook_feed: Facebook
           navigation_menu: sivuvalikko
           category_menu: tuoteryhmävalikko
           raw: ʜᴛᴍʟ-osio

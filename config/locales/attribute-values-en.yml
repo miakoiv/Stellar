@@ -156,20 +156,20 @@ en:
           product: product
           department: department
         template:
-          empty: empty area
-          text: text column
+          empty: empty
+          text: text
           picture: picture
           gallery: gallery
           map: map
-          video_player: video embed
-          documentation: document list
-          media: text column with picture
+          video_player: video
+          documentation: documentation
+          media: picture with text
           category: category
           product: product
           promotion: promotion
           department: department
-          feature: featured item
-          facebook_feed: Facebook posts
+          feature: poster
+          facebook_feed: Facebook
           navigation_menu: navigation menu
           category_menu: category menu
           raw: ʜᴛᴍʟ snippet
