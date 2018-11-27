@@ -2,7 +2,7 @@
 @mixin button-outline-variant($color, $color-hover: #fff) {
   color: $color;
   background-image: none;
-  background-color: white; // transparent is better?
+  background-color: transparent; // transparent is better?
   border-color: $color;
 
   &:hover {
