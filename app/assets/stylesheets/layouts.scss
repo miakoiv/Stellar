@@ -117,7 +117,9 @@
 .column.align-middle { justify-content: center; }
 .column.align-bottom { justify-content: flex-end; }
 .column.align-fill {
-  .segment, .segment-shape, .segment-content-wrap { height: 100%; }
+  .segment { flex-grow: 1; }
+  .segment-shape:not(.fixed-ratio),
+  .segment-content-wrap { height: 100%; }
 }
 
 /* Column pivoting on mobile viewports */
