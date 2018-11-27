@@ -24,6 +24,7 @@ Rails.application.config.assets.precompile += %w(
   spry_themes/cardirad.css    spry_themes/cardirad.js
   spry_themes/cards.css       spry_themes/cards.js
   spry_themes/cottage.css     spry_themes/cottage.js
+  spry_themes/darkmatter.css  spry_themes/darkmatter.js
   spry_themes/hiustalo.css    spry_themes/hiustalo.js
   spry_themes/material.css    spry_themes/material.js
   spry_themes/mechanet.css    spry_themes/mechanet.js

@@ -138,7 +138,7 @@ class Store < ActiveRecord::Base
 
   def self.theme_options
     @@themes ||= %w{
-      birch boutique cardirad cards cottage hiustalo material mechanet premium
+      birch boutique cardirad cards cottage darkmatter hiustalo material mechanet premium
     }
   end
 
