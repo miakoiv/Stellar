@@ -733,11 +733,15 @@ input[type="range"] {
   border-radius: 0;
   box-shadow: none;
 }
-
 i.icon {
   display: inline-block;
   vertical-align: middle;
   padding: 5px 5px 6px 4px;
+}
+mark {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
 }
 .pre { white-space: pre-line; }
 .box { background: transparent; }

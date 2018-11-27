@@ -687,10 +687,11 @@
 
 
 /*
- * Generic styling classes
+ * Marker styles for ckeditor5
  */
-.text-white { color: #fff !important; }
-.text-shadow { text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); }
+.text-shadow-light { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+.text-shadow-medium { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
+.text-shadow-dark { text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); }
 
 
 /*
