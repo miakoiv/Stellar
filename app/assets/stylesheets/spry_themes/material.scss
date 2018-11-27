@@ -104,6 +104,19 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 
 /*
+ * Dropdown opening animation
+ */
+.dropdown.open .dropdown-menu:not(.datepicker),
+.mega-dropdown-menu.open {
+  animation: dropdown 150ms $material-easing;
+}
+@keyframes dropdown {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+/*
  * Mega dropdown menu
  */
 .mega-dropdown-menu {
