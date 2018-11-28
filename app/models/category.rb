@@ -34,8 +34,8 @@ class Category < ActiveRecord::Base
   validates :view_mode, presence: true
 
   #---
-  def self.find_self_and_descendants(id)
-    find(id).self_and_descendants
+  def self.self_and_descendant_ids(id)
+    find(id).self_and_descendants.pluck(:id)
   end
 
   def self.options_for_select(categories)

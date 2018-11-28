@@ -103,7 +103,7 @@ class Product < ActiveRecord::Base
     where.not(purpose: [3, 4])
   }
 
-  scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.find_self_and_descendants(id).pluck(:id) }}) }
+  scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.self_and_descendant_ids(id) }.flatten}) }
   scope :not_including, -> (this) { where.not(id: this) }
   scope :with_assets, -> { joins(:customer_assets).distinct }
 
