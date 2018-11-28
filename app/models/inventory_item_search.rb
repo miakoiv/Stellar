@@ -37,6 +37,10 @@ class InventoryItemSearch < Searchlight::Search
     query.where(product_id: product_id)
   end
 
+  def search_categories
+    query.where(product_id: Product.by_category_id(categories))
+  end
+
   def search_online
     return query unless checked?(online)
     query.where('on_hand - reserved > 0')
