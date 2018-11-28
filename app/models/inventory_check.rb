@@ -29,6 +29,12 @@ class InventoryCheck < ActiveRecord::Base
   scope :complete, -> { where.not(completed_at: nil) }
 
   #---
+  # This attribute allows seeding the inventory check with
+  # entries matching products by category.
+  attr_accessor :category_ids
+  after_create :seed_from_category_ids
+
+  #---
   def complete?
     completed_at.present?
   end
@@ -68,4 +74,22 @@ class InventoryCheck < ActiveRecord::Base
   def to_s
     note
   end
+
+  private
+    def seed_from_category_ids
+      selected_ids = category_ids.reject(&:blank?)
+      categories = selected_ids.any? ? selected_ids : store.categories.pluck(:id)
+      search = InventoryItemSearch.new(inventory_id: inventory, categories: categories)
+      inventory_items = search.results.reorder('products.title DESC, products.subtitle DESC')
+      transaction do
+        inventory_items.each do |inventory_item|
+          inventory_check_items.create(
+            inventory_item: inventory_item,
+            product: inventory_item.product,
+            lot_code: inventory_item.code,
+            expires_at: inventory_item.expires_at
+          )
+        end
+      end
+    end
 end

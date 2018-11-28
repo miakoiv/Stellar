@@ -153,6 +153,9 @@ en:
     inventory_checks:
       index:
         new_inventory_check: New check
+      form:
+        all_categories: "[All categories]"
+        category_ids_help: Select categories to restrict checking to these categories only.
       row:
         resolve: Resolve
       show:

@@ -91,9 +91,10 @@ class InventoryCheckItem < ActiveRecord::Base
       self[:lot_code] = [lot_code, serial].map(&:presence).compact.join('-')
     end
 
-    # Existing, matching inventory item is associated after validation.
+    # Existing, matching inventory item is associated after validation,
+    # if the association is not established yet.
     def assign_inventory_item
-      self.inventory_item = inventory.item_by_product_and_code(product, lot_code)
+      self.inventory_item ||= inventory.item_by_product_and_code(product, lot_code)
       self
     end
 

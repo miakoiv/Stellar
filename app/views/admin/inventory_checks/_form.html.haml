@@ -4,6 +4,8 @@
       %fieldset{disabled: locked}
         = f.select :inventory_id, current_store.inventories.map { |i| [i.to_s, i.id] }, {}, {class: 'selectize'}
         = f.text_field :note
+        - if @inventory_check.new_record?
+          = f.select :category_ids, Category.options_for_select(current_store.categories) { |c, l| [indent(c.to_s, l), c.id] }, {help: t('.category_ids_help')}, {multiple: true, placeholder: t('.all_categories'), class: 'selectize selectize-tall'}
       - unless locked
         %fieldset.actions.fixed
           .container

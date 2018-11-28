@@ -228,6 +228,7 @@ fi:
         completed_at: Valmistunut
         inventory_check_items: Tarkastusrivit
         note: Huomautus
+        category_ids: Sisältyvät tuoteryhmät
       inventory_check_item:
         inventory_check_id: Varastotarkastus
         product_id: Tuote

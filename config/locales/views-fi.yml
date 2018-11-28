@@ -133,6 +133,9 @@ fi:
     inventory_checks:
       index:
         new_inventory_check: Uusi tarkastus
+      form:
+        all_categories: "[Kaikki tuoteryhmät]"
+        category_ids_help: Valitse tuoteryhmiä rajaaksesi tarkastuksen vain valittuihin tuoteryhmiin.
       row:
         resolve: Selvitä
       show:

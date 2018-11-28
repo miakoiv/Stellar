@@ -125,7 +125,7 @@ class Admin::InventoryChecksController < ApplicationController
 
     def inventory_check_params
       params.require(:inventory_check).permit(
-        :inventory_id, :note
+        :inventory_id, :note, category_ids: []
       )
     end
 

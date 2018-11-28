@@ -228,6 +228,7 @@ en:
         completed_at: Completed
         inventory_check_items: Inventory check items
         note: Note
+        category_ids: Included categories
       inventory_check_item:
         inventory_check_id: Inventory check
         product_id: Product
