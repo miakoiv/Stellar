@@ -19,7 +19,7 @@ class InventoryCheckItem < ActiveRecord::Base
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
-  default_scope { order(updated_at: :desc) }
+  default_scope { order('updated_at DESC, id DESC') }
   scope :mismatching, -> { where.not(difference: 0) }
   scope :pending, -> { where(adjustment: nil) }
 
