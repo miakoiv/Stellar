@@ -1,16 +1,3 @@
 .section-content{class: [section.layout, section.width, section.viewport? && 'viewport', section.swiper? && 'swiper']}
   .row
     = render partial: 'admin/columns/column', collection: section.columns
-
-  - if section.swiper?
-    .column-pagination
-
-    :coffee
-      jQuery ->
-        $section = $('##{dom_id(section)}')
-        new Swiper $section.find('.swiper'),
-          slideClass: 'column'
-          wrapperClass: 'row'
-          slidesPerView: 'auto'
-          pagination:
-            el: '.column-pagination'
