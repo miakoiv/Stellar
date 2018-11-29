@@ -43,7 +43,7 @@ class Admin::ColumnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def column_params
-      params.require(:column).permit(
+      params.fetch(:column) {{}}.permit(
         :alignment, :pivot, :background_color
       )
     end

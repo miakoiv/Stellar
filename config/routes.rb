@@ -184,6 +184,7 @@ Rails.application.routes.draw do
       resources :sections, shallow: true do
         resources :pictures
         resources :columns do
+          resources :pictures
           resources :segments do
             resources :pictures
             resources :documents

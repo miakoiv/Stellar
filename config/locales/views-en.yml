@@ -114,6 +114,7 @@ en:
       column_nav:
         tooltips:
           settings: Settings
+          pictures: Pictures
           new: New
           paste: Paste
     customer_assets:

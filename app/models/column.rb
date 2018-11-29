@@ -4,6 +4,7 @@ class Column < ActiveRecord::Base
 
   resourcify
   include Authority::Abilities
+  include Pictureable
   include Reorderable
   include Stylable
 
@@ -30,6 +31,10 @@ class Column < ActiveRecord::Base
         c.segments << segment.duplicate
       end
     end
+  end
+
+  def background_picture
+    cover_picture
   end
 
   def to_s

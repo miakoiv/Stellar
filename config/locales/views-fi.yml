@@ -94,6 +94,7 @@ fi:
       column_nav:
         tooltips:
           settings: Asetukset
+          pictures: Kuvat
           new: Uusi
           paste: Liitä
     customer_assets:

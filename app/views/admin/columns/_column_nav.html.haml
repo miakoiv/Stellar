@@ -4,6 +4,9 @@
       = link_to settings_admin_column_path(column), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('cog', class: 'fa-fw')
     %li
+      = link_to admin_column_pictures_path(column), remote: true, title: t('.tooltips.pictures'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
+        = icon('photo', class: 'fa-fw')
+    %li
       = link_to admin_column_segments_path(column), method: :post, remote: true, title: t('.tooltips.new'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('file-o', class: 'fa-fw')
     %li.info
