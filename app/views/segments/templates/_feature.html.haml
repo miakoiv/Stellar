@@ -3,7 +3,7 @@
 - sizing = feature.image_sizing
 
 - cache [:segment_feature, feature] do
-  .segment-content.feature{class: sizing, style: feature.style(:backgroundColor, :backgroundImage)}
+  .segment-content.feature{class: sizing}
     - if pictures.count > 1
       - pictures[1..-1].each do |picture|
         .image-container.stacked{class: sizing}

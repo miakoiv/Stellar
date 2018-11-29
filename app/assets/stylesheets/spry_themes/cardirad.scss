@@ -36,7 +36,8 @@ $border-radius-small: 0 !default;
   }
 }
 
-/* Jumbotron applies rounded corners on self and buttons */
+/* Features and jumbotron segments have rounded corners on self and buttons */
+.segment.feature .segment-bg-container,
 .segment-content-wrap.jumbotron {
   border-top-left-radius: 40px;
   border-bottom-right-radius: 40px;
@@ -94,14 +95,15 @@ $border-radius-small: 0 !default;
 }
 
 /* Background blending and text shadow in feature box segments */
-.segment-content.feature {
-  filter: none;
-  background-blend-mode: overlay;
-  transition: background-color 250ms $material-easing;
-
+.segment.feature {
+  .segment-content-wrap {
+    transition: background-color 250ms $material-easing;
+  }
   &:hover {
-    filter: none;
-    background-color: transparent !important;
+    .segment-bg-container { filter: none; }
+    .segment-content-wrap {
+      background-color: transparent !important;
+    }
   }
   .editable-content {
     text-shadow: 0 0 12px rgba(0,0,0,0.667);

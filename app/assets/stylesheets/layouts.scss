@@ -228,14 +228,17 @@
 
 
 /*
- * Column backgrounds
+ * Column and segment backgrounds
  */
-.column-bg-container {
+.column-bg-container,
+.segment-bg-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 
@@ -244,6 +247,7 @@
  */
 .segment { position: relative; }
 .segment-content-wrap {
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
 }
@@ -365,11 +369,6 @@
   display: flex;
   flex-flow: column nowrap;
   height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  &.sizing-contain { background-size: contain; }
-  &.sizing-cover { background-size: cover; }
 
   .feature-link {
     position: absolute;

@@ -1,4 +1,5 @@
-.segment[segment]{style: segment.style(:margins)}
+.segment[segment]{class: segment.template, style: segment.style(:margins)}
   .segment-shape{class: [segment.shape, segment.fixed_ratio? && 'fixed-ratio', segment.shadow, segment.animation_class], data: {'av-animation': segment.animation}}
+    .segment-bg-container{style: segment.style(:backgroundImage)}
     .segment-content-wrap{class: [segment.alignment, segment.justification, segment.inset, segment.jumbotron? && 'jumbotron'], style: segment.style(:foregroundColor, :backgroundColor)}
       = render partial: segment.to_partial_path, object: segment, locals: {context: :layout}

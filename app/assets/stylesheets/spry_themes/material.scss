@@ -227,12 +227,16 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 
 /* Feature box segments */
-.segment-content.feature {
-  filter: grayscale(0%);
-  transition: filter 250ms $material-easing;
+.segment.feature {
+  .segment-bg-container {
+    filter: grayscale(0%);
+    transition: filter 250ms $material-easing;
+  }
 
   &:hover {
-    filter: grayscale(100%);
+    .segment-bg-container {
+      filter: grayscale(100%);
+    }
   }
 }
 
