@@ -488,6 +488,7 @@ fi:
         name: ID
         layout: Asettelu
         gutters: Palstavälit
+        swiper: Pyyhkäistävät palstat
         viewport: Tasaa ikkunan korkeuteen
         width: Sisällön leveys
         background_color: Taustaväri

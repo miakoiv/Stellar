@@ -105,6 +105,31 @@
 
 
 /*
+ * Swipeable columns
+ */
+.section-content.swiper {
+  .column-pagination { display: none; }
+}
+@media (max-width: $screen-xs-max) {
+  .section-content.swiper {
+    > .row {
+      flex-wrap: nowrap;
+
+      .column {
+        flex-shrink: 0;
+        width: calc(100% - #{$grid-gutter-width});
+      }
+    }
+    .column-pagination {
+      display: flex;
+      position: absolute;
+      justify-content: center;
+    }
+  }
+}
+
+
+/*
  * Column flexboxen
  */
 .column {

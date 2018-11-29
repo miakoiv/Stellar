@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181121142832) do
+ActiveRecord::Schema.define(version: 20181128142841) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -740,6 +740,7 @@ ActiveRecord::Schema.define(version: 20181121142832) do
     t.string   "width",              limit: 255,   default: "col-12",      null: false
     t.string   "layout",             limit: 255,   default: "twelve",      null: false
     t.boolean  "gutters",                          default: true,          null: false
+    t.boolean  "swiper",                           default: false,         null: false
     t.boolean  "viewport",                         default: false,         null: false
     t.string   "shape",              limit: 255
     t.string   "background_color",   limit: 255,   default: "transparent", null: false

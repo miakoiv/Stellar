@@ -488,6 +488,7 @@ en:
         name: ID
         layout: Layout
         gutters: Gutters
+        swiper: Swipeable columns
         viewport: Use viewport height
         width: Content width
         background_color: Background color
