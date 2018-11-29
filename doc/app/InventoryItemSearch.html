@@ -85,6 +85,8 @@
     
     <li class="calls-super" ><a href="#method-i-options">#options</a>
     
+    <li ><a href="#method-i-search_categories">#search_categories</a>
+    
     <li ><a href="#method-i-search_code">#search_code</a>
     
     <li ><a href="#method-i-search_inventory_id">#search_inventory_id</a>
@@ -197,6 +199,39 @@
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">opts</span>[<span class="ruby-value">:online</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword">true</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_categories" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_categories</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_categories-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_categories</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">product_id</span><span class="ruby-operator">:</span> <span class="ruby-constant">Product</span>.<span class="ruby-identifier">by_category_id</span>(<span class="ruby-identifier">categories</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -326,7 +361,7 @@
 
           
           <div class="method-source-code" id="search_live-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_live</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">empty?</span>(<span class="ruby-identifier">live</span>)
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">products</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">live</span>)})
@@ -360,7 +395,7 @@
 
           
           <div class="method-source-code" id="search_online-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_online</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">query</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">checked?</span>(<span class="ruby-identifier">online</span>)
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;on_hand - reserved &gt; 0&#39;</span>)
@@ -428,7 +463,7 @@ that have at least once been available.</p>
 
           
           <div class="method-source-code" id="search_reported-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_item_search.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_reported</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">products</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">available_at</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>})
 <span class="ruby-keyword">end</span></pre>

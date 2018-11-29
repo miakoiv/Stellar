@@ -85,6 +85,8 @@
     
     <li ><a href="#method-i-destroy">#destroy</a>
     
+    <li ><a href="#method-i-duplicate">#duplicate</a>
+    
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
@@ -206,6 +208,44 @@
       <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@page</span>) }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-duplicate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duplicate</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /admin/pages/1/duplicate</p>
+          
+          
+
+          
+          <div class="method-source-code" id="duplicate-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/pages_controller.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Page</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">original</span> = <span class="ruby-ivar">@page</span>
+  <span class="ruby-ivar">@page</span> = <span class="ruby-identifier">original</span>.<span class="ruby-identifier">duplicate!</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@page</span>, <span class="ruby-keyword">nil</span>, {<span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;create&#39;</span>}
+
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_page_path</span>(<span class="ruby-ivar">@page</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">original</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -389,7 +429,7 @@
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">edit_admin_page_path</span>(<span class="ruby-ivar">@page</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:rollback</span> }
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@page</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>

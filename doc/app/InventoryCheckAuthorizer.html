@@ -241,7 +241,7 @@
           <div class="method-source-code" id="updatable_by-3F-source">
             <pre><span class="ruby-comment"># File app/authorizers/inventory_check_authorizer.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">complete?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">concluded?</span>
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:inventory_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>

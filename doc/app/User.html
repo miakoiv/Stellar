@@ -89,6 +89,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-generate_guest-21">::generate_guest!</a>
+    
     <li class="calls-super" ><a href="#method-i-active_for_authentication-3F">#active_for_authentication?</a>
     
     <li ><a href="#method-i-existing_order_types">#existing_order_types</a>
@@ -135,6 +137,53 @@
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-generate_guest-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_guest!</span><span
+            class="method-args">(hostname, group)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_guest-21-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_guest!</span>(<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">group</span>)
+  <span class="ruby-identifier">uuid</span> = <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">uuid</span>
+  <span class="ruby-identifier">guest</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">create!</span>(
+    <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">uuid</span>,
+    <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{uuid}@#{hostname}&quot;</span>
+  )
+  <span class="ruby-identifier">guest</span>.<span class="ruby-identifier">groups</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">group</span>
+  <span class="ruby-identifier">guest</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -165,7 +214,7 @@
 
           
           <div class="method-source-code" id="active_for_authentication-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_for_authentication?</span>
   <span class="ruby-keyword">super</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">approved?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -199,7 +248,7 @@ completed orders.</p>
 
           
           <div class="method-source-code" id="existing_order_types-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">existing_order_types</span>(<span class="ruby-identifier">store</span>)
   <span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Order</span>.<span class="ruby-identifier">complete</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">orders</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>}).<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
@@ -233,7 +282,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="grantable_roles-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 72</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grantable_roles</span>
   <span class="ruby-identifier">roles</span> = <span class="ruby-constant">Role</span>.<span class="ruby-identifier">available_roles</span>
   <span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:superuser</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">roles</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">roles</span> <span class="ruby-operator">-</span> [<span class="ruby-string">&#39;superuser&#39;</span>]
@@ -267,7 +316,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="group-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">group</span>(<span class="ruby-identifier">store</span>)
   <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -300,7 +349,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="guest-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">guest?</span>(<span class="ruby-identifier">store</span>)
   <span class="ruby-identifier">group</span>(<span class="ruby-identifier">store</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">default_group</span>
 <span class="ruby-keyword">end</span></pre>
@@ -333,7 +382,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="require_password-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_password?</span>
   <span class="ruby-identifier">encrypted_password</span>.<span class="ruby-identifier">blank?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -366,7 +415,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="shopping_cart-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shopping_cart</span>(<span class="ruby-identifier">store</span>, <span class="ruby-identifier">store_portal</span>, <span class="ruby-identifier">group</span>)
   <span class="ruby-identifier">cart</span> = <span class="ruby-identifier">orders</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">store</span>).<span class="ruby-identifier">for</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">incomplete</span>.<span class="ruby-identifier">first</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">cart</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cart</span>.<span class="ruby-identifier">nil?</span>
@@ -409,7 +458,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 86</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{name} &lt;#{email}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -450,7 +499,7 @@ promote others to superusers.</p>
 
           
           <div class="method-source-code" id="password_required-3F-source">
-            <pre><span class="ruby-comment"># File app/models/user.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">password_required?</span>
   <span class="ruby-identifier">persisted?</span> <span class="ruby-operator">&amp;&amp;</span> (
     <span class="ruby-identifier">encrypted_password</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span>

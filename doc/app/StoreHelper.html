@@ -77,6 +77,8 @@
     
     <li ><a href="#method-i-product_stock">#product_stock</a>
     
+    <li ><a href="#method-i-product_url">#product_url</a>
+    
     <li ><a href="#method-i-unit_pricing_string">#unit_pricing_string</a>
     
   </ul>
@@ -132,11 +134,11 @@
 
           
           <div class="method-source-code" id="fancy_price-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fancy_price</span>(<span class="ruby-identifier">price</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">incl_tax?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">with_tax</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">sans_tax</span>
-  <span class="ruby-identifier">sep</span> = <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">separator</span>
+  <span class="ruby-identifier">sep</span> = <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">decimal_mark</span>
   <span class="ruby-identifier">units</span>, <span class="ruby-identifier">subunits</span> = <span class="ruby-identifier">humanized_money</span>(<span class="ruby-identifier">amount</span>).<span class="ruby-identifier">split</span> <span class="ruby-identifier">sep</span>
   <span class="ruby-identifier">capture</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">concat</span> <span class="ruby-identifier">units</span>
@@ -174,7 +176,7 @@
 
           
           <div class="method-source-code" id="fancy_price_range-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fancy_price_range</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">to</span>
     <span class="ruby-identifier">fancy_price</span>(<span class="ruby-identifier">from</span>)
@@ -215,7 +217,7 @@
 
           
           <div class="method-source-code" id="fuzzy_amount-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fuzzy_amount</span>(<span class="ruby-identifier">amount</span>)
   <span class="ruby-identifier">amount</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">25</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;number.more_than&#39;</span>, <span class="ruby-identifier">number</span><span class="ruby-operator">:</span> <span class="ruby-value">25</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">amount</span>
 <span class="ruby-keyword">end</span></pre>
@@ -248,7 +250,7 @@
 
           
           <div class="method-source-code" id="money-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">money</span>(<span class="ruby-identifier">amount</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amount</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">humanized_money_with_symbol</span>(<span class="ruby-identifier">amount</span>)
@@ -282,7 +284,7 @@
 
           
           <div class="method-source-code" id="price_range-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_range</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
   <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;price-range&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">fancy_price_range</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>)
@@ -318,7 +320,7 @@ special/regular prices.</p>
 
           
           <div class="method-source-code" id="price_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_tag</span>(<span class="ruby-identifier">final_price</span>, <span class="ruby-identifier">regular_price</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-identifier">regular_price</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;special-price&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">concat</span> <span class="ruby-identifier">fancy_price</span>(<span class="ruby-identifier">final_price</span>)
@@ -358,10 +360,49 @@ href="Product.html#method-i-available">Product#available</a>.</p>
 
           
           <div class="method-source-code" id="product_stock-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">product_stock</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">product</span>)
   <span class="ruby-identifier">available</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">available</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">fuzzy?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">fuzzy_amount</span>(<span class="ruby-identifier">available</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">available</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-product_url" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">product_url</span><span
+            class="method-args">(product, category = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates a product url that can be in another store if the current store
+is a portal.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="product_url-source">
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">product_url</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">category</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">portal?</span>
+    <span class="ruby-identifier">host</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">hostname_at</span>(<span class="ruby-identifier">current_store</span>)
+    <span class="ruby-identifier">show_product_url</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-identifier">host</span>.<span class="ruby-identifier">to_s</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">show_product_path</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">category</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -392,7 +433,7 @@ href="Product.html#method-i-available">Product#available</a>.</p>
 
           
           <div class="method-source-code" id="unit_pricing_string-source">
-            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/helpers/store_helper.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unit_pricing_string</span>(<span class="ruby-identifier">price</span>, <span class="ruby-identifier">quantity</span>, <span class="ruby-identifier">unit</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">quantity</span>.<span class="ruby-identifier">zero?</span>
     <span class="ruby-identifier">capture</span> <span class="ruby-keyword">do</span>

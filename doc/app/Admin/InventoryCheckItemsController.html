@@ -70,9 +70,13 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-approve">#approve</a>
+    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-destroy">#destroy</a>
+    
+    <li ><a href="#method-i-discard">#discard</a>
     
     <li ><a href="#method-i-update">#update</a>
     
@@ -110,6 +114,41 @@
        </header>
 
     
+      <div id="method-i-approve" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">approve</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/inventory_check_items/1/approve</p>
+          
+          
+
+          
+          <div class="method-source-code" id="approve-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">approve</span>
+  <span class="ruby-ivar">@inventory_check</span> = <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">inventory_check</span>
+  <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">approve!</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check_item</span>, <span class="ruby-ivar">@inventory_check</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-create" class="method-detail ">
         
         <div class="method-heading">
@@ -129,13 +168,15 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@inventory_check_item</span> = <span class="ruby-ivar">@inventory_check</span>.<span class="ruby-identifier">inventory_check_items</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">inventory_check_item_params</span>)
+  <span class="ruby-identifier">item</span> = <span class="ruby-constant">InventoryCheckItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">inventory_check_item_params</span>)
+  <span class="ruby-ivar">@inventory_check_item</span> = <span class="ruby-ivar">@inventory_check</span>.<span class="ruby-identifier">inventory_check_items</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">item</span>)
+  <span class="ruby-identifier">action</span> = <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">new_record?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:create</span> <span class="ruby-operator">:</span> <span class="ruby-value">:update</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check_item</span>, <span class="ruby-ivar">@inventory_check</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check_item</span>, <span class="ruby-ivar">@inventory_check</span>, {<span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-identifier">action</span>}
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:create</span> }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:error</span> }
@@ -171,13 +212,47 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@inventory_check_item</span> = <span class="ruby-constant">InventoryCheckItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@inventory_check</span> = <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">inventory_check</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check_item</span>, <span class="ruby-ivar">@inventory_check</span>
 
   <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">destroy</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-discard" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">discard</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/inventory_check_items/1/discard</p>
+          
+          
+
+          
+          <div class="method-source-code" id="discard-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">discard</span>
+  <span class="ruby-ivar">@inventory_check</span> = <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">inventory_check</span>
+  <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">discard!</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check_item</span>, <span class="ruby-ivar">@inventory_check</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -208,9 +283,8 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_check_items_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-ivar">@inventory_check_item</span> = <span class="ruby-constant">InventoryCheckItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@inventory_check</span> = <span class="ruby-ivar">@inventory_check_item</span>.<span class="ruby-identifier">inventory_check</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>

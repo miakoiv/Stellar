@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Pos::ProductsController - Rails Application Documentation</title>
+<title>class Styles::Inline - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../Object.html">Object</a>
   
 </div>
 
@@ -70,9 +70,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-query">#query</a>
+    <li ><a href="#method-c-new">::new</a>
     
-    <li ><a href="#method-i-show">#show</a>
+    <li ><a href="#method-i-write_inline_styles">#write_inline_styles</a>
     
   </ul>
 </div>
@@ -80,9 +80,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Pos::ProductsController">
-  <h1 id="class-Pos::ProductsController" class="class">
-    class Pos::ProductsController
+<main role="main" aria-labelledby="class-Styles::Inline">
+  <h1 id="class-Styles::Inline" class="class">
+    class Styles::Inline
   </h1>
 
   <section class="description">
@@ -100,19 +100,40 @@
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-r" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">r</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-query" class="method-detail ">
+      <div id="method-c-new" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">query</span><span
-            class="method-args">()</span>
+          <span class="method-name">new</span><span
+            class="method-args">(record)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -121,18 +142,15 @@
 
         <div class="method-description">
           
-          <p>GET /pos/products/query.json?q=keyword This method serves selectize widgets
-populated via Ajax.</p>
+          
           
           
 
           
-          <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File app/controllers/pos/products_controller.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span>
-  <span class="ruby-identifier">query</span> = {<span class="ruby-string">&#39;keyword&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:q</span>], <span class="ruby-string">&#39;having_variants&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:having_variants</span>], <span class="ruby-identifier">live</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">params</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ProductSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
-  <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File app/models/styles/inline.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">record</span>)
+  <span class="ruby-ivar">@r</span> = <span class="ruby-identifier">record</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -144,10 +162,18 @@ populated via Ajax.</p>
       </div>
 
     
-      <div id="method-i-show" class="method-detail ">
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-write_inline_styles" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show</span><span
+          <span class="method-name">write_inline_styles</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -157,14 +183,19 @@ populated via Ajax.</p>
 
         <div class="method-description">
           
-          <p>GET /pos/products/1 This method supplies product data JSON for UI widgets.</p>
+          <p>Writes Autoprefixed rules into the inline styles attribute.</p>
           
           
 
           
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/pos/products_controller.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+          <div class="method-source-code" id="write_inline_styles-source">
+            <pre><span class="ruby-comment"># File app/models/styles/inline.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write_inline_styles</span>
+  <span class="ruby-identifier">write</span>(<span class="ruby-value">:foregroundColor</span>, <span class="ruby-identifier">foreground_color</span>)
+  <span class="ruby-identifier">write</span>(<span class="ruby-value">:backgroundColor</span>, <span class="ruby-identifier">background_color</span>)
+  <span class="ruby-identifier">write</span>(<span class="ruby-value">:backgroundImage</span>, <span class="ruby-identifier">background_image</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">write</span>(<span class="ruby-value">:minHeight</span>, <span class="ruby-identifier">min_height</span>)
+  <span class="ruby-identifier">write</span>(<span class="ruby-value">:margins</span>, <span class="ruby-identifier">margins</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

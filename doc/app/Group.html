@@ -97,8 +97,6 @@
     
     <li ><a href="#method-i-available_inventories">#available_inventories</a>
     
-    <li ><a href="#method-i-category_options">#category_options</a>
-    
     <li ><a href="#method-i-guest-3F">#guest?</a>
     
     <li ><a href="#method-i-limited_categories-3F">#limited_categories?</a>
@@ -178,7 +176,7 @@
 
           
           <div class="method-source-code" id="appearance_options-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">appearance_options</span>
   <span class="ruby-constant">APPEARANCES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:appearance</span>, <span class="ruby-identifier">a</span>), <span class="ruby-identifier">a</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">appearance</span><span class="ruby-operator">:</span> <span class="ruby-identifier">a</span>}.<span class="ruby-identifier">to_json</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -211,7 +209,7 @@
 
           
           <div class="method-source-code" id="price_base_options-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">price_base_options</span>
   <span class="ruby-identifier">price_bases</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:price_base</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -252,7 +250,7 @@
 
           
           <div class="method-source-code" id="available_categories-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_categories</span>
   <span class="ruby-identifier">limited_categories?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">categories</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -285,42 +283,9 @@
 
           
           <div class="method-source-code" id="available_inventories-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_inventories</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">inventories</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-category_options" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">category_options</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="category_options-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">category_options</span>
-  <span class="ruby-identifier">available_categories</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_option</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -351,7 +316,7 @@
 
           
           <div class="method-source-code" id="guest-3F-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">guest?</span>
   <span class="ruby-identifier">store</span>.<span class="ruby-identifier">default_group</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -450,7 +415,7 @@
 
           
           <div class="method-source-code" id="ordering_allowed-3F-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ordering_allowed?</span>
   <span class="ruby-identifier">outgoing_order_types</span>.<span class="ruby-identifier">any?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -483,7 +448,7 @@
 
           
           <div class="method-source-code" id="price_method-source">
-            <pre><span class="ruby-comment"># File app/models/group.rb, line 61</span>
+            <pre><span class="ruby-comment"># File app/models/group.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">price_method</span>
   <span class="ruby-node">&quot;#{price_base}_price&quot;</span>.<span class="ruby-identifier">to_sym</span>
 <span class="ruby-keyword">end</span></pre>

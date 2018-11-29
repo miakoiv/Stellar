@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Image - Rails Application Documentation</title>
+<title>class Tag - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -72,7 +72,11 @@
   
   
   
-    <li><a class="include" href="Trackable.html">Trackable</a>
+    <li><a class="include" href="Pictureable.html">Pictureable</a>
+  
+  
+  
+    <li><span class="include">FriendlyId</span>
   
   
   </ul>
@@ -85,15 +89,13 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-dimensions">#dimensions</a>
+    <li ><a href="#method-c-appearance_options">::appearance_options</a>
     
-    <li ><a href="#method-i-is_bitmap-3F">#is_bitmap?</a>
+    <li ><a href="#method-i-description">#description</a>
     
-    <li ><a href="#method-i-is_vector-3F">#is_vector?</a>
+    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
     
-    <li ><a href="#method-i-landscape-3F">#landscape?</a>
-    
-    <li ><a href="#method-i-portrait-3F">#portrait?</a>
+    <li ><a href="#method-i-slugger">#slugger</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -103,9 +105,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Image">
-  <h1 id="class-Image" class="class">
-    class Image
+<main role="main" aria-labelledby="class-Tag">
+  <h1 id="class-Tag" class="class">
+    class Tag
   </h1>
 
   <section class="description">
@@ -127,7 +129,7 @@
       </header>
       <dl>
       
-        <dt id="STYLES">STYLES
+        <dt id="APPEARANCES">APPEARANCES
         
         <dd>
         
@@ -139,51 +141,57 @@
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-appearance_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">appearance_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="appearance_options-source">
+            <pre><span class="ruby-comment"># File app/models/tag.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">appearance_options</span>
+  <span class="ruby-constant">APPEARANCES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:appearance</span>, <span class="ruby-identifier">a</span>), <span class="ruby-identifier">a</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">appearance</span><span class="ruby-operator">:</span> <span class="ruby-identifier">a</span>}.<span class="ruby-identifier">to_json</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-i-dimensions" class="method-detail ">
+      <div id="method-i-description" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">dimensions</span><span
-            class="method-args">(style = :original)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p><a href="Image.html">Image</a> dimensions courtesy of FastImage, cached.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="dimensions-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">style</span> = <span class="ruby-value">:original</span>)
-  <span class="ruby-ivar">@dimensions</span> <span class="ruby-operator">||=</span> {}
-  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>))
-  <span class="ruby-ivar">@dimensions</span>[<span class="ruby-identifier">style</span>] <span class="ruby-operator">||=</span> [<span class="ruby-value">:width</span>, <span class="ruby-value">:height</span>].<span class="ruby-identifier">zip</span>(<span class="ruby-constant">FastImage</span>.<span class="ruby-identifier">size</span>(<span class="ruby-identifier">attachment</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">style</span>))).<span class="ruby-identifier">to_h</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-is_bitmap-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">is_bitmap?</span><span
+          <span class="method-name">description</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -198,10 +206,10 @@
           
 
           
-          <div class="method-source-code" id="is_bitmap-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_bitmap?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">is_vector?</span>
+          <div class="method-source-code" id="description-source">
+            <pre><span class="ruby-comment"># File app/models/tag.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
+  <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -213,10 +221,48 @@
       </div>
 
     
-      <div id="method-i-is_vector-3F" class="method-detail ">
+      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">is_vector?</span><span
+          <span class="method-name">should_generate_new_friendly_id?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
+            <pre><span class="ruby-comment"># File app/models/tag.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
+  <span class="ruby-identifier">name_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-slugger" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">slugger</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -231,77 +277,10 @@
           
 
           
-          <div class="method-source-code" id="is_vector-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_vector?</span>
-  <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\/svg/</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-landscape-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">landscape?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="landscape-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 77</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">landscape?</span>
-  <span class="ruby-operator">!</span><span class="ruby-identifier">portrait?</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-portrait-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">portrait?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="portrait-3F-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">portrait?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_bitmap?</span>
-  <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:height</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dimensions</span>[<span class="ruby-value">:width</span>]
+          <div class="method-source-code" id="slugger-source">
+            <pre><span class="ruby-comment"># File app/models/tag.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
+  [<span class="ruby-value">:name</span>, [<span class="ruby-value">:name</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -332,9 +311,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/image.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/models/tag.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">attachment_file_name</span>.<span class="ruby-identifier">humanize</span>
+  <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

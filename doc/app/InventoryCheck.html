@@ -91,9 +91,17 @@
     
     <li ><a href="#method-i-complete-3F">#complete?</a>
     
+    <li ><a href="#method-i-conclude-21">#conclude!</a>
+    
+    <li ><a href="#method-i-concluded-3F">#concluded?</a>
+    
     <li ><a href="#method-i-icon">#icon</a>
     
     <li ><a href="#method-i-incomplete-3F">#incomplete?</a>
+    
+    <li ><a href="#method-i-life_pro_tip">#life_pro_tip</a>
+    
+    <li ><a href="#method-i-merge">#merge</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -123,6 +131,27 @@
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-category_ids" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">category_ids</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
 
     
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
@@ -150,9 +179,10 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
-  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;warning text-warning&#39;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">concluded?</span>
+  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;info text-info&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;warning text-warning&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -183,7 +213,7 @@
 
           
           <div class="method-source-code" id="complete-21-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete!</span>
   <span class="ruby-identifier">update</span> <span class="ruby-identifier">completed_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>
 <span class="ruby-keyword">end</span></pre>
@@ -216,9 +246,75 @@
 
           
           <div class="method-source-code" id="complete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
   <span class="ruby-identifier">completed_at</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-conclude-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">conclude!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="conclude-21-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">conclude!</span>
+  <span class="ruby-identifier">update</span> <span class="ruby-identifier">concluded_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-concluded-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">concluded?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="concluded-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">concluded?</span>
+  <span class="ruby-identifier">concluded_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -249,9 +345,10 @@
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
-  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;cog&#39;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">concluded?</span>
+  <span class="ruby-identifier">complete?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;refresh&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;cog&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -282,9 +379,82 @@
 
           
           <div class="method-source-code" id="incomplete-3F-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">complete?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-life_pro_tip" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">life_pro_tip</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="life_pro_tip-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">life_pro_tip</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-value">:info</span>, <span class="ruby-string">&#39;.concluded&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">concluded?</span>
+  <span class="ruby-keyword">return</span> [<span class="ruby-value">:warning</span>, <span class="ruby-string">&#39;.complete&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">complete?</span>
+  [<span class="ruby-value">:danger</span>, <span class="ruby-string">&#39;.incomplete&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-merge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">merge</span><span
+            class="method-args">(new_item)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="merge-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">merge</span>(<span class="ruby-identifier">new_item</span>)
+  <span class="ruby-identifier">find_or_initialize_by</span>(
+    <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_item</span>.<span class="ruby-identifier">product</span>,
+    <span class="ruby-identifier">lot_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">new_item</span>.<span class="ruby-identifier">lot_code</span>
+  ).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">item</span>.<span class="ruby-identifier">current</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">new_item</span>.<span class="ruby-identifier">current</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -315,7 +485,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">note</span>
 <span class="ruby-keyword">end</span></pre>

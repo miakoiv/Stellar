@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Admin::StoresController - Rails Application Documentation</title>
+<title>class Admin::TagsController - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -72,6 +72,8 @@
     
     <li ><a href="#method-i-create">#create</a>
     
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
     <li ><a href="#method-i-edit">#edit</a>
     
     <li ><a href="#method-i-index">#index</a>
@@ -88,9 +90,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Admin::StoresController">
-  <h1 id="class-Admin::StoresController" class="class">
-    class Admin::StoresController
+<main role="main" aria-labelledby="class-Admin::TagsController">
+  <h1 id="class-Admin::TagsController" class="class">
+    class Admin::TagsController
   </h1>
 
   <section class="description">
@@ -129,28 +131,66 @@
 
         <div class="method-description">
           
-          <p>POST /admin/stores POST /admin/stores.json</p>
+          <p>POST /admin/tags POST /admin/tags.js</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@store</span> = <span class="ruby-constant">Store</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">store_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Store</span>.<span class="ruby-identifier">default_settings</span>))
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">tag_params</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@store</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_store_path</span>(<span class="ruby-ivar">@store</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_store_path</span>(<span class="ruby-ivar">@store</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tag</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@tag</span>
+      <span class="ruby-ivar">@tags</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tags</span>
+
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_tag_path</span>(<span class="ruby-ivar">@tag</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tag</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tag</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DELETE /admin/tags/1</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">track</span> <span class="ruby-ivar">@tag</span>
+  <span class="ruby-ivar">@tag</span>.<span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_tags_path</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tag</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -175,15 +215,18 @@
 
         <div class="method-description">
           
-          <p>GET /admin/stores/1/edit</p>
+          <p>GET /admin/tags/1/edit GET /admin/tags/1/edit.js</p>
           
           
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@tags</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tags</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:html</span>, <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -208,18 +251,16 @@
 
         <div class="method-description">
           
-          <p>GET /admin/stores GET /admin/stores.json</p>
+          <p>GET /admin/tags</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;store&#39;</span>, <span class="ruby-string">&#39;admin_store_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">StoreSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>)
-  <span class="ruby-ivar">@stores</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@tags</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tags</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -244,17 +285,18 @@
 
         <div class="method-description">
           
-          <p>GET /admin/stores/new</p>
+          <p>GET /admin/tags/new.js</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@store</span> = <span class="ruby-constant">Store</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">locale</span><span class="ruby-operator">:</span> <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">default_locale</span>, <span class="ruby-identifier">country</span><span class="ruby-operator">:</span> <span class="ruby-constant">Country</span>.<span class="ruby-identifier">default</span>)
-  <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">tax_categories</span>.<span class="ruby-identifier">build</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">build</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -279,15 +321,15 @@
 
         <div class="method-description">
           
-          <p>GET /admin/stores/1 GET /admin/stores/1.json</p>
+          <p>GET /admin/tags/1</p>
           
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_tag_path</span>(<span class="ruby-ivar">@tag</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -312,25 +354,24 @@
 
         <div class="method-description">
           
-          <p>PATCH/PUT /stores/1 PATCH/PUT /stores/1.json</p>
+          <p>PATCH/PUT /admin/tags/1 PATCH/PUT /admin/tags/1.js</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/stores_controller.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/tags_controller.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@store</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@tag</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">store_params</span>)
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@store</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_store_path</span>(<span class="ruby-ivar">@store</span>),
-        <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_store_path</span>(<span class="ruby-ivar">@store</span>) }
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tag</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">tag_params</span>)
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@tag</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_tag_path</span>(<span class="ruby-ivar">@tag</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tag</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">flash</span>.<span class="ruby-identifier">now</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@tag</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>

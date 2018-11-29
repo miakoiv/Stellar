@@ -129,7 +129,7 @@
 
           
           <div class="method-source-code" id="apply-21-source">
-            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">apply!</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">items</span>)
   <span class="ruby-identifier">tax_included</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">includes_tax?</span>
   <span class="ruby-identifier">price_method</span> = <span class="ruby-identifier">tax_included</span> <span class="ruby-operator">?</span> <span class="ruby-value">:price_with_tax</span> <span class="ruby-operator">:</span> <span class="ruby-value">:price_sans_tax</span>
@@ -199,7 +199,7 @@
 
           
           <div class="method-source-code" id="editable_prices-3F-source">
-            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">editable_prices?</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -232,7 +232,7 @@
 
           
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/models/promotion_handler/bundle_pricing.rb, line 59</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
   <span class="ruby-string">&#39;promotion_handler/bundle_pricing&#39;</span>
 <span class="ruby-keyword">end</span></pre>

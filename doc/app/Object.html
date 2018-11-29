@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Payment - Rails Application Documentation</title>
+<title>class Object - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link">ActiveRecord::Base
+  <p class="link">BasicObject
   
 </div>
 
@@ -70,7 +70,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-available_gateways">::available_gateways</a>
+    <li ><a href="#method-i-date_param">#date_param</a>
     
   </ul>
 </div>
@@ -78,9 +78,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Payment">
-  <h1 id="class-Payment" class="class">
-    class Payment
+<main role="main" aria-labelledby="class-Object">
+  <h1 id="class-Object" class="class">
+    class Object
   </h1>
 
   <section class="description">
@@ -100,17 +100,17 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-available_gateways" class="method-detail ">
+      <div id="method-i-date_param" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">available_gateways</span><span
-            class="method-args">()</span>
+          <span class="method-name">date_param</span><span
+            class="method-args">(param, default)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -124,10 +124,12 @@
           
 
           
-          <div class="method-source-code" id="available_gateways-source">
-            <pre><span class="ruby-comment"># File app/models/payment.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_gateways</span>
-  <span class="ruby-node">%w{None Paybyway}</span>
+          <div class="method-source-code" id="date_param-source">
+            <pre><span class="ruby-comment"># File app/models/order_item_search.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">date_param</span>(<span class="ruby-identifier">param</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">default</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">present?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">param</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Date</span>)
+  <span class="ruby-constant">Date</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">param</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

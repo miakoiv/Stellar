@@ -359,7 +359,7 @@
   <span class="ruby-ivar">@pricing</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:pricing</span>)
 
   <span class="ruby-identifier">headers</span> = {
-    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.fqdn}&quot;</span>,
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.to_s}&quot;</span>,
     <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">to</span>,
     <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
   }
@@ -443,7 +443,7 @@
           <div class="method-source-code" id="roadie_options-source">
             <pre><span class="ruby-comment"># File app/mailers/order_mailer.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">roadie_options</span>
-  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">url_options</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">primary_host</span>.<span class="ruby-identifier">fqdn</span>})
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">url_options</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">primary_host</span>.<span class="ruby-identifier">to_s</span>})
 <span class="ruby-keyword">end</span></pre>
           </div>
           

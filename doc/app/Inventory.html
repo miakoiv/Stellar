@@ -93,6 +93,8 @@
     
     <li ><a href="#method-i-item_by_product_and_code">#item_by_product_and_code</a>
     
+    <li ><a href="#method-i-items_by_product">#items_by_product</a>
+    
     <li ><a href="#method-i-restock-21">#restock!</a>
     
     <li ><a href="#method-i-stock">#stock</a>
@@ -137,7 +139,7 @@
         
         <div class="method-heading">
           <span class="method-name">destock!</span><span
-            class="method-args">(transfer_item, timestamp, source = nil)</span>
+            class="method-args">(item, timestamp, source = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -146,28 +148,28 @@
 
         <div class="method-description">
           
-          <p>Destocks the inventory from given transfer item that specifies a product, a
-lot code, and an amount. The inventory item must exist.</p>
+          <p>Destocks the inventory using given item that specifies a product, lot code,
+and amount. The inventory item must exist, and will be returned.</p>
           
           
 
           
           <div class="method-source-code" id="destock-21-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destock!</span>(<span class="ruby-identifier">transfer_item</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">source</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">item</span> = <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">find_by</span>(
-    <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">product</span>,
-    <span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">lot_code</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destock!</span>(<span class="ruby-identifier">item</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">source</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">inventory_item</span> = <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">find_by</span>(
+    <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>,
+    <span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">lot_code</span>
   )
-  <span class="ruby-identifier">item</span>.<span class="ruby-identifier">inventory_entries</span>.<span class="ruby-identifier">build</span>(
+  <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">inventory_entries</span>.<span class="ruby-identifier">create!</span>(
     <span class="ruby-identifier">recorded_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">timestamp</span>,
     <span class="ruby-identifier">source</span><span class="ruby-operator">:</span> <span class="ruby-identifier">source</span>,
-    <span class="ruby-identifier">on_hand</span><span class="ruby-operator">:</span> <span class="ruby-operator">-</span><span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">amount</span>,
+    <span class="ruby-identifier">on_hand</span><span class="ruby-operator">:</span> <span class="ruby-operator">-</span><span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span>,
     <span class="ruby-identifier">reserved</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
     <span class="ruby-identifier">pending</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
-    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">value</span>
+    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">value</span>
   )
-  <span class="ruby-identifier">item</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">inventory_item</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -200,7 +202,40 @@ lot code, and an amount. The inventory item must exist.</p>
           <div class="method-source-code" id="item_by_product_and_code-source">
             <pre><span class="ruby-comment"># File app/models/inventory.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">item_by_product_and_code</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">code</span>)
-  <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">for</span>(<span class="ruby-identifier">product</span>).<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">items_by_product</span>(<span class="ruby-identifier">product</span>).<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">code</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-items_by_product" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">items_by_product</span><span
+            class="method-args">(product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Finds items by product.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="items_by_product-source">
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">items_by_product</span>(<span class="ruby-identifier">product</span>)
+  <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">for</span>(<span class="ruby-identifier">product</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -216,7 +251,7 @@ lot code, and an amount. The inventory item must exist.</p>
         
         <div class="method-heading">
           <span class="method-name">restock!</span><span
-            class="method-args">(transfer_item, timestamp, source = nil)</span>
+            class="method-args">(item, timestamp, source = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -225,29 +260,31 @@ lot code, and an amount. The inventory item must exist.</p>
 
         <div class="method-description">
           
-          <p>Restocks the inventory with given transfer item that specifies the product,
-a lot code, expiration, and amount. New inventory items may be created if
-not seen before.</p>
+          <p>Restocks the inventory with given item that specifies a product, lot code,
+expiration, and amount. New inventory items may be created if not seen
+before. The affected inventory item is returned.</p>
           
           
 
           
           <div class="method-source-code" id="restock-21-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">restock!</span>(<span class="ruby-identifier">transfer_item</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">source</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">item</span> = <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">find_or_initialize_by</span>(
-    <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">product</span>,
-    <span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">lot_code</span>
-  ) { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">expires_at</span> = <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">expires_at</span> }
-  <span class="ruby-identifier">item</span>.<span class="ruby-identifier">inventory_entries</span>.<span class="ruby-identifier">build</span>(
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">restock!</span>(<span class="ruby-identifier">item</span>, <span class="ruby-identifier">timestamp</span>, <span class="ruby-identifier">source</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">inventory_item</span> = <span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">create_with</span>(
+    <span class="ruby-identifier">expires_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">expires_at</span>
+  ).<span class="ruby-identifier">find_or_create_by!</span>(
+    <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>,
+    <span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">lot_code</span>
+  )
+  <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">inventory_entries</span>.<span class="ruby-identifier">create!</span>(
     <span class="ruby-identifier">recorded_at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">timestamp</span>,
     <span class="ruby-identifier">source</span><span class="ruby-operator">:</span> <span class="ruby-identifier">source</span>,
-    <span class="ruby-identifier">on_hand</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">amount</span>,
+    <span class="ruby-identifier">on_hand</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span>,
     <span class="ruby-identifier">reserved</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
     <span class="ruby-identifier">pending</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>,
-    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">transfer_item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">trade_price</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
   )
-  <span class="ruby-identifier">item</span>.<span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">inventory_item</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -278,7 +315,7 @@ not seen before.</p>
 
           
           <div class="method-source-code" id="stock-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stock</span>
   <span class="ruby-identifier">items</span> = <span class="ruby-identifier">inventory_items</span>
   [<span class="ruby-identifier">items</span>, <span class="ruby-identifier">items</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>).<span class="ruby-identifier">sum</span>]
@@ -312,7 +349,7 @@ not seen before.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/models/inventory.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>

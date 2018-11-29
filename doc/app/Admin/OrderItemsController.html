@@ -74,6 +74,8 @@
     
     <li ><a href="#method-i-destroy">#destroy</a>
     
+    <li ><a href="#method-i-index">#index</a>
+    
     <li ><a href="#method-i-update">#update</a>
     
   </ul>
@@ -123,7 +125,7 @@
 
         <div class="method-description">
           
-          <p>POST /admin/orders/1/order_items Use <a
+          <p>POST /admin/orders/1/order_items.js Use <a
 href="../Order.html#method-i-insert">Order#insert</a> to create order items
 correctly.</p>
           
@@ -131,8 +133,9 @@ correctly.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">OrderItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
   <span class="ruby-ivar">@product</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_item_params</span>[<span class="ruby-value">:customer_code</span>].<span class="ruby-identifier">present?</span>
     <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">customer_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item_params</span>[<span class="ruby-value">:customer_code</span>])
@@ -141,6 +144,7 @@ correctly.</p>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">order_item_params</span>[<span class="ruby-value">:amount</span>].<span class="ruby-identifier">to_i</span>
   <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">lot_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">concatenated_lot_code</span>}
+
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-ivar">@product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>)
       <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-ivar">@order</span>
@@ -174,20 +178,69 @@ correctly.</p>
 
         <div class="method-description">
           
-          <p>DELETE /admin/order_items/1</p>
+          <p>DELETE /admin/order_items/1.js</p>
           
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@order_item</span> = <span class="ruby-constant">OrderItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@order</span> = <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">order</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">destroy</span>
+    <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-ivar">@order</span>
     <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/order_items</p>
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">OrderItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-identifier">order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_item&#39;</span>, <span class="ruby-string">&#39;admin_order_item_search&#39;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">order_types</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
+  <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">pending</span>
+  <span class="ruby-ivar">@order_items</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+  <span class="ruby-ivar">@customers</span> = <span class="ruby-constant">UserSearch</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>,
+    <span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:source</span>),
+    <span class="ruby-identifier">except_group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">default_group</span>
+  ).<span class="ruby-identifier">results</span>
+  <span class="ruby-ivar">@products</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>
+    .<span class="ruby-identifier">find</span>((<span class="ruby-identifier">query</span>[<span class="ruby-string">&#39;product_id&#39;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:blank?</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -212,27 +265,22 @@ correctly.</p>
 
         <div class="method-description">
           
-          <p>PATCH/PUT /admin/order_items/1</p>
+          <p>PATCH/PUT /admin/order_items/1.js</p>
           
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-ivar">@order_item</span> = <span class="ruby-constant">OrderItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@order</span> = <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">order</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_item_params</span>)
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-ivar">@order</span>
-      <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">reload</span>
-      <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">order_item_params</span>)
+    <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-ivar">@order</span>
+    <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">recalculate!</span>
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

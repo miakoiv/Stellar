@@ -72,6 +72,8 @@
     
     <li ><a href="#method-i-complete">#complete</a>
     
+    <li ><a href="#method-i-conclude">#conclude</a>
+    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-destroy">#destroy</a>
@@ -81,6 +83,8 @@
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
+    
+    <li ><a href="#method-i-resolve">#resolve</a>
     
     <li ><a href="#method-i-show">#show</a>
     
@@ -145,12 +149,52 @@
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory_check</span>.<span class="ruby-identifier">complete!</span>
-      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check</span>, <span class="ruby-keyword">nil</span>, {<span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;conclude&#39;</span>}
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_inventory_check_path</span>(<span class="ruby-ivar">@inventory_check</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory_check</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory_check</span>) }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-identifier">admin_inventory_check_path</span>(<span class="ruby-ivar">@inventory_check</span>) }
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">resolve_admin_inventory_check_path</span>(<span class="ruby-ivar">@inventory_check</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory_check</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory_check</span>) }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory_check</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-conclude" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">conclude</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /admin/inventory_checks/1/conclude</p>
+          
+          
+
+          
+          <div class="method-source-code" id="conclude-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_checks_controller.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">conclude</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@inventory_check</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inventory_check</span>.<span class="ruby-identifier">conclude!</span>
+      <span class="ruby-identifier">track</span> <span class="ruby-ivar">@inventory_check</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">admin_inventory_check_path</span>(<span class="ruby-ivar">@inventory_check</span>), <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-identifier">t</span>(<span class="ruby-string">&#39;.notice&#39;</span>, <span class="ruby-identifier">inventory_check</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@inventory_check</span>) }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span> }
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
@@ -306,8 +350,8 @@
             <pre><span class="ruby-comment"># File app/controllers/admin/inventory_checks_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryCheck</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_check&#39;</span>, <span class="ruby-string">&#39;admin_inventory_check_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryCheckSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_check&#39;</span>, <span class="ruby-string">&#39;admin_inventory_check_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryCheckSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
   <span class="ruby-ivar">@inventory_checks</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -344,6 +388,38 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryCheck</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@inventory_check</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventory_checks</span>.<span class="ruby-identifier">build</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-resolve" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">resolve</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/inventory_checks/1/resolve</p>
+          
+          
+
+          
+          <div class="method-source-code" id="resolve-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_checks_controller.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

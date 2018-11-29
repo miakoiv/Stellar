@@ -90,6 +90,8 @@
     
     <li ><a href="#method-i-outgoing">#outgoing</a>
     
+    <li ><a href="#method-i-preview">#preview</a>
+    
     <li ><a href="#method-i-review">#review</a>
     
     <li ><a href="#method-i-show">#show</a>
@@ -149,7 +151,7 @@
 
           
           <div class="method-source-code" id="approve-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">approve</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">approved_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>)
@@ -188,7 +190,7 @@
 
           
           <div class="method-source-code" id="conclude-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 174</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conclude</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">concluded_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>)
@@ -402,9 +404,9 @@
 
   <span class="ruby-ivar">@users</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">current_store</span>)
   <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">user_search</span>(<span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:source</span>))
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;incoming_admin_order_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;incoming_admin_order_search&#39;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
   <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -440,8 +442,8 @@
             <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;admin_order_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;admin_order_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
   <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -532,11 +534,44 @@
 
   <span class="ruby-ivar">@users</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">with_role</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">current_store</span>)
   <span class="ruby-ivar">@customers</span> = <span class="ruby-identifier">user_search</span>(<span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:destination</span>))
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;outgoing_admin_order_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;outgoing_admin_order_search&#39;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-string">&#39;order_type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
   <span class="ruby-ivar">@orders</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-preview" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">preview</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/orders/1/preview</p>
+          
+          
+
+          
+          <div class="method-source-code" id="preview-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 158</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">preview</span>
+  <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -567,7 +602,7 @@
 
           
           <div class="method-source-code" id="review-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 169</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/orders_controller.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">review</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>

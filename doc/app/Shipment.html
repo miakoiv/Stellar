@@ -95,6 +95,8 @@
     
     <li ><a href="#method-i-complete-21">#complete!</a>
     
+    <li ><a href="#method-i-complete-3F">#complete?</a>
+    
     <li ><a href="#method-i-cost">#cost</a>
     
     <li ><a href="#method-i-free_shipping-3F">#free_shipping?</a>
@@ -192,7 +194,7 @@
 
           
           <div class="method-source-code" id="available_gateways-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_gateways</span>
   <span class="ruby-node">%w{
     Pakettikauppa::Matkahuolto
@@ -234,7 +236,7 @@
 
           
           <div class="method-source-code" id="package_type_options-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">package_type_options</span>
   <span class="ruby-constant">PACKAGE_TYPES</span>
 <span class="ruby-keyword">end</span></pre>
@@ -275,7 +277,7 @@
 
           
           <div class="method-source-code" id="active-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 119</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">cancelled?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -308,10 +310,11 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 173</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 186</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;default muted&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cancelled?</span>
-  <span class="ruby-identifier">shipped?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;default&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;primary&#39;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;primary hidden-print&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pending?</span>
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">last_completed_shipment</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;default&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;default hidden-print&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -343,7 +346,7 @@ shipments are destroyed along with their transfer.</p>
 
           
           <div class="method-source-code" id="cancel-21-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel!</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">complete?</span>
     <span class="ruby-identifier">return!</span>
@@ -352,6 +355,7 @@ shipments are destroyed along with their transfer.</p>
     <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">destroy!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">present?</span>
     <span class="ruby-identifier">destroy!</span>
   <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">update_shipped!</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -382,7 +386,7 @@ shipments are destroyed along with their transfer.</p>
 
           
           <div class="method-source-code" id="cancelled-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 115</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cancelled?</span>
   <span class="ruby-identifier">cancelled_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -409,18 +413,52 @@ shipments are destroyed along with their transfer.</p>
 
         <div class="method-description">
           
-          <p>Completes the shipment by running its transfer and setting the completion
+          <p>Completes the shipment by running its transfer and setting the shipping
 timestamp. Returns false if the associated transfer is not feasible.</p>
           
           
 
           
           <div class="method-source-code" id="complete-21-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">complete!</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">feasible?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">pending?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">feasible?</span>
   <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">complete!</span>
   <span class="ruby-identifier">update</span> <span class="ruby-identifier">shipped_at</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>
+  <span class="ruby-identifier">order</span>.<span class="ruby-identifier">update_shipped!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-complete-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">complete?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="complete-3F-source">
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete?</span>
+  <span class="ruby-identifier">shipped?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">active?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -453,7 +491,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="cost-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 138</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cost</span>(<span class="ruby-identifier">pricing</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">free_shipping?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">shipping_cost_product</span>.<span class="ruby-identifier">nil?</span>
@@ -490,7 +528,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="free_shipping-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 146</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">free_shipping?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">free_shipping_from</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">total</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">includes_tax?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">grand_total_with_tax</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">grand_total_sans_tax</span>
@@ -525,7 +563,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="has_label-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 131</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_label?</span>
   <span class="ruby-identifier">shipping_gateway</span>.<span class="ruby-identifier">generates_labels?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -558,10 +596,10 @@ earlier.</p>
 
           
           <div class="method-source-code" id="load-21-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load!</span>
   <span class="ruby-identifier">transfer</span> = <span class="ruby-identifier">find_or_create_transfer</span>
-  <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">load!</span>(<span class="ruby-identifier">order</span>.<span class="ruby-identifier">items_pending_shipping</span>)
+  <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">load!</span>(<span class="ruby-identifier">order</span>.<span class="ruby-identifier">items_waiting</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -592,7 +630,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="parsed_metadata-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 164</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parsed_metadata</span>
   <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">metadata</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">metadata</span>)
@@ -626,7 +664,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="pending-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 111</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pending?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">shipped?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">cancelled?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -659,7 +697,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="reload-21-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reload!</span>
   <span class="ruby-identifier">transfer</span> = <span class="ruby-identifier">find_or_create_transfer</span>
   <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">transfer_items</span>.<span class="ruby-identifier">destroy_all</span>
@@ -694,7 +732,7 @@ earlier.</p>
 
           
           <div class="method-source-code" id="requires_dimensions-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 127</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">requires_dimensions?</span>
   <span class="ruby-identifier">shipping_gateway</span>.<span class="ruby-identifier">requires_dimensions?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -729,7 +767,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="return-21-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 98</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">return!</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">return_transfer</span> = <span class="ruby-identifier">create_return_transfer</span>(
     <span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">transfer</span>.<span class="ruby-identifier">store</span>,
@@ -767,7 +805,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="returned-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">returned?</span>
   <span class="ruby-identifier">cancelled?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">return_transfer</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -800,7 +838,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="shipped-3F-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 107</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shipped?</span>
   <span class="ruby-identifier">shipped_at</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -833,7 +871,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="shipping_gateway-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 169</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shipping_gateway</span>
   <span class="ruby-identifier">shipping_method</span>.<span class="ruby-identifier">shipping_gateway_class</span>
 <span class="ruby-keyword">end</span></pre>
@@ -866,7 +904,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 192</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{Shipment.human_attribute_name(:number)} #{id}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -899,7 +937,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="volume-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 159</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">volume</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dimension_u</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dimension_v</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dimension_w</span>.<span class="ruby-identifier">nil?</span>
   (<span class="ruby-identifier">dimension_u</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">dimension_v</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">dimension_w</span>) <span class="ruby-operator">/</span> <span class="ruby-value">1_000_000_000.0</span>
@@ -933,7 +971,7 @@ destination.</p>
 
           
           <div class="method-source-code" id="weight-source">
-            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 153</span>
+            <pre><span class="ruby-comment"># File app/models/shipment.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">weight</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mass</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">mass</span> <span class="ruby-operator">/</span> <span class="ruby-value">1000.0</span>

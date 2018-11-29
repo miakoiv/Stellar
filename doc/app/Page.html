@@ -105,6 +105,8 @@
     
     <li ><a href="#method-c-entry_point">::entry_point</a>
     
+    <li ><a href="#method-c-options_for_select">::options_for_select</a>
+    
     <li ><a href="#method-c-purpose_options">::purpose_options</a>
     
     <li ><a href="#method-i-active_link_options">#active_link_options</a>
@@ -119,6 +121,8 @@
     
     <li ><a href="#method-i-description">#description</a>
     
+    <li ><a href="#method-i-duplicate-21">#duplicate!</a>
+    
     <li ><a href="#method-i-icon">#icon</a>
     
     <li ><a href="#method-i-label">#label</a>
@@ -131,11 +135,9 @@
     
     <li ><a href="#method-i-path">#path</a>
     
-    <li class="calls-super" ><a href="#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    <li ><a href="#method-i-rename_as_copy">#rename_as_copy</a>
     
     <li ><a href="#method-i-slugger">#slugger</a>
-    
-    <li ><a href="#method-i-to_option">#to_option</a>
     
     <li ><a href="#method-i-to_partial_path">#to_partial_path</a>
     
@@ -208,7 +210,7 @@
 
           
           <div class="method-source-code" id="available_purposes-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 91</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_purposes</span>
   <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">except</span> <span class="ruby-value">:header</span>, <span class="ruby-value">:footer</span>
 <span class="ruby-keyword">end</span></pre>
@@ -241,9 +243,46 @@
 
           
           <div class="method-source-code" id="entry_point-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 87</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_point</span>
   <span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-options_for_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">options_for_select</span><span
+            class="method-args">(pages) { |p, l| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="options_for_select-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">options_for_select</span>(<span class="ruby-identifier">pages</span>)
+  [].<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">each_with_level</span>(<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:lft</span>)) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span>, <span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">p</span>, <span class="ruby-identifier">l</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -274,7 +313,7 @@
 
           
           <div class="method-source-code" id="purpose_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
   <span class="ruby-identifier">available_purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Page</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -317,11 +356,11 @@ category and product pages.</p>
 
           
           <div class="method-source-code" id="active_link_options-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 197</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_link_options</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">slug</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;front&#39;</span>
-    [[<span class="ruby-string">&#39;store&#39;</span>], [<span class="ruby-string">&#39;show_category&#39;</span>, <span class="ruby-string">&#39;show_product&#39;</span>, <span class="ruby-string">&#39;show_promotion&#39;</span>, <span class="ruby-string">&#39;show_department&#39;</span>]]
+    [[<span class="ruby-string">&#39;store&#39;</span>], [<span class="ruby-string">&#39;show_category&#39;</span>, <span class="ruby-string">&#39;show_product&#39;</span>, <span class="ruby-string">&#39;show_promotion&#39;</span>, <span class="ruby-string">&#39;show_department&#39;</span>, <span class="ruby-string">&#39;show_category_order&#39;</span>]]
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;cart&#39;</span>
     [[<span class="ruby-string">&#39;store&#39;</span>], [<span class="ruby-string">&#39;cart&#39;</span>]]
   <span class="ruby-keyword">end</span>
@@ -355,7 +394,7 @@ category and product pages.</p>
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 145</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -389,7 +428,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_be_live-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 122</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_live?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">needs_resource?</span>
   <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:live</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">live?</span>)
@@ -423,7 +462,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_have_children-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 104</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_children?</span>
   <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">continuous?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -456,7 +495,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="can_have_content-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 108</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">can_have_content?</span>
   <span class="ruby-identifier">primary?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">template?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">contentmenu?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -489,9 +528,52 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">description</span>
-  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:content</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">reorder</span>(<span class="ruby-string">&#39;sections.priority, columns.priority, segments.priority&#39;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:content</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-duplicate-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duplicate!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a duplicate containing duplicates of sections on this page.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="duplicate-21-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate!</span>
+  <span class="ruby-identifier">clone</span> = <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">rename_as_copy</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">slug</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">sections</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">section</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">sections</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">section</span>.<span class="ruby-identifier">duplicate</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">picture</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">pictures</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">duplicate</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -522,7 +604,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 141</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 162</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">Page</span><span class="ruby-operator">::</span><span class="ruby-constant">PRESENTATION</span>[<span class="ruby-identifier">purpose</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -555,7 +637,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="label-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 149</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">label</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">slug</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">route?</span>
@@ -590,7 +672,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="movable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 116</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">movable?</span>
   <span class="ruby-operator">!</span>(<span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -623,9 +705,9 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="needs_resource-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 112</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">needs_resource?</span>
-  <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">promotion?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">department?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">internal?</span>
+  <span class="ruby-identifier">category?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">promotion?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">department?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">category_order?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">portal?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">proxy?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">internal?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -656,7 +738,7 @@ doesn&#39;t understand the concept of being live in the first place.</p>
 
           
           <div class="method-source-code" id="part_of_continuous_page-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">part_of_continuous_page?</span>
   <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">continuous?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -690,7 +772,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 166</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>
   <span class="ruby-keyword">case</span>
   <span class="ruby-keyword">when</span> <span class="ruby-identifier">primary?</span>
@@ -707,6 +789,8 @@ pointing to the right place.</p>
     <span class="ruby-identifier">show_promotion_path</span>(<span class="ruby-identifier">resource</span>)
   <span class="ruby-keyword">when</span> <span class="ruby-identifier">department?</span>
     <span class="ruby-identifier">show_department_path</span>(<span class="ruby-identifier">resource</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-identifier">category_order?</span>
+    <span class="ruby-identifier">show_category_order_path</span>(<span class="ruby-identifier">resource</span>)
   <span class="ruby-keyword">when</span> <span class="ruby-identifier">dropdown?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">megamenu?</span>
     <span class="ruby-identifier">children</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">path</span>
   <span class="ruby-keyword">when</span> <span class="ruby-identifier">continuous?</span>
@@ -717,44 +801,6 @@ pointing to the right place.</p>
     <span class="ruby-identifier">show_page_path</span>(<span class="ruby-identifier">resource</span>)
   <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-should_generate_new_friendly_id-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">should_generate_new_friendly_id?</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Prevent FriendlyId from changing slugs on route and external pages.</p>
-          
-          
-            <div class="method-calls-super">
-              Calls superclass method
-              
-            </div>
-          
-
-          
-          <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
-  <span class="ruby-operator">!</span>(<span class="ruby-identifier">route?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">external?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -785,42 +831,9 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 127</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [<span class="ruby-value">:title</span>, [<span class="ruby-value">:title</span>, <span class="ruby-value">:id</span>]]
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-to_option" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">to_option</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="to_option-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 206</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_option</span>
-  <span class="ruby-identifier">self_and_ancestors</span>.<span class="ruby-identifier">join</span> <span class="ruby-string">&quot; \u23f5 &quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -851,7 +864,7 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 160</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
   <span class="ruby-node">&quot;pages/purposes/#{purpose}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -884,10 +897,53 @@ pointing to the right place.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/page.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">header?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">footer?</span>
   <span class="ruby-identifier">title</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-rename_as_copy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rename_as_copy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Adds an incrementing duplicate number to the title.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="rename_as_copy-source">
+            <pre><span class="ruby-comment"># File app/models/page.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rename_as_copy</span>
+  <span class="ruby-identifier">trunk</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-identifier">title</span>.<span class="ruby-identifier">partition</span>(<span class="ruby-regexp">/ \(\d+\)/</span>)
+  <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39; (0)&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">branch</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">self</span>[<span class="ruby-value">:title</span>] = <span class="ruby-node">&quot;#{trunk}#{branch.succ}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

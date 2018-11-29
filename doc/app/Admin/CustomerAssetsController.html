@@ -215,8 +215,8 @@
             <pre><span class="ruby-comment"># File app/controllers/admin/customer_assets_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">CustomerAsset</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;customer_asset&#39;</span>, <span class="ruby-string">&#39;admin_customer_asset_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">CustomerAssetSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;customer_asset&#39;</span>, <span class="ruby-string">&#39;admin_customer_asset_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">CustomerAssetSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-ivar">@customer_assets</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>

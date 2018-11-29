@@ -131,7 +131,7 @@ the promotion on a given order.</p>
 
           
           <div class="method-source-code" id="flatten-source">
-            <pre><span class="ruby-comment"># File app/models/promotion_handler.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/promotion_handler.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flatten</span>(<span class="ruby-identifier">items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">n</span> = <span class="ruby-identifier">item</span>.<span class="ruby-identifier">amount</span>
@@ -168,7 +168,7 @@ the promotion on a given order.</p>
 
           
           <div class="method-source-code" id="recombine-source">
-            <pre><span class="ruby-comment"># File app/models/promotion_handler.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/promotion_handler.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">recombine</span>(<span class="ruby-identifier">items</span>)
   <span class="ruby-identifier">items</span>.<span class="ruby-identifier">chunk</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:id</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">id</span>, <span class="ruby-identifier">items</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">item</span> = <span class="ruby-identifier">items</span>.<span class="ruby-identifier">first</span>

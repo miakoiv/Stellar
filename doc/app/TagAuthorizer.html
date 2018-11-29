@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class OrderItemAuthorizer - Rails Application Documentation</title>
+<title>class TagAuthorizer - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -72,9 +72,9 @@
     
     <li ><a href="#method-c-creatable_by-3F">::creatable_by?</a>
     
-    <li ><a href="#method-c-readable_by-3F">::readable_by?</a>
+    <li ><a href="#method-c-deletable_by-3F">::deletable_by?</a>
     
-    <li ><a href="#method-i-deletable_by-3F">#deletable_by?</a>
+    <li ><a href="#method-c-readable_by-3F">::readable_by?</a>
     
     <li ><a href="#method-i-updatable_by-3F">#updatable_by?</a>
     
@@ -84,16 +84,13 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-OrderItemAuthorizer">
-  <h1 id="class-OrderItemAuthorizer" class="class">
-    class OrderItemAuthorizer
+<main role="main" aria-labelledby="class-TagAuthorizer">
+  <h1 id="class-TagAuthorizer" class="class">
+    class TagAuthorizer
   </h1>
 
   <section class="description">
     
-<p>This authorizer only applies to actions on order items made through the
-admin namespace. The non-admin side does not use authorizations.</p>
-
   </section>
 
   
@@ -134,9 +131,42 @@ admin namespace. The non-admin side does not use authorizations.</p>
 
           
           <div class="method-source-code" id="creatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_item_authorizer.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/authorizers/tag_authorizer.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">creatable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:category_editor</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-deletable_by-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">deletable_by?</span><span
+            class="method-args">(user, opts)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="deletable_by-3F-source">
+            <pre><span class="ruby-comment"># File app/authorizers/tag_authorizer.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:category_editor</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -167,10 +197,9 @@ admin namespace. The non-admin side does not use authorizations.</p>
 
           
           <div class="method-source-code" id="readable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_item_authorizer.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/authorizers/tag_authorizer.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">readable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_review</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>]) <span class="ruby-operator">||</span>
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:category_editor</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -188,39 +217,6 @@ admin namespace. The non-admin side does not use authorizations.</p>
        <header>
          <h3>Public Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-deletable_by-3F" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">deletable_by?</span><span
-            class="method-args">(user, opts)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="deletable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_item_authorizer.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">deletable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">active_transfer_items</span>.<span class="ruby-identifier">empty?</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-updatable_by-3F" class="method-detail ">
@@ -242,9 +238,9 @@ admin namespace. The non-admin side does not use authorizations.</p>
 
           
           <div class="method-source-code" id="updatable_by-3F-source">
-            <pre><span class="ruby-comment"># File app/authorizers/order_item_authorizer.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/authorizers/tag_authorizer.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">updatable_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:order_manage</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">active_transfer_items</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">has_cached_role?</span>(<span class="ruby-value">:category_editor</span>, <span class="ruby-identifier">opts</span>[<span class="ruby-value">:at</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           

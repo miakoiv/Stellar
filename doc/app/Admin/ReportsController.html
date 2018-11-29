@@ -74,6 +74,8 @@
     
     <li ><a href="#method-i-inventory">#inventory</a>
     
+    <li ><a href="#method-i-product_sales">#product_sales</a>
+    
     <li ><a href="#method-i-purchases">#purchases</a>
     
     <li ><a href="#method-i-sales">#sales</a>
@@ -167,20 +169,61 @@
           <div class="method-source-code" id="inventory-source">
             <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inventory</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_report_search&#39;</span>)
-  <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">reported</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_report_search&#39;</span>)
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">reported</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
-      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@query</span>)
+      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>)
     }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> {
       <span class="ruby-identifier">search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(
-        <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
+        <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
       )
       <span class="ruby-ivar">@inventory</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Inventory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search</span>)
     }
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-product_sales" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">product_sales</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /admin/reports/product/1/sales.js</p>
+          
+          
+
+          
+          <div class="method-source-code" id="product_sales-source">
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">product_sales</span>
+  <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
+  <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types!</span>(<span class="ruby-identifier">query</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-string">&#39;product_id&#39;</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@product</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">concluded_only</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>))
+  <span class="ruby-ivar">@order_items</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -211,21 +254,22 @@
 
           
           <div class="method-source-code" id="purchases-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">purchases</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">outgoing_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_purchases_order_report_row_search&#39;</span>)
-  <span class="ruby-identifier">set_default_order_types</span>
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_purchases_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types!</span>(<span class="ruby-identifier">query</span>)
+  <span class="ruby-identifier">query</span>[<span class="ruby-string">&#39;temporal_unit&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;day&#39;</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
-      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@query</span>)
+      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>)
     }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> {
       <span class="ruby-identifier">search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(
-        <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
+        <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
       )
       <span class="ruby-ivar">@purchases</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Sales</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search</span>)
     }
@@ -264,17 +308,18 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
-  <span class="ruby-identifier">set_default_order_types</span>
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types!</span>(<span class="ruby-identifier">query</span>)
+  <span class="ruby-identifier">query</span>[<span class="ruby-string">&#39;temporal_unit&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;day&#39;</span>
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> {
-      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@query</span>)
+      <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>)
     }
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> {
       <span class="ruby-identifier">search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(
-        <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
+        <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
       )
       <span class="ruby-ivar">@sales</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Sales</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search</span>)
     }
@@ -309,17 +354,17 @@
 
           
           <div class="method-source-code" id="sales_tax-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales_tax</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
-  <span class="ruby-identifier">set_default_order_types</span>
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order_report_row&#39;</span>, <span class="ruby-string">&#39;admin_sales_order_report_row_search&#39;</span>)
+  <span class="ruby-identifier">set_default_order_types!</span>(<span class="ruby-identifier">query</span>)
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> {
       <span class="ruby-identifier">search</span> = <span class="ruby-constant">OrderReportRowSearch</span>.<span class="ruby-identifier">new</span>(
-        <span class="ruby-ivar">@query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
+        <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">view_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">tabular_params</span>)
       )
       <span class="ruby-ivar">@sales</span> = <span class="ruby-constant">Reports</span><span class="ruby-operator">::</span><span class="ruby-constant">Sales</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search</span>)
     }

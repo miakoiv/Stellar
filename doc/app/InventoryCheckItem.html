@@ -81,9 +81,23 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-amount">#amount</a>
+    
     <li ><a href="#method-i-appearance">#appearance</a>
     
+    <li ><a href="#method-i-approve-21">#approve!</a>
+    
     <li ><a href="#method-i-customer_code-3D">#customer_code=</a>
+    
+    <li ><a href="#method-i-discard-21">#discard!</a>
+    
+    <li ><a href="#method-i-final-3F">#final?</a>
+    
+    <li ><a href="#method-i-matching-3F">#matching?</a>
+    
+    <li ><a href="#method-i-pending-3F">#pending?</a>
+    
+    <li ><a href="#method-i-stocked-3F">#stocked?</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -142,6 +156,39 @@
        </header>
 
     
+      <div id="method-i-amount" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">amount</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Amount needed to restock the inventory is the difference.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="amount-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-identifier">difference</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-appearance" class="method-detail ">
         
         <div class="method-heading">
@@ -161,8 +208,45 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">final?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;danger text-danger&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">stocked?</span>
+  <span class="ruby-identifier">matching?</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;warning text-warning&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-approve-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">approve!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Approves the required adjustment to inventory by restocking with this item.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="approve-21-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">approve!</span>
+  <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">restock!</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>, <span class="ruby-identifier">inventory_check</span>)
+  <span class="ruby-identifier">update!</span>(<span class="ruby-identifier">adjustment</span><span class="ruby-operator">:</span> <span class="ruby-identifier">difference</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -193,9 +277,174 @@
 
           
           <div class="method-source-code" id="customer_code-3D-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">customer_code=</span>(<span class="ruby-identifier">val</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">product</span> = <span class="ruby-constant">Product</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">customer_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">val</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-discard-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">discard!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Discards the item by setting its adjustment to zero.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="discard-21-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">discard!</span>
+  <span class="ruby-identifier">update!</span>(<span class="ruby-identifier">adjustment</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-final-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">final?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="final-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">final?</span>
+  <span class="ruby-identifier">adjustment</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-matching-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">matching?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="matching-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">matching?</span>
+  <span class="ruby-identifier">difference</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pending-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pending?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="pending-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pending?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">final?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-stocked-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stocked?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>We are stocked if a matching inventory item exists.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="stocked-3F-source">
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stocked?</span>
+  <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -226,9 +475,9 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_check_item.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
-  <span class="ruby-string">&quot;%d⨉ %s (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">amount</span>, <span class="ruby-identifier">product</span>, <span class="ruby-identifier">lot_code</span>]
+  <span class="ruby-string">&quot;%d⨉ %s (%s)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">current</span>, <span class="ruby-identifier">product</span>, <span class="ruby-identifier">lot_code</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           

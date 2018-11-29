@@ -70,8 +70,6 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-check">#check</a>
-    
     <li ><a href="#method-i-create">#create</a>
     
     <li ><a href="#method-i-edit">#edit</a>
@@ -118,39 +116,6 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
-
-    
-      <div id="method-i-check" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">check</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /admin/inventory_items/check</p>
-          
-          
-
-          
-          <div class="method-source-code" id="check-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">check</span>
-  <span class="ruby-identifier">index</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
 
     
       <div id="method-i-create" class="method-detail ">
@@ -264,13 +229,13 @@
             <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>)
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">reorder</span>(<span class="ruby-keyword">nil</span>)
     .<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Product</span>.<span class="ruby-identifier">alphabetical</span>).<span class="ruby-identifier">order</span>(<span class="ruby-value">:code</span>)
   <span class="ruby-ivar">@inventory_items</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">by_product</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
   <span class="ruby-ivar">@products</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>
-    .<span class="ruby-identifier">find</span>((<span class="ruby-ivar">@query</span>[<span class="ruby-string">&#39;product_id&#39;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:blank?</span>))
+    .<span class="ruby-identifier">find</span>((<span class="ruby-identifier">query</span>[<span class="ruby-string">&#39;product_id&#39;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">reject</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:blank?</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -339,8 +304,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">params</span>))
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">reorder</span>(<span class="ruby-string">&#39;inventories.name&#39;</span>, <span class="ruby-string">&#39;code&#39;</span>)
   <span class="ruby-ivar">@inventory_items</span> = <span class="ruby-identifier">results</span>
 <span class="ruby-keyword">end</span></pre>
@@ -376,8 +341,8 @@
             <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
-  <span class="ruby-ivar">@query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
-  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">search_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">params</span>))
+  <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
+  <span class="ruby-ivar">@search</span> = <span class="ruby-constant">InventoryItemSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">params</span>))
   <span class="ruby-identifier">results</span> = <span class="ruby-ivar">@search</span>.<span class="ruby-identifier">results</span>.<span class="ruby-identifier">reorder</span>(<span class="ruby-string">&#39;inventories.name&#39;</span>, <span class="ruby-string">&#39;code&#39;</span>)
   <span class="ruby-ivar">@inventory_item</span> = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">by_product</span>.<span class="ruby-identifier">first</span>
   <span class="ruby-ivar">@inventory_items</span> = <span class="ruby-identifier">results</span>

@@ -150,7 +150,7 @@
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 49</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;file-pdf-o&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_pdf?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;file-word-o&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_text?</span>
@@ -187,7 +187,7 @@
 
           
           <div class="method-source-code" id="is_pdf-3F-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_pdf?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\Aapplication\/pdf/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -220,7 +220,7 @@
 
           
           <div class="method-source-code" id="is_presentation-3F-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_presentation?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(ms-powerpoint|presentationml\.presentation|opendocument\.presentation)/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -253,7 +253,7 @@
 
           
           <div class="method-source-code" id="is_spreadsheet-3F-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_spreadsheet?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(ms-excel|spreadsheetml\.sheet|opendocument\.spreadsheet)/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -286,7 +286,7 @@
 
           
           <div class="method-source-code" id="is_text-3F-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">is_text?</span>
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span>(<span class="ruby-identifier">attachment_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(msword|wordprocessingml\.document|opendocument\.text)/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -319,7 +319,7 @@
 
           
           <div class="method-source-code" id="popuppable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/document.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/models/document.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">popuppable?</span>
   <span class="ruby-identifier">is_pdf?</span>
 <span class="ruby-keyword">end</span></pre>

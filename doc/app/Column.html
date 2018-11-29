@@ -75,6 +75,10 @@
     <li><a class="include" href="Reorderable.html">Reorderable</a>
   
   
+  
+    <li><a class="include" href="Stylable.html">Stylable</a>
+  
+  
   </ul>
 </div>
 
@@ -86,6 +90,8 @@
   <ul class="link-list" role="directory">
     
     <li ><a href="#method-c-alignment_options">::alignment_options</a>
+    
+    <li ><a href="#method-i-duplicate">#duplicate</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
@@ -156,7 +162,7 @@
 
           
           <div class="method-source-code" id="alignment_options-source">
-            <pre><span class="ruby-comment"># File app/models/column.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/column.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alignment_options</span>
   <span class="ruby-constant">ALIGNMENTS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Column</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:alignment</span>, <span class="ruby-identifier">a</span>), <span class="ruby-identifier">a</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -178,6 +184,44 @@
        </header>
 
     
+      <div id="method-i-duplicate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duplicate</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="duplicate-source">
+            <pre><span class="ruby-comment"># File app/models/column.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
+  <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">section</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">segment</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">duplicate</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-to_s" class="method-detail ">
         
         <div class="method-heading">
@@ -197,7 +241,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/column.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/models/column.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">priority</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>

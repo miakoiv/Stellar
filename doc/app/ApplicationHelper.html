@@ -63,21 +63,11 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-background_color_style">#background_color_style</a>
-    
-    <li ><a href="#method-i-background_picture_style">#background_picture_style</a>
-    
-    <li ><a href="#method-i-blank">#blank</a>
-    
     <li ><a href="#method-i-bootstrap_label">#bootstrap_label</a>
     
     <li ><a href="#method-i-branding">#branding</a>
     
     <li ><a href="#method-i-col">#col</a>
-    
-    <li ><a href="#method-i-column_class">#column_class</a>
-    
-    <li ><a href="#method-i-css">#css</a>
     
     <li ><a href="#method-i-document_icon_tag">#document_icon_tag</a>
     
@@ -86,6 +76,8 @@
     <li ><a href="#method-i-dropdown_toggle">#dropdown_toggle</a>
     
     <li ><a href="#method-i-image_variant_tag">#image_variant_tag</a>
+    
+    <li ><a href="#method-i-indent">#indent</a>
     
     <li ><a href="#method-i-life_pro_tip">#life_pro_tip</a>
     
@@ -108,8 +100,6 @@
     <li ><a href="#method-i-picture_variant_tag">#picture_variant_tag</a>
     
     <li ><a href="#method-i-product_header">#product_header</a>
-    
-    <li ><a href="#method-i-segment_style">#segment_style</a>
     
     <li ><a href="#method-i-tab_pane">#tab_pane</a>
     
@@ -151,110 +141,6 @@
        </header>
 
     
-      <div id="method-i-background_color_style" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">background_color_style</span><span
-            class="method-args">(element)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="background_color_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 177</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_color_style</span>(<span class="ruby-identifier">element</span>)
-  {
-    <span class="ruby-identifier">backgroundColor</span><span class="ruby-operator">:</span> <span class="ruby-identifier">element</span>.<span class="ruby-identifier">background_color</span>.<span class="ruby-identifier">presence</span>
-  }
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-background_picture_style" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">background_picture_style</span><span
-            class="method-args">(picture, size = :lightbox)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="background_picture_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 170</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture_style</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:lightbox</span>)
-  <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
-  {
-    <span class="ruby-identifier">backgroundImage</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;url(#{picture.image.url(size, timestamp: false)})&quot;</span>
-  }
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-blank" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">blank</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="blank-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 106</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">blank</span>
-  <span class="ruby-string">&quot;\u00a0&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-bootstrap_label" class="method-detail ">
         
         <div class="method-heading">
@@ -274,7 +160,7 @@
 
           
           <div class="method-source-code" id="bootstrap_label-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 78</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">bootstrap_label</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">appearance</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:appearance</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:appearance</span>) <span class="ruby-operator">||</span> <span class="ruby-value">:default</span>
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;label label-#{appearance}&quot;</span>)
@@ -315,7 +201,7 @@
 
           
           <div class="method-source-code" id="branding-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 137</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">branding</span>(<span class="ruby-identifier">object</span>)
   <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_picture</span>, <span class="ruby-value">:technical</span>) <span class="ruby-operator">+</span>
     <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>)
@@ -363,74 +249,6 @@
       </div>
 
     
-      <div id="method-i-column_class" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">column_class</span><span
-            class="method-args">(column)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="column_class-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_class</span>(<span class="ruby-identifier">column</span>)
-  [<span class="ruby-string">&#39;column&#39;</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">column</span>.<span class="ruby-identifier">pivot?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;pivot&#39;</span>].<span class="ruby-identifier">join</span> <span class="ruby-string">&#39; &#39;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-css" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">css</span><span
-            class="method-args">(styles)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Converts given styles hash to a string of CSS rules.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="css-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 164</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">css</span>(<span class="ruby-identifier">styles</span>)
-  <span class="ruby-identifier">styles</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">nil?</span> }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">selector</span>, <span class="ruby-identifier">rule</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;#{selector.to_s.underscore.dasherize}: #{rule};&quot;</span>
-  }.<span class="ruby-identifier">join</span> <span class="ruby-string">&#39; &#39;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-document_icon_tag" class="method-detail ">
         
         <div class="method-heading">
@@ -450,7 +268,7 @@
 
           
           <div class="method-source-code" id="document_icon_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 130</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon_tag</span>(<span class="ruby-identifier">document</span>)
   <span class="ruby-identifier">icon</span>(<span class="ruby-identifier">document</span>.<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-lg icon&#39;</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">document</span>.<span class="ruby-identifier">attachment_file_name</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tooltip&#39;</span>})
 <span class="ruby-keyword">end</span></pre>
@@ -483,7 +301,7 @@
 
           
           <div class="method-source-code" id="drag_handle-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 100</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">drag_handle</span>
   <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;handle&#39;</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;opacity: 0.5&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">icon</span>(<span class="ruby-string">&#39;ellipsis-v&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-lg fa-fw&#39;</span>)
@@ -518,7 +336,7 @@
 
           
           <div class="method-source-code" id="dropdown_toggle-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">dropdown_toggle</span>
   <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:a</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;dropdown&#39;</span>}, <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;button&#39;</span>, <span class="ruby-identifier">tabindex</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span> <span class="ruby-keyword">do</span>
     <span class="ruby-keyword">yield</span>
@@ -538,7 +356,7 @@
         
         <div class="method-heading">
           <span class="method-name">image_variant_tag</span><span
-            class="method-args">(image, size = :icon, options = {})</span>
+            class="method-args">(image, variant = :icon, options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -553,14 +371,47 @@
 
           
           <div class="method-source-code" id="image_variant_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">variant</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">is_bitmap?</span>
-    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">size</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">size</span>)))
+    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-identifier">variant</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">dimensions</span>(<span class="ruby-identifier">variant</span>)))
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:original</span>), <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;img-responsive&#39;</span>))
+    <span class="ruby-identifier">image_tag</span>(<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:original</span>), <span class="ruby-identifier">options</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-indent" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">indent</span><span
+            class="method-args">(text, level = 0, indent = "\u00a0\u00a0\u00a0\u00a0")</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="indent-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">indent</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">level</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">indent</span> = <span class="ruby-string">&quot;\u00a0\u00a0\u00a0\u00a0&quot;</span>)
+  <span class="ruby-string">&quot;%s%s&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">indent</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">level</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">text</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -591,7 +442,7 @@
 
           
           <div class="method-source-code" id="life_pro_tip-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 90</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">life_pro_tip</span>(<span class="ruby-identifier">object</span>)
   <span class="ruby-identifier">appearance</span>, <span class="ruby-identifier">message</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">life_pro_tip</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">message</span>.<span class="ruby-identifier">nil?</span>
@@ -663,7 +514,7 @@
 
           
           <div class="method-source-code" id="menu_item-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 44</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">menu_item</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">active_link_to</span> <span class="ruby-identifier">menu_title</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>), <span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">wrap_tag</span><span class="ruby-operator">:</span> <span class="ruby-value">:li</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -696,7 +547,7 @@
 
           
           <div class="method-source-code" id="menu_title-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">menu_title</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>)
   <span class="ruby-identifier">icon</span>(<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-fw&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -729,7 +580,7 @@
 
           
           <div class="method-source-code" id="meta_tags_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">meta_tags_for</span>(<span class="ruby-identifier">object</span>)
   <span class="ruby-identifier">tags</span> = {
     <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>,
@@ -768,12 +619,12 @@
 
           
           <div class="method-source-code" id="nav_tab-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">nav_tab</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">href</span> = <span class="ruby-node">&quot;#tab-#{id}&quot;</span>
-  <span class="ruby-identifier">classes</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>
-  <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;active&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:default</span>)
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:class</span>)).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">in?</span> [<span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>] }
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;active&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:default</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
   <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:li</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;presentation&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">link_to</span> <span class="ruby-identifier">text</span>, <span class="ruby-identifier">href</span>, <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tab&#39;</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tab&#39;</span>}
   <span class="ruby-keyword">end</span>
@@ -807,8 +658,9 @@
 
           
           <div class="method-source-code" id="number_if_present-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 155</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_if_present</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-identifier">number</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{prefix}#{number}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -840,8 +692,9 @@
 
           
           <div class="method-source-code" id="number_to_signed_percentage-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 147</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_to_signed_percentage</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
     <span class="ruby-node">&quot;-#{number_to_percentage(-number, options)}&quot;</span>
   <span class="ruby-keyword">else</span>
@@ -877,8 +730,9 @@
 
           
           <div class="method-source-code" id="number_with_precision_and_sign-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 139</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_with_precision_and_sign</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
     <span class="ruby-node">&quot;-#{number_with_precision(-number, options)}&quot;</span>
   <span class="ruby-keyword">else</span>
@@ -899,7 +753,7 @@
         
         <div class="method-heading">
           <span class="method-name">picture_variant_tag</span><span
-            class="method-args">(picture, size = :icon, options = {})</span>
+            class="method-args">(picture, variant = nil, options = {})</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -915,9 +769,12 @@
           
           <div class="method-source-code" id="picture_variant_tag-source">
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">size</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">variant</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>, <span class="ruby-identifier">size</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">variant</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">variant</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-value">:lightbox</span>
+  <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:figure</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>, <span class="ruby-identifier">variant</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -949,7 +806,7 @@ respond to product, product_title, product_subtitle, product_code</p>
 
           
           <div class="method-source-code" id="product_header-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">product_header</span>(<span class="ruby-identifier">item</span>)
   <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:div</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;product&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">concat</span> <span class="ruby-identifier">link_to</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">product_title</span>, <span class="ruby-identifier">admin?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">admin_product_path</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">show_product_path</span>(<span class="ruby-identifier">item</span>.<span class="ruby-identifier">product</span>))
@@ -958,41 +815,6 @@ respond to product, product_title, product_subtitle, product_code</p>
     <span class="ruby-keyword">end</span>
     <span class="ruby-identifier">concat</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:div</span>, <span class="ruby-identifier">item</span>.<span class="ruby-identifier">product_subtitle</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;small&#39;</span>)
   <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-segment_style" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">segment_style</span><span
-            class="method-args">(segment)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="segment_style-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 183</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">segment_style</span>(<span class="ruby-identifier">segment</span>)
-  {
-    <span class="ruby-identifier">minHeight</span><span class="ruby-operator">:</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">min_height</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{segment.min_height}em&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1023,13 +845,13 @@ respond to product, product_title, product_subtitle, product_code</p>
 
           
           <div class="method-source-code" id="tab_pane-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tab_pane</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">id</span> = <span class="ruby-node">&quot;tab-#{id}&quot;</span>
-  <span class="ruby-identifier">classes</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>
-  <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;tab-pane fade&#39;</span>
-  <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;in active&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:default</span>)
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:class</span>)).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">in?</span> [<span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>] }
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;tab-pane fade&#39;</span>
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;in active&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:default</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
   <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:div</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">id</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-keyword">yield</span>
   <span class="ruby-keyword">end</span>
@@ -1063,11 +885,11 @@ respond to product, product_title, product_subtitle, product_code</p>
 
           
           <div class="method-source-code" id="tab_set-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tab_set</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-identifier">classes</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>
-  <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;nav nav-tabs&#39;</span>
-  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:class</span>)).<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">in?</span> [<span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>] }
+  <span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;nav nav-tabs&#39;</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:class</span>] = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
   <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:ul</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">id</span>, <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tablist&#39;</span>) <span class="ruby-keyword">do</span>
     <span class="ruby-keyword">yield</span>
   <span class="ruby-keyword">end</span>

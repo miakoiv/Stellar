@@ -131,7 +131,7 @@
 
           
           <div class="method-source-code" id="for-source">
-            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-keyword">for</span>(<span class="ruby-identifier">group</span>)
   <span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-identifier">group</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -172,7 +172,7 @@
 
           
           <div class="method-source-code" id="margin_percent-source">
-            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">margin_percent</span>(<span class="ruby-identifier">group</span>)
   <span class="ruby-identifier">base_price</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">price_method</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">base_price</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">zero?</span>
@@ -207,7 +207,7 @@
 
           
           <div class="method-source-code" id="markup_percent-source">
-            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">markup_percent</span>(<span class="ruby-identifier">group</span>)
   <span class="ruby-identifier">base_price</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">price_method</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">base_price</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">base_price</span>.<span class="ruby-identifier">zero?</span>
@@ -242,7 +242,7 @@
 
           
           <div class="method-source-code" id="modifier-source">
-            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/alternate_price.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modifier</span>
   <span class="ruby-identifier">group</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">modifier</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>

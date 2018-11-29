@@ -160,7 +160,7 @@ record, with which the activity should appear.</p>
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/activity.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/activity.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">ACTIONS</span>[<span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_sym</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -193,7 +193,7 @@ record, with which the activity should appear.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/activity.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/activity.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">ACTIONS</span>[<span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_sym</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -226,7 +226,7 @@ record, with which the activity should appear.</p>
 
           
           <div class="method-source-code" id="resource_class-source">
-            <pre><span class="ruby-comment"># File app/models/activity.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/activity.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resource_class</span>
   <span class="ruby-identifier">resource_type</span>.<span class="ruby-identifier">constantize</span>
 <span class="ruby-keyword">end</span></pre>
@@ -259,7 +259,7 @@ record, with which the activity should appear.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/activity.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/models/activity.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{model_name.human.capitalize} #{created_at.year}-#{id}&quot;</span>
 <span class="ruby-keyword">end</span></pre>

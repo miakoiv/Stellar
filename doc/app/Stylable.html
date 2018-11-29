@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Payment - Rails Application Documentation</title>
+<title>module Stylable - Rails Application Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
@@ -18,7 +18,7 @@
 
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -54,23 +54,27 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
+    
+    
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
 
+  <ul class="link-list">
+    
   
-  <p class="link">ActiveRecord::Base
+    <li><span class="extend">ActiveSupport::Concern</span>
   
+  
+  </ul>
 </div>
 
-    
-    
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-available_gateways">::available_gateways</a>
+    <li ><a href="#method-i-style">#style</a>
     
   </ul>
 </div>
@@ -78,13 +82,22 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Payment">
-  <h1 id="class-Payment" class="class">
-    class Payment
+<main role="main" aria-labelledby="module-Stylable">
+  <h1 id="module-Stylable" class="module">
+    module Stylable
   </h1>
 
   <section class="description">
     
+<p><a href="Stylable.html">Stylable</a> adds support for inline styling stored
+in a serialized attribute, keyed by feature such as backgroundColor or
+minHeight. Provides <a href="Stylable.html#method-i-style">style</a> to
+fetch previously stored CSS rules ready for inlining. <a
+href="Stylable.html">Stylable</a> records are assigned a before_save
+callback to update the inlined styles through a <a
+href="Styles/Inline.html">Styles::Inline</a> object that employs
+Autoprefixer to add any syntax variants required by different browsers.</p>
+
   </section>
 
   
@@ -100,17 +113,17 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-available_gateways" class="method-detail ">
+      <div id="method-i-style" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">available_gateways</span><span
-            class="method-args">()</span>
+          <span class="method-name">style</span><span
+            class="method-args">(*features)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -124,10 +137,10 @@
           
 
           
-          <div class="method-source-code" id="available_gateways-source">
-            <pre><span class="ruby-comment"># File app/models/payment.rb, line 12</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_gateways</span>
-  <span class="ruby-node">%w{None Paybyway}</span>
+          <div class="method-source-code" id="style-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/stylable.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">style</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">features</span>)
+  <span class="ruby-identifier">features</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inline_styles</span>[<span class="ruby-identifier">f</span>] }.<span class="ruby-identifier">join</span> <span class="ruby-string">&#39; &#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

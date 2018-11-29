@@ -79,6 +79,10 @@
     <li><a class="include" href="Reorderable.html">Reorderable</a>
   
   
+  
+    <li><a class="include" href="Stylable.html">Stylable</a>
+  
+  
   </ul>
 </div>
 
@@ -89,11 +93,17 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-gradient_direction_options">::gradient_direction_options</a>
+    
+    <li ><a href="#method-c-gradient_type_options">::gradient_type_options</a>
+    
     <li ><a href="#method-c-preset_menu_options">::preset_menu_options</a>
     
     <li ><a href="#method-c-width_options">::width_options</a>
     
     <li ><a href="#method-i-background_picture">#background_picture</a>
+    
+    <li ><a href="#method-i-duplicate">#duplicate</a>
     
     <li ><a href="#method-i-gutter">#gutter</a>
     
@@ -142,6 +152,16 @@ contained segments are created.</p>
       </header>
       <dl>
       
+        <dt id="GRADIENT_DIRECTIONS">GRADIENT_DIRECTIONS
+        
+        <dd>
+        
+      
+        <dt id="GRADIENT_TYPES">GRADIENT_TYPES
+        
+        <dd>
+        
+      
         <dt id="PRESETS">PRESETS
         
         <dd>
@@ -165,6 +185,72 @@ contained segments are created.</p>
        </header>
 
     
+      <div id="method-c-gradient_direction_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gradient_direction_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="gradient_direction_options-source">
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">gradient_direction_options</span>
+  <span class="ruby-constant">GRADIENT_DIRECTIONS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Section</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:gradient_direction</span>, <span class="ruby-identifier">g</span>), <span class="ruby-identifier">g</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-gradient_type_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gradient_type_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="gradient_type_options-source">
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">gradient_type_options</span>
+  <span class="ruby-constant">GRADIENT_TYPES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Section</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:gradient_type</span>, <span class="ruby-identifier">g</span>), <span class="ruby-identifier">g</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-c-preset_menu_options" class="method-detail ">
         
         <div class="method-heading">
@@ -184,7 +270,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="preset_menu_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 56</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preset_menu_options</span>
   <span class="ruby-constant">PRESETS</span>
 <span class="ruby-keyword">end</span></pre>
@@ -217,7 +303,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="width_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">width_options</span>
   <span class="ruby-constant">WIDTHS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Section</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:width</span>, <span class="ruby-identifier">w</span>), <span class="ruby-identifier">w</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -258,9 +344,50 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="background_picture-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 81</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture</span>
   <span class="ruby-identifier">cover_picture</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-duplicate" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">duplicate</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates a duplicate with duplicated columns.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="duplicate-source">
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
+  <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">c</span>.<span class="ruby-identifier">page</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">columns</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">duplicate</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">picture</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">c</span>.<span class="ruby-identifier">pictures</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">duplicate</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -291,7 +418,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="gutter-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">gutter</span>
   <span class="ruby-identifier">gutters?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;gutters&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;no-gutters&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -324,7 +451,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="layout_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 73</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">layout_options</span>
   <span class="ruby-constant">PRESETS</span>.<span class="ruby-identifier">flatten</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">l</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">l</span>[<span class="ruby-value">0</span>]] }
 <span class="ruby-keyword">end</span></pre>
@@ -357,7 +484,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="picture_options-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 77</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_options</span>
   {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> [<span class="ruby-string">&#39;presentational&#39;</span>]}
 <span class="ruby-keyword">end</span></pre>
@@ -390,7 +517,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="spread-3F-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">spread?</span>
   <span class="ruby-identifier">width</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;spread&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -423,7 +550,7 @@ contained segments are created.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/section.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/models/section.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">priority</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>

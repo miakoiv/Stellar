@@ -164,7 +164,7 @@
 
           
           <div class="method-source-code" id="administrative-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">administrative</span>
   <span class="ruby-identifier">available_roles</span> <span class="ruby-operator">-</span> [<span class="ruby-string">&#39;order_notify&#39;</span>, <span class="ruby-string">&#39;correspondence&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -197,7 +197,7 @@
 
           
           <div class="method-source-code" id="available_roles-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">available_roles</span>
   <span class="ruby-constant">ROLES</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
@@ -230,7 +230,7 @@
 
           
           <div class="method-source-code" id="icon_for-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">icon_for</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -271,7 +271,7 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 75</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -304,7 +304,7 @@
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -337,7 +337,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 67</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:name</span>)
 <span class="ruby-keyword">end</span></pre>

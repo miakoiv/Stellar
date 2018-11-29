@@ -76,7 +76,11 @@
     
     <li ><a href="#method-i-available_purposes">#available_purposes</a>
     
+    <li ><a href="#method-i-available_variants">#available_variants</a>
+    
     <li ><a href="#method-i-cover_picture">#cover_picture</a>
+    
+    <li ><a href="#method-i-picture_count">#picture_count</a>
     
     <li ><a href="#method-i-picture_options">#picture_options</a>
     
@@ -147,6 +151,39 @@
       </div>
 
     
+      <div id="method-i-available_variants" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">available_variants</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="available_variants-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">available_variants</span>
+  <span class="ruby-identifier">picture_options</span>[<span class="ruby-value">:variant</span>] <span class="ruby-operator">||</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-cover_picture" class="method-detail ">
         
         <div class="method-heading">
@@ -166,9 +203,42 @@
 
           
           <div class="method-source-code" id="cover_picture-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">cover_picture</span>(<span class="ruby-identifier">purpose</span> = <span class="ruby-value">:presentational</span>)
   <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">purpose</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">presentational</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-picture_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">picture_count</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="picture_count-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_count</span>
+  <span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">count</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -202,7 +272,7 @@ a class by class basis.</p>
           <div class="method-source-code" id="picture_options-source">
             <pre><span class="ruby-comment"># File app/models/concerns/pictureable.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_options</span>
-  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>}
+  {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">variant</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>}
 <span class="ruby-keyword">end</span></pre>
           </div>
           

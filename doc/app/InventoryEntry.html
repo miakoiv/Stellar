@@ -140,7 +140,7 @@
 
           
           <div class="method-source-code" id="available-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available</span>
   <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reserved</span>
 <span class="ruby-keyword">end</span></pre>
@@ -173,7 +173,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-string">&quot;%s (%s) %d/%d/%d&quot;</span> <span class="ruby-operator">%</span> [
     <span class="ruby-identifier">inventory_item</span>.<span class="ruby-identifier">product</span>,
@@ -210,7 +210,7 @@
 
           
           <div class="method-source-code" id="total_value_cents-source">
-            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/inventory_entry.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">total_value_cents</span>
   <span class="ruby-identifier">on_hand</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">value_cents</span>
 <span class="ruby-keyword">end</span></pre>

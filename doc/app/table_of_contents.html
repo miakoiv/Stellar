@@ -295,6 +295,12 @@
     <a href="Admin/StylesHelper.html">Admin::StylesHelper</a>
   </li>
   <li class="class">
+    <a href="Admin/TagsController.html">Admin::TagsController</a>
+  </li>
+  <li class="module">
+    <a href="Admin/TagsHelper.html">Admin::TagsHelper</a>
+  </li>
+  <li class="class">
     <a href="Admin/TaxCategoriesController.html">Admin::TaxCategoriesController</a>
   </li>
   <li class="module">
@@ -490,6 +496,9 @@
     <a href="MeasurementUnit.html">MeasurementUnit</a>
   </li>
   <li class="class">
+    <a href="Object.html">Object</a>
+  </li>
+  <li class="class">
     <a href="Order.html">Order</a>
   </li>
   <li class="class">
@@ -503,6 +512,9 @@
   </li>
   <li class="class">
     <a href="OrderItemAuthorizer.html">OrderItemAuthorizer</a>
+  </li>
+  <li class="class">
+    <a href="OrderItemSearch.html">OrderItemSearch</a>
   </li>
   <li class="class">
     <a href="OrderItemsController.html">OrderItemsController</a>
@@ -551,6 +563,9 @@
   </li>
   <li class="class">
     <a href="PaymentGateway/PaybywayConnector.html">PaymentGateway::PaybywayConnector</a>
+  </li>
+  <li class="class">
+    <a href="PaymentGateway/PaymentMethod.html">PaymentGateway::PaymentMethod</a>
   </li>
   <li class="class">
     <a href="Picture.html">Picture</a>
@@ -744,6 +759,9 @@
   <li class="class">
     <a href="StoreSearch.html">StoreSearch</a>
   </li>
+  <li class="module">
+    <a href="Stylable.html">Stylable</a>
+  </li>
   <li class="class">
     <a href="Style.html">Style</a>
   </li>
@@ -752,6 +770,15 @@
   </li>
   <li class="class">
     <a href="Styles/Generator.html">Styles::Generator</a>
+  </li>
+  <li class="class">
+    <a href="Styles/Inline.html">Styles::Inline</a>
+  </li>
+  <li class="class">
+    <a href="Tag.html">Tag</a>
+  </li>
+  <li class="class">
+    <a href="TagAuthorizer.html">TagAuthorizer</a>
   </li>
   <li class="class">
     <a href="TaxCategory.html">TaxCategory</a>
@@ -823,6 +850,11 @@
     <a href="Group.html#method-c-appearance_options">::appearance_options</a>
     &mdash;
     <span class="container">Group</span>
+
+  <li class="method">
+    <a href="Tag.html#method-c-appearance_options">::appearance_options</a>
+    &mdash;
+    <span class="container">Tag</span>
 
   <li class="method">
     <a href="PaymentGateway/PaybywayConnector.html#method-c-auth_payment">::auth_payment</a>
@@ -965,6 +997,11 @@
     <span class="container">OrderAuthorizer</span>
 
   <li class="method">
+    <a href="OrderItemAuthorizer.html#method-c-creatable_by-3F">::creatable_by?</a>
+    &mdash;
+    <span class="container">OrderItemAuthorizer</span>
+
+  <li class="method">
     <a href="PolicyAuthorizer.html#method-c-creatable_by-3F">::creatable_by?</a>
     &mdash;
     <span class="container">PolicyAuthorizer</span>
@@ -998,6 +1035,11 @@
     <a href="StoreAuthorizer.html#method-c-creatable_by-3F">::creatable_by?</a>
     &mdash;
     <span class="container">StoreAuthorizer</span>
+
+  <li class="method">
+    <a href="TagAuthorizer.html#method-c-creatable_by-3F">::creatable_by?</a>
+    &mdash;
+    <span class="container">TagAuthorizer</span>
 
   <li class="method">
     <a href="TaxCategoryAuthorizer.html#method-c-creatable_by-3F">::creatable_by?</a>
@@ -1080,14 +1122,14 @@
     <span class="container">Store</span>
 
   <li class="method">
+    <a href="ProductSearch.html#method-c-define_property_search_method">::define_property_search_method</a>
+    &mdash;
+    <span class="container">ProductSearch</span>
+
+  <li class="method">
     <a href="Reorderable.html#method-c-define_scope">::define_scope</a>
     &mdash;
     <span class="container">Reorderable</span>
-
-  <li class="method">
-    <a href="ProductSearch.html#method-c-define_search_method">::define_search_method</a>
-    &mdash;
-    <span class="container">ProductSearch</span>
 
   <li class="method">
     <a href="AlbumAuthorizer.html#method-c-deletable_by-3F">::deletable_by?</a>
@@ -1165,19 +1207,24 @@
     <span class="container">StoreAuthorizer</span>
 
   <li class="method">
+    <a href="TagAuthorizer.html#method-c-deletable_by-3F">::deletable_by?</a>
+    &mdash;
+    <span class="container">TagAuthorizer</span>
+
+  <li class="method">
     <a href="TaxCategoryAuthorizer.html#method-c-deletable_by-3F">::deletable_by?</a>
     &mdash;
     <span class="container">TaxCategoryAuthorizer</span>
 
   <li class="method">
+    <a href="Product.html#method-c-described_options">::described_options</a>
+    &mdash;
+    <span class="container">Product</span>
+
+  <li class="method">
     <a href="Page.html#method-c-entry_point">::entry_point</a>
     &mdash;
     <span class="container">Page</span>
-
-  <li class="method">
-    <a href="Category.html#method-c-find_self_and_descendants">::find_self_and_descendants</a>
-    &mdash;
-    <span class="container">Category</span>
 
   <li class="method">
     <a href="ShippingGateway/CustomerPickup.html#method-c-fixed_cost-3F">::fixed_cost?</a>
@@ -1215,6 +1262,11 @@
     <span class="container">AlternatePrice</span>
 
   <li class="method">
+    <a href="User.html#method-c-generate_guest-21">::generate_guest!</a>
+    &mdash;
+    <span class="container">User</span>
+
+  <li class="method">
     <a href="ShippingGateway/CustomerPickup.html#method-c-generates_labels-3F">::generates_labels?</a>
     &mdash;
     <span class="container">ShippingGateway::CustomerPickup</span>
@@ -1250,6 +1302,16 @@
     <span class="container">ShippingGateway::PakettikauppaConnector</span>
 
   <li class="method">
+    <a href="Section.html#method-c-gradient_direction_options">::gradient_direction_options</a>
+    &mdash;
+    <span class="container">Section</span>
+
+  <li class="method">
+    <a href="Section.html#method-c-gradient_type_options">::gradient_type_options</a>
+    &mdash;
+    <span class="container">Section</span>
+
+  <li class="method">
     <a href="Segment.html#method-c-grid_columns_options">::grid_columns_options</a>
     &mdash;
     <span class="container">Segment</span>
@@ -1265,12 +1327,22 @@
     <span class="container">Role</span>
 
   <li class="method">
+    <a href="Product.html#method-c-illustrated_options">::illustrated_options</a>
+    &mdash;
+    <span class="container">Product</span>
+
+  <li class="method">
     <a href="Segment.html#method-c-image_sizing_options">::image_sizing_options</a>
     &mdash;
     <span class="container">Segment</span>
 
   <li class="method">
     <a href="Segment.html#method-c-inset_options">::inset_options</a>
+    &mdash;
+    <span class="container">Segment</span>
+
+  <li class="method">
+    <a href="Segment.html#method-c-justification_options">::justification_options</a>
     &mdash;
     <span class="container">Segment</span>
 
@@ -1355,6 +1427,11 @@
     <span class="container">Styles::Generator</span>
 
   <li class="method">
+    <a href="Styles/Inline.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Styles::Inline</span>
+
+  <li class="method">
     <a href="Uploaders/Products.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Uploaders::Products</span>
@@ -1365,6 +1442,16 @@
     <span class="container">InventoryItem</span>
 
   <li class="method">
+    <a href="Category.html#method-c-options_for_select">::options_for_select</a>
+    &mdash;
+    <span class="container">Category</span>
+
+  <li class="method">
+    <a href="Page.html#method-c-options_for_select">::options_for_select</a>
+    &mdash;
+    <span class="container">Page</span>
+
+  <li class="method">
     <a href="Shipment.html#method-c-package_type_options">::package_type_options</a>
     &mdash;
     <span class="container">Shipment</span>
@@ -1373,6 +1460,11 @@
     <a href="Store.html#method-c-payment_gateway_options">::payment_gateway_options</a>
     &mdash;
     <span class="container">Store</span>
+
+  <li class="method">
+    <a href="PaymentGateway/PaybywayConnector.html#method-c-payment_methods">::payment_methods</a>
+    &mdash;
+    <span class="container">PaymentGateway::PaybywayConnector</span>
 
   <li class="method">
     <a href="Section.html#method-c-preset_menu_options">::preset_menu_options</a>
@@ -1460,6 +1552,11 @@
     <span class="container">OrderAuthorizer</span>
 
   <li class="method">
+    <a href="OrderItemAuthorizer.html#method-c-readable_by-3F">::readable_by?</a>
+    &mdash;
+    <span class="container">OrderItemAuthorizer</span>
+
+  <li class="method">
     <a href="PolicyAuthorizer.html#method-c-readable_by-3F">::readable_by?</a>
     &mdash;
     <span class="container">PolicyAuthorizer</span>
@@ -1493,6 +1590,11 @@
     <a href="StoreAuthorizer.html#method-c-readable_by-3F">::readable_by?</a>
     &mdash;
     <span class="container">StoreAuthorizer</span>
+
+  <li class="method">
+    <a href="TagAuthorizer.html#method-c-readable_by-3F">::readable_by?</a>
+    &mdash;
+    <span class="container">TagAuthorizer</span>
 
   <li class="method">
     <a href="TaxCategoryAuthorizer.html#method-c-readable_by-3F">::readable_by?</a>
@@ -1575,9 +1677,19 @@
     <span class="container">ShippingGateway::Vendor</span>
 
   <li class="method">
+    <a href="Segment.html#method-c-resource_type_options">::resource_type_options</a>
+    &mdash;
+    <span class="container">Segment</span>
+
+  <li class="method">
     <a href="ShippingGateway/PakettikauppaConnector.html#method-c-search_pickup_points">::search_pickup_points</a>
     &mdash;
     <span class="container">ShippingGateway::PakettikauppaConnector</span>
+
+  <li class="method">
+    <a href="Category.html#method-c-self_and_descendant_ids">::self_and_descendant_ids</a>
+    &mdash;
+    <span class="container">Category</span>
 
   <li class="method">
     <a href="Segment.html#method-c-shadow_options">::shadow_options</a>
@@ -1678,11 +1790,6 @@
     <a href="OrderAuthorizer.html#method-c-updatable_by-3F">::updatable_by?</a>
     &mdash;
     <span class="container">OrderAuthorizer</span>
-
-  <li class="method">
-    <a href="OrderItemAuthorizer.html#method-c-updatable_by-3F">::updatable_by?</a>
-    &mdash;
-    <span class="container">OrderItemAuthorizer</span>
 
   <li class="method">
     <a href="ProductAuthorizer.html#method-c-updatable_by-3F">::updatable_by?</a>
@@ -1790,9 +1897,9 @@
     <span class="container">Promotion</span>
 
   <li class="method">
-    <a href="Promotion.html#method-i-active-3F">#active?</a>
+    <a href="StoreController.html#method-i-activate_code">#activate_code</a>
     &mdash;
-    <span class="container">Promotion</span>
+    <span class="container">StoreController</span>
 
   <li class="method">
     <a href="Shipment.html#method-i-active-3F">#active?</a>
@@ -1815,9 +1922,34 @@
     <span class="container">Page</span>
 
   <li class="method">
+    <a href="Product.html#method-i-active_promoted_items">#active_promoted_items</a>
+    &mdash;
+    <span class="container">Product</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-active_promotions">#active_promotions</a>
+    &mdash;
+    <span class="container">Product</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-active_transfer_items">#active_transfer_items</a>
+    &mdash;
+    <span class="container">OrderItem</span>
+
+  <li class="method">
+    <a href="Promotion.html#method-i-add">#add</a>
+    &mdash;
+    <span class="container">Promotion</span>
+
+  <li class="method">
     <a href="Admin/PromotionsController.html#method-i-add_categories">#add_categories</a>
     &mdash;
     <span class="container">Admin::PromotionsController</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-add_favorite">#add_favorite</a>
+    &mdash;
+    <span class="container">StoreController</span>
 
   <li class="method">
     <a href="Admin/PromotionsController.html#method-i-add_products">#add_products</a>
@@ -1875,19 +2007,14 @@
     <span class="container">Store</span>
 
   <li class="method">
-    <a href="OrderItem.html#method-i-amount_pending">#amount_pending</a>
+    <a href="InventoryCheckItem.html#method-i-amount">#amount</a>
     &mdash;
-    <span class="container">OrderItem</span>
+    <span class="container">InventoryCheckItem</span>
 
   <li class="method">
     <a href="Adjustment.html#method-i-amount_sans_tax">#amount_sans_tax</a>
     &mdash;
     <span class="container">Adjustment</span>
-
-  <li class="method">
-    <a href="OrderItem.html#method-i-amount_shipped">#amount_shipped</a>
-    &mdash;
-    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="Adjustment.html#method-i-amount_with_tax">#amount_with_tax</a>
@@ -1918,6 +2045,11 @@
     <a href="Order.html#method-i-appearance">#appearance</a>
     &mdash;
     <span class="container">Order</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-appearance">#appearance</a>
+    &mdash;
+    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="Page.html#method-i-appearance">#appearance</a>
@@ -1975,9 +2107,19 @@
     <span class="container">Order</span>
 
   <li class="method">
+    <a href="Admin/InventoryCheckItemsController.html#method-i-approve">#approve</a>
+    &mdash;
+    <span class="container">Admin::InventoryCheckItemsController</span>
+
+  <li class="method">
     <a href="Admin/OrdersController.html#method-i-approve">#approve</a>
     &mdash;
     <span class="container">Admin::OrdersController</span>
+
+  <li class="method">
+    <a href="InventoryCheckItem.html#method-i-approve-21">#approve!</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
 
   <li class="method">
     <a href="Order.html#method-i-approved-3F">#approved?</a>
@@ -1993,11 +2135,6 @@
     <a href="OrderItem.html#method-i-archive-21">#archive!</a>
     &mdash;
     <span class="container">OrderItem</span>
-
-  <li class="method">
-    <a href="Image.html#method-i-as_json">#as_json</a>
-    &mdash;
-    <span class="container">Image</span>
 
   <li class="method">
     <a href="Order.html#method-i-as_json">#as_json</a>
@@ -2018,6 +2155,11 @@
     <a href="Picture.html#method-i-assign_purpose">#assign_purpose</a>
     &mdash;
     <span class="container">Picture</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-associations_changed">#associations_changed</a>
+    &mdash;
+    <span class="container">Product</span>
 
   <li class="method">
     <a href="ApplicationController.html#method-i-authenticate_user_or_skip-21">#authenticate_user_or_skip!</a>
@@ -2043,6 +2185,11 @@
     <a href="InventoryItem.html#method-i-available">#available</a>
     &mdash;
     <span class="container">InventoryItem</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-available">#available</a>
+    &mdash;
+    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="Product.html#method-i-available">#available</a>
@@ -2100,6 +2247,11 @@
     <span class="container">Product</span>
 
   <li class="method">
+    <a href="Pictureable.html#method-i-available_variants">#available_variants</a>
+    &mdash;
+    <span class="container">Pictureable</span>
+
+  <li class="method">
     <a href="Product.html#method-i-back_orderable-3F">#back_orderable?</a>
     &mdash;
     <span class="container">Product</span>
@@ -2110,19 +2262,14 @@
     <span class="container">Admin::OrdersHelper</span>
 
   <li class="method">
-    <a href="ApplicationHelper.html#method-i-background_color_style">#background_color_style</a>
-    &mdash;
-    <span class="container">ApplicationHelper</span>
-
-  <li class="method">
     <a href="Section.html#method-i-background_picture">#background_picture</a>
     &mdash;
     <span class="container">Section</span>
 
   <li class="method">
-    <a href="ApplicationHelper.html#method-i-background_picture_style">#background_picture_style</a>
+    <a href="Segment.html#method-i-background_picture">#background_picture</a>
     &mdash;
-    <span class="container">ApplicationHelper</span>
+    <span class="container">Segment</span>
 
   <li class="method">
     <a href="Order.html#method-i-balance">#balance</a>
@@ -2163,6 +2310,11 @@
     <a href="InventoryItemSearch.html#method-i-base_query">#base_query</a>
     &mdash;
     <span class="container">InventoryItemSearch</span>
+
+  <li class="method">
+    <a href="OrderItemSearch.html#method-i-base_query">#base_query</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
 
   <li class="method">
     <a href="OrderReportRowSearch.html#method-i-base_query">#base_query</a>
@@ -2210,11 +2362,6 @@
     <span class="container">Order</span>
 
   <li class="method">
-    <a href="ApplicationHelper.html#method-i-blank">#blank</a>
-    &mdash;
-    <span class="container">ApplicationHelper</span>
-
-  <li class="method">
     <a href="ApplicationHelper.html#method-i-bootstrap_label">#bootstrap_label</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
@@ -2223,11 +2370,6 @@
     <a href="ApplicationHelper.html#method-i-branding">#branding</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
-
-  <li class="method">
-    <a href="Reports/Sales.html#method-i-by_date">#by_date</a>
-    &mdash;
-    <span class="container">Reports::Sales</span>
 
   <li class="method">
     <a href="Reports/Sales.html#method-i-by_product">#by_product</a>
@@ -2345,11 +2487,6 @@
     <span class="container">Product</span>
 
   <li class="method">
-    <a href="Group.html#method-i-category_options">#category_options</a>
-    &mdash;
-    <span class="container">Group</span>
-
-  <li class="method">
     <a href="Adjustment.html#method-i-charge-3F">#charge?</a>
     &mdash;
     <span class="container">Adjustment</span>
@@ -2363,11 +2500,6 @@
     <a href="PaymentGateway/Paybyway.html#method-i-charge_e_payment">#charge_e_payment</a>
     &mdash;
     <span class="container">PaymentGateway::Paybyway</span>
-
-  <li class="method">
-    <a href="Admin/InventoryItemsController.html#method-i-check">#check</a>
-    &mdash;
-    <span class="container">Admin::InventoryItemsController</span>
 
   <li class="method">
     <a href="CheckoutController.html#method-i-checkout">#checkout</a>
@@ -2385,6 +2517,11 @@
     <span class="container">Order</span>
 
   <li class="method">
+    <a href="OrdersController.html#method-i-claim">#claim</a>
+    &mdash;
+    <span class="container">OrdersController</span>
+
+  <li class="method">
     <a href="Order.html#method-i-clear_shipping_costs-21">#clear_shipping_costs!</a>
     &mdash;
     <span class="container">Order</span>
@@ -2396,11 +2533,6 @@
 
   <li class="method">
     <a href="ApplicationHelper.html#method-i-col">#col</a>
-    &mdash;
-    <span class="container">ApplicationHelper</span>
-
-  <li class="method">
-    <a href="ApplicationHelper.html#method-i-column_class">#column_class</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
 
@@ -2455,6 +2587,11 @@
     <span class="container">Order</span>
 
   <li class="method">
+    <a href="Shipment.html#method-i-complete-3F">#complete?</a>
+    &mdash;
+    <span class="container">Shipment</span>
+
+  <li class="method">
     <a href="Transfer.html#method-i-complete-3F">#complete?</a>
     &mdash;
     <span class="container">Transfer</span>
@@ -2465,9 +2602,24 @@
     <span class="container">Order</span>
 
   <li class="method">
+    <a href="Admin/InventoryChecksController.html#method-i-conclude">#conclude</a>
+    &mdash;
+    <span class="container">Admin::InventoryChecksController</span>
+
+  <li class="method">
     <a href="Admin/OrdersController.html#method-i-conclude">#conclude</a>
     &mdash;
     <span class="container">Admin::OrdersController</span>
+
+  <li class="method">
+    <a href="InventoryCheck.html#method-i-conclude-21">#conclude!</a>
+    &mdash;
+    <span class="container">InventoryCheck</span>
+
+  <li class="method">
+    <a href="InventoryCheck.html#method-i-concluded-3F">#concluded?</a>
+    &mdash;
+    <span class="container">InventoryCheck</span>
 
   <li class="method">
     <a href="Order.html#method-i-concluded-3F">#concluded?</a>
@@ -2503,6 +2655,11 @@
     <a href="Admin/ActivitiesController.html#method-i-context">#context</a>
     &mdash;
     <span class="container">Admin::ActivitiesController</span>
+
+  <li class="method">
+    <a href="Admin/SegmentsController.html#method-i-copy">#copy</a>
+    &mdash;
+    <span class="container">Admin::SegmentsController</span>
 
   <li class="method">
     <a href="Order.html#method-i-copy_items_to">#copy_items_to</a>
@@ -2705,6 +2862,11 @@
     <span class="container">Admin::StylesController</span>
 
   <li class="method">
+    <a href="Admin/TagsController.html#method-i-create">#create</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
+
+  <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-create">#create</a>
     &mdash;
     <span class="container">Admin::TaxCategoriesController</span>
@@ -2748,11 +2910,6 @@
     <a href="Adjustment.html#method-i-credit-3F">#credit?</a>
     &mdash;
     <span class="container">Adjustment</span>
-
-  <li class="method">
-    <a href="ApplicationHelper.html#method-i-css">#css</a>
-    &mdash;
-    <span class="container">ApplicationHelper</span>
 
   <li class="method">
     <a href="Store.html#method-i-csv_headers">#csv_headers</a>
@@ -2835,9 +2992,19 @@
     <span class="container">Order</span>
 
   <li class="method">
+    <a href="Order.html#method-i-customer_required-3F">#customer_required?</a>
+    &mdash;
+    <span class="container">Order</span>
+
+  <li class="method">
     <a href="Order.html#method-i-customer_string">#customer_string</a>
     &mdash;
     <span class="container">Order</span>
+
+  <li class="method">
+    <a href="Object.html#method-i-date_param">#date_param</a>
+    &mdash;
+    <span class="container">Object</span>
 
   <li class="method">
     <a href="Promotion.html#method-i-deactivate_at">#deactivate_at</a>
@@ -2885,6 +3052,11 @@
     <span class="container">OrderAuthorizer</span>
 
   <li class="method">
+    <a href="OrderItemAuthorizer.html#method-i-deletable_by-3F">#deletable_by?</a>
+    &mdash;
+    <span class="container">OrderItemAuthorizer</span>
+
+  <li class="method">
     <a href="OrderTypeAuthorizer.html#method-i-deletable_by-3F">#deletable_by?</a>
     &mdash;
     <span class="container">OrderTypeAuthorizer</span>
@@ -2928,6 +3100,11 @@
     <a href="Store.html#method-i-description">#description</a>
     &mdash;
     <span class="container">Store</span>
+
+  <li class="method">
+    <a href="Tag.html#method-i-description">#description</a>
+    &mdash;
+    <span class="container">Tag</span>
 
   <li class="method">
     <a href="Inventory.html#method-i-destock-21">#destock!</a>
@@ -3075,6 +3252,11 @@
     <span class="container">Admin::StylesController</span>
 
   <li class="method">
+    <a href="Admin/TagsController.html#method-i-destroy">#destroy</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
+
+  <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-destroy">#destroy</a>
     &mdash;
     <span class="container">Admin::TaxCategoriesController</span>
@@ -3115,6 +3297,16 @@
     <span class="container">Image</span>
 
   <li class="method">
+    <a href="Admin/InventoryCheckItemsController.html#method-i-discard">#discard</a>
+    &mdash;
+    <span class="container">Admin::InventoryCheckItemsController</span>
+
+  <li class="method">
+    <a href="InventoryCheckItem.html#method-i-discard-21">#discard!</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
+
+  <li class="method">
     <a href="ShippingGateway/Truckload.html#method-i-distance_lookup">#distance_lookup</a>
     &mdash;
     <span class="container">ShippingGateway::Truckload</span>
@@ -3140,6 +3332,11 @@
     <span class="container">ApplicationHelper</span>
 
   <li class="method">
+    <a href="Admin/PagesController.html#method-i-duplicate">#duplicate</a>
+    &mdash;
+    <span class="container">Admin::PagesController</span>
+
+  <li class="method">
     <a href="Admin/ProductsController.html#method-i-duplicate">#duplicate</a>
     &mdash;
     <span class="container">Admin::ProductsController</span>
@@ -3148,6 +3345,31 @@
     <a href="OrdersController.html#method-i-duplicate">#duplicate</a>
     &mdash;
     <span class="container">OrdersController</span>
+
+  <li class="method">
+    <a href="Column.html#method-i-duplicate">#duplicate</a>
+    &mdash;
+    <span class="container">Column</span>
+
+  <li class="method">
+    <a href="Picture.html#method-i-duplicate">#duplicate</a>
+    &mdash;
+    <span class="container">Picture</span>
+
+  <li class="method">
+    <a href="Section.html#method-i-duplicate">#duplicate</a>
+    &mdash;
+    <span class="container">Section</span>
+
+  <li class="method">
+    <a href="Segment.html#method-i-duplicate">#duplicate</a>
+    &mdash;
+    <span class="container">Segment</span>
+
+  <li class="method">
+    <a href="Page.html#method-i-duplicate-21">#duplicate!</a>
+    &mdash;
+    <span class="container">Page</span>
 
   <li class="method">
     <a href="Product.html#method-i-duplicate-21">#duplicate!</a>
@@ -3188,6 +3410,11 @@
     <a href="Admin/GroupsController.html#method-i-edit">#edit</a>
     &mdash;
     <span class="container">Admin::GroupsController</span>
+
+  <li class="method">
+    <a href="Admin/ImagesController.html#method-i-edit">#edit</a>
+    &mdash;
+    <span class="container">Admin::ImagesController</span>
 
   <li class="method">
     <a href="Admin/InventoriesController.html#method-i-edit">#edit</a>
@@ -3268,6 +3495,11 @@
     <a href="Admin/StylesController.html#method-i-edit">#edit</a>
     &mdash;
     <span class="container">Admin::StylesController</span>
+
+  <li class="method">
+    <a href="Admin/TagsController.html#method-i-edit">#edit</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
 
   <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-edit">#edit</a>
@@ -3378,6 +3610,11 @@
     <a href="ShippingGateway/Pakettikauppa/Base.html#method-i-fetch_label">#fetch_label</a>
     &mdash;
     <span class="container">ShippingGateway::Pakettikauppa::Base</span>
+
+  <li class="method">
+    <a href="InventoryCheckItem.html#method-i-final-3F">#final?</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
 
   <li class="method">
     <a href="Store.html#method-i-first_category">#first_category</a>
@@ -3535,11 +3772,6 @@
     <span class="container">ApplicationController</span>
 
   <li class="method">
-    <a href="Store.html#method-i-guest_user_defaults">#guest_user_defaults</a>
-    &mdash;
-    <span class="container">Store</span>
-
-  <li class="method">
     <a href="Section.html#method-i-gutter">#gutter</a>
     &mdash;
     <span class="container">Section</span>
@@ -3588,6 +3820,11 @@
     <a href="Order.html#method-i-has_pending_shipment-3F">#has_pending_shipment?</a>
     &mdash;
     <span class="container">Order</span>
+
+  <li class="method">
+    <a href="Segment.html#method-i-has_pictures-3F">#has_pictures?</a>
+    &mdash;
+    <span class="container">Segment</span>
 
   <li class="method">
     <a href="Order.html#method-i-has_shipping-3F">#has_shipping?</a>
@@ -3705,6 +3942,11 @@
     <span class="container">Transfer</span>
 
   <li class="method">
+    <a href="ApplicationHelper.html#method-i-indent">#indent</a>
+    &mdash;
+    <span class="container">ApplicationHelper</span>
+
+  <li class="method">
     <a href="Admin/ActivitiesController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">Admin::ActivitiesController</span>
@@ -3760,6 +4002,11 @@
     <span class="container">Admin::InventoryItemsController</span>
 
   <li class="method">
+    <a href="Admin/OrderItemsController.html#method-i-index">#index</a>
+    &mdash;
+    <span class="container">Admin::OrderItemsController</span>
+
+  <li class="method">
     <a href="Admin/OrderTypesController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">Admin::OrderTypesController</span>
@@ -3773,6 +4020,11 @@
     <a href="Admin/PagesController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">Admin::PagesController</span>
+
+  <li class="method">
+    <a href="Admin/PicturesController.html#method-i-index">#index</a>
+    &mdash;
+    <span class="container">Admin::PicturesController</span>
 
   <li class="method">
     <a href="Admin/PoliciesController.html#method-i-index">#index</a>
@@ -3810,6 +4062,11 @@
     <span class="container">Admin::StoresController</span>
 
   <li class="method">
+    <a href="Admin/TagsController.html#method-i-index">#index</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
+
+  <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">Admin::TaxCategoriesController</span>
@@ -3838,6 +4095,11 @@
     <a href="StoreController.html#method-i-index">#index</a>
     &mdash;
     <span class="container">StoreController</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-inherit_from_master">#inherit_from_master</a>
+    &mdash;
+    <span class="container">Product</span>
 
   <li class="method">
     <a href="Order.html#method-i-insert">#insert</a>
@@ -3915,12 +4177,17 @@
     <span class="container">Promotion</span>
 
   <li class="method">
+    <a href="Inventory.html#method-i-items_by_product">#items_by_product</a>
+    &mdash;
+    <span class="container">Inventory</span>
+
+  <li class="method">
     <a href="Order.html#method-i-items_by_vendor">#items_by_vendor</a>
     &mdash;
     <span class="container">Order</span>
 
   <li class="method">
-    <a href="Order.html#method-i-items_pending_shipping">#items_pending_shipping</a>
+    <a href="Order.html#method-i-items_waiting">#items_waiting</a>
     &mdash;
     <span class="container">Order</span>
 
@@ -3945,6 +4212,11 @@
     <span class="container">Image</span>
 
   <li class="method">
+    <a href="Order.html#method-i-last_completed_shipment">#last_completed_shipment</a>
+    &mdash;
+    <span class="container">Order</span>
+
+  <li class="method">
     <a href="Admin/PagesController.html#method-i-layout">#layout</a>
     &mdash;
     <span class="container">Admin::PagesController</span>
@@ -3963,6 +4235,11 @@
     <a href="Product.html#method-i-lead_time_days">#lead_time_days</a>
     &mdash;
     <span class="container">Product</span>
+
+  <li class="method">
+    <a href="InventoryCheck.html#method-i-life_pro_tip">#life_pro_tip</a>
+    &mdash;
+    <span class="container">InventoryCheck</span>
 
   <li class="method">
     <a href="Order.html#method-i-life_pro_tip">#life_pro_tip</a>
@@ -3985,16 +4262,6 @@
     <span class="container">ShippingGateway::Pakettikauppa::Base</span>
 
   <li class="method">
-    <a href="Product.html#method-i-live_promoted_items">#live_promoted_items</a>
-    &mdash;
-    <span class="container">Product</span>
-
-  <li class="method">
-    <a href="Product.html#method-i-live_promotions">#live_promotions</a>
-    &mdash;
-    <span class="container">Product</span>
-
-  <li class="method">
     <a href="Shipment.html#method-i-load-21">#load!</a>
     &mdash;
     <span class="container">Shipment</span>
@@ -4003,6 +4270,11 @@
     <a href="Transfer.html#method-i-load-21">#load!</a>
     &mdash;
     <span class="container">Transfer</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-loaded">#loaded</a>
+    &mdash;
+    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="ApplicationHelper.html#method-i-loading_spinner">#loading_spinner</a>
@@ -4060,6 +4332,11 @@
     <span class="container">Product</span>
 
   <li class="method">
+    <a href="InventoryCheckItem.html#method-i-matching-3F">#matching?</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
+
+  <li class="method">
     <a href="ApplicationController.html#method-i-may_shop_at-3F">#may_shop_at?</a>
     &mdash;
     <span class="container">ApplicationController</span>
@@ -4075,6 +4352,16 @@
     <span class="container">ApplicationHelper</span>
 
   <li class="method">
+    <a href="InventoryCheck.html#method-i-merge">#merge</a>
+    &mdash;
+    <span class="container">InventoryCheck</span>
+
+  <li class="method">
+    <a href="Transfer.html#method-i-merge">#merge</a>
+    &mdash;
+    <span class="container">Transfer</span>
+
+  <li class="method">
     <a href="ApplicationHelper.html#method-i-meta_tags_for">#meta_tags_for</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
@@ -4083,6 +4370,11 @@
     <a href="Admin/ShipmentsHelper.html#method-i-metadata_table">#metadata_table</a>
     &mdash;
     <span class="container">Admin::ShipmentsHelper</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-modal_ordering-3F">#modal_ordering?</a>
+    &mdash;
+    <span class="container">Product</span>
 
   <li class="method">
     <a href="AlternatePrice.html#method-i-modifier">#modifier</a>
@@ -4225,6 +4517,11 @@
     <span class="container">Admin::StoresController</span>
 
   <li class="method">
+    <a href="Admin/TagsController.html#method-i-new">#new</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
+
+  <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-new">#new</a>
     &mdash;
     <span class="container">Admin::TaxCategoriesController</span>
@@ -4248,6 +4545,11 @@
     <a href="Price.html#method-i-nil-3F">#nil?</a>
     &mdash;
     <span class="container">Price</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-not_priced-3F">#not_priced?</a>
+    &mdash;
+    <span class="container">Product</span>
 
   <li class="method">
     <a href="OrderMailer.html#method-i-notification">#notification</a>
@@ -4288,6 +4590,11 @@
     <a href="InventoryItemSearch.html#method-i-options">#options</a>
     &mdash;
     <span class="container">InventoryItemSearch</span>
+
+  <li class="method">
+    <a href="OrderItemSearch.html#method-i-options">#options</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
 
   <li class="method">
     <a href="OrderReportRowSearch.html#method-i-options">#options</a>
@@ -4360,6 +4667,11 @@
     <span class="container">User</span>
 
   <li class="method">
+    <a href="Admin/SegmentsController.html#method-i-paste">#paste</a>
+    &mdash;
+    <span class="container">Admin::SegmentsController</span>
+
+  <li class="method">
     <a href="Page.html#method-i-path">#path</a>
     &mdash;
     <span class="container">Page</span>
@@ -4375,9 +4687,34 @@
     <span class="container">OrderType</span>
 
   <li class="method">
+    <a href="CheckoutController.html#method-i-payment_methods">#payment_methods</a>
+    &mdash;
+    <span class="container">CheckoutController</span>
+
+  <li class="method">
+    <a href="PaymentGateway/Paybyway.html#method-i-payment_methods">#payment_methods</a>
+    &mdash;
+    <span class="container">PaymentGateway::Paybyway</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-pending">#pending</a>
+    &mdash;
+    <span class="container">OrderItem</span>
+
+  <li class="method">
+    <a href="InventoryCheckItem.html#method-i-pending-3F">#pending?</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
+
+  <li class="method">
     <a href="Order.html#method-i-pending-3F">#pending?</a>
     &mdash;
     <span class="container">Order</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-pending-3F">#pending?</a>
+    &mdash;
+    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="Policy.html#method-i-pending-3F">#pending?</a>
@@ -4388,11 +4725,6 @@
     <a href="Shipment.html#method-i-pending-3F">#pending?</a>
     &mdash;
     <span class="container">Shipment</span>
-
-  <li class="method">
-    <a href="OrderItem.html#method-i-pending_shipping-3F">#pending_shipping?</a>
-    &mdash;
-    <span class="container">OrderItem</span>
 
   <li class="method">
     <a href="ContentGenerationJob.html#method-i-perform">#perform</a>
@@ -4413,6 +4745,11 @@
     <a href="PromotionActivationJob.html#method-i-perform">#perform</a>
     &mdash;
     <span class="container">PromotionActivationJob</span>
+
+  <li class="method">
+    <a href="Pictureable.html#method-i-picture_count">#picture_count</a>
+    &mdash;
+    <span class="container">Pictureable</span>
 
   <li class="method">
     <a href="Section.html#method-i-picture_options">#picture_options</a>
@@ -4458,6 +4795,16 @@
     <a href="ApplicationController.html#method-i-premium_pricing">#premium_pricing</a>
     &mdash;
     <span class="container">ApplicationController</span>
+
+  <li class="method">
+    <a href="Admin/OrdersController.html#method-i-preview">#preview</a>
+    &mdash;
+    <span class="container">Admin::OrdersController</span>
+
+  <li class="method">
+    <a href="OrdersController.html#method-i-preview">#preview</a>
+    &mdash;
+    <span class="container">OrdersController</span>
 
   <li class="method">
     <a href="OrderItem.html#method-i-price_for_export">#price_for_export</a>
@@ -4565,7 +4912,17 @@
     <span class="container">Product</span>
 
   <li class="method">
+    <a href="Admin/ReportsController.html#method-i-product_sales">#product_sales</a>
+    &mdash;
+    <span class="container">Admin::ReportsController</span>
+
+  <li class="method">
     <a href="StoreHelper.html#method-i-product_stock">#product_stock</a>
+    &mdash;
+    <span class="container">StoreHelper</span>
+
+  <li class="method">
+    <a href="StoreHelper.html#method-i-product_url">#product_url</a>
     &mdash;
     <span class="container">StoreHelper</span>
 
@@ -4675,9 +5032,24 @@
     <span class="container">Admin::ShipmentsController</span>
 
   <li class="method">
+    <a href="Order.html#method-i-refresh-21">#refresh!</a>
+    &mdash;
+    <span class="container">Order</span>
+
+  <li class="method">
     <a href="Shipment.html#method-i-reload-21">#reload!</a>
     &mdash;
     <span class="container">Shipment</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-remove_favorite">#remove_favorite</a>
+    &mdash;
+    <span class="container">StoreController</span>
+
+  <li class="method">
+    <a href="Page.html#method-i-rename_as_copy">#rename_as_copy</a>
+    &mdash;
+    <span class="container">Page</span>
 
   <li class="method">
     <a href="Admin/SegmentsController.html#method-i-reorder">#reorder</a>
@@ -4720,12 +5092,7 @@
     <span class="container">Product</span>
 
   <li class="method">
-    <a href="Product.html#method-i-reset_itself-21">#reset_itself!</a>
-    &mdash;
-    <span class="container">Product</span>
-
-  <li class="method">
-    <a href="Product.html#method-i-reset_live_status-21">#reset_live_status!</a>
+    <a href="Product.html#method-i-reset_live_status">#reset_live_status</a>
     &mdash;
     <span class="container">Product</span>
 
@@ -4738,6 +5105,11 @@
     <a href="OrderItem.html#method-i-reset_subitems-21">#reset_subitems!</a>
     &mdash;
     <span class="container">OrderItem</span>
+
+  <li class="method">
+    <a href="Admin/InventoryChecksController.html#method-i-resolve">#resolve</a>
+    &mdash;
+    <span class="container">Admin::InventoryChecksController</span>
 
   <li class="method">
     <a href="Activity.html#method-i-resource_class">#resource_class</a>
@@ -4830,6 +5202,11 @@
     <span class="container">ApplicationController</span>
 
   <li class="method">
+    <a href="InventoryItemSearch.html#method-i-search_categories">#search_categories</a>
+    &mdash;
+    <span class="container">InventoryItemSearch</span>
+
+  <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_categories">#search_categories</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
@@ -4850,9 +5227,19 @@
     <span class="container">ProductSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_concluded_only">#search_concluded_only</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderSearch.html#method-i-search_customer">#search_customer</a>
     &mdash;
     <span class="container">OrderSearch</span>
+
+  <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_customer_id">#search_customer_id</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
 
   <li class="method">
     <a href="OrderSearch.html#method-i-search_customer_id">#search_customer_id</a>
@@ -4863,6 +5250,11 @@
     <a href="OrderSearch.html#method-i-search_date">#search_date</a>
     &mdash;
     <span class="container">OrderSearch</span>
+
+  <li class="method">
+    <a href="ProductSearch.html#method-i-search_described">#search_described</a>
+    &mdash;
+    <span class="container">ProductSearch</span>
 
   <li class="method">
     <a href="TransferSearch.html#method-i-search_destination">#search_destination</a>
@@ -4905,6 +5297,11 @@
     <span class="container">StoreSearch</span>
 
   <li class="method">
+    <a href="ProductSearch.html#method-i-search_illustrated">#search_illustrated</a>
+    &mdash;
+    <span class="container">ProductSearch</span>
+
+  <li class="method">
     <a href="ProductSearch.html#method-i-search_inventories">#search_inventories</a>
     &mdash;
     <span class="container">ProductSearch</span>
@@ -4925,6 +5322,11 @@
     <span class="container">CategorySearch</span>
 
   <li class="method">
+    <a href="ImageSearch.html#method-i-search_keyword">#search_keyword</a>
+    &mdash;
+    <span class="container">ImageSearch</span>
+
+  <li class="method">
     <a href="InventoryCheckSearch.html#method-i-search_keyword">#search_keyword</a>
     &mdash;
     <span class="container">InventoryCheckSearch</span>
@@ -4938,6 +5340,11 @@
     <a href="OrderReportRowSearch.html#method-i-search_keyword">#search_keyword</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
+
+  <li class="method">
+    <a href="OrderSearch.html#method-i-search_keyword">#search_keyword</a>
+    &mdash;
+    <span class="container">OrderSearch</span>
 
   <li class="method">
     <a href="ProductSearch.html#method-i-search_keyword">#search_keyword</a>
@@ -4985,6 +5392,11 @@
     <span class="container">InventoryItemSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_order_type">#search_order_type</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_order_type">#search_order_type</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
@@ -5030,6 +5442,11 @@
     <span class="container">InventoryItemSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_product_id">#search_product_id</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_product_id">#search_product_id</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
@@ -5050,9 +5467,19 @@
     <span class="container">InventoryItemSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_shipping_country_code">#search_shipping_country_code</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_shipping_country_code">#search_shipping_country_code</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
+
+  <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_since_date">#search_since_date</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
 
   <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_since_date">#search_since_date</a>
@@ -5095,6 +5522,11 @@
     <span class="container">InventoryCheckSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_store">#search_store</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderSearch.html#method-i-search_store">#search_store</a>
     &mdash;
     <span class="container">OrderSearch</span>
@@ -5120,19 +5552,34 @@
     <span class="container">InventoryItemSearch</span>
 
   <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_store_portal_id">#search_store_portal_id</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
+
+  <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_store_portal_id">#search_store_portal_id</a>
     &mdash;
     <span class="container">OrderReportRowSearch</span>
 
   <li class="method">
-    <a href="OrderSearch.html#method-i-search_summary">#search_summary</a>
+    <a href="ProductSearch.html#method-i-search_tags">#search_tags</a>
     &mdash;
-    <span class="container">OrderSearch</span>
+    <span class="container">ProductSearch</span>
+
+  <li class="method">
+    <a href="OrderReportRowSearch.html#method-i-search_temporal_unit">#search_temporal_unit</a>
+    &mdash;
+    <span class="container">OrderReportRowSearch</span>
 
   <li class="method">
     <a href="ActivitySearch.html#method-i-search_until_date">#search_until_date</a>
     &mdash;
     <span class="container">ActivitySearch</span>
+
+  <li class="method">
+    <a href="OrderItemSearch.html#method-i-search_until_date">#search_until_date</a>
+    &mdash;
+    <span class="container">OrderItemSearch</span>
 
   <li class="method">
     <a href="OrderReportRowSearch.html#method-i-search_until_date">#search_until_date</a>
@@ -5180,9 +5627,9 @@
     <span class="container">Store</span>
 
   <li class="method">
-    <a href="ApplicationHelper.html#method-i-segment_style">#segment_style</a>
+    <a href="Admin/SegmentsHelper.html#method-i-segment_placeholder">#segment_placeholder</a>
     &mdash;
-    <span class="container">ApplicationHelper</span>
+    <span class="container">Admin::SegmentsHelper</span>
 
   <li class="method">
     <a href="Admin/ImagesController.html#method-i-select">#select</a>
@@ -5248,6 +5695,16 @@
     <a href="ShippingGateway/Vendor.html#method-i-send_shipment">#send_shipment</a>
     &mdash;
     <span class="container">ShippingGateway::Vendor</span>
+
+  <li class="method">
+    <a href="Order.html#method-i-set_amount">#set_amount</a>
+    &mdash;
+    <span class="container">Order</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-set_order_amount">#set_order_amount</a>
+    &mdash;
+    <span class="container">StoreController</span>
 
   <li class="method">
     <a href="Admin/ProductsController.html#method-i-set_price">#set_price</a>
@@ -5345,11 +5802,6 @@
     <span class="container">Department</span>
 
   <li class="method">
-    <a href="Page.html#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
-    &mdash;
-    <span class="container">Page</span>
-
-  <li class="method">
     <a href="Product.html#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
     &mdash;
     <span class="container">Product</span>
@@ -5358,6 +5810,11 @@
     <a href="Promotion.html#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
     &mdash;
     <span class="container">Promotion</span>
+
+  <li class="method">
+    <a href="Tag.html#method-i-should_generate_new_friendly_id-3F">#should_generate_new_friendly_id?</a>
+    &mdash;
+    <span class="container">Tag</span>
 
   <li class="method">
     <a href="Admin/ActivitiesController.html#method-i-show">#show</a>
@@ -5455,6 +5912,11 @@
     <span class="container">Admin::SegmentsController</span>
 
   <li class="method">
+    <a href="Admin/ShipmentsController.html#method-i-show">#show</a>
+    &mdash;
+    <span class="container">Admin::ShipmentsController</span>
+
+  <li class="method">
     <a href="Admin/ShippingMethodsController.html#method-i-show">#show</a>
     &mdash;
     <span class="container">Admin::ShippingMethodsController</span>
@@ -5463,6 +5925,11 @@
     <a href="Admin/StoresController.html#method-i-show">#show</a>
     &mdash;
     <span class="container">Admin::StoresController</span>
+
+  <li class="method">
+    <a href="Admin/TagsController.html#method-i-show">#show</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
 
   <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-show">#show</a>
@@ -5505,7 +5972,22 @@
     <span class="container">StoreController</span>
 
   <li class="method">
+    <a href="StoreController.html#method-i-show_category_order">#show_category_order</a>
+    &mdash;
+    <span class="container">StoreController</span>
+
+  <li class="method">
     <a href="StoreController.html#method-i-show_department">#show_department</a>
+    &mdash;
+    <span class="container">StoreController</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-show_favorite">#show_favorite</a>
+    &mdash;
+    <span class="container">StoreController</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-show_favorites">#show_favorites</a>
     &mdash;
     <span class="container">StoreController</span>
 
@@ -5526,6 +6008,11 @@
 
   <li class="method">
     <a href="StoreController.html#method-i-show_promotion">#show_promotion</a>
+    &mdash;
+    <span class="container">StoreController</span>
+
+  <li class="method">
+    <a href="StoreController.html#method-i-show_tag">#show_tag</a>
     &mdash;
     <span class="container">StoreController</span>
 
@@ -5565,6 +6052,11 @@
     <span class="container">Promotion</span>
 
   <li class="method">
+    <a href="Tag.html#method-i-slugger">#slugger</a>
+    &mdash;
+    <span class="container">Tag</span>
+
+  <li class="method">
     <a href="Property.html#method-i-sluggify">#sluggify</a>
     &mdash;
     <span class="container">Property</span>
@@ -5585,6 +6077,11 @@
     <span class="container">TransferItem</span>
 
   <li class="method">
+    <a href="TransferItem.html#method-i-source_item_choices">#source_item_choices</a>
+    &mdash;
+    <span class="container">TransferItem</span>
+
+  <li class="method">
     <a href="Section.html#method-i-spread-3F">#spread?</a>
     &mdash;
     <span class="container">Section</span>
@@ -5600,9 +6097,19 @@
     <span class="container">ApplicationController</span>
 
   <li class="method">
+    <a href="InventoryCheckItem.html#method-i-stocked-3F">#stocked?</a>
+    &mdash;
+    <span class="container">InventoryCheckItem</span>
+
+  <li class="method">
     <a href="Hostname.html#method-i-store_portal">#store_portal</a>
     &mdash;
     <span class="container">Hostname</span>
+
+  <li class="method">
+    <a href="Stylable.html#method-i-style">#style</a>
+    &mdash;
+    <span class="container">Stylable</span>
 
   <li class="method">
     <a href="Store.html#method-i-stylesheet_source">#stylesheet_source</a>
@@ -5638,6 +6145,11 @@
     <a href="ApplicationHelper.html#method-i-tab_set">#tab_set</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
+
+  <li class="method">
+    <a href="Store.html#method-i-tag_options">#tag_options</a>
+    &mdash;
+    <span class="container">Store</span>
 
   <li class="method">
     <a href="Product.html#method-i-tangible-3F">#tangible?</a>
@@ -5690,6 +6202,11 @@
     <span class="container">Store</span>
 
   <li class="method">
+    <a href="Reports/Sales.html#method-i-temporal_data">#temporal_data</a>
+    &mdash;
+    <span class="container">Reports::Sales</span>
+
+  <li class="method">
     <a href="ApplicationController.html#method-i-third_party-3F">#third_party?</a>
     &mdash;
     <span class="container">ApplicationController</span>
@@ -5713,11 +6230,6 @@
     <a href="Category.html#method-i-to_option">#to_option</a>
     &mdash;
     <span class="container">Category</span>
-
-  <li class="method">
-    <a href="Page.html#method-i-to_option">#to_option</a>
-    &mdash;
-    <span class="container">Page</span>
 
   <li class="method">
     <a href="Page.html#method-i-to_partial_path">#to_partial_path</a>
@@ -5795,6 +6307,11 @@
     <span class="container">ShippingGateway::Vendor</span>
 
   <li class="method">
+    <a href="Category.html#method-i-to_path">#to_path</a>
+    &mdash;
+    <span class="container">Category</span>
+
+  <li class="method">
     <a href="Activity.html#method-i-to_s">#to_s</a>
     &mdash;
     <span class="container">Activity</span>
@@ -5813,6 +6330,11 @@
     <a href="Column.html#method-i-to_s">#to_s</a>
     &mdash;
     <span class="container">Column</span>
+
+  <li class="method">
+    <a href="Country.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Country</span>
 
   <li class="method">
     <a href="CustomerAsset.html#method-i-to_s">#to_s</a>
@@ -5895,6 +6417,11 @@
     <span class="container">Page</span>
 
   <li class="method">
+    <a href="Picture.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Picture</span>
+
+  <li class="method">
     <a href="Policy.html#method-i-to_s">#to_s</a>
     &mdash;
     <span class="container">Policy</span>
@@ -5955,6 +6482,11 @@
     <span class="container">Store</span>
 
   <li class="method">
+    <a href="Tag.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Tag</span>
+
+  <li class="method">
     <a href="TaxCategory.html#method-i-to_s">#to_s</a>
     &mdash;
     <span class="container">TaxCategory</span>
@@ -6010,19 +6542,9 @@
     <span class="container">InventoryItem</span>
 
   <li class="method">
-    <a href="Product.html#method-i-touch_categories">#touch_categories</a>
-    &mdash;
-    <span class="container">Product</span>
-
-  <li class="method">
     <a href="Promotion.html#method-i-touch_products">#touch_products</a>
     &mdash;
     <span class="container">Promotion</span>
-
-  <li class="method">
-    <a href="Product.html#method-i-touch_variants">#touch_variants</a>
-    &mdash;
-    <span class="container">Product</span>
 
   <li class="method">
     <a href="ApplicationController.html#method-i-track">#track</a>
@@ -6098,6 +6620,11 @@
     <a href="StoreAuthorizer.html#method-i-updatable_by-3F">#updatable_by?</a>
     &mdash;
     <span class="container">StoreAuthorizer</span>
+
+  <li class="method">
+    <a href="TagAuthorizer.html#method-i-updatable_by-3F">#updatable_by?</a>
+    &mdash;
+    <span class="container">TagAuthorizer</span>
 
   <li class="method">
     <a href="TransferAuthorizer.html#method-i-updatable_by-3F">#updatable_by?</a>
@@ -6240,6 +6767,11 @@
     <span class="container">Admin::StylesController</span>
 
   <li class="method">
+    <a href="Admin/TagsController.html#method-i-update">#update</a>
+    &mdash;
+    <span class="container">Admin::TagsController</span>
+
+  <li class="method">
     <a href="Admin/TaxCategoriesController.html#method-i-update">#update</a>
     &mdash;
     <span class="container">Admin::TaxCategoriesController</span>
@@ -6290,6 +6822,21 @@
     <span class="container">Uploaders::Products</span>
 
   <li class="method">
+    <a href="Order.html#method-i-update_shipped-21">#update_shipped!</a>
+    &mdash;
+    <span class="container">Order</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-update_shipped-21">#update_shipped!</a>
+    &mdash;
+    <span class="container">OrderItem</span>
+
+  <li class="method">
+    <a href="Product.html#method-i-update_variants">#update_variants</a>
+    &mdash;
+    <span class="container">Product</span>
+
+  <li class="method">
     <a href="Admin/ProductsController.html#method-i-upload_file">#upload_file</a>
     &mdash;
     <span class="container">Admin::ProductsController</span>
@@ -6308,6 +6855,16 @@
     <a href="ApplicationController.html#method-i-user_shopping_cart">#user_shopping_cart</a>
     &mdash;
     <span class="container">ApplicationController</span>
+
+  <li class="method">
+    <a href="PaymentGateway/PaymentMethod.html#method-i-valid_for-3F">#valid_for?</a>
+    &mdash;
+    <span class="container">PaymentGateway::PaymentMethod</span>
+
+  <li class="method">
+    <a href="Adjustment.html#method-i-validity_last_date">#validity_last_date</a>
+    &mdash;
+    <span class="container">Adjustment</span>
 
   <li class="method">
     <a href="ProductProperty.html#method-i-value-3D">#value=</a>
@@ -6380,6 +6937,16 @@
     <span class="container">Shipment</span>
 
   <li class="method">
+    <a href="OrderItem.html#method-i-waiting">#waiting</a>
+    &mdash;
+    <span class="container">OrderItem</span>
+
+  <li class="method">
+    <a href="OrderItem.html#method-i-waiting-3F">#waiting?</a>
+    &mdash;
+    <span class="container">OrderItem</span>
+
+  <li class="method">
     <a href="Shipment.html#method-i-weight">#weight</a>
     &mdash;
     <span class="container">Shipment</span>
@@ -6405,14 +6972,14 @@
     <span class="container">Price</span>
 
   <li class="method">
-    <a href="Image.html#method-i-wysiwyg_style">#wysiwyg_style</a>
+    <a href="Segment.html#method-i-without_settings-3F">#without_settings?</a>
     &mdash;
-    <span class="container">Image</span>
+    <span class="container">Segment</span>
 
   <li class="method">
-    <a href="Image.html#method-i-wysiwyg_url">#wysiwyg_url</a>
+    <a href="Styles/Inline.html#method-i-write_inline_styles">#write_inline_styles</a>
     &mdash;
-    <span class="container">Image</span>
+    <span class="container">Styles::Inline</span>
 
   <li class="method">
     <a href="Price.html#method-i-zero-3F">#zero?</a>
