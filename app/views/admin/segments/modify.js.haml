@@ -1,2 +1,3 @@
+$('##{dom_id(@segment)} .segment-bg-container').replaceWith("#{j render partial: 'segments/background', object: @segment, as: :segment}");
 $('##{dom_id(@segment)} .segment-content-wrap').replaceWith("#{j render partial: 'admin/segments/content', object: @segment, as: :segment}");
 $('##{dom_id(@segment)}').addClass('active');
