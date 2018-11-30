@@ -264,11 +264,16 @@ $navbar-icon-padding: 12px !default;
       opacity: 1;
     }
   }
-  &.active,
-  &.editing {
+  &.active {
     .segment-content-wrap {
       z-index: 2;
       outline: $outline-width solid rgba($brand-info, 0.5);
+    }
+  }
+  &.editing {
+    .segment-content {
+      outline: 3px dotted $brand-primary;
+      outline-offset: 3px;
     }
   }
   .editable-content {
