@@ -60,4 +60,5 @@ Rails.application.configure do
   # API configuration.
   config.x.pakettikauppa.api_uri = 'https://apitest.pakettikauppa.fi/'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
+  config.stripe.publishable_key = 'pk_test_HpO1Z1azrRN6l4M35cQSxLCE'
 end
