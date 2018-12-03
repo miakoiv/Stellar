@@ -376,7 +376,7 @@ class Product < ActiveRecord::Base
     def associations_changed(context)
       if persisted?
         context.touch if context.persisted?
-        master_product.touch if variant?
+        touch_master_and_variants if variant?
         update_variants if has_variants?
       end
       true
@@ -399,6 +399,17 @@ class Product < ActiveRecord::Base
     def inherit_from_master
       self.categories = master_product.categories
       self.tags = master_product.tags
+      true
+    end
+
+    # Touches master and all its variants to bust partial caches.
+    def touch_master_and_variants
+      transaction do
+        master_product.touch
+        master_product.variants.each do |variant|
+          variant.touch
+        end
+      end
       true
     end
 
