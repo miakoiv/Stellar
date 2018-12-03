@@ -371,16 +371,24 @@ class Product < ActiveRecord::Base
       true
     end
 
-    # Callback to touch the associated object that was added or removed.
+    # Callback to touch the associated object that was added or removed,
+    # and update the master/variants to bust their partial caches.
     def associations_changed(context)
-      context.touch if persisted? && context.persisted?
+      if persisted?
+        context.touch if context.persisted?
+        master_product.touch if variant?
+        update_variants if has_variants?
+      end
       true
     end
 
+    # All variants are saved to have them inherit master categories and tags,
+    # and touched to force a timestamp update in case no changes are made.
     def update_variants
       transaction do
         variants.each do |variant|
           variant.save
+          variant.touch
         end
       end
       true

@@ -12,7 +12,7 @@
       = render partial: 'admin/alternate_prices/edit_tbody', object: product, as: :product
 
 .table-responsive
-  = form_for [:admin, product, product.alternate_prices.new], remote: true do |f|
+  = form_for [:admin, product, AlternatePrice.new], remote: true do |f|
     %table.table
       %tfoot
         %tr

@@ -13,7 +13,7 @@
       = render partial: 'admin/component_entries/edit_tbody', object: product, as: :product
 
 .table-responsive
-  = form_for [:admin, product, product.component_entries.build(quantity: 1)], remote: true do |f|
+  = form_for [:admin, product, ComponentEntry.new(quantity: 1)], remote: true do |f|
     %table.table
       %tfoot
         %tr
