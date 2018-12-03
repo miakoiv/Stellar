@@ -73,6 +73,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.2)
     crass (1.0.4)
     creek (2.4.1)
       http (~> 3.0)
@@ -211,6 +212,8 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.4.10)
+    net-http-persistent (3.0.0)
+      connection_pool (~> 2.2)
     netrc (0.11.0)
     nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
@@ -336,6 +339,13 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stickykit-rails (1.1.2)
+    stripe (4.2.0)
+      faraday (~> 0.13)
+      net-http-persistent (~> 3.0)
+    stripe-rails (1.5.4)
+      rails (>= 3)
+      responders
+      stripe (>= 1.36.2)
     temple (0.8.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
@@ -429,6 +439,7 @@ DEPENDENCIES
   selectize-rails
   spring
   stickykit-rails
+  stripe-rails
   twitter-bootstrap-rails-confirm
   uglifier (>= 1.3.0, < 4.0.0)
   unobtrusive_flash (>= 3)

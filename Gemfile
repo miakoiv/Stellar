@@ -80,6 +80,9 @@ gem 'devise-bootstrap-views', '~> 0.0.11'
 gem 'authority'
 gem 'rolify'
 
+# stripe.com integration
+gem 'stripe-rails'
+
 # Twitter Bootstrap scaffolds
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'font-awesome-sass', '~> 4.7.0'
