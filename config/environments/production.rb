@@ -90,4 +90,5 @@ Rails.application.configure do
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
   config.stripe.publishable_key = 'pk_live_TxdcZiBgT9qfi5ecgFsGucrS'
   config.stripe.secret_key = 'sk_live_UDXKAWHRR6DhgAnT45IynUQI'
+  config.stripe.signing_secret = 'whsec_KWW8V7FvlFRtYn9s1CUeFAzVMhD8rkvC'
 end
