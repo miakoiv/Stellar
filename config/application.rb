@@ -28,5 +28,8 @@ module Spry
 
     # Let DelayedJob do the heavy lifting for ActiveJob.
     config.active_job.queue_adapter = :delayed_job
+
+    # Don't automount stripe engine, provide a route instead.
+    config.stripe.auto_mount = false
   end
 end

@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   #  end
   #end
 
+  # Mount stripe engine at /stripe
+  mount Stripe::Engine => '/stripe'
+
   resources :orders do
     resources :order_items, shallow: true
     member do
