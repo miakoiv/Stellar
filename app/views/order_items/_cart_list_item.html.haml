@@ -41,10 +41,11 @@
                 .input-group-btn
                   = link_to icon('remove'), order_item_path(order_item), remote: true, method: :delete, class: 'btn btn-danger'
       %p.unit-price.text-right
-        à
-        %span.currency= money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+        - unless order_item.part_of_package?
+          à
+          %span.currency= money order_item.includes_tax? ? order_item.cart_price_with_tax : order_item.cart_price_sans_tax
       %h4.subtotal.text-right
-        %span.currency= money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+        %span.currency= money order_item.includes_tax? ? order_item.cart_subtotal_with_tax : order_item.cart_subtotal_sans_tax
 
 - if order_item.adjustments.any?
   = render partial: 'adjustments/item', collection: order_item.adjustments, as: :adjustment, locals: {includes_tax: order_item.includes_tax?}

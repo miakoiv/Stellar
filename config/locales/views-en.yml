@@ -232,7 +232,10 @@ en:
       search:
         order_type: Select order type
         status: "[All statuses]"
+        since_date: Since date
+        until_date: Until date
         keyword: Keyword search
+        payment_number: Transaction №
         customer: Select customer
         user: Select order author
       edit:
@@ -518,7 +521,7 @@ en:
       duplicate: Duplicate to cart
     search:
       order_type: Select order type
-      summary: Keyword search
+      keyword: Keyword search
     edit:
       duplicate: Duplicate to cart
     quote:

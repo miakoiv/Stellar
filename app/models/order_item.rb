@@ -14,7 +14,7 @@ class OrderItem < ActiveRecord::Base
 
   has_many :transfer_items
   belongs_to :product, required: true
-  delegate :live?, :real?, :internal?, :tangible?, :back_orderable?, to: :product
+  delegate :live?, :real?, :internal?, :package?, :tangible?, :back_orderable?, to: :product
 
   # Order items may have subitems that update with their parent, and are not
   # directly updatable or removable.
@@ -37,6 +37,10 @@ class OrderItem < ActiveRecord::Base
   #---
   def is_subitem?
     parent_item.present?
+  end
+
+  def part_of_package?
+    is_subitem? && parent_item.package?
   end
 
   # When an order item is updated, its subitems must be updated to reflect
@@ -90,6 +94,32 @@ class OrderItem < ActiveRecord::Base
     price_as_price.with_tax * amount
   end
 
+  # Prices and subtotals seen in cart context, where packages show
+  # a single price for the parent item and no prices for subitems.
+  def cart_price_sans_tax
+    return nil if part_of_package?
+    return price_with_subitems(:price_sans_tax) if package?
+    price_sans_tax
+  end
+
+  def cart_price_with_tax
+    return nil if part_of_package?
+    return price_with_subitems(:price_with_tax) if package?
+    price_with_tax
+  end
+
+  def cart_subtotal_sans_tax
+    return nil if part_of_package?
+    return price_with_subitems(:subtotal_sans_tax) if package?
+    subtotal_sans_tax
+  end
+
+  def cart_subtotal_with_tax
+    return nil if part_of_package?
+    return price_with_subitems(:subtotal_with_tax) if package?
+    subtotal_with_tax
+  end
+
   def adjustments_sans_tax
     adjustments.map(&:amount_sans_tax).sum
   end
@@ -113,6 +143,11 @@ class OrderItem < ActiveRecord::Base
 
   def grand_total_with_tax
     (subtotal_with_tax || 0.to_money) + adjustments_with_tax
+  end
+
+  # Price including subitems using given method on each.
+  def price_with_subitems(method)
+    send(method) + subitems.map { |i| i.send(method) }.sum
   end
 
   # Price for exported orders, always without tax.

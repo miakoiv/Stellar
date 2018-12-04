@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
       ))
     else
       insert_single(product, amount, group, options.merge(
-        separate_components: product.composite?
+        separate_components: product.composite? || product.package?
       ))
     end
   end

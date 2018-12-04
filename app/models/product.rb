@@ -19,6 +19,8 @@ class Product < ActiveRecord::Base
     bundle: 3,
     # Composites come with their components
     composite: 4,
+    # Packages come with their components with a single price tag
+    package: 2,
     # Virtual products are intangible, such as services
     virtual: 5,
     # Internal products are implied costs and other surcharges
@@ -93,14 +95,14 @@ class Product < ActiveRecord::Base
   scope :variant, -> { where.not(master_product_id: nil) }
 
   # Visible products are shown in storefront views. They include live
-  # vanilla, bundle, composite, and virtual products, but not variants.
+  # vanilla, bundle, composite, package, and virtual products, but not variants.
   scope :visible, -> {
-    live.master.where(purpose: [0, 3, 4, 5])
+    live.master.where(purpose: [0, 2, 3, 4, 5])
   }
 
-  # Simple products exclude bundles and composites.
+  # Simple products exclude bundles, composites, and packages.
   scope :simple, -> {
-    where.not(purpose: [3, 4])
+    where.not(purpose: [2, 3, 4])
   }
 
   scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.self_and_descendant_ids(id) }.flatten}) }
@@ -227,11 +229,11 @@ class Product < ActiveRecord::Base
   end
 
   def visible?
-    live? && master? && (vanilla? || bundle? || composite? || virtual?)
+    live? && master? && (vanilla? || bundle? || composite? || package? || virtual?)
   end
 
   def purchasable?
-    live? && !has_variants? && (vanilla? || bundle? || composite? || virtual?)
+    live? && !has_variants? && (vanilla? || bundle? || composite? || package? || virtual?)
   end
 
   # If additional info needs to be prompted, use an ordering modal.
@@ -294,9 +296,10 @@ class Product < ActiveRecord::Base
     product_properties.pluck(:property_id, :value).to_h
   end
 
-  # Bundles and composites include components when ordered, if any are live.
+  # Bundles, composites, and packages include components when ordered,
+  # if any are live.
   def includes_components?
-    (bundle? || composite?) && component_entries.live.any?
+    (bundle? || composite? || package?) && component_entries.live.any?
   end
 
   # Finds the available shipping methods from associated active

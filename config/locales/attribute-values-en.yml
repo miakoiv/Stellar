@@ -77,8 +77,9 @@ en:
           vanilla: product
           master: master product
           variant: product variant
-          bundle: product collection
-          composite: composite product
+          bundle: bundle from components
+          composite: product with components, separately
+          package: product with components, package
           virtual: virtual product
           internal: internal cost
           component: product component

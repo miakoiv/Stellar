@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 
   # Stock is not tracked for virtual or internal products.
   def tracked_stock?
-    vanilla? || bundle? || composite?
+    vanilla? || bundle? || composite? || package?
   end
 
   # Amount available in given inventory, calculated from product
@@ -18,7 +18,7 @@ class Product < ActiveRecord::Base
     return [
       stock(inventory, lot_code),
       component_stock(inventory)
-    ].min if composite?
+    ].min if composite? || package?
     stock(inventory, lot_code)
   end
 

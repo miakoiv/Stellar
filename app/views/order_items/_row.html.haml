@@ -14,9 +14,9 @@
   %td.text-right
     = order_item.amount
   %td.text-right.currency
-    = money order_item.includes_tax? ? order_item.price_with_tax : order_item.price_sans_tax
+    = money order_item.includes_tax? ? order_item.cart_price_with_tax : order_item.cart_price_sans_tax
   %td.text-right.currency
-    = money order_item.includes_tax? ? order_item.subtotal_with_tax : order_item.subtotal_sans_tax
+    = money order_item.includes_tax? ? order_item.cart_subtotal_with_tax : order_item.cart_subtotal_sans_tax
   %td.actions
 
 - if order_item.adjustments.any?

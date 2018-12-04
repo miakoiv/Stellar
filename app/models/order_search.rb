@@ -32,12 +32,20 @@ class OrderSearch < Searchlight::Search
     query.merge(Order.send(status))
   end
 
-  def search_date
-    query.where('DATE(completed_at) = ?', date)
+  def search_since_date
+    query.where('DATE(completed_at) >= ?', since_date)
+  end
+
+  def search_until_date
+    query.where('DATE(completed_at) <= ?', until_date)
   end
 
   def search_customer
     query.where('customer_name LIKE ?', "%#{customer}%")
+  end
+
+  def search_payment_number
+    query.joins(:payments).where(payments: {number: payment_number})
   end
 
   def search_keyword
