@@ -212,6 +212,8 @@ fi:
       search:
         order_type: Valitse tilauslaji
         status: "[Kaikki vaiheet]"
+        since_date: Pvm alkaen
+        until_date: Pvm päättyen
         keyword: Etsi hakusanalla
         payment_number: Tapahtumanumero
         customer: Valitse asiakas

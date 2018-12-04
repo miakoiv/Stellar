@@ -12,7 +12,10 @@
             = f.select :status, Order.statuses.map { |s| [Order.human_attribute_value(:status, s), s] }, {include_blank: t('.status')}, {class: 'form-control selectize'}
         .col-sm-6.col-md-4
           .form-group
-            = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
+            .input-group.input-daterange{data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}}
+              = f.search_field :since_date, autocomplete: 'off', placeholder: t('.since_date'), class: 'form-control'
+              %span.input-group-addon= icon('caret-right')
+              = f.search_field :until_date, autocomplete: 'off', placeholder: t('.until_date'), class: 'form-control'
         .col-sm-6.col-md-8
           .form-group
             = f.search_field :keyword, autocomplete: 'off', placeholder: t('.keyword'), class: 'form-control'

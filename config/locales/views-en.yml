@@ -232,6 +232,8 @@ en:
       search:
         order_type: Select order type
         status: "[All statuses]"
+        since_date: Since date
+        until_date: Until date
         keyword: Keyword search
         payment_number: Transaction №
         customer: Select customer
