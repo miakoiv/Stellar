@@ -23,11 +23,11 @@ module Appraiser
     end
 
     # Price used for display purposes, including any aggregated
-    # component prices for bundle or composite products.
+    # component prices for bundle, composite, or package products.
     # Returns a tuple of final price, regular price, where the latter
     # only appears if there was a special price.
     def for_display(product)
-      if product.bundle? || product.composite?
+      if product.bundle? || product.composite? || product.package?
         [aggregate_price(product), nil]
       else
         if special = special_price(product)
@@ -77,18 +77,18 @@ module Appraiser
         special_price(product) || regular_price(product)
       end
 
-      # Aggregate price includes bundle/composite components.
+      # Aggregate price includes bundle/composite/package components.
       def aggregate_price(product)
         if product.bundle?
           component_total_price(product)
-        elsif product.composite?
+        elsif product.composite? || product.package?
           final_price(product) + component_total_price(product)
         else
           final_price(product)
         end
       end
 
-      # Total price of components. This is added to composite product
+      # Total price of components. This is added to composite/package
       # prices, and bundle prices consist solely of component totals.
       # Final price is used for the sum, therefore bundle and composite
       # prices may change due to group pricing or promotions.

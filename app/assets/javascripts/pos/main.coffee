@@ -16,7 +16,7 @@ $.fn.extend
           dataType: 'json'
           data:
             q: query
-            purposes: ['vanilla', 'composite']
+            purposes: ['vanilla', 'composite', 'package']
             having_variants: false
           error: ->
             callback()

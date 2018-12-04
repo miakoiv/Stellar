@@ -7,6 +7,7 @@ class Product < ActiveRecord::Base
     'vanilla' => nil,
     'bundle' => 'archive',
     'composite' => 'object-group',
+    'package' => 'object-group',
     'virtual' => 'magic',
     'internal' => 'link',
     'component' => 'puzzle-piece'

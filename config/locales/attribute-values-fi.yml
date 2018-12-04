@@ -77,8 +77,9 @@ fi:
           vanilla: tuote
           master: päätuote
           variant: tuotevariantti
-          bundle: tuotekokonaisuus
-          composite: yhdistelmätuote
+          bundle: tuotekokonaisuus osista
+          composite: tuote + osat eriteltynä
+          package: tuote + osat pakettina
           virtual: näennäinen tuote
           internal: sisäinen kustannus
           component: tuotteen osa
