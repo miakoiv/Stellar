@@ -374,6 +374,7 @@ en:
         url: ᴡᴡᴡ address
       payment:
         order_id: Order
+        number: Transaction №
         amount: Paid
         created_at: Date
       policy:

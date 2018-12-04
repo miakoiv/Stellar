@@ -369,6 +369,7 @@ fi:
         content: Sisältö
       payment:
         order_id: Tilaus
+        number: Tapahtumanro
         amount: Maksettu
         created_at: Päiväys
       picture:
