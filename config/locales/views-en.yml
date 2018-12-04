@@ -233,6 +233,7 @@ en:
         order_type: Select order type
         status: "[All statuses]"
         keyword: Keyword search
+        payment_number: Transaction №
         customer: Select customer
         user: Select order author
       edit:

@@ -40,6 +40,10 @@ class OrderSearch < Searchlight::Search
     query.where('customer_name LIKE ?', "%#{customer}%")
   end
 
+  def search_payment_number
+    query.joins(:payments).where(payments: {number: payment_number})
+  end
+
   def search_keyword
     query.where("CONCAT_WS(' ', customer_name, company_name, contact_person, shipping_city) LIKE ?", "%#{keyword}%")
   end

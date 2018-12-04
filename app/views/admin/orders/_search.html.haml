@@ -4,18 +4,21 @@
   .panel-body
     = form_for @search, url: url, method: :get do |f|
       .row
-        .col-sm-6.col-md-3
-          .form-group
-            = f.select :order_type, order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: t('.order_type'), class: 'form-control selectize'}
-        .col-sm-6.col-md-3
-          .form-group
-            = f.select :status, Order.statuses.map { |s| [Order.human_attribute_value(:status, s), s] }, {include_blank: t('.status')}, {class: 'form-control selectize'}
-        .col-sm-6.col-md-2
-          .form-group
-            = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
         .col-sm-6.col-md-4
           .form-group
+            = f.select :order_type, order_types.map { |o| [o.to_s, o.id] }, {}, {placeholder: t('.order_type'), class: 'form-control selectize'}
+        .col-sm-6.col-md-4
+          .form-group
+            = f.select :status, Order.statuses.map { |s| [Order.human_attribute_value(:status, s), s] }, {include_blank: t('.status')}, {class: 'form-control selectize'}
+        .col-sm-6.col-md-4
+          .form-group
+            = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
+        .col-sm-6.col-md-8
+          .form-group
             = f.search_field :keyword, autocomplete: 'off', placeholder: t('.keyword'), class: 'form-control'
+        .col-sm-6.col-md-4
+          .form-group
+            = f.search_field :payment_number, autocomplete: 'off', placeholder: t('.payment_number'), class: 'form-control'
         .col-sm-6.col-md-5
           .form-group
             = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.customer')}, {class: 'form-control selectize'}
