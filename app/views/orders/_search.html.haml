@@ -12,7 +12,7 @@
             = f.search_field :date, autocomplete: 'off', placeholder: col(Order, :completed_at), class: 'form-control', data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-orientation': 'bottom'}
         .col-sm-6.col-md-4
           .form-group
-            = f.search_field :summary, autocomplete: 'off', placeholder: t('.summary'), class: 'form-control'
+            = f.search_field :keyword, autocomplete: 'off', placeholder: t('.keyword'), class: 'form-control'
         .col-sm-6.col-md-1
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'

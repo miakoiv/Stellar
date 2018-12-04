@@ -519,7 +519,7 @@ en:
       duplicate: Duplicate to cart
     search:
       order_type: Select order type
-      summary: Keyword search
+      keyword: Keyword search
     edit:
       duplicate: Duplicate to cart
     quote:

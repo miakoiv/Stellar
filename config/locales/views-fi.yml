@@ -503,7 +503,7 @@ fi:
       duplicate: Kopioi ostoskoriin
     search:
       order_type: Valitse tilauslaji
-      summary: Etsi hakusanalla
+      keyword: Etsi hakusanalla
     edit:
       duplicate: Kopioi ostoskoriin
     quote:
