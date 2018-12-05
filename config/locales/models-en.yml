@@ -28,6 +28,9 @@ en:
       category:
         one: category
         other: categories
+      component_entry:
+        one: product component
+        other: product components
       customer_asset:
         one: customer asset
         other: customer assets

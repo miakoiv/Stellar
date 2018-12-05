@@ -32,4 +32,8 @@ class AlternatePrice < ActiveRecord::Base
     return nil if base_price.nil? || price.nil? || price.zero?
     100 * (price - base_price) / price
   end
+
+  def to_s
+    group.to_s
+  end
 end

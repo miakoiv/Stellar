@@ -65,6 +65,10 @@ class PromotedItem < ActiveRecord::Base
     product.send(group.price_method)
   end
 
+  def to_s
+    product.to_s
+  end
+
   private
     def touch_product
       product.touch

@@ -60,6 +60,10 @@ class Style < ActiveRecord::Base
       .map { |k, v| "$%s: %s;\n" % [k.dasherize, v] }.join
   end
 
+  def to_s
+    I18n.l(created_at.to_date)
+  end
+
   private
     def generate_stylesheet
       reload

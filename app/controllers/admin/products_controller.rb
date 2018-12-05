@@ -129,7 +129,7 @@ class Admin::ProductsController < ApplicationController
     authorize_action_for @product, at: current_store
     original = @product
     @product = original.duplicate!
-    track @product
+    track @product, nil, {action: 'create'}
 
     redirect_to edit_admin_product_path(@product),
       notice: t('.notice', product: original)
