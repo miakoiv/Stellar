@@ -18,4 +18,8 @@ class ComponentEntry < ActiveRecord::Base
   def available(inventory)
     component.available(inventory, nil) / quantity
   end
+
+  def to_s
+    component.to_s
+  end
 end

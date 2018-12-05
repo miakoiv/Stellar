@@ -53,4 +53,8 @@ class Document < ActiveRecord::Base
     return 'file-powerpoint-o' if is_presentation?
     'file-o'
   end
+
+  def to_s
+    attachment_file_name
+  end
 end

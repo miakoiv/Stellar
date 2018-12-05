@@ -9,4 +9,9 @@ class RequisiteEntry < ActiveRecord::Base
 
   default_scope { sorted }
   scope :live, -> { joins(:requisite).merge(Product.live) }
+
+  #---
+  def to_s
+    product.to_s
+  end
 end

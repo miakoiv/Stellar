@@ -13,4 +13,9 @@ class Payment < ActiveRecord::Base
   def self.available_gateways
     %w{None Paybyway}
   end
+
+  #---
+  def to_s
+    number
+  end
 end

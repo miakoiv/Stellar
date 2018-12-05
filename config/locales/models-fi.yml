@@ -28,6 +28,9 @@ fi:
       category:
         one: tuoteryhmä
         other: tuoteryhmät
+      component_entry:
+        one: tuotekomponentti
+        other: tuotekomponentit
       customer_asset:
         one: asiakkaan omistus
         other: asiakkaan omistukset
