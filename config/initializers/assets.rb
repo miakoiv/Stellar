@@ -18,6 +18,7 @@ Rails.application.config.assets.paths << File.join(
 Rails.application.config.assets.precompile += %w(
   print.css
   jasny-bootstrap/rowlink.js
+  payment_gateway/none.js
   payment_gateway/paybyway.js
   spry_themes/birch.css       spry_themes/birch.js
   spry_themes/boutique.css    spry_themes/boutique.js
