@@ -1,0 +1,12 @@
+.panel{class: "panel-#{subscription.appearance}"}
+  .panel-heading
+    - if subscription.active?
+      .pull-right
+        %span.label.label-primary= icon('power-off', t('.active'))
+    %h4.panel-title= subscription
+  .panel-body
+    = render subscription.plan
+  .panel-footer
+    .pull-right
+      - if subscription.active? && current_user.can_delete?(Subscription, at: current_store)
+        = link_to icon('remove', t('.cancel')), admin_subscription_path(subscription), method: :delete, class: 'btn btn-sm btn-danger'

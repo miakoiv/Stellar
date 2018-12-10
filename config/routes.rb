@@ -112,6 +112,7 @@ Rails.application.routes.draw do
       resources :pictures, shallow: true
       resource :style
     end
+    resources :subscriptions
     resources :groups do
       resources :users, only: [:index, :new, :create] do
         patch :join, on: :member
