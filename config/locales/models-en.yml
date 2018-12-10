@@ -370,16 +370,20 @@ en:
         slug: Slug
         url: Address
         content: Content
-      picture:
-        purpose: Image type
-        variant: Size variant
-        caption: Caption
-        url: ᴡᴡᴡ address
       payment:
         order_id: Order
         number: Transaction №
         amount: Paid
         created_at: Date
+      picture:
+        purpose: Image type
+        variant: Size variant
+        caption: Caption
+        url: ᴡᴡᴡ address
+      plan:
+        amount: Price
+        interval: Subscription period
+        trial_period_days: Trial period
       policy:
         title: Title
         content: Content

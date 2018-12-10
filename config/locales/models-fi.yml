@@ -380,6 +380,10 @@ fi:
         variant: Kokovaihtoehto
         caption: Kuvateksti
         url: ᴡᴡᴡ-osoite
+      plan:
+        amount: Hinta
+        interval: Tilausjakso
+        trial_period_days: Kokeilujakso
       policy:
         title: Otsikko
         content: Sisältö
