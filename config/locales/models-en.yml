@@ -125,6 +125,9 @@ en:
       store:
         one: store
         other: stores
+      subscription:
+        one: subscription
+        other: subscriptions
       tag:
         one: tag
         other: tags

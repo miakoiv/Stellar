@@ -125,6 +125,9 @@ fi:
       store:
         one: kauppa
         other: kaupat
+      subscription:
+        one: tilaus
+        other: tilaukset
       tag:
         one: tagi
         other: tagit

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181128142841) do
+ActiveRecord::Schema.define(version: 20181207131031) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -851,6 +851,21 @@ ActiveRecord::Schema.define(version: 20181128142841) do
 
   add_index "styles", ["store_id"], name: "index_styles_on_store_id", using: :btree
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "store_id",       limit: 4,   null: false
+    t.integer  "customer_id",    limit: 4,   null: false
+    t.string   "stripe_plan_id", limit: 255, null: false
+    t.string   "stripe_id",      limit: 255
+    t.date     "first_date"
+    t.date     "last_date"
+    t.integer  "status",         limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "subscriptions", ["customer_id"], name: "index_subscriptions_on_customer_id", using: :btree
+  add_index "subscriptions", ["store_id"], name: "index_subscriptions_on_store_id", using: :btree
+
   create_table "tags", force: :cascade do |t|
     t.integer  "store_id",   limit: 4,                       null: false
     t.string   "name",       limit: 255
@@ -921,6 +936,7 @@ ActiveRecord::Schema.define(version: 20181128142841) do
     t.string   "shipping_city",          limit: 255
     t.string   "shipping_country_code",  limit: 2
     t.string   "locale",                 limit: 255
+    t.string   "stripe_customer_id",     limit: 255
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"

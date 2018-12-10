@@ -84,6 +84,7 @@ class Store < ActiveRecord::Base
     store.has_many :tax_categories
     store.has_many :groups
     store.has_many :policies
+    store.has_many :subscriptions
   end
 
   has_one :style
