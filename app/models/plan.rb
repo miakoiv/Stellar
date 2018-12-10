@@ -30,6 +30,10 @@ class Plan
     raise ArgumentError if @config.nil?
   end
 
+  def id
+    @config.id
+  end
+
   def amount
     Money.new(@config.amount, @config.currency)
   end
@@ -46,7 +50,11 @@ class Plan
     @config.trial_period_days
   end
 
-  def to_s
+  def nickname
     @config.nickname
+  end
+
+  def to_s
+    nickname
   end
 end

@@ -68,6 +68,13 @@ en:
           presentational: 1000×600
           laptop: 1440×900
           lightbox: 1920×1200
+      plan:
+        id:
+          platform_nonprofit: Stellar Platform for Nonprofit
+          platform_commercial: Stellar Platform
+          storefront_nonprofit: Stellar Storefront for Nonprofit
+          storefront_starter: Stellar Storefront
+          storefront_advanced: Stellar Storefront Pro
       property:
         value_type:
           string: String
