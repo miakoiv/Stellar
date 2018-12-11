@@ -3,7 +3,6 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
-    = stripe_javascript_tag
     = javascript_include_tag 'ckeditor5/ckeditor'
     = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"
   %body.admin{class: content_for?(:secondary_nav) && 'dual-nav'}
