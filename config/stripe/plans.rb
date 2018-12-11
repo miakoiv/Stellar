@@ -23,11 +23,11 @@
 #   plan.trial_period_days = 30
 # end
 
-Stripe.plan :storefront_nonprofit do |plan|
-  plan.nickname = 'Storefront nonprofit'
-  plan.product_id = 'prod_E5SHuFhYf9Z2O3'
-  #plan.product_id = 'prod_E5RvKgWSbpBCH3'
-  plan.amount = 3500
+Stripe.plan :platform_commercial do |plan|
+  plan.nickname = 'Platform commercial'
+  plan.product_id = 'prod_E5SH2kx56pW5EW'
+  #plan.product_id = 'prod_E5Rl4jx1zZr339'
+  plan.amount = 2000
   plan.currency = 'eur'
   plan.interval = 'month'
   plan.trial_period_days = 30
@@ -63,11 +63,11 @@ Stripe.plan :platform_nonprofit do |plan|
   plan.trial_period_days = 30
 end
 
-Stripe.plan :platform_commercial do |plan|
-  plan.nickname = 'Platform commercial'
-  plan.product_id = 'prod_E5SH2kx56pW5EW'
-  #plan.product_id = 'prod_E5Rl4jx1zZr339'
-  plan.amount = 2000
+Stripe.plan :storefront_nonprofit do |plan|
+  plan.nickname = 'Storefront nonprofit'
+  plan.product_id = 'prod_E5SHuFhYf9Z2O3'
+  #plan.product_id = 'prod_E5RvKgWSbpBCH3'
+  plan.amount = 3500
   plan.currency = 'eur'
   plan.interval = 'month'
   plan.trial_period_days = 30
