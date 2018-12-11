@@ -9,4 +9,4 @@
   .panel-footer
     .pull-right
       - if subscription.active? && current_user.can_delete?(Subscription, at: current_store)
-        = link_to icon('remove', t('.cancel')), admin_subscription_path(subscription), method: :delete, class: 'btn btn-sm btn-danger'
+        = link_to icon('remove', t('.cancel')), admin_subscription_path(subscription), method: :delete, class: 'btn btn-sm btn-outline-danger'

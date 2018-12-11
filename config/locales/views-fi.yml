@@ -431,6 +431,14 @@ fi:
       modal_form:
         save: Ota tyyli käyttöön
         delete: Poista tyyliasetukset
+    subscriptions:
+      index:
+        new_subscription: Uusi palvelutilaus
+      new:
+        new_subscription: Uusi palvelutilaus
+      subscription:
+        active: Aktiivinen tilaus
+        cancel: Peruuta tämä tilaus
     tags:
       index:
         new_tag: Uusi tagi

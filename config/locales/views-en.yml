@@ -447,6 +447,14 @@ en:
       modal_form:
         save: Apply detailing
         delete: Discard detailing
+    subscriptions:
+      index:
+        new_subscription: New subscription
+      new:
+        new_subscription: New subscription
+      subscription:
+        active: Active subscription
+        cancel: Cancel this subscription
     tags:
       index:
         new_tag: New tag

@@ -4,7 +4,7 @@
       = icon('plus', t('.new_subscription'))
   %h1= icon('ticket', title(Subscription, count: 2))
 
-.row
+.subscription-list
   - @subscriptions.each do |subscription|
-    .col-xs-12.col-sm-6.col-lg-4
+    .subscription
       = render subscription
