@@ -82,6 +82,9 @@ en:
       picture:
         one: picture
         other: pictures
+      plan:
+        one: subscription plan
+        other: subscription plans
       policy:
         one: policy
         other: policies

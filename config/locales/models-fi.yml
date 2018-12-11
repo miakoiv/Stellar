@@ -82,6 +82,9 @@ fi:
       picture:
         one: kuva
         other: kuvat
+      plan:
+        one: tilausmalli
+        other: tilausmallit
       policy:
         one: sopimus
         other: sopimukset
@@ -126,8 +129,8 @@ fi:
         one: kauppa
         other: kaupat
       subscription:
-        one: tilaus
-        other: tilaukset
+        one: palvelutilaus
+        other: palvelutilaukset
       tag:
         one: tagi
         other: tagit
