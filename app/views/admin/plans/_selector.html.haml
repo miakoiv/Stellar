@@ -5,11 +5,15 @@
         .panel-body
           = render plan
         .panel-footer
-          %button.btn.btn-outline-primary.btn-block.plan-select{type: 'button', data: {stripe_plan_id: plan.id}}
-            = t('.select')
+          .check-mark
+            .btn.btn-outline-primary.btn-block.disabled
+              = icon('check')
+          .plan-select
+            %button.btn.btn-outline-primary.btn-block{type: 'button', data: {stripe_plan_id: plan.id}}
+              = t('.select')
 
 :coffee
-  $('.plan-select').on 'click', (e) ->
+  $('.plan-select .btn').on 'click', (e) ->
     $target = $(e.currentTarget);
     id = $target.data 'stripePlanId'
     $plan = $('#plan_' + id)

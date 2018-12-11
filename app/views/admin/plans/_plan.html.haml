@@ -1,5 +1,13 @@
-%p.lead= plan.human_attribute_value(:id)
-%p.text-right><
-  %strong.currency= humanized_money_with_symbol plan.amount
-  \/
-  = t(plan.interval, scope: 'date.units')
+.plan-card{class: plan.id}
+  .plan-image
+  .plan-title
+    = plan.human_attribute_value(:id)
+  .plan-details
+    = t(".#{plan.id}_html")
+  .plan-pricing
+    %p
+      = t('.pricing_html')
+      %span.currency= humanized_money_with_symbol plan.amount
+      %span.interval
+        \/
+        = t(plan.interval, scope: 'date.units')

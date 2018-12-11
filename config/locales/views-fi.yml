@@ -260,6 +260,13 @@ fi:
       modal:
         title: Valitse tai lisää uusi kuva
     plans:
+      plan:
+        pricing_html: Hinta <span class="small">(ALV 0%)</span>
+        platform_commercial_html: <ul><li>helppokäyttöinen sivujen suunnittelutyökalu<li>täysin responsiivinen (100% mobiiliyhteensopiva)<li>tallennustilaa 500 megatavua<li>oma osoite sekä <code>*.stellar.fi</code> -osoite</ul><p><span class="label label-info">Aloituspaketti ilman verkkokauppaominaisuuksia</span></p>
+        storefront_starter_html: <p><em>Stellar Platform</em> -perusta ja lisäksi:</p><ul><li>helppokäyttöinen ja myyvä verkkokauppa<li>monipuolinen tuotteiden sekä tuoteominaisuuksien hallinta ja hyödylliset tuotekonfiguraatiot<li>integraatiot logistiikkajärjestelmiin ja maksupalveluihin<li>joustavasti konfiguroitavat tilaustavat</ul><p><span class="label label-info">Suositeltava aloituspaketti verkkokauppiaalle</span></p>
+        storefront_advanced_html: <p><em>Stellar Storefrontin</em> lisäksi:</p><ul><li>mahdollisuus integraatioihin yrityksen taustajärjestelmiin tuote-, hinta- ja saldotietojen päivittämiseksi<li>mahdollisuus tilastotietojen integrointiin yrityksen taustajärjestelmiin<li>tallennustilaa 5000 megatavua<li>monipuolinen tilaustenhallinta</ul>
+        platform_nonprofit_html: <ul><li>helppokäyttöinen sivujen suunnittelutyökalu<li>täysin responsiivinen (100% mobiiliyhteensopiva)<li>tallennustilaa 500 megatavua<li>oma osoite sekä <code>*.stellar.fi</code> -osoite</ul><p><span class="label label-primary">Edullinen ratkaisu yhdistyksille ja yhteisöille</span></p>
+        storefront_nonprofit_html: <p><em>Stellar Platform Yhdistyspainoksen lisäksi:</em></p><ul><li>helppokäyttöinen ja myyvä verkkokauppa<li>monipuolinen tuotteiden sekä tuoteominaisuuksien hallinta ja hyödylliset tuotekonfiguraatiot<li>integraatiot logistiikkajärjestelmiin ja maksupalveluihin<li>joustavasti konfiguroitavat tilaustavat</ul><p><span class="label label-primary">Edullinen ratkaisu yhdistyksille ja yhteisöille</span></p>
       selector:
         select: Valitse
     policies:

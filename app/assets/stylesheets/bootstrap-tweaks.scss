@@ -1683,8 +1683,12 @@ fieldset > legend {
     &.selected {
       .panel {
         @extend .panel-primary, .bg-info;
+        @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
 
-        .panel-footer { visibility: hidden; }
+        .panel-footer {
+          .check-mark { display: block; }
+          .plan-select { display: none; }
+        }
       }
     }
     .panel {
@@ -1694,14 +1698,76 @@ fieldset > legend {
 
       .panel-body {
         flex: 1 1 auto;
+        padding-bottom: 0;
       }
       .panel-footer {
+        padding-top: 0;
         background-color: transparent;
         border-top: 0;
+
+        .check-mark {
+          display: none;
+
+          .btn { border-color: transparent; }
+          .fa { @extend .fa-lg; }
+        }
       }
     }
   }
 }
-.plan-selector {
-  justify-content: center;
+.subscription-list {
+  .subscription {
+    .plan-details { display: none; }
+    .plan-pricing {
+      @extend .small;
+
+      .currency {
+        @extend .h4;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+
+/*
+ * Subscriptions and plan selector
+ */
+.plan-card {
+  .plan-image {
+    @extend .pull-left, .box-thumbnail;
+    margin-right: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  &.platform_commercial,
+  &.platform_nonprofit {
+    .plan-image {
+      background-image: asset-url('stellar-logo/badge-queen-blue.svg');
+    }
+  }
+  &.storefront_starter,
+  &.storefront_advanced,
+  &.storefront_nonprofit {
+    .plan-image {
+      background-image: asset-url('stellar-logo/badge-rosso-corsa.svg');
+    }
+  }
+  .plan-title {
+    @extend .clearfix, .lead;
+  }
+  .plan-details {
+    ul {
+      @extend .small;
+      padding-left: 1em;
+    }
+  }
+  .plan-pricing {
+    .currency {
+      @extend .h3, .text-primary;
+      display: block;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
 }
