@@ -275,6 +275,9 @@ en:
         new: New picture
       modal:
         title: Select or add a new picture
+    plans:
+      selector:
+        select: Select
     policies:
       index:
         pending: You have pending policies. Please review the marked policies.

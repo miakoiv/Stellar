@@ -12,4 +12,11 @@ class Admin::SubscriptionsController < ApplicationController
     authorize_action_for Subscription, at: current_store
     @subscriptions = current_store.subscriptions
   end
+
+  # GET /admin/subscriptions/new
+  def new
+    authorize_action_for Subscription, at: current_store
+    @plans = Plan.all
+    @subscription = current_store.subscriptions.new
+  end
 end

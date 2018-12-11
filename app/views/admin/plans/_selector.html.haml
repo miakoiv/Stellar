@@ -1,0 +1,19 @@
+.plan-selector
+  - @plans.each do |plan|
+    .plan{id: dom_id(plan)}
+      .panel.panel-default
+        .panel-body
+          = render plan
+        .panel-footer
+          %button.btn.btn-outline-primary.btn-block.plan-select{type: 'button', data: {stripe_plan_id: plan.id}}
+            = t('.select')
+
+:coffee
+  $('.plan-select').on 'click', (e) ->
+    $target = $(e.currentTarget);
+    id = $target.data 'stripePlanId'
+    $plan = $('#plan_' + id)
+    console.log $plan
+    $('#subscription_stripe_plan_id').val id
+    $('.plan').removeClass 'selected'
+    $plan.addClass 'selected'

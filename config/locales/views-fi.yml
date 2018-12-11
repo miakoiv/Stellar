@@ -259,6 +259,9 @@ fi:
         new: Uusi kuva
       modal:
         title: Valitse tai lisää uusi kuva
+    plans:
+      selector:
+        select: Valitse
     policies:
       index:
         pending: Sinulla on hyväksymättömiä sopimuksia. Ole hyvä ja tarkista keltaisella merkityt sopimukset.

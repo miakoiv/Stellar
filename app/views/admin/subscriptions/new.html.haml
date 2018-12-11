@@ -1,0 +1,13 @@
+.page-header
+  = link_to admin_subscriptions_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1
+    = icon('ticket', t('.new_subscription'))
+
+= render partial: 'admin/plans/selector'
+
+= bootstrap_form_for [:admin, @subscription] do |f|
+  %fieldset
+    = f.text_field :stripe_plan_id
+
+= stripe_javascript_tag
