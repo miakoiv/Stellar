@@ -1665,3 +1665,43 @@ fieldset > legend {
 }
 .branding .media p { margin: 0; }
 .branding .media p.lead { font-size: $font-size-base; }
+
+
+/*
+ * Subscriptions and plan selector
+ */
+.subscription-list, .plan-selector {
+  @extend .row;
+  display: flex;
+  flex-flow: row wrap;
+
+  .subscription, .plan {
+    @extend .col-xs-12, .col-sm-6, .col-lg-4;
+    float: none;
+    margin-bottom: 20px;
+
+    &.selected {
+      .panel {
+        @extend .panel-primary, .bg-info;
+
+        .panel-footer { visibility: hidden; }
+      }
+    }
+    .panel {
+      display: flex;
+      flex-flow: column nowrap;
+      height: 100%;
+
+      .panel-body {
+        flex: 1 1 auto;
+      }
+      .panel-footer {
+        background-color: transparent;
+        border-top: 0;
+      }
+    }
+  }
+}
+.plan-selector {
+  justify-content: center;
+}
