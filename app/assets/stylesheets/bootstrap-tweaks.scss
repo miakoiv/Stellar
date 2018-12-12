@@ -1725,6 +1725,7 @@ fieldset > legend {
         @extend .h4;
         display: inline-block;
       }
+      .interval { display: inline-block; }
     }
   }
 }
@@ -1765,9 +1766,9 @@ fieldset > legend {
   .plan-pricing {
     .currency {
       @extend .h3, .text-primary;
-      display: block;
       margin-top: 0;
       margin-bottom: 0;
     }
+    .interval { display: block; }
   }
 }

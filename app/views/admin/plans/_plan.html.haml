@@ -5,9 +5,8 @@
   .plan-details
     = t(".#{plan.id}_html")
   .plan-pricing
-    %p
-      = t('.pricing_html')
-      %span.currency= humanized_money_with_symbol plan.amount
-      %span.interval
-        \/
-        = t(plan.interval, scope: 'date.units')
+    %span.currency= humanized_money_with_symbol plan.amount
+    %span.taxation= t('.taxation')
+    %span.interval
+      \/
+      = t(plan.interval, scope: 'date.units')
