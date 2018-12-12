@@ -276,6 +276,13 @@ en:
       modal:
         title: Select or add a new picture
     plans:
+      plan:
+        taxation: + 24% VAT
+        platform_commercial_html: <ul><li>intuitive layout design toolkit<li>fully responsive (100% mobile compatible)<li>500 megabytes of storage<li>your own domain and a <code>*.stellar.fi</code> hostname</ul><p><span class="label label-info">Starter package without e-commerce</span></p>
+        storefront_starter_html: <p><em>Stellar Platform</em> foundation with extras:</p><ul><li>easy-to-use e-commerce platform<li>features to manage products and their properties and configurations<li>integrations to logistics and payment systems<li>flexible ordering workflows</ul><p><span class="label label-info">Recommended for e-commerce</span></p>
+        storefront_advanced_html: <p>In addition to <em>Stellar Storefront</em>:</p><ul><li>integration possibilities to company back-end systems<li>integrated reporting to existing systems<li>5000 megabytes of storage<li>fully featured order management</ul>
+        platform_nonprofit_html: <ul><li>intuitive layout design toolkit<li>fully responsive (100% mobile compatible)<li>500 megabytes of storage<li>your own domain and a <code>*.stellar.fi</code> hostname</ul><p><span class="label label-primary">Best price for non-profit organizations</span></p>
+        storefront_nonprofit_html: <p><em>Stellar Platform</em> foundation with extras:</p><ul><li>easy-to-use e-commerce platform<li>features to manage products and their properties and configurations<li>integrations to logistics and payment systems<li>flexible ordering workflows</ul><p><span class="label label-primary">Best price for non-profit organizations</span></p>
       selector:
         select: Select
     policies:
