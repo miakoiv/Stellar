@@ -1,0 +1,5 @@
+$('#subscription_stripe_plan_id').val('#{@plan.id}');
+$('#selected-plan').html("#{j render @plan}");
+$('.plan').removeClass('selected');
+$("##{dom_id(@plan)}").addClass('selected');
+$('#subscription-panel').collapse('show');

@@ -9,15 +9,5 @@
             .btn.btn-outline-primary.btn-block.disabled
               = icon('check')
           .plan-select
-            %button.btn.btn-outline-primary.btn-block{type: 'button', data: {stripe_plan_id: plan.id}}
+            = link_to new_admin_subscription_path(stripe_plan_id: plan.id), remote: true, class: 'btn btn-outline-primary btn-block' do
               = t('.select')
-
-:coffee
-  $('.plan-select .btn').on 'click', (e) ->
-    $target = $(e.currentTarget);
-    id = $target.data 'stripePlanId'
-    $plan = $('#plan_' + id)
-    console.log $plan
-    $('#subscription_stripe_plan_id').val id
-    $('.plan').removeClass 'selected'
-    $plan.addClass 'selected'

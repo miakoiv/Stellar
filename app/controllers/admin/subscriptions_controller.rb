@@ -14,9 +14,20 @@ class Admin::SubscriptionsController < ApplicationController
   end
 
   # GET /admin/subscriptions/new
+  # GET /admin/subscriptions/new.js
   def new
     authorize_action_for Subscription, at: current_store
-    @plans = Plan.all
-    @subscription = current_store.subscriptions.new
+
+    respond_to do |format|
+      format.html do
+        @plans = Plan.all
+        @subscription = current_store.subscriptions.build(
+          customer: current_user
+        )
+      end
+      format.js do
+        @plan = Plan.new(stripe_plan_id: params[:stripe_plan_id])
+      end
+    end
   end
 end
