@@ -462,6 +462,8 @@ en:
         new_subscription: New subscription
       new:
         new_subscription: New subscription
+        subscriber_info: Subscriber information
+        credit_card_payment: Credit card payment
       subscription:
         active: Active subscription
         cancel: Cancel this subscription

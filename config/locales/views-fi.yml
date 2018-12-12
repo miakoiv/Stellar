@@ -446,6 +446,8 @@ fi:
         new_subscription: Uusi palvelutilaus
       new:
         new_subscription: Uusi palvelutilaus
+        subscriber_info: Tilaajan tiedot
+        credit_card_payment: Maksu luottokortilla
       subscription:
         active: Aktiivinen tilaus
         cancel: Peruuta tämä tilaus
