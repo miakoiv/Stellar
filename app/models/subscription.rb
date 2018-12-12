@@ -13,6 +13,7 @@ class Subscription < ActiveRecord::Base
 
   # Associated customer (user).
   belongs_to :customer, class_name: 'User', required: true
+  accepts_nested_attributes_for :customer
 
   default_scope { order(first_date: :desc) }
 

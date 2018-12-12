@@ -4,10 +4,47 @@
   %h1
     = icon('ticket', t('.new_subscription'))
 
-= render partial: 'admin/plans/selector'
+#subscription-panel.collapse
+  .row
+    .col-sm-5.col-lg-4
+      .panel.panel-default
+        .panel-body
+          #selected-plan
+    .col-sm-7.col-lg-4
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= t('.subscription_info')
+        .panel-body
+          = bootstrap_form_for [:admin, @subscription] do |f|
+            %fieldset
+              = f.hidden_field :stripe_plan_id
+            %fieldset
+              = f.fields_for :customer do |ff|
+                = ff.hidden_field :id
+                = ff.text_field :email, required: true
+                = ff.text_field :name, required: true
+                = ff.telephone_field :phone, required: true
+    .col-sm-7.col-sm-offset-5.col-lg-4.col-lg-offset-0
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= t('.credit_card_payment')
+        .panel-body
+          = bootstrap_form_tag do |f|
+            .pull-right
+              .cc-symbol.visa
+              .cc-symbol.mastercard
+            .row
+              .col-sm-12
+                = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
+              .col-sm-6
+                = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
+              .col-sm-6
+                = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
+              .col-xs-12.pay-now-button.collapse.in
+                = f.button t('checkout.charge'), class: 'btn btn-lg btn-outline-primary btn-block'
 
-= bootstrap_form_for [:admin, @subscription] do |f|
-  %fieldset
-    = f.text_field :stripe_plan_id
+  %hr
+
+= render partial: 'admin/plans/selector'
 
 = stripe_javascript_tag
