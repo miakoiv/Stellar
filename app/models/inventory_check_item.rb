@@ -31,7 +31,7 @@ class InventoryCheckItem < ActiveRecord::Base
   }
 
   attr_accessor :serial
-  before_validation :concatenate_lot_code
+  after_initialize :concatenate_lot_code
   after_validation :assign_inventory_item, on: :create
   after_validation :calculate_difference
 
