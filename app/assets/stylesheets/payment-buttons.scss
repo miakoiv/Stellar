@@ -1,0 +1,30 @@
+.payment-buttons {
+
+  .payment-button {
+    width: 125px;
+    height: 85px;
+    float: left;
+    transform: scale(0.88);
+    opacity: 0.667;
+    transition: all 0.6s ease-in-out 0s;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+.cc-symbol {
+  display: inline-block;
+  width: 3em;
+  height: 2em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.mastercard { background-image: asset-url('mc_symbol.svg'); }
+  &.visa { background-image: asset-url('visa_symbol.svg'); }
+}
+.cc-symbol + .cc-symbol { margin-left: 0.6667em; }
