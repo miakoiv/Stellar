@@ -28,7 +28,7 @@ class TransferItem < ActiveRecord::Base
   }
 
   attr_accessor :serial
-  before_validation :concatenate_lot_code
+  after_initialize :concatenate_lot_code
 
   #---
   # The source inventory item associated with this tranfer item
