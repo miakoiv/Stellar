@@ -1,0 +1,13 @@
+= bootstrap_form_tag do |f|
+  .pull-right
+    .cc-symbol.visa
+    .cc-symbol.mastercard
+  .row
+    .col-sm-12
+      = f.telephone_field :number, label: t('checkout.card_number'), class: 'credit-card-number', autocomplete: 'cc-number'
+    .col-sm-6
+      = f.text_field :expiry, label: t('checkout.card_expiry'), class: 'credit-card-expiry'
+    .col-sm-6
+      = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
+    .col-xs-12.pay-now-button.collapse.in
+      = f.button t('checkout.charge'), class: 'btn btn-lg btn-outline-primary btn-block'

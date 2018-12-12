@@ -1,0 +1,9 @@
+= bootstrap_form_for [:admin, @subscription] do |f|
+  %fieldset
+    = f.hidden_field :stripe_plan_id
+  %fieldset
+    = f.fields_for :customer do |ff|
+      = ff.hidden_field :id
+      = ff.text_field :email, required: true
+      = ff.text_field :name, required: true
+      = ff.telephone_field :phone, required: true
