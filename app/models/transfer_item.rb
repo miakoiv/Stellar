@@ -28,7 +28,7 @@ class TransferItem < ActiveRecord::Base
   }
 
   attr_accessor :serial
-  after_initialize :concatenate_lot_code
+  after_initialize :lot_code_from_serial
 
   #---
   # The source inventory item associated with this tranfer item
@@ -62,9 +62,11 @@ class TransferItem < ActiveRecord::Base
   end
 
   private
-    # Lot code and serial are joined by hyphen, either one appearing alone
-    # is used as the lot code.
-    def concatenate_lot_code
-      self[:lot_code] = [lot_code, serial].map(&:presence).compact.join('-')
+    # Serial is used as lot code on products that have no lot code.
+    def lot_code_from_serial
+      if lot_code.blank? && serial.present?
+        self[:lot_code] = serial
+      end
+      true
     end
 end
