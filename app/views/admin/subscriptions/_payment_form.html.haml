@@ -1,3 +1,4 @@
+.alert.alert-danger.subscription-errors.collapse
 = bootstrap_form_tag do |f|
   .pull-right
     .cc-symbol.visa
@@ -11,3 +12,7 @@
       = f.text_field :cvc, label: t('checkout.card_cvc'), class: 'credit-card-cvc', autocomplete: 'off'
     .col-xs-12.pay-now-button.collapse.in
       = f.button t('checkout.charge'), class: 'btn btn-lg btn-outline-primary btn-block'
+    .col-xs-12.working.collapse
+      .text-center
+        = icon('circle-o-notch', class: 'fa-lg fa-spin')
+        = t('checkout.messages.charging')
