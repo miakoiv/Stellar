@@ -138,11 +138,24 @@ class Transfer < ActiveRecord::Base
       return false if stock_items.none?
 
       # Ordering by lot code selects inventory item by that code.
-      if order_item.lot_code.present? &&
+      if order_item.lot_code.present?
+
+        # Exact match by lot code, with potentially attached serial number.
         item = stock_items.find { |item| order_item.lot_code == item.code }
 
-        item.reserved += order_item.amount
-        return create_item_from(order_item, order_item.lot_code, item.expires_at)
+        # If the order item has a serial number, try lot code part only.
+        if item.nil? && order_item.lot_code['-']
+          lot_code_part = order_item.lot_code.split('-').first
+          item = stock_items.find { |item| lot_code_part == item.code }
+        end
+
+        # If a match was found, load the item and return. If a partial
+        # match set a lot code part above, use that, or provide nil
+        # to use the code on the order item.
+        if item.present?
+          item.reserved += order_item.amount
+          return create_item_from(order_item, lot_code_part, item.expires_at)
+        end
       end
 
       amount = order_item.waiting
