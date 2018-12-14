@@ -30,4 +30,30 @@ class Admin::SubscriptionsController < ApplicationController
       end
     end
   end
+
+  # POST /admin/subscriptions
+  def create
+    authorize_action_for Subscription, at: current_store
+
+    @subscription = current_store.subscriptions.build(subscription_params)
+    logger.info params
+
+    respond_to do |format|
+      format.html { redirect_to admin_subscriptions_path, notice: t('.notice', subscription: @subscription) }
+      format.json { render :show, status: :created, location: admin_subscription_path(@subscription) }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_subscription
+      @subscription = current_store.subscriptions.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def subscription_params
+      params.require(:subscription).permit(
+        :stripe_plan_id, :stripe_token
+      )
+    end
 end

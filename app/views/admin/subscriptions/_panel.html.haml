@@ -1,0 +1,15 @@
+#subscription-panel.collapse
+  .row
+    .col-sm-7.col-md-6.col-lg-5
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= t('.subscriber_info')
+        .panel-body
+          = render partial: 'form'
+    .col-sm-5.col-md-5.col-lg-4
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= t('.selected_plan')
+        .panel-body
+          #selected-plan
+  %hr

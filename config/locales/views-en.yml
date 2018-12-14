@@ -285,6 +285,7 @@ en:
         storefront_nonprofit_html: <p><em>Stellar Platform</em> foundation with extras:</p><ul><li>easy-to-use e-commerce platform<li>features to manage products and their properties and configurations<li>integrations to logistics and payment systems<li>flexible ordering workflows</ul><p><span class="label label-primary">Best price for non-profit organizations</span></p>
       selector:
         select: Select
+        subscribe: Subscribe
     policies:
       index:
         pending: You have pending policies. Please review the marked policies.
@@ -462,8 +463,12 @@ en:
         new_subscription: New subscription
       new:
         new_subscription: New subscription
+      panel:
         subscriber_info: Subscriber information
-        credit_card_payment: Credit card payment
+        selected_plan: Selected plan
+      form:
+        submit: Subscribe
+        working: Processing transaction…
       subscription:
         active: Active subscription
         cancel: Cancel this subscription

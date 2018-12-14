@@ -1682,13 +1682,10 @@ fieldset > legend {
 
     &.selected {
       .panel {
-        @extend .panel-primary, .bg-info;
+        @extend .panel-primary;
         @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
 
-        .panel-footer {
-          .check-mark { display: block; }
-          .plan-select { display: none; }
-        }
+        .plan-select > .btn { @extend .disabled; }
       }
     }
     .panel {
@@ -1704,13 +1701,6 @@ fieldset > legend {
         padding-top: 0;
         background-color: transparent;
         border-top: 0;
-
-        .check-mark {
-          display: none;
-
-          .btn { border-color: transparent; }
-          .fa { @extend .fa-lg; }
-        }
       }
     }
   }

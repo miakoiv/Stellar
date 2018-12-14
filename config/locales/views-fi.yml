@@ -269,6 +269,7 @@ fi:
         storefront_nonprofit_html: <p><em>Stellar Platform Yhdistyspainoksen lisäksi:</em></p><ul><li>helppokäyttöinen ja myyvä verkkokauppa<li>monipuolinen tuotteiden sekä tuoteominaisuuksien hallinta ja hyödylliset tuotekonfiguraatiot<li>integraatiot logistiikkajärjestelmiin ja maksupalveluihin<li>joustavasti konfiguroitavat tilaustavat</ul><p><span class="label label-primary">Edullinen ratkaisu yhdistyksille ja yhteisöille</span></p>
       selector:
         select: Valitse
+        subscribe: Tilaa
     policies:
       index:
         pending: Sinulla on hyväksymättömiä sopimuksia. Ole hyvä ja tarkista keltaisella merkityt sopimukset.
@@ -446,8 +447,12 @@ fi:
         new_subscription: Uusi palvelutilaus
       new:
         new_subscription: Uusi palvelutilaus
+      panel:
         subscriber_info: Tilaajan tiedot
-        credit_card_payment: Maksu luottokortilla
+        selected_plan: Valittu tilausmalli
+      form:
+        submit: Aloita tilaus
+        working: Odotetaan tapahtuman valmistumista…
       subscription:
         active: Aktiivinen tilaus
         cancel: Peruuta tämä tilaus

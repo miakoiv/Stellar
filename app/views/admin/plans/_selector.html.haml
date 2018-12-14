@@ -1,13 +1,33 @@
+= javascript_include_tag 'https://checkout.stripe.com/checkout.js'
+
 .plan-selector
   - @plans.each do |plan|
-    .plan{id: dom_id(plan)}
+    .plan{id: dom_id(plan), data: {name: plan.human_attribute_value(:id), image: image_url("stellar-badges/#{plan.id}.png")}}
       .panel.panel-default
         .panel-body
           = render plan
         .panel-footer
-          .check-mark
-            .btn.btn-outline-primary.btn-block.disabled
-              = icon('check')
+          .plan-subscribe.collapse
+            %button.btn.btn-success.btn-block
+              = t('.subscribe')
           .plan-select
             = link_to new_admin_subscription_path(stripe_plan_id: plan.id), remote: true, class: 'btn btn-outline-primary btn-block' do
               = t('.select')
+
+:coffee
+  checkoutHandler = StripeCheckout.configure
+    key: '#{Rails.configuration.stripe.publishable_key}'
+    locale: '#{I18n.locale}'
+
+  $('.plan-subscribe > .btn').on 'click', (e) ->
+    $btn = $(e.currentTarget)
+    $plan = $btn.parents '.plan'
+
+    checkoutHandler.open
+      email: '#{current_user.email}'
+      image: $plan.data 'image'
+      name: $plan.data 'name'
+      currency: 'EUR'
+      token: (token) ->
+        $('#subscription_stripe_token').val token.id
+        $('#new_subscription').trigger 'submit.rails'
