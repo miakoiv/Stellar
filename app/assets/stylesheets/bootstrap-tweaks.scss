@@ -1737,23 +1737,26 @@ fieldset > legend {
 .plan-card {
   .plan-image {
     @extend .pull-left, .box-thumbnail;
-    margin-right: 5px;
+    margin-right: 10px;
     background-size: contain;
     background-repeat: no-repeat;
   }
-  &.platform_commercial,
-  &.platform_nonprofit {
-    .plan-image {
-      background-image: asset-url('stellar-logo/badge-queen-blue.svg');
-    }
+  &.platform_commercial .plan-image {
+    background-image: asset-url('stellar-badges/platform_commercial.png');
   }
-  &.storefront_starter,
-  &.storefront_advanced,
-  &.storefront_nonprofit {
-    .plan-image {
-      background-image: asset-url('stellar-logo/badge-rosso-corsa.svg');
-    }
+  &.storefront_starter .plan-image {
+    background-image: asset-url('stellar-badges/storefront_starter.png');
   }
+  &.storefront_advanced .plan-image {
+    background-image: asset-url('stellar-badges/storefront_advanced.png');
+  }
+  &.platform_nonprofit .plan-image {
+    background-image: asset-url('stellar-badges/platform_nonprofit.png');
+  }
+  &.storefront_nonprofit .plan-image {
+    background-image: asset-url('stellar-badges/storefront_nonprofit.png');
+  }
+
   .plan-title {
     @extend .clearfix, .lead;
   }
