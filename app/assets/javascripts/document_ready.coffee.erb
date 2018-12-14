@@ -36,10 +36,6 @@ $.fn.extend
       loading: ->
         $('#spinner').show()
 
-    $('.credit-card-number').payment 'formatCardNumber'
-    $('.credit-card-expiry').payment 'formatCardExpiry'
-    $('.credit-card-cvc').payment 'formatCardCVC'
-
   deactivate: ->
     $(this).removeClass 'active'
   activate: ->
