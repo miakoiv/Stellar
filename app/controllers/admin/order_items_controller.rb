@@ -37,7 +37,7 @@ class Admin::OrderItemsController < ApplicationController
       current_store.products.live.find_by(id: order_item_params[:product_id])
     end
     amount = order_item_params[:amount].to_i
-    options = {lot_code: concatenated_lot_code}
+    options = {lot_code: lot_code_or_serial}
 
     respond_to do |format|
       if @order_item = @order.insert(@product, amount, @order.source, options)
@@ -96,10 +96,8 @@ class Admin::OrderItemsController < ApplicationController
       }
     end
 
-    # Lot codes and serials are joined by hyphen if both are present,
-    # either one alone is used as the lot code.
-    def concatenated_lot_code
-      [:lot_code, :serial].map { |k| order_item_params[k].presence }
-        .compact.join('-')
+    # Use lot code if found, serial otherwise.
+    def lot_code_or_serial
+      order_item_params[:lot_code].presence || order_item_params[:serial].presence
     end
 end

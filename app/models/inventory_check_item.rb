@@ -31,7 +31,7 @@ class InventoryCheckItem < ActiveRecord::Base
   }
 
   attr_accessor :serial
-  after_initialize :concatenate_lot_code
+  after_initialize :lot_code_from_serial
   after_validation :assign_inventory_item, on: :create
   after_validation :calculate_difference
 
@@ -85,10 +85,12 @@ class InventoryCheckItem < ActiveRecord::Base
   end
 
   private
-    # Lot code and serial are joined by hyphen, either one appearing alone
-    # is used as the lot code.
-    def concatenate_lot_code
-      self[:lot_code] = [lot_code, serial].map(&:presence).compact.join('-')
+    # Serial is used as lot code on products that have no lot code.
+    def lot_code_from_serial
+      if lot_code.blank? && serial.present?
+        self[:lot_code] = serial
+      end
+      true
     end
 
     # Existing, matching inventory item is associated after validation,
