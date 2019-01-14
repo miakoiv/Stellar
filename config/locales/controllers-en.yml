@@ -134,6 +134,9 @@ en:
         notice: "Store %{store} created."
       update:
         notice: "Store %{store} updated."
+    subscriptions:
+      create:
+        notice: "Subscription %{plan} started."
     tags:
       create:
         notice: "Tag %{tag} created."

@@ -134,6 +134,9 @@ fi:
         notice: "Kauppa %{store} luotu."
       update:
         notice: "Kauppa %{store} päivitetty."
+    subscriptions:
+      create:
+        notice: "Palvelutilaus %{plan} aloitettu."
     tags:
       create:
         notice: "Tagi %{tag} luotu."

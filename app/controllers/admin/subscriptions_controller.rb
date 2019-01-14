@@ -35,12 +35,15 @@ class Admin::SubscriptionsController < ApplicationController
   def create
     authorize_action_for Subscription, at: current_store
 
-    @subscription = current_store.subscriptions.build(subscription_params)
-    logger.info params
-
-    respond_to do |format|
-      format.html { redirect_to admin_subscriptions_path, notice: t('.notice', subscription: @subscription) }
-      format.json { render :show, status: :created, location: admin_subscription_path(@subscription) }
+    @plan = Plan.new(stripe_plan_id: subscription_params[:stripe_plan_id])
+    subscription = PaymentGateway::StripeSubscription.new(
+      store: current_store,
+      user: current_user,
+      plan: @plan,
+      token: subscription_params[:stripe_token]
+    )
+    if subscription.subscribe
+      redirect_to admin_subscriptions_path, notice: t('.notice', plan: @plan.human_attribute_value(:id))
     end
   end
 
