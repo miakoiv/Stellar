@@ -308,8 +308,11 @@
 .segment-content-wrap.inset-double { padding: $grid-gutter-width*2; }
 
 @media (max-width: $screen-xs-max) {
+  .segment-content-wrap.inset-quarter { padding: $grid-gutter-width/8; }
   .segment-content-wrap.inset-half { padding: $grid-gutter-width/4; }
   .segment-content-wrap.inset-full { padding: $grid-gutter-width/2; }
+  .segment-content-wrap.inset-extra { padding: $grid-gutter-width*0.75; }
+  .segment-content-wrap.inset-double { padding: $grid-gutter-width; }
 }
 
 .segment-content .page-header { margin-top: 0; }
