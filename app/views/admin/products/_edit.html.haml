@@ -18,6 +18,12 @@
               = f.text_field :trade_price, class: 'text-right', append: '€'
             .col-sm-6
               = f.text_field :retail_price, class: 'text-right', append: '€'
+      %fieldset
+        .row
+          .col-md-6
+            = f.text_field :available_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-clear-btn': true}, append: f.button(t('.now'), id: 'available-now', class: 'btn btn-default')
+          .col-md-6
+            = f.text_field :deleted_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale, 'date-clear-btn': true}, append: f.button(t('.now'), id: 'deleted-now', class: 'btn btn-default')
     .panel-footer
       - if @product.page.present?
         = link_to icon('file-o', t('.edit_page')), edit_admin_page_path(@product.page), class: 'btn btn-default btn-sm'
@@ -35,6 +41,12 @@
     = render partial: 'admin/inventory_items/form', object: @product, as: :product
 
 :coffee
+  $('#available-now').on 'click', (e) ->
+    $('#product_available_at').val moment().format('YYYY-MM-DD')
+
+  $('#deleted-now').on 'click', (e) ->
+    $('#product_deleted_at').val moment().format('YYYY-MM-DD')
+
   $('select.selectize-label').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
