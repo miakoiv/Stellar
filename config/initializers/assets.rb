@@ -33,5 +33,6 @@ Rails.application.config.assets.precompile += %w(
   email/mailgun.css
   hamburgers/hamburgers.css
   ckeditor5/ckeditor
+  ckeditor5/translations/en
   ckeditor5/translations/fi
 )

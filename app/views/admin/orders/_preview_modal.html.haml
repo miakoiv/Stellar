@@ -13,4 +13,4 @@
       %h5= t('.contents')
       = render partial: 'contents', locals: {display_stock: true}
     .modal-footer
-      = link_to icon('check', t('.approve')), approve_admin_order_path(@order), remote: true, method: :patch, class: 'btn btn-warning'
+      = link_to icon('check', t('.approve')), approve_admin_order_path(@order), remote: true, method: :patch, data: {disable_with: button_spinner}, class: 'btn btn-warning'

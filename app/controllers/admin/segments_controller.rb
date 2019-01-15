@@ -58,6 +58,7 @@ class Admin::SegmentsController < ApplicationController
     respond_to do |format|
       if @segment.update(segment_params)
         track @segment, @page
+        @segment.touch
         format.js { render in_place_edit ? :show : :update }
       else
         format.js { render :rollback }

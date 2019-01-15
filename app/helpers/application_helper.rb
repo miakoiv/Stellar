@@ -108,6 +108,10 @@ module ApplicationHelper
     end
   end
 
+  def button_spinner
+    icon('cog', class: 'fa-spin')
+  end
+
   def loading_spinner
     icon('chevron-down', id: 'spinner', class: 'animated infinite flip', style: 'display: none')
   end

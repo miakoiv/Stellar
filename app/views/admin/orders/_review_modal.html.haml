@@ -13,4 +13,4 @@
       %h5= t('.contents')
       = render partial: 'contents', locals: {display_stock: false}
     .modal-footer
-      = link_to icon('gavel', t('.conclude')), conclude_admin_order_path(@order), remote: true, method: :patch, class: 'btn btn-primary'
+      = link_to icon('gavel', t('.conclude')), conclude_admin_order_path(@order), remote: true, method: :patch, data: {disable_with: button_spinner}, class: 'btn btn-primary'
