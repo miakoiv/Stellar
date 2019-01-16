@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181207131031) do
+ActiveRecord::Schema.define(version: 20181207112527) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "store_id",      limit: 4,     null: false
@@ -936,7 +936,6 @@ ActiveRecord::Schema.define(version: 20181207131031) do
     t.string   "shipping_city",          limit: 255
     t.string   "shipping_country_code",  limit: 2
     t.string   "locale",                 limit: 255
-    t.string   "stripe_customer_id",     limit: 255
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
