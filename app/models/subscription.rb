@@ -17,8 +17,8 @@ class Subscription < ActiveRecord::Base
   default_scope { order(first_date: :desc) }
 
   #---
-  # New subscriptions have this set by Stripe.
-  attr_accessor :stripe_token
+  # New subscriptions have this set by Stripe Checkout.
+  attr_accessor :stripe_source_id
 
   #---
   # Returns the associated Plan object.

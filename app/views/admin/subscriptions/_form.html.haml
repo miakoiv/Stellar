@@ -1,5 +1,4 @@
-= bootstrap_form_for [:admin, @subscription] do |f|
-  .alert.alert-danger.subscription-errors.collapse
+= bootstrap_form_for [:admin, current_store.subscriptions.new] do |f|
   %fieldset
     = f.hidden_field :stripe_plan_id
-    = f.hidden_field :stripe_token
+    = f.hidden_field :stripe_source_id

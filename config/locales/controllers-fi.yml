@@ -136,7 +136,9 @@ fi:
         notice: "Kauppa %{store} päivitetty."
     subscriptions:
       create:
-        notice: "Palvelutilaus %{plan} aloitettu."
+        notice: "Palvelutilaus aloitettu."
+        card_error: "Palvelutilaus epäonnistui. Maksukorttia ei kelpaa."
+        error: "Palvelutilaus epäonnistui tuntemattomasta syystä."
     tags:
       create:
         notice: "Tagi %{tag} luotu."

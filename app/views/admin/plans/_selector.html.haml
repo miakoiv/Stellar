@@ -18,6 +18,9 @@
   checkoutHandler = StripeCheckout.configure
     key: '#{Rails.configuration.stripe.publishable_key}'
     locale: '#{I18n.locale}'
+    source: (source) ->
+      $('#subscription_stripe_source_id').val source.id
+      $('#new_subscription').trigger 'submit.rails'
 
   $('.plan-subscribe > .btn').on 'click', (e) ->
     $btn = $(e.currentTarget)
@@ -28,6 +31,3 @@
       image: $plan.data 'image'
       name: $plan.data 'name'
       currency: 'EUR'
-      token: (token) ->
-        $('#subscription_stripe_token').val token.id
-        $('#new_subscription').trigger 'submit.rails'

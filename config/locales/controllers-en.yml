@@ -136,7 +136,9 @@ en:
         notice: "Store %{store} updated."
     subscriptions:
       create:
-        notice: "Subscription %{plan} started."
+        notice: "Subscription started."
+        card_error: "Subscription failed. There was a problem with the card."
+        error: "Subscription failed for an unknown reason."
     tags:
       create:
         notice: "Tag %{tag} created."
