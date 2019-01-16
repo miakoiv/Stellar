@@ -855,7 +855,7 @@ ActiveRecord::Schema.define(version: 20181207112527) do
     t.integer  "store_id",       limit: 4,   null: false
     t.integer  "customer_id",    limit: 4,   null: false
     t.string   "stripe_plan_id", limit: 255, null: false
-    t.string   "stripe_id",      limit: 255
+    t.string   "stripe_id",      limit: 255, null: false
     t.date     "first_date"
     t.date     "last_date"
     t.integer  "status",         limit: 4

@@ -4,7 +4,7 @@ class CreateSubscriptions < ActiveRecord::Migration
       t.belongs_to :store, index: true, null: false
       t.belongs_to :customer, index: true, null: false
       t.string :stripe_plan_id, null: false
-      t.string :stripe_id
+      t.string :stripe_id, null: false
       t.date :first_date
       t.date :last_date
       t.integer :status
