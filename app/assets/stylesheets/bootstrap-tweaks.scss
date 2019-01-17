@@ -548,22 +548,6 @@ body {
 
 
 /*
- * Switchboard
- */
-.switchboard { @extend .list-group; }
-.switchboard > a {
-  @extend .list-group-item;
-
-  figure {
-    @extend .pull-right, .box-icon;
-  }
-  span {
-    display: block;
-  }
-}
-
-
-/*
  * Product filtering
  */
 .filter-bar .dropdown-menu {
