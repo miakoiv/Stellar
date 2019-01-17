@@ -187,6 +187,10 @@ class Store < ActiveRecord::Base
     subscriptions.active.first
   end
 
+  def eligible_for_trial_subscription?
+    subscriptions.none?
+  end
+
   # Let's assume the first inventory is the default one.
   # May be nil if the store doesn't keep stock.
   def default_inventory

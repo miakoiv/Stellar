@@ -29,7 +29,7 @@ module PaymentGateway
         Stripe::Subscription.create(
           customer: create_stripe_customer!,
           tax_percent: Price::DEFAULT_TAX_RATE,
-          trial_from_plan: true,
+          trial_from_plan: store.eligible_for_trial_subscription?,
           items: [
             {plan: stripe_plan_id},
           ]
