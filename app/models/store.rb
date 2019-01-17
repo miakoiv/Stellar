@@ -182,6 +182,11 @@ class Store < ActiveRecord::Base
     hostnames.first
   end
 
+  # Only one subscription is active at any time.
+  def active_subscription
+    subscriptions.active.first
+  end
+
   # Let's assume the first inventory is the default one.
   # May be nil if the store doesn't keep stock.
   def default_inventory
