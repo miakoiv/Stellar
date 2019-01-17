@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   # pending policies are shown the policies index however.
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
-      if can_manage?
+      if current_store.present? && can_manage?
         policies_pending? ? admin_policies_url : admin_dashboard_url
       else
         super

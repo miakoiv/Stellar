@@ -67,8 +67,8 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = {
-    host: ENV['DEFAULT_URL_HOST'],
-    port: ENV['DEFAULT_URL_PORT'] || 80
+    protocol: 'https',
+    host: ENV['DEFAULT_URL_HOST']
   }
   config.action_mailer.delivery_method = :sendmail
 
