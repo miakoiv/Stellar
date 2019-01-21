@@ -52,6 +52,19 @@ class Admin::SubscriptionsController < ApplicationController
     end
   end
 
+  # DELETE /admin/subscriptions/1
+  def destroy
+    authorize_action_for @subscription, at: current_store
+
+    begin
+      StripeGateway::CancellationService.new(@subscription).cancel!
+    rescue => e
+      flash[:error] = t('.error')
+    end
+
+    redirect_to admin_subscriptions_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
