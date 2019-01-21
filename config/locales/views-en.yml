@@ -472,7 +472,13 @@ en:
         working: Processing transaction…
       subscription:
         active: Active subscription
-        cancel: Cancel this subscription
+        edit: Change plan
+        cancel:
+          button: End subscription
+          confirm:
+            title: Ending your subscription
+            body_html: The subscription will end at the current billing cycle. Click <strong>End subscription</strong> to confirm. If you want to change to a different plan instead, click Cancel and then <i class="fa fa-edit"></i> Change plan.
+            proceed: End subscription
     tags:
       index:
         new_tag: New tag

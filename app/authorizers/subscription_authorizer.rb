@@ -23,6 +23,10 @@ class SubscriptionAuthorizer < ApplicationAuthorizer
     user.has_cached_role?(:store_admin, opts[:at])
   end
 
+  def updatable_by?(user, opts)
+    user == resource.customer && resource.active?
+  end
+
   def deletable_by?(user, opts)
     resource.active? &&
       (user.has_cached_role?(:superuser, opts[:at]) ||

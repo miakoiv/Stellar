@@ -456,7 +456,13 @@ fi:
         working: Odotetaan tapahtuman valmistumista…
       subscription:
         active: Aktiivinen tilaus
-        cancel: Peruuta tämä tilaus
+        edit: Vaihda tilausmallia
+        cancel:
+          button: Päätä tilaus
+          confirm:
+            title: Palvelutilauksen päättäminen
+            body_html: Tilaus päättyy tämänhetkisen laskutuskauden loppuun. Valitse <strong>Päätä tilaus</strong> jos olet varma. Jos haluat vaihtaa palvelutilauksen mallia, valitse Kumoa ja sitten <i class="fa fa-edit"></i> Vaihda tilausmallia.
+            proceed: Päätä tilaus
     tags:
       index:
         new_tag: Uusi tagi

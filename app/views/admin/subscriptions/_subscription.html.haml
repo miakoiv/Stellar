@@ -8,5 +8,7 @@
     = render subscription.plan
   .panel-footer
     .pull-right
-      - if subscription.active? && current_user.can_delete?(Subscription, at: current_store)
-        = link_to icon('remove', t('.cancel')), admin_subscription_path(subscription), method: :delete, class: 'btn btn-sm btn-outline-danger'
+      - if current_user.can_update?(subscription, at: current_store)
+        = link_to icon('edit', t('.edit')), edit_admin_subscription_path(subscription), class: 'btn btn-sm btn-default'
+      - if current_user.can_delete?(subscription, at: current_store)
+        = link_to icon('remove', t('.cancel.button')), admin_subscription_path(subscription), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('.cancel.confirm.body_html'), 'confirm-title': t('.cancel.confirm.title'), 'confirm-proceed': t('.cancel.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
