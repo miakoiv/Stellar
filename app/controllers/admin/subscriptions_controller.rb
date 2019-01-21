@@ -21,6 +21,7 @@ class Admin::SubscriptionsController < ApplicationController
     respond_to do |format|
       format.html do
         @plans = Plan.all
+        @subscription = current_store.subscriptions.new
       end
       format.js do
         @plan = Plan.new(stripe_plan_id: params[:stripe_plan_id])
@@ -41,15 +42,12 @@ class Admin::SubscriptionsController < ApplicationController
         stripe_source_id: subscription_params[:stripe_source_id]
       ).subscribe!
 
-      redirect_to admin_subscriptions_path, notice: t('.notice')
-
     rescue Stripe::CardError => e
-      flash.now[:error] = t('.card_error')
-      render :new
+      redirect_to admin_subscriptions_path, alert: t('.card_error') and return
     rescue => e
-      flash.now[:error] = t('.error')
-      render :new
+      redirect_to admin_subscriptions_path, alert: t('.error') and return
     end
+    redirect_to admin_subscriptions_path, notice: t('.notice')
   end
 
   # DELETE /admin/subscriptions/1
