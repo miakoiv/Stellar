@@ -5,7 +5,7 @@ class Subscription < ActiveRecord::Base
   resourcify
   include Authority::Abilities
 
-  enum status: {active: 0, inactive: 1, cancelled: 2}
+  enum status: {active: 0, cancelling: 1, cancelled: 2}
 
   #---
   # Store subscribing to the Stripe plan.
@@ -15,6 +15,7 @@ class Subscription < ActiveRecord::Base
   belongs_to :customer, class_name: 'User', required: true
 
   default_scope { order(first_date: :desc) }
+  scope :running, -> { where.not(status: 2)}
 
   #---
   # New subscriptions have this set by Stripe Checkout.
@@ -26,8 +27,12 @@ class Subscription < ActiveRecord::Base
     @plan ||= Plan.new(stripe_plan_id: stripe_plan_id)
   end
 
+  def running?
+    !cancelled?
+  end
+
   def appearance
-    active? ? 'primary' : 'default'
+    running? ? 'primary' : 'default'
   end
 
   def to_s

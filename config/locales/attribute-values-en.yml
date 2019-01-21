@@ -210,6 +210,11 @@ en:
           'velocity-slow': <i class="fa fa-car"></i>
           'velocity-normal': <i class="fa fa-plane"></i>
           'velocity-fast': <i class="fa fa-rocket"></i>
+      subscription:
+        status:
+          active: active
+          cancelling: cancelling
+          cancelled: cancelled
       tag:
         appearance:
           default: gray

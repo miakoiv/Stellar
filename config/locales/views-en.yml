@@ -471,7 +471,6 @@ en:
         submit: Subscribe
         working: Processing transaction…
       subscription:
-        active: Active subscription
         edit: Change plan
         cancel:
           button: End subscription

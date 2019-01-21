@@ -1,8 +1,7 @@
 .panel{class: "panel-#{subscription.appearance}"}
   .panel-heading
-    - if subscription.active?
-      .pull-right
-        %span.label.label-primary= icon('power-off', t('.active'))
+    .pull-right
+      %span.label.label-primary= subscription.human_attribute_value(:status)
     %h4.panel-title= subscription
   .panel-body
     = render subscription.plan

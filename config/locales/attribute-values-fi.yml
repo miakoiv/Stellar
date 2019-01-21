@@ -210,6 +210,11 @@ fi:
           'velocity-slow': <i class="fa fa-car"></i>
           'velocity-normal': <i class="fa fa-plane"></i>
           'velocity-fast': <i class="fa fa-rocket"></i>
+      subscription:
+        status:
+          active: aktiivinen
+          cancelling: päättymässä
+          cancelled: päättynyt
       tag:
         appearance:
           default: harmaa

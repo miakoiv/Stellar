@@ -455,7 +455,6 @@ fi:
         submit: Aloita tilaus
         working: Odotetaan tapahtuman valmistumista…
       subscription:
-        active: Aktiivinen tilaus
         edit: Vaihda tilausmallia
         cancel:
           button: Päätä tilaus
