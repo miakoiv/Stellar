@@ -34,7 +34,7 @@ class Admin::SubscriptionsController < ApplicationController
 
     begin
       @plans = Plan.all
-      @subscription = PaymentGateway::StripeSubscriber.new(
+      @subscription = StripeGateway::SubscriptionService.new(
         store: current_store,
         user: current_user,
         stripe_plan_id: subscription_params[:stripe_plan_id],

@@ -1,7 +1,7 @@
 #encoding: utf-8
 
-module PaymentGateway
-  class StripeSubscriber
+module StripeGateway
+  class SubscriptionService
 
     include ActiveModel::Model
 
