@@ -1,0 +1,18 @@
+.plan-selector
+  - @plans.each do |plan|
+    .plan{id: dom_id(plan), data: {name: plan.human_attribute_value(:id), image: image_url("stellar-badges/#{plan.id}.png")}}
+      .panel.panel-default
+        .panel-body
+          = render plan
+        .panel-footer
+          .plan-subscribe.collapse
+            %button.btn.btn-success.btn-block
+              = t('admin.plans.selector.subscribe')
+          - unless plan.id == @subscription.plan.id
+            .plan-select
+              = link_to edit_admin_subscription_path(stripe_plan_id: plan.id), remote: true, class: 'btn btn-outline-primary btn-block' do
+                = t('admin.plans.selector.select')
+
+:coffee
+  $('.plan-subscribe > .btn').on 'click', (e) ->
+    $('.edit_subscription').trigger 'submit.rails'

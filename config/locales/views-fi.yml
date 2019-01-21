@@ -448,6 +448,10 @@ fi:
         new_subscription: Uusi palvelutilaus
       new:
         new_subscription: Uusi palvelutilaus
+      edit:
+        title: Palvelutilauksen muutos
+        current_plan: Nykyinen tilausmalli
+        new_plan: Valitse uusi tilausmalli
       panel:
         subscriber_info: Tilaajan tiedot
         selected_plan: Valittu tilausmalli

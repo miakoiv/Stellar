@@ -1,0 +1,16 @@
+.page-header
+  = link_to admin_subscriptions_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  %h1= t('.title')
+
+.row
+  .col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title= t('.current_plan')
+      .panel-body
+        = render @subscription.plan
+
+= render partial: 'form'
+%h4= t('.new_plan')
+= render partial: 'admin/plans/edit_subscription'

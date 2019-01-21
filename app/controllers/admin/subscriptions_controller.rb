@@ -13,6 +13,20 @@ class Admin::SubscriptionsController < ApplicationController
     @subscriptions = current_store.subscriptions
   end
 
+  # GET /admin/subscriptions/1/edit
+  def edit
+    authorize_action_for @subscription, at: current_store
+
+    respond_to do |format|
+      format.html do
+        @plans = Plan.all
+      end
+      format.js do
+        @plan = Plan.new(stripe_plan_id: params[:stripe_plan_id])
+      end
+    end
+  end
+
   # GET /admin/subscriptions/new
   # GET /admin/subscriptions/new.js
   def new
@@ -48,6 +62,20 @@ class Admin::SubscriptionsController < ApplicationController
       redirect_to admin_subscriptions_path, alert: t('.error') and return
     end
     redirect_to admin_subscriptions_path, notice: t('.notice')
+  end
+
+  # PATCH/PUT /admin/subscriptions/1
+  def update
+    authorize_action_for @subscription, at: current_store
+
+    begin
+      plan_id = subscription_params[:stripe_plan_id]
+      StripeGateway::UpgradingService.new(@subscription).upgrade!(plan_id)
+    rescue => e
+      flash[:error] = t('.error')
+    end
+
+    redirect_to admin_subscriptions_path
   end
 
   # DELETE /admin/subscriptions/1

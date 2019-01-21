@@ -464,6 +464,10 @@ en:
         new_subscription: New subscription
       new:
         new_subscription: New subscription
+      edit:
+        title: Changing subscription
+        current_plan: Current plan
+        new_plan: Select new plan
       panel:
         subscriber_info: Subscriber information
         selected_plan: Selected plan
