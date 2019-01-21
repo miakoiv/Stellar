@@ -14,7 +14,7 @@ class Subscription < ActiveRecord::Base
   # Associated customer (user).
   belongs_to :customer, class_name: 'User', required: true
 
-  default_scope { order(first_date: :desc) }
+  default_scope { order(created_at: :desc) }
   scope :running, -> { where.not(status: 2)}
 
   #---
