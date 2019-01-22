@@ -10,7 +10,7 @@
           %fieldset{disabled: locked}
             = f.text_field :email, required: true
             = f.text_field :name, required: true
-            = f.telephone_field :phone, required: true
+            = f.telephone_field :phone
             = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
             - unless locked
               = f.password_field :password

@@ -7,7 +7,7 @@
       .col-sm-8
         = f.text_field :customer_name, required: true
       .col-sm-4
-        = f.telephone_field :customer_phone, required: true
+        = f.telephone_field :customer_phone
   - if current_store.b2b_sales?
     %fieldset.info
       .row
