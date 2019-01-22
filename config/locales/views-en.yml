@@ -470,6 +470,7 @@ en:
         title: Changing subscription
         current_plan: Current plan
         new_plan: Select new plan
+        upgrading_html: <p class="lead">When you need more features, choose another plan.</p><p>Select the features you need below and subscribe. The change will take effect immediately.</p><p>Note:</p><ul><li>Changing the plan will activate the new features immediately<li>The billing cycle of the subscription will not change<li>Any remaining time from the previous plan will be reimbursed on the next invoice</ul>
       panel:
         subscriber_info: Subscriber information
         selected_plan: Selected plan

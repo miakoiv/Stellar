@@ -454,6 +454,7 @@ fi:
         title: Palvelutilauksen muutos
         current_plan: Nykyinen tilausmalli
         new_plan: Valitse uusi tilausmalli
+        upgrading_html: <p class="lead">Kun tarvitset enemmän ominaisuuksia, valitse toinen tilausmalli.</p><p>Valitse alta tarvitsemasi ominaisuudet ja tilaa. Muutos tulee voimaan välittömästi.</p><p>Huomioitavaa:</p><ul><li>Tilausmallia vaihtamalla kauppa saa heti käyttöönsä uuden tilausmallin ominaisuudet<li>Palvelutilauksen laskutus jatkuu kuukausittain samana päivänä kuin aiemmassa mallissa<li>Seuraavassa laskussa hyvitetään jäljelle jäänyt aika edellisestä tilausmallista</ul>
       panel:
         subscriber_info: Tilaajan tiedot
         selected_plan: Valittu tilausmalli
