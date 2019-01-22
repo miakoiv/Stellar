@@ -462,6 +462,8 @@ en:
     subscriptions:
       index:
         new_subscription: New subscription
+        getting_started_html: The store will need a subscription to continue working. Start a subscription by clicking <i class="fa fa-plus"></i> New subscription</i> and select a plan.
+        cancelling_and_upgrading_html: The store has an active subscription. You can change the active subscription to a different plan when you need additional features. You can end the subscription to disable the store at the end of the billing cycle.
       new:
         new_subscription: New subscription
       edit:

@@ -4,6 +4,12 @@
       = icon('plus', t('.new_subscription'))
   %h1= icon('ticket', title(Subscription, count: 2))
 
+.alert.alert-info
+  - if current_store.subscriptions.running.any?
+    = t('.cancelling_and_upgrading_html')
+  - else
+    = t('.getting_started_html')
+
 .subscription-list
   - @subscriptions.each do |subscription|
     .subscription

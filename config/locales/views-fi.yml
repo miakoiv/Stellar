@@ -446,6 +446,8 @@ fi:
     subscriptions:
       index:
         new_subscription: Uusi palvelutilaus
+        getting_started_html: Kauppa tarvitsee toimiakseen palvelutilauksen. Aloita tilaus painamalla <i class="fa fa-plus"></i> Uusi palvelutilaus</i> ja valitse kaupallesi sopiva tilausmalli.
+        cancelling_and_upgrading_html: Kaupalla on voimassaoleva palvelutilaus. Voit vaihtaa aktiivisen tilauksen tilausmallia kun tarvitset uusia ominaisuuksia. Tilauksen voi myös päättää, jolloin kauppa lakkaa toimimasta laskutuskauden lopussa.
       new:
         new_subscription: Uusi palvelutilaus
       edit:
