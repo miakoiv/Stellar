@@ -32,7 +32,8 @@ module StripeGateway
           trial_from_plan: store.eligible_for_trial_subscription?,
           items: [
             {plan: stripe_plan_id},
-          ]
+          ],
+          metadata: {store: store.name}
         )
       end
 
