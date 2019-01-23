@@ -39,6 +39,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_store
 
+  def current_site_name
+    'Stellar'
+  end
+  helper_method :current_site_name
+
   private
 
     # Unless given by param, locale is set from user preference first, then

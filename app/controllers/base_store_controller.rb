@@ -10,6 +10,8 @@ class BaseStoreController < ApplicationController
   prepend_before_action :set_hostname_and_store
   before_action :set_header_and_footer
 
+  layout 'store'
+
   # Authenticate user, but skip authentication if guests are admitted.
   def authenticate_user_or_skip!
     return true if current_store.admit_guests?
@@ -200,7 +202,7 @@ class BaseStoreController < ApplicationController
     end
 
     def set_header_and_footer
-      if !request.xhr? && current_store.present?
+      if !request.xhr?
         @header = current_store.header
         @footer = current_store.footer
       end

@@ -3,6 +3,8 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
+    = stylesheet_link_tag current_store.stylesheet_source, media: 'all'
+    = javascript_include_tag "spry_themes/#{current_theme}"
     = stylesheet_link_tag 'ckeditor-document', media: 'all'
     = javascript_include_tag 'ckeditor5/ckeditor'
     = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"

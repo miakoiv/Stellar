@@ -2,41 +2,8 @@
 %html{lang: I18n.locale}
   %head
     = render partial: 'shared/metadata'
-    = render partial: 'shared/cookieconsent'
     = render partial: 'favicon'
-  %body{class: [current_theme, (current_store.detach_menu? || content_for?(:auxiliary_nav)) && 'dual-nav']}
-    %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
-      .inner-wrap= render partial: 'shared/side_nav'
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top
-      .container
-        .navbar-header
-          = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).to_s), class: 'navbar-brand'
-        .navbar-body
-          - unless current_store.detach_menu?
-            = render partial: 'shared/main_nav'
-          #navbar-lookup.collapse
-            = render partial: 'shared/lookup'
-        .navbar-charms
-          = render partial: 'shared/offcanvas_toggle'
-          %ul.nav.navbar-nav.navbar-right
-            = render partial: 'shared/navbar_charms'
-            = render partial: 'shared/user_widget'
-      - if current_store.detach_menu? || content_for?(:auxiliary_nav)
-        %nav#secondary-nav.navbar.navbar-inverse.hidden-xs
-          .container
-            - if current_store.detach_menu?
-              = render partial: 'shared/main_nav'
-            %ul.aux-nav.nav.navbar-nav.navbar-right
-              = yield :auxiliary_nav
-    #content-wrap
+    = stylesheet_link_tag 'bootstrap-base', media: 'all'
+  %body
+    .container
       = yield
-
-    - if current_store.favorites?
-      = render partial: 'shared/favorites_modal'
-    = render partial: 'shared/footer'
-    = render partial: 'shared/outdated_browser'
-    = render partial: 'shared/external_scripts'
-    = render partial: 'shared/live_chat'
-
-    #mega-dropdown-wrap
-      = yield :mega_dropdown_content

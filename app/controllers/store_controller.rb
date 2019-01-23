@@ -2,10 +2,6 @@
 
 class StoreController < BaseStoreController
 
-  def wiselinks_layout
-    'application'
-  end
-
   # This controller is aware of unauthenticated guests.
   def current_user
     super || guest_user

@@ -1,12 +1,10 @@
 %meta{charset: 'utf-8'}
 %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
 %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
+
 = display_meta_tags site: current_site_name
+= csrf_meta_tags
 
 = stylesheet_link_tag 'application', media: 'all'
-= stylesheet_link_tag current_store.stylesheet_source, media: 'all'
 = stylesheet_link_tag 'print', media: 'print'
 = javascript_include_tag 'application'
-= javascript_include_tag "spry_themes/#{current_theme}"
-
-= csrf_meta_tags
