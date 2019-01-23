@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::ColumnsController < ApplicationController
+class Admin::ColumnsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_column
 
   authority_actions settings: 'update', modify: 'update'
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/columns/1/settings.js
   def settings

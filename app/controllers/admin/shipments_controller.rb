@@ -1,14 +1,11 @@
 #encoding: utf-8
 
-class Admin::ShipmentsController < ApplicationController
+class Admin::ShipmentsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_order, only: [:create]
   before_action :set_shipment, except: [:create]
 
   authority_actions refresh: 'update', complete: 'update', label: 'read'
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/shipments/1
   def show

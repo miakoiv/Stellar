@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::GroupsController < ApplicationController
+class Admin::GroupsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default, :select_categories, :toggle_category]
 
   authority_actions reorder: 'update', make_default: 'update', select_categories: 'update', toggle_category: 'update'
-
-  layout 'admin'
 
   # GET /admin/groups
   # GET /admin/groups.json

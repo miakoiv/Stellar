@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::PagesController < ApplicationController
+class Admin::PagesController < AdminController
 
   include AwesomeNester
-  before_action :authenticate_user!
+
   before_action :set_page, only: [:edit, :update, :destroy, :layout, :duplicate]
 
   authority_actions rearrange: 'update', layout: 'update', duplicate: 'create'
-
-  layout 'admin'
 
   # GET /admin/pages
   # GET /admin/pages.json

@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::OrderItemsController < ApplicationController
+class Admin::OrderItemsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_order_and_item, except: [:index, :create]
-
-  layout 'admin'
 
   # GET /admin/order_items
   def index

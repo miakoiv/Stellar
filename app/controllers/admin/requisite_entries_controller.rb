@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::RequisiteEntriesController < ApplicationController
+class Admin::RequisiteEntriesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
-
-  # No layout, this controller never renders HTML.
 
   # DELETE /admin/requisite_entries/1
   def destroy

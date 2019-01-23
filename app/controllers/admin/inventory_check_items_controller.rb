@@ -1,12 +1,9 @@
 #encoding: utf-8
 
-class Admin::InventoryCheckItemsController < ApplicationController
+class Admin::InventoryCheckItemsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_inventory_check, only: [:create]
   before_action :set_inventory_check_item, only: [:update, :destroy, :approve, :discard]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/inventory_checks/1/inventory_check_items
   def create

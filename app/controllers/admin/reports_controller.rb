@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::ReportsController < ApplicationController
+class Admin::ReportsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_variant, only: [:sales, :purchases]
-
-  layout 'admin'
 
   # GET /admin/reports
   def index

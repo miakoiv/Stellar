@@ -1,15 +1,13 @@
 #encoding: utf-8
 
-class Admin::ProductsController < ApplicationController
+class Admin::ProductsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :set_price, :duplicate, :add_requisite_entries, :make_primary]
   before_action :set_group, only: [:pricing, :set_price]
 
   authority_actions query: 'read', pricing: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', set_price: 'update', duplicate: 'create'
-
-  layout 'admin'
 
   # GET /admin/products
   # GET /admin/products.json

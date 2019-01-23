@@ -1,10 +1,6 @@
 #encoding: utf-8
 
-class Admin::DashboardController < ApplicationController
-
-  before_action :authenticate_user!
-
-  layout 'admin'
+class Admin::DashboardController < AdminController
 
   # GET /admin/dashboard
   def index

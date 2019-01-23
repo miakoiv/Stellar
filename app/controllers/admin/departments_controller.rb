@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::DepartmentsController < ApplicationController
+class Admin::DepartmentsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_department, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions reorder: 'update'
-
-  layout 'admin'
 
   # GET /admin/departments
   # GET /admin/departments.json

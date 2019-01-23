@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::AssetEntriesController < ApplicationController
+class Admin::AssetEntriesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_customer_asset, only: [:create]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/customer_assets/1/asset_entries
   def create

@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::DocumentsController < ApplicationController
+class Admin::DocumentsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/documents/1
   # This is only called by Dropzone as callback for success.

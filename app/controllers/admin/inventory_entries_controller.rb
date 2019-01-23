@@ -1,8 +1,7 @@
 #encoding: utf-8
 
-class Admin::InventoryEntriesController < ApplicationController
+class Admin::InventoryEntriesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_inventory_item, only: [:create]
 
   # POST /admin/inventory_items/1/inventory_entries

@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::ShippingMethodsController < ApplicationController
+class Admin::ShippingMethodsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_shipping_method, only: [:show, :edit, :update, :destroy]
-
-  layout 'admin'
 
   # GET /admin/shipping_methods
   # GET /admin/shipping_methods.json

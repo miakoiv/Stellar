@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::RolesController < ApplicationController
+class Admin::RolesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_user_and_role
 
   authority_actions toggle: 'update'
-
-  # No layout, this controller never renders HTML.
 
   # PATCH /admin/users/1/roles/el_presidente/toggle.js
   def toggle

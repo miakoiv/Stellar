@@ -1,14 +1,11 @@
 #encoding: utf-8
 
-class Admin::PromotionsController < ApplicationController
+class Admin::PromotionsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_promotion,
     only: [:show, :edit, :update, :destroy, :add_products, :add_categories]
 
   authority_actions add_products: 'update', add_categories: 'update'
-
-  layout 'admin'
 
   # GET /admin/promotions
   # GET /admin/promotions.json

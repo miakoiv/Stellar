@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::OrderTypesController < ApplicationController
+class Admin::OrderTypesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_order_type, only: [:show, :edit, :update, :destroy]
-
-  layout 'admin'
 
   # GET /admin/order_types
   # GET /admin/order_types.json

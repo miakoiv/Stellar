@@ -1,9 +1,6 @@
-class Admin::StylesController < ApplicationController
+class Admin::StylesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_store
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/stores/1/style.js
   def edit

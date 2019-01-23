@@ -1,14 +1,11 @@
 #encoding: utf-8
 
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_group, only: [:index, :new, :create, :join]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :join]
 
   authority_actions join: 'update'
-
-  layout 'admin'
 
   # GET /admin/groups/1/users
   # GET /admin/groups/1/users.json
