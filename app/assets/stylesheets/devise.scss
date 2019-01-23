@@ -1,0 +1,27 @@
+$font-size-base: 16px !default;
+
+$screen-top-color: #ec2f4b;
+$screen-bottom-color: #009fff;
+
+@import "bootstrap-base";
+
+#app {
+  justify-content: center;
+  @include gradient-vertical($screen-top-color, $screen-bottom-color, 0%, 100%);
+
+  .container {
+    .branding {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      border-radius: 50%;
+    }
+    .page-header {
+      text-align: center;
+      color: #fff;
+    }
+    .panel {
+
+    }
+  }
+}

@@ -3,12 +3,9 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
-  %body
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top
+    = stylesheet_link_tag 'devise', media: 'all'
+  %body#app
+    .vertical-center
       .container
-        .navbar-header
-          .navbar-brand= image_tag('stellar-horizontal.svg', class: 'img-responsive', style: 'height: 100%;')
-    #content-wrap
-      #static-wrap.layout-container
-        .container
-          = yield
+        .branding
+        = yield
