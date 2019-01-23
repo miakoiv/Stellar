@@ -2,7 +2,7 @@
 #
 # This controller deals with editing and deleting items in the shopping cart.
 #
-class OrderItemsController < ApplicationController
+class OrderItemsController < BaseStoreController
 
   # This controller is aware of unauthenticated guests.
   def current_user
@@ -11,7 +11,6 @@ class OrderItemsController < ApplicationController
 
   # Guest users may edit their shopping cart contents.
   before_action :authenticate_user_or_skip!
-
   before_action :set_order_and_item
 
   # PATCH/PUT /order_items/1

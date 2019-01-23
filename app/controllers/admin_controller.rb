@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class AdminController < BaseStoreController
 
   before_action :authenticate_user!
 

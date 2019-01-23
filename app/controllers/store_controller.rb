@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class StoreController < ApplicationController
+class StoreController < BaseStoreController
 
   def wiselinks_layout
     'application'

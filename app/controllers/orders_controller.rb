@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class OrdersController < ApplicationController
+class OrdersController < BaseStoreController
 
   # This controller is aware of unauthenticated guests.
   def current_user
@@ -9,11 +9,10 @@ class OrdersController < ApplicationController
 
   # Unauthenticated guests may browse their orders.
   before_action :authenticate_user_or_skip!
-  authority_actions duplicate: 'read', select: 'read', preview: 'read', claim: 'update'
-
-  before_action :set_header_and_footer
   before_action :set_categories, only: [:index, :show, :edit]
   before_action :set_order, only: [:show, :edit, :update, :destroy, :duplicate]
+
+  authority_actions duplicate: 'read', select: 'read', preview: 'read', claim: 'update'
 
   # GET /orders
   def index
