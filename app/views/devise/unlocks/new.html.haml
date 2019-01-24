@@ -6,7 +6,7 @@
       .panel-body
         = bootstrap_form_for resource, as: resource_name, url: unlock_path(resource_name), html: {method: :post} do |f|
           = f.email_field :email, autofocus: true, autocomplete: 'email'
-        .actions
-          = f.primary t('.resend_unlock_instructions')
+          .actions
+            = f.primary t('.resend_unlock_instructions')
     .links
       = render 'devise/shared/links'
