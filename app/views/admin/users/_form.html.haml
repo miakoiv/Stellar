@@ -9,8 +9,6 @@
       .tab-content
         = tab_pane 'user-personal', default: true do
           %fieldset{disabled: locked}
-            = f.form_group do
-              = f.check_box :approved
             = f.text_field :email, required: true
             - unless @user.new_record?
               = f.text_field :name, required: true

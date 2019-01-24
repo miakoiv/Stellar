@@ -654,7 +654,6 @@ en:
         roles: Roles
         orders: Orders
         locale: Language
-        approved: Active
         phone: Phone number
         billing_address: Billing address
         billing_postalcode: Postal code

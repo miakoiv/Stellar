@@ -654,7 +654,6 @@ fi:
         roles: Roolit
         orders: Tilaukset
         locale: Kieli
-        approved: Aktiivinen
         phone: Puhelinnumero
         billing_address: Laskutusosoite
         billing_postalcode: Postinumero
