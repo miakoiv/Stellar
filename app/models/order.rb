@@ -63,7 +63,6 @@ class Order < ActiveRecord::Base
     order.validates :customer
     order.validates :customer_name
     order.validates :customer_email
-    order.validates :customer_phone
   end
 
   #---
