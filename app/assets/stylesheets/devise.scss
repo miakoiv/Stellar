@@ -1,6 +1,6 @@
 $font-size-base: 16px !default;
 
-$screen-top-color: #00416a;
+$screen-top-color: darken(#428bca, 38.5%);
 $screen-bottom-color: #e4e5e6;
 
 @import "bootstrap-base";
@@ -14,9 +14,12 @@ $screen-bottom-color: #e4e5e6;
       width: 120px;
       height: 120px;
       margin: 0 auto 20px;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
       background-image: image-url('stellar-badge.svg');
       background-repeat: no-repeat;
       background-size: contain;
+      @include box-shadow(0 0 256px 32px rgba(255,255,255,0.95));
     }
     .page-header {
       text-align: center;
