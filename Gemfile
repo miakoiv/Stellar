@@ -76,6 +76,7 @@ gem 'httparty'
 
 # Authentication and authorization
 gem 'devise'
+gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 0.0.11'
 gem 'authority'
 gem 'rolify'
