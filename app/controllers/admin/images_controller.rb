@@ -1,8 +1,6 @@
 #encoding: utf-8
 
-class Admin::ImagesController < ApplicationController
-
-  # No layout, this controller never renders HTML.
+class Admin::ImagesController < AdminController
 
   # GET /admin/images
   def index

@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::PromotedItemsController < ApplicationController
+class Admin::PromotedItemsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_promotion, only: [:create]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/promotions/1/promoted_items
   def create

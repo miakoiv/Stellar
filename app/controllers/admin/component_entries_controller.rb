@@ -1,12 +1,10 @@
 #encoding: utf-8
 
-class Admin::ComponentEntriesController < ApplicationController
+class Admin::ComponentEntriesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
-  before_action :set_product, only: [:create]
 
-  # No layout, this controller never renders HTML.
+  before_action :set_product, only: [:create]
 
   # POST /admin/products/1/component_entries
   def create

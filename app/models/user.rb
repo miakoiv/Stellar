@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :registerable, :recoverable, :confirmable, :lockable,
   # :timeoutable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable
 
   #---
   # Users may belong to any number of groups to be part of stores.
@@ -44,7 +44,6 @@ class User < ActiveRecord::Base
   #---
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, on: :update
-  validates :phone, presence: true, on: :update, if: :approved?
   validates :password, presence: true, if: :password_required?
   validates :password, confirmation: true
 
@@ -100,11 +99,6 @@ class User < ActiveRecord::Base
 
   def to_s
     "#{name} <#{email}>"
-  end
-
-  # Overrides Devise method to ensure the user is approved.
-  def active_for_authentication?
-    super && approved?
   end
 
   def require_password?

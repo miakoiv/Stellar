@@ -1,12 +1,9 @@
 #encoding: utf-8
 
-class Admin::AlternatePricesController < ApplicationController
+class Admin::AlternatePricesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_product
   before_action :set_alternate_price, only: [:update, :destroy]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/products/1/alternate_prices
   def create

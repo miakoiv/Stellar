@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::PoliciesController < ApplicationController
+class Admin::PoliciesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_policy, only: [:show, :edit, :update, :accept]
 
   authority_actions accept: :accept
-
-  layout 'admin'
 
   # GET /policies
   # GET /policies.json

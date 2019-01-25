@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::SegmentsController < ApplicationController
+class Admin::SegmentsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :copy, :destroy]
 
   authority_actions reorder: 'update', paste: 'create'
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/segments/1.js
   def show

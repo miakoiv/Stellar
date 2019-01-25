@@ -1,0 +1,25 @@
+.row
+  .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+    .page-header
+      %h1= t('.title', resource: resource.model_name.human)
+    .panel.panel-default
+      .panel-body
+        = bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), html: {method: :put} do |f|
+          = f.email_field :email, autofocus: true, autocomplete: 'email'
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            .help-block= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email)
+          = f.password_field :password, autocomplete: 'new-password', help: t('.leave_blank_if_you_don_t_want_to_change_it')
+          = render partial: 'shared/password_strength'
+          = f.password_field :password_confirmation, autocomplete: 'new-password'
+          = f.password_field :current_password, autocomplete: 'current-password', help: t('.we_need_your_current_password_to_confirm_your_changes')
+          .actions
+            = f.primary t('.update')
+    .panel.panel-default
+      .panel-heading
+        %h4.panel-title= t('.cancel_my_account')
+      .panel-body
+        %p
+          = t('.unhappy')
+          = button_to t('.cancel_my_account'), registration_path(resource_name), data: {confirm: t('.are_you_sure')}, method: :delete
+    .links
+      = link_to t('devise.shared.links.back'), :back

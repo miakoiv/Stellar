@@ -1,14 +1,11 @@
 #encoding: utf-8
 
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_group, only: [:index, :new, :create, :join]
   before_action :set_user, only: [:show, :edit, :update, :destroy, :join]
 
   authority_actions join: 'update'
-
-  layout 'admin'
 
   # GET /admin/groups/1/users
   # GET /admin/groups/1/users.json
@@ -45,7 +42,7 @@ class Admin::UsersController < ApplicationController
     if user = User.find_by(email: user_params[:email])
       return redirect_to edit_admin_user_path(user), alert: t('.exists', user: user)
     end
-    @user = User.new(user_params.merge(approved: true))
+    @user = User.new(user_params.merge(confirmed_at: Time.current))
 
     respond_to do |format|
       if @user.save
@@ -124,7 +121,7 @@ class Admin::UsersController < ApplicationController
         :billing_city, :billing_country_code,
         :shipping_address, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :locale, :approved, :password, :password_confirmation
+        :locale, :password, :password_confirmation
       )
     end
 

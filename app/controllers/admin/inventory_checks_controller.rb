@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::InventoryChecksController < ApplicationController
+class Admin::InventoryChecksController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_inventory_check, except: [:index, :new, :create]
 
   authority_actions complete: 'update', resolve: 'update', conclude: 'update'
-
-  layout 'admin'
 
   # GET /admin/inventory_checks
   def index

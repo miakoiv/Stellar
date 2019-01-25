@@ -362,6 +362,73 @@ body {
 
 
 /*
+ * Mega dropdown menu
+ */
+.mega-dropdown-menu {
+  left: 0 !important;
+}
+.mega-dropdown-menu ul.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-left: 0;
+  list-style: none;
+
+  a { text-decoration: none; }
+  .page-title {
+    padding: 5px 0;
+    line-height: 1;
+  }
+
+  > li {
+    @extend .col-sm-3, .col-md-2;
+    flex: 0 1 auto;
+
+    > a {
+      display: block;
+
+      .page-image {
+        margin: 5px 0;
+
+        figure {
+          height: 0;
+          padding-bottom: 100%;
+          @include covering-image;
+        }
+      }
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: $font-size-small;
+
+      > li {
+        > a {
+          .page-image { display: none; }
+          .page-title {
+            padding-left: 15px;
+            &:before {
+              @extend .fa;
+              content: '\f0da';
+              display: inline-block;
+              float: left;
+              width: 15px;
+              margin-left: -15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.mega-dropdown-menu-compact ul.row {
+  flex-wrap: nowrap;
+
+  > li > a .page-image { @include contained-image; }
+}
+
+
+/*
  * Wrapper for app boilerplate
  */
 #static-wrap > .container {

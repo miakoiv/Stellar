@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_order, except: [:index, :incoming, :outgoing, :new, :create]
 
   authority_actions incoming: 'read', outgoing: 'read', forward: 'read', preview: 'update', approve: 'update', review: 'update', conclude: 'update'
-
-  layout 'admin'
 
   # GET /admin/orders
   # GET /admin/orders.json

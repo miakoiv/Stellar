@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::CustomerAssetsController < ApplicationController
+class Admin::CustomerAssetsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_customer_asset, only: [:show, :edit]
-
-  layout 'admin'
 
   # GET /admin/customer_assets
   # GET /admin/customer_assets.json

@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::InventoryItemsController < ApplicationController
+class Admin::InventoryItemsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_inventory_item, only: [:show, :edit]
 
   authority_actions query: 'read', refresh: 'read'
-
-  layout 'admin'
 
   # GET /admin/inventory_items
   # GET /admin/inventory_items.json

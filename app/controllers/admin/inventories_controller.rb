@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::InventoriesController < ApplicationController
+class Admin::InventoriesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_inventory, only: [:show, :edit, :update, :destroy]
 
   authority_actions reorder: 'update'
-
-  layout 'admin'
 
   # GET /admin/inventories
   # GET /admin/inventories.json

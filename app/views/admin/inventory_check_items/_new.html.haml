@@ -11,7 +11,7 @@
         .col-xs-12.col-sm-3.col-md-2
           .form-group
             .input-group
-              = f.number_field_without_bootstrap :current, min: 1, max: 999, placeholder: col(InventoryCheckItem, :current), class: 'form-control text-right'
+              = f.number_field_without_bootstrap :current, min: 1, placeholder: col(InventoryCheckItem, :current), class: 'form-control text-right'
               .input-group-btn
                 = f.button class: 'btn btn-success' do
                   = t('.submit')

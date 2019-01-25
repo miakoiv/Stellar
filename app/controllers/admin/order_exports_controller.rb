@@ -4,7 +4,7 @@
 # in XML format using Builder. No routes point to this controller,
 # hence rendering happens by calling #render.
 #
-class Admin::OrderExportsController < ApplicationController
+class Admin::OrderExportsController < AdminController
 
   # GET /admin/order_exports/1.xml
   def show

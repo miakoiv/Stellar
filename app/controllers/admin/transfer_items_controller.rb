@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::TransferItemsController < ApplicationController
+class Admin::TransferItemsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_transfer, only: [:create]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/transfers/1/transfer_items
   def create

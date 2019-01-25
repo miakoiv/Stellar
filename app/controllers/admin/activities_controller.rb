@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::ActivitiesController < ApplicationController
+class Admin::ActivitiesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_activity, only: [:show]
-
-  layout 'admin'
 
   # GET /activities
   # GET /activities.json

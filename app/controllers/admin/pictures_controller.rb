@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::PicturesController < ApplicationController
+class Admin::PicturesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/pictureable/1/pictures.js
   def index

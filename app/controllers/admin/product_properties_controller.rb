@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::ProductPropertiesController < ApplicationController
+class Admin::ProductPropertiesController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_product, only: [:create]
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/products/1/product_properties
   def create

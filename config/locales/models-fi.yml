@@ -664,7 +664,6 @@ fi:
         roles: Roolit
         orders: Tilaukset
         locale: Kieli
-        approved: Aktiivinen
         phone: Puhelinnumero
         billing_address: Laskutusosoite
         billing_postalcode: Postinumero
@@ -679,6 +678,7 @@ fi:
         last_sign_in_at: Edellinen kirjautuminen
         current_sign_in_ip: IP-osoite
         last_sign_in_ip: IP-osoite
+        password_strength: Salasanan vahvuus
     errors:
       models:
         transfer:

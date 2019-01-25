@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::TaxCategoriesController < ApplicationController
+class Admin::TaxCategoriesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_tax_category, only: [:show, :edit, :update, :destroy]
 
   authority_actions reorder: 'update'
-
-  layout 'admin'
 
   # GET /admin/tax_categories
   # GET /admin/tax_categories.json

@@ -7,6 +7,6 @@
   %td.control
     = form_for [:admin, inventory_check_item], remote: true,
         html: {class: 'pull-right immediate'} do |f|
-      = f.number_field :current, min: 0, max: 999, class: 'form-control text-right', tabindex: 1
+      = f.number_field :current, min: 0, class: 'form-control text-right', tabindex: 1
   %td.actions
     = link_to icon('remove'), admin_inventory_check_item_path(inventory_check_item), remote: true, method: :delete, class: 'btn btn-outline-danger btn-sm'

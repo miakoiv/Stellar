@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::TagsController < ApplicationController
+class Admin::TagsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
-
-  layout 'admin'
 
   # GET /admin/tags
   def index

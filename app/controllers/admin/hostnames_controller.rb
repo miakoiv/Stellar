@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::HostnamesController < ApplicationController
+class Admin::HostnamesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_store, only: [:create]
 
   authority_actions reorder: 'update'
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/stores/1/hostnames
   def create

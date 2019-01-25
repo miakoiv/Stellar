@@ -2,9 +2,7 @@
  * Theme specific styles
  */
 
-@import "bootstrap-font-awesome";
-@import "bootstrap-generators";
-@import "bootstrap-tweaks";
+ @import "bootstrap-base";
 
 #main-nav {
   @include box-shadow(0 6px 12px 0 rgba(0,0,0,0.333));

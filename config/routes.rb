@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  constraints(host: ENV['DEFAULT_URL_HOST']) do
+    get '/', to: 'account#index'
+  end
+
   root 'store#index'
 
   # Catch error conditions early.

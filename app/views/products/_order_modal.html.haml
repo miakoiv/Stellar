@@ -17,7 +17,7 @@
             = text_field_tag :additional_info, nil, required: true, class: 'form-control input-lg'
           .form-group
             %label.control-label= t('.amount')
-            = number_field_tag :amount, 1, min: 1, max: 999, class: 'form-control input-lg'
+            = number_field_tag :amount, 1, min: 1, class: 'form-control input-lg'
         .modal-footer
           %button.btn.btn-lg.btn-success{type: 'submit'}
             = icon('cart-plus', t('store.add_to_cart'))

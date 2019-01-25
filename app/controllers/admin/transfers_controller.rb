@@ -1,13 +1,10 @@
 #encoding: utf-8
 
-class Admin::TransfersController < ApplicationController
+class Admin::TransfersController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_transfer, except: [:index, :new, :create]
 
   authority_actions complete: 'update'
-
-  layout 'admin'
 
   # GET /admin/transfers
   def index

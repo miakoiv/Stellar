@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminController
 
   include AwesomeNester
-  before_action :authenticate_user!
+
   before_action :set_category, only: [:show, :edit, :update, :destroy, :reorder_products]
 
   authority_actions rearrange: 'update', reorder_products: 'update'
-
-  layout 'admin'
 
   # GET /admin/categories
   # GET /admin/categories.json

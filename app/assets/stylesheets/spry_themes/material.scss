@@ -27,9 +27,7 @@ $footer-bg:    #555555 !default;
 $navmenu-inverse-link-color: #aaa !default;
 $navmenu-inverse-link-hover-bg: $brand-primary !default;
 
-@import "bootstrap-font-awesome";
-@import "bootstrap-generators";
-@import "bootstrap-tweaks";
+@import "bootstrap-base";
 
 $body-tone-bg: darken($body-bg, 6%) !default;
 $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
@@ -119,75 +117,19 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /*
  * Mega dropdown menu
  */
-.mega-dropdown-menu {
-  left: 0 !important;
-}
 .mega-dropdown-menu ul.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  padding-left: 0;
-  list-style: none;
-
-  a { text-decoration: none; }
-  .page-title {
-    padding: 5px 0;
-    line-height: 1;
-  }
-
   > li {
-    @extend .col-sm-3, .col-md-2;
-    flex: 0 1 auto;
     border-right: 1px solid $table-border-color;
-
     &:last-child { border-right: 0; }
     > a {
-      display: block;
       border-top: 3px solid transparent;
 
       &:hover, &:focus {
         border-top-color: $brand-primary;
       }
-      .page-image {
-        margin: 5px 0;
-
-        figure {
-          height: 0;
-          padding-bottom: 100%;
-          @include covering-image;
-        }
-      }
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-      font-size: $font-size-small;
-
-      > li {
-        > a {
-          .page-image { display: none; }
-          .page-title {
-            padding-left: 15px;
-            &:before {
-              @extend .fa;
-              content: '\f0da';
-              display: inline-block;
-              float: left;
-              width: 15px;
-              margin-left: -15px;
-            }
-          }
-        }
-      }
     }
   }
 }
-.mega-dropdown-menu-compact ul.row {
-  flex-wrap: nowrap;
-
-  > li > a .page-image { @include contained-image; }
-}
-
 
 /* Price context styles */
 .special-price {

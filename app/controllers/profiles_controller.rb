@@ -1,9 +1,8 @@
 #encoding: utf-8
 
-class ProfilesController < ApplicationController
+class ProfilesController < BaseStoreController
 
   before_action :authenticate_user!
-  before_action :set_header_and_footer
   before_action :set_categories
 
   # GET /profile

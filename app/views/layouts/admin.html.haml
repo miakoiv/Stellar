@@ -3,6 +3,10 @@
   %head
     = render partial: 'shared/metadata'
     = render partial: 'favicon'
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'admin', media: 'all'
+    = stylesheet_link_tag 'print', media: 'print'
+    = javascript_include_tag 'application'
     = javascript_include_tag 'ckeditor5/ckeditor'
     = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"
   %body.admin{class: content_for?(:secondary_nav) && 'dual-nav'}

@@ -9,12 +9,10 @@
       .tab-content
         = tab_pane 'user-personal', default: true do
           %fieldset{disabled: locked}
-            = f.form_group do
-              = f.check_box :approved
             = f.text_field :email, required: true
             - unless @user.new_record?
               = f.text_field :name, required: true
-              = f.telephone_field :phone, required: true
+              = f.telephone_field :phone
               = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
               - unless locked
                 %hr

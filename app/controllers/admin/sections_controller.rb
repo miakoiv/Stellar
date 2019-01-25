@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::SectionsController < ApplicationController
+class Admin::SectionsController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_section, only: [:settings, :preload, :update, :modify, :destroy]
 
   authority_actions settings: 'update', reorder: 'update'
-
-  # No layout, this controller never renders HTML.
 
   # GET /admin/pages/1/sections/create.js
   def create

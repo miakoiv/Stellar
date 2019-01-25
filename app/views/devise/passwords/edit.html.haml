@@ -1,19 +1,15 @@
 .row
   .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+    .page-header
+      %h1= t('.change_your_password')
     .panel.panel-default
-      .panel-heading
-        %h4.panel-title= t('.change_your_password', default: 'Change your password')
       .panel-body
-        = form_for resource, as: resource_name, url: password_path(resource_name), method: :put do |f|
+        = bootstrap_form_for resource, as: resource_name, url: password_path(resource_name), html: {method: :put} do |f|
           = f.hidden_field :reset_password_token
-          .form-group
-            = f.label :password, t('.new_password', default: 'New password'), class: 'control-label'
-            = f.password_field :password, autofocus: true, class: 'form-control'
-          .form-group
-            = render partial: 'shared/password_strength'
-          .form-group
-            = f.label :password_confirmation, t('.confirm_new_password', default: 'Confirm new password'), class: 'control-label'
-            = f.password_field :password_confirmation, class: 'form-control'
-          = f.submit t('.change_my_password', default: 'Change my password'), class: 'btn btn-primary'
-
-    = render 'devise/shared/links'
+          = f.password_field :password, autofocus: true, autocomplete: 'new-password', label: t('.new_password')
+          = render partial: 'shared/password_strength'
+          = f.password_field :password_confirmation, autocomplete: 'off', label: t('.confirm_new_password')
+          .actions
+            = f.primary t('.change_my_password')
+    .links
+      = render 'devise/shared/links'

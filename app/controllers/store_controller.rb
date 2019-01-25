@@ -1,10 +1,6 @@
 #encoding: utf-8
 
-class StoreController < ApplicationController
-
-  def wiselinks_layout
-    'application'
-  end
+class StoreController < BaseStoreController
 
   # This controller is aware of unauthenticated guests.
   def current_user

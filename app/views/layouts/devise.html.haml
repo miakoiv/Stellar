@@ -1,25 +1,14 @@
 !!!
 %html{lang: I18n.locale}
   %head
-    %meta{charset: 'utf-8'}
-    %meta{content: 'IE=edge', 'http-equiv' => 'X-UA-Compatible'}
-    %meta{content: 'width=device-width, initial-scale=1', name: 'viewport'}
-    = stylesheet_link_tag 'application', media: 'all'
-    = stylesheet_link_tag "spry_themes/#{current_theme || 'premium'}", media: 'all'
-    = javascript_include_tag 'application'
-    = javascript_include_tag "spry_themes/#{current_theme || 'premium'}"
-
-    = csrf_meta_tags
+    = render partial: 'shared/metadata'
     = render partial: 'favicon'
-  %body{class: current_theme || 'premium'}
-    %nav#main-nav.navbar.navbar-default.navbar-fixed-top
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'devise', media: 'all'
+    = stylesheet_link_tag 'print', media: 'print'
+    = javascript_include_tag 'application'
+  %body#app
+    .vertical-center
       .container
-        .navbar-header
-          - if current_store.present?
-            = link_to branding(current_store), root_path, class: 'navbar-brand'
-          - else
-            .navbar-brand= image_tag('stellar-horizontal.svg', class: 'img-responsive', style: 'height: 100%;')
-    #content-wrap
-      #static-wrap.layout-container
-        .container
-          = yield
+        .branding
+        = yield

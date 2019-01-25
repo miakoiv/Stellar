@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::AlbumsController < ApplicationController
+class Admin::AlbumsController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_album, only: [:show, :edit, :update, :destroy]
-
-  layout 'admin'
 
   # GET /admin/albums
   # GET /admin/albums.json

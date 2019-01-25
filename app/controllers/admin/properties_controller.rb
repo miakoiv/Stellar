@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::PropertiesController < ApplicationController
+class Admin::PropertiesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   authority_actions reorder: 'update'
-
-  layout 'admin'
 
   # GET /admin/properties
   # GET /admin/properties.json

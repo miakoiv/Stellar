@@ -1,11 +1,8 @@
 #encoding: utf-8
 
-class Admin::StoresController < ApplicationController
+class Admin::StoresController < AdminController
 
-  before_action :authenticate_user!
   before_action :set_store, only: [:show, :edit, :update, :destroy]
-
-  layout 'admin'
 
   # GET /admin/stores
   # GET /admin/stores.json

@@ -4,9 +4,7 @@
 
 $navbar-default-link-active-bg: transparent;
 
-@import "bootstrap-font-awesome";
-@import "bootstrap-generators";
-@import "bootstrap-tweaks";
+@import "bootstrap-base";
 
 #content-wrap, .offcanvas .inner-wrap { padding-top: 80px; }
 

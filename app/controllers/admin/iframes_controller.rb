@@ -1,14 +1,12 @@
 #encoding: utf-8
 
-class Admin::IframesController < ApplicationController
+class Admin::IframesController < AdminController
 
   include Reorderer
-  before_action :authenticate_user!
+
   before_action :set_iframe, only: [:update, :destroy]
 
   authority_actions reorder: 'update'
-
-  # No layout, this controller never renders HTML.
 
   # POST /admin/products/1/iframes
   def create

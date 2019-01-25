@@ -664,7 +664,6 @@ en:
         roles: Roles
         orders: Orders
         locale: Language
-        approved: Active
         phone: Phone number
         billing_address: Billing address
         billing_postalcode: Postal code
@@ -679,6 +678,7 @@ en:
         last_sign_in_at: Last sign in
         current_sign_in_ip: IP address
         last_sign_in_ip: IP address
+        password_strength: Password strength
     errors:
       models:
         transfer:
