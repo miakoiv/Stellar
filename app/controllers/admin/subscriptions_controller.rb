@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Admin::SubscriptionsController < ApplicationController
+class Admin::SubscriptionsController < AdminController
 
   before_action :authenticate_user!
   before_action :set_subscription, except: [:index, :new, :create]
