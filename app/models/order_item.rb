@@ -32,7 +32,7 @@ class OrderItem < ActiveRecord::Base
   scope :pending, -> { joins(:product).merge(Product.tangible).where('shipped IS NULL OR shipped < amount') }
 
   #---
-  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1, less_than: 1000}, on: :update
+  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1}, on: :update
 
   #---
   def is_subitem?

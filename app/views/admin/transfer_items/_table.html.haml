@@ -4,7 +4,7 @@
       %tr
         %th= col(TransferItem, :product_title)
         %th.col-xs-4= col(TransferItem, :lot_code)
-        %th.col-xs-1.text-right= col(TransferItem, :amount)
+        %th.col-xs-2.text-right= col(TransferItem, :amount)
 
     %tbody
       - transfer.transfer_items.each do |transfer_item|
