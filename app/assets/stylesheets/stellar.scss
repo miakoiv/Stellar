@@ -1,3 +1,31 @@
 $font-size-base: 16px !default;
 
+$primary-color:     darken(#428bca, 38.5%);
+$secondary-color:   #e4e5e6;
+$body-bg:           $secondary-color;
+$navbar-inverse-bg: $primary-color !default;
+
 @import "bootstrap-base";
+
+#app {
+  justify-content: center;
+  background-attachment: fixed;
+
+  > .navbar {
+    .navbar-brand {
+      width: auto;
+      height: $navbar-height;
+      padding: 5px 15px;
+      > img { max-height: 100%; }
+    }
+  }
+  .container {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+}
+
+.hamburger { display: none; }
+@media (max-width: $screen-xs-max) {
+  .hamburger { display: inline-block; }
+}
