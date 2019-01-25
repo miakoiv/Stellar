@@ -1,5 +1,10 @@
 #encoding: utf-8
-
+#
+# ApplicationController provides the minimal set of features
+# for other controllers to extend, such as BaseStoreController
+# and AccountController. Within this controller, current store
+# is unset and we're operating outside of any particular store.
+#
 class ApplicationController < ActionController::Base
 
   # Prevent CSRF attacks by raising an exception.
