@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   constraints(host: ENV['DEFAULT_URL_HOST']) do
     get '/', to: 'account#index'
+    get '/onboarding', to: 'account#onboarding', as: :onboarding
   end
 
   root 'store#index'

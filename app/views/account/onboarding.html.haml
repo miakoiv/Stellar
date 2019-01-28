@@ -1,0 +1,18 @@
+.container
+  .page-header
+    %h1= t('.title')
+  .row
+    .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+      .panel.panel-default
+        = bootstrap_form_for @store, url: onboarding_path do |f|
+          .panel-body
+            = t('.body_html')
+            = f.text_field :name, label: t('.store_name'), help: t('.store_name_help'), class: 'input-lg'
+            .row
+              .col-md-6
+                = f.select :locale, Store.locale_options, {}, {class: 'selectize'}
+              .col-md-6
+                = f.select :country_code, Store.country_options, {}, {class: 'selectize'}
+          .panel-footer
+            .pull-right
+              = f.primary t('.submit'), class: 'btn btn-primary btn-lg'

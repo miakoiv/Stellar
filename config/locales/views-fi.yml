@@ -20,6 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 fi:
+  account:
+    onboarding:
+      title: Uuden sivuston luonti
+      body_html: <p>Vastaa allaoleviin kysymyksiin.</p>
+      store_name: Sivuston nimi
+      store_name_help: Yrityksesi tai yhteisösi nimi, tai joku muu muistettava nimi
+      submit: Aloita
+    register:
+      title: Luo itsellesi tili
+      body_html: <p class="lead">Rekisteröitymällä Stellarin käyttäjäksi pääset alkuun.</p>
+      sign_up: Rekisteröidy tästä
+    splash:
+      title: Aloita tästä
+      body_html: <p class="lead">Vastaamalla muutamaan kysymykseen pääset aloittamaan oman sivustosi kanssa.</p>
+      onboarding: Aloita
   admin:
     activities:
       title: Historia

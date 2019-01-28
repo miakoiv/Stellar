@@ -1,0 +1,27 @@
+#viewport.swiper-container
+  .swiper-wrapper
+    .swiper-slide= image_tag 'splash/01.jpg'
+    .swiper-slide= image_tag 'splash/02.jpg'
+    .swiper-slide= image_tag 'splash/03.jpg'
+    .swiper-slide= image_tag 'splash/04.jpg'
+    .swiper-slide= image_tag 'splash/05.jpg'
+
+.container
+  .page-header
+    %h1= t('.title')
+  .row
+    .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+      .panel.panel-default
+        .panel-body
+          = t('.body_html')
+        .panel-footer
+          .pull-right
+            = link_to t('.onboarding'), onboarding_path, class: 'btn btn-primary btn-lg'
+
+:coffee
+  jQuery ->
+    new Swiper $('#viewport'),
+      autoplay:
+        delay: 5000
+      loop: true
+      effect: 'fade'
