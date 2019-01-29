@@ -83,22 +83,32 @@
  * Section content widths
  */
 .section-content.col-12 {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   @include padding-horizontal(0);
   float: none;
 }
 .section-content.col-10 {
-  @extend .col-xs-12, .col-sm-10, .col-sm-offset-1;
+  @include make-xs-column(12);
+  @include make-sm-column(10);
+  @include make-sm-column-offset(1);
   @include padding-horizontal(0);
   float: none;
 }
 .section-content.col-8 {
-  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2;
+  @include make-xs-column(10);
+  @include make-xs-column-offset(1);
+  @include make-sm-column(8);
+  @include make-sm-column-offset(2);
   @include padding-horizontal(0);
   float: none;
 }
 .section-content.col-6 {
-  @extend .col-xs-10, .col-xs-offset-1, .col-sm-8, .col-sm-offset-2, .col-md-6, .col-md-offset-3;
+  @include make-xs-column(10);
+  @include make-xs-column-offset(1);
+  @include make-sm-column(8);
+  @include make-sm-column-offset(2);
+  @include make-md-column(6);
+  @include make-md-column-offset(3);
   @include padding-horizontal(0);
   float: none;
 }
@@ -167,41 +177,85 @@
  * Column widths for each layout
  */
 .twelve {
-  .column { @extend .col-xs-12; }
+  .column {
+    @include make-xs-column(12);
+  }
 }
 .eight-four {
-  .column:first-child { @extend .col-xs-12, .col-sm-8; }
-  .column:last-child { @extend .col-xs-12, .col-sm-4; }
+  .column:first-child {
+    @include make-xs-column(12);
+    @include make-sm-column(8);
+  }
+  .column:last-child {
+    @include make-xs-column(12);
+    @include make-sm-column(4);
+  }
 }
 .four-eight {
-  .column:first-child { @extend .col-xs-12, .col-sm-4; }
-  .column:last-child { @extend .col-xs-12, .col-sm-8; }
+  .column:first-child {
+    @include make-xs-column(12);
+    @include make-sm-column(4);
+  }
+  .column:last-child {
+    @include make-xs-column(12);
+    @include make-sm-column(8);
+  }
 }
 .four-four-four {
-  .column { @extend .col-xs-12, .col-sm-4; }
+  .column {
+    @include make-xs-column(12);
+    @include make-sm-column(4);
+  }
 }
 .two-two-two-two-two-two {
-  .column { @extend .col-xs-6, .col-sm-2; }
+  .column {
+    @include make-xs-column(6);
+    @include make-sm-column(2);
+  }
 }
 .six-six {
-  .column { @extend .col-xs-12, .col-sm-6; }
+  .column {
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+  }
 }
 .six-three-three,
 .three-six-three,
 .three-three-six {
-  .column:first-child { @extend .col-xs-12, .col-sm-6; }
-  .column:not(:first-child) { @extend .col-xs-6, .col-sm-3; }
+  .column:first-child {
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+  }
+  .column:not(:first-child) {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+  }
 }
 .nine-three {
-  .column:first-child { @extend .col-xs-12, .col-sm-9; }
-  .column:last-child { @extend .col-xs-12, .col-sm-3; }
+  .column:first-child {
+    @include make-xs-column(12);
+    @include make-sm-column(9);
+  }
+  .column:last-child {
+    @include make-xs-column(12);
+    @include make-sm-column(3);
+  }
 }
 .three-nine {
-  .column:first-child { @extend .col-xs-12, .col-sm-3; }
-  .column:last-child { @extend .col-xs-12, .col-sm-9; }
+  .column:first-child {
+    @include make-xs-column(12);
+    @include make-sm-column(3);
+  }
+  .column:last-child {
+    @include make-xs-column(12);
+    @include make-sm-column(9);
+  }
 }
 .three-three-three-three {
-  .column { @extend .col-xs-6, .col-sm-3; }
+  .column {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+  }
 }
 
 /* Reordering of columns based on viewport size */
@@ -419,7 +473,7 @@
     // other sizings get top center positioning
     figure {
       img {
-        @extend .img-responsive;
+        @include img-responsive;
         margin: auto;
         object-position: top;
       }
@@ -583,9 +637,9 @@
 .segment-content.facebook_feed {
   .post { @extend .panel, .panel-default; }
   .post .header { @extend .panel-heading; }
-  .post .timestamp { @extend .pull-right; }
+  .post .timestamp { float: right !important; }
   .post .body { @extend .panel-body; }
-  .post .picture img { @extend .img-responsive; }
+  .post .picture img { @include img-responsive; }
 }
 
 
@@ -602,27 +656,46 @@
 }
 .columns-1 {
   @include flex-columns;
-  > div { @extend .col-xs-12; }
+  > div {
+    @include make-xs-column(12);
+  }
 }
 .columns-2 {
   @include flex-columns;
-  > div { @extend .col-xs-6; }
+  > div {
+    @include make-xs-column(6);
+  }
 }
 .columns-3 {
   @include flex-columns;
-  > div { @extend .col-xs-6, .col-sm-4; }
+  > div {
+    @include make-xs-column(6);
+    @include make-sm-column(4);
+  }
 }
 .columns-4 {
   @include flex-columns;
-  > div { @extend .col-xs-6, .col-sm-3; }
+  > div {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+  }
 }
 .columns-6 {
   @include flex-columns;
-  > div { @extend .col-xs-6, .col-sm-3, .col-md-2; }
+  > div {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+    @include make-md-column(2);
+  }
 }
 .columns-12 {
   @include flex-columns;
-  > div { @extend .col-xs-6, .col-sm-3, .col-md-2, .col-lg-1; }
+  > div {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+    @include make-md-column(2);
+    @include make-lg-column(1);
+  }
 }
 @media (max-width: $screen-xs-max) {
   .grid-disable-xs {

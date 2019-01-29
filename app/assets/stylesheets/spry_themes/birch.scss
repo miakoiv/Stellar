@@ -44,7 +44,7 @@ $brand-primary: #013183;
     padding-top: 20px;
 
     > ul {
-      @extend .row;
+      @include make-row;
       display: flex;
       flex-wrap: wrap;
       align-content: flex-start;
@@ -52,7 +52,10 @@ $brand-primary: #013183;
       padding-left: 0;
 
       > li.category {
-        @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+        @include make-xs-column(6);
+        @include make-sm-column(4);
+        @include make-md-column(3);
+        @include make-lg-column(2);
         position: static; // override position: relative set by .col-*
         max-width: 230px;
         margin-bottom: 15px;
@@ -80,7 +83,7 @@ $brand-primary: #013183;
           text-decoration: none;
 
           img {
-            @extend .img-responsive;
+            @include img-responsive;
           }
           p {
             position: absolute;
@@ -132,7 +135,7 @@ $brand-primary: #013183;
     padding-bottom: 40px;
 
     .product-grid {
-      @extend .row;
+      @include make-row;
 
       ul {
         display: flex;
@@ -143,7 +146,9 @@ $brand-primary: #013183;
         padding-left: 0;
 
         li.product {
-          @extend .col-xs-6, .col-sm-4, .col-md-3;
+          @include make-xs-column(6);
+          @include make-sm-column(4);
+          @include make-md-column(3);
           position: relative;
           transition: all 0.2s ease-in-out 0s;
 
@@ -227,7 +232,7 @@ $brand-primary: #013183;
 
     .product-header {
       .actions {
-        @extend .pull-right;
+        float: right !important;
 
         .btn { display: inline-block; }
       }
@@ -239,14 +244,20 @@ $brand-primary: #013183;
       }
     }
     .product-body {
-      @extend .row;
+      @include make-row;
 
       .images.presentational {
-        @extend .col-xs-12, .col-sm-7, .col-md-8, .col-lg-9;
+        @include make-xs-column(12);
+        @include make-sm-column(7);
+        @include make-md-column(8);
+        @include make-lg-column(9);
         margin-bottom: 30px;
       }
       .product-meta {
-        @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(5);
+        @include make-md-column(4);
+        @include make-lg-column(3);
 
         .product-code {
           font-size: $font-size-small;
@@ -256,16 +267,17 @@ $brand-primary: #013183;
 
           .product-pricing {
             .price {
-              @extend .lead, .text-primary;
+              @extend .lead;
               margin-right: 0.5em;
               margin-bottom: 0;
               font-weight: 500;
+              color: $brand-primary;
 
               .tax-rate, .unit-price {
-                @extend .text-muted;
                 display: inline-block;
                 font-size: $font-size-base;
                 font-weight: 400;
+                color: $text-muted;
               }
               .tax-rate { margin-left: 0.5em; }
               .unit-price { display: block; }
@@ -280,20 +292,28 @@ $brand-primary: #013183;
 
               #amount { display: none; }
               button {
-                @extend .btn-block, .btn-lg, .btn-success;
+                @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+                @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+                display: block;
+                width: 100%;
                 transition: all 0.2s ease-in-out 0s;
               }
             }
           }
           .go-checkout .btn {
-            @extend .btn-block, .btn-lg;
+            @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+            display: block;
+            width: 100%;
             transition: all 0.2s ease-in-out 0s;
           }
         }
         .variant-products {
           margin-bottom: 20px;
 
-          button { @extend .btn-block; }
+          button {
+            display: block;
+            width: 100%;
+          }
           .dropdown-menu {
             @extend .dropdown-menu-right;
           }
@@ -301,24 +321,32 @@ $brand-primary: #013183;
         .product-stock {
           font-size: $font-size-small;
 
-          dt { @extend .pull-left; }
-          dd { @extend .pull-right, .badge; }
+          dt { float: left !important; }
+          dd {
+            @extend .badge;
+            float: right !important;
+          }
         }
       }
       .product-description {
-        @extend .col-xs-12, .col-sm-12, .col-md-6, .col-lg-6;
+        @include make-xs-column(12);
+        @include make-md-column(6);
 
         .body-text { margin-bottom: 20px; }
       }
       .product-properties {
-        @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(6);
+        @include make-md-column(3);
 
         .properties, .components {
           tr > :last-child { padding-right: 10px; }
         }
       }
       .images.technical {
-        @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(6);
+        @include make-md-column(3);
 
         .picture { padding-bottom: 100%; }
       }
@@ -328,7 +356,8 @@ $brand-primary: #013183;
         left: -1*$grid-gutter-width;
 
         .iframe-toggle {
-          @extend .btn-sm, .btn-primary;
+          @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+          @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
           display: block;
           width: 2*$grid-gutter-width;
           font-weight: 500;
@@ -369,7 +398,7 @@ $brand-primary: #013183;
     .product-footer {
 
       .requisite-products, .variant-products {
-        @extend .row;
+        @include make-row;
 
         ul {
           display: flex;
@@ -379,7 +408,7 @@ $brand-primary: #013183;
           padding: 0;
 
           li.product {
-            @extend .col-sm-2;
+            @include make-sm-column(2);
 
             a {
               display: block;

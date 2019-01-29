@@ -29,7 +29,7 @@ $brand-danger:  $hiustalo-red !default;
       margin-top: -24px;
 
       img {
-        @extend .img-responsive;
+        @include img-responsive;
         margin: 0 auto;
       }
     }

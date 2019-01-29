@@ -7,38 +7,38 @@ $screen-bottom-color: $secondary-color;
   @include gradient-vertical($screen-top-color, $screen-bottom-color, 0%, 100%);
   background-attachment: fixed;
   justify-content: center;
+}
+#app .branding {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  background-image: image-url('stellar-badge.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  @include box-shadow(0 0 256px 32px rgba(255,255,255,0.95));
+}
+#app .panel {
+  background: rgba($panel-bg, 0.6667);
+  border-radius: $border-radius-large;
+  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
 
-  .branding {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 20px;
-    border: 2px solid rgba(255,255,255,0.5);
-    border-radius: 50%;
-    background-image: image-url('stellar-badge.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    @include box-shadow(0 0 256px 32px rgba(255,255,255,0.95));
+  .panel-body { padding: 20px; }
+
+  .form-group { @extend .form-group-lg; }
+  .form-group:last-child { margin-bottom: 0; }
+  .btn-primary {
+    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+    display: block;
+    width: 100%;
   }
-  .panel {
-    background: rgba($panel-bg, 0.6667);
-    border-radius: $border-radius-large;
-    @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
-
-    .panel-body {
-      padding: 20px;
-
-      .form-group { @extend .form-group-lg; }
-      .form-group:last-child { margin-bottom: 0; }
-      .btn-primary { @extend .btn-block, .btn-lg; }
-    }
+}
+#app .links {
+  ul {
+    padding-left: 0;
+    list-style: none;
   }
-  .links {
-    ul {
-      padding-left: 0;
-      list-style: none;
-
-      li { text-align: center; }
-      a { color: #fff; }
-    }
-  }
+  li { text-align: center; }
+  a { color: #fff; }
 }

@@ -10,7 +10,7 @@
 }
 
 .dd-item {
-  @extend .clearfix;
+  @include clearfix;
   margin: 5px 0;
   padding: $padding-small-vertical $padding-small-horizontal;
   background-color: $list-group-bg;
@@ -28,7 +28,7 @@
   }
 
   .dd-handle {
-    @extend .pull-left;
+    float: left !important;
     margin-right: 15px;
   }
   .dd-content a {
@@ -42,11 +42,14 @@
   .dd-handle { cursor: grab; }
   .label { margin-left: 15px; }
   .dd-actions {
-    @extend .pull-right, .text-right, .no-wrap, .hidden-print;
+    @extend .hidden-print;
+    float: right !important;
+    text-align: right;
+    white-space: nowrap;
   }
 
   > button {
-    @extend .pull-left;
+    float: left !important;
     position: relative;
     width: 24px;
     margin-right: 15px;
@@ -58,7 +61,7 @@
     background-color: transparent;
 
     &:before {
-      @extend .fa;
+      @include font-awesome;
       display: block;
       position: absolute;
       width: 100%;

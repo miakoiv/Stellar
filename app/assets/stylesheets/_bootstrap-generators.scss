@@ -1,14 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap-variables";
 @import "bootstrap";
+@import "mixins";
+@import "jasny-bootstrap/jasny-bootstrap";
 @import "bootstrap-outline-buttons";
 @import "bootstrap-form-inverse";
-@import "jasny-bootstrap/jasny-bootstrap";
 @import "hamburgers-recipe";
 @import "hamburgers/hamburgers";
 @import "selectize";
 @import "selectize.bootstrap3";
-@import "_mixins";
 @import "layouts";
 @import "layout-editor";
 @import "jquery.minicolors";

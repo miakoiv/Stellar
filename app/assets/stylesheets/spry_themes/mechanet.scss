@@ -110,7 +110,9 @@ $body-tone-bg: darken($body-bg, 4%);
   list-style: none;
 
   > li {
-    @extend .col-xs-4, .col-sm-3, .col-md-2;
+    @include make-xs-column(4);
+    @include make-sm-column(3);
+    @include make-md-column(2);
     flex: 0 1 auto;
     border-right: 1px solid $table-border-color;
 
@@ -138,19 +140,23 @@ $body-tone-bg: darken($body-bg, 4%);
   padding: 5px 0 0 10px;
 
   &:before {
-    @extend .fa, .fa-lg;
+    @include font-awesome;
     content: "\f0da";
     position: absolute;
     left: 0;
+    font-size: 1.333em;
+    line-height: 0.75em;
+    vertical-align: -15%;
   }
   .page-title { display: inline-block; }
 }
 .mega-dropdown-menu h4 {
-  @extend .text-center, .text-muted;
   margin-top: 0;
   margin-bottom: 0;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.15em;
+  color: $text-muted;
 }
 
 /* Only top level items get images and styled titles */
@@ -219,13 +225,13 @@ $body-tone-bg: darken($body-bg, 4%);
   padding-top: 20px;
 
   .breadcrumb {
-    @extend .small;
+    @include small;
     margin-bottom: 0;
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: transparent;
 
-    .active { @extend strong; }
+    .active { font-weight: bold; }
   }
 }
 
@@ -244,7 +250,7 @@ $body-tone-bg: darken($body-bg, 4%);
 .department .page-header,
 .promotion .page-header,
 .products .page-header {
-  @extend .text-center;
+  text-align: center;
   display: block !important;
 }
 .category .page-header h1,
@@ -264,16 +270,21 @@ $body-tone-bg: darken($body-bg, 4%);
   @extend .list-group;
 }
 .product-list .product {
-  @extend .list-group-item, .clearfix;
+  @include clearfix;
+  @extend .list-group-item;
 
   &:hover,
   &:focus {
     background-color: $list-group-hover-bg;
-    .buy-now .btn { @extend .btn-danger; }
+    .buy-now .btn {
+      @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+    }
   }
 }
 .product-list .product > a {
-  @extend .col-xs-12, .col-sm-9, .col-md-10;
+  @include make-xs-column(12);
+  @include make-sm-column(9);
+  @include make-md-column(10);
   padding-left: 0;
   padding-right: 0;
   color: inherit;
@@ -302,16 +313,18 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Buy now widget and price */
 .product-list .buy-now {
-  @extend .col-xs-12, .col-sm-3, .col-md-2;
-  @extend .text-right;
+  @include make-xs-column(12);
+  @include make-sm-column(3);
+  @include make-md-column(2);
   padding-left: 0;
   padding-right: 0;
   display: flex;
   flex-flow: row nowrap;
+  text-align: right;
 
   p + p { display: none; }
   .btn {
-    @extend .btn-default;
+    @include button-variant($btn-default-color, $btn-default-bg, transparent);
     font-size: 16px;
     line-height: 1.125;
     border: 0;
@@ -335,7 +348,7 @@ $body-tone-bg: darken($body-bg, 4%);
 /*
  * Products in product grid, product cards
  */
-.product-grid { @extend .row; }
+.product-grid { @include make-row; }
 .product-grid > ul {
   display: flex;
   flex-flow: row wrap;
@@ -344,7 +357,9 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-bottom: 0;
 }
 .product-grid .product {
-  @extend .col-xs-6, .col-sm-3, .col-md-2;
+  @include make-xs-column(6);
+  @include make-sm-column(3);
+  @include make-md-column(2);
   margin-bottom: 10px;
 }
 .product-card {
@@ -356,8 +371,12 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-grid .product:hover,
 .product-card:hover {
   .product-image { transform: scale(1.04); }
-  .buy-now-form > .btn { @extend .btn-danger; }
-  .store-link > a { @extend .btn-primary; }
+  .buy-now-form > .btn {
+    @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+  }
+  .store-link > a {
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  }
 }
 .product-grid .product > a,
 .product-card > a {
@@ -425,7 +444,7 @@ $body-tone-bg: darken($body-bg, 4%);
 .product-card .buy-now-form > .btn,
 .product-grid .buy-now .product-link > a,
 .product-card .buy-now .product-link > a {
-  @extend .btn-default;
+  @include button-variant($btn-default-color, $btn-default-bg, transparent);
   display: block;
   width: 100%;
   font-size: 16px;
@@ -435,7 +454,7 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 .product-grid .store-link > a,
 .product-card .store-link > a {
-  @extend .btn-default;
+  @include button-variant($btn-default-color, $btn-default-bg, transparent);
   display: block;
   width: 100%;
   overflow: hidden;
@@ -454,7 +473,7 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 .product-detail .product-header,
 .product-detail .product-body,
-.product-detail .product-footer { @extend .row; }
+.product-detail .product-footer { @include make-row; }
 
 /* Product header with actions */
 .product-detail .product-header {
@@ -467,11 +486,11 @@ $body-tone-bg: darken($body-bg, 4%);
     z-index: 1;
 
     .btn {
-      @extend .pull-right;
-      @extend .btn-sm;
+      @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
+      float: right !important;
       background-color: transparent;
 
-      > .fa { @extend .fa-2x; }
+      > .fa { font-size: 2em; }
 
       &:hover {
         background-color: $brand-primary;
@@ -481,7 +500,7 @@ $body-tone-bg: darken($body-bg, 4%);
   }
   .categories {
     .breadcrumb {
-      @extend .small;
+      @include small;
       margin-bottom: 0;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -489,7 +508,7 @@ $body-tone-bg: darken($body-bg, 4%);
     }
   }
   .product-title {
-    @extend .col-xs-12;
+    @include make-xs-column(12);
     margin-top: 0;
     margin-bottom: 20px;
     font-size: $font-size-h2;
@@ -519,7 +538,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Product meta */
 .product-meta {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   grid-column: 3 / span 1;
   grid-row: 1 / span 1;
   order: 4;
@@ -553,27 +572,33 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-top: 20px;
 
   .input-group { @extend .input-group-lg; }
-  .btn { @extend .btn-lg, .btn-success; }
+  .btn {
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+  }
 }
-.product-meta .go-checkout .btn { @extend .btn-block; }
+.product-meta .go-checkout .btn {
+  display: block;
+  width: 100%;
+}
 
 .product-meta .product-stock {
   margin-bottom: 40px;
 
-  dt { @extend .pull-left; }
-  dd { @extend .pull-right; }
+  dt { float: left !important; }
+  dd { float: right !important; }
 }
 
 /* Product description and properties */
 .product-description {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   grid-column: 1 / span 1;
   grid-row: 2 / span 1;
   order: 3;
   margin-bottom: 40px;
 }
 .product-properties {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
   order: 2;
@@ -586,7 +611,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Technical images */
 .product-detail .images.technical {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   position: relative;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
@@ -601,7 +626,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Presentational images */
 .product-detail .images.presentational {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   position: relative;
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;

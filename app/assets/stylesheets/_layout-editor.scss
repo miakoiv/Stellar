@@ -137,47 +137,41 @@ $navbar-icon-padding: 12px !default;
   top: -1px;
   right: -1px;
   opacity: 0;
+}
+.segment-nav .mega-dropdown-menu {
+  left: auto !important;
+  width: 420px !important;
+}
+.segment-nav .mega-dropdown-menu ul.row {
+  margin: 0 -10px;
+}
+.segment-nav .mega-dropdown-menu li {
+  width: 25% !important;
+  padding: 15px;
+  border: 0;
 
-  .mega-dropdown-menu {
-    left: auto !important;
-    width: 420px !important;
+  &:hover {
+    background-color: $dropdown-link-hover-bg;
+    figcaption { color: $dropdown-link-hover-color; }
+  }
+  &.active {
+    background-color: $dropdown-link-active-bg;
+    figure img { filter: invert(1); }
+    figcaption { color: $dropdown-link-active-color; }
+  }
+  > a {
+    border: 0;
 
-    ul.row {
-      margin: 0 -10px;
-
-      > li {
-        width: 25% !important;
-        padding: 15px;
-        border: 0;
-
-        &:hover {
-          background-color: $dropdown-link-hover-bg;
-          > a figure figcaption { color: $dropdown-link-hover-color; }
-        }
-        &.active {
-          background-color: $dropdown-link-active-bg;
-          > a figure {
-            img { filter: invert(1); }
-            figcaption { color: $dropdown-link-active-color; }
-          }
-        }
-        > a {
-          border: 0;
-
-          figure {
-            img {
-              width: 42%;
-              margin: 0 auto 5px;
-              opacity: 0.6667;
-            }
-            figcaption {
-              @extend .text-center, .text-muted;
-              font-size: 78%;
-              hyphens: auto;
-            }
-          }
-        }
-      }
+    figure img {
+      width: 42%;
+      margin: 0 auto 5px;
+      opacity: 0.6667;
+    }
+    figcaption {
+      text-align: center;
+      font-size: 78%;
+      color: $text-muted;
+      hyphens: auto;
     }
   }
 }
@@ -291,6 +285,42 @@ $navbar-icon-padding: 12px !default;
     width: 100%;
     height: 100%;
     border: 1px solid rgba($brand-info, 0.333);
+  }
+}
+
+
+/*
+ * Image editor components
+ */
+#image-editor {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .navbar {
+    min-height: auto;
+    margin: 0;
+    border-radius: 0;
+    background-color: $navbar-background;
+    border-color: transparent;
+    transition: all 150ms ease-in-out 0s;
+
+    > .navbar-nav {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 0;
+
+      > li > a {
+        padding: $navbar-icon-padding;
+        font-size: $navbar-icon-size;
+      }
+    }
+  }
+  .canvas {
+    flex: 1 1 auto;
+    overflow: hidden;
+
+    > img { max-width: 100%; }
   }
 }
 

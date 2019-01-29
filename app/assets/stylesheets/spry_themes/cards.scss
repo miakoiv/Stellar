@@ -22,7 +22,8 @@ $footer-bg: #d4d4d4;
   list-style: none;
 }
 .mega-dropdown-menu ul.row > li {
-  @extend .col-sm-3, .col-md-2;
+  @include make-sm-column(3);
+  @include make-md-column(2);
   margin-bottom: 20px;
 }
 .mega-dropdown-menu li a {
@@ -42,7 +43,7 @@ $footer-bg: #d4d4d4;
   padding-left: 1em;
 
   &:before {
-    @extend .fa;
+    @include font-awesome;
     content: "\f0da";
     display: block;
     position: absolute;
@@ -105,7 +106,7 @@ $footer-bg: #d4d4d4;
           text-decoration: none;
           transition: all 0.2s ease-in-out 0s;
 
-          img { @extend .img-responsive; }
+          img { @include img-responsive; }
           > p {
             margin: 0.5em 0.25em 0;
             font-size: $font-size-small;
@@ -230,7 +231,7 @@ $footer-bg: #d4d4d4;
 }
 .product-detail .product-header {
   .actions {
-    @extend .pull-right;
+    float: right !important;
 
     .btn { display: inline-block; }
   }
@@ -242,14 +243,20 @@ $footer-bg: #d4d4d4;
   }
 }
 .product-detail .product-body {
-  @extend .row;
+  @include make-row;
 
   .images.presentational {
-    @extend .col-xs-12, .col-sm-7, .col-md-8, .col-lg-9;
+    @include make-xs-column(12);
+    @include make-sm-column(7);
+    @include make-md-column(8);
+    @include make-lg-column(9);
     margin-bottom: 30px;
   }
   .product-meta {
-    @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+    @include make-xs-column(12);
+    @include make-sm-column(5);
+    @include make-md-column(4);
+    @include make-lg-column(3);
 
     .product-code {
       font-size: $font-size-small;
@@ -259,17 +266,18 @@ $footer-bg: #d4d4d4;
 
       .product-pricing {
         .price {
-          @extend .lead, .text-primary;
+          @extend .lead;
           display: inline-block;
           margin-right: 0.5em;
           margin-bottom: 0;
           font-weight: 500;
+          color: $brand-primary;
 
           .tax-rate, .unit-price {
-            @extend .text-muted;
             display: inline-block;
             font-size: $font-size-base;
             font-weight: 400;
+            color: $text-muted;
           }
           .tax-rate { margin-left: 0.5em; }
           .unit-price { display: block; }
@@ -286,20 +294,25 @@ $footer-bg: #d4d4d4;
           #amount { @include border-right-radius(0); }
           .btn:last-child {
             @include border-left-radius(0);
-            @extend .btn-success;
+            @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
             transition: all 0.2s ease-in-out 0s;
           }
         }
       }
       .go-checkout .btn {
-        @extend .btn-block, .btn-lg;
+        @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+        display: block;
+        width: 100%;
         transition: all 0.2s ease-in-out 0s;
       }
     }
     .variant-products {
       margin-bottom: 20px;
 
-      button { @extend .btn-block; }
+      button {
+        display: block;
+        width: 100%;
+      }
       .dropdown-menu {
         @extend .dropdown-menu-right;
       }
@@ -307,24 +320,29 @@ $footer-bg: #d4d4d4;
     .product-stock {
       font-size: $font-size-small;
 
-      dt { @extend .pull-left; }
-      dd { @extend .pull-right; }
+      dt { float: left !important; }
+      dd { float: right !important; }
     }
   }
   .product-description {
-    @extend .col-xs-12, .col-sm-12, .col-md-6, .col-lg-6;
+    @include make-xs-column(12);
+    @include make-md-column(6);
 
     .body-text { margin-bottom: 20px; }
   }
   .product-properties {
-    @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+    @include make-md-column(3);
 
     .properties, .components {
       tr > :last-child { padding-right: 10px; }
     }
   }
   .images.technical {
-    @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+    @include make-md-column(3);
 
     .image { padding-bottom: 100%; }
   }
@@ -364,12 +382,14 @@ $footer-bg: #d4d4d4;
 .product-footer .variant-products,
 #offer-requisites-modal .requisite-products {
   ul {
-    @extend .row;
+    @include make-row;
     list-style: none;
     padding: 0;
 
     li.product {
-      @extend .col-xs-6, .col-sm-4, .col-md-3;
+      @include make-xs-column(6);
+      @include make-sm-column(4);
+      @include make-md-column(3);
       padding-bottom: 40px;
 
       a {

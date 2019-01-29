@@ -1,4 +1,7 @@
 $main-nav-height: 50px !default;
+$footer-bg: #f5f5f5 !default;
+$footer-color: $text-color !default;
+
 
 html { height: 100%; }
 
@@ -170,7 +173,7 @@ body {
     top: 5px;
   }
 }
-#favorites.loaded > a { @extend .text-danger; }
+#favorites.loaded > a { color: $state-danger-text; }
 
 
 /* Adding .responsive hides a nav on mobile */
@@ -178,7 +181,7 @@ body {
 
 /* Centered navbar-nav */
 .navbar-nav.nav-center {
-  @extend .text-center;
+  text-align: center;
   width: 100%;
 
   > li {
@@ -364,67 +367,57 @@ body {
 /*
  * Mega dropdown menu
  */
-.mega-dropdown-menu {
-  left: 0 !important;
-}
+.mega-dropdown-menu { left: 0 !important; }
 .mega-dropdown-menu ul.row {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
   padding-left: 0;
   list-style: none;
+}
+.mega-dropdown-menu a { text-decoration: none; }
+.mega-dropdown-menu .page-title {
+  padding: 5px 0;
+  line-height: 1;
+}
+.mega-dropdown-menu ul.row > li {
+  @include make-sm-column(3);
+  @include make-md-column(2);
+  flex: 0 1 auto;
 
-  a { text-decoration: none; }
-  .page-title {
-    padding: 5px 0;
-    line-height: 1;
-  }
+  > a { display: block; }
 
-  > li {
-    @extend .col-sm-3, .col-md-2;
-    flex: 0 1 auto;
+  .page-image {
+    margin: 5px 0;
 
-    > a {
-      display: block;
-
-      .page-image {
-        margin: 5px 0;
-
-        figure {
-          height: 0;
-          padding-bottom: 100%;
-          @include covering-image;
-        }
-      }
+    figure {
+      height: 0;
+      padding-bottom: 100%;
+      @include covering-image;
     }
-    ul {
-      list-style: none;
-      padding-left: 0;
-      font-size: $font-size-small;
+  }
+}
+.mega-dropdown-menu ul.row > li ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: $font-size-small;
 
-      > li {
-        > a {
-          .page-image { display: none; }
-          .page-title {
-            padding-left: 15px;
-            &:before {
-              @extend .fa;
-              content: '\f0da';
-              display: inline-block;
-              float: left;
-              width: 15px;
-              margin-left: -15px;
-            }
-          }
-        }
-      }
+  .page-image { display: none; }
+  .page-title {
+    padding-left: 15px;
+    &:before {
+      @include font-awesome;
+      content: '\f0da';
+      float: left;
+      width: 15px;
+      margin-left: -15px;
     }
   }
 }
 .mega-dropdown-menu-compact ul.row {
   flex-wrap: nowrap;
 
-  > li > a .page-image { @include contained-image; }
+  > li .page-image figure { @include contained-image; }
 }
 
 
@@ -488,7 +481,6 @@ body {
   padding-left: 0;
 
   > li {
-    @extend .product-card;
     flex: 1 1 auto;
     max-width: 230px;
     margin-right: 10px;
@@ -506,7 +498,9 @@ body {
 
 /* Fancy shopping cart and mobile friendly cart list view */
 #cart-contents.fancy-cart {
-  #checkout-button .btn { @extend .btn-success; }
+  #checkout-button .btn {
+    @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+  }
   > .actions {
     margin-top: 40px;
     padding-top: 20px;
@@ -520,78 +514,92 @@ body {
     padding-bottom: 5px;
     border-top: 0;
   }
-  .cart-item-row {
-    @extend .row;
+}
+.cart-item-row {
+  @include make-row;
 
-    .cart-item-picture {
-      @extend .col-xs-4, .col-sm-3, .col-md-2;
+  .cart-item-picture {
+    @include make-xs-column(4);
+    @include make-sm-column(3);
+    @include make-md-column(2);
 
-      .product-image {
-        figure {
-          height: 0;
-          padding-bottom: 100%;
-          @include covering-image;
-        }
-      }
-      .badge {
-        position: absolute;
-        left: -10px;
-        top: 1px;
-        background-color: $brand-primary;
+    .product-image {
+      figure {
+        height: 0;
+        padding-bottom: 100%;
+        @include covering-image;
       }
     }
-    .cart-item-product {
-      @extend .col-xs-8, .col-sm-5, .col-md-7;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-between;
-
-      .product-title {
-        @extend .list-group-item-heading;
-        margin-bottom: 10px;
-        font-weight: 700;
-
-        .small { font-weight: normal; }
-      }
-      .product-info .label { font-size: inherit; }
-      .product-code {
-        margin-top: 10px;
-        margin-bottom: 5px;
-        font-size: 75%;
-      }
+    .badge {
+      position: absolute;
+      left: -10px;
+      top: 1px;
+      background-color: $brand-primary;
     }
-    .cart-item-pricing {
-      @extend .col-xs-8, .col-xs-offset-4, .col-sm-4, .col-sm-offset-0, .col-md-3, .col-md-offset-0;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-between;
+  }
+  .cart-item-product {
+    @include make-xs-column(8);
+    @include make-sm-column(5);
+    @include make-md-column(7);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
 
-      .actions form {
-        @extend .pull-right;
-        max-width: 120px;
-      }
-      .unit-price {
-        @extend .text-muted;
-      }
-      .subtotal {
-        @extend .list-group-item-heading;
-      }
-    }
-    .adjustment-label {
-      @extend .col-xs-12, .col-sm-8, .col-md-9;
-      p { margin-bottom: 5px; }
-    }
-    .adjustment-amount {
-      @extend .col-xs-12, .col-sm-4, .col-md-3;
+    .product-title {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-weight: 700;
 
-      h4 {
-        @extend .list-group-item-heading;
-      }
+      .small { font-weight: normal; }
+    }
+    .product-info .label { font-size: inherit; }
+    .product-code {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-size: 75%;
+    }
+  }
+  .cart-item-pricing {
+    @include make-xs-column(8);
+    @include make-xs-column-offset(4);
+    @include make-sm-column(4);
+    @include make-sm-column-offset(0);
+    @include make-md-column(3);
+    @include make-md-column-offset(0);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+
+    .actions form {
+      float: right !important;
+      max-width: 120px;
+    }
+    .unit-price { color: $text-muted; }
+    .subtotal {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+  }
+  .adjustment-label {
+    @include make-xs-column(12);
+    @include make-sm-column(8);
+    @include make-md-column(9);
+    p { margin-bottom: 5px; }
+  }
+  .adjustment-amount {
+    @include make-xs-column(12);
+    @include make-sm-column(4);
+    @include make-md-column(3);
+
+    h4 {
+      margin-top: 0;
+      margin-bottom: 5px;
     }
   }
 }
 .cart-list .caption {
-  @extend .pull-left, .small;
+  @include small;
+  float: left !important;
   max-width: 50%;
 }
 
@@ -738,7 +746,7 @@ body {
  * Breadcrumbs
  */
 .breadcrumbs .breadcrumb {
-  @extend .small;
+  @include small;
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: transparent;
@@ -748,14 +756,17 @@ body {
 /*
  * Pagination controls for infinite tables and product grids
  */
-.pagination-block { @extend .col-xs-12; }
+.pagination-block {
+  @include make-xs-column(12);
+}
 .infinite-table .pagination-block a {
-  @extend .btn, .btn-lg, .btn-block, .btn-default;
-  background-color: transparent;
-  border-color: transparent;
+  @include button-variant($btn-default-color, transparent, transparent);
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
   pointer-events: none;
+  display: block;
+  width: 100%;
 
-  .fa { @extend .fa-2x; }
+  .fa { font-size: 2em; }
 }
 
 
@@ -767,7 +778,7 @@ h1, h2, h3, h4, h5, h6, th, dt, label, .label { font-weight: 500; }
 a.disabled, .disabled > a { pointer-events: none; }
 
 .control-label,
-.table > thead > tr > th { @extend .small; }
+.table > thead > tr > th { @include small; }
 textarea {
   overflow: auto;
   resize: vertical;
@@ -792,7 +803,6 @@ mark {
 .pre { white-space: pre-line; }
 .box { background: transparent; }
 .monospace { font-family: "Fira Mono", monospace; }
-.no-wrap { white-space: nowrap; }
 .currency {
   word-spacing: -0.1em;
   white-space: nowrap;
@@ -830,7 +840,7 @@ mark {
   @extend .hidden-print;
   opacity: 0.4;
 }
-.panel-footer { @extend .clearfix; }
+.panel-footer { @include clearfix; }
 .panel-footer .btn { margin-bottom: 5px; }
 .panel-footer .btn + .btn { margin-left: 8px; }
 
@@ -888,26 +898,18 @@ mark {
  * Rounded buttons
  */
 .btn-round {
-  padding-left: $padding-base-horizontal - 1px;
-  padding-right: $padding-base-horizontal - 1px;
-  border-radius: (0.5 * $font-size-base * $line-height-base) + $padding-base-vertical;
+  @include button-rounded($padding-base-horizontal - 1px, (0.5 * $font-size-base * $line-height-base) + $padding-base-vertical);
 }
 .btn-lg.btn-round,
 .input-group-lg > .input-group-btn > .btn-round {
-  padding-left: $padding-large-horizontal - 1px;
-  padding-right: $padding-large-horizontal - 1px;
-  border-radius: (0.5 * $font-size-large * $line-height-large) + $padding-large-vertical;
+  @include button-rounded($padding-large-horizontal - 1px, (0.5 * $font-size-large * $line-height-large) + $padding-large-vertical);
 }
 .btn-sm.btn-round,
 .input-group-sm > .input-group-btn > .btn-round {
-  padding-left: $padding-small-horizontal - 1px;
-  padding-right: $padding-small-horizontal - 1px;
-  border-radius: (0.5 * $font-size-small * $line-height-small) + $padding-small-vertical;
+  @include button-rounded($padding-small-horizontal - 1px, (0.5 * $font-size-small * $line-height-small) + $padding-small-vertical);
 }
 .btn-xs.btn-round {
-  padding-left: $padding-xs-horizontal - 1px;
-  padding-right: $padding-xs-horizontal - 1px;
-  border-radius: (0.5 * $font-size-small * $line-height-small) + $padding-xs-vertical;
+  @include button-rounded($padding-xs-horizontal - 1px, (0.5 * $font-size-small * $line-height-small) + $padding-xs-vertical);
 }
 
 
@@ -915,7 +917,7 @@ mark {
  * Block level button toggles, buttons with more contrast
  */
 .btn-group-block {
-  @extend .clearfix;
+  @include clearfix;
   display: block;
 }
 [data-toggle="buttons"] {
@@ -1023,7 +1025,7 @@ mark {
  */
 .quick-edit-panel { }
 .quick-edit-panel .header {
-  @extend .clearfix;
+  @include clearfix;
   padding-top: 40px;
   padding-bottom: 44px;
 
@@ -1169,42 +1171,6 @@ mark {
 
 
 /*
- * Image editor components
- */
-#image-editor {
-  height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-
-  .navbar {
-    min-height: auto;
-    margin: 0;
-    border-radius: 0;
-    background-color: $navbar-background;
-    border-color: transparent;
-    transition: all 150ms ease-in-out 0s;
-
-    > .navbar-nav {
-      display: flex;
-      flex-flow: row nowrap;
-      margin: 0;
-
-      > li > a {
-        padding: $navbar-icon-padding;
-        font-size: $navbar-icon-size;
-      }
-    }
-  }
-  .canvas {
-    flex: 1 1 auto;
-    overflow: hidden;
-
-    > img { max-width: 100%; }
-  }
-}
-
-
-/*
  * Dashboard components
  */
 .dashboard-row:first-child { margin-top: 40px; }
@@ -1222,13 +1188,14 @@ mark {
   &:hover { text-decoration: none; }
 }
 .stat-value {
-  @extend .text-center;
+  text-align: center;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
   font-size: 40px;
   line-height: 1;
 }
 .stat-text {
-  @extend .text-center, .small;
+  @include small;
+  text-align: center;
 }
 @media (min-width: $screen-sm-min) {
   .stats-row { display: flex; }
@@ -1285,14 +1252,16 @@ mark {
 .selectize-tall .selectize-dropdown-content { min-height: 400px; }
 .selectize-list-group {
   .selectize-input img {
-    @extend .pull-left, .box-icon;
+    @extend .box-icon;
+    float: left !important;
     margin: -2px 10px -3px 0;
   }
   .selectize-dropdown-content {
     padding: 0;
 
     .list-group-item img {
-      @extend .pull-left, .box-icon;
+      @extend .box-icon;
+      float: left !important;
       margin-right: 10px;
     }
   }
@@ -1350,7 +1319,9 @@ fieldset[disabled] .help-block { display: none; }
  * Form validation states
  */
 .control-label.required:after {
-  @extend .fa, .small, .text-muted;
+  @include font-awesome;
+  @include small;
+  color: $text-muted;
   content: "\f0a3";
   margin-left: 0.333em;
 }
@@ -1431,7 +1402,7 @@ fieldset > legend {
   }
   fieldset.row {
     .form-group {
-      @extend .col-sm-3;
+      @include make-sm-column(3);
       margin-bottom: 5px;
     }
     .control-label {
@@ -1453,7 +1424,11 @@ fieldset > legend {
   padding: 4px 8px;
 }
 .table .col-min { width: 1px; }
-.table .actions { @extend .text-right, .no-wrap, .hidden-print; }
+.table .actions {
+  @extend .hidden-print;
+  text-align: right;
+  white-space: nowrap;
+}
 .table tbody .actions {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -1502,7 +1477,7 @@ fieldset > legend {
 .table.table-nested > tbody + tbody { border-top: 0; }
 .table.table-nested > tbody.subtable > tr > th,
 .table.table-nested > tbody.subtable > tr > td {
-  @extend .small;
+  @include small;
   padding: 4px 8px;
   border-top-style: dotted;
 }
@@ -1583,22 +1558,32 @@ fieldset > legend {
 /*
  * Report panels
  */
-.reports { @extend .row, .list-group; }
+.reports {
+  @include make-row;
+  @extend .list-group;
+}
 .report-panel {
-  @extend .col-sm-4, .col-md-3, .col-lg-2;
+  @include make-sm-column(4);
+  @include make-md-column(3);
+  @include make-lg-column(2);
   margin-bottom: 20px;
 }
 .report-panel > a {
-  @extend .list-group-item, .text-center;
+  @extend .list-group-item;
   padding: 40px 20px;
+  text-align: center;
 
   .fa {
-    @extend .fa-3x;
     display: block;
     margin-bottom: 10px;
+    font-size: 3em;
   }
 }
-.report-body { @extend .col-sm-8, .col-md-9, .col-lg-10; }
+.report-body {
+  @include make-sm-column(8);
+  @include make-md-column(9);
+  @include make-lg-column(10);
+}
 
 
 /*
@@ -1717,52 +1702,52 @@ fieldset > legend {
  * Subscriptions and plan selector
  */
 .subscription-list, .plan-selector {
-  @extend .row;
+  @include make-row;
   display: flex;
   flex-flow: row wrap;
+}
+.subscription-list .subscription,
+.plan-selector .plan {
+  @include make-xs-column(12);
+  @include make-sm-column(6);
+  @include make-lg-column(4);
+  float: none;
+  margin-bottom: 20px;
+}
+.subscription .panel,
+.plan .panel {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
 
-  .subscription, .plan {
-    @extend .col-xs-12, .col-sm-6, .col-lg-4;
-    float: none;
-    margin-bottom: 20px;
-
-    &.selected {
-      .panel {
-        @extend .panel-primary;
-        @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
-
-        .plan-select > .btn { @extend .disabled; }
-      }
-    }
-    .panel {
-      display: flex;
-      flex-flow: column nowrap;
-      height: 100%;
-
-      .panel-body {
-        flex: 1 1 auto;
-        padding-bottom: 0;
-      }
-      .panel-footer {
-        padding-top: 0;
-        background-color: transparent;
-        border-top: 0;
-      }
-    }
+  .panel-body {
+    flex: 1 1 auto;
+    padding-bottom: 0;
+  }
+  .panel-footer {
+    padding-top: 0;
+    background-color: transparent;
+    border-top: 0;
   }
 }
-.subscription-list {
-  .subscription {
-    .plan-details { display: none; }
-    .plan-pricing {
-      @extend .small;
+.subscription.selected .panel,
+.plan.selected .panel {
+  @extend .panel-primary;
+  @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
 
-      .currency {
-        @extend .h4;
-        display: inline-block;
-      }
-      .interval { display: inline-block; }
+  .plan-select > .btn { @extend .disabled; }
+}
+
+.subscription-list .subscription {
+  .plan-details { display: none; }
+  .plan-pricing {
+    @include small;
+
+    .currency {
+      @extend .h4;
+      display: inline-block;
     }
+    .interval { display: inline-block; }
   }
 }
 
@@ -1772,7 +1757,8 @@ fieldset > legend {
  */
 .plan-card {
   .plan-image {
-    @extend .pull-left, .box-thumbnail;
+    @extend .box-thumbnail;
+    float: left !important;
     margin-right: 10px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -1794,19 +1780,21 @@ fieldset > legend {
   }
 
   .plan-title {
-    @extend .clearfix, .lead;
+    @include clearfix;
+    @extend .lead;
   }
   .plan-details {
     ul {
-      @extend .small;
+      @include small;
       padding-left: 1em;
     }
   }
   .plan-pricing {
     .currency {
-      @extend .h3, .text-primary;
+      @extend .h3;
       margin-top: 0;
       margin-bottom: 0;
+      color: $brand-primary;
     }
     .interval { display: block; }
   }

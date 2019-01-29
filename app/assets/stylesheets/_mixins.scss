@@ -38,6 +38,22 @@
     height: auto;
   }
 }
+@mixin small {
+  font-size: floor((100% * $font-size-small / $font-size-base));
+}
+@mixin font-awesome {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+@mixin button-rounded($padding-horizontal, $corner-radius) {
+  padding-left: $padding-horizontal;
+  padding-right: $padding-horizontal;
+  border-radius: $corner-radius;
+}
 @mixin checkerboard-pattern {
   background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%), linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
   background-position: 0 0, 10px 10px;

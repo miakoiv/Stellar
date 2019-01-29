@@ -214,13 +214,13 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   padding-top: 20px;
 
   .breadcrumb {
-    @extend .small;
+    @include small;
     margin-bottom: 0;
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: transparent;
 
-    .active { @extend strong; }
+    .active { font-weight: bold; }
   }
 }
 
@@ -264,18 +264,21 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     &:not(:last-child) { border-bottom: 0; }
 
     > a .product-text {
-      @extend .col-sm-offset-2, .col-md-offset-1;
+      @include make-sm-column-offset(2);
+      @include make-md-column-offset(1);
 
       h3 .small { display: inline-block; }
     }
   }
   > a {
-    @extend .row;
+    @include make-row;
     flex: 1 1 auto;
     margin-right: $grid-gutter-width;
 
     .product-image {
-      @extend .hidden-xs, .col-sm-2, .col-md-1;
+      @extend .hidden-xs;
+      @include make-sm-column(2);
+      @include make-md-column(1);
 
       > figure {
         width: 100%;
@@ -285,7 +288,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       }
     }
     .product-text {
-      @extend .col-xs-9, .col-sm-8, .col-md-9;
+      @include make-xs-column(9);
+      @include make-sm-column(8);
+      @include make-md-column(9);
 
       h3 {
         margin-top: 0;
@@ -294,15 +299,16 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
         font-weight: 700;
 
         .small {
-          @extend .text-muted;
           display: block;
           margin-top: 5px;
           font-size: $font-size-small;
+          color: $text-muted;
         }
       }
     }
     .product-pricing {
-      @extend .col-xs-3, .col-sm-2, .col-md-2;
+      @include make-xs-column(3);
+      @include make-sm-column(2);
       color: $text-color;
 
       .price.currency {
@@ -313,7 +319,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
       .promotions {
         .promotion {
-          @extend .pull-right;
+          float: right !important;
 
           .promotion-image { display: none; }
           .promotion-text {
@@ -331,7 +337,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     .form-group {
       margin-bottom: 0;
 
-      .form-control { @extend .text-right; }
+      .form-control { text-align: right; }
     }
   }
 }
@@ -362,7 +368,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 
   > a {
-    @extend .row;
+    @include make-row;
     display: block;
     flex: 1 1 auto;
     padding: 10px 15px;
@@ -371,7 +377,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
     &:focus { outline: 0; }
     .product-image {
-      @extend .col-xs-4, .col-sm-2;
+      @include make-xs-column(4);
+      @include make-sm-column(2);
 
       > figure {
         height: 0;
@@ -380,7 +387,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       }
     }
     .product-text {
-      @extend .col-xs-8, .col-sm-10;
+      @include make-xs-column(8);
+      @include make-sm-column(10);
       padding-bottom: 30px;
 
       h3 {
@@ -396,8 +404,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       .description { font-size: $font-size-small; }
     }
     .promotions {
-      @extend .col-xs-8, .col-xs-offset-4;
-      @extend .col-sm-10, .col-sm-offset-2;
+      @include make-xs-column(8);
+      @include make-xs-column-offset(4);
+      @include make-sm-column(10);
+      @include make-sm-column-offset(2);
       margin-top: -25px;
 
       .promotion {
@@ -412,8 +422,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       }
     }
     .premium-price {
-      @extend .col-xs-8, .col-xs-offset-4;
-      @extend .col-sm-10, .col-sm-offset-2;
+      @include make-xs-column(8);
+      @include make-xs-column-offset(4);
+      @include make-sm-column(10);
+      @include make-sm-column-offset(2);
 
       .price {
         display: inline-block;
@@ -430,18 +442,19 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     padding: 10px 15px;
     background-color: lighten($body-tone-bg, 5%);
 
-    p { @extend .small; }
+    p { @include small; }
     .price {
       margin-bottom: 0;
       font-size: $font-size-h4;
       text-align: right;
 
-      .special-price { @extend .clearfix; }
+      .special-price { @include clearfix; }
       .regular-price { font-size: $font-size-base; }
     }
     .add-favorite {
       > .btn {
-        @extend .btn-outline-danger, .btn-lg;
+        @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+        @include button-outline-variant($btn-danger-bg);
         border: 0;
         opacity: 0.333;
         transition: opacity 100ms $material-easing;
@@ -458,7 +471,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       margin-left: $grid-gutter-width/2;
 
       .btn {
-        @extend .btn-default, .btn-lg;
+        @include button-variant($btn-default-color, $btn-default-bg, transparent);
+        @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
         border: 0;
         text-align: left;
         transition: background-color 100ms $material-easing;
@@ -502,7 +516,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   margin-bottom: 0;
 }
 .product-grid .product {
-  @extend .col-xs-6, .col-sm-4, .col-md-3;
+  @include make-xs-column(6);
+  @include make-sm-column(4);
+  @include make-md-column(3);
   margin-bottom: 30px;
 }
 .product-grid .product.out-of-stock,
@@ -524,7 +540,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /* Product image and text */
 .product-grid .product-image {
   img {
-    @extend .img-responsive;
+    @include img-responsive;
     width: 100%;
     max-width: none;
     margin: 0 auto;
@@ -596,10 +612,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 .product-grid .add-favorite,
 .product-card .add-favorite {
-  @extend .pull-right;
+  float: right !important;
 
   > .btn {
-    @extend .btn-outline-danger, .btn-lg;
+    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+    @include button-outline-variant($btn-danger-bg);
     border: 0;
     opacity: 0.333;
     transition: opacity 100ms $material-easing;
@@ -616,7 +633,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 .product-card .buy-now-form > .btn,
 .product-grid .buy-now .product-link > a,
 .product-card .buy-now .product-link > a {
-  @extend .btn-default, .btn-lg;
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+  @include button-variant($btn-default-color, $btn-default-bg, transparent);
   width: 50%;
   border: 0;
   text-align: left;
@@ -624,7 +642,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 .product-grid .store-link > a,
 .product-card .store-link > a {
-  @extend .btn-default;
+  @include button-variant($btn-default-color, $btn-default-bg, transparent);
   border: 0;
   text-align: left;
   transition: background-color 100ms $material-easing;
@@ -643,7 +661,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Staggered grid includes shadows */
 .product-grid .staggered-grid {
-  @extend .row;
+  @include make-row;
 
   .product {
     transform: translate3d(0, 0, 0);
@@ -670,7 +688,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   @extend .grid-lines, .columns-4;
 
   .product {
-    @extend .col-sm-3;
+    @include make-sm-column(3);
     margin-bottom: 0;
   }
 }
@@ -719,10 +737,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 
 /* Link to more at the bottom of a grid */
-.more-items-link {
-  > a {
-    @extend .btn, .btn-sm, .btn-outline-primary;
-  }
+.more-items-link > a {
+  @include button-outline-variant($btn-primary-bg);
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
 }
 .layout-container .more-items-link {
   margin-top: 10px;
@@ -739,7 +756,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 .product-detail .product-header,
 .product-detail .product-body,
-.product-detail .product-footer { @extend .row; }
+.product-detail .product-footer { @include make-row; }
 
 /* Product header with actions */
 .product-detail .product-header {
@@ -753,7 +770,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     z-index: 1;
 
     .btn {
-      @extend .pull-right;
+      float: right !important;
       width: 40px;
       height: 40px;
       background-image: asset-url('close.svg');
@@ -769,11 +786,13 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   .categories {
-    @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+    @include make-xs-column(12);
+    @include make-md-column(6);
+    @include make-md-column-offset(6);
     margin-bottom: 20px;
 
     .breadcrumb {
-      @extend .small;
+      @include small;
       margin-bottom: 0;
       margin-right: 40px;
       padding-top: 10px;
@@ -782,7 +801,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   .tags {
-    @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+    @include make-xs-column(12);
+    @include make-md-column(6);
+    @include make-md-column-offset(6);
 
     .nav {
       display: flex;
@@ -797,7 +818,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   .product-title {
-    @extend .col-xs-12, .col-md-6, .col-md-offset-6;
+    @include make-xs-column(12);
+    @include make-md-column(6);
+    @include make-md-column-offset(6);
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: $font-size-h3;
@@ -850,7 +873,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Presentational images */
 .product-detail .images.presentational {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   grid-column: 1 / span 1;
   grid-row: 1 / span 3;
   order: 1;
@@ -925,7 +948,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Product meta */
 .product-meta {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   position: static;
   grid-column: 2 / span 1;
   grid-row: 2 / span 1;
@@ -933,11 +956,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   margin-bottom: 40px;
 
   .add-favorite {
-    @extend .pull-right;
+    float: right !important;
     margin-top: -15px;
 
     > a {
-      @extend .btn-outline-danger;
+      @include button-outline-variant($btn-danger-bg);
     }
   }
 
@@ -947,7 +970,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 
   .buy-now {
-    @extend .row;
+    @include make-row;
     margin-bottom: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -957,7 +980,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
   .product-pricing,
   .buy-now > p {
-    @extend .col-xs-12;
+    @include make-xs-column(12);
     float: none;
   }
   .price {
@@ -975,29 +998,37 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
   .unit-price { font-size: $font-size-small; }
   .order-form {
-    @extend .col-sm-6;
+    @include make-sm-column(6);
     margin-top: 20px;
 
     .input-group { @extend .input-group-lg; }
-    .btn { @extend .btn-lg, .btn-success; }
+    .btn {
+      @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+      @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+    }
   }
   .go-checkout {
-    @extend .col-sm-6;
+    @include make-sm-column(6);
     margin-top: 20px;
 
-    .btn { @extend .btn-block, .btn-lg; }
+    .btn {
+      @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+      display: block;
+      width: 100%;
+    }
   }
   .variant-products {
     margin-bottom: 20px;
 
     .table-scroller {
-      @extend .row;
+      @include make-row;
       @include padded-table;
       max-height: 20em;
     }
 
     .dropdown .btn {
-      @extend .btn-block;
+      display: block;
+      width: 100%;
       text-align: left;
     }
   }
@@ -1037,7 +1068,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Product description and properties */
 .product-description {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   float: none;
   grid-column: 2 / span 1;
   grid-row: 3 / span 1;
@@ -1049,7 +1080,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   .nav-tabs, .tab-content { padding: 0 $grid-gutter-width/2; }
 }
 .product-properties {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   float: none;
   grid-column: 2 / span 1;
   grid-row: 4 / span 1;
@@ -1061,7 +1092,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Technical images */
 .product-detail .images.technical {
-  @extend .col-xs-12;
+  @include make-xs-column(12);
   float: none;
   position: relative;
   grid-column: 1 / span 1;
@@ -1077,7 +1108,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   z-index: 1;
 
   .tag {
-    @extend .pull-left;
+    float: left !important;
     padding: 0 $grid-gutter-width/2;
   }
 }
@@ -1085,7 +1116,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /* Product footer elements */
 .product-footer {
   .promoted-products, .requisite-products {
-    @extend .col-xs-12, .col-md-10, .col-md-offset-1;
+    @include make-xs-column(12);
+    @include make-md-column(10);
+    @include make-md-column-offset(1);
     padding-top: 20px;
     padding-bottom: 20px;
   }
@@ -1123,7 +1156,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   .swiper-slide {
-    @extend .col-xs-6, .col-sm-4, .col-md-3;
+    @include make-xs-column(6);
+    @include make-sm-column(4);
+    @include make-md-column(3);
     padding-left: 0;
     padding-right: 0;
 

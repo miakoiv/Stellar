@@ -86,7 +86,7 @@
     padding-bottom: 20px;
 
     .product-grid {
-      @extend .row;
+      @include make-row;
 
       ul {
         list-style: none;
@@ -94,7 +94,10 @@
         padding-left: 0;
 
         li.product {
-          @extend .col-xs-6, .col-sm-4, .col-md-3, .col-lg-2;
+          @include make-xs-column(6);
+          @include make-sm-column(4);
+          @include make-md-column(3);
+          @include make-lg-column(2);
           margin-bottom: 10px;
 
           &:hover a img { @include box-shadow(0 0 8px $link-color); }
@@ -133,7 +136,7 @@
 
     .product-header {
       .actions {
-        @extend .pull-right;
+        float: right !important;
 
         .btn { display: inline-block; }
       }
@@ -145,14 +148,20 @@
       }
     }
     .product-body {
-      @extend .row;
+      @include make-row;
 
       .images.presentational {
-        @extend .col-xs-12, .col-sm-7, .col-md-8, .col-lg-9;
+        @include make-xs-column(12);
+        @include make-sm-column(7);
+        @include make-md-column(8);
+        @include make-lg-column(9);
         margin-bottom: 30px;
       }
       .product-meta {
-        @extend .col-xs-12, .col-sm-5, .col-md-4, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(5);
+        @include make-md-column(4);
+        @include make-lg-column(3);
 
         .product-code {
           font-size: $font-size-small;
@@ -162,16 +171,17 @@
 
           .product-pricing {
             .price {
-              @extend .lead, .text-primary;
+              @extend .lead;
               margin-right: 0.5em;
               margin-bottom: 0;
               font-weight: 500;
+              color: $brand-primary;
 
               .tax-rate, .unit-price {
-                @extend .text-muted;
                 display: inline-block;
                 font-size: $font-size-base;
                 font-weight: 400;
+                color: $text-muted;
               }
               .tax-rate { margin-left: 0.5em; }
               .unit-price { display: block; }
@@ -188,20 +198,28 @@
               .form-control { display: none; }
             }
             .btn {
-              @extend .btn-lg, .btn-block, .btn-success;
+              @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+              @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+              display: block;
+              width: 100%;
               margin-left: 0;
               transition: all 0.2s ease-in-out 0s;
             }
           }
           .go-checkout .btn {
-            @extend .btn-block, .btn-lg;
+            @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
+            display: block;
+            width: 100%;
             transition: all 0.2s ease-in-out 0s;
           }
         }
         .variant-products {
           margin-bottom: 20px;
 
-          button { @extend .btn-block; }
+          button {
+            display: block;
+            width: 100%;
+          }
           .dropdown-menu {
             @extend .dropdown-menu-right;
           }
@@ -209,24 +227,29 @@
         .product-stock {
           font-size: $font-size-small;
 
-          dt { @extend .pull-left; }
-          dd { @extend .pull-right; }
+          dt { float: left !important; }
+          dd { float: right !important; }
         }
       }
       .product-description {
-        @extend .col-xs-12, .col-sm-12, .col-md-6, .col-lg-6;
+        @include make-xs-column(12);
+        @include make-md-column(6);
 
         .body-text { margin-bottom: 20px; }
       }
       .product-properties {
-        @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(6);
+        @include make-md-column(3);
 
         .properties, .components {
           tr > :last-child { padding-right: 10px; }
         }
       }
       .images.technical {
-        @extend .col-xs-12, .col-sm-6, .col-md-3, .col-lg-3;
+        @include make-xs-column(12);
+        @include make-sm-column(6);
+        @include make-md-column(3);
 
         .image { padding-bottom: 100%; }
       }
