@@ -6,7 +6,9 @@ $secondary-color:   #e4e5e6;
 $body-bg:           $secondary-color;
 $navbar-inverse-bg: $primary-color !default;
 
-@import "bootstrap-base";
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
 
 #viewport {
   position: absolute;

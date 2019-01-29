@@ -8,7 +8,9 @@ $navbar-default-bg: #fff;
 $navbar-default-color: #959595;
 $brand-primary: #013183;
 
-@import "bootstrap-base";
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
 
 #main-nav {
   @include box-shadow(0 3px 6px 0 rgba(0,0,0,0.333));

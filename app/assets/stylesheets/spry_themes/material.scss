@@ -27,7 +27,9 @@ $footer-bg:    #555555 !default;
 $navmenu-inverse-link-color: #aaa !default;
 $navmenu-inverse-link-hover-bg: $brand-primary !default;
 
-@import "bootstrap-base";
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
 
 $body-tone-bg: darken($body-bg, 6%) !default;
 $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;

@@ -1,9 +1,9 @@
-@import "bootstrap-variables.scss";
-@import "bootstrap-sprockets.scss";
-@import "bootstrap.scss";
+@import "bootstrap-sprockets";
+@import "bootstrap-variables";
+@import "bootstrap";
 @import "bootstrap-outline-buttons";
 @import "bootstrap-form-inverse";
-@import "jasny-bootstrap/jasny-bootstrap.scss";
+@import "jasny-bootstrap/jasny-bootstrap";
 @import "hamburgers-recipe";
 @import "hamburgers/hamburgers";
 @import "selectize";

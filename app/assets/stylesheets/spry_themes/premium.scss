@@ -1,6 +1,8 @@
 $main-nav-height: 80px;
 
-@import "bootstrap-base";
+@import "bootstrap-font-awesome";
+@import "bootstrap-generators";
+@import "bootstrap-tweaks";
 
 $body-tone-bg: darken($body-bg, 4%);
 
