@@ -345,7 +345,7 @@ $navbar-default-link-active-bg: transparent;
           dt { float: left !important; }
           dd {
             @extend .badge;
-            float: right: !important;
+            float: right !important;
           }
         }
       }
