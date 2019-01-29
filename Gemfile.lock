@@ -55,8 +55,9 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
-    bootstrap-generators (3.3.4)
-      railties (>= 3.1.0)
+    bootstrap-sass (3.4.0)
+      autoprefixer-rails (>= 5.2.1)
+      sassc (>= 2.0.0)
     bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (10.0.2)
@@ -315,14 +316,13 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    sassc (1.12.1)
+    sassc (2.0.0)
       ffi (~> 1.9.6)
-      sass (>= 3.3.0)
-    sassc-rails (1.3.0)
+      rake
+    sassc-rails (2.1.0)
       railties (>= 4.0.0)
-      sass
-      sassc (~> 1.9)
-      sprockets (> 2.11)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
       sprockets-rails
       tilt
     sdoc (0.4.2)
@@ -389,7 +389,7 @@ DEPENDENCIES
   awesome_nested_set
   backport_new_renderer
   bootstrap-datepicker-rails
-  bootstrap-generators (~> 3.3.4)
+  bootstrap-sass (~> 3.4.0)
   bootstrap_form
   byebug
   clipboard-rails
@@ -435,8 +435,7 @@ DEPENDENCIES
   roadie-rails
   rolify
   roo (~> 2.7.0)
-  sass-rails (~> 5.0)
-  sassc-rails
+  sassc-rails (>= 2.0.0)
   sdoc (~> 0.4.0)
   searchlight
   selectize-rails

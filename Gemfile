@@ -11,8 +11,7 @@ gem 'yaml_db'
 gem 'haml-rails'
 gem 'erb2haml', group: :development
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-gem 'sassc-rails'
+gem 'sassc-rails', '>= 2.0.0'
 gem 'autoprefixer-rails', '~> 8.6.5'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0', '< 4.0.0'
@@ -84,8 +83,8 @@ gem 'rolify'
 # stripe.com integration
 gem 'stripe-rails'
 
-# Twitter Bootstrap scaffolds
-gem 'bootstrap-generators', '~> 3.3.4'
+# Twitter Bootstrap
+gem 'bootstrap-sass', '~> 3.4.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 
 # Image attachments and popups
