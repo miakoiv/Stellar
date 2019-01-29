@@ -10,4 +10,4 @@
           %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
             = render partial: 'departments/product', collection: @products, as: :product
           .pagination-block
-            = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next'
+            = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next', class: 'btn'

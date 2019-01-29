@@ -19,7 +19,7 @@
         = render partial: 'departments/product_card', collection: max_items ? products.first(max_items) : products, as: :product
     - if department.show_more? && products.count > max_items.to_i
       .more-items-link
-        = link_to show_department_path(resource) do
+        = link_to show_department_path(resource), class: 'btn' do
           = resource
           = icon('arrow-circle-right')
   - else
