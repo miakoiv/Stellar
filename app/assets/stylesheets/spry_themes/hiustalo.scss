@@ -24,15 +24,7 @@ $brand-danger:  $hiustalo-red !default;
   .promotion {
     text-align: right;
 
-    .promotion-image {
-      display: block;
-      margin-top: -24px;
-
-      img {
-        @include img-responsive;
-        margin: 0 auto;
-      }
-    }
+    .promotion-image { display: inline-block; }
     .promotion-text { display: inline-block; }
     .promotion-image + .promotion-text { display: none; }
   }

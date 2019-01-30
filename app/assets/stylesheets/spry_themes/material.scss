@@ -1044,7 +1044,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /* Promotions positioned outside the static product-meta */
 .product-meta .promotions {
   position: absolute;
-  top: 24px;
+  top: 20px;
   right: $grid-gutter-width/2;
 
   .promotion {
