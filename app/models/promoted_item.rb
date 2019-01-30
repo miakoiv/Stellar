@@ -40,11 +40,14 @@ class PromotedItem < ActiveRecord::Base
   end
 
   # Calculations should happen when the linked attribute changes but only once.
+  # Skip if promotion doesn't have editable prices.
   def should_calculate_price
+    return false unless promotion.editable_prices?
     discount_percent_changed? && !calculated && base_price.present?
   end
 
   def should_calculate_discount
+    return false unless promotion.editable_prices?
     price_cents_changed? && !calculated && base_price.present?
   end
 
