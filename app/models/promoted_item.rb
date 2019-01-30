@@ -12,7 +12,7 @@ class PromotedItem < ActiveRecord::Base
 
   #---
   belongs_to :promotion, touch: true
-  delegate :group, to: :promotion
+  delegate :group, :first_date, :last_date, to: :promotion
 
   belongs_to :product, required: true
   delegate :real?, to: :product
