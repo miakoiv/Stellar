@@ -79,7 +79,7 @@
             - if @order.incomplete?
               .btn-group{data: {toggle: 'buttons'}}
                 %label.btn.btn-success{title: t('.approved_at_help'), data: {toggle: 'tooltip'}}
-                  = f.check_box_without_bootstrap :is_final
+                  = f.check_box_without_bootstrap :is_final, include_hidden: false
                   = icon('check', col(Order, :is_final))
             = f.primary
 
