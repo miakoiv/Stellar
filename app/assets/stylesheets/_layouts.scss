@@ -472,10 +472,21 @@
     // sizing original gets img-responsive,
     // other sizings get top center positioning
     figure {
+      position: relative;
+
       img {
         @include img-responsive;
         margin: auto;
         object-position: top;
+      }
+      figcaption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px;
+        font-size: $font-size-small;
+        font-weight: bolder;
+        text-align: center;
       }
     }
     // contain and cover sizings expand both figure and img
@@ -521,6 +532,7 @@
     .image-container, .swiper-container {
       justify-content: flex-start;
 
+      figcaption { text-align: left; }
       img { object-position: left; }
     }
   }
@@ -530,6 +542,7 @@
     .image-container, .swiper-container {
       justify-content: flex-end;
 
+      figcaption { text-align: right; }
       img { object-position: right; }
     }
   }

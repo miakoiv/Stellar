@@ -10,14 +10,20 @@
           .swiper-wrapper
             - picture.pictures.each do |picture|
               .swiper-slide
-                = picture_variant_tag picture
+                = picture_variant_tag picture do
+                  %figcaption{style: picture.style(:backgroundColor)}
+                    = picture.caption
       - else
         .image-container{class: sizing}
           - if picture.url.present?
             = link_to picture.url do
-              = picture_variant_tag picture.cover_picture
+              = picture_variant_tag picture.cover_picture do
+                %figcaption{style: picture.style(:backgroundColor)}
+                  = picture.cover_picture.caption
           - else
-            = picture_variant_tag picture.cover_picture
+            = picture_variant_tag picture.cover_picture do
+              %figcaption{style: picture.style(:backgroundColor)}
+                = picture.cover_picture.caption
 
     - else
       = segment_placeholder(picture)

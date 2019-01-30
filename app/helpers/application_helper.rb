@@ -120,7 +120,8 @@ module ApplicationHelper
     return ''.html_safe if picture.nil?
     variant ||= picture.variant.presence || :lightbox
     content_tag :figure do
-      image_variant_tag(picture.image, variant, options)
+      concat image_variant_tag(picture.image, variant, options)
+      yield if block_given?
     end
   end
 

@@ -7,10 +7,14 @@
             - if gallery.lightbox?
               = link_to picture.image.url(:lightbox, timestamp: false), class: 'image-link' do
                 .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
-                  = picture_variant_tag picture
+                  = picture_variant_tag picture do
+                    %figcaption{style: gallery.style(:backgroundColor)}
+                      = picture.caption
             - else
               .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
-                = picture_variant_tag picture
+                = picture_variant_tag picture do
+                  %figcaption{style: gallery.style(:backgroundColor)}
+                    = picture.caption
 
     - else
       = segment_placeholder(gallery)
