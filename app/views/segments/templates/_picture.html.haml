@@ -8,11 +8,11 @@
       - if swiper
         .swiper-container{class: sizing}
           .swiper-wrapper
-            - picture.pictures.each do |picture|
+            - picture.pictures.each do |slide|
               .swiper-slide
-                = picture_variant_tag picture do
+                = picture_variant_tag slide do
                   %figcaption{style: picture.style(:backgroundColor)}
-                    = picture.caption
+                    = slide.caption
       - else
         .image-container{class: sizing}
           - if picture.url.present?
