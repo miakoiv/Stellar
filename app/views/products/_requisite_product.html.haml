@@ -1,4 +1,4 @@
-%li.product{id: dom_id(product, :requisite)}
+%li.grid-item.single.product{id: dom_id(product, :requisite)}
   = link_to show_product_path(product), data: {push: 'partial', target: '#store-body'} do
     = render partial: 'products/card/list_image', object: product, as: :product
     = render partial: 'products/card/title_text', object: product, as: :product

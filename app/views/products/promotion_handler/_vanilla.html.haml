@@ -1,21 +1,23 @@
 .promoted-products[promotion]
-  %h2.footer-header= t('.title')
-  .swiper-container.product-grid
-    %ul.swiper-wrapper
-      = render partial: 'products/promoted_product', collection: promotion.products.live.random.not_including(context).first(8), as: :product, layout: 'shared/swiper_slide'
-  .swiper-button-prev
-  .swiper-button-next
-  .more-items-link
-    = link_to show_promotion_path(promotion), class: 'btn' do
-      = promotion
-      = icon('arrow-circle-right')
+  .product-browser
+    %h4.product-browser-header
+      = t('.title')
+    .product-grid.swiper-container
+      %ul.swiper-wrapper
+        = render partial: 'products/promoted_product', collection: promotion.products.live.random.not_including(context).first(8), as: :product, layout: 'shared/swiper_slide'
+    .swiper-button-prev
+    .swiper-button-next
+    .more-items-link
+      = link_to show_promotion_path(promotion), class: 'btn' do
+        = promotion
+        = icon('arrow-circle-right')
 
-:coffee
-  jQuery ->
-    $promotion = $('##{dom_id(promotion)}')
-    new Swiper $promotion.find('.swiper-container'),
-      slidesPerView: 'auto'
-      watchOverflow: true
-      navigation:
-        nextEl: '##{dom_id(promotion)} .swiper-button-next'
-        prevEl: '##{dom_id(promotion)} .swiper-button-prev'
+  :coffee
+    jQuery ->
+      $promotion = $('##{dom_id(promotion)}')
+      new Swiper $promotion.find('.swiper-container'),
+        slidesPerView: 'auto'
+        watchOverflow: true
+        navigation:
+          nextEl: '##{dom_id(promotion)} .swiper-button-next'
+          prevEl: '##{dom_id(promotion)} .swiper-button-prev'

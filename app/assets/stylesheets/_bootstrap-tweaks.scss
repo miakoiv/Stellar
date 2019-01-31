@@ -467,36 +467,6 @@ body {
   }
 }
 
-#promoted-products {
-  margin-top: 40px;
-  padding: 10px $grid-gutter-width/2;
-
-  h2 { margin: 20px 0; }
-  &:empty { display: none; }
-}
-.product-stripe > ul {
-  display: flex;
-  flex-flow: row wrap;
-  list-style: none;
-  padding-left: 0;
-
-  > li {
-    @extend .product-card;
-    flex: 1 1 auto;
-    max-width: 230px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-}
-@media (min-width: $screen-sm-min) {
-  #promoted-products {
-    height: 100%;
-    margin-top: 0;
-    overflow-y: scroll;
-  }
-  .product-stripe > ul > li { margin-right: 0; }
-}
-
 /* Fancy shopping cart and mobile friendly cart list view */
 #cart-contents.fancy-cart {
   #checkout-button .btn {

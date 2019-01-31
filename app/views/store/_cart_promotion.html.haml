@@ -1,4 +1,18 @@
 - if products.any?
-  %h2= t('.title')
-  .product-stripe
-    %ul= render partial: 'products/promoted_product', collection: products, as: :product
+  .product-browser
+    %h4.product-browser-header= t('.title')
+    .product-grid.swiper-container
+      %ul.swiper-wrapper
+        = render partial: 'products/promoted_product', collection: products, as: :product, layout: 'shared/swiper_slide'
+    .swiper-button-prev
+    .swiper-button-next
+
+  :coffee
+    jQuery ->
+      $swiper = $('#promoted-products .swiper-container')
+      new Swiper $swiper,
+        slidesPerView: 'auto'
+        watchOverflow: true
+        navigation:
+          nextEl: '#promoted-products .swiper-button-next'
+          prevEl: '#promoted-products .swiper-button-prev'

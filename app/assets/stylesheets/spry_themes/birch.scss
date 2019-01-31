@@ -395,50 +395,37 @@ $brand-primary: #013183;
         }
       }
     }
-    .product-footer {
+  }
+}
 
-      .requisite-products, .variant-products {
-        @include make-row;
+.product-browser {
+  position: relative;
+}
+.product-browser .product-grid > ul {
+  display: flex;
+  flex-flow: row wrap;
 
-        ul {
-          display: flex;
-          flex-wrap: wrap;
-          align-content: flex-start;
-          list-style: none;
-          padding: 0;
+  &.swiper-wrapper { flex-wrap: nowrap; }
+  .product {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    float: none;
+    margin-bottom: 0;
 
-          li.product {
-            @include make-sm-column(2);
-
-            a {
-              display: block;
-              text-decoration: none;
-
-              .product-image {
-                position: relative;
-
-                figure {
-                  height: 0;
-                  padding-bottom: 100%;
-                  @include contained-image;
-                }
-              }
-
-              h3 {
-                font-size: $font-size-base;
-                margin-top: 0.25em;
-                margin-bottom: 0.5em;
-
-                .small {
-                  display: block;
-                  font-size: $font-size-small;
-                }
-              }
-            }
-          }
-        }
-      }
+    .product-image {
+      height: 0;
+      padding-bottom: 100%;
+      @include contained-image;
     }
+  }
+  .swiper-slide {
+    @include make-xs-column(6);
+    @include make-sm-column(4);
+    @include make-md-column(3);
+    padding-left: 0;
+    padding-right: 0;
+
+    > .product { width: 100%; }
   }
 }
 

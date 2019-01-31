@@ -80,9 +80,10 @@
 
   - if product.requisite_products.live.any?
     .requisite-products
-      %h2.footer-header= t('store.requisite_products')
-      .product-grid
-        %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
+      .product-browser
+        %h4.product-browser-header= t('store.requisite_products')
+        .product-grid
+          %ul= render partial: 'products/requisite_product', collection: product.requisite_products.live, as: :product
 
 #offer-requisites-modal.modal{data: {backdrop: 'static'}}
   .modal-dialog.modal-lg
