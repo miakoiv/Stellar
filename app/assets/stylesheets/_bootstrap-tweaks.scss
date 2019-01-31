@@ -481,6 +481,7 @@ body {
   padding-left: 0;
 
   > li {
+    @extend .product-card;
     flex: 1 1 auto;
     max-width: 230px;
     margin-right: 10px;
