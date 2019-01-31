@@ -119,7 +119,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /*
  * Mega dropdown menu
  */
-.mega-dropdown-menu ul.row {
+#main-nav .mega-dropdown-menu ul.row {
   > li {
     border-right: 1px solid $table-border-color;
     &:last-child { border-right: 0; }
