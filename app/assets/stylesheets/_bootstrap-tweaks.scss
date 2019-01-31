@@ -1335,6 +1335,7 @@ fieldset.fixed {
     display: flex;
     justify-content: flex-end;
 
+    > .switch { margin: 0 30px; }
     > .btn,
     > .btn-group { margin-left: 8px; }
   }
