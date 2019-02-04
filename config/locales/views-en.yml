@@ -405,6 +405,8 @@ en:
           select_product_scope: "[Select sorting]"
         category_menu:
           select_category: "[Select category]"
+        content_feed:
+          select_content_class: "[Select content source]"
         department:
           select_department: "[Select department]"
           select_product_scope: "[Select sorting]"

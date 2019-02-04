@@ -21,6 +21,8 @@ class Segment < ActiveRecord::Base
     :map_marker,      # flag to display the location marker
     :map_zoom,        # zoom factor of google map segments
     :map_theme,       # map theme as a JS snippet
+    :content_class,   # content feed class in the ContentGateway module
+    :content_type,    # content type in context of the content class
     :facebook_page,   # page id for facebook feeds
     :facebook_token,  # access token for the facebook feed
     :inverse,         # flag to invert things, like colour schemes or layouts
@@ -75,6 +77,8 @@ class Segment < ActiveRecord::Base
 
   VELOCITIES = %w{velocity-slowest velocity-slow velocity-normal velocity-fast}.freeze
 
+  CONTENT_CLASSES = %w{OikotieAsunnot}.freeze
+
   #---
   enum template: {
     text: 1,
@@ -90,6 +94,7 @@ class Segment < ActiveRecord::Base
     video_player: 5,
     documentation: 6,
     facebook_feed: 30,
+    content_feed: 31,
     navigation_menu: 50,
     category_menu: 51,
     empty: 0,
@@ -166,6 +171,10 @@ class Segment < ActiveRecord::Base
 
   def self.velocity_options
     VELOCITIES.map { |v| [Segment.human_attribute_value(:velocity, v).html_safe, v] }
+  end
+
+  def self.content_class_options
+    CONTENT_CLASSES
   end
 
   #---

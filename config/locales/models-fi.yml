@@ -542,6 +542,8 @@ fi:
         map_marker: Näytä sijainti kartalla
         map_zoom: Kartan koko
         map_theme: Teemamääritykset
+        content_class: Sisällön lähde
+        content_type: Sisällön laji
         facebook_page: Facebook-sivun nimi
         facebook_token: Facebook-pääsykoodi
         shadow: Varjo

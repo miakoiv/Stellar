@@ -25,6 +25,8 @@ class Store < ActiveRecord::Base
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
+    :oikotie_asunnot_api_key,     # Oikotie Asunnot API key
+    :oikotie_asunnot_broker_id,   # Oikotie Asunnot broker company id
     :order_sequence, # base value for order numbers if no numbering exists
     :quotation_template_id, # page reference to quotation boilerplate
     :csv_encoding,         # CSV encoding of uploaded files

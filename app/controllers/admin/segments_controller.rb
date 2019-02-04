@@ -135,6 +135,7 @@ class Admin::SegmentsController < AdminController
         :masonry, :image_sizing, :thumbnails, :lightbox,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
+        :content_class, :content_type,
         :facebook_page, :facebook_token,
         :inverse, :jumbotron, :shadow,
         :animation, :velocity

@@ -1,0 +1,18 @@
+%fieldset
+  = f.select :content_class, Segment.content_class_options, {include_blank: t('.select_content_class')}
+  = f.text_field :content_type
+  = f.text_field :header
+  = f.text_field :subhead
+  .form-group
+    = f.label col(Segment, :grid_columns), class: 'control-label'
+    .btn-group{data: {toggle: 'buttons'}}
+      - Segment.grid_columns_options.each do |columns|
+        %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
+          = f.radio_button_without_bootstrap :grid_columns, columns
+          = columns
+  = f.form_group do
+    = f.check_box :grid_disable_xs
+  = f.text_field :max_items
+
+:coffee
+  $('#segment_content_class').betterSelectize()

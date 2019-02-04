@@ -86,6 +86,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # API configuration.
+  config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://api.pakettikauppa.fi/'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
   config.stripe.publishable_key = 'pk_live_TxdcZiBgT9qfi5ecgFsGucrS'

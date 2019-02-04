@@ -404,6 +404,8 @@ fi:
           select_product_scope: "[Valitse järjestys]"
         category_menu:
           select_category: "[Valitse tuoteryhmä]"
+        content_feed:
+          select_content_class: "[Valitse sisällön lähde]"
         department:
           select_department: "[Valitse osasto]"
           select_product_scope: "[Valitse järjestys]"

@@ -178,6 +178,7 @@ fi:
           department: osasto
           feature: juliste
           facebook_feed: Facebook
+          content_feed: ulkopuolinen sisältö
           navigation_menu: sivuvalikko
           category_menu: tuoteryhmävalikko
           raw: ʜᴛᴍʟ-osio
