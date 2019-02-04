@@ -1,0 +1,13 @@
+.feed-item
+  = link_to item.link, target: '_blank' do
+    .header
+      %h3
+        = item.title
+        %span.small= item.subtitle
+    .picture= image_tag item.image
+    .body
+      .metadata
+        .price.currency= item.price
+        .size= item.size
+        .type= item.type
+      .description= item.description

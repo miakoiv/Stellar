@@ -95,6 +95,9 @@ Rails.application.routes.draw do
   get '/front', to: 'store#front', as: :front
   get '/cart',  to: 'store#cart',  as: :cart
 
+  # Content consumer actions.
+  get '/content/feed', to: 'content#feed', as: :content_feed
+
   # Koala actions
   get 'koala/feed'
 

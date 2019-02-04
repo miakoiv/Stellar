@@ -1,0 +1,5 @@
+- if @items.present?
+  = render @items
+- else
+  .feed-item
+    .alert.alert-danger= @error_message
