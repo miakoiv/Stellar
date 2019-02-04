@@ -1172,6 +1172,66 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 }
 
+
+/*
+ * Item cards in a content feed
+ */
+.content-feed { @extend .grid-lines; }
+.content-feed .feed-item {
+  transition: box-shadow 200ms $material-easing;
+  &:hover {
+    z-index: 2;
+    @include shadow-higher;
+    .header h3 { color: $link-hover-color; }
+  }
+
+  > a {
+    display: block;
+    padding: 10px 0;
+    background-color: $body-bg;
+    color: inherit;
+    text-decoration: none;
+
+    &:focus { outline: 0; }
+  }
+  .header h3 {
+    margin: 0;
+    font-size: $font-size-large;
+    color: $link-color;
+
+    .small {
+      display: block;
+      font-size: $font-size-base;
+    }
+  }
+  .picture {
+    width: 100%;
+    height: 0;
+    padding-bottom: 62.5%;
+    margin: 10px 0;
+    @include covering-image;
+  }
+  .body {
+    .metadata {
+      @include make-row;
+    }
+    .price, .size {
+      @include make-xs-column(6);
+      font-weight: bold;
+    }
+    .size { text-align: right; }
+    .type { @include make-xs-column(12); }
+    .description {
+      margin-top: 10px;
+      padding-top: 5px;
+      border-top: 1px solid $table-border-color;
+      font-size: $font-size-small;
+      color: $text-muted;
+    }
+  }
+}
+
+
 /* Nested lists */
 .list-group.nested .toggle { transition: transform 100ms $material-easing; }
 
