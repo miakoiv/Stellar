@@ -44,12 +44,16 @@ module ContentGateway
       @broker_id = @store.oikotie_asunnot_broker_id
     end
 
-    def feed(options = {})
-      options.merge!(
-        cardType: card_type(options.delete('contentType')),
+    # Loads the feed and returns a tuple of [items, count]
+    def feed(params = {})
+      page = params['page'].present? ? params['page'].to_i : 1
+      items = params['items'].to_i
+      options = params.merge(
+        cardType: card_type(params['contentType']),
         brokerCompanyId: broker_id,
         sortBy: :published_desc,
-        limit: options.delete('items')
+        offset: items * (page - 1),
+        limit: items
       )
       response = self.class.get('/cards',
         headers: {key: api_key},
@@ -57,9 +61,10 @@ module ContentGateway
         timeout: 10
       ).parsed_response
       if response['cards'].present?
-        response['cards'].map { |card| build_content_item(card) }
+        items = response['cards'].map { |card| build_content_item(card) }
+        [items, response['found']]
       else
-        []
+        [[], 0]
       end
     end
 

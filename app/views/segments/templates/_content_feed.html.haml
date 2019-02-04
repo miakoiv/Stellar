@@ -1,17 +1,17 @@
-.segment-content.content_feed{id: dom_id(content_feed, :content)}
+.segment-content.content_feed{id: dom_id(content_feed, :content), data: {id: dom_id(content_feed, :content), store: current_store.id, content_class: content_feed.content_class, content_type: content_feed.content_type, items: content_feed.max_items.presence || 24}}
   - if content_feed.header.present?
     .page-header
       %h1= content_feed.header
       - if content_feed.subhead.present?
         %p.lead= content_feed.subhead
-  .content-feed.row{class: content_feed.grid_columns_class, data: {store: current_store.id, content_class: content_feed.content_class, content_type: content_feed.content_type, items: content_feed.max_items.presence || 24}}
+  .content-feed.row{class: content_feed.grid_columns_class}
     = segment_placeholder(content_feed)
+  .content-pagination
 
 - if content_feed.content_class.present?
   :coffee
-    $container = $('##{dom_id(content_feed, :content)} > .content-feed')
+    $content = $('##{dom_id(content_feed, :content)}')
     $.ajax
       url: '#{content_feed_path}'
-      data: $container.data()
-      success: (response) ->
-        $container.html response
+      data: $content.data()
+      dataType: 'script'

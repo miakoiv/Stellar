@@ -1,5 +1,6 @@
 - if @items.present?
   = render @items
+  = paginate @items, remote: true
 - else
   .feed-item
     .alert.alert-danger= @error_message
