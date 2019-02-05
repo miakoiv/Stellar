@@ -8,7 +8,7 @@
       - pictures[1..-1].each do |picture|
         .image-container.stacked{class: sizing}
           = picture_variant_tag picture
-    .editable-content
+    .editable-content{class: feature.hyphens? && 'hyphens'}
       - if feature.body.present?
         = feature.body.html_safe
       - else

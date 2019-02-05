@@ -132,7 +132,7 @@ class Admin::SegmentsController < AdminController
         :body, :header, :subhead, :url,
         :margin_top, :margin_bottom, :min_height,
         :grid_columns, :grid_lines, :grid_disable_xs,
-        :masonry, :image_sizing, :thumbnails, :lightbox,
+        :hyphens, :masonry, :image_sizing, :thumbnails, :lightbox,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
         :content_class, :content_type,

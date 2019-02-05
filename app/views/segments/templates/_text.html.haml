@@ -1,5 +1,5 @@
 .segment-content.text
-  .editable-content
+  .editable-content{class: text.hyphens? && 'hyphens'}
     - if text.body.present?
       = text.body.html_safe
     - else

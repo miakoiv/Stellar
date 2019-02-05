@@ -8,7 +8,7 @@
         - else
           = picture_variant_tag media.cover_picture
     .media-body
-      .editable-content
+      .editable-content{class: media.hyphens? && 'hyphens'}
         - if media.body.present?
           = media.body.html_safe
         - else

@@ -534,6 +534,7 @@ fi:
         direction: Suunta
         jumbotron: Jättikoko
         image_sizing: Kuvan sovitus
+        hyphens: Tekstin tavutus
         masonry: Tiivistä rivit
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön
