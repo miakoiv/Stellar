@@ -114,15 +114,4 @@ $border-radius-small: 0 !default;
 .navigation-map svg {
   display: block;
   margin: auto;
-
-  .country {
-    fill: $cardirad-green;
-    stroke: rgba(255,255,255,0.8);
-    stroke-width: 1;
-
-    &:hover {
-      filter: brightness(0.88) drop-shadow(0 0 2px rgba(255,255,255,0.8));
-      cursor: pointer;
-    }
-  }
 }
