@@ -1,13 +1,5 @@
 @import "stellar";
 
-$screen-top-color:    $primary-color;
-$screen-bottom-color: $secondary-color;
-
-#app {
-  @include gradient-vertical($screen-top-color, $screen-bottom-color, 0%, 100%);
-  background-attachment: fixed;
-  justify-content: center;
-}
 #app .branding {
   width: 120px;
   height: 120px;

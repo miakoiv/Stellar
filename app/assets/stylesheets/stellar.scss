@@ -28,7 +28,9 @@ $navbar-inverse-bg: $primary-color !default;
   }
 }
 #app {
-  justify-content: flex-end;
+  @include gradient-vertical($primary-color, $secondary-color, 0%, 100%);
+  background-attachment: fixed;
+  justify-content: space-evenly;
 
   > .navbar {
     .navbar-brand {
