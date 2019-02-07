@@ -59,6 +59,11 @@ class Role < ActiveRecord::Base
     available_roles - ['order_notify', 'correspondence']
   end
 
+  # Roles granted at onboarding new store admins.
+  def self.onboarding
+    %w{store_admin user_manager inventory_manage page_editor product_editor category_editor property_editor promotion_editor order_review order_manage reports order_notify correspondence}
+  end
+
   def self.icon_for(name)
     ROLES[name][:icon]
   end
