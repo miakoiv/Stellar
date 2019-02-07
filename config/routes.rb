@@ -2,9 +2,15 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  constraints(host: ENV['DEFAULT_URL_HOST']) do
+  constraints(host: ENV['STELLAR_HOST']) do
+    resource :onboarding do
+      get :frontend
+      get :backend
+      get :admin
+      post 'validate/:step', action: :validate, as: :validate
+    end
     get '/', to: 'account#index'
-    get '/onboarding', to: 'account#onboarding', as: :onboarding
+    get '/get-started', to: 'account#onboarding', as: :get_started
   end
 
   root 'store#index'

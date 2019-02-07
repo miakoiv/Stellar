@@ -2,6 +2,11 @@
 
 class Hostname < ActiveRecord::Base
 
+  RESTRICTED_FQDNS = [
+    ENV['STELLAR_DOMAIN'],
+    ENV['STELLAR_HOST']
+  ].freeze
+
   resourcify
   include Authority::Abilities
   include Trackable
@@ -21,8 +26,7 @@ class Hostname < ActiveRecord::Base
   scope :domain, -> { joins(:store).merge(Store.portal) }
   scope :subdomain, -> { where.not(domain_hostname: nil) }
 
-  #---
-  validates :fqdn, presence: true, uniqueness: true
+  validates :fqdn, presence: true, uniqueness: true, exclusion: {in: RESTRICTED_FQDNS}
 
   #---
   # The store specified by domain hostname, if any.
