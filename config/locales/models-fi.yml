@@ -642,6 +642,7 @@ fi:
         name: Nimi
         rate: Verokanta
         included_in_retail: Myyntihinnat sisältävät veron
+        default_tax_name: ALV
       transfer:
         number: nro
         completed_at: Siirretty

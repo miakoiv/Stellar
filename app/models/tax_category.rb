@@ -17,6 +17,15 @@ class TaxCategory < ActiveRecord::Base
   validates :rate, numericality: {greater_than_or_equal_to: 0, less_than: 100}
 
   #---
+  def self.defaults_for_locale(locale)
+    {
+      name: "%s %d%%" % [TaxCategory.human_attribute_name(:default_tax_name, locale: locale), Price::DEFAULT_TAX_RATE],
+      rate: Price::DEFAULT_TAX_RATE,
+      included_in_retail: true
+    }
+  end
+
+  #---
   # Convenience method to query tax inclusion at given price base.
   def tax_included?(price_base)
     send("included_in_#{price_base}".to_sym)

@@ -642,6 +642,7 @@ en:
         name: Name
         rate: Tax rate
         included_in_retail: Retail prices include tax
+        default_tax_name: VAT
       transfer:
         number: №
         completed_at: Transfer date
