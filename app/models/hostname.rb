@@ -26,7 +26,7 @@ class Hostname < ActiveRecord::Base
   scope :domain, -> { joins(:store).merge(Store.portal) }
   scope :subdomain, -> { where.not(domain_hostname: nil) }
 
-  validates :fqdn, presence: true, uniqueness: true, exclusion: {in: RESTRICTED_FQDNS}
+  validates :fqdn, presence: true, uniqueness: true, exclusion: {in: RESTRICTED_FQDNS}, format: {with: /\A[a-z0-9.-]+\z/}
 
   #---
   # The store specified by domain hostname, if any.
