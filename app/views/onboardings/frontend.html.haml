@@ -1,0 +1,12 @@
+- content_for :main_title do
+  = t('.title')
+- content_for :main_panel do
+  .panel.panel-default
+    = bootstrap_form_for @onboarding, as: :onboarding, url: validate_onboarding_path(:frontend) do |f|
+      = f.hidden_field :theme, value: 'material'
+      .panel-body
+        = t('.body_html')
+      .panel-body
+        = f.text_field :name, label: t('.store_name'), help: t('.store_name_help'), class: 'input-lg', required: true
+        .actions
+          = f.primary t('.submit')

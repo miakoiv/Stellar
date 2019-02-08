@@ -1,0 +1,12 @@
+- content_for :main_title do
+  = t('.title')
+- content_for :main_panel do
+  .panel.panel-default
+    = bootstrap_form_for @onboarding, as: :onboarding, url: validate_onboarding_path(:admin) do |f|
+      .panel-body
+        = t('.body_html')
+      .panel-body
+        = f.text_field :admin_name, label: t('.admin_name'), required: true
+        = f.text_field :vat_number, label: t('.vat_number'), help: t('.vat_number_help')
+        .actions
+          = f.primary t('.submit')

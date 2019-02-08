@@ -1,0 +1,16 @@
+- content_for :main_title do
+  = t('.title')
+- content_for :main_panel do
+  .panel.panel-default
+    = bootstrap_form_for @onboarding, as: :onboarding, url: validate_onboarding_path(:backend) do |f|
+      .panel-body
+        = t('.body_html')
+      .panel-body
+        = f.text_field :subdomain, label: t('.subdomain'), required: true, append: ".#{ENV['STELLAR_DOMAIN']}", help: t('.subdomain_help')
+        .row
+          .col-md-6
+            = f.select :country_code, Account::Onboarding::Base.country_options, {label: t('.country')}, {class: 'selectize'}
+          .col-md-6
+            = f.select :locale, Account::Onboarding::Base.locale_options, {label: t('.locale')}, {class: 'selectize'}
+        .actions
+          = f.primary t('.submit')

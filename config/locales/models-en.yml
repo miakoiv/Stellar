@@ -11,6 +11,13 @@ en:
       shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
       shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
+    errors:
+      models:
+        account/onboarding/backend:
+          attributes:
+            subdomain:
+              not_available: This address is already in use elsewhere
+              reserved: This address is reserved for internal use
   activerecord:
     models:
       activity:

@@ -9,16 +9,20 @@
     = javascript_include_tag 'application'
     = javascript_include_tag 'stellar'
   %body#app
-    %nav.navbar.navbar-inverse.navbar-fixed-top
+    %nav.navbar.navbar-inverse.navbar-transparent
       .container-fluid
         = render partial: 'shared/account_nav'
-    .container
-      - if content_for?(:main_title)
-        .page-header
-          %h1= yield :main_title
-      - if content_for?(:main_panel)
-        .row
-          .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
-            = yield :main_panel
+    - if content_for?(:splash)
+      .splash
+        = yield :splash
+    - if content_for?(:main_title) || content_for?(:main_panel)
+      .container
+        - if content_for?(:main_title)
+          .page-header
+            %h1= yield :main_title
+        - if content_for?(:main_panel)
+          .row
+            .col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+              = yield :main_panel
 
     = yield

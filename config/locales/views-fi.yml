@@ -21,20 +21,32 @@
 
 fi:
   account:
-    onboarding:
-      title: Uuden sivuston luonti
-      body_html: <p>Vastaa allaoleviin kysymyksiin.</p>
+    splash:
+      title: Stellar
+      blurb: Moderni alusta verkkokaupoille ja sivustoille, helposti.
+      get_started: Aloita tästä
+  onboardings:
+    frontend:
+      title: Uuden sivuston nimi
+      body_html: <p>Aloita nimeämällä sivustosi tai kauppasi.</p>
       store_name: Sivuston nimi
       store_name_help: Yrityksesi tai yhteisösi nimi, tai joku muu muistettava nimi
       submit: Aloita
-    register:
-      title: Luo itsellesi tili
-      body_html: <p class="lead">Rekisteröitymällä Stellarin käyttäjäksi pääset alkuun.</p>
-      sign_up: Rekisteröidy tästä
-    splash:
-      title: Aloita tästä
-      body_html: <p class="lead">Vastaamalla muutamaan kysymykseen pääset aloittamaan oman sivustosi kanssa.</p>
-      onboarding: Aloita
+    backend:
+      title: Sivuston asetukset
+      body_html: <p>Sivustosi tarvitsee väliaikaisen osoitteen, sekä kotimaan ja oletuskielen.</p>
+      country: Kotimaa
+      locale: Kieli
+      subdomain: Väliaikainen osoite
+      subdomain_help: Ehdotettu osoite on sivuston nimi. Voit vaihtaa sen toiseksi, jos haluamasi osoite on saatavana.
+      submit: Jatka
+    admin:
+      title: Ylläpitäjän nimi ja organisaatio
+      body_html: <p>Tarvitsemme ylläpitäjän (sinun) nimesi ja yrityksesi tai organisaatiosi Y-tunnuksen, jos sellainen on.
+      admin_name: Ylläpitäjän nimi
+      vat_number: Yrityksen tai organisaation Y-tunnus
+      vat_number_help: Jätä tyhjäksi, jos olet yksityishenkilö
+      submit: Jatka
   admin:
     activities:
       title: Historia

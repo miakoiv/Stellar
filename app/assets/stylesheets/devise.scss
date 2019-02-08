@@ -12,19 +12,8 @@
   @include box-shadow(0 0 256px 32px rgba(255,255,255,0.95));
 }
 #app .panel {
-  background: rgba($panel-bg, 0.6667);
-  border-radius: $border-radius-large;
-  @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
-
-  .panel-body { padding: 20px; }
-
   .form-group { @extend .form-group-lg; }
   .form-group:last-child { margin-bottom: 0; }
-  .btn-primary {
-    @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);
-    display: block;
-    width: 100%;
-  }
 }
 #app .links {
   ul {

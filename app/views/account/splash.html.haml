@@ -1,20 +1,25 @@
-#viewport.swiper-container
-  .swiper-wrapper
-    .swiper-slide= image_tag 'splash/01.jpg'
-    .swiper-slide= image_tag 'splash/02.jpg'
-    .swiper-slide= image_tag 'splash/03.jpg'
-    .swiper-slide= image_tag 'splash/04.jpg'
-    .swiper-slide= image_tag 'splash/05.jpg'
+- content_for :splash do
+  .background.swiper-container
+    .swiper-wrapper
+      .swiper-slide= image_tag 'splash/01.jpg'
+      .swiper-slide= image_tag 'splash/02.jpg'
+      .swiper-slide= image_tag 'splash/03.jpg'
+      .swiper-slide= image_tag 'splash/04.jpg'
+      .swiper-slide= image_tag 'splash/05.jpg'
 
-- content_for :main_title do
-  = t('.title')
-- content_for :main_panel do
-  = link_to t('.get_started'), get_started_path, class: 'btn btn-default btn-lg btn-block'
+  .container
+    .page-header
+      %h1= t('.title')
 
-:coffee
-  jQuery ->
-    new Swiper $('#viewport'),
-      autoplay:
-        delay: 5000
-      loop: true
-      effect: 'fade'
+    .row
+      .col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
+        %p.lead.text-center= t('.blurb')
+        = link_to t('.get_started'), get_started_path, class: 'btn btn-default btn-lg btn-block'
+
+  :coffee
+    jQuery ->
+      new Swiper $('.swiper-container'),
+        autoplay:
+          delay: 5500
+        loop: true
+        effect: 'slide'
