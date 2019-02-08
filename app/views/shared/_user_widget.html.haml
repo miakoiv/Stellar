@@ -2,7 +2,7 @@
   %li.dropdown.hidden-xs
     = dropdown_toggle do
       = bootstrap_label(current_group, icon: 'user', text: '')
-      = current_user.name.split.first
+      = current_user.name&.split&.first || current_user.email
       %span.caret
     %ul.dropdown-menu.dropdown-menu-right{role: 'menu'}
       - if can_manage?
