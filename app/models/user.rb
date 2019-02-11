@@ -51,10 +51,12 @@ class User < ActiveRecord::Base
   # Generates a guest user visiting at hostname as member of group.
   def self.generate_guest!(hostname, group)
     uuid = SecureRandom.uuid
-    guest = User.create!(
+    guest = User.new(
       name: uuid,
       email: "#{uuid}@#{hostname}"
     )
+    guest.skip_confirmation!
+    guest.save!
     guest.groups << group
     guest
   end
