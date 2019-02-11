@@ -70,7 +70,16 @@ Rails.application.configure do
     protocol: 'https',
     host: ENV['STELLAR_HOST']
   }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: ENV['STELLAR_DOMAIN'],
+    user_name: 'apikey',
+    password: ENV['SENDGRID_API_KEY'],
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
