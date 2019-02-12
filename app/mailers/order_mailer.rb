@@ -12,7 +12,7 @@ class OrderMailer < ApplicationMailer
     @pricing = options.delete(:pricing)
 
     headers = {
-      from: "noreply@#{@store.primary_host.to_s}",
+      from: "noreply@#{ENV['STELLAR_DOMAIN']}",
       to: to,
       subject: default_i18n_subject(store: @store),
     }
