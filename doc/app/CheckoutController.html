@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="BaseStoreController.html">BaseStoreController</a>
   
 </div>
 
@@ -148,7 +148,7 @@ shipping costs to allow re-entry to the checkout process.</p>
 
           
           <div class="method-source-code" id="checkout-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">complete?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@order</span>.<span class="ruby-identifier">checkoutable?</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">cart_path</span>
@@ -193,7 +193,7 @@ reasons the validity of this operation is queried from the payment gateway.</p>
 
           
           <div class="method-source-code" id="confirm-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 148</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">confirm</span>
   <span class="ruby-ivar">@payment_gateway</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">payment_gateway_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@payment_gateway</span>.<span class="ruby-identifier">confirm</span>
@@ -273,7 +273,7 @@ no client to render any views to.</p>
 
           
           <div class="method-source-code" id="notify-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 128</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">notify</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
   <span class="ruby-ivar">@payment_gateway</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">payment_gateway_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
@@ -319,7 +319,7 @@ proceed to checkout.</p>
 
           
           <div class="method-source-code" id="order_type-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">order_type</span>
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">order_type</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_type_id</span>])
   <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">save!</span>(<span class="ruby-identifier">validate</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
@@ -353,7 +353,7 @@ proceed to checkout.</p>
 
           
           <div class="method-source-code" id="pay-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 79</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pay</span>
   <span class="ruby-identifier">method</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:method</span>]
 
@@ -394,7 +394,7 @@ proceed to checkout.</p>
 
           
           <div class="method-source-code" id="payment_methods-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">payment_methods</span>
   <span class="ruby-identifier">grand_total</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">includes_tax?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">grand_total_with_tax</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">grand_total_sans_tax</span>
   <span class="ruby-ivar">@payment_gateway</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">payment_gateway_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
@@ -431,7 +431,7 @@ proceed to checkout.</p>
 
           
           <div class="method-source-code" id="receipt-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 159</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 158</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">receipt</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -463,7 +463,7 @@ proceed to checkout.</p>
 
           
           <div class="method-source-code" id="return-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 107</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">return</span>
   <span class="ruby-ivar">@shipping_methods</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">available_shipping_methods</span>
   <span class="ruby-ivar">@payment_gateway</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">payment_gateway_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">order</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@order</span>)
@@ -510,7 +510,7 @@ JS response will trigger an order update.</p>
 
           
           <div class="method-source-code" id="ship-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 56</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ship</span>
   <span class="ruby-ivar">@shipment</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">shipments</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">shipment_params</span>)
 
@@ -554,7 +554,7 @@ Called via Ajax.</p>
 
           
           <div class="method-source-code" id="shipping_method-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shipping_method</span>
   <span class="ruby-ivar">@shipping_methods</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">available_shipping_methods</span>
   <span class="ruby-ivar">@shipping_method</span> = <span class="ruby-ivar">@shipping_methods</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:method_id</span>])
@@ -593,7 +593,7 @@ Called via Ajax.</p>
 
           
           <div class="method-source-code" id="verify-source">
-            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 92</span>
+            <pre><span class="ruby-comment"># File app/controllers/checkout_controller.rb, line 91</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verify</span>
   <span class="ruby-identifier">token</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:token</span>]
 

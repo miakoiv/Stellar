@@ -209,6 +209,8 @@
     
     <li ><a href="#method-i-to_s">#to_s</a>
     
+    <li ><a href="#method-i-touch_master_and_variants">#touch_master_and_variants</a>
+    
     <li ><a href="#method-i-tracked_stock-3F">#tracked_stock?</a>
     
     <li ><a href="#method-i-trade_price_with_tax">#trade_price_with_tax</a>
@@ -320,7 +322,7 @@
 
           
           <div class="method-source-code" id="availability_options-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 129</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">availability_options</span>
   [
     [<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-value">:live</span>), <span class="ruby-keyword">true</span>],
@@ -357,7 +359,7 @@ matching given order types, excepting items already present.</p>
 
           
           <div class="method-source-code" id="best_selling-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 152</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">best_selling</span>(<span class="ruby-identifier">order</span>, <span class="ruby-identifier">order_types</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_types</span>.<span class="ruby-identifier">any?</span>
     <span class="ruby-identifier">existing_ids</span> = <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_items</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:product_id</span>)
@@ -405,7 +407,7 @@ matching given order types, excepting items already present.</p>
 
           
           <div class="method-source-code" id="described_options-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 136</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">described_options</span>
   [
     [<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-value">:described</span>), <span class="ruby-keyword">true</span>],
@@ -441,7 +443,7 @@ matching given order types, excepting items already present.</p>
 
           
           <div class="method-source-code" id="illustrated_options-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 143</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">illustrated_options</span>
   [
     [<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-value">:illustrated</span>), <span class="ruby-keyword">true</span>],
@@ -477,7 +479,7 @@ matching given order types, excepting items already present.</p>
 
           
           <div class="method-source-code" id="purpose_options-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 124</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">purpose_options</span>
   <span class="ruby-identifier">purposes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Product</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:purpose</span>, <span class="ruby-identifier">p</span>), <span class="ruby-identifier">p</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -510,7 +512,7 @@ matching given order types, excepting items already present.</p>
 
           
           <div class="method-source-code" id="to_csv-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_csv</span>
   <span class="ruby-identifier">attributes</span> = <span class="ruby-node">%w{code customer_code title subtitle picture_count description}</span>
   <span class="ruby-constant">CSV</span>.<span class="ruby-identifier">generate</span>(
@@ -557,7 +559,7 @@ targets the first inventory</p>
 
           
           <div class="method-source-code" id="update_from_csv_row-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 178</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_from_csv_row</span>(<span class="ruby-identifier">store</span>, <span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">row</span>, <span class="ruby-identifier">code</span>)
   <span class="ruby-identifier">product</span> = <span class="ruby-identifier">store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">row</span>[<span class="ruby-value">:product_code</span>]).<span class="ruby-identifier">first</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">inventory</span>.<span class="ruby-identifier">nil?</span>
@@ -690,7 +692,7 @@ targets the first inventory</p>
 
           
           <div class="method-source-code" id="as_json-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">super</span>({
     <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [<span class="ruby-value">:id</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">:customer_code</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:subtitle</span>],
@@ -736,7 +738,7 @@ is not specified or product stock is not tracked.</p>
   <span class="ruby-keyword">return</span> [
     <span class="ruby-identifier">stock</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">lot_code</span>),
     <span class="ruby-identifier">component_stock</span>(<span class="ruby-identifier">inventory</span>)
-  ].<span class="ruby-identifier">min</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">composite?</span>
+  ].<span class="ruby-identifier">min</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">package?</span>
   <span class="ruby-identifier">stock</span>(<span class="ruby-identifier">inventory</span>, <span class="ruby-identifier">lot_code</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -805,7 +807,7 @@ methods if any, defaulting to all active shipping methods.</p>
 
           
           <div class="method-source-code" id="available_shipping_methods-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 303</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 306</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">available_shipping_methods</span>
   <span class="ruby-identifier">shipping_methods</span>.<span class="ruby-identifier">active</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">store</span>.<span class="ruby-identifier">shipping_methods</span>.<span class="ruby-identifier">active</span>
 <span class="ruby-keyword">end</span></pre>
@@ -907,7 +909,7 @@ methods if any, defaulting to all active shipping methods.</p>
 
           
           <div class="method-source-code" id="category-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 282</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 284</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">category</span>
   <span class="ruby-identifier">categories</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">depth</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>, <span class="ruby-identifier">lft</span><span class="ruby-operator">:</span> <span class="ruby-value">:asc</span>).<span class="ruby-identifier">first</span>
 <span class="ruby-keyword">end</span></pre>
@@ -940,7 +942,7 @@ methods if any, defaulting to all active shipping methods.</p>
 
           
           <div class="method-source-code" id="codes-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">codes</span>
   <span class="ruby-identifier">customer_code</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{customer_code} ⧸ #{code}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">code</span>
 <span class="ruby-keyword">end</span></pre>
@@ -974,7 +976,7 @@ product. Properties unique to this product are retained.</p>
 
           
           <div class="method-source-code" id="distinct_properties-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 267</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 269</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">distinct_properties</span>(<span class="ruby-identifier">product</span>)
   <span class="ruby-identifier">baseline</span> = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">product_properties_hash</span>
   <span class="ruby-identifier">product_properties</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">product_property</span><span class="ruby-operator">|</span>
@@ -1011,7 +1013,7 @@ the product may have are not duplicated.</p>
 
           
           <div class="method-source-code" id="duplicate-21-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 326</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 329</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate!</span>
   <span class="ruby-identifier">clone</span> = <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">c</span>.<span class="ruby-identifier">reset_code</span>
@@ -1059,7 +1061,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="first_variant-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 243</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 245</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">first_variant</span>
   <span class="ruby-identifier">master?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">primary_variant</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">variants</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">sorted</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1092,7 +1094,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="formatted_price_string-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 59</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">formatted_price_string</span>
   <span class="ruby-identifier">retail_price</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">retail_price</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1125,7 +1127,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="generate_variant_code-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 344</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 347</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_variant_code</span>
   <span class="ruby-node">&quot;#{code}-#{variants_count}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1158,7 +1160,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="has_master_properties-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 251</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 253</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_master_properties?</span>
   <span class="ruby-identifier">variant?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">properties</span>.<span class="ruby-identifier">any?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1191,7 +1193,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="has_variants-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 220</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 222</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_variants?</span>
   <span class="ruby-identifier">variants_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1224,7 +1226,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">PURPOSE_ICONS</span>[<span class="ruby-identifier">purpose</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -1257,7 +1259,7 @@ not a master product or there are no variants.</p>
 
           
           <div class="method-source-code" id="icon_image_url-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon_image_url</span>
   <span class="ruby-identifier">cover_picture</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cover_picture</span>(<span class="ruby-value">:presentational</span>).<span class="ruby-identifier">image</span>.<span class="ruby-identifier">url</span>(<span class="ruby-value">:icon</span>, <span class="ruby-identifier">timestamp</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1284,15 +1286,16 @@ not a master product or there are no variants.</p>
 
         <div class="method-description">
           
-          <p>Bundles and composites include components when ordered, if any are live.</p>
+          <p>Bundles, composites, and packages include components when ordered, if any
+are live.</p>
           
           
 
           
           <div class="method-source-code" id="includes_components-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 297</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 300</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">includes_components?</span>
-  (<span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">component_entries</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">any?</span>
+  (<span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">package?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">component_entries</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">any?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1434,7 +1437,7 @@ have any assigned variants.</p>
 
           
           <div class="method-source-code" id="master-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 212</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">master?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">variant?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1467,7 +1470,7 @@ have any assigned variants.</p>
 
           
           <div class="method-source-code" id="modal_ordering-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 237</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 239</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modal_ordering?</span>
   <span class="ruby-identifier">additional_info_prompt</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1639,7 +1642,7 @@ amount is known.</p>
 
           
           <div class="method-source-code" id="primary-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 224</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">primary?</span>
   <span class="ruby-identifier">variant?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">primary_variant</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1674,7 +1677,7 @@ href="Product.html#method-i-distinct_properties">distinct_properties</a>.</p>
 
           
           <div class="method-source-code" id="product_properties_hash-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 292</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 294</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">product_properties_hash</span>
   <span class="ruby-identifier">product_properties</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:property_id</span>, <span class="ruby-value">:value</span>).<span class="ruby-identifier">to_h</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1707,9 +1710,9 @@ href="Product.html#method-i-distinct_properties">distinct_properties</a>.</p>
 
           
           <div class="method-source-code" id="purchasable-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 232</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 234</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">purchasable?</span>
-  <span class="ruby-identifier">live?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_variants?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">virtual?</span>)
+  <span class="ruby-identifier">live?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_variants?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">package?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">virtual?</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1740,7 +1743,7 @@ href="Product.html#method-i-distinct_properties">distinct_properties</a>.</p>
 
           
           <div class="method-source-code" id="real-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 202</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">real?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">internal?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1852,7 +1855,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="searchable_product_properties-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 286</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">searchable_product_properties</span>
   <span class="ruby-identifier">product_properties</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:property</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Property</span>.<span class="ruby-identifier">searchable</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Property</span>.<span class="ruby-identifier">sorted</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1890,7 +1893,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="should_generate_new_friendly_id-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 352</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 355</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_generate_new_friendly_id?</span>
   (<span class="ruby-identifier">title_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">subtitle_changed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">code_changed?</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1923,7 +1926,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="sibling_variants-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 247</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 249</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sibling_variants</span>
   <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">variants</span>.<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -1956,7 +1959,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="slugger-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 348</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 351</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">slugger</span>
   [[<span class="ruby-value">:title</span>, <span class="ruby-value">:code</span>], [<span class="ruby-value">:title</span>, <span class="ruby-value">:code</span>, <span class="ruby-value">:id</span>]]
 <span class="ruby-keyword">end</span></pre>
@@ -1989,7 +1992,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="tangible-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 206</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tangible?</span>
   <span class="ruby-operator">!</span>(<span class="ruby-identifier">virtual?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">internal?</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -2022,7 +2025,7 @@ and expiration date.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/models/product/presentation.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-node">&quot;#{title} #{subtitle}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2057,7 +2060,7 @@ and expiration date.</p>
           <div class="method-source-code" id="tracked_stock-3F-source">
             <pre><span class="ruby-comment"># File app/models/product/inventory.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tracked_stock?</span>
-  <span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span>
+  <span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">package?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -2123,7 +2126,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="unique_properties-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 276</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 278</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unique_properties</span>
   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">has_variants?</span>
   <span class="ruby-identifier">variants</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:product_properties</span>).<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:property</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">uniq</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:value</span>).<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> }
@@ -2157,7 +2160,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="variant-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 216</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">variant?</span>
   <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2190,7 +2193,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="variants_with_master_properties-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 255</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">variants_with_master_properties</span>
   <span class="ruby-keyword">return</span> {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">has_variants?</span>
   <span class="ruby-identifier">pids</span> = <span class="ruby-identifier">properties</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
@@ -2229,7 +2232,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="vary_from-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 308</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 311</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">vary_from</span>(<span class="ruby-identifier">master</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">assign_attributes</span>(
     <span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> <span class="ruby-identifier">master</span>.<span class="ruby-identifier">purpose</span>,
@@ -2274,9 +2277,9 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="visible-3F-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 228</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 230</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">visible?</span>
-  <span class="ruby-identifier">live?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">master?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">virtual?</span>)
+  <span class="ruby-identifier">live?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">master?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">vanilla?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">package?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">virtual?</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -2307,7 +2310,7 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
           
           <div class="method-source-code" id="with_requisite_products-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 356</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 359</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">with_requisite_products</span>
   [<span class="ruby-keyword">self</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">requisite_products</span>
 <span class="ruby-keyword">end</span></pre>
@@ -2342,15 +2345,20 @@ Returns a hash keyed by property, or an empty set if there are no variants.</p>
 
         <div class="method-description">
           
-          <p>Callback to touch the associated object that was added or removed.</p>
+          <p>Callback to touch the associated object that was added or removed, and
+update the master/variants to bust their partial caches.</p>
           
           
 
           
           <div class="method-source-code" id="associations_changed-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 374</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 378</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">associations_changed</span>(<span class="ruby-identifier">context</span>)
-  <span class="ruby-identifier">context</span>.<span class="ruby-identifier">touch</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">context</span>.<span class="ruby-identifier">persisted?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">persisted?</span>
+    <span class="ruby-identifier">context</span>.<span class="ruby-identifier">touch</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">context</span>.<span class="ruby-identifier">persisted?</span>
+    <span class="ruby-identifier">touch_master_and_variants</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">variant?</span>
+    <span class="ruby-identifier">update_variants</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_variants?</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2383,7 +2391,7 @@ inherited from their master product.</p>
 
           
           <div class="method-source-code" id="inherit_from_master-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 390</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 401</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inherit_from_master</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">categories</span> = <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">categories</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tags</span> = <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">tags</span>
@@ -2418,7 +2426,7 @@ inherited from their master product.</p>
 
           
           <div class="method-source-code" id="reset_code-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 397</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 419</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_code</span>
   <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>
     <span class="ruby-identifier">trunk</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-identifier">code</span>.<span class="ruby-identifier">partition</span>(<span class="ruby-regexp">/ \(\d+\)/</span>)
@@ -2463,12 +2471,51 @@ inherited from their master product.</p>
 
           
           <div class="method-source-code" id="reset_live_status-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 365</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 368</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_live_status</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">live</span> =
       (<span class="ruby-identifier">available_at</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">available_at</span>.<span class="ruby-identifier">future?</span>) <span class="ruby-operator">&amp;&amp;</span>
       (<span class="ruby-identifier">retail_price_cents</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">has_variants?</span>) <span class="ruby-operator">&amp;&amp;</span>
       (<span class="ruby-identifier">deleted_at</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">deleted_at</span>.<span class="ruby-identifier">future?</span>)
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-touch_master_and_variants" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">touch_master_and_variants</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Touches master and all its variants to bust partial caches.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="touch_master_and_variants-source">
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">touch_master_and_variants</span>
+  <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">touch</span>
+    <span class="ruby-identifier">master_product</span>.<span class="ruby-identifier">variants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">variant</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">variant</span>.<span class="ruby-identifier">touch</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -2494,17 +2541,19 @@ inherited from their master product.</p>
 
         <div class="method-description">
           
-          
+          <p>All variants are saved to have them inherit master categories and tags, and
+touched to force a timestamp update in case no changes are made.</p>
           
           
 
           
           <div class="method-source-code" id="update_variants-source">
-            <pre><span class="ruby-comment"># File app/models/product.rb, line 379</span>
+            <pre><span class="ruby-comment"># File app/models/product.rb, line 389</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_variants</span>
   <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">variants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">variant</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">variant</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">variant</span>.<span class="ruby-identifier">touch</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">true</span>

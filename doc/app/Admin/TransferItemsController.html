@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -129,7 +129,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">item</span> = <span class="ruby-constant">TransferItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">transfer_item_params</span>)
   <span class="ruby-ivar">@transfer_item</span> = <span class="ruby-ivar">@transfer</span>.<span class="ruby-identifier">transfer_items</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">item</span>)
@@ -173,7 +173,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@transfer_item</span> = <span class="ruby-constant">TransferItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@transfer</span> = <span class="ruby-ivar">@transfer_item</span>.<span class="ruby-identifier">transfer</span>
@@ -210,7 +210,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/transfer_items_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-ivar">@transfer_item</span> = <span class="ruby-constant">TransferItem</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@transfer</span> = <span class="ruby-ivar">@transfer_item</span>.<span class="ruby-identifier">transfer</span>

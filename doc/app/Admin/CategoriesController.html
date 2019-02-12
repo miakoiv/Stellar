@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -150,7 +150,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">category_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">product_scope</span><span class="ruby-operator">:</span> <span class="ruby-value">:alphabetical</span>))
@@ -196,7 +196,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@category</span>
@@ -237,7 +237,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@category</span>
@@ -274,7 +274,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@categories</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">roots</span>
@@ -308,7 +308,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">build</span>
@@ -342,7 +342,7 @@
 
           
           <div class="method-source-code" id="reorder_products-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">reorder_products</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@products</span> = <span class="ruby-ivar">@category</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">visible</span>.<span class="ruby-identifier">sorted</span>(<span class="ruby-ivar">@category</span>.<span class="ruby-identifier">product_scope</span>)
@@ -376,7 +376,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_category_path</span>(<span class="ruby-ivar">@category</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -410,7 +410,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 62</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/categories_controller.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@category</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

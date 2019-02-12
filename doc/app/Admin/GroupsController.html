@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -155,7 +155,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">group_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">count</span>))
@@ -203,7 +203,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 90</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@group</span>
@@ -244,7 +244,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@group</span>
@@ -281,7 +281,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@groups</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">groups</span>
@@ -315,7 +315,7 @@
 
           
           <div class="method-source-code" id="make_default-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 103</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_default</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@group</span>.<span class="ruby-identifier">store</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">default_group</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@group</span>
@@ -352,7 +352,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@group</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">groups</span>.<span class="ruby-identifier">build</span>
@@ -386,7 +386,7 @@
 
           
           <div class="method-source-code" id="select_categories-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 112</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select_categories</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
@@ -419,7 +419,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">edit_admin_group_path</span>(<span class="ruby-ivar">@group</span>) }
@@ -455,7 +455,7 @@
 
           
           <div class="method-source-code" id="toggle_category-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 117</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">toggle_category</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">categories</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:category_id</span>])
@@ -497,7 +497,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/groups_controller.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@group</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

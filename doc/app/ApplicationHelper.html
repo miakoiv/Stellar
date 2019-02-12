@@ -67,6 +67,8 @@
     
     <li ><a href="#method-i-branding">#branding</a>
     
+    <li ><a href="#method-i-button_spinner">#button_spinner</a>
+    
     <li ><a href="#method-i-col">#col</a>
     
     <li ><a href="#method-i-document_icon_tag">#document_icon_tag</a>
@@ -201,10 +203,43 @@
 
           
           <div class="method-source-code" id="branding-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 137</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">branding</span>(<span class="ruby-identifier">object</span>)
   <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">cover_picture</span>, <span class="ruby-value">:technical</span>) <span class="ruby-operator">+</span>
     <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:span</span>, <span class="ruby-identifier">object</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-button_spinner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">button_spinner</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="button_spinner-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">button_spinner</span>
+  <span class="ruby-identifier">icon</span>(<span class="ruby-string">&#39;cog&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-spin&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -268,7 +303,7 @@
 
           
           <div class="method-source-code" id="document_icon_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 133</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">document_icon_tag</span>(<span class="ruby-identifier">document</span>)
   <span class="ruby-identifier">icon</span>(<span class="ruby-identifier">document</span>.<span class="ruby-identifier">icon</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fa-lg icon&#39;</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">document</span>.<span class="ruby-identifier">attachment_file_name</span>, <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">toggle</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tooltip&#39;</span>})
 <span class="ruby-keyword">end</span></pre>
@@ -371,7 +406,7 @@
 
           
           <div class="method-source-code" id="image_variant_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 123</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">image</span>, <span class="ruby-identifier">variant</span> = <span class="ruby-value">:icon</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">image</span>.<span class="ruby-identifier">is_bitmap?</span>
@@ -481,7 +516,7 @@
 
           
           <div class="method-source-code" id="loading_spinner-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 110</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">loading_spinner</span>
   <span class="ruby-identifier">icon</span>(<span class="ruby-string">&#39;chevron-down&#39;</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;spinner&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;animated infinite flip&#39;</span>, <span class="ruby-identifier">style</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;display: none&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -658,7 +693,7 @@
 
           
           <div class="method-source-code" id="number_if_present-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 160</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 165</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_if_present</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-identifier">number</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{prefix}#{number}&quot;</span>
@@ -692,7 +727,7 @@
 
           
           <div class="method-source-code" id="number_to_signed_percentage-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 151</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_to_signed_percentage</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
@@ -730,7 +765,7 @@
 
           
           <div class="method-source-code" id="number_with_precision_and_sign-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">number_with_precision_and_sign</span>(<span class="ruby-identifier">number</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span>.<span class="ruby-identifier">blank?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
@@ -753,7 +788,7 @@
         
         <div class="method-heading">
           <span class="method-name">picture_variant_tag</span><span
-            class="method-args">(picture, variant = nil, options = {})</span>
+            class="method-args">(picture, variant = nil, options = {}) { || ... }</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -768,12 +803,13 @@
 
           
           <div class="method-source-code" id="picture_variant_tag-source">
-            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_variant_tag</span>(<span class="ruby-identifier">picture</span>, <span class="ruby-identifier">variant</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">variant</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">picture</span>.<span class="ruby-identifier">variant</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-value">:lightbox</span>
   <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:figure</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>, <span class="ruby-identifier">variant</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">concat</span> <span class="ruby-identifier">image_variant_tag</span>(<span class="ruby-identifier">picture</span>.<span class="ruby-identifier">image</span>, <span class="ruby-identifier">variant</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">yield</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -148,7 +148,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-identifier">find_pictureable</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-ivar">@pictureable</span>.<span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">picture_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@pictureable</span>.<span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">count</span>))
@@ -194,7 +194,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 79</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-ivar">@picture</span>.<span class="ruby-identifier">pictureable</span>
@@ -235,7 +235,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 39</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 
@@ -270,7 +270,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-identifier">find_pictureable</span>
 
@@ -307,7 +307,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-identifier">find_pictureable</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-ivar">@pictureable</span>.<span class="ruby-identifier">pictures</span>.<span class="ruby-identifier">build</span>(
@@ -347,7 +347,7 @@ success.</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-ivar">@picture</span>.<span class="ruby-identifier">pictureable</span>
@@ -383,7 +383,7 @@ success.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/pictures_controller.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-ivar">@picture</span> = <span class="ruby-constant">Picture</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@pictureable</span> = <span class="ruby-ivar">@picture</span>.<span class="ruby-identifier">pictureable</span>

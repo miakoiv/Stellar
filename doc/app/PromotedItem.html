@@ -82,6 +82,8 @@
     
     <li ><a href="#method-i-should_calculate_price">#should_calculate_price</a>
     
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
   </ul>
 </div>
 
@@ -161,7 +163,7 @@ subject to change.</p>
 
           
           <div class="method-source-code" id="base_price-source">
-            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">base_price</span>
   <span class="ruby-identifier">product</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">group</span>.<span class="ruby-identifier">price_method</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -194,7 +196,7 @@ subject to change.</p>
 
           
           <div class="method-source-code" id="calculate_discount-source">
-            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">calculate_discount</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">discount_percent</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">base_price</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">price</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">base_price</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">calculated</span> = <span class="ruby-keyword">true</span>
@@ -229,7 +231,7 @@ again as the linked attribute changes.</p>
 
           
           <div class="method-source-code" id="calculate_price-source">
-            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 52</span>
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">calculate_price</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">price</span> = <span class="ruby-identifier">base_price</span> <span class="ruby-operator">*</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">discount_percent</span><span class="ruby-operator">/</span><span class="ruby-value">100</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">calculated</span> = <span class="ruby-keyword">true</span>
@@ -298,8 +300,9 @@ again as the linked attribute changes.</p>
 
           
           <div class="method-source-code" id="should_calculate_discount-source">
-            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 46</span>
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_calculate_discount</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">promotion</span>.<span class="ruby-identifier">editable_prices?</span>
   <span class="ruby-identifier">price_cents_changed?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">calculated</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">base_price</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -325,15 +328,50 @@ again as the linked attribute changes.</p>
 
         <div class="method-description">
           
-          <p>Calculations should happen when the linked attribute changes but only once.</p>
+          <p>Calculations should happen when the linked attribute changes but only once.
+Skip if promotion doesn&#39;t have editable prices.</p>
           
           
 
           
           <div class="method-source-code" id="should_calculate_price-source">
-            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">should_calculate_price</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">promotion</span>.<span class="ruby-identifier">editable_prices?</span>
   <span class="ruby-identifier">discount_percent_changed?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">calculated</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">base_price</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File app/models/promoted_item.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">product</span>.<span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

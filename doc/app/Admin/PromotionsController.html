@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -141,7 +141,7 @@
 
           
           <div class="method-source-code" id="add_categories-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 106</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_categories</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">category_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:promotion</span>][<span class="ruby-value">:category_ids_string</span>]
@@ -189,7 +189,7 @@
 
           
           <div class="method-source-code" id="add_products-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 89</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_products</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">product_ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:promotion</span>][<span class="ruby-value">:product_ids_string</span>]
@@ -234,7 +234,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@promotion</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">promotions</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">promotion_params</span>)
@@ -281,7 +281,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 76</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@promotion</span>
@@ -322,7 +322,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
@@ -355,7 +355,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@promotions</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">promotions</span>
@@ -389,7 +389,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@promotion</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">promotions</span>.<span class="ruby-identifier">build</span>
@@ -423,7 +423,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
@@ -456,7 +456,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/promotions_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@promotion</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

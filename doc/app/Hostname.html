@@ -119,6 +119,20 @@
     
 
     
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="RESTRICTED_FQDNS">RESTRICTED_FQDNS
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -148,7 +162,7 @@
 
           
           <div class="method-source-code" id="store_portal-source">
-            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">store_portal</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">domain_hostname</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">domain_hostname</span>.<span class="ruby-identifier">store</span>
@@ -182,7 +196,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">fqdn</span>
 <span class="ruby-keyword">end</span></pre>
@@ -215,7 +229,7 @@
 
           
           <div class="method-source-code" id="to_url-source">
-            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 33</span>
+            <pre><span class="ruby-comment"># File app/models/hostname.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_url</span>
   <span class="ruby-node">&quot;//#{fqdn}&quot;</span>
 <span class="ruby-keyword">end</span></pre>

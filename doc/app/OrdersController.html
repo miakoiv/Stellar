@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="BaseStoreController.html">BaseStoreController</a>
   
 </div>
 
@@ -147,7 +147,7 @@
 
           
           <div class="method-source-code" id="claim-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 167</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">claim</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">user_orders</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">current_store</span>).<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
@@ -189,7 +189,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -280,7 +280,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 115</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
@@ -322,7 +322,7 @@
 
           
           <div class="method-source-code" id="duplicate-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 129</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -360,7 +360,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
@@ -394,7 +394,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;order&#39;</span>, <span class="ruby-string">&#39;order_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">OrderSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
@@ -432,7 +432,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -482,7 +482,7 @@
 
           
           <div class="method-source-code" id="preview-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 161</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">preview</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">user_orders</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">current_store</span>).<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
@@ -518,7 +518,7 @@ matches the default shopping cart, it is cleared instead.</p>
 
           
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
@@ -563,7 +563,7 @@ matches the default shopping cart, it is cleared instead.</p>
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">track</span> <span class="ruby-ivar">@order</span>
@@ -604,7 +604,7 @@ user edits her own completed orders.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 95</span>
+            <pre><span class="ruby-comment"># File app/controllers/orders_controller.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

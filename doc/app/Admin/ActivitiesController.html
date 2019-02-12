@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -129,7 +129,7 @@
 
           
           <div class="method-source-code" id="context-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">context</span>
   <span class="ruby-ivar">@resource</span> = <span class="ruby-constant">GlobalID</span><span class="ruby-operator">::</span><span class="ruby-constant">Locator</span>.<span class="ruby-identifier">locate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:gid</span>])
   <span class="ruby-ivar">@context</span> = <span class="ruby-ivar">@resource</span>.<span class="ruby-identifier">activities</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:context_page</span>])
@@ -165,7 +165,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 11</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Activity</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;activity&#39;</span>, <span class="ruby-string">&#39;admin_activity_search&#39;</span>)
@@ -201,7 +201,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/activities_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Activity</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>

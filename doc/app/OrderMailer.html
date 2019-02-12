@@ -359,7 +359,7 @@
   <span class="ruby-ivar">@pricing</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:pricing</span>)
 
   <span class="ruby-identifier">headers</span> = {
-    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{@store.primary_host.to_s}&quot;</span>,
+    <span class="ruby-identifier">from</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;noreply@#{ENV[&#39;STELLAR_DOMAIN&#39;]}&quot;</span>,
     <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">to</span>,
     <span class="ruby-identifier">subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">default_i18n_subject</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>),
   }

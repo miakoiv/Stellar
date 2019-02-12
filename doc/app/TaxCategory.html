@@ -89,6 +89,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-c-defaults_for_locale">::defaults_for_locale</a>
+    
     <li ><a href="#method-i-included_in_cost">#included_in_cost</a>
     
     <li ><a href="#method-i-included_in_cost-3F">#included_in_cost?</a>
@@ -129,6 +131,51 @@
     
 
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-defaults_for_locale" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">defaults_for_locale</span><span
+            class="method-args">(locale)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="defaults_for_locale-source">
+            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">defaults_for_locale</span>(<span class="ruby-identifier">locale</span>)
+  {
+    <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;%s %d%%&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-constant">TaxCategory</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-value">:default_tax_name</span>, <span class="ruby-identifier">locale</span><span class="ruby-operator">:</span> <span class="ruby-identifier">locale</span>), <span class="ruby-constant">Price</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_TAX_RATE</span>],
+    <span class="ruby-identifier">rate</span><span class="ruby-operator">:</span> <span class="ruby-constant">Price</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_TAX_RATE</span>,
+    <span class="ruby-identifier">included_in_retail</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
@@ -154,7 +201,7 @@
 
           
           <div class="method-source-code" id="included_in_cost-source">
-            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">included_in_cost</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -219,7 +266,7 @@
 
           
           <div class="method-source-code" id="included_in_trade-source">
-            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">included_in_trade</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -284,7 +331,7 @@
 
           
           <div class="method-source-code" id="tax_included-3F-source">
-            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">tax_included?</span>(<span class="ruby-identifier">price_base</span>)
   <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;included_in_#{price_base}&quot;</span>.<span class="ruby-identifier">to_sym</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -317,7 +364,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/tax_category.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">name</span>
 <span class="ruby-keyword">end</span></pre>

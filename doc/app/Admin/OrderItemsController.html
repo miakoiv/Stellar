@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -133,7 +133,7 @@ correctly.</p>
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">OrderItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@order</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
@@ -143,7 +143,7 @@ correctly.</p>
     <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">live</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_item_params</span>[<span class="ruby-value">:product_id</span>])
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">amount</span> = <span class="ruby-identifier">order_item_params</span>[<span class="ruby-value">:amount</span>].<span class="ruby-identifier">to_i</span>
-  <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">lot_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">concatenated_lot_code</span>}
+  <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">lot_code</span><span class="ruby-operator">:</span> <span class="ruby-identifier">lot_code_or_serial</span>}
 
   <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_item</span> = <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-ivar">@product</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">source</span>, <span class="ruby-identifier">options</span>)
@@ -184,7 +184,7 @@ correctly.</p>
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -224,7 +224,7 @@ correctly.</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">OrderItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -271,7 +271,7 @@ correctly.</p>
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/order_items_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@order_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

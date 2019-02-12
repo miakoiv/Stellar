@@ -87,15 +87,19 @@
     
     <li ><a href="#method-i-search_customer_id">#search_customer_id</a>
     
-    <li ><a href="#method-i-search_date">#search_date</a>
-    
     <li ><a href="#method-i-search_keyword">#search_keyword</a>
     
     <li ><a href="#method-i-search_order_type">#search_order_type</a>
     
+    <li ><a href="#method-i-search_payment_number">#search_payment_number</a>
+    
+    <li ><a href="#method-i-search_since_date">#search_since_date</a>
+    
     <li ><a href="#method-i-search_status">#search_status</a>
     
     <li ><a href="#method-i-search_store">#search_store</a>
+    
+    <li ><a href="#method-i-search_until_date">#search_until_date</a>
     
     <li ><a href="#method-i-search_user_id">#search_user_id</a>
     
@@ -185,7 +189,7 @@
 
           
           <div class="method-source-code" id="search_customer-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_customer</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;customer_name LIKE ?&#39;</span>, <span class="ruby-node">&quot;%#{customer}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -232,39 +236,6 @@
       </div>
 
     
-      <div id="method-i-search_date" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">search_date</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="search_date-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 34</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_date</span>
-  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;DATE(completed_at) = ?&#39;</span>, <span class="ruby-identifier">date</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-search_keyword" class="method-detail ">
         
         <div class="method-heading">
@@ -284,7 +255,7 @@
 
           
           <div class="method-source-code" id="search_keyword-source">
-            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_keyword</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;CONCAT_WS(&#39; &#39;, customer_name, company_name, contact_person, shipping_city) LIKE ?&quot;</span>, <span class="ruby-node">&quot;%#{keyword}%&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -320,6 +291,72 @@
             <pre><span class="ruby-comment"># File app/models/order_search.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_order_type</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">order_type</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_type</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_payment_number" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_payment_number</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_payment_number-source">
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_payment_number</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:payments</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">payments</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">number</span><span class="ruby-operator">:</span> <span class="ruby-identifier">payment_number</span>})
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_since_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_since_date</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_since_date-source">
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_since_date</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;DATE(completed_at) &gt;= ?&#39;</span>, <span class="ruby-identifier">since_date</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -388,6 +425,39 @@
             <pre><span class="ruby-comment"># File app/models/order_search.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search_store</span>
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">store</span><span class="ruby-operator">:</span> <span class="ruby-identifier">store</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-search_until_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search_until_date</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search_until_date-source">
+            <pre><span class="ruby-comment"># File app/models/order_search.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">search_until_date</span>
+  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;DATE(completed_at) &lt;= ?&#39;</span>, <span class="ruby-identifier">until_date</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

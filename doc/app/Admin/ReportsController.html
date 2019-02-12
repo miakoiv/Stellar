@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -135,7 +135,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -167,7 +167,7 @@
 
           
           <div class="method-source-code" id="inventory-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">inventory</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_report_search&#39;</span>)
   <span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">store_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">reported</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
@@ -213,7 +213,7 @@
 
           
           <div class="method-source-code" id="product_sales-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">product_sales</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
@@ -254,7 +254,7 @@
 
           
           <div class="method-source-code" id="purchases-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 84</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">purchases</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">outgoing_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
@@ -304,7 +304,7 @@
 
           
           <div class="method-source-code" id="sales-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>
@@ -354,7 +354,7 @@
 
           
           <div class="method-source-code" id="sales_tax-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/reports_controller.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">sales_tax</span>
   <span class="ruby-ivar">@order_types</span> = <span class="ruby-identifier">current_group</span>.<span class="ruby-identifier">incoming_order_types</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:bad_request</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order_types</span>.<span class="ruby-identifier">empty?</span>

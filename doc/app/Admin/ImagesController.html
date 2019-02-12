@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -133,7 +133,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">image_params</span>)
 
@@ -176,7 +176,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 38</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@image</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
@@ -217,7 +217,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 
@@ -252,7 +252,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;image&#39;</span>, <span class="ruby-string">&#39;admin_image_search&#39;</span>)
   <span class="ruby-ivar">@search</span> = <span class="ruby-constant">ImageSearch</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">search_params</span>))
@@ -289,7 +289,7 @@
 
           
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/images_controller.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">select</span>
   <span class="ruby-ivar">@image</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">images</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>

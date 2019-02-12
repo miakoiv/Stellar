@@ -91,6 +91,8 @@
     
     <li ><a href="#method-c-icon_for">::icon_for</a>
     
+    <li ><a href="#method-c-onboarding">::onboarding</a>
+    
     <li ><a href="#method-i-appearance">#appearance</a>
     
     <li ><a href="#method-i-icon">#icon</a>
@@ -230,9 +232,42 @@
 
           
           <div class="method-source-code" id="icon_for-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 61</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">icon_for</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-onboarding" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">onboarding</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Roles granted at onboarding new store admins.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="onboarding-source">
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">onboarding</span>
+  <span class="ruby-node">%w{store_admin user_manager inventory_manage page_editor product_editor category_editor property_editor promotion_editor order_review order_manage reports order_notify correspondence}</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -271,7 +306,7 @@
 
           
           <div class="method-source-code" id="appearance-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">appearance</span>
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:appearance</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -304,7 +339,7 @@
 
           
           <div class="method-source-code" id="icon-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">icon</span>
   <span class="ruby-constant">ROLES</span>[<span class="ruby-identifier">name</span>][<span class="ruby-value">:icon</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -337,7 +372,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/role.rb, line 66</span>
+            <pre><span class="ruby-comment"># File app/models/role.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:name</span>)
 <span class="ruby-keyword">end</span></pre>

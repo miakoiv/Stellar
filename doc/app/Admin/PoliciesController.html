@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -137,7 +137,7 @@
 
           
           <div class="method-source-code" id="accept-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 71</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">accept</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -180,7 +180,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 37</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@policy</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">policies</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">policy_params</span>)
@@ -225,7 +225,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 31</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
@@ -258,7 +258,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@policies</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">policies</span>
@@ -292,7 +292,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@policy</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">policies</span>.<span class="ruby-identifier">build</span>
@@ -326,7 +326,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>
@@ -359,7 +359,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 55</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/policies_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@policy</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -146,7 +146,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Section</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@page</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">pages</span>.<span class="ruby-identifier">friendly</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page_id</span>])
@@ -190,7 +190,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 60</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@section</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -229,7 +229,7 @@
 
           
           <div class="method-source-code" id="modify-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span>
   <span class="ruby-ivar">@section</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">section_params</span>)
   <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
@@ -263,7 +263,7 @@
 
           
           <div class="method-source-code" id="preload-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 36</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">preload</span>
   <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
 <span class="ruby-keyword">end</span></pre>
@@ -296,7 +296,7 @@
 
           
           <div class="method-source-code" id="settings-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">settings</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@section</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -331,7 +331,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/sections_controller.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@section</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

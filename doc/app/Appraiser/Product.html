@@ -193,9 +193,9 @@ given products to appraise as <a href="../Price.html">Price</a> objects.</p>
         <div class="method-description">
           
           <p><a href="../Price.html">Price</a> used for display purposes, including any
-aggregated component prices for bundle or composite products. Returns a
-tuple of final price, regular price, where the latter only appears if there
-was a special price.</p>
+aggregated component prices for bundle, composite, or package products.
+Returns a tuple of final price, regular price, where the latter only
+appears if there was a special price.</p>
           
           
 
@@ -203,7 +203,7 @@ was a special price.</p>
           <div class="method-source-code" id="for_display-source">
             <pre><span class="ruby-comment"># File app/models/appraiser/product.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">for_display</span>(<span class="ruby-identifier">product</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">composite?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">bundle?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">composite?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">package?</span>
     [<span class="ruby-identifier">aggregate_price</span>(<span class="ruby-identifier">product</span>), <span class="ruby-keyword">nil</span>]
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">special</span> = <span class="ruby-identifier">special_price</span>(<span class="ruby-identifier">product</span>)

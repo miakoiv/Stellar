@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -129,7 +129,7 @@
 
           
           <div class="method-source-code" id="modify-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 32</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">modify</span>
   <span class="ruby-ivar">@column</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">column_params</span>)
   <span class="ruby-identifier">respond_to</span> <span class="ruby-value">:js</span>
@@ -163,7 +163,7 @@
 
           
           <div class="method-source-code" id="settings-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">settings</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@column</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -198,7 +198,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/columns_controller.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@column</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 

@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -138,7 +138,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/hostnames_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/hostnames_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">Hostname</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@hostname</span> = <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">hostnames</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">hostname_params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">priority</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@store</span>.<span class="ruby-identifier">hostnames</span>.<span class="ruby-identifier">count</span>))
@@ -182,7 +182,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/hostnames_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/hostnames_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@hostname</span> = <span class="ruby-constant">Hostname</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@hostname</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>

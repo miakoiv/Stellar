@@ -58,7 +58,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="../AdminController.html">AdminController</a>
   
 </div>
 
@@ -137,7 +137,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 65</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -191,7 +191,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@inventory_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 
@@ -226,7 +226,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
@@ -266,7 +266,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@inventory_item</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">inventory_items</span>.<span class="ruby-identifier">build</span>
@@ -300,7 +300,7 @@
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-constant">InventoryItem</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
@@ -338,7 +338,7 @@
 
           
           <div class="method-source-code" id="refresh-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh</span>
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">current_store</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:product_id</span>])
   <span class="ruby-identifier">query</span> = <span class="ruby-identifier">saved_search_query</span>(<span class="ruby-string">&#39;inventory_item&#39;</span>, <span class="ruby-string">&#39;admin_inventory_item_search&#39;</span>)
@@ -376,7 +376,7 @@
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/controllers/admin/inventory_items_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-identifier">authorize_action_for</span> <span class="ruby-ivar">@inventory_item</span>, <span class="ruby-identifier">at</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_store</span>
 <span class="ruby-keyword">end</span></pre>

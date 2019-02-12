@@ -105,6 +105,8 @@
     
     <li ><a href="#method-c-animation_options">::animation_options</a>
     
+    <li ><a href="#method-c-content_class_options">::content_class_options</a>
+    
     <li ><a href="#method-c-default_settings">::default_settings</a>
     
     <li ><a href="#method-c-grid_columns_options">::grid_columns_options</a>
@@ -193,6 +195,11 @@
         <dd>
         
       
+        <dt id="CONTENT_CLASSES">CONTENT_CLASSES
+        
+        <dd>
+        
+      
         <dt id="GRID_COLUMNS">GRID_COLUMNS
         
         <dd>
@@ -265,7 +272,7 @@
 
           
           <div class="method-source-code" id="alignment_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 138</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alignment_options</span>
   <span class="ruby-constant">ALIGNMENTS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:alignment</span>, <span class="ruby-identifier">a</span>), <span class="ruby-identifier">a</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -298,9 +305,42 @@
 
           
           <div class="method-source-code" id="animation_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 162</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">animation_options</span>
   <span class="ruby-constant">ANIMATIONS</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-content_class_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">content_class_options</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="content_class_options-source">
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">content_class_options</span>
+  <span class="ruby-constant">CONTENT_CLASSES</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -331,7 +371,7 @@
 
           
           <div class="method-source-code" id="default_settings-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 114</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_settings</span>
   {
     <span class="ruby-identifier">template</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;text&#39;</span>,
@@ -372,7 +412,7 @@
 
           
           <div class="method-source-code" id="grid_columns_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 146</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">grid_columns_options</span>
   <span class="ruby-constant">GRID_COLUMNS</span>
 <span class="ruby-keyword">end</span></pre>
@@ -405,7 +445,7 @@
 
           
           <div class="method-source-code" id="image_sizing_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 150</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">image_sizing_options</span>
   <span class="ruby-constant">IMAGE_SIZES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:image_sizing</span>, <span class="ruby-identifier">s</span>), <span class="ruby-identifier">s</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -438,7 +478,7 @@
 
           
           <div class="method-source-code" id="inset_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 154</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">inset_options</span>
   <span class="ruby-constant">INSETS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:inset</span>, <span class="ruby-identifier">i</span>), <span class="ruby-identifier">i</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -471,7 +511,7 @@
 
           
           <div class="method-source-code" id="justification_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 142</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 148</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">justification_options</span>
   <span class="ruby-constant">JUSTIFICATIONS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:justification</span>, <span class="ruby-identifier">j</span>), <span class="ruby-identifier">j</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -504,7 +544,7 @@
 
           
           <div class="method-source-code" id="resource_type_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 126</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">resource_type_options</span>
   <span class="ruby-constant">RESOURCE_TYPES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:resource_type</span>, <span class="ruby-identifier">t</span>.<span class="ruby-identifier">underscore</span>), <span class="ruby-identifier">t</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -537,7 +577,7 @@
 
           
           <div class="method-source-code" id="shadow_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 158</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 164</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shadow_options</span>
   <span class="ruby-constant">SHADOWS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:shadow</span>, <span class="ruby-identifier">s</span>), <span class="ruby-identifier">s</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -570,7 +610,7 @@
 
           
           <div class="method-source-code" id="shape_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 134</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">shape_options</span>
   <span class="ruby-constant">SHAPES</span>
 <span class="ruby-keyword">end</span></pre>
@@ -603,7 +643,7 @@
 
           
           <div class="method-source-code" id="template_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 130</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">template_options</span>
   <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">templates</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:template</span>, <span class="ruby-identifier">t</span>), <span class="ruby-identifier">t</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -636,7 +676,7 @@
 
           
           <div class="method-source-code" id="velocity_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 166</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">velocity_options</span>
   <span class="ruby-constant">VELOCITIES</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:velocity</span>, <span class="ruby-identifier">v</span>).<span class="ruby-identifier">html_safe</span>, <span class="ruby-identifier">v</span>] }
 <span class="ruby-keyword">end</span></pre>
@@ -677,7 +717,7 @@
 
           
           <div class="method-source-code" id="animation_class-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 196</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">animation_class</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">animation</span>.<span class="ruby-identifier">present?</span>
   <span class="ruby-node">&quot;animation #{velocity}&quot;</span>
@@ -705,15 +745,15 @@
 
         <div class="method-description">
           
-          
+          <p>Only feature segments have a background picture.</p>
           
           
 
           
           <div class="method-source-code" id="background_picture-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 213</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 224</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">background_picture</span>
-  <span class="ruby-identifier">cover_picture</span>
+  <span class="ruby-identifier">feature?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cover_picture</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -744,7 +784,7 @@
 
           
           <div class="method-source-code" id="duplicate-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 226</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">duplicate</span>
   <span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">c</span>.<span class="ruby-identifier">column</span> = <span class="ruby-keyword">nil</span>
@@ -782,7 +822,7 @@
 
           
           <div class="method-source-code" id="edit_in_place-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 179</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit_in_place?</span>
   <span class="ruby-identifier">text?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">media?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">feature?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -815,7 +855,7 @@
 
           
           <div class="method-source-code" id="fixed_ratio-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 192</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 202</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fixed_ratio?</span>
   <span class="ruby-identifier">shape</span>.<span class="ruby-identifier">present?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -853,7 +893,7 @@
 
           
           <div class="method-source-code" id="grid_columns-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 201</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grid_columns</span>
   <span class="ruby-keyword">super</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;3&#39;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -886,7 +926,7 @@
 
           
           <div class="method-source-code" id="grid_columns_class-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 205</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 215</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">grid_columns_class</span>
   [<span class="ruby-node">&quot;columns-#{grid_columns}&quot;</span>, <span class="ruby-identifier">grid_disable_xs?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-string">&#39;grid-disable-xs&#39;</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -919,7 +959,7 @@
 
           
           <div class="method-source-code" id="has_content-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 171</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_content?</span>
   <span class="ruby-identifier">text?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">media?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">feature?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raw?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -952,7 +992,7 @@
 
           
           <div class="method-source-code" id="has_min_height-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 188</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_min_height?</span>
   <span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">map?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -985,7 +1025,7 @@
 
           
           <div class="method-source-code" id="has_pictures-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 175</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 185</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">has_pictures?</span>
   <span class="ruby-identifier">picture?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">gallery?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">media?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">feature?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1018,7 +1058,7 @@
 
           
           <div class="method-source-code" id="picture_options-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 209</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">picture_options</span>
   {<span class="ruby-identifier">purpose</span><span class="ruby-operator">:</span> [<span class="ruby-string">&#39;presentational&#39;</span>], <span class="ruby-identifier">variant</span><span class="ruby-operator">:</span> <span class="ruby-constant">Image</span><span class="ruby-operator">::</span><span class="ruby-constant">STYLES</span>}
 <span class="ruby-keyword">end</span></pre>
@@ -1051,7 +1091,7 @@
 
           
           <div class="method-source-code" id="to_partial_path-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 239</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 250</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_partial_path</span>
   <span class="ruby-node">&quot;segments/templates/#{template}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1084,7 +1124,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 235</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 246</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">human_attribute_value</span>(<span class="ruby-value">:template</span>).<span class="ruby-identifier">capitalize</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1117,7 +1157,7 @@
 
           
           <div class="method-source-code" id="without_settings-3F-source">
-            <pre><span class="ruby-comment"># File app/models/segment.rb, line 184</span>
+            <pre><span class="ruby-comment"># File app/models/segment.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">without_settings?</span>
   <span class="ruby-identifier">text?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raw?</span>
 <span class="ruby-keyword">end</span></pre>
