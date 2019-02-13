@@ -21,7 +21,7 @@ class Admin::OrdersController < AdminController
     authorize_action_for Order, at: current_store
 
     @order_types = current_group.incoming_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
 
     @users = current_store.users.with_role(:order_manage, current_store)
     @customers = user_search(@order_types.map(&:source))
@@ -37,7 +37,7 @@ class Admin::OrdersController < AdminController
     authorize_action_for Order, at: current_store
 
     @order_types = current_group.outgoing_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
 
     @users = current_store.users.with_role(:order_manage, current_store)
     @customers = user_search(@order_types.map(&:destination))

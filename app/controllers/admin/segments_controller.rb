@@ -80,7 +80,7 @@ class Admin::SegmentsController < AdminController
         item.update(column: @column, priority: index)
       end
     end
-    render nothing: true
+    head :ok
   end
 
   # GET /admin/segments/1/copy.json

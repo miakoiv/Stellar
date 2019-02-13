@@ -189,7 +189,7 @@ class BaseStoreController < ApplicationController
       if @current_hostname.present?
         @current_store = @current_hostname.store
       else
-        render nothing: true, status: :bad_request
+        head :bad_request
       end
     end
 

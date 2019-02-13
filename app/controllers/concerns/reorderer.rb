@@ -8,7 +8,7 @@ module Reorderer
         item.update_columns(priority: index)
       end
     end
-    render nothing: true
+    head :ok
   end
 
   private

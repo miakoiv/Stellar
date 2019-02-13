@@ -9,7 +9,7 @@ module AwesomeNester
         rearrange_recursively klass, items
       end
     end
-    render nothing: true
+    head :ok
   end
 
   private

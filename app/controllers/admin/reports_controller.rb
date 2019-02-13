@@ -29,7 +29,7 @@ class Admin::ReportsController < AdminController
   # GET /admin/reports/sales
   def sales
     @order_types = current_group.incoming_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types!(query)
     query['temporal_unit'] ||= 'day'
@@ -51,7 +51,7 @@ class Admin::ReportsController < AdminController
   # GET /admin/reports/sales_tax
   def sales_tax
     @order_types = current_group.incoming_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types!(query)
 
@@ -69,7 +69,7 @@ class Admin::ReportsController < AdminController
   def product_sales
     @product = current_store.products.find(params[:product_id])
     @order_types = current_group.incoming_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_sales_order_report_row_search')
     set_default_order_types!(query)
     @search = OrderItemSearch.new(query.merge('product_id': @product.id, concluded_only: true))
@@ -81,7 +81,7 @@ class Admin::ReportsController < AdminController
   # GET /admin/reports/purchases
   def purchases
     @order_types = current_group.outgoing_order_types
-    return render nothing: true, status: :bad_request if @order_types.empty?
+    return head :bad_request if @order_types.empty?
     query = saved_search_query('order_report_row', 'admin_purchases_order_report_row_search')
     set_default_order_types!(query)
     query['temporal_unit'] ||= 'day'

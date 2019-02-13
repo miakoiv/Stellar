@@ -135,9 +135,9 @@ class CheckoutController < BaseStoreController
         .find_or_create_by(number: number)
         .update(amount: @order.grand_total_with_tax)
       @order.complete! if @order.should_complete?
-      render nothing: true, status: :ok
+      head :ok
     else
-      render nothing: true, status: :unprocessable_entity
+      head :unprocessable_entity
     end
   end
 
