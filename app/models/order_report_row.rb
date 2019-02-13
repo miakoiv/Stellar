@@ -4,7 +4,7 @@
 # report generation. They are created or updated automatically when
 # orders are concluded, or can be recreated via a rake task.
 #
-class OrderReportRow < ActiveRecord::Base
+class OrderReportRow < ApplicationRecord
 
   monetize :total_sans_tax_cents, disable_validation: true
   monetize :total_with_tax_cents, disable_validation: true

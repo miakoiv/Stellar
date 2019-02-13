@@ -5,7 +5,7 @@
 # is concluded, and can be created manually to bring customer assets up to date
 # with various circumstances.
 #
-class AssetEntry < ActiveRecord::Base
+class AssetEntry < ApplicationRecord
 
   resourcify
   include Authority::Abilities

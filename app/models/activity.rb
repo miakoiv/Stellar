@@ -4,7 +4,7 @@
 # a certain context. The context may be the resource itself, or its
 # relational parent record, with which the activity should appear.
 #
-class Activity < ActiveRecord::Base
+class Activity < ApplicationRecord
 
   paginates_per 15
 

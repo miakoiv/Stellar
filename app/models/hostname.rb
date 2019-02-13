@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Hostname < ActiveRecord::Base
+class Hostname < ApplicationRecord
 
   RESTRICTED_FQDNS = [
     ENV['STELLAR_DOMAIN'],

@@ -4,7 +4,7 @@
 # with varying business logic for how to apply the promotion on a given
 # order.
 #
-class PromotionHandler < ActiveRecord::Base
+class PromotionHandler < ApplicationRecord
 
   belongs_to :promotion
 

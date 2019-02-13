@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Iframe < ActiveRecord::Base
+class Iframe < ApplicationRecord
 
   resourcify
   include Authority::Abilities

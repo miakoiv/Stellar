@@ -1,4 +1,4 @@
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
 
   INLINE_SEARCH_RESULTS = 20
   paginates_per 30

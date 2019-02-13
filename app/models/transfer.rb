@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Transfer < ActiveRecord::Base
+class Transfer < ApplicationRecord
 
   resourcify
   include Authority::Abilities

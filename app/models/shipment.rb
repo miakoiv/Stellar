@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Shipment < ActiveRecord::Base
+class Shipment < ApplicationRecord
 
   resourcify
   include Authority::Abilities

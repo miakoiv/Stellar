@@ -2,7 +2,7 @@
 #
 # Transfer items record what is transferred by product and lot code.
 #
-class TransferItem < ActiveRecord::Base
+class TransferItem < ApplicationRecord
 
   resourcify
   include Authority::Abilities

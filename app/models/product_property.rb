@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class ProductProperty < ActiveRecord::Base
+class ProductProperty < ApplicationRecord
 
   belongs_to :product, touch: true
   belongs_to :property, required: true

@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class RequisiteEntry < ActiveRecord::Base
+class RequisiteEntry < ApplicationRecord
 
   include Reorderable
 

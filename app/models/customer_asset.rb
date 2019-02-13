@@ -5,7 +5,7 @@
 # asset is never edited directly, but modified when an associated asset
 # entry is created.
 #
-class CustomerAsset < ActiveRecord::Base
+class CustomerAsset < ApplicationRecord
 
   resourcify
   include Authority::Abilities

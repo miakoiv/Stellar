@@ -4,7 +4,7 @@
 # the images with pictureable objects, and containing metadata about the
 # context.
 #
-class Picture < ActiveRecord::Base
+class Picture < ApplicationRecord
 
   include Authority::Abilities
   include Trackable

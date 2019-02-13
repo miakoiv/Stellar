@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class TaxCategory < ActiveRecord::Base
+class TaxCategory < ApplicationRecord
 
   resourcify
   include Authority::Abilities

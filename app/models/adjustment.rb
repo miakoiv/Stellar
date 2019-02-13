@@ -9,7 +9,7 @@
 # an associated source, it should respond to `description` that defines
 # the contents of the label.
 #
-class Adjustment < ActiveRecord::Base
+class Adjustment < ApplicationRecord
 
   monetize :amount_cents, allow_nil: true
 

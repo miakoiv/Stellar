@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Document < ActiveRecord::Base
+class Document < ApplicationRecord
 
   include Trackable
   include Reorderable

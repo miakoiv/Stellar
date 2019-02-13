@@ -7,7 +7,7 @@
 # The layout for a section is selected from presets that specify how many
 # contained segments are created.
 #
-class Section < ActiveRecord::Base
+class Section < ApplicationRecord
 
   resourcify
   include Authority::Abilities

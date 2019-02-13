@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Segment < ActiveRecord::Base
+class Segment < ApplicationRecord
 
   store :metadata, accessors: [
     :header,          # headline for category, department segments, etc.

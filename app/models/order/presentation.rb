@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
 
   def to_s
     return "#{Order.human_attribute_name(:number)} #{number}" if complete?

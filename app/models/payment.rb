@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
 
   monetize :amount_cents
 

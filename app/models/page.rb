@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
 
   store :metadata, accessors: [
     :url

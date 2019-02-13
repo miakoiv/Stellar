@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class ShippingMethod < ActiveRecord::Base
+class ShippingMethod < ApplicationRecord
 
   resourcify
   include Authority::Abilities

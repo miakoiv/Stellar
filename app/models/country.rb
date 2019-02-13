@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Country < ActiveRecord::Base
+class Country < ApplicationRecord
 
   self.primary_key = 'code'
 

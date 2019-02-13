@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class ComponentEntry < ActiveRecord::Base
+class ComponentEntry < ApplicationRecord
 
   include Reorderable
 

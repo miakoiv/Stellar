@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Tag < ActiveRecord::Base
+class Tag < ApplicationRecord
 
   resourcify
   include Authority::Abilities

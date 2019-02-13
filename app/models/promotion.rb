@@ -4,7 +4,7 @@
 # to last_date. The business logic of the promotion is defined by its
 # promotion handler that is created on the creation of the promotion.
 #
-class Promotion < ActiveRecord::Base
+class Promotion < ApplicationRecord
 
   resourcify
   include Authority::Abilities

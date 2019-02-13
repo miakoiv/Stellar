@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class MeasurementUnit < ActiveRecord::Base
+class MeasurementUnit < ApplicationRecord
 
   belongs_to :base_unit, class_name: 'MeasurementUnit'
 

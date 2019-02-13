@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Policy < ActiveRecord::Base
+class Policy < ApplicationRecord
 
   include Authority::Abilities
   include Trackable

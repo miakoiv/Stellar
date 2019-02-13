@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Group < ActiveRecord::Base
+class Group < ApplicationRecord
 
   resourcify
   include Authority::Abilities

@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Image < ActiveRecord::Base
+class Image < ApplicationRecord
 
   STYLES = %w{icon thumbnail matchbox postcard technical shoebox presentational laptop lightbox}
 

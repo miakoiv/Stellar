@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Column < ActiveRecord::Base
+class Column < ApplicationRecord
 
   resourcify
   include Authority::Abilities

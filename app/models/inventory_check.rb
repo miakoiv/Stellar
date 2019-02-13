@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class InventoryCheck < ActiveRecord::Base
+class InventoryCheck < ApplicationRecord
 
   resourcify
   include Authority::Abilities

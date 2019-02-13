@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Store < ActiveRecord::Base
+class Store < ApplicationRecord
 
   store :settings, accessors: [
     :locale,   # see #locale_options for supported locales

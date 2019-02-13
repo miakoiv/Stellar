@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
 
   has_many :payments, dependent: :destroy, inverse_of: :order
   has_many :shipments, dependent: :destroy, inverse_of: :order

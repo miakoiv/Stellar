@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class AlternatePrice < ActiveRecord::Base
+class AlternatePrice < ApplicationRecord
 
   monetize :price_cents, numericality: {
     greater_than: 0

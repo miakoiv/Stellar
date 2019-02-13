@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Inventory < ActiveRecord::Base
+class Inventory < ApplicationRecord
 
   resourcify
   include Authority::Abilities

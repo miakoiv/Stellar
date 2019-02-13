@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
 
   resourcify
   include Authority::Abilities

@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
 
   # Adds `creatable_by?(user)`, etc.
   include Authority::UserAbilities

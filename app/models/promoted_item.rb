@@ -4,7 +4,7 @@
 # a discount percent and price. Both are stored to allow calculation of
 # the price before discount, since product pricing is subject to change.
 #
-class PromotedItem < ActiveRecord::Base
+class PromotedItem < ApplicationRecord
 
   monetize :price_cents, allow_nil: true
 

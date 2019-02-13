@@ -1,4 +1,4 @@
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
 
   # Monetize product attributes.
   monetize :cost_price_cents, allow_nil: true

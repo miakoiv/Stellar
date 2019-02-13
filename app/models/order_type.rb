@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class OrderType < ActiveRecord::Base
+class OrderType < ApplicationRecord
 
   resourcify
   include Authority::Abilities

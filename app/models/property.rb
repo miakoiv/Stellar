@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class Property < ActiveRecord::Base
+class Property < ApplicationRecord
 
   resourcify
   include Authority::Abilities
