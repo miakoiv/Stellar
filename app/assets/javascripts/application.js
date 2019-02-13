@@ -37,7 +37,6 @@
 //= require js.cookie
 //= require selectize
 //= require unobtrusive_flash
-//= require outdatedbrowser/outdatedBrowser
 //= require clipboard
 //= require vis
 
