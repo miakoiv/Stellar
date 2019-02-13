@@ -1,7 +1,7 @@
 #products-wrap
   .context
     .pull-right
-      = link_to show_category_path(@category, params.slice(:page)), class: 'btn btn-default btn-sm' do
+      = link_to show_category_path(@category, params.permit([:page]).to_h), class: 'btn btn-default btn-sm' do
         = icon('times', t('.close'))
     %ol.breadcrumb
       = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
