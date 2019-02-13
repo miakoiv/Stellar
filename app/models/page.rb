@@ -242,6 +242,5 @@ class Page < ApplicationRecord
 
     def conditionally_disable
       self.live = false unless can_be_live?
-      true
     end
 end

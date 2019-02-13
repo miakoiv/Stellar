@@ -85,6 +85,6 @@ class Image < ApplicationRecord
 
   private
     def resize_bitmaps
-      return false if is_vector?
+      is_bitmap?
     end
 end

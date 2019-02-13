@@ -371,7 +371,6 @@ class Product < ApplicationRecord
           (available_at.present? && !available_at.future?) &&
           (retail_price_cents.present? || bundle? || has_variants?) &&
           (deleted_at.nil? || deleted_at.future?)
-      true
     end
 
     # Callback to touch the associated object that was added or removed,
@@ -382,7 +381,6 @@ class Product < ApplicationRecord
         touch_master_and_variants if variant?
         update_variants if has_variants?
       end
-      true
     end
 
     # All variants are saved to have them inherit master categories and tags,
@@ -394,7 +392,6 @@ class Product < ApplicationRecord
           variant.touch
         end
       end
-      true
     end
 
     # Variants don't have their own categories and tags,
@@ -402,7 +399,6 @@ class Product < ApplicationRecord
     def inherit_from_master
       self.categories = master_product.categories
       self.tags = master_product.tags
-      true
     end
 
     # Touches master and all its variants to bust partial caches.
@@ -413,7 +409,6 @@ class Product < ApplicationRecord
           variant.touch
         end
       end
-      true
     end
 
     # Adds an incrementing branch number to the product code.
@@ -422,7 +417,6 @@ class Product < ApplicationRecord
         trunk, branch = code.partition(/ \(\d+\)/)
         branch = ' (0)' if branch.empty?
         self[:code] = "#{trunk}#{branch.succ}"
-        true
       end
     end
 end

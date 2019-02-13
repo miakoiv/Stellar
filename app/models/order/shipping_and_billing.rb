@@ -147,12 +147,10 @@ class Order < ApplicationRecord
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
       self.billing_country = shipping_country
-      true
     end
 
     def ensure_valid_countries
       self.shipping_country = store.country if shipping_country.nil?
       self.billing_country = store.country if billing_country.nil?
-      true
     end
 end

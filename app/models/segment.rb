@@ -260,6 +260,5 @@ class Segment < ApplicationRecord
 
     def schedule_content_update
       ContentGenerationJob.perform_later(self)
-      true
     end
 end

@@ -22,6 +22,5 @@ module Stylable
   private
     def update_inline_styles
       Styles::Inline.new(self).write_inline_styles
-      true
     end
 end
