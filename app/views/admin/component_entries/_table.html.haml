@@ -8,16 +8,17 @@
         %th.col-xs-1= col(ComponentEntry, :subtotal)
 
     %tbody
-      = content_tag_for :tr, product.component_entries do |entry|
-        %td
-          .product
-            = link_to entry.component.title, admin_product_path(entry.component)
-            %span.small= entry.component.subtitle
-            .badge= entry.component.code
-        %td.text-right.currency
-          - if entry.component.retail_price.present?
-            = money entry.component.retail_price
-        %td.text-right= entry.quantity
-        %td.text-right.currency
-          - if entry.component.retail_price.present?
-            = money entry.quantity * entry.component.retail_price
+      - product.component_entries.each do |entry|
+        %tr[entry]
+          %td
+            .product
+              = link_to entry.component.title, admin_product_path(entry.component)
+              %span.small= entry.component.subtitle
+              .badge= entry.component.code
+          %td.text-right.currency
+            - if entry.component.retail_price.present?
+              = money entry.component.retail_price
+          %td.text-right= entry.quantity
+          %td.text-right.currency
+            - if entry.component.retail_price.present?
+              = money entry.quantity * entry.component.retail_price

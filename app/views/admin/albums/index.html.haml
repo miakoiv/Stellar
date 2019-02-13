@@ -14,23 +14,24 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, @albums do |album|
-        %td= l(album.created_at.to_date)
-        %td= album.title
-        %td
-          - album.pictures.each do |picture|
-            = picture_variant_tag(picture, :icon, data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{picture_variant_tag(picture, :matchbox)}"})
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_album_path(album),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(album, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_album_path(album),
+      - @albums.each do |album|
+        %tr[album]
+          %td= l(album.created_at.to_date)
+          %td= album.title
+          %td
+            - album.pictures.each do |picture|
+              = picture_variant_tag(picture, :icon, data: {toggle: 'popover', placement: 'left', container: 'body', content: "#{picture_variant_tag(picture, :matchbox)}"})
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_album_path(album),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(album, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_album_path(album),
-                method: :delete, class: 'btn btn-sm btn-outline-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: album.model_name.human, name: album.title),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+            - if current_user.can_update?(album, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_album_path(album),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(album, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_album_path(album),
+                  method: :delete, class: 'btn btn-sm btn-outline-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: album.model_name.human, name: album.title),
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}

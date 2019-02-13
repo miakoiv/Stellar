@@ -5,9 +5,10 @@
         %th= col(Product, :title)
 
     %tbody
-      = content_tag_for :tr, product.requisite_entries do |entry|
-        %td
-          .product
-            = link_to entry.requisite.title, admin_product_path(entry.requisite)
-            %span.small= entry.requisite.subtitle
-            .badge= entry.requisite.code
+      - product.requisite_entries.each do |entry|
+        %tr[entry]
+          %td
+            .product
+              = link_to entry.requisite.title, admin_product_path(entry.requisite)
+              %span.small= entry.requisite.subtitle
+              .badge= entry.requisite.code

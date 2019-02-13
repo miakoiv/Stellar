@@ -1,9 +1,10 @@
-= content_tag_for :tr, product.inventory_items.online do |inventory_item|
-  %td= link_to_if current_user.can_read?(inventory_item, at: current_store), inventory_item.code, admin_inventory_item_path(inventory_item)
-  %td= inventory_item.inventory.name
-  %td.text-right.currency= money inventory_item.value
-  %td.text-right
-    = inventory_item.on_hand
-    %span.text-muted
-      = number_if_present(inventory_item.reserved, '–')
-      = number_if_present(inventory_item.pending, '+')
+- product.inventory_items.online.each do |inventory_item|
+  %tr[inventory_item]
+    %td= link_to_if current_user.can_read?(inventory_item, at: current_store), inventory_item.code, admin_inventory_item_path(inventory_item)
+    %td= inventory_item.inventory.name
+    %td.text-right.currency= money inventory_item.value
+    %td.text-right
+      = inventory_item.on_hand
+      %span.text-muted
+        = number_if_present(inventory_item.reserved, '–')
+        = number_if_present(inventory_item.pending, '+')

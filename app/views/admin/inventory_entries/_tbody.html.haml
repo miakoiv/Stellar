@@ -1,9 +1,10 @@
-= content_tag_for :tr, inventory_item.inventory_entries do |inventory_entry|
-  %td
-    - if inventory_entry.source.present?
-      = link_to [:admin, inventory_entry.source], title: "#{title(inventory_entry.source.class)} #{inventory_entry.source}", data: {toggle: 'tooltip'} do
-        = icon('info-circle')
-  %td= l(inventory_entry.recorded_at)
-  %td= inventory_entry.note
-  %td.text-right= inventory_entry.on_hand
-  %td.text-right.currency= money inventory_entry.value
+- inventory_item.inventory_entries.each do |inventory_entry|
+  %tr[inventory_entry]
+    %td
+      - if inventory_entry.source.present?
+        = link_to [:admin, inventory_entry.source], title: "#{title(inventory_entry.source.class)} #{inventory_entry.source}", data: {toggle: 'tooltip'} do
+          = icon('info-circle')
+    %td= l(inventory_entry.recorded_at)
+    %td= inventory_entry.note
+    %td.text-right= inventory_entry.on_hand
+    %td.text-right.currency= money inventory_entry.value

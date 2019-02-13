@@ -16,7 +16,7 @@
 
     %tbody.sortable
       - @properties.each do |property|
-        = content_tag_for :tr, property do
+        %tr[property]
           %td.hidden-print= drag_handle
           %td
             = property.searchable? ? icon('search-plus', property.name, data: {toggle: 'tooltip'}, title: col(Property, :searchable)) : property.name

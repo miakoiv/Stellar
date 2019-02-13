@@ -10,12 +10,13 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, customer_asset.asset_entries do |asset_entry|
-        %td= l(asset_entry.recorded_at)
-        %td
-          - if asset_entry.source.present?
-            = link_to_if current_user.can_read?(asset_entry.source.class, at: current_store), "#{title(asset_entry.source.class)} #{asset_entry.source}", [:admin, asset_entry.source]
-        %td.text-right= asset_entry.amount
-        %td.hidden.text-right.currency= money asset_entry.value
-        %td= asset_entry.note
-        %td
+      - customer_asset.asset_entries.each do |asset_entry|
+        %tr[asset_entry]
+          %td= l(asset_entry.recorded_at)
+          %td
+            - if asset_entry.source.present?
+              = link_to_if current_user.can_read?(asset_entry.source.class, at: current_store), "#{title(asset_entry.source.class)} #{asset_entry.source}", [:admin, asset_entry.source]
+          %td.text-right= asset_entry.amount
+          %td.hidden.text-right.currency= money asset_entry.value
+          %td= asset_entry.note
+          %td

@@ -15,25 +15,26 @@
         %th.actions
 
     %tbody{class: current_user.can_update?(Inventory, at: current_store) && 'sortable'}
-      = content_tag_for :tr, @inventories do |inventory|
-        %td.hidden-print= drag_handle
-        %td= inventory.name
-        %td= inventory.inventory_code
-        %td
-          - if inventory.fuzzy?
-            = icon('low-vision', title: col(Inventory, :fuzzy), data: {toggle: 'tooltip'})
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(inventory, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(inventory, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_inventory_path(inventory),
-                method: :delete, class: 'btn btn-sm btn-outline-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Inventory.model_name.human, name: inventory.name),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+      - @inventories.each do |inventory|
+        %tr[inventory]
+          %td.hidden-print= drag_handle
+          %td= inventory.name
+          %td= inventory.inventory_code
+          %td
+            - if inventory.fuzzy?
+              = icon('low-vision', title: col(Inventory, :fuzzy), data: {toggle: 'tooltip'})
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(inventory, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_inventory_path(inventory), class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(inventory, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_inventory_path(inventory),
+                  method: :delete, class: 'btn btn-sm btn-outline-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: Inventory.model_name.human, name: inventory.name),
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

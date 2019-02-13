@@ -1,8 +1,9 @@
-= content_tag_for :tr, store.hostnames do |hostname|
-  %td.hidden-print= drag_handle
-  %td= hostname
-  %td= hostname.domain_hostname
-  %td.actions
-    - if current_user.can_delete?(hostname, at: current_store)
-      = link_to icon('remove'), admin_hostname_path(hostname),
-          remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'
+- store.hostnames.each do |hostname|
+  %tr[hostname]
+    %td.hidden-print= drag_handle
+    %td= hostname
+    %td= hostname.domain_hostname
+    %td.actions
+      - if current_user.can_delete?(hostname, at: current_store)
+        = link_to icon('remove'), admin_hostname_path(hostname),
+            remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'

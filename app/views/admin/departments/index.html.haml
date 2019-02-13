@@ -16,30 +16,31 @@
         %th.actions
 
     %tbody{class: current_user.can_update?(Department, at: current_store) && 'sortable'}
-      = content_tag_for :tr, @departments do |department|
-        %td.hidden-print= drag_handle
-        %td= picture_variant_tag department.cover_picture, :icon
-        %td= department.name
-        %td
-          - if department.page.present?
-            = icon('file-o', title: col(Department, :has_page), data: {toggle: 'tooltip'})
-        %td
-          - department.categories.group_by(&:store).each do |store, categories|
-            = bootstrap_label(store, appearance: :primary)
-            - categories.each do |category|
-              = bootstrap_label(category, text: category.to_path)
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(department, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_department_path(department), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(department, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_department_path(department),
-                method: :delete, class: 'btn btn-sm btn-outline-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: Department.model_name.human, name: department.name),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+      - @departments.each do |department|
+        %tr[department]
+          %td.hidden-print= drag_handle
+          %td= picture_variant_tag department.cover_picture, :icon
+          %td= department.name
+          %td
+            - if department.page.present?
+              = icon('file-o', title: col(Department, :has_page), data: {toggle: 'tooltip'})
+          %td
+            - department.categories.group_by(&:store).each do |store, categories|
+              = bootstrap_label(store, appearance: :primary)
+              - categories.each do |category|
+                = bootstrap_label(category, text: category.to_path)
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_department_path(department), class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(department, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_department_path(department), class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(department, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_department_path(department),
+                  method: :delete, class: 'btn btn-sm btn-outline-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: Department.model_name.human, name: department.name),
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

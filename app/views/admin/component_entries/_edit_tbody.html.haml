@@ -1,16 +1,17 @@
-= content_tag_for :tr, product.component_entries do |entry|
-  %td.hidden-print= drag_handle
-  %td
-    .product
-      = link_to entry.component.title, admin_product_path(entry.component)
-      %span.small= entry.component.subtitle
-      .badge= entry.component.code
-  %td.text-right.currency
-    - if entry.component.retail_price.present?
-      = money entry.component.retail_price
-  %td.text-right= entry.quantity
-  %td.text-right.currency
-    - if entry.component.retail_price.present?
-      = money entry.quantity * entry.component.retail_price
-  %td.actions
-    = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'
+- product.component_entries.each do |entry|
+  %tr[entry]
+    %td.hidden-print= drag_handle
+    %td
+      .product
+        = link_to entry.component.title, admin_product_path(entry.component)
+        %span.small= entry.component.subtitle
+        .badge= entry.component.code
+    %td.text-right.currency
+      - if entry.component.retail_price.present?
+        = money entry.component.retail_price
+    %td.text-right= entry.quantity
+    %td.text-right.currency
+      - if entry.component.retail_price.present?
+        = money entry.quantity * entry.component.retail_price
+    %td.actions
+      = link_to icon('remove'), admin_component_entry_path(entry), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'

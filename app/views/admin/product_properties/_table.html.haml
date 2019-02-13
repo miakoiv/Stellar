@@ -6,6 +6,7 @@
         %th= col(ProductProperty, :value)
 
     %tbody
-      = content_tag_for :tr, product.product_properties do |product_property|
-        %td= product_property.property
-        %td= product_property.value_with_units
+      - product.product_properties.each do |product_property|
+        %tr[product_property]
+          %td= product_property.property
+          %td= product_property.value_with_units

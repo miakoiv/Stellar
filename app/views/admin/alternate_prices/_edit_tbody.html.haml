@@ -1,7 +1,8 @@
-= content_tag_for :tr, product.alternate_prices do |alternate_price|
-  %td= bootstrap_label(alternate_price.group)
-  %td.text-right.currency= money alternate_price.price
-  %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
-  %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)
-  %td.actions
-    = link_to icon('remove'), admin_product_alternate_price_path(product, alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'
+- product.alternate_prices.each do |alternate_price|
+  %tr[alternate_price]
+    %td= bootstrap_label(alternate_price.group)
+    %td.text-right.currency= money alternate_price.price
+    %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
+    %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)
+    %td.actions
+      = link_to icon('remove'), admin_product_alternate_price_path(product, alternate_price), remote: true, method: :delete, class: 'btn btn-sm btn-outline-danger'

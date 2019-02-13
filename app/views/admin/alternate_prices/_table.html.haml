@@ -8,8 +8,9 @@
         %th.col-xs-2.text-right= col(AlternatePrice, :margin_percent)
 
     %tbody
-      = content_tag_for :tr, product.alternate_prices do |alternate_price|
-        %td= bootstrap_label(alternate_price.group)
-        %td.text-right.currency= money alternate_price.price
-        %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
-        %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)
+      - product.alternate_prices.each do |alternate_price|
+        %tr[alternate_price]
+          %td= bootstrap_label(alternate_price.group)
+          %td.text-right.currency= money alternate_price.price
+          %td.text-right= number_with_precision(alternate_price.markup_percent(current_group), precision: 2)
+          %td.text-right= number_with_precision(alternate_price.margin_percent(current_group), precision: 2)

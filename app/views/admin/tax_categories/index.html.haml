@@ -15,29 +15,30 @@
         %th.actions
 
     %tbody{class: current_user.can_update?(TaxCategory, at: current_store) && 'sortable'}
-      = content_tag_for :tr, @tax_categories do |tax_category|
-        %td.hidden-print= drag_handle
-        %td= tax_category.name
-        %td
-          = tax_category.rate
-          \%
-        %td
-          - if tax_category.included_in_retail?
-            .label.label-primary= col(TaxCategory, :included_in_retail)
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_tax_category_path(tax_category),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(tax_category, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_tax_category_path(tax_category),
+      - @tax_categories.each do |tax_category|
+        %tr[tax_category]
+          %td.hidden-print= drag_handle
+          %td= tax_category.name
+          %td
+            = tax_category.rate
+            \%
+          %td
+            - if tax_category.included_in_retail?
+              .label.label-primary= col(TaxCategory, :included_in_retail)
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_tax_category_path(tax_category),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(tax_category, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_tax_category_path(tax_category),
-                method: :delete, class: 'btn btn-sm btn-danger',
-                data: {confirm: t('actions.confirm.body',
-                  klass: TaxCategory.model_name.human, name: tax_category.name),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+            - if current_user.can_update?(tax_category, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_tax_category_path(tax_category),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(tax_category, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_tax_category_path(tax_category),
+                  method: :delete, class: 'btn btn-sm btn-danger',
+                  data: {confirm: t('actions.confirm.body',
+                    klass: TaxCategory.model_name.human, name: tax_category.name),
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
 
 :coffee
   $('.sortable').sortable(

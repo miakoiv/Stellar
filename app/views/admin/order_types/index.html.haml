@@ -17,32 +17,33 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, @order_types do |order_type|
-        %td
-          = bootstrap_label(order_type.source)
-          %i.fa.fa-arrow-right.fa-fw.fa-lg
-          = bootstrap_label(order_type.destination)
-        %td= order_type.name
-        %td= order_type.label
-        %td
-          - if order_type.has_payment?
-            = bootstrap_label(order_type, text: col(OrderType, :has_payment), appearance: :success)
-          - if order_type.has_shipping?
-            = bootstrap_label(order_type, text: col(OrderType, :has_shipping), appearance: :primary)
-        - if current_store.b2b_sales?
+      - @order_types.each do |order_type|
+        %tr[order_type]
           %td
-            - if order_type.is_forwarded?
-              = bootstrap_label(order_type, text: col(OrderType, :is_forwarded), appearance: :warning)
-            - if order_type.has_installation?
-              = bootstrap_label(order_type, text: col(OrderType, :has_installation), appearance: :danger)
-            - if order_type.is_exported?
-              = bootstrap_label(order_type, text: col(OrderType, :is_exported), appearance: :info)
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_order_type_path(order_type),
-              class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(order_type, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_order_type_path(order_type),
+            = bootstrap_label(order_type.source)
+            %i.fa.fa-arrow-right.fa-fw.fa-lg
+            = bootstrap_label(order_type.destination)
+          %td= order_type.name
+          %td= order_type.label
+          %td
+            - if order_type.has_payment?
+              = bootstrap_label(order_type, text: col(OrderType, :has_payment), appearance: :success)
+            - if order_type.has_shipping?
+              = bootstrap_label(order_type, text: col(OrderType, :has_shipping), appearance: :primary)
+          - if current_store.b2b_sales?
+            %td
+              - if order_type.is_forwarded?
+                = bootstrap_label(order_type, text: col(OrderType, :is_forwarded), appearance: :warning)
+              - if order_type.has_installation?
+                = bootstrap_label(order_type, text: col(OrderType, :has_installation), appearance: :danger)
+              - if order_type.is_exported?
+                = bootstrap_label(order_type, text: col(OrderType, :is_exported), appearance: :info)
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_order_type_path(order_type),
                 class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(order_type, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
-                  klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
+            - if current_user.can_update?(order_type, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_order_type_path(order_type),
+                  class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(order_type, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
+                    klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

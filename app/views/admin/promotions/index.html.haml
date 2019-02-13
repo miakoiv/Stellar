@@ -18,7 +18,7 @@
 
     %tbody
       - @promotions.each do |promotion|
-        = content_tag_for :tr, promotion, class: promotion.live? ? nil : 'warning text-warning' do
+        %tr[promotion]{class: promotion.live? || 'warning text-warning'}
           %td= bootstrap_label(promotion.group)
           %td= promotion.name
           %td= title(promotion.promotion_handler)

@@ -14,12 +14,13 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, @activities do |activity|
-        %td= l(activity.created_at, format: :iso)
-        %td= bootstrap_label activity, text: activity.action
-        %td= resource_link(activity)
-        %td= activity.user
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_activity_path(activity), class: 'btn btn-default btn-sm'
+      - @activities.each do |activity|
+        %tr[activity]
+          %td= l(activity.created_at, format: :iso)
+          %td= bootstrap_label activity, text: activity.action
+          %td= resource_link(activity)
+          %td= activity.user
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_activity_path(activity), class: 'btn btn-default btn-sm'
 
 = paginate @activities

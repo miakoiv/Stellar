@@ -1,6 +1,6 @@
 #timeline{data: {events: @timeline_orders.map(&:timeline_events).flatten.to_json}}
   - @timeline_orders.each do |order|
-    = content_tag_for :span, order, :vis, data: {id: order.id, url: order_path(order), number: order.number, summary: order.summary}
+    %span{data: {id: order.id, url: order_path(order), number: order.number, summary: order.summary}}
 
 :coffee
   container = $('#timeline')[0]

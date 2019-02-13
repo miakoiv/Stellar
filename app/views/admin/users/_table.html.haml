@@ -8,19 +8,20 @@
         %th.actions
 
     %tbody
-      = content_tag_for :tr, users do |user|
-        %td= user.name
-        %td= user.email
-        %td
-          - user.roles.at(current_store).each do |role|
-            = icon(role.icon, title: role, class: 'fa-fw', data: {toggle: 'tooltip'})
-        %td.actions
-          = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'
-          - if current_user.can_update?(user, at: current_store)
-            = link_to icon('edit', t('actions.edit')), edit_admin_user_path(user), class: 'btn btn-default btn-sm'
-          - if current_user.can_delete?(user, at: current_store)
-            = link_to icon('remove', t('actions.delete')), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
-                  klass: User.model_name.human, name: user.name),
-                  'confirm-title': t('actions.confirm.title'),
-                  'confirm-proceed': t('actions.confirm.proceed'),
-                  'confirm-cancel': t('actions.confirm.cancel')}
+      - users.each do |user|
+        %tr[user]
+          %td= user.name
+          %td= user.email
+          %td
+            - user.roles.at(current_store).each do |role|
+              = icon(role.icon, title: role, class: 'fa-fw', data: {toggle: 'tooltip'})
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_user_path(user), class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(user, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_user_path(user), class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(user, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_user_path(user), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
+                    klass: User.model_name.human, name: user.name),
+                    'confirm-title': t('actions.confirm.title'),
+                    'confirm-proceed': t('actions.confirm.proceed'),
+                    'confirm-cancel': t('actions.confirm.cancel')}
