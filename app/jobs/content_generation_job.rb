@@ -2,7 +2,7 @@
 # Content generation takes a segment and updates its content
 # attribute with a plain text representation.
 #
-class ContentGenerationJob < ActiveJob::Base
+class ContentGenerationJob < ApplicationJob
   queue_as :default
 
   def perform(segment)

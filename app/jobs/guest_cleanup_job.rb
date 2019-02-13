@@ -3,7 +3,7 @@
 # at least one order. This job is queued when a guest user is
 # first created.
 #
-class GuestCleanupJob < ActiveJob::Base
+class GuestCleanupJob < ApplicationJob
   queue_as :default
 
   def perform(user)

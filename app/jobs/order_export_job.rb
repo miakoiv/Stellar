@@ -2,7 +2,7 @@
 # Order export generates XML output and writes it into
 # the directory at specified path.
 #
-class OrderExportJob < ActiveJob::Base
+class OrderExportJob < ApplicationJob
   queue_as :default
 
   def perform(order, path)
