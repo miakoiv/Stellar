@@ -26,7 +26,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 # More concise logging
-gem 'lograge'
+#gem 'lograge'
 
 # Automatic eager loading
 gem 'goldiloader'
