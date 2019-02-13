@@ -118,7 +118,7 @@ gem 'selectize-rails'
 gem 'unobtrusive_flash', '>= 3'
 
 # Bootstrappy forms
-gem 'bootstrap_form'
+gem 'bootstrap_form', '~> 2.7'
 
 # Eternicode's excellent Datepicker
 gem 'bootstrap-datepicker-rails'

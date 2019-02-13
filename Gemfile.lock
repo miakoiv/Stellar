@@ -58,8 +58,7 @@ GEM
     bootstrap-sass (3.4.0)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
-    bootstrap_form (4.1.0)
-      rails (>= 5.0)
+    bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (10.0.2)
     choice (0.2.0)
@@ -385,7 +384,7 @@ DEPENDENCIES
   awesome_nested_set
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.4.0)
-  bootstrap_form
+  bootstrap_form (~> 2.7)
   byebug
   clipboard-rails
   codemirror-rails
