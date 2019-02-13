@@ -170,7 +170,7 @@ class Store < ActiveRecord::Base
   end
 
   def stylesheet_source
-    style.present? && style.stylesheet.present? && style.stylesheet.url || "spry_themes/#{theme}"
+    style.present? && style.stylesheet.present? && style.stylesheet.url || "themes/#{theme}"
   end
 
   # Finds a subdomain hostname belonging to the given store portal.

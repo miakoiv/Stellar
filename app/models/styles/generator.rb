@@ -34,7 +34,7 @@ module Styles
       # Store theme file from app assets.
       def theme_file
         @theme_file ||= File.join(
-          Rails.root, 'app', 'assets', 'stylesheets', 'spry_themes',
+          Rails.root, 'app', 'assets', 'stylesheets', 'themes',
           "#{theme}.scss"
         )
       end

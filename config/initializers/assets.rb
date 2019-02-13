@@ -20,16 +20,16 @@ Rails.application.config.assets.precompile += %w(
   jasny-bootstrap/rowlink.js
   payment_gateway/none.js
   payment_gateway/paybyway.js
-  spry_themes/birch.css       spry_themes/birch.js
-  spry_themes/boutique.css    spry_themes/boutique.js
-  spry_themes/cardirad.css    spry_themes/cardirad.js
-  spry_themes/cards.css       spry_themes/cards.js
-  spry_themes/cottage.css     spry_themes/cottage.js
-  spry_themes/darkmatter.css  spry_themes/darkmatter.js
-  spry_themes/hiustalo.css    spry_themes/hiustalo.js
-  spry_themes/material.css    spry_themes/material.js
-  spry_themes/mechanet.css    spry_themes/mechanet.js
-  spry_themes/premium.css     spry_themes/premium.js
+  themes/birch.css       themes/birch.js
+  themes/boutique.css    themes/boutique.js
+  themes/cardirad.css    themes/cardirad.js
+  themes/cards.css       themes/cards.js
+  themes/cottage.css     themes/cottage.js
+  themes/darkmatter.css  themes/darkmatter.js
+  themes/hiustalo.css    themes/hiustalo.js
+  themes/material.css    themes/material.js
+  themes/mechanet.css    themes/mechanet.js
+  themes/premium.css     themes/premium.js
   email/mailgun.css
   stellar.css
   devise.css
