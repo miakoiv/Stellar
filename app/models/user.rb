@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class User < ApplicationRecord
 
   # Adds `creatable_by?(user)`, etc.

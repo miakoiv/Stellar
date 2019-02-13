@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Plan is a wrapper for Stripe::Plans::Configuration objects,
 # initialized by specifying a stripe_plan_id attribute that

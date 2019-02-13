@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This controller takes a visitor through the onboarding process
 # modelled in the Account::Onboarding module. At each step,

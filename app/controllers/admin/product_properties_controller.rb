@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::ProductPropertiesController < AdminController
 
   before_action :set_product, only: [:create]

@@ -1,9 +1,8 @@
-#encoding: utf-8
 #
 # CancellationService takes a Subscription record and
 # cancels it on Stripe by setting cancel_at_period_end.
 # The subscription status is set to cancelling.
-
+#
 module StripeGateway
   class CancellationService
 

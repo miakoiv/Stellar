@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # PromotedItem links a product to a promotion and optionally specifies
 # a discount percent and price. Both are stored to allow calculation of

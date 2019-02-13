@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::TransfersController < AdminController
 
   before_action :set_transfer, except: [:index, :new, :create]

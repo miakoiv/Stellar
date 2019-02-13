@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::ActivitiesController < AdminController
 
   before_action :set_activity, only: [:show]

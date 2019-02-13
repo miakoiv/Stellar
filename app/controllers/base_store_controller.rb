@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # BaseStoreController extends ApplicationController with
 # methods and business logic common to all controllers that

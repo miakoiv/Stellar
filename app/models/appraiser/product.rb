@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module Appraiser
 
   # Product appraiser is set up with a group and

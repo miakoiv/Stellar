@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class ImageAuthorizer < ApplicationAuthorizer
 
   def deletable_by?(user, opts)

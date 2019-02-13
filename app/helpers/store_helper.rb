@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module StoreHelper
 
   # Generates a product url that can be in another store

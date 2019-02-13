@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class HostnameAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user, opts)

@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This controller only handles a single task: rendering orders
 # in XML format using Builder. No routes point to this controller,

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module ApplicationHelper
 
   def title(klass, options = {})

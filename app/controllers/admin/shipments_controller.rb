@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::ShipmentsController < AdminController
 
   before_action :set_order, only: [:create]

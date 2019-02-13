@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class CheckoutController < BaseStoreController
 
   # This controller is aware of unauthenticated guests.

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class ProfilesController < BaseStoreController
 
   before_action :authenticate_user!

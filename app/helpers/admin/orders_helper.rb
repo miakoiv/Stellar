@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module Admin::OrdersHelper
 
   def back_path_for(order)

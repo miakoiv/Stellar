@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Country < ApplicationRecord
 
   self.primary_key = 'code'

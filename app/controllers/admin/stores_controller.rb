@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::StoresController < AdminController
 
   before_action :set_store, only: [:show, :edit, :update, :destroy]

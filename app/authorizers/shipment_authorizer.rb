@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class ShipmentAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user, opts)

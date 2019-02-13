@@ -1,11 +1,10 @@
-#encoding: utf-8
 #
 # Implementation of the Bambora PayForm née Paybyway API, including
 # payment token requests, credit card charge requests & verifications,
 # and bank e-payments.
 # For API docs, see
 # <https://payform.bambora.com/docs/web_payments/?page=full-api-reference>
-
+#
 module PaymentGateway
 
   class PaybywayConnector

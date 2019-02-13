@@ -1,11 +1,10 @@
-#encoding: utf-8
 #
 # Implementation of several shipping methods available through
 # the Pakettikauppa API, using DB Schenker, Matkahuolto, and Posti
 # as service providers. Each shipping method is defined as a subclass
 # of ShippingGateway::Pakettikauppa::Base.
 # For API docs, see <https://www.pakettikauppa.fi/tekniset-ohjeet/>
-
+#
 module ShippingGateway
 
   class PakettikauppaConnector

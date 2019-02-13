@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Uploaders are classes that handle file uploads containing data for a
 # specific model, like products. To handle an uploaded file, create an

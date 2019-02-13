@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::AlbumsController < AdminController
 
   before_action :set_album, only: [:show, :edit, :update, :destroy]

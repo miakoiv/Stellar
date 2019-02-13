@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Hostname < ApplicationRecord
 
   RESTRICTED_FQDNS = [

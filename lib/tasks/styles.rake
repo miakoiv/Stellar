@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 namespace :styles do
   desc "Recompile store styles to include changes made to theme files"
   task recompile: :environment do |task, args|

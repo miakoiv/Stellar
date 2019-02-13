@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class OrderAuthorizer < ApplicationAuthorizer
 
   # Class methods are called when authorizing an admin

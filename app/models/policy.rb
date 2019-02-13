@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Policy < ApplicationRecord
 
   include Authority::Abilities

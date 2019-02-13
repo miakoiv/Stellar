@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Promotions of one or more promoted items that run from first_date
 # to last_date. The business logic of the promotion is defined by its

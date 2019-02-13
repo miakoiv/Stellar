@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class AlternatePrice < ApplicationRecord
 
   monetize :price_cents, numericality: {

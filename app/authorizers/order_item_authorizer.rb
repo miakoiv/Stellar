@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This authorizer only applies to actions on order items made through
 # the admin namespace. The non-admin side does not use authorizations.

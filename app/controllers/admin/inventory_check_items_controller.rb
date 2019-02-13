@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::InventoryCheckItemsController < AdminController
 
   before_action :set_inventory_check, only: [:create]

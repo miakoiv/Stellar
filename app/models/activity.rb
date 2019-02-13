@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Activities are records of actions taken by users on resources in
 # a certain context. The context may be the resource itself, or its

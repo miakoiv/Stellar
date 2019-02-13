@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This is the point-of-sale specific controller for order items.
 #

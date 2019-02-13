@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Account::Onboarding models the workflow for creating new stores
 # and others objects required for its operation from user input

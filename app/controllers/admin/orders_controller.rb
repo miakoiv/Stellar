@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::OrdersController < AdminController
 
   before_action :set_order, except: [:index, :incoming, :outgoing, :new, :create]

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class OrderTypeAuthorizer < ApplicationAuthorizer
 
   def self.default(able, user, opts)

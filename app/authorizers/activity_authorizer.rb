@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class ActivityAuthorizer < ApplicationAuthorizer
 
   def self.readable_by?(user, opts)

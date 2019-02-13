@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class PolicyAuthorizer < ApplicationAuthorizer
 
   def self.readable_by?(user, opts)

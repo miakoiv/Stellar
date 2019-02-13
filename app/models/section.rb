@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Sections are page subdivisions defining the layout of its content segments.
 # The segments contain the actual content and have optional associations to

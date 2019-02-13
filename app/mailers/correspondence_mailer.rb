@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class CorrespondenceMailer < ApplicationMailer
 
   include Roadie::Rails::Mailer

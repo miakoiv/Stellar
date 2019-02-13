@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::RolesController < AdminController
 
   before_action :set_user_and_role

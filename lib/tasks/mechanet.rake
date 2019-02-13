@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 require 'creek'
 
 DROPBOX_PATH = '/opt/dropbox/Dropbox/Mechanet_verkkokauppa'

@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This search is suited for finding navigable categories,
 # which means categories that have an associated page as

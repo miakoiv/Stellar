@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # ApplicationController provides the minimal set of features
 # for other controllers to extend, such as BaseStoreController

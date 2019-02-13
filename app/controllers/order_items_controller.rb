@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # This controller deals with editing and deleting items in the shopping cart.
 #

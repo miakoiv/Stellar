@@ -1,8 +1,7 @@
-#encoding: utf-8
 #
 # Koala::Post is a convenience model for posts coming from feeds
 # like Facebook, fetched by Koala.
-
+#
 class Koala::Post
 
   include ActiveModel::Model

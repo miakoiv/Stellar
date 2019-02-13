@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # ContentGateway::OikotieAsunnot implements a content gateway
 # interface to the Oikotie Asunnot API. Documentation is at

@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # OrderReportRows aggregate data from concluded orders to facilitate
 # report generation. They are created or updated automatically when

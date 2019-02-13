@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class ProductProperty < ApplicationRecord
 
   belongs_to :product, touch: true

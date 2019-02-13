@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::HostnamesController < AdminController
 
   include Reorderer

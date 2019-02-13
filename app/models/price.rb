@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Price is a wrapper around Money with taxation metadata and
 # methods for the amount with or without tax, and the tax itself.

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::TagsController < AdminController
 
   before_action :set_tag, only: [:show, :edit, :update, :destroy]

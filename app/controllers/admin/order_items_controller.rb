@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::OrderItemsController < AdminController
 
   before_action :set_order_and_item, except: [:index, :create]

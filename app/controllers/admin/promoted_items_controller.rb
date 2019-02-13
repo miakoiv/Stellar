@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::PromotedItemsController < AdminController
 
   before_action :set_promotion, only: [:create]

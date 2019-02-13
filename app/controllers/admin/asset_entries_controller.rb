@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::AssetEntriesController < AdminController
 
   before_action :set_customer_asset, only: [:create]

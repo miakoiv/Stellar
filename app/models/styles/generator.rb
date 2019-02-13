@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Styles::Generator compiles store stylesheets on demand from the SCSS
 # of the theme file prepended by the style variables.

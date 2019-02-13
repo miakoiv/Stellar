@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::PoliciesController < AdminController
 
   before_action :set_policy, only: [:show, :edit, :update, :accept]

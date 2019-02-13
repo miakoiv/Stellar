@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 require 'csv'
 
 IMPORT_PATH = Pathname.new '/etc/dropbox/Dropbox/extranet'

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class MeasurementUnit < ApplicationRecord
 
   belongs_to :base_unit, class_name: 'MeasurementUnit'

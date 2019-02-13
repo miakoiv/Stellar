@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Transfer items record what is transferred by product and lot code.
 #

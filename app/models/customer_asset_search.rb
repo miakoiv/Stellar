@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 require 'searchlight/adapters/action_view'
 
 class CustomerAssetSearch < Searchlight::Search

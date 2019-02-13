@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Adjustments are modifiers affecting the price of an adjustable object.
 # Anything adjustable may have an adjustment that adds its amount to

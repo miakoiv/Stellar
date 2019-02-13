@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # ContentItem is a convenience model for items loaded from feeds
 # by classes in the ContentGateway module.

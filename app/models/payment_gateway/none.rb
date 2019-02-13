@@ -1,8 +1,7 @@
-#encoding: utf-8
 #
 # Payment gateway that doesn't collect payments but provides
 # an interface to confirm the order and create a payment object.
-
+#
 module PaymentGateway
   class None
 

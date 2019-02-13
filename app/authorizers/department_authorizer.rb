@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class DepartmentAuthorizer < ApplicationAuthorizer
 
   def self.creatable_by?(user, opts)

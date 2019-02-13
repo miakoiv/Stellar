@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Styles::Inline models a collection of inline CSS rules based on
 # an ActiveRecord object that responds to one or more methods that

@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 namespace :reports do
   desc "Generate up-to-date reports from all concluded orders"
   task generate: :environment do |task, args|

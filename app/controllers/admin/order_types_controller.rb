@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::OrderTypesController < AdminController
 
   before_action :set_order_type, only: [:show, :edit, :update, :destroy]

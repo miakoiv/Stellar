@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # CustomerAssets keep track of a user's tangible property in the form
 # of products, by quantity (amount) and total value. Once created, an

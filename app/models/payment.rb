@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Payment < ApplicationRecord
 
   monetize :amount_cents

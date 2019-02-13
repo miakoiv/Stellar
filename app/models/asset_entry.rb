@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # AssetEntries record the changes made to a CustomerAsset object during its
 # lifetime. Entries are created automatically from order items when an order

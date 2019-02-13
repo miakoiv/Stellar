@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::ShippingMethodsController < AdminController
 
   before_action :set_shipping_method, only: [:show, :edit, :update, :destroy]

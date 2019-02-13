@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 class Admin::SubscriptionsController < AdminController
 
   before_action :authenticate_user!

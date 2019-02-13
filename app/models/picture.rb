@@ -1,4 +1,3 @@
-#encoding: utf-8
 #
 # Pictures are instances of images used in different contexts, connecting
 # the images with pictureable objects, and containing metadata about the
