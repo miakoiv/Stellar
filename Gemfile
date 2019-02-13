@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 ruby '>= 2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.10'
+gem 'rails', '~> 5.0.7', '>= 5.0.7.1'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.4.0'
+gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 gem 'with_advisory_lock'
 gem 'yaml_db'
 # Use Haml for markup
@@ -13,7 +13,7 @@ gem 'haml-rails'
 gem 'erb2haml', group: :development
 # Use SCSS for stylesheets
 gem 'sassc-rails', '>= 2.0.0'
-gem 'autoprefixer-rails', '~> 8.6.5'
+gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0', '< 4.0.0'
 # Use CoffeeScript for .coffee assets and views
@@ -64,10 +64,8 @@ gem 'jquery-ui-rails'
 # Progressive rendering for the slower parts
 gem 'progressive_render'
 
-# Backport of ApplicationController.renderer from Rails 5
-gem 'backport_new_renderer'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -132,7 +130,7 @@ gem 'twitter-bootstrap-rails-confirm'
 gem 'js_cookie_rails'
 
 # Outdated browser warnings
-gem 'outdatedbrowser_rails'
+#gem 'outdatedbrowser_rails', '~> 1.1.4'
 
 # Codemirror for syntax highlighting
 gem 'codemirror-rails'
@@ -157,13 +155,16 @@ gem 'koala'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug', platform: :mri
+end
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Entity-Relationship Diagrams.
   gem 'rails-erd'
