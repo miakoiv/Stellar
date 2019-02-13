@@ -13,7 +13,7 @@ class OrderReportRow < ApplicationRecord
   belongs_to :order_type
   belongs_to :product
   belongs_to :user
-  belongs_to :store_portal, class_name: 'Store'
+  belongs_to :store_portal, class_name: 'Store', optional: true
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
 
   #---

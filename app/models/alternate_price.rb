@@ -6,7 +6,7 @@ class AlternatePrice < ApplicationRecord
 
   #---
   belongs_to :product, touch: true
-  belongs_to :group, required: true
+  belongs_to :group
 
   #---
   def self.for(group)

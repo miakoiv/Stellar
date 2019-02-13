@@ -29,8 +29,8 @@ class User < ApplicationRecord
   has_many :order_types, -> { joins(:source) }, through: :orders
 
   # Preset shipping and billing addresses have country associations.
-  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
-  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
+  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code, optional: true
+  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code, optional: true
 
   has_many :performed_activities, class_name: 'Activity', foreign_key: :user_id
 

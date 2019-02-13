@@ -11,12 +11,12 @@ class OrderItem < ApplicationRecord
   delegate :inventory, :includes_tax?, :track_shipments?, :approved?, :concluded?, to: :order
 
   has_many :transfer_items
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :live?, :real?, :internal?, :package?, :tangible?, :back_orderable?, to: :product
 
   # Order items may have subitems that update with their parent, and are not
   # directly updatable or removable.
-  belongs_to :parent_item, class_name: 'OrderItem'
+  belongs_to :parent_item, class_name: 'OrderItem', optional: true
   has_many :subitems, class_name: 'OrderItem', foreign_key: :parent_item_id,
     dependent: :destroy
 

@@ -11,9 +11,9 @@ class TransferItem < ApplicationRecord
   delegate :complete?, :source, :destination, to: :transfer
 
   # Transfer items may reference an order item they were created for.
-  belongs_to :order_item
+  belongs_to :order_item, optional: true
 
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 

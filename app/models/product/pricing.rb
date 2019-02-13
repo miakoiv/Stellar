@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   monetize :retail_price_cents, allow_nil: true
 
   # Products must have a tax category
-  belongs_to :tax_category, required: true
+  belongs_to :tax_category
 
   # Alternate prices for different groups.
   has_many :alternate_prices, dependent: :destroy

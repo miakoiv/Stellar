@@ -6,7 +6,7 @@ class InventoryCheck < ApplicationRecord
 
   #---
   belongs_to :store
-  belongs_to :inventory, required: true
+  belongs_to :inventory
 
   # This association has an extension to merge a new inventory check item
   # with an existing similar item, because the item needs to be built first

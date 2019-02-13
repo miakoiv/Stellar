@@ -10,7 +10,7 @@ class Property < ApplicationRecord
 
   #---
   belongs_to :store
-  belongs_to :measurement_unit
+  belongs_to :measurement_unit, optional: true
   has_many :product_properties, dependent: :destroy
   has_many :products, through: :product_properties
 

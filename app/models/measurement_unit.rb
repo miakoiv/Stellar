@@ -1,6 +1,6 @@
 class MeasurementUnit < ApplicationRecord
 
-  belongs_to :base_unit, class_name: 'MeasurementUnit'
+  belongs_to :base_unit, class_name: 'MeasurementUnit', optional: true
 
   #---
   def factor

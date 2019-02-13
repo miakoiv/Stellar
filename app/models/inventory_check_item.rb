@@ -10,10 +10,10 @@ class InventoryCheckItem < ApplicationRecord
   # Inventory check items have a product association and
   # attributes for lot code, expiration, and current amount,
   # but may be associated with a matching inventory item.
-  belongs_to :inventory_item
+  belongs_to :inventory_item, optional: true
   delegate :on_hand, to: :inventory_item
 
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 

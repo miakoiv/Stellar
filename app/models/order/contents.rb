@@ -5,7 +5,7 @@ class Order < ApplicationRecord
 
   # The inventory this order ships from by default.
   # If nil, the store doesn't keep stock.
-  belongs_to :inventory
+  belongs_to :inventory, optional: true
 
   # Inserts amount of product to this order in the context of given
   # group. Options may include a parent item for grouping the order items,

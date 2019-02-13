@@ -14,7 +14,7 @@ class Hostname < ApplicationRecord
   belongs_to :store
 
   # Parent hostname provides domain/subdomains associations.
-  belongs_to :domain_hostname, class_name: 'Hostname', foreign_key: :parent_hostname_id
+  belongs_to :domain_hostname, class_name: 'Hostname', foreign_key: :parent_hostname_id, optional: true
   has_many :subdomain_hostnames, class_name: 'Hostname', foreign_key: :parent_hostname_id
 
 

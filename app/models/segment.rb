@@ -102,7 +102,7 @@ class Segment < ApplicationRecord
 
   #---
   belongs_to :column, touch: true
-  belongs_to :resource, polymorphic: true
+  belongs_to :resource, polymorphic: true, optional: true
 
   accepts_nested_attributes_for :pictures
 

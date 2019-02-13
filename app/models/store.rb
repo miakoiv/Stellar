@@ -94,7 +94,7 @@ class Store < ApplicationRecord
   has_one :footer, -> { merge(Page.footer) }, class_name: 'Page'
 
   # User supplied footer page, if any.
-  belongs_to :footer_page, class_name: 'Page'
+  belongs_to :footer_page, class_name: 'Page', optional: true
 
   # Pages intended for portals.
   has_many :portal_pages, -> { merge(Page.portal).merge(Page.live) }, class_name: 'Page'
@@ -116,7 +116,6 @@ class Store < ApplicationRecord
 
   #---
   validates :name, presence: true
-  validates :country, presence: true
   validates :erp_number, numericality: true, allow_blank: true
 
   #---

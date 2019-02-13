@@ -13,7 +13,7 @@ class PromotedItem < ApplicationRecord
   belongs_to :promotion, touch: true
   delegate :group, :first_date, :last_date, to: :promotion
 
-  belongs_to :product, required: true
+  belongs_to :product
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 

@@ -5,7 +5,7 @@ class Policy < ApplicationRecord
 
   #---
   belongs_to :store
-  belongs_to :accepted_by, class_name: 'User'
+  belongs_to :accepted_by, class_name: 'User', optional: true
 
   default_scope { order(created_at: :asc) }
   scope :pending, -> { where(mandatory: true, accepted_at: nil) }

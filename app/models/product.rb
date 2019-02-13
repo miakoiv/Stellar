@@ -48,7 +48,7 @@ class Product < ApplicationRecord
   belongs_to :store
 
   # A product may belong to a specific vendor group who's responsible for it.
-  belongs_to :vendor, class_name: 'Group'
+  belongs_to :vendor, class_name: 'Group', optional: true
 
   has_and_belongs_to_many :categories, after_add: :associations_changed, after_remove: :associations_changed
 
@@ -60,9 +60,9 @@ class Product < ApplicationRecord
 
   # Products may form master-variant relationships, and any change will
   # trigger a live status update.
-  belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true, counter_cache: :variants_count
+  belongs_to :master_product, class_name: 'Product', inverse_of: :variants, touch: true, counter_cache: :variants_count, optional: true
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, counter_cache: :variants_count, after_add: :associations_changed, after_remove: :associations_changed
-  belongs_to :primary_variant, class_name: 'Product'
+  belongs_to :primary_variant, class_name: 'Product', optional: true
 
   has_many :order_items
   has_many :component_entries, dependent: :destroy

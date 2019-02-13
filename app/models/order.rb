@@ -9,14 +9,14 @@ class Order < ApplicationRecord
   # Store is the current store, store portal is an optional store id
   # for the portal store the originating hostname points to.
   belongs_to :store
-  belongs_to :store_portal, class_name: 'Store'
+  belongs_to :store_portal, class_name: 'Store', optional: true
 
   # User created the order, and is usually the customer too.
   belongs_to :user
   belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
   accepts_nested_attributes_for :customer
 
-  belongs_to :order_type
+  belongs_to :order_type, optional: true
   delegate :payment_gateway_class, to: :order_type
 
   # Locked promotions that have been activated on the order.

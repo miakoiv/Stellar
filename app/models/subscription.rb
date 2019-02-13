@@ -7,10 +7,10 @@ class Subscription < ApplicationRecord
 
   #---
   # Store subscribing to the Stripe plan.
-  belongs_to :store, required: true
+  belongs_to :store
 
   # Associated customer (user).
-  belongs_to :customer, class_name: 'User', required: true
+  belongs_to :customer, class_name: 'User'
 
   default_scope { order(created_at: :desc) }
   scope :running, -> { where.not(status: 2)}

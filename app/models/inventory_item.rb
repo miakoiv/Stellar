@@ -7,7 +7,7 @@ class InventoryItem < ApplicationRecord
   monetize :total_value_cents, disable_validation: true
 
   #---
-  belongs_to :inventory, required: true
+  belongs_to :inventory
   belongs_to :product, touch: true
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true

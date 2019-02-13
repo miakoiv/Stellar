@@ -18,9 +18,6 @@ class Picture < ApplicationRecord
   default_scope { sorted }
 
   #---
-  validates :image, presence: true
-
-  #---
   before_validation :assign_purpose
 
   #---

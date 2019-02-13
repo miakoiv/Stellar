@@ -35,7 +35,7 @@ class Group < ApplicationRecord
   has_many :promotions
 
   # Reference to another group with premium features and/or better prices.
-  belongs_to :premium_group, class_name: 'Group'
+  belongs_to :premium_group, class_name: 'Group', optional: true
 
   has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
 

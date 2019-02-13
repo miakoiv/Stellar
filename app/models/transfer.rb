@@ -9,11 +9,11 @@ class Transfer < ApplicationRecord
 
   # Transfers happen from source to destination, either of which may be nil
   # for a one-sided transfer (from purchases/orders).
-  belongs_to :source, class_name: 'Inventory'
-  belongs_to :destination, class_name: 'Inventory'
+  belongs_to :source, class_name: 'Inventory', optional: true
+  belongs_to :destination, class_name: 'Inventory', optional: true
 
   # If a shipment is associated, this transfer is for its stock changes.
-  belongs_to :shipment
+  belongs_to :shipment, optional: true
 
   # This association has an extension to merge a new transfer item with
   # an existing similar item, because the item needs to be built first
