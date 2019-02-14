@@ -29,9 +29,9 @@ class Promotion < ApplicationRecord
 
   # Having an activation code means the promotion is locked.
   scope :locked, -> { where.not(activation_code: nil) }
-  scope :open, -> { where(activation_code: nil) }
+  scope :unlocked, -> { where(activation_code: nil) }
 
-  scope :active, -> { live.open }
+  scope :active, -> { live.unlocked }
 
   #---
   validates :name, presence: true
@@ -117,7 +117,6 @@ class Promotion < ApplicationRecord
             (last_date.nil? || !last_date.past?)
     )
     touch
-    true
   end
 
   def touch_products
