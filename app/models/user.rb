@@ -20,7 +20,7 @@ class User < ApplicationRecord
   # Users (customers) collect assets by ordering products.
   has_many :customer_assets, dependent: :destroy
 
-  has_and_belongs_to_many :favorite_products, -> { uniq }, class_name: 'Product'
+  has_and_belongs_to_many :favorite_products, -> { distinct }, class_name: 'Product'
 
   has_many :orders, dependent: :destroy
   has_many :customer_orders, class_name: 'Order', foreign_key: :customer_id, inverse_of: :customer
@@ -78,7 +78,7 @@ class User < ApplicationRecord
 
   # Order types seen in the user's set of completed orders.
   def existing_order_types(store)
-    order_types.merge(Order.complete).where(orders: {store: store}).uniq
+    order_types.merge(Order.complete).where(orders: {store: store}).distinct
   end
 
   # Roles that a user manager may grant to other users. The superuser
