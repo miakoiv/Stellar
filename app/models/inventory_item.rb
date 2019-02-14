@@ -74,7 +74,7 @@ class InventoryItem < ApplicationRecord
     # Value is calculated from on hand inventory, using a weighted average
     # of values given in the entries.
     def update_counts_and_value!
-      entries = inventory_entries(true)
+      entries = inventory_entries.reload
       total_on_hand = entries.sum(:on_hand)
       total_reserved = entries.sum(:reserved)
       total_pending = entries.sum(:pending)

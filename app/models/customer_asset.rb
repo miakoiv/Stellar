@@ -54,7 +54,7 @@ class CustomerAsset < ApplicationRecord
 
   private
     def update_amount_and_value
-      entries = asset_entries(true)
+      entries = asset_entries.reload
       update(
         amount: entries.sum(:amount),
         value: entries.map(&:total_value).sum
