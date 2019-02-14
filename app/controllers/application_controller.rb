@@ -26,15 +26,18 @@ class ApplicationController < ActionController::Base
   # to prevent params from propagating to another user if logged
   # on from the same client.
   def saved_search_query(search_model, query_key)
-    param = "#{search_model}_search"
+    param_name = "#{search_model}_search"
     cookie_key = "#{query_key}_#{current_user.id}"
-    if params[param]
-      cookies[cookie_key] = {
-        value: params[param].to_json,
+    value = params.fetch(param_name, {})
+    if value.empty?
+      ActionController::Parameters.new(cookies.signed[cookie_key] || {})
+    else
+      cookies.signed[cookie_key] = {
+        value: value,
         expires: 2.weeks.from_now
       }
+      value
     end
-    params[param].presence || JSON.load(cookies[cookie_key]) || {}
   end
 
   # No current store. BaseStoreController overrides this.
