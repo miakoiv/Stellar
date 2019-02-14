@@ -117,10 +117,10 @@ class Admin::ReportsController < AdminController
 
     # Params specific to the inherent controls tabular provides.
     def tabular_params
-      sort = params[:sort].presence || {name: 'product_title', dir: 'asc'}
-      search = params[:q]
+      sort_params = params.fetch(:sort) {{name: 'product_title', dir: 'asc'}}
+      search = params.fetch(:q, nil)
       {
-        sort: "#{sort[:name]} #{sort[:dir]}",
+        sort: "#{sort_params[:name]} #{sort_params[:dir]}",
         keyword: search
       }
     end
