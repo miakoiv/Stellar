@@ -60,8 +60,8 @@ class Store < ApplicationRecord
   has_many :domain_hostnames, through: :hostnames
   has_many :subdomain_hostnames, through: :hostnames
 
-  has_many :store_portals, -> {distinct}, through: :domain_hostnames, source: :store
-  has_many :member_stores, -> {distinct}, through: :subdomain_hostnames, source: :store
+  has_many :store_portals, -> { distinct.reorder(:name) }, through: :domain_hostnames, source: :store
+  has_many :member_stores, -> { distinct.reorder(:name) }, through: :subdomain_hostnames, source: :store
 
   # All these associations are dependent of the store.
   with_options dependent: :destroy do |store|
