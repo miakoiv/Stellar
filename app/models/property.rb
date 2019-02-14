@@ -39,7 +39,11 @@ class Property < ApplicationRecord
   end
 
   def value_counts
-    product_properties.reorder(sort_attribute).group(:value).count
+    product_properties
+      .reorder(sort_attribute)
+      .select(sort_attribute)
+      .group(sort_attribute)
+      .count
   end
 
   def value_type_name
