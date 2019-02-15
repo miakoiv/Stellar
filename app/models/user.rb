@@ -36,8 +36,8 @@ class User < ApplicationRecord
 
   default_scope { order(:name) }
 
-  scope :with_assets, -> { joins(:customer_assets).distinct }
-  scope :with_activities, -> { joins(:performed_activities).distinct }
+  scope :with_assets, -> { joins(:customer_assets).reorder(:name).distinct }
+  scope :with_activities, -> { joins(:performed_activities).reorder(:name).distinct }
 
   #---
   validates :email, presence: true, uniqueness: true
