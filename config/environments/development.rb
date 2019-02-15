@@ -72,6 +72,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # Whitelist our local IP address block to the web console.
+  config.web_console.whitelisted_ips = '10.2.0.0/16'
+
   # API configuration.
   config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://apitest.pakettikauppa.fi/'
