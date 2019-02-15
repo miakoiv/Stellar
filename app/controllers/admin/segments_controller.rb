@@ -123,7 +123,7 @@ class Admin::SegmentsController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def segment_params
-      params.fetch(:segment) {{}}.permit(
+      params.fetch(:segment, {}).permit(
         :resource_id, :resource_type,
         :template, :alignment, :justification,
         :shape, :inset, :foreground_color, :background_color,
