@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190124133303) do
+ActiveRecord::Schema.define(version: 20190215122741) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci" do |t|
     t.integer  "store_id",                    null: false
@@ -418,7 +418,7 @@ ActiveRecord::Schema.define(version: 20190124133303) do
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci" do |t|
     t.integer  "store_id",                                            null: false
     t.integer  "store_portal_id"
-    t.integer  "order_items_count"
+    t.integer  "order_items_count",                   default: 0,     null: false
     t.string   "number"
     t.string   "external_number"
     t.string   "vat_number"
