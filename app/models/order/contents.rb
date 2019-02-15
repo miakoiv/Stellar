@@ -104,7 +104,7 @@ class Order < ApplicationRecord
   # A single item that requires shipping will demand shipping
   # for the whole order. Returns nil for not applicable (no items).
   def requires_shipping?
-    return nil unless order_items.any?
+    return nil if order_items.none?
     order_items.tangible.any?
   end
 
