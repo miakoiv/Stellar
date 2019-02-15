@@ -17,10 +17,6 @@ class OrderType < ApplicationRecord
   has_many :orders, dependent: :destroy
 
   scope :has_shipping, -> { where(has_shipping: true) }
-  scope :available_for, -> (group) {
-    where(arel_table[:source_id].eq(group)
-      .or(arel_table[:destination_id].eq(group)))
-  }
 
   #---
   def payment_gateway_class
