@@ -34,12 +34,7 @@ class Role < ApplicationRecord
 
   default_scope { order(:name) }
   scope :at, -> (store) {
-    where(
-      arel_table[:resource_type].eq(:store)
-        .and(arel_table[:resource_id].eq(store))
-      .or(arel_table[:resource_type].eq(nil)
-        .and(arel_table[:resource_id].eq(nil)))
-    )
+    where(resource: store).or(where(resource: nil))
   }
 
   #---

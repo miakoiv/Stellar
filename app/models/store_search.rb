@@ -18,11 +18,10 @@ class StoreSearch < Searchlight::Search
   end
 
   def search_domain
-    hostname = Hostname.arel_table
-    query.joins(:hostnames).where(
-      hostname[:id].in(domain).or(
-        hostname[:parent_hostname_id].in(domain)
+    query.joins(:hostnames).where(hostnames: {id: domain})
+      .or(
+        query.joins(:hostnames).where(hostnames: {parent_hostname_id: domain})
       )
-    ).distinct
+      .distinct
   end
 end
