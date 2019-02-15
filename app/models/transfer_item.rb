@@ -66,6 +66,5 @@ class TransferItem < ApplicationRecord
       if lot_code.blank? && serial.present?
         self[:lot_code] = serial
       end
-      true
     end
 end

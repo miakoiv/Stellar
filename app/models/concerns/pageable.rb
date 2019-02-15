@@ -21,6 +21,5 @@ module Pageable
       if page.present? && respond_to?(:live) && !live?
         page.update(live: false)
       end
-      true
     end
 end

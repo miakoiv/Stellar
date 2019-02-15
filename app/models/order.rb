@@ -310,7 +310,6 @@ class Order < ApplicationRecord
         end
       end
       create_initial_transfer! if track_shipments?
-      true
     end
 
     # Concluding an order creates asset entries for it.
@@ -321,7 +320,6 @@ class Order < ApplicationRecord
       email(:shipment, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
       OrderReportRow.create_from(self)
       CustomerAsset.create_from(self)
-      true
     end
 
     # Cancelling an order rolls back any changes made earlier by
@@ -341,7 +339,6 @@ class Order < ApplicationRecord
           shipment.cancel!
         end
       end
-      true
     end
 
     # Perform XML export if specified by order type, and

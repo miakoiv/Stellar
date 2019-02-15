@@ -298,7 +298,6 @@ class Store < ApplicationRecord
         reload
         Styles::Generator.new(theme, style).compile
       end
-      true
     end
 
     def assign_slug

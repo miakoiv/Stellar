@@ -88,7 +88,7 @@ class InventoryCheckItem < ApplicationRecord
       if lot_code.blank? && serial.present?
         self[:lot_code] = serial
       end
-      true
+      self
     end
 
     # Existing, matching inventory item is associated after validation,
