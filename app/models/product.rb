@@ -352,7 +352,7 @@ class Product < ApplicationRecord
   end
 
   def should_generate_new_friendly_id?
-    (title_changed? || subtitle_changed? || code_changed?) || super
+    (will_save_change_to_title? || will_save_change_to_subtitle? || will_save_change_to_code?) || super
   end
 
   def with_requisite_products

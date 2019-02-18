@@ -64,7 +64,7 @@ class Category < ApplicationRecord
   end
 
   def should_generate_new_friendly_id?
-    name_changed? || super
+    will_save_change_to_name? || super
   end
 
   def description

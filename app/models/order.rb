@@ -78,13 +78,16 @@ class Order < ApplicationRecord
 
   #---
   # Approve the order when approved_at first gets a value.
-  after_save :approve!, if: -> (order) { order.approved_at_changed?(from: nil) }
+  after_save :approve!,
+    if: -> (order) { order.saved_change_to_approved_at?(from: nil) }
 
   # Conclude the order when concluded_at first gets a value.
-  after_save :conclude!, if: -> (order) { order.concluded_at_changed?(from: nil) }
+  after_save :conclude!,
+    if: -> (order) { order.saved_change_to_concluded_at?(from: nil) }
 
   # Cancel the order when cancelled_at first gets a value.
-  after_save :cancel!, if: -> (order) { order.cancelled_at_changed?(from: nil) }
+  after_save :cancel!,
+    if: -> (order) { order.saved_change_to_cancelled_at?(from: nil) }
 
   #---
   # Statuses that can be queried against.

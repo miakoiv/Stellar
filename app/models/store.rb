@@ -45,7 +45,8 @@ class Store < ApplicationRecord
   after_create :assign_slug
   after_create :create_guest_group
   after_create :create_header_and_footer
-  after_save :reapply_style, if: -> (store) { store.theme_changed? }
+  after_save :reapply_style,
+    if: -> (store) { store.saved_change_to_theme? }
 
   #---
   # Default group for users if not otherwise specified, guests especially.

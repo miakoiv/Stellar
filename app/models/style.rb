@@ -46,7 +46,8 @@ class Style < ApplicationRecord
   do_not_validate_attachment_file_type :stylesheet
 
   before_post_process -> { false }
-  after_save :generate_stylesheet, if: -> (style) { style.preamble_changed? || style.variables_changed? }
+  after_save :generate_stylesheet,
+    if: -> (style) { style.saved_change_to_preamble? || style.saved_change_to_variables? }
 
   #---
   belongs_to :store

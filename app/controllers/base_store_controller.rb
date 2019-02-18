@@ -166,7 +166,7 @@ class BaseStoreController < ApplicationController
   # Options may be supplied to override the recorded action and/or differences.
   def track(resource, context = nil, options = {})
     action = options[:action] || action_name
-    differences = options[:differences].presence || resource.previous_changes
+    differences = options[:differences].presence || resource.saved_changes
       .except('body', 'encrypted_password', 'created_at', 'updated_at')
       .reject { |_, value| value.reject(&:blank?).empty? }
 

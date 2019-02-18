@@ -42,12 +42,12 @@ class PromotedItem < ApplicationRecord
   # Skip if promotion doesn't have editable prices.
   def should_calculate_price
     return false unless promotion.editable_prices?
-    discount_percent_changed? && !calculated && base_price.present?
+    will_save_change_to_discount_percent? && !calculated && base_price.present?
   end
 
   def should_calculate_discount
     return false unless promotion.editable_prices?
-    price_cents_changed? && !calculated && base_price.present?
+    will_save_change_to_price_cents? && !calculated && base_price.present?
   end
 
   # The calculations set a flag to prevent before_validation hooks from
