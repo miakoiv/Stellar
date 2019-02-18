@@ -133,7 +133,7 @@ gem 'codemirror-rails'
 gem 'stickykit-rails'
 
 #  Making HTML emails comfortable for the Rails rockstars
-gem 'roadie-rails'
+gem 'roadie-rails', '~> 1.3.0'
 
 # Facebook integration
 gem 'koala'
