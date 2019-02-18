@@ -168,7 +168,7 @@ en:
           text: text
           picture: picture
           gallery: gallery
-          map: map
+          google_map: Google map
           video_player: video
           documentation: documentation
           media: picture with text

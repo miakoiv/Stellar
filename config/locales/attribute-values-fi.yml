@@ -168,7 +168,7 @@ fi:
           text: teksti
           picture: kuva
           gallery: galleria
-          map: kartta
+          google_map: Google-kartta
           video_player: video
           documentation: dokumentointi
           media: kuvitettu teksti

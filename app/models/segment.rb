@@ -4,7 +4,7 @@ class Segment < ApplicationRecord
     :header,          # headline for category, department segments, etc.
     :subhead,         # subhead to the headline
     :url,             # url to external resource, such as video
-    :min_height,      # min height for maps and empty segments
+    :min_height,      # min height for google maps and empty segments
     :grid_columns,    # column count for grid views like galleries
     :grid_lines,      # enable grid lines between grid elements
     :grid_disable_xs, # disable grid layout on extra small viewports
@@ -89,7 +89,7 @@ class Segment < ApplicationRecord
     promotion: 13,
     department: 14,
     feature: 20,
-    map: 4,
+    google_map: 4,
     video_player: 5,
     documentation: 6,
     facebook_feed: 30,
@@ -196,7 +196,7 @@ class Segment < ApplicationRecord
   end
 
   def has_min_height?
-    empty? || map?
+    empty? || google_map?
   end
 
   def fixed_ratio?

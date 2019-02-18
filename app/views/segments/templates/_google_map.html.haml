@@ -1,16 +1,16 @@
-- has_map = map.map_location.present?
+- has_map = google_map.map_location.present?
 
-- cache [:segment_map, map] do
-  .segment-content.map{id: dom_id(map, :content), style: map.style(:minHeight)}
+- cache [:segment_map, google_map] do
+  .segment-content.map{id: dom_id(google_map, :content), style: google_map.style(:minHeight)}
     - if has_map
-      .map-container{data: {location: map.map_location, marker: map.map_marker?, zoom: map.map_zoom || 10, theme: map.map_theme}, style: map.style(:minHeight)}
+      .map-container{data: {location: google_map.map_location, marker: google_map.map_marker?, zoom: google_map.map_zoom || 10, theme: google_map.map_theme}, style: google_map.style(:minHeight)}
     - else
-      = segment_placeholder(map)
+      = segment_placeholder(google_map)
 
   - if has_map
     :coffee
       jQuery ->
-        $map = $('##{dom_id(map, :content)}').find '.map-container'
+        $map = $('##{dom_id(google_map, :content)}').find '.map-container'
         options =
           zoom: $map.data 'zoom'
           disableDefaultUI: true
