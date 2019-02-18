@@ -1,5 +1,5 @@
 - resource = promotion.resource
-- max_items = promotion.max_items.presence
+- max_items = promotion.max_items.presence && promotion.max_items.to_i
 - products = resource.is_a?(Promotion) && resource.products.live.sorted(promotion.product_scope.presence)
 - swiper = promotion.grid_columns == '1'
 

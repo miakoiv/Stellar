@@ -1,5 +1,5 @@
 - resource = category.resource
-- max_items = category.max_items.presence
+- max_items = category.max_items.presence && category.max_items.to_i
 - products = resource.is_a?(Category) && resource.products.visible.sorted(category.product_scope.presence)
 - swiper = category.grid_columns == '1'
 
