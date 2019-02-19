@@ -194,8 +194,8 @@ class Product < ApplicationRecord
         product.restock!(inventory, code, nil, amount)
       end
       product
-    rescue
-      nil
+    rescue StandardError => e
+      logger.warn e.message
     end
   end
 
