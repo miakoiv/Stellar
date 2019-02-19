@@ -13,8 +13,7 @@ class Pos::ProductsController < ApplicationController
   # GET /pos/products/query.json?q=keyword
   # This method serves selectize widgets populated via Ajax.
   def query
-    query = {'keyword' => params[:q], 'having_variants' => params[:having_variants], live: true}.merge(params)
-    @search = ProductSearch.new(query.merge(search_params))
+    @search = ProductSearch.new(query_params)
     @products = @search.results
   end
 
@@ -24,11 +23,18 @@ class Pos::ProductsController < ApplicationController
       @product = current_store.products.friendly.find(params[:id])
     end
 
-    # Restrict searching to products in current store.
-    def search_params
-      {store: current_store}.tap do |params|
-        params.merge!(vendor_id: current_group) if third_party?
-        params.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
+    def query_params
+      params.permit(
+        :q, {purposes: []}, {inventories: []}, {exclusions: []},
+        :having_variants
+      ).merge(search_constrains).merge(live: true)
+    end
+
+    # Impose search constrains from current store and group.
+    def search_constrains
+      {store: current_store}.tap do |c|
+        c.merge!(vendor_id: current_group) if third_party?
+        c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       end
     end
 end
