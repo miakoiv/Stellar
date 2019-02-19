@@ -25,8 +25,7 @@ class Admin::ProductsController < AdminController
   # This method serves selectize widgets populated via Ajax.
   def query
     authorize_action_for Product, at: current_store
-    query = {'keyword' => params[:q], live: true}.merge(params)
-    @search = ProductSearch.new(query.merge(search_params))
+    @search = ProductSearch.new(query_params)
     @products = @search.results
   end
 
@@ -199,11 +198,25 @@ class Admin::ProductsController < AdminController
       )
     end
 
-    # Restrict searching to products in current store.
     def search_params
-      {store: current_store}.tap do |params|
-        params.merge!(vendor_id: current_group) if third_party?
-        params.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
+      params.fetch(:product_search, {}).permit(
+        :keyword, {purposes: []}, {categories: []}, {tags: []},
+        :live, :illustrated, :described
+      ).merge(search_constrains)
+    end
+
+    def query_params
+      params.permit(
+        :q, {purposes: []}, {inventories: []}, {exclusions: []},
+        :having_variants
+      ).merge(live: true)
+    end
+
+    # Impose search constrains from current store and group.
+    def search_constrains
+      constrains = {store: current_store}.tap do |c|
+        c.merge!(vendor_id: current_group) if third_party?
+        c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       end
     end
 end
