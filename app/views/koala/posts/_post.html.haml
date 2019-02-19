@@ -3,6 +3,7 @@
     .header
       = link_to icon('facebook-official', class: 'fa-lg'), post.link, target: '_blank'
       %span.timestamp= l(post.created_at, format: :long)
-    .picture= image_tag post.picture
+    - if post.picture.present?
+      .picture= image_tag post.picture
     .body
       %p= auto_link post.message, html: {target: '_blank'}
