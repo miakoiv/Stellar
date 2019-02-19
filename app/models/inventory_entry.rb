@@ -11,7 +11,7 @@ class InventoryEntry < ApplicationRecord
 
   # The source can be any object that's responsible for the existence
   # of this particular entry.
-  belongs_to :source, polymorphic: true
+  belongs_to :source, polymorphic: true, optional: true
 
   default_scope { order(recorded_at: :desc, created_at: :desc) }
 
