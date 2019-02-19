@@ -15,7 +15,7 @@ class OrdersController < BaseStoreController
   # GET /orders
   def index
     query = saved_search_query('order', 'order_search')
-    @search = OrderSearch.new(query.merge(search_params))
+    @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results.complete
     @orders = results.page(params[:page])
     @timeline_orders = []
@@ -229,10 +229,7 @@ class OrdersController < BaseStoreController
     end
 
     # The search is limited to the current user's personal history.
-    def search_params
-      {
-        store: current_store,
-        user_id: current_user.id
-      }
+    def search_constrains
+      {store: current_store, user_id: current_user.id}
     end
 end

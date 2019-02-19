@@ -9,7 +9,7 @@ class Admin::OrdersController < AdminController
   def index
     authorize_action_for Order, at: current_store
     query = saved_search_query('order', 'admin_order_search')
-    @search = OrderSearch.new(query.merge(search_params))
+    @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results
     @orders = results.page(params[:page])
   end
@@ -25,7 +25,7 @@ class Admin::OrdersController < AdminController
     @customers = user_search(@order_types.map(&:source))
     query = saved_search_query('order', 'incoming_admin_order_search')
     query.reverse_merge!('order_type' => @order_types.first)
-    @search = OrderSearch.new(query.merge(search_params))
+    @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results
     @orders = results.page(params[:page])
   end
@@ -41,7 +41,7 @@ class Admin::OrdersController < AdminController
     @customers = user_search(@order_types.map(&:destination))
     query = saved_search_query('order', 'outgoing_admin_order_search')
     query.reverse_merge!('order_type' => @order_types.first)
-    @search = OrderSearch.new(query.merge(search_params))
+    @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results
     @orders = results.page(params[:page])
   end
@@ -247,9 +247,7 @@ class Admin::OrdersController < AdminController
     end
 
     # Limit the search to orders in current store.
-    def search_params
-      {
-        store: current_store
-      }
+    def search_constrains
+      {store: current_store}
     end
 end

@@ -8,7 +8,7 @@ class Admin::TransfersController < AdminController
   def index
     authorize_action_for Transfer, at: current_store
     query = saved_search_query('transfer', 'admin_transfer_search')
-    @search = TransferSearch.new(query.merge(search_params))
+    @search = TransferSearch.new(query.merge(search_constrains))
     results = @search.results
     @transfers = results.page(params[:page])
   end
@@ -108,9 +108,7 @@ class Admin::TransfersController < AdminController
       )
     end
 
-    def search_params
-      {
-        store: current_store
-      }
+    def search_constrains
+      {store: current_store}
     end
 end

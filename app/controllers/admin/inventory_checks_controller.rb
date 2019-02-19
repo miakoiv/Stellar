@@ -8,7 +8,7 @@ class Admin::InventoryChecksController < AdminController
   def index
     authorize_action_for InventoryCheck, at: current_store
     query = saved_search_query('inventory_check', 'admin_inventory_check_search')
-    @search = InventoryCheckSearch.new(query.merge(search_params))
+    @search = InventoryCheckSearch.new(query.merge(search_constrains))
     results = @search.results
     @inventory_checks = results.page(params[:page])
   end
@@ -124,9 +124,7 @@ class Admin::InventoryChecksController < AdminController
       )
     end
 
-    def search_params
-      {
-        store: current_store
-      }
+    def search_constrains
+      {store: current_store}
     end
 end

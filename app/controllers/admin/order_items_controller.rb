@@ -9,7 +9,7 @@ class Admin::OrderItemsController < AdminController
     order_types = current_group.incoming_order_types
     query = saved_search_query('order_item', 'admin_order_item_search')
     query.merge!('order_type' => order_types)
-    @search = OrderItemSearch.new(query.merge(search_params))
+    @search = OrderItemSearch.new(query.merge(search_constrains))
     results = @search.results.pending
     @order_items = results.page(params[:page])
     @customers = UserSearch.new(
@@ -84,11 +84,8 @@ class Admin::OrderItemsController < AdminController
       )
     end
 
-    def search_params
-      {
-        store: current_store,
-        all_time: true
-      }
+    def search_constrains
+      {store: current_store, all_time: true}
     end
 
     # Use lot code if found, serial otherwise.

@@ -10,7 +10,7 @@ class Admin::UsersController < AdminController
   def index
     authorize_action_for User, at: current_store
     query = saved_search_query('user', 'admin_user_search')
-    @search = UserSearch.new(query.merge(search_params))
+    @search = UserSearch.new(query.merge(search_constrains))
     @users = @search.results.page(params[:page])
   end
 
@@ -124,9 +124,7 @@ class Admin::UsersController < AdminController
     end
 
     # Restrict searching to users in selected group.
-    def search_params
-      {
-        group: @group
-      }
+    def search_constrains
+      {group: @group}
     end
 end

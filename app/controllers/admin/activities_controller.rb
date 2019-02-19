@@ -7,7 +7,7 @@ class Admin::ActivitiesController < AdminController
   def index
     authorize_action_for Activity, at: current_store
     query = saved_search_query('activity', 'admin_activity_search')
-    @search = ActivitySearch.new(query.merge(search_params))
+    @search = ActivitySearch.new(query.merge(search_constrains))
     @activities = @search.results.page(params[:page])
   end
 
@@ -32,9 +32,7 @@ class Admin::ActivitiesController < AdminController
     end
 
     # Restrict searching to activities in current store.
-    def search_params
-      {
-        store: current_store
-      }
+    def search_constrains
+      {store: current_store}
     end
 end
