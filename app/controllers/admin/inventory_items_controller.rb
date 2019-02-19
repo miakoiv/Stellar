@@ -11,7 +11,7 @@ class Admin::InventoryItemsController < AdminController
     query = saved_search_query('inventory_item', 'admin_inventory_item_search')
     @search = InventoryItemSearch.new(query.merge(search_constrains))
     results = @search.results.reorder(nil)
-      .merge(Product.alphabetical).order(:code)
+      .merge(Product.alphabetical)
     @inventory_items = results.by_product.page(params[:page])
     @products = current_store.products
       .find((query['product_id'] || []).reject(&:blank?))
@@ -22,7 +22,7 @@ class Admin::InventoryItemsController < AdminController
     authorize_action_for InventoryItem, at: current_store
     @product = current_store.products.find(params[:product_id])
     query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(query.merge(search_constrains).merge(params))
+    @search = InventoryItemSearch.new(query.merge(query_params))
     results = @search.results.reorder('inventories.name', 'code')
     @inventory_items = results
   end
@@ -31,9 +31,9 @@ class Admin::InventoryItemsController < AdminController
   def refresh
     @product = current_store.products.find(params[:product_id])
     query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(query.merge(search_constrains).merge(params))
+    @search = InventoryItemSearch.new(query.merge(query_params))
     results = @search.results.reorder('inventories.name', 'code')
-    @inventory_item = results.by_product.first
+    @inventory_item = results.reorder(nil).by_product.first
     @inventory_items = results
   end
 
@@ -97,6 +97,10 @@ class Admin::InventoryItemsController < AdminController
           :recorded_at, :on_hand, :reserved, :pending, :value, :note
         ]
       )
+    end
+
+    def query_params
+      params.permit(:product_id).merge(search_constrains)
     end
 
     # Restrict searching to inventories in current store.
