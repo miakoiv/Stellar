@@ -209,7 +209,7 @@ class Admin::ProductsController < AdminController
       params.permit(
         :q, {purposes: []}, {inventories: []}, {exclusions: []},
         :having_variants
-      ).merge(live: true)
+      ).merge(search_constrains).merge(live: true)
     end
 
     # Impose search constrains from current store and group.
