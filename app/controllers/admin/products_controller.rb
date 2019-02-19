@@ -214,7 +214,7 @@ class Admin::ProductsController < AdminController
 
     # Impose search constrains from current store and group.
     def search_constrains
-      constrains = {store: current_store}.tap do |c|
+      {store: current_store}.tap do |c|
         c.merge!(vendor_id: current_group) if third_party?
         c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       end
