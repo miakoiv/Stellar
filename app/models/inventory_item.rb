@@ -17,10 +17,10 @@ class InventoryItem < ApplicationRecord
 
   # The order is by expiration first with nil expiration sorted last,
   # creation date second.
-  default_scope { order('expires_at IS NULL', :expires_at, :created_at) }
+  default_scope { order(arel_table[:expires_at].eq(nil), :expires_at, :created_at) }
 
   # Inventory items are considered online if they have stock available.
-  scope :online, -> { where('on_hand - reserved > 0') }
+  scope :online, -> { where(arel_table[:on_hand].gt(arel_table[:reserved])) }
 
   scope :in, -> (inventory) { where(inventory: inventory) }
   scope :for, -> (product) { where(product: product) }
@@ -35,13 +35,13 @@ class InventoryItem < ApplicationRecord
 
   #---
   def self.by_product
-    select(
-      'inventory_items.product_id,
+    select(<<~SQL).group(:product_id)
+      inventory_items.product_id,
       SUM(on_hand) AS total_on_hand,
       SUM(reserved) AS total_reserved,
       SUM(pending) AS total_pending,
-      products.*'
-    ).group(:product_id)
+      products.*
+    SQL
   end
 
   # Options for a search form.

@@ -41,7 +41,7 @@ class InventoryItemSearch < Searchlight::Search
 
   def search_online
     return query unless checked?(online)
-    query.where('on_hand - reserved > 0')
+    query.online
   end
 
   def search_live

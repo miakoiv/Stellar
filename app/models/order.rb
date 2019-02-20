@@ -26,7 +26,9 @@ class Order < ApplicationRecord
 
   scope :at, -> (store) { where(store: store) }
   scope :for, -> (customer) { where(customer: customer) }
-  scope :targeted, -> { where('orders.user_id != orders.customer_id') }
+  scope :targeted, -> {
+    where(arel_table[:user_id].not_eq(arel_table[:customer_id]))
+  }
   scope :not_by, -> (user) { where.not(user: user) }
 
   # Current orders are completed, not yet approved orders.

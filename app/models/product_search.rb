@@ -9,16 +9,15 @@ class ProductSearch < Searchlight::Search
   def self.define_property_search_method(property)
     key = property.sluggify
     define_method("search_#{key}") do
-      query.where('EXISTS (
-        SELECT 1 FROM product_properties
-        WHERE property_id = ? AND value IN (?)
-          AND (product_id = products.id OR
-            product_id IN (
-              SELECT id FROM products p
-              WHERE p.master_product_id = products.id
-            )
-          )
-        )', property, send(key))
+      query.where(<<~SQL, property, send(key))
+        EXISTS (SELECT 1 FROM product_properties
+          WHERE property_id = ? AND value IN (?)
+            AND (product_id = products.id OR
+              product_id IN (
+                SELECT id FROM products p
+                WHERE p.master_product_id = products.id)))
+      SQL
+      logger.warn "Defined search method for #{property}"
     end
   end
 
@@ -88,19 +87,19 @@ class ProductSearch < Searchlight::Search
   def search_described
     return query if empty?(described)
     if checked?(described)
-      query.where("description != ''")
+      query.where.not(description: [nil, ''])
     else
-      query.where("description IS NULL OR description = ''")
+      query.where(description: [nil, ''])
     end
   end
 
   def search_illustrated
     return query if empty?(illustrated)
-    has_pictures = "EXISTS (
-      SELECT 1 FROM pictures
-      WHERE pictures.pictureable_type = 'Product'
-        AND pictures.pictureable_id = products.id
-      )"
+    has_pictures = <<~SQL
+      EXISTS (SELECT 1 FROM pictures
+        WHERE pictures.pictureable_type = 'Product'
+          AND pictures.pictureable_id = products.id)
+    SQL
     if checked?(illustrated)
       query.where(has_pictures)
     else
