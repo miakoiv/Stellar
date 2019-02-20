@@ -17,7 +17,7 @@
       - @activities.each do |activity|
         %tr[activity]
           %td= l(activity.created_at, format: :iso)
-          %td= bootstrap_label activity, text: activity.action
+          %td= bootstrap_label(activity, text: activity.action)
           %td= resource_link(activity)
           %td= activity.user
           %td.actions

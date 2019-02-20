@@ -10,7 +10,7 @@
         %tr[activity]{class: activity == @activity && 'active'}
           %td= link_to l(activity.created_at, format: :iso), admin_activity_path(activity)
           %td
-            = bootstrap_label activity, text: activity.action
+            = bootstrap_label(activity, text: activity.action)
             - if activity.resource != activity.context
               = resource_name(activity)
           %td= activity.user.name
