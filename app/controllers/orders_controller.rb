@@ -18,8 +18,6 @@ class OrdersController < BaseStoreController
     @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results.complete
     @orders = results.page(params[:page])
-    @timeline_orders = []
-    #@timeline_orders = results.has_shipping.topical
   end
 
   # GET /orders/1

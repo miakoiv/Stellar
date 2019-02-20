@@ -53,9 +53,6 @@ class Order < ApplicationRecord
   # Orders that are targeted and not yet completed are considered to be quotes.
   scope :quote, -> { targeted.incomplete }
 
-  # Orders not concluded or concluded recently for timeline data.
-  scope :topical, -> { where('concluded_at IS NULL OR concluded_at > ?', 2.weeks.ago) }
-
   #---
   with_options on: :update, if: :customer_required?, presence: true do |order|
     order.validates :customer

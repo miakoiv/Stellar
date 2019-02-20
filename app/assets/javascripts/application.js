@@ -38,7 +38,6 @@
 //= require selectize
 //= require unobtrusive_flash
 //= require clipboard
-//= require vis
 
 // Vendor assets
 

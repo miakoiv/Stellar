@@ -186,9 +186,6 @@ es:
     dismiss: ¡Entendido!
     more_info: Más info
   orders:
-    index:
-      timeline_header: Pedidos que requieran envío
-      timeline_help_html: Click on the timeline to activate scrolling and zooming haz click en el para activar el la rueda y el zomm.
     table:
       cancel:
         button: Cancelar

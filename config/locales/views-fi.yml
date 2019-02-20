@@ -549,9 +549,6 @@ fi:
     row:
       valid_until: voimassa %{date} asti
   orders:
-    index:
-      timeline_header: Toimitettavat tilaukset
-      timeline_help_html: Aktivoi aikajana klikkaamalla
     new:
       new_order: Uusi tilaus/tarjous
     form_for_new:

@@ -538,9 +538,6 @@ en:
     row:
       valid_until: valid until %{date}
   orders:
-    index:
-      timeline_header: Orders that require shipping
-      timeline_help_html: Click on the timeline to activate scrolling and zooming
     new:
       new_order: New order/quote
     form_for_new:
