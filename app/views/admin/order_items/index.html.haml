@@ -22,6 +22,14 @@
             .pull-right
               .label.label-primary= order_item.lot_code
           = product_header order_item
+          - if order_item.additional_info.present?
+            .additional-info
+              = order_item.product.additional_info_prompt
+              %strong= order_item.additional_info
+          - if order_item.product.shipping_notes.present?
+            .small
+              = icon('info-circle')
+              = order_item.product.shipping_notes
         %td.text-right= order_item.amount
         %td.text-right= order_item.shipped
         %td.actions
