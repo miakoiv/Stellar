@@ -557,7 +557,8 @@ en:
     show:
       duplicate: Duplicate to cart
     search:
-      order_type: Select order type
+      since_date: Since date
+      until_date: Until date
       keyword: Keyword search
     edit:
       duplicate: Duplicate to cart

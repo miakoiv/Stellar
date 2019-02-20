@@ -568,7 +568,8 @@ fi:
     show:
       duplicate: Kopioi ostoskoriin
     search:
-      order_type: Valitse tilauslaji
+      since_date: Pvm alkaen
+      until_date: Pvm päättyen
       keyword: Etsi hakusanalla
     edit:
       duplicate: Kopioi ostoskoriin

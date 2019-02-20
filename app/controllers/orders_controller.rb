@@ -26,7 +26,7 @@ class OrdersController < BaseStoreController
     authorize_action_for @order, at: current_store
     track @order
 
-    respond_to :js, :json
+    respond_to :js, :json, :html
   end
 
   # GET /orders/new
