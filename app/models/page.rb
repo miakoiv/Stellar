@@ -111,6 +111,11 @@ class Page < ApplicationRecord
     parent.present? && parent.continuous?
   end
 
+  # The first primary child page is the front page for continuous pages.
+  def front_page
+    children.live.primary.first
+  end
+
   def can_have_children?
     category? || header? || footer? || dropdown? || megamenu? || continuous?
   end
@@ -155,6 +160,7 @@ class Page < ApplicationRecord
 
   def to_s
     return human_attribute_value(:purpose) if header? || footer?
+    return front_page.title if continuous?
     title
   end
 
@@ -173,6 +179,7 @@ class Page < ApplicationRecord
   end
 
   def description
+    return front_page&.description if continuous?
     segments.reorder('sections.priority, columns.priority, segments.priority').map(&:content).join("\n")
   end
 
@@ -204,7 +211,7 @@ class Page < ApplicationRecord
     when dropdown? || megamenu?
       children.live.first.path
     when continuous?
-      show_page_path(self, trailing_slash: true, anchor: children.live.primary.first.slug)
+      show_page_path(self, trailing_slash: true, anchor: front_page.slug)
     when portal?
       resource.to_url
     when internal?
