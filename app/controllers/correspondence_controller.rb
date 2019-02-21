@@ -1,10 +1,10 @@
 class CorrespondenceController < ApplicationController
 
-  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session
 
   def mail_form
     @store = Store.find(params[:store_id])
-    @fields = params[:fields]
+    @fields = correspondence_params
 
     if @fields[:nickname].present?
       raise 'Honeypot attracted a fly. Killing it with fire.'
@@ -18,4 +18,10 @@ class CorrespondenceController < ApplicationController
 
     redirect_to root_path, notice: t('.thank_you')
   end
+
+  private
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def correspondence_params
+      params.fetch(:fields, {}).permit!
+    end
 end
