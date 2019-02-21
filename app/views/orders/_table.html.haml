@@ -19,7 +19,7 @@
           %td
             %strong= order.number
           - if current_store.b2b_sales?
-            %td= bootstrap_label(order.source)
+            %td= bootstrap_label(order.order_type.source)
           %td= order.complete? ? l(order.completed_at.to_date) : nil
           %td.no-wrap
             %strong= order.customer_name
