@@ -82,6 +82,8 @@
                 = f.text_field_without_bootstrap :dimension_w, class: 'form-control text-right'
                 %span.input-group-addon mm
             = f.text_field :lead_time, help: t('.lead_time_help_html')
+            = f.form_group do
+              = f.check_box :infinite_stock, help: t('.infinite_stock_help_html')
             = f.text_field :additional_info_prompt, help: t('.additional_info_help_html')
             ~ f.text_area :shipping_notes, rows: 2, help: t('.shipping_notes_help')
 

@@ -2,8 +2,10 @@ class Product < ApplicationRecord
 
   has_many :inventory_items, dependent: :destroy
 
-  # Stock is not tracked for virtual or internal products.
+  # Stock is not tracked for virtual or internal products,
+  # or other products with infinite stock enabled.
   def tracked_stock?
+    return false if infinite_stock?
     vanilla? || bundle? || composite? || package?
   end
 

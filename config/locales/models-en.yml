@@ -437,6 +437,7 @@ en:
         shipping_method_ids: Available shipping methods
         mass: Shipping weight
         dimensions: Shipping dimensions
+        infinite_stock: Infinite stock
         lead_time: Lead time
         out_of_stock: Sold out
         additional_info_prompt: Prompt for additional info
