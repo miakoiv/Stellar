@@ -12,13 +12,13 @@ module ApplicationHelper
     "%s%s" % [indent * level.to_i, text]
   end
 
-  def meta_tags_for(object)
-    tags = {
+  def meta_tags_for(object, options = {})
+    tags = options.reverse_merge(
       title: object.to_s,
       url: request.original_url,
-      image: object.cover_picture.present? ? image_url(object.cover_picture.image.url(:presentational, timestamp: false)) : nil,
+      image: object.cover_picture.present? && image_url(object.cover_picture.image.url(:shoebox, timestamp: false)),
       description: object.description.presence
-    }
+    )
     set_meta_tags(og: tags)
   end
 
