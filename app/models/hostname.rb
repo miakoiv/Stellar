@@ -11,7 +11,9 @@ class Hostname < ApplicationRecord
   include Reorderable
 
   #---
-  belongs_to :store
+  # Store association is optional because hostnames are validated
+  # without one during the onboarding process.
+  belongs_to :store, optional: true
 
   # Parent hostname provides domain/subdomains associations.
   belongs_to :domain_hostname, class_name: 'Hostname', foreign_key: :parent_hostname_id, optional: true

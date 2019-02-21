@@ -50,7 +50,8 @@ class Store < ApplicationRecord
 
   #---
   # Default group for users if not otherwise specified, guests especially.
-  belongs_to :default_group, class_name: 'Group'
+  # Optional because stores are created without one during onboarding.
+  belongs_to :default_group, class_name: 'Group', optional: true
 
   # Home country, used as default shipping and billing country.
   belongs_to :country, foreign_key: :country_code
