@@ -16,7 +16,6 @@ module Account
 
     class Base
       include ActiveModel::Model
-      include ActiveRecord::AttributeAssignment
 
       def self.locale_options
         @@locale_options ||= [
