@@ -1,6 +1,6 @@
 - meta_tags_for(@page, title: "#{current_store} • #{@page}")
 
-#static-wrap.layout-container
+#static-wrap
   - if @page.continuous?
     = render partial: 'pages/layout', collection: @page.children, as: :page
 

@@ -1,4 +1,4 @@
-#section-list.section-list.layout-container.sortable{data: {sections: @page.sections.map { |section| preload_admin_section_path(section) }.as_json}}
+#section-list.section-list.sortable{data: {sections: @page.sections.map { |section| preload_admin_section_path(section) }.as_json}}
   = render partial: 'admin/sections/loader', collection: @page.sections, as: :section
 
 - content_for :secondary_nav do

@@ -589,9 +589,7 @@ $body-tone-bg: darken($body-bg, 4%);
     @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
     @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
   }
-}
-.layout-container .more-items-link {
-  margin-top: 10px;
+  #static-wrap & { margin-top: 10px; }
 }
 
 
