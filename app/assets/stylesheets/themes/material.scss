@@ -877,33 +877,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 
 /* Product image galleries */
-.product-detail .images .nav {
-  @extend .nav-pills;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  z-index: 1;
-  right: 15px;
-  bottom: 10px;
-  left: 15px;
-}
-.product-detail .images .nav li {
-  flex: 0 1 auto;
-
-  > a {
-    padding: 4px;
-    border-radius: 50%;
-
-    &:focus { outline: 0; }
-    img { @extend .img-circle; }
-  }
-}
 .product-detail .images {
   display: flex;
   flex-flow: column nowrap;
   align-items: stretch;
 
-  .gallery { flex: 1 0 auto; }
+  .gallery {
+    flex: 1 0 auto;
+    width: 100%;
+  }
   .picture {
     width: 100%;
     height: 100%;
@@ -923,6 +905,16 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     width: auto;
     height: auto;
   }
+}
+.product-detail .image-pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  right: 15px;
+  bottom: 10px;
+  left: 15px;
+  width: auto;
 }
 
 /* Mixin for tables to have the padding on the inside */

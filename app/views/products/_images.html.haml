@@ -1,14 +1,19 @@
 - pictures = product.pictures.send(purpose)
 
-- if pictures.count > 1
-  %ul.nav{role: 'tablist'}
+.gallery.swiper-container{class: purpose}
+  .swiper-wrapper
     - pictures.each_with_index do |picture, index|
-      %li{role: 'presentation', class: index == 0 && 'active'}
-        = link_to "##{dom_id(picture)}", role: 'pill', data: {toggle: 'pill'} do
-          = picture_variant_tag picture, :icon
+      .swiper-slide[picture]
+        = link_to picture.image.url(:lightbox, timestamp: false), class: 'image-link' do
+          = picture_variant_tag picture, purpose
 
-.tab-content.gallery
-  - pictures.each_with_index do |picture, index|
-    .tab-pane.fade[picture]{class: index == 0 && 'in active'}
-      = link_to picture.image.url(:lightbox, timestamp: false), class: 'image-link' do
-        = picture_variant_tag picture, purpose
+  - if pictures.count > 1
+    .image-pagination
+
+    :coffee
+      jQuery ->
+        $gallery = $('.gallery.#{purpose}')
+        new Swiper $gallery,
+          pagination:
+            el: '.image-pagination'
+            clickable: true

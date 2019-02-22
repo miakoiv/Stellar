@@ -638,15 +638,6 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 /* Product image galleries */
-.product-detail .images .nav {
-  @extend .nav-pills;
-  position: absolute;
-  left: $grid-gutter-width/2;
-  bottom: 10px;
-}
-.product-detail .images .nav li {
-  > a { padding: 3px; }
-}
 .product-detail .images {
   .gallery, .image {
     position: relative;
@@ -668,4 +659,10 @@ $body-tone-bg: darken($body-bg, 4%);
     transition: transform 0.4s ease-in-out 0.2s;
     &:hover { transform: scale(1.02); }
   }
+}
+.product-detail .image-pagination {
+  position: absolute;
+  left: $grid-gutter-width/2;
+  bottom: 10px;
+  z-index: 1;
 }

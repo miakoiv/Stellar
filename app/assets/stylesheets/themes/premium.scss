@@ -857,25 +857,6 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 /* Product image galleries */
-.product-detail .images .nav {
-  @extend .nav-pills;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  z-index: 1;
-  right: 15px;
-  bottom: 10px;
-  left: 15px;
-}
-.product-detail .images .nav li {
-  flex: 0 1 auto;
-
-  > a {
-    padding: 3px;
-    border-radius: 15.5px;
-  }
-  > a img { @extend .img-circle; }
-}
 .product-detail .images {
   .gallery {
     position: relative;
@@ -901,6 +882,16 @@ $body-tone-bg: darken($body-bg, 4%);
     transition: transform 0.4s ease-in-out 0.2s;
     &:hover { transform: scale(1.02); }
   }
+}
+.product-detail .image-pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  right: 15px;
+  bottom: 10px;
+  left: 15px;
+  width: auto;
 }
 
 /* Product listings */
