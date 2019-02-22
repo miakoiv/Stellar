@@ -480,6 +480,14 @@ body {
 }
 .cart-list { }
 .cart-list .cart-list-item {
+  &.subitem {
+    border-top-style: dotted;
+
+    .product-image {
+      transform: scale(0.667);
+      transform-origin: top right;
+    }
+  }
   &.subrow {
     padding-top: 5px;
     padding-bottom: 5px;
