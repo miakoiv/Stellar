@@ -1,6 +1,6 @@
 - cache [selected_group, I18n.locale, :product_order_list_item, product, @category] do
   %li[product]{class: product.has_variants? && 'header'}
-    = link_to show_product_path(product, @category), data: {push: 'partial', target: '#store-body'} do
+    = link_to show_product_path(product, @category) do
       = render partial: 'products/card/list_image', object: product, as: :product
       = render partial: 'products/card/title_text', object: product, as: :product
       .product-pricing

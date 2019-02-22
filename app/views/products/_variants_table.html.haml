@@ -12,7 +12,7 @@
             - if product == variant
               = icon('dot-circle-o', class: 'fa-lg')
             - else
-              = link_to show_product_path(variant), data: {push: 'partial', target: '#store-body'} do
+              = link_to show_product_path(variant) do
                 = icon('circle-o', class: 'fa-lg')
           - product_properties.each do |product_property|
             %td

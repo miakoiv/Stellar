@@ -5,7 +5,7 @@
   %ul.dropdown-menu
     - product.sibling_variants.live.sorted.each do |variant|
       %li[variant]
-        = link_to show_product_path(variant), data: {push: 'partial', target: '#store-body'} do
+        = link_to show_product_path(variant) do
           .media
             .media-left= picture_variant_tag variant.cover_picture, :thumbnail, class: 'media-object'
             .media-body
