@@ -7,8 +7,8 @@
     = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_link_tag current_store.stylesheet_source, media: 'all'
     = stylesheet_link_tag 'print', media: 'print'
-    = javascript_include_tag 'application', async: true
-    = javascript_include_tag "themes/#{current_theme}", async: true
+    = javascript_include_tag 'application'
+    = javascript_include_tag "themes/#{current_theme}"
   %body{class: [current_theme, (current_store.detach_menu? || content_for?(:auxiliary_nav)) && 'dual-nav']}
     %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
       .inner-wrap= render partial: 'shared/side_nav'
