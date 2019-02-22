@@ -30,6 +30,12 @@ module Reports
       SQL
     end
 
+    def best_selling(top = 10)
+      @items.select('products.id AS product_id').group(:product_id)
+        .reorder('SUM(amount) DESC')
+        .first(top)
+    end
+
     def grand_total_sans_tax
       @items.sum(:total_sans_tax_cents)
     end

@@ -159,10 +159,9 @@ class Product < ApplicationRecord
         live: true,
         except_product_id: existing_ids,
         since_date: 1.month.ago.to_date,
-        until_date: Date.current,
-        sort: 'amount DESC, order_report_rows.created_at DESC'
+        until_date: Date.current
       )
-      top10 = Reports::Sales.new(search).by_product.limit(10)
+      top10 = Reports::Sales.new(search).best_selling
       Product.find(top10.map(&:product_id))
     else
       Product.none
