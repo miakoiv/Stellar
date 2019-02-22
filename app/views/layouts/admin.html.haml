@@ -6,9 +6,9 @@
     = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_link_tag 'admin', media: 'all'
     = stylesheet_link_tag 'print', media: 'print'
-    = javascript_include_tag 'application'
-    = javascript_include_tag 'ckeditor5/ckeditor'
-    = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"
+    = javascript_include_tag 'application', async: true
+    = javascript_include_tag 'ckeditor5/ckeditor', async: true
+    = javascript_include_tag "ckeditor5/translations/#{I18n.locale}", async: true
   %body.admin{class: content_for?(:secondary_nav) && 'dual-nav'}
     %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left
       .inner-wrap= render partial: 'admin/shared/side_nav'
