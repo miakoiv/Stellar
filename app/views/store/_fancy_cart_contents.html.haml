@@ -5,13 +5,15 @@
     - else
       %h5= t('store.cart_contents.empty_cart')
   - else
-    = render partial: 'order_items/cart_list', object: order, as: :order, locals: {locked: false}
+    .row
+      .col-md-10.col-lg-8
+        = render partial: 'order_items/cart_list', object: order, as: :order, locals: {locked: false}
 
     .row
-      .col-sm-7
+      .col-xs-12.col-sm-7.col-lg-5
         - if current_store.promotions.live.locked.any?
           = render partial: 'store/activate_code'
-      .col-xs-12.col-sm-5
+      .col-xs-12.col-sm-5.col-md-3
         .pull-right
           - if order.checkoutable?
             = render partial: 'checkout/order_type', object: order, as: :order
