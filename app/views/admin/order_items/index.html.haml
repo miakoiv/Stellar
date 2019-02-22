@@ -15,7 +15,7 @@
       %th.actions
   %tbody
     - @order_items.each do |order_item|
-      %tr[order_item]
+      %tr[order_item]{class: order_item.is_subitem? && 'subrow'}
         %td= order_item.order.number
         %td
           - if order_item.lot_code.present?

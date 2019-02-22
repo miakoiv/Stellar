@@ -6,7 +6,7 @@ class OrderItemSearch < Searchlight::Search
 
   def base_query
     OrderItem.joins(:order).merge(Order.approved)
-      .reorder('orders.completed_at')
+      .reorder('orders.id DESC, order_items.priority')
   end
 
   def options
