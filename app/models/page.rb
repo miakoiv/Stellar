@@ -69,6 +69,7 @@ class Page < ApplicationRecord
 
   has_many :sections, dependent: :destroy
   has_many :segments, through: :sections
+  has_many :content_pictures, through: :segments, source: :pictures
 
   scope :live, -> { where(live: true) }
   scope :excluding, -> (page) { where.not(id: page) }
@@ -181,6 +182,10 @@ class Page < ApplicationRecord
   def description
     return front_page&.description if continuous?
     segments.reorder('sections.priority, columns.priority, segments.priority').map(&:content).join("\n")
+  end
+
+  def cover_picture
+    super || content_pictures.first
   end
 
   # Pages are rendered with partials corresponding to purpose.
