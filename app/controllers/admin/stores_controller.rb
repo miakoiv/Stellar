@@ -80,12 +80,12 @@ class Admin::StoresController < AdminController
         :tracking_code, :maps_api_key,
         :facebook_access_token, :facebook_pixel_id,
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
-        :quotation_template_id,
+        :quotation_template_id, :footer_page_id,
         :csv_encoding, :csv_product_code,
         :csv_trade_price, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :vat_number, :order_sequence,
-        :theme, :detach_menu, :fancy_cart, :cart_promotion, :favorites,
-        :category_order, :masonry, :footer_page_id,
+        :theme, :main_nav_lookup, :detach_menu, :fancy_cart,
+        :cart_promotion, :favorites, :category_order, :masonry,
         tax_categories_attributes: [
           :name, :rate, :included_in_retail
         ]

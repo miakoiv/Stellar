@@ -612,6 +612,7 @@ fi:
         slug: Tunniste
         theme: Teema
         styles: Yksityiskohtaiset tyylit
+        main_nav_lookup: Näytä hakutoiminto päävalikossa
         detach_menu: Irroita päävalikko
         masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori

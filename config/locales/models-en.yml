@@ -612,6 +612,7 @@ en:
         slug: Slug
         theme: Display theme
         styles: Detailed styles
+        main_nav_lookup: Show search widget in main navigation
         detach_menu: Detach main navigation
         masonry: Compress product cards
         fancy_cart: Modern shopping cart
