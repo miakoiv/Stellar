@@ -84,8 +84,8 @@ class Admin::StoresController < AdminController
         :csv_encoding, :csv_product_code,
         :csv_trade_price, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :vat_number, :order_sequence,
-        :theme, :detach_menu, :fancy_cart, :favorites, :category_order,
-        :masonry, :footer_page_id,
+        :theme, :detach_menu, :fancy_cart, :cart_promotion, :favorites,
+        :category_order, :masonry, :footer_page_id,
         tax_categories_attributes: [
           :name, :rate, :included_in_retail
         ]

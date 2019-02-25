@@ -17,8 +17,9 @@
 
   #order-preview-modal.modal{data: {backdrop: 'static'}}
 
-:coffee
-  $.ajax
-    type: 'GET'
-    dataType: 'script'
-    url: '#{show_promoted_products_path}'
+- if current_store.cart_promotion?
+  :coffee
+    $.ajax
+      type: 'GET'
+      dataType: 'script'
+      url: '#{show_promoted_products_path}'
