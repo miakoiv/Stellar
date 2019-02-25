@@ -19,8 +19,9 @@
 # Ignore database YAML dump
 /db/data.yml
 
-# Ignore uploaded files
+# Ignore uploaded files and certificate challenges
 /public/system
+/public/.well-known
 
 # Ignore CSV files for scripting
 /lib/scripts/*.csv
