@@ -1,0 +1,12 @@
+- if pages.any?
+  %li.dropdown-header= title(Page, count: 2)
+  - pages.each do |page|
+    %li.media
+      = link_to page.path do
+        .media-left
+          .box-thumbnail
+            = picture_variant_tag page.cover_picture, :thumbnail
+        .media-body
+          .media-heading
+            %strong= page.title
+            .small= page.description.truncate(140, omission: '…')

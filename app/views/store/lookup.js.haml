@@ -1,6 +1,7 @@
 - if @results
   $('#lookup-dropdown .category-results').html("#{j render partial: 'categories/lookup_results', object: @category_results, as: :categories}");
   $('#lookup-dropdown .product-results').html("#{j render partial: 'products/lookup_results', object: @product_results, as: :products}");
+  $('#lookup-dropdown .page-results').html("#{j render partial: 'pages/lookup_results', object: @page_results, as: :pages}");
   $('#lookup-dropdown').show('fade', 150);
 - else
   $('#lookup-dropdown').hide('fade');

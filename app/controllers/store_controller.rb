@@ -98,10 +98,12 @@ class StoreController < BaseStoreController
     query = params.permit(:keyword)
     category_search = CategorySearch.new(query.merge(category_lookup_params))
     product_search = ProductSearch.new(query.merge(product_lookup_params))
+    page_search = PageSearch.new(query.merge(page_lookup_params))
     @category_results = category_search.results
     @product_results = product_search.results.visible
       .limit(Product::INLINE_SEARCH_RESULTS)
-    @results = @category_results.any? || @product_results.any?
+    @page_results = page_search.results
+    @results = @category_results.any? || @product_results.any? || @page_results.any?
 
     respond_to :js
   end
@@ -293,6 +295,15 @@ class StoreController < BaseStoreController
       {
         store: current_store.member_stores.presence || current_store,
         live: true
+      }
+    end
+
+    # Page lookup includes pages contained in the store header.
+    # The search model sets further search criteria by itself.
+    def page_lookup_params
+      {
+        store: current_store,
+        within: current_store.header
       }
     end
 
