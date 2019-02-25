@@ -8,7 +8,7 @@ class ContentGenerationJob < ApplicationJob
   def perform(segment)
     content = if segment.has_content?
       html = Nokogiri::HTML(segment.body)
-      html.search('//text()').map(&:text).join(' ')
+      html.search('//text()').map(&:text).join(' ').squish
     else
       nil
     end
