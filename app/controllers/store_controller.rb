@@ -95,7 +95,7 @@ class StoreController < BaseStoreController
 
   # GET /store/lookup.js
   def lookup
-    query = params
+    query = params.permit(:keyword)
     category_search = CategorySearch.new(query.merge(category_lookup_params))
     product_search = ProductSearch.new(query.merge(product_lookup_params))
     @category_results = category_search.results
