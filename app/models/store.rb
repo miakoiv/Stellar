@@ -276,9 +276,14 @@ class Store < ApplicationRecord
   # Returns the stored smtp settings as a hash suitable
   # for Action Mailer smtp delivery method options.
   def smtp_delivery_method_options
-    Store.stored_attributes[:smtp_settings].map { |key|
-      [key.to_s.sub('smtp_', '').to_sym, send(key)]
-    }.to_h
+    {
+      address: smtp_address,
+      port: smtp_port.to_i,
+      user_name: smtp_user_name,
+      password: smtp_password,
+      authentication: smtp_authentication.to_sym,
+      enable_starttls_auto: smtp_enable_starttls_auto
+    }
   end
 
   # Finds the quotation boilerplate page.
