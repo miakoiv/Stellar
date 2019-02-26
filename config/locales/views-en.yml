@@ -718,7 +718,7 @@ en:
     return: Return to front page
   branding:
     heading: Stellar Storefront
-    body_html: <p>Provided by LeasIT Oy</p><p><i class="fa fa-copyright"></i> 2015–2018</p>
+    body_html: <p>Provided by LeasIT Oy</p><p><i class="fa fa-copyright"></i> 2015–2019</p>
   tips:
     inventory_check:
       concluded: <i class="fa fa-info-circle"></i> <b>This inventory check has been concluded and archived.</b> It cannot be modified further.
