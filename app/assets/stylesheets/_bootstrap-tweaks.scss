@@ -800,8 +800,9 @@ mark {
   > h1 > figure { margin-right: 5px; }
   > h1 > figure {
     display: inline-block;
-    max-height: 1em;
-    width: auto;
+    height: 1em;
+    width: 1em;
+    @include covering-image;
   }
   > .btn,
   > .dropdown { float: right; }
