@@ -15,6 +15,9 @@ class OrderMailer < ApplicationMailer
       subject: default_i18n_subject(store: @store),
     }
     headers[:bcc] = @order.notified_users.map(&:to_s) if @bcc
+    headers.merge!(
+      delivery_method_options: @store.smtp_delivery_method_options
+    ) if @store.custom_smtp_settings?
 
     roadie_mail(headers)
   end

@@ -624,6 +624,13 @@ en:
         country_code: Country
         admit_guests: Admit guests to the store
         disable_mail: Disable sending of e-mail
+        custom_smtp_settings: Specify custom ꜱᴍᴛᴘ service
+        smtp_address: Server address
+        smtp_port: Server port
+        smtp_user_name: Login
+        smtp_password: Password
+        smtp_authentication: Authentication scheme
+        smtp_enable_starttls_auto: Enable ᴛʟꜱ encryption
         disable_shipment_transfers: No stock transfers for shipments
         tracking_code: Google Analytics key
         maps_api_key: Google Maps key

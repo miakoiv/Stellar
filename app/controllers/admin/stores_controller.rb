@@ -76,8 +76,8 @@ class Admin::StoresController < AdminController
     def store_params
       params.require(:store).permit(
         :portal, :name, :locale, :country_code, :shipping_origin,
-        :admit_guests, :disable_mail, :disable_shipment_transfers,
-        :tracking_code, :maps_api_key,
+        :admit_guests, :disable_mail, :custom_smtp_settings,
+        :disable_shipment_transfers, :tracking_code, :maps_api_key,
         :facebook_access_token, :facebook_pixel_id,
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
         :quotation_template_id, :footer_page_id,
@@ -86,6 +86,9 @@ class Admin::StoresController < AdminController
         :order_xml_path, :erp_number, :vat_number, :order_sequence,
         :theme, :main_nav_lookup, :detach_menu, :fancy_cart,
         :cart_promotion, :favorites, :category_order, :masonry,
+        :smtp_address, :smtp_port,
+        :smtp_user_name, :smtp_password,
+        :smtp_authentication, :smtp_enable_starttls_auto,
         tax_categories_attributes: [
           :name, :rate, :included_in_retail
         ]

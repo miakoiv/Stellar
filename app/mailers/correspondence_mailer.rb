@@ -7,11 +7,16 @@ class CorrespondenceMailer < ApplicationMailer
     @store = store
     @fields = fields
 
-    roadie_mail(
+    headers = {
       from: "#{@fields[:name]} <#{@fields[:email]}>",
       to: @store.correspondents.map(&:to_s),
       subject: @fields[:subject]
-    )
+    }
+    headers.merge!(
+      delivery_method_options: @store.smtp_delivery_method_options
+    ) if @store.custom_smtp_settings?
+
+    roadie_mail(headers)
   end
 
   protected

@@ -624,6 +624,13 @@ fi:
         country_code: Kotimaa
         admit_guests: Salli pääsy kauppaan vieraana
         disable_mail: Estä sähköpostin lähetys
+        custom_smtp_settings: Määrittele omat ꜱᴍᴛᴘ-asetukset
+        smtp_address: Palvelimen osoite
+        smtp_port: Portti
+        smtp_user_name: Tunnus
+        smtp_password: Salasana
+        smtp_authentication: Tunnistautuminen
+        smtp_enable_starttls_auto: Käytä ᴛʟꜱ-salausta
         disable_shipment_transfers: Ei varastosiirtoja toimituksille
         tracking_code: Google Analytics -koodi
         maps_api_key: Google Maps -avain
