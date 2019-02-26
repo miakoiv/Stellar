@@ -277,7 +277,7 @@ class Store < ApplicationRecord
   # for Action Mailer smtp delivery method options.
   def smtp_delivery_method_options
     Store.stored_attributes[:smtp_settings].map { |key|
-      [key.to_s.sub('smtp_', ''), send(key)]
+      [key.to_s.sub('smtp_', '').to_sym, send(key)]
     }.to_h
   end
 
