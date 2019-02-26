@@ -16,6 +16,7 @@ class OrderMailer < ApplicationMailer
     }
     headers[:bcc] = @order.notified_users.map(&:to_s) if @bcc
     headers.merge!(
+      from: @store.smtp_user_name,
       delivery_method_options: @store.smtp_delivery_method_options
     ) if @store.custom_smtp_settings?
 
