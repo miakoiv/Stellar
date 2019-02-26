@@ -8,7 +8,8 @@ class CorrespondenceMailer < ApplicationMailer
     @fields = fields
 
     headers = {
-      from: "#{@fields[:name]} <#{@fields[:email]}>",
+      from: "noreply@#{ENV['STELLAR_DOMAIN']}",
+      reply_to: "#{@fields[:name]} <#{@fields[:email]}>",
       to: @store.correspondents.map(&:to_s),
       subject: @fields[:subject]
     }
