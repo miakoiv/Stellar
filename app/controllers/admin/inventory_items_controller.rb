@@ -11,9 +11,15 @@ class Admin::InventoryItemsController < AdminController
     query = saved_search_query('inventory_item', 'admin_inventory_item_search')
     @search = InventoryItemSearch.new(query.merge(search_constrains))
     results = @search.results.reorder(nil).merge(Product.alphabetical)
-    @inventory_items = results.by_product.page(params[:page])
-    @products = current_store.products
-      .find((query['product_id'] || []).reject(&:blank?))
+
+    respond_to do |format|
+      format.html {
+        @inventory_items = results.by_product.page(params[:page])
+        @products = current_store.products
+          .find((query['product_id'] || []).reject(&:blank?))
+      }
+      format.csv { send_data(results.by_product.to_csv, filename: "inventory-#{current_store.slug}-#{Date.today}.csv") }
+    end
   end
 
   # GET /admin/inventory_items/query.js

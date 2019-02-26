@@ -52,6 +52,20 @@ class InventoryItem < ApplicationRecord
     ]
   end
 
+  def self.to_csv
+    attributes = %w{product_code product_customer_code product_title product_subtitle total_on_hand total_reserved total_pending}
+    CSV.generate(
+      headers: true,
+      col_sep: ';',
+      force_quotes: true
+    ) do |csv|
+      csv << attributes
+      all.each do |inventory_item|
+        csv << attributes.map { |k| inventory_item.send(k) }
+      end
+    end
+  end
+
   #---
   def available
     on_hand - reserved
