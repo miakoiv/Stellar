@@ -36,7 +36,10 @@ class Admin::InventoryItemsController < AdminController
   def refresh
     @product = current_store.products.find(params[:product_id])
     query = saved_search_query('inventory_item', 'admin_inventory_item_search')
-    @search = InventoryItemSearch.new(query.merge(query_params))
+    @search = InventoryItemSearch.new(
+      query.merge(query_params).merge('online' => 'false')
+    )
+    logger.info "Searching with #{@search.inspect}"
     results = @search.results.reorder('inventories.name', 'code')
     @inventory_item = results.reorder(nil).by_product.first
     @inventory_items = results
