@@ -86,10 +86,11 @@ class Page < ApplicationRecord
   after_save :touch_resource
 
   #---
-  # Finds the first page that returns a non-nil path.
+  # Finds the first valid entry point.
   def self.entry_point
-    find { |page| page.path }
+    where.not(purpose: [10, 11, 23, 30, 42]).first
   end
+
 
   def self.available_purposes
     purposes.except :header, :footer
