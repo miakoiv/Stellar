@@ -1,6 +1,6 @@
 class Admin::InventoryItemsController < AdminController
 
-  before_action :set_inventory_item, only: [:show, :edit]
+  before_action :set_inventory_item, only: [:show, :edit, :update]
 
   authority_actions query: 'read', refresh: 'read'
 
@@ -91,6 +91,18 @@ class Admin::InventoryItemsController < AdminController
     end
   end
 
+  # PATCH/PUT /admin/inventory_items/1.js
+  def update
+    authorize_action_for InventoryItem, at: current_store
+
+    if @inventory_item.update(inventory_item_params)
+      @product = @inventory_item.product
+      track @inventory_item, @product
+    end
+
+    respond_to :js
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_inventory_item
@@ -100,7 +112,7 @@ class Admin::InventoryItemsController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_item_params
       params.require(:inventory_item).permit(
-        :inventory_id, :product_id, :code,
+        :inventory_id, :product_id, :code, :unlimited,
         inventory_entries_attributes: [
           :recorded_at, :on_hand, :reserved, :pending, :value, :note
         ]

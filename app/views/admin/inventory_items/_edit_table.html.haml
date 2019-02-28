@@ -1,0 +1,11 @@
+.table-responsive
+  %table.table.table-hover
+    %thead
+      %tr
+        %th.col-xs-2= col(InventoryItem, :code)
+        %th.col-xs-4= col(InventoryItem, :inventory_id)
+        %th.col-xs-2.text-right à
+        %th.col-xs-2.text-right= col(InventoryItem, :on_hand)
+        %th.col-xs-1.text-right ∞
+    %tbody#inventory-items-tbody
+      = render partial: 'admin/inventory_items/edit_tbody', object: product, as: :product
