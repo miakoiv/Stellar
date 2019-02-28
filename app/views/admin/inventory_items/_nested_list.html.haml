@@ -9,8 +9,8 @@
 #inventory-items-edit-modal.modal{data: {backdrop: 'static'}}
 
 :coffee
-  $('#inventory-item-list').on 'click', '.expand > .row', (e) ->
-    $row = $(e.currentTarget).parent();
+  $('#inventory-item-list').on 'click', '.expand .toggle', (e) ->
+    $row = $(e.currentTarget).parents '.expand'
     if $row.hasClass 'open'
       $row.removeClass 'open'
       $row.find('.collapse').collapse 'hide'
@@ -19,6 +19,7 @@
       $.ajax
         url: '#{query_admin_inventory_items_path}'
         type: 'GET'
+        cache: true
         dataType: 'script'
         data:
           product_id: $row.data('productId')

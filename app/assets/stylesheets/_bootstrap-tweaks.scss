@@ -1500,10 +1500,7 @@ fieldset > legend {
  */
 .list-group.nested {
   > .list-group-item {
-    @extend a.list-group-item;
-
     &.open .toggle { @extend .fa-rotate-180; }
-    &:hover { cursor: pointer; }
   }
   > .list-group-item .sub-list { margin: 0 -15px; }
   > .list-group-item .list-group {
