@@ -274,6 +274,7 @@ fi:
         on_hand: Varastossa
         reserved: Varattu
         pending: Tulossa
+        unlimited: Rajoittamaton
         value: Arvo
         total_value: Arvo yhteensä
       order:

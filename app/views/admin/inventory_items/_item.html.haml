@@ -1,12 +1,14 @@
 #inventory-item.panel.panel-default
   .panel-body
-    = bootstrap_form_for [:admin, inventory_item] do |f|
+    = bootstrap_form_for [:admin, inventory_item], layout: :horizontal, label_col: 'col-sm-6', control_col: 'col-sm-6' do |f|
       %fieldset{disabled: true}
-        = f.text_field :code
-        = f.text_field :expires_at
-        = f.text_field :inventory_id, value: inventory_item.inventory
-        = f.text_field :on_hand
-        = f.text_field :reserved
-        = f.text_field :pending
-        = f.text_field :value
-        = f.text_field :total_value
+        = f.static_control :code
+        = f.static_control :expires_at
+        = f.static_control :inventory_id do
+          = inventory_item.inventory
+        - unless inventory_item.unlimited?
+          = f.static_control :on_hand
+          = f.static_control :reserved
+          = f.static_control :pending
+          = f.static_control :value
+          = f.static_control :total_value

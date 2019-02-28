@@ -274,6 +274,7 @@ en:
         on_hand: On hand
         reserved: Reserved
         pending: Pending
+        unlimited: Unlimited
         value: Value
         total_value: Total value
       order:

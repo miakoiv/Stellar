@@ -20,4 +20,5 @@
         - if display_stock
           %td.text-right
             - if order_item.track_shipments? && order_item.tangible?
-              = bootstrap_label(order_item, text: order_item.available)
+              - available = order_item.available
+              = bootstrap_label(order_item, text: available == Float::INFINITY ? '∞' : available)

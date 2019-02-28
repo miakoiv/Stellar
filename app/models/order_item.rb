@@ -29,8 +29,8 @@ class OrderItem < ApplicationRecord
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
   scope :pending, -> { joins(:product).merge(Product.tangible).where(
     arel_table[:shipped].eq(nil)
-    .or(arel_table[:shipped].lt(arel_table[:amount]))
-  ) }
+    .or(arel_table[:shipped].lt(arel_table[:amount])))
+  }
 
   #---
   validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1}, on: :update

@@ -86,7 +86,8 @@ class Product < ApplicationRecord
         item = inventory.item_by_product_and_code(self, lot_code)
         return item.present? ? item.available : 0
       end
-      inventory_items.in(inventory).online.map(&:available).sum
+      items = inventory_items.in(inventory).online
+      items.reduce(0) { |total, item| total += item.available }
     end
 
     # Minimum stock of components, used by #available.

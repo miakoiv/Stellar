@@ -19,8 +19,11 @@ class InventoryItem < ApplicationRecord
   # creation date second.
   default_scope { order(arel_table[:expires_at].eq(nil), :expires_at, :created_at) }
 
-  # Inventory items are considered online if they have stock available.
-  scope :online, -> { where(arel_table[:on_hand].gt(arel_table[:reserved])) }
+  # Online items have available stock, or are unlimited.
+  scope :online, -> {
+    where(unlimited: true)
+      .or(where(arel_table[:on_hand].gt(arel_table[:reserved])))
+  }
 
   scope :in, -> (inventory) { where(inventory: inventory) }
   scope :for, -> (product) { where(product: product) }
@@ -35,11 +38,12 @@ class InventoryItem < ApplicationRecord
 
   #---
   def self.by_product
-    select(<<~SQL).group(:product_id)
+    select(<<~SQL).group(:product_id, :unlimited)
       inventory_items.product_id,
       SUM(on_hand) AS total_on_hand,
       SUM(reserved) AS total_reserved,
       SUM(pending) AS total_pending,
+      unlimited,
       products.*
     SQL
   end
@@ -68,6 +72,7 @@ class InventoryItem < ApplicationRecord
 
   #---
   def available
+    return Float::INFINITY if unlimited?
     on_hand - reserved
   end
 
