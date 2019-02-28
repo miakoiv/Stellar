@@ -13,11 +13,4 @@ class ApplicationAuthorizer < Authority::Authorizer
     # considered forbidden.
     false
   end
-
-  # General authorization to initiate orders
-  # as a member of the group specified in opts.
-  def self.authorizes_to_order?(user, opts = {})
-    group = opts[:as]
-    group.present? && group.ordering_allowed?
-  end
 end

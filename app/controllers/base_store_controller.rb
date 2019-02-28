@@ -72,8 +72,7 @@ class BaseStoreController < ApplicationController
   helper_method :guest?
 
   def can_order?
-    @can_order = current_user.can?(:order, as: selected_group) if @can_order.nil?
-    @can_order
+    current_group.ordering_allowed?
   end
   helper_method :can_order?
 
