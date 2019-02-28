@@ -28,11 +28,6 @@ class Inventory < ApplicationRecord
     inventory_items.for(product)
   end
 
-  def stock
-    items = inventory_items
-    [items, items.map(&:value).sum]
-  end
-
   # Restocks the inventory with given item that specifies a product,
   # lot code, expiration, and amount. New inventory items may be
   # created if not seen before. The affected inventory item is returned.
