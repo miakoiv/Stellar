@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_140026) do
+ActiveRecord::Schema.define(version: 2019_03_01_142138) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -204,15 +204,6 @@ ActiveRecord::Schema.define(version: 2019_03_01_140026) do
     t.index ["fqdn"], name: "index_hostnames_on_fqdn"
     t.index ["parent_hostname_id"], name: "index_hostnames_on_parent_hostname_id"
     t.index ["store_id"], name: "index_hostnames_on_store_id"
-  end
-
-  create_table "iframes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.integer "product_id"
-    t.text "html"
-    t.integer "priority"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_iframes_on_product_id"
   end
 
   create_table "images", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|

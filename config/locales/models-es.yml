@@ -19,9 +19,6 @@ es:
       hostname:
         one: Dirección
         other: Direcciones
-      iframe:
-        one: encastro
-        other: encastros
       image:
         one: Imagen
         other: Imagenes
@@ -110,8 +107,6 @@ es:
       hostname:
         fqdn: Nombre del host
         is_subdomain: Subdominio
-      iframe:
-        html: Código HTML
       image:
         purpose: Tipo de imagen
         attachment_file_name: Nombre de archivo
@@ -233,7 +228,6 @@ es:
         lead_time: Tiempo de entrega
         out_of_stock: Vendido
         shipping_notes: Notas
-        iframes: Encastrar
         images: Imagenes
         product_properties: Propiedades
         component_entries: Estructuras

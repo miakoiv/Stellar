@@ -44,9 +44,6 @@ fi:
       hostname:
         one: osoite
         other: osoitteet
-      iframe:
-        one: upotus
-        other: upotukset
       image:
         one: kuvatiedosto
         other: kuvatiedostot
@@ -200,8 +197,6 @@ fi:
       hostname:
         fqdn: Verkkotunnus
         parent_hostname_id: Toimialue
-      iframe:
-        html: HTML-koodi
       image:
         attachment_file_name: Tiedostonimi
         attachment_content_type: Tyyppi

@@ -70,10 +70,6 @@
       .tags.graphic
         = render partial: 'tags/graphic', collection: product.tags.graphic, as: :tag
 
-    - if product.iframes.any?
-      .iframes
-        = render partial: 'iframes/gallery', object: product, as: :product, locals: {inline: current_store.inline_iframes}
-
 .product-footer
   - product.active_promotions(selected_group).each do |promotion|
     = render partial: "products/#{promotion.promotion_handler.to_partial_path}", locals: {promotion: promotion, context: product}

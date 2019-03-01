@@ -4,9 +4,6 @@ de:
       category:
         one: Kategorie
         other: Kategorien
-      iframe:
-        one: Eingebunder iFrame
-        other: Eingebundene iFrames
       inventory:
         one: Bestand
         other: Bestände
@@ -60,8 +57,6 @@ de:
         name: Name
         description: Beschreibung
         product_scope: Produktsortierung
-      iframe:
-        html: HTML-Code
       image:
         purpose: Bild-Typ
         attachment_file_name: Dateiname
@@ -137,7 +132,6 @@ de:
         deleted_at: Verfügbar bis
         not_live: Nicht verfügbar
         memo: Notiz
-        iframes: Einbindung
         images: Bilder
         product_properties: Eigenschaften
         components: Komponenten

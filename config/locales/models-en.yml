@@ -44,9 +44,6 @@ en:
       hostname:
         one: address
         other: addresses
-      iframe:
-        one: embed
-        other: embeds
       image:
         one: image file
         other: image files
@@ -200,8 +197,6 @@ en:
       hostname:
         fqdn: Hostname
         parent_hostname_id: Top level domain
-      iframe:
-        html: HTML code
       image:
         attachment_file_name: File name
         attachment_content_type: File type

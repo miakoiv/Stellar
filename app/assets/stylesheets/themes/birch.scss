@@ -351,20 +351,6 @@ $brand-primary: #013183;
 
         .picture { padding-bottom: 100%; }
       }
-      .iframes {
-        @extend .hidden-print;
-        position: absolute;
-        left: -1*$grid-gutter-width;
-
-        .iframe-toggle {
-          @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
-          @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
-          display: block;
-          width: 2*$grid-gutter-width;
-          font-weight: 500;
-          text-align: right;
-        }
-      }
       .images {
         .nav { @extend .nav-tabs, .nav-sm; }
         .picture {

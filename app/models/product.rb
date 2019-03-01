@@ -71,7 +71,6 @@ class Product < ApplicationRecord
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy, after_add: :associations_changed, after_remove: :associations_changed
   has_many :properties, through: :product_properties
-  has_many :iframes, dependent: :destroy
 
   has_many :order_report_rows, dependent: :destroy
 
@@ -328,7 +327,6 @@ class Product < ApplicationRecord
         categories: categories,
         component_products: component_products,
         requisite_products: requisite_products,
-        iframes: iframes.map(&:dup),
         alternate_prices: alternate_prices.map(&:dup),
         product_properties: product_properties.map(&:dup)
       )

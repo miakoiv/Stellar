@@ -239,7 +239,6 @@ Rails.application.routes.draw do
       resources :documents, shallow: true
       resources :product_properties, shallow: true
       resources :alternate_prices
-      resources :iframes, shallow: true
       resources :inventory_items, shallow: true
       resources :component_entries, shallow: true do
         post :reorder, on: :collection
@@ -299,7 +298,6 @@ Rails.application.routes.draw do
     post '/documents/reorder', to: 'documents#reorder', as: :reorder_documents
     post '/pictures/delete', to: 'pictures#delete', as: :delete_picture
     post '/documents/delete', to: 'documents#delete', as: :delete_document
-    post '/iframes/reorder', to: 'iframes#reorder', as: :reorder_iframes
   end
 
   if Rails.env.production?
