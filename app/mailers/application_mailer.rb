@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
 
   layout 'mailer'
-  helper :application
+  helper :application, :store
 
 end

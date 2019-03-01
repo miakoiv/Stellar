@@ -5,7 +5,7 @@
   .plan-details
     = t(".#{plan.id}_html")
   .plan-pricing
-    %span.currency= humanized_money_with_symbol plan.amount
+    %span.currency= money plan.amount
     %span.taxation= t('.taxation')
     %span.interval
       \/
