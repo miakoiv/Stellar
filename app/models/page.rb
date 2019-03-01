@@ -185,10 +185,6 @@ class Page < ApplicationRecord
     segments.reorder('sections.priority, columns.priority, segments.priority').map(&:content).join("\n")
   end
 
-  def cover_picture
-    super || content_pictures.first
-  end
-
   # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
     "pages/purposes/#{purpose}"
