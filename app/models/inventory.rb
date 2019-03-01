@@ -31,7 +31,10 @@ class Inventory < ApplicationRecord
   # Restocks the inventory with given item that specifies a product,
   # lot code, expiration, and amount. New inventory items may be
   # created if not seen before. The affected inventory item is returned.
+  # Does nothing and returns nil if the product does not track stock.
   def restock!(item, timestamp, source = nil)
+    return nil unless item.product.tracked_stock?
+
     inventory_item = inventory_items.create_with(
       expires_at: item.expires_at
     ).find_or_create_by!(
@@ -50,9 +53,12 @@ class Inventory < ApplicationRecord
   end
 
   # Destocks the inventory using given item that specifies
-  # a product, lot code, and amount. The inventory item must exist,
-  # and will be returned.
+  # a product, lot code, and amount. Returns the affected
+  # inventory item. Does nothing and returns nil if
+  # the product does not track stock.
   def destock!(item, timestamp, source = nil)
+    return nil unless item.product.tracked_stock?
+
     inventory_item = inventory_items.find_by(
       product: item.product,
       code: item.lot_code

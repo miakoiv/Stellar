@@ -1,6 +1,6 @@
 %tr[transfer_item]{class: transfer_item.appearance}
   %td= product_header transfer_item
-  - if transfer_item.source.present?
+  - if transfer_item.source.present? && transfer_item.product.tracked_stock?
     %td.control
       = form_for [:admin, transfer_item], remote: true, html: {id: nil, class: 'immediate'} do |f|
         = f.select :lot_code, [], {}, id: dom_id(transfer_item, :lot_code), data: {source_items: transfer_item.source_item_choices.online.map { |i| {code: i.code, available: i.available, expires_at: i.expires_at} }, selected: transfer_item.lot_code}
