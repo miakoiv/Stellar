@@ -28,7 +28,7 @@
           = render partial: 'admin/pictures/edit_collection', object: @product, as: :pictureable
       = tab_pane 'inventory' do
         = progressive_render do
-          = render partial: 'admin/inventory_items/edit_table', object: @product, as: :product
+          = render partial: 'admin/inventory_items/table', object: @product, as: :product
           - if current_user.can_create?(InventoryItem, at: current_store)
             = render partial: 'admin/inventory_items/form', object: @product, as: :product
       = tab_pane 'alternate-prices' do

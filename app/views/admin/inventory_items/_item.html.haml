@@ -6,9 +6,8 @@
         = f.static_control :expires_at
         = f.static_control :inventory_id do
           = inventory_item.inventory
-        - unless inventory_item.unlimited?
-          = f.static_control :on_hand
-          = f.static_control :reserved
-          = f.static_control :pending
-          = f.static_control :value
-          = f.static_control :total_value
+        = f.static_control :on_hand
+        = f.static_control :reserved
+        = f.static_control :pending
+        = f.static_control :value
+        = f.static_control :total_value

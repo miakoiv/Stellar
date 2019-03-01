@@ -1,21 +1,16 @@
 .row
   .col-xs-12.col-sm-7
     = product_header inventory_item
-  - if inventory_item.unlimited?
-    .col-xs-9.col-sm-3
-      .text-right
-        %span.label.label-success= col(InventoryItem, :unlimited)
-  - else
-    .col-xs-3.col-sm-1
-      .text-right.text-muted.small
-        = number_if_present(inventory_item.total_reserved, '–')
-    .col-xs-3.col-sm-1
-      .text-right.text-muted.small
-        = number_if_present(inventory_item.total_pending, '+')
-    .col-xs-3.col-sm-1
-      .text-right
-        %strong= inventory_item.total_on_hand
-    .col-xs-3.col-sm-2
-      .text-right
-        %button.toggle.btn.btn-default.btn-sm{type: 'button'}
-          = icon('caret-down')
+  .col-xs-3.col-sm-1
+    .text-right.text-muted.small
+      = number_if_present(inventory_item.total_reserved, '–')
+  .col-xs-3.col-sm-1
+    .text-right.text-muted.small
+      = number_if_present(inventory_item.total_pending, '+')
+  .col-xs-3.col-sm-1
+    .text-right
+      %strong= inventory_item.total_on_hand
+  .col-xs-3.col-sm-2
+    .text-right
+      %button.toggle.btn.btn-default.btn-sm{type: 'button'}
+        = icon('caret-down')

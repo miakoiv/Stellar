@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_103242) do
+ActiveRecord::Schema.define(version: 2019_03_01_084838) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -325,7 +325,6 @@ ActiveRecord::Schema.define(version: 2019_02_28_103242) do
     t.integer "on_hand"
     t.integer "reserved"
     t.integer "pending"
-    t.boolean "unlimited", default: false, null: false
     t.integer "value_cents"
     t.date "expires_at"
     t.datetime "created_at", null: false

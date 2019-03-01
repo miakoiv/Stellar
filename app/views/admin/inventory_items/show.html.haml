@@ -6,8 +6,6 @@
     %span.small
       %strong= @inventory_item.product.title
       = @inventory_item.product.subtitle
-      - if @inventory_item.unlimited?
-        %span.label.label-success= col(InventoryItem, :unlimited)
 
 .row
   .col-md-4

@@ -1,7 +1,7 @@
 #inventory-item-list
   .list-group.nested
     - @inventory_items.each do |inventory_item|
-      .list-group-item{id: dom_id(inventory_item.product), data: {product_id: inventory_item.product_id}, class: inventory_item.unlimited? || 'expand'}
+      .list-group-item.expand{id: dom_id(inventory_item.product), data: {product_id: inventory_item.product_id}}
         = render partial: 'nested_list_row', object: inventory_item, as: :inventory_item
         .sub-list.collapse
           .list-group

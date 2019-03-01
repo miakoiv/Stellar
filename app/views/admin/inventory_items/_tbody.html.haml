@@ -3,12 +3,8 @@
     %td= link_to_if current_user.can_read?(inventory_item, at: current_store), inventory_item.code, admin_inventory_item_path(inventory_item)
     %td= inventory_item.inventory.name
     %td.text-right.currency= money inventory_item.value
-    - if inventory_item.unlimited?
-      %td.text-right
-        %span.label.label-success= col(InventoryItem, :unlimited)
-    - else
-      %td.text-right
-        = inventory_item.on_hand
-        %span.text-muted
-          = number_if_present(inventory_item.reserved, '–')
-          = number_if_present(inventory_item.pending, '+')
+    %td.text-right
+      = inventory_item.on_hand
+      %span.text-muted
+        = number_if_present(inventory_item.reserved, '–')
+        = number_if_present(inventory_item.pending, '+')
