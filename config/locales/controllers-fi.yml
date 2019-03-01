@@ -1,12 +1,5 @@
 fi:
   admin:
-    albums:
-      create:
-        notice: "Albumi %{album} luotu."
-      update:
-        notice: "Albumi %{album} päivitetty."
-      destroy:
-        notice: "Albumi %{album} poistettu."
     categories:
       create:
         notice: "Tuoteryhmä %{category} luotu."

@@ -1,9 +1,6 @@
 de:
   activerecord:
     models:
-      album:
-        one: Album
-        other: Alben
       category:
         one: Kategorie
         other: Kategorien
@@ -58,12 +55,6 @@ de:
         one: Nutzer
         other: Nutzer
     attributes:
-      album:
-        title: Titel
-        created_at: Datum
-        description: Beschreibung
-        images: Fotos
-        page_ids: Angezeigt auf Seiten
       category:
         parent_id: Übergeordnete Kategorie
         name: Name

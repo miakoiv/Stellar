@@ -110,7 +110,6 @@ fi:
           product_editor: tuotteet
           promotion_editor: kampanjat
           user_manager: käyttäjät
-          album_editor: albumit
           inventory_manage: varastot
           store_admin: myymäläpäällikkö
           superuser: pääkäyttäjä
@@ -128,7 +127,6 @@ fi:
           product_editor: tuotteiden hallinta
           promotion_editor: kampanjoiden hallinta
           user_manager: käyttäjien ja käyttöoikeuksien hallinta
-          album_editor: kuva-albumien hallinta
           inventory_manage: varastojen hallinta
           store_admin: kaupan asetukset ja verkko-osoitteet
           superuser: kauppojen perustaminen ja järjestelmäasetukset

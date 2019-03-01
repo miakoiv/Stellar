@@ -23,9 +23,6 @@ fi:
       activity:
         one: tapahtuma
         other: tapahtumat
-      album:
-        one: albumi
-        other: albumit
       alternate_price:
         one: hinta
         other: hinnat
@@ -155,12 +152,6 @@ fi:
         resource: Kohde
         context: Asiayhteys
         differences: Tehdyt muutokset
-      album:
-        title: Otsikko
-        created_at: Päiväys
-        description: Kuvaus
-        images: Kuvat
-        page_ids: Näytetään sivuilla
       alternate_price:
         group_id: Ryhmä
         product_id: Tuote

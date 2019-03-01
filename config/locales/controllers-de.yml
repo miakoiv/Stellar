@@ -1,12 +1,5 @@
 de:
   admin:
-    albums:
-      create:
-        notice: "Fotoalbum %{album} erstellt."
-      update:
-        notice: "Fotoalbum %{album} aktualisiert."
-      destroy:
-        notice: "Fotoalbum %{album} gelöscht."
     categories:
       create:
         notice: "Kategorie %{category} erstellt."

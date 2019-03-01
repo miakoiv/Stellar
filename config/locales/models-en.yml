@@ -23,9 +23,6 @@ en:
       activity:
         one: activity
         other: activities
-      album:
-        one: album
-        other: albums
       alternate_price:
         one: price
         other: prices
@@ -155,12 +152,6 @@ en:
         resource: Target
         context: Context
         differences: Changes made
-      album:
-        title: Title
-        created_at: Date
-        description: Description
-        images: Photos
-        page_ids: Shown on pages
       alternate_price:
         group_id: Group
         product_id: Product

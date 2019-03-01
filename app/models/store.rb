@@ -90,7 +90,6 @@ class Store < ApplicationRecord
     store.has_many :order_types
     store.has_many :shipping_methods
     store.has_many :pages
-    store.has_many :albums
     store.has_many :promotions
     store.has_many :tax_categories
     store.has_many :groups
@@ -250,10 +249,6 @@ class Store < ApplicationRecord
 
   def user_options
     users.map { |u| [u.to_s, u.id] }
-  end
-
-  def album_options
-    albums.map { |a| [a.to_s, a.id] }
   end
 
   def template_options

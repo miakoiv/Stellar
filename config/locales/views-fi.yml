@@ -103,11 +103,6 @@ fi:
           total: Yhteensä €
     manage: Hallinta
     return_to_storefront: Palaa etusivulle
-    albums:
-      index:
-        new_album: Uusi albumi
-      new:
-        new_album: Uusi albumi
     categories:
       index:
         new_category: Uusi tuoteryhmä

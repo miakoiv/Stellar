@@ -52,7 +52,6 @@ es:
           product_editor: Editor de productos
           promotion_editor: Editor de promoción
           user_manager: 'Administrador de usuarios'
-          album_editor: Editor del album
           inventory_manage: Inventario
           store_admin: Administrador de tienda
           superuser: Super Usuario

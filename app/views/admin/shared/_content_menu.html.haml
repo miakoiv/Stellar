@@ -9,5 +9,3 @@
   = menu_item 'eyedropper', title(Property, count: 2), admin_properties_path
 - if current_user_has_role?(:page_editor)
   = menu_item 'files-o', title(Page, count: 2), admin_pages_path
-- if current_user_has_role?(:album_editor)
-  = menu_item 'camera-retro', title(Album, count: 2), admin_albums_path

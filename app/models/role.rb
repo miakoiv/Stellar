@@ -19,7 +19,6 @@ class Role < ApplicationRecord
     'category_editor' => {icon: 'sitemap', appearance: 'info'},
     'property_editor' => {icon: 'eyedropper', appearance: 'info'},
     'promotion_editor' => {icon: 'tag', appearance: 'info'},
-    'album_editor' => {icon: 'camera-retro', appearance: 'info'},
     'order_review' => {icon: 'truck', appearance: 'primary'},
     'order_manage' => {icon: 'truck', appearance: 'primary'},
     'reports' => {icon: 'line-chart', appearance: 'primary'},

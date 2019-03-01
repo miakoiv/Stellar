@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_134159) do
+ActiveRecord::Schema.define(version: 2019_03_01_140026) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -39,15 +39,6 @@ ActiveRecord::Schema.define(version: 2019_03_01_134159) do
     t.datetime "updated_at", null: false
     t.index ["adjustable_type", "adjustable_id"], name: "index_adjustments_on_adjustable_type_and_adjustable_id"
     t.index ["source_type", "source_id"], name: "index_adjustments_on_source_type_and_source_id"
-  end
-
-  create_table "albums", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_albums_on_store_id"
   end
 
   create_table "alternate_prices", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|

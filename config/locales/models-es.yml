@@ -7,9 +7,6 @@ es:
       shipping_gateway/vendor: Envío a cargo del vendedor
   activerecord:
     models:
-      album:
-        one: Album
-        other: Albumes
       alternate_price:
         one: Precio
         other: Precios
@@ -90,12 +87,6 @@ es:
         one: Usuario
         other: Usuarios
     attributes:
-      album:
-        title: Título
-        created_at: Fecha
-        description: Descripción
-        images: Fotos
-        page_ids: Mostrar en páginas
       alternate_price:
         product_id: Producto
         retail_price: Precio de venta

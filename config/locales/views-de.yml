@@ -50,11 +50,6 @@ de:
         total_value: Gesamtwert
         items: Stücke
     manage: Verwalten
-    albums:
-      index:
-        new_album: Neues Fotoalbum
-      new:
-        new_album: Neues Fotoalbum
     categories:
       index:
         new_category: Neue Kategorie

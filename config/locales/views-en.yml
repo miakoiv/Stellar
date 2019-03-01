@@ -96,11 +96,6 @@ en:
           total: Total purchases €
     manage: Manage
     return_to_storefront: Return to storefront
-    albums:
-      index:
-        new_album: New album
-      new:
-        new_album: New album
     categories:
       index:
         new_category: New category

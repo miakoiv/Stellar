@@ -64,11 +64,6 @@ es:
           total: Ventas totales €
     manage: Administrar
     return_to_storefront: Regresar al inicio
-    albums:
-      index:
-        new_album: Nuevo album
-      new:
-        new_album: Nuevo album
     categories:
       index:
         new_category: Nueva categoria

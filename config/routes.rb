@@ -234,9 +234,6 @@ Rails.application.routes.draw do
     resources :images do
       get :select, on: :member
     end
-    resources :albums do
-      resources :pictures, shallow: true
-    end
     resources :products do
       resources :pictures, shallow: true
       resources :documents, shallow: true
