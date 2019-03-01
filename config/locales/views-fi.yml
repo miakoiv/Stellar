@@ -124,12 +124,6 @@ fi:
           pictures: Kuvat
           new: Uusi
           paste: Liitä
-    customer_assets:
-      index:
-        new_customer_asset: Uusi omistus
-        grand_total: Yhteensä
-      new:
-        new_customer_asset: Uusi omistus
     departments:
       index:
         new_department: Uusi osasto

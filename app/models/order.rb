@@ -314,24 +314,20 @@ class Order < ApplicationRecord
       create_initial_transfer! if track_shipments?
     end
 
-    # Concluding an order creates asset entries for it.
+    # Concluding an order creates report rows for it.
     # A notification of shipment is sent.
     def conclude!
       reload # to clear changes and prevent a callback loop
       email(:shipment, customer_string, nil, bcc: false)
       email(:shipment, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
       OrderReportRow.create_from(self)
-      CustomerAsset.create_from(self)
     end
 
     # Cancelling an order rolls back any changes made earlier by
     # backtracking its life cycle from conclusion to creation.
     def cancel!
       reload # to clear changes and prevent a callback loop
-      if concluded?
-        CustomerAsset.cancel_entries_from(self)
-        OrderReportRow.cancel_entries_from(self)
-      end
+      OrderReportRow.cancel_entries_from(self) if concluded?
       total_for_real_items = grand_total_with_tax(order_items.real)
       if has_payment? && paid?
         payments.create(amount: -total_for_real_items)

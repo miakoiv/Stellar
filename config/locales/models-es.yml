@@ -13,15 +13,9 @@ es:
       alternate_price:
         one: Precio
         other: Precios
-      asset_entry:
-        one: Entrada
-        other: Entradas
       category:
         one: Categoria
         other: Categorias
-      customer_asset:
-        one: Bien del cliente
-        other: Bienes del cliente
       department:
         one: Departamento
         other: Departamentos
@@ -108,13 +102,6 @@ es:
         markup_percent: Incremento del precio %
         margin_percent: Ganancia %
         price_factor: Factor de precios
-      asset_entry:
-        customer_asset_id: Bien del cliente
-        recorded_at: Fecha
-        source_id: Referencia
-        amount: Cantidad
-        value: Valor
-        note: Notas
       category:
         parent_id: Categoria parental
         live: Habilitar
@@ -126,11 +113,6 @@ es:
         component_id: Componentes
         quantity: Cantidad
         subtotal: Subtotal
-      customer_asset:
-        user_id: Cliente
-        product_id: Producto
-        amount: Cantidad
-        value: Valor
       department:
         name: Nombre
         category_ids: Categorias

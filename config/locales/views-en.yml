@@ -117,12 +117,6 @@ en:
           pictures: Pictures
           new: New
           paste: Paste
-    customer_assets:
-      index:
-        new_customer_asset: New asset
-        grand_total: Total
-      new:
-        new_customer_asset: New asset
     departments:
       index:
         new_department: New department

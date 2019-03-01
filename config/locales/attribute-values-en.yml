@@ -111,7 +111,6 @@ en:
           promotion_editor: promotions
           user_manager: users
           album_editor: albums
-          asset_editor: assets
           inventory_manage: inventories
           store_admin: store administrator
           superuser: superuser
@@ -130,7 +129,6 @@ en:
           promotion_editor: promotion management
           user_manager: user and privilege management
           album_editor: photo album management
-          asset_editor: management of products sold to customers
           inventory_manage: inventory management
           store_admin: store settings and web addresses
           superuser: store creation and system settings

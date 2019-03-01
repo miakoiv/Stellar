@@ -29,18 +29,12 @@ en:
       alternate_price:
         one: price
         other: prices
-      asset_entry:
-        one: entry
-        other: entries
       category:
         one: category
         other: categories
       component_entry:
         one: product component
         other: product components
-      customer_asset:
-        one: customer asset
-        other: customer assets
       department:
         one: department
         other: departments
@@ -173,13 +167,6 @@ en:
         price: Price
         markup_percent: Markup %
         margin_percent: Margin %
-      asset_entry:
-        customer_asset_id: Customer asset
-        recorded_at: Date
-        source_id: Reference
-        amount: Amount
-        value: Value
-        note: Note
       category:
         parent_id: Parent category
         live: Enabled
@@ -199,11 +186,6 @@ en:
         component_id: Component
         quantity: Quantity
         subtotal: Subtotal
-      customer_asset:
-        user_id: Customer
-        product_id: Product
-        amount: Amount
-        value: Value
       department:
         has_page: Department has a page
         name: Name

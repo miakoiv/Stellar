@@ -14,7 +14,6 @@ class Role < ApplicationRecord
     'customer_selection' => {icon: 'address-book-o', appearance: 'danger'},
     'user_manager' => {icon: 'users', appearance: 'success'},
     'inventory_manage' => {icon: 'cubes', appearance: 'success'},
-    'asset_editor' => {icon: 'archive', appearance: 'success'},
     'page_editor' => {icon: 'files-o', appearance: 'info'},
     'product_editor' => {icon: 'cube', appearance: 'info'},
     'category_editor' => {icon: 'sitemap', appearance: 'info'},

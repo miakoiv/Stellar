@@ -92,7 +92,6 @@ class Store < ApplicationRecord
     store.has_many :pages
     store.has_many :albums
     store.has_many :promotions
-    store.has_many :customer_assets
     store.has_many :tax_categories
     store.has_many :groups
     store.has_many :policies

@@ -178,9 +178,6 @@ Rails.application.routes.draw do
     resources :tags do
       resources :pictures, shallow: true
     end
-    resources :customer_assets do
-      resources :asset_entries, shallow: true, only: :create
-    end
     resources :transfers do
       resources :transfer_items, shallow: true
       patch :complete, on: :member

@@ -14,9 +14,6 @@ fi:
         notice: "Tuoteryhmä %{category} päivitetty."
       destroy:
         notice: "Tuoteryhmä %{category} poistettu."
-    customer_assets:
-      create:
-        notice: "Asiakkaan omistus %{customer_asset} luotu."
     departments:
       create:
         notice: "Osasto %{department} luotu."

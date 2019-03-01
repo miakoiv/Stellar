@@ -14,9 +14,6 @@ es:
         notice: "Categoria %{category} subido."
       destroy:
         notice: "Categoria %{category} eliminado."
-    customer_assets:
-      create:
-        notice: "Bienes del cliente %{customer_asset} creados."
     departments:
       create:
         notice: "Departamento %{department} creado."

@@ -76,12 +76,6 @@ es:
         new_category: Nueva categoria
       edit:
         new_category: Nueva categoria
-    customer_assets:
-      index:
-        new_customer_asset: Nuevo bien
-        grand_total: Total
-      new:
-        new_customer_asset: Nuevo bien
     departments:
       index:
         new_department: Nuevo departamento

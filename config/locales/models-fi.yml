@@ -29,18 +29,12 @@ fi:
       alternate_price:
         one: hinta
         other: hinnat
-      asset_entry:
-        one: kirjaus
-        other: kirjaukset
       category:
         one: tuoteryhmä
         other: tuoteryhmät
       component_entry:
         one: tuotekomponentti
         other: tuotekomponentit
-      customer_asset:
-        one: asiakkaan omistus
-        other: asiakkaan omistukset
       department:
         one: osasto
         other: osastot
@@ -173,13 +167,6 @@ fi:
         price: Hinta
         markup_percent: Lisä-%
         margin_percent: Kate-%
-      asset_entry:
-        customer_asset_id: Asiakkaan omistus
-        recorded_at: Pvm
-        source_id: Viite
-        amount: Määrä
-        value: Arvo
-        note: Selite
       category:
         parent_id: Pääryhmä
         live: Aktiivinen
@@ -199,11 +186,6 @@ fi:
         component_id: Komponentti
         quantity: Määrä
         subtotal: Yhteensä
-      customer_asset:
-        user_id: Asiakas
-        product_id: Tuote
-        amount: Määrä
-        value: Arvo
       department:
         has_page: Osastolla on sivu
         name: Nimi

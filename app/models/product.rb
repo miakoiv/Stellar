@@ -75,9 +75,6 @@ class Product < ApplicationRecord
 
   has_many :order_report_rows, dependent: :destroy
 
-  # Customer assets referring to this product.
-  has_many :customer_assets, dependent: :destroy
-
   scope :at, -> (store) { where(store: store) }
 
   # Real products are everything but internal costs.
@@ -105,7 +102,6 @@ class Product < ApplicationRecord
 
   scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.self_and_descendant_ids(id) }.flatten}) }
   scope :not_including, -> (this) { where.not(id: this) }
-  scope :with_assets, -> { joins(:customer_assets).distinct }
 
   #---
   validates :code, presence: true, uniqueness: {scope: :store}

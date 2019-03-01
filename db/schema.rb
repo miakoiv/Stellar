@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_084838) do
+ActiveRecord::Schema.define(version: 2019_03_01_134159) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -58,20 +58,6 @@ ActiveRecord::Schema.define(version: 2019_03_01_084838) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_alternate_prices_on_group_id"
     t.index ["product_id"], name: "index_alternate_prices_on_product_id"
-  end
-
-  create_table "asset_entries", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.integer "customer_asset_id", null: false
-    t.date "recorded_at"
-    t.integer "source_id"
-    t.string "source_type"
-    t.integer "amount", null: false
-    t.integer "value_cents", null: false
-    t.string "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_asset_id"], name: "index_asset_entries_on_customer_asset_id"
-    t.index ["source_type", "source_id"], name: "index_asset_entries_on_source_type_and_source_id"
   end
 
   create_table "categories", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
@@ -142,19 +128,6 @@ ActiveRecord::Schema.define(version: 2019_03_01_084838) do
     t.string "code", limit: 2, null: false
     t.string "name"
     t.index ["code"], name: "index_countries_on_code", unique: true
-  end
-
-  create_table "customer_assets", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.integer "store_id", null: false
-    t.integer "user_id", null: false
-    t.integer "product_id", null: false
-    t.integer "amount", default: 0, null: false
-    t.integer "value_cents", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_customer_assets_on_product_id"
-    t.index ["store_id"], name: "index_customer_assets_on_store_id"
-    t.index ["user_id"], name: "index_customer_assets_on_user_id"
   end
 
   create_table "delayed_jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|

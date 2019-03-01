@@ -17,9 +17,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :groups
   has_many :stores, through: :groups
 
-  # Users (customers) collect assets by ordering products.
-  has_many :customer_assets, dependent: :destroy
-
   has_and_belongs_to_many :favorite_products, -> { distinct }, class_name: 'Product'
 
   has_many :orders, dependent: :destroy
@@ -36,7 +33,6 @@ class User < ApplicationRecord
 
   default_scope { order(:name) }
 
-  scope :with_assets, -> { joins(:customer_assets).reorder(:name).distinct }
   scope :with_activities, -> { joins(:performed_activities).reorder(:name).distinct }
 
   #---
