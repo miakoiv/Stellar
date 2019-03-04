@@ -70,3 +70,6 @@ MoneyRails.configure do |config|
   #  :sign_before_symbol => false
   #}
 end
+
+# Set i18n backend
+Money.locale_backend = :i18n
