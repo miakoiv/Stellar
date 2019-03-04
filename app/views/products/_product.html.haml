@@ -1,5 +1,5 @@
 - cache [selected_group, I18n.locale, :product, product, @category] do
-  %li.grid-item.single[product]{class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
+  %li.grid-item.single[product]{class: product.has_variants? || product.orderable?(default_inventory, nil) || 'out-of-stock'}
     = link_to show_product_path(product, @category) do
       = render partial: 'products/card/card_image', object: product, as: :product
       = render partial: 'products/card/full_text', object: product, as: :product

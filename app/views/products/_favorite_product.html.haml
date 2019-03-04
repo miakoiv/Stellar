@@ -1,4 +1,4 @@
-%li.grid-item.single.product{id: dom_id(product, :favorite), class: !product.orderable?(default_inventory, nil) && 'out-of-stock'}
+%li.grid-item.single.product{id: dom_id(product, :favorite), class: product.has_variants? || product.orderable?(default_inventory, nil) || 'out-of-stock'}
   = link_to show_product_path(product) do
     = render partial: 'products/card/card_image', object: product, as: :product
     = render partial: 'products/card/title_text', object: product, as: :product
