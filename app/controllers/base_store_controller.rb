@@ -34,7 +34,7 @@ class BaseStoreController < ApplicationController
   helper_method :current_store
 
   def current_group
-    @current_group ||= current_user.group(current_store)
+    @current_group ||= current_user.effective_group(current_store)
   end
   helper_method :current_group
 
@@ -65,9 +65,8 @@ class BaseStoreController < ApplicationController
   end
   helper_method :current_user_has_role?
 
-  # Belonging to the default group is considered being a guest.
   def guest?
-    @guest ||= current_group == current_store.default_group
+    current_user.guest?(current_store)
   end
   helper_method :guest?
 
@@ -146,7 +145,7 @@ class BaseStoreController < ApplicationController
   helper_method :selected_customer
 
   def selected_group
-    selected_customer.group(current_store)
+    selected_customer.effective_group(current_store)
   end
   helper_method :selected_group
 
@@ -193,7 +192,7 @@ class BaseStoreController < ApplicationController
 
     # Create a record for a guest user and schedule a cleanup in two weeks.
     def create_guest_user
-      guest = User.generate_guest!(current_hostname, current_store.default_group)
+      guest = User.generate_guest!(current_hostname)
       session[:guest_user_id] = guest.id
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest

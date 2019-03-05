@@ -15,5 +15,4 @@
       %span.badge
         = number_to_signed_percentage(group.price_modifier, precision: 2, strip_insignificant_zeros: true)
   %td.actions.rowlink-skip
-    - unless group.guest?
-      = link_to icon('users', title(User, count: 2)), admin_group_users_path(group), class: 'btn btn-outline-primary btn-sm'
+    = link_to icon('users', title(User, count: 2)), admin_group_users_path(group), class: 'btn btn-outline-primary btn-sm'

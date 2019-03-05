@@ -18,14 +18,11 @@ class ProductAuthorizer < ApplicationAuthorizer
 
   # Third parties have access to products they are vendors for.
   def readable_by?(user, opts)
-    return false unless user.has_cached_role?(:product_editor, opts[:at])
-    return true unless user.has_cached_role?(:third_party, opts[:at])
-    resource.vendor == user.group(opts[:at])
+    store = opts[:at]
+    return false unless user.has_cached_role?(:product_editor, store)
+    return true unless user.has_cached_role?(:third_party, store)
+    group = user.group(store)
+    group.present? && resource.vendor == group
   end
-
-  def updatable_by?(user, opts)
-    return false unless user.has_cached_role?(:product_editor, opts[:at])
-    return true unless user.has_cached_role?(:third_party, opts[:at])
-    resource.vendor == user.group(opts[:at])
-  end
+  alias_method :updatable_by?, :readable_by?
 end

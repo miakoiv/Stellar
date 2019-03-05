@@ -121,7 +121,7 @@ class Order < ApplicationRecord
 
   # Order source group is independent of order type.
   def source
-    customer.group(store)
+    customer.effective_group(store)
   end
 
   # Pricing applied to this order, based on source group.

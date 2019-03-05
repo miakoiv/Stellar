@@ -42,8 +42,8 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   #---
-  # Generates a guest user visiting at hostname as member of group.
-  def self.generate_guest!(hostname, group)
+  # Generates a guest user visiting at hostname.
+  def self.generate_guest!(hostname)
     uuid = SecureRandom.uuid
     guest = User.new(
       name: uuid,
@@ -51,7 +51,6 @@ class User < ApplicationRecord
     )
     guest.skip_confirmation!
     guest.save!
-    guest.groups << group
     guest
   end
 
@@ -85,12 +84,19 @@ class User < ApplicationRecord
   end
 
   # Finds the group this user belongs to at the given store.
+  # Returns nil if the user is a guest.
   def group(store)
     groups.find_by(store: store)
   end
 
   def guest?(store)
-    group(store) == store.default_group
+    group(store).nil?
+  end
+
+  # The effective group is the user's own group, and
+  # if none exists, the default group at the store.
+  def effective_group(store)
+    group(store) || store.default_group
   end
 
   def to_s
