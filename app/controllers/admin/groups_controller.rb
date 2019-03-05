@@ -37,9 +37,9 @@ class Admin::GroupsController < AdminController
     respond_to :html, :js
   end
 
-  # POST /admin/departments
-  # POST /admin/departments.js
-  # POST /admin/departments.json
+  # POST /admin/groups
+  # POST /admin/groups.js
+  # POST /admin/groups.json
   def create
     authorize_action_for Group, at: current_store
     @group = current_store.groups.build(group_params.merge(priority: current_store.groups.count))
