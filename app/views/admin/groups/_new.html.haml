@@ -1,1 +1,8 @@
-= render partial: 'form'
+= bootstrap_form_for [:admin, @group] do |f|
+  .panel.panel-primary
+    .panel-body
+      %fieldset
+        = f.select :parent_id, Group.options_for_select(current_store.groups) { |g, l| [indent(g.to_s, l), g.id] }, {include_blank: true}, {class: 'selectize'}
+        = f.text_field :name, required: true
+    .panel-footer
+      = f.primary

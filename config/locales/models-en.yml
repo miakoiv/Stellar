@@ -179,6 +179,7 @@ en:
         name: Name
         category_ids: Categories
       group:
+        parent_id: Parent group
         name: Name
         pricing_shown: Product pricing shown
         stock_shown: Product stock shown

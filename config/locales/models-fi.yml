@@ -179,6 +179,7 @@ fi:
         name: Nimi
         category_ids: Tuoteryhmät
       group:
+        parent_id: Pääryhmä
         name: Nimi
         pricing_shown: Tuotteiden hinnat näkyvissä
         stock_shown: Tuotteiden saldot näkyvissä

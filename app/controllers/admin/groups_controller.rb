@@ -1,10 +1,8 @@
 class Admin::GroupsController < AdminController
 
-  include Reorderer
-
   before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default, :select_categories, :toggle_category]
 
-  authority_actions reorder: 'update', make_default: 'update', select_categories: 'update', toggle_category: 'update'
+  authority_actions rearrange: 'update', make_default: 'update', select_categories: 'update', toggle_category: 'update'
 
   # GET /admin/groups
   # GET /admin/groups.json
@@ -38,22 +36,19 @@ class Admin::GroupsController < AdminController
   end
 
   # POST /admin/groups
-  # POST /admin/groups.js
   # POST /admin/groups.json
   def create
     authorize_action_for Group, at: current_store
-    @group = current_store.groups.build(group_params.merge(priority: current_store.groups.count))
+    @group = current_store.groups.build(group_params)
 
     respond_to do |format|
       if @group.save
         track @group
         format.html { redirect_to edit_admin_group_path(@group),
           notice: t('.notice', group: @group) }
-        format.js { flash.now[:notice] = t('.notice', group: @group) }
         format.json { render :edit, status: :created, location: edit_admin_group_path(@group) }
       else
         format.html { render :new }
-        format.js { render :new }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
@@ -70,8 +65,7 @@ class Admin::GroupsController < AdminController
         track @group
         @groups = current_store.groups
 
-        format.html { redirect_to admin_group_path(@group),
-          notice: t('.notice', group: @group) }
+        format.html { redirect_to edit_admin_group_path(@group), notice: t('.notice', group: @group) }
         format.js { flash.now[:notice] = t('.notice', group: @group) }
         format.json { render :show, status: :ok, location: admin_group_path(@group) }
       else
@@ -90,19 +84,18 @@ class Admin::GroupsController < AdminController
     @group.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_groups_path,
-        notice: t('.notice', group: @group) }
+      format.html { redirect_to admin_groups_path, notice: t('.notice', group: @group) }
       format.json { head :no_content }
     end
   end
 
-  # PATCH /admin/groups/1/make_default.js
+  # PATCH /admin/groups/1/make_default
   def make_default
     authorize_action_for @group, at: current_store
     @group.store.update default_group: @group
     @groups = current_store.groups
 
-    respond_to :js
+    redirect_to edit_admin_group_path(@group)
   end
 
   # GET /admin/groups/1/select_categories
@@ -132,7 +125,7 @@ class Admin::GroupsController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
       params.require(:group).permit(
-        :name, :appearance,
+        :parent_id, :name, :appearance,
         :pricing_shown, :stock_shown,
         :price_base, :price_modifier, :price_tax_included,
         :premium_group_id, :premium_teaser

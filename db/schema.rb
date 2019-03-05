@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_142138) do
+ActiveRecord::Schema.define(version: 2019_03_05_124439) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -173,6 +173,11 @@ ActiveRecord::Schema.define(version: 2019_03_01_142138) do
 
   create_table "groups", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth", default: 0, null: false
+    t.integer "children_count", default: 0, null: false
     t.string "name", null: false
     t.boolean "pricing_shown", default: true, null: false
     t.boolean "stock_shown", default: true, null: false
@@ -182,9 +187,9 @@ ActiveRecord::Schema.define(version: 2019_03_01_142138) do
     t.integer "premium_group_id"
     t.string "premium_teaser"
     t.string "appearance", default: "default", null: false
-    t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_groups_on_parent_id"
     t.index ["store_id"], name: "index_groups_on_store_id"
   end
 

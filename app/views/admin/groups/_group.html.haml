@@ -1,0 +1,5 @@
+%li.dd-item{data: {id: group.id}}
+  = render partial: 'item', object: group, as: :group
+  - if group.children_count > 0
+    %ol.dd-list
+      = render group.children

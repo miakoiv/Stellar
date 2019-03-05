@@ -98,7 +98,10 @@ class Admin::UsersController < AdminController
     @user.groups << @group
     track @user, nil, {action: 'update', differences: {group: @group}}
 
-    respond_to :js
+    respond_to do |format|
+      format.js
+      format.html { redirect_to edit_admin_group_path(@group) }
+    end
   end
 
   private

@@ -1,3 +1,4 @@
-$('#groups-table .group').removeClass('active');
+$('#group-list .dd-item').removeClass('active');
+$('#group-form').destroySelectized();
 $('#group-form').html("#{j render partial: 'admin/groups/new'}");
 $('#group-form').initialize();

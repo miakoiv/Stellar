@@ -3,7 +3,10 @@ class Group < ApplicationRecord
   resourcify
   include Authority::Abilities
   include Trackable
-  include Reorderable
+  acts_as_nested_set scope: :store,
+                     dependent: :destroy,
+                     counter_cache: :children_count,
+                     touch: true
 
   # This group purchases products at price base plus price modifier.
   enum price_base: {retail: 1, trade: 2, cost: 3}
@@ -39,7 +42,6 @@ class Group < ApplicationRecord
 
   has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
 
-  default_scope { sorted }
   scope :at, -> (store) { where(store: store) }
   scope :not_including, -> (this) { where.not(id: this) }
 
@@ -48,6 +50,14 @@ class Group < ApplicationRecord
   validates :price_modifier, numericality: {greater_than: -100}
 
   #---
+  def self.options_for_select(groups)
+    [].tap do |options|
+      each_with_level(groups.order(:lft)) do |g, l|
+        options << yield(g, l)
+      end
+    end
+  end
+
   def self.appearance_options
     APPEARANCES.map { |a| [human_attribute_value(:appearance, a), a, data: {appearance: a}.to_json] }
   end

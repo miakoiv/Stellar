@@ -136,7 +136,7 @@ Rails.application.routes.draw do
         get :select_categories
         patch :toggle_category
       end
-      post :reorder, on: :collection
+      post :rearrange, on: :collection
     end
     resources :users, except: [:index, :new, :create] do
       resources :roles, only: [] do

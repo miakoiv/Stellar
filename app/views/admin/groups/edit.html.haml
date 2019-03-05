@@ -2,7 +2,9 @@
   .col-md-7
     .page-header
       %h1= icon('users', title(Group, count: 2))
-    = render partial: 'admin/groups/table', object: @groups, as: :groups
+    #group-list.dd
+      %ol.dd-list
+        = render @groups
   .col-md-5
     .quick-edit-panel
       .header
@@ -20,7 +22,15 @@
     spacer: false
     recalc_every: 50
 
-  $('##{dom_id(@group)}').addClass 'active'
+  $('#group-list').nestable().on 'change', ->
+    data = {rearrange: {groups: $(this).nestable('serialize')}}
+    $.ajax
+      type: 'POST'
+      url: '#{rearrange_admin_groups_path}'
+      data: JSON.stringify data
+      contentType: 'application/json; charset=utf-8'
+
+  $('##{dom_id(@group)}').closest('.dd-item').addClass 'active'
 
   scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
   scroll.animateScroll $('##{dom_id(@group)}')[0], null, speed: 300

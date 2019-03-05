@@ -1,0 +1,10 @@
+.dd-content[group]
+  .dd-handle= drag_handle
+  = link_to edit_admin_group_path(group), remote: true do
+    .dd-icon
+      = bootstrap_label(group, icon: 'user', text: '')
+    - if group == current_group
+      .dd-icon= icon('home', title: col(Group, :home), data: {toggle: 'tooltip'})
+    = group
+    - if group == current_store.default_group
+      .dd-widget= bootstrap_label(group, text: col(Group, :default), appearance: :default)
