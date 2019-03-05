@@ -50,14 +50,6 @@ class Group < ApplicationRecord
   validates :price_modifier, numericality: {greater_than: -100}
 
   #---
-  def self.options_for_select(groups)
-    [].tap do |options|
-      each_with_level(groups.order(:lft)) do |g, l|
-        options << yield(g, l)
-      end
-    end
-  end
-
   def self.appearance_options
     APPEARANCES.map { |a| [human_attribute_value(:appearance, a), a, data: {appearance: a}.to_json] }
   end
@@ -96,6 +88,10 @@ class Group < ApplicationRecord
 
   def notified_users
     users.with_role(:order_notify, store)
+  end
+
+  def to_path
+    self_and_ancestors.map(&:to_s).join ' » '
   end
 
   def to_s

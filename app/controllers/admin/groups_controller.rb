@@ -1,5 +1,7 @@
 class Admin::GroupsController < AdminController
 
+  include AwesomeNester
+
   before_action :set_group, only: [:show, :edit, :update, :destroy, :make_default, :select_categories, :toggle_category]
 
   authority_actions rearrange: 'update', make_default: 'update', select_categories: 'update', toggle_category: 'update'
@@ -8,7 +10,7 @@ class Admin::GroupsController < AdminController
   # GET /admin/groups.json
   def index
     authorize_action_for Group, at: current_store
-    @groups = current_store.groups
+    @groups = current_store.groups.roots
   end
 
   # GET /admin/groups/1
@@ -30,7 +32,7 @@ class Admin::GroupsController < AdminController
   def edit
     authorize_action_for @group, at: current_store
     track @group
-    @groups = current_store.groups
+    @groups = current_store.groups.roots
 
     respond_to :html, :js
   end
@@ -44,8 +46,8 @@ class Admin::GroupsController < AdminController
     respond_to do |format|
       if @group.save
         track @group
-        format.html { redirect_to edit_admin_group_path(@group),
-          notice: t('.notice', group: @group) }
+
+        format.html { redirect_to edit_admin_group_path(@group), notice: t('.notice', group: @group) }
         format.json { render :edit, status: :created, location: edit_admin_group_path(@group) }
       else
         format.html { render :new }
@@ -63,7 +65,6 @@ class Admin::GroupsController < AdminController
     respond_to do |format|
       if @group.update(group_params)
         track @group
-        @groups = current_store.groups
 
         format.html { redirect_to edit_admin_group_path(@group), notice: t('.notice', group: @group) }
         format.js { flash.now[:notice] = t('.notice', group: @group) }
@@ -93,7 +94,6 @@ class Admin::GroupsController < AdminController
   def make_default
     authorize_action_for @group, at: current_store
     @group.store.update default_group: @group
-    @groups = current_store.groups
 
     redirect_to edit_admin_group_path(@group)
   end
