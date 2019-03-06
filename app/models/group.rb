@@ -42,6 +42,7 @@ class Group < ApplicationRecord
 
   has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
 
+  default_scope { order(:lft) }
   scope :at, -> (store) { where(store: store) }
   scope :not_including, -> (this) { where.not(id: this) }
 
