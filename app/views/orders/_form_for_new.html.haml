@@ -5,7 +5,7 @@
         %h4.panel-title= t('.order_meta')
       .panel-body
         %fieldset
-          = f.select :group_id, @groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, label: t('.group_id')
+          = f.select :group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }, label: t('.group_id')
           = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.new_customer')}
           %hr
           .row

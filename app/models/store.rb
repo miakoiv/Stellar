@@ -231,7 +231,7 @@ class Store < ApplicationRecord
   end
 
   def group_options
-    groups.map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }
+    groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }
   end
 
   def shipping_method_options

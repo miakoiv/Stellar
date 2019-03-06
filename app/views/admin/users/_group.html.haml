@@ -4,8 +4,8 @@
     - if locked
       .list-group-item{class: css}
         %h5.list-group-item-heading
-          = bootstrap_label(group)
+          = bootstrap_label(group, text: group.to_path)
     - else
       = link_to join_admin_group_user_path(group, user), class: css, remote: true, method: :patch do
         %h5.list-group-item-heading
-          = bootstrap_label(group)
+          = bootstrap_label(group, text: group.to_path)
