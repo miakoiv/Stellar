@@ -23,7 +23,7 @@
                 %span.help-block= @group.errors[:price_modifier].join(', ')
         = f.form_group do
           = f.check_box :price_tax_included
-        = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.name, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: true}, {class: 'selectize-label'}
+        = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: true}, {class: 'selectize-label'}
         .premium-teaser.collapse{class: @group.premium_group.present? && 'in'}
           = f.text_field :premium_teaser
     .panel-footer
