@@ -71,7 +71,7 @@ class Page < ApplicationRecord
   has_many :segments, through: :sections
   has_many :content_pictures, through: :segments, source: :pictures
 
-  default_scope { order(:lft) }
+  default_scope { nested_set_scope }
   scope :live, -> { where(live: true) }
   scope :excluding, -> (page) { where.not(id: page) }
 

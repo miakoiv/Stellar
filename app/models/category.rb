@@ -24,7 +24,7 @@ class Category < ApplicationRecord
   # Categories may appear at any number of portal departments.
   has_and_belongs_to_many :departments
 
-  default_scope { order(:lft) }
+  default_scope { nested_set_scope }
   scope :live, -> { where(live: true) }
 
   #---
