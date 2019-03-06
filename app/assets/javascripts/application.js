@@ -47,6 +47,7 @@
 //= require cropper.min
 //= require gumshoe.min
 //= require imagesloaded.pkgd.min
+//= require jquery.nestable.min
 //= require masonry.pkgd.min
 //= require numbro.min
 //= require numbro/languages.min
