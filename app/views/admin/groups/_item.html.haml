@@ -4,5 +4,9 @@
     - if group == current_group
       .dd-icon= icon('home', title: col(Group, :home), data: {toggle: 'tooltip'})
     = group
+    %span.label{class: "label-#{group.appearance}"}
+      = group.human_attribute_value(:price_base)
+      - if group.price_modifier.nonzero?
+        = number_to_signed_percentage(group.price_modifier, precision: 2, strip_insignificant_zeros: true)
     - if group == current_store.default_group
-      .dd-widget= bootstrap_label(group, text: col(Group, :default), appearance: :default)
+      .pull-right= bootstrap_label(group, text: col(Group, :default), appearance: :primary)
