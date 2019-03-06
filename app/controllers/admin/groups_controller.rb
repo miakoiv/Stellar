@@ -32,9 +32,14 @@ class Admin::GroupsController < AdminController
   def edit
     authorize_action_for @group, at: current_store
     track @group
-    @groups = current_store.groups.roots
 
-    respond_to :html, :js
+    respond_to do |format|
+      format.html {
+        @groups = current_store.groups.roots
+        render 'index'
+      }
+      format.js
+    end
   end
 
   # POST /admin/groups

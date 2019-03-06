@@ -23,9 +23,14 @@ class Admin::PagesController < AdminController
   # GET /admin/pages/1/edit.js
   def edit
     authorize_action_for @page, at: current_store
-    @pages = current_store.pages.roots
 
-    respond_to :html, :js
+    respond_to do |format|
+      format.html {
+        @pages = current_store.pages.roots
+        render 'index'
+      }
+      format.js
+    end
   end
 
   # POST /admin/pages

@@ -12,6 +12,12 @@
           = link_to new_admin_group_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_group'))
       #group-form
+        - if @group.present?
+          = render partial: 'form'
+          :coffee
+            $('##{dom_id(@group)}').closest('.dd-item').addClass 'active'
+            scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+            scroll.animateScroll $('##{dom_id(@group)}')[0], null, speed: 300
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
@@ -21,7 +27,9 @@
     spacer: false
     recalc_every: 50
 
-  $('#group-list').nestable().on 'change', ->
+  $('#group-list').nestable
+    scroll: true
+  .on 'change', ->
     data = {rearrange: {groups: $(this).nestable('serialize')}}
     $.ajax
       type: 'POST'

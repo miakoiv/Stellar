@@ -12,6 +12,12 @@
           = link_to new_admin_category_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_category'))
       #category-form
+        - if @category.present?
+          = render partial: 'edit'
+          :coffee
+            $('##{dom_id(@category)}').closest('.dd-item').addClass 'active'
+            scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+            scroll.animateScroll $('##{dom_id(@category)}')[0], null, speed: 300
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
@@ -21,7 +27,9 @@
     spacer: false
     recalc_every: 50
 
-  $('#category-list').nestable().on 'change', ->
+  $('#category-list').nestable
+    scroll: true
+  .on 'change', ->
     data = {rearrange: {categories: $(this).nestable('serialize')}}
     $.ajax
       type: 'POST'

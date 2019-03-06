@@ -12,6 +12,12 @@
           = link_to new_admin_page_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_page'))
       #page-form
+        - if @page.present?
+          = render partial: 'edit'
+          :coffee
+            $('##{dom_id(@page)}').closest('.dd-item').addClass 'active'
+            scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+            scroll.animateScroll $('##{dom_id(@page)}')[0], null, speed: 300
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
@@ -21,7 +27,9 @@
     spacer: false
     recalc_every: 50
 
-  $('#page-list').nestable().on 'change', ->
+  $('#page-list').nestable
+    scroll: true
+  .on 'change', ->
     data = {rearrange: {pages: $(this).nestable('serialize')}}
     $.ajax
       type: 'POST'

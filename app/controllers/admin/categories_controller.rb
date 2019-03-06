@@ -28,10 +28,14 @@ class Admin::CategoriesController < AdminController
   # GET /admin/categories/1/edit.js
   def edit
     authorize_action_for @category, at: current_store
-    track @category
-    @categories = current_store.categories.roots
 
-    respond_to :html, :js
+    respond_to do |format|
+      format.html {
+        @categories = current_store.categories.roots
+        render 'index'
+      }
+      format.js
+    end
   end
 
   # POST /admin/categories
