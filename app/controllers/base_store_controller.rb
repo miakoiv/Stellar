@@ -150,7 +150,7 @@ class BaseStoreController < ApplicationController
   helper_method :selected_group
 
   def set_categories
-    @live_categories = current_store.categories.live.order(:lft)
+    @live_categories = current_store.categories.live
     @categories = @live_categories.roots
   end
 

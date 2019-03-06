@@ -86,7 +86,7 @@ class Promotion < ApplicationRecord
   end
 
   def available_categories
-    store.categories.order(:lft)
+    store.categories
   end
 
   def slugger

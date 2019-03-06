@@ -211,7 +211,7 @@ class Store < ApplicationRecord
   end
 
   def available_categories
-    categories.live.order(:lft)
+    categories.live
   end
 
   # Properties flagged searchable.

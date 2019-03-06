@@ -79,7 +79,7 @@ class Group < ApplicationRecord
 
   # Categories available to this group when creating and editing products.
   def available_categories
-    limited_categories? ? categories.order(:lft) : store.categories.order(:lft)
+    limited_categories? ? categories : store.categories
   end
 
   # Category selection is limited if any are set.

@@ -71,6 +71,7 @@ class Page < ApplicationRecord
   has_many :segments, through: :sections
   has_many :content_pictures, through: :segments, source: :pictures
 
+  default_scope { order(:lft) }
   scope :live, -> { where(live: true) }
   scope :excluding, -> (page) { where.not(id: page) }
 
@@ -102,7 +103,7 @@ class Page < ApplicationRecord
 
   def self.options_for_select(pages)
     [].tap do |options|
-      each_with_level(pages.order(:lft)) do |p, l|
+      each_with_level(pages) do |p, l|
         options << yield(p, l)
       end
     end

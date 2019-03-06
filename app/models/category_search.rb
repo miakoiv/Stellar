@@ -10,7 +10,7 @@ class CategorySearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def base_query
-    Category.joins(:page).order(:lft)
+    Category.joins(:page)
   end
 
   def search_store

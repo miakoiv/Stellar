@@ -24,6 +24,7 @@ class Category < ApplicationRecord
   # Categories may appear at any number of portal departments.
   has_and_belongs_to_many :departments
 
+  default_scope { order(:lft) }
   scope :live, -> { where(live: true) }
 
   #---
@@ -38,7 +39,7 @@ class Category < ApplicationRecord
 
   def self.options_for_select(categories)
     [].tap do |options|
-      each_with_level(categories.order(:lft)) do |c, l|
+      each_with_level(categories) do |c, l|
         options << yield(c, l)
       end
     end
