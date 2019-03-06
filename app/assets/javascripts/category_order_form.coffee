@@ -1,5 +1,5 @@
 $.fn.extend
-  category_order_form: (order_items_url)->
+  category_order_form: (order_items_url) ->
     $element = this
     $.ajax
       type: 'GET'
