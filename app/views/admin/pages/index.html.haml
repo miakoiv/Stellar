@@ -22,10 +22,10 @@
 :coffee
   $('.quick-edit-panel').stick_in_parent
     parent: $('#content-wrap')
-    offset_top: 80
+    offset_top: $('#main-nav').height()
     bottoming: false
     spacer: false
-    recalc_every: 50
+    recalc_every: 500
 
   $('#page-list').nestable
     scroll: true
