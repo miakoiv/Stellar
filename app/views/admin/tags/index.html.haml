@@ -10,6 +10,12 @@
           = link_to new_admin_tag_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_tag'))
       #tag-form
+        - if @tag.present?
+          = render partial: 'edit'
+          :coffee
+            $('##{dom_id(@tag)}').addClass 'active'
+            scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
+            scroll.animateScroll $('##{dom_id(@tag)}')[0], null, speed: 300
 
 :coffee
   $('.quick-edit-panel').stick_in_parent

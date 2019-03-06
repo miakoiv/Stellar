@@ -25,9 +25,14 @@ class Admin::TagsController < AdminController
   # GET /admin/tags/1/edit.js
   def edit
     authorize_action_for @tag, at: current_store
-    @tags = current_store.tags
 
-    respond_to :html, :js
+    respond_to do |format|
+      format.html {
+        @tags = current_store.tags
+        render 'index'
+      }
+      format.js
+    end
   end
 
   # POST /admin/tags
