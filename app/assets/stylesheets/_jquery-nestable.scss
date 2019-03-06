@@ -29,7 +29,7 @@
 
   .dd-handle {
     float: left !important;
-    margin-right: 15px;
+    margin-right: 5px;
   }
   .dd-content a {
     display: block;
@@ -52,7 +52,7 @@
     float: left !important;
     position: relative;
     width: 24px;
-    margin-right: 15px;
+    margin-right: 5px;
     padding: 0;
     text-indent: 100%;
     white-space: nowrap;
@@ -75,7 +75,11 @@
   }
 }
 
-.dd-item .dd-list { padding-left: 28px; }
+.dd-item .dd-list {
+  margin-top: 10px;
+  margin-bottom: -5px;
+  padding-left: 56px;
+}
 
 .dd-empty, .dd-placeholder {
   box-sizing: content-box;
