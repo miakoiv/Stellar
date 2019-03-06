@@ -47,6 +47,7 @@ class Admin::GroupsController < AdminController
   def create
     authorize_action_for Group, at: current_store
     @group = current_store.groups.build(group_params)
+    @group.inherit_settings_from_parent
 
     respond_to do |format|
       if @group.save

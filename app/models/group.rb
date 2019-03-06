@@ -87,6 +87,19 @@ class Group < ApplicationRecord
     categories.any?
   end
 
+  def inherit_settings_from_parent
+    if child?
+      self.pricing_shown = parent.pricing_shown
+      self.stock_shown = parent.stock_shown
+      self.price_base = parent.price_base
+      self.price_modifier = parent.price_modifier
+      self.price_tax_included = parent.price_tax_included
+      self.premium_group = parent.premium_group
+      self.premium_teaser = parent.premium_teaser
+      self.appearance = parent.appearance
+    end
+  end
+
   def notified_users
     users.with_role(:order_notify, store)
   end
