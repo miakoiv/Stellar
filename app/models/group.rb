@@ -38,7 +38,8 @@ class Group < ApplicationRecord
   # Reference to another group with premium features and/or better prices.
   belongs_to :premium_group, class_name: 'Group', optional: true
 
-  has_one :letterhead, class_name: 'Page', as: :resource, dependent: :destroy
+  # Associated letterhead page is inherited by subgroups. See #letterhead.
+  has_one :letterhead_page, class_name: 'Page', as: :resource, dependent: :destroy
 
   default_scope { nested_set_scope }
   scope :at, -> (store) { where(store: store) }
@@ -89,6 +90,11 @@ class Group < ApplicationRecord
   # inherit effective categories from ancestors.
   def effective_categories
     categories.presence || parent&.effective_categories
+  end
+
+  # Finds the letterhead page that may be inherited from ancestors.
+  def letterhead
+    letterhead_page || parent&.letterhead
   end
 
   def inherit_settings_from_parent
