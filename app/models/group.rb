@@ -28,7 +28,8 @@ class Group < ApplicationRecord
   # Group-specific prices for products.
   has_many :alternate_prices
 
-  # Categories the group members are limited to, if any.
+  # Categories the group members are limited to, if any. May be inherited
+  # from ancestor groups, see #effective_categories below.
   has_and_belongs_to_many :categories
 
   # Promotions targeting this group.
@@ -74,14 +75,20 @@ class Group < ApplicationRecord
     store.inventories
   end
 
-  # Categories available to this group when creating and editing products.
-  def available_categories
-    limited_categories? ? categories : store.categories
+  # Category selection is limited if any selections are in effect.
+  def limited_categories?
+    effective_categories.present?
   end
 
-  # Category selection is limited if any are set.
-  def limited_categories?
-    categories.any?
+  # Categories available to this group when creating and editing products.
+  def available_categories
+    limited_categories? ? effective_categories : store.categories
+  end
+
+  # Group's own categories take precedence, but if none are set,
+  # inherit effective categories from ancestors.
+  def effective_categories
+    categories.presence || parent&.effective_categories
   end
 
   def inherit_settings_from_parent
