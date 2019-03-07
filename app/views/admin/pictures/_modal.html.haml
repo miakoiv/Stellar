@@ -11,7 +11,7 @@
         .modal-body
           .row
             .col-sm-5
-              #image-preview.box-postcard
+              #image-preview.picture-postcard
                 = render partial: 'admin/images/preview', object: @picture.image, as: :image
               = f.hidden_field :image_id
             .col-sm-7

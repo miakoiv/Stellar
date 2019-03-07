@@ -19,7 +19,7 @@
       - @departments.each do |department|
         %tr[department]
           %td.hidden-print= drag_handle
-          %td= picture_variant_tag department.cover_picture, :icon
+          %td= picture_variant_tag department.cover_picture, :icon, figure_class: 'picture-icon'
           %td= department.name
           %td
             - if department.page.present?

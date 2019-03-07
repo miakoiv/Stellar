@@ -10,7 +10,7 @@
     %tbody
       - @stores.each do |store|
         %tr[store]{class: store.portal? && 'info text-info'}
-          %td= picture_variant_tag store.cover_picture, :icon
+          %td= picture_variant_tag store.cover_picture, :icon, figure_class: 'picture-icon'
           %td= store.name
           %td
             - store.store_portals.each do |portal|

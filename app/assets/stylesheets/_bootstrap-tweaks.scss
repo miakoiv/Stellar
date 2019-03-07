@@ -947,7 +947,32 @@ mark {
 
 
 /*
- * Image boxes of various sizes, with image centered inside
+ * Picture boxes of various sizes, with image centered inside
+ */
+.picture-postcard {
+  width: 300px;
+  height: 300px;
+  @include contained-image;
+}
+.picture-matchbox {
+  width: 200px;
+  height: 200px;
+  @include contained-image;
+}
+.picture-thumbnail {
+  width: 75px;
+  height: 75px;
+  @include contained-image;
+}
+.picture-icon {
+  width: 25px;
+  height: 25px;
+  @include covering-image;
+}
+
+
+/*
+ * Image boxes that should be deprecated
  */
 .box-postcard {
   position: relative;

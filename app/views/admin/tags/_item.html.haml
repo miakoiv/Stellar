@@ -2,8 +2,7 @@
   .row
     .col-xs-2
       - if tag.cover_picture.present?
-        .box-thumbnail
-          = picture_variant_tag tag.cover_picture, :thumbnail
+        = picture_variant_tag tag.cover_picture, :thumbnail, figure_class: 'picture-thumbnail'
       - else
         = bootstrap_label(tag)
     .col-xs-10

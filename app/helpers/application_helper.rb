@@ -117,7 +117,7 @@ module ApplicationHelper
   def picture_variant_tag(picture, variant = nil, options = {})
     return ''.html_safe if picture.nil?
     variant ||= picture.variant.presence || :lightbox
-    content_tag :figure do
+    content_tag :figure, class: options.delete(:figure_class) do
       concat image_variant_tag(picture.image, variant, options)
       yield if block_given?
     end
