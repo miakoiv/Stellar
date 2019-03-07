@@ -109,7 +109,7 @@ class Group < ApplicationRecord
   end
 
   def to_path
-    self_and_ancestors.map(&:to_s).join ' » '
+    self_and_ancestors.join " \u23f5 "
   end
 
   def to_s
