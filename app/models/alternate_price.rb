@@ -9,8 +9,9 @@ class AlternatePrice < ApplicationRecord
   belongs_to :group
 
   #---
+  # Finds the alternate price for given group or its ancestors.
   def self.for(group)
-    find_by(group: group)
+    find_by(group: group) || group.child? && AlternatePrice.for(group.parent)
   end
 
   def modifier
