@@ -1,8 +1,14 @@
 .page-header
   = link_to edit_admin_group_path(@group), class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
-  %h1= icon('group', @group)
+  %h1= icon('group', @group.to_path)
 
 .row
   .col-md-7
     = render partial: 'categories', object: @group, as: :group
+  .col-md-5
+    - if @group.categories.none? && @group.limited_categories?
+      = t('.inherited_categories_html')
+      %ul.list-group
+        - @group.effective_categories.each do |category|
+          %li.list-group-item= category.to_path

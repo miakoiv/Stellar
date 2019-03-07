@@ -137,6 +137,8 @@ fi:
         make_default: Vieraille
         select_categories: Tuoteryhmät
         join: Liity
+      select_categories:
+        inherited_categories_html: <h4>Pääryhmiltä perityt valinnat</h4><p>Nämä asetukset ovat voimassa, kun tällä ryhmällä ei ole valittuja ryhmiä</p>
     images:
       browser:
         search: Hae kuvan nimellä…
