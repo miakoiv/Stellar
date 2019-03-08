@@ -69,6 +69,7 @@ en:
         total_value: Total value
         items: Items
       search:
+        all_groups: "[All groups]"
         all_order_types: "[All order types]"
         all_categories: "[All categories]"
         since_date: Since date

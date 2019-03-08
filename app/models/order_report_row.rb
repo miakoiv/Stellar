@@ -10,6 +10,7 @@ class OrderReportRow < ApplicationRecord
   monetize :total_tax_cents, disable_validation: true
 
   #---
+  belongs_to :group
   belongs_to :order_type
   belongs_to :product
   belongs_to :user, optional: true
@@ -17,21 +18,19 @@ class OrderReportRow < ApplicationRecord
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
 
   #---
-  # Creates or updates a report row from given order and its item.
-  # Rows are aggregated by order type, shipping country, and product
-  # to collect as many order items to a single slot as possible.
-  # Orders made by non-guest users are further distinguished by user.
-  def self.create_from_order_and_item(order, order_item, factor = 1)
+  def self.update_row_for(order, order_item, options = {})
+    factor = options[:factor]
     product = order_item.product
     return false unless product.present?
     row = where(
+      group: options[:group],
+      user: options[:user],
       order_type: order.order_type,
-      user: order.user.guest?(order.store) ? nil : order.user,
       store_portal: order.store_portal,
       shipping_country_code: order.shipping_country_code,
       product: product,
-      ordered_at: order.completed_at.to_date,
-      tax_rate: order_item.tax_rate
+      tax_rate: order_item.tax_rate,
+      ordered_at: order.completed_at.to_date
     ).first_or_initialize
     row.amount += factor * order_item.amount
     row.total_sans_tax_cents += factor * order_item.grand_total_sans_tax.cents
@@ -41,9 +40,10 @@ class OrderReportRow < ApplicationRecord
   end
 
   def self.create_from(order)
+    options = order.report_options.merge(factor: 1)
     transaction do
-      order.order_items.each do |item|
-        create_from_order_and_item(order, item)
+      order.order_items.each do |order_item|
+        update_row_for(order, order_item, options)
       end
     end
   end
@@ -51,9 +51,10 @@ class OrderReportRow < ApplicationRecord
   # Reporting a cancelled order is done by creating report rows
   # with a factor of minus one to cancel the earlier entries.
   def self.cancel_entries_from(order)
+    options = order.report_options.merge(factor: -1)
     transaction do
-      order.order_items.each do |item|
-        create_from_order_and_item(order, item, -1)
+      order.order_items.each do |order_item|
+        update_row_for(order, order_item, options)
       end
     end
   end

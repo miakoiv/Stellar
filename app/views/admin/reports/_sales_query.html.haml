@@ -4,10 +4,10 @@
   .panel-body
     = form_for @search, url: admin_sales_report_path, method: :get, remote: true do |f|
       .row
-        .col-sm-12
+        .col-sm-6
           .form-group
-            = f.select :order_type, current_group.incoming_order_types.map { |o| [o.to_s, o.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_order_types'), class: 'form-control selectize'}
-        .col-sm-12
+            = f.select :group, current_store.group_options, {include_blank: true}, {placeholder: t('admin.reports.search.all_groups'), class: 'form-control selectize-label'}
+        .col-sm-6
           .form-group
             = f.select :categories, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
         .col-sm-6
@@ -34,5 +34,10 @@
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
   :coffee
+    $('select.selectize-label').betterSelectize
+      labelField: 'title'
+      dataAttr: 'data'
+      render: $.fn.selectize.label_renderer
+
     $('.temporal-unit-select :input').on 'change', ->
       $('#new_order_report_row_search').trigger 'submit.rails'

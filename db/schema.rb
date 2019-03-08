@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_124439) do
+ActiveRecord::Schema.define(version: 2019_03_08_115503) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_124439) do
   end
 
   create_table "order_report_rows", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
+    t.integer "group_id", null: false
     t.integer "order_type_id", null: false
     t.integer "user_id"
     t.integer "store_portal_id"
@@ -346,6 +347,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_124439) do
     t.decimal "tax_rate", precision: 5, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_order_report_rows_on_group_id"
     t.index ["order_type_id"], name: "index_order_report_rows_on_order_type_id"
     t.index ["ordered_at"], name: "index_order_report_rows_on_ordered_at"
     t.index ["product_id"], name: "index_order_report_rows_on_product_id"

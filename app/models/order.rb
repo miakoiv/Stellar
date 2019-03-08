@@ -266,6 +266,14 @@ class Order < ApplicationRecord
     }.sum + adjustments_sans_tax
   end
 
+  # Collects relevant information about this order for reporting.
+  def report_options
+    {
+      group: customer.effective_group(store),
+      user: user.guest?(store) ? nil : user
+    }
+  end
+
   # Order phase in the checkout process. This is included in the JSON
   # representation for checkout.coffee to reveal the corresponding form
   # elements.

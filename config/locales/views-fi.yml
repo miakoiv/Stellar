@@ -76,7 +76,8 @@ fi:
         total_value: Arvo yhteensä
         items: Nimikkeitä
       search:
-        all_order_types: "[Kaikki tilaustyypit]"
+        all_groups: "[Kaikki asiakasryhmät]"
+        all_order_types: "[Kaikki tilaustavat]"
         all_categories: "[Kaikki tuoteryhmät]"
         since_date: Pvm alkaen
         until_date: Pvm päättyen
