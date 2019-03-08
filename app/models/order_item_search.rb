@@ -54,11 +54,11 @@ class OrderItemSearch < Searchlight::Search
     return query unless checked?(concluded_only)
     query.merge(Order.concluded)
   end
-end
 
-private
-  def date_param(param, default)
-    return default unless param.present?
-    return param if param.is_a?(Date)
-    Date.parse(param)
-  end
+  private
+    def date_param(param, default)
+      return default unless param.present?
+      return param if param.is_a?(Date)
+      Date.parse(param)
+    end
+end
