@@ -133,6 +133,9 @@ class Order < ApplicationRecord
   # multiple order types to choose from at checkout.
   delegate :destination, to: :order_type
 
+  # Order is forwarded if the order type so declares.
+  delegate :is_forwarded?, to: :order_type
+
   # Finds the order types available to this order. These are the outgoing
   # order types for the source group, excluding those that are not suitable
   # for one or more products present in the order items.
@@ -191,7 +194,9 @@ class Order < ApplicationRecord
   def complete!(acknowledge = true)
     assign_number!
     archive!
-    email(has_payment? ? :receipt : :acknowledge, customer_string) if acknowledge
+    if acknowledge and !is_forwarded?
+      email(has_payment? ? :receipt : :acknowledge, customer_string)
+    end
     export_xml
   end
 
@@ -310,7 +315,7 @@ class Order < ApplicationRecord
       reload # to clear changes and prevent a callback loop
       if has_payment?
         email(:processing, customer_string, nil, bcc: false)
-      else
+      elsif !is_forwarded?
         email(:confirmation, customer_string, nil, bcc: false)
         email(:confirmation, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
       end
@@ -326,8 +331,10 @@ class Order < ApplicationRecord
     # A notification of shipment is sent.
     def conclude!
       reload # to clear changes and prevent a callback loop
-      email(:shipment, customer_string, nil, bcc: false)
-      email(:shipment, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
+      if !is_forwarded?
+        email(:shipment, customer_string, nil, bcc: false)
+        email(:shipment, contact_string, nil, bcc: false, pricing: false) if has_contact_info?
+      end
       OrderReportRow.create_from(self)
     end
 
