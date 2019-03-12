@@ -495,8 +495,8 @@ nf:
 mp:
   code: MP
   name: Northern Mariana Islands
-no:
-  code: NO
+'no':
+  code: 'NO'
   name: Norway
 om:
   code: OM
