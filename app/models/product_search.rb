@@ -17,7 +17,6 @@ class ProductSearch < Searchlight::Search
                 SELECT id FROM products p
                 WHERE p.master_product_id = products.id)))
       SQL
-      logger.warn "Defined search method for #{property}"
     end
   end
 
