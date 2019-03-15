@@ -10,6 +10,11 @@
   background-repeat: no-repeat;
   background-size: contain;
   @include box-shadow(0 0 256px 32px rgba(255,255,255,0.95));
+
+  @media (max-width: $screen-xs-max) {
+    width: 80px;
+    height: 80px;
+  }
 }
 #app .panel {
   .form-group { @extend .form-group-lg; }

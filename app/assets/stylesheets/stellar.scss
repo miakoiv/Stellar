@@ -3,7 +3,6 @@ $font-size-base: 16px !default;
 
 $primary-color:     darken(#428bca, 38.5%);
 $secondary-color:   #e4e5e6;
-$body-bg:           $secondary-color;
 $navbar-inverse-bg: $primary-color !default;
 
 @import "bootstrap-font-awesome";
@@ -12,6 +11,7 @@ $navbar-inverse-bg: $primary-color !default;
 
 #app {
   @include gradient-vertical($primary-color, $secondary-color, 0%, 100%);
+  min-height: 100vh;
   background-attachment: fixed;
   justify-content: center;
 
@@ -40,15 +40,17 @@ $navbar-inverse-bg: $primary-color !default;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
-    background-color: rgba($primary-color, 0.667);
 
-    .background {
+    .swiper-container, .overlay {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 100%;
-      z-index: -1;
+      z-index: 0;
+    }
+    .overlay {
+      background-color: rgba($primary-color, 0.667);
     }
     .swiper-slide > img {
       width: 100%;
@@ -61,7 +63,10 @@ $navbar-inverse-bg: $primary-color !default;
     margin-top: 120px;
     margin-bottom: 60px;
 
-    @media (max-width: $screen-xs-max) { width: 100%; }
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      margin-top: 30px;
+    }
   }
   .page-header, .lead {
     text-align: center;

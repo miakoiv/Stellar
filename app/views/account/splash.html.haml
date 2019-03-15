@@ -1,12 +1,12 @@
 - content_for :splash do
-  .background.swiper-container
+  .swiper-container
     .swiper-wrapper
       .swiper-slide= image_tag 'splash/01.jpg'
       .swiper-slide= image_tag 'splash/02.jpg'
       .swiper-slide= image_tag 'splash/03.jpg'
       .swiper-slide= image_tag 'splash/04.jpg'
       .swiper-slide= image_tag 'splash/05.jpg'
-
+  .overlay
   .container
     .page-header
       %h1= t('.title')
