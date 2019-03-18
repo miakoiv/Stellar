@@ -9,10 +9,10 @@
     = stylesheet_link_tag 'print', media: 'print'
     = javascript_include_tag 'application'
   %body
+    %nav.navbar.navbar-dynamic{data: {'navbar-static-class': 'navbar-static-top navbar-inverse', 'navbar-fixed-class': 'navbar-fixed-top navbar-default'}}
+      .container-fluid
+        = render partial: 'shared/account_nav'
     #app
-      %nav.navbar.navbar-inverse.navbar-transparent
-        .container-fluid
-          = render partial: 'shared/account_nav'
       - if content_for?(:splash)
         .splash
           = yield :splash

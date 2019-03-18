@@ -8,32 +8,22 @@ $navbar-inverse-bg: $primary-color !default;
 @import "bootstrap-font-awesome";
 @import "bootstrap-generators";
 @import "bootstrap-tweaks";
+@import "bootstrap-navbar-dynamic";
 
+.navbar {
+  .navbar-brand {
+    width: auto;
+    height: $navbar-height;
+    padding: 15px;
+    > img { max-height: 100%; }
+  }
+}
 #app {
   @include gradient-vertical($primary-color, $secondary-color, 0%, 100%);
   min-height: 100vh;
   background-attachment: fixed;
   justify-content: center;
 
-  > .navbar {
-    .navbar-brand {
-      width: auto;
-      height: $navbar-height;
-      padding: 15px;
-      > img { max-height: 100%; }
-    }
-  }
-  > .navbar-transparent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    margin-bottom: 0;
-    background-color: transparent;
-    border-color: transparent;
-    border-radius: 0;
-  }
   .splash {
     position: relative;
     min-height: 100vh;
@@ -57,6 +47,11 @@ $navbar-inverse-bg: $primary-color !default;
       height: 100%;
       object-fit: cover;
       object-position: center;
+    }
+
+    #dynamic-navbar-breakpoint {
+      position: absolute;
+      bottom: -33vh;
     }
   }
   .container {
