@@ -1,7 +1,10 @@
-.container
-  .jumbotron
-    %h1= t('errors.header')
-    %p
-      = t('errors.blurb')
-      %code= "#{@status_code} #{Rack::Utils::HTTP_STATUS_CODES[@status_code] || 'Internal Server Error'}"
-    %p= link_to t('errors.return'), root_path, class: 'btn btn-primary btn-lg'
+- content_for :main_title do
+  = t('errors.header')
+- content_for :main_panel do
+  .panel.panel-default
+    .panel-body
+      %p
+        = t('errors.blurb')
+        %code= "#{@status_code} #{Rack::Utils::HTTP_STATUS_CODES[@status_code] || 'Internal Server Error'}"
+      .actions
+        = link_to t('errors.return'), root_path, class: 'btn btn-primary btn-lg'
