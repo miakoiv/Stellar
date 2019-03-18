@@ -19,6 +19,7 @@ module ApplicationHelper
       image: object.cover_picture.present? && image_url(object.cover_picture.image.url(:shoebox, timestamp: false)),
       description: object.description.presence
     )
+    set_meta_tags(tags)
     set_meta_tags(og: tags)
   end
 
