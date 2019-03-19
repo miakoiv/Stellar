@@ -14,5 +14,5 @@
           = link_to icon('search'), show_product_path(product), class: 'btn btn-sm'
 
   .remove
-    = link_to remove_favorite_path(product), method: :delete, remote: true, class: 'btn btn-xs btn-outline-danger' do
+    = link_to remove_favorite_path(product), method: :delete, remote: true, rel: 'nofollow', class: 'btn btn-xs btn-outline-danger' do
       = icon('remove')

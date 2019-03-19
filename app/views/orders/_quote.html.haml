@@ -3,5 +3,5 @@
     = t('.title')
     %span.caret
   %ul.dropdown-menu
-    %li= link_to icon('envelope-open-o', t('.send_self')), send_quote_path(recipient: :self), remote: true
-    %li= link_to icon('envelope-o', t('.send_customer')), send_quote_path(recipient: :customer), remote: true
+    %li= link_to icon('envelope-open-o', t('.send_self')), send_quote_path(recipient: :self), remote: true, rel: 'nofollow'
+    %li= link_to icon('envelope-o', t('.send_customer')), send_quote_path(recipient: :customer), remote: true, rel: 'nofollow'

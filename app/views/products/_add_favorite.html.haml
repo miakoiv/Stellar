@@ -1,5 +1,5 @@
 .add-favorite
-  = link_to add_favorite_path(product), method: :post, remote: true, id: dom_id(product, :add_favorite), class: 'btn btn-default disabled', data: {id: product.id} do
+  = link_to add_favorite_path(product), method: :post, remote: true, rel: 'nofollow', id: dom_id(product, :add_favorite), class: 'btn btn-default disabled', data: {id: product.id} do
     = icon('heart')
     - if text
       = t('.title')

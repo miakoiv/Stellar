@@ -7,7 +7,7 @@
       %li.dropdown-header= t('.header')
       - orders.each do |order|
         %li{class: order == shopping_cart && 'active'}
-          = link_to preview_order_path(order), remote: true do
+          = link_to preview_order_path(order), remote: true, rel: 'nofollow' do
             .badge.pull-right= order.size
             = bootstrap_label(order.user, text: order.user.name)
             = order.customer_name
