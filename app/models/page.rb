@@ -68,7 +68,7 @@ class Page < ApplicationRecord
   belongs_to :resource, polymorphic: true, optional: true
 
   has_many :sections, dependent: :destroy
-  has_many :segments, through: :sections
+  has_many :segments, -> { reorder('sections.priority, columns.priority, segments.priority') }, through: :sections
   has_many :content_pictures, through: :segments, source: :pictures
 
   default_scope { nested_set_scope }
@@ -183,7 +183,7 @@ class Page < ApplicationRecord
 
   def description
     return front_page&.description if continuous?
-    segments.reorder('sections.priority, columns.priority, segments.priority').map(&:content).join("\n")
+    segments.map(&:content).join("\n")
   end
 
   # Pages are rendered with partials corresponding to purpose.

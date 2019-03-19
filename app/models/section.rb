@@ -51,7 +51,7 @@ class Section < ApplicationRecord
   #---
   belongs_to :page, touch: true
   has_many :columns, dependent: :destroy
-  has_many :segments, through: :columns
+  has_many :segments, -> { reorder('columns.priority, segments.priority') }, through: :columns
 
   default_scope { sorted }
   scope :named, -> { where.not(name: nil) }
