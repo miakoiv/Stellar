@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_095517) do
+ActiveRecord::Schema.define(version: 2019_03_19_100426) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -418,7 +418,6 @@ ActiveRecord::Schema.define(version: 2019_03_19_095517) do
     t.string "contact_email"
     t.string "contact_phone"
     t.integer "shipping_address_id"
-    t.boolean "has_billing_address", default: false, null: false
     t.integer "billing_address_id"
     t.string "billing_street"
     t.string "billing_postalcode"
@@ -673,6 +672,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_095517) do
     t.boolean "gutters", default: true, null: false
     t.boolean "swiper", default: false, null: false
     t.boolean "viewport", default: false, null: false
+    t.string "shape"
     t.string "background_color", default: "transparent", null: false
     t.string "gradient_color", default: "#FFFFFF", null: false
     t.string "gradient_type"
