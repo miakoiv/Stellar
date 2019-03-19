@@ -115,7 +115,7 @@ class Admin::PagesController < AdminController
     def page_params
       params.require(:page).permit(
         :parent_id, :purpose, :resource_type, :resource_id,
-        :live, :title, :slug, :url
+        :live, :title, :slug, :url, :description
       )
     end
 end

@@ -352,6 +352,7 @@ fi:
         slug: Tunniste
         url: Osoite
         content: Sisältö
+        description: Kuvaus
       payment:
         order_id: Tilaus
         number: Tapahtumanro

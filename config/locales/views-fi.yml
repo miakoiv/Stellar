@@ -266,6 +266,7 @@ fi:
       form:
         show_resource: Näytä kohde
         slug_help_html: Tunnistetta käytetään sivun ᴡᴡᴡ-osoitteena
+        description_help_html: Sivun lyhyt kuvaus hakukoneita varten. Kuvaus otetaan oletuksena sivun sisällöstä.
         duplicate:
           button: Monista
           confirm: "Monistetaanko varmasti %{klass} %{name}?"

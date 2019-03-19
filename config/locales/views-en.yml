@@ -255,6 +255,7 @@ en:
       form:
         show_resource: Show target
         slug_help_html: Slug becomes part of the ᴡᴡᴡ address
+        description_help_html: Short description of the page for search engines. This defaults to an excerpt from the page contents.
         duplicate:
           button: Duplicate
           confirm: "Are you sure you want to duplicate %{klass} %{name}?"

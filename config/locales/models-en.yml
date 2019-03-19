@@ -352,6 +352,7 @@ en:
         slug: Slug
         url: Address
         content: Content
+        description: Description
       payment:
         order_id: Order
         number: Transaction №

@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
 
   store :metadata, accessors: [
-    :url
+    :url, :description
   ], coder: JSON
 
   # Pages must be aware of their routes since they may link to anything.
@@ -182,8 +182,14 @@ class Page < ApplicationRecord
   end
 
   def description
-    return front_page&.description if continuous?
-    segments.map(&:content).join("\n")
+    metadata[:description].presence || content
+  end
+
+  def content
+    return front_page&.content if continuous?
+    if segment = segments.find { |segment| segment.content.present? }
+      segment.content.truncate(250, separator: ' ', omission: '…')
+    end
   end
 
   # Pages are rendered with partials corresponding to purpose.
