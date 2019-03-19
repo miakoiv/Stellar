@@ -13,14 +13,17 @@ module ApplicationHelper
   end
 
   def meta_tags_for(object, options = {})
+    image = if object.cover_picture.present?
+      image_url(object.cover_picture.image.url(:shoebox, timestamp: false))
+    end
     tags = options.reverse_merge(
       title: object.to_s,
       url: request.original_url,
-      image: object.cover_picture.present? && image_url(object.cover_picture.image.url(:shoebox, timestamp: false)),
-      description: object.description.presence
-    )
-    set_meta_tags(tags)
-    set_meta_tags(og: tags)
+      image: image,
+      description: object.description.presence,
+    ).compact
+    set_meta_tags tags
+    set_meta_tags og: tags.merge(site_name: :site)
   end
 
   # Product header based on given item, which should respond to
