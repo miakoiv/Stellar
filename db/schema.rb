@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_100426) do
+ActiveRecord::Schema.define(version: 2019_03_09_095517) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -186,14 +186,10 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.boolean "price_tax_included", default: true, null: false
     t.integer "premium_group_id"
     t.string "premium_teaser"
-    t.integer "billing_address_id"
-    t.integer "shipping_address_id"
     t.string "appearance", default: "default", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["billing_address_id"], name: "index_groups_on_billing_address_id"
     t.index ["parent_id"], name: "index_groups_on_parent_id"
-    t.index ["shipping_address_id"], name: "index_groups_on_shipping_address_id"
     t.index ["store_id"], name: "index_groups_on_store_id"
   end
 
@@ -408,13 +404,12 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.string "contact_person"
     t.string "contact_email"
     t.string "contact_phone"
-    t.integer "shipping_address_id"
-    t.integer "billing_address_id"
-    t.string "billing_street"
+    t.boolean "has_billing_address", default: false, null: false
+    t.string "billing_address"
     t.string "billing_postalcode"
     t.string "billing_city"
     t.string "billing_country_code", limit: 2
-    t.string "shipping_street"
+    t.string "shipping_address"
     t.string "shipping_postalcode"
     t.string "shipping_city"
     t.string "shipping_country_code", limit: 2
@@ -427,11 +422,9 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.string "user_email"
     t.string "user_phone"
     t.string "order_type_name"
-    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["inventory_id"], name: "index_orders_on_inventory_id"
     t.index ["order_type_id"], name: "index_orders_on_order_type_id"
-    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -663,7 +656,6 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.boolean "gutters", default: true, null: false
     t.boolean "swiper", default: false, null: false
     t.boolean "viewport", default: false, null: false
-    t.string "shape"
     t.string "background_color", default: "transparent", null: false
     t.string "gradient_color", default: "#FFFFFF", null: false
     t.string "gradient_type"
@@ -839,11 +831,11 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.string "name"
     t.string "email", default: "", null: false
     t.string "phone"
-    t.string "billing_street"
+    t.string "billing_address"
     t.string "billing_postalcode"
     t.string "billing_city"
     t.string "billing_country_code", limit: 2
-    t.string "shipping_street"
+    t.string "shipping_address"
     t.string "shipping_postalcode"
     t.string "shipping_city"
     t.string "shipping_country_code", limit: 2
