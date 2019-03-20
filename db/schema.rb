@@ -28,15 +28,6 @@ ActiveRecord::Schema.define(version: 2019_03_19_100426) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
-  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.string "company"
-    t.string "address1"
-    t.string "address2"
-    t.string "postalcode"
-    t.string "city"
-    t.string "country_code", limit: 2, null: false
-  end
-
   create_table "adjustments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "adjustable_id"
     t.string "adjustable_type"
