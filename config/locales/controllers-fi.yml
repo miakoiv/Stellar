@@ -46,6 +46,13 @@ fi:
         notice: "Varastotarkastus %{inventory_check} päätetty."
       destroy:
         notice: "Varastotarkastus %{inventory_check} poistettu."
+    messages:
+      create:
+        notice: "Viesti %{message} luotu."
+      update:
+        notice: "Viesti %{message} päivitetty."
+      destroy:
+        notice: "Viesti %{message} poistettu."
     order_types:
       create:
         notice: "Tilauslaji %{order_type} luotu."

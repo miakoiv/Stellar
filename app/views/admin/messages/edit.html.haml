@@ -1,0 +1,20 @@
+.page-header
+  = link_to admin_messages_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  = link_to admin_message_path(@message), class: 'btn btn-primary' do
+    = icon('info-circle', t('actions.show'))
+  %h1
+    = icon('envelope-o')
+    = @message.context
+    %span.small
+      = @message.human_attribute_value(:stage)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: false}
+
+  .col-md-6
+    #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @message.to_global_id}}
+
+:coffee
+  $('#context-activities').fetch_context()

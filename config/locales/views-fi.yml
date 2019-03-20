@@ -187,6 +187,11 @@ fi:
         open: Avaa
       form:
         inventory_entry_help_html: Vain hankintakirjauksille. Korjaukset ja siirrot <a href="%{path}">Varastosaldon</a> kautta.
+    messages:
+      index:
+        new_message: Uusi viesti
+      new:
+        new_message: Uusi viesti
     order_items:
       index:
         title: Toimittamattomat tilausrivit

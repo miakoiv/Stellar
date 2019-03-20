@@ -1,0 +1,21 @@
+.page-header
+  = link_to admin_messages_path, class: 'btn btn-default' do
+    = icon('chevron-circle-left', t('actions.back'))
+  - if current_user.can_update?(@message, at: current_store)
+    = link_to edit_admin_message_path(@message), class: 'btn btn-primary' do
+      = icon('pencil-square', t('actions.edit'))
+  %h1
+    = icon('envelope-o')
+    = @message.context
+    %span.small
+      = @message.human_attribute_value(:stage)
+
+.row
+  .col-md-6
+    = render partial: 'form', locals: {locked: true}
+
+  .col-md-6
+    #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @message.to_global_id}}
+
+:coffee
+  $('#context-activities').fetch_context()

@@ -46,6 +46,13 @@ en:
         notice: "Inventory check %{inventory_check} concluded."
       destroy:
         notice: "Inventory check %{inventory_check} deleted."
+    messages:
+      create:
+        notice: "Message %{message} created."
+      update:
+        notice: "Message %{message} updated."
+      destroy:
+        notice: "Message %{message} deleted."
     order_types:
       create:
         notice: "Order type %{order_type} created."

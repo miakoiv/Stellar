@@ -180,6 +180,11 @@ en:
         open: Open
       form:
         inventory_entry_help_html: Purchases only. Corrections and transfers via <a href="%{path}">Inventory levels</a>.
+    messages:
+      index:
+        new_message: New message
+      new:
+        new_message: New message
     order_items:
       index:
         title: Items pending shipping

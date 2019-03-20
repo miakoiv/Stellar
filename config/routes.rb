@@ -172,6 +172,7 @@ Rails.application.routes.draw do
         patch :conclude
       end
     end
+    resources :messages
     resources :properties do
       post :reorder, on: :collection
     end

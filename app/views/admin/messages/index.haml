@@ -1,0 +1,30 @@
+.page-header
+  - if current_user.can_create?(Message, at: current_store)
+    = link_to new_admin_message_path, class: 'btn btn-primary' do
+      = icon('plus', t('.new_message'))
+  %h1= icon('envelope-o', title(Message, count: 2))
+
+.table-responsive
+  %table.table.table-hover
+    %thead
+      %tr
+        %th.col-xs-2= col(Message, :context_type)
+        %th.col-xs-2= col(Message, :context_id)
+        %th= col(Message, :stage)
+        %th.actions
+
+    %tbody
+      - @messages.each do |message|
+        %tr[message]
+          %td= message.context.model_name.human
+          %td= message.context
+          %td
+            - if message.disabled?
+              = icon('ban', data: {toggle: 'tooltip'}, title: col(Message, :disabled))
+            = message.human_attribute_value(:stage)
+          %td.actions
+            = link_to icon('info', t('actions.show')), admin_message_path(message), class: 'btn btn-default btn-sm'
+            - if current_user.can_update?(message, at: current_store)
+              = link_to icon('edit', t('actions.edit')), edit_admin_message_path(message), class: 'btn btn-default btn-sm'
+            - if current_user.can_delete?(message, at: current_store)
+              = link_to icon('remove', t('actions.delete')), admin_message_path(message), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body', klass: Message.model_name.human, name: message.context), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
