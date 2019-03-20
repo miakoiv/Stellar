@@ -62,6 +62,9 @@ en:
       inventory_item:
         one: inventory level
         other: inventory levels
+      message:
+        one: message
+        other: messages
       order:
         one: order
         other: orders
@@ -245,6 +248,13 @@ en:
         pending: Pending
         value: Value
         total_value: Total value
+      message:
+        context_type: Context
+        context_id: Workflow
+        context_gid: Workflow
+        stage: Stage
+        disabled: Message suppressed
+        content: Message content
       order:
         number: №
         external_number: External №

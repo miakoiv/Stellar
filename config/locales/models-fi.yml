@@ -62,6 +62,9 @@ fi:
       inventory_item:
         one: varastosaldo
         other: varastosaldot
+      message:
+        one: viesti
+        other: viestit
       order:
         one: tilaus
         other: tilaukset
@@ -245,6 +248,13 @@ fi:
         pending: Tulossa
         value: Arvo
         total_value: Arvo yhteensä
+      message:
+        context_type: Asiayhteys
+        context_id: Työnkulku
+        context_gid: Työnkulku
+        stage: Vaihe
+        disabled: Viestin lähetys estetty
+        content: Viestin sisältö
       order:
         number: nro
         external_number: Ulkoinen nro

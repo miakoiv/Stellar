@@ -88,6 +88,7 @@ class Store < ApplicationRecord
     store.has_many :orders
     store.has_many :order_types
     store.has_many :shipping_methods
+    store.has_many :messages
     store.has_many :pages
     store.has_many :promotions
     store.has_many :tax_categories
@@ -212,6 +213,10 @@ class Store < ApplicationRecord
 
   def available_categories
     categories.live
+  end
+
+  def available_contexts
+    [order_types, shipping_methods].flatten
   end
 
   # Properties flagged searchable.

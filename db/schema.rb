@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_09_095517) do
+ActiveRecord::Schema.define(version: 2019_03_20_100741) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -306,6 +306,19 @@ ActiveRecord::Schema.define(version: 2019_03_09_095517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["base_unit_id"], name: "index_measurement_units_on_base_unit_id"
+  end
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
+    t.integer "store_id", null: false
+    t.string "context_type", null: false
+    t.bigint "context_id", null: false
+    t.string "stage", null: false
+    t.boolean "disabled", default: false, null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["context_type", "context_id"], name: "index_messages_on_context_type_and_context_id"
+    t.index ["store_id"], name: "index_messages_on_store_id"
   end
 
   create_table "order_items", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|

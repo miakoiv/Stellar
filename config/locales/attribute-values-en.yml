@@ -26,6 +26,16 @@ en:
         status:
           online: active only
           all: all items
+      message:
+        stage:
+          acknowledge: order acknowledged
+          receipt: order receipt
+          processing: processing order
+          confirmation: order confirmation
+          notification: vendor notification
+          conclusion: order concluded
+          cancellation: order cancelled
+          shipped: shipment shipped
       order:
         status:
           current: awaiting approval

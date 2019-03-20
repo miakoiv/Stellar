@@ -26,6 +26,16 @@ fi:
         status:
           online: vain aktiiviset
           all: kaikki rivit
+      message:
+        stage:
+          acknowledge: tilaus vastaanotettu
+          receipt: kuitti tilauksesta
+          processing: tilausta käsitellään
+          confirmation: tilaus vahvistettu
+          notification: ilmoitus tavarantoimittajalle
+          conclusion: tilaus päätetty
+          cancellation: tilaus peruutettu
+          shipped: toimitus lähetetty
       order:
         status:
           current: odottaa vahvistusta
