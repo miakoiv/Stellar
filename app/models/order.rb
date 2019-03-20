@@ -352,6 +352,7 @@ class Order < ApplicationRecord
           shipment.cancel!
         end
       end
+      email(:cancellation, customer_string)
     end
 
     # Perform XML export if specified by order type, and

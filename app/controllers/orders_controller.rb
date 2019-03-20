@@ -113,7 +113,6 @@ class OrdersController < BaseStoreController
     track @order
 
     @order.update(cancelled_at: Time.current)
-    @order.email(:cancellation, @order.customer_string)
 
     respond_to do |format|
       format.html { redirect_to orders_path,
