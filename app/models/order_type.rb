@@ -16,8 +16,8 @@ class OrderType < ApplicationRecord
   # Order types should never be destroyed if completed orders exist.
   has_many :orders, dependent: :destroy
 
-  # Message definition attached to this order type, if any.
-  has_one :message, as: :context
+  # Message definitions attached to this order type, if any.
+  has_many :messages, as: :context
 
   scope :has_shipping, -> { where(has_shipping: true) }
 
