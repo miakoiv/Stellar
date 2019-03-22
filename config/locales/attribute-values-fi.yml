@@ -35,7 +35,7 @@ fi:
           notification: ilmoitus tavarantoimittajalle
           conclusion: tilaus päätetty
           cancellation: tilaus peruutettu
-          shipped: toimitus lähetetty
+          shipment: toimitus lähetetty
       order:
         status:
           current: odottaa vahvistusta

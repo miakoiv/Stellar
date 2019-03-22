@@ -35,7 +35,7 @@ en:
           notification: vendor notification
           conclusion: order concluded
           cancellation: order cancelled
-          shipped: shipment shipped
+          shipment: shipment shipped
       order:
         status:
           current: awaiting approval

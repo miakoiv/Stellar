@@ -7,7 +7,7 @@
 #
 class Message < ApplicationRecord
 
-  STAGES = %w{acknowledge processing confirmation notification receipt conclusion cancellation shipped
+  STAGES = %w{acknowledge processing confirmation notification receipt conclusion cancellation shipment
   }.freeze
 
   resourcify
