@@ -10,6 +10,8 @@ class Shipment < ApplicationRecord
   # Shipments refer to a transfer to handle the stock changes.
   has_one :transfer, -> { where(return: false) }
 
+  has_many :shipment_items, through: :transfer, source: :transfer_items
+
   # If the shipment is returned, another transfer is needed.
   has_one :return_transfer, -> { where(return: true) }, class_name: 'Transfer'
 
