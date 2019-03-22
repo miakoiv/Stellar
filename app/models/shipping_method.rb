@@ -17,6 +17,9 @@ class ShippingMethod < ApplicationRecord
   # Products specifying this shipping method can be used to ship them.
   has_and_belongs_to_many :products
 
+  # Message definition attached to this shipping method, if any.
+  has_one :message, as: :context
+
   # A reference to a page containing pertinent details displayed during
   # checkout as a button opening the page contents in a modal.
   belongs_to :detail_page, class_name: 'Page', optional: true

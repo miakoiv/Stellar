@@ -21,7 +21,7 @@ class Message < ApplicationRecord
   default_scope { order(:context_type, :context_id, :stage) }
 
   validates :context, presence: true
-  validates :stage, presence: true
+  validates :stage, presence: true, uniqueness: {scope: :context}
 
   #---
   def self.stage_options
