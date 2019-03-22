@@ -1,32 +1,44 @@
 en:
   order_mailer:
+    footer:
+      left_html: <a href="https://stellar.fi">Stellar Storefont</a>
+      right_html: © <a href="https://leasit.fi">LeasIT</a> 2015–2019
     receipt:
-      subject: "Receipt for your order from %{store}"
-      title: Receipt
-      thank_you: "Thank you for shopping at %{store}!"
+      subject: "[%{store}] Receipt for order %{order}"
+      title: Receipt for order %{order}
+      content_html: <p></p>
     acknowledge:
-      subject: "Your order has been received by %{store}"
-      title: Your order
-      thank_you: "Thank you for shopping at %{store}!"
+      subject: "[%{store}] Order %{order}"
+      title: Your order %{order}
+      content_html: <p>We have received your order.</p>
     processing:
-      subject: "Your order is being processed at %{store}"
-      title: Your order
-      thank_you: "Thank you for shopping at %{store}!"
+      subject: "[%{store}] Order %{order}"
+      title: Your order %{order}
+      content_html: <p></p>
     confirmation:
-      subject: "Order confirmation from %{store}"
-      title: Order confirmation
-      thank_you: "Thank you for shopping at %{store}!"
+      subject: "[%{store}] Order confirmation %{order}"
+      title: Order confirmation %{order}
+      content_html: <p></p>
     shipment:
-      subject: "Your order has been shipped from %{store}"
-      title: "Your order is on its way"
-      thank_you: "Thank you for shopping at %{store}!"
+      subject: "[%{store}] Shipment from order %{order}"
+      title: Your order %{order} has been shipped
+      contents: Shipment %{shipment}
+      content_html: <p></p>
+    pending:
+      items: Items pending shipment
     notification:
-      subject: "Order notification from %{store}"
-      title: "Order notification"
+      subject: "[%{store}] Order notification %{order}"
+      title: Order notification %{order}
+      content_html: <p></p>
     cancellation:
-      subject: "Order cancelled"
-      title: Order cancellation
-      body_html: <p>Your order № %{order} from %{store} has been cancelled.</p>
+      subject: "[%{store}] Order %{order} cancelled"
+      title: Order cancellation %{order}
+      content_html: <p>Your order has been cancelled.</p>
     quotation:
-      subject: "Quotation from %{store}"
+      subject: "[%{store}] Quotation"
       title: Quotation
+      content_html: <p></p>
+    conclusion:
+      subject: "[%{store}] Order %{order}"
+      title: Summary for %{order}
+      content_html: <p>This is a summary for your order and shipments made thereof.</p>

@@ -2,12 +2,48 @@
 
 class OrderMailerPreview < ActionMailer::Preview
 
-  [:receipt, :acknowledge, :processing, :confirmation, :shipment, :notification, :cancellation, :quotation].each do |type|
-    define_method type do
-      order = Order.concluded.last
-      to = order.customer_string
-      options = {bcc: true, pricing: true}
-      OrderMailer.send(type, order, to, nil, options)
-    end
+  def acknowledge
+    email.acknowledge(to: order.customer_string)
   end
+
+  def cancellation
+    email.cancellation(to: order.customer_string)
+  end
+
+  def conclusion
+    email.conclusion(to: order.customer_string)
+  end
+
+  def confirmation
+    email.confirmation(to: order.customer_string)
+  end
+
+  def notification
+    email.notification(to: order.customer_string, items: order.order_items.first(2), pricing: false)
+  end
+
+  def processing
+    email.processing(to: order.customer_string)
+  end
+
+  def quotation
+    email.quotation(to: order.customer_string)
+  end
+
+  def receipt
+    email.receipt(to: order.customer_string)
+  end
+
+  def shipment
+    Messaging::Shipments.new(order.shipments.last).shipment(to: order.customer_string)
+  end
+
+  private
+    def order
+      @order ||= Order.find(2205535)
+    end
+
+    def email
+      Messaging::Orders.new(order)
+    end
 end

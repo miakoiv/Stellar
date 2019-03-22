@@ -1,13 +1,13 @@
-- if @pricing
+- if @options[:pricing]
   %caption.alignright
     %em= @order.includes_tax? ? t('orders.receipt.tax_included') : t('orders.receipt.tax_excluded')
 %tr
   %td= OrderItem.human_attribute_name(:product_title)
   %td.alignright= OrderItem.human_attribute_name(:amount)
-  - if @pricing
+  - if @options[:pricing]
     %td.alignright= OrderItem.human_attribute_name(:price)
     %td.alignright= OrderItem.human_attribute_name(:subtotal)
-- @order.order_items.each do |order_item|
+- @order_items.each do |order_item|
   %tr[order_item]
     %td
       %b= order_item.product_title
@@ -26,12 +26,12 @@
         .small
           %em= order_item.product.shipping_notes
     %td.alignright.nowrap= order_item.amount
-    - if @pricing
+    - if @options[:pricing]
       %td.alignright.nowrap
         = money @order.includes_tax? ? order_item.cart_price_with_tax : order_item.cart_price_sans_tax
       %td.alignright.nowrap
         = money @order.includes_tax? ? order_item.cart_subtotal_with_tax : order_item.cart_subtotal_sans_tax
-- if @pricing
+- if @options[:pricing]
   %tr.total
     %td.alignright{colspan: 3}
       = Order.human_attribute_name(:grand_total)

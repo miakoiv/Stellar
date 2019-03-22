@@ -87,6 +87,7 @@ class Shipment < ApplicationRecord
     transfer.complete!
     update shipped_at: Time.current
     order.update_shipped!
+    email.shipment(to: order.customer_string)
   end
 
   # Cancels the shipment and returns it if it was already shipped.
@@ -182,6 +183,10 @@ class Shipment < ApplicationRecord
 
   def shipping_gateway
     shipping_method.shipping_gateway_class
+  end
+
+  def email
+    @messaging ||= Messaging::Shipments.new(self)
   end
 
   def appearance

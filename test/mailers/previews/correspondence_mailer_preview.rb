@@ -4,7 +4,7 @@ class CorrespondenceMailerPreview < ActionMailer::Preview
   # Preview this email at http://localhost:3000/rails/mailers/correspondence_mailer/correspondence
   def correspondence
     CorrespondenceMailer.correspondence(
-      Store.first,
+      Store.find(24),
       {
         subject: 'Yhteydenotto',
         name: 'Jukka-Pekka Palo',

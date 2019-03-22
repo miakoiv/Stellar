@@ -1,5 +1,14 @@
 %tr
-  %td
-    = Order.human_attribute_name(:shipping_method)
-  %td
-    %b= shipment.shipping_method.name
+  %th= t('.contents', shipment: shipment)
+  %th.alignright= l(shipment.shipped_at.to_date)
+%tr
+  %td= OrderItem.human_attribute_name(:product_title)
+  %td.alignright= OrderItem.human_attribute_name(:amount)
+- shipment.shipment_items.each do |shipment_item|
+  %tr[shipment_item]
+    %td
+      %b= shipment_item.product_title
+      %span.badge= shipment_item.product_code
+      %br
+      = shipment_item.product_subtitle
+    %td.alignright.nowrap= shipment_item.amount

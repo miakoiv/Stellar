@@ -17,9 +17,20 @@
                 %td
                   %table{width: '100%', cellpadding: 6, cellspacing: 10}
                     = render partial: 'customer'
+                    = render partial: 'order_meta'
+              - @order.shipments.shipped.each do |shipment|
+                %tr
+                  %td
+                    %table.invoice-items{cellpadding: 6, cellspacing: 0}
+                      = render partial: 'shipment', object: shipment
               %tr
                 %td
                   %table.invoice-items{cellpadding: 6, cellspacing: 0}
                     = render partial: 'invoice'
+              - if @options[:pricing]
+                %tr
+                  %td
+                    %table.invoice-items{cellpadding: 6, cellspacing: 0}
+                      = render partial: 'taxation'
 
 = render partial: 'footer'

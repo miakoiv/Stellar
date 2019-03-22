@@ -144,7 +144,7 @@ class StoreController < BaseStoreController
     else
       return head :bad_request
     end
-    @order.email(:quotation, @recipient.to_s)
+    @order.email.quotation(to: @recipient.to_s)
 
     flash.now[:notice] = t('.notice', email: @recipient.email)
     respond_to :js

@@ -1,0 +1,16 @@
+- unless @order.fully_shipped?
+  %tr
+    %th= t('.items', shipment: @shipment)
+  %tr
+    %td= OrderItem.human_attribute_name(:product_title)
+    %td.alignright= OrderItem.human_attribute_name(:ordered)
+    %td.alignright= OrderItem.human_attribute_name(:shipped)
+  - @order_items.pending.each do |order_item|
+    %tr[order_item]
+      %td
+        %b= order_item.product_title
+        %span.badge= order_item.product_code
+        %br
+        = order_item.product_subtitle
+      %td.alignright.nowrap= order_item.amount
+      %td.alignright.nowrap= order_item.shipped || 0

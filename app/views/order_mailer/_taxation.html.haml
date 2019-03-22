@@ -3,7 +3,7 @@
   %td.alignright= Order.human_attribute_name(:total_sans_tax)
   %td.alignright= Order.human_attribute_name(:tax_total)
   %td.alignright= Order.human_attribute_name(:total_with_tax)
-- @order.order_items.group_by(&:tax_rate).each do |tax_rate, items|
+- @order_items.group_by(&:tax_rate).each do |tax_rate, items|
   %tr
     %td= number_to_percentage tax_rate, precision: 0
     %td.alignright.nowrap
