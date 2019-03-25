@@ -253,8 +253,10 @@ en:
         context_id: Workflow
         context_gid: Workflow
         stage: Stage
+        default: Message will be sent with default text
         disabled: Message suppressed
-        content: Message content
+        content: Message text
+        custom: Message will be sent with customized text
       order:
         number: №
         external_number: External №

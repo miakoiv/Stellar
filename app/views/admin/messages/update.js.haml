@@ -1,0 +1,2 @@
+$('#message-modal').modal('hide');
+$('#message-list').replaceWith("#{j render partial: 'admin/messages/edit_in_context', object: @message.context, as: :context}");

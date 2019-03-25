@@ -1,0 +1,36 @@
+#message-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: 'button', data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title
+          = @message.context
+          %span.small
+            = @message.human_attribute_value(:stage)
+      = bootstrap_form_for [:admin, @message], remote: true do |f|
+        = f.hidden_field :context_gid
+        = f.hidden_field :stage
+        .modal-body
+          %fieldset
+            = f.form_group do
+              = f.check_box :disabled
+            .message-content.collapse{class: @message.disabled? || 'in'}
+              ~ f.text_area :content
+        .modal-footer
+          - if @message.persisted? && current_user.can_delete?(@message, at: current_store)
+            .pull-left
+              = link_to icon('remove', t('actions.delete')), admin_message_path(@message), method: :delete, remote: true, class: 'btn btn-outline-danger'
+          = f.primary
+
+  :coffee
+    $('#message_disabled').on 'change', (e) ->
+      if $(e.target).is ':checked'
+        $('.message-content').collapse 'hide'
+      else
+        $('.message-content').collapse 'show'
+
+    CKEDITOR.ClassicEditor.create(
+      $('#message_content')[0]
+      toolbar: ['heading', 'bold', 'italic', 'numberedList', 'bulletedList', 'link', 'undo', 'redo']
+      language: '#{I18n.locale}'
+    ).catch (error) -> console.log error

@@ -11,6 +11,7 @@
         %th.col-xs-2= col(Message, :context_type)
         %th.col-xs-2= col(Message, :context_id)
         %th= col(Message, :stage)
+        %th.col-xs-1
         %th.actions
 
     %tbody
@@ -18,10 +19,8 @@
         %tr[message]
           %td= message.context.model_name.human
           %td= message.context
-          %td
-            - if message.disabled?
-              = icon('ban', data: {toggle: 'tooltip'}, title: col(Message, :disabled))
-            = message.human_attribute_value(:stage)
+          %td= message.human_attribute_value(:stage)
+          %td= render partial: 'status', object: message, as: :message
           %td.actions
             = link_to icon('info', t('actions.show')), admin_message_path(message), class: 'btn btn-default btn-sm'
             - if current_user.can_update?(message, at: current_store)

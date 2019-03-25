@@ -1,0 +1,7 @@
+.list-group
+  - context.message_stages.each do |stage|
+    - message = context.messages.find_by(stage: stage)
+    .list-group-item
+      .pull-right
+        = render partial: 'admin/messages/status', object: message, as: :message
+      = Message.human_attribute_value(:stage, stage)

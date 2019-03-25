@@ -1,0 +1,7 @@
+- if message
+  - if message.disabled?
+    = icon('toggle-off', title: col(Message, :disabled), class: 'fa-lg', data: {toggle: 'tooltip'})
+  - else
+    = icon('toggle-on', title: col(Message, :custom), class: 'fa-lg text-primary', data: {toggle: 'tooltip'})
+- else
+  = icon('toggle-on', title: col(Message, :default), class: 'fa-lg text-muted', data: {toggle: 'tooltip'})

@@ -1,0 +1,7 @@
+#message-list.list-group
+  - context.message_stages.each do |stage|
+    - message = context.messages.find_by(stage: stage)
+    = link_to message ? edit_admin_message_path(message) : new_admin_message_path(message: {context_gid: context.to_global_id, stage: stage}), remote: true, class: 'list-group-item' do
+      .pull-right
+        = render partial: 'admin/messages/status', object: message, as: :message
+      = Message.human_attribute_value(:stage, stage)

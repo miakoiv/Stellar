@@ -253,8 +253,10 @@ fi:
         context_id: Työnkulku
         context_gid: Työnkulku
         stage: Vaihe
+        default: Viesti lähetetään oletustekstillä
         disabled: Viestin lähetys estetty
-        content: Viestin sisältö
+        content: Viestin teksti
+        custom: Viesti lähetetään räätälöidyllä tekstillä
       order:
         number: nro
         external_number: Ulkoinen nro
