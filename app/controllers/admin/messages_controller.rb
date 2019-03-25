@@ -23,7 +23,7 @@ class Admin::MessagesController < AdminController
   # GET /admin/messages/new
   def new
     authorize_action_for Message, at: current_store
-    @message = current_store.messages.build
+    @message = current_store.messages.build(context: current_store.order_types.first)
   end
 
   # GET /admin/messages/1/edit

@@ -1,5 +1,8 @@
 class OrderType < ApplicationRecord
 
+  MESSAGE_STAGES = %w{acknowledge processing confirmation notification receipt conclusion cancellation
+  }.freeze
+
   resourcify
   include Authority::Abilities
   include Trackable
@@ -24,6 +27,10 @@ class OrderType < ApplicationRecord
   #---
   def payment_gateway_class
     "PaymentGateway::#{payment_gateway}".constantize
+  end
+
+  def message_stages
+    MESSAGE_STAGES
   end
 
   # Checks if any completed orders refer to this order type, cancelled

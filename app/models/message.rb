@@ -7,9 +7,6 @@
 #
 class Message < ApplicationRecord
 
-  STAGES = %w{acknowledge processing confirmation notification receipt conclusion cancellation shipment
-  }.freeze
-
   resourcify
   include Authority::Abilities
   include Trackable
@@ -24,11 +21,11 @@ class Message < ApplicationRecord
   validates :stage, presence: true, uniqueness: {scope: :context}
 
   #---
-  def self.stage_options
-    STAGES
+  def stage_options
+    return [] if context.nil?
+    context.message_stages
   end
 
-  #---
   def context_gid
     context ? context.to_global_id.to_s : nil
   end

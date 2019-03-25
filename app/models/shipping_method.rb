@@ -36,6 +36,10 @@ class ShippingMethod < ApplicationRecord
     "ShippingGateway::#{shipping_gateway}".constantize
   end
 
+  def message_stages
+    ['shipment']
+  end
+
   def to_s
     name
   end
