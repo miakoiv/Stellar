@@ -12,7 +12,16 @@
     = render partial: 'form', locals: {locked: false}
 
   .col-md-6
-    #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @order_type.to_global_id}}
+    = tab_set 'order-type-side', class: 'nav-justified nav-sm' do
+      = nav_tab 'messages', title(Message, count: 2), default: true
+      = nav_tab 'history', t('admin.activities.title')
+
+    .tab-content
+      = tab_pane 'messages', default: true do
+        = render partial: 'admin/messages/edit_in_context', object: @order_type, as: :context
+      = tab_pane 'history' do
+        #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @order_type.to_global_id}}
 
 :coffee
+  persist_tabs 'order-type-side'
   $('#context-activities').fetch_context()

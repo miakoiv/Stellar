@@ -14,11 +14,14 @@
   .col-md-6
     = tab_set 'shipping-method-side', class: 'nav-justified nav-sm' do
       = nav_tab 'images', col(ShippingMethod, :images), default: true
+      = nav_tab 'messages', title(Message, count: 2)
       = nav_tab 'history', t('admin.activities.title')
 
     .tab-content
       = tab_pane 'images', default: true do
         = render partial: 'admin/pictures/edit_collection', object: @shipping_method, as: :pictureable
+      = tab_pane 'messages' do
+        = render partial: 'admin/messages/edit_in_context', object: @shipping_method, as: :context
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @shipping_method.to_global_id}}
 
