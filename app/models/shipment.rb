@@ -87,7 +87,8 @@ class Shipment < ApplicationRecord
     transfer.complete!
     update shipped_at: Time.current
     order.update_shipped!
-    email.shipment(to: order.customer_string)
+    email.shipment(to: order.customer_string)&.deliver_later
+    true
   end
 
   # Cancels the shipment and returns it if it was already shipped.
