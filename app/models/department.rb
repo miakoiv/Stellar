@@ -31,6 +31,10 @@ class Department < ApplicationRecord
     will_save_change_to_name? || super
   end
 
+  def description
+    name
+  end
+
   def to_s
     name
   end
