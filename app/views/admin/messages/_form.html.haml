@@ -2,8 +2,8 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.select :context_gid, current_store.available_contexts.map { |c| ["#{c.model_name.human}: #{c}", c.to_global_id] }, {}, {class: 'selectize'}
-        = f.select :stage, @message.stage_options.map { |s| [Message.human_attribute_value(:stage, s), s] }, {}, {class: 'selectize'}
+        = f.select :context_gid, current_store.available_contexts.map { |c| ["#{c.model_name.human}: #{c}", c.to_global_id] }, {}, {data: {stages: current_store.available_contexts.map { |c| [c.to_global_id, c.message_stages.map { |s| [value: s, text: Message.human_attribute_value(:stage, s)] }] }.to_h}}
+        = f.select :stage, @message.stage_options.map { |s| [Message.human_attribute_value(:stage, s), s] }, {include_blank: true}, {class: 'selectize'}
         = f.form_group do
           = f.check_box :disabled
         .message-content.collapse{class: @message.disabled? || 'in'}
@@ -14,6 +14,16 @@
             = f.primary
 
 :coffee
+  $('#message_context_gid').betterSelectize
+    onChange: (id) ->
+      $stage = $('#message_stage')[0].selectize
+      stages = $('#message_context_gid').data 'stages'
+      if stages[id]
+        $stage.setValue null
+        $stage.clearOptions()
+        $stage.load (callback) ->
+          callback stages[id]
+
   $('#message_disabled').on 'change', (e) ->
     if $(e.target).is ':checked'
       $('.message-content').collapse 'hide'
