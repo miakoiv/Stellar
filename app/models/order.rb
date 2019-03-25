@@ -195,7 +195,7 @@ class Order < ApplicationRecord
     assign_number!
     archive!
     if acknowledge and !is_forwarded?
-      email.send(has_payment? ? :receipt : :acknowledge, to: customer_string).deliver_later
+      email.send(has_payment? ? :receipt : :acknowledge, to: customer_string)&.deliver_later
     end
     export_xml
   end
@@ -305,14 +305,14 @@ class Order < ApplicationRecord
     def approve!
       reload # to clear changes and prevent a callback loop
       if has_payment?
-        email.processing(to: customer_string, bcc: false).deliver_later
+        email.processing(to: customer_string, bcc: false)&.deliver_later
       elsif !is_forwarded?
-        email.confirmation(to: customer_string, bcc: false).deliver_later
-        email.confirmation(to: contact_string, bcc: false, pricing: false).deliver_later if has_contact_info?
+        email.confirmation(to: customer_string, bcc: false)&.deliver_later
+        email.confirmation(to: contact_string, bcc: false, pricing: false)&.deliver_later if has_contact_info?
       end
       items_by_vendor.each do |vendor, items|
         vendor.notified_users.each do |user|
-          email.notification(to: user.to_s, items: items, bcc: false, pricing: false).deliver_later
+          email.notification(to: user.to_s, items: items, bcc: false, pricing: false)&.deliver_later
         end
       end
       create_initial_transfer! if track_shipments?
@@ -323,8 +323,8 @@ class Order < ApplicationRecord
     def conclude!
       reload # to clear changes and prevent a callback loop
       if !is_forwarded?
-        email.conclusion(to: customer_string, bcc: false).deliver_later
-        email.conclusion(to: contact_string, bcc: false, pricing: false).deliver_later if has_contact_info?
+        email.conclusion(to: customer_string, bcc: false)&.deliver_later
+        email.conclusion(to: contact_string, bcc: false, pricing: false)&.deliver_later if has_contact_info?
       end
       OrderReportRow.create_from(self)
     end
@@ -343,7 +343,7 @@ class Order < ApplicationRecord
           shipment.cancel!
         end
       end
-      email.cancellation(to: customer_string).deliver_later
+      email.cancellation(to: customer_string)&.deliver_later
     end
 
     # Perform XML export if specified by order type, and
