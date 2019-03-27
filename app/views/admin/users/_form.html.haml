@@ -22,7 +22,7 @@
         - unless @user.new_record?
           = tab_pane 'user-addresses' do
             %fieldset{disabled: locked}
-              = f.text_field :shipping_address
+              = f.text_field :shipping_street
               .row
                 .col-md-4
                   = f.text_field :shipping_postalcode
@@ -30,7 +30,7 @@
                   = f.text_field :shipping_city
               = f.select :shipping_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
               %hr
-              = f.text_field :billing_address
+              = f.text_field :billing_street
               .row
                 .col-md-4
                   = f.text_field :billing_postalcode

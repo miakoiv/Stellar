@@ -121,7 +121,7 @@ module ShippingGateway
               xml.Shipment do
                 xml.send 'Shipment.Sender' do
                   xml.send 'Sender.Name1', @store.name
-                  xml.send 'Sender.Addr1', user.shipping_address
+                  xml.send 'Sender.Addr1', user.shipping_street
                   xml.send 'Sender.Postcode', user.shipping_postalcode
                   xml.send 'Sender.City', user.shipping_city
                   xml.send 'Sender.Country', user.shipping_country_code
@@ -129,7 +129,7 @@ module ShippingGateway
                 end
                 xml.send 'Shipment.Recipient' do
                   xml.send 'Recipient.Name1', order.customer_name
-                  xml.send 'Recipient.Addr1', order.shipping_address
+                  xml.send 'Recipient.Addr1', order.shipping_street
                   xml.send 'Recipient.Postcode', order.shipping_postalcode
                   xml.send 'Recipient.City', order.shipping_city
                   xml.send 'Recipient.Country', order.shipping_country_code

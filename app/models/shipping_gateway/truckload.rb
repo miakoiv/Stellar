@@ -50,7 +50,7 @@ module ShippingGateway
         key: order.store.maps_api_key,
         language: locale,
         origins: origin,
-        destinations: [order.shipping_address, order.shipping_city].join(', ')
+        destinations: [order.shipping_street, order.shipping_city].join(', ')
       }
       response = @truckload_connector.lookup(query).parsed_response
       if response['status'] == 'OK'

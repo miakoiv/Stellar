@@ -38,16 +38,16 @@
 .row
   .col-xs-5
     %dl.dl-horizontal
-      %dt= col(Order, :billing_address)
-      %dd= order.billing_address
+      %dt= col(Order, :billing_street)
+      %dd= order.billing_street
       %dd
         = order.billing_postalcode
         = order.billing_city
   .col-xs-7
     - if order.has_shipping?
       %dl.dl-horizontal
-        %dt= col(Order, :shipping_address)
-        %dd= order.shipping_address
+        %dt= col(Order, :shipping_street)
+        %dd= order.shipping_street
         %dd
           = order.shipping_postalcode
           = order.shipping_city

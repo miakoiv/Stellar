@@ -4,7 +4,7 @@
   = ff.text_field :name, required: true
   = ff.telephone_field :phone
   %hr
-  = ff.text_field :shipping_address
+  = ff.text_field :shipping_street
   .row
     .col-md-4
       = ff.text_field :shipping_postalcode
@@ -12,7 +12,7 @@
       = ff.text_field :shipping_city
   = ff.select :shipping_country_code, Store.country_options
   %hr
-  = ff.text_field :billing_address
+  = ff.text_field :billing_street
   .row
     .col-md-4
       = ff.text_field :billing_postalcode

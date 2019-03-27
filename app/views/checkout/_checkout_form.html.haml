@@ -23,7 +23,7 @@
     %fieldset
       .row
         .col-sm-12
-          = f.text_field :shipping_address, required: true
+          = f.text_field :shipping_street, required: true
         .col-xs-6.col-sm-4
           = f.text_field :shipping_postalcode, required: true
         .col-xs-6.col-sm-4
@@ -48,7 +48,7 @@
       %fieldset
         .row
           .col-sm-12
-            = f.text_field :billing_address, required: @order.billing_address_required?
+            = f.text_field :billing_street, required: @order.billing_address_required?
           .col-xs-6.col-sm-4
             = f.text_field :billing_postalcode, required: @order.billing_address_required?
           .col-xs-6.col-sm-4

@@ -231,16 +231,16 @@ class Admin::OrdersController < AdminController
         :external_number, :your_reference, :our_reference, :message,
         :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :contact_email, :contact_phone,
-        :billing_address, :billing_postalcode,
+        :billing_street, :billing_postalcode,
         :billing_city, :billing_country_code,
-        :shipping_address, :shipping_postalcode,
+        :shipping_street, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
         :notes, :is_final,
         customer_attributes: [
           :id, :initial_group_id, :email, :name, :phone,
-          :shipping_address, :shipping_postalcode,
+          :shipping_street, :shipping_postalcode,
           :shipping_city, :shipping_country_code,
-          :billing_address, :billing_postalcode,
+          :billing_street, :billing_postalcode,
           :billing_city, :billing_country_code
         ]
       )

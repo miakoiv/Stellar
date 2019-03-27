@@ -289,12 +289,12 @@ fi:
         contact_person: Yhteyshenkilö
         contact_email: Sähköpostiosoite
         contact_phone: Puhelinnumero
-        billing_address: Laskutusosoite
+        billing_street: Laskutusosoite
         billing_postalcode: Postinro
         billing_city: Toimipaikka
         billing_country_code: Maa
         has_billing_address: Maksajan osoite eri kuin toimitusosoite
-        shipping_address: Toimitusosoite
+        shipping_street: Toimitusosoite
         shipping_postalcode: Postinro
         shipping_city: Toimipaikka
         shipping_country_code: Maa
@@ -668,11 +668,11 @@ fi:
         orders: Tilaukset
         locale: Kieli
         phone: Puhelinnumero
-        billing_address: Laskutusosoite
+        billing_street: Laskutusosoite
         billing_postalcode: Postinumero
         billing_city: Toimipaikka
         billing_country_code: Maa
-        shipping_address: Toimitusosoite
+        shipping_street: Toimitusosoite
         shipping_postalcode: Postinumero
         shipping_city: Toimipaikka
         shipping_country_code: Maa

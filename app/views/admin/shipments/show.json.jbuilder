@@ -1,7 +1,7 @@
 json.extract! @shipment, :id, :shipped_at
 json.order_number @shipment.order.number
 json.extract! @shipment, :tracking_code, :pickup_point_id, :package_type, :mass
-json.extract! @shipment.order, :customer_name, :customer_email, :shipping_address, :shipping_postalcode, :shipping_city, :shipping_country_code
+json.extract! @shipment.order, :customer_name, :customer_email, :shipping_street, :shipping_postalcode, :shipping_city, :shipping_country_code
 json.extract! @shipment.shipping_method, :shipping_gateway
 json.shipment_items do
   json.array!(@shipment.transfer.transfer_items) do |transfer_item|

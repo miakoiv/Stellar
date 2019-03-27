@@ -7,16 +7,16 @@
     %b= @order.customer_phone
 %tr
   %td
-    = Order.human_attribute_name(:billing_address)
+    = Order.human_attribute_name(:billing_street)
   %td
-    %b= @order.billing_address
+    %b= @order.billing_street
     %br
     %b= @order.billing_postalcode
     %b= @order.billing_city
   %td
-    = Order.human_attribute_name(:shipping_address)
+    = Order.human_attribute_name(:shipping_street)
   %td
-    %b= @order.shipping_address
+    %b= @order.shipping_street
     %br
     %b= @order.shipping_postalcode
     %b= @order.shipping_city

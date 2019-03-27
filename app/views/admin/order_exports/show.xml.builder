@@ -15,7 +15,7 @@ xml.order do
     xml.contactPerson @order.contact_person
 
     xml.billing do
-      xml.address @order.billing_address
+      xml.address @order.billing_street
       xml.postalcode @order.billing_postalcode
       xml.city @order.billing_city
       xml.country @order.billing_country_code
@@ -23,7 +23,7 @@ xml.order do
     end
 
     xml.shipping do
-      xml.address @order.shipping_address
+      xml.address @order.shipping_street
       xml.postalcode @order.shipping_postalcode
       xml.city @order.shipping_city
       xml.country @order.shipping_country_code

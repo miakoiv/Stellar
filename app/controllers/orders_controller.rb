@@ -210,16 +210,16 @@ class OrdersController < BaseStoreController
         :customer_name, :customer_email, :customer_phone,
         :company_name, :contact_person, :contact_email, :contact_phone,
         :has_billing_address,
-        :billing_address, :billing_postalcode,
+        :billing_street, :billing_postalcode,
         :billing_city, :billing_country_code,
-        :shipping_address, :shipping_postalcode,
+        :shipping_street, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
         :notes,
         customer_attributes: [
           :id, :initial_group_id, :email, :name, :phone,
-          :shipping_address, :shipping_postalcode,
+          :shipping_street, :shipping_postalcode,
           :shipping_city, :shipping_country_code,
-          :billing_address, :billing_postalcode,
+          :billing_street, :billing_postalcode,
           :billing_city, :billing_country_code
         ]
       )

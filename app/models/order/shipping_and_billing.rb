@@ -7,10 +7,10 @@ class Order < ApplicationRecord
   belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
   belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
 
-  validates :shipping_address, :shipping_postalcode, :shipping_city, :shipping_country_code, presence: true, on: :update,
+  validates :shipping_street, :shipping_postalcode, :shipping_city, :shipping_country_code, presence: true, on: :update,
     if: :has_shipping?
 
-  validates :billing_address, :billing_postalcode, :billing_city, :billing_country_code, presence: true, on: :update,
+  validates :billing_street, :billing_postalcode, :billing_city, :billing_country_code, presence: true, on: :update,
     if: :billing_address_required?
 
   before_validation :copy_billing_address, if: :should_copy_billing_address?
@@ -71,8 +71,8 @@ class Order < ApplicationRecord
 
   def billing_address_components
     has_billing_address? ?
-      [billing_address, billing_postalcode, billing_city] :
-      [shipping_address, shipping_postalcode, shipping_city]
+      [billing_street, billing_postalcode, billing_city] :
+      [shipping_street, shipping_postalcode, shipping_city]
   end
 
   # VAT numbers are not mandatory, but expected to be present in orders
@@ -93,11 +93,11 @@ class Order < ApplicationRecord
       self.customer_email = customer.email
       self.customer_name = customer.name
       self.customer_phone = customer.phone
-      self.shipping_address = customer.shipping_address
+      self.shipping_street = customer.shipping_street
       self.shipping_postalcode = customer.shipping_postalcode
       self.shipping_city = customer.shipping_city
       self.shipping_country = customer.shipping_country
-      self.billing_address = customer.billing_address
+      self.billing_street = customer.billing_street
       self.billing_postalcode = customer.billing_postalcode
       self.billing_city = customer.billing_city
       self.billing_country = customer.billing_country
@@ -143,7 +143,7 @@ class Order < ApplicationRecord
 
   private
     def copy_billing_address
-      self.billing_address = shipping_address
+      self.billing_street = shipping_street
       self.billing_postalcode = shipping_postalcode
       self.billing_city = shipping_city
       self.billing_country = shipping_country
