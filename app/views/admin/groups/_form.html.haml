@@ -26,14 +26,16 @@
         = f.select :premium_group_id, current_store.groups.not_including(@group).map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }, {include_blank: true}, {class: 'selectize-label'}
         .premium-teaser.collapse{class: @group.premium_group.present? && 'in'}
           = f.text_field :premium_teaser
+    .panel-body
+      - if current_user.can_update?(@group, at: current_store)
+        = link_to icon('users', t('.users')), admin_group_users_path(@group), class: 'btn btn-default btn-sm'
+        = link_to icon('sitemap', t('.categories')), select_categories_admin_group_path(@group), class: 'btn btn-default btn-sm'
     .panel-footer
       - if current_user.can_update?(@group, at: current_store)
         - if @group != current_store.default_group
           = link_to icon('star', t('.make_default')), make_default_admin_group_path(@group), method: :patch, class: 'btn btn-primary btn-sm'
         - if @group != current_group
           = link_to icon('home', t('.join')), join_admin_group_user_path(@group, current_user), method: :patch, class: 'btn btn-default btn-sm'
-        = link_to icon('users', title(User, count: 2)), admin_group_users_path(@group), class: 'btn btn-default btn-sm'
-        = link_to icon('sitemap', t('.select_categories')), select_categories_admin_group_path(@group), class: 'btn btn-default btn-sm'
       - if current_user.can_delete?(@group, at: current_store)
         .pull-right
           = link_to icon('remove', t('actions.delete')), admin_group_path(@group), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: t('actions.confirm.body', klass: Group.model_name.human, name: @group.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}

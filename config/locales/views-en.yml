@@ -129,8 +129,9 @@ en:
         new_group: New group
       form:
         make_default: For guests
-        select_categories: Categories
         join: Join
+        categories: Allowed categories
+        users: Group members
       select_categories:
         inherited_categories_html: <h4>Inherited settings from parent groups</h4><p>These settings are in effect as long as this group does not specify its own</p>
     images:
