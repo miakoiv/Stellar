@@ -33,7 +33,7 @@ class ProfilesController < BaseStoreController
         :billing_city, :billing_country_code,
         :shipping_street, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
-        :locale, :password, :password_confirmation
+        :locale
       )
     end
 end

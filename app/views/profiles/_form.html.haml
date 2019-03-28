@@ -12,10 +12,6 @@
             = f.text_field :name, required: true
             = f.telephone_field :phone
             = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
-            - unless locked
-              = f.password_field :password
-              = render partial: 'shared/password_strength'
-              = f.password_field :password_confirmation
         = tab_pane 'user-addresses' do
           %fieldset{disabled: locked}
             = f.text_field :shipping_street

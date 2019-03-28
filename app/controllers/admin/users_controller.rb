@@ -65,6 +65,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       if @user.update(user_params)
         track @user
+        bypass_sign_in @user
         format.html { redirect_to admin_user_path(@user),
           notice: t('.notice', user: @user) }
         format.json { render :show, status: :ok, location: admin_user_path(@user) }
@@ -123,7 +124,12 @@ class Admin::UsersController < AdminController
         :shipping_street, :shipping_postalcode,
         :shipping_city, :shipping_country_code,
         :locale, :password, :password_confirmation
-      )
+      ).tap do |p|
+        if p[:password].blank? && p[:password_confirmation].blank?
+          p.delete(:password)
+          p.delete(:password_confirmation)
+        end
+      end
     end
 
     # Restrict searching to users in selected group.
