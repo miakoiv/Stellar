@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 2019_03_27_130328) do
   end
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
-    t.string "company"
-    t.string "address1"
-    t.string "address2"
-    t.string "postalcode"
-    t.string "city"
+    t.string "name", default: "", null: false
+    t.string "phone", default: "", null: false
+    t.string "company", default: "", null: false
+    t.string "address1", null: false
+    t.string "address2", default: "", null: false
+    t.string "postalcode", null: false
+    t.string "city", null: false
     t.string "country_code", limit: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

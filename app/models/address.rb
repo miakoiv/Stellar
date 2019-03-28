@@ -12,10 +12,10 @@ class Address < ApplicationRecord
   end
 
   def empty?
-    attributes.except('id', 'country_code').all? { |_, v| v.nil? || v.squish.empty? }
+    attributes.except('id', 'country_code').all? { |_, v| v.blank? }
   end
 
   def to_s
-    [name, phone, company, address1, address2, postalcode, city, country].compact.join "\n"
+    [name, phone, company, address1, address2, postalcode, city, country].join "\n"
   end
 end
