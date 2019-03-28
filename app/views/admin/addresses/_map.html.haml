@@ -1,0 +1,26 @@
+- if current_store.maps_api_key.present?
+  - id = "map-#{SecureRandom.base58}"
+  .thumbnail{style: 'position: relative; height: 0; padding-bottom: 25%; background-color: #eee;'}
+    .map-container{id: id, data: {location: address.to_location}, style: 'position: absolute; left: 0; right: 0; top: 0; bottom: 0;'}
+
+  :coffee
+    $map = $('##{id}')
+    console.log $map
+    options =
+      zoom: 17
+      disableDefaultUI: true
+      draggable: false
+      scrollwheel: false
+      gesturehandling: 'none'
+    map = new google.maps.Map $map[0], options
+    geocoder = new google.maps.Geocoder
+    loc = $map.data 'location'
+    results = geocoder.geocode {address: loc}, (results, status) ->
+      if status is 'OK'
+        latlng = results[0].geometry.location
+      else
+        latlng = {lat: 37.3320003, lng: -122.0329752}
+      map.setCenter latlng
+      marker = new google.maps.Marker
+        position: latlng
+        map: map

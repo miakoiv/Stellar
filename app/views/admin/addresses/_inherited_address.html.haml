@@ -1,2 +1,3 @@
 %p= t('admin.addresses.none.inherited')
-.well= render address
+= render partial: 'admin/addresses/map', object: address, as: :address
+= render address
