@@ -66,6 +66,7 @@ fi:
       none:
         billing: Ei laskutusosoitetta tallennettuna
         shipping: Ei toimitusosoitetta tallennettuna
+        inherited: Käytössä oleva osoite
     dashboard:
       title: Konsoli
       orders:

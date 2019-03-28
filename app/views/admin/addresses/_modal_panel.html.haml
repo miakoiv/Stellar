@@ -1,6 +1,8 @@
 %h5= t(type, scope: '.admin.addresses.labels')
 - if address.nil?
-  %p= t(type, scope: '.admin.addresses.none')
+  %p= icon('exclamation-circle', t(type, scope: '.admin.addresses.none'))
+  - if inherited_address = addressed.inherited_address(type)
+    = render partial: 'admin/addresses/inherited_address', object: inherited_address, as: :address
   .text-right= link_to icon('plus', t('.new_address')), new_admin_address_path(type: type, gid: addressed.to_global_id), remote: true, class: 'btn btn-outline-primary'
 - else
   = bootstrap_form_for [:admin, address], namespace: type, remote: true do |f|

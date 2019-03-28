@@ -59,6 +59,7 @@ en:
       none:
         billing: No billing address on file
         shipping: No shipping address on file
+        inherited: Effective address
     dashboard:
       title: Dashboard
       orders:
