@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '>= 2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2', '< 6.0'
+gem 'rails', '~> 5.2.3', '< 6.0'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'with_advisory_lock'
