@@ -1,0 +1,12 @@
+#addresses-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title
+          = t('.title')
+          %small= bootstrap_label(@addressed)
+      #billing-address-panel.modal-body
+        = render partial: 'admin/addresses/modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.billing_address, type: :billing}
+      #shipping-address-panel.modal-body
+        = render partial: 'admin/addresses/modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.shipping_address, type: :shipping}

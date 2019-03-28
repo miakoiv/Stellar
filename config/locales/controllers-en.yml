@@ -1,5 +1,12 @@
 en:
   admin:
+    addresses:
+      create:
+        notice: "Address assigned to %{addressed}."
+      update:
+        notice: "Address for %{addressed} changed."
+      destroy:
+        notice: "Address for %{addressed} deleted."
     categories:
       create:
         notice: "Category %{category} created."

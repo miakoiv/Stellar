@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   resourcify
   include Authority::Abilities
   include Trackable
+  include Addressed
   acts_as_nested_set scope: :store,
                      dependent: :destroy,
                      counter_cache: :children_count,

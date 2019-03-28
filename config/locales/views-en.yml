@@ -47,6 +47,18 @@ en:
       search:
         user: Activity performed by
         until_date: Activity date until
+    addresses:
+      labels:
+        billing: Billing address
+        shipping: Shipping address
+      modal:
+        title: Addresses
+      modal_panel:
+        new_address: New address
+        delete: Delete
+      none:
+        billing: No billing address on file
+        shipping: No shipping address on file
     dashboard:
       title: Dashboard
       orders:
@@ -132,6 +144,7 @@ en:
         join: Join
         categories: Allowed categories
         users: Group members
+        addresses: Addresses
       select_categories:
         inherited_categories_html: <h4>Inherited settings from parent groups</h4><p>These settings are in effect as long as this group does not specify its own</p>
     images:

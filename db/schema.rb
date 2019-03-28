@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_084453) do
+ActiveRecord::Schema.define(version: 2019_03_27_130328) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 2019_03_27_084453) do
     t.index ["context_type", "context_id"], name: "index_activities_on_context_type_and_context_id"
     t.index ["store_id"], name: "index_activities_on_store_id"
     t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "company"
+    t.string "address1"
+    t.string "address2"
+    t.string "postalcode"
+    t.string "city"
+    t.string "country_code", limit: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "adjustments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
@@ -186,10 +199,14 @@ ActiveRecord::Schema.define(version: 2019_03_27_084453) do
     t.boolean "price_tax_included", default: true, null: false
     t.integer "premium_group_id"
     t.string "premium_teaser"
+    t.integer "billing_address_id"
+    t.integer "shipping_address_id"
     t.string "appearance", default: "default", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["billing_address_id"], name: "index_groups_on_billing_address_id"
     t.index ["parent_id"], name: "index_groups_on_parent_id"
+    t.index ["shipping_address_id"], name: "index_groups_on_shipping_address_id"
     t.index ["store_id"], name: "index_groups_on_store_id"
   end
 

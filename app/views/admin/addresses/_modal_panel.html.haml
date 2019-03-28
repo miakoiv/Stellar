@@ -1,0 +1,30 @@
+%h5= t(type, scope: '.admin.addresses.labels')
+- if address.nil?
+  %p= t(type, scope: '.admin.addresses.none')
+  .text-right= link_to icon('plus', t('.new_address')), new_admin_address_path(type: type, gid: addressed.to_global_id), remote: true, class: 'btn btn-outline-primary'
+- else
+  = bootstrap_form_for [:admin, address], namespace: type, remote: true do |f|
+    %fieldset
+      = hidden_field_tag :gid, addressed.to_global_id
+      = hidden_field_tag :type, type
+      .row
+        .col-md-6
+          = f.text_field :name, hide_label: true, placeholder: col(Address, :name), prepend: icon('user', class: 'fa-fw')
+        .col-md-6
+          = f.phone_field :phone, hide_label: true, placeholder: col(Address, :phone), prepend: icon('phone', class: 'fa-fw')
+      = f.text_field :company, hide_label: true, placeholder: col(Address, :company), prepend: icon('building', class: 'fa-fw')
+      = f.text_field :address1, hide_label: true, placeholder: col(Address, :address1), prepend: icon('address-card-o', class: 'fa-fw')
+      = f.text_field :address2, hide_label: true, placeholder: col(Address, :address2)
+      .row
+        .col-md-4
+          = f.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), prepend: icon('map-marker', class: 'fa-fw')
+        .col-md-8
+          = f.text_field :city, hide_label: true, placeholder: col(Address, :city)
+      = f.select :country_code, Store.country_options, {hide_label: true}
+    %fieldset
+      .pull-right= f.primary class: 'btn btn-outline-primary'
+      - unless address.new_record?
+        = link_to icon('remove', t('.delete')), admin_address_path(address, type: type, gid: addressed.to_global_id), remote: true, method: :delete, class: 'btn btn-outline-danger'
+:coffee
+  $('##{type}_address_country_code').betterSelectize
+    dropdownParent: null

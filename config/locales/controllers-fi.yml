@@ -1,5 +1,12 @@
 fi:
   admin:
+    addresses:
+      create:
+        notice: "Osoite asetettu: %{addressed}"
+      update:
+        notice: "Osoite vaihdettu: %{addressed}"
+      destroy:
+        notice: "Osoite poistettu: %{addressed}"
     categories:
       create:
         notice: "Tuoteryhmä %{category} luotu."

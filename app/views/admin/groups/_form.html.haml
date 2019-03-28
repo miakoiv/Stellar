@@ -29,6 +29,7 @@
     .panel-body
       - if current_user.can_update?(@group, at: current_store)
         = link_to icon('users', t('.users')), admin_group_users_path(@group), class: 'btn btn-default btn-sm'
+        = link_to icon('address-book', t('.addresses')), admin_addresses_path(gid: @group.to_global_id), remote: true, class: 'btn btn-default btn-sm'
         = link_to icon('sitemap', t('.categories')), select_categories_admin_group_path(@group), class: 'btn btn-default btn-sm'
     .panel-footer
       - if current_user.can_update?(@group, at: current_store)

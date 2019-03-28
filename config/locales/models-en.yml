@@ -23,6 +23,9 @@ en:
       activity:
         one: activity
         other: activities
+      address:
+        one: address
+        other: addresses
       alternate_price:
         one: price
         other: prices
@@ -152,6 +155,15 @@ en:
         resource: Target
         context: Context
         differences: Changes made
+      address:
+        name: Name
+        phone: Phone number
+        company: Company
+        address1: Address
+        address2: Address 2
+        postalcode: Post code
+        city: City
+        country_code: Country
       alternate_price:
         group_id: Group
         product_id: Product

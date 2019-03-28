@@ -23,6 +23,9 @@ fi:
       activity:
         one: tapahtuma
         other: tapahtumat
+      address:
+        one: osoite
+        other: osoitteet
       alternate_price:
         one: hinta
         other: hinnat
@@ -152,6 +155,15 @@ fi:
         resource: Kohde
         context: Asiayhteys
         differences: Tehdyt muutokset
+      address:
+        name: Nimi
+        phone: Puhelinnumero
+        company: Yritys
+        address1: Osoite
+        address2: Osoite 2
+        postalcode: Postinumero
+        city: Toimipaikka
+        country_code: Maa
       alternate_price:
         group_id: Ryhmä
         product_id: Tuote

@@ -54,6 +54,18 @@ fi:
       search:
         user: Tapahtuman tekijä
         until_date: Tapahtumapäivä viimeistään
+    addresses:
+      labels:
+        billing: Laskutusosoite
+        shipping: Toimitusosoite
+      modal:
+        title: Osoitteet
+      modal_panel:
+        new_address: Uusi osoite
+        delete: Poista
+      none:
+        billing: Ei laskutusosoitetta tallennettuna
+        shipping: Ei toimitusosoitetta tallennettuna
     dashboard:
       title: Konsoli
       orders:
@@ -139,6 +151,7 @@ fi:
         join: Liity
         categories: Tuoteryhmärajaukset
         users: Ryhmän jäsenet
+        addresses: Osoitteet
       select_categories:
         inherited_categories_html: <h4>Pääryhmiltä perityt valinnat</h4><p>Nämä asetukset ovat voimassa, kun tällä ryhmällä ei ole valittuja ryhmiä</p>
     images:
