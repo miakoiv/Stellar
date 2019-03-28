@@ -15,7 +15,11 @@ class Address < ApplicationRecord
     attributes.except('id', 'country_code').all? { |_, v| v.blank? }
   end
 
+  def to_location
+    [company, address1, address2, postalcode, city, country].reject(&:blank?).join ', '
+  end
+
   def to_s
-    [name, phone, company, address1, address2, postalcode, city, country].join "\n"
+    [company, name, address1, address2, postalcode, city, country, phone].reject(&:blank?).join "\n"
   end
 end
