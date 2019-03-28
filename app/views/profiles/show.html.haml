@@ -3,6 +3,8 @@
     .page-header
       = link_to edit_profile_path, class: 'btn btn-default' do
         = icon('edit', t('actions.edit'))
+      = link_to edit_user_registration_path, class: 'btn btn-default' do
+        = icon('key', t('devise.passwords.edit.change_my_password'))
       %h1= icon('user', current_user)
 
     .row

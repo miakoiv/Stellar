@@ -75,9 +75,9 @@ fi:
         cancel_my_account: Poista tilini
         currently_waiting_confirmation_for_email: 'Odotetaan vahvistusta sähköpostille: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: jätä tämä tyhjäksi, mikäli et halua vaihtaa
-        title: Muokkaa %{resource}
+        title: Salasanan vaihtaminen
         unhappy: Epäonnellinen
-        update: Päivitä
+        update: Vaihda salasana
         we_need_your_current_password_to_confirm_your_changes: syötä nykyinen salasanasi
       new:
         sign_up: Rekisteröidy
