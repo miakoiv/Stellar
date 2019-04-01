@@ -51,6 +51,10 @@ class Group < ApplicationRecord
   validates :price_modifier, numericality: {greater_than: -100}
 
   #---
+  def self.with_descendants(ids)
+    find(ids).map { |group| group.self_and_descendants.ids }.flatten.uniq
+  end
+
   def self.appearance_options
     APPEARANCES.map { |a| [human_attribute_value(:appearance, a), a, data: {appearance: a}.to_json] }
   end

@@ -16,8 +16,8 @@ class OrderReportRowSearch < Searchlight::Search
     end
   end
 
-  def search_group
-    query.where(group: Group.find(group).self_and_descendants)
+  def search_groups
+    query.where(group: Group.with_descendants(groups))
   end
 
   def search_order_type

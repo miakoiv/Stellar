@@ -3,10 +3,11 @@
     %h4.panel-title= t('actions.search')
   .panel-body
     = form_for @search, url: admin_sales_report_path, method: :get, remote: true do |f|
+      = f.hidden_field :order_type, value: nil
       .row
         .col-sm-6
           .form-group
-            = f.select :group, current_store.group_options, {include_blank: true}, {placeholder: t('admin.reports.search.all_groups'), class: 'form-control selectize-label'}
+            = f.select :groups, current_store.group_options, {}, {multiple: true, placeholder: t('admin.reports.search.all_groups'), class: 'form-control selectize-label'}
         .col-sm-6
           .form-group
             = f.select :categories, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
