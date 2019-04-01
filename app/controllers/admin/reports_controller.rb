@@ -35,6 +35,8 @@ class Admin::ReportsController < AdminController
     respond_to do |format|
       format.html {
         @search = OrderReportRowSearch.new(query)
+        @products = current_store.products
+          .find((query['product_id'] || []).reject(&:blank?))
       }
       format.js
       format.json {

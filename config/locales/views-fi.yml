@@ -92,6 +92,7 @@ fi:
         all_groups: "[Kaikki asiakasryhmät]"
         all_order_types: "[Kaikki tilaustavat]"
         all_categories: "[Kaikki tuoteryhmät]"
+        product_query: Kirjoita hakeaksesi tuotteita…
         since_date: Pvm alkaen
         until_date: Pvm päättyen
         countries: "[Kaikki kohdemaat]"

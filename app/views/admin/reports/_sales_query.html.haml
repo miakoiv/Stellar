@@ -11,6 +11,9 @@
         .col-sm-6
           .form-group
             = f.select :categories, Category.options_for_select(current_store.categories.live) { |c, l| [indent(c.to_s, l), c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.all_categories'), class: 'form-control selectize'}
+        .col-sm-12
+          .form-group
+            = f.select :product_id, [], {}, {multiple: true, placeholder: t('admin.reports.search.product_query'), class: 'selectize-tall selectize-list-group', data: {products: @products, selected: @search.raw_options['product_id']}}
         .col-sm-6
           .form-group
             = f.select :shipping_country_code, current_store.countries_shipped_to.map { |c| [c.name, c.id] }, {}, {multiple: true, placeholder: t('admin.reports.search.countries'), class: 'form-control selectize'}
@@ -39,6 +42,32 @@
       labelField: 'title'
       dataAttr: 'data'
       render: $.fn.selectize.label_renderer
+
+    $product = $('#order_report_row_search_product_id')
+    products = $product.data 'products'
+    selected = $product.data 'selected'
+
+    $product.betterSelectize
+      options: products
+      items: selected
+      valueField: 'id'
+      sortField: [{field: 'title'}, {field: 'subtitle'}]
+      searchField: ['code', 'customer_code', 'title', 'subtitle']
+      diacritics: false
+      render: $.fn.selectize.product_renderer
+      load: (query, callback) ->
+        return callback() unless query.length > 2
+        $.ajax
+          url: '#{query_admin_products_path}'
+          type: 'GET'
+          dataType: 'json'
+          data:
+            q: query
+            having_variants: false
+          error: ->
+            callback()
+          success: (response) ->
+            callback(response)
 
     $('.temporal-unit-select :input').on 'change', ->
       $('#new_order_report_row_search').trigger 'submit.rails'
