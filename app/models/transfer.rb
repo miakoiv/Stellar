@@ -141,9 +141,10 @@ class Transfer < ApplicationRecord
       return false if stock_items.none?
 
       if order_item.lot_code.present?
-        load_item_by_lot_code(order_item, stock_items) && return
+        load_item_by_lot_code(order_item, stock_items)
+      else
+        load_item_from_stock(order_item, stock_items)
       end
-      load_item_from_stock(order_item, stock_items)
     end
 
     # Loading from infinite stock always succeeds. Order number is
