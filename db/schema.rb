@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_27_130328) do
+ActiveRecord::Schema.define(version: 2019_03_29_074850) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -421,6 +421,8 @@ ActiveRecord::Schema.define(version: 2019_03_27_130328) do
     t.integer "customer_id", null: false
     t.integer "inventory_id"
     t.integer "order_type_id"
+    t.integer "billing_address_id"
+    t.integer "shipping_address_id"
     t.boolean "includes_tax", default: true, null: false
     t.datetime "completed_at"
     t.date "shipping_at"
@@ -452,9 +454,11 @@ ActiveRecord::Schema.define(version: 2019_03_27_130328) do
     t.string "user_email"
     t.string "user_phone"
     t.string "order_type_name"
+    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["inventory_id"], name: "index_orders_on_inventory_id"
     t.index ["order_type_id"], name: "index_orders_on_order_type_id"
+    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

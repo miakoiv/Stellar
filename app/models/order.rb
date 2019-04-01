@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   resourcify
   include Authority::Abilities
   include Trackable
+  include Addressed
   include Adjustable
 
   #---
