@@ -119,10 +119,6 @@ class Admin::UsersController < AdminController
     def user_params
       params.require(:user).permit(
         :name, :email, :phone,
-        :billing_street, :billing_postalcode,
-        :billing_city, :billing_country_code,
-        :shipping_street, :shipping_postalcode,
-        :shipping_city, :shipping_country_code,
         :locale, :password, :password_confirmation
       ).tap do |p|
         if p[:password].blank? && p[:password_confirmation].blank?

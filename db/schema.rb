@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_074850) do
+ActiveRecord::Schema.define(version: 2019_04_02_072337) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -865,14 +865,6 @@ ActiveRecord::Schema.define(version: 2019_03_29_074850) do
     t.string "name"
     t.string "email", default: "", null: false
     t.string "phone"
-    t.string "billing_street"
-    t.string "billing_postalcode"
-    t.string "billing_city"
-    t.string "billing_country_code", limit: 2
-    t.string "shipping_street"
-    t.string "shipping_postalcode"
-    t.string "shipping_city"
-    t.string "shipping_country_code", limit: 2
     t.string "locale"
     t.string "encrypted_password", default: "", null: false
     t.string "confirmation_token"

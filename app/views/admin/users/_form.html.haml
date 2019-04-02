@@ -1,46 +1,18 @@
 = bootstrap_form_for [:admin, @group, @user] do |f|
-  = tab_set 'user-main', class: 'panel-tabs' do
-    = nav_tab 'user-personal', col(User, :personal), default: true
-    - unless @user.new_record?
-      = nav_tab 'user-addresses', col(User, :addresses)
-
-  .panel.panel-default.tabbed-panel
+  .panel.panel-default
     .panel-body
-      .tab-content
-        = tab_pane 'user-personal', default: true do
-          %fieldset{disabled: locked}
-            = f.text_field :email, required: true
-            - unless @user.new_record?
-              = f.text_field :name, required: true
-              = f.telephone_field :phone
-              = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
-              - unless locked
-                %hr
-                = f.password_field :password, required: @user.require_password?
-                = render partial: 'shared/password_strength'
-                = f.password_field :password_confirmation, required: @user.require_password?
+      %fieldset{disabled: locked}
+        = f.text_field :email, required: true
         - unless @user.new_record?
-          = tab_pane 'user-addresses' do
-            %fieldset{disabled: locked}
-              = f.text_field :shipping_street
-              .row
-                .col-md-4
-                  = f.text_field :shipping_postalcode
-                .col-md-8
-                  = f.text_field :shipping_city
-              = f.select :shipping_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
-              %hr
-              = f.text_field :billing_street
-              .row
-                .col-md-4
-                  = f.text_field :billing_postalcode
-                .col-md-8
-                  = f.text_field :billing_city
-              = f.select :billing_country_code, Store.country_options, {include_blank: true}, {class: 'selectize'}
+          = f.text_field :name, required: true
+          = f.telephone_field :phone
+          = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
+          - unless locked
+            %hr
+            = f.password_field :password, required: @user.require_password?
+            = render partial: 'shared/password_strength'
+            = f.password_field :password_confirmation, required: @user.require_password?
       - unless locked
         %fieldset.actions.fixed
           .container
             = f.primary
-
-:coffee
-  persist_tabs 'user-main'
