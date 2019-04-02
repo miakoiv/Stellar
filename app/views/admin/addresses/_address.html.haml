@@ -1,6 +1,7 @@
 %address
-  %strong= address.company
-  %br
+  - if address.company.present?
+    %strong= address.company
+    %br
   - if address.name.present?
     = address.name
     %br

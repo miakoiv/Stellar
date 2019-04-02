@@ -876,6 +876,40 @@ mark {
 
 
 /*
+ * Address label boxes
+ */
+.address-label {
+  margin-bottom: $line-height-computed;
+  padding: $panel-body-padding;
+  border-radius: $panel-border-radius;
+  background-color: $panel-default-heading-bg;
+  @include box-shadow(0 1px 1px rgba(0, 0, 0, .05));
+
+  h5 {
+    margin-top: 0;
+    padding-left: 15px;
+    font-size: $font-size-small;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:before {
+      @include font-awesome;
+      float: left;
+      width: 15px;
+      margin-left: -15px;
+    }
+  }
+  address {
+    margin-bottom: 0;
+    color: #000;
+  }
+  &.billing h5:before { content: '\f153'; }
+  &.shipping h5:before { content: '\f124'; }
+}
+
+
+/*
  * Rounded buttons
  */
 .btn-round {
