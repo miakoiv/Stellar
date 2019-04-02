@@ -4,11 +4,11 @@ class AddAddressRefsToOrders < ActiveRecord::Migration[5.2]
     add_reference :orders, :shipping_address, type: :integer, after: :billing_address_id
 
     Order.find_each(batch_size: 50) do |order|
-      billing_name         = order.customer_name
-      billing_phone        = order.customer_phone
-      billing_street       = order.billing_street
-      billing_postalcode   = order.billing_postalcode
-      billing_city         = order.billing_city
+      billing_name = order.customer_name
+      billing_phone = order.customer_phone
+      billing_street = order.billing_street
+      billing_postalcode = order.billing_postalcode
+      billing_city = order.billing_city
       billing_country_code = order.billing_country_code
       if billing_street.present? || billing_postalcode.present? || billing_city.present?
         billing_address = Address.find_or_initialize_by(
@@ -23,12 +23,12 @@ class AddAddressRefsToOrders < ActiveRecord::Migration[5.2]
         )
         order.update_columns(billing_address_id: billing_address.id)
       end
-      shipping_name         = order.contact_person
-      shipping_phone        = order.contact_phone
-      shipping_company      = order.company_name
-      shipping_street       = order.shipping_street
-      shipping_postalcode   = order.shipping_postalcode
-      shipping_city         = order.shipping_city
+      shipping_name = order.contact_person.presence || billing_name
+      shipping_phone = order.contact_phone.presence || billing_phone
+      shipping_company = order.company_name
+      shipping_street = order.shipping_street
+      shipping_postalcode = order.shipping_postalcode
+      shipping_city = order.shipping_city
       shipping_country_code = order.shipping_country_code
       if shipping_name.present? || shipping_company.present? || shipping_street.present? || shipping_postalcode.present? || shipping_city.present?
         shipping_address = Address.find_or_initialize_by(
