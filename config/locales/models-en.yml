@@ -281,6 +281,8 @@ en:
         inventory_id: Inventory
         group_id: Customer group
         order_type_id: Order type
+        billing_address_id: Billing address
+        shipping_address_id: Shipping address
         completed_at: Ordered
         updated_at: Updated
         is_final: Mark as complete
@@ -301,15 +303,6 @@ en:
         contact_person: Contact person
         contact_email: E-mail
         contact_phone: Phone number
-        billing_street: Billing address
-        billing_postalcode: Postal code
-        billing_city: City
-        billing_country_code: Country
-        has_billing_address: Billing to a different address from shipping
-        shipping_street: Shipping address
-        shipping_postalcode: Postal code
-        shipping_city: City
-        shipping_country_code: Country
         shipping_method: Shipping
         notes: Notes
         store_name: Store

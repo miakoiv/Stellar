@@ -281,6 +281,8 @@ fi:
         inventory_id: Varasto
         group_id: Asiakasryhmä
         order_type_id: Tilaustyyppi
+        billing_address_id: Laskutusosoite
+        shipping_address_id: Toimitusosoite
         completed_at: Tilauspvm
         updated_at: Päivitetty
         is_final: Merkitse valmiiksi
@@ -301,15 +303,6 @@ fi:
         contact_person: Yhteyshenkilö
         contact_email: Sähköpostiosoite
         contact_phone: Puhelinnumero
-        billing_street: Laskutusosoite
-        billing_postalcode: Postinro
-        billing_city: Toimipaikka
-        billing_country_code: Maa
-        has_billing_address: Maksajan osoite eri kuin toimitusosoite
-        shipping_street: Toimitusosoite
-        shipping_postalcode: Postinro
-        shipping_city: Toimipaikka
-        shipping_country_code: Maa
         shipping_method: Toimitus
         notes: Lisätietoja
         store_name: Kauppa
