@@ -1,5 +1,7 @@
 class Address < ApplicationRecord
 
+  NONVALUE_ATTRIBUTES = %w{id created_at updated_at}.freeze
+
   resourcify
   include Authority::Abilities
 
@@ -11,8 +13,17 @@ class Address < ApplicationRecord
     new(country: store.country)
   end
 
+  def ==(other)
+    return false unless other&.respond_to?(:value_attributes)
+    value_attributes == other.value_attributes
+  end
+
   def empty?
     attributes.except('id', 'country_code').all? { |_, v| v.blank? }
+  end
+
+  def value_attributes
+    attributes.except(*NONVALUE_ATTRIBUTES)
   end
 
   def to_location
