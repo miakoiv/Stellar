@@ -28,12 +28,7 @@ class ProfilesController < BaseStoreController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(
-        :name, :email, :phone,
-        :billing_street, :billing_postalcode,
-        :billing_city, :billing_country_code,
-        :shipping_street, :shipping_postalcode,
-        :shipping_city, :shipping_country_code,
-        :locale
+        :name, :email, :phone, :locale
       )
     end
 end
