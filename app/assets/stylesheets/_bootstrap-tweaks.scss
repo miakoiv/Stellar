@@ -1358,16 +1358,16 @@ fieldset[disabled] .help-block { display: none; }
 /*
  * Form validation states
  */
-.control-label.required:after {
-  @include font-awesome;
-  @include small;
-  color: $text-muted;
-  content: "\f0a3";
-  margin-left: 0.333em;
-}
-.form-control:required:invalid:focus {
-  border-color: darken($state-danger-text, 10%);
-  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($state-danger-text, 20%));
+.form-control:required {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%235cb85c' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
+
+  &:invalid {
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%23d9534f' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
+  }
+  &:invalid:focus {
+    border-color: darken($state-danger-text, 10%);
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($state-danger-text, 20%));
+  }
 }
 
 
@@ -1410,12 +1410,12 @@ fieldset.fixed {
   }
 }
 fieldset > legend {
-  margin-bottom: $breadcrumb-padding-vertical;
-  padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
+  margin-bottom: $line-height-computed/2;
   border: 0;
-  border-radius: $border-radius-base;
-  background-color: $breadcrumb-bg;
-  font-size: $font-size-base;
+  font-size: $font-size-small;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 
