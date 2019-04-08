@@ -82,22 +82,7 @@ de:
         not_approved: Noch nicht bearbeitet
         items: Posten
         products: Produkte
-        customer_name: Kunde
         customer_email: E-Mail
-        customer_phone: Telefonnummer
-        company_name: Firma
-        contact_person: Kontaktperson
-        contact_email: E-Mail
-        contact_phone: Telefonnummer
-        billing_street: Rechnungsadresse
-        billing_postalcode: Postleitzahl
-        billing_city: Stadt
-        billing_country_code: Land
-        has_billing_address: Abweichende Lieferadresse
-        shipping_street: Lieferadresse
-        shipping_postalcode: Postleitzahl
-        shipping_city: Stadt
-        shipping_country_code: Land
         notes: Anmerkungen
         store_name: Filiale
         user_name: Kunde

@@ -153,22 +153,7 @@ es:
         not_approved: No procesado
         items: Artículos
         products: Productos
-        customer_name: Nombre del cliente
         customer_email: E-mail
-        customer_phone: Numero de teléfono
-        company_name: Compañia
-        contact_person: Persona de contacto
-        contact_email: E-mail
-        contact_phone: Numero de teléfono
-        billing_street: Dirección de facturacuön
-        billing_postalcode: Código Postal
-        billing_city: Ciudad
-        billing_country_code: País
-        has_billing_address: Envío a diferente dirección
-        shipping_street: Dirección de envío
-        shipping_postalcode: Código postal
-        shipping_city: Ciudad
-        shipping_country_code: País
         shipping_method: Envío
         notes: Notas
         store_name: Tienda
