@@ -145,7 +145,8 @@ module PaymentGateway
 
       def token_request(options = {})
         number = SecureRandom.hex(12)
-        first, last = order.customer_name.split(/\s+/, 2)
+        name = order.billing_address&.name
+        first, last = name.split(/\s+/, 2)
         street, zip, city = order.billing_address_components
         {
           version: @version,

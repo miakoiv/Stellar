@@ -168,7 +168,7 @@ module ShippingGateway
                 xml.send 'Routing.Account', @api_key
                 xml.send 'Routing.Key', md5(@api_key, id, @secret)
                 xml.send 'Routing.Id', id
-                xml.send 'Routing.Name', order.customer_name
+                xml.send 'Routing.Name', order.shipping_address.name
                 xml.send 'Routing.Time', unix_time
               end
               xml.PrintLabel do
