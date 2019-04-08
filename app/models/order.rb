@@ -57,11 +57,7 @@ class Order < ApplicationRecord
   scope :quote, -> { targeted.incomplete }
 
   #---
-  with_options on: :update, if: :customer_required?, presence: true do |order|
-    order.validates :customer
-    order.validates :customer_name
-    order.validates :customer_email
-  end
+  validates :customer_email, presence: true, on: :update, if: :customer_required?
 
   #---
   # This attribute allows adding products en masse
