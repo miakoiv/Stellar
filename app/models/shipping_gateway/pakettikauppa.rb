@@ -56,6 +56,7 @@ module ShippingGateway
         super
         raise ArgumentError if order.nil?
         @store = order.store
+        @group = user.group(@store)
         @api_key = '00000000-0000-0000-0000-000000000000'
         @secret = '1234567890ABCDEF'
         @locale = I18n.locale
@@ -121,19 +122,19 @@ module ShippingGateway
               xml.Shipment do
                 xml.send 'Shipment.Sender' do
                   xml.send 'Sender.Name1', @store.name
-                  xml.send 'Sender.Addr1', user.shipping_street
-                  xml.send 'Sender.Postcode', user.shipping_postalcode
-                  xml.send 'Sender.City', user.shipping_city
-                  xml.send 'Sender.Country', user.shipping_country_code
+                  xml.send 'Sender.Addr1', @group.shipping_address.address1
+                  xml.send 'Sender.Postcode', @group.shipping_address.postalcode
+                  xml.send 'Sender.City', @group.shipping_address.city
+                  xml.send 'Sender.Country', @group.shipping_address.country_code
                   xml.send 'Sender.Vatcode', @store.vat_number
                 end
                 xml.send 'Shipment.Recipient' do
-                  xml.send 'Recipient.Name1', order.customer_name
-                  xml.send 'Recipient.Addr1', order.shipping_street
-                  xml.send 'Recipient.Postcode', order.shipping_postalcode
-                  xml.send 'Recipient.City', order.shipping_city
-                  xml.send 'Recipient.Country', order.shipping_country_code
-                  xml.send 'Recipient.Phone', order.customer_phone
+                  xml.send 'Recipient.Name1', order.shipping_address.name
+                  xml.send 'Recipient.Addr1', order.shipping_address.address1
+                  xml.send 'Recipient.Postcode', order.shipping_address.postalcode
+                  xml.send 'Recipient.City', order.shipping_address.city
+                  xml.send 'Recipient.Country', order.shipping_address.country_code
+                  xml.send 'Recipient.Phone', order.shipping_address.phone
                   xml.send 'Recipient.Email', order.customer_email
                 end
                 xml.send 'Shipment.Consignment' do
