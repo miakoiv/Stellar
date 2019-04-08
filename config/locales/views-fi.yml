@@ -669,6 +669,10 @@ fi:
     show_category_order:
       close: Sulje tilauslomake
   checkout:
+    addresses:
+      labels:
+        billing: Tilaajan osoite
+        shipping: Toimitusosoite
     panels:
       address_panel: Yhteystietosi
       shipping_panel: Toimitustapa

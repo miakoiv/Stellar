@@ -283,6 +283,7 @@ fi:
         order_type_id: Tilaustyyppi
         billing_address_id: Laskutusosoite
         shipping_address_id: Toimitusosoite
+        separate_shipping_address: Toimitus eri osoitteeseen
         completed_at: Tilauspvm
         updated_at: Päivitetty
         is_final: Merkitse valmiiksi

@@ -1,108 +1,57 @@
 = bootstrap_form_for @order, remote: true, data: {type: 'json'}, html: {id: 'checkout-form', class: 'collapse in'} do |f|
   = f.hidden_field :order_type_id
   %fieldset
-    .row
-      .col-sm-12
-        = f.email_field :customer_email, required: true
-      .col-sm-8
-        = f.text_field :customer_name, required: true
-      .col-sm-4
-        = f.telephone_field :customer_phone
-  - if current_store.b2b_sales?
-    %fieldset.info
-      .row
-        .col-sm-6
-          = f.text_field :company_name
-        .col-sm-6
-          = f.text_field :contact_person
-        .col-sm-6
-          = f.email_field :contact_email
-        .col-sm-6
-          = f.telephone_field :contact_phone
+    = f.email_field :customer_email, hide_label: true, placeholder: col(Order, :customer_email), required: true
+
+  - if @order.has_payment?
+    #billing-address
+      = render partial: 'address_fields', locals: {type: :billing, required: true, f: f}
+    - if @order.has_shipping?
+      = f.form_group do
+        = f.check_box :separate_shipping_address
   - if @order.has_shipping?
-    %fieldset
+    #shipping-address.collapse{class: (@order.shipping_address_required? || @order.separate_shipping_address) && 'in'}
+      = render partial: 'address_fields', locals: {type: :shipping, required: @order.shipping_address_required?, f: f}
+
+  %fieldset
+    %legend
+      .pull-right
+        %button.btn.btn-sm.btn-default{type: 'button', data: {toggle: 'collapse', target: '#order-meta'}}
+          %span.caret
+      = t('checkout.order_meta')
+    #order-meta.collapse{class: current_store.b2b_sales? && 'in'}
+      = f.text_field :message, hide_label: true, placeholder: col(Order, :message)
       .row
-        .col-sm-12
-          = f.text_field :shipping_street, required: true
-        .col-xs-6.col-sm-4
-          = f.text_field :shipping_postalcode, required: true
-        .col-xs-6.col-sm-4
-          = f.text_field :shipping_city, required: true
-        .col-sm-4
-          - if current_store.global_sales?
-            = f.select :shipping_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
-          - else
-            = f.hidden_field :shipping_country_code
+        .col-sm-6
+          = f.text_field :your_reference, hide_label: true, placeholder: col(Order, :your_reference)
+        .col-sm-6
+          = f.text_field :our_reference, hide_label: true, placeholder: col(Order, :our_reference)
       - if current_store.b2b_sales?
         .row
-          .col-sm-4
-            = f.text_field :shipping_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
+          .col-sm-6
+            = f.text_field :shipping_at, hide_label: true, placeholder: col(Order, :shipping_at), data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
           - if @order.has_installation?
-            .col-sm-4
-              = f.text_field :installation_at, data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
-  - if @order.has_shipping? && @order.has_payment?
-    = f.form_group do
-      = f.check_box :has_billing_address
-  - if @order.has_payment?
-    #billing-address.collapse{class: @order.billing_address_required? && 'in'}
+            .col-sm-6
+              = f.text_field :installation_at, hide_label: true, placeholder: col(Order, :installation_at), data: {provide: 'datepicker', 'date-start-date': @order.earliest_shipping_at, 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
       %fieldset
-        .row
-          .col-sm-12
-            = f.text_field :billing_street, required: @order.billing_address_required?
-          .col-xs-6.col-sm-4
-            = f.text_field :billing_postalcode, required: @order.billing_address_required?
-          .col-xs-6.col-sm-4
-            = f.text_field :billing_city, required: @order.billing_address_required?
-          .col-sm-4
-            - if current_store.global_sales?
-              = f.select :billing_country_code, Store.country_options, {}, {required: true, class: 'selectize'}
-            - else
-              = f.hidden_field :billing_country_code
-  %p
-    %button.btn.btn-default{type: 'button', data: {toggle: 'collapse', target: '#order-meta'}}
-      = t('checkout.order_meta')
-      %span.caret
-  #order-meta.collapse{class: current_store.b2b_sales? && 'in'}
-    %fieldset
-      .row
-        .col-sm-6
-          = f.text_field :message
-        #vat-number.col-sm-6.collapse{class: @order.vat_number_expected? && 'in'}
-          .form-group.has-feedback
-            = f.label :vat_number, class: 'control-label'
-            = f.text_field_without_bootstrap :vat_number, class: 'form-control'
-            %span.form-control-feedback.fa.fa-warning.text-danger
-            %span.help-block= t('checkout.messages.vat_number_reminder')
-      .row
-        .col-sm-6
-          = f.text_field :your_reference
-        .col-sm-6
-          = f.text_field :our_reference
-    %fieldset
-      ~ f.text_area :notes, rows: 4
+        ~ f.text_area :notes, rows: 4, hide_label: true, placeholder: col(Order, :notes)
 
   #continue-order.hidden-print
     = f.form_group do
       = f.submit t('checkout.address'), class: 'btn btn-lg btn-block btn-primary'
 
 :coffee
-  $('#order_has_billing_address').on 'change', (e) ->
+  $('#order_separate_shipping_address').on 'change', (e) ->
     if $(e.target).is ':checked'
-      $('.form-control', '#billing-address').attr 'required', true
-      $('#billing-address').collapse 'show'
-      $('#order_billing_country_code').trigger 'change'
+      $('.may-be-required', '#shipping-address').attr 'required', true
+      $('#shipping-address').collapse 'show'
     else
-      $('.form-control', '#billing-address').attr 'required', false
-      $('#billing-address').collapse 'hide'
-      $('#order_shipping_country_code').trigger 'change'
+      $('.may-be-required', '#shipping-address').attr 'required', false
+      $('#shipping-address').collapse 'hide'
 
   country_code = '#{current_store.country_code}'
-  $('#order_shipping_country_code, #order_billing_country_code').on 'change', (e) ->
-    destination = if $('#order_has_billing_address').is ':checked'
-      $('#order_billing_country_code').val()
-    else
-      $('#order_shipping_country_code').val()
-    if country_code is destination
+  $('#order_billing_address_attributes_country_code').on 'change', (e) ->
+    if country_code is $('#order_billing_address_attributes_country_code')
       $('#vat-number').collapse 'hide'
     else
       $('#vat-number').collapse 'show'

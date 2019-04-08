@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_072337) do
+ActiveRecord::Schema.define(version: 2019_04_05_072214) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -423,6 +423,7 @@ ActiveRecord::Schema.define(version: 2019_04_02_072337) do
     t.integer "order_type_id"
     t.integer "billing_address_id"
     t.integer "shipping_address_id"
+    t.boolean "separate_shipping_address", default: false, null: false
     t.boolean "includes_tax", default: true, null: false
     t.datetime "completed_at"
     t.date "shipping_at"
@@ -436,15 +437,6 @@ ActiveRecord::Schema.define(version: 2019_04_02_072337) do
     t.string "contact_person"
     t.string "contact_email"
     t.string "contact_phone"
-    t.boolean "has_billing_address", default: false, null: false
-    t.string "billing_street"
-    t.string "billing_postalcode"
-    t.string "billing_city"
-    t.string "billing_country_code", limit: 2
-    t.string "shipping_street"
-    t.string "shipping_postalcode"
-    t.string "shipping_city"
-    t.string "shipping_country_code", limit: 2
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

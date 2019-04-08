@@ -3,31 +3,23 @@ class Order < ApplicationRecord
   has_many :payments, dependent: :destroy, inverse_of: :order
   has_many :shipments, dependent: :destroy, inverse_of: :order
 
-  # Shipping and billing addresses have country associations.
-  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
-  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code
+  before_validation :copy_shipping_address, if: :should_copy_shipping_address?
+  before_save :check_separate_shipping_address
 
-  validates :shipping_street, :shipping_postalcode, :shipping_city, :shipping_country_code, presence: true, on: :update,
-    if: :has_shipping?
-
-  validates :billing_street, :billing_postalcode, :billing_city, :billing_country_code, presence: true, on: :update,
-    if: :billing_address_required?
-
-  before_validation :copy_billing_address, if: :should_copy_billing_address?
-  before_validation :ensure_valid_countries, on: :update
+  validates :billing_address, presence: true, if: :has_payment?
+  validates :shipping_address, presence: true, if: :shipping_address_required?
 
   #---
   def last_completed_shipment
     shipments.complete.first
   end
 
-  def should_copy_billing_address?
-    has_shipping? && has_payment? && !has_billing_address?
+  def should_copy_shipping_address?
+    has_shipping? && (shipping_address.nil? || !separate_shipping_address?)
   end
 
-  def billing_address_required?
-    return false unless customer_required?
-    has_billing_address? || has_payment? && !has_shipping?
+  def shipping_address_required?
+    has_shipping? && (!has_payment? || separate_shipping_address?)
   end
 
   # Order having shipping is simply from the order type,
@@ -70,39 +62,19 @@ class Order < ApplicationRecord
   end
 
   def billing_address_components
-    has_billing_address? ?
-      [billing_street, billing_postalcode, billing_city] :
-      [shipping_street, shipping_postalcode, shipping_city]
+    [billing_address.address1, billing_address.postalcode, billing_address.city]
   end
 
   # VAT numbers are not mandatory, but expected to be present in orders
   # billed at a different country from the store home country.
   def vat_number_expected?
     return false unless has_payment?
-    if has_billing_address?
-      billing_country != store.country
-    else
-      shipping_country != store.country
-    end
+    billing_address.country != store.country
   end
 
   # Addresses the order to its customer unless guest mode is specified.
-  # In any case will ensure that country codes are set.
+  # FIXME: this should do something
   def address_to_customer(guest = false)
-    unless guest
-      self.customer_email = customer.email
-      self.customer_name = customer.name
-      self.customer_phone = customer.phone
-      self.shipping_street = customer.shipping_street
-      self.shipping_postalcode = customer.shipping_postalcode
-      self.shipping_city = customer.shipping_city
-      self.shipping_country = customer.shipping_country
-      self.billing_street = customer.billing_street
-      self.billing_postalcode = customer.billing_postalcode
-      self.billing_city = customer.billing_city
-      self.billing_country = customer.billing_country
-    end
-    ensure_valid_countries
   end
 
   # Inserts an order item for the shipping cost using the shipping cost
@@ -142,15 +114,13 @@ class Order < ApplicationRecord
   end
 
   private
-    def copy_billing_address
-      self.billing_street = shipping_street
-      self.billing_postalcode = shipping_postalcode
-      self.billing_city = shipping_city
-      self.billing_country = shipping_country
+    def copy_shipping_address
+      self.shipping_address = billing_address.dup
     end
 
-    def ensure_valid_countries
-      self.shipping_country = store.country if shipping_country.nil?
-      self.billing_country = store.country if billing_country.nil?
+    def check_separate_shipping_address
+      if billing_address && shipping_address && billing_address == shipping_address
+        self.separate_shipping_address = false
+      end
     end
 end

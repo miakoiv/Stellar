@@ -283,6 +283,7 @@ en:
         order_type_id: Order type
         billing_address_id: Billing address
         shipping_address_id: Shipping address
+        separate_shipping_address: Shipping to a different address
         completed_at: Ordered
         updated_at: Updated
         is_final: Mark as complete

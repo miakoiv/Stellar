@@ -658,6 +658,10 @@ en:
     show_category_order:
       close: Close form
   checkout:
+    addresses:
+      labels:
+        billing: Customer address
+        shipping: Shipping address
     panels:
       address_panel: Contact information
       shipping_panel: Shipping options
