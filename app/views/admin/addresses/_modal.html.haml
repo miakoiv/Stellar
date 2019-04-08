@@ -7,6 +7,6 @@
           = t('.title')
           %small= bootstrap_label(@addressed)
       #billing-address-panel.modal-body
-        = render partial: 'admin/addresses/modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.billing_address, type: :billing}
+        = render partial: 'modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.billing_address, type: :billing}
       #shipping-address-panel.modal-body
-        = render partial: 'admin/addresses/modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.shipping_address, type: :shipping}
+        = render partial: 'modal_panel', object: @addressed, as: :addressed, locals: {address: @addressed.shipping_address, type: :shipping}

@@ -2,11 +2,11 @@
 - if address.nil?
   %p= icon('exclamation-circle', t(type, scope: '.admin.addresses.none'))
   - if inherited_address = addressed.inherited_address(type)
-    = render partial: 'admin/addresses/inherited_address', object: inherited_address, as: :address
+    = render partial: 'inherited_address', object: inherited_address, as: :address
   .text-right= link_to icon('plus', t('.new_address')), new_admin_address_path(type: type, gid: addressed.to_global_id), remote: true, class: 'btn btn-outline-primary'
 - else
   - if address.persisted?
-    = render partial: 'admin/addresses/map', object: address, as: :address
+    = render partial: 'map', object: address, as: :address
   = bootstrap_form_for [:admin, address], namespace: type, remote: true do |f|
     %fieldset
       = hidden_field_tag :gid, addressed.to_global_id
