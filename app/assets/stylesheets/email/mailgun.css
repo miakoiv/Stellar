@@ -136,6 +136,10 @@ p li, ul li, ol li {
   list-style-position: inside;
 }
 
+address {
+  font-style: normal;
+}
+
 .badge {
   display: inline-block;
   padding: 0 7px;

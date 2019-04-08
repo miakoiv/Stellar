@@ -1,0 +1,7 @@
+%tr
+  - if @order.billing_address.present?
+    %td= Order.human_attribute_name(:billing_address_id)
+    %td= render @order.billing_address
+  - if @order.shipping_address.present?
+    %td= Order.human_attribute_name(:shipping_address_id)
+    %td= render @order.shipping_address

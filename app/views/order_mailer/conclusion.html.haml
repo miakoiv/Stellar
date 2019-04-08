@@ -16,7 +16,7 @@
               %tr
                 %td
                   %table{width: '100%', cellpadding: 6, cellspacing: 10}
-                    = render partial: 'customer'
+                    = render partial: 'addresses'
                     = render partial: 'order_meta'
               - @order.shipments.shipped.each do |shipment|
                 %tr
