@@ -1,0 +1,19 @@
+%address
+  - if address.company.present?
+    %strong= address.company
+    %br
+  - if address.name.present?
+    = address.name
+    %br
+  = address.address1
+  %br
+  - if address.address2.present?
+    = address.address2
+    %br
+  = address.postalcode
+  = address.city
+  %br
+  = address.country
+  %br
+  - if address.phone.present?
+    = icon('phone', address.phone)
