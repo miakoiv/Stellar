@@ -25,10 +25,6 @@ class User < ApplicationRecord
   # Order types from outgoing orders. See #existing_order_types below.
   has_many :order_types, -> { joins(:source) }, through: :orders
 
-  # Preset shipping and billing addresses have country associations.
-  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code, optional: true
-  belongs_to :billing_country, class_name: 'Country', foreign_key: :billing_country_code, optional: true
-
   has_many :performed_activities, class_name: 'Activity', foreign_key: :user_id
 
   default_scope { order(:name) }
@@ -55,13 +51,14 @@ class User < ApplicationRecord
   end
 
   #---
-  # A user's shopping cart is the only incomplete order at given store
-  # with her as the customer.
+  # A user's shopping cart is the first incomplete order at given store.
   def shopping_cart(store, store_portal, group)
-    cart = orders.at(store).for(self).incomplete.first
+    cart = orders.at(store).incomplete.first
     return cart unless cart.nil?
 
-    cart = orders.at(store).for(self).build(
+    cart = orders.at(store).build(
+      billing_group: group,
+      shipping_group: group,
       inventory: store.default_inventory,
       store_portal: store_portal,
       includes_tax: group.price_tax_included?

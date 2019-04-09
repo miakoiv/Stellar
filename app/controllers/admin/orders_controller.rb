@@ -59,10 +59,7 @@ class Admin::OrdersController < AdminController
     @groups = all_groups
     @group = find_selected_group || @groups.first
     @customers = customer_selection
-    @customer = find_selected_customer || User.new(
-      shipping_country: Country.default,
-      billing_country: Country.default
-    )
+    @customer = find_selected_customer || User.new
     @order = current_store.orders.build(
       group_id: @group.id,
       customer: @customer,
@@ -229,20 +226,7 @@ class Admin::OrdersController < AdminController
         :completed_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :cancelled_at, :vat_number,
         :external_number, :your_reference, :our_reference, :message,
-        :customer_name, :customer_email, :customer_phone,
-        :company_name, :contact_person, :contact_email, :contact_phone,
-        :billing_street, :billing_postalcode,
-        :billing_city, :billing_country_code,
-        :shipping_street, :shipping_postalcode,
-        :shipping_city, :shipping_country_code,
-        :notes, :is_final,
-        customer_attributes: [
-          :id, :initial_group_id, :email, :name, :phone,
-          :shipping_street, :shipping_postalcode,
-          :shipping_city, :shipping_country_code,
-          :billing_street, :billing_postalcode,
-          :billing_city, :billing_country_code
-        ]
+        :customer_email, :notes, :is_final
       )
     end
 

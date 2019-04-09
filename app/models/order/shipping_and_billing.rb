@@ -1,5 +1,10 @@
 class Order < ApplicationRecord
 
+  include Addressed
+
+  belongs_to :billing_group, class_name: 'Group'
+  belongs_to :shipping_group, class_name: 'Group'
+
   has_many :payments, dependent: :destroy, inverse_of: :order
   has_many :shipments, dependent: :destroy, inverse_of: :order
 

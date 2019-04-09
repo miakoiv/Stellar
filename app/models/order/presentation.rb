@@ -39,16 +39,19 @@ class Order < ApplicationRecord
     super(methods: :checkout_phase)
   end
 
-  def has_contact_info?
-    contact_person.present? && contact_email.present?
+  # Email recipient for billing related messages.
+  def billing_recipient
+    "#{billing_address.name} <#{customer_email}>"
   end
 
-  def contact_string
-    has_contact_info? ? "#{contact_person} <#{contact_email}>" : nil
+  def has_contact_email?
+    contact_email.present?
   end
 
-  def customer_string
-    "#{billing_address&.name} <#{customer_email}>"
+  # Email recipient for shipping related messages.
+  # Check #has_contact_email? first.
+  def shipping_recipient
+    "#{shipping_address.name} <#{contact_email}>"
   end
 
   def external_identifier

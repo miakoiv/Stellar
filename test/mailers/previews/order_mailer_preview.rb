@@ -3,39 +3,39 @@
 class OrderMailerPreview < ActionMailer::Preview
 
   def acknowledge
-    email.acknowledge(to: order.customer_string)
+    email.acknowledge(to: order.billing_recipient)
   end
 
   def cancellation
-    email.cancellation(to: order.customer_string)
+    email.cancellation(to: order.billing_recipient)
   end
 
   def conclusion
-    email.conclusion(to: order.customer_string)
+    email.conclusion(to: order.billing_recipient)
   end
 
   def confirmation
-    email.confirmation(to: order.customer_string)
+    email.confirmation(to: order.billing_recipient)
   end
 
   def notification
-    email.notification(to: order.customer_string, items: order.order_items.first(2), pricing: false)
+    email.notification(to: order.billing_recipient, items: order.order_items.first(2), pricing: false)
   end
 
   def processing
-    email.processing(to: order.customer_string)
+    email.processing(to: order.billing_recipient)
   end
 
   def quotation
-    email.quotation(to: order.customer_string)
+    email.quotation(to: order.billing_recipient)
   end
 
   def receipt
-    email.receipt(to: order.customer_string)
+    email.receipt(to: order.billing_recipient)
   end
 
   def shipment
-    Messaging::Shipments.new(order.shipments.last).shipment(to: order.customer_string)
+    Messaging::Shipments.new(order.shipments.last).shipment(to: order.shipping_recipient)
   end
 
   private

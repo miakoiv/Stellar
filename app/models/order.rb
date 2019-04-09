@@ -3,7 +3,6 @@ class Order < ApplicationRecord
   resourcify
   include Authority::Abilities
   include Trackable
-  include Addressed
   include Adjustable
 
   #---
@@ -12,10 +11,9 @@ class Order < ApplicationRecord
   belongs_to :store
   belongs_to :store_portal, class_name: 'Store', optional: true
 
-  # User created the order, and is usually the customer too.
   belongs_to :user
-  belongs_to :customer, class_name: 'User', inverse_of: :customer_orders
-  accepts_nested_attributes_for :customer
+  belongs_to :billing_group
+  belongs_to :shipping_group
 
   belongs_to :order_type, optional: true
   delegate :payment_gateway_class, to: :order_type
@@ -26,9 +24,8 @@ class Order < ApplicationRecord
   default_scope { where(cancelled_at: nil) }
 
   scope :at, -> (store) { where(store: store) }
-  scope :for, -> (customer) { where(customer: customer) }
   scope :targeted, -> {
-    where(arel_table[:user_id].not_eq(arel_table[:customer_id]))
+
   }
   scope :not_by, -> (user) { where.not(user: user) }
 
@@ -63,10 +60,6 @@ class Order < ApplicationRecord
   # This attribute allows adding products en masse
   # through a string of comma-separated ids.
   attr_accessor :product_ids_string
-
-  # This attribute allows specifying a group for an order
-  # created from scratch with nested customer data.
-  attr_accessor :group_id
 
   # This attribute allows admins to finalize an order,
   # both completing and approving it at once.
@@ -109,21 +102,13 @@ class Order < ApplicationRecord
     order_type.present?
   end
 
-  # Orders targeted at another customer, not the user herself.
-  # This also indicates the order is considered to be a quote
-  # when incomplete.
   def targeted?
-    user != customer
+    false
   end
 
-  # Order source group is independent of order type.
-  def source
-    customer.effective_group(store)
-  end
-
-  # Pricing applied to this order, based on source group.
-  def customer_pricing
-    Appraiser::Product.new(source)
+  # Pricing applied to this order, based on billing group.
+  def product_pricing
+    Appraiser::Product.new(billing_group)
   end
 
   # Order destination depends on the order type since there may be
@@ -138,8 +123,8 @@ class Order < ApplicationRecord
   # for one or more products present in the order items.
   def available_order_types
     shipping_requirement = requires_shipping?
-    return source.outgoing_order_types if shipping_requirement.nil?
-    source.outgoing_order_types.where(has_shipping: shipping_requirement)
+    return billing_group.outgoing_order_types if shipping_requirement.nil?
+    billing_group.outgoing_order_types.where(has_shipping: shipping_requirement)
   end
 
   # Changing the order contents is allowed for incomplete orders,
@@ -192,7 +177,7 @@ class Order < ApplicationRecord
     assign_number!
     archive!
     if acknowledge and !is_forwarded?
-      email.send(has_payment? ? :receipt : :acknowledge, to: customer_string)&.deliver_later
+      email.send(has_payment? ? :receipt : :acknowledge, to: billing_recipient)&.deliver_later
     end
     export_xml
   end
@@ -270,7 +255,7 @@ class Order < ApplicationRecord
   # Collects relevant information about this order for reporting.
   def report_options
     {
-      group: customer.effective_group(store),
+      group: billing_group,
       user: user.guest?(store) ? nil : user
     }
   end
@@ -301,10 +286,10 @@ class Order < ApplicationRecord
     def approve!
       reload # to clear changes and prevent a callback loop
       if has_payment?
-        email.processing(to: customer_string, bcc: false)&.deliver_later
+        email.processing(to: billing_recipient, bcc: false)&.deliver_later
       elsif !is_forwarded?
-        email.confirmation(to: customer_string, bcc: false)&.deliver_later
-        email.confirmation(to: contact_string, bcc: false, pricing: false)&.deliver_later if has_contact_info?
+        email.confirmation(to: billing_recipient, bcc: false)&.deliver_later
+        email.confirmation(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
       end
       items_by_vendor.each do |vendor, items|
         vendor.notified_users.each do |user|
@@ -319,8 +304,8 @@ class Order < ApplicationRecord
     def conclude!
       reload # to clear changes and prevent a callback loop
       if !is_forwarded?
-        email.conclusion(to: customer_string, bcc: false)&.deliver_later
-        email.conclusion(to: contact_string, bcc: false, pricing: false)&.deliver_later if has_contact_info?
+        email.conclusion(to: billing_recipient, bcc: false)&.deliver_later
+        email.conclusion(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
       end
       OrderReportRow.create_from(self)
     end
@@ -339,7 +324,7 @@ class Order < ApplicationRecord
           shipment.cancel!
         end
       end
-      email.cancellation(to: customer_string)&.deliver_later
+      email.cancellation(to: billing_recipient)&.deliver_later
     end
 
     # Perform XML export if specified by order type, and
