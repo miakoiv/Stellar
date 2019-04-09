@@ -94,7 +94,7 @@ class Order < ApplicationRecord
   #---
   # Define methods to use archived copies of order attributes if the order
   # is concluded, otherwise go through the associations. See #archive! below.
-  %w[store_name user_name user_email user_phone].each do |method|
+  %w[store_name user_name user_email].each do |method|
     association, association_method = method.split('_', 2)
     define_method(method.to_sym) do
       concluded? ? self[method] : send(association).send(association_method)
@@ -217,7 +217,6 @@ class Order < ApplicationRecord
         store_name: store.name,
         user_name: user.try(:name),
         user_email: user.try(:email),
-        user_phone: user.try(:phone),
         order_type_name: order_type.name
       )
       order_items.each do |item|
