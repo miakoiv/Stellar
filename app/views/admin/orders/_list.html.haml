@@ -16,7 +16,7 @@
           = link_to admin_order_path(order) do
             %strong= order.number
         %td= order.completed_at.present? ? l(order.completed_at.to_date) : nil
-        %td.no-wrap= order.customer_name
+        %td.no-wrap= order.billing_address&.name
         %td.text-right= order.order_items_count
         %td.text-right.currency
           = money order.includes_tax? ? order.grand_total_with_tax : order.grand_total_sans_tax

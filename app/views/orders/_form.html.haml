@@ -2,9 +2,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :customer_name
         = f.text_field :customer_email
-        = f.telephone_field :customer_phone
       - if @order.has_shipping?
         %fieldset.warning{disabled: locked}
           .row
@@ -23,26 +21,6 @@
             = f.text_field :your_reference
           .col-md-6
             = f.text_field :our_reference
-      %fieldset{disabled: locked}
-        = f.text_field :company_name
-        = f.text_field :contact_person
-        = f.text_field :contact_email
-        = f.telephone_field :contact_phone
-        - if @order.has_shipping?
-          = f.text_field :shipping_street
-          .row
-            .col-md-4
-              = f.text_field :shipping_postalcode
-            .col-md-8
-              = f.text_field :shipping_city
-          = f.select :shipping_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
-          = f.text_field :billing_street
-          .row
-            .col-md-4
-              = f.text_field :billing_postalcode
-            .col-md-8
-              = f.text_field :billing_city
-          = f.select :billing_country_code, Store.country_options, {skip_label: true}, {required: true, class: 'selectize'}
       %fieldset{disabled: locked}
         ~ f.text_area :notes, rows: 7
       %fieldset.actions

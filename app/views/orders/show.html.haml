@@ -15,6 +15,11 @@
 
     .row
       .col-lg-5.hidden-print
+        - if @order.billing_address.present?
+          = render partial: @order.billing_address, layout: 'addresses/label', locals: {type: :billing}
+        - if @order.shipping_address.present?
+          = render partial: @order.shipping_address, layout: 'addresses/label', locals: {type: :shipping}
+
         = render partial: 'form', locals: {locked: true}
 
       .col-lg-7

@@ -34,35 +34,7 @@
             = f.text_field :our_reference
         - if @order.store.b2b_sales?
           = f.text_field :external_number
-      %fieldset{disabled: locked}
-        = f.text_field :customer_name, required: true
-        = f.text_field :customer_email, required: true
-        = f.telephone_field :customer_phone
-        %hr
-        = f.text_field :company_name
-        = f.text_field :contact_person
-        = f.text_field :contact_email
-        = f.telephone_field :contact_phone
-        - if @order.has_shipping?
-          %hr
-          = f.text_field :shipping_street, required: true
-          .row
-            .col-md-4
-              = f.text_field :shipping_postalcode, required: true
-            .col-md-8
-              = f.text_field :shipping_city, required: true
-          = f.select :shipping_country_code, Store.country_options, {}, class: 'selectize'
-          - if @order.store.b2b_sales? || @order.has_payment?
-            %hr
-            = f.text_field :billing_street, required: @order.billing_address_required?
-            .row
-              .col-md-4
-                = f.text_field :billing_postalcode, required: @order.billing_address_required?
-              .col-md-8
-                = f.text_field :billing_city, required: @order.billing_address_required?
-            = f.select :billing_country_code, Store.country_options, {include_blank: !@order.billing_address_required?}, class: 'selectize'
-        %hr
-        ~ f.text_area :notes, rows: 7
+      ~ f.text_area :notes, rows: 3
       - unless locked || @order.cancelled? || @order.incomplete?
         %fieldset.danger
           .form-group

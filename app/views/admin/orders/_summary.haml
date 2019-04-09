@@ -4,24 +4,8 @@
       - if @order.completed_at.present?
         %dt= col(Order, :completed_at)
         %dd= l(@order.completed_at.to_date, format: :iso)
-      %dt= col(Order, :customer_name)
-      %dd= @order.customer_name
       %dt= col(Order, :customer_email)
       %dd= @order.customer_email
-      %dt= col(Order, :customer_phone)
-      %dd= @order.customer_phone
-  .col-xs-4
-    %dl
-      - if @order.company_name.present?
-        %dt= col(Order, :company_name)
-        %dd= @order.company_name
-      - if @order.contact_person.present?
-        %dt= col(Order, :contact_person)
-        %dd= @order.contact_person
-      - if @order.contact_phone.present?
-        %dt= col(Order, :contact_phone)
-        %dd= @order.contact_phone
-    %dl
       - if @order.your_reference.present?
         %dt= col(Order, :your_reference)
         %dd= @order.your_reference
@@ -30,22 +14,18 @@
         %dd= @order.message
   .col-xs-4
     %dl
+      - if @order.billing_address.present?
+        %dt= col(Order, :billing_address_id)
+        %dd= render @order.billing_address
+  .col-xs-4
+    %dl
       - if @order.has_shipping?
         - if @order.shipping_at.present?
           %dt= col(Order, :shipping_at)
           %dd= l(@order.shipping_at)
-        %dt= col(Order, :shipping_street)
-        %dd= @order.shipping_street
-        %dd
-          = @order.shipping_postalcode
-          = @order.shipping_city
-        %dd= @order.shipping_country.try(:name)
-        %dt= col(Order, :billing_street)
-        %dd= @order.billing_street
-        %dd
-          = @order.billing_postalcode
-          = @order.billing_city
-        %dd= @order.billing_country.try(:name)
+      - if @order.shipping_address.present?
+        %dt= col(Order, :shipping_address_id)
+        %dd= render @order.shipping_address
 - if @order.notes.present?
   .row
     .col-xs-6

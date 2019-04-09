@@ -546,6 +546,10 @@ en:
     more_info: More info
   live_chat:
     title: Contact us
+  addresses:
+    labels:
+      billing: Customer address
+      shipping: Shipping address
   adjustments:
     item:
       valid_until: valid until %{date}

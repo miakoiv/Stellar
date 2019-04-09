@@ -23,7 +23,7 @@ class Order < ApplicationRecord
   end
 
   def summary
-    [company_name, shipping_city].compact.reject(&:empty?).join(', ')
+    [billing_address.company, billing_address.city].compact.reject(&:empty?).join(', ')
   end
 
   # Icon name based on order status.
@@ -48,7 +48,7 @@ class Order < ApplicationRecord
   end
 
   def customer_string
-    "#{customer_name} <#{customer_email}>"
+    "#{billing_address&.name} <#{customer_email}>"
   end
 
   def external_identifier

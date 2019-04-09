@@ -9,7 +9,7 @@
       \/
       = order.installation_at.present? ? l(order.installation_at) : nil
   %td
-    %strong= order.customer_name
+    %strong= order.billing_address&.name
     - if current_store.b2b_sales?
       .small= order.summary
   %td.text-right= order.order_items_count

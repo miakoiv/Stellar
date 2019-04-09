@@ -557,6 +557,10 @@ fi:
     more_info: Kerro lisää
   live_chat:
     title: Ota yhteyttä
+  addresses:
+    labels:
+      billing: Tilaajan osoite
+      shipping: Toimitusosoite
   adjustments:
     item:
       valid_until: voimassa %{date} asti

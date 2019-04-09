@@ -10,19 +10,19 @@
             %dt= @order.order_type
             %dd= @order.user.name
             %dd= l(@order.updated_at, format: :long)
-        .col-xs-4
-          %dl
             %dd= bootstrap_label(@order.destination)
-            %dd= @order.customer_name
-            %dd= @order.customer_email
-            %dd= @order.customer_phone
         .col-xs-4
           %dl
-            %dd= @order.shipping_street
-            %dd
-              = @order.shipping_postalcode
-              = @order.shipping_city
-            %dd= @order.shipping_country
+            %dt= col(Order, :customer_email)
+            %dd= @order.customer_email
+            - if @order.billing_address.present?
+              %dt= col(Order, :billing_address_id)
+              %dd= render @order.billing_address
+        .col-xs-4
+          %dl
+            - if @order.shipping_address.present?
+              %dt= col(Order, :shipping_address_id)
+              %dd= render @order.shipping_address
       %table.table.table-hover
         %thead
           %tr
