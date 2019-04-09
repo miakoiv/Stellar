@@ -129,19 +129,9 @@ class Order < ApplicationRecord
     another_order.update(
       shipping_at: shipping_at,
       installation_at: installation_at,
-      company_name: company_name,
-      contact_person: contact_person,
-      contact_email: contact_email,
-      contact_phone: contact_phone,
-      has_billing_address: has_billing_address,
-      billing_street: billing_street,
-      billing_postalcode: billing_postalcode,
-      billing_city: billing_city,
-      billing_country: billing_country,
-      shipping_street: shipping_street,
-      shipping_postalcode: shipping_postalcode,
-      shipping_city: shipping_city,
-      shipping_country: shipping_country,
+      billing_address: billing_address.dup,
+      shipping_address: shipping_address.dup,
+      separate_shipping_address: separate_shipping_address,
       notes: notes
     )
   end
