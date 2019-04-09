@@ -206,21 +206,15 @@ class OrdersController < BaseStoreController
       params.fetch(:order, {}).permit(
         :group_id, :order_type_id, :customer_id, :inventory_id,
         :completed_at, :shipping_at, :installation_at,
-        :vat_number, :your_reference, :our_reference, :message,
-        :customer_name, :customer_email, :customer_phone,
-        :company_name, :contact_person, :contact_email, :contact_phone,
-        :has_billing_address,
-        :billing_street, :billing_postalcode,
-        :billing_city, :billing_country_code,
-        :shipping_street, :shipping_postalcode,
-        :shipping_city, :shipping_country_code,
-        :notes,
-        customer_attributes: [
-          :id, :initial_group_id, :email, :name, :phone,
-          :shipping_street, :shipping_postalcode,
-          :shipping_city, :shipping_country_code,
-          :billing_street, :billing_postalcode,
-          :billing_city, :billing_country_code
+        :vat_number, :your_reference, :our_reference, :message, :notes,
+        :customer_email, :separate_shipping_address,
+        billing_address_attributes: [
+          :id, :name, :phone, :company,
+          :address1, :address2, :postalcode, :city, :country_code
+        ],
+        shipping_address_attributes: [
+          :id, :name, :phone, :company,
+          :address1, :address2, :postalcode, :city, :country_code
         ]
       )
     end
