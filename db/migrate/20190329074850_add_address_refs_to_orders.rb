@@ -11,7 +11,7 @@ class AddAddressRefsToOrders < ActiveRecord::Migration[5.2]
       billing_city = order.billing_city
       billing_country_code = order.billing_country_code
       if billing_street.present? || billing_postalcode.present? || billing_city.present?
-        billing_address = Address.find_or_initialize_by(
+        billing_address = Address.create(
           name: billing_name || '',
           phone: billing_phone || '',
           company: '',
@@ -31,7 +31,7 @@ class AddAddressRefsToOrders < ActiveRecord::Migration[5.2]
       shipping_city = order.shipping_city
       shipping_country_code = order.shipping_country_code
       if shipping_name.present? || shipping_company.present? || shipping_street.present? || shipping_postalcode.present? || shipping_city.present?
-        shipping_address = Address.find_or_initialize_by(
+        shipping_address = Address.create(
           name: shipping_name || '',
           phone: shipping_phone || '',
           company: shipping_company || '',
