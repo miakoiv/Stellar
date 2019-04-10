@@ -20,7 +20,7 @@ class Admin::AddressesController < AdminController
   # POST /admin/addresses
   def create
     authorize_action_for Address, at: current_store
-    @address = Address.find_or_initialize_by(address_params)
+    @address = Address.new(address_params)
 
     respond_to do |format|
       if @address.save && @addressed.update_address(@type, @address)
@@ -36,16 +36,29 @@ class Admin::AddressesController < AdminController
 
   # PATCH/PUT /admin/addresses/1
   def update
-    create
+    authorize_action_for Address, at: current_store
+    @address = Address.find(params[:id])
+
+    respond_to do |format|
+      if @address.update(address_params)
+        format.js {
+          flash.now[:notice] = t('.notice', addressed: @addressed)
+          render :refresh
+        }
+      else
+        format.js { render :refresh }
+      end
+    end
   end
 
   # DELETE /admin/addresses/1?gid=addressed
   def destroy
-    @address = nil
     authorize_action_for Address, at: current_store
+    @address = Address.find(params[:id])
 
     respond_to do |format|
-      if @addressed.update_address(@type, nil)
+      if @address.destroy && @addressed.update_address(@type, nil)
+        @address = nil
         format.js {
           flash.now[:notice] = t('.notice', addressed: @addressed)
           render :refresh
