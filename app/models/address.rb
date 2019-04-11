@@ -26,6 +26,10 @@ class Address < ApplicationRecord
     attributes.except(*NONVALUE_ATTRIBUTES)
   end
 
+  def copy_from(other)
+    self.attributes = other.value_attributes
+  end
+
   def to_location
     [company, address1, address2, postalcode, city, country].reject(&:blank?).join ', '
   end

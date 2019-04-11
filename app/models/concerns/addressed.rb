@@ -4,8 +4,8 @@ module Addressed
   ADDRESS_TYPES = [:billing, :shipping].freeze
 
   included do
-    belongs_to :billing_address, class_name: 'Address', optional: true
-    belongs_to :shipping_address, class_name: 'Address', optional: true
+    belongs_to :billing_address, class_name: 'Address', dependent: :destroy, optional: true
+    belongs_to :shipping_address, class_name: 'Address', dependent: :destroy, optional: true
 
     accepts_nested_attributes_for :billing_address
     accepts_nested_attributes_for :shipping_address
