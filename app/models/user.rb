@@ -63,7 +63,6 @@ class User < ApplicationRecord
       store_portal: store_portal,
       includes_tax: group.price_tax_included?
     )
-    cart.address_to_customer(group.guest?)
     cart.save!
     cart
   end

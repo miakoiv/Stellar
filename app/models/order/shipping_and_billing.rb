@@ -20,7 +20,7 @@ class Order < ApplicationRecord
   end
 
   def should_copy_shipping_address?
-    has_shipping? && (shipping_address.nil? || !separate_shipping_address?)
+    has_shipping? && !separate_shipping_address?
   end
 
   def shipping_address_required?
@@ -77,9 +77,19 @@ class Order < ApplicationRecord
     billing_address.country != store.country
   end
 
-  # Addresses the order to its customer unless guest mode is specified.
-  # FIXME: this should do something
-  def address_to_customer(guest = false)
+  # Addresses the order by looking up billing and shipping addresses
+  # from the corresponding groups.
+  def assign_addresses
+    self.billing_address ||= Address.default(store)
+    self.shipping_address ||= Address.default(store)
+
+    if billing_group && billing_group.billing_address.present?
+      billing_address.copy_from(billing_group.billing_address)
+    end
+    if shipping_group && shipping_group.shipping_address.present?
+      shipping_address.copy_from(shipping_group.shipping_address)
+    end
+    check_separate_shipping_address
   end
 
   # Inserts an order item for the shipping cost using the shipping cost
@@ -120,12 +130,10 @@ class Order < ApplicationRecord
 
   private
     def copy_shipping_address
-      self.shipping_address = billing_address.dup
+      shipping_address.copy_from(billing_address)
     end
 
     def check_separate_shipping_address
-      if billing_address && shipping_address && billing_address == shipping_address
-        self.separate_shipping_address = false
-      end
+      self.separate_shipping_address = (billing_address != shipping_address)
     end
 end
