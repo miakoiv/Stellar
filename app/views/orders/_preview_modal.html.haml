@@ -10,7 +10,7 @@
             %dt= @order.order_type
             %dd= @order.user.name
             %dd= l(@order.updated_at, format: :long)
-            %dd= bootstrap_label(@order.destination)
+            %dd= bootstrap_label(@order.billing_group)
         .col-xs-4
           %dl
             %dt= col(Order, :customer_email)

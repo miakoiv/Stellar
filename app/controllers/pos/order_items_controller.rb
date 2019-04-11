@@ -15,7 +15,7 @@ class Pos::OrderItemsController < ApplicationController
     amount = order_item_params[:amount].to_i
     options = {lot_code: order_item_params[:lot_code]}
     respond_to do |format|
-      if @order_item = @order.insert(@product, amount, @order.source, options)
+      if @order_item = @order.insert(@product, amount, @order.billing_group, options)
         @order.recalculate!
         format.js { render :create }
       else

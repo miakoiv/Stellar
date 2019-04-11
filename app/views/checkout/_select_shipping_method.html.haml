@@ -10,7 +10,7 @@
           - if method.shipping_gateway_class.fixed_cost? && (product = method.shipping_cost_product).present?
             .pull-right.label.label-primary
               = icon('plus')
-              = price_tag *@order.customer_pricing.for_display(product)
+              = price_tag *@order.product_pricing.for_display(product)
           - if method.delivery_time.present?
             = t('checkout.delivery_time', days: method.delivery_time)
 .description

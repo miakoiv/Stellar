@@ -166,7 +166,7 @@ class StoreController < BaseStoreController
     amount = params[:amount].to_i
     options = {}
     options[:additional_info] = params[:additional_info] if params[:additional_info].present?
-    @order.insert(@product, amount, @order.source, options)
+    @order.insert(@product, amount, @order.billing_group, options)
     @order.recalculate!
 
     flash.now[:notice] = t('.notice', product: @product, amount: amount)
@@ -178,7 +178,7 @@ class StoreController < BaseStoreController
     @order = shopping_cart
     find_product
     amount = params[:amount].to_i
-    @order.set_amount(@product, amount, @order.source)
+    @order.set_amount(@product, amount, @order.billing_group)
     @order.recalculate!
 
     respond_to :js

@@ -35,7 +35,7 @@ class Admin::OrderItemsController < AdminController
     options = {lot_code: lot_code_or_serial}
 
     respond_to do |format|
-      if @order_item = @order.insert(@product, amount, @order.source, options)
+      if @order_item = @order.insert(@product, amount, @order.billing_group, options)
         track @order_item, @order
         @order.recalculate!
         format.js { render :create }

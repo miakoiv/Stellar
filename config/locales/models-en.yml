@@ -277,9 +277,9 @@ en:
         our_reference: Our reference
         message: Message
         user_id: From
-        customer_id: Customer
+        billing_group_id: Billing
+        shipping_group_id: Shipping
         inventory_id: Inventory
-        group_id: Customer group
         order_type_id: Order type
         billing_address_id: Billing address
         shipping_address_id: Shipping address

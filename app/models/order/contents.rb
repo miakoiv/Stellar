@@ -71,12 +71,12 @@ class Order < ApplicationRecord
   end
 
   # Copies the contents of this order to another order by inserting
-  # the top level real items. Pricing is according to the source group
+  # the top level real items. Pricing is according to the billing group
   # of the target order.
   def copy_items_to(another_order)
     transaction do
       order_items.top_level.real.each do |item|
-        another_order.insert(item.product, item.amount, another_order.source)
+        another_order.insert(item.product, item.amount, another_order.billing_group)
       end
     end
   end
@@ -158,7 +158,7 @@ class Order < ApplicationRecord
         adjustments.destroy_all
         order_items.each { |order_item| order_item.adjustments.destroy_all }
 
-        source.promotions.active.each do |promotion|
+        billing_group.promotions.active.each do |promotion|
           promotion.apply!(self)
         end
         activated_promotions.live.each do |promotion|

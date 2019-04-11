@@ -277,9 +277,9 @@ fi:
         our_reference: Viitteemme
         message: Merkki
         user_id: Tilaaja
-        customer_id: Asiakas
+        billing_group_id: Laskutus
+        shipping_group_id: Toimitus
         inventory_id: Varasto
-        group_id: Asiakasryhmä
         order_type_id: Tilaustyyppi
         billing_address_id: Laskutusosoite
         shipping_address_id: Toimitusosoite

@@ -85,7 +85,7 @@ class Order < ApplicationRecord
   # Inserts an order item for the shipping cost using the shipping cost
   # product with the price queried from the given shipment.
   def apply_shipping_cost!(shipment)
-    cost = shipment.cost(customer_pricing)
+    cost = shipment.cost(product_pricing)
     unless cost.nil?
       order_items.create(
         product: shipment.shipping_cost_product,
