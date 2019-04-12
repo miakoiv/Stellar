@@ -233,8 +233,6 @@ en:
       form_for_new:
         order_meta: Customer selection and order settings
         customer: Customer information
-        new_customer: "[New customer]"
-        group_id: Customer group/pricing
       row:
         preview: Approve…
         review: Conclude…

@@ -240,8 +240,6 @@ fi:
       form_for_new:
         order_meta: Asiakkaan valinta ja tilauksen asetukset
         customer: Asiakkaan tiedot
-        new_customer: "[Uusi asiakas]"
-        group_id: Asiakasryhmä/hinnoittelu
       row:
         preview: Vahvista…
         review: Päätä…
