@@ -23,9 +23,7 @@ class CheckoutController < BaseStoreController
     if @order.complete? || @order.empty? || !@order.checkoutable?
       return redirect_to cart_path
     end
-
-    @order.billing_address ||= Address.default(current_store)
-    @order.shipping_address ||= Address.default(current_store)
+    @order.assign_addresses
     @shipping_methods = @order.available_shipping_methods
     @order.shipments.destroy_all
     @order.clear_shipping_costs!

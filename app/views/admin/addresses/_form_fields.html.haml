@@ -1,0 +1,18 @@
+= f.fields_for "#{type}_address" do |ff|
+  %fieldset
+    %legend= t(type, scope: '.admin.addresses.labels')
+    .row
+      .col-sm-7
+        = ff.text_field :name, hide_label: true, placeholder: col(Address, :name), prepend: icon('user', class: 'fa-fw')
+      .col-sm-5
+        = ff.phone_field :phone, hide_label: true, placeholder: col(Address, :phone), prepend: icon('phone', class: 'fa-fw')
+    = ff.text_field :company, hide_label: true, placeholder: col(Address, :company), prepend: icon('building', class: 'fa-fw')
+    = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1), prepend: icon('address-card-o', class: 'fa-fw')
+    = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2)
+    .row
+      .col-sm-4
+        = ff.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), prepend: icon('map-marker', class: 'fa-fw')
+      .col-sm-4
+        = ff.text_field :city, hide_label: true, placeholder: col(Address, :city)
+      .col-sm-4
+        = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {required: true, class: 'selectize'}

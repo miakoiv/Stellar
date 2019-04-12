@@ -22,7 +22,6 @@ class Admin::OrdersController < AdminController
     return head :bad_request if @order_types.empty?
 
     @users = current_store.users.with_role(:order_manage, current_store)
-    @customers = user_search(@order_types.map(&:source))
     query = saved_search_query('order', 'incoming_admin_order_search')
     query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(query.merge(search_constrains))
@@ -38,7 +37,6 @@ class Admin::OrdersController < AdminController
     return head :bad_request if @order_types.empty?
 
     @users = current_store.users.with_role(:order_manage, current_store)
-    @customers = user_search(@order_types.map(&:destination))
     query = saved_search_query('order', 'outgoing_admin_order_search')
     query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(query.merge(search_constrains))
@@ -57,15 +55,11 @@ class Admin::OrdersController < AdminController
     authorize_action_for Order, at: current_store
 
     @groups = all_groups
-    @group = find_selected_group || @groups.first
-    @customers = customer_selection
-    @customer = find_selected_customer || User.new
-    @order = current_store.orders.build(
-      group_id: @group.id,
-      customer: @customer,
-      order_type: @group.outgoing_order_types.first
-    )
-    @order.customer = @customer
+    @order = current_store.orders.build(order_params)
+    @order.billing_group ||= @groups.first
+    @order.shipping_group ||= @order.billing_group
+    @order.separate_shipping_address = true
+    @order.assign_addresses
 
     respond_to :html, :js
   end
@@ -82,20 +76,14 @@ class Admin::OrdersController < AdminController
     authorize_action_for Order, at: current_store
 
     @groups = all_groups
-    @group = find_selected_group
-    @customers = customer_selection
     @order = current_store.orders.build(order_params.merge(user: current_user))
-    @order.address_to_customer
-    @order.includes_tax = @group.price_tax_included?
-    new_customer = @order.customer.new_record?
+    @order.includes_tax = @order.billing_group.price_tax_included?
 
     respond_to do |format|
       if @order.save
         track @order
-        @order.customer.groups << @group if new_customer
 
-        format.html { redirect_to edit_admin_order_path(@order),
-          notice: t('.notice', order: @order) }
+        format.html { redirect_to edit_admin_order_path(@order), notice: t('.notice', order: @order) }
         format.json { render :show, status: :created, location: admin_order_path(@order) }
       else
         format.html { render :new }
@@ -185,33 +173,9 @@ class Admin::OrdersController < AdminController
       @order = current_store.orders.unscope(where: :cancelled_at).find(params[:id])
     end
 
-    def user_search(groups = nil)
-      options = {store: current_store, except_group: current_store.default_group}
-      options.merge(group: groups) if groups.present?
-      UserSearch.new(options).results
-    end
-
     # All groups except the default are available for selection.
     def all_groups
       current_store.groups.not_including(current_store.default_group)
-    end
-
-    def find_selected_group
-      order_params[:group_id].present? &&
-        current_store.groups.find_by(id: order_params[:group_id])
-    end
-
-    def find_selected_customer
-      order_params[:customer_id].present? &&
-        current_store.users.find_by(id: order_params[:customer_id])
-    end
-
-    # Customers can be selected from the selected group only.
-    def customer_selection
-      UserSearch.new(
-        store: current_store,
-        group: @group
-      ).results
     end
 
     def should_finalize?
@@ -221,12 +185,21 @@ class Admin::OrdersController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.fetch(:order, {}).permit(
-        :user_id, :group_id,
-        :order_type_id, :customer_id, :inventory_id,
+        :user_id, :billing_group_id, :shipping_group_id,
+        :order_type_id, :inventory_id,
         :completed_at, :shipping_at, :installation_at,
-        :approved_at, :concluded_at, :cancelled_at, :vat_number,
-        :external_number, :your_reference, :our_reference, :message,
-        :customer_email, :notes, :is_final
+        :approved_at, :concluded_at, :cancelled_at,
+        :vat_number, :external_number, :your_reference, :our_reference,
+        :message, :notes, :is_final,
+        :customer_email, :contact_email, :separate_shipping_address,
+        billing_address_attributes: [
+          :id, :name, :phone, :company,
+          :address1, :address2, :postalcode, :city, :country_code
+        ],
+        shipping_address_attributes: [
+          :id, :name, :phone, :company,
+          :address1, :address2, :postalcode, :city, :country_code
+        ]
       )
     end
 

@@ -298,6 +298,7 @@ fi:
         items: Tuotteita
         products: Tuotteet
         customer_email: Sähköpostiosoite
+        contact_email: Yhteyshenkilön sähköpostiosoite
         shipping_method: Toimitus
         notes: Lisätietoja
         store_name: Kauppa

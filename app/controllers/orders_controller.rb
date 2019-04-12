@@ -34,18 +34,11 @@ class OrdersController < BaseStoreController
     authorize_action_for Order, at: current_store
 
     @groups = all_groups
-    @group = find_selected_group || @groups.first
-    @customers = customer_selection
-    @customer = find_selected_customer || User.new(
-      shipping_country: Country.default,
-      billing_country: Country.default
-    )
-    @order = current_store.orders.build(
-      group_id: @group.id,
-      customer: @customer,
-      order_type: @group.outgoing_order_types.first
-    )
-    @order.customer = @customer
+    @order = current_store.orders.build(order_params)
+    @order.billing_group ||= @groups.first
+    @order.shipping_group ||= @order.billing_group
+    @order.separate_shipping_address = true
+    @order.assign_addresses
 
     respond_to :html, :js
   end
@@ -61,17 +54,12 @@ class OrdersController < BaseStoreController
     authorize_action_for Order, at: current_store
 
     @groups = all_groups
-    @group = find_selected_group
-    @customers = customer_selection
     @order = current_store.orders.build(order_params.merge(user: current_user))
-    @order.address_to_customer
-    @order.includes_tax = @group.price_tax_included?
-    new_customer = @order.customer.new_record?
+    @order.includes_tax = @order.billing_group.price_tax_included?
 
     respond_to do |format|
       if @order.save
         track @order
-        @order.customer.groups << @group if new_customer
         user_session['shopping_cart_id'] = @order.id
 
         format.html { redirect_to cart_path, notice: t('.notice', order: @order) }
@@ -139,7 +127,7 @@ class OrdersController < BaseStoreController
     authorize_action_for @order, at: current_store
 
     if can_select_customer?
-      if @order.targeted?
+      if @order != user_shopping_cart
         user_session['shopping_cart_id'] = @order.id
       else
         user_session.delete('shopping_cart_id')
@@ -204,10 +192,11 @@ class OrdersController < BaseStoreController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.fetch(:order, {}).permit(
-        :group_id, :order_type_id, :customer_id, :inventory_id,
+        :billing_group_id, :shipping_group_id,
+        :order_type_id, :inventory_id,
         :completed_at, :shipping_at, :installation_at,
         :vat_number, :your_reference, :our_reference, :message, :notes,
-        :customer_email, :separate_shipping_address,
+        :customer_email, :contact_email, :separate_shipping_address,
         billing_address_attributes: [
           :id, :name, :phone, :company,
           :address1, :address2, :postalcode, :city, :country_code

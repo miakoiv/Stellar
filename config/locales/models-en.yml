@@ -298,6 +298,7 @@ en:
         items: Items
         products: Products
         customer_email: E-mail
+        contact_email: Contact person e-mail
         shipping_method: Shipping
         notes: Notes
         store_name: Store
