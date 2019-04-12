@@ -246,8 +246,10 @@ class Store < ApplicationRecord
   # Countries where concluded orders have been shipped to.
   # Useful as sales report search option.
   def countries_shipped_to
-    country_codes = orders.concluded.select(:shipping_country_code)
-      .distinct.pluck(:shipping_country_code)
+    country_codes = orders.concluded
+      .joins(:shipping_address)
+      .select(Address.arel_table[:country_code])
+      .distinct.pluck(:country_code)
     Country.find(country_codes)
   end
 

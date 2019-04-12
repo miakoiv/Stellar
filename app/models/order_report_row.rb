@@ -27,7 +27,7 @@ class OrderReportRow < ApplicationRecord
       user: options[:user],
       order_type: order.order_type,
       store_portal: order.store_portal,
-      shipping_country_code: order.shipping_country_code,
+      shipping_country_code: order.shipping_address&.country_code,
       product: product,
       tax_rate: order_item.tax_rate,
       ordered_at: order.completed_at.to_date
