@@ -20,7 +20,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :favorite_products, -> { distinct }, class_name: 'Product'
 
   has_many :orders, dependent: :destroy
-  has_many :customer_orders, class_name: 'Order', foreign_key: :customer_id, inverse_of: :customer
 
   # Order types from outgoing orders. See #existing_order_types below.
   has_many :order_types, -> { joins(:source) }, through: :orders
