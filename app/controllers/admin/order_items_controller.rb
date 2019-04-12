@@ -6,17 +6,11 @@ class Admin::OrderItemsController < AdminController
   def index
     authorize_action_for OrderItem, at: current_store
 
-    order_types = current_group.incoming_order_types
+    @order_types = current_group.incoming_order_types
     query = saved_search_query('order_item', 'admin_order_item_search')
-    query.merge!('order_type' => order_types)
     @search = OrderItemSearch.new(query.merge(search_constrains))
     results = @search.results.pending
     @order_items = results.page(params[:page])
-    @customers = UserSearch.new(
-      store: current_store,
-      group: order_types.map(&:source),
-      except_group: current_store.default_group
-    ).results
     @products = current_store.products
       .find((query['product_id'] || []).reject(&:blank?))
   end
@@ -85,7 +79,7 @@ class Admin::OrderItemsController < AdminController
     end
 
     def search_constrains
-      {store: current_store, all_time: true}
+      {store: current_store, order_type: @order_types, all_time: true}
     end
 
     # Use lot code if found, serial otherwise.

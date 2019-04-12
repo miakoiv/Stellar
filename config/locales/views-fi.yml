@@ -217,7 +217,7 @@ fi:
       pending:
         title: Toimittamattomat tuotteet
       search:
-        customer: Valitse asiakas
+        billing_group: "[Kaikki asiakasryhmät]"
         product_query: Kirjoita hakeaksesi tuotteita…
     order_types:
       index:

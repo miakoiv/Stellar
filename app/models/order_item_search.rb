@@ -22,8 +22,8 @@ class OrderItemSearch < Searchlight::Search
     query.where(orders: {store_id: store})
   end
 
-  def search_customer_id
-    query.where(orders: {customer_id: customer_id})
+  def search_billing_group
+    query.where(orders: {billing_group: Group.find(billing_group).self_and_descendants})
   end
 
   def search_order_type

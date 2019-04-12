@@ -210,7 +210,7 @@ en:
       pending:
         title: Products not shipped yet
       search:
-        customer: Select customer
+        billing_group: "[All customer groups]"
         product_query: Type to search for products…
     order_types:
       index:

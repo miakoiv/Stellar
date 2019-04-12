@@ -4,17 +4,22 @@
   .panel-body
     = form_for @search, url: admin_order_items_path, method: :get do |f|
       .row
-        .col-sm-12.col-md-12
+        .col-sm-12.col-md-6
           .form-group
             = f.select :product_id, [], {}, {multiple: true, placeholder: t('.product_query'), class: 'selectize-tall selectize-list-group', data: {products: @products, selected: @search.raw_options['product_id']}}
-        .col-sm-8.col-md-10
+        .col-sm-8.col-md-4
           .form-group
-            = f.select :customer_id, @customers.map { |c| [c.to_s, c.id] }, {include_blank: t('.customer')}, {class: 'form-control selectize'}
+            = f.select :billing_group, current_store.group_options, {include_blank: t('.billing_group')}, {placeholder: t('.billing_group'), class: 'form-control'}
         .col-sm-4.col-md-2
           .form-group
             = f.submit t('actions.search'), class: 'btn btn-block btn-primary'
 
 :coffee
+  $('#order_item_search_billing_group').betterSelectize
+    labelField: 'title'
+    dataAttr: 'data'
+    render: $.fn.selectize.label_renderer
+
   $product = $('#order_item_search_product_id')
   products = $product.data 'products'
   selected = $product.data 'selected'
