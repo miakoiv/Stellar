@@ -297,6 +297,7 @@ fi:
         not_approved: Ei vielä käsitelty
         items: Tuotteita
         products: Tuotteet
+        customer: Asiakas
         customer_email: Sähköpostiosoite
         contact_email: Yhteyshenkilön sähköpostiosoite
         shipping_method: Toimitus

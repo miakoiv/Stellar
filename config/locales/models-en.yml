@@ -297,6 +297,7 @@ en:
         not_approved: Not processed yet
         items: Items
         products: Products
+        customer: Customer
         customer_email: E-mail
         contact_email: Contact person e-mail
         shipping_method: Shipping
