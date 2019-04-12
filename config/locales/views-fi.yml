@@ -248,13 +248,12 @@ fi:
         print_delivery_note: Tulosta lähete
         shipped_items: Toimitetut tuotteet
       search:
-        order_type: Valitse tilauslaji
+        billing_group: "[Kaikki asiakasryhmät]"
         status: "[Kaikki vaiheet]"
         since_date: Pvm alkaen
         until_date: Pvm päättyen
         keyword: Etsi hakusanalla
         payment_number: Tapahtumanumero
-        customer: Valitse asiakas
         user: Valitse tilauksen laatija
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle

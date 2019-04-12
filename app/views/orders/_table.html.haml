@@ -4,9 +4,9 @@
       %tr
         %th.col-min
         %th.col-xs-1= col(Order, :number)
-        - if current_store.b2b_sales?
-          %th.col-xs-1= col(Order, :billing_group_id)
         %th= col(Order, :completed_at)
+        - if current_store.b2b_sales?
+          %th
         %th= col(Order, :customer)
         %th.col-xs-1.text-right= col(Order, :items)
         %th.col-xs-1.text-right= col(Order, :grand_total)
@@ -18,9 +18,9 @@
           %td= icon(order.icon)
           %td
             %strong= order.number
+          %td= order.complete? ? l(order.completed_at.to_date) : nil
           - if current_store.b2b_sales?
             %td= bootstrap_label(order.billing_group)
-          %td= order.complete? ? l(order.completed_at.to_date) : nil
           %td.no-wrap
             %strong= order.billing_address&.company
             = order.billing_address&.name

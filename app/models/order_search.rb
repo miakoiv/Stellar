@@ -12,12 +12,12 @@ class OrderSearch < Searchlight::Search
     query.where(store: store)
   end
 
-  def search_user_id
-    query.where(user_id: user_id)
+  def search_billing_group
+    query.where(billing_group: Group.find(billing_group).self_and_descendants)
   end
 
-  def search_customer_id
-    query.where(customer_id: customer_id)
+  def search_user_id
+    query.where(user_id: user_id)
   end
 
   def search_order_type
@@ -38,15 +38,11 @@ class OrderSearch < Searchlight::Search
     query.where('DATE(completed_at) <= ?', until_date)
   end
 
-  def search_customer
-    query.where('customer_name LIKE ?', "%#{customer}%")
-  end
-
   def search_payment_number
     query.joins(:payments).where(payments: {number: payment_number})
   end
 
   def search_keyword
-    query.where("CONCAT_WS(' ', customer_name, company_name, contact_person, shipping_city) LIKE ?", "%#{keyword}%")
+    query.joins(:shipping_address).where("CONCAT_WS(' ', addresses.name, addresses.company, addresses.address1, addresses.address2, addresses.city) LIKE ?", "%#{keyword}%")
   end
 end

@@ -23,7 +23,6 @@ class Admin::OrdersController < AdminController
 
     @users = current_store.users.with_role(:order_manage, current_store)
     query = saved_search_query('order', 'incoming_admin_order_search')
-    query.reverse_merge!('order_type' => @order_types.first)
     @search = OrderSearch.new(query.merge(search_constrains))
     results = @search.results
     @orders = results.page(params[:page])
@@ -203,8 +202,9 @@ class Admin::OrdersController < AdminController
       )
     end
 
-    # Limit the search to orders in current store.
+    # Limit the search to orders in current store and
+    # order types set by the action.
     def search_constrains
-      {store: current_store}
+      {store: current_store, order_type: @order_types}
     end
 end

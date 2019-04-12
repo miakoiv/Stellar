@@ -241,13 +241,12 @@ en:
         print_delivery_note: Print delivery note
         shipped_items: Shipment contents
       search:
-        order_type: Select order type
+        billing_group: "[All customer groups]"
         status: "[All statuses]"
         since_date: Since date
         until_date: Until date
         keyword: Keyword search
         payment_number: Transaction №
-        customer: Select customer
         user: Select order author
       edit:
         add_order_items: Add items to this order
