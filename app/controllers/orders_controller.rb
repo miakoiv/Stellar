@@ -171,24 +171,6 @@ class OrdersController < BaseStoreController
       current_store.groups.not_including(current_store.default_group)
     end
 
-    def find_selected_group
-      order_params[:group_id].present? &&
-        current_store.groups.find_by(id: order_params[:group_id])
-    end
-
-    def find_selected_customer
-      order_params[:customer_id].present? &&
-        current_store.users.find_by(id: order_params[:customer_id])
-    end
-
-    # Customers can be selected from the selected group only.
-    def customer_selection
-      UserSearch.new(
-        store: current_store,
-        group: @group
-      ).results
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.fetch(:order, {}).permit(
