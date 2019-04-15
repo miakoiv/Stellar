@@ -53,7 +53,7 @@ class Admin::OrdersController < AdminController
   def new
     authorize_action_for Order, at: current_store
 
-    @groups = all_groups
+    @groups = current_store.non_default_groups
     @order = current_store.orders.build(order_params)
     @order.billing_group ||= @groups.first
     @order.shipping_group ||= @order.billing_group
@@ -74,7 +74,7 @@ class Admin::OrdersController < AdminController
   def create
     authorize_action_for Order, at: current_store
 
-    @groups = all_groups
+    @groups = current_store.non_default_groups
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.includes_tax = @order.billing_group.price_tax_included?
 
@@ -170,11 +170,6 @@ class Admin::OrdersController < AdminController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = current_store.orders.unscope(where: :cancelled_at).find(params[:id])
-    end
-
-    # All groups except the default are available for selection.
-    def all_groups
-      current_store.groups.not_including(current_store.default_group)
     end
 
     def should_finalize?

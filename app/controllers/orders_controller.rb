@@ -33,7 +33,7 @@ class OrdersController < BaseStoreController
   def new
     authorize_action_for Order, at: current_store
 
-    @groups = all_groups
+    @groups = current_store.non_default_groups
     @order = current_store.orders.build(order_params)
     @order.billing_group ||= @groups.first
     @order.shipping_group ||= @order.billing_group
@@ -53,7 +53,7 @@ class OrdersController < BaseStoreController
   def create
     authorize_action_for Order, at: current_store
 
-    @groups = all_groups
+    @groups = current_store.non_default_groups
     @order = current_store.orders.build(order_params.merge(user: current_user))
     @order.includes_tax = @order.billing_group.price_tax_included?
 
@@ -164,11 +164,6 @@ class OrdersController < BaseStoreController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = current_user.orders.find(params[:id])
-    end
-
-    # All groups except the default are available for selection.
-    def all_groups
-      current_store.groups.not_including(current_store.default_group)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

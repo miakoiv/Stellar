@@ -168,6 +168,10 @@ class Store < ApplicationRecord
   end
 
   #---
+  def non_default_groups
+    groups.not_including(default_group)
+  end
+
   def cart_contents_partial
     fancy_cart? ? 'store/fancy_cart_contents' : 'store/cart_contents'
   end
