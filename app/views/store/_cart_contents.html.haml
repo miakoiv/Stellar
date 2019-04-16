@@ -2,7 +2,7 @@
   .panel.panel-default
     - if order.empty?
       .panel-body
-        - if order.targeted?
+        - if order.quotation?
           = t('store.cart_contents.empty_order_html')
         - else
           %p.lead= t('store.cart_contents.empty_cart')

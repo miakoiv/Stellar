@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :favorite_products, -> { distinct }, class_name: 'Product'
 
   has_many :orders, dependent: :destroy
+  has_many :shopping_carts, class_name: 'Order', foreign_key: :shopper_id
 
   # Order types from outgoing orders. See #existing_order_types below.
   has_many :order_types, -> { joins(:source) }, through: :orders
@@ -50,12 +51,12 @@ class User < ApplicationRecord
   end
 
   #---
-  # A user's shopping cart is the first incomplete order at given store.
   def shopping_cart(store, store_portal, group)
-    cart = orders.at(store).incomplete.first
+    cart = shopping_carts.at(store).incomplete.first
     return cart unless cart.nil?
 
-    cart = orders.at(store).build(
+    cart = shopping_carts.at(store).build(
+      user: self,
       billing_group: group,
       shipping_group: group,
       inventory: store.default_inventory,

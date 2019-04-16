@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_093611) do
+ActiveRecord::Schema.define(version: 2019_04_15_104611) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -418,6 +418,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_093611) do
     t.string "our_reference"
     t.string "message"
     t.integer "user_id", null: false
+    t.bigint "shopper_id"
     t.integer "billing_group_id", null: false
     t.integer "shipping_group_id", null: false
     t.integer "inventory_id"
@@ -453,6 +454,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_093611) do
     t.index ["order_type_id"], name: "index_orders_on_order_type_id"
     t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["shipping_group_id"], name: "index_orders_on_shipping_group_id"
+    t.index ["shopper_id"], name: "index_orders_on_shopper_id"
     t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

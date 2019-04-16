@@ -71,8 +71,8 @@ class OrdersController < BaseStoreController
 
   # PATCH/PUT /orders/1
   # The checkout process calls this via AJAX any time the order status changes.
-  # Completes an order if it's ready for completion. Orders targeted at another
-  # customer are approved at completion. Responses are in JSON.
+  # Completes an order if it's ready for completion. Quotations are approved
+  # at completion. Responses are in JSON.
   # Returns an error if the order itself does not validate, or it has become
   # uncheckoutable until completed.
   # HTML responses are sent when the user edits her own completed orders.
@@ -83,7 +83,7 @@ class OrdersController < BaseStoreController
       if @order.update(order_params) && (@order.checkoutable? || @order.complete?)
         if @order.should_complete?
           @order.complete!
-          @order.update(approved_at: Date.current) if @order.targeted?
+          @order.update(approved_at: Date.current) if @order.quotation?
         end
 
         format.json { render json: @order }
@@ -127,7 +127,7 @@ class OrdersController < BaseStoreController
     authorize_action_for @order, at: current_store
 
     if can_select_customer?
-      if @order != user_shopping_cart
+      if @order != default_shopping_cart
         user_session['shopping_cart_id'] = @order.id
       else
         user_session.delete('shopping_cart_id')

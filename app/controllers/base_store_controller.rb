@@ -48,16 +48,26 @@ class BaseStoreController < ApplicationController
   end
   helper_method :current_theme
 
-  # Selected shopping cart, if any.
+  # Currently active shopping cart that can be either explicitly
+  # selected or the default cart for current user.
   def shopping_cart
-    @shopping_cart ||= selected_shopping_cart || user_shopping_cart
+    @shopping_cart ||= selected_shopping_cart || default_shopping_cart
   end
   helper_method :shopping_cart
 
-  def user_shopping_cart
-    current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
+  def selected_shopping_cart
+    can_select_customer? && user_session['shopping_cart_id'] && current_user.orders.incomplete.find_by(id: user_session['shopping_cart_id'])
   end
-  helper_method :user_shopping_cart
+
+  def shopping_cart_selected?
+    !selected_shopping_cart.nil?
+  end
+  helper_method :shopping_cart_selected?
+
+  def default_shopping_cart
+    @default_cart ||= current_user.shopping_cart(current_store, current_hostname.store_portal, current_group)
+  end
+  helper_method :default_shopping_cart
 
   # Convenience method to check current user roles at current store.
   def current_user_has_role?(role)
@@ -71,7 +81,7 @@ class BaseStoreController < ApplicationController
   helper_method :guest?
 
   def can_order?
-    current_group.ordering_allowed?
+    selected_group.ordering_allowed?
   end
   helper_method :can_order?
 
@@ -122,10 +132,10 @@ class BaseStoreController < ApplicationController
   helper_method :can_manage?
 
   # The ability to shop at any given category depends on possible restricted
-  # categories given to the current group. If any category assignments
+  # categories given to the selected group. If any category assignments
   # exist, shopping is only allowed in the assigned categories.
   def may_shop_at?(category)
-    current_group.categories.empty? || current_group.categories.include?(category)
+    selected_group.categories.empty? || selected_group.categories.include?(category)
   end
   helper_method :may_shop_at?
 
@@ -139,13 +149,8 @@ class BaseStoreController < ApplicationController
   end
   helper_method :can_select_customer?
 
-  def selected_customer
-    can_select_customer? && shopping_cart.customer || current_user
-  end
-  helper_method :selected_customer
-
   def selected_group
-    selected_customer.effective_group(current_store)
+    shopping_cart_selected? ? shopping_cart.billing_group : current_user.effective_group(current_store)
   end
   helper_method :selected_group
 
@@ -203,10 +208,6 @@ class BaseStoreController < ApplicationController
         @header = current_store.header
         @footer = current_store.footer
       end
-    end
-
-    def selected_shopping_cart
-      can_select_customer? && user_session['shopping_cart_id'].present? && current_user.orders.incomplete.find_by(id: user_session['shopping_cart_id'])
     end
 
     def policies_pending?

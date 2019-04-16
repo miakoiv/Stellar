@@ -5,7 +5,7 @@
     .page-header
       - if can_select_customer?
         = render 'orders/new'
-      - if @order.targeted?
+      - if @order.quotation?
         = render 'orders/quote'
       = render 'cart_title'
 

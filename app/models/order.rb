@@ -11,7 +11,11 @@ class Order < ApplicationRecord
   belongs_to :store
   belongs_to :store_portal, class_name: 'Store', optional: true
 
+  # User is the creator of the order, shopper indicates the user
+  # who has this order as their shopping cart.
   belongs_to :user
+  belongs_to :shopper, class_name: 'User', optional: true
+
   belongs_to :billing_group
   belongs_to :shipping_group
 
@@ -24,9 +28,6 @@ class Order < ApplicationRecord
   default_scope { where(cancelled_at: nil) }
 
   scope :at, -> (store) { where(store: store) }
-  scope :targeted, -> {
-
-  }
   scope :not_by, -> (user) { where.not(user: user) }
 
   # Current orders are completed, not yet approved orders.
@@ -50,8 +51,10 @@ class Order < ApplicationRecord
   # Cancelled orders.
   scope :cancelled, -> { unscope(where: :cancelled_at).where.not(cancelled_at: nil) }
 
-  # Orders that are targeted and not yet completed are considered to be quotes.
-  scope :quote, -> { targeted.incomplete }
+  scope :cart, -> { where.not(shopper: nil) }
+
+  # Quotations are orders that are not shopping carts.
+  scope :quotation, -> { where(shopper: nil) }
 
   #---
   validates :customer_email, presence: true, on: :update, if: :customer_required?
@@ -102,8 +105,13 @@ class Order < ApplicationRecord
     order_type.present?
   end
 
-  def targeted?
-    false
+  def cart?
+    shopper.present?
+  end
+
+  # Order that is not a shopping cart counts as a quotation.
+  def quotation?
+    !cart?
   end
 
   # Pricing applied to this order, based on billing group.
@@ -128,9 +136,9 @@ class Order < ApplicationRecord
   end
 
   # Changing the order contents is allowed for incomplete orders,
-  # targeted orders, but they must not be concluded or cancelled.
+  # quotations, but they must not be concluded or cancelled.
   def editable_items?
-    incomplete? || targeted? && !(concluded? || cancelled?)
+    incomplete? || quotation? && !(concluded? || cancelled?)
   end
 
   def current?

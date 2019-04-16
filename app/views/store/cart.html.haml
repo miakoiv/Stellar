@@ -5,7 +5,7 @@
     .page-header
       - if can_select_customer?
         = render 'orders/new'
-      - if @order.targeted?
+      - if @order.quotation?
         = render 'orders/quote'
       = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
       = render 'cart_title'

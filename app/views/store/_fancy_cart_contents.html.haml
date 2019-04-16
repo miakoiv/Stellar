@@ -1,6 +1,6 @@
 #cart-contents.fancy-cart
   - if order.empty?
-    - if order.targeted?
+    - if order.quotation?
       = t('store.cart_contents.empty_order_html')
     - else
       %h5= t('store.cart_contents.empty_cart')

@@ -1,7 +1,7 @@
 %h1.hidden-print
-  - if @order.targeted?
+  - if @order.quotation?
     = icon('inbox', t('store.cart.order_or_quote'))
-    %span.small= bootstrap_label(@order.billing_group, text: @order.billing_address.name.split.first)
+    %span.small= bootstrap_label(@order.billing_group)
   - else
     = icon('shopping-cart', t('store.cart.shopping_cart'))
 %h1.visible-print-block= current_store
