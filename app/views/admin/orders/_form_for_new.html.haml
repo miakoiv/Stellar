@@ -18,8 +18,14 @@
         %h4.panel-title= t('.customer')
       .panel-body
         %fieldset.for-billing-refresh.for-shipping-refresh
-          = f.text_field :customer_email, prepend: icon('envelope-o', class: 'fa-fw'), required: true
-          = f.text_field :contact_email
+          .form-group.has-icon
+            %label.control-label= col(Order, :customer_email)
+            = f.text_field_without_bootstrap :customer_email, class: 'form-control', required: true
+            = icon('envelope-o')
+          .form-group.has-icon
+            %label.control-label= col(Order, :contact_email)
+            = f.text_field_without_bootstrap :contact_email, class: 'form-control'
+            = icon('envelope-o')
         %fieldset
           = render partial: 'admin/addresses/form_fields', locals: {type: :billing, f: f}
           = f.form_group do

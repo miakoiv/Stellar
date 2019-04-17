@@ -1372,6 +1372,39 @@ fieldset[disabled] .help-block { display: none; }
 
 
 /*
+ * Embedded Font Awesome icons inside form controls
+ */
+.has-icon {
+  position: relative;
+
+  .form-control { padding-left: $input-height-base; }
+  .fa {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: block;
+    width: $input-height-base;
+    line-height: $input-height-base;
+    text-align: center;
+    pointer-events: none;
+  }
+  .input-lg + .fa,
+  .input-group-lg + .fa,
+  &.form-group-lg .form-control + .fa {
+    width: $input-height-large;
+    line-height: $input-height-large;
+  }
+  .input-sm + .fa,
+  .input-group-sm + .fa,
+  &.form-group-sm .form-control + .fa {
+    width: $input-height-small;
+    line-height: $input-height-small;
+  }
+}
+
+
+/*
  * Colour coded fieldsets, fixed fieldsets, fieldset legend
  */
 fieldset { position: relative; }

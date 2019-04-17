@@ -3,15 +3,27 @@
     %legend= t(type, scope: '.admin.addresses.labels')
     .row
       .col-sm-7
-        = ff.text_field :name, hide_label: true, placeholder: col(Address, :name), prepend: icon('user', class: 'fa-fw')
+        .form-group.has-icon
+          = ff.text_field_without_bootstrap :name, placeholder: col(Address, :name), class: 'form-control'
+          = icon('user')
       .col-sm-5
-        = ff.phone_field :phone, hide_label: true, placeholder: col(Address, :phone), prepend: icon('phone', class: 'fa-fw')
-    = ff.text_field :company, hide_label: true, placeholder: col(Address, :company), prepend: icon('building', class: 'fa-fw')
-    = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1), prepend: icon('address-card-o', class: 'fa-fw')
-    = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2)
+        .form-group.has-icon
+          = ff.phone_field_without_bootstrap :phone, placeholder: col(Address, :phone), class: 'form-control'
+          = icon('phone')
+    .form-group.has-icon
+      = ff.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
+      = icon('building')
+    .form-group.has-icon
+      = ff.text_field_without_bootstrap :address1, placeholder: col(Address, :address1), class: 'form-control'
+      = icon('address-card-o')
+    .form-group.has-icon
+      = ff.text_field_without_bootstrap :address2, placeholder: col(Address, :address2), class: 'form-control'
+      = icon('address-card-o')
     .row
       .col-sm-4
-        = ff.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), prepend: icon('map-marker', class: 'fa-fw')
+        .form-group.has-icon
+          = ff.text_field_without_bootstrap :postalcode, placeholder: col(Address, :postalcode), class: 'form-control'
+          = icon('map-marker')
       .col-sm-4
         = ff.text_field :city, hide_label: true, placeholder: col(Address, :city)
       .col-sm-4
