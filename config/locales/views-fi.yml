@@ -239,6 +239,7 @@ fi:
         new_order: Uusi tilaus
       form_for_new:
         order_meta: Asiakkaan valinta ja tilauksen asetukset
+        order_meta_help: Valitse nämä ryhmät ensin poimiaksesi laskutus- ja toimitusosoitteet
         customer: Asiakkaan tiedot
       row:
         preview: Vahvista…
@@ -568,9 +569,8 @@ fi:
       new_order: Uusi tilaus/tarjous
     form_for_new:
       order_meta: Asiakkaan valinta ja tilauksen asetukset
+      order_meta_help: Valitse nämä ryhmät ensin poimiaksesi laskutus- ja toimitusosoitteet
       customer: Asiakkaan tiedot
-      new_customer: "[Uusi asiakas]"
-      group_id: Asiakasryhmä/hinnoittelu
     table:
       cancel:
         button: Peru

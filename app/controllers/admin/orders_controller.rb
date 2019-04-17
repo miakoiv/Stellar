@@ -57,7 +57,6 @@ class Admin::OrdersController < AdminController
     @order = current_store.orders.build(order_params)
     @order.billing_group ||= @groups.first
     @order.shipping_group ||= @order.billing_group
-    @order.separate_shipping_address = true
     @order.assign_addresses
 
     respond_to :html, :js

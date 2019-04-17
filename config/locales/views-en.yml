@@ -232,6 +232,7 @@ en:
         new_order: New order
       form_for_new:
         order_meta: Customer selection and order settings
+        order_meta_help: Select these groups first to pick billing and shipping addresses
         customer: Customer information
       row:
         preview: Approve…
@@ -557,9 +558,8 @@ en:
       new_order: New order/quote
     form_for_new:
       order_meta: Customer selection and order settings
+      order_meta_help: Select these groups first to pick billing and shipping addresses
       customer: Customer information
-      new_customer: "[New customer]"
-      group_id: Customer group/pricing
     table:
       cancel:
         button: Cancel

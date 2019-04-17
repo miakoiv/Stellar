@@ -4,28 +4,29 @@
       .panel-heading
         %h4.panel-title= t('.order_meta')
       .panel-body
-        %fieldset#order-meta
+        %fieldset.for-billing-refresh.for-shipping-refresh
           = f.select :billing_group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }
-          = f.select :shipping_group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }
-          %hr
-          .row
-            .col-md-6
-              = f.select :order_type_id, @order.billing_group.outgoing_order_types.map { |o| [o.to_s, o.id] }
-            .col-md-6
-              = f.select :inventory_id, @order.billing_group.available_inventories.map { |i| [i.to_s, i.id] }
+        %fieldset.for-shipping-refresh
+          = f.select :shipping_group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }, help: t('.order_meta_help')
+        %hr
+        %fieldset.for-shipping-refresh
+          = f.select :order_type_id, @order.billing_group.outgoing_order_types.map { |o| [o.to_s, o.id] }
+          = f.select :inventory_id, @order.billing_group.available_inventories.map { |i| [i.to_s, i.id] }
   .col-lg-6.col-lg-offset-1
     .panel.panel-default
       .panel-heading
         %h4.panel-title= t('.customer')
       .panel-body
-        %fieldset
+        %fieldset.for-billing-refresh.for-shipping-refresh
           = f.text_field :customer_email, prepend: icon('envelope-o', class: 'fa-fw'), required: true
           = f.text_field :contact_email
         %fieldset
           = render partial: 'admin/addresses/form_fields', locals: {type: :billing, f: f}
-          = f.hidden_field :separate_shipping_address
-        %fieldset
-          = render partial: 'admin/addresses/form_fields', locals: {type: :shipping, f: f}
+          = f.form_group do
+            = f.check_box :separate_shipping_address
+        #shipping-address.collapse{class: @order.separate_shipping_address && 'in'}
+          %fieldset
+            = render partial: 'admin/addresses/form_fields', locals: {type: :shipping, f: f}
         %fieldset.actions.fixed
           .container
             = f.primary
@@ -43,14 +44,20 @@
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer
     onChange: (id) ->
-      refresh $('#order_billing_group_id').serialize()
+      refresh $('.for-billing-refresh').serialize()
 
   $shipping_group_select = $('#order_shipping_group_id').betterSelectize
     labelField: 'title'
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer
     onChange: (id) ->
-      refresh $('#order-meta').serialize()
+      refresh $('.for-shipping-refresh').serialize()
 
   $order_type_select = $('#order_order_type_id').betterSelectize()
   $inventory_select = $('#order_inventory_id').betterSelectize()
+
+  $('#order_separate_shipping_address').on 'change', (e) ->
+    if $(e.target).is ':checked'
+      $('#shipping-address').collapse 'show'
+    else
+      $('#shipping-address').collapse 'hide'
