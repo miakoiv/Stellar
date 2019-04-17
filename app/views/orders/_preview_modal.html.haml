@@ -4,22 +4,22 @@
       %button.close{data: {dismiss: 'modal'}}= icon('close')
       %h4.modal-title= t('.title')
     .modal-body
-      .row.small
+      .row
         .col-xs-4
           %dl
-            %dt= @order.order_type
-            %dd= @order.user.name
-            %dd= l(@order.updated_at, format: :long)
-            %dd= bootstrap_label(@order.billing_group)
+            %dt= icon('cogs', @order.order_type, class: 'fa-fw')
+            %dd= icon('user', @order.user.name, class: 'fa-fw')
+            %dd= icon('clock-o', l(@order.updated_at, format: :long), class: 'fa-fw')
         .col-xs-4
-          %dl
+          %dl.small
             %dt= col(Order, :customer_email)
             %dd= @order.customer_email
+            %dd= bootstrap_label(@order.billing_group)
             - if @order.billing_address.present?
               %dt= col(Order, :billing_address_id)
               %dd= render @order.billing_address
         .col-xs-4
-          %dl
+          %dl.small
             - if @order.shipping_address.present?
               %dt= col(Order, :shipping_address_id)
               %dd= render @order.shipping_address

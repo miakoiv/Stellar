@@ -10,7 +10,7 @@
           = link_to preview_order_path(order), remote: true, rel: 'nofollow' do
             .badge.pull-right= order.size
             = bootstrap_label(order.user, text: order.user.name)
-            = order.billing_address&.name
+            = order.billing_customer
             .small= l(order.created_at.to_date, format: :long)
     - else
       %li.dropdown-header= t('.none')

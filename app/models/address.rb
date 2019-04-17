@@ -34,6 +34,10 @@ class Address < ApplicationRecord
     [company, address1, address2, postalcode, city, country].reject(&:blank?).join ', '
   end
 
+  def to_identifier
+    [company, name, city].reject(&:blank?).join ' '
+  end
+
   def to_s
     [company, name, address1, address2, postalcode, city, country, phone].reject(&:blank?).join "\n"
   end

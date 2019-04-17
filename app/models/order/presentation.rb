@@ -22,8 +22,12 @@ class Order < ApplicationRecord
     [:warning, '.pending']
   end
 
+  def billing_customer
+    billing_address&.to_identifier
+  end
+
   def shipping_customer
-    [shipping_address&.company, billing_address&.city].compact.reject(&:empty?).join(', ')
+    shipping_address&.to_identifier
   end
 
   # Icon name based on order status.
