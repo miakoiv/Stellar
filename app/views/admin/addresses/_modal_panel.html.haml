@@ -22,7 +22,10 @@
             = icon('phone')
       .form-group.has-icon
         = f.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
-        = icon('building')
+        = icon('building-o')
+      .form-group.has-icon
+        = f.text_field_without_bootstrap :department, placeholder: col(Address, :department), class: 'form-control'
+        = icon('sitemap')
       .form-group.has-icon
         = f.text_field_without_bootstrap :address1, placeholder: col(Address, :address1), class: 'form-control'
         = icon('address-card-o')

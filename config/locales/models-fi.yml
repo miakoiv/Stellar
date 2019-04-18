@@ -159,6 +159,7 @@ fi:
         name: Nimi
         phone: Puhelinnumero
         company: Yritys
+        department: Osasto
         address1: Osoite
         address2: Osoite 2
         postalcode: Postinumero

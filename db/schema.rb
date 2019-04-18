@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_104611) do
+ActiveRecord::Schema.define(version: 2019_04_18_124430) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_104611) do
     t.string "name", default: "", null: false
     t.string "phone", default: "", null: false
     t.string "company", default: "", null: false
+    t.string "department", default: "", null: false
     t.string "address1", null: false
     t.string "address2", default: "", null: false
     t.string "postalcode", null: false

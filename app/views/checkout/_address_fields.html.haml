@@ -7,6 +7,7 @@
       .col-sm-4
         = ff.phone_field :phone, hide_label: true, placeholder: col(Address, :phone)
     = ff.text_field :company, hide_label: true, placeholder: col(Address, :company)
+    = ff.text_field :department, hide_label: true, placeholder: col(Address, :department)
     = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1), class: 'may-be-required', required: required
     = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2)
     .row

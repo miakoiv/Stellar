@@ -174,11 +174,11 @@ class OrdersController < BaseStoreController
         :vat_number, :your_reference, :our_reference, :message, :notes,
         :customer_email, :contact_email, :separate_shipping_address,
         billing_address_attributes: [
-          :id, :name, :phone, :company,
+          :id, :name, :phone, :company, :department,
           :address1, :address2, :postalcode, :city, :country_code
         ],
         shipping_address_attributes: [
-          :id, :name, :phone, :company,
+          :id, :name, :phone, :company, :department,
           :address1, :address2, :postalcode, :city, :country_code
         ]
       )

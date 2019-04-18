@@ -159,6 +159,7 @@ en:
         name: Name
         phone: Phone number
         company: Company
+        department: Department
         address1: Address
         address2: Address 2
         postalcode: Post code
