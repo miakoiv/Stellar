@@ -88,7 +88,7 @@ class Shipment < ApplicationRecord
     update shipped_at: Time.current
     order.update_shipped!
     email.shipment(to: order.billing_recipient)&.deliver_later
-    email.shipment(to: order.shipping_recipient, bcc: false)&.deliver_later if has_contact_email?
+    email.shipment(to: order.shipping_recipient, bcc: false)&.deliver_later if order.has_contact_email?
     true
   end
 
