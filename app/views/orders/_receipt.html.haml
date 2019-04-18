@@ -7,25 +7,15 @@
   %h1= t('checkout.receipt')
 
 .row
-  .col-xs-5
-    %dl.dl-horizontal
-      %dt= col(Order, :customer_name)
-      %dd= order.customer_name
+  .col-xs-6
+    %dl
       %dt= col(Order, :customer_email)
       %dd= order.customer_email
-      %dt= col(Order, :customer_phone)
-      %dd= order.customer_phone
       - if order.store.b2b_sales?
-        %dt= col(Order, :company_name)
-        %dd= order.company_name
-        %dt= col(Order, :contact_person)
-        %dd= order.contact_person
         %dt= col(Order, :contact_email)
         %dd= order.contact_email
-        %dt= col(Order, :contact_phone)
-        %dd= order.contact_phone
-  .col-xs-7
-    %dl.dl-horizontal
+  .col-xs-6
+    %dl
       %dt= col(Order, :completed_at)
       %dd= l(order.completed_at.to_date)
       - if order.store.b2b_sales?
@@ -34,31 +24,25 @@
         - if order.has_installation?
           %dt= col(Order, :installation_at)
           %dd= order.installation_at.present? ? l(order.installation_at) : nil
-%hr
 .row
-  .col-xs-5
-    %dl.dl-horizontal
-      %dt= col(Order, :billing_street)
-      %dd= order.billing_street
-      %dd
-        = order.billing_postalcode
-        = order.billing_city
-  .col-xs-7
-    - if order.has_shipping?
-      %dl.dl-horizontal
-        %dt= col(Order, :shipping_street)
-        %dd= order.shipping_street
-        %dd
-          = order.shipping_postalcode
-          = order.shipping_city
+  .col-xs-6
+    - if order.billing_address.present?
+      %dl
+        %dt= col(Order, :billing_address_id)
+        %dd= render order.billing_address
+  .col-xs-6
+    - if order.shipping_address.present?
+      %dl
+        %dt= col(Order, :shipping_address_id)
+        %dd= render order.shipping_address
         - order.shipments.each do |shipment|
           %dt= col(Shipment, :shipping_method_id)
           %dd= shipment.shipping_method
 
 %hr
 .row
-  .col-xs-5
-    %dl.dl-horizontal
+  .col-xs-6
+    %dl
       - if order.vat_number_expected?
         %dt= col(Order, :vat_number)
         %dd= order.vat_number
@@ -68,8 +52,8 @@
       %dd= order.our_reference
       %dt= col(Order, :message)
       %dd= order.message
-  .col-xs-7
-    %dl.dl-horizontal
+  .col-xs-6
+    %dl
       %dt= col(Order, :notes)
       %dd= order.notes
 
