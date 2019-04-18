@@ -10,9 +10,7 @@
     - @order_items.each do |order_item|
       %tr
         %td= link_to order_item.order.number, admin_order_path(order_item.order)
-        %td
-          %strong= order_item.order.billing_address&.company
-          = order_item.order.billing_address&.name
+        %td= order_item.order.billing_customer
         %td= l(order_item.order.completed_at.to_date)
         %td.text-right= order_item.amount
         %td.text-right.currency= money order_item.subtotal_sans_tax
