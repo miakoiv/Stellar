@@ -163,7 +163,7 @@ class Page < ApplicationRecord
 
   def to_s
     return human_attribute_value(:purpose) if header? || footer?
-    return front_page.title if continuous?
+    return front_page.title if continuous? && front_page.present?
     title
   end
 
@@ -186,7 +186,7 @@ class Page < ApplicationRecord
   end
 
   def content
-    return front_page&.content if continuous?
+    return front_page&.content if continuous? && front_page.present?
     if segment = segments.find { |segment| segment.content.present? }
       segment.content.truncate(250, separator: ' ', omission: '…')
     end
