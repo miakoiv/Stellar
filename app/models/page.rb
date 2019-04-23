@@ -16,8 +16,7 @@ class Page < ApplicationRecord
   friendly_id :slugger, use: [:slugged, :scoped], scope: :store
   acts_as_nested_set scope: :store,
                      dependent: :destroy,
-                     counter_cache: :children_count,
-                     touch: true
+                     counter_cache: :children_count
 
   #---
   enum purpose: {
@@ -86,6 +85,8 @@ class Page < ApplicationRecord
   #---
   before_save :conditionally_disable
   after_save :touch_resource
+  after_save :touch_ancestors
+  after_save :touch_descendants
 
   #---
   # Finds the first valid entry point.
@@ -260,6 +261,14 @@ class Page < ApplicationRecord
   private
     def touch_resource
       resource.touch if resource.present?
+    end
+
+    def touch_ancestors
+      ancestors.map(&:touch)
+    end
+
+    def touch_descendants
+      descendants.map(&:touch)
     end
 
     def conditionally_disable
