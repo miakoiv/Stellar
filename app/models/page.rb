@@ -185,7 +185,7 @@ class Page < ApplicationRecord
   def label
     return '' if header? || footer?
     return slug if route?
-    resource || Page.human_attribute_value(:purpose, purpose)
+    resource || human_attribute_value(:purpose)
   end
 
   def description
