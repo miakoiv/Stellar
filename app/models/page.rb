@@ -118,7 +118,7 @@ class Page < ApplicationRecord
 
   # The first primary child page is the front page for continuous pages.
   def front_page
-    children.live.primary.first
+    children.primary.live.first
   end
 
   def can_have_children?
