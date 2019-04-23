@@ -3,7 +3,7 @@
     .dd-handle= drag_handle
   = link_to edit_admin_page_path(page), remote: true do
     .dd-icon= icon(page.icon)
-    = page.internal_title
+    = page
     .dd-widget
       = bootstrap_label(page)
     - unless page.live?

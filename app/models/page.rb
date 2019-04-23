@@ -165,13 +165,13 @@ class Page < ApplicationRecord
     !(header? || footer?)
   end
 
-  def internal_title
-    title || human_attribute_value(:purpose)
+  def display_title
+    return front_page.display_title if continuous? && front_page.present?
+    title
   end
 
   def to_s
-    return front_page.title if continuous? && front_page.present?
-    title
+    title || human_attribute_value(:purpose)
   end
 
   def icon
