@@ -219,7 +219,7 @@ class Page < ApplicationRecord
       show_category_order_path(resource)
     when dropdown? || megamenu?
       children.live.first.path
-    when continuous?
+    when continuous? && front_page.present?
       show_page_path(self, trailing_slash: true, anchor: front_page.slug)
     when portal?
       resource.to_url
