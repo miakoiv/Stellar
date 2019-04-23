@@ -1359,10 +1359,10 @@ fieldset[disabled] .help-block { display: none; }
  * Form validation states
  */
 .form-control:required {
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%235cb85c' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
+  background: $input-bg url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%235cb85c' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
 
   &:invalid {
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%23d9534f' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
+    background: $input-bg url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9px' height='9px'><path fill='%23d9534f' d='M0,0L9,0L9,9Z' /></svg>") no-repeat right top;
   }
   &:invalid:focus {
     border-color: darken($state-danger-text, 10%);
