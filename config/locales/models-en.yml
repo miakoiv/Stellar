@@ -183,6 +183,7 @@ en:
         view_mode: Default view
       column:
         alignment: Vertical alignment
+        viewport: Use viewport height
         background_color: Background color
         pivot: Horizontal layout on mobile
       component_entry:

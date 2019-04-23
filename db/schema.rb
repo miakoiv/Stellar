@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_18_124430) do
+ActiveRecord::Schema.define(version: 2019_04_23_141151) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_04_18_124430) do
   create_table "columns", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "section_id", null: false
     t.string "alignment", default: "align-top", null: false
+    t.boolean "viewport", default: false, null: false
     t.boolean "pivot", default: false, null: false
     t.string "background_color", default: "transparent", null: false
     t.text "inline_styles"

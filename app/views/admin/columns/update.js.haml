@@ -1,3 +1,4 @@
 $('##{dom_id(@column)}').replaceWith("#{j render partial: 'admin/columns/column', object: @column}");
 $('##{dom_id(@column)}').addClass('active');
 $('##{dom_id(@column)}').column_sortable();
+viewportUpdate();

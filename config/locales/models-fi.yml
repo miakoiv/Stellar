@@ -183,6 +183,7 @@ fi:
         view_mode: Oletusnäkymä
       column:
         alignment: Pystytasaus
+        viewport: Tasaa ikkunan korkeuteen
         background_color: Taustaväri
         pivot: Kääntö vaakatasoon mobiilinäytöllä
       component_entry:

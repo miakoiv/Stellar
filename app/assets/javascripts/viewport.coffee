@@ -4,7 +4,7 @@ $.fn.extend
     $(this).css 'min-height', vh
 
 @viewportUpdate = ->
-  $('.section-content.viewport').each ->
+  $('.section .viewport').each ->
     $(this).fillViewport()
 
 $(window).on 'resize', debounce(viewportUpdate)
