@@ -48,11 +48,6 @@ $navbar-inverse-bg: $primary-color !default;
       object-fit: cover;
       object-position: center;
     }
-
-    #dynamic-navbar-breakpoint {
-      position: absolute;
-      bottom: -33vh;
-    }
   }
   .container {
     margin-top: 120px;
@@ -79,6 +74,10 @@ $navbar-inverse-bg: $primary-color !default;
       display: block;
       width: 100%;
     }
+  }
+  #dynamic-navbar-breakpoint {
+    position: absolute;
+    bottom: -33vh;
   }
 }
 
