@@ -342,7 +342,7 @@ class Store < ApplicationRecord
     end
 
     def create_header_and_footer
-      pages.header.create_with(title: "#{name} header").first_or_create
-      pages.footer.create_with(title: "#{name} footer").first_or_create
+      pages.header.first_or_create
+      pages.footer.first_or_create
     end
 end

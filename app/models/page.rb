@@ -79,7 +79,7 @@ class Page < ApplicationRecord
   scope :container, -> { where(purpose: [10, 11, 20, 21, 22]) }
 
   #---
-  validates :title, presence: true
+  validates :title, presence: true, if: :title_required?
   validates :slug, presence: true, uniqueness: {scope: :store}, format: {with: /\A[a-z0-9_-]+\z/}
 
   #---
@@ -158,11 +158,18 @@ class Page < ApplicationRecord
   end
 
   def slugger
-    [:title, [:title, :id]]
+    title_required? ? [:title, [:title, :id]] : purpose
+  end
+
+  def title_required?
+    !(header? || footer?)
+  end
+
+  def internal_title
+    title || human_attribute_value(:purpose)
   end
 
   def to_s
-    return human_attribute_value(:purpose) if header? || footer?
     return front_page.title if continuous? && front_page.present?
     title
   end
@@ -219,8 +226,8 @@ class Page < ApplicationRecord
       show_category_order_path(resource)
     when dropdown? || megamenu?
       children.live.first.path
-    when continuous? && front_page.present?
-      show_page_path(self, trailing_slash: true, anchor: front_page.slug)
+    when continuous?
+      show_page_path(self, trailing_slash: true, anchor: front_page&.slug)
     when portal?
       resource.to_url
     when internal?
