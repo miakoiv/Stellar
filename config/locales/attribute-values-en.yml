@@ -119,6 +119,7 @@ en:
           page_editor: pages
           product_editor: products
           promotion_editor: promotions
+          group_editor: groups
           user_manager: users
           inventory_manage: inventories
           store_admin: store administrator
@@ -136,6 +137,7 @@ en:
           page_editor: page and navigation management
           product_editor: product management
           promotion_editor: promotion management
+          group_editor: group management and addressing
           user_manager: user and privilege management
           inventory_manage: inventory management
           store_admin: store settings and web addresses

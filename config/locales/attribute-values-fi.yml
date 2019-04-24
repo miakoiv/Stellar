@@ -119,6 +119,7 @@ fi:
           page_editor: sivut
           product_editor: tuotteet
           promotion_editor: kampanjat
+          group_editor: ryhmät
           user_manager: käyttäjät
           inventory_manage: varastot
           store_admin: myymäläpäällikkö
@@ -136,6 +137,7 @@ fi:
           page_editor: sivujen ja navigaation hallinta
           product_editor: tuotteiden hallinta
           promotion_editor: kampanjoiden hallinta
+          group_editor: ryhmien hallinta ja osoitteistus
           user_manager: käyttäjien ja käyttöoikeuksien hallinta
           inventory_manage: varastojen hallinta
           store_admin: kaupan asetukset ja verkko-osoitteet

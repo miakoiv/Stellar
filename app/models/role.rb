@@ -12,13 +12,14 @@ class Role < ApplicationRecord
     'store_admin' => {icon: 'user-circle', appearance: 'danger'},
     'third_party' => {icon: 'user-circle-o', appearance: 'danger'},
     'customer_selection' => {icon: 'address-book-o', appearance: 'danger'},
-    'user_manager' => {icon: 'users', appearance: 'success'},
+    'user_manager' => {icon: 'user-o', appearance: 'success'},
     'inventory_manage' => {icon: 'cubes', appearance: 'success'},
     'page_editor' => {icon: 'files-o', appearance: 'info'},
     'product_editor' => {icon: 'cube', appearance: 'info'},
     'category_editor' => {icon: 'sitemap', appearance: 'info'},
     'property_editor' => {icon: 'eyedropper', appearance: 'info'},
     'promotion_editor' => {icon: 'tag', appearance: 'info'},
+    'group_editor' => {icon: 'users', appearance: 'primary'},
     'order_review' => {icon: 'truck', appearance: 'primary'},
     'order_manage' => {icon: 'truck', appearance: 'primary'},
     'reports' => {icon: 'line-chart', appearance: 'primary'},
@@ -52,7 +53,7 @@ class Role < ApplicationRecord
 
   # Roles granted at onboarding new store admins.
   def self.onboarding
-    %w{store_admin user_manager inventory_manage page_editor product_editor category_editor property_editor promotion_editor order_review order_manage reports order_notify correspondence}
+    %w{store_admin user_manager inventory_manage page_editor product_editor category_editor property_editor promotion_editor group_editor order_review order_manage reports order_notify correspondence}
   end
 
   def self.icon_for(name)
