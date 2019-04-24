@@ -4,7 +4,7 @@
   = link_to edit_admin_page_path(page), remote: true do
     .dd-icon= icon(page.icon)
     = page
-    .dd-widget
-      = bootstrap_label(page)
     - unless page.live?
       .dd-widget= icon('eye-slash', title: col(Page, :not_live), data: {toggle: 'tooltip'})
+    .pull-right
+      = bootstrap_label(page)

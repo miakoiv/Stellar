@@ -16,7 +16,8 @@
   background-color: $list-group-bg;
   color: $text-color;
   border: 1px solid $list-group-border;
-  border-radius: $list-group-border-radius;
+  border-top-left-radius: $list-group-border-radius;
+  border-bottom-left-radius: $list-group-border-radius;
 
   &:hover { background-color: $list-group-hover-bg; }
   &.active {
@@ -79,6 +80,7 @@
   margin-top: 10px;
   margin-bottom: -5px;
   padding-left: 56px;
+  margin-right: -11px;
 }
 
 .dd-empty, .dd-placeholder {
