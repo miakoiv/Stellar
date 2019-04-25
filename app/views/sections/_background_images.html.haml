@@ -1,24 +1,20 @@
-- if section.fixed_background?
-  .section-bg-container.fixed-background{style: section.style(:backgroundImage)}
-    .section-bg-overlay{style: section.style(:backgroundColor)}
-- else
-  .section-bg-container
-    - if section.pictures.any?
-      - if section.pictures.count > 1
-        .swiper-container
-          .swiper-wrapper
-            - section.pictures.each do |picture|
-              .swiper-slide
-                = picture_variant_tag picture, :lightbox, class: 'image-bg'
+.section-bg-container{class: section.fixed_background? && 'fixed-background'}
+  - if section.pictures.any?
+    - if section.pictures.count > 1
+      .swiper-container
+        .swiper-wrapper
+          - section.pictures.each do |picture|
+            .swiper-slide
+              = picture_variant_tag picture, :lightbox
 
-        :coffee
-          jQuery ->
-            $section = $('##{dom_id(section)}')
-            new Swiper $section.find('.section-bg-container > .swiper-container'),
-              autoplay:
-                delay: 5000
-              loop: true
-              effect: 'fade'
-      - else
-        = picture_variant_tag section.cover_picture, :lightbox, class: 'image-bg'
-    .section-bg-overlay{style: section.style(:backgroundColor)}
+      :coffee
+        jQuery ->
+          $section = $('##{dom_id(section)}')
+          new Swiper $section.find('.section-bg-container > .swiper-container'),
+            autoplay:
+              delay: 5000
+            loop: true
+            effect: 'fade'
+    - else
+      .image-bg{style: section.style(:backgroundImage)}
+  .section-bg-overlay{style: section.style(:backgroundColor)}

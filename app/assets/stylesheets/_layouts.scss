@@ -55,41 +55,50 @@
 /*
  * Section background image container and color overlay
  */
-.section-bg-container,
-.section-bg-overlay {
+.section-bg-container {
   @include cover-absolute;
-  @include flex-vertical;
+  clip: rect(0, auto, auto, 0);
+  background-color: $body-bg;
 
+  /* Wrapper for single image declared as background image */
+  .image-bg {
+    @include cover-absolute;
+    background-size: cover;
+    background-position: center center;
+  }
+  &.fixed-background .image-bg {
+    position: fixed;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* Swiper container for multiple images */
   .swiper-container {
-    width: 100%;
-    flex-grow: 1;
+    @include cover-absolute;
     z-index: 0;
+  }
+  &.fixed-background .swiper-container {
+    position: fixed;
+    transform: translateZ(0);
+    will-change: transform;
   }
   .swiper-slide {
     @include flex-vertical;
   }
   figure {
-    max-height: 100%;
-    flex-grow: 1;
+    @include cover-absolute;
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
 }
-.section-bg-container { background-color: $body-bg; }
-.section-bg-overlay { background-color: transparent; }
-.image-bg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.section-bg-container.fixed-background {
-  background-size: cover;
-  background-position: center;
-}
-@media (min-width: $screen-sm-min) {
-  .section-bg-container.fixed-background {
-    background-attachment: fixed;
-  }
+.section-bg-overlay {
+  @include cover-absolute;
+  background-color: transparent;
 }
 
 
