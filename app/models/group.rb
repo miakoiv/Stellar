@@ -23,6 +23,9 @@ class Group < ApplicationRecord
   # Orders created by users in this group.
   has_many :user_orders, through: :users, source: :orders, class_name: 'Order'
 
+  has_many :orders_as_billing, class_name: 'Order', foreign_key: :billing_group_id, inverse_of: :billing_group
+  has_many :orders_as_shipping, class_name: 'Order', foreign_key: :shipping_group_id, inverse_of: :shipping_group
+
   has_many :outgoing_order_types, -> (group) { rewhere(source_id: group.self_and_ancestors) }, class_name: 'OrderType', foreign_key: :source_id, inverse_of: :source
   has_many :incoming_order_types, -> (group) { rewhere(destination_id: group.self_and_ancestors) }, class_name: 'OrderType', foreign_key: :destination_id, inverse_of: :destination
 
