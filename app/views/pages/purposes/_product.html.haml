@@ -1,4 +1,4 @@
-%li.has-image{class: active_link_to_class(product.path)}
+%li.has-image{class: is_active_link?(product.path) && 'active mm-active'}
   - cache [navmenu, I18n.locale, :product_page, product] do
     = link_to product.path do
       - if product.resource.cover_picture.present?

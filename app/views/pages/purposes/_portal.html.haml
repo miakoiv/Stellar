@@ -1,4 +1,4 @@
-%li{class: active_link_to_class(portal.path)}
+%li{class: is_active_link?(portal.path) && 'active mm-active'}
   = link_to portal.path do
     .page-title
       = portal
