@@ -35,6 +35,7 @@ body {
   overflow-y: scroll;
   backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
+  font-size: $font-size-large;
 }
 #side-nav.open {
   transform: translateX(100vw);
@@ -652,7 +653,6 @@ body {
 /*
  * Navmenu titles, headers, and icons; nested navmenus
  */
-.navmenu { font-size: $font-size-large; }
 .navmenu-title {
   margin-top: 20px;
   padding: $nav-link-padding;
@@ -679,6 +679,7 @@ body {
 }
 .navmenu-nav { margin-bottom: 0; }
 .navmenu-nav .navmenu-nav { padding-left: 20px; }
+.navmenu .divider { padding: $nav-link-padding; }
 
 
 /*
