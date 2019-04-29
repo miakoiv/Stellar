@@ -1,9 +1,7 @@
 - if dropdown.children_count > 0
   - if navmenu
     %li
-      .navmenu-header
-        = dropdown
-        %span.caret
+      %a.has-arrow{href: '#', role: 'button'}= dropdown
       %ul.nav.navmenu-nav
         - dropdown.children.live.each do |child|
           = render partial: child.to_partial_path, object: child, locals: {navmenu: true}

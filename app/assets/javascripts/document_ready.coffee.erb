@@ -76,6 +76,8 @@ $(document).on 'click', 'a[href="#print"]', (e) ->
 jQuery ->
 
   $(document).initialize()
+
+  $('#side-nav-menu').metisMenu()
   $('.products').masonry_build()
 
   new Clipboard('.clipboard')

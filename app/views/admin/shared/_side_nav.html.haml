@@ -1,21 +1,31 @@
-.navmenu-title= menu_title 'tachometer', t('admin.dashboard.title')
-%ul.nav.navmenu-nav
-  = render partial: 'admin/shared/dashboard_menu'
+%ul#side-nav-menu.nav.navmenu-nav
+  %li
+    %a.navmenu-title.has-arrow{href: '#', role: 'button'}
+      = menu_title 'tachometer', t('admin.dashboard.title')
+    %ul.nav.navmenu-nav
+      = render partial: 'admin/shared/dashboard_menu'
 
-.navmenu-title= menu_title 'cube', t('admin.content.title')
-%ul.nav.navmenu-nav
-  = render partial: 'admin/shared/content_menu'
+  %li
+    %a.navmenu-title.has-arrow{href: '#', role: 'button'}
+      = menu_title 'cube', t('admin.content.title')
+    %ul.nav.navmenu-nav
+      = render partial: 'admin/shared/content_menu'
 
-.navmenu-title= menu_title 'cog', t('admin.configuration.title')
-%ul.nav.navmenu-nav
-  = render partial: 'admin/shared/configuration_menu'
+  %li
+    %a.navmenu-title.has-arrow{href: '#', role: 'button'}
+      = menu_title 'cog', t('admin.configuration.title')
+    %ul.nav.navmenu-nav
+      = render partial: 'admin/shared/configuration_menu'
 
-- if user_signed_in? && !guest?
-  .navmenu-title
-    = bootstrap_label(current_group, icon: 'user', text: '')
-    = current_user.name
-  %ul.nav.navmenu-nav
-    = render partial: 'shared/user_menu'
-- else
-  %ul.nav.navmenu-nav
-    = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
+  %li.divider
+
+  - if user_signed_in? && !guest?
+    %li
+      %a.navmenu-title.has-arrow{href: '#', role: 'button'}
+        = bootstrap_label(current_group, icon: 'user', text: '')
+        = current_user.name
+      %ul.nav.navmenu-nav
+        = render partial: 'shared/user_menu'
+  - else
+    %li
+      = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path

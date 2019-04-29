@@ -49,6 +49,7 @@
 //= require imagesloaded.pkgd.min
 //= require jquery.nestable.min
 //= require masonry.pkgd.min
+//= require metisMenu.min
 //= require numbro.min
 //= require numbro/languages.min
 //= require smooth-scroll.min

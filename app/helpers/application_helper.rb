@@ -49,7 +49,10 @@ module ApplicationHelper
   end
 
   def menu_item(icon, text, path, options = {})
-    active_link_to menu_title(icon, text), path, options.merge(wrap_tag: :li)
+    active = is_active_link?(path)
+    content_tag :li, class: active && 'active mm-active' do
+      link_to menu_title(icon, text), path, options
+    end
   end
 
   def tab_set(id, options = {})
