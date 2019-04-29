@@ -26,7 +26,8 @@ body {
  */
 #side-nav {
   display: block;
-  left: -1*$navmenu-width;
+  left: -100vw;
+  width: 100vw;
   z-index: 1020;
   transform: translateX(0);
   transform: translateX(0) translateZ(0);
@@ -36,8 +37,8 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 #side-nav.open {
-  transform: translateX($navmenu-width);
-  transform: translateX($navmenu-width) translateZ(0);
+  transform: translateX(100vw);
+  transform: translateX(100vw) translateZ(0);
   @include box-shadow(0 0 12px 0 rgba(0,0,0,0.5));
 }
 
@@ -651,6 +652,7 @@ body {
 /*
  * Navmenu titles, headers, and icons; nested navmenus
  */
+.navmenu { font-size: $font-size-large; }
 .navmenu-title {
   margin-top: 20px;
   padding: $nav-link-padding;
