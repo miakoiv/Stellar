@@ -78,6 +78,10 @@ jQuery ->
   $(document).initialize()
 
   $('#side-nav-menu').metisMenu()
+  .on 'shown.metisMenu', (e) ->
+    $(e.target).parent().scrollMenu $('#side-nav')
+  $('#side-nav-menu').find('.active').scrollMenu $('#side-nav')
+
   $('.products').masonry_build()
 
   new Clipboard('.clipboard')

@@ -11,6 +11,12 @@ $.fn.extend
       $target.trigger 'hidden'
       $toggle.removeClass 'is-active'
 
+  scrollMenu: (context) ->
+    position = this.position().top
+    context.animate
+      scrollTop: position - $('#main-nav').height()
+      200
+
 $(document).on 'click', '[data-toggle="offcanvas"]', (e) ->
   $toggle = $(this)
   action = if $toggle.hasClass 'is-active' then 'hide' else 'show'

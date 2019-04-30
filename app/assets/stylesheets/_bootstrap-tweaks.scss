@@ -16,6 +16,7 @@ body {
 .offcanvas { z-index: $zindex-navbar; }
 .offcanvas.open { display: block; }
 .offcanvas .inner-wrap {
+  position: relative;
   padding-top: $main-nav-height;
   padding-bottom: 40px;
 }
