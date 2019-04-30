@@ -343,7 +343,7 @@ body {
   display: flex;
   flex-flow: row nowrap;
 
-  .page-image { margin: -3px 5px -2px -0; }
+  .page-image { margin: -1px 5px -2px 0; }
   img { @extend .box-icon; }
 }
 
@@ -675,7 +675,7 @@ body {
   display: flex;
   flex-flow: row nowrap;
 
-  .page-image { margin: -3px 5px -2px -0; }
+  .page-image { margin: 2px 5px 2px 0; }
   img { @extend .box-icon; }
 }
 .navmenu-nav { margin-bottom: 0; }
