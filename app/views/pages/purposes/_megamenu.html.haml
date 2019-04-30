@@ -1,6 +1,6 @@
 - if megamenu.children_count > 0
   - if navmenu
-    %li
+    %li{class: megamenu.always_expand? && 'mm-active'}
       %a.has-arrow{href: '#', role: 'button'}= megamenu
       %ul.nav.navmenu-nav
         - megamenu.children.live.each do |child|

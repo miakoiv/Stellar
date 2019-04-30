@@ -10,6 +10,9 @@
             = f.check_box :live
         = f.text_field :slug, required: true, help: t('.slug_help_html')
         = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
+        - if @page.can_have_children?
+          = f.form_group do
+            = f.check_box :always_expand
         = f.text_area :description, maxlength: 250, help: t('.description_help_html')
     .panel-footer
       - if @page.can_have_content?

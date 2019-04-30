@@ -369,6 +369,7 @@ en:
         url: Address
         content: Content
         description: Description
+        always_expand: Keep menu opened
       payment:
         order_id: Order
         number: Transaction №

@@ -1,6 +1,6 @@
 - if dropdown.children_count > 0
   - if navmenu
-    %li
+    %li{class: dropdown.always_expand? && 'mm-active'}
       %a.has-arrow{href: '#', role: 'button'}= dropdown
       %ul.nav.navmenu-nav
         - dropdown.children.live.each do |child|

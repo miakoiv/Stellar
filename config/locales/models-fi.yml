@@ -369,6 +369,7 @@ fi:
         url: Osoite
         content: Sisältö
         description: Kuvaus
+        always_expand: Pidä menu avoinna
       payment:
         order_id: Tilaus
         number: Tapahtumanro

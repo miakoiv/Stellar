@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
 
   store :metadata, accessors: [
-    :url, :description
+    :url, :description, :always_expand
   ], coder: JSON
 
   # Pages must be aware of their routes since they may link to anything.
@@ -135,6 +135,11 @@ class Page < ApplicationRecord
 
   def movable?
     !(header? || footer?)
+  end
+
+  alias_method :always_expand?, :always_expand
+  def always_expand=(value)
+    super(['1', 1, true].include?(value))
   end
 
   # Pages needing a resource can be live if the resource is live, or
