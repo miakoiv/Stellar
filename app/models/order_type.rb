@@ -25,6 +25,9 @@ class OrderType < ApplicationRecord
   scope :has_shipping, -> { where(has_shipping: true) }
 
   #---
+  validates :payment_gateway, presence: true, if: -> { has_payment? }
+
+  #---
   def payment_gateway_class
     "PaymentGateway::#{payment_gateway}".constantize
   end
