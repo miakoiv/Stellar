@@ -12,10 +12,11 @@ $.fn.extend
       $toggle.removeClass 'is-active'
 
   scrollMenu: (context) ->
-    position = this.position().top
-    context.animate
-      scrollTop: position - $('#main-nav').height()
-      200
+    if this.length
+      position = this.position().top
+      context.animate
+        scrollTop: position - $('#main-nav').height()
+        200
 
 $(document).on 'click', '[data-toggle="offcanvas"]', (e) ->
   $toggle = $(this)
