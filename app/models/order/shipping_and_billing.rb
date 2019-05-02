@@ -62,10 +62,6 @@ class Order < ApplicationRecord
     store.shipping_methods.where(id: ids)
   end
 
-  def has_payment?
-    order_type.present? && order_type.has_payment?
-  end
-
   def billing_address_components
     [billing_address.address1, billing_address.postalcode, billing_address.city]
   end

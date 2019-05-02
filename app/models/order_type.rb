@@ -29,7 +29,7 @@ class OrderType < ApplicationRecord
 
   #---
   def payment_gateway_class
-    "PaymentGateway::#{payment_gateway}".constantize
+    gateway_class ||= "PaymentGateway::#{payment_gateway}".constantize
   end
 
   def message_stages

@@ -185,7 +185,7 @@ class Order < ApplicationRecord
     assign_number!
     archive!
     if acknowledge and !is_forwarded?
-      email.send(has_payment? ? :receipt : :acknowledge, to: billing_recipient)&.deliver_later
+      email.send(collects_payment? ? :receipt : :acknowledge, to: billing_recipient)&.deliver_later
     end
     export_xml
   end
@@ -220,6 +220,21 @@ class Order < ApplicationRecord
 
   def has_installation?
     order_type.present? && order_type.has_installation?
+  end
+
+  def has_payment?
+    order_type.present? && order_type.has_payment?
+  end
+
+  # Payment is collected if the order type requires payments
+  # and the gateway for that order type actually collects payments.
+  def collects_payment?
+    has_payment? && payment_gateway_class.new(order: self).collect_payment?
+  end
+
+  # Require confirmation at checkout for orders that don't collect payment.
+  def requires_confirmation?
+    !collects_payment?
   end
 
   def paid?
@@ -272,10 +287,10 @@ class Order < ApplicationRecord
   # representation for checkout.coffee to reveal the corresponding form
   # elements.
   def checkout_phase
+    return :complete if complete? || paid?
     return :address  if !valid?
     return :shipping if has_shipping? && shipments.empty?
-    return :payment  if has_payment? && !paid?
-    return :complete
+    return requires_confirmation? ? :confirm : :payment
   end
 
   # Notify users with order_notify role in the destination group.

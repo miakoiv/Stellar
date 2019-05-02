@@ -678,6 +678,7 @@ fi:
       address_panel: Yhteystietosi
       shipping_panel: Toimitustapa
       payment_panel: Maksaminen
+      confirm_panel: Vahvistaminen
       complete_panel: Tilauksen valmistuminen
     continue_shopping: Jatka ostoksia
     back_to_cart: Ostoskoriin

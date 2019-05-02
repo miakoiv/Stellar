@@ -14,10 +14,9 @@ module PaymentGateway
       raise ArgumentError if order.nil?
     end
 
-    # This gateway allows confirming orders without
-    # collecting a payment.
-    def confirm
-      true
+    # This payment gateway doesn't collect actual payments.
+    def collect_payment?
+      false
     end
 
     def to_partial_path

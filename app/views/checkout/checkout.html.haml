@@ -31,7 +31,7 @@
                   = render partial: 'select_shipping_method'
                 .panel-footer
                   = render partial: 'cancel'
-          - if @payment_gateway.present?
+          - if @order.collects_payment?
             .panel.panel-default
               .panel-heading{role: 'tab'}
                 %h4.panel-title= t('checkout.panels.payment_panel')
@@ -40,6 +40,13 @@
                   = render @payment_gateway
                 .panel-footer
                   = render partial: 'cancel'
+          - if @order.requires_confirmation?
+            .panel.panel-default
+              .panel-heading{role: 'tab'}
+                %h4.panel-title= t('checkout.panels.confirm_panel')
+              #confirm-panel.panel-collapse.collapse{role: 'tabpanel'}
+                .panel-body
+                  = render partial: 'confirm'
           .panel.panel-default
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.complete_panel')

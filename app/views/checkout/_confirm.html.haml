@@ -1,0 +1,11 @@
+= bootstrap_form_tag url: confirm_path(@order), html: {id: 'confirm-form'} do |f|
+  .row
+    .col-xs-12.confirm-button
+      = f.button t('checkout.confirm'), class: 'btn btn-block btn-lg btn-primary'
+
+:coffee
+  $('#confirm-form').on 'submit', (e) ->
+    e.preventDefault()
+    request = $.post $(this).attr 'action'
+    request.done (data) ->
+      $('#checkout-form').trigger 'submit.rails'
