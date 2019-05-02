@@ -12,8 +12,9 @@ class CheckoutController < BaseStoreController
   # POST /checkout/1/order_type/2.js
   # Setting an order type allows the user to proceed to checkout.
   def order_type
-    @order.order_type = current_store.order_types.find(params[:order_type_id])
-    @order.save!(validate: false)
+    @order_type = current_store.order_types.find(params[:order_type_id])
+    @order.update_columns(order_type_id: @order_type.id)
+    @order_types = @order.available_order_types
   end
 
   # GET /checkout/1

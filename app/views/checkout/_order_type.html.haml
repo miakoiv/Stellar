@@ -10,19 +10,16 @@
   :coffee
     $('#order-type-form input').on 'change', (e) ->
       $('#order-type-form').trigger 'submit.rails'
-      $('#checkout-button').collapse 'show'
 
-- elsif @order_types.count == 1
-  #checkout-button.collapse{class: order.order_type.present? && 'in'}
-    = link_to checkout_path(order), class: 'btn btn-lg btn-primary' do
-      - if order.quotation?
-        = icon('share', t('store.cart.complete_order'))
-      - else
-        = icon('check-circle', t('store.go_checkout'))
-
+- elsif order.order_type.nil?
   :coffee
     jQuery ->
       request = $.post '#{order_type_path(order)}',
         order_type_id: #{@order_types.first.id}
-      request.done (data) ->
-        $('#checkout-button').collapse 'show'
+
+#checkout-button.collapse{class: order.order_type.present? && 'in'}
+  = link_to checkout_path(order), class: 'btn btn-lg btn-block btn-primary' do
+    - if order.quotation?
+      = icon('share', t('store.cart.complete_order'))
+    - else
+      = icon('check-circle', t('store.go_checkout'))
