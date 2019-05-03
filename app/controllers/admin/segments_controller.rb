@@ -94,7 +94,7 @@ class Admin::SegmentsController < AdminController
       segment_attributes.merge(priority: @column.segments.count)
     )
     respond_to do |format|
-      if @segment.save
+      if @segment.save && @segment.save_inline_styles
         track @segment, @segment.column.section.page, {action: :create}
         format.js { render :create }
       else
