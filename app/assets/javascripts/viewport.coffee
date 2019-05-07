@@ -1,10 +1,10 @@
 $.fn.extend
-  fillViewport: ->
+  initViewport: ->
     vh = $(window).height() - $('#main-nav').outerHeight()
     $(this).css 'min-height', vh
 
 @viewportUpdate = ->
-  $('.section .viewport').each ->
-    $(this).fillViewport()
+  $('.viewport').each ->
+    $(this).initViewport()
 
 $(window).on 'resize', debounce(viewportUpdate)

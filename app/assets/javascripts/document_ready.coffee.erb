@@ -1,13 +1,7 @@
 $.fn.extend
   initialize: ->
-
-    viewportUpdate()
-
-    $('#content-wrap').imagesLoaded ->
-      new SmoothScroll '.nav > .scroll > a'
-      gumshoe.init
-        selector: '#main-nav .nav > .scroll > a'
-        offset: 40
+    $('.viewport', this).each ->
+      $(this).initViewport()
 
     $('.animation', this).AniView
       animateThreshold: 40
@@ -81,6 +75,12 @@ jQuery ->
   .on 'shown.metisMenu', (e) ->
     $(e.target).parent().scrollMenu $('#side-nav')
   $('#side-nav-menu').find('.active').scrollMenu $('#side-nav')
+
+  $('#content-wrap').imagesLoaded ->
+    new SmoothScroll '.nav > .scroll > a'
+    gumshoe.init
+      selector: '#main-nav .nav > .scroll > a'
+      offset: 40
 
   $('.products').masonry_build()
 
