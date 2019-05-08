@@ -265,8 +265,8 @@ $navbar-icon-padding: 12px !default;
     }
   }
   &.editing {
-    .segment-content {
-      outline: 3px dotted $brand-primary;
+    .editable-content {
+      outline: 3px dotted $brand-primary !important;
       outline-offset: 3px;
     }
   }

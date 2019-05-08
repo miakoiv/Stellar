@@ -8,9 +8,10 @@
   bottom: 0;
   left: 0;
 }
-@mixin flex-vertical {
+@mixin flex($flow: row, $wrap: nowrap) {
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: $flow;
+  flex-wrap: $wrap;
 }
 @mixin padding-horizontal($padding: $grid-gutter-width/2) {
   padding-left: $padding;
@@ -27,11 +28,10 @@
  */
 .section { position: relative; }
 .section-content {
-  @include flex-vertical;
+  @include flex(column);
 }
 .section-content > .row {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
   flex-grow: 1;
 
   /* Nuking pseudo elements to work around a Safari glitch */
@@ -83,7 +83,7 @@
     will-change: transform;
   }
   .swiper-slide {
-    @include flex-vertical;
+    @include flex;
   }
   figure {
     @include cover-absolute;
@@ -166,7 +166,7 @@
  * Column flexboxen
  */
 .column {
-  @include flex-vertical;
+  @include flex(column);
   float: none !important;
   max-height: 100%;
 }
@@ -175,14 +175,12 @@
 .column.align-bottom { justify-content: flex-end; }
 .column.align-fill {
   .segment { flex-grow: 1; }
-  .segment-shape:not(.fixed-ratio),
-  .segment-content-wrap { flex-grow: 1; }
 }
 
 /* Column pivoting on mobile viewports */
 @media (max-width: $screen-xs-max) {
   .column.pivot {
-    flex-flow: row wrap;
+    @include flex(row, wrap);
 
     .segment {
       flex: 0 1 50%;
@@ -316,40 +314,54 @@
 
 
 /*
- * Segment content styles
+ * Segment layout elements
  */
 .segment {
   position: relative;
-  @include flex-vertical;
+  @include flex;
+  overflow: visible; // overrides Bootstrap default
+
+    > .av-container {
+      width: 100%;
+      @include flex;
+    }
+}
+.segment-shape {
+  position: relative;
+  width: 100%;
+  @include flex;
 }
 .segment-content-wrap {
   position: relative;
-  @include flex-vertical;
-}
-.segment-content-wrap.jumbotron {
-  padding: 0;
-  border-radius: 0;
-  margin-bottom: 0;
-  background-color: transparent;
+  width: 100%;
+  overflow: hidden;
+  @include flex;
+
+  &.jumbotron {
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    background-color: transparent;
+  }
 }
 .segment-content {
   position: relative;
-  @include flex-vertical;
+  width: 100%;
   z-index: 0;
-}
-.segment-shape {
-  @include flex-vertical;
+  @include flex(column);
+
+  .segment-content-wrap.align-top & { justify-content: flex-start; }
+  .segment-content-wrap.align-middle & { justify-content: center; }
+  .segment-content-wrap.align-bottom & { justify-content: flex-end; }
+  .segment-content-wrap.align-fill & { flex-grow: 1; }
 }
 
 /* Aspect ratios */
 .segment-shape.fixed-ratio {
-  position: relative;
   height: 0 !important;
-  overflow: hidden;
 
   .segment-content-wrap {
     @include cover-absolute;
-    overflow: hidden;
   }
 }
 .segment-shape.shape-viewport { height: auto; }
@@ -363,16 +375,6 @@
 .segment-shape.shape-21-9 { padding-bottom: 42.85714%; }
 .segment-shape.shape-three-one { padding-bottom: 33.33333%; }
 .segment-shape.shape-four-one { padding-bottom: 25%; }
-
-/* Shadows */
-.segment-shape.shadow-light { @include box-shadow(0 1px 1px rgba(0,0,0,0.1)); }
-.segment-shape.shadow-medium { @include box-shadow(0 2px 2px rgba(0,0,0,0.25)); }
-.segment-shape.shadow-heavy { @include box-shadow(0 3px 3px rgba(0,0,0,0.5)); }
-
-/* Content alignment */
-.segment-content-wrap.align-top { justify-content: flex-start; }
-.segment-content-wrap.align-middle { justify-content: center; }
-.segment-content-wrap.align-bottom { justify-content: flex-end; }
 
 /* Insets */
 .segment-content-wrap.inset-quarter { padding: $grid-gutter-width/4; }
@@ -389,9 +391,20 @@
   .segment-content-wrap.inset-double { padding: $grid-gutter-width; }
 }
 
-.segment-content .page-header { margin-top: 0; }
+/* Shadows */
+.segment-shape.shadow-light { @include box-shadow(0 1px 1px rgba(0,0,0,0.1)); }
+.segment-shape.shadow-medium { @include box-shadow(0 2px 2px rgba(0,0,0,0.25)); }
+.segment-shape.shadow-heavy { @include box-shadow(0 3px 3px rgba(0,0,0,0.5)); }
+
+
+/*
+ * Segment content styles
+ */
+.segment-content .page-header {
+  margin-top: 0;
+}
 .segment-content .placeholder {
-  display: flex;
+  @include flex;
   align-items: center;
   justify-content: center;
 
@@ -410,8 +423,8 @@
 .segment-content.promotion,
 .segment-content.department {
   .swiper-container {
-    position: relative;
     flex-grow: 1;
+    position: relative;
   }
   .swiper-slide .product-card {
     max-height: 100%;
@@ -434,64 +447,41 @@
 
 .segment-content.picture,
 .segment-content.gallery {
-  flex-grow: 1;
-  @include flex-vertical;
-
   a {
-    display: block;
+    @include flex;
+  }
+}
+.segment-content.gallery {
+  .gallery-wrap {
     flex-grow: 1;
+    @include flex(row, wrap);
+    justify-content: space-between;
+
+    .gallery-item {
+      @include flex;
+    }
   }
-}
-
-.segment-content.feature {
-  flex-grow: 1;
-  @include flex-vertical;
-
-  .feature-link {
-    @include cover-absolute;
-    overflow: hidden;
-    text-indent: -999px;
-  }
-}
-
-.segment-content-wrap.align-top .segment-content.feature {
-  justify-content: flex-start;
-}
-.segment-content-wrap.align-middle .segment-content.feature {
-  justify-content: center;
-}
-.segment-content-wrap.align-bottom .segment-content.feature {
-  justify-content: flex-end;
 }
 
 .segment-content.picture,
 .segment-content.gallery,
 .segment-content.feature {
-
-  // containers are full size flexboxen to align
-  // sizing-original figures to top/center/bottom
   .image-container,
   .swiper-container {
     flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    @include flex;
 
     &.stacked {
-      position: absolute;
-      top: 0;
-      left: 0;
+      @include cover-absolute;
       z-index: -1;
     }
-    // sizing original gets img-responsive,
-    // other sizings get top center positioning
     figure {
+      flex-grow: 1;
       position: relative;
 
       img {
         @include img-responsive;
         margin: auto;
-        object-position: top;
       }
       figcaption {
         position: absolute;
@@ -503,14 +493,9 @@
         text-align: center;
       }
     }
-    // contain and cover sizings expand both figure and img
-    // to full size to apply object-fit and object-position
-    &.sizing-contain figure,
-    &.sizing-cover figure {
-      width: 100%;
-      height: 100%;
-
-      img {
+    &.sizing-contain,
+    &.sizing-cover {
+      figure img {
         width: 100%;
         height: 100%;
       }
@@ -523,42 +508,12 @@
     padding: 2%;
   }
 }
-.segment-content-wrap.align-middle .segment-content {
-  &.picture, &.gallery, &.feature {
-    .image-container, .swiper-container {
-      align-items: center;
 
-      img { object-position: center; }
-    }
-  }
-}
-.segment-content-wrap.align-bottom .segment-content {
-  &.picture, &.gallery, &.feature {
-    .image-container, .swiper-container {
-      align-items: flex-end;
-
-      img { object-position: bottom; }
-    }
-  }
-}
-.segment-content-wrap.justify-left .segment-content {
-  &.picture, &.gallery, &.feature {
-    .image-container, .swiper-container {
-      justify-content: flex-start;
-
-      figcaption { text-align: left; }
-      img { object-position: left; }
-    }
-  }
-}
-.segment-content-wrap.justify-right .segment-content {
-  &.picture, &.gallery, &.feature {
-    .image-container, .swiper-container {
-      justify-content: flex-end;
-
-      figcaption { text-align: right; }
-      img { object-position: right; }
-    }
+.segment-content.feature {
+  .feature-link {
+    @include cover-absolute;
+    overflow: hidden;
+    text-indent: -999px;
   }
 }
 

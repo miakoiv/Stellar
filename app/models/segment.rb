@@ -43,7 +43,7 @@ class Segment < ApplicationRecord
   #---
   RESOURCE_TYPES = %w{Page Category Promotion Product Department}.freeze
 
-  ALIGNMENTS = %w{align-top align-middle align-bottom}.freeze
+  ALIGNMENTS = %w{align-top align-middle align-bottom align-fill}.freeze
 
   JUSTIFICATIONS = %w{justify-left justify-center justify-right}.freeze
 

@@ -194,10 +194,11 @@ fi:
           'align-top': ylös
           'align-middle': keskelle
           'align-bottom': alas
+          'align-fill': täytä
         image_sizing:
-          'sizing-original': ei sovitusta
+          'sizing-original': ei
           'sizing-contain': sovita
-          'sizing-cover': täytä
+          'sizing-cover': peitä
         inset:
           'inset-none': 0
           'inset-quarter': ¼
