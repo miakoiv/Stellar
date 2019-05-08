@@ -78,7 +78,7 @@ class Admin::SegmentsController < AdminController
         item.update(column: @column, priority: index)
       end
     end
-    head :ok
+    respond_to :js
   end
 
   # GET /admin/segments/1/copy.json
