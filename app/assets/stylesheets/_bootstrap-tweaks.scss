@@ -1116,6 +1116,11 @@ mark {
   max-width: 16.66667%;
   flex: 0 0 16.666667%;
 }
+.grid.grid-columns-8 .grid-item {
+  width: 12.5%;
+  max-width: 12.5%;
+  flex: 0 0 12.5%;
+}
 .grid.grid-columns-12 .grid-item {
   width: 8.333333%;
   max-width: 8.333333%;
@@ -1140,6 +1145,10 @@ mark {
     flex: 0 0 50%;
   }
   .grid.grid-columns-6 .grid-item {
+    width: 50%;
+    flex: 0 0 50%;
+  }
+  .grid.grid-columns-8 .grid-item {
     width: 50%;
     flex: 0 0 50%;
   }
