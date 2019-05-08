@@ -6,6 +6,9 @@ $.fn.extend
     $('.animation', this).AniView
       animateThreshold: 40
 
+    $('.gallery-wrap', this).each ->
+      $(this).initGallery()
+
     $('.gallery', this).each ->
       $(this).magnificPopup
         delegate: '.image-link'

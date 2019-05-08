@@ -521,6 +521,7 @@ en:
         body: Body text
         header: Headline
         subhead: Subhead
+        min_width: Minimum width
         min_height: Height
         grid_columns: Grid columns
         grid_lines: Grid lines

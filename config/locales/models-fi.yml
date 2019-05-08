@@ -521,6 +521,7 @@ fi:
         body: Leipäteksti
         header: Otsikko
         subhead: Alaotsikko
+        min_width: Leveys vähintään
         min_height: Korkeus
         grid_columns: Sarakkeita
         grid_lines: Sarakelinjat

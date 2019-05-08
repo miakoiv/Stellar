@@ -128,7 +128,7 @@ class Admin::SegmentsController < AdminController
         :template, :alignment, :justification,
         :shape, :inset, :foreground_color, :background_color,
         :body, :header, :subhead, :url,
-        :margin_top, :margin_bottom, :min_height,
+        :margin_top, :margin_bottom, :min_width, :min_height,
         :grid_columns, :grid_lines, :grid_disable_xs,
         :hyphens, :masonry, :image_sizing, :thumbnails, :lightbox,
         :max_items, :product_scope, :show_more,

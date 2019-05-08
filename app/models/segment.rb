@@ -4,12 +4,13 @@ class Segment < ApplicationRecord
     :header,          # headline for category, department segments, etc.
     :subhead,         # subhead to the headline
     :url,             # url to external resource, such as video
+    :min_width,       # min width for gallery items, etc.
     :min_height,      # min height for google maps and empty segments
-    :grid_columns,    # column count for grid views like galleries
+    :grid_columns,    # column count for grid views like categories
     :grid_lines,      # enable grid lines between grid elements
     :grid_disable_xs, # disable grid layout on extra small viewports
     :hyphens,         # enable hyphenation for paragraph content
-    :masonry,         # flag to apply masonry to the content grid
+    :masonry,         # enable masonry on product cards
     :image_sizing,    # image sizing options, one of original, contain, cover
     :thumbnails,      # use thumbnails for gallery pictures
     :lightbox,        # link images to lightboxed larger variants
@@ -122,6 +123,7 @@ class Segment < ApplicationRecord
       template: 'text',
       margin_top: 20,
       margin_bottom: 20,
+      min_width: 200,
       image_sizing: 'sizing-contain',
       thumbnails: true,
       shadow: 'shadow-none',
