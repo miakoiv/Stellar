@@ -2,6 +2,8 @@ $.fn.extend
   offcanvas: (action) ->
     $toggle = this
     $target = $(this.data 'target')
+    if action is 'toggle'
+      action = if $target.hasClass 'open' then 'hide' else 'show'
     if action is 'show'
       $target.addClass 'open'
       $target.trigger 'shown'
@@ -20,8 +22,7 @@ $.fn.extend
 
 $(document).on 'click', '[data-toggle="offcanvas"]', (e) ->
   $toggle = $(this)
-  action = if $toggle.hasClass 'is-active' then 'hide' else 'show'
-  $toggle.offcanvas action
+  $toggle.offcanvas 'toggle'
 
 $(document).on 'click', '#side-nav .scroll > a', ->
   $('.offcanvas-toggle').offcanvas 'hide'
