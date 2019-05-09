@@ -511,6 +511,7 @@ en:
         resource_id: Target
         template: Content type
         shape: Block shape
+        stretch: Enable stretch
         margin_top: Top margin
         margin_bottom: Bottom margin
         alignment: Content alignment

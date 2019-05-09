@@ -511,6 +511,7 @@ fi:
         resource_id: Kohde
         template: Sisällön tyyppi
         shape: Lohkon muoto
+        stretch: Venyvä lohko
         margin_top: Ylämarginaali
         margin_bottom: Alamarginaali
         alignment: Sisällön pystytasaus

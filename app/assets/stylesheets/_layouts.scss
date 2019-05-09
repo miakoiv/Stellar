@@ -174,7 +174,8 @@
 .column.align-middle { justify-content: center; }
 .column.align-bottom { justify-content: flex-end; }
 .column.align-fill {
-  .segment { flex-grow: 1; }
+  justify-content: space-between;
+  .segment.stretch:not(.fixed-ratio) { flex-grow: 1; }
 }
 
 /* Column pivoting on mobile viewports */
@@ -357,7 +358,7 @@
 }
 
 /* Aspect ratios */
-.segment-shape.fixed-ratio {
+.fixed-ratio .segment-shape {
   height: 0 !important;
 
   .segment-content-wrap {
