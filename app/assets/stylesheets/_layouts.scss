@@ -348,13 +348,13 @@
 .segment-content {
   position: relative;
   width: 100%;
+  max-height: 100%;
   z-index: 0;
   @include flex(column);
 
   .segment-content-wrap.align-top & { justify-content: flex-start; }
   .segment-content-wrap.align-middle & { justify-content: center; }
   .segment-content-wrap.align-bottom & { justify-content: flex-end; }
-  .segment-content-wrap.align-fill & { flex-grow: 1; }
 }
 
 /* Aspect ratios */
@@ -424,7 +424,6 @@
 .segment-content.promotion,
 .segment-content.department {
   .swiper-container {
-    flex-grow: 1;
     position: relative;
   }
   .swiper-slide .product-card {
@@ -469,19 +468,27 @@
 .segment-content.feature {
   .image-container,
   .swiper-container {
-    flex-grow: 1;
+    max-width: 100%;
     @include flex;
+
+    .justify-left & { justify-content: flex-start; }
+    .justify-center & { justify-content: center; }
+    .justify-right & { justify-content: flex-end; }
 
     &.stacked {
       @include cover-absolute;
       z-index: -1;
     }
+    .swiper-wrapper { height: auto; }
+    .swiper-slide { @include flex; }
     figure {
-      flex-grow: 1;
+      max-width: 100%;
       position: relative;
 
       img {
-        @include img-responsive;
+        display: block;
+        max-width: 100%;
+        height: auto;
         margin: auto;
       }
       figcaption {
@@ -496,13 +503,19 @@
     }
     &.sizing-contain,
     &.sizing-cover {
-      figure img {
+      figure { width: 100%; }
+      img {
         width: 100%;
         height: 100%;
       }
     }
-    &.sizing-contain figure img { object-fit: contain; }
-    &.sizing-cover figure img { object-fit: cover; }
+    &.sizing-contain {
+      img { object-fit: contain; }
+    }
+    &.sizing-cover {
+      flex-grow: 1;
+      img { object-fit: cover; }
+    }
   }
   .thumbnail {
     margin-bottom: 0;
