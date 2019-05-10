@@ -515,6 +515,8 @@ en:
         stretch: Enable stretch
         margin_top: Top margin
         margin_bottom: Bottom margin
+        padding_vertical: Vertical padding
+        padding_horizontal: Horizontal padding
         alignment: Content alignment
         justification: Content justification
         inset: Content inset

@@ -515,6 +515,8 @@ fi:
         stretch: Venyvä lohko
         margin_top: Ylämarginaali
         margin_bottom: Alamarginaali
+        padding_vertical: Pystysuuntainen sisennys
+        padding_horizontal: Vaakasuuntainen sisennys
         alignment: Sisällön pystytasaus
         justification: Sisällön vaakatasaus
         inset: Sisällön sisennys

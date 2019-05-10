@@ -21,6 +21,7 @@ module Styles
       write(:backgroundImage, background_image, true)
       write(:minHeight, min_height)
       write(:margins, margins)
+      write(:padding, padding)
     end
 
     private
@@ -78,6 +79,12 @@ module Styles
             ['margin-top', "#{r.margin_top}px"],
             ['margin-bottom', "#{r.margin_bottom}px"]
           ]
+        end
+      end
+
+      def padding
+        if r.respond_to?(:padding_vertical)
+          [['padding', "#{r.padding_vertical}% #{r.padding_horizontal}%"]]
         end
       end
 
