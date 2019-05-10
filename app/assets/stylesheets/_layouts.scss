@@ -513,7 +513,6 @@
   }
 }
 
-.segment-content.picture,
 .segment-content.feature {
   .image-container,
   .swiper-container {
@@ -522,9 +521,6 @@
       z-index: -1;
     }
   }
-}
-
-.segment-content.feature {
   .feature-link {
     @include cover-absolute;
     overflow: hidden;
