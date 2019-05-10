@@ -343,6 +343,10 @@
     border-radius: 0;
     margin-bottom: 0;
     background-color: transparent;
+
+    @media (max-width: $screen-xs-max) {
+      p { font-size: $font-size-large; }
+    }
   }
 }
 .segment-content {
