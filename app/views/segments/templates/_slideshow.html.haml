@@ -1,0 +1,25 @@
+- has_pictures = slideshow.pictures.any?
+- sizing = slideshow.image_sizing
+
+- cache [:segment_slideshow, slideshow] do
+  .segment-content.slideshow{id: dom_id(slideshow, :content)}
+    - if slideshow.pictures.any?
+      .swiper-container{class: sizing}
+        .swiper-wrapper
+          - slideshow.pictures.each do |slide|
+            .swiper-slide
+              = picture_variant_tag slide do
+                - if slide.caption.present?
+                  %figcaption{style: slideshow.style(:backgroundColor)}
+                    = slide.caption
+    - else
+      = segment_placeholder(slideshow)
+
+  :coffee
+    jQuery ->
+      $segment = $('##{dom_id(slideshow, :content)}')
+      new Swiper $segment.find('.swiper-container'),
+        autoplay:
+          delay: 5000
+        loop: true
+        effect: 'fade'

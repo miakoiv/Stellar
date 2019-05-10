@@ -85,6 +85,7 @@ class Segment < ApplicationRecord
     media: 7,
     picture: 2,
     gallery: 3,
+    slideshow: 8,
     product: 12,
     category: 11,
     promotion: 13,
@@ -185,7 +186,7 @@ class Segment < ApplicationRecord
   end
 
   def has_pictures?
-    picture? || gallery? || media? || feature?
+    picture? || gallery? || slideshow? || media? || feature?
   end
 
   def edit_in_place?

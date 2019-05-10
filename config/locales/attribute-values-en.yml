@@ -176,6 +176,7 @@ en:
           text: text
           picture: picture
           gallery: gallery
+          slideshow: slide show
           google_map: Google map
           video_player: video
           documentation: documentation

@@ -176,6 +176,7 @@ fi:
           text: teksti
           picture: kuva
           gallery: galleria
+          slideshow: diaesitys
           google_map: Google-kartta
           video_player: video
           documentation: dokumentointi

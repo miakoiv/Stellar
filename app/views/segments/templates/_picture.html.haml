@@ -1,41 +1,19 @@
-- has_pictures = picture.pictures.any?
-- swiper = picture.pictures.count > 1
+- cover_picture = picture.cover_picture
 - sizing = picture.image_sizing
 
 - cache [:segment_picture, picture] do
   .segment-content.picture{id: dom_id(picture, :content)}
-    - if has_pictures
-      - if swiper
-        .swiper-container{class: sizing}
-          .swiper-wrapper
-            - picture.pictures.each do |slide|
-              .swiper-slide
-                = picture_variant_tag slide do
-                  - if slide.caption.present?
-                    %figcaption{style: picture.style(:backgroundColor)}
-                      = slide.caption
+    - if cover_picture
+      - picture_with_caption = capture_haml do
+        = picture_variant_tag cover_picture do
+          - if cover_picture.caption.present?
+            %figcaption{style: picture.style(:backgroundColor)}
+              = cover_picture.caption
+      - if picture.url.present?
+        = link_to picture.url, class: "image-container #{sizing}" do
+          = picture_with_caption
       - else
-        - content_for :picture do
-          = picture_variant_tag picture.cover_picture do
-            - if picture.cover_picture.caption.present?
-              %figcaption{style: picture.style(:backgroundColor)}
-                = picture.cover_picture.caption
-        - if picture.url.present?
-          = link_to picture.url, class: "image-container #{sizing}" do
-            = yield :picture
-        - else
-          .image-container
-            = yield :picture
-
+        .image-container{class: sizing}
+          = picture_with_caption
     - else
       = segment_placeholder(picture)
-
-  - if swiper
-    :coffee
-      jQuery ->
-        $segment = $('##{dom_id(picture, :content)}')
-        new Swiper $segment.find('.swiper-container'),
-          autoplay:
-            delay: 5000
-          loop: true
-          effect: 'fade'
