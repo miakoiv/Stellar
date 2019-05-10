@@ -3,7 +3,7 @@
     - if gallery.pictures.any?
       .gallery-wrap{class: gallery.masonry? && 'masonry', data: {min_width: gallery.min_width, gutter: 10}}
         - gallery.pictures.each do |picture|
-          - content_for picture do
+          - gallery_item = capture_haml do
             .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
               = picture_variant_tag picture do
                 - if picture.caption.present?
@@ -11,10 +11,10 @@
                     = picture.caption
           - if gallery.lightbox?
             = link_to picture.image.url(:lightbox, timestamp: false), class: 'gallery-item image-link' do
-              = yield picture
+              = gallery_item
           - else
             .gallery-item
-              = yield picture
+              = gallery_item
 
     - else
       = segment_placeholder(gallery)
