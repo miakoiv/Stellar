@@ -216,6 +216,12 @@ fi:
           'shadow-light': vaalea
           'shadow-medium': keski
           'shadow-heavy': tumma
+        slide_effect:
+          slide: liuku
+          fade: häivytys
+          cube: pyörähdys
+          coverflow: CoverFlow
+          flip: kääntö
         velocity:
           'velocity-slowest': <i class="fa fa-bicycle"></i>
           'velocity-slow': <i class="fa fa-car"></i>

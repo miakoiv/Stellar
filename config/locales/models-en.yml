@@ -531,6 +531,9 @@ en:
         direction: Direction
         jumbotron: Jumbotron
         image_sizing: Image sizing
+        slide_effect: Slide effect
+        slide_delay: Delay between slides
+        slide_speed: Transition duration
         hyphens: Hyphenation
         masonry: Pack rows tightly
         max_items: Max items

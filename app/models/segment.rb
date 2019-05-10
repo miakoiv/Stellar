@@ -14,6 +14,9 @@ class Segment < ApplicationRecord
     :image_sizing,    # image sizing options, one of original, contain, cover
     :thumbnails,      # use thumbnails for gallery pictures
     :lightbox,        # link images to lightboxed larger variants
+    :slide_effect,    # slideshow transition effect
+    :slide_delay,     # slideshow autoplay delay between slides
+    :slide_speed,     # slideshow transition speed
     :max_items,       # number of items to show in category, department segments
     :product_scope,   # product sorting scope in category, department segments
     :show_more,       # flag to include a show more link when max items exceeded
@@ -77,6 +80,8 @@ class Segment < ApplicationRecord
 
   VELOCITIES = %w{velocity-slowest velocity-slow velocity-normal velocity-fast}.freeze
 
+  SLIDE_EFFECTS = %w{slide fade cube coverflow flip}.freeze
+
   CONTENT_CLASSES = %w{OikotieAsunnot}.freeze
 
   #---
@@ -127,6 +132,7 @@ class Segment < ApplicationRecord
       min_width: 200,
       image_sizing: 'sizing-contain',
       thumbnails: true,
+      slide_effect: 'slide',
       shadow: 'shadow-none',
       velocity: 'velocity-slow'
     }
@@ -174,6 +180,10 @@ class Segment < ApplicationRecord
 
   def self.velocity_options
     VELOCITIES.map { |v| [Segment.human_attribute_value(:velocity, v).html_safe, v] }
+  end
+
+  def self.slide_effect_options
+    SLIDE_EFFECTS.map { |e| [Segment.human_attribute_value(:slide_effect, e), e] }
   end
 
   def self.content_class_options

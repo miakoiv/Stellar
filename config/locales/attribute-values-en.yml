@@ -216,6 +216,12 @@ en:
           'shadow-light': light
           'shadow-medium': medium
           'shadow-heavy': heavy
+        slide_effect:
+          slide: slide
+          fade: fade
+          cube: rotate
+          coverflow: CoverFlow
+          flip: flip
         velocity:
           'velocity-slowest': <i class="fa fa-bicycle"></i>
           'velocity-slow': <i class="fa fa-car"></i>

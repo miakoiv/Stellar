@@ -2,7 +2,7 @@
 - sizing = slideshow.image_sizing
 
 - cache [:segment_slideshow, slideshow] do
-  .segment-content.slideshow{id: dom_id(slideshow, :content)}
+  .segment-content.slideshow{id: dom_id(slideshow, :content), data: {effect: slideshow.slide_effect || 'slide', delay: slideshow.slide_delay || 3000, speed: slideshow.slide_speed || 300}}
     - if slideshow.pictures.any?
       .swiper-container{class: sizing}
         .swiper-wrapper
@@ -20,6 +20,8 @@
       $segment = $('##{dom_id(slideshow, :content)}')
       new Swiper $segment.find('.swiper-container'),
         autoplay:
-          delay: 5000
+          delay: $segment.data 'delay'
+          disableOnInteraction: false
         loop: true
-        effect: 'fade'
+        effect: $segment.data 'effect'
+        speed: $segment.data 'speed'

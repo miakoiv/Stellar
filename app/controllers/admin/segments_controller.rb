@@ -131,6 +131,7 @@ class Admin::SegmentsController < AdminController
         :margin_top, :margin_bottom, :min_width, :min_height,
         :grid_columns, :grid_lines, :grid_disable_xs,
         :hyphens, :masonry, :image_sizing, :thumbnails, :lightbox,
+        :slide_effect, :slide_delay, :slide_speed,
         :max_items, :product_scope, :show_more,
         :map_location, :map_marker, :map_zoom, :map_theme,
         :content_class, :content_type,

@@ -531,6 +531,9 @@ fi:
         direction: Suunta
         jumbotron: Jättikoko
         image_sizing: Kuvan sovitus
+        slide_effect: Siirtymän tehoste
+        slide_delay: Tauko siirtymien välillä
+        slide_speed: Siirtymän kesto
         hyphens: Tekstin tavutus
         masonry: Tiivistä rivit
         max_items: Maksimimäärä
