@@ -419,6 +419,56 @@
   min-height: 45px;
 }
 
+/* Image containers, swipers, and image positioning */
+.segment-content .image-container,
+.segment-content .swiper-container {
+  max-width: 100%;
+  @include flex;
+
+  .swiper-wrapper { height: auto; }
+  .swiper-slide { @include flex; }
+
+  .justify-left & { justify-content: flex-start; }
+  .justify-center & { justify-content: center; }
+  .justify-right & { justify-content: flex-end; }
+
+  figure {
+    max-width: 100%;
+    position: relative;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: auto;
+    }
+    figcaption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 5px;
+      font-size: $font-size-small;
+      font-weight: bolder;
+      text-align: center;
+    }
+  }
+  &.sizing-contain,
+  &.sizing-cover {
+    figure { width: 100%; }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &.sizing-contain {
+    img { object-fit: contain; }
+  }
+  &.sizing-cover {
+    flex-grow: 1;
+    img { object-fit: cover; }
+  }
+}
+
 .segment-content.category,
 .segment-content.product,
 .segment-content.promotion,
@@ -445,12 +495,6 @@
   }
 }
 
-.segment-content.picture,
-.segment-content.gallery {
-  a {
-    @include flex;
-  }
-}
 .segment-content.gallery {
   .gallery-wrap {
     flex-grow: 1;
@@ -459,67 +503,24 @@
 
     .gallery-item {
       @include flex;
+
+      .image-container { width: 100%; }
+      .thumbnail {
+        margin-bottom: 0;
+        padding: 2%;
+      }
     }
   }
 }
 
 .segment-content.picture,
-.segment-content.gallery,
 .segment-content.feature {
   .image-container,
   .swiper-container {
-    max-width: 100%;
-    @include flex;
-
-    .justify-left & { justify-content: flex-start; }
-    .justify-center & { justify-content: center; }
-    .justify-right & { justify-content: flex-end; }
-
     &.stacked {
       @include cover-absolute;
       z-index: -1;
     }
-    .swiper-wrapper { height: auto; }
-    .swiper-slide { @include flex; }
-    figure {
-      max-width: 100%;
-      position: relative;
-
-      img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-        margin: auto;
-      }
-      figcaption {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 5px;
-        font-size: $font-size-small;
-        font-weight: bolder;
-        text-align: center;
-      }
-    }
-    &.sizing-contain,
-    &.sizing-cover {
-      figure { width: 100%; }
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    &.sizing-contain {
-      img { object-fit: contain; }
-    }
-    &.sizing-cover {
-      flex-grow: 1;
-      img { object-fit: cover; }
-    }
-  }
-  .thumbnail {
-    margin-bottom: 0;
-    padding: 2%;
   }
 }
 

@@ -15,18 +15,17 @@
                     %figcaption{style: picture.style(:backgroundColor)}
                       = slide.caption
       - else
-        .image-container{class: sizing}
-          - if picture.url.present?
-            = link_to picture.url do
-              = picture_variant_tag picture.cover_picture do
-                - if picture.cover_picture.caption.present?
-                  %figcaption{style: picture.style(:backgroundColor)}
-                    = picture.cover_picture.caption
-          - else
-            = picture_variant_tag picture.cover_picture do
-              - if picture.cover_picture.caption.present?
-                %figcaption{style: picture.style(:backgroundColor)}
-                  = picture.cover_picture.caption
+        - content_for :picture do
+          = picture_variant_tag picture.cover_picture do
+            - if picture.cover_picture.caption.present?
+              %figcaption{style: picture.style(:backgroundColor)}
+                = picture.cover_picture.caption
+        - if picture.url.present?
+          = link_to picture.url, class: "image-container #{sizing}" do
+            = yield :picture
+        - else
+          .image-container
+            = yield :picture
 
     - else
       = segment_placeholder(picture)
