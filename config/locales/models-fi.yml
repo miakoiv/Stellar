@@ -499,6 +499,7 @@ fi:
         gutters: Palstavälit
         swiper: Pyyhkäistävät palstat
         viewport: Tasaa ikkunan korkeuteen
+        reverse: Käänteinen järjestys mobiilinäytöllä
         width: Sisällön leveys
         background_color: Taustaväri
         gradient_color: Liukuväri

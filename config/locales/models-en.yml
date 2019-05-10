@@ -499,6 +499,7 @@ en:
         gutters: Gutters
         swiper: Swipeable columns
         viewport: Use viewport height
+        reverse: Reverse order on mobile
         width: Content width
         background_color: Background color
         gradient_color: Gradient color
