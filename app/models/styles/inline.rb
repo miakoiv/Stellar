@@ -84,7 +84,7 @@ module Styles
 
       def padding
         if r.respond_to?(:padding_vertical)
-          [['padding', "#{r.padding_vertical}% #{r.padding_horizontal}%"]]
+          [['padding', "#{r.padding_vertical}px #{r.padding_horizontal}%"]]
         end
       end
 

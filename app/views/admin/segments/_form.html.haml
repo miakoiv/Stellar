@@ -23,7 +23,7 @@
             %label.btn.btn-default{class: segment.justification == justification && 'active'}
               = f.radio_button_without_bootstrap :justification, justification
               = title
-      = f.range_field :padding_vertical, min: 0, max: 25, step: 1
+      = f.range_field :padding_vertical, min: 0, max: 150, step: 5
       = f.range_field :padding_horizontal, min: 0, max: 25, step: 1
       = f.form_group do
         = f.check_box :jumbotron
