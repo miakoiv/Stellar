@@ -81,9 +81,8 @@ jQuery ->
 
   $('#content-wrap').imagesLoaded ->
     new SmoothScroll '.nav > .scroll > a'
-    gumshoe.init
-      selector: '#main-nav .nav > .scroll > a'
-      offset: 40
+    new Gumshoe '#main-nav .nav > .scroll > a',
+      reflow: true
 
   $('.products').masonry_build()
 
