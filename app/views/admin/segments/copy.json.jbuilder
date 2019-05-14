@@ -8,7 +8,7 @@ json.segment do
   if @segment.pictures.any?
     json.pictures_attributes do
       json.array!(@segment.pictures) do |picture|
-        json.extract! picture, :image_id, :purpose, :caption, :url, :priority
+        json.extract! picture, :image_id, :purpose, :variant, :caption, :url, :priority
       end
     end
   end
