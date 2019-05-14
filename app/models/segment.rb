@@ -113,7 +113,7 @@ class Segment < ApplicationRecord
 
   accepts_nested_attributes_for :pictures
 
-  before_validation :clear_unwanted_attributes
+  before_validation :clear_unwanted_attributes, if: :persisted?
   after_save :schedule_content_update,
     if: -> (segment) { segment.saved_change_to_body? }
 
@@ -266,7 +266,7 @@ class Segment < ApplicationRecord
 
   private
     def clear_unwanted_attributes
-      self.resource_id = nil if will_save_change_to_resource_type?
+      self.resource_id = nil if will_save_change_to_template?
       self.min_height = nil unless has_min_height?
     end
 
