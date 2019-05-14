@@ -3,14 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'click', '.copy-segment', ->
-  key = 'store_#{current_store.slug}_pasteboard'
+  key = 'store_#{current_store.slug}_segment_pasteboard'
   $.get $(this).data 'url'
     .done (data) ->
       serialized = JSON.stringify data
       localStorage.setItem key, serialized
 
 $(document).on 'click', '.paste-segment', ->
-  key = 'store_#{current_store.slug}_pasteboard'
+  key = 'store_#{current_store.slug}_segment_pasteboard'
   serialized = localStorage.getItem key
   if serialized
     $.ajax
