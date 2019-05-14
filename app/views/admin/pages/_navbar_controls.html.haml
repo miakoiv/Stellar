@@ -4,6 +4,9 @@
       = icon('eye', t('actions.show'))
   - if current_user.can_create?(Section, at: current_store)
     = render partial: 'admin/pages/layout_menu'
+    %li
+      %a.paste-section{role: 'button', data: {url: paste_admin_page_sections_path(page)}}
+        = icon('paste', t('.paste'))
   %li
     = link_to edit_admin_page_path(page) do
       = icon('chevron-circle-left', t('actions.back'))

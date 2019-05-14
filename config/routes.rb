@@ -225,8 +225,12 @@ Rails.application.routes.draw do
           get :preload
           get :settings
           patch :modify
+          get :copy
         end
-        post :reorder, on: :collection
+        collection do
+          post :reorder
+          post :paste
+        end
       end
       member do
         get :layout

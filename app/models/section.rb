@@ -53,6 +53,9 @@ class Section < ApplicationRecord
   has_many :columns, dependent: :destroy
   has_many :segments, -> { reorder('columns.priority, segments.priority') }, through: :columns
 
+  accepts_nested_attributes_for :pictures
+  accepts_nested_attributes_for :columns
+
   default_scope { sorted }
   scope :named, -> { where.not(name: nil) }
 
@@ -108,6 +111,13 @@ class Section < ApplicationRecord
       pictures.each do |picture|
         c.pictures << picture.duplicate
       end
+    end
+  end
+
+  def save_inline_styles_recursively
+    save_inline_styles
+    columns.each do |column|
+      column.save_inline_styles_recursively
     end
   end
 

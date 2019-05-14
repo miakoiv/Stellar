@@ -2,9 +2,9 @@ class Admin::SectionsController < AdminController
 
   include Reorderer
 
-  before_action :set_section, only: [:settings, :preload, :update, :modify, :destroy]
+  before_action :set_section, only: [:settings, :preload, :update, :modify, :copy, :destroy]
 
-  authority_actions settings: 'update', reorder: 'update'
+  authority_actions settings: 'update', reorder: 'update', paste: 'create'
 
   # GET /admin/pages/1/sections/create.js
   def create
@@ -53,6 +53,26 @@ class Admin::SectionsController < AdminController
     respond_to :js
   end
 
+  # GET /admin/sections/1/copy.json
+  def copy
+    respond_to :json
+  end
+
+  # POST /admin/pages/1/sections/paste.js
+  def paste
+    @page = current_store.pages.friendly.find(params[:page_id])
+    authorize_action_for @page, at: current_store
+    @section = @page.sections.build(section_attributes.merge(priority: @page.sections.any? ? 1 + @page.sections.maximum(:priority) : 0))
+
+    respond_to do |format|
+      if @section.save && @section.save_inline_styles_recursively
+        format.js { render :create }
+      else
+        format.js { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /admin/sections/1.js
   def destroy
     authorize_action_for @section, at: current_store
@@ -86,5 +106,9 @@ class Admin::SectionsController < AdminController
         :background_color, :fixed_background,
         :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
       )
+    end
+
+    def section_attributes
+      params.require(:section).permit!
     end
 end

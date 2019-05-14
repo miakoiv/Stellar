@@ -13,6 +13,9 @@ class Column < ApplicationRecord
   belongs_to :section, touch: true
   has_many :segments, dependent: :destroy
 
+  accepts_nested_attributes_for :pictures
+  accepts_nested_attributes_for :segments
+
   default_scope { sorted }
 
   #---
@@ -28,6 +31,13 @@ class Column < ApplicationRecord
       segments.each do |segment|
         c.segments << segment.duplicate
       end
+    end
+  end
+
+  def save_inline_styles_recursively
+    save_inline_styles
+    segments.each do |segment|
+      segment.save_inline_styles
     end
   end
 

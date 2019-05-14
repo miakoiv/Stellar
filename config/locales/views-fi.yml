@@ -292,8 +292,10 @@ fi:
           confirm: "Monistetaanko varmasti %{klass} %{name}?"
           proceed: Monista
           cancel: Kumoa
+      navbar_controls:
+        paste: Liitä lohko
       layout_menu:
-        new_section: Uusi lohko
+        new: Uusi lohko
     pictures:
       edit_collection:
         new: Uusi kuva
@@ -393,6 +395,7 @@ fi:
         gradient_center: keskitetty
       section_nav:
         tooltips:
+          copy: Kopioi
           reorder: Järjestele
           settings: Asetukset
           pictures: Kuvat

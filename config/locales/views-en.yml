@@ -281,8 +281,10 @@ en:
           confirm: "Are you sure you want to duplicate %{klass} %{name}?"
           proceed: Duplicate
           cancel: Cancel
+      navbar_controls:
+        paste: Paste section
       layout_menu:
-        new_section: New section
+        new: New section
     pictures:
       edit_collection:
         new: New picture
@@ -382,6 +384,7 @@ en:
         gradient_center: centered
       section_nav:
         tooltips:
+          copy: Copy
           reorder: Reorder
           settings: Settings
           pictures: Pictures
