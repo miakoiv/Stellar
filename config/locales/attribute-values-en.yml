@@ -190,6 +190,7 @@ en:
           content_feed: external content
           navigation_menu: navigation menu
           category_menu: category menu
+          reference: linked content
           raw: ʜᴛᴍʟ snippet
         alignment:
           'align-top': top

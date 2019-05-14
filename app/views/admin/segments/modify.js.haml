@@ -2,3 +2,6 @@ $('##{dom_id(@segment)} .segment-bg-container').replaceWith("#{j render partial:
 $('##{dom_id(@segment)} .segment-content-wrap').replaceWith("#{j render partial: 'admin/segments/content', object: @segment, as: :segment}");
 $('##{dom_id(@segment)}').addClass('active');
 $('##{dom_id(@segment)}').initialize();
+- @segment.referring_segments.each do |reference|
+  $('##{dom_id(reference)}').replaceWith("#{j render partial: 'admin/segments/segment', object: reference}");
+  $('##{dom_id(reference)}').initialize();

@@ -213,6 +213,7 @@ Rails.application.routes.draw do
             collection do
               post :reorder
               post :paste
+              post :refer
             end
           end
           member do

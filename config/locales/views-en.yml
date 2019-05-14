@@ -127,6 +127,7 @@ en:
           pictures: Pictures
           new: New
           paste: Paste
+          refer: Paste as link
     departments:
       index:
         new_department: New department
@@ -426,6 +427,8 @@ en:
           select_page: "[Select page]"
         promotion:
           select_promotion: "[Select promotion]"
+        reference:
+          help: This block shows the contents of another block that was pasted here as a link.
     shipments:
       item:
         inventory: from inventory

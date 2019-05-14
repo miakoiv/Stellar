@@ -5,3 +5,6 @@ $segment = $('##{dom_id(@segment)}');
 $segment.replaceWith("#{j render partial: 'admin/segments/segment', object: @segment}");
 $('##{dom_id(@segment)}').addClass('active');
 $('##{dom_id(@segment)}').initialize();
+- @segment.referring_segments.each do |reference|
+  $('##{dom_id(reference)}').replaceWith("#{j render partial: 'admin/segments/segment', object: reference}");
+  $('##{dom_id(reference)}').initialize();

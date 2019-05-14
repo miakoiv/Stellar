@@ -104,12 +104,14 @@ class Segment < ApplicationRecord
     navigation_menu: 50,
     category_menu: 51,
     empty: 0,
+    reference: 98,
     raw: 99,
   }
 
   #---
   belongs_to :column, touch: true
   belongs_to :resource, polymorphic: true, optional: true
+  has_many :referring_segments, class_name: 'Segment', as: :resource, inverse_of: :resource
 
   accepts_nested_attributes_for :pictures
 
@@ -254,6 +256,28 @@ class Segment < ApplicationRecord
         c.pictures << picture.duplicate
       end
     end
+  end
+
+  # Assign the attributes of this segment to refer to another segment.
+  def refer(another)
+    self.assign_attributes(
+      template: 'reference',
+      shape: another.shape,
+      stretch: another.stretch,
+      alignment: another.alignment,
+      justification: another.justification,
+      margin_top: another.margin_top,
+      margin_bottom: another.margin_bottom,
+      padding_vertical: another.padding_vertical,
+      padding_horizontal: another.padding_horizontal,
+      foreground_color: another.foreground_color,
+      background_color: another.background_color,
+      body: another.body,
+      metadata: another.metadata,
+      content: nil,
+      inline_styles: another.inline_styles
+    )
+    self.resource = another
   end
 
   def to_s

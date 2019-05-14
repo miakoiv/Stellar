@@ -134,6 +134,7 @@ fi:
           pictures: Kuvat
           new: Uusi
           paste: Liitä
+          refer: Liitä linkkinä
     departments:
       index:
         new_department: Uusi osasto
@@ -437,6 +438,8 @@ fi:
           select_page: "[Valitse sivu]"
         promotion:
           select_promotion: "[Valitse kampanja]"
+        reference:
+          help: Tämän linkitetyn lohkon sisältö on toisinto kopioidusta lohkosta.
     shipments:
       item:
         inventory: varastosta

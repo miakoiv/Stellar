@@ -4,7 +4,7 @@ class Admin::SegmentsController < AdminController
 
   before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :copy, :destroy]
 
-  authority_actions reorder: 'update', paste: 'create'
+  authority_actions reorder: 'update', paste: 'create', refer: 'create'
 
   # GET /admin/segments/1.js
   def show
@@ -91,10 +91,29 @@ class Admin::SegmentsController < AdminController
     @column = Column.find(params[:column_id])
     authorize_action_for @column, at: current_store
     @segment = @column.segments.build(
-      segment_attributes.merge(priority: @column.segments.count)
+      segment_attributes.except(:id).merge(priority: @column.segments.count)
     )
     respond_to do |format|
       if @segment.save && @segment.save_inline_styles
+        track @segment, @segment.column.section.page, {action: :create}
+        format.js { render :create }
+      else
+        format.json { render json: @segment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /admin/columns/1/segments/refer.js
+  def refer
+    @column = Column.find(params[:column_id])
+    authorize_action_for @column, at: current_store
+    referred = Segment.find(segment_attributes[:id])
+
+    @segment = @column.segments.build(priority: @column.segments.count)
+    @segment.refer(referred)
+
+    respond_to do |format|
+      if @segment.save
         track @segment, @segment.column.section.page, {action: :create}
         format.js { render :create }
       else

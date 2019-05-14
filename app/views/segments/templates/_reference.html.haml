@@ -1,0 +1,7 @@
+- resource = reference.resource
+
+- if resource.present? && resource.is_a?(Segment)
+  = render partial: resource.to_partial_path, object: resource, locals: {context: :layout}
+- else
+  .segment-content.reference{id: dom_id(reference, :content)}
+    = segment_placeholder(reference)
