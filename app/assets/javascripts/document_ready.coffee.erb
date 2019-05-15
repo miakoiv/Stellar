@@ -80,9 +80,10 @@ jQuery ->
   $('#side-nav-menu').find('.active').scrollMenu $('#side-nav')
 
   $('#content-wrap').imagesLoaded ->
-    new SmoothScroll '.nav > .scroll > a'
-    new Gumshoe '#main-nav .nav > .scroll > a',
-      reflow: true
+    selector = '#main-nav .nav > .scroll > a'
+    if !!document.querySelectorAll(selector).length
+      new SmoothScroll selector
+      new Gumshoe selector, reflow: true
 
   $('.products').masonry_build()
 
