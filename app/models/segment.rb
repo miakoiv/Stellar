@@ -30,6 +30,7 @@ class Segment < ApplicationRecord
     :facebook_token,  # access token for the facebook feed
     :inverse,         # flag to invert things, like colour schemes or layouts
     :shadow,          # drop shadow selection
+    :css_classes,     # additional custom CSS classes
     :jumbotron,       # flag to apply the jumbotron class to segment contents
     :animation,       # animation applied to the segment via AniView
     :velocity,        # animation velocity, one of slowest, slow, normal, fast
@@ -114,6 +115,8 @@ class Segment < ApplicationRecord
   has_many :referring_segments, class_name: 'Segment', as: :resource, inverse_of: :resource
 
   accepts_nested_attributes_for :pictures
+
+  validates :css_classes, format: {with: /\A(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)(?:\s+\g<1>)*\z/}, allow_blank: true
 
   before_validation :clear_unwanted_attributes, if: :persisted?
   after_save :schedule_content_update,

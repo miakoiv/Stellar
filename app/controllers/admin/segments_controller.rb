@@ -158,7 +158,7 @@ class Admin::SegmentsController < AdminController
         :content_class, :content_type,
         :facebook_page, :facebook_token,
         :inverse, :jumbotron, :shadow,
-        :animation, :velocity
+        :css_classes, :animation, :velocity
       )
     end
 

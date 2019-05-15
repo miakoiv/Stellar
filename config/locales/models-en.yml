@@ -547,6 +547,7 @@ en:
         map_zoom: Map zoom
         map_theme: Theme definition
         shadow: Shadow
+        css_classes: Additional ᴄꜱꜱ classes
         content_class: Content source
         content_type: Content type
         facebook_page: Facebook page name

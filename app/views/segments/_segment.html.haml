@@ -1,4 +1,4 @@
-.segment[segment]{class: [segment.template, segment.stretch? && 'stretch', segment.fixed_ratio? && 'fixed-ratio'], style: segment.style(:margins)}
+.segment[segment]{class: [segment.template, segment.stretch? && 'stretch', segment.fixed_ratio? && 'fixed-ratio', segment.css_classes], style: segment.style(:margins)}
   .segment-shape{class: [segment.shape, segment.shadow, segment.animation_class], data: {'av-animation': segment.animation}}
     = render partial: 'segments/background', object: segment, as: :segment
     .segment-content-wrap{class: [segment.alignment, segment.justification, segment.jumbotron? && 'jumbotron'], style: segment.style(:padding, :foregroundColor, :backgroundColor)}

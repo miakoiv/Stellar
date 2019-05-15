@@ -551,6 +551,7 @@ fi:
         facebook_page: Facebook-sivun nimi
         facebook_token: Facebook-pääsykoodi
         shadow: Varjo
+        css_classes: ᴄꜱꜱ-luokat
         url: Sisällön osoite
         thumbnail_size: Diakuvan koko
         thumbnails: Kehystä diakuviksi

@@ -44,6 +44,7 @@
             %label.btn.btn-default{class: segment.velocity == velocity && 'active'}
               = f.radio_button_without_bootstrap :velocity, velocity
               = title
+      = f.text_field :css_classes
 
 :coffee
   $('#segment_template').betterSelectize()
