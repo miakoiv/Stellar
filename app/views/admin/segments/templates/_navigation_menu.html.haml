@@ -1,16 +1,17 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Page'
-  = f.select :resource_id, Page.options_for_select(current_store.pages.container) { |p, l| [indent(p.to_s, l), p.id] }, {include_blank: t('.select_page')}
+  = f.select :resource_id, Page.options_for_select(current_store.pages.container) { |p, l| [indent(p.to_s, l), p.id] }, {include_blank: t('.select_page')}, class: 'input-sm'
   .form-group
     = f.label col(Segment, :inverse), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       %label.btn.btn-default{class: segment.inverse? || 'active'}
         = f.radio_button_without_bootstrap :inverse, 0
         = icon('sticky-note-o')
       %label.btn.btn-default{class: segment.inverse? && 'active'}
         = f.radio_button_without_bootstrap :inverse, 1
         = icon('sticky-note')
-  = f.text_field :header
+  = f.text_field :header, class: 'input-sm'
 
 :coffee
-  $('#segment_resource_id').betterSelectize()
+  $('#segment_resource_id').betterSelectize
+    dropdownParent: null

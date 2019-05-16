@@ -392,9 +392,15 @@ en:
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
     segments:
-      form:
-        fluid_ratio: from content
-        not_animated: not animated
+      settings:
+        layout: Layout
+        design: Design
+        color: Colors
+      panels:
+        layout:
+          fluid_ratio: from content
+        design:
+          not_animated: not animated
       segment_nav:
         tooltips:
           move: Move

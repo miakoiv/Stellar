@@ -1,9 +1,9 @@
 %fieldset
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       - Segment.image_sizing_options.each do |title, size|
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
-  = f.text_field :url, placeholder: 'http://'
+  = f.text_field :url, placeholder: 'http://', class: 'input-sm'

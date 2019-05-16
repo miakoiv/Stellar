@@ -1,4 +1,28 @@
 /*
+ * Layout editor modal panel
+ */
+#layout-modal {
+  overflow: hidden;
+
+  .modal-dialog {
+    margin: 0;
+    font-size: 13px;
+
+    .modal-header { background-color: $modal-header-border-color; }
+
+    .nav-tabs {
+      float: left;
+      margin-top: -54px;
+      border-bottom: 0;
+    }
+    .tab-content { padding-top: 10px; }
+
+    .control-label { font-size: inherit; }
+  }
+}
+
+
+/*
  * Layout editor side panel
  */
 $side-panel-width: 360px !default;

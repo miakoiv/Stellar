@@ -1,6 +1,9 @@
 %fieldset
   = hidden_field_tag :content_mode, true
-  ~ f.text_area_without_bootstrap :body, rows: 10
+  ~ f.text_area :body, rows: 10, skip_label: true
+%fieldset.actions
+  = f.button class: 'btn btn-primary btn-block' do
+    = icon('check', t('actions.save'))
 
 :coffee
   $content = $('#segment_body')[0]

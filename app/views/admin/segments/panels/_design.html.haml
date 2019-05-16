@@ -1,0 +1,26 @@
+#segment-design-panel
+  = bootstrap_form_for [:admin, segment], remote: true, html: {id: 'segment-design-form', class: 'immediate triggered'} do |f|
+    = hidden_field_tag :panel, 'design'
+    %fieldset
+      = f.form_group do
+        = f.check_box :jumbotron
+      .form-group
+        = f.label col(Segment, :shadow), class: 'control-label'
+        .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+          - Segment.shadow_options.each do |title, shadow|
+            %label.btn.btn-default{class: segment.shadow == shadow && 'active'}
+              = f.radio_button_without_bootstrap :shadow, shadow
+              = title
+      = f.select :animation, Segment.animation_options, {include_blank: t('.not_animated')}, {placeholder: t('.not_animated'), class: 'input-sm'}
+      .form-group
+        = f.label col(Segment, :velocity), class: 'control-label'
+        .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+          - Segment.velocity_options.each do |title, velocity|
+            %label.btn.btn-default{class: segment.velocity == velocity && 'active'}
+              = f.radio_button_without_bootstrap :velocity, velocity
+              = title
+      = f.text_field :css_classes, class: 'input-sm'
+
+  :coffee
+    $('#segment_animation').betterSelectize
+      dropdownParent: null

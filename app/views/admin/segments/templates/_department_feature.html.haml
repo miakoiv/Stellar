@@ -1,4 +1,5 @@
 = f.select :resource_id, current_store.departments.map { |d| [d.to_s, d.id] }, {include_blank: t('.select_department')}
 
 :coffee
-  $('#segment_resource_id').betterSelectize()
+  $('#segment_resource_id').betterSelectize
+    dropdownParent: null

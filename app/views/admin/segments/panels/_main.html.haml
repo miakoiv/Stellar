@@ -1,0 +1,8 @@
+#segment-main-panel
+  = bootstrap_form_for [:admin, segment], remote: true, html: {id: 'segment-main-form', class: 'immediate triggered event-hook'} do |f|
+    = hidden_field_tag :panel, 'main'
+    %fieldset
+      = render partial: "admin/#{segment.to_partial_path}", object: segment, as: :segment, locals: {f: f}
+
+  - if content_for?(:supplemental)
+    = yield :supplemental

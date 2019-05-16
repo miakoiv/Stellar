@@ -1716,8 +1716,9 @@ fieldset > legend {
  */
 .CodeMirror {
   @extend .form-control;
-  height: 600px;
-  font-size: 0.8em;
+  height: 400px;
+  background-color: #000;
+  font-size: 13px;
   line-height: 1.2;
 }
 .CodeMirror-focused {

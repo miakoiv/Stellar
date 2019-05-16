@@ -17,6 +17,7 @@
 //= require moment/fi
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widgets/draggable
 //= require jquery-ui/widgets/sortable
 //= require jquery-ui/effect.all
 //= require jquery.sticky-kit

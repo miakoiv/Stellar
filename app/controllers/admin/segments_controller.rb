@@ -15,9 +15,7 @@ class Admin::SegmentsController < AdminController
 
   # GET /admin/segments/1/edit.js
   def edit
-    respond_to do |format|
-      format.js { render @segment.edit_in_place? ? :edit_in_place : :edit }
-    end
+    respond_to :js
   end
 
   # GET /admin/segments/1/settings.js
@@ -48,6 +46,7 @@ class Admin::SegmentsController < AdminController
   def update
     authorize_action_for @segment, at: current_store
     @page = @segment.column.section.page
+    @panel = params[:panel]
     @content_mode = params[:content_mode].presence
     in_place_edit = params[:in_place_edit].presence
 

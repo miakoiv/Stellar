@@ -1,11 +1,11 @@
 %fieldset
   .form-group
     = f.label col(Segment, :direction), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       %label.btn.btn-default{class: segment.inverse? || 'active'}
         = f.radio_button_without_bootstrap :inverse, 0
         = icon('hand-o-left')
       %label.btn.btn-default{class: segment.inverse? && 'active'}
         = f.radio_button_without_bootstrap :inverse, 1
         = icon('hand-o-right')
-  = f.text_field :url, placeholder: 'http://'
+  = f.text_field :url, placeholder: 'http://', class: 'input-sm'

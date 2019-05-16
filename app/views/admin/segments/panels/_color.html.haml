@@ -1,0 +1,20 @@
+#segment-color-panel
+  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
+    %fieldset
+      = f.text_field :foreground_color, class: 'input-sm color'
+    %fieldset
+      = f.text_field :background_color, class: 'input-sm color'
+
+  :coffee
+    $form = $('##{dom_id(segment, :colors)}')
+    $form.find('.color').minicolors
+      theme: 'bootstrap'
+      position: 'bottom left'
+      format: 'rgb'
+      opacity: true
+      keywords: 'transparent'
+      swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+      change: (value) ->
+        $form.trigger 'submit.rails'
+      changeDelay: 500
+      

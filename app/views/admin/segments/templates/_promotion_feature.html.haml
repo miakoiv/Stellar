@@ -1,4 +1,6 @@
-= f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: t('.select_promotion')}
+= f.select :resource_id, current_store.promotions.live.map { |p| [p.name, p.id] }, {include_blank: t('.select_promotion')}, class: 'input-sm'
 
 :coffee
-  $('#segment_resource_id').betterSelectize()
+  $('#segment_resource_id').betterSelectize
+    dropdownParent: null
+    

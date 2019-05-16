@@ -1,12 +1,13 @@
 %fieldset
   = f.hidden_field :resource_type, value: 'Product'
-  = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group', data: {resources: [segment.resource].compact, selected: [segment.resource_id].compact}}
+  = f.select :resource_id, [], {}, {placeholder: t('actions.query'), class: 'selectize-tall selectize-list-group input-sm', data: {resources: [segment.resource].compact, selected: [segment.resource_id].compact}}
 
 :coffee
   $product = $('#segment_resource_id')
   resources = $product.data 'resources'
   selected = $product.data 'selected'
   $product.betterSelectize
+    dropdownParent: null
     remove: true
     options: resources
     items: selected

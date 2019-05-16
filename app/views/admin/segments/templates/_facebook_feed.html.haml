@@ -1,13 +1,13 @@
 %fieldset
-  = f.text_field :facebook_page
-  = f.text_field :facebook_token
+  = f.text_field :facebook_page, class: 'input-sm'
+  = f.text_field :facebook_token, class: 'input-sm'
   .form-group
     = f.label col(Segment, :grid_columns), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       - Segment.grid_columns_options.each do |columns|
         %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
           = f.radio_button_without_bootstrap :grid_columns, columns
           = columns
   = f.form_group do
     = f.check_box :grid_disable_xs
-  = f.number_field :max_items
+  = f.number_field :max_items, class: 'input-sm'

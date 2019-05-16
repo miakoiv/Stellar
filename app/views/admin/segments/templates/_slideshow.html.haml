@@ -1,14 +1,15 @@
 %fieldset
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       - Segment.image_sizing_options.each do |title, size|
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
-  = f.select :slide_effect, Segment.slide_effect_options
-  = f.range_field :slide_delay, min: 500, max: 10000, step: 500
-  = f.range_field :slide_speed, min: 200, max: 2500, step: 100
+  = f.select :slide_effect, Segment.slide_effect_options, {}, class: 'input-sm'
+  = f.range_field :slide_delay, min: 500, max: 10000, step: 500, class: 'input-sm'
+  = f.range_field :slide_speed, min: 200, max: 2500, step: 100, class: 'input-sm'
 
 :coffee
-  $('#segment_slide_effect').betterSelectize()
+  $('#segment_slide_effect').betterSelectize
+    dropdownParent: null

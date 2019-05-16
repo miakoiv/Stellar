@@ -1,8 +1,8 @@
 %fieldset
-  = f.range_field :min_width, min: 40, max: 320, step: 5
+  = f.range_field :min_width, min: 40, max: 320, step: 5, class: 'input-sm'
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
-    .btn-group{data: {toggle: 'buttons'}}
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       - Segment.image_sizing_options.each do |title, size|
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
           = f.radio_button_without_bootstrap :image_sizing, size

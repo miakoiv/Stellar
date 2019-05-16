@@ -1,23 +1,15 @@
-= render partial: 'admin/segments/form', object: segment, as: :segment
+= tab_set 'segment-settings' do
+  = nav_tab 'segment-main', segment, default: true
+  = nav_tab 'segment-layout', t('.layout')
+  = nav_tab 'segment-design', t('.design')
+  = nav_tab 'segment-color', t('.color')
 
-= bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
-  %fieldset
-    = f.text_field :foreground_color, class: 'color'
-  %fieldset
-    = f.text_field :background_color, class: 'color'
-
-:coffee
-  $form = $('##{dom_id(segment, :colors)}')
-  $form.find('.color').minicolors
-    theme: 'bootstrap'
-    position: 'top left'
-    format: 'rgb'
-    opacity: true
-    keywords: 'transparent'
-    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
-    change: (value) ->
-      $form.trigger 'submit.rails'
-    changeDelay: 500
-
-- if content_for?(:supplemental)
-  = yield :supplemental
+.tab-content
+  = tab_pane 'segment-main', default: true do
+    = render partial: 'admin/segments/panels/main', object: segment, as: :segment
+  = tab_pane 'segment-layout' do
+    = render partial: 'admin/segments/panels/layout', object: segment, as: :segment
+  = tab_pane 'segment-design' do
+    = render partial: 'admin/segments/panels/design', object: segment, as: :segment
+  = tab_pane 'segment-color' do
+    = render partial: 'admin/segments/panels/color', object: segment, as: :segment

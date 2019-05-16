@@ -403,9 +403,15 @@ fi:
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     segments:
-      form:
-        fluid_ratio: sisällön mukaan
-        not_animated: ei animaatiota
+      settings:
+        layout: Muotoilu
+        design: Ulkoasu
+        color: Värit
+      panels:
+        layout:
+          fluid_ratio: sisällön mukaan
+        design:
+          not_animated: ei animaatiota
       segment_nav:
         tooltips:
           move: Siirrä
