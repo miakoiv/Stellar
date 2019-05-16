@@ -325,7 +325,6 @@
 .segment-content-wrap {
   position: relative;
   width: 100%;
-  overflow: hidden;
   @include flex;
 
   &.jumbotron {
