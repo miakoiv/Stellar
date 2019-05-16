@@ -25,7 +25,7 @@
         {reorder: $(this).sortable('toArray')}
 
   $(document).on 'pictureable:added pictureable:changed pictureable:removed pictureable:reordered documentable:added documentable:removed documentable:reordered', ->
-    $('#layout-modal').find('.event-hook').trigger 'submit.rails'
+    $('.event-hook').trigger 'submit.rails'
 
   $(document).on 'hidden.bs.modal', (e) ->
     $('.section, .column, .segment').removeClass('active');
