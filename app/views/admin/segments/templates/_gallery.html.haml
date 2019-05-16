@@ -1,5 +1,6 @@
 %fieldset
   = f.range_field :min_width, min: 40, max: 320, step: 5, class: 'input-sm'
+  = f.range_field :gutter, min: 0, max: 50, step: 1, class: 'input-sm'
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
     .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}

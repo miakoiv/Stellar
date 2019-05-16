@@ -1,7 +1,7 @@
 - cache [:segment_gallery, gallery] do
   .segment-content.gallery{id: dom_id(gallery, :content)}
     - if gallery.pictures.any?
-      .gallery-wrap{class: gallery.masonry? && 'masonry', data: {min_width: gallery.min_width, gutter: 10}}
+      .gallery-wrap{class: gallery.masonry? && 'masonry', data: {min_width: gallery.min_width, gutter: gallery.gutter.presence || 10}}
         - gallery.pictures.each do |picture|
           - gallery_item = capture_haml do
             .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}

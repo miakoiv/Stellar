@@ -7,7 +7,7 @@ $.fn.extend
     n = Math.floor (track + gutter) / (minWidth + gutter)
     n = 1 if n < 1
     n = items.length if n > items.length
-    width = (track - gutter * (n - 1)) / n
+    width = Math.floor (track - gutter * (n - 1)) / n
     items.css width: width, marginBottom: gutter
 
     masonry = this.data 'masonry'
