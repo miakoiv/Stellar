@@ -12,7 +12,3 @@
                   %figure= image_tag "layouts/#{layout}.svg"
                 .page-title
                   = name
-
-:coffee
-  $('#layout-menu').on 'shown.bs.dropdown', ->
-    $('#side-panel').removeClass 'open'
