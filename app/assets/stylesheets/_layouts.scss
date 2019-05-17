@@ -576,9 +576,8 @@
     @include flex(column);
   }
   .media-body {
-    display: block;
     flex: 1 1 auto;
-    width: auto;
+    @include flex(column);
   }
   &.media-left {
     padding-right: 0;
@@ -595,6 +594,17 @@
       order: 2;
     }
     .media-body { order: 1; }
+  }
+
+  /* Vertically align media content like segment content */
+  .segment-content-wrap.align-top & {
+    .media-object, .media-body { justify-content: flex-start; }
+  }
+  .segment-content-wrap.align-middle & {
+    .media-object, .media-body { justify-content: center; }
+  }
+  .segment-content-wrap.align-bottom & {
+    .media-object, .media-body { justify-content: flex-end; }
   }
 }
 
