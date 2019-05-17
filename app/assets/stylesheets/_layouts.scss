@@ -252,14 +252,33 @@
     @include make-sm-column(6);
   }
 }
-.six-three-three,
-.three-six-three,
-.three-three-six {
+.six-three-three {
   .column:first-child {
     @include make-xs-column(12);
     @include make-sm-column(6);
   }
   .column:not(:first-child) {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+  }
+}
+.three-six-three {
+  .column:nth-child(2) {
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+  }
+  .column:first-child,
+  .column:last-child {
+    @include make-xs-column(6);
+    @include make-sm-column(3);
+  }
+}
+.three-three-six {
+  .column:last-child {
+    @include make-xs-column(12);
+    @include make-sm-column(6);
+  }
+  .column:not(:last-child) {
     @include make-xs-column(6);
     @include make-sm-column(3);
   }
