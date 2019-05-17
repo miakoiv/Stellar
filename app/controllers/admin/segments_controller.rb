@@ -144,7 +144,7 @@ class Admin::SegmentsController < AdminController
       params.fetch(:segment, {}).permit(
         :resource_id, :resource_type,
         :template, :alignment, :justification,
-        :shape, :stretch, :inset, :foreground_color, :background_color,
+        :shape, :stretch, :foreground_color, :background_color,
         :body, :header, :subhead, :url,
         :margin_top, :margin_bottom,
         :padding_vertical, :padding_horizontal,
