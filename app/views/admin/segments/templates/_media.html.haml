@@ -4,8 +4,19 @@
     .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
       %label.btn.btn-default{class: segment.inverse? || 'active'}
         = f.radio_button_without_bootstrap :inverse, 0
-        = icon('hand-o-left')
+        = icon('photo')
+        = icon('align-left')
       %label.btn.btn-default{class: segment.inverse? && 'active'}
         = f.radio_button_without_bootstrap :inverse, 1
-        = icon('hand-o-right')
+        = icon('align-left')
+        = icon('photo')
+  = f.range_field :width_ratio, min: 5, max: 75, step: 5, class: 'input-sm'
+  = f.range_field :gutter, min: 0, max: 50, step: 1, class: 'input-sm'
+  .form-group
+    = f.label col(Segment, :image_sizing), class: 'control-label'
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+      - Segment.image_sizing_options.each do |title, size|
+        %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
+          = f.radio_button_without_bootstrap :image_sizing, size
+          = title
   = f.text_field :url, placeholder: 'http://', class: 'input-sm'

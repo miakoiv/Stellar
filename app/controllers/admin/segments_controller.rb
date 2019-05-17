@@ -148,7 +148,7 @@ class Admin::SegmentsController < AdminController
         :body, :header, :subhead, :url,
         :margin_top, :margin_bottom,
         :padding_vertical, :padding_horizontal,
-        :min_width, :min_height, :gutter,
+        :min_width, :min_height, :gutter, :width_ratio,
         :grid_columns, :grid_lines, :grid_disable_xs,
         :hyphens, :masonry, :image_sizing, :thumbnails, :lightbox,
         :slide_effect, :slide_delay, :slide_speed,

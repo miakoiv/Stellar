@@ -528,6 +528,7 @@ en:
         min_width: Minimum width
         min_height: Height
         gutter: Gutter
+        width_ratio: Width ratio
         grid_columns: Grid columns
         grid_lines: Grid lines
         grid_disable_xs: Disable grid on mobile

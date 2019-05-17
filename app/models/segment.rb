@@ -6,7 +6,8 @@ class Segment < ApplicationRecord
     :url,             # url to external resource, such as video
     :min_width,       # min width for gallery items, etc.
     :min_height,      # min height for google maps and empty segments
-    :gutter,          # gutter width for galleries
+    :gutter,          # gutter width for galleries and media segments
+    :width_ratio,     # width ratio for media objects
     :grid_columns,    # column count for grid views like categories
     :grid_lines,      # enable grid lines between grid elements
     :grid_disable_xs, # disable grid layout on extra small viewports
@@ -137,6 +138,7 @@ class Segment < ApplicationRecord
       margin_bottom: 20,
       min_width: 200,
       gutter: 10,
+      width_ratio: 25,
       image_sizing: 'sizing-contain',
       thumbnails: true,
       slide_effect: 'slide',

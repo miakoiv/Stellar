@@ -569,52 +569,68 @@
 }
 
 .segment-content.media {
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 
   .media-object {
-    display: block;
-    flex: 0 1 auto;
-    width: auto;
-
-    > a { display: block; }
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
+    flex: 0 0 auto;
+    @include flex(column);
   }
   .media-body {
-    display: flex;
-    flex: 0 1 100%;
-    flex-flow: column nowrap;
+    display: block;
+    flex: 1 1 auto;
     width: auto;
   }
   &.media-left {
     padding-right: 0;
 
     .media-object {
-      margin-right: $grid-gutter-width/2;
+      margin-left: 0 !important;
     }
   }
   &.media-right {
     padding-left: 0;
 
     .media-object {
-      margin-left: $grid-gutter-width/2;
+      margin-right: 0 !important;
       order: 2;
     }
     .media-body { order: 1; }
   }
 }
-.segment-content-wrap.align-top .segment-content.media .media-body {
-  justify-content: flex-start;
-}
-.segment-content-wrap.align-middle .segment-content.media .media-body {
-  justify-content: center;
-}
-.segment-content-wrap.align-bottom .segment-content.media .media-body {
-  justify-content: flex-end;
+
+/* On mobile, turn media to vertical and use justify on the media object */
+@media (max-width: $screen-xs-max) {
+  .segment-content.media {
+    flex-direction: column;
+
+    &.media-left .media-object { margin-bottom: 20px; }
+    &.media-right .media-object { margin-top: 20px; }
+  }
+  .justify-left {
+    .segment-content.media.media-left,
+    .segment-content.media.media-right {
+      .media-object {
+        margin-right: auto !important;
+      }
+    }
+  }
+  .justify-center {
+    .segment-content.media.media-left,
+    .segment-content.media.media-right {
+      .media-object {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+    }
+  }
+  .justify-right {
+    .segment-content.media.media-left,
+    .segment-content.media.media-right {
+      .media-object {
+        margin-left: auto !important;
+      }
+    }
+  }
 }
 
 .segment-content.navigation_menu {
@@ -623,20 +639,6 @@
 
 .segment-content.category_menu {
   .navmenu { width: 100%; }
-}
-@media (max-width: $screen-xs-max) {
-  .segment-content.media {
-    flex-flow: column nowrap;
-
-    &.media-left .media-object {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-    &.media-right .media-object {
-      margin-left: 0;
-      margin-top: 10px;
-    }
-  }
 }
 
 .segment-content.facebook_feed {

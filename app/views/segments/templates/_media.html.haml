@@ -1,12 +1,21 @@
+- cover_picture = media.cover_picture
+- sizing = media.image_sizing
+
 - cache [:segment_media, media] do
   .segment-content.media{id: dom_id(media, :content), class: media.inverse? ? 'media-right' : 'media-left'}
-    - if media.pictures.any?
-      .media-object
+    - if cover_picture
+      - picture_with_caption = capture_haml do
+        = picture_variant_tag cover_picture do
+          - if cover_picture.caption.present?
+            %figcaption{style: media.style(:backgroundColor)}
+              = cover_picture.caption
+      .media-object{style: media.style(:widthRatio, :gutter)}
         - if media.url.present?
-          = link_to media.url do
-            = picture_variant_tag media.cover_picture
+          = link_to media.url, class: "image-container #{sizing}" do
+            = picture_with_caption
         - else
-          = picture_variant_tag media.cover_picture
+          .image-container{class: sizing}
+            = picture_with_caption
     .media-body
       .editable-content{class: media.hyphens? && 'hyphens'}
         - if media.body.present?

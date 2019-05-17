@@ -20,6 +20,8 @@ module Styles
       write(:backgroundColor, background_color)
       write(:backgroundImage, background_image, true)
       write(:minHeight, min_height)
+      write(:gutter, gutter)
+      write(:widthRatio, width_ratio)
       write(:margins, margins)
       write(:padding, padding)
     end
@@ -67,9 +69,24 @@ module Styles
         end
       end
 
+      def width_ratio
+        if r.respond_to?(:width_ratio) && r.width_ratio.present?
+          [['width', "#{r.width_ratio}%"]]
+        end
+      end
+
       def min_height
         if r.respond_to?(:min_height) && r.min_height.present?
           [['min-height', "#{r.min_height}em"]]
+        end
+      end
+
+      def gutter
+        if r.respond_to?(:gutter) && r.gutter.present?
+          [
+            ['margin-left', "#{r.gutter}px"],
+            ['margin-right', "#{r.gutter}px"]
+          ]
         end
       end
 
