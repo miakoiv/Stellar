@@ -201,13 +201,6 @@ fi:
           'sizing-original': ei
           'sizing-contain': sovita
           'sizing-cover': peitä
-        inset:
-          'inset-none': 0
-          'inset-quarter': ¼
-          'inset-half': ½
-          'inset-full': 1
-          'inset-extra': 1½
-          'inset-double': 2
         justification:
           'justify-left': vasemmalle
           'justify-center': keskelle

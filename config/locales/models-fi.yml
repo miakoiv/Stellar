@@ -519,7 +519,6 @@ fi:
         padding_horizontal: Vaakasuuntainen sisennys
         alignment: Sisällön pystytasaus
         justification: Sisällön vaakatasaus
-        inset: Sisällön sisennys
         foreground_color: Tekstiväri
         background_color: Taustaväri
         body: Leipäteksti

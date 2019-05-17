@@ -70,8 +70,6 @@ class Segment < ApplicationRecord
 
   IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
 
-  INSETS = %w{inset-none inset-quarter inset-half inset-full inset-extra inset-double}.freeze
-
   SHADOWS = %w{shadow-none shadow-light shadow-medium shadow-heavy}.freeze
 
   ANIMATIONS = %w{
@@ -173,10 +171,6 @@ class Segment < ApplicationRecord
 
   def self.image_sizing_options
     IMAGE_SIZES.map { |s| [Segment.human_attribute_value(:image_sizing, s), s] }
-  end
-
-  def self.inset_options
-    INSETS.map { |i| [Segment.human_attribute_value(:inset, i), i] }
   end
 
   def self.shadow_options
