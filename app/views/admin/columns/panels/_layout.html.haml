@@ -1,9 +1,9 @@
-.column-form
-  = bootstrap_form_for [:admin, column], remote: true, html: {class: 'immediate triggered'} do |f|
+#column-layout-panel
+  = bootstrap_form_for [:admin, column], remote: true, html: {id: 'column-layout-form', class: 'immediate triggered'} do |f|
     %fieldset
       .form-group
         = f.label col(Column, :alignment), class: 'control-label'
-        .btn-group{data: {toggle: 'buttons'}}
+        .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
           - Column.alignment_options.each do |title, alignment|
             %label.btn.btn-default{class: @column.alignment == alignment && 'active'}
               = f.radio_button_without_bootstrap :alignment, alignment

@@ -1,18 +1,9 @@
-= render partial: 'admin/columns/form', object: column, as: :column
+= tab_set 'column-settings' do
+  = nav_tab 'column-layout', t('.layout'), default: true
+  = nav_tab 'column-color', t('.color')
 
-= bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors)} do |f|
-  %fieldset
-    = f.text_field :background_color, class: 'color'
-
-:coffee
-  $form = $('##{dom_id(column, :colors)}')
-  $form.find('.color').minicolors
-    theme: 'bootstrap'
-    position: 'bottom left'
-    format: 'rgb'
-    opacity: true
-    keywords: 'transparent'
-    swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
-    change: (value) ->
-      $form.trigger 'submit.rails'
-    changeDelay: 500
+.tab-content
+  = tab_pane 'column-layout', default: true do
+    = render partial: 'admin/columns/panels/layout', object: column, as: :column
+  = tab_pane 'column-color' do
+    = render partial: 'admin/columns/panels/color', object: column, as: :column

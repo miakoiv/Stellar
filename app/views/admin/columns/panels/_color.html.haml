@@ -1,11 +1,10 @@
-#segment-color-panel
-  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
+#column-color-panel
+  = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors)} do |f|
     %fieldset
-      = f.text_field :foreground_color, class: 'input-sm color'
       = f.text_field :background_color, class: 'input-sm color'
 
   :coffee
-    $form = $('##{dom_id(segment, :colors)}')
+    $form = $('##{dom_id(column, :colors)}')
     $form.find('.color').minicolors
       theme: 'bootstrap'
       position: 'bottom left'

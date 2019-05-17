@@ -1,0 +1,21 @@
+#section-layout-panel
+  = bootstrap_form_for [:admin, section], remote: true, html: {id: 'section-layout-form', class: 'immediate triggered'} do |f|
+    %fieldset
+      = f.select :layout, section.layout_options, {}, class: 'input-sm'
+      = f.form_group do
+        = f.check_box :gutters
+      = f.form_group do
+        = f.check_box :swiper
+      = f.form_group do
+        = f.check_box :reverse
+      = f.form_group do
+        = f.check_box :viewport
+      = f.form_group do
+        = f.check_box :fixed_background
+      = f.select :width, Section.width_options, {}, class: 'input-sm'
+
+  :coffee
+    $('#section_layout').betterSelectize
+      dropdownParent: null
+    $('#section_width').betterSelectize
+      dropdownParent: null

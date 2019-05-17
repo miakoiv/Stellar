@@ -121,6 +121,9 @@ en:
       form:
         edit_page: Edit page
     columns:
+      settings:
+        layout: Layout
+        color: Color
       column_nav:
         tooltips:
           settings: Settings
@@ -379,9 +382,13 @@ en:
       values:
         empty: "[Empty]"
     sections:
-      form:
-        solid_color: "[No gradient]"
-        gradient_center: centered
+      settings:
+        layout: Layout
+        color: Colors
+      panels:
+        color:
+          solid_color: "[No gradient]"
+          gradient_center: centered
       section_nav:
         tooltips:
           copy: Copy

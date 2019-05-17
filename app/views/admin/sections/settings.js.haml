@@ -1,5 +1,9 @@
-$('#editor-panel').destroySelectized();
-$('#editor-panel').html("#{j render partial: 'admin/sections/settings', object: @section, as: :section}");
-$('.section, .column, .segment').removeClass('active');
+$('#layout-modal').remove();
+$("#{j render partial: 'admin/sections/modal'}}").appendTo('body');
+$("#{j render partial: 'admin/sections/settings', object: @section, as: :section}}").appendTo($('#layout-modal .modal-body'));
+var $dialog = $('#layout-modal .modal-dialog');
+$dialog.initialize();
+$('#layout-modal').modal({backdrop: false});
+$dialog.modalPosition();
+$dialog.draggable({handle: '.modal-header'});
 $('##{dom_id(@section)} > .section').addClass('active');
-$('#side-panel').addClass('open');
