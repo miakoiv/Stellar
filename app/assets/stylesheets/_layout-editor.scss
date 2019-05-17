@@ -4,6 +4,19 @@ $navbar-icon-size: 13px !default;
 $navbar-icon-padding: 12px !default;
 $outline-width: 15px !default;
 
+/* Bootstrap modal override to keep the window scrollable */
+body.layout-editor.modal-open {
+  overflow: visible;
+
+  &,
+  #main-nav,
+  #layout-modal,
+  #pictures-modal {
+    padding-right: 0 !important;
+  }
+}
+
+
 /*
  * Layout editor modal panel
  */

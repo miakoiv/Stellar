@@ -11,7 +11,7 @@
     = javascript_include_tag "themes/#{current_theme}"
     = javascript_include_tag 'ckeditor5/ckeditor'
     = javascript_include_tag "ckeditor5/translations/#{I18n.locale}"
-  %body.admin.dual-nav
+  %body.admin.dual-nav.layout-editor
     %nav#side-nav.offcanvas.navmenu.navmenu-inverse.navmenu-fixed-left
       .inner-wrap= render partial: 'admin/shared/side_nav'
     %nav#main-nav.navbar.navbar-inverse.navbar-fixed-top
