@@ -496,6 +496,7 @@ fi:
         edit_style: Tyylit
         default_footer: "[Oletus]"
         slug_help_html: Tunniste luodaan automaattisesti.
+        stock_gateway_help: Valittu varastorajapinta varastoille joissa käytetään ulkopuolista saldokyselyä.
         order_sequence_help_html: "Ensimmäinen tilaus saa tämän arvon plus yksi: <strong>0000</strong> antaa <strong>0001</strong>, <strong>AAA</strong> antaa <strong>AAB</strong>"
     styles:
       edit_modal:

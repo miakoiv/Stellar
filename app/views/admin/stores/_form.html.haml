@@ -99,6 +99,10 @@
                 = f.text_field :pbw_api_key
               .col-md-6
                 = f.text_field :pbw_private_key
+            %hr
+          %fieldset{disabled: locked}
+            = f.select :stock_gateway, Store.stock_gateway_options, {include_blank: true, help: t('.stock_gateway_help')}, {class: 'selectize'}
+            = f.text_field :stock_gateway_token
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)

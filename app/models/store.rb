@@ -24,6 +24,8 @@ class Store < ApplicationRecord
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
+    :stock_gateway,   # stock gateway class, see .stock_gateway_options
+    :stock_gateway_token, # client token to access the stock gateway
     :oikotie_asunnot_api_key,     # Oikotie Asunnot API key
     :oikotie_asunnot_broker_id,   # Oikotie Asunnot broker company id
     :order_sequence, # base value for order numbers if no numbering exists
@@ -159,6 +161,13 @@ class Store < ApplicationRecord
   def self.shipping_gateway_options
     Shipment.available_gateways.map do |gateway|
       ["ShippingGateway::#{gateway}".constantize.model_name.human, gateway]
+    end
+  end
+
+  # Options for stock gateways found in the StockGateway module.
+  def self.stock_gateway_options
+    Inventory.available_gateways.map do |gateway|
+      ["StockGateway::#{gateway}".constantize.model_name.human, gateway]
     end
   end
 

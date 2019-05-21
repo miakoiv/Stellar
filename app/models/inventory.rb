@@ -18,6 +18,11 @@ class Inventory < ApplicationRecord
   validates :name, presence: true
 
   #---
+  def self.available_gateways
+    %w{Kaunotar}
+  end
+
+  #---
   # Finds an item by product and lot code.
   def item_by_product_and_code(product, code)
     items_by_product(product).find_by(code: code)

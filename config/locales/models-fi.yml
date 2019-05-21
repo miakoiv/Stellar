@@ -636,6 +636,8 @@ fi:
         tawkto_site_id: tawk.to -tunnus
         pbw_api_key: Rajapinta-avain
         pbw_private_key: Yksityinen avain
+        stock_gateway: Varastorajapinta
+        stock_gateway_token: Varastorajapinnan avain
         order_sequence: Tilausnumerointi
         inventory_ids: Varastot
         quotation_template_id: Tarjouksen tekstisisältö

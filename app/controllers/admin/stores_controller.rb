@@ -80,6 +80,7 @@ class Admin::StoresController < AdminController
         :disable_shipment_transfers, :tracking_code, :maps_api_key,
         :facebook_access_token, :facebook_pixel_id,
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
+        :stock_gateway, :stock_gateway_token,
         :quotation_template_id, :footer_page_id,
         :csv_encoding, :csv_product_code,
         :csv_trade_price, :csv_retail_price, :csv_inventory_amount,

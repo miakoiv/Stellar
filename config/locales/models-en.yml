@@ -636,6 +636,8 @@ en:
         tawkto_site_id: tawk.to site
         pbw_api_key: API key
         pbw_private_key: Private key
+        stock_gateway: Stock gateway
+        stock_gateway_token: Stock gateway client token
         order_sequence: Order numbering
         inventory_ids: Inventories
         quotation_template_id: Quotation boilerplate
