@@ -27,7 +27,7 @@
         .premium-teaser.collapse{class: @group.premium_group.present? && 'in'}
           = f.text_field :premium_teaser
     .panel-body
-      - if current_user_has_role?(:superuser) || current_user.can_update?(User, at: current_store)
+      - if current_user_has_role?(:superuser) || current_user.can_create?(User, at: current_store)
         = link_to icon('users', t('.users')), admin_group_users_path(@group), class: 'btn btn-default btn-sm'
       - if current_user.can_update?(@group, at: current_store)
         = link_to icon('address-book', t('.addresses')), admin_addresses_path(gid: @group.to_global_id), remote: true, class: 'btn btn-default btn-sm'
