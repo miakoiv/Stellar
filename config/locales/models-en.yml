@@ -224,6 +224,7 @@ en:
         name: Name
         fuzzy: Approximate quantities
         inventory_code: Inventory code
+        enable_gateway: Enable stock gateway
       inventory_check:
         inventory_id: Inventory
         number: №

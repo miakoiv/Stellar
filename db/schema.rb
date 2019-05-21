@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_17_121839) do
+ActiveRecord::Schema.define(version: 2019_05_21_131144) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -246,6 +246,7 @@ ActiveRecord::Schema.define(version: 2019_05_17_121839) do
     t.boolean "fuzzy", default: false, null: false
     t.string "name"
     t.string "inventory_code"
+    t.boolean "enable_gateway", default: false, null: false
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

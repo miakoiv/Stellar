@@ -90,7 +90,7 @@ class Admin::InventoriesController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_params
       params.require(:inventory).permit(
-        :fuzzy, :name, :inventory_code
+        :fuzzy, :name, :inventory_code, :enable_gateway
       )
     end
 end

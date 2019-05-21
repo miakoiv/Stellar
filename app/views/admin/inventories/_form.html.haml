@@ -6,6 +6,8 @@
         = f.text_field :inventory_code
         = f.form_group do
           = f.check_box :fuzzy
+        = f.form_group do
+          = f.check_box :enable_gateway
       - unless locked
         %fieldset.actions.fixed
           .container

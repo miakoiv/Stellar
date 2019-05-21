@@ -224,6 +224,7 @@ fi:
         name: Nimi
         fuzzy: Epätarkat saldot
         inventory_code: Inventaariokoodi
+        enable_gateway: Käytä varastorajapintaa
       inventory_check:
         inventory_id: Varasto
         number: nro
