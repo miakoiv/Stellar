@@ -35,7 +35,9 @@ class PromotedItem < ApplicationRecord
   def description
     text = promotion.description
     return text if price_cents.nil?
-    text.gsub /%/, "#{discount_percent.to_i}%"
+    text
+      .sub('€', "#{discount}€")
+      .sub('%', "#{discount_percent.to_i}%")
   end
 
   # Calculations should happen when the linked attribute changes but only once.
@@ -65,6 +67,10 @@ class PromotedItem < ApplicationRecord
   # Base prices are according to the target group of the promotion.
   def base_price
     product.send(group.price_method)
+  end
+
+  def discount
+    base_price - price
   end
 
   def to_s
