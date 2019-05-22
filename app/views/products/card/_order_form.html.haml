@@ -4,5 +4,4 @@
     %button.btn.btn-success.btn-sm{type: 'submit'}= icon('cart-plus')
 - else
   %p.text-danger
-    = icon('exclamation-circle')
-    = col(Product, :out_of_stock)
+    = icon('exclamation-circle', title: col(Product, :out_of_stock))
