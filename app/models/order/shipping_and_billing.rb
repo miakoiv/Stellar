@@ -20,7 +20,7 @@ class Order < ApplicationRecord
   end
 
   def should_copy_shipping_address?
-    has_shipping? && !separate_shipping_address?
+    has_shipping? && has_payment? && !separate_shipping_address?
   end
 
   def shipping_address_required?

@@ -184,7 +184,7 @@ class Order < ApplicationRecord
   def complete!(acknowledge = true)
     assign_number!
     archive!
-    if acknowledge and !is_forwarded?
+    if acknowledge && !is_forwarded? && billing_address.present?
       email.send(collects_payment? ? :receipt : :acknowledge, to: billing_recipient)&.deliver_later
     end
     export_xml
