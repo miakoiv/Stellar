@@ -13,8 +13,13 @@ $.fn.extend
       $(this).magnificPopup
         delegate: '.image-link'
         type: 'image'
+        image:
+          titleSrc: 'title'
         gallery:
           enabled: true
+          tPrev: '←'
+          tNext: '→'
+          tCounter: '%curr%/%total%'
 
     $('[data-toggle="tooltip"]', this).tooltip()
     $('[data-toggle="popover"]', this).popover

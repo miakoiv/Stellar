@@ -5,12 +5,9 @@
         - gallery.pictures.each do |picture|
           - gallery_item = capture_haml do
             .image-container{class: [gallery.image_sizing, gallery.thumbnails? && 'thumbnail']}
-              = picture_variant_tag picture do
-                - if picture.caption.present?
-                  %figcaption{style: gallery.style(:backgroundColor)}
-                    = picture.caption
+              = picture_variant_tag picture
           - if gallery.lightbox?
-            = link_to picture.image.url(:lightbox, timestamp: false), class: 'gallery-item image-link' do
+            = link_to picture.image.url(:lightbox, timestamp: false), class: 'gallery-item image-link', title: picture.caption do
               = gallery_item
           - else
             .gallery-item
