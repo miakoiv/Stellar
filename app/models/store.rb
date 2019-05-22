@@ -215,6 +215,14 @@ class Store < ApplicationRecord
     inventories.first
   end
 
+  def stock_gateway_class
+    "StockGateway::#{stock_gateway}".constantize
+  end
+
+  def stock_gateway_singleton
+    @stock_gateway_singleton ||= stock_gateway_class.new(store: self)
+  end
+
   # Returns the first category. See Page#path.
   def first_category
     categories.live.root

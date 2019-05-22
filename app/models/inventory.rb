@@ -79,6 +79,12 @@ class Inventory < ApplicationRecord
     inventory_item
   end
 
+  def stock_query(product)
+    Rails.cache.fetch("stock-#{self}-#{product}", expires_in: 5.minutes) do
+      store.stock_gateway_singleton.stock(product)
+    end
+  end
+
   def to_s
     name
   end

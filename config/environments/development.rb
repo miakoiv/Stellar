@@ -82,6 +82,7 @@ Rails.application.configure do
   config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://apitest.pakettikauppa.fi/'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
+  config.x.kaunotar.api_uri = 'http://pos.test.zetanol.com/api/v1/'
   config.stripe.publishable_key = 'pk_test_HpO1Z1azrRN6l4M35cQSxLCE'
   config.stripe.secret_key = 'sk_test_Ci2RTHLxv2G5K0CVbaDK43Px'
   config.stripe.signing_secret = 'whsec_mqLWeLD1eq8lUzBLy3B6CWPh10ye7QY3'

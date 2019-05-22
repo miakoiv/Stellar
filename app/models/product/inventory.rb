@@ -80,9 +80,13 @@ class Product < ApplicationRecord
 
   private
     # Stock from given inventory, optionally with a specific lot code,
-    # used by #available for calculations.
+    # used by #available for calculations. If gateway is enabled,
+    # query that instead.
     def stock(inventory, lot_code)
       return Float::INFINITY if !tracked_stock?
+      if inventory.enable_gateway?
+        return inventory.stock_query(self)
+      end
       if lot_code.present?
         item = inventory.item_by_product_and_code(self, lot_code)
         return item.present? ? item.available : 0
