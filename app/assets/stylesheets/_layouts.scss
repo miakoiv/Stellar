@@ -375,6 +375,7 @@
 
   .segment-content-wrap {
     @include cover-absolute;
+    overflow: hidden;
   }
 }
 .segment-shape.shape-viewport { height: auto; }
@@ -563,6 +564,7 @@
   .media-body {
     flex: 1 1 auto;
     @include flex(column);
+    width: auto;
   }
   &.media-left {
     padding-right: 0;
