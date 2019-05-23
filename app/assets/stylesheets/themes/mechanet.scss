@@ -305,6 +305,7 @@ $body-tone-bg: darken($body-bg, 4%);
     }
   }
   .description { display: none; }
+  .code { display: none; }
 }
 
 /* Product promotions */
@@ -405,6 +406,8 @@ $body-tone-bg: darken($body-bg, 4%);
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
+
+  .code { display: none; }
 }
 .product-grid .product-text h3,
 .product-card .product-text h3 {

@@ -210,6 +210,7 @@ $navbar-default-link-active-bg: transparent;
                 }
               }
               .description { display: none; }
+              .code { display: none; }
             }
             .promotion { text-align: center; }
           }
@@ -442,6 +443,7 @@ $navbar-default-link-active-bg: transparent;
                     font-size: $font-size-small;
                   }
                 }
+                .code { display: none; }
               }
               .properties {
                 font-size: $font-size-small;

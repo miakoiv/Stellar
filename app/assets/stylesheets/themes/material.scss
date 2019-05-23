@@ -394,6 +394,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
         .small { font-size: $font-size-small; }
       }
       .description { font-size: $font-size-small; }
+      .code {
+        float: right;
+        margin-left: 15px;
+        font-size: 75%;
+      }
     }
     .promotions {
       @include make-xs-column(8);
@@ -556,6 +561,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     margin-top: 5px;
     font-size: $font-size-small;
   }
+}
+.product-grid .product-text .code,
+.product-card .product-text .code {
+  display: none;
 }
 .product-grid .product-text .description { display: none; }
 

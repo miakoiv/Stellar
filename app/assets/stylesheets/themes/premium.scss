@@ -330,6 +330,7 @@ $body-tone-bg: darken($body-bg, 4%);
     font-weight: normal;
   }
 }
+.product-list .product-text .code { display: none; }
 .product-list .product-text .description {
   @include small;
   max-height: 51px;
@@ -477,6 +478,8 @@ $body-tone-bg: darken($body-bg, 4%);
   overflow: hidden;
   margin-top: 10px;
   text-align: center;
+
+  .code { display: none; }
 }
 .product-grid .product-text h3,
 .product-card .product-text h3 {

@@ -184,6 +184,8 @@ $footer-bg: #d4d4d4;
         }
         a {
           display: block;
+          position: relative;
+          padding-bottom: 10px;
           text-decoration: none;
 
           .product-image {
@@ -214,6 +216,12 @@ $footer-bg: #d4d4d4;
               display: block;
               font-size: $font-size-small;
             }
+          }
+          .code {
+            position: absolute;
+            bottom: 5px;
+            font-size: 75%;
+            color: $text-muted;
           }
           .description { display: none; }
           .promotion { display: none; }
@@ -394,6 +402,8 @@ $footer-bg: #d4d4d4;
 
       a {
         display: block;
+        position: relative;
+        padding-bottom: 10px;
         text-decoration: none;
 
         .product-image {
@@ -415,6 +425,12 @@ $footer-bg: #d4d4d4;
               display: block;
               font-size: $font-size-small;
             }
+          }
+          .code {
+            position: absolute;
+            bottom: 5px;
+            font-size: 75%;
+            color: $text-muted;
           }
         }
       }
