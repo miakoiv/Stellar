@@ -3,5 +3,6 @@
     .input-group
       = number_field_tag :amount, 1, min: 1, class: 'form-control'
       %span.input-group-btn
-        %button.btn.btn-default{type: 'submit'}
+        %button.btn.btn-default.add-to-cart{type: 'submit', data: {url: show_product_stock_path(product, default_inventory)}}
           = icon('cart-plus', t('store.add_to_cart'))
+  = render partial: 'products/availability', object: product, as: :product

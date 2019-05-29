@@ -1,4 +1,6 @@
-- if stock_shown? && product.tracked_stock?
-  %dl
-    %dt= default_inventory
-    %dd= icon('cube', product_stock(default_inventory, product))
+%dl
+  %dt= inventory
+  %dd
+    = icon('cube')
+    %span.stock-amount{id: "product-#{product.id}-#{inventory.id}", data: {url: show_product_stock_path(product, inventory)}}
+      = icon('refresh', class: 'fa-spin')

@@ -3,8 +3,9 @@
   - product.component_entries.live.each do |entry|
     %li.list-group-item[entry]
       - if stock_shown? && entry.component.tracked_stock?
-        .stock-amount
-          = icon('cube', product_stock(default_inventory, entry.component))
+        = icon('cube')
+        %span.stock-amount{id: "entry-#{entry.id}", data: {url: show_product_stock_path(entry.component, default_inventory)}}
+          = icon('refresh', class: 'fa-spin')
       = entry.quantity
       ⨉
       %strong= entry.component.title

@@ -1,15 +1,2 @@
 - if can_order? && may_shop_at?(@category) && product.purchasable?
-
-  - if product.out_of_stock?(default_inventory, nil)
-    - if product.back_orderable?
-      %p.text-info
-        = icon('exclamation-circle')
-        = col(Product, :lead_time)
-        = product.lead_time
-    - else
-      %p.text-danger
-        = icon('exclamation-circle')
-        = col(Product, :out_of_stock)
-
-  - if product.orderable?(default_inventory, nil)
-    = render partial: product.modal_ordering? ? 'products/order_modal' : 'products/order_form', object: product, as: :product
+  = render partial: product.modal_ordering? ? 'products/order_modal' : 'products/order_form', object: product, as: :product

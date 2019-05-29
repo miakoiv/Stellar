@@ -1,5 +1,5 @@
 .set-order-amount
-  - if !product.has_variants? && product.orderable?(default_inventory, nil)
+  - if !product.has_variants?
     = form_tag set_order_amount_path(product), method: :post, remote: true, class: 'immediate' do
       .form-group
         = text_field_tag :amount, nil, id: dom_id(product, :set_order_amount), class: 'form-control', tabindex: 1

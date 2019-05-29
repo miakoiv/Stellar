@@ -41,8 +41,9 @@
           - else
             = render partial: 'products/variants_dropdown', object: product, as: :product
 
-      .product-stock
-        = render partial: 'products/stock', object: product, as: :product
+      - if stock_shown? && product.tracked_stock?
+        .product-stock
+          = render partial: 'products/stock', object: product, as: :product, locals: {inventory: default_inventory}
 
     .product-description
       %ul.nav.nav-tabs.nav-sm{role: 'tablist'}
@@ -92,3 +93,14 @@
       .modal-footer
         = link_to cart_path, class: 'btn btn-primary' do
           = icon('shopping-cart', t('store.continue_to_cart'))
+
+:coffee
+  $('.stock-amount').each ->
+    url = $(this).data 'url'
+    data = {update: this.id}
+    $.ajax
+      type: 'GET'
+      url: url
+      data: data
+      dataType: 'script'
+      cache: true

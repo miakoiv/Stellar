@@ -1,0 +1,16 @@
+:coffee
+  $('.add-to-cart').each (i, e) ->
+    url = $(e).data 'url'
+    $(e).addClass 'disabled'
+    $.ajax
+      url: url
+      dataType: 'json'
+    .done (data) ->
+      if data.available > 0
+        $(e).removeClass 'disabled'
+      else
+        if data.backOrder
+          $(e).removeClass 'disabled'
+          $('.back-orderable').collapse 'show'
+        else
+          $('.out-of-stock').collapse 'show'

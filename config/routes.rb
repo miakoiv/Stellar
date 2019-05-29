@@ -79,6 +79,7 @@ Rails.application.routes.draw do
   get  '/checkout/:order_id/receipt', to: 'checkout#receipt', as: :receipt
 
   # Product specific routes.
+  get  '/product/:product_id/stock/:inventory_id', to: 'store#show_product_stock', as: :show_product_stock
   post '/product/:product_id/order', to: 'store#order_product', as: :order_product
   post '/product/:product_id/set_order_amount', to: 'store#set_order_amount', as: :set_order_amount
 

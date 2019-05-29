@@ -42,13 +42,6 @@ class Product < ApplicationRecord
     lead_time.present?
   end
 
-  # Orderable means in stock or back orderable, but stock may not
-  # be enough to satisfy the ordered amount, check #satisfies?
-  # as soon as the amount is known.
-  def orderable?(inventory, lot_code)
-    satisfies?(inventory, lot_code, 1)
-  end
-
   # Check if ordering an amount of product can be satisfied.
   def satisfies?(inventory, lot_code, amount)
     back_orderable? || available?(inventory, lot_code, amount)

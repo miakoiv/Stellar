@@ -158,6 +158,21 @@ class StoreController < BaseStoreController
     redirect_to cart_path, notice: t('.notice')
   end
 
+  # GET /product/:product_id/stock/:inventory_id.json
+  # GET /product/:product_id/stock/:inventory_id.js
+  def show_product_stock
+    find_product
+    @inventory = current_store.inventories.find(params[:inventory_id])
+    @available = @product.available(@inventory, nil)
+
+    respond_to do |format|
+      format.json { render json: {available: @available, backOrder: @product.back_orderable?}}
+      format.js {
+        @update = params[:update]
+      }
+    end
+  end
+
   # POST /product/:product_id/order.js
   def order_product
     @order = shopping_cart
