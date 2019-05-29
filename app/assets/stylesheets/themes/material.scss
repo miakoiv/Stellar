@@ -1230,6 +1230,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 }
 
+/* Emphasize disabled state of buy now buttons */
+.buy-now .disabled { opacity: 0.333; }
 
 /* Nested lists */
 .list-group.nested .toggle { transition: transform 100ms $material-easing; }
