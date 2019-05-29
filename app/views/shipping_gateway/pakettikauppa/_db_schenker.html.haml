@@ -1,4 +1,4 @@
-- postalcode = params[:postalcode] || @order.shipping_postalcode
+- postalcode = params[:postalcode] || @order.shipping_address.postalcode
 - locations = @shipping_gateway.search_pickup_points(postalcode)
 
 #gateway{data: {locations: locations.to_json}}

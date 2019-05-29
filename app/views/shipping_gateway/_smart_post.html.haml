@@ -1,4 +1,4 @@
-- postalcode = params[:postalcode] || @order.shipping_postalcode
+- postalcode = params[:postalcode] || @order.shipping_address.postalcode
 - areacode, locations = @shipping_gateway.smartpost_lookup(postalcode)
 
 #gateway{data: {areacode: areacode.to_json, locations: locations.to_json}}
