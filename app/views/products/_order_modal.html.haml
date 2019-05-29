@@ -1,6 +1,6 @@
 .order-form
   .form-group
-    %button.btn.btn-success.add-to-cart{type: 'button', data: {toggle: 'modal', target: '#order-product-modal', url: show_product_stock_path(product, default_inventory)}}
+    %button.btn.btn-success.add-to-cart{type: 'button', data: {toggle: 'modal', target: '#order-product-modal', url: show_product_stock_path(product, default_inventory), update: '.product-availability'}}
       = icon('cart-plus', t('store.order_modal'))
   = render partial: 'products/availability', object: product, as: :product
 

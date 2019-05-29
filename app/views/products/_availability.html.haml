@@ -1,7 +1,8 @@
-%p.text-info.back-orderable.collapse
-  = icon('exclamation-circle')
-  = col(Product, :lead_time)
-  = product.lead_time
-%p.text-danger.out-of-stock.collapse
-  = icon('exclamation-circle')
-  = col(Product, :out_of_stock)
+.product-availability
+  %p.text-info.back-orderable.collapse
+    = icon('exclamation-circle')
+    = col(Product, :lead_time)
+    = product.lead_time
+  %p.text-danger.out-of-stock.collapse
+    = icon('exclamation-circle')
+    = col(Product, :out_of_stock)

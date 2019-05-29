@@ -1,16 +1,18 @@
 :coffee
   $('.add-to-cart').each (i, e) ->
-    url = $(e).data 'url'
-    $(e).addClass 'disabled'
+    $widget = $(e)
+    $widget.addClass 'disabled'
+    url = $widget.data 'url'
+    update = $widget.data 'update'
     $.ajax
       url: url
       dataType: 'json'
     .done (data) ->
       if data.available > 0
-        $(e).removeClass 'disabled'
+        $widget.removeClass 'disabled'
       else
         if data.backOrder
-          $(e).removeClass 'disabled'
-          $('.back-orderable').collapse 'show'
+          $widget.removeClass 'disabled'
+          if update then $(update).find('.back-orderable').collapse 'show'
         else
-          $('.out-of-stock').collapse 'show'
+          if update then $(update).find('.out-of-stock').collapse 'show'
