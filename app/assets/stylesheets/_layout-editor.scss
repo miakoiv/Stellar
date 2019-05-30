@@ -11,7 +11,7 @@ body.layout-editor.modal-open {
   &,
   #main-nav,
   #layout-modal,
-  #pictures-modal {
+  #media-modal {
     padding-right: 0 !important;
   }
 }
@@ -20,7 +20,7 @@ body.layout-editor.modal-open {
 /*
  * Layout editor modal panel
  */
-#layout-modal, #pictures-modal {
+#layout-modal, #media-modal {
   overflow: hidden;
 
   .modal-dialog {
