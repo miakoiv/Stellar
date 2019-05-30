@@ -744,6 +744,7 @@ en:
   dropzone:
     upload_images: Click to add images, or drop image files here.
     upload_documents: Click to add documents, or drop document files here.
+    upload_video_files: Click to add video files, or drop video files here.
   shipping_gateway:
     pakettikauppa:
       db_schenker:

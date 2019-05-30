@@ -1,0 +1,22 @@
+- id = dom_id(video, :new_video_file)
+- grid_columns ||= 3
+
+.grid.thumbnail-grid{id: dom_id(video, :video_files), class: "grid-columns-#{grid_columns}"}
+  = render partial: 'admin/video_files/edit', collection: video.video_files, as: :video_file
+
+%hr
+= form_for [:admin, video, VideoFile.new], html: {multipart: true, id: id, class: 'dropzone'} do |f|
+  .fallback
+    = f.file_field :attachment
+    = f.submit class: 'btn btn-primary'
+
+:coffee
+  Dropzone.autoDiscover = false
+  $('##{id}').dropzone
+    dictDefaultMessage: "#{I18n.t('dropzone.upload_video_files')}"
+    paramName: 'video_file[attachment]'
+    init: ->
+      @on 'success', (file, video_file) ->
+        $.get '/admin/video_files/' + video_file['id']
+      @on 'complete', (file) ->
+        this.removeFile file

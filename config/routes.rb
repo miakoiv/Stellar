@@ -201,7 +201,9 @@ Rails.application.routes.draw do
       resources :pictures, shallow: true
       resources :sections, shallow: true do
         resources :pictures
-        resources :videos
+        resources :videos do
+          resources :video_files
+        end
         resources :columns do
           resources :pictures
           resources :segments do

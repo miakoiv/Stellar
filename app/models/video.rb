@@ -10,6 +10,7 @@ class Video < ApplicationRecord
 
   #---
   belongs_to :videoable, polymorphic: true
+  has_many :video_files, dependent: :destroy
 
   default_scope { sorted }
 

@@ -756,6 +756,7 @@ fi:
   dropzone:
     upload_images: Napsauta tätä valitaksesi kuvia, tai pudota kuvat tähän.
     upload_documents: Napsauta tätä valitaksesi dokumentteja, tai pudota dokumentit tähän.
+    upload_video_files: Napsauta tätä valitaksesi videotiedostoja, tai pudota tiedostot tähän.
   shipping_gateway:
     pakettikauppa:
       db_schenker:

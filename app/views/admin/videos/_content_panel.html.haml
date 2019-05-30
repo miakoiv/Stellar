@@ -9,5 +9,7 @@
       .col-sm-3
         = f.form_group do
           = f.check_box :muted
+.panel-body
+  = render partial: 'admin/video_files/edit_collection', object: video, as: :video
 .panel-footer
   = link_to icon('trash', t('actions.delete')), admin_video_path(video), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

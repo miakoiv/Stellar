@@ -1,0 +1,9 @@
+.grid-item[video_file]
+  .thumbnail
+    .box-thumbnail= icon('film', class: 'fa-3x')
+  .grid-widgets
+    .pull-right
+      = link_to icon('remove'), admin_video_file_path(video_file), remote: true, method: :delete, class: 'btn btn-xs btn-danger'
+  .badge
+    .truncate{title: video_file.attachment_file_name}
+      = video_file.attachment_file_name

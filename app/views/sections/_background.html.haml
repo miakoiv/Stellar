@@ -1,4 +1,6 @@
 .section-bg-container{class: section.fixed_background? && 'fixed-background'}
+  = render partial: 'sections/video', collection: section.videos, as: :video
+
   - if section.pictures.any?
     - if section.pictures.count > 1
       .swiper-container
