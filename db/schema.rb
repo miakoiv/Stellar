@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_081136) do
+ActiveRecord::Schema.define(version: 2019_05_30_122108) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -895,7 +895,7 @@ ActiveRecord::Schema.define(version: 2019_05_30_081136) do
 
   create_table "videos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.string "videoable_type"
-    t.bigint "videoable_id"
+    t.integer "videoable_id"
     t.string "title"
     t.boolean "loop", default: true, null: false
     t.boolean "muted", default: false, null: false
