@@ -9,6 +9,9 @@
     %li
       = link_to admin_section_pictures_path(section), remote: true, title: t('.tooltips.pictures'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
         = icon('photo', class: 'fa-fw')
+    %li
+      = link_to admin_section_videos_path(section), remote: true, title: t('.tooltips.videos'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
+        = icon('film', class: 'fa-fw')
     %li.info
       %a.copy-section{title: t('.tooltips.copy'), role: 'button', data: {url: copy_admin_section_path(section), toggle: 'tooltip', placement: 'bottom', container: 'body'}}
         = icon('copy', class: 'fa-fw')

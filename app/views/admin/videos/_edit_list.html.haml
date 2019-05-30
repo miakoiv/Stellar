@@ -1,0 +1,18 @@
+- id = dom_id(videoable, :videos)
+
+.panel-group.sortable{id: id}
+  = render partial: 'admin/videos/edit', collection: videoable.videos, as: :video
+
+:coffee
+  $('##{id}').sortable(
+    items: '> .panel'
+    handle: '.handle'
+    placeholder: 'panel sortable-placeholder'
+    axis: 'y'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{admin_reorder_videos_path}',
+      {reorder: $(this).sortable('toArray')},
+      (data, status, xhr) ->
+        $(document).trigger 'videoable:reordered'

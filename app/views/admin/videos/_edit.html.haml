@@ -1,0 +1,9 @@
+.panel.panel-default.sortable[video]
+  .panel-heading.clearfix
+    %span.pull-right
+      %a{role: 'button', data: {toggle: 'collapse'}, href: "##{dom_id(video, :content)}"}
+        = icon('info-circle', class: 'fa-lg')
+    .pull-left= drag_handle
+    %h4.panel-title= video
+  .collapse{id: dom_id(video, :content)}
+    = render partial: 'admin/videos/content_panel', object: video, as: :video

@@ -1,0 +1,4 @@
+= bootstrap_form_for [:modify, :admin, videoable], remote: true, html: {class: 'triggered event-hook'} do
+  %fieldset
+
+= render partial: 'admin/videos/edit_list', object: videoable, as: :videoable

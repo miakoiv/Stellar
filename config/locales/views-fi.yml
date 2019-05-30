@@ -406,6 +406,7 @@ fi:
           reorder: Järjestele
           settings: Asetukset
           pictures: Kuvat
+          videos: Videot
           delete: Poista
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.
@@ -569,6 +570,9 @@ fi:
         new_user: Uusi käyttäjä
       form:
         no_categories: kaikki
+    videos:
+      modal:
+        new_video: Uusi video
   cookieconsent:
     message: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.
     dismiss: Selvä!

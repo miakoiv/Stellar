@@ -147,6 +147,9 @@ en:
       user:
         one: user
         other: users
+      video:
+        one: video
+        other: videos
     attributes:
       activity:
         created_at: Timestamp
@@ -700,6 +703,10 @@ en:
         current_sign_in_ip: IP address
         last_sign_in_ip: IP address
         password_strength: Password strength
+      video:
+        title: Title
+        loop: Loop playback
+        muted: Mute audio
     errors:
       models:
         transfer:

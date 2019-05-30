@@ -147,6 +147,9 @@ fi:
       user:
         one: käyttäjä
         other: käyttäjät
+      video:
+        one: video
+        other: videot
     attributes:
       activity:
         created_at: Aikaleima
@@ -700,6 +703,10 @@ fi:
         current_sign_in_ip: IP-osoite
         last_sign_in_ip: IP-osoite
         password_strength: Salasanan vahvuus
+      video:
+        title: Otsake
+        loop: Jatkuva toisto
+        muted: Hiljennä ääni
     errors:
       models:
         transfer:

@@ -1,0 +1,13 @@
+.panel-body
+  = bootstrap_form_for [:admin, video], namespace: dom_id(video), remote: true, html: {class: 'immediate'} do |f|
+    .row
+      .col-sm-6
+        = f.text_field :title, skip_label: true, class: 'input-sm', placeholder: col(Video, :title)
+      .col-sm-3
+        = f.form_group do
+          = f.check_box :loop
+      .col-sm-3
+        = f.form_group do
+          = f.check_box :muted
+.panel-footer
+  = link_to icon('trash', t('actions.delete')), admin_video_path(video), remote: true, method: :delete, class: 'btn btn-danger btn-sm'

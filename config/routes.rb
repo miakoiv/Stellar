@@ -201,6 +201,7 @@ Rails.application.routes.draw do
       resources :pictures, shallow: true
       resources :sections, shallow: true do
         resources :pictures
+        resources :videos
         resources :columns do
           resources :pictures
           resources :segments do
@@ -303,8 +304,10 @@ Rails.application.routes.draw do
 
     post '/hostnames/reorder', to: 'hostnames#reorder', as: :reorder_hostnames
     post '/pictures/reorder', to: 'pictures#reorder', as: :reorder_pictures
+    post '/videos/reorder', to: 'videos#reorder', as: :reorder_videos
     post '/documents/reorder', to: 'documents#reorder', as: :reorder_documents
     post '/pictures/delete', to: 'pictures#delete', as: :delete_picture
+    post '/videos/delete', to: 'videos#delete', as: :delete_video
     post '/documents/delete', to: 'documents#delete', as: :delete_document
   end
 

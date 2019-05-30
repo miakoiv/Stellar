@@ -395,6 +395,7 @@ en:
           reorder: Reorder
           settings: Settings
           pictures: Pictures
+          videos: Videos
           delete: Delete
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.
@@ -558,6 +559,9 @@ en:
         new_user: New user
       form:
         no_categories: all
+    videos:
+      modal:
+        new_video: New video
   cookieconsent:
     message: This website uses cookies to ensure you get the best experience on our website.
     dismiss: Got it!

@@ -13,6 +13,7 @@ class Section < ApplicationRecord
   include Pictureable
   include Reorderable
   include Stylable
+  include Videoable
 
   #---
   # Presets as layout, name, column count tuples.
