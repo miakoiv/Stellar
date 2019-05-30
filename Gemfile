@@ -83,7 +83,7 @@ gem 'bootstrap-sass', '~> 3.4.0'
 gem 'font-awesome-sass', '~> 4.7.0'
 
 # Image attachments and popups
-gem 'paperclip', '~> 5.3'
+gem 'paperclip', '~> 6.1'
 gem 'fastimage'
 gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
