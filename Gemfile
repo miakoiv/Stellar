@@ -9,7 +9,7 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'with_advisory_lock'
 gem 'yaml_db'
 # Use Haml for markup
-gem 'haml-rails'
+gem 'haml-rails', '~> 2.0'
 gem 'erb2haml', group: :development
 # Use SCSS for stylesheets
 gem 'sassc-rails', '>= 2.0.0'
