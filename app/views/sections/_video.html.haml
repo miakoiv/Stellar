@@ -1,4 +1,4 @@
 .section-bg-overlay
-  %video{autoplay: true, loop: video.loop ? 'true' : 'false', muted: video.muted ? 'true' : 'false'}
+  %video{playsinline: true, autoplay: true, loop: video.loop, muted: video.muted}
     - video.video_files.each do |source|
       %source{src: source.url, type: source.content_type}
