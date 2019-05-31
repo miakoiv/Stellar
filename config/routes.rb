@@ -210,6 +210,7 @@ Rails.application.routes.draw do
             resources :pictures
             resources :documents
             member do
+              get :template
               get :settings
               patch :modify
               get :copy

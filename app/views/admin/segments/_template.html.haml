@@ -1,0 +1,19 @@
+.template-selector
+  - Segment.template_options.each do |title, template|
+    %button.btn.btn-default{class: segment.template == template && 'active', data: {url: admin_segment_path(segment), template: template}}
+      %figure
+        = image_tag "templates/#{template}.svg"
+        %figcaption= title
+
+:coffee
+  $('.template-selector > .btn').on 'click', (e) ->
+    $btn = $(e.currentTarget)
+    $.ajax
+      type: 'PATCH'
+      url: $btn.data 'url'
+      data:
+        segment:
+          template: $btn.data 'template'
+    .done ->
+      $('#layout-modal').remove()
+      $('.segment').removeClass 'active'

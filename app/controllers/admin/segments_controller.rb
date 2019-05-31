@@ -2,7 +2,7 @@ class Admin::SegmentsController < AdminController
 
   include Reorderer
 
-  before_action :set_segment, only: [:show, :edit, :settings, :update, :modify, :copy, :destroy]
+  before_action :set_segment, only: [:show, :edit, :template, :settings, :update, :modify, :copy, :destroy]
 
   authority_actions reorder: 'update', paste: 'create', refer: 'create'
 
@@ -15,6 +15,11 @@ class Admin::SegmentsController < AdminController
 
   # GET /admin/segments/1/edit.js
   def edit
+    respond_to :js
+  end
+
+  # GET /admin/segments/1/template.js
+  def template
     respond_to :js
   end
 
