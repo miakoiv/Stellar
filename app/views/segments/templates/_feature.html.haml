@@ -1,17 +1,17 @@
 - resource = feature.resource
-- pictures = feature.pictures
+- picture = feature.pictures.count > 1 ? feature.pictures.last : nil
+- body = feature.body.presence
 - sizing = feature.image_sizing
 
 - cache [:segment_feature, feature] do
   .segment-content.feature{class: sizing}
-    - if pictures.count > 1
-      - pictures[1..-1].each do |picture|
-        .image-container.stacked{class: sizing}
-          = picture_variant_tag picture
-    .editable-content{class: feature.hyphens? && 'hyphens'}
-      - if feature.body.present?
-        = feature.body.html_safe
-      - else
-        = segment_placeholder(feature)
+    - if picture
+      .image-container{class: sizing}
+        = picture_variant_tag picture
+    - if body
+      .editable-content{class: [picture && 'content-overlay', feature.hyphens? && 'hyphens']}
+        = body.html_safe
+    - if !picture && !body
+      = segment_placeholder(feature)
     - if resource.present?
       = link_to icon('link'), [:show, resource], class: 'feature-link'

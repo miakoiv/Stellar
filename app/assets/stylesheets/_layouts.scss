@@ -519,12 +519,9 @@
 }
 
 .segment-content.feature {
-  .image-container,
-  .swiper-container {
-    &.stacked {
-      @include cover-absolute;
-      z-index: -1;
-    }
+  .content-overlay {
+    position: absolute;
+    width: 100%;
   }
   .feature-link {
     @include cover-absolute;
