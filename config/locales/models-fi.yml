@@ -11,6 +11,8 @@ fi:
       shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
       shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
+      product/uploader/csv: CSV
+      product/uploader/spreadsheetml: Microsoft Office XML
     errors:
       models:
         account/onboarding/backend:
@@ -600,7 +602,7 @@ fi:
         apis: Liitynnät
         new_tax_category: Aseta verotus
         files: Tiedostot
-        product_csv: Tuotteiden CSV-tuonti
+        product_csv: Tuotteiden tuonti
         order_xml: Tilauksien XML-vienti
         superuser: Lisäasetukset
         hostnames: Osoitteet
@@ -645,6 +647,7 @@ fi:
         order_sequence: Tilausnumerointi
         inventory_ids: Varastot
         quotation_template_id: Tarjouksen tekstisisältö
+        product_uploader: Tiedostoformaatti
         csv_encoding: Tiedoston merkistö
         csv_product_code: Tuotekoodisarake
         csv_trade_price: Valmistajan hinta -sarake

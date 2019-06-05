@@ -82,7 +82,7 @@ class Admin::StoresController < AdminController
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
         :stock_gateway, :stock_gateway_token,
         :quotation_template_id, :footer_page_id,
-        :csv_encoding, :csv_product_code,
+        :product_uploader, :csv_encoding, :csv_product_code,
         :csv_trade_price, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :vat_number, :order_sequence,
         :theme, :main_nav_lookup, :detach_menu, :fancy_cart,

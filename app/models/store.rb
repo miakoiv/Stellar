@@ -30,6 +30,7 @@ class Store < ApplicationRecord
     :oikotie_asunnot_broker_id,   # Oikotie Asunnot broker company id
     :order_sequence, # base value for order numbers if no numbering exists
     :quotation_template_id, # page reference to quotation boilerplate
+    :product_uploader,     # Uploader class to use for product data
     :csv_encoding,         # CSV encoding of uploaded files
     :csv_product_code,     # CSV field headers for product code,
     :csv_trade_price,      # trade price,
@@ -171,6 +172,12 @@ class Store < ApplicationRecord
     end
   end
 
+  def self.product_uploader_options
+    Product.available_uploaders.map do |uploader|
+      ["Product::Uploader::#{uploader}".constantize.model_name.human, uploader]
+    end
+  end
+
   # Options for shipping address countries.
   def self.country_options
     @@country_options ||= Country.all.map { |c| [c.name, c.code] }
@@ -221,6 +228,10 @@ class Store < ApplicationRecord
 
   def stock_gateway_singleton
     @stock_gateway_singleton ||= stock_gateway_class.new(store: self)
+  end
+
+  def product_uploader_class
+    "Product::Uploader::#{product_uploader}".constantize
   end
 
   # Returns the first category. See Page#path.

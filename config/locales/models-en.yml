@@ -11,6 +11,8 @@ en:
       shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
       shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
+      product/uploader/csv: CSV
+      product/uploader/spreadsheetml: Microsoft Office XML
     errors:
       models:
         account/onboarding/backend:
@@ -600,7 +602,7 @@ en:
         apis: Interfaces
         new_tax_category: Set taxation
         files: Files
-        product_csv: Product CSV import
+        product_csv: Product data import
         order_xml: Order XML export
         superuser: Advanced
         hostnames: Addresses
@@ -645,6 +647,7 @@ en:
         order_sequence: Order numbering
         inventory_ids: Inventories
         quotation_template_id: Quotation boilerplate
+        product_uploader: Import format
         csv_encoding: Character set
         csv_product_code: Product code field
         csv_trade_price: Trade price field

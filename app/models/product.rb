@@ -163,34 +163,8 @@ class Product < ApplicationRecord
     end
   end
 
-  # Takes a CSV::Row and updates a product from its data in the given store
-  # and inventory. Returns the updated product, or nil if it fails.
-  # Supported fields:
-  # product_code     : required
-  # trade_price:     : anything supported by Monetize.parse
-  # retail_price     : same as above
-  # inventory_amount : targets the first inventory
-  def self.update_from_csv_row(store, inventory, row, code)
-    product = store.products.where(code: row[:product_code]).first
-    return nil if product.nil? || inventory.nil?
-
-    begin
-      if row[:trade_price].present?
-        product.update!(trade_price: row[:trade_price].to_money)
-      end
-      if row[:retail_price].present?
-        product.update!(retail_price: row[:retail_price].to_money)
-      end
-      if row[:inventory_amount].present?
-        product.inventory_items.destroy_all
-        amount = row[:inventory_amount].to_i
-        amount = 0 if amount < 0
-        product.restock!(inventory, code, nil, amount)
-      end
-      product
-    rescue StandardError => e
-      logger.warn e.message
-    end
+  def self.available_uploaders
+    %w{Csv Spreadsheetml}
   end
 
   #---

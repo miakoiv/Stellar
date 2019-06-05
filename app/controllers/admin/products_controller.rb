@@ -166,7 +166,9 @@ class Admin::ProductsController < AdminController
 
   # POST /admin/products/upload_file
   def upload_file
-    uploader = Uploaders::Products.new(params.merge(store_id: current_store.id))
+    uploader = current_store.product_uploader_class.new(
+      file_upload_params.merge(store: current_store)
+    )
     updated = uploader.process
 
     respond_to do |format|
@@ -218,5 +220,9 @@ class Admin::ProductsController < AdminController
         c.merge!(vendor_id: current_group) if third_party?
         c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       end
+    end
+
+    def file_upload_params
+      params.permit(:file)
     end
 end

@@ -106,6 +106,7 @@
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)
+            = f.select :product_uploader, Store.product_uploader_options, {include_blank: true}, {class: 'selectize'}
             = f.text_field :csv_encoding
             .row
               .col-md-6
