@@ -40,7 +40,7 @@ class Order < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(methods: :checkout_phase)
+    super(options.reverse_merge(methods: :checkout_phase))
   end
 
   # Email recipient for billing related messages.
