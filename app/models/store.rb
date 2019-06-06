@@ -227,7 +227,7 @@ class Store < ApplicationRecord
   end
 
   def stock_gateway_singleton
-    @stock_gateway_singleton ||= stock_gateway_class.new(store: self)
+    @stock_gateway_singleton ||= stock_gateway_class.new(self)
   end
 
   def product_uploader_class
