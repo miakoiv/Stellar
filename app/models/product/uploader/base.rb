@@ -47,5 +47,9 @@ module Product::Uploader
         methods: [:formatted_price_string]
       })
     end
+
+    def log_error(product)
+      Rails.logger.warn product.errors.messages.map { |a, m| "%s: %s" % [a, *m]}.join('; ')
+    end
   end
 end

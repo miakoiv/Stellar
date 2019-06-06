@@ -164,7 +164,7 @@ class Product < ApplicationRecord
   end
 
   def self.available_uploaders
-    %w{Csv Spreadsheetml}
+    %w{Csv Spreadsheetml Xml}
   end
 
   #---

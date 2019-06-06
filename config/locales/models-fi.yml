@@ -13,6 +13,7 @@ fi:
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
       product/uploader/csv: CSV
       product/uploader/spreadsheetml: Microsoft Office XML
+      product/uploader/xml: XML
     errors:
       models:
         account/onboarding/backend:

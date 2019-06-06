@@ -18,7 +18,7 @@
   Dropzone.options.productsUpload =
     dictDefaultMessage: "#{I18n.t('admin.products.upload_modal.dropzone_message')}"
     paramName: 'file'
-    acceptedFiles: '.csv,.xls'
+    acceptedFiles: '.csv,.xls,.xml'
     timeout: 600000
     init: ->
       @on 'success', (file, response) ->
