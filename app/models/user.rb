@@ -85,8 +85,10 @@ class User < ApplicationRecord
     groups.find_by(store: store)
   end
 
+  # Check user's guest status, making an exception for superusers
+  # who are never guests in any store.
   def guest?(store)
-    group(store).nil?
+    group(store).nil? && !has_cached_role?(:superuser)
   end
 
   # The effective group is the user's own group, and
