@@ -8,7 +8,8 @@ class Admin::StoresController < AdminController
     authorize_action_for Store, at: current_store
     query = saved_search_query('store', 'admin_store_search')
     @search = StoreSearch.new(query)
-    @stores = @search.results
+    results = @search.results
+    @stores = results.page(params[:page])
   end
 
   # GET /admin/stores/1
