@@ -96,7 +96,7 @@ class BaseStoreController < ApplicationController
   helper_method :pricing_shown?
 
   def stock_shown?
-    selected_group.stock_shown?
+    default_inventory.present? && selected_group.stock_shown?
   end
   helper_method :stock_shown?
 

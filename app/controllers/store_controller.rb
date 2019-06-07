@@ -162,7 +162,7 @@ class StoreController < BaseStoreController
   # GET /product/:product_id/stock/:inventory_id.js
   def show_product_stock
     find_product
-    @inventory = current_store.inventories.find(params[:inventory_id])
+    @inventory = current_store.inventories.find_by(id: params[:inventory_id])
     @available = @product.available(@inventory, nil)
 
     respond_to do |format|
