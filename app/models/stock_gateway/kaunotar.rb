@@ -1,6 +1,7 @@
 module StockGateway
 
   class Kaunotar
+    extend ActiveModel::Naming
     include HTTParty
     base_uri Rails.configuration.x.kaunotar.api_uri
     headers 'Content-Type' => 'application/json'
