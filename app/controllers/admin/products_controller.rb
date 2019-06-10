@@ -5,7 +5,7 @@ class Admin::ProductsController < AdminController
   before_action :set_product,  only: [:show, :edit, :update, :destroy, :set_price, :duplicate, :add_requisite_entries, :make_primary]
   before_action :set_group, only: [:pricing, :set_price]
 
-  authority_actions query: 'read', pricing: 'read', reorder: 'update', upload_file: 'update', add_requisite_entries: 'update', make_primary: 'update', set_price: 'update', duplicate: 'create'
+  authority_actions query: 'read', pricing: 'read', reorder: 'update', add_requisite_entries: 'update', make_primary: 'update', set_price: 'update', duplicate: 'create'
 
   # GET /admin/products
   # GET /admin/products.json
@@ -164,18 +164,6 @@ class Admin::ProductsController < AdminController
     respond_to :js
   end
 
-  # POST /admin/products/upload_file
-  def upload_file
-    uploader = current_store.product_uploader_class.new(
-      file_upload_params.merge(store: current_store)
-    )
-    updated = uploader.process
-
-    respond_to do |format|
-      format.json { render json: updated, status: 200 }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -220,9 +208,5 @@ class Admin::ProductsController < AdminController
         c.merge!(vendor_id: current_group) if third_party?
         c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
       end
-    end
-
-    def file_upload_params
-      params.permit(:file)
     end
 end

@@ -1,0 +1,26 @@
+#product-upload-modal.modal{data: {backdrop: 'static'}}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}}= icon('close')
+        %h4.modal-title= t('.title')
+      .modal-body
+        = form_for [:admin, ProductUpload.new], html: {multipart: true, class: 'dropzone'} do |f|
+          .fallback
+            = f.file_field :attachment
+            = f.submit class: 'btn btn-primary'
+      .modal-footer
+        #upload-complete.collapse.fade
+          = t('.upload_complete')
+
+  :coffee
+    Dropzone.autoDiscover = false
+    $('#new_product_upload').dropzone
+      dictDefaultMessage: "#{I18n.t('admin.product_uploads.modal.dropzone_message')}"
+      paramName: 'product_upload[attachment]'
+      acceptedFiles: '.csv,.xls,.xml'
+      timeout: 6000
+      init: ->
+        @on 'success', (file, product_upload) ->
+          $.get '/admin/product_uploads/' + product_upload['id']
+          $('#upload-complete').collapse 'show'

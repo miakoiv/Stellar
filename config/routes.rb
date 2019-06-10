@@ -262,7 +262,6 @@ Rails.application.routes.draw do
         get :query
         get 'pricing(/:group_id)', action: :pricing, as: :pricing
         post :reorder
-        post :upload_file
       end
       member do
         post :add_requisite_entries
@@ -271,6 +270,7 @@ Rails.application.routes.draw do
         patch :make_primary
       end
     end
+    resources :product_uploads
     resources :promotions do
       resources :promoted_items, shallow: true
       resources :pictures, shallow: true

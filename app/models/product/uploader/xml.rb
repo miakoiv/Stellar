@@ -5,7 +5,6 @@ module Product::Uploader
     require 'nokogiri'
 
     def process
-      response = []
       tax_categories = store.tax_categories.group_by { |t| t.rate.to_i.to_s }
 
       xml = File.open(file.path) { |f| Nokogiri::XML(f) }
@@ -25,9 +24,7 @@ module Product::Uploader
         rescue StandardError => e
           log_error(product)
         end
-        response << json_response(product)
       end
-      response
     end
   end
 end

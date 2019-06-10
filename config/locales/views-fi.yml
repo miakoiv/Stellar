@@ -325,6 +325,11 @@ fi:
         title: Järjestelmäasiakkaan suostumus
         blurb: Olen lukenut ja hyväksyn oheiset sopimusehdot.
         confirm: Varmista hyväksyminen
+    product_uploads:
+      modal:
+        title: Siirrä tuotetiedosto
+        dropzone_message: Pudota käsiteltävä tuotetiedosto tähän.
+        upload_complete: Tiedosto otettu käsiteltäväksi. Voit sulkea tämän ikkunan.
     products:
       index:
         new_product: Uusi tuote
@@ -358,9 +363,6 @@ fi:
         lead_time_help_html: Toimitusajat muodossa <em>n päivää</em> käsitellään automaattisesti. Muut formaatit ovat vain ohjeellisia.
         additional_info_help_html: Tilatessa kysyttävä lisätietorivi, joka on <strong>pakollinen tieto</strong>.
         shipping_notes_help: Lisätietoja tilausriville ostoskoriin ja tilauksiin.
-      upload_modal:
-        title: Siirrä CSV tai XLS -tiedosto
-        dropzone_message: Pudota tiedosto tähän päivittääksesi useiden tuotteiden hinta- ja toimitustiedot kerralla.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Jokainen ym. erä tuotteita alentaa tuotteiden hintaa kumulatiivisesti annetulla prosentilla.

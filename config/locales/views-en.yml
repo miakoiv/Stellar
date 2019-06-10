@@ -314,6 +314,11 @@ en:
         title: Agreement to terms of service
         blurb: I have read and accept the terms of service.
         confirm: Confirm acceptance
+    product_uploads:
+      modal:
+        title: Upload product data file
+        dropzone_message: Drop a file here to start an update.
+        upload_complete: File received and queued for processing. You may close this window.
     products:
       index:
         new_product: New product
@@ -347,9 +352,6 @@ en:
         lead_time_help_html: Lead times of <em>n days</em> enable automatic shipping date calculation. Other formats are advisory only.
         additional_info_help_html: Additional information asked upon ordering, which the customer is <strong>required</strong> to fill.
         shipping_notes_help: Extra information for shopping cart and order rows.
-      upload_modal:
-        title: Upload CSV or XLS file
-        dropzone_message: Drop a file here to update pricing and shipping information on multiple products at once.
     promotion_handler:
       bulk_discount:
         discount_percent_help: Each batch of required items yields a cumulative discount on all of the items.

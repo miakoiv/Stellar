@@ -35,17 +35,9 @@ module Product::Uploader
           amount = 0 if amount < 0
           product.restock!(@inventory, @lot_code, nil, amount)
         end
-        return json_response(product)
       rescue StandardError => e
-        logger.warn e.message
+        log_error(product)
       end
-    end
-
-    def json_response(product)
-      product.as_json({
-        only: [:code, :title, :subtitle],
-        methods: [:formatted_price_string]
-      })
     end
 
     def log_error(product)

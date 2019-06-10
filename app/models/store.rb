@@ -86,6 +86,7 @@ class Store < ApplicationRecord
     store.has_many :categories
     store.has_many :departments
     store.has_many :products
+    store.has_many :product_uploads
     store.has_many :properties
     store.has_many :tags
     store.has_many :orders

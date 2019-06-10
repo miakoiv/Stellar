@@ -5,12 +5,11 @@
   = link_to pricing_admin_products_path, class: 'btn btn-default' do
     = icon('tag', t('.pricing'))
   - if current_store.product_uploader.present?
-    %button.btn.btn-default{data: {toggle: 'modal', target: '#products-upload-modal'}}
+    = link_to new_admin_product_upload_path, remote: true, class: 'btn btn-default' do
       = icon('cloud-upload', t('actions.upload'))
   %h1= icon('cube', title(Product, count: 2))
 
 = render partial: 'search', locals: {url: admin_products_path}
-= render partial: 'admin/products/upload_modal'
 
 .row
   .col-md-7
