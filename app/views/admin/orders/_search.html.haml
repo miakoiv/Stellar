@@ -16,12 +16,12 @@
               = f.search_field :since_date, autocomplete: 'off', placeholder: t('.since_date'), class: 'form-control'
               %span.input-group-addon= icon('caret-right')
               = f.search_field :until_date, autocomplete: 'off', placeholder: t('.until_date'), class: 'form-control'
-        .col-sm-8.col-md-8
+        .col-sm-6.col-md-6
           .form-group
             = f.search_field :keyword, autocomplete: 'off', placeholder: t('.keyword'), class: 'form-control'
-        .col-sm-4.col-md-4
+        .col-sm-6.col-md-6
           .form-group
-            = f.search_field :payment_number, autocomplete: 'off', placeholder: t('.payment_number'), class: 'form-control'
+            = f.search_field :number, autocomplete: 'off', placeholder: t('.number'), class: 'form-control'
         .col-sm-8.col-md-6
           .form-group
             = f.select :user_id, @users.map { |u| [u.to_s, u.id] }, {include_blank: t('.user')}, {class: 'form-control selectize'}

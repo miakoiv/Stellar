@@ -258,7 +258,7 @@ fi:
         since_date: Pvm alkaen
         until_date: Pvm päättyen
         keyword: Etsi hakusanalla
-        payment_number: Tapahtumanumero
+        number: Tilauksen, maksutapahtuman tai toimituksen numero
         user: Valitse tilauksen laatija
       edit:
         add_order_items: Lisää tilausrivejä tilaukselle

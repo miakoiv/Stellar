@@ -38,8 +38,13 @@ class OrderSearch < Searchlight::Search
     query.where('DATE(completed_at) <= ?', until_date)
   end
 
-  def search_payment_number
-    query.joins(:payments).where(payments: {number: payment_number})
+  def search_number
+    query.left_outer_joins(:payments, :shipments)
+      .where(
+        Order.arel_table[:number].eq(number)
+        .or(Payment.arel_table[:number].eq(number))
+        .or(Shipment.arel_table[:id].eq(number))
+      )
   end
 
   def search_keyword
