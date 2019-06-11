@@ -50,6 +50,14 @@ class OrderSearch < Searchlight::Search
   end
 
   def search_keyword
-    query.joins(:shipping_address).where("CONCAT_WS(' ', addresses.name, addresses.company, addresses.address1, addresses.address2, addresses.city) LIKE ?", "%#{keyword}%")
+    q = '%%%s%%' % keyword.gsub(/[%_]/, '\\\\\0')
+    query.joins(:shipping_address)
+      .where(
+        Address.arel_table[:name].matches(q)
+        .or(Address.arel_table[:company].matches(q))
+        .or(Address.arel_table[:address1].matches(q))
+        .or(Address.arel_table[:address2].matches(q))
+        .or(Address.arel_table[:city].matches(q))
+      )
   end
 end
