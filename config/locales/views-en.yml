@@ -251,7 +251,7 @@ en:
         since_date: Since date
         until_date: Until date
         keyword: Keyword search
-        number: Order, payment, or shipping №
+        number: Number search
         user: Select order author
       edit:
         add_order_items: Add items to this order

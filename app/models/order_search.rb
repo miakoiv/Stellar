@@ -42,6 +42,8 @@ class OrderSearch < Searchlight::Search
     query.left_outer_joins(:payments, :shipments)
       .where(
         Order.arel_table[:number].eq(number)
+        .or(Order.arel_table[:our_reference].eq(number))
+        .or(Order.arel_table[:your_reference].eq(number))
         .or(Payment.arel_table[:number].eq(number))
         .or(Shipment.arel_table[:id].eq(number))
       )
