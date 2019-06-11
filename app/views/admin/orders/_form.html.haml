@@ -37,6 +37,8 @@
             = f.text_field :our_reference
         - if @order.store.b2b_sales?
           = f.text_field :external_number
+        - unless @order.user.guest?(@order.store)
+          = f.static_control :user
       ~ f.text_area :notes, rows: 3
       - unless locked || @order.cancelled? || @order.incomplete?
         %fieldset.danger

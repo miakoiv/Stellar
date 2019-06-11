@@ -285,6 +285,7 @@ en:
         your_reference: Your reference
         our_reference: Our reference
         message: Message
+        user: Author
         user_id: From
         billing_group_id: Billing
         shipping_group_id: Shipping

@@ -285,6 +285,7 @@ fi:
         your_reference: Viitteenne
         our_reference: Viitteemme
         message: Merkki
+        user: Laatija
         user_id: Tilaaja
         billing_group_id: Laskutus
         shipping_group_id: Toimitus
