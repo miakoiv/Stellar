@@ -1,7 +1,20 @@
 :root {
-  --ck-focus-ring: 0;
-  --ck-border-radius: 0;
-  --ck-font-face: system-ui;
-  --ck-font-size-base: 13px;
-  --ck-inner-shadow: none;
+  --ck-font-face: system-ui !important;
+}
+
+.ck.ck-heading_display1 {
+  font-weight: 300 !important;
+  font-size: 44px !important;
+}
+.ck.ck-heading_display2 {
+  font-weight: 300 !important;
+  font-size: 38px !important;
+}
+.ck.ck-heading_display3 {
+  font-weight: 300 !important;
+  font-size: 32px !important;
+}
+.ck.ck-heading_display4 {
+  font-weight: 300 !important;
+  font-size: 26px !important;
 }

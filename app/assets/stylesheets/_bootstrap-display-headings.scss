@@ -1,0 +1,38 @@
+$display1-size:               6em !default;
+$display2-size:               5.5em !default;
+$display3-size:               4.5em !default;
+$display4-size:               3.5em !default;
+
+$display1-weight:             300 !default;
+$display2-weight:             300 !default;
+$display3-weight:             300 !default;
+$display4-weight:             300 !default;
+$display-line-height: $headings-line-height !default;
+
+.display-1 {
+  font-size: $display1-size;
+  font-weight: $display1-weight;
+  line-height: $display-line-height;
+}
+.display-2 {
+  font-size: $display2-size;
+  font-weight: $display2-weight;
+  line-height: $display-line-height;
+}
+.display-3 {
+  font-size: $display3-size;
+  font-weight: $display3-weight;
+  line-height: $display-line-height;
+}
+.display-4 {
+  font-size: $display4-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+@media (max-width: $screen-xs-max) {
+  .display-1 { font-size: $display1-size * 0.69; }
+  .display-2 { font-size: $display2-size * 0.71; }
+  .display-3 { font-size: $display3-size * 0.73; }
+  .display-4 { font-size: $display4-size * 0.75; }
+}
