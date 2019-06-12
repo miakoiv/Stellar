@@ -36,7 +36,11 @@
           .col-md-6
             = f.text_field :our_reference
         - if @order.store.b2b_sales?
-          = f.text_field :external_number
+          .row
+            .col-md-6
+              = f.text_field :external_number
+            .col-md-6
+              = f.text_field :ordered_at, data: {provide: 'datepicker', 'date-format': 'yyyy-mm-dd', 'date-language': I18n.locale}
         - unless @order.user.guest?(@order.store)
           = f.static_control :user
       ~ f.text_area :notes, rows: 3

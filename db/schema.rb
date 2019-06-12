@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_082055) do
+ActiveRecord::Schema.define(version: 2019_06_12_065723) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -431,6 +431,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_082055) do
     t.boolean "separate_shipping_address", default: false, null: false
     t.boolean "includes_tax", default: true, null: false
     t.datetime "completed_at"
+    t.date "ordered_at"
     t.date "shipping_at"
     t.date "installation_at"
     t.date "approved_at"

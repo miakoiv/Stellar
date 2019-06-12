@@ -295,6 +295,7 @@ fi:
         shipping_address_id: Toimitusosoite
         separate_shipping_address: Toimitus eri osoitteeseen
         completed_at: Tilauspvm
+        ordered_at: Alkuperäinen tilauspvm
         updated_at: Päivitetty
         is_final: Merkitse valmiiksi
         shipping_at: Haluttu toimituspvm

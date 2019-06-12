@@ -180,7 +180,7 @@ class Admin::OrdersController < AdminController
       params.fetch(:order, {}).permit(
         :user_id, :billing_group_id, :shipping_group_id,
         :order_type_id, :inventory_id,
-        :completed_at, :shipping_at, :installation_at,
+        :completed_at, :ordered_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :cancelled_at,
         :vat_number, :external_number, :your_reference, :our_reference,
         :message, :notes, :is_final,
