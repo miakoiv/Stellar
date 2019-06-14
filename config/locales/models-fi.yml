@@ -622,6 +622,7 @@ fi:
         detach_menu: Irroita päävalikko
         masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori
+        dynamic_navbar: Animoitu päävalikko
         cart_promotion: Näytä myydyimmät ostoskorisivulla
         favorites: Tuotteiden tykkäys
         category_order: Tuotetilauslomakkeet

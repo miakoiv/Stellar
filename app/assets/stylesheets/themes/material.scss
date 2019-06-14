@@ -87,6 +87,29 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   @include box-shadow(inset 0 4px 4px -4px rgba(0,0,0,0.5));
 }
 
+
+/*
+ * Dynamic navbar support
+ */
+#main-nav.navbar-dynamic {
+  &.navbar-static-top { box-shadow: none; }
+  &.navbar-fixed-top { top: -1*$main-nav-height - 1; }
+}
+.show_page #content-wrap.dynamic {
+  padding-top: 0;
+
+  .page-wrapper {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  #store-wrap { padding-top: $main-nav-height; }
+}
+#dynamic-navbar-breakpoint {
+  position: absolute;
+  top: 133vh;
+  bottom: 0;
+}
+
 /* Change the responsive breakpoint for navs to screen-sm */
 @media (max-width: $screen-md-min) {
   .offcanvas-toggle { display: block !important; }
