@@ -27,6 +27,19 @@ $border-radius-small: 0 !default;
     }
   }
 }
+#side-nav-menu {
+  margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 1.5em;
+
+  li > ul { font-size: 0.6667em; }
+
+  @media (min-width: $screen-md-min) {
+    font-size: 2em;
+  }
+}
+
 @media (max-width: 9999px) {
   body:not(.admin) {
     .offcanvas-toggle { display: block !important; }
