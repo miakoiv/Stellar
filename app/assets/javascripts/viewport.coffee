@@ -1,7 +1,9 @@
 $.fn.extend
   initViewport: ->
-    vh = $(window).height() - $('#main-nav').outerHeight()
-    this.css minHeight: vh
+    vh = $(window).height()
+    nh = $('#main-nav').outerHeight()
+    h = if $('#main-nav').hasClass 'navbar-dynamic' then vh else vh - nh
+    this.css minHeight: h
 
 @viewportUpdate = ->
   $('.viewport').each ->
