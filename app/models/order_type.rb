@@ -28,6 +28,11 @@ class OrderType < ApplicationRecord
   validates :payment_gateway, presence: true, if: -> { has_payment? }
 
   #---
+  def payment_gateway
+    return 'None' unless has_payment?
+    super
+  end
+
   def payment_gateway_class
     gateway_class ||= "PaymentGateway::#{payment_gateway}".constantize
   end
