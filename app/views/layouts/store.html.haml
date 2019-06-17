@@ -10,10 +10,10 @@
     = stylesheet_link_tag 'print', media: 'print'
     = javascript_include_tag 'application'
     = javascript_include_tag "themes/#{current_theme}"
-  %body{class: [current_theme, action_name, (current_store.detach_menu? || content_for?(:auxiliary_nav)) && 'dual-nav']}
+  %body{class: [current_theme, (current_store.detach_menu? || content_for?(:auxiliary_nav)) && 'dual-nav']}
     %nav#side-nav.offcanvas.navmenu.navmenu-default.navmenu-fixed-left
       .inner-wrap= render partial: 'shared/side_nav'
-    %nav#main-nav.navbar.navbar-default{class: current_store.dynamic_navbar? ? 'navbar-dynamic' : 'navbar-fixed-top', data: {'navbar-fixed-class': 'navbar-fixed-top navbar-default', 'navbar-static-class': 'navbar-static-top navbar-inverse'}}
+    %nav#main-nav.navbar.navbar-default{class: dynamic_navbar? ? 'navbar-dynamic' : 'navbar-fixed-top', data: {'navbar-fixed-class': 'navbar-fixed-top navbar-default', 'navbar-static-class': 'navbar-static-top navbar-inverse'}}
       .container
         .navbar-header
           = link_to branding(current_store), root_url(host: (current_hostname.domain_hostname || current_hostname).to_s), class: 'navbar-brand'
@@ -34,7 +34,7 @@
               = render partial: 'shared/main_nav'
             %ul.aux-nav.nav.navbar-nav.navbar-right
               = yield :auxiliary_nav
-    #content-wrap{class: current_store.dynamic_navbar? && 'dynamic'}
+    #content-wrap{class: dynamic_navbar? && 'dynamic'}
       #dynamic-navbar-breakpoint
       = yield
 

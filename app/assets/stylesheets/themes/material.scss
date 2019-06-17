@@ -93,9 +93,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
  */
 #main-nav.navbar-dynamic {
   &.navbar-static-top { box-shadow: none; }
-  &.navbar-fixed-top { top: -1*$main-nav-height - 1; }
+  &.navbar-fixed-top { top: -$main-nav-height - 1; }
 }
-.show_page #content-wrap.dynamic {
+#content-wrap.dynamic {
   padding-top: 0;
 
   .page-wrapper {

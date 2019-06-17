@@ -379,6 +379,7 @@ fi:
         content: Sisältö
         description: Kuvaus
         always_expand: Pidä menu avoinna
+        dynamic_navbar: Animoitu päävalikko
       payment:
         order_id: Tilaus
         number: Tapahtumanro
@@ -622,7 +623,6 @@ fi:
         detach_menu: Irroita päävalikko
         masonry: Tiivistä tuotekortit
         fancy_cart: Moderni ostoskori
-        dynamic_navbar: Animoitu päävalikko
         cart_promotion: Näytä myydyimmät ostoskorisivulla
         favorites: Tuotteiden tykkäys
         category_order: Tuotetilauslomakkeet

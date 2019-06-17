@@ -10,6 +10,8 @@
             = f.check_box :live
         = f.text_field :slug, required: true, help: t('.slug_help_html')
         = render partial: "admin/#{@page.to_partial_path}", locals: {f: f}
+        = f.form_group do
+          = f.check_box :dynamic_navbar
         - if @page.can_have_children?
           = f.form_group do
             = f.check_box :always_expand

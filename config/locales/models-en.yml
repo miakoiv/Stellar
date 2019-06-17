@@ -379,6 +379,7 @@ en:
         content: Content
         description: Description
         always_expand: Keep menu opened
+        dynamic_navbar: Dynamic navigation bar
       payment:
         order_id: Order
         number: Transaction №
@@ -622,7 +623,6 @@ en:
         detach_menu: Detach main navigation
         masonry: Compress product cards
         fancy_cart: Modern shopping cart
-        dynamic_navbar: Dynamic navigation bar
         cart_promotion: Promote best sellers on shopping cart page
         favorites: Product favorites
         category_order: Bulk order forms

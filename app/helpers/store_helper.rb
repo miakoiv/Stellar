@@ -77,4 +77,8 @@ module StoreHelper
       end
     end
   end
+
+  def dynamic_navbar?
+    @page&.dynamic_navbar?
+  end
 end
