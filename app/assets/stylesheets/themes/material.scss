@@ -110,6 +110,12 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   bottom: 0;
 }
 
+/* Keep main nav fixed when side nav is open */
+#side-nav.open + #main-nav.navbar-dynamic {
+  @extend .navbar-fixed-top;
+  background-color: $navbar-inverse-bg;
+}
+
 /* Change the responsive breakpoint for navs to screen-sm */
 @media (max-width: $screen-md-min) {
   .offcanvas-toggle { display: block !important; }
