@@ -29,17 +29,18 @@ module StockGateway
     end
 
     # Sends an API call to report a sale based on `order` and its contents.
-    # Returns the argument if successful, nil otherwise.
-    def sale(order)
+    # Provide `return_url` to view the order from the external platform.
+    # Returns true if successful, false otherwise.
+    def sale(order, return_url)
       begin
-        response = self.class.post("/orders",
+        response = self.class.post("/stock_changes",
           headers: headers,
-          body: sale_request(order)
+          body: sale_request(order, return_url).to_json
         ).parsed_response
-        return order
+        return true
       rescue => e
         Rails.logger.error e.message
-        return nil
+        return false
       end
     end
 
@@ -48,14 +49,14 @@ module StockGateway
         {'X-USER-TOKEN' => @client_token}
       end
 
-      def sale_request(order)
+      def sale_request(order, return_url)
         {
-          order_number: order.number,
-          timestamp: order.completed_at,
-          line_items: order.order_items.real.map { |item|
+          note: "External order #{order.number}",
+          url: return_url,
+          item_list: order.order_items.real.map { |item|
             {
-              product: item.product.customer_code.presence || item.product.code,
-              amount: item.amount
+              product_id: item.product.customer_code.presence || item.product.code,
+              quantity: -item.amount
             }
           }
         }
