@@ -80,7 +80,8 @@ class Inventory < ApplicationRecord
   end
 
   def stock_query(product)
-    Rails.cache.fetch("stock-#{self}-#{product}", expires_in: 5.minutes) do
+    key = "#{cache_key}/#{product.cache_key}"
+    MemCacheStore.fetch(key, expires_in: 5.minutes) do
       store.stock_gateway_singleton.stock(product)
     end
   end

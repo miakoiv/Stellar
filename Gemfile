@@ -8,6 +8,8 @@ gem 'rails', '~> 5.2.3', '< 6.0'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'with_advisory_lock'
 gem 'yaml_db'
+# Use dalli as memcached client
+gem 'dalli'
 # Use Haml for markup
 gem 'haml-rails', '~> 2.0'
 gem 'erb2haml', group: :development
