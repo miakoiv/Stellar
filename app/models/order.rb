@@ -218,6 +218,13 @@ class Order < ApplicationRecord
     end
   end
 
+  # Sends a request through the stock gateway to report this order
+  # as a completed sale, if the inventory has a gateway enabled.
+  def report_sale_via_stock_gateway(return_url)
+    return true unless inventory.enable_gateway?
+    store.stock_gateway_singleton.sale(self, return_url)
+  end
+
   def has_installation?
     order_type.present? && order_type.has_installation?
   end

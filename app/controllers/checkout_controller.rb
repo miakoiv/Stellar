@@ -113,6 +113,7 @@ class CheckoutController < BaseStoreController
         .find_or_create_by(number: number)
         .update(amount: @order.grand_total_with_tax)
       @order.complete! if @order.should_complete?
+      @order.report_sale_via_stock_gateway(order_url(@order))
       render :success
     else
       redirect_to checkout_path(@order)
