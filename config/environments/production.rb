@@ -112,6 +112,7 @@ Rails.application.configure do
   config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://api.pakettikauppa.fi/'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
+  config.x.kaunotar.api_uri = 'http://pos.test.zetanol.com/api/v1/'
   config.stripe.publishable_key = 'pk_live_TxdcZiBgT9qfi5ecgFsGucrS'
   config.stripe.secret_key = 'sk_live_UDXKAWHRR6DhgAnT45IynUQI'
   config.stripe.signing_secret = ENV['STRIPE_SIGNING_SECRET']
