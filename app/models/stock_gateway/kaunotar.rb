@@ -13,6 +13,27 @@ module StockGateway
       @client_token = @store.stock_gateway_token
     end
 
+    # Queries the API for information on all products.
+    def products
+      begin
+        response = self.class.get("/products",
+          headers: headers,
+          timeout: 10
+        ).parsed_response
+        response.map { |item|
+          {
+            code: item['barcode2'].presence || item['barcode'],
+            customer_code: item['id'].to_s,
+            title: item['descriptions'][0]['name'],
+            retail_price: Money.new(item['sales_price_cents']),
+            updated_at: item['updated_at']
+          }
+        }
+      rescue => e
+        return []
+      end
+    end
+
     # Queries the API for the stock level of `product`.
     # Returns an integer, or 0 if the query fails.
     def stock(product)
