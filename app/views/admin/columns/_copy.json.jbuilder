@@ -1,4 +1,4 @@
-json.extract! column, :alignment, :viewport, :pivot, :background_color, :inline_styles, :priority
+json.extract! column, :span_xs, :span_sm, :alignment, :viewport, :pivot, :background_color, :inline_styles, :priority
 
 if column.pictures.any?
   json.pictures_attributes do

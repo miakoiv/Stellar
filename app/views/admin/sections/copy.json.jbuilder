@@ -2,7 +2,7 @@ json.section do
   # Copying a section and all its columns and segments without primary keys
   # or page association to provide a representation compatible with
   # nested attributes.
-  json.extract! @section, :width, :layout, :gutters, :swiper, :viewport, :reverse, :background_color, :gradient_color, :gradient_type, :gradient_direction, :gradient_balance, :fixed_background, :inline_styles
+  json.extract! @section, :width, :gutters, :swiper, :viewport, :reverse, :background_color, :gradient_color, :gradient_type, :gradient_direction, :gradient_balance, :fixed_background, :inline_styles
 
   if @section.pictures.any?
     json.pictures_attributes do
