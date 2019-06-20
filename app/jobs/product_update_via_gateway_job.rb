@@ -27,4 +27,8 @@ class ProductUpdateViaGatewayJob < ApplicationJob
       )
     end
   end
+
+  def max_attempts
+    1
+  end
 end
