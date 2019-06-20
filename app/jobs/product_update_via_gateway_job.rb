@@ -19,8 +19,7 @@ class ProductUpdateViaGatewayJob < ApplicationJob
         code: item[:code],
         customer_code: item[:customer_code],
         title: item[:title],
-        tax_category: tax_category,
-        available_at: item[:updated_at]
+        tax_category: tax_category
       )
       product.update!(
         customer_code: item[:customer_code],
