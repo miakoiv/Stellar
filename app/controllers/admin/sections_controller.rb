@@ -90,11 +90,12 @@ class Admin::SectionsController < AdminController
       @section = Section.find(params[:id])
     end
 
-    # Create columns and segments according to given layout preset.
+    # Create columns and segments according to spans in params.
     def create_columns!
-      columns = params[:columns].to_i
-      columns.times do |i|
-        column = @section.columns.create(priority: i)
+      spans = params[:spans]
+      spans[:sm].each_with_index do |sm, i|
+        xs = spans[:xs].shift
+        column = @section.columns.create(span_xs: xs, span_sm: sm, priority: i)
         column.segments.create(Segment.default_settings)
       end
     end
@@ -102,7 +103,7 @@ class Admin::SectionsController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
       params.fetch(:section, {}).permit(
-        :width, :layout, :gutters, :swiper, :viewport, :reverse,
+        :width, :gutters, :swiper, :viewport, :reverse,
         :background_color, :fixed_background,
         :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
       )

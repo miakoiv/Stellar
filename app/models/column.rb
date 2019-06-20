@@ -24,6 +24,10 @@ class Column < ApplicationRecord
   end
 
   #---
+  def span
+    @span ||= "col-xs-%d col-sm-%d" % [span_xs, span_sm]
+  end
+
   # Generates a duplicate with duplicated segments.
   def duplicate
     dup.tap do |c|

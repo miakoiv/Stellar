@@ -69,6 +69,7 @@ body.layout-editor.modal-open {
 #layout-menu {
   .mega-dropdown-menu .page-image figure {
     @include contained-image;
+    padding-bottom: 75%;
   }
 }
 .section-nav, .column-nav, .segment-nav {

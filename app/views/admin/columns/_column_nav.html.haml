@@ -15,3 +15,7 @@
     %li.info
       %a.paste-segment{title: t('.tooltips.refer'), role: 'button', data: {url: refer_admin_column_segments_path(column), toggle: 'tooltip', placement: 'bottom'}}
         = icon('link', class: 'fa-fw')
+    - if current_user.can_delete?(column, at: current_store)
+      %li.danger
+        = link_to admin_column_path(column), method: :delete, remote: true, title: t('.tooltips.delete'), data: {toggle: 'tooltip', placement: 'bottom', confirm: t('.delete.confirm'), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')} do
+          = icon('trash-o', class: 'fa-fw')

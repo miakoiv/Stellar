@@ -138,6 +138,9 @@ fi:
           new: Uusi
           paste: Liitä
           refer: Liitä linkkinä
+          delete: Poista
+        delete:
+          confirm: Palsta poistetaan sisältöineen. Tätä toimintoa ei voi perua.
     departments:
       index:
         new_department: Uusi osasto
@@ -409,6 +412,7 @@ fi:
           settings: Asetukset
           pictures: Kuvat
           videos: Videot
+          new: Lisää palsta
           delete: Poista
         delete:
           confirm: Lohko poistetaan sisältöineen. Tätä toimintoa ei voi perua.

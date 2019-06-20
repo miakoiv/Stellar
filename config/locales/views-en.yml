@@ -131,6 +131,9 @@ en:
           new: New
           paste: Paste
           refer: Paste as link
+          delete: Delete
+        delete:
+          confirm: The column and its contents will be deleted. This cannot be undone.
     departments:
       index:
         new_department: New department
@@ -398,6 +401,7 @@ en:
           settings: Settings
           pictures: Pictures
           videos: Videos
+          new: Add column
           delete: Delete
         delete:
           confirm: The section and its contents will be deleted. This cannot be undone.

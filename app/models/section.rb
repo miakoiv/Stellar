@@ -17,6 +17,7 @@ class Section < ApplicationRecord
 
   #---
   # Presets as layout, name, column count tuples.
+  # DEPRECATED: being replaced with SPANS.
   PRESETS = [
     [
       ['twelve', '12', 1],
@@ -35,6 +36,23 @@ class Section < ApplicationRecord
       ['three-three-three-three', '3+3+3+3', 4],
     ]
   ].freeze
+
+  # Section layout presets defined as tuples of
+  # column spans for xs and sm viewports.
+  SPANS = {
+    'twelve' => {xs: [12], sm: [12]},
+    'eight-four' => {xs: [12, 12], sm: [8, 4]},
+    'four-eight' => {xs: [12, 12], sm: [4, 8]},
+    'four-four-four' => {xs: [12]*3, sm: [4]*3},
+    'two-two-two-two-two-two' => {xs: [6]*6, sm: [2]*6},
+    'six-six' => {xs: [12, 12], sm: [6, 6]},
+    'nine-three' => {xs: [12, 12], sm: [9, 3]},
+    'three-nine' => {xs: [12, 12], sm: [3, 9]},
+    'six-three-three' => {xs: [12, 6, 6], sm: [6, 3, 3]},
+    'three-six-three' => {xs: [6, 12, 6], sm: [3, 6, 3]},
+    'three-three-six' => {xs: [6, 6, 12], sm: [3, 3, 6]},
+    'three-three-three-three' => {xs: [6]*4, sm: [3]*4},
+  }.freeze
 
   # Available content widths defined in layouts.css.
   WIDTHS = %w{
@@ -66,7 +84,7 @@ class Section < ApplicationRecord
 
   #---
   def self.preset_menu_options
-    PRESETS
+    SPANS
   end
 
   def self.width_options
@@ -90,8 +108,17 @@ class Section < ApplicationRecord
     gutters? ? 'gutters' : 'no-gutters'
   end
 
-  def layout_options
-    PRESETS.flatten(1).map { |l| [l[1], l[0]] }
+  def remaining_span
+    12 - columns.sum(:span_sm)
+  end
+
+  # Returns attributes for creating a new column that fills
+  # the remaining space in this section.
+  def new_column_attributes
+    {
+      span_sm: remaining_span,
+      priority: columns.count
+    }
   end
 
   def picture_options
