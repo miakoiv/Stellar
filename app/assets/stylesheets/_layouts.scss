@@ -197,6 +197,11 @@
   .segment.stretch:not(.fixed-ratio) { flex-grow: 1; }
 }
 
+/* Special zero-width column */
+@media (max-width: $screen-xs-max) {
+  .column.col-xs-0 { display: none; }
+}
+
 /* Column pivoting on mobile viewports */
 @media (max-width: $screen-xs-max) {
   .column.pivot {
