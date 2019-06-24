@@ -7,6 +7,7 @@ class ProductUpdateViaGatewayJob < ApplicationJob
   def perform(store, timestamp = Time.at(0))
     gateway = store.stock_gateway_singleton
     tax_category = store.tax_categories.first
+    category = store.categories.friendly.find('stock-gateway')
     t = Product.arel_table
     gateway.products.each do |item|
       next if item[:code].blank?
@@ -15,15 +16,20 @@ class ProductUpdateViaGatewayJob < ApplicationJob
           t[:code].eq(item[:code])
         )
       )
-      product ||= store.products.create!(
-        code: item[:code],
-        customer_code: item[:customer_code],
-        title: item[:title],
-        tax_category: tax_category
-      )
+      if product.nil? && item[:online]
+        product = store.products.create!(
+          code: item[:code],
+          customer_code: item[:customer_code],
+          title: item[:title],
+          tax_category: tax_category,
+          categories: [category]
+        )
+      end
+      next if product.nil?
       product.update!(
         customer_code: item[:customer_code],
-        retail_price: item[:retail_price]
+        retail_price: item[:retail_price],
+        available_at: item[:online] ? item[:updated_at] : nil
       )
     end
   end

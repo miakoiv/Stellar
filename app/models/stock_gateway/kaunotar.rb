@@ -8,6 +8,8 @@ module StockGateway
     format :json
     logger Rails.logger
 
+    THRESHOLD = 15
+
     def initialize(store)
       @store = store
       @client_token = @store.stock_gateway_token
@@ -26,6 +28,7 @@ module StockGateway
             customer_code: item['id'].to_s,
             title: item['descriptions'][0]['name'],
             retail_price: Money.new(item['sales_price_cents']),
+            online: item['stock_sales'].to_i >= THRESHOLD,
             updated_at: item['updated_at']
           }
         }
@@ -43,7 +46,8 @@ module StockGateway
           headers: headers,
           timeout: 10
         ).parsed_response
-        return response['stock_sales'].to_i
+        quantity = response['stock_sales'].to_i - THRESHOLD
+        return quantity < 0 ? 0 : quantity
       rescue => e
         return 0
       end
