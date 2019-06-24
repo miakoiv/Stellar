@@ -7,13 +7,14 @@
     %fieldset
       = f.select :gradient_type, Section.gradient_type_options, {include_blank: true}, {placeholder: t('.solid_color'), class: 'input-sm'}
       = f.select :gradient_direction, Section.gradient_direction_options, {include_blank: true}, {placeholder: t('.gradient_center'), class: 'input-sm'}
-      = f.range_field :gradient_balance, min: -100, max: 100, class: 'input-sm'
+      = f.range_field :gradient_balance, min: -100, max: 100, step: 1
 
   :coffee
     $('#section_gradient_type').betterSelectize
       dropdownParent: null
     $('#section_gradient_direction').betterSelectize
       dropdownParent: null
+    $('#section_gradient_balance').nouislider()
 
     $form = $('##{dom_id(section, :colors)}')
     $form.find('.color').minicolors

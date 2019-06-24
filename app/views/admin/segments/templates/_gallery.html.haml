@@ -1,6 +1,6 @@
 %fieldset
-  = f.range_field :min_width, min: 40, max: 600, step: 5, class: 'input-sm'
-  = f.range_field :gutter, min: 0, max: 50, step: 1, class: 'input-sm'
+  = f.range_field :min_width, min: 40, max: 600, step: 5
+  = f.range_field :gutter, min: 0, max: 50, step: 1
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
     .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
@@ -14,3 +14,7 @@
     = f.check_box :thumbnails
   = f.form_group do
     = f.check_box :masonry
+
+:coffee
+  $('#segment_min_width').nouislider()
+  $('#segment_gutter').nouislider()

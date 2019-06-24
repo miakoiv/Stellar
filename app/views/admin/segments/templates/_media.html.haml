@@ -10,8 +10,8 @@
         = f.radio_button_without_bootstrap :inverse, 1
         = icon('align-left')
         = icon('photo')
-  = f.range_field :width_ratio, min: 5, max: 75, step: 5, class: 'input-sm'
-  = f.range_field :gutter, min: 0, max: 50, step: 1, class: 'input-sm'
+  = f.range_field :width_ratio, min: 5, max: 75, step: 5
+  = f.range_field :gutter, min: 0, max: 50, step: 1
   .form-group
     = f.label col(Segment, :image_sizing), class: 'control-label'
     .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
@@ -20,3 +20,7 @@
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
   = f.text_field :url, placeholder: 'http://', class: 'input-sm'
+
+:coffee
+  $('#segment_width_ratio').nouislider()
+  $('#segment_gutter').nouislider()

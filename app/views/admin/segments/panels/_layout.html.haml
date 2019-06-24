@@ -6,8 +6,8 @@
       - unless segment.fixed_ratio?
         = f.form_group do
           = f.check_box :stretch
-      = f.range_field :margin_top, min: 0, max: 80, step: 10, class: 'input-sm'
-      = f.range_field :margin_bottom, min: 0, max: 80, step: 10, class: 'input-sm'
+      = f.range_field :margin_top, min: 0, max: 200, step: 10
+      = f.range_field :margin_bottom, min: 0, max: 200, step: 10
       .form-group
         = f.label col(Segment, :alignment), class: 'control-label'
         .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
@@ -22,11 +22,15 @@
             %label.btn.btn-default{class: segment.justification == justification && 'active'}
               = f.radio_button_without_bootstrap :justification, justification
               = title
-      = f.range_field :padding_vertical, min: 0, max: 150, step: 5, class: 'input-sm'
-      = f.range_field :padding_horizontal, min: 0, max: 25, step: 1, class: 'input-sm'
+      = f.range_field :padding_vertical, min: 0, max: 150, step: 5
+      = f.range_field :padding_horizontal, min: 0, max: 25, step: 1
 
   :coffee
     $('#segment_template').betterSelectize
       dropdownParent: null
     $('#segment_shape').betterSelectize
       dropdownParent: null
+    $('#segment_margin_top').nouislider()
+    $('#segment_margin_bottom').nouislider()
+    $('#segment_padding_vertical').nouislider()
+    $('#segment_padding_horizontal').nouislider()
