@@ -83,7 +83,7 @@ module ContentGateway
           link: card['url'],
           price: card['price'] != 0 ? card['price'] : nil,
           type: card['roomConfiguration'],
-          size: card['size'] != 0 ? '%d m²' % card['size'] : nil
+          size: (card['size'].present? && card['size'] != 0) ? '%d m²' % card['size'] : nil
         )
       end
   end
