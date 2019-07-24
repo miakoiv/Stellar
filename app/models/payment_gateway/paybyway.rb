@@ -162,7 +162,8 @@ module PaymentGateway
             address_street: street,
             address_zip: zip,
             address_city: city
-          }
+          },
+          products: products_list
         }.merge(options)
       end
 
@@ -173,6 +174,33 @@ module PaymentGateway
           token: token,
           authcode: sha256(@private_key, "#{@api_key}|#{token}")
         }
+      end
+
+      def products_list
+        order.order_items.map { |item|
+          [
+            {
+              id: item.product_id,
+              title: item.product.to_s,
+              count: item.amount,
+              tax: item.tax_rate.to_i,
+              pretax_price: item.price_sans_tax.cents,
+              price: item.price_with_tax.cents,
+              type: item.real? ? 1 : 2
+            },
+            item.adjustments.map { |adjustment|
+              {
+                id: adjustment.source_id,
+                title: adjustment.label,
+                count: 1,
+                tax: adjustment.adjustable.tax_rate.to_i,
+                pretax_price: adjustment.amount_sans_tax.cents,
+                price: adjustment.amount_with_tax.cents,
+                type: 4
+              }
+            }
+          ]
+        }.flatten
       end
 
       def sha256(secret, data)
