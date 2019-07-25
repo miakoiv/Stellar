@@ -15,7 +15,7 @@ class OrderReportRow < ApplicationRecord
   belongs_to :product
   belongs_to :user, optional: true
   belongs_to :store_portal, class_name: 'Store', optional: true
-  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code
+  belongs_to :shipping_country, class_name: 'Country', foreign_key: :shipping_country_code, optional: true
 
   #---
   def self.update_row_for(order, order_item, options = {})
