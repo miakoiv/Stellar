@@ -1,7 +1,7 @@
 class PageSearch < Searchlight::Search
 
   def base_query
-    Page.joins(:segments)
+    Page.includes(:sections).joins(:segments)
   end
 
   def search_store
