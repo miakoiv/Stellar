@@ -8,7 +8,7 @@ module StockGateway
     format :json
     logger Rails.logger
 
-    THRESHOLD = 15
+    THRESHOLD = 5
 
     def initialize(store)
       @store = store
