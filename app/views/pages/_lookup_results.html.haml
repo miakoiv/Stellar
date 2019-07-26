@@ -2,7 +2,7 @@
   %li.dropdown-header= title(Page, count: 2)
   - pages.each do |page|
     %li.media
-      = link_to page.path do
+      = link_to show_page_path(page) do
         .media-left
           = picture_variant_tag page.cover_picture, :thumbnail, figure_class: 'picture-thumbnail'
         .media-body

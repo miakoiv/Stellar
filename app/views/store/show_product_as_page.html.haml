@@ -1,0 +1,10 @@
+- meta_tags_for(@page, title: @page.display_title)
+
+- content_for :product_insert do
+  = render partial: 'pages/layout', object: @page, as: :page
+
+#store-wrap
+  #store-body
+    = render partial: 'show_product'
+    = render partial: 'stock_handler'
+    = render partial: 'favorites_handler'

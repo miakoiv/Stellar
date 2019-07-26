@@ -1,6 +1,6 @@
-%li.has-image{class: [is_active_link?(category.path) && 'active mm-active', category.always_expand? && 'mm-active']}
+%li.has-image{class: [is_active_link?(show_page_path(category)) && 'active mm-active', category.always_expand? && 'mm-active']}
   - cache [navmenu, I18n.locale, :category_page, category] do
-    = link_to category.path, class: category.children_count > 0 && 'has-arrow', 'aria-disabled': category.always_expand? ? 'true' : 'false' do
+    = link_to show_page_path(category), class: category.children_count > 0 && 'has-arrow', 'aria-disabled': category.always_expand? ? 'true' : 'false' do
       - if category.resource.cover_picture.present?
         .page-image
           = picture_variant_tag category.resource.cover_picture, :matchbox

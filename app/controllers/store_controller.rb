@@ -6,7 +6,7 @@ class StoreController < BaseStoreController
   end
 
   # Unauthenticated guests may visit the store.
-  before_action :authenticate_user_or_skip!, except: [:index, :show_page]
+  before_action :authenticate_user_or_skip!, except: :index
 
   with_options only: [:front, :cart, :show_category, :show_category_order, :show_department, :show_page, :show_product, :show_promotion, :show_tag] do
     before_action :set_categories
@@ -17,7 +17,7 @@ class StoreController < BaseStoreController
   def index
     if current_store.present?
       entry_point = @header.descendants.live.entry_point
-      return redirect_to entry_point.present? ? entry_point.path : front_path
+      return redirect_to entry_point.present? ? show_page_path(entry_point) : front_path
     end
     render :index, layout: 'devise'
   end
@@ -65,11 +65,6 @@ class StoreController < BaseStoreController
     respond_to :js, :html
   end
 
-  # GET /:slug
-  def show_page
-    @page = current_store.pages.friendly.find(params[:slug])
-  end
-
   # GET /product/:product_id(/:category_id)
   def show_product
     find_first_variant_product
@@ -91,6 +86,70 @@ class StoreController < BaseStoreController
   def show_tag
     @tag = current_store.tags.friendly.find(params[:tag_id])
     @products = @tag.products.live.page(params[:page])
+  end
+
+  # GET /:slug
+  # Multiplexer to call different actions depending on page type.
+  def show_page
+    @page = current_store.pages.friendly.find(params[:slug])
+
+    case @page.purpose.to_sym
+    when :primary, :continuous, :route, :proxy
+      render :show_page
+    when :category
+      show_category_as_page
+    when :category_order
+      show_category_order_as_page
+    when :department
+      show_department_as_page
+    when :product
+      show_product_as_page
+    when :promotion
+      show_promotion_as_page
+    else
+      raise 'Unknown page type'
+    end
+  end
+
+  # Same as #show_category but in the context of a page.
+  def show_category_as_page
+    @category = @page.resource
+    @search, results = search_category_products
+    @products = results.page(params[:page])
+    @view_mode = get_view_mode_setting(@category)
+
+    render :show_category_as_page
+  end
+
+  def show_category_order_as_page
+    @category = @page.resource
+    @search, results = search_category_products
+    @products = results.simple.page(params[:page])
+
+    render :show_category_order_as_page
+  end
+
+  def show_department_as_page
+    @department = @page.resource
+    @products = @department.products.live.random.page(params[:page]).per(24)
+
+    respond_to do |format|
+      format.any(:js, :html) { render :show_department_as_page }
+    end
+  end
+
+  def show_promotion_as_page
+    @promotion = @page.resource
+    @products = @promotion.products.visible.page(params[:page])
+
+    render :show_promotion_as_page
+  end
+
+  def show_product_as_page
+    @product = @page.resource.first_variant
+    @category = @product.category
+
+    render :show_product_as_page
   end
 
   # GET /store/lookup.js
@@ -116,7 +175,7 @@ class StoreController < BaseStoreController
     respond_to :js
   end
 
-  # POST /cart/activate_code
+  # POST /cart/activate_code.js
   def activate_code
     activation_code = params[:activation_code]
     @order = shopping_cart
@@ -133,7 +192,7 @@ class StoreController < BaseStoreController
     respond_to :js
   end
 
-  # GET /cart/quote/:recipient
+  # GET /cart/quote/:recipient.js
   def quote
     @order = shopping_cart
     @recipient = case params[:recipient]
@@ -322,13 +381,12 @@ class StoreController < BaseStoreController
       }
     end
 
-    # Product filtering in the current category asks the category
-    # whether to include its descendants in the view.
+    # Product filtering in current category including descendants.
     def filter_params
       {
         store: current_store,
         live: true,
-        permitted_categories: @category.self_and_maybe_descendants
+        permitted_categories: @category.self_and_descendants
       }
     end
 end

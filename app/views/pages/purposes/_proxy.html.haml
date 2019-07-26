@@ -1,4 +1,4 @@
-%li{class: is_active_link?(proxy.path) && 'active mm-active'}
-  = link_to proxy.path do
+%li{class: is_active_link?(show_page_path(proxy)) && 'active mm-active'}
+  = link_to show_page_path(proxy) do
     .page-title
       = proxy

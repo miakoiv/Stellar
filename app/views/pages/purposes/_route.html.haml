@@ -1,4 +1,4 @@
-%li{class: active_link_to_class(route.path, active: route.active_link_options)}
-  = link_to route.path do
+%li{class: active_link_to_class(show_page_path(route), active: route.active_link_options)}
+  = link_to show_page_path(route) do
     .page-title
       = route

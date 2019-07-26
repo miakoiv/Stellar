@@ -1,0 +1,7 @@
+- meta_tags_for(@page, title: @page.display_title)
+
+#store-wrap
+  #store-body
+    = render partial: 'show_category_order'
+
+= render partial: 'admin/pages/navbar_edit', object: @page, as: :page

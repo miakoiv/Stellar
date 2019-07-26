@@ -71,6 +71,10 @@
       .tags.graphic
         = render partial: 'tags/graphic', collection: product.tags.graphic, as: :tag
 
+- if content_for?(:product_insert)
+  .product-insert
+    = yield :product_insert
+
 .product-footer
   - product.active_promotions(selected_group).each do |promotion|
     = render partial: "products/#{promotion.promotion_handler.to_partial_path}", locals: {promotion: promotion, context: product}

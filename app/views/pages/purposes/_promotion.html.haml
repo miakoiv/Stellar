@@ -1,6 +1,6 @@
-%li.has-image{class: is_active_link?(promotion.path) && 'active mm-active'}
+%li.has-image{class: is_active_link?(show_page_path(promotion)) && 'active mm-active'}
   - cache [navmenu, I18n.locale, :promotion_page, promotion] do
-    = link_to promotion.path do
+    = link_to show_page_path(promotion) do
       - if promotion.resource.cover_picture.present?
         .page-image
           = picture_variant_tag promotion.resource.cover_picture, :matchbox

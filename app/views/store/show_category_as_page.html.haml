@@ -1,0 +1,10 @@
+- meta_tags_for(@page, title: @page.display_title)
+
+#store-wrap
+  #store-body
+    = render partial: 'pages/layout', object: @page, as: :page
+    = render partial: 'show_category'
+    = render partial: 'stock_handler'
+    = render partial: 'favorites_handler'
+
+= render partial: 'admin/pages/navbar_edit', object: @page, as: :page

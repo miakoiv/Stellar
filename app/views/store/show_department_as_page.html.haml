@@ -1,0 +1,11 @@
+- meta_tags_for(@page, title: @page.display_title)
+
+#store-wrap
+  #store-body
+    #products-wrap
+      .products
+        #product-view.product-grid.infinite-table
+          %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
+            = render partial: 'departments/product', collection: @products, as: :product
+          .pagination-block
+            = link_to loading_spinner, show_department_path(@department), remote: true, rel: 'next', class: 'btn'

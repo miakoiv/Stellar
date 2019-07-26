@@ -4,9 +4,6 @@ class Page < ApplicationRecord
     :url, :description, :always_expand, :dynamic_navbar
   ], coder: JSON
 
-  # Pages must be aware of their routes since they may link to anything.
-  include Rails.application.routes.url_helpers
-
   resourcify
   include Authority::Abilities
   include Trackable
@@ -22,11 +19,11 @@ class Page < ApplicationRecord
   enum purpose: {
     route: 0,           # navigation node routed to #slug
     primary: 1,         # page with content sections
-    category: 2,        # link to category
-    product: 3,         # link to product
-    promotion: 4,       # link to promotion
-    department: 5,      # link to department
-    category_order: 6,  # link to category order
+    category: 2,        # category page with optional content
+    category_order: 6,  # category order page with optional content
+    product: 3,         # product page with optional content
+    promotion: 4,       # promotion page with optional content
+    department: 5,      # department page with optional content
     header: 10,         # container for main navigation
     footer: 11,         # container for footer links
     dropdown: 20,       # dropdown container for other pages
@@ -44,10 +41,10 @@ class Page < ApplicationRecord
     'route' => {icon: 'share-alt', appearance: 'danger'},
     'primary' => {icon: 'file-text-o', appearance: 'success'},
     'category' => {icon: 'sitemap', appearance: 'info'},
+    'category_order' => {icon: 'list-ul', appearance: 'info'},
     'product' => {icon: 'cube', appearance: 'info'},
     'promotion' => {icon: 'tag', appearance: 'info'},
     'department' => {icon: 'umbrella', appearance: 'info'},
-    'category_order' => {icon: 'list-ul', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
@@ -126,7 +123,7 @@ class Page < ApplicationRecord
   end
 
   def can_have_content?
-    primary? || template? || contentmenu? || portal?
+    primary? || category? || product? || promotion? || department? || category_order? || template? || contentmenu? || portal?
   end
 
   def needs_resource?
@@ -212,38 +209,6 @@ class Page < ApplicationRecord
   # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
     "pages/purposes/#{purpose}"
-  end
-
-  # Path to a page object based on purpose for rendering
-  # navigation nodes pointing to the right place.
-  def path
-    case
-    when primary?
-      part_of_continuous_page? ?
-        show_page_path(parent, trailing_slash: true, anchor: slug) :
-        show_page_path(self)
-    when route? || proxy?
-      show_page_path(self)
-    when category?
-      show_category_path(resource)
-    when product?
-      show_product_path(resource)
-    when promotion?
-      show_promotion_path(resource)
-    when department?
-      show_department_path(resource)
-    when category_order?
-      show_category_order_path(resource)
-    when dropdown? || megamenu?
-      children.live.first.path
-    when continuous?
-      show_page_path(self, trailing_slash: true, anchor: front_page&.slug)
-    when portal?
-      resource.to_url
-    when internal?
-      show_page_path(resource)
-    else nil
-    end
   end
 
   # Route pages ask this method to render their links with
