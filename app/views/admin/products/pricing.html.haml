@@ -20,7 +20,6 @@
     %span.small= bootstrap_label(@group)
 
 = render partial: 'search', locals: {url: pricing_admin_products_path(@group)}
-= render partial: 'admin/products/upload_modal'
 
 = render partial: 'admin/products/pricing_table', object: @products, as: :products
 = paginate @products
