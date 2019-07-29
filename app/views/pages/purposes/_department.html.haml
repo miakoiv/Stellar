@@ -1,8 +1,8 @@
 %li.has-image{class: is_active_link?(show_page_path(department)) && 'active mm-active'}
   - cache [navmenu, I18n.locale, :department_page, department] do
     = link_to show_page_path(department) do
-      - if department.resource.cover_picture.present?
+      - if picture = department.cover_picture || department.resource.cover_picture
         .page-image
-          = picture_variant_tag department.resource.cover_picture, :matchbox
+          = picture_variant_tag picture, :matchbox
       .page-title
         = department
