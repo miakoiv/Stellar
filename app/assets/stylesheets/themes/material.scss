@@ -912,6 +912,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   margin-bottom: 40px;
 }
 
+/* Reduced presentational image height for mobile viewports */
+@media (max-width: $screen-xs-max) {
+  .product-detail .images.presentational .gallery {
+    max-height: 480px;
+
+    img { max-height: 480px; }
+  }
+}
+
 /* Product image galleries */
 .product-detail .images {
   display: flex;
