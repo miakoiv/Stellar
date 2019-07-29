@@ -639,6 +639,7 @@ fi:
         smtp_authentication: Tunnistautuminen
         smtp_enable_starttls_auto: Käytä ᴛʟꜱ-salausta
         disable_shipment_transfers: Ei varastosiirtoja toimituksille
+        created_at: Perustettu
         tracking_code: Google Analytics -koodi
         maps_api_key: Google Maps -avain
         facebook_access_token: Facebook-rajapinta-avain

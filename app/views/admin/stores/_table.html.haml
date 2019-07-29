@@ -5,6 +5,7 @@
         %th.col-min
         %th.col-xs-3= col(Store, :name)
         %th= col(Store, :network)
+        %th.col-xs-2= col(Store, :created_at)
         %th.actions
 
     %tbody
@@ -17,6 +18,7 @@
               = bootstrap_label(portal)
             - store.member_stores.each do |member|
               = bootstrap_label(member, appearance: :primary)
+          %td= l(store.created_at.to_date)
           %td.actions
             - if current_store != store && store.hostnames.any?
               = link_to icon('bookmark', t('actions.select')), admin_stores_url(host: (store.hostname_at(current_store) || store.primary_host).to_s), class: 'btn btn-default btn-sm'

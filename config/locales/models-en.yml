@@ -639,6 +639,7 @@ en:
         smtp_authentication: Authentication scheme
         smtp_enable_starttls_auto: Enable ᴛʟꜱ encryption
         disable_shipment_transfers: No stock transfers for shipments
+        created_at: Founded
         tracking_code: Google Analytics key
         maps_api_key: Google Maps key
         facebook_access_token: Facebook access token
