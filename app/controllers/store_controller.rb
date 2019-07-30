@@ -6,7 +6,7 @@ class StoreController < BaseStoreController
   end
 
   # Unauthenticated guests may visit the store.
-  before_action :authenticate_user_or_skip!, except: :index
+  before_action :authenticate_user_or_skip!, except: [:index, :show_page]
 
   with_options only: [:front, :cart, :show_category, :show_category_order, :show_department, :show_page, :show_product, :show_promotion, :show_tag] do
     before_action :set_categories

@@ -88,7 +88,7 @@ class Page < ApplicationRecord
   #---
   # Finds the first valid entry point.
   def self.entry_point
-    where.not(purpose: [10, 11, 23, 30, 42]).first
+    where.not(purpose: [10, 11, 20, 21, 23, 30, 42]).first
   end
 
 
