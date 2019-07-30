@@ -88,9 +88,8 @@ class Page < ApplicationRecord
   #---
   # Finds the first valid entry point.
   def self.entry_point
-    where.not(purpose: [10, 11, 20, 21, 23, 30, 42]).first
+    where(purpose: [0, 1, 2, 3, 4, 5, 6, 22, 43]).first
   end
-
 
   def self.available_purposes
     purposes.except :header, :footer

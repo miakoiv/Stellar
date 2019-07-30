@@ -106,6 +106,9 @@ class StoreController < BaseStoreController
       show_product_as_page
     when :promotion
       show_promotion_as_page
+    when :internal
+      @page = @page.resource
+      render :show_page
     else
       raise 'Unknown page type'
     end
