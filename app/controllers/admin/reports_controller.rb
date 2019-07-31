@@ -21,6 +21,11 @@ class Admin::ReportsController < AdminController
         )
         @inventory = Reports::Inventory.new(search)
       }
+      format.csv {
+        search = InventoryItemSearch.new(query)
+        inventory = Reports::Inventory.new(search)
+        send_data(inventory.to_csv, filename: "inventory-#{current_store.slug}-#{Date.today}.csv")
+      }
     end
   end
 

@@ -2,6 +2,8 @@
   = link_to admin_reports_path, class: 'btn btn-default' do
     = icon('chevron-circle-left', t('actions.back'))
   = link_to icon('print', t('actions.print')), '#print', class: 'btn btn-default'
+  = link_to admin_inventory_report_path(format: :csv), class: 'btn btn-default' do
+    = icon('table', t('.export_csv'))
   %h1= icon('eur', t('admin.reports.inventory.title'))
 
 = render partial: 'inventory_query'

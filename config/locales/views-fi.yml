@@ -88,6 +88,7 @@ fi:
         title: Varaston arvo
         total_value: Arvo yhteensä
         items: Nimikkeitä
+        export_csv: Vie CSV
       search:
         all_groups: "[Kaikki asiakasryhmät]"
         all_order_types: "[Kaikki tilaustavat]"

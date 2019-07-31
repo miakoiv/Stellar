@@ -81,6 +81,7 @@ en:
         title: Inventory value
         total_value: Total value
         items: Items
+        export_csv: Export CSV
       search:
         all_groups: "[All groups]"
         all_order_types: "[All order types]"

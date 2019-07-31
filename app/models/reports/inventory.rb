@@ -23,5 +23,25 @@ module Reports
     def product_count
       @items.distinct.count(:product_id)
     end
+
+    def to_csv
+      attributes = %w{product_code product_title product_subtitle on_hand unit_value subtotal_value}
+      CSV.generate(
+        headers: true,
+        col_sep: ';'
+      ) do |csv|
+        csv << attributes
+        with_subtotals.each do |item|
+          csv << [
+            item.product_code,
+            item.product_title,
+            item.product_subtitle,
+            item.on_hand,
+            Money.new(item.unit_value).format,
+            Money.new(item.subtotal_value).format
+          ]
+        end
+      end
+    end
   end
 end
