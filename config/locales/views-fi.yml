@@ -338,6 +338,7 @@ fi:
       index:
         new_product: Uusi tuote
         pricing: Hinnoittelutyökalu
+        export_csv: Vie CSV
       pricing:
         no_group: "[Ei ryhmää]"
       show:

@@ -4,6 +4,8 @@
       = icon('plus', t('.new_product'))
   = link_to pricing_admin_products_path, class: 'btn btn-default' do
     = icon('tag', t('.pricing'))
+  = link_to admin_products_path(format: :csv), class: 'btn btn-default' do
+    = icon('table', t('.export_csv'))
   - if current_store.product_uploader.present?
     = link_to new_admin_product_upload_path, remote: true, class: 'btn btn-default' do
       = icon('cloud-upload', t('actions.upload'))

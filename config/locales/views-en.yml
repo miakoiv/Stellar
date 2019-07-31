@@ -327,6 +327,7 @@ en:
       index:
         new_product: New product
         pricing: Pricing tool
+        export_csv: Export CSV
       pricing:
         no_group: "[No group]"
       show:
