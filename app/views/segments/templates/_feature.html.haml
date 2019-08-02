@@ -8,10 +8,10 @@
     - if picture
       .image-container{class: sizing}
         = picture_variant_tag picture
-    - if body
-      .editable-content{class: [picture && 'content-overlay', feature.hyphens? && 'hyphens']}
+    .editable-content{class: [picture && 'content-overlay', feature.hyphens? && 'hyphens']}
+      - if body
         = body.html_safe
-    - if !picture && !body
-      = segment_placeholder(feature)
+      - elsif !picture
+        = segment_placeholder(feature)
     - if resource.present?
       = link_to icon('link'), [:show, resource], class: 'feature-link'
