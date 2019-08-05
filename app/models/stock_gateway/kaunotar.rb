@@ -16,10 +16,11 @@ module StockGateway
     end
 
     # Queries the API for information on all products.
-    def products
+    def products(start_date = nil)
       begin
         response = self.class.get("/products",
           headers: headers,
+          query: {start_date: start_date},
           timeout: 10
         ).parsed_response
         response.map { |item|
