@@ -400,6 +400,13 @@
   }
 }
 
+.segment-content.picture {
+  .image-link {
+    flex-grow: 1;
+    @include flex;
+  }
+}
+
 .segment-content.gallery {
   .gallery-wrap {
     flex-grow: 1;
