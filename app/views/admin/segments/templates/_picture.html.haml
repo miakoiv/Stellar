@@ -6,4 +6,7 @@
         %label.btn.btn-default{class: segment.image_sizing == size && 'active'}
           = f.radio_button_without_bootstrap :image_sizing, size
           = title
-  = f.text_field :url, placeholder: 'http://', class: 'input-sm'
+  = f.form_group do
+    = f.check_box :lightbox
+  - unless segment.lightbox?
+    = f.text_field :url, placeholder: 'http://', class: 'input-sm'

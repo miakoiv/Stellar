@@ -2,14 +2,18 @@
 - sizing = picture.image_sizing
 
 - cache [:segment_picture, picture] do
-  .segment-content.picture{id: dom_id(picture, :content)}
+  .segment-content.picture{id: dom_id(picture, :content), class: picture.lightbox? && 'gallery'}
     - if cover_picture
       - picture_with_caption = capture_haml do
         = picture_variant_tag cover_picture do
           - if cover_picture.caption.present?
             %figcaption{style: picture.style(:backgroundColor)}
               = cover_picture.caption
-      - if picture.url.present?
+      - if picture.lightbox?
+        = link_to cover_picture.image.url(:lightbox, timestamp: false), class: 'image-link', title: cover_picture.caption do
+          .image-container{class: sizing}
+            = picture_variant_tag cover_picture
+      - elsif picture.url.present?
         = link_to picture.url, class: "image-container #{sizing}" do
           = picture_with_caption
       - else
