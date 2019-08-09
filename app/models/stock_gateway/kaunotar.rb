@@ -29,7 +29,7 @@ module StockGateway
             customer_code: item['id'].to_s,
             title: item['descriptions'][0]['name'],
             retail_price: Money.new(item['sales_price_cents']),
-            online: item['stock_sales'].to_i >= THRESHOLD,
+            online: item['removed'].nil? && item['stock_sales'].to_i >= THRESHOLD,
             updated_at: item['updated_at']
           }
         }
