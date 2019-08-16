@@ -42,9 +42,10 @@ class TransferItem < ApplicationRecord
   end
 
   # Transfer items are feasible if there's enough stock
-  # or the product does not require stock tracking.
+  # or the product does not require stock tracking, or
+  # the source inventory is using a stock gateway.
   def feasible?
-    return true if source.nil? || !product.tracked_stock?
+    return true if source.nil? || !product.tracked_stock? || source.enable_gateway?
     inventory_item = source_item
     inventory_item.present? && inventory_item.available >= amount
   end

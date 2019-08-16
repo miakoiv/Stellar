@@ -66,9 +66,10 @@ class Transfer < ApplicationRecord
 
   # Transfer is considered feasible only if all its items can be
   # transferred, given current stock levels. Immediately returns
-  # true if the source is nil, denoting an external source.
+  # true if the source is nil -- denoting an external source -- or
+  # if the source uses a stock gateway, which will not be queried.
   def feasible?
-    return true if source.nil?
+    return true if source.nil? || source.enable_gateway?
     transfer_items.each do |item|
       return false unless item.feasible?
     end
@@ -134,7 +135,7 @@ class Transfer < ApplicationRecord
     # Attempts several strategies until one returns true to denote
     # the item has been loaded or the item is left (partially) unloaded.
     def load_item!(order_item, stock)
-      if !order_item.product.tracked_stock?
+      if !order_item.product.tracked_stock? || source.enable_gateway?
         load_item_from_infinite_stock(order_item) && return
       end
       stock_items = stock.select { |item| item.product == order_item.product }
