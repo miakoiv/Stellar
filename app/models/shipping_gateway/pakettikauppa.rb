@@ -56,7 +56,7 @@ module ShippingGateway
         super
         raise ArgumentError if order.nil?
         @store = order.store
-        @group = user.group(@store)
+        @group = user&.group(@store)
         @api_key = '00000000-0000-0000-0000-000000000000'
         @secret = '1234567890ABCDEF'
         @locale = I18n.locale
@@ -122,10 +122,12 @@ module ShippingGateway
               xml.Shipment do
                 xml.send 'Shipment.Sender' do
                   xml.send 'Sender.Name1', @store.name
-                  xml.send 'Sender.Addr1', @group.shipping_address.address1
-                  xml.send 'Sender.Postcode', @group.shipping_address.postalcode
-                  xml.send 'Sender.City', @group.shipping_address.city
-                  xml.send 'Sender.Country', @group.shipping_address.country_code
+                  if @group.present?
+                    xml.send 'Sender.Addr1', @group.shipping_address.address1
+                    xml.send 'Sender.Postcode', @group.shipping_address.postalcode
+                    xml.send 'Sender.City', @group.shipping_address.city
+                    xml.send 'Sender.Country', @group.shipping_address.country_code
+                  end
                   xml.send 'Sender.Vatcode', @store.vat_number
                 end
                 xml.send 'Shipment.Recipient' do
