@@ -229,6 +229,17 @@ module ShippingGateway
     end
 
     class Posti < Base
+      def self.requires_maps?
+        true
+      end
+
+      def search_pickup_points(postalcode)
+        super(postalcode, 'Posti')
+      end
+
+      def to_partial_path
+        'shipping_gateway/pakettikauppa/posti'
+      end
     end
   end
 end
