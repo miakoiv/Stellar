@@ -33,7 +33,7 @@ module ShippingGateway
 
     def initialize(attributes = {})
       super
-      raise ArgumentError if order.nil?
+      raise ShippingGatewayError, 'Order not specified' if order.nil?
       @truckload_connector = TruckloadConnector.new
     end
 

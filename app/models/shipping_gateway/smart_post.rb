@@ -33,7 +33,7 @@ module ShippingGateway
 
     def initialize(attributes = {})
       super
-      raise ArgumentError if order.nil?
+      raise ShippingGatewayError, 'Order not specified' if order.nil?
     end
 
     def calculated_cost(base_price, metadata)
