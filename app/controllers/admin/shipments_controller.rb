@@ -92,6 +92,9 @@ class Admin::ShipmentsController < AdminController
         format.js { render :error }
       end
     end
+  rescue => e
+    flash.now[:error] = e.message
+    head :unprocessable_entity
   end
 
   # GET /admin/shipments/1/label
@@ -106,6 +109,9 @@ class Admin::ShipmentsController < AdminController
     respond_to do |format|
       format.pdf { send_data(file, filename: "#{@shipment.number}.pdf", type: 'application/pdf') }
     end
+  rescue => e
+    flash.now[:error] = e.message
+    head :unprocessable_entity
   end
 
   private

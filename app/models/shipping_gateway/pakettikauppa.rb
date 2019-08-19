@@ -54,7 +54,7 @@ module ShippingGateway
 
       def initialize(attributes = {})
         super
-        raise ArgumentError if order.nil?
+        raise ShippingGatewayError, 'Order not specified' if order.nil?
         @store = order.store
         @group = user&.group(@store)
         @api_key = '00000000-0000-0000-0000-000000000000'
@@ -81,11 +81,13 @@ module ShippingGateway
       end
 
       def send_shipment
-        raise ArgumentError if shipment.nil? || user.nil?
+        raise ShippingGatewayError, 'Shipment and user must be present' if shipment.nil? || user.nil?
+        raise ShippingGatewayError, 'Shipping address must be present' unless @group.shipping_address.present?
         response = PakettikauppaConnector.create_shipment(shipment_xml)
           .parsed_response['Response']
         status = response['response.status'] == '0'
 
+        raise ShippingGatewayError, response['response.message'] unless status
         return [
           status,
           status && response['response.reference']['__content__'],
@@ -94,11 +96,12 @@ module ShippingGateway
       end
 
       def fetch_label
-        raise ArgumentError if shipment.nil?
+        raise ShippingGatewayError, 'Shipment must be present' if shipment.nil?
         response = PakettikauppaConnector.get_shipping_label(label_xml)
           .parsed_response['Response']
         status = response['response.status'] == '0'
 
+        raise ShippingGatewayError, response['response.message'] unless status
         return [
           status,
           status && Base64.decode64(response['response.file']['__content__'])
