@@ -35,17 +35,21 @@ class CheckoutController < BaseStoreController
   end
 
   # GET /checkout/1/shipping_method/2.js
-  # Selecting a shipping method sets up a shipping gateway object that will
-  # render its own interface within the view.
+  # Selecting a shipping method sets up a shipping gateway object and
+  # prepares its interface data. The shipping gateway partial is rendered.
   # Called via Ajax.
   def shipping_method
     @shipping_methods = @order.available_shipping_methods
     @shipping_method = @shipping_methods.find(params[:method_id])
-    @shipping_gateway = if @shipping_method.shipping_gateway.present?
-      @shipping_method.shipping_gateway_class.new(order: @order)
+    if @shipping_method.shipping_gateway.present?
+      @shipping_gateway = @shipping_method.shipping_gateway_class.new(order: @order)
+      @data = @shipping_gateway.prepare_interface_data(params)
     else
-      nil
+      @shipping_gateway = nil
     end
+  rescue => e
+    flash.now[:error] = e.message
+    head :unprocessable_entity
   end
 
   # POST /checkout/1/ship/2.js

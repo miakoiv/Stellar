@@ -2,18 +2,18 @@ module ShippingGateway
 
   class SmartPostPickupConnector
     include HTTParty
-    base_uri 'https://ohjelmat.posti.fi/pup/v1/'
+    base_uri 'https://locationservice.posti.com/api/2'
     logger Rails.logger
 
     def self.lookup(query)
-      get '/pickuppoints', query: query
+      get '/location', query: query
     end
   end
 
   class SmartPost
     include ActiveModel::Model
 
-    attr_accessor :order, :shipment, :user
+    attr_accessor :order, :shipment, :user, :data
 
     def self.requires_maps?
       true
@@ -34,6 +34,16 @@ module ShippingGateway
     def initialize(attributes = {})
       super
       raise ShippingGatewayError, 'Order not specified' if order.nil?
+      @data = {}
+    end
+
+    def prepare_interface_data(params = {})
+      postalcode = params[:postalcode] || order.shipping_address.postalcode
+      locations = smartpost_lookup(postalcode)
+      {
+        postalcode: postalcode,
+        locations: locations
+      }
     end
 
     def calculated_cost(base_price, metadata)
@@ -41,20 +51,14 @@ module ShippingGateway
     end
 
     # Performs a lookup of SmartPost pickup locations by given postal code.
-    # The post office code servicing the postal code area is looked up first,
-    # using its locations to look for the nearest five locations around it.
-    # Returns a tuple of both results.
     def smartpost_lookup(postalcode)
-      areacode = SmartPostPickupConnector.lookup(zipcode: postalcode).parsed_response[0]
-      return [nil, nil] if areacode.nil?
       query = {
-        type: 'smartpost',
-        longitude: areacode['MapLongitude'],
-        latitude: areacode['MapLatitude'],
-        top: 5
+        types: 'SMARTPOST',
+        locationZipCode: postalcode,
+        top: 6
       }
-      locations = SmartPostPickupConnector.lookup(query).parsed_response
-      return [areacode, locations]
+      response = SmartPostPickupConnector.lookup(query).parsed_response
+      response['locations'] or raise ShippingGatewayError, response['message']
     end
 
     def send_shipment

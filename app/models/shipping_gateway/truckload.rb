@@ -13,7 +13,7 @@ module ShippingGateway
   class Truckload
     include ActiveModel::Model
 
-    attr_accessor :order, :shipment, :user
+    attr_accessor :order, :shipment, :user, :data
 
     def self.requires_maps?
       true
@@ -34,7 +34,17 @@ module ShippingGateway
     def initialize(attributes = {})
       super
       raise ShippingGatewayError, 'Order not specified' if order.nil?
+      @store = order.store
       @truckload_connector = TruckloadConnector.new
+    end
+
+    def prepare_interface_data(params = {})
+      origin = @store.shipping_origin
+      destination = distance_lookup(origin, I18n.locale)
+      {
+        origin: origin,
+        destination: destination
+      }
     end
 
     def calculated_cost(base_price, metadata)

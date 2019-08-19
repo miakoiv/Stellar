@@ -26,6 +26,10 @@ module ShippingGateway
       raise ShippingGatewayError, 'Order not specified' if order.nil?
     end
 
+    def prepare_interface_data(params = {})
+      {}
+    end
+
     def calculated_cost(base_price, metadata)
       base_price
     end

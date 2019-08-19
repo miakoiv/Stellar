@@ -38,7 +38,7 @@ module ShippingGateway
     class Base
       include ActiveModel::Model
 
-      attr_accessor :order, :shipment, :user
+      attr_accessor :order, :shipment, :user, :data
 
       def self.fixed_cost?
         true
@@ -60,6 +60,10 @@ module ShippingGateway
         @api_key = '00000000-0000-0000-0000-000000000000'
         @secret = '1234567890ABCDEF'
         @locale = I18n.locale
+      end
+
+      def prepare_interface_data(params = {})
+        {}
       end
 
       def calculated_cost(base_price, metadata)
@@ -208,6 +212,15 @@ module ShippingGateway
     end
 
     class DbSchenker < Base
+      def prepare_interface_data(params = {})
+        postalcode = params[:postalcode] || order.shipping_address.postalcode
+        locations = search_pickup_points(postalcode)
+        {
+          postalcode: postalcode,
+          locations: locations
+        }
+      end
+
       def self.requires_maps?
         true
       end
@@ -232,6 +245,15 @@ module ShippingGateway
     end
 
     class Posti < Base
+      def prepare_interface_data(params = {})
+        postalcode = params[:postalcode] || order.shipping_address.postalcode
+        locations = search_pickup_points(postalcode)
+        {
+          postalcode: postalcode,
+          locations: locations
+        }
+      end
+
       def self.requires_maps?
         true
       end

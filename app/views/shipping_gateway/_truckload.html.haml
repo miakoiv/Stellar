@@ -1,18 +1,15 @@
-- origin = current_store.shipping_origin
-- destination = @shipping_gateway.distance_lookup(origin, I18n.locale)
-
 .gateway-error.alert.alert-danger{style: 'display: none;'}
   = icon('warning', t('.lookup_error'))
 
-- if destination.present?
+- if @data[:destination].present?
   %dl.dl-horizontal
     %dt= t('.distance')
-    %dd= destination['distance']['text']
+    %dd= @data[:destination]['distance']['text']
     %dt= t('.loads')
     %dd= 1
   = form_for [@order, @order.shipments.build(shipping_method: @shipping_method)], url: ship_path(@order), remote: true, html: {id: 'gateway-form'} do |f|
     = f.hidden_field :shipping_method_id
-    = f.hidden_field :metadata, value: destination
+    = f.hidden_field :metadata, value: @data[:destination]
     .ship-button.hidden-print
       = button_tag t('checkout.ship'), class: 'btn btn-block btn-lg btn-primary'
 
