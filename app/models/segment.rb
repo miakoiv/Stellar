@@ -155,10 +155,6 @@ class Segment < ApplicationRecord
     Segment.templates.keys.map { |t| [Segment.human_attribute_value(:template, t), t] }
   end
 
-  def self.shape_options
-    SHAPES
-  end
-
   def self.alignment_options
     ALIGNMENTS.map { |a| [Segment.human_attribute_value(:alignment, a), a] }
   end
@@ -218,7 +214,7 @@ class Segment < ApplicationRecord
   end
 
   def fixed_ratio?
-    shape.present?
+    aspect_ratio.present?
   end
 
   def animation_class
@@ -232,6 +228,12 @@ class Segment < ApplicationRecord
 
   def grid_columns_class
     ["columns-#{grid_columns}", grid_disable_xs? && 'grid-disable-xs']
+  end
+
+  def shape_options
+    shapes = Segment::SHAPES.map { |ratio, name| ratio }
+    shapes.unshift(aspect_ratio) unless shapes.include?(aspect_ratio)
+    shapes.map { |shape| {value: shape} }
   end
 
   def picture_options
@@ -265,7 +267,7 @@ class Segment < ApplicationRecord
   def refer(another)
     self.assign_attributes(
       template: 'reference',
-      shape: another.shape,
+      aspect_ratio: another.aspect_ratio,
       stretch: another.stretch,
       alignment: another.alignment,
       justification: another.justification,

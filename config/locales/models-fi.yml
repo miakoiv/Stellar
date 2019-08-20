@@ -522,7 +522,7 @@ fi:
         resource_type: Kohteen tyyppi
         resource_id: Kohde
         template: Sisällön tyyppi
-        shape: Lohkon muoto
+        aspect_ratio: Lohkon kuvasuhde
         stretch: Venyvä lohko
         margin_top: Ylämarginaali
         margin_bottom: Alamarginaali

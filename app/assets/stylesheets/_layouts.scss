@@ -276,7 +276,7 @@
   .segment-content-wrap.align-bottom & { justify-content: flex-end; }
 }
 
-/* Aspect ratios */
+/* Fixed ratio segments */
 .fixed-ratio .segment-shape {
   height: 0 !important;
 
@@ -285,19 +285,6 @@
     overflow: hidden;
   }
 }
-.segment-shape.shape-viewport { height: auto; }
-.segment-shape.shape-2-3 { padding-bottom: 150%; }
-.segment-shape.shape-3-4 { padding-bottom: 133.333%; }
-.segment-shape.shape-square { padding-bottom: 100%; }
-.segment-shape.shape-4-3 { padding-bottom: 75%; }
-.segment-shape.shape-13-9 { padding-bottom: 69.23077%; }
-.segment-shape.shape-3-2 { padding-bottom: 66.66667%; }
-.segment-shape.shape-5-3 { padding-bottom: 60%; }
-.segment-shape.shape-16-9 { padding-bottom: 56.25%; }
-.segment-shape.shape-two-one { padding-bottom: 50%; }
-.segment-shape.shape-21-9 { padding-bottom: 42.85714%; }
-.segment-shape.shape-three-one { padding-bottom: 33.33333%; }
-.segment-shape.shape-four-one { padding-bottom: 25%; }
 
 /* Shadows */
 .segment-shape.shadow-light { @include box-shadow(0 1px 1px rgba(0,0,0,0.1)); }

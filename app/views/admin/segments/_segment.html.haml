@@ -1,5 +1,5 @@
 .segment[segment]{class: [segment.template, segment.stretch? && 'stretch', segment.fixed_ratio? && 'fixed-ratio', segment.css_classes], style: segment.style(:margins)}
-  .segment-shape{class: [segment.shape, segment.shadow, segment.animation_class], data: {'av-animation': segment.animation}}
+  .segment-shape{class: [segment.shadow, segment.animation_class], style: segment.style(:aspectRatio), data: {'av-animation': segment.animation}}
     = render partial: 'segments/background', object: segment, as: :segment
     = render partial: 'admin/segments/content', object: segment, as: :segment
   = render partial: 'admin/segments/segment_nav', object: segment, as: :segment

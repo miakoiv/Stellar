@@ -2,7 +2,7 @@
   = bootstrap_form_for [:admin, segment], remote: true, html: {id: 'segment-layout-form', class: 'immediate triggered'} do |f|
     = hidden_field_tag :panel, 'layout'
     %fieldset
-      = f.select :shape, Segment.shape_options, {include_blank: t('.fluid_ratio')}, {placeholder: t('.fluid_ratio'), class: 'input-sm'}
+      = f.text_field :aspect_ratio, data: {shapes: segment.shape_options.to_json}, placeholder: t('.fluid_ratio'), class: 'input-sm'
       - unless segment.fixed_ratio?
         = f.form_group do
           = f.check_box :stretch
@@ -28,8 +28,17 @@
   :coffee
     $('#segment_template').betterSelectize
       dropdownParent: null
-    $('#segment_shape').betterSelectize
+    $('#segment_aspect_ratio').betterSelectize
+      plugins: ['remove_button']
       dropdownParent: null
+      options: $('#segment_aspect_ratio').data('shapes')
+      labelField: 'value'
+      searchField: ['value']
+      maxItems: 1
+      create: true
+      render:
+        option_create: (data, escape) ->
+          '<div class="create no-wrap"><i class="fa fa-fw fa-plus-circle"></i> ' + escape(data.input) + '</div>'
     $('#segment_margin_top').nouislider()
     $('#segment_margin_bottom').nouislider()
     $('#segment_padding_vertical').nouislider()
