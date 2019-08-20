@@ -16,27 +16,6 @@ class Section < ApplicationRecord
   include Videoable
 
   #---
-  # Presets as layout, name, column count tuples.
-  # DEPRECATED: being replaced with SPANS.
-  PRESETS = [
-    [
-      ['twelve', '12', 1],
-      ['eight-four', '8+4', 2],
-      ['four-eight', '4+8', 2],
-      ['four-four-four', '4+4+4', 3],
-      ['two-two-two-two-two-two', '2+2+2+2+2+2', 6],
-    ],
-    [
-      ['six-six', '6+6', 2],
-      ['nine-three', '9+3', 2],
-      ['three-nine', '3+9', 2],
-      ['six-three-three', '6+3+3', 3],
-      ['three-six-three', '3+6+3', 3],
-      ['three-three-six', '3+3+6', 3],
-      ['three-three-three-three', '3+3+3+3', 4],
-    ]
-  ].freeze
-
   # Section layout presets defined as tuples of
   # column spans for xs and sm viewports.
   SPANS = {
