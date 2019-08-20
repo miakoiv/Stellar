@@ -104,10 +104,6 @@ class Section < ApplicationRecord
     width == 'spread'
   end
 
-  def gutter
-    gutters? ? 'gutters' : 'no-gutters'
-  end
-
   def remaining_span
     12 - columns.sum(:span_sm)
   end

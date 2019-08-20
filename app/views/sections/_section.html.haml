@@ -1,4 +1,4 @@
-%section.section{id: dom_id(section), class: section.gutter}
+%section.section{id: dom_id(section), class: section.gutters? ? 'gutters' : 'no-gutters'}
   = render partial: 'sections/background', object: section, as: :section
   %div{class: section.spread? ? 'container-fluid' : 'container'}
     = render partial: 'sections/content', object: section, as: :section
