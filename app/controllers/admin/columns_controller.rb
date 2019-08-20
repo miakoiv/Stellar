@@ -68,7 +68,8 @@ class Admin::ColumnsController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def column_params
       params.fetch(:column, {}).permit(
-        :span_xs, :span_sm, :alignment, :viewport, :pivot, :background_color
+        :span_xs, :span_sm, :alignment, :viewport, :pivot, :background_color,
+        :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
       )
     end
 end

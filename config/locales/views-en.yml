@@ -125,6 +125,10 @@ en:
       settings:
         layout: Layout
         color: Color
+      panels:
+        color:
+          solid_color: "[No gradient]"
+          gradient_center: centered
       column_nav:
         tooltips:
           settings: Settings

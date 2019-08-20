@@ -132,6 +132,10 @@ fi:
       settings:
         layout: Muotoilu
         color: Värit
+      panels:
+        color:
+          solid_color: "[Ei väriliukua]"
+          gradient_center: keskitetty
       column_nav:
         tooltips:
           settings: Asetukset

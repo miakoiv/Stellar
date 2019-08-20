@@ -11,6 +11,19 @@ fi:
           'align-middle': keskelle
           'align-bottom': alas
           'align-fill': täytä
+        gradient_type:
+          linear: suora
+          circle: ympyrä
+          ellipse: soikio
+        gradient_direction:
+          'top left': ylös vasemmalle
+          'top': ylös
+          'top right': ylös oikealle
+          'left': vasemmalle
+          'right': oikealle
+          'bottom left': alas vasemmalle
+          'bottom': alas
+          'bottom right': alas oikealle
       group:
         appearance:
           default: harmaa

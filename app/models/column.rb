@@ -9,6 +9,14 @@ class Column < ApplicationRecord
   #---
   ALIGNMENTS = %w{align-top align-middle align-bottom align-fill}.freeze
 
+  GRADIENT_TYPES = %w{linear circle ellipse}.freeze
+
+  GRADIENT_DIRECTIONS = [
+    'top left', 'top', 'top right',
+    'left', 'right',
+    'bottom left', 'bottom', 'bottom right'
+  ].freeze
+
   #---
   belongs_to :section, touch: true
   has_many :segments, dependent: :destroy
@@ -21,6 +29,14 @@ class Column < ApplicationRecord
   #---
   def self.alignment_options
     ALIGNMENTS.map { |a| [Column.human_attribute_value(:alignment, a), a] }
+  end
+
+  def self.gradient_type_options
+    GRADIENT_TYPES.map { |g| [Column.human_attribute_value(:gradient_type, g), g] }
+  end
+
+  def self.gradient_direction_options
+    GRADIENT_DIRECTIONS.map { |g| [Column.human_attribute_value(:gradient_direction, g), g] }
   end
 
   #---

@@ -192,6 +192,10 @@ en:
         alignment: Vertical alignment
         viewport: Use viewport height
         background_color: Background color
+        gradient_color: Gradient color
+        gradient_type: Gradient type
+        gradient_direction: Gradient direction
+        gradient_balance: Gradient middle point
         pivot: Horizontal layout on mobile
       component_entry:
         product_id: Product

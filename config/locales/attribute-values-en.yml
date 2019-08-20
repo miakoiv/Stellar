@@ -11,6 +11,19 @@ en:
           'align-middle': middle
           'align-bottom': bottom
           'align-fill': fill
+        gradient_type:
+          linear: linear
+          circle: circle
+          ellipse: ellipse
+        gradient_direction:
+          'top left': top left
+          'top': top
+          'top right': top right
+          'left': left
+          'right': right
+          'bottom left': bottom left
+          'bottom': bottom
+          'bottom right': bottom right
       group:
         appearance:
           default: gray
