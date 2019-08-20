@@ -38,6 +38,9 @@ module ShippingGateway
     class Base
       include ActiveModel::Model
 
+      TEST_KEY = '00000000-0000-0000-0000-000000000000'
+      TEST_SECRET = '1234567890ABCDEF'
+
       attr_accessor :order, :shipment, :user, :data
 
       def self.fixed_cost?
@@ -57,8 +60,8 @@ module ShippingGateway
         raise ShippingGatewayError, 'Order not specified' if order.nil?
         @store = order.store
         @group = user&.group(@store)
-        @api_key = '00000000-0000-0000-0000-000000000000'
-        @secret = '1234567890ABCDEF'
+        @api_key = @store.pakettikauppa_api_key || TEST_KEY
+        @secret = @store.pakettikauppa_secret || TEST_SECRET
         @locale = I18n.locale
       end
 

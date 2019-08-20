@@ -24,6 +24,8 @@ class Store < ApplicationRecord
     :tawkto_site_id, # tawk.to site id for chat widget
     :pbw_api_key,     # Paybyway API key
     :pbw_private_key, # Paybyway private key
+    :pakettikauppa_api_key, # Pakettikauppa API key
+    :pakettikauppa_secret,  # Pakettikauppa merchant secret
     :stock_gateway,   # stock gateway class, see .stock_gateway_options
     :stock_gateway_token, # client token to access the stock gateway
     :oikotie_asunnot_api_key,     # Oikotie Asunnot API key

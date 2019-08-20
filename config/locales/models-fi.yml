@@ -8,6 +8,7 @@ fi:
       shipping_gateway/smart_post: Posti SmartPOST
       shipping_gateway/vendor: tavarantoimittaja kuljettaa
       shipping_gateway/truckload: kuorma-autokuljetus
+      shipping_gateway/pakettikauppa/base: Pakettikauppa
       shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
       shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
@@ -647,6 +648,8 @@ fi:
         tawkto_site_id: tawk.to -tunnus
         pbw_api_key: Rajapinta-avain
         pbw_private_key: Yksityinen avain
+        pakettikauppa_api_key: Rajapinta-avain
+        pakettikauppa_secret: Salausavain
         stock_gateway: Varastorajapinta
         stock_gateway_token: Varastorajapinnan avain
         order_sequence: Tilausnumerointi

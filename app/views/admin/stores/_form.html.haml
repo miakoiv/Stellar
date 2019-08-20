@@ -84,14 +84,16 @@
               .col-md-6
                 = f.text_field :maps_api_key
             = f.text_field :shipping_origin
-            %hr
             .row
               .col-md-6
                 = f.text_field :facebook_access_token
               .col-md-6
                 = f.text_field :facebook_pixel_id
-            %hr
             = f.text_field :tawkto_site_id
+          %fieldset{disabled: locked}
+            = f.select :stock_gateway, Store.stock_gateway_options, {include_blank: true, help: t('.stock_gateway_help')}, {class: 'selectize'}
+            = f.text_field :stock_gateway_token
+          %hr
           %fieldset{disabled: locked}
             %legend= PaymentGateway::Paybyway.model_name.human
             .row
@@ -99,10 +101,13 @@
                 = f.text_field :pbw_api_key
               .col-md-6
                 = f.text_field :pbw_private_key
-            %hr
           %fieldset{disabled: locked}
-            = f.select :stock_gateway, Store.stock_gateway_options, {include_blank: true, help: t('.stock_gateway_help')}, {class: 'selectize'}
-            = f.text_field :stock_gateway_token
+            %legend= ShippingGateway::Pakettikauppa::Base.model_name.human
+            .row
+              .col-md-6
+                = f.text_field :pakettikauppa_api_key
+              .col-md-6
+                = f.text_field :pakettikauppa_secret
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)
