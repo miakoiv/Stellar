@@ -19,6 +19,7 @@ module Styles
       write(:foregroundColor, foreground_color)
       write(:backgroundColor, background_color)
       write(:backgroundImage, background_image, true)
+      write(:aspectRatio, aspect_ratio)
       write(:minHeight, min_height)
       write(:gutter, gutter)
       write(:widthRatio, width_ratio)
@@ -66,6 +67,15 @@ module Styles
           variant = r.background_picture.image.is_bitmap? ? (r.background_picture.variant || :lightbox) : :original
           url = r.background_picture.image.url(variant, timestamp: false)
           [['background-image', "url(#{url})"]]
+        end
+      end
+
+      def aspect_ratio
+        if r.respond_to?(:aspect_ratio) && r.aspect_ratio.present?
+          if m = /\A(\d+)[\D]+(\d+)/.match(r.aspect_ratio)
+            n, d = m[1].to_f, m[2].to_f
+            [['padding-bottom', "#{100*d / n}%"]]
+          end
         end
       end
 
