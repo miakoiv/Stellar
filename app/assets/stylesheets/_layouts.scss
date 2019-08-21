@@ -252,6 +252,7 @@
   position: relative;
   width: 100%;
   @include flex;
+  background-repeat: no-repeat;
 
   &.jumbotron {
     padding: 0;
