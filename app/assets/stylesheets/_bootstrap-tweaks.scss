@@ -914,6 +914,26 @@ mark {
 
 
 /*
+ * Square buttons
+ */
+.btn-sq {
+  width: 2*$padding-base-vertical + $line-height-computed;
+}
+.btn-sq-lg {
+  @extend .btn-lg;
+  width: 2*$padding-large-vertical + floor(($font-size-large * $line-height-large));
+}
+.btn-sq-sm {
+  @extend .btn-sm;
+  width: 2*$padding-small-vertical + floor(($font-size-small * $line-height-small));
+}
+.btn-sq-xs {
+  @extend .btn-xs;
+  width: 2*$padding-xs-vertical + floor(($font-size-small * $line-height-small));
+}
+
+
+/*
  * Rounded buttons
  */
 .btn-round {
@@ -936,9 +956,11 @@ mark {
  * Block level button toggles, buttons with more contrast
  */
 .btn-group-block {
-  @include clearfix;
-  display: block;
+  display: flex;
+  flex-flow: row nowrap;
 }
+.btn-group-block + .btn-group-block { margin-top: -1px; }
+
 [data-toggle="buttons"] {
   > .btn,
   > .btn-group > .btn {
