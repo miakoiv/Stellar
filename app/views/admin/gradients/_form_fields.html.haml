@@ -1,14 +1,23 @@
 %fieldset
   .row
-    .col-sm-6
-      = f.select :gradient_type, Gradient.type_options, {include_blank: true}, {placeholder: t('.solid_color'), id: 'gradient-type', class: 'input-sm'}
-    .col-sm-6
-      = f.select :gradient_direction, Gradient.direction_options, {include_blank: true}, {placeholder: t('.gradient_center'), id: 'gradient-direction', class: 'input-sm'}
-  = f.range_field :gradient_balance, min: -100, max: 100, step: 1, id: 'gradient-balance'
+    .col-sm-8
+      .form-group
+        %label.control-label= t('.type')
+        .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+          - Gradient.type_options.each do |title, type|
+            %label.btn.btn-default{class: f.object.gradient_type == type && 'active'}
+              = f.radio_button_without_bootstrap :gradient_type, type
+              = title
+      = f.range_field :gradient_balance, min: -100, max: 100, step: 1, id: 'gradient-balance', label: t('.balance')
+    .col-sm-4
+      .form-group{data: {toggle: 'buttons'}}
+        %label.control-label= t('.direction')
+        - Gradient.direction_options.each_slice(3) do |row|
+          .btn-group.btn-group-block
+            - row.each do |title, direction|
+              %label.btn.btn-sq-sm.btn-default{class: f.object.gradient_direction == direction && 'active'}
+                = f.radio_button_without_bootstrap :gradient_direction, direction
+                = title
 
 :coffee
-  $('#gradient-type').betterSelectize
-    dropdownParent: null
-  $('#gradient-direction').betterSelectize
-    dropdownParent: null
   $('#gradient-balance').nouislider()

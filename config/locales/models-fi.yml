@@ -193,9 +193,6 @@ fi:
         viewport: Tasaa ikkunan korkeuteen
         background_color: Taustaväri
         gradient_color: Liukuväri
-        gradient_type: Väriliu’un tyyppi
-        gradient_direction: Väriliu’un suunta
-        gradient_balance: Väriliu’un keskikohta
         pivot: Kääntö vaakatasoon mobiilinäytöllä
       component_entry:
         product_id: Tuote
@@ -518,9 +515,6 @@ fi:
         width: Sisällön leveys
         background_color: Taustaväri
         gradient_color: Liukuväri
-        gradient_type: Väriliu’un tyyppi
-        gradient_direction: Väriliu’un suunta
-        gradient_balance: Väriliu’un keskikohta
         fixed_background: Kiinteä tausta
       segment:
         resource_type: Kohteen tyyppi
@@ -537,9 +531,6 @@ fi:
         foreground_color: Tekstiväri
         background_color: Taustaväri
         gradient_color: Liukuväri
-        gradient_type: Väriliu’un tyyppi
-        gradient_direction: Väriliu’un suunta
-        gradient_balance: Väriliu’un keskikohta
         body: Leipäteksti
         header: Otsikko
         subhead: Alaotsikko

@@ -3,6 +3,7 @@ fi:
     values:
       gradient:
         type:
+          solid: ei
           linear: suora
           circle: ympyrä
           ellipse: soikio

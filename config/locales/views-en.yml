@@ -144,8 +144,9 @@ en:
         edit_page: Edit page
     gradients:
       form_fields:
-        solid_color: "[No gradient]"
-        gradient_center: centered
+        type: Gradient type
+        direction: Gradient direction
+        balance: Gradient middle point
     groups:
       index:
         new_group: New group

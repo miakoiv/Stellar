@@ -3,6 +3,7 @@ en:
     values:
       gradient:
         type:
+          solid: none
           linear: linear
           circle: circle
           ellipse: ellipse

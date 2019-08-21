@@ -151,8 +151,9 @@ fi:
         edit_page: Muokkaa sivua
     gradients:
       form_fields:
-        solid_color: "[Ei väriliukua]"
-        gradient_center: keskitetty
+        type: Väriliu’un tyyppi
+        direction: Väriliu’un suunta
+        balance: Väriliu’un keskikohta
     groups:
       index:
         new_group: Uusi ryhmä
