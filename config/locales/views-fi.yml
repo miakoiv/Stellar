@@ -132,10 +132,6 @@ fi:
       settings:
         layout: Muotoilu
         color: Värit
-      panels:
-        color:
-          solid_color: "[Ei väriliukua]"
-          gradient_center: keskitetty
       column_nav:
         tooltips:
           settings: Asetukset
@@ -153,6 +149,10 @@ fi:
         new_department: Uusi osasto
       show:
         edit_page: Muokkaa sivua
+    gradients:
+      form_fields:
+        solid_color: "[Ei väriliukua]"
+        gradient_center: keskitetty
     groups:
       index:
         new_group: Uusi ryhmä
@@ -407,10 +407,6 @@ fi:
       settings:
         layout: Muotoilu
         color: Värit
-      panels:
-        color:
-          solid_color: "[Ei väriliukua]"
-          gradient_center: keskitetty
       section_nav:
         tooltips:
           copy: Kopioi

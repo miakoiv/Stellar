@@ -125,10 +125,6 @@ en:
       settings:
         layout: Layout
         color: Color
-      panels:
-        color:
-          solid_color: "[No gradient]"
-          gradient_center: centered
       column_nav:
         tooltips:
           settings: Settings
@@ -146,6 +142,10 @@ en:
         new_department: New department
       show:
         edit_page: Edit page
+    gradients:
+      form_fields:
+        solid_color: "[No gradient]"
+        gradient_center: centered
     groups:
       index:
         new_group: New group
@@ -396,10 +396,6 @@ en:
       settings:
         layout: Layout
         color: Colors
-      panels:
-        color:
-          solid_color: "[No gradient]"
-          gradient_center: centered
       section_nav:
         tooltips:
           copy: Copy

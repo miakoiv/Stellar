@@ -1,21 +1,15 @@
 #column-color-panel
   = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors)} do |f|
     %fieldset
-      = f.text_field :background_color, class: 'input-sm color'
-      = f.text_field :gradient_color, class: 'input-sm color'
+      .row
+        .col-sm-6
+          = f.text_field :background_color, class: 'input-sm color'
+        .col-sm-6
+          = f.text_field :gradient_color, class: 'input-sm color'
   = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: 'column-color-form', class: 'immediate'} do |f|
-    %fieldset
-      = f.select :gradient_type, Column.gradient_type_options, {include_blank: true}, {placeholder: t('.solid_color'), class: 'input-sm'}
-      = f.select :gradient_direction, Column.gradient_direction_options, {include_blank: true}, {placeholder: t('.gradient_center'), class: 'input-sm'}
-      = f.range_field :gradient_balance, min: -100, max: 100, step: 1
+    = render partial: 'admin/gradients/form_fields', object: f, as: :f
 
   :coffee
-    $('#column_gradient_type').betterSelectize
-      dropdownParent: null
-    $('#column_gradient_direction').betterSelectize
-      dropdownParent: null
-    $('#column_gradient_balance').nouislider()
-
     $form = $('##{dom_id(column, :colors)}')
     $form.find('.color').minicolors
       theme: 'bootstrap'

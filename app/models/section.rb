@@ -38,14 +38,6 @@ class Section < ApplicationRecord
     spread col-12 col-10 col-8 col-6
   }.freeze
 
-  GRADIENT_TYPES = %w{linear circle ellipse}.freeze
-
-  GRADIENT_DIRECTIONS = [
-    'top left', 'top', 'top right',
-    'left', 'right',
-    'bottom left', 'bottom', 'bottom right'
-  ].freeze
-
   #---
   belongs_to :page, touch: true
   has_many :columns, dependent: :destroy
@@ -68,14 +60,6 @@ class Section < ApplicationRecord
 
   def self.width_options
     WIDTHS.map { |w| [Section.human_attribute_value(:width, w), w] }
-  end
-
-  def self.gradient_type_options
-    GRADIENT_TYPES.map { |g| [Section.human_attribute_value(:gradient_type, g), g] }
-  end
-
-  def self.gradient_direction_options
-    GRADIENT_DIRECTIONS.map { |g| [Section.human_attribute_value(:gradient_direction, g), g] }
   end
 
   #---

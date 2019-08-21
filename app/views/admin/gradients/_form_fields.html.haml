@@ -1,0 +1,14 @@
+%fieldset
+  .row
+    .col-sm-6
+      = f.select :gradient_type, Gradient.type_options, {include_blank: true}, {placeholder: t('.solid_color'), id: 'gradient-type', class: 'input-sm'}
+    .col-sm-6
+      = f.select :gradient_direction, Gradient.direction_options, {include_blank: true}, {placeholder: t('.gradient_center'), id: 'gradient-direction', class: 'input-sm'}
+  = f.range_field :gradient_balance, min: -100, max: 100, step: 1, id: 'gradient-balance'
+
+:coffee
+  $('#gradient-type').betterSelectize
+    dropdownParent: null
+  $('#gradient-direction').betterSelectize
+    dropdownParent: null
+  $('#gradient-balance').nouislider()
