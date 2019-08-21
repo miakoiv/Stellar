@@ -536,6 +536,10 @@ fi:
         justification: Sisällön vaakatasaus
         foreground_color: Tekstiväri
         background_color: Taustaväri
+        gradient_color: Liukuväri
+        gradient_type: Väriliu’un tyyppi
+        gradient_direction: Väriliu’un suunta
+        gradient_balance: Väriliu’un keskikohta
         body: Leipäteksti
         header: Otsikko
         subhead: Alaotsikko

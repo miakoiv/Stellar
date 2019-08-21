@@ -150,6 +150,7 @@ class Admin::SegmentsController < AdminController
         :resource_id, :resource_type,
         :template, :aspect_ratio, :alignment, :justification,
         :stretch, :foreground_color, :background_color,
+        :gradient_color, :gradient_type, :gradient_direction, :gradient_balance,
         :body, :header, :subhead, :url,
         :margin_top, :margin_bottom,
         :padding_vertical, :padding_horizontal,

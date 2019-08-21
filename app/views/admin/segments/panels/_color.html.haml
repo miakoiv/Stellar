@@ -2,7 +2,13 @@
   = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :colors)} do |f|
     %fieldset
       = f.text_field :foreground_color, class: 'input-sm color'
-      = f.text_field :background_color, class: 'input-sm color'
+      .row
+        .col-sm-6
+          = f.text_field :background_color, class: 'input-sm color'
+        .col-sm-6
+          = f.text_field :gradient_color, class: 'input-sm color'
+  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: 'segment-color-form', class: 'immediate'} do |f|
+    = render partial: 'admin/gradients/form_fields', object: f, as: :f
 
   :coffee
     $form = $('##{dom_id(segment, :colors)}')
