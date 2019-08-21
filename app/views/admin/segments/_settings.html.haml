@@ -3,6 +3,7 @@
   = nav_tab 'segment-layout', t('.layout')
   = nav_tab 'segment-design', t('.design')
   = nav_tab 'segment-color', t('.color')
+  = nav_tab 'segment-borders', t('.borders')
 
 .tab-content
   = tab_pane 'segment-main', default: true do
@@ -13,3 +14,5 @@
     = render partial: 'admin/segments/panels/design', object: segment, as: :segment
   = tab_pane 'segment-color' do
     = render partial: 'admin/segments/panels/color', object: segment, as: :segment
+  = tab_pane 'segment-borders' do
+    = render partial: 'admin/segments/panels/borders', object: segment, as: :segment

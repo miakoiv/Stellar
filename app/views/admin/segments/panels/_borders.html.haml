@@ -1,0 +1,28 @@
+#segment-borders-panel
+  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :borders)} do |f|
+    %fieldset
+      .row
+        .col-sm-4
+          = f.text_field :border_color, class: 'input-sm color', skip_label: true
+        .col-sm-4
+          = f.range_field :border_width, min: 0, max: 50, step: 1, skip_label: true
+        .col-sm-4
+          = f.select :border_style, Segment.border_style_options, {skip_label: true}, {class: 'input-sm'}
+  :coffee
+    $('#segment_border_style').betterSelectize
+      dropdownParent: null
+    $('#segment_border_width').nouislider()
+
+    $form = $('##{dom_id(segment, :borders)}')
+    $form.find('.color').minicolors
+      theme: 'bootstrap'
+      position: 'bottom left'
+      format: 'rgb'
+      opacity: true
+      keywords: 'transparent'
+      swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
+      change: (value) ->
+        $form.trigger 'submit.rails'
+      changeDelay: 500
+    $form.on 'change', 'select, input:not(.color)', (e) ->
+      $form.trigger 'submit.rails'

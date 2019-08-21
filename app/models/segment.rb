@@ -44,6 +44,7 @@ class Segment < ApplicationRecord
   include Documentable
   include Pictureable
   include Reorderable
+  include Borderable
   include Stylable
 
   #---

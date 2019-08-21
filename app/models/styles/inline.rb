@@ -25,6 +25,7 @@ module Styles
       write(:widthRatio, width_ratio)
       write(:margins, margins)
       write(:padding, padding)
+      write(:borders, borders)
     end
 
     private
@@ -112,6 +113,15 @@ module Styles
       def padding
         if r.respond_to?(:padding_vertical)
           [['padding', "#{r.padding_vertical}px #{r.padding_horizontal}%"]]
+        end
+      end
+
+      def borders
+        if r.respond_to?(:border_color)
+          Borderable::ATTRIBUTES.map do |attr|
+            value, unit = r.send(attr), Borderable.unit(attr)
+            value.present? ? [attr.to_s.dasherize, "#{value}#{unit}"] : nil
+          end
         end
       end
 

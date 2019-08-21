@@ -424,6 +424,7 @@ fi:
         layout: Muotoilu
         design: Ulkoasu
         color: Värit
+        borders: Kehykset
       panels:
         layout:
           fluid_ratio: sisällön mukaan

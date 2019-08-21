@@ -413,6 +413,7 @@ en:
         layout: Layout
         design: Design
         color: Colors
+        borders: Borders
       panels:
         layout:
           fluid_ratio: from content

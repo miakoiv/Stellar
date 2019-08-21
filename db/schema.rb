@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_072530) do
+ActiveRecord::Schema.define(version: 2019_08_21_114832) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -745,6 +745,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_072530) do
     t.text "body", limit: 16777215
     t.text "metadata"
     t.text "content"
+    t.text "borders"
     t.text "inline_styles"
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
