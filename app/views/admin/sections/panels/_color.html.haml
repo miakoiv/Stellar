@@ -3,15 +3,15 @@
     %fieldset
       .row
         .col-sm-6
-          = f.text_field :background_color, class: 'input-sm color'
+          = f.text_field :background_color, class: 'input-sm color-modify'
         .col-sm-6
-          = f.text_field :gradient_color, class: 'input-sm color'
+          = f.text_field :gradient_color, class: 'input-sm color-modify'
   = bootstrap_form_for [:modify, :admin, section], remote: true, html: {id: 'section-color-form', class: 'immediate'} do |f|
     = render partial: 'admin/gradients/form_fields', object: f, as: :f
 
   :coffee
     $form = $('##{dom_id(section, :colors)}')
-    $form.find('.color').minicolors
+    $form.find('.color-modify').minicolors
       theme: 'bootstrap'
       position: 'bottom left'
       format: 'rgb'
