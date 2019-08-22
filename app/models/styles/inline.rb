@@ -117,11 +117,8 @@ module Styles
       end
 
       def borders
-        if r.respond_to?(:border_color)
-          Borderable::ATTRIBUTES.map do |attr|
-            value, unit = r.send(attr), Borderable.unit(attr)
-            value.present? ? [attr.to_s.dasherize, "#{value}#{unit}"] : nil
-          end
+        if r.respond_to?(:inline_border_styles)
+          r.inline_border_styles
         end
       end
 

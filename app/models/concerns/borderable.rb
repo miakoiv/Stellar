@@ -9,19 +9,7 @@ module Borderable
     :border_left_color, :border_left_style, :border_left_width
   ].freeze
 
-  STYLES = %w{solid dotted dashed groove inset}.freeze
-
-  UNITS = {
-    border_width: 'px',
-    border_top_width: 'px',
-    border_right_width: 'px',
-    border_bottom_width: 'px',
-    border_left_width: 'px'
-  }.freeze
-
-  def self.unit(attr)
-    UNITS[attr]
-  end
+  STYLES = %w{none solid dotted dashed groove inset}.freeze
 
   included do
     store :borders, accessors: ATTRIBUTES, coder: JSON
@@ -29,5 +17,28 @@ module Borderable
     def self.border_style_options
       STYLES
     end
+
+    def inline_border_styles
+      styles = []
+      build_border(styles, :border)
+      build_border(styles, :border_top)
+      build_border(styles, :border_right)
+      build_border(styles, :border_bottom)
+      build_border(styles, :border_left)
+      styles
+    end
+
+    private
+      def build_border(s, attr)
+        color = send("#{attr}_color").presence
+        style = send("#{attr}_style").presence
+        width = send("#{attr}_width").presence
+        prop = attr.to_s.dasherize
+        if style.present?
+          s << ["#{prop}-color", color] if color
+          s << ["#{prop}-style", style]
+          s << ["#{prop}-width", "#{width}px"] if width
+        end
+      end
   end
 end
