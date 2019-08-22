@@ -430,6 +430,15 @@ fi:
           fluid_ratio: sisällön mukaan
         design:
           not_animated: ei animaatiota
+        border_fields:
+          styles:
+            none: ei mitään
+            solid: viiva
+            dotted: pisteviiva
+            dashed: katkoviiva
+            groove: ura
+            inset: upotus
+          undefined: "[ei määritelty]"
       segment_nav:
         tooltips:
           move: Siirrä

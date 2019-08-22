@@ -419,6 +419,15 @@ en:
           fluid_ratio: from content
         design:
           not_animated: not animated
+        border_fields:
+          styles:
+            none: none
+            solid: line
+            dotted: dotted line
+            dashed: dashed line
+            groove: groove
+            inset: inset
+          undefined: "[undefined]"
       segment_nav:
         tooltips:
           move: Move
