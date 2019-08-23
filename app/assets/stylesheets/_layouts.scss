@@ -237,11 +237,6 @@
   position: relative;
   @include flex;
   overflow: visible; // overrides Bootstrap default
-
-    > .av-container {
-      width: 100%;
-      @include flex;
-    }
 }
 .segment-shape {
   position: relative;

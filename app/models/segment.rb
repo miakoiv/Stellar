@@ -34,7 +34,7 @@ class Segment < ApplicationRecord
     :shadow,          # drop shadow selection
     :css_classes,     # additional custom CSS classes
     :jumbotron,       # flag to apply the jumbotron class to segment contents
-    :animation,       # animation applied to the segment via AniView
+    :animation,       # animation applied to the segment when scrolled into view
     :velocity,        # animation velocity, one of slowest, slow, normal, fast
   ], coder: JSON
 
