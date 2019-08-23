@@ -582,7 +582,8 @@
   @include flex-columns;
   > div {
     @include make-xs-column(6);
-    @include make-sm-column(3);
+    @include make-sm-column(4);
+    @include make-md-column(3);
   }
 }
 .columns-6 {
