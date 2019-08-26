@@ -60,7 +60,6 @@
 // App assets
 
 //= require_directory ./admin
-//= require_directory ./pos
 //= require_directory ./jasny-bootstrap
 //= require materialize/nouislider
 //= require palette

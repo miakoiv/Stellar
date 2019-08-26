@@ -21,17 +21,6 @@ Rails.application.routes.draw do
     defaults: {status: '500'},
     via: :all
 
-  # Point-of-sale interface.
-  #namespace :pos do
-  #  root 'main#index'
-  #  resources :orders do
-  #    resources :order_items, shallow: true
-  #  end
-  #  resources :products do
-  #    get :query, on: :collection
-  #  end
-  #end
-
   # Mount stripe engine at /stripe
   mount Stripe::Engine => '/stripe'
 

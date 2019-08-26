@@ -1,2 +1,0 @@
-module Pos::OrdersHelper
-end

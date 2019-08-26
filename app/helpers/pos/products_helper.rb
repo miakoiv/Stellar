@@ -1,2 +1,0 @@
-module Pos::ProductsHelper
-end
