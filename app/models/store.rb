@@ -150,7 +150,7 @@ class Store < ApplicationRecord
 
   def self.theme_options
     @@themes ||= %w{
-      birch boutique cardirad cards cottage darkmatter hiustalo material mechanet premium
+      birch boutique cards clinical cottage darkmatter material mechanic premium salon
     }
   end
 

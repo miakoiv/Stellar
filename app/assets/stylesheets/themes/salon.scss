@@ -1,21 +1,21 @@
-$hiustalo-green: #a2b982;
-$hiustalo-red:   #ed1944;
-$hiustalo-blue:  #007db6;
+$salon-green: #a2b982;
+$salon-red:   #ed1944;
+$salon-blue:  #007db6;
 
-$brand-primary: $hiustalo-blue !default;
+$brand-primary: $salon-blue !default;
 $brand-success: #86bc2a !default;
-$brand-info:    lighten($hiustalo-blue, 25%) !default;
+$brand-info:    lighten($salon-blue, 25%) !default;
 $brand-warning: #ffa538 !default;
-$brand-danger:  $hiustalo-red !default;
+$brand-danger:  $salon-red !default;
 
 @import "themes/material";
 
 /*
- * Overrides to the material theme for Hiustalo
+ * Overrides to the material theme
  */
 
 /* Product filtering */
-.filter-bar { background-color: rgba($hiustalo-green, 0.2); }
+.filter-bar { background-color: rgba($salon-green, 0.2); }
 
 /* Promotions positioned outside the static product-meta */
 .product-meta .promotions {
@@ -38,6 +38,6 @@ $brand-danger:  $hiustalo-red !default;
     margin-top: -45px;
     background-size: 100% 100%;
   }
-  .swiper-button-next { background-image: asset-url('hiustalo-next.svg'); }
-  .swiper-button-prev { background-image: asset-url('hiustalo-prev.svg'); }
+  .swiper-button-next { background-image: asset-url('red-triangle-next.svg'); }
+  .swiper-button-prev { background-image: asset-url('red-triangle-prev.svg'); }
 }

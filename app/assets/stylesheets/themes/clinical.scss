@@ -1,5 +1,5 @@
-$cardirad-green: #00de05;
-$cardirad-blue:  #0068de;
+$clinical-green: #00de05;
+$clinical-blue:  #0068de;
 
 $brand-primary: #007eb5 !default;
 $brand-success: #82bf7e !default;
@@ -16,7 +16,7 @@ $border-radius-small: 0 !default;
 @import "themes/material";
 
 /*
- * Overrides to the material theme for Cardirad
+ * Overrides to the material theme
  */
 #main-nav {
   .navbar-header {

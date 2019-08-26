@@ -25,14 +25,14 @@ Rails.application.config.assets.precompile += %w(
   payment_gateway/paybyway.js
   themes/birch.css       themes/birch.js
   themes/boutique.css    themes/boutique.js
-  themes/cardirad.css    themes/cardirad.js
   themes/cards.css       themes/cards.js
+  themes/clinical.css    themes/clinical.js
   themes/cottage.css     themes/cottage.js
   themes/darkmatter.css  themes/darkmatter.js
-  themes/hiustalo.css    themes/hiustalo.js
   themes/material.css    themes/material.js
-  themes/mechanet.css    themes/mechanet.js
+  themes/mechanic.css    themes/mechanic.js
   themes/premium.css     themes/premium.js
+  themes/salon.css       themes/salon.js
   email/mailgun.css
   stellar.css
   devise.css
