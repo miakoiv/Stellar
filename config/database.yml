@@ -50,6 +50,4 @@ test:
 #
 production:
   <<: *default
-  database: spry
-  username: ruby
-  password: rails
+  url: <%= ENV['STELLAR_DATABASE_URL'] %>
