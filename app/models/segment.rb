@@ -134,7 +134,7 @@ class Segment < ApplicationRecord
   #---
   def self.default_settings
     {
-      template: 'text',
+      template: 'empty',
       margin_top: 20,
       margin_bottom: 20,
       min_width: 200,
