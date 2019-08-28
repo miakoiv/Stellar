@@ -299,14 +299,11 @@
   align-items: center;
   justify-content: center;
 
-  figure { opacity: 0.333; }
-}
-.section-content .placeholder {
-  min-height: 10em;
+  p, figure { opacity: 0.333; }
 }
 
 .segment-content.empty {
-  min-height: 45px;
+  min-height: 80px;
 }
 
 /* Image containers, swipers, and image positioning */
