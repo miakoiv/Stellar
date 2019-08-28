@@ -13,6 +13,7 @@
   .col-md-8
     .panel.panel-default
       .panel-body
-        = @policy.content.html_safe
+        .editable-content
+          = @policy.content.html_safe
   .col-md-4
     = render partial: 'acceptance'
