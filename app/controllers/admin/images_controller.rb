@@ -31,6 +31,21 @@ class Admin::ImagesController < AdminController
     end
   end
 
+  # POST /admin/images/upload
+  # Image uploads from CKEditor
+  def upload
+    @image = current_store.images.build(attachment: upload_params[:upload])
+
+    if @image.save
+      track @image
+      respond_to :json
+    else
+      render json: {
+        error: {message: @image.errors.messages[:attachment].join(' ')}
+      }
+    end
+  end
+
   # DELETE /admin/images/1
   def destroy
     @image = current_store.images.find(params[:id])
@@ -53,6 +68,10 @@ class Admin::ImagesController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.require(:image).permit(:attachment)
+    end
+
+    def upload_params
+      params.permit(:upload)
     end
 
     # Restrict searching to images in current store.

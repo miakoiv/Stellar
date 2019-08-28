@@ -1,7 +1,0 @@
-var $segment = $("##{dom_id(@segment)}");
-var $content = $segment.find('.editable-content');
-$('#secondary-nav .controls').replaceWith("#{j render partial: 'admin/segments/navbar_controls', object: @segment, as: :segment}");
-$('.section, .column, .segment').removeClass('active');
-$segment.addClass('editing');
-$('#section-list').addClass('editing');
-CKEDITOR.DecoupledEditor.create($content[0], $.extend(window.ckLayoutConfig, {language: '#{I18n.locale}'})).then(function (editor) { window.editor = editor; editor.editing.view.focus(); $('.navbar-toolbar').append(editor.ui.view.toolbar.element); }).catch(function (error) { console.error(error); });

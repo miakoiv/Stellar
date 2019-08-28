@@ -719,6 +719,10 @@ fi:
         muted: Hiljennä ääni
     errors:
       models:
+        image:
+          attributes:
+            attachment_content_type:
+              invalid: tuntematon kuvaformaatti
         transfer:
           attributes:
             destination_id:

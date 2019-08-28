@@ -234,6 +234,7 @@ Rails.application.routes.draw do
     end
     resources :images do
       get :select, on: :member
+      post :upload, on: :collection
     end
     resources :products do
       resources :pictures, shallow: true
