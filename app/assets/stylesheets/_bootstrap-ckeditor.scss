@@ -73,3 +73,24 @@
 	.text-shadow-medium { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); }
 	.text-shadow-dark { text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); }
 }
+
+
+/*
+ * CKEditor UI
+ */
+.ck.ck-heading_display1 {
+  font-weight: 300 !important;
+  font-size: 44px !important;
+}
+.ck.ck-heading_display2 {
+  font-weight: 300 !important;
+  font-size: 38px !important;
+}
+.ck.ck-heading_display3 {
+  font-weight: 300 !important;
+  font-size: 32px !important;
+}
+.ck.ck-heading_display4 {
+  font-weight: 300 !important;
+  font-size: 26px !important;
+}
