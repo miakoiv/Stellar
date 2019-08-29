@@ -205,6 +205,11 @@ fi:
           'sizing-original': ei
           'sizing-contain': sovita
           'sizing-cover': peitä
+        line_height:
+          'line-height-compact': tiuha
+          'line-height-default': vakio
+          'line-height-loose': harva
+          'line-height-double': tupla
         justification:
           'justify-left': vasemmalle
           'justify-center': keskelle

@@ -548,6 +548,7 @@ en:
         slide_effect: Slide effect
         slide_delay: Delay between slides
         slide_speed: Transition duration
+        line_height: Text line spacing
         hyphens: Hyphenation
         masonry: Pack rows tightly
         max_items: Max items

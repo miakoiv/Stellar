@@ -548,6 +548,7 @@ fi:
         slide_effect: Siirtymän tehoste
         slide_delay: Tauko siirtymien välillä
         slide_speed: Siirtymän kesto
+        line_height: Tekstin rivivälistys
         hyphens: Tekstin tavutus
         masonry: Tiivistä rivit
         max_items: Maksimimäärä

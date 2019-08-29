@@ -1,3 +1,10 @@
 %fieldset
+  .form-group
+    = f.label col(Segment, :line_height), class: 'control-label'
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+      - Segment.line_height_options.each do |title, height|
+        %label.btn.btn-default{class: segment.line_height == height && 'active'}
+          = f.radio_button_without_bootstrap :line_height, height
+          = title
   = f.form_group do
     = f.check_box :hyphens

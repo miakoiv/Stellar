@@ -205,6 +205,11 @@ en:
           'sizing-original': none
           'sizing-contain': fit
           'sizing-cover': cover
+        line_height:
+          'line-height-compact': compact
+          'line-height-default': default
+          'line-height-loose': loose
+          'line-height-double': double
         justification:
           'justify-left': left
           'justify-center': center

@@ -880,6 +880,23 @@ mark {
 
 
 /*
+ * Preset line heights
+ */
+.line-height-compact {
+  p, p.lead { line-height: 1.2; }
+}
+.line-height-default {
+  p, p.lead { line-height: inherit; }
+}
+.line-height-loose {
+  p, p.lead { line-height: 1.6; }
+}
+.line-height-double {
+  p, p.lead { line-height: 2; }
+}
+
+
+/*
  * Address label boxes
  */
 .address-label {

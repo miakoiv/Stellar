@@ -11,6 +11,7 @@ class Segment < ApplicationRecord
     :grid_columns,    # column count for grid views like categories
     :grid_lines,      # enable grid lines between grid elements
     :grid_disable_xs, # disable grid layout on extra small viewports
+    :line_height,     # line height setting for text segments
     :hyphens,         # enable hyphenation for paragraph content
     :masonry,         # enable masonry on product cards
     :image_sizing,    # image sizing options, one of original, contain, cover
@@ -72,6 +73,8 @@ class Segment < ApplicationRecord
   GRID_COLUMNS = %w{1 2 3 4 6 12}.freeze
 
   IMAGE_SIZES = %w{sizing-original sizing-contain sizing-cover}.freeze
+
+  LINE_HEIGHTS = %w{line-height-compact line-height-default line-height-loose line-height-double}.freeze
 
   SHADOWS = %w{shadow-none shadow-light shadow-medium shadow-heavy}.freeze
 
@@ -140,6 +143,7 @@ class Segment < ApplicationRecord
       min_width: 200,
       gutter: 10,
       width_ratio: 25,
+      line_height: 'line-height-default',
       image_sizing: 'sizing-contain',
       thumbnails: true,
       slide_effect: 'slide',
@@ -166,6 +170,10 @@ class Segment < ApplicationRecord
 
   def self.grid_columns_options
     GRID_COLUMNS
+  end
+
+  def self.line_height_options
+    LINE_HEIGHTS.map { |h| [Segment.human_attribute_value(:line_height, h), h] }
   end
 
   def self.image_sizing_options
