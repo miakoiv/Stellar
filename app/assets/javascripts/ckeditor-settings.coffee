@@ -9,7 +9,7 @@ window.ckLayoutConfig =
       {
         model: 'lead'
         view:
-          name: 'p-lead'
+          name: 'p'
           classes: 'lead'
         title: 'lead'
         class: 'ck-heading_paragraph_lead'
