@@ -1,0 +1,2 @@
+$('#<%= dom_id(@video) %>').find('.panel-title').html('<%= @video.title %>');
+$(document).trigger('videoable:changed');

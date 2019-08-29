@@ -1,0 +1,10 @@
+$('#media-modal').remove();
+$('<%= j render partial: 'admin/videos/modal', object: @videoable, as: :videoable %>').appendTo('body');
+$('<%= j render partial: 'admin/videos/index', object: @videoable, as: :videoable %>').appendTo($('#media-modal .modal-body'));
+var $dialog = $('#media-modal .modal-dialog');
+$dialog.initialize();
+$('#media-modal').modal({backdrop: false});
+$dialog.modalPosition();
+$dialog.draggable({handle: '.modal-header'});
+$('.section, .column, .segment').removeClass('active');
+$('#<%= dom_id(@videoable) %>').addClass('active');

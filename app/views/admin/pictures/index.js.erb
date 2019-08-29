@@ -1,0 +1,10 @@
+$('#media-modal').remove();
+$('<%= j render partial: 'admin/pictures/collection_modal' %>').appendTo('body');
+$('<%= j render partial: 'admin/pictures/index', object: @pictureable, as: :pictureable %>').appendTo($('#media-modal .modal-body'));
+var $dialog = $('#media-modal .modal-dialog');
+$dialog.initialize();
+$('#media-modal').modal({backdrop: false});
+$dialog.modalPosition();
+$dialog.draggable({handle: '.modal-header'});
+$('.section, .column, .segment').removeClass('active');
+$('#<%= dom_id(@pictureable) %>').addClass('active');

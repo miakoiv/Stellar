@@ -1,0 +1,3 @@
+$('#<%= dom_id(@section) %> .section-bg-container').replaceWith(
+  '<%= j render partial: 'sections/background', object: @section, as: :section %>'
+);

@@ -1,0 +1,2 @@
+$('<%= j render partial: 'admin/video_files/edit', object: @video_file, as: :video_file %>').appendTo('#<%= dom_id(@video, :video_files) %>');
+$(document).trigger('videoable:added');

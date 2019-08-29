@@ -1,0 +1,10 @@
+$('#layout-modal').remove();
+$('<%= j render partial: 'admin/segments/modal' %>').appendTo('body');
+$('<%= j render partial: 'admin/segments/template', object: @segment, as: :segment %>').appendTo($('#layout-modal .modal-body'));
+var $dialog = $('#layout-modal .modal-dialog');
+$dialog.initialize();
+$('#layout-modal').modal({backdrop: false});
+$dialog.modalPosition();
+$dialog.draggable({handle: '.modal-header'});
+$('.section, .column, .segment').removeClass('active');
+$('#<%= dom_id(@segment) %>').addClass('active');

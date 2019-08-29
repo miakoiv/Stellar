@@ -1,0 +1,6 @@
+$('#order-items-table').replaceWith(
+  '<%= j render partial: 'admin/order_items/edit_table', object: @order, as: :order %>'
+);
+<% if @order_item.valid? %>
+  $('#<%= dom_id(@order_item) %>').effect('highlight');
+<% end %>

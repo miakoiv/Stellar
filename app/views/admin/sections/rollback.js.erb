@@ -1,0 +1,5 @@
+$panel = $('#section-layout-panel');
+$panel.destroySelectized();
+$panel.replaceWith(
+  '<%= j render partial: 'admin/sections/panels/layout', object: @section, as: :section %>'
+);

@@ -1,0 +1,5 @@
+$('#page-form').destroySelectized();
+$('#page-form > form').replaceWith(
+  '<%= j render partial: 'admin/pages/form' %>'
+);
+$('#page-form').initialize();

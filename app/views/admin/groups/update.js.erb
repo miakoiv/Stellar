@@ -1,0 +1,9 @@
+$('#<%= dom_id(@group) %>').replaceWith(
+  '<%= j render partial: 'item', object: @group, as: :group %>'
+);
+$('#<%= dom_id(@group) %>').closest('.dd-item').addClass('active');
+$('#group-form').destroySelectized();
+$('#group-form').html(
+  '<%= j render partial: 'admin/groups/edit' %>'
+);
+$('#group-form').initialize();

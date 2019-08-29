@@ -1,0 +1,5 @@
+$panel = $('#segment-<%= @panel %>-panel');
+$panel.destroySelectized();
+$panel.replaceWith(
+  '<%= j render partial: "admin/segments/panels/#{@panel}", object: @segment, as: :segment} %>'
+);

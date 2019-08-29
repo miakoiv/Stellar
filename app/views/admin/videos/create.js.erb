@@ -1,0 +1,3 @@
+$('<%= j render partial: 'admin/videos/edit', object: @video, as: :video %>').appendTo($('#<%= dom_id(@videoable, :videos) %>'));
+$('#<%= dom_id(@videoable, :videos) %>').sortable('refresh');
+$(document).trigger('videoable:added');

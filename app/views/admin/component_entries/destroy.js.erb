@@ -1,0 +1,4 @@
+$('#<%= dom_id(@component_entry) %>').fadeOut(200, function() {
+  this.remove();
+});
+$('#component-entries-tbody').sortable('refresh');

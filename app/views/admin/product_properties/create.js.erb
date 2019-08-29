@@ -1,0 +1,4 @@
+$('#properties-tbody').html(
+  '<%= j render partial: 'admin/product_properties/edit_tbody', object: @product, as: :product %>'
+);
+$('#<%= dom_id(@product_property) %>').effect('highlight');
