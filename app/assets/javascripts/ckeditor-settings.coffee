@@ -7,6 +7,15 @@ window.ckLayoutConfig =
         class: 'ck-heading_paragraph'
       }
       {
+        model: 'lead'
+        view:
+          name: 'p-lead'
+          classes: 'lead'
+        title: 'lead'
+        class: 'ck-heading_paragraph_lead'
+        converterPriority: 'high'
+      }
+      {
         model: 'heading1'
         view: 'h1'
         title: 'H1'
