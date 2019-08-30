@@ -8,6 +8,12 @@ $.fn.extend
       $target.addClass 'open'
       $target.trigger 'shown'
       $toggle.addClass 'is-active'
+      url = $target.data 'url'
+      content = $target.data 'content'
+      if url and $(content).is(':empty')
+        $.get url, {content: content}
+        .then ->
+          $(content).activateMetisMenu()
     else
       $target.removeClass 'open'
       $target.trigger 'hidden'
