@@ -1,18 +1,19 @@
-%footer.default-footer
-  .container
-    .row
-      .col-xs-12.col-sm-5.col-sm-push-4.bordered
-        - if @footer.present? && @footer.children_count > 0
-          %nav.navmenu
-            %ul.nav.navmenu-nav
-              = render partial: @footer.children.live, locals: {navmenu: true}
-      .col-xs-8.col-sm-4.col-sm-pull-5
-        = render partial: 'shared/branding'
-      .col-xs-4.col-sm-3
-        .branding
-          .media
-            .media-body
-            .media-right
-              .media-object
-                %a{href: 'https://leasit.fi/', target: '_blank'}
-                  = image_tag('leasit.svg')
+- cache [I18n.locale, :default_footer] do
+  %footer.default-footer
+    .container
+      .row
+        .col-xs-12.col-sm-5.col-sm-push-4.bordered
+          - if @footer.present? && @footer.children_count > 0
+            %nav.navmenu
+              %ul.nav.navmenu-nav
+                = render partial: @footer.children.live, locals: {navmenu: true}
+        .col-xs-8.col-sm-4.col-sm-pull-5
+          = render partial: 'shared/branding'
+        .col-xs-4.col-sm-3
+          .branding
+            .media
+              .media-body
+              .media-right
+                .media-object
+                  %a{href: 'https://leasit.fi/', target: '_blank'}
+                    = image_tag('leasit.svg')
