@@ -36,6 +36,9 @@ $.fn.extend
       loading: ->
         $('#spinner').show()
 
+    $('.metismenu', this).each ->
+      $(this).activateMetisMenu()
+
   deactivate: ->
     $(this).removeClass 'active'
   activate: ->
@@ -80,11 +83,6 @@ jQuery ->
   $('#navbar-lookup').navbarLookup
     widget: '#navbar-lookup-widget'
     dropdown: '#lookup-dropdown'
-
-  $('#side-nav-menu').metisMenu()
-  .on 'shown.metisMenu', (e) ->
-    $(e.target).parent().scrollMenu $('#side-nav')
-  $('#side-nav-menu').find('.active').scrollMenu $('#side-nav')
 
   $('#content-wrap').imagesLoaded ->
     selector = '#main-nav .nav > .scroll > a'
