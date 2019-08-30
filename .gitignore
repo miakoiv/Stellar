@@ -23,5 +23,8 @@
 /public/system
 /public/.well-known
 
+# Ignore Rake tasks
+/lib/tasks
+
 # Ignore CSV files for scripting
 /lib/scripts/*.csv
