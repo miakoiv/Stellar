@@ -7,7 +7,7 @@
 class BaseStoreController < ApplicationController
 
   prepend_before_action :set_hostname_and_store
-  before_action :set_header_and_footer
+  before_action :set_header_and_footer, unless: proc { request.xhr? }
 
   layout 'store'
 
@@ -15,6 +15,11 @@ class BaseStoreController < ApplicationController
   def authenticate_user_or_skip!
     return true if current_store.admit_guests?
     authenticate_user!
+  end
+
+  def set_header_and_footer
+    @header = current_store.header
+    @footer = current_store.footer
   end
 
   # Find the guest user stored in session, or create it.
@@ -201,13 +206,6 @@ class BaseStoreController < ApplicationController
       session[:guest_user_id] = guest.id
       GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
       guest
-    end
-
-    def set_header_and_footer
-      if !request.xhr?
-        @header = current_store.header
-        @footer = current_store.footer
-      end
     end
 
     def policies_pending?
