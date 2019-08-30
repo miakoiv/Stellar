@@ -77,6 +77,10 @@ jQuery ->
 
   $(document).initialize()
 
+  $('#navbar-lookup').navbarLookup
+    widget: '#navbar-lookup-widget'
+    dropdown: '#lookup-dropdown'
+
   $('#side-nav-menu').metisMenu()
   .on 'shown.metisMenu', (e) ->
     $(e.target).parent().scrollMenu $('#side-nav')

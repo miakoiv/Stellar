@@ -1,8 +1,8 @@
 - if current_store.main_nav_lookup?
   %li.lg
-    %a{data: {toggle: 'collapse', target: '#navbar-lookup'}, tabindex: 0, role: 'button'}
-      = icon('search', id: 'lookup-open')
-      = icon('search-minus', id: 'lookup-close', style: 'display: none;')
+    %a#navbar-lookup-widget{data: {toggle: 'collapse', target: '#navbar-lookup'}, tabindex: 0, role: 'button'}
+      .lookup-open= icon('search')
+      .lookup-close{style: 'display: none;'}= icon('search-minus')
 - if current_store.favorites?
   %li#favorites.lg{class: current_user.favorite_products.at(current_store).any? && 'loaded'}
     = link_to favorites_path, remote: true, rel: 'nofollow' do
