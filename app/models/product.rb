@@ -315,7 +315,7 @@ class Product < ApplicationRecord
   end
 
   def slugger
-    [[:title, :code], [:title, :code, :id]]
+    [[:title], [:title, :subtitle], [:title, :subtitle, :code]]
   end
 
   def should_generate_new_friendly_id?
