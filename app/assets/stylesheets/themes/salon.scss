@@ -14,6 +14,56 @@ $brand-danger:  $salon-red !default;
  * Overrides to the material theme
  */
 
+#main-nav .mega-dropdown-menu {
+  position: fixed;
+  top: 70px;
+
+  ul.row {
+    display: block;
+    padding: 40px;
+    column-count: 5;
+    column-gap: $grid-gutter-width;
+    column-rule: 1px solid $table-border-color;
+
+    @media (max-width: $screen-md-max) {
+      column-count: 4;
+    }
+
+    > li {
+      width: auto;
+      float: none;
+      break-inside: avoid;
+      margin-bottom: 4em;
+      padding: 0;
+      border: none;
+
+      > a {
+        border: none;
+        color: inherit;
+        font-weight: bolder;
+
+        .page-image {
+          max-width: 120px;
+          margin: 5px auto;
+        }
+        .page-title {
+          padding: 0.33333em 0;
+          font-size: $font-size-small;
+          text-transform: uppercase;
+        }
+        .page-image + .page-title { display: none; }
+
+        &:hover { color: $brand-primary; }
+      }
+
+      ul .page-title {
+        padding-left: 0;
+        &:before { content: none; }
+      }
+    }
+  }
+}
+
 /* Product filtering */
 .filter-bar { background-color: rgba($salon-green, 0.2); }
 
