@@ -2,8 +2,7 @@
   .panel.panel-primary
     .panel-body
       %fieldset
-        = f.static_control :purpose do
-          = @page.human_attribute_value(:purpose)
+        = f.select :purpose, @page.purpose_options, {}, {class: 'selectize'}
         = f.text_field :title, required: true
         - if @page.can_be_live?
           = f.form_group do

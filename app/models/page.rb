@@ -37,6 +37,13 @@ class Page < ApplicationRecord
     internal: 43,       # link to an internal page
   }
 
+  PURPOSE_CHAIN = {
+    category: [:category, :category_order],
+    category_order: [:category_order, :category],
+    dropdown: [:dropdown, :megamenu],
+    megamenu: [:megamenu, :dropdown],
+  }.freeze
+
   PRESENTATION = {
     'route' => {icon: 'share-alt', appearance: 'danger'},
     'primary' => {icon: 'file-text-o', appearance: 'success'},
@@ -208,6 +215,15 @@ class Page < ApplicationRecord
   # Pages are rendered with partials corresponding to purpose.
   def to_partial_path
     "pages/purposes/#{purpose}"
+  end
+
+  # Purposes a page can switch to from existing ones.
+  def available_purposes
+    PURPOSE_CHAIN[purpose.to_sym] || [purpose]
+  end
+
+  def purpose_options
+    available_purposes.map { |p| [Page.human_attribute_value(:purpose, p), p] }
   end
 
   # Route pages ask this method to render their links with
