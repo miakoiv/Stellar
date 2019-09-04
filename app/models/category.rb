@@ -56,6 +56,11 @@ class Category < ApplicationRecord
     category == self || is_descendant_of?(category)
   end
 
+  # Render all categories collapsed.
+  def should_collapse?
+    true
+  end
+
   def self_and_maybe_descendants
     filtering ? self_and_descendants : Category.where(id: self)
   end

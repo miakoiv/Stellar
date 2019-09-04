@@ -1,4 +1,4 @@
-%li.dd-item{data: {id: group.id}}
+%li.dd-item{data: {id: group.id}, class: group.should_collapse? && !@group&.inside?(group) && 'dd-collapsed'}
   = render partial: 'item', object: group, as: :group
   - if group.children_count > 0
     %ol.dd-list

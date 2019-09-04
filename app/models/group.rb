@@ -67,6 +67,15 @@ class Group < ApplicationRecord
   end
 
   #---
+  def inside?(group)
+    group == self || is_descendant_of?(group)
+  end
+
+  # Render all groups collapsed.
+  def should_collapse?
+    true
+  end
+
   def guest?
     store.default_group == self
   end

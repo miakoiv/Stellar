@@ -1,4 +1,4 @@
-%li.dd-item{data: {id: page.id}, class: page.can_have_children? || 'dd-nochildren'}
+%li.dd-item{data: {id: page.id}, class: [page.can_have_children? || 'dd-nochildren', page.should_collapse? && !@page&.inside?(page) && 'dd-collapsed']}
   = render partial: 'item', object: page, as: :page
   - if page.children_count > 0
     %ol.dd-list
