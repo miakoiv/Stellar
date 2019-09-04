@@ -115,12 +115,18 @@ en:
     categories:
       index:
         new_category: New category
+        nav_wizard: Create navigation
       new:
         new_category: New category
       edit:
         new_category: New category
       form:
         edit_page: Edit page
+      nav_wizard:
+        title: Navigation menu creation
+        instructions_html: <p>The selected categories and their subcategories are included in a new navigation menu. Disabled categories are excluded.</p>
+        dropdown_name: Menu title
+        create: Create navigation
     columns:
       settings:
         layout: Layout

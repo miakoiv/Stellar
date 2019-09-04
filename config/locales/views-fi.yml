@@ -122,12 +122,18 @@ fi:
     categories:
       index:
         new_category: Uusi tuoteryhmä
+        nav_wizard: Luo navigaatio
       new:
         new_category: Uusi tuoteryhmä
       edit:
         new_category: Uusi tuoteryhmä
       form:
         edit_page: Muokkaa sivua
+      nav_wizard:
+        title: Navigaatiovalikon luonti
+        instructions_html: <p>Valitut tuoteryhmät alaryhmineen kopioidaan uudeksi navigaatiovalikoksi. Vain aktiiviset tuoteryhmät sisällytetään.</p>
+        dropdown_name: Valikon otsake
+        create: Luo navigaatio
     columns:
       settings:
         layout: Muotoilu

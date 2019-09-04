@@ -14,6 +14,9 @@ en:
         notice: "Category %{category} updated."
       destroy:
         notice: "Category %{category} deleted."
+      generate_nav:
+        notice: "Navigation menu created."
+        empty: "No categories selected."
     departments:
       create:
         notice: "Department %{department} created."

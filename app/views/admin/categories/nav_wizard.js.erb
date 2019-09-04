@@ -1,0 +1,4 @@
+$('#nav-wizard-modal').remove();
+$('<%= j render partial: 'admin/categories/nav_wizard_modal' %>').appendTo('body');
+$('<%= j render partial: 'admin/categories/nav_wizard', object: @categories, as: :categories %>').appendTo($('#nav-wizard-modal .modal-content'));
+$('#nav-wizard-modal').modal();

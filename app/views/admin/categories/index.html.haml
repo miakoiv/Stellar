@@ -11,6 +11,9 @@
         - if current_user.can_create?(Category, at: current_store)
           = link_to new_admin_category_path, remote: true, class: 'btn btn-primary' do
             = icon('plus', t('.new_category'))
+        - if current_user.can_create?(Page, at: current_store)
+          = link_to nav_wizard_admin_categories_path, remote: true, class: 'btn btn-default' do
+            = icon('magic', t('.nav_wizard'))
       #category-form
         - if @category.present?
           = render partial: 'edit'

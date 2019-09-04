@@ -14,6 +14,9 @@ fi:
         notice: "Tuoteryhmä %{category} päivitetty."
       destroy:
         notice: "Tuoteryhmä %{category} poistettu."
+      generate_nav:
+        notice: "Navigaatiovalikko luotu."
+        empty: "Ei valittuja tuoteryhmiä."
     departments:
       create:
         notice: "Osasto %{department} luotu."

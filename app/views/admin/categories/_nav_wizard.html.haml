@@ -1,0 +1,16 @@
+= form_with url: generate_nav_admin_categories_path do |f|
+  .modal-header
+    %button.close{data: {dismiss: 'modal'}}= icon('close')
+    %h4.modal-title= t('.title')
+  .modal-body
+    = t('.instructions_html')
+    %ul.list-group
+      = f.collection_check_boxes :category_ids, categories, :id, :name, include_hidden: false do |b|
+        %li.list-group-item
+          .pull-right= b.check_box checked: true
+          = b.label
+    %fieldset
+      %label.control-label= t('.dropdown_name')
+      = f.text_field :name, class: 'form-control', required: true
+  .modal-footer
+    = f.submit t('.create'), class: 'btn btn-primary'

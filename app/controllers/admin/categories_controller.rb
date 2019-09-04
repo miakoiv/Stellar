@@ -98,6 +98,25 @@ class Admin::CategoriesController < AdminController
     @products = @category.products.visible.sorted(@category.product_scope)
   end
 
+  # GET /admin/categories/nav_wizard.js
+  def nav_wizard
+    @categories = current_store.categories.live.roots
+    respond_to :js
+  end
+
+  # POST /admin/categories/generate_nav
+  def generate_nav
+    if ids = params[:category_ids]
+      categories = current_store.categories.find(ids)
+      name = params[:name]
+      NavGenerationJob.perform_later(current_store, name, categories)
+
+      redirect_to admin_categories_path, notice: t('.notice')
+    else
+      redirect_to admin_categories_path, alert: t('.empty')
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category

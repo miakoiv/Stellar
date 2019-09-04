@@ -179,6 +179,23 @@ class Page < ApplicationRecord
     end
   end
 
+  # Creates a navigation menu by creating a link page to each item in
+  # collection, recursively. The page purpose is determined by item class.
+  def create_nav_menu!(collection)
+    return if collection.none?
+
+    collection.each do |item|
+      page = store.pages.create!(
+        parent: self,
+        purpose: item.model_name.singular,
+        title: item.to_s,
+        live: true,
+        resource: item
+      )
+      page.create_nav_menu!(item.children)
+    end
+  end
+
   def slugger
     title_required? ? [:title, [:title, :id]] : purpose
   end
