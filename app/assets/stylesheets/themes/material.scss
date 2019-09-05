@@ -41,6 +41,9 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 @mixin shadow-higher {
   @include box-shadow(0 3px 6px rgba(0,0,0,.1));
 }
+@mixin shadow-highest {
+  @include box-shadow(0 6px 12px rgba(0,0,0,.075));
+}
 
 
 /*

@@ -72,6 +72,19 @@ $brand-danger:  $salon-red !default;
   color: $text-muted;
 }
 
+.product-grid .straight-grid .product {
+  transform: translate3d(0, 0, 0);
+  transition: box-shadow, transform 200ms $material-easing;
+
+  &:hover {
+    border: 0;
+    transform: perspective(250px) translate3d(0, -4px, 8px);
+    @include shadow-highest;
+
+    &:after { border: 0; }
+  }
+}
+
 /* Product filtering */
 .filter-bar { background-color: rgba($salon-green, 0.2); }
 
