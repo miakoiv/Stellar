@@ -621,6 +621,17 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /* Premium teaser and pricing */
 .product-grid .premium-price,
 .product-card .premium-price {
+  display: flex;
+  margin-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .teaser { flex-grow: 1; }
+  .price {
+    flex-grow: 1;
+    text-align: right;
+    font-weight: bold;
+  }
 }
 
 /* Buy now widget and pricing */
@@ -743,7 +754,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       @include contained-image;
     }
   }
-  .product-text {
+  .product-text, .premium-price {
     padding-left: 0;
     padding-right: 0;
   }

@@ -64,6 +64,14 @@ $brand-danger:  $salon-red !default;
   }
 }
 
+/* Product card */
+.product-grid .premium-price,
+.product-list .premium-price,
+.product-card .premium-price {
+  font-size: $font-size-small;
+  color: $text-muted;
+}
+
 /* Product filtering */
 .filter-bar { background-color: rgba($salon-green, 0.2); }
 
