@@ -1192,10 +1192,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   display: flex;
   flex-flow: row wrap;
 
-  &.swiper-wrapper { flex-wrap: nowrap; }
   .product {
-    flex: 0 0 auto;
-    align-self: flex-start;
     float: none;
     margin-bottom: 0;
 
@@ -1205,10 +1202,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
       @include contained-image;
     }
   }
+  /* Swipers introduce extra wrappers */
+  &.swiper-wrapper { flex-wrap: nowrap; }
+
   .swiper-slide {
     @include make-xs-column(6);
     @include make-sm-column(4);
     @include make-md-column(3);
+    display: flex;
+    height: auto;
     padding-left: 0;
     padding-right: 0;
 
