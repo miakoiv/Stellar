@@ -198,14 +198,15 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Feature box segments */
 .segment.feature {
-  .segment-bg-container {
-    filter: grayscale(0%);
-    transition: filter 250ms $material-easing;
+  overflow: hidden;
+
+  .segment-bg-container, .segment-content-wrap {
+    transition: all 250ms $material-easing;
   }
 
   &:hover {
     .segment-bg-container {
-      filter: grayscale(100%);
+      transform: scale(1.05);
     }
   }
 }

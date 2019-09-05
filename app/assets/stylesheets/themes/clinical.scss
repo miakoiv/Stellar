@@ -115,11 +115,8 @@ $border-radius-small: 0 !default;
 
 /* Background blending and text shadow in feature box segments */
 .segment.feature {
-  .segment-content-wrap {
-    transition: background-color 250ms $material-easing;
-  }
   &:hover {
-    .segment-bg-container { filter: none; }
+    .segment-bg-container { transform: none; }
     .segment-content-wrap {
       background-color: transparent !important;
     }
