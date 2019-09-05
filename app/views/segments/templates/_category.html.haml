@@ -1,7 +1,6 @@
 - resource = category.resource
 - max_items = category.max_items.presence && category.max_items.to_i
 - products = resource.is_a?(Category) && resource.products.visible.sorted(category.product_scope.presence)
-- swiper = category.grid_columns == '1'
 
 .segment-content.category{id: dom_id(category, :content)}
   - if category.header.present?
@@ -10,10 +9,11 @@
       - if category.subhead.present?
         %p.lead= category.subhead
   - if products
-    - if swiper
+    - if category.swiper?
       .swiper-container
-        .swiper-wrapper
+        .swiper-wrapper{class: category.grid_lines? && 'grid-lines'}
           = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+        .swiper-pagination
     - else
       .columns{class: ["columns-#{category.grid_columns || 3}", category.grid_lines? && 'grid-lines']}
         = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
@@ -25,20 +25,13 @@
   - else
     = segment_placeholder(category)
 
-- if swiper
+- if category.swiper?
   :coffee
     jQuery ->
       $segment = $('##{dom_id(category, :content)}')
       new Swiper $segment.find('.swiper-container'),
-        autoplay:
-          delay: 3000
-          disableOnInteraction: false
-- elsif category.masonry?
-  :coffee
-    $grid = $('##{dom_id(category, :content)}').find '.row'
-    $grid.imagesLoaded ->
-      $grid.masonry
-        itemSelector: '.product-card'
-        columnWidth: '.product-card'
-        percentPosition: true
-        horizontalOrder: true
+        slidesPerView: #{category.grid_columns || 3}
+        watchOverflow: true
+        pagination:
+          el: '##{dom_id(category, :content)} .swiper-pagination'
+          clickable: true

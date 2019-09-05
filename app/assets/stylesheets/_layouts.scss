@@ -312,8 +312,11 @@
   max-width: 100%;
   @include flex;
 
-  .swiper-wrapper { height: auto; }
-  .swiper-slide { @include flex; }
+  .swiper-wrapper {
+    @include flex(row, nowrap);
+    height: auto;
+  }
+  .swiper-slide { @include flex(row, nowrap); }
 
   .justify-left & { justify-content: flex-start; }
   .justify-center & { justify-content: center; }
@@ -360,14 +363,8 @@
 .segment-content.product,
 .segment-content.promotion,
 .segment-content.department {
-  .swiper-container {
-    position: relative;
-  }
-  .swiper-slide .product-card {
-    max-height: 100%;
-    padding: 0;
-    margin: 0 auto;
-  }
+  .swiper-container { padding-bottom: 10px + $line-height-computed; }
+  .swiper-slide .product-card { width: 100%; }
 }
 
 .segment-content.text,

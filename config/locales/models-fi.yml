@@ -551,6 +551,7 @@ fi:
         line_height: Tekstin rivivälistys
         hyphens: Tekstin tavutus
         masonry: Tiivistä rivit
+        swiper: Karusellinäkymä
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön
         product_scope: Tuotteiden järjestys
