@@ -363,8 +363,16 @@
 .segment-content.product,
 .segment-content.promotion,
 .segment-content.department {
+  .columns > .product-card {
+    align-self: stretch;
+  }
   .swiper-container { padding-bottom: 10px + $line-height-computed; }
-  .swiper-slide .product-card { width: 100%; }
+  .swiper-slide {
+    float: none;
+    padding: 0;
+
+    > .product-card { width: 100%; }
+  }
 }
 
 .segment-content.text,

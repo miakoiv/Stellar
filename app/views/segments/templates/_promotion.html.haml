@@ -11,7 +11,7 @@
   - if products
     - if promotion.swiper?
       .swiper-container
-        .swiper-wrapper{class: promotion.grid_lines? && 'grid-lines'}
+        .swiper-wrapper{class: ["columns-#{promotion.grid_columns || 3}", promotion.grid_lines? && 'grid-lines']}
           = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
         .swiper-pagination
     - else
@@ -30,7 +30,7 @@
     jQuery ->
       $segment = $('##{dom_id(promotion, :content)}')
       new Swiper $segment.find('.swiper-container'),
-        slidesPerView: #{promotion.grid_columns || 3}
+        slidesPerView: 'auto'
         watchOverflow: true
         pagination:
           el: '##{dom_id(promotion, :content)} .swiper-pagination'
