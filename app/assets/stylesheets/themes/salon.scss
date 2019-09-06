@@ -85,6 +85,14 @@ $brand-danger:  $salon-red !default;
   }
 }
 
+.product-grid .product-text h3,
+.product-card .product-text h3 {
+  font-weight: 900;
+  text-transform: uppercase;
+
+  .small { text-transform: none; }
+}
+
 /* Product filtering */
 .filter-bar { background-color: rgba($salon-green, 0.2); }
 
