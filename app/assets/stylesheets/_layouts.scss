@@ -606,6 +606,30 @@
   }
 }
 
+/* Narrower widths for swipers to have the next slide peek from the edge */
+.swiper-wrapper {
+  &.columns-1 > div { width: 75%; }
+  &.columns-2 > div { width: 40%; }
+  &.columns-3 > div { width: 40%; }
+  &.columns-4 > div { width: 40%; }
+  &.columns-6 > div { width: 40%; }
+  &.columns-12 > div { width: 40%; }
+  @media (min-width: $screen-sm-min) {
+    &.columns-3 > div { width: 28.57142857%; }
+    &.columns-4 > div { width: 28.57142857%; }
+    &.columns-6 > div { width: 22.22222222%; }
+    &.columns-12 > div { width: 22.22222222%; }
+  }
+  @media (min-width: $screen-md-min) {
+    &.columns-4 > div { width: 22.22222222%; }
+    &.columns-6 > div { width: 15.38461538%; }
+    &.columns-12 > div { width: 15.38461538%; }
+  }
+  @media (min-width: $screen-lg-min) {
+    &.columns-12 > div { width: 8%; }
+  }
+}
+
 /* Grid lines for grids */
 @mixin no-right-border {
   &:after { border-right: 0; }
@@ -633,33 +657,43 @@
 }
 
 /* Removal of grid lines at the right and bottom edges */
-.grid-lines.columns-1 {
-  > div, li {
-    @include no-right-border;
-    @include no-bottom-border;
+:not(.swiper-wrapper) {
+  &.grid-lines.columns-1 {
+    > div, li {
+      @include no-right-border;
+      @include no-bottom-border;
+    }
+  }
+  &.grid-lines.columns-2 { @include grid-line-removal(2); }
+  @media (max-width: $screen-xs-max) {
+    &.grid-lines { @include grid-line-removal(2); }
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    &.grid-lines.columns-3 { @include grid-line-removal(3); }
+    &.grid-lines.columns-4,
+    &.grid-lines.columns-6,
+    &.grid-lines.columns-12 { @include grid-line-removal(4); }
+  }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    &.grid-lines.columns-3 { @include grid-line-removal(3); }
+    &.grid-lines.columns-4 { @include grid-line-removal(4); }
+    &.grid-lines.columns-6,
+    &.grid-lines.columns-12 { @include grid-line-removal(6); }
+  }
+  @media (min-width: $screen-lg-min) {
+    &.grid-lines.columns-3 { @include grid-line-removal(3); }
+    &.grid-lines.columns-4 { @include grid-line-removal(4); }
+    &.grid-lines.columns-6 { @include grid-line-removal(6); }
+    &.grid-lines.columns-12 { @include grid-line-removal(12); }
   }
 }
-.grid-lines.columns-2 { @include grid-line-removal(2); }
-@media (max-width: $screen-xs-max) {
-  .grid-lines { @include grid-line-removal(2); }
-}
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-  .grid-lines.columns-3 { @include grid-line-removal(3); }
-  .grid-lines.columns-4,
-  .grid-lines.columns-6,
-  .grid-lines.columns-12 { @include grid-line-removal(4); }
-}
-@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-  .grid-lines.columns-3 { @include grid-line-removal(3); }
-  .grid-lines.columns-4 { @include grid-line-removal(4); }
-  .grid-lines.columns-6,
-  .grid-lines.columns-12 { @include grid-line-removal(6); }
-}
-@media (min-width: $screen-lg-min) {
-  .grid-lines.columns-3 { @include grid-line-removal(3); }
-  .grid-lines.columns-4 { @include grid-line-removal(4); }
-  .grid-lines.columns-6 { @include grid-line-removal(6); }
-  .grid-lines.columns-12 { @include grid-line-removal(12); }
+.grid-lines.swiper-wrapper {
+  > div, li {
+    @include no-bottom-border;
+  }
+  > :last-child {
+    @include no-right-border;
+  }
 }
 
 
