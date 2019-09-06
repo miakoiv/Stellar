@@ -28,7 +28,6 @@ class ProductUpdateViaGatewayJob < ApplicationJob
       next if product.nil?
       product.update!(
         customer_code: item[:customer_code],
-        retail_price: item[:retail_price],
         available_at: item[:online] ? item[:updated_at] : nil
       )
     end
