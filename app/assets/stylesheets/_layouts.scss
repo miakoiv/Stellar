@@ -608,13 +608,9 @@
 
 /* Narrower widths for swipers to have the next slide peek from the edge */
 .swiper-wrapper {
-  &.columns-1 > div { width: 75%; }
-  &.columns-2 > div { width: 40%; }
-  &.columns-3 > div { width: 40%; }
-  &.columns-4 > div { width: 40%; }
-  &.columns-6 > div { width: 40%; }
-  &.columns-12 > div { width: 40%; }
   @media (min-width: $screen-sm-min) {
+    &.columns-1 > div { width: 75%; }
+    &.columns-2 > div { width: 40%; }
     &.columns-3 > div { width: 28.57142857%; }
     &.columns-4 > div { width: 28.57142857%; }
     &.columns-6 > div { width: 22.22222222%; }
