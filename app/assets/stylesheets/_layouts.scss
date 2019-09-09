@@ -13,6 +13,16 @@
   flex-direction: $flow;
   flex-wrap: $wrap;
 }
+@mixin flex-row($gutter: $grid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: floor(($gutter / -2));
+  margin-left: ceil(($gutter / -2));
+
+  /* Fix Safari glitch caused by pseudo elements of .row */
+  &:before,
+  &:after { display: none; }
+}
 @mixin padding-horizontal($padding: $grid-gutter-width/2) {
   padding-left: $padding;
   padding-right: $padding;
@@ -31,12 +41,8 @@
   @include flex(column);
 }
 .section-content > .row {
-  @include flex(row, wrap);
+  @include flex-row;
   flex-grow: 1;
-
-  /* Nuking pseudo elements to work around a Safari glitch */
-  &:before,
-  &:after { display: none; }
 }
 
 /* Reverse order applies only on mobile viewports */

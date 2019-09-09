@@ -1783,9 +1783,7 @@ fieldset > legend {
  * Subscriptions and plan selector
  */
 .subscription-list, .plan-selector {
-  @include make-row;
-  display: flex;
-  flex-flow: row wrap;
+  @include flex-row;
 }
 .subscription-list .subscription,
 .plan-selector .plan {

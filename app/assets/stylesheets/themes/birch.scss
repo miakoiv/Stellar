@@ -45,9 +45,7 @@ $brand-primary: #013183;
     padding-top: 20px;
 
     > ul {
-      @include make-row;
-      display: flex;
-      flex-wrap: wrap;
+      @include flex-row;
       align-content: flex-start;
       list-style: none;
       padding-left: 0;

@@ -197,8 +197,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Containers for product view and product filter */
 .products {
-  @include make-row;
-  @include flex(row, wrap);
+  @include flex-row;
 
   .page-header {
     @include make-xs-column(12);

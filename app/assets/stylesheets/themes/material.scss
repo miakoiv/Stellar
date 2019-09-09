@@ -266,8 +266,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Containers for product view and product filter */
 .products {
-  @include make-row;
-  @include flex(row, wrap);
+  @include flex-row;
 
   .page-header {
     @include make-xs-column(12);
@@ -601,9 +600,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 .product-grid > .straight-grid,
 .product-grid > .staggered-grid {
-  @include make-row;
-  display: flex;
-  flex-flow: row wrap;
+  @include flex-row;
   align-items: flex-start;
   margin-bottom: 0;
 }
