@@ -1,0 +1,5 @@
+#product-view-selector.view-selector.btn-group
+  %button.btn.btn-default{class: @view_mode == 'product-grid' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-grid', target: '#product-view'}}
+    = icon('th')
+  %button.btn.btn-default{class: @view_mode == 'product-list' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-list', target: '#product-view'}}
+    = icon('list')

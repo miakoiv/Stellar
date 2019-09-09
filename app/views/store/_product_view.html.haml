@@ -1,0 +1,8 @@
+#product-view{class: @view_mode, data: {'view-key': dom_id(@category)}}
+  %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
+    = render @products
+  .pagination-block
+    = paginate @products
+
+  = render partial: 'stock_handler'
+  = render partial: 'favorites_handler'

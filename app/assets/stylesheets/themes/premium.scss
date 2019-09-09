@@ -159,7 +159,11 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 #store-wrap { }
 #categories-wrap { display: none; }
-#products-wrap { }
+#products-wrap {
+  @extend .container;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 #product-detail-wrap { }
 
 /* Slightly darker right column on medium and up */
@@ -175,24 +179,13 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 
-/*
- * Product filtering and breadcrumbs
- */
-.filter-bar { border-radius: $navbar-height/2; }
-.filter-bar .navbar-form {
-  padding-left: 9px;
-  input { border-radius: $input-height-base/2; }
-}
-.filter-bar .view-selector {
-  margin-right: 9px;
-  .btn { @extend .btn-round; }
-}
+/* Product view context */
 #products-wrap > .context {
-  @extend .container;
-  min-height: 53px;
-  padding-top: 20px;
+  @include flex;
+  margin-bottom: $line-height-computed;
 
   .breadcrumb {
+    flex-grow: 1;
     @include small;
     margin-bottom: 0;
     background-color: transparent;
@@ -202,13 +195,54 @@ $body-tone-bg: darken($body-bg, 4%);
 }
 
 
-/*
- * Containers for product grid and product table
- */
+/* Containers for product view and product filter */
 .products {
-  @extend .container;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  @include make-row;
+  @include flex(row, wrap);
+
+  .page-header {
+    @include make-xs-column(12);
+  }
+  #product-view {
+    @include make-xs-column(12);
+    @include make-md-column(10);
+    flex-grow: 1;
+    order: 2;
+    margin-bottom: $line-height-computed;
+  }
+  .product-filter {
+    @include make-xs-column(12);
+    @include make-md-column(2);
+    order: 1;
+    padding-top: 9px;
+    background-color: $body-tone-bg;
+    border-radius: $navbar-height/2;
+  }
+  @media (max-width: $screen-sm-max) {
+    #product-view { order: 1; }
+    .product-filter { order: 2; }
+  }
+  .pagination-block { @extend .col-xs-12; }
+}
+
+/* Product filtering */
+#filter-form {
+  .form-group {
+    margin-left: -6px;
+    margin-right: -6px;
+  }
+  input { border-radius: $input-height-base/2; }
+}
+.filter-bar .nav {
+  @include small;
+  margin-bottom: $line-height-computed;
+
+  > li { font-weight: bold; }
+  > li > .nav {
+    .checkbox {
+      margin: 5px 0;
+    }
+  }
 }
 
 /* Page header for products in various contexts */

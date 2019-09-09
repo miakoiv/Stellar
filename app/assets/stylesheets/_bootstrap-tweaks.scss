@@ -606,52 +606,6 @@ body {
 
 
 /*
- * Product filtering
- */
-.filter-bar .dropdown-menu {
-  > .checkbox,
-  > .radio {
-    flex: 0 0 auto;
-    margin: 0;
-    padding: 3px 20px;
-
-    &:hover,
-    &:focus {
-      color: $dropdown-link-hover-color;
-      background-color: $dropdown-link-hover-bg;
-    }
-  }
-}
-.filter-bar .dropdown:last-child > .dropdown-menu {
-  @extend .dropdown-menu-right;
-}
-@media (min-width: $screen-sm-min) {
-  .filter-bar .dropdown-menu {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-}
-.filter-bar .view-selector {
-  float: right;
-  margin-right: 15px;
-}
-@media (max-width: $screen-xs-max) {
-  .filter-bar .view-selector .navbar-btn {
-    margin-top: 11px;
-    margin-bottom: 11px;
-  }
-  .navbar-form-inline {
-    display: inline-block;
-    max-width: 150px;
-    margin: 0;
-    padding: 10px 0 10px 15px;
-    border: 0;
-  }
-}
-.without-view-selector .view-selector { display: none; }
-
-
-/*
  * Navmenu titles, headers, and icons; nested navmenus
  */
 .navmenu-title {
@@ -727,7 +681,7 @@ body {
 
 
 /*
- * Breadcrumbs
+ * View context elements
  */
 .breadcrumbs .breadcrumb {
   @include small;
@@ -735,14 +689,15 @@ body {
   padding-bottom: 5px;
   background-color: transparent;
 }
+@media (max-width: $screen-xs-max) {
+  #product-view-selector { display: none; }
+}
 
 
 /*
  * Pagination controls for infinite tables and product grids
  */
-.pagination-block {
-  @include make-xs-column(12);
-}
+.pagination-block {}
 .infinite-table .pagination-block a {
   @include button-variant($btn-default-color, transparent, transparent);
   @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $btn-border-radius-large);

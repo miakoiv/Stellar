@@ -1,22 +1,12 @@
-%nav.navbar.navbar-default.filter-bar
-  #product-view-selector.view-selector.btn-group
-    %button.btn.navbar-btn.btn-default{class: @view_mode == 'product-grid' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-grid', target: '#product-view'}}
-      = icon('th')
-    %button.btn.navbar-btn.btn-default{class: @view_mode == 'product-list' && 'active', data: {parent: '#product-view-selector', 'view-mode': 'product-list', target: '#product-view'}}
-      = icon('list')
+.filter-bar
   = form_for @search, url: url_for, method: :get, enforce_utf8: false, html: {id: 'filter-form'} do |f|
-    .navbar-header
-      .navbar-form.navbar-form-inline
-        .form-group.has-feedback
-          = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
-          %span.form-control-feedback= icon('search')
-      %button.navbar-toggle.collapsed{type: 'button', data: {toggle: 'collapse', target: '#filter-nav'}}
-        = icon('caret-down')
-    #filter-nav.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        = render partial: 'categories/filter_menu', object: @category, as: :category, locals: {selected: @search.options['categories']}
-        - current_store.searchable_properties.each do |property|
-          = render partial: 'properties/filter_menu', object: property, as: :property, locals: {param: property.sluggify, values: property.values_for(@category.self_and_maybe_descendants), selected: @search.options[property.sluggify]}
+    .form-group.has-feedback
+      = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
+      %span.form-control-feedback= icon('search')
+    %ul.nav
+      = render partial: 'categories/filter_menu', object: @category, as: :category, locals: {selected: @search.options['categories']}
+      - current_store.searchable_properties.each do |property|
+        = render partial: 'properties/filter_menu', object: property, as: :property, locals: {param: property.sluggify, values: property.values_for(@category.self_and_maybe_descendants), selected: @search.options[property.sluggify]}
 
 :coffee
   $('#filter-form').on 'change', (e) ->

@@ -93,9 +93,6 @@ $brand-danger:  $salon-red !default;
   .small { text-transform: none; }
 }
 
-/* Product filtering */
-.filter-bar { background-color: rgba($salon-green, 0.2); }
-
 /* Promotions positioned outside the static product-meta */
 .product-meta .promotions {
   left: $grid-gutter-width/2;

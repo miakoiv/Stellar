@@ -1,14 +1,14 @@
 - if values.any?
-  %li.dropdown
-    = dropdown_toggle do
-      = property.name
-      - if selected
-        %span.badge= selected.size
-      %span.caret
-    .dropdown-menu
+  %li
+    = property.name
+    - if selected
+      %span.badge= selected.size
+
+    %ul.nav
       - values.each do |value|
-        .checkbox
-          %label
-            = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
-            = value
-            = property.measurement_unit
+        %li
+          .checkbox
+            %label
+              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
+              = value
+              = property.measurement_unit

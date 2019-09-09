@@ -1,18 +1,18 @@
 #products-wrap
   .context
-    .pull-right
-      = link_to show_category_path(@category, params.permit([:page]).to_h), class: 'btn btn-default btn-sm' do
-        = icon('times', t('.close'))
     %ol.breadcrumb
       = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
+    .category-order-toggle
+      = link_to show_category_path(@category, params.permit([:page]).to_h), class: 'btn btn-default' do
+        = icon('times', t('.close'))
   .products
-    .product-filter.without-view-selector
-      = render partial: 'products/filtering'
     #product-view.product-order-list
       %ul
         = render partial: 'products/order_list_item', collection: @products, as: :product
       .pagination-block
         = paginate @products
+    .product-filter
+      = render partial: 'products/filtering'
 
 :coffee
   $('.category').deactivate()

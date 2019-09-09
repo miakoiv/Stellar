@@ -1,23 +1,20 @@
 #products-wrap
   .context
-    - if current_store.category_order?
-      .pull-right
-        = link_to show_category_order_path(@category, params.permit([:page]).to_h), class: 'btn btn-default btn-sm' do
-          = icon('list-ul', t('.category_order'))
     %ol.breadcrumb
       = render partial: 'categories/breadcrumb', collection: @category.self_and_ancestors, as: :category
+    - if current_store.category_order?
+      .category-order-toggle
+        = link_to show_category_order_path(@category, params.permit([:page]).to_h), class: 'btn btn-default' do
+          = icon('list-ul', t('.category_order'))
+    = render partial: 'view_selector'
   .products
     .page-header.visible-print
       %h1= @category.to_s
       %p.lead= @category.subtitle
+    = render partial: 'product_view'
     - if @category.filtering?
       .product-filter
         = render partial: 'products/filtering'
-    #product-view{class: @view_mode, data: {'view-key': dom_id(@category)}}
-      %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
-        = render @products
-      .pagination-block
-        = paginate @products
 
 :coffee
   $('.category').deactivate()
