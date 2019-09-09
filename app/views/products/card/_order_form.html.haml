@@ -1,4 +1,4 @@
 = form_tag order_product_path(product), method: :post, remote: true, class: 'form-inline buy-now-form' do
-  = hidden_field_tag :amount, 1
+  = hidden_field_tag :amount, 1, id: nil
   %button.btn.btn-success.btn-sm.add-to-cart{type: 'submit', data: {url: show_product_stock_path(product, default_inventory)}}
     = icon('cart-plus')

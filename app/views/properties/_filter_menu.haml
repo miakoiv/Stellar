@@ -9,6 +9,6 @@
         %li
           .checkbox
             %label
-              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value)
+              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value), id: nil
               = value
               = property.measurement_unit

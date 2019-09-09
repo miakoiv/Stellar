@@ -9,5 +9,5 @@
         %li
           .checkbox
             %label
-              = check_box_tag "product_search[categories][]", descendant.id, selected.present? && selected.include?(descendant.id.to_s)
+              = check_box_tag "product_search[categories][]", descendant.id, selected.present? && selected.include?(descendant.id.to_s), id: nil
               = descendant
