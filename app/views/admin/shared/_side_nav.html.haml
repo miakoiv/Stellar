@@ -27,5 +27,4 @@
       %ul.nav.navmenu-nav
         = render partial: 'shared/user_menu'
   - else
-    %li
-      = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
+    = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
