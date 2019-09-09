@@ -125,7 +125,7 @@ module ApplicationHelper
     return ''.html_safe if picture.nil?
     variant ||= picture.variant.presence || :lightbox
     content_tag :figure, class: options.delete(:figure_class) do
-      concat image_variant_tag(picture.image, variant, options)
+      concat image_variant_tag(picture.image, variant, options.merge(alt: picture.caption))
       yield if block_given?
     end
   end
@@ -133,6 +133,7 @@ module ApplicationHelper
   # image_tag that supports size variants and non-bitmaps.
   def image_variant_tag(image, variant = :icon, options = {})
     return ''.html_safe if image.nil?
+    options[:alt] ||= ''
     if image.is_bitmap?
       image_tag(image.url(variant), options.merge(image.dimensions(variant)))
     else
