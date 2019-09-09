@@ -267,14 +267,28 @@ $body-tone-bg: darken($body-bg, 4%);
   }
   input { border-radius: $input-height-base/2; }
 }
-.filter-bar .nav {
-  @include small;
-  margin-bottom: $line-height-computed;
+.filter-bar {
 
-  > li { font-weight: bold; }
-  > li > .nav {
-    .checkbox {
-      margin: 5px 0;
+  .nav > li {
+    @include small;
+    margin-bottom: $line-height-computed;
+
+    > .title {
+      margin-bottom: 5px;
+      line-height: 2;
+      font-weight: bold;
+    }
+    > .btn-group-vertical {
+      display: block;
+
+      .btn {
+        @include button-variant($btn-default-color, transparent, transparent);
+        text-align: left;
+
+        &.active {
+          @include button-variant($btn-primary-color, $btn-primary-bg, transparent);
+        }
+      }
     }
   }
 }

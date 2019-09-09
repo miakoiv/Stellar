@@ -1,14 +1,14 @@
 - if values.any?
   %li
-    = property.name
-    - if selected
-      %span.badge= selected.size
+    .title
+      = property.name
+      - if selected
+        %span.badge= selected.size
 
-    %ul.nav
+    .btn-group-vertical{data: {toggle: 'buttons'}}
       - values.each do |value|
-        %li
-          .checkbox
-            %label
-              = check_box_tag "product_search[#{param}][]", value, selected.present? && selected.include?(value), id: nil
-              = value
-              = property.measurement_unit
+        - active = selected.present? && selected.include?(value)
+        %label.btn.btn-default.btn-xs{class: active && 'active'}
+          = check_box_tag "product_search[#{param}][]", value, active, id: nil
+          = value
+          = property.measurement_unit

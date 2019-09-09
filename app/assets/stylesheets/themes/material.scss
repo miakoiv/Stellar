@@ -292,33 +292,47 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 
 /* Product filtering */
-.filter-bar .nav {
-  @include small;
-  margin-bottom: $line-height-computed;
+.filter-bar {
 
-  > li { font-weight: bold; }
-  > li > .nav {
-    .checkbox {
-      margin: 5px 0;
+  .nav > li {
+    @include small;
+    margin-bottom: $line-height-computed;
+
+    > .title {
+      margin-bottom: 5px;
+      line-height: 2;
+      font-weight: bold;
+    }
+    > .btn-group-vertical {
+      display: block;
+
+      .btn {
+        @include button-variant($btn-default-color, $btn-default-bg, transparent);
+        text-align: left;
+
+        &.active {
+          @include button-variant($btn-primary-color, $btn-primary-bg, transparent);
+        }
+      }
     }
   }
   @media (max-width: $screen-sm-max) {
-    margin-bottom: 5px;
+    margin: -15px -15px 0;
+    padding: 15px;
+    background-color: $body-tone-bg;
 
-    > li > .nav {
-      @include flex;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+    .nav > li {
+      margin-bottom: 10px;
 
-      .checkbox {
-        margin-right: 5px;
-        white-space: nowrap;
-        touch-action: manipulation;
-        cursor: pointer;
-        border: 1px solid transparent;
-        @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $btn-border-radius-small);
-        @include user-select(none);
-        @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+      > .btn-group-vertical {
+        @include flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .btn {
+          margin-right: 5px;
+          @include button-rounded($padding-small-horizontal, (0.5 * $font-size-small * $line-height-small) + $padding-xs-vertical);
+        }
       }
     }
   }

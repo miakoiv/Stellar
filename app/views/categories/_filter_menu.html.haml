@@ -1,13 +1,13 @@
 - if category.descendants.any?
   %li
-    = title(Category)
-    - if selected
-      %span.badge= selected.size
+    .title
+      = title(Category)
+      - if selected
+        %span.badge= selected.size
 
-    %ul.nav
+    .btn-group-vertical{data: {toggle: 'buttons'}}
       - category.descendants.each do |descendant|
-        %li
-          .checkbox
-            %label
-              = check_box_tag "product_search[categories][]", descendant.id, selected.present? && selected.include?(descendant.id.to_s), id: nil
-              = descendant
+        - active = selected.present? && selected.include?(descendant.id.to_s)
+        %label.btn.btn-default.btn-xs{class: active && 'active'}
+          = check_box_tag "product_search[categories][]", descendant.id, active, id: nil
+          = descendant
