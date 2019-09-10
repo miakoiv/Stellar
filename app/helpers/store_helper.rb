@@ -1,5 +1,9 @@
 module StoreHelper
 
+  def product_search_params
+    request.params.slice(:product_search)
+  end
+
   # Generates a product url that can be in another store
   # if the current store is a portal.
   def product_url(product, category = nil)

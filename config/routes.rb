@@ -86,6 +86,7 @@ Rails.application.routes.draw do
   get '/promotion/:promotion_id', to: 'store#show_promotion', as: :show_promotion
   get '/product/:product_id(/:category_id)', to: 'store#show_product', as: :show_product
   get '/products/promoted', to: 'store#show_promoted_products', as: :show_promoted_products
+  get '/products/filter/:category_id', to: 'store#show_product_filter', as: :show_product_filter
 
   # These routes can be reached via /:slug
   get '/front', to: 'store#front', as: :front

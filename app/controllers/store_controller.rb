@@ -8,7 +8,7 @@ class StoreController < BaseStoreController
   # Unauthenticated guests may visit the store.
   before_action :authenticate_user_or_skip!, except: [:index, :show_page, :lookup]
 
-  with_options only: [:front, :cart, :show_category, :show_category_order, :show_department, :show_page, :show_product, :show_promotion, :show_tag] do
+  with_options only: [:front, :cart, :show_category, :show_category_order, :show_department, :show_page, :show_product, :show_promotion, :show_tag, :show_product_filter] do
     before_action :set_categories
     before_action :set_departments
   end
@@ -45,15 +45,31 @@ class StoreController < BaseStoreController
   # GET /category/:category_id
   def show_category
     find_category && redirect_to_first_descendant_category
-    @search, results = search_category_products
-    @products = results.page(params[:page])
     @view_mode = get_view_mode_setting(@category)
+    @search = prepare_category_search
+
+    respond_to do |format|
+      format.js {
+        results = @search.results.visible.sorted(@category.product_scope)
+        @products = results.page(params[:page])
+      }
+      format.html
+    end
+  end
+
+  # GET /products/filter
+  def show_product_filter
+    find_category
+    @search = prepare_category_search
+
+    respond_to :js
   end
 
   # GET /category/:category_id/order
   def show_category_order
     find_category
-    @search, results = search_category_products
+    @search = prepare_category_search
+    results = @search.results.visible.sorted(@category.product_scope)
     @products = results.simple.page(params[:page])
   end
 
@@ -117,16 +133,16 @@ class StoreController < BaseStoreController
   # Same as #show_category but in the context of a page.
   def show_category_as_page
     @category = @page.resource
-    @search, results = search_category_products
-    @products = results.page(params[:page])
     @view_mode = get_view_mode_setting(@category)
+    @search = prepare_category_search
 
     render :show_category_as_page
   end
 
   def show_category_order_as_page
     @category = @page.resource
-    @search, results = search_category_products
+    @search = prepare_category_search
+    results = @search.results.visible.sorted(@category.product_scope)
     @products = results.simple.page(params[:page])
 
     render :show_category_order_as_page
@@ -318,13 +334,10 @@ class StoreController < BaseStoreController
       end
     end
 
-    # Performs a product search in current category.
-    # Returns a tuple with search object, search results.
-    def search_category_products
+    # Prepares a search for products in current category and its descendants.
+    def prepare_category_search
       query = params[:product_search] || {}
-      search = ProductSearch.new(query.merge(filter_params))
-      results = search.results.visible.sorted(@category.product_scope)
-      [search, results]
+      ProductSearch.new(query.merge(filter_params))
     end
 
     # Find product by friendly id in `product_id`.
