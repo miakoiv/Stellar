@@ -1,4 +1,4 @@
-- if values.any?
+- if (value_set = values.reject(&:blank?)).any?
   %li
     .title
       = property.name
@@ -6,7 +6,7 @@
         %span.badge= selected.size
 
     .btn-group-vertical{data: {toggle: 'buttons'}}
-      - values.each do |value|
+      - value_set.each do |value|
         - active = selected.present? && selected.include?(value)
         %label.btn.btn-default.btn-xs{class: active && 'active'}
           = check_box_tag "product_search[#{param}][]", value, active, id: nil

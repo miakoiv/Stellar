@@ -1,5 +1,6 @@
-- if current_store.footer_page.present?
-  %footer
-    = render partial: 'pages/layout', object: current_store.footer_page, as: :page
+- if footer = current_store.footer_page.presence
+  - cache [I18n.locale, :footer, footer] do
+    %footer
+      = render partial: 'pages/layout', object: footer, as: :page
 - else
   = render partial: 'shared/default_footer'
