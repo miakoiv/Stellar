@@ -6,4 +6,6 @@
   = render partial: 'products/context_menu', object: @product, as: :product
 
 :coffee
+  $('.add-to-cart').checkAvailability()
+  $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
   $('.product-detail').initialize()

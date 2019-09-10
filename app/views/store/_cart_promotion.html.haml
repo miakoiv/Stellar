@@ -7,9 +7,10 @@
     .swiper-button-prev
     .swiper-button-next
 
-  = render partial: 'stock_handler'
-
   :coffee
+    $('.product-browser .add-to-cart').checkAvailability()
+    $('.product-browser .add-favorite > .btn').checkFavorites '#{favorites_path}'
+
     jQuery ->
       $swiper = $('#promoted-products .swiper-container')
       new Swiper $swiper,

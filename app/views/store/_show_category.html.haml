@@ -19,3 +19,6 @@
       .product-filter
         = render partial: 'products/filtering'
 
+:coffee
+  $('.add-to-cart').checkAvailability()
+  $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
