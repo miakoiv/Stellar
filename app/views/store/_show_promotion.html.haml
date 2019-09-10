@@ -8,7 +8,4 @@
     .page-header.visible-print
       %h1= @promotion.to_s
     #product-view.product-grid
-      %ul{class: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
-        = render @products
-      .pagination-block
-        = paginate @products
+      = render partial: 'products/grid_view', object: @products, as: :products, locals: {grid_type: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
