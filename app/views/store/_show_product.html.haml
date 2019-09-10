@@ -5,10 +5,5 @@
 - content_for :auxiliary_nav do
   = render partial: 'products/context_menu', object: @product, as: :product
 
-- if @category.present?
-  :coffee
-    $('.category').deactivate()
-    $("##{dom_id(@category)}").activate()
-
 :coffee
   $('.product-detail').initialize()
