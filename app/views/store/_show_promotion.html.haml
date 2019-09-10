@@ -7,9 +7,9 @@
   .products
     .page-header.visible-print
       %h1= @promotion.to_s
-    #product-view.product-grid
-      = render partial: 'products/grid_view', object: @products, as: :products, locals: {grid_type: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
+    #product-view.product-grid{data: {url: show_promotion_path(@promotion)}}
 
 :coffee
-  $('.add-to-cart').checkAvailability()
-  $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
+  $('#product-view').loadPartial().done ->
+    $('.add-to-cart').checkAvailability()
+    $('.add-favorite > .btn').checkFavorites '#{favorites_path}'

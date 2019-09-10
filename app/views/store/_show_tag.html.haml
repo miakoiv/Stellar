@@ -3,9 +3,9 @@
     %ol.breadcrumb
       = render partial: 'tags/breadcrumb', collection: current_store.tags, as: :tag
   .products
-    #product-view.product-grid
-      = render partial: 'products/grid_view', object: @products, as: :products, locals: {grid_type: current_store.masonry? ? 'staggered-grid' : 'straight-grid'}
+    #product-view.product-grid{data: {url: show_tag_path(@tag)}}
 
 :coffee
-  $('.add-to-cart').checkAvailability()
-  $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
+  $('#product-view').loadPartial().done ->
+    $('.add-to-cart').checkAvailability()
+    $('.add-favorite > .btn').checkFavorites '#{favorites_path}'

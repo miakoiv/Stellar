@@ -95,13 +95,25 @@ class StoreController < BaseStoreController
   def show_promotion
     @promotion = current_store.promotions
       .active.friendly.find(params[:promotion_id])
-    @products = @promotion.products.visible.page(params[:page])
+
+    respond_to do |format|
+      format.js {
+        @products = @promotion.products.visible.page(params[:page])
+      }
+      format.html
+    end
   end
 
   # GET /tag/:tag_id
   def show_tag
     @tag = current_store.tags.friendly.find(params[:tag_id])
-    @products = @tag.products.live.page(params[:page])
+
+    respond_to do |format|
+      format.js {
+        @products = @tag.products.live.page(params[:page])
+      }
+      format.html
+    end
   end
 
   # GET /:slug
@@ -159,7 +171,6 @@ class StoreController < BaseStoreController
 
   def show_promotion_as_page
     @promotion = @page.resource
-    @products = @promotion.products.visible.page(params[:page])
 
     render :show_promotion_as_page
   end
