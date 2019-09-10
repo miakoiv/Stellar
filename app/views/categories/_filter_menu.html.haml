@@ -1,4 +1,4 @@
-- if category.descendants.any?
+- if category.descendants.live.any?
   %li
     .title
       = title(Category)
@@ -6,7 +6,7 @@
         %span.badge= selected.size
 
     .btn-group-vertical{data: {toggle: 'buttons'}}
-      - category.descendants.each do |descendant|
+      - category.descendants.live.each do |descendant|
         - active = selected.present? && selected.include?(descendant.id.to_s)
         %label.btn.btn-default.btn-xs{class: active && 'active'}
           = check_box_tag "product_search[categories][]", descendant.id, active, id: nil
