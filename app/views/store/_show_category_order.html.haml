@@ -15,8 +15,4 @@
       = render partial: 'products/filtering'
 
 :coffee
-  $('.category').deactivate()
-  $("##{dom_id(@category)}").activate()
-  $('.navbar-form').show()
-
   $('#product-view').category_order_form '#{cart_path}'
