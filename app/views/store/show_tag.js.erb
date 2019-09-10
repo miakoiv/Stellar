@@ -1,2 +1,4 @@
 $('#product-view').html('<%= j render partial: 'products/grid_view', object: @products, as: :products, locals: {grid_type: current_store.masonry? ? 'staggered-grid' : 'straight-grid'} %>');
-$('.products').masonry_build()
+$('.products').masonry_build();
+$('.add-to-cart').checkAvailability();
+$('.add-favorite > .btn').checkFavorites('<%= favorites_path %>');

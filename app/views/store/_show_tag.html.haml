@@ -6,6 +6,4 @@
     #product-view.product-grid{data: {url: show_tag_path(@tag)}}
 
 :coffee
-  $('#product-view').loadPartial().done ->
-    $('.add-to-cart').checkAvailability()
-    $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
+  $('#product-view').loadPartial()

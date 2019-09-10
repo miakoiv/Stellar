@@ -18,7 +18,5 @@
       .product-filter{data: {url: show_product_filter_path(@category, product_search_params)}}
 
 :coffee
-  $('#product-view').loadPartial().done ->
-    $('.add-to-cart').checkAvailability()
-    $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
+  $('#product-view').loadPartial()
   $('.product-filter').loadPartial()
