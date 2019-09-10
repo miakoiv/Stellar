@@ -11,8 +11,7 @@ gem 'yaml_db'
 # Use dalli as memcached client
 gem 'dalli'
 # Use Haml for markup
-gem 'haml-rails', '~> 2.0'
-gem 'erb2haml', group: :development
+gem 'hamlit-rails'
 # Use SCSS for stylesheets
 gem 'sassc-rails', '>= 2.0.0'
 gem 'autoprefixer-rails'
