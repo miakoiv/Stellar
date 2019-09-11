@@ -76,6 +76,14 @@ $(document).on 'click', 'a[href="#print"]', (e) ->
   e.preventDefault()
   $.print()
 
+$(document).on 'click', '.filter-reset', (e) ->
+  $filter = $(e.currentTarget).parents 'li'
+  $filter.find('label.active')
+    .removeClass('active')
+    .find('input').prop 'checked', false
+  $('#filter-form').trigger 'submit.rails'
+
+
 jQuery ->
 
   $(document).initialize()

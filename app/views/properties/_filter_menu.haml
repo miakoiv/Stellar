@@ -1,9 +1,8 @@
 - if (value_set = values.reject(&:blank?)).any?
   %li
-    .title
-      = property.name
-      - if selected
-        %span.badge= selected.size
+    .pull-right
+      .filter-reset.btn= icon('undo')
+    .title= property.name
 
     .btn-group-vertical{data: {toggle: 'buttons'}}
       - value_set.each do |value|

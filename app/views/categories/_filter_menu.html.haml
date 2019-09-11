@@ -1,9 +1,8 @@
 - if category.descendants.live.any?
   %li
-    .title
-      = title(Category)
-      - if selected
-        %span.badge= selected.size
+    .pull-right
+      .filter-reset.btn= icon('undo')
+    .title= title(Category)
 
     .btn-group-vertical{data: {toggle: 'buttons'}}
       - category.descendants.live.each do |descendant|
