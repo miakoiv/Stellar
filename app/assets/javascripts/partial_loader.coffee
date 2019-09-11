@@ -6,7 +6,6 @@ $.fn.extend
     $.ajax
       url: url
       dataType: 'script'
-      cache: true
     .fail (xhr, status, err) ->
       console.log err
     .always ->
