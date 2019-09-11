@@ -1,5 +1,6 @@
 #product-detail-wrap
   .product-detail{data: {url: show_product_path(@product)}}
+    .product-detail-placeholder
 
 - content_for :auxiliary_nav do
   = render partial: 'products/context_menu', object: @product, as: :product

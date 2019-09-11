@@ -13,6 +13,7 @@
       %p.lead= @category.subtitle
 
     #product-view{class: @view_mode, data: {url: show_category_path(@category, product_search_params), 'view-key': dom_id(@category)}}
+      .product-grid-placeholder
 
     - if @category.filtering?
       .product-filter{data: {url: show_product_filter_path(@category, product_search_params)}}

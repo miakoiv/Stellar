@@ -4,6 +4,7 @@
       = render partial: 'tags/breadcrumb', collection: current_store.tags, as: :tag
   .products
     #product-view.product-grid{data: {url: show_tag_path(@tag)}}
+      .product-grid-placeholder
 
 :coffee
   $('#product-view').loadPartial()
