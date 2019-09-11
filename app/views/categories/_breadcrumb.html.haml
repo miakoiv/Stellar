@@ -1,5 +1,2 @@
-- if category == @category
-  %li.active= category
-- else
-  %li
-    = link_to category, show_category_path(category)
+%li{class: category == @category && 'active'}
+  = link_to category, show_category_path(category)
