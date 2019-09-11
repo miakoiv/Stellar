@@ -1,14 +1,15 @@
-%li.grid-item.single.product{id: dom_id(product, :promoted)}
-  = link_to show_product_path(product) do
-    = render partial: 'products/card/card_image', object: product, as: :product
-    = render partial: 'products/card/title_text', object: product, as: :product
-    = render partial: 'products/card/promotions', object: product, as: :product
-    = render partial: 'products/card/premium', object: product, as: :product
-  .buy-now
-    = render partial: 'products/card/pricing', object: product, as: :product
-    - if can_order?
-      - if product.purchasable? && !product.modal_ordering?
-        = render partial: 'products/card/order_form', object: product, as: :product
-      - else
-        .product-link
-          = link_to icon('search'), show_product_path(product), class: 'btn btn-sm'
+- cache [selected_group, I18n.locale, :promoted_product, product] do
+  %li.grid-item.single.product{id: dom_id(product, :promoted)}
+    = link_to show_product_path(product) do
+      = render partial: 'products/card/card_image', object: product, as: :product
+      = render partial: 'products/card/title_text', object: product, as: :product
+      = render partial: 'products/card/promotions', object: product, as: :product
+      = render partial: 'products/card/premium', object: product, as: :product
+    .buy-now
+      = render partial: 'products/card/pricing', object: product, as: :product
+      - if can_order?
+        - if product.purchasable? && !product.modal_ordering?
+          = render partial: 'products/card/order_form', object: product, as: :product
+        - else
+          .product-link
+            = link_to icon('search'), show_product_path(product), class: 'btn btn-sm'
