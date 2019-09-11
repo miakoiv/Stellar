@@ -1,11 +1,8 @@
 #product-detail-wrap
-  .product-detail
-    = render partial: 'products/product_detail', object: @product, as: :product
+  .product-detail{data: {url: show_product_path(@product)}}
 
 - content_for :auxiliary_nav do
   = render partial: 'products/context_menu', object: @product, as: :product
 
 :coffee
-  $('.add-to-cart').checkAvailability()
-  $('.add-favorite > .btn').checkFavorites '#{favorites_path}'
-  $('.product-detail').initialize()
+  $('.product-detail').loadPartial()

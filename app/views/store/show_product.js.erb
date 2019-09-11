@@ -1,0 +1,5 @@
+$('.product-detail').html('<%= j render partial: 'products/product_detail', object: @product, as: :product%>');
+$('.stock-amount').fetchStockAmounts();
+$('.add-to-cart').checkAvailability();
+$('.add-favorite > .btn').checkFavorites('<%= favorites_path %>');
+$('.product-detail').initialize();

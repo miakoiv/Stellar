@@ -89,6 +89,8 @@ class StoreController < BaseStoreController
     else
       @product.category
     end
+
+    respond_to :js, :html
   end
 
   # GET /promotion/:promotion_id
