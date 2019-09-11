@@ -1,5 +1,5 @@
 .filter-bar
-  = form_for @search, url: show_category_path(@category), method: :get, remote: true, enforce_utf8: false, html: {id: 'filter-form'} do |f|
+  = form_for @search, url: show_category_path(@category), method: :get, remote: true, enforce_utf8: false, html: {id: 'filter-form', class: 'immediate'} do |f|
     .form-group.has-feedback
       = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
       %span.form-control-feedback= icon('search')
@@ -7,7 +7,3 @@
       = render partial: 'categories/filter_menu', object: @category, as: :category, locals: {selected: @search.options['categories']}
       - current_store.searchable_properties.each do |property|
         = render partial: 'properties/filter_menu', object: property, as: :property, locals: {param: property.sluggify, values: property.values_for(@category.self_and_maybe_descendants), selected: @search.options[property.sluggify]}
-
-:coffee
-  $('#filter-form').on 'change', (e) ->
-    $(this).submit()
