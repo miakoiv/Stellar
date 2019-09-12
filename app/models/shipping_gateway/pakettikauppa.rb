@@ -60,8 +60,8 @@ module ShippingGateway
         raise ShippingGatewayError, 'Order not specified' if order.nil?
         @store = order.store
         @group = user&.group(@store)
-        @api_key = @store.pakettikauppa_api_key || TEST_KEY
-        @secret = @store.pakettikauppa_secret || TEST_SECRET
+        @api_key = @store.pakettikauppa_api_key.presence || TEST_KEY
+        @secret = @store.pakettikauppa_secret.presence || TEST_SECRET
         @locale = I18n.locale
       end
 
