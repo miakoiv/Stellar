@@ -83,6 +83,8 @@ $(document).on 'click', '.filter-reset', (e) ->
     .find('input').prop 'checked', false
   $('#filter-form').trigger 'submit.rails'
 
+$(window).on 'unload', (e) ->
+  window.$_Tawk = undefined
 
 jQuery ->
 
