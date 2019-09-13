@@ -11,7 +11,7 @@
     $('#order-type-form input').on 'change', (e) ->
       $('#order-type-form').trigger 'submit.rails'
 
-- elsif order.order_type.nil?
+- elsif order.order_type.nil? && @order_types.any?
   :coffee
     jQuery ->
       request = $.post '#{order_type_path(order)}',
