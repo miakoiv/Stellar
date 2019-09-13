@@ -1,0 +1,4 @@
+%ul
+  = render partial: 'products/order_list_item', collection: products, as: :product
+.pagination-block
+  = paginate products, remote: true

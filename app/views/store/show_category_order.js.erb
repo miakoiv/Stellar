@@ -1,0 +1,2 @@
+$('#product-view').html('<%= j render partial: 'products/order_list_view', object: @products, as: :products %>');
+$('#product-view').category_order_form('<%= cart_path %>');

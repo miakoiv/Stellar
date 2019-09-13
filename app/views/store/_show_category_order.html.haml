@@ -6,13 +6,9 @@
       = link_to show_category_path(@category, params.permit([:page]).to_h), class: 'btn btn-default' do
         = icon('times', t('.close'))
   .products
-    #product-view.product-order-list
-      %ul
-        = render partial: 'products/order_list_item', collection: @products, as: :product
-      .pagination-block
-        = paginate @products
-    .product-filter
-      = render partial: 'products/filtering'
+    #product-view.product-order-list{data: {url: show_category_order_path(@category)}}
+    .product-filter{data: {url: show_product_filter_path(@category, product_search_params)}}
 
 :coffee
-  $('#product-view').category_order_form '#{cart_path}'
+  $('#product-view').loadPartial()
+  $('.product-filter').loadPartial products_url: '#{show_category_order_path(@category)}'

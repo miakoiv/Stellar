@@ -61,8 +61,14 @@ class StoreController < BaseStoreController
   def show_category_order
     find_category
     @search = prepare_category_search
-    results = @search.results.visible.sorted(@category.product_scope)
-    @products = results.simple.page(params[:page])
+
+    respond_to do |format|
+      format.js {
+        results = @search.results.visible.sorted(@category.product_scope)
+        @products = results.simple.page(params[:page])
+      }
+      format.html
+    end
   end
 
   # GET /department/:department_id
@@ -148,8 +154,6 @@ class StoreController < BaseStoreController
   def show_category_order_as_page
     @category = @page.resource
     @search = prepare_category_search
-    results = @search.results.visible.sorted(@category.product_scope)
-    @products = results.simple.page(params[:page])
 
     render :show_category_order_as_page
   end
