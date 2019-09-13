@@ -1,5 +1,5 @@
 .filter-bar
-  = form_for @search, url: show_category_path(@category), method: :get, remote: true, enforce_utf8: false, html: {id: 'filter-form', class: 'immediate'} do |f|
+  = form_for @search, url: @products_url, method: :get, remote: true, enforce_utf8: false, html: {id: 'filter-form', class: 'immediate'} do |f|
     .form-group.has-feedback
       = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
       %span.form-control-feedback= icon('search')

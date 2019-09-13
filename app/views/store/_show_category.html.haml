@@ -20,4 +20,4 @@
 
 :coffee
   $('#product-view').loadPartial()
-  $('.product-filter').loadPartial()
+  $('.product-filter').loadPartial products_url: '#{show_category_path(@category)}'

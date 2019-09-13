@@ -57,14 +57,6 @@ class StoreController < BaseStoreController
     end
   end
 
-  # GET /products/filter
-  def show_product_filter
-    find_category
-    @search = prepare_category_search
-
-    respond_to :js
-  end
-
   # GET /category/:category_id/order
   def show_category_order
     find_category
@@ -195,6 +187,15 @@ class StoreController < BaseStoreController
       .limit(Product::INLINE_SEARCH_RESULTS)
     @page_results = page_search.results
     @results = @category_results.any? || @product_results.any? || @page_results.any?
+
+    respond_to :js
+  end
+
+  # GET /products/filter.js
+  def show_product_filter
+    find_category
+    @products_url = params[:products_url]
+    @search = prepare_category_search
 
     respond_to :js
   end
