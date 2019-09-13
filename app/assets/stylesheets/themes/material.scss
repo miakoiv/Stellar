@@ -409,6 +409,11 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
           color: $text-muted;
         }
       }
+      .code {
+        float: right;
+        font-size: 75%;
+        color: $text-color;
+      }
     }
     .product-pricing {
       @include make-xs-column(3);
