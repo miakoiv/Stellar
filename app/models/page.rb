@@ -85,6 +85,9 @@ class Page < ApplicationRecord
   # Containers for other pages. Segments target these to build navs.
   scope :container, -> { where(purpose: [10, 11, 20, 21, 22]) }
 
+  # Searchable pages can appear in keyword search results.
+  scope :searchable, -> { where(purpose: [1, 2, 3, 4, 5, 6, 40]) }
+
   # Scope for visible pages by group: live, and either public or accessible by group.
   scope :visible, -> (group) { includes(:groups).live.where(groups: {id: [nil, group]}) }
 

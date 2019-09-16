@@ -409,11 +409,13 @@ class StoreController < BaseStoreController
       }
     end
 
-    # Page lookup includes pages contained in the store header.
+    # Page lookup includes pages contained in the store header,
+    # visible to the current group.
     # The search model sets further search criteria by itself.
     def page_lookup_params
       {
         store: current_store,
+        group: current_group,
         within: current_store.header
       }
     end

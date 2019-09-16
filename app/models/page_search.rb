@@ -8,14 +8,19 @@ class PageSearch < Searchlight::Search
     query.where(store: store)
   end
 
+  def search_group
+    query.visible(group)
+  end
+
   def search_within
-    query.where(
-      'pages.lft >= ? AND pages.lft < ?',
-      within.lft, within.rgt
-    )
+    query.where(Page.arel_table[:lft].gteq(within.lft)).where(Page.arel_table[:rgt].lt(within.rgt))
   end
 
   def search_keyword
-    query.primary.live.distinct.where('segments.content LIKE ?', "%#{keyword}%")
+    q = '%%%s%%' % keyword.gsub(/[%_]/, '\\\\\0')
+    query.live.searchable.distinct.where(
+      Page.arel_table[:title].matches(q)
+        .or(Segment.arel_table[:content].matches(q))
+    )
   end
 end
