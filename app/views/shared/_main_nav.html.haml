@@ -1,3 +1,3 @@
-- if @header.children_count > 0
+- if store_header.children_count > 0
   %ul.nav.navbar-nav.navbar-left.responsive
-    = render partial: @header.children.live, locals: {navmenu: false}
+    = render partial: store_header.children.visible(current_group), locals: {navmenu: false}

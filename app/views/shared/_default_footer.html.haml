@@ -3,10 +3,10 @@
     .container
       .row
         .col-xs-12.col-sm-5.col-sm-push-4.bordered
-          - if @footer.present? && @footer.children_count > 0
+          - if store_footer.present? && store_footer.children_count > 0
             %nav.navmenu
               %ul.nav.navmenu-nav
-                = render partial: @footer.children.live, locals: {navmenu: true}
+                = render partial: store_footer.children.visible(current_group), locals: {navmenu: true}
         .col-xs-8.col-sm-4.col-sm-pull-5
           = render partial: 'shared/branding'
         .col-xs-4.col-sm-3

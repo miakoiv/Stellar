@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_114832) do
+ActiveRecord::Schema.define(version: 2019_09_13_112709) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -216,6 +216,12 @@ ActiveRecord::Schema.define(version: 2019_08_21_114832) do
     t.index ["parent_id"], name: "index_groups_on_parent_id"
     t.index ["shipping_address_id"], name: "index_groups_on_shipping_address_id"
     t.index ["store_id"], name: "index_groups_on_store_id"
+  end
+
+  create_table "groups_pages", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "page_id", null: false
+    t.index ["page_id", "group_id"], name: "index_groups_pages_on_page_id_and_group_id", unique: true
   end
 
   create_table "groups_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|

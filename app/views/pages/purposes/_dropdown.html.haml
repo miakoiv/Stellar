@@ -3,7 +3,7 @@
     %li{class: dropdown.always_expand? && 'mm-active'}
       %a.has-arrow{href: '#', role: 'button'}= dropdown
       %ul.nav.navmenu-nav
-        - dropdown.children.live.each do |child|
+        - dropdown.children.visible(current_group).each do |child|
           = render partial: child.to_partial_path, object: child, locals: {navmenu: true}
   - else
     %li.dropdown
@@ -11,5 +11,5 @@
         = dropdown
         %span.caret
       %ul.dropdown-menu{role: 'menu'}
-        - dropdown.children.live.each do |child|
+        - dropdown.children.visible(current_group).each do |child|
           = render partial: child.to_partial_path, object: child, locals: {navmenu: false}

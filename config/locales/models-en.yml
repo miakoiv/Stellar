@@ -382,6 +382,8 @@ en:
         description: Description
         always_expand: Keep menu opened
         dynamic_navbar: Dynamic navigation bar
+        group_ids: Page visibility
+        all_groups: "[Public]"
       payment:
         order_id: Order
         number: Transaction №

@@ -1,5 +1,5 @@
 %ul#side-nav-menu.nav.navmenu-nav.metismenu
-  = render partial: @header.children.live, locals: {navmenu: true}
+  = render partial: store_header.children.visible(current_group), locals: {navmenu: true}
 
   %li.divider
 
@@ -15,6 +15,6 @@
   - else
     = menu_item 'sign-in', t('devise.sessions.new.sign_in'), new_user_session_path
 
-  - if @footer.present? && @footer.children_count > 0
+  - if store_footer.present? && store_footer.children_count > 0
     %li.divider
-    = render partial: @footer.children.live, locals: {navmenu: true}
+    = render partial: store_footer.children.visible(current_group), locals: {navmenu: true}

@@ -13,10 +13,12 @@ class StoreController < BaseStoreController
     before_action :set_departments
   end
 
+  authority_actions show_page: 'read'
+
   # GET /
   def index
     if current_store.present?
-      entry_point = @header.descendants.live.entry_point
+      entry_point = store_header.descendants.visible(current_group).entry_point
       return redirect_to entry_point.present? ? show_page_path(entry_point) : front_path
     end
     render :index, layout: 'devise'
@@ -120,6 +122,7 @@ class StoreController < BaseStoreController
   # Multiplexer to call different actions depending on page type.
   def show_page
     @page = current_store.pages.friendly.find(params[:slug])
+    authorize_action_for @page, at: current_store, for: current_group
 
     case @page.purpose.to_sym
     when :primary, :continuous, :route, :proxy

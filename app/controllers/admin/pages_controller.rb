@@ -116,7 +116,7 @@ class Admin::PagesController < AdminController
       params.require(:page).permit(
         :parent_id, :purpose, :resource_type, :resource_id,
         :live, :title, :slug, :url, :description,
-        :always_expand, :dynamic_navbar
+        :always_expand, :dynamic_navbar, group_ids: []
       )
     end
 end

@@ -75,12 +75,18 @@ class Page < ApplicationRecord
   has_many :segments, -> { reorder('sections.priority, columns.priority, segments.priority') }, through: :sections
   has_many :content_pictures, through: :segments, source: :pictures
 
+  # Groups having access to this page. If empty, page is public to all.
+  has_and_belongs_to_many :groups
+
   default_scope { nested_set_scope }
   scope :live, -> { where(live: true) }
   scope :excluding, -> (page) { where.not(id: page) }
 
   # Containers for other pages. Segments target these to build navs.
   scope :container, -> { where(purpose: [10, 11, 20, 21, 22]) }
+
+  # Scope for visible pages by group: live, and either public or accessible by group.
+  scope :visible, -> (group) { includes(:groups).live.where(groups: {id: [nil, group]}) }
 
   #---
   validates :title, presence: true, if: :title_required?

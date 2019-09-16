@@ -7,7 +7,6 @@
 class BaseStoreController < ApplicationController
 
   prepend_before_action :set_hostname_and_store
-  before_action :set_header_and_footer, unless: proc { request.xhr? }
 
   layout 'store'
 
@@ -17,10 +16,15 @@ class BaseStoreController < ApplicationController
     authenticate_user!
   end
 
-  def set_header_and_footer
-    @header = current_store.header
-    @footer = current_store.footer
+  def store_header
+    @header ||= current_store.header
   end
+  helper_method :store_header
+
+  def store_footer
+    @footer ||= current_store.footer
+  end
+  helper_method :store_footer
 
   # Find the guest user stored in session, or create it.
   def guest_user

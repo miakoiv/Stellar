@@ -2,7 +2,7 @@
 
 #static-wrap
   - if @page.continuous?
-    = render partial: 'pages/layout', collection: @page.children.primary.live, as: :page
+    = render partial: 'pages/layout', collection: @page.children.primary.visible(current_group), as: :page
 
   - else
     = render partial: 'pages/layout', object: @page, as: :page

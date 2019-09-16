@@ -382,6 +382,8 @@ fi:
         description: Kuvaus
         always_expand: Pidä menu avoinna
         dynamic_navbar: Animoitu päävalikko
+        group_ids: Sivun näkyvyys
+        all_groups: "[Julkinen]"
       payment:
         order_id: Tilaus
         number: Tapahtumanro

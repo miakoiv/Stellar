@@ -1,2 +1,2 @@
-- continuous.children.primary.live.each do |child|
+- continuous.children.primary.visible(current_group).each do |child|
   = render partial: child.to_partial_path, object: child, locals: {navmenu: navmenu}
