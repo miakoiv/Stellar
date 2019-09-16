@@ -11,5 +11,7 @@
     .editable-content{class: [picture && 'content-overlay', feature.hyphens? && 'hyphens']}
       - if body
         = body.html_safe
+      - else
+        = segment_placeholder(feature)
     - if resource.present?
       = link_to icon('link'), [:show, resource], class: 'feature-link'
