@@ -3,6 +3,8 @@
     = hidden_field_tag :panel, 'design'
     %fieldset
       = f.form_group do
+        = f.check_box :tapestry
+      = f.form_group do
         = f.check_box :jumbotron
       .form-group
         = f.label col(Segment, :shadow), class: 'control-label'

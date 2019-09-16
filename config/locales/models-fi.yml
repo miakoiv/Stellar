@@ -553,6 +553,7 @@ fi:
         line_height: Tekstin rivivälistys
         hyphens: Tekstin tavutus
         masonry: Tiivistä rivit
+        tapestry: Taustakuva taustavärin edessä
         swiper: Karusellinäkymä
         max_items: Maksimimäärä
         show_more: Linkki lisäsisältöön
