@@ -15,5 +15,5 @@
         = ff.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), class: 'may-be-required', required: required
       .col-xs-6.col-sm-4
         = ff.text_field :city, hide_label: true, placeholder: col(Address, :city), class: 'may-be-required', required: required
-      .col-sm-4
+      .col-xs-12.col-sm-4
         = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {class: 'may-be-required', required: required, class: 'selectize'}
