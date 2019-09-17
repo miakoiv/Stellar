@@ -16,6 +16,11 @@ class Admin::InventoryChecksController < AdminController
   # GET /admin/inventory_checks/1
   def show
     authorize_action_for @inventory_check, at: current_store
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data(@inventory_check.to_csv, filename: "inventory-check-#{current_store.slug}-#{Date.today}.csv") }
+    end
   end
 
   # GET /admin/inventory_checks/new

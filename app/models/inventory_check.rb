@@ -53,6 +53,19 @@ class InventoryCheck < ApplicationRecord
     concluded_at.present?
   end
 
+  def to_csv
+    attributes = %w{product_code product_title product_subtitle lot_code expires_at current difference adjustment}
+    CSV.generate(
+      headers: true,
+      col_sep: ';'
+    ) do |csv|
+      csv << attributes
+      inventory_check_items.each do |item|
+        csv << attributes.map { |k| item.send(k) }
+      end
+    end
+  end
+
   def appearance
     return nil if concluded?
     complete? ? 'info text-info' : 'warning text-warning'

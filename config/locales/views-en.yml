@@ -190,6 +190,7 @@ en:
         complete: Complete
         resolve: Resolve
         print_inventory_check_report: Print report
+        export_csv: Export CSV
       resolve:
         conclude: Conclude
       new:

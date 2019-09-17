@@ -12,6 +12,8 @@
         = icon('check-circle', t('.complete'))
   - else
     = link_to icon('print', t('.print_inventory_check_report')), '#print', class: 'btn btn-default'
+  = link_to admin_inventory_check_path(@inventory_check, format: :csv), class: 'btn btn-default' do
+    = icon('table', t('.export_csv'))
   %h1
     = icon('check-circle-o', title(InventoryCheck))
     %span.small
