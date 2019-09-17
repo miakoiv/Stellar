@@ -1,11 +1,11 @@
-.row
-  .col-md-7
+.row.flex-row
+  .col.col-md-7
     .page-header
       %h1= icon('sitemap', title(Category, count: 2))
     #category-list.dd
       %ol.dd-list
         = render @categories
-  .col-md-5
+  .col.col-md-5
     .quick-edit-panel
       .header
         - if current_user.can_create?(Category, at: current_store)
@@ -24,10 +24,7 @@
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
-    parent: $('#content-wrap')
     offset_top: $('#main-nav').height()
-    bottoming: false
-    spacer: false
     recalc_every: 500
 
   $('#category-list').nestable

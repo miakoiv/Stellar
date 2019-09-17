@@ -1,11 +1,11 @@
-.row
-  .col-md-7
+.row.flex-row
+  .col.col-md-7
     .page-header
       %h1= icon('users', title(Group, count: 2))
     #group-list.dd
       %ol.dd-list
         = render @groups
-  .col-md-5
+  .col.col-md-5
     .quick-edit-panel
       .header
         - if current_user.can_create?(Group, at: current_store)
@@ -21,10 +21,7 @@
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
-    parent: $('#content-wrap')
     offset_top: $('#main-nav').height()
-    bottoming: false
-    spacer: false
     recalc_every: 500
 
   $('#group-list').nestable

@@ -1059,21 +1059,33 @@ mark {
 
 
 /*
- * Quick edit panel
+ * Flex framework for views with a quick edit panel
  */
-.quick-edit-panel { }
-.quick-edit-panel .header {
-  @include clearfix;
-  padding-top: 40px;
-  padding-bottom: 44px;
+.flex-row {
+  @include flex-row;
 
-  .btn { float: right; }
-  .btn + .btn { margin-right: 8px; }
+  > .col {
+    float: none;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    flex-flow: column-reverse;
+  }
 }
-.quick-edit-panel .panel-primary {
-  @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
+
+.quick-edit-panel {
+  .header {
+    @include flex(row-reverse, nowrap);
+    padding-top: 40px;
+    padding-bottom: 44px;
+
+    .btn { margin-left: 8px; }
+  }
+  .panel-primary {
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba($brand-primary, 0.6));
+  }
+  .panel-error-indicator { opacity: 0; }
 }
-.panel-error-indicator { opacity: 0; }
 
 
 /*
