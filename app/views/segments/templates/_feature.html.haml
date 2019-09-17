@@ -12,6 +12,6 @@
       - if body
         = body.html_safe
       - else
-        = segment_placeholder(feature)
+        .placeholder
     - if resource.present?
       = link_to icon('link'), [:show, resource], class: 'feature-link'
