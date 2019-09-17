@@ -1,5 +1,5 @@
 #
-# Sections are page subdivisions defining the layout of its content segments.
+# Sections are page subdivisions containing segments arranged into columns.
 # The segments contain the actual content and have optional associations to
 # external resources like images, products, promotions, etc.
 #
