@@ -63,6 +63,13 @@ class InventoryCheckItem < ApplicationRecord
     difference
   end
 
+  # Amount that was on hand during the check can be inferred from
+  # current and difference, since actual amount in inventory will
+  # eventually change.
+  def was_on_hand
+    current - difference
+  end
+
   # Approves the required adjustment to inventory
   # by restocking with this item.
   def approve!

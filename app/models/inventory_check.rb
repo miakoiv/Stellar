@@ -54,7 +54,7 @@ class InventoryCheck < ApplicationRecord
   end
 
   def to_csv
-    attributes = %w{product_code product_title product_subtitle lot_code expires_at current difference adjustment}
+    attributes = %w{product_code product_title product_subtitle lot_code expires_at was_on_hand current difference}
     CSV.generate(
       headers: true,
       col_sep: ';'
