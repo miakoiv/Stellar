@@ -1,0 +1,12 @@
+- if tags.any?
+  %li
+    .pull-right
+      .filter-reset.btn= icon('undo')
+    .title= title(Tag)
+
+    .btn-group-vertical{data: {toggle: 'buttons'}}
+      - tags.each do |tag|
+        - active = selected.present? && selected.include?(tag.id.to_s)
+        %label.btn.btn-default.btn-xs{class: active && 'active'}
+          = check_box_tag "product_search[tags][]", tag.id, active, id: nil
+          = tag
