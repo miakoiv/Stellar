@@ -334,7 +334,7 @@ class Order < ApplicationRecord
     def conclude!
       reload # to clear changes and prevent a callback loop
       if !is_forwarded?
-        email.conclusion(to: billing_recipient, bcc: false)&.deliver_later
+        email.conclusion(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
         email.conclusion(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
       end
       OrderReportRow.create_from(self)
@@ -354,7 +354,7 @@ class Order < ApplicationRecord
           shipment.cancel!
         end
       end
-      email.cancellation(to: billing_recipient)&.deliver_later
+      email.cancellation(to: billing_recipient)&.deliver_later if billing_address.present?
     end
 
     # Perform XML export if specified by order type, and
