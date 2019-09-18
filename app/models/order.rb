@@ -318,7 +318,7 @@ class Order < ApplicationRecord
       if has_payment?
         email.processing(to: billing_recipient, bcc: false)&.deliver_later
       elsif !is_forwarded?
-        email.confirmation(to: billing_recipient, bcc: false)&.deliver_later
+        email.confirmation(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
         email.confirmation(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
       end
       items_by_vendor.each do |vendor, items|
