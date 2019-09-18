@@ -26,8 +26,7 @@ $navbar-inverse-bg: $primary-color !default;
   .splash {
     position: relative;
     min-height: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex(column);
     justify-content: flex-end;
 
     .swiper-container, .overlay {

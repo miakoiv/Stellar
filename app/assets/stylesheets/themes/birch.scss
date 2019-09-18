@@ -388,8 +388,7 @@ $brand-primary: #013183;
   position: relative;
 }
 .product-browser .product-grid > ul {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
 
   &.swiper-wrapper { flex-wrap: nowrap; }
   .product {

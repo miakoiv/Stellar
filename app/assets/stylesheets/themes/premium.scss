@@ -360,7 +360,7 @@ $body-tone-bg: darken($body-bg, 4%);
 
 /* Product image and text */
 .product-list .product-image {
-  @extend .box-thumbnail;
+  @extend .picture-thumbnail;
   float: left !important;
 
   img { bottom: auto; }
@@ -430,8 +430,7 @@ $body-tone-bg: darken($body-bg, 4%);
   text-align: center;
   flex: 0 0 85px;
   width: 85px;
-  display: flex;
-  flex-flow: column nowrap;
+  @include flex(column);
 }
 .product-list .price.currency {
   flex: 1 1 auto;
@@ -978,8 +977,7 @@ $body-tone-bg: darken($body-bg, 4%);
   }
 }
 .product-browser .product-grid > ul {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
 
   &.swiper-wrapper { flex-wrap: nowrap; }
   .product {

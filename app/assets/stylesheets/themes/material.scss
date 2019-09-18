@@ -352,8 +352,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 .product-order-list .product {
   @extend .list-group-item;
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 
   &.header {
     > a {
@@ -463,8 +462,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   position: relative !important;
   top: 0 !important;
   left: 0 !important;
-  display: flex;
-  flex-flow: column nowrap;
+  @include flex(column);
   justify-content: space-between;
   padding: 0;
 
@@ -548,8 +546,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   .buy-now {
-    display: flex;
-    flex-flow: row nowrap;
+    @include flex;
     justify-content: flex-end;
     align-items: center;
     min-width: 160px;
@@ -596,8 +593,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 }
 @media (min-width: $screen-sm-min) {
   .product-list .product {
-    display: flex;
-    flex-flow: row nowrap;
+    @include flex;
 
     .buy-now {
       flex-flow: column nowrap;
@@ -954,8 +950,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     @include make-md-column-offset(6);
 
     .nav {
-      display: flex;
-      flex-flow: row wrap;
+      @include flex(row, wrap);
 
       > li {
         margin-right: 5px;
@@ -990,8 +985,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     top: 0;
     width: 100%;
     height: 200px;
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex(column);
 
     .categories { margin-bottom: auto; }
   }
@@ -1013,9 +1007,8 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /* Flexbox for smaller viewports */
 @media (max-width: $screen-sm-max) {
   .product-detail .product-body {
-    display: flex;
+    @include flex(column);
     position: relative;
-    flex-flow: column nowrap;
   }
 }
 
@@ -1041,8 +1034,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Product image galleries */
 .product-detail .images {
-  display: flex;
-  flex-flow: column nowrap;
+  @include flex(column);
   align-items: stretch;
 
   .gallery {
@@ -1294,8 +1286,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   }
 }
 .product-browser .product-grid > ul {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
 
   .product {
     float: none;

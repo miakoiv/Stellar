@@ -6,8 +6,7 @@ $footer-color: $text-color !default;
 html { height: 100%; }
 
 body {
-  display: flex;
-  flex-direction: column;
+  @include flex(column);
   min-height: 100%;
   padding-top: 0;
   background-color: $body-bg;
@@ -85,8 +84,7 @@ body {
   border: 0;
 }
 #main-nav > .container {
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 }
 #main-nav .navbar-header {
   flex: 0 0 auto;
@@ -340,11 +338,12 @@ body {
 
 /* Navbar dropdowns with page icons */
 .navbar-nav .dropdown-menu > li.has-image > a {
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 
-  .page-image { margin: -1px 5px -2px 0; }
-  img { @extend .box-icon; }
+  .page-image {
+    @extend .picture-icon;
+    margin: -1px 5px -2px 0;
+  }
 }
 
 /* Orders menu */
@@ -439,8 +438,7 @@ body {
  * Shopping cart
  */
 #static-wrap.shopping-cart {
-  display: flex;
-  flex-flow: column nowrap;
+  @include flex(column);
   min-height: 100%;
 
   > .container {
@@ -461,8 +459,7 @@ body {
 @media (min-width: $screen-sm-min) {
   #static-wrap.shopping-cart {
     > .container > .row {
-      display: flex;
-      flex-flow: row nowrap;
+      @include flex;
       height: 100%;
 
       > div { float: none; }
@@ -524,8 +521,7 @@ body {
     @include make-xs-column(8);
     @include make-sm-column(5);
     @include make-md-column(7);
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex(column);
     justify-content: space-between;
 
     .product-title {
@@ -549,8 +545,7 @@ body {
     @include make-sm-column-offset(0);
     @include make-md-column(3);
     @include make-md-column-offset(0);
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex(column);
     justify-content: space-between;
 
     .actions form {
@@ -626,11 +621,12 @@ body {
 .navmenu.navmenu-inverse .navmenu-header { color: $navmenu-inverse-brand-color; }
 
 .navmenu-nav > li.has-image > a {
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 
-  .page-image { margin: 2px 5px 2px 0; }
-  img { @extend .box-icon; }
+  .page-image {
+    margin: 2px 5px 2px 0;
+    @extend .picture-icon;
+  }
 }
 .navmenu-nav { margin-bottom: 0; }
 .navmenu-nav .navmenu-nav { padding-left: 20px; }
@@ -928,8 +924,7 @@ mark {
  * Block level button toggles, buttons with more contrast
  */
 .btn-group-block {
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
 }
 .btn-group-block + .btn-group-block { margin-top: -1px; }
 
@@ -962,23 +957,6 @@ mark {
 
 
 /*
- * Contextual variants for inverse navbar icons
- */
-@mixin navbar-icon-variant($color) {
-  > a:hover {
-    background-color: darken($color, 10%);
-  }
-}
-.navbar-inverse .navbar-nav > li {
-  &.primary { @include navbar-icon-variant($btn-primary-bg); }
-  &.success { @include navbar-icon-variant($btn-success-bg); }
-  &.info { @include navbar-icon-variant($btn-info-bg); }
-  &.warning { @include navbar-icon-variant($btn-warning-bg); }
-  &.danger { @include navbar-icon-variant($btn-danger-bg); }
-}
-
-
-/*
  * Picture boxes of various sizes, with image centered inside
  */
 .picture-postcard {
@@ -1000,61 +978,6 @@ mark {
   width: 25px;
   height: 25px;
   @include covering-image;
-}
-
-
-/*
- * Image boxes that should be deprecated
- */
-.box-postcard {
-  position: relative;
-  width: 300px;
-  height: 300px;
-
-  img {
-   max-width: 300px;
-   max-height: 300px;
-  }
-}
-.box-matchbox {
-  position: relative;
-  width: 200px;
-  height: 200px;
-
-  img {
-    max-width: 200px;
-    max-height: 200px;
-  }
-}
-.box-thumbnail {
-  position: relative;
-  width: 75px;
-  height: 75px;
-
-  img {
-    max-width: 75px;
-    max-height: 75px;
-  }
-}
-.box-icon {
-  position: relative;
-  width: 25px;
-  height: 25px;
-
-  img {
-    max-width: 25px;
-    max-height: 25px;
-  }
-}
-.box-postcard img, .box-matchbox img, .box-thumbnail img, .box-icon img {
-  position: absolute;
-  width: auto;
-  height: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
 }
 
 
@@ -1236,8 +1159,7 @@ mark {
 
 .stats-box-horizontal,
 .stats-box-vertical {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
   justify-content: center;
 }
 .stat {
@@ -1310,16 +1232,14 @@ mark {
 }
 .selectize-tall .selectize-dropdown-content { min-height: 400px; }
 .selectize-list-group {
-  .selectize-input img {
-    @extend .box-icon;
+  .selectize-input .picture-icon {
     float: left !important;
     margin: -2px 10px -3px 0;
   }
   .selectize-dropdown-content {
     padding: 0;
 
-    .list-group-item img {
-      @extend .box-icon;
+    .list-group-item .picture-icon {
       float: left !important;
       margin-right: 10px;
     }
@@ -1629,8 +1549,7 @@ fieldset > legend {
   }
 }
 .list-group-item .row {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
 
   > div { flex: 0 0 auto; }
 }
@@ -1807,8 +1726,7 @@ fieldset > legend {
 }
 .subscription .panel,
 .plan .panel {
-  display: flex;
-  flex-flow: column nowrap;
+  @include flex(column);
   height: 100%;
 
   .panel-body {
@@ -1848,7 +1766,7 @@ fieldset > legend {
  */
 .plan-card {
   .plan-image {
-    @extend .box-thumbnail;
+    @extend .picture-thumbnail;
     float: left !important;
     margin-right: 10px;
     background-size: contain;

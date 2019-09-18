@@ -40,8 +40,7 @@ body.layout-editor.modal-open {
   }
 }
 .template-selector {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
 
   .btn {
     display: block;
@@ -83,8 +82,7 @@ body.layout-editor.modal-open {
   user-select: none;
 
   > .navbar-nav {
-    display: flex;
-    flex-flow: row nowrap;
+    @include flex;
     margin: 0;
 
     > li > a {
@@ -230,9 +228,8 @@ body.layout-editor.modal-open {
  * Image editor components
  */
 #image-editor {
+  @include flex(column);
   height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
 
   .navbar {
     min-height: auto;
@@ -243,8 +240,7 @@ body.layout-editor.modal-open {
     transition: all 150ms ease-in-out 0s;
 
     > .navbar-nav {
-      display: flex;
-      flex-flow: row nowrap;
+      @include flex;
       margin: 0;
 
       > li > a {

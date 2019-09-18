@@ -1,21 +1,40 @@
-/*
- * Mixins
- */
-@mixin fill-up {
+/* Flexbox shortcut */
+@mixin flex($flow: row, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $flow;
+  flex-wrap: $wrap;
+}
+
+/* Flex row à la Bootstrap 4 */
+@mixin flex-row($gutter: $grid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: $gutter / -2;
+  margin-left: $gutter / -2;
+
+  /* Fix Safari glitch caused by pseudo elements of .row */
+  &:before,
+  &:after { display: none; }
+}
+
+/* Cover parent container with absolute positioning */
+@mixin cover-absolute {
   position: absolute;
-  left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
 }
+
+/* Image scaling inside a container */
 @mixin contained-image {
   position: relative;
   overflow: hidden;
 
   img {
-    @include fill-up;
+    @include cover-absolute;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     object-position: center;
   }
@@ -25,7 +44,9 @@
   overflow: hidden;
 
   img {
-    @include fill-up;
+    @include cover-absolute;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
   }
@@ -38,9 +59,13 @@
     height: auto;
   }
 }
+
+/* Bootstrappy text styles */
 @mixin small {
   font-size: floor((100% * $font-size-small / $font-size-base));
 }
+
+/* Apply Font Awesome styling as per .fa */
 @mixin font-awesome {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -49,11 +74,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Round buttons */
 @mixin button-rounded($padding-horizontal, $corner-radius) {
   padding-left: $padding-horizontal;
   padding-right: $padding-horizontal;
   border-radius: $corner-radius;
 }
+
+/* Background patterns */
 @mixin checkerboard-pattern {
   background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%), linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);
   background-position: 0 0, 10px 10px;

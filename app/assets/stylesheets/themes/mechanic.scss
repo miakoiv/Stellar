@@ -367,8 +367,7 @@ $body-tone-bg: darken($body-bg, 4%);
   @include make-md-column(2);
   padding-left: 0;
   padding-right: 0;
-  display: flex;
-  flex-flow: row nowrap;
+  @include flex;
   text-align: right;
 
   p + p { display: none; }
@@ -399,8 +398,7 @@ $body-tone-bg: darken($body-bg, 4%);
  */
 .product-grid { @include make-row; }
 .product-grid > ul {
-  display: flex;
-  flex-flow: row wrap;
+  @include flex(row, wrap);
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
@@ -582,8 +580,7 @@ $body-tone-bg: darken($body-bg, 4%);
 /* Flexbox for smaller viewports */
 @media (max-width: $screen-sm-max) {
   .product-detail .product-body {
-    display: flex;
-    flex-flow: column nowrap;
+    @include flex(column);
   }
 }
 
