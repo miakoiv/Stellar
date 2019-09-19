@@ -776,6 +776,9 @@ en:
       db_schenker:
         gateway_error: No pickup points found. Please check your zip code.
         postalcode: Search by postcode
+      posti:
+        gateway_error: No pickup points found. Please check your zip code.
+        postalcode: Search by postcode
     smart_post:
       gateway_error: No pickup points found. Please check your zip code.
       postalcode: Search by postcode

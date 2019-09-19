@@ -788,6 +788,9 @@ fi:
       db_schenker:
         gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
         postalcode: Hae postinumerolla
+      posti:
+        gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
+        postalcode: Hae postinumerolla
     smart_post:
       gateway_error: Noutopisteitä ei löytynyt. Ole hyvä ja tarkista postinumero.
       postalcode: Hae postinumerolla
