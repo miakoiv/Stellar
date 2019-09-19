@@ -1,45 +1,45 @@
 class Store < ApplicationRecord
 
   store :settings, accessors: [
-    :locale,   # see #locale_options for supported locales
-    :main_nav_lookup, # boolean, enable lookup widget in main navbar
-    :detach_menu, # boolean, detach the primary navigation as #page-menu
-    :masonry,     # boolean, use masonry in storefront products view
-    :fancy_cart,  # boolean, use modernized shopping cart view
-    :cart_promotion,  # boolean, show a promotion section in cart view
-    :favorites,   # boolean, enable favorite products
-    :category_order,  # boolean, category order view enabled
-    :card_image_type, # image purpose to use for cover images on cards etc.
-    :list_image_type, # image purpose in list views
-    :b2b_sales,       # boolean, does the shop do business to business sales
-    :global_sales,    # boolean, do shipping addresses include country selection
-    :admit_guests,    # boolean, are guests allowed to shop at the store
-    :disable_mail,    # boolean, disable all sending of mail
-    :custom_smtp_settings, # boolean, enable custom smtp settings, see below
-    :disable_shipment_transfers, # boolean, disable transfers for shipments
-    :tracking_code,   # Google Analytics code
-    :maps_api_key,    # Google Maps API key
-    :facebook_access_token,  # Facebook API key
-    :facebook_pixel_id, # Facebook Pixel id
-    :tawkto_site_id, # tawk.to site id for chat widget
-    :pbw_api_key,     # Paybyway API key
-    :pbw_private_key, # Paybyway private key
-    :pakettikauppa_api_key, # Pakettikauppa API key
-    :pakettikauppa_secret,  # Pakettikauppa merchant secret
-    :stock_gateway,   # stock gateway class, see .stock_gateway_options
-    :stock_gateway_token, # client token to access the stock gateway
+    :locale,                      # see #locale_options for supported locales
+    :main_nav_lookup,             # boolean, enable lookup widget in main navbar
+    :detach_menu,                 # boolean, detach the primary navigation as #page-menu
+    :masonry,                     # boolean, use masonry in storefront products view
+    :fancy_cart,                  # boolean, use modernized shopping cart view
+    :cart_promotion,              # boolean, show a promotion section in cart view
+    :favorites,                   # boolean, enable favorite products
+    :category_order,              # boolean, category order view enabled
+    :card_image_type,             # image purpose to use for cover images on cards etc.
+    :list_image_type,             # image purpose in list views
+    :b2b_sales,                   # boolean, does the shop do business to business sales
+    :global_sales,                # boolean, do shipping addresses include country selection
+    :admit_guests,                # boolean, are guests allowed to shop at the store
+    :disable_mail,                # boolean, disable all sending of mail
+    :custom_smtp_settings,        # boolean, enable custom smtp settings, see below
+    :disable_shipment_transfers,  # boolean, disable transfers for shipments
+    :tracking_code,               # Google Analytics code
+    :maps_api_key,                # Google Maps API key
+    :facebook_access_token,       # Facebook API key
+    :facebook_pixel_id,           # Facebook Pixel id
+    :tawkto_site_id,              # tawk.to site id for chat widget
+    :pbw_api_key,                 # Paybyway API key
+    :pbw_private_key,             # Paybyway private key
+    :pakettikauppa_api_key,       # Pakettikauppa API key
+    :pakettikauppa_secret,        # Pakettikauppa merchant secret
+    :stock_gateway,               # stock gateway class, see .stock_gateway_options
+    :stock_gateway_token,         # client token to access the stock gateway
     :oikotie_asunnot_api_key,     # Oikotie Asunnot API key
     :oikotie_asunnot_broker_id,   # Oikotie Asunnot broker company id
-    :order_sequence, # base value for order numbers if no numbering exists
-    :quotation_template_id, # page reference to quotation boilerplate
-    :product_uploader,     # Uploader class to use for product data
-    :csv_encoding,         # CSV encoding of uploaded files
-    :csv_product_code,     # CSV field headers for product code,
-    :csv_trade_price,      # trade price,
-    :csv_retail_price,     # retail price, and
-    :csv_inventory_amount, # inventory amount
-    :order_xml_path,  # where to upload XML files of completed orders
-    :shipping_origin, # geolocation-compatible origin for shipping calculations
+    :order_sequence,              # base value for order numbers if no numbering exists
+    :quotation_template_id,       # page reference to quotation boilerplate
+    :product_uploader,            # Uploader class to use for product data
+    :csv_encoding,                # CSV encoding of uploaded files
+    :csv_product_code,            # CSV field headers for product code,
+    :csv_trade_price,             # trade price,
+    :csv_retail_price,            # retail price, and
+    :csv_inventory_amount,        # inventory amount
+    :order_xml_path,              # where to upload XML files of completed orders
+    :shipping_origin,             # geolocation-compatible origin for shipping calculations
   ], coder: JSON
 
   # SMTP settings to override ActionMailer::Base.smtp_settings
