@@ -1,15 +1,8 @@
+#
+# Shipping gateway for deliveries that are priced by distance, calculated from
+# the store shipping origin to the shipping address.
+#
 module ShippingGateway
-
-  class TruckloadConnector
-    include HTTParty
-    base_uri 'https://maps.googleapis.com/maps/api/distancematrix/'
-    logger Rails.logger
-
-    def lookup(query)
-      self.class.get '/json', query: query
-    end
-  end
-
   class Truckload
     include ActiveModel::Model
 
@@ -35,7 +28,8 @@ module ShippingGateway
       super
       raise ShippingGatewayError, 'Order not specified' if order.nil?
       @store = order.store
-      @truckload_connector = TruckloadConnector.new
+      raise ShippingGatewayError, 'Shipping origin not set' if @store.shipping_origin.blank?
+      @distance_api = ShippingGateway::Connector::GoogleDistanceMatrix.new
     end
 
     def prepare_interface_data(params = {})
@@ -62,7 +56,7 @@ module ShippingGateway
         origins: origin,
         destinations: [order.shipping_address.address1, order.shipping_address.address2, order.shipping_address.city].join(', ')
       }
-      response = @truckload_connector.lookup(query).parsed_response
+      response = @distance_api.lookup(query).parsed_response
       if response['status'] == 'OK'
         response['rows'][0]['elements'][0]
       else

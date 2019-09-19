@@ -1,15 +1,9 @@
+#
+# Simple Posti SmartPost shipping gateway that provides a front end interface
+# for the customer to select a pick up point using Posti Location Services.
+# There is no back end functionality nor connections to any shipping vendor API.
+#
 module ShippingGateway
-
-  class SmartPostPickupConnector
-    include HTTParty
-    base_uri 'https://locationservice.posti.com/api/2'
-    logger Rails.logger
-
-    def self.lookup(query)
-      get '/location', query: query
-    end
-  end
-
   class SmartPost
     include ActiveModel::Model
 
@@ -35,6 +29,7 @@ module ShippingGateway
       super
       raise ShippingGatewayError, 'Order not specified' if order.nil?
       @data = {}
+      @location_api = ShippingGateway::Connector::PostiLocationService.new
     end
 
     def prepare_interface_data(params = {})
@@ -50,14 +45,13 @@ module ShippingGateway
       base_price
     end
 
-    # Performs a lookup of SmartPost pickup locations by given postal code.
     def smartpost_lookup(postalcode)
       query = {
         types: 'SMARTPOST',
         locationZipCode: postalcode,
         top: 6
       }
-      response = SmartPostPickupConnector.lookup(query).parsed_response
+      response = @location_api.lookup(query).parsed_response
       response['locations'] or raise ShippingGatewayError, response['message']
     end
 

@@ -1,5 +1,4 @@
 module ShippingGateway
-
   class Vendor
     include ActiveModel::Model
 

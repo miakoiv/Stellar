@@ -6,35 +6,7 @@
 # For API docs, see <https://www.pakettikauppa.fi/tekniset-ohjeet/>
 #
 module ShippingGateway
-
-  class PakettikauppaConnector
-    include HTTParty
-    base_uri Rails.configuration.x.pakettikauppa.api_uri
-    logger Rails.logger
-
-    def self.list_shipping_methods(query)
-      post '/shipping-methods/list', query: query
-    end
-
-    def self.search_pickup_points(query)
-      post '/pickup-points/search', query: query
-    end
-
-    def self.create_shipment(body)
-      headers = {'Content-Type' => 'application/xml'}
-      post '/prinetti/create-shipment', format: :xml,
-        headers: headers, body: body
-    end
-
-    def self.get_shipping_label(body)
-      headers = {'Content-Type' => 'application/xml'}
-      post '/prinetti/get-shipping-label', format: :xml,
-        headers: headers, body: body
-    end
-  end
-
   module Pakettikauppa
-
     class Base
       include ActiveModel::Model
 
@@ -63,6 +35,7 @@ module ShippingGateway
         @api_key = @store.pakettikauppa_api_key.presence || TEST_KEY
         @secret = @store.pakettikauppa_secret.presence || TEST_SECRET
         @locale = I18n.locale
+        @api = ShippingGateway::Connector::Pakettikauppa.new(@api_key, @secret)
       end
 
       def prepare_interface_data(params = {})
@@ -74,24 +47,22 @@ module ShippingGateway
       end
 
       def list_shipping_methods
-        request = hmac_request(language: @locale)
-        response = PakettikauppaConnector.list_shipping_methods(request)
-          .parsed_response
+        request = {language: @locale}
+        @api.list_shipping_methods(request).parsed_response
       end
 
       def search_pickup_points(postalcode, provider)
-        request = hmac_request(
+        request = {
           postcode: postalcode,
           service_provider: provider
-        )
-        PakettikauppaConnector.search_pickup_points(request).parsed_response
+        }
+        @api.search_pickup_points(request).parsed_response
       end
 
       def send_shipment
         raise ShippingGatewayError, 'Shipment and user must be present' if shipment.nil? || user.nil?
         raise ShippingGatewayError, 'Shipping address must be present' unless @group.shipping_address.present?
-        response = PakettikauppaConnector.create_shipment(shipment_xml)
-          .parsed_response['Response']
+        response = @api.create_shipment(shipment_xml).parsed_response['Response']
         status = response['response.status'] == '0'
 
         raise ShippingGatewayError, response['response.message'] unless status
@@ -104,8 +75,7 @@ module ShippingGateway
 
       def fetch_label
         raise ShippingGatewayError, 'Shipment must be present' if shipment.nil?
-        response = PakettikauppaConnector.get_shipping_label(label_xml)
-          .parsed_response['Response']
+        response = @api.get_shipping_label(label_xml).parsed_response['Response']
         status = response['response.status'] == '0'
 
         raise ShippingGatewayError, response['response.message'] unless status
@@ -127,7 +97,7 @@ module ShippingGateway
                 xml.send 'Routing.Account', @api_key
                 xml.send 'Routing.Key', md5(@api_key, id, @secret)
                 xml.send 'Routing.Id', id
-                xml.send 'Routing.Time', unix_time
+                xml.send 'Routing.Time', Time.now.to_i
               end
               xml.Shipment do
                 xml.send 'Shipment.Sender' do
@@ -181,7 +151,7 @@ module ShippingGateway
                 xml.send 'Routing.Key', md5(@api_key, id, @secret)
                 xml.send 'Routing.Id', id
                 xml.send 'Routing.Name', order.shipping_address.name
-                xml.send 'Routing.Time', unix_time
+                xml.send 'Routing.Time', Time.now.to_i
               end
               xml.PrintLabel do
                 xml.Reference shipment.number
@@ -192,25 +162,8 @@ module ShippingGateway
           builder.to_xml
         end
 
-        def hmac_request(params = {})
-          request = params.merge(
-            api_key: @api_key,
-            timestamp: unix_time
-          )
-          plaintext = request.sort.map { |_, v| v }.join('&')
-          request.merge(hash: sha256(@secret, plaintext))
-        end
-
-        def sha256(secret, data)
-          OpenSSL::HMAC.hexdigest('sha256', secret, data)
-        end
-
         def md5(*parts)
           Digest::MD5.hexdigest(parts.join)
-        end
-
-        def unix_time
-          Time.now.to_i
         end
     end
 
