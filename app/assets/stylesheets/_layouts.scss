@@ -274,6 +274,7 @@
   @include flex;
   align-items: center;
   justify-content: center;
+  min-height: 80px;
 
   p, figure { opacity: 0.333; }
 }
@@ -289,10 +290,10 @@
   @include flex;
 
   .swiper-wrapper {
-    @include flex(row, nowrap);
+    @include flex;
     height: auto;
   }
-  .swiper-slide { @include flex(row, nowrap); }
+  .swiper-slide { @include flex; }
 
   .justify-left & { justify-content: flex-start; }
   .justify-center & { justify-content: center; }
@@ -339,10 +340,10 @@
 .segment-content.product,
 .segment-content.promotion,
 .segment-content.department {
-  .columns > .product-card {
-    align-self: stretch;
+  .swiper-container {
+    width: 100%;
+    padding-bottom: 10px + $line-height-computed;
   }
-  .swiper-container { padding-bottom: 10px + $line-height-computed; }
   .swiper-slide {
     float: none;
     padding: 0;
