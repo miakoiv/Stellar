@@ -137,11 +137,11 @@ fi:
     columns:
       settings:
         layout: Muotoilu
+        pictures: Kuvat
         color: Värit
       column_nav:
         tooltips:
           settings: Asetukset
-          pictures: Kuvat
           new: Uusi
           paste: Liitä
           refer: Liitä linkkinä
@@ -414,14 +414,14 @@ fi:
     sections:
       settings:
         layout: Muotoilu
+        pictures: Kuvat
+        videos: Videot
         color: Värit
       section_nav:
         tooltips:
           copy: Kopioi
           reorder: Järjestele
           settings: Asetukset
-          pictures: Kuvat
-          videos: Videot
           new: Lisää palsta
           delete: Poista
         delete:
@@ -430,6 +430,7 @@ fi:
       settings:
         layout: Muotoilu
         design: Ulkoasu
+        pictures: Kuvat
         color: Värit
         borders: Kehykset
       panels:
@@ -452,7 +453,6 @@ fi:
           edit: Muokkaa
           copy: Kopioi
           settings: Asetukset
-          pictures: Kuvat
           delete: Poista
         delete:
           confirm: Alue poistetaan sisältöineen. Tätä toimintoa ei voi perua.
@@ -597,7 +597,7 @@ fi:
       form:
         no_categories: kaikki
     videos:
-      modal:
+      index:
         new_video: Uusi video
   cookieconsent:
     message: Tämä sivusto käyttää keksejä käytettävyyden parantamiseksi.

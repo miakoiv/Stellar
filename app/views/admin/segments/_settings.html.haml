@@ -2,6 +2,8 @@
   = nav_tab 'segment-main', segment, default: true
   = nav_tab 'segment-layout', t('.layout')
   = nav_tab 'segment-design', t('.design')
+  - if segment.has_pictures?
+    = nav_tab 'segment-pictures', t('.pictures')
   = nav_tab 'segment-color', t('.color')
   = nav_tab 'segment-borders', t('.borders')
 
@@ -12,6 +14,9 @@
     = render partial: 'admin/segments/panels/layout', object: segment, as: :segment
   = tab_pane 'segment-design' do
     = render partial: 'admin/segments/panels/design', object: segment, as: :segment
+  - if segment.has_pictures?
+    = tab_pane 'segment-pictures' do
+      = render partial: 'admin/segments/panels/pictures', object: segment, as: :segment
   = tab_pane 'segment-color' do
     = render partial: 'admin/segments/panels/color', object: segment, as: :segment
   = tab_pane 'segment-borders' do

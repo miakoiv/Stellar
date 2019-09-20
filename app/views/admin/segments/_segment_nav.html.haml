@@ -6,17 +6,13 @@
     %li
       = link_to template_admin_segment_path(segment), remote: true, role: 'button' do
         = segment
-    %li
-      = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
-        = icon('cog', class: 'fa-fw')
-    - if segment.has_pictures?
-      %li
-        = link_to admin_segment_pictures_path(segment), remote: true, title: t('.tooltips.pictures'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
-          = icon('photo', class: 'fa-fw')
     - if segment.edit_in_place?
       %li
         = link_to edit_admin_segment_path(segment), remote: true, title: t('.tooltips.edit'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
           = icon('edit', class: 'fa-fw')
+    %li
+      = link_to settings_admin_segment_path(segment), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
+        = icon('cog', class: 'fa-fw')
     - unless segment.reference?
       %li.info
         %a.copy-segment{title: t('.tooltips.copy'), role: 'button', data: {url: copy_admin_segment_path(segment), toggle: 'tooltip', placement: 'bottom', container: 'body'}}

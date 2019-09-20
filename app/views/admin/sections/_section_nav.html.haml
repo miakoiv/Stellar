@@ -7,12 +7,6 @@
       = link_to settings_admin_section_path(section), remote: true, title: t('.tooltips.settings'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('cog', class: 'fa-fw')
     %li
-      = link_to admin_section_pictures_path(section), remote: true, title: t('.tooltips.pictures'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
-        = icon('photo', class: 'fa-fw')
-    %li
-      = link_to admin_section_videos_path(section), remote: true, title: t('.tooltips.videos'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom', container: 'body'} do
-        = icon('film', class: 'fa-fw')
-    %li
       = link_to admin_section_columns_path(section), method: :post, remote: true, title: t('.tooltips.new'), role: 'button', data: {toggle: 'tooltip', placement: 'bottom'} do
         = icon('plus-square-o', class: 'fa-fw')
     %li.info

@@ -130,11 +130,11 @@ en:
     columns:
       settings:
         layout: Layout
+        pictures: Pictures
         color: Color
       column_nav:
         tooltips:
           settings: Settings
-          pictures: Pictures
           new: New
           paste: Paste
           refer: Paste as link
@@ -403,14 +403,14 @@ en:
     sections:
       settings:
         layout: Layout
+        pictures: Pictures
+        videos: Videos
         color: Colors
       section_nav:
         tooltips:
           copy: Copy
           reorder: Reorder
           settings: Settings
-          pictures: Pictures
-          videos: Videos
           new: Add column
           delete: Delete
         delete:
@@ -419,6 +419,7 @@ en:
       settings:
         layout: Layout
         design: Design
+        pictures: Pictures
         color: Colors
         borders: Borders
       panels:
@@ -441,7 +442,6 @@ en:
           edit: Edit
           copy: Copy
           settings: Settings
-          pictures: Pictures
           delete: Delete
         delete:
           confirm: The segment and its contents will be deleted. This cannot be undone.
@@ -586,7 +586,7 @@ en:
       form:
         no_categories: all
     videos:
-      modal:
+      index:
         new_video: New video
   cookieconsent:
     message: This website uses cookies to ensure you get the best experience on our website.

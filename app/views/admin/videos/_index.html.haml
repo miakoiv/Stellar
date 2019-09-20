@@ -1,4 +1,7 @@
 = bootstrap_form_for [:modify, :admin, videoable], remote: true, html: {class: 'triggered event-hook'} do
   %fieldset
 
+%p.text-right
+  = link_to [:admin, videoable, :videos], class: 'btn btn-primary btn-sm', remote: true, method: :post do
+    = icon('plus', t('.new_video'))
 = render partial: 'admin/videos/edit_list', object: videoable, as: :videoable
