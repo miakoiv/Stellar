@@ -19,5 +19,5 @@
       change: (value) ->
         $form.trigger 'submit.rails'
       changeDelay: 500
-    $form.on 'change', 'select, input:not(.color)', (e) ->
+    $form.on 'change', 'select, input:not(.color-modify)', (e) ->
       $form.trigger 'submit.rails'
