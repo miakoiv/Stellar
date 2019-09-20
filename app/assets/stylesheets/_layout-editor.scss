@@ -78,7 +78,8 @@ body.layout-editor.modal-open {
   border-radius: 0;
   background-color: $navbar-background;
   border-color: $navbar-border;
-  transition: all 150ms ease-in-out 0s;
+  opacity: 0;
+  transition: all 150ms ease-in-out 150ms;
   user-select: none;
 
   > .navbar-nav {
@@ -99,16 +100,15 @@ body.layout-editor.modal-open {
   top: -1px;
   left: -1px;
   z-index: 300;
+  opacity: 1;
 }
 .column-nav {
   bottom: -1px;
   left: -1px;
-  opacity: 0;
 }
 .segment-nav {
   top: -1px;
   right: -1px;
-  opacity: 0;
 }
 
 
@@ -140,9 +140,15 @@ body.layout-editor.modal-open {
   }
 }
 .section-list-item .section {
+  outline: $outline-width solid transparent;
+  transition: outline-color 100ms ease-in-out 0s;
+
+  &:hover {
+    outline-color: rgba($brand-primary, 0.333);
+  }
   &.active {
     z-index: 1;
-    outline: $outline-width solid rgba($brand-primary, 0.5);
+    outline-color: rgba($brand-primary, 0.5);
   }
   .section-bg-container:before {
     content: '';
@@ -161,8 +167,12 @@ body.layout-editor.modal-open {
 }
 .section-list-item .column {
   position: relative;
+  outline: $outline-width solid transparent;
+  transition: outline-color 100ms ease-in-out 0s;
 
   &:hover {
+    outline-color: rgba($gray-base, 0.333);
+
     .column-nav {
       z-index: 400;
       opacity: 1;
@@ -170,7 +180,7 @@ body.layout-editor.modal-open {
   }
   &.active {
     z-index: 2;
-    outline: $outline-width solid rgba($gray-base, 0.333);
+    outline-color: rgba($gray-base, 0.5);
   }
   &:before {
     content: '';
@@ -185,8 +195,11 @@ body.layout-editor.modal-open {
   }
 }
 .section-list-item .segment {
+  outline: $outline-width solid transparent;
+  transition: outline-color 100ms ease-in-out 0s;
+
   &:hover {
-    min-height: 45px;
+    outline-color: rgba($brand-info, 0.333);
 
     .segment-nav {
       z-index: 500;
@@ -194,10 +207,8 @@ body.layout-editor.modal-open {
     }
   }
   &.active {
-    .segment-content-wrap {
-      z-index: 2;
-      outline: $outline-width solid rgba($brand-info, 0.5);
-    }
+    z-index: 2;
+    outline-color: rgba($brand-info, 0.75);
   }
   &.editing {
     .editable-content {
