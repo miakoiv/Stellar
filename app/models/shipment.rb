@@ -52,6 +52,7 @@ class Shipment < ApplicationRecord
       Pakettikauppa::Matkahuolto
       Pakettikauppa::Posti
       Pakettikauppa::DbSchenker
+      PostiSmartShip::SmartPost
       SmartPost
       CustomerPickup
       Letter

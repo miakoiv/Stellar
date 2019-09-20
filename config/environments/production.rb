@@ -111,6 +111,7 @@ Rails.application.configure do
   # API configuration.
   config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://api.pakettikauppa.fi/'
+  config.x.unifaun.api_uri = 'https://api.unifaun.com/rs-extapi/v1'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
   config.x.kaunotar.api_uri = 'http://10.76.51.1/api/v1/'
   config.stripe.publishable_key = ENV['STRIPE_PUBLIC_KEY']

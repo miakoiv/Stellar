@@ -81,6 +81,7 @@ Rails.application.configure do
   # API configuration.
   config.x.oikotie_asunnot.api_uri = 'https://asunnot.oikotie.fi/api/4.0/'
   config.x.pakettikauppa.api_uri = 'https://apitest.pakettikauppa.fi/'
+  config.x.unifaun.api_uri = 'https://api.unifaun.com/rs-extapi/v1'
   config.x.paybyway.api_uri = 'https://payform.bambora.com/pbwapi/'
   config.x.kaunotar.api_uri = 'http://pos.test.zetanol.com/api/v1/'
   config.stripe.publishable_key = 'pk_test_HpO1Z1azrRN6l4M35cQSxLCE'
