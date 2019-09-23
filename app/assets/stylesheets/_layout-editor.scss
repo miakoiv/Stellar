@@ -128,16 +128,10 @@ body.layout-editor.modal-open {
 }
 .section-list-item { position: relative; }
 .section-list-item.loading {
-  height: 200px;
-  background-color: rgba(0, 0, 0, 0.8);
+  @include flex;
+  height: calc(100vh - #{$navbar-height});
 
-  .spinner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-  }
+  .preloader-wrapper { margin: auto; }
 }
 .section-list-item .section {
   outline: $outline-width solid transparent;
