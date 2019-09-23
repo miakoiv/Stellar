@@ -685,6 +685,29 @@ body {
 
 
 /*
+ * Chips
+ */
+.chips {
+  @include flex(row, wrap);
+  padding-left: 0;
+  list-style: none;
+}
+.chip {
+  margin-right: 5px;
+  margin-bottom: 5px;
+
+  > a {
+    @include flex;
+  }
+  figure {
+    @extend .picture-icon;
+    margin: -2.5px 7px -2.5px -7px;
+    border-radius: 50%;
+  }
+}
+
+
+/*
  * Pagination controls for infinite tables and product grids
  */
 .pagination-block {}

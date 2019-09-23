@@ -1,0 +1,4 @@
+%li.chip
+  = link_to admin_store_path(store), class: 'btn btn-default btn-round' do
+    = picture_variant_tag(store.cover_picture, :icon)
+    = store.name

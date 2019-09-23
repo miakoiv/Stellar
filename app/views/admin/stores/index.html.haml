@@ -4,6 +4,9 @@
       = icon('plus', t('.new_store'))
   %h1= icon('paw', title(Store, count: 2))
 
+%ol.chips
+  = render partial: 'chip', collection: @latest, as: :store
+
 = render partial: 'search'
 = render partial: 'table'
 = paginate @stores

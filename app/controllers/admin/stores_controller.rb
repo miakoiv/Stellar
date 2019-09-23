@@ -10,6 +10,7 @@ class Admin::StoresController < AdminController
     @search = StoreSearch.new(query)
     results = @search.results
     @stores = results.page(params[:page])
+    @latest = Store.order(created_at: :desc).limit(10)
   end
 
   # GET /admin/stores/1
