@@ -621,6 +621,7 @@ en:
         vat_number: VAT number
         portal: Store portal
         name: Name
+        tagline: Tagline
         slug: Slug
         theme: Display theme
         styles: Detailed styles

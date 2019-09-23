@@ -2,6 +2,7 @@ class Store < ApplicationRecord
 
   store :settings, accessors: [
     :locale,                      # see #locale_options for supported locales
+    :tagline,                     # company tagline to display as part of site title
     :main_nav_lookup,             # boolean, enable lookup widget in main navbar
     :detach_menu,                 # boolean, detach the primary navigation as #page-menu
     :masonry,                     # boolean, use masonry in storefront products view

@@ -48,7 +48,7 @@ class BaseStoreController < ApplicationController
   helper_method :current_group
 
   def current_site_name
-    current_store.name
+    [current_store.name, current_store.tagline].reject(&:blank?).join ' | '
   end
   helper_method :current_site_name
 

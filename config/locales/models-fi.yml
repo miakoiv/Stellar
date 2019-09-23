@@ -621,6 +621,7 @@ fi:
         vat_number: Y-tunnus
         portal: Kauppaverkosto
         name: Nimi
+        tagline: Iskulause
         slug: Tunniste
         theme: Teema
         styles: Yksityiskohtaiset tyylit
