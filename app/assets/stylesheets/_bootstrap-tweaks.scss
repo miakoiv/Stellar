@@ -1428,6 +1428,12 @@ fieldset > legend {
     .form-group {
       @include make-sm-column(3);
       margin-bottom: 5px;
+
+      .pickr {
+        top: 0;
+        bottom: auto;
+        margin: 2.5px 5px;
+      }
     }
     .control-label {
       padding-top: 0;
@@ -1603,6 +1609,23 @@ fieldset > legend {
   @include make-sm-column(8);
   @include make-md-column(9);
   @include make-lg-column(10);
+}
+
+
+/*
+ * Pickr widgets embedded in form controls
+ */
+.pickr-controls {
+  .form-group {
+    position: relative;
+
+    .form-control { padding-left: 2.5em; }
+    .pickr {
+      position: absolute;
+      bottom: 0;
+      margin: 5px;
+    }
+  }
 }
 
 

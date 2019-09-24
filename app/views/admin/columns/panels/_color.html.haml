@@ -1,23 +1,14 @@
 #column-color-panel
-  = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors)} do |f|
-    %fieldset
+  = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: dom_id(column, :colors), class: 'immediate'} do |f|
+    %fieldset.pickr-controls
       .row
-        .col-sm-6
-          = f.text_field :background_color, class: 'input-sm color-modify'
-        .col-sm-6
-          = f.text_field :gradient_color, class: 'input-sm color-modify'
+        .col-sm-4
+          = f.text_field :background_color, class: 'color'
+        .col-sm-4
+          = f.text_field :gradient_color, class: 'color'
+
   = bootstrap_form_for [:modify, :admin, column], remote: true, html: {id: 'column-color-form', class: 'immediate'} do |f|
     = render partial: 'admin/gradients/form_fields', object: f, as: :f
 
   :coffee
-    $form = $('##{dom_id(column, :colors)}')
-    $form.find('.color-modify').minicolors
-      theme: 'bootstrap'
-      position: 'bottom left'
-      format: 'rgb'
-      opacity: true
-      keywords: 'transparent'
-      swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
-      change: (value) ->
-        $form.trigger 'submit.rails'
-      changeDelay: 500
+    $('##{dom_id(column, :colors)}').find('.color').pickr()

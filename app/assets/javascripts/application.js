@@ -53,6 +53,7 @@
 //= require metisMenu.min
 //= require numbro.min
 //= require numbro/languages.min
+//= require pickr.es5.min
 //= require smooth-scroll.min
 //= require swiper.min
 //= require tabular.min

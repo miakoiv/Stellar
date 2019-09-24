@@ -2,4 +2,5 @@ $('#style-modal').html(
   '<%= j render partial: 'admin/styles/edit_modal' %>'
 );
 $('#style-modal').initialize();
+$('#style-modal').find('.color').pickr();
 $('#style-modal').modal('show');

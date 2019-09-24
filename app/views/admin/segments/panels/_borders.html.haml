@@ -1,5 +1,5 @@
 #segment-borders-panel
-  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :borders)} do |f|
+  = bootstrap_form_for [:modify, :admin, segment], remote: true, html: {id: dom_id(segment, :borders), class: 'immediate'} do |f|
     = render partial: 'admin/segments/panels/border_fields', object: segment, as: :segment, locals: {f: f, attr: 'border'}
     %hr
     = render partial: 'admin/segments/panels/border_fields', object: segment, as: :segment, locals: {f: f, attr: 'border_top'}
@@ -8,16 +8,4 @@
     = render partial: 'admin/segments/panels/border_fields', object: segment, as: :segment, locals: {f: f, attr: 'border_left'}
 
   :coffee
-    $form = $('##{dom_id(segment, :borders)}')
-    $form.find('.color-modify').minicolors
-      theme: 'bootstrap'
-      position: 'bottom left'
-      format: 'rgb'
-      opacity: true
-      keywords: 'transparent'
-      swatches: ['rgba(255,255,255,1)', 'rgba(0,0,0,1)', 'rgba(255,255,255,0)']
-      change: (value) ->
-        $form.trigger 'submit.rails'
-      changeDelay: 500
-    $form.on 'change', 'select, input:not(.color-modify)', (e) ->
-      $form.trigger 'submit.rails'
+    $('##{dom_id(segment, :borders)}').find('.color').pickr()

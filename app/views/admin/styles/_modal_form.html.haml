@@ -2,7 +2,7 @@
   .modal-body
     %fieldset
       = f.text_area :preamble, rows: 4
-    %fieldset.row
+    %fieldset.row.pickr-controls
       - Style::VARIABLES.each do |key, attr|
         .form-group
           = f.text_field_without_bootstrap key, class: [attr[:type], 'form-control']
