@@ -50,15 +50,12 @@ module ShippingGateway
         raise ShippingGatewayError, 'Shipment and user must be present' if shipment.nil? || user.nil?
         raise ShippingGatewayError, 'Shipping address must be present' unless @group.shipping_address.present?
         request = {pdfConfig: pdf_config, shipment: default_shipment.merge(options)}
-        puts request.inspect; return
-        response = @api.create_shipment(request).parsed_response
-        # FIXME: parse response
+        response = @shipment_api.create_shipment(request).parsed_response
       end
 
       def fetch_label
         raise ShippingGatewayError, 'Shipment must be present' if shipment.nil?
-        response = @api.get_shipping_label(label_request).parsed_response
-        # FIXME: parse response
+        response = @shipment_api.get_shipping_label(label_request).parsed_response
       end
 
       private
@@ -105,12 +102,13 @@ module ShippingGateway
             },
             senderPartners: [{
               id: 'POSTI',
-              custNo: @store.unifaun_customer_number,
+              custNo: @store.posti_customer_number,
             }],
             parcels: [{
               copies: 1,
               packageCode: shipment.package_type,
-              weight: shipment.mass,
+              weight: shipment.mass / 1000.0,
+              valuePerParcel: true,
             }],
           }
         end
@@ -149,7 +147,7 @@ module ShippingGateway
             quickId: shipment.pickup_point_id
           },
           service: {
-            id: 2103
+            id: 'PO2103'
           },
         })
       end
