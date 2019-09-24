@@ -5,13 +5,15 @@ fi:
       payment_gateway/paybyway: Bambora PayForm
       shipping_gateway/customer_pickup: asiakas noutaa
       shipping_gateway/letter: postitus kirjeenä
-      shipping_gateway/smart_post: Posti SmartPOST
+      shipping_gateway/smart_post: Smartpost-pisteen valinta
       shipping_gateway/vendor: tavarantoimittaja kuljettaa
       shipping_gateway/truckload: kuorma-autokuljetus
       shipping_gateway/pakettikauppa/base: Pakettikauppa
       shipping_gateway/pakettikauppa/matkahuolto: Pakettikauppa/Matkahuolto
       shipping_gateway/pakettikauppa/posti: Pakettikauppa/Posti
       shipping_gateway/pakettikauppa/db_schenker: Pakettikauppa/Db Schenker
+      shipping_gateway/posti_smart_ship/base: Posti SmartShip (Unifaun)
+      shipping_gateway/posti_smart_ship/smart_post: Posti Smartpost (Unifaun)
       product/uploader/csv: CSV
       product/uploader/spreadsheetml: Microsoft Office XML
       product/uploader/xml: XML
@@ -655,6 +657,9 @@ fi:
         pbw_private_key: Yksityinen avain
         pakettikauppa_api_key: Rajapinta-avain
         pakettikauppa_secret: Salausavain
+        posti_customer_number: Postin asiakasnumero
+        unifaun_api_key: Tunnus
+        unifaun_secret: Salainen tunnus
         stock_gateway: Varastorajapinta
         stock_gateway_token: Varastorajapinnan avain
         order_sequence: Tilausnumerointi

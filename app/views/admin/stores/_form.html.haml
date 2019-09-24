@@ -109,6 +109,14 @@
                 = f.text_field :pakettikauppa_api_key
               .col-md-6
                 = f.text_field :pakettikauppa_secret
+          %fieldset{disabled: locked}
+            %legend= ShippingGateway::PostiSmartShip::Base.model_name.human
+            = f.text_field :posti_customer_number
+            .row
+              .col-md-6
+                = f.text_field :unifaun_api_key
+              .col-md-6
+                = f.text_field :unifaun_secret
         = tab_pane 'store-files' do
           %fieldset{disabled: locked}
             %legend= col(Store, :product_csv)

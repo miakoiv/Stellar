@@ -83,6 +83,7 @@ class Admin::StoresController < AdminController
         :facebook_access_token, :facebook_pixel_id,
         :tawkto_site_id, :pbw_api_key, :pbw_private_key,
         :pakettikauppa_api_key, :pakettikauppa_secret,
+        :posti_customer_number, :unifaun_api_key, :unifaun_secret,
         :stock_gateway, :stock_gateway_token,
         :quotation_template_id, :footer_page_id,
         :product_uploader, :csv_encoding, :csv_product_code,

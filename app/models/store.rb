@@ -27,7 +27,7 @@ class Store < ApplicationRecord
     :pbw_private_key,             # Paybyway private key
     :pakettikauppa_api_key,       # Pakettikauppa API key
     :pakettikauppa_secret,        # Pakettikauppa merchant secret
-    :unifaun_customer_number,     # Unifaun customer number (contract number)
+    :posti_customer_number,       # Posti customer number (contract number) for Unifaun
     :unifaun_api_key,             # Unifaun API key
     :unifaun_secret,              # Unifaun secret key
     :stock_gateway,               # stock gateway class, see .stock_gateway_options
