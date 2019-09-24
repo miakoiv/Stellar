@@ -181,7 +181,9 @@ class Shipment < ApplicationRecord
 
   def parsed_metadata
     return {} if metadata.blank?
-    JSON.parse(metadata) rescue eval(metadata)
+    JSON.parse(metadata).with_indifferent_access
+  rescue JSON::ParserError => e
+    return {}
   end
 
   def shipping_gateway
