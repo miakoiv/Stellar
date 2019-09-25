@@ -251,6 +251,16 @@ class Segment < ApplicationRecord
     {purpose: ['presentational'], variant: Image::STYLES}
   end
 
+  # Styles to include in .content-wrap elements excludes background color
+  # when tapestry is enabled to stack the background image on top.
+  def content_wrap_styles
+    tapestry? ? [:padding, :foregroundColor, :borders] : [:padding, :backgroundColor, :foregroundColor, :borders]
+  end
+
+  def background_styles
+    tapestry? ? [:backgroundColor, :backgroundImage] : :backgroundImage
+  end
+
   # Only feature segments have a background picture.
   def background_picture
     feature? && cover_picture
