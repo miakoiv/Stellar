@@ -23,5 +23,5 @@ $.fn.extend
       new Pickr(
         $.extend settings, {el: $chip[0], default: $input.val()}
       ).on 'save', (c, p) ->
-        $input.val c.toRGBA().toString().toLowerCase()
+        $input.val c.toRGBA().toString(0).toLowerCase()
         $input.trigger 'change'
