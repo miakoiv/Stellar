@@ -186,6 +186,7 @@ en:
           documentation: documentation
           media: picture with text
           category: category
+          tag: Tag
           product: product
           promotion: promotion
           department: department

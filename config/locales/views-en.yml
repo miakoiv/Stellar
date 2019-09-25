@@ -470,6 +470,8 @@ en:
           select_page: "[Select page]"
         promotion:
           select_promotion: "[Select promotion]"
+        tag:
+          select_tag: "[Select tag]"
         reference:
           help: This block shows the contents of another block that was pasted here as a link.
     shipments:

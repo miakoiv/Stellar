@@ -102,6 +102,7 @@ class Segment < ApplicationRecord
     slideshow: 8,
     product: 12,
     category: 11,
+    tag: 15,
     promotion: 13,
     department: 14,
     feature: 20,

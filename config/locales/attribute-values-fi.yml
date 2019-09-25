@@ -186,6 +186,7 @@ fi:
           documentation: dokumentointi
           media: kuvitettu teksti
           category: tuoteryhmä
+          tag: tagi
           product: tuotekortti
           promotion: kampanja
           department: osasto

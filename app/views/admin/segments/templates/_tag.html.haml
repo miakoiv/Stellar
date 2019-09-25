@@ -1,0 +1,26 @@
+%fieldset
+  = f.hidden_field :resource_type, value: 'Tag'
+  = f.select :resource_id, current_store.tags.map { |t, l| [t.to_s, t.id] }, {include_blank: t('.select_tag')}, class: 'input-sm'
+  = f.text_field :header, class: 'input-sm'
+  = f.text_field :subhead, class: 'input-sm'
+  .form-group
+    = f.label col(Segment, :grid_columns), class: 'control-label'
+    .btn-group.btn-group-justified.btn-group-sm{data: {toggle: 'buttons'}}
+      - Segment.grid_columns_options.each do |columns|
+        %label.btn.btn-default{class: segment.grid_columns == columns && 'active'}
+          = f.radio_button_without_bootstrap :grid_columns, columns
+          = columns
+  = f.form_group do
+    = f.check_box :grid_lines
+  = f.form_group do
+    = f.check_box :swiper
+  = f.text_field :max_items, class: 'input-sm'
+  = f.form_group do
+    = f.check_box :show_more
+  = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {include_blank: t('.select_product_scope')}, class: 'input-sm'
+
+:coffee
+  $('#segment_resource_id').betterSelectize
+    dropdownParent: null
+  $('#segment_product_scope').betterSelectize
+    dropdownParent: null

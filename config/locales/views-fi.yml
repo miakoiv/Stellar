@@ -481,6 +481,8 @@ fi:
           select_page: "[Valitse sivu]"
         promotion:
           select_promotion: "[Valitse kampanja]"
+        tag:
+          select_tag: "[Valitse tagi]"
         reference:
           help: Tämän linkitetyn lohkon sisältö on toisinto kopioidusta lohkosta.
     shipments:

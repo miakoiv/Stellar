@@ -1,0 +1,37 @@
+- resource = tag.resource
+- max_items = tag.max_items.presence && tag.max_items.to_i
+- products = resource.is_a?(Tag) && resource.products.visible.sorted(tag.product_scope.presence)
+
+.segment-content.tag{id: dom_id(tag, :content)}
+  - if tag.header.present?
+    .page-header
+      %h1= tag.header
+      - if tag.subhead.present?
+        %p.lead= tag.subhead
+  - if products
+    - if tag.swiper?
+      .swiper-container
+        .swiper-wrapper{class: ["columns-#{tag.grid_columns || 3}", tag.grid_lines? && 'grid-lines']}
+          = render partial: 'products/product_card', layout: 'shared/swiper_slide', collection: max_items ? products.first(max_items) : products, as: :product
+        .swiper-pagination
+    - else
+      .columns{class: ["columns-#{tag.grid_columns || 3}", tag.grid_lines? && 'grid-lines']}
+        = render partial: 'products/product_card', collection: max_items ? products.first(max_items) : products, as: :product
+    - if tag.show_more? && products.count > max_items.to_i
+      .more-items-link
+        = link_to show_tag_path(resource), class: 'btn' do
+          = resource
+          = icon('arrow-circle-right')
+  - else
+    = segment_placeholder(tag)
+
+- if tag.swiper?
+  :coffee
+    jQuery ->
+      $segment = $('##{dom_id(tag, :content)}')
+      new Swiper $segment.find('.swiper-container'),
+        slidesPerView: 'auto'
+        watchOverflow: true
+        pagination:
+          el: '.swiper-pagination'
+          clickable: true
