@@ -4,7 +4,7 @@ $.fn.extend
       container: 'body'
       position: 'bottom-end'
       theme: 'nano'
-      swatches: ['#000', '#fff', 'transparent']
+      swatches: ['transparent', '#000', '#333', '#666', '#999', '#ccc', '#fff']
       components:
         preview: true
         opacity: true
@@ -22,6 +22,10 @@ $.fn.extend
       $chip.appendTo $group
       new Pickr(
         $.extend settings, {el: $chip[0], default: $input.val()}
-      ).on 'save', (c, p) ->
+      ).on 'changestop', (p) ->
+        p.applyColor()
+      .on 'swatchselect', (c, p) ->
+        p.applyColor()
+      .on 'save', (c, p) ->
         $input.val c.toRGBA().toString(0).toLowerCase()
         $input.trigger 'change'
