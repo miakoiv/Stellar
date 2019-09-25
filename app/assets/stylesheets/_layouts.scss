@@ -199,7 +199,8 @@
  */
 .column-bg-container,
 .column-bg-overlay,
-.segment-bg-container {
+.segment-bg-container,
+.segment-bg-overlay {
   @include cover-absolute;
   background-size: cover;
   background-position: center;
