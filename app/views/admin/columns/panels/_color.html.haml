@@ -11,4 +11,5 @@
     = render partial: 'admin/gradients/form_fields', object: f, as: :f
 
   :coffee
-    $('##{dom_id(column, :colors)}').find('.color').pickr()
+    $('##{dom_id(column, :colors)}').find('.color').pickr
+      container: '#layout-modal'
