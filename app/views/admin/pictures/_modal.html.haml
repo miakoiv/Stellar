@@ -18,7 +18,7 @@
               .form-group
                 %label.control-label= col(Picture, :purpose)
                 .btn-group.btn-group-block{data: {toggle: 'buttons'}}
-                  - @picture.pictureable.available_purposes.each do |purpose|
+                  - @picture.pictureable.available_picture_purposes.each do |purpose|
                     %label.btn.btn-default{class: @picture.purpose == purpose && 'active'}
                       = f.radio_button_without_bootstrap :purpose, purpose
                       = Picture.human_attribute_value(:purpose, purpose)

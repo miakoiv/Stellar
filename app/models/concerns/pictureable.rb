@@ -11,7 +11,7 @@ module Pictureable
     {purpose: nil, variant: nil}
   end
 
-  def available_purposes
+  def available_picture_purposes
     picture_options[:purpose] || Picture.available_purposes
   end
 

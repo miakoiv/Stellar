@@ -24,7 +24,7 @@ class Admin::PicturesController < AdminController
   def new
     @pictureable = find_pictureable
     @picture = @pictureable.pictures.build(
-      purpose: @pictureable.available_purposes.first,
+      purpose: @pictureable.available_picture_purposes.first,
       variant: 'presentational'
     )
 
