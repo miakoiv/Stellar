@@ -50,18 +50,35 @@ module ShippingGateway
         raise ShippingGatewayError, 'Shipment and user must be present' if shipment.nil? || user.nil?
         raise ShippingGatewayError, 'Shipping address must be present' unless @group.shipping_address.present?
         request = {pdfConfig: pdf_config, shipment: default_shipment.merge(options)}
-        response = @shipment_api.create_shipment(request).parsed_response
+        response = @shipment_api.create_shipment(request)
+        result = response.parsed_response[0]
+        raise ShippingGatewayError, result unless response.created? && result.present?
+        status = result['id'].present?
+
+        return [
+          status,
+          status && result['id'],
+          status && result['parcels'][0]['parcelNo']
+        ]
       end
 
       def fetch_label
         raise ShippingGatewayError, 'Shipment must be present' if shipment.nil?
-        response = @shipment_api.get_shipping_label(label_request).parsed_response
+        response = @shipment_api.get_shipping_label(shipment.number)
+        result = response.parsed_response[0]
+        raise ShippingGatewayError, 'Fetching shipping label failed' unless response.ok? && result.present?
+        status = result['pdf'].present?
+
+        return [
+          status,
+          status && Base64.decode64(result['pdf'])
+        ]
       end
 
       private
         def pdf_config
           {
-            target1Media: 'laser-ste',
+            target1Media: 'laser-a5',
             target1XOffset: 0,
             target1YOffset: 0,
             target2Media: 'laser-a4',

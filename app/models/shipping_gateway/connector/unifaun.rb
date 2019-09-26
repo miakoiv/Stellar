@@ -16,6 +16,10 @@ module ShippingGateway
       def create_shipment(request)
         self.class.post '/shipments', body: request.to_json
       end
+
+      def get_shipping_label(shipment_id)
+        self.class.get "/shipments/#{shipment_id}/pdfs", query: {inlinePdf: true}
+      end
     end
   end
 end
