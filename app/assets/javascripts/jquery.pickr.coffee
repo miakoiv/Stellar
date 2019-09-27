@@ -20,8 +20,9 @@ $.fn.extend
       $group = $input.parent()
       $chip = $('<div>', class: 'pickr')
       $chip.appendTo $group
+      value = $input.val() || 'rgba(0,0,0,0)'
       new Pickr(
-        $.extend settings, {el: $chip[0], default: $input.val()}
+        $.extend settings, {el: $chip[0], default: value}
       ).on 'changestop', (p) ->
         p.applyColor()
       .on 'swatchselect', (c, p) ->
