@@ -72,12 +72,12 @@ module ContentGateway
         CARD_TYPES[content_type.to_sym] || CARD_TYPES[:apartment_sell]
       end
 
-      # Returns a new content item from given card data,
+      # Returns a new content item card from given card data,
       # applying necessary transformations.
       def build_content_item(card)
-        ContentItem.new(
+        ContentItem::Card.new(
           title: card['buildingData']['address'],
-          subtitle: card['buildingData']['district'] + ', ' + card['buildingData']['city'],
+          subtitle: [card['buildingData']['district'], card['buildingData']['city']].reject(&:blank?).join(', '),
           image: card['images']['wide'],
           description: card['description'],
           link: card['url'],

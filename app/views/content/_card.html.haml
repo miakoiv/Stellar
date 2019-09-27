@@ -1,0 +1,13 @@
+.feed-item
+  = link_to card.link, target: '_blank' do
+    .header
+      %h3
+        = card.title
+        %span.small= card.subtitle
+    .picture= image_tag card.image
+    .body
+      .metadata
+        .price.currency= card.price
+        .size= card.size
+        .type= card.type
+      .description= card.description
