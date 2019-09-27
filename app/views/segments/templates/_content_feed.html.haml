@@ -1,4 +1,4 @@
-.segment-content.content_feed{id: dom_id(content_feed, :content), data: {id: dom_id(content_feed, :content), store: current_store.id, content_class: content_feed.content_class, content_type: content_feed.content_type, items: content_feed.max_items.presence || 24}}
+.segment-content.content_feed{id: dom_id(content_feed, :content), data: {id: dom_id(content_feed, :content), store: current_store.id, content_class: content_feed.content_class, content_type: content_feed.content_type, url: content_feed.url, items: content_feed.max_items.presence || 24}}
   - if content_feed.header.present?
     .page-header
       %h1= content_feed.header

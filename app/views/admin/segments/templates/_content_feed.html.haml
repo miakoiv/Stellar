@@ -1,6 +1,7 @@
 %fieldset
   = f.select :content_class, Segment.content_class_options, {include_blank: t('.select_content_class')}, class: 'input-sm'
   = f.text_field :content_type, class: 'input-sm'
+  = f.text_field :url, placeholder: 'https://domain/feed/@author', class: 'input-sm'
   = f.text_field :header, class: 'input-sm'
   = f.text_field :subhead, class: 'input-sm'
   .form-group

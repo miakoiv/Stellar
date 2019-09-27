@@ -1326,8 +1326,50 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 
 /*
- * Item cards in a content feed
+ * Content feed items
  */
+.content-feed .article {
+  .header {
+    padding-bottom: (($line-height-computed / 2) - 1);
+    margin: 0 0 $line-height-computed;
+    border-bottom: 1px solid $page-header-border-color;
+
+    .metadata {
+      @include flex;
+      font-size: $font-size-small;
+
+      .date { flex-grow: 1; }
+    }
+    h2 {
+    }
+  }
+  .body {
+    margin-bottom: $line-height-computed;
+
+    figure {
+      margin-bottom: $line-height-computed;
+
+      > img { @extend .img-responsive; }
+      figcaption {
+        font-size: $font-size-small;
+        font-style: italic;
+      }
+    }
+  }
+  ul.categories {
+    @include flex(row, wrap);
+    padding-left: 0;
+    list-style: none;
+    font-size: $font-size-small;
+
+    > li {
+      @extend .label, .label-default;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  + .article { margin-top: 20px; }
+}
 .content-feed .card {
   transition: box-shadow 200ms $material-easing;
   &:hover {

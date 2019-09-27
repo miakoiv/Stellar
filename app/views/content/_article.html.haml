@@ -1,0 +1,11 @@
+.feed-item.article
+  .header
+    %h2= article.title
+    .metadata
+      .date= l(article.date, format: :long)
+      .link= link_to icon('external-link'), article.link, target: '_blank'
+  .body
+    = article.content.html_safe
+  %ul.categories
+    - article.categories.each do |category|
+      %li= category
