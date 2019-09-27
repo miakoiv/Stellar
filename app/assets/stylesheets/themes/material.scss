@@ -1328,8 +1328,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /*
  * Item cards in a content feed
  */
-.content-feed { @extend .grid-lines; }
-.content-feed .feed-item {
+.content-feed .card {
   transition: box-shadow 200ms $material-easing;
   &:hover {
     z-index: 2;

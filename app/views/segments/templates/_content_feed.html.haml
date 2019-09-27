@@ -4,7 +4,7 @@
       %h1= content_feed.header
       - if content_feed.subhead.present?
         %p.lead= content_feed.subhead
-  .content-feed.row{class: content_feed.grid_columns_class}
+  .content-feed.row{class: [content_feed.grid_columns_class, content_feed.grid_lines? && 'grid-lines']}
     = segment_placeholder(content_feed)
   .content-pagination
 
