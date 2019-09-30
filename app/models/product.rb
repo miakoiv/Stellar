@@ -103,9 +103,12 @@ class Product < ApplicationRecord
     live.master.where(purpose: [0, 2, 3, 4, 5])
   }
 
-  # Simple products exclude bundles, composites, and packages.
+  # Simple products exclude complex products: bundles, composites, and packages.
   scope :simple, -> {
     where.not(purpose: [2, 3, 4])
+  }
+  scope :complex, -> {
+    where(purpose: [2, 3, 4])
   }
 
   scope :by_category_id, -> (ids) { joins(:categories).where(categories: {id: ids.map { |id| Category.self_and_descendant_ids(id) }.flatten}) }
@@ -124,6 +127,7 @@ class Product < ApplicationRecord
   before_save :reset_live_status
   before_save :inherit_from_master, if: :variant?
   after_save :update_variants, if: :has_variants?
+  after_save :update_component_parents, if: :has_component_parents?
 
   #---
   def self.purpose_options
@@ -197,6 +201,10 @@ class Product < ApplicationRecord
 
   def has_variants?
     variants_count > 0
+  end
+
+  def has_component_parents?
+    component_parent_entries.count > 0
   end
 
   def primary?
@@ -364,6 +372,16 @@ class Product < ApplicationRecord
         variants.each do |variant|
           variant.save
           variant.touch
+        end
+      end
+    end
+
+    # Complex component parents depend on this product to be live for them to be live as well.
+    def update_component_parents
+      return if live?
+      transaction do
+        component_parent_products.each do |parent|
+          parent.update(deleted_at: Date.today)
         end
       end
     end
