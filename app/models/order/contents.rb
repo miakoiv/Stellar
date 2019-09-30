@@ -129,8 +129,8 @@ class Order < ApplicationRecord
     another_order.update(
       shipping_at: shipping_at,
       installation_at: installation_at,
-      billing_address: billing_address.dup,
-      shipping_address: shipping_address.dup,
+      billing_address: billing_address&.dup,
+      shipping_address: shipping_address&.dup,
       separate_shipping_address: separate_shipping_address,
       notes: notes
     )
