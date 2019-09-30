@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_083418) do
+ActiveRecord::Schema.define(version: 2019_09_30_071416) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_083418) do
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["component_id"], name: "index_component_entries_on_component_id"
     t.index ["product_id"], name: "index_component_entries_on_product_id"
   end
 
