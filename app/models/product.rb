@@ -65,9 +65,18 @@ class Product < ApplicationRecord
   belongs_to :primary_variant, class_name: 'Product', optional: true
 
   has_many :order_items
+
+  # Product/component relationships in both directions. Component entries describe the connections between
+  # a product and its component. First declare the straightforward relationship through component entries.
   has_many :component_entries, dependent: :destroy
   has_many :component_products, through: :component_entries, source: :component
+
+  # Then use the component entries in reverse to connect a product to its component parents.
+  has_many :component_parent_entries, class_name: 'ComponentEntry', foreign_key: :component_id
+  has_many :component_parent_products, through: :component_parent_entries, source: :product
+
   has_many :requisite_entries, dependent: :destroy
+
   has_many :requisite_products, through: :requisite_entries, source: :requisite
   has_many :product_properties, dependent: :destroy, after_add: :associations_changed, after_remove: :associations_changed
   has_many :properties, through: :product_properties

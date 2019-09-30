@@ -355,6 +355,7 @@ fi:
         no_group: "[Ei ryhmää]"
       show:
         edit_page: Muokkaa sivua
+        component_parents: Tuotteen osallisuus rakenteen osana
       search:
         availability: "[Saatavuus]"
         described: "[Tuotetiedot]"
@@ -366,6 +367,7 @@ fi:
           proceed: Kopioi
           cancel: Kumoa
         edit_page: Muokkaa sivua
+        component_parents: Tuotteen osallisuus rakenteen osana
         new_variant: Uusi variantti
         make_primary: Aseta ensisijaiseksi
         now: Nyt

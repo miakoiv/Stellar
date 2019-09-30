@@ -344,6 +344,7 @@ en:
         no_group: "[No group]"
       show:
         edit_page: Edit page
+        component_parents: Product as a component in other structures
       search:
         availability: "[Availability]"
         described: "[Product information]"
@@ -355,6 +356,7 @@ en:
           proceed: Duplicate
           cancel: Cancel
         edit_page: Edit page
+        component_parents: Product as a component in other structures
         new_variant: New variant
         make_primary: Set as primary
         now: Now

@@ -50,6 +50,10 @@
       = tab_pane 'component-entries' do
         = progressive_render do
           = render partial: 'admin/component_entries/table', object: @product, as: :product
+          %hr
+          %h5= t('.component_parents')
+          .list-group
+            = render partial: 'admin/products/item', collection: @product.component_parent_products, as: :product
       = tab_pane 'history' do
         #context-activities.hidden-print{data: {url: context_admin_activities_path(format: :js), gid: @product.to_global_id}}
 
