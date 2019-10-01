@@ -16,10 +16,10 @@
 
       .col-md-6.col-md-pull-6
         #checkout-panels.panel-group{role: 'tablist'}
-          .panel.panel-default
+          .panel.panel-primary
             .panel-heading{role: 'tab'}
               %h4.panel-title= t('checkout.panels.address_panel')
-            #address-panel.panel-collapse.collapse.in{role: 'tabpanel'}
+            #address-panel.panel-collapse.collapse.in.active{role: 'tabpanel'}
               .panel-body
                 = render partial: 'checkout_form'
           - if @order.has_shipping?

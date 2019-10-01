@@ -1,6 +1,6 @@
 # Collapse and reveal checkout panels according to checkout phase.
 
-$.do_checkout_phase = (phase) ->
+$.doCheckoutPhase = (phase) ->
   ga?('send', 'pageview', '/checkout' + phase)
   switch phase
     when 'address'
@@ -27,6 +27,24 @@ jQuery ->
   # externally by actions that create shipments or payments.
   $('#checkout-form')
     .on 'ajax:success', (e, data, status, xhr) ->
-      $.do_checkout_phase data.checkout_phase
+      $.doCheckoutPhase data.checkout_phase
     .on 'ajax:error', (e, xhr, status, error) ->
       $('#order-preflight-modal').modal 'show'
+
+  # Event handlers to make the shown panel primary and scroll it into view,
+  # and revert hidden panels back to default appearance.
+  $(document).on 'shown.bs.collapse', '#checkout-panels .panel-collapse:not(.active)', (e) ->
+    $t = $(this)
+    $p = $t.parents '.panel'
+    $t.addClass 'active'
+    $p.removeClass 'panel-default'
+    $p.addClass 'panel-primary'
+    s = new SmoothScroll
+    s.animateScroll $p[0], null, {header: '#main-nav', speed: 300, updateURL: false}
+
+  $(document).on 'hide.bs.collapse', '#checkout-panels .panel-collapse.active', (e) ->
+    $t = $(this)
+    $p = $t.parents '.panel'
+    $t.removeClass 'active'
+    $p.removeClass 'panel-primary'
+    $p.addClass 'panel-default'
