@@ -3,7 +3,7 @@
   %fieldset
     = f.email_field :customer_email, hide_label: true, placeholder: col(Order, :customer_email), required: true
 
-  - if @order.has_payment?
+  - if @order.has_billing?
     #billing-address
       = render partial: 'address_fields', locals: {type: :billing, required: true, f: f}
     - if @order.has_shipping?

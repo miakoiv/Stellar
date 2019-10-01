@@ -29,7 +29,7 @@ class CheckoutController < BaseStoreController
     @order.shipments.destroy_all
     @order.clear_shipping_costs!
 
-    if @order.has_payment?
+    if @order.has_billing?
       @payment_gateway = @order.payment_gateway_class.new(order: @order)
     end
   end
@@ -82,7 +82,7 @@ class CheckoutController < BaseStoreController
   def pay
     method = params[:method]
 
-    if method.present? && @order.has_payment?
+    if method.present? && @order.has_billing?
       @payment_gateway = @order.payment_gateway_class.new(order: @order, return_url: return_url(@order), notify_url: notify_url(@order))
       response = @payment_gateway.send("charge_#{method}", params)
       render json: response

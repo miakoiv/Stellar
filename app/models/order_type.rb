@@ -25,11 +25,11 @@ class OrderType < ApplicationRecord
   scope :has_shipping, -> { where(has_shipping: true) }
 
   #---
-  validates :payment_gateway, presence: true, if: -> { has_payment? }
+  validates :payment_gateway, presence: true, if: -> { has_billing? }
 
   #---
   def payment_gateway
-    return 'None' unless has_payment?
+    return 'None' unless has_billing?
     super
   end
 

@@ -366,7 +366,7 @@ fi:
         outgoing: Lähtevät tilaukset
         has_shipping: Toimitettava
         has_installation: Asennettava
-        has_payment: Maksettava
+        has_billing: Laskutettava
         payment_gateway: Maksukanava
         is_forwarded: Välitettävä
         prepaid_stock: Tilaa ennalta maksetusta varastosta

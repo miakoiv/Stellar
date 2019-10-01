@@ -4,12 +4,12 @@
       .panel-heading
         %h4.panel-title= t('.order_meta')
       .panel-body
-        %fieldset.for-billing-refresh.for-shipping-refresh
+        %fieldset.for-billing-refresh.for-shipping-refresh.for-order-type-refresh
           = f.select :billing_group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }
-        %fieldset.for-shipping-refresh
+        %fieldset.for-shipping-refresh.for-order-type-refresh
           = f.select :shipping_group_id, @groups.map { |g| [g.to_path, g.id, data: {appearance: g.appearance}.to_json] }, help: t('.order_meta_help')
         %hr
-        %fieldset.for-shipping-refresh
+        %fieldset.for-shipping-refresh.for-order-type-refresh
           = f.select :order_type_id, @order.billing_group.outgoing_order_types.map { |o| [o.to_s, o.id] }
           = f.select :inventory_id, @order.billing_group.available_inventories.map { |i| [i.to_s, i.id] }
       .panel-footer.text-right
@@ -19,16 +19,19 @@
       .panel-heading
         %h4.panel-title= t('.customer')
       .panel-body
-        %fieldset.for-billing-refresh.for-shipping-refresh
+        %fieldset.for-billing-refresh.for-shipping-refresh.for-order-type-refresh
           = f.text_field :customer_email, required: true
           = f.text_field :contact_email
-        %fieldset
-          = render partial: 'addresses/form_fields', locals: {type: :billing, f: f}
-          = f.form_group do
-            = f.check_box :separate_shipping_address
-        #shipping-address.collapse{class: @order.separate_shipping_address && 'in'}
+        - if @order.has_billing?
           %fieldset
-            = render partial: 'addresses/form_fields', locals: {type: :shipping, f: f}
+            = render partial: 'addresses/form_fields', locals: {type: :billing, f: f}
+            - if @order.has_shipping?
+              = f.form_group do
+                = f.check_box :separate_shipping_address
+        - if @order.has_shipping?
+          #shipping-address.collapse{class: @order.separate_shipping_address && 'in'}
+            %fieldset
+              = render partial: 'addresses/form_fields', locals: {type: :shipping, f: f}
 
 :coffee
   refresh = (data) ->
@@ -52,7 +55,10 @@
     onChange: (id) ->
       refresh $('.for-shipping-refresh').serialize()
 
-  $order_type_select = $('#order_order_type_id').betterSelectize()
+  $order_type_select = $('#order_order_type_id').betterSelectize
+    onChange: (id) ->
+      refresh $('.for-order-type-refresh').serialize()
+
   $inventory_select = $('#order_inventory_id').betterSelectize()
 
   $('#order_separate_shipping_address').on 'change', (e) ->

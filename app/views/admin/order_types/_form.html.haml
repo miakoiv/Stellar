@@ -22,11 +22,11 @@
             = f.check_box :has_installation
           = f.form_group do
             = f.check_box :is_exported
-        = f.form_group help: t('.has_payment_help') do
-          = f.check_box :has_payment
-        #payment-gateway.collapse{class: @order_type.has_payment? && 'in'}
+        = f.form_group help: t('.has_billing_help') do
+          = f.check_box :has_billing
+        #payment-gateway.collapse{class: @order_type.has_billing? && 'in'}
           = f.select :payment_gateway, Store.payment_gateway_options, {}, {class: 'selectize'}
-        #prepaid-stock.collapse{class: @order_type.has_payment? || 'in'}
+        #prepaid-stock.collapse{class: @order_type.has_billing? || 'in'}
           = f.form_group do
             = f.check_box :prepaid_stock
         ~ f.text_area :instructions, rows: 4
@@ -41,7 +41,7 @@
     dataAttr: 'data'
     render: $.fn.selectize.label_renderer
 
-  $('#order_type_has_payment').on 'change', (e) ->
+  $('#order_type_has_billing').on 'change', (e) ->
     if $(e.target).is ':checked'
       $('#payment-gateway').collapse 'show'
       $('#prepaid-stock').collapse 'hide'

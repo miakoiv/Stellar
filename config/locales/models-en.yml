@@ -366,7 +366,7 @@ en:
         outgoing: Outgoing orders
         has_shipping: Shipping
         has_installation: Installation
-        has_payment: Payment
+        has_billing: Billing
         payment_gateway: Payment gateway
         is_forwarded: Forwarded
         prepaid_stock: Order from prepaid stock

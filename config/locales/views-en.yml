@@ -238,8 +238,8 @@ en:
       new:
         new_order_type: New order type
       form:
-        has_shipping_help: Shipping must be enabled if physical products are shipped to the customer. Orders will require a shipping address.
-        has_payment_help: Payment must be enabled if payments are collected before completing orders. Disable this if billing is processed externally.
+        has_shipping_help: Enable shipping to require a shipping address on orders. Shipping methods are defined separately.
+        has_billing_help: Enable billing to require a billing address on orders. Select a suitable gateway below to handle payments.
     orders:
       incoming:
         title: Incoming orders

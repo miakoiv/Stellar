@@ -37,6 +37,7 @@ class OrdersController < BaseStoreController
     @order = current_store.orders.build(order_params)
     @order.billing_group ||= @groups.first
     @order.shipping_group ||= @order.billing_group
+    @order.set_default_order_type
     @order.assign_addresses
 
     respond_to :html, :js

@@ -245,8 +245,8 @@ fi:
       new:
         new_order_type: Uusi tilauslaji
       form:
-        has_shipping_help: Tilauslaji on toimitettava, jos tilaajalle lähetetään tavaraa. Tilaukseen on sisällytettävä toimitusosoite.
-        has_payment_help: Tilauslaji on maksettava, jos tilaukset on maksettava tilauksen yhteydessä. Jätä tämä tyhjäksi jos laskutus tapahtuu muuta kautta.
+        has_shipping_help: Toimitettavalla tilauksella on oltava toimitusosoite. Toimitustavat määritellään erikseen.
+        has_billing_help: Laskutettavalla tilauksella on oltava laskutusosoite. Valitse laskutukseen soveltuva maksukanava alta.
     orders:
       incoming:
         title: Saapuvat tilaukset

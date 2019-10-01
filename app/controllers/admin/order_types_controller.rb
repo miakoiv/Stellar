@@ -19,7 +19,7 @@ class Admin::OrderTypesController < AdminController
   def new
     authorize_action_for OrderType, at: current_store
     @order_type = current_store.order_types.build(
-      has_shipping: true, has_payment: true
+      has_shipping: true, has_billing: true
     )
   end
 
@@ -91,7 +91,7 @@ class Admin::OrderTypesController < AdminController
         :source_id, :destination_id,
         :name, :label, :instructions,
         :has_shipping, :has_installation,
-        :has_payment, :payment_gateway,
+        :has_billing, :payment_gateway,
         :is_forwarded, :prepaid_stock, :is_exported
       )
     end

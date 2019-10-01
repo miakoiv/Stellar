@@ -126,6 +126,11 @@ class Order < ApplicationRecord
   # Order is forwarded if the order type so declares.
   delegate :is_forwarded?, to: :order_type
 
+  def set_default_order_type
+    outgoing = billing_group&.outgoing_order_types || []
+    outgoing.any? && self.order_type = outgoing.first
+  end
+
   # Finds the order types available to this order. These are the outgoing
   # order types for the source group, excluding those that are not suitable
   # for one or more products present in the order items.
@@ -229,14 +234,14 @@ class Order < ApplicationRecord
     order_type.present? && order_type.has_installation?
   end
 
-  def has_payment?
-    order_type.present? && order_type.has_payment?
+  def has_billing?
+    order_type.present? && order_type.has_billing?
   end
 
   # Payment is collected if the order type requires payments
   # and the gateway for that order type actually collects payments.
   def collects_payment?
-    has_payment? && payment_gateway_class.new(order: self).collect_payment?
+    has_billing? && payment_gateway_class.new(order: self).collect_payment?
   end
 
   # Require confirmation at checkout for orders that don't collect payment.
@@ -315,7 +320,7 @@ class Order < ApplicationRecord
     # The appropriate parties are sent email notifications.
     def approve!
       reload # to clear changes and prevent a callback loop
-      if has_payment?
+      if has_billing?
         email.processing(to: billing_recipient, bcc: false)&.deliver_later
       elsif !is_forwarded?
         email.confirmation(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
@@ -346,7 +351,7 @@ class Order < ApplicationRecord
       reload # to clear changes and prevent a callback loop
       OrderReportRow.cancel_entries_from(self) if concluded?
       total_for_real_items = grand_total_with_tax(order_items.real)
-      if has_payment? && paid?
+      if has_billing? && paid?
         payments.create(amount: -total_for_real_items)
       end
       if track_shipments?

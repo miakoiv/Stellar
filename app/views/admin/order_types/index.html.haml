@@ -26,8 +26,8 @@
           %td= order_type.name
           %td= order_type.label
           %td
-            - if order_type.has_payment?
-              = bootstrap_label(order_type, text: col(OrderType, :has_payment), appearance: :success)
+            - if order_type.has_billing?
+              = bootstrap_label(order_type, text: col(OrderType, :has_billing), appearance: :success)
             - if order_type.has_shipping?
               = bootstrap_label(order_type, text: col(OrderType, :has_shipping), appearance: :primary)
           - if current_store.b2b_sales?

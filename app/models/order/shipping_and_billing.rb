@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   before_validation :copy_shipping_address, if: :should_copy_shipping_address?
   before_save :check_separate_shipping_address
 
-  validates :billing_address, presence: true, if: :has_payment?
+  validates :billing_address, presence: true, if: :has_billing?
   validates :shipping_address, presence: true, if: :shipping_address_required?
 
   #---
@@ -20,11 +20,11 @@ class Order < ApplicationRecord
   end
 
   def should_copy_shipping_address?
-    has_shipping? && has_payment? && !separate_shipping_address?
+    has_shipping? && has_billing? && !separate_shipping_address?
   end
 
   def shipping_address_required?
-    has_shipping? && (!has_payment? || separate_shipping_address?)
+    has_shipping? && (!has_billing? || separate_shipping_address?)
   end
 
   # Order having shipping is simply from the order type,
@@ -69,7 +69,7 @@ class Order < ApplicationRecord
   # VAT numbers are not mandatory, but expected to be present in orders
   # billed at a different country from the store home country.
   def vat_number_expected?
-    return false unless has_payment?
+    return false unless has_billing?
     billing_address.country != store.country
   end
 
