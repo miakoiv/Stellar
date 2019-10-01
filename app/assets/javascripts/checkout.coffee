@@ -23,6 +23,8 @@ $.doCheckoutPhase = (phase) ->
 
 jQuery ->
 
+  window.smoothScroll = new SmoothScroll
+
   # This callback is triggered by user submission of #checkout-form, and
   # externally by actions that create shipments or payments.
   $('#checkout-form')
@@ -39,8 +41,7 @@ jQuery ->
     $t.addClass 'active'
     $p.removeClass 'panel-default'
     $p.addClass 'panel-primary'
-    s = new SmoothScroll
-    s.animateScroll $p[0], null, {header: '#main-nav', speed: 300, updateURL: false}
+    window.smoothScroll.animateScroll $p[0], null, {header: '#main-nav', speed: 300, updateURL: false}
 
   $(document).on 'hide.bs.collapse', '#checkout-panels .panel-collapse.active', (e) ->
     $t = $(this)
