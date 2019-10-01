@@ -425,7 +425,7 @@ class StoreController < BaseStoreController
       {
         store: current_store,
         live: true,
-        permitted_categories: @category.self_and_descendants
+        permitted_categories: @category.self_and_maybe_descendants
       }
     end
 end

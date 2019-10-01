@@ -62,7 +62,7 @@ class Category < ApplicationRecord
   end
 
   def self_and_maybe_descendants
-    filtering ? self_and_descendants : Category.where(id: self)
+    filtering ? self_and_descendants : self.class.where(id: self)
   end
 
   def slugger
