@@ -45,6 +45,10 @@ class StoreController < BaseStoreController
   end
 
   # GET /category/:category_id
+  # When this action is reached directly from a show_category_path link, any redirects that
+  # happen will be visible to the user. However, other views may call this via Ajax and get
+  # redirected to the first descendant without seeing the URL change. This may or may not be
+  # a good thing. Pending a better implementation.
   def show_category
     find_category && redirect_to_first_descendant_category
     @view_mode = get_view_mode_setting(@category)
