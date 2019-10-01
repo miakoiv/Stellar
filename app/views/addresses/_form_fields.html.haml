@@ -1,12 +1,12 @@
 = f.fields_for "#{type}_address" do |ff|
   %fieldset
     %legend= t(type, scope: '.addresses.labels')
+    = ff.text_field :company, hide_label: true, placeholder: col(Address, :company)
     .row
       .col-sm-7
         = ff.text_field :name, hide_label: true, placeholder: col(Address, :name)
       .col-sm-5
         = ff.phone_field :phone, hide_label: true, placeholder: col(Address, :phone)
-    = ff.text_field :company, hide_label: true, placeholder: col(Address, :company)
     = ff.text_field :department, hide_label: true, placeholder: col(Address, :company)
     = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1)
     = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2)

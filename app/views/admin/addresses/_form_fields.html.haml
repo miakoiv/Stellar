@@ -1,6 +1,9 @@
 = f.fields_for "#{type}_address" do |ff|
   %fieldset
     %legend= t(type, scope: '.admin.addresses.labels')
+    .form-group.has-icon
+      = ff.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
+      = icon('building-o')
     .row
       .col-sm-7
         .form-group.has-icon
@@ -10,9 +13,6 @@
         .form-group.has-icon
           = ff.phone_field_without_bootstrap :phone, placeholder: col(Address, :phone), class: 'form-control'
           = icon('phone')
-    .form-group.has-icon
-      = ff.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
-      = icon('building-o')
     .form-group.has-icon
       = ff.text_field_without_bootstrap :department, placeholder: col(Address, :department), class: 'form-control'
       = icon('sitemap')

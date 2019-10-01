@@ -11,6 +11,9 @@
     %fieldset
       = hidden_field_tag :gid, addressed.to_global_id
       = hidden_field_tag :type, type
+      .form-group.has-icon
+        = f.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
+        = icon('building-o')
       .row
         .col-md-6
           .form-group.has-icon
@@ -20,9 +23,6 @@
           .form-group.has-icon
             = f.phone_field_without_bootstrap :phone, placeholder: col(Address, :phone), class: 'form-control'
             = icon('phone')
-      .form-group.has-icon
-        = f.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
-        = icon('building-o')
       .form-group.has-icon
         = f.text_field_without_bootstrap :department, placeholder: col(Address, :department), class: 'form-control'
         = icon('sitemap')

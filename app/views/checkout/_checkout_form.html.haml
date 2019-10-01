@@ -2,16 +2,18 @@
   = f.hidden_field :order_type_id
   %fieldset
     = f.email_field :customer_email, hide_label: true, placeholder: col(Order, :customer_email), required: true
+    - if current_store.b2b_sales?
+      = f.email_field :contact_email, hide_label: true, placeholder: col(Order, :contact_email)
 
   - if @order.has_billing?
     #billing-address
-      = render partial: 'address_fields', locals: {type: :billing, required: true, f: f}
+      = render partial: 'address_fields', locals: {type: :billing, b2b: current_store.b2b_sales?, required: true, f: f}
     - if @order.has_shipping?
       = f.form_group do
         = f.check_box :separate_shipping_address
   - if @order.has_shipping?
     #shipping-address.collapse{class: (@order.shipping_address_required? || @order.separate_shipping_address) && 'in'}
-      = render partial: 'address_fields', locals: {type: :shipping, required: @order.shipping_address_required?, f: f}
+      = render partial: 'address_fields', locals: {type: :shipping, b2b: current_store.b2b_sales?, required: @order.shipping_address_required?, f: f}
 
   %fieldset
     %legend
