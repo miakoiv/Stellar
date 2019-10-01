@@ -224,7 +224,7 @@ es:
     cancel_checkout: Cancelar y devolver al contacto
     select_order_type: "Elige para proceder:"
     address: Enviar información del contacto
-    select_shipping_method: Elegir metodo de envío
+    select_shipping_method_html: <p>Elegir metodo de envío</p>
     delivery_time: El envío tardará %{days} días laborables.
     ship: Elegir este metodo de envío
     business_orders_only: Estos campos son solo para pedidos laborales

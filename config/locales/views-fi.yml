@@ -739,9 +739,9 @@ fi:
     cancel_checkout: Keskeytä ja palaa takaisin yhteystietoihin
     select_order_type: "Valitse ja jatka kassalle:"
     address: Vahvista yhteystiedot
-    select_shipping_method: Valitse toimitustapa
+    select_shipping_method_html: <p>Valitse toimitustapa allaolevista vaihtoehdoista, sitten jatka valitsemalla <b>Vahvista toimitus</b>.</p>
     delivery_time: Toimitusaika-arvio %{days} arkipäivää.
-    ship: Valitse tämä toimitustapa
+    ship: Vahvista toimitus
     order_meta: Tilauksen lisätiedot
     business_orders_only: Nämä tiedot vain yritystilauksille
     receipt: Kuitti

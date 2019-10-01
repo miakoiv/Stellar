@@ -728,9 +728,9 @@ en:
     cancel_checkout: Cancel and return to contact information
     select_order_type: "Select to proceed:"
     address: Submit contact information
-    select_shipping_method: Select shipping method
+    select_shipping_method_html: <p>Select shipping method from options below, then continue by selecting <b>Confirm shipping</b>.</p>
     delivery_time: Please allow %{days} business days for delivery.
-    ship: Select this shipping method
+    ship: Confirm shipping
     business_orders_only: These fields for business orders only
     receipt: Receipt
     creditcard_payment: Credit card payment

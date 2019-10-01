@@ -1582,6 +1582,39 @@ fieldset > legend {
 
 
 /*
+ * List group selectors
+ */
+.list-group-selector {
+  .list-group-item {
+    @include flex;
+    padding-left: 48px;
+
+    &:before {
+      @include font-awesome;
+      content: '\f10c';
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      font-size: $font-size-large;
+      color: $text-muted;
+    }
+    &.active:before {
+      content: '\f192';
+      color: $list-group-active-color;
+    }
+    figure {
+      width: 50px;
+      @include contained-image;
+      margin-right: 10px;
+    }
+    .list-group-item-content {
+      flex-grow: 1;
+    }
+  }
+}
+
+
+/*
  * Report panels
  */
 .reports {
