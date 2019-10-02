@@ -17,7 +17,7 @@ class TransferItem < ApplicationRecord
   delegate :real?, to: :product
   delegate :code, :customer_code, :title, :subtitle, to: :product, prefix: true
 
-  default_scope { order(updated_at: :desc) }
+  default_scope { includes(:order_item).order('order_items.priority', updated_at: :desc) }
 
   #---
   validates :lot_code, presence: true
