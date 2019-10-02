@@ -6,6 +6,7 @@ class OrderType < ApplicationRecord
   resourcify
   include Authority::Abilities
   include Trackable
+  include Reorderable
 
   #---
   belongs_to :store
@@ -22,6 +23,7 @@ class OrderType < ApplicationRecord
   # Message definitions attached to this order type, if any.
   has_many :messages, as: :context
 
+  default_scope { sorted }
   scope :has_shipping, -> { where(has_shipping: true) }
 
   #---

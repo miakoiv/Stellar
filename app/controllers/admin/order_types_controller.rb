@@ -1,5 +1,7 @@
 class Admin::OrderTypesController < AdminController
 
+  include Reorderer
+
   before_action :set_order_type, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/order_types
@@ -32,7 +34,7 @@ class Admin::OrderTypesController < AdminController
   # POST /admin/order_types.json
   def create
     authorize_action_for OrderType, at: current_store
-    @order_type = current_store.order_types.build(order_type_params)
+    @order_type = current_store.order_types.build(order_type_params.merge(priority: current_store.order_types.count))
 
     respond_to do |format|
       if @order_type.save

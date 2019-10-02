@@ -8,17 +8,19 @@
   %table.table.table-hover
     %thead
       %tr
+        %th.col-min.hidden-print
         %th.col-xs-3= col(OrderType, :workflow)
         %th.col-xs-2= col(OrderType, :name)
         %th.col-xs-2= col(OrderType, :label)
-        %th.col-xs-2
+        %th
         - if current_store.b2b_sales?
-          %th.col-xs-2
+          %th
         %th.actions
 
-    %tbody
+    %tbody{class: current_user.can_update?(OrderType, at: current_store) && 'sortable'}
       - @order_types.each do |order_type|
         %tr[order_type]
+          %td.hidden-print= drag_handle
           %td
             = bootstrap_label(order_type.source)
             %i.fa.fa-arrow-right.fa-fw.fa-lg
@@ -47,3 +49,14 @@
             - if current_user.can_delete?(order_type, at: current_store)
               = link_to icon('remove', t('actions.delete')), admin_order_type_path(order_type), method: :delete, class: 'btn btn-sm btn-outline-danger', data: {confirm: t('actions.confirm.body',
                     klass: order_type.model_name.human, name: order_type.name), 'confirm-title': t('actions.confirm.title'), 'confirm-proceed': t('actions.confirm.proceed'), 'confirm-cancel': t('actions.confirm.cancel')}
+
+:coffee
+  $('.sortable').sortable(
+    items: '> tr'
+    handle: '.handle'
+    placeholder: 'sortable-placeholder'
+    opacity: 0.5
+    revert: 200
+  ).bind 'sortupdate', (e, ui) ->
+    $.post '#{reorder_admin_order_types_path}',
+      {reorder: $(this).sortable('toArray')}

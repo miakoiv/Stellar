@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_103142) do
+ActiveRecord::Schema.define(version: 2019_10_02_132726) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -418,6 +418,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_103142) do
     t.boolean "is_forwarded", default: false, null: false
     t.boolean "prepaid_stock", default: false, null: false
     t.boolean "is_exported", default: false, null: false
+    t.integer "priority", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["destination_id"], name: "index_order_types_on_destination_id"

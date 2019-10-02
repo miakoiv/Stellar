@@ -272,7 +272,9 @@ Rails.application.routes.draw do
       post :add_products, on: :member
       post :add_categories, on: :member
     end
-    resources :order_types
+    resources :order_types do
+      post :reorder, on: :collection
+    end
     resources :shipping_methods do
       resources :pictures, shallow: true
     end
