@@ -127,7 +127,6 @@ class Product < ApplicationRecord
   before_save :reset_live_status
   before_save :inherit_from_master, if: :variant?
   after_save :update_variants, if: :has_variants?
-  after_save :update_component_parents, if: :has_component_parents?
 
   #---
   def self.purpose_options
