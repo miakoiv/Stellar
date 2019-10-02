@@ -4,6 +4,8 @@
       %fieldset
         = f.text_field :name, required: true
         = f.text_field :subtitle
+        = f.form_group do
+          = f.check_box :live
         .row
           .col-sm-6
             = f.select :product_scope, Product.sorting_scopes.map { |s| [Product.human_attribute_value(:sorting, s), s] }, {}, {class: 'selectize'}
@@ -12,10 +14,12 @@
         .row
           .col-sm-6
             = f.form_group do
-              = f.check_box :live
+              = f.check_box :filtering
           .col-sm-6
             = f.form_group do
-              = f.check_box :filtering
+              = f.check_box :nesting
+        = f.form_group do
+          = f.check_box :redirecting
     .panel-footer
       - if @category.product_scope == 'manual'
         = link_to icon('reorder', t('actions.reorder')), reorder_products_admin_category_path(@category), class: 'btn btn-default btn-sm'

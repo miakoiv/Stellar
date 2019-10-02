@@ -189,6 +189,8 @@ fi:
         subtitle: Alaotsikko
         product_scope: Tuotteiden järjestys
         filtering: Tuotteiden suodatus
+        nesting: Sisällytä alaryhmät
+        redirecting: Ohita ryhmä tyhjänä
         view_mode: Oletusnäkymä
       column:
         alignment: Pystytasaus

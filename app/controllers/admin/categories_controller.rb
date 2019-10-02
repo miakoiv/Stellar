@@ -126,8 +126,8 @@ class Admin::CategoriesController < AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(
-        :parent_id, :live, :name, :subtitle,
-        :product_scope, :filtering, :view_mode
+        :parent_id, :live, :name, :subtitle, :product_scope, :view_mode,
+        :filtering, :nesting, :redirecting
       )
     end
 end

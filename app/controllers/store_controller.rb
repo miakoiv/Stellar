@@ -45,12 +45,9 @@ class StoreController < BaseStoreController
   end
 
   # GET /category/:category_id
-  # When this action is reached directly from a show_category_path link, any redirects that
-  # happen will be visible to the user. However, other views may call this via Ajax and get
-  # redirected to the first descendant without seeing the URL change. This may or may not be
-  # a good thing. Pending a better implementation.
   def show_category
-    find_category && redirect_to_first_descendant_category
+    find_category
+    apply_redirecting && return
     @view_mode = get_view_mode_setting(@category)
     @search = prepare_category_search
 
@@ -66,6 +63,7 @@ class StoreController < BaseStoreController
   # GET /category/:category_id/order
   def show_category_order
     find_category
+    apply_redirecting && return
     @search = prepare_category_search
 
     respond_to do |format|
@@ -152,6 +150,7 @@ class StoreController < BaseStoreController
   # Same as #show_category but in the context of a page.
   def show_category_as_page
     @category = @page.resource
+    apply_redirecting && return
     @view_mode = get_view_mode_setting(@category)
     @search = prepare_category_search
 
@@ -341,14 +340,15 @@ class StoreController < BaseStoreController
       true
     end
 
-    # If the current category is empty and has filtering disabled,
+    # If the current category has redirecting enabled and no visible products,
     # redirect to its first descendant category, if any.
-    def redirect_to_first_descendant_category
-      if @category.products.visible.empty? && !@category.filtering
+    def apply_redirecting
+      if @category.redirecting? && @category.products.visible.empty?
         if first_child = @category.children.live.first
           return redirect_to show_category_path(first_child)
         end
       end
+      false
     end
 
     # Find department by friendly id in `department_id`, including history.

@@ -4,7 +4,8 @@
       = f.search_field :keyword, placeholder: t('.keyword'), class: 'form-control'
       %span.form-control-feedback= icon('search')
     %ul.nav
-      = render partial: 'categories/filter_menu', object: @category, as: :category, locals: {selected: @search.options['categories']}
+      - if @category.nesting?
+        = render partial: 'categories/filter_menu', object: @category, as: :category, locals: {selected: @search.options['categories']}
       = render partial: 'tags/filter_menu', object: current_store.tags.searchable, as: :tags, locals: {selected: @search.options['tags']}
       - current_store.searchable_properties.each do |property|
         = render partial: 'properties/filter_menu', object: property, as: :property, locals: {param: property.sluggify, values: property.values_for(@category.self_and_maybe_descendants), selected: @search.options[property.sluggify]}

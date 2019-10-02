@@ -189,6 +189,8 @@ en:
         subtitle: Subtitle
         product_scope: Product sorting
         filtering: Product filtering
+        nesting: Include subcategories
+        redirecting: Skip empty category
         view_mode: Default view
       column:
         alignment: Vertical alignment

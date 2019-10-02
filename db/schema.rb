@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_124238) do
+ActiveRecord::Schema.define(version: 2019_10_02_103142) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2019_09_30_124238) do
     t.string "slug", null: false
     t.string "product_scope"
     t.boolean "filtering", default: false, null: false
+    t.boolean "nesting", default: true, null: false
+    t.boolean "redirecting", default: false, null: false
     t.string "view_mode", default: "product-grid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
