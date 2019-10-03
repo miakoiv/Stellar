@@ -10,23 +10,23 @@ xml.order do
   xml.shippingDate @order.shipping_at
 
   xml.customer do
-    xml.company @order.shipping_address.company
-    xml.name @order.shipping_address.name
-    xml.contactPerson @order.shipping_address.name
+    xml.company @order.shipping_address&.company
+    xml.name @order.shipping_address&.name
+    xml.contactPerson @order.shipping_address&.name
 
     xml.billing do
-      xml.address @order.billing_address.address1
-      xml.postalcode @order.billing_address.postalcode
-      xml.city @order.billing_address.city
-      xml.country @order.billing_address.country_code
+      xml.address @order.billing_address&.address1
+      xml.postalcode @order.billing_address&.postalcode
+      xml.city @order.billing_address&.city
+      xml.country @order.billing_address&.country_code
       xml.vatNumber @order.vat_number
     end
 
     xml.shipping do
-      xml.address @order.shipping_address.address1
-      xml.postalcode @order.shipping_address.postalcode
-      xml.city @order.shipping_address.city
-      xml.country @order.shipping_address.country_code
+      xml.address @order.shipping_address&.address1
+      xml.postalcode @order.shipping_address&.postalcode
+      xml.city @order.shipping_address&.city
+      xml.country @order.shipping_address&.country_code
     end
   end
 

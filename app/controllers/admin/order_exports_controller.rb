@@ -1,7 +1,6 @@
 #
-# This controller only handles a single task: rendering orders
-# in XML format using Builder. No routes point to this controller,
-# hence rendering happens by calling #render.
+# This controller only handles a single task: rendering orders in XML format using Builder.
+# OrderExportJob objects call #render to render the show action.
 #
 class Admin::OrderExportsController < AdminController
 

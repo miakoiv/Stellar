@@ -47,6 +47,11 @@ class Admin::OrdersController < AdminController
   def show
     authorize_action_for Order, at: current_store
     track @order
+
+    respond_to do |format|
+      format.html
+      format.xml { render 'admin/order_exports/show' }
+    end
   end
 
   # GET /admin/orders/new
