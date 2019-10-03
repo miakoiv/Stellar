@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_132726) do
+ActiveRecord::Schema.define(version: 2019_10_03_130918) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -452,13 +452,8 @@ ActiveRecord::Schema.define(version: 2019_10_02_132726) do
     t.date "installation_at"
     t.date "approved_at"
     t.date "concluded_at"
-    t.string "customer_name"
     t.string "customer_email"
-    t.string "customer_phone"
-    t.string "company_name"
-    t.string "contact_person"
     t.string "contact_email"
-    t.string "contact_phone"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
