@@ -39,6 +39,13 @@
   @include no-gutters;
 }
 
+/* Wrapper for single image declared as background image */
+.image-bg {
+  @include cover-absolute;
+  background-size: cover;
+  background-position: center;
+}
+
 
 /*
  * Section background image container and color overlay
@@ -48,12 +55,6 @@
   clip: rect(0, auto, auto, 0);
   background-color: $body-bg;
 
-  /* Wrapper for single image declared as background image */
-  .image-bg {
-    @include cover-absolute;
-    background-size: cover;
-    background-position: center center;
-  }
   &.fixed-background .image-bg {
     position: fixed;
     transform: translateZ(0);
@@ -202,6 +203,7 @@
   @include cover-absolute;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 }
 
 
@@ -253,7 +255,6 @@
 
   .segment-content-wrap {
     @include cover-absolute;
-    overflow: hidden;
   }
 }
 

@@ -201,17 +201,10 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* Feature box segments */
 .segment.feature {
-  overflow: hidden;
-
-  .segment-bg-container, .segment-content-wrap {
+  .segment-bg-container .image-bg {
     transition: all 250ms $material-easing;
   }
-
-  &:hover {
-    .segment-bg-container {
-      transform: scale(1.05);
-    }
-  }
+  &:hover .segment-bg-container .image-bg { transform: scale(1.05); }
 }
 
 /* Shopping cart */

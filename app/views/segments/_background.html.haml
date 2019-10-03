@@ -1,6 +1,7 @@
-- if segment.tapestry?
-  .segment-bg-container{style: segment.style(:backgroundColor)}
-    .segment-bg-overlay{style: segment.style(:backgroundImage)}
-- else
-  .segment-bg-container{style: segment.style(:backgroundImage)}
+.segment-bg-container
+  - if segment.tapestry?
+    .segment-bg-overlay{style: segment.style(:backgroundColor)}
+    .image-bg{style: segment.style(:backgroundImage)}
+  - else
+    .image-bg{style: segment.style(:backgroundImage)}
     .segment-bg-overlay{style: segment.style(:backgroundColor)}
