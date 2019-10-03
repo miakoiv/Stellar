@@ -23,8 +23,6 @@ $.doCheckoutPhase = (phase) ->
 
 jQuery ->
 
-  window.smoothScroll = new SmoothScroll
-
   # This callback is triggered by user submission of #checkout-form, and
   # externally by actions that create shipments or payments.
   $('#checkout-form')

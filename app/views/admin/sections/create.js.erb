@@ -4,3 +4,4 @@ $('#<%= dom_id(@section) %> > .section').addClass('active');
 $('<%= j render partial: 'admin/sections/list_item', object: @section, as: :section %>').appendTo('#section-list');
 $('#<%= dom_id(@section) %>').initialize();
 $('#section-list').sortable('refresh');
+window.smoothScroll.animateScroll($('#<%= dom_id(@section) %>')[0], null, {header: '#main-nav', speed: 300, updateURL: false});

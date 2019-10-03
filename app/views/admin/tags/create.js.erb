@@ -5,5 +5,4 @@ $('#<%= dom_id(@tag) %>').addClass('active');
 $('#tag-form').html(
   '<%= j render partial: 'admin/tags/edit' %>'
 );
-var scroll = new SmoothScroll('#content-wrap', {header: '#main-nav'});
-scroll.animateScroll($('#<%= dom_id(@tag) %>')[0], null, {speed: 300});
+window.smoothScroll.animateScroll($('#<%= dom_id(@tag) %>')[0], null, {header: '#main-nav', speed: 300, updateURL: false});

@@ -16,8 +16,7 @@
           = render partial: 'edit'
           :coffee
             $('##{dom_id(@page)}').closest('.dd-item').addClass 'active'
-            scroll = new SmoothScroll '#content-wrap', header: '#main-nav'
-            scroll.animateScroll $('##{dom_id(@page)}')[0], null, speed: 300
+            window.smoothScroll.animateScroll $('##{dom_id(@page)}')[0], null, {header: '#main-nav', speed: 300, updateURL: false}
 
 :coffee
   $('.quick-edit-panel').stick_in_parent
