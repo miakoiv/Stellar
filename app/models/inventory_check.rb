@@ -53,6 +53,18 @@ class InventoryCheck < ApplicationRecord
     concluded_at.present?
   end
 
+  def invoice_params
+    {
+      inventory_id: inventory,
+      payload_gid: to_global_id
+    }
+  end
+
+  # Converts inventory check items to a list of argument hashes that can be given to Order#insert.
+  def payload_contents
+    inventory_check_items.for_payload.map(&:as_payload)
+  end
+
   def to_csv
     attributes = %w{product_code product_title product_subtitle lot_code expires_at was_on_hand current difference}
     CSV.generate(
@@ -69,6 +81,10 @@ class InventoryCheck < ApplicationRecord
   def appearance
     return nil if concluded?
     complete? ? 'info text-info' : 'warning text-warning'
+  end
+
+  def label
+    "%s %s" % [self.class.model_name.human, id]
   end
 
   def life_pro_tip

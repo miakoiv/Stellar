@@ -196,6 +196,7 @@ fi:
       show:
         complete: Valmista
         resolve: Selvitä
+        invoice: Laskuta
         print_inventory_check_report: Tulosta raportti
         export_csv: Vie CSV
       resolve:

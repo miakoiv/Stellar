@@ -20,7 +20,7 @@ class InventoryCheckItem < ApplicationRecord
   default_scope { order('updated_at DESC, id DESC') }
   scope :mismatching, -> { where.not(difference: 0) }
   scope :pending, -> { where(adjustment: nil) }
-  scope :for_billing, -> { pending.where(arel_table[:difference].lt(0)) }
+  scope :for_payload, -> { pending.where(arel_table[:difference].lt(0)) }
 
   #---
   validates :lot_code, presence: true
@@ -68,6 +68,19 @@ class InventoryCheckItem < ApplicationRecord
   # eventually change.
   def was_on_hand
     current - difference
+  end
+
+  # This inventory check item formatted as payload content. Note that the amount
+  # is the amount that needs to be invoiced and shipped to ultimately correct
+  # the stock for this inventory lot.
+  def as_payload
+    {
+      product: product,
+      amount: -amount,
+      options: {
+        lot_code: lot_code
+      }
+    }
   end
 
   # Approves the required adjustment to inventory
