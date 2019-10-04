@@ -51,6 +51,7 @@ body {
   flex: 1 0 auto;
   position: relative;
   width: 100%;
+  @include flex(column);
   padding-top: $main-nav-height;
   overflow: hidden;
 }

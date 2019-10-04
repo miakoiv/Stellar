@@ -216,14 +216,18 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 /*
  * Storefront and content wrappers
  */
-#store-wrap { }
+#store-wrap {
+  flex-grow: 1;
+  background-color: $body-tone-bg;
+}
 #categories-wrap { display: none; }
 #products-wrap {
   @extend .container;
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: $body-bg;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.333);
 }
-#product-detail-wrap { background-color: $body-tone-bg; }
 
 /* Product view context */
 #products-wrap .context {
@@ -884,6 +888,7 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
   @extend .container;
   position: relative;
   background-color: $body-bg;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.333);
 }
 .product-detail-placeholder {
   min-height: 795px;
