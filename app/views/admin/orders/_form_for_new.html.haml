@@ -11,6 +11,7 @@
         %hr
         %fieldset.for-shipping-refresh.for-order-type-refresh
           = f.select :order_type_id, @order.billing_group.outgoing_order_types.map { |o| [o.to_s, o.id] }
+        %fieldset.for-billing-refresh.for-shipping-refresh.for-order-type-refresh
           = f.select :inventory_id, @order.billing_group.available_inventories.map { |i| [i.to_s, i.id] }
           = f.hidden_field :payload_gid
           - if @order.payload.present?
