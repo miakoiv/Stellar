@@ -29,7 +29,7 @@
               = f.form_group do
                 = f.check_box :separate_shipping_address
         - if @order.has_shipping?
-          #shipping-address.collapse{class: @order.separate_shipping_address && 'in'}
+          #shipping-address.collapse{class: @order.shipping_address_required? && 'in'}
             %fieldset
               = render partial: 'addresses/form_fields', locals: {type: :shipping, f: f}
 
