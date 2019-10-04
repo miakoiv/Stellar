@@ -5,14 +5,6 @@ class Order < ApplicationRecord
     Order.human_attribute_value(:status, :incomplete)
   end
 
-  # CSS class based on order status.
-  def appearance
-    return 'text-muted' if incomplete? || cancelled?
-    return nil if concluded?
-    return 'text-danger' if current?
-    fully_shipped? ? 'text-warning' : 'warning text-warning'
-  end
-
   def life_pro_tip
     return [:info, '.cancelled'] if cancelled?
     return [:info, '.concluded'] if concluded?
@@ -37,6 +29,18 @@ class Order < ApplicationRecord
     return nil if concluded?
     return 'question-circle' if current?
     fully_shipped? && 'exclamation-circle' || 'truck'
+  end
+
+  # CSS class based on order status.
+  def appearance
+    return 'text-muted' if incomplete? || cancelled?
+    return nil if concluded?
+    return 'text-danger' if current?
+    fully_shipped? ? 'text-warning' : 'warning text-warning'
+  end
+
+  def label
+    "%s %s" % [self.class.model_name.human, to_s]
   end
 
   def as_json(options = {})
