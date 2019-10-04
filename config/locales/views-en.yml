@@ -254,11 +254,13 @@ en:
         order_meta: Customer selection and order settings
         order_meta_help: Select these groups first to pick billing and shipping addresses
         customer: Customer information
+        has_payload: Source for order contents
       row:
         preview: Approve…
         review: Conclude…
       show:
         forward: Forward to cart
+        replicate: Copy
         print_delivery_note: Print delivery note
         shipped_items: Shipment contents
       search:

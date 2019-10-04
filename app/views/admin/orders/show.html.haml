@@ -9,6 +9,8 @@
       = link_to forward_admin_order_path(@order), class: 'btn btn-danger' do
         = icon('share', t('.forward'))
     - if @order.complete?
+      = link_to new_admin_order_path(order: @order.replicate_params), class: 'btn btn-default' do
+        = icon('clone', t('.replicate'))
       = link_to icon('print', t('.print_delivery_note')), '#print', class: 'btn btn-default'
 
   %h1

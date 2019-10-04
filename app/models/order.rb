@@ -287,6 +287,18 @@ class Order < ApplicationRecord
     }.sum + adjustments_sans_tax
   end
 
+  # Collected attributes to use as params to replicate the order with
+  # the same workflow and payload.
+  def replicate_params
+    {
+      payload_gid: to_global_id,
+      billing_group_id: billing_group,
+      shipping_group_id: shipping_group,
+      order_type_id: order_type,
+      inventory_id: inventory
+    }
+  end
+
   # Collects relevant information about this order for reporting.
   def report_options
     {

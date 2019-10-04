@@ -7,6 +7,11 @@ class Order < ApplicationRecord
   # If nil, the store doesn't keep stock.
   belongs_to :inventory, optional: true
 
+  # The payload_gid attribute holds a global ID to an object that supplies
+  # the contents of the order on creation. The payload object must
+  # respond to #payload_contents. See below.
+  attr_accessor :payload_gid
+
   # Inserts amount of product to this order in the context of given
   # group. Options may include a parent item for grouping the order items,
   # and a specific lot code.
@@ -134,6 +139,25 @@ class Order < ApplicationRecord
       separate_shipping_address: separate_shipping_address,
       notes: notes
     )
+  end
+
+  # Resolves the payload_gid into actual record.
+  def payload
+    payload_gid.present? && GlobalID::Locator.locate(payload_gid)
+  end
+
+  # Adds the order payload to the order as order items using #insert.
+  def apply_payload!
+    transaction do
+      payload.payload_contents.each do |item|
+        insert(item[:product], item[:amount], billing_group, item[:options])
+      end
+    end
+  end
+
+  # Converts order items to a list of argument hashes that can be given to Order#insert.
+  def payload_contents
+    order_items.top_level.real.map(&:as_payload)
   end
 
   # Coalesces items in this order into a hash by product vendor.

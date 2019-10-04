@@ -261,11 +261,13 @@ fi:
         order_meta: Asiakkaan valinta ja tilauksen asetukset
         order_meta_help: Valitse nämä ryhmät ensin poimiaksesi laskutus- ja toimitusosoitteet
         customer: Asiakkaan tiedot
+        has_payload: Lähdetieto tilauksen sisällölle
       row:
         preview: Vahvista…
         review: Päätä…
       show:
         forward: Välitä ostoskoriin
+        replicate: Kopioi
         print_delivery_note: Tulosta lähete
         shipped_items: Toimitetut tuotteet
       search:

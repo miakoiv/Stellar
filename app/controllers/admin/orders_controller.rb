@@ -85,6 +85,7 @@ class Admin::OrdersController < AdminController
 
     respond_to do |format|
       if @order.save
+        @order.apply_payload! if @order.payload.present?
         track @order
 
         format.html { redirect_to edit_admin_order_path(@order), notice: t('.notice', order: @order) }
@@ -185,7 +186,7 @@ class Admin::OrdersController < AdminController
     def order_params
       params.fetch(:order, {}).permit(
         :user_id, :billing_group_id, :shipping_group_id,
-        :order_type_id, :inventory_id,
+        :order_type_id, :inventory_id, :payload_gid,
         :completed_at, :ordered_at, :shipping_at, :installation_at,
         :approved_at, :concluded_at, :cancelled_at,
         :vat_number, :external_number, :your_reference, :our_reference,

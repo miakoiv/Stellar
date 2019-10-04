@@ -221,6 +221,18 @@ class OrderItem < ApplicationRecord
     amount - loaded
   end
 
+  # This order item formatted as payload content, containing attributes
+  # that can be given to Order#insert. See Order#apply_payload!
+  def as_payload
+    {
+      product: product,
+      amount: amount,
+      options: {
+        additional_info: additional_info
+      }
+    }
+  end
+
   # Date used in reports is the completion date of the order.
   def report_date
     order.completed_at.to_date

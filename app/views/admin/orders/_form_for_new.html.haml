@@ -12,6 +12,12 @@
         %fieldset.for-shipping-refresh.for-order-type-refresh
           = f.select :order_type_id, @order.billing_group.outgoing_order_types.map { |o| [o.to_s, o.id] }
           = f.select :inventory_id, @order.billing_group.available_inventories.map { |i| [i.to_s, i.id] }
+          = f.hidden_field :payload_gid
+          - if @order.payload.present?
+            %hr
+            .form-group
+              %label.control-label= t('.has_payload')
+              %p.form-control-static= bootstrap_label(@order.payload, appearance: 'primary')
   .col-lg-6.col-lg-offset-1
     .panel.panel-default
       .panel-heading
