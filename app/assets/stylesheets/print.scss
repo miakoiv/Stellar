@@ -32,7 +32,10 @@
     line-height: 1.1;
   }
 
+  #side-nav { display: none; }
+
   #content-wrap {
+    display: block;
     flex: none;
     position: static;
     padding-top: 0 !important;
