@@ -2,7 +2,7 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :customer_email
+        = f.email_field :customer_email
       - if @order.has_shipping?
         %fieldset.warning{disabled: locked}
           .row

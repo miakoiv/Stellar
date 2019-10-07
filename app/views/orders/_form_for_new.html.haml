@@ -21,8 +21,8 @@
         %h4.panel-title= t('.customer')
       .panel-body
         %fieldset.for-billing-refresh.for-shipping-refresh.for-order-type-refresh
-          = f.text_field :customer_email, required: true
-          = f.text_field :contact_email
+          = f.email_field :customer_email, required: true, autocomplete: 'billing email'
+          = f.email_field :contact_email, autocomplete: 'shipping email'
         - if @order.has_billing?
           %fieldset
             = render partial: 'addresses/form_fields', locals: {type: :billing, f: f}

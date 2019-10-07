@@ -2,32 +2,32 @@
   %fieldset
     %legend= t(type, scope: '.admin.addresses.labels')
     .form-group.has-icon
-      = ff.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control'
+      = ff.text_field_without_bootstrap :company, placeholder: col(Address, :company), class: 'form-control', autocomplete: "#{type} organization"
       = icon('building-o')
     .row
       .col-sm-7
         .form-group.has-icon
-          = ff.text_field_without_bootstrap :name, placeholder: col(Address, :name), class: 'form-control'
+          = ff.text_field_without_bootstrap :name, placeholder: col(Address, :name), class: 'form-control', autocomplete: "#{type} name"
           = icon('user')
       .col-sm-5
         .form-group.has-icon
-          = ff.phone_field_without_bootstrap :phone, placeholder: col(Address, :phone), class: 'form-control'
+          = ff.telephone_field_without_bootstrap :phone, placeholder: col(Address, :phone), class: 'form-control', autocomplete: "#{type} mobile tel"
           = icon('phone')
     .form-group.has-icon
       = ff.text_field_without_bootstrap :department, placeholder: col(Address, :department), class: 'form-control'
       = icon('sitemap')
     .form-group.has-icon
-      = ff.text_field_without_bootstrap :address1, placeholder: col(Address, :address1), class: 'form-control'
+      = ff.text_field_without_bootstrap :address1, placeholder: col(Address, :address1), class: 'form-control', autocomplete: "#{type} address-line1"
       = icon('address-card-o')
     .form-group.has-icon
-      = ff.text_field_without_bootstrap :address2, placeholder: col(Address, :address2), class: 'form-control'
+      = ff.text_field_without_bootstrap :address2, placeholder: col(Address, :address2), class: 'form-control', autocomplete: "#{type} address-line2"
       = icon('address-card-o')
     .row
       .col-sm-4
         .form-group.has-icon
-          = ff.text_field_without_bootstrap :postalcode, placeholder: col(Address, :postalcode), class: 'form-control'
+          = ff.text_field_without_bootstrap :postalcode, placeholder: col(Address, :postalcode), class: 'form-control', autocomplete: "#{type} postal-code"
           = icon('map-marker')
       .col-sm-4
-        = ff.text_field :city, hide_label: true, placeholder: col(Address, :city)
+        = ff.text_field :city, hide_label: true, placeholder: col(Address, :city), autocomplete: "#{type} address-level2"
       .col-sm-4
-        = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {required: true, class: 'selectize'}
+        = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {required: true, class: 'selectize', autocomplete: "#{type} country"}

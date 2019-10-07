@@ -1,9 +1,9 @@
 = bootstrap_form_for @order, remote: true, data: {type: 'json'}, html: {id: 'checkout-form', class: 'collapse in'} do |f|
   = f.hidden_field :order_type_id
   %fieldset
-    = f.email_field :customer_email, hide_label: true, placeholder: col(Order, :customer_email), required: true
+    = f.email_field :customer_email, hide_label: true, placeholder: col(Order, :customer_email), required: true, autocomplete: 'billing email'
     - if current_store.b2b_sales?
-      = f.email_field :contact_email, hide_label: true, placeholder: col(Order, :contact_email)
+      = f.email_field :contact_email, hide_label: true, placeholder: col(Order, :contact_email), autocomplete: 'shipping email'
 
   - if @order.has_billing?
     #billing-address

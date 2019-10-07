@@ -27,11 +27,11 @@
         %fieldset.for-billing-refresh.for-shipping-refresh.for-order-type-refresh
           .form-group.has-icon
             %label.control-label= col(Order, :customer_email)
-            = f.text_field_without_bootstrap :customer_email, class: 'form-control', required: true
+            = f.email_field_without_bootstrap :customer_email, class: 'form-control', required: true, autocomplete: 'billing email'
             = icon('envelope-o')
           .form-group.has-icon
             %label.control-label= col(Order, :contact_email)
-            = f.text_field_without_bootstrap :contact_email, class: 'form-control'
+            = f.email_field_without_bootstrap :contact_email, class: 'form-control', autocomplete: 'shipping email'
             = icon('envelope-o')
         - if @order.has_billing?
           %fieldset

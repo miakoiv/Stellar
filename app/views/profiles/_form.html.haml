@@ -2,9 +2,9 @@
   .panel.panel-default
     .panel-body
       %fieldset{disabled: locked}
-        = f.text_field :email, required: true
-        = f.text_field :name, required: true
-        = f.telephone_field :phone
+        = f.email_field :email, required: true, autocomplete: 'email'
+        = f.text_field :name, required: true, autocomplete: 'name'
+        = f.telephone_field :phone, autocomplete: 'mobile tel'
         = f.select :locale, Store.locale_options, {include_blank: true}, {class: 'selectize'}
       - unless locked
         %fieldset.actions

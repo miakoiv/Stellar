@@ -16,8 +16,8 @@
         %fieldset{disabled: true}
           = f.text_field :completed_at, value: l(@order.completed_at.to_date, format: :iso)
       %fieldset{disabled: locked}
-        = f.text_field :customer_email, required: true
-        = f.text_field :contact_email
+        = f.email_field :customer_email, required: true, autocomplete: 'billing email'
+        = f.email_field :contact_email, autocomplete: 'shipping email'
       %fieldset.info{disabled: locked}
         - if @order.store.b2b_sales? && @order.has_shipping?
           .row

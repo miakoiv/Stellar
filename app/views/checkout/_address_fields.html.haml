@@ -2,22 +2,22 @@
   %fieldset
     %legend= t(type, scope: '.checkout.addresses.labels')
     - if b2b
-      = ff.text_field :company, hide_label: true, placeholder: col(Address, :company)
+      = ff.text_field :company, hide_label: true, placeholder: col(Address, :company), autocomplete: "#{type} organization"
     .row
       .col-sm-8
-        = ff.text_field :name, hide_label: true, placeholder: col(Address, :name), class: 'may-be-required', required: required
+        = ff.text_field :name, hide_label: true, placeholder: col(Address, :name), class: 'may-be-required', required: required, autocomplete: "#{type} name"
       .col-sm-4
-        = ff.phone_field :phone, hide_label: true, placeholder: col(Address, :phone)
+        = ff.telephone_field :phone, hide_label: true, placeholder: col(Address, :phone), autocomplete: "#{type} mobile tel"
     - unless b2b
-      = ff.text_field :company, hide_label: true, placeholder: col(Address, :company)
+      = ff.text_field :company, hide_label: true, placeholder: col(Address, :company), autocomplete: "#{type} organization"
     - if b2b
       = ff.text_field :department, hide_label: true, placeholder: col(Address, :department)
-    = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1), class: 'may-be-required', required: required
-    = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2)
+    = ff.text_field :address1, hide_label: true, placeholder: col(Address, :address1), class: 'may-be-required', required: required, autocomplete: "#{type} address-line1"
+    = ff.text_field :address2, hide_label: true, placeholder: col(Address, :address2), autocomplete: "#{type} address-line2"
     .row
       .col-xs-6.col-sm-4
-        = ff.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), class: 'may-be-required', required: required
+        = ff.text_field :postalcode, hide_label: true, placeholder: col(Address, :postalcode), class: 'may-be-required', required: required, autocomplete: "#{type} postal-code"
       .col-xs-6.col-sm-4
-        = ff.text_field :city, hide_label: true, placeholder: col(Address, :city), class: 'may-be-required', required: required
+        = ff.text_field :city, hide_label: true, placeholder: col(Address, :city), class: 'may-be-required', required: required, autocomplete: "#{type} address-level2"
       .col-xs-12.col-sm-4
-        = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {class: 'may-be-required', required: required, class: 'selectize'}
+        = ff.select :country_code, Store.country_options, {hide_label: true, prompt: true}, {class: 'may-be-required selectize', required: required, autocomplete: "#{type} country"}
