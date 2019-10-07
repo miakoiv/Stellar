@@ -91,7 +91,7 @@ class Segment < ApplicationRecord
 
   SLIDE_EFFECTS = %w{slide fade cube coverflow flip}.freeze
 
-  CONTENT_CLASSES = %w{OikotieAsunnot RSS}.freeze
+  CONTENT_CLASSES = %w{OikotieAsunnot ArticleFeed HeadlineFeed}.freeze
 
   #---
   enum template: {

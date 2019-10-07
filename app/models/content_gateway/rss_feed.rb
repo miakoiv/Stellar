@@ -1,7 +1,7 @@
 #
-# ContentGateway::RSS implements a content gateway interface
-# to any RSS-formatted feed. To use the gateway, initialize
-# a ContentGateway::RSS object with a store argument.
+# ContentGateway::RssFeed implements a content gateway interface
+# to any RSS-formatted feed. To use the gateway, initialize an object
+# from one of its subclasses, ArticleFeed or HeadlineFeed.
 #
 # Calling the feed method will load the feed from the URL
 # given in params, and return a set of ContentItem objects.
@@ -9,7 +9,7 @@
 require 'rss'
 
 module ContentGateway
-  class RSS
+  class RssFeed
     def initialize(store)
       @store = store
     end
@@ -25,14 +25,8 @@ module ContentGateway
     end
 
     private
-      def build_content_item(item)
-        ContentItem::Article.new(
-          title: item.title,
-          date: item.pubDate,
-          categories: item.categories.map(&:content),
-          content: item.content_encoded,
-          link: item.link
-        )
+      # Implementations can be found in subclasses of RssFeed.
+      def build_content_item
       end
   end
 end
