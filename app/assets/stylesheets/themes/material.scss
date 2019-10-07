@@ -1338,8 +1338,6 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
       .date { flex-grow: 1; }
     }
-    h2 {
-    }
   }
   .body {
     margin-bottom: $line-height-computed;
@@ -1367,6 +1365,26 @@ $material-easing: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
     }
   }
   + .article { margin-top: 20px; }
+}
+.content-feed .headline {
+  padding-bottom: (($line-height-computed / 4) - 1);
+  margin: 0 0 $line-height-computed / 2;
+  border-bottom: 1px solid $page-header-border-color;
+
+  .date {
+    font-size: $font-size-small;
+  }
+  h4 {
+    margin-top: 0;
+
+    &:after {
+      @include font-awesome;
+      content: '\f08e';
+      margin-left: 5px;
+      font-size: $font-size-small;
+      vertical-align: super;
+    }
+  }
 }
 .content-feed .card {
   transition: box-shadow 200ms $material-easing;
