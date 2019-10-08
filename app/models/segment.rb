@@ -200,7 +200,7 @@ class Segment < ApplicationRecord
   end
 
   def self.content_class_options
-    CONTENT_CLASSES
+    CONTENT_CLASSES.map { |c| ["ContentGateway::#{c}".constantize.model_name.human, c] }
   end
 
   #---

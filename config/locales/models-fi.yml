@@ -1,6 +1,9 @@
 fi:
   activemodel:
     models:
+      content_gateway/oikotie_asunnot: Oikotie Asunnot
+      content_gateway/article_feed: ʀꜱꜱ artikkelisyöte
+      content_gateway/headline_feed: ʀꜱꜱ otsikkosyöte
       payment_gateway/none: "[Ulkopuolinen laskutus]"
       payment_gateway/paybyway: Bambora PayForm
       shipping_gateway/customer_pickup: asiakas noutaa

@@ -8,8 +8,7 @@ class ContentController < ApplicationController
     @id = p[:id]
     store = Store.find(p[:store])
     paginates_per = p[:items].to_i
-    content_class = p[:contentClass].classify
-    gateway_class = "ContentGateway::#{content_class}".constantize
+    gateway_class = "ContentGateway::#{p[:contentClass]}".constantize
     items, count = gateway_class.new(store).feed(p)
     @items = Kaminari.paginate_array(items, total_count: count).page(p[:page]).per(paginates_per)
 

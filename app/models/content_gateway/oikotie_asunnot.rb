@@ -14,6 +14,7 @@
 module ContentGateway
 
   class OikotieAsunnot
+    extend ActiveModel::Translation
     include HTTParty
     base_uri Rails.configuration.x.oikotie_asunnot.api_uri
     headers 'Content-Type' => 'application/json'

@@ -10,6 +10,8 @@ require 'rss'
 
 module ContentGateway
   class RssFeed
+    extend ActiveModel::Translation
+
     def initialize(store)
       @store = store
     end

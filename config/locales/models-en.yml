@@ -1,6 +1,9 @@
 en:
   activemodel:
     models:
+      content_gateway/oikotie_asunnot: Oikotie Asunnot
+      content_gateway/article_feed: ʀꜱꜱ article feed
+      content_gateway/headline_feed: ʀꜱꜱ headline feed
       payment_gateway/none: "[External billing]"
       payment_gateway/paybyway: Bambora PayForm
       shipping_gateway/customer_pickup: customer pick-up
