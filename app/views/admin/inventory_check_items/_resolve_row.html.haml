@@ -1,9 +1,7 @@
 %tr[inventory_check_item]
   %td= product_header inventory_check_item
   %td= inventory_check_item.lot_code
-  %td.text-right
-    - if inventory_check_item.stocked?
-      = inventory_check_item.on_hand
+  %td.text-right= inventory_check_item.was_on_hand
   %td.text-right= inventory_check_item.current
   %td.text-right
     %strong= number_with_precision_and_sign inventory_check_item.difference, precision: 0
