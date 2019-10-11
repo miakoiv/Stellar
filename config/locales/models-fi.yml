@@ -445,6 +445,7 @@ fi:
         shipping_method_ids: Sallitut toimitustavat
         mass: Pakkauksen paino
         dimensions: Pakkauksen mitat
+        safety_stock: Varmuusvarasto
         infinite_stock: Loppumaton saldo
         lead_time: Toimitusaika
         out_of_stock: Loppuunmyyty

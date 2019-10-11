@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_03_131942) do
+ActiveRecord::Schema.define(version: 2019_10_11_074032) do
 
   create_table "activities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci", force: :cascade do |t|
     t.integer "store_id", null: false
@@ -581,6 +581,7 @@ ActiveRecord::Schema.define(version: 2019_10_03_131942) do
     t.integer "dimension_u"
     t.integer "dimension_v"
     t.integer "dimension_w"
+    t.integer "safety_stock", default: 0, null: false
     t.boolean "infinite_stock", default: false, null: false
     t.string "lead_time"
     t.string "additional_info_prompt"

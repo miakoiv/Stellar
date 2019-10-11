@@ -38,8 +38,8 @@ module StockGateway
       end
     end
 
-    # Queries the API for the stock level of `product`.
-    # Returns an integer, or 0 if the query fails.
+    # Queries the API for the stock level of `product`. Decrements the stock quantity
+    # by the safety stock setting of the product. Returns 0 if the query fails.
     def stock(product)
       id = product.customer_code.presence || product.code
       begin
@@ -47,7 +47,7 @@ module StockGateway
           headers: headers,
           timeout: 10
         ).parsed_response
-        quantity = response['stock_sales'].to_i - THRESHOLD
+        quantity = response['stock_sales'].to_i - product.safety_stock
         return quantity < 0 ? 0 : quantity
       rescue => e
         return 0
