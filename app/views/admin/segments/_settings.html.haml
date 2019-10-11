@@ -1,23 +1,26 @@
-= tab_set 'segment-settings' do
-  = nav_tab 'segment-main', segment, default: true
-  = nav_tab 'segment-layout', t('.layout')
-  = nav_tab 'segment-design', t('.design')
-  - if segment.has_pictures?
-    = nav_tab 'segment-pictures', t('.pictures')
-  = nav_tab 'segment-color', t('.color')
-  = nav_tab 'segment-borders', t('.borders')
+.modal-header
+  %button.close{data: {dismiss: 'modal'}}= icon('close')
+  = tab_set 'segment-settings' do
+    = nav_tab 'segment-main', segment, default: true
+    = nav_tab 'segment-layout', t('.layout')
+    = nav_tab 'segment-design', t('.design')
+    - if segment.has_pictures?
+      = nav_tab 'segment-pictures', t('.pictures')
+    = nav_tab 'segment-color', t('.color')
+    = nav_tab 'segment-borders', t('.borders')
 
-.tab-content
-  = tab_pane 'segment-main', default: true do
-    = render partial: 'admin/segments/panels/main', object: segment, as: :segment
-  = tab_pane 'segment-layout' do
-    = render partial: 'admin/segments/panels/layout', object: segment, as: :segment
-  = tab_pane 'segment-design' do
-    = render partial: 'admin/segments/panels/design', object: segment, as: :segment
-  - if segment.has_pictures?
-    = tab_pane 'segment-pictures' do
-      = render partial: 'admin/segments/panels/pictures', object: segment, as: :segment
-  = tab_pane 'segment-color' do
-    = render partial: 'admin/segments/panels/color', object: segment, as: :segment
-  = tab_pane 'segment-borders' do
-    = render partial: 'admin/segments/panels/borders', object: segment, as: :segment
+.modal-body
+  .tab-content
+    = tab_pane 'segment-main', default: true do
+      = render partial: 'admin/segments/panels/main', object: segment, as: :segment
+    = tab_pane 'segment-layout' do
+      = render partial: 'admin/segments/panels/layout', object: segment, as: :segment
+    = tab_pane 'segment-design' do
+      = render partial: 'admin/segments/panels/design', object: segment, as: :segment
+    - if segment.has_pictures?
+      = tab_pane 'segment-pictures' do
+        = render partial: 'admin/segments/panels/pictures', object: segment, as: :segment
+    = tab_pane 'segment-color' do
+      = render partial: 'admin/segments/panels/color', object: segment, as: :segment
+    = tab_pane 'segment-borders' do
+      = render partial: 'admin/segments/panels/borders', object: segment, as: :segment

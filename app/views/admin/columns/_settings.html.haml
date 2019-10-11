@@ -1,12 +1,15 @@
-= tab_set 'column-settings' do
-  = nav_tab 'column-layout', t('.layout'), default: true
-  = nav_tab 'column-pictures', t('.pictures')
-  = nav_tab 'column-color', t('.color')
+.modal-header
+  %button.close{data: {dismiss: 'modal'}}= icon('close')
+  = tab_set 'column-settings' do
+    = nav_tab 'column-layout', t('.layout'), default: true
+    = nav_tab 'column-pictures', t('.pictures')
+    = nav_tab 'column-color', t('.color')
 
-.tab-content
-  = tab_pane 'column-layout', default: true do
-    = render partial: 'admin/columns/panels/layout', object: column, as: :column
-  = tab_pane 'column-pictures' do
-    = render partial: 'admin/columns/panels/pictures', object: column, as: :column
-  = tab_pane 'column-color' do
-    = render partial: 'admin/columns/panels/color', object: column, as: :column
+.modal-body
+  .tab-content
+    = tab_pane 'column-layout', default: true do
+      = render partial: 'admin/columns/panels/layout', object: column, as: :column
+    = tab_pane 'column-pictures' do
+      = render partial: 'admin/columns/panels/pictures', object: column, as: :column
+    = tab_pane 'column-color' do
+      = render partial: 'admin/columns/panels/color', object: column, as: :column

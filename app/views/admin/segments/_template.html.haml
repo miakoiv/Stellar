@@ -1,9 +1,13 @@
-.template-selector
-  - Segment.template_options.each do |title, template|
-    %button.btn.btn-default{class: segment.template == template && 'active', data: {url: admin_segment_path(segment), template: template}}
-      %figure
-        = image_tag "templates/#{template}.svg"
-        %figcaption= title
+.modal-header
+  %button.close{data: {dismiss: 'modal'}}= icon('close')
+
+.modal-body
+  .template-selector
+    - Segment.template_options.each do |title, template|
+      %button.btn.btn-default{class: segment.template == template && 'active', data: {url: admin_segment_path(segment), template: template}}
+        %figure
+          = image_tag "templates/#{template}.svg"
+          %figcaption= title
 
 :coffee
   $('.template-selector > .btn').on 'click', (e) ->

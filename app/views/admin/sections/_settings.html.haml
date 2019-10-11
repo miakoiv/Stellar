@@ -1,15 +1,18 @@
-= tab_set 'section-settings' do
-  = nav_tab 'section-layout', t('.layout'), default: true
-  = nav_tab 'section-pictures', t('.pictures')
-  = nav_tab 'section-videos', t('.videos')
-  = nav_tab 'section-color', t('.color')
+.modal-header
+  %button.close{data: {dismiss: 'modal'}}= icon('close')
+  = tab_set 'section-settings' do
+    = nav_tab 'section-layout', t('.layout'), default: true
+    = nav_tab 'section-pictures', t('.pictures')
+    = nav_tab 'section-videos', t('.videos')
+    = nav_tab 'section-color', t('.color')
 
-.tab-content
-  = tab_pane 'section-layout', default: true do
-    = render partial: 'admin/sections/panels/layout', object: section, as: :section
-  = tab_pane 'section-pictures' do
-    = render partial: 'admin/sections/panels/pictures', object: section, as: :section
-  = tab_pane 'section-videos' do
-    = render partial: 'admin/sections/panels/videos', object: section, as: :section
-  = tab_pane 'section-color' do
-    = render partial: 'admin/sections/panels/color', object: section, as: :section
+.modal-body
+  .tab-content
+    = tab_pane 'section-layout', default: true do
+      = render partial: 'admin/sections/panels/layout', object: section, as: :section
+    = tab_pane 'section-pictures' do
+      = render partial: 'admin/sections/panels/pictures', object: section, as: :section
+    = tab_pane 'section-videos' do
+      = render partial: 'admin/sections/panels/videos', object: section, as: :section
+    = tab_pane 'section-color' do
+      = render partial: 'admin/sections/panels/color', object: section, as: :section
