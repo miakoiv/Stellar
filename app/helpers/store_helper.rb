@@ -43,11 +43,9 @@ module StoreHelper
   end
 
   def fancy_price_range(from, to)
-    if from == to
-      fancy_price(from)
-    else
-      capture do
-        concat fancy_price(from)
+    capture do
+      concat fancy_price(from)
+      if from != to
         concat '–'
         concat fancy_price(to)
       end
