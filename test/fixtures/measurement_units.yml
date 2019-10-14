@@ -64,7 +64,7 @@ nm:
   name: Nm
 inch:
   id: 17
-  name: \"
+  name: '"'
 kgm:
   id: 18
   name: kg/m
