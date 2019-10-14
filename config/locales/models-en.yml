@@ -420,6 +420,7 @@ en:
         shipping: Shipping
         variants: Varieties
         vendor_id: Supplier
+        sales_measure_unit_id: Sales unit of measure
         purpose: Type
         master_product_id: Variant of
         variant_ids: Variants

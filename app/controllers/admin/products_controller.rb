@@ -178,7 +178,7 @@ class Admin::ProductsController < AdminController
     def product_params
       params.require(:product).permit(
         :purpose, :master_product_id, {variant_ids: []},
-        :vendor_id, :code, :customer_code,
+        :vendor_id, :sales_measure_unit_id, :code, :customer_code,
         :title, :subtitle, :description, :overview, :memo,
         :mass, :dimension_u, :dimension_v, :dimension_w,
         :safety_stock, :infinite_stock, :lead_time, :additional_info_prompt, :shipping_notes,

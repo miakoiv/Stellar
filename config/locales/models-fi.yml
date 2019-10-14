@@ -420,6 +420,7 @@ fi:
         shipping: Toimitus
         variants: Variaatiot
         vendor_id: Tavarantoimittaja
+        sales_measure_unit_id: Myynnin mittayksikkö
         purpose: Tyyppi
         master_product_id: Varioitava tuote
         variant_ids: Variantit

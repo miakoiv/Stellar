@@ -11,6 +11,7 @@
           .badge= product.code
           .small
             = product.subtitle
+            = product.formatted_sales_measure_unit
             = icon('star') if product.primary?
     %td
       - if product.page.present?

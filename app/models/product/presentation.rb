@@ -61,6 +61,10 @@ class Product < ApplicationRecord
     retail_price.present? ? retail_price.format : ''
   end
 
+  def formatted_sales_measure_unit
+    sales_measure_unit.presence && "(#{sales_measure_unit})"
+  end
+
   private
     # Generates the description as a plain text representation of overview.
     def generate_description

@@ -40,7 +40,11 @@
 
         = tab_pane 'product-pricing' do
           %fieldset{disabled: locked}
-            = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, {incl_tax: t.included_in_retail?, rate: t.rate.to_f}] }.to_h}
+            .row
+              .col-md-6
+                = f.select :tax_category_id, current_store.tax_categories.map { |t| [t.to_s, t.id] }, {}, data: {tax_categories: current_store.tax_categories.map { |t| [t.id, {incl_tax: t.included_in_retail?, rate: t.rate.to_f}] }.to_h}
+              .col-md-6
+                = f.select :sales_measure_unit_id, MeasurementUnit.all.map { |u| [u.to_s, u.id] }, {include_blank: true}, class: 'selectize'
             - if current_group.cost?
               .row
                 .col-md-8

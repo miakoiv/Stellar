@@ -64,6 +64,9 @@ class Product < ApplicationRecord
   has_many :variants, class_name: 'Product', foreign_key: :master_product_id, inverse_of: :master_product, counter_cache: :variants_count, after_add: :associations_changed, after_remove: :associations_changed
   belongs_to :primary_variant, class_name: 'Product', optional: true
 
+  # Products have a sales measure unit if it's sold in other that pcs.
+  belongs_to :sales_measure_unit, class_name: 'MeasurementUnit', optional: true
+
   has_many :order_items
 
   # Product/component relationships in both directions. Component entries describe the connections between

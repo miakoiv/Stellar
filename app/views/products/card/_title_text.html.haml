@@ -2,4 +2,6 @@
   .code= icon('barcode', product.code, class: 'fa-lg fa-flip-horizontal')
   %h3
     = product.title
-    %span.small= product.subtitle
+    %span.small
+      = product.subtitle
+      = product.formatted_sales_measure_unit

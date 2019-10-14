@@ -8,7 +8,9 @@
       = render partial: 'products/tags', object: product, as: :product
     %h1.product-title
       = product.title
-      %span.small= product.subtitle
+      %span.small
+        = product.subtitle
+        = product.formatted_sales_measure_unit
 
 - cache [selected_group, I18n.locale, :product_detail_body, product] do
   .product-body

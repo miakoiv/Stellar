@@ -1,5 +1,7 @@
 = link_to admin_product_path(product), class: 'list-group-item' do
   .product
     %strong= product.title
-    %span.small= product.subtitle
+    %span.small
+      = product.subtitle
+      = product.formatted_sales_measure_unit
     .badge= product.code
