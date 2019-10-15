@@ -16,19 +16,23 @@ Image processing for [Paperclip](https://github.com/thoughtbot/paperclip) upload
 
 ### Installing
 
+To install Stellar Storefront on your server:
 
+1. Clone the repo
 
-```
-Give the example
-```
+  ```
+  git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+  ```
 
-And repeat
+2. Set up your environment as described in the Deployment section below
 
-```
-until finished
-```
+  You need to define at least `SECRET_KEY_BASE` and `STELLAR_DATABASE_URL`, and set `RAILS_ENV` to `production`.
 
-End with an example of getting some data out of the system or using it for a little demo
+3. Set up the database and seed data
+
+  ```
+  rails db:setup
+  ```
 
 ## Testing
 
@@ -60,9 +64,9 @@ Stellar Storefront is able to talk to various 3rd party services to do payment p
 
 `PaymentGateway` module includes classes to handle payments through an external service. Stellar currently includes one gateway, `Paybyway` that interfaces with the [Bambora Payform API](https://www.bambora.com/fi/fi/online/).
 
-`ShippingGateway` module contains classes to interface with 3rd party services for registering shipments. Some shipping gateways work locally and expect the vendor to handle shipments themselves. The `Pakettikauppa` gateway provides an interface to the [Pakettikauppa API](https://www.pakettikauppa.fi).
+`ShippingGateway` module contains classes to interface with 3rd party services for registering shipments. Some shipping gateways work locally and expect the vendor to handle shipments themselves. There are gateways for [Posti Smartship](https://www.posti.fi/en/for-businesses/improve-logistics/digital-services-and-interfaces/smartship) through the [Unifaun API](), and Pakettikauppa through the [Pakettikauppa API](https://www.pakettikauppa.fi).
 
-`ContentGateway` module provides access to external content. Currently the only implementation is for [Oikotie Asunnot](https://asunnot.oikotie.fi) to pull real estate listings into Stellar hosted pages.
+`ContentGateway` module provides access to external content. There are implementations for RSS feeds in either article or headline mode, as well as real estate listings provided by [Oikotie Asunnot](https://asunnot.oikotie.fi).
 
 Other integrations include [Tawk.to](https://www.tawk.to) and [Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial).
 
@@ -71,6 +75,7 @@ Other integrations include [Tawk.to](https://www.tawk.to) and [Google Maps](http
 * [Ruby on Rails](https://rubyonrails.org/) - version 5.2.3 (project started on 4.2)
 * [Bootstrap](https://getbootstrap.com/docs/3.4/) - version 3.4
 * [CKEditor 5](https://ckeditor.com/ckeditor-5/)
+* [FontAwesome](https://fontawesome.com/v4.7.0/) - version 4.7.0
 * [Droid Serif Font](https://www.fontsquirrel.com/fonts/droid-serif) - see [LICENSE](https://www.fontsquirrel.com/license/droid-serif)
 * [Fira Sans Font](https://www.fontsquirrel.com/fonts/fira-sans) - see [LICENSE](https://www.fontsquirrel.com/license/fira-sans)
 * [Montserrat Font](https://www.fontsquirrel.com/fonts/montserrat) - see [LICENSE](https://www.fontsquirrel.com/license/montserrat)
@@ -78,8 +83,6 @@ Other integrations include [Tawk.to](https://www.tawk.to) and [Google Maps](http
 ## Authors
 
 * [LeasIT](https://leasit.fi)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
