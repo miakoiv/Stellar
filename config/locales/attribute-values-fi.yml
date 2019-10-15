@@ -75,7 +75,7 @@ fi:
           megamenu: Megamenu
           continuous: Yhdistetyt sivut
           contentmenu: Sivumuotoinen menu
-          template: Sivupohja
+          stationary: Kirjepohja
           portal: Verkostosivu
           proxy: Jäsenkaupan sivu
           external: Ulkoinen sivu

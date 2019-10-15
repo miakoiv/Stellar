@@ -127,7 +127,7 @@ class StoreController < BaseStoreController
     authorize_action_for @page, at: current_store, for: current_group
 
     case @page.purpose.to_sym
-    when :primary, :continuous, :route, :proxy, :template
+    when :primary, :continuous, :route, :proxy, :stationary
       render :show_page
     when :category
       show_category_as_page
