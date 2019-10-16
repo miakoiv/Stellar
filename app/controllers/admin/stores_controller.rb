@@ -90,7 +90,7 @@ class Admin::StoresController < AdminController
         :csv_trade_price, :csv_retail_price, :csv_inventory_amount,
         :order_xml_path, :erp_number, :vat_number, :order_sequence,
         :theme, :main_nav_lookup, :detach_menu, :fancy_cart,
-        :cart_promotion, :favorites, :category_order, :masonry,
+        :cart_promotion, :favorites, :cookie_consent, :category_order, :masonry,
         :smtp_address, :smtp_port,
         :smtp_user_name, :smtp_password,
         :smtp_authentication, :smtp_enable_starttls_auto,

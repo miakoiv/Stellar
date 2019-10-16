@@ -1,4 +1,4 @@
-- if !user_signed_in? || guest?
+- if current_store.cookie_consent? && (!user_signed_in? || guest?)
   %script(src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false")
   :javascript
     window.cookieconsent.initialise({

@@ -640,6 +640,7 @@ en:
         fancy_cart: Modern shopping cart
         cart_promotion: Promote best sellers on shopping cart page
         favorites: Product favorites
+        cookie_consent: Ask for consent to use cookies
         category_order: Bulk order forms
         footer_page_id: Footer page
         locale: Language

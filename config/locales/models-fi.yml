@@ -640,6 +640,7 @@ fi:
         fancy_cart: Moderni ostoskori
         cart_promotion: Näytä myydyimmät ostoskorisivulla
         favorites: Tuotteiden tykkäys
+        cookie_consent: Kysy suostumus keksien käyttämiselle
         category_order: Tuotetilauslomakkeet
         footer_page_id: Alatunnistesivu
         locale: Kieli
