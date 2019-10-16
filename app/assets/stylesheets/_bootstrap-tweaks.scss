@@ -1700,8 +1700,10 @@ fieldset > legend {
 /*
  * Cookieconsent fixes
  */
-.cc_banner-wrapper { z-index: 2000000001 !important; }
-.cc_banner-wrapper .cc_container { font-family: inherit !important; }
+.cc-window {
+  z-index: 2000000001 !important;
+  font-family: inherit !important;
+}
 
 
 /*
