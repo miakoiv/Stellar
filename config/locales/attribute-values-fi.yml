@@ -71,6 +71,7 @@ fi:
           category_order: Tilauslomake tuoteryhmälle
           header: Päävalikko
           footer: Alavalikko
+          template: Sivuston malli
           dropdown: Pudotusvalikko
           megamenu: Megamenu
           continuous: Yhdistetyt sivut

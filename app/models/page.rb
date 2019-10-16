@@ -26,6 +26,7 @@ class Page < ApplicationRecord
     department: 5,      # department page with optional content
     header: 10,         # container for main navigation
     footer: 11,         # container for footer links
+    template: 12,       # container for site template pages
     dropdown: 20,       # dropdown container for other pages
     megamenu: 21,       # megamenu container for other pages
     continuous: 22,     # single page container for other pages
@@ -54,6 +55,7 @@ class Page < ApplicationRecord
     'department' => {icon: 'umbrella', appearance: 'info'},
     'header' => {icon: 'navicon'},
     'footer' => {icon: 'paragraph'},
+    'template' => {icon: 'folder-open-o', appearance: 'warning'},
     'dropdown' => {icon: 'files-o', appearance: 'primary'},
     'megamenu' => {icon: 'window-maximize', appearance: 'primary'},
     'continuous' => {icon: 'scissors', appearance: 'primary'},
@@ -83,7 +85,10 @@ class Page < ApplicationRecord
   scope :excluding, -> (page) { where.not(id: page) }
 
   # Containers for other pages. Segments target these to build navs.
-  scope :container, -> { where(purpose: [10, 11, 20, 21, 22]) }
+  scope :container, -> { where(purpose: [10, 11, 12, 20, 21, 22]) }
+
+  # Templateable pages are suitable for copying from a template container.
+  scope :templateable, -> { where(purpose: [0, 1, 20, 21, 22, 23, 42]) }
 
   # Searchable pages can appear in keyword search results.
   scope :searchable, -> { where(purpose: [1, 2, 3, 4, 5, 6, 40]) }
@@ -108,7 +113,7 @@ class Page < ApplicationRecord
   end
 
   def self.available_purposes
-    purposes.except :header, :footer
+    purposes.except :header, :footer, :template
   end
 
   def self.purpose_options
@@ -138,7 +143,7 @@ class Page < ApplicationRecord
   end
 
   def can_have_children?
-    category? || header? || footer? || dropdown? || megamenu? || continuous?
+    category? || header? || footer? || template? || dropdown? || megamenu? || continuous?
   end
 
   def can_have_content?
@@ -185,6 +190,28 @@ class Page < ApplicationRecord
       pictures.each do |picture|
         c.pictures << picture.duplicate
       end
+    end
+  end
+
+  # Makes copies of given collection of pages, including descendants, inserting
+  # them as children of this page. This is used to copy the contents of a template
+  # page to a new store. See Store#apply_theme_template!
+  def insert_collection!(collection)
+    collection.templateable.each do |template|
+      page = store.pages.create!(
+        parent: self,
+        purpose: template.purpose,
+        title: template.title,
+        live: template.live
+      )
+      template.sections.each do |section|
+        page.sections << section.duplicate
+      end
+      template.pictures.each do |picture|
+        page.pictures << picture.duplicate
+      end
+      page.save_inline_styles_recursively
+      page.insert_collection!(template.children)
     end
   end
 

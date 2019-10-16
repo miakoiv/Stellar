@@ -71,6 +71,7 @@ en:
           category_order: Order form for category
           header: Header navigation
           footer: Footer navigation
+          template: Site template
           dropdown: Dropdown menu
           megamenu: Mega menu
           continuous: Combined pages

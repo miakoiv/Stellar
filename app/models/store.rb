@@ -327,6 +327,14 @@ class Store < ApplicationRecord
     pages.find_by(id: quotation_template_id)
   end
 
+  # Applies a theme template by attempting to find a template page
+  # matching to the theme, and if found, duplicating the contained
+  # pages recursively into the header of this store.
+  def apply_theme_template!(theme)
+    template = Page.template.find_by(slug: theme) || return
+    header.insert_collection!(template.children)
+  end
+
   # CSV header conversion table for uploaded products.
   def csv_headers
     {

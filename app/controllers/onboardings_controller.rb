@@ -35,6 +35,7 @@ class OnboardingsController < ApplicationController
 
   def create
     store = @onboarding.finalize!(current_user)
+    store.apply_theme_template!(@onboarding.theme)
     session[:onboarding_attributes] = nil
     session[:next_step] = nil
     redirect_to controller: 'store', action: 'index', host: store.primary_host.fqdn
