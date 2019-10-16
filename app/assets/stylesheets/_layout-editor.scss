@@ -37,10 +37,10 @@ body.layout-editor.modal-open {
       margin-bottom: -15px;
       border-bottom: 0;
     }
-    .tab-content { padding: 10px 0; }
     .modal-body {
       max-height: 80vh;
       overflow-y: auto;
+      padding-bottom: 30px;
     }
 
     .control-label { font-size: inherit; }
