@@ -100,6 +100,7 @@ class Admin::PagesController < AdminController
     authorize_action_for Page, at: current_store
     original = @page
     @page = original.duplicate!
+    @page.save_inline_styles_recursively
     track @page, nil, {action: 'create'}
 
     redirect_to edit_admin_page_path(@page), notice: t('.notice', page: original)

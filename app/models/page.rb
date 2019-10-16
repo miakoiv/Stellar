@@ -205,6 +205,12 @@ class Page < ApplicationRecord
     end
   end
 
+  def save_inline_styles_recursively
+    sections.each do |section|
+      section.save_inline_styles_recursively
+    end
+  end
+
   def slugger
     title_required? ? [:title, [:title, :id]] : purpose
   end
