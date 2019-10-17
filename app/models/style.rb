@@ -64,8 +64,9 @@ class Style < ApplicationRecord
   end
 
   private
-    def generate_stylesheet
-      reload
-      Styles::Generator.new(store.theme, self).compile
-    end
+
+  def generate_stylesheet
+    reload
+    Styles::Generator.new(store.theme, self).compile
+  end
 end

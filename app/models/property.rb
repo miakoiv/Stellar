@@ -63,11 +63,12 @@ class Property < ApplicationRecord
   end
 
   private
-    def sort_attribute
-      numeric? ? :value_f : :value
-    end
 
-    def define_property_search_method
-      ProductSearch.define_property_search_method(self)
-    end
+  def sort_attribute
+    numeric? ? :value_f : :value
+  end
+
+  def define_property_search_method
+    ProductSearch.define_property_search_method(self)
+  end
 end

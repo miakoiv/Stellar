@@ -362,31 +362,32 @@ class Store < ApplicationRecord
   end
 
   private
-    def reapply_style
-      if style.present?
-        reload
-        Styles::Generator.new(theme, style).compile
-      end
-    end
 
-    def assign_slug
-      taken_slugs = Store.all_except(self).map(&:slug)
-      len = 3
-      unique_slug = "#{name}#{id}#{Time.now.to_i}"
-        .parameterize.underscore.mb_chars.downcase
-      begin
-        slug = unique_slug[0, len]
-        len += 1
-      end while taken_slugs.include?(slug)
-      update(slug: slug)
+  def reapply_style
+    if style.present?
+      reload
+      Styles::Generator.new(theme, style).compile
     end
+  end
 
-    def create_guest_group
-      update(default_group: groups.create(name: Group.human_attribute_name(:default_name)))
-    end
+  def assign_slug
+    taken_slugs = Store.all_except(self).map(&:slug)
+    len = 3
+    unique_slug = "#{name}#{id}#{Time.now.to_i}"
+      .parameterize.underscore.mb_chars.downcase
+    begin
+      slug = unique_slug[0, len]
+      len += 1
+    end while taken_slugs.include?(slug)
+    update(slug: slug)
+  end
 
-    def create_header_and_footer
-      pages.header.first_or_create
-      pages.footer.first_or_create
-    end
+  def create_guest_group
+    update(default_group: groups.create(name: Group.human_attribute_name(:default_name)))
+  end
+
+  def create_header_and_footer
+    pages.header.first_or_create
+    pages.footer.first_or_create
+  end
 end

@@ -104,27 +104,28 @@ class InventoryCheckItem < ApplicationRecord
   end
 
   private
-    # Serial is used as lot code on products that have no lot code.
-    def lot_code_from_serial
-      if lot_code.blank? && serial.present?
-        self[:lot_code] = serial
-      end
-      self
-    end
 
-    # Existing, matching inventory item is associated after validation,
-    # if the association is not established yet.
-    def assign_inventory_item
-      self.inventory_item ||= inventory.item_by_product_and_code(product, lot_code)
-      self
+  # Serial is used as lot code on products that have no lot code.
+  def lot_code_from_serial
+    if lot_code.blank? && serial.present?
+      self[:lot_code] = serial
     end
+    self
+  end
 
-    # The difference between current and on hand amounts
-    # is calculated after save.
-    def calculate_difference
-      unless final?
-        self.difference = stocked? ? current - on_hand : current
-      end
-      self
+  # Existing, matching inventory item is associated after validation,
+  # if the association is not established yet.
+  def assign_inventory_item
+    self.inventory_item ||= inventory.item_by_product_and_code(product, lot_code)
+    self
+  end
+
+  # The difference between current and on hand amounts
+  # is calculated after save.
+  def calculate_difference
+    unless final?
+      self.difference = stocked? ? current - on_hand : current
     end
+    self
+  end
 end

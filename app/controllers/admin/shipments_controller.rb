@@ -115,19 +115,20 @@ class Admin::ShipmentsController < AdminController
   end
 
   private
-    def set_order
-      @order = current_store.orders.find(params[:order_id])
-    end
 
-    def set_shipment
-      @shipment = Shipment.find(params[:id])
-    end
+  def set_order
+    @order = current_store.orders.find(params[:order_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def shipment_params
-      params.require(:shipment).permit(
-        :shipping_method_id, :package_type, :mass,
-        :dimension_u, :dimension_v, :dimension_w
-      )
-    end
+  def set_shipment
+    @shipment = Shipment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def shipment_params
+    params.require(:shipment).permit(
+      :shipping_method_id, :package_type, :mass,
+      :dimension_u, :dimension_v, :dimension_w
+    )
+  end
 end

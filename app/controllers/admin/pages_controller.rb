@@ -107,17 +107,18 @@ class Admin::PagesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_page
-      @page = current_store.pages.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def page_params
-      params.require(:page).permit(
-        :parent_id, :purpose, :resource_type, :resource_id,
-        :live, :title, :slug, :url, :description,
-        :always_expand, :dynamic_navbar, group_ids: []
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_page
+    @page = current_store.pages.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def page_params
+    params.require(:page).permit(
+      :parent_id, :purpose, :resource_type, :resource_id,
+      :live, :title, :slug, :url, :description,
+      :always_expand, :dynamic_navbar, group_ids: []
+    )
+  end
 end

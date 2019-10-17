@@ -82,19 +82,20 @@ class Admin::OrderTypesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order_type
-      @order_type = current_store.order_types.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_type_params
-      params.require(:order_type).permit(
-        :source_id, :destination_id,
-        :name, :label, :instructions,
-        :has_shipping, :has_installation,
-        :has_billing, :payment_gateway,
-        :is_forwarded, :prepaid_stock, :is_exported
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order_type
+    @order_type = current_store.order_types.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_type_params
+    params.require(:order_type).permit(
+      :source_id, :destination_id,
+      :name, :label, :instructions,
+      :has_shipping, :has_installation,
+      :has_billing, :payment_gateway,
+      :is_forwarded, :prepaid_stock, :is_exported
+    )
+  end
 end

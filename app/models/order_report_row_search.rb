@@ -75,9 +75,10 @@ class OrderReportRowSearch < Searchlight::Search
   end
 
   private
-    def date_param(param, default)
-      return default unless param.present?
-      return param if param.is_a?(Date)
-      Date.parse(param)
-    end
+
+  def date_param(param, default)
+    return default unless param.present?
+    return param if param.is_a?(Date)
+    Date.parse(param)
+  end
 end

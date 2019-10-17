@@ -78,18 +78,19 @@ class Admin::ShippingMethodsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_shipping_method
-      @shipping_method = current_store.shipping_methods.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def shipping_method_params
-      params.require(:shipping_method).permit(
-        :name, :code, :shipping_gateway, :has_pickup_points, :home_delivery,
-        :delivery_time, :enabled_at, :disabled_at,
-        :description, :shipping_cost_product_id, :free_shipping_from,
-        :detail_page_id
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_shipping_method
+    @shipping_method = current_store.shipping_methods.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def shipping_method_params
+    params.require(:shipping_method).permit(
+      :name, :code, :shipping_gateway, :has_pickup_points, :home_delivery,
+      :delivery_time, :enabled_at, :disabled_at,
+      :description, :shipping_cost_product_id, :free_shipping_from,
+      :detail_page_id
+    )
+  end
 end

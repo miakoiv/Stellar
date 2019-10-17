@@ -193,26 +193,27 @@ class BaseStoreController < ApplicationController
   end
 
   private
-    # Before doing anything else, set current hostname and
-    # current store based on request.host.
-    def set_hostname_and_store
-      @current_hostname = Hostname.find_by(fqdn: request.host)
-      if @current_hostname.present?
-        @current_store = @current_hostname.store
-      else
-        head :bad_request
-      end
-    end
 
-    # Create a record for a guest user and schedule a cleanup in two weeks.
-    def create_guest_user
-      guest = User.generate_guest!(current_hostname)
-      session[:guest_user_id] = guest.id
-      GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
-      guest
+  # Before doing anything else, set current hostname and
+  # current store based on request.host.
+  def set_hostname_and_store
+    @current_hostname = Hostname.find_by(fqdn: request.host)
+    if @current_hostname.present?
+      @current_store = @current_hostname.store
+    else
+      head :bad_request
     end
+  end
 
-    def policies_pending?
-      current_user.can_accept?(Policy, at: current_store) && current_store.policies.pending.any?
-    end
+  # Create a record for a guest user and schedule a cleanup in two weeks.
+  def create_guest_user
+    guest = User.generate_guest!(current_hostname)
+    session[:guest_user_id] = guest.id
+    GuestCleanupJob.set(wait: 2.weeks).perform_later(guest)
+    guest
+  end
+
+  def policies_pending?
+    current_user.can_accept?(Policy, at: current_store) && current_store.policies.pending.any?
+  end
 end

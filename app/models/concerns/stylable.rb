@@ -26,7 +26,8 @@ module Stylable
   end
 
   private
-    def update_inline_styles
-      Styles::Inline.new(self).write_inline_styles
-    end
+
+  def update_inline_styles
+    Styles::Inline.new(self).write_inline_styles
+  end
 end

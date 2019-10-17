@@ -43,27 +43,28 @@ class Admin::DocumentsController < AdminController
   end
 
   private
-    # Finds the associated documentable by looking through params.
-    # Invokes a friendly_id find if the class implements it.
-    def find_documentable
-      params.each do |name, value|
-        if name =~ /(.+)_id$/
-          klass = $1.classify.constantize
-          if klass.respond_to?(:friendly)
-            association_method = $1.tableize
-            return current_store.send(association_method).friendly.find(value)
-          else
-            return klass.find(value)
-          end
+
+  # Finds the associated documentable by looking through params.
+  # Invokes a friendly_id find if the class implements it.
+  def find_documentable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        klass = $1.classify.constantize
+        if klass.respond_to?(:friendly)
+          association_method = $1.tableize
+          return current_store.send(association_method).friendly.find(value)
+        else
+          return klass.find(value)
         end
       end
-      nil
     end
+    nil
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def document_params
-      params.require(:document).permit(
-        :attachment
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def document_params
+    params.require(:document).permit(
+      :attachment
+    )
+  end
 end

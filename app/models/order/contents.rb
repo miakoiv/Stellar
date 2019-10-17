@@ -175,32 +175,33 @@ class Order < ApplicationRecord
   end
 
   private
-    # Applies active promotions on the order, first removing all existing
-    # adjustments from the order and its items.
-    def apply_promotions!
-      transaction do
-        adjustments.destroy_all
-        order_items.each { |order_item| order_item.adjustments.destroy_all }
 
-        billing_group.promotions.active.each do |promotion|
-          promotion.apply!(self)
-        end
-        activated_promotions.live.each do |promotion|
-          promotion.apply!(self)
-        end
+  # Applies active promotions on the order, first removing all existing
+  # adjustments from the order and its items.
+  def apply_promotions!
+    transaction do
+      adjustments.destroy_all
+      order_items.each { |order_item| order_item.adjustments.destroy_all }
+
+      billing_group.promotions.active.each do |promotion|
+        promotion.apply!(self)
+      end
+      activated_promotions.live.each do |promotion|
+        promotion.apply!(self)
       end
     end
+  end
 
-    # Creates the initial transfer containing the tangible order items,
-    # associated with the initial shipment, which may already exist.
-    # Does nothing if the order has no associated inventory or doesn't
-    # require shipping anything.
-    def create_initial_transfer!
-      shipping_method = store.shipping_methods.active.first
-      return nil unless shipping_method.present? && inventory.present? && requires_shipping?
-      shipment = shipments.create_with(
-        shipping_method: shipping_method
-      ).first_or_create!
-      shipment.load!
-    end
+  # Creates the initial transfer containing the tangible order items,
+  # associated with the initial shipment, which may already exist.
+  # Does nothing if the order has no associated inventory or doesn't
+  # require shipping anything.
+  def create_initial_transfer!
+    shipping_method = store.shipping_methods.active.first
+    return nil unless shipping_method.present? && inventory.present? && requires_shipping?
+    shipment = shipments.create_with(
+      shipping_method: shipping_method
+    ).first_or_create!
+    shipment.load!
+  end
 end

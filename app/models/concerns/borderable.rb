@@ -29,16 +29,17 @@ module Borderable
     end
 
     private
-      def build_border(s, attr)
-        color = send("#{attr}_color").presence
-        style = send("#{attr}_style").presence
-        width = send("#{attr}_width").presence
-        prop = attr.to_s.dasherize
-        if style.present?
-          s << ["#{prop}-color", color] if color
-          s << ["#{prop}-style", style]
-          s << ["#{prop}-width", "#{width}px"] if width
-        end
+
+    def build_border(s, attr)
+      color = send("#{attr}_color").presence
+      style = send("#{attr}_style").presence
+      width = send("#{attr}_width").presence
+      prop = attr.to_s.dasherize
+      if style.present?
+        s << ["#{prop}-color", color] if color
+        s << ["#{prop}-style", style]
+        s << ["#{prop}-width", "#{width}px"] if width
       end
+    end
   end
 end

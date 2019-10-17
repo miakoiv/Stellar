@@ -161,32 +161,33 @@ class OrdersController < BaseStoreController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = current_user.orders.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.fetch(:order, {}).permit(
-        :billing_group_id, :shipping_group_id,
-        :order_type_id, :inventory_id,
-        :completed_at, :shipping_at, :installation_at,
-        :vat_number, :your_reference, :our_reference, :message, :notes,
-        :customer_email, :contact_email, :separate_shipping_address,
-        billing_address_attributes: [
-          :id, :name, :phone, :company, :department,
-          :address1, :address2, :postalcode, :city, :country_code
-        ],
-        shipping_address_attributes: [
-          :id, :name, :phone, :company, :department,
-          :address1, :address2, :postalcode, :city, :country_code
-        ]
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = current_user.orders.find(params[:id])
+  end
 
-    # The search is limited to the current user's personal history.
-    def search_constrains
-      {store: current_store, user_id: current_user.id}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.fetch(:order, {}).permit(
+      :billing_group_id, :shipping_group_id,
+      :order_type_id, :inventory_id,
+      :completed_at, :shipping_at, :installation_at,
+      :vat_number, :your_reference, :our_reference, :message, :notes,
+      :customer_email, :contact_email, :separate_shipping_address,
+      billing_address_attributes: [
+        :id, :name, :phone, :company, :department,
+        :address1, :address2, :postalcode, :city, :country_code
+      ],
+      shipping_address_attributes: [
+        :id, :name, :phone, :company, :department,
+        :address1, :address2, :postalcode, :city, :country_code
+      ]
+    )
+  end
+
+  # The search is limited to the current user's personal history.
+  def search_constrains
+    {store: current_store, user_id: current_user.id}
+  end
 end

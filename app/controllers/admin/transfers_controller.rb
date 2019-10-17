@@ -97,18 +97,19 @@ class Admin::TransfersController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transfer
-      @transfer = current_store.transfers.find(params[:id])
-    end
 
-    def transfer_params
-      params.require(:transfer).permit(
-        :source_id, :destination_id, :note
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transfer
+    @transfer = current_store.transfers.find(params[:id])
+  end
 
-    def search_constrains
-      {store: current_store}
-    end
+  def transfer_params
+    params.require(:transfer).permit(
+      :source_id, :destination_id, :note
+    )
+  end
+
+  def search_constrains
+    {store: current_store}
+  end
 end

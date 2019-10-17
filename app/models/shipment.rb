@@ -205,10 +205,11 @@ class Shipment < ApplicationRecord
   end
 
   private
-    def find_or_create_transfer
-      self.transfer ||= create_transfer(
-        store: order.store,
-        source: order.inventory
-      )
-    end
+
+  def find_or_create_transfer
+    self.transfer ||= create_transfer(
+      store: order.store,
+      source: order.inventory
+    )
+  end
 end

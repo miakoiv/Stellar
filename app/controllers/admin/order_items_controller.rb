@@ -64,26 +64,27 @@ class Admin::OrderItemsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order_and_item
-      @order_item = OrderItem.find(params[:id])
-      @order = @order_item.order
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_item_params
-      params.require(:order_item).permit(
-        :product_id, :amount, :lot_code, :serial,
-        :price, :customer_code
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order_and_item
+    @order_item = OrderItem.find(params[:id])
+    @order = @order_item.order
+  end
 
-    def search_constrains
-      {store: current_store, order_type: @order_types, all_time: true}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_item_params
+    params.require(:order_item).permit(
+      :product_id, :amount, :lot_code, :serial,
+      :price, :customer_code
+    )
+  end
 
-    # Use lot code if found, serial otherwise.
-    def lot_code_or_serial
-      order_item_params[:lot_code].presence || order_item_params[:serial].presence
-    end
+  def search_constrains
+    {store: current_store, order_type: @order_types, all_time: true}
+  end
+
+  # Use lot code if found, serial otherwise.
+  def lot_code_or_serial
+    order_item_params[:lot_code].presence || order_item_params[:serial].presence
+  end
 end

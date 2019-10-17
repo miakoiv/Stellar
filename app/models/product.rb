@@ -346,73 +346,74 @@ class Product < ApplicationRecord
   end
 
   protected
-    # Resets the live status of the product, according to these criteria:
-    # - set to be available at a certain date which is not in the future
-    # - retail price is not nil (or product is a bundle or has variants)
-    # - if set to be deleted at a certain date which is in the future
-    def reset_live_status
-      self.live =
-          (available_at.present? && !available_at.future?) &&
-          (retail_price_cents.present? || bundle? || has_variants?) &&
-          (deleted_at.nil? || deleted_at.future?)
-    end
 
-    # Callback to touch the associated object that was added or removed,
-    # and update the master/variants to bust their partial caches.
-    def associations_changed(context)
-      if persisted?
-        context.touch if context.persisted?
-        touch_master_and_variants if variant?
-        update_variants if has_variants?
+  # Resets the live status of the product, according to these criteria:
+  # - set to be available at a certain date which is not in the future
+  # - retail price is not nil (or product is a bundle or has variants)
+  # - if set to be deleted at a certain date which is in the future
+  def reset_live_status
+    self.live =
+        (available_at.present? && !available_at.future?) &&
+        (retail_price_cents.present? || bundle? || has_variants?) &&
+        (deleted_at.nil? || deleted_at.future?)
+  end
+
+  # Callback to touch the associated object that was added or removed,
+  # and update the master/variants to bust their partial caches.
+  def associations_changed(context)
+    if persisted?
+      context.touch if context.persisted?
+      touch_master_and_variants if variant?
+      update_variants if has_variants?
+    end
+  end
+
+  # All variants are saved to have them inherit master categories and tags,
+  # and touched to force a timestamp update in case no changes are made.
+  def update_variants
+    transaction do
+      variants.each do |variant|
+        variant.save
+        variant.touch
       end
     end
+  end
 
-    # All variants are saved to have them inherit master categories and tags,
-    # and touched to force a timestamp update in case no changes are made.
-    def update_variants
-      transaction do
-        variants.each do |variant|
-          variant.save
-          variant.touch
-        end
+  # Complex component parents depend on this product to be live for them to be live as well.
+  def update_component_parents
+    return if live?
+    transaction do
+      component_parent_products.each do |parent|
+        parent.update(deleted_at: Date.today)
       end
     end
+  end
 
-    # Complex component parents depend on this product to be live for them to be live as well.
-    def update_component_parents
-      return if live?
-      transaction do
-        component_parent_products.each do |parent|
-          parent.update(deleted_at: Date.today)
-        end
+  # Variants don't have their own categories and tags,
+  # instead they are inherited from their master product.
+  def inherit_from_master
+    self.categories = master_product.categories
+    self.tags = master_product.tags
+  end
+
+  # Touches master and all its variants to bust partial caches.
+  def touch_master_and_variants
+    transaction do
+      master_product.touch
+      master_product.variants.each do |variant|
+        variant.touch
       end
     end
+  end
 
-    # Variants don't have their own categories and tags,
-    # instead they are inherited from their master product.
-    def inherit_from_master
-      self.categories = master_product.categories
-      self.tags = master_product.tags
+  # Adds an incrementing branch number to the product code.
+  def reset_code
+    while !valid?
+      trunk, branch = code.partition(/ \(\d+\)/)
+      branch = ' (0)' if branch.empty?
+      self[:code] = "#{trunk}#{branch.succ}"
     end
-
-    # Touches master and all its variants to bust partial caches.
-    def touch_master_and_variants
-      transaction do
-        master_product.touch
-        master_product.variants.each do |variant|
-          variant.touch
-        end
-      end
-    end
-
-    # Adds an incrementing branch number to the product code.
-    def reset_code
-      while !valid?
-        trunk, branch = code.partition(/ \(\d+\)/)
-        branch = ' (0)' if branch.empty?
-        self[:code] = "#{trunk}#{branch.succ}"
-      end
-    end
+  end
 end
 
 require_dependency 'product/pricing'

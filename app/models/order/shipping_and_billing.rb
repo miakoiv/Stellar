@@ -125,11 +125,12 @@ class Order < ApplicationRecord
   end
 
   private
-    def copy_shipping_address
-      shipping_address.copy_from(billing_address)
-    end
 
-    def check_separate_shipping_address
-      self.separate_shipping_address = (billing_address != shipping_address)
-    end
+  def copy_shipping_address
+    shipping_address.copy_from(billing_address)
+  end
+
+  def check_separate_shipping_address
+    self.separate_shipping_address = (billing_address != shipping_address)
+  end
 end

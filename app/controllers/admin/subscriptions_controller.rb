@@ -90,15 +90,16 @@ class Admin::SubscriptionsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subscription
-      @subscription = current_store.subscriptions.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def subscription_params
-      params.require(:subscription).permit(
-        :stripe_plan_id, :stripe_source_id
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subscription
+    @subscription = current_store.subscriptions.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def subscription_params
+    params.require(:subscription).permit(
+      :stripe_plan_id, :stripe_source_id
+    )
+  end
 end

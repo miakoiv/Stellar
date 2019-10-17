@@ -36,14 +36,15 @@ class Admin::HostnamesController < AdminController
   end
 
   private
-    def set_store
-      @store = Store.find(params[:store_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def hostname_params
-      params.require(:hostname).permit(
-        :parent_hostname_id, :fqdn
-      )
-    end
+  def set_store
+    @store = Store.find(params[:store_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def hostname_params
+    params.require(:hostname).permit(
+      :parent_hostname_id, :fqdn
+    )
+  end
 end

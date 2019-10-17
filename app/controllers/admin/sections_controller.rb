@@ -85,31 +85,32 @@ class Admin::SectionsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_section
-      @section = Section.find(params[:id])
-    end
 
-    # Create columns and segments according to spans in params.
-    def create_columns!
-      spans = params[:spans]
-      spans[:sm].each_with_index do |sm, i|
-        xs = spans[:xs].shift
-        column = @section.columns.create(span_xs: xs, span_sm: sm, priority: i)
-        column.segments.create(Segment.default_settings)
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_section
+    @section = Section.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def section_params
-      params.fetch(:section, {}).permit(
-        :width, :gutters, :swiper, :viewport, :reverse,
-        :background_color, :fixed_background,
-        :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
-      )
+  # Create columns and segments according to spans in params.
+  def create_columns!
+    spans = params[:spans]
+    spans[:sm].each_with_index do |sm, i|
+      xs = spans[:xs].shift
+      column = @section.columns.create(span_xs: xs, span_sm: sm, priority: i)
+      column.segments.create(Segment.default_settings)
     end
+  end
 
-    def section_attributes
-      params.require(:section).permit!
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def section_params
+    params.fetch(:section, {}).permit(
+      :width, :gutters, :swiper, :viewport, :reverse,
+      :background_color, :fixed_background,
+      :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
+    )
+  end
+
+  def section_attributes
+    params.require(:section).permit!
+  end
 end

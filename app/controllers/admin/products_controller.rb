@@ -165,48 +165,49 @@ class Admin::ProductsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = current_store.products.friendly.find(params[:id])
-    end
 
-    def set_group
-      @group = current_store.groups.find_by(id: params[:group_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = current_store.products.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(
-        :purpose, :master_product_id, {variant_ids: []},
-        :vendor_id, :sales_measure_unit_id, :code, :customer_code,
-        :title, :subtitle, :description, :overview, :memo,
-        :mass, :dimension_u, :dimension_v, :dimension_w,
-        :safety_stock, :infinite_stock, :lead_time, :additional_info_prompt, :shipping_notes,
-        :cost_price, :trade_price, :retail_price, :tax_category_id,
-        :available_at, :deleted_at, {category_ids: []}, {tag_ids: []},
-        {shipping_method_ids: []}
-      )
-    end
+  def set_group
+    @group = current_store.groups.find_by(id: params[:group_id])
+  end
 
-    def search_params
-      params.fetch(:product_search, {}).permit(
-        :keyword, {purposes: []}, {categories: []}, {tags: []},
-        :live, :illustrated, :described
-      ).merge(search_constrains)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(
+      :purpose, :master_product_id, {variant_ids: []},
+      :vendor_id, :sales_measure_unit_id, :code, :customer_code,
+      :title, :subtitle, :description, :overview, :memo,
+      :mass, :dimension_u, :dimension_v, :dimension_w,
+      :safety_stock, :infinite_stock, :lead_time, :additional_info_prompt, :shipping_notes,
+      :cost_price, :trade_price, :retail_price, :tax_category_id,
+      :available_at, :deleted_at, {category_ids: []}, {tag_ids: []},
+      {shipping_method_ids: []}
+    )
+  end
 
-    def query_params
-      params.permit(
-        :q, {purposes: []}, {inventories: []}, {exclusions: []},
-        :having_variants
-      ).merge(search_constrains).merge(live: true)
-    end
+  def search_params
+    params.fetch(:product_search, {}).permit(
+      :keyword, {purposes: []}, {categories: []}, {tags: []},
+      :live, :illustrated, :described
+    ).merge(search_constrains)
+  end
 
-    # Impose search constrains from current store and group.
-    def search_constrains
-      {store: current_store}.tap do |c|
-        c.merge!(vendor_id: current_group) if third_party?
-        c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
-      end
+  def query_params
+    params.permit(
+      :q, {purposes: []}, {inventories: []}, {exclusions: []},
+      :having_variants
+    ).merge(search_constrains).merge(live: true)
+  end
+
+  # Impose search constrains from current store and group.
+  def search_constrains
+    {store: current_store}.tap do |c|
+      c.merge!(vendor_id: current_group) if third_party?
+      c.merge!(permitted_categories: current_group.available_categories) if current_group.limited_categories?
     end
+  end
 end

@@ -65,17 +65,18 @@ class Admin::ImagesController < AdminController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def image_params
-      params.require(:image).permit(:attachment)
-    end
 
-    def upload_params
-      params.permit(:upload)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def image_params
+    params.require(:image).permit(:attachment)
+  end
 
-    # Restrict searching to images in current store.
-    def search_constrains
-      {store: current_store}
-    end
+  def upload_params
+    params.permit(:upload)
+  end
+
+  # Restrict searching to images in current store.
+  def search_constrains
+    {store: current_store}
+  end
 end

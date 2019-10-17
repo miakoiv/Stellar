@@ -87,84 +87,84 @@ module ShippingGateway
 
       private
 
-        def shipment_xml
-          id = order.number
-          shipping_method = shipment.shipping_method
+      def shipment_xml
+        id = order.number
+        shipping_method = shipment.shipping_method
 
-          builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-            xml.eChannel do
-              xml.ROUTING do
-                xml.send 'Routing.Account', @api_key
-                xml.send 'Routing.Key', md5(@api_key, id, @secret)
-                xml.send 'Routing.Id', id
-                xml.send 'Routing.Time', Time.now.to_i
+        builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+          xml.eChannel do
+            xml.ROUTING do
+              xml.send 'Routing.Account', @api_key
+              xml.send 'Routing.Key', md5(@api_key, id, @secret)
+              xml.send 'Routing.Id', id
+              xml.send 'Routing.Time', Time.now.to_i
+            end
+            xml.Shipment do
+              xml.send 'Shipment.Sender' do
+                xml.send 'Sender.Name1', @store.name
+                if @group.present?
+                  xml.send 'Sender.Addr1', @group.shipping_address.address1
+                  xml.send 'Sender.Postcode', @group.shipping_address.postalcode
+                  xml.send 'Sender.City', @group.shipping_address.city
+                  xml.send 'Sender.Country', @group.shipping_address.country_code
+                end
+                xml.send 'Sender.Vatcode', @store.vat_number
               end
-              xml.Shipment do
-                xml.send 'Shipment.Sender' do
-                  xml.send 'Sender.Name1', @store.name
-                  if @group.present?
-                    xml.send 'Sender.Addr1', @group.shipping_address.address1
-                    xml.send 'Sender.Postcode', @group.shipping_address.postalcode
-                    xml.send 'Sender.City', @group.shipping_address.city
-                    xml.send 'Sender.Country', @group.shipping_address.country_code
-                  end
-                  xml.send 'Sender.Vatcode', @store.vat_number
+              xml.send 'Shipment.Recipient' do
+                xml.send 'Recipient.Name1', order.shipping_address.name
+                xml.send 'Recipient.Addr1', order.shipping_address.address1
+                xml.send 'Recipient.Postcode', order.shipping_address.postalcode
+                xml.send 'Recipient.City', order.shipping_address.city
+                xml.send 'Recipient.Country', order.shipping_address.country_code
+                xml.send 'Recipient.Phone', order.shipping_address.phone
+                xml.send 'Recipient.Email', order.customer_email
+              end
+              xml.send 'Shipment.Consignment' do
+                xml.send 'Consignment.Reference', order.number
+                xml.send 'Consignment.Product', shipping_method.code
+                xml.send 'Consignment.Parcel' do
+                  xml.send 'Parcel.Packagetype', shipment.package_type
+                  xml.send 'Parcel.Weight', shipment.weight
+                  xml.send 'Parcel.Volume', shipment.volume
+                  xml.send 'Parcel.Contents', 'M' # Merchandise
                 end
-                xml.send 'Shipment.Recipient' do
-                  xml.send 'Recipient.Name1', order.shipping_address.name
-                  xml.send 'Recipient.Addr1', order.shipping_address.address1
-                  xml.send 'Recipient.Postcode', order.shipping_address.postalcode
-                  xml.send 'Recipient.City', order.shipping_address.city
-                  xml.send 'Recipient.Country', order.shipping_address.country_code
-                  xml.send 'Recipient.Phone', order.shipping_address.phone
-                  xml.send 'Recipient.Email', order.customer_email
-                end
-                xml.send 'Shipment.Consignment' do
-                  xml.send 'Consignment.Reference', order.number
-                  xml.send 'Consignment.Product', shipping_method.code
-                  xml.send 'Consignment.Parcel' do
-                    xml.send 'Parcel.Packagetype', shipment.package_type
-                    xml.send 'Parcel.Weight', shipment.weight
-                    xml.send 'Parcel.Volume', shipment.volume
-                    xml.send 'Parcel.Contents', 'M' # Merchandise
-                  end
-                  if shipment.pickup_point_id.present?
-                    xml.send 'Consignment.AdditionalService' do
-                      xml.send 'AdditionalService.Servicecode', 2106
-                      xml.send 'AdditionalService.Specifier', shipment.pickup_point_id, name: 'pickup_point_id'
-                    end
+                if shipment.pickup_point_id.present?
+                  xml.send 'Consignment.AdditionalService' do
+                    xml.send 'AdditionalService.Servicecode', 2106
+                    xml.send 'AdditionalService.Specifier', shipment.pickup_point_id, name: 'pickup_point_id'
                   end
                 end
               end
             end
           end
-          builder.to_xml
         end
+        builder.to_xml
+      end
 
-        def label_xml
-          id = order.number
+      def label_xml
+        id = order.number
 
-          builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-            xml.eChannel do
-              xml.ROUTING do
-                xml.send 'Routing.Account', @api_key
-                xml.send 'Routing.Key', md5(@api_key, id, @secret)
-                xml.send 'Routing.Id', id
-                xml.send 'Routing.Name', order.shipping_address.name
-                xml.send 'Routing.Time', Time.now.to_i
-              end
-              xml.PrintLabel do
-                xml.Reference shipment.number
-                xml.TrackingCode shipment.tracking_code
-              end
+        builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+          xml.eChannel do
+            xml.ROUTING do
+              xml.send 'Routing.Account', @api_key
+              xml.send 'Routing.Key', md5(@api_key, id, @secret)
+              xml.send 'Routing.Id', id
+              xml.send 'Routing.Name', order.shipping_address.name
+              xml.send 'Routing.Time', Time.now.to_i
+            end
+            xml.PrintLabel do
+              xml.Reference shipment.number
+              xml.TrackingCode shipment.tracking_code
             end
           end
-          builder.to_xml
         end
+        builder.to_xml
+      end
 
-        def md5(*parts)
-          Digest::MD5.hexdigest(parts.join)
-        end
+      def md5(*parts)
+        Digest::MD5.hexdigest(parts.join)
+      end
     end
 
     class DbSchenker < Base

@@ -258,13 +258,14 @@ class OrderItem < ApplicationRecord
   end
 
   private
-    # Transfer items in complete shipments, considered shipped.
-    def completed_transfer_items
-      transfer_items.joins(transfer: :shipment).merge(Shipment.complete)
-    end
 
-    # Price represented as a Price object for tax calculations.
-    def price_as_price
-      @price_as_price ||= Price.new(price, price_includes_tax?, tax_rate)
-    end
+  # Transfer items in complete shipments, considered shipped.
+  def completed_transfer_items
+    transfer_items.joins(transfer: :shipment).merge(Shipment.complete)
+  end
+
+  # Price represented as a Price object for tax calculations.
+  def price_as_price
+    @price_as_price ||= Price.new(price, price_includes_tax?, tax_rate)
+  end
 end

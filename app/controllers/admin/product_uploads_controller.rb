@@ -29,10 +29,11 @@ class Admin::ProductUploadsController < AdminController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_upload_params
-      params.require(:product_upload).permit(
-        :attachment
-      )
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_upload_params
+    params.require(:product_upload).permit(
+      :attachment
+    )
+  end
 end

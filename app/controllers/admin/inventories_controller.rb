@@ -82,15 +82,16 @@ class Admin::InventoriesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory
-      @inventory = current_store.inventories.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_params
-      params.require(:inventory).permit(
-        :fuzzy, :name, :inventory_code, :enable_gateway
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inventory
+    @inventory = current_store.inventories.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def inventory_params
+    params.require(:inventory).permit(
+      :fuzzy, :name, :inventory_code, :enable_gateway
+    )
+  end
 end

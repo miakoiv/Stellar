@@ -66,10 +66,11 @@ class Product < ApplicationRecord
   end
 
   private
-    # Generates the description as a plain text representation of overview.
-    def generate_description
-      html = Nokogiri::HTML(overview)
-      lines = html.search('//text()').map(&:text)
-      self[:description] = lines.join("\n")
-    end
+
+  # Generates the description as a plain text representation of overview.
+  def generate_description
+    html = Nokogiri::HTML(overview)
+    lines = html.search('//text()').map(&:text)
+    self[:description] = lines.join("\n")
+  end
 end

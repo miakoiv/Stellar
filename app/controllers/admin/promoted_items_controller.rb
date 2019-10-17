@@ -45,14 +45,15 @@ class Admin::PromotedItemsController < AdminController
   end
 
   private
-    def set_promotion
-      @promotion = current_store.promotions.find(params[:promotion_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def promoted_item_params
-      params.require(:promoted_item).permit(
-        :price, :discount_percent, :amount_available
-      )
-    end
+  def set_promotion
+    @promotion = current_store.promotions.find(params[:promotion_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def promoted_item_params
+    params.require(:promoted_item).permit(
+      :price, :discount_percent, :amount_available
+    )
+  end
 end

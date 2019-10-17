@@ -60,16 +60,17 @@ class Admin::ColumnsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_column
-      @column = Column.joins(:section).find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def column_params
-      params.fetch(:column, {}).permit(
-        :span_xs, :span_sm, :alignment, :viewport, :pivot, :background_color,
-        :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_column
+    @column = Column.joins(:section).find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def column_params
+    params.fetch(:column, {}).permit(
+      :span_xs, :span_sm, :alignment, :viewport, :pivot, :background_color,
+      :gradient_color, :gradient_type, :gradient_direction, :gradient_balance
+    )
+  end
 end

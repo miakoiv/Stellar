@@ -30,60 +30,61 @@ module Styles
     end
 
     private
-      # Store theme file from app assets.
-      def theme_file
-        @theme_file ||= File.join(
-          Rails.root, 'app', 'assets', 'stylesheets', 'themes',
-          "#{theme}.scss"
-        )
-      end
 
-      def style_header
-        style.to_scss
-      end
+    # Store theme file from app assets.
+    def theme_file
+      @theme_file ||= File.join(
+        Rails.root, 'app', 'assets', 'stylesheets', 'themes',
+        "#{theme}.scss"
+      )
+    end
 
-      def style_footer
-        "\n#{style.preamble}"
-      end
+    def style_header
+      style.to_scss
+    end
 
-      def scss_source
-        theme_body = ERB.new(File.read(theme_file)).result(binding)
-        style_header + theme_body + style_footer
-      end
+    def style_footer
+      "\n#{style.preamble}"
+    end
 
-      def scss_tmpfile_path
-        @tmp_path ||= File.join(
-          Rails.root, 'tmp', 'cache', 'assets'
-        )
-        FileUtils.mkdir_p(@tmp_path) unless File.exists?(@tmp_path)
-        @tmp_path
-      end
+    def scss_source
+      theme_body = ERB.new(File.read(theme_file)).result(binding)
+      style_header + theme_body + style_footer
+    end
 
-      def scss_file_path
-        @scss_file_path ||= File.join(scss_tmpfile_path, "#{filename}.scss")
-      end
+    def scss_tmpfile_path
+      @tmp_path ||= File.join(
+        Rails.root, 'tmp', 'cache', 'assets'
+      )
+      FileUtils.mkdir_p(@tmp_path) unless File.exists?(@tmp_path)
+      @tmp_path
+    end
 
-      def create_scss
-        File.open(scss_file_path, 'w') { |f| f.write(scss_source) }
-      end
+    def scss_file_path
+      @scss_file_path ||= File.join(scss_tmpfile_path, "#{filename}.scss")
+    end
 
-      def generate_css
-        SassC::Engine.new(asset_source, {
-          syntax: :scss,
-          cache: false,
-          read_cache: false,
-          style: :compressed
-        }).render
-      end
+    def create_scss
+      File.open(scss_file_path, 'w') { |f| f.write(scss_source) }
+    end
 
-      def asset_source
-        if env.find_asset(filename)
-          env.find_asset(filename).source
-        else
-          uri = Sprockets::URIUtils.build_asset_uri(scss_file.path, type: 'text/css')
-          asset = Sprockets::UnloadedAsset.new(uri, env)
-          env.load(asset.uri).source
-        end
+    def generate_css
+      SassC::Engine.new(asset_source, {
+        syntax: :scss,
+        cache: false,
+        read_cache: false,
+        style: :compressed
+      }).render
+    end
+
+    def asset_source
+      if env.find_asset(filename)
+        env.find_asset(filename).source
+      else
+        uri = Sprockets::URIUtils.build_asset_uri(scss_file.path, type: 'text/css')
+        asset = Sprockets::UnloadedAsset.new(uri, env)
+        env.load(asset.uri).source
       end
+    end
   end
 end

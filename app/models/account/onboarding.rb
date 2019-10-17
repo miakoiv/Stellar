@@ -107,10 +107,11 @@ module Account
       end
 
       private
-        def subdomain_availability
-          hostname = Hostname.new(fqdn: fqdn)
-          errors.add(:subdomain, :not_available) if hostname.invalid?
-        end
+
+      def subdomain_availability
+        hostname = Hostname.new(fqdn: fqdn)
+        errors.add(:subdomain, :not_available) if hostname.invalid?
+      end
     end
 
     class Admin < Backend

@@ -86,21 +86,22 @@ class InventoryItem < ApplicationRecord
   end
 
   private
-    # After save, update the inventory counts and value from the entries.
-    # Value is calculated from on hand inventory, using a weighted average
-    # of values given in the entries.
-    def update_counts_and_value!
-      entries = inventory_entries.reload
-      total_on_hand = entries.sum(:on_hand)
-      total_reserved = entries.sum(:reserved)
-      total_pending = entries.sum(:pending)
-      weighted_total_cents = entries.map { |e| e.on_hand * e.value_cents }.sum
 
-      update_columns(
-        on_hand: total_on_hand,
-        reserved: total_reserved,
-        pending: total_pending,
-        value_cents: total_on_hand == 0 ? nil : weighted_total_cents / total_on_hand
-      )
-    end
+  # After save, update the inventory counts and value from the entries.
+  # Value is calculated from on hand inventory, using a weighted average
+  # of values given in the entries.
+  def update_counts_and_value!
+    entries = inventory_entries.reload
+    total_on_hand = entries.sum(:on_hand)
+    total_reserved = entries.sum(:reserved)
+    total_pending = entries.sum(:pending)
+    weighted_total_cents = entries.map { |e| e.on_hand * e.value_cents }.sum
+
+    update_columns(
+      on_hand: total_on_hand,
+      reserved: total_reserved,
+      pending: total_pending,
+      value_cents: total_on_hand == 0 ? nil : weighted_total_cents / total_on_hand
+    )
+  end
 end

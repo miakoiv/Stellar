@@ -12,11 +12,12 @@ module Reorderer
   end
 
   private
-    def reordered_items
-      ids = params[:reorder]
-      return [] if ids.nil?
-      ids.map do |param|
-        param =~ /(.+)_(\d+)$/ && $1.classify.constantize.find($2)
-      end
+
+  def reordered_items
+    ids = params[:reorder]
+    return [] if ids.nil?
+    ids.map do |param|
+      param =~ /(.+)_(\d+)$/ && $1.classify.constantize.find($2)
     end
+  end
 end

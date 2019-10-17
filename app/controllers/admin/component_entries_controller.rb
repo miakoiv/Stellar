@@ -34,14 +34,15 @@ class Admin::ComponentEntriesController < AdminController
   end
 
   private
-    def set_product
-      @product = current_store.products.friendly.find(params[:product_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def component_entry_params
-      params.require(:component_entry).permit(
-        :component_id, :quantity
-      )
-    end
+  def set_product
+    @product = current_store.products.friendly.find(params[:product_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def component_entry_params
+    params.require(:component_entry).permit(
+      :component_id, :quantity
+    )
+  end
 end

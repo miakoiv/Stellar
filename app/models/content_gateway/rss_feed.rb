@@ -27,8 +27,9 @@ module ContentGateway
     end
 
     private
-      # Implementations can be found in subclasses of RssFeed.
-      def build_content_item
-      end
+
+    # Implementations can be found in subclasses of RssFeed.
+    def build_content_item
+    end
   end
 end

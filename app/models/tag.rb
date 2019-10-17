@@ -45,7 +45,8 @@ class Tag < ApplicationRecord
   end
 
   private
-    def touch_products
-      products.each(&:touch)
-    end
+
+  def touch_products
+    products.each(&:touch)
+  end
 end

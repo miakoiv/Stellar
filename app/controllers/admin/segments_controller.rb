@@ -139,37 +139,38 @@ class Admin::SegmentsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_segment
-      @segment = Segment.joins(:column).find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def segment_params
-      params.fetch(:segment, {}).permit(
-        :resource_id, :resource_type,
-        :template, :aspect_ratio, :alignment, :justification,
-        :stretch, :foreground_color, :background_color,
-        :gradient_color, :gradient_type, :gradient_direction, :gradient_balance,
-        :body, :header, :subhead, :url,
-        :margin_top, :margin_bottom,
-        :padding_vertical, :padding_horizontal,
-        :min_width, :min_height, :gutter, :width_ratio,
-        :grid_columns, :grid_lines, :grid_disable_xs, :swiper,
-        :line_height, :hyphens,
-        :masonry, :tapestry, :image_sizing, :thumbnails, :lightbox,
-        :slide_effect, :slide_delay, :slide_speed,
-        :max_items, :product_scope, :show_more,
-        :map_location, :map_marker, :map_zoom, :map_theme,
-        :content_class, :content_type,
-        :facebook_page, :facebook_token,
-        :inverse, :jumbotron, :shadow,
-        :css_classes, :animation, :velocity,
-        Borderable::ATTRIBUTES
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_segment
+    @segment = Segment.joins(:column).find(params[:id])
+  end
 
-    def segment_attributes
-      params.require(:segment).permit!
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def segment_params
+    params.fetch(:segment, {}).permit(
+      :resource_id, :resource_type,
+      :template, :aspect_ratio, :alignment, :justification,
+      :stretch, :foreground_color, :background_color,
+      :gradient_color, :gradient_type, :gradient_direction, :gradient_balance,
+      :body, :header, :subhead, :url,
+      :margin_top, :margin_bottom,
+      :padding_vertical, :padding_horizontal,
+      :min_width, :min_height, :gutter, :width_ratio,
+      :grid_columns, :grid_lines, :grid_disable_xs, :swiper,
+      :line_height, :hyphens,
+      :masonry, :tapestry, :image_sizing, :thumbnails, :lightbox,
+      :slide_effect, :slide_delay, :slide_speed,
+      :max_items, :product_scope, :show_more,
+      :map_location, :map_marker, :map_zoom, :map_theme,
+      :content_class, :content_type,
+      :facebook_page, :facebook_token,
+      :inverse, :jumbotron, :shadow,
+      :css_classes, :animation, :velocity,
+      Borderable::ATTRIBUTES
+    )
+  end
+
+  def segment_attributes
+    params.require(:segment).permit!
+  end
 end

@@ -106,30 +106,31 @@ class Admin::UsersController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = current_store.groups.find(params[:group_id])
-    end
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = current_store.groups.find(params[:group_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(
-        :name, :email, :phone,
-        :locale, :password, :password_confirmation
-      ).tap do |p|
-        if p[:password].blank? && p[:password_confirmation].blank?
-          p.delete(:password)
-          p.delete(:password_confirmation)
-        end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(
+      :name, :email, :phone,
+      :locale, :password, :password_confirmation
+    ).tap do |p|
+      if p[:password].blank? && p[:password_confirmation].blank?
+        p.delete(:password)
+        p.delete(:password_confirmation)
       end
     end
+  end
 
-    # Restrict searching to users in selected group.
-    def search_constrains
-      {group: @group}
-    end
+  # Restrict searching to users in selected group.
+  def search_constrains
+    {group: @group}
+  end
 end

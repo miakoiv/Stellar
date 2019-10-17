@@ -134,77 +134,78 @@ module PaymentGateway
     end
 
     private
-      def payment_methods_request
-        {
-          version: '2',
-          api_key: @api_key,
-          authcode: sha256(@private_key, @api_key)
-        }
-      end
 
-      def token_request(options = {})
-        number = SecureRandom.hex(12)
-        name = order.billing_address&.name
-        first, last = name.split(/\s+/, 2)
-        street, zip, city = order.billing_address_components
-        {
-          version: @version,
-          api_key: @api_key,
-          order_number: number,
-          amount: order.grand_total_with_tax.cents,
-          currency: order.grand_total_with_tax.currency.to_s,
+    def payment_methods_request
+      {
+        version: '2',
+        api_key: @api_key,
+        authcode: sha256(@private_key, @api_key)
+      }
+    end
+
+    def token_request(options = {})
+      number = SecureRandom.hex(12)
+      name = order.billing_address&.name
+      first, last = name.split(/\s+/, 2)
+      street, zip, city = order.billing_address_components
+      {
+        version: @version,
+        api_key: @api_key,
+        order_number: number,
+        amount: order.grand_total_with_tax.cents,
+        currency: order.grand_total_with_tax.currency.to_s,
+        email: order.customer_email,
+        authcode: sha256(@private_key, "#{@api_key}|#{number}"),
+        customer: {
+          firstname: first,
+          lastname: last,
           email: order.customer_email,
-          authcode: sha256(@private_key, "#{@api_key}|#{number}"),
-          customer: {
-            firstname: first,
-            lastname: last,
-            email: order.customer_email,
-            address_street: street,
-            address_zip: zip,
-            address_city: city
+          address_street: street,
+          address_zip: zip,
+          address_city: city
+        },
+        products: products_list
+      }.merge(options)
+    end
+
+    def verify_request(token)
+      {
+        version: @version,
+        api_key: @api_key,
+        token: token,
+        authcode: sha256(@private_key, "#{@api_key}|#{token}")
+      }
+    end
+
+    def products_list
+      order.order_items.map { |item|
+        [
+          {
+            id: item.product_id,
+            title: item.product.to_s,
+            count: item.amount,
+            tax: item.tax_rate.to_i,
+            pretax_price: item.price_sans_tax.cents,
+            price: item.price_with_tax.cents,
+            type: item.real? ? 1 : 2
           },
-          products: products_list
-        }.merge(options)
-      end
-
-      def verify_request(token)
-        {
-          version: @version,
-          api_key: @api_key,
-          token: token,
-          authcode: sha256(@private_key, "#{@api_key}|#{token}")
-        }
-      end
-
-      def products_list
-        order.order_items.map { |item|
-          [
+          item.adjustments.map { |adjustment|
             {
-              id: item.product_id,
-              title: item.product.to_s,
-              count: item.amount,
-              tax: item.tax_rate.to_i,
-              pretax_price: item.price_sans_tax.cents,
-              price: item.price_with_tax.cents,
-              type: item.real? ? 1 : 2
-            },
-            item.adjustments.map { |adjustment|
-              {
-                id: adjustment.source_id,
-                title: adjustment.label,
-                count: 1,
-                tax: adjustment.adjustable.tax_rate.to_i,
-                pretax_price: adjustment.amount_sans_tax.cents,
-                price: adjustment.amount_with_tax.cents,
-                type: 4
-              }
+              id: adjustment.source_id,
+              title: adjustment.label,
+              count: 1,
+              tax: adjustment.adjustable.tax_rate.to_i,
+              pretax_price: adjustment.amount_sans_tax.cents,
+              price: adjustment.amount_with_tax.cents,
+              type: 4
             }
-          ]
-        }.flatten
-      end
+          }
+        ]
+      }.flatten
+    end
 
-      def sha256(secret, data)
-        OpenSSL::HMAC.hexdigest('sha256', secret, data).upcase
-      end
+    def sha256(secret, data)
+      OpenSSL::HMAC.hexdigest('sha256', secret, data).upcase
+    end
   end
 end

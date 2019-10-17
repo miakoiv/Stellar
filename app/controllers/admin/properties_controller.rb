@@ -87,16 +87,17 @@ class Admin::PropertiesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = current_store.properties.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def property_params
-      params.require(:property).permit(
-        :value_type, :measurement_unit_id, :unit_pricing, :searchable,
-        :name, :external_name
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = current_store.properties.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def property_params
+    params.require(:property).permit(
+      :value_type, :measurement_unit_id, :unit_pricing, :searchable,
+      :name, :external_name
+    )
+  end
 end

@@ -57,29 +57,30 @@ module Reports
     end
 
     private
-      # Temporal data gathering methods, called by #temporal_data.
-      def by_day
-        @items.select(<<~SQL).group('datum').reorder('datum')
-          ordered_at AS datum,
-          SUM(amount) AS amount,
-          SUM(total_sans_tax_cents) AS value_sans_tax
-        SQL
-      end
 
-      def by_week
-        @items.select(<<~SQL).group('datum').reorder('datum')
-          DATE_FORMAT(ordered_at, '%xW%v') AS datum,
-          SUM(amount) AS amount,
-          SUM(total_sans_tax_cents) AS value_sans_tax
-        SQL
-      end
+    # Temporal data gathering methods, called by #temporal_data.
+    def by_day
+      @items.select(<<~SQL).group('datum').reorder('datum')
+        ordered_at AS datum,
+        SUM(amount) AS amount,
+        SUM(total_sans_tax_cents) AS value_sans_tax
+      SQL
+    end
 
-      def by_month
-        @items.select(<<~SQL).group('datum').reorder('datum')
-          DATE_FORMAT(ordered_at, '%Y-%m') AS datum,
-          SUM(amount) AS amount,
-          SUM(total_sans_tax_cents) AS value_sans_tax
-        SQL
-      end
+    def by_week
+      @items.select(<<~SQL).group('datum').reorder('datum')
+        DATE_FORMAT(ordered_at, '%xW%v') AS datum,
+        SUM(amount) AS amount,
+        SUM(total_sans_tax_cents) AS value_sans_tax
+      SQL
+    end
+
+    def by_month
+      @items.select(<<~SQL).group('datum').reorder('datum')
+        DATE_FORMAT(ordered_at, '%Y-%m') AS datum,
+        SUM(amount) AS amount,
+        SUM(total_sans_tax_cents) AS value_sans_tax
+      SQL
+    end
   end
 end

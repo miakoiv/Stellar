@@ -32,14 +32,15 @@ class Admin::ProductPropertiesController < AdminController
   end
 
   private
-    def set_product
-      @product = Product.friendly.find(params[:product_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_property_params
-      params.require(:product_property).permit(
-        :property_id, :value
-      )
-    end
+  def set_product
+    @product = Product.friendly.find(params[:product_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_property_params
+    params.require(:product_property).permit(
+      :property_id, :value
+    )
+  end
 end

@@ -20,8 +20,9 @@ class CorrespondenceController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def correspondence_params
-      params.fetch(:fields, {}).permit!
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def correspondence_params
+    params.fetch(:fields, {}).permit!
+  end
 end

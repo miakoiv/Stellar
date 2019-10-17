@@ -63,10 +63,11 @@ class TransferItem < ApplicationRecord
   end
 
   private
-    # Serial is used as lot code on products that have no lot code.
-    def lot_code_from_serial
-      if lot_code.blank? && serial.present?
-        self[:lot_code] = serial
-      end
+
+  # Serial is used as lot code on products that have no lot code.
+  def lot_code_from_serial
+    if lot_code.blank? && serial.present?
+      self[:lot_code] = serial
     end
+  end
 end

@@ -173,39 +173,40 @@ class Admin::OrdersController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = current_store.orders.unscope(where: :cancelled_at).find(params[:id])
-    end
 
-    def should_finalize?
-      order_params[:is_final] == '1'
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = current_store.orders.unscope(where: :cancelled_at).find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.fetch(:order, {}).permit(
-        :user_id, :billing_group_id, :shipping_group_id,
-        :order_type_id, :inventory_id, :payload_gid,
-        :completed_at, :ordered_at, :shipping_at, :installation_at,
-        :approved_at, :concluded_at, :cancelled_at,
-        :vat_number, :external_number, :your_reference, :our_reference,
-        :message, :notes, :is_final,
-        :customer_email, :contact_email, :separate_shipping_address,
-        billing_address_attributes: [
-          :id, :name, :phone, :company, :department,
-          :address1, :address2, :postalcode, :city, :country_code
-        ],
-        shipping_address_attributes: [
-          :id, :name, :phone, :company, :department,
-          :address1, :address2, :postalcode, :city, :country_code
-        ]
-      )
-    end
+  def should_finalize?
+    order_params[:is_final] == '1'
+  end
 
-    # Limit the search to orders in current store and
-    # order types set by the action.
-    def search_constrains
-      {store: current_store, order_type: @order_types}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.fetch(:order, {}).permit(
+      :user_id, :billing_group_id, :shipping_group_id,
+      :order_type_id, :inventory_id, :payload_gid,
+      :completed_at, :ordered_at, :shipping_at, :installation_at,
+      :approved_at, :concluded_at, :cancelled_at,
+      :vat_number, :external_number, :your_reference, :our_reference,
+      :message, :notes, :is_final,
+      :customer_email, :contact_email, :separate_shipping_address,
+      billing_address_attributes: [
+        :id, :name, :phone, :company, :department,
+        :address1, :address2, :postalcode, :city, :country_code
+      ],
+      shipping_address_attributes: [
+        :id, :name, :phone, :company, :department,
+        :address1, :address2, :postalcode, :city, :country_code
+      ]
+    )
+  end
+
+  # Limit the search to orders in current store and
+  # order types set by the action.
+  def search_constrains
+    {store: current_store, order_type: @order_types}
+  end
 end

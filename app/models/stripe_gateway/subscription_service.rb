@@ -21,28 +21,29 @@ module StripeGateway
     end
 
     private
-      # Creates the subscription on Stripe with the specified plan,
-      # creating the associated customer on the fly.
-      def create_stripe_subscription!
-        Stripe::Subscription.create(
-          customer: create_stripe_customer!,
-          tax_percent: Price::DEFAULT_TAX_RATE,
-          trial_from_plan: store.eligible_for_trial_subscription?,
-          items: [
-            {plan: stripe_plan_id},
-          ],
-          metadata: {store: store.name}
-        )
-      end
 
-      # Creates a Stripe customer for this particular subscription
-      # and assigns the source from Stripe Checkout as default.
-      def create_stripe_customer!
-        Stripe::Customer.create(
-          email: user.email,
-          description: store.name,
-          source: stripe_source_id
-        )
-      end
+    # Creates the subscription on Stripe with the specified plan,
+    # creating the associated customer on the fly.
+    def create_stripe_subscription!
+      Stripe::Subscription.create(
+        customer: create_stripe_customer!,
+        tax_percent: Price::DEFAULT_TAX_RATE,
+        trial_from_plan: store.eligible_for_trial_subscription?,
+        items: [
+          {plan: stripe_plan_id},
+        ],
+        metadata: {store: store.name}
+      )
+    end
+
+    # Creates a Stripe customer for this particular subscription
+    # and assigns the source from Stripe Checkout as default.
+    def create_stripe_customer!
+      Stripe::Customer.create(
+        email: user.email,
+        description: store.name,
+        source: stripe_source_id
+      )
+    end
   end
 end

@@ -56,19 +56,20 @@ class Admin::InventoryCheckItemsController < AdminController
   end
 
   private
-    def set_inventory_check_item
-      @inventory_check_item = InventoryCheckItem.find(params[:id])
-    end
 
-    def set_inventory_check
-      @inventory_check = current_store.inventory_checks.find(params[:inventory_check_id])
-    end
+  def set_inventory_check_item
+    @inventory_check_item = InventoryCheckItem.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_check_item_params
-      params.require(:inventory_check_item).permit(
-        :product_id, :lot_code, :expires_at, :current,
-        :customer_code, :serial
-      )
-    end
+  def set_inventory_check
+    @inventory_check = current_store.inventory_checks.find(params[:inventory_check_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def inventory_check_item_params
+    params.require(:inventory_check_item).permit(
+      :product_id, :lot_code, :expires_at, :current,
+      :customer_code, :serial
+    )
+  end
 end

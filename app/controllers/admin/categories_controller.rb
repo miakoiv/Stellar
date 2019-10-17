@@ -118,16 +118,17 @@ class Admin::CategoriesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = current_store.categories.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(
-        :parent_id, :live, :name, :subtitle, :product_scope, :view_mode,
-        :filtering, :nesting, :redirecting
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = current_store.categories.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def category_params
+    params.require(:category).permit(
+      :parent_id, :live, :name, :subtitle, :product_scope, :view_mode,
+      :filtering, :nesting, :redirecting
+    )
+  end
 end

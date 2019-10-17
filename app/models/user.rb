@@ -106,11 +106,12 @@ class User < ApplicationRecord
   end
 
   protected
-    def password_required?
-      persisted? && (
-        encrypted_password.nil? ||
-        password.present? ||
-        password_confirmation.present?
-      )
-    end
+
+  def password_required?
+    persisted? && (
+      encrypted_password.nil? ||
+      password.present? ||
+      password_confirmation.present?
+    )
+  end
 end

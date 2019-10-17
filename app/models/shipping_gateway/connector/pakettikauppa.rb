@@ -29,20 +29,21 @@ module ShippingGateway
       end
 
       private
-        # Parts of the Pakettikauppa API require HMAC authentication.
-        # This method takes a request and returns a hashed request.
-        def hmac_request(request = {})
-          hashed_request = request.merge(
-            api_key: @api_key,
-            timestamp: Time.now.to_i
-          )
-          plaintext = hashed_request.sort.map { |_, v| v }.join('&')
-          hashed_request.merge(hash: sha256(@secret, plaintext))
-        end
 
-        def sha256(secret, data)
-          OpenSSL::HMAC.hexdigest('sha256', secret, data)
-        end
+      # Parts of the Pakettikauppa API require HMAC authentication.
+      # This method takes a request and returns a hashed request.
+      def hmac_request(request = {})
+        hashed_request = request.merge(
+          api_key: @api_key,
+          timestamp: Time.now.to_i
+        )
+        plaintext = hashed_request.sort.map { |_, v| v }.join('&')
+        hashed_request.merge(hash: sha256(@secret, plaintext))
+      end
+
+      def sha256(secret, data)
+        OpenSSL::HMAC.hexdigest('sha256', secret, data)
+      end
     end
   end
 end

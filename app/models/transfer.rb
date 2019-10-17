@@ -130,70 +130,71 @@ class Transfer < ApplicationRecord
   end
 
   private
-    # Loads a single order item from given stock into the transfer
-    # as one or more transfer items. Updates the stock accordingly.
-    # Attempts several strategies until one returns true to denote
-    # the item has been loaded or the item is left (partially) unloaded.
-    def load_item!(order_item, stock)
-      if !order_item.product.tracked_stock? || source.enable_gateway?
-        load_item_from_infinite_stock(order_item) && return
-      end
-      stock_items = stock.select { |item| item.product == order_item.product }
-      return false if stock_items.none?
 
-      if order_item.lot_code.present?
-        load_item_by_lot_code(order_item, stock_items)
+  # Loads a single order item from given stock into the transfer
+  # as one or more transfer items. Updates the stock accordingly.
+  # Attempts several strategies until one returns true to denote
+  # the item has been loaded or the item is left (partially) unloaded.
+  def load_item!(order_item, stock)
+    if !order_item.product.tracked_stock? || source.enable_gateway?
+      load_item_from_infinite_stock(order_item) && return
+    end
+    stock_items = stock.select { |item| item.product == order_item.product }
+    return false if stock_items.none?
+
+    if order_item.lot_code.present?
+      load_item_by_lot_code(order_item, stock_items)
+    else
+      load_item_from_stock(order_item, stock_items)
+    end
+  end
+
+  # Loading from infinite stock always succeeds. Order number is
+  # used as lot code for the transfer item.
+  def load_item_from_infinite_stock(order_item)
+    create_item_from(order_item, order_item.order.number)
+    true
+  end
+
+  # Loading an item by lot code selects an inventory item by code,
+  # and only loads the item if a match is found.
+  def load_item_by_lot_code(order_item, stock_items)
+    item = stock_items.find { |item| order_item.lot_code == item.code }
+
+    # If the order item has a serial number, try lot code part only.
+    if item.nil? && order_item.lot_code['-']
+      lot_code_part = order_item.lot_code.split('-').first
+      item = stock_items.find { |item| lot_code_part == item.code }
+    end
+
+    # If a match was found, load the item and return. If a partial
+    # match set a lot code part above, use that, or provide nil
+    # to use the code on the order item.
+    if item.present?
+      item.reserved += order_item.amount
+      return create_item_from(order_item, lot_code_part, item.expires_at)
+    end
+
+    false # Failed to load the item.
+  end
+
+  # Default strategy: loads the order item from given stock items.
+  def load_item_from_stock(order_item, stock_items)
+    amount = order_item.waiting
+    stock_items.each do |item|
+      all = item.available
+      next if all <= 0
+
+      if amount <= all
+        # This inventory item satisfies the amount, we're done.
+        item.reserved += amount
+        return create_item_from(order_item, item.code, item.expires_at, amount)
       else
-        load_item_from_stock(order_item, stock_items)
+        # Load all of this item and continue with the remaining amount.
+        item.reserved += all
+        create_item_from(order_item, item.code, item.expires_at, all)
+        amount -= all
       end
     end
-
-    # Loading from infinite stock always succeeds. Order number is
-    # used as lot code for the transfer item.
-    def load_item_from_infinite_stock(order_item)
-      create_item_from(order_item, order_item.order.number)
-      true
-    end
-
-    # Loading an item by lot code selects an inventory item by code,
-    # and only loads the item if a match is found.
-    def load_item_by_lot_code(order_item, stock_items)
-      item = stock_items.find { |item| order_item.lot_code == item.code }
-
-      # If the order item has a serial number, try lot code part only.
-      if item.nil? && order_item.lot_code['-']
-        lot_code_part = order_item.lot_code.split('-').first
-        item = stock_items.find { |item| lot_code_part == item.code }
-      end
-
-      # If a match was found, load the item and return. If a partial
-      # match set a lot code part above, use that, or provide nil
-      # to use the code on the order item.
-      if item.present?
-        item.reserved += order_item.amount
-        return create_item_from(order_item, lot_code_part, item.expires_at)
-      end
-
-      false # Failed to load the item.
-    end
-
-    # Default strategy: loads the order item from given stock items.
-    def load_item_from_stock(order_item, stock_items)
-      amount = order_item.waiting
-      stock_items.each do |item|
-        all = item.available
-        next if all <= 0
-
-        if amount <= all
-          # This inventory item satisfies the amount, we're done.
-          item.reserved += amount
-          return create_item_from(order_item, item.code, item.expires_at, amount)
-        else
-          # Load all of this item and continue with the remaining amount.
-          item.reserved += all
-          create_item_from(order_item, item.code, item.expires_at, all)
-          amount -= all
-        end
-      end
-    end
+  end
 end

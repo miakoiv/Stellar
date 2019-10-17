@@ -119,21 +119,22 @@ class Admin::PromotionsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_promotion
-      @promotion = current_store.promotions.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def promotion_params
-      params.require(:promotion).permit(
-        :name, :group_id, :promotion_handler_type,
-        :first_date, :last_date, :activation_code,
-        promotion_handler_attributes: [
-          :id, :description, :default_price,
-          :order_total, :required_items, :items_total,
-          :discount_percent
-        ]
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_promotion
+    @promotion = current_store.promotions.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def promotion_params
+    params.require(:promotion).permit(
+      :name, :group_id, :promotion_handler_type,
+      :first_date, :last_date, :activation_code,
+      promotion_handler_attributes: [
+        :id, :description, :default_price,
+        :order_total, :required_items, :items_total,
+        :discount_percent
+      ]
+    )
+  end
 end

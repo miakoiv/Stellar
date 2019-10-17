@@ -128,21 +128,22 @@ class Promotion < ApplicationRecord
   end
 
   private
-    def nullify_activation_code
-      self[:activation_code] = nil if activation_code.blank?
-    end
 
-    # Takes an order object and returns order items that match this promotion.
-    def matching_items(order)
-      order.order_items.where(product_id: promoted_items.pluck(:product_id))
-    end
+  def nullify_activation_code
+    self[:activation_code] = nil if activation_code.blank?
+  end
 
-    def schedule_activation
-      if activate_at && activate_at.future?
-        PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
-      end
-      if deactivate_at && deactivate_at.future?
-        PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
-      end
+  # Takes an order object and returns order items that match this promotion.
+  def matching_items(order)
+    order.order_items.where(product_id: promoted_items.pluck(:product_id))
+  end
+
+  def schedule_activation
+    if activate_at && activate_at.future?
+      PromotionActivationJob.set(wait_until: activate_at).perform_later(self)
     end
+    if deactivate_at && deactivate_at.future?
+      PromotionActivationJob.set(wait_until: deactivate_at).perform_later(self)
+    end
+  end
 end

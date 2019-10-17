@@ -71,21 +71,22 @@ module StockGateway
     end
 
     private
-      def headers
-        {'X-USER-TOKEN' => @client_token}
-      end
 
-      def sale_request(order, return_url)
-        {
-          note: "External order #{order.number}",
-          url: return_url,
-          item_list: order.order_items.real.map { |item|
-            {
-              product_id: item.product.customer_code.presence || item.product.code,
-              quantity: -item.amount
-            }
+    def headers
+      {'X-USER-TOKEN' => @client_token}
+    end
+
+    def sale_request(order, return_url)
+      {
+        note: "External order #{order.number}",
+        url: return_url,
+        item_list: order.order_items.real.map { |item|
+          {
+            product_id: item.product.customer_code.presence || item.product.code,
+            quantity: -item.amount
           }
         }
-      end
+      }
+    end
   end
 end

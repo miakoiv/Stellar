@@ -82,15 +82,16 @@ class Admin::DepartmentsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_department
-      @department = current_store.departments.friendly.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def department_params
-      params.require(:department).permit(
-        :name, category_ids: []
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_department
+    @department = current_store.departments.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def department_params
+    params.require(:department).permit(
+      :name, category_ids: []
+    )
+  end
 end

@@ -92,27 +92,28 @@ class Admin::InventoryItemsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory_item
-      @inventory_item = current_store.inventory_items.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_item_params
-      params.require(:inventory_item).permit(
-        :inventory_id, :product_id, :code,
-        inventory_entries_attributes: [
-          :recorded_at, :on_hand, :reserved, :pending, :value, :note
-        ]
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inventory_item
+    @inventory_item = current_store.inventory_items.find(params[:id])
+  end
 
-    def query_params
-      params.permit(:product_id).merge(search_constrains)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def inventory_item_params
+    params.require(:inventory_item).permit(
+      :inventory_id, :product_id, :code,
+      inventory_entries_attributes: [
+        :recorded_at, :on_hand, :reserved, :pending, :value, :note
+      ]
+    )
+  end
 
-    # Restrict searching to inventories in current store.
-    def search_constrains
-      {store_id: current_store.id}
-    end
+  def query_params
+    params.permit(:product_id).merge(search_constrains)
+  end
+
+  # Restrict searching to inventories in current store.
+  def search_constrains
+    {store_id: current_store.id}
+  end
 end

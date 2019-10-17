@@ -53,12 +53,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-    # Unless given by param, locale is set from user preference first, then
-    # from portal settings if any, and finally from store settings.
-    def set_locale
-      I18n.locale = params[:locale] ||
-        user_signed_in? && current_user.locale.presence ||
-        current_store.present? && current_store.locale ||
-        I18n.default_locale
-    end
+  # Unless given by param, locale is set from user preference first, then
+  # from portal settings if any, and finally from store settings.
+  def set_locale
+    I18n.locale = params[:locale] ||
+      user_signed_in? && current_user.locale.presence ||
+      current_store.present? && current_store.locale ||
+      I18n.default_locale
+  end
 end

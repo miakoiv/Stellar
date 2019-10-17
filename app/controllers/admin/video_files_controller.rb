@@ -32,10 +32,11 @@ class Admin::VideoFilesController < AdminController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def video_file_params
-      params.require(:video_file).permit(
-        :attachment
-      )
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def video_file_params
+    params.require(:video_file).permit(
+      :attachment
+    )
+  end
 end

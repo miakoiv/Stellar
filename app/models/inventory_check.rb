@@ -103,20 +103,21 @@ class InventoryCheck < ApplicationRecord
   end
 
   private
-    def seed_from_category_ids
-      selected_ids = category_ids.reject(&:blank?)
-      categories = selected_ids.any? ? selected_ids : store.categories.pluck(:id)
-      search = InventoryItemSearch.new(inventory_id: inventory, categories: categories)
-      inventory_items = search.results.reorder('products.title DESC, products.subtitle DESC')
-      transaction do
-        inventory_items.each do |inventory_item|
-          inventory_check_items.create(
-            inventory_item: inventory_item,
-            product: inventory_item.product,
-            lot_code: inventory_item.code,
-            expires_at: inventory_item.expires_at
-          )
-        end
+
+  def seed_from_category_ids
+    selected_ids = category_ids.reject(&:blank?)
+    categories = selected_ids.any? ? selected_ids : store.categories.pluck(:id)
+    search = InventoryItemSearch.new(inventory_id: inventory, categories: categories)
+    inventory_items = search.results.reorder('products.title DESC, products.subtitle DESC')
+    transaction do
+      inventory_items.each do |inventory_item|
+        inventory_check_items.create(
+          inventory_item: inventory_item,
+          product: inventory_item.product,
+          lot_code: inventory_item.code,
+          expires_at: inventory_item.expires_at
+        )
       end
     end
+  end
 end

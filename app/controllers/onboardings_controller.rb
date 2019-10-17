@@ -42,36 +42,37 @@ class OnboardingsController < ApplicationController
   end
 
   private
-    def load_onboarding
-      @onboarding = onboarding_for_step(action_name)
-    end
 
-    def check_for_registration
-      return unless @onboarding.requires_registration?
-      if user_signed_in?
-        return true
-      else
-        store_location_for(:user, session[:next_step])
-        return redirect_to new_user_registration_path
-      end
-    end
+  def load_onboarding
+    @onboarding = onboarding_for_step(action_name)
+  end
 
-    def onboarding_for_step(step)
-      raise ArgumentError unless step.in?(Account::Onboarding::STEPS)
-      onboarding_class = "Account::Onboarding::#{step.camelize}".constantize
-      onboarding_class.new(session[:onboarding_attributes])
+  def check_for_registration
+    return unless @onboarding.requires_registration?
+    if user_signed_in?
+      return true
+    else
+      store_location_for(:user, session[:next_step])
+      return redirect_to new_user_registration_path
     end
+  end
 
-    def onboarding_next_step(step)
-      Account::Onboarding::STEPS[Account::Onboarding::STEPS.index(step) + 1]
-    end
+  def onboarding_for_step(step)
+    raise ArgumentError unless step.in?(Account::Onboarding::STEPS)
+    onboarding_class = "Account::Onboarding::#{step.camelize}".constantize
+    onboarding_class.new(session[:onboarding_attributes])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def onboarding_params
-      params.require(:onboarding).permit(
-        :name, :theme,
-        :country_code, :locale, :subdomain,
-        :admin_name, :vat_number
-      )
-    end
+  def onboarding_next_step(step)
+    Account::Onboarding::STEPS[Account::Onboarding::STEPS.index(step) + 1]
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def onboarding_params
+    params.require(:onboarding).permit(
+      :name, :theme,
+      :country_code, :locale, :subdomain,
+      :admin_name, :vat_number
+    )
+  end
 end

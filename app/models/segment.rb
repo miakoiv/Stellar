@@ -306,12 +306,13 @@ class Segment < ApplicationRecord
   end
 
   private
-    def clear_unwanted_attributes
-      self.resource_id = nil if will_save_change_to_template?
-      self.min_height = nil unless has_min_height?
-    end
 
-    def schedule_content_update
-      ContentGenerationJob.perform_later(self)
-    end
+  def clear_unwanted_attributes
+    self.resource_id = nil if will_save_change_to_template?
+    self.min_height = nil unless has_min_height?
+  end
+
+  def schedule_content_update
+    ContentGenerationJob.perform_later(self)
+  end
 end

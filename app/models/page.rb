@@ -307,27 +307,29 @@ class Page < ApplicationRecord
   end
 
   protected
-    # Adds an incrementing duplicate number to the title.
-    def rename_as_copy
-      trunk, branch = title.partition(/ \(\d+\)/)
-      branch = ' (0)' if branch.empty?
-      self[:title] = "#{trunk}#{branch.succ}"
-    end
+
+  # Adds an incrementing duplicate number to the title.
+  def rename_as_copy
+    trunk, branch = title.partition(/ \(\d+\)/)
+    branch = ' (0)' if branch.empty?
+    self[:title] = "#{trunk}#{branch.succ}"
+  end
 
   private
-    def touch_resource
-      resource.touch if resource.present?
-    end
 
-    def touch_ancestors
-      ancestors.map(&:touch)
-    end
+  def touch_resource
+    resource.touch if resource.present?
+  end
 
-    def touch_descendants
-      descendants.map(&:touch)
-    end
+  def touch_ancestors
+    ancestors.map(&:touch)
+  end
 
-    def conditionally_disable
-      self.live = false unless can_be_live?
-    end
+  def touch_descendants
+    descendants.map(&:touch)
+  end
+
+  def conditionally_disable
+    self.live = false unless can_be_live?
+  end
 end

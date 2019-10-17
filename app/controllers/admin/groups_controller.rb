@@ -123,18 +123,19 @@ class Admin::GroupsController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = current_store.groups.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_params
-      params.require(:group).permit(
-        :parent_id, :name, :appearance,
-        :pricing_shown, :stock_shown,
-        :price_base, :price_modifier, :price_tax_included,
-        :premium_group_id, :premium_teaser
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = current_store.groups.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_params
+    params.require(:group).permit(
+      :parent_id, :name, :appearance,
+      :pricing_shown, :stock_shown,
+      :price_base, :price_modifier, :price_tax_included,
+      :premium_group_id, :premium_teaser
+    )
+  end
 end

@@ -78,7 +78,8 @@ class PromotedItem < ApplicationRecord
   end
 
   private
-    def touch_product
-      product.touch
-    end
+
+  def touch_product
+    product.touch
+  end
 end

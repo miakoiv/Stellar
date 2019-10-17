@@ -106,29 +106,30 @@ class Admin::ReportsController < AdminController
   end
 
   private
-    # Chart views can be requested as variants.
-    def set_variant
-      request.variant = :chart if params[:variant] == 'chart'
-    end
 
-    # Params specifying a view but not saved with the search query.
-    def view_params
-      params.fetch(:view_params, {}).permit!
-    end
+  # Chart views can be requested as variants.
+  def set_variant
+    request.variant = :chart if params[:variant] == 'chart'
+  end
 
-    def set_default_order_types!(query)
-      types = query['order_type'] || []
-      types = @order_types.pluck(:id) if types.blank? || types == ['']
-      query['order_type'] = types
-    end
+  # Params specifying a view but not saved with the search query.
+  def view_params
+    params.fetch(:view_params, {}).permit!
+  end
 
-    # Params specific to the inherent controls tabular provides.
-    def tabular_params
-      sort_params = params.fetch(:sort, {name: 'product_title', dir: 'asc'})
-      search = params.fetch(:q, nil)
-      {
-        sort: "#{sort_params[:name]} #{sort_params[:dir]}",
-        keyword: search
-      }
-    end
+  def set_default_order_types!(query)
+    types = query['order_type'] || []
+    types = @order_types.pluck(:id) if types.blank? || types == ['']
+    query['order_type'] = types
+  end
+
+  # Params specific to the inherent controls tabular provides.
+  def tabular_params
+    sort_params = params.fetch(:sort, {name: 'product_title', dir: 'asc'})
+    search = params.fetch(:q, nil)
+    {
+      sort: "#{sort_params[:name]} #{sort_params[:dir]}",
+      keyword: search
+    }
+  end
 end

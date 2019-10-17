@@ -51,18 +51,19 @@ class Admin::AlternatePricesController < AdminController
   end
 
   private
-    def set_product
-      @product = current_store.products.friendly.find(params[:product_id])
-    end
 
-    def set_alternate_price
-      @alternate_price = @product.alternate_prices.find(params[:id])
-    end
+  def set_product
+    @product = current_store.products.friendly.find(params[:product_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def alternate_price_params
-      params.require(:alternate_price).permit(
-        :group_id, :price
-      )
-    end
+  def set_alternate_price
+    @alternate_price = @product.alternate_prices.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def alternate_price_params
+    params.require(:alternate_price).permit(
+      :group_id, :price
+    )
+  end
 end

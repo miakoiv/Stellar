@@ -330,106 +330,107 @@ class StoreController < BaseStoreController
   end
 
   private
-    # Find category from live categories by friendly id, including history.
-    def find_category
-      @category = @live_categories.friendly.find(params[:category_id])
-      category_path = url_for(category_id: @category, only_path: true)
-      if request.path != category_path
-        return redirect_to category_path, status: :moved_permanently
-      end
-      true
-    end
 
-    # If the current category has redirecting enabled and no visible products,
-    # redirect to its first descendant category, if any.
-    def apply_redirecting
-      if @category.redirecting? && @category.products.visible.empty?
-        if first_child = @category.children.live.first
-          return redirect_to show_category_path(first_child)
-        end
-      end
-      false
+  # Find category from live categories by friendly id, including history.
+  def find_category
+    @category = @live_categories.friendly.find(params[:category_id])
+    category_path = url_for(category_id: @category, only_path: true)
+    if request.path != category_path
+      return redirect_to category_path, status: :moved_permanently
     end
+    true
+  end
 
-    # Find department by friendly id in `department_id`, including history.
-    def find_department
-      @department = @departments.friendly.find(params[:department_id])
-      if request.path != show_department_path(@department)
-        return redirect_to show_department_path(@department), status: :moved_permanently
+  # If the current category has redirecting enabled and no visible products,
+  # redirect to its first descendant category, if any.
+  def apply_redirecting
+    if @category.redirecting? && @category.products.visible.empty?
+      if first_child = @category.children.live.first
+        return redirect_to show_category_path(first_child)
       end
     end
+    false
+  end
 
-    # Prepares a search for products in current category and its descendants.
-    def prepare_category_search
-      query = params[:product_search] || {}
-      ProductSearch.new(query.merge(filter_params))
+  # Find department by friendly id in `department_id`, including history.
+  def find_department
+    @department = @departments.friendly.find(params[:department_id])
+    if request.path != show_department_path(@department)
+      return redirect_to show_department_path(@department), status: :moved_permanently
     end
+  end
 
-    # Find product by friendly id in `product_id`.
-    def find_product
-      @product = current_store.products.live.friendly.find(params[:product_id])
-    end
+  # Prepares a search for products in current category and its descendants.
+  def prepare_category_search
+    query = params[:product_search] || {}
+    ProductSearch.new(query.merge(filter_params))
+  end
 
-    # Find product by friendly id in `product_id`, redirecting to its
-    # first variant if applicable.
-    def find_first_variant_product
-      selected = current_store.products.live.find_by(slug: params[:product_id])
-      if selected.nil?
-        return redirect_to front_path, notice: t('store.product_not_found')
-      end
-      @product = selected.first_variant
-      if @product != selected
-        return redirect_to show_product_path(@product, @category)
-      end
-    end
+  # Find product by friendly id in `product_id`.
+  def find_product
+    @product = current_store.products.live.friendly.find(params[:product_id])
+  end
 
-    def get_view_mode_setting(category)
-      settings = if cookies[:view_mode_settings].present?
-        JSON.parse(cookies[:view_mode_settings])
-      else
-        {}
-      end
-      key = ActionView::RecordIdentifier.dom_id(category)
-      settings[key] || category.view_mode
+  # Find product by friendly id in `product_id`, redirecting to its
+  # first variant if applicable.
+  def find_first_variant_product
+    selected = current_store.products.live.find_by(slug: params[:product_id])
+    if selected.nil?
+      return redirect_to front_path, notice: t('store.product_not_found')
     end
+    @product = selected.first_variant
+    if @product != selected
+      return redirect_to show_product_path(@product, @category)
+    end
+  end
 
-    # Category lookup includes categories in current store that are
-    # live and have a category page contained in the store header,
-    # thus they are navigable.
-    def category_lookup_params
-      {
-        store: current_store,
-        live: true,
-        within: current_store.header
-      }
+  def get_view_mode_setting(category)
+    settings = if cookies[:view_mode_settings].present?
+      JSON.parse(cookies[:view_mode_settings])
+    else
+      {}
     end
+    key = ActionView::RecordIdentifier.dom_id(category)
+    settings[key] || category.view_mode
+  end
 
-    # Restrict product lookup to live products in current store,
-    # or member stores if defined (applies to portals).
-    def product_lookup_params
-      {
-        store: current_store.member_stores.presence || current_store,
-        live: true
-      }
-    end
+  # Category lookup includes categories in current store that are
+  # live and have a category page contained in the store header,
+  # thus they are navigable.
+  def category_lookup_params
+    {
+      store: current_store,
+      live: true,
+      within: current_store.header
+    }
+  end
 
-    # Page lookup includes pages contained in the store header,
-    # visible to the current group.
-    # The search model sets further search criteria by itself.
-    def page_lookup_params
-      {
-        store: current_store,
-        group: current_group,
-        within: current_store.header
-      }
-    end
+  # Restrict product lookup to live products in current store,
+  # or member stores if defined (applies to portals).
+  def product_lookup_params
+    {
+      store: current_store.member_stores.presence || current_store,
+      live: true
+    }
+  end
 
-    # Product filtering in current category including descendants.
-    def filter_params
-      {
-        store: current_store,
-        live: true,
-        permitted_categories: @category.self_and_maybe_descendants
-      }
-    end
+  # Page lookup includes pages contained in the store header,
+  # visible to the current group.
+  # The search model sets further search criteria by itself.
+  def page_lookup_params
+    {
+      store: current_store,
+      group: current_group,
+      within: current_store.header
+    }
+  end
+
+  # Product filtering in current category including descendants.
+  def filter_params
+    {
+      store: current_store,
+      live: true,
+      permitted_categories: @category.self_and_maybe_descendants
+    }
+  end
 end

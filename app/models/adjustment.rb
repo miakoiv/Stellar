@@ -47,7 +47,8 @@ class Adjustment < ApplicationRecord
   end
 
   private
-    def amount_as_price
-      @amount_as_price ||= Price.new(amount, price_includes_tax?, tax_rate)
-    end
+
+  def amount_as_price
+    @amount_as_price ||= Price.new(amount, price_includes_tax?, tax_rate)
+  end
 end

@@ -29,8 +29,9 @@ class Admin::RolesController < AdminController
   end
 
   private
-    def set_user_and_role
-      @user = User.find(params[:user_id])
-      @role = params[:id].to_sym
-    end
+
+  def set_user_and_role
+    @user = User.find(params[:user_id])
+    @role = params[:id].to_sym
+  end
 end

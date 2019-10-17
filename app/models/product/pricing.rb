@@ -72,7 +72,8 @@ class Product < ApplicationRecord
   end
 
   private
-    def unit_pricing_property
-      product_properties.joins(:property).merge(Property.unit_pricing).first
-    end
+
+  def unit_pricing_property
+    product_properties.joins(:property).merge(Property.unit_pricing).first
+  end
 end

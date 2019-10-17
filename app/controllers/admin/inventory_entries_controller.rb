@@ -20,14 +20,15 @@ class Admin::InventoryEntriesController < AdminController
   end
 
   private
-    def set_inventory_item
-      @inventory_item = current_store.inventory_items.find(params[:inventory_item_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_entry_params
-      params.require(:inventory_entry).permit(
-        :recorded_at, :on_hand, :reserved, :pending, :value, :note
-      )
-    end
+  def set_inventory_item
+    @inventory_item = current_store.inventory_items.find(params[:inventory_item_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def inventory_entry_params
+    params.require(:inventory_entry).permit(
+      :recorded_at, :on_hand, :reserved, :pending, :value, :note
+    )
+  end
 end

@@ -22,8 +22,9 @@ class ContentController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def content_params
-      params.permit(:id, :store, :items, :contentClass, :contentType, :url, :page)
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def content_params
+    params.permit(:id, :store, :items, :contentClass, :contentType, :url, :page)
+  end
 end

@@ -23,17 +23,18 @@ module StripeGateway
     end
 
     private
-      def stripe_subscription
-        @stripe_subcription ||= Stripe::Subscription.retrieve(subscription.stripe_id)
-      end
 
-      def last_date
-        Time.at(stripe_subscription.current_period_end).to_date
-      end
+    def stripe_subscription
+      @stripe_subcription ||= Stripe::Subscription.retrieve(subscription.stripe_id)
+    end
 
-      def cancel_subscription!
-        stripe_subscription.cancel_at_period_end = true
-        stripe_subscription.save
-      end
+    def last_date
+      Time.at(stripe_subscription.current_period_end).to_date
+    end
+
+    def cancel_subscription!
+      stripe_subscription.cancel_at_period_end = true
+      stripe_subscription.save
+    end
   end
 end

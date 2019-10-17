@@ -82,7 +82,8 @@ class Image < ApplicationRecord
   end
 
   private
-    def resize_bitmaps
-      is_bitmap?
-    end
+
+  def resize_bitmaps
+    is_bitmap?
+  end
 end

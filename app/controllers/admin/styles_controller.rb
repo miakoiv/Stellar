@@ -47,15 +47,16 @@ class Admin::StylesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_store
-      @store = Store.find(params[:store_id])
-    end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_store
+    @store = Store.find(params[:store_id])
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-    def style_params
-      params.require(:style).permit(
-        :preamble, Style::VARIABLES.keys
-      )
-    end
+  def style_params
+    params.require(:style).permit(
+      :preamble, Style::VARIABLES.keys
+    )
+  end
 end

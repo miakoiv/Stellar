@@ -51,21 +51,22 @@ class Admin::VideosController < AdminController
   end
 
   private
-    # Finds the associated videoable by looking through params.
-    def find_videoable
-      params.each do |name, value|
-        if name =~ /(.+)_id$/
-          klass = $1.classify.constantize
-          return klass.find(value)
-        end
-      end
-      nil
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def video_params
-      params.fetch(:video, {}).permit(
-        :title, :loop, :muted
-      )
+  # Finds the associated videoable by looking through params.
+  def find_videoable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        klass = $1.classify.constantize
+        return klass.find(value)
+      end
     end
+    nil
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def video_params
+    params.fetch(:video, {}).permit(
+      :title, :loop, :muted
+    )
+  end
 end

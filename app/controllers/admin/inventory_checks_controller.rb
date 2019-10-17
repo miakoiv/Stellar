@@ -118,18 +118,19 @@ class Admin::InventoryChecksController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory_check
-      @inventory_check = current_store.inventory_checks.find(params[:id])
-    end
 
-    def inventory_check_params
-      params.require(:inventory_check).permit(
-        :inventory_id, :note, category_ids: []
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inventory_check
+    @inventory_check = current_store.inventory_checks.find(params[:id])
+  end
 
-    def search_constrains
-      {store: current_store}
-    end
+  def inventory_check_params
+    params.require(:inventory_check).permit(
+      :inventory_id, :note, category_ids: []
+    )
+  end
+
+  def search_constrains
+    {store: current_store}
+  end
 end

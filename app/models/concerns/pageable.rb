@@ -13,13 +13,14 @@ module Pageable
   end
 
   private
-    # Disables the associated page if this resource has been deactivated.
-    # NOTE: this can't be implemented using ActiveModel::Dirty due to
-    # awesome_nested_set incompatibility.
-    # See <https://github.com/collectiveidea/awesome_nested_set/issues/276>
-    def conditionally_disable_page
-      if page.present? && respond_to?(:live) && !live?
-        page.update(live: false)
-      end
+
+  # Disables the associated page if this resource has been deactivated.
+  # NOTE: this can't be implemented using ActiveModel::Dirty due to
+  # awesome_nested_set incompatibility.
+  # See <https://github.com/collectiveidea/awesome_nested_set/issues/276>
+  def conditionally_disable_page
+    if page.present? && respond_to?(:live) && !live?
+      page.update(live: false)
     end
+  end
 end

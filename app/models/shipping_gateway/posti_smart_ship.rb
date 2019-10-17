@@ -76,62 +76,63 @@ module ShippingGateway
       end
 
       private
-        def pdf_config
-          {
-            target1Media: 'laser-a5',
-            target1XOffset: 0,
-            target1YOffset: 0,
-            target2Media: 'laser-a4',
-            target2XOffset: 0,
-            target2YOffset: 0,
-            target3Media: nil,
-            target3XOffset: 0,
-            target3YOffset: 0,
-            target4Media: nil,
-            target4XOffset: 0,
-            target4YOffset: 0,
-          }
-        end
 
-        def default_shipment
-          {
-            orderNo: order.number,
-            senderReference: order.our_reference,
-            receiverReference: order.your_reference,
-            sender: {
-              name: @group.shipping_address.company.presence || @group.shipping_address.name,
-              address1: @group.shipping_address.address1,
-              address2: @group.shipping_address.address2,
-              zipcode: @group.shipping_address.postalcode,
-              city: @group.shipping_address.city,
-              country: @group.shipping_address.country_code,
-              mobile: @group.shipping_address.phone,
-            },
-            receiver: {
-              name: order.shipping_address.name,
-              address1: order.shipping_address.address1,
-              address2: order.shipping_address.address2,
-              zipcode: order.shipping_address.postalcode,
-              city: order.shipping_address.city,
-              country: order.shipping_address.country_code,
-              email: order.customer_email,
-              mobile: order.shipping_address.phone,
-            },
-            senderPartners: [{
-              id: 'POSTI',
-              custNo: @store.posti_customer_number,
-            }],
-            parcels: [{
-              copies: 1,
-              packageCode: shipment.package_type,
-              weight: shipment.mass / 1000.0,
-              valuePerParcel: true,
-            }],
-          }
-        end
+      def pdf_config
+        {
+          target1Media: 'laser-a5',
+          target1XOffset: 0,
+          target1YOffset: 0,
+          target2Media: 'laser-a4',
+          target2XOffset: 0,
+          target2YOffset: 0,
+          target3Media: nil,
+          target3XOffset: 0,
+          target3YOffset: 0,
+          target4Media: nil,
+          target4XOffset: 0,
+          target4YOffset: 0,
+        }
+      end
 
-        def label_request
-        end
+      def default_shipment
+        {
+          orderNo: order.number,
+          senderReference: order.our_reference,
+          receiverReference: order.your_reference,
+          sender: {
+            name: @group.shipping_address.company.presence || @group.shipping_address.name,
+            address1: @group.shipping_address.address1,
+            address2: @group.shipping_address.address2,
+            zipcode: @group.shipping_address.postalcode,
+            city: @group.shipping_address.city,
+            country: @group.shipping_address.country_code,
+            mobile: @group.shipping_address.phone,
+          },
+          receiver: {
+            name: order.shipping_address.name,
+            address1: order.shipping_address.address1,
+            address2: order.shipping_address.address2,
+            zipcode: order.shipping_address.postalcode,
+            city: order.shipping_address.city,
+            country: order.shipping_address.country_code,
+            email: order.customer_email,
+            mobile: order.shipping_address.phone,
+          },
+          senderPartners: [{
+            id: 'POSTI',
+            custNo: @store.posti_customer_number,
+          }],
+          parcels: [{
+            copies: 1,
+            packageCode: shipment.package_type,
+            weight: shipment.mass / 1000.0,
+            valuePerParcel: true,
+          }],
+        }
+      end
+
+      def label_request
+      end
     end
 
     class SmartPost < Base

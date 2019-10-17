@@ -327,60 +327,61 @@ class Order < ApplicationRecord
   end
 
   private
-    # Approving an order prepares its initial transfer by creating it
-    # attached to the initial shipment, which in turn is created if needed.
-    # The appropriate parties are sent email notifications.
-    def approve!
-      reload # to clear changes and prevent a callback loop
-      if has_billing?
-        email.processing(to: billing_recipient, bcc: false)&.deliver_later
-      elsif !is_forwarded?
-        email.confirmation(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
-        email.confirmation(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
-      end
-      items_by_vendor.each do |vendor, items|
-        vendor.notified_users.each do |user|
-          email.notification(to: user.to_s, items: items, bcc: false, pricing: false)&.deliver_later
-        end
-      end
-      create_initial_transfer! if track_shipments?
-    end
 
-    # Concluding an order creates report rows for it.
-    # A notification of shipment is sent.
-    def conclude!
-      reload # to clear changes and prevent a callback loop
-      if !is_forwarded?
-        email.conclusion(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
-        email.conclusion(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
-      end
-      OrderReportRow.create_from(self)
+  # Approving an order prepares its initial transfer by creating it
+  # attached to the initial shipment, which in turn is created if needed.
+  # The appropriate parties are sent email notifications.
+  def approve!
+    reload # to clear changes and prevent a callback loop
+    if has_billing?
+      email.processing(to: billing_recipient, bcc: false)&.deliver_later
+    elsif !is_forwarded?
+      email.confirmation(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
+      email.confirmation(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
     end
+    items_by_vendor.each do |vendor, items|
+      vendor.notified_users.each do |user|
+        email.notification(to: user.to_s, items: items, bcc: false, pricing: false)&.deliver_later
+      end
+    end
+    create_initial_transfer! if track_shipments?
+  end
 
-    # Cancelling an order rolls back any changes made earlier by
-    # backtracking its life cycle from conclusion to creation.
-    def cancel!
-      reload # to clear changes and prevent a callback loop
-      OrderReportRow.cancel_entries_from(self) if concluded?
-      total_for_real_items = grand_total_with_tax(order_items.real)
-      if has_billing? && paid?
-        payments.create(amount: -total_for_real_items)
-      end
-      if track_shipments?
-        shipments.active.each do |shipment|
-          shipment.cancel!
-        end
-      end
-      email.cancellation(to: billing_recipient)&.deliver_later if billing_address.present?
+  # Concluding an order creates report rows for it.
+  # A notification of shipment is sent.
+  def conclude!
+    reload # to clear changes and prevent a callback loop
+    if !is_forwarded?
+      email.conclusion(to: billing_recipient, bcc: false)&.deliver_later if billing_address.present?
+      email.conclusion(to: shipping_recipient, bcc: false, pricing: false)&.deliver_later if has_contact_email?
     end
+    OrderReportRow.create_from(self)
+  end
 
-    # Perform XML export if specified by order type, and
-    # store settings have a path defined.
-    def export_xml
-      if order_type.is_exported? && store.order_xml_path.present?
-        OrderExportJob.perform_later(self, store.order_xml_path)
+  # Cancelling an order rolls back any changes made earlier by
+  # backtracking its life cycle from conclusion to creation.
+  def cancel!
+    reload # to clear changes and prevent a callback loop
+    OrderReportRow.cancel_entries_from(self) if concluded?
+    total_for_real_items = grand_total_with_tax(order_items.real)
+    if has_billing? && paid?
+      payments.create(amount: -total_for_real_items)
+    end
+    if track_shipments?
+      shipments.active.each do |shipment|
+        shipment.cancel!
       end
     end
+    email.cancellation(to: billing_recipient)&.deliver_later if billing_address.present?
+  end
+
+  # Perform XML export if specified by order type, and
+  # store settings have a path defined.
+  def export_xml
+    if order_type.is_exported? && store.order_xml_path.present?
+      OrderExportJob.perform_later(self, store.order_xml_path)
+    end
+  end
 end
 
 require_dependency 'order/contents'

@@ -38,15 +38,16 @@ class OrderItemsController < BaseStoreController
   end
 
   private
-    def set_order_and_item
-      @order = shopping_cart
-      @order_types = @order.available_order_types
-      @order_item = @order.order_items.find(params[:id])
-    end
 
-    def order_item_params
-      params.require(:order_item).permit(
-        :amount
-      )
-    end
+  def set_order_and_item
+    @order = shopping_cart
+    @order_types = @order.available_order_types
+    @order_item = @order.order_items.find(params[:id])
+  end
+
+  def order_item_params
+    params.require(:order_item).permit(
+      :amount
+    )
+  end
 end

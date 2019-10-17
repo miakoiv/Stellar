@@ -82,15 +82,16 @@ class Admin::TaxCategoriesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tax_category
-      @tax_category = current_store.tax_categories.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tax_category_params
-      params.require(:tax_category).permit(
-        :name, :rate, :included_in_retail
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tax_category
+    @tax_category = current_store.tax_categories.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tax_category_params
+    params.require(:tax_category).permit(
+      :name, :rate, :included_in_retail
+    )
+  end
 end

@@ -68,20 +68,21 @@ class Admin::AddressesController < AdminController
   end
 
   private
-    # Finds the associated addressed object by global id.
-    def find_addressed
-      @addressed = GlobalID::Locator.locate(params[:gid])
-    end
 
-    def set_type
-      @type = params[:type].to_sym
-    end
+  # Finds the associated addressed object by global id.
+  def find_addressed
+    @addressed = GlobalID::Locator.locate(params[:gid])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def address_params
-      params.require(:address).permit(
-        :name, :phone, :company, :department,
-        :address1, :address2, :postalcode, :city, :country_code
-      )
-    end
+  def set_type
+    @type = params[:type].to_sym
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def address_params
+    params.require(:address).permit(
+      :name, :phone, :company, :department,
+      :address1, :address2, :postalcode, :city, :country_code
+    )
+  end
 end

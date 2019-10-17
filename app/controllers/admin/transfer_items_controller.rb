@@ -43,15 +43,16 @@ class Admin::TransferItemsController < AdminController
   end
 
   private
-    def set_transfer
-      @transfer = current_store.transfers.find(params[:transfer_id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def transfer_item_params
-      params.require(:transfer_item).permit(
-        :product_id, :lot_code, :expires_at, :amount,
-        :customer_code, :serial
-      )
-    end
+  def set_transfer
+    @transfer = current_store.transfers.find(params[:transfer_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def transfer_item_params
+    params.require(:transfer_item).permit(
+      :product_id, :lot_code, :expires_at, :amount,
+      :customer_code, :serial
+    )
+  end
 end

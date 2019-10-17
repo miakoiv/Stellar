@@ -93,15 +93,16 @@ class Admin::MessagesController < AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = current_store.messages.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.fetch(:message, {}).permit(
-        :context_type, :context_id, :context_gid, :stage, :disabled, :content
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_message
+    @message = current_store.messages.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def message_params
+    params.fetch(:message, {}).permit(
+      :context_type, :context_id, :context_gid, :stage, :disabled, :content
+    )
+  end
 end
