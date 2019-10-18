@@ -20,7 +20,7 @@ class InventoryCheckItem < ApplicationRecord
   default_scope { order('updated_at DESC, id DESC') }
   scope :mismatching, -> { where.not(difference: 0) }
   scope :pending, -> { where(adjustment: nil) }
-  scope :for_payload, -> { pending.where(arel_table[:difference].lt(0)) }
+  scope :for_payload, -> { pending.mismatching }
 
   #---
   validates :lot_code, presence: true

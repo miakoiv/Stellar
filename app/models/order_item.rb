@@ -33,7 +33,7 @@ class OrderItem < ApplicationRecord
   }
 
   #---
-  validates :amount, numericality: {integer_only: true, greater_than_or_equal_to: 1}, on: :update
+  validates :amount, numericality: {integer_only: true}, on: :update
 
   #---
   def is_subitem?

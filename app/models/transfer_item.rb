@@ -21,10 +21,7 @@ class TransferItem < ApplicationRecord
 
   #---
   validates :lot_code, presence: true
-  validates :amount, numericality: {
-    integer_only: true,
-    greater_than_or_equal_to: 1
-  }
+  validates :amount, numericality: {integer_only: true}
 
   attr_accessor :serial
   after_initialize :lot_code_from_serial
