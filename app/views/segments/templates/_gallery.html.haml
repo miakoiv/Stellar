@@ -9,6 +9,9 @@
           - if gallery.lightbox?
             = link_to picture.image.url(:lightbox, timestamp: false), class: 'gallery-item image-link', title: picture.caption do
               = gallery_item
+          - elsif picture.url.present?
+            = link_to picture.url, class: 'gallery-item', title: picture.caption do
+              = gallery_item
           - else
             .gallery-item
               = gallery_item
