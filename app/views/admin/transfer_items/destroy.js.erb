@@ -1,3 +1,9 @@
-$('.transfer-items-table').replaceWith(
-  '<%= j render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer %>'
-);
+<% if @transfer.shipment.present? %>
+  $('#<%= dom_id(@transfer.shipment) %>').replaceWith(
+    '<%= j render partial: 'admin/shipments/item', object: @transfer.shipment, as: :shipment, locals: {locked: false} %>'
+  );
+<% else %>
+  $('.transfer-items-table').replaceWith(
+    '<%= j render partial: 'admin/transfer_items/edit_table', object: @transfer, as: :transfer %>'
+  );
+<% end %>

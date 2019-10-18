@@ -118,6 +118,10 @@ class Shipment < ApplicationRecord
     return_transfer.complete!
   end
 
+  def nonempty?
+    transfer.present? && transfer.transfer_items.any?
+  end
+
   def active?
     !cancelled?
   end

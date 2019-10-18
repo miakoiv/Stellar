@@ -493,6 +493,7 @@ fi:
     shipments:
       item:
         inventory: varastosta
+        empty: Toimitus on tyhjä. Voit keräillä toimituksen varastosta automaattisesti. Varmista, että tuotteita on varastossa.
       active:
         refresh: Keräile varastosta
         edit: Lähetyksen tiedot

@@ -69,7 +69,9 @@ class Admin::ShipmentsController < AdminController
     }
     @shipment.reload!
 
-    respond_to :js
+    respond_to do |format|
+      format.js { render :update }
+    end
   end
 
   # PATCH/PUT /admin/shipments/1/complete

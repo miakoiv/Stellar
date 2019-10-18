@@ -481,6 +481,7 @@ en:
           help: This block shows the contents of another block that was pasted here as a link.
     shipments:
       item:
+        empty: The shipment is empty. You can reload it from stock automatically. Make sure the ordered items are in stock.
         inventory: from inventory
       active:
         refresh: Reload from stock

@@ -15,7 +15,11 @@
         = metadata_table(shipment.parsed_metadata)
 
   - if shipment.transfer.present?
-    = render partial: locked || shipment.shipped? ? 'admin/transfer_items/table' : 'admin/transfer_items/edit_table', object: shipment.transfer, as: :transfer
+    - if shipment.nonempty?
+      = render partial: locked || shipment.shipped? ? 'admin/transfer_items/table' : 'admin/transfer_items/edit_table', object: shipment.transfer, as: :transfer
+    - else
+      .panel-body
+        = icon('exclamation-triangle', t('.empty'))
 
     .panel-footer
       - if shipment.cancelled?
