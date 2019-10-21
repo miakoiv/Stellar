@@ -70,7 +70,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'httparty'
 
 # Authentication and authorization
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 0.0.11'
 gem 'authority'
@@ -90,11 +90,12 @@ gem 'dropzonejs-rails'
 gem 'magnific-popup-rails'
 
 # HTML/XML parsing, autolinking
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.10.4'
 gem 'rinku'
 
 # OpenDocument (.ods) support
 gem 'roo', '~> 2.7.0'
+gem 'rubyzip', '>= 1.3.0'
 
 # SpreadsheetML parser for uploaded files
 gem 'SpreadsheetML'
