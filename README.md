@@ -20,22 +20,29 @@ To install Stellar Storefront on your server:
 
 1. Clone the repo
 
-  ```
-  git clone https://github.com/miakoiv/Stellar
+  ```sh
+  git clone https://github.com/miakoiv/stellar
+  cd stellar
   ```
 
 2. Set up your environment as described in the Deployment section below
 
   You need to define at least `SECRET_KEY_BASE` and `STELLAR_DATABASE_URL`, and set `RAILS_ENV` to `production`.
 
-3. Set up the database and seed data
+3. Run Bundler to install required gems
+
+  ```sh
+  bundle
+  ```
+
+4. Set up the database and seed data
 
   ```
   rails db:setup
   ```
   The seed data from fixtures contains a set of countries, and predefined units of measure.
 
-4. Create the first store and superuser account
+5. Create the first store and superuser account
 
   The installation does not come with any stores or accounts, therefore the first store and its admin must be created through the console:
 
@@ -60,7 +67,7 @@ To install Stellar Storefront on your server:
   ```
   You should now be able to access the store at http://shop.yourdomain.com, log in, and access the admin dashboard from the user menu. From there, you can edit your user account and add more roles for yourself.
 
-5. Set up onboarding
+6. Set up onboarding
 
   Enabling onboarding allows anyone to sign up and create a store for themselves. The onboarding entry point is defined with the `STELLAR_HOST` environment variable. Entering the site through that URL starts the onboarding process that requires you to sign up (or sign in if you already have an account).
 
