@@ -21,7 +21,7 @@ To install Stellar Storefront on your server:
 1. Clone the repo
 
   ```
-  git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+  git clone https://github.com/miakoiv/Stellar
   ```
 
 2. Set up your environment as described in the Deployment section below
@@ -33,6 +33,38 @@ To install Stellar Storefront on your server:
   ```
   rails db:setup
   ```
+  The seed data from fixtures contains a set of countries, and predefined units of measure.
+
+4. Create the first store and superuser account
+
+  The installation does not come with any stores or accounts, therefore the first store and its admin must be created through the console:
+
+  ```
+    store = Store.create name: 'Example shop', country_code: 'FI'
+  ```
+  This will create a store and an initial group for anonymous guests. Create a group for administrators next:
+  ```
+    group = store.groups.create name: 'Administrators'
+  ```
+
+  Add a hostname to the store to be able to access it through the web:
+  ```
+    store.hostnames.create fqdn: 'shop.yourdomain.com'
+  ```
+
+  Finally, create a user account for yourself, confirm the account, and assign it to the group created earlier:
+  ```
+    user = User.create name: 'Your name', email: 'your.email@yourdomain.com', password: 'secure~password!', password_confirmation: 'secure~password!'
+    user.confirm
+    group.users << user
+  ```
+  You should now be able to access the store at http://shop.yourdomain.com, log in, and access the admin dashboard from the user menu. From there, you can edit your user account and add more roles for yourself.
+
+5. Set up onboarding
+
+  Enabling onboarding allows anyone to sign up and create a store for themselves. The onboarding entry point is defined with the `STELLAR_HOST` environment variable. Entering the site through that URL starts the onboarding process that requires you to sign up (or sign in if you already have an account).
+
+  Completing the onboarding will create a store with the signed in user as the store admin. To guide new customers to get started with Stellar, you can set up template pages that will be duplicated as initial content for the site.
 
 ## Testing
 
