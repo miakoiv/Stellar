@@ -29,7 +29,7 @@ class OrderItem < ApplicationRecord
   scope :virtual, -> { joins(:product).merge(Product.virtual) }
   scope :pending, -> { joins(:product).merge(Product.tangible).where(
     arel_table[:shipped].eq(nil)
-    .or(arel_table[:shipped].lt(arel_table[:amount])))
+    .or(arel_table[:shipped].not_eq(arel_table[:amount])))
   }
 
   #---
@@ -190,7 +190,7 @@ class OrderItem < ApplicationRecord
   # Pending items have not been shipped. They may be loaded and
   # awaiting shipment though, see #waiting? and #waiting below.
   def pending?
-    tangible? && pending > 0
+    tangible? && pending != 0
   end
 
   def pending
@@ -213,7 +213,7 @@ class OrderItem < ApplicationRecord
   end
 
   def waiting?
-    tangible? && waiting > 0
+    tangible? && waiting != 0
   end
 
   def waiting
