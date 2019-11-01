@@ -34,8 +34,10 @@ class TransferItem < ApplicationRecord
   end
 
   # Finds the choices for source item by transferred product.
+  # For positive amounts, only online items are selected.
   def source_item_choices
-    source.items_by_product(product)
+    choices = source.items_by_product(product)
+    amount > 0 ? choices.online : choices
   end
 
   # Transfer items are feasible if there's enough stock, the amount is negative,
