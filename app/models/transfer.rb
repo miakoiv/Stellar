@@ -82,7 +82,7 @@ class Transfer < ApplicationRecord
   def load!(order_items)
     transaction do
       products = order_items.map(&:product)
-      stock = source.inventory_items.online.for(products)
+      stock = source.inventory_items.for(products)
       order_items.each do |order_item|
         load_item!(order_item, stock)
       end
