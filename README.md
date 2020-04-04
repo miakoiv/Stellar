@@ -42,7 +42,13 @@ To install Stellar Storefront on your server:
   ```
   The seed data from fixtures contains a set of countries, and predefined units of measure.
 
-5. Create the first store and superuser account
+5. Populate database and create the first store and superuser account
+
+  Populate countries table:
+  
+  ```
+  c = Country.create :code => "fi", :name => "Suomi"
+  ```
 
   The installation does not come with any stores or accounts, therefore the first store and its admin must be created through the console:
 
@@ -111,6 +117,7 @@ Other integrations include [Tawk.to](https://www.tawk.to) and [Google Maps](http
 
 ## Built With
 
+* [Ruby](https://www.ruby-lang.org/en/) - version 2.5.x
 * [Ruby on Rails](https://rubyonrails.org/) - version 5.2.3 (project started on 4.2)
 * [Bootstrap](https://getbootstrap.com/docs/3.4/) - version 3.4
 * [CKEditor 5](https://ckeditor.com/ckeditor-5/)
